@@ -1,11 +1,12 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    public enum Dialogue {
+    private enum Dialogue {
         GREETING, FAREWELL
     }
-
-    public enum Styling {
+    private enum Styling {
         LINE
     }
 
@@ -18,15 +19,24 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println(Duke.speak(Dialogue.GREETING));
         Scanner sc = new Scanner(System.in);
+        List<Task> todo = new ArrayList<>();
         while (true) {
-            String input = sc.next();
+            String input = sc.nextLine();
             System.out.println(style(Styling.LINE));
             if (input.equals("bye")) {
                 System.out.println(Duke.speak(Dialogue.FAREWELL));
                 break;
+            } else if (input.equals("list")) {
+                Integer count = 1;
+                for (int i = 0; i < todo.size(); i++) {
+                    System.out.printf("%d. %s\n", count, todo.get(i));
+                    count++;
+                }
             } else {
-                System.out.println(input);
+                todo.add(new Task(input));
+                System.out.println("added: " + input);
             }
+
             System.out.println(style(Styling.LINE));
         }
     }
