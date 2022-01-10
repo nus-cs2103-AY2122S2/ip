@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -7,7 +8,7 @@ public class Duke {
         String indentationBase = "\t";
         String indentationText = "\t  ";
         String indentationTaskStatus = "\t    ";
-        ArrayList<Task> list = new ArrayList<>();
+        ArrayList<Task> taskList = new ArrayList<>();
         boolean firstUserChat = true;
 
         String logo = " ____        _        \n"
@@ -40,11 +41,11 @@ public class Duke {
 
                 // List - "list", lists all of the user's inputs 
                 else if (userInput.toLowerCase().equals("list")) {
-                    if (list.size() == 0) System.out.println(String.format("\tYour list is empty %s", userName));
+                    if (taskList.size() == 0) System.out.println(String.format("\tYour list is empty %s", userName));
                     else {
-                        for (int i = 0; i < list.size(); i++) {
-                            Task task = list.get(i);
-                            System.out.println(String.format("%s%d. [%s] %s", indentationText, i+1, task.getStatusIcon(), task));
+                        for (int i = 0; i < taskList.size(); i++) {
+                            Task task = taskList.get(i);
+                            System.out.println(String.format("%s%d. %s", indentationText, i+1, task)); 
                         }
                     }
                 }
@@ -57,25 +58,62 @@ public class Duke {
                     // Mark 
                     if (stringArray[0].equals("mark")) {
                         System.out.println(String.format("%sOkay, marking this task as done:", indentationText));
-                        list.get(taskIndex).markAsDone();
+                        taskList.get(taskIndex).markAsDone();
                     
                     // Unmark 
                     } else if (stringArray[0].equals("unmark")) {
                         System.out.println(String.format("%sOkay, marking this task as not done yet:", indentationText));
-                        list.get(taskIndex).markAsUndone();
+                        taskList.get(taskIndex).markAsUndone();
                     }
 
                     // Print out Task 
-                    Task task = list.get(taskIndex);
-                    System.out.println(String.format("%s[%s] %s", indentationTaskStatus, task.getStatusIcon(), task));
+                    Task task = taskList.get(taskIndex);
+                    System.out.println(String.format("%s%s", indentationTaskStatus, task));
 
                 }
                 
-                // Add - adds user input to a list 
+                // Add - adds Task to list 
+                // 3 types of Tasks: ToDo's, Events, Deadlines 
                 else {
-                    Task task = new Task(userInput);
-                    list.add(task);
-                    System.out.println(String.format("%sTask added: %s", indentationText, userInput));
+                    String[] textStrings = userInput.split(" "); 
+                    String taskType = textStrings[0].toLowerCase(); 
+                    String taskDescription = String.join(" ", Arrays.copyOfRange(textStrings, 1, textStrings.length));
+
+                    System.out.println(String.format("%sNoted. I've added this task:", indentationText));
+
+                    Task task = new Task("");
+                    
+                    // ToDo's 
+                    if (taskType.equals("todo")) {
+
+                        task = new Todo(taskDescription); 
+                        taskList.add(task);
+                    
+                    // Events & Deadlines 
+                    } else {
+
+                        String[] taskDescriptionStrings = taskDescription.split("/");
+                        String taskDescriptionText = taskDescriptionStrings[0].strip();
+                        String[] taskDescriptionTimeStrings = taskDescriptionStrings[1].split(" ");
+                        String taskDescriptionTime = String.join(" ", Arrays.copyOfRange(taskDescriptionTimeStrings, 1, taskDescriptionTimeStrings.length)).strip();
+
+                        // Events 
+                        if (taskType.equals("event")) { 
+
+                            task = new Event(taskDescriptionText, taskDescriptionTime);
+                            taskList.add(task);
+                        
+                        // Deadlines 
+                        } else if (taskType.equals("deadline")) {
+
+                            task = new Deadline(taskDescriptionText, taskDescriptionTime);
+                            taskList.add(task);
+                        }
+                        
+                    }
+
+                    System.out.println(String.format("%s%s", indentationTaskStatus, task));
+                    System.out.println(String.format("%sNow you have %d tasks in the list.", indentationText, taskList.size()));
                 }
 
             }
