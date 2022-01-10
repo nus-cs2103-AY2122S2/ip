@@ -1,15 +1,41 @@
+import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
     public static void greetings() {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.next();
+        input += scanner.nextLine();
+        ArrayList<String> list = new ArrayList<>();
 
-        while(!input.toLowerCase().equals("bye")) {
-            System.out.println(input);
+        while(true) {
+            //list all the tasks
+            if (input.equalsIgnoreCase("list")) {
+                if (list.size() == 0) {
+                    System.out.println("You are done for the day, or are you?");
+                } else {
+                    for(int i = 0; i < list.size(); i ++) {
+                        System.out.println(i + 1 + ". " + list.get(i));
+                    }
+                }
+            //bye, shut down Cortana
+            } else if (input.equalsIgnoreCase("bye")) {
+                System.out.println("Bye. Hope to see you again soon!");
+                break;
+            //valid command, add task
+            } else {
+                if(list.contains(input)) {
+                    System.out.println("Task already exists!");
+                } else {
+                    list.add(input);
+                    System.out.print("added: " + input + "\n");
+                }
+            }
             input = scanner.next();
+            input += scanner.nextLine();
         }
-        System.out.println("Bye. Hope to see you again soon!");
+        scanner.close();
     }
 
     public static void main(String[] args) {
@@ -20,7 +46,7 @@ public class Duke {
                 " | |___  | (_) | | |    | |_  | (_| | | | | | | (_| |\n" +
                 "  \\____|  \\___/  |_|     \\__|  \\__,_| |_| |_|  \\__,_|\n" +
                 "                                                     \n";
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello from\n" + logo + "My name is Cortana, what can I do for you, master?");
         greetings();
     }
 }
