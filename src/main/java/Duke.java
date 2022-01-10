@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Duke {
     private enum Dialogue {
-        GREETING, FAREWELL, LIST, MARK, UNMARKED, ADDED, GIBBERISH
+        GREETING, FAREWELL, LIST, MARK, UNMARKED, ADDED, GIBBERISH, DELETE
     }
     private enum Styling {
         LINE
@@ -45,10 +45,17 @@ public class Duke {
                 Task t = todo.get(index-1);
                 t.unmarked();
                 System.out.println(t);
+            } else if (input.equals("delete")) {
+                System.out.println(Duke.speak(Dialogue.DELETE));
+                Integer index = sc.nextInt();
+                System.out.println(todo.get(index-1));
+                todo.remove(index-1);
+                System.out.printf("Now you have %d task you'll never complete\n", todo.size());
+
             } else if (input.equals("todo")){
                 System.out.println(Duke.speak(Dialogue.ADDED));
                 input += sc.nextLine();
-                todo.add(new Task(input));
+                todo.add(new ToDos(input));
                 System.out.println(todo.get(todo.size()-1));
                 System.out.printf("Now you have %d task you'll never complete\n", todo.size());
             } else if (input.equals("deadline") || input.equals("event")) {
@@ -89,11 +96,13 @@ public class Duke {
                 break;
             case UNMARKED: reply = "Huh. Must have messed up again didn't you.\n";
                 break;
+            case DELETE: reply = "Task has been removed, like my patience with your list.\n";
+                break;
             case ADDED: reply = "Cool, is that another task you'll never complete?\n";
                 break;
             case LIST: reply = "Here are some menial tasks you've decided to waste your life on.\n";
                 break;
-            case FAREWELL: reply = "Thank god. I thought it'll never end.\nI'm going to pretend I don't recognize you next time.";
+            case FAREWELL: reply = "Thank god. I thought it'll never end.\nPlease bother someone else next time.";
                 break;
             case GIBBERISH: reply = "I have no idea what you're saying. Come back when you learn to write.\n";
                 break;
