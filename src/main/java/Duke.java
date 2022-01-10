@@ -4,7 +4,11 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         String splitter = "______________________________________";
-        ArrayList<String> list = new ArrayList<>();
+        String indentationBase = "\t";
+        String indentationText = "\t  ";
+        String indentationTaskStatus = "\t    ";
+        ArrayList<Task> list = new ArrayList<>();
+        boolean firstUserChat = true;
 
         String logo = " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
@@ -14,22 +18,23 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         Scanner sc = new Scanner(System.in);
-        System.out.println("\tHow should I address you?");
+        System.out.println(String.format("%sHow should I address you?", indentationText));
         String userName = sc.nextLine();
-        System.out.println(String.format("\tSplendid! My pleasure to serve you %s \n\t%s", userName, splitter));
+        System.out.println(String.format("%sSplendid! My pleasure to serve you %s ", indentationText, userName));
 
         while(true) {
             try {
-                System.out.println(String.format("\tWhat may I assist you with today, %s? \n\t%s", userName, splitter));
+                System.out.println(String.format("%sWhat %smay I assist you with today, %s? \n\t%s", indentationText, (firstUserChat ? "" : "else "), userName, splitter));
+                firstUserChat = (firstUserChat==true) ? false : firstUserChat;
 
                 String userInput = sc.nextLine();
 
                 // Start of Duke's text block 
-                System.out.println(String.format("\t%s", splitter));
+                System.out.println(String.format("%s%s", indentationBase, splitter));
 
                 // Exit - "bye", exits the program 
                 if (userInput.toLowerCase().equals("bye")) {
-                    System.out.println("\tGoodbye for now. \n");
+                    System.out.println(String.format("%sGoodbye for now. \n", indentationText));
                     break;
                 }
 
@@ -38,15 +43,39 @@ public class Duke {
                     if (list.size() == 0) System.out.println(String.format("\tYour list is empty %s", userName));
                     else {
                         for (int i = 0; i < list.size(); i++) {
-                            System.out.println(String.format("\t%d: %s", i+1, list.get(i)));
+                            Task task = list.get(i);
+                            System.out.println(String.format("%s%d. [%s] %s", indentationText, i+1, task.getStatusIcon(), task));
                         }
                     }
+                }
+
+                // Mark, Unmark - "mark itemIndexNumber", "unmark itemIndexNumber", marks an item as done/undone accordingly 
+                else if (userInput.toLowerCase().contains("mark") || userInput.toLowerCase().contains("unmark")) {
+                    String[] stringArray = userInput.toLowerCase().split(" ");
+                    int taskIndex = Integer.valueOf(stringArray[1]) - 1;
+
+                    // Mark 
+                    if (stringArray[0].equals("mark")) {
+                        System.out.println(String.format("%sOkay, marking this task as done:", indentationText));
+                        list.get(taskIndex).markAsDone();
+                    
+                    // Unmark 
+                    } else if (stringArray[0].equals("unmark")) {
+                        System.out.println(String.format("%sOkay, marking this task as not done yet:", indentationText));
+                        list.get(taskIndex).markAsUndone();
+                    }
+
+                    // Print out Task 
+                    Task task = list.get(taskIndex);
+                    System.out.println(String.format("%s[%s] %s", indentationTaskStatus, task.getStatusIcon(), task));
+
                 }
                 
                 // Add - adds user input to a list 
                 else {
-                    list.add(userInput);
-                    System.out.println(String.format("\tadded: %s", userInput));
+                    Task task = new Task(userInput);
+                    list.add(task);
+                    System.out.println(String.format("%sTask added: %s", indentationText, userInput));
                 }
 
             }
