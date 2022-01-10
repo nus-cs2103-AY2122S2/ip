@@ -1,6 +1,6 @@
 public class Task {
-    private String objective;
-    private boolean done;
+    protected String objective;
+    protected boolean done;
 
     public Task(String objective) {
         this.objective = objective;
@@ -11,7 +11,7 @@ public class Task {
         this.done = true;
     }
 
-    public void unmark() {
+    public void unmarked() {
         this.done = false;
     }
 
@@ -20,3 +20,5 @@ public class Task {
         return (done ? "[X]" : "[ ]") + " " + this.objective;
     }
 }
+
+

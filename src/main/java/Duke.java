@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Duke {
     private enum Dialogue {
-        GREETING, FAREWELL, LIST, MARK, UNMARK
+        GREETING, FAREWELL, LIST, MARK, UNMARKED, ADDED, GIBBERISH
     }
     private enum Styling {
         LINE
@@ -40,20 +40,45 @@ public class Duke {
                 t.mark();
                 System.out.println(t);
             } else if (input.equals("unmark")) {
-                System.out.println(Duke.speak(Dialogue.UNMARK));
+                System.out.println(Duke.speak(Dialogue.UNMARKED));
                 Integer index = sc.nextInt();
                 Task t = todo.get(index-1);
-                t.unmark();
+                t.unmarked();
                 System.out.println(t);
-            } else {
+            } else if (input.equals("todo")){
+                System.out.println(Duke.speak(Dialogue.ADDED));
                 input += sc.nextLine();
                 todo.add(new Task(input));
-                System.out.println("added: " + input);
+                System.out.println(todo.get(todo.size()-1));
+                System.out.printf("Now you have %d task you'll never complete\n", todo.size());
+            } else if (input.equals("deadline") || input.equals("event")) {
+                System.out.println(Duke.speak(Dialogue.ADDED));
+                StringBuilder obj = new StringBuilder();
+                String date = "";
+                while (sc.hasNext()) {
+                    String secondInput = sc.next();
+                    if (secondInput.charAt(0) == '/') {
+                        obj.setLength(obj.length()-1);
+                        date = sc.nextLine();
+                        break;
+                    }
+                    obj.append(secondInput + " ");
+                }
+                if (input.equals("deadline")) {
+                    todo.add(new DeadLine(obj.toString(), date));
+                } else {
+                    todo.add(new Events(obj.toString(), date));
+                }
+                System.out.println(todo.get(todo.size()-1));
+                System.out.printf("Now you have %d task you'll never complete\n", todo.size());
+            } else {
+                System.out.println(Duke.speak(Dialogue.GIBBERISH));
             }
 
             System.out.println(style(Styling.LINE));
         }
     }
+
 
     public static String speak(Dialogue option) {
         String reply;
@@ -62,11 +87,15 @@ public class Duke {
                 break;
             case MARK: reply = "Took you long enough.\n";
                 break;
-            case UNMARK: reply = "Huh. Must have messed up again didn't you.\n";
+            case UNMARKED: reply = "Huh. Must have messed up again didn't you.\n";
+                break;
+            case ADDED: reply = "Cool, is that another task you'll never complete?\n";
                 break;
             case LIST: reply = "Here are some menial tasks you've decided to waste your life on.\n";
                 break;
             case FAREWELL: reply = "Thank god. I thought it'll never end.\nI'm going to pretend I don't recognize you next time.";
+                break;
+            case GIBBERISH: reply = "I have no idea what you're saying. Come back when you learn to write.\n";
                 break;
             default: reply = "Are you finally done?";
                 break;
