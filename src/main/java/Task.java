@@ -1,25 +1,28 @@
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected boolean isTodo;
-    protected boolean isDeadline;
-    protected boolean isEvent;
-    protected String time;
 
-    public Task(String description, boolean isTodo, boolean isDeadline, boolean isEvent, String time) {
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
-        this.isTodo = isTodo;
-        this.isDeadline = isDeadline;
-        this.isEvent = isEvent;
-        this.time = time;
     }
 
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    public String getTaskTypeIcon() {
-        return (isTodo ? "T" : isDeadline ? "D" : isEvent ? "E" : " ");
+    public void markAsDone() {
+        this.isDone = true;
+        System.out.println("Nice! I've marked this task as done: \n" + " [" + this.getStatusIcon() + "] " + this.description);
+    }
+
+    public void markAsUndone() {
+        this.isDone = false;
+        System.out.println("OK, I've marked this task as not done yet: \n" + " [" + this.getStatusIcon() + "] " + this.description);
+    }
+
+    @Override
+    public String toString() {
+        return " [" + this.getStatusIcon() + "] " + this.description;
     }
 }
