@@ -9,23 +9,14 @@ public class TaskManager {
             System.out.println("Task already exists!");
         } else {
             tasks.put(task.description, task);
-            if (tasks.size() <= 1) {
-                System.out.println("Yes master, I have added: \n" + taskFormatter(task) + "\nNow you have " + tasks.size() + " task in the list.");
-            } else {
-                System.out.println("Yes master, I have added: \n" + taskFormatter(task) + "\nNow you have " + tasks.size() + " tasks in the list.");
-            }
+            System.out.println("added: " + task.description);
         }
     }
 
     public void list() {
-        if (tasks.size() == 0) {
-            System.out.println("Your todo list is empty, go get something done!");
-        } else {
-            for (int i = 0; i < tasks.size(); i ++) {
-                String description = (String) tasks.keySet().toArray()[i];
-                Task task = tasks.get(description);
-                System.out.println(i + 1 + "." + this.taskFormatter(task));
-            }
+        for (int i = 0; i < tasks.size(); i ++) {
+            String description = (String) tasks.keySet().toArray()[i];
+            System.out.println(i + 1 + "." + " [" + tasks.get(description).getStatusIcon() +"] " + description);
         }
     }
 
@@ -37,7 +28,7 @@ public class TaskManager {
                 System.out.println("Task is already marked!");
             } else {
                 task.isDone = true;
-                System.out.println("Nice! I've marked this task as done: \n" + this.taskFormatter(task));
+                System.out.println("Nice! I've marked this task as done: \n" + " [" + task.getStatusIcon() + "] " + task.description);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("No such task, check your index!");
@@ -50,22 +41,12 @@ public class TaskManager {
             Task task = tasks.get(description);
             if (task.isDone) {
                 task.isDone = false;
-                System.out.println("OK, I've marked this task as not done yet: \n" + this.taskFormatter(task));
+                System.out.println("OK, I've marked this task as not done yet: \n" + " [" + task.getStatusIcon() + "] " + task.description);
             } else {
                 System.out.println("Task is already unmarked!");
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("No such task, check your index!");
         }
-    }
-
-    public String taskFormatter(Task task) {
-        String time = "";
-        if (task.isDeadline) {
-            time = "(By: " + task.time + ")";
-        } else if (task.isEvent) {
-            time = "(At: " + task.time + ")";
-        }
-        return " [" + task.getTaskTypeIcon() +"][" + task.getStatusIcon() + "] " + task.description + time;
     }
 }
