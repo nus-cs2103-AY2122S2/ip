@@ -1,10 +1,11 @@
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     private enum Dialogue {
-        GREETING, FAREWELL, LIST, MARK, UNMARKED, ADDED, GIBBERISH, DELETE
+        GREETING, FAREWELL, LIST, MARK, UNMARKED, ADDED, GIBBERISH, DELETE, NUMLEFT
     }
     private enum Styling {
         LINE
@@ -18,93 +19,146 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println(Duke.speak(Dialogue.GREETING));
+        Duke.runBot();
+        System.out.println(Duke.speak(Dialogue.FAREWELL));
+    }
+
+    public static void runBot() {
         Scanner sc = new Scanner(System.in);
         List<Task> todo = new ArrayList<>();
         while (true) {
-            String input = sc.next();
-            System.out.println(style(Styling.LINE));
-            if (input.equals("bye")) {
-                System.out.println(Duke.speak(Dialogue.FAREWELL));
-                break;
-            } else if (input.equals("list")) {
+            try {
+                String[] input = sc.nextLine().split(" ");
+                System.out.println(style(Styling.LINE));
+                if (input[0].equals("bye")) {
+                    break;
+                } else {
+                    Duke.action(input, todo);
+                }
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("You don't have that many tasks.\n");
+            } catch (DukeException e) {
+                System.out.println(e);
+            } finally {
+                System.out.println(style(Styling.LINE));
+            }
+        }
+        sc.close();
+    }
+
+    public static void action(String[] input, List<Task> todo) throws DukeException{
+        StringBuilder obj = new StringBuilder("");
+        switch (input[0]) {
+            case "list":
                 System.out.println(Duke.speak(Dialogue.LIST));
                 Integer count = 1;
                 for (int i = 0; i < todo.size(); i++) {
                     System.out.printf("%d. %s\n", count, todo.get(i));
                     count++;
                 }
-            } else if (input.equals("mark")) {
-                System.out.println(Duke.speak(Dialogue.MARK));
-                Integer index = sc.nextInt();
-                Task t = todo.get(index-1);
-                t.mark();
-                System.out.println(t);
-            } else if (input.equals("unmark")) {
-                System.out.println(Duke.speak(Dialogue.UNMARKED));
-                Integer index = sc.nextInt();
-                Task t = todo.get(index-1);
-                t.unmarked();
-                System.out.println(t);
-            } else if (input.equals("delete")) {
-                System.out.println(Duke.speak(Dialogue.DELETE));
-                Integer index = sc.nextInt();
-                System.out.println(todo.get(index-1));
-                todo.remove(index-1);
-                System.out.printf("Now you have %d task you'll never complete\n", todo.size());
-
-            } else if (input.equals("todo")){
-                System.out.println(Duke.speak(Dialogue.ADDED));
-                input += sc.nextLine();
-                todo.add(new ToDos(input));
-                System.out.println(todo.get(todo.size()-1));
-                System.out.printf("Now you have %d task you'll never complete\n", todo.size());
-            } else if (input.equals("deadline") || input.equals("event")) {
-                System.out.println(Duke.speak(Dialogue.ADDED));
-                StringBuilder obj = new StringBuilder();
-                String date = "";
-                while (sc.hasNext()) {
-                    String secondInput = sc.next();
-                    if (secondInput.charAt(0) == '/') {
-                        obj.setLength(obj.length()-1);
-                        date = sc.nextLine();
-                        break;
-                    }
-                    obj.append(secondInput + " ");
+                break;
+            case "mark":
+            case "unmark":
+                if (input.length != 2) {
+                    throw new DukeException("Fill in proper integer for marking/unmarking.\n");
                 }
-                if (input.equals("deadline")) {
-                    todo.add(new DeadLine(obj.toString(), date));
+                if (input[0].equals("mark")) {
+                    todo.get(Integer.valueOf(input[1]) - 1).mark();
                 } else {
-                    todo.add(new Events(obj.toString(), date));
+                    todo.get(Integer.valueOf(input[1]) - 1).unmarked();
                 }
+                if (input[0].equals("mark")) {
+                    System.out.println(Duke.speak(Dialogue.MARK));
+                } else {
+                    System.out.println(Duke.speak(Dialogue.UNMARKED));
+                }
+                System.out.println(todo.get(Integer.valueOf(input[1]) - 1));
+                break;
+            case "delete":
+                if (input.length != 2) {
+                    throw new DukeException("Fill in proper integer for deletion.\n");
+                }
+                todo.get(Integer.valueOf(input[1]) - 1);
+                System.out.println(Duke.speak(Dialogue.DELETE));
+                System.out.println(todo.get(Integer.valueOf(input[1]) - 1));
+                todo.remove(Integer.valueOf(input[1]) - 1);
+                System.out.printf(Duke.speak(Dialogue.NUMLEFT, todo.size()));
+                break;
+            case "todo":
+                if (input.length == 1) {
+                    throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.\n");
+                }
+                for (int i = 1; i < input.length; i++) {
+                    obj.append(input[i]);
+                    obj.append(" ");
+                }
+                System.out.println(Duke.speak(Dialogue.ADDED));
+                obj.setLength(obj.length()-1);
+                todo.add(new ToDos(obj.toString()));
                 System.out.println(todo.get(todo.size()-1));
-                System.out.printf("Now you have %d task you'll never complete\n", todo.size());
-            } else {
-                System.out.println(Duke.speak(Dialogue.GIBBERISH));
-            }
-
-            System.out.println(style(Styling.LINE));
+                System.out.printf(Duke.speak(Dialogue.NUMLEFT, todo.size()));
+                break;
+            case "deadline":
+            case "event":
+                if (input.length == 1) {
+                    throw new DukeException("☹ OOPS!!! The description of a " + input[0] + " cannot be empty.\n");
+                }
+                int i = 1;
+                for (; i < input.length; i++) {
+                    if (input[i].charAt(0) == '/') break;
+                    obj.append(input[i]);
+                    obj.append(" ");
+                }
+                if (i == input.length) {
+                    throw new DukeException("☹ OOPS!!! There is no proper date for " + input[0] + ".\n");
+                }
+                StringBuilder date = new StringBuilder("");
+                for (i = i+1; i < input.length; i++) {
+                    date.append(input[i]);
+                    date.append(" ");
+                }
+                obj.setLength(obj.length()-1);
+                date.setLength(date.length()-1);
+                if (input[0].equals("deadline")) {
+                    todo.add(new DeadLine(obj.toString(), date.toString()));
+                } else {
+                    todo.add(new Events(obj.toString(), date.toString()));
+                }
+                System.out.println(Duke.speak(Dialogue.ADDED));
+                System.out.println(todo.get(todo.size()-1));
+                System.out.printf(Duke.speak(Dialogue.NUMLEFT, todo.size()));
+                break;
+            default:
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
         }
     }
 
+    public static String speak(Dialogue option, Integer num) {
+        String reply;
+        switch (option) {
+            case NUMLEFT: reply =  "Now you have " + num.toString() + " task in the list\n";
+                break;
+            default: reply = "";
+        }
+        return reply;
+    }
 
     public static String speak(Dialogue option) {
         String reply;
         switch (option) {
-            case GREETING: reply =  "You again.\nWhat do you want this time?";
+            case GREETING: reply =  "Hello! I'm Duke.\nWhat can I do for you?";
                 break;
-            case MARK: reply = "Took you long enough.\n";
+            case MARK: reply = "Nice! I've marked this task as done:\n";
                 break;
-            case UNMARKED: reply = "Huh. Must have messed up again didn't you.\n";
+            case UNMARKED: reply = "OK, I've marked this task as not done yet:\n";
                 break;
-            case DELETE: reply = "Task has been removed, like my patience with your list.\n";
+            case DELETE: reply = "Noted. I've removed this task:\n";
                 break;
-            case ADDED: reply = "Cool, is that another task you'll never complete?\n";
+            case ADDED: reply = "Got it. I've added this task:\n";
                 break;
-            case LIST: reply = "Here are some menial tasks you've decided to waste your life on.\n";
+            case LIST: reply = "Here are the tasks in your list:\n";
                 break;
-            case FAREWELL: reply = "Thank god. I thought it'll never end.\nPlease bother someone else next time.";
-                break;
-            case GIBBERISH: reply = "I have no idea what you're saying. Come back when you learn to write.\n";
+            case FAREWELL: reply = "Bye. Hope to see you again soon!\n";
                 break;
             default: reply = "Are you finally done?";
                 break;
@@ -115,7 +169,7 @@ public class Duke {
     public static String style(Styling option) {
         String style;
         switch (option) {
-            case LINE: style =  "_____________________________________";
+            case LINE: style =  "_________________________________________________________";
                 break;
             default: style = "";
                 break;

@@ -8,6 +8,6 @@ public class Events extends Task{
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at:" + this.at + ")";
+        return "[E]" + super.toString() + " (at: " + this.at + ")";
     }
 }
