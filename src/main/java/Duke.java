@@ -13,14 +13,29 @@ public class Duke {
                 break;
             } else if (input.equalsIgnoreCase("list")) { //list all the tasks
                 taskManager.list();
-            } else if (input.matches("mark \\d+")) { //mark a task
+            } else if (input.toLowerCase().matches("mark \\d+")) { //mark a task
                 int index = Integer.parseInt(input.replaceAll("mark ", "")) - 1;
                 taskManager.mark(index);
-            } else if (input.matches("unmark \\d+")) { //unmark a task
+            } else if (input.toLowerCase().matches("unmark \\d+")) { //unmark a task
                 int index = Integer.parseInt(input.replaceAll("unmark ", "")) - 1;
                 taskManager.unmark(index);
             } else { //add task
-                taskManager.addTask(new Task(input));
+                if (input.toLowerCase().matches("^deadline .*")) { //isDeadline
+                    String actualTask = input.replaceAll("deadline ", "");
+                    String[] sliced = actualTask.split("/by ");
+                    String taskDescription = sliced[0];
+                    String deadline = sliced[1];
+                    taskManager.addTask(new Task(taskDescription, false, true, false, deadline));
+                } else if (input.toLowerCase().matches("^event .*")) { //isEvent
+                    String actualTask = input.replaceAll("event ", "");
+                    String[] sliced = actualTask.split("/at ");
+                    String taskDescription = sliced[0];
+                    String eventTime = sliced[1];
+                    taskManager.addTask(new Task(taskDescription, false, false, true, eventTime));
+                } else { //otherwise, isTodo
+                    String actualTask = input.replaceAll("todo ", "");
+                    taskManager.addTask(new Task(actualTask, true, false, false, ""));
+                }
             }
             input = scanner.next();
             input += scanner.nextLine();
