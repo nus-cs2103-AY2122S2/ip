@@ -54,8 +54,8 @@ public class Duke {
 
     public static void overWriteFile(String filePath, List<Task> todo) throws IOException{
         FileWriter fw = new FileWriter(filePath);
-        for (int i = 0; i < todo.size(); i++) {
-            fw.write(todo.get(i).serialize());
+        for (Task task : todo) {
+            fw.write(task.serialize());
         }
         fw.close();
     }
@@ -109,27 +109,27 @@ public class Duke {
                     throw new DukeException("Fill in proper integer for marking/unmarking.\n");
                 }
                 if (input[0].equals("mark")) {
-                    todo.get(Integer.valueOf(input[1]) - 1).mark();
+                    todo.get(Integer.parseInt(input[1]) - 1).mark();
                 } else {
-                    todo.get(Integer.valueOf(input[1]) - 1).unmarked();
+                    todo.get(Integer.parseInt(input[1]) - 1).unmarked();
                 }
                 if (input[0].equals("mark")) {
                     System.out.println(Duke.speak(Dialogue.MARK));
                 } else {
                     System.out.println(Duke.speak(Dialogue.UNMARKED));
                 }
-                System.out.println(todo.get(Integer.valueOf(input[1]) - 1));
+                System.out.println(todo.get(Integer.parseInt(input[1]) - 1));
                 overWriteFile(filePath, todo);
                 break;
             case "delete":
                 if (input.length != 2) {
                     throw new DukeException("Fill in proper integer for deletion.\n");
                 }
-                todo.get(Integer.valueOf(input[1]) - 1);
+                todo.get(Integer.parseInt(input[1]) - 1);
                 System.out.println(Duke.speak(Dialogue.DELETE));
-                System.out.println(todo.get(Integer.valueOf(input[1]) - 1));
-                todo.remove(Integer.valueOf(input[1]) - 1);
-                System.out.printf(Duke.speak(Dialogue.NUMLEFT, todo.size()));
+                System.out.println(todo.get(Integer.parseInt(input[1]) - 1));
+                todo.remove(Integer.parseInt(input[1]) - 1);
+                System.out.println(Duke.speak(Dialogue.NUMLEFT, todo.size()));
                 overWriteFile(filePath, todo);
                 break;
             case "todo":
@@ -144,7 +144,7 @@ public class Duke {
                 obj.setLength(obj.length()-1);
                 todo.add(new ToDos(obj.toString()));
                 System.out.println(todo.get(todo.size()-1));
-                System.out.printf(Duke.speak(Dialogue.NUMLEFT, todo.size()));
+                System.out.println(Duke.speak(Dialogue.NUMLEFT, todo.size()));
                 appendFile(filePath, todo.get(todo.size()-1));
                 break;
             case "deadline":
@@ -175,7 +175,7 @@ public class Duke {
                 }
                 System.out.println(Duke.speak(Dialogue.ADDED));
                 System.out.println(todo.get(todo.size()-1));
-                System.out.printf(Duke.speak(Dialogue.NUMLEFT, todo.size()));
+                System.out.println(Duke.speak(Dialogue.NUMLEFT, todo.size()));
                 appendFile(filePath, todo.get(todo.size()-1));
                 break;
             default:
