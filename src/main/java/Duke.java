@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -6,30 +5,22 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.next();
         input += scanner.nextLine();
-        ArrayList<String> list = new ArrayList<>();
+        TaskManager taskManager = new TaskManager();
 
         while(true) {
-                //bye, shut down Cortana
-            if (input.equalsIgnoreCase("bye")) {
+            if (input.equalsIgnoreCase("bye")) { //bye, shut down Cortana
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
-                //list all the tasks
-            } else if (input.equalsIgnoreCase("list")) {
-                if (list.size() == 0) {
-                    System.out.println("You are done for the day, or are you?");
-                } else {
-                    for(int i = 0; i < list.size(); i ++) {
-                        System.out.println(i + 1 + ". " + list.get(i));
-                    }
-                }
-                //valid command, add task
-            } else {
-                if(list.contains(input)) {
-                    System.out.println("Task already exists!");
-                } else {
-                    list.add(input);
-                    System.out.print("added: " + input + "\n");
-                }
+            } else if (input.equalsIgnoreCase("list")) { //list all the tasks
+                taskManager.list();
+            } else if (input.matches("mark \\d+")) { //mark a task
+                int index = Integer.parseInt(input.replaceAll("mark ", "")) - 1;
+                taskManager.mark(index);
+            } else if (input.matches("unmark \\d+")) { //unmark a task
+                int index = Integer.parseInt(input.replaceAll("unmark ", "")) - 1;
+                taskManager.unmark(index);
+            } else { //add task
+                taskManager.addTask(new Task(input));
             }
             input = scanner.next();
             input += scanner.nextLine();
