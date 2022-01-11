@@ -1,7 +1,12 @@
 import java.awt.*;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.io.File;
+import java.nio.file.Paths;
 
 public class Duke {
     private enum Dialogue {
@@ -23,9 +28,48 @@ public class Duke {
         System.out.println(Duke.speak(Dialogue.FAREWELL));
     }
 
+    public static void loadFile(String filePath, List<Task> todo) throws IOException {
+//        Paths path= Paths.get("saved");
+//        boolean directoryFiles = java.nio.file.Files.exists();
+        File dir = new File(filePath);
+        dir.getParentFile().mkdirs();
+        if (dir.createNewFile()) {
+            System.out.println("There is no old save file found.\n");
+        } else {
+            System.out.println("Old save file found on: " + dir.getAbsolutePath()+"\n");
+            Scanner sc = new Scanner(dir);
+            while (sc.hasNext()) {
+                String encoded = sc.nextLine();
+                todo.add(Task.deserialize(encoded));
+            }
+            sc.close();
+        }
+    }
+
+    public static void appendFile(String filePath, Task todo) throws IOException{
+        FileWriter fw = new FileWriter(filePath, true);
+        fw.write(todo.serialize());
+        fw.close();
+    }
+
+    public static void overWriteFile(String filePath, List<Task> todo) throws IOException{
+        FileWriter fw = new FileWriter(filePath);
+        for (int i = 0; i < todo.size(); i++) {
+            fw.write(todo.get(i).serialize());
+        }
+        fw.close();
+    }
+
     public static void runBot() {
         Scanner sc = new Scanner(System.in);
         List<Task> todo = new ArrayList<>();
+        String filePath = "/dukeMemory/saved.txt";
+        try {
+            loadFile(filePath, todo);
+        } catch (IOException e){
+            System.out.println("Cannot load save file\n");
+        }
+
         while (true) {
             try {
                 String[] input = sc.nextLine().split(" ");
@@ -33,20 +77,22 @@ public class Duke {
                 if (input[0].equals("bye")) {
                     break;
                 } else {
-                    Duke.action(input, todo);
+                    Duke.action(input, todo, filePath);
                 }
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("You don't have that many tasks.\n");
             } catch (DukeException e) {
                 System.out.println(e);
-            } finally {
+            } catch (IOException e ) {
+                System.out.println("Problem with save file\n");
+            }finally {
                 System.out.println(style(Styling.LINE));
             }
         }
         sc.close();
     }
 
-    public static void action(String[] input, List<Task> todo) throws DukeException{
+    public static void action(String[] input, List<Task> todo, String filePath) throws DukeException, IOException{
         StringBuilder obj = new StringBuilder("");
         switch (input[0]) {
             case "list":
@@ -73,6 +119,7 @@ public class Duke {
                     System.out.println(Duke.speak(Dialogue.UNMARKED));
                 }
                 System.out.println(todo.get(Integer.valueOf(input[1]) - 1));
+                overWriteFile(filePath, todo);
                 break;
             case "delete":
                 if (input.length != 2) {
@@ -83,6 +130,7 @@ public class Duke {
                 System.out.println(todo.get(Integer.valueOf(input[1]) - 1));
                 todo.remove(Integer.valueOf(input[1]) - 1);
                 System.out.printf(Duke.speak(Dialogue.NUMLEFT, todo.size()));
+                overWriteFile(filePath, todo);
                 break;
             case "todo":
                 if (input.length == 1) {
@@ -97,6 +145,7 @@ public class Duke {
                 todo.add(new ToDos(obj.toString()));
                 System.out.println(todo.get(todo.size()-1));
                 System.out.printf(Duke.speak(Dialogue.NUMLEFT, todo.size()));
+                appendFile(filePath, todo.get(todo.size()-1));
                 break;
             case "deadline":
             case "event":
@@ -127,6 +176,7 @@ public class Duke {
                 System.out.println(Duke.speak(Dialogue.ADDED));
                 System.out.println(todo.get(todo.size()-1));
                 System.out.printf(Duke.speak(Dialogue.NUMLEFT, todo.size()));
+                appendFile(filePath, todo.get(todo.size()-1));
                 break;
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
