@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected String objective;
     protected boolean done;
 
@@ -14,6 +14,8 @@ public class Task {
     public void unmarked() {
         this.done = false;
     }
+
+    public abstract boolean sameTime(String date);
 
     @Override
     public String toString() {
