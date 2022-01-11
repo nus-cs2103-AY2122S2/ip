@@ -21,6 +21,8 @@ public abstract class Task {
 
     public abstract String serialize();
 
+    public abstract boolean sameTime(String date);
+
     @Override
     public String toString() {
         return (done ? "[X]" : "[ ]") + " " + this.objective;

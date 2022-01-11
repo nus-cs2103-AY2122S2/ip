@@ -2,6 +2,7 @@ import java.awt.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -10,7 +11,7 @@ import java.nio.file.Paths;
 
 public class Duke {
     private enum Dialogue {
-        GREETING, FAREWELL, LIST, MARK, UNMARKED, ADDED, GIBBERISH, DELETE, NUMLEFT
+        GREETING, FAREWELL, LIST, MARK, UNMARKED, ADDED, DELETE, NUMLEFT
     }
     private enum Styling {
         LINE
@@ -161,22 +162,26 @@ public class Duke {
                 if (i == input.length) {
                     throw new DukeException("☹ OOPS!!! There is no proper date for " + input[0] + ".\n");
                 }
-                StringBuilder date = new StringBuilder("");
-                for (i = i+1; i < input.length; i++) {
-                    date.append(input[i]);
-                    date.append(" ");
-                }
                 obj.setLength(obj.length()-1);
-                date.setLength(date.length()-1);
                 if (input[0].equals("deadline")) {
-                    todo.add(new DeadLine(obj.toString(), date.toString()));
+                    todo.add(new DeadLine(obj.toString(), input[input.length-2], input[input.length-1]));
                 } else {
-                    todo.add(new Events(obj.toString(), date.toString()));
+                    todo.add(new Events(obj.toString(), input[input.length-3] ,input[input.length-2], input[input.length-1]));
                 }
                 System.out.println(Duke.speak(Dialogue.ADDED));
                 System.out.println(todo.get(todo.size()-1));
                 System.out.println(Duke.speak(Dialogue.NUMLEFT, todo.size()));
                 appendFile(filePath, todo.get(todo.size()-1));
+                break;
+            case "findDate":
+                if (input.length != 2) {
+                    throw new DukeException("Fill in proper integer to find date.\n");
+                }
+                for (Task task : todo) {
+                    if (task.sameTime(input[1])) {
+                        System.out.println(task);
+                    }
+                }
                 break;
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
