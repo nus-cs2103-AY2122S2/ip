@@ -1,6 +1,10 @@
+import java.util.Set;
+
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String markAsDoneFeedback = "Nice! I've marked this task as done: \n ";
+    protected String markAsUndoneFeedback = "OK, I've marked this task as not done yet: \n ";
 
     public Task(String description) {
         this.description = description;
@@ -13,16 +17,14 @@ public class Task {
 
     public void markAsDone() {
         this.isDone = true;
-        System.out.println("Nice! I've marked this task as done: \n" + " [" + this.getStatusIcon() + "] " + this.description);
     }
 
     public void markAsUndone() {
         this.isDone = false;
-        System.out.println("OK, I've marked this task as not done yet: \n" + " [" + this.getStatusIcon() + "] " + this.description);
     }
 
     @Override
     public String toString() {
-        return " [" + this.getStatusIcon() + "] " + this.description;
+        return "[" + this.getStatusIcon() + "] " + this.description;
     }
 }
