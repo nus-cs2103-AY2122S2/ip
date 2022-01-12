@@ -1,3 +1,9 @@
+package duke.parser;
+
+import duke.main.DukeException;
+import duke.command.*;
+import duke.task.*;
+
 public class Parser {
     public static Command parse(String cmd) throws DukeException {
         String[] input = cmd.split(" ");
@@ -17,7 +23,7 @@ public class Parser {
                 return Parser.prepareDelete(input);
 //            case "findDate":
 //                if (input.length != 2) {
-//                    throw new DukeException("Fill in proper integer to find date.\n");
+//                    throw new duke.main.DukeException("Fill in proper integer to find date.\n");
 //                }
 //                for (Task task : todo) {
 //                    if (task.sameTime(input[1])) {

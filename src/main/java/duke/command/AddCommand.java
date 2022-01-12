@@ -1,4 +1,9 @@
+package duke.command;
+
 import java.io.IOException;
+import duke.task.*;
+import duke.ui.*;
+import duke.storage.*;
 
 public class AddCommand extends Command{
     protected Task obj;

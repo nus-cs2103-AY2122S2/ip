@@ -1,11 +1,15 @@
+package duke.main;
+
+import duke.command.*;
+import duke.task.*;
+import duke.ui.*;
+import duke.storage.*;
+import duke.parser.*;
+
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
 public class Duke {
-    private enum Dialogue {
-        GREETING, FAREWELL, LIST, MARK, UNMARKED, ADDED, DELETE, NUMLEFT
-    }
-
     protected Storage storage;
     protected TaskList tasks;
     protected Ui ui;

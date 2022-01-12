@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.task.*;
+import duke.ui.*;
+import duke.storage.*;
+
 public class ExitCommand extends Command {
     @Override
     public void execute(TaskList task, Ui ui, Storage storage) {

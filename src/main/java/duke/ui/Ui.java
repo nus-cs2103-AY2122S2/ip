@@ -1,3 +1,7 @@
+package duke.ui;
+
+import duke.task.*;
+
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.List;
