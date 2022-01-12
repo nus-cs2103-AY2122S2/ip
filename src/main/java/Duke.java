@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 public class Duke {
     private static boolean isEnd = false;
+    private static String[] TaskList = new String[100];
+    private static int TaskNo = 0;
 
     public static void horizontalLine(){
         System.out.println("____________________________________________________________");
@@ -17,17 +19,43 @@ public class Duke {
 
     public static void echo(){
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-        String output = myObj.nextLine();
+        String input = myObj.nextLine();
+
+        // default return is added + input
+        String result = "added: " + input;
+
         // detect bye
-        if (output.equals("bye")) {
+        if (input.equals("bye")) {
             Duke.isEnd = true;
-            output = "\tBye. Hope to see you again soon!";
+            result = "\tBye. Hope to see you again soon!";
+        }else if (input.equals("list")){
+            // detect list
+            Duke.list();
+            return;
+        } else {
+            // add task
+            TaskList[TaskNo] = input;
+            TaskNo ++;
         }
+
+        // print result
         horizontalLine();
-        System.out.println(output);
+        System.out.println(result);
         System.out.println();
         horizontalLine();
     }
+
+    public static void list(){
+        horizontalLine();
+        for (int i = 0; i < TaskNo ; i++) {
+            if (TaskList[i] != null) {
+                System.out.format("%d. %s\n", i, TaskList[i]);
+            }
+        }
+        System.out.println();
+        horizontalLine();
+    }
+
 
     public static void main(String[] args) {
         greet();
