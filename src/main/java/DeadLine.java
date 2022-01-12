@@ -3,7 +3,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class DeadLine extends Task {
-    protected String by;
     protected LocalDate bydate;
     protected LocalTime bytime;
 
@@ -13,16 +12,21 @@ public class DeadLine extends Task {
         this.bytime = LocalTime.parse(time);
     }
 
+    public DeadLine(String objective, Boolean done, String date, String time) {
+        super(objective, done);
+        this.bydate = LocalDate.parse(date);
+        this.bytime = LocalTime.parse(time);
+    }
+
     public boolean sameTime(String date) {
         return this.bydate.equals(LocalDate.parse(date));
     }
-    public DeadLine(String objective, Boolean done, String by) {
-        super(objective, done);
-        this.by = by;
-    }
+
+
     @Override
     public String serialize() {
-        return "D|" + (this.done ? "1|" : "0|") + this.objective + "|" + this.by +"\n";
+        return "D|" + (this.done ? "1|" : "0|") + this.objective
+                + "|" + bydate.toString() + "|" + bytime.toString() +"\n";
     };
 
     @Override

@@ -15,6 +15,13 @@ public class Events extends Task{
         this.bytime = LocalTime.parse(to);
     }
 
+    public Events(String objective, Boolean done, String date, String fromtime, String bytime) {
+        super(objective, done);
+        this.date = LocalDate.parse(date);
+        this.fromtime = LocalTime.parse(fromtime);
+        this.bytime = LocalTime.parse(bytime);
+    }
+
     public boolean sameTime(String date) {
         return this.date.equals(LocalDate.parse(date));
     }
@@ -24,7 +31,8 @@ public class Events extends Task{
     }
     @Override
     public String serialize() {
-        return "E|" + (this.done ? "1|" : "0|") + this.objective + "|" + this.at +"\n";
+        return "E|" + (this.done ? "1|" : "0|") + this.objective + "|" + this.date.toString() +
+                "|" + this.fromtime.toString() + "|" + this.bytime.toString() +"\n";
     };
     @Override
     public String toString() {

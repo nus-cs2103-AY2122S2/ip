@@ -34,9 +34,9 @@ public abstract class Task {
         if (arr[0].equals("T")) {
             return new ToDos(arr[2], completed);
         } else if (arr[0].equals("D")) {
-            return new DeadLine(arr[2], completed, arr[3]);
+            return new DeadLine(arr[2], completed, arr[3], arr[4]);
         } else {
-            return new DeadLine(arr[2], completed, arr[3]);
+            return new Events(arr[2], completed, arr[3], arr[4], arr[5]);
         }
     }
 }
