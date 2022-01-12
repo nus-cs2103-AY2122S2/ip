@@ -11,12 +11,16 @@ public class Duke {
         ArrayList<Task> taskList = new ArrayList<>();
         boolean firstUserChat = true;
 
-        String logo = " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        String logo =   indentationText +
+                        "    _                  _     \n" + indentationText +
+                        "   |_|                |_|    \n" + indentationText +
+                        "    _  __ _ _ ____   ___ ___ \n" + indentationText +
+                        "   | |/ _` | '__\\ \\ / / / __|\n" + indentationText +
+                        "   | | (_| | |   \\ V /| \\__ \\\n" + indentationText +
+                        "   | |\\__,_|_|    \\_/ |_|___/\n" + indentationText +
+                        "  _/ |                       \n" + indentationText +
+                        " |__/                        \n";
+        System.out.println(String.format("%sHello, I'm\n%s", indentationText, logo));
 
         Scanner sc = new Scanner(System.in);
         System.out.println(String.format("%sHow should I address you?", indentationText));
