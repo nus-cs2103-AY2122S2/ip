@@ -3,14 +3,34 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public Duke(){}
+    private ArrayList<String> arr;
+    private int numOfTasks;
 
-    public String answer(String input) {
+    public Duke(){
+        this.arr = new ArrayList<String>(0);
+        this.numOfTasks = 0;
+    }
+
+    private void update(String s) {
+        this.arr.add(s);
+    }
+
+    private void answer(String input) {
+        String ans = "";
         if (input.equals("bye")) {
-            return "Bye. Hope to see you again soon!";
+            ans = "Bye. Hope to see you again soon!";
+        } else if (input.equals("list")) {
+            for (String s : arr) {
+                ans += s + ('\n');
+            }
+            ans = ans.trim();
         } else {
-            return input;
+            numOfTasks++;
+            String task = numOfTasks + ". " + input;
+            update(task);
+            ans = "added: " + input;
         }
+        System.out.println(ans);
     }
 
     public static void main(String[] args) {
@@ -21,7 +41,7 @@ public class Duke {
 
         while (!userInput.equals("bye")) {
             userInput = sc.nextLine();
-            System.out.println(duke.answer(userInput));
+            duke.answer(userInput);
         }
         sc.close();
 
