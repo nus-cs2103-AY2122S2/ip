@@ -107,7 +107,7 @@ public class Ui {
                 reply = "Hello from\n" + logo +"\n";
                 reply +=  "Hello! I'm Duke.\nWhat can I do for you?\n";
                 break;
-            case LOADERROR: reply = "Cannot load save file";
+            case LOADERROR: reply = "There is no previously saved file to be loaded.\n";
                 break;
             case MARK: reply = "Nice! I've marked this task as done:\n";
                 break;

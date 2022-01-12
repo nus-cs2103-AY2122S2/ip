@@ -7,8 +7,9 @@ import duke.storage.*;
 import java.io.IOException;
 
 public class MarkCommand extends Command{
-    boolean mark;
-    Integer index;
+    protected boolean mark;
+    protected Integer index;
+
     public MarkCommand(Integer index, boolean mark) {
         this.mark = mark;
         this.index = index-1;

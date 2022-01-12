@@ -5,7 +5,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Events extends Task{
-    protected String at;
     protected LocalDate date;
     protected LocalTime fromtime;
     protected LocalTime bytime;
@@ -27,10 +26,18 @@ public class Events extends Task{
     public boolean sameTime(String date) {
         return this.date.equals(LocalDate.parse(date));
     }
-    public Events(String objective, Boolean done, String at) {
-        super(objective, done);
-        this.at = at;
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Events) {
+            Events e = (Events) o;
+            return this.date.equals(e.date) && this.fromtime.equals(e.fromtime) && this.bytime.equals(e.bytime)
+                    && this.objective.equals(e.objective) && this.done == e.done;
+        } else {
+            return false;
+        }
     }
+
     @Override
     public String serialize() {
         return "E|" + (this.done ? "1|" : "0|") + this.objective + "|" + this.date.toString() +

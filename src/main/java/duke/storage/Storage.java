@@ -2,6 +2,7 @@ package duke.storage;
 
 import duke.task.*;
 import duke.main.DukeException;
+import duke.ui.Ui;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -23,10 +24,9 @@ public class Storage {
         List<Task> loaded = new ArrayList<>();
         dir.getParentFile().mkdirs();
         if (dir.createNewFile()) {
-            System.out.println("Old save file found on: " + dir.getAbsolutePath()+"\n");
-            System.out.println("There is no old save file found.\n");
+            throw new DukeException("No previous save file");
         } else {
-            System.out.println("Old save file found on: " + dir.getAbsolutePath()+"\n");
+            //System.out.println("Old save file found on: " + dir.getAbsolutePath()+"\n");
             Scanner sc = new Scanner(dir);
             while (sc.hasNext()) {
                 String encoded = sc.nextLine();

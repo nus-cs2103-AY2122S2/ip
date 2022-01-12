@@ -27,7 +27,7 @@ public class Duke {
             ui.showLoadingError();
             tasks = new TaskList();
         } catch (IOException e) {
-            System.out.println("hi");
+            ui.showError(e.getMessage());
         }
     }
 

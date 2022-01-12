@@ -36,7 +36,7 @@ public class Parser {
         }
     }
 
-    public static Command prepareAdd(String[] input) throws DukeException {
+    private static Command prepareAdd(String[] input) throws DukeException {
         if (input.length == 1) {
             throw new DukeException("☹ OOPS!!! The description of a " + input[0] + " cannot be empty.\n");
         }
@@ -66,7 +66,7 @@ public class Parser {
         }
     }
 
-    public static Command prepareMark(String[] input) throws DukeException {
+    private static Command prepareMark(String[] input) throws DukeException {
         if (input.length != 2) {
             throw new DukeException("Fill in proper integer for marking/unmarking.\n");
         }
@@ -77,7 +77,7 @@ public class Parser {
         }
     }
 
-    public static Command prepareDelete(String[] input) throws DukeException {
+    private static Command prepareDelete(String[] input) throws DukeException {
         if (input.length != 2) {
             throw new DukeException("Fill in proper integer for deletion.\n");
         }

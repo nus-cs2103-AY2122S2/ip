@@ -24,6 +24,16 @@ public class DeadLine extends Task {
         return this.bydate.equals(LocalDate.parse(date));
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof DeadLine) {
+            DeadLine e = (DeadLine) o;
+            return this.bydate.equals(e.bydate) && this.bytime.equals(e.bytime) &&
+                    this.objective.equals(e.objective) && (this.done == e.done);
+        } else {
+            return false;
+        }
+    }
 
     @Override
     public String serialize() {
