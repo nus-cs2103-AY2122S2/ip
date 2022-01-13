@@ -1,3 +1,6 @@
+package Tasks;
+
+// can actually change this to an Abstract Class
 public class Task {
     private String task;
     private boolean markStatus;
@@ -30,6 +33,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.getMarkStatus() + " " + this.getTask();
+        return this.getMarkStatus() + this.getTask();
     }
 }

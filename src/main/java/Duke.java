@@ -1,3 +1,8 @@
+import Tasks.Task;
+import Tasks.ToDo;
+import Tasks.Event;
+import Tasks.Deadline;
+
 import java.io.BufferedReader;
 import java.util.*;
 import java.io.IOException;
@@ -25,7 +30,7 @@ public class Duke {
                 case "mark":
                     int numberToMark = Integer.parseInt(cmd_split[1])-1; // convert to 0-based indexing
                     if (toDoList.size() == 0 || numberToMark >= toDoList.size()) {
-                        System.out.println("Error. Task does not exist");
+                        System.out.println("Error. Tasks.Task does not exist");
                         break;
                     }
                     Task taskToMark = toDoList.get(numberToMark);
@@ -37,7 +42,7 @@ public class Duke {
                 case "unmark":
                     int numberToUnmark = Integer.parseInt(cmd_split[1])-1; // convert to 0-based indexing
                     if (toDoList.size() == 0 || numberToUnmark >= toDoList.size()) {
-                        System.out.println("Error. Task does not exist");
+                        System.out.println("Error. Tasks.Task does not exist");
                         break;
                     }
                     Task taskToUnmark = toDoList.get(numberToUnmark);
@@ -46,11 +51,32 @@ public class Duke {
                     System.out.println(taskToUnmark);
                     System.out.println(tabbedLine);
                     break;
-                default:
-                    // new Task(String cmd, boolean markStatus)
-                    toDoList.add(new Task(cmd, false));
-                    System.out.println(tabbedLine + "\n\tadded: " + cmd + "\n" + tabbedLine);
+                case "todo":
+                    ToDo newToDo = new ToDo(cmd.split("todo")[1], false);
+                    toDoList.add(newToDo);
+                    System.out.println(tabbedLine + "\n\tGot it. I've added this task:\n\t" + newToDo + "\n\tNow you have " + toDoList.size() + " tasks in the list.");
+                    System.out.println(tabbedLine);
                     break;
+                case "deadline":
+                    String[] deadlineDetails = cmd.split("deadline")[1].split("/by");
+                    String deadlineName = deadlineDetails[0];
+                    String deadline = deadlineDetails[1];
+                    Deadline newDeadline = new Deadline(deadlineName, false, deadline);
+                    toDoList.add(newDeadline);
+                    System.out.println(tabbedLine + "\n\tGot it. I've added this task:\n\t" + newDeadline + "\n\tNow you have " + toDoList.size() + " tasks in the list.");
+                    System.out.println(tabbedLine);
+                    break;
+                case "event":
+                    String[] eventDetails = cmd.split("event")[1].split("/at");
+                    String eventName = eventDetails[0];
+                    String eventDateTime = eventDetails[1];
+                    Event newEvent = new Event(eventName, false, eventDateTime);
+                    toDoList.add(newEvent);
+                    System.out.println(tabbedLine + "\n\tGot it. I've added this task:\n\t" + newEvent + "\n\tNow you have " + toDoList.size() + " tasks in the list.");
+                    System.out.println(tabbedLine);
+                    break;
+                default:
+                    System.out.println("Invalid");
             }
         }
         System.out.println(tabbedLine + "\n\tBye. Hope to see you again soon!\n" + tabbedLine);
