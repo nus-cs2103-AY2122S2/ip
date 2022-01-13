@@ -27,26 +27,6 @@ public class Duke {
                     }
                     System.out.println(tabbedLine);
                     break;
-                case "mark":
-                    try {
-                        int numberToMark = Integer.parseInt(cmd_split[1])-1; // convert to 0-based indexing
-                        Task taskToMark = toDoList.get(numberToMark);
-                        taskToMark.mark();
-                        System.out.println(formatMsg("OK, I've marked this task as done:\n\t" + taskToMark));
-                    } catch (IndexOutOfBoundsException e) {
-                        System.out.println(new DukeException(formatMsg("☹ OOPS!!! Item to mark does not exist.")));
-                    }
-                    break;
-                case "unmark":
-                    try {
-                        int numberToUnmark = Integer.parseInt(cmd_split[1])-1; // convert to 0-based indexing
-                        Task taskToUnmark = toDoList.get(numberToUnmark);
-                        taskToUnmark.unmark();
-                        System.out.println(formatMsg("OK, I've marked this task as not done yet:\n\t" + taskToUnmark));
-                    } catch (IndexOutOfBoundsException e) {
-                        System.out.println(new DukeException(formatMsg("☹ OOPS!!! Item to unmark does not exist.")));
-                    }
-                    break;
                 case "todo":
                     try {
                         ToDo newToDo = new ToDo(cmd.split("todo")[1], false);
@@ -78,6 +58,35 @@ public class Duke {
                         System.out.println(formatMsg("Got it. I've added this task:\n\t" + newEvent + "\n\tNow you have " + toDoList.size() + " tasks in the list."));
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println(new DukeException(formatMsg("☹ OOPS!!! The description of an event cannot be empty.")));
+                    }
+                    break;
+                case "mark":
+                    try {
+                        int numberToMark = Integer.parseInt(cmd_split[1])-1; // convert to 0-based indexing
+                        Task taskToMark = toDoList.get(numberToMark);
+                        taskToMark.mark();
+                        System.out.println(formatMsg("OK, I've marked this task as done:\n\t" + taskToMark));
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println(new DukeException(formatMsg("☹ OOPS!!! Item to mark does not exist.")));
+                    }
+                    break;
+                case "unmark":
+                    try {
+                        int numberToUnmark = Integer.parseInt(cmd_split[1])-1; // convert to 0-based indexing
+                        Task taskToUnmark = toDoList.get(numberToUnmark);
+                        taskToUnmark.unmark();
+                        System.out.println(formatMsg("OK, I've marked this task as not done yet:\n\t" + taskToUnmark));
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println(new DukeException(formatMsg("☹ OOPS!!! Item to unmark does not exist.")));
+                    }
+                    break;
+                case "delete":
+                    try {
+                        int toDelete = Integer.parseInt(cmd_split[1])-1;
+                        Task deletedTask = toDoList.remove(toDelete);
+                        System.out.println(formatMsg("Noted. I've removed this task:\n\t" + deletedTask + "\n\tNow you have " + toDoList.size() + " tasks in the list."));
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println(new DukeException(formatMsg("☹ OOPS!!! Item to delete does not exist.")));
                     }
                     break;
                 default:
