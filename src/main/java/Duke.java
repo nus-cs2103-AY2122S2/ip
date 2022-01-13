@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 /**
- * Task class represents a Personal Assistant Chatbot that
+ * Duke class represents a Personal Assistant Chatbot that
  * helps a person to keep track of various things.
  */
 public class Duke {
@@ -30,39 +30,62 @@ public class Duke {
     }
 
     /**
-     * Processes the input from the user.
-     * @param input Full input from user.
+     * Processes the command from the user.
      * @param command Command to execute.
+     * @param description Task description if any.
      */
-    public static void processCommand(String input, String command) {
+    public static void processCommand(String command, String description) {
         int index;
+        Task t;
 
         switch (command) {
         case "list":
             System.out.print(lineBreak);
             for (int i = 0; i < Task.numOfTasks; i++) {
                 index = i + 1;
-                System.out.println(index + ".[" + tasks[i].getStatusIcon() + "] " + tasks[i].description);
+                System.out.println(index + ". " + tasks[i]);
             }
             System.out.print(lineBreak);
             break;
         case "mark":
-            index = Integer.parseInt(input.split(" ")[1]);
+            index = Integer.parseInt(description.trim());
             tasks[index - 1].markAsDone();
             System.out.println(lineBreak + "Meow! Task is done!" + catFace
                     + tasks[index - 1] + "\n" + lineBreak);
             break;
         case "unmark":
-            index = Integer.parseInt(input.split(" ")[1]);
+            index = Integer.parseInt(description.trim());
             tasks[index - 1].unmarkAsDone();
             System.out.println(lineBreak + "Meow! Task is not done!" + catFace
                     + tasks[index - 1] + "\n" + lineBreak);
             break;
-        default:
-            Task t = new Task(input);
+        case "todo":
+            t = new Todo(description);
             tasks[Task.numOfTasks] = t;
             Task.numOfTasks++;
-            System.out.println(lineBreak + "added: " + input + catFace + lineBreak);
+            System.out.println(lineBreak + "added: " + t + "\n" + "Number of tasks in list: " + Task.numOfTasks + catFace + lineBreak);
+            break;
+        case "deadline":
+            String deadline = description.split("/by", 2)[1].trim();
+            description = description.split("/by", 2)[0].trim();
+            t = new Deadline(description, deadline);
+            tasks[Task.numOfTasks] = t;
+            Task.numOfTasks++;
+            System.out.println(lineBreak + "added: " + t + "\n" + "Number of tasks in list: " + Task.numOfTasks + catFace + lineBreak);
+            break;
+        case "event":
+            String period = description.split("/at", 2)[1].trim();
+            description = description.split("/at", 2)[0].trim();
+            t = new Event(description, period);
+            tasks[Task.numOfTasks] = t;
+            Task.numOfTasks++;
+            System.out.println(lineBreak + "added: " + t + "\n" + "Number of tasks in list: " + Task.numOfTasks + catFace + lineBreak);
+            break;
+        default:
+            t = new Task(description);
+            tasks[Task.numOfTasks] = t;
+            Task.numOfTasks++;
+            System.out.println(lineBreak + "added: " + description + "\n" + lineBreak);
             break;
         }
     }
@@ -72,14 +95,16 @@ public class Duke {
 
         greet();
 
-        String input = sc.nextLine().strip();
-        String command = (input + " ").split(" ")[0];
+        String input = sc.nextLine().strip() + " ";
+        String command = input.split(" ")[0];
+        String description = input.split(" ", 2)[1];
 
         while (!command.equals("bye")) {
-            processCommand(input, command);
+            processCommand(command, description);
 
-            input = sc.nextLine().strip();
-            command = (input + " ").split(" ")[0];
+            input = sc.nextLine().strip() + " ";
+            command = input.split(" ")[0];
+            description = input.split(" ", 2)[1];
         }
 
         exit();
