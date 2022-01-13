@@ -126,7 +126,7 @@ public class Duke {
                     System.out.println(String.format("%s%s", indentationTaskStatus, task));
                     System.out.println(String.format("%sNow you have %d tasks in the list.", indentationText, taskList.size()));
                 } else {
-                    System.out.println(String.format("%sI'm sorry, you've input a command I don't recognize. Please try again.", indentationText));
+                    throw new DukeException("I'm sorry, you've input a command I don't recognize. Please try again.");
                 }
 
             }
