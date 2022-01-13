@@ -1,9 +1,25 @@
-import java.util.Locale;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    private static ArrayList<String> tasks = new ArrayList<>();
+
+    public static void addTask(String task) {
+        System.out.println("Added as per your request: " + task);
+        tasks.add(task);
+    }
+
+    public static void listTasks() {
+        StringBuilder listOfTasks = new StringBuilder();
+        for (int i = 0; i < tasks.size(); i++) {
+            listOfTasks.append(i+1).append(". ").append(tasks.get(i)).append("\n");
+        }
+        System.out.println(listOfTasks);
+    }
+
     public static void main(String[] args) {
-        String divider = "______________________________________";
+
+        String divider = "\n______________________________________\n";
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -18,7 +34,11 @@ public class Duke {
         String userInput = scanner.nextLine();
 
         while (!userInput.equalsIgnoreCase("bye")) {
-            System.out.println(userInput);
+            if (userInput.equalsIgnoreCase("list")) {
+                listTasks();
+            } else {
+                addTask(userInput);
+            }
             System.out.println(divider);
             userInput = scanner.nextLine();
         }
