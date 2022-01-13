@@ -1,14 +1,27 @@
+/**
+ * Task class represents the tasks created by the user.
+ * It keeps track of the task's description and its status.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
 
+    /** Total number of tasks in the list */
     protected static int numOfTasks = 0;
 
+    /**
+     * Class constructor specifying the task's description.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Returns status icon "X" of the task.
+     * If the task is not done, " " is returned.
+     * @return Status icon.
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
@@ -21,6 +34,9 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Returns status icon and description of the task.
+     */
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + this.description;
