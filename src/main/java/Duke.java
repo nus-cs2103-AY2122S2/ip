@@ -20,7 +20,7 @@ public class Duke {
                         "   | |\\__,_|_|    \\_/ |_|___/\n" + indentationText +
                         "  _/ |                       \n" + indentationText +
                         " |__/                        \n";
-        System.out.println(String.format("%sHello, I'm\n%s", indentationText, logo));
+        System.out.println(String.format("%sHello, I'm\n%s%syour personal assistant.", indentationText, logo, indentationText));
 
         Scanner sc = new Scanner(System.in);
         System.out.println(String.format("%sHow should I address you?", indentationText));
@@ -55,30 +55,37 @@ public class Duke {
                 }
 
                 // Mark, Unmark - "mark itemIndexNumber", "unmark itemIndexNumber", marks an item as done/undone accordingly 
-                else if (userInput.toLowerCase().contains("mark") || userInput.toLowerCase().contains("unmark")) {
+                else if (userInput.toLowerCase().matches("^mark \\d+") || userInput.toLowerCase().matches("^unmark \\d+")) {
                     String[] stringArray = userInput.toLowerCase().split(" ");
                     int taskIndex = Integer.valueOf(stringArray[1]) - 1;
 
-                    // Mark 
-                    if (stringArray[0].equals("mark")) {
-                        System.out.println(String.format("%sOkay, marking this task as done:", indentationText));
-                        taskList.get(taskIndex).markAsDone();
-                    
-                    // Unmark 
-                    } else if (stringArray[0].equals("unmark")) {
-                        System.out.println(String.format("%sOkay, marking this task as not done yet:", indentationText));
-                        taskList.get(taskIndex).markAsUndone();
+                    try {
+                        // Mark 
+                        if (stringArray[0].equals("mark")) {
+                            
+                            Task task = taskList.get(taskIndex);
+                            task.markAsDone();
+                            System.out.println(String.format("%sOkay, marking this task as done:", indentationText));
+                            System.out.println(String.format("%s%s", indentationTaskStatus, task));
+                        
+                        // Unmark 
+                        } else if (stringArray[0].equals("unmark")) {
+                            
+                            // taskList.get(taskIndex).markAsUndone();
+                            Task task = taskList.get(taskIndex);
+                            task.markAsDone();
+                            System.out.println(String.format("%sOkay, marking this task as not done yet:", indentationText));
+                            System.out.println(String.format("%s%s", indentationTaskStatus, task));
+                        }
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println(String.format("%sNo such task exists!", indentationText)); 
                     }
-
-                    // Print out Task 
-                    Task task = taskList.get(taskIndex);
-                    System.out.println(String.format("%s%s", indentationTaskStatus, task));
 
                 }
                 
                 // Add - adds Task to list 
                 // 3 types of Tasks: ToDo's, Events, Deadlines 
-                else {
+                else if (userInput.toLowerCase().matches("^todo .*") || userInput.toLowerCase().matches("^event .*") || userInput.toLowerCase().matches("^deadline .*")) {
                     String[] textStrings = userInput.split(" "); 
                     String taskType = textStrings[0].toLowerCase(); 
                     String taskDescription = String.join(" ", Arrays.copyOfRange(textStrings, 1, textStrings.length));
@@ -118,12 +125,14 @@ public class Duke {
 
                     System.out.println(String.format("%s%s", indentationTaskStatus, task));
                     System.out.println(String.format("%sNow you have %d tasks in the list.", indentationText, taskList.size()));
+                } else {
+                    System.out.println(String.format("%sI'm sorry, you've input a command I don't recognize. Please try again.", indentationText));
                 }
 
             }
             // TODO - catching all Exceptions
             catch(Exception e) {
-                System.out.println("\tException: " + e.getMessage());
+                System.out.println("\tException: " + e.getMessage() + ", of Exception type: " + e.getClass().getCanonicalName());
             }
         }
 
