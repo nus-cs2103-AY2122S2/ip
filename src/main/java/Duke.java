@@ -11,6 +11,17 @@ public class Duke {
         TODO, DEADLINE, EVENT
     }
 
+    public static void greet() {
+        String logo = "\n" +
+                "   ____                  _                           \n" +
+                "  / ___|   ___    _ __  | |_    __ _   _ __     __ _ \n" +
+                " | |      / _ \\  | '__| | __|  / _` | | '_ \\   / _` |\n" +
+                " | |___  | (_) | | |    | |_  | (_| | | | | | | (_| |\n" +
+                "  \\____|  \\___/  |_|     \\__|  \\__,_| |_| |_|  \\__,_|\n" +
+                "                                                     \n";
+        System.out.println("Hello from\n" + logo + "\nMy name is Cortana, what can I do for you?");
+    }
+
     public static void simpleTodo() {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.next();
@@ -149,14 +160,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String logo = "\n" +
-                "   ____                  _                           \n" +
-                "  / ___|   ___    _ __  | |_    __ _   _ __     __ _ \n" +
-                " | |      / _ \\  | '__| | __|  / _` | | '_ \\   / _` |\n" +
-                " | |___  | (_) | | |    | |_  | (_| | | | | | | (_| |\n" +
-                "  \\____|  \\___/  |_|     \\__|  \\__,_| |_| |_|  \\__,_|\n" +
-                "                                                     \n";
-        System.out.println("Hello from\n" + logo + "My name is Cortana, what can I do for you?");
+        greet();
         simpleTodo();
     }
 }

@@ -1,5 +1,3 @@
-import java.util.Objects;
-
 public class Task {
     protected String description;
     protected boolean isDone;
