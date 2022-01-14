@@ -1,6 +1,8 @@
-public class Event extends Task {
+import java.util.Objects;
 
+public class Event extends Task {
     protected String at;
+    protected String taskType;
 
     public Event(String description, String at) {
         super(description);
@@ -22,5 +24,20 @@ public class Event extends Task {
     public void markAsUndone() {
         super.markAsUndone();
         System.out.println(super.markAsUndoneFeedback + this);
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        if (obj != null && obj.getClass() == getClass()) {
+            Event event = (Event) obj;
+            return (event.description.equals(this.description) && event.at.equals(this.at));
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description, at);
     }
 }

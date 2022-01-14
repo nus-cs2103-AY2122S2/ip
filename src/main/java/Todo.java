@@ -1,5 +1,6 @@
-public class Todo extends Task {
+import java.util.Objects;
 
+public class Todo extends Task {
     public Todo(String description) {
         super(description);
     }
@@ -19,5 +20,20 @@ public class Todo extends Task {
     public void markAsUndone() {
         super.markAsUndone();
         System.out.println(super.markAsUndoneFeedback + this);
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        if (obj != null && obj.getClass() == getClass()) {
+            Todo todo = (Todo) obj;
+            return todo.description.equals(this.description);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description);
     }
 }
