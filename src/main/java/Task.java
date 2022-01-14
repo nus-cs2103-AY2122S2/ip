@@ -1,8 +1,6 @@
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected String markAsDoneFeedback = "Nice! I've marked this task as done: \n ";
-    protected String markAsUndoneFeedback = "OK, I've marked this task as not done yet: \n ";
 
     public Task(String description) {
         this.description = description;

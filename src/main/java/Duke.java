@@ -7,9 +7,6 @@ import java.util.regex.Pattern;
 public class Duke {
     private static final Set<Task> taskSet = new HashSet<>();
     private final static ArrayList<Task> tasksArrayList = new ArrayList<>();
-    private enum TaskTypes {
-        TODO, DEADLINE, EVENT
-    }
 
     public static void greet() {
         String logo = "\n" +
@@ -33,39 +30,16 @@ public class Duke {
                 break;
             } else {
                 if (input.replaceAll("[ |\\t]", "").equalsIgnoreCase("list")) { //list all tasks
-                    if (tasksArrayList.size() == 0) {
-                            System.out.println("You are done for the day, or are you?");
-                    } else {
-                        for (int i = 0; i < tasksArrayList.size(); i ++) {
-                            System.out.println(i + 1 + "." + tasksArrayList.get(i));
-                        }
-                    }
+                    list();
                 } else if (input.toLowerCase().matches("^mark \\d+|^mark -\\d+")) { //mark task as done
                     int index = Integer.parseInt(input.replaceAll("mark ", "")) - 1;
-                    try {
-                        tasksArrayList.get(index).markAsDone();
-                    } catch (Exception e) {
-                            System.out.println("No such task!");
-                    }
+                    markAsDone(index);
                 } else if (input.toLowerCase().matches("^unmark \\d+|^unmark -\\d+")) { //mark task as undone
                     int index = Integer.parseInt(input.replaceAll("unmark ", "")) - 1;
-                    try {
-                        tasksArrayList.get(index).markAsUndone();
-                    } catch (Exception e) {
-                        System.out.println("No such task!");
-                    }
+                    markAsUndone(index);
                 } else if (input.toLowerCase().matches("^delete \\d+|^delete -\\d+")) { //delete a task
                     int index = Integer.parseInt(input.replaceAll("delete ", "")) - 1;
-                    try {
-                        Task taskDeleted = tasksArrayList.get(index);
-                        tasksArrayList.remove(index);
-                        taskSet.remove(taskDeleted);
-                        String taskOrTasks = tasksArrayList.size() < 1 ? "task" : "tasks";
-                        System.out.println("Noted. I've removed this task:\n" + " " + taskDeleted + "\n" +
-                                "Now you have " + tasksArrayList.size() + " " + taskOrTasks + " in the list.");
-                    } catch (Exception e) {
-                        System.out.println("No such task!");
-                    }
+                    delete(index);
                 } else { //add task
                     try {
                         //only input the task type and nothing else
@@ -74,7 +48,8 @@ public class Duke {
                         boolean isEmptyTodo = input.replaceAll("[ |\\t]", "").equalsIgnoreCase("todo");
                         String taskType = isEmptyDeadline ? "deadline" : isEmptyEvent ? "event" : "todo";
                         if (isEmptyDeadline || isEmptyEvent || isEmptyTodo ) {
-                            throw new CortanaException("OOPS!!! The description of a " + taskType + " cannot be empty! \uD83E\uDD21");
+                            String aOrAn = isEmptyEvent ? "an " : "a ";
+                            throw new CortanaException("OOPS!!! The description of " + aOrAn + taskType + " cannot be empty!");
                         } else {
                             //input the task type with at least one character after it
                             boolean isNotEmptyDeadline = input.toLowerCase().matches("^deadline .*");
@@ -83,30 +58,31 @@ public class Duke {
                             boolean hasBy = Pattern.compile("/by .*").matcher(input).find();
                             boolean hasAt = Pattern.compile("/at .*").matcher(input).find();
                             if (isNotEmptyDeadline && hasBy) { //valid deadline command
-                                String actualTask = input.replaceAll("deadline ", "");
-                                String[] sliced = actualTask.split("/by ");
-                                String description = sliced[0];
-                                String by = sliced[1];
-                                taskActions(TaskTypes.DEADLINE, description, by);
+                                String[] actualTask = input.replaceAll("deadline ", "").split("/by ");
+                                String description = actualTask[0];
+                                String by = actualTask[1];
+                                Deadline deadline = new Deadline(description, by);
+                                addTask(deadline);
                             } else if (isNotEmptyEvent && hasAt) { //valid event command
-                                String actualTask = input.replaceAll("event ", "");
-                                String[] sliced = actualTask.split("/at ");
-                                String description = sliced[0];
-                                String at = sliced[1];
-                                taskActions(TaskTypes.EVENT, description, at);
+                                String[] actualTask = input.replaceAll("event ", "").split("/at ");
+                                String description = actualTask[0];
+                                String at = actualTask[1];
+                                Event event = new Event(description, at);
+                                addTask(event);
                             } else if (isNotEmptyTodo) { //valid todo command
                                 String description = input.replaceAll("todo ", "");
-                                taskActions(TaskTypes.TODO, description, "");
+                                Todo todo = new Todo(description);
+                                addTask(todo);
                             } else if (isNotEmptyDeadline && hasAt) { //used /at for deadline
                                 throw new CortanaException("Please use the /by keyword for deadline!");
                             } else if (isNotEmptyEvent && hasBy) { //used /by for event
                                 throw new CortanaException("Please use the /at keyword for event!");
                             } else if (isNotEmptyDeadline) { //deadline without specifying time with /by
-                                throw new CortanaException("Please specify the deadline time with the /by keyword! ⌚");
+                                throw new CortanaException("Please specify the deadline time with the /by keyword!");
                             } else if (isNotEmptyEvent) { //event without specifying time with /at
-                                throw new CortanaException("Please specify the event time with the /at keyword! ⌚");
+                                throw new CortanaException("Please specify the event time with the /at keyword!");
                             } else { //invalid command
-                                throw new CortanaException("I don't know what that means \uD83D\uDE05");
+                                throw new CortanaException("I don't know what that means :(");
                             }
                         }
                     } catch (CortanaException e) {
@@ -120,42 +96,58 @@ public class Duke {
         scanner.close();
     }
 
-    public static void taskActions(TaskTypes taskType, String description, String time) {
-        String taskOrTasks = tasksArrayList.size() < 1 ? "task" : "tasks";
-        switch (taskType) {
-            case DEADLINE:
-                Deadline deadline = new Deadline(description, time);
-                if (taskSet.contains(deadline)) {
-                    System.out.println("Task already exists!");
-                } else {
-                    taskSet.add(deadline);
-                    tasksArrayList.add(deadline);
-                    System.out.println("Got it. I've added this task: \n" + " " + deadline +
-                            "\nNow you have " + tasksArrayList.size() + " " + taskOrTasks + " in the list.");
-                }
-                break;
-            case EVENT:
-                Event event = new Event(description, time);
-                if (taskSet.contains(event)) {
-                    System.out.println("Task already exists!");
-                } else {
-                    taskSet.add(event);
-                    tasksArrayList.add(event);
-                    System.out.println("Got it. I've added this task: \n" + " " + event +
-                            "\nNow you have " + tasksArrayList.size() + " " + taskOrTasks + " in the list.");
-                }
-                break;
-            case TODO:
-                Todo todo = new Todo(description);
-                if (taskSet.contains(todo)) {
-                    System.out.println("Task already exists!");
-                } else {
-                    taskSet.add(todo);
-                    tasksArrayList.add(todo);
-                    System.out.println("Got it. I've added this task: \n" + " " + todo +
-                            "\nNow you have " + tasksArrayList.size() + " " + taskOrTasks + " in the list.");
-                }
-                break;
+    public static void list()  {
+        if (tasksArrayList.size() == 0) {
+            System.out.println("You are done for the day, or are you?");
+        } else {
+            for (int i = 0; i < tasksArrayList.size(); i ++) {
+                System.out.println(i + 1 + "." + tasksArrayList.get(i));
+            }
+        }
+    }
+
+    public static void addTask(Task task) {
+        if (taskSet.contains(task)) {
+            System.out.println("Task already exists!");
+        } else {
+            taskSet.add(task);
+            tasksArrayList.add(task);
+            String taskOrTasks = tasksArrayList.size() <= 1 ? "task" : "tasks";
+            System.out.println("Got it. I've added this task: \n" + " " + task +
+                    "\nNow you have " + tasksArrayList.size() + " " + taskOrTasks + " in the list.");
+        }
+    }
+
+    public static void markAsDone(int index) {
+        try {
+            Task task = tasksArrayList.get(index);
+            task.markAsDone();
+            System.out.println("Nice! I've marked this task as done: \n " + task);
+        } catch (Exception e) {
+            System.out.println("No such task!");
+        }
+    }
+
+    public static void markAsUndone(int index) {
+        try {
+            Task task = tasksArrayList.get(index);
+            task.markAsUndone();
+            System.out.println("OK, I've marked this task as not done yet: \n " + task);
+        } catch (Exception e) {
+            System.out.println("No such task!");
+        }
+    }
+
+    public static void delete (int index) {
+        try {
+            Task taskDeleted = tasksArrayList.get(index);
+            tasksArrayList.remove(index);
+            taskSet.remove(taskDeleted);
+            String taskOrTasks = tasksArrayList.size() <= 1 ? "task" : "tasks";
+            System.out.println("Noted. I've removed this task: \n" + " " + taskDeleted + "\n" +
+                    "Now you have " + tasksArrayList.size() + " " + taskOrTasks + " in the list.");
+        } catch (Exception e) {
+            System.out.println("No such task!");
         }
     }
 
