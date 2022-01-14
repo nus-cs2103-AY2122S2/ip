@@ -1,23 +1,22 @@
 public class Command {
     private CommandType commandType;
+    private String input;
 
-    Command(CommandType commandType) {
+    Command(CommandType commandType, String input) {
         this.commandType = commandType;
+        this.input = input;
     }
 
     Command() {
-        new Command(CommandType.DEFAULT);
+        new Command(CommandType.ADD, "");
     }
 
     public CommandType getCommandType() {
         return commandType;
     }
 
-    public void printOutput(String output) {
-        String msg = "============================================================\n"
-                + String.format("%s: %s\n", Duke.BOT_NAME, output)
-                + "============================================================";
-        System.out.println(msg);
+    public String getInput() {
+        return input;
     }
 
     public boolean isExitCmd() {
@@ -26,11 +25,11 @@ public class Command {
 
     public static Command parseCommand(String input) {
         if (input.equals("bye")) {
-            return new Command(CommandType.EXIT);
+            return new Command(CommandType.EXIT, input);
+        } else if (input.equals("list")) {
+            return new Command(CommandType.LIST, input);
         } else {
-            Command cmd = new Command(CommandType.DEFAULT);
-            cmd.printOutput(input);
-            return cmd;
+            return new Command(CommandType.ADD, input);
         }
     }
 }
