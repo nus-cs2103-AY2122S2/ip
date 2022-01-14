@@ -51,6 +51,10 @@ public class Duke {
         while(true) {
             Scanner sc = new Scanner(System.in);
             String input = sc.nextLine(); // read string
+
+            // Create a String array to read mark/unmark function
+            String[] strs =input.split(" ");
+
             if (input.equalsIgnoreCase("bye")) {
                 line();
                 System.out.println("Better watch out for the imposter AMONG US!");
@@ -59,9 +63,28 @@ public class Duke {
                 line();
                 break;
             } else if(input.equalsIgnoreCase("list")) {
+                line();
+                System.out.println("     Here are the tasks in your list:");
                 for (int i = 0; i < taskArr.size(); i++) {
-                    System.out.println(i + 1 +". " + taskArr.get(i));
+                    System.out.println("     " + (i + 1) + "." + taskArr.get(i));
                 }
+                line();
+            } else if(strs[0].equalsIgnoreCase("mark")) {
+                line();
+                int listIndex = Integer.parseInt(strs[1]); // retrieve the index after mark/unmark
+                Task currTask = taskArr.get(listIndex - 1);
+                currTask.mark();
+                System.out.println("     Your progressive bar has increased! Keep going to stop the imposter!");
+                System.out.println("     " + currTask);
+                line();
+            } else if(strs[0].equalsIgnoreCase("unmark")) {
+                line();
+                int listIndex = Integer.parseInt(strs[1]); // retrieve the index after mark/unmark
+                Task currTask = taskArr.get(listIndex - 1);
+                currTask.unmark();
+                System.out.println("     Uh oh, every task left undone lets the imposter edge closer...");
+                System.out.println("     " + currTask);
+                line();
             } else {
                 Task task = new Task(input);
                 taskArr.add(task);
