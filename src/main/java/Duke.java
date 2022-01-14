@@ -3,7 +3,7 @@ import java.util.*;
 public class Duke {
     private static void format(String output) {
         String border = "   ____________________________________________________________";
-        System.out.println(border + "\n      " + output + "\n" +  border + "\n");
+        System.out.println(border + "\n      " + output + "\n" +  border);
     }
 
     public static void main(String[] args) {
@@ -22,11 +22,29 @@ public class Duke {
                 "      WHAT YOU WANT?";
         format(welcome);
 
+        //Create ArrayList to store tasks
+        ArrayList<Task> tasks = new ArrayList<>();
+
         Scanner input = new Scanner(System.in);
         String toEcho = input.nextLine();
         while(!toEcho.equals("bye")) {
-            format(toEcho);
-            toEcho = input.nextLine();
+            //Add name of task to str for easy printing
+            StringBuilder str = new StringBuilder();
+            if (toEcho.equals("list")) {
+                int size = tasks.size();
+                for (int i = 0; i < size; i++) {
+                    str.append(i + 1 + ". " + tasks.get(i));
+                    if (i != size - 1) {
+                        str.append("\n      ");
+                    }
+                }
+                format(str.toString());
+                toEcho = input.nextLine();
+            } else {
+                tasks.add(new Task(toEcho));
+                format("added: " + toEcho);
+                toEcho = input.nextLine();
+            }
         }
         format("BYE WHAT BYE? YOU GO DROP TWENTY THEN BYE! DOWN!");
     }
