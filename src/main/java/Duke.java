@@ -1,6 +1,11 @@
 import java.util.*;
 
 public class Duke {
+    private static void format(String output) {
+        String border = "   ____________________________________________________________";
+        System.out.println(border + "\n      " + output + "\n" +  border + "\n");
+    }
+
     public static void main(String[] args) {
         String logo =
                 " _____           _ _   \n" +
@@ -12,17 +17,17 @@ public class Duke {
         System.out.println("Good morning gennermen from\n" + logo);
 
         String border = "   ____________________________________________________________";
-        System.out.println(border +
-                "\n      Good MORNING CHAO RECRUIT! YOU MAY CALL ME ENCIK ENCIK\n" +
-                "      WHAT YOU WANT?\n" + border + "\n");
+        String welcome =
+                "Good MORNING CHAO RECRUIT! YOU MAY CALL ME ENCIK ENCIK\n" +
+                "      WHAT YOU WANT?";
+        format(welcome);
 
         Scanner input = new Scanner(System.in);
         String toEcho = input.nextLine();
         while(!toEcho.equals("bye")) {
-            System.out.println(toEcho);
+            format(toEcho);
             toEcho = input.nextLine();
         }
-        System.out.println(border +
-                "\n      BYE WHAT BYE? YOU GO DROP TWENTY THEN BYE! DOWN!\n" + border + "\n");
+        format("BYE WHAT BYE? YOU GO DROP TWENTY THEN BYE! DOWN!");
     }
 }
