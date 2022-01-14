@@ -13,8 +13,7 @@ public class Duke {
         String command = ""; //Where user input will be stored
 
         // Storage for all the items listed by the user
-        List<String> storeList = new ArrayList<String>();
-        List<Boolean> storeDone = new ArrayList<Boolean>();
+        List<Task> tasks = new ArrayList<Task>();
 
 
         // Program will keep taking in new user input until terminated
@@ -29,13 +28,80 @@ public class Duke {
             }
             // User lists out all stored items
             else if (command.equals("list")) {
-                System.out.println("These are your stored items *quack*:");
-                for (int i = 0; i < storeList.size(); i++) {
-                    int number = i + 1;
-                    String state = storeDone.get(i) ? "X" : " ";
-                    String task = storeList.get(i);
-                    System.out.println(String.format("%d.[%s] %s", number, state, task));
+                if (tasks.size() == 0) {
+                    System.out.println("You currently do not have any tasks *quack*, please add some more");
+                    continue;
                 }
+
+                System.out.println("These are your tasks *quack*:");
+                for (int i = 0; i < tasks.size(); i++) {
+                    int number = i + 1;
+                    Task task = tasks.get(i);
+                    System.out.println(String.format("%d. %s", number, task.toString()));
+                }
+            }
+            // Add a ToDo Task
+            else if (command.equals("todo")) {
+                List<String> newTaskNameArray = new ArrayList<>();
+                while (st.hasMoreTokens()) {
+                    newTaskNameArray.add(st.nextToken());
+                }
+                String newTaskName = String.join(" ", newTaskNameArray);
+                Task newTask = new ToDoTask(newTaskName);
+                tasks.add(newTask);
+                System.out.println("Got it. I've added this task *quack*:");
+                System.out.println(String.format("  %s", newTask.toString()));
+                System.out.println(String.format("Now you have %d task%s in the list *quack*.", tasks.size(), tasks.size() == 1 ? "" : "s"));
+            }
+            // Add a Deadline Task
+            else if (command.equals("deadline")) {
+                List<String> newTaskNameArray = new ArrayList<>();
+                String preposition = "";
+                while (st.hasMoreTokens()) {
+                    String nextToken = st.nextToken();
+                    if (nextToken.charAt(0) != '/') {
+                        newTaskNameArray.add(nextToken);
+                    } else {
+                        preposition = nextToken.substring(1);
+                        break;
+                    }
+                }
+                List<String> deadlineArray = new ArrayList<>();
+                while (st.hasMoreTokens()) {
+                    deadlineArray.add(st.nextToken());
+                }
+                String newTaskName = String.join(" ", newTaskNameArray);
+                String deadline = String.join(" ", deadlineArray);
+                Task newTask = new DeadlineTask(newTaskName, preposition, deadline);
+                tasks.add(newTask);
+                System.out.println("Got it. I've added this task *quack*:");
+                System.out.println(String.format("  %s", newTask.toString()));
+                System.out.println(String.format("Now you have %d task%s in the list *quack*.", tasks.size(), tasks.size() == 1 ? "" : "s"));
+            }
+            // Add a Event Task
+            else if (command.equals("event")) {
+                List<String> newTaskNameArray = new ArrayList<>();
+                String preposition = "";
+                while (st.hasMoreTokens()) {
+                    String nextToken = st.nextToken();
+                    if (nextToken.charAt(0) != '/') {
+                        newTaskNameArray.add(nextToken);
+                    } else {
+                        preposition = nextToken.substring(1);
+                        break;
+                    }
+                }
+                List<String> deadlineArray = new ArrayList<>();
+                while (st.hasMoreTokens()) {
+                    deadlineArray.add(st.nextToken());
+                }
+                String newTaskName = String.join(" ", newTaskNameArray);
+                String deadline = String.join(" ", deadlineArray);
+                Task newTask = new EventTask(newTaskName, preposition, deadline);
+                tasks.add(newTask);
+                System.out.println("Got it. I've added this task *quack*:");
+                System.out.println(String.format("  %s", newTask.toString()));
+                System.out.println(String.format("Now you have %d task%s in the list *quack*.", tasks.size(), tasks.size() == 1 ? "" : "s"));
             }
             // User marks an item as done
             else if (command.equals("mark")) {
@@ -46,7 +112,7 @@ public class Duke {
                     // Error handling if user inputs strings
                     try {
                         int number = Integer.parseInt(st.nextToken());
-                        storeDone.set(number - 1, true);
+                        tasks.get(number - 1).mark();
                         System.out.println(String.format("I've marked task %d as done! *quack*", number));
                     } catch (Exception e) {
                         System.out.println("Please ONLY input integers when unmarking (eg. 'unmark 1')");
@@ -62,7 +128,7 @@ public class Duke {
                     // Error handling if user inputs strings
                     try {
                         int number = Integer.parseInt(st.nextToken());
-                        storeDone.set(number - 1, false);
+                        tasks.get(number - 1).unmark();
                         System.out.println(String.format("I've unmarked task %d as done! *quack*", number));
                     } catch (Exception e) {
                         System.out.println("Please ONLY input integers when unmarking (eg. 'unmark 1')");
@@ -71,9 +137,7 @@ public class Duke {
             }
             // User adds items to the list
             else {
-                storeList.add(command);
-                storeDone.add(false);
-                System.out.println(String.format("You have added: %s", command));
+                System.out.println(String.format("That is not a valid command"));
             }
         }
     }
