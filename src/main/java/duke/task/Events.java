@@ -23,8 +23,9 @@ public class Events extends Task{
         this.bytime = LocalTime.parse(bytime);
     }
 
-    public boolean sameTime(String date) {
-        return this.date.equals(LocalDate.parse(date));
+    @Override
+    public boolean sameTime(LocalDate date) {
+        return this.date.equals(date);
     }
 
     @Override

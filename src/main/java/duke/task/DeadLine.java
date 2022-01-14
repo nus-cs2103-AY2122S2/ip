@@ -20,8 +20,9 @@ public class DeadLine extends Task {
         this.bytime = LocalTime.parse(time);
     }
 
-    public boolean sameTime(String date) {
-        return this.bydate.equals(LocalDate.parse(date));
+    @Override
+    public boolean sameTime(LocalDate date) {
+        return this.bydate.equals(date);
     }
 
     @Override

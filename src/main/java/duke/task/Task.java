@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 public abstract class Task {
     protected String objective;
     protected boolean done;
@@ -23,7 +25,11 @@ public abstract class Task {
 
     public abstract String serialize();
 
-    public abstract boolean sameTime(String date);
+    public abstract boolean sameTime(LocalDate date);
+
+    public boolean contains(String keyword) {
+        return this.objective.contains(keyword);
+    }
 
     @Override
     public String toString() {

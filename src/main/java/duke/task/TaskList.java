@@ -1,5 +1,6 @@
 package duke.task;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,27 @@ public class TaskList {
     public List<Task> getObjectives() {
         return this.objectives;
     }
+
+    public List<Task> getObjectives(String keyword) {
+        List<Task> matches = new ArrayList<>();
+        for (int i = 0; i < objectives.size(); i++) {
+            if (objectives.get(i).contains(keyword)) {
+                matches.add(objectives.get(i));
+            }
+        }
+        return matches;
+    }
+
+    public List<Task> getObjectives(LocalDate keyword) {
+        List<Task> matches = new ArrayList<>();
+        for (int i = 0; i < objectives.size(); i++) {
+            if (objectives.get(i).sameTime(keyword)) {
+                matches.add(objectives.get(i));
+            }
+        }
+        return matches;
+    }
+
 
     public Task getTask(int i) {
         return this.objectives.get(i);

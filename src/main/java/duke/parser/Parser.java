@@ -21,18 +21,23 @@ public class Parser {
                 return Parser.prepareMark(input);
             case "delete":
                 return Parser.prepareDelete(input);
-//            case "findDate":
-//                if (input.length != 2) {
-//                    throw new duke.main.DukeException("Fill in proper integer to find date.\n");
-//                }
-//                for (Task task : todo) {
-//                    if (task.sameTime(input[1])) {
-//                        System.out.println(task);
-//                    }
-//                }
-//                break;
+            case "findDate":
+            case "find":
+                return Parser.prepareFind(input);
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+        }
+    }
+
+    private static Command prepareFind(String[] input) throws DukeException {
+        if (input.length != 2) {
+            throw new duke.main.DukeException("Fill in proper input to find.\n");
+        }
+
+        if (input[0].equals("find")) {
+            return new FindCommand(input[1]);
+        } else {
+            return new FindDateCommand(input[1]);
         }
     }
 

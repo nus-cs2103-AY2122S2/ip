@@ -4,12 +4,13 @@ import duke.task.*;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
     private enum Dialogue {
-        GREETING, FAREWELL, LIST, MARK, UNMARKED, ADDED, DELETE, NUMLEFT, LINE, LOADERROR
+        GREETING, FAREWELL, LIST, MARK, UNMARKED, ADDED, DELETE, NUMLEFT, LINE, LOADERROR, FIND, FINDDATE
     }
     private final Scanner in;
     private final PrintStream out;
@@ -55,6 +56,26 @@ public class Ui {
         }
     }
 
+    public void printList(TaskList tasks, String keyword) {
+        List<Task> t = tasks.getObjectives(keyword);
+        speak(Dialogue.FIND);
+        for (int i = 0; i < t.size(); i++) {
+            System.out.print(i+1);
+            System.out.print(".");
+            System.out.println(t.get(i));
+        }
+    }
+
+    public void printList(TaskList tasks, LocalDate keyword) {
+        List<Task> t = tasks.getObjectives(keyword);
+        speak(Dialogue.FINDDATE);
+        for (int i = 0; i < t.size(); i++) {
+            System.out.print(i+1);
+            System.out.print(".");
+            System.out.println(t.get(i));
+        }
+    }
+
     public void addList(TaskList tasks) {
         speak(Dialogue.ADDED);
         Integer size = tasks.getSize();
@@ -81,10 +102,6 @@ public class Ui {
         System.out.println(e);
     }
 
-    public void print(Object o) {
-        System.out.println(o);
-    }
-
     public static void speak(Dialogue option, Integer num) {
         String reply;
         switch (option) {
@@ -95,7 +112,7 @@ public class Ui {
         System.out.print(reply);
     }
 
-    public static void speak(Dialogue option) {
+    private static void speak(Dialogue option) {
         String reply;
         switch (option) {
             case GREETING:
@@ -118,6 +135,10 @@ public class Ui {
             case DELETE: reply = "Noted. I've removed this task:\n";
                 break;
             case ADDED: reply = "Got it. I've added this task:\n";
+                break;
+            case FIND: reply = "Here are the matching tasks in your list:\n";
+                break;
+            case FINDDATE: reply = "Here are the tasks on that date:\n";
                 break;
             case LIST: reply = "Here are the tasks in your list:\n";
                 break;

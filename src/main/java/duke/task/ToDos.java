@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 public class ToDos extends Task{
     public ToDos(String objective) {
         super(objective);
@@ -25,7 +27,7 @@ public class ToDos extends Task{
     }
 
     @Override
-    public boolean sameTime(String date) {
+    public boolean sameTime(LocalDate date) {
         return false;
     }
 
