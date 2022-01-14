@@ -33,6 +33,7 @@ public class Duke {
                 firstUserChat = (firstUserChat==true) ? false : firstUserChat;
 
                 String userInput = sc.nextLine();
+                userInput = userInput.trim();
 
                 // Start of Duke's text block 
                 System.out.println(String.format("%s%s", indentationBase, splitter));
