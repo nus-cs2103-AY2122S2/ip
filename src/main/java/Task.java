@@ -6,9 +6,6 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
-    /** Total number of tasks in the list */
-    protected static int numOfTasks = 0;
-
     /**
      * Class constructor specifying the task's description and type.
      */

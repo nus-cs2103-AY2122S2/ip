@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Scanner;
 public class Duke {
     static String lineBreak = "____________________________________________________________\n";
     static String catFace = " =^_^=\n";
-    static Task[] tasks = new Task[100];
+    static ArrayList<Task> tasks = new ArrayList<>();
 
     /**
      * Prints the greeting and logo.
@@ -35,38 +36,51 @@ public class Duke {
      * @param description Task description.
      */
     public static void processCommand(String command, String description) {
-        int index = 0;
+        int index;
         Task t;
 
         switch (command) {
         case "list":
             System.out.print(lineBreak);
-            for (int i = 0; i < Task.numOfTasks; i++) {
-                System.out.println((i + 1) + ". " + tasks[i]);
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println((i + 1) + ". " + tasks.get(i));
             }
             System.out.print(lineBreak);
             break;
         case "mark":
             try {
                 index = Integer.parseInt(description.trim());
-                tasks[index - 1].markAsDone();
+                tasks.get(index - 1).markAsDone();
                 System.out.print(lineBreak + "Meow! Task is done!" + catFace
-                        + tasks[index - 1] + "\n" + lineBreak);
+                        + tasks.get(index - 1) + "\n" + lineBreak);
             } catch (NumberFormatException e) {
                 System.out.print(lineBreak + "Meow! Enter a valid task!\n" + lineBreak);
-            } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
+            } catch (NullPointerException | IndexOutOfBoundsException e) {
                 System.out.print(lineBreak + "Meow! Task does not exist!\n" + lineBreak);
             }
             break;
         case "unmark":
             try {
                 index = Integer.parseInt(description.trim());
-                tasks[index - 1].unmarkAsDone();
+                tasks.get(index - 1).unmarkAsDone();
                 System.out.print(lineBreak + "Meow! Task is not done!" + catFace
-                        + tasks[index - 1] + "\n" + lineBreak);
+                        + tasks.get(index - 1) + "\n" + lineBreak);
             } catch (NumberFormatException e) {
                 System.out.print(lineBreak + "Meow! Enter a valid task!\n" + lineBreak);
-            } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
+            } catch (NullPointerException | IndexOutOfBoundsException e) {
+                System.out.print(lineBreak + "Meow! Task does not exist!\n" + lineBreak);
+            }
+            break;
+        case "delete":
+            try {
+                index = Integer.parseInt(description.trim());
+                t = tasks.get(index - 1);
+                tasks.remove(index - 1);
+                System.out.print(lineBreak + "Meow! Task is removed!\n" + t + "\n"
+                        + "Number of tasks in list: " + tasks.size() + catFace + lineBreak);
+            } catch (NumberFormatException e) {
+                System.out.print(lineBreak + "Meow! Enter a valid task!\n" + lineBreak);
+            } catch (NullPointerException | IndexOutOfBoundsException e) {
                 System.out.print(lineBreak + "Meow! Task does not exist!\n" + lineBreak);
             }
             break;
@@ -121,9 +135,9 @@ public class Duke {
                     return;
                 }
 
-                tasks[Task.numOfTasks] = t;
-                Task.numOfTasks++;
-                System.out.print(lineBreak + "added: " + t + "\n" + "Number of tasks in list: " + Task.numOfTasks + catFace + lineBreak);
+                tasks.add(t);
+                System.out.print(lineBreak + "Meow! Task is added!\n" + t + "\n"
+                        + "Number of tasks in list: " + tasks.size() + catFace + lineBreak);
             } catch (DukeException e) {
                 e.EmptyDescriptionException();
                 e.InvalidDateException();
