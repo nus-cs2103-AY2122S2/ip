@@ -99,17 +99,15 @@ public class Duke {
                     if (userInput.toLowerCase().matches("^todo .+") || userInput.toLowerCase().matches("^event .+") || userInput.toLowerCase().matches("^deadline .+")) {
                         
                         String taskDescription = String.join(" ", Arrays.copyOfRange(textStrings, 1, textStrings.length));
-
-                        // TODO - only printed when a task has been added 
-                        System.out.println(String.format("%sNoted. I've added this task:", indentationText));
-
-                        Task task = new Task("");
+                        Task task;
                         
                         // ToDo's 
                         if (taskType.equals("todo")) {
 
                             task = new Todo(taskDescription); 
                             taskList.add(task);
+                            System.out.println(String.format("%sNoted. I've added this task:", indentationText));
+                            System.out.println(String.format("%s%s", indentationTaskStatus, task));
                         
                         // Events & Deadlines 
                         } else {
@@ -128,17 +126,19 @@ public class Duke {
 
                                 task = new Event(taskDescriptionText, taskDescriptionTime);
                                 taskList.add(task);
+                                System.out.println(String.format("%sNoted. I've added this task:", indentationText));
+                                System.out.println(String.format("%s%s", indentationTaskStatus, task));
                             
                             // Deadlines 
                             } else if (taskType.equals("deadline")) {
 
                                 task = new Deadline(taskDescriptionText, taskDescriptionTime);
                                 taskList.add(task);
+                                System.out.println(String.format("%sNoted. I've added this task:", indentationText));
+                                System.out.println(String.format("%s%s", indentationTaskStatus, task));
                             }
-                            
                         }
 
-                        System.out.println(String.format("%s%s", indentationTaskStatus, task));
                         System.out.println(String.format("%sNow you have %d tasks in the list.", indentationText, taskList.size()));
                     } else {
                         throw new DukeException("I'm sorry, your " + taskType + " command is missing a task description. Please try again.");
