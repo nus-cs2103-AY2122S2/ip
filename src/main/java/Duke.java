@@ -30,6 +30,7 @@ public class Duke {
         while(!toEcho.equals("bye")) {
             //Add name of task to str for easy printing
             StringBuilder str = new StringBuilder();
+            str.append("NEED ME TO REMIND YOU AH?\n      ");
             if (toEcho.equals("list")) {
                 int size = tasks.size();
                 for (int i = 0; i < size; i++) {
@@ -65,21 +66,31 @@ public class Duke {
                     String dead = rem.split("/by")[1];
                     Task tempTask = new Task(cmd, task, dead);
                     tasks.add(tempTask);
-                    format("YOU BETTER FINISH THIS AH:\n        " + tempTask +
-                            "\n      YOU GOT " + tasks.size() + " TO DO AH BETTER NOT FORGET!");
+                    String confirm =
+                            "YOU BETTER FINISH THIS AH:\n        " + tempTask +
+                            "\n      YOU STILL GOT " + tasks.size() +
+                            " THINGS TO DO AH BETTER NOT FORGET!";
+                    format(confirm);
                 } else if (cmd.equals("event")) {
                     //event
                     String task = rem.split("/at")[0];
                     String dead = rem.split("/at")[1];
                     Task tempTask = new Task(cmd, task, dead);
                     tasks.add(tempTask);
-                    format("YOU BETTER REMEMBER THIS AH:\n        " + tempTask +
-                            "\n      YOU GOT " + tasks.size() + " TO DO AH BETTER NOT FORGET!");
+                    String confirm =
+                            "YOU BETTER REMEMBER THIS AH:\n        " + tempTask +
+                            "\n      YOU STILL GOT " + tasks.size() +
+                            " THINGS TO DO AH BETTER NOT FORGET!";
+                    format(confirm);
                 } else if (cmd.equals("todo")) {
                     //todo
                     Task tempTask = new Task(cmd, rem);
                     tasks.add(tempTask);
-                    format("YOU WANT TO DO THIS AH:\n        " + tempTask + "\n      VERY GOOD!");
+                    String confirm =
+                            "YOU WANT TO DO THIS AH:\n        " + tempTask +
+                            "\n      VERY GOOD! YOU STILL GOT " + tasks.size() +
+                            " THINGS TO DO AH BETTER NOT FORGET!";
+                    format(confirm);
                 }
             }
             toEcho = input.nextLine();
