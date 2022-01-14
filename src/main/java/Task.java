@@ -10,7 +10,7 @@ public class Task {
     protected static int numOfTasks = 0;
 
     /**
-     * Class constructor specifying the task's description.
+     * Class constructor specifying the task's description and type.
      */
     public Task(String description) {
         this.description = description;

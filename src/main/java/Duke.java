@@ -31,62 +31,103 @@ public class Duke {
 
     /**
      * Processes the command from the user.
-     * @param command Command to execute.
-     * @param description Task description if any.
+     * @param command User command.
+     * @param description Task description.
      */
     public static void processCommand(String command, String description) {
-        int index;
+        int index = 0;
         Task t;
 
         switch (command) {
         case "list":
             System.out.print(lineBreak);
             for (int i = 0; i < Task.numOfTasks; i++) {
-                index = i + 1;
-                System.out.println(index + ". " + tasks[i]);
+                System.out.println((i + 1) + ". " + tasks[i]);
             }
             System.out.print(lineBreak);
             break;
         case "mark":
-            index = Integer.parseInt(description.trim());
-            tasks[index - 1].markAsDone();
-            System.out.print(lineBreak + "Meow! Task is done!" + catFace
-                    + tasks[index - 1] + "\n" + lineBreak);
+            try {
+                index = Integer.parseInt(description.trim());
+                tasks[index - 1].markAsDone();
+                System.out.print(lineBreak + "Meow! Task is done!" + catFace
+                        + tasks[index - 1] + "\n" + lineBreak);
+            } catch (NumberFormatException e) {
+                System.out.print(lineBreak + "Meow! Enter a valid task!\n" + lineBreak);
+            } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
+                System.out.print(lineBreak + "Meow! Task does not exist!\n" + lineBreak);
+            }
             break;
         case "unmark":
-            index = Integer.parseInt(description.trim());
-            tasks[index - 1].unmarkAsDone();
-            System.out.print(lineBreak + "Meow! Task is not done!" + catFace
-                    + tasks[index - 1] + "\n" + lineBreak);
-            break;
-        case "todo":
-            t = new Todo(description.trim());
-            tasks[Task.numOfTasks] = t;
-            Task.numOfTasks++;
-            System.out.print(lineBreak + "added: " + t + "\n" + "Number of tasks in list: " + Task.numOfTasks + catFace + lineBreak);
-            break;
-        case "deadline":
-            String deadline = description.split("/by", 2)[1].trim();
-            description = description.split("/by", 2)[0].trim();
-            t = new Deadline(description, deadline);
-            tasks[Task.numOfTasks] = t;
-            Task.numOfTasks++;
-            System.out.print(lineBreak + "added: " + t + "\n" + "Number of tasks in list: " + Task.numOfTasks + catFace + lineBreak);
-            break;
-        case "event":
-            String period = description.split("/at", 2)[1].trim();
-            description = description.split("/at", 2)[0].trim();
-            t = new Event(description, period);
-            tasks[Task.numOfTasks] = t;
-            Task.numOfTasks++;
-            System.out.print(lineBreak + "added: " + t + "\n" + "Number of tasks in list: " + Task.numOfTasks + catFace + lineBreak);
+            try {
+                index = Integer.parseInt(description.trim());
+                tasks[index - 1].unmarkAsDone();
+                System.out.print(lineBreak + "Meow! Task is not done!" + catFace
+                        + tasks[index - 1] + "\n" + lineBreak);
+            } catch (NumberFormatException e) {
+                System.out.print(lineBreak + "Meow! Enter a valid task!\n" + lineBreak);
+            } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
+                System.out.print(lineBreak + "Meow! Task does not exist!\n" + lineBreak);
+            }
             break;
         default:
-            t = new Task(description);
-            tasks[Task.numOfTasks] = t;
-            Task.numOfTasks++;
-            System.out.print(lineBreak + "added: " + description + "\n" + lineBreak);
-            break;
+            try {
+                switch (command) {
+                case "deadline":
+                    if (description.isBlank()) {
+                        throw new DukeException(ExceptionType.EMPTYDESC);
+                    }
+
+                    if (!description.contains("/by")) {
+                        throw new DukeException(ExceptionType.INVALIDDATE);
+                    }
+
+                    String deadline = description.split("/by", 2)[1].trim();
+                    description = description.split("/by", 2)[0].trim();
+
+                    if (deadline.isBlank()) {
+                        throw new DukeException(ExceptionType.INVALIDDATE);
+                    }
+
+                    t = new Deadline(description, deadline);
+                    break;
+                case "event":
+                    if (description.isBlank()) {
+                        throw new DukeException(ExceptionType.EMPTYDESC);
+                    }
+
+                    if (!description.contains("/at")) {
+                        throw new DukeException(ExceptionType.INVALIDDATE);
+                    }
+
+                    String period = description.split("/at", 2)[1].trim();
+                    description = description.split("/at", 2)[0].trim();
+
+                    if (period.isBlank()) {
+                        throw new DukeException(ExceptionType.INVALIDDATE);
+                    }
+
+                    t = new Event(description, period);
+                    break;
+                case "todo":
+                    if (description.isBlank()) {
+                        throw new DukeException(ExceptionType.EMPTYDESC);
+                    }
+
+                    t = new Todo(description.trim());
+                    break;
+                default:
+                    System.out.print(lineBreak + "Meow? I don't know what that means.\n" + lineBreak);
+                    return;
+                }
+
+                tasks[Task.numOfTasks] = t;
+                Task.numOfTasks++;
+                System.out.print(lineBreak + "added: " + t + "\n" + "Number of tasks in list: " + Task.numOfTasks + catFace + lineBreak);
+            } catch (DukeException e) {
+                e.EmptyDescriptionException();
+                e.InvalidDateException();
+            }
         }
     }
 
@@ -95,16 +136,21 @@ public class Duke {
 
         greet();
 
-        String input = sc.nextLine().strip() + " ";
-        String command = input.split(" ")[0];
-        String description = input.split(" ", 2)[1];
+        String input = sc.nextLine().strip();
+        while (!input.equals("bye")) {
+            try {
+                if (input.isBlank()) {
+                    throw new DukeException(ExceptionType.EMPTYINPUT);
+                }
 
-        while (!command.equals("bye")) {
-            processCommand(command, description);
-
-            input = sc.nextLine().strip() + " ";
-            command = input.split(" ")[0];
-            description = input.split(" ", 2)[1];
+                String command = (input + " ").split(" ")[0];
+                String description = (input + " ").split(" ", 2)[1];
+                processCommand(command, description);
+            } catch (DukeException e) {
+                e.EmptyInputException();
+            } finally {
+                input = sc.nextLine().strip();
+            }
         }
 
         exit();

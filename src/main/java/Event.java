@@ -1,5 +1,5 @@
 /**
- * Deadline class represents tasks start at a specific time
+ * Event class represents tasks start at a specific time
  * and ends at a specific time.
  */
 public class Event extends Task {
