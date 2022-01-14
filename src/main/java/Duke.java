@@ -1,10 +1,25 @@
+import java.io.*;
+
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+    public static void main(String[] args) throws IOException {
+        System.out.println("Hello! I'm Duke \nWhat can I do for you?");
+
+        while (true) {
+            BufferedReader br = new BufferedReader(new
+                    InputStreamReader(System.in));
+
+            PrintWriter pr = new PrintWriter(new BufferedWriter((new OutputStreamWriter((System.out)))));
+
+            String userInput = br.readLine();
+
+            if (userInput.equals("bye")) {
+                pr.print("Bye. Hope to see you again soon!");
+                pr.close();
+                break;
+            } else {
+                pr.print(userInput);
+                pr.flush();
+            }
+        }
     }
 }
