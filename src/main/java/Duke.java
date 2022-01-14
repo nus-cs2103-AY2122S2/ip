@@ -64,7 +64,7 @@ public class Duke {
                     //deadline
                     String task = rem.split("/by")[0];
                     String dead = rem.split("/by")[1];
-                    Task tempTask = new Task(cmd, task, dead);
+                    Task tempTask = new Deadline(task, dead);
                     tasks.add(tempTask);
                     String confirm =
                             "YOU BETTER FINISH THIS AH:\n        " + tempTask +
@@ -75,7 +75,7 @@ public class Duke {
                     //event
                     String task = rem.split("/at")[0];
                     String dead = rem.split("/at")[1];
-                    Task tempTask = new Task(cmd, task, dead);
+                    Task tempTask = new Event(task, dead);
                     tasks.add(tempTask);
                     String confirm =
                             "YOU BETTER REMEMBER THIS AH:\n        " + tempTask +
@@ -84,7 +84,7 @@ public class Duke {
                     format(confirm);
                 } else if (cmd.equals("todo")) {
                     //todo
-                    Task tempTask = new Task(cmd, rem);
+                    Task tempTask = new ToDo(cmd, rem);
                     tasks.add(tempTask);
                     String confirm =
                             "YOU WANT TO DO THIS AH:\n        " + tempTask +
