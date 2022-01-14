@@ -8,11 +8,11 @@ public class Duke {
             +" | |   | | | | |/ / _ \\\n"
             +" | |___| |_| |   <  __/\n"
             +" |______\\__,_|_|\\_\\___|\n";
-    private String[] taskList;
+    private Task[] taskList;
     private int taskIndex;
 
     Duke() {
-        taskList = new String[100];
+        taskList = new Task[100];
         taskIndex = 0;
     }
 
@@ -44,7 +44,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         greeting();
         do {
-            cmd = cmd.parseCommand(sc.nextLine());
+            cmd = Command.parseCommand(sc.nextLine());
             switch (cmd.getCommandType()) {
                 case EXIT:
                     break;
@@ -52,12 +52,19 @@ public class Duke {
                     printTaskList();
                     break;
                 case ADD:
-                    printOutput(String.format("I have added \"%s\" into list.", cmd.getInput()));
-                    taskList[taskIndex++] = cmd.getInput();
+                    printOutput(String.format("I have added \"%s\" into list.", cmd.getArguments()));
+                    taskList[taskIndex++] = new Task(cmd.getArguments());
+                    break;
+                case MARK:
+                    int index = Integer.valueOf(cmd.getArguments()) - 1;
+                    boolean isDone = taskList[index].toggleIsDone();
+                    String msg = isDone ? "Great! I have marked this task as done." : "Noted, I've mark this task as not done yet.";
+                    printOutput(msg);
                     break;
             }
         } while(!cmd.isExitCmd());
         farewell();
+        sc.close();
     }
 
     public static void main(String[] args) {

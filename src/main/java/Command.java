@@ -1,22 +1,26 @@
 public class Command {
     private CommandType commandType;
-    private String input;
+    private String arguments;
 
-    Command(CommandType commandType, String input) {
+    Command(CommandType commandType, String arguments) {
         this.commandType = commandType;
-        this.input = input;
+        this.arguments = arguments;
+    }
+
+    Command(CommandType commandType) {
+        this(commandType, "");
     }
 
     Command() {
-        new Command(CommandType.ADD, "");
+        this(CommandType.ADD, "");
     }
 
     public CommandType getCommandType() {
-        return commandType;
+        return this.commandType;
     }
 
-    public String getInput() {
-        return input;
+    public String getArguments() {
+        return this.arguments;
     }
 
     public boolean isExitCmd() {
@@ -24,10 +28,13 @@ public class Command {
     }
 
     public static Command parseCommand(String input) {
-        if (input.equals("bye")) {
-            return new Command(CommandType.EXIT, input);
-        } else if (input.equals("list")) {
-            return new Command(CommandType.LIST, input);
+        String[] inputs = input.split(" ", 2);
+        if (inputs[0].equals("bye")) {
+            return new Command(CommandType.EXIT);
+        } else if (inputs[0].equals("list")) {
+            return new Command(CommandType.LIST);
+        } else if (inputs[0].equals("mark") || inputs[0].equals("unmark")) {
+            return new Command(CommandType.MARK, inputs[1]);
         } else {
             return new Command(CommandType.ADD, input);
         }
