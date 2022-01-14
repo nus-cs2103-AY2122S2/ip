@@ -2,25 +2,48 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static ArrayList<String> textList = new ArrayList<>();
+    private static ArrayList<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
         printMsg("Hello! I am Spike ⊂( ・ ̫・)⊃\nWhat can I do for you?");
 
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
+            // Get the command as one line
             String command = sc.nextLine();
-            if (command.equals("bye")) {
+            // Also split the command into words for easy processing
+            String[] commandWords =  command.split(" ");
+            if (commandWords[0].equals("bye")) {
                 printMsg("See you soon! ﾍ(=￣∇￣)ﾉ");
-                sc.close();
-                return;
-            } else if (command.equals("list")) {
-                printList();
-            } else {
-                String str = "added: " + command;
-                textList.add(command);
-                printMsg(str);
+                break;
             }
+            processCommand(command, commandWords);
+        }
+        sc.close();
+        return;
+    }
+
+    /**
+     * Process the command entered by user.
+     */
+    public static void processCommand(String command, String[] commandWords) {
+        switch (commandWords[0]) {
+            case "list":
+                printList();
+                break;
+            case "mark":
+                Task toMark = taskList.get(Integer.parseInt(commandWords[1]) - 1);
+                toMark.markAsDone();
+                printMsg("Great! One more task done:\n" + toMark);
+                break;
+            case "unmark":
+                Task toUnmark = taskList.get(Integer.parseInt(commandWords[1]) - 1);
+                toUnmark.markAsNotDone();
+                printMsg("Oops, I've marked this task as not done yet:\n" + toUnmark);
+                break;
+            default:
+                taskList.add(new Task(command));
+                printMsg("added: " + command);
         }
     }
 
@@ -39,11 +62,11 @@ public class Duke {
     public static void printList() {
         int i = 1;
         String result = "";
-        for (String str : textList) {
-            if (i == textList.size()) {
-                result = result + i + ". " + str;
+        for (Task task : taskList) {
+            if (i == taskList.size()) {
+                result = result + i + ". " + task;
             } else {
-                result = result + i + ". " + str + "\n";
+                result = result + i + ". " + task + "\n";
             }
             i++;
         }
