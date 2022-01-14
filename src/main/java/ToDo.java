@@ -1,7 +1,7 @@
 public class ToDo extends Task{
     protected String dead;
 
-    public ToDo(String name, String dead) {
+    public ToDo(String name) {
         super(name);
         this.dead = dead;
     }

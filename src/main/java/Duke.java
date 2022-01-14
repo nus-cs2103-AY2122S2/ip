@@ -84,7 +84,7 @@ public class Duke {
                     format(confirm);
                 } else if (cmd.equals("todo")) {
                     //todo
-                    Task tempTask = new ToDo(cmd, rem);
+                    Task tempTask = new ToDo(rem);
                     tasks.add(tempTask);
                     String confirm =
                             "YOU WANT TO DO THIS AH:\n        " + tempTask +
