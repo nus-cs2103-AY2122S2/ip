@@ -12,25 +12,38 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("Duke: Hello! I'm Duke\n      What can I do for you?");
         String inp = "";
-        List<String> a = new ArrayList<String>();
+        List<Task> a = new ArrayList<Task>();
         while (!inp.equals("bye")) {
-            inp = s.nextLine();
+            inp = s.next();
             if (inp.equals("bye")) {
                 System.out.println("\nDuke:  Bye. Hope to see you again soon!");
             }
             else if(inp.equals("list")){
                 int j = 0;
                 BufferedWriter w = new BufferedWriter(new OutputStreamWriter(System.out));
-                for(String k:a){
+                for(Task k:a){
                     j++;
-                    w.write(j+". "+k);
+                    w.write(j+". "+k.show());
                     w.newLine();
                 }
                 w.newLine();
                 w.flush();
             }
+            else if (inp.equals("mark")){
+                if(s.hasNext()){
+                    int x = Integer.parseInt(s.next());
+                    a.get(x-1).mark();
+                }
+            }
+            else if (inp.equals("unmark")){
+                if(s.hasNext()){
+                    int y = Integer.parseInt(s.next());
+                    a.get(y-1).unmark();
+                }
+            }
             else {
-                a.add(inp);
+                Task k = new Task(inp);
+                a.add(k);
                 System.out.println("\nDuke: Added \"" + inp + "\"\n");
             }
         }
