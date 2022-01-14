@@ -34,10 +34,33 @@ public class Duke {
                 tasks[taskIndex].unmark();
                 System.out.println("Aw man..I've marked this task as not done yet:\n"
                         + tasks[taskIndex].toString());
+            } else if (user_message.startsWith("todo")) {
+                String task = user_message.substring(5);
+                tasks[tasksAdded_index] = new Todo(task);
+
+                System.out.println(LINE + "\nWokay! I've added this task:\n"
+                        + tasks[tasksAdded_index].toString()
+                        + "\nNow you have " + (tasksAdded_index + 1) + " tasks in the list\n" + LINE);
+                tasksAdded_index++;
+
+            } else if (user_message.startsWith("deadline")) {
+                String[] taskDetails = user_message.substring(9).split("/", 2);
+                tasks[tasksAdded_index] = new Deadline(taskDetails[0], taskDetails[1]);
+                System.out.println((LINE + "\nWokay! I've added this task:\n"
+                        + tasks[tasksAdded_index].toString()
+                        + "\nNow you have " + (tasksAdded_index + 1) + " tasks in the list\n" + LINE));
+                tasksAdded_index++;
+
+            } else if (user_message.startsWith("event")) {
+                String[] taskDetails = user_message.substring(6).split("/", 2);
+                tasks[tasksAdded_index] = new Event(taskDetails[0], taskDetails[1]);
+                System.out.println((LINE + "\nWokay! I've added this task:\n"
+                        + tasks[tasksAdded_index].toString()
+                        + "\nNow you have " + (tasksAdded_index + 1) + " tasks in the list\n" + LINE));
+                tasksAdded_index++;
+
             } else {
-                System.out.println(LINE + "\n" + "New task added:" + user_message + "\n" + LINE);
-                tasks[tasksAdded_index] = new Task(user_message);
-                tasksAdded_index ++;
+                System.out.println(LINE + "\n" + user_message + "? Sorry, I don't understand what that means.. :(\n" + LINE);
             }
 
             user_message = user_input.next();
