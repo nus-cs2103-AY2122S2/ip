@@ -33,18 +33,36 @@ public class Duke {
             if (toEcho.equals("list")) {
                 int size = tasks.size();
                 for (int i = 0; i < size; i++) {
-                    str.append(i + 1 + ". " + tasks.get(i));
+                    str.append(i + 1 + "." + tasks.get(i));
                     if (i != size - 1) {
                         str.append("\n      ");
                     }
                 }
                 format(str.toString());
-                toEcho = input.nextLine();
             } else {
-                tasks.add(new Task(toEcho));
-                format("added: " + toEcho);
-                toEcho = input.nextLine();
+                String[] temp = toEcho.split(" ");
+                String cmd = temp[0];
+                //Assuming input correct
+                if (cmd.equals("mark")) {
+                    int num = Integer.parseInt(temp[1]) - 1;
+                    tasks.get(num).mark();
+                    String confirm =
+                            "THIS ONE\n        " + tasks.get(num) +
+                            "\n      FINISH ALREADY AH? SWEE CHAI BUTTERFLY RECRUIT!";
+                    format(confirm);
+                } else if (cmd.equals("unmark")) {
+                    int num = Integer.parseInt(temp[1]) - 1;
+                    tasks.get(num).unmark();
+                    String confirm =
+                            "I THOUGHT THIS ONE\n        " + tasks.get(num) +
+                            "\n      FINISH ALREADY? NEVER MIND THIS WEEKEND CONFINE!";
+                    format(confirm);
+                } else {
+                    tasks.add(new Task(toEcho));
+                    format("added: " + toEcho);
+                }
             }
+            toEcho = input.nextLine();
         }
         format("BYE WHAT BYE? YOU GO DROP TWENTY THEN BYE! DOWN!");
     }
