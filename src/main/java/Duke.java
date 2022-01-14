@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Duke {
 
     public static String LINE = "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*";
-    public static String[] tasks = new String[100];
+    public static Task[] tasks = new Task[100];
     public static int tasksAdded_index = 0;
 
 
@@ -13,14 +13,30 @@ public class Duke {
 
         while (!user_message.equals("bye")) {
             if (user_message.equals("list")) {
+                System.out.println(LINE + "\nHere is your list:");
                 int i = 0;
                 while(tasks[i] != null) {
                     System.out.println((i + 1) + ". " + tasks[i]);
                     i++;
                 }
+                System.out.println(LINE);
+
+            } else if (user_message.startsWith("mark")) {
+                String clean = user_message.replaceAll("\\D+", "");
+                int taskIndex = Integer.parseInt(clean) - 1;
+                tasks[taskIndex].markAsDone();
+                System.out.println("Yay! I've marked this task as done:\n"
+                        + tasks[taskIndex].toString());
+
+            } else if (user_message.startsWith("unmark")) {
+                String clean = user_message.replaceAll("\\D+", "");
+                int taskIndex = Integer.parseInt(clean) - 1;
+                tasks[taskIndex].unmark();
+                System.out.println("Aw man..I've marked this task as not done yet:\n"
+                        + tasks[taskIndex].toString());
             } else {
                 System.out.println(LINE + "\n" + "New task added:" + user_message + "\n" + LINE);
-                tasks[tasksAdded_index] = user_message;
+                tasks[tasksAdded_index] = new Task(user_message);
                 tasksAdded_index ++;
             }
 
