@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -39,6 +40,9 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        // Create an empty array list
+        ArrayList<Task> taskArr = new ArrayList<>();
+
         line();
         System.out.println("Tell me... have you seen a RED imposter among us?");
         System.out.println("If you have seen this SUSSY imposter, please let me know immediately... otherwise how may I be of assistance?");
@@ -54,9 +58,15 @@ public class Duke {
                 logo();
                 line();
                 break;
+            } else if(input.equalsIgnoreCase("list")) {
+                for (int i = 0; i < taskArr.size(); i++) {
+                    System.out.println(i + 1 +". " + taskArr.get(i));
+                }
             } else {
+                Task task = new Task(input);
+                taskArr.add(task);
                 line();
-                System.out.println("     " + input);
+                System.out.println("     added: " + task);
                 line();
             }
         }
