@@ -1,5 +1,9 @@
 import java.util.Scanner;
+
 import helperClasses.Task;
+import helperClasses.Deadline;
+import helperClasses.Event;
+import helperClasses.ToDo;
 
 public class Duke {
     private static boolean isEnd = false;
@@ -21,13 +25,10 @@ public class Duke {
     public static void echo(){
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
         String input = myObj.nextLine();
-
-        // generate task
-        Task temp = new Task(input);
-
-        // default message is added + input
-        String result = "added: " + input;
-
+        
+        // default message
+        String result = null;
+        
         // detect bye
         if (input.equals("bye")) {
             Duke.isEnd = true;
@@ -47,11 +48,37 @@ public class Duke {
                 int currTask = Character.getNumericValue(input.charAt(input.length() - 1));
                 unmark(currTask - 1);
                 return;
-            }
-            else {
+            } else {
                 // add task
-                TaskList[TaskNo] = temp;
-                TaskNo ++;
+                if (input.startsWith("todo")) {
+                    // generate
+                    String description = input.substring(5);
+                    ToDo temp = new ToDo(description);
+                    TaskList[TaskNo] = temp;
+                    TaskNo ++;
+                    result = String.format("Got it. I've added this task: \n\t%s \nNow you have %d tasks in the list.",
+                            temp.toString(),TaskNo);
+                } else if (input.startsWith("deadline")) {
+                    int byPos = input.indexOf("/by");
+                    String description = input.substring(9,byPos);
+                    String by = input.substring(byPos+4);
+                    Deadline ddl = new Deadline(description, by);
+                    TaskList[TaskNo] = ddl;
+                    TaskNo ++;
+                    result = String.format("Got it. I've added this task: \n\t%s \nNow you have %d tasks in the list.",
+                            ddl.toString(),TaskNo);
+                } else if (input.startsWith("event")) {
+                    int atPos = input.indexOf("/at");
+                    String description = input.substring(6,atPos);
+                    String at = input.substring(atPos+4);
+                    Event event = new Event(description, at);
+                    TaskList[TaskNo] = event;
+                    TaskNo ++;
+                    result = String.format("Got it. I've added this task: \n\t%s \nNow you have %d tasks in the list.",
+                            event.toString(),TaskNo);
+                } else {
+                    result = input;
+                }
             }
         }
 
@@ -67,7 +94,7 @@ public class Duke {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < TaskNo ; i++) {
             if (TaskList[i] != null) {
-                System.out.format("[%s] %d. %s\n",TaskList[i].getStatusIcon(), i+1, TaskList[i].getDescription());
+                System.out.format("%s. %s\n", i + 1, TaskList[i].toString());
             }
         }
         System.out.println();
@@ -78,7 +105,7 @@ public class Duke {
         TaskList[currTask].markAsDone();
         horizontalLine();
         System.out.println("Nice! I've marked this task as done: ");
-        System.out.format("[%s] %s\n",TaskList[currTask].getStatusIcon(), TaskList[currTask].getDescription());
+        System.out.println(TaskList[currTask].toString());
         System.out.println();
         horizontalLine();
     }
@@ -87,7 +114,7 @@ public class Duke {
         TaskList[currTask].markAsNotDone();
         horizontalLine();
         System.out.println("OK, I've marked this task as not done yet: ");
-        System.out.format("[%s] %s\n",TaskList[currTask].getStatusIcon(), TaskList[currTask].getDescription());
+        System.out.println(TaskList[currTask].toString());
         System.out.println();
         horizontalLine();
     }
