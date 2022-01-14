@@ -1,3 +1,3 @@
 public enum CommandType {
-    ADD, LIST, MARK, EXIT
+    ADD, LIST, MARK, UNMARK, EXIT
 }

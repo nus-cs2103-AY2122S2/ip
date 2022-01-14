@@ -40,7 +40,7 @@ public class Duke {
     }
 
     public void start() {
-        Command cmd = new Command();
+        Command cmd;
         Scanner sc = new Scanner(System.in);
         greeting();
         do {
@@ -57,9 +57,13 @@ public class Duke {
                     break;
                 case MARK:
                     int index = Integer.valueOf(cmd.getArguments()) - 1;
-                    boolean isDone = taskList[index].toggleIsDone();
-                    String msg = isDone ? "Great! I have marked this task as done." : "Noted, I've mark this task as not done yet.";
-                    printOutput(msg);
+                    taskList[index].markAsDone();
+                    printOutput("Great! I have marked this task as done.");
+                    break;
+                case UNMARK:
+                    index = Integer.valueOf(cmd.getArguments()) - 1;
+                    taskList[index].unmarkAsDone();
+                    printOutput("Noted, I've mark this task as not done yet.");
                     break;
             }
         } while(!cmd.isExitCmd());
