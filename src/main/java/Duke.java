@@ -13,12 +13,12 @@ public class Duke {
      * Prints the greeting and logo.
      */
     public static void greet() {
-        String logo = " ____        _        \n"
+        String logo = " ____        _\n"
                 + "|  _ \\ _   _| | _____      /\\_/\\           ___\n"
                 + "| | | | | | | |/ / _      = o_o =_______    \\ \\  -Julie Rhodes-\\\n"
                 + "| |_| | |_| |   <  __/     __^      __(  \\.__) )\n"
                 + "|____/ \\__,_|_|\\_\\___| (@)<_____>__(_____)____/\n";
-        System.out.println(logo + lineBreak + "Meow! I'm Duke" + catFace
+        System.out.print(logo + lineBreak + "Meow! I'm Duke" + catFace
                 + "What can I do for you?\n" + lineBreak);
     }
 
@@ -26,7 +26,7 @@ public class Duke {
      * Prints the farewell.
      */
     public static void exit() {
-        System.out.println(lineBreak + "Bye. Meow!" + catFace + lineBreak);
+        System.out.print(lineBreak + "Bye. Meow!" + catFace + lineBreak);
     }
 
     /**
@@ -50,20 +50,20 @@ public class Duke {
         case "mark":
             index = Integer.parseInt(description.trim());
             tasks[index - 1].markAsDone();
-            System.out.println(lineBreak + "Meow! Task is done!" + catFace
+            System.out.print(lineBreak + "Meow! Task is done!" + catFace
                     + tasks[index - 1] + "\n" + lineBreak);
             break;
         case "unmark":
             index = Integer.parseInt(description.trim());
             tasks[index - 1].unmarkAsDone();
-            System.out.println(lineBreak + "Meow! Task is not done!" + catFace
+            System.out.print(lineBreak + "Meow! Task is not done!" + catFace
                     + tasks[index - 1] + "\n" + lineBreak);
             break;
         case "todo":
-            t = new Todo(description);
+            t = new Todo(description.trim());
             tasks[Task.numOfTasks] = t;
             Task.numOfTasks++;
-            System.out.println(lineBreak + "added: " + t + "\n" + "Number of tasks in list: " + Task.numOfTasks + catFace + lineBreak);
+            System.out.print(lineBreak + "added: " + t + "\n" + "Number of tasks in list: " + Task.numOfTasks + catFace + lineBreak);
             break;
         case "deadline":
             String deadline = description.split("/by", 2)[1].trim();
@@ -71,7 +71,7 @@ public class Duke {
             t = new Deadline(description, deadline);
             tasks[Task.numOfTasks] = t;
             Task.numOfTasks++;
-            System.out.println(lineBreak + "added: " + t + "\n" + "Number of tasks in list: " + Task.numOfTasks + catFace + lineBreak);
+            System.out.print(lineBreak + "added: " + t + "\n" + "Number of tasks in list: " + Task.numOfTasks + catFace + lineBreak);
             break;
         case "event":
             String period = description.split("/at", 2)[1].trim();
@@ -79,13 +79,13 @@ public class Duke {
             t = new Event(description, period);
             tasks[Task.numOfTasks] = t;
             Task.numOfTasks++;
-            System.out.println(lineBreak + "added: " + t + "\n" + "Number of tasks in list: " + Task.numOfTasks + catFace + lineBreak);
+            System.out.print(lineBreak + "added: " + t + "\n" + "Number of tasks in list: " + Task.numOfTasks + catFace + lineBreak);
             break;
         default:
             t = new Task(description);
             tasks[Task.numOfTasks] = t;
             Task.numOfTasks++;
-            System.out.println(lineBreak + "added: " + description + "\n" + lineBreak);
+            System.out.print(lineBreak + "added: " + description + "\n" + lineBreak);
             break;
         }
     }
