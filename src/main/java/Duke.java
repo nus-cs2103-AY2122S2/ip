@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.Scanner;
 
 public class Duke {
@@ -12,10 +13,20 @@ public class Duke {
         System.out.println("Welcome to Duke! \nWhat can i do for you?\n");
 
         Scanner sc = new Scanner(System.in);
+        ActionList list = new ActionList();
 
         String input = sc.nextLine();
         while(!input.equals("bye")) {
-            System.out.println(input);
+            if (input.equals("list")) {
+                list.print();
+            } else {
+                boolean addSuccess = list.add(input);
+                if (addSuccess) {
+                    System.out.println("added: " + input);
+                } else {
+                    System.out.println("Failed to add " + input);
+                }
+            }
             input = sc.nextLine();
         }
 
