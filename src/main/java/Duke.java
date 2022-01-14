@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -5,8 +6,7 @@ import java.util.regex.Pattern;
 
 public class Duke {
     private static final Set<String> setOfAllTasks = new HashSet<>();
-    final static Task[] tasks = new Task[100];
-    private static int taskCounter = 0;
+    final static ArrayList<Task> tasksArrayList = new ArrayList<>();
 
     public static void simpleTodo() {
         Scanner scanner = new Scanner(System.in);
@@ -19,24 +19,36 @@ public class Duke {
                 break;
             } else {
                 if (input.equalsIgnoreCase("list")) { //list all tasks
-                    if (taskCounter == 0) {
+                    if (tasksArrayList.size() == 0) {
                             System.out.println("You are done for the day, or are you?");
                     } else {
-                        for (int i = 0; i < taskCounter; i ++) {
-                            System.out.println(i + 1 + "." + tasks[i]);
+                        for (int i = 0; i < tasksArrayList.size(); i ++) {
+                            System.out.println(i + 1 + "." + tasksArrayList.get(i));
                         }
                     }
                 } else if (input.toLowerCase().matches("mark \\d+")) { //mark task as done
                     int index = Integer.parseInt(input.replaceAll("mark ", "")) - 1;
+                    System.out.println(index);
                     try {
-                        tasks[index].markAsDone();
+                        tasksArrayList.get(index).markAsDone();
                     } catch (Exception e) {
                             System.out.println("No such task!");
                     }
                 } else if (input.toLowerCase().matches("unmark \\d+")) { //mark task as undone
                     int index = Integer.parseInt(input.replaceAll("unmark ", "")) - 1;
                     try {
-                        tasks[index].markAsUndone();
+                        tasksArrayList.get(index).markAsUndone();
+                    } catch (Exception e) {
+                        System.out.println("No such task!");
+                    }
+                } else if (input.toLowerCase().matches("delete \\d+")) { //delete a task
+                    int index = Integer.parseInt(input.replaceAll("delete ", "")) - 1;
+                    try {
+                        Task taskDeleted = tasksArrayList.get(index);
+                        tasksArrayList.remove(index);
+                        System.out.println("Noted. I've removed this task:\n" +
+                                " " + taskDeleted + "\n" +
+                                "Now you have " + tasksArrayList.size() + " tasks in the list.");
                     } catch (Exception e) {
                         System.out.println("No such task!");
                     }
@@ -47,14 +59,13 @@ public class Duke {
                         boolean isEmptyTodo = input.replaceAll(" ", "").equalsIgnoreCase("todo");
                         String taskType = isEmptyDeadline ? "deadline" : isEmptyEvent ? "event" : "todo";
                         if (isEmptyDeadline || isEmptyEvent || isEmptyTodo ) {
-                            throw new CortanaException(taskType);
+                            throw new CortanaException("OOPS!!! The description of a " + taskType + " cannot be empty! \uD83E\uDD21");
                         } else {
                             boolean isNotEmptyDeadline = input.toLowerCase().matches("^deadline .*");
                             boolean isNotEmptyEvent = input.toLowerCase().matches("^event .*");
                             boolean isNotEmptyTodo = input.toLowerCase().matches("^todo .*");
                             boolean hasBy = Pattern.compile("/by .*").matcher(input).find();
                             boolean hasAt = Pattern.compile("/at .*").matcher(input).find();
-                            //boolean noSlash = Pattern.compile(" \\w[by|at] ").matcher(input).find();
                             if (isNotEmptyDeadline & hasBy) {
                                 String actualTask = input.replaceAll("deadline ", "");
                                 String[] sliced = actualTask.split("/by ");
@@ -70,18 +81,20 @@ public class Duke {
                             } else if (isNotEmptyTodo) {
                                 String description = input.replaceAll("todo ", "");
                                 taskActions("todo", input, description, "");
-                            } else if (isNotEmptyDeadline & !hasBy || isNotEmptyEvent & !hasAt) {
-                                taskType = isNotEmptyDeadline ? "deadline without time" : "event without time";
-                                throw new CortanaException(taskType);
+                            } else if (isNotEmptyDeadline & hasAt) {
+                                throw new CortanaException("Please use the /by keyword for deadline!");
+                            } else if (isNotEmptyEvent & hasBy) {
+                                throw new CortanaException("Please use the /at keyword for event!");
+                            } else if (isNotEmptyDeadline & !hasBy) {
+                                throw new CortanaException("Please specify the time with the /by keyword! ⌚");
+                            } else if (isNotEmptyEvent & !hasAt) {
+                                throw new CortanaException("Please specify the time with the /at keyword! ⌚");
                             } else {
-                                taskType = "nothing";
-                                throw new CortanaException(taskType);
+                                throw new CortanaException("I don't know what that means \uD83D\uDE05");
                             }
                         }
                     } catch (CortanaException e) {
-                        e.UnidentifiedCommandException();
-                        e.EmptyDescriptionException();
-                        e.DidNotSpecifyTimeException();
+                        System.out.println(e.getMessage());
                     }
                 }
             }
@@ -99,10 +112,9 @@ public class Duke {
                 } else {
                     setOfAllTasks.add(input.toLowerCase());
                     Deadline deadline = new Deadline(description, time);
-                    tasks[taskCounter] = deadline;
-                    taskCounter++;
+                    tasksArrayList.add(deadline);
                     System.out.println("Got it. I've added this task: \n" + " " + deadline +
-                            "\nNow you have " + taskCounter + " tasks in the list.");
+                            "\nNow you have " + tasksArrayList.size() + " tasks in the list.");
                 }
                 break;
             case "event":
@@ -111,10 +123,9 @@ public class Duke {
                 } else {
                     setOfAllTasks.add(input.toLowerCase());
                     Event event = new Event(description, time);
-                    tasks[taskCounter] = event;
-                    taskCounter++;
+                    tasksArrayList.add(event);
                     System.out.println("Got it. I've added this task: \n" + " " + event +
-                            "\nNow you have " + taskCounter + " tasks in the list.");
+                            "\nNow you have " + tasksArrayList.size() + " tasks in the list.");
                 }
                 break;
             case "todo":
@@ -123,10 +134,9 @@ public class Duke {
                 } else {
                     setOfAllTasks.add(input.toLowerCase());
                     Todo todo = new Todo(description);
-                    tasks[taskCounter] = todo;
-                    taskCounter++;
+                    tasksArrayList.add(todo);
                     System.out.println("Got it. I've added this task: \n" + " " + todo +
-                            "\nNow you have " + taskCounter + " tasks in the list.");
+                            "\nNow you have " + tasksArrayList.size() + " tasks in the list.");
                 }
                 break;
         }
