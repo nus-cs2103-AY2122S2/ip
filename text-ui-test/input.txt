@@ -1,0 +1,21 @@
+list
+todo
+todo read
+event
+event play
+event play/
+event play/Monday
+deadline
+deadline homework
+deadline homework/Tuesday
+list
+mark
+mark 2
+mark 0
+mark 4
+unmark 2
+unmark 0
+delete
+delete 3
+delete 5
+bye
