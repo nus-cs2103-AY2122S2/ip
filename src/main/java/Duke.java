@@ -91,46 +91,57 @@ public class Duke {
                 
                 // Add - adds Task to list 
                 // 3 types of Tasks: ToDo's, Events, Deadlines 
-                else if (userInput.toLowerCase().matches("^todo .*") || userInput.toLowerCase().matches("^event .*") || userInput.toLowerCase().matches("^deadline .*")) {
+                else if (userInput.matches("^todo .*|^todo") || userInput.toLowerCase().matches("^event .*|^event") || userInput.toLowerCase().matches("^deadline .*|^deadline")) {
                     String[] textStrings = userInput.split(" "); 
                     String taskType = textStrings[0].toLowerCase(); 
-                    String taskDescription = String.join(" ", Arrays.copyOfRange(textStrings, 1, textStrings.length));
 
-                    System.out.println(String.format("%sNoted. I've added this task:", indentationText));
+                    if (userInput.toLowerCase().matches("^todo .+") || userInput.toLowerCase().matches("^event .+") || userInput.toLowerCase().matches("^deadline .+")) {
+                        
+                        String taskDescription = String.join(" ", Arrays.copyOfRange(textStrings, 1, textStrings.length));
 
-                    Task task = new Task("");
-                    
-                    // ToDo's 
-                    if (taskType.equals("todo")) {
+                        // TODO - only printed when a task has been added 
+                        System.out.println(String.format("%sNoted. I've added this task:", indentationText));
 
-                        task = new Todo(taskDescription); 
-                        taskList.add(task);
-                    
-                    // Events & Deadlines 
-                    } else {
+                        Task task = new Task("");
+                        
+                        // ToDo's 
+                        if (taskType.equals("todo")) {
 
-                        String[] taskDescriptionStrings = taskDescription.split("/");
-                        String taskDescriptionText = taskDescriptionStrings[0].strip();
-                        String[] taskDescriptionTimeStrings = taskDescriptionStrings[1].split(" ");
-                        String taskDescriptionTime = String.join(" ", Arrays.copyOfRange(taskDescriptionTimeStrings, 1, taskDescriptionTimeStrings.length)).strip();
-
-                        // Events 
-                        if (taskType.equals("event")) { 
-
-                            task = new Event(taskDescriptionText, taskDescriptionTime);
+                            task = new Todo(taskDescription); 
                             taskList.add(task);
                         
-                        // Deadlines 
-                        } else if (taskType.equals("deadline")) {
+                        // Events & Deadlines 
+                        } else {
 
-                            task = new Deadline(taskDescriptionText, taskDescriptionTime);
-                            taskList.add(task);
+                            if (!taskDescription.matches(".+ /by .+|.+ /at .+")) {
+                                throw new DukeException("Your " + taskType + " command is incorrectly formatted. Please try again.");
+                            }
+
+                            String[] taskDescriptionStrings = taskDescription.split("/");
+                            String taskDescriptionText = taskDescriptionStrings[0].strip();
+                            String[] taskDescriptionTimeStrings = taskDescriptionStrings[1].split(" ");
+                            String taskDescriptionTime = String.join(" ", Arrays.copyOfRange(taskDescriptionTimeStrings, 1, taskDescriptionTimeStrings.length)).strip();
+
+                            // Events 
+                            if (taskType.equals("event")) { 
+
+                                task = new Event(taskDescriptionText, taskDescriptionTime);
+                                taskList.add(task);
+                            
+                            // Deadlines 
+                            } else if (taskType.equals("deadline")) {
+
+                                task = new Deadline(taskDescriptionText, taskDescriptionTime);
+                                taskList.add(task);
+                            }
+                            
                         }
-                        
-                    }
 
-                    System.out.println(String.format("%s%s", indentationTaskStatus, task));
-                    System.out.println(String.format("%sNow you have %d tasks in the list.", indentationText, taskList.size()));
+                        System.out.println(String.format("%s%s", indentationTaskStatus, task));
+                        System.out.println(String.format("%sNow you have %d tasks in the list.", indentationText, taskList.size()));
+                    } else {
+                        throw new DukeException("I'm sorry, your " + taskType + " command is missing a task description. Please try again.");
+                    }
                 } else {
                     throw new DukeException("I'm sorry, you've input a command I don't recognize. Please try again.");
                 }
@@ -138,7 +149,7 @@ public class Duke {
             }
             
             catch(DukeException e) {
-                System.out.println(String.format("%sException: %s", indentationText, e.getMessage()));
+                System.out.println(String.format("%s%s", indentationText, e.getMessage()));
             }
         }
 
