@@ -46,7 +46,7 @@ public class Duke {
 
                 // List - "list", lists all of the user's inputs 
                 else if (userInput.toLowerCase().equals("list")) {
-                    if (taskList.size() == 0) System.out.println(String.format("\tYour list is empty %s", userName));
+                    if (taskList.size() == 0) System.out.println(String.format("%sYour list is empty %s", indentationText, userName));
                     else {
                         for (int i = 0; i < taskList.size(); i++) {
                             Task task = taskList.get(i);
@@ -88,6 +88,26 @@ public class Duke {
                         System.out.println(String.format("%s%s", indentationText, e.getMessage())); 
                     }
 
+                }
+
+                // Delete - removes Tasks from the list 
+                else if (userInput.matches("^delete \\d+|^delete")) {
+                    // when the user input has the "delete" command & an integer 
+                    if (userInput.matches("^delete \\d+")) {
+                        String[] textStrings = userInput.split(" "); 
+                        int taskIndex = Integer.valueOf(textStrings[1]) - 1;
+
+                        // if user-specified task index is out of the list 
+                        if (taskIndex >= taskList.size() || taskIndex < 0) {
+                            throw new DukeException("I'm sorry, you're referencing a task that does not exist!");
+                        }
+
+                        Task task = taskList.remove(taskIndex);
+                        System.out.println(String.format("%sOkay, I've deleted this task:", indentationText));
+                        System.out.println(String.format("%s%s", indentationTaskStatus, task));
+                    } else {
+                        throw new DukeException("I'm sorry, you missed out the task index");
+                    }
                 }
                 
                 // Add - adds Task to list 
