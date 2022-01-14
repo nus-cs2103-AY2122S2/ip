@@ -56,10 +56,16 @@ public class Duke {
 
                 // Mark, Unmark - "mark itemIndexNumber", "unmark itemIndexNumber", marks an item as done/undone accordingly 
                 else if (userInput.toLowerCase().matches("^mark \\d+") || userInput.toLowerCase().matches("^unmark \\d+")) {
-                    String[] stringArray = userInput.toLowerCase().split(" ");
-                    int taskIndex = Integer.valueOf(stringArray[1]) - 1;
 
                     try {
+                        String[] stringArray = userInput.toLowerCase().split(" ");
+                        int taskIndex = Integer.valueOf(stringArray[1]) - 1;
+                        
+                        // if user-specified task index is out of the list 
+                        if (taskIndex >= taskList.size() || taskIndex < 0) {
+                            throw new DukeException("I'm sorry, you're referencing a task that does not exist!");
+                        }
+
                         // Mark 
                         if (stringArray[0].equals("mark")) {
                             
@@ -77,8 +83,8 @@ public class Duke {
                             System.out.println(String.format("%sOkay, marking this task as not done yet:", indentationText));
                             System.out.println(String.format("%s%s", indentationTaskStatus, task));
                         }
-                    } catch (IndexOutOfBoundsException e) {
-                        System.out.println(String.format("%sNo such task exists!", indentationText)); 
+                    } catch (DukeException e) {
+                        System.out.println(String.format("%s%s", indentationText, e.getMessage())); 
                     }
 
                 }
@@ -130,9 +136,9 @@ public class Duke {
                 }
 
             }
-            // TODO - catching all Exceptions
-            catch(Exception e) {
-                System.out.println("\tException: " + e.getMessage() + ", of Exception type: " + e.getClass().getCanonicalName());
+            
+            catch(DukeException e) {
+                System.out.println(String.format("%sException: %s", indentationText, e.getMessage()));
             }
         }
 
