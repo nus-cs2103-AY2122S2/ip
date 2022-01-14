@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException{
         Scanner s = new Scanner(System.in);
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -17,8 +17,21 @@ public class Duke {
             inp = s.nextLine();
             if (inp.equals("bye")) {
                 System.out.println("\nDuke:  Bye. Hope to see you again soon!");
-            } else {
-                System.out.println("\nDuke:  " + inp + "\n");
+            }
+            else if(inp.equals("list")){
+                int j = 0;
+                BufferedWriter w = new BufferedWriter(new OutputStreamWriter(System.out));
+                for(String k:a){
+                    j++;
+                    w.write(j+". "+k);
+                    w.newLine();
+                }
+                w.newLine();
+                w.flush();
+            }
+            else {
+                a.add(inp);
+                System.out.println("\nDuke: Added \"" + inp + "\"\n");
             }
         }
     }
