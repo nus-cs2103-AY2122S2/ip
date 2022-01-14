@@ -1,35 +1,39 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
     public static String LINE = "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*";
-    public static Task[] tasks = new Task[100];
+    public static ArrayList<Task> tasks = new ArrayList<>(100);
     public static int tasksAdded_index = 0;
 
     public static boolean list_isEmpty() {
         return tasksAdded_index == 0;
     }
 
+    private static void message_list() {
+        if (list_isEmpty()) {
+            System.out.println(LINE + "\nYour list is empty~\n" + LINE);
+        } else {
+            System.out.println(LINE + "\nHere is your task list!");
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println((i + 1) + "." + tasks.get(i).toString());
+            }
+            System.out.println(LINE);
+        }
+    }
+
     private static void messageProcess() {
+
         Scanner user_input = new Scanner(System.in).useDelimiter("\n");
         String user_message = user_input.next();
 
         while (!user_message.equals("bye")) {
             try {
                 if (user_message.equals("list")) {
-                    if (list_isEmpty()) {
-                        System.out.println(LINE + "\nYour list is empty~\n" + LINE);
-                    } else {
-                        int i = 0;
-                        System.out.println(LINE + "\nHere is your task list!");
-                        while(tasks[i] != null) {
-                            System.out.println((i + 1) + "." + tasks[i].toString());
-                            i++;
-                        }
-                        System.out.println(LINE);
-                    }
+                    message_list();
 
-                } else if (user_message.startsWith("mark")) {
+                } else if (user_message.startsWith("mark")) { //todo: mark/unmark negative number?????
                     //list is empty
                     if (list_isEmpty()) {
                         throw new DukeException(LINE
@@ -48,15 +52,15 @@ public class Duke {
                     int taskIndex = Integer.parseInt(clean) - 1;
 
                     //user trying to mark a non-existing task
-                    if (taskIndex >= tasksAdded_index || taskIndex <= 0) {
+                    if (taskIndex >= tasksAdded_index || taskIndex < 0) {
                         throw new DukeException(LINE
                                 + "\nThere is no number " + (taskIndex + 1) + " in your task list!\n"
                                 + LINE);
                     }
 
-                    tasks[taskIndex].markAsDone();
+                    tasks.get(taskIndex).markAsDone();
                     System.out.println("Yay! I've marked this task as done:\n"
-                            + tasks[taskIndex].toString());
+                            + tasks.get(taskIndex).toString());
 
                 } else if (user_message.startsWith("unmark")) {
                     //list is empty
@@ -77,25 +81,25 @@ public class Duke {
                     int taskIndex = Integer.parseInt(clean) - 1;
 
                     //user trying to mark a non-existing task
-                    if (taskIndex >= tasksAdded_index || taskIndex <= 0) {
+                    if (taskIndex >= tasksAdded_index || taskIndex < 0) {
                         throw new DukeException(LINE
                                 + "\nThere is no number " + (taskIndex + 1) + " in your task list!\n"
                                 + LINE);
                     }
 
-                    tasks[taskIndex].unmark();
+                    tasks.get(taskIndex).unmark();
                     System.out.println("Aw man..I've marked this task as not done yet:\n"
-                            + tasks[taskIndex].toString());
+                            + tasks.get(taskIndex).toString());
 
                 } else if (user_message.startsWith("todo")) {
                     if (user_message.substring(4).replaceAll(" ", "").equals("")) {
                         throw new DukeException(LINE + "\nOh no..did you forget to put what you need to do? :(\n" + LINE);
                     } else {
                         String task = user_message.substring(5);
-                        tasks[tasksAdded_index] = new Todo(task);
+                        tasks.add(new Todo(task));
 
                         System.out.println(LINE + "\nWokay! I've added this task:\n"
-                                + tasks[tasksAdded_index].toString()
+                                + tasks.get(tasksAdded_index).toString()
                                 + "\nNow you have " + (tasksAdded_index + 1) + " tasks in the list\n" + LINE);
                         tasksAdded_index++;
                     }
@@ -113,7 +117,6 @@ public class Duke {
                     }
 
                     String[] taskDetails = user_message.substring(9).split("/", 2);
-                    tasks[tasksAdded_index] = new Deadline(taskDetails[0], taskDetails[1]);
 
                     //deadline is empty
                     if (taskDetails[1].replaceAll(" ", "").equals("")) {
@@ -122,8 +125,9 @@ public class Duke {
                                 + LINE);
                     }
 
+                    tasks.add(new Deadline(taskDetails[0], taskDetails[1]));
                     System.out.println((LINE + "\nWokay! I've added this task:\n"
-                            + tasks[tasksAdded_index].toString()
+                            + tasks.get(tasksAdded_index).toString()
                             + "\nNow you have " + (tasksAdded_index + 1) + " tasks in the list\n" + LINE));
                     tasksAdded_index++;
 
@@ -140,7 +144,6 @@ public class Duke {
                     }
 
                     String[] taskDetails = user_message.substring(6).split("/", 2);
-                    tasks[tasksAdded_index] = new Event(taskDetails[0], taskDetails[1]);
 
                     //deadline is empty
                     if (taskDetails[1].replaceAll(" ", "").equals("")) {
@@ -149,10 +152,42 @@ public class Duke {
                                 + LINE);
                     }
 
+                    tasks.add(new Event(taskDetails[0], taskDetails[1]));
                     System.out.println((LINE + "\nWokay! I've added this task:\n"
-                            + tasks[tasksAdded_index].toString()
+                            + tasks.get(tasksAdded_index).toString()
                             + "\nNow you have " + (tasksAdded_index + 1) + " tasks in the list\n" + LINE));
                     tasksAdded_index++;
+
+                } else if (user_message.startsWith("delete")) {
+                    //list is empty
+                    if (list_isEmpty()) {
+                        throw new DukeException(LINE
+                                + "\nOops... your list is empty! :(\n" + LINE);
+                    }
+
+                    String clean = user_message.replaceAll("\\D+", "");
+
+                    //empty message after delete
+                    if (clean.equals("")) {
+                        throw new DukeException(LINE
+                                + "\nWhich task do you want to delete? Add the number in the end to tell me~\n"
+                                + LINE);
+                    }
+
+                    int taskIndex = Integer.parseInt(clean) - 1;
+
+                    //user trying to delete a non-existing task
+                    if (taskIndex >= tasksAdded_index || taskIndex < 0) {
+                        throw new DukeException(LINE
+                                + "\nThere is no number " + (taskIndex + 1) + " in your task list!\n"
+                                + LINE);
+                    }
+
+                    System.out.println("Done! I've removed this task:\n"
+                            + tasks.get(taskIndex).toString());
+
+                    tasks.remove(taskIndex);
+                    tasksAdded_index--;
 
                 } else {
                     System.out.println(LINE + "\n" + user_message + "? Sorry, I don't understand what that means.. :(\n" + LINE);
@@ -160,7 +195,6 @@ public class Duke {
             } catch (DukeException err) {
                 System.out.println(err.getMessage());
             }
-
 
 
             user_message = user_input.next();
