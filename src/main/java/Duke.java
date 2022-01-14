@@ -56,38 +56,43 @@ public class Duke {
                 }
 
                 // Mark, Unmark - "mark itemIndexNumber", "unmark itemIndexNumber", marks an item as done/undone accordingly 
-                else if (userInput.toLowerCase().matches("^mark \\d+") || userInput.toLowerCase().matches("^unmark \\d+")) {
+                else if (userInput.toLowerCase().matches("^mark \\d+|^mark") || userInput.toLowerCase().matches("^unmark \\d+|^unmark")) {
+                    
+                    // when the user input has the "mark/unmark" command & an integer 
+                    if (userInput.toLowerCase().matches("^mark \\d+") || userInput.toLowerCase().matches("^unmark \\d+")) {
 
-                    try {
-                        String[] stringArray = userInput.toLowerCase().split(" ");
-                        int taskIndex = Integer.valueOf(stringArray[1]) - 1;
-                        
-                        // if user-specified task index is out of the list 
-                        if (taskIndex >= taskList.size() || taskIndex < 0) {
-                            throw new DukeException("I'm sorry, you're referencing a task that does not exist!");
-                        }
+                        try {
+                            String[] stringArray = userInput.toLowerCase().split(" ");
+                            int taskIndex = Integer.valueOf(stringArray[1]) - 1;
+                            
+                            // if user-specified task index is out of the list 
+                            if (taskIndex >= taskList.size() || taskIndex < 0) {
+                                throw new DukeException("I'm sorry, you're referencing a task that does not exist!");
+                            }
 
-                        // Mark 
-                        if (stringArray[0].equals("mark")) {
+                            // Mark 
+                            if (stringArray[0].equals("mark")) {
+                                
+                                Task task = taskList.get(taskIndex);
+                                task.markAsDone();
+                                System.out.println(String.format("%sOkay, marking this task as done:", indentationText));
+                                System.out.println(String.format("%s%s", indentationTaskStatus, task));
                             
-                            Task task = taskList.get(taskIndex);
-                            task.markAsDone();
-                            System.out.println(String.format("%sOkay, marking this task as done:", indentationText));
-                            System.out.println(String.format("%s%s", indentationTaskStatus, task));
-                        
-                        // Unmark 
-                        } else if (stringArray[0].equals("unmark")) {
-                            
-                            // taskList.get(taskIndex).markAsUndone();
-                            Task task = taskList.get(taskIndex);
-                            task.markAsDone();
-                            System.out.println(String.format("%sOkay, marking this task as not done yet:", indentationText));
-                            System.out.println(String.format("%s%s", indentationTaskStatus, task));
+                            // Unmark 
+                            } else if (stringArray[0].equals("unmark")) {
+                                
+                                // taskList.get(taskIndex).markAsUndone();
+                                Task task = taskList.get(taskIndex);
+                                task.markAsDone();
+                                System.out.println(String.format("%sOkay, marking this task as not done yet:", indentationText));
+                                System.out.println(String.format("%s%s", indentationTaskStatus, task));
+                            }
+                        } catch (DukeException e) {
+                            System.out.println(String.format("%s%s", indentationText, e.getMessage())); 
                         }
-                    } catch (DukeException e) {
-                        System.out.println(String.format("%s%s", indentationText, e.getMessage())); 
+                    } else {
+                        throw new DukeException("I'm sorry, you missed out the task index");
                     }
-
                 }
 
                 // Delete - removes Tasks from the list 
