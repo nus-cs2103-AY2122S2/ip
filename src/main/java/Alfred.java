@@ -3,11 +3,11 @@ import java.util.Scanner;
 
 public class Alfred {
     // class constants
-    private static String GREETING = "Hello! My name is Alfred.\n"
+    private static final String GREETING = "Hello! My name is Alfred.\n"
             + "How can I be of service?";
-    private static String BYE = "Bye! Hope I was of service.";
-    private static int BREAK_CHAR_LENGTH = 100;;
-    private String BREAK_LINE = this.line();
+    private static final String BYE = "Bye! Hope I was of service.";
+    private static final int BREAK_CHAR_LENGTH = 100;
+    private final String BREAK_LINE = this.line();
 
     // functional attributes
     ArrayList<Task> task_list;
@@ -18,7 +18,7 @@ public class Alfred {
 
     private String line() {
         String out = "";
-        for (int i = 0; i < this.BREAK_CHAR_LENGTH; i++) {
+        for (int i = 0; i < Alfred.BREAK_CHAR_LENGTH; i++) {
             out += "-";
         }
         out += "\n";
@@ -34,11 +34,11 @@ public class Alfred {
     }
 
     private void greeting() {
-        this.sandwich_and_print(this.GREETING);
+        this.sandwich_and_print(Alfred.GREETING);
     }
 
     private void bye() {
-        this.sandwich_and_print(this.BYE);
+        this.sandwich_and_print(Alfred.BYE);
     }
 
     private void add_task(Task task) {
@@ -100,6 +100,16 @@ public class Alfred {
         this.sandwich_and_print(text);
     }
 
+    private void delete_task(int task_id) {
+        // update data state
+        Task task = this.task_list.remove(task_id);
+
+        // return representation
+        String text = "Noted sir. I've removed the following task:\n";
+        text += task.toString();
+        this.sandwich_and_print(text);
+    }
+
     private void read_input(String input) throws InvalidCommandException, InvalidInputException, InvalidIndexException, MissingInputException {
         // read in arguments
         String[] arguments = input.split(" ");
@@ -110,12 +120,17 @@ public class Alfred {
         if ((command.equals("list")) && (arguments.length == 1)) {
             this.list_tasks();
 
-        // (UN)MARK
-        } else if (command.equals("mark") || command.equals("unmark")) { // validity check for (un)mark
+        // (UN)MARK and DELETE
+        } else if (command.equals("mark") || command.equals("unmark") || command.equals("delete")) { // validity check for (un)mark
             if (arguments.length != 2) {
                 throw new MissingInputException();
             }
-            int task_id = Integer.valueOf(arguments[1]) - 1;
+            int task_id;
+            try {
+                task_id = Integer.valueOf(arguments[1]) - 1;
+            } catch (NumberFormatException nfe) {
+                throw new InvalidInputException();
+            }
             if (task_id >= this.task_list.size()) {
                 throw new InvalidIndexException();
             }
@@ -124,7 +139,10 @@ public class Alfred {
                 this.mark_task(task_id);
             } else if (command.equals("unmark")) {
                 this.unmark_task(task_id);
+            } else {
+                this.delete_task(task_id);
             }
+
 
         // DEADLINE
         } else if (command.equals("deadline")) {

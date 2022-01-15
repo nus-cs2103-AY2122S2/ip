@@ -75,11 +75,11 @@ Missing input, sir. No valid input found after keyword arguments '(un)mark', 'to
 ----------------------------------------------------------------------------------------------------
 
 ----------------------------------------------------------------------------------------------------
-Sorry sir, that's a valid command but invalid input. Likely due to wrong format after 'todo', 'deadline' or 'event'.
+Sorry sir, that's a valid command but invalid input. Likely due to wrong format after '(un)mark', 'delete', 'todo', 'deadline' or 'event'.
 ----------------------------------------------------------------------------------------------------
 
 ----------------------------------------------------------------------------------------------------
-Sorry sir, that's a valid command but invalid input. Likely due to wrong format after 'todo', 'deadline' or 'event'.
+Sorry sir, that's a valid command but invalid input. Likely due to wrong format after '(un)mark', 'delete', 'todo', 'deadline' or 'event'.
 ----------------------------------------------------------------------------------------------------
 
 ----------------------------------------------------------------------------------------------------
@@ -95,15 +95,23 @@ Missing input, sir. No valid input found after keyword arguments '(un)mark', 'to
 ----------------------------------------------------------------------------------------------------
 
 ----------------------------------------------------------------------------------------------------
-Sorry sir, that's a valid command but invalid input. Likely due to wrong format after 'todo', 'deadline' or 'event'.
+Sorry sir, that's a valid command but invalid input. Likely due to wrong format after '(un)mark', 'delete', 'todo', 'deadline' or 'event'.
 ----------------------------------------------------------------------------------------------------
 
 ----------------------------------------------------------------------------------------------------
-Sorry sir, that's a valid command but invalid input. Likely due to wrong format after 'todo', 'deadline' or 'event'.
+Sorry sir, that's a valid command but invalid input. Likely due to wrong format after '(un)mark', 'delete', 'todo', 'deadline' or 'event'.
 ----------------------------------------------------------------------------------------------------
 
 ----------------------------------------------------------------------------------------------------
-Invalid command, sir. I'm not sure what you want me to do.
+Noted sir. I've removed the following task:
+[T][X]  read book
 ----------------------------------------------------------------------------------------------------
 
+----------------------------------------------------------------------------------------------------
+Sorry sir, that's a valid command but invalid input. Likely due to wrong format after '(un)mark', 'delete', 'todo', 'deadline' or 'event'.
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Missing input, sir. No valid input found after keyword arguments '(un)mark', 'todo', 'event' or 'deadline'.
+----------------------------------------------------------------------------------------------------
 

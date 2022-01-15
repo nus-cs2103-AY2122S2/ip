@@ -17,4 +17,6 @@ mark
 unmark
 mark invalidnum
 unmark invalidnum
-
+delete 1
+delete invalidnum
+delete
