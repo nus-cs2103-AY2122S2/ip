@@ -2,12 +2,28 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Alfred {
-    // attributes
+    // constants
     String GREETING = "Hello! My name is Alfred.\n"
             + "How can I be of service?\n";
     String BYE = "Bye! Hope I was of service.\n";
     int BREAK_CHAR_LENGTH = 100;;
     String BREAK_LINE = this.line();
+
+    // functional attributes
+    ArrayList<String> entered;
+
+    Alfred() {
+        this.entered = new ArrayList<String>();
+    }
+
+    public String line() {
+        String out = "";
+        for (int i = 0; i < this.BREAK_CHAR_LENGTH; i++) {
+            out += "-";
+        }
+        out += "\n";
+        return out;
+    }
 
     public String greeting() {
         String out = "";
@@ -25,13 +41,30 @@ public class Alfred {
         return out;
     }
 
-
-    public String line() {
+    public String list_entered() {
         String out = "";
-        for (int i = 0; i < this.BREAK_CHAR_LENGTH; i++) {
-            out += "-";
+        out += this.BREAK_LINE;
+        for (int i = 1; i < this.entered.size() + 1; i++) {
+            out += i + ". " + this.entered.get(i - 1).toString() + "\n";
         }
-        out += "\n";
+        out += this.BREAK_LINE;
+        return out;
+    }
+
+    public void read_input(String input) {
+        if (input.equals("list")) {
+            System.out.println(this.list_entered());
+        } else {
+            System.out.println(this.add_and_echo(input));
+        }
+    }
+
+    public String add_and_echo(String input) {
+        this.entered.add(input);
+        String out = "";
+        out += this.BREAK_LINE;
+        out += "added: " + input + "\n";
+        out += this.BREAK_LINE;
         return out;
     }
 
@@ -49,7 +82,7 @@ public class Alfred {
         System.out.println(bot.greeting());
         String input = sc.nextLine();
         while (!input.equals("bye")) {
-            System.out.println(bot.echo(input));
+            bot.read_input(input);
             input = sc.nextLine();
         }
         System.out.println(bot.bye());
