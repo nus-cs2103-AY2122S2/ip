@@ -29,5 +29,8 @@ Marked as incomplete
 1.[T][x] week 2 topics
 2.[D][ ] week 2 project  (by: this friday)
 3.[E][ ] lecture  (at: friday 2-4pm)
-Unrecognised Command
+Sorry, i don't understand what you are saying
+Description of task can't be empty
+Failed to add
+Number of tasks: 3
 Bye. Hope to see you again soon!

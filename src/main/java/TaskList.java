@@ -3,12 +3,16 @@ import java.util.ArrayList;
 public class TaskList {
     ArrayList<Task> actions = new ArrayList<Task>();
 
-    public boolean add(TaskType type, String action){
+    public boolean add(TaskType type, String action) throws EmptyDescriptionException{
+        if (action.equals("")) {
+            throw new EmptyDescriptionException("ToDo cannot be empty");
+        }
         int indexOfTime;
         String description;
         String time;
         switch (type) {
-            case TODO : return actions.add(new ToDo(action));
+            case TODO :
+                return actions.add(new ToDo(action));
             case DEADLINE:
                 indexOfTime = action.indexOf("/by");
                 description = action.substring(0,indexOfTime);
