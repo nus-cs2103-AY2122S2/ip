@@ -14,7 +14,7 @@ abstract class Task {
     }
 
     private String getStatusSymbol() {
-        return this.isDone ? "\u2713" : " ";
+        return this.isDone ? "X" : " ";
     }
 
     abstract String getSymbol();

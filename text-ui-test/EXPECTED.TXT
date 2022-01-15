@@ -5,3 +5,59 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+**********************************************************************
+Roarrr.... I'm Burning Charizard, tasked to burnnn down your tasks.
+Which task shall we burn today?
+**********************************************************************
+
+What should Charizard do next?
+**********************************************************************
+    Charizard is ready to burn task:
+      [T][ ] read book
+    There are 1 tasks in the burning list
+**********************************************************************
+
+What should Charizard do next?
+**********************************************************************
+    Charizard's burning wish list:
+    1. [T][ ] read book
+**********************************************************************
+
+What should Charizard do next?
+**********************************************************************
+    Charizard breathe out fire and burned the task.
+      [T][X] read book
+**********************************************************************
+
+What should Charizard do next?
+**********************************************************************
+    Charizard's burning wish list:
+    1. [T][X] read book
+**********************************************************************
+
+What should Charizard do next?
+**********************************************************************
+    Charizard is ready to burn task:
+      [D][ ] deadline return book (by: Sunday)
+    There are 2 tasks in the burning list
+**********************************************************************
+
+What should Charizard do next?
+**********************************************************************
+    Charizard is ready to burn task:
+      [E][ ] project meeting (at: Mon 2-4pm)
+    There are 3 tasks in the burning list
+**********************************************************************
+
+What should Charizard do next?
+**********************************************************************
+    Charizard's burning wish list:
+    1. [T][X] read book
+    2. [D][ ] deadline return book (by: Sunday)
+    3. [E][ ] project meeting (at: Mon 2-4pm)
+**********************************************************************
+
+What should Charizard do next?
+**********************************************************************
+Roarrr....Let's burn more tasks next time!
+**********************************************************************

@@ -97,6 +97,7 @@ public class Duke {
         drawBorder(BORDER_LENGTH);
         System.out.println(GREET_MESSAGE);
         drawBorder(BORDER_LENGTH);
+        System.out.println();
     }
 
     private static void drawBorder(int length) {
