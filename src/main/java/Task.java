@@ -1,41 +1,50 @@
 public class Task {
+    /** Description of task. */
+    private final String desc;
 
-    /** Array of task. */
-    private final String[] task;
-
-    /** Length of task. */
-    private int count;
+    /** Status of task. */
+    private boolean isDone;
 
     /**
      * Constructor for Task class.
+     *
+     * @param desc Description of task.
      */
-    public Task() {
-        this.task = new String[100];
-        this.count = 0;
+    public Task(String desc) {
+        this.desc = desc;
+        this.isDone = false;
     }
 
     /**
-     * Add string to the task.
-     *
-     * @param s String to be added to task.
+     * Marks task.
      */
-    public void add(String s) {
-        task[count++] = String.format("        %d. %s", count, s);
+    public void mark() {
+        this.isDone = true;
+    }
+
+    /**
+     * Marks task.
+     */
+    public void unmark() {
+        this.isDone = false;
+    }
+
+    /**
+     * Returns status icon of task.
+     *
+     * @return String representing the status of task.
+     */
+    private String getStatusIcon() {
+        return isDone ? "X" : " ";
     }
 
     /**
      * String representation of task.
+     *
+     * @return String representation of task.
      */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        String prefix = "";
-        for (String s : task) {
-            if (s == null) break;
-            sb.append(prefix);
-            prefix = "\n";
-            sb.append(s);
-        }
-        return sb.toString();
+        return String.format("[%s] %s", this.getStatusIcon(), desc);
     }
 }

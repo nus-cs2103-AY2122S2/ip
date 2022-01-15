@@ -1,31 +1,47 @@
-import java.util.Scanner;
-
 public class Echo {
 
-    /** Task. */
-    private final Task task;
+    /** TaskList. */
+    private final TaskList taskList;
 
     /**
-     * Constructor for Task class.
+     * Constructor for TaskList class.
      */
     public Echo() {
-        this.task = new Task();
+        this.taskList = new TaskList();
     }
     /**
-     * Add task and replies that it has been added.
+     * Add taskList and replies that it has been added.
      *
      * @param s String to be printed.
      */
     public void addTask(String s) {
-        task.add(s);
+        taskList.add(s);
         System.out.println("        added: " + s);
     }
 
     /**
-     * Returns task.
+     * Returns taskList.
      */
     public void getTask() {
-        System.out.println(task.toString());
+        System.out.println(taskList.toString());
+    }
+
+    /**
+     * Marks taskList.
+     *
+     * @param i TaskList.
+     */
+    public void mark(int i) {
+        taskList.mark(i);
+    }
+
+    /**
+     * Unmark taskList.
+     *
+     * @param i TaskList.
+     */
+    public void unmark(int i) {
+        taskList.unmark(i);
     }
 
     /**
