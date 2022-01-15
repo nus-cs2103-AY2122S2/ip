@@ -40,65 +40,36 @@ public class Duke {
                     System.out.println(String.format("%d. %s", number, task.toString()));
                 }
             }
-            // Add a ToDo Task
-            else if (command.equals("todo")) {
-                List<String> newTaskNameArray = new ArrayList<>();
-                while (st.hasMoreTokens()) {
-                    newTaskNameArray.add(st.nextToken());
-                }
-                String newTaskName = String.join(" ", newTaskNameArray);
-                Task newTask = new ToDoTask(newTaskName);
-                tasks.add(newTask);
-                System.out.println("Got it. I've added this task *quack*:");
-                System.out.println(String.format("  %s", newTask.toString()));
-                System.out.println(String.format("Now you have %d task%s in the list *quack*.", tasks.size(), tasks.size() == 1 ? "" : "s"));
-            }
-            // Add a Deadline Task
-            else if (command.equals("deadline")) {
-                List<String> newTaskNameArray = new ArrayList<>();
+            // Add a ToDo Task OR Deadline Task OR Event Task
+            else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
+                //Reading in the name and preposition
+                List<String> nameArray = new ArrayList<>();
                 String preposition = "";
                 while (st.hasMoreTokens()) {
                     String nextToken = st.nextToken();
-                    if (nextToken.charAt(0) != '/') {
-                        newTaskNameArray.add(nextToken);
-                    } else {
+                    if (command.equals("todo") || nextToken.charAt(0) != '/') {
+                        nameArray.add(nextToken);
+                    }
+                    //Only take in preposition if it is not a todo
+                    else {
                         preposition = nextToken.substring(1);
                         break;
                     }
                 }
-                List<String> deadlineArray = new ArrayList<>();
+                String name = String.join(" ", nameArray);
+                //Setting up deadline/ date
+                List<String> deadlineOrDateArray = new ArrayList<>();
                 while (st.hasMoreTokens()) {
-                    deadlineArray.add(st.nextToken());
+                    deadlineOrDateArray.add(st.nextToken());
                 }
-                String newTaskName = String.join(" ", newTaskNameArray);
-                String deadline = String.join(" ", deadlineArray);
-                Task newTask = new DeadlineTask(newTaskName, preposition, deadline);
+                String deadlineOrDate = String.join(" ", deadlineOrDateArray);
+                //Creating the new task
+                Task newTask = new Task("placeholder task");
+                if (command.equals("todo")) newTask = new ToDoTask(name);
+                else if (command.equals("deadline")) newTask = new DeadlineTask(name, preposition, deadlineOrDate);
+                else if (command.equals("event")) newTask = new EventTask(name, preposition, deadlineOrDate);
                 tasks.add(newTask);
-                System.out.println("Got it. I've added this task *quack*:");
-                System.out.println(String.format("  %s", newTask.toString()));
-                System.out.println(String.format("Now you have %d task%s in the list *quack*.", tasks.size(), tasks.size() == 1 ? "" : "s"));
-            }
-            // Add a Event Task
-            else if (command.equals("event")) {
-                List<String> newTaskNameArray = new ArrayList<>();
-                String preposition = "";
-                while (st.hasMoreTokens()) {
-                    String nextToken = st.nextToken();
-                    if (nextToken.charAt(0) != '/') {
-                        newTaskNameArray.add(nextToken);
-                    } else {
-                        preposition = nextToken.substring(1);
-                        break;
-                    }
-                }
-                List<String> deadlineArray = new ArrayList<>();
-                while (st.hasMoreTokens()) {
-                    deadlineArray.add(st.nextToken());
-                }
-                String newTaskName = String.join(" ", newTaskNameArray);
-                String deadline = String.join(" ", deadlineArray);
-                Task newTask = new EventTask(newTaskName, preposition, deadline);
-                tasks.add(newTask);
+                //Output to update user
                 System.out.println("Got it. I've added this task *quack*:");
                 System.out.println(String.format("  %s", newTask.toString()));
                 System.out.println(String.format("Now you have %d task%s in the list *quack*.", tasks.size(), tasks.size() == 1 ? "" : "s"));
@@ -114,7 +85,7 @@ public class Duke {
                         int number = Integer.parseInt(st.nextToken());
                         tasks.get(number - 1).mark();
                         System.out.println(String.format("I've marked task %d as done! *quack*", number));
-                    } catch (Exception e) {
+                    } catch (NumberFormatException e) {
                         System.out.println("Please ONLY input integers when unmarking (eg. 'unmark 1')");
                     }
                 }
