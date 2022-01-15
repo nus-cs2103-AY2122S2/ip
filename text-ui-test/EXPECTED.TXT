@@ -47,6 +47,8 @@ Great job nyan~!
 [D][X] apply internship (by: May 2022)
 Great job nyan~!
 [E][X] 2103 lec (at: fri 2pm)
+Hey! Please choose something to mark nyaan~!
+Hey! Please choose something to unmark nyaan~!
 Let's get it done next time nyan~!
 [D][ ] apply internship (by: May 2022)
 Here are your list items nyan~:
@@ -61,3 +63,15 @@ Here are your list items nyan~:
 Hey! This todo can't be empty nyaan~!
 Hey! This event can't be empty nyaan~!
 Hey! This deadline can't be empty nyaan~!
+Chi-san has removed task:
+ [T][ ] wash dishes
+You now have 7 tasks nyan~!
+Here are your list items nyan~:
+1. [T][ ] erase whiteboard
+2. [T][X] buy textbooks
+3. [D][ ] submit modreg (by: friday night)
+4. [D][ ] apply internship (by: May 2022)
+5. [E][ ] birthday part (at: sat 2-3pm)
+6. [E][X] 2103 lec (at: fri 2pm)
+7. [E][ ] career fair (at: march 2020)
+Hey! Please choose something to delete nyaan~!

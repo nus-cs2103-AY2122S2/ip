@@ -16,8 +16,13 @@ list
 mark 3
 mark 5
 mark 7
+mark
+unmark
 unmark 5
 list
 todo
 event
 deadline
+delete 2
+list
+delete

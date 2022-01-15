@@ -26,7 +26,7 @@ public class Duke {
                 return;
             }
             // Unknown message, or command lacks task
-            throw new DukeException(msg.trim());
+            throw new DukeException(msg.trim().toLowerCase());
         } else {
             // Check for keywords
             switch(command[0].toLowerCase()) {
@@ -76,6 +76,12 @@ public class Duke {
                     messages.add(newTask2);
                     System.out.printf("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n",
                             newTask2,messages.size());
+                    break;
+                case "delete":
+                    Task toDelete = messages.get(Integer.parseInt(command[1]) - 1);
+                    messages.remove(toDelete);
+                    System.out.printf("Chi-san has removed task:\n %s\nYou now have %d tasks nyan~!\n",
+                            toDelete, messages.size());
                     break;
                 default:
                     // Some message which does not start with a keyword

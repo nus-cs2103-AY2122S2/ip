@@ -15,15 +15,12 @@ public class DukeException extends Exception {
     @Override
     public String toString() {
         // Error messages based on message sent
-        switch(msg) {
-            case "todo":
-                return "Hey! This todo can't be empty nyaan~!";
-            case "deadline":
-                return "Hey! This deadline can't be empty nyaan~!";
-            case "event":
-                return "Hey! This event can't be empty nyaan~!";
-            default:
-                return "Chi-san doesn't understand that nyaan~!";
+        if (msg.equals("todo") || msg.equals("deadline") || msg.equals("event")) {
+            return "Hey! This " + msg + " can't be empty nyaan~!";
+        } else if (msg.equals("mark") || msg.equals("unmark") || msg.equals("delete")) {
+            return "Hey! Please choose something to " + msg + " nyaan~!";
+        } else {
+            return "Chi-san doesn't understand that nyaan~!";
         }
     }
 
