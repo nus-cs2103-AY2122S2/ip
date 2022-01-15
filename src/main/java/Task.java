@@ -23,8 +23,8 @@ public class Task {
         return (isDone ? "[X]" : "[ ]"); // mark done task with X
     }
 
-    public String getTask() {
-        return task;
+    @Override
+    public String toString() {
+        return getStatus() + " " + task;
     }
-
 }
