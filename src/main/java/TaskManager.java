@@ -1,3 +1,5 @@
+import Tasks.Task;
+
 import java.util.ArrayList;
 
 /**
@@ -13,6 +15,14 @@ public class TaskManager {
      */
     public void addTask(Task task) {
         tasks.add(task);
+    }
+
+    /**
+     * return the total number of tasks in the task manager list.
+     * @return total number of tasks in the task manager list.
+     */
+    public int getNumberOfTasks() {
+        return tasks.size();
     }
 
     /**

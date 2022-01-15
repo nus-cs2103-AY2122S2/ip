@@ -1,10 +1,12 @@
+package Tasks;
+
 /**
  * This class represents a task and all its attributes like its name or whether it is completed.
  */
 
 public class Task {
-    private String name;
-    private boolean completed = false;
+    protected String name;
+    protected boolean completed = false;
 
     /**
      * Construct a task.

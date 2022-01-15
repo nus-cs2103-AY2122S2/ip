@@ -1,3 +1,7 @@
+import Tasks.Deadline;
+import Tasks.Event;
+import Tasks.Task;
+
 import java.util.Scanner;
 
 /**
@@ -26,9 +30,26 @@ public class Chat {
                 int indexOfTask = Integer.parseInt(input.substring(7));
                 System.out.println("OK, I've marked this task as not done yet:");
                 System.out.println(taskManager.removeCompletedStatusOfTask(indexOfTask));
-            } else {
-                taskManager.addTask(new Task(input));
-                System.out.println("added: " + input);
+            } else if (command.equals("todo")) {
+                Task task = new Task(input.substring(5));
+                taskManager.addTask(task);
+                System.out.println("Got it. I've added this task:");
+                System.out.println("  " + task);
+                System.out.println("Now you have " + taskManager.getNumberOfTasks() + " tasks in the list.");
+            } else if (command.equals("event")) {
+                int indexOfStartDate = input.indexOf(" /") + 5;
+                Event task = new Event(input.substring(6, input.indexOf(" /")), input.substring(indexOfStartDate));
+                taskManager.addTask(task);
+                System.out.println("Got it. I've added this task:");
+                System.out.println("  " + task);
+                System.out.println("Now you have " + taskManager.getNumberOfTasks() + " tasks in the list.");
+            } else if (command.equals("deadline")) {
+                int indexOfStartDate = input.indexOf(" /") + 5;
+                Deadline task = new Deadline(input.substring(9, input.indexOf(" /")), input.substring(indexOfStartDate));
+                taskManager.addTask(task);
+                System.out.println("Got it. I've added this task:");
+                System.out.println("  " + task);
+                System.out.println("Now you have " + taskManager.getNumberOfTasks() + " tasks in the list.");
             }
             //get next command
             input = scanner.nextLine();
