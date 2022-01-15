@@ -7,6 +7,7 @@ public class Duke {
     private static List<Task> messages = new ArrayList<>();
 
     public static void respondToMsg(String msg) throws DukeException {
+        // Obtain 1st word
         String[] command = msg.trim().split(" ");
         if (command.length == 1) {
             if (command[0].equals("list")) {
@@ -19,8 +20,10 @@ public class Duke {
                 }
                 return;
             }
-            throw new DukeException(msg);
+            // Unknown message, or command lacks task
+            throw new DukeException(msg.trim());
         } else {
+            // Check for keywords
             switch(command[0].toLowerCase()) {
                 case "mark":
                     // Retrieve the task from the list
@@ -60,6 +63,7 @@ public class Duke {
                     System.out.printf("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n", newTask2,messages.size());
                     break;
                 default:
+                    // Some message which does not start with a keyword
                     throw new DukeException(msg);
             }
         }
@@ -80,10 +84,12 @@ public class Duke {
             // To handle special messages
             try {
                 respondToMsg(echo);
+                echo = userInput.nextLine();
             } catch (DukeException e) {
-
+                System.out.println(e);
+                echo = userInput.nextLine();
             }
-            echo = userInput.nextLine();
+            /*
             String[] command = echo.split(" ");
             if (command[0].equals("list")) {
                 System.out.println("Here are your list items nyan~:");
@@ -141,6 +147,7 @@ public class Duke {
                 messages.add(new Task(echo));
                 echo = userInput.nextLine();
             }
+             */
         }
         // Ending statement and close scanner
         System.out.println("Sayonara, see you next time nyan~");
