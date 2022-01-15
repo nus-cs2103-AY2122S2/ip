@@ -15,7 +15,16 @@ public class Task {
         return done;
     }
 
-    public void setDone(Boolean done) {
-        this.done = done;
+    public void markDone() {
+        this.done = true;
+    }
+
+    public void unmarkDone() {
+        this.done = false;
+    }
+
+    public String toString(){
+        String isDone=(done==true)?"X":" ";
+        return "["+isDone+"] " +getTitle();
     }
 }
