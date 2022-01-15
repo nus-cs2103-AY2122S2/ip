@@ -5,3 +5,29 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Welcome to Duke! 
+What can i do for you?
+
+added: week 2 topics
+Number of tasks: 1
+added: week 2 project /by this friday
+Number of tasks: 2
+added: lecture /at friday 2-4pm
+Number of tasks: 3
+1.[T][ ] week 2 topics
+2.[D][ ] week 2 project  (by: this friday)
+3.[E][ ] lecture  (at: friday 2-4pm)
+Marked as complete
+[T][x] week 2 topics
+Marked as complete
+[E][x] lecture  (at: friday 2-4pm)
+1.[T][x] week 2 topics
+2.[D][ ] week 2 project  (by: this friday)
+3.[E][x] lecture  (at: friday 2-4pm)
+Marked as incomplete
+[E][ ] lecture  (at: friday 2-4pm)
+1.[T][x] week 2 topics
+2.[D][ ] week 2 project  (by: this friday)
+3.[E][ ] lecture  (at: friday 2-4pm)
+Unrecognised Command
+Bye. Hope to see you again soon!
