@@ -1,4 +1,5 @@
 import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Console {
@@ -15,8 +16,14 @@ public class Console {
         System.out.println(logo);
     }
 
+    public static void printList(ArrayList<String> arr) {
+
+        for (int i = 0; i < arr.size(); i++) {
+            System.out.println(String.format("    %d. %s", i + 1, arr.get(i)));
+        }
+        System.out.println("    ____________________________________________________________");
+    }
     public static void println(String msg) {
-        //System.out.println("    ____________________________________________________________");
 
         String[] msgs = msg.split("\n");
 

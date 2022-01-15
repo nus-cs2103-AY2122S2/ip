@@ -1,8 +1,10 @@
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class Duke {
 
     public static String exitString = "bye";
+    public static ArrayList<String> inputArr = new ArrayList<>();
 
     public static void printWelcomeMsg() {
         Console.printLogo();
@@ -35,8 +37,13 @@ public class Duke {
                     Console.println("WRYYYYYYYYYYYY!");
                     break;
                 }
+                case "list": {
+                    Console.printList(inputArr);
+                    break;
+                }
                 default: {
-                    Console.println(input);
+                    inputArr.add(input);
+                    Console.println ("added: " + input);
                     break;
                 }
             }
