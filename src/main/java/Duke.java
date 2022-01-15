@@ -1,6 +1,8 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    static ArrayList<Task> allTasks = new ArrayList<Task>();
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -20,6 +22,7 @@ public class Duke {
         System.out.println(line);
 
         Scanner s = new Scanner(System.in);
+
         String input;
 
         while(true) {
@@ -29,11 +32,14 @@ public class Duke {
             if (input.equals("bye")){
                 break;
             }
+            else if (input.equals("list")){
+                list();
+            }
             else {
                 System.out.println("\n");
                 System.out.println(line);
-                Task t = new Task(input);
-                System.out.println(t.reply());
+                String response = addTask(input);
+                System.out.println(String.format("added: %s",response));
                 System.out.println(line);
             }
         }
@@ -41,7 +47,19 @@ public class Duke {
         System.out.println(line);
         System.out.println(bye);
         System.out.println(line);
+    }
 
+    public static String addTask(String s){
+        Task t = new Task(s);
+        allTasks.add(t);
+        return t.reply();
+    }
 
+    public static void list(){
+        int counter = 1;
+        for (Task t : allTasks) {
+            System.out.println(String.format("%d. %s",counter,t.reply()));
+            counter++;
+        }
     }
 }
