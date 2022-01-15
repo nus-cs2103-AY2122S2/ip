@@ -6,6 +6,9 @@ public class TaskList {
 
     public void add(Task task) {
         ls.add(task);
+        System.out.println("Got it. I've added this task: ");
+        System.out.println(task);
+        System.out.println("Now you have " + this.numOfTasks() + " tasks in the list.");
     }
 
     public Task get(int item) {
@@ -14,6 +17,13 @@ public class TaskList {
 
     public int numOfTasks() {
         return ls.size();
+    }
+
+    public void delete(int index) {
+        System.out.println("Noted. I've removed this task: ");
+        System.out.println(ls.get(index - 1));
+        ls.remove(index - 1);
+        System.out.println("Now you have " + this.numOfTasks() + " tasks in the list.");
     }
 
     @Override

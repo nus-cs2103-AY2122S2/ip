@@ -7,8 +7,13 @@ mark 2
 unmark 2
 mark 3
 list
+delete 2
+list
 dagagga
 todo
 event
 deadline
+delete
+mark
+unmark
 bye

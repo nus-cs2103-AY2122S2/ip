@@ -26,11 +26,34 @@ public class Duke {
                 } else if (command[0].equals("list")) {
                     System.out.println(taskList);
                 } else if (command[0].equals("mark")) {
-                    Task task = taskList.get(Integer.parseInt(command[1]));
-                    task.markAsDone();
+                    try {
+                        if (command.length < 2 || !isNumeric(command[1])) {
+                            throw new InvalidTaskNumberException(command[0]);
+                        }
+                        Task task = taskList.get(Integer.parseInt(command[1]));
+                        task.markAsDone();
+                    } catch (InvalidTaskNumberException e) {
+                        System.out.println(e.getMessage());
+                    }
                 } else if (command[0].equals("unmark")) {
-                    Task task = taskList.get(Integer.parseInt(command[1]));
-                    task.markAsUndone();
+                    try {
+                        if (command.length < 2 || !isNumeric(command[1])) {
+                            throw new InvalidTaskNumberException(command[0]);
+                        }
+                        Task task = taskList.get(Integer.parseInt(command[1]));
+                        task.markAsUndone();
+                    } catch (InvalidTaskNumberException e) {
+                        System.out.println(e.getMessage());
+                    }
+                } else if (command[0].equals("delete")) {
+                    try {
+                        if (command.length < 2 || !isNumeric(command[1])) {
+                            throw new InvalidTaskNumberException(command[0]);
+                        }
+                        taskList.delete(Integer.parseInt(command[1]));
+                    } catch (InvalidTaskNumberException e) {
+                        System.out.println(e.getMessage());
+                    }
                 } else if (command[0].equals("todo") || command[0].equals("deadline") || command[0].equals("event")) {
                     try {
                         addTask(taskList, command);
@@ -58,9 +81,6 @@ public class Duke {
                 case "todo":
                     newTask = new ToDo(command[1]);
                     taskList.add(newTask);
-                    System.out.println("Got it. I've added this task: ");
-                    System.out.println(newTask);
-                    System.out.println("Now you have " + taskList.numOfTasks() + " tasks in the list.");
                     break;
 
                 case "deadline":
@@ -71,9 +91,6 @@ public class Duke {
                         newTask = new Deadline(substring[0], substring[1]);
                     }
                     taskList.add(newTask);
-                    System.out.println("Got it. I've added this task: ");
-                    System.out.println(newTask);
-                    System.out.println("Now you have " + taskList.numOfTasks() + " tasks in the list.");
                     break;
 
                 case "event":
@@ -83,12 +100,24 @@ public class Duke {
                     } else {
                         newTask = new Event(substring[0], substring[1]);
                     }
-
                     taskList.add(newTask);
-                    System.out.println("Got it. I've added this task: ");
-                    System.out.println(newTask);
-                    System.out.println("Now you have " + taskList.numOfTasks() + " tasks in the list.");
             }
+        }
+    }
+
+    public static boolean isNumeric(String string) {
+
+        int intValue;
+
+        if(string == null || string.equals("")) {
+            return false;
+        }
+
+        try {
+            intValue = Integer.parseInt(string);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
     }
 }
