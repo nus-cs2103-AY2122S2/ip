@@ -111,11 +111,17 @@ public class Duke {
 
     private void Terminate() {
         String exitText = "Bye. This city needs me. na na na na na na BATMAN\n" +
-                            "      ▄   ▄\n" +
-                            " ▄█▄  █▀█▀█  ▄█▄\n" +
-                            " ▀▀████▄█▄████▀▀\n" +
-                            "      ▀█▀█▀\n";
-        System.out.println(line + exitText + line);
+                            "          _,     _   _     ,_\n" +
+                "      .-'` /     \\'-'/     \\ `'-.\n" +
+                "     /    |      |   |      |    \\\n" +
+                "    ;      \\_  _/     \\_  _/      ;\n" +
+                "   |         ``         ``         |\n" +
+                "   |                               |\n" +
+                "    ;    .-.   .-.   .-.   .-.    ;\n" +
+                "     \\  (   '.'   \\ /   '.'   )  /\n" +
+                "      '-.;         V         ;.-'\n" +
+                "          `                 `\n";
+        System.out.print(line + exitText + line);
         System.exit(0);
     }
 
