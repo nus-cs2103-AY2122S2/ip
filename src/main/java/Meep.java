@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Meep {
@@ -6,8 +8,7 @@ public class Meep {
         String userInput = "In", outputMsg = "Out";
         Scanner sc = new Scanner(System.in);
 
-        String[] tasks = new String[100];
-        int taskIndex = 0;
+        List<Task> taskList = new ArrayList<Task>();
 
         while (true) {
             System.out.print("You: ");
@@ -17,13 +18,14 @@ public class Meep {
                 break;
             } else if (userInput.equals("list")) {
                 System.out.println("Meep: ");
-                for (int i = 0; i < taskIndex; i++) {
-                    System.out.println("     " + i + ".  " + tasks[i]);
+                int i = 0;
+                for (Task task : taskList) {
+                    System.out.println("     " + i + ".  " + task.getTitle());
+                    i++;
                 }
             } else {
                 outputMsg = userInput;
-                tasks[taskIndex] = userInput;
-                taskIndex++;
+                taskList.add(new Task(userInput));
                 System.out.println("Meep: added: " + outputMsg);
             }
         }
