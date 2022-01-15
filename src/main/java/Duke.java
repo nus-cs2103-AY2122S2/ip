@@ -17,7 +17,8 @@ public class Duke {
         echo = userInput.nextLine();
         // Check if bye has been said
         while (!echo.toLowerCase().equals("bye")) {
-            if (echo.toLowerCase().equals("list")) {
+            String[] command = echo.split(" ");
+            if (command[0].equals("list")) {
                 System.out.println("Here are your list items nyan~:");
                 int i = 1;
                 for (Task t: messages) {
@@ -27,35 +28,46 @@ public class Duke {
                 }
                 echo = userInput.nextLine();
                 continue;
-            } else if (echo.split(" ")[0].toLowerCase().equals("mark") && echo.split(" ").length == 2) {
+            } else if (command[0].equals("mark")) {
                 // Retrieve the task from the list
-                Task doneTask = messages.get(Integer.parseInt(echo.split(" ")[1]) - 1);
+                Task doneTask = messages.get(Integer.parseInt(command[1]) - 1);
                 // Mark as done
                 doneTask.markAsDone();
                 // Print completion message
-                System.out.printf("Great job nyan~!\n[%s] %s\n",doneTask.getStatusIcon(), doneTask);
+                System.out.printf("Great job nyan~!\n%s\n",doneTask);
                 echo = userInput.nextLine();
                 continue;
-            } else if (echo.split(" ")[0].toLowerCase().equals("unmark") && echo.split(" ").length == 2) {
-                Task doneTask = messages.get(Integer.parseInt(echo.split(" ")[1]) - 1);
+            } else if (command[0].equals("unmark")) {
+                Task doneTask = messages.get(Integer.parseInt(command[1]) - 1);
                 doneTask.markAsUndone();
                 // Print undo message
-                System.out.printf("Let's get it done next time nyan~!\n[%s] %s\n",doneTask.getStatusIcon(), doneTask);
+                System.out.printf("Let's get it done next time nyan~!\n%s\n",doneTask);
                 echo = userInput.nextLine();
                 continue;
-            } else if (echo.split(" ")[0].toLowerCase().equals("todo")) {
+            } else if (command[0].equals("todo")) {
                 Task newTask = new Todo(echo.substring(4).trim());
                 messages.add(newTask);
-                System.out.printf("Ok! Chi-san has added this task:\n%s\nYou have %d tasks nyan~!", newTask,messages.size());
+                System.out.printf("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n", newTask,messages.size());
                 echo = userInput.nextLine();
-            } else if (echo.split(" ")[0].toLowerCase().equals("deadline")) {
-                //Task newTask = new Deadline(echo.substring(8).split("/by")[0].trim(), )
-            } else if (echo.split(" ")[0].toLowerCase().equals("event"))
-            // Echo message sent by user
-            System.out.println(echo);
-            // Store message
-            messages.add(new Task(echo));
-            echo = userInput.nextLine();
+            } else if (command[0].equals("deadline")) {
+                String[] content = echo.substring(8).split("/by");
+                Task newTask = new Deadline(content[0].trim(), content[1].trim());
+                messages.add(newTask);
+                System.out.printf("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n", newTask,messages.size());
+                echo = userInput.nextLine();
+            } else if (command[0].equals("event")) {
+                String[] content = echo.substring(5).split("/at");
+                Task newTask = new Event(content[0].trim(), content[1].trim());
+                messages.add(newTask);
+                System.out.printf("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n", newTask,messages.size());
+                echo = userInput.nextLine();
+            } else {
+                // Echo message sent by user
+                System.out.println(echo);
+                // Store message
+                messages.add(new Task(echo));
+                echo = userInput.nextLine();
+            }
         }
         // Ending statement and close scanner
         System.out.println("Sayonara, see you next time nyan~");
