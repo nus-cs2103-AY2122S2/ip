@@ -94,6 +94,12 @@ public class Duke {
                     System.out.print("Number of tasks: ");
                     System.out.println(list.getLength());
                     break;
+                case DELETE:
+                    indexOfList = Integer.parseInt(input);
+                    System.out.println("Noted. I've removed this task:");
+                    list.print(indexOfList);
+                    list.delete(indexOfList);
+                    System.out.println("Now you have " + Integer.toString(list.getLength()) + " tasks in the list.");
             }
 
             actionType = null;
@@ -129,6 +135,8 @@ public class Duke {
             return Command.TODO;
         } else if (command.equals("bye")) {
             return Command.BYE;
+        } else if (command.equals("delete")) {
+            return Command.DELETE;
         } else {
             throw new CommandNotFoundException("Unrecognised Command");
         }

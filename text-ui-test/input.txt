@@ -9,4 +9,5 @@ unmark 3
 list
 i like cats
 todo
+delete 3
 bye

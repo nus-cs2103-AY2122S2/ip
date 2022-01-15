@@ -50,4 +50,8 @@ public class TaskList {
     public int getLength() {
         return this.actions.size();
     }
+
+    public void delete(int i) {
+        actions.remove(i-1);
+    }
 }

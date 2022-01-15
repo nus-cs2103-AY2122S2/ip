@@ -5,5 +5,6 @@ public enum Command {
     MARK,
     UNMARK,
     BYE,
-    LIST
+    LIST,
+    DELETE
 }
