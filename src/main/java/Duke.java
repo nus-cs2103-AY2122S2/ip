@@ -23,6 +23,12 @@ public class Duke {
         System.out.println(listOfTasks);
     }
 
+    public static void deleteTask(int taskId) {
+        Task preview = tasks.get(taskId - 1);
+        tasks.remove(taskId - 1);
+        System.out.println("Otsukaresamadeshita! You have finally completed one task.\n" + preview);
+    }
+
     public static void markTask(int taskId, boolean mark) throws DukeException {
         Task toSet = tasks.get(taskId - 1);
         if (mark) {
@@ -38,6 +44,31 @@ public class Duke {
                 throw new DukeException("This task has yet to be done!");
             }
         }
+    }
+
+    public static void taskAction(String taskType, String index) throws DukeException, NumberFormatException {
+        try {
+            int taskId = Integer.parseInt(index);
+            if (!(taskId > 0 && taskId < (tasks.size() + 1))) {
+                throw new DukeException("Task cannot be found within the task list! Please fix your machigai!");
+            }
+
+            switch (taskType) {
+                case "delete":
+                    deleteTask(taskId);
+                    break;
+                case "unmark":
+                    markTask(taskId, false);
+                    break;
+                case "mark":
+                    markTask(taskId, true);
+                    break;
+            }
+
+        } catch (NumberFormatException e) {
+            throw new DukeException("Task ID has to be an integer!");
+        }
+
     }
 
     public static void main(String[] args) throws DukeException {
@@ -71,55 +102,43 @@ public class Duke {
             // multi command
             if (inputArray.length > 1) {
                 String taskType = inputArray[0].toLowerCase(Locale.ROOT);
-                StringBuilder taskDetails = new StringBuilder();
+                StringBuilder taskDetailsBuilder = new StringBuilder();
                 for (int i = 1; i < inputArray.length; i++) {
                     if (i != inputArray.length - 1) {
-                        taskDetails.append(inputArray[i]).append(" ");
+                        taskDetailsBuilder.append(inputArray[i]).append(" ");
                     } else {
-                        taskDetails.append(inputArray[i]);
+                        taskDetailsBuilder.append(inputArray[i]);
                     }
                 }
+                String taskDetails = taskDetailsBuilder.toString();
+
 
                 String description = "";
                 String date = "";
                 String dateTime = "";
 
-                if (taskDetails.toString().contains("/by")) {
-                    description = taskDetails.toString().split("/by", 2)[0];
-                    date = taskDetails.toString().split("/by", 2)[1];
-                } else if (taskDetails.toString().contains("/at")) {
-                    description = taskDetails.toString().split("/at", 2)[0];
-                    dateTime = taskDetails.toString().split("/at", 2)[1];
+                if (taskDetails.contains("/by")) {
+                    description = taskDetails.split("/by", 2)[0];
+                    date = taskDetails.split("/by", 2)[1];
+                } else if (taskDetails.contains("/at")) {
+                    description = taskDetails.split("/at", 2)[0];
+                    dateTime = taskDetails.split("/at", 2)[1];
                 }
 
                 switch (taskType) {
+
+                    case "delete":
+                        taskAction("delete", inputArray[1]);
+                        break;
                     case "unmark":
-                        try {
-                            int taskId = Integer.parseInt(inputArray[1]);
-                            if (taskId > 0 && taskId < (tasks.size() + 1)) {
-                                markTask(taskId, false);
-                            } else {
-                                throw new DukeException("Task cannot be found within the task list! Please fix your machigai!");
-                            }
-                        } catch (NumberFormatException e) {
-                            throw new DukeException("Task ID has to be an integer!");
-                        }
+                        taskAction("unmark", inputArray[1]);
                         break;
                     case "mark":
-                        try {
-                            int taskId = Integer.parseInt(inputArray[1]);
-                            if (taskId > 0 && taskId < (tasks.size() + 1)) {
-                                markTask(taskId, true);
-                            } else {
-                                throw new DukeException("Task cannot be found within the task list! Please fix your machigai!");
-                            }
-                        } catch (NumberFormatException e) {
-                            throw new DukeException("Task ID has to be an integer!");
-                        }
+                        taskAction("mark", inputArray[1]);
                         break;
                     case "todo":
-                        Task ToDo = new Todo(taskDetails.toString());
-                        if (taskDetails.toString().equals("")) {
+                        Task ToDo = new Todo(taskDetails);
+                        if (taskDetails.equals("")) {
                             throw new DukeException("Todo command is invalid!");
                         }
                         addTask(ToDo);
@@ -152,4 +171,5 @@ public class Duke {
     }
 
 }
+
 
