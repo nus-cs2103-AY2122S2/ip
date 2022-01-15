@@ -9,6 +9,10 @@ public class DeadlineTask extends Task {
     }
 
     public String toString() {
-        return "[D]" + super.toString() + String.format(" (%s: %s)", this.preposition, this.deadline);
+        String res = "[D]" + super.toString();
+        if (this.preposition != "" && this.deadline != "") {
+            res += String.format(" (%s: %s)",this.preposition, this.deadline);
+        }
+        return res;
     }
 }

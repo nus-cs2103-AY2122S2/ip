@@ -57,6 +57,10 @@ public class Duke {
                     }
                 }
                 String name = String.join(" ", nameArray);
+                if (name.equals("")) {
+                    System.out.println("Please add a description of your todo as it cannot be empty! *quack*");
+                    continue;
+                }
                 //Setting up deadline/ date
                 List<String> deadlineOrDateArray = new ArrayList<>();
                 while (st.hasMoreTokens()) {

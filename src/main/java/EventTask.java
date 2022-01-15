@@ -9,6 +9,10 @@ public class EventTask extends Task {
     }
 
     public String toString() {
-        return "[E]" + super.toString() + String.format(" (%s: %s)",this.preposition, this.time);
+        String res = "[E]" + super.toString();
+        if (this.preposition != "" && this.time != "") {
+            res += String.format(" (%s: %s)",this.preposition, this.time);
+        }
+        return res;
     }
 }
