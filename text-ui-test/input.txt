@@ -1,0 +1,10 @@
+todo eat
+todo sleep
+event party /at my house
+deadline cs2103t ip /by 20 Jan
+list
+mark 2
+unmark 2
+mark 3
+list
+bye

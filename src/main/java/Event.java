@@ -1,7 +1,10 @@
-public class Event extends Task{
+public class Event extends Task {
 
     protected String at;
 
+    public Event(String description) {
+        super(description);
+    }
     public Event(String description, String at) {
         super(description);
         this.at = at;
@@ -9,6 +12,10 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        if (at != null) {
+            return "[E]" + super.toString() + " (at: " + at + ")";
+        } else {
+            return "[E]" + super.toString();
+        }
     }
 }
