@@ -17,7 +17,7 @@ public class Duke {
         System.out.println("____________________________________________________________");
 
         while (true) {
-            String str = sc.nextLine();
+            String str = sc.nextLine().toLowerCase();
             System.out.println("____________________________________________________________");
             if (str.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
