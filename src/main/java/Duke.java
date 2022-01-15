@@ -22,7 +22,7 @@ public class Duke {
                 int i = 1;
                 for (Task t: messages) {
                     // Print task and its status
-                    System.out.printf("%d.[%s] %s\n",i ,t.getStatusIcon(), t);
+                    System.out.printf("%d. %s\n",i , t);
                     ++i;
                 }
                 echo = userInput.nextLine();
@@ -43,7 +43,14 @@ public class Duke {
                 System.out.printf("Let's get it done next time nyan~!\n[%s] %s\n",doneTask.getStatusIcon(), doneTask);
                 echo = userInput.nextLine();
                 continue;
-            }
+            } else if (echo.split(" ")[0].toLowerCase().equals("todo")) {
+                Task newTask = new Todo(echo.substring(4).trim());
+                messages.add(newTask);
+                System.out.printf("Ok! Chi-san has added this task:\n%s\nYou have %d tasks nyan~!", newTask,messages.size());
+                echo = userInput.nextLine();
+            } else if (echo.split(" ")[0].toLowerCase().equals("deadline")) {
+                //Task newTask = new Deadline(echo.substring(8).split("/by")[0].trim(), )
+            } else if (echo.split(" ")[0].toLowerCase().equals("event"))
             // Echo message sent by user
             System.out.println(echo);
             // Store message
