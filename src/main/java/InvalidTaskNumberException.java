@@ -1,2 +1,5 @@
-package PACKAGE_NAME;public class InvalidTaskNumberException {
+public class InvalidTaskNumberException extends DukeException{
+    InvalidTaskNumberException(String taskType) {
+        super("Please enter a valid task number to " + taskType);
+    }
 }
