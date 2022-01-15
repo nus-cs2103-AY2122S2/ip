@@ -7,12 +7,9 @@ public class Duke {
     private static List<Task> messages = new ArrayList<>();
 
     public static void respondToMsg(String msg) throws DukeException {
-        String[] command = msg.split(" ");
+        String[] command = msg.trim().split(" ");
         if (command.length == 1) {
-            throw new DukeException(msg);
-        } else {
-            switch(command[0]) {
-                case "list":
+            if (command[0].equals("list")) {
                 System.out.println("Here are your list items nyan~:");
                 int i = 1;
                 for (Task t: messages) {
@@ -20,6 +17,50 @@ public class Duke {
                     System.out.printf("%d. %s\n",i , t);
                     ++i;
                 }
+                return;
+            }
+            throw new DukeException(msg);
+        } else {
+            switch(command[0].toLowerCase()) {
+                case "mark":
+                    // Retrieve the task from the list
+                    Task doneTask = messages.get(Integer.parseInt(command[1]) - 1);
+                    // Mark as done
+                    doneTask.markAsDone();
+                    // Print completion message
+                    System.out.printf("Great job nyan~!\n%s\n",doneTask);
+                    break;
+                case "unmark":
+                    Task doneTask1 = messages.get(Integer.parseInt(command[1]) - 1);
+                    doneTask1.markAsUndone();
+                    // Print undo message
+                    System.out.printf("Let's get it done next time nyan~!\n%s\n",doneTask1);
+                    break;
+                case "todo":
+                    // Obtain the ToDo
+                    Task newTask = new Todo(msg.substring(4).trim());
+                    // Add task to list
+                    messages.add(newTask);
+                    System.out.printf("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n", newTask,messages.size());
+                    break;
+                case "deadline":
+                    // Separate task and deadline
+                    String[] content = msg.substring(8).split("/by");
+                    // Create new Deadline object
+                    Task newTask1 = new Deadline(content[0].trim(), content[1].trim());
+                    messages.add(newTask1);
+                    System.out.printf("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n", newTask1,messages.size());
+                    break;
+                case "event":
+                    // Separate task and timing
+                    String[] content1 = msg.substring(5).split("/at");
+                    // Create new Event object
+                    Task newTask2 = new Event(content1[0].trim(), content1[1].trim());
+                    messages.add(newTask2);
+                    System.out.printf("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n", newTask2,messages.size());
+                    break;
+                default:
+                    throw new DukeException(msg);
             }
         }
 
