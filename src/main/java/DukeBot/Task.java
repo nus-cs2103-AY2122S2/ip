@@ -2,11 +2,18 @@ package DukeBot;
 
 public class Task {
     private boolean completed;
+    private String type;
     private String description;
 
     public Task(String description) {
         this.description = description;
         this.completed = false;
+    }
+
+    // Overloaded constructor
+    public Task(String type, String description) {
+        this.type = type;
+        this.description = description;
     }
 
     public void toggleCompleted() {
@@ -27,10 +34,11 @@ public class Task {
 
     @Override
     public String toString() {
+
         if (this.completed) {
-            return "[X] " + description;
+            return "[" + type + "]" + "[X] " + description;
         } else {
-            return "[ ] " + description;
+            return "[" + type + "]" + "[ ] " + description;
         }
     }
 

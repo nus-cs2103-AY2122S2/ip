@@ -6,20 +6,21 @@ public class Duke {
 
         ArrayList<DukeBot.Task> arrayList = new ArrayList<>();
 
-        System.out.println("Hello! I'm Duke \nWhat can I do for you?");
+        System.out.println("Hello! I'm Duke \nWhat can I do for you?\n");
+
+        BufferedReader br = new BufferedReader(new
+                InputStreamReader(System.in));
+
+        PrintWriter pr = new PrintWriter(new BufferedWriter((new OutputStreamWriter((System.out)))));
+
 
         while (true) {
-            BufferedReader br = new BufferedReader(new
-                    InputStreamReader(System.in));
-
-            PrintWriter pr = new PrintWriter(new BufferedWriter((new OutputStreamWriter((System.out)))));
-
             String input = br.readLine();
             String userInput;
-            String parts[] = new String[0];
+            String parts[] = input.split(" ");
 
-            if (input.length() > 1) {
-                parts = input.split(" ");
+
+            if (parts.length > 1) {
                 userInput = parts[0];
             } else {
                 userInput = input;
@@ -56,6 +57,39 @@ public class Duke {
 
                 pr.print("OK, I've marked this task as not done yet:" + "\n");
                 pr.print(task.toString() + "\n");
+                pr.flush();
+            } else if (userInput.equals("todo")) {
+                String description = input.substring(5);
+                DukeBot.ToDo toDo = new DukeBot.ToDo(description);
+                arrayList.add(toDo);
+
+                pr.print("Got it. I've added this task:\n");
+                pr.print(toDo.toString() + "\n");
+                pr.print("Now you have " + arrayList.size() + " tasks in the list.\n");
+                pr.flush();
+            } else if (userInput.equals("deadline")) {
+                String description = input.substring(9);
+                String deadlineParts[] = description.split("/");
+                String byWhen = deadlineParts[1].substring(3);
+
+                DukeBot.Deadline deadline = new DukeBot.Deadline(deadlineParts[0], byWhen);
+                arrayList.add(deadline);
+
+                pr.print("Got it. I've added this task:\n");
+                pr.print(deadline.toString() + "\n");
+                pr.print("Now you have " + arrayList.size() + " tasks in the list.\n");
+                pr.flush();
+            } else if (userInput.equals("event")) {
+                String description = input.substring(6);
+                String deadlineParts[] = description.split("/");
+                String atWhichDay = deadlineParts[1].substring(3);
+
+                DukeBot.Event event = new DukeBot.Event(deadlineParts[0], atWhichDay);
+                arrayList.add(event);
+
+                pr.print("Got it. I've added this task:\n");
+                pr.print(event.toString() + "\n");
+                pr.print("Now you have " + arrayList.size() + " tasks in the list.\n");
                 pr.flush();
             } else {
                 DukeBot.Task task = new DukeBot.Task(input);
