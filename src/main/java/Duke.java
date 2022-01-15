@@ -33,12 +33,15 @@ public class Duke {
                 break;
             } else if (input.equals("list")) {
                 System.out.println(list.getTaskList());
+            } else if (input.contains("unmark")) {
+                int index = Integer.parseInt(input.replaceAll("unmark", "").strip());
+                // TODO Handle conversion exception
+                System.out.println(list.markTaskUndone(index));
             } else if (input.contains("mark")) {
                 int index = Integer.parseInt(input.replaceAll("mark", "").strip());
                 // TODO Handle conversion exception
                 System.out.println(list.markTaskDone(index));
-            }
-            else {
+            }  else {
                 System.out.println("\n");
                 System.out.println(line);
                 String response = list.addTask(input);

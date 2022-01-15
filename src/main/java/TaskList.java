@@ -15,6 +15,7 @@ public class TaskList {
     }
 
     public String markTaskDone(int index){
+        // TODO Handle index out of bounds exception
         Task t = list.get(index-1);
         t.markDone();
         String s = String.format("Nice! I've marked this task as done:\n");
@@ -23,6 +24,7 @@ public class TaskList {
     }
 
     public String markTaskUndone(int index){
+        // TODO Handle index out of bounds exception
         Task t = list.get(index-1);
         t.markunDone();
         String s = String.format("OK, I've marked this task as not done yet:\n");
@@ -32,7 +34,7 @@ public class TaskList {
 
     public String getTaskList(){
         int i = 1;
-        String s = "";
+        String s = "Here is your task list:\n";
         for (Task t: list) {
             s+=String.format("%d.%s\n",i,t.reply());
             i++;
