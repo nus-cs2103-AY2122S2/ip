@@ -3,11 +3,11 @@ import java.util.Scanner;
 
 public class Alfred {
     // constants
-    String GREETING = "Hello! My name is Alfred.\n"
+    private String GREETING = "Hello! My name is Alfred.\n"
             + "How can I be of service?\n";
-    String BYE = "Bye! Hope I was of service.\n";
-    int BREAK_CHAR_LENGTH = 100;;
-    String BREAK_LINE = this.line();
+    private String BYE = "Bye! Hope I was of service.\n";
+    private int BREAK_CHAR_LENGTH = 100;;
+    private String BREAK_LINE = this.line();
 
     // functional attributes
     ArrayList<String> entered;
@@ -16,7 +16,7 @@ public class Alfred {
         this.entered = new ArrayList<String>();
     }
 
-    public String line() {
+    private String line() {
         String out = "";
         for (int i = 0; i < this.BREAK_CHAR_LENGTH; i++) {
             out += "-";
@@ -25,7 +25,7 @@ public class Alfred {
         return out;
     }
 
-    public String greeting() {
+    private String greeting() {
         String out = "";
         out += this.BREAK_LINE;
         out += this.GREETING;
@@ -33,7 +33,7 @@ public class Alfred {
         return out;
     }
 
-    public String bye() {
+    private String bye() {
         String out = "";
         out += this.BREAK_LINE;
         out += this.BYE;
@@ -41,7 +41,7 @@ public class Alfred {
         return out;
     }
 
-    public String list_entered() {
+    private String list_entered() {
         String out = "";
         out += this.BREAK_LINE;
         for (int i = 1; i < this.entered.size() + 1; i++) {
@@ -51,7 +51,7 @@ public class Alfred {
         return out;
     }
 
-    public void read_input(String input) {
+    private void read_input(String input) {
         if (input.equals("list")) {
             System.out.println(this.list_entered());
         } else {
@@ -59,7 +59,7 @@ public class Alfred {
         }
     }
 
-    public String add_and_echo(String input) {
+    private String add_and_echo(String input) {
         this.entered.add(input);
         String out = "";
         out += this.BREAK_LINE;
@@ -68,7 +68,7 @@ public class Alfred {
         return out;
     }
 
-    public String echo(String input) {
+    private String echo(String input) {
         String out = "";
         out += this.BREAK_LINE;
         out += input + "\n";
