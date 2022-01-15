@@ -32,14 +32,12 @@ public class Meep {
                 System.out.println("Meep:");
                 Utils.printTaskList(taskList);
             } else if (userCommand.equals("mark")) {
-                String theRest = parsedInput[1];
-                Task task = taskList.get(Integer.parseInt(theRest) - 1);
+                Task task = taskList.get(Integer.parseInt(parsedInput[1]) - 1);
                 task.markDone();
                 System.out.println("Meep:Nice! I've marked this task as done:");
                 System.out.println("     " + task.toString());
             } else if (userCommand.equals("unmark")) {
-                String theRest = parsedInput[1];
-                Task task = taskList.get(Integer.parseInt(theRest) - 1);
+                Task task = taskList.get(Integer.parseInt(parsedInput[1]) - 1);
                 task.unmarkDone();
 
                 System.out.println("Meep:OK, I've marked this task as not done yet:");
@@ -64,6 +62,13 @@ public class Meep {
 
                 System.out.println("Meep:Got it. I've added this task:");
                 System.out.println(todo.toString());
+                System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+            }else if(userCommand.equals("delete")){
+                int index=Integer.parseInt(parsedInput[1]) - 1;
+                Task task = taskList.get(index);
+                taskList.remove(index);
+                System.out.println("Meep: Noted. I've removed this task:" );
+                System.out.println(task.toString());
                 System.out.println("Now you have " + taskList.size() + " tasks in the list.");
             }
         }
