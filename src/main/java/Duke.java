@@ -12,14 +12,20 @@ public class Duke {
         System.out.println("Hello I'm Duke!");
         System.out.println("What can I do for you?\n");
 
+        Todolist tlist = new Todolist();
         while (true) {
             Scanner scn = new Scanner(System.in);
             String input = scn.nextLine();
             if (input.equals(Handlers.BYE.label)) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
+            } else if (input.equals(Handlers.LIST.label)) {
+                System.out.println("Fetching all records...");
+                System.out.println(tlist.toString());
             } else {
-                System.out.println(input);
+                Todo todo = new Todo(input);
+                tlist.addTodo(todo);
+                System.out.println("Added: " + todo.toString() + "\n");
             }
         }
     }

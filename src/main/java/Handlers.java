@@ -1,5 +1,6 @@
 public enum Handlers {
-    BYE("bye");
+    BYE("bye"),
+    LIST("list");
 
     public final String label;
 
