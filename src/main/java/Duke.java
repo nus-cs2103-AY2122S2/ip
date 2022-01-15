@@ -48,17 +48,35 @@ public class Duke {
             int taskId = Integer.parseInt(inputWithoutCommand) - 1;
             tasks.get(taskId).mark(true);
             message = String.format("Charizard breathe out fire and burned the task.");
-            message += String.format("\n    %s", tasks.get(taskId).toString());
+            message += String.format("\n  %s", tasks.get(taskId).toString());
         } else if (input.startsWith("unmark")) {
             String inputWithoutCommand = input.replaceFirst("unmark", "").trim();
             int taskId = Integer.parseInt(inputWithoutCommand) - 1;
             tasks.get(taskId).mark(false);
             message = String.format("Oh no! The task was not burnt completely!");
-            message += String.format("\n    %s", tasks.get(taskId).toString());
-        } else {
-            Task newTask = new Task(input);
-            tasks.add(newTask);
-            message = String.format("Charizard is ready to burn task: %s", newTask.getDescription());
+            message += String.format("\n  %s", tasks.get(taskId).toString());
+        } else if (input.startsWith("todo")) {
+            String description = input.replaceFirst("todo", "").trim();
+            ToDo newTodo = new ToDo(description);
+            tasks.add(newTodo);
+            message = String.format("Charizard is ready to burn task:\n  %s\nThere are %d tasks in the burning list",
+                    newTodo.toString(), tasks.size());
+        } else if (input.startsWith("deadline")) {
+            String inputWithoutCommand = input.replaceFirst("todo", "").trim();
+            String description = inputWithoutCommand.split("/by")[0].trim();
+            String deadline = inputWithoutCommand.split("/by")[1].trim();
+            Deadline newDeadline = new Deadline(description, deadline);
+            tasks.add(newDeadline);
+            message = String.format("Charizard is ready to burn task:\n  %s\nThere are %d tasks in the burning list",
+                    newDeadline.toString(), tasks.size());
+        } else if (input.startsWith("event")) {
+            String inputWithoutCommand = input.replaceFirst("event", "").trim();
+            String description = inputWithoutCommand.split("/at")[0].trim();
+            String time = inputWithoutCommand.split("/at")[1].trim();
+            Event newEvent = new Event(description, time);
+            tasks.add(newEvent);
+            message = String.format("Charizard is ready to burn task:\n  %s\nThere are %d tasks in the burning list",
+                    newEvent.toString(), tasks.size());
         }
         show(message);
     }
