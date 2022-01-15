@@ -88,23 +88,55 @@ public class Duke {
                     }
                     break;
                 }
-                default: {
-                    taskArr.add(new Task(input));
-                    switch(dot) {
-                        case JJBA: {
-                            Console.println("added: " + input);
-                            break;
-                        }
-                        case DIO: {
-                            Console.println("MUDA MUDA MUDA MUDA MUDA! " + input);
-                        }
-                    }
+                case "todo": {
+                    Task newTask = new Todo(input);
+
+                    taskArr.add(newTask);
+                    printTaskAdd(newTask);
+                    break;
+                }
+                case "deadline": {
+
+                    String[] oargs = inputArg[1].split("/");
+                    Task newTask = new Deadline(oargs[0], oargs[1].substring(3));
+
+                    taskArr.add(newTask);
+                    printTaskAdd(newTask);
+                    break;
+                }
+                case "event": {
+
+                    String[] oargs = inputArg[1].split("/");
+                    Task newTask = new Event(oargs[0], oargs[1].substring(3));
+
+                    taskArr.add(newTask);
+                    printTaskAdd(newTask);
                     break;
                 }
             }
 
         } while (!exitProg);
 
+    }
+
+    public static void printTaskAdd(Task newTask) {
+        switch(dot) {
+            case JJBA: {
+                Console.print("Task added: \n" + newTask);
+                Console.println(String.format("You have %d task%s in your list.",
+                        taskArr.size(), (taskArr.size() == 1) ? "" : "s"));
+                break;
+            }
+            case DIO: {
+                Console.print("WRYYYYYYYYYYYY! \n" + newTask);
+                String muda = "";
+                for (int i = 0; i < taskArr.size(); i++) {
+                    muda += (i == taskArr.size() - 1) ? "MUDA!" : "MUDA ";
+                }
+                Console.println(muda);
+
+            }
+        }
     }
 
     public enum BOT {
