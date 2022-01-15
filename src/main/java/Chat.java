@@ -1,9 +1,11 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  * Main Chat interface class.
  */
 public class Chat {
+    ArrayList<String> list = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
 
     /**
@@ -13,9 +15,16 @@ public class Chat {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         String command = scanner.next();
         while (!command.equals("bye")) {
-            //perform action related to the command here
-            System.out.println(command);
-
+            if (command.equals("list")) {
+                //print out all items in list, numbered from 1
+                for (int i = 1; i < list.size() + 1; i++) {
+                    System.out.println(String.valueOf(i) + ". " + list.get(i - 1));
+                }
+            } else {
+                //perform action related to the command here
+                System.out.println("added: " + command);
+                list.add(command);
+            }
             //get next command
             command = scanner.next();
         }
