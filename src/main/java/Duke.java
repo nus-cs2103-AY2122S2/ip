@@ -20,6 +20,7 @@ public class Duke {
         while (true) {
             StringTokenizer st = new StringTokenizer(sc.nextLine());
             command = st.nextToken();
+            System.out.println("____________________________________________________________");
 
             // User terminates the program
             if (command.equals("bye"))  {
@@ -78,35 +79,59 @@ public class Duke {
                 System.out.println(String.format("  %s", newTask.toString()));
                 System.out.println(String.format("Now you have %d task%s in the list *quack*.", tasks.size(), tasks.size() == 1 ? "" : "s"));
             }
-            // User marks an item as done
-            else if (command.equals("mark")) {
+            // User marks or unmarks a task
+            else if (command.equals("mark") || command.equals("unmark") || command.equals("delete")) {
                 // Error handling if user does not input a second argument
                 if (!st.hasMoreTokens()) {
-                    System.out.println("Please input an item number when marking (eg. 'mark 1')");
+                    System.out.println("Please input an item number (eg. 'mark 1', 'unmark 1', or 'delete 1')");
                 } else {
-                    // Error handling if user inputs strings
+                    // Error handling
                     try {
                         int number = Integer.parseInt(st.nextToken());
-                        tasks.get(number - 1).mark();
-                        System.out.println(String.format("I've marked task %d as done! *quack*", number));
+                        //If the number given is out of range
+                        if (number < 0 || number >= tasks.size()) throw new DukeException("OutOfTaskRangeException");
+                        Task task = tasks.get(number - 1);
+                        String action = "";
+                        String additionalText = "";
+                        //Deleting a task
+                        if (command.equals("delete")) {
+                            tasks.remove(number - 1);
+                            action = "delet";
+                        }
+                        //Marking a task as done
+                        else if (command.equals("mark")) {
+                            task.mark();
+                            additionalText = " as done";
+                            action = command;
+                        }
+                        //Unmarking a task
+                        else if (command.equals("unmark")) {
+                            task.unmark();
+                            action = command;
+                        }
+                        System.out.println(String.format("I've %sed task %d%s! *quack*", action, number, additionalText));
+                        System.out.println(String.format("  %d. %s", number, task.toString()));
                     } catch (NumberFormatException e) {
-                        System.out.println("Please ONLY input integers when unmarking (eg. 'unmark 1')");
+                        System.out.println("Please ONLY input integers (eg. 'mark 1', 'unmark 1', 'delete 1')");
+                    } catch (DukeException e) {
+                        System.out.println("Please ONLY input integers that correspond to tasks (type 'list' to see your tasks)");
                     }
                 }
             }
-            // User marks an item as undone
-            else if (command.equals("unmark")) {
+            // User deletes a task
+            else if (command.equals("delete")) {
                 // Error handling if user does not input a second argument
                 if (!st.hasMoreTokens()) {
-                    System.out.println("Please input an item number when unmarking (eg. 'unmark 1')");
+                    System.out.println("Please input an item number when deleting (eg. 'delete 1')");
                 } else {
                     // Error handling if user inputs strings
                     try {
                         int number = Integer.parseInt(st.nextToken());
-                        tasks.get(number - 1).unmark();
-                        System.out.println(String.format("I've unmarked task %d as done! *quack*", number));
+                        Task removedTask = tasks.remove(number - 1);
+                        System.out.println(String.format("I've deleted task %d! *quack*", number));
+                        System.out.println(String.format("  %s", removedTask.toString()));
                     } catch (Exception e) {
-                        System.out.println("Please ONLY input integers when unmarking (eg. 'unmark 1')");
+                        System.out.println("Please ONLY input integers when deleting (eg. 'delete 1')");
                     }
                 }
             }
@@ -114,11 +139,12 @@ public class Duke {
             else if (command.equals("help")) {
                 System.out.println("These are the commands you can use *quack*:");
                 System.out.println("  'list' to list out all your tasks");
-                System.out.println("  'todo <name>' to add a todo task");
-                System.out.println("  'deadline /<preposition> <name>' to add a task with a deadline");
-                System.out.println("  'event /<preposition> <name>' to add an event with a date");
+                System.out.println("  'todo <description>' to add a todo task");
+                System.out.println("  'deadline /<preposition> <description>' to add a task with a deadline");
+                System.out.println("  'event /<preposition> <description>' to add an event with a date");
                 System.out.println("  'mark <task number>' to mark a task as done");
                 System.out.println("  'unmark <task number>' to unmark a task as done");
+                System.out.println("  'delete <task number>' to delete a task");
                 System.out.println("  'bye' to close your Duck app");
                 System.out.println("*quack*");
             }
@@ -126,6 +152,7 @@ public class Duke {
             else {
                 System.out.println(String.format("That is not a valid command *quack*\nType 'help' to see a list of valid commands"));
             }
+            System.out.println("____________________________________________________________");
         }
     }
 }
