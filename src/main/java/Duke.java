@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -11,14 +12,27 @@ public class Duke {
         System.out.println(generateIntro());
         // Starting input loop
         Scanner sc = new Scanner(System.in);
+        ArrayList<String> toDoList = new ArrayList<>();
         boolean done = false;
         while(!done) {
             String input = sc.nextLine();
             if (input.equals("quit") || input.equals("exit")) {
                 done = true;
                 System.out.println(generateGoodbye());
-            } else {
-                System.out.println(generateResponse(input));
+            } else if (input.equals("list")) { // List
+                String listOutput = "";
+                for (int i = 0; i < toDoList.size(); i++) {
+                    if (i != 0) {
+                        listOutput += "\n" + (i + 1) + ". " + toDoList.get(i);
+                    } else {
+                        listOutput += (i + 1) + ". " + toDoList.get(i);
+                    }
+                }
+                System.out.println(generateResponse(listOutput));
+            } else { // Add to list
+                toDoList.add(input);
+                String message = "added " + input;
+                System.out.println(generateResponse(message));
             }
         }
     }
