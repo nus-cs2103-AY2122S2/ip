@@ -1,10 +1,12 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected static int totalTasks = 0;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        totalTasks++;
     }
 
     public String getStatusIcon() {
@@ -17,6 +19,10 @@ public class Task {
 
     public void unmarkItem() {
         this.isDone = false;
+    }
+
+    public String printNoOfTasks() {
+        return "Now you have " + totalTasks + " tasks in the list.";
     }
 
     @Override

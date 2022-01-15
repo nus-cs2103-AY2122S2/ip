@@ -36,6 +36,10 @@ public class Duke {
 
     private void Print(String text) {
         StringBuilder sb = new StringBuilder();
+        Task t;
+        int itemIndex;
+        String description;
+        String details;
         sb.append(line);
         String[] command = text.split(" ", 2);
         switch(command[0]) {
@@ -44,24 +48,40 @@ public class Duke {
                     sb.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
                 }
                 break;
-            case "mark": {
-                int itemIndex = Integer.parseInt(command[1]) - 1;
+            case "mark":
+                itemIndex = Integer.parseInt(command[1]) - 1;
                 tasks.get(itemIndex).markItem();
                 sb.append("Alfred, mark it as done!\n  ").append(tasks.get(itemIndex).toString()).append("\n");
                 break;
-            }
             case "unmark":
-                int itemIndex = Integer.parseInt(command[1]) - 1;
+                itemIndex = Integer.parseInt(command[1]) - 1;
                 tasks.get(itemIndex).unmarkItem();
                 sb.append("Make up your mind. Alfred, unmark it!\n  ").append(tasks.get(itemIndex).toString()).append("\n");
                 break;
-            case "bye":
-                sb.append(text).append("\n");
+            case "todo":
+                description = command[1];
+                t = new Todo(description);
+                tasks.add(t);
+                sb.append("Got it. Task added:\n  ").append(t).append("\n").append(t.printNoOfTasks()).append("\n");
+                break;
+            case "deadline":
+                description = command[1].split("/")[0];
+                details = command[1].split("/by")[1];
+                t = new Deadline(description, details);
+                tasks.add(t);
+                sb.append("Got it. Task added:\n  ").append(t).append("\n").append(t.printNoOfTasks()).append("\n");
+                break;
+            case "event":
+                description = command[1].split("/")[0];
+                details = command[1].split("/at")[1];
+                t = new Event(description, details);
+                tasks.add(t);
+                sb.append("Got it. Task added:\n  ").append(t).append("\n").append(t.printNoOfTasks()).append("\n");
                 break;
             default:
-                Task t = new Task(text);
+                t = new Task(text);
                 tasks.add(t);
-                sb.append("added: ").append(t.description).append("\n");
+                sb.append("added: ").append(t.description).append("\n").append(t.printNoOfTasks()).append("\n");
                 break;
         }
         sb.append(line);
