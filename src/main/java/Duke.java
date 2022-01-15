@@ -41,14 +41,31 @@ public class Duke {
                 toUnmark.markAsNotDone();
                 printMsg("Oops, I've marked this task as not done yet:\n" + toUnmark);
                 break;
+            case "todo":
+                ToDo newTD = new ToDo(command.substring(command.indexOf("todo") + 5));
+                taskList.add(newTD);
+                printAddedTask(newTD);
+                break;
+            case "deadline":
+                // Extract description and deadline and pass to constructor
+                Deadline newD = new Deadline(command.substring(command.indexOf("deadline") + 9, command.indexOf("/by") - 1)
+                    , command.substring(command.indexOf("/by") + 4));
+                taskList.add(newD);
+                printAddedTask(newD);
+                break;
+            case "event":
+                Deadline newE = new Deadline(command.substring(command.indexOf("event") + 6, command.indexOf("/at") - 1)
+                        , command.substring(command.indexOf("/at") + 4));
+                taskList.add(newE);
+                printAddedTask(newE);
+                break;
             default:
-                taskList.add(new Task(command));
-                printMsg("added: " + command);
+                printMsg("Sorry, I am not programmed to do this yet :(");
         }
     }
 
     /**
-     * Format and print the response to the console.
+     * Format and print general response
      */
     public static void printMsg(String msg) {
         System.out.println("-------------------------------------------------\n"
@@ -57,11 +74,22 @@ public class Duke {
     }
 
     /**
+     * Format response to request to add task
+     */
+    public static void printAddedTask(Task task) {
+        System.out.println("-------------------------------------------------\n"
+                + "Got it. I've added this task:\n"
+                + String.format("    %s\n", task.toString())
+                + String.format("Now you have %s task(s) in the list.\n", taskList.size())
+                + "-------------------------------------------------");
+    }
+
+    /**
      * Print all items in the list
      */
     public static void printList() {
         int i = 1;
-        String result = "";
+        String result = "Here are the tasks in your list:\n";
         for (Task task : taskList) {
             if (i == taskList.size()) {
                 result = result + i + ". " + task;
