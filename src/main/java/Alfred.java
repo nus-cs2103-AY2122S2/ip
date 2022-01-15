@@ -2,18 +2,18 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Alfred {
-    // constants
-    private String GREETING = "Hello! My name is Alfred.\n"
-            + "How can I be of service?\n";
-    private String BYE = "Bye! Hope I was of service.\n";
-    private int BREAK_CHAR_LENGTH = 100;;
+    // class constants
+    private static String GREETING = "Hello! My name is Alfred.\n"
+            + "How can I be of service?";
+    private static String BYE = "Bye! Hope I was of service.";
+    private static int BREAK_CHAR_LENGTH = 100;;
     private String BREAK_LINE = this.line();
 
     // functional attributes
-    ArrayList<String> entered;
+    ArrayList<Task> task_list;
 
     Alfred() {
-        this.entered = new ArrayList<String>();
+        this.task_list = new ArrayList<Task>();
     }
 
     private String line() {
@@ -25,67 +25,91 @@ public class Alfred {
         return out;
     }
 
-    private String greeting() {
+    private void sandwich_and_print(String text) {
         String out = "";
         out += this.BREAK_LINE;
-        out += this.GREETING;
+        out += text + "\n";
         out += this.BREAK_LINE;
-        return out;
+        System.out.println(out);
     }
 
-    private String bye() {
-        String out = "";
-        out += this.BREAK_LINE;
-        out += this.BYE;
-        out += this.BREAK_LINE;
-        return out;
+    private void greeting() {
+        this.sandwich_and_print(this.GREETING);
     }
 
-    private String list_entered() {
+    private void bye() {
+        this.sandwich_and_print(this.BYE);
+    }
+
+    private void add_task(String description) {
+        this.task_list.add(new Task(description));
+        String text = "added: " + description;
+        this.sandwich_and_print(text);
+    }
+
+    private void list_tasks() {
         String out = "";
         out += this.BREAK_LINE;
-        for (int i = 1; i < this.entered.size() + 1; i++) {
-            out += i + ". " + this.entered.get(i - 1).toString() + "\n";
+        out += "Sir, here are the things you need to do:\n";
+        for (int i = 1; i < this.task_list.size() + 1; i++) {
+            out += i + ". " + this.task_list.get(i - 1).toString() + "\n";
         }
         out += this.BREAK_LINE;
-        return out;
+        System.out.println(out);
+    }
+
+    private void mark_task(int task_id) {
+        // update data state
+        this.task_list.get(task_id).mark_complete();
+
+        // return representation
+        String text = "Good job sir. I've marked this as complete.\n";
+        text += this.task_list.get(task_id).toString();
+        this.sandwich_and_print(text);
+    }
+
+    private void unmark_task(int task_id) {
+        // update data state
+        this.task_list.get(task_id).mark_incomplete();
+
+        // return representation
+        String text = "I see, no worries sir. I've marked this as to-be-done.\n";
+        text += this.task_list.get(task_id).toString();
+        this.sandwich_and_print(text);
     }
 
     private void read_input(String input) {
         if (input.equals("list")) {
-            System.out.println(this.list_entered());
+            this.list_tasks();
+        } else if (input.startsWith("mark")) {
+            int task_id = Integer.valueOf(input.split(" ")[1]) - 1;
+            this.mark_task(task_id);
+        } else if (input.startsWith("unmark")) {
+            int task_id = Integer.valueOf(input.split(" ")[1]) - 1;
+            this.unmark_task(task_id);
         } else {
-            System.out.println(this.add_and_echo(input));
+            this.add_task(input);
         }
     }
 
-    private String add_and_echo(String input) {
-        this.entered.add(input);
-        String out = "";
-        out += this.BREAK_LINE;
-        out += "added: " + input + "\n";
-        out += this.BREAK_LINE;
-        return out;
-    }
-
-    private String echo(String input) {
-        String out = "";
-        out += this.BREAK_LINE;
-        out += input + "\n";
-        out += this.BREAK_LINE;
-        return out;
-    }
 
     public static void main(String[] args) {
+        // initialize
         Scanner sc = new Scanner(System.in);
         Alfred bot = new Alfred();
-        System.out.println(bot.greeting());
+
+        // greet
+        bot.greeting();
+
+        // input
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             bot.read_input(input);
             input = sc.nextLine();
         }
-        System.out.println(bot.bye());
+
+        // close
+        bot.bye();
 
     }
 }
