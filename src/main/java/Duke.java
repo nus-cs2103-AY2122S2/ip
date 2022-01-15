@@ -135,9 +135,21 @@ public class Duke {
                     }
                 }
             }
+            // Help command
+            else if (command.equals("help")) {
+                System.out.println("These are the commands you can use *quack*:");
+                System.out.println("  'list' to list out all your tasks");
+                System.out.println("  'todo <name>' to add a todo task");
+                System.out.println("  'deadline /<preposition> <name>' to add a task with a deadline");
+                System.out.println("  'event /<preposition> <name>' to add an event with a date");
+                System.out.println("  'mark <task number>' to mark a task as done");
+                System.out.println("  'unmark <task number>' to unmark a task as done");
+                System.out.println("  'bye' to close your Duck app");
+                System.out.println("*quack*");
+            }
             // User adds items to the list
             else {
-                System.out.println(String.format("That is not a valid command"));
+                System.out.println(String.format("That is not a valid command *quack*\nType 'help' to see a list of valid commands"));
             }
         }
     }
