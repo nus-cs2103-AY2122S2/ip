@@ -48,6 +48,12 @@ public class Duke {
                     printMsg(d.toString());
                 }
                 break;
+            case "delete":
+                try{
+                    delete(commandWords);
+                } catch (DukeException d) {
+                    printMsg(d.toString());
+                }
             case "todo":
             case "deadline":
             case "event":
@@ -124,6 +130,20 @@ public class Duke {
     }
 
     /**
+     * Delete task from the list
+     */
+    public static void delete(String[] commandWords) throws DukeException {
+        if (commandWords.length != 2 || isInt(commandWords[1]) == -1 || isInt(commandWords[1]) > taskList.size()) {
+            throw new DukeException("Invalid arguments for deletion. Please check again!");
+        }
+        Task toDelete = taskList.get(Integer.parseInt(commandWords[1]) - 1);
+        taskList.remove(toDelete);
+        printMsg(" Noted. I've removed this task: \n"
+                + String.format("    %s\n", toDelete)
+                + String.format("Now you have %s task(s) in the list.", taskList.size()));
+    }
+
+    /**
      * Checking whether the input string is integer, if yes, return it, else return -1
      */
     public static int isInt(String str) {
@@ -162,7 +182,7 @@ public class Duke {
      */
     public static void printList() {
         int i = 1;
-        String result = "Here are the tasks in your list:\n";
+        String result = "Here are the task(s) in your list:\n";
         for (Task task : taskList) {
             if (i == taskList.size()) {
                 result = result + i + "." + task;
