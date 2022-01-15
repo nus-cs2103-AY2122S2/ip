@@ -60,6 +60,15 @@ public class Duke {
         line();
     }
 
+    public static void list() {
+        line();
+        System.out.println("     Here are the tasks in your device:");
+        for (int i = 0; i < taskArr.size(); i++) {
+            System.out.println("     " + (i + 1) + "." + taskArr.get(i).toString());
+        }
+        line();
+    }
+
     public static void main(String[] args) {
         line();
         System.out.println("Tell me... have you seen a RED imposter among us?");
@@ -90,12 +99,7 @@ public class Duke {
                     line();
                     break;
                 } else if(input.equalsIgnoreCase("list")) {
-                    line();
-                    System.out.println("     Here are the tasks in your device:");
-                    for (int i = 0; i < taskArr.size(); i++) {
-                        System.out.println("     " + (i + 1) + "." + taskArr.get(i).toString());
-                    }
-                    line();
+                    list();
                 } else if(firstWord.equalsIgnoreCase("mark")) {
                     int listIndex = Integer.parseInt(strs[1]); // retrieve the index after mark/unmark
                     mark(listIndex);
