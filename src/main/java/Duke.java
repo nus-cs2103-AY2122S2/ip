@@ -13,6 +13,9 @@ public class Duke {
     }
 
     public static void listTasks() {
+        if (tasks.size() == 0) {
+            System.out.println("Empty much!");
+        }
         StringBuilder listOfTasks = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             listOfTasks.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
@@ -20,7 +23,7 @@ public class Duke {
         System.out.println(listOfTasks);
     }
 
-    public static void markTask(int taskId, boolean mark) {
+    public static void markTask(int taskId, boolean mark) throws DukeException {
         Task toSet = tasks.get(taskId - 1);
         if (mark) {
             toSet.markIsDone();
@@ -32,12 +35,12 @@ public class Duke {
                 tasks.set(taskId - 1, toSet);
                 System.out.println("Daijoubu! I have unmarked this task for you!\n" + tasks.get(taskId - 1).toString());
             } else {
-                System.out.println("This task has yet to be done!");
+                throw new DukeException("This task has yet to be done!");
             }
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
 
 
         String logo = " ____        _\n"
@@ -61,7 +64,7 @@ public class Duke {
                 if (inputArray[0].equalsIgnoreCase("list")) {
                     listTasks();
                 } else {
-                    System.out.println("Please key in task using the correct string format!");
+                    throw new DukeException("Sumimasen! I don't recognize this command. Please try again!");
                 }
             }
 
@@ -96,12 +99,10 @@ public class Duke {
                             if (taskId > 0 && taskId < (tasks.size() + 1)) {
                                 markTask(taskId, false);
                             } else {
-                                System.out.println("Task cannot be found within the task list! Please fix your machigai!");
-                                break;
+                                throw new DukeException("Task cannot be found within the task list! Please fix your machigai!");
                             }
                         } catch (NumberFormatException e) {
-                            System.out.println("Task ID has to be an integer!");
-                            break;
+                            throw new DukeException("Task ID has to be an integer!");
                         }
                         break;
                     case "mark":
@@ -110,40 +111,35 @@ public class Duke {
                             if (taskId > 0 && taskId < (tasks.size() + 1)) {
                                 markTask(taskId, true);
                             } else {
-                                System.out.println("Task cannot be found within the task list! Please fix your machigai!");
-                                break;
+                                throw new DukeException("Task cannot be found within the task list! Please fix your machigai!");
                             }
                         } catch (NumberFormatException e) {
-                            System.out.println("Task ID needs to be an integer");
-                            break;
+                            throw new DukeException("Task ID has to be an integer!");
                         }
                         break;
                     case "todo":
                         Task ToDo = new Todo(taskDetails.toString());
                         if (taskDetails.toString().equals("")) {
-                            System.out.println("Todo command is invalid!");
+                            throw new DukeException("Todo command is invalid!");
                         }
                         addTask(ToDo);
                         break;
                     case "deadline":
                         Task Deadline = new Deadline(description, date);
                         if (description.equals("") || date.equals("")) {
-                            System.out.println("Deadline command is invalid!");
-                            break;
+                            throw new DukeException("Deadline command is invalid!");
                         }
                         addTask(Deadline);
                         break;
                     case "event":
                         Task Event = new Event(description, dateTime);
                         if (dateTime.equals("") || description.equals("")) {
-                            System.out.println("Event command is invalid");
-                            break;
+                            throw new DukeException("Event command is invalid");
                         }
                         addTask(Event);
                         break;
                     default:
-                        System.out.println("Please key in task using the correct string format!");
-                        break;
+                        throw new DukeException("Sumimasen! I don't recognize this command. Please try again!");
                 }
             }
             System.out.println(divider);
