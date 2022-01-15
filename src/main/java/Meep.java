@@ -15,7 +15,7 @@ public class Meep {
         while (true) {
             System.out.print("You: ");
             userInput = sc.nextLine();
-            String arr[] = userInput.split(" ", 2);
+            String[] arr = userInput.split(" ", 2);
             String userCommand = arr[0];
 
 
@@ -43,11 +43,34 @@ public class Meep {
 
                 System.out.println("Meep:  OK, I've marked this task as not done yet: ");
                 System.out.println("     " + task.toString());
+            } else if (userCommand.equals("deadline")) {
+                String[] output = arr[1].split("/", 2);
+                String[] newoutput = output[1].split(" ", 2);
+                Deadline deadline = new Deadline(output[0],newoutput[1]);
+                taskList.add(deadline);
 
+                System.out.println("Meep: Got it. I've added this task: ");
+                System.out.println(deadline.toString());
+                System.out.println("Now you have "+ taskList.size()+" tasks in the list.");
+            } else if (userCommand.equals("event")) {
+                String[] output = arr[1].split("/", 2);
+                String[] newoutput = output[1].split(" ", 2);
+                Event event = new Event(output[0],newoutput[1]);
+                taskList.add(event);
+
+                System.out.println("Meep: Got it. I've added this task: ");
+                System.out.println(event.toString());
+                System.out.println("Now you have "+ taskList.size()+" tasks in the list.");
+            } else if (userCommand.equals("todo")) {
+                outputMsg = arr[1];
+                ToDo todo = new ToDo(outputMsg);
+                taskList.add(todo);
+
+                System.out.println("Meep: Got it. I've added this task: ");
+                System.out.println(todo.toString());
+                System.out.println("Now you have "+ taskList.size()+" tasks in the list.");
             } else {
-                outputMsg = userInput;
-                taskList.add(new Task(outputMsg));
-                System.out.println("Meep: added: " + outputMsg);
+                System.out.println("Meep: else ");
             }
         }
         sc.close();
