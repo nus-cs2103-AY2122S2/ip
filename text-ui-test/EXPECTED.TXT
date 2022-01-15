@@ -86,3 +86,28 @@ Daijoubu! I have unmarked this task for you!
 
 ______________________________________
 
+Otsukaresamadeshita! You have finally completed one task.
+[T][ ] something
+
+______________________________________
+
+Otsukaresamadeshita! You have finally completed one task.
+[D][ ] test test  (by: Sunday)
+
+______________________________________
+
+Otsukaresamadeshita! You have finally completed one task.
+[E][ ] drink coffee  (at: Sunday 2-4pm)
+
+______________________________________
+
+Otsukaresamadeshita! You have finally completed one task.
+[T][ ] list
+
+______________________________________
+
+Empty much!
+
+
+______________________________________
+
