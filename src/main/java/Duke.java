@@ -45,38 +45,63 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         while(sc.hasNextLine()) {
-            String input = sc.nextLine();
-            String[] inputSplit = input.split(" "); //split input by space
-            String command = inputSplit[0];
+            try {
+                String input = sc.nextLine();
 
-            if(command.equals("bye")){
-                System.out.print(ending);
-                break;
+                if(input.length() == 0) {
+                    throw new BlankCommandException();
+                }
+                String[] inputSplit = input.split(" "); //split input by space
+                String command = inputSplit[0];
 
-            } else if (command.equals("list")) {
-                printList();
+                if (command.equals("bye")) {
+                    System.out.print(ending);
+                    break;
 
-            } else if (command.equals("todo")) {
-                String description = input.substring(5); // + 1 for the space
-                addToList(new Todo(description));
+                } else if (command.equals("list")) {
+                    printList();
 
-            } else if (command.equals("deadline")) {
-                String[] inputSlash = input.split("/");
-                String description = inputSlash[0].substring(9);
-                String time = inputSlash[1].substring(3);
-                addToList(new Deadline(description, time));
+                } else if (command.equals("todo")) {
+                    String description = input.substring(4);
 
-            } else if (command.equals("event")) {
-                String[] inputSlash = input.split("/");
-                String description = inputSlash[0].substring(6);
-                String time = inputSlash[1].substring(3);
-                addToList(new Event(description, time));
+                    if(description.length() == 0) {
+                        throw new IncompleteCommandException(command);
+                    }
 
-            } else if (command.equals("mark")) {
-                markTask(Integer.parseInt(inputSplit[1]));
+                    addToList(new Todo(description));
 
-            } else if (command.equals("unmark")) {
-                unMarkTask(Integer.parseInt(inputSplit[1]));
+                } else if (command.equals("deadline")) {
+                    String[] inputSlash = input.split("/");
+                    String description = inputSlash[0].substring(8);
+
+                    if(description.length() == 0) {
+                        throw new IncompleteCommandException(command);
+                    }
+
+                    String time = inputSlash[1].substring(3);
+                    addToList(new Deadline(description, time));
+
+                } else if (command.equals("event")) {
+                    String[] inputSlash = input.split("/");
+                    String description = inputSlash[0].substring(5);
+
+                    if(description.length() == 0) {
+                        throw new IncompleteCommandException(command);
+                    }
+
+                    String time = inputSlash[1].substring(3);
+                    addToList(new Event(description, time));
+
+                } else if (command.equals("mark")) {
+                    markTask(Integer.parseInt(inputSplit[1]));
+
+                } else if (command.equals("unmark")) {
+                    unMarkTask(Integer.parseInt(inputSplit[1]));
+                } else {
+                    throw new InvalidCommandException();
+                }
+            }  catch (IncompleteCommandException | InvalidCommandException  | BlankCommandException e) {
+                System.out.println(e.getMessage());
             }
         }
     }

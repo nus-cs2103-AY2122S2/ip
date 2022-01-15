@@ -29,6 +29,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + getDescription();
+        return "[" + getStatusIcon() + "] " + getDescription().substring(1); // start from 1 because 0 is a space
     }
 }
