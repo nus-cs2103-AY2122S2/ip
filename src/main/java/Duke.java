@@ -9,7 +9,7 @@ public class Duke {
     public static void main(String[] args) {
         // Initialize a scanner object
         Scanner userInput = new Scanner(System.in);
-        System.out.println("Hello master I am Chi \nHow may I serve you today nyan~?");
+        System.out.println("Hello master I am Chi\nHow may I serve you today nyan~?");
 
         // Stores the text input of user
         String echo;

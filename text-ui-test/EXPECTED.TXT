@@ -1,0 +1,32 @@
+Hello master I am Chi
+How may I serve you today nyan~?
+echo after me ah
+Here are your list items nyan~:
+1. [ ] echo after me ah
+Great job nyan~!
+[X] echo after me ah
+Let's get it done next time nyan~!
+[ ] echo after me ah
+Ok! Chi-san has added:
+[T][ ] wash dishes
+You have 2 tasks nyan~!
+Ok! Chi-san has added:
+[T][ ] buy textbooks
+You have 3 tasks nyan~!
+Ok! Chi-san has added:
+[D][ ] submit modreg (by: friday night)
+You have 4 tasks nyan~!
+Ok! Chi-san has added:
+[D][ ] apply internship (by: May 2022)
+You have 5 tasks nyan~!
+Ok! Chi-san has added:
+[D][ ]  (by: idk)
+You have 6 tasks nyan~!
+Ok! Chi-san has added:
+[E][ ] birthday part (at: sat 2-3pm)
+You have 7 tasks nyan~!
+Ok! Chi-san has added:
+[E][ ] 2103 lec (at: fri 2pm)
+You have 8 tasks nyan~!
+Great job nyan~!
+[X] echo after me ah
