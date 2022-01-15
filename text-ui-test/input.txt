@@ -1,2 +1,10 @@
-todo borrow book
+todo
+deadline
+event
+todo go jog
+deadline go do project /by Sunday
+event go run /at reservoir
+mark 1
+mark 3
+list
 bye

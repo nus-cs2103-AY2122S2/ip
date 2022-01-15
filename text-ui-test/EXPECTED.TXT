@@ -3,9 +3,42 @@ Tell me... have you seen a RED imposter among us?
 If you have seen this SUSSY imposter, please let me know immediately... otherwise how may I be of assistance?
 ____________________________________________________________
 ____________________________________________________________
+     ☹ todo is an incomplete command! Please enter another command.
+____________________________________________________________
+____________________________________________________________
+     ☹ deadline is an incomplete command! Please enter another command.
+____________________________________________________________
+____________________________________________________________
+     ☹ event is an incomplete command! Please enter another command.
+____________________________________________________________
+____________________________________________________________
      Remember to complete your task!
-       [T][ ] borrow book
+       [T][ ] go jog
      You currently have 1 task in your device.
+____________________________________________________________
+____________________________________________________________
+     This task is on a timer!
+       [D][ ] go do project (by: Sunday)
+     You currently have 2 tasks in your device.
+____________________________________________________________
+____________________________________________________________
+     Emergency meeting on this date!
+       [E][ ] go run (at: reservoir)
+     You currently have 3 tasks in your device.
+____________________________________________________________
+____________________________________________________________
+     Your progressive bar has increased! Keep going to stop the imposter!
+     [T][X] go jog
+____________________________________________________________
+____________________________________________________________
+     Your progressive bar has increased! Keep going to stop the imposter!
+     [E][X] go run (at: reservoir)
+____________________________________________________________
+____________________________________________________________
+     Here are the tasks in your device:
+     1.[T][X] go jog
+     2.[D][ ] go do project (by: Sunday)
+     3.[E][X] go run (at: reservoir)
 ____________________________________________________________
 ____________________________________________________________
 Better watch out for the imposter AMONG US!
