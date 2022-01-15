@@ -54,7 +54,7 @@ public class Duke {
                 printAddedTask(newD);
                 break;
             case "event":
-                Deadline newE = new Deadline(command.substring(command.indexOf("event") + 6, command.indexOf("/at") - 1)
+                Event newE = new Event(command.substring(command.indexOf("event") + 6, command.indexOf("/at") - 1)
                         , command.substring(command.indexOf("/at") + 4));
                 taskList.add(newE);
                 printAddedTask(newE);
@@ -92,9 +92,9 @@ public class Duke {
         String result = "Here are the tasks in your list:\n";
         for (Task task : taskList) {
             if (i == taskList.size()) {
-                result = result + i + ". " + task;
+                result = result + i + "." + task;
             } else {
-                result = result + i + ". " + task + "\n";
+                result = result + i + "." + task + "\n";
             }
             i++;
         }
