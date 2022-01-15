@@ -6,6 +6,25 @@ public class Duke {
     /** Stores the messages sent by the user. */
     private static List<Task> messages = new ArrayList<>();
 
+    public static void respondToMsg(String msg) throws DukeException {
+        String[] command = msg.split(" ");
+        if (command.length == 1) {
+            throw new DukeException(msg);
+        } else {
+            switch(command[0]) {
+                case "list":
+                System.out.println("Here are your list items nyan~:");
+                int i = 1;
+                for (Task t: messages) {
+                    // Print task and its status
+                    System.out.printf("%d. %s\n",i , t);
+                    ++i;
+                }
+            }
+        }
+
+    }
+
     public static void main(String[] args) {
         // Initialize a scanner object
         Scanner userInput = new Scanner(System.in);
@@ -16,8 +35,14 @@ public class Duke {
         // Request for user input
         echo = userInput.nextLine();
         // Check if bye has been said
-        while (!echo.toLowerCase().equals("bye")) {
+        while (!echo.equals("bye")) {
             // To handle special messages
+            try {
+                respondToMsg(echo);
+            } catch (DukeException e) {
+
+            }
+            echo = userInput.nextLine();
             String[] command = echo.split(" ");
             if (command[0].equals("list")) {
                 System.out.println("Here are your list items nyan~:");
