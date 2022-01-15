@@ -9,7 +9,8 @@ deadline apply internship /by May 2022
 deadline /by idk
 event birthday part /at sat 2-3pm
 event 2103 lec /at fri 2pm
-event /at
+event career fair /at march 2020
+list
 mark 3
 mark 5
 mark 7

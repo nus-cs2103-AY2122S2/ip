@@ -17,6 +17,7 @@ public class Duke {
         echo = userInput.nextLine();
         // Check if bye has been said
         while (!echo.toLowerCase().equals("bye")) {
+            // To handle special messages
             String[] command = echo.split(" ");
             if (command[0].equals("list")) {
                 System.out.println("Here are your list items nyan~:");
@@ -45,18 +46,24 @@ public class Duke {
                 echo = userInput.nextLine();
                 continue;
             } else if (command[0].equals("todo")) {
+                // Obtain the ToDo
                 Task newTask = new Todo(echo.substring(4).trim());
+                // Add task to list
                 messages.add(newTask);
                 System.out.printf("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n", newTask,messages.size());
                 echo = userInput.nextLine();
             } else if (command[0].equals("deadline")) {
+                // Separate task and deadline
                 String[] content = echo.substring(8).split("/by");
+                // Create new Deadline object
                 Task newTask = new Deadline(content[0].trim(), content[1].trim());
                 messages.add(newTask);
                 System.out.printf("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n", newTask,messages.size());
                 echo = userInput.nextLine();
             } else if (command[0].equals("event")) {
+                // Separate task and timing
                 String[] content = echo.substring(5).split("/at");
+                // Create new Event object
                 Task newTask = new Event(content[0].trim(), content[1].trim());
                 messages.add(newTask);
                 System.out.printf("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n", newTask,messages.size());

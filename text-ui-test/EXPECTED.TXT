@@ -28,5 +28,24 @@ You have 7 tasks nyan~!
 Ok! Chi-san has added:
 [E][ ] 2103 lec (at: fri 2pm)
 You have 8 tasks nyan~!
+Ok! Chi-san has added:
+[E][ ] career fair (at: march 2020)
+You have 9 tasks nyan~!
+Here are your list items nyan~:
+1. [ ] echo after me ah
+2. [T][ ] wash dishes
+3. [T][ ] buy textbooks
+4. [D][ ] submit modreg (by: friday night)
+5. [D][ ] apply internship (by: May 2022)
+6. [D][ ]  (by: idk)
+7. [E][ ] birthday part (at: sat 2-3pm)
+8. [E][ ] 2103 lec (at: fri 2pm)
+9. [E][ ] career fair (at: march 2020)
 Great job nyan~!
-[X] echo after me ah
+[T][X] buy textbooks
+Great job nyan~!
+[D][X] apply internship (by: May 2022)
+Great job nyan~!
+[E][X] birthday part (at: sat 2-3pm)
+Let's get it done next time nyan~!
+[D][ ] apply internship (by: May 2022)
