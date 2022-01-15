@@ -3,11 +3,12 @@ import java.util.ArrayList;
 
 public class Duke {
     private final String botName;
-    private ArrayList<String> items;
+    private final ArrayList<Task> tasks;
+    private final String line ="+" + String.valueOf('-').repeat(50) + "+\n";
 
     private Duke(String botName) {
         this.botName = botName;
-        items = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     private void Greeting() {
@@ -28,27 +29,39 @@ public class Duke {
                 "  \\ \\| | /   | |__\n" +
                 "       / |   |____)\n" +
                 "       |_/";
-        String s = String.format(logo + "\n" + "Hello! I'm %s"
-                            +"\n" + "What can I do for you?", this.botName);
-        Print(3,s);
+        String s = String.format(line + logo + "\n" + "Hello! I'm %s"
+                            +"\n" + "What can I do for you?\n" + line, this.botName);
+        System.out.println(s);
     }
 
-    private void Print(int choice, String text) {
-        String line ="+" + String.valueOf('-').repeat(50) + "+\n";
+    private void Print(String text) {
         StringBuilder sb = new StringBuilder();
         sb.append(line);
-        switch(choice) {
-            case 1:
-                for (int i = 0; i < items.size(); i++) {
-                    sb.append((i+1) + ". " + items.get(i) + "\n");
+        String[] command = text.split(" ", 2);
+        switch(command[0]) {
+            case "list":
+                for (int i = 0; i < tasks.size(); i++) {
+                    sb.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
                 }
                 break;
-            case 2:
-                items.add(text);
-                sb.append("added: " + text + "\n");
+            case "mark": {
+                int itemIndex = Integer.parseInt(command[1]) - 1;
+                tasks.get(itemIndex).markItem();
+                sb.append("Alfred, mark it as done!\n  ").append(tasks.get(itemIndex).toString()).append("\n");
+                break;
+            }
+            case "unmark":
+                int itemIndex = Integer.parseInt(command[1]) - 1;
+                tasks.get(itemIndex).unmarkItem();
+                sb.append("Make up your mind. Alfred, unmark it!\n  ").append(tasks.get(itemIndex).toString()).append("\n");
+                break;
+            case "bye":
+                sb.append(text).append("\n");
                 break;
             default:
-                sb.append(text + "\n");
+                Task t = new Task(text);
+                tasks.add(t);
+                sb.append("added: ").append(t.description).append("\n");
                 break;
         }
         sb.append(line);
@@ -60,12 +73,8 @@ public class Duke {
             Terminate();
             return false;
         }
-        else if (text.equals("list")){
-            Print(1, "");
-            return true;
-        }
         else {
-            Print(2, text);
+            Print(text);
             return true;
         }
     }
@@ -81,12 +90,12 @@ public class Duke {
     }
 
     private void Terminate() {
-        String exit_text = "Bye. This city needs me. na na na na na na BATMAN\n" +
+        String exitText = "Bye. This city needs me. na na na na na na BATMAN\n" +
                             "      ▄   ▄\n" +
                             " ▄█▄  █▀█▀█  ▄█▄\n" +
                             " ▀▀████▄█▄████▀▀\n" +
-                            "      ▀█▀█▀";
-        Print(3,exit_text);
+                            "      ▀█▀█▀\n";
+        System.out.println(line + exitText + line);
         System.exit(0);
     }
 
