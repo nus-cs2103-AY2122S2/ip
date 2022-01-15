@@ -20,12 +20,19 @@ public class Echo {
         }
         exit();
     }
-
-    public static void echo(String s) {
+    /**
+     * Prints input with an 8-spaced indentation.
+     *
+     * @param s The bus services available.
+     */
+    private static void echo(String s) {
         System.out.println("        " + s);
     }
 
-    public static void exit() {
+    /**
+     * Prints goodbye.
+     */
+    private static void exit() {
         System.out.println("        Goodbye!");
     }
 }
