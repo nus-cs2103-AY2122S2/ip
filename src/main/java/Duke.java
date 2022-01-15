@@ -6,6 +6,11 @@ public class Duke {
     /** Stores the messages sent by the user. */
     private static List<Task> messages = new ArrayList<>();
 
+    /**
+     * Displays a message based on the user input.
+     * @param msg The message inputted by the user.
+     * @throws DukeException if messages are invalid.
+     */
     public static void respondToMsg(String msg) throws DukeException {
         // Obtain 1st word
         String[] command = msg.trim().split(" ");
@@ -50,6 +55,10 @@ public class Duke {
                     // Separate task and deadline
                     String[] content = msg.substring(8).split("/by");
                     // Create new Deadline object
+                    if (content[0].trim().equals("")) {
+                        throw new DukeException("deadline");
+                    }
+                    // Create new Deadline object
                     Task newTask1 = new Deadline(content[0].trim(), content[1].trim());
                     messages.add(newTask1);
                     System.out.printf("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n", newTask1,messages.size());
@@ -57,6 +66,9 @@ public class Duke {
                 case "event":
                     // Separate task and timing
                     String[] content1 = msg.substring(5).split("/at");
+                    if (content1[0].trim().equals("")) {
+                        throw new DukeException("event");
+                    }
                     // Create new Event object
                     Task newTask2 = new Event(content1[0].trim(), content1[1].trim());
                     messages.add(newTask2);
@@ -81,11 +93,11 @@ public class Duke {
         echo = userInput.nextLine();
         // Check if bye has been said
         while (!echo.equals("bye")) {
-            // To handle special messages
             try {
                 respondToMsg(echo);
                 echo = userInput.nextLine();
             } catch (DukeException e) {
+                // Output error message
                 System.out.println(e);
                 echo = userInput.nextLine();
             }

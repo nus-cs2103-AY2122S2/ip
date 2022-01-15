@@ -1,5 +1,6 @@
 echo after me ah
 list
+todo erase whiteboard
 mark 1
 unmark 1
 todo wash dishes
@@ -15,3 +16,7 @@ mark 3
 mark 5
 mark 7
 unmark 5
+list
+todo
+event
+deadline

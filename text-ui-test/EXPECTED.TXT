@@ -1,12 +1,14 @@
 Hello master I am Chi
 How may I serve you today nyan~?
-echo after me ah
+Chi-san doesn't understand that nyaan~!
 Here are your list items nyan~:
-1. [ ] echo after me ah
+Ok! Chi-san has added:
+[T][ ] erase whiteboard
+You have 1 tasks nyan~!
 Great job nyan~!
-[X] echo after me ah
+[T][X] erase whiteboard
 Let's get it done next time nyan~!
-[ ] echo after me ah
+[T][ ] erase whiteboard
 Ok! Chi-san has added:
 [T][ ] wash dishes
 You have 2 tasks nyan~!
@@ -19,33 +21,42 @@ You have 4 tasks nyan~!
 Ok! Chi-san has added:
 [D][ ] apply internship (by: May 2022)
 You have 5 tasks nyan~!
-Ok! Chi-san has added:
-[D][ ]  (by: idk)
-You have 6 tasks nyan~!
+Hey! This deadline can't be empty nyaan~!
 Ok! Chi-san has added:
 [E][ ] birthday part (at: sat 2-3pm)
-You have 7 tasks nyan~!
+You have 6 tasks nyan~!
 Ok! Chi-san has added:
 [E][ ] 2103 lec (at: fri 2pm)
-You have 8 tasks nyan~!
+You have 7 tasks nyan~!
 Ok! Chi-san has added:
 [E][ ] career fair (at: march 2020)
-You have 9 tasks nyan~!
+You have 8 tasks nyan~!
 Here are your list items nyan~:
-1. [ ] echo after me ah
+1. [T][ ] erase whiteboard
 2. [T][ ] wash dishes
 3. [T][ ] buy textbooks
 4. [D][ ] submit modreg (by: friday night)
 5. [D][ ] apply internship (by: May 2022)
-6. [D][ ]  (by: idk)
-7. [E][ ] birthday part (at: sat 2-3pm)
-8. [E][ ] 2103 lec (at: fri 2pm)
-9. [E][ ] career fair (at: march 2020)
+6. [E][ ] birthday part (at: sat 2-3pm)
+7. [E][ ] 2103 lec (at: fri 2pm)
+8. [E][ ] career fair (at: march 2020)
 Great job nyan~!
 [T][X] buy textbooks
 Great job nyan~!
 [D][X] apply internship (by: May 2022)
 Great job nyan~!
-[E][X] birthday part (at: sat 2-3pm)
+[E][X] 2103 lec (at: fri 2pm)
 Let's get it done next time nyan~!
 [D][ ] apply internship (by: May 2022)
+Here are your list items nyan~:
+1. [T][ ] erase whiteboard
+2. [T][ ] wash dishes
+3. [T][X] buy textbooks
+4. [D][ ] submit modreg (by: friday night)
+5. [D][ ] apply internship (by: May 2022)
+6. [E][ ] birthday part (at: sat 2-3pm)
+7. [E][X] 2103 lec (at: fri 2pm)
+8. [E][ ] career fair (at: march 2020)
+Hey! This todo can't be empty nyaan~!
+Hey! This event can't be empty nyaan~!
+Hey! This deadline can't be empty nyaan~!
