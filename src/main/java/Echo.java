@@ -23,7 +23,7 @@ public class Echo {
     /**
      * Prints input with an 8-spaced indentation.
      *
-     * @param s The bus services available.
+     * @param s String to be printed.
      */
     private static void echo(String s) {
         System.out.println("        " + s);
