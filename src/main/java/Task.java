@@ -23,8 +23,8 @@ public class Task {
     @Override
     public String toString() {
         String completedOrNah = this.completed? "X":"";
-        String display = "[" + completedOrNah + "] " + taskName;
-        return display;
+         return "[" + completedOrNah + "] " + taskName;
+
     }
 
 

@@ -4,6 +4,7 @@
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.regex.PatternSyntaxException;
 
 public class Duke {
 
@@ -11,12 +12,16 @@ public class Duke {
     public static void main(String[] args) {
         //Program's opening message
         System.out.println("____________________________________________________________");
-        System.out.println("    Wassup! I'm Puke! \n    What can I do for you?");
+        System.out.println("    Whats up! I'm Puke! \n    What can I do for you?");
         System.out.println("____________________________________________________________");
 
         //Scanner initialization for user input
         Scanner sc = new Scanner(System.in);
+        //Command is the command that will be executed
+        String command = "";
+        //User input is the raw user input
         String userInput = "";
+
 
         //Task List
         ArrayList<Task> taskList = new ArrayList<>();
@@ -27,8 +32,12 @@ public class Duke {
             //User Input dictates what the program does
             userInput = sc.nextLine();
 
+            String[] splitString = userInput.split(" ");
+            command = splitString[0];
+
+
             //Case 1: Terminate the program
-            if (userInput.equals("bye")) {
+            if (command.equals("bye")) {
                 System.out.println("____________________________________________________________");
                 System.out.println("    Bye Bye! Hope to see you again soon!");
                 System.out.println("____________________________________________________________");
@@ -36,17 +45,24 @@ public class Duke {
                 break;
             }
             //Case 2: List the todolist
-            else if (userInput.equals("list")) {
-                System.out.println("____________________________________________________________");
-                System.out.println("    Here are the tasks in your list:");
-                for (int i = 0; i < numOfTasks; i++)
-                    System.out.println("    " + (i + 1) + ". " + taskList.get(i));
-                System.out.println("____________________________________________________________");
+            else if (command.equals("list")) {
+
+                if (numOfTasks == 0) {
+                    System.out.println("____________________________________________________________");
+                    System.out.println("    You have yet to add any tasks!");
+                    System.out.println("____________________________________________________________");
+                }
+                else {
+                    System.out.println("____________________________________________________________");
+                    System.out.println("    Here are the tasks in your list:");
+                    for (int i = 0; i < numOfTasks; i++)
+                        System.out.println("    " + (i + 1) + ". " + taskList.get(i));
+                    System.out.println("____________________________________________________________");
+                }
             }
 
             //Case 3: mark or unmark the task
-            else if (userInput.contains("mark")) {
-                String[] splitString = userInput.split(" ");
+            else if (command.equals("mark") || command.equals("unmark")) {
                 //If no second input
                 if (splitString[1].equals(""))
                     System.out.println("Please input a second input. Eg mark 1, unmark 2");
@@ -57,7 +73,7 @@ public class Duke {
                     int index = Integer.parseInt(splitString[1]);
                     //If index is out of range, throw illegal argument exception
                     if (index < 0 || index > numOfTasks) {
-                        throw new IllegalArgumentException();
+                        throw new PukeExceptions("Index is out of task range");
                     }
 
                     //If no errors, continue
@@ -66,7 +82,7 @@ public class Duke {
 
                     System.out.println("____________________________________________________________");
                     String displayMessage = "";
-                    if (splitString[0].equals("mark")) {
+                    if (command.equals("mark")) {
                         displayMessage = "    Nice! I've marked this task as done:";
                         thatTask.markTask();
                     } else {
@@ -84,28 +100,63 @@ public class Duke {
                     System.out.println("    Second input has to be an integer! Eg mark 1, unmark 2");
                     System.out.println("____________________________________________________________");
 
-                //IllegalArgumentException is thrown if the second input is out of range
-                } catch (IllegalArgumentException e) {
-                    System.out.println("    Out of range! Number has to be between 1 and " + numOfTasks);
+                //Out of task range is thrown if the second input is out of range
+                } catch (PukeExceptions e) {
+                    System.out.println("    Out of range! Number has to in the range of the list");
+                    System.out.println("    You can check by using the list command");
                     System.out.println("____________________________________________________________");
                 }
 
             }
 
 
-            //Case 4: Add the task
-            else {
-                if (userInput.equals("")) {
-                    System.out.println("____________________________________________________________");
-                    System.out.println("    Task cannot be empty!");
-                    System.out.println("____________________________________________________________");
+            //Case 4: Add the task under todo/deadline/event
+            else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
+                String taskName = userInput.substring(userInput.indexOf(" "));
+                Task newTask = new Task("");
+                if (command.equals("todo")) {
+                    newTask = new TodoTask(taskName);
                 } else {
-                    taskList.add(new Task(userInput));
-                    numOfTasks++;
-                    System.out.println("____________________________________________________________");
-                    System.out.println("    added: " + userInput);
-                    System.out.println("____________________________________________________________");
+                    String temp = taskName.substring(taskName.indexOf("/"));
+                    String timeOfOccurrence = temp.substring(temp.indexOf(" ") + 1);
+                    //String that states by ... or at....
+                    if (command.equals("deadline")) {
+                        newTask = new DeadlineTask(taskName, timeOfOccurrence);
+                    } else {
+                        newTask = new EventTask(taskName, timeOfOccurrence);
+                    }
                 }
+
+                taskList.add(newTask);
+                numOfTasks++;
+                System.out.println("____________________________________________________________");
+                System.out.println("    Got it. I've added this task:");
+                System.out.println("    " + newTask);
+                System.out.println("    Now you have " + numOfTasks + " tasks in the list.");
+                System.out.println("____________________________________________________________");
+
+            }
+
+            else if (userInput.equals("help")) {
+                System.out.println("____________________________________________________________");
+                System.out.println("Commands: ");
+                System.out.println("    List                                    -list out all your current tasks");
+                System.out.println("    todo <task name>                        -Add a todo task without any deadline specified");
+                System.out.println("    deadline <task name> /by <deadline>     -Adds a task that has to be done before the specified deadline");
+                System.out.println("    event <task name> /at <deadline>        -Adds a task that occurs at the specified deadline");
+                System.out.println("    mark <task number>                      -marks task as completed");
+                System.out.println("    unmark <task number>                    -marks a completed task as uncompleted");
+                System.out.println("    bye                                     -exits the program :'( ");
+                System.out.println("____________________________________________________________");
+            }
+
+            //Case 6: User enters an invalid command
+            else {
+                    System.out.println("____________________________________________________________");
+                    System.out.println("    " + userInput + "?");
+                    System.out.println("    I'm sorry, i did not understand that command!");
+                    System.out.println("    Try typing in help for the list of commands!");
+                    System.out.println("____________________________________________________________");
             }
 
         }
