@@ -1,7 +1,105 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
 
+____________________________________________________________
+    Got it. I've added this task:
+    [T][]  borrow book
+    Now you have 1 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+    Got it. I've added this task:
+    [D][]  return book /by June 6th (by: June 6th)
+    Now you have 2 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+    Got it. I've added this task:
+    [E][]  project meeting /at Aug 6th 2-4pm (at: Aug 6th 2-4pm)
+    Now you have 3 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+    Got it. I've added this task:
+    [T][]  sports club
+    Now you have 4 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+    Got it. I've added this task:
+    [T][]  borrow book
+    Now you have 5 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+    Nice! I've marked this task as done:
+    [T][X]  borrow book
+____________________________________________________________
+____________________________________________________________
+    Nice! I've marked this task as done:
+    [D][X]  return book /by June 6th (by: June 6th)
+____________________________________________________________
+____________________________________________________________
+  OK, I've marked this task as not done yet:
+    [D][]  return book /by June 6th (by: June 6th)
+____________________________________________________________
+____________________________________________________________
+  OK, I've marked this task as not done yet:
+    [D][]  return book /by June 6th (by: June 6th)
+____________________________________________________________
+____________________________________________________________
+    Here are the tasks in your list:
+    1. [T][X]  borrow book
+    2. [D][]  return book /by June 6th (by: June 6th)
+    3. [E][]  project meeting /at Aug 6th 2-4pm (at: Aug 6th 2-4pm)
+    4. [T][]  sports club
+    5. [T][]  borrow book
+____________________________________________________________
+    Out of range! Number has to in the range of the list
+    You can check by using the list command
+____________________________________________________________
+____________________________________________________________
+Task description/name cannot be empty. Eg todo eat, deadline eat food /by 12pm, event concert /at 8pm
+____________________________________________________________
+____________________________________________________________
+Task description/name cannot be empty. Eg todo eat, deadline eat food /by 12pm, event concert /at 8pm
+____________________________________________________________
+____________________________________________________________
+Task description/name cannot be empty. Eg todo eat, deadline eat food /by 12pm, event concert /at 8pm
+____________________________________________________________
+____________________________________________________________
+    what?
+    I'm sorry, i did not understand that command!
+    Try typing in help for the list of commands!
+____________________________________________________________
+____________________________________________________________
+    huh??
+    I'm sorry, i did not understand that command!
+    Try typing in help for the list of commands!
+____________________________________________________________
+____________________________________________________________
+Please input a second input. Eg mark 1, unmark 2
+____________________________________________________________
+    Second input has to be an integer! Eg mark 1, unmark 2
+____________________________________________________________
+    Second input has to be an integer! Eg mark 1, unmark 2
+____________________________________________________________
+____________________________________________________________
+Deadline and event tasks require /by and /at to specify the deadline or time of occurrence.
+Eg Deadline eat food /by 12pm, event concert /at 8pm
+____________________________________________________________
+____________________________________________________________
+Deadline and event tasks require /by and /at to specify the deadline or time of occurrence.
+Eg Deadline eat food /by 12pm, event concert /at 8pm
+____________________________________________________________
+____________________________________________________________
+    Got it. I've added this task:
+    [E][]  hahahaha /at 8pm (at: 8pm)
+    Now you have 6 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Event tasks require /at specify the time of occurrence.
+Eg music concert /at 8pm
+____________________________________________________________
+____________________________________________________________
+Deadline tasks require /by specify the deadline.
+Eg deadline eat food /by 12pm
+____________________________________________________________
+____________________________________________________________
+Event tasks require /at specify the time of occurrence.
+Eg music concert /at 8pm
+____________________________________________________________
+bye
