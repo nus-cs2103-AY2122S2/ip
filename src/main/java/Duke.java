@@ -1,10 +1,13 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     private final String botName;
+    private ArrayList<String> items;
 
     private Duke(String botName) {
         this.botName = botName;
+        items = new ArrayList<>();
     }
 
     private void Greeting() {
@@ -27,20 +30,29 @@ public class Duke {
                 "       |_/";
         String s = String.format(logo + "\n" + "Hello! I'm %s"
                             +"\n" + "What can I do for you?", this.botName);
-        System.out.println(s);
+        Print(3,s);
     }
 
-    private void Print(String text) {
-        int input_len = text.length();
-        StringBuilder sb = new StringBuilder(input_len);
-        String line = "+" + String.valueOf('-').repeat(input_len + 2) + "+";
-        String output = "\n" + "| " + text + " |" + "\n";
-        sb.append(line + output + line);
+    private void Print(int choice, String text) {
+        String line ="+" + String.valueOf('-').repeat(50) + "+\n";
+        StringBuilder sb = new StringBuilder();
+        sb.append(line);
+        switch(choice) {
+            case 1:
+                for (int i = 0; i < items.size(); i++) {
+                    sb.append((i+1) + ". " + items.get(i) + "\n");
+                }
+                break;
+            case 2:
+                items.add(text);
+                sb.append("added: " + text + "\n");
+                break;
+            default:
+                sb.append(text + "\n");
+                break;
+        }
+        sb.append(line);
         System.out.println(sb);
-    }
-
-    private void userReply(String text) {
-        Response(text);
     }
 
     private boolean Response(String text) {
@@ -48,8 +60,12 @@ public class Duke {
             Terminate();
             return false;
         }
+        else if (text.equals("list")){
+            Print(1, "");
+            return true;
+        }
         else {
-            Print(text);
+            Print(2, text);
             return true;
         }
     }
@@ -57,22 +73,22 @@ public class Duke {
     private void Run() {
         Greeting();
         Scanner sc = new Scanner(System.in);
-        while (Response(sc.nextLine())) {
-            userReply(sc.nextLine());
+        boolean valid = Response(sc.nextLine());
+        while (valid) {
+            valid = Response(sc.nextLine());
         }
         sc.close();
     }
 
     private void Terminate() {
-        Print("Bye. This city needs me. na na na na na na BATMAN");
-        String exit_logo = "      ▄   ▄\n" +
+        String exit_text = "Bye. This city needs me. na na na na na na BATMAN\n" +
+                            "      ▄   ▄\n" +
                             " ▄█▄  █▀█▀█  ▄█▄\n" +
                             " ▀▀████▄█▄████▀▀\n" +
                             "      ▀█▀█▀";
-        System.out.println(exit_logo);
+        Print(3,exit_text);
         System.exit(0);
     }
-
 
     public static void main(String[] args) {
         Duke bot = new Duke("Batman");
