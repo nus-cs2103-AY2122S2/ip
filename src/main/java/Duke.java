@@ -15,16 +15,29 @@ public class Duke {
 
         Scanner myObj = new Scanner(System.in); //Create a Scanner object
         String input; //declare a string variable to store input
-        List<String> all = new ArrayList<String>();
+        List<Task> all = new ArrayList<Task>(); //ArrayList of Task
 
         while (!(input = myObj.nextLine()).equals("bye")) { //check input not "bye"
-            if (!input.equals("list")) {
-                all.add(input);
-                System.out.println("added: " + input);
-            } else {
+            String[] words = input.split(" ", 2); //split input string to get first word (action)
+
+            if (input.equals("list")) { //if list
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 1; i <= all.size(); i++) {
-                    System.out.println(i + ". " + all.get(i-1));
+                    System.out.println(i + ". " + all.get(i-1).toString());
                 }
+
+            } else if (words[0].equals("mark")) {
+                int n = Integer.parseInt(words[1]);
+                all.get(n-1).markDone(); //call Task method, mark task as done
+
+            } else if (words[0].equals("unmark")) {
+                int n = Integer.parseInt(words[1]);
+                all.get(n-1).unMarkDone(); //call Task method, mark task as not done
+
+            } else {
+                Task task = new Task(input);
+                all.add(task);
+                System.out.println(task.toString());
             }
         }
         System.out.println("Bye. Hope to see you again soon!"); //ending sentence
