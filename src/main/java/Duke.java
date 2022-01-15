@@ -2,9 +2,14 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static int level = 1;
+    private static int level = 2;
+    private String task_arr[];
+    private int curr_task;
 
-    public Duke() {}
+    public Duke() {
+        this.task_arr = new String[100];
+        this.curr_task = 0;
+    }
 
     public void run() {
         welcome();
@@ -16,14 +21,26 @@ public class Duke {
                 exit();
                 end = true;
             } else {
-                echo(user_command);
+                handle(user_command);
             }
         }
     }
 
-    public void echo(String user_command) {
+    public void handle(String user_command) {
         horizontal();
-        System.out.println(user_command);
+        if (user_command.equals("list")) {
+            if (curr_task == 0) {
+                System.out.println("No tasks added yet!");
+            } else {
+                for (int i = 0; i < curr_task; i++) {
+                    System.out.println(i+1 + ". " + task_arr[i]);
+                }
+            }
+        } else {
+            task_arr[curr_task] = user_command;
+            System.out.println("added new task: "+ user_command);
+            curr_task++;
+        }
         horizontal();
     }
 
