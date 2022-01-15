@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    static ArrayList<Task> allTasks = new ArrayList<Task>();
+    static TaskList list = new TaskList();
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -25,21 +25,24 @@ public class Duke {
 
         String input;
 
-        while(true) {
+        while (true) {
 
-             input = s.nextLine();
+            input = s.nextLine();
 
-            if (input.equals("bye")){
+            if (input.equals("bye")) {
                 break;
-            }
-            else if (input.equals("list")){
-                list();
+            } else if (input.equals("list")) {
+                System.out.println(list.getTaskList());
+            } else if (input.contains("mark")) {
+                int index = Integer.parseInt(input.replaceAll("mark", "").strip());
+                // TODO Handle conversion exception
+                System.out.println(list.markTaskDone(index));
             }
             else {
                 System.out.println("\n");
                 System.out.println(line);
-                String response = addTask(input);
-                System.out.println(String.format("added: %s",response));
+                String response = list.addTask(input);
+                System.out.println(response);
                 System.out.println(line);
             }
         }
@@ -47,31 +50,5 @@ public class Duke {
         System.out.println(line);
         System.out.println(bye);
         System.out.println(line);
-    }
-
-    public static String addTask(String s){
-        /*
-        * Takes a string as input, create a new task with the input as the name,
-        * and adds it to the task list.
-        *
-        * @param s
-        * input string to be used as the task name
-        *
-        * @return the reply of the task added
-         */
-        Task t = new Task(s);
-        allTasks.add(t);
-        return t.reply();
-    }
-
-    public static void list(){
-        /*
-        * Display all current tasks in the task list as an ordered list.
-         */
-        int counter = 1;
-        for (Task t : allTasks) {
-            System.out.println(String.format("%d. %s",counter,t.reply()));
-            counter++;
-        }
     }
 }
