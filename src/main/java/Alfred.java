@@ -41,11 +41,33 @@ public class Alfred {
         this.sandwich_and_print(this.BYE);
     }
 
-    private void add_task(String description) {
-        this.task_list.add(new Task(description));
-        String text = "added: " + description;
+    private void add_task(Task task) {
+        this.task_list.add(task);
+        String text = "Yes sir, I've added this task.\n";
+        text += task.toString() + "\n";
+        text += this.summarize_list();
         this.sandwich_and_print(text);
     }
+
+    private void add_todo(String description) {
+        Task task = new ToDo(description);
+        this.add_task(task);
+    }
+
+    private void add_deadline(String description, String deadline) {
+        Task task = new Deadline(description, deadline);
+        this.add_task(task);
+    }
+
+    private void add_event(String description, String dateAndTime) {
+        Task task = new Event(description, dateAndTime);
+        this.add_task(task);
+    }
+
+    private String summarize_list() {
+        return "Now you have " + this.task_list.size() + " task(s) in the your list.";
+    }
+
 
     private void list_tasks() {
         String out = "";
@@ -87,8 +109,19 @@ public class Alfred {
         } else if (input.startsWith("unmark")) {
             int task_id = Integer.valueOf(input.split(" ")[1]) - 1;
             this.unmark_task(task_id);
+        } else if (input.startsWith("deadline")) {
+            String s = input.substring(8);
+            String[] arguments = s.split("/by ");
+            this.add_deadline(arguments[0], arguments[1]);
+        } else if (input.startsWith("todo")) {
+            String descripton = input.substring(4);
+            this.add_todo(descripton);
+        } else if (input.startsWith("event")) {
+            String s = input.substring(5);
+            String[] arguments = s.split("/at ");
+            this.add_event(arguments[0], arguments[1]);
         } else {
-            this.add_task(input);
+           // do nothing
         }
     }
 

@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     // class constants
     private static String COMPLETION_MARK = "X";
     private static String INCOMPLETE_MARK = " ";
