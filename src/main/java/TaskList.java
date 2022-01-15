@@ -3,8 +3,24 @@ import java.util.ArrayList;
 public class TaskList {
     ArrayList<Task> actions = new ArrayList<Task>();
 
-    public boolean add(String action){
-         return actions.add(new Task(action));
+    public boolean add(TaskType type, String action){
+        int indexOfTime;
+        String description;
+        String time;
+        switch (type) {
+            case TODO : return actions.add(new ToDo(action));
+            case DEADLINE:
+                indexOfTime = action.indexOf("/by");
+                description = action.substring(0,indexOfTime);
+                time = action.substring(indexOfTime+4);
+                return actions.add(new Deadlines(description,time));
+            case EVENTS:
+                indexOfTime = action.indexOf("/at");
+                description = action.substring(0, indexOfTime);
+                time = action.substring(indexOfTime + 4);
+                return actions.add(new Events(description,time));
+        }
+         return false;
     }
 
     public void print(){
@@ -25,5 +41,9 @@ public class TaskList {
 
     public void markIncomplete(int index){
         this.actions.get(index - 1).markIncompleted();
+    }
+
+    public int getLength() {
+        return this.actions.size();
     }
 }
