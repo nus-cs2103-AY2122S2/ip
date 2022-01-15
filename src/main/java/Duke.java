@@ -13,7 +13,7 @@ public class Duke {
     private static final String byePhrase = "Bye. Hope to see you again soon!";
 
     private final String name;
-    private final List<String> tasks;
+    private final List<Task> tasks;
 
     private Duke(String name) {
         this.name = name;
@@ -29,15 +29,21 @@ public class Duke {
     }
 
     private void add(String s) {
-        tasks.add(s);
-        System.out.println(indent + "added: " + s);
+        Task t = new Task(s);
+        tasks.add(t);
+        System.out.println(indent + "added:" + s);
     }
 
     private void list() {
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.print(indent);
-            System.out.print(i+1);
-            System.out.println(". " + tasks.get(i));
+        if (tasks.size() == 0) {
+            System.out.println(indent + "You don't have tasks listed.");
+        } else {
+            System.out.println(indent + "Here are the tasks in your list:");
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.print(indent);
+                System.out.print(i + 1);
+                System.out.println(". " + tasks.get(i));
+            }
         }
     }
 
