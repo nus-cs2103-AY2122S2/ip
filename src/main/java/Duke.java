@@ -19,28 +19,32 @@ public class Duke {
         while (true) {
             String[] command = sc.nextLine().trim().toLowerCase().split(" ", 2);
             System.out.println("____________________________________________________________");
-
-            if (command[0].equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                break;
-            } else if (command[0].equals("list")) {
-                System.out.println(taskList);
-            } else if (command[0].equals("mark")) {
-                Task task = taskList.get(Integer.parseInt(command[1]));
-                task.markAsDone();
-            } else if (command[0].equals("unmark")) {
-                Task task = taskList.get(Integer.parseInt(command[1]));
-                task.markAsUndone();
-            } else if (command[0].equals("todo") || command[0].equals("deadline") || command[0].equals("event")) {
-                try {
-                    addTask(taskList, command);
-                } catch (EmptyDescriptionException e) {
-                    System.out.println(e.getMessage());
+            try {
+                if (command[0].equals("bye")) {
+                    System.out.println("Bye. Hope to see you again soon!");
+                    break;
+                } else if (command[0].equals("list")) {
+                    System.out.println(taskList);
+                } else if (command[0].equals("mark")) {
+                    Task task = taskList.get(Integer.parseInt(command[1]));
+                    task.markAsDone();
+                } else if (command[0].equals("unmark")) {
+                    Task task = taskList.get(Integer.parseInt(command[1]));
+                    task.markAsUndone();
+                } else if (command[0].equals("todo") || command[0].equals("deadline") || command[0].equals("event")) {
+                    try {
+                        addTask(taskList, command);
+                    } catch (EmptyDescriptionException e) {
+                        System.out.println(e.getMessage());
+                    }
+                } else {
+                    throw new InvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :(");
                 }
-            } else {
-                System.out.println("Invalid command!");
+            } catch (InvalidCommandException e) {
+                System.out.println(e.getMessage());
+            } finally {
+                System.out.println("____________________________________________________________");
             }
-            System.out.println("____________________________________________________________");
         }
     }
 

@@ -5,6 +5,7 @@ public class Deadline extends Task {
     public Deadline(String description) {
         super(description);
     }
+
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
