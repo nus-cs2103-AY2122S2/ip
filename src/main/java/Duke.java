@@ -1,10 +1,21 @@
+import java.util.*;
+
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        Scanner sc= new Scanner(System.in);
+
+        String welcome = "Hello! I'm ChatCat\n" + "What can I do for you?\n";
+        System.out.println(welcome);
+
+        String input = "placeholder";
+        while (!input.equals("bye")) {
+            input = sc.nextLine(); //reads string.
+
+           if (!input.equals("bye")) {
+               System.out.println(input + "\n");
+           } else {
+               System.out.println("Bye. Hope to see you again soon!");
+           }
+        }
     }
 }
