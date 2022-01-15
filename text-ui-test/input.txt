@@ -1,10 +1,17 @@
 todo
-deadline
 event
-todo go jog
-deadline go do project /by Sunday
-event go run /at reservoir
+deadline
+
+test
+todo run
+todo jog
+todo eat
+deadline project /by sunday
+event food /at home
+list
 mark 1
-mark 3
+mark 4
+list
+delete 3
 list
 bye
