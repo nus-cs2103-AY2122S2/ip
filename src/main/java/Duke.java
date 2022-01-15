@@ -22,6 +22,12 @@ public class Duke {
         Pattern p_mark = Pattern.compile(" *(un)?mark +\\d*([1-9]+\\d*) *", Pattern.CASE_INSENSITIVE);
         while (true) {
             command = sc.nextLine();
+            String[] type_desc = command.split(" ", 2);
+            String taskType = type_desc[0];
+            String desc = "";
+            if (type_desc.length == 2) {
+                desc = type_desc[1];
+            }
             Matcher m_mark = p_mark.matcher(command);
             if (command.equals("bye")) {
                 System.out.println(frame + "\nBye. Hope to see you again soon!\n" + frame + "\n");
@@ -56,9 +62,36 @@ public class Duke {
                         System.out.println("Index is invalid");
                     }
                 }
-            } else {
-                tasks.add(new Task(command));
-                System.out.println(frame + "\nadded: " + command + "\n" + frame + "\n");
+            } else if (desc.equals("")) {
+                System.out.println(frame + "\nNo description entered\n" + frame + "\n");
+            } else if (taskType.equals("todo")) {
+                Task t = new Todo(desc);
+                tasks.add(t);
+                System.out.println(frame + "\nGot it. I've added this task:\n" + t
+                        + "\nNow you have " + tasks.size() + " tasks in your list.\n"
+                        + frame + "\n");
+            } else if (taskType.equals("deadline")) {
+                String[] desc_by = desc.split(" /by ", 2);
+                String by = "";
+                if (desc_by.length == 2) {
+                    by = desc_by[1];
+                }
+                Task t = new Deadline(desc_by[0], by);
+                tasks.add(t);
+                System.out.println(frame + "\nGot it. I've added this task:\n" + t
+                        + "\nNow you have " + tasks.size() + " tasks in your list.\n"
+                        + frame + "\n");
+            } else if (taskType.equals("event")) {
+                String[] desc_at = desc.split(" /at ", 2);
+                String at = "";
+                if (desc_at.length == 2) {
+                    at = desc_at[1];
+                }
+                Task t = new Event(desc_at[0], at);
+                tasks.add(t);
+                System.out.println(frame + "\nGot it. I've added this task:\n" + t
+                        + "\nNow you have " + tasks.size() + " tasks in your list.\n"
+                        + frame + "\n");
             }
         }
     }
