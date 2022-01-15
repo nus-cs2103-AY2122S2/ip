@@ -1,10 +1,9 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ToDoList toDoList = new ToDoList();
+        TaskList taskList = new TaskList();
         String logo = "███████╗ █████╗ ██╗████████╗ █████╗ ███╗   ███╗ █████╗\n" +
                 "██╔════╝██╔══██╗██║╚══██╔══╝██╔══██╗████╗ ████║██╔══██╗\n" +
                 "███████╗███████║██║   ██║   ███████║██╔████╔██║███████║\n" +
@@ -24,73 +23,38 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             } else if (str.equals("list")) {
-                System.out.println(toDoList);
-            } else if (str.length() > 4 && str.substring(0,4).equals("mark")) {
-                ToDoItem task = toDoList.get(Integer.parseInt(str.substring(5)));
+                System.out.println(taskList);
+            } else if (str.length() > 5 && str.substring(0,4).equals("mark")) {
+                Task task = taskList.get(Integer.parseInt(str.substring(5)));
                 task.markAsDone();
-            } else if (str.length() > 6 && str.substring(0,6).equals("unmark")) {
-                ToDoItem task = toDoList.get(Integer.parseInt(str.substring(7)));
+            } else if (str.length() > 7 && str.substring(0,6).equals("unmark")) {
+                Task task = taskList.get(Integer.parseInt(str.substring(7)));
                 task.markAsUndone();
+            } else if (str.length() > 5 && str.substring(0,4).equals("todo")) {
+                Task newTask = new ToDo(str.substring(5));
+                taskList.add(newTask);
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(newTask);
+                System.out.println("Now you have " + taskList.numOfTasks() + " tasks in the list.");
+            } else if (str.length() > 9 && str.substring(0,8).equals("deadline")) {
+                String[] substring = str.split("/by ");
+                Task newTask = new Deadline(substring[0].substring(9), substring[1]);
+                taskList.add(newTask);
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(newTask);
+                System.out.println("Now you have " + taskList.numOfTasks() + " tasks in the list.");
+            } else if (str.length() > 6 && str.substring(0,5).equals("event")) {
+                String[] substring = str.split("/at ");
+                Task newTask = new Event(substring[0].substring(6), substring[1]);
+                taskList.add(newTask);
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(newTask);
+                System.out.println("Now you have " + taskList.numOfTasks() + " tasks in the list.");
+            } else {
+                System.out.println("Invalid command!");
             }
-            else {
-                toDoList.add(new ToDoItem(str));
-                System.out.println("added: " + str);
-            }
+
             System.out.println("____________________________________________________________");
         }
-    }
-}
-
-class ToDoItem {
-    protected String task;
-    protected boolean isDone;
-
-    ToDoItem(String task) {
-        this.task = task;
-        this.isDone = false;
-    }
-
-    public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
-    }
-
-    public void markAsDone() {
-        isDone = true;
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println("[X] " + this.task);
-    }
-
-    public void markAsUndone() {
-        isDone = false;
-        System.out.println(" OK, I've marked this task as not done yet: ");
-        System.out.println("[ ] " + this.task);
-    }
-
-    @Override
-    public String toString() {
-        return this.task.toString();
-    }
-}
-
-class ToDoList {
-    protected ArrayList<ToDoItem> ls = new ArrayList<>();
-
-    public void add(ToDoItem task) {
-        ls.add(task);
-    }
-
-    public ToDoItem get(int item) {
-        return ls.get(item - 1);
-    }
-
-    @Override
-    public String toString() {
-        int counter = 1;
-        String output = "Here are the tasks in your list:\n";
-        for (ToDoItem task : ls) {
-            output += counter + "." + "[" + task.getStatusIcon() + "] " + task + "\n";
-            counter += 1;
-        }
-        return output.substring(0,output.length() - 1);
     }
 }
