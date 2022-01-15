@@ -1,21 +1,31 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
-    private static Task taskList[] = new Task[100];
+    private static ArrayList<Task> taskList = new ArrayList<>();
     private static int numOfTask = 0;
 
     public static void addToList(Task t){
         String message = "Got it. I've added this task:\n";
-        taskList[numOfTask] = t;
+        taskList.add(t);
         numOfTask++;
         System.out.println(message + t.toString() + "\nNow you have " + numOfTask + " tasks in the list.");
     }
 
+    public static void deleteTask(int taskNum) {
+        String message = "Noted. I've removed this task:\n";
+        int actualTaskNum = taskNum - 1;
+        System.out.println(message + taskList.get(actualTaskNum).toString());
+        taskList.remove(actualTaskNum);
+        numOfTask--;
+        System.out.println("Now you have " + numOfTask + " tasks in the list.");
+    }
+
     public static void markTask(int taskNum) {
         String message = "Nice! I've marked this task as done:\n" ;
-        int actualTaskNum = taskNum - 1; //minus 1 as array index is from 0
-        Task t = taskList[actualTaskNum]; // get the task from the array
+        int actualTaskNum = taskNum - 1; //minus 1 as list index is from 0
+        Task t = taskList.get(actualTaskNum); // get the task from the array
         t.setTaskDone();
         System.out.println(message + t.toString());
     }
@@ -23,7 +33,7 @@ public class Duke {
     public static void unMarkTask(int taskNum) {
         String message = "OK, I've marked this task as not done yet:\n";
         int actualTaskNum = taskNum - 1;
-        Task t = taskList[actualTaskNum]; // get the task from the array
+        Task t = taskList.get(actualTaskNum); // get the task from the array
         t.setTaskNotDone();
         System.out.println(message + t.toString());
     }
@@ -33,7 +43,7 @@ public class Duke {
         System.out.println(message);
 
         for(int i = 0; i < numOfTask; i++){
-            String output = i + 1 + "." + taskList[i].toString();
+            String output = i + 1 + "." + taskList.get(i).toString();
             System.out.println(output);
         }
     }
@@ -51,6 +61,7 @@ public class Duke {
                 if(input.length() == 0) {
                     throw new BlankCommandException();
                 }
+
                 String[] inputSplit = input.split(" "); //split input by space
                 String command = inputSplit[0];
 
@@ -97,10 +108,14 @@ public class Duke {
 
                 } else if (command.equals("unmark")) {
                     unMarkTask(Integer.parseInt(inputSplit[1]));
+
+                } else if (command.equals("delete")) {
+                    deleteTask(Integer.parseInt(inputSplit[1]));
+
                 } else {
                     throw new InvalidCommandException();
                 }
-            }  catch (IncompleteCommandException | InvalidCommandException  | BlankCommandException e) {
+            }  catch (IncompleteCommandException | InvalidCommandException | BlankCommandException e) {
                 System.out.println(e.getMessage());
             }
         }
