@@ -39,6 +39,14 @@ public class Duke {
         );
     }
 
+    public static void totalTasks(int num) {
+        if(num == 1) {
+            System.out.println("     You currently have " + num + " task in your device.");
+        } else {
+            System.out.println("     You currently have " + num + " tasks in your device.");
+        }
+    }
+
     public static void main(String[] args) {
         // Create an empty array list
         ArrayList<Task> taskArr = new ArrayList<>();
@@ -52,8 +60,11 @@ public class Duke {
             Scanner sc = new Scanner(System.in);
             String input = sc.nextLine(); // read string
 
-            // Create a String array to read mark/unmark function
+            // Create a String array to read various functions
             String[] strs =input.split(" ");
+
+            // Store first word as variable
+            String firstWord = strs[0];
 
             if (input.equalsIgnoreCase("bye")) {
                 line();
@@ -64,12 +75,12 @@ public class Duke {
                 break;
             } else if(input.equalsIgnoreCase("list")) {
                 line();
-                System.out.println("     Here are the tasks in your list:");
+                System.out.println("     Here are the tasks in your device:");
                 for (int i = 0; i < taskArr.size(); i++) {
                     System.out.println("     " + (i + 1) + "." + taskArr.get(i));
                 }
                 line();
-            } else if(strs[0].equalsIgnoreCase("mark")) {
+            } else if(firstWord.equalsIgnoreCase("mark")) {
                 line();
                 int listIndex = Integer.parseInt(strs[1]); // retrieve the index after mark/unmark
                 Task currTask = taskArr.get(listIndex - 1);
@@ -77,13 +88,43 @@ public class Duke {
                 System.out.println("     Your progressive bar has increased! Keep going to stop the imposter!");
                 System.out.println("     " + currTask);
                 line();
-            } else if(strs[0].equalsIgnoreCase("unmark")) {
+            } else if(firstWord.equalsIgnoreCase("unmark")) {
                 line();
                 int listIndex = Integer.parseInt(strs[1]); // retrieve the index after mark/unmark
                 Task currTask = taskArr.get(listIndex - 1);
                 currTask.unmark();
                 System.out.println("     Uh oh, every task left undone lets the imposter edge closer...");
                 System.out.println("     " + currTask);
+                line();
+            } else if(firstWord.equalsIgnoreCase("todo")) {
+                String subString = input.substring(5); // take the remaining of the input String
+                Task toDo = new ToDo(subString);
+                taskArr.add(toDo);
+                line();
+                System.out.println("     Remember to complete your task!");
+                System.out.println("       " + toDo);
+                totalTasks(taskArr.size());
+                line();
+            } else if(firstWord.equalsIgnoreCase("deadline")) {
+                String subString = input.substring(9); // take the remaining of the input String
+                String[] temp = subString.split(" /"); // breaks the subString into 2 parts
+                String deadlineDate = temp[1].substring(3);
+                Task deadline = new Deadline(temp[0], deadlineDate);
+                taskArr.add(deadline);
+                line();
+                System.out.println("     This task is on a timer!");
+                System.out.println("       " + deadline);
+                totalTasks(taskArr.size());
+                line();
+            } else if(firstWord.equalsIgnoreCase("event")) {
+                String subString = input.substring(6); // take the remaining of the input String
+                String[] temp = subString.split(" /"); // breaks the subString into 2 parts
+                String eventDate = temp[1].substring(3);
+                Task event = new Event(temp[0], eventDate);
+                taskArr.add(event);
+                System.out.println("     Emergency meeting on this date!");
+                System.out.println("       " + event);
+                totalTasks(taskArr.size());
                 line();
             } else {
                 Task task = new Task(input);
@@ -95,11 +136,3 @@ public class Duke {
         }
     }
 }
-
-
-
-
-
-
-
-
