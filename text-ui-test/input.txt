@@ -8,6 +8,7 @@ todo buy textbooks
 deadline submit modreg /by friday night
 deadline apply internship /by May 2022
 deadline /by idk
+event /at
 event birthday part /at sat 2-3pm
 event 2103 lec /at fri 2pm
 event career fair /at march 2020
