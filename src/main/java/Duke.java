@@ -60,7 +60,7 @@ public class Duke {
         line();
     }
 
-    public static void list() {
+    public static void printList() {
         line();
         System.out.println("     Here are the tasks in your device:");
         for (int i = 0; i < taskArr.size(); i++) {
@@ -99,7 +99,7 @@ public class Duke {
                     line();
                     break;
                 } else if(input.equalsIgnoreCase("list")) {
-                    list();
+                    printList();
                 } else if(firstWord.equalsIgnoreCase("mark")) {
                     int listIndex = Integer.parseInt(strs[1]); // retrieve the index after mark/unmark
                     mark(listIndex);
@@ -144,7 +144,7 @@ public class Duke {
                         line();
                     }
                 } else if(firstWord.equalsIgnoreCase("delete")) {
-                    int listIndex = Integer.parseInt(strs[1]); // retrieve the index after mark/unmark
+                    int listIndex = Integer.parseInt(strs[1]); // retrieve the index after delete
                     Task taskToBeDeleted = taskArr.get(listIndex - 1);
                     deleteFromList(taskToBeDeleted);
                 } else {
