@@ -100,29 +100,63 @@ public class Alfred {
         this.sandwich_and_print(text);
     }
 
-    private void read_input(String input) {
-        if (input.equals("list")) {
+    private void read_input(String input) throws InvalidCommandException, InvalidInputException, InvalidIndexException, MissingInputException {
+        // read in arguments
+        String[] arguments = input.split(" ");
+        String command = arguments[0];
+
+        // case by case, with checks
+        // LIST
+        if ((command.equals("list")) && (arguments.length == 1)) {
             this.list_tasks();
-        } else if (input.startsWith("mark")) {
-            int task_id = Integer.valueOf(input.split(" ")[1]) - 1;
-            this.mark_task(task_id);
-        } else if (input.startsWith("unmark")) {
-            int task_id = Integer.valueOf(input.split(" ")[1]) - 1;
-            this.unmark_task(task_id);
-        } else if (input.startsWith("deadline")) {
-            String s = input.substring(8);
-            String[] arguments = s.split("/by ");
-            this.add_deadline(arguments[0], arguments[1]);
-        } else if (input.startsWith("todo")) {
+
+        // (UN)MARK
+        } else if (command.equals("mark") || command.equals("unmark")) { // validity check for (un)mark
+            if (arguments.length != 2) {
+                throw new MissingInputException();
+            }
+            int task_id = Integer.valueOf(arguments[1]) - 1;
+            if (task_id >= this.task_list.size()) {
+                throw new InvalidIndexException();
+            }
+            // checks complete
+            if (command.equals("mark")) {
+                this.mark_task(task_id);
+            } else if (command.equals("unmark")) {
+                this.unmark_task(task_id);
+            }
+
+        // DEADLINE
+        } else if (command.equals("deadline")) {
+            String s = input.substring(8); // select those after keyword
+            String[] arg = s.split("/by ");
+            if (arg.length < 2) {
+                throw new InvalidInputException();
+            }
+            this.add_deadline(arg[0], arg[1]);
+
+        } else if (command.equals("todo")) {
             String descripton = input.substring(4);
+            if ((descripton.length() < 1) || descripton.split(" ").length == 0) {
+                throw new MissingInputException();
+            }
             this.add_todo(descripton);
-        } else if (input.startsWith("event")) {
+
+        } else if (command.equals("event")) {
             String s = input.substring(5);
-            String[] arguments = s.split("/at ");
-            this.add_event(arguments[0], arguments[1]);
+            String[] arg = s.split("/at ");
+            if (arg.length < 2) {
+                throw new InvalidInputException();
+            }
+            this.add_event(arg[0], arg[1]);
         } else {
-           // do nothing
+            // invalid command
+           throw new InvalidCommandException();
         }
+    }
+
+    public void handle_alfredException(AlfredException e) {
+        this.sandwich_and_print(e.getMessage());
     }
 
 
@@ -137,7 +171,12 @@ public class Alfred {
         // input
         String input = sc.nextLine();
         while (!input.equals("bye")) {
-            bot.read_input(input);
+            try {
+                bot.read_input(input);
+            } catch(AlfredException e) {
+                bot.handle_alfredException(e);
+            }
+
             input = sc.nextLine();
         }
 
