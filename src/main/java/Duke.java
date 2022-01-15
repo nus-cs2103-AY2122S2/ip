@@ -1,4 +1,4 @@
-import java.util.Scanner; //Import the Scanner class
+import java.util.*;
 
 public class Duke {
     public static void main(String[] args) {
@@ -11,13 +11,21 @@ public class Duke {
 
         System.out.println("Oh hello dear, I'm Dukie, Zi Xin's favourite chattie box\n" +
                             "Nice to meet you dear:>\n" +
-                            "I'll just repeat what you say for now");
+                            "What can I do for you?");
 
         Scanner myObj = new Scanner(System.in); //Create a Scanner object
         String input; //declare a string variable to store input
+        List<String> all = new ArrayList<String>();
 
         while (!(input = myObj.nextLine()).equals("bye")) { //check input not "bye"
-            System.out.println(input);
+            if (!input.equals("list")) {
+                all.add(input);
+                System.out.println("added: " + input);
+            } else {
+                for (int i = 1; i <= all.size(); i++) {
+                    System.out.println(i + ". " + all.get(i-1));
+                }
+            }
         }
         System.out.println("Bye. Hope to see you again soon!"); //ending sentence
     }
