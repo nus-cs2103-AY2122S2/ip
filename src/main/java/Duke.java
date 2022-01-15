@@ -21,15 +21,32 @@ public class Duke {
                 isBye = true;
             } else if (input.equals("list")) {
                 listAllTask(taskList, taskNum);
-            } else if (input.startsWith("mark ") || input.startsWith("unmark ")){
+            } else if (input.startsWith("mark") || input.startsWith("unmark")){
                 markTask(input, taskList);
-            } else {
-                taskList[taskNum] = new Task(input, taskNum);
-                System.out.println("added: " + input);
+            } else if (input.startsWith("todo")){
+                taskList[taskNum] = new ToDo(input, taskNum);
+                System.out.println("Got it. I've added this task: ");
+                System.out.printf(" [T][%s] %s\n", taskList[taskNum].getStatus(),  taskList[taskNum].name);
                 taskNum++;
+                System.out.printf("Now you have %d task on the list\n", taskNum);
+            } else if (input.startsWith("deadline")){
+                taskList[taskNum] = new Deadline(input, taskNum);
+                System.out.println("Got it. I've added this task: ");
+                System.out.printf(" [D][%s] %s (by: %s) \n", taskList[taskNum].getStatus(),  taskList[taskNum].name, taskList[taskNum].deadline);
+                taskNum++;
+                System.out.printf("Now you have %d task on the list\n", taskNum);
+            } else if (input.startsWith("event")){
+                taskList[taskNum] = new Event(input, taskNum);
+                System.out.println("Got it. I've added this task: ");
+                System.out.printf(" [E][%s] %s (on: %s) \n", taskList[taskNum].getStatus(),  taskList[taskNum].name, taskList[taskNum].deadline);
+                taskNum++;
+                System.out.printf("Now you have %d task on the list\n", taskNum);
+            } else {
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
     }
+
     public static void markTask(String input, Task[] taskList){
         String[] inputArr = input.split(" ");
         int taskNum = Integer.parseInt(inputArr[1]) - 1;
@@ -45,6 +62,7 @@ public class Duke {
     }
 
     public static void listAllTask(Task[] taskList, int taskNum){
+        System.out.printf("Here are the tasks in your list:\n");
         for(int i=0; i<taskNum && taskNum!= 0; i++){
             System.out.print(taskList[i].toString());
         }

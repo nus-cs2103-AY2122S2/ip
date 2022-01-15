@@ -1,4 +1,5 @@
 public class Task {
+    String deadline;
     String name;
     int number;
     boolean done = false;
