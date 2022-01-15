@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Duke {
 
     public static void main(String[] args) {
-        String greeting = " Hello! I'm AskJamie_TaskVer \n What can i do for you?";
+        String greeting = " Hello! I'm TaskJamie \n What can i do for you?";
         String ending =  " Bye. Hope to see you again soon!";
         System.out.println(greeting);
 
