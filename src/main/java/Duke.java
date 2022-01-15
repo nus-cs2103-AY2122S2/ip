@@ -50,12 +50,24 @@ public class Duke {
     }
 
     public static String addTask(String s){
+        /*
+        * Takes a string as input, create a new task with the input as the name,
+        * and adds it to the task list.
+        *
+        * @param s
+        * input string to be used as the task name
+        *
+        * @return the reply of the task added
+         */
         Task t = new Task(s);
         allTasks.add(t);
         return t.reply();
     }
 
     public static void list(){
+        /*
+        * Display all current tasks in the task list as an ordered list.
+         */
         int counter = 1;
         for (Task t : allTasks) {
             System.out.println(String.format("%d. %s",counter,t.reply()));
