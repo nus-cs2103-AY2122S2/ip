@@ -34,20 +34,33 @@ public class Duke {
     }
 
     public static void processInput(String input) {
+        String message = "";
         if (input.equalsIgnoreCase("list")) {
-            String message = "Charizard's burning wish list:\n";
+            message = "Charizard's burning wish list:\n";
             for (int i = 0; i < tasks.size(); i++) {
-                message += String.format("%d. %s", i, tasks.get(i).toString());
+                message += String.format("%d. %s", i + 1, tasks.get(i).toString());
                 if (i < tasks.size() - 1) {
                     message += "\n";
                 }
             }
-            show(message);
+        } else if (input.startsWith("mark")) {
+            String inputWithoutCommand = input.replaceFirst("mark", "").trim();
+            int taskId = Integer.parseInt(inputWithoutCommand) - 1;
+            tasks.get(taskId).mark(true);
+            message = String.format("Charizard breathe out fire and burned the task.");
+            message += String.format("\n    %s", tasks.get(taskId).toString());
+        } else if (input.startsWith("unmark")) {
+            String inputWithoutCommand = input.replaceFirst("unmark", "").trim();
+            int taskId = Integer.parseInt(inputWithoutCommand) - 1;
+            tasks.get(taskId).mark(false);
+            message = String.format("Oh no! The task was not burnt completely!");
+            message += String.format("\n    %s", tasks.get(taskId).toString());
         } else {
             Task newTask = new Task(input);
             tasks.add(newTask);
-            show(String.format("Charizard is ready to burn task: %s", newTask.toString()));
+            message = String.format("Charizard is ready to burn task: %s", newTask.getDescription());
         }
+        show(message);
     }
 
     public static void exit() {
