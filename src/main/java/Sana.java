@@ -36,16 +36,37 @@ public class Sana {
      *
      * @param userCommand   the user command
      */
-    public void command(String userCommand) {
+    public void commandParser(String userCommand) {
         border();
         if (userCommand.equals("bye")) {
             bye();
         } else if (userCommand.equals("list")) {
             list();
+        } else if (userCommand.startsWith("mark")) {
+            int taskIndex = Integer.parseInt(userCommand.split(" ", 2)[1]) - 1;
+            mark(taskIndex, true);
+        } else if (userCommand.startsWith("unmark")) {
+            int taskIndex = Integer.parseInt(userCommand.split(" ", 2)[1]) - 1;
+            mark(taskIndex, false);
         } else {
             addTask(userCommand);
         }
         border();
+    }
+
+    /**
+     * This method marks the task located at the index as done or not done
+     *
+     * @param taskIndex     the index of the task to be marked done
+     * @param completion    the completion of the task
+     */
+    private void mark(int taskIndex, boolean completion) {
+        userCommands.get(taskIndex).setDone(completion);
+        if (completion) {
+            System.out.println("You've done it! Well done!");
+        } else {
+            System.out.println("Oopsies! I'll change it back!");
+        }
     }
 
     /**
@@ -64,7 +85,12 @@ public class Sana {
     private void list() {
         int index = 1;
         for (Task task : userCommands) {
-            String header = Integer.valueOf(index).toString() + ". ";
+            String header = Integer.valueOf(index).toString() + ".[";
+            if (task.getDone()) {
+                header += "X] ";
+            } else {
+                header += " ] ";
+            }
             System.out.println(header + task.getTaskName());
             index++;
         }
@@ -91,7 +117,7 @@ public class Sana {
         Scanner userInput = new Scanner(System.in);
         while (true) {
             String input = userInput.nextLine();
-            sana.command(input);
+            sana.commandParser(input);
             if (input.equals("bye")) {
                 break;
             }
