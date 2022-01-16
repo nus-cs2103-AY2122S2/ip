@@ -1,7 +1,80 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Hello! I am 
+  _           _        
+ | |         | |       
+ | |    _   _| | _____ 
+ | |   | | | | |/ / _ \
+ | |___| |_| |   <  __/
+ |______\__,_|_|\_\___|
 
+============================================================
+How can I help you?
+============================================================
+============================================================
+I have added the following task into list: 
+	[T][ ] read book
+now you have 1 tasks in the list.
+============================================================
+============================================================
+I have added the following task into list: 
+	[D][ ] return book (by: June 6th)
+now you have 2 tasks in the list.
+============================================================
+============================================================
+I have added the following task into list: 
+	[E][ ] project meeting (at: Aug 6th 2-4pm)
+now you have 3 tasks in the list.
+============================================================
+============================================================
+I have added the following task into list: 
+	[T][ ] join sports club
+now you have 4 tasks in the list.
+============================================================
+============================================================
+Using the force... Great! I have forced this task as done.
+============================================================
+============================================================
+Using the force... Great! I have forced this task as done.
+============================================================
+============================================================
+I have added the following task into list: 
+	[T][ ] borrow book
+now you have 5 tasks in the list.
+============================================================
+============================================================
+Currently, you have the following tasks:
+	1. [T][X] read book
+	2. [D][ ] return book (by: June 6th)
+	3. [E][ ] project meeting (at: Aug 6th 2-4pm)
+	4. [T][X] join sports club
+	5. [T][ ] borrow book
+============================================================
+============================================================
+I have added the following task into list: 
+	[D][ ] return book (by: Sunday)
+now you have 6 tasks in the list.
+============================================================
+============================================================
+I have added the following task into list: 
+	[E][ ] project meeting (at: Mon 2-4pm)
+now you have 7 tasks in the list.
+============================================================
+============================================================
+Using the force... Great! I have forced this task as done.
+============================================================
+============================================================
+Force should be used for greater good!
+I've forced this task as not done yet...
+============================================================
+============================================================
+Currently, you have the following tasks:
+	1. [T][ ] read book
+	2. [D][X] return book (by: June 6th)
+	3. [E][ ] project meeting (at: Aug 6th 2-4pm)
+	4. [T][X] join sports club
+	5. [T][ ] borrow book
+	6. [D][ ] return book (by: Sunday)
+	7. [E][ ] project meeting (at: Mon 2-4pm)
+============================================================
+============================================================
+I'll take my leave... Do you know who is my father?
+============================================================

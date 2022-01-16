@@ -28,14 +28,14 @@ public class Luke {
     public void printTaskList() {
         String msg = "Currently, you have the following tasks:\n";
         for (int i = 0; i < taskIndex; i++) {
-            msg += String.format("%d. %s\n", i+1, taskList[i]);
+            msg += String.format("\t%d. %s\n", i+1, taskList[i]);
         }
         printOutput(msg.stripTrailing());
     }
     public void printOutput(String output) {
-        String msg = "======================================================================\n"
-                + String.format("[%s] %s\n", Luke.BOT_NAME, output)
-                + "======================================================================";
+        String msg = "============================================================\n"
+                + String.format("%s\n", output)
+                + "============================================================";
         System.out.println(msg);
     }
 
@@ -63,18 +63,18 @@ public class Luke {
                             break;
                     }
                     taskList[taskIndex++] = task;
-                    printOutput(String.format("I have added the following task into list: \n %s \n now you have %d tasks in the list.", task, taskIndex));
+                    printOutput(String.format("I have added the following task into list: \n\t%s\nnow you have %d tasks in the list.", task, taskIndex));
                     break;
                 case UPDATE:
                     int index = Integer.valueOf(cmd.getArgumentByKey("index")) - 1;
                     switch (cmd.getCommandAction()) {
                         case MARK:
                             taskList[index].markAsDone();
-                            printOutput("Great! I have marked this task as done.");
+                            printOutput("Using the force... Great! I have forced this task as done.");
                             break;
                         case UNMARK:
                             taskList[index].unmarkAsDone();
-                            printOutput("Noted, I've mark this task as not done yet.");
+                            printOutput("Force should be used for greater good!\nI've forced this task as not done yet...");
                             break;
                     }
                     break;
