@@ -6,7 +6,9 @@ mark 1
 list
 mark 2
 list
+delete
 unmark 2
+delete 1
 list
 todo
 todo buy dinner
@@ -14,4 +16,5 @@ deadline /by 10
 event /at 2pm Sun
 deadline finish 2103 /by today
 list
+delete 3
 bye

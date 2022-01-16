@@ -3,16 +3,17 @@ import main.java.Task;
 import java.util.Scanner;
 import main.java.ToDo;
 import main.java.Deadline;
+import java.util.ArrayList;
 import main.java.Event;
 
 public class Duke {
 
-    private static int level = 5;
-    private Task taskArr[];
+    private static int level = 6;
+    private ArrayList<Task> taskArr;
     private int currTask;
 
     public Duke() {
-        this.taskArr = new Task[100];
+        this.taskArr = new ArrayList<Task>();
         this.currTask = 0;
     }
 
@@ -59,6 +60,12 @@ public class Duke {
                     System.out.println("todo YOUR_TASK");
                 }
             }
+        } else if (command.equals("delete")) {
+            try {
+                delete(Integer.parseInt(words[1]) - 1);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Specify a task to delete!");
+            }
         } else {
             System.out.println("Idk what you mean! :-(");
         }
@@ -70,21 +77,21 @@ public class Duke {
             System.out.println("No tasks added yet!");
         } else {
             for (int i = 0; i < currTask; i++) {
-                System.out.println(i+1 + ". " + taskArr[i].toString());
+                System.out.println(i+1 + ". " + taskArr.get(i).toString());
             }
         }
     }
 
     public void mark(int num) {
-        taskArr[num].markDone();
+        taskArr.get(num).markDone();
         System.out.println("Cool! You seemed to have been productive just like me! I've marked this task as done:");
-        System.out.println(taskArr[num].toString());
+        System.out.println(taskArr.get(num).toString());
     }
 
     public void unmark(int num){
         System.out.println("Did you mess up something? Fine... I'll mark it as undone -- but I believe you can do it!:");
-        taskArr[num].markUndone();
-        System.out.println(taskArr[num].toString());
+        taskArr.get(num).markUndone();
+        System.out.println(taskArr.get(num).toString());
     }
     public void exit() {
         horizontal();
@@ -94,20 +101,28 @@ public class Duke {
 
     public void addTask(String userCommand, String type) {
         if (type.equals("todo")) {
-            taskArr[currTask] = new ToDo(userCommand);
+            taskArr.add(new ToDo(userCommand));
         } else if (type.equals("deadline")) {
             String words[] = userCommand.split(" /by ", 2);
-            taskArr[currTask] = new Deadline(words[0], words[1]);
+            taskArr.add(new Deadline(words[0], words[1]));
         } else {
             String words[] = userCommand.split(" /at ", 2);
-            taskArr[currTask] = new Event(words[0], words[1]);
+            taskArr.add(new Event(words[0], words[1]));
         }
 
         System.out.println("Roger, I got you. I've added this task:");
-        System.out.println(taskArr[currTask].toString());
+        System.out.println(taskArr.get(currTask).toString());
         currTask++;
         System.out.println("Now you have " + currTask + " tasks in the list.");
 
+    }
+
+    public void delete(int taskNum) {
+        System.out.println("Noted, I have removed this task:");
+        System.out.println(taskArr.get(taskNum).toString());
+        taskArr.remove(taskNum);
+        currTask--;
+        System.out.println("Now you have " + currTask + " tasks in the list.");
     }
 
     public void horizontal() {
