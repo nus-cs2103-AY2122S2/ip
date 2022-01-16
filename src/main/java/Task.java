@@ -25,6 +25,11 @@ public class Task {
     }
 
     public String getCurrentStatus() {
-        return "[" + getStatusIcon() + "] " + this.taskName;
+        return "[" + getStatusIcon() + "] " + this;
+    }
+
+    public String getType() {
+        return "Generic Task";
     }
 }
+
