@@ -84,7 +84,7 @@ public class Duke {
                     //Create deadline
                     Deadline deadline = new Deadline(inputForDeadlineConstructor[0], inputForDeadlineConstructor[1]);
                     System.out.println(String.format(
-                            "    Got it. I've added this task: \n      %s", deadline.identify()));
+                            "    Got it. I've added this task:\n      %s", deadline.identify()));
                     tasks.add(deadline);
                     System.out.println(String.format("    Now you have %d tasks in the list.", tasks.size()));
                     break;
@@ -98,7 +98,7 @@ public class Duke {
                     //Create Todo
                     ToDo todo = new ToDo(processedCommand[1]);
                     System.out.println(String.format(
-                            "    Got it. I've added this task: \n      %s", todo.identify()));
+                            "    Got it. I've added this task:\n      %s", todo.identify()));
                     tasks.add(todo);
                     System.out.println(String.format("    Now you have %d tasks in the list.", tasks.size()));
                     break;
@@ -120,7 +120,7 @@ public class Duke {
                     //Create event
                     Event event = new Event(inputForEventConstructor[0], inputForEventConstructor[1]);
                     System.out.println(String.format(
-                            "    Got it. I've added this task: \n      %s", event.identify()));
+                            "    Got it. I've added this task:\n      %s", event.identify()));
                     tasks.add(event);
                     System.out.println(String.format("    Now you have %d tasks in the list.", tasks.size()));
                     break;
