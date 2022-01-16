@@ -1,10 +1,10 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 public class Duke {
-    public static void listOut(ArrayList<String> list) {
+    public static void listOut(ArrayList<Action> list) {
         int count = 1;
-        for (String s : list) {
-            System.out.println(count + ". " + s);
+        for (Action act : list) {
+            System.out.println(count + ". " + act);
             count++;
         }
     }
@@ -14,7 +14,7 @@ public class Duke {
                 "What can I do for you?";
         System.out.println(greeting);
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> store = new ArrayList<>();
+        ArrayList<Action> store = new ArrayList<>();
         Action action = new Action(sc.nextLine());
         while (!action.isBye()) {
             if (action.isList()) {
@@ -22,7 +22,10 @@ public class Duke {
                 action = new Action(sc.nextLine());
                 continue;
             }
-            store.add(action.toString());
+            if (action.isMark()) {
+
+            }
+            store.add(action);
             System.out.println("added: " + action);
             action = new Action(sc.nextLine());
         }
