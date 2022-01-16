@@ -1,7 +1,7 @@
 public class Task {
 
-    private String s;
-    private boolean done;
+    public String s;
+    public boolean done;
 
     public Task(String s){
         this.s = s;
@@ -26,4 +26,5 @@ public class Task {
             return "[ ] " + this.s;
         }
     }
+
 }
