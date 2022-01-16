@@ -3,13 +3,13 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static int level = 2;
-    private Task task_arr[];
-    private int curr_task;
+    private static int level = 3;
+    private Task taskArr[];
+    private int currTask;
 
     public Duke() {
-        this.task_arr = new Task[100];
-        this.curr_task = 0;
+        this.taskArr = new Task[100];
+        this.currTask = 0;
     }
 
     public void run() {
@@ -17,47 +17,62 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         boolean end = false;
         while (!end) {
-            String user_command = sc.nextLine();
-            if (user_command.equals("bye")){
+            String userCommand = sc.nextLine();
+            if (userCommand.equals("bye")){
                 exit();
                 end = true;
             } else {
-                handle(user_command);
+                handle(userCommand);
             }
         }
     }
 
-    public void handle(String user_command) {
-        String words[] = user_command.split(" ", 2);
+    public void handle(String userCommand) {
+        String words[] = userCommand.split(" ", 2);
         horizontal();
-        if (user_command.equals("list")) {
-            if (curr_task == 0) {
-                System.out.println("No tasks added yet!");
-            } else {
-                for (int i = 0; i < curr_task; i++) {
-                    System.out.println(i+1 + "." + "[" + task_arr[i].getStatusIcon() + "] " + task_arr[i].getDescription());
-                }
-            }
+        if (userCommand.equals("list")) {
+            list();
         } else if (words[0].equals("mark")){
-            System.out.println("Cool! You seemed to have been productive just like me! I've marked this task as done: ");
-            task_arr[Integer.parseInt(words[1]) - 1].markDone();
-            System.out.println( "[" + task_arr[Integer.parseInt(words[1]) - 1].getStatusIcon() + "] " + task_arr[Integer.parseInt(words[1]) - 1].getDescription());
+            mark(Integer.parseInt(words[1]) - 1);
         } else if (words[0].equals("unmark")){
-            System.out.println("Did you mess up something? Fine... I'll mark it as undone heh but I believe you can do it!: ");
-            task_arr[Integer.parseInt(words[1]) - 1].markUndone();
-            System.out.println( "[" + task_arr[Integer.parseInt(words[1]) - 1].getStatusIcon() + "] " + task_arr[Integer.parseInt(words[1]) - 1].getDescription());
+            unmark(Integer.parseInt(words[1]) - 1);
         } else {
-            task_arr[curr_task] = new Task(user_command);
-            System.out.println("added new task: "+ user_command);
-            curr_task++;
-            }
+            addTask(userCommand);
+        }
         horizontal();
     }
 
+    public void list() {
+        if (currTask == 0) {
+            System.out.println("No tasks added yet!");
+        } else {
+            for (int i = 0; i < currTask; i++) {
+                System.out.println(i+1 + "." + "[" + taskArr[i].getStatusIcon() + "] " + taskArr[i].getDescription());
+            }
+        }
+    }
+
+    public void mark(int num) {
+        System.out.println("Cool! You seemed to have been productive just like me! I've marked this task as done: ");
+        taskArr[num].markDone();
+        System.out.println( "[" + taskArr[num].getStatusIcon() + "] " + taskArr[num].getDescription());
+    }
+
+    public void unmark(int num){
+        System.out.println("Did you mess up something? Fine... I'll mark it as undone -- but I believe you can do it!: ");
+        taskArr[num].markUndone();
+        System.out.println( "[" + taskArr[num].getStatusIcon() + "] " + taskArr[num].getDescription());
+    }
     public void exit() {
         horizontal();
         System.out.println("Bye nerd. Glad you'll be interacting with a real life human now! Haha...");
         horizontal();
+    }
+
+    public void addTask(String userCommand) {
+        taskArr[currTask] = new Task(userCommand);
+        System.out.println("added new task: "+ userCommand);
+        currTask++;
     }
 
     public void horizontal() {
