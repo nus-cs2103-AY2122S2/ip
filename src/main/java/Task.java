@@ -25,12 +25,16 @@ public class Task {
         this.done = false;
     }
 
+    public String getGenericTaskName() {
+        return String.format("[%s] %s", this.done ? "X" : " ", this.taskName);
+    }
+
     /**
      * Overrides the string representation of the task to just the task name.
      * @return The task name.
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.done ? "X" : " ", this.taskName);
+        return "[T]" + this.getGenericTaskName();
     }
 }
