@@ -25,20 +25,45 @@ public class Duke {
                 for (int i = 1; i <= all.size(); i++) {
                     System.out.println(i + ". " + all.get(i-1).toString());
                 }
+            }
 
-            } else if (words[0].equals("mark")) {
+            else if (words[0].equals("mark")) {
                 int n = Integer.parseInt(words[1]);
                 all.get(n-1).markDone(); //call Task method, mark task as done
+            }
 
-            } else if (words[0].equals("unmark")) {
+            else if (words[0].equals("unmark")) {
                 int n = Integer.parseInt(words[1]);
                 all.get(n-1).unMarkDone(); //call Task method, mark task as not done
-
-            } else {
-                Task task = new Task(input);
-                all.add(task);
-                System.out.println(task.toString());
             }
+
+            else { //adding of Tasks
+
+                if (words[0].equals("todo")) {
+                    ToDo item = new ToDo(words[1]);
+                    all.add(item);
+                    System.out.println("Got it. I've added this task: ");
+                    System.out.println(item.toString());
+                }
+
+                if (words[0].equals("deadline")) {
+                    String[] split_deadline = words[1].split("/by", 2);
+                    Deadline item = new Deadline(split_deadline[0], split_deadline[1]);
+                    all.add(item);
+                    System.out.println("Got it. I've added this task: ");
+                    System.out.println(item.toString());
+                }
+
+                if (words[0].equals("event")) {
+                    String[] split_event = words[1].split("/at", 2);
+                    Event item = new Event(split_event[0], split_event[1]);
+                    all.add(item);
+                    System.out.println("Got it. I've added this task: ");
+                    System.out.println(item.toString());
+                }
+                System.out.println("Now you have " + all.size() + " tasks in the list."); //print when new task added
+            }
+
         }
         System.out.println("Bye. Hope to see you again soon!"); //ending sentence
     }
