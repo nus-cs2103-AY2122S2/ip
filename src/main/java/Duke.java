@@ -12,6 +12,9 @@ public class Duke {
             String[] processedCommand = comm.split(" ", 2);
             Integer taskIndex = null;
             switch (processedCommand[0]) {
+                case "hi":
+                    System.out.println("    Hello! I'm Duke\n    What can I do for you?");
+                    break;
                 case "bye":
                     System.out.println("    Bye. Hope to see you again soon!");
                     isExit = true;
@@ -123,10 +126,7 @@ public class Duke {
                     System.out.println(String.format("    Now you have %d tasks in the list.", numOfTasks));
                     break;
                 default:
-                    System.out.println(String.format("    added: %s", comm));
-                    Task newTask = new Task(comm);
-                    tasks[numOfTasks] = newTask;
-                    numOfTasks++;
+                    new DukeException();
             }
         }
         sc.close();
