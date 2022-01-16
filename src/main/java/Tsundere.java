@@ -2,8 +2,9 @@ import java.util.Scanner;
 
 public class Tsundere {
 
-    static private String lines = "--------------------------------------------------------------------------------";
-    static private boolean isBye;
+    static final private String lines = "--------------------------------------------------------------------------------";
+    static String[] aryLst = new String[100];
+    static int countLst = 0;
 
     public static void main(String[] args) {
         String logo = " ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⠤⠤⠤⠤⠤⠤⢤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
@@ -40,15 +41,21 @@ public class Tsundere {
                 "⠉⢫⠀⠇⠀⠀⠀⠀⠇⠈⠻⣥⠓⠆⣤⡇⡆⠀⠀⠀⠀⠀⡇⡇⠉⠓⠢⣄⠀⢆⡀⠠⡷⠀⠀⠂⠀⠀⠀⠀⠀⠀⣄⠉⠉⠁⢳⡄⢀⣠⠤⠖⢟⡇⠀⠀⠈⢇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀";
         System.out.println("It's you again...\n" + logo);
         greet();
-        isBye = false;
+        boolean isBye = false;
+
         Scanner sc = new Scanner(System.in);
         while (!isBye) {
             String userInput =  sc.nextLine();
-            if (userInput.equals("bye")) {
-                exit();
-                isBye = true;
-            } else {
-                echo(userInput);
+            switch (userInput.toUpperCase()) {
+                case "BYE":
+                    exit();
+                    isBye = true;
+                    break;
+                case "LIST":
+                    list();
+                    break;
+                default:
+                    echo(userInput);
             }
 
         }
@@ -63,6 +70,16 @@ public class Tsundere {
     static private void echo(String userInput) {
         System.out.println(lines);
         System.out.println(userInput);
+        aryLst[countLst] = userInput;
+        countLst++;
+        System.out.println(lines);
+    }
+    static private void list() {
+        System.out.println(lines);
+        for (int i = 0; i < countLst; i++) {
+            int num = i + 1;
+            System.out.println(num + ". " + aryLst[i]);
+        }
         System.out.println(lines);
     }
 
