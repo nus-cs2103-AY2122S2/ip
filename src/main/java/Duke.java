@@ -39,8 +39,13 @@ public class Duke {
                     int n = Integer.parseInt(words[1]);
                     all.get(n - 1).unMarkDone(); //call Task method, mark task as not done
 
-                } else { //adding of Tasks
+                } else if (words[0].equals("delete")) {
+                    int n = Integer.parseInt(words[1]);
+                    all.remove(n - 1);
+                    System.out.println("Now you have " + all.size() + " tasks in the list.");
+                }
 
+                else { //adding of Tasks
                     if (words[0].equals("todo")) {
                         try {
                             ToDo item = new ToDo(words[1]);
