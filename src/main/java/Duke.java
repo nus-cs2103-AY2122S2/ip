@@ -1,10 +1,11 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
         System.out.println("    Hello! I'm Duke\n    What can I do for you?");
-        Task[] tasks = new Task[100];
-        int numOfTasks = 0;
+        ArrayList<Task> tasks = new ArrayList<Task>();
+        //Task[] tasks = new Task[100];
         Scanner sc = new Scanner(System.in);
         boolean isExit = false;
         while (!isExit) {
@@ -21,10 +22,10 @@ public class Duke {
                     break;
                 case "list":
                     System.out.println("    Here are the tasks in your list:");
-                    for (int i = 0; i < numOfTasks; i++) {
+                    for (int i = 0; i < tasks.size(); i++) {
                         int indexToPrint = i + 1;
                         System.out.println(String.format(
-                                "    %d.%s", indexToPrint, tasks[i].identify()));
+                                "    %d.%s", indexToPrint, tasks.get(i).identify()));
                     }
                     break;
                 case "mark":
@@ -41,9 +42,9 @@ public class Duke {
                     }
 
                     //Mark task
-                    tasks[taskIndex].setIsDone(true);
+                    tasks.get(taskIndex).setIsDone(true);
                     System.out.println(String.format(
-                            "    Nice! I've marked this task as done:\n    %s", tasks[taskIndex].identify()));
+                            "    Nice! I've marked this task as done:\n    %s", tasks.get(taskIndex).identify()));
                     break;
                 case "unmark":
                     //Exception catching
@@ -59,9 +60,9 @@ public class Duke {
                     }
 
                     //Unmark task
-                    tasks[taskIndex].setIsDone(false);
+                    tasks.get(taskIndex).setIsDone(false);
                     System.out.println("    Ok! I've marked this task as not done yet:" + "\n"
-                            + "      " + tasks[taskIndex].identify());
+                            + "      " + tasks.get(taskIndex).identify());
                     break;
                 case "deadline":
                     //Exception catching
@@ -82,10 +83,9 @@ public class Duke {
                     //Create deadline
                     Deadline deadline = new Deadline(inputForDeadlineConstructor[0], inputForDeadlineConstructor[1]);
                     System.out.println(String.format(
-                            "    Got it. I've added this task: \n    %s", deadline.identify()));
-                    tasks[numOfTasks] = deadline;
-                    numOfTasks++;
-                    System.out.println(String.format("    Now you have %d tasks in the list.", numOfTasks));
+                            "    Got it. I've added this task: \n      %s", deadline.identify()));
+                    tasks.add(deadline);
+                    System.out.println(String.format("    Now you have %d tasks in the list.", tasks.size()));
                     break;
                 case "todo":
                     //Exception catching
@@ -98,9 +98,8 @@ public class Duke {
                     ToDo todo = new ToDo(processedCommand[1]);
                     System.out.println(String.format(
                             "    Got it. I've added this task: \n      %s", todo.identify()));
-                    tasks[numOfTasks] = todo;
-                    numOfTasks++;
-                    System.out.println(String.format("    Now you have %d tasks in the list.", numOfTasks));
+                    tasks.add(todo);
+                    System.out.println(String.format("    Now you have %d tasks in the list.", tasks.size()));
                     break;
                 case "event":
                     //Exception catching
@@ -121,9 +120,8 @@ public class Duke {
                     Event event = new Event(inputForEventConstructor[0], inputForEventConstructor[1]);
                     System.out.println(String.format(
                             "    Got it. I've added this task: \n      %s", event.identify()));
-                    tasks[numOfTasks] = event;
-                    numOfTasks++;
-                    System.out.println(String.format("    Now you have %d tasks in the list.", numOfTasks));
+                    tasks.add(event);
+                    System.out.println(String.format("    Now you have %d tasks in the list.", tasks.size()));
                     break;
                 default:
                     new DukeException();
