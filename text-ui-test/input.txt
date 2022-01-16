@@ -1,0 +1,5 @@
+deadline do homework /by Tmr
+event project meeting /at Mon 2-4pm
+todo borrow book
+list
+bye
