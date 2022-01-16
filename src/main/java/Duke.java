@@ -19,9 +19,11 @@ public class Duke {
         while (!action.isBye()) {
             if (action.isList()) {
                 listOut(store);
+                action = new Action(sc.nextLine());
                 continue;
             }
-            System.out.println(action);
+            store.add(action.toString());
+            System.out.println("added: " + action);
             action = new Action(sc.nextLine());
         }
         System.out.println("Bye! Hope to see you again soon!");
