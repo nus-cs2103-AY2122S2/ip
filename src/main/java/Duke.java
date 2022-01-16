@@ -1,7 +1,10 @@
 import java.util.Scanner;
 
 public class Duke {
+    // Keeps track of the number of tasks
     private static int id = 0;
+
+    // Array containing tasks
     private static final Task[] tasks = new Task[100];
 
     public static void listTasks() {
@@ -11,22 +14,40 @@ public class Duke {
         }
     }
 
-    public static void markTask(int i) {
-        Task t = tasks[i];
-        t.markAsDone();
-        System.out.println("    Great job! I've marked the task as completed:");
-        System.out.println("    " + t);
+    public static void markTask(String request, String[] parsedReq) throws DukeException {
+        if (parsedReq.length != 2) {
+            throw new DukeException("Please tell me which task you would like to be marked as done.");
+        } else {
+            try {
+                int curr = Integer.parseInt(parsedReq[1]) - 1;
+                Task t = tasks[curr];
+                t.markAsDone();
+                System.out.println("    Great job! I've marked the task as completed:");
+                System.out.println("    " + t);
+            } catch (NumberFormatException n) {
+                throw new DukeException("Oh no, that is not a valid task to mark!");
+            }
+        }
     }
 
-    public static void unmarkTask(int i) {
-        Task t = tasks[i];
-        t.markAsUndone();
-        System.out.println("    No problem, I've marked the task as uncompleted:");
-        System.out.println("    " + t);
+    public static void unmarkTask(String request, String[] parsedReq) throws DukeException {
+        if (parsedReq.length != 2) {
+            throw new DukeException("Please tell me which task you would like to be marked as undone.");
+        } else {
+            try {
+                int curr = Integer.parseInt(parsedReq[1]) - 1;
+                Task t = tasks[curr];
+                t.markAsUndone();
+                System.out.println("    No problem, I've marked the task as uncompleted:");
+                System.out.println("    " + t);
+            } catch (NumberFormatException n) {
+                throw new DukeException("Oh no, that is not a valid task to unmark!");
+            }
+        }
     }
 
     public static void createTodo(String request, String[] parsedReq) throws DukeException {
-        if (parsedReq.length == 1) {
+        if (parsedReq.length != 2) {
             throw new DukeException("The description of a todo cannot be empty.");
         } else {
             Task newTask = new Todo(request.substring(5));
@@ -40,6 +61,8 @@ public class Duke {
     public static void createDeadline(String request, String[] parsedReq) throws DukeException {
         if (parsedReq.length == 1) {
             throw new DukeException("The description of a deadline cannot be empty.");
+        } else if (!request.contains(" /by ")) {
+            throw new DukeException("You left the deadline of the deadline empty!");
         } else {
             int dIndex = request.indexOf("/by");
             Task newTask = new Deadline(request.substring(9, dIndex), request.substring(dIndex + 4));
@@ -53,6 +76,8 @@ public class Duke {
     public static void createEvent(String request, String[] parsedReq) throws DukeException {
         if (parsedReq.length == 1) {
             throw new DukeException("The description of an event cannot be empty.");
+        } else if (!request.contains(" /at ")) {
+            throw new DukeException("You left the date of the event empty!");
         } else {
             int eIndex = request.indexOf("/at");
             Task newTask = new Event(request.substring(6, eIndex), request.substring(eIndex + 4));
@@ -82,7 +107,8 @@ public class Duke {
                 "    How may I be of service to you?\n" + divider);
 
         while (userInput.hasNextLine()) {
-            String request = userInput.nextLine();
+            // Removes all leading and trailing white spaces
+            String request = userInput.nextLine().strip();
             String[] parsedReq = request.split(" ");
 
             // Main response
@@ -93,9 +119,9 @@ public class Duke {
                 } else if (request.equals("list")) {
                     listTasks();
                 } else if (request.startsWith("mark")) {
-                    markTask(Integer.parseInt(parsedReq[1]) - 1);
+                    markTask(request, parsedReq);
                 } else if (request.startsWith("unmark")) {
-                    unmarkTask(Integer.parseInt(parsedReq[1]) - 1);
+                    unmarkTask(request, parsedReq);
                 } else if (request.startsWith("todo")) {
                     createTodo(request, parsedReq);
                 } else if (request.startsWith("deadline")) {
