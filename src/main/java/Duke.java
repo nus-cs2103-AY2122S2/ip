@@ -2,12 +2,12 @@ import java.util.Scanner;
 
 public class Duke {
     private static final int MAX_TASK = 100;
-    private static String[] tasks;
+    private static Task[] tasks;
     private static int number_of_task;
     private static final String delimiter = "*******************************************************";
 
     private static void init() {
-        tasks = new String[MAX_TASK];
+        tasks = new Task[MAX_TASK];
         number_of_task = 0;
     }
 
@@ -31,11 +31,12 @@ public class Duke {
     }
 
     private static void addTask(String task) {
-        tasks[number_of_task] = task;
+        tasks[number_of_task] = new Task(task);
         number_of_task++;
     }
 
     private static void listTask() {
+        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < number_of_task; i++) {
             System.out.printf("%d. %s\n", i + 1, tasks[i]);
         }
