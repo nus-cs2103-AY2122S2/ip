@@ -13,15 +13,20 @@ U _____ u    ____    _   _      U  ___ u
           2. [D][ ] return book  (by: Sunday)
         Now you have 2 tasks in the list.
         Got it. I've added this task:
-          3. [E][ ] project meeting  (at: on 2-4pm)
+          3. [E][ ] project meeting  (at: Mon 2-4pm)
         Now you have 3 tasks in the list.
         1. [T][ ] borrow book
         2. [D][ ] return book  (by: Sunday)
-        3. [E][ ] project meeting  (at: on 2-4pm)
+        3. [E][ ] project meeting  (at: Mon 2-4pm)
         Nice! The task is marked as done:
           1. [T][X] borrow book
         Nice! The task is marked as done:
           2. [D][X] return book  (by: Sunday)
         1. [T][X] borrow book
         2. [D][X] return book  (by: Sunday)
-        3. [E][ ] project meeting  (at: on 2-4pm)
+        3. [E][ ] project meeting  (at: Mon 2-4pm)
+        Noted. I've removed this task: 
+          2. [D][X] return book  (by: Sunday)
+        Now you have 2 tasks in the list.
+        1. [T][X] borrow book
+        2. [E][ ] project meeting  (at: Mon 2-4pm)

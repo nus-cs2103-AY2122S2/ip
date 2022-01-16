@@ -25,14 +25,14 @@ public class Echo {
             this.getTask();
         } else if (command.equals("mark")) {
             if (split.length == 1 || !isInteger(split[1])) {
-                throw new EchoException("Please specify the task number(Integer).");
+                throw new EchoException("Please specify the task number to be marked.");
             }
-            this.mark(Integer.parseInt(split[1]));
+            this.mark(Integer.parseInt(split[1]) - 1);
         } else if (command.equals("unmark")) {
             if (split.length == 1 || !isInteger(split[1])) {
-                throw new EchoException("Please specify the task number(Integer).");
+                throw new EchoException("Please specify the task number to be unmarked.");
             }
-            this.unmark(Integer.parseInt(split[1]));
+            this.unmark(Integer.parseInt(split[1]) - 1);
         } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
             if (split.length == 1) {
                 throw new EchoException(String.format("The description of a %s cannot be empty.", s));
@@ -44,6 +44,11 @@ public class Echo {
                 throw new EchoException("Please specify the time of the event. E.g. meeting /at Mon");
             }
             this.addTask(command, s.substring(command.length() + 1));
+        } else if (command.equals("delete")) {
+            if (split.length == 1 || !isInteger(split[1])) {
+                throw new EchoException("Please specify the task number to be deleted.");
+            }
+            this.delete(Integer.parseInt(split[1]) - 1);
         } else {
             System.out.println(
                     "       ☹ OOPS!!! I'm sorry, but I don't know what that means :-( \n" +
@@ -86,6 +91,15 @@ public class Echo {
      */
     public void unmark(int i) {
         taskList.unmark(i);
+    }
+
+    /**
+     * Delete task.
+     *
+     * @param i Task index.
+     */
+    public void delete(int i) {
+        taskList.delete(i);
     }
 
     /**

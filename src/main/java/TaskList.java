@@ -1,21 +1,19 @@
+import java.util.ArrayList;
+
 /**
  * Encapsulates a task-list.
  */
 public class TaskList {
 
-    /** Array of task. */
-    private final Task[] tasks;
-
-    /** 1-based length of tasks. */
-    private int count;
+    /** Arraylist of task. */
+    private ArrayList<Task> tasks;
 
     /**
      * Constructor for TaskList class.
-     * 1-based array.
+     * 1-based ArrayList array.
      */
     public TaskList() {
-        this.tasks = new Task[101];
-        this.count = 1;
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -39,14 +37,14 @@ public class TaskList {
                 break;
             case "event":
                 split = s.split("/");
-                time = split[1].substring(4); // time
+                time = split[1].substring(3); // time
                 cur = new Event(split[0], time);
                 break;
         }
-        tasks[count++] = cur;
+        tasks.add(cur);
         System.out.println("        Got it. I've added this task:");
-        System.out.println("  " + this.taskStatus(count-1));
-        System.out.printf("        Now you have %d tasks in the list.%n", count-1);
+        System.out.println("  " + this.taskStatus(tasks.size() - 1));
+        this.size();
     }
 
     /**
@@ -57,7 +55,7 @@ public class TaskList {
      * @return String representation of task index and description.
      */
     private String taskStatus(int i) {
-        return String.format("        %d. %s", i, tasks[i].toString());
+        return String.format("        %d. %s", i+1, tasks.get(i).toString());
     }
 
     /**
@@ -67,7 +65,7 @@ public class TaskList {
      */
     public void mark(int i) {
         try {
-            tasks[i].mark();
+            tasks.get(i).mark();
             System.out.println("        Nice! The task is marked as done:");
             System.out.println("  " + this.taskStatus(i));
         } catch (Exception e) {
@@ -82,12 +80,37 @@ public class TaskList {
      */
     public void unmark(int i) {
         try {
-            tasks[i].unmark();
+            tasks.get(i).unmark();
             System.out.println("        OK! The task is unmarked:");
             System.out.println("  " + this.taskStatus(i));
         } catch (Exception e) {
             System.out.println("        Task does not exist!");
         }
+    }
+
+    /**
+     * Delete task.
+     *
+     * @param i Task index.
+     */
+    public void delete(int i) {
+        try {
+            String status = this.taskStatus(i);
+            tasks.remove(i);
+            System.out.println("        Noted. I've removed this task: ");
+            System.out.println("  " + status);
+            this.size();
+        } catch (Exception e) {
+            System.out.println("        Task does not exist!");
+        }
+    }
+
+    /**
+     * Prints the number of tasks.
+     *
+     */
+    private void size() {
+        System.out.printf("        Now you have %d tasks in the list.%n", tasks.size());
     }
 
     /**
@@ -99,8 +122,8 @@ public class TaskList {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         String prefix = "";
-        for (int i = 1; i < tasks.length; i++) {
-            if (tasks[i] == null) break;
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i) == null) break;
             sb.append(prefix);
             prefix = "\n";
             sb.append(this.taskStatus(i));
