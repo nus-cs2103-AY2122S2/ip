@@ -42,7 +42,7 @@ public class Duke {
                 // TODO Handle conversion exception
                 System.out.println(list.markTaskDone(index));
             }  else {
-                System.out.println("\n");
+                //System.out.println("\n");
                 System.out.println(line);
                 String response = list.addTask(input);
                 System.out.println(response);

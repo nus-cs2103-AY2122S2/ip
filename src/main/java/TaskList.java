@@ -13,7 +13,7 @@ public class TaskList {
 
         String str = String.format( "Got it. I've added this task:\n" +
                                     "\t%s\n" +
-                                    "Now you have %d tasks in the list.\n",t.toString(),list.size());
+                                    "Now you have %d tasks in the list.",t.toString(),list.size());
         return str;
     }
 
@@ -21,8 +21,8 @@ public class TaskList {
         // TODO Handle index out of bounds exception
         Task t = list.get(index-1);
         t.markDone();
-        String s = String.format("Nice! I've marked this task as done:\n");
-        s += t.toString();
+        String s = String.format("+++ Nice! I've marked this task as done:\n" +
+                "+++ %s\n",t);
         return s;
     }
 
@@ -30,18 +30,20 @@ public class TaskList {
         // TODO Handle index out of bounds exception
         Task t = list.get(index-1);
         t.markunDone();
-        String s = String.format("OK, I've marked this task as not done yet:\n");
-        s += t.toString();
+        String s = String.format("--- OK, I've marked this task as not done yet:\n" +
+                "--- %s\n",t);
         return s;
     }
 
     public String getTaskList(){
         int i = 1;
-        String s = "Here is your task list:\n";
+        String s =  "=====================================================================================\n";
+        s += "Here is your task list:\n";
         for (Task t: list) {
             s+=String.format("%d.%s\n",i,t.toString());
             i++;
         }
+        s +=        "=====================================================================================";
         return s;
     }
 }
