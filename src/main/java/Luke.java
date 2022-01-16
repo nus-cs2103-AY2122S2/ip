@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Duke {
+public class Luke {
     public static final String BOT_NAME = "Luke";
     private static final String LOGO = "  _           _        \n"
             +" | |         | |       \n"
@@ -11,7 +11,7 @@ public class Duke {
     private Task[] taskList;
     private int taskIndex;
 
-    Duke() {
+    Luke() {
         taskList = new Task[100];
         taskIndex = 0;
     }
@@ -34,7 +34,7 @@ public class Duke {
     }
     public void printOutput(String output) {
         String msg = "======================================================================\n"
-                + String.format("[%s] %s\n", Duke.BOT_NAME, output)
+                + String.format("[%s] %s\n", Luke.BOT_NAME, output)
                 + "======================================================================";
         System.out.println(msg);
     }
@@ -45,25 +45,40 @@ public class Duke {
         greeting();
         do {
             cmd = Command.parseCommand(sc.nextLine());
-            switch (cmd.getCommandType()) {
-                case EXIT:
-                    break;
-                case LIST:
+            switch (cmd.getCommandAction().getCommandActionType()) {
+                case READ:
                     printTaskList();
                     break;
                 case ADD:
-                    printOutput(String.format("I have added \"%s\" into list.", cmd.getArguments()));
-                    taskList[taskIndex++] = new Task(cmd.getArguments());
+                    Task task;
+                    switch (cmd.getCommandAction()) {
+                        case DEADLINE:
+                            task = new Deadline(cmd.getArguments());
+                            break;
+                        case EVENT:
+                            task = new Event(cmd.getArguments());
+                            break;
+                        default:
+                            task = new ToDo(cmd.getArguments());
+                            break;
+                    }
+                    taskList[taskIndex++] = task;
+                    printOutput(String.format("I have added the following task into list: \n %s \n now you have %d tasks in the list.", task, taskIndex));
                     break;
-                case MARK:
-                    int index = Integer.valueOf(cmd.getArguments()) - 1;
-                    taskList[index].markAsDone();
-                    printOutput("Great! I have marked this task as done.");
+                case UPDATE:
+                    int index = Integer.valueOf(cmd.getArgumentByKey("index")) - 1;
+                    switch (cmd.getCommandAction()) {
+                        case MARK:
+                            taskList[index].markAsDone();
+                            printOutput("Great! I have marked this task as done.");
+                            break;
+                        case UNMARK:
+                            taskList[index].unmarkAsDone();
+                            printOutput("Noted, I've mark this task as not done yet.");
+                            break;
+                    }
                     break;
-                case UNMARK:
-                    index = Integer.valueOf(cmd.getArguments()) - 1;
-                    taskList[index].unmarkAsDone();
-                    printOutput("Noted, I've mark this task as not done yet.");
+                default:
                     break;
             }
         } while(!cmd.isExitCmd());
@@ -72,7 +87,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.start();
+        Luke luke = new Luke();
+        luke.start();
     }
 }
