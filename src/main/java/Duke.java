@@ -37,14 +37,8 @@ public class Duke {
             Reply type = determineType(cmd.split(" ")[0]);
             burpReply(type, toDoList, cmd);
         }
-        // do writing before exiting
-        FileWriter fw = new FileWriter("./tasklist.txt");
-        for (int i = 0; i < toDoList.size(); i++) {
-            Task currentTask = toDoList.get(i);
-            fw.write(currentTask.getStringCmd());
-            fw.write("\n");
-        }
-        fw.close();
+        // do writing right before exiting
+        writeFileContent(toDoList);
         System.out.println(formatMsg("Bye. Hope to see you again soon!"));
     }
 
@@ -95,6 +89,16 @@ public class Duke {
         }
     }
 
+    // Writes the contents of toDoList into storage with specific formatting
+    private static void writeFileContent(List<Task> toDoList) throws IOException {
+        FileWriter fw = new FileWriter("./tasklist.txt");
+        for (int i = 0; i < toDoList.size(); i++) {
+            Task currentTask = toDoList.get(i);
+            fw.write(currentTask.getStringCmd());
+            fw.write("\n");
+        }
+        fw.close();
+    }
     // logic that determines how Burp will reply
     public static void burpReply(Reply type, List<Task> toDoList, String cmd) {
         String[] cmd_split = cmd.split(" ");
