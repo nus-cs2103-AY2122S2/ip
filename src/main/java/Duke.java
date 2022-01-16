@@ -4,6 +4,39 @@ import java.util.Scanner;
 public class Duke {
     // Array containing tasks
     private static final ArrayList<Task> tasks = new ArrayList<>();
+    private enum Command {
+        BYE,
+        LIST,
+        MARK,
+        UNMARK,
+        TODO,
+        DEADLINE,
+        EVENT,
+        DELETE,
+        INVALID
+    }
+
+    private static Command parser(String input) {
+        if (input.equals("bye")) {
+            return Command.BYE;
+        } else if (input.equals("list")) {
+            return Command.LIST;
+        } else if (input.startsWith("mark")) {
+            return Command.MARK;
+        } else if (input.startsWith("unmark")) {
+            return Command.UNMARK;
+        } else if (input.startsWith("todo")) {
+            return Command.TODO;
+        } else if (input.startsWith("deadline")) {
+            return Command.DEADLINE;
+        } else if (input.startsWith("event")) {
+            return Command.EVENT;
+        } else if (input.startsWith("delete")) {
+            return Command.DELETE;
+        } else {
+            return Command.INVALID;
+        }
+    }
 
     public static void listTasks() {
         System.out.println("    Your outstanding tasks as of now are as listed:");
@@ -128,28 +161,38 @@ public class Duke {
             // Removes all leading and trailing white spaces
             String request = userInput.nextLine().strip();
             String[] parsedReq = request.split(" ");
+            Command c = parser(request);
 
             // Main response
             System.out.print(divider);
             try {
-                if (request.equals("bye")) {
-                    System.out.println("    Goodbye! Till the next time we meet!");
-                } else if (request.equals("list")) {
-                    listTasks();
-                } else if (request.startsWith("mark")) {
-                    markTask(parsedReq);
-                } else if (request.startsWith("unmark")) {
-                    unmarkTask(parsedReq);
-                } else if (request.startsWith("todo")) {
-                    createTodo(request, parsedReq);
-                } else if (request.startsWith("deadline")) {
-                    createDeadline(request, parsedReq);
-                } else if (request.startsWith("event")) {
-                    createEvent(request, parsedReq);
-                } else if (request.startsWith("delete")) {
-                    deleteTask(parsedReq);
-                } else {
-                    throw new DukeException("My apologies, but it seems that I do not understand your request.");
+                switch (c) {
+                    case BYE:
+                        System.out.println("    Goodbye! Till the next time we meet!");
+                        break;
+                    case LIST:
+                        listTasks();
+                        break;
+                    case MARK:
+                        markTask(parsedReq);
+                        break;
+                    case UNMARK:
+                        unmarkTask(parsedReq);
+                        break;
+                    case TODO:
+                        createTodo(request, parsedReq);
+                        break;
+                    case DEADLINE:
+                        createDeadline(request, parsedReq);
+                        break;
+                    case EVENT:
+                        createEvent(request, parsedReq);
+                        break;
+                    case DELETE:
+                        deleteTask(parsedReq);
+                        break;
+                    case INVALID:
+                        throw new DukeException("My apologies, but it seems that I do not understand your request.");
                 }
             } catch (DukeException e) {
                 System.out.println("    " + e.getMessage());
