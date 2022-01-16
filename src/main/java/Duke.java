@@ -1,12 +1,12 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import helperClasses.*;
 
 public class Duke {
     private static boolean isEnd = false;
-    private static Task[] TaskList = new Task[100];
-    private static int TaskNo = 0;
-    private static Scanner myObj = new Scanner(System.in);
+    private static final ArrayList<Task> TaskList = new ArrayList<Task>();
+    private static final Scanner myObj = new Scanner(System.in);
 
     public static void horizontalLine(){
         System.out.println("____________________________________________________________");
@@ -16,7 +16,6 @@ public class Duke {
         horizontalLine();
         System.out.println("\tHello I am DDX");
         System.out.println("\tWhat can I do for you?");
-        System.out.println();
         horizontalLine();
 
     }
@@ -38,7 +37,7 @@ public class Duke {
                 Duke.list();
                 return;
             } else {
-                if (input.startsWith("mark") || input.startsWith("unmark")){
+                if (input.startsWith("mark") || input.startsWith("unmark") || input.startsWith("delete")){
                     boolean isDigit = !Character.isDigit(input.charAt(input.length() - 1));
                     int markDigit = Character.getNumericValue(input.charAt(input.length() - 1));
                     if (input.startsWith("mark")){
@@ -46,7 +45,7 @@ public class Duke {
                         if (isDigit) {
                             throw new DukeException("☹ OOPS!!! The mark cannot be done.");
                         }
-                        if (markDigit - 1 < 0 || (markDigit > TaskNo)){
+                        if (markDigit - 1 < 0 || (markDigit > TaskList.size())){
                             throw new DukeException("☹ OOPS!!! The task of a mark cannot be reached.");
                         }
                         mark(markDigit - 1);
@@ -57,10 +56,21 @@ public class Duke {
                         if (isDigit) {
                             throw new DukeException("☹ OOPS!!! The unmark cannot be done.");
                         }
-                        if (markDigit - 1 < 0 || (markDigit > TaskNo)){
+                        if (markDigit - 1 < 0 || (markDigit > TaskList.size())){
                             throw new DukeException("☹ OOPS!!! The task of a unmark cannot be reached.");
                         }
                         unmark(markDigit - 1);
+                        return;
+                    }
+                    if (input.startsWith("delete")) {
+                        // detect delete
+                        if (isDigit) {
+                            throw new DukeException("☹ OOPS!!! The delete cannot be done.");
+                        }
+                        if (markDigit - 1 < 0 || (markDigit > TaskList.size())){
+                            throw new DukeException("☹ OOPS!!! The task of a delete cannot be reached.");
+                        }
+                        delete(markDigit - 1);
                         return;
                     }
                 } else {
@@ -72,10 +82,9 @@ public class Duke {
                             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                         }
                         ToDo temp = new ToDo(description);
-                        TaskList[TaskNo] = temp;
-                        TaskNo ++;
+                        TaskList.add(temp);
                         result = String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.",
-                                temp.toString(),TaskNo);
+                                temp.toString(),TaskList.size());
                     } else if (input.startsWith("deadline")) {
                         if (Duke.isEmpty(input.substring(8))){
                             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -87,10 +96,9 @@ public class Duke {
                         String description = input.substring(9,byPos);
                         String by = input.substring(byPos+4);
                         Deadline ddl = new Deadline(description, by);
-                        TaskList[TaskNo] = ddl;
-                        TaskNo ++;
+                        TaskList.add(ddl);
                         result = String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.",
-                                ddl.toString(),TaskNo);
+                                ddl.toString(), TaskList.size());
                     } else if (input.startsWith("event")) {
                         if (Duke.isEmpty(input.substring(5))){
                             throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
@@ -102,10 +110,9 @@ public class Duke {
                         String description = input.substring(6,atPos);
                         String at = input.substring(atPos+4);
                         Event event = new Event(description, at);
-                        TaskList[TaskNo] = event;
-                        TaskNo ++;
+                        TaskList.add(event);
                         result = String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.",
-                                event.toString(),TaskNo);
+                                event.toString(), TaskList.size());
                     } else {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
@@ -114,7 +121,6 @@ public class Duke {
             // print result
             horizontalLine();
             System.out.println(result);
-            System.out.println();
             horizontalLine();
         } catch (DukeException e){
             horizontalLine();
@@ -140,30 +146,36 @@ public class Duke {
     public static void list(){
         horizontalLine();
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < TaskNo ; i++) {
-            if (TaskList[i] != null) {
-                System.out.format("%s. %s\n", i + 1, TaskList[i].toString());
+        for (int i = 0; i < TaskList.size() ; i++) {
+            if (TaskList.get(i) != null) {
+                System.out.format("%s. %s\n", i + 1, TaskList.get(i).toString());
             }
         }
-        System.out.println();
         horizontalLine();
     }
 
     public static void mark(int currTask){
-        TaskList[currTask].markAsDone();
+        TaskList.get(currTask).markAsDone();
         horizontalLine();
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println(TaskList[currTask].toString());
-        System.out.println();
+        System.out.println(TaskList.get(currTask).toString());
         horizontalLine();
     }
 
     public static void unmark(int currTask){
-        TaskList[currTask].markAsNotDone();
+        TaskList.get(currTask).markAsNotDone();
         horizontalLine();
         System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println(TaskList[currTask].toString());
-        System.out.println();
+        System.out.println(TaskList.get(currTask).toString());
+        horizontalLine();
+    }
+
+    public static void delete(int currTask) {
+        horizontalLine();
+        System.out.println("OK, I've removed this task:");
+        System.out.println("\t" + TaskList.get(currTask).toString());
+        TaskList.remove(currTask);
+        System.out.format("Now you have %d tasks in the list.\n",TaskList.size());
         horizontalLine();
     }
 
