@@ -1,10 +1,18 @@
+import java.sql.SQLOutput;
+import java.util.Scanner;
+
 public class Duke {
+
+    private static String WELCOME_MESSAGE = "Hello, this is Duke!\nWhat can I do for you today?";
+    private static String END_MESSAGE = "Bye!";
+
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+
+        System.out.println(WELCOME_MESSAGE);
+
+        TaskHandler taskHandler = new TaskHandler();
+        taskHandler.doTasks();
+
+
     }
 }
