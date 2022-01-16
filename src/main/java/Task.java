@@ -1,6 +1,7 @@
 public class Task {
     String deadline;
     String name;
+    String type;
     int number;
     static int totalTask = 0;
     boolean done = false;
@@ -12,10 +13,11 @@ public class Task {
             this.name = name;
             this.number = number;
             this.deadline = deadline;
+            this.type = type;
             System.out.println("Got it. I've added this task: ");
-            if (type.equals("deadline")){
+            if (type.equals("D")){
                 System.out.printf(" [D][%s] %s (by: %s) \n", this.getStatus(),  this.name, this.deadline);
-            } else if (type.equals("todo")){
+            } else if (type.equals("T")){
                 System.out.printf(" [T][%s] %s\n", this.getStatus(),  this.name);
             } else {
                 System.out.printf(" [E][%s] %s (on: %s) \n", this.getStatus(),  this.name, this.deadline);
@@ -42,6 +44,10 @@ public class Task {
         } else {
             return " ";
         }
+    }
+
+    public void decrementNum(){
+        this.number--;
     }
 
     @Override
