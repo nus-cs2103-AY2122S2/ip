@@ -15,16 +15,9 @@ public class Heylo {
         Scanner sc = new Scanner(System.in);
 
         while(true) {
-            String command = sc.nextLine();
-            System.out.printf(" ");
-
-            if(command.equals("Bye")) {
-                System.out.println("See you again! :)");
-                return;
-            } else {
-                System.out.println(command);
-            }
-            System.out.println("__________________________________________________________");
+            String input = sc.nextLine();
+            Command cmd = new Command(input);
+            cmd.run();
         }
     }
 }
