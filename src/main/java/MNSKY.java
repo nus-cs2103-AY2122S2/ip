@@ -1,17 +1,17 @@
 import java.util.Scanner;
 
-public class Duke {
+public class MNSKY {
     public static void print_mnsky(String msg) {
         System.out.print("MNSKY: ");
         System.out.println(msg);
     }
     public static void main(String[] args) {
         print_mnsky("Hi, I'm");
-        print_mnsky("MM    MM  NN    NN   SSSSS  KK   KK  YY    YY");
-        print_mnsky("MMM  MMM  NNN   NN  SSS     KK  KK    YY  YY");
-        print_mnsky("MM MM MM  NN NN NN   SSSS   KKKKK       YY");
-        print_mnsky("MM    MM  NN   NNN     SSS  KK  KK      YY");
-        print_mnsky("MM    MM  NN    NN  SSSSS   KK   KK     YY");
+        print_mnsky("MM      MM  NN      NN   SSSSSSS   KK     KK  YY      YY");
+        print_mnsky("MMMM  MMMM  NNNN    NN  SSSS       KK   KK      YY  YY");
+        print_mnsky("MM  MM  MM  NN  NN  NN    SSSSS    KKKKK          YY");
+        print_mnsky("MM      MM  NN    NNNN       SSSS  KK   KK        YY");
+        print_mnsky("MM      MM  NN      NN  SSSSSSS    KK     KK      YY");
         print_mnsky("I can help!");
 
         String input = "";
