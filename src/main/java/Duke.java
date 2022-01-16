@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+@SuppressWarnings("ALL")
 public class Duke {
     public static void listOut(ArrayList<Action> list) {
         int count = 1;
@@ -17,7 +18,7 @@ public class Duke {
 
     public static void testForUnknown(Action act) throws DukeException {
         if (!act.known()) {
-            throw new DukeException("What is this nonsence?");
+            throw new DukeException("What is this nonsense?");
         }
         if (act.getFull().equals("todo")) {
             throw new DukeException("Sorry, got to have something todo.");
@@ -25,7 +26,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String greeting = "Hello!! I am Duke, your humble pesonal chatbot.\n" +
+        String greeting = "Hello!! I am Duke, your humble personal chatbot.\n" +
                 "What can I do for you?";
         System.out.println(greeting);
         Scanner sc = new Scanner(System.in);
@@ -46,7 +47,7 @@ public class Duke {
             }
             if (action.isMark()) {
                 int index = Integer.parseInt(action.getBody());
-                String statement = "";
+                String statement;
                 if (action.isUnmark()) {
                     store.set(index - 1, store.get(index - 1).setUnDone());
                     statement = "Ok, I have marked this task as not done yet:\n  ";
