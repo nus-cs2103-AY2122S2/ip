@@ -89,8 +89,19 @@ public class Duke {
         System.out.println(line);
     }
     public static void invalid(){
+        String invalidText =    "Invalid Entry!\n" +
+                                "List of available commands:\n\n" +
+                                "\"list\": View Current Task List\n" +
+                                "\"todo <name>\": Add a new Task\n" +
+                                "\"deadline <name> /by <date/time>\": Add a new Deadline\n" +
+                                "\"event <name> /at <date/time>\": Add a new Event\n" +
+                                "\"delete <number>\": delete the corresponding entry in your task list\n" +
+                                "\"mark <number>\": mark the corresponding entry in your task list as done\n" +
+                                "\"unmark <number>\": mark the corresponding entry in your task list as not done\n" +
+                                "\"bye\": Exit the chatbot application";
+
         System.out.println(line);
-        System.out.println("Invalid Entry!");
+        System.out.println(invalidText);
         System.out.println(line);
     }
 }
