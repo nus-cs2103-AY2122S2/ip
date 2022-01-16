@@ -5,4 +5,16 @@ list
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
 list
+unmark anything
+unmark 4
+unmark 1
+list
+todo
+mark anything
+mark -1
+deadline /by Sunday 2359
+deadline 2103T level-6 /by Sunday 2359 /by Monday 2359
+deadline 2103T level-6
+event
+list
 bye
