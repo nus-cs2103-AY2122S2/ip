@@ -1,11 +1,30 @@
 public class Deadline extends Task{
     private String date;
-    public Deadline(String taskName){
-        super(taskName);
+    public Deadline(String taskName) throws InvalidTaskDescriptionException,InvalidTaskDataTimeException{
+        super();
         String[] str =  taskName.split("/by");
-        this.taskName=str[0].strip();
-        this.date=str[1].strip();
-        // TODO handle invalid/empty date
+
+        try {
+            this.taskName = str[0].strip();
+            if (this.taskName.equals("")) this.taskName=null;
+        } catch (IndexOutOfBoundsException i){
+            this.taskName=null;
+        }
+
+        try {
+            this.date = str[1].strip();
+            if (this.date.equals("")) this.date=null;
+        } catch (IndexOutOfBoundsException i){
+            this.date=null;
+        }
+
+        if (this.taskName == null){
+            throw new InvalidTaskDescriptionException("Deadline");
+        }
+        if (this.date == null){
+            throw new InvalidTaskDataTimeException("Deadline");
+        }
+
     }
 
     public char getType(){

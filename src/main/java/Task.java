@@ -2,13 +2,14 @@ import javax.swing.tree.ExpandVetoException;
 
 public abstract class Task{
     protected String taskName;
-    protected char done;
+    protected char done = ' ';
     public Task(String taskName){
         this.taskName = taskName;
         this.done = ' ';
     }
+    public Task(){}
 
-    public static Task newTask(String s){
+    public static Task newTask(String s) throws InvalidTaskDataTimeException,InvalidTaskDescriptionException{
         if (s.contains("todo")){
             return newToDo(s);
         }
@@ -23,17 +24,17 @@ public abstract class Task{
         }
     }
 
-    private static ToDo newToDo(String s){
+    private static ToDo newToDo(String s) throws InvalidTaskDescriptionException{
         String taskName =  s.replaceAll("todo","").strip();
         return new ToDo(taskName);
     }
 
-    private static Event newEvent(String s){
+    private static Event newEvent(String s) throws InvalidTaskDataTimeException,InvalidTaskDescriptionException{
         String taskName =  s.replaceAll("event","").strip();
         return new Event(taskName);
     }
 
-    private static Deadline newDeadline(String s){
+    private static Deadline newDeadline(String s) throws InvalidTaskDataTimeException,InvalidTaskDescriptionException{
         String taskName =  s.replaceAll("deadline","").strip();
         return new Deadline(taskName);
     }

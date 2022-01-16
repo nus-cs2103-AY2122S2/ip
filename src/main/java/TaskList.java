@@ -6,13 +6,19 @@ public class TaskList {
     public TaskList(){}
 
     public String addTask(String s){
-        Task t = Task.newTask(s);
-        list.add(t);
+        try {
+            Task t = Task.newTask(s);
+            list.add(t);
 
-        String str = String.format( "Got it. I've added this task:\n" +
-                                    "\t%s\n" +
-                                    "Now you have %d tasks in the list.",t.toString(),list.size());
-        return str;
+            String str = String.format("Got it. I've added this task:\n" +
+                    "\t%s\n" +
+                    "Now you have %d tasks in the list.", t.toString(), list.size());
+            return str;
+        } catch (InvalidTaskDescriptionException i){
+            return i.toString();
+        } catch (InvalidTaskDataTimeException u){
+            return u.toString();
+        }
     }
 
     public String markTaskDone(int index){
