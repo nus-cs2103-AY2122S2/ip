@@ -17,7 +17,18 @@ abstract class Task {
         return this.isDone ? "X" : " ";
     }
 
-    abstract String getSymbol();
+    private String getSymbol() {
+        switch (this.type) {
+        case TODO:
+            return "T";
+        case DEADLINE:
+            return "D";
+        case EVENT:
+            return "E";
+        default:
+            return " ";
+        }
+    };
 
     public String getDescription() {
         return this.description;
