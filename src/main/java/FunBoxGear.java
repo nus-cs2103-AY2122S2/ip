@@ -53,27 +53,51 @@ public class FunBoxGear {
      *
      * @param formattedMsg The original message from the users split by " " into an array
      * @param type The type of task: event, deadline, todo
+     *
      */
     private void addToList(String[] formattedMsg, String type) {
         String description = this.getMessage(formattedMsg);
         String[] resultArr;
-        switch (type) {
-        case "event":
-            resultArr = this.getDescriptionAndDate(description, type);
-            this.tasksList[noOfItems] = new Event(resultArr[0], resultArr[1]);
-            break;
-        case "deadline":
-            resultArr = this.getDescriptionAndDate(description, type);
-            this.tasksList[noOfItems] = new Deadline(resultArr[0], resultArr[1]);
-            break;
-        case "todo":
-            this.tasksList[noOfItems] = new ToDo(description);
-            break;
+
+        try {
+            switch (type) {
+            case "event":
+                this.isDescriptionError(description, type);
+                resultArr = this.getDescriptionAndDate(description, type);
+                this.tasksList[noOfItems] = new Event(resultArr[0], resultArr[1]);
+                break;
+            case "deadline":
+                this.isDescriptionError(description, type);
+                resultArr = this.getDescriptionAndDate(description, type);
+                this.tasksList[noOfItems] = new Deadline(resultArr[0], resultArr[1]);
+                break;
+            case "todo":
+                this.isDescriptionError(description, type);
+                this.tasksList[noOfItems] = new ToDo(description);
+                break;
+            default:
+                throw new FunBoxExceptions("ERROR! I do not know what the commands means :<");
+            }
+            System.out.println("Gotcha! I've added this task!");
+            System.out.println(this.tasksList[noOfItems]);
+            noOfItems++;
+            System.out.println("Now you have " + noOfItems + " tasks in the list!");
+        } catch (FunBoxExceptions e) {
+            System.out.println(e.getMessage());
         }
-        System.out.println("Gotcha! I've added this task!");
-        System.out.println(this.tasksList[noOfItems]);
-        noOfItems++;
-        System.out.println("Now you have " + noOfItems + " tasks in the list!");
+    }
+
+    /**
+     * Check whether user input has a description
+     *
+     * @param description The description of the user input which usually comes after the command type
+     * @param type The type of tasks the user used
+     * @throws FunBoxExceptions If description == ""
+     */
+    private void isDescriptionError(String description, String type) throws FunBoxExceptions {
+        if (description.equals("")) {
+            throw new FunBoxExceptions("ERROR! The description of a " + type + " cannot be empty!");
+        }
     }
 
     /**
@@ -127,14 +151,13 @@ public class FunBoxGear {
      * @param message The message to retrieve the date and time from
      * @return Return a String array of size 2 where the first item on the list contains the message and
      * the second item contains the date and time.
+     *
      */
     private String[] getDescriptionAndDate(String message, String type) {
         if (type.equals("event")) {
             return message.split(" /at ");
         }
-
-        return  message.split(" /by ");
-
+        return message.split(" /by ");
     }
 
     /**
@@ -142,6 +165,7 @@ public class FunBoxGear {
      *
      * @param messageArr The formatted message of the user, the second item of the array typically contains the
      *                   taskNo to be mark as done
+     *
      */
     private void markDone(String[] messageArr) {
         int taskNo = Integer.parseInt(messageArr[1]);
