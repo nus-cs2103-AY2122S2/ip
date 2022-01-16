@@ -1,0 +1,49 @@
+/**
+ * The task class represents the task user's wants to do
+ */
+public class Task {
+    protected String description;
+    protected boolean isDone;
+
+    /**
+     * Constructor for Task class
+     *
+     * @param description The description of task submitted by the users
+     */
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
+    }
+
+    /**
+     * The icon representing the current status of the task
+     *
+     * @return Return "X" if status of task is completed else return " "
+     */
+    public String getStatusIcon() {
+        return (isDone ? "X" : " "); // mark done task with X
+    }
+
+    /**
+     * Set the task to done
+     */
+    public void setDone() {
+        this.isDone = true;
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(this);
+    }
+
+    /**
+     * Set the task to unfinished
+     */
+    public void setUndone() {
+        this.isDone = false;
+        System.out.println("OK, I've marked this task as not done yet:");
+        System.out.println(this);
+    }
+
+    @Override
+    public String toString() {
+        return "[" + this.getStatusIcon() + "] " + this.description;
+    }
+}
