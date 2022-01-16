@@ -1,8 +1,9 @@
 import javax.sound.sampled.Line;
 import java.util.Scanner;
+import commands.*;
 public class Duke {
-    public static String LINE = "    ____________________________________________________________\n";
-    public static String INDENT = "     ";
+    private static String[] TASKLIST = new String[100];
+    private static int LISTSIZE = 0;
     public static void main(String[] args) {
         //intro messages
         Scanner sc =  new Scanner(System.in);
@@ -12,16 +13,37 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println(LINE + INDENT + "Hello! I'm Duke\n"+ INDENT + "What can I do for you?\n" + LINE);
+        Command cmd = new WelcomeCommand();
+        cmd.execute();
         //main program loop
         while(true){
             String input = sc.nextLine();
-            if(input.equals("bye")){
+            cmd = processInput(input);
+            if(cmd.ends()) {
+                cmd.execute();
                 break;
             }
-            System.out.println(LINE + INDENT + input + "\n" + LINE);
+            cmd.execute();
         }
+    }
 
-        System.out.println(LINE + INDENT + "Bye. Hope to see you again soon!\n" + LINE);
+    public static Command processInput(String input){
+        Command cmd = null;
+        switch (input) {
+            case "bye":
+                cmd = new ByeCommand();
+                break;
+
+            case "list":
+                cmd = new ListCommand(TASKLIST);
+                break;
+
+            default:
+                cmd = new AddCommand(TASKLIST, LISTSIZE, input);
+                TASKLIST = cmd.getList();
+                LISTSIZE++;
+                break;
+        }
+        return cmd;
     }
 }
