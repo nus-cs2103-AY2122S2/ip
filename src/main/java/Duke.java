@@ -2,6 +2,9 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
+        String[] listOfThings = new String[100];
+        int counter = 0;
+
         String line = "____________________________________________________________";
         String indentation = "    ";
         String logo = " ____        _        \n"
@@ -19,11 +22,16 @@ public class Duke {
         Scanner sc= new Scanner(System.in);
         String str = " ";
         while(true){
-            str = sc.next();
+            str = sc.nextLine();
             if (str.equals("list")) {
                 System.out.println(indentation + line);
-                System.out.println(indentation + "list");
+
+                for (int i = 0; i <  counter; i++) {
+                    String tempNum = String.valueOf(i+1);
+                    System.out.println(indentation + tempNum + ": " + listOfThings[i]);
+                }
                 System.out.println(indentation + line);
+
             } else if (str.equals("blah")) {
                 System.out.println(indentation + line);
                 System.out.println(indentation + "blah");
@@ -33,6 +41,12 @@ public class Duke {
                 System.out.println(indentation + "Bye. Hope to see you again soon!");
                 System.out.println(indentation + line);
                 break;
+            } else {
+                System.out.println(indentation + line);
+                System.out.println(indentation + "added: " + str);
+                System.out.println(indentation + line);
+                listOfThings[counter] = str;
+                counter++;
             }
         }
     }
