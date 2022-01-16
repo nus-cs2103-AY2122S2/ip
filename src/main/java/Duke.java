@@ -16,19 +16,35 @@ public class Duke {
 
         while (!input.equals("bye")) {
 
-            switch (input) {
+            String[] arr = input.split(" ");
+
+            switch (arr[0]) {
 
                 case "list":
                     for (int i = 0; i < taskList.size(); i++) {
                         int idx = i + 1;
-                        System.out.println("\t" + idx + ". " + taskList.get(i).getDescription());
+                        System.out.println("\t" + idx + ". " + taskList.get(i).toString());
                     }
                     System.out.println();
                     break;
 
+                case "mark":
+                    int mark = Integer.parseInt(arr[1]) - 1;
+                    taskList.get(mark).setCompleted(true);
+                    System.out.println("\tNice! I've marked this task as done:");
+                    System.out.println("\t\t" + arr[1] + ". " + taskList.get(mark).toString() + "\n");
+                    break;
+
+                case "unmark":
+                    int unmark = Integer.parseInt(arr[1]) - 1;
+                    taskList.get(unmark).setCompleted(false);
+                    System.out.println("\tOK, I've marked this task as not done yet:");
+                    System.out.println("\t\t" + arr[1] + ". " + taskList.get(unmark).toString() + "\n");
+                    break;
+
                 default:
                     taskList.add(new Task(input));
-                    System.out.println("\t added: "+input+"\n");
+                    System.out.println("\tadded: " + input + "\n");
             }
 
             input = sc.nextLine();

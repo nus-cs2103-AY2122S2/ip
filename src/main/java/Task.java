@@ -24,7 +24,12 @@ public class Task {
         return this.description;
     }
 
-    public boolean getCompleted() {
-        return this.completed;
+    public String getCompleted() {
+        return completed ? "X" : " ";
+    }
+
+    @Override
+    public String toString() {
+        return "[" + this.getCompleted() + "] " + this.description;
     }
 }
