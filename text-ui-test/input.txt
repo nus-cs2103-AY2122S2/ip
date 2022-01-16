@@ -5,8 +5,13 @@ mark 1
 deadline brush teeth /by 12am
 mark 2
 unmark 1
+event test deletion /at now
+delete 4
 list
 todo
 event
 deadline
+mark
+unmark
+delete
 bye
