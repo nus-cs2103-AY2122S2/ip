@@ -23,35 +23,26 @@ public class Duke {
             switch (input[0]) {
                 case INPUT_BYE:
                     processNext = false;
-                    break;
+                    echo("Goodbye. J.A.R.V.I.S. systems powering off...");
+                    return;
                 case INPUT_LIST:
                     printTasks();
                     break;
                 case INPUT_MARK:
-                    int num = Integer.parseInt(input[1]);
-                    Task task = tasks.get(num);
-                    task.markAsDone();
-                    echo("I've marked the following task as completed:\n" + task.toString());
+                    markAsDone(input);
                     break;
                 case INPUT_UNMARK:
-                    num = Integer.parseInt(input[1]);
-                    task = tasks.get(num);
-                    task.markAsUndone();
-                    echo("Understood. I've marked the following task as incomplete:\n" + task.toString());
+                    markAsUndone(input);
                     break;
                 default:
-                    String description = String.join(" ", input);
-                    tasks.add(new Task(description));
-                    count++;
-                    echo("Added: " + description);
+                    addTask(input);
                     break;
             }
             input = scanner.nextLine().split(" ");
         }
-        System.out.println("Goodbye. J.A.R.V.I.S. systems powering off...");
     }
 
-    public static void welcome() {
+    private static void welcome() {
         String logo =
                 "      _          _          ____       __     __      ___       ____      \n"
                         + "     | |        / \\        |  _ \\      \\ \\   / /     |_ _|     / ___|     \n"
@@ -65,20 +56,41 @@ public class Duke {
                 + "At your service.\n");
     }
 
-    public static void echo(String str) {
-        System.out.println("------------------------------");
+    private static void echo(String str) {
+        System.out.println("------------------------------------------------------------");
         System.out.println(str);
-        System.out.println("------------------------------");
+        System.out.println("------------------------------------------------------------");
     }
 
     private static void printTasks() {
         StringBuilder sb = new StringBuilder();
         for (int i = 1; i < count; i++) {
-            sb.append(i).append(". ").append(tasks.get(i).toString());
+            sb.append(i).append(". ").append(tasks.get(i));
             if (i + 1 != count) {
                 sb.append("\n");
             }
         }
         echo(sb.toString());
+    }
+
+    private static void markAsDone(String[] input) {
+        int num = Integer.parseInt(input[1]);
+        Task task = tasks.get(num);
+        task.markAsDone();
+        echo("I've marked the following task as completed:\n" + task);
+    }
+
+    private static void markAsUndone(String[] input) {
+        int num = Integer.parseInt(input[1]);
+        Task task = tasks.get(num);
+        task.markAsUndone();
+        echo("Understood. I've marked the following task as incomplete:\n" + task);
+    }
+
+    private static void addTask(String[] input) {
+        String description = String.join(" ", input);
+        tasks.add(new Task(description));
+        count++;
+        echo("Added: " + description);
     }
 }
