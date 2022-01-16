@@ -17,7 +17,7 @@ public class Duke {
 
         System.out.print(logo + "\n" + intro + line);
 
-        String[] taskArr = new String[100];
+        Task[] taskArr = new Task[100];
         int totalTasks = 0;
 
         Scanner scanner = new Scanner(System.in);
@@ -25,15 +25,16 @@ public class Duke {
 
         while (!input.equals("bye")) {
             if (input.equals("list")) {
-                System.out.print(line);
+                System.out.print(line + indent + "Here are the tasks in your list: \n");
                 int index = 1;
                 for (int n = 0; n < totalTasks; n++) {
-                    System.out.println(indent + index + ". " + taskArr[n]);
+                    Task cur = taskArr[n];
+                    System.out.println(indent + index + ". " + cur.getDescription());
                     index++;
                 }
                 System.out.print(line);
             } else {
-                taskArr[totalTasks] = input;
+                taskArr[totalTasks] = new Task(input);
                 totalTasks++;
                 System.out.print(line + indent + "added: " + input + "\n" + line);
             }
