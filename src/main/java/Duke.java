@@ -6,14 +6,23 @@ public class Duke {
         ChatBot duke = new ChatBot("Duke");
         duke.greet();
         String input;
-        while(true) {
-            System.out.print("Command: ");
+        boolean quit = false;
+        while(!quit) {
             input = sc.nextLine();
-            if (input.toLowerCase().equals("bye")) {
-                duke.quit();
-                break;
+            switch (input.toLowerCase()) {
+                case "bye":
+                    duke.quit();
+                    quit = true;
+                    break;
+
+                case "list":
+                    duke.printTasks();
+                    break;
+
+                default:
+                    duke.addTask(input);
+                    break;
             }
-            duke.echo(input);
         }
         sc.close();
     }
