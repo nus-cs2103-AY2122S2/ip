@@ -77,7 +77,13 @@ public class Duke {
             String output = "Marked as done:\n" + currentTask.getCurrentStatus();
             System.out.println(generateResponse(output));
         } else if (command.equals("unmark")) {
-            int taskNo = Integer.parseInt(inputArray[1]) - 1;
+            int taskNo = -1;
+            try {
+                taskNo = Integer.parseInt(inputArray[1]) - 1;
+            } catch (NumberFormatException e) {
+                System.out.println(generateResponse("bruh that ain't a number"));
+                return false;
+            }
             Task currentTask = toDoList.get(taskNo);
             currentTask.markAsUndone();
             String output = "Marked as undone:\n" + currentTask.getCurrentStatus();
