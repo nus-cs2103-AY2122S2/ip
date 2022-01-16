@@ -6,4 +6,7 @@ deadline brush teeth /by 12am
 mark 2
 unmark 1
 list
+todo
+event
+deadline
 bye
