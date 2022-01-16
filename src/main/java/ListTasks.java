@@ -32,7 +32,7 @@ final class ListTasks extends Instruction {
      */
     private static String getTaskList(List<Task> tasks) {
 
-        StringBuilder result = new StringBuilder("List of tasks: \n");
+        StringBuilder result = new StringBuilder("List of tasks:\n");
 
         for (int i = 0; i < tasks.size(); i++) {
             result.append("     " + (i + 1) + ". " + tasks.get(i).toString() + "\n");
