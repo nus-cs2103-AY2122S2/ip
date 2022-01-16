@@ -60,13 +60,13 @@ public class Duke {
     }
 
     public void mark(int num) {
-        System.out.println("Cool! You seemed to have been productive just like me! I've marked this task as done: ");
         taskArr[num].markDone();
+        System.out.println("Cool! You seemed to have been productive just like me! I've marked this task as done:");
         System.out.println(taskArr[num].toString());
     }
 
     public void unmark(int num){
-        System.out.println("Did you mess up something? Fine... I'll mark it as undone -- but I believe you can do it!: ");
+        System.out.println("Did you mess up something? Fine... I'll mark it as undone -- but I believe you can do it!:");
         taskArr[num].markUndone();
         System.out.println(taskArr[num].toString());
     }
