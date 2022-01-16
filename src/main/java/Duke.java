@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Duke {
     public static void listOut(ArrayList<Action> list) {
         int count = 1;
+        System.out.println("Here are the tasks in your list:");
         for (Action act : list) {
             System.out.println(count + "." + act);
             count++;
@@ -36,15 +37,16 @@ public class Duke {
                 action =  new Action(sc.nextLine());
                 continue;
             }
-            action = new Todo(action.getBody());
             if (action.isDeadline()) {
                 String[] sarr = action.getBody().split("/by");
                 action = new Deadline(sarr[0], sarr[1]);
-                store.add(action);
             }
             if (action.isEvent()) {
-                action = new Event(action.getBody());
-                store.add(action);
+                String[] sarr = action.getBody().split("/at");
+                action = new Event(sarr[0], sarr[1]);
+            }
+            if (action.isTodo()) {
+                action = new Todo(action.getBody());
             }
             store.add(action);
             System.out.println("Got it. I have added this task:\n  " + action +

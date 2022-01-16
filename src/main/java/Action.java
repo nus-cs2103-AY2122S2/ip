@@ -1,6 +1,6 @@
 public class Action {
-    private final String act;
-    private boolean isDone;
+    protected final String act;
+    protected final boolean isDone;
 
     public Action(String string){
          act = string;
@@ -65,6 +65,10 @@ public class Action {
 
     public boolean isEvent() {
         return getAction().equals("event");
+    }
+
+    public boolean isTodo() {
+        return getAction().equals("todo");
     }
 
     @Override
