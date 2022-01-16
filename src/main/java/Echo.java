@@ -1,3 +1,6 @@
+/**
+ * Echo chatbot.
+ */
 public class Echo {
 
     /** TaskList. */
@@ -12,11 +15,11 @@ public class Echo {
     /**
      * Add taskList and replies that it has been added.
      *
-     * @param s String to be printed.
+     * @param type Type of task.
+     * @param s Description of task.
      */
-    public void addTask(String s) {
-        taskList.add(s);
-        System.out.println("        added: " + s);
+    public void addTask(String type, String s) {
+        taskList.add(type, s);
     }
 
     /**

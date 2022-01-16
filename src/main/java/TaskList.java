@@ -1,3 +1,6 @@
+/**
+ * Encapsulates a task-list.
+ */
 public class TaskList {
 
     /** Array of task. */
@@ -18,10 +21,32 @@ public class TaskList {
     /**
      * Adds a new task.
      *
+     * @param type Type of class
      * @param s Description of task.
      */
-    public void add(String s) {
-        tasks[count++] = new Task(s);
+    public void add(String type, String s) {
+        Task cur = null;
+        String time;
+        String[] split;
+        switch (type) {
+            case "todo":
+                cur = new Todo(s);
+                break;
+            case "deadline":
+                split = s.split("/");
+                time = split[1].substring(3); // time
+                cur = new Deadline(split[0], time);
+                break;
+            case "event":
+                split = s.split("/");
+                time = split[1].substring(4); // time
+                cur = new Event(split[0], time);
+                break;
+        }
+        tasks[count++] = cur;
+        System.out.println("        Got it. I've added this task:");
+        System.out.println("  " + this.taskStatus(count-1));
+        System.out.printf("        Now you have %d tasks in the list.%n", count-1);
     }
 
     /**

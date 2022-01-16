@@ -1,3 +1,6 @@
+/**
+ * Encapsulates a task.
+ */
 public class Task {
     /** Description of task. */
     private final String desc;
