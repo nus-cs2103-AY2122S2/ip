@@ -1,26 +1,35 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class MNSKY {
+public class Mnsky {
     private ArrayList<String> list;
     private Scanner con;
 
-    public MNSKY() {
+    public Mnsky() {
          this.list = new ArrayList<>();
          this.con = new Scanner(System.in);
+    }
+
+    /**
+     * Prints the passed message with "MNSKY: " before it.
+     * @param msg The message that should be printed after "MNSKY: "
+     */
+    private void printMnsky(String msg) {
+        System.out.print("MNSKY: ");
+        System.out.println(msg);
     }
 
     /**
      * Prints the greeting message for the chatbot.
      */
     public void greeting() {
-        this.printMNSKY("Hi, I'm");
-        this.printMNSKY("MM      MM  NN      NN   SSSSSSS   KK     KK  YY      YY");
-        this.printMNSKY("MMMM  MMMM  NNNN    NN  SSSS       KK   KK      YY  YY");
-        this.printMNSKY("MM  MM  MM  NN  NN  NN    SSSSS    KKKKK          YY");
-        this.printMNSKY("MM      MM  NN    NNNN       SSSS  KK   KK        YY");
-        this.printMNSKY("MM      MM  NN      NN  SSSSSSS    KK     KK      YY");
-        this.printMNSKY("I can help!");
+        this.printMnsky("Hi, I'm");
+        this.printMnsky("MM      MM  NN      NN   SSSSSSS   KK     KK  YY      YY");
+        this.printMnsky("MMMM  MMMM  NNNN    NN  SSSS       KK   KK      YY  YY");
+        this.printMnsky("MM  MM  MM  NN  NN  NN    SSSSS    KKKKK          YY");
+        this.printMnsky("MM      MM  NN    NNNN       SSSS  KK   KK        YY");
+        this.printMnsky("MM      MM  NN      NN  SSSSSSS    KK     KK      YY");
+        this.printMnsky("I can help!");
     }
 
     /**
@@ -34,15 +43,6 @@ public class MNSKY {
     }
 
     /**
-     * Prints the passed message with "MNSKY: " before it.
-     * @param msg The message that should be printed after "MNSKY: "
-     */
-    private void printMNSKY(String msg) {
-        System.out.print("MNSKY: ");
-        System.out.println(msg);
-    }
-
-    /**
      * Parses the input and executes the logic depending on the type of input.
      * @return True if the user input "bye" and thus wants to stop talking to the chatbot.
      *          False otherwise.
@@ -52,7 +52,7 @@ public class MNSKY {
 
         switch (input) {
             case "bye":
-                this.printMNSKY("I can help!");
+                this.printMnsky("I can help!");
                 System.out.println("[MNSKY is shutting itself down...]");
                 return false;
 
@@ -67,12 +67,12 @@ public class MNSKY {
                 this.list.add(input);
         }
 
-        this.printMNSKY("I can help!");
+        this.printMnsky("I can help!");
         return true;
     }
 
     public static void main(String[] args) {
-        MNSKY mnsky = new MNSKY();
+        Mnsky mnsky = new Mnsky();
         mnsky.greeting();
 
         while (mnsky.parseInput()) {}
