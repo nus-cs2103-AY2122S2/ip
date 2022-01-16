@@ -21,40 +21,43 @@ public class Echo {
     public void read(String s) throws EchoException {
         String[] split = s.split(" ");
         String command = split[0];
-        if (command.equals("list")) {
-            this.getTask();
-        } else if (command.equals("mark")) {
-            if (split.length == 1 || !isInteger(split[1])) {
-                throw new EchoException("Please specify the task number to be marked.");
-            }
-            this.mark(Integer.parseInt(split[1]) - 1);
-        } else if (command.equals("unmark")) {
-            if (split.length == 1 || !isInteger(split[1])) {
-                throw new EchoException("Please specify the task number to be unmarked.");
-            }
-            this.unmark(Integer.parseInt(split[1]) - 1);
-        } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
-            if (split.length == 1) {
-                throw new EchoException(String.format("The description of a %s cannot be empty.", s));
-            }
-            if (command.equals("deadline") && !s.contains("/by")) {
-                throw new EchoException("Please specify the deadline of the task. E.g. return book /by Sunday");
-            }
-            if (command.equals("event") && !s.contains("/at")) {
-                throw new EchoException("Please specify the time of the event. E.g. meeting /at Mon");
-            }
-            this.addTask(command, s.substring(command.length() + 1));
-        } else if (command.equals("delete")) {
-            if (split.length == 1 || !isInteger(split[1])) {
-                throw new EchoException("Please specify the task number to be deleted.");
-            }
-            this.delete(Integer.parseInt(split[1]) - 1);
-        } else {
-            System.out.println(
-                    "       ☹ OOPS!!! I'm sorry, but I don't know what that means :-( \n" +
-                            "       Please use the following commands: \n" +
-                            "       todo | deadline | event | list | mark | unmark"
-            );
+        switch (command) {
+            case "list":
+                this.getTask();
+                break;
+            case "mark":
+                if (split.length == 1 || !isInteger(split[1]))
+                    throw new EchoException("Please specify the task number to be marked.");
+                this.mark(Integer.parseInt(split[1]) - 1);
+                break;
+            case "unmark":
+                if (split.length == 1 || !isInteger(split[1]))
+                    throw new EchoException("Please specify the task number to be unmarked.");
+                this.unmark(Integer.parseInt(split[1]) - 1);
+                break;
+            case "todo":
+            case "deadline":
+            case "event":
+                if (split.length == 1)
+                    throw new EchoException(String.format("The description of a %s cannot be empty.", s));
+                if (command.equals("deadline") && !s.contains("/by"))
+                    throw new EchoException("Please specify the deadline of the task. E.g. return book /by Sunday");
+                if (command.equals("event") && !s.contains("/at"))
+                    throw new EchoException("Please specify the time of the event. E.g. meeting /at Mon");
+                this.addTask(command, s.substring(command.length() + 1));
+                break;
+            case "delete":
+                if (split.length == 1 || !isInteger(split[1]))
+                    throw new EchoException("Please specify the task number to be deleted.");
+                this.delete(Integer.parseInt(split[1]) - 1);
+                break;
+            default:
+                System.out.println(
+                        "       ☹ OOPS!!! I'm sorry, but I don't know what that means :-( \n" +
+                                "       Please use the following commands: \n" +
+                                "       todo | deadline | event | list | mark | unmark"
+                );
+                break;
         }
     }
 
