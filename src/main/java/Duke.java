@@ -1,9 +1,80 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    static TaskList list = new TaskList();
+    static TaskManager manager = new TaskManager();
+    private static final String line = "-------------------------------------------------------------------------------------";
     public static void main(String[] args) {
+
+        start();
+
+        Scanner s = new Scanner(System.in);
+        String input;
+
+        while (true) {
+            input = s.nextLine();
+
+            if (input.equals("bye")) {
+                bye();
+                return;
+            } else if (input.equals("list")) {
+                list();
+            } else if (input.startsWith("unmark") || input.startsWith("mark")) {
+                marking(input);
+            } else if (input.startsWith("delete")) {
+                delete(input);
+            } else if (input.startsWith("todo") || input.startsWith("deadline") || input.startsWith("event")){
+                add(input);
+            } else {
+                invalid();
+            }
+        }
+    }
+    public static void add(String input){
+        System.out.println(line);
+        String response = manager.addTask(input);
+        System.out.println(response);
+        System.out.println(line);
+    }
+    public static void delete(String input){
+        System.out.println(line);
+        try {
+            int index = Integer.parseInt(input.replaceFirst("delete", "").strip());
+            System.out.println(manager.deleteTask(index));
+        } catch (NumberFormatException n){
+            System.out.println("Invalid number entered! Please enter an integer");
+        }
+        System.out.println(line);
+    }
+    public static void list(){
+        System.out.println(manager.getTaskList());
+    }
+    public static void marking(String input){
+
+        if (input.startsWith("mark")){
+            try {
+                int index = Integer.parseInt(input.replaceFirst("mark", "").strip());
+                System.out.println(manager.markTaskDone(index));
+            } catch (NumberFormatException n){
+                System.out.println("Invalid number entered! Please enter an integer");
+            }
+        } else if (input.startsWith("unmark")){
+            try {
+                int index = Integer.parseInt(input.replaceFirst("unmark", "").strip());
+                System.out.println(manager.markTaskUndone(index));
+            } catch (NumberFormatException n){
+                System.out.println("Invalid number entered! Please enter an integer");
+            }
+        }
+
+
+    }
+    public static void bye(){
+        String bye = "Bye. Hope to see you again soon!";
+        System.out.println(line);
+        System.out.println(bye);
+        System.out.println(line);
+    }
+    public static void start(){
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -13,52 +84,13 @@ public class Duke {
         String intro = "I am a Personal Assistant Chatbot that helps you to keep track of various things.\n"
                 + "Let's get started.\n";
 
-        String line = "-------------------------------------------------------------------------------------";
-
-        String bye = "Bye. Hope to see you again soon!";
-
         System.out.println("Hello from\n" + logo);
         System.out.println(intro);
         System.out.println(line);
-
-        Scanner s = new Scanner(System.in);
-
-        String input;
-
-        while (true) {
-
-            input = s.nextLine();
-
-            if (input.equals("bye")) {
-                break;
-            } else if (input.equals("list")) {
-                System.out.println(list.getTaskList());
-            } else if (input.startsWith("unmark")) {
-                try{
-                    int index = Integer.parseInt(input.replaceAll("unmark", "").strip());
-                    System.out.println(list.markTaskUndone(index));
-                } catch (NumberFormatException n){
-                    System.out.println("Invalid number entered! Please enter an integer");
-                }
-
-            } else if (input.startsWith("mark")) {
-                try {
-                    int index = Integer.parseInt(input.replaceAll("mark", "").strip());
-                    System.out.println(list.markTaskDone(index));
-                } catch (NumberFormatException n){
-                    System.out.println("Invalid number entered! Please enter an integer");
-                }
-            }  else {
-                //System.out.println("\n");
-                System.out.println(line);
-                String response = list.addTask(input);
-                System.out.println(response);
-                System.out.println(line);
-            }
-        }
-
+    }
+    public static void invalid(){
         System.out.println(line);
-        System.out.println(bye);
+        System.out.println("Invalid Entry!");
         System.out.println(line);
     }
 }
