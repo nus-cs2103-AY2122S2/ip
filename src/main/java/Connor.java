@@ -31,7 +31,7 @@ public class Connor {
             break;
         }
         case "mark": {
-            int taskNo = Integer.valueOf(statement[1]) - 1;
+            int taskNo = Integer.parseInt(statement[1]) - 1;
             Task t = xs.get(taskNo);
             t.mark();
             print("Good job! I have marked the following task as completed: ");
@@ -39,7 +39,7 @@ public class Connor {
             break;
         }
         case "unmark": {
-            int taskNo = Integer.valueOf(statement[1]) - 1;
+            int taskNo = Integer.parseInt(statement[1]) - 1;
             Task t = xs.get(taskNo);
             t.unmark();
             print("Understood. I have unmarked the following task: ");
