@@ -36,8 +36,19 @@ public class Duke {
                 action =  new Action(sc.nextLine());
                 continue;
             }
+            action = new Todo(action.getBody());
+            if (action.isDeadline()) {
+                String[] sarr = action.getBody().split("/by");
+                action = new Deadline(sarr[0], sarr[1]);
+                store.add(action);
+            }
+            if (action.isEvent()) {
+                action = new Event(action.getBody());
+                store.add(action);
+            }
             store.add(action);
-            System.out.println("added: " + action);
+            System.out.println("Got it. I have added this task:\n  " + action +
+                    "\nNow you have " + store.size() + " tasks in the list.");
             action = new Action(sc.nextLine());
         }
         System.out.println("Bye! Hope to see you again soon!");

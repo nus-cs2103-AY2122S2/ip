@@ -12,11 +12,20 @@ public class Action {
         isDone = status;
     }
 
+    /**
+     * Returns the first word of the input
+     * which is the action
+     * @return head of message/the action
+     */
     public String getAction() {
         String head = act.split(" ")[0];
         return head;
     }
 
+    /**
+     * Returns the input without the head
+     * @return the body of the input
+     */
     public String getBody() {
         String bod = act.split(" ", 2)[1];
         return bod;
@@ -48,6 +57,14 @@ public class Action {
 
     public boolean isUnmark() {
         return getAction().equals("unmark");
+    }
+
+    public boolean isDeadline() {
+        return getAction().equals(("deadline"));
+    }
+
+    public boolean isEvent() {
+        return getAction().equals("event");
     }
 
     @Override
