@@ -15,14 +15,9 @@ public class FunBox {
         boolean isLoop = true;
         while (isLoop) {
             String userMessage = sc.nextLine();
-            // If user types "bye" exit the program, otherwise echo user message
-            if (funBox.isBye(userMessage)) {
-                funBox.sayBye();
-                break;
-            } else if (funBox.isList(userMessage)) {
-                funBox.showList();
-            } else {
-                funBox.addToList(userMessage);
+
+            if (!funBox.getCommands(userMessage)) {
+                isLoop = false;
             }
         }
         sc.close();
