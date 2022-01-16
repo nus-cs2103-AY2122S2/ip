@@ -17,11 +17,18 @@ public class Command {
             if (command.equals("list")) {
                 taskList.listTasks();
             }
-            else {
-                taskList.tasks.add(command);
-                System.out.println("added: " + command);
+            else if (command.equals("mark")) {
+                taskList.markTask(scan.nextInt());
             }
-            Command nextCommand = new Command(scan,scan.nextLine());
+            else if (command.equals("unmark")) {
+                taskList.unmarkTask(scan.nextInt());
+            }
+            else {
+                String remainingCommand = scan.nextLine();
+                taskList.tasks.add(new Task(command + remainingCommand));
+                System.out.println("added: " + command + remainingCommand);
+            }
+            Command nextCommand = new Command(scan,scan.next());
             nextCommand.execute(taskList);
         }
     }
