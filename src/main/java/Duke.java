@@ -48,64 +48,90 @@ public class Duke {
 
             // Mark & Unmark Feature
             else if (input.contains("mark") || input.contains("unmark")) {
-                String s = input.replaceAll("\\D+","");
-                int clean = Integer.parseInt(s) - 1;  // Parse to find what number in list to toggle
-                // Edge Case
-                if (arr[clean] == null) {
-                    System.out.println("Error! No tasked added");
+                try {
+                    String s = input.replaceAll("\\D+", "");
+                    int clean = Integer.parseInt(s) - 1;  // Parse to find what number in list to toggle
+                    // Edge Case
+                    if (arr[clean] == null) {
+                        System.out.println("Error! No tasked added");
+                    }
+                    // Mark
+                    else if (input.toCharArray()[0] != 'u') {
+                        arr[clean].setMarked();
+                        System.out.println("Nice! I've marked this task as done:\n " +
+                                "   " + arr[clean].toString());
+                    }
+                    // Unmark
+                    else {
+                        arr[clean].setUnmarked();
+                        System.out.println("OK, I've marked this task as not done yet:\n " +
+                                "   " + arr[clean].toString());
+                    }
                 }
-                // Mark
-                else if (input.toCharArray()[0] != 'u') {
-                    arr[clean].setMarked();
-                    System.out.println("Nice! I've marked this task as done:\n " +
-                            "   "  + arr[clean].toString());
-                }
-                // Unmark
-                else {
-                    arr[clean].setUnmarked();
-                    System.out.println("OK, I've marked this task as not done yet:\n " +
-                            "   "  + arr[clean].toString());
-                }
+                 catch (NumberFormatException e) {
+                     System.out.println("Don't be cheeky. Please write something that makes sense.");
+                 }
                 System.out.println(line);
             }
 
             // Deadline Feature
             else if (input.contains("deadline")) {
-                String nondead = input.split("deadline ", 2)[1]; // Remove instruction
-                String task = nondead.split(" /by ", 2)[0]; // Split to task
-                String date = nondead.split(" /by ", 2)[1]; // Split to date
-                Deadline newDeadline = new Deadline(task, date);
-                int itemsInList = getLength(arr) + 1;
-                System.out.println("Got it! I've added this task: \n    " +
-                        newDeadline.toString() + "\n" +
-                        "Now you have " + itemsInList + " tasks in the list.");
-                arr[getLength(arr)] = newDeadline;
+                try {
+                    String nondead = input.split("deadline ", 2)[1]; // Remove instruction
+                    String task = nondead.split(" /by ", 2)[0]; // Split to task
+                    String date = nondead.split(" /by ", 2)[1]; // Split to date
+                    Deadline newDeadline = new Deadline(task, date);
+                    int itemsInList = getLength(arr) + 1;
+                    System.out.println("Got it! I've added this task: \n    " +
+                            newDeadline.toString() + "\n" +
+                            "Now you have " + itemsInList + " tasks in the list.");
+                    arr[getLength(arr)] = newDeadline;
+                }
+                 catch (IndexOutOfBoundsException e) {
+                    System.out.println("Don't be cheeky. Give me a deadline to stress you over.");
+                }
                 System.out.println(line);
             }
 
             // Event Feature
             else if (input.contains("event")) {
-                String nonevent = input.split("event ", 2)[1]; // Remove instruction
-                String task = nonevent.split(" /at ", 2)[0]; // Split to task
-                String date = nonevent.split(" /at ", 2)[1]; // Split to date
-                Event newEvent = new Event(task, date);
-                int itemsInList = getLength(arr) + 1;
-                System.out.println("Got it! I've added this task: \n    " +
-                        newEvent.toString() + "\n" +
-                        "Now you have " + itemsInList + " tasks in the list.");
-                arr[getLength(arr)] = newEvent;
+                try {
+                    String nonevent = input.split("event ", 2)[1]; // Remove instruction
+                    String task = nonevent.split(" /at ", 2)[0]; // Split to task
+                    String date = nonevent.split(" /at ", 2)[1]; // Split to date
+                    Event newEvent = new Event(task, date);
+                    int itemsInList = getLength(arr) + 1;
+                    System.out.println("Got it! I've added this task: \n    " +
+                            newEvent.toString() + "\n" +
+                            "Now you have " + itemsInList + " tasks in the list.");
+                    arr[getLength(arr)] = newEvent;
+                }
+                 catch (IndexOutOfBoundsException e) {
+                    System.out.println("Don't be cheeky. Give me an event to record.");
+                }
                 System.out.println(line);
             }
 
             // To Do Feature
             else if (input.contains("todo")) {
-                String word = input.split(" ", 2)[1]; // Remove instruction
-                ToDo newToDo = new ToDo(word);
-                int itemsInList = getLength(arr) + 1;
-                System.out.println("Got it! I've added this task: \n    " +
-                        newToDo.toString() + "\n" +
-                        "Now you have " + itemsInList + " tasks in the list.");
-                arr[getLength(arr)] = newToDo;
+                try {
+                    String word = input.split(" ", 2)[1]; // Remove instruction
+                    ToDo newToDo = new ToDo(word);
+                    int itemsInList = getLength(arr) + 1;
+                    System.out.println("Got it! I've added this task: \n    " +
+                            newToDo.toString() + "\n" +
+                            "Now you have " + itemsInList + " tasks in the list.");
+                    arr[getLength(arr)] = newToDo;
+                }
+                 catch (IndexOutOfBoundsException e) {
+                    System.out.println("Don't be cheeky. Give me something to do.");
+                }
+                System.out.println(line);
+            }
+
+            // Edge Case
+            else {
+                System.out.println(input + " is not a valid command. Please try again.");
                 System.out.println(line);
             }
         }
