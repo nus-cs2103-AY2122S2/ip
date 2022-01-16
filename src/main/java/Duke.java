@@ -9,7 +9,7 @@ public class Duke {
                 + "/,    /` \n"
                 + "\\\\\"--\\\\\n";
 
-        System.out.println("Woof, I am (supposed to look like) a dog bot. \n" + logo + "\n" +  "What do you want from me?");
+        System.out.println("Woof, I am (supposed to look like) a dog bot. \n" + logo + "\n" +  "What do you want from me?\n");
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
         List<Task> tasks = new ArrayList<>();
