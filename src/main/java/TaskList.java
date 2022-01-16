@@ -7,12 +7,26 @@ public class TaskList {
         this.tasks = new ArrayList<>(100);
     }
 
-    public void add(String name) {
-        int taskId = tasks.size() + 1; // taskId numbering starts from 1
-        Task t = new Task(taskId, name);
-        tasks.add(t);
+    private int generateNewTaskId() {
+        return tasks.size() + 1; // taskId numbering starts from 1
+    }
 
-        System.out.format("added: %s\n", t.getName());
+    public void addToDo(String name) {
+        int taskId = generateNewTaskId();
+        ToDo toDo = new ToDo(taskId, name);
+        tasks.add(toDo);
+    }
+
+    public void addDeadline(String name, String by) {
+        int taskId = generateNewTaskId();
+        Deadline deadline = new Deadline(taskId, name, by);
+        tasks.add(deadline);
+    }
+
+    public void addEvent(String name, String at) {
+        int taskId = generateNewTaskId();
+        Event event = new Event(taskId, name, at);
+        tasks.add(event);
     }
 
     public void markTask(int taskId) {

@@ -4,6 +4,9 @@ public class Event extends Task {
     public Event(int taskId, String name, String at) {
         super(taskId, name);
         this.at = at;
+
+        System.out.println("Got it. I've added this event: ");
+        System.out.println(this);
     }
 
     @Override

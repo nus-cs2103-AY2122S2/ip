@@ -1,3 +1,4 @@
+import java.util.*;
 import java.util.Scanner;
 
 public class Spark {
@@ -14,13 +15,13 @@ public class Spark {
         System.out.println("----------------------------------------------------------------------");
 
         String input;
-        String[] split;
+        String[] tokens;
         String command;
         do {
             // get input from user
             input = sc.nextLine();
-            split = input.split(" "); // split command into individual keywords
-            command = split[0]; // assume that the first keyword is always the command word
+            tokens = input.split(" "); // split command into individual keywords by single-space
+            command = tokens[0]; // assume that the first keyword is always the command word
 
             System.out.println("----------------------------------------------------------------------");
 
@@ -31,19 +32,79 @@ public class Spark {
                 taskList.print();
 
             } else if (command.equals("mark")) {
-                int taskId = Integer.parseInt(split[1]);
+                int taskId = Integer.parseInt(tokens[1]);
                 taskList.markTask(taskId);
 
             } else if (command.equals("unmark")) {
-                int taskId = Integer.parseInt(split[1]);
+                int taskId = Integer.parseInt(tokens[1]);
                 taskList.unMarkTask(taskId);
 
             } else {
-                taskList.add(input);
+                if (command.equals("event")) {
+                    String[] eventParams = getEventParams(tokens);
+                    taskList.addEvent(eventParams[0], eventParams[1]);
 
+                } else if (command.equals("deadline")) {
+                    String[] deadlineParams = getDeadlineParams(tokens);
+                    taskList.addDeadline(deadlineParams[0], deadlineParams[1]);
+
+                } else { // command.equals("toDo")
+                    String toDoParams = getToDoParams(tokens);
+                    taskList.addToDo(toDoParams);
+
+                }
             }
 
             System.out.println("----------------------------------------------------------------------");
         } while (!command.equals("bye"));
+    }
+
+    private static String getToDoParams(String[] tokens) {
+
+        List<String> words = new ArrayList<>(Arrays.asList(tokens).subList(1, tokens.length));
+
+        return String.join(" ", words);
+    }
+
+    private static String[] getDeadlineParams(String[] tokens) {
+        List<String> firstHalf = new ArrayList<>();
+        List<String> secondHalf = new ArrayList<>();
+
+        boolean inSecondHalf = false;
+        for (int i=1; i<tokens.length; i++) {
+            if (tokens[i].equals("/by")) {
+                inSecondHalf = true;
+            } else if (!inSecondHalf) {
+                firstHalf.add(tokens[i]);
+            } else {
+                secondHalf.add(tokens[i]);
+            }
+        }
+
+        String name = String.join(" ", firstHalf);
+        String by = String.join(" ", secondHalf);
+
+        return new String[]{name, by};
+    }
+
+    private static String[] getEventParams(String[] tokens) {
+        List<String> firstHalf = new ArrayList<>();
+        List<String> secondHalf = new ArrayList<>();
+
+        boolean inSecondHalf = false;
+        for (int i=1; i<tokens.length; i++) {
+            if (tokens[i].equals("/at")) {
+                inSecondHalf = true;
+            } else if (!inSecondHalf) {
+                firstHalf.add(tokens[i]);
+            } else {
+                secondHalf.add(tokens[i]);
+            }
+        }
+
+        String name = String.join(" ", firstHalf);
+        String at = String.join(" ", secondHalf);
+
+        return new String[]{name, at};
     }
 }

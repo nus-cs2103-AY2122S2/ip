@@ -4,6 +4,9 @@ public class Deadline extends Task {
     public Deadline(int taskId, String name, String by) {
         super(taskId, name);
         this.by = by;
+
+        System.out.println("Got it. I've added this deadline: ");
+        System.out.println(this);
     }
 
     @Override
