@@ -7,16 +7,25 @@ public class Duke {
     public static void main(String[] args) {
         start();
         Scanner sc = new Scanner(System.in);
-        String command;
+        String input;
+        Notebook notebook = new Notebook();
+
         do {
             System.out.print(INPUT_NAME);
-            command = sc.nextLine();
+            input = sc.nextLine();
+            String output = OUTPUT_NAME;
 
             // main
-            String output = command.equals("bye")
-                    ? "Why are you leaving me? :(" : command;
+            if (input.equals("list")) {
+                output += "\n" + notebook;
+            } else if (input.equals("bye")) {
+                output += "don't leave me don't leave me.";
+            } else {
+                notebook.addTask(input);
+                output += "added " + input;
+            }
             System.out.println(output);
-        } while (!command.equals("bye"));
+        } while (!input.equals("bye"));
         sc.close();
     }
 
