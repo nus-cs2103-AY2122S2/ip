@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -7,13 +8,29 @@ public class Duke {
 
     public static void main(String[] args) {
 
+        System.out.println(greeting);
+
+        ArrayList<String> taskList = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
-        System.out.println(greeting);
-
         while (!input.equals("bye")) {
-            System.out.println("\t"+input+"\n");
+
+            switch (input) {
+
+                case "list":
+                    for (int i = 0; i < taskList.size(); i++) {
+                        int idx = i + 1;
+                        System.out.println("\t" + idx + ". " + taskList.get(i));
+                    }
+                    System.out.println();
+                    break;
+
+                default:
+                    taskList.add(input);
+                    System.out.println("\t added: "+input+"\n");
+            }
+
             input = sc.nextLine();
         }
 
