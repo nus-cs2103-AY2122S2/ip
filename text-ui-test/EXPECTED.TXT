@@ -1,54 +1,88 @@
--------------------------Level 4-------------------------
+-------------------------Level 5-------------------------
 Greetings, NERD! I'm Duke
 Fine, I'm programmed to be nice today. What can I do for you? :)
--------------------------Level 4-------------------------
--------------------------Level 4-------------------------
+-------------------------Level 5-------------------------
+-------------------------Level 5-------------------------
 Roger, I got you. I've added this task:
 [T][ ] borrow book
 Now you have 1 tasks in the list.
--------------------------Level 4-------------------------
--------------------------Level 4-------------------------
+-------------------------Level 5-------------------------
+-------------------------Level 5-------------------------
 Roger, I got you. I've added this task:
 [D][ ] return book (by: friday)
 Now you have 2 tasks in the list.
--------------------------Level 4-------------------------
--------------------------Level 4-------------------------
+-------------------------Level 5-------------------------
+-------------------------Level 5-------------------------
 Roger, I got you. I've added this task:
 [E][ ] project meeting (at: Mon 2-4pm)
 Now you have 3 tasks in the list.
--------------------------Level 4-------------------------
--------------------------Level 4-------------------------
+-------------------------Level 5-------------------------
+-------------------------Level 5-------------------------
 1. [T][ ] borrow book
 2. [D][ ] return book (by: friday)
 3. [E][ ] project meeting (at: Mon 2-4pm)
--------------------------Level 4-------------------------
--------------------------Level 4-------------------------
+-------------------------Level 5-------------------------
+-------------------------Level 5-------------------------
 Cool! You seemed to have been productive just like me! I've marked this task as done:
 [T][X] borrow book
--------------------------Level 4-------------------------
--------------------------Level 4-------------------------
+-------------------------Level 5-------------------------
+-------------------------Level 5-------------------------
 1. [T][X] borrow book
 2. [D][ ] return book (by: friday)
 3. [E][ ] project meeting (at: Mon 2-4pm)
--------------------------Level 4-------------------------
--------------------------Level 4-------------------------
+-------------------------Level 5-------------------------
+-------------------------Level 5-------------------------
 Cool! You seemed to have been productive just like me! I've marked this task as done:
 [D][X] return book (by: friday)
--------------------------Level 4-------------------------
--------------------------Level 4-------------------------
+-------------------------Level 5-------------------------
+-------------------------Level 5-------------------------
 1. [T][X] borrow book
 2. [D][X] return book (by: friday)
 3. [E][ ] project meeting (at: Mon 2-4pm)
--------------------------Level 4-------------------------
--------------------------Level 4-------------------------
+-------------------------Level 5-------------------------
+-------------------------Level 5-------------------------
 Did you mess up something? Fine... I'll mark it as undone -- but I believe you can do it!:
 [D][ ] return book (by: friday)
--------------------------Level 4-------------------------
--------------------------Level 4-------------------------
+-------------------------Level 5-------------------------
+-------------------------Level 5-------------------------
 1. [T][X] borrow book
 2. [D][ ] return book (by: friday)
 3. [E][ ] project meeting (at: Mon 2-4pm)
--------------------------Level 4-------------------------
--------------------------Level 4-------------------------
+-------------------------Level 5-------------------------
+-------------------------Level 5-------------------------
+Oh dear. You need to follow the proper format of providing a description for todo!
+Follow this format:
+todo YOUR_TASK
+-------------------------Level 5-------------------------
+-------------------------Level 5-------------------------
+Roger, I got you. I've added this task:
+[T][ ] buy dinner
+Now you have 4 tasks in the list.
+-------------------------Level 5-------------------------
+-------------------------Level 5-------------------------
+Oh dear. You need to follow the proper format of providing a description for deadline!
+Follow this format:
+deadline YOUR_TASK /by YOUR_DATE
+eg: deadline return book /by Sunday
+-------------------------Level 5-------------------------
+-------------------------Level 5-------------------------
+Oh dear. You need to follow the proper format of providing a description for event!
+Follow this format:
+event YOUR_TASK /at YOUR_DATE
+eg: event project meeting /at Mon 2-4pm
+-------------------------Level 5-------------------------
+-------------------------Level 5-------------------------
+Roger, I got you. I've added this task:
+[D][ ] finish 2103 (by: today)
+Now you have 5 tasks in the list.
+-------------------------Level 5-------------------------
+-------------------------Level 5-------------------------
+1. [T][X] borrow book
+2. [D][ ] return book (by: friday)
+3. [E][ ] project meeting (at: Mon 2-4pm)
+4. [T][ ] buy dinner
+5. [D][ ] finish 2103 (by: today)
+-------------------------Level 5-------------------------
+-------------------------Level 5-------------------------
 Bye nerd. Glad you'll be interacting with a real life human now! Haha...
--------------------------Level 4-------------------------
+-------------------------Level 5-------------------------

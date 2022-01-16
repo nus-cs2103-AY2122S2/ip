@@ -7,7 +7,7 @@ import main.java.Event;
 
 public class Duke {
 
-    private static int level = 4;
+    private static int level = 5;
     private Task taskArr[];
     private int currTask;
 
@@ -42,9 +42,25 @@ public class Duke {
         } else if (command.equals("unmark")){
             unmark(Integer.parseInt(words[1]) - 1);
         } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
-            addTask(words[1], command);
+            try {
+                addTask(words[1], command);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Oh dear. You need to follow the proper format of providing a description for " + command + "!");
+                if (command.equals("deadline")) {
+                    System.out.println("Follow this format:");
+                    System.out.println("deadline YOUR_TASK /by YOUR_DATE");
+                    System.out.println("eg: deadline return book /by Sunday");
+                } else if (command.equals("event")) {
+                    System.out.println("Follow this format:");
+                    System.out.println("event YOUR_TASK /at YOUR_DATE");
+                    System.out.println("eg: event project meeting /at Mon 2-4pm");
+                } else {
+                    System.out.println("Follow this format:");
+                    System.out.println("todo YOUR_TASK");
+                }
+            }
         } else {
-            System.out.println("Idk what you mean!");
+            System.out.println("Idk what you mean! :-(");
         }
         horizontal();
     }

@@ -8,4 +8,10 @@ mark 2
 list
 unmark 2
 list
+todo
+todo buy dinner
+deadline /by 10
+event /at 2pm Sun
+deadline finish 2103 /by today
+list
 bye
