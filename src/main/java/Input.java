@@ -3,6 +3,7 @@ public class Input {
         ECHO,
         ADD,
         LIST,
+        TOGGLE,
         BYE
     }
 
@@ -11,15 +12,22 @@ public class Input {
     private String input;
 
     public Input(String input) {
-        if (input.equalsIgnoreCase("bye")) {
+        String[] inputArr = input.split(" ", 2);
+        String command = inputArr[0];
+        String args = inputArr.length > 1 ? inputArr[1] : "";
+
+        if (command.equalsIgnoreCase("bye")) {
             this.states = States.BYE;
-        } else if (input.equalsIgnoreCase("list")) {
+        } else if (command.equalsIgnoreCase("list")) {
             this.states = States.LIST;
-        } else {
+        } else if (command.equalsIgnoreCase("mark") ||
+                command.equalsIgnoreCase("unmark")) {
+            this.states = States.TOGGLE;
+        }else {
             this.states = States.ADD;
         }
 
-        this.args = this.states == States.ADD ? input : "";
+        this.args = args;
         this.input = input;
     }
 

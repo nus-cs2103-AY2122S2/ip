@@ -12,7 +12,7 @@ public class Duke {
             "                       |___/ ";
     private static final String BOT_NAME = "Abby";
 
-    private ArrayList<String> tasks;
+    private ArrayList<Task> tasks;
     
     public Duke() {
         this.tasks = new ArrayList<>();
@@ -31,7 +31,7 @@ public class Duke {
     }
 
     public void add(String task) {
-        this.tasks.add(task);
+        this.tasks.add(new Task(task));
         
         output("added: " + task);
     }
@@ -40,8 +40,13 @@ public class Duke {
         int length = this.tasks.size();
         StringBuilder sb = new StringBuilder();
 
+        if (length == 0) {
+            output("No tasks found! Quit lazing around!");
+            return;
+        }
+
         for (int i = 0; i < length; ++i) {
-            sb.append(i + 1 + ". " + this.tasks.get(i));
+            sb.append(i + 1 + ". " + this.tasks.get(i).toString());
 
             if (i + 1 != length) {
                 sb.append("\n");
@@ -49,6 +54,17 @@ public class Duke {
         }
 
         output(sb.toString());
+    }
+
+    public void toggleCompleted(boolean isMark, int index) {
+        this.tasks.get(--index).setCompleted();
+
+        String output = isMark ?
+                "Nice! I've marked this task as done:\n" :
+                "OK, I've marked this task as not done yet:\n";
+        String task = "  " + this.tasks.get(index).toString();
+
+        output(output + task);
     }
 
     public void start() {
@@ -75,6 +91,13 @@ public class Duke {
                     break;
                 case LIST:
                     list();
+
+                    break;
+                case TOGGLE:
+                    boolean isMark =
+                            input.getInput().split(" ")[0].equalsIgnoreCase("mark");
+
+                    toggleCompleted(isMark, Integer.parseInt(input.getArgs()));
 
                     break;
                 default:
