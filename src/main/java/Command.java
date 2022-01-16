@@ -20,13 +20,8 @@ public class Command {
             else if (command.equals("mark")) {
                 taskList.markTask(scan.nextInt());
             }
-            else if (command.equals("unmark")) {
-                taskList.unmarkTask(scan.nextInt());
-            }
             else {
-                String remainingCommand = scan.nextLine();
-                taskList.tasks.add(new Task(command + remainingCommand));
-                System.out.println("added: " + command + remainingCommand);
+                taskList.addTask(command, scan.nextLine());
             }
             Command nextCommand = new Command(scan,scan.next());
             nextCommand.execute(taskList);

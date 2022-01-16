@@ -29,4 +29,26 @@ public class TaskList {
         System.out.println("OK, I've marked this task as not done yet:");
         System.out.println(tasks.get(number - 1));
     }
+
+    public void addTask(String command, String description) {
+        System.out.println("Got it. I've added this task:");
+        if (command.equals("todo")) {
+            tasks.add(new Todo(description));
+        }
+        else if (command.equals("deadline")) {
+            String[] splitDescription = description.split("/by");
+            tasks.add(new Deadline(splitDescription[0], splitDescription[1]));
+        }
+        else {
+            String[] splitDescription = description.split("/at");
+            tasks.add(new Event(splitDescription[0], splitDescription[1]));
+        }
+        System.out.println(tasks.get(tasks.size() - 1));
+        if (tasks.size() <= 1) {
+            System.out.println(String.format("Now you have %d task in the list.", tasks.size()));
+        }
+        else {
+            System.out.println(String.format("Now you have %d tasks in the list.", tasks.size()));
+        }
+    }
 }
