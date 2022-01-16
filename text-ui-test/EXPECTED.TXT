@@ -41,4 +41,21 @@ Here are the tasks in your list:
 3. [D][ ] stop crying (by: monday)
 4. [E][ ] shower (at: Tuesday)
 
+Noted. I've removed this task:
+[T][ ] cry myself to sleep
+Now you have 3 tasks in the list.
+
+Here are the tasks in your list:
+1. [E][ ] do homework (at: Monday)
+2. [D][ ] stop crying (by: monday)
+3. [E][ ] shower (at: Tuesday)
+
+Noted. I've removed this task:
+[E][ ] do homework (at: Monday)
+Now you have 2 tasks in the list.
+
+Here are the tasks in your list:
+1. [D][ ] stop crying (by: monday)
+2. [E][ ] shower (at: Tuesday)
+
 Bye. Hope to see you again soon!
