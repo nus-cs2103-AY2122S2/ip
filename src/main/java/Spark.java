@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Spark {
     public static void main(String[] args) {
         // assuming that there will be no more than 100 tasks,
-        TaskList tasks = new TaskList();
+        TaskList taskList = new TaskList();
 
         Scanner sc = new Scanner(System.in);
 
@@ -14,27 +14,36 @@ public class Spark {
         System.out.println("----------------------------------------------------------------------");
 
         String input;
-        while (true) {
+        String[] split;
+        String command;
+        do {
             // get input from user
             input = sc.nextLine();
-            String[] split = input.split(" "); // split command into individual keywords
-            String command = split[0]; // assume that the first keyword is always the command word
+            split = input.split(" "); // split command into individual keywords
+            command = split[0]; // assume that the first keyword is always the command word
 
             System.out.println("----------------------------------------------------------------------");
 
-            if (command.equals("bye")) {
-                // print goodbye message
+            if (command.equals("bye")) {// print goodbye message
                 System.out.println("Cool, see you around!");
-                System.out.println("----------------------------------------------------------------------");
 
-                break;
             } else if (command.equals("list")) {
-                tasks.print();
+                taskList.print();
+
+            } else if (command.equals("mark")) {
+                int taskId = Integer.parseInt(split[1]);
+                taskList.markTask(taskId);
+
+            } else if (command.equals("unmark")) {
+                int taskId = Integer.parseInt(split[1]);
+                taskList.unMarkTask(taskId);
+
             } else {
-                tasks.add(input);
+                taskList.add(input);
+
             }
 
             System.out.println("----------------------------------------------------------------------");
-        }
+        } while (!command.equals("bye"));
     }
 }

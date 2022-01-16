@@ -8,10 +8,31 @@ public class TaskList {
     }
 
     public void add(String name) {
-        Task t = new Task(name);
+        int taskId = tasks.size() + 1; // taskId numbering starts from 1
+        Task t = new Task(taskId, name);
         tasks.add(t);
 
         System.out.format("added: %s\n", t.getName());
+    }
+
+    public void markTask(int taskId) {
+        for (Task t : tasks) {
+            if (t.taskId == taskId) {
+                t.mark();
+
+                break;
+            }
+        }
+    }
+
+    public void unMarkTask(int taskId) {
+        for (Task t : tasks) {
+            if (t.taskId == taskId) {
+                t.unMark();
+
+                break;
+            }
+        }
     }
 
     public void print() {
