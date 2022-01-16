@@ -33,14 +33,21 @@ public class Duke {
                 break;
             } else if (input.equals("list")) {
                 System.out.println(list.getTaskList());
-            } else if (input.contains("unmark")) {
-                int index = Integer.parseInt(input.replaceAll("unmark", "").strip());
-                // TODO Handle conversion exception
-                System.out.println(list.markTaskUndone(index));
-            } else if (input.contains("mark")) {
-                int index = Integer.parseInt(input.replaceAll("mark", "").strip());
-                // TODO Handle conversion exception
-                System.out.println(list.markTaskDone(index));
+            } else if (input.startsWith("unmark")) {
+                try{
+                    int index = Integer.parseInt(input.replaceAll("unmark", "").strip());
+                    System.out.println(list.markTaskUndone(index));
+                } catch (NumberFormatException n){
+                    System.out.println("Invalid number entered! Please enter an integer");
+                }
+
+            } else if (input.startsWith("mark")) {
+                try {
+                    int index = Integer.parseInt(input.replaceAll("mark", "").strip());
+                    System.out.println(list.markTaskDone(index));
+                } catch (NumberFormatException n){
+                    System.out.println("Invalid number entered! Please enter an integer");
+                }
             }  else {
                 //System.out.println("\n");
                 System.out.println(line);

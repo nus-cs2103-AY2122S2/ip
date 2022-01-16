@@ -10,7 +10,6 @@ public class Deadline extends Task{
         } catch (IndexOutOfBoundsException i){
             this.taskName=null;
         }
-
         try {
             this.date = str[1].strip();
             if (this.date.equals("")) this.date=null;
@@ -24,7 +23,6 @@ public class Deadline extends Task{
         if (this.date == null){
             throw new InvalidTaskDataTimeException("Deadline");
         }
-
     }
 
     public char getType(){

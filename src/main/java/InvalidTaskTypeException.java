@@ -8,7 +8,7 @@ public class InvalidTaskTypeException extends DukeException{
     }
 
     public String toString(){
-        return String.format("Invalid entry! Task type not specified.\n" +
+        return String.format("Invalid entry! Task type not specified or invalid.\n" +
                 "You entered: %s",entry);
     }
 }

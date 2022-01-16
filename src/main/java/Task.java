@@ -3,39 +3,35 @@ import javax.swing.tree.ExpandVetoException;
 public abstract class Task{
     protected String taskName;
     protected char done = ' ';
-    public Task(String taskName){
-        this.taskName = taskName;
-        this.done = ' ';
-    }
+
     public Task(){}
 
-    public static Task newTask(String s) throws InvalidTaskDataTimeException,InvalidTaskDescriptionException{
-        if (s.contains("todo")){
+    public static Task newTask(String s) throws InvalidTaskDataTimeException,InvalidTaskDescriptionException,InvalidTaskTypeException{
+        if (s.startsWith("todo")){
             return newToDo(s);
         }
-        else if (s.contains("deadline")){
+        else if (s.startsWith("deadline")){
             return newDeadline(s);
         }
-        else if (s.contains("event")){
+        else if (s.startsWith("event")){
             return newEvent(s);
         } else {
-            // TODO handle null case
-            return null;
+            throw new InvalidTaskTypeException(s);
         }
     }
 
     private static ToDo newToDo(String s) throws InvalidTaskDescriptionException{
-        String taskName =  s.replaceAll("todo","").strip();
+        String taskName =  s.replaceFirst("todo","").strip();
         return new ToDo(taskName);
     }
 
     private static Event newEvent(String s) throws InvalidTaskDataTimeException,InvalidTaskDescriptionException{
-        String taskName =  s.replaceAll("event","").strip();
+        String taskName =  s.replaceFirst("event","").strip();
         return new Event(taskName);
     }
 
     private static Deadline newDeadline(String s) throws InvalidTaskDataTimeException,InvalidTaskDescriptionException{
-        String taskName =  s.replaceAll("deadline","").strip();
+        String taskName =  s.replaceFirst("deadline","").strip();
         return new Deadline(taskName);
     }
 
