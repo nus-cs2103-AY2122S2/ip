@@ -1,5 +1,6 @@
 public class Deadline extends Task{
-    String deadLine;
+    protected String deadLine;
+
     public Deadline(String description, String deadLine) {
         super(description);
         this.deadLine = deadLine;

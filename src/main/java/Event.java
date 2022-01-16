@@ -1,5 +1,6 @@
 public class Event extends Task{
-    String scheduledTime;
+    protected String scheduledTime;
+
     public Event(String description, String scheduledTime) {
         super(description);
         this.scheduledTime = scheduledTime;

@@ -29,9 +29,9 @@ public class Driver {
             } else if(command.equals("list")) {
                 this.displayTasks();
             } else if(command.split(" ")[0].equals("mark")) {
-                this.markAsDone(command.split(" ")[1]);
+                this.markAsDone(command);
             } else if(command.split(" ")[0].equals("unmark")) {
-                this.unmarkDone(command.split(" ")[1]);
+                this.unmarkDone(command);
             } else if(!command.equals("")) {
                 this.addTask(command);
             }
@@ -42,7 +42,7 @@ public class Driver {
         String[] taskString = task.split(" ",2);
         String type = taskString[0];
         try {
-            Task t = null;g
+            Task t = null;
             if (type.equals("todo")) t = new ToDo(taskString[1]);
             else if (type.equals("deadline")) {
                 String[] descriptionAndDate = taskString[1].split(" /by ", 2);
@@ -73,7 +73,7 @@ public class Driver {
 
     private void markAsDone(String in) {
         try {
-            int index = Integer.parseInt(in);
+            int index = Integer.parseInt(in.split(" ")[1]);
             if (index > this.tasks.size()) {
                 System.out.println(line + "\n\tTask number: " + index + " does not exist" + "\n" + line);
             } else {
@@ -82,12 +82,14 @@ public class Driver {
             }
         } catch (NumberFormatException e) {
             System.out.println(line + "\n\t Please input a valid Task number" + "\n" + line);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(line + "\n\tPlease input a valid Task command\n" + line);
         }
     }
 
     private void unmarkDone(String in) {
         try {
-            int index = Integer.parseInt(in);
+            int index = Integer.parseInt(in.split(" ")[1]);
             if (index > this.tasks.size()) {
                 System.out.println(line + "\n\t Task number: " + index + " does not exist" + "\n" + line);
             } else {
@@ -96,6 +98,8 @@ public class Driver {
             }
         } catch (NumberFormatException e) {
             System.out.println(line + "\n\t Please input a valid Task number" + "\n" + line);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(line + "\n\tPlease input a valid Task command\n" + line);
         }
     }
 }
