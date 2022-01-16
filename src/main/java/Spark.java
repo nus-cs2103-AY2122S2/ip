@@ -48,10 +48,11 @@ public class Spark {
                     String[] deadlineParams = getDeadlineParams(tokens);
                     taskList.addDeadline(deadlineParams[0], deadlineParams[1]);
 
-                } else { // command.equals("toDo")
+                } else if (command.equals("todo")) {
                     String toDoParams = getToDoParams(tokens);
                     taskList.addToDo(toDoParams);
-
+                } else {
+                System.out.println("I didn't quite get that :(");
                 }
             }
 
@@ -72,7 +73,7 @@ public class Spark {
 
         boolean inSecondHalf = false;
         for (int i=1; i<tokens.length; i++) {
-            if (tokens[i].equals("/by")) {
+        if (tokens[i].equals("/by")) {
                 inSecondHalf = true;
             } else if (!inSecondHalf) {
                 firstHalf.add(tokens[i]);
