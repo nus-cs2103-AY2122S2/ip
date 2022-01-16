@@ -52,7 +52,7 @@ public class Spark {
                     String toDoParams = getToDoParams(tokens);
                     taskList.addToDo(toDoParams);
                 } else {
-                System.out.println("I didn't quite get that :(");
+                    System.out.println("I didn't quite get that :(");
                 }
             }
 
