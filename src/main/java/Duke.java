@@ -27,8 +27,7 @@ public class Duke {
                 System.out.println("\t" + "Here are the tasks in your list:");
                 for (int i = 0; i < counting; i++) {
                     int index = i + 1;
-                    System.out.println("\t" + index + "." + "[" + savedTask[i].getStatusIcon() + "] "
-                            + savedTask[i].getDescription());
+                    System.out.println("\t" + index + "." + savedTask[i].toString());
                 }
                 System.out.println(HORIZONTAL_LINE);
             } else if (commands[0].equals("mark")) {
@@ -36,15 +35,13 @@ public class Duke {
                 System.out.println("\t" + "Nice! I've marked this task as done:");
                 int index = Integer.parseInt(commands[1]) - 1;
                 savedTask[index].markAsDone();
-                System.out.println("\t" + "[" + savedTask[index].getStatusIcon() + "] "
-                            + savedTask[index].getDescription());
+                System.out.println("\t" + savedTask[index].toString());
             } else if (commands[0].equals("unmark")) {
                 System.out.println(HORIZONTAL_LINE);
                 System.out.println("\t" + "OK, I've marked this task as not done yet:");
                 int index = Integer.parseInt(commands[1]) - 1;
                 savedTask[index].markAsNotDone();
-                System.out.println("\t" + "[" + savedTask[index].getStatusIcon() + "] "
-                        + savedTask[index].getDescription());
+                System.out.println("\t" + savedTask[index].toString());
             } else {
                 savedTask[counting] = new Task(userInput);
                 counting++;
