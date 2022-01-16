@@ -54,6 +54,7 @@ public class Duke {
                 } catch (DukeException d) {
                     printMsg(d.toString());
                 }
+                break;
             case "todo":
             case "deadline":
             case "event":
