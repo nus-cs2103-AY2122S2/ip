@@ -6,6 +6,8 @@ public class Duke {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         System.out.println("========================");
 
+        ArrayList<String> list = new ArrayList<>(100);
+
         while(true) {
             System.out.print("Me   : ");
             String message = sc.nextLine();
@@ -13,7 +15,17 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             }
-            System.out.print("Duke : " + message + "\n");
+            if (message.equals("list")) {
+                for (int i = 0; i < list.size(); i++) {
+                    int num = i + 1;
+                    System.out.print(num + ". ");
+                    System.out.println(list.get(i));
+                }
+
+            } else {
+                list.add(message);
+                System.out.println("Duke has added :" + message);
+            }
         }
         sc.close();
     }
