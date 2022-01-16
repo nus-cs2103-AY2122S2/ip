@@ -9,14 +9,20 @@ public class Command {
         this.command = command;
     }
 
-    public void execute() {
-        if (!command.equals("bye")) {
-            System.out.println(command);
-            Command nextCommand = new Command(scan,scan.next());
-            nextCommand.execute();
+    public void execute(TaskList taskList) {
+        if (command.equals("bye")) {
+            System.out.println("Bye. Hope to see you again soon!");
         }
         else {
-            System.out.println("Bye. Hope to see you again soon!");
+            if (command.equals("list")) {
+                taskList.listTasks();
+            }
+            else {
+                taskList.tasks.add(command);
+                System.out.println("added: " + command);
+            }
+            Command nextCommand = new Command(scan,scan.nextLine());
+            nextCommand.execute(taskList);
         }
     }
 }

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -5,7 +6,7 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         Scanner scan = new Scanner(System.in);
-        Command command = new Command(scan, scan.next());
-        command.execute();
+        Command command = new Command(scan, scan.nextLine());
+        command.execute(new TaskList());
     }
 }
