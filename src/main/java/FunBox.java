@@ -19,8 +19,10 @@ public class FunBox {
             if (funBox.isBye(userMessage)) {
                 funBox.sayBye();
                 break;
+            } else if (funBox.isList(userMessage)) {
+                funBox.showList();
             } else {
-                funBox.echo(userMessage);
+                funBox.addToList(userMessage);
             }
         }
         sc.close();
