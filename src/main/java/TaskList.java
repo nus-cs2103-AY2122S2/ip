@@ -16,21 +16,29 @@ public class TaskList {
     }
 
     public String markTaskDone(int index){
-        // TODO Handle index out of bounds exception
-        Task t = list.get(index-1);
-        t.markDone();
-        String s = String.format("+++ Nice! I've marked this task as done:\n" +
-                "+++ %s\n",t);
-        return s;
+        try{
+            Task t = list.get(index-1);
+            t.markDone();
+            String s = String.format("+++ Nice! I've marked this task as done:\n" +
+                    "+++ %s\n",t);
+            return s;
+        } catch (IndexOutOfBoundsException i){
+            String s = String.format("Invalid number entered! No tasks marked.");
+            return s;
+        }
     }
 
     public String markTaskUndone(int index){
-        // TODO Handle index out of bounds exception
-        Task t = list.get(index-1);
-        t.markunDone();
-        String s = String.format("--- OK, I've marked this task as not done yet:\n" +
-                "--- %s\n",t);
-        return s;
+         try {
+             Task t = list.get(index - 1);
+             t.markunDone();
+             String s = String.format("--- OK, I've marked this task as not done yet:\n" +
+                     "--- %s\n", t);
+             return s;
+         } catch (IndexOutOfBoundsException i){
+             String s = String.format("Invalid number entered! No tasks unmarked.");
+             return s;
+         }
     }
 
     public String getTaskList(){
