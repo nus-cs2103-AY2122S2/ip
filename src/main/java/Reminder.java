@@ -1,20 +1,25 @@
 public class Reminder {
-    String[] reminders = new String[100];
-    int pointer = 0;
+    Task[] reminders = new Task[100];
+    int pointer = 0; // points to next empty slot in the array
 
-    public Reminder() {
-
+    public void add(Task task) {
+        reminders[pointer++] = task;
+        System.out.println("\tadded: " + task.description);
     }
 
-    public String add(String task) {
-        reminders[pointer] = task;
-        pointer++;
-        return "added: " + task;
+    public void mark(int position, boolean done) {
+        reminders[--position].setDone(done);
     }
 
     public void list() {
-        for (int i = 0; i < pointer; i++) {
-            System.out.println("\t" + (i+1) + ". " + reminders[i]);
+        System.out.println("\tHere are the tasks in your list: ");
+        if (pointer == 0) {
+            System.out.println("\tYou have no task in your list.");
+        } else {
+            for (int i = 0; i < pointer; i++) {
+                Task task = reminders[i];
+                System.out.println("\t" + (i + 1) + ". [" + task.getStatusIcon() + "] " + task.description);
+            }
         }
     }
 }

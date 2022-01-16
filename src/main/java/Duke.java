@@ -11,20 +11,41 @@ public class Duke {
                 "\t |____/ u/_/   \\_\\  /____|  /____|  \n" +
                 "\t  |||_    \\\\    >>  _//<<,- _//<<,- \n" +
                 "\t (__)_)  (__)  (__)(__) (_/(__) (_/ ";
+
         System.out.println(hr + "\n\tHello from\n" + logo + "\n\n"
                 + "\tGood day!\n\tWhat can I do for you? \n" + hr);
-        Reminder task = new Reminder();
+
+        Reminder reminder = new Reminder();
+
         while (scanner.hasNext()) {
             String command = scanner.nextLine();
-            if (command.equals("bye")) { // bye
-                System.out.println(hr + "\n\tBye. Hope to see you again soon!\n" + hr + "\n");
+            String[] arr = command.split("\\s+");
+            boolean byeFlag = arr[0].equals("bye");
+            System.out.println(hr);
+            switch(arr[0]) {
+                case "bye":
+                    System.out.println("\tBye. Hope to see you again soon!");
+                    break;
+
+                case "list":
+                    reminder.list();
+                    break;
+
+                case "mark":
+                    reminder.mark(Integer.parseInt(arr[1]), true);
+                    break;
+
+                case "unmark":
+                    reminder.mark(Integer.parseInt(arr[1]), false);
+                    break;
+
+                default:
+                    reminder.add(new Task(command));
+                    break;
+            }
+            System.out.println(hr);
+            if (byeFlag) {
                 break;
-            } else if (command.equals("list")) { // list
-                System.out.println(hr);
-                task.list();
-                System.out.println(hr);
-            } else { // add
-                System.out.println(hr + "\n\t" + task.add(command) + "\n" + hr);
             }
         }
         scanner.close();
