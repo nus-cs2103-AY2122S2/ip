@@ -2,34 +2,58 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Connor {
-    private static String CURRENT_VERSION = "Version 1.2";
+    private static String CURRENT_VERSION = "Version 1.3";
     private static final String LINE = "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━";
     private static final String INDENT = "    ";
 
     private static boolean isActive = true;
 
-    private static ArrayList<String> xs = new ArrayList<>();
+    private static ArrayList<Task> xs = new ArrayList<>();
 
     private static void interpret(String s) {
         // Standardise Format
-        String x = s.toLowerCase();
-        switch (x) {
-        case "bye":
+        String[] statement = s.split(" ",2);
+        switch (statement[0].toLowerCase()) {
+        case "bye": {
             isActive = false;
             print("Farewell. See you next time!");
             break;
-        case "list":
+        }
+        case "list": {
             if (xs.size() == 0) {
                 print("List is empty!");
             } else {
+                print("Here are your current tasks: ");
                 for (int i = 1; i <= xs.size(); i++) {
-                    print(Integer.toString(i) + ". " + xs.get(i-1));
+                    print(INDENT + Integer.toString(i) + ". " + xs.get(i - 1));
                 }
             }
             break;
-        default:
-            xs.add(s);
-            print("Added: " + s);
+        }
+        case "mark": {
+            int taskNo = Integer.valueOf(statement[1]) - 1;
+            Task t = xs.get(taskNo);
+            t.mark();
+            print("Good job! I have marked the following task as completed: ");
+            print(INDENT + t);
+            break;
+        }
+        case "unmark": {
+            int taskNo = Integer.valueOf(statement[1]) - 1;
+            Task t = xs.get(taskNo);
+            t.unmark();
+            print("Understood. I have unmarked the following task: ");
+            print(INDENT + t);
+            break;
+        }
+        default: {
+            Task task = new Task(s);
+            xs.add(task);
+            print("Alright, I have added a new task: ");
+            print(INDENT + task.toString());
+            print("");
+            print("You currently have " + xs.size() + " tasks.");
+        }
         }
     }
 
