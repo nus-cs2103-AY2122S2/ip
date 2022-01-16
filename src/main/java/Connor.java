@@ -14,6 +14,7 @@ public class Connor {
         // Standardise Format
         String[] statement = s.split(" ",2);
         switch (statement[0].toLowerCase()) {
+        case "exit":
         case "bye": {
             isActive = false;
             print("Farewell. See you next time!");
@@ -21,13 +22,50 @@ public class Connor {
         }
         case "list": {
             if (xs.size() == 0) {
-                print("List is empty!");
-            } else {
-                print("Here are your current tasks: ");
-                for (int i = 1; i <= xs.size(); i++) {
-                    print(INDENT + Integer.toString(i) + ". " + xs.get(i - 1));
-                }
+                print("Your task list is empty.");
+                return;
             }
+            print("Here are your current tasks: ");
+            for (int i = 1; i <= xs.size(); i++) {
+                print(INDENT + Integer.toString(i) + ". " + xs.get(i - 1));
+            }
+            break;
+        }
+        case "todo": {
+            ToDo todo = new ToDo(statement[1]);
+            xs.add(todo);
+            print("Alright, I have added a new task: ");
+            print(INDENT + todo.toString());
+            print("");
+            print("You currently have " + xs.size() + " tasks.");
+            break;
+        }
+        case "deadline": {
+            if (!statement[1].contains("/by")) {
+                print("Error! Wrong format.");
+                return;
+            }
+            String[] phrase = statement[1].split("/by",2);
+            Deadline deadline = new Deadline(phrase[0].trim(), phrase[1].trim());
+            xs.add(deadline);
+            print("Alright, I have added a new task: ");
+            print(INDENT + deadline.toString());
+            print("");
+            print("You currently have " + xs.size() + " tasks.");
+            break;
+        }
+        case "event": {
+            if (!statement[1].contains("/at")) {
+                print("Error! Wrong format.");
+                return;
+            }
+            String[] phrase = statement[1].split("/at", 2);
+            Event event = new Event(phrase[0].trim(), phrase[1].trim());
+            xs.add(event);
+            print("Alright, I have added a new task: ");
+            print(INDENT + event.toString());
+            print("");
+            print("You currently have " + xs.size() + " tasks.");
             break;
         }
         case "mark": {
@@ -47,12 +85,8 @@ public class Connor {
             break;
         }
         default: {
-            Task task = new Task(s);
-            xs.add(task);
-            print("Alright, I have added a new task: ");
-            print(INDENT + task.toString());
-            print("");
-            print("You currently have " + xs.size() + " tasks.");
+            print("My apologies, I do not understand this.");
+            return;
         }
         }
     }
