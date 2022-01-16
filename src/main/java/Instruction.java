@@ -23,7 +23,7 @@ abstract class Instruction {
     protected static Instruction of(String instruction) {
 
         // Extract the words in the instruction. The first word should determine the type of instruction to be returned.
-        String[] words = instruction.split(" ");
+        String[] words = instruction.split(" ", 2);
         String type = words[0];
         switch (type) {
             case "list":
@@ -38,9 +38,14 @@ abstract class Instruction {
                 // Mark the task as not done. If the second parameter is not an integer, or if the task does not exit,
                 // throw an exception. (To be implemented later)
                 return new UnmarkAsDone(Integer.parseInt(words[1]));
+            case "todo":
+            case "event":
+            case "deadline":
+                // These three cases are used to add tasks of different types.
+                return new Add(Task.of(type, words[1]));
             default:
-                // This is the 'add' case.
-                return new Add(new Task(instruction));
+                // Unrecognized instruction. Return null for now. Will fix later.
+                return null;
         }
     }
 

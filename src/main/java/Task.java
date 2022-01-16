@@ -1,7 +1,7 @@
 /**
  * Represent a task that is stored by Duke.
  */
-class Task {
+abstract class Task {
 
     private boolean isDone;
     private String description;
@@ -15,6 +15,25 @@ class Task {
 
         this.description = description;
         this.isDone = false;
+    }
+
+    protected static Task of(String type, String description) {
+
+        String[] parameters;
+        switch (type) {
+
+            case "todo":
+                return new ToDo(description);
+            case "event":
+                parameters = description.split(" /at ");
+                return new Event(parameters[0], parameters[1]);
+            case "deadline":
+                parameters = description.split(" /by ");
+                return new Deadline(parameters[0], parameters[1]);
+            default:
+                // Return null for invalid cases for now, will fix later.
+                return null;
+        }
     }
 
     /**
@@ -42,7 +61,7 @@ class Task {
 
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return this.getTypeIcon() + this.getStatusIcon() + " " + this.description;
     }
 
     /**
@@ -51,7 +70,9 @@ class Task {
      * @return The icon.
      */
     private String getStatusIcon() {
-        return this.isDone ? "X" : " ";
+        return this.isDone ? "[X]" : "[ ]";
     }
+
+    protected abstract String getTypeIcon();
 
 }
