@@ -5,8 +5,7 @@ public class Duke {
     private static String LINE_BREAK = "_".repeat(LINE_BREAK_LENGTH); // string for horizontal line break
 
     private static int MAX_SIZE = 100;
-    private static int listSize = 0;
-    private static String[] toDoList = new String[MAX_SIZE];
+    private static TaskList toDoList = new TaskList(MAX_SIZE);
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -22,17 +21,16 @@ public class Duke {
         String introMessage = String.format("\t%s\n"
                 + "%s\n"
                 + "\tDear Master, I'm Ari, your Personal Assistant Chatbot\n"
-                + "\tWhat can I do for you?\n"
-                + "\t%s", LINE_BREAK, logo, LINE_BREAK);
+                + "\tWhat can I do for you?\n" + "\t%s", LINE_BREAK, logo, LINE_BREAK);
         System.out.println(introMessage + "\n");
 
         String cmd = "start"; // starting value that is not "bye" to start the loop
         while (!cmd.equals("bye")) {
             cmd = scanner.nextLine().toLowerCase();
             if (cmd.equals("bye")) {
-                printWithTab(LINE_BREAK);
-                printWithTab("Have a nice day Master");
-                printWithTab(LINE_BREAK + "\n");
+                System.out.println("\t" + LINE_BREAK);
+                System.out.println("\tHave a nice day Master");
+                System.out.println("\t" + LINE_BREAK + "\n");
                 continue;
             } else {
                 command(cmd);
@@ -41,31 +39,26 @@ public class Duke {
         scanner.close();
     }
 
-    public static void printWithTab(String message) {
-        System.out.println("\t" + message);
-    }
+    public static void command(String message) {
+        String[] cmdList = message.split(" ");
+        String instr = cmdList[0]; // instruction to execute
 
-    public static void command(String command) {
-        printWithTab(LINE_BREAK);
-        if (command.equals("list")) {
-            if (listSize == 0) {
-                printWithTab("Dear Master, you have not added anything");
-            } else {
-                printWithTab("Dear Master, here is a list of things you have added:\n");
-                for (int i = 0; i < listSize; i++) {
-                    printWithTab(String.format("%d. %s", i + 1, toDoList[i]));
-                }
-            }
-        } else {
-            addTask(command);
+        System.out.println("\t" + LINE_BREAK);
+        switch (instr) {
+        case "list":
+            System.out.println(String.format("%s", toDoList));
+            break;
+        case "mark":
+            int markIndex = Integer.valueOf(cmdList[1]);
+            toDoList.markTask(markIndex - 1);
+            break;
+        case "unmark":
+            int unmarkIndex = Integer.valueOf(cmdList[1]);
+            toDoList.unmarkTask(unmarkIndex - 1);
+            break;
+        default:
+            toDoList.addTask(message);
         }
-        printWithTab(LINE_BREAK + "\n");
-    }
-
-    public static void addTask(String todo) {
-        toDoList[listSize] = todo;
-        listSize++;
-
-        printWithTab(String.format("Understood, I have added \"%s\" to the list", todo));
+        System.out.println("\t" + LINE_BREAK + "\n");
     }
 }
