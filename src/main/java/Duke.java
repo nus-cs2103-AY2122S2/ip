@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
-        System.out.println("    Hello! I'm Duke\n    What can I do for you?");
+        System.out.println(Commands.HI.toString());
         ArrayList<Task> tasks = new ArrayList<Task>();
         //Task[] tasks = new Task[100];
         Scanner sc = new Scanner(System.in);
@@ -14,14 +14,14 @@ public class Duke {
             Integer taskIndex = null;
             switch (processedCommand[0]) {
                 case "hi":
-                    System.out.println("    Hello! I'm Duke\n    What can I do for you?");
+                    System.out.println(Commands.HI.toString());
                     break;
                 case "bye":
-                    System.out.println("    Bye. Hope to see you again soon!");
+                    System.out.println(Commands.BYE.toString());
                     isExit = true;
                     break;
                 case "list":
-                    System.out.println("    Here are the tasks in your list:");
+                    System.out.println(Commands.LIST.toString());
                     for (int i = 0; i < tasks.size(); i++) {
                         int indexToPrint = i + 1;
                         System.out.println(String.format(
@@ -44,7 +44,7 @@ public class Duke {
                     //Mark task
                     tasks.get(taskIndex).setIsDone(true);
                     System.out.println(String.format(
-                            "    Nice! I've marked this task as done:\n    %s", tasks.get(taskIndex).identify()));
+                            "%s    %s", Commands.MARK.toString(), tasks.get(taskIndex).identify()));
                     break;
                 case "unmark":
                     //Exception catching
@@ -62,8 +62,8 @@ public class Duke {
                     //Unmark task
                     tasks.get(taskIndex).setIsDone(false);
                     System.out.println(String.format(
-                            "    Ok! I've marked this task as not done yet:\n      %s",
-                            tasks.get(taskIndex).identify()));
+                            "%s      %s",
+                            Commands.UNMARK.toString(), tasks.get(taskIndex).identify()));
                     break;
                 case "deadline":
                     //Exception catching
@@ -84,7 +84,7 @@ public class Duke {
                     //Create deadline
                     Deadline deadline = new Deadline(inputForDeadlineConstructor[0], inputForDeadlineConstructor[1]);
                     System.out.println(String.format(
-                            "    Got it. I've added this task:\n      %s", deadline.identify()));
+                            "%s      %s", Commands.ADD.toString(), deadline.identify()));
                     tasks.add(deadline);
                     System.out.println(String.format("    Now you have %d tasks in the list.", tasks.size()));
                     break;
@@ -98,7 +98,7 @@ public class Duke {
                     //Create Todo
                     ToDo todo = new ToDo(processedCommand[1]);
                     System.out.println(String.format(
-                            "    Got it. I've added this task:\n      %s", todo.identify()));
+                            "%s      %s", Commands.ADD.toString(), todo.identify()));
                     tasks.add(todo);
                     System.out.println(String.format("    Now you have %d tasks in the list.", tasks.size()));
                     break;
@@ -120,7 +120,7 @@ public class Duke {
                     //Create event
                     Event event = new Event(inputForEventConstructor[0], inputForEventConstructor[1]);
                     System.out.println(String.format(
-                            "    Got it. I've added this task:\n      %s", event.identify()));
+                            "%s      %s", Commands.ADD.toString(), event.identify()));
                     tasks.add(event);
                     System.out.println(String.format("    Now you have %d tasks in the list.", tasks.size()));
                     break;
@@ -139,8 +139,8 @@ public class Duke {
 
                     Task deletedTask = tasks.remove((int)taskIndex);
                     System.out.println(String.format(
-                            "    Noted. I've removed this task:\n      %s\n    Now you have %d tasks in the list",
-                            deletedTask.identify(), tasks.size()));
+                            "%s      %s\n    Now you have %d tasks in the list",
+                            Commands.DELETE.toString(), deletedTask.identify(), tasks.size()));
                     break;
                 default:
                     new DukeException();
