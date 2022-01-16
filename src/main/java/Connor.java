@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Connor {
-    private static String CURRENT_VERSION = "Version 1.3";
+    private static final String CURRENT_VERSION = "Version 1.3";
     private static final String LINE = "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━";
     private static final String INDENT = "    ";
 
