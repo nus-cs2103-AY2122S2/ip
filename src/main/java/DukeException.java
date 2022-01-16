@@ -42,10 +42,10 @@ public class DukeException extends Exception {
         }
         try {
             index = Integer.parseInt(keywords[1]) - 1;
-            if (index < 0 || index > 99) {
-                throw new DukeException("Please key in a number from 1 to 100.\n");
+            if (index < 0) {
+                throw new DukeException("Please key in a number starting from 1.\n");
             }
-            if (l.getTask(index) == null) {
+            if (index >= l.getTotalTasks()) {
                 throw new DukeException("No task with this number exists yet!\n");
             }
         } catch (NumberFormatException err) {

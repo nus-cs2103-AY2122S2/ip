@@ -1,78 +1,52 @@
-import java.lang.reflect.Array;
+import java.util.LinkedList;
 
 public class Tasklist {
 
-    private Task[] tasks;
-    private int filled;
+    private LinkedList<Task> tasks;
 
     public Tasklist() {
-        this.tasks = new Task[100];
-        this.filled = 0;
+        this.tasks = new LinkedList<Task>();
     }
 
     public void addTask(Task t) {
-        this.filled++;
-        for (int i = 0; i < this.tasks.length; i++) {
-            if (this.tasks[i] == null) {
-                this.tasks[i] = t;
-                return;
-            }
-        }
+        this.tasks.add(t);
     }
 
     public Task getTask(int index) {
-        return this.tasks[index];
+        return this.tasks.get(index);
     }
 
     public int getTotalTasks() {
-        return this.filled;
+        return this.tasks.size();
     }
 
     public Task mark(int index) {
-        Task t = (Task)Array.get(this.tasks, index);
+        Task t = this.tasks.get(index);
         t.mark();
         return t;
     }
 
     public Task unmark(int index) {
-        Task t = (Task)Array.get(this.tasks, index);
+        Task t = this.tasks.get(index);
         t.unmark();
         return t;
     }
 
     public Task delete(int index) {
-        Task t = null;
-        Task[] temp = new Task[100];
-        int j = 0;
-        for (int i = 0; i < this.filled; i++) {
-            if (i == index) {
-                t = this.tasks[i];
-                j++;
-            }
-            temp[i] = this.tasks[j];
-            j++;
-        }
-        this.tasks = temp;
-        this.filled--;
-        return t;
+        return this.tasks.remove(index);
     }
 
     @Override
     public String toString() {
         StringBuilder allTodos = new StringBuilder();
-        for (int i = 0; i < this.tasks.length; i++) {
-            if (this.tasks[i] != null) {
-                allTodos.append(i + 1)
-                        .append(". ")
-                        .append(this.tasks[i].toString())
-                        .append("\n");
-            } else {
-                if (allTodos.length() == 0) {
-                    return "No entries found, start by adding one!\n";
-                } else {
-                    break;
-                }
-            }
+        for (int i = 0; i < this.tasks.size(); i++) {
+            allTodos.append(i + 1)
+                    .append(". ")
+                    .append(this.tasks.get(i).toString())
+                    .append("\n");
+        }
+        if (allTodos.length() == 0) {
+            return "No entries found, start by adding one!\n";
         }
         return allTodos.toString();
     }

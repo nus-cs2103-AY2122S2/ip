@@ -11,7 +11,7 @@ What can I do for you?
 Fetching all records...
 No entries found, start by adding one!
 
-Please key in a number from 1 to 100.
+Please key in a number starting from 1.
 
 Sorry, this is not a recognized command.
 
