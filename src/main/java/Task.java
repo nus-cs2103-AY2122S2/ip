@@ -2,9 +2,9 @@ public class Task {
     String name;
     int status;
 
-    public Task (String name, int status) {
+    public Task (String name) {
         this.name = name;
-        this.status = status;
+        this.status = 0;
     }
 
     public void taskDone() {

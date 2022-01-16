@@ -11,23 +11,23 @@ public class Duke {
         while(true) {
             System.out.print("Me   : ");
             String message = sc.nextLine();
+            String[] splitStr = message.split(" ");
+            boolean exitLoop = false;
 
-            if (message.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                break;
-            }
-
-            if (message.equals("list")) {
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < list.size(); i++) {
-                    int num = i + 1;
-                    System.out.print(num + ". ");
-                    list.get(i).getStatus();
-                }
-
-            } else {
-                String[] splitStr = message.split(" ");
-                if (splitStr[0].equals("mark")) {
+            switch(splitStr[0]) {
+                case "bye":
+                    System.out.println("Bye. Hope to see you again soon!");
+                    exitLoop = true;
+                    break;
+                case "list":
+                    System.out.println("Here are the tasks in your list:");
+                    for (int i = 0; i < list.size(); i++) {
+                        int num = i + 1;
+                        System.out.print(num + ". ");
+                        list.get(i).getStatus();
+                    }
+                    break;
+                case "mark":
                     try{
                         int index = Integer.parseInt(splitStr[1]);
                         index--;
@@ -43,7 +43,8 @@ public class Duke {
                     } catch (NumberFormatException e) {
                         System.out.println("Invalid mark index");
                     }
-                } else if (splitStr[0].equals("unmark")) {
+                    break;
+                case "unmark":
                     try{
                         int index = Integer.parseInt(splitStr[1]);
                         index--;
@@ -59,11 +60,16 @@ public class Duke {
                     } catch (NumberFormatException e) {
                         System.out.println("Invalid mark index");
                     }
-                } else {
-                    Task newT = new Task(message, 0);
+                    break;
+                default:
+                    Task newT = new Task(message);
                     list.add(newT);
                     System.out.println("Duke has added :" + message);
-                }
+                    break;
+
+            }
+            if (exitLoop) {
+                break;
             }
         }
         sc.close();
