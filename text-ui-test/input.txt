@@ -1,7 +1,14 @@
 list
+mark -1
+add task
+todo
 todo borrow book
+deadline /by Sunday
 deadline return book /by Sunday
 event project meeting /at Monday 2-4pm
+event festival /at
+mark 47
+deadline
 list
 mark 2
 list

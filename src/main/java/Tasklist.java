@@ -20,18 +20,22 @@ public class Tasklist {
         }
     }
 
+    public Task getTask(int index) {
+        return this.tasks[index];
+    }
+
     public int getTotalTasks() {
         return this.filled;
     }
 
     public Task mark(int index) {
-        Task t = (Task)Array.get(this.tasks, index - 1);
+        Task t = (Task)Array.get(this.tasks, index);
         t.mark();
         return t;
     }
 
     public Task unmark(int index) {
-        Task t = (Task)Array.get(this.tasks, index - 1);
+        Task t = (Task)Array.get(this.tasks, index);
         t.unmark();
         return t;
     }

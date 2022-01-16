@@ -11,14 +11,28 @@ What can I do for you?
 Fetching all records...
 No entries found, start by adding one!
 
+Please key in a number from 1 to 100.
+
+Sorry, this is not a recognized command.
+
+Please key in a valid task name.
+
 Todo Added: [T][ ] borrow book
 There are now 1 tasks in the list.
+
+Please key in a valid task name.
 
 Deadline Added: [D][ ] return book (by: Sunday)
 There are now 2 tasks in the list.
 
 Event Added: [E][ ] project meeting (at: Monday 2-4pm)
 There are now 3 tasks in the list.
+
+Please key in a valid time.
+
+No task with this number exists yet!
+
+Please specify a date using '/by'.
 
 Fetching all records...
 1. [T][ ] borrow book
