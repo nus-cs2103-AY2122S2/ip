@@ -4,7 +4,7 @@ public class Duke {
     public static void listOut(ArrayList<Action> list) {
         int count = 1;
         for (Action act : list) {
-            System.out.println(count + ". " + act);
+            System.out.println(count + "." + act);
             count++;
         }
     }
@@ -23,7 +23,18 @@ public class Duke {
                 continue;
             }
             if (action.isMark()) {
-
+                int index = Integer.parseInt(action.getBody());
+                String statement = "";
+                if (action.isUnmark()) {
+                    store.set(index - 1, store.get(index - 1).setUnDone());
+                    statement = "Ok, I have marked this task as not done yet:\n  ";
+                } else {
+                    store.set(index - 1, store.get(index - 1).setDone());
+                    statement = "Nice! I have marked this task as done:\n  ";
+                }
+                System.out.println(statement + store.get(index - 1));
+                action =  new Action(sc.nextLine());
+                continue;
             }
             store.add(action);
             System.out.println("added: " + action);

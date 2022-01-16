@@ -17,12 +17,21 @@ public class Action {
         return head;
     }
 
+    public String getBody() {
+        String bod = act.split(" ", 2)[1];
+        return bod;
+    }
+
     public String getStatus() {
         return isDone ? "X" : " ";
     }
 
     public Action setDone() {
-        return isDone ? new Action(act, false) : new Action(act, true);
+        return new Action(act, true);
+    }
+
+    public Action setUnDone() {
+        return new Action(act, false);
     }
 
     public boolean isBye() {
