@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         final String HORIZONTAL_LINE = "\t" + "____________________________________________________________";
-        String[] storedText = new String[100];
+        Task[] savedTask = new Task[100];
         int counting = 0;
 
         System.out.println(HORIZONTAL_LINE);
@@ -15,20 +15,38 @@ public class Duke {
 
         while (true) {
             String userInput = sc.nextLine();
-            if (userInput.equals("bye")) {
+            String[] commands = userInput.strip().split(" ");
+
+            if (commands[0].equals("bye")) {
                 System.out.println(HORIZONTAL_LINE);
                 System.out.println("\t" + "Bye. Hope to see you again soon!");
                 System.out.println(HORIZONTAL_LINE);
                 break;
-            } else if (userInput.equals("list")) {
+            } else if (commands[0].equals("list")) {
                 System.out.println(HORIZONTAL_LINE);
+                System.out.println("\t" + "Here are the tasks in your list:");
                 for (int i = 0; i < counting; i++) {
                     int index = i + 1;
-                    System.out.println("\t" + index + ". " + storedText[i]);
+                    System.out.println("\t" + index + "." + "[" + savedTask[i].getStatusIcon() + "] "
+                            + savedTask[i].getDescription());
                 }
                 System.out.println(HORIZONTAL_LINE);
+            } else if (commands[0].equals("mark")) {
+                System.out.println(HORIZONTAL_LINE);
+                System.out.println("\t" + "Nice! I've marked this task as done:");
+                int index = Integer.parseInt(commands[1]) - 1;
+                savedTask[index].markAsDone();
+                System.out.println("\t" + "[" + savedTask[index].getStatusIcon() + "] "
+                            + savedTask[index].getDescription());
+            } else if (commands[0].equals("unmark")) {
+                System.out.println(HORIZONTAL_LINE);
+                System.out.println("\t" + "OK, I've marked this task as not done yet:");
+                int index = Integer.parseInt(commands[1]) - 1;
+                savedTask[index].markAsNotDone();
+                System.out.println("\t" + "[" + savedTask[index].getStatusIcon() + "] "
+                        + savedTask[index].getDescription());
             } else {
-                storedText[counting] = userInput;
+                savedTask[counting] = new Task(userInput);
                 counting++;
                 System.out.println(HORIZONTAL_LINE);
                 System.out.println("\t" + "added: " + userInput);
