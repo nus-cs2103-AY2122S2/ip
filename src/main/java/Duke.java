@@ -71,7 +71,7 @@ public class Duke {
 
                 totalTasks++;
                 System.out.print(line + indent + "Got it! I've added this task: \n"
-                        + indent + indent + taskArr[totalTasks - 1].toString() + "\n"
+                        + indent + "  " + taskArr[totalTasks - 1].toString() + "\n"
                         + indent + "Now you have " + totalTasks + (totalTasks > 1 ? " tasks" : " task")
                         + " in the list. \n" + line);
             }
