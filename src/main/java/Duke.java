@@ -1,7 +1,15 @@
 import java.util.Scanner;
 
 public class Duke {
-    private static String delimiter = "*******************************************************";
+    private static final int MAX_TASK = 100;
+    private static String[] tasks;
+    private static int number_of_task;
+    private static final String delimiter = "*******************************************************";
+
+    private static void init() {
+        tasks = new String[MAX_TASK];
+        number_of_task = 0;
+    }
 
     private static void greet() {
         String logo = " ____        _        \n"
@@ -22,6 +30,11 @@ public class Duke {
         System.out.println(command);
     }
 
+    private static void addTask(String task) {
+        tasks[number_of_task] = task;
+        number_of_task++;
+    }
+
     private static void run() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -31,12 +44,14 @@ public class Duke {
             if (command.equals("bye")) {
                 break;
             } else {
-                echo(command);
+                addTask(command);
+                echo("added: " + command);
             }
         }
     }
 
     public static void main(String[] args) {
+        init();
         greet();
         run();
         exit();
