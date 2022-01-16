@@ -10,6 +10,10 @@ public class Action {
         return head;
     }
 
+    public boolean isBye() {
+        return act.equals("bye");
+    }
+
     @Override
     public String toString() {
         return act;
