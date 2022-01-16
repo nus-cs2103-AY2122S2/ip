@@ -61,8 +61,9 @@ public class Duke {
 
                     //Unmark task
                     tasks.get(taskIndex).setIsDone(false);
-                    System.out.println("    Ok! I've marked this task as not done yet:" + "\n"
-                            + "      " + tasks.get(taskIndex).identify());
+                    System.out.println(String.format(
+                            "    Ok! I've marked this task as not done yet:\n      %s",
+                            tasks.get(taskIndex).identify()));
                     break;
                 case "deadline":
                     //Exception catching
@@ -122,6 +123,24 @@ public class Duke {
                             "    Got it. I've added this task: \n      %s", event.identify()));
                     tasks.add(event);
                     System.out.println(String.format("    Now you have %d tasks in the list.", tasks.size()));
+                    break;
+                case "delete":
+                    //Exception catching
+                    if (processedCommand.length <= 1) {
+                        new DukeException();
+                        break;
+                    }
+                    try {
+                        taskIndex = Integer.parseInt(processedCommand[1]) - 1;
+                    } catch (NumberFormatException e) {
+                        new DukeException();
+                        break;
+                    }
+
+                    Task deletedTask = tasks.remove((int)taskIndex);
+                    System.out.println(String.format(
+                            "    Noted. I've removed this task:\n      %s\n    Now you have %d tasks in the list",
+                            deletedTask.identify(), tasks.size()));
                     break;
                 default:
                     new DukeException();
