@@ -25,6 +25,13 @@ class Task {
     }
 
     /**
+     * Marks the current task as not done.
+     */
+    protected void markAsNotDone() {
+        this.isDone = false;
+    }
+
+    /**
      * Obtains the status of the task.
      *
      * @return True if the task is done already, false otherwise.
@@ -35,10 +42,16 @@ class Task {
 
     @Override
     public String toString() {
-        return this.description;
+        return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
-
-
+    /**
+     * Gets the icon that represents the status of the task.
+     *
+     * @return The icon.
+     */
+    private String getStatusIcon() {
+        return this.isDone ? "X" : " ";
+    }
 
 }

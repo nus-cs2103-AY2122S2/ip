@@ -18,6 +18,15 @@ public class TaskManager {
     }
 
     /**
+     * Marks the status of the task as not done.
+     *
+     * @param task The task to be operated on.
+     */
+    protected static void markAsNotDone(Task task) {
+        task.markAsNotDone();
+    }
+
+    /**
      * Lists all the tasks.
      *
      * @return The list of all the tasks.
@@ -36,6 +45,15 @@ public class TaskManager {
     protected static String addTask(Task task) {
         TaskManager.tasks.add(task);
         return "added: " + task.toString();
+    }
+
+    /**
+     * Gets the task with the specified index.
+     * @param index The index of task to be retrieved (1-indexed).
+     * @return The retrieved task.
+     */
+    protected static Task getTaskIndex(int index) {
+        return TaskManager.tasks.get(index - 1);
     }
 
 }

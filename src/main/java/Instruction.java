@@ -30,6 +30,14 @@ abstract class Instruction {
                 return new ListTasks();
             case Instruction.TERMINATE_INSTRUCTION:
                 return new Quit(Instruction.TERMINATE_INSTRUCTION);
+            case "mark":
+                // Mark the task as done. If the second parameter is not an integer, or if the task does not exit, throw
+                // an exception. (To be implemented later)
+                return new MarkAsDone(Integer.parseInt(words[1]));
+            case "unmark":
+                // Mark the task as not done. If the second parameter is not an integer, or if the task does not exit,
+                // throw an exception. (To be implemented later)
+                return new UnmarkAsDone(Integer.parseInt(words[1]));
             default:
                 // This is the 'add' case.
                 return new Add(new Task(instruction));
