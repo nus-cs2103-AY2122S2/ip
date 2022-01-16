@@ -6,8 +6,13 @@ import duke.storage.*;
 
 import java.io.IOException;
 
+/**
+ * Represents command to delete a task from the task list.
+ *
+ */
 public class DeleteCommand extends Command{
     protected Integer index;
+
     public DeleteCommand(Integer index) {
         this.index = index-1;
     }

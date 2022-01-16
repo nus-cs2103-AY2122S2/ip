@@ -6,6 +6,10 @@ import duke.storage.*;
 
 import java.io.IOException;
 
+/**
+ * Represents command to list all the tasks in the task list.
+ *
+ */
 public class ListCommand extends Command{
 
     @Override
@@ -18,3 +22,24 @@ public class ListCommand extends Command{
         return false;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -4,6 +4,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a task that the user wants to do by a specific date and time.
+ *
+ */
 public class DeadLine extends Task {
     protected LocalDate bydate;
     protected LocalTime bytime;

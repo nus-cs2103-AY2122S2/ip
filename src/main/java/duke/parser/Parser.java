@@ -4,7 +4,19 @@ import duke.main.DukeException;
 import duke.command.*;
 import duke.task.*;
 
+/**
+ * Parser to read user commands and ensure that it is syntactically and semantically valid.
+ *
+ */
 public class Parser {
+
+    /**
+     * Returns the command from parsing user's instructions.
+     *
+     * @param cmd The instruction of the user.
+     * @return Command to be executed by Duke.
+     * @throws DukeException If there is a syntactic or semantic error.
+     */
     public static Command parse(String cmd) throws DukeException {
         String[] input = cmd.split(" ");
         switch (input[0]) {

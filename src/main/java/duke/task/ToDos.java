@@ -1,5 +1,9 @@
 package duke.task;
 
+/**
+ * Represents a task that the user wants to do.
+ *
+ */
 public class ToDos extends Task{
     public ToDos(String objective) {
         super(objective);

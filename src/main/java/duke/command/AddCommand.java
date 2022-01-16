@@ -5,6 +5,10 @@ import duke.task.*;
 import duke.ui.*;
 import duke.storage.*;
 
+/**
+ * Represents command to add a task to the task list.
+ *
+ */
 public class AddCommand extends Command{
     protected Task obj;
 
