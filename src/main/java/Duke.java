@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -40,41 +41,51 @@ public class Duke {
 
     private void addTask(String input) {
         tasks.add(input);
-        System.out.println(indent(addSeparator("added: " + input)) + '\n');
+        printDivider();
+        printTabbed("added: " + input, 1);
+        printDivider();
+        System.out.println();
     }
 
     private void listTasks() {
-        System.out.println(indent(TEXT_DIVIDER));
+        printDivider();
 
         for (int i = 0; i < tasks.size(); i++) {
             String entry = (i + 1) + ". " + tasks.get(i);
-            System.out.println(indent(entry));
+            printTabbed(entry, 1);
         }
 
-        System.out.println(indent(TEXT_DIVIDER) + '\n');
+        printDivider();
+        System.out.println();
     }
 
     private void greet() {
-        System.out.println(indent(addSeparator(TEXT_LOGO + "\n\n" + TEXT_GREETING)) + '\n');
+        printDivider();
+        printTabbed(TEXT_LOGO, 1);
+        System.out.println();
+        printTabbed(TEXT_GREETING, 1);
+        printDivider();
+        System.out.println();
     }
 
     private void sayGoodbye() {
-        System.out.println(indent(addSeparator(TEXT_GOODBYE)) + '\n');
+        printDivider();
+        printTabbed(TEXT_GOODBYE, 1);
+        printDivider();
+        System.out.println();
     }
 
-    private String addSeparator(String input) {
-        return TEXT_DIVIDER + '\n' + input + '\n' + TEXT_DIVIDER;
+    private void printDivider() {
+        printTabbed(TEXT_DIVIDER, 0);
     }
 
-    private String indent(String input) {
-        StringBuilder sb = new StringBuilder(input).insert(0, '\t');
+    private void printTabbed(String s, int padding) {
+        String[] lines = s.split("\n");
+        char[] whiteSpace = new char[padding];
+        Arrays.fill(whiteSpace, ' ');
 
-        for (int i = 0; i < sb.length() - 1; i++) {
-            if (sb.charAt(i) == '\n') {
-                sb.insert(i + 1, '\t');
-            }
+        for (String line : lines) {
+            System.out.println('\t' + String.valueOf(whiteSpace) + line);
         }
-
-        return sb.toString();
     }
 }
