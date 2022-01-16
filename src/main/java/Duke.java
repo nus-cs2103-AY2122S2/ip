@@ -28,13 +28,13 @@ public class Duke {
         String command = inputArr[0];
 
         while (!command.equals("bye")) {
+
             if (command.equals("list")) { // list out all added tasks
                 System.out.print(line + indent + "Here are the tasks in your list: \n");
                 int index = 1;
                 for (int n = 0; n < totalTasks; n++) {
                     Task t = taskArr[n];
-                    System.out.println(indent + index + "."
-                            + t.getStatusIcon() + " " + t.getDescription());
+                    System.out.println(indent + index + "." + t.toString());
                     index++;
                 }
                 System.out.print(line);
@@ -51,12 +51,29 @@ public class Duke {
                     t.markAsUndone();
                 }
 
-                System.out.print(indent + t.getStatusIcon() + " " + t.getDescription() + "\n" + line);
+                System.out.print(indent + t.toString() + "\n" + line);
 
             } else { // add task to list
-                taskArr[totalTasks] = new Task(input);
+                if (command.equals("todo")) {
+                    String str = input.substring(5);
+                    taskArr[totalTasks] = new Todo(str);
+
+                } else if (command.equals("deadline")) {
+                    String str = input.substring(9);
+                    String[] strArr = str.split(" /by ");
+                    taskArr[totalTasks] = new Deadline(strArr[0], strArr[1]);
+
+                } else if (command.equals("event")) {
+                    String str = input.substring(6);
+                    String[] strArr = str.split(" /at ");
+                    taskArr[totalTasks] = new Event(strArr[0], strArr[1]);
+                }
+
                 totalTasks++;
-                System.out.print(line + indent + "added: " + input + "\n" + line);
+                System.out.print(line + indent + "Got it! I've added this task: \n"
+                        + indent + indent + taskArr[totalTasks - 1].toString() + "\n"
+                        + indent + "Now you have " + totalTasks + (totalTasks > 1 ? " tasks" : " task")
+                        + " in the list. \n" + line);
             }
             input = br.readLine();
             inputArr = input.split(" ");
@@ -66,4 +83,5 @@ public class Duke {
         System.out.print(line + indent + "Bye! Hope to see you again soon!" + "\n" + line);
     }
 }
+
 
