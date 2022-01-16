@@ -40,10 +40,18 @@ public class Duke {
                         System.out.println((i + 1) + ". " + tasks.get(i));
                     }
                 }
-            } else if (input.matches("(un)?mark \\d*([1-9]+\\d*)")) {
+            } else if (input.matches("delete \\d*[1-9]+\\d*")) {
+                int i = Integer.parseInt(remaining);
+                if (i <= tasks.size()) {
+                    System.out.println("Noted. I've removed this task:\n" + tasks.get(i - 1));
+                    tasks.remove(i - 1);
+                } else {
+                    System.out.println("Index is invalid");
+                }
+            } else if (input.matches("(un)?mark \\d*[1-9]+\\d*")) {
                 int i = Integer.parseInt(remaining);
                 if (firstWord.equals("unmark")) {
-                    if (i > 0 && i <= tasks.size()) {
+                    if (i <= tasks.size()) {
                         tasks.get(i - 1).markNotDone();
                         System.out.println("OK, I've marked this task as not done yet:\n"
                                 + tasks.get(i - 1));
@@ -51,7 +59,7 @@ public class Duke {
                         System.out.println("Index is invalid");
                     }
                 } else {
-                    if (i > 0 && i <= tasks.size()) {
+                    if (i <= tasks.size()) {
                         tasks.get(i - 1).markAsDone();
                         System.out.println("Nice! I've marked this task as done:\n"
                                 + tasks.get(i - 1));
