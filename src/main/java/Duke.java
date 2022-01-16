@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -9,12 +11,17 @@ public class Duke {
         printDivider();
         Scanner inputScanner = new Scanner(System.in);
         String input = "";
+        ArrayList<String> todo = new ArrayList<>();
+
         while (!input.equals("bye")) {
             input = inputScanner.nextLine();
             if (input.equals("bye")) {
                 printEndMessage();
+            } else if(input.equals("list")) {
+                printTodo(todo);
             } else {
-                echo(input);
+                echoForAdd(input);
+                todo.add(input);
             }
         }
     }
@@ -30,10 +37,19 @@ public class Duke {
         System.out.println(divider);
     }
 
-    public static void echo(String input) {
+    public static void printTodo(ArrayList<String> inputArray) {
         printDivider();
-        System.out.println("    " + input);
+        for (int index = 0; index < inputArray.size(); index++) {
+            int order = (index + 1);
+            String result = "    " + order + ": " + inputArray.get(index);
+            System.out.println(result);
+        }
         printDivider();
     }
 
+    public static void echoForAdd(String input) {
+        printDivider();
+        System.out.println("    added: " + input);
+        printDivider();
+    }
 }
