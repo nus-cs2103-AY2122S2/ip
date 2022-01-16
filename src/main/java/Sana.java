@@ -4,7 +4,7 @@ import java.util.*; // Import java utils
  * Sana is a BIG program!
  *
  * @author  Jan Alfenson Tan
- * @version 1.0
+ * @version 1.2
  */
 public class Sana {
     // The border for Sana's replies
@@ -13,7 +13,7 @@ public class Sana {
     /**
      * userCommands stores the commands given to Sana from the user
      */
-    private LinkedList<String> userCommands;
+    private LinkedList<Task> userCommands;
 
     /**
      * Constructor for the Sana class
@@ -43,10 +43,19 @@ public class Sana {
         } else if (userCommand.equals("list")) {
             list();
         } else {
-            userCommands.add(userCommand);
-            System.out.println("added: " + userCommand);
+            addTask(userCommand);
         }
         border();
+    }
+
+    /**
+     * Adds given task to the list of tasks given to Sana.
+     *
+     * @param taskName  name of task
+     */
+    private void addTask(String taskName) {
+        userCommands.add(new Task(taskName));
+        System.out.println("added: " + taskName);
     }
 
     /**
@@ -54,9 +63,9 @@ public class Sana {
      */
     private void list() {
         int index = 1;
-        for (String userCommand : userCommands) {
+        for (Task task : userCommands) {
             String header = Integer.valueOf(index).toString() + ". ";
-            System.out.println(header + userCommand);
+            System.out.println(header + task.getTaskName());
             index++;
         }
     }
