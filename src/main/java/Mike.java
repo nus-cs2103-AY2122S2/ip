@@ -1,24 +1,37 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Mike {
+    List<String> listItems;
+
     public static void main(String[] args) {
-        printGreeting();
-        printStartInstruction();
+        Mike mike = new Mike();
+        mike.printGreeting();
+        mike.printStartingInstruction();
 
         Scanner sc = new Scanner(System.in);
-        String inputString = sc.next(); //limitation: can't accept sentences yet
+        String inputString = sc.nextLine(); //limitation: accepts blanks to the list
         while(!inputString.equals("bye")) {
-            String reply = inputString;
-            printReply(reply);
-
+            if (inputString.equals("list")) {
+                mike.printList();
+            } else {
+                String reply = inputString;
+                //mike.printReply(reply);
+                mike.addToList(inputString);
+            }
             sc = new Scanner(System.in);
-            printNextCommandInstruction();
-            inputString = sc.next();
+            mike.printNextCommandInstruction();
+            inputString = sc.nextLine();
         }
-        printGoodbyeMessage();
-        }
+        mike.printGoodbyeMessage();
+    }
 
-    static void printGreeting() {
+    public Mike() {
+        this.listItems = new ArrayList<String>();
+    }
+
+    void printGreeting() {
         String textBanner = "" +
                 "  _     _   _                   \n" +
                 " | |   (_) (_)                  \n" +
@@ -36,25 +49,39 @@ public class Mike {
         System.out.println("Welcome!\n" + textBanner);
     }
 
-    static void printStartInstruction() {
-        String tip = "**Tip: type bye to end**";
+    void printStartingInstruction() {
+        String tip = "**Tip: type bye to end conversation**";
         System.out.println(tip);
         System.out.println("Enter a command:\n");
     }
 
-    static void printReply(String str){
+    void printReply(String str){
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("Mike: " + str);
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
 
-    static void printNextCommandInstruction() {
+    void printNextCommandInstruction() {
         System.out.println("Enter next command:");
     }
 
-    static void printGoodbyeMessage() {
+    void printGoodbyeMessage() {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("Mike: " + "Goodbye and see you again");
+        String goodbyeMessage = "Mike: Goodbye and see you again";
+        System.out.println(goodbyeMessage);
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    }
+
+    void addToList(String str) {
+        this.listItems.add(str);
+        printReply("Added \"" + str + "\" to the list!");
+    }
+
+    void printList() {
+        int counter = 1;
+        for (String str : listItems) {
+            System.out.println(String.format("%d. %s", counter, str));
+            counter++;
+        }
     }
 }
