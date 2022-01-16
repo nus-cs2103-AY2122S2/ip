@@ -2,10 +2,30 @@ public class Task {
     String deadline;
     String name;
     int number;
+    static int totalTask = 0;
     boolean done = false;
-    public Task(String name, int number){
-        this.name = name;
-        this.number = number;
+    public Task(String name, int number, String deadline, String type){
+        try {
+            if (name.equals("")) {
+                throw new EmptyDescriptorExceptions();
+            }
+            this.name = name;
+            this.number = number;
+            this.deadline = deadline;
+            System.out.println("Got it. I've added this task: ");
+            if (type.equals("deadline")){
+                System.out.printf(" [D][%s] %s (by: %s) \n", this.getStatus(),  this.name, this.deadline);
+            } else if (type.equals("todo")){
+                System.out.printf(" [T][%s] %s\n", this.getStatus(),  this.name);
+            } else {
+                System.out.printf(" [E][%s] %s (on: %s) \n", this.getStatus(),  this.name, this.deadline);
+            }
+            totalTask++;
+            System.out.printf("Now you have %d task on the list.\n", Task.totalTask);
+        }
+        catch (EmptyDescriptorExceptions e){
+            System.out.println("☹ OOPS!!! The description of a task cannot be empty.");
+        }
     }
 
     public void mark(){

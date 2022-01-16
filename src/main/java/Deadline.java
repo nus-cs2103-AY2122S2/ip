@@ -1,9 +1,6 @@
 public class Deadline extends Task{
-    public Deadline(String input, int number){
-        super(input, number);
-        String[] inputArr = input.split("/by ");
-        name = inputArr[0].substring(8, inputArr[0].length());
-        deadline = inputArr[1];
+    public Deadline(String input, int number, String deadline) {
+        super(input, number, deadline, "deadline");
     }
 
     @Override

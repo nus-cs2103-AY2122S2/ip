@@ -12,37 +12,39 @@ public class Duke {
         System.out.println("What can i do for you?");
         Scanner sc = new Scanner(System.in);
         Task[] taskList = new Task[100];
-        int taskNum = 0;
         boolean isBye = false;
         while(!isBye) {
-            String input = sc.nextLine();
-            if (input.equals("bye")) {
-                System.out.println("Bye. I don't want to see you anytime soon! :)");
-                isBye = true;
-            } else if (input.equals("list")) {
-                listAllTask(taskList, taskNum);
-            } else if (input.startsWith("mark") || input.startsWith("unmark")){
-                markTask(input, taskList);
-            } else if (input.startsWith("todo")){
-                taskList[taskNum] = new ToDo(input, taskNum);
-                System.out.println("Got it. I've added this task: ");
-                System.out.printf(" [T][%s] %s\n", taskList[taskNum].getStatus(),  taskList[taskNum].name);
-                taskNum++;
-                System.out.printf("Now you have %d task on the list\n", taskNum);
-            } else if (input.startsWith("deadline")){
-                taskList[taskNum] = new Deadline(input, taskNum);
-                System.out.println("Got it. I've added this task: ");
-                System.out.printf(" [D][%s] %s (by: %s) \n", taskList[taskNum].getStatus(),  taskList[taskNum].name, taskList[taskNum].deadline);
-                taskNum++;
-                System.out.printf("Now you have %d task on the list\n", taskNum);
-            } else if (input.startsWith("event")){
-                taskList[taskNum] = new Event(input, taskNum);
-                System.out.println("Got it. I've added this task: ");
-                System.out.printf(" [E][%s] %s (on: %s) \n", taskList[taskNum].getStatus(),  taskList[taskNum].name, taskList[taskNum].deadline);
-                taskNum++;
-                System.out.printf("Now you have %d task on the list\n", taskNum);
-            } else {
-                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            try {
+                String input = sc.nextLine();
+                if (input.equals("bye")) {
+                    System.out.println("Bye. I don't want to see you anytime soon! :)");
+                    isBye = true;
+                } else if (input.equals("list")) {
+                    listAllTask(taskList, Task.totalTask);
+                } else if (input.startsWith("mark") || input.startsWith("unmark")) {
+                    markTask(input, taskList);
+                } else if (input.startsWith("todo")) {
+                    taskList[Task.totalTask] = new ToDo(input, Task.totalTask);
+                } else if (input.startsWith("deadline") || input.startsWith("event")) {
+                    if (input.startsWith("deadline")) {
+                        String[] inputArr = input.split("/by ");
+                        if (inputArr.length == 1){
+                            throw new EmptyDescriptorExceptions();
+                        }
+                        taskList[Task.totalTask] = new Deadline(inputArr[0].substring(8, inputArr[0].length()), Task.totalTask, inputArr[1]);
+                    } else {
+                        String[] inputArr = input.split("/at ");
+                        if (inputArr.length == 1){
+                            throw new EmptyDescriptorExceptions();
+                        }
+                        taskList[Task.totalTask] = new Event(inputArr[0].substring(5, inputArr[0].length()), Task.totalTask, inputArr[1]);
+                    }
+                } else {
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+            }
+            catch (EmptyDescriptorExceptions e){
+                System.out.println("  ☹ OOPS!!! The description of a task cannot be empty.");
             }
         }
     }
