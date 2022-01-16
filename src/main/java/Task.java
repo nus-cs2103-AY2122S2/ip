@@ -1,6 +1,6 @@
 public class Task {
-    private boolean isDone = false; // not done by default
-    private String taskMessage;
+    protected boolean isDone = false;
+    protected String taskMessage;
 
     public Task(String message) {
         taskMessage = message;
@@ -8,7 +8,7 @@ public class Task {
 
     @Override
     public String toString() {
-        String statusMessage = "[ ]"; // not done by default
+        String statusMessage = "[ ]";
         if (isDone) {
             statusMessage = "[X]";
         }

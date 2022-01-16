@@ -38,6 +38,15 @@ public class TaskList {
         System.out.println(String.format("\tUnderstood, I have added \"%s\" to the list", item));
     }
 
+    public void addTask(Task task) {
+        taskList.add(size, task);
+        size++;
+
+        System.out.println(String.format("\tUnderstood, I have added this task to the list:\n"
+                + "\t    %s\n"
+                + "\tYou have %d task(s) currently", task, size));
+    }
+
     public void markTask(int index) {
         Task currentTask = getTask(index);
         currentTask.markDone();

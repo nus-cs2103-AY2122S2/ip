@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -26,7 +27,7 @@ public class Duke {
 
         String cmd = "start"; // starting value that is not "bye" to start the loop
         while (!cmd.equals("bye")) {
-            cmd = scanner.nextLine().toLowerCase();
+            cmd = scanner.nextLine();
             if (cmd.equals("bye")) {
                 System.out.println("\t" + LINE_BREAK);
                 System.out.println("\tHave a nice day Master");
@@ -41,9 +42,13 @@ public class Duke {
 
     public static void command(String message) {
         String[] cmdList = message.split(" ");
-        String instr = cmdList[0]; // instruction to execute
+        String instr = cmdList[0].toLowerCase(); // instruction to execute
 
         System.out.println("\t" + LINE_BREAK);
+
+        String msg;
+        String time;
+        int i;
         switch (instr) {
         case "list":
             System.out.println(String.format("%s", toDoList));
@@ -56,9 +61,39 @@ public class Duke {
             int unmarkIndex = Integer.valueOf(cmdList[1]);
             toDoList.unmarkTask(unmarkIndex - 1);
             break;
+        case "todo":
+            msg = String.join(" ", Arrays.copyOfRange(cmdList, 1, cmdList.length));
+
+            toDoList.addTask(new ToDo(msg));
+            break;
+        case "deadline":
+            for (i = 1; i < cmdList.length; i++) {
+                if (cmdList[i].equals("/by")) {
+                    break;
+                }
+            }
+
+            msg = String.join(" ", Arrays.copyOfRange(cmdList, 1, i));
+            time = String.join(" ", Arrays.copyOfRange(cmdList, i + 1, cmdList.length));
+
+            toDoList.addTask(new Deadline(msg, time));
+            break;
+        case "event":
+            for (i = 1; i < cmdList.length; i++) {
+                if (cmdList[i].equals("/at")) {
+                    break;
+                }
+            }
+
+            msg = String.join(" ", Arrays.copyOfRange(cmdList, 1, i));
+            time = String.join(" ", Arrays.copyOfRange(cmdList, i + 1, cmdList.length));
+            
+            toDoList.addTask(new Event(msg, time));
+            break;
         default:
             toDoList.addTask(message);
         }
+
         System.out.println("\t" + LINE_BREAK + "\n");
     }
 }
