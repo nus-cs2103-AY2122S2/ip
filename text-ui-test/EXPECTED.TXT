@@ -131,5 +131,36 @@ What should Charizard do next?
 
 What should Charizard do next?
 ********************************************************************************
+    OOPS! Task number does not exist. Charizard is confused..
+********************************************************************************
+
+What should Charizard do next?
+********************************************************************************
+    OOPS! Charizard's can only remember numbers. Try specifying a task number.
+    (Use "list" command to see the tasks and their corresponding task number).
+********************************************************************************
+
+What should Charizard do next?
+********************************************************************************
+    OOPS! Charizard's can only remember numbers. Try specifying a task number.
+    (Use "list" command to see the tasks and their corresponding task number).
+********************************************************************************
+
+What should Charizard do next?
+********************************************************************************
+    Charizard got tired of waiting and deleted this task
+      [T][ ] read book
+    There are 2 tasks in the burning list.
+********************************************************************************
+
+What should Charizard do next?
+********************************************************************************
+    Charizard's burning wish list:
+    1. [D][ ] return book (by: Sunday)
+    2. [E][ ] project meeting (at: Mon 2-4pm)
+********************************************************************************
+
+What should Charizard do next?
+********************************************************************************
 Roarrr....Let's burn more tasks next time!
 ********************************************************************************

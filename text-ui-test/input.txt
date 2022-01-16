@@ -17,4 +17,9 @@ deadline 2103T level-6 /by Sunday 2359 /by Monday 2359
 deadline 2103T level-6
 event
 list
+delete 0
+delete anything
+delete
+delete 1
+list
 bye

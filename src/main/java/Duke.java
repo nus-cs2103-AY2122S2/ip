@@ -7,6 +7,7 @@ public class Duke {
             "Which task shall we burn today?";
     private static final String BYE_MESSAGE = "Roarrr....Let's burn more tasks next time!";
     private static final String ADD_MESSAGE = "Charizard is ready to burn task:";
+    private static final String REMOVE_MESSAGE = "Charizard got tired of waiting and deleted this task";
     private static final String MARK_MESSAGE = "Charizard breathe out fire and burned the task.";
     private static final String UNMARK_MESSAGE = "Oh no! The task was not burnt completely!";
     private static final String QUESTION_MESSAGE = "What should Charizard do next?";
@@ -73,7 +74,9 @@ public class Duke {
             } else if (input.startsWith("event")) {
                 String inputWithoutCommand = input.replaceFirst("event", "").trim();
                 message = processEvent(inputWithoutCommand);
-
+            } else if (input.startsWith("delete")) {
+                String inputWithoutCommand = input.replaceFirst("delete", "").trim();
+                message = processDelete(inputWithoutCommand);
             } else {
                 throw new DukeException(ERROR_NO_COMMAND);
             }
@@ -94,6 +97,21 @@ public class Duke {
                 message = String.format(UNMARK_MESSAGE);
             }
             message += String.format("\n  %s", tasks.get(taskId).toString());
+            return message;
+        } catch (NumberFormatException e) {
+            throw new DukeException(ERROR_PARSE_INT);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(ERROR_INVALID_INDEX);
+        }
+    }
+
+    public static String processDelete(String input) throws DukeException {
+        try {
+            int taskId = Integer.parseInt(input) - 1;
+            Task task = tasks.get(taskId);
+            tasks.remove(taskId);
+            String message = String.format("%s\n  %s\nThere are %d tasks in the burning list.",
+                    REMOVE_MESSAGE, task.toString(), tasks.size());
             return message;
         } catch (NumberFormatException e) {
             throw new DukeException(ERROR_PARSE_INT);
