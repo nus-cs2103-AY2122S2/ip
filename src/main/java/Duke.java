@@ -26,10 +26,20 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    private static void addTask(String task) {
-        tasks[numberOfTasks] = new Task(task);
+    private static void addTask(String taskType, String taskName, String dateTime) {
+        Task newTask;
+        if (taskType.equals("todo")) {
+            newTask = new ToDo(taskName);
+        } else if (taskType.equals("deadline")) {
+            newTask = new Deadline(taskName, dateTime);
+        } else {
+            newTask = new Event(taskName, dateTime);
+        }
+        tasks[numberOfTasks] = newTask;
         numberOfTasks++;
-        System.out.println("added: " + task);
+        System.out.println("Got it. I've added this task: ");
+        System.out.println(newTask);
+        System.out.println("Now you have " + numberOfTasks + " tasks in the list.");
     }
 
     private static void listTask() {
@@ -63,8 +73,29 @@ public class Duke {
         case "unmark":
             unmark(Integer.parseInt(commandTokens[1]));
             break;
+        case "todo":
+            //fallthrough
+        case "deadline":
+            //fallthrough
+        case "event":
+            String taskName = "";
+            String dateTime = "";
+            boolean isTaskNameTurn = true;
+            for (int i = 1; i < commandTokens.length; i++) {
+                String currentToken = commandTokens[i];
+                if (currentToken.equals("/by") || currentToken.equals("/at")) {
+                    isTaskNameTurn = false;
+                    continue;
+                }
+                if (isTaskNameTurn) {
+                    taskName += (taskName.equals("") ? "" : " ") + currentToken;
+                } else {
+                    dateTime += (dateTime.equals("") ? "" : " ") + currentToken;
+                }
+            }
+            addTask(commandTokens[0], taskName, dateTime);
         default:
-            addTask(command);
+            ;
         }
     }
 
