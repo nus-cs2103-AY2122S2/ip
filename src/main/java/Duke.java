@@ -35,6 +35,12 @@ public class Duke {
         number_of_task++;
     }
 
+    private static void listTask() {
+        for (int i = 0; i < number_of_task; i++) {
+            System.out.printf("%d. %s\n", i + 1, tasks[i]);
+        }
+    }
+
     private static void run() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -43,6 +49,8 @@ public class Duke {
             String command = scanner.nextLine();
             if (command.equals("bye")) {
                 break;
+            } else if (command.equals("list")) {
+                listTask();
             } else {
                 addTask(command);
                 echo("added: " + command);
