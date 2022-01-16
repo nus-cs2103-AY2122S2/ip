@@ -12,8 +12,8 @@ public class Duke {
         System.out.println("What can I do for you?\n");
 
         Tasklist tlist = new Tasklist();
-        while (true) {
-            Scanner scn = new Scanner(System.in);
+        Scanner scn = new Scanner(System.in);
+        while (scn.hasNextLine()) {
             String input = scn.nextLine();
             String[] inputArr = input.split(" ");
             String cmd = inputArr[0];

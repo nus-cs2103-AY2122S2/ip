@@ -5,3 +5,35 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello I'm Duke!
+What can I do for you?
+
+Fetching all records...
+No entries found, start by adding one!
+
+Todo Added: [T][ ] borrow book
+There are now 1 tasks in the list.
+
+Deadline Added: [D][ ] return book (by: Sunday)
+There are now 2 tasks in the list.
+
+Event Added: [E][ ] project meeting (at: Monday 2-4pm)
+There are now 3 tasks in the list.
+
+Fetching all records...
+1. [T][ ] borrow book
+2. [D][ ] return book (by: Sunday)
+3. [E][ ] project meeting (at: Monday 2-4pm)
+
+Nice! I've marked this task as done!
+[D][X] return book (by: Sunday)
+
+Fetching all records...
+1. [T][ ] borrow book
+2. [D][X] return book (by: Sunday)
+3. [E][ ] project meeting (at: Monday 2-4pm)
+
+Okay! I've marked this as undone!
+[D][ ] return book (by: Sunday)
+
+Bye. Hope to see you again soon!

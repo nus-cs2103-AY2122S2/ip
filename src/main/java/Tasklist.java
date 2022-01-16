@@ -47,7 +47,7 @@ public class Tasklist {
                         .append("\n");
             } else {
                 if (allTodos.length() == 0) {
-                    return "No entries found, start by adding one!";
+                    return "No entries found, start by adding one!\n";
                 } else {
                     break;
                 }
