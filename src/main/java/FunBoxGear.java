@@ -2,7 +2,7 @@
  * The FunBoxGear class contains all the functionalities of FunBox.
  */
 public class FunBoxGear {
-    public final String GREETING = "Yo! I am FunBox └[∵┌]└[ ∵ ]┘[┐∵]┘ \nWhat can I do for you?";
+    public final String GREETING = "Yo! I am FunBox [0 _ 0] \nWhat can I do for you?";
     private int noOfItems;
     private Task[] tasksList;
 
@@ -70,17 +70,17 @@ public class FunBoxGear {
             this.tasksList[noOfItems] = new ToDo(description);
             break;
         }
-        System.out.println("Gotcha! I've added this task \uD83C\uDD95");
+        System.out.println("Gotcha! I've added this task!");
         System.out.println(this.tasksList[noOfItems]);
         noOfItems++;
-        System.out.println("Now you have " + noOfItems + " tasks in the list \uD83D\uDCF3");
+        System.out.println("Now you have " + noOfItems + " tasks in the list!");
     }
 
     /**
      * Loop through a list of items and print out each item
      */
     private void showList() {
-        System.out.println("Here are the tasks in your list \uD83D\uDCF3:");
+        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < this.noOfItems; i++) {
             System.out.println((i + 1) + "." + this.tasksList[i]);
         }
@@ -163,6 +163,6 @@ public class FunBoxGear {
      * Print out goodbye message to the user
      */
     public void sayBye() {
-        System.out.println("B-b-bbye. Hope to see you again soon ┗|*´Д｀|┛");
+        System.out.println("B-b-bbye. Hope to see you again soon [0 n 0]");
     }
 }
