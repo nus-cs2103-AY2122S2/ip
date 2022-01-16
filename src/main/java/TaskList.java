@@ -3,9 +3,7 @@ import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> list= new ArrayList<Task>();
 
-    public TaskList(){
-
-    }
+    public TaskList(){}
 
     public String addTask(String s){
         Task t = Task.newTask(s);
