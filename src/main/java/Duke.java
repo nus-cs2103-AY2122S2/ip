@@ -10,6 +10,7 @@ public class Duke {
     private static final String INPUT_LIST = "list";
     private static final String INPUT_MARK = "mark";
     private static final String INPUT_UNMARK = "unmark";
+    private static final String INPUT_DELETE = "delete";
 
     private static final String TASK_TODO = "todo";
     private static final String TASK_DEADLINE = "deadline";
@@ -43,6 +44,9 @@ public class Duke {
                         break;
                     case INPUT_UNMARK:
                         markAsUndone(tokens);
+                        break;
+                    case INPUT_DELETE:
+                        delete(tokens);
                         break;
                     case TASK_TODO:
                         addTodo(input);
@@ -146,6 +150,31 @@ public class Duke {
         }
     }
 
+    private static void delete(String[] tokens) throws DukeException {
+        if (count == 0) {
+            throw new DukeException("You have no tasks in your list.");
+        }
+
+        int num;
+
+        try {
+            num = Integer.parseInt(tokens[1]) - 1;
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Please specify a task number to delete.");
+        } catch (NumberFormatException e) {
+            throw new DukeException("Please specify the task number numerically.");
+        }
+        try {
+            Task task = tasks.remove(num);
+            count--;
+            echo("Understood. I've removed the following task:\n\t"
+                    + task + "\n"
+                    + "Now you have " + count + " task(s) in your list.");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Please specify a valid task number (between 1 to " + count + " inclusive).");
+        }
+    }
+
     private static void addTodo(String input) throws DukeException {
         String description;
         try {
@@ -166,19 +195,19 @@ public class Duke {
         String description;
         String[] split = input.split(TASK_BY);
 
+        try {
+            description = split[0].trim().substring(TASK_DEADLINE.length() + 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("The description of the deadline cannot be empty.");
+        }
         if (split.length == 1) {
             throw new DukeException("Please specify the date of the deadline (usage: `deadline <description> /by <date>`).");
         }
         if (split[1].trim().equals("")) {
             throw new DukeException("The date of the deadline cannot be empty.");
         }
-        try {
-            description = split[0].trim().substring(TASK_DEADLINE.length() + 1);
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("The description of the deadline cannot be empty.");
-        }
 
-        Deadline deadline = new Deadline(description, split[1]);
+        Deadline deadline = new Deadline(description, split[1].trim());
         tasks.add(deadline);
         count++;
         echo("Got it. I've added this deadline:\n\t"
@@ -190,19 +219,19 @@ public class Duke {
         String description;
         String[] split = input.split(TASK_AT);
 
+        try {
+            description = split[0].trim().substring(TASK_EVENT.length() + 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("The description of the event cannot be empty.");
+        }
         if (split.length == 1) {
             throw new DukeException("Please specify the date of the event (usage: `event <description> /at <date>`).");
         }
         if (split[1].trim().equals("")) {
             throw new DukeException("The date of the event cannot be empty.");
         }
-        try {
-            description = split[0].trim().substring(TASK_EVENT.length() + 1);
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("The description of the event cannot be empty.");
-        }
 
-        Event event = new Event(description, split[1]);
+        Event event = new Event(description, split[1].trim());
         tasks.add(event);
         count++;
         echo("Got it. I've added this event:\n\t"
