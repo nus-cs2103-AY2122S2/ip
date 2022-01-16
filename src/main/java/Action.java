@@ -14,6 +14,10 @@ public class Action {
         return act.equals("bye");
     }
 
+    public boolean isList() {
+        return act.equals("list");
+    }
+
     @Override
     public String toString() {
         return act;
