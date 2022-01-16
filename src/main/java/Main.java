@@ -22,7 +22,7 @@ public class Main {
             try {
                 echo.read(s);
             } catch (EchoException e) {
-                System.out.println("        ☹ OOPS!!! " + e.getMessage());
+                System.out.println("        " + e.getMessage());
             }
             s = sc.nextLine();
         }
