@@ -43,20 +43,37 @@ public class FunBoxGear {
             this.markUndone(formattedMsg);
             return true;
         default:
-            this.addToList(message);
+            this.addToList(formattedMsg, formattedMsg[0]);
             return true;
         }
     }
 
     /**
-     * Add user's message to a list
+     * Add user's tasks to the list based on the type of task
      *
-     * @param message The message written by the users on the command prompt
+     * @param formattedMsg The original message from the users split by " " into an array
+     * @param type The type of task: event, deadline, todo
      */
-    private void addToList(String message) {
-        this.tasksList[noOfItems] = new Task(message);
+    private void addToList(String[] formattedMsg, String type) {
+        String description = this.getMessage(formattedMsg);
+        String[] resultArr;
+        switch (type) {
+        case "event":
+            resultArr = this.getDescriptionAndDate(description, type);
+            this.tasksList[noOfItems] = new Event(resultArr[0], resultArr[1]);
+            break;
+        case "deadline":
+            resultArr = this.getDescriptionAndDate(description, type);
+            this.tasksList[noOfItems] = new Deadline(resultArr[0], resultArr[1]);
+            break;
+        case "todo":
+            this.tasksList[noOfItems] = new ToDo(description);
+            break;
+        }
+        System.out.println("Gotcha! I've added this task \uD83C\uDD95");
+        System.out.println(this.tasksList[noOfItems]);
         noOfItems++;
-        System.out.println("added: " + message);
+        System.out.println("Now you have " + noOfItems + " tasks in the list \uD83D\uDCF3");
     }
 
     /**
@@ -78,8 +95,46 @@ public class FunBoxGear {
      */
     private String[] formatCommands(String message) {
         // Split message by blank space
-        String[] messageArr = message.split(" ");
-        return messageArr;
+        return message.split(" ");
+    }
+
+    /**
+     * Get the message from the formatted message without the first item of the array which typically contains the
+     * command
+     *
+     * @param formattedMsg The message sent by the user which has been formatted
+     * @return Return a string of the original message sent by the users without the command
+     *
+     */
+    private String getMessage(String[] formattedMsg) {
+        StringBuilder sb = new StringBuilder();
+
+        int size = formattedMsg.length;
+
+        for (int i = 1; i < size; i++) {
+            if (i == size - 1) {
+                sb.append(formattedMsg[i]);
+            } else {
+                sb.append(formattedMsg[i]).append(" ");
+            }
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Used to split the message, date and time from a message which is needed for certain commands
+     *
+     * @param message The message to retrieve the date and time from
+     * @return Return a String array of size 2 where the first item on the list contains the message and
+     * the second item contains the date and time.
+     */
+    private String[] getDescriptionAndDate(String message, String type) {
+        if (type.equals("event")) {
+            return message.split(" /at ");
+        }
+
+        return  message.split(" /by ");
+
     }
 
     /**
