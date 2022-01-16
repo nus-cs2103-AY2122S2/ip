@@ -2,9 +2,12 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Mnsky {
-    private ArrayList<String> list;
+    private ArrayList<Task> list;
     private Scanner con;
 
+    /**
+     * Constructor for the Mnsky object.
+     */
     public Mnsky() {
          this.list = new ArrayList<>();
          this.con = new Scanner(System.in);
@@ -49,22 +52,38 @@ public class Mnsky {
      */
     public boolean parseInput() {
         String input = this.getInput();
+        String[] input_split = input.split(" ");
+        int index;
 
-        switch (input) {
+        switch (input_split[0]) {
             case "bye":
                 this.printMnsky("I can help!");
-                System.out.println("[MNSKY is shutting itself down...]");
+                System.out.println("[MNSKY has shut itself down]");
                 return false;
 
             case "list":
                 for (int i = 0; i < this.list.size(); i++) {
-                    System.out.println(String.format("%d. %s", i, this.list.get(i)));
+                    System.out.println(String.format("%d. %s", i + 1, this.list.get(i)));
                 }
+                break;
+
+            case "mark":
+                // TODO: Throw and handle error if no number or invlaid number given
+                index = Integer.parseInt(input_split[1]) - 1;
+                this.list.get(index).mark();
+                System.out.println(this.list.get(index));
+                break;
+
+            case "unmark":
+                // TODO: Throw and handle error if no number or invlaid number given
+                index = Integer.parseInt(input_split[1]) - 1;
+                this.list.get(index).unmark();
+                System.out.println(this.list.get(index));
                 break;
 
             default:
                 System.out.println(String.format("[Added %s]", input));
-                this.list.add(input);
+                this.list.add(new Task(input));
         }
 
         this.printMnsky("I can help!");
