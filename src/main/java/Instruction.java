@@ -1,16 +1,42 @@
+import java.util.ArrayList;
+
 /**
  * A task represents an instruction inputted to Duke by a user.
  * At this stage, a task has minimally a name (description).
  */
-class Instruction {
+abstract class Instruction {
+
     private String description;
+    private static final String TERMINATE_INSTRUCTION = "bye";
+
+    protected static String getTerminateInstruction() {
+        return TERMINATE_INSTRUCTION;
+    }
 
     /**
-     * Constructor of an instruction.
+     * Factory method. Create an instance of subclass of instructions according to the string inputted, and returns it.
+     * The instruction must have at least one word.
      *
-     * @param description the description of the task as inputted by the user.
+     * @param instruction The line of command.
+     * @return A corresponding instance of instruction.
      */
-    protected Instruction(String description) {
+    protected static Instruction of(String instruction) {
+
+        // Extract the words in the instruction. The first word should determine the type of instruction to be returned.
+        String[] words = instruction.split(" ");
+        String type = words[0];
+        switch (type) {
+            case "list":
+                return new ListTasks();
+            case Instruction.TERMINATE_INSTRUCTION:
+                return new Quit(Instruction.TERMINATE_INSTRUCTION);
+            default:
+                // This is the 'add' case.
+                return new Add(new Task(instruction));
+        }
+    }
+
+    protected void setDescription(String description) {
         this.description = description;
     }
 
@@ -22,18 +48,9 @@ class Instruction {
     }
 
     /**
-     * Retrieves the message of the task (when it is finished).
-     *
-     * @return the message.
-     */
-    protected String getMessage() {
-        return this.description;
-    }
-
-    /**
      * Performs the associated action of the task. By default, there is no action associated to a task.
+     *
+     * @return The message once the instruction is executed.
      */
-    protected void act() {
-        return;
-    }
+    protected abstract String act();
 }

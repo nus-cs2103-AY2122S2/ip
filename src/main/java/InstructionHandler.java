@@ -5,8 +5,8 @@ import java.util.Scanner;
  */
 class InstructionHandler {
 
-    private String TERMINATE_INSTRUCTION = "bye";
-    private String OUTPUT_PREFIX = ">> ";
+    private final String TERMINATE_INSTRUCTION = Instruction.getTerminateInstruction();
+    private final String OUTPUT_PREFIX = ">> ";
 
     /**
      * Receives the instructions from user, and performs them one by one and prints the message, until a terminating
@@ -16,16 +16,16 @@ class InstructionHandler {
 
         Scanner sc = new Scanner(System.in);
 
-        Instruction nextInstruction = new Instruction(sc.nextLine());
-        while (!nextInstruction.getDescription().equals(TERMINATE_INSTRUCTION)) {
+        Instruction nextInstruction = Instruction.of(sc.nextLine());
+        while (true) {
+            System.out.println(OUTPUT_PREFIX + nextInstruction.act());
 
-            nextInstruction.act();
-            System.out.println(OUTPUT_PREFIX + nextInstruction.getMessage());
-
-            nextInstruction = new Instruction(sc.nextLine());
+            if (nextInstruction.getDescription().equals(TERMINATE_INSTRUCTION)) {
+                // Current instruction terminates the program.
+                break;
+            }
+            nextInstruction = Instruction.of(sc.nextLine());
         }
-
-        System.out.println(OUTPUT_PREFIX + "See you!");
     }
 
 }
