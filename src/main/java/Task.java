@@ -1,6 +1,6 @@
 public class Task {
 
-    private String description;
+    private final String description;
     private boolean completed;
 
     public Task(String description) {
@@ -16,15 +16,7 @@ public class Task {
         this.completed = completed;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    public String getCompleted() {
+    private String getCompleted() {
         return completed ? "X" : " ";
     }
 

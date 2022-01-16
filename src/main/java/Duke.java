@@ -16,9 +16,11 @@ public class Duke {
 
         while (!input.equals("bye")) {
 
-            String[] arr = input.split(" ");
+            String[] arr = input.split(" ", 2);
+            String cmd = arr[0];
+            String var = arr.length > 1 ? arr[1] : "";
 
-            switch (arr[0]) {
+            switch (cmd) {
 
                 case "list":
                     for (int i = 0; i < taskList.size(); i++) {
@@ -29,17 +31,15 @@ public class Duke {
                     break;
 
                 case "mark":
-                    int mark = Integer.parseInt(arr[1]) - 1;
+                    int mark = Integer.parseInt(var) - 1;
                     taskList.get(mark).setCompleted(true);
-                    System.out.println("\tNice! I've marked this task as done:");
-                    System.out.println("\t\t" + arr[1] + ". " + taskList.get(mark).toString() + "\n");
+                    System.out.println("\tNice! I've marked this task as done:\n\t\t" + var + ". " + taskList.get(mark).toString() + "\n");
                     break;
 
                 case "unmark":
-                    int unmark = Integer.parseInt(arr[1]) - 1;
+                    int unmark = Integer.parseInt(var) - 1;
                     taskList.get(unmark).setCompleted(false);
-                    System.out.println("\tOK, I've marked this task as not done yet:");
-                    System.out.println("\t\t" + arr[1] + ". " + taskList.get(unmark).toString() + "\n");
+                    System.out.println("\tOK, I've marked this task as not done yet:\n\t\t" + var + ". " + taskList.get(unmark).toString() + "\n");
                     break;
 
                 default:
