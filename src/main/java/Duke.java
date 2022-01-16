@@ -11,7 +11,7 @@ public class Duke {
         System.out.println("Hello I'm Duke!");
         System.out.println("What can I do for you?\n");
 
-        Todolist tlist = new Todolist();
+        Tasklist tlist = new Tasklist();
         while (true) {
             Scanner scn = new Scanner(System.in);
             String input = scn.nextLine();
@@ -23,18 +23,36 @@ public class Duke {
             } else if (cmd.equals(Handlers.LIST.label)) {
                 System.out.println("Fetching all records...");
                 System.out.println(tlist.toString());
+            } else if (cmd.equals(Handlers.DEADLINE.label)) {
+                int index = input.indexOf("/by");
+                Deadline task = new Deadline(input.substring(9, index - 1), input.substring(index + 4));
+                tlist.addTask(task);
+                System.out.println("Deadline Added: " + task.toString());
+                System.out.println("There are now " + tlist.getTotalTasks() + " tasks in the list.\n");
+            } else if (cmd.equals(Handlers.EVENT.label)) {
+                int index = input.indexOf("/at");
+                Event task = new Event(input.substring(6, index - 1), input.substring(index + 4));
+                tlist.addTask(task);
+                System.out.println("Event Added: " + task.toString());
+                System.out.println("There are now " + tlist.getTotalTasks() + " tasks in the list.\n");
+            } else if (cmd.equals(Handlers.TODO.label)) {
+                Todo task = new Todo(input.substring(5));
+                tlist.addTask(task);
+                System.out.println("Todo Added: " + task.toString());
+                System.out.println("There are now " + tlist.getTotalTasks() + " tasks in the list.\n");
             } else if (cmd.equals(Handlers.MARK.label)) {
                 System.out.println("Nice! I've marked this task as done!");
-                Todo t = tlist.mark(Integer.parseInt(inputArr[1]));
+                Task t = tlist.mark(Integer.parseInt(inputArr[1]));
                 System.out.println(t.toString() + "\n");
             } else if (cmd.equals(Handlers.UNMARK.label)) {
                 System.out.println("Okay! I've marked this as undone!");
-                Todo t = tlist.unmark(Integer.parseInt(inputArr[1]));
+                Task t = tlist.unmark(Integer.parseInt(inputArr[1]));
                 System.out.println(t.toString() + "\n");
             } else {
-                Todo todo = new Todo(input);
-                tlist.addTodo(todo);
-                System.out.println("Added: " + todo.toString() + "\n");
+                Task task = new Task(input);
+                tlist.addTask(task);
+                System.out.println("Added: " + task.toString());
+                System.out.println("There are now " + tlist.getTotalTasks() + " tasks in the list.\n");
             }
         }
     }

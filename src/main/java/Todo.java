@@ -1,29 +1,11 @@
-public class Todo {
+public class Todo extends Task {
 
-    private String todo;
-    private boolean completed;
-
-    public Todo(String todo) {
-        this.todo = todo;
-        this.completed = false;
-    }
-
-    public void mark() {
-        this.completed = true;
-    }
-
-    public void unmark() {
-        this.completed = false;
+    public Todo(String task) {
+        super(task);
     }
 
     @Override
     public String toString() {
-        StringBuilder status = new StringBuilder();
-        if (this.completed) {
-            status.append("[X] ");
-        } else {
-            status.append("[ ] ");
-        }
-        return status.append(this.todo).toString();
+        return "[T]" + super.toString();
     }
 }
