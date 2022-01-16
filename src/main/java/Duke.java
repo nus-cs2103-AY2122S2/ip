@@ -1,7 +1,5 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-
-@SuppressWarnings("ALL")
 public class Duke {
     public static void listOut(ArrayList<Action> list) {
         int count = 1;
@@ -59,6 +57,14 @@ public class Duke {
                 action = new Action(sc.nextLine());
                 continue;
             }
+            if (action.isDelete()) {
+                int index = Integer.parseInt(action.getBody());
+                Action deleted = store.remove(index - 1);
+                System.out.println("Noted. I have removed this task:\n  " +
+                        deleted + "\nNow you have " + store.size() + " tasks in the list.");
+                action = new Action(sc.nextLine());
+                continue;
+            }
             if (action.isDeadline()) {
                 String[] sarr = action.getBody().split("/by");
                 action = new Deadline(sarr[0], sarr[1]);
@@ -76,6 +82,5 @@ public class Duke {
             action = new Action(sc.nextLine());
         }
         System.out.println("Bye! Hope to see you again soon!");
-
     }
 }

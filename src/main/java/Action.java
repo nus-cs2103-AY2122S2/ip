@@ -49,7 +49,7 @@ public class Action {
 
     public boolean known() {
         return isList() || isMark() || isUnmark() || isDeadline() || isEvent()
-                || isTodo();
+                || isTodo() || isDelete();
     }
 
     public boolean isBye() {
@@ -78,6 +78,10 @@ public class Action {
 
     public boolean isTodo() {
         return getAction().equals("todo");
+    }
+
+    public boolean isDelete() {
+        return getAction().equals("delete");
     }
 
     @Override
