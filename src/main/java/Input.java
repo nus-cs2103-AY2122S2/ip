@@ -11,8 +11,15 @@ public class Input {
     private String input;
 
     public Input(String input) {
-        this.states = input.equalsIgnoreCase("bye") ? States.BYE : States.ECHO;
-        this.args = "";
+        if (input.equalsIgnoreCase("bye")) {
+            this.states = States.BYE;
+        } else if (input.equalsIgnoreCase("list")) {
+            this.states = States.LIST;
+        } else {
+            this.states = States.ADD;
+        }
+
+        this.args = this.states == States.ADD ? input : "";
         this.input = input;
     }
 

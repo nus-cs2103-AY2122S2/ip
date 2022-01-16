@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -11,6 +12,12 @@ public class Duke {
             "                       |___/ ";
     private static final String BOT_NAME = "Abby";
 
+    private ArrayList<String> tasks;
+    
+    public Duke() {
+        this.tasks = new ArrayList<>();
+    }
+
     public void output(String output) {
         String result =
                 "____________________________________________________________\n\n" +
@@ -21,6 +28,27 @@ public class Duke {
 
     public String bye() {
         return "Bye. Hope to see you again soon!";
+    }
+
+    public void add(String task) {
+        this.tasks.add(task);
+        
+        output("added: " + task);
+    }
+
+    public void list() {
+        int length = this.tasks.size();
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < length; ++i) {
+            sb.append(i + 1 + ". " + this.tasks.get(i));
+
+            if (i + 1 != length) {
+                sb.append("\n");
+            }
+        }
+
+        output(sb.toString());
     }
 
     public void start() {
@@ -39,6 +67,14 @@ public class Duke {
                     break;
                 case BYE:
                     output(bye());
+
+                    break;
+                case ADD:
+                    add(input.getInput());
+
+                    break;
+                case LIST:
+                    list();
 
                     break;
                 default:
