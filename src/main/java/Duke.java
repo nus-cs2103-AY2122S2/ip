@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
-    private static int LINE_BREAK_LENGTH = 60; // len(gth) for line break
+    private static int LINE_BREAK_LENGTH = 60; // length for line break
     private static String LINE_BREAK = "_".repeat(LINE_BREAK_LENGTH); // string for horizontal line break
 
     public static void main(String[] args) {
@@ -34,6 +34,7 @@ public class Duke {
                 command(cmd);
             }
         }
+        scanner.close();
     }
 
     public static void printWithTab(String message) {
