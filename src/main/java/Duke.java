@@ -10,7 +10,7 @@ public class Duke {
 
         System.out.println(greeting);
 
-        ArrayList<String> taskList = new ArrayList<>();
+        ArrayList<Task> taskList = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
@@ -21,13 +21,13 @@ public class Duke {
                 case "list":
                     for (int i = 0; i < taskList.size(); i++) {
                         int idx = i + 1;
-                        System.out.println("\t" + idx + ". " + taskList.get(i));
+                        System.out.println("\t" + idx + ". " + taskList.get(i).getDescription());
                     }
                     System.out.println();
                     break;
 
                 default:
-                    taskList.add(input);
+                    taskList.add(new Task(input));
                     System.out.println("\t added: "+input+"\n");
             }
 
