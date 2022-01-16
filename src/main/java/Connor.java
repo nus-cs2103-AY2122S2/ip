@@ -1,26 +1,39 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Connor {
-    public static String CURRENT_VERSION = "Version 1.1";
-    public static String LINE = "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━";
-    public static String INDENT = "    ";
+    private static String CURRENT_VERSION = "Version 1.2";
+    private static final String LINE = "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━";
+    private static final String INDENT = "    ";
 
-    public static boolean isActive = true;
+    private static boolean isActive = true;
 
-    public static void interpret(String s) {
+    private static ArrayList<String> xs = new ArrayList<>();
+
+    private static void interpret(String s) {
         // Standardise Format
         String x = s.toLowerCase();
         switch (x) {
-            case "bye":
-                isActive = false;
-                print("Farewell. See you next time!");
-                break;
-            default:
-                print(s);
+        case "bye":
+            isActive = false;
+            print("Farewell. See you next time!");
+            break;
+        case "list":
+            if (xs.size() == 0) {
+                print("List is empty!");
+            } else {
+                for (int i = 1; i <= xs.size(); i++) {
+                    print(Integer.toString(i) + ". " + xs.get(i-1));
+                }
+            }
+            break;
+        default:
+            xs.add(s);
+            print("Added: " + s);
         }
     }
 
-    public static void print(String s) {
+    private static void print(String s) {
         System.out.println(s);
     }
 
