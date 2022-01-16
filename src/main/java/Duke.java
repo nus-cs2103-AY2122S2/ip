@@ -31,9 +31,29 @@ public class Duke {
     }
 
     public void add(String task) {
-        this.tasks.add(new Task(task));
-        
-        output("added: " + task);
+        String[] taskArr = task.split(" ", 2);
+        String type = taskArr[0];
+        String result = "Got it. I've added this task:\n";
+
+        if (type.equalsIgnoreCase("deadline")) {
+            String[] taskData = taskArr[1].split(" /by ");
+
+            this.tasks.add(new Deadline(taskData[0], taskData[1]));
+        } else if (type.equalsIgnoreCase("event")) {
+            String[] taskData = taskArr[1].split(" /at ");
+
+            this.tasks.add(new Event(taskData[0], taskData[1]));
+        } else {
+            this.tasks.add(new Todo(taskArr[1]));
+        }
+
+        int noOfTasks = this.tasks.size();
+        String pluralTask = noOfTasks > 1 ? "tasks" : "task";
+
+        result += "  " + this.tasks.get(noOfTasks - 1).toString() + "\n";
+        result += "Now you have " + noOfTasks + " " + pluralTask + " in the list.";
+
+        output(result);
     }
 
     public void list() {
@@ -44,6 +64,8 @@ public class Duke {
             output("No tasks found! Quit lazing around!");
             return;
         }
+
+        sb.append("Here are the tasks in your list:\n");
 
         for (int i = 0; i < length; ++i) {
             sb.append(i + 1 + ". " + this.tasks.get(i).toString());
@@ -57,7 +79,7 @@ public class Duke {
     }
 
     public void toggleCompleted(boolean isMark, int index) {
-        this.tasks.get(--index).setCompleted();
+        this.tasks.get(--index).setCompleted(isMark);
 
         String output = isMark ?
                 "Nice! I've marked this task as done:\n" :

@@ -19,10 +19,8 @@ public class Task {
         return this.completed ? "X" : " ";
     }
 
-    public void setCompleted() {
-        boolean status = this.completed;
-
-        this.completed = !status;
+    public void setCompleted(boolean setCompleted) {
+        this.completed = setCompleted;
     }
 
     @Override

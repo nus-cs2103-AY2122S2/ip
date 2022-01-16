@@ -23,7 +23,7 @@ public class Input {
         } else if (command.equalsIgnoreCase("mark") ||
                 command.equalsIgnoreCase("unmark")) {
             this.states = States.TOGGLE;
-        }else {
+        } else {
             this.states = States.ADD;
         }
 
