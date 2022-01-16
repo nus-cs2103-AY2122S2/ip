@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -7,16 +9,15 @@ public class Duke {
                 + "/,    /` \n"
                 + "\\\\\"--\\\\\n";
 
-        System.out.println("Woof, I am (supposed to look like) a dog bot. \n" + logo + "\n" +  "What do you want from me?\n");
+        System.out.println("Woof, I am (supposed to look like) a dog bot. \n" + logo + "\n" +  "What do you want from me?");
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
-        Task[] tasks = new Task[100];
-        int size = 1;
+        List<Task> tasks = new ArrayList<>();
         while (!str.equals("bye")){
             if (str.equals("list")){
-                for (int i = 1; i < size; i++) {
-                    Task task = tasks[i];
-                    System.out.println(i + "." + task);
+                for (int i = 0; i < tasks.size(); i++) {
+                    Task task = tasks.get(i);
+                    System.out.println(i + 1 + "." + task);
                 }
                 str = sc.nextLine();
             }
@@ -26,25 +27,43 @@ public class Duke {
                     try {
                         int taskNumber = Integer.parseInt(temp[1]);
                         if (temp[0].equals("mark")) {
-                            Task currTask = tasks[taskNumber];
+                            Task currTask = tasks.get(taskNumber - 1);
                             currTask.setDone();
                             System.out.println("Nice! I've marked this task as done: \n" + "  " + currTask);
                         }
                         else {
-                            Task currTask = tasks[taskNumber];
+                            Task currTask = tasks.get(taskNumber - 1);
                             currTask.setNotDone();
                             System.out.println("OK, I've marked this task as not done yet:: \n" + "  " + currTask);
                         }
                     } catch (NumberFormatException e) {
                         System.out.println("added : " + str);
-                        tasks[size] = new Task(str);
-                        size++;
+                        tasks.add(new Task(str));
                     }
                 }
                 else {
-                    System.out.println("added : " + str);
-                    tasks[size] = new Task(str);
-                    size++;
+                    if (temp[0].equals("todo")){
+                        Todo todo = new Todo(str.substring(5));
+                        tasks.add(todo);
+                        System.out.println("Got it. I've added this task: \n  " + todo +
+                                "\nNow you have " + tasks.size() + " task(s) on the list.");
+                    }
+                    else if (temp[0].equals("event")){
+                        Event event = new Event(str.substring(6));
+                        tasks.add(event);
+                        System.out.println("Got it. I've added this task: \n  " + event +
+                                "\nNow you have " + tasks.size() + " task(s) on the list.");
+                    }
+                    else if (temp[0].equals("deadline")){
+                        Deadline deadline = new Deadline(str.substring(9));
+                        tasks.add(deadline);
+                        System.out.println("Got it. I've added this task: \n  " + deadline +
+                                "\nNow you have " + tasks.size() + " task(s) on the list.");
+                    }
+                    else {
+                        System.out.println("added : " + str);
+                        tasks.add(new Task(str));
+                    }
                 }
                 str = sc.nextLine();
             }
