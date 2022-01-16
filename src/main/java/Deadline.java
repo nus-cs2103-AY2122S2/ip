@@ -1,23 +1,23 @@
 public class Deadline extends Action{
     private final String by;
 
-    public Deadline(String task, String by) {
+    public Deadline(String task, String by)  {
         super(task);
         this.by  = by;
     }
 
-    public Deadline(String task, String by, boolean bool) {
+    public Deadline(String task, String by, boolean bool)  {
         super(task, bool);
         this.by = by;
     }
 
     @Override
-    public Action setDone() {
+    public Action setDone()  {
         return new Deadline(act, by, true);
     }
 
     @Override
-    public Action setUnDone() {
+    public Action setUnDone()  {
         return new Deadline(act, by, false);
     }
 

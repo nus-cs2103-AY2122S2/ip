@@ -5,18 +5,18 @@ public class Event extends Action {
         this.at = at;
     }
 
-    public Event(String task, String at, boolean bool) {
+    public Event(String task, String at, boolean bool){
         super(task, bool);
         this.at = at;
     }
 
     @Override
-    public Action setDone() {
+    public Action setDone()  {
         return new Event(act, at, true);
     }
 
     @Override
-    public Action setUnDone() {
+    public Action setUnDone()  {
         return new Event(act, at, false);
     }
 

@@ -2,14 +2,18 @@ public class Action {
     protected final String act;
     protected final boolean isDone;
 
-    public Action(String string){
+    public Action(String string) {
          act = string;
          isDone = false;
     }
 
-    public Action(String string, boolean status) {
+    public Action(String string, boolean status)  {
         act = string;
         isDone = status;
+    }
+
+    public String getFull() {
+        return act;
     }
 
     /**
@@ -41,6 +45,11 @@ public class Action {
 
     public Action setUnDone() {
         return new Action(act, false);
+    }
+
+    public boolean known() {
+        return isList() || isMark() || isUnmark() || isDeadline() || isEvent()
+                || isTodo();
     }
 
     public boolean isBye() {

@@ -1,15 +1,15 @@
 public class Todo  extends Action{
 
-    public Todo(String s) {
+    public Todo(String s)  {
         super(s);
     }
 
-    public Todo(String s, boolean bool) {
+    public Todo(String s, boolean bool)  {
         super(s, bool);
     }
 
     @Override
-    public Action setDone() {
+    public Action setDone()  {
         return new Todo(act, true);
     }
 
