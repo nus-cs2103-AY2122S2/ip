@@ -64,6 +64,17 @@ public class Tsundere {
                         String[] splitStr = userInput.split(" ");
                         int num = Integer.parseInt(splitStr[1]);
                         mark(num);
+                    } else if (comUserInput.contains("TODO")) {
+                        String[] splitStr = userInput.split(" ", 2);
+                        todo(splitStr[1]);
+                    } else if (comUserInput.contains("DEADLINE")) {
+                        String[] splitStr = userInput.split("/");
+                        String[] splitStr2 = splitStr[0].split(" ",2);
+                        deadline(splitStr2[1], splitStr[1]);
+                    } else if (comUserInput.contains("EVENT")) {
+                        String[] splitStr = userInput.split("/");
+                        String[] splitStr2 = splitStr[0].split(" ",2);
+                        event(splitStr2[1], splitStr[1]);
                     } else {
                         echo(userInput);
                     }
@@ -81,8 +92,6 @@ public class Tsundere {
     static private void echo(String userInput) {
         System.out.println(lines);
         System.out.println(userInput);
-        aryLst[countLst] = new Task(userInput);
-        countLst++;
         System.out.println(lines);
     }
     static private void list() {
@@ -90,7 +99,7 @@ public class Tsundere {
         System.out.println("You forgetful baka... here are your tasks: ");
         for (int i = 0; i < countLst; i++) {
             int num = i + 1;
-            System.out.println(num + ". [" + aryLst[i].getStatusIcon()  +"] " + aryLst[i].getDescription());
+            System.out.println(num + ". " + aryLst[i].toString());
         }
         System.out.println(lines);
     }
@@ -119,6 +128,34 @@ public class Tsundere {
         System.out.println(lines);
     }
 
+    static private void todo(String strTask) {
+        System.out.println(lines);
+        System.out.println("New task! You better do it.");
+        aryLst[countLst] = new ToDo(strTask);
+        System.out.println(aryLst[countLst].toString());
+        countLst++;
+        System.out.println("You have " + countLst + " to do you lazy bum!");
+        System.out.println(lines);
+    }
 
+    static private void deadline(String strTask, String by) {
+        System.out.println(lines);
+        System.out.println("New task! You better do it.");
+        aryLst[countLst] = new Deadline(strTask, by);
+        System.out.println(aryLst[countLst].toString());
+        countLst++;
+        System.out.println("You have " + countLst + " to do you lazy bum!");
+        System.out.println(lines);
+    }
+
+    static private void event(String strTask, String at) {
+        System.out.println(lines);
+        System.out.println("New task! You better do it.");
+        aryLst[countLst] = new Event(strTask, at);
+        System.out.println(aryLst[countLst].toString());
+        countLst++;
+        System.out.println("You have " + countLst + " to do, you lazy bum!");
+        System.out.println(lines);
+    }
 
 }
