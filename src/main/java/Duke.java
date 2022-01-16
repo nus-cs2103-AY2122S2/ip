@@ -16,12 +16,11 @@ public class Duke {
 
     public static void main(String[] args) {
 
-        String logo = "/\\___ \\                            __           \n"
-                + "\\/__/\\ \\     __     _ __   __  __ /\\_\\    ____  \n"
-                + "   _\\ \\ \\  /'__`\\  /\\`'__\\/\\ \\/\\ \\\\/\\ \\  /',__\\ \n"
-                + "  /\\ \\_\\ \\/\\ \\L\\.\\_\\ \\ \\/ \\ \\ \\_/ |\\ \\ \\/\\__, `\\\n"
-                + "  \\ \\____/\\ \\__/.\\_\\\\ \\_\\  \\ \\___/  \\ \\_\\/\\____/\n"
-                + "   \\/___/  \\/__/\\/_/ \\/_/   \\/__/    \\/_/\\/___/ \n";
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("How may I help you today?");
         System.out.println(line);
@@ -31,7 +30,6 @@ public class Duke {
 
             // Exit Feature
             if (input.equals("bye")) {
-                System.out.println(line);
                 System.out.println("Goodbye! I'll be here if you need anything else.");
                 System.out.println(line);
                 break;
@@ -39,7 +37,6 @@ public class Duke {
 
             // List Feature
             else if (input.equals("list")) {
-                System.out.println(line);
                 for (int i = 0; i < arr.length; i++) {
                     if (arr[i] == null) {
                         break;
@@ -51,7 +48,6 @@ public class Duke {
 
             // Mark & Unmark Feature
             else if (input.contains("mark") || input.contains("unmark")) {
-                System.out.println(line);
                 String s = input.replaceAll("\\D+","");
                 int clean = Integer.parseInt(s) - 1;  // Parse to find what number in list to toggle
                 // Edge Case
@@ -75,7 +71,6 @@ public class Duke {
 
             // Deadline Feature
             else if (input.contains("deadline")) {
-                System.out.println(line);
                 String nondead = input.split("deadline ", 2)[1]; // Remove instruction
                 String task = nondead.split(" /by ", 2)[0]; // Split to task
                 String date = nondead.split(" /by ", 2)[1]; // Split to date
@@ -90,7 +85,6 @@ public class Duke {
 
             // Event Feature
             else if (input.contains("event")) {
-                System.out.println(line);
                 String nonevent = input.split("event ", 2)[1]; // Remove instruction
                 String task = nonevent.split(" /at ", 2)[0]; // Split to task
                 String date = nonevent.split(" /at ", 2)[1]; // Split to date
@@ -105,7 +99,6 @@ public class Duke {
 
             // To Do Feature
             else if (input.contains("todo")) {
-                System.out.println(line);
                 String word = input.split(" ", 2)[1]; // Remove instruction
                 ToDo newToDo = new ToDo(word);
                 int itemsInList = getLength(arr) + 1;
