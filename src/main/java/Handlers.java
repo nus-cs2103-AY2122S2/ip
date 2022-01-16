@@ -1,6 +1,7 @@
 public enum Handlers {
     BYE("bye"),
     DEADLINE("deadline"),
+    DELETE("delete"),
     EVENT("event"),
     MARK("mark"),
     LIST("list"),

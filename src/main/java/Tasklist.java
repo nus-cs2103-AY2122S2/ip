@@ -40,6 +40,23 @@ public class Tasklist {
         return t;
     }
 
+    public Task delete(int index) {
+        Task t = null;
+        Task[] temp = new Task[100];
+        int j = 0;
+        for (int i = 0; i < this.filled; i++) {
+            if (i == index) {
+                t = this.tasks[i];
+                j++;
+            }
+            temp[i] = this.tasks[j];
+            j++;
+        }
+        this.tasks = temp;
+        this.filled--;
+        return t;
+    }
+
     @Override
     public String toString() {
         StringBuilder allTodos = new StringBuilder();

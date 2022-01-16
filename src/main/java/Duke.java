@@ -74,6 +74,16 @@ public class Duke {
                     } catch (DukeException err) {
                         System.out.println(err.getMessage());
                     }
+                } else if (cmd.equals(Handlers.DELETE.label)) {
+                    try {
+                        int index = DukeException.indexValidity(input, tlist);
+                        System.out.println("Noted. Deleting this task...");
+                        Task t = tlist.delete(index);
+                        System.out.println(t.toString());
+                        System.out.println("There are now " + tlist.getTotalTasks() + " tasks in the list.\n");
+                    } catch (DukeException err) {
+                        System.out.println(err.getMessage());
+                    }
                 } else {
                     throw new IllegalArgumentException("Sorry, this is not a recognized command.\n");
                 }
