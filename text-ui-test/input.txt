@@ -1,0 +1,9 @@
+todo read book
+event watch movie /at 12pm
+list
+mark 1
+deadline brush teeth /by 12am
+mark 2
+unmark 1
+list
+bye
