@@ -1,10 +1,11 @@
 package Tasks;
 
 // can actually change this to an Abstract Class
-public class Task {
+public abstract class Task {
     private String task;
     private boolean markStatus;
 
+    public abstract String getStringCmd();
 
     public Task (String task, boolean markStatus) {
         this.task = task;

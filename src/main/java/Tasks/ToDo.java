@@ -7,6 +7,12 @@ public class ToDo extends Task {
     }
 
     @Override
+    public String getStringCmd() {
+        // mark status | type | descriptor
+        return super.getMarkStatus() + "&T&" + super.getTask();
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }

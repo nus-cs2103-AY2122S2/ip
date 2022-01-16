@@ -7,6 +7,10 @@ import java.io.BufferedReader;
 import java.util.*;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.io.FileWriter;
 
 public class Duke {
     private enum Reply {
@@ -14,16 +18,81 @@ public class Duke {
     }
 
     public static void main(String[] args) throws IOException {
+        List<Task> toDoList = new ArrayList<>();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String cmd;
-        List<Task> toDoList = new ArrayList<>();
+        // Attempt to open file. If file does not exist, then create a file
+        try {
+            System.out.println("Attempting to open file");
+            addFileContent("./tasklist.txt", toDoList);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+            // create a new file called tasklist.txt in the current directory
+            File f = new File("./tasklist.txt");
+        }
+
         String welcome = formatMsg("Hello from Burp\n\tWhat can I do for you?");
         System.out.println(welcome);
         while (!(cmd = br.readLine()).equals("bye")) {
             Reply type = determineType(cmd.split(" ")[0]);
             burpReply(type, toDoList, cmd);
         }
+        // do writing before exiting
+        FileWriter fw = new FileWriter("./tasklist.txt");
+        for (int i = 0; i < toDoList.size(); i++) {
+            Task currentTask = toDoList.get(i);
+            fw.write(currentTask.getStringCmd());
+            fw.write("\n");
+        }
+        fw.close();
         System.out.println(formatMsg("Bye. Hope to see you again soon!"));
+    }
+
+    // Reads and adds the file's content into the array
+    private static void addFileContent(String filePath, List<Task> toDoList) throws FileNotFoundException{
+        File f = new File(filePath);
+        // save commands into the file
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+            // mark status & type & descriptor & additional
+            String cmd = s.nextLine();
+            String[] cmd_split = cmd.split("&");
+            Reply type;
+            boolean mark = cmd_split[0].equals("[X]") ? true : false;
+            switch (cmd_split[1]) {
+                case "T":
+                    type = Reply.TODO;
+                    break;
+                case "E":
+                    type = Reply.EVENT;
+                    break;
+                case "D":
+                    type = Reply.DEADLINE;
+                    break;
+                default:
+                   type = Reply.DEFAULT;
+                   break;
+            }
+
+            switch (type) {
+                case TODO:
+                    // ToDo(String task, boolean markStatus)
+                    toDoList.add(new ToDo(cmd_split[2], mark));
+                    break;
+                case EVENT:
+                    // Event(String task, boolean markStatus, String dateTime)
+                    toDoList.add(new Event(cmd_split[2], mark, cmd_split[3]));
+                    break;
+                case DEADLINE:
+                    // Deadline(String task, boolean markStatus, String deadline)
+                    toDoList.add(new Deadline(cmd_split[2], mark, cmd_split[3]));
+                    break;
+                default:
+                    // do nothing
+                    System.out.println("aaaa");
+                    break;
+            }
+        }
     }
 
     // logic that determines how Burp will reply

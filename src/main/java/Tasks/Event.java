@@ -7,6 +7,12 @@ public class Event extends Task {
         this.dateTime = dateTime;
     }
 
+    @Override
+    public String getStringCmd() {
+        // mark status | type | descriptor | datetime
+        return super.getMarkStatus() + "&E&" + super.getTask() + "&" + this.dateTime;
+    }
+
     public String getDateTime() {
         return "(at:" + this.dateTime + ")";
     }

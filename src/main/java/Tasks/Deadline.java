@@ -7,6 +7,12 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    @Override
+    public String getStringCmd() {
+        // mark status | type | descriptor | deadline
+        return super.getMarkStatus() + "&D&" + super.getTask() + "&" +  this.deadline;
+    }
+
     public String getDeadline() {
         return "(by:" + this.deadline + ")";
     }
