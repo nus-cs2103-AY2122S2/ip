@@ -1,8 +1,10 @@
 public class Task {
-    private String name;
-    private boolean done;
+    protected int taskId;
+    protected String name;
+    protected boolean done;
 
-    public Task(String name) {
+    public Task(int taskId, String name) {
+        this.taskId = taskId;
         this.name = name;
     }
 
@@ -14,14 +16,14 @@ public class Task {
         return this.done;
     }
 
-    public void markDone() {
+    public void mark() {
         this.done = true;
 
         System.out.println("Awesome! I've marked this task as done:");
         System.out.println(this);
     }
 
-    public void markNotDone() {
+    public void unMark() {
         this.done = false;
 
         System.out.println("Okay, I've marked this task as not done yet:");
