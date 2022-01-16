@@ -8,7 +8,7 @@ public class Task {
     }
 
     public Task(String description, boolean completed) {
-        this.description = description;
+        this.description = description.trim();
         this.completed = completed;
     }
 

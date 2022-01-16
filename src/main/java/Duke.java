@@ -42,6 +42,26 @@ public class Duke {
                     System.out.println("\tOK, I've marked this task as not done yet:\n\t\t" + var + ". " + taskList.get(unmark).toString() + "\n");
                     break;
 
+                case "event":
+                    String[] e = var.split("/at", 2);
+                    Event newEvent = new Event(e[0], e[1]);
+                    taskList.add(newEvent);
+                    System.out.println("\tGot it. I've added this task:\n\t\t" + newEvent + "\n\tNow you have "+ taskList.size() +" tasks in the list.\n");
+                    break;
+
+                case "deadline":
+                    String[] d = var.split("/by", 2);
+                    Deadline newDeadline = new Deadline(d[0], d[1]);
+                    taskList.add(newDeadline);
+                    System.out.println("\tGot it. I've added this task:\n\t\t" + newDeadline + "\n\tNow you have "+ taskList.size() +" tasks in the list.\n");
+                    break;
+
+                case "todo":
+                    ToDo newTodo = new ToDo(var);
+                    taskList.add(newTodo);
+                    System.out.println("\tGot it. I've added this task:\n\t\t" + newTodo + "\n\tNow you have "+ taskList.size() +" tasks in the list.\n");
+                    break;
+
                 default:
                     taskList.add(new Task(input));
                     System.out.println("\tadded: " + input + "\n");

@@ -4,7 +4,7 @@ public class Event extends Task {
 
     public Event(String description, String duration) {
         super(description);
-        this.duration = duration;
+        this.duration = duration.trim();
     }
 
     @Override
