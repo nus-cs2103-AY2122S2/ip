@@ -1,6 +1,6 @@
 public class ToDo extends Task {
     public ToDo(String input, int number){
-        super(input.substring(4,input.length()), number, null, "todo");
+        super(input.substring(4,input.length()), number, null, "T");
     }
 
     @Override
