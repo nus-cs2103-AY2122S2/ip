@@ -11,7 +11,7 @@ public class Duke {
         while(true) {
             System.out.print("Me   : ");
             String message = sc.nextLine();
-            String[] splitStr = message.split(" ");
+            String[] splitStr = message.split(" ", 2);
             boolean exitLoop = false;
 
             switch(splitStr[0]) {
@@ -35,7 +35,8 @@ public class Duke {
                             Task updateT = list.get(index);
                             updateT.status = 1;
                             list.set(index, updateT);
-                            updateT.taskDone();
+                            System.out.println("Nice! I've marked this task as done");
+                            updateT.getStatus();
                         } else {
                             System.out.println("Invalid mark index");
                         }
@@ -52,7 +53,8 @@ public class Duke {
                             Task updateT = list.get(index);
                             updateT.status = 0;
                             list.set(index, updateT);
-                            updateT.taskUndo();
+                            System.out.println("Ooof! I've marked this task as undone");
+                            updateT.getStatus();
                         } else {
                             System.out.println("Invalid mark index");
                         }
@@ -61,10 +63,31 @@ public class Duke {
                         System.out.println("Invalid mark index");
                     }
                     break;
-                default:
-                    Task newT = new Task(message);
+                case "todo":
+                    Task newT = new Todo(splitStr[1], "T");
                     list.add(newT);
-                    System.out.println("Duke has added :" + message);
+                    newT.addedTask();
+                    newT.getStatus();
+                    System.out.println("Now you've got " + list.size() +" tasks in the list.");
+                    break;
+                case "deadline":
+                    String[] tempStr = splitStr[1].split(" /by ");
+                    Task newD = new Deadline(tempStr[0], "D", tempStr[1]);
+                    list.add(newD);
+                    newD.addedTask();
+                    newD.getStatus();
+                    System.out.println("Now you've got " + list.size() +" tasks in the list.");
+                    break;
+                case "event":
+                    String[] tempStr2 = splitStr[1].split(" /at ");
+                    Task newE = new Event(tempStr2[0], "E", tempStr2[1]);
+                    list.add(newE);
+                    newE.addedTask();
+                    newE.getStatus();
+                    System.out.println("Now you've got " + list.size() +" tasks in the list.");
+                    break;
+                default:
+                    System.out.println("Invalid Task.\nValid tasks are: \"todo\", \"deadline\" and \"event\"");
                     break;
 
             }
