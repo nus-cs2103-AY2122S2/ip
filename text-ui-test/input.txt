@@ -1,0 +1,19 @@
+list
+todo eat
+todo drink water
+event study /at 3-5 pm
+event sleep /at 10pm - 6am
+deadline CS2103T Week 1 commit /by 20 Jan
+deadline project /by 25 Jan
+list
+mark 3
+mark 4
+list
+unmark 3
+mark 5
+list
+event run /at 5-7pm
+deadline homework /by tomorrow
+todo submit this work
+list
+bye
