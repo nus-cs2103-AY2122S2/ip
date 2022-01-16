@@ -15,18 +15,24 @@ public class TaskList {
         int taskId = generateNewTaskId();
         ToDo toDo = new ToDo(taskId, name);
         tasks.add(toDo);
+
+        showNumberOfTasks();
     }
 
     public void addDeadline(String name, String by) {
         int taskId = generateNewTaskId();
         Deadline deadline = new Deadline(taskId, name, by);
         tasks.add(deadline);
+
+        showNumberOfTasks();
     }
 
     public void addEvent(String name, String at) {
         int taskId = generateNewTaskId();
         Event event = new Event(taskId, name, at);
         tasks.add(event);
+
+        showNumberOfTasks();
     }
 
     public void markTask(int taskId) {
@@ -58,5 +64,9 @@ public class TaskList {
                 System.out.format("%d. %s\n", i + 1, tasks.get(i));
             }
         }
+    }
+
+    public void showNumberOfTasks() {
+        System.out.format("Now you have %d tasks in the list.\n", this.tasks.size());
     }
 }
