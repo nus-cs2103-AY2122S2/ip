@@ -1,17 +1,18 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 /**
  * The FunBoxGear class contains all the functionalities of FunBox.
  */
 public class FunBoxGear {
     public final String GREETING = "Yo! I am FunBox [0 _ 0] \nWhat can I do for you?";
-    private int noOfItems;
-    private Task[] tasksList;
+    // private Task[] tasksList;
+    private ArrayList<Task> tasksList;
 
     /**
      * Constructor for FunBoxGear
      */
     public FunBoxGear() {
-        this.noOfItems = 0;
-        this.tasksList = new Task[100];
+        this.tasksList = new ArrayList<Task>();
     }
 
     /**
@@ -42,6 +43,9 @@ public class FunBoxGear {
         case "unmark":
             this.markUndone(formattedMsg);
             return true;
+        case "delete":
+            this.deleteTask(formattedMsg);
+            return true;
         default:
             this.addToList(formattedMsg, formattedMsg[0]);
             return true;
@@ -58,29 +62,29 @@ public class FunBoxGear {
     private void addToList(String[] formattedMsg, String type) {
         String description = this.getMessage(formattedMsg);
         String[] resultArr;
-
+        int noOfItems;
         try {
             switch (type) {
             case "event":
                 this.isDescriptionError(description, type);
                 resultArr = this.getDescriptionAndDate(description, type);
-                this.tasksList[noOfItems] = new Event(resultArr[0], resultArr[1]);
+                this.tasksList.add(new Event(resultArr[0], resultArr[1]));
                 break;
             case "deadline":
                 this.isDescriptionError(description, type);
                 resultArr = this.getDescriptionAndDate(description, type);
-                this.tasksList[noOfItems] = new Deadline(resultArr[0], resultArr[1]);
+                this.tasksList.add(new Deadline(resultArr[0], resultArr[1]));
                 break;
             case "todo":
                 this.isDescriptionError(description, type);
-                this.tasksList[noOfItems] = new ToDo(description);
+                this.tasksList.add(new ToDo(description));
                 break;
             default:
                 throw new FunBoxExceptions("ERROR! I do not know what the commands means :<");
             }
+            noOfItems = this.tasksList.size();
             System.out.println("Gotcha! I've added this task!");
-            System.out.println(this.tasksList[noOfItems]);
-            noOfItems++;
+            System.out.println(this.tasksList.get(noOfItems - 1));
             System.out.println("Now you have " + noOfItems + " tasks in the list!");
         } catch (FunBoxExceptions e) {
             System.out.println(e.getMessage());
@@ -105,8 +109,8 @@ public class FunBoxGear {
      */
     private void showList() {
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < this.noOfItems; i++) {
-            System.out.println((i + 1) + "." + this.tasksList[i]);
+        for (int i = 0; i < this.tasksList.size(); i++) {
+            System.out.println((i + 1) + "." + this.tasksList.get(i));
         }
     }
 
@@ -169,7 +173,7 @@ public class FunBoxGear {
      */
     private void markDone(String[] messageArr) {
         int taskNo = Integer.parseInt(messageArr[1]);
-        this.tasksList[taskNo - 1].setDone();
+        this.tasksList.get(taskNo - 1).setDone();
     }
 
     /**
@@ -180,7 +184,22 @@ public class FunBoxGear {
      */
     private void markUndone(String[] messageArr) {
         int taskNo = Integer.parseInt(messageArr[1]);
-        this.tasksList[taskNo - 1].setUndone();
+        this.tasksList.get(taskNo - 1).setUndone();
+    }
+
+    /**
+     * Delete the task requested by the user
+     *
+     * @param messageArr The formatted message of the user, the second item of the array typically contains the
+     *                   taskNo to be deleted
+     */
+    private void deleteTask(String[] messageArr) {
+        int taskNo = Integer.parseInt(messageArr[1]) - 1;
+        Task temp = this.tasksList.get(taskNo);
+        this.tasksList.remove(taskNo);
+        System.out.println("Noted! I've removed this task:");
+        System.out.println(temp);
+        System.out.println("Now you have " + this.tasksList.size() + " tasks in the list");
     }
 
     /**
