@@ -100,7 +100,7 @@ What should Charizard do next?
 
 What should Charizard do next?
 ********************************************************************************
-    OOPS! Charizard insists of knowing both name and deadline of the new task.
+    OOPS! Charizard insists of knowing both name and time of the new task.
     Try using "deadline <task_name> /by <deadline>".
 ********************************************************************************
 
@@ -111,7 +111,7 @@ What should Charizard do next?
 
 What should Charizard do next?
 ********************************************************************************
-    OOPS! Charizard insists of knowing both name and deadline of the new task.
+    OOPS! Charizard insists of knowing both name and time of the new task.
     Try using "deadline <task_name> /by <deadline>".
 ********************************************************************************
 
