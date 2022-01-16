@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.logging.Handler;
 
 public class Duke {
     public static void main(String[] args) {
@@ -16,12 +15,22 @@ public class Duke {
         while (true) {
             Scanner scn = new Scanner(System.in);
             String input = scn.nextLine();
-            if (input.equals(Handlers.BYE.label)) {
+            String[] inputArr = input.split(" ");
+            String cmd = inputArr[0];
+            if (cmd.equals(Handlers.BYE.label)) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
-            } else if (input.equals(Handlers.LIST.label)) {
+            } else if (cmd.equals(Handlers.LIST.label)) {
                 System.out.println("Fetching all records...");
                 System.out.println(tlist.toString());
+            } else if (cmd.equals(Handlers.MARK.label)) {
+                System.out.println("Nice! I've marked this task as done!");
+                Todo t = tlist.mark(Integer.parseInt(inputArr[1]));
+                System.out.println(t.toString() + "\n");
+            } else if (cmd.equals(Handlers.UNMARK.label)) {
+                System.out.println("Okay! I've marked this as undone!");
+                Todo t = tlist.unmark(Integer.parseInt(inputArr[1]));
+                System.out.println(t.toString() + "\n");
             } else {
                 Todo todo = new Todo(input);
                 tlist.addTodo(todo);

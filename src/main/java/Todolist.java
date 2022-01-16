@@ -1,3 +1,5 @@
+import java.lang.reflect.Array;
+
 public class Todolist {
 
     private Todo[] todos;
@@ -13,6 +15,18 @@ public class Todolist {
                 return;
             }
         }
+    }
+
+    public Todo mark(int index) {
+        Todo t = (Todo)Array.get(this.todos, index - 1);
+        t.mark();
+        return t;
+    }
+
+    public Todo unmark(int index) {
+        Todo t = (Todo)Array.get(this.todos, index - 1);
+        t.unmark();
+        return t;
     }
 
     @Override
