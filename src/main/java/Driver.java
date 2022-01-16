@@ -6,7 +6,7 @@ import java.util.Scanner;
  */
 public class Driver {
     private ArrayList<Task> tasks;
-    private String line = "\t____________________________________________________________";
+    private final String line = "\t____________________________________________________________";
 
     /*
      * Constructor that initializes the tasks arraylist
@@ -39,12 +39,32 @@ public class Driver {
     }
 
     private void addTask(String task) {
-        this.tasks.add(new Task(task));
-        System.out.println(line + "\n\t added: " + task + "\n" + line);
+        String[] taskString = task.split(" ",2);
+        String type = taskString[0];
+        try {
+            Task t = null;g
+            if (type.equals("todo")) t = new ToDo(taskString[1]);
+            else if (type.equals("deadline")) {
+                String[] descriptionAndDate = taskString[1].split(" /by ", 2);
+                t = new Deadline(descriptionAndDate[0], descriptionAndDate[1]);
+            } else if (type.equals("event")) {
+                String[] descriptionAndTime = taskString[1].split(" /at ", 2);
+                t = new Event(descriptionAndTime[0], descriptionAndTime[1]);
+            }
+            if (t == null) {
+                System.out.println(line + "\n\tPlease add a valid Task type\n" + line);
+            } else {
+                this.tasks.add(t);
+                System.out.println(line + "\n\tGot it. I've added this task:\n\t\t" + t.toString() + "\n\t" +
+                        "Now you have " + tasks.size() + " in the list.\n" + line);
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(line + "\n\tPlease input a valid Task command\n" + line);
+        }
     }
 
     private void displayTasks() {
-        System.out.println(line);
+        System.out.println(line + "\n\tHere are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println("\t" + (i+1) + ". " + tasks.get(i).toString());
         }

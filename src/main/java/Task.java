@@ -1,7 +1,7 @@
 /**
  * Class that encapsulates a Task
  */
-public class Task {
+public abstract class Task {
     private final String description;
     private boolean isDone;
 
