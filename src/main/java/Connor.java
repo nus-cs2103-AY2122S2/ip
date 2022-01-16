@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Connor {
-    private static final String CURRENT_VERSION = "Version 1.3";
+    private static final String CURRENT_VERSION = "Version 1.4";
     private static final String LINE = "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━";
     private static final String INDENT = "    ";
 
@@ -11,7 +11,7 @@ public class Connor {
     private static ArrayList<Task> xs = new ArrayList<>();
 
     private static void interpret(String s) {
-        // Standardise Format
+        // Split between command and description
         String[] statement = s.split(" ",2);
         switch (statement[0].toLowerCase()) {
         case "exit":
