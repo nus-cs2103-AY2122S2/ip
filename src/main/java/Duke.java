@@ -1,10 +1,10 @@
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     static String line = "------------------------------------";
     static Scanner scanner = new Scanner(System.in);
-    static Task[] arr = new Task[100];
+    static ArrayList<Task> arr = new ArrayList<>();
 
     public static <T> int getLength(T[] arr){
         int count = 0;
@@ -37,11 +37,8 @@ public class Duke {
 
             // List Feature
             else if (input.equals("list")) {
-                for (int i = 0; i < arr.length; i++) {
-                    if (arr[i] == null) {
-                        break;
-                    }
-                    System.out.println(i+1 + "." + arr[i].toString());
+                for (int i = 0; i < arr.size(); i++) {
+                    System.out.println(i+1 + "." + arr.get(i).toString());
                 }
                 System.out.println(line);
             }
@@ -52,25 +49,46 @@ public class Duke {
                     String s = input.replaceAll("\\D+", "");
                     int clean = Integer.parseInt(s) - 1;  // Parse to find what number in list to toggle
                     // Edge Case
-                    if (arr[clean] == null) {
+                    if (clean > arr.size()) {
                         System.out.println("Error! No tasked added");
                     }
                     // Mark
                     else if (input.toCharArray()[0] != 'u') {
-                        arr[clean].setMarked();
+                        arr.get(clean).setMarked();
                         System.out.println("Nice! I've marked this task as done:\n " +
-                                "   " + arr[clean].toString());
+                                "   " + arr.get(clean).toString());
                     }
                     // Unmark
                     else {
-                        arr[clean].setUnmarked();
+                        arr.get(clean).setUnmarked();
                         System.out.println("OK, I've marked this task as not done yet:\n " +
-                                "   " + arr[clean].toString());
+                                "   " + arr.get(clean).toString());
                     }
                 }
                  catch (NumberFormatException e) {
                      System.out.println("Don't be cheeky. Please write something that makes sense.");
                  }
+                System.out.println(line);
+            }
+
+            // Delete Feature
+            else if (input.contains("delete")) {
+                try {
+                    String s = input.replaceAll("\\D+", "");
+                    int delete = Integer.parseInt(s) - 1;  // Parse to find what number in list to delete
+                    // Edge Case
+                    if (delete > arr.size()) {
+                        System.out.println("Error! Nothing to delete!");
+                    } else {
+                        System.out.println("Noted. I've removed this task: \n   " +
+                                arr.get(delete).toString());
+                        arr.remove(delete);
+                        System.out.println("Now you have " + arr.size() + " tasks in the list.");
+                    }
+                }
+                catch (NumberFormatException e) {
+                    System.out.println("Error! Nothing to delete!");
+                }
                 System.out.println(line);
             }
 
@@ -81,11 +99,10 @@ public class Duke {
                     String task = nondead.split(" /by ", 2)[0]; // Split to task
                     String date = nondead.split(" /by ", 2)[1]; // Split to date
                     Deadline newDeadline = new Deadline(task, date);
-                    int itemsInList = getLength(arr) + 1;
+                    arr.add(newDeadline);
                     System.out.println("Got it! I've added this task: \n    " +
                             newDeadline.toString() + "\n" +
-                            "Now you have " + itemsInList + " tasks in the list.");
-                    arr[getLength(arr)] = newDeadline;
+                            "Now you have " + arr.size() + " tasks in the list.");
                 }
                  catch (IndexOutOfBoundsException e) {
                     System.out.println("Don't be cheeky. Give me a deadline to stress you over.");
@@ -100,11 +117,10 @@ public class Duke {
                     String task = nonevent.split(" /at ", 2)[0]; // Split to task
                     String date = nonevent.split(" /at ", 2)[1]; // Split to date
                     Event newEvent = new Event(task, date);
-                    int itemsInList = getLength(arr) + 1;
+                    arr.add(newEvent);
                     System.out.println("Got it! I've added this task: \n    " +
                             newEvent.toString() + "\n" +
-                            "Now you have " + itemsInList + " tasks in the list.");
-                    arr[getLength(arr)] = newEvent;
+                            "Now you have " + arr.size() + " tasks in the list.");
                 }
                  catch (IndexOutOfBoundsException e) {
                     System.out.println("Don't be cheeky. Give me an event to record.");
@@ -117,11 +133,10 @@ public class Duke {
                 try {
                     String word = input.split(" ", 2)[1]; // Remove instruction
                     ToDo newToDo = new ToDo(word);
-                    int itemsInList = getLength(arr) + 1;
+                    arr.add(newToDo);
                     System.out.println("Got it! I've added this task: \n    " +
                             newToDo.toString() + "\n" +
-                            "Now you have " + itemsInList + " tasks in the list.");
-                    arr[getLength(arr)] = newToDo;
+                            "Now you have " + arr.size() + " tasks in the list.");
                 }
                  catch (IndexOutOfBoundsException e) {
                     System.out.println("Don't be cheeky. Give me something to do.");
