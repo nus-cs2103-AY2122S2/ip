@@ -2,20 +2,20 @@
  * A task represents an instruction inputted to Duke by a user.
  * At this stage, a task has minimally a name (description).
  */
-class Task {
+class Instruction {
     private String description;
 
     /**
-     * Constructor of a task.
+     * Constructor of an instruction.
      *
      * @param description the description of the task as inputted by the user.
      */
-    protected Task(String description) {
+    protected Instruction(String description) {
         this.description = description;
     }
 
     /**
-     * @return the description of the task.
+     * @return the description of the instruction.
      */
     protected String getDescription() {
         return this.description;
