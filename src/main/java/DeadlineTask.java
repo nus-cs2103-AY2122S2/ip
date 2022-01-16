@@ -1,26 +1,26 @@
 /**
- * Deadline task which inherits from Task class.
+ * DeadlineTask which inherits from Task class.
  */
-public class Deadline extends Task {
+public class DeadlineTask extends Task {
 
     /** Deadline of task. */
     private String by;
 
     /**
-     * Constructor for Deadline class.
+     * Constructor for DeadlineTask class.
      *
-     * @param desc Description of deadline task.
-     * @param by Deadline of deadline task.
+     * @param desc Description of DeadlineTask.
+     * @param by Deadline of DeadlineTask.
      */
-    public Deadline(String desc, String by) {
+    public DeadlineTask(String desc, String by) {
         super(desc);
         this.by = by;
     }
 
     /**
-     * String representation of deadline task.
+     * String representation of DeadlineTask.
      *
-     * @return String representation of deadline task.
+     * @return String representation of DeadlineTask.
      */
     @Override
     public String toString() {

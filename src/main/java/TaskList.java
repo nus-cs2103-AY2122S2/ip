@@ -28,17 +28,17 @@ public class TaskList {
         String[] split;
         switch (type) {
             case "todo":
-                cur = new Todo(s);
+                cur = new TodoTask(s);
                 break;
             case "deadline":
                 split = s.split("/");
-                time = split[1].substring(3); // time
-                cur = new Deadline(split[0], time);
+                time = split[1].substring(split[1].indexOf(" ") + 1); // time
+                cur = new DeadlineTask(split[0], time);
                 break;
             case "event":
                 split = s.split("/");
-                time = split[1].substring(3); // time
-                cur = new Event(split[0], time);
+                time = split[1].substring(split[1].indexOf(" ") + 1); // time
+                cur = new EventTask(split[0], time);
                 break;
         }
         tasks.add(cur);

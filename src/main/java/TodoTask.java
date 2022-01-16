@@ -1,21 +1,21 @@
 /**
- * Todo task which inherits from Task class.
+ * TodoTask task which inherits from Task class.
  */
-public class Todo extends Task {
+public class TodoTask extends Task {
 
     /**
-     * Constructor for Todo class.
+     * Constructor for TodoTask class.
      *
-     * @param desc Description of Todo task.
+     * @param desc Description of TodoTask.
      */
-    public Todo(String desc) {
+    public TodoTask(String desc) {
         super(desc);
     }
 
     /**
-     * String representation of Todo task.
+     * String representation of TodoTask.
      *
-     * @return String representation of Todo task.
+     * @return String representation of TodoTask.
      */
     @Override
     public String toString() {

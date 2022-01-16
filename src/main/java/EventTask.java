@@ -1,26 +1,26 @@
 /**
- * Event task which inherits from Task class.
+ * EventTask task which inherits from Task class.
  */
-public class Event extends Task {
+public class EventTask extends Task {
 
     /** Duration of event. */
     private String at;
 
     /**
-     * Constructor for Event class.
+     * Constructor for EventTask class.
      *
-     * @param desc Description of event task.
-     * @param at Duration of event task.
+     * @param desc Description of EventTask.
+     * @param at Duration of EventTask.
      */
-    public Event(String desc, String at) {
+    public EventTask(String desc, String at) {
         super(desc);
         this.at = at;
     }
 
     /**
-     * String representation of event task.
+     * String representation of EventTask.
      *
-     * @return String representation of event task.
+     * @return String representation of EventTask.
      */
     @Override
     public String toString() {
