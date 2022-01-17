@@ -1,8 +1,9 @@
-public class Task {
+public abstract class Task {
+    private TaskType type;
     private String description;
     private boolean isDone;
 
-    public Task(String description) {
+    public Task(TaskType type, String description) {
         this.description = description;
         this.isDone = false;
     }

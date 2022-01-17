@@ -93,7 +93,8 @@ public class Duke {
                 linePrinter.print(String.format("\t %s", task.getReadableString()));
             }
         } else {
-            taskStore.addTask(command);
+            // todo: Replace placeholder task type with proper creation logic
+            taskStore.addTask(new Todo(command));
             linePrinter.print(String.format("added: %s", command));
         }
     }

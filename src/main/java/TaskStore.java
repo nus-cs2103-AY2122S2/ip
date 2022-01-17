@@ -12,10 +12,6 @@ public class TaskStore {
         this.tasks.add(task);
     }
 
-    public void addTask(String task) {
-        this.tasks.add(new Task(task));
-    }
-
     public ArrayList<Task> getTasks() {
         return this.tasks;
     }
