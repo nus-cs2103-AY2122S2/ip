@@ -7,6 +7,7 @@ public class Duke {
     public static void main(String[] args) {
         String greet = "Hello! I'm Duke\n" + "What can I do for you?\n";
         String goodbye = "Bye. Hope to see you again soon!";
+        String conformation = "Got it. I've added this task:";
 
         System.out.println(greet);
 
@@ -29,13 +30,35 @@ public class Duke {
                         System.out.println(i + ". " + currTask);
                     }
                 }
+            } else if (first_word.equals("deadline")) {
+                System.out.println(conformation);
+                String[] actions = remaining_word.trim().split("/by", 2);
+                Deadline currTask = new Deadline(actions[0].trim(), actions[1].trim());
+                taskList[taskNum] = currTask;
+                taskNum++;
+                System.out.println(currTask + "\n" + "Now you have " + taskNum
+                        + " tasks in the list.");
+            } else if (first_word.equals("event")) {
+                System.out.println(conformation);
+                String[] actions = remaining_word.trim().split("/at", 2);
+                Event currTask = new Event(actions[0].trim(), actions[1].trim());
+                taskList[taskNum] = currTask;
+                taskNum++;
+                System.out.println(currTask + "\n" + "Now you have " + taskNum
+                        + " tasks in the list.");
+            } else if (first_word.equals("todo")) {
+                System.out.println(conformation);
+                ToDo currTask = new ToDo(remaining_word.trim());
+                taskList[taskNum] = currTask;
+                taskNum++;
+                System.out.println(currTask + "\n" + "Now you have " + taskNum
+                        + " tasks in the list.");
             } else if (first_word.equals("mark")) {
                 int currTaskNum = Integer.parseInt(remaining_word.trim());
                 Task currTask = taskList[currTaskNum - 1];
                 currTask.setChecked();
                 System.out.println("Nice! I've marked this task as done:\n"
                         + currTask);
-
             } else if (first_word.equals("unmark")) {
                 int currTaskNum = Integer.parseInt(remaining_word.trim());
                 Task currTask = taskList[currTaskNum - 1];
