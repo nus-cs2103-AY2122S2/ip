@@ -33,7 +33,7 @@ public class Spark {
                     System.out.println("Cool, see you around!");
 
                 } else if (command.equals("list")) {
-                    taskList.print();
+                    taskList.showTaskList();
 
                 } else if (command.equals("mark")) {
                     int taskId = Integer.parseInt(tokens[1]);
@@ -59,8 +59,10 @@ public class Spark {
                     } else if (command.equals("todo")) {
                         String toDoParams = getToDoParams(tokens);
                         taskList.addToDo(toDoParams);
+
                     } else {
                         throw new UnrecognisedCommandException();
+
                     }
                 }
             } catch (FormatException e) {

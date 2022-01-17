@@ -11,38 +11,44 @@ public class TaskList {
         this.tasks = new ArrayList<>(100);
     }
 
-    private int generateNewTaskId() {
-        return tasks.size() + 1; // taskId numbering starts from 1
-    }
-
     public void addToDo(String name) {
-        int taskId = generateNewTaskId();
-        ToDo toDo = new ToDo(taskId, name);
+        ToDo toDo = new ToDo(name);
         tasks.add(toDo);
+
+        System.out.println("Got it, I've added this todo:");
+        System.out.format("   %s\n", toDo);
 
         showNumberOfTasks();
     }
 
     public void addDeadline(String name, String by) {
-        int taskId = generateNewTaskId();
-        Deadline deadline = new Deadline(taskId, name, by);
+        Deadline deadline = new Deadline(name, by);
         tasks.add(deadline);
+
+        System.out.println("Got it, I've added this deadline:");
+        System.out.format("   %s\n", deadline);
 
         showNumberOfTasks();
     }
 
     public void addEvent(String name, String at) {
-        int taskId = generateNewTaskId();
-        Event event = new Event(taskId, name, at);
+        Event event = new Event(name, at);
         tasks.add(event);
+
+        System.out.println("Got it, I've added this event:");
+        System.out.format("   %s\n", event);
 
         showNumberOfTasks();
     }
 
     public void markTask(int taskId) {
         try {
-            Task t = findTaskById(taskId);
+            int index = taskId - 1;
+            Task t = getTaskByIndex(index);
             t.mark();
+
+            System.out.println("Awesome! I've marked this task as done:");
+            System.out.format("   %s\n", t);
         } catch (TaskNotFoundException e) {
             System.out.println(e.getMessage());
         }
@@ -50,8 +56,12 @@ public class TaskList {
 
     public void unMarkTask(int taskId) {
         try {
-            Task t = findTaskById(taskId);
+            int index = taskId - 1;
+            Task t = getTaskByIndex(index);
             t.unMark();
+
+            System.out.println("Okay, I've marked this task as not done yet:");
+            System.out.format("   %s\n", t);
         } catch (TaskNotFoundException e) {
             System.out.println(e.getMessage());
         }
@@ -59,10 +69,11 @@ public class TaskList {
 
     public void deleteTask(int taskId) {
         try {
-            Task t = findTaskById(taskId);
+            int index = taskId - 1;
+            Task t = getTaskByIndex(index);
 
             System.out.println("Noted. I've removed this task:");
-            System.out.println(t);
+            System.out.format("   %s\n", t);
 
             tasks.remove(t);
             showNumberOfTasks();
@@ -71,13 +82,13 @@ public class TaskList {
         }
     }
 
-    public void print() {
+    public void showTaskList() {
         // if there are no tasks, inform the user
         if (tasks.size() == 0) {
             System.out.println("No tasks found! (trust me, I've looked everywhere)");
         } else {
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.format("%d. %s\n", i + 1, tasks.get(i));
+                System.out.format("    %d. %s\n", i + 1, tasks.get(i));
             }
         }
     }
@@ -86,20 +97,11 @@ public class TaskList {
         System.out.format("Now you have %d tasks in the list.\n", this.tasks.size());
     }
 
-    private Task findTaskById(int taskId) throws TaskNotFoundException {
-        Task match = null;
-
-        for (Task t : tasks) {
-            if (t.taskId == taskId) {
-                match = t;
-                break;
-            }
-        }
-
-        if (match == null) {
+    private Task getTaskByIndex(int index) throws TaskNotFoundException {
+        try {
+            return tasks.get(index);
+        } catch (IndexOutOfBoundsException e) {
             throw new TaskNotFoundException();
         }
-
-        return match;
     }
 }
