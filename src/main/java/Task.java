@@ -4,6 +4,7 @@ public abstract class Task {
     private boolean isDone;
 
     public Task(TaskType type, String description) {
+        this.type = type;
         this.description = description;
         this.isDone = false;
     }
@@ -29,6 +30,7 @@ public abstract class Task {
     }
 
     public String getReadableString() {
-        return String.format("[%s] %s", this.getStatusIcon(), this.description);
+        return String.format("[%s][%s] %s", this.type.getShorthand(), this.getStatusIcon(),
+                this.description);
     }
 }
