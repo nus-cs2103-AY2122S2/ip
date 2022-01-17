@@ -8,21 +8,32 @@ public class Duke {
         start();
         Scanner sc = new Scanner(System.in);
         String input;
-        Notebook notebook = new Notebook();
+        TaskManager notebook = new TaskManager();
 
         do {
             System.out.print(INPUT_NAME);
             input = sc.nextLine();
             String output = OUTPUT_NAME;
+            Command c = Command.getCommand(input.split(" ")[0]);
 
             // main
-            if (input.equals("list")) {
-                output += "\n" + notebook;
-            } else if (input.equals("bye")) {
-                output += "don't leave me don't leave me.";
-            } else {
-                notebook.addTask(input);
-                output += "added " + input;
+            switch (c) {
+                case BYE:
+                    output += "don't leave me don't leave me.";
+                    break;
+                case LIST:
+                    output += "\n" + notebook;
+                    break;
+                case MARK:
+                    output += "I have marked this as done. \n";
+                    output += notebook.markTask(Integer.parseInt(input.split(" ")[1]));
+                    break;
+                case UNMARK:
+                    output += "I have unmarked this task. \n";
+                    output += notebook.unmarkTask(Integer.parseInt(input.split(" ")[1]));
+                    break;
+                default:
+                    output += notebook.addTask(input);
             }
             System.out.println(output);
         } while (!input.equals("bye"));
