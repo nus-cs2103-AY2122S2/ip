@@ -80,7 +80,10 @@ public class Duke {
             if (task == null) {
                 linePrinter.print("Are you sure the task number is correct?");
             } else {
-                if (commandLowerCase.startsWith(COMMAND_MARK)) {
+                final boolean newState = commandLowerCase.startsWith(COMMAND_MARK);
+                if (task.isDone() == newState) {
+                    linePrinter.print(String.format("Task is already %s:", newState ? "done" : "not done"));
+                } else if (newState) {
                     task.markAsDone();
                     linePrinter.print("Great Job Finishing the task:");
                 } else {
