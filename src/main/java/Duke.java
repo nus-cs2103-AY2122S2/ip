@@ -5,8 +5,12 @@ public class Duke {
     private static final String SEPARATOR = "\t------------------------------------";
     private static final String BOT_NAME = "Megumin";
     private static final String COMMAND_EXIT = "bye";
+    private static final String COMMAND_LIST = "list";
+
+    private static TaskStore taskStore;
 
     public static void main(String[] args) {
+        init();
         greet();
 
         Scanner sc = new Scanner(System.in);
@@ -26,6 +30,10 @@ public class Duke {
         });
     }
 
+    private static void init() {
+        taskStore = new TaskStore();
+    }
+
     private static void greet() {
         printBlock((linePrinter) -> {
             linePrinter.print("Hi! I'm " + BOT_NAME);
@@ -42,7 +50,15 @@ public class Duke {
     }
 
     private static void processCommand(String command, IPrintable linePrinter) {
-        linePrinter.print(command);
+        if (command.equalsIgnoreCase(COMMAND_LIST)) {
+            taskStore.forEach((index, task) -> {
+                // Note that index passed into this consumer is 0-based. Increment by 1 for readability
+                linePrinter.print(String.format("%d. %s", index + 1, task.getDescription()));
+            });
+        } else {
+            taskStore.addTask(command);
+            linePrinter.print(String.format("added: %s", command));
+        }
     }
 
     private static void printBlock(Consumer<IPrintable> action) {
