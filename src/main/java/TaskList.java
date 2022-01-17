@@ -27,7 +27,11 @@ public class TaskList {
         return size;
     }
 
-    public Task getTask(int index) {
+    public Task getTask(int index) throws OutOfRangeException {
+        if (size == 0 || index < 0 || index >= size) {
+            throw new OutOfRangeException(
+                    String.format("Sorry Master, please enter an integer between 1 and %d (inclusive)", size));
+        }
         return taskList.get(index);
     }
 
@@ -47,17 +51,54 @@ public class TaskList {
                 + "\tYou have %d task(s) currently", task, size));
     }
 
-    public void markTask(int index) {
-        Task currentTask = getTask(index);
-        currentTask.markDone();
-        System.out.println("\tYes Master, I have marked this task as done:");
-        System.out.println(String.format("\t    %s", currentTask));
+    public void addTask(String inst, String task) {
+        try {
+            switch (inst) {
+            case "todo":
+                addTask(new ToDo(task));
+                break;
+            case "deadline":
+                addTask(new Deadline(task));
+                break;
+            case "event":
+                addTask(new Event(task));
+                break;
+            }
+        } catch (EmptyMessageException emptyEx) {
+            System.out.println("\t" + emptyEx.getMessage());
+        } catch (DateFormatException dateEx) {
+            System.out.println("\t" + dateEx.getMessage());
+        }
     }
 
-    public void unmarkTask(int index) {
-        Task currentTask = getTask(index);
-        currentTask.markNotDone();
-        System.out.println("\tYes Master, I have marked this task as not done yet:");
-        System.out.println(String.format("\t    %s", currentTask));
+    public void markTask(String message) {
+        try {
+            int index = Integer.valueOf(message);
+            Task currentTask = getTask(index - 1);
+            currentTask.markDone();
+
+            System.out.println("\tYes Master, I have marked this task as done:");
+            System.out.println(String.format("\t    %s", currentTask));
+        } catch (NumberFormatException numEx) {
+            System.out.println("\tSorry Master, you have to enter an integer after the \"mark\" command");
+        } catch (OutOfRangeException rangeEx) {
+            System.out.println("\t" + rangeEx.getMessage());
+        }
+
+    }
+
+    public void unmarkTask(String message) {
+        try {
+            int index = Integer.valueOf(message);
+            Task currentTask = getTask(index - 1);
+            currentTask.markNotDone();
+
+            System.out.println("\tYes Master, I have marked this task as not done yet:");
+            System.out.println(String.format("\t    %s", currentTask));
+        } catch (NumberFormatException numEx) {
+            System.out.println("\tSorry Master, you have to enter an integer after the \"unmark\" command");
+        } catch (OutOfRangeException rangeEx) {
+            System.out.println("\t" + rangeEx.getMessage());
+        }
     }
 }

@@ -1,5 +1,5 @@
 public class ToDo extends Task {
-    public ToDo(String message) {
+    public ToDo(String message) throws EmptyMessageException {
         super(message);
     }
 

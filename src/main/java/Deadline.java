@@ -1,6 +1,19 @@
 public class Deadline extends Task {
     protected String time;
 
+    public Deadline(String message) throws EmptyMessageException, DateFormatException {
+        String[] taskArray = message.split("/by");
+
+        if (taskArray[0].equals("")) {
+            throw new EmptyMessageException();
+        } else if (taskArray.length == 1) {
+            throw new DateFormatException("Sorry Master, when is the due? (include /by)");
+        }
+
+        super.taskMessage = taskArray[0].stripLeading().stripTrailing();
+        time = taskArray[1].stripLeading().stripTrailing();
+    }
+
     public Deadline(String message, String deadline) {
         super(message);
         time = deadline;
@@ -10,5 +23,5 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + time + ")";
     }
-    
+
 }

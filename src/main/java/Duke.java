@@ -21,7 +21,7 @@ public class Duke {
 
         String introMessage = String.format("\t%s\n"
                 + "%s\n"
-                + "\tDear Master, I'm Ari, your Personal Assistant Chatbot\n"
+                + "\tDear Master, I am Ari, your Personal Assistant Chatbot\n"
                 + "\tWhat can I do for you?\n" + "\t%s", LINE_BREAK, logo, LINE_BREAK);
         System.out.println(introMessage + "\n");
 
@@ -46,52 +46,28 @@ public class Duke {
 
         System.out.println("\t" + LINE_BREAK);
 
-        String msg;
-        String time;
-        int i;
+        String msg = String.join(" ", Arrays.copyOfRange(cmdList, 1, cmdList.length));
         switch (instr) {
         case "list":
             System.out.println(String.format("%s", toDoList));
             break;
         case "mark":
-            int markIndex = Integer.valueOf(cmdList[1]);
-            toDoList.markTask(markIndex - 1);
+            toDoList.markTask(msg);
             break;
         case "unmark":
-            int unmarkIndex = Integer.valueOf(cmdList[1]);
-            toDoList.unmarkTask(unmarkIndex - 1);
+            toDoList.unmarkTask(msg);
             break;
         case "todo":
-            msg = String.join(" ", Arrays.copyOfRange(cmdList, 1, cmdList.length));
-
-            toDoList.addTask(new ToDo(msg));
+            toDoList.addTask(instr, msg);
             break;
         case "deadline":
-            for (i = 1; i < cmdList.length; i++) {
-                if (cmdList[i].equals("/by")) {
-                    break;
-                }
-            }
-
-            msg = String.join(" ", Arrays.copyOfRange(cmdList, 1, i));
-            time = String.join(" ", Arrays.copyOfRange(cmdList, i + 1, cmdList.length));
-
-            toDoList.addTask(new Deadline(msg, time));
+            toDoList.addTask(instr, msg);
             break;
         case "event":
-            for (i = 1; i < cmdList.length; i++) {
-                if (cmdList[i].equals("/at")) {
-                    break;
-                }
-            }
-
-            msg = String.join(" ", Arrays.copyOfRange(cmdList, 1, i));
-            time = String.join(" ", Arrays.copyOfRange(cmdList, i + 1, cmdList.length));
-            
-            toDoList.addTask(new Event(msg, time));
+            toDoList.addTask(instr, msg);
             break;
         default:
-            toDoList.addTask(message);
+            System.out.println("\tI am sorry Master, I am afraid I do not know what you mean");
         }
 
         System.out.println("\t" + LINE_BREAK + "\n");

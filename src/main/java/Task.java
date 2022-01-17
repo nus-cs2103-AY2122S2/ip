@@ -2,8 +2,20 @@ public class Task {
     protected boolean isDone = false;
     protected String taskMessage;
 
-    public Task(String message) {
+    public Task(String message) throws EmptyMessageException {
+        if (message.equals("")) {
+            throw new EmptyMessageException();
+        }
+
         taskMessage = message;
+    }
+
+    protected Task(Task task) {
+        this(task.getTask());
+    }
+
+    protected Task() {
+        taskMessage = "";
     }
 
     @Override
