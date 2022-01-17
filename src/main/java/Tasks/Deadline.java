@@ -17,7 +17,7 @@ public class Deadline extends Task {
     @Override
     public String getStringCmd() {
         // mark status | type | descriptor | deadline
-        return super.getMarkStatus() + "&D&" + super.getTask() + "&" +  this.deadline;
+        return super.getMarkStatus() + "&D&" + super.getTask() + "&" + this.deadline;
     }
 
     private void dateFormatter(String dateTime) {

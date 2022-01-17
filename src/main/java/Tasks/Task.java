@@ -7,7 +7,7 @@ public abstract class Task {
 
     public abstract String getStringCmd();
 
-    public Task (String task, boolean markStatus) {
+    public Task(String task, boolean markStatus) {
         this.task = task;
         this.markStatus = markStatus;
     }
