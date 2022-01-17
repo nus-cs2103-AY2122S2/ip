@@ -185,6 +185,17 @@ public class Mnsky {
     }
 
     /**
+     * Deletes the task corresponding to the given index parameter, if it exists.
+     * @param input_split The input, split into an array using space.
+     * @throws MnskyException Thrown if the index parameter is missing, not an integer, or out of bounds of the list.
+     */
+    private void delete(String[] input_split) throws MnskyException {
+        int index = this.retrieveIndex("delete", input_split);
+        System.out.println(String.format("[MNSKY has deleted the task %s from the list.]", this.list.get(index)));
+        this.list.remove(index);
+    }
+
+    /**
      * Parses the input and executes the logic depending on the type of input.
      * @return True if the user input "bye" and thus wants to stop talking to the chatbot.
      *          False otherwise.
@@ -221,6 +232,10 @@ public class Mnsky {
 
                 case "deadline":
                     this.addDeadline(input_split);
+                    break;
+
+                case "delete":
+                    this.delete(input_split);
                     break;
 
                 default:
