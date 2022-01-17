@@ -1,10 +1,13 @@
 todo task A
 event task B /at idk hehe xd
 deadline task C /by yesterday oops
+list
 mark 1
 mark 2
 mark 3
+list
 unmark 1
 unmark 2
 unmark 3
+list
 bye

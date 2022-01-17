@@ -26,6 +26,12 @@ GOOD MORNING GENNERMEN from
       YOU STILL GOT 3 THINGS TO DO AH BETTER NOT FORGET!
    ____________________________________________________________
    ____________________________________________________________
+      NEED ME TO REMIND YOU AH?
+      1.[T][ ] task A
+      2.[E][ ] task B  (at: idk hehe xd)
+      3.[D][ ] task C  (by: yesterday oops)
+   ____________________________________________________________
+   ____________________________________________________________
       THIS ONE
         [T][X] task A
       FINISH ALREADY AH? SWEE CHAI BUTTERFLY RECRUIT!
@@ -41,6 +47,12 @@ GOOD MORNING GENNERMEN from
       FINISH ALREADY AH? SWEE CHAI BUTTERFLY RECRUIT!
    ____________________________________________________________
    ____________________________________________________________
+      NEED ME TO REMIND YOU AH?
+      1.[T][X] task A
+      2.[E][X] task B  (at: idk hehe xd)
+      3.[D][X] task C  (by: yesterday oops)
+   ____________________________________________________________
+   ____________________________________________________________
       I THOUGHT THIS ONE
         [T][ ] task A
       FINISH ALREADY? NEVER MIND THIS WEEKEND CONFINE!
@@ -54,6 +66,12 @@ GOOD MORNING GENNERMEN from
       I THOUGHT THIS ONE
         [D][ ] task C  (by: yesterday oops)
       FINISH ALREADY? NEVER MIND THIS WEEKEND CONFINE!
+   ____________________________________________________________
+   ____________________________________________________________
+      NEED ME TO REMIND YOU AH?
+      1.[T][ ] task A
+      2.[E][ ] task B  (at: idk hehe xd)
+      3.[D][ ] task C  (by: yesterday oops)
    ____________________________________________________________
    ____________________________________________________________
       BYE WHAT BYE? YOU GO DROP TWENTY THEN BYE! DOWN!
