@@ -1,0 +1,11 @@
+todo project
+deadline assignment /by Sunday 8pm
+event party /at Friday 9pm
+mark 1
+unmark 1
+list
+mark 2
+mark 3
+list
+todo homework
+bye
