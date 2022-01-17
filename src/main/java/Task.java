@@ -1,19 +1,33 @@
 import java.util.List;
 import java.util.ArrayList;
 
-public class Task {
+public abstract class Task {
     private String name;
     private int status;
-    private static String[] statusSymbols = new String[]{"[ ]", "[✓]"};
+    protected static String[] statusSymbols = new String[]{"[ ]", "[✓]"};
 
     public Task(String name) {
         this.name = name;
         this.status = 0;
     }
 
-    public String getStatus() {
-        return statusSymbols[this.status] + " " + this.name;
+    public static Task addNewToDo(String input) {
+        return new Todo(input);
+    };
+
+    public static Task addNewDeadline(String input, String date) {
+        return new Deadline(input, date);
     }
+
+    public static Task addNewEvent(String input, String dateTime) {
+        return new Event(input, dateTime);
+    }
+
+    public String getName() { return this.name; }
+
+    public int getStatus() { return this.status; }
+
+    public abstract String printStatus();
 
     public void setStatus(int status) {
         this.status = status;
