@@ -21,23 +21,38 @@ public class Driver {
      */
     public void execute() {
         Scanner sc = new Scanner(System.in);
-        String command;
-        while(true) {
+        String input;
+        boolean exit = false;
+        while(!exit) {
             try {
-                command = sc.nextLine();
-                if (command.equals("bye")) {
-                    System.out.println(line + "\n" + "\tBye. Hope to see you again soon!\n" + line);
-                    break;
-                } else if (command.equals("list")) {
-                    this.displayTasks();
-                } else if (command.split(" ")[0].equals("mark")) {
-                    this.markAsDone(command);
-                } else if (command.split(" ")[0].equals("unmark")) {
-                    this.unmarkDone(command);
-                } else if(command.split(" ")[0].equals("delete")) {
-                    this.deleteTask(command);
-                } else if (!command.equals("")) {
-                    this.addTask(command);
+                input = sc.nextLine();
+                String[] commands = input.split(" ", 2);
+                Command command = parseString(commands);
+                switch (command) {
+                    case BYE:
+                        exit = true;
+                        System.out.println(line + "\n" + "\tBye. Hope to see you again soon!\n" + line);
+                        break;
+                    case LIST:
+                        displayTasks();
+                        break;
+                    case MARK:
+                        markAsDone(commands[1]);
+                        break;
+                    case UNMARK:
+                        unmarkDone(commands[1]);
+                        break;
+                    case DELETE:
+                        deleteTask(commands[1]);
+                        break;
+                    case INVALID:
+                        System.out.println(line + "\n\t" + commands[0] +" is not a valid command\n" + line);
+                        break;
+                    case EMPTY:
+                        break;
+                    default:
+                        addTask(command, commands[1]);
+                        break;
                 }
             } catch (DukeException e) {
                 System.out.println(line + "\n\t" + e.getMessage() + "\n" + line);
@@ -45,32 +60,61 @@ public class Driver {
         }
     }
 
-    private void addTask(String task) throws DukeException {
-        String[] taskString = task.split(" ",2);
-        String type = taskString[0];
-        try {
-            Task t = null;
-            if (type.equals("todo")) t = new ToDo(taskString[1]);
-            else if (type.equals("deadline")) {
-                String[] descriptionAndDate = taskString[1].split(" /by ", 2);
-                t = new Deadline(descriptionAndDate[0], descriptionAndDate[1]);
-            } else if (type.equals("event")) {
-                String[] descriptionAndTime = taskString[1].split(" /at ", 2);
-                t = new Event(descriptionAndTime[0], descriptionAndTime[1]);
-            } else if(type.equals("list")) {
-                throw new DukeWrongInputFormatException("list command should not have any additional arguments");
-            }
-            if (t == null) {
-                throw new DukeNotACommandException(type + " is not a valid Task command");
+    public Command parseString(String[] command) throws DukeException{
+            if (command[0].equals("")) {
+                return Command.EMPTY;
+            } else if (command[0].equals("bye")) {
+                if(command.length > 1 && !command[1].equals("")) throw new DukeWrongInputFormatException("Command bye should not have any arguments");
+                return Command.BYE;
+            } else if (command[0].equals("list")) {
+                if(command.length > 1 && !command[1].equals("")) throw new DukeWrongInputFormatException("Command list should not have any arguments");
+                return Command.LIST;
+            } else if (command[0].equals("mark")) {
+                if(command.length <= 1 || command[1].equals("")) throw new DukeWrongInputFormatException("Missing task number to mark");
+                return Command.MARK;
+            } else if (command[0].equals("unmark")) {
+                if(command.length <= 1 || command[1].equals("")) throw new DukeWrongInputFormatException("Missing task number to unmark");
+                return Command.UNMARK;
+            } else if(command[0].equals("delete")) {
+                if(command.length <= 1 || command[1].equals("")) throw new DukeWrongInputFormatException("Missing task number to delete");
+                return Command.DELETE;
+            } else if(command[0].equals("todo")) {
+                if(command.length <= 1 || command[1].equals("")) throw new DukeWrongInputFormatException("The description of a todo cannot be empty.");
+                return Command.TODO;
+            } else if(command[0].equals("deadline")) {
+                if(command.length <= 1 || command[1].equals("")) throw new DukeWrongInputFormatException("The description of a deadline cannot be empty.");
+                return Command.DEADLINE;
+            } else if(command[0].equals("event")) {
+                if(command.length <= 1 || command[1].equals("")) throw new DukeWrongInputFormatException("The description of an event cannot be empty.");
+                return Command.EVENT;
             } else {
-                this.tasks.add(t);
-                System.out.println(line + "\n\tGot it. I've added this task:\n\t\t" + t + "\n\t" +
-                        "Now you have " + tasks.size() + " in the list.\n" + line);
+                return Command.INVALID;
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeWrongInputFormatException("Please input a valid Task command:" +
-                    "\n\ttodo <description>\n\tdeadline <description> /by <date>\n\tevent <description> /at <dateAndTime>");
+    }
+    private void addTask(Command c, String task) throws DukeException {
+        Task t;
+        switch(c) {
+            case TODO:
+                t = new ToDo(task);
+                break;
+            case DEADLINE:
+                String[] descriptionAndDate = task.split(" /by ", 2);
+                if(descriptionAndDate.length <= 1) throw new DukeWrongInputFormatException("Missing deadline by date.");
+                t = new Deadline(descriptionAndDate[0], descriptionAndDate[1]);
+                break;
+            case EVENT:
+                String[] descriptionAndTime = task.split(" /at ", 2);
+                if(descriptionAndTime.length <= 1) throw new DukeWrongInputFormatException("Missing event at date.");
+                t = new Event(descriptionAndTime[0], descriptionAndTime[1]);
+                break;
+            default:
+                t = null;
+                break;
         }
+        this.tasks.add(t);
+        System.out.println(line + "\n\tGot it. I've added this task:\n\t\t" + t + "\n\t" +
+                    "Now you have " + tasks.size() + " in the list.\n" + line);
+
     }
 
     private void displayTasks() {
@@ -83,7 +127,7 @@ public class Driver {
 
     private void markAsDone(String in) throws DukeException{
         try {
-            int index = Integer.parseInt(in.split(" ")[1]);
+            int index = Integer.parseInt(in);
             if (index > this.tasks.size() || index < 1) {
                 throw new DukeInvalidTaskNumberException("Task number: " + index + " does not exist");
             } else {
@@ -99,7 +143,7 @@ public class Driver {
 
     private void unmarkDone(String in) throws DukeException {
         try {
-            int index = Integer.parseInt(in.split(" ")[1]);
+            int index = Integer.parseInt(in);
             if (index > this.tasks.size() || index < 1) {
                 throw new DukeInvalidTaskNumberException("Task number: " + index + " does not exist");
             } else {
@@ -115,7 +159,7 @@ public class Driver {
 
     private void deleteTask(String in) throws DukeException {
         try {
-            int index = Integer.parseInt(in.split(" ")[1]);
+            int index = Integer.parseInt(in);
             if (index > this.tasks.size() || index < 1) {
                 throw new DukeInvalidTaskNumberException("Task number: " + index + " does not exist");
             } else {
