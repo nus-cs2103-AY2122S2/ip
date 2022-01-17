@@ -49,7 +49,7 @@ public class Duke {
                         tl.addItem(s);
                     }
                     System.out.println(tl.getLast());
-                    System.out.println("Now there are " + tl.size() + " tasks in the list x)");
+                    System.out.println("Now there are " + tl.size() + " tasks on the list x)");
                 }
             }
         }
