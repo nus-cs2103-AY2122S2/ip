@@ -1,15 +1,15 @@
 public class Task {
     protected int taskId;
-    protected String name;
+    protected String title;
     protected boolean done;
 
     public Task(int taskId, String name) {
         this.taskId = taskId;
-        this.name = name;
+        this.title = name;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
     public boolean isDone() {
@@ -36,6 +36,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("%s %s", this.getStatusIcon(), this.getName());
+        return String.format("%s %s", this.getStatusIcon(), this.getTitle());
     }
 }
