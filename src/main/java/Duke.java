@@ -114,6 +114,19 @@ public class Duke {
                         ToDo toDoTask = new ToDo(toDoName);
                         taskManager.add(toDoTask);
                         break;
+                    case "delete":
+                        if (inputArguments.length < 2) {
+                            throw new DukeInsufficientArgumentsException();
+                        }
+                        try {
+                            int deleteIndex = Integer.parseInt(inputArguments[1]) - 1;
+                            taskManager.delete(deleteIndex);
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new DukeTaskNotFoundException();
+                        } catch (NumberFormatException e) {
+                            throw new DukeInvalidArgumentsException();
+                        }
+                        break;
                     default:
                         throw new DukeInvalidCommandException();
                 }
