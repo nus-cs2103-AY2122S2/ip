@@ -1,10 +1,15 @@
 public class Duke {
+    private static final String SEPARATOR = "------------------------------------";
+    private static final String BOT_NAME = "Megumin";
+
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        greet();
+    }
+
+    private static void greet() {
+        System.out.println(SEPARATOR);
+        System.out.println("Hi! I'm " + BOT_NAME);
+        System.out.println("What do you need?");
+        System.out.println(SEPARATOR);
     }
 }
