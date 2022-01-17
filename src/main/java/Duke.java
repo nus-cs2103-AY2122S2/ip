@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException{
         Printer p = new Printer();
         Scanner in = new Scanner(System.in);
         InputParser ip = new InputParser();
