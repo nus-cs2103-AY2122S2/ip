@@ -35,7 +35,7 @@ public class Duke {
     /**
      * Echoes input message back to the user.
      *
-     * @param userInput
+     * @param userInput Commands entered by the user.
      */
     private static void echo(String userInput) {
         String echoedMessage = "    ____________________________________________________________\n"
