@@ -5,7 +5,7 @@ public class Duke {
     public static void main(String[] args) {
         System.out.println("Hello! I'm Duke \nWhat can I do for you?");
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> taskArray = new ArrayList<Task>();
+        TaskManager taskManager = new TaskManager();
         while (sc.hasNextLine()) {
             String userInput = sc.nextLine();
             String[] inputArguments = userInput.split(" ");
@@ -15,10 +15,7 @@ public class Duke {
                     System.out.println("Bye. Hope to see you again soon!");
                     return;
                 case "list":
-                    System.out.println("Here are the tasks in your list:");
-                    for (int i = 1; i <= taskArray.size(); i++) {
-                        System.out.println(i + ". " + taskArray.get(i - 1));
-                    }
+                    taskManager.list();
                     break;
                 case "mark":
                     if (inputArguments.length < 2) {
@@ -27,10 +24,7 @@ public class Duke {
                     }
                     try {
                         int markIndex = Integer.parseInt(inputArguments[1]) - 1;
-                        Task taskToMark = taskArray.get(markIndex);
-                        taskToMark.mark();
-                        System.out.println("Nice! I've marked this task as done:");
-                        System.out.println("    " + taskArray.get(markIndex));
+                        taskManager.mark(markIndex);
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println("Task with this index is not found.");
                     } catch (NumberFormatException e) {
@@ -44,10 +38,7 @@ public class Duke {
                     }
                     try {
                         int unmarkIndex = Integer.parseInt(inputArguments[1]) - 1;
-                        Task taskToUnmark = taskArray.get(unmarkIndex);
-                        taskToUnmark.unmark();
-                        System.out.println("OK, I've marked this task as not done yet:");
-                        System.out.println("    " + taskArray.get(unmarkIndex));
+                        taskManager.unmark(unmarkIndex);
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println("Task with this index is not found.");
                     } catch (NumberFormatException e) {
@@ -81,10 +72,7 @@ public class Duke {
                         break;
                     }
                     Deadline deadlineTask = new Deadline(deadlineName, deadlineTime);
-                    taskArray.add(deadlineTask);
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println("    " + deadlineTask);
-                    System.out.println(String.format("Now you have %d tasks in the list.", taskArray.size()));
+                    taskManager.add(deadlineTask);
                     break;
                 case "event":
                     if (inputArguments.length < 2) {
@@ -113,10 +101,7 @@ public class Duke {
                         break;
                     }
                     Event eventTask = new Event(eventName, eventTime);
-                    taskArray.add(eventTask);
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println("    " + eventTask);
-                    System.out.println(String.format("Now you have %d tasks in the list.", taskArray.size()));
+                    taskManager.add(eventTask);
                     break;
                 case "todo":
                     if (inputArguments.length < 2) {
@@ -125,10 +110,7 @@ public class Duke {
                     }
                     String toDoName = userInput.substring(operation.length() + 1);
                     ToDo toDoTask = new ToDo(toDoName);
-                    taskArray.add(toDoTask);
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println("    " + toDoTask);
-                    System.out.println(String.format("Now you have %d tasks in the list.", taskArray.size()));
+                    taskManager.add(toDoTask);
                     break;
                 default:
                     System.out.println("No such command found.");
