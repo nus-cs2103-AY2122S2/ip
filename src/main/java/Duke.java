@@ -15,7 +15,7 @@ public class Duke {
         // reading user input
         Scanner sc = new Scanner(System.in);
 
-        // boolean to indicate whether userInput is bye
+        // boolean to indicate whether userInput isBye
         boolean isBye = false;
 
         String userInput = sc.nextLine();
