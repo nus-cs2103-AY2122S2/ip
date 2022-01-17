@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
@@ -13,7 +14,15 @@ public class Duke {
         Printer p = new Printer();
         p.print("Hello! I'm Duke," , "What can I do for you?");
 
+        Scanner in = new Scanner(System.in);
+        String userInput = in.nextLine();
 
+        while(!userInput.equals("bye")) {
+            p.print(userInput);
+            userInput = in.nextLine();
+        }
+
+        p.print(" Bye. Hope to see you again soon!");
     }
 
 
