@@ -8,12 +8,17 @@ public class TaskStore {
         this.tasks = new ArrayList<>();
     }
 
-    public void addTask(Task task) {
+    public Task addTask(Task task) {
         this.tasks.add(task);
+        return task;
     }
 
     public ArrayList<Task> getTasks() {
         return this.tasks;
+    }
+
+    public int getTaskCount() {
+        return this.tasks.size();
     }
 
     public void forEach(BiConsumer<Integer, ? super Task> consumer) {
