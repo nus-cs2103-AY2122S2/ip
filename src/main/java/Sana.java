@@ -67,6 +67,7 @@ public class Sana {
         } else {
             System.out.println("Oopsies! I'll change it back!");
         }
+        System.out.println(userCommands.get(taskIndex));
     }
 
     /**
@@ -85,13 +86,8 @@ public class Sana {
     private void list() {
         int index = 1;
         for (Task task : userCommands) {
-            String header = Integer.valueOf(index).toString() + ".[";
-            if (task.getDone()) {
-                header += "X] ";
-            } else {
-                header += " ] ";
-            }
-            System.out.println(header + task.getTaskName());
+            String header = Integer.valueOf(index).toString() + ".";
+            System.out.println(header + task);
             index++;
         }
     }
