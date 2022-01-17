@@ -9,16 +9,51 @@ final class Event extends Task {
      * Initializes an event with a name (description) and a time range.
      *
      * @param description The name of the task.
-     * @param timeRange The range of time associated with the event.
+     * @param timeRange   The range of time associated with the event.
      */
-    protected Event(String description, String timeRange) {
+    private Event(String description, String timeRange) {
         super(description);
         this.timeRange = timeRange;
+    }
+
+    private Event(String[] details) {
+
+        this(details[0], details[1]);
+    }
+
+    /**
+     * The constructor to be called. Instantiates an event using a single string containing all the details.
+     *
+     * @param details Contains the description and time range for the event.
+     */
+    protected Event(String details) throws IllegalArgumentException {
+
+        this(parseDetails(details));
     }
 
     @Override
     protected String getTypeIcon() {
         return "[E]";
+    }
+
+    /**
+     * Parses the details containing the event description and time range.
+     * <p>
+     * (The details will be encapsulated in a separated class in the future if needed).
+     *
+     * @param details The string containing the event description and time range.
+     * @return An array of strings containing the description and time range.
+     */
+    private static String[] parseDetails(String details) throws IllegalArgumentException {
+
+        String[] args = details.split(" /at ", 2);
+
+        if (args.length != 2) {
+            throw new IllegalArgumentException(
+                    "Oops, both of the description and the time of the event can't be empty.");
+        }
+
+        return args;
     }
 
     /**

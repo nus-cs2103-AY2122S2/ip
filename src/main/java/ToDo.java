@@ -4,12 +4,14 @@
 final class ToDo extends Task {
 
     /**
-     * Initializes a to-do item, with a name.
-     * @param description
+     * Initializes a to-do item, with a description.
+     *
+     * @param description The description of the task.
      */
     protected ToDo(String description) {
         super(description);
     }
+
 
     @Override
     protected String getTypeIcon() {

@@ -10,7 +10,7 @@ final class Add extends Instruction{
      *
      * @param task The task to be added.
      */
-    protected Add(Task task) {
+    protected Add(Task task) throws IllegalArgumentException {
 
         super.setDescription("add");
         this.task = task;

@@ -17,22 +17,38 @@ abstract class Task {
         this.isDone = false;
     }
 
-    protected static Task of(String type, String description) {
+    /**
+     * Factory method. Parses the instruction and determines the type of task to be instantiated.
+     *
+     * @param instruction The line of instruction used to create a task.
+     * @return The instantiated task.
+     * @throws IllegalArgumentException If the instruction (i) does not contain valid type of task; or (ii) does not
+     * contain a valid description of task.
+     */
+    protected static Task of(String instruction) throws IllegalArgumentException {
 
-        String[] parameters;
+        String[] args = instruction.split(" ", 2);
+        String type = args[0];
+
+        if (args.length < 2) {
+
+            throw new IllegalArgumentException("Oops, a type and a description for the task must be provided.");
+        }
+
+        // Contains the description and possibly other information about the task.
+        String details = args[1];
+
         switch (type) {
 
             case "todo":
-                return new ToDo(description);
+                return new ToDo(details);
             case "event":
-                parameters = description.split(" /at ");
-                return new Event(parameters[0], parameters[1]);
+                return new Event(details);
             case "deadline":
-                parameters = description.split(" /by ");
-                return new Deadline(parameters[0], parameters[1]);
+                return new Deadline(details);
             default:
-                // Return null for invalid cases for now, will fix later.
-                return null;
+                // Invalid type.
+                throw new IllegalArgumentException("Oops, the type of the task must be todo/event/deadline.");
         }
     }
 

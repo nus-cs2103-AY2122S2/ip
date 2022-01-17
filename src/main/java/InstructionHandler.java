@@ -12,19 +12,29 @@ class InstructionHandler {
      * Receives the instructions from user, and performs them one by one and prints the message, until a terminating
      * instruction is received.
      */
-    protected void doInstructions() {
+    protected void doInstructions() throws IllegalArgumentException {
 
         Scanner sc = new Scanner(System.in);
 
-        Instruction nextInstruction = Instruction.of(sc.nextLine());
+        Instruction nextInstruction;
         while (true) {
+
+
+            try {
+                nextInstruction = Instruction.of(sc.nextLine());
+            } catch (IllegalArgumentException e) {
+                System.err.println(e.getMessage());
+                System.out.println(OUTPUT_PREFIX + "Try again please:");
+                continue;
+            }
+
             System.out.println(OUTPUT_PREFIX + nextInstruction.act());
 
             if (nextInstruction.getDescription().equals(TERMINATE_INSTRUCTION)) {
                 // Current instruction terminates the program.
                 break;
             }
-            nextInstruction = Instruction.of(sc.nextLine());
+
         }
     }
 

@@ -49,11 +49,23 @@ public class TaskManager {
 
     /**
      * Gets the task with the specified index.
+     *
      * @param index The index of task to be retrieved (1-indexed).
      * @return The retrieved task.
      */
     protected static Task getTaskIndex(int index) {
         return TaskManager.tasks.get(index - 1);
+    }
+
+    /**
+     * Checks the validity of a task index.
+     *
+     * @param index An index of task. (1-indexed)
+     * @return True if the index is valid, false otherwise.
+     */
+    protected static boolean isValidIndex(int index) {
+
+        return (index > 0 && index <= TaskManager.tasks.size());
     }
 
 }
