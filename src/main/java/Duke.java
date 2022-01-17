@@ -13,113 +13,122 @@ public class Duke {
 
         ArrayList<Task> tasks = new ArrayList<> ();
 
-        while (true){
-            String str= sc.nextLine();
+        outerloop:
+        while (true) {
+            String str = sc.nextLine();
+            String[] commandSections = str.split(" ", 2);
+            Commands currentCommand = Commands.valueOf(commandSections[0]);
 
-            // quit
-            if (str.equals("bye")) {
-                break;
-            }
-
-            // list
-            else if (str.equals("list")) {
-                for (int i = 0; i < tasks.size(); i++) {
-                    Task currentTask = tasks.get(i);
-                    int index = i + 1;
-                    System.out.println(index + "." + currentTask.toString());
-                }
-            }
-
-            // mark
-            else if (str.startsWith("mark")) {
-                try {
-                    String[] markedTask = str.split(" ");
-                    int indexMarked = Integer.parseInt(markedTask[1]) - 1;
-                    Task currentTask = tasks.get(indexMarked);
-                    currentTask.isDone = true;
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(currentTask.toString());
-                }
-                catch (IndexOutOfBoundsException e) {
-                    System.out.println(new DukeException("task does not exist!"));
-                }
-            }
-
-
-            // unmark
-            else if (str.startsWith("unmark")) {
-                try {
-                    String[] markedTask = str.split(" ");
-                    int indexMarked = Integer.parseInt(markedTask[1]) - 1;
-                    Task currentTask = tasks.get(indexMarked);
-                    currentTask.isDone = false;
-                    System.out.println("OK, I've marked this task as not done yet:");
-                    System.out.println(currentTask.toString());
-                }
-                catch (IndexOutOfBoundsException e) {
-                    System.out.println(new DukeException("task does not exist!"));
-                }
-
-            }
-
-            else if (str.startsWith("delete")) {
-                try {
-                    String[] deleteTask = str.split(" ");
-                    int indexDelete = Integer.parseInt(deleteTask[1]) - 1;
-                    Task deletedTask = tasks.remove(indexDelete);
-                    System.out.println("Noted. I've removed this task: ");
-                    System.out.println(deletedTask.toString());
-                }
-                catch (IndexOutOfBoundsException e) {
-                    System.out.println(new DukeException("task does not exist!"));
-                }
-            }
-
-            // generate tasks
-            else {
-                if (str.startsWith("todo")) {
-                    try {
-                        Todo currentTodo = new Todo(str.substring(5));
-                        tasks.add(currentTodo);
-                        System.out.println("added: " + currentTodo.toString());
-                    }
-                    catch (StringIndexOutOfBoundsException e) {
-                        System.out.println(new DukeException("task does not exist!"));
-                    }
-                }
-                else if (str.startsWith("deadline")) {
-                    try {
-                        String actualTask = str.substring(9);
-                        String[] segments = actualTask.split(" /by ");
-                        Deadline currentDeadline = new Deadline(segments[0], segments[1]);
-                        tasks.add(currentDeadline);
-                        System.out.println("added: " + currentDeadline.toString());
-                    }
-                    catch (StringIndexOutOfBoundsException e) {
-                        System.out.println(new DukeException("task does not exist!"));
+                switch (currentCommand) {
+                    // quit
+                    case bye: {
+                        System.out.println("Bye. Hope to see you again soon!\n");
+                        break outerloop;
                     }
 
-                }
+                    // list
+                    case list: {
+                        for (int i = 0; i < tasks.size(); i++) {
+                            Task currentTask = tasks.get(i);
+                            int index = i + 1;
+                            System.out.println(index + "." + currentTask.toString());
+                        }
+                        break;
+                    }
 
-                else if (str.startsWith("event")) {
-                    try {
-                        String actualTask = str.substring(6);
-                        String[] segments = actualTask.split(" /at ");
-                        Event currentEvent = new Event(segments[0], segments[1]);
-                        tasks.add(currentEvent);
-                        System.out.println("added: " + currentEvent.toString());
+                    // mark
+                    case mark: {
+                        try {
+                            int indexMarked = Integer.parseInt(commandSections[1]) - 1;
+                            Task currentTask = tasks.get(indexMarked);
+                            currentTask.isDone = true;
+                            System.out.println("Nice! I've marked this task as done:");
+                            System.out.println(currentTask.toString());
+                        } catch (IndexOutOfBoundsException e) {
+                            System.out.println(new DukeException("task does not exist!"));
+                        } catch (NumberFormatException e) {
+                            System.out.println(new DukeException("provide an index instead :)"));
+                        }
+                        break;
                     }
-                    catch (StringIndexOutOfBoundsException e) {
-                        System.out.println(new DukeException("task does not exist!"));
+
+
+                    // unmark
+                    case unmark: {
+                        try {
+                            int indexMarked = Integer.parseInt(commandSections[1]) - 1;
+                            Task currentTask = tasks.get(indexMarked);
+                            currentTask.isDone = false;
+                            System.out.println("OK, I've marked this task as not done yet:");
+                            System.out.println(currentTask.toString());
+                        } catch (IndexOutOfBoundsException e) {
+                            System.out.println(new DukeException("task does not exist!"));
+                        } catch (NumberFormatException e) {
+                            System.out.println(new DukeException("provide an index instead :)"));
+                        }
+                        break;
                     }
-                }
-                else {
-                    System.out.println(new DukeException("I'm sorry, but I don't know what that means :-("));
+                    case delete: {
+                        try {
+                            int indexDelete = Integer.parseInt(commandSections[1]) - 1;
+                            Task deletedTask = tasks.remove(indexDelete);
+                            System.out.println("Noted. I've removed this task: ");
+                            System.out.println(deletedTask.toString());
+                        } catch (IndexOutOfBoundsException e) {
+                            System.out.println(new DukeException("task does not exist!"));
+                        } catch (NumberFormatException e) {
+                            System.out.println(new DukeException("provide an index instead :)"));
+                        }
+                        break;
+                    }
+
+                    // generate tasks
+                    case todo: {
+                        try {
+                            if (commandSections[1].isBlank()) {
+                                throw new ArrayIndexOutOfBoundsException();
+                            }
+                            Todo currentTodo = new Todo(commandSections[1]);
+                            tasks.add(currentTodo);
+                            System.out.println("added: " + currentTodo.toString());
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            System.out.println(new DukeException("The description of a todo cannot be empty"));
+                        }
+                        break;
+                    }
+                    case deadline: {
+                        try {
+                            String actualTask = commandSections[1];
+                            String[] segments = actualTask.split(" /by ");
+                            if (segments[0].isBlank() || segments[0].isBlank()) {
+                                throw new ArrayIndexOutOfBoundsException();
+                            }
+                            Deadline currentDeadline = new Deadline(segments[0], segments[1]);
+                            tasks.add(currentDeadline);
+                            System.out.println("added: " + currentDeadline.toString());
+
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            System.out.println(new DukeException("The description of a deadline cannot be empty"));
+                        }
+                        break;
+                    }
+
+                    case event: {
+                        try {
+                            String actualTask = commandSections[1];
+                            String[] segments = actualTask.split(" /at ");
+                            if (segments[0].isBlank() || segments[0].isBlank()) {
+                                throw new ArrayIndexOutOfBoundsException();
+                            }
+                            Event currentEvent = new Event(segments[0], segments[1]);
+                            tasks.add(currentEvent);
+                            System.out.println("added: " + currentEvent.toString());
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            System.out.println(new DukeException("The description of a event cannot be empty"));
+                        }
+                        break;
+                    }
                 }
             }
         }
-        System.out.println("Bye. Hope to see you again soon!\n");
-
-
     }
-}
