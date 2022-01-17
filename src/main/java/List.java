@@ -33,9 +33,12 @@ public class List {
      * Iterates through the list and prints out each task that is on the list.
      */
     public void display() {
-        System.out.println("    ____________________________________________________________\n");
+        System.out.println("    ____________________________________________________________\n"
+                + "     Here are the tasks in your list:\n");
         for (int i = 1; i <= this.numberOfTasks; i++) {
-            String output = "     " + i + ". " + this.listOfTasks[i].getDescription() + "\n";
+            Task currTask = this.listOfTasks[i];
+            String output = "     " + i + ".[ " + currTask.getStatusIcon() + "] "
+                    + currTask.getDescription() + "\n";
             System.out.println(output);
         }
         System.out.println("    ____________________________________________________________\n");

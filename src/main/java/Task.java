@@ -14,7 +14,7 @@ public class Task {
     }
 
     /**
-     * Retrieves the status icon according to the current status (isDone).
+     * Retrieves the status icon corresponding to the current status (isDone).
      *
      * @return "X" if task is already done, " " if task is not done.
      */
