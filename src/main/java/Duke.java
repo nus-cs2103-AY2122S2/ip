@@ -66,6 +66,9 @@ public class Duke {
         case "event":
             toDoList.addTask(instr, msg);
             break;
+        case "delete":
+            toDoList.deleteTask(msg);
+            break;
         default:
             System.out.println("\tI am sorry Master, I am afraid I do not know what you mean");
         }

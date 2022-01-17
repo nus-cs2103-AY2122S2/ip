@@ -28,7 +28,9 @@ public class TaskList {
     }
 
     public Task getTask(int index) throws OutOfRangeException {
-        if (size == 0 || index < 0 || index >= size) {
+        if (size == 0) {
+            throw new OutOfRangeException("Dear Master, you have not added anything");
+        } else if (index < 0 || index >= size) {
             throw new OutOfRangeException(
                     String.format("Sorry Master, please enter an integer between 1 and %d (inclusive)", size));
         }
@@ -68,6 +70,35 @@ public class TaskList {
             System.out.println("\t" + emptyEx.getMessage());
         } catch (DateFormatException dateEx) {
             System.out.println("\t" + dateEx.getMessage());
+        }
+    }
+
+    protected Task delete(int index) throws OutOfRangeException {
+        if (size == 0) {
+            throw new OutOfRangeException("Dear Master, you have not added anything");
+        } else if(index < 0 || index >= size) {
+            throw new OutOfRangeException(
+                    String.format("Sorry Master, please enter an integer between 1 and %d (inclusive)", size));
+        }
+
+        Task delTask = taskList.remove(index);
+        size--;
+
+        return delTask;
+    }
+
+    public void deleteTask(String message) {
+        try {
+            int index = Integer.valueOf(message);
+            Task delTask = delete(index - 1);
+            
+            System.out.println(String.format("\tYes Master, I have removed this task:\n"
+                + "\t    %s\n"
+                + "\tYou have %d task(s) currently", delTask, size));
+        } catch (NumberFormatException numEx) {
+            System.out.println("\tSorry Master, you have to enter an integer after the \"delete\" command");
+        } catch (OutOfRangeException rangeEx) {
+            System.out.println("\t" + rangeEx.getMessage());
         }
     }
 
