@@ -40,7 +40,8 @@ public class Duke {
     }
 
     private static void handleList() {
-        final String response = Duke.constructResponse(Duke.constructTextList(Duke.tasks));
+        final String taskList = "Here are the tasks in your list:\n" + Duke.constructTaskList(Duke.tasks);
+        final String response = Duke.constructResponse(taskList);
         System.out.println(response);
     }
 
@@ -56,17 +57,18 @@ public class Duke {
         return divider + response + divider;
     }
 
-    private static <T> String constructTextList(T[] items) {
-        String textList = "";
-        int currentTextListItemIndex = 1;
+    private static String constructTaskList(Task[] tasks) {
+        String taskList = "";
+        int currentTaskListItemIndex = 1;
 
-        for (int i = 0; i < items.length; i++) {
-            if (items[i] == null) continue;
-            if (currentTextListItemIndex > 1) textList += "\n";
-            textList += currentTextListItemIndex + ". " + items[i];
-            currentTextListItemIndex++;
+        for (int i = 0; i < tasks.length; i++) {
+            final Task task = tasks[i];
+            if (task == null) continue;
+            if (currentTaskListItemIndex > 1) taskList += "\n";
+            taskList += currentTaskListItemIndex + ".[" + task.getStatusIcon() + "] " + task;
+            currentTaskListItemIndex++;
         }
 
-        return textList;
+        return taskList;
     }
 }
