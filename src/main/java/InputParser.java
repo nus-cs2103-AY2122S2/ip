@@ -6,7 +6,7 @@ public class InputParser {
             p.print(" Bye. Hope to see you again soon!");
             return -1;
         } else if (ss.equals("list")) {
-
+            p.print(arr);
         } else {
             arr.add(ss);
             p.print(String.format("added: %s", ss));
