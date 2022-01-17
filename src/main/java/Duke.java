@@ -11,12 +11,12 @@ public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        String logo = "             ___      .______       __  \n"
-                + "            /   \\     |   _  \\     |  | \n"
-                + "           /  ^  \\    |  |_)  |    |  | \n"
-                + "          /  /_\\  \\   |      /     |  | \n"
-                + "         /  _____  \\  |  |\\  \\----.|  | \n"
-                + "        /__/     \\__\\ | _| `._____||__| \n"
+        String logo = "             ___      .______       __         \n"
+                + "            /   \\     |   _  \\     |  |      \n"
+                + "           /  ^  \\    |  |_)  |    |  |      \n"
+                + "          /  /_\\  \\   |      /     |  |      \n"
+                + "         /  _____  \\  |  |\\  \\----.|  |      \n"
+                + "        /__/     \\__\\ | _| `._____||__|      \n"
                 + "\n";
 
         String introMessage = String.format("\t%s\n"
