@@ -70,12 +70,14 @@ public class Spark {
     private static String getToDoParams(String[] tokens) throws EmptyTitleException {
         List<String> words = new ArrayList<>(Arrays.asList(tokens).subList(1, tokens.length));
 
-        // if title is an empty-string "" or a string of spaces "          "
-        if (words.size() == 0 || words.size()==1 && words.get(0).equals("")) {
+        String title = String.join(" ", words);
+
+        // ToDo must have a title
+        if (title.equals("")) {
             throw new EmptyTitleException();
         }
 
-        return String.join(" ", words);
+        return title;
     }
 
     private static String[] getDeadlineParams(String[] tokens) throws EmptyTitleException, EmptyDateException {
@@ -93,20 +95,20 @@ public class Spark {
             }
         }
 
-        // if title is an empty-string "" or a string of spaces "          "
-        if (firstHalf.size() == 0 || firstHalf.size()==1 && firstHalf.get(0).equals("")) {
+        String title = String.join(" ", firstHalf);
+        String by = String.join(" ", secondHalf);
+
+        // Deadline must have a title
+        if (title.equals("")) {
             throw new EmptyTitleException();
         }
 
-        // if by is an empty-string "" or a string of spaces "          "
-        if (secondHalf.size() == 0 || secondHalf.size()==1 && secondHalf.get(0).equals("")) {
+        // Deadline must have a date
+        if (by.equals("")) {
             throw new EmptyDateException();
         }
 
-        String name = String.join(" ", firstHalf);
-        String by = String.join(" ", secondHalf);
-
-        return new String[]{name, by};
+        return new String[]{title, by};
     }
 
     private static String[] getEventParams(String[] tokens) throws EmptyTitleException, EmptyDateException {
@@ -124,19 +126,19 @@ public class Spark {
             }
         }
 
-        // if title is an empty-string "" or a string of spaces "          "
-        if (firstHalf.size() == 0 || firstHalf.size()==1 && firstHalf.get(0).equals("")) {
+        String title = String.join(" ", firstHalf);
+        String at = String.join(" ", secondHalf);
+
+        // Event must have a title
+        if (title.equals("")) {
             throw new EmptyTitleException();
         }
 
-        // if by is an empty-string "" or a string of spaces "          "
-        if (secondHalf.size() == 0 || secondHalf.size()==1 && secondHalf.get(0).equals("")) {
+        // Event must have a date
+        if (at.equals("")) {
             throw new EmptyDateException();
         }
 
-        String name = String.join(" ", firstHalf);
-        String at = String.join(" ", secondHalf);
-
-        return new String[]{name, at};
+        return new String[]{title, at};
     }
 }
