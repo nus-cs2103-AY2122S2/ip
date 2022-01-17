@@ -11,21 +11,15 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("____________________________________________________________");
         System.out.println(logo);
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?\n");
-    }
-
-    public void addTask(String input) {
-        Task newTask = new Task(input);
+        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         System.out.println("____________________________________________________________");
-        System.out.printf("added: %s%n", input);
-        System.out.println("____________________________________________________________");
-        taskList.add(newTask);
     }
 
     public void printAddTaskSuccess(Task task) {
         System.out.println("____________________________________________________________");
-        System.out.printf("Got it. I've added this task:    %n%s%n", task);
+        System.out.printf("Got it. I've added this task:%n%s%n", task);
         System.out.printf("Now you have %d tasks in the list.%n", taskList.size());
         System.out.println("____________________________________________________________");
     }
@@ -67,6 +61,17 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
+    public void deleteTask(int index) {
+        System.out.println("____________________________________________________________");
+        System.out.println("Noted. I've removed this task:");
+        Task foundTask = taskList.get(index - 1);
+        System.out.println(foundTask);
+        taskList.remove(index - 1);
+        System.out.printf("Now you have %d tasks in the list.%n", taskList.size());
+        System.out.println("____________________________________________________________");
+
+    }
+
     public void exit() {
         System.out.println("____________________________________________________________");
         System.out.println("Bye. Hope to see you again soon!");
@@ -80,32 +85,48 @@ public class Duke {
 
         String input = "";
         while (true) {
-            input = scanner.nextLine();
-            if (input.equals("bye")) {
-                break;
-            } else if (input.equals("list")) {
-                this.listTasks();
-            } else if (input.startsWith("mark")) {
-                String[] string = input.split(" ");
-                int index = Integer.parseInt(string[1]);
-                completeTask(index);
-            } else if (input.startsWith("unmark")) {
-                String[] string = input.split(" ");
-                int index = Integer.parseInt(string[1]);
-                undoTask(index);
-            } else if (input.startsWith("todo")) {
-                String[] string = input.split(" ", 2);
-                this.addTodoTask(string[1]);
-            } else if (input.startsWith("deadline")) {
-                String[] string = input.split(" ", 2);
-                String[] contents = string[1].split(" /by ");
-                this.addDeadlineTask(contents[0], contents[1]);
-            } else if (input.startsWith("event")) {
-                String[] string = input.split(" ", 2);
-                String[] contents = string[1].split(" /at ");
-                this.addEventTask(contents[0], contents[1]);
-            } else {
-                this.addTask(input);
+            try {
+                input = scanner.nextLine();
+                if (input.equals("bye")) {
+                    break;
+                } else if (input.equals("list")) {
+                    this.listTasks();
+                } else if (input.startsWith("mark")) {
+                    String[] string = input.split(" ");
+                    int index = Integer.parseInt(string[1]);
+                    if (index > taskList.size()) {
+                        throw new InvalidParameterException("☹ OOPS!!! The index provided is invalid.");
+                    }
+                    completeTask(index);
+                } else if (input.startsWith("unmark")) {
+                    String[] string = input.split(" ");
+                    int index = Integer.parseInt(string[1]);
+                    undoTask(index);
+                } else if (input.startsWith("todo")) {
+                    String[] string = input.split(" ", 2);
+                    if (string.length == 1) {
+                        throw new InvalidParameterException("☹ OOPS!!! The description of a task cannot be empty.");
+                    }
+                    this.addTodoTask(string[1]);
+                } else if (input.startsWith("deadline")) {
+                    String[] string = input.split(" ", 2);
+                    String[] contents = string[1].split(" /by ");
+                    this.addDeadlineTask(contents[0], contents[1]);
+                } else if (input.startsWith("event")) {
+                    String[] string = input.split(" ", 2);
+                    String[] contents = string[1].split(" /at ");
+                    this.addEventTask(contents[0], contents[1]);
+                } else if (input.startsWith("delete")) {
+                    String[] string = input.split(" ", 2);
+                    int index = Integer.parseInt(string[1]);
+                    this.deleteTask(index);
+                } else {
+                    throw new InvalidCommandException();
+                }
+            } catch (DukeException exception) {
+                System.out.println("____________________________________________________________");
+                System.out.println(exception.getMessage());
+                System.out.println("____________________________________________________________");
             }
         }
         this.exit();
