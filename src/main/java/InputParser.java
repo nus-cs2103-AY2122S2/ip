@@ -20,7 +20,7 @@ public class InputParser {
             arr.add(newTask);
             p.print("Added Task: ", " " + newTask.toString(), String.format("There are now %d task(s) in the list.", arr.size()));
         } else if (action.equals("deadline")) {
-            DeadlineTask newTask = new DeadlineTask((ss).substring(5, ss.length()));
+            DeadlineTask newTask = new DeadlineTask(ss.substring(9, ss.length()).split("/by")[0], ss.split("/by")[1]);
             arr.add(newTask);
             p.print("Added Task: ", " " + newTask.toString(), String.format("There are now %d task(s) in the list.", arr.size()));
         } else if (action.equals("event")) {
