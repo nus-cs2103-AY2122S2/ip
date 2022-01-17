@@ -15,11 +15,6 @@ public class Duke {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?\n");
     }
 
-    public void echo(String input) {
-
-        System.out.println(input);
-    }
-
     public void addTask(String input) {
         Task newTask = new Task(input);
         System.out.println("____________________________________________________________");
@@ -28,8 +23,19 @@ public class Duke {
         taskList.add(newTask);
     }
 
+    public void completeTask(int taskIndex) {
+        Task foundTask = taskList.get(taskIndex - 1);
+        foundTask.markDone();
+    }
+
+    public void undoTask(int taskIndex) {
+        Task foundTask = taskList.get(taskIndex - 1);
+        foundTask.markUndone();
+    }
+
     public void listTasks() {
         System.out.println("____________________________________________________________");
+        System.out.println("Here are the tasks in your list:");
         for (int i = 1; i < taskList.size() + 1; i++) {
             System.out.printf("%d. %s%n", i, taskList.get(i - 1));
         }
@@ -54,6 +60,14 @@ public class Duke {
                 break;
             } else if (input.equals("list")) {
                 this.listTasks();
+            } else if (input.startsWith("mark")) {
+                String[] string = input.split(" ");
+                int index = Integer.parseInt(string[1]);
+                completeTask(index);
+            } else if (input.startsWith("unmark")) {
+                String[] string = input.split(" ");
+                int index = Integer.parseInt(string[1]);
+                undoTask(index);
             } else {
                 this.addTask(input);
             }
