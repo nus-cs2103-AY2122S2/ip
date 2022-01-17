@@ -1,4 +1,4 @@
-public class Task {
+abstract public class Task {
     private String taskName;
     private boolean status;
 
@@ -23,9 +23,6 @@ public class Task {
         return this.status;
     }
 
-    public String toString() {
-        String done = this.status ? "[X] " : "[ ] ";
-        return done + getTaskName();
-    }
+    public abstract String toString();
 
 }

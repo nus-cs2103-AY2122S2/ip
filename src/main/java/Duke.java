@@ -45,11 +45,46 @@ public class Duke {
                     command = br.readLine();
                     break;
                 }
-                default: {
-                    list.add(new Task(command));
+                case "todo": {
+                    String task = command.replaceFirst("todo", "");
+                    list.add(new ToDo(task));
                     System.out.println("    ____________________________________________________________\n" +
-                            "     added: " + list.get(list.size()-1).toString() + "\n" +
-                            "    ____________________________________________________________");
+                            "     Got it. I've added this task: ");
+                    System.out.printf("       %s%n", list.get(list.size()-1).toString());
+                    System.out.printf("     Now you have %d tasks in the list.%n", list.size());
+                    System.out.println("    ____________________________________________________________");
+                    command = br.readLine();
+                    break;
+                }
+                case "deadline": {
+                    String[] text = command.replaceFirst("deadline", "").split(" /by ");
+                    String task = text[0];
+                    String by = text[1];
+                    list.add(new Deadline(task,by));
+                    System.out.println("    ____________________________________________________________\n" +
+                            "     Got it. I've added this task: ");
+                    System.out.printf("       %s%n", list.get(list.size()-1).toString());
+                    System.out.printf("     Now you have %d tasks in the list.%n", list.size());
+                    System.out.println("    ____________________________________________________________");
+                    command = br.readLine();
+                    break;
+
+                }
+                case "event": {
+                    String[] text = command.replaceFirst("event", "").split(" /at ");
+                    String task = text[0];
+                    String at = text[1];
+                    list.add(new Event(task,at));
+                    System.out.println("    ____________________________________________________________\n" +
+                            "     Got it. I've added this task: ");
+                    System.out.printf("       %s%n", list.get(list.size()-1).toString());
+                    System.out.printf("     Now you have %d tasks in the list.%n", list.size());
+                    System.out.println("    ____________________________________________________________");
+                    command = br.readLine();
+                    break;
+                }
+                default: {
+                    System.out.println("Please Enter a valid command");
                     command = br.readLine();
                     break;
                 }
@@ -58,7 +93,5 @@ public class Duke {
         System.out.println("    ____________________________________________________________\n" +
                 "     Bye. Hope to see you again soon!\n" +
                 "    ____________________________________________________________");
-
-
     }
 }
