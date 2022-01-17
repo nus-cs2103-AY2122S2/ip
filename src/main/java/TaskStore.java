@@ -25,4 +25,11 @@ public class TaskStore {
             consumer.accept(i, this.tasks.get(i));
         }
     }
+
+    public Task getTaskByIndex(int index) {
+        if (index >= this.tasks.size() || index < 0) {
+            return null;
+        }
+        return this.tasks.get(index);
+    }
 }
