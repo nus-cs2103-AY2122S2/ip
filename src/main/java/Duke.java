@@ -45,10 +45,12 @@ public class Duke {
 
                 switch (userInput) {
                     case "list":
+                        System.out.println(lines);
                         for (int i = 0; i < count; i++) {
-                            String display = String.format("%d. %s", i + 1, todoList[i]);
+                            String display = String.format("    %d. %s", i + 1, todoList[i]);
                             System.out.println(display);
                         }
+                        System.out.println(lines);
                         break;
 
                     default:
