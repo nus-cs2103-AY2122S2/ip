@@ -36,12 +36,14 @@ public class Duke {
                 int index = Integer.parseInt(commands[1]) - 1;
                 savedTask[index].markAsDone();
                 System.out.println("\t" + savedTask[index].toString());
+                System.out.println(HORIZONTAL_LINE);
             } else if (commands[0].equals("unmark")) {
                 System.out.println(HORIZONTAL_LINE);
                 System.out.println("\t" + "OK, I've marked this task as not done yet:");
                 int index = Integer.parseInt(commands[1]) - 1;
                 savedTask[index].markAsNotDone();
                 System.out.println("\t" + savedTask[index].toString());
+                System.out.println(HORIZONTAL_LINE);
             } else {
                 switch (commands[0]) {
                     case "todo":
