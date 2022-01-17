@@ -12,7 +12,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("\nHow may I help you today?\n");
 
-        ArrayList<String> inputList = new ArrayList<>();
+        ArrayList<Task> inputList = new ArrayList<>();
         while (true) {
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();
@@ -20,12 +20,18 @@ public class Duke {
                 System.out.println("\nGoodbye.\nHave a nice day!");
                 break;
             } else if (Objects.equals(input.toLowerCase(), "list")) {
+                System.out.println("Here are the tasks in your list: " + "\n");
                 if (!inputList.isEmpty()) {
-                    inputList.forEach(System.out::println);
+                    for (int i = 0; i < inputList.size(); i++) {
+                        System.out.println( (i + 1) + ". "
+                                + "[" + inputList.get(i).getStatusIcon() + "] "
+                                + inputList.get(i).description + "\n");
+                    }
                 }
             } else {
+                Task t = new Task(input);
                 System.out.println("added: " + input + "\n");
-                inputList.add(input);
+                inputList.add(t);
             }
         }
     }
