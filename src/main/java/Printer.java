@@ -10,7 +10,10 @@ class Printer {
 
     public void print(ArrayList<Task> arr) {
         System.out.println(String.format("    %s", "=========================================="));
-        arr.forEach((x) -> { System.out.println(String.format("    %d. %s", arr.indexOf(x) + 1, x.toString())); } );
+        if(arr.size() == 0)
+            System.out.println("    List is empty!");
+        else
+            arr.forEach((x) -> { System.out.println(String.format("    %d. %s", arr.indexOf(x) + 1, x.toString())); } );
         System.out.println(String.format("    %s", "=========================================="));
     }
 }
