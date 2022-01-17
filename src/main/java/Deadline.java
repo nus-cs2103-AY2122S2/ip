@@ -6,7 +6,7 @@ public class Deadline extends Task {
     public Deadline(String description) {
         super(description);
         if (!tipShown) {
-            System.out.println("Tip: You can specify deadline");
+            System.out.println("Tip: You can specify due dates");
             System.out.println("eg. deadline CS2103T /by today\n");
             tipShown = true;
         }
