@@ -13,6 +13,8 @@ public class Duke {
         System.out.println("\nHow may I help you today?\n");
 
         ArrayList<Task> inputList = new ArrayList<>();
+        Event e = new Event("lol", "what");
+        System.out.println(e.toString());
         while (true) {
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();
