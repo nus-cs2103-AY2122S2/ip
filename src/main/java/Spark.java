@@ -1,6 +1,9 @@
 import java.util.*;
 import java.util.Scanner;
 
+import SparkExceptions.FormatExceptions.*;
+import Tasks.TaskList;
+
 public class Spark {
     public static void main(String[] args) {
         // assuming that there will be no more than 100 tasks,
@@ -56,7 +59,7 @@ public class Spark {
                         throw new UnrecognisedCommandException();
                     }
                 }
-            } catch (UnrecognisedCommandException | EmptyTitleException | EmptyDateException e) {
+            } catch (FormatException e) {
                 System.out.println(e.getMessage());
             }
 
