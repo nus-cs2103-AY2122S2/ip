@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class ChatBot {
     String name = "Duke";
     boolean isRunning = true;
+    ArrayList<String> mem = new ArrayList<>();
 
 
     public void run() {
@@ -22,11 +23,14 @@ public class ChatBot {
                 stop.callback();
                 isRunning = false;
                 break;
+            } else if (Cmd.equals("list")) {
+                Response lst = new ListResponse(mem);
+                lst.callback();
+            } else {
+                Response curr = new AddResponse(Cmd);
+                mem.add(Cmd);
+                curr.callback();
             }
-
-            Response curr = new EchoResponse(Cmd);
-            curr.callback();
-
         }
     }
 
