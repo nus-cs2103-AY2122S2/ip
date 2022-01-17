@@ -5,14 +5,15 @@ public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList<>();
-        String[] temp;
+        String[] temp, temptemp;
         Task tempTask;
-        String input;
+        String input, command;
 
         System.out.println("Hola! soy José\nQué puedo hacer por ti? UwU");
 
         while (scanner.hasNext()) {
             input = scanner.nextLine();
+            System.out.println("-------------------------------------");
             if (input.equals("bye")) {
                 System.out.println("Adiós. Espero volver a verte pronto!");
                 break;
@@ -22,20 +23,39 @@ public class Duke {
                     System.out.println(i + 1 + ": " + tasks.get(i));
                 }
             } else {
-                temp = input.split(" ");
-                if (temp[0].equals("mark")) {
+                temp = input.split(" ", 2);
+                command = temp[0];
+
+                if (command.equals("mark")) {
                     tempTask = tasks.get(Integer.parseInt(temp[1]) - 1);
                     tempTask.mark();
                     System.out.println("¡Bonito! He marcado esta tarea como hecha:\n" + tempTask);
-                } else if (temp[0].equals("unmark")) {
+                } else if (command.equals("unmark")) {
                     tempTask = tasks.get(Integer.parseInt(temp[1]) - 1);
                     tempTask.unmark();
                     System.out.println("Bien, he marcado esta tarea como aún no realizada:\n" + tempTask);
                 } else {
-                    System.out.println("Agregado: " + input);
-                    tasks.add(new Task(input));
-                }                
+                    if (command.equals("todo")) {
+                        tempTask = new ToDo(temp[1]);
+                        tasks.add(tempTask);
+                        System.out.println("Entendido. he añadido esta tarea:\n" + tempTask);
+                    } else if (command.equals("deadline")) {
+                        temptemp = temp[1].split(" /by ");
+                        tempTask = new Deadline(temptemp[0], temptemp[1]);
+                        tasks.add(tempTask);
+                        System.out.println("Entendido. he añadido esta tarea:\n" + tempTask);
+                    } else if (command.equals("event")) {
+                        temptemp = temp[1].split(" /at ");
+                        tempTask = new Event(temptemp[0], temptemp[1]);
+                        tasks.add(tempTask);
+                        System.out.println("Entendido. he añadido esta tarea:\n" + tempTask);
+                    } else {
+                        System.out.println("Error");
+                    }
+                    System.out.println("Ahora tienes " + tasks.size() + " tareas en la lista.");
+                }
             }
+            System.out.println("-------------------------------------");
         }
 
         scanner.close();
