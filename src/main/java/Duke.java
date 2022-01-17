@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException{
         Scanner sc= new Scanner(System.in);
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -31,53 +31,77 @@ public class Duke {
             }
 
             // mark
-            else if (str.length() >= 4 && str.startsWith("mark")) {
-                String[] markedTask = str.split(" ");
-                int indexMarked = Integer.parseInt(markedTask[1]) - 1;
-                Task currentTask = tasks.get(indexMarked);
-                currentTask.isDone = true;
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println(currentTask.toString())
-                ;
+            else if (str.startsWith("mark")) {
+                try {
+                    String[] markedTask = str.split(" ");
+                    int indexMarked = Integer.parseInt(markedTask[1]) - 1;
+                    Task currentTask = tasks.get(indexMarked);
+                    currentTask.isDone = true;
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println(currentTask.toString());
+                }
+                catch (IndexOutOfBoundsException e) {
+                    System.out.println(new DukeException("task does not exist!"));
+                }
             }
 
 
             // unmark
-            else if (str.length() >= 6 && str.startsWith("unmark")) {
-                String[] markedTask = str.split(" ");
-                int indexMarked = Integer.parseInt(markedTask[1]) - 1;
-                Task currentTask = tasks.get(indexMarked);
-                currentTask.isDone = false;
-                System.out.println("OK, I've marked this task as not done yet:");
-                System.out.println(currentTask.toString());
+            else if (str.startsWith("unmark")) {
+                try {
+                    String[] markedTask = str.split(" ");
+                    int indexMarked = Integer.parseInt(markedTask[1]) - 1;
+                    Task currentTask = tasks.get(indexMarked);
+                    currentTask.isDone = false;
+                    System.out.println("OK, I've marked this task as not done yet:");
+                    System.out.println(currentTask.toString());
+                }
+                catch (IndexOutOfBoundsException e) {
+                    System.out.println(new DukeException("task does not exist!"));
+                }
+
             }
 
             // generate tasks
             else {
-                if (str.length() >= 4 && str.startsWith("todo")) {
-                    Todo currentTodo = new Todo(str.substring(5));
-                    tasks.add(currentTodo);
-                    System.out.println("added: " + currentTodo.toString());
+                if (str.startsWith("todo")) {
+                    try {
+                        Todo currentTodo = new Todo(str.substring(5));
+                        tasks.add(currentTodo);
+                        System.out.println("added: " + currentTodo.toString());
+                    }
+                    catch (StringIndexOutOfBoundsException e) {
+                        System.out.println(new DukeException("task does not exist!"));
+                    }
                 }
-                else if (str.length() >= 8 && str.startsWith("deadline")) {
-                    String actualTask = str.substring(9);
-                    String[] segments = actualTask.split(" /by ");
-                    Deadline currentDeadline = new Deadline(segments[0], segments[1]);
-                    tasks.add(currentDeadline);
-                    System.out.println("added: " +  currentDeadline.toString());
+                else if (str.startsWith("deadline")) {
+                    try {
+                        String actualTask = str.substring(9);
+                        String[] segments = actualTask.split(" /by ");
+                        Deadline currentDeadline = new Deadline(segments[0], segments[1]);
+                        tasks.add(currentDeadline);
+                        System.out.println("added: " + currentDeadline.toString());
+                    }
+                    catch (StringIndexOutOfBoundsException e) {
+                        System.out.println(new DukeException("task does not exist!"));
+                    }
 
                 }
 
-                else if (str.length() >= 5 && str.startsWith("event")) {
-                    String actualTask = str.substring(6);
-                    String[] segments = actualTask.split(" /at ");
-                    Event currentEvent = new Event(segments[0], segments[1]);
-                    tasks.add(currentEvent);
-                    System.out.println("added: " + currentEvent.toString());
+                else if (str.startsWith("event")) {
+                    try {
+                        String actualTask = str.substring(6);
+                        String[] segments = actualTask.split(" /at ");
+                        Event currentEvent = new Event(segments[0], segments[1]);
+                        tasks.add(currentEvent);
+                        System.out.println("added: " + currentEvent.toString());
+                    }
+                    catch (StringIndexOutOfBoundsException e) {
+                        System.out.println(new DukeException("task does not exist!"));
+                    }
                 }
                 else {
-                    tasks.add(new Task(str));
-                    System.out.println("added: " + str);
+                    System.out.println(new DukeException("I'm sorry, but I don't know what that means :-(nr"));
                 }
             }
         }
