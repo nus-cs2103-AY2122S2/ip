@@ -20,16 +20,20 @@ Hello! I'm Batman
 What can I do for you?
 +--------------------------------------------------+
 +--------------------------------------------------+
-OOPS!!! I'm sorry, but I don't know what that means.
+I'm sorry, but I don't know what that means.
 +--------------------------------------------------+
 +--------------------------------------------------+
-List is empty
+List is empty.
 +--------------------------------------------------+
 +--------------------------------------------------+
-OOPS!!! The description of a task cannot be empty.
+List is empty.
+Index does not exists in array.
 +--------------------------------------------------+
 +--------------------------------------------------+
-OOPS!!! The description of a task cannot be empty.
+The description of a task cannot be empty.
++--------------------------------------------------+
++--------------------------------------------------+
+The description of a task cannot be empty.
 +--------------------------------------------------+
 +--------------------------------------------------+
 Got it. Task added:
@@ -77,6 +81,15 @@ Alfred, mark it as done!
 1. [T][ ] borrow book
 2. [D][ ] return book (by: Sunday)
 3. [E][X] project meeting (at: Mon 2-4pm)
++--------------------------------------------------+
++--------------------------------------------------+
+Got it. Task removed:
+  [E][X] project meeting (at: Mon 2-4pm)
+Now you have 2 tasks in the list.
++--------------------------------------------------+
++--------------------------------------------------+
+1. [T][ ] borrow book
+2. [D][ ] return book (by: Sunday)
 +--------------------------------------------------+
 +--------------------------------------------------+
 Bye. This city needs me. na na na na na na BATMAN

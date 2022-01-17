@@ -59,8 +59,11 @@ public class Duke {
                 case "deadline":
                     sb.append(addTask(command));
                     break;
+                case "delete":
+                    sb.append(deleteTask(Integer.parseInt(command[1]) - 1));
+                    break;
                 default:
-                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means.");
+                    throw new DukeException("I'm sorry, but I don't know what that means.");
             }
         }
         catch (DukeException e) {
@@ -98,23 +101,39 @@ public class Duke {
             }
         }
         catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("OOPS!!! The description of a task cannot be empty.");
+            throw new DukeException("The description of a task cannot be empty.");
         }
         return "";
     }
 
+    private String deleteTask(int index) throws DukeException {
+        try {
+            if (index >= tasks.size()) {
+                throw new DukeException("Index does not exists in array.");
+            }
+            Task t = tasks.get(index);
+            t.decrementTask();
+            tasks.remove(index);
+            return "Got it. Task removed:\n  " + t + "\n" + t.printNoOfTasks() + "\n";
+        }
+        catch (DukeException e) {
+            return printList() + e;
+        }
+    }
+
     private String printList() {
-        String s = "";
+        StringBuilder s = new StringBuilder();
         if (tasks.size() == 0) {
-            return "List is empty\n";
+            return "List is empty.\n";
         }
         for (int i = 0; i < tasks.size(); i++) {
-            s += (i+1) + ". " + tasks.get(i) + "\n";
+            s.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
         }
-        return s;
+        return s.toString();
     }
 
     private String printTask(Task t) {
+        t.incrementTask();
         return "Got it. Task added:\n  " + t + "\n" + t.printNoOfTasks() + "\n";
     }
 

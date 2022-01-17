@@ -6,7 +6,6 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-        totalTasks++;
     }
 
     public String getStatusIcon() {
@@ -19,6 +18,14 @@ public class Task {
 
     public void unmarkItem() {
         this.isDone = false;
+    }
+
+    public void incrementTask() {
+        totalTasks++;
+    }
+
+    public void decrementTask() {
+        totalTasks--;
     }
 
     public String printNoOfTasks() {
