@@ -1,18 +1,31 @@
+//Author: Tan Ting Yu
+//Student Number: A218235J
+
+/*
+ * Commands encapsulates the operations that will be performed based on the user's response
+ */
+
 public class Commands {
     private String command;
+
+     /**
+     * Constructor for Command Objects
+     *
+     * @param command - The command entered by the user
+     */
 
     public Commands(String command) {
         this.command = command;
     }
     
-    //Default case 
+    //Default case when user enters wrong command
     public void invalidCommand() {
         System.out.println("\n" + this.command + "?");
         System.out.println("What are you on about?");
-        System.out.println("Type list if you want to know the commands, kid!");
+        System.out.println("Type list if you want to know the commands, kid!\n");
     }
 
-    //List of commands
+    //Contains the list of commands when user enters help
     public void listOfCommand() {
         System.out.println("____________________________________________________________");
         System.out.println("\nCommands: ");
@@ -23,23 +36,33 @@ public class Commands {
         System.out.println("    mark <task number>                      -marks task as completed");
         System.out.println("    unmark <task number>                    -marks a completed task as uncompleted");
         System.out.println("    bye                                     -exits the program :'( ");
-        System.out.println("____________________________________________________________");
+        System.out.println("____________________________________________________________\n");
     }
 
-
+    /**
+     * Function that works as a switch for user's input
+     * 
+     * @param tasklist - Tasklist that is created by collating all the tasks
+     */
     public void performCommand(TaskList tasklist) {
+        
+        //Splits up the string to identify the main command
         String splitString[] = this.command.split(" ");
         String firstWord = splitString[0];
         
+        //Case "List"
          if (firstWord.equals("list")) {
                 tasklist.list();
          } 
          
+         //Case "mark" & Case("unmark") & Case"delete"
+         //Collated together because it works similarly
         else if (firstWord.equals("mark") || firstWord.equals("unmark") || firstWord.equals("delete")) {
+            //String to contain successful deleted message if its a delete command
             String deleted = "";
              //Handle the case of having no second input
              if (splitString.length == 1 ) {
-                 System.out.println("What?! You are to enter only 2 inputs. Eg mark 1, unmark 2, delete 3\n");
+                 System.out.println("What?! You are to enter only 2 inputs. Eg mar k 1, unmark 2, delete 3\n");
              }  else if (splitString.length > 2) {
                  //Handle the case of having more than 2 inputs
                  System.out.println("What?! You are to enter only 2 inputs. Eg mark 1, unmark 2, delete 3\n");
@@ -50,7 +73,7 @@ public class Commands {
                      int index = Integer.parseInt(splitString[1]);
                      //If index is out of range, throw illegal argument exception
                      if (index <= 0 || index > tasklist.currentSize) {
-                         throw new DukeExceptions("  Index is out of task range");
+                         throw new DukeExceptions("  Index is out of task range\n");
                      }
                      //If no errors, continue
                        //Task that we are going to mark/unmark/delete
@@ -65,7 +88,7 @@ public class Commands {
                      } else {
                          tasklist.delete(index - 1);
                          displayMessage = "YES! I've removed this task and soon I'll remove you as well!:\n";
-                         deleted = "Now you have " + tasklist.currentSize + " tasks in the list";
+                         deleted = "Now you have " + tasklist.currentSize + " tasks in the list\n";
                      }
                     
                      System.out.println(displayMessage);
@@ -77,12 +100,13 @@ public class Commands {
                      System.out.println("What? Second input has to be an integer! Eg mark 1, unmark 2\n");
                      //Out of task range is thrown if the second input is out of range
                  } catch (DukeExceptions e) {
-                     System.out.println("BRAT ! Your index is out of range! Number has to in the range of the list");
+                     System.out.println("BRAT ! Your index is out of range! Number has to in the range of the list\n");
                  }
 
              }
          }  
-         
+          //Case "mark" & Case("unmark") & Case"delete"
+         //Collated together because it works similarly
          else if (firstWord.equals("todo") || firstWord.equals("deadline") || firstWord.equals("event")) {
             //Pass to check whether task is to be created
             boolean created = false;
@@ -112,7 +136,7 @@ public class Commands {
                             if (!temp.contains("by")) {
                                 System.out.println("Quit fooling around kid!");
                                 System.out.println("Deadline tasks require /by specify the deadline.");
-                                System.out.println("Eg deadline eat food /by 12pm");
+                                System.out.println("Eg deadline eat food /by 12pm\n");
                             } else {
                                 String timeOfOccurrence = temp.substring(temp.indexOf(" ") + 1);
                                 newTask = new DeadlineTask(taskNameWithoutBack, timeOfOccurrence);
@@ -139,16 +163,18 @@ public class Commands {
                     System.out.println("Quit ordering me around!");
                     System.out.println("I've added this task to our list:");
                     System.out.println("    " + newTask);
-                    System.out.println("    Now you have " + tasklist.currentSize + " tasks in the list.\n");
+                    System.out.println("Now you have " + tasklist.currentSize + " tasks in the list.\n");
                 }
 
             }
         }
 
+         //Case "help""
+        //List out all commands 
         else if (firstWord.equals("help")) {
           listOfCommand();
         }
-
+        //Invalid command case
         else {
            invalidCommand();
         }
