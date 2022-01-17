@@ -8,7 +8,7 @@ class Printer {
         System.out.println(String.format("    %s", "=========================================="));
     }
 
-    public void print(ArrayList<String> arr) {
+    public void print(ArrayList<Task> arr) {
         System.out.println(String.format("    %s", "=========================================="));
         arr.forEach((x) -> { System.out.println(String.format("    %d. %s", arr.indexOf(x) + 1, x.toString())); } );
         System.out.println(String.format("    %s", "=========================================="));
