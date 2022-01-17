@@ -1,5 +1,5 @@
 public class List {
-    private final String[] listOfTasks;
+    private final Task[] listOfTasks;
     private int numberOfTasks;
 
     /**
@@ -8,7 +8,7 @@ public class List {
      * @param size Size of list of tasks.
      */
     public List(int size) {
-        this.listOfTasks = new String[size];
+        this.listOfTasks = new Task[size];
         this.numberOfTasks = 0;
     }
 
@@ -19,7 +19,9 @@ public class List {
      */
     public void add(String userInput) {
         this.numberOfTasks++;
-        this.listOfTasks[numberOfTasks] = userInput;
+
+        Task currentTask = new Task(userInput);
+        this.listOfTasks[numberOfTasks] = currentTask;
 
         String output = "    ____________________________________________________________\n"
                 + "     added: " + userInput + "\n"
@@ -33,7 +35,7 @@ public class List {
     public void display() {
         System.out.println("    ____________________________________________________________\n");
         for (int i = 1; i <= this.numberOfTasks; i++) {
-            String output = "     " + i + ". " + this.listOfTasks[i] + "\n";
+            String output = "     " + i + ". " + this.listOfTasks[i].getDescription() + "\n";
             System.out.println(output);
         }
         System.out.println("    ____________________________________________________________\n");
