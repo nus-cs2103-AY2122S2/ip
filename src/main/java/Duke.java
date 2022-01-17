@@ -31,75 +31,105 @@ public class Duke {
                 "       |_/";
         String s = String.format(line + logo + "\n" + "Hello! I'm %s"
                             +"\n" + "What can I do for you?\n" + line, this.botName);
-        System.out.println(s);
+        System.out.print(s);
     }
 
-    private void Print(String text) {
+    private void checkInput(String input){
         StringBuilder sb = new StringBuilder();
-        Task t;
         int itemIndex;
-        String description;
-        String details;
         sb.append(line);
-        String[] command = text.split(" ", 2);
-        switch(command[0]) {
-            case "list":
-                for (int i = 0; i < tasks.size(); i++) {
-                    sb.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
-                }
-                break;
-            case "mark":
-                itemIndex = Integer.parseInt(command[1]) - 1;
-                tasks.get(itemIndex).markItem();
-                sb.append("Alfred, mark it as done!\n  ").append(tasks.get(itemIndex).toString()).append("\n");
-                break;
-            case "unmark":
-                itemIndex = Integer.parseInt(command[1]) - 1;
-                tasks.get(itemIndex).unmarkItem();
-                sb.append("Make up your mind. Alfred, unmark it!\n  ").append(tasks.get(itemIndex).toString()).append("\n");
-                break;
-            case "todo":
-                description = command[1];
-                t = new Todo(description);
-                tasks.add(t);
-                sb.append("Got it. Task added:\n  ").append(t).append("\n").append(t.printNoOfTasks()).append("\n");
-                break;
-            case "deadline":
-                description = command[1].split("/")[0];
-                details = command[1].split("/by")[1];
-                t = new Deadline(description, details);
-                tasks.add(t);
-                sb.append("Got it. Task added:\n  ").append(t).append("\n").append(t.printNoOfTasks()).append("\n");
-                break;
-            case "event":
-                description = command[1].split("/")[0];
-                details = command[1].split("/at")[1];
-                t = new Event(description, details);
-                tasks.add(t);
-                sb.append("Got it. Task added:\n  ").append(t).append("\n").append(t.printNoOfTasks()).append("\n");
-                break;
-            default:
-                t = new Task(text);
-                tasks.add(t);
-                sb.append("added: ").append(t.description).append("\n").append(t.printNoOfTasks()).append("\n");
-                break;
+        String[] command = input.split(" ", 2);
+        try {
+            switch (command[0]) {
+                case "list":
+                    sb.append(printList());
+                    break;
+                case "mark":
+                    itemIndex = Integer.parseInt(command[1]) - 1;
+                    tasks.get(itemIndex).markItem();
+                    sb.append("Alfred, mark it as done!\n  ").append(tasks.get(itemIndex).toString()).append("\n");
+                    break;
+                case "unmark":
+                    itemIndex = Integer.parseInt(command[1]) - 1;
+                    tasks.get(itemIndex).unmarkItem();
+                    sb.append("Make up your mind. Alfred, unmark it!\n  ").append(tasks.get(itemIndex).toString()).append("\n");
+                    break;
+                case "todo":
+                case "event":
+                case "deadline":
+                    sb.append(addTask(command));
+                    break;
+                default:
+                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means.");
+            }
+        }
+        catch (DukeException e) {
+            sb.append(e);
         }
         sb.append(line);
-        System.out.println(sb);
+        System.out.print(sb);
     }
 
-    private boolean Response(String text) {
-        if (text.equals("bye")) {
+    private String addTask(String[] command) throws DukeException{
+        Task t;
+        String description;
+        String details;
+        try {
+            String task;
+            task = command[1];
+            switch (command[0]) {
+                case "todo":
+                        description = task;
+                        t = new Todo(description);
+                        tasks.add(t);
+                        return printTask(t);
+                case "deadline":
+                        description = task.split("/")[0];
+                        details = task.split("/by")[1];
+                        t = new Deadline(description, details);
+                        tasks.add(t);
+                        return printTask(t);
+                case "event":
+                        description = task.split("/")[0];
+                        details = task.split("/at")[1];
+                        t = new Event(description, details);
+                        tasks.add(t);
+                        return printTask(t);
+            }
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("OOPS!!! The description of a task cannot be empty.");
+        }
+        return "";
+    }
+
+    private String printList() {
+        String s = "";
+        if (tasks.size() == 0) {
+            return "List is empty\n";
+        }
+        for (int i = 0; i < tasks.size(); i++) {
+            s += (i+1) + ". " + tasks.get(i) + "\n";
+        }
+        return s;
+    }
+
+    private String printTask(Task t) {
+        return "Got it. Task added:\n  " + t + "\n" + t.printNoOfTasks() + "\n";
+    }
+
+    private boolean Response(String input){
+        if (input.equals("bye")) {
             Terminate();
             return false;
         }
         else {
-            Print(text);
+            checkInput(input);
             return true;
         }
     }
 
-    private void Run() {
+    private void Run(){
         Greeting();
         Scanner sc = new Scanner(System.in);
         boolean valid = Response(sc.nextLine());
