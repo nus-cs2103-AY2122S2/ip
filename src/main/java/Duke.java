@@ -34,6 +34,11 @@ public class Duke {
                         tempTask = tasks.get(Integer.parseInt(task[1]) - 1);
                         tempTask.unmark();
                         System.out.println("Bien, he marcado esta tarea como aún no realizada:\n" + tempTask);
+                    } else if (command.equals("delete")) {
+                        tempTask = tasks.get(Integer.parseInt(task[1]) - 1);
+                        System.out.println("Señalado. He eliminado esta tarea:\n" + tempTask);
+                        tasks.remove(tempTask);
+                        System.out.println("Ahora tienes " + tasks.size() + " tareas en la lista.");
                     } else {
                         if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
                             if (task.length > 1) {
