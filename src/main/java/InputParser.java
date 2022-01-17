@@ -15,8 +15,17 @@ public class InputParser {
         } else if (action.equals("unmark")) {
             arr.get(Integer.parseInt(args[1]) - 1).unmark();
             p.print("OK, I've marked this task as not done yet: "," " + arr.get(Integer.parseInt(args[1]) - 1).toString());
-        } else {
-            arr.add(new Task(ss));
+        } else if (action.equals("todo")) {
+            ToDoTask newTask = new ToDoTask((ss).substring(5, ss.length()));
+            arr.add(newTask);
+            p.print("Added Task: ", " " + newTask.toString(), String.format("There are now %d task(s) in the list.", arr.size()));
+        } else if (action.equals("deadline")) {
+
+        } else if (action.equals("event")) {
+
+        }
+        else {
+            //arr.add(new Task(ss));
             p.print(String.format("added: %s", ss));
         }
         return 0;
