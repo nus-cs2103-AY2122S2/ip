@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -33,6 +34,8 @@ public class Driver {
                     this.markAsDone(command);
                 } else if (command.split(" ")[0].equals("unmark")) {
                     this.unmarkDone(command);
+                } else if(command.split(" ")[0].equals("delete")) {
+                    this.deleteTask(command);
                 } else if (!command.equals("")) {
                     this.addTask(command);
                 }
@@ -107,6 +110,23 @@ public class Driver {
             throw new DukeWrongInputFormatException("Please input a valid Task number after typing unmark: unmark <taskNum>");
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeWrongInputFormatException("Please input a valid mark command: unmark <taskNum>");
+        }
+    }
+
+    private void deleteTask(String in) throws DukeException {
+        try {
+            int index = Integer.parseInt(in.split(" ")[1]);
+            if (index > this.tasks.size() || index < 1) {
+                throw new DukeInvalidTaskNumberException("Task number: " + index + " does not exist");
+            } else {
+                Task deleted = tasks.remove(index - 1);
+                System.out.println(line + "\n\tNoted. I've removed this task:\n\t\t" + deleted.toString()
+                        + "\n\tNow you have "+ tasks.size() +" tasks in the list.\n" + line);
+            }
+        } catch (NumberFormatException e) {
+            throw new DukeWrongInputFormatException("Please input a valid Task number after typing delete: delete <taskNum>");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeWrongInputFormatException("Please input a valid delete command: delete <taskNum>");
         }
     }
 }
