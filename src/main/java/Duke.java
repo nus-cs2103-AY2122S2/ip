@@ -29,7 +29,7 @@ public class Duke {
         /**
          * Array container for user's to do tasks
          */
-        String[] todoList = new String[100];
+        Task[] todoList = new Task[100];
 
         String userInput = sc.nextLine();
 
@@ -42,27 +42,43 @@ public class Duke {
                 System.out.println(lines);
             } else {
                 // storing input task in todoList
+                String[] userInputArr = userInput.split(" ");
 
-                switch (userInput) {
+                switch (userInputArr[0]) {
                     case "list":
                         System.out.println(lines);
+                        System.out.println("    Here are the tasks in your list:");
                         for (int i = 0; i < count; i++) {
-                            String display = String.format("    %d. %s", i + 1, todoList[i]);
+                            String display = String.format("    %d.[%s] %s", i + 1, todoList[i].getStatusIcon(), todoList[i].description);
                             System.out.println(display);
                         }
                         System.out.println(lines);
                         break;
 
+                    case "mark":
+                        int taskToMark = Integer.parseInt(userInputArr[1]);
+                        todoList[taskToMark - 1].markAsDone();
+
+                        System.out.println("Nice! I've marked this task as done: ");
+
+                        String taskString = String.format("[%s] %s", todoList[taskToMark - 1].getStatusIcon(), todoList[taskToMark - 1].description);
+                        System.out.println("    " + taskString);
+                        break;
+
                     default:
+                        // creating task
+                        Task inputTask = new Task(userInput);
+
                         // storing input task
-                        todoList[count] = userInput;
+                        todoList[count] = inputTask;
+
                         // displaying input task
                         System.out.println(lines);
-                        System.out.println("    added: " + userInput);
+                        System.out.println("    added: " + inputTask.description);
                         System.out.println(lines);
+                        count++;
                         break;
                 }
-                count++;
                 userInput = sc.nextLine();
             }
         }
