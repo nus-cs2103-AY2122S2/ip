@@ -1,0 +1,10 @@
+todo buy lunch
+deadline submit assignment /by Friday, 2pm
+event project meeting /at Wednesday, 10am-11am
+list
+mark 1
+mark 3
+list
+unmark 3
+list
+bye

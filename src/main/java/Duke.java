@@ -4,16 +4,16 @@ import java.io.IOException;
 
 public class Duke {
     public static void main(String[] args) throws IOException {
-        String logo = "     ____        _        \n"
-                + "    |  _ \\ _   _| | _____ \n"
+        String logo = "     ____        _\n"
+                + "    |  _ \\ _   _| | _____\n"
                 + "    | | | | | | | |/ / _ \\\n"
                 + "    | |_| | |_| |   <  __/\n"
                 + "    |____/ \\__,_|_|\\_\\___|\n";
 
-        String intro = "    Hello! I'm Duke! \n"
-                + "    What can I do for you? \n";
+        String intro = "    Hello! I'm Duke!\n"
+                + "    What can I do for you?\n";
 
-        String line = "    ―――――――――――――――――――――――――――――――――― \n";
+        String line = "    ――――――――――――――――――――――――――――――――――\n";
 
         String indent = "    ";
 
@@ -30,7 +30,7 @@ public class Duke {
         while (!command.equals("bye")) {
 
             if (command.equals("list")) { // list out all added tasks
-                System.out.print(line + indent + "Here are the tasks in your list: \n");
+                System.out.print(line + indent + "Here are the tasks in your list:\n");
                 int index = 1;
                 for (int n = 0; n < totalTasks; n++) {
                     Task t = taskArr[n];
@@ -44,10 +44,10 @@ public class Duke {
                 Task t = taskArr[taskNum - 1];
 
                 if (command.equals("mark")) {
-                    System.out.print(line + indent + "Nice! You've completed this task: \n");
+                    System.out.print(line + indent + "Nice! You've completed this task:\n");
                     t.markAsDone();
                 } else {
-                    System.out.print(line + indent + "Okay, I've marked this task as undone: \n");
+                    System.out.print(line + indent + "Okay, I've marked this task as undone:\n");
                     t.markAsUndone();
                 }
 
@@ -70,10 +70,10 @@ public class Duke {
                 }
 
                 totalTasks++;
-                System.out.print(line + indent + "Got it! I've added this task: \n"
+                System.out.print(line + indent + "Got it! I've added this task:\n"
                         + indent + "  " + taskArr[totalTasks - 1].toString() + "\n"
                         + indent + "Now you have " + totalTasks + (totalTasks > 1 ? " tasks" : " task")
-                        + " in the list. \n" + line);
+                        + " in the list.\n" + line);
             }
             input = br.readLine();
             inputArr = input.split(" ");

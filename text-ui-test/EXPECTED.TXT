@@ -1,7 +1,57 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+     ____        _
+    |  _ \ _   _| | _____
+    | | | | | | | |/ / _ \
+    | |_| | |_| |   <  __/
+    |____/ \__,_|_|\_\___|
 
+    Hello! I'm Duke!
+    What can I do for you?
+    ――――――――――――――――――――――――――――――――――
+    ――――――――――――――――――――――――――――――――――
+    Got it! I've added this task:
+      [T][ ] buy lunch
+    Now you have 1 task in the list.
+    ――――――――――――――――――――――――――――――――――
+    ――――――――――――――――――――――――――――――――――
+    Got it! I've added this task:
+      [D][ ] submit assignment (by: Friday, 2pm)
+    Now you have 2 tasks in the list.
+    ――――――――――――――――――――――――――――――――――
+    ――――――――――――――――――――――――――――――――――
+    Got it! I've added this task:
+      [E][ ] project meeting (at: Wednesday, 10am-11am)
+    Now you have 3 tasks in the list.
+    ――――――――――――――――――――――――――――――――――
+    ――――――――――――――――――――――――――――――――――
+    Here are the tasks in your list:
+    1.[T][ ] buy lunch
+    2.[D][ ] submit assignment (by: Friday, 2pm)
+    3.[E][ ] project meeting (at: Wednesday, 10am-11am)
+    ――――――――――――――――――――――――――――――――――
+    ――――――――――――――――――――――――――――――――――
+    Nice! You've completed this task:
+    [T][X] buy lunch
+    ――――――――――――――――――――――――――――――――――
+    ――――――――――――――――――――――――――――――――――
+    Nice! You've completed this task:
+    [E][X] project meeting (at: Wednesday, 10am-11am)
+    ――――――――――――――――――――――――――――――――――
+    ――――――――――――――――――――――――――――――――――
+    Here are the tasks in your list:
+    1.[T][X] buy lunch
+    2.[D][ ] submit assignment (by: Friday, 2pm)
+    3.[E][X] project meeting (at: Wednesday, 10am-11am)
+    ――――――――――――――――――――――――――――――――――
+    ――――――――――――――――――――――――――――――――――
+    Okay, I've marked this task as undone:
+    [E][ ] project meeting (at: Wednesday, 10am-11am)
+    ――――――――――――――――――――――――――――――――――
+    ――――――――――――――――――――――――――――――――――
+    Here are the tasks in your list:
+    1.[T][X] buy lunch
+    2.[D][ ] submit assignment (by: Friday, 2pm)
+    3.[E][ ] project meeting (at: Wednesday, 10am-11am)
+    ――――――――――――――――――――――――――――――――――
+    ――――――――――――――――――――――――――――――――――
+    Bye! Hope to see you again soon!
+    ――――――――――――――――――――――――――――――――――
