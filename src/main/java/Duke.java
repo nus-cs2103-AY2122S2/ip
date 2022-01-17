@@ -9,6 +9,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Howdy and welcome to\n" + logo + "\n" + "Feel free to tell duke any tasks you'd like!");
+        System.out.println("-----------------------------------");
 
         //Initialise objects needed
         String inputData;
@@ -92,6 +93,9 @@ public class Duke {
                 newTask.printTask();
                 System.out.println("Now you have " + list.size() + " tasks in the list.");
             }
+            System.out.println("-----------------------------------");
         }
+
+        scan.close();
     }
 }
