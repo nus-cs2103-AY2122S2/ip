@@ -4,15 +4,17 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         TaskList taskList = new TaskList();
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo = "   _____       _ _                        \n" +
+                "  / ____|     (_) |                       \n" +
+                " | (___   __ _ _| |_ __ _ _ __ ___   __ _ \n" +
+                "  \\___ \\ / _` | | __/ _` | '_ ` _ \\ / _` |\n" +
+                "  ____) | (_| | | || (_| | | | | | | (_| |\n" +
+                " |_____/ \\__,_|_|\\__\\__,_|_| |_| |_|\\__,_|\n";
+
         System.out.println(logo);
 
         System.out.println("____________________________________________________________");
-        System.out.println("Hello! I'm Saitama");
+        System.out.println("Hello! I'm Saitama.");
         System.out.println("What can I do for you?");
         System.out.println("____________________________________________________________");
 
@@ -44,7 +46,7 @@ public class Duke {
                     taskList.add(command);
                     break;
                 default:
-                    throw new InvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :(");
+                    throw new InvalidCommandException("huh?!\nPlease enter a valid command.");
                 }
             } catch (InvalidCommandException | InvalidTaskNumberException | EmptyDescriptionException e) {
                 System.out.println(e.getMessage());
@@ -52,6 +54,6 @@ public class Duke {
                 System.out.println("____________________________________________________________");
             }
         }
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("OK...");
     }
 }

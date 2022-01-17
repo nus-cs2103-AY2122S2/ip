@@ -6,7 +6,8 @@ public class TaskList {
 
     private void add(Task task) {
         ls.add(task);
-        System.out.println("Got it. I've added this task: ");
+        System.out.println("OK...");
+        System.out.println("The following task has been added to the list: ");
         System.out.println(task);
         System.out.println("Now you have " + this.numOfTasks() + " tasks in the list.");
     }
@@ -62,7 +63,8 @@ public class TaskList {
     }
 
     private void delete(int taskNumber) {
-        System.out.println("Noted. I've removed this task: ");
+        System.out.println("OK...");
+        System.out.println("The following task has been removed from the list: ");
         System.out.println(ls.get(taskNumber - 1));
         ls.remove(taskNumber - 1);
         System.out.println("Now you have " + this.numOfTasks() + " tasks in the list.");
