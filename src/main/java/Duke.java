@@ -1,5 +1,5 @@
 import java.util.Scanner;
-import java.util.ArrayList;
+
 
 public class Duke {
     public static void main(String[] args) {
@@ -9,112 +9,116 @@ public class Duke {
         while (sc.hasNextLine()) {
             String userInput = sc.nextLine();
             String[] inputArguments = userInput.split(" ");
-            String operation = inputArguments[0];
-            switch (operation) {
-                case "bye":
-                    System.out.println("Bye. Hope to see you again soon!");
-                    return;
-                case "list":
-                    taskManager.list();
-                    break;
-                case "mark":
-                    if (inputArguments.length < 2) {
-                        System.out.println("Task number is not indicated.");
+            String operation = "";
+            try {
+                if (inputArguments.length == 0) {
+                    throw new DukeEmptyInputException();
+                }
+                if (inputArguments[0].equals("")) {
+                    throw new DukeEmptyInputException();
+                }
+                operation = inputArguments[0];
+            } catch (DukeEmptyInputException e){
+                System.out.println(e);
+                continue;
+            }
+            try {
+                switch (operation) {
+                    case "bye":
+                        System.out.println("Bye. Hope to see you again soon!");
+                        return;
+                    case "list":
+                        taskManager.list();
                         break;
-                    }
-                    try {
-                        int markIndex = Integer.parseInt(inputArguments[1]) - 1;
-                        taskManager.mark(markIndex);
-                    } catch (IndexOutOfBoundsException e) {
-                        System.out.println("Task with this index is not found.");
-                    } catch (NumberFormatException e) {
-                        System.out.println("Task number is not a valid number");
-                    }
-                    break;
-                case "unmark":
-                    if (inputArguments.length < 2) {
-                        System.out.println("Task number is not indicated.");
-                        break;
-                    }
-                    try {
-                        int unmarkIndex = Integer.parseInt(inputArguments[1]) - 1;
-                        taskManager.unmark(unmarkIndex);
-                    } catch (IndexOutOfBoundsException e) {
-                        System.out.println("Task with this index is not found.");
-                    } catch (NumberFormatException e) {
-                        System.out.println("Task number is not a valid number");
-                    }
-                    break;
-                case "deadline":
-                    if (inputArguments.length < 2) {
-                        System.out.println("Task is not indicated.");
-                        break;
-                    }
-                    boolean foundDeadlineCommand = false;
-                    for (int i = 0; i < inputArguments.length; i++) {
-                        if (inputArguments[i].equals("/by")) {
-                            foundDeadlineCommand = true;
+                    case "mark":
+                        if (inputArguments.length < 2) {
+                            throw new DukeInsufficientArgumentsException();
                         }
-                    }
-                    if (!foundDeadlineCommand) {
-                        System.out.println("Command to insert deadline task is not found.");
-                        break;
-                    }
-                    String[] deadlineDetails = userInput.split("/by", 2);
-                    String deadlineTime = deadlineDetails[1].trim();
-                    String deadlineName = deadlineDetails[0].substring(operation.length() + 1).trim();
-                    if (deadlineTime.isEmpty()) {
-                        System.out.println("No deadline found.");
-                        break;
-                    }
-                    if (deadlineName.isEmpty()) {
-                        System.out.println("Task name is not found.");
-                        break;
-                    }
-                    Deadline deadlineTask = new Deadline(deadlineName, deadlineTime);
-                    taskManager.add(deadlineTask);
-                    break;
-                case "event":
-                    if (inputArguments.length < 2) {
-                        System.out.println("Task is not indicated.");
-                        break;
-                    }
-                    boolean foundEventCommand = false;
-                    for (int i = 0; i < inputArguments.length; i++) {
-                        if (inputArguments[i].equals("/at")) {
-                            foundEventCommand = true;
+                        try {
+                            int markIndex = Integer.parseInt(inputArguments[1]) - 1;
+                            taskManager.mark(markIndex);
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new DukeTaskNotFoundException();
+                        } catch (NumberFormatException e) {
+                            throw new DukeInvalidArgumentsException();
                         }
-                    }
-                    if (!foundEventCommand) {
-                        System.out.println("Command to insert event task is not found.");
                         break;
-                    }
-                    String[] eventDetails = userInput.split("/at", 2);
-                    String eventTime = eventDetails[1].trim();
-                    String eventName = eventDetails[0].substring(operation.length() + 1).trim();
-                    if (eventTime.isEmpty()) {
-                        System.out.println("No event time found.");
+                    case "unmark":
+                        if (inputArguments.length < 2) {
+                            throw new DukeInsufficientArgumentsException();
+                        }
+                        try {
+                            int unmarkIndex = Integer.parseInt(inputArguments[1]) - 1;
+                            taskManager.unmark(unmarkIndex);
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new DukeTaskNotFoundException();
+                        } catch (NumberFormatException e) {
+                            throw new DukeInvalidArgumentsException();
+                        }
                         break;
-                    }
-                    if (eventName.isEmpty()) {
-                        System.out.println("Task name is not found.");
+                    case "deadline":
+                        if (inputArguments.length < 2) {
+                            throw new DukeInsufficientArgumentsException();
+                        }
+                        boolean foundDeadlineCommand = false;
+                        for (int i = 0; i < inputArguments.length; i++) {
+                            if (inputArguments[i].equals("/by")) {
+                                foundDeadlineCommand = true;
+                            }
+                        }
+                        if (!foundDeadlineCommand) {
+                            throw new DukeInsufficientArgumentsException();
+                        }
+                        String[] deadlineDetails = userInput.split("/by", 2);
+                        String deadlineTime = deadlineDetails[1].trim();
+                        String deadlineName = deadlineDetails[0].substring(operation.length() + 1).trim();
+                        if (deadlineTime.isEmpty()) {
+                            throw new DukeInsufficientArgumentsException();
+                        }
+                        if (deadlineName.isEmpty()) {
+                            throw new DukeInsufficientArgumentsException();
+                        }
+                        Deadline deadlineTask = new Deadline(deadlineName, deadlineTime);
+                        taskManager.add(deadlineTask);
                         break;
-                    }
-                    Event eventTask = new Event(eventName, eventTime);
-                    taskManager.add(eventTask);
-                    break;
-                case "todo":
-                    if (inputArguments.length < 2) {
-                        System.out.println("Task is not indicated.");
+                    case "event":
+                        if (inputArguments.length < 2) {
+                            throw new DukeInsufficientArgumentsException();
+                        }
+                        boolean foundEventCommand = false;
+                        for (int i = 0; i < inputArguments.length; i++) {
+                            if (inputArguments[i].equals("/at")) {
+                                foundEventCommand = true;
+                            }
+                        }
+                        if (!foundEventCommand) {
+                            throw new DukeInsufficientArgumentsException();
+                        }
+                        String[] eventDetails = userInput.split("/at", 2);
+                        String eventTime = eventDetails[1].trim();
+                        String eventName = eventDetails[0].substring(operation.length() + 1).trim();
+                        if (eventTime.isEmpty()) {
+                            throw new DukeInsufficientArgumentsException();
+                        }
+                        if (eventName.isEmpty()) {
+                            throw new DukeInsufficientArgumentsException();
+                        }
+                        Event eventTask = new Event(eventName, eventTime);
+                        taskManager.add(eventTask);
                         break;
-                    }
-                    String toDoName = userInput.substring(operation.length() + 1);
-                    ToDo toDoTask = new ToDo(toDoName);
-                    taskManager.add(toDoTask);
-                    break;
-                default:
-                    System.out.println("No such command found.");
-                    break;
+                    case "todo":
+                        if (inputArguments.length < 2) {
+                            throw new DukeInsufficientArgumentsException();
+                        }
+                        String toDoName = userInput.substring(operation.length() + 1);
+                        ToDo toDoTask = new ToDo(toDoName);
+                        taskManager.add(toDoTask);
+                        break;
+                    default:
+                        throw new DukeInvalidCommandException();
+                }
+            } catch (DukeException e){
+                System.out.println(e);
             }
         }
     }
