@@ -16,14 +16,6 @@ public class Duke {
             + "    Bye! Hope to see you again soon :D\n"
             + "    ____________________________________________________________";
 
-    private static void echo(String userInput) {
-        String echoedMessage = "    ____________________________________________________________\n"
-                + "    " + userInput + "\n"
-                + "    ____________________________________________________________";
-        System.out.println(echoedMessage);
-
-    }
-
     /**
      * Greets the user by printing the default welcome message.
      */
@@ -38,6 +30,19 @@ public class Duke {
     private static void exit() {
         System.out.println(EXIT_MESSAGE);
         System.exit(0);
+    }
+
+    /**
+     * Echoes input message back to the user.
+     *
+     * @param userInput
+     */
+    private static void echo(String userInput) {
+        String echoedMessage = "    ____________________________________________________________\n"
+                + "    " + userInput + "\n"
+                + "    ____________________________________________________________";
+        System.out.println(echoedMessage);
+
     }
 
     public static void main(String[] args) {
