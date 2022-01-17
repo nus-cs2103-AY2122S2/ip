@@ -27,14 +27,14 @@ public class TaskList {
         Task t = list.get(index);
         t.markAsDone();
         System.out.println("Task done! \\(n_n)/");
-        System.out.println("\t" + t);
+        System.out.println("  " + t);
     }
 
     public void markItemUndone(int index) {
         Task t = list.get(index);
         t.markUndone();
         System.out.println("Task not done =(");
-        System.out.println("\t" + t);
+        System.out.println("  " + t);
     }
 
     public String getLast() {

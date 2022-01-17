@@ -10,7 +10,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
         Scanner sc = new Scanner(System.in);
-        System.out.println("Hello! I'm \n" + logo);
+        System.out.println("Hello! I'm\n" + logo);
         System.out.println("What can I do for you? =)");
         TaskList tl = new TaskList();
 
@@ -31,8 +31,8 @@ public class Duke {
                     int index = Integer.parseInt(text[1]) - 1;
                     tl.markItemUndone(index);
                 } else {
-                    System.out.println("added o.O: ");
-                    System.out.print("\t");
+                    System.out.println("added o.O:");
+                    System.out.print("  ");
                     if (command.equals("todo")) {
                         tl.addTodo(s.split("todo ")[1]);
                     } else if (command.equals("deadline")) {
@@ -57,6 +57,6 @@ public class Duke {
     }
 
     public static void echo(String s) {
-        System.out.println("\t" + s);
+        System.out.println("  " + s);
     }
 }
