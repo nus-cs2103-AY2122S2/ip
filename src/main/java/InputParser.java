@@ -7,7 +7,7 @@ public class InputParser {
             String[] args = ss.split("\\s+");
             String action = args[0];
             if(action.equals("bye")) {
-                p.print(" Bye. Hope to see you again soon!");
+                p.print("Bye. Hope to see you again soon!");
                 return -1;
             } else if (action.equals("list")) {
                 // Empty List handled by Printer
@@ -27,7 +27,7 @@ public class InputParser {
                     throw new DukeException("Task ID out of range!");
 
                 arr.get(Integer.parseInt(args[1]) - 1).mark();
-                p.print("Nice! I've marked this task as done: ", " " + arr.get(Integer.parseInt(args[1]) - 1).toString());
+                p.print("Task marked as done: ", " " + arr.get(Integer.parseInt(args[1]) - 1).toString());
             } else if (action.equals("unmark")) {
 
                 if(args.length == 1)
@@ -43,7 +43,7 @@ public class InputParser {
                     throw new DukeException("Task ID out of range!");
 
                 arr.get(Integer.parseInt(args[1]) - 1).unmark();
-                p.print("OK, I've marked this task as not done yet: "," " + arr.get(Integer.parseInt(args[1]) - 1).toString());
+                p.print("Task as not done yet: "," " + arr.get(Integer.parseInt(args[1]) - 1).toString());
             } else if (action.equals("todo")) {
                 if(args.length == 1)
                     throw new DukeException("Task Name must be provided!");
@@ -79,6 +79,23 @@ public class InputParser {
                 EventTask newTask = new EventTask(ss.substring(6, ss.length()).split("/at")[0], ss.split("/at")[1]);
                 arr.add(newTask);
                 p.print("Added Task: ", " " + newTask.toString(), String.format("There are now %d task(s) in the list.", arr.size()));
+            } else if (action.equals("delete")) {
+
+                if(args.length == 1)
+                    throw new DukeException("Task ID must be provided!");
+                try {
+                    Integer.parseInt(args[1]);
+                } catch(NumberFormatException e) {
+                    throw new DukeException("Task ID must be an integer!");
+                }
+                if(arr.size() == 0)
+                    throw new DukeException("Task List is empty!");
+                if(Integer.parseInt(args[1]) > arr.size())
+                    throw new DukeException("Task ID out of range!");
+
+                Task deletedTask = arr.get(Integer.parseInt(args[1]) - 1);
+                arr.remove(Integer.parseInt(args[1]) - 1);
+                p.print("Deleted Task:", " " + deletedTask.toString(), String.format("There are now %d task(s) in the list.", arr.size()));
             }
             else {
                 throw new DukeException("Unknown Command");
