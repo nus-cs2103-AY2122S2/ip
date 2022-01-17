@@ -2,6 +2,11 @@ public class Task {
     protected String taskName;
     protected boolean isDone;
 
+    Task() {
+        this.taskName = "";
+        this.isDone = false;
+    }
+
     Task(String ss) {
         this.taskName = ss;
         this.isDone = false;
@@ -20,3 +25,4 @@ public class Task {
         return String.format("[%s] %s", this.isDone?"X":" ", taskName);
     }
 }
+
