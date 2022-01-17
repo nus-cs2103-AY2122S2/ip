@@ -36,7 +36,16 @@ public class Connor {
         case "todo":
         case "deadline":
         case "event": {
-            addTask(x, statement[1].trim());
+            try {
+                String desc = statement[1].trim();
+                if (desc.isBlank()) {
+                    print("Error! Tasks cannot have an empty description.");
+                    return;
+                }
+                addTask(x, desc);
+            } catch (Exception ArrayIndexOutOfBoundsException) {
+                print("Error! Tasks cannot have an empty description.");
+            }
             break;
         }
         case "mark": {
@@ -79,7 +88,13 @@ public class Connor {
                 return;
             }
             String[] phrase = desc.split("/by", 2);
-            Deadline deadline = new Deadline(phrase[0].trim(), phrase[1].trim());
+            String thing = phrase[0].trim();
+            String when  = phrase[1].trim();
+            if (thing.isBlank() || when.isBlank()) {
+                print("Error! Deadlines cannot have empty descriptions or dates.");
+                return;
+            }
+            Deadline deadline = new Deadline(thing, when);
             taskList.add(deadline);
             print("Alright, I have added a new task: ");
             print(INDENT + deadline.toString());
@@ -95,7 +110,13 @@ public class Connor {
                 return;
             }
             String[] phrase = desc.split("/at", 2);
-            Event event = new Event(phrase[0].trim(), phrase[1].trim());
+            String thing = phrase[0].trim();
+            String when  = phrase[1].trim();
+            if (thing.isBlank() || when.isBlank()) {
+                print("Error! Events cannot have empty descriptions or dates.");
+                return;
+            }
+            Event event = new Event(thing, when);
             taskList.add(event);
             print("Alright, I have added a new task: ");
             print(INDENT + event.toString());
