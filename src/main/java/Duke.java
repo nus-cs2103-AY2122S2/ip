@@ -9,7 +9,7 @@ public class Duke {
     }
 }
 
-class printer {
+class Printer {
     public void print(String ss) {
         System.out.println(String.format("    %s", "=========================================="));
         System.out.println(String.format("    %s", ss));
