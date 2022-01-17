@@ -30,70 +30,106 @@ public class Duke {
         Scanner input = new Scanner(System.in);
         String toEcho = input.nextLine();
         while (!toEcho.equals("bye")) {
-            //Add name of task to str for easy printing
-            StringBuilder str = new StringBuilder();
-            str.append("NEED ME TO REMIND YOU AH?\n      ");
-            if (toEcho.equals("list")) {
-                int size = tasks.size();
-                for (int i = 0; i < size; i++) {
-                    str.append(i + 1 + "." + tasks.get(i));
-                    if (i != size - 1) {
-                        str.append("\n      ");
+            try {
+                //Add name of task to str for easy printing
+                StringBuilder str = new StringBuilder();
+                str.append("NEED ME TO REMIND YOU AH?");
+                if (toEcho.equals("list")) {
+                    int size = tasks.size();
+                    if (size == 0) {
+                        format("NOTHING TO DO AH?" + SPACE +
+                                "YOU BETTER FIND SOMETHING TO DO BEFORE I CONFINE YOU CHAO RECRUIT!");
+                    } else {
+                        for (int i = 0; i < size; i++) {
+                            str.append(SPACE + (i + 1) + "." + tasks.get(i));
+                        }
+                        format(str.toString());
+                    }
+                } else {
+                    //Split cmd into 2 parts, the type of task, and remaining text
+                    String[] temp = toEcho.split(" ", 2);
+                    String cmd = temp[0];
+                    //placeholder in case temp[1] is empty and cannot be initialised
+                    String rem = "";
+                    boolean incomplete = false;
+                    if (temp.length < 2 || temp[1].isBlank()) {
+                        incomplete = true;
+                    } else {
+                        rem = temp[1];
+                    }
+
+                    //Assuming input correct
+                    if (cmd.equals("mark")) {
+                        if (incomplete) {
+                            throw new DukeException("WHAT YOU WANT MARK? WEAR HELMET CANNOT THINK ALREADY AH?");
+                        } else {
+                            int num = Integer.parseInt(rem) - 1;
+                            tasks.get(num).mark();
+                            String confirm =
+                                    "THIS ONE" + TASKSPACE + tasks.get(num) + SPACE +
+                                    "FINISH ALREADY AH? SWEE CHAI BUTTERFLY RECRUIT!";
+                            format(confirm);
+                        }
+                    } else if (cmd.equals("unmark")) {
+                        if (incomplete) {
+                            throw new DukeException("WHAT YOU WANT MARK? WEAR HELMET CANNOT THINK ALREADY AH?");
+                        } else {
+                            int num = Integer.parseInt(rem) - 1;
+                            tasks.get(num).unmark();
+                            String confirm =
+                                    "I THOUGHT THIS ONE" + TASKSPACE + tasks.get(num) + SPACE +
+                                            "FINISH ALREADY? NEVER MIND THIS WEEKEND CONFINE!";
+                            format(confirm);
+                        }
+                    } else if (cmd.equals("deadline")) {
+                        //deadline
+                        if (incomplete) {
+                            throw new DukeException("WHAT YOU WANT DO? NOTHING AH HELLOOOOOO?");
+                        } else {
+                            String task = rem.split("/by")[0];
+                            String dead = rem.split("/by")[1];
+                            Task tempTask = new Deadline(task, dead);
+                            tasks.add(tempTask);
+                            String confirm =
+                                    "YOU BETTER FINISH THIS AH:" + TASKSPACE + tempTask + SPACE +
+                                            "YOU STILL GOT " + tasks.size() +
+                                            " THINGS TO DO AH BETTER NOT FORGET!";
+                            format(confirm);
+                        }
+                    } else if (cmd.equals("event")) {
+                        //event
+                        if (incomplete) {
+                            throw new DukeException("WHAT YOU WANT DO? NOTHING AH HELLOOOOOO?");
+                        } else {
+                            String task = rem.split("/at")[0];
+                            String dead = rem.split("/at")[1];
+                            Task tempTask = new Event(task, dead);
+                            tasks.add(tempTask);
+                            String confirm =
+                                    "YOU BETTER REMEMBER THIS AH:" + TASKSPACE + tempTask + SPACE +
+                                            "YOU STILL GOT " + tasks.size() +
+                                            " THINGS TO DO AH BETTER NOT FORGET!";
+                            format(confirm);
+                        }
+                    } else if (cmd.equals("todo")) {
+                        //todo
+                        if (incomplete) {
+                            throw new DukeException("WHAT YOU WANT DO? NOTHING AH HELLOOOOOO?");
+                        } else {
+                            Task tempTask = new ToDo(rem);
+                            tasks.add(tempTask);
+                            String confirm =
+                                    "YOU WANT TO DO THIS AH:" + TASKSPACE + tempTask + SPACE +
+                                            "VERY GOOD! YOU STILL GOT " + tasks.size() +
+                                            " THINGS TO DO AH BETTER NOT FORGET!";
+                            format(confirm);
+                        }
+                    } else {
+                        throw new DukeException("WHAT TALKING YOU? CHAO RECRUIT YOU BETTER WAKE UP YOUR IDEA!");
                     }
                 }
-                format(str.toString());
-            } else {
-                //Split cmd into 2 parts, the type of task, and remaining text
-                String[] temp = toEcho.split(" ", 2);
-                String cmd = temp[0];
-                String rem = temp[1];
-                //Assuming input correct
-                if (cmd.equals("mark")) {
-                    int num = Integer.parseInt(rem) - 1;
-                    tasks.get(num).mark();
-                    String confirm =
-                            "THIS ONE" + TASKSPACE + tasks.get(num) + SPACE +
-                                    "FINISH ALREADY AH? SWEE CHAI BUTTERFLY RECRUIT!";
-                    format(confirm);
-                } else if (cmd.equals("unmark")) {
-                    int num = Integer.parseInt(rem) - 1;
-                    tasks.get(num).unmark();
-                    String confirm =
-                            "I THOUGHT THIS ONE" + TASKSPACE + tasks.get(num) + SPACE +
-                                    "FINISH ALREADY? NEVER MIND THIS WEEKEND CONFINE!";
-                    format(confirm);
-                } else if (cmd.equals("deadline")) {
-                    //deadline
-                    String task = rem.split("/by")[0];
-                    String dead = rem.split("/by")[1];
-                    Task tempTask = new Deadline(task, dead);
-                    tasks.add(tempTask);
-                    String confirm =
-                            "YOU BETTER FINISH THIS AH:" + TASKSPACE + tempTask + SPACE +
-                                    "YOU STILL GOT " + tasks.size() +
-                                    " THINGS TO DO AH BETTER NOT FORGET!";
-                    format(confirm);
-                } else if (cmd.equals("event")) {
-                    //event
-                    String task = rem.split("/at")[0];
-                    String dead = rem.split("/at")[1];
-                    Task tempTask = new Event(task, dead);
-                    tasks.add(tempTask);
-                    String confirm =
-                            "YOU BETTER REMEMBER THIS AH:" + TASKSPACE + tempTask + SPACE +
-                                    "YOU STILL GOT " + tasks.size() +
-                                    " THINGS TO DO AH BETTER NOT FORGET!";
-                    format(confirm);
-                } else if (cmd.equals("todo")) {
-                    //todo
-                    Task tempTask = new ToDo(rem);
-                    tasks.add(tempTask);
-                    String confirm =
-                            "YOU WANT TO DO THIS AH:" + TASKSPACE + tempTask + SPACE +
-                                    "VERY GOOD! YOU STILL GOT " + tasks.size() +
-                                    " THINGS TO DO AH BETTER NOT FORGET!";
-                    format(confirm);
-                }
+            } catch (DukeException e) {
+                format(e.getMessage());
             }
             toEcho = input.nextLine();
         }
