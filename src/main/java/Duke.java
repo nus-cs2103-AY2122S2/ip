@@ -13,8 +13,7 @@ public class Duke {
         System.out.println("\nHow may I help you today?\n");
 
         ArrayList<Task> inputList = new ArrayList<>();
-        Event e = new Event("lol", "what");
-        System.out.println(e.toString());
+
         while (true) {
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();
@@ -27,9 +26,7 @@ public class Duke {
                 System.out.println("Here are the tasks in your list: " + "\n");
                 if (!inputList.isEmpty()) {
                     for (int i = 0; i < inputList.size(); i++) {
-                        System.out.println( (i + 1) + ". "
-                                + "[" + inputList.get(i).getStatusIcon() + "] "
-                                + inputList.get(i).description + "\n");
+                        System.out.println( (i + 1) + ". "  + inputList.get(i) + "\n");
                     }
                 }
             }
@@ -57,9 +54,16 @@ public class Duke {
             }
 
             else {
-                Task t = new Task(input);
-                System.out.println("added: " + input + "\n");
-                inputList.add(t);
+                String[] parsedString = input.toLowerCase().split(" ", 2);
+                if (parsedString[0].equalsIgnoreCase("deadline")) {
+                   String [] dlParseBy = parsedString[1].split("/by");
+                   if (dlParseBy.length <= 1) {
+                       System.out.println("Please include a date.");
+                   } else {
+                       Deadline dl  = new Deadline(dlParseBy[0], dlParseBy[1]);
+                       inputList.add(dl);
+                   }
+                }
             }
         }
     }
