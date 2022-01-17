@@ -9,4 +9,9 @@ public class Event extends Task {
     public String getAt() {
         return this.at;
     }
+
+    @Override
+    public String getReadableString() {
+        return String.format("%s (at: %s)", super.getReadableString(), this.at);
+    }
 }

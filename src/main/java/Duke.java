@@ -110,6 +110,12 @@ public class Duke {
     }
 
     private static void parseCreateTodo(IPrintable linePrinter, String args) {
+        // Syntax Check
+        if (args.equals("")) {
+            linePrinter.print(ERROR_INVALID_SYNTAX);
+            return;
+        }
+
         final Task task = taskStore.addTask(new Todo(args));
         linePrinter.print("Added the following Todo Task:");
         linePrinter.print(String.format("\t%s", task.getReadableString()));
@@ -117,11 +123,35 @@ public class Duke {
     }
 
     private static void parseCreateDeadline(IPrintable linePrinter, String args) {
+        // Syntax Check
+        final String[] argParts = args.split(" /by ");
+        if (argParts.length < 2) {
+            linePrinter.print(ERROR_INVALID_SYNTAX);
+            return;
+        }
 
+        final String taskDescription = argParts[0];
+        final String taskBy = argParts[1];
+        final Task task = taskStore.addTask(new Deadline(taskDescription, taskBy));
+        linePrinter.print("Added the following Deadline Task:");
+        linePrinter.print(String.format("\t%s", task.getReadableString()));
+        linePrinter.print(String.format("Now you have %d task(s) in the list", taskStore.getTaskCount()));
     }
 
     private static void parseCreateEvent(IPrintable linePrinter, String args) {
+        // Syntax Check
+        final String[] argParts = args.split(" /at ");
+        if (argParts.length < 2) {
+            linePrinter.print(ERROR_INVALID_SYNTAX);
+            return;
+        }
 
+        final String taskDescription = argParts[0];
+        final String taskAt = argParts[1];
+        final Task task = taskStore.addTask(new Event(taskDescription, taskAt));
+        linePrinter.print("Added the following Event Task:");
+        linePrinter.print(String.format("\t%s", task.getReadableString()));
+        linePrinter.print(String.format("Now you have %d task(s) in the list", taskStore.getTaskCount()));
     }
 
     private static void printBlock(Consumer<IPrintable> action) {
