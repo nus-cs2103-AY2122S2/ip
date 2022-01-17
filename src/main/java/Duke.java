@@ -31,7 +31,7 @@ public class Duke {
         line();
         Task currTask = taskArr.get(num - 1);
         currTask.mark();
-        System.out.println("     Your progressive bar has increased! Keep going to stop the imposter!");
+        System.out.println("     The bar on the top left of your screen just increased! Keep going!");
         System.out.println("     " + currTask);
         line();
     }
@@ -40,7 +40,7 @@ public class Duke {
         line();
         Task currTask = taskArr.get(num - 1);
         currTask.unmark();
-        System.out.println("     Uh oh, every task left undone lets the imposter edge closer...");
+        System.out.println("     Surely you aren't the imposter... right??");
         System.out.println("     " + currTask);
         line();
     }
@@ -54,7 +54,7 @@ public class Duke {
     public static void deleteFromList(Task task) {
         taskArr.remove(task);
         line();
-        System.out.println("     Aite, this task has been deleted!");
+        System.out.println("     Hmm... kinda sus you deleted this task...");
         System.out.println("       " + task);
         totalTasks(taskArr.size());
         line();
@@ -113,7 +113,7 @@ public class Duke {
                     } else {
                         Task toDo = new ToDo(subString);
                         line();
-                        System.out.println("     Remember to complete your task!");
+                        System.out.println("     Remember to do your task!");
                         addToList(toDo);
                         line();
                     }
@@ -123,12 +123,16 @@ public class Duke {
                         throw new IncompleteInputException(firstWord);
                     } else {
                         String[] temp = subString.split(" /"); // breaks the subString into 2 parts
-                        String deadlineDate = temp[1].substring(3);
-                        Task deadline = new Deadline(temp[0], deadlineDate);
-                        line();
-                        System.out.println("     This task is on a timer!");
-                        addToList(deadline);
-                        line();
+                        if(!temp[1].substring(0,3).equals("by ")) {
+                            throw new UnknownInputException();
+                        } else {
+                            String deadlineDate = temp[1].substring(3); // retrieves the String after '/by'
+                            Task deadline = new Deadline(temp[0], deadlineDate);
+                            line();
+                            System.out.println("     This task is on a timer!");
+                            addToList(deadline);
+                            line();
+                        }
                     }
                 } else if(firstWord.equalsIgnoreCase("event")) {
                     String subString = input.substring(5); // take the remaining of the input String
@@ -136,12 +140,16 @@ public class Duke {
                         throw new IncompleteInputException(firstWord);
                     } else {
                         String[] temp = subString.split(" /"); // breaks the subString into 2 parts
-                        String eventDate = temp[1].substring(3);
-                        Task event = new Event(temp[0], eventDate);
-                        line();
-                        System.out.println("     Emergency event on this date!");
-                        addToList(event);
-                        line();
+                        if(!temp[1].substring(0,3).equals("at ")) {
+                            throw new UnknownInputException();
+                        } else {
+                            String eventDate = temp[1].substring(3); // retrieves the String after '/at'
+                            Task event = new Event(temp[0], eventDate);
+                            line();
+                            System.out.println("     Emergency event on this date!");
+                            addToList(event);
+                            line();
+                        }
                     }
                 } else if(firstWord.equalsIgnoreCase("delete")) {
                     int listIndex = Integer.parseInt(strs[1]); // retrieve the index after delete
