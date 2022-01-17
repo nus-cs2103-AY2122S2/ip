@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 public class Bobby {
     static ArrayList<Task> tasks = new ArrayList<Task>();
+//    static ArrayList<Task> tasks = new ArrayList<Task>();
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String logo = " ____  _____ ____  ____ __  __\n"
@@ -12,7 +13,7 @@ public class Bobby {
                 + "|____/|_____|____/|____/ |__|\n";
         System.out.println("Hello from\n" + logo);
         String dash = "    ____________________________________\n";
-        System.out.println(dash + "    Hello! I\'m Bobby\n    What can I do for you?\n" + dash);
+        System.out.println(dash + "    Howdy! I\'m Bobby\n    What can I do for you?\n" + dash);
 
          while (true) {
              String input = sc.nextLine();
@@ -24,55 +25,33 @@ public class Bobby {
                  case "list" :
                      System.out.println(dash);
                      Task currTask;
-                     for (int i = 0; i < Bobby.tasks.size(); i++) {
+                     for (int i = 0; i < tasks.size(); i++) {
                          currTask = Bobby.tasks.get(i);
                          int index = i+1;
-                         System.out.println("    " + index + "." + currTask.getStatus() + currTask.taskName);
+                         System.out.println("    " + index + "." + currTask);
                      }
                      System.out.println(dash);
                      break;
                  case "mark":
                      Task doneTask = Bobby.tasks.get(Integer.parseInt(inputs[1])-1);
                      doneTask.markDone();
-                     System.out.println(dash + "    " + "Nice! I've marked this task as done: ");
-                     System.out.println("      [" + doneTask.getStatus() + doneTask.taskName);
+                     System.out.println(dash + "    " + "Finally... I've marked this task as done: ");
+                     System.out.println("      " + doneTask);
                      System.out.println(dash);
                      break;
                  case "unmark":
                      Task undoneTask = Bobby.tasks.get(Integer.parseInt(inputs[1])-1);
                      undoneTask.unmarkDone();
-                     System.out.println(dash + "    " + "OK! I've marked this task as not done yet: ");
-                     System.out.println("      " + undoneTask.getStatus() + undoneTask.taskName);
+                     System.out.println(dash + "    " + "Could you be any more lazy? I've marked this task as not done yet: ");
+                     System.out.println("      " + undoneTask);
                      System.out.println(dash);
                      break;
                  default:
-//                     System.out.println(dash + "    " + input + "\n" + dash);
                      Task newTask = new Task(input);
                      tasks.add(newTask);
                      System.out.println(dash + "    " + "added: " + input + "\n" + dash);
              }
 
-        }
-    }
-    public static class Task {
-        public String taskName;
-        public boolean done;
-
-        public Task(String taskName) {
-            this.taskName = taskName;
-            this.done = false;
-        }
-
-        public void markDone() {
-            this.done = true;
-        }
-
-        public void unmarkDone() {
-            this.done = false;
-        }
-
-        public String getStatus() {
-            return done ? "[X] " : "[ ] ";
         }
     }
 
