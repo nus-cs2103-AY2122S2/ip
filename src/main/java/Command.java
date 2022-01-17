@@ -23,6 +23,9 @@ public class Command {
             else if (command.equals("unmark")) {
                 taskList.unmarkTask(scan.nextInt());
             }
+            else if (command.equals("delete")) {
+                taskList.deleteTask(scan.nextInt());
+            }
             else if (command.equals("todo") || command.equals("deadline") || command.equals("event")){
                 String description = scan.nextLine();
                 if (description.equals("")) {

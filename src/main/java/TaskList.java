@@ -26,6 +26,13 @@ public class TaskList {
         System.out.println(tasks.get(number - 1));
     }
 
+    public void deleteTask(int number) {
+        Task removedTask = tasks.remove(number - 1);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(removedTask);
+        System.out.println(String.format("Now you have %d tasks in the list.", tasks.size()));
+    }
+
     public void addTask(String command, String description) {
         System.out.println("Got it. I've added this task:");
         if (command.equals("todo")) {
