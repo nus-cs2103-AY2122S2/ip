@@ -15,4 +15,8 @@ Nice! I've marked this task as done:
 [D][X] return book (by: Sunday)
 OK, I've marked this task as not done yet:
 [T][ ] borrow book
+OOPS!!! The description of a todo cannot be empty.
+Noted. I've removed this task:
+[T][ ] borrow book
+Now you have 2 tasks in the list.
 Bye. Hope to see you again soon!
