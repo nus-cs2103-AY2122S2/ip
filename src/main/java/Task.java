@@ -1,9 +1,9 @@
-public class Activity {
+public abstract class Task {
     /** Name of the activity */
-    private String name;
-    private boolean isDone;
+    protected String name;
+    protected boolean isDone;
 
-    public Activity(String name) {
+    public Task(String name) {
         this.name = name;
     }
 

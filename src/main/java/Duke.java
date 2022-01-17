@@ -2,10 +2,10 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Duke {
-    private static ActivityList al;
+    private static TaskList al;
     public static void main(String[] args) {
         greet();
-        al = new ActivityList();
+        al = new TaskList();
         Scanner sc = new Scanner(System.in);
         String userIn = "";
         String out;
@@ -56,19 +56,30 @@ public class Duke {
             return al.toString();
         } else if (userIn.equals("help")) {
             return help();
-        } else if (Pattern.matches("mark \\d", userIn)) {
+        } else if (Pattern.matches("^mark\\s\\d+", userIn)) {
             return "This activity is marked as done: \n"
                     + al.markDone(Integer.parseInt(userIn
                     .replaceAll("[^\\d.]", "")) - 1)
                     .toString();
-        }else if (Pattern.matches("unmark \\d", userIn)) {
-            return "This activity is marked as done: \n" +
+        }else if (Pattern.matches("^unmark\\s\\d+", userIn)) {
+            return "This activity is unmarked as done: \n" +
                     al.markUndone(Integer.parseInt(userIn
                     .replaceAll("[^\\d.]", "")) - 1)
                     .toString();
+        } else if (Pattern.matches("^todo\\s(.*?)", userIn)) {
+            return al.addToDo(userIn.replace("todo ", ""));
+        } else if (Pattern.matches("^deadline\\s(.*s?)\\s/by\\s(.*s?)", userIn)) {
+            String[] split = userIn
+                    .replace("deadline ", "")
+                    .split("\\s/by\\s", 2);
+            return al.addDeadline(split[0], split[1]);
+        } else if (Pattern.matches("^event\\s(.*s?)\\s/at\\s(.*s?)", userIn)) {
+            String[] split = userIn
+                    .replace("event ", "")
+                    .split("\\s/at\\s", 2);
+            return al.addEvent(split[0], split[1]);
         } else {
-            al.add(userIn);
-            return "added: " + userIn;
+            return "Oops! Your instructions were unclear!";
         }
     }
 
