@@ -13,7 +13,7 @@ public class Connor {
 
     private static void interpret(String s) {
         // Split between command and description
-        String[] statement = s.split(" ",2);
+        String[] statement = s.trim().split(" ",2);
         // Standardise command format
         String x = statement[0].toLowerCase();
         switch (x) {
@@ -54,7 +54,6 @@ public class Connor {
             try {
                 int taskNo = Integer.parseInt(statement[1]) - 1;
                 markStatus(x, taskNo);
-                break;
             } catch (NumberFormatException e) {
                 print("Error! Index must be a valid integer.");
             } catch (ArrayIndexOutOfBoundsException e) {
