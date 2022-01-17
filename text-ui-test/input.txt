@@ -1,0 +1,11 @@
+list
+todo Do Laundry
+deadline Study /by 9pm
+event Wedding Party/atSaturday Afternoon
+list
+mark 2
+mark 3
+list
+unmark 2
+list
+exit
