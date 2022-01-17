@@ -9,4 +9,17 @@ deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
 deadline do homework /by no idea :-p
 list
+
+wrong
+mark 999
+unmark wrong
+event
+deadline
+event /at
+event /at time
+event task /at
+deadline /by
+deadline /by time
+deadline task /by
+todo
 bye
