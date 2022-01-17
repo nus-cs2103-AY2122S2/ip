@@ -16,25 +16,37 @@ public class Duke {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String nextLine = br.readLine();
 
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<Task> list = new ArrayList<Task>();
+
         while (!nextLine.equals("bye")) {
             System.out.println("__________________________________________________");
-            if (nextLine.equals("list")) {
+            if (nextLine.split(" ")[0].equals("mark")) {
+                int indexToMark = Integer.parseInt(nextLine.split(" ")[1]) - 1;
+                list.set(indexToMark, list.get(indexToMark).mark());
+                System.out.println("Nice! I've marked this task as done:\n  " 
+                        + list.get(indexToMark));
+            } else if (nextLine.split(" ")[0].equals("unmark")) {
+                int indexToMark = Integer.parseInt(nextLine.split(" ")[1]) - 1;
+                list.set(indexToMark, list.get(indexToMark).unmark());
+                System.out.println("OK, I've marked this task as not done yet:\n  " 
+                        + list.get(indexToMark));
+            } else if (nextLine.equals("list")) {
                 if (list.isEmpty()) {
                     System.out.println("Uh-oh! List is empty");
                 } else {
                     for (int i = 0; i < list.size(); i++) {
-                        String output = String.format("%d. %s", i + 1, list.get(i));
-                        System.out.println(output);
+                        System.out.println((i + 1) + "." + list.get(i));
                     }
                 }
             } else {
-                list.add(nextLine);
+                list.add(new Task(nextLine));
                 System.out.println("added: " + nextLine);
             }
+
             System.out.println("__________________________________________________");
             nextLine = br.readLine();
         }
+
         System.out.println("__________________________________________________\n" 
                 + "Bye. Hope to see you again soon!"
                 + "\n__________________________________________________");
