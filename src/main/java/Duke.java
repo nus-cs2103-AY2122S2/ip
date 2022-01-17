@@ -1,6 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+
+    private ArrayList<String> list = new ArrayList<>();
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -25,12 +29,30 @@ public class Duke {
     }
 
     public void echo(String userInput) {
-        String hLine = "____________________________________________________________\n";
+        String hLine = "____________________________________________________________";
+        System.out.println(hLine);
 
-        if (userInput.equals("bye")) {
-            System.out.println(hLine + "Bye. Hope to see you again soon!\n" + hLine);
-        } else {
-            System.out.println(hLine + userInput + "\n" + hLine);
+        switch (userInput) {
+            case "bye":
+                System.out.println("Bye. Hope to see you again soon!");
+                break;
+            case "list":
+                readList();
+                break;
+            default:
+                addList(userInput);
+        }
+        System.out.println(hLine + "\n");
+    }
+
+    public void addList(String userInput) {
+        list.add(userInput);
+        System.out.println("added: " + userInput);
+    }
+
+    public void readList() {
+        for (int i = 1; i < list.size(); i++) {
+            System.out.println(i + ". " + list.get(i));
         }
     }
 }
