@@ -4,6 +4,20 @@ import java.util.Scanner;
 
 public class Duke {
     private static final ArrayList<Task> tasks = new ArrayList<>();
+
+    enum CommandType {
+        TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE;
+
+        static CommandType getCommandType(String input) throws DukeException {
+            for (CommandType type: CommandType.values()) {
+                if (input.equalsIgnoreCase(type.toString())) {
+                    return type;
+                }
+            }
+            throw new DukeException("Sumimasen! I don't recognize this command. Please try again!");
+        }
+    }
+
     private static final String divider = "\n______________________________________\n";
 
     public static void addTask(Task task) {
@@ -46,21 +60,21 @@ public class Duke {
         }
     }
 
-    public static void taskAction(String taskType, String index) throws DukeException, NumberFormatException {
+    public static void taskAction(CommandType commandType, String index) throws DukeException, NumberFormatException {
         try {
             int taskId = Integer.parseInt(index);
             if (!(taskId > 0 && taskId < (tasks.size() + 1))) {
                 throw new DukeException("Task cannot be found within the task list! Please fix your machigai!");
             }
 
-            switch (taskType) {
-                case "delete":
+            switch (commandType) {
+                case DELETE:
                     deleteTask(taskId);
                     break;
-                case "unmark":
+                case UNMARK:
                     markTask(taskId, false);
                     break;
-                case "mark":
+                case MARK:
                     markTask(taskId, true);
                     break;
             }
@@ -101,8 +115,9 @@ public class Duke {
 
             // multi command
             if (inputArray.length > 1) {
-                String taskType = inputArray[0].toLowerCase(Locale.ROOT);
+                CommandType commandType = CommandType.getCommandType(inputArray[0]);
                 StringBuilder taskDetailsBuilder = new StringBuilder();
+
                 for (int i = 1; i < inputArray.length; i++) {
                     if (i != inputArray.length - 1) {
                         taskDetailsBuilder.append(inputArray[i]).append(" ");
@@ -110,8 +125,8 @@ public class Duke {
                         taskDetailsBuilder.append(inputArray[i]);
                     }
                 }
-                String taskDetails = taskDetailsBuilder.toString();
 
+                String taskDetails = taskDetailsBuilder.toString();
 
                 String description = "";
                 String date = "";
@@ -125,32 +140,32 @@ public class Duke {
                     dateTime = taskDetails.split("/at", 2)[1];
                 }
 
-                switch (taskType) {
+                switch (commandType) {
 
-                    case "delete":
-                        taskAction("delete", inputArray[1]);
+                    case DELETE:
+                        taskAction(CommandType.DELETE, inputArray[1]);
                         break;
-                    case "unmark":
-                        taskAction("unmark", inputArray[1]);
+                    case UNMARK:
+                        taskAction(CommandType.UNMARK, inputArray[1]);
                         break;
-                    case "mark":
-                        taskAction("mark", inputArray[1]);
+                    case MARK:
+                        taskAction(CommandType.MARK, inputArray[1]);
                         break;
-                    case "todo":
+                    case TODO:
                         Task ToDo = new Todo(taskDetails);
                         if (taskDetails.equals("")) {
                             throw new DukeException("Todo command is invalid!");
                         }
                         addTask(ToDo);
                         break;
-                    case "deadline":
+                    case DEADLINE:
                         Task Deadline = new Deadline(description, date);
                         if (description.equals("") || date.equals("")) {
                             throw new DukeException("Deadline command is invalid!");
                         }
                         addTask(Deadline);
                         break;
-                    case "event":
+                    case EVENT:
                         Task Event = new Event(description, dateTime);
                         if (dateTime.equals("") || description.equals("")) {
                             throw new DukeException("Event command is invalid");
