@@ -9,6 +9,9 @@ public class Duke {
         // Scanner for new input
         Scanner sc = new Scanner(System.in);
 
+        // ToDoList for the program
+        Calendar calendar = new Calendar();
+
         while (true) {
             String input = sc.nextLine();
             String[] splitInput = input.split("\\s");
@@ -16,8 +19,12 @@ public class Duke {
                 case "bye":
                     System.out.println("____________________________________________________________\nBye! Hope to see you again\n____________________________________________________________");
                     return;
+                case "list":
+                    System.out.println("____________________________________________________________\n" + calendar + "____________________________________________________________");
+                    continue;
                 default:
-                    System.out.println("____________________________________________________________\n" + input + "\n____________________________________________________________");
+                    calendar.add(new Task(input));
+                    System.out.println("____________________________________________________________\n" + String.format("added: %s", input) + "\n____________________________________________________________");
             }
         }
     }
