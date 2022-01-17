@@ -1,4 +1,5 @@
 package commands;
+import tasks.Task;
 
 public abstract class Command {
     public final static String LINE = "    ____________________________________________________________\n";
@@ -8,7 +9,7 @@ public abstract class Command {
 
     public abstract boolean ends();
 
-    public abstract String[] getList();
+    public abstract Task[] getList();
 
     public static void printFormatted(String[] msg){
         System.out.print(LINE);

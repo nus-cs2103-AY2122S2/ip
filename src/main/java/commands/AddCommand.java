@@ -1,23 +1,23 @@
 package commands;
+import tasks.*;
 
 public class AddCommand extends Command {
-    private static String input;
-    private static String[] tasklist;
-    private static int size;
+    private String input;
+    private Task[] tasklist;
+    private int size;
 
 
-    public AddCommand(String[] tasklist, int size,  String input){
+    public AddCommand(Task[] tasklist, int size,  String input){
         this.input = input;
         this.tasklist = tasklist;
         this.size = size;
+        tasklist[size] = new Task(input);
     }
 
     @Override
-    public String[] getList(){
-        String newsize = String.valueOf(size + 1);
-        tasklist[size] = newsize + ". " + input;
+    public Task[] getList(){
         return tasklist;
-    };
+    }
 
     @Override
     public boolean ends(){

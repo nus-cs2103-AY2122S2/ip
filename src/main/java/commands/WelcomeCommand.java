@@ -1,10 +1,12 @@
 package commands;
 
+import tasks.Task;
+
 public class WelcomeCommand extends Command{
 
     @Override
-    public String[] getList(){
-        return new String[0];
+    public Task[] getList(){
+        return new Task[0];
     }
 
     @Override
