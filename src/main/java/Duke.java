@@ -62,6 +62,19 @@ public class Duke {
 
             }
 
+            else if (str.startsWith("delete")) {
+                try {
+                    String[] deleteTask = str.split(" ");
+                    int indexDelete = Integer.parseInt(deleteTask[1]) - 1;
+                    Task deletedTask = tasks.remove(indexDelete);
+                    System.out.println("Noted. I've removed this task: ");
+                    System.out.println(deletedTask.toString());
+                }
+                catch (IndexOutOfBoundsException e) {
+                    System.out.println(new DukeException("task does not exist!"));
+                }
+            }
+
             // generate tasks
             else {
                 if (str.startsWith("todo")) {
@@ -101,7 +114,7 @@ public class Duke {
                     }
                 }
                 else {
-                    System.out.println(new DukeException("I'm sorry, but I don't know what that means :-(nr"));
+                    System.out.println(new DukeException("I'm sorry, but I don't know what that means :-("));
                 }
             }
         }
