@@ -1,8 +1,9 @@
 import javax.sound.sampled.Line;
 import java.util.Scanner;
 import commands.*;
+import tasks.*;
 public class Duke {
-    private static String[] TASKLIST = new String[100];
+    private static Task[] TASKLIST = new Task[100];
     private static int LISTSIZE = 0;
     public static void main(String[] args) {
         //intro messages
@@ -29,21 +30,31 @@ public class Duke {
 
     public static Command processInput(String input){
         Command cmd = null;
-        switch (input) {
-            case "bye":
-                cmd = new ByeCommand();
-                break;
-
-            case "list":
-                cmd = new ListCommand(TASKLIST);
-                break;
-
-            default:
-                cmd = new AddCommand(TASKLIST, LISTSIZE, input);
-                TASKLIST = cmd.getList();
-                LISTSIZE++;
-                break;
+        String[] inputSplit = input.split(" ");
+        if(inputSplit.length == 1 && inputSplit[0].equals("bye")){
+            cmd = new ByeCommand();
+        } else if(inputSplit.length == 1 && inputSplit[0].equals("list")){
+            cmd = new ListCommand(TASKLIST);
+        } else if(inputSplit.length == 2 && inputSplit[0].equals("mark") && isInteger(inputSplit[1])) {
+            cmd = new MarkCommand(TASKLIST, Integer.parseInt(inputSplit[1]));
         }
+        else if(inputSplit.length == 2 && inputSplit[0].equals("unmark") && isInteger(inputSplit[1])){
+            cmd = new UnMarkCommand(TASKLIST, Integer.parseInt(inputSplit[1]));
+        } else {
+            cmd = new AddCommand(TASKLIST, LISTSIZE, input);
+            TASKLIST = cmd.getList();
+            LISTSIZE++;
+        }
+
         return cmd;
+    }
+
+    public static boolean isInteger(String input){
+        for(int i = 0; i < input.length(); i++){
+            if( !Character.isDigit(input.charAt(i))){
+                return false;
+            }
+        }
+        return true;
     }
 }
