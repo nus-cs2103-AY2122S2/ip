@@ -63,7 +63,7 @@ public class Connor {
             break;
         }
         default: {
-            print("My apologies, I do not understand what '" + statement[0] + "' means.");
+            print("My apologies, I don't understand what '" + statement[0] + "' means.");
         }
         }
     }
@@ -73,7 +73,7 @@ public class Connor {
         case "todo":
             ToDo todo = new ToDo(desc);
             taskList.add(todo);
-            print("Alright, I have added a new task: ");
+            print("Alright, I've added a new task: ");
             print(INDENT + todo.toString());
             break;
         case "deadline": {
@@ -94,7 +94,7 @@ public class Connor {
             }
             Deadline deadline = new Deadline(thing, when);
             taskList.add(deadline);
-            print("Alright, I have added a new task: ");
+            print("Alright, I've added a new task: ");
             print(INDENT + deadline.toString());
             break;
         }
@@ -116,7 +116,7 @@ public class Connor {
             }
             Event event = new Event(thing, when);
             taskList.add(event);
-            print("Alright, I have added a new task: ");
+            print("Alright, I've added a new task: ");
             print(INDENT + event.toString());
             break;
         }
@@ -136,7 +136,7 @@ public class Connor {
             try {
                 Task t = taskList.get(index);
                 t.mark();
-                print("Good job! I have marked the following task as completed: ");
+                print("Good job! I've marked the following task as completed: ");
                 print(INDENT + t);
             } catch (IndexOutOfBoundsException e){
                 print("Error! Given index is out of range.");
@@ -148,7 +148,7 @@ public class Connor {
             try {
                 Task t = taskList.get(index);
                 t.unmark();
-                print("Understood. I have unmarked the following task: ");
+                print("Understood. I've unmarked the following task: ");
                 print(INDENT + t);
             } catch (IndexOutOfBoundsException e) {
                 if (taskList.isEmpty()) {
