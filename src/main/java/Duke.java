@@ -60,7 +60,7 @@ public class Duke {
     private static void parseCommand(String command, IPrintable linePrinter) {
         final String[] commandParts = command.split(" ");
         final String commandLowerCase = commandParts[0].toLowerCase();
-        final String[] args = Arrays.copyOfRange(commandParts, 1, commandParts.length);
+        final String args = command.substring(commandLowerCase.length()).trim();
 
         if (commandLowerCase.equals(COMMAND_LIST)) {
             linePrinter.print("This is your task list:");
@@ -73,22 +73,19 @@ public class Duke {
         } else if (commandLowerCase.equals(COMMAND_CREATE_TODO)) {
             parseCreateTodo(linePrinter, args);
         } else if (commandLowerCase.equals(COMMAND_CREATE_DEADLINE)) {
-            parseCreateDeadline(linePrinter, command);
+            parseCreateDeadline(linePrinter, args);
         } else if (commandLowerCase.equals(COMMAND_CREATE_EVENT)) {
-            parseCreateEvent(linePrinter, command);
+            parseCreateEvent(linePrinter, args);
         } else {
             linePrinter.print(ERROR_INVALID_SYNTAX);
         }
     }
 
-    private static void parseMarkCommand(IPrintable linePrinter, String[] args, boolean newState) {
+    private static void parseMarkCommand(IPrintable linePrinter, String args, boolean newState) {
         // Syntax Checking
         int taskIndex = -1;
         try {
-            taskIndex = Integer.parseInt(args[0]);
-        } catch (IndexOutOfBoundsException ex) {
-            linePrinter.print(ERROR_INVALID_SYNTAX);
-            return;
+            taskIndex = Integer.parseInt(args);
         } catch (NumberFormatException ex) {
             linePrinter.print(ERROR_INVALID_SYNTAX);
             return;
@@ -112,19 +109,18 @@ public class Duke {
         }
     }
 
-    private static void parseCreateTodo(IPrintable linePrinter, String[] args) {
-        final String taskDescription = String.join(" ", args);
-        final Task task = taskStore.addTask(new Todo(taskDescription));
+    private static void parseCreateTodo(IPrintable linePrinter, String args) {
+        final Task task = taskStore.addTask(new Todo(args));
         linePrinter.print("Added the following Todo Task:");
         linePrinter.print(String.format("\t%s", task.getReadableString()));
         linePrinter.print(String.format("Now you have %d task(s) in the list", taskStore.getTaskCount()));
     }
 
-    private static void parseCreateDeadline(IPrintable linePrinter, String command) {
+    private static void parseCreateDeadline(IPrintable linePrinter, String args) {
 
     }
 
-    private static void parseCreateEvent(IPrintable linePrinter, String command) {
+    private static void parseCreateEvent(IPrintable linePrinter, String args) {
 
     }
 
