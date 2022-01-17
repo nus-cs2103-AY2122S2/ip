@@ -13,13 +13,13 @@ public class Sana {
     /**
      * userCommands stores the commands given to Sana from the user
      */
-    private LinkedList<Task> userCommands;
+    private LinkedList<Task> userTasks;
 
     /**
      * Constructor for the Sana class
      */
     public Sana() {
-        this.userCommands = new LinkedList<>();
+        this.userTasks = new LinkedList<>();
     }
 
     /**
@@ -48,10 +48,26 @@ public class Sana {
         } else if (userCommand.startsWith("unmark")) {
             int taskIndex = Integer.parseInt(userCommand.split(" ", 2)[1]) - 1;
             mark(taskIndex, false);
+        } else if (userCommand.startsWith("todo")) {
+            String taskName = userCommand.replaceFirst("todo ", "");
+            addToDo(taskName);
         } else {
             addTask(userCommand);
         }
         border();
+    }
+
+    /**
+     * This method adds a ToDo to userTasks
+     *
+     * @param taskName  the name of the todo
+     */
+    private void addToDo(String taskName) {
+        addTaskText();
+        ToDo newTodo = new ToDo(taskName);
+        userTasks.add(newTodo);
+        System.out.println(newTodo);
+        taskNumberText();
     }
 
     /**
@@ -61,13 +77,13 @@ public class Sana {
      * @param completion    the completion of the task
      */
     private void mark(int taskIndex, boolean completion) {
-        userCommands.get(taskIndex).setDone(completion);
+        userTasks.get(taskIndex).setDone(completion);
         if (completion) {
             System.out.println("You've done it! Well done!");
         } else {
             System.out.println("Oopsies! I'll change it back!");
         }
-        System.out.println(userCommands.get(taskIndex));
+        System.out.println(userTasks.get(taskIndex));
     }
 
     /**
@@ -76,7 +92,7 @@ public class Sana {
      * @param taskName  name of task
      */
     private void addTask(String taskName) {
-        userCommands.add(new Task(taskName));
+        userTasks.add(new Task(taskName));
         System.out.println("added: " + taskName);
     }
 
@@ -85,11 +101,27 @@ public class Sana {
      */
     private void list() {
         int index = 1;
-        for (Task task : userCommands) {
+        System.out.println("Here's your tasks!");
+        for (Task task : userTasks) {
             String header = Integer.valueOf(index).toString() + ".";
             System.out.println(header + task);
             index++;
         }
+    }
+
+    /**
+     * This method prints to system IO how many tasks in user tasks
+     */
+    private void taskNumberText() {
+        String taskAmt = Integer.valueOf(userTasks.size()).toString();
+        System.out.println("You have " + taskAmt + " things to do. Time to get working!");
+    }
+
+    /**
+     * This method prints to system IO Sana's add task text
+     */
+    private void addTaskText() {
+        System.out.println("I've added your task!");
     }
 
     /**
