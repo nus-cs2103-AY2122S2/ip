@@ -32,6 +32,21 @@ public class ChatBot {
                 taskList.get(Integer.parseInt(Marked[1]) - 1).setMark(true);
             } else if (Marked[0].equals("unmark")) {
                 taskList.get(Integer.parseInt(Marked[1]) - 1).setMark(false);
+            } else if (Marked[0].equals("todo")) {
+                String[] ans = Cmd.split("todo ");
+                Task tempTask = new ToDo(ans[1]);
+                taskList.add(tempTask);
+                new AddTask(tempTask, taskList).callback();
+            } else if (Marked[0].equals("deadline")) {
+                String[] ans = Cmd.split(" /by ");
+                Task tempTask = new Deadline(ans[0].replace("deadline ", "") ,ans[1]);
+                taskList.add(tempTask);
+                new AddTask(tempTask, taskList).callback();
+            } else if (Marked[0].equals("event")) {
+                String[] ans = Cmd.split(" /at ");
+                Task tempTask = new Events(ans[0].replace("event ", "") ,ans[1]);
+                taskList.add(tempTask);
+                new AddTask(tempTask, taskList).callback();
             }
             else {
                 Response curr = new AddResponse(Cmd);
