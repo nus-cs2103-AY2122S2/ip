@@ -1,5 +1,7 @@
 package Tasks;
 
+import SparkExceptions.TaskModificationExceptions.TaskNotFoundException;
+
 import java.util.*;
 
 public class TaskList {
@@ -38,22 +40,34 @@ public class TaskList {
     }
 
     public void markTask(int taskId) {
-        for (Task t : tasks) {
-            if (t.taskId == taskId) {
-                t.mark();
-
-                break;
-            }
+        try {
+            Task t = findTaskById(taskId);
+            t.mark();
+        } catch (TaskNotFoundException e) {
+            System.out.println(e.getMessage());
         }
     }
 
     public void unMarkTask(int taskId) {
-        for (Task t : tasks) {
-            if (t.taskId == taskId) {
-                t.unMark();
+        try {
+            Task t = findTaskById(taskId);
+            t.unMark();
+        } catch (TaskNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
-                break;
-            }
+    public void deleteTask(int taskId) {
+        try {
+            Task t = findTaskById(taskId);
+
+            System.out.println("Noted. I've removed this task:");
+            System.out.println(t);
+
+            tasks.remove(t);
+            showNumberOfTasks();
+        } catch (TaskNotFoundException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -70,5 +84,22 @@ public class TaskList {
 
     public void showNumberOfTasks() {
         System.out.format("Now you have %d tasks in the list.\n", this.tasks.size());
+    }
+
+    private Task findTaskById(int taskId) throws TaskNotFoundException {
+        Task match = null;
+
+        for (Task t : tasks) {
+            if (t.taskId == taskId) {
+                match = t;
+                break;
+            }
+        }
+
+        if (match == null) {
+            throw new TaskNotFoundException();
+        }
+
+        return match;
     }
 }

@@ -6,6 +6,6 @@ package SparkExceptions.FormatExceptions;
  */
 public class EmptyDateException extends FormatException {
     public EmptyDateException() {
-        super("OOPS!!! You have to give your task a date!");
+        super("You have to give your task a date!");
     }
 }

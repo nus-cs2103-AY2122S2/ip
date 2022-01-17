@@ -6,6 +6,6 @@ package SparkExceptions.FormatExceptions;
  */
 public class EmptyTitleException extends FormatException {
     public EmptyTitleException() {
-        super("OOPS!!! You have to give your task a title!");
+        super("You have to give your task a title!");
     }
 }

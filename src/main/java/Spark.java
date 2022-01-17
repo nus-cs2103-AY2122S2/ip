@@ -43,6 +43,10 @@ public class Spark {
                     int taskId = Integer.parseInt(tokens[1]);
                     taskList.unMarkTask(taskId);
 
+                } else if (command.equals("delete")) {
+                    int taskId = Integer.parseInt(tokens[1]);
+                    taskList.deleteTask(taskId);
+
                 } else {
                     if (command.equals("event")) {
                         String[] eventParams = getEventParams(tokens);

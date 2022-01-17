@@ -7,4 +7,6 @@ deadline a
 deadline /by Sunday
 event b
 event /at Friday
+delete 3
+delete 3
 bye
