@@ -1,6 +1,6 @@
-package duke.Commands;
+package duke.commands;
 
-import duke.Tasks.Deadline;
+import duke.tasks.Deadline;
 import duke.main.DukeException;
 import duke.main.TaskList;
 import duke.main.Parser;

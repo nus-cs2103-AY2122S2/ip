@@ -1,6 +1,6 @@
-package duke.Commands;
+package duke.commands;
 
-import duke.Tasks.Task;
+import duke.tasks.Task;
 import duke.main.DukeException;
 import duke.main.TaskList;
 import duke.main.Parser;

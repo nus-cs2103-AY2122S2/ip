@@ -1,4 +1,4 @@
-package duke.Tasks;
+package duke.tasks;
 
 // duke.Tasks.ToDo is a duke.Tasks.Task
 public class ToDo extends Task {

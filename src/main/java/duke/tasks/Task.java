@@ -1,4 +1,4 @@
-package duke.Tasks;
+package duke.tasks;
 
 // can actually change this to an Abstract Class
 public abstract class Task {
