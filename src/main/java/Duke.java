@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
     private int repeatListSize = 0;
-    private String[] repeatList = new String[100];
+    private Task[] repeatList = new Task[100];
     private Scanner scanner;
 
     public Duke(Scanner sc) {
@@ -44,6 +44,12 @@ public class Duke {
             } else if (str.compareToIgnoreCase("list") == 0) {
                 displayList();
                 System.out.println(lineBreak());
+            } else if (str.startsWith("mark ")) {
+                markHandler(str);
+                System.out.println(lineBreak());
+            } else if (str.startsWith("unmark ")) {
+                unmarkHandler(str);
+                System.out.println(lineBreak());
             } else {
                 System.out.println("added: " + str);
                 addToList(str);
@@ -53,7 +59,7 @@ public class Duke {
     }
 
     private void addToList(String str) {
-        repeatList[repeatListSize] = str;
+        repeatList[repeatListSize] = new Task(str);
         repeatListSize++;
     }
 
@@ -62,8 +68,45 @@ public class Duke {
             System.out.println("LUMU: Your list is empty!");
         } else {
             for (int i = 0; i < repeatList.length && i < repeatListSize; i++) {
-                System.out.println(String.valueOf(i + 1) + ". " + repeatList[i]);
+                Task currTask = repeatList[i];
+                System.out.println(String.valueOf(i + 1) + ". " + "[" + currTask.getStatusIcon() + "] " + currTask.getDescription());
             }
         }
     }
+
+    private void markHandler(String str) {
+        if (str.length() < 6) {
+            System.out.println("Invalid task!");
+        } else {
+            String listNumber = str.substring(5);
+            if ((listNumber.chars().allMatch(Character::isDigit)) && (Integer.parseInt(listNumber) <= repeatListSize)) {
+                int num = Integer.parseInt(listNumber);
+                Task currTask = repeatList[num - 1];
+                currTask.setStatus(true);
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println("[" + currTask.getStatusIcon() + "] " + currTask.getDescription());
+            } else {
+                System.out.println("Invalid task!");
+            }
+        }
+    }
+
+    private void unmarkHandler(String str) {
+        if (str.length() < 8) {
+            System.out.println("Invalid task!");
+        } else {
+            String listNumber = str.substring(7);
+            if ((listNumber.chars().allMatch(Character::isDigit)) && (Integer.parseInt(listNumber) <= repeatListSize)) {
+                int num = Integer.parseInt(listNumber);
+                Task currTask = repeatList[num - 1];
+                currTask.setStatus(false);
+                System.out.println("OK, I've marked this task as not done yet:");
+                System.out.println("[" + currTask.getStatusIcon() + "] " + currTask.getDescription());
+            } else {
+                System.out.println("Invalid task!");
+            }
+        }
+    }
+
+
 }
