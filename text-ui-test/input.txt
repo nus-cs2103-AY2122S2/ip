@@ -1,11 +1,14 @@
 list
 todo Do Laundry
 deadline Study /by 9pm
-event Wedding Party/atSaturday Afternoon
+event Birthday Party/atSaturday Afternoon
 list
 mark 2
 mark 3
 list
 unmark 2
+list
+mark asdfg
+unmark 66
 list
 exit

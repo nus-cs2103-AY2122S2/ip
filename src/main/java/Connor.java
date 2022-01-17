@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -43,25 +44,22 @@ public class Connor {
                     return;
                 }
                 addTask(x, desc);
-            } catch (Exception ArrayIndexOutOfBoundsException) {
+            } catch (ArrayIndexOutOfBoundsException e) {
                 print("Error! Tasks cannot have an empty description.");
             }
             break;
         }
-        case "mark": {
-            int taskNo = Integer.parseInt(statement[1]) - 1;
-            Task t = taskList.get(taskNo);
-            t.mark();
-            print("Good job! I have marked the following task as completed: ");
-            print(INDENT + t);
-            break;
-        }
+        case "mark":
         case "unmark": {
-            int taskNo = Integer.parseInt(statement[1]) - 1;
-            Task t = taskList.get(taskNo);
-            t.unmark();
-            print("Understood. I have unmarked the following task: ");
-            print(INDENT + t);
+            try {
+                int taskNo = Integer.parseInt(statement[1]) - 1;
+                markStatus(x, taskNo);
+                break;
+            } catch (NumberFormatException e) {
+                print("Error! Index must be a valid integer.");
+            } catch (ArrayIndexOutOfBoundsException e) {
+                print("Error! Index cannot be empty.");
+            }
             break;
         }
         default: {
@@ -131,6 +129,37 @@ public class Connor {
         print("");
         String plurality = taskList.size() == 1 ? "" : "s";
         print("You currently have " + taskList.size() + " task" + plurality + ".");
+    }
+
+    private static void markStatus(String status, int index) {
+        if (status.equals("mark")) {
+            try {
+                Task t = taskList.get(index);
+                t.mark();
+                print("Good job! I have marked the following task as completed: ");
+                print(INDENT + t);
+            } catch (IndexOutOfBoundsException e){
+                print("Error! Given index is out of range.");
+                String plurality = taskList.size() == 1 ? "" : "s";
+                print("You currently have " + taskList.size() + " task" + plurality + ".");
+            }
+        } else {
+            // Unmark
+            try {
+                Task t = taskList.get(index);
+                t.unmark();
+                print("Understood. I have unmarked the following task: ");
+                print(INDENT + t);
+            } catch (IndexOutOfBoundsException e) {
+                if (taskList.isEmpty()) {
+                    print("Error! I can't mark an empty task list!");
+                    return;
+                }
+                print("Error! Given index is out of range.");
+                String plurality = taskList.size() == 1 ? "" : "s";
+                print("You currently have " + taskList.size() + " task" + plurality + ".");
+            }
+        }
     }
 
     private static void print(String s) {
