@@ -12,13 +12,19 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         System.out.println("Hello! I'm \n" + logo);
         System.out.println("What can I do for you? =)");
+        ItemList il = new ItemList();
 
         while (true) {
             String s = sc.nextLine();
             if (s.equals("bye")) {
                 break;
             }
-            Duke.echo(s);
+            if (s.equals("list")) {
+                il.printItems();
+            } else {
+                il.addItem(s);
+                System.out.println("added: " + s);
+            }
         }
 
         System.out.println("Bye t_t");
