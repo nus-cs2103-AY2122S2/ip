@@ -2,7 +2,7 @@ public class ToDo extends Task {
     public ToDo(int taskId, String name) {
         super(taskId, name);
 
-        System.out.println("Got it. I've added this todo: ");
+        System.out.println("Got it. I've added this todo:");
         System.out.println(this);
     }
 

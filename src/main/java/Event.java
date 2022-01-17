@@ -5,7 +5,7 @@ public class Event extends Task {
         super(taskId, name);
         this.at = at;
 
-        System.out.println("Got it. I've added this event: ");
+        System.out.println("Got it. I've added this event:");
         System.out.println(this);
     }
 

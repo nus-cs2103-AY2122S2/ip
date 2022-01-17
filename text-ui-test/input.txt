@@ -2,3 +2,9 @@ todo borrow book
 list
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
+todo
+deadline a
+deadline /by Sunday
+event b
+event /at Friday
+bye

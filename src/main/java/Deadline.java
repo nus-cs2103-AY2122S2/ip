@@ -5,7 +5,7 @@ public class Deadline extends Task {
         super(taskId, name);
         this.by = by;
 
-        System.out.println("Got it. I've added this deadline: ");
+        System.out.println("Got it. I've added this deadline:");
         System.out.println(this);
     }
 
