@@ -11,6 +11,18 @@ public class TaskList {
         list.add(new Task(s));
     }
 
+    public void addTodo(String s) {
+        list.add(new Todo(s));
+    }
+
+    public void addEvent(String s, String time) {
+        list.add(new Event(s,time));
+    }
+
+    public void addDeadline(String s, String time) {
+        list.add(new Deadline(s,time));
+    }
+
     public void markItemDone(int index) {
         Task t = list.get(index);
         t.markAsDone();
@@ -23,6 +35,10 @@ public class TaskList {
         t.markUndone();
         System.out.println("Task not done =(");
         System.out.println("\t" + t);
+    }
+
+    public String getLast() {
+        return list.get(list.size() - 1).toString();
     }
 
     public void printItems() {
@@ -38,5 +54,9 @@ public class TaskList {
                 counter++;
             }
         }
+    }
+
+    public int size() {
+        return list.size();
     }
 }

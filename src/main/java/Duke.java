@@ -31,8 +31,25 @@ public class Duke {
                     int index = Integer.parseInt(text[1]) - 1;
                     tl.markItemUndone(index);
                 } else {
-                    tl.addItem(s);
-                    System.out.println("added: " + s);
+                    System.out.println("added o.O: ");
+                    System.out.print("\t");
+                    if (command.equals("todo")) {
+                        tl.addTodo(s.split("todo ")[1]);
+                    } else if (command.equals("deadline")) {
+                        String[] inputs = s.split("deadline ")[1].split(" /by ");
+                        String name = inputs[0];
+                        String time = inputs[1];
+                        tl.addDeadline(name,time);
+                    } else if (command.equals("event")) {
+                        String[] inputs = s.split("event ")[1].split(" /at ");
+                        String name = inputs[0];
+                        String time = inputs[1];
+                        tl.addEvent(name,time);
+                    } else {
+                        tl.addItem(s);
+                    }
+                    System.out.println(tl.getLast());
+                    System.out.println("Now there are " + tl.size() + " tasks in the list x)");
                 }
             }
         }
