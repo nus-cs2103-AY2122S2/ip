@@ -91,6 +91,18 @@ public class Duke {
                             + "       " + newTask + "\n" + "     Now you have " + listOfTasks.size() + " tasks in the list.";
                     System.out.println(printWithin(textToPrint));
 
+                } else if (userInput.contains("delete")) {
+                    // Get index to delete
+                    int index = Character.getNumericValue(userInput.charAt(userInput.length() - 1) - 1);
+                    // If index is out of range of list throw a DukeException
+                    if (index < 0 || index > listOfTasks.size() -1) {
+                        throw new DukeException("     ☹ OOPS!!! I'm sorry, but the number you provided is invalid");
+                    }
+                    Task removedTask = listOfTasks.remove(index);
+                    String textToPrint = "     Noted. I've removed this task:\n"
+                            + "       " + removedTask + "\n" + "     Now you have " + listOfTasks.size() + " tasks in the list.";
+                    System.out.println(printWithin(textToPrint));
+
                 } else {
                         throw new DukeException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
