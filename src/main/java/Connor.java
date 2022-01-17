@@ -2,9 +2,9 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Connor {
-    private static final String CURRENT_VERSION = "Version 1.4";
-    private static final String LINE = "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━";
-    private static final String INDENT = "    ";
+    private static final String CURRENT_VERSION = "Version 1.5";
+    private static final String LINE = "┄".repeat(66);
+    private static final String INDENT = " ".repeat(4);
 
     private static boolean isActive = true;
 
@@ -36,7 +36,7 @@ public class Connor {
         case "todo":
         case "deadline":
         case "event": {
-            addTask(x, statement[1]);
+            addTask(x, statement[1].trim());
             break;
         }
         case "mark": {
@@ -56,34 +56,39 @@ public class Connor {
             break;
         }
         default: {
-            print("My apologies, I do not understand this.");
-            return;
+            print("My apologies, I do not understand what '" + statement[0] + "' means.");
         }
         }
     }
 
     private static void addTask(String taskType, String desc) {
-        if (taskType.equals("todo")) {
+        switch (taskType) {
+        case "todo":
             ToDo todo = new ToDo(desc);
             taskList.add(todo);
             print("Alright, I have added a new task: ");
             print(INDENT + todo.toString());
-        } else if (taskType.equals("deadline")) {
+            break;
+        case "deadline": {
             if (!desc.contains("/by")) {
                 print("Error! Wrong format for deadlines.");
+                print("");
                 print("Deadline tasks must include \"/by\" in the description.");
                 print("Example: ");
                 print(">>> deadline Finish Project /by Monday Morning");
                 return;
             }
-            String[] phrase = desc.split("/by",2);
+            String[] phrase = desc.split("/by", 2);
             Deadline deadline = new Deadline(phrase[0].trim(), phrase[1].trim());
             taskList.add(deadline);
             print("Alright, I have added a new task: ");
             print(INDENT + deadline.toString());
-        } else if (taskType.equals("event")) {
+            break;
+        }
+        case "event": {
             if (!desc.contains("/at")) {
                 print("Error! Wrong format for events.");
+                print("");
                 print("Event tasks must include \"/at\" in the description.");
                 print("Example: ");
                 print(">>> event Wedding Party /at May 5th");
@@ -94,14 +99,17 @@ public class Connor {
             taskList.add(event);
             print("Alright, I have added a new task: ");
             print(INDENT + event.toString());
-        } else {
+            break;
+        }
+        default:
             // Something has gone wrong
             print("Oh no! Incorrect Task type!");
             return;
         }
         // After task is added show current no. of tasks
         print("");
-        print("You currently have " + taskList.size() + " tasks.");
+        String plurality = taskList.size() == 1 ? "" : "s";
+        print("You currently have " + taskList.size() + " task" + plurality + ".");
     }
 
     private static void print(String s) {
@@ -127,6 +135,7 @@ public class Connor {
         while (isActive) {
             System.out.print(">>> ");
             String input = sc.nextLine();
+            print(input);
             print(LINE);
             interpret(input);
             print(LINE);
