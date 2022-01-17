@@ -57,6 +57,22 @@ public class Duke {
                 , tasks.size()));
     }
 
+    enum Commands {
+        LIST("list"),
+        MARK("mark"),
+        UNMARK("unmark"),
+        TODO("todo"),
+        DEADLINE("deadline"),
+        EVENT("event"),
+        DELETE("delete");
+
+        final String command;
+
+        Commands(String command) {
+            this.command = command;
+        }
+    }
+
     public void run() throws DukeException {
         Scanner sc = new Scanner(System.in);
         String intro = "Hello! I'm Duke\n" +
@@ -66,30 +82,20 @@ public class Duke {
         String cmd = sc.next();
         while (!cmd.equals("bye")) {
 
-            if (cmd.equals("list")) {
+            if (cmd.equals(Commands.LIST.command)) {
                 listTasks();
 
-            } else if (cmd.equals("mark")) {
+            } else if (cmd.equals(Commands.MARK.command)) {
                 int taskNumber = 0;
-                if (sc.hasNextInt()) {
-                    taskNumber = sc.nextInt();
-                } else {
-                    throw new DukeException("OOPS!!! I don't know which" +
-                            "task to mark.");
-                }
+                taskNumber = sc.nextInt();
                 mark(taskNumber);
 
-            } else if (cmd.equals("unmark")) {
+            } else if (cmd.equals(Commands.UNMARK.command)) {
                 int taskNumber = 0;
-                if (sc.hasNextInt()) {
-                    taskNumber = sc.nextInt();
-                } else {
-                    throw new DukeException("OOPS!!! I don't know which" +
-                            "task to unmark.");
-                }
+                taskNumber = sc.nextInt();
                 unmark(taskNumber);
 
-            } else if (cmd.equals("todo")){
+            } else if (cmd.equals(Commands.TODO.command)){
                 String description = sc.nextLine();
                 if (description.length() == 0) {
                     throw new DukeException("OOPS!!! The description of " +
@@ -98,7 +104,7 @@ public class Duke {
                 ToDo todo = new ToDo(description);
                 addToDo(todo);
 
-            } else if (cmd.equals("deadline")) {
+            } else if (cmd.equals(Commands.DEADLINE.command)) {
                 String info = sc.nextLine();
                 String[] split = info.split("/by ");
                 String description = split[0];
@@ -106,7 +112,7 @@ public class Duke {
                 Deadline deadline = new Deadline(description, time);
                 addDeadline(deadline);
 
-            } else if (cmd.equals("event")) {
+            } else if (cmd.equals(Commands.EVENT.command)) {
                 String info = sc.nextLine();
                 String[] split = info.split("/at ");
                 String description = split[0];
@@ -114,7 +120,7 @@ public class Duke {
                 Event event = new Event(description, time);
                 addEvent(event);
 
-            } else if (cmd.equals("delete")) {
+            } else if (cmd.equals(Commands.DELETE.command)) {
                 int taskNumber = sc.nextInt();
                 deleteTask(taskNumber);
 
