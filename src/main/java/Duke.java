@@ -12,7 +12,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         System.out.println("Hello! I'm \n" + logo);
         System.out.println("What can I do for you? =)");
-        ItemList il = new ItemList();
+        TaskList tl = new TaskList();
 
         while (true) {
             String s = sc.nextLine();
@@ -20,13 +20,22 @@ public class Duke {
                 break;
             }
             if (s.equals("list")) {
-                il.printItems();
+                tl.printItems();
             } else {
-                il.addItem(s);
-                System.out.println("added: " + s);
+                String[] text = s.split(" ");
+                String command = text[0];
+                if (command.equals("mark")) {
+                    int index = Integer.parseInt(text[1]) - 1;
+                    tl.markItemDone(index);
+                } else if (command.equals("unmark")) {
+                    int index = Integer.parseInt(text[1]) - 1;
+                    tl.markItemUndone(index);
+                } else {
+                    tl.addItem(s);
+                    System.out.println("added: " + s);
+                }
             }
         }
-
         System.out.println("Bye t_t");
     }
 
