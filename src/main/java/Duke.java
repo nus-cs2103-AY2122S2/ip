@@ -1,20 +1,21 @@
 import java.util.Scanner;
 
 /**
- * KoroBot is a chatbot with simple functionalities such as greet and echo.
+ * KoroBot is a chatbot that tracks the list of tasks on hand.
  * @author Terng Yan Long
- * @version 1.0
+ * @version 2.0
  * @since 1.0
  */
 public class Duke {
     private static final String BOT_NAME = "KoroBot";
     private static final String WELCOME_MESSAGE = "    ____________________________________________________________\n"
-            + "    Hi! I'm " + BOT_NAME + "\n"
-            + "    What can I do for you?\n"
+            + "     Hi! I'm " + BOT_NAME + "\n"
+            + "     What can I do for you?\n"
             + "    ____________________________________________________________";
     private static final String EXIT_MESSAGE = "    ____________________________________________________________\n"
-            + "    Bye! Hope to see you again soon :D\n"
+            + "     Bye! Hope to see you again soon :D\n"
             + "    ____________________________________________________________";
+    private static List listOfTasks;
 
     /**
      * Greets the user by printing the default welcome message.
@@ -33,28 +34,28 @@ public class Duke {
     }
 
     /**
-     * Echoes input message back to the user.
+     * Calls different functions according to the user's input command
      *
-     * @param userInput Commands entered by the user.
+     * @param userInput Command entered by the user.
      */
-    private static void echo(String userInput) {
-        String echoedMessage = "    ____________________________________________________________\n"
-                + "    " + userInput + "\n"
-                + "    ____________________________________________________________";
-        System.out.println(echoedMessage);
-
+    private static void parse(String userInput) {
+        if (userInput.equals("list")) {
+            listOfTasks.display();
+        } else {
+            listOfTasks.add(userInput);
+        }
     }
 
     public static void main(String[] args) {
         greet();
+        listOfTasks = new List(100); // Assume there will be no more than 100 tasks
         Scanner sc = new Scanner(System.in);
         String userInput = sc.next();
         while (!userInput.equals("bye")) {
-            echo(userInput);
+            parse(userInput);
             userInput = sc.next();
         }
         sc.close();
         exit();
-
     }
 }
