@@ -10,4 +10,12 @@ deadline return book /by Sunday
 mark 6
 unmark 1
 list
+mark 7
+unmark
+delete
+deadline
+list
+delete 10
+delete 3
+list
 bye
