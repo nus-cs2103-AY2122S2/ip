@@ -7,4 +7,9 @@ event project meeting /at Wed 8pm
 unmark 1
 mark 2
 list
+mark 0
+todo
+event
+deadline
+event concert
 bye
