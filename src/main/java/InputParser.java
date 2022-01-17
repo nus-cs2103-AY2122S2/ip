@@ -10,7 +10,8 @@ public class InputParser {
         } else if (action.equals("list")) {
             p.print(arr);
         } else if (action.equals("mark")) {
-
+            arr.get(Integer.parseInt(args[1]) - 1).mark();
+            p.print("Nice! I've marked this task as done: "," " + arr.get(Integer.parseInt(args[1]) - 1).toString());
         } else if (action.equals("unmark")) {
 
         } else {
