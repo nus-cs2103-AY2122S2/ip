@@ -1,4 +1,5 @@
 public class EventTask extends Task{
+    private String location;
 
     EventTask(String ss) {
         this.taskName = ss;

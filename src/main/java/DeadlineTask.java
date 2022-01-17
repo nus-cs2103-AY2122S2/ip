@@ -1,4 +1,6 @@
 public class DeadlineTask extends Task{
+    private String by;
+
     DeadlineTask(String ss) {
         this.taskName = ss;
         this.isDone = false;
