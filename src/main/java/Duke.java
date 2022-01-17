@@ -7,8 +7,9 @@ public class Duke {
         Printer p = new Printer();
         Scanner in = new Scanner(System.in);
         InputParser ip = new InputParser();
+        ArrayList<String> arr = new ArrayList<>();
 
-        String logo = " ____        _        \n"
+        String logo = " ____        _        \n"    
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
@@ -17,9 +18,9 @@ public class Duke {
         p.print("Hello! I'm Duke," , "What can I do for you?");
 
         String userInput = in.nextLine();
-        while(ip.run(userInput, p) != -1)
+        while(ip.run(userInput, p, arr) != -1)
             userInput = in.nextLine();
-        
+
     }
 
 
