@@ -16,7 +16,7 @@ public class PaggroBot {
                 int i = sc.nextInt();
                 paggro.unmark(i);
             } else {
-                paggro.add(command);
+                paggro.add(new Task(command));
             }
             command = sc.next();
         }
