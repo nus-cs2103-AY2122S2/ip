@@ -53,7 +53,7 @@ public class Duke {
         if (command.equalsIgnoreCase(COMMAND_LIST)) {
             taskStore.forEach((index, task) -> {
                 // Note that index passed into this consumer is 0-based. Increment by 1 for readability
-                linePrinter.print(String.format("%d. %s", index + 1, task.getDescription()));
+                linePrinter.print(String.format("%d.[%s] %s", index + 1, task.getStatusIcon(), task.getDescription()));
             });
         } else {
             taskStore.addTask(command);
