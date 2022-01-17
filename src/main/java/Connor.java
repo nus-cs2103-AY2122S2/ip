@@ -8,7 +8,7 @@ public class Connor {
 
     private static boolean isActive = true;
 
-    private static ArrayList<Task> xs = new ArrayList<>();
+    private static ArrayList<Task> taskList = new ArrayList<>();
 
     private static void interpret(String s) {
         // Split between command and description
@@ -23,13 +23,13 @@ public class Connor {
             break;
         }
         case "list": {
-            if (xs.size() == 0) {
+            if (taskList.size() == 0) {
                 print("Your task list is empty.");
                 return;
             }
             print("Here are your current tasks: ");
-            for (int i = 1; i <= xs.size(); i++) {
-                print(INDENT + Integer.toString(i) + ". " + xs.get(i - 1));
+            for (int i = 1; i <= taskList.size(); i++) {
+                print(INDENT + Integer.toString(i) + ". " + taskList.get(i - 1));
             }
             break;
         }
@@ -41,7 +41,7 @@ public class Connor {
         }
         case "mark": {
             int taskNo = Integer.parseInt(statement[1]) - 1;
-            Task t = xs.get(taskNo);
+            Task t = taskList.get(taskNo);
             t.mark();
             print("Good job! I have marked the following task as completed: ");
             print(INDENT + t);
@@ -49,7 +49,7 @@ public class Connor {
         }
         case "unmark": {
             int taskNo = Integer.parseInt(statement[1]) - 1;
-            Task t = xs.get(taskNo);
+            Task t = taskList.get(taskNo);
             t.unmark();
             print("Understood. I have unmarked the following task: ");
             print(INDENT + t);
@@ -65,7 +65,7 @@ public class Connor {
     private static void addTask(String taskType, String desc) {
         if (taskType.equals("todo")) {
             ToDo todo = new ToDo(desc);
-            xs.add(todo);
+            taskList.add(todo);
             print("Alright, I have added a new task: ");
             print(INDENT + todo.toString());
         } else if (taskType.equals("deadline")) {
@@ -78,7 +78,7 @@ public class Connor {
             }
             String[] phrase = desc.split("/by",2);
             Deadline deadline = new Deadline(phrase[0].trim(), phrase[1].trim());
-            xs.add(deadline);
+            taskList.add(deadline);
             print("Alright, I have added a new task: ");
             print(INDENT + deadline.toString());
         } else if (taskType.equals("event")) {
@@ -91,7 +91,7 @@ public class Connor {
             }
             String[] phrase = desc.split("/at", 2);
             Event event = new Event(phrase[0].trim(), phrase[1].trim());
-            xs.add(event);
+            taskList.add(event);
             print("Alright, I have added a new task: ");
             print(INDENT + event.toString());
         } else {
@@ -101,7 +101,7 @@ public class Connor {
         }
         // After task is added show current no. of tasks
         print("");
-        print("You currently have " + xs.size() + " tasks.");
+        print("You currently have " + taskList.size() + " tasks.");
     }
 
     private static void print(String s) {
