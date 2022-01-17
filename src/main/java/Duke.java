@@ -48,6 +48,15 @@ public class Duke {
                 , tasks.size()));
     }
 
+    private void deleteTask(int number) {
+        Task taskToDelete = tasks.get(number - 1);
+        tasks.remove(number - 1);
+        System.out.println("Noted. I've removed this task:\n"
+                + taskToDelete + "\n"
+                + String.format("Now you have %d tasks in the list."
+                , tasks.size()));
+    }
+
     public void run() throws DukeException {
         Scanner sc = new Scanner(System.in);
         String intro = "Hello! I'm Duke\n" +
@@ -104,6 +113,11 @@ public class Duke {
                 String time = split[1];
                 Event event = new Event(description, time);
                 addEvent(event);
+
+            } else if (cmd.equals("delete")) {
+                int taskNumber = sc.nextInt();
+                deleteTask(taskNumber);
+
             } else {
                 throw new DukeException("OOPS!!! I'm sorry, " +
                         "but I don't know what that means :-(");
