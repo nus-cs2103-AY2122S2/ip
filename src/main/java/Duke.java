@@ -23,6 +23,31 @@ public class Duke {
         taskList.add(newTask);
     }
 
+    public void printAddTaskSuccess(Task task) {
+        System.out.println("____________________________________________________________");
+        System.out.printf("Got it. I've added this task:    %n%s%n", task);
+        System.out.printf("Now you have %d tasks in the list.%n", taskList.size());
+        System.out.println("____________________________________________________________");
+    }
+
+    public void addTodoTask(String input) {
+        TodoTask newTask = new TodoTask(input);
+        taskList.add(newTask);
+        printAddTaskSuccess(newTask);
+    }
+
+    public void addDeadlineTask(String input, String deadline) {
+        DeadlineTask newTask = new DeadlineTask(input, deadline);
+        taskList.add(newTask);
+        printAddTaskSuccess(newTask);
+    }
+
+    public void addEventTask(String input, String deadline) {
+        EventTask newTask = new EventTask(input, deadline);
+        taskList.add(newTask);
+        printAddTaskSuccess(newTask);
+    }
+
     public void completeTask(int taskIndex) {
         Task foundTask = taskList.get(taskIndex - 1);
         foundTask.markDone();
@@ -68,6 +93,17 @@ public class Duke {
                 String[] string = input.split(" ");
                 int index = Integer.parseInt(string[1]);
                 undoTask(index);
+            } else if (input.startsWith("todo")) {
+                String[] string = input.split(" ", 2);
+                this.addTodoTask(string[1]);
+            } else if (input.startsWith("deadline")) {
+                String[] string = input.split(" ", 2);
+                String[] contents = string[1].split(" /by ");
+                this.addDeadlineTask(contents[0], contents[1]);
+            } else if (input.startsWith("event")) {
+                String[] string = input.split(" ", 2);
+                String[] contents = string[1].split(" /at ");
+                this.addEventTask(contents[0], contents[1]);
             } else {
                 this.addTask(input);
             }
