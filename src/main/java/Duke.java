@@ -39,8 +39,23 @@ public class Duke {
                     }
                 }
             } else {
-                list.add(new Task(nextLine));
-                System.out.println("added: " + nextLine);
+                String taskType = nextLine.split(" ")[0];
+                Task task;
+                if (taskType.equals("todo")) {
+                    task = new Todo(nextLine.substring(5));
+                } else if (taskType.equals("deadline")) {
+                    String description = nextLine.split(" /by ")[0].substring(9);
+                    String by = nextLine.split(" /by ")[1];
+                    task = new Deadline(description, by);
+                } else {
+                    String description = nextLine.split(" /at ")[0].substring(6);
+                    String at = nextLine.split(" /at ")[1];
+                    task = new Event(description, at);
+                }
+                System.out.println("Got it. I've added this task:");
+                list.add(task);
+                System.out.println("  " + task);
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
             }
 
             System.out.println("__________________________________________________");

@@ -1,13 +1,13 @@
 class Task {
-    private final String description;
-    private final boolean isDone;
+    protected final String description;
+    protected final boolean isDone;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
-    private Task(String description, boolean isDone) {
+    public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
