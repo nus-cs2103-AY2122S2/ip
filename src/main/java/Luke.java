@@ -40,46 +40,54 @@ public class Luke {
     }
 
     public void start() {
-        Command cmd;
+        Command cmd = new Command();
         Scanner sc = new Scanner(System.in);
         greeting();
         do {
-            cmd = Command.parseCommand(sc.nextLine());
-            switch (cmd.getCommandAction().getCommandActionType()) {
-                case READ:
-                    printTaskList();
-                    break;
-                case ADD:
-                    Task task;
-                    switch (cmd.getCommandAction()) {
-                        case DEADLINE:
-                            task = new Deadline(cmd.getArguments());
-                            break;
-                        case EVENT:
-                            task = new Event(cmd.getArguments());
-                            break;
-                        default:
-                            task = new ToDo(cmd.getArguments());
-                            break;
-                    }
-                    taskList[taskIndex++] = task;
-                    printOutput(String.format("I have added the following task into list: \n\t%s\nnow you have %d tasks in the list.", task, taskIndex));
-                    break;
-                case UPDATE:
-                    int index = Integer.valueOf(cmd.getArgumentByKey("index")) - 1;
-                    switch (cmd.getCommandAction()) {
-                        case MARK:
-                            taskList[index].markAsDone();
-                            printOutput("Using the force... Great! I have forced this task as done.");
-                            break;
-                        case UNMARK:
-                            taskList[index].unmarkAsDone();
-                            printOutput("Force should be used for greater good!\nI've forced this task as not done yet...");
-                            break;
-                    }
-                    break;
-                default:
-                    break;
+            try {
+                cmd = Command.parseCommand(sc.nextLine());
+                switch (cmd.getCommandAction().getCommandActionType()) {
+                    case READ:
+                        printTaskList();
+                        break;
+                    case ADD:
+                        Task task;
+                        switch (cmd.getCommandAction()) {
+                            case DEADLINE:
+                                task = new Deadline(cmd.getArguments());
+                                break;
+                            case EVENT:
+                                task = new Event(cmd.getArguments());
+                                break;
+                            default:
+                                task = new ToDo(cmd.getArguments());
+                                break;
+                        }
+                        taskList[taskIndex++] = task;
+                        printOutput(String.format("I have added the following task into list: \n\t%s\nnow you have %d tasks in the list.", task, taskIndex));
+                        break;
+                    case UPDATE:
+                        int index = Integer.parseInt(cmd.getArgumentByKey("index")) - 1;
+                        switch (cmd.getCommandAction()) {
+                            case MARK:
+                                taskList[index].markAsDone();
+                                printOutput("Using the force... Great! I have forced this task as done.");
+                                break;
+                            case UNMARK:
+                                taskList[index].unmarkAsDone();
+                                printOutput("Force should be used for greater good!\nI've forced this task as not done yet...");
+                                break;
+                        }
+                        break;
+                    default:
+                        break;
+            }
+            } catch(UnknownCommandException e) {
+                printOutput("Oops, the force does not support this action.\nPlease try again :(");
+            } catch(NumberFormatException e) {
+                printOutput("Oops, the force cannot convert the value to a number.\nPlease try again :(");
+            } catch(IllegalArgumentException e) {
+                printOutput(String.format("Oops, the force is not strong.\n%s\nPlease try again :(", e.getMessage()));
             }
         } while(!cmd.isExitCmd());
         farewell();

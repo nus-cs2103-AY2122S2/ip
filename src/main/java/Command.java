@@ -3,19 +3,28 @@ import java.util.Map;
 
 public class Command {
     private CommandAction commandAction;
-    private Map<String,String> arguments;
+    private Map<String, String> arguments;
+    private static Map<String, CommandAction> commandActionMap = new HashMap<>() {{
+        put("bye", CommandAction.EXIT);
+        put("list", CommandAction.LIST);
+        put("mark", CommandAction.MARK);
+        put("unmark", CommandAction.UNMARK);
+        put("todo", CommandAction.TODO);
+        put("event", CommandAction.EVENT);
+        put("deadline", CommandAction.DEADLINE);
+    }};
 
-    Command(CommandAction commandAction, Map<String,String> arguments) {
+    Command(CommandAction commandAction, Map<String, String> arguments) {
         this.commandAction = commandAction;
         this.arguments = arguments;
     }
 
-    Command(CommandAction commandAction, String arguments) {
+    Command(CommandAction commandAction, String[] arguments) {
         this(commandAction, parseArguments(commandAction, arguments));
     }
 
-    Command(CommandAction commandAction) {
-        this(commandAction, parseArguments(commandAction, ""));
+    Command() {
+        this(CommandAction.UNKNOWN, new HashMap<>());
     }
 
     public CommandAction getCommandAction() {
@@ -26,32 +35,47 @@ public class Command {
         return this.arguments;
     }
 
-    public String getArgumentByKey(String key) { return this.arguments.get(key); }
+    public String getArgumentByKey(String key) {
+        return this.arguments.get(key);
+    }
 
     public boolean isExitCmd() {
         return this.commandAction == CommandAction.EXIT;
     }
 
-    public static Map<String,String> parseArguments(CommandAction cmdType, String args) {
+    public static Map<String, String> parseArguments(CommandAction cmdAction, String[] args) {
         Map<String, String> argsMap = new HashMap<>();
-        if(args.length() != 0) {
-            switch(cmdType.getCommandActionType()) {
+        if (!cmdAction.getArgumentKeys().isBlank()) {
+
+            switch (cmdAction.getCommandActionType()) {
                 case ADD:
-                    String[] inputs = args.split("/", 2);
+                    if (args.length < 2) {
+                        throw new IllegalArgumentException(String.format("The description of %s cannot be empty.", args[0]));
+                    }
+                    String[] inputs = args[1].split("/", 2);
+                    if(inputs[0].isBlank()) {
+                        throw new IllegalArgumentException(String.format("The description of %s cannot be empty.", args[0]));
+                    }
                     argsMap.put("description", inputs[0]);
-                    switch(cmdType) {
-                        case DEADLINE:
-                            inputs = inputs[1].split(" ",2);
-                            argsMap.put("by", inputs[1]);
-                            break;
-                        case EVENT:
-                            inputs = inputs[1].split(" ",2);
-                            argsMap.put("at", inputs[1]);
-                            break;
+                    if (cmdAction != CommandAction.TODO) {
+                        String extraArg = cmdAction.getArgumentKeys().split(",",2)[1];
+                        if (inputs.length < 2) {
+                            throw new IllegalArgumentException(String.format("%s require the %s argument.", args[0], extraArg));
+                        }
+                        inputs = inputs[1].split(" ", 2);
+                        if (inputs[0].equalsIgnoreCase(extraArg)) {
+                            argsMap.put(extraArg, inputs[1]);
+                        } else {
+                            throw new IllegalArgumentException(String.format("%s require the %s argument.", args[0], extraArg));
+                        }
                     }
                     break;
                 case UPDATE:
-                    argsMap.put("index", args);
+                    if (args.length < 2) {
+                        throw new IllegalArgumentException(String.format("The index of %s cannot be empty.", args[0]));
+                    }
+                    Integer.parseInt(args[1]);
+                    argsMap.put("index", args[1]);
                     break;
                 default:
                     break;
@@ -60,24 +84,12 @@ public class Command {
         return argsMap;
     }
 
-    public static Command parseCommand(String input) {
+    public static Command parseCommand(String input) throws UnknownCommandException, IllegalArgumentException {
         String[] inputs = input.split(" ", 2);
-        if (inputs[0].equalsIgnoreCase("bye")) {
-            return new Command(CommandAction.EXIT);
-        } else if (inputs[0].equalsIgnoreCase("list")) {
-            return new Command(CommandAction.LIST);
-        } else if (inputs[0].equalsIgnoreCase("mark")) {
-            return new Command(CommandAction.MARK, inputs[1]);
-        } else if (inputs[0].equalsIgnoreCase("unmark")) {
-            return new Command(CommandAction.UNMARK, inputs[1]);
-        } else if (inputs[0].equalsIgnoreCase("todo")) {
-            return new Command(CommandAction.TODO, inputs[1]);
-        } else if (inputs[0].equalsIgnoreCase("deadline")) {
-            return new Command(CommandAction.DEADLINE, inputs[1]);
-        } else if (inputs[0].equalsIgnoreCase("event")) {
-            return new Command(CommandAction.EVENT, inputs[1]);
+        if (commandActionMap.containsKey(inputs[0].toLowerCase())) {
+            return new Command(commandActionMap.get(inputs[0].toLowerCase()), inputs);
         } else {
-            return new Command(CommandAction.UNKNOWN, input);
+            throw new UnknownCommandException();
         }
     }
 }
