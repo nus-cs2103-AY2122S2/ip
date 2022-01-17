@@ -1,6 +1,6 @@
 package duke.main;
 
-import duke.Commands.*;
+import duke.commands.*;
 
 
 public class Parser {
