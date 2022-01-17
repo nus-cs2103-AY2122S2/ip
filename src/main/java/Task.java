@@ -31,8 +31,15 @@ public class Task {
      *
      * @return taskName
      */
-    public String getTaskName() {
-        return taskName;
+    @Override
+    public String toString() {
+        String doneStr;
+        if (this.done) {
+            doneStr = "X";
+        } else {
+            doneStr = " ";
+        }
+        return "[" + doneStr + "] " + taskName;
     }
 
     /**
