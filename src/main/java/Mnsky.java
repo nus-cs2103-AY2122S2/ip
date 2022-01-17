@@ -46,11 +46,17 @@ public class Mnsky {
         return this.con.nextLine();
     }
 
+    /**
+     * Prints out the bye messages.
+     */
     private void bye() {
         this.printMnsky("I can help!");
         System.out.println("[MNSKY has shut itself down]");
     }
 
+    /**
+     * Prints out the list of tasks.
+     */
     private void printList() {
         if (this.list.size() == 0) {
             System.out.println("[MNSKY presents an empty task list.]");
@@ -61,30 +67,88 @@ public class Mnsky {
         }
     }
 
-    private void mark(int index) {
+    /**
+     * Retrieves and returns the value of the index parameter from the input.
+     * @param command The name of the command that called this function.
+     * @param input_split The input, split into an array using space.
+     * @return The value of the index parameter.
+     * @throws MnskyException Thrown if the index parameter is missing, not an integer, or out of bounds of the list.
+     */
+    private int retrieveIndex(String command, String[] input_split) throws MnskyException {
+        if (input_split.length < 2) {
+            throw new MnskyMissingParameterException(command, "index");
+        }
+
+        if (!input_split[1].matches("\\d+")) {
+            throw new MnskyInvalidParameterException(command, "index");
+        }
+
+        int index = Integer.parseInt(input_split[1]) - 1;
+
+        if (index < 0 || index >= this.list.size()) {
+            throw new MnskyInvalidParameterException(command, "index");
+        }
+
+        return index;
+    }
+
+    /**
+     * Marks the task corresponding to the given index parameter as done, if it exists.
+     * @param input_split The input, split into an array using space.
+     * @throws MnskyException Thrown if the index parameter is missing, not an integer, or out of bounds of the list.
+     */
+    private void mark(String[] input_split) throws MnskyException {
+        int index = this.retrieveIndex("mark", input_split);
         this.list.get(index).mark();
         System.out.println(this.list.get(index));
     }
 
-    private void unmark(int index) {
+    /**
+     * Unmarks the task corresponding to the given index parameter so it is not done, if it exists.
+     * @param input_split The input, split into an array using space.
+     * @throws MnskyException Thrown if the index parameter is missing, not an integer, or out of bounds of the list.
+     */
+    private void unmark(String[] input_split) throws MnskyException {
+        int index = this.retrieveIndex("unmark", input_split);
         this.list.get(index).unmark();
         System.out.println(this.list.get(index));
     }
 
-    private void addTask(String input) {
-        // TODO: Throw and handle errors for invalid input
-        String taskName = input.split(" ", 2)[1];
+    /**
+     * Adds a task to the list.
+     * @param input The input string.
+     * @throws MnskyException Thrown if the name parameter is missing.
+     */
+    private void addTask(String input) throws MnskyException {
+        String[] input_split = input.split(" ", 2);
+        if (input_split.length < 2) {
+            throw new MnskyMissingParameterException("todo", "name");
+        }
+
+        String taskName = input_split[1];
         this.list.add(new Task(taskName));
         System.out.println(String.format("[MNSKY added task %s to their list]", taskName));
     }
 
-    private void addDeadline(String[] input_split) {
-        // TODO: Throw and handle errors for invalid input
+    /**
+     * Adds a deadline (a task with a "by" parameter included) to the list.
+     * @param input_split The input, split into an array using space.
+     * @throws MnskyException Thrown if the name or the by parameter is missing.
+     */
+    private void addDeadline(String[] input_split) throws MnskyException {
+        if (input_split.length < 2) {
+            throw new MnskyMissingParameterException("deadline", "name");
+        }
+
         int by_index = 1;
         for (; by_index < input_split.length; by_index++) {
             if (input_split[by_index].equals("/by")) {
                 break;
             }
+        }
+
+        if (by_index >= input_split.length) {
+            throw new MnskyMissingParameterException("deadline", "by");
         }
 
         String deadlineName = String.join(" ", Arrays.copyOfRange(input_split, 1, by_index));
@@ -93,12 +157,25 @@ public class Mnsky {
         System.out.println(String.format("[MNSKY added deadline %s to their list]", deadlineName));
     }
 
-    private void addEvent(String[] input_split) {
+    /**
+     * Adds a deadline (a task with an "at" parameter included) to the list.
+     * @param input_split The input, split into an array using space.
+     * @throws MnskyException Thrown if the name or the at parameter is missing.
+     */
+    private void addEvent(String[] input_split) throws MnskyException {
+        if (input_split.length < 2) {
+            throw new MnskyMissingParameterException("event", "name");
+        }
+
         int at_index = 1;
         for (; at_index < input_split.length; at_index++) {
             if (input_split[at_index].equals("/at")) {
                 break;
             }
+        }
+
+        if (at_index >= input_split.length) {
+            throw new MnskyMissingParameterException("event", "at");
         }
 
         String eventName = String.join(" ", Arrays.copyOfRange(input_split, 1, at_index));
@@ -116,39 +193,42 @@ public class Mnsky {
         String input = this.getInput();
         String[] input_split = input.split(" ");
 
-        switch (input_split[0]) {
-            case "bye":
-                this.bye();
-                return false;
+        try {
+            switch (input_split[0]) {
+                case "bye":
+                    this.bye();
+                    return false;
 
-            case "list":
-                this.printList();
-                break;
+                case "list":
+                    this.printList();
+                    break;
 
-            case "mark":
-                // TODO: Throw and handle error if no number or invalid number given
-                this.mark(Integer.parseInt(input_split[1]) - 1);
-                break;
+                case "mark":
+                    this.mark(input_split);
+                    break;
 
-            case "unmark":
-                // TODO: Throw and handle error if no number or invalid number given
-                this.unmark(Integer.parseInt(input_split[1]) - 1);
-                break;
+                case "unmark":
+                    this.unmark(input_split);
+                    break;
 
-            case "todo":
-                this.addTask(input);
-                break;
+                case "todo":
+                    this.addTask(input);
+                    break;
 
-            case "event":
-                this.addEvent(input_split);
-                break;
+                case "event":
+                    this.addEvent(input_split);
+                    break;
 
-            case "deadline":
-                this.addDeadline(input_split);
-                break;
+                case "deadline":
+                    this.addDeadline(input_split);
+                    break;
 
-            default:
-                this.printMnsky("...");
+                default:
+                    this.printMnsky("...");
+            }
+        } catch (MnskyException m) {
+            this.printMnsky("..?");
+            System.out.println(m);
         }
 
         this.printMnsky("I can help!");
