@@ -58,12 +58,32 @@ public class Duke {
                 if (parsedString[0].equalsIgnoreCase("deadline")) {
                    String [] dlParseBy = parsedString[1].split("/by");
                    if (dlParseBy.length <= 1) {
-                       System.out.println("Please include a date.");
+                       System.out.println("Please check that your input is correct.");
                    } else {
                        Deadline dl  = new Deadline(dlParseBy[0], dlParseBy[1]);
                        inputList.add(dl);
+                       System.out.println("Got it. I've added " + dl + " to the list.");
                    }
                 }
+
+                else if (parsedString[0].equalsIgnoreCase("event")) {
+                    String [] eventParseBy = parsedString[1].split("/at");
+                    if (eventParseBy.length <= 1) {
+                        System.out.println("Please check that your input is correct.");
+                    } else {
+                        Event ev  = new Event(eventParseBy[0], eventParseBy[1]);
+                        inputList.add(ev);
+                        System.out.println("Got it. I've added " + ev + " to the list.");
+                    }
+                }
+
+                else if (parsedString[0].equalsIgnoreCase("todo")) {
+                    ToDos td = new ToDos(parsedString[1]);
+                    inputList.add(td);
+                    System.out.println("Got it. I've added " + td + " to the list.");
+                }
+
+                System.out.println("Now you have " + inputList.size() + " tasks in the list.");
             }
         }
     }
