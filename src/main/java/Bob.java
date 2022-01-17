@@ -44,7 +44,11 @@ public class Bob {
                 command.nextToken();
                 markTaskDone(Integer.parseInt(command.nextToken()));
             } else {
-                addTask(input);
+                try {
+                    addTask(input);
+                } catch (BobException e) {
+                    System.out.print(e.getBobReply() + lineSplit + "You: ");
+                }
             }
             input = sc.nextLine();
             System.out.print(lineSplit);
@@ -68,38 +72,41 @@ public class Bob {
         System.out.print(lineSplit + "You: ");
     }
 
-    public static void addTask(String input) {
+    public static void addTask(String input) throws BobException{
         StringTokenizer line = new StringTokenizer(input);
         String taskType = line.nextToken();
-        Task newTask = null;
+        Task newTask;
         if (taskType.equalsIgnoreCase("todo")) {
+            String[] strArr = input.substring(4).split(" ");
+            if (strArr.length == 1) {
+                if (strArr[0].isBlank()) {
+                    throw new BobException("todo");
+                }
+            }
+            if (strArr.length <= 0) {
+                throw new BobException("todo");
+            }
             newTask = new Todo(input.substring(4).trim());
         } else if (taskType.equalsIgnoreCase("deadline")) {
             String[] strArr = input.substring(8).split("/by");
             if (strArr.length <= 1) {
-                invalidInput();
-                return;
+                throw new BobException("deadline");
             }
             newTask = new Deadline(strArr[0].trim(), strArr[1].trim());
         } else if (taskType.equalsIgnoreCase("event")) {
             String[] strArr = input.substring(5).split("/at");
             if (strArr.length <= 1) {
-                invalidInput();
-                return;
+                throw new BobException("event");
             }
             newTask = new Event(strArr[0].trim(), strArr[1].trim());
         } else {
-            invalidInput();
-            return;
+            throw new BobException("invalid input");
         }
         tasks.add(newTask);
         System.out.print("Bob: I have added " + newTask + " to your tasks! You have " + tasks.size() + " tasks now " +
                 "._.)/\\(._.\n" + lineSplit + "You: ");
     }
 
-    public static void invalidInput() {
-        System.out.print("Bob: Your input was invalid (ㆆ _ ㆆ)\n" + lineSplit + "You: ");
-    }
     public static void sayBye() {
         System.out.println("Bob: "+ "bye bye c u next time (ʘ‿ʘ)╯\n" + lineSplit2);
     }
