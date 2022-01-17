@@ -57,13 +57,13 @@ public class TaskList {
         try {
             switch (inst) {
             case "todo":
-                addTask(new ToDo(task));
+                addTask(new ToDoTask(task));
                 break;
             case "deadline":
-                addTask(new Deadline(task));
+                addTask(new DeadlineTask(task));
                 break;
             case "event":
-                addTask(new Event(task));
+                addTask(new EventTask(task));
                 break;
             }
         } catch (EmptyMessageException emptyEx) {
@@ -91,7 +91,7 @@ public class TaskList {
         try {
             int index = Integer.valueOf(message);
             Task delTask = delete(index - 1);
-            
+
             System.out.println(String.format("\tYes Master, I have removed this task:\n"
                 + "\t    %s\n"
                 + "\tYou have %d task(s) currently", delTask, size));

@@ -1,7 +1,7 @@
-public class Deadline extends Task {
+public class DeadlineTask extends Task {
     protected String time;
 
-    public Deadline(String message) throws EmptyMessageException, DateFormatException {
+    public DeadlineTask(String message) throws EmptyMessageException, DateFormatException {
         String[] taskArray = message.split("/by");
 
         if (taskArray[0].equals("")) {
@@ -14,7 +14,7 @@ public class Deadline extends Task {
         time = taskArray[1].stripLeading().stripTrailing();
     }
 
-    public Deadline(String message, String deadline) {
+    public DeadlineTask(String message, String deadline) {
         super(message);
         time = deadline;
     }

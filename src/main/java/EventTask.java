@@ -1,7 +1,7 @@
-public class Event extends Task {
+public class EventTask extends Task {
     protected String time;
 
-    public Event(String message) throws EmptyMessageException, DateFormatException {
+    public EventTask(String message) throws EmptyMessageException, DateFormatException {
         String[] taskArray = message.split("/at");
 
         if (taskArray[0].equals("")) {
@@ -14,7 +14,7 @@ public class Event extends Task {
         time = taskArray[1].stripLeading().stripTrailing();
     }
 
-    public Event(String message, String when) {
+    public EventTask(String message, String when) {
         super(message);
         time = when;
     }
