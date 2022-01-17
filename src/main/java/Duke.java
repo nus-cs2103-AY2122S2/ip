@@ -22,96 +22,158 @@ public class Duke {
             input = Console.read();
             String[] inputArg = input.split(" ", 2);
 
-            switch (inputArg[0].toLowerCase()) {
-                case "bye": {
-                    switch(dot) {
-                        case JJBA: {
-                            Console.println("Goodbye! Good luck!");
-                            break;
+            try {
+                switch (inputArg[0].toLowerCase()) {
+                    case "bye": {
+                        switch (dot) {
+                            case JJBA: {
+                                Console.println("Goodbye! Good luck!");
+                                break;
+                            }
+                            case DIO: {
+                                Console.println("What?! I-Impossible... I-I am Dio... I am the mighty Dio!");
+                            }
                         }
-                        case DIO: {
-                            Console.println("RODA ROLLA DA!");
-                        }
+                        exitProg = true;
+                        break;
                     }
-                    exitProg = true;
-                    break;
-                }
-                case "dio": {
-                    dot = BOT.DIO;
-                    Console.println("ZA WARUDO!");
-                    break;
-                }
-                case "jjba": {
-                    dot = BOT.JJBA;
-                    Console.println("What can I do for you?");
-                    break;
-                }
-                case "mark": {
-                    Task curTask = taskArr.get(Integer.parseInt(inputArg[1]) - 1);
-                    curTask.markTask();
-
-                    switch(dot) {
-                        case JJBA: {
-                            Console.println("Good job on completing your task!\n   " + curTask.toString());
-                            break;
-                        }
-                        case DIO: {
-                            Console.println("KONO DIO DA!\n   " + curTask.toString());
-                        }
+                    case "dio": {
+                        dot = BOT.DIO;
+                        Console.println("ZA WARUDO!");
+                        break;
                     }
-                    break;
-                }
-                case "unmark": {
-                    Task curTask = taskArr.get(Integer.parseInt(inputArg[1]) - 1);
-                    curTask.unmarkTask();
-                    switch(dot) {
-                        case JJBA: {
-                            Console.println("Done, remember to do your task.\n   " + curTask.toString());
-                            break;
-                        }
-                        case DIO: {
-                            Console.println("Hinjaku! Hinjaku!\n   " + curTask.toString());
-                        }
+                    case "jjba": {
+                        dot = BOT.JJBA;
+                        Console.println("What can I do for you?");
+                        break;
                     }
-                    break;
-                }
-                case "list": {
+                    case "mark": {
+                        Task curTask = taskArr.get(Integer.parseInt(inputArg[1]) - 1);
+                        curTask.markTask();
 
-                    switch(dot) {
-                        case JJBA: {
-                            Console.printList("Here are the things you will need to do:", taskArr);
-                            break;
+                        switch (dot) {
+                            case JJBA: {
+                                Console.println("Good job on completing your task!\n   " + curTask.toString());
+                                break;
+                            }
+                            case DIO: {
+                                Console.println("KONO DIO DA!\n   " + curTask.toString());
+                            }
                         }
-                        case DIO: {
-                            Console.printList("Oh? You're Approaching Me?", taskArr);
-                        }
+                        break;
                     }
-                    break;
+                    case "unmark": {
+                        Task curTask = taskArr.get(Integer.parseInt(inputArg[1]) - 1);
+                        curTask.unmarkTask();
+                        switch (dot) {
+                            case JJBA: {
+                                Console.println("Done, remember to do your task.\n   " + curTask.toString());
+                                break;
+                            }
+                            case DIO: {
+                                Console.println("Hinjaku! Hinjaku!\n   " + curTask.toString());
+                            }
+                        }
+                        break;
+                    }
+                    case "list": {
+
+                        switch (dot) {
+                            case JJBA: {
+                                Console.printList("Here are the things you will need to do:",
+                                        "There are no task available.",taskArr);
+                                break;
+                            }
+                            case DIO: {
+                                Console.printList("Oh? You're Approaching Me?",
+                                        "I reject my humanity, Jojo!", taskArr);
+                            }
+                        }
+                        break;
+                    }
+                    case "todo": {
+
+                        if (inputArg.length < 2 || inputArg[1].isBlank()) {
+                            throw new DukeException("Description of a todo task cannot be empty.");
+                        }
+
+                        Task newTask = new Todo(inputArg[1]);
+
+                        taskArr.add(newTask);
+                        printTaskAdd(newTask);
+                        break;
+                    }
+                    case "deadline": {
+
+                        if (inputArg.length < 2 || inputArg[1].isBlank()) {
+                            throw new DukeException("Time and Description of a deadline task cannot be empty.");
+                        }
+
+                        String[] oargs = inputArg[1].split("/");
+
+                        if (oargs.length < 2 || oargs[1].isBlank() || !oargs[1].startsWith("by")) {
+                            throw new DukeException("Invalid/Missing suffix, format is 'deadline [message] /by [date/time]'.");
+                        }
+
+                        Task newTask = new Deadline(oargs[0], oargs[1].substring(3));
+
+                        taskArr.add(newTask);
+                        printTaskAdd(newTask);
+                        break;
+                    }
+                    case "event": {
+
+                        if (inputArg.length < 2 || inputArg[1].isBlank()) {
+                            throw new DukeException("Time and Description of a event task cannot be empty.");
+                        }
+
+                        String[] oargs = inputArg[1].split("/");
+
+                        if (oargs.length < 2 || oargs[1].isBlank() || !oargs[1].startsWith("at")) {
+                            throw new DukeException("Invalid/Missing suffix, format is 'event [message] /at [date/time]'.");
+                        }
+
+                        Task newTask = new Event(oargs[0], oargs[1].substring(3));
+
+                        taskArr.add(newTask);
+                        printTaskAdd(newTask);
+                        break;
+                    }
+                    default: {
+                        throw new DukeException("Invalid Command.");
+                    }
                 }
-                case "todo": {
-                    Task newTask = new Todo(inputArg[1]);
-
-                    taskArr.add(newTask);
-                    printTaskAdd(newTask);
-                    break;
+            } catch (DukeException e) {
+                switch (dot) {
+                    case JJBA: {
+                        Console.println(e.getMessage());
+                        break;
+                    }
+                    case DIO: {
+                        Console.println("RODA ROLLA DA!");
+                    }
                 }
-                case "deadline": {
 
-                    String[] oargs = inputArg[1].split("/");
-                    Task newTask = new Deadline(oargs[0], oargs[1].substring(3));
-
-                    taskArr.add(newTask);
-                    printTaskAdd(newTask);
-                    break;
+            } catch (NumberFormatException e) {
+                switch (dot) {
+                    case JJBA: {
+                        Console.println("Invalid input, please enter a task number.");
+                        break;
+                    }
+                    case DIO: {
+                        Console.println("RODA ROLLA DA!");
+                    }
                 }
-                case "event": {
 
-                    String[] oargs = inputArg[1].split("/");
-                    Task newTask = new Event(oargs[0], oargs[1].substring(3));
-
-                    taskArr.add(newTask);
-                    printTaskAdd(newTask);
-                    break;
+            } catch (IndexOutOfBoundsException e) {
+                switch (dot) {
+                    case JJBA: {
+                        Console.println("Invalid task number, pleased enter a valid task number.");
+                        break;
+                    }
+                    case DIO: {
+                        Console.println("RODA ROLLA DA!");
+                    }
                 }
             }
 

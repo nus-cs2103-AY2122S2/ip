@@ -14,10 +14,16 @@ public class Console {
         }
     }
 
-    public static void printList(String msg, ArrayList<Task> arr) {
-        System.out.println("      " + msg);
-        for (int i = 0; i < arr.size(); i++) {
-            System.out.println(String.format("      %d. %s", i + 1, arr.get(i).toString()));
+    public static void printList(String msg, String emptymsg, ArrayList<Task> arr) {
+
+        if (arr.isEmpty()) {
+            System.out.println("      " + emptymsg);
+
+        } else {
+            System.out.println("      " + msg);
+            for (int i = 0; i < arr.size(); i++) {
+                System.out.println(String.format("      %d. %s", i + 1, arr.get(i).toString()));
+            }
         }
         System.out.println("    ____________________________________________________________");
     }
