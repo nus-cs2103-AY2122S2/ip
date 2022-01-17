@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class ListResponse implements Response{
 
-    ArrayList<String> iterate;
+    ArrayList<Task> iterate;
     int count = 1;
 
     ListResponse(ArrayList iterate) {
@@ -16,8 +16,10 @@ public class ListResponse implements Response{
         System.out.println(
                 "____________________________________________________________"
         );
+
+        System.out.println("Here are the tasks in your list:");
         iterate.forEach(x -> {
-            System.out.println(count + ". " + x);
+            System.out.println(count + ". " + x.display());
             count++;
         });
 
