@@ -33,13 +33,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        String doneStr;
-        if (this.done) {
-            doneStr = "X";
-        } else {
-            doneStr = " ";
-        }
-        return "[" + doneStr + "] " + taskName;
+        return taskName;
     }
 
     /**
