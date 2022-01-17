@@ -1,6 +1,16 @@
 import java.util.Scanner;
 
+
 public class Duke {
+    public static boolean parseIntAble(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
+    }
+
     public static void main(String[] args) {
         // greeting message
         String greetings = "    Hi there! 👋 I'm Duke\n"
@@ -56,13 +66,41 @@ public class Duke {
                         break;
 
                     case "mark":
-                        int taskToMark = Integer.parseInt(userInputArr[1]);
-                        todoList[taskToMark - 1].markAsDone();
+                        if (parseIntAble(userInputArr[1])) {
+                            int taskToMark = Integer.parseInt(userInputArr[1]);
+                            todoList[taskToMark - 1].markAsDone();
 
-                        System.out.println("Nice! I've marked this task as done: ");
+                            System.out.println(lines);
+                            System.out.println("    Nice! I've marked this task as done: ");
 
-                        String taskString = String.format("[%s] %s", todoList[taskToMark - 1].getStatusIcon(), todoList[taskToMark - 1].description);
+                            String taskString = String.format("[%s] %s", todoList[taskToMark - 1].getStatusIcon(), todoList[taskToMark - 1].description);
+                            System.out.println("    " + taskString);
+                            System.out.println(lines);
+                        } else {
+                            // creating task
+                            Task inputTask = new Task(userInput);
+
+                            // storing input task
+                            todoList[count] = inputTask;
+
+                            // displaying input task
+                            System.out.println(lines);
+                            System.out.println("    added: " + inputTask.description);
+                            System.out.println(lines);
+                            count++;
+                        }
+                        break;
+
+                    case "unmark":
+                        int taskToUnmark = Integer.parseInt(userInputArr[1]);
+                        todoList[taskToUnmark - 1].markAsNotDone();
+
+                        System.out.println(lines);
+                        System.out.println("    OK, I've marked this task as not done yet:");
+
+                        String taskString = String.format("[%s] %s", todoList[taskToUnmark - 1].getStatusIcon(), todoList[taskToUnmark - 1].description);
                         System.out.println("    " + taskString);
+                        System.out.println(lines);
                         break;
 
                     default:
