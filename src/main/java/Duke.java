@@ -72,13 +72,31 @@ public class Duke {
                         }
                     } else if (cmd.equals("unmark")) {
                         if (incomplete) {
-                            throw new DukeException("WHAT YOU WANT MARK? WEAR HELMET CANNOT THINK ALREADY AH?");
+                            throw new DukeException("WHAT YOU WANT UNMARK? WEAR HELMET CANNOT THINK ALREADY AH?");
                         } else {
                             int num = Integer.parseInt(rem) - 1;
                             tasks.get(num).unmark();
                             String confirm =
                                     "I THOUGHT THIS ONE" + TASKSPACE + tasks.get(num) + SPACE +
-                                            "FINISH ALREADY? NEVER MIND THIS WEEKEND CONFINE!";
+                                    "FINISH ALREADY? NEVER MIND THIS WEEKEND CONFINE!";
+                            format(confirm);
+                        }
+                    } else if (cmd.equals("delete")) {
+                        if (incomplete) {
+                            throw new DukeException("YOU TRYING TO LEPAK IS IT? WAKE UP YOUR BLOODY IDEA!");
+                        } else {
+                            int num = Integer.parseInt(rem) - 1;
+                            Task toDelete = tasks.get(num);
+                            tasks.remove(num);
+                            int size = tasks.size();
+                            String confirm =
+                                    "YOU DON'T WANT DO THEN SAY DON'T DO AH?" + TASKSPACE + toDelete.toString() +
+                                    "WAKE UP YOUR BLOODY IDEA CHAO RECRUIT!";
+                            if (size == 0) {
+                                confirm += SPACE + "NOTHING ELSE TO DO CAN RILEK ALREADY AH RECRUIT? DOWN 20!";
+                            } else {
+                                confirm += SPACE + size + " MORE TASKS REMAINING! YOU BETTER ONE TIMES GOOD ONE!";
+                            }
                             format(confirm);
                         }
                     } else if (cmd.equals("deadline")) {
@@ -92,8 +110,8 @@ public class Duke {
                             tasks.add(tempTask);
                             String confirm =
                                     "YOU BETTER FINISH THIS AH:" + TASKSPACE + tempTask + SPACE +
-                                            "YOU STILL GOT " + tasks.size() +
-                                            " THINGS TO DO AH BETTER NOT FORGET!";
+                                    "YOU STILL GOT " + tasks.size() +
+                                    " THINGS TO DO AH BETTER NOT FORGET!";
                             format(confirm);
                         }
                     } else if (cmd.equals("event")) {
@@ -107,8 +125,8 @@ public class Duke {
                             tasks.add(tempTask);
                             String confirm =
                                     "YOU BETTER REMEMBER THIS AH:" + TASKSPACE + tempTask + SPACE +
-                                            "YOU STILL GOT " + tasks.size() +
-                                            " THINGS TO DO AH BETTER NOT FORGET!";
+                                    "YOU STILL GOT " + tasks.size() +
+                                    " THINGS TO DO AH BETTER NOT FORGET!";
                             format(confirm);
                         }
                     } else if (cmd.equals("todo")) {
@@ -120,8 +138,8 @@ public class Duke {
                             tasks.add(tempTask);
                             String confirm =
                                     "YOU WANT TO DO THIS AH:" + TASKSPACE + tempTask + SPACE +
-                                            "VERY GOOD! YOU STILL GOT " + tasks.size() +
-                                            " THINGS TO DO AH BETTER NOT FORGET!";
+                                    "VERY GOOD! YOU STILL GOT " + tasks.size() +
+                                    " THINGS TO DO AH BETTER NOT FORGET!";
                             format(confirm);
                         }
                     } else {
