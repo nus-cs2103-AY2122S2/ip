@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class Duke {
     private static Task[] taskList = new Task[100];
     private static int taskNum = 0;
@@ -7,6 +5,7 @@ public class Duke {
     private static Scanner sc;
 
     public static void main(String[] args) {
+<<<<<<< HEAD
         String greet = "Hello! I'm Duke\n" + "What can I do for you?";
         System.out.println(greet);
         sc = new Scanner(System.in);
@@ -20,37 +19,61 @@ public class Duke {
     private static void getUserInput(){
         String first_word = sc.next();
         String remaining_word = sc.nextLine();
-
-        switch (first_word) {
-        case "bye":
-            exit();
-            break;
-        case "list":
-            displayList();
-            break;
-        case "deadline":
-            deadlineTask(remaining_word.trim());
-            break;
-        case "event":
-            eventTask(remaining_word.trim());
-            break;
-        case "todo":
-            todoTask(remaining_word.trim());
-            break;
-        case "mark":
-            markTaskList(remaining_word.trim());
-            break;
-        case "unmark":
-            unmarkTaskList(remaining_word.trim());
-            break;
-        default:
-            String curr_word = first_word + remaining_word;
-            Task curr_task = new Task(curr_word);
-            taskList[taskNum] = curr_task;
-            taskNum++;
-            System.out.println("added: " + curr_task.getDescription());
+        try {
+            switch (first_word) {
+            case "bye":
+                exit();
+                break;
+            case "list":
+                displayList();
+                break;
+            case "deadline":
+                if (remaining_word.equals("")) {
+                    errorMessage("OOPS!!! The description of a deadline cannot be empty. :<");
+                }
+                deadlineTask(remaining_word.trim());
+                break;
+            case "event":
+                if (remaining_word.equals("")) {
+                    errorMessage("OOPS!!! The description of a event cannot be empty. :<");
+                }
+                eventTask(remaining_word.trim());
+                break;
+            case "todo":
+                if (remaining_word.equals("")) {
+                    errorMessage("OOPS!!! The description of a todo cannot be empty. :<");
+                }
+                todoTask(remaining_word.trim());
+                break;
+            case "mark":
+                if (remaining_word.equals("")) {
+                    errorMessage("OOPS!!! Please input a number. :<");
+                }
+                markTaskList(remaining_word.trim());
+                break;
+            case "unmark":
+                if (remaining_word.equals("")) {
+                    errorMessage("OOPS!!! Please input a number. :<");
+                }
+                unmarkTaskList(remaining_word.trim());
+                break;
+            default:
+                errorMessage("OOPS!!! I'm sorry, but I don't know what that means :<");
+            }
+        } catch (DukeException error) {
+            System.out.println(error.getMessage());
             getUserInput();
         }
+    }
+
+    /**
+     * To show the error message to user.
+     *
+     * @param message error message to be display to warn user.
+     * @throws DukeException error exception shown if empty.
+     */
+    private static void errorMessage(String message) throws DukeException {
+        throw new DukeException(message);
     }
 
     /**
@@ -153,3 +176,13 @@ public class Duke {
         getUserInput();
     }
 }
+=======
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
+    }
+}
+>>>>>>> parent of 01f2bfb (duke chatbot)

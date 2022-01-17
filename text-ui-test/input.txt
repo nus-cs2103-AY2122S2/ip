@@ -3,9 +3,10 @@ mark 1
 event group project meeting /at Wed 1-4pm
 list
 deadline return book /by Sunday
+mark
 mark 3
 unmark 3
 list
-todo study
+todo
 list
 bye

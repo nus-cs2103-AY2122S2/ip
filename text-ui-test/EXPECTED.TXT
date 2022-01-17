@@ -14,6 +14,7 @@ Here are the tasks in your list:
 Got it. I've added this task:
 [D][ ] return book (by: Sunday)
 Now you have 3 tasks in the list.
+OOPS!!! Please input a number. :<
 Nice! I've marked this task as done:
 [D][X] return book (by: Sunday)
 OK, I've marked this task as not done yet:
@@ -22,12 +23,9 @@ Here are the tasks in your list:
 1. [T][X] borrow book
 2. [E][ ] group project meeting (at: Wed 1-4pm)
 3. [D][ ] return book (by: Sunday)
-Got it. I've added this task:
-[T][ ] study
-Now you have 4 tasks in the list.
+OOPS!!! The description of a todo cannot be empty. :<
 Here are the tasks in your list:
 1. [T][X] borrow book
 2. [E][ ] group project meeting (at: Wed 1-4pm)
 3. [D][ ] return book (by: Sunday)
-4. [T][ ] study
 Bye. Hope to see you again soon!
