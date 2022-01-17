@@ -15,7 +15,7 @@ public class Duke {
 
         while (true) {
             String userInput = sc.nextLine();
-            String[] commands = userInput.strip().split(" ");
+            String[] commands = userInput.strip().split(" ", 2);
 
             if (commands[0].equals("bye")) {
                 System.out.println(HORIZONTAL_LINE);
@@ -43,11 +43,25 @@ public class Duke {
                 savedTask[index].markAsNotDone();
                 System.out.println("\t" + savedTask[index].toString());
             } else {
-                savedTask[counting] = new Task(userInput);
+                switch (commands[0]) {
+                    case "todo":
+                        savedTask[counting] = new Todo(commands[0]);
+                        break;
+                    case "deadline":
+                        String[] deadlineDetail = commands[1].split("/by");
+                        savedTask[counting] = new Deadline(deadlineDetail[0], deadlineDetail[1]);
+                        break;
+                    case "event":
+                        String[] eventDetail = commands[1].split("/at");
+                        savedTask[counting] = new Event(eventDetail[0], eventDetail[1]);
+                        break;
+                }
+                System.out.println(HORIZONTAL_LINE);
+                System.out.println("\t" + "Got it. I've added this task:");
+                System.out.println("\t" + savedTask[counting].toString());
+                System.out.println("\t" + "Now you have " + (counting + 1) + " tasks in the list.");
+                System.out.println(HORIZONTAL_LINE);
                 counting++;
-                System.out.println(HORIZONTAL_LINE);
-                System.out.println("\t" + "added: " + userInput);
-                System.out.println(HORIZONTAL_LINE);
             }
         }
     }
