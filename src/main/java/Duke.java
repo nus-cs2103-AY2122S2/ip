@@ -15,8 +15,21 @@ public class Duke {
         // reading user input
         Scanner sc = new Scanner(System.in);
 
-        // boolean to indicate whether userInput isBye
+        // INITIALIZING VARIABLES
+        /**
+         * whether the user's input is bye
+         */
         boolean isBye = false;
+
+        /**
+         * current number of to do tasks
+         */
+        int count = 0;
+
+        /**
+         * Array container for user's to do tasks
+         */
+        String[] todoList = new String[100];
 
         String userInput = sc.nextLine();
 
@@ -28,10 +41,26 @@ public class Duke {
                 System.out.println("    Bye. See you again next time! Have a nice day 😊!");
                 System.out.println(lines);
             } else {
-                System.out.println(lines);
-                System.out.println("    " + userInput);
-                System.out.println(lines);
+                // storing input task in todoList
 
+                switch (userInput) {
+                    case "list":
+                        for (int i = 0; i < count; i++) {
+                            String display = String.format("%d. %s", i + 1, todoList[i]);
+                            System.out.println(display);
+                        }
+                        break;
+
+                    default:
+                        // storing input task
+                        todoList[count] = userInput;
+                        // displaying input task
+                        System.out.println(lines);
+                        System.out.println("    added: " + userInput);
+                        System.out.println(lines);
+                        break;
+                }
+                count++;
                 userInput = sc.nextLine();
             }
         }
