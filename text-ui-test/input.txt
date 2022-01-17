@@ -11,4 +11,10 @@ list
 mark asdfg
 unmark 66
 list
+todo ppppppppppp
+event Meet Friend /at Sunday 12pm
+list
+delete 4
+delete 99
+delete asdf
 exit

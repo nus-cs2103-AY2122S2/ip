@@ -1,9 +1,8 @@
-import java.lang.reflect.Array;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Connor {
-    private static final String CURRENT_VERSION = "Version 1.5";
+    private static final String CURRENT_VERSION = "Version 1.6";
     private static final String LINE = "┄".repeat(66);
     private static final String INDENT = " ".repeat(4);
 
@@ -24,14 +23,7 @@ public class Connor {
             break;
         }
         case "list": {
-            if (taskList.size() == 0) {
-                print("Your task list is empty.");
-                return;
-            }
-            print("Here are your current tasks: ");
-            for (int i = 1; i <= taskList.size(); i++) {
-                print(INDENT + Integer.toString(i) + ". " + taskList.get(i - 1));
-            }
+            viewTasks();
             break;
         }
         case "todo":
@@ -46,6 +38,19 @@ public class Connor {
                 addTask(x, desc);
             } catch (ArrayIndexOutOfBoundsException e) {
                 print("Error! Tasks cannot have an empty description.");
+            }
+            break;
+        }
+        case "delete": {
+            try {
+                int taskNo = Integer.parseInt(statement[1]) - 1;
+                deleteTask(taskNo);
+                print("");
+                viewTasks();
+            } catch (NumberFormatException e) {
+                print("Error! Index must be a valid integer.");
+            } catch (ArrayIndexOutOfBoundsException e) {
+                print("Error! Index cannot be empty.");
             }
             break;
         }
@@ -64,6 +69,17 @@ public class Connor {
         default: {
             print("My apologies, I don't understand what '" + statement[0] + "' means.");
         }
+        }
+    }
+
+    private static void viewTasks() {
+        if (taskList.size() == 0) {
+            print("Your task list is empty.");
+            return;
+        }
+        print("Here are your current tasks: ");
+        for (int i = 1; i <= taskList.size(); i++) {
+            print(INDENT + Integer.toString(i) + ". " + taskList.get(i - 1));
         }
     }
 
@@ -126,8 +142,18 @@ public class Connor {
         }
         // After task is added show current no. of tasks
         print("");
-        String plurality = taskList.size() == 1 ? "" : "s";
-        print("You currently have " + taskList.size() + " task" + plurality + ".");
+        getNoOfTasks();
+    }
+
+    private static void deleteTask(int index) {
+        try {
+            Task t = taskList.get(index);
+            taskList.remove(index);
+            print("Alright, I've deleted the task: ");
+            print(INDENT + t);
+        } catch (IndexOutOfBoundsException e) {
+            print("Error! Given index is out of range.");
+        }
     }
 
     private static void markStatus(String status, int index) {
@@ -137,10 +163,9 @@ public class Connor {
                 t.mark();
                 print("Good job! I've marked the following task as completed: ");
                 print(INDENT + t);
-            } catch (IndexOutOfBoundsException e){
+            } catch (IndexOutOfBoundsException e) {
                 print("Error! Given index is out of range.");
-                String plurality = taskList.size() == 1 ? "" : "s";
-                print("You currently have " + taskList.size() + " task" + plurality + ".");
+                getNoOfTasks();
             }
         } else {
             // Unmark
@@ -155,10 +180,14 @@ public class Connor {
                     return;
                 }
                 print("Error! Given index is out of range.");
-                String plurality = taskList.size() == 1 ? "" : "s";
-                print("You currently have " + taskList.size() + " task" + plurality + ".");
+                getNoOfTasks();
             }
         }
+    }
+
+    private static void getNoOfTasks() {
+        String plurality = taskList.size() == 1 ? "" : "s";
+        print("You have " + taskList.size() + " task" + plurality + ".");
     }
 
     private static void print(String s) {
