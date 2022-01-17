@@ -4,7 +4,7 @@ import java.util.function.Consumer;
 public class Duke {
     private static final String SEPARATOR = "\t------------------------------------";
     private static final String BOT_NAME = "Megumin";
-
+    private static final String COMMAND_EXIT = "bye";
 
     public static void main(String[] args) {
         greet();
@@ -12,13 +12,18 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (true) {
             String command = readInput(sc);
-
+            if (command.equalsIgnoreCase(COMMAND_EXIT)) {
+                break;
+            }
             printBlock((linePrinter) -> {
                 processCommand(command, linePrinter);
             });
 
             System.out.println();
         }
+        printBlock((linePrinter) -> {
+            linePrinter.print("Goodbye! Have a Nice Day.");
+        });
     }
 
     private static void greet() {
