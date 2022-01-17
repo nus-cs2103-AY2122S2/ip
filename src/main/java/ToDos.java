@@ -1,7 +1,10 @@
 public class ToDos extends Task {
 
-    public ToDos (String task) {
+    public ToDos (String task) throws DukeException {
         super(task);
+        if (task.length() < 5) {
+            throw new DukeException("     ☹ OOPS!!! The description of a todo cannot be empty.");
+        }
     }
 
     @Override
