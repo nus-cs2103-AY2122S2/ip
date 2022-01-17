@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         Scanner scan = new Scanner(System.in);
