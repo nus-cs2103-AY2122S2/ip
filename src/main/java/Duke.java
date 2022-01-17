@@ -24,11 +24,18 @@ public class Duke {
             switch (cmd) {
 
                 case "list":
-                    for (int i = 0; i < taskList.size(); i++) {
-                        int idx = i + 1;
-                        System.out.println("\t" + idx + ". " + taskList.get(i).toString());
+
+                    if (taskList.size() == 0) {
+                        System.out.println("\tEmpty list\n");
                     }
-                    System.out.println();
+
+                    else {
+                        for (int i = 0; i < taskList.size(); i++) {
+                            int idx = i + 1;
+                            System.out.println("\t" + idx + ". " + taskList.get(i).toString());
+                        }
+                        System.out.println();
+                    }
                     break;
 
                 case "mark":
@@ -82,6 +89,26 @@ public class Duke {
 
                     break;
 
+                case "delete":
+                    try {
+                        int i = Integer.parseInt(var) - 1;
+                        Task t = taskList.get(i);
+                        taskList.remove(i);
+                        System.out.println("\tNoted. I've removed this task:");
+                        System.out.println("\t\t" + t);
+                        System.out.println("\tNow you have "+ taskList.size() +" tasks in the list.\n");
+                    }
+
+                    catch (NumberFormatException ex) {
+                        System.out.println("\tThere is no index\n");
+                    }
+
+                    catch (IndexOutOfBoundsException ex) {
+                        System.out.println("\tTask does not exist\n");
+                    }
+
+                    break;
+
                 default:
                     System.out.println("\tWrong command\n");
             }
@@ -109,7 +136,7 @@ public class Duke {
         }
 
         catch (NumberFormatException e) {
-            System.out.println("\tThere is no a number\n");
+            System.out.println("\tThere is no index\n");
         }
 
         catch (IndexOutOfBoundsException e) {
