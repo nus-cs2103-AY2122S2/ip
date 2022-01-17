@@ -1,0 +1,26 @@
+list
+todo This is a todo task
+deadline This is a deadline task /by User Date 1
+event This is an event task /at User Date 2
+list
+mark 1
+mark 2
+list
+unmark 2
+list
+todo
+deadline
+deadline /by
+deadline text /by
+deadline /by text
+event
+event /at
+event text /at
+event /at text
+mark 1
+unmark 2
+mark
+mark notanumber
+mark 4
+mark 0
+bye
