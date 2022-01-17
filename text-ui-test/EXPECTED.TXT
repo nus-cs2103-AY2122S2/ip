@@ -11,6 +11,10 @@ GOOD MORNING GENNERMEN from
       WHAT YOU WANT?
    ____________________________________________________________
    ____________________________________________________________
+      NOTHING TO DO AH?
+      YOU BETTER FIND SOMETHING TO DO BEFORE I CONFINE YOU CHAO RECRUIT!
+   ____________________________________________________________
+   ____________________________________________________________
       YOU WANT TO DO THIS AH:
         [T][ ] task A
       VERY GOOD! YOU STILL GOT 1 THINGS TO DO AH BETTER NOT FORGET!
@@ -72,6 +76,42 @@ GOOD MORNING GENNERMEN from
       1.[T][ ] task A
       2.[E][ ] task B  (at: idk hehe xd)
       3.[D][ ] task C  (by: yesterday oops)
+   ____________________________________________________________
+   ____________________________________________________________
+      WHAT YOU WANT DO? NOTHING AH HELLOOOOOO?
+   ____________________________________________________________
+   ____________________________________________________________
+      WHAT YOU WANT DO? NOTHING AH HELLOOOOOO?
+   ____________________________________________________________
+   ____________________________________________________________
+      WHAT YOU WANT DO? NOTHING AH HELLOOOOOO?
+   ____________________________________________________________
+   ____________________________________________________________
+      WHAT YOU WANT MARK? WEAR HELMET CANNOT THINK ALREADY AH?
+   ____________________________________________________________
+   ____________________________________________________________
+      WHAT YOU WANT UNMARK? WEAR HELMET CANNOT THINK ALREADY AH?
+   ____________________________________________________________
+   ____________________________________________________________
+      YOU TRYING TO LEPAK IS IT? WAKE UP YOUR BLOODY IDEA!
+   ____________________________________________________________
+   ____________________________________________________________
+      YOU DON'T WANT DO THEN SAY DON'T DO AH?
+        [D][ ] task C  (by: yesterday oops)
+      WAKE UP YOUR BLOODY IDEA CHAO RECRUIT!
+      2 MORE TASKS REMAINING! YOU BETTER ONE TIMES GOOD ONE!
+   ____________________________________________________________
+   ____________________________________________________________
+      YOU DON'T WANT DO THEN SAY DON'T DO AH?
+        [E][ ] task B  (at: idk hehe xd)
+      WAKE UP YOUR BLOODY IDEA CHAO RECRUIT!
+      1 MORE TASKS REMAINING! YOU BETTER ONE TIMES GOOD ONE!
+   ____________________________________________________________
+   ____________________________________________________________
+      YOU DON'T WANT DO THEN SAY DON'T DO AH?
+        [T][ ] task A
+      WAKE UP YOUR BLOODY IDEA CHAO RECRUIT!
+      NOTHING ELSE TO DO CAN RILEK ALREADY AH RECRUIT? DOWN 20!
    ____________________________________________________________
    ____________________________________________________________
       BYE WHAT BYE? YOU GO DROP TWENTY THEN BYE! DOWN!

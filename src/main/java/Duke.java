@@ -91,7 +91,7 @@ public class Duke {
                             int size = tasks.size();
                             String confirm =
                                     "YOU DON'T WANT DO THEN SAY DON'T DO AH?" + TASKSPACE + toDelete.toString() +
-                                    "WAKE UP YOUR BLOODY IDEA CHAO RECRUIT!";
+                                    SPACE + "WAKE UP YOUR BLOODY IDEA CHAO RECRUIT!";
                             if (size == 0) {
                                 confirm += SPACE + "NOTHING ELSE TO DO CAN RILEK ALREADY AH RECRUIT? DOWN 20!";
                             } else {
