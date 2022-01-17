@@ -30,4 +30,13 @@ public class Task {
     public String getDescription() {
         return this.description;
     }
+
+    /**
+     * Sets the current status for the task.
+     *
+     * @param isDone True/False depending if the task is already done.
+     */
+    public void setStatus(boolean isDone) {
+        this.isDone = isDone;
+    }
 }
