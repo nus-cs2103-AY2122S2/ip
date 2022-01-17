@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Duke {
+public class Puke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -22,6 +22,6 @@ public class Duke {
 
             System.out.println(input + "\n____________________________________________________________");
         }
-        System.out.println("Goodbye. Come back by anytime!\n____________________________________________________________");
+        System.out.println("Goodbye. Come back anytime!\n____________________________________________________________");
     }
 }
