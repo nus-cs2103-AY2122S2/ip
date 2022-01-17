@@ -49,6 +49,8 @@ abstract class Instruction {
             case "deadline":
                 // These three cases are used to add tasks of different types.
                 return new Add(Task.of(instruction));
+            case "delete":
+                return new Delete(instruction);
             default:
                 throw new IllegalArgumentException("Oops, I'm not sure what you mean.");
         }

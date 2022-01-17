@@ -68,4 +68,13 @@ public class TaskManager {
         return (index > 0 && index <= TaskManager.tasks.size());
     }
 
+    /**
+     * Removes the task with specified index.
+     *
+     * @param toDeleteIndex The index of the task to be deleted. (1-indexed)
+     */
+    protected static void deleteIndex(int toDeleteIndex) {
+
+        TaskManager.tasks.remove(toDeleteIndex - 1);
+    }
 }
