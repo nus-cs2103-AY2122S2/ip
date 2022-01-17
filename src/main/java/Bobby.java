@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Duke {
+public class Bobby {
     static ArrayList<Task> tasks = new ArrayList<Task>();
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -24,22 +24,22 @@ public class Duke {
                  case "list" :
                      System.out.println(dash);
                      Task currTask;
-                     for (int i = 0; i < Duke.tasks.size(); i++) {
-                         currTask = Duke.tasks.get(i);
+                     for (int i = 0; i < Bobby.tasks.size(); i++) {
+                         currTask = Bobby.tasks.get(i);
                          int index = i+1;
                          System.out.println("    " + index + "." + currTask.getStatus() + currTask.taskName);
                      }
                      System.out.println(dash);
                      break;
                  case "mark":
-                     Task doneTask = Duke.tasks.get(Integer.parseInt(inputs[1])-1);
+                     Task doneTask = Bobby.tasks.get(Integer.parseInt(inputs[1])-1);
                      doneTask.markDone();
                      System.out.println(dash + "    " + "Nice! I've marked this task as done: ");
                      System.out.println("      [" + doneTask.getStatus() + doneTask.taskName);
                      System.out.println(dash);
                      break;
                  case "unmark":
-                     Task undoneTask = Duke.tasks.get(Integer.parseInt(inputs[1])-1);
+                     Task undoneTask = Bobby.tasks.get(Integer.parseInt(inputs[1])-1);
                      undoneTask.unmarkDone();
                      System.out.println(dash + "    " + "OK! I've marked this task as not done yet: ");
                      System.out.println("      " + undoneTask.getStatus() + undoneTask.taskName);
