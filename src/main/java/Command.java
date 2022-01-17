@@ -9,7 +9,7 @@ public class Command {
     public void run() {
         System.out.printf(" ");
 
-        if(command.equals("Bye")) {
+        if(command.equals("bye")) {
             System.out.println("See you again! :)");
             System.exit(0);
         } else {
