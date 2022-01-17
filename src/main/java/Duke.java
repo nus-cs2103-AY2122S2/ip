@@ -8,7 +8,7 @@ public class Duke {
 
     public static void main(String[] args) throws Exception {
         final Scanner input = new Scanner(System.in);
-        final String[] items = new String[100];
+        final Task[] items = new Task[100];
         int nextItemIndex = 0;
 
         System.out.println(Duke.constructResponse(Duke.GREETING));
@@ -23,7 +23,7 @@ public class Duke {
                         System.out.println(Duke.constructResponse(Duke.constructTextList(items)));
                         break;
                     default:
-                        items[nextItemIndex++] = command;
+                        items[nextItemIndex++] = new Task(command);
                         System.out.println(Duke.constructResponse("added: " + command));
                 }
             }
