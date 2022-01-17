@@ -1,6 +1,0 @@
-todo Eat dinner
-Deadline CS2103T IP /by Jan 20
-Event Movie /at Jan 18 2-3
-invalidinput
-list
-bye
