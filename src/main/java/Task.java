@@ -11,6 +11,10 @@ public class Task {
         return this.name;
     }
 
+    public boolean isDone() {
+        return this.isDone;
+    }
+
     public void markDone() {
         this.isDone = true;
     }
@@ -21,6 +25,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("[%c] %s", this.isDone ? 'X' : ' ', this.name );
+        return String.format("[%c] %s", this.isDone ? 'X' : ' ', this.name);
     }
 }
