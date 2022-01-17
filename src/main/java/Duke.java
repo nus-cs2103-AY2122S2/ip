@@ -34,7 +34,7 @@ public class Duke {
         System.out.print(s);
     }
 
-    private void checkInput(String input){
+    private void checkInput(String input) {
         StringBuilder sb = new StringBuilder();
         int itemIndex;
         sb.append(line);
@@ -63,11 +63,11 @@ public class Duke {
                     sb.append(deleteTask(Integer.parseInt(command[1]) - 1));
                     break;
                 default:
-                    throw new DukeException("I'm sorry, but I don't know what that means.");
+                    throw new DukeException(Error.INVALID);
             }
         }
         catch (DukeException e) {
-            sb.append(e);
+            sb.append(e.invalidInput());
         }
         sb.append(line);
         System.out.print(sb);
@@ -79,6 +79,9 @@ public class Duke {
         String details;
         try {
             String task;
+            if (command.length <= 1) {
+                throw new DukeException(Error.EMPTYDESC);
+            }
             task = command[1];
             switch (command[0]) {
                 case "todo":
@@ -100,16 +103,16 @@ public class Duke {
                         return printTask(t);
             }
         }
-        catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("The description of a task cannot be empty.");
+        catch (DukeException e) {
+            return e.emptyDesc();
         }
         return "";
     }
 
-    private String deleteTask(int index) throws DukeException {
+    private String deleteTask(int index) {
         try {
             if (index >= tasks.size()) {
-                throw new DukeException("Index does not exists in array.");
+                throw new DukeException(Error.LISTERROR);
             }
             Task t = tasks.get(index);
             t.decrementTask();
@@ -117,7 +120,7 @@ public class Duke {
             return "Got it. Task removed:\n  " + t + "\n" + t.printNoOfTasks() + "\n";
         }
         catch (DukeException e) {
-            return printList() + e;
+            return printList() + e.listError();
         }
     }
 
