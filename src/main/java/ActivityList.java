@@ -11,10 +11,36 @@ public class ActivityList {
     /**
      * Adds and saves an activity.
      *
-     * @param the name of the activity
+     * @param activity name of the activity
      */
-    public void add(String activity) {
-        activities.add(new Activity(activity));
+    public Activity add(String activity) {
+        Activity ac = new Activity(activity);
+        activities.add(ac);
+        return ac;
+    }
+
+    /**
+     * Marks activity in list as done.
+     *
+     * @param idx 1-based index of the activity
+     * @return the marked activity
+     */
+    public Activity markDone(int idx) {
+        Activity ac = activities.get(idx);
+        ac.done();
+        return ac;
+    }
+
+    /**
+     * Marks activity in list as undone.
+     *
+     * @param idx 1-based index of the activity
+     * @return the unmarked activity
+     */
+    public Activity markUndone(int idx) {
+        Activity ac = activities.get(idx);
+        ac.undone();
+        return ac;
     }
 
     /**
@@ -28,7 +54,7 @@ public class ActivityList {
         if (activities.size() == 0) return "Nothing is added yet.";
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < activities.size(); i++) {
-            sb.append((i + 1) + ". " + activities.get(i).toString() + "\n");
+            sb.append((i + 1) + "." + activities.get(i).toString() + "\n");
         }
         if(sb.length() > 0){
             sb.deleteCharAt(sb.length() - 1);

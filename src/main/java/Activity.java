@@ -1,9 +1,24 @@
 public class Activity {
     /** Name of the activity */
-    String name;
+    private String name;
+    private boolean isDone;
 
     public Activity(String name) {
         this.name = name;
+    }
+
+    /**
+     * Marks activity as done.
+     */
+    public void done() {
+        this.isDone = true;
+    }
+
+    /**
+     * Marks activity as undone.
+     */
+    public void undone() {
+        this.isDone = false;
     }
 
     /**
@@ -13,6 +28,7 @@ public class Activity {
      */
     @Override
     public String toString() {
-        return this.name;
+        String status = isDone ? "[X] " : "[ ] ";
+        return status + this.name;
     }
 }

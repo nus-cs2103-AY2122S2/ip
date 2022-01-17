@@ -1,25 +1,18 @@
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Duke {
-    private static ActivityList al = new ActivityList();
+    private static ActivityList al;
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello I'm\n" + logo);
-        System.out.println("Tell me about your upcoming activities!");
-        System.out.println("Input \"list\" to display your activities.");
-        System.out.println("Input \"bye\" to end our session.");
+        greet();
+        al = new ActivityList();
         Scanner sc = new Scanner(System.in);
         String userIn = "";
+        String out;
         do {
-            if (userIn.equals("list")) {
-                speech(al.toString());
-            } else if (userIn.length() > 0) {
-                al.add(userIn);
-                speech("added: " + userIn);
+            if (userIn.length() > 0) {
+                out = processUserInput(userIn);
+                speech(out);
             }
             userIn = sc.nextLine();
         } while (!userIn.equals("bye"));
@@ -27,9 +20,62 @@ public class Duke {
     }
 
     /**
+     * Greets the user.
+     */
+    private static void greet() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello I'm\n" + logo);
+        System.out.println("Tell me about your upcoming activities!");
+        System.out.println("Input \"help\" for instructions.");
+    }
+
+    /**
+     * Helper text on the special keywords to instruct Duke.
+     *
+     * @return instruction for user
+     */
+    private static String help() {
+        return "\"list\": to display your activities.\n" +
+                "\"bye\": to end our session.\n" +
+                "\"mark [i]\" to mark the i-th task as done.\n" +
+                "\"unmark [i]\" to unmark the i-th task as done.";
+    }
+
+    /**
+     * Processes user's input and executes the instruction.
+     *
+     * @param userIn user's input
+     * @return response string to user
+     */
+    private static String processUserInput(String userIn) {
+        if (userIn.equals("list")) {
+            return al.toString();
+        } else if (userIn.equals("help")) {
+            return help();
+        } else if (Pattern.matches("mark \\d", userIn)) {
+            return "This activity is marked as done: \n"
+                    + al.markDone(Integer.parseInt(userIn
+                    .replaceAll("[^\\d.]", "")) - 1)
+                    .toString();
+        }else if (Pattern.matches("unmark \\d", userIn)) {
+            return "This activity is marked as done: \n" +
+                    al.markUndone(Integer.parseInt(userIn
+                    .replaceAll("[^\\d.]", "")) - 1)
+                    .toString();
+        } else {
+            al.add(userIn);
+            return "added: " + userIn;
+        }
+    }
+
+    /**
      * Prints Duke's formatted speech.
      *
-     * @param Duke's line
+     * @param text Duke's speech
      */
     private static void speech(String text) {
         System.out.println("____________________________");
