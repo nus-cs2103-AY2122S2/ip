@@ -7,11 +7,15 @@ public class Task {
         this.done = false;
     }
 
-    public void markDone(Task task) {
-        task.done = true;
+    public void markDone() {
+        this.done = true;
     }
 
-    public void unmarkDone(Task task) {
+    public void unmarkDone() {
         this.done = false;
+    }
+
+    public String getStatus() {
+        return done ? "[X] " : "[ ] ";
     }
 }

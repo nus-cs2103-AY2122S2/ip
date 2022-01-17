@@ -2,8 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-//    Task tasks[] = new Task[100];
-static ArrayList<Task> tasks = new ArrayList<Task>();
+    static ArrayList<Task> tasks = new ArrayList<Task>();
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String logo = " ____  _____ ____  ____ __  __\n"
@@ -17,16 +16,33 @@ static ArrayList<Task> tasks = new ArrayList<Task>();
 
          while (true) {
              String input = sc.nextLine();
-             switch(input) {
+             String inputs[] = input.split(" ");
+             switch(inputs[0]) {
                  case "bye":
                      System.out.println(dash + "    Bye! Hope to see you again soon!\n" + dash);
                      return;
                  case "list" :
                      System.out.println(dash);
+                     Task currTask;
                      for (int i = 0; i < Duke.tasks.size(); i++) {
+                         currTask = Duke.tasks.get(i);
                          int index = i+1;
-                         System.out.println("    " + index + ". " + Duke.tasks.get(i).taskName);
+                         System.out.println("    " + index + "." + currTask.getStatus() + currTask.taskName);
                      }
+                     System.out.println(dash);
+                     break;
+                 case "mark":
+                     Task doneTask = Duke.tasks.get(Integer.parseInt(inputs[1])-1);
+                     doneTask.markDone();
+                     System.out.println(dash + "    " + "Nice! I've marked this task as done: ");
+                     System.out.println("      [" + doneTask.getStatus() + doneTask.taskName);
+                     System.out.println(dash);
+                     break;
+                 case "unmark":
+                     Task undoneTask = Duke.tasks.get(Integer.parseInt(inputs[1])-1);
+                     undoneTask.unmarkDone();
+                     System.out.println(dash + "    " + "OK! I've marked this task as not done yet: ");
+                     System.out.println("      " + undoneTask.getStatus() + undoneTask.taskName);
                      System.out.println(dash);
                      break;
                  default:
@@ -47,12 +63,16 @@ static ArrayList<Task> tasks = new ArrayList<Task>();
             this.done = false;
         }
 
-        public void markDone(Task task) {
-            task.done = true;
+        public void markDone() {
+            this.done = true;
         }
 
-        public void unmarkDone(Task task) {
+        public void unmarkDone() {
             this.done = false;
+        }
+
+        public String getStatus() {
+            return done ? "[X] " : "[ ] ";
         }
     }
 
