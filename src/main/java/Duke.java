@@ -58,6 +58,3 @@ public class Duke {
 
     }
 }
-
-//TODO: Fix indentation, add author/comments/other formatting stuff
-//TODO: OOP out welcome message
