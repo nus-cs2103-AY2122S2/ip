@@ -27,6 +27,9 @@ public class TaskStore {
     }
 
     public Task getTaskByIndex(int index) {
+        if (index >= this.tasks.size() || index < 0) {
+            return null;
+        }
         return this.tasks.get(index);
     }
 }
