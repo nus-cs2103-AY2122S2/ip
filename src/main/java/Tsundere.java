@@ -1,9 +1,9 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Tsundere {
 
     static final private String lines = "------------------------------------------------------------------------";
-    static Task[] aryLst = new Task[100];
+    static List<Task> aryLst = new ArrayList<>();
     static int countLst = 0;
 
     public static void main(String[] args) {
@@ -57,7 +57,7 @@ public class Tsundere {
                             }
                             todo(splitStr[1]);
                         } else if (comUserInput.contains("DEADLINE")) {
-                            String[] splitStr = userInput.split("/");
+                            String[] splitStr = userInput.split("/by");
                             if (splitStr.length < 2) {
                                 throw new TsundereException("Hmph you baka, gimme a correct format. For example, deadline sleep/by Sunday");
                             }
@@ -67,7 +67,7 @@ public class Tsundere {
                             }
                             deadline(splitStr2[1], splitStr[1]);
                         } else if (comUserInput.contains("EVENT")) {
-                            String[] splitStr = userInput.split("/");
+                            String[] splitStr = userInput.split("/at");
                             if (splitStr.length < 2) {
                                 throw new TsundereException("Hmph you baka, gimme a correct format. For example, event sleep/at Sunday");
                             }
@@ -76,6 +76,19 @@ public class Tsundere {
                                 throw new TsundereException("Hmph you baka, gimme a correct format. For example, event sleep/at Sunday");
                             }
                             event(splitStr2[1], splitStr[1]);
+                        } else if (comUserInput.contains("DELETE")) {
+                            String[] splitStr = userInput.split(" ");
+
+                            if (splitStr.length < 2) {
+                                throw new TsundereException("Hmph you baka, gimme a correct format. For example: delete 1");
+                            }
+
+                            int num = Integer.parseInt(splitStr[1]);
+
+                            if (num > countLst) {
+                                throw new TsundereException("Hmph you baka, you gave a invalid number!");
+                            }
+                            delete(num);
                         } else {
                             throw new TsundereException("I don't know what you want! Say something valid.");
                         }
@@ -110,7 +123,7 @@ public class Tsundere {
         System.out.println("You forgetful baka... here are your tasks: ");
         for (int i = 0; i < countLst; i++) {
             int num = i + 1;
-            System.out.println(num + ". " + aryLst[i].toString());
+            System.out.println(num + ". " + aryLst.get(i).toString());
         }
         System.out.println(lines);
     }
@@ -125,8 +138,8 @@ public class Tsundere {
         System.out.println(lines);
         System.out.println("Alright! Aright, i will mark it down!");
         int realNum = num - 1;
-        aryLst[realNum].markDone();
-        System.out.println("[" + aryLst[realNum].getStatusIcon()  +"] " + aryLst[realNum].getDescription());
+        aryLst.get(realNum).markDone();
+        System.out.println("[" +  aryLst.get(realNum).getStatusIcon()  +"] " +  aryLst.get(realNum).getDescription());
         System.out.println(lines);
     }
 
@@ -134,16 +147,16 @@ public class Tsundere {
         System.out.println(lines);
         System.out.println("You didn't actually finish?!");
         int realNum = num - 1;
-        aryLst[realNum].markNotDone();
-        System.out.println("[" + aryLst[realNum].getStatusIcon()  +"] " + aryLst[realNum].getDescription());
+        aryLst.get(realNum).markNotDone();
+        System.out.println("[" +  aryLst.get(realNum).getStatusIcon()  +"] " +  aryLst.get(realNum).getDescription());
         System.out.println(lines);
     }
 
     static private void todo(String strTask) {
         System.out.println(lines);
         System.out.println("New task! You better do it.");
-        aryLst[countLst] = new ToDo(strTask);
-        System.out.println(aryLst[countLst].toString());
+        aryLst.add(new ToDo(strTask));
+        System.out.println(aryLst.get(countLst).toString());
         countLst++;
         System.out.println("You have " + countLst + " task(s) to do you lazy bum!");
         System.out.println(lines);
@@ -152,8 +165,8 @@ public class Tsundere {
     static private void deadline(String strTask, String by) {
         System.out.println(lines);
         System.out.println("New task! You better do it.");
-        aryLst[countLst] = new Deadline(strTask, by);
-        System.out.println(aryLst[countLst].toString());
+        aryLst.add(new Deadline(strTask, by));
+        System.out.println(aryLst.get(countLst).toString());
         countLst++;
         System.out.println("You have " + countLst + " task(s) to do you lazy bum!");
         System.out.println(lines);
@@ -162,11 +175,23 @@ public class Tsundere {
     static private void event(String strTask, String at) {
         System.out.println(lines);
         System.out.println("New task! You better do it.");
-        aryLst[countLst] = new Event(strTask, at);
-        System.out.println(aryLst[countLst].toString());
+        aryLst.add(new Event(strTask, at));
+        System.out.println(aryLst.get(countLst).toString());
         countLst++;
         System.out.println("You have " + countLst + " task(s) to do, you lazy bum!");
         System.out.println(lines);
     }
+
+    static private void delete(int num) {
+        System.out.println(lines);
+        System.out.println("Deleting the task. You're not being lazy, are you?");
+        System.out.println(aryLst.get(num).toString());
+        aryLst.remove(num - 1);
+        countLst--;
+        System.out.println("You have " + countLst + " task(s) to do, you lazy bum!");
+        System.out.println(lines);
+    }
+
+
 
 }
