@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        String[] listOfThings = new String[100];
+        Task[] listOfThings = new Task[100];
         int counter = 0;
 
         String line = "____________________________________________________________";
@@ -28,26 +28,62 @@ public class Duke {
 
                 for (int i = 0; i <  counter; i++) {
                     String tempNum = String.valueOf(i+1);
-                    System.out.println(indentation + tempNum + ": " + listOfThings[i]);
+                    System.out.println(indentation + tempNum + ". "  + listOfThings[i].getStatus() + " " + listOfThings[i].getDescription());
                 }
                 System.out.println(indentation + line);
-
-            } else if (str.equals("blah")) {
-                System.out.println(indentation + line);
-                System.out.println(indentation + "blah");
-                System.out.println(indentation + line);
-            } else if(str.equals("bye")) {
+            }  else if(str.equals("bye")) {
                 System.out.println(indentation + line);
                 System.out.println(indentation + "Bye. Hope to see you again soon!");
                 System.out.println(indentation + line);
                 break;
-            } else {
+            } else if (str.contains("unmark")) {
+                int num = Integer.parseInt(str.split(" ")[1]);
+                listOfThings[num-1].unmarkDone();
+                System.out.println(indentation + line);
+                System.out.println(indentation + "OK, I've marked this task as not done yet:") ;
+                System.out.println(indentation + "  " + listOfThings[num-1].getStatus() + " " + listOfThings[num-1].getDescription());
+                System.out.println(indentation + line);
+            } else if (str.contains("mark")) {
+                int num = Integer.parseInt(str.split(" ")[1]);
+                listOfThings[num-1].markDone();
+                System.out.println(indentation + line);
+                System.out.println(indentation + "Nice! I've marked this task as done:") ;
+                System.out.println(indentation + "  " + listOfThings[num-1].getStatus() + " " + listOfThings[num-1].getDescription());
+                System.out.println(indentation + line);
+            } else{
                 System.out.println(indentation + line);
                 System.out.println(indentation + "added: " + str);
                 System.out.println(indentation + line);
-                listOfThings[counter] = str;
+                listOfThings[counter] = new Task(str);
                 counter++;
             }
         }
+    }
+}
+
+class Task {
+
+    protected String description;
+    protected boolean status;
+
+    public Task(String description) {
+        this.description = description;
+        status = false;
+    }
+
+    String getStatus() {
+        return status ? "[X]" : "[ ]";
+    }
+
+    void markDone() {
+        this.status = true;
+    }
+
+    void unmarkDone() {
+        this.status = false;
+    }
+
+    String getDescription(){
+        return this.description;
     }
 }
