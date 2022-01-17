@@ -76,5 +76,52 @@ Currently, you have the following tasks:
 	7. [E][ ] project meeting (at: Mon 2-4pm)
 ============================================================
 ============================================================
+Oops, the force does not support this action.
+Please try again :(
+============================================================
+============================================================
+Oops, the force is not strong.
+The description of todo cannot be empty.
+Please try again :(
+============================================================
+============================================================
+Oops, the force is not strong.
+The description of deadline cannot be empty.
+Please try again :(
+============================================================
+============================================================
+Oops, the force is not strong.
+The description of event cannot be empty.
+Please try again :(
+============================================================
+============================================================
+Oops, the force is not strong.
+deadline require the by argument.
+Please try again :(
+============================================================
+============================================================
+Oops, the force is not strong.
+event require the at argument.
+Please try again :(
+============================================================
+============================================================
+Oops, the force is not strong.
+deadline require the by argument.
+Please try again :(
+============================================================
+============================================================
+Oops, the force is not strong.
+event require the at argument.
+Please try again :(
+============================================================
+============================================================
+Oops, the force cannot convert the value to a number.
+Please try again :(
+============================================================
+============================================================
+Oops, the force cannot convert the value to a number.
+Please try again :(
+============================================================
+============================================================
 I'll take my leave... Do you know who is my father?
 ============================================================

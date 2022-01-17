@@ -11,4 +11,14 @@ event project meeting /at Mon 2-4pm
 mark 2
 unmark 1
 list
+blah
+todo
+deadline
+event
+deadline test1
+event test2
+deadline test3 /at 5pm
+event test4 /by 6pm
+mark abcd
+unmark efgh
 bye
