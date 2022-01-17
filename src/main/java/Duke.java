@@ -14,16 +14,23 @@ public class Duke {
 
         try {
             while (true) {
-                final String command = input.nextLine();
-                switch (command) {
+                final String query = input.nextLine();
+                final String[] tokens = query.split(" ");
+                switch (tokens[0]) {
                     case "bye":
                         Duke.bidFarewell();
                         return;
                     case "list":
                         Duke.handleList();
                         break;
+                    case "mark":
+                        Duke.handleMark(Integer.parseInt(tokens[1]) - 1);
+                        break;
+                    case "unmark":
+                        Duke.handleUnmark(Integer.parseInt(tokens[1]) - 1);
+                        break;
                     default:
-                        Duke.handleAdd(new Task(command));
+                        Duke.handleAdd(new Task(query));
                 }
             }
         } finally {
@@ -48,6 +55,20 @@ public class Duke {
     private static void handleAdd(Task t) {
         Duke.tasks[Duke.nextItemIndex++] = t;
         System.out.println(Duke.constructResponse("added: " + t));
+    }
+
+    private static void handleMark(int taskId) {
+        final Task t = Duke.tasks[taskId];
+        t.markAsDone();
+        final String response = "Nice! I've marked this task as done:\n  [" + t.getStatusIcon() + "] " + t;
+        System.out.println(Duke.constructResponse(response));
+    }
+
+    private static void handleUnmark(int taskId) {
+        final Task t = Duke.tasks[taskId];
+        t.markAsUndone();
+        final String response = "OK, I've marked this task as not done yet:\n  [" + t.getStatusIcon() + "] " + t;
+        System.out.println(Duke.constructResponse(response));
     }
 
     private static String constructResponse(String content) {
