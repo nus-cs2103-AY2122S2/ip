@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -15,12 +17,22 @@ public class Duke {
         // Setup scanner for user input
         Scanner sc = new Scanner(System.in);
 
+        // Store items in agenda
+        List<String> agenda = new ArrayList<>();
+
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
             if (input.equals("bye")) {
                 break;
+            } else if (input.equals("list")) {
+                StringBuilder result = new StringBuilder();
+                for (int i = 0; i < agenda.size(); i++) {
+                    result.append(i + 1).append(". ").append(agenda.get(i)).append("\n");
+                }
+                System.out.println(wrap(result.toString()));
             } else {
-                System.out.println(wrap(input + "\n"));
+                agenda.add(input);
+                System.out.println(wrap("added: " + input + "\n"));
             }
         }
 
