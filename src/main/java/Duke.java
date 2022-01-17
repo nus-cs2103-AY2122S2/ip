@@ -20,8 +20,8 @@ public class Duke {
 
         String border = "   ____________________________________________________________";
         String welcome =
-                "GOOD MORNING CHAO RECRUIT! YOU MAY CALL ME ENCIK ENCIK\n" +
-                        "      WHAT YOU WANT?";
+                "GOOD MORNING CHAO RECRUIT! YOU MAY CALL ME ENCIK ENCIK" + SPACE +
+                "WHAT YOU WANT?";
         format(welcome);
 
         //Create ArrayList to store tasks
