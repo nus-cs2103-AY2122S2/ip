@@ -11,17 +11,25 @@ public class Calendar {
         calendar.add(newTask);
     }
 
+    int size() {
+        return this.calendar.size();
+    }
+
+    Task get(int number) {
+        return this.calendar.get(number - 1);
+    }
+
     @Override
     public String toString() {
         if (calendar.size() == 0) {
             return "No items in To-Do List as of now :(";
         } else {
             String product = "";
-            int count = 1;
-            for (Task task: this.calendar) {
-                product += String.format("%s: %s\n", count++, task);
+            for (int i = 0; i < this.calendar.size() - 1; i++) {
+                product += String.format("%s: %s\n", i + 1, this.calendar.get(i));
             }
-            product.substring(0, product.length() - 1);
+            product += String.format("%s: %s", this.calendar.size(), this.calendar.get(this.calendar.size() - 1));
+
             return product;
         }
 
