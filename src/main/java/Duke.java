@@ -5,21 +5,26 @@ public class Duke {
     private static final String SEPARATOR = "\t------------------------------------";
     private static final String BOT_NAME = "Megumin";
 
+
     public static void main(String[] args) {
         greet();
 
         Scanner sc = new Scanner(System.in);
         while (true) {
             String command = readInput(sc);
-            processCommand(command);
+
+            printBlock((linePrinter) -> {
+                processCommand(command, linePrinter);
+            });
+
             System.out.println();
         }
     }
 
     private static void greet() {
         printBlock((linePrinter) -> {
-            linePrinter.accept("Hi! I'm " + BOT_NAME);
-            linePrinter.accept("What do you need?");
+            linePrinter.print("Hi! I'm " + BOT_NAME);
+            linePrinter.print("What do you need?");
         });
         System.out.println();
     }
@@ -31,13 +36,11 @@ public class Duke {
         return line;
     }
 
-    private static void processCommand(String command) {
-        printBlock((linePrinter) -> {
-            linePrinter.accept("\t" + command);
-        });
+    private static void processCommand(String command, IPrintable linePrinter) {
+        linePrinter.print(command);
     }
 
-    private static void printBlock(Consumer<Consumer<String>> action) {
+    private static void printBlock(Consumer<IPrintable> action) {
         System.out.println(SEPARATOR);
         action.accept((line) -> {
             System.out.println("\t" + line);
