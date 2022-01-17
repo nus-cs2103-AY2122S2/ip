@@ -47,6 +47,21 @@ public class Duke {
                         Console.println("What can I do for you?");
                         break;
                     }
+                    case "delete" : {
+                        Task curTask = taskArr.remove(Integer.parseInt(inputArg[1]) - 1);
+
+                        switch (dot) {
+                            case JJBA: {
+                                Console.print("Task removed!\n   " + curTask.toString());
+                                break;
+                            }
+                            case DIO: {
+                                Console.print("*throws knifes\n   " + curTask.toString());
+                            }
+                        }
+                        printTaskLeft();
+                        break;
+                    }
                     case "mark": {
                         Task curTask = taskArr.get(Integer.parseInt(inputArg[1]) - 1);
                         curTask.markTask();
@@ -146,33 +161,33 @@ public class Duke {
             } catch (DukeException e) {
                 switch (dot) {
                     case JJBA: {
-                        Console.println(e.getMessage());
+                        Console.println("⚠ " + e.getMessage());
                         break;
                     }
                     case DIO: {
-                        Console.println("RODA ROLLA DA!");
+                        Console.println("⚠ RODA ROLLA DA!");
                     }
                 }
 
             } catch (NumberFormatException e) {
                 switch (dot) {
                     case JJBA: {
-                        Console.println("Invalid input, please enter a task number.");
+                        Console.println("⚠ Invalid input, please enter a task number.");
                         break;
                     }
                     case DIO: {
-                        Console.println("RODA ROLLA DA!");
+                        Console.println("⚠ RODA ROLLA DA!");
                     }
                 }
 
             } catch (IndexOutOfBoundsException e) {
                 switch (dot) {
                     case JJBA: {
-                        Console.println("Invalid task number, pleased enter a valid task number.");
+                        Console.println("⚠ Invalid task number, pleased enter a valid task number.");
                         break;
                     }
                     case DIO: {
-                        Console.println("RODA ROLLA DA!");
+                        Console.println("⚠ RODA ROLLA DA!");
                     }
                 }
             }
@@ -185,17 +200,34 @@ public class Duke {
         switch(dot) {
             case JJBA: {
                 Console.print("Task added: \n" + newTask);
-                Console.println(String.format("You have %d task%s in your list.",
-                        taskArr.size(), (taskArr.size() == 1) ? "" : "s"));
                 break;
             }
             case DIO: {
                 Console.print("WRYYYYYYYYYYYY! \n" + newTask);
+                break;
+            }
+        }
+        printTaskLeft();
+    }
+
+    public static void printTaskLeft() {
+        switch(dot) {
+            case JJBA: {
+                Console.println(String.format("You have %s task%s in your list.",
+                        (taskArr.size() > 0) ? taskArr.size() : "no", (taskArr.size() <= 1) ? "" : "s"));
+                break;
+            }
+            case DIO: {
                 String muda = "";
                 for (int i = 0; i < taskArr.size(); i++) {
                     muda += (i == taskArr.size() - 1) ? "MUDA!" : "MUDA ";
                 }
-                Console.println(muda);
+
+                if (muda.isEmpty()) {
+                    Console.println("NANI!");
+                } else {
+                    Console.println(muda);
+                }
 
             }
         }
