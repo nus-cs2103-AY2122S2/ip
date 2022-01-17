@@ -18,20 +18,30 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         // Store items in agenda
-        List<String> agenda = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
 
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
-            if (input.equals("bye")) {
+            String[] breakdown = input.split(" ");
+            String command = breakdown[0];
+            if (command.equals("bye")) {
                 break;
-            } else if (input.equals("list")) {
+            } else if (command.equals("list")) {
                 StringBuilder result = new StringBuilder();
-                for (int i = 0; i < agenda.size(); i++) {
-                    result.append(i + 1).append(". ").append(agenda.get(i)).append("\n");
+                for (int i = 0; i < tasks.size(); i++) {
+                    result.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
                 }
                 System.out.println(wrap(result.toString()));
+            } else if (command.equals("mark")) {
+                Task task = tasks.get(Integer.parseInt(breakdown[1]) - 1);
+                task.markAsDone();
+                System.out.println(wrap("Nice! I've marked this task as done:\n" + task + "\n"));
+            } else if (command.equals("unmark")) {
+                Task task = tasks.get(Integer.parseInt(breakdown[1]) - 1);
+                task.markAsUndone();
+                System.out.println(wrap("OK, I've marked this task as not done yet:\n" + task + "\n"));
             } else {
-                agenda.add(input);
+                tasks.add(new Task(input));
                 System.out.println(wrap("added: " + input + "\n"));
             }
         }
