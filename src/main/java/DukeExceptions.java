@@ -5,7 +5,6 @@
  * DukeExceptions encapsulates exceptions in the Duke Program
  */
 
-
 public class DukeExceptions extends Exception {
 
     /**
