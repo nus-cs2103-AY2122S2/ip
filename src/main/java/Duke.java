@@ -6,18 +6,26 @@ public class Duke {
     private static final String GREETING = "Hello! I'm Duke\nWhat can I do for you?";
     private static final String GOODBYE = "Bye. Hope to see you again soon!";
 
-
     public static void main(String[] args) throws Exception {
         final Scanner input = new Scanner(System.in);
+        final String[] items = new String[100];
+        int nextItemIndex = 0;
+
         System.out.println(Duke.constructResponse(Duke.GREETING));
         try {
             while (true) {
                 final String command = input.nextLine();
-                if (command.equals("bye")) {
-                    System.out.println(Duke.constructResponse(Duke.GOODBYE));
-                    break;
+                switch (command) {
+                    case "bye":
+                        System.out.println(Duke.constructResponse(Duke.GOODBYE));
+                        return;
+                    case "list":
+                        System.out.println(Duke.constructResponse(Duke.constructTextList(items)));
+                        break;
+                    default:
+                        items[nextItemIndex++] = command;
+                        System.out.println(Duke.constructResponse("added: " + command));
                 }
-                System.out.println(Duke.constructResponse(command));
             }
         } finally {
             input.close();
@@ -29,5 +37,19 @@ public class Duke {
         final String response =
                 Duke.INDENTATION + " " + content.replaceAll("\n", "\n " + Duke.INDENTATION) + "\n";
         return divider + response + divider;
+    }
+
+    private static <T> String constructTextList(T[] items) {
+        String textList = "";
+        int currentTextListItemIndex = 1;
+
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] == null) continue;
+            if (currentTextListItemIndex > 1) textList += "\n";
+            textList += currentTextListItemIndex + ". " + items[i];
+            currentTextListItemIndex++;
+        }
+
+        return textList;
     }
 }
