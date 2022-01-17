@@ -48,7 +48,7 @@ public class Duke {
                 , tasks.size()));
     }
 
-    public void run() {
+    public void run() throws DukeException {
         Scanner sc = new Scanner(System.in);
         String intro = "Hello! I'm Duke\n" +
                 "What can I do for you?";
@@ -56,19 +56,37 @@ public class Duke {
 
         String cmd = sc.next();
         while (!cmd.equals("bye")) {
+
             if (cmd.equals("list")) {
                 listTasks();
 
             } else if (cmd.equals("mark")) {
-                int taskNumber = sc.nextInt();
+                int taskNumber = 0;
+                if (sc.hasNextInt()) {
+                    taskNumber = sc.nextInt();
+                } else {
+                    throw new DukeException("OOPS!!! I don't know which" +
+                            "task to mark.");
+                }
                 mark(taskNumber);
 
             } else if (cmd.equals("unmark")) {
-                int taskNumber = sc.nextInt();
+                int taskNumber = 0;
+                if (sc.hasNextInt()) {
+                    taskNumber = sc.nextInt();
+                } else {
+                    throw new DukeException("OOPS!!! I don't know which" +
+                            "task to unmark.");
+                }
                 unmark(taskNumber);
 
             } else if (cmd.equals("todo")){
-                ToDo todo = new ToDo(sc.nextLine());
+                String description = sc.nextLine();
+                if (description.length() == 0) {
+                    throw new DukeException("OOPS!!! The description of " +
+                            "a todo cannot be empty.");
+                }
+                ToDo todo = new ToDo(description);
                 addToDo(todo);
 
             } else if (cmd.equals("deadline")) {
@@ -86,13 +104,16 @@ public class Duke {
                 String time = split[1];
                 Event event = new Event(description, time);
                 addEvent(event);
+            } else {
+                throw new DukeException("OOPS!!! I'm sorry, " +
+                        "but I don't know what that means :-(");
             }
             cmd = sc.next();
 
         }
         System.out.println("Bye. Hope to see you again soon!");
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException{
         Duke duke = new Duke();
         duke.run();
     }
