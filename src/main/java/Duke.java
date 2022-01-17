@@ -24,6 +24,20 @@ public class Duke {
                 continue;
             }
 
+            // mark certain task as done
+            if(input.startsWith("mark")) {
+                int n = Integer.parseInt(input.replaceAll("[\\D]", ""));
+                markDone(n - 1, list);
+                continue;
+            }
+
+            // mark certain task as not done yet
+            if(input.startsWith("unmark")) {
+                int n = Integer.parseInt(input.replaceAll("[\\D]", ""));
+                markUndone(n - 1, list);
+                continue;
+            }
+
             // add task
             addTask(input, list);
         }
@@ -56,8 +70,9 @@ public class Duke {
         if(list.size() == 0) {
             System.out.println("Nothing on your list!");
         } else {
+            System.out.println("Here are the tasks in your list:");
             for(int i = 0; i < list.size(); i++) {
-                System.out.println(String.format("%d. %s", i + 1, list.get(i).getTaskName()));
+                System.out.printf("%d.%s%n", i + 1, list.get(i).toString());
             }
         }
         drawDivider();
@@ -66,7 +81,37 @@ public class Duke {
     private static void addTask(String taskName, ArrayList<Task> list) {
         drawDivider();
         list.add(new Task(taskName));
-        System.out.println("    " + "added: " + taskName);
+        System.out.println("added: " + taskName);
         drawDivider();
+    }
+
+    private static void markDone(int i, ArrayList<Task> list) {
+        if(i < 0 || i >= list.size()) {
+            // handle index out of bound
+            drawDivider();
+            System.out.println("Invalid input");
+            drawDivider();
+        } else {
+            drawDivider();
+            list.get(i).markDone();
+            System.out.println("Nice! I've marked this task as done:");
+            System.out.println(list.get(i).toString());
+            drawDivider();
+        }
+    }
+
+    private static void markUndone(int i, ArrayList<Task> list) {
+        if(i < 0 || i >= list.size()) {
+            // handle index out of bound
+            drawDivider();
+            System.out.println("Invalid input");
+            drawDivider();
+        } else {
+            drawDivider();
+            list.get(i).markUndone();
+            System.out.println("OK, I've marked this task as not done yet:");
+            System.out.println(list.get(i).toString());
+            drawDivider();
+        }
     }
 }
