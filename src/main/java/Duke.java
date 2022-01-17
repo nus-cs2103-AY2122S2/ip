@@ -43,7 +43,7 @@ public class Duke {
     }
 
     private static String readInput(Scanner sc) {
-        System.out.println("Enter a Command:");
+        System.out.println("Enter a Command or New Task:");
         String line = sc.nextLine();
 
         return line;
