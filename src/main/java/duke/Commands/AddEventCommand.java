@@ -1,10 +1,9 @@
-package Commands;
+package duke.Commands;
 
-import Tasks.Event;
-import Tasks.ToDo;
-import main.DukeException;
-import main.TaskList;
-import main.Parser;
+import duke.Tasks.Event;
+import duke.main.DukeException;
+import duke.main.TaskList;
+import duke.main.Parser;
 
 public class AddEventCommand {
     public AddEventCommand(TaskList toDoList, String cmd) {

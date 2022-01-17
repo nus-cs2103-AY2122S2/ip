@@ -1,6 +1,6 @@
-package Tasks;
+package duke.Tasks;
 
-// Tasks.ToDo is a Tasks.Task
+// duke.Tasks.ToDo is a duke.Tasks.Task
 public class ToDo extends Task {
     public ToDo(String task, boolean markStatus) {
         super(task, markStatus);

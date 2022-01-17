@@ -1,9 +1,9 @@
-package Commands;
+package duke.Commands;
 
-import Tasks.ToDo;
-import main.DukeException;
-import main.TaskList;
-import main.Parser;
+import duke.Tasks.ToDo;
+import duke.main.DukeException;
+import duke.main.TaskList;
+import duke.main.Parser;
 
 public class AddToDoCommand {
     public AddToDoCommand(TaskList toDoList, String cmd) {

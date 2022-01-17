@@ -1,6 +1,6 @@
-package Commands;
+package duke.Commands;
 
-import main.TaskList;
+import duke.main.TaskList;
 
 public class ListCommand extends Command {
     private final String tabbedLine = "\t----------------------------------------------";

@@ -1,6 +1,6 @@
-package main;
+package duke.main;
 
-import Tasks.*;
+import duke.Tasks.*;
 import java.util.*;
 
 public class TaskList {

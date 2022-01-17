@@ -1,4 +1,4 @@
-package Tasks;
+package duke.Tasks;
 
 public class Event extends Task {
     String dateTime; // (at: date time)

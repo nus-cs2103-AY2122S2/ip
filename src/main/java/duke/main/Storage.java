@@ -1,9 +1,9 @@
-package main;
+package duke.main;
 
-import Tasks.Deadline;
-import Tasks.Event;
-import Tasks.Task;
-import Tasks.ToDo;
+import duke.Tasks.Deadline;
+import duke.Tasks.Event;
+import duke.Tasks.Task;
+import duke.Tasks.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,10 +12,6 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Storage {
-    private enum Reply {
-        LIST, TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, DEFAULT
-    }
-
     String filepath;
 
     public Storage(String filepath) {
@@ -32,33 +28,18 @@ public class Storage {
             // mark status & type & descriptor & additional
             String cmd = s.nextLine();
             String[] cmd_split = cmd.split("&");
-            Reply type;
             boolean mark = cmd_split[0].equals("[X]") ? true : false;
+
             switch (cmd_split[1]) {
             case "T":
-                type = Reply.TODO;
-                break;
-            case "E":
-                type = Reply.EVENT;
-                break;
-            case "D":
-                type = Reply.DEADLINE;
-                break;
-            default:
-                type = Reply.DEFAULT;
-                break;
-            }
-
-            switch (type) {
-            case TODO:
                 // ToDo(String task, boolean markStatus)
                 toDoList.add(new ToDo(cmd_split[2], mark));
                 break;
-            case EVENT:
+            case "E":
                 // Event(String task, boolean markStatus, String dateTime)
                 toDoList.add(new Event(cmd_split[2], mark, cmd_split[3]));
                 break;
-            case DEADLINE:
+            case "D":
                 // Deadline(String task, boolean markStatus, String deadline)
                 toDoList.add(new Deadline(cmd_split[2], mark, cmd_split[3]));
                 break;

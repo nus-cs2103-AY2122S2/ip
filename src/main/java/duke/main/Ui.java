@@ -1,4 +1,4 @@
-package main;
+package duke.main;
 
 public class Ui {
     private static Parser parser;

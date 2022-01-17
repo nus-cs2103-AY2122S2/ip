@@ -1,4 +1,4 @@
-package main;
+package duke.main;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,7 +9,6 @@ import java.io.FileNotFoundException;
 
 public class Duke {
     private TaskList toDoList;
-//    private List<Task> toDoList;
     private Storage storage;
     private Ui ui;
 

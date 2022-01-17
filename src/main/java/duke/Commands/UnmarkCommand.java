@@ -1,12 +1,9 @@
-package Commands;
+package duke.Commands;
 
-import Tasks.Deadline;
-import Tasks.Event;
-import Tasks.Task;
-import Tasks.ToDo;
-import main.DukeException;
-import main.TaskList;
-import main.Parser;
+import duke.Tasks.Task;
+import duke.main.DukeException;
+import duke.main.TaskList;
+import duke.main.Parser;
 
 public class UnmarkCommand {
     public UnmarkCommand(TaskList toDoList, int numberToUnmark) {
