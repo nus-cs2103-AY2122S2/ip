@@ -45,7 +45,7 @@ public class Duke {
             } else {
                 switch (commands[0]) {
                     case "todo":
-                        savedTask[counting] = new Todo(commands[0]);
+                        savedTask[counting] = new Todo(commands[1]);
                         break;
                     case "deadline":
                         String[] deadlineDetail = commands[1].split("/by");
