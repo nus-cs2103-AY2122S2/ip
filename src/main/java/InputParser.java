@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class InputParser {
-    public int run(String ss, Printer p, ArrayList<String> arr) {
+    public int run(String ss, Printer p, ArrayList<Task> arr) {
         String[] args = ss.split("\\s+");
         String action = args[0];
         if(action.equals("bye")) {
@@ -14,7 +14,7 @@ public class InputParser {
         } else if (action.equals("unmark")) {
 
         } else {
-            arr.add(ss);
+            arr.add(new Task(ss));
             p.print(String.format("added: %s", ss));
         }
         return 0;

@@ -7,7 +7,7 @@ public class Duke {
         Printer p = new Printer();
         Scanner in = new Scanner(System.in);
         InputParser ip = new InputParser();
-        ArrayList<String> arr = new ArrayList<>();
+        ArrayList<Task> arr = new ArrayList<>();
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
