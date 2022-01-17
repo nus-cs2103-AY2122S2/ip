@@ -20,32 +20,58 @@ public class McBot {
 
         Scanner sc = new Scanner(System.in);
         boolean running = true;
-        ArrayList<String> arrList = new ArrayList<>(100);
+        ArrayList<Task> arrList = new ArrayList<>(100);
 
         while(running) {
-            String command = sc.nextLine();
-            switch(command) {
-                case "bye":
+            String fullCommand = sc.nextLine();
+            String[] command = fullCommand.split(" ");
+            switch(command[0]) {
+                case "bye": {
                     System.out.println(frameLine);
                     System.out.println("Arghh! This ain't the last time ye see me lad");
                     System.out.println(frameLine);
                     running = false;
                     break;
-                case "list":
+                }
+                case "list": {
                     int i = 1;
                     System.out.println(frameLine);
-                    for (String task : arrList) {
-                        System.out.print(i + ". ");
-                        System.out.println(task);
+                    System.out.println("Here are yer tasks boi: ");
+                    for (Task task : arrList) {
+                        System.out.print(i + ".[" + task.getStatusIcon() + "] ");
+                        System.out.println(task.getTaskName());
                         i++;
                     }
                     System.out.println(frameLine);
                     break;
-                default:
-                    arrList.add(command);
+                }
+                case "mark": {
+                    int num = Integer.parseInt(command[1]);
+                    Task t = arrList.get(num - 1);
+                    t.markDone();
                     System.out.println(frameLine);
-                    System.out.println("added: " + command);
+                    System.out.println("Aye I'ave marked it done:");
+                    System.out.println("[" + t.getStatusIcon() + "] " + t.getTaskName());
                     System.out.println(frameLine);
+                    break;
+                }
+                case "unmark": {
+                    int num = Integer.parseInt(command[1]);
+                    Task t = arrList.get(num - 1);
+                    t.undoDone();
+                    System.out.println(frameLine);
+                    System.out.println("Aye I'ave unmarked it:");
+                    System.out.println("[" + t.getStatusIcon() + "] " + t.getTaskName());
+                    System.out.println(frameLine);
+                    break;
+                }
+                default: {
+                    Task t = new Task(fullCommand);
+                    arrList.add(t);
+                    System.out.println(frameLine);
+                    System.out.println("aye, I added " + fullCommand);
+                    System.out.println(frameLine);
+                }
             }
         }
     }
