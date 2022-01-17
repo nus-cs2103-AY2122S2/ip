@@ -89,7 +89,7 @@ public class Duke {
                     break;
                 }
                 case "todo": {
-                    Task newTask = new Todo(input);
+                    Task newTask = new Todo(inputArg[1]);
 
                     taskArr.add(newTask);
                     printTaskAdd(newTask);
