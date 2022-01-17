@@ -67,6 +67,21 @@ public class Duke {
                         }
                     }
                 }
+                // check if input == delete
+                else if(inputData.contains("delete")){
+                    String[] splitted = inputData.split("\\s+");
+                    int index = Integer.parseInt(splitted[1]);
+                    if(index > list.size() || index <= 0){
+                        System.out.println("Index out of bounds, please try again");
+                    } else {
+                        list.remove(index-1);
+                        for (int i = 1; i <= list.size(); i++) {
+                            Task task = list.get(i - 1);
+                            System.out.print(i + ": ");
+                            task.printTask();
+                        }
+                    }
+                }
                 //input is a new type of task
                 else if(inputData.contains("todo") || inputData.contains("event") || inputData.contains("deadline")) {
                     //identify type of task
