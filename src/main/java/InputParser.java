@@ -24,7 +24,9 @@ public class InputParser {
             arr.add(newTask);
             p.print("Added Task: ", " " + newTask.toString(), String.format("There are now %d task(s) in the list.", arr.size()));
         } else if (action.equals("event")) {
-
+            EventTask newTask = new EventTask(ss.substring(6, ss.length()).split("/at")[0], ss.split("/at")[1]);
+            arr.add(newTask);
+            p.print("Added Task: ", " " + newTask.toString(), String.format("There are now %d task(s) in the list.", arr.size()));
         }
         else {
             //arr.add(new Task(ss));
