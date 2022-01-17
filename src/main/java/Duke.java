@@ -17,84 +17,104 @@ public class Duke {
         Scanner scan = new Scanner(System.in);
 
         while(true) {
-            //Take in input
-            inputData = scan.nextLine();
 
-            //Check if input == bye
-            if(inputData.equals("bye")) {
-                System.out.println("~BYE!~ Come back to Duke anytime");
-                break;
-            }
+            try{
+                //Take in input
+                inputData = scan.nextLine();
 
-            //Check if input == list
-            else if(inputData.equals("list")){
-                for(int i = 1; i <= list.size(); i++){
-                    Task task = list.get(i-1);
-                    System.out.print(i + ": ");
-                    task.printTask();
+                //Check if input == bye
+                if(inputData.equals("bye")) {
+                    System.out.println("~BYE!~ Come back to Duke anytime");
+                    break;
                 }
 
-            //Check if input == unmark
-            } else if(inputData.contains("unmark")){
-                //split string by space
-                String[] splitted = inputData.split("\\s+");
-                int index = Integer.parseInt(splitted[1]);
-                if(index > list.size() || index <= 0){
-                    System.out.println("Index out of bounds, please try again");
-                } else {
-                    list.get(index-1).setDone(false);
-                    for (int i = 1; i <= list.size(); i++) {
-                        Task task = list.get(i - 1);
+                //Check if input == list
+                else if(inputData.equals("list")){
+                    for(int i = 1; i <= list.size(); i++){
+                        Task task = list.get(i-1);
                         System.out.print(i + ": ");
                         task.printTask();
                     }
-                }
-            //Check if input == mark
-            } else if(inputData.contains("mark")){
-                //split string by space
-                String[] splitted = inputData.split("\\s+");
-                int index = Integer.parseInt(splitted[1]);
-                if(index > list.size() || index <= 0){
-                    System.out.println("Index out of bounds, please try again");
-                } else {
-                    list.get(index-1).setDone(true);
-                    for (int i = 1; i <= list.size(); i++) {
-                        Task task = list.get(i - 1);
-                        System.out.print(i + ": ");
-                        task.printTask();
+
+                //Check if input == unmark
+                } else if(inputData.contains("unmark")){
+                    //split string by space
+                    String[] splitted = inputData.split("\\s+");
+                    int index = Integer.parseInt(splitted[1]);
+                    if(index > list.size() || index <= 0){
+                        System.out.println("Index out of bounds, please try again");
+                    } else {
+                        list.get(index-1).setDone(false);
+                        for (int i = 1; i <= list.size(); i++) {
+                            Task task = list.get(i - 1);
+                            System.out.print(i + ": ");
+                            task.printTask();
+                        }
+                    }
+                //Check if input == mark
+                } else if(inputData.contains("mark")){
+                    //split string by space
+                    String[] splitted = inputData.split("\\s+");
+                    int index = Integer.parseInt(splitted[1]);
+                    if(index > list.size() || index <= 0){
+                        System.out.println("Index out of bounds, please try again");
+                    } else {
+                        list.get(index-1).setDone(true);
+                        for (int i = 1; i <= list.size(); i++) {
+                            Task task = list.get(i - 1);
+                            System.out.print(i + ": ");
+                            task.printTask();
+                        }
                     }
                 }
-            }
-            //input is a new type of task
-            else{
-                //identify type of task
-                String[] arr = inputData.split(" ", 2);
-                String taskType = arr[0];
-                String taskDetails = arr[1];
+                //input is a new type of task
+                else if(inputData.contains("todo") || inputData.contains("event") || inputData.contains("deadline")) {
+                    //identify type of task
+                    String[] arr = inputData.split(" ", 2);
+                    
+                    if(arr.length < 2){
+                        throw new DukeException("Description of task cannot be empty!");
+                    }
 
-                Task newTask = new Task("");
+                    String taskType = arr[0];
+                    String taskDetails = arr[1];
 
-                if(taskType.equals("todo")){
-                    newTask = new Todo(inputData);
-                } else if(taskType.equals("deadline")){
-                    String[] spl=taskDetails.split("/");
-                    String details=spl[0];
-                    String date=spl[1];
-                    newTask = new Deadline(details,date);
-                } else if(taskType.equals("event")){
-                    String[] spl=taskDetails.split("/");
-                    String details=spl[0];
-                    String date=spl[1];
-                    newTask = new Event(details,date);
+                    Task newTask = new Task("");
+
+                    if(taskType.equals("todo")){
+                        newTask = new Todo(taskDetails);
+                    } else if(taskType.equals("deadline")){
+                        String[] spl=taskDetails.split("/");
+                        if(spl.length < 2){
+                            throw new DukeException("Description of deadline must include a date/time! Did you miss out a /by?");
+                        }
+                        String details=spl[0];
+                        String date=spl[1];
+                        newTask = new Deadline(details,date);
+                    } else if(taskType.equals("event")){
+                        String[] spl=taskDetails.split("/");
+                        if(spl.length < 2){
+                            throw new DukeException("Description of event must include a date/time! Did you miss out a /at?");
+                        }
+                        String details=spl[0];
+                        String date=spl[1];
+                        newTask = new Event(details,date);
+                    }
+
+                    list.add(newTask);
+                    System.out.println("Got it. The task has been added:");
+                    newTask.printTask();
+                    System.out.println("Now you have " + list.size() + " tasks in the list.");
+                } else {
+                    throw new DukeException("no such task type");
                 }
+                System.out.println("-----------------------------------");
 
-                list.add(newTask);
-                System.out.println("Got it. The task has been added:");
-                newTask.printTask();
-                System.out.println("Now you have " + list.size() + " tasks in the list.");
+            } catch (DukeException e) {
+                System.out.println(e);
+                System.out.println("-----------------------------------");
             }
-            System.out.println("-----------------------------------");
-        }
+        } 
 
         scan.close();
     }
