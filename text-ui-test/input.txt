@@ -1,3 +1,4 @@
+list
 todo read book
 deadline return book /by June 6th
 event project meeting /at Aug 6th 2-4pm
@@ -21,4 +22,9 @@ deadline test3 /at 5pm
 event test4 /by 6pm
 mark abcd
 unmark efgh
+delete 1
+list
+delete 8
+mark 8
+unmark 8
 bye

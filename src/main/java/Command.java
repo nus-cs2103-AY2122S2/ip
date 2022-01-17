@@ -12,6 +12,7 @@ public class Command {
         put("todo", CommandAction.TODO);
         put("event", CommandAction.EVENT);
         put("deadline", CommandAction.DEADLINE);
+        put("delete", CommandAction.DELETE);
     }};
 
     Command(CommandAction commandAction, Map<String, String> arguments) {

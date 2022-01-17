@@ -1,7 +1,8 @@
 public enum CommandAction {
     DEADLINE(ActionType.ADD, "description,by"), TODO(ActionType.ADD, "description"), EVENT(ActionType.ADD, "description,at"),
-    LIST(ActionType.READ), MARK(ActionType.UPDATE,"index"), UNMARK(ActionType.UPDATE,"index"),
-    EXIT(ActionType.NO_ACTION), UNKNOWN(ActionType.NO_ACTION);
+    MARK(ActionType.UPDATE,"index"), UNMARK(ActionType.UPDATE,"index"), DELETE(ActionType.UPDATE, "index"),
+    EXIT(ActionType.NO_ACTION), UNKNOWN(ActionType.NO_ACTION),
+    LIST(ActionType.READ);
 
     private ActionType actionType;
     private String argumentKeys;
