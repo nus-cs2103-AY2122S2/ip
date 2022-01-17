@@ -7,14 +7,28 @@ public class TaskManager {
         this.tasks = new ArrayList<>();
     }
 
-    public String addTask(String task) {
-        this.tasks.add(new Task(task));
-        return "added " + task;
+    public String addToDo(String description) {
+        this.tasks.add(new Todo(description));
+        return this.tasks.get(this.tasks.size() - 1).toString();
+    }
+
+    public String addDeadline(String description, String date) {
+        this.tasks.add(new Deadline(description, date));
+        return this.tasks.get(this.tasks.size() - 1).toString();
+    }
+
+    public String addEvent(String description, String time) {
+        this.tasks.add(new Event(description, time));
+        return this.tasks.get(this.tasks.size() - 1).toString();
     }
 
     public String markTask(int taskId) {
         this.tasks.get(taskId - 1).mark();
         return this.tasks.get(taskId - 1).toString();
+    }
+
+    public int size() {
+        return this.tasks.size();
     }
 
     public String unmarkTask(int taskId) {

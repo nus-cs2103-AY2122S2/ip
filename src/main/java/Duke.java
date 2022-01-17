@@ -14,7 +14,9 @@ public class Duke {
             System.out.print(INPUT_NAME);
             input = sc.nextLine();
             String output = OUTPUT_NAME;
-            Command c = Command.getCommand(input.split(" ")[0]);
+
+            String commandLine[] = cleanCommand(input);
+            Command c = Command.getCommand(commandLine[0]);
 
             // main
             switch (c) {
@@ -26,19 +28,47 @@ public class Duke {
                     break;
                 case MARK:
                     output += "I have marked this as done. \n";
-                    output += notebook.markTask(Integer.parseInt(input.split(" ")[1]));
+                    output += notebook.markTask(Integer.parseInt(commandLine[1]));
                     break;
                 case UNMARK:
                     output += "I have unmarked this task. \n";
-                    output += notebook.unmarkTask(Integer.parseInt(input.split(" ")[1]));
+                    output += notebook.unmarkTask(Integer.parseInt(commandLine[1]));
                     break;
-                default:
-                    output += notebook.addTask(input);
+                case TODO:
+                    output += "Got it. I have added this task- \n";
+                    output += notebook.addToDo(commandLine[1]) + "\n";
+                    output += "Now you have " + notebook.size() + " tasks. \n";
+                    break;
+                case DEADLINE:
+                    output += "Got it. I have added this task- \n";
+                    output += notebook.addDeadline(commandLine[1], commandLine[2]) + "\n";
+                    output += "Now you have " + notebook.size() + " tasks. \n";
+                    break;
+                case EVENT:
+                    output += "Got it. I have added this task- \n";
+                    output += notebook.addEvent(commandLine[1], commandLine[2]) + "\n";
+                    output += "Now you have " + notebook.size() + " tasks. \n";
+                    break;
             }
             System.out.println(output);
         } while (!input.equals("bye"));
         sc.close();
     }
+
+    public static String[] cleanCommand(String input) {
+        String[] commandLine = input.trim().split("\\s+", 2);
+        if (commandLine.length == 2) {
+            String commandType = commandLine[0];
+            String commandInfo = commandLine[1];
+
+            if (commandType.equals("deadline") || commandType.equals("event")) {
+                return new String[]{commandType, commandInfo.split("/")[0],
+                        commandInfo.split("/")[1]};
+            }
+        }
+        return commandLine;
+    }
+
 
     public static void start() {
         String logo = " ____        _        \n"

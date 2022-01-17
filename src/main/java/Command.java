@@ -5,7 +5,9 @@ public enum Command {
     LIST,
     MARK,
     UNMARK,
-    ADD;
+    TODO,
+    DEADLINE,
+    EVENT;
 
     private static HashMap<String, Command> commands = new HashMap<>();
 
@@ -14,11 +16,14 @@ public enum Command {
         commands.put("list", Command.LIST);
         commands.put("mark", Command.MARK);
         commands.put("unmark", Command.UNMARK);
+        commands.put("todo", Command.TODO);
+        commands.put("deadline", Command.DEADLINE);
+        commands.put("event", Command.EVENT);
     }
 
     public static Command getCommand(String c) {
         return commands.containsKey(c)
                 ? commands.get(c)
-                : Command.ADD;
+                : null;
     }
 }

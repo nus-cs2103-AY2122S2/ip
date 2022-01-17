@@ -1,14 +1,10 @@
-public class Task {
+public abstract class Task {
     private String description;
     private boolean marked;
 
-    public Task(String description, boolean marked) {
-        this.description = description;
-        this.marked = marked;
-    }
-
     public Task(String description) {
-        this(description, false);
+        this.description = description;
+        this.marked = false;
     }
 
     public void mark() {
