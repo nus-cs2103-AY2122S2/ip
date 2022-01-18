@@ -12,13 +12,13 @@ public class TaskManager {
         return this.tasks.get(this.tasks.size() - 1).toString();
     }
 
-    public String addDeadline(String description, String date) {
-        this.tasks.add(new Deadline(description, date));
+    public String addDeadline(String description, String by) {
+        this.tasks.add(new Deadline(description, by));
         return this.tasks.get(this.tasks.size() - 1).toString();
     }
 
-    public String addEvent(String description, String time) {
-        this.tasks.add(new Event(description, time));
+    public String addEvent(String description, String at) {
+        this.tasks.add(new Event(description, at));
         return this.tasks.get(this.tasks.size() - 1).toString();
     }
 

@@ -24,30 +24,30 @@ public class Duke {
                     output += "don't leave me don't leave me.";
                     break;
                 case LIST:
-                    output += "\n" + notebook;
+                    output += "Here are the tasks in your list.\n" + notebook;
                     break;
                 case MARK:
-                    output += "I have marked this as done. \n";
-                    output += notebook.markTask(Integer.parseInt(commandLine[1]));
+                    output += "I have marked this as done.\n";
+                    output += notebook.markTask(Integer.parseInt(commandLine[1])) + "\n";
                     break;
                 case UNMARK:
-                    output += "I have unmarked this task. \n";
-                    output += notebook.unmarkTask(Integer.parseInt(commandLine[1]));
+                    output += "I have unmarked this task.\n";
+                    output += notebook.unmarkTask(Integer.parseInt(commandLine[1])) + "\n";
                     break;
                 case TODO:
-                    output += "Got it. I have added this task- \n";
+                    output += "Got it. I have added this task-\n";
                     output += notebook.addToDo(commandLine[1]) + "\n";
-                    output += "Now you have " + notebook.size() + " tasks. \n";
+                    output += "Now you have " + notebook.size() + " tasks.\n";
                     break;
                 case DEADLINE:
-                    output += "Got it. I have added this task- \n";
+                    output += "Got it. I have added this task-\n";
                     output += notebook.addDeadline(commandLine[1], commandLine[2]) + "\n";
-                    output += "Now you have " + notebook.size() + " tasks. \n";
+                    output += "Now you have " + notebook.size() + " tasks.\n";
                     break;
                 case EVENT:
-                    output += "Got it. I have added this task- \n";
+                    output += "Got it. I have added this task-\n";
                     output += notebook.addEvent(commandLine[1], commandLine[2]) + "\n";
-                    output += "Now you have " + notebook.size() + " tasks. \n";
+                    output += "Now you have " + notebook.size() + " tasks.\n";
                     break;
             }
             System.out.println(output);
@@ -71,13 +71,13 @@ public class Duke {
 
 
     public static void start() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
+        String logo = " ____        _\n"
+                + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
-        String msg = "Hello! I am Duke. \n"
+        String msg = "Hello! I am Duke.\n"
                 + "Your wish is my command.\n\n";
         System.out.print(logo + msg);
     }
