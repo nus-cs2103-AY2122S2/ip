@@ -3,14 +3,24 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
+
 //        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
+//                    + "|  _ \\ _   _| | _____ \n"
+//                    + "| | | | | | | |/ / _ \\\n"
+//                    + "| |_| | |_| |   <  __/\n"
+//                    + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo =         "\n" +
+                "       _       _        \n" +
+                "      | |     | |       \n" +
+                "      | |_   _| | _____ \n" +
+                "  _   | | | | | |/ / _ \\\n" +
+                " | |__| | |_| |   <  __/\n" +
+                "  \\____/ \\__,_|_|\\_\\___|\n" +
+                "                        \n" +
+                "                        \n";
+        System.out.println("Hello from\n" + logo);
         System.out.println("    ____________________________________________________________\n" +
-                "     Hello! I'm Duke\n" +
+                "     Hello! I'm Juke\n" +
                 "     What can I do for you?\n" +
                 "    ____________________________________________________________");
         ArrayList<Task> itemList = new ArrayList<>();
@@ -23,7 +33,7 @@ public class Duke {
                 itemList.get(index - 1).markAsDone();
                 System.out.println("    ____________________________________________________________\n" +
                         "     Nice! I've marked this task as done: \n" +
-                        "       [X] " + itemList.get(index - 1).description + "\n" +
+                        "       " + itemList.get(index - 1).getDescription() + "\n" +
                         "    ____________________________________________________________\n");
 
 
@@ -32,39 +42,51 @@ public class Duke {
                 itemList.get(index - 1).markAsUndone();
                 System.out.println("    ____________________________________________________________\n" +
                         "     OK, I've marked this task as not done yet: \n" +
-                        "       [ ] " + itemList.get(index - 1).description + "\n" +
+                        "       " + itemList.get(index - 1).getDescription() + "\n" +
                         "    ____________________________________________________________\n");
 
             } else if (splittedString[0].equals("todo")) { // check for todo tag
-                String newReply = reply.replace("todo ", "");
-                itemList.add(new Task(newReply, "T"));
-                System.out.println("    ____________________________________________________________\n" +
-                        "     Got it. I've added this task: \n" +
-                        "       [T][ ] " + newReply + "\n" +
-                        "     Now you have " + itemList.size() + " tasks in the list.\n" +
-                        "    ____________________________________________________________");
+                if (splittedString.length == 1) {
+                    System.out.println("    ____________________________________________________________\n" +
+                            "     ☹ OOPS!!! The description of a todo cannot be empty.\n" +
+                            "    ____________________________________________________________");
+                } else {
+                    Task todoTask = new Todo(reply);
+                    itemList.add(todoTask);
+                    System.out.println("    ____________________________________________________________\n" +
+                            "     Got it. I've added this task: \n" +
+                            "       " + todoTask.getDescription() + "\n" +
+                            "     Now you have " + itemList.size() + " tasks in the list.\n" +
+                            "    ____________________________________________________________");
+                }
             } else if (splittedString[0].equals("deadline")) { // check for deadline tag
-                String newReply = reply.replace("deadline ", "");
-                String taskAtHand = newReply.split("/")[0];
-                String deadline = newReply.split("/")[1].replace("by ", "by: ");
-                String finalDescription = taskAtHand + "(" + deadline + ")";
-                itemList.add(new Task(finalDescription, "D"));
-                System.out.println("    ____________________________________________________________\n" +
-                        "     Got it. I've added this task: \n" +
-                        "       [D][ ] " + finalDescription + "\n" +
-                        "     Now you have " + itemList.size() + " tasks in the list.\n" +
-                        "    ____________________________________________________________");
+                if (splittedString.length == 1) {
+                    System.out.println("    ____________________________________________________________\n" +
+                            "     ☹ OOPS!!! The description of a deadline cannot be empty.\n" +
+                            "    ____________________________________________________________");
+                } else {
+                    Task deadlineTask = new Deadline(reply);
+                    itemList.add(deadlineTask);
+                    System.out.println("    ____________________________________________________________\n" +
+                            "     Got it. I've added this task: \n" +
+                            "       " + deadlineTask.getDescription() + "\n" +
+                            "     Now you have " + itemList.size() + " tasks in the list.\n" +
+                            "    ____________________________________________________________");
+                }
             } else if (splittedString[0].equals("event")) { // check for event tag
-                String newReply = reply.replace("event ", "");
-                String taskAtHand = newReply.split("/")[0];
-                String event = newReply.split("/")[1].replace("at ", "at: ");
-                String finalDescription = taskAtHand + "(" + event + ")";
-                itemList.add(new Task(finalDescription, "E"));
-                System.out.println("    ____________________________________________________________\n" +
-                        "     Got it. I've added this task: \n" +
-                        "       [E][ ] " + finalDescription + "\n" +
-                        "     Now you have " + itemList.size() + " tasks in the list.\n" +
-                        "    ____________________________________________________________");
+                if (splittedString.length == 1) {
+                    System.out.println("    ____________________________________________________________\n" +
+                            "     ☹ OOPS!!! The description of a event cannot be empty.\n" +
+                            "    ____________________________________________________________");
+                } else {
+                    Task eventTask = new Event(reply);
+                    itemList.add(eventTask);
+                    System.out.println("    ____________________________________________________________\n" +
+                            "     Got it. I've added this task: \n" +
+                            "       " + eventTask.getDescription() + "\n" +
+                            "     Now you have " + itemList.size() + " tasks in the list.\n" +
+                            "    ____________________________________________________________");
+                }
             } else if (reply.equals("bye")) { // check for bye
                 System.out.println("    ____________________________________________________________\n" +
                         "     Bye. Hope to see you again soon!\n" +
@@ -73,24 +95,26 @@ public class Duke {
             } else if (reply.equals("list")) { // check for list
                 String totalString = "    ____________________________________________________________\n" +
                         "    Here are the tasks in your list:\n";
-                for(int i = 0; i < itemList.size(); i++) {
-//                    if (itemList.get(i).getTaskType().equals("D")) { //if deadline
-//                        totalString += "    " + (i + 1) + ". " + "[" + itemList.get(i).getTaskType()
-//                                + "]" + "[" + itemList.get(i).getStatusIcon() + "] " + itemList.get(i).description + "\n";
-//                    } else if (itemList.get(i).getTaskType().equals("E")) { //if event
-//
-//                    } else {
-                        totalString += "    " + (i + 1) + ". " + "[" + itemList.get(i).getTaskType()
-                                + "]" + "[" + itemList.get(i).getStatusIcon() + "] " + itemList.get(i).description + "\n";
-
+                for (int i = 0; i < itemList.size(); i++) {
+//                    totalString += "    " + (i + 1) + ". " + "[" + itemList.get(i).getTaskType()
+//                            + "]" + "[" + itemList.get(i).getStatusIcon() + "] " + itemList.get(i).description + "\n";
+                    totalString += "    " + (i + 1) + ". " + itemList.get(i).getDescription() + "\n";
                 }
                 totalString += "    ____________________________________________________________\n";
                 System.out.println(totalString);
-            } else { // check for any other inputs
-//                itemList.add(new Task(reply));
-//                System.out.println("    ____________________________________________________________\n" +
-//                        "     " + "added: " + reply + "\n" +
-//                        "    ____________________________________________________________");
+            } else if (splittedString[0].equals("delete")) {
+                int index = Integer.valueOf(splittedString[1]);
+
+                String toRemove = itemList.remove(index - 1).getDescription();
+                System.out.println("    ____________________________________________________________\n" +
+                        "     Noted. I've removed this task: \n" +
+                        "       " + toRemove + "\n" +
+                        "     Now you have " + itemList.size() + " tasks in the list.\n" +
+                        "    ____________________________________________________________");
+            } else {
+                System.out.println("    ____________________________________________________________\n" +
+                        "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                        "    ____________________________________________________________");
             }
         }
     }
