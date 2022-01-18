@@ -12,10 +12,14 @@ public class Task {
     }
 
     public void markAsDone() {
-        isDone = ! isDone;
+        isDone = true;
+    }
+
+    public void markAsUndone() {
+        isDone = false;
     }
 
     public String toString() {
-        return description;
+        return "[" + genDoneSymbol() + "] " + description;
     }
 }

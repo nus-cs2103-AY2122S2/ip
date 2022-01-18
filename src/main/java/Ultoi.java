@@ -28,13 +28,33 @@ public class Ultoi {
             if (cmd.equals("bye")) { // end the session
                 System.out.print(byeMessage);
                 break;
-            } else if (cmd.equals("list")) {
+            } else if (cmd.equals("list")) { // list all tasks
                 System.out.print(lineBreaker);
 
                 for (int i = 0; i < logs.size(); i++) {
                     Task curr = logs.get(i);
-                    System.out.println((i + 1) + ". " + curr.toString());
+                    System.out.println("     " + (i + 1) + ". " + curr.toString());
                 }
+
+                System.out.print(lineBreaker);
+            } else if ((cmd.split(" "))[0].equals("mark")) {
+                System.out.print(lineBreaker);
+
+                String[] tokens = cmd.split(" ");
+                int taskIndex = Integer.parseInt(tokens[1]) - 1;
+                logs.get(taskIndex).markAsDone();
+                System.out.println("     Nice! I have marked this task as done:");
+                System.out.println("          " + logs.get(taskIndex).toString());
+
+                System.out.print(lineBreaker);
+            } else if ((cmd.split(" "))[0].equals("unmark")) {
+                System.out.print(lineBreaker);
+
+                String[] tokens = cmd.split(" ");
+                int taskIndex = Integer.parseInt(tokens[1]) - 1;
+                logs.get(taskIndex).markAsUndone();
+                System.out.println("     Nice! I have marked this task as not done yet:");
+                System.out.println("          " + logs.get(taskIndex).toString());
 
                 System.out.print(lineBreaker);
             } else {
