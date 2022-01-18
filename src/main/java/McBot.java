@@ -5,14 +5,13 @@ public class McBot {
     public static void main(String[] args) {
             String frameLine = "==========================================";
             String logo = "\n" +
-                    "___  ___    ______       _    \n" +
-                    "|  \\/  |    | ___ \\     | |   \n" +
-                    "| .  . | ___| |_/ / ___ | |_  \n" +
-                    "| |\\/| |/ __| ___ \\/ _ \\| __| \n" +
-                    "| |  | | (__| |_/ / (_) | |_  \n" +
-                    "\\_|  |_/\\___\\____/ \\___/ \\__| \n" +
-                    "                              \n" +
-                    "                              \n";
+                    "___  ___    ______       _\n" +
+                    "|  \\/  |    | ___ \\     | |\n" +
+                    "| .  . | ___| |_/ / ___ | |_\n" +
+                    "| |\\/| |/ __| ___ \\/ _ \\| __|\n" +
+                    "| |  | | (__| |_/ / (_) | |_\n" +
+                    "\\_|  |_/\\___\\____/ \\___/ \\__|\n" +
+                    "\n\n";
         System.out.println(logo);
         System.out.println(frameLine);
         System.out.println("Ahoy! Me name be McBot.\nTell me lad, what do you want?");
@@ -36,7 +35,7 @@ public class McBot {
                 case "list": {
                     int i = 1;
                     System.out.println(frameLine);
-                    System.out.println("Here are yer tasks boi: ");
+                    System.out.println("Here are yer tasks boi:");
                     for (Task task : arrList) {
                         System.out.print(i + ".[" + task.getTaskIcon() + "]");
                         System.out.print("[" + task.getStatusIcon() + "] ");
@@ -95,6 +94,7 @@ public class McBot {
                     String eventDetails = str[1];
                     Event t = new Event(taskName, eventDetails);
                     arrList.add(t);
+                    System.out.println(frameLine);
                     System.out.println("Got 'em down as event:");
                     System.out.println("[" + t.getTaskIcon() + "][" + t.getStatusIcon() + "] " + t.getFullDetails());
                     System.out.println("Ye now have " + arrList.size() + " tasks in list lad");
