@@ -49,21 +49,29 @@ public class Sana {
             } else if (userCommand.startsWith("unmark")) {
                 int taskIndex = Integer.parseInt(userCommand.split(" ", 2)[1]) - 1;
                 mark(taskIndex, false);
-            } else if (userCommand.startsWith("todo")) {
+            } else if (userCommand.startsWith("todo ")) {
                 String taskName = userCommand.replaceFirst("todo ", "");
                 addToDo(taskName);
-            } else if (userCommand.startsWith("event")) {
+            } else if (userCommand.startsWith("event ")) {
                 String temp = userCommand.replaceFirst("event ", "");
+                if (!temp.contains(" /at ")) {
+                    throw new IncompleteCommandException();
+                }
                 String[] subStrings = temp.split(" /at ", 2);
                 addEvent(subStrings[0], subStrings[1]);
             } else if (userCommand.startsWith("deadline ")) {
                 String temp = userCommand.replaceFirst("deadline ", "");
+                if (!temp.contains(" /by ")) {
+                    throw new IncompleteCommandException();
+                }
                 String[] subStrings = temp.split(" /by ", 2);
                 addDeadline(subStrings[0], subStrings[1]);
             } else {
                 throw new UnknownCommandException();
             }
         } catch (UnknownCommandException e) {
+            System.out.println(e.getMessage());
+        } catch (IncompleteCommandException e) {
             System.out.println(e.getMessage());
         }
         border();
@@ -75,7 +83,10 @@ public class Sana {
      * @param deadlineName  name of the deadline
      * @param deadlineTime  time of the deadline
      */
-    private void addDeadline(String deadlineName, String deadlineTime) {
+    private void addDeadline(String deadlineName, String deadlineTime) throws IncompleteCommandException {
+        if (deadlineName.isBlank() || deadlineTime.isBlank()) {
+            throw new IncompleteCommandException();
+        }
         addTaskText();
         Deadline newDeadline = new Deadline(deadlineName, deadlineTime);
         userTasks.add(newDeadline);
@@ -89,7 +100,10 @@ public class Sana {
      * @param eventName name of the event
      * @param eventTime time of the event
      */
-    private void addEvent(String eventName, String eventTime) {
+    private void addEvent(String eventName, String eventTime) throws IncompleteCommandException {
+        if (eventName.isBlank() || eventTime.isBlank()) {
+            throw new IncompleteCommandException();
+        }
         addTaskText();
         Event newEvent = new Event(eventName, eventTime);
         userTasks.add(newEvent);
@@ -102,7 +116,10 @@ public class Sana {
      *
      * @param taskName  the name of the todo
      */
-    private void addToDo(String taskName) {
+    private void addToDo(String taskName) throws IncompleteCommandException {
+        if (taskName.isBlank()) {
+            throw new IncompleteCommandException();
+        }
         addTaskText();
         ToDo newTodo = new ToDo(taskName);
         userTasks.add(newTodo);
