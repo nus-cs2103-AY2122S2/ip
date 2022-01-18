@@ -136,14 +136,14 @@ public class Duke {
                         todoList[taskToMark - 1].markAsDone();
 
                         System.out.println(lines);
-                        System.out.println("    Nice! I've marked this task as done: ");
+                        System.out.println("    Nice! I've marked this task as done:");
 
                         String taskMarkString = String.format("%s", todoList[taskToMark - 1].toString());
                         System.out.println("    " + taskMarkString);
                         System.out.println(lines);
 
                         break;
-                        
+
                     case "unmark":
                         int taskToUnmark = Integer.parseInt(userInputArr[1]);
                         todoList[taskToUnmark - 1].markAsNotDone();
