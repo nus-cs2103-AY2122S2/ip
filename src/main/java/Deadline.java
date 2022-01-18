@@ -9,16 +9,24 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + this.getSymbol() + this.getName() + "(by: " + this.date.trim() + ")";
+        return "[D]" + this.getSymbol() + " " + this.getName() + " (by: " + this.date.trim() + ")";
     }
 
-    public static Deadline formatInput(String input) {
+    //Formats a line of text into a Deadline object
+    public static Deadline formatInput(String input) throws StringIndexOutOfBoundsException, DukeException {
         String dlTask = input.substring(8); //Grabs all the text after the "deadline" command word
+        dlTask = dlTask.trim();
+        if (dlTask.equals("")) {
+            throw new DukeException("Empty description for Deadline object");
+        }
         String dLine = "/by";
         int dlDatePos = dlTask.indexOf(dLine);
         String dlDate = dlTask.substring(dlDatePos + 3); //Grabs all the text after the "/by" key word
         String dlDes = dlTask.substring(0, dlDatePos);
-        return new Deadline(dlDes, dlDate);
+        if (dlDate.trim().equals("") || dlDes.trim().equals("")) {
+            throw new DukeException("No valid date/description entered");
+        }
+        return new Deadline(dlDes.trim(), dlDate);
     }
 
 }

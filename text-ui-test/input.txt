@@ -12,4 +12,10 @@ mark 2
 todo go to school
 mark 4
 list
+     event   attend concert
+    deadline    buy plane tickets    /by     Monday 4pm
+           mark          6
+      blah blah
+  unmark  -1
+     unmark 3 4
 bye

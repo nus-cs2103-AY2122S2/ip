@@ -6,12 +6,16 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "[T]" + this.getSymbol() + this.getName();
+        return "[T]" + this.getSymbol() + " " + this.getName();
     }
 
-    public static Todo formatInput(String input) {
+    //Formats a line of text into a Todo object
+    public static Todo formatInput(String input) throws DukeException {
         String tdTask = input.substring(4); //Grabs all the text after the "todo" command word
-        return new Todo(tdTask);
+        if (tdTask.trim().equals("")) {
+            throw new DukeException("Empty description for Todo object");
+        }
+        return new Todo(tdTask.trim());
     }
 
 }

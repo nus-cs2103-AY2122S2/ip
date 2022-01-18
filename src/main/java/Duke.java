@@ -1,13 +1,12 @@
 import java.util.*;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         String bar = "-------------------------------------------------"; //Reusable horizontal bar display
         String indent = "      "; //Reusable indentation display
 
         System.out.println(bar);
-        System.out.println("Hi I'm Zen!\n" +
-                "How can I help ?");
+        System.out.println("Hi I'm Zen!\n" + "How can I help ?");
         System.out.println(bar);
         System.out.println();
 
@@ -16,71 +15,114 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
 
-        String input = sc.nextLine();
+        String input = sc.nextLine().trim(); //Whitespace is taken into consideration
         String command = getCommand(input); //Command is the first word of any input
 
         while (!command.equals("bye")) {
 
             switch (command) {
+
                 case "list":
                     System.out.println(bar);
                     System.out.println(indent + "Here are the tasks in your list:");
                     displayList(count, listOfTasks);
                     System.out.println(bar);
                     break;
+
                 case "mark":
                     System.out.println(bar);
-                    int number = Integer.parseInt(input.replaceAll("[^0-9]", ""));
-                    Task markT = listOfTasks.get(number - 1);
-                    markT.markTask();
-                    System.out.println(indent + "Nice! I've marked this task as done!");
-                    System.out.println(indent + markT.toString());
+                    try {
+                        int number = getIndex(input);
+                        Task markT = listOfTasks.get(number - 1);
+                        System.out.println(indent + "Nice! I've marked this task as done!");
+                        markT.markTask();
+                        System.out.println(indent + markT.toString());
+                    } catch (NumberFormatException | IndexOutOfBoundsException | DukeException e) {
+                        System.out.println("Please enter a valid number!");
+                    }
                     System.out.println(bar);
                     break;
+
                 case "unmark":
                     System.out.println(bar);
-                    int num = Integer.parseInt(input.replaceAll("[^0-9]", ""));
-                    Task unmarkT = listOfTasks.get(num - 1);
-                    unmarkT.unmarkTask();
-                    System.out.println(indent + "OK, I've marked this task as not done yet");
-                    System.out.println(indent + unmarkT.toString());
+                    try {
+                        int num = getIndex(input);
+                        Task unmarkT = listOfTasks.get(num - 1);
+                        System.out.println(indent + "OK, I've marked this task as not done yet");
+                        unmarkT.unmarkTask();
+                        System.out.println(indent + unmarkT.toString());
+                    } catch (NumberFormatException | IndexOutOfBoundsException | DukeException e) {
+                        System.out.println("Please enter a valid number!");
+                    }
                     System.out.println(bar);
                     break;
+
                 case "todo":
                     System.out.println(bar);
-                    Todo td = Todo.formatInput(input);
-                    System.out.println(indent + "Got it! I've added this task:");
-                    System.out.println(indent + td.toString());
-                    listOfTasks.add(td);
+                    try {
+                        Todo td = Todo.formatInput(input);
+                        System.out.println(indent + "Got it! I've added this task:");
+                        System.out.println(indent + td.toString());
+                        listOfTasks.add(td);
+                    } catch (DukeException e) {
+                        System.out.println("Please enter a valid description!");
+                        System.out.println(bar);
+                        break;
+                    }
                     count++;
                     System.out.println(indent + "Now you have " + listOfTasks.size() + " tasks in the list");
                     System.out.println(bar);
                     break;
+
                 case "deadline":
                     System.out.println(bar);
-                    Deadline dl = Deadline.formatInput(input);
-                    System.out.println(indent + "Got it! I've added this task:");
-                    System.out.println(indent + dl.toString());
-                    listOfTasks.add(dl);
+                    try {
+                        Deadline dl = Deadline.formatInput(input);
+                        System.out.println(indent + "Got it! I've added this task:");
+                        System.out.println(indent + dl.toString());
+                        listOfTasks.add(dl);
+                    } catch (DukeException e) {
+                        System.out.println("Please enter a valid description/date!");
+                        System.out.println(bar);
+                        break;
+                    } catch (StringIndexOutOfBoundsException e) {
+                        System.out.println("Please enter a date (eg. /by Tuesday)!");
+                        System.out.println(bar);
+                        break;
+                    }
                     count++;
                     System.out.println(indent + "Now you have " + listOfTasks.size() + " tasks in the list");
                     System.out.println(bar);
                     break;
+
                 case "event":
                     System.out.println(bar);
-                    Event ev = Event.formatInput(input);
-                    System.out.println(indent + "Got it! I've added this task:");
-                    System.out.println(indent + ev.toString());
-                    listOfTasks.add(ev);
+                    try {
+                        Event ev = Event.formatInput(input);
+                        System.out.println(indent + "Got it! I've added this task:");
+                        System.out.println(indent + ev.toString());
+                        listOfTasks.add(ev);
+                    } catch (DukeException e) {
+                        System.out.println("Please enter a valid description/date!");
+                        System.out.println(bar);
+                        break;
+                    } catch (StringIndexOutOfBoundsException e) {
+                        System.out.println("Please enter a date (eg. /at Monday 3-4pm)!");
+                        System.out.println(bar);
+                        break;
+                    }
                     count++;
                     System.out.println(indent + "Now you have " + listOfTasks.size() + " tasks in the list");
                     System.out.println(bar);
                     break;
+                    
                 default:
-                    System.out.println("Nothing here yet");
+                    System.out.println(bar);
+                    System.out.println("Please enter a valid command word (eg. list, mark, todo)!");
+                    System.out.println(bar);
             }
             System.out.println();
-            input = sc.nextLine();
+            input = sc.nextLine().trim();
             command = getCommand(input);
         }
 
@@ -106,4 +148,14 @@ public class Duke {
         return (index >= 0) ? input.substring(0, index) : input;
     }
 
+    //Gets the index of the numerical value in the "mark/unmark" input
+    public static int getIndex(String input) throws DukeException {
+        String seperator = " ";
+        int pos = input.indexOf(seperator);
+        int res = Integer.parseInt(input.substring(pos + 1).trim());
+        if (res < 0) {
+            throw new DukeException("Negative numbers cannot be used");
+        }
+        return res;
+    }
 }
