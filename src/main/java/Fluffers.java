@@ -1,16 +1,16 @@
 import java.sql.SQLOutput;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
  * This class encapsulates the chatbot Fluffers for CS2103T's Individual Project.
- * As there can only be one Fluffers, most fields and methods will be static, so
- * that users do not have to initialise a Fluffers Object.
  *
  * ASCII art credit: All ASCII art was found on https://www.asciiart.eu/animals/cats .
  *
+ *
  * @author Ong Han Yang
  */
-public class Fluffers {
+public class Fluffers<T> {
     /** ASCII art for when Fluffers just wakes up*/
     private static String AWAKE =
             "    /\\_____/\\\n" +
@@ -28,12 +28,23 @@ public class Fluffers {
             "     |,4-  ) )-,_. ,\\ (  `'-'\n" +
             "    '---''(_/--'  `-'\\_)";
 
+    /** ASCII art for when Fluffers is displaying a list */
     private static String LIST_TOP =
             "    |\\__/,|   (`\\\n" +
             "  _.|o o  |_   ) )\n" +
             "-(((---(((--------";
 
-    private static TaskList<String> tasks = new TaskList<>();
+    /**
+     * The private task list that each Fluffers object will keep.
+     */
+    private TaskList tasks;
+
+    /**
+     * Constructor to initialise Fluffers.
+     */
+    public Fluffers() {
+        tasks = new TaskList();
+    }
 
     /**
      * Asks Fluffers to speak with fancy formatting.
@@ -41,7 +52,7 @@ public class Fluffers {
      * @param input the text that Fluffers is asked to speak.
      * @return the formatted String that Fluffers is asked to speak.
      */
-    private static String speak(String input) {
+    private String speak(String input) {
         return String.format("Meow! (%s)\n", input);
     }
 
@@ -53,16 +64,67 @@ public class Fluffers {
      * @param isQuestion whether the text is meant to be a question or not.
      * @return the formatted String that Fluffers is asked to speak.
      */
-    private static String speak(String input, boolean isQuestion) {
+    private String speak(String input, boolean isQuestion) {
         return String.format("Meow%s (%s)\n", isQuestion ? "?" : "!", input);
     }
 
-    private static void store(String toStore) {
+    /**
+     * Initial greeting from Fluffers, with fancy formatting.
+     *
+     * @return String representation of the greeting.
+     */
+    private String greet() {
+        return "Activating Cat Translator 2000...\n" +
+                "Waking Fluffers up...\n\n" +
+                "Meow! (Hello!)\n" +
+                Fluffers.AWAKE;
+    }
+
+    /**
+     * Farewell from Fluffers, with fancy formatting.
+     *
+     * @return String representation of the Farewell.
+     */
+    private String farewell() {
+        return "Bye bye!\n" +
+                Fluffers.ASLEEP;
+    }
+
+    /**
+     * Asks Fluffers to keep track of an item.
+     *
+     * @param toStore the item to be tracked.
+     */
+    private void store(Task toStore) {
         tasks.add(toStore);
     }
 
-    private static String listTasks() {
+    /**
+     * Asks Fluffers to display what they have kept track of.
+     * @return the String representation of the tasks, with fancy formatting.
+     */
+    private String listTasks() {
         return String.format("%s\n%s\n------------------", Fluffers.LIST_TOP, tasks.toString());
+    }
+
+    /**
+     * Marks a task as done or undone.
+     *
+     * @param taskNum the task number to be marked (starts from 1).
+     * @param isDone whether the task is done or not.
+     */
+    private void markTask(int taskNum, boolean isDone) {
+        this.tasks.markTask(taskNum - 1, isDone);
+    }
+
+    /**
+     * Displays a task as a String.
+     *
+     * @param taskNum which task to be displayed (starts from 1).
+     * @return the String representation of the task.
+     */
+    private String displayTask(int taskNum) {
+        return this.tasks.displayTask(taskNum - 1);
     }
 
 
@@ -72,32 +134,41 @@ public class Fluffers {
      * @param args input CLI arguments.
      */
     public static void main(String[] args) {
-        String openingText = "Activating Cat Translator 2000...\n" +
-                "Waking Fluffers up...\n\n" +
-                "Meow! (Hello!)\n" +
-                Fluffers.AWAKE;
+        Fluffers<Task> f = new Fluffers<>();
 
-        System.out.println(openingText);
+        System.out.println(f.greet());
 
         Scanner sc = new Scanner(System.in);
         boolean isAwake = true;
 
         while (isAwake) {
             String input = sc.nextLine();
-            switch(input) {
-            case "bye":
-                System.out.println(Fluffers.speak("Bye bye!"));
-                System.out.println(Fluffers.ASLEEP);
+
+            if (Objects.equals(input, "bye")) {
+                System.out.println(f.farewell());
                 isAwake = false;
-                break;
-            case "list":
-                System.out.println(Fluffers.listTasks());
-                break;
-            default:
-                tasks.add(input);
-                System.out.println(Fluffers.speak("Added: " + input));
+
+            } else if (Objects.equals(input, "list")) {
+                System.out.println(f.listTasks());
+
+            } else if (input.startsWith("mark")) {
+                int taskNum = Integer.parseInt(input.split(" ")[1]);
+                f.markTask(taskNum, true);
+                System.out.println(f.speak(
+                        "Okay! I've marked this task as done! " + f.displayTask(taskNum)
+                ));
+
+            } else if (input.startsWith("unmark")) {
+                int taskNum = Integer.parseInt(input.split(" ")[1]);
+                f.markTask(taskNum, false);
+                System.out.println(f.speak(
+                        "This task now needs to be done! " + f.displayTask(taskNum)
+                ));
+
+            } else {
+                f.store(new Task(input));
+                System.out.println(f.speak("Added: " + input));
             }
         }
-
     }
 }
