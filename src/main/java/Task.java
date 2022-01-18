@@ -15,12 +15,8 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
-    }
-
     @Override
     public String toString() {
-        return (isDone ? "[X]" : "[ ]") + this.description;
+        return (isDone ? "[X] " : "[ ] ") + this.description;
     }
 }
