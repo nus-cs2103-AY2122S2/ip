@@ -8,11 +8,14 @@ public class Mike {
     public static void main(String[] args) {
         Mike mike = new Mike();
         mike.start();
-
         Scanner sc = new Scanner(System.in);
-        String inputString = sc.nextLine();
-        String trimmedInputString = inputString.trim();
-        while(!trimmedInputString.equals("bye")) {
+        while(true) {
+            mike.printNextCommandInstruction();
+            String inputString = sc.nextLine();
+            String trimmedInputString = inputString.trim();
+            if (trimmedInputString.equals("bye")) {
+                break;
+            }
             String[] splitString = trimmedInputString.split(" ");
 
             if (!trimmedInputString.isEmpty()) {
@@ -51,14 +54,8 @@ public class Mike {
             } else {
                 mike.printNoCharactersMessage();
             }
-
-            //this segment reads the next input
-            sc = new Scanner(System.in);
-            mike.printNextCommandInstruction();
-            inputString = sc.nextLine();
-            trimmedInputString = inputString.trim();
         }
-
+        sc.close();
         mike.printGoodbyeMessage();
     }
 
@@ -79,26 +76,23 @@ public class Mike {
 
     void printGreeting() {
         String textBanner = "" +
-                "  _     _   _                   \n" +
-                " | |   (_) (_)                  \n" +
-                " | |__  _   _    __ _ _ __ ___  \n" +
-                " | '_ \\| | | |  / _` | '_ ` _ \\ \n" +
+                "  _     _   _\n" +
+                " | |   (_) (_)\n" +
+                " | |__  _   _    __ _ _ __ ___\n" +
+                " | '_ \\| | | |  / _` | '_ ` _ \\\n" +
                 " | | | | | | | | (_| | | | | | |\n" +
                 " |_| |_|_| |_|_ \\__,_|_| |_| |_|\n" +
-                "           (_) |                \n" +
-                "  _ __ ___  _| | _____          \n" +
-                " | '_ ` _ \\| | |/ / _ \\         \n" +
-                " | | | | | | |   <  __/         \n" +
-                " |_| |_| |_|_|_|\\_\\___|         \n" +
-                "                                \n" +
-                "                                ";
+                "           (_) |\n" +
+                "  _ __ ___  _| | _____\n" +
+                " | '_ ` _ \\| | |/ / _ \\\n" +
+                " | | | | | | |   <  __/\n" +
+                " |_| |_| |_|_|_|\\_\\___|\n";
         System.out.println("Welcome!\n" + textBanner);
     }
 
     void printStartingInstruction() {
         String tip = "**Tip: type bye to end conversation**";
         System.out.println(tip);
-        System.out.println("Enter a command:\n");
     }
 
     void printReply(String str){

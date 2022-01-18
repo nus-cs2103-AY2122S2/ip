@@ -1,7 +1,45 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Welcome!
+  _     _   _
+ | |   (_) (_)
+ | |__  _   _    __ _ _ __ ___
+ | '_ \| | | |  / _` | '_ ` _ \
+ | | | | | | | | (_| | | | | | |
+ |_| |_|_| |_|_ \__,_|_| |_| |_|
+           (_) |
+  _ __ ___  _| | _____
+ | '_ ` _ \| | |/ / _ \
+ | | | | | | |   <  __/
+ |_| |_| |_|_|_|\_\___|
 
+**Tip: type bye to end conversation**
+Enter next command:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Mike: I don't understand the command "test 123"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Enter next command:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Mike: Added "todo1" to the list!
+You now have *1* task(s) in your list.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Enter next command:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Mike: Great job, "todo1" marked as done!
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Enter next command:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Mike: Behold, your list!
+1. [T][X] todo1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Enter next command:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Mike: Sure thing, "todo1" marked as undone!
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Enter next command:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Mike: Behold, your list!
+1. [T][ ] todo1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Enter next command:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Mike: Goodbye and see you again :)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
