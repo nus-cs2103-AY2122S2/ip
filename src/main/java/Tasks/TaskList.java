@@ -1,8 +1,10 @@
+package Tasks;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class encapsulates a TaskList, that contains up to 100 tasks.
+ * This class encapsulates a tasks.TaskList, that contains up to 100 tasks.
  *
  * @author Ong Han Yang
  */
@@ -11,14 +13,14 @@ public class TaskList {
     private ArrayList<Task> list;
 
     /**
-     * Constructor for a TaskList.
+     * Constructor for a tasks.TaskList.
      */
     public TaskList() {
         this.list = new ArrayList<>();
     }
 
     /**
-     * Method to add an item into the Task List
+     * Method to add an item into the tasks.Task List
      *
      * @param item the item to be added.
      */
@@ -32,6 +34,14 @@ public class TaskList {
      */
     public void add(Task... items) {
         this.list.addAll(List.of(items));
+    }
+
+    /**
+     * Method to return the length of the task list.
+     * @return an integer representing the length of the list.
+     */
+    public int length() {
+        return this.list.size();
     }
 
     /**
@@ -63,9 +73,9 @@ public class TaskList {
     }
 
     /**
-     * Overridden toString method to display the TaskList as a String.
+     * Overridden toString method to display the tasks.TaskList as a String.
      *
-     * @return String representation of the TaskList.
+     * @return String representation of the tasks.TaskList.
      */
     @Override
     public String toString() {

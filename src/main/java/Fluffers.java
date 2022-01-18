@@ -1,3 +1,10 @@
+import Tasks.NoSuchTaskException;
+import Tasks.Task;
+import Tasks.TaskList;
+import Tasks.ToDoTask;
+import Tasks.DeadlineTask;
+import Tasks.EventTask;
+
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -35,12 +42,14 @@ public class Fluffers<T> {
 
     /** The private task list that each Fluffers object will keep. */
     private TaskList tasks;
+    private boolean isAwake;
 
     /**
      * Constructor to initialise Fluffers.
      */
     public Fluffers() {
         tasks = new TaskList();
+        isAwake = false;
     }
 
     /**
@@ -88,6 +97,15 @@ public class Fluffers<T> {
     }
 
     /**
+     * Method/Getter to check if Fluffers is awake.
+     *
+     * @return whether Fluffers is awake.
+     */
+    public boolean isAwake() {
+        return this.isAwake;
+    }
+
+    /**
      * Asks Fluffers to keep track of an item.
      *
      * @param toStore the item to be tracked.
@@ -103,6 +121,15 @@ public class Fluffers<T> {
      */
     private String listTasks() {
         return String.format("%s\n%s\n------------------", Fluffers.LIST_TOP, tasks.toString());
+    }
+
+    /**
+     * Method to count the number of tasks in the list.
+     *
+     * @return an integer representing the number of tasks.
+     */
+    public int countTasks() {
+        return tasks.length();
     }
 
     /**
@@ -127,6 +154,90 @@ public class Fluffers<T> {
         return this.tasks.displayTask(taskNum - 1);
     }
 
+    /**
+     * Method for Fluffers to reply and describe an invalid action that they are asked to do.
+     *
+     * This is used in place of an exception as Fluffers will be initiated in the main function,
+     * and there's no point if an exception is thrown and then caught immediately.
+     *
+     * @param message the sentence to be included in the reply. Include a fullstop.
+     * @return a String representing the invalid action reply.
+     */
+    public String invalidActionReply(String message) {
+        String invalidMsg = String.format(
+                "I can't do that! %sDid you mean to do something else?", message + " ");
+        return this.speak(invalidMsg, true);
+    }
+
+    /**
+     * Method to store the task and give a reply with fancy formatting.
+     *
+     * @param task the given task
+     * @return the reply with fancy formatting.
+     */
+    public String storeTaskAndReply(Task task) {
+        this.store(task);
+        String reply = String.format("Added: %s.\nYou now have %d tasks!", task, this.countTasks());
+        return this.speak(reply);
+    }
+
+    /**
+     * Overall Method for Fluffers to accept input and give responses.
+     *
+     * @param input the input String or command to be given to Fluffers.
+     * @return the response given with respect to the given input.
+     */
+    public String feedCommandAndReply(String input) {
+        if (!isAwake) {
+            return Fluffers.ASLEEP;
+        } else {
+            if (Objects.equals(input, "bye")) {
+                isAwake = false;
+                return this.farewell();
+
+            } else if (Objects.equals(input, "list")) {
+                return this.listTasks();
+
+            } else if (input.startsWith("mark")) {
+                int taskNum = Integer.parseInt(input.split(" ")[1]);
+                try {
+                    this.markTask(taskNum, true);
+                    return this.speak("Okay! I've marked this task as done! " + this.displayTask(taskNum));
+
+                } catch (NoSuchTaskException e) {
+                    return this.invalidActionReply(String.format("There's no task %d to mark.", taskNum));
+                }
+
+            } else if (input.startsWith("unmark")) {
+                int taskNum = Integer.parseInt(input.split(" ")[1]);
+                try {
+                    this.markTask(taskNum, false);
+                    return this.speak("This task now needs to be done! " + this.displayTask(taskNum));
+
+                } catch (NoSuchTaskException e) {
+                    return this.invalidActionReply(String.format(
+                            "There's no task %d to unmark.", taskNum));
+                }
+
+            } else if (input.startsWith("todo")){
+                ToDoTask task = ToDoTask.parseInput(input);
+                return this.storeTaskAndReply(task);
+
+            } else if (input.startsWith("deadline")){
+                DeadlineTask task = DeadlineTask.parseInput(input);
+                return this.storeTaskAndReply(task);
+
+            } else if (input.startsWith("event")) {
+                EventTask task = EventTask.parseInput(input);
+                return this.storeTaskAndReply(task);
+
+            } else {
+                return this.invalidActionReply("I don't understand what you said.");
+            }
+        }
+    }
+
+
 
 
     /**
@@ -139,50 +250,10 @@ public class Fluffers<T> {
         System.out.println(f.greet());
 
         Scanner sc = new Scanner(System.in);
-        boolean isAwake = true;
 
-        while (isAwake) {
+        while (f.isAwake()) {
             String input = sc.nextLine();
-
-            if (Objects.equals(input, "bye")) {
-                System.out.println(f.farewell());
-                isAwake = false;
-
-            } else if (Objects.equals(input, "list")) {
-                System.out.println(f.listTasks());
-
-            } else if (input.startsWith("mark")) {
-                int taskNum = Integer.parseInt(input.split(" ")[1]);
-                try {
-                    f.markTask(taskNum, true);
-                    System.out.println(f.speak(
-                            "Okay! I've marked this task as done! " + f.displayTask(taskNum)
-                    ));
-                } catch (NoSuchTaskException e) {
-                    String reply = String.format(
-                            "There's no task %d to mark. Did you mean to do something else?",
-                            taskNum);
-                    System.out.println(f.speak(reply, true));
-                }
-
-            } else if (input.startsWith("unmark")) {
-                int taskNum = Integer.parseInt(input.split(" ")[1]);
-                try {
-                    f.markTask(taskNum, false);
-                    System.out.println(f.speak(
-                            "This task now needs to be done! " + f.displayTask(taskNum)
-                    ));
-                } catch (NoSuchTaskException e) {
-                    String reply = String.format(
-                            "There's no task %d to unmark. Did you mean to do something else?",
-                            taskNum);
-                    System.out.println(f.speak(reply, true));
-                }
-
-            } else {
-                f.store(new Task(input));
-                System.out.println(f.speak("Added: " + input));
-            }
+            System.out.println(f.feedCommandAndReply(input));
         }
     }
 }

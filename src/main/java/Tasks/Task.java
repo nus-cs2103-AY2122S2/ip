@@ -1,9 +1,11 @@
+package Tasks;
+
 /**
- * This class encapsulates a Task, which contains a String and a checkbox to indicate if it is done.
+ * This class encapsulates a tasks.Task, which contains a String and a checkbox to indicate if it is done.
  *
  * @author Ong Han Yang
  */
-public class Task {
+public abstract class Task {
     /** The description of the task.*/
     private String desc;
     /** Whether the task is done or not.*/
@@ -13,10 +15,11 @@ public class Task {
 
     /**
      * Constructor to create a task.
+     * Abstract class Task so this should not be used normally.
      *
      * @param desc the description of the task.
      */
-    public Task(String desc) {
+    protected Task(String desc) {
         this.desc = desc;
         this.isDone = false;
     }
@@ -37,4 +40,5 @@ public class Task {
     public String toString() {
         return String.format("[%s] %s", isDone ? Task.TICK : " ", desc);
     }
+
 }

@@ -1,6 +1,8 @@
+package Tasks;
+
 /**
- * This class encapsulates a "No Such Task" exception, that occurs when trying to
- * access a task that is not in a TaskList.
+ * This class encapsulates a "No Such tasks.Task" exception, that occurs when trying to
+ * access a task that is not in a tasks.TaskList.
  */
 public class NoSuchTaskException extends Exception {
     /**
