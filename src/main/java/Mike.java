@@ -9,6 +9,7 @@ public class Mike {
         Mike mike = new Mike();
         mike.start();
         Scanner sc = new Scanner(System.in);
+
         while(true) {
             mike.printNextCommandInstruction();
             String inputString = sc.nextLine();
@@ -121,11 +122,6 @@ public class Mike {
         System.out.println("Enter next command:");
     }
 
-    //this has been converted to a thrown exception
-    void printInvalidCommandMessage(String str) {
-        printReply(String.format("I don't understand the command \"%s\"", str));
-    }
-
     void printGoodbyeMessage() {
         String goodbyeMessage = "Goodbye and see you again :)";
         printReply(goodbyeMessage);
@@ -181,7 +177,7 @@ public class Mike {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("Mike: Behold, your list!");
         for (Task task : listOfTasks) {
-            System.out.println(String.format("%d. %s", counter, task));
+            System.out.println(counter + ". " + task);
             counter++;
         }
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
