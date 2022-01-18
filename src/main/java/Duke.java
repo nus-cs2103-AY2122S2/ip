@@ -37,15 +37,13 @@ public class Duke {
             cmd = new ListCommand(TASKLIST);
         } else if(inputSplit.length == 2 && inputSplit[0].equals("mark") && isInteger(inputSplit[1])) {
             cmd = new MarkCommand(TASKLIST, Integer.parseInt(inputSplit[1]));
-        }
-        else if(inputSplit.length == 2 && inputSplit[0].equals("unmark") && isInteger(inputSplit[1])){
+        } else if(inputSplit.length == 2 && inputSplit[0].equals("unmark") && isInteger(inputSplit[1])){
             cmd = new UnMarkCommand(TASKLIST, Integer.parseInt(inputSplit[1]));
         } else {
             cmd = new AddCommand(TASKLIST, LISTSIZE, input);
             TASKLIST = cmd.getList();
             LISTSIZE++;
         }
-
         return cmd;
     }
 
