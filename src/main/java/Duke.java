@@ -40,19 +40,24 @@ public class Duke {
                     valid = false;
                 } else {
                     String[] split = response.split("\\s+");
-                    if (split[0].contains("mark")) {
+                    if (split[0].contains("mark") || split[0].contains("delete")) {
                         int digit = Integer.parseInt(split[1]);
                         if (digit > 0 && digit <= tasks.size()) {
                             handleResponse(split[0]);
-                            Task t = tasks.get(digit - 1);
-                            t.unmark();
-                            System.out.println(t.toString());
+                            if (split[0].contains("mark")) {
+                                Task t = tasks.get(digit - 1);
+                                t.unmark();
+                                System.out.println(t.toString());
+                            } else {
+                                System.out.println(tasks.get(digit - 1).toString());
+                                tasks.remove(digit - 1);
+                                printNumberOfTask(tasks);
+                            }
                         } else {
                             System.out.println("Invalid range! Try again.");
                         }
                     } else {
                         if (split.length > 1) {
-                            handleResponse(split[0]);
                             String[] secondSplit;
                             if (split[0].equals("todo")) {
                                 newTask = new Todo(removeSubString(response, "todo "));
@@ -68,9 +73,10 @@ public class Duke {
                                 } else { valid = false; }
                             } else { valid = false; }
                             if (valid) {
+                                handleResponse(split[0]);
                                 tasks.add(newTask);
                                 System.out.println(newTask.toString());
-                                System.out.println("Now you have " + tasks.size() +  " tasks in the list.");
+                                printNumberOfTask(tasks);
                             }
                         } else {
                             valid = false;
@@ -98,6 +104,10 @@ public class Duke {
         }
     }
 
+    public static void printNumberOfTask(ArrayList<Task> tasks) {
+        System.out.println("Now you have " + tasks.size() +  " tasks in the list.");
+    }
+
     public static String removeSubString(String response, String word) {
         return response.replace(word, "");
     }
@@ -112,8 +122,14 @@ public class Duke {
             case "unmark":
                 System.out.println("OK, I've marked this task as not done yet:");
                 break;
+            case "delete":
+                System.out.println("Noted. I've removed this task:");
+                break;
             case "todo":
+            case "deadline":
+            case "event":
                 System.out.println("Got it. I've added this task:");
+                break;
         }
     }
 }
