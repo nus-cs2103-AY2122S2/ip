@@ -1,7 +1,6 @@
 public class Task {
     private final String name;
-    private final boolean done;
-    // immutable class for best practice
+    private boolean done;
 
     public Task(String name, boolean done) {
         this.name = name;
@@ -12,8 +11,8 @@ public class Task {
         this(name, false);
     }
 
-    public Task mark() {
-        return new Task(this.name, !this.done);
+    public void mark() {
+        this.done = !this.done;
     }
 
     @Override

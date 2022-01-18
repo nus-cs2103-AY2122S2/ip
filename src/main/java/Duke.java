@@ -39,9 +39,22 @@ public class Duke {
                     sc.nextLine();
                     break;
                 default:
-                    command += sc.nextLine();
-                    toDoList.add(new Task(command));
-                    System.out.println("okie!! (✿◠‿◠)  i have added: " + command);
+                    // different cases add to different things
+                    Task newTask;
+                    if (command.equals("todo")) {
+                        command = sc.nextLine();
+                        newTask = new ToDo(command);
+                    } else if (command.equals("deadline")) {
+                        String[] s = sc.nextLine().split("/by");
+                        newTask = new Deadline(s[0], s[1]);
+                    } else {
+                        String[] s = sc.nextLine().split("/at");
+                        newTask = new Event(s[0], s[1]);
+                    }
+                    toDoList.add(newTask);
+                    System.out.println("okie!! (✿◠‿◠)  i have added: \n" +
+                            newTask.toString() + "\n" +
+                            "now there are " + toDoList.size() + " tasks in the list! get to work (ง︡'-'︠)ง");
                     break;
             }
         }
@@ -57,7 +70,7 @@ public class Duke {
     }
 
     private static void mark(int idx) {
-        toDoList.set(idx - 1, toDoList.get(idx - 1).mark()); // minus 1 to offset the indexing
+        toDoList.get(idx - 1).mark();
         if (toDoList.get(idx - 1).getDone()) {
             System.out.println("yay!!! this task is now marked as done ٩(˘◡˘)۶");
         } else {
