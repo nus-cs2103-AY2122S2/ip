@@ -67,13 +67,13 @@ public class Duke {
     }
 
     public static void printAddTaskSuccess(ArrayList<Task> tasks, Task task){
-        String content = taskLine(task, MESSAGE_TASKADD);
+        String content = taskLine(task, MESSAGE_TASKADD) + "\n";
         content += listSizeLine(tasks);
         printContent(content);
     }
 
     public static String taskLine(Task task, String message){
-        return message + "\n       [" + task.getType() + "][" + task.getStatusIcon() + "] " + task.toString() + "\n";
+        return message + "\n       [" + task.getType() + "][" + task.getStatusIcon() + "] " + task.toString();
     }
 
     public static String listSizeLine(ArrayList<Task> tasks){
