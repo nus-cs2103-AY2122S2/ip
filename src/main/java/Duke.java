@@ -12,19 +12,25 @@ public class Duke {
         Duke.log(GREETINGS);
 
         while (true) {
-            String arg = sc.nextLine();
-            String[] input = arg.split(" ");
+            String input = sc.next();
 
-            if (input[0].equals("bye")) {
+            if (input.equals("bye")) {
                 Duke.log(BYE);
                 break;
-            } else if (input[0].equals("list")){
+            } else if (input.equals("list")){
                 Duke.log(taskList.getTasks());
-            } else if (input[0].equals("mark") || input[0].equals("unmark")){
-                int taskId = Integer.parseInt(input[1]);
+            } else if (input.equals("mark") || input.equals("unmark")){
+                int taskId = sc.nextInt();
                 Duke.log(taskList.mark(taskId));
-            } else {
-                Duke.log(taskList.addTask(new Task(arg)));
+            } else if (input.equals("todo")){
+                String toDo = sc.nextLine().strip();
+                Duke.log(taskList.addTask(new ToDo(toDo)));
+            } else if (input.equals("event")) {
+                String[] eventDetails = sc.nextLine().strip().split(" /at ");
+                Duke.log(taskList.addTask(new Event(eventDetails[0], eventDetails[1])));
+            } else if (input.equals("deadline")) {
+                String[] deadlineDetails = sc.nextLine().strip().split(" /by ");
+                Duke.log(taskList.addTask(new Deadline(deadlineDetails[0], deadlineDetails[1])));
             }
         }
     }
