@@ -1,11 +1,11 @@
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.function.Consumer;
 
 public class Duke {
     private static final String SEPARATOR = "\t------------------------------------";
     private static final String BOT_NAME = "Megumin";
-    private static final String ERROR_INVALID_SYNTAX = "I do not understand you!";
+    private static final String ERROR_INVALID_COMMAND = "I do not understand you!";
+    private static final String ERROR_INVALID_SYNTAX = "There was a problem understanding you:";
 
     private static final String COMMAND_EXIT = "bye";
     private static final String COMMAND_LIST = "list";
@@ -28,7 +28,15 @@ public class Duke {
                 break;
             }
             printBlock((linePrinter) -> {
-                parseCommand(command, linePrinter);
+                try {
+                    parseCommand(command, linePrinter);
+                } catch (DukeInvalidCommandException ex) {
+                    linePrinter.print(ERROR_INVALID_COMMAND);
+                } catch (DukeIllegalArgumentException ex) {
+                    linePrinter.print(ERROR_INVALID_SYNTAX);
+                    linePrinter.print(ex.getMessage());
+
+                }
             });
 
             System.out.println();
@@ -57,7 +65,8 @@ public class Duke {
         return line;
     }
 
-    private static void parseCommand(String command, IPrintable linePrinter) {
+    private static void parseCommand(String command, IPrintable linePrinter)
+            throws DukeInvalidCommandException,DukeIllegalArgumentException {
         final String[] commandParts = command.split(" ");
         final String commandLowerCase = commandParts[0].toLowerCase();
         final String args = command.substring(commandLowerCase.length()).trim();
@@ -77,24 +86,24 @@ public class Duke {
         } else if (commandLowerCase.equals(COMMAND_CREATE_EVENT)) {
             parseCreateEvent(linePrinter, args);
         } else {
-            linePrinter.print(ERROR_INVALID_SYNTAX);
+            throw new DukeInvalidCommandException(String.format("No such command: %s", commandLowerCase));
         }
     }
 
-    private static void parseMarkCommand(IPrintable linePrinter, String args, boolean newState) {
+    private static void parseMarkCommand(IPrintable linePrinter, String args, boolean newState)
+            throws DukeIllegalArgumentException {
         // Syntax Checking
         int taskIndex = -1;
         try {
             taskIndex = Integer.parseInt(args);
         } catch (NumberFormatException ex) {
-            linePrinter.print(ERROR_INVALID_SYNTAX);
-            return;
+            throw new DukeIllegalArgumentException("Task Number must be a number");
         }
 
         // Note that task storage uses 0-based index
         Task task = taskStore.getTaskByIndex(taskIndex - 1);
         if (task == null) {
-            linePrinter.print("Are you sure the task number is correct?");
+            throw new DukeIllegalArgumentException("No matching task with given number");
         } else {
             if (task.isDone() == newState) {
                 linePrinter.print(String.format("Task is already %s:", newState ? "done" : "not done"));
@@ -109,11 +118,11 @@ public class Duke {
         }
     }
 
-    private static void parseCreateTodo(IPrintable linePrinter, String args) {
+    private static void parseCreateTodo(IPrintable linePrinter, String args)
+            throws DukeIllegalArgumentException {
         // Syntax Check
         if (args.equals("")) {
-            linePrinter.print(ERROR_INVALID_SYNTAX);
-            return;
+            throw new DukeIllegalArgumentException("Task name cannot be empty");
         }
 
         final Task task = taskStore.addTask(new Todo(args));
@@ -122,12 +131,12 @@ public class Duke {
         linePrinter.print(String.format("Now you have %d task(s) in the list", taskStore.getTaskCount()));
     }
 
-    private static void parseCreateDeadline(IPrintable linePrinter, String args) {
+    private static void parseCreateDeadline(IPrintable linePrinter, String args)
+            throws DukeIllegalArgumentException {
         // Syntax Check
         final String[] argParts = args.split(" /by ");
         if (argParts.length < 2) {
-            linePrinter.print(ERROR_INVALID_SYNTAX);
-            return;
+            throw new DukeIllegalArgumentException("Not in the format <Task name> /by <Date>");
         }
 
         final String taskDescription = argParts[0];
@@ -138,12 +147,12 @@ public class Duke {
         linePrinter.print(String.format("Now you have %d task(s) in the list", taskStore.getTaskCount()));
     }
 
-    private static void parseCreateEvent(IPrintable linePrinter, String args) {
+    private static void parseCreateEvent(IPrintable linePrinter, String args)
+            throws DukeIllegalArgumentException {
         // Syntax Check
         final String[] argParts = args.split(" /at ");
         if (argParts.length < 2) {
-            linePrinter.print(ERROR_INVALID_SYNTAX);
-            return;
+            throw new DukeIllegalArgumentException("Not in the format <Task name> /at <Date>");
         }
 
         final String taskDescription = argParts[0];

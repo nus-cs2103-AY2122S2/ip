@@ -73,47 +73,56 @@ Enter a Command or New Task:
 
 Enter a Command or New Task:
 	------------------------------------
-	I do not understand you!
+	There was a problem understanding you:
+	Task name cannot be empty
 	------------------------------------
 
 Enter a Command or New Task:
 	------------------------------------
-	I do not understand you!
+	There was a problem understanding you:
+	Not in the format <Task name> /by <Date>
 	------------------------------------
 
 Enter a Command or New Task:
 	------------------------------------
-	I do not understand you!
+	There was a problem understanding you:
+	Not in the format <Task name> /by <Date>
 	------------------------------------
 
 Enter a Command or New Task:
 	------------------------------------
-	I do not understand you!
+	There was a problem understanding you:
+	Not in the format <Task name> /by <Date>
 	------------------------------------
 
 Enter a Command or New Task:
 	------------------------------------
-	I do not understand you!
+	There was a problem understanding you:
+	Not in the format <Task name> /by <Date>
 	------------------------------------
 
 Enter a Command or New Task:
 	------------------------------------
-	I do not understand you!
+	There was a problem understanding you:
+	Not in the format <Task name> /at <Date>
 	------------------------------------
 
 Enter a Command or New Task:
 	------------------------------------
-	I do not understand you!
+	There was a problem understanding you:
+	Not in the format <Task name> /at <Date>
 	------------------------------------
 
 Enter a Command or New Task:
 	------------------------------------
-	I do not understand you!
+	There was a problem understanding you:
+	Not in the format <Task name> /at <Date>
 	------------------------------------
 
 Enter a Command or New Task:
 	------------------------------------
-	I do not understand you!
+	There was a problem understanding you:
+	Not in the format <Task name> /at <Date>
 	------------------------------------
 
 Enter a Command or New Task:
@@ -130,22 +139,26 @@ Enter a Command or New Task:
 
 Enter a Command or New Task:
 	------------------------------------
-	I do not understand you!
+	There was a problem understanding you:
+	Task Number must be a number
 	------------------------------------
 
 Enter a Command or New Task:
 	------------------------------------
-	I do not understand you!
+	There was a problem understanding you:
+	Task Number must be a number
 	------------------------------------
 
 Enter a Command or New Task:
 	------------------------------------
-	Are you sure the task number is correct?
+	There was a problem understanding you:
+	No matching task with given number
 	------------------------------------
 
 Enter a Command or New Task:
 	------------------------------------
-	Are you sure the task number is correct?
+	There was a problem understanding you:
+	No matching task with given number
 	------------------------------------
 
 Enter a Command or New Task:
