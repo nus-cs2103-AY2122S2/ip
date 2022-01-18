@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 
@@ -44,6 +45,11 @@ public class Duke {
         String userInput = sc.nextLine();
 
         while (!isBye) {
+            /**
+             * A string to display the remaining task number
+             */
+            String displayTaskAmount = String.format("Now you have %d tasks in the list.", count + 1);
+
             if (userInput.equals("bye")) {
                 isBye = true;
 
@@ -53,16 +59,75 @@ public class Duke {
             } else {
                 // storing input task in todoList
                 String[] userInputArr = userInput.split(" ");
+                String userCommand = userInputArr[0];
+                String userInputTask = String.join(" ", Arrays.copyOfRange(userInputArr, 1, userInputArr.length));
 
-                switch (userInputArr[0]) {
+                switch (userCommand) {
                     case "list":
                         System.out.println(lines);
                         System.out.println("    Here are the tasks in your list:");
                         for (int i = 0; i < count; i++) {
-                            String display = String.format("    %d.[%s] %s", i + 1, todoList[i].getStatusIcon(), todoList[i].toString());
+                            String display = String.format("    %d.%s", i + 1, todoList[i].toString());
                             System.out.println(display);
                         }
                         System.out.println(lines);
+                        break;
+
+                    case "todo":
+                        System.out.println(lines);
+
+                        // adding task to todoList
+                        Todo userToDoTask = new Todo(userInputTask);
+                        todoList[count] = userToDoTask;
+
+                        // display to do task
+                        System.out.println("    Got it. I've added this task:");
+                        System.out.println("        " + userToDoTask.toString());
+                        System.out.println("    " + displayTaskAmount);
+                        System.out.println(lines);
+
+                        count++;
+                        break;
+
+                    case "deadline":
+                        System.out.println(lines);
+
+                        // splitting deadline into description and by
+                        String[] deadlineTaskArr = userInputTask.split(" /by ");
+                        String deadlineDescription = deadlineTaskArr[0];
+                        String by = deadlineTaskArr[1];
+
+                        // adding task to todoList
+                        Deadline userDeadlineTask = new Deadline(deadlineDescription, by);
+                        todoList[count] = userDeadlineTask;
+
+                        // displaying
+                        System.out.println("    Got it. I've added this task:");
+                        System.out.println("        " + userDeadlineTask.toString());
+                        System.out.println("    " + displayTaskAmount);
+                        System.out.println(lines);
+
+                        count++;
+                        break;
+
+                    case "event":
+                        System.out.println(lines);
+
+                        // splitting event into description and dateTime
+                        String[] eventTaskArr = userInputTask.split(" /at ");
+                        String eventDescription = eventTaskArr[0];
+                        String eventDateTime = eventTaskArr[1];
+
+                        // adding task to todoList
+                        Event userEventTask = new Event(eventDescription, eventDateTime);
+                        todoList[count] = userEventTask;
+
+                        System.out.println("    Got it. I've added this task:");
+                        System.out.println("        " + userEventTask.toString());
+                        System.out.println("    " + displayTaskAmount);
+                        System.out.println(lines);
+
+                        count++;
                         break;
 
                     case "mark":
@@ -73,7 +138,7 @@ public class Duke {
                             System.out.println(lines);
                             System.out.println("    Nice! I've marked this task as done: ");
 
-                            String taskString = String.format("[%s] %s", todoList[taskToMark - 1].getStatusIcon(), todoList[taskToMark - 1].toString());
+                            String taskString = String.format("%s", todoList[taskToMark - 1].toString());
                             System.out.println("    " + taskString);
                             System.out.println(lines);
                         } else {
@@ -98,7 +163,7 @@ public class Duke {
                         System.out.println(lines);
                         System.out.println("    OK, I've marked this task as not done yet:");
 
-                        String taskString = String.format("[%s] %s", todoList[taskToUnmark - 1].getStatusIcon(), todoList[taskToUnmark - 1].toString());
+                        String taskString = String.format("%s", todoList[taskToUnmark - 1].toString());
                         System.out.println("    " + taskString);
                         System.out.println(lines);
                         break;
