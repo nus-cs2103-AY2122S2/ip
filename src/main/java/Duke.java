@@ -7,20 +7,35 @@ public class Duke {
     public static String[] openingMessage = new String[] {"Hello! I'm Duke", "What can I do for you?"};
     public static String closingMessage = "Bye. Hope to see you again soon!";
 
+    public static ArrayList<String> allTasks = new ArrayList<>();
+
     public static void printIndent(String s) {
         System.out.println(indent + s);
     }
 
-    public static void printWithSeparator(String message) {
+    public static void prettyPrint(String s) {
         printIndent(separator);
-        printIndent(message);
+        printIndent(s);
         printIndent(separator + "\n");
     }
 
-    public static void printWithSeparator(String[] messages) {
+    public static void prettyPrint(String[] messages) {
         printIndent(separator);
         for (String message : messages) printIndent(message);
         printIndent(separator + "\n");
+    }
+
+    public static void displayTasks() {
+        printIndent(separator);
+        for (int i = 0; i < allTasks.size(); i++) {
+            printIndent(String.format("%d. %s", i+1, allTasks.get(i)));
+        }
+        printIndent(separator + "\n");
+    }
+
+    public static void addTask(String task) {
+        allTasks.add(task);
+        prettyPrint(String.format("added: %s", task));
     }
 
     public static void main(String[] args) {
@@ -32,19 +47,26 @@ public class Duke {
 
         // introduction messages
         System.out.println(logo);
-        printWithSeparator(openingMessage);
+        prettyPrint(openingMessage);
 
         // read input
         Scanner sc = new Scanner(System.in);
         String userInput;
-        while (true) {
+        boolean finished = false;
+        while (!finished) {
             userInput = sc.nextLine();
-            if (userInput.equals("bye")) {
-                printWithSeparator(closingMessage);
-                break;
-            }
-            printWithSeparator(userInput);
-        }
 
+            switch (userInput) {
+                case "bye":
+                    prettyPrint(closingMessage);
+                    finished = true;
+                    break;
+                case "list":
+                    displayTasks();
+                    break;
+                default:
+                    addTask(userInput);
+            }
+        }
     }
 }
