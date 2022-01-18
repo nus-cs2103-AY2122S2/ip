@@ -22,20 +22,24 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         label:
         while (sc.hasNext()) {
-            String command = sc.nextLine();
+            String command = sc.next();
             switch (command) {
                 case "bye":
                     break label;
                 case "list":
                     displayList();
+                    sc.nextLine();
                     break;
                 case "blah":
                     System.out.println("blah");
+                    sc.nextLine();
                     break;
-                case "mark":
+                case "mark": case "unmark":
                     mark(sc.nextInt());
+                    sc.nextLine();
                     break;
                 default:
+                    command += sc.nextLine();
                     toDoList.add(new Task(command));
                     System.out.println("okie!! (✿◠‿◠)  i have added: " + command);
                     break;
@@ -45,12 +49,20 @@ public class Duke {
 
     private static void displayList() {
         int number = 1;
+        System.out.println("here are your tasks ☜(ˆ▿ˆc)");
         for (Task item : toDoList) {
             System.out.println(number + ". " + item.toString());
+            number++;
         }
     }
 
     private static void mark(int idx) {
         toDoList.set(idx - 1, toDoList.get(idx - 1).mark()); // minus 1 to offset the indexing
+        if (toDoList.get(idx - 1).getDone()) {
+            System.out.println("yay!!! this task is now marked as done ٩(˘◡˘)۶");
+        } else {
+            System.out.println("this task is now marked as not done yet... do it soon! ᕙ(`▿´)ᕗ");
+        }
+        System.out.println(toDoList.get(idx - 1).toString());
     }
 }
