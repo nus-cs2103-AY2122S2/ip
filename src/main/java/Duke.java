@@ -66,7 +66,7 @@ public class Duke {
                 task = new Todo(str.substring(5));
                 break;
             case ("deadline") :
-                task = new Deadline(str.substring(9, str.lastIndexOf(" /by ")), str.substring(str.lastIndexOf(" /by " + 5)));
+                task = new Deadline(str.substring(9, str.lastIndexOf(" /by ")), str.substring(str.lastIndexOf(" /by ") + 5));
                 break;
             case ("event") :
                 task = new Event(str.substring(6, str.lastIndexOf(" /at ")), str.substring(str.lastIndexOf(" /at ") + 5));
