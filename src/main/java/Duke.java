@@ -23,12 +23,11 @@ public class Duke {
             try {
                 String input = sc.nextLine();
                 cmd = processInput(input);
+                cmd.execute();
                 if (cmd.ends()) {
-                    cmd.execute();
                     break;
                 }
-                cmd.execute();
-            } catch (DukeExceptions e){
+            } catch (DukeException e){
                 e.printError();
             }
         }
