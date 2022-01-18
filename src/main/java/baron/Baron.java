@@ -1,16 +1,21 @@
 package baron;
 
 import baron.commands.Command;
-import baron.commands.CommandParser;
+import baron.commands.CommandManager;
 import baron.printer.Printer;
+import baron.tasks.TaskManager;
 
 import java.util.Scanner;
 
 public class Baron {
     Scanner inputScanner;
+    TaskManager taskManager;
+    CommandManager commandManager;
 
     public Baron() {
-        inputScanner = new Scanner(System.in);
+        this.inputScanner = new Scanner(System.in);
+        this.taskManager = new TaskManager();
+        this.commandManager = new CommandManager(this.taskManager);
     }
 
     private void start() {
@@ -21,7 +26,7 @@ public class Baron {
         do {
             String fullCommand = inputScanner.nextLine();
 
-            command = CommandParser.parseCommand(fullCommand);
+            command = commandManager.parseCommand(fullCommand);
             Printer.printCommandOutput(command.execute());
         }
         while (!command.isByeCommand());
