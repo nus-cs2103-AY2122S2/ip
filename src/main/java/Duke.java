@@ -24,7 +24,7 @@ public class Duke {
             switch (command) {
                 case "list":
                     System.out.println(bar);
-                    System.out.println(indent + "Here are the tasks in your list: ");
+                    System.out.println(indent + "Here are the tasks in your list:");
                     displayList(count, listOfTasks);
                     System.out.println(bar);
                     break;
