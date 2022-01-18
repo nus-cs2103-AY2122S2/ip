@@ -60,17 +60,11 @@ public class Duke {
             return str;
         }
     }
+
     public static void main(String[] args) {
-        /*
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        */
 
         FastIO io = new FastIO();
+        ArrayList<String> tasks = new ArrayList<>();
 
         greet();
         boolean exited = false;
@@ -79,12 +73,26 @@ public class Duke {
             String input = io.nextLine();
             if (input.equals("bye")) {
                 exited = true;
+            } else if (input.equals("list")) {
+                list(tasks);
             } else {
-                echo(input);
+                store(tasks, input);
             }
         }
-
         bye();
+    }
+
+    public static <T> void store(Collection<? super T> collection, T value) {
+        collection.add(value);
+        echo("added: " + value.toString());
+    }
+
+    public static void list(Collection<? extends Object> collection) {
+        StringBuilder sb = new StringBuilder("");
+        for (Object var : collection) {
+            sb.append(var.toString() + "\n     ");
+        }
+        echo(sb.toString().trim());
     }
 
     public static void greet() {
