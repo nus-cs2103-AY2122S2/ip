@@ -8,13 +8,14 @@ public class Duke {
 
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String bot = "Hello! I'm Duke\nWhat can I do for you?";
+        String bot = "Hello! I'm Duke\nHere is a list of commands for your reference!\n";
         String response = "";
 
         ArrayList<Task> tasks = new ArrayList<Task>();
 
         printLines();
         System.out.println(bot);
+        printHelp();
         printLines();
 
         do {
@@ -54,7 +55,7 @@ public class Duke {
                                 printNumberOfTask(tasks);
                             }
                         } else {
-                            System.out.println("Invalid range! Try again.");
+                            System.out.println("Task does not exist! Try again.");
                         }
                     } else {
                         if (split.length > 1) {
@@ -98,9 +99,24 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
+    public static void printHelp() {
+        System.out.println("1. todo [task]");
+        System.out.println("2. deadline [task] /by [date and/or time]");
+        System.out.println("3. event [task] /at [location]");
+        System.out.println("4. list");
+        System.out.println("5. mark X (mark X task as done");
+        System.out.println("6. unmark X (mark X task as undone");
+        System.out.println("7. delete X (delete X task from the list");
+    }
+
     public static void listAllTasks(ArrayList<Task> tasks) {
-        for(int i = 0; i < tasks.size(); i++) {
-            System.out.println(i + 1 + ". " + tasks.get(i).toString());
+        if (tasks.size() == 0) {
+            System.out.println("You have 0 task at the moment. Start by adding these commands:\n");
+            printHelp();
+        } else {
+            for(int i = 0; i < tasks.size(); i++) {
+                System.out.println(i + 1 + ". " + tasks.get(i).toString());
+            }
         }
     }
 
