@@ -49,9 +49,6 @@ public class Sana {
                     throw new IncompleteCommandException();
                 }
                 int taskIndex = Integer.parseInt(substringArr[1]) - 1;
-                if (taskIndex < 0 || taskIndex >= userTasks.size()) {
-                    throw new OutOfBoundsMarkException();
-                }
                 mark(taskIndex, userCommand.startsWith("mark"));
             } else if (userCommand.startsWith("todo ")) {
                 String taskName = userCommand.replaceFirst("todo ", "");
@@ -70,6 +67,13 @@ public class Sana {
                 }
                 String[] subStrings = temp.split(" /by ", 2);
                 addDeadline(subStrings[0], subStrings[1]);
+            } else if (userCommand.startsWith("delete ")) {
+                String[] substringArr = userCommand.split(" ", 2);
+                if (substringArr.length == 1) {
+                    throw new IncompleteCommandException();
+                }
+                int taskIndex = Integer.parseInt(substringArr[1]) - 1;
+                delete(taskIndex);
             } else {
                 throw new UnknownCommandException();
             }
@@ -77,10 +81,25 @@ public class Sana {
             System.out.println(e.getMessage());
         } catch (IncompleteCommandException e) {
             System.out.println(e.getMessage());
-        } catch (OutOfBoundsMarkException e) {
+        } catch (OutOfBoundsTaskException e) {
             System.out.println(e.getMessage());
         }
         border();
+    }
+
+    /**
+     * This method removes a task from the userTasks list
+     *
+     * @param taskIndex The index of the tast to be removed
+     */
+    private void delete(int taskIndex) throws OutOfBoundsTaskException {
+        if (taskIndex < 0 || taskIndex >= userTasks.size()) {
+            throw new OutOfBoundsTaskException();
+        }
+        System.out.println("Yay! I'll take this out!");
+        System.out.println(userTasks.get(taskIndex));
+        userTasks.remove(taskIndex);
+        taskNumberText();
     }
 
     /**
@@ -139,7 +158,10 @@ public class Sana {
      * @param taskIndex     the index of the task to be marked done
      * @param completion    the completion of the task
      */
-    private void mark(int taskIndex, boolean completion) {
+    private void mark(int taskIndex, boolean completion) throws OutOfBoundsTaskException {
+        if (taskIndex < 0 || taskIndex >= userTasks.size()) {
+            throw new OutOfBoundsTaskException();
+        }
         userTasks.get(taskIndex).setDone(completion);
         if (completion) {
             System.out.println("You've done it! Well done!");
