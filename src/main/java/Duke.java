@@ -58,7 +58,7 @@ public class Duke {
                         if (command.equals("todo")) {
                             task = new Todo(options);
                         } else if (command.equals("deadline")) {
-                            String[] splitCommand = options.split("/by");
+                            String[] splitCommand = options.split(" /by ");
                             if (splitCommand.length < 2) {
                                 throw new DukeException("No deadline time supplied");
                             }
@@ -66,7 +66,7 @@ public class Duke {
                             String byTime = splitCommand[1];
                             task = new Deadline(description, byTime);
                         } else {
-                            String[] splitCommand = options.split("/at");
+                            String[] splitCommand = options.split(" /at ");
                             if (splitCommand.length < 2) {
                                 throw new DukeException("No event time supplied");
                             }
