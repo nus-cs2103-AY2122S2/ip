@@ -13,7 +13,7 @@ public class Lister {
         tasks[count] = task;
         count++;
         System.out.println("   ________________________________________");
-        System.out.println("    Fine I'll add this task in: \n      " + task);
+        System.out.println("    Fine I'll add this task in:\n      " + task);
         if (count == 1) {
             System.out.println("    Now you have 1 task in the list. =.=");
         } else {

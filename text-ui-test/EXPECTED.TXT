@@ -1,7 +1,44 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+   ________________________________________
+    Hi I'm PaggroBot =.=
+    What do you want? =.=
+   ________________________________________
+   ________________________________________
+    Fine I'll add this task in:
+      [T][ ]  borrow book
+    Now you have 1 task in the list. =.=
+   ________________________________________
+   ________________________________________
+    Fine I'll add this task in:
+      [E][ ]  go for class (at: Mon 2-3pm)
+    Now you have 2 tasks in the list. =.=
+   ________________________________________
+   ________________________________________
+    You've finished this task. Good for you... =.=
+      [T][X]  borrow book
+   ________________________________________
+   ________________________________________
+    Fine I'll add this task in:
+      [D][ ]  finish homework (by: Tues 2pm)
+    Now you have 3 tasks in the list. =.=
+   ________________________________________
+   ________________________________________
+    You've finished this task. Good for you... =.=
+      [D][X]  finish homework (by: Tues 2pm)
+   ________________________________________
+   ________________________________________
+    1.[T][X]  borrow book
+    2.[E][ ]  go for class (at: Mon 2-3pm)
+    3.[D][X]  finish homework (by: Tues 2pm)
+   ________________________________________
+   ________________________________________
+    Marked undone. Stop slacking off... =.=
+      [D][ ]  finish homework (by: Tues 2pm)
+   ________________________________________
+   ________________________________________
+    1.[T][X]  borrow book
+    2.[E][ ]  go for class (at: Mon 2-3pm)
+    3.[D][ ]  finish homework (by: Tues 2pm)
+   ________________________________________
+   ________________________________________
+    Oh finally. Please don't come back anytime soon. =.=
+   ________________________________________
