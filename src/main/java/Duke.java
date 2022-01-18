@@ -151,6 +151,9 @@ public class Duke {
 }
 
 class Task {
+    enum Type {
+        E, T, D
+    }
 
     protected String description;
     protected boolean status;
@@ -186,7 +189,7 @@ class ToDos extends Task {
 
     @Override
     public String toString() {
-        return "[T]";
+        return "[" + Type.T + "]";
     }
 
 }
@@ -202,7 +205,7 @@ class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]";
+        return "[" + Type.D + "]";
     }
 
     public String getDate() {
@@ -226,9 +229,8 @@ class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]";
+        return "[" + Type.E + "]";
     }
-
     public String getDate() {
         return this.date;
     }
