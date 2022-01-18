@@ -62,6 +62,14 @@ public class Duke {
                 String userCommand = userInputArr[0];
                 String userInputTask = String.join(" ", Arrays.copyOfRange(userInputArr, 1, userInputArr.length));
 
+                try {
+                    UserInputTaskValidator.userCommandValidator(userCommand);
+                } catch (DukeException e) {
+                    System.out.println(lines);
+                    System.out.println("    OOPS!!! I'm sorry, but I don't know what that means.");
+                    System.out.println(lines);
+                }
+
                 switch (userCommand) {
                     case "list":
                         System.out.println(lines);
@@ -74,6 +82,17 @@ public class Duke {
                         break;
 
                     case "todo":
+
+                        // handle error from empty task description
+                        try {
+                            UserInputTaskValidator.taskDescriptionValidator(userCommand ,userInputTask);
+                        } catch (DukeException e) {
+                            System.out.println(lines);
+                            System.out.println("    OOPS!!! The description of a todo cannot be empty.");
+                            System.out.println(lines);
+                            break;
+                        }
+
                         System.out.println(lines);
 
                         // adding task to todoList
@@ -90,13 +109,42 @@ public class Duke {
                         break;
 
                     case "deadline":
-                        System.out.println(lines);
+                        // handle error from empty task description
+                        try {
+                            UserInputTaskValidator.taskDescriptionValidator(userCommand, userInputTask);
+                        } catch (DukeException e) {
+                            System.out.println(lines);
+                            System.out.println("    OOPS!!! The description of a deadline cannot be empty.");
+                            System.out.println(lines);
+                            break;
+                        }
+
+                        // handle error from empty by
+                        try {
+                            UserInputTaskValidator.deadlineTaskValidator(userInputTask);
+                        } catch (DukeException e) {
+                            System.out.println(lines);
+                            System.out.println("    OOPS!!! Deadline tasks require a by day.");
+                            System.out.println(lines);
+                            break;
+                        }
+
+                        // handle error when there is more than one by deadline day
+                        try {
+                            UserInputTaskValidator.deadlineByDayValidator(userInputTask);
+                        } catch (DukeException e) {
+                            System.out.println(lines);
+                            System.out.println("    OOPS!!! Deadline tasks can only have one by day.");
+                            System.out.println(lines);
+                            break;
+                        }
 
                         // splitting deadline into description and by
                         String[] deadlineTaskArr = userInputTask.split(" /by ");
                         String deadlineDescription = deadlineTaskArr[0];
                         String by = deadlineTaskArr[1];
 
+                        System.out.println(lines);
                         // adding task to todoList
                         Deadline userDeadlineTask = new Deadline(deadlineDescription, by);
                         todoList[count] = userDeadlineTask;
@@ -111,8 +159,38 @@ public class Duke {
                         break;
 
                     case "event":
-                        System.out.println(lines);
+                        // handle error from empty task description
+                        try {
+                            UserInputTaskValidator.taskDescriptionValidator(userCommand, userInputTask);
+                        } catch (DukeException e) {
+                            System.out.println(lines);
+                            System.out.println("    OOPS!!! The description of an event cannot be empty.");
+                            System.out.println(lines);
+                            break;
+                        }
 
+                        // handle error when there is no datTime
+                        try {
+                            UserInputTaskValidator.eventTaskValidator(userInputTask);
+                        } catch (DukeException e) {
+                            System.out.println(lines);
+                            System.out.println("    OOPS!!! Event tasks require an at date and time.");
+                            System.out.println(lines);
+                            break;
+                        }
+
+                        // handle error when there is more than one dateTime
+                        try {
+                            UserInputTaskValidator.eventAtDateTimeValidator(userInputTask);
+                        } catch (DukeException e) {
+                            System.out.println(lines);
+                            System.out.println("    OOPS!!! Event tasks can only have one at date and time.");
+                            System.out.println(lines);
+                            break;
+                        }
+
+                        System.out.println(lines);
+                        
                         // splitting event into description and dateTime
                         String[] eventTaskArr = userInputTask.split(" /at ");
                         String eventDescription = eventTaskArr[0];
@@ -131,7 +209,6 @@ public class Duke {
                         break;
 
                     case "mark":
-
                         int taskToMark = Integer.parseInt(userInputArr[1]);
                         todoList[taskToMark - 1].markAsDone();
 
@@ -154,20 +231,6 @@ public class Duke {
                         String taskString = String.format("%s", todoList[taskToUnmark - 1].toString());
                         System.out.println("    " + taskString);
                         System.out.println(lines);
-                        break;
-
-                    default:
-                        // creating task
-                        Task inputTask = new Task(userInput);
-
-                        // storing input task
-                        todoList[count] = inputTask;
-
-                        // displaying input task
-                        System.out.println(lines);
-                        System.out.println("    added: " + inputTask.toString());
-                        System.out.println(lines);
-                        count++;
                         break;
                 }
                 userInput = sc.nextLine();
