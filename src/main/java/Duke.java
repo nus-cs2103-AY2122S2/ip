@@ -44,13 +44,13 @@ public class Duke {
     public static void main(String[] args) {
         greet();
         Scanner sc = new Scanner(System.in);
-        label:
+        whileLoop:
         while (sc.hasNext()) {
             String usrInput = sc.next();
             switch (usrInput) {
                 case "bye":
                     exit();
-                    break label;
+                    break whileLoop;
                 case "list":
                     list();
                     break;
