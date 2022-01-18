@@ -8,7 +8,7 @@ public class Duke {
 
         System.out.println(chatBox("Hello! I'm Duke\n    What can I do for you?"));
 
-        String[] texts = new String[100];
+        Task[] tasks = new Task[100];
         String tab = "    ";
 
         int items = 0;
@@ -16,23 +16,39 @@ public class Duke {
         String command = sc.nextLine();
 
         while (!command.equals("bye")) {
-            if (!command.equals("list")) {
+            if (!command.equals("list") &&
+                    !command.split(" ")[0].equals("mark") &&
+                    !command.split(" ")[0].equals("unmark")) {
                 items += 1;
-                texts[items] = command;
+                tasks[items] = new Task(command);
                 System.out.println(chatBox("added: " + command));
                 System.out.println();
 
             } else {
-                String lists = "";
-                for (int i = 1; i <= items; i++) {
-                    if (i != 1) {
-                        lists += "\n" + tab;
-                    }
-                    lists += String.format("%d. %s", i, texts[i]);
+                if (command.equals("list")){
+                    String lists = "";
+                    for (int i = 1; i <= items; i++) {
+                        if (i != 1) {
+                            lists += "\n" + tab;
+                        }
+                        lists += String.format("%d. %s", i, tasks[i].toString());
 
+                    }
+
+                    System.out.println(chatBox(lists));
+
+                } else if (command.split(" ")[0].equals("mark")) {
+                    int task = Integer.parseInt(command.split(" ")[1]);
+                    tasks[task].markAsDone();
+                    System.out.println(chatBox("Nice! I've marked this task as done:\n      "
+                            + tasks[task].toString()));
+                } else if (command.split(" ")[0].equals("unmark")) {
+                    int task = Integer.parseInt(command.split(" ")[1]);
+                    tasks[task].markAsUndone();
+                    System.out.println(chatBox("OK, I've marked this task as not done yet:\n      "
+                            + tasks[task].toString()));
                 }
 
-                System.out.println(chatBox(lists));
             }
 
 
