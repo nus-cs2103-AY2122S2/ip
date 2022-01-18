@@ -9,29 +9,29 @@ public class Duke {
             + lineDivider;
     static String goodBye = "Bye. Hope to see you again soon!";
     static String added = lineDivider + "added: " + "%s" + "\n" + lineDivider;
+    static String addedTask = lineDivider + "Got it. I've added this task:\n" +
+            "   %s" + "\nNow you have %d tasks in the list.\n" + lineDivider;
 
-    public static void listOut(List list) {
-        int sizeOfList = list.size();
+    public static void listOut(Task[] list, int n) {
         System.out.printf(lineDivider + "Here are the tasks in your list:\n");
-        for (int i = 0; i < sizeOfList; i++) {
-            Task curr = (Task) list.get(i);
-            System.out.printf("%d.[%s] " + "%s\n", i+1, curr.getStatus(), curr.getDescription());
+        for (int i = 0; i < n; i++) {
+            System.out.printf("%d." + list[i].toString() + "\n", i+1);
         }
     }
 
-    public static void markTask(List list, String echo, int indexOfSpace) {
+    public static void markTask(Task[] list, String echo, int indexOfSpace) {
         int targetIndex = Integer.parseInt(echo.substring(indexOfSpace + 1));
-        Task curr = (Task) list.get(targetIndex - 1);
+        Task curr = list[targetIndex - 1];
         curr.mark();
         String status = curr.getStatus();
         String description = curr.getDescription();
         System.out.printf(lineDivider + "Nice! I've marked this task as done:\n" +
-                "[%s] " + "%s\n" + lineDivider, status, description);
+                "[%s] " + " %s\n" + lineDivider, status, description);
     }
 
-    public static void unMarkTask(List list, String echo, int indexOfSpace) {
+    public static void unMarkTask(Task[] list, String echo, int indexOfSpace) {
         int targetIndex = Integer.parseInt(echo.substring(indexOfSpace + 1));
-        Task curr = (Task) list.get(targetIndex - 1);
+        Task curr = list[targetIndex - 1];
         curr.unMark();
         String status = curr.getStatus();
         String description = curr.getDescription();
@@ -39,14 +39,40 @@ public class Duke {
                 "[%s] " + "%s\n" + lineDivider, status, description);
     }
 
-    public static void addTask(List list, String echo) {
+    public static void addTask(Task[] list, int n, String echo) {
         Task newTask = new Task(echo);
-        list.add(newTask);
-        System.out.printf(added, echo);
+        list[n] = newTask;
+        System.out.printf(addedTask, echo, n+1);
+    }
+
+    public static void addDeadline(Task[] list, int n, String info) {
+        int indexOfSpace = info.indexOf("/");
+        String description = info.substring(0, indexOfSpace - 1);
+        String date = info.substring(indexOfSpace + 4);
+        Deadline curr = new Deadline(description, date);
+        list[n] = curr;
+        System.out.printf(addedTask, curr.toString(), n+1);
+    }
+
+    public static void addEvent(Task[] list, int n, String info) {
+        int indexOfSpace = info.indexOf("/");
+        String description = info.substring(0, indexOfSpace - 1);
+        String date = info.substring(indexOfSpace + 4);
+        Event curr = new Event(description, date);
+        list[n] = curr;
+        System.out.printf(addedTask, curr.toString(), n+1);
+    }
+
+    public static void addTodo(Task[] list, int n,String info) {
+        String description = info;
+        Todo curr = new Todo(description);
+        list[n] = curr;
+        System.out.printf(addedTask, curr.toString(), n+1);
     }
 
     public static void main(String[] args) {
-        List<Task> list = new ArrayList<>(100);
+        Task[] listOfTasks = new Task[100];
+        int n = 0;
 
         System.out.printf(greet);
         while (true) {
@@ -56,21 +82,32 @@ public class Duke {
                 break;
             }
             if (echo.equalsIgnoreCase("list")) {
-                listOut(list);
+                listOut(listOfTasks, n);
                 System.out.printf(lineDivider);
                 continue;
             } else if (echo.contains(" ")) {
                 int indexOfSpace = echo.indexOf(" ");
                 String wordOne = echo.substring(0, indexOfSpace);
                 if (wordOne.equalsIgnoreCase("mark")) {
-                    markTask(list, echo, indexOfSpace);
+                    markTask(listOfTasks, echo, indexOfSpace);
                     continue;
                 } else if (wordOne.equalsIgnoreCase("unmark")) {
-                    unMarkTask(list, echo, indexOfSpace);
+                    unMarkTask(listOfTasks, echo, indexOfSpace);
+                    continue;
+                } else if (wordOne.equalsIgnoreCase("deadline")) {
+                    addDeadline(listOfTasks, n, echo.substring(indexOfSpace + 1));
+                    n = n+1;
+                    continue;
+                } else if (wordOne.equalsIgnoreCase("event")) {
+                    addEvent(listOfTasks, n, echo.substring(indexOfSpace + 1));
+                    n = n+1;
+                    continue;
+                } else if (wordOne.equalsIgnoreCase("todo")) {
+                    addTodo(listOfTasks, n, echo.substring(indexOfSpace + 1));
+                    n = n+1;
                     continue;
                 }
             }
-            addTask(list, echo);
         }
         System.out.printf(lineDivider + goodBye + "\n" + lineDivider);
     }

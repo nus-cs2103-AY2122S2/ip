@@ -8,7 +8,7 @@ public class Task {
     }
 
     public String getStatus() {
-        return (isDone ? "X" : "");
+        return (isDone ? "X" : " ");
     }
 
     public void mark() {
@@ -21,5 +21,9 @@ public class Task {
 
     public String getDescription() {
         return this.description;
+    }
+
+    public String toString() {
+        return "[" + getStatus() +"] " + description;
     }
 }
