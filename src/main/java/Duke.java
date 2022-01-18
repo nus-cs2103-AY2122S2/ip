@@ -106,6 +106,7 @@ public class Duke {
             System.out.println(delimiter);
             System.out.print("Enter your command: ");
             String command = scanner.nextLine();
+            System.out.println();
             if (command.equals("bye")) {
                 isQuitting = true;
             } else {
