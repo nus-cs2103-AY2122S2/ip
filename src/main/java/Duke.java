@@ -49,6 +49,9 @@ public class Duke {
                 case "unmark":
                     list.get(Integer.parseInt(userInput[1]) - 1).markTask(false);
                     break;
+                case "delete":
+                    delete(Integer.parseInt(userInput[1]) - 1);
+                    break;
                 default:
                     addList(userInput);
             }
@@ -113,6 +116,12 @@ public class Duke {
 
     private boolean isCommandRecognized(String input) {
         String temp = input.toLowerCase();
-        return temp.equals("todo") || temp.equals("event") || temp.equals("deadline");
+        return temp.equals("todo") || temp.equals("event") || temp.equals("deadline") || temp.equals("delete");
+    }
+
+    public void delete(int pos) {
+        String description = this.list.get(pos).toString();
+        this.list.remove(pos);
+        System.out.println("Noted. I've removed this task:\n" + description + "\nNow you have " + this.list.size() + " tasks in the list.");
     }
 }
