@@ -24,4 +24,7 @@ event
 event newtask
 event newtask /at
 event /at somwhere
+delete 3
+delete 2 
+delete 1
 bye

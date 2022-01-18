@@ -80,5 +80,20 @@ Task Name must be provided!
 Please specify deadline date after /at!
 Task Name must be provided!
     ==========================================
+    Deleted Task:
+     [E][ ] project meeting  (at: Aug 6th 2-4pm)
+    There are now 7 task(s) in the list.
+    ==========================================
+    ==========================================
+    Deleted Task:
+     [D][ ] return book  (by: June 6th)
+    There are now 6 task(s) in the list.
+    ==========================================
+    ==========================================
+    Deleted Task:
+     [T][X] read book
+    There are now 5 task(s) in the list.
+    ==========================================
+    ==========================================
     Bye. Hope to see you again soon!
     ==========================================
