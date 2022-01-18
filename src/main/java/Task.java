@@ -1,10 +1,20 @@
 public class Task {
   private final String name;
-  private int status; // 0 for undone; 1 for done
+  private char type; // T: ToDo, D: Deadlines, E: Events
+  private String date;
+  private int status; // 0: undone, 1: done
+  protected static int noOfTasks = 0;
 
-  Task(String s) {
-    this.name = s;
+  Task(String taskName, char taskType, String date) {
+    this.name = taskName;
+    this.type = taskType;
+    this.date = date;
     this.status = 0;
+    Task.noOfTasks++;
+  }
+
+  public static int getNoOfTasks() {
+    return Task.noOfTasks;
   }
 
   public boolean isDone() {
@@ -21,8 +31,10 @@ public class Task {
 
   @Override
   public String toString() {
-    return "[" +
-            (this.isDone() ? "X" : " ") // get the icon according to the status
-            + "] " + this.name;
+    return "[" + this.type + "]["
+            + (this.isDone() ? "X" : " ") // get the icon according to the status
+            + "] " + this.name
+            + (this.type == 'T' ? "" :
+                (this.type == 'D' ? "(by: " + this.date + ")" : "(at: " + this.date + ")"));
   }
 }
