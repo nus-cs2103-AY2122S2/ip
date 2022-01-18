@@ -16,11 +16,13 @@ public class Task {
         return "[" + status + "] " + name;
     }
 
-    public void markAsDone() {
+    public void markAsDone() throws InvalidActionException {
+        if (isDone) { throw new InvalidActionException("Task already done!"); }
         this.isDone = true;
     }
 
-    public void markUndone() {
+    public void markUndone() throws InvalidActionException {
+        if (!isDone) { throw new InvalidActionException("Task already not done!"); }
         this.isDone = false;
     }
 }

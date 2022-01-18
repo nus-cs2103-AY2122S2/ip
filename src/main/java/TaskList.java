@@ -7,10 +7,6 @@ public class TaskList {
         this.list = new ArrayList<>();
     }
 
-    public void addItem(String s) {
-        list.add(new Task(s));
-    }
-
     public void addTodo(String s) {
         list.add(new Todo(s));
     }
@@ -23,22 +19,20 @@ public class TaskList {
         list.add(new Deadline(s,time));
     }
 
-    public void markItemDone(int index) {
+    public String getLast() { return list.get(list.size() - 1).toString(); }
+
+    public int size() { return list.size(); }
+
+    public String markItemDone(int index) throws InvalidActionException {
         Task t = list.get(index);
         t.markAsDone();
-        System.out.println("Task done! \\(n_n)/");
-        System.out.println("  " + t);
+        return "Task done! \\(n_n)/\n " + t.toString();
     }
 
-    public void markItemUndone(int index) {
+    public String markItemUndone(int index) throws InvalidActionException {
         Task t = list.get(index);
         t.markUndone();
-        System.out.println("Task not done =(");
-        System.out.println("  " + t);
-    }
-
-    public String getLast() {
-        return list.get(list.size() - 1).toString();
+        return "Task not done =(\n " + t.toString();
     }
 
     public void printItems() {
@@ -54,9 +48,5 @@ public class TaskList {
                 counter++;
             }
         }
-    }
-
-    public int size() {
-        return list.size();
     }
 }
