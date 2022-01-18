@@ -111,16 +111,17 @@ public class Dingus {
 	public static void todo(String input) throws DingusException {
 		// Adding Todo
 		String currTask = input.substring(4);
+		Task curr = new Todo(currTask);
 		if (currTask.isEmpty()) {
 			throw new DingusException("So doing NOTHING is a task?");
 		} else {
-			tasks.add(new Todo(currTask));
+			tasks.add(curr);
 		}
 		System.out.println(startLine + "\nStop troubling me, I've already added this task:\n" + currTask
 				+ "\nCan you even finish " + tasks.size() + " tasks?\n" + endLine);
 		System.out.println(startLine);
 		System.out.println("Stop troubling me, I've already added this task:");
-		System.out.println(currTask);
+		System.out.println(curr);
 		System.out.println((tasks.size() > 1) ? "Can you even finish " + tasks.size() + " tasks?"
 				: "Can you even finish " + tasks.size() + " task?");
 		System.out.println(endLine);
@@ -158,7 +159,7 @@ public class Dingus {
 			throw new DingusException("Are you incapable of understanding what's an integer?");
 		}
 
-		if (Integer.parseInt(info[1]) > tasks.size()) {
+		if (Integer.parseInt(info[1]) > tasks.size() || Integer.parseInt(info[1]) < 0) {
 			throw new DingusException("Can't you count? How am I supposed to delete something that doesn't exist?");
 		} else {
 			int pos = Integer.parseInt(info[1]) - 1;
@@ -185,7 +186,7 @@ public class Dingus {
 			throw new DingusException("Are you incapable of understanding what's an integer?");
 		}
 
-		if (Integer.parseInt(info[1]) > tasks.size()) {
+		if (Integer.parseInt(info[1]) > tasks.size() || Integer.parseInt(info[1]) < 0) {
 			throw new DingusException("Can't you count? How am I supposed to mark something that doesn't exist?");
 		} else {
 			int pos = Integer.parseInt(info[1]) - 1;
@@ -215,7 +216,7 @@ public class Dingus {
 			throw new DingusException("Are you incapable of understanding what's an integer?");
 		}
 
-		if (Integer.parseInt(info[1]) > tasks.size()) {
+		if (Integer.parseInt(info[1]) > tasks.size() || Integer.parseInt(info[1]) < 0) {
 			throw new DingusException("Can't you count? How am I supposed to unmark something that doesn't exist?");
 		} else {
 			int pos = Integer.parseInt(info[1]) - 1;
