@@ -59,7 +59,7 @@ public class Duke {
                         System.out.println(lines);
                         System.out.println("    Here are the tasks in your list:");
                         for (int i = 0; i < count; i++) {
-                            String display = String.format("    %d.[%s] %s", i + 1, todoList[i].getStatusIcon(), todoList[i].description);
+                            String display = String.format("    %d.[%s] %s", i + 1, todoList[i].getStatusIcon(), todoList[i].toString());
                             System.out.println(display);
                         }
                         System.out.println(lines);
@@ -73,7 +73,7 @@ public class Duke {
                             System.out.println(lines);
                             System.out.println("    Nice! I've marked this task as done: ");
 
-                            String taskString = String.format("[%s] %s", todoList[taskToMark - 1].getStatusIcon(), todoList[taskToMark - 1].description);
+                            String taskString = String.format("[%s] %s", todoList[taskToMark - 1].getStatusIcon(), todoList[taskToMark - 1].toString());
                             System.out.println("    " + taskString);
                             System.out.println(lines);
                         } else {
@@ -85,7 +85,7 @@ public class Duke {
 
                             // displaying input task
                             System.out.println(lines);
-                            System.out.println("    added: " + inputTask.description);
+                            System.out.println("    added: " + inputTask.toString());
                             System.out.println(lines);
                             count++;
                         }
@@ -98,7 +98,7 @@ public class Duke {
                         System.out.println(lines);
                         System.out.println("    OK, I've marked this task as not done yet:");
 
-                        String taskString = String.format("[%s] %s", todoList[taskToUnmark - 1].getStatusIcon(), todoList[taskToUnmark - 1].description);
+                        String taskString = String.format("[%s] %s", todoList[taskToUnmark - 1].getStatusIcon(), todoList[taskToUnmark - 1].toString());
                         System.out.println("    " + taskString);
                         System.out.println(lines);
                         break;
@@ -112,7 +112,7 @@ public class Duke {
 
                         // displaying input task
                         System.out.println(lines);
-                        System.out.println("    added: " + inputTask.description);
+                        System.out.println("    added: " + inputTask.toString());
                         System.out.println(lines);
                         count++;
                         break;
