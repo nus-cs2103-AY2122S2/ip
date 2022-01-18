@@ -11,9 +11,29 @@ Hello from
     ____________________________________
     ____________________________________
 
+    There is no description after the event command :(
+    ____________________________________
+    ____________________________________
+
+    There is no description after the todo command :(
+    ____________________________________
+    ____________________________________
+
+    There is no description after the "deadline" command :(
+    ____________________________________
+    ____________________________________
+
     OK you better do this today, or else! Added task:
-    [T][ ] borrow book
+    [T][ ]  borrow book
     Now you have 1 in the list.
+    ____________________________________
+    ____________________________________
+
+    I cannot tell the time of the event, put the time after a "/"
+    ____________________________________
+    ____________________________________
+
+    There is nothing after the "/"! When is this event happening?
     ____________________________________
     ____________________________________
 
@@ -22,24 +42,65 @@ Hello from
     Now you have 2 in the list.
     ____________________________________
     ____________________________________
-    added: read book
+    Invalid command
+    ____________________________________
+    ____________________________________
+
+    I cannot tell the due date and time, put it after a "/"
+    ____________________________________
+    ____________________________________
+
+    There is nothing after the "/"! When is this due?
     ____________________________________
     ____________________________________
 
     Oh boy, another deadline? Added task:
     [D][ ] return book (by: Sunday)
-    Now you have 4 in the list.
-    ____________________________________
-    ____________________________________
-    Finally... I've marked this task as done:
-      [D][X] return book (by: Sunday)
+    Now you have 3 in the list.
     ____________________________________
     ____________________________________
 
-    1.[T][ ] borrow book
+    1.[T][ ]  borrow book
     2.[T][ ] pokemon release (at: 28th jan)
-    3.[ ] read book
-    4.[D][X] return book (by: Sunday)
+    3.[D][ ] return book (by: Sunday)
+    ____________________________________
+    ____________________________________
+
+    Invalid number man, cannot be 0 or negative
+    ____________________________________
+    ____________________________________
+
+    Finally... I've marked this task as done:
+      [T][X] pokemon release (at: 28th jan)
+    ____________________________________
+    ____________________________________
+
+    Number too big, count properly!
+    ____________________________________
+    ____________________________________
+
+    1.[T][ ]  borrow book
+    2.[T][X] pokemon release (at: 28th jan)
+    3.[D][ ] return book (by: Sunday)
+    ____________________________________
+    ____________________________________
+
+    Invalid number man, cannot be 0 or negative
+    ____________________________________
+    ____________________________________
+
+    Could you be any more lazy? I've marked this task as not done yet:
+      [T][ ] pokemon release (at: 28th jan)
+    ____________________________________
+    ____________________________________
+
+    Number too big, count properly!
+    ____________________________________
+    ____________________________________
+
+    1.[T][ ]  borrow book
+    2.[T][ ] pokemon release (at: 28th jan)
+    3.[D][ ] return book (by: Sunday)
     ____________________________________
     ____________________________________
     Bye! Hope to see you again soon!
