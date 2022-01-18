@@ -26,4 +26,8 @@ public enum Command {
                 ? commands.get(c)
                 : null;
     }
+
+    public static boolean isValid(String c) {
+        return commands.containsKey(c);
+    }
 }

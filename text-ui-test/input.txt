@@ -1,13 +1,27 @@
-todo grocery shopping
-deadline project /thursday 2359
-event party /sat 1700
+todo borrow book
 list
-mark 1
+event project meeting /at Mon 2-4pm
+list
+deadline return book /by Sunday
 list
 mark 2
 list
-unmark 1
+mark 1
 list
 unmark 2
 list
+todo
+event
+deadline
+event /at
+deadline /by
+event hello /at
+deadline hello /by
+event /at monday 5pm
+deadline /by monday 5pm
+mark
+unmark
+mark 5
+unmark 7 7
+mark a
 bye
