@@ -11,6 +11,10 @@ public class Task {
         return (isDone ? "X" : " ");
     }
 
+    public String getTaskIcon() {
+        return " ";
+    }
+
     public void markDone() {
         this.isDone = true;
     }
@@ -19,7 +23,7 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getTaskName() {
+    public String getFullDetails() {
         return this.taskName;
     }
 }
