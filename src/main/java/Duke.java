@@ -1,5 +1,7 @@
 import javax.sound.sampled.Line;
 import java.util.Scanner;
+
+import Exceptions.*;
 import commands.*;
 import tasks.*;
 public class Duke {
@@ -18,31 +20,40 @@ public class Duke {
         cmd.execute();
         //main program loop
         while(true){
-            String input = sc.nextLine();
-            cmd = processInput(input);
-            if(cmd.ends()) {
+            try {
+                String input = sc.nextLine();
+                cmd = processInput(input);
+                if (cmd.ends()) {
+                    cmd.execute();
+                    break;
+                }
                 cmd.execute();
-                break;
+            } catch (DukeExceptions e){
+                e.printError();
             }
-            cmd.execute();
         }
     }
 
-    public static Command processInput(String input){
+    public static Command processInput(String input) throws UnknownCommandException, EmptyDescriptionException{
         Command cmd = null;
         String[] inputSplit = input.split(" ");
-        if(inputSplit.length == 1 && inputSplit[0].equals("bye")){
+        if(inputSplit[0].equals("bye")){
             cmd = new ByeCommand();
-        } else if(inputSplit.length == 1 && inputSplit[0].equals("list")){
+        } else if(inputSplit[0].equals("list")){
             cmd = new ListCommand(TASKLIST);
-        } else if(inputSplit.length == 2 && inputSplit[0].equals("mark") && isInteger(inputSplit[1])) {
+        } else if(inputSplit[0].equals("mark")) {
             cmd = new MarkCommand(TASKLIST, Integer.parseInt(inputSplit[1]));
-        } else if(inputSplit.length == 2 && inputSplit[0].equals("unmark") && isInteger(inputSplit[1])){
+        } else if(inputSplit[0].equals("unmark")){
             cmd = new UnMarkCommand(TASKLIST, Integer.parseInt(inputSplit[1]));
-        } else {
+        } else if (inputSplit[0].equals("todo")||inputSplit[0].equals("event")||inputSplit[0].equals("deadline")){
+            if(inputSplit.length<2){
+                throw new EmptyDescriptionException(inputSplit[0]);
+            }
             cmd = new AddCommand(TASKLIST, LISTSIZE, input);
             TASKLIST = cmd.getList();
             LISTSIZE++;
+        } else {
+            throw new UnknownCommandException();
         }
         return cmd;
     }
