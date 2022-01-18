@@ -51,10 +51,28 @@ public class Sana {
         } else if (userCommand.startsWith("todo")) {
             String taskName = userCommand.replaceFirst("todo ", "");
             addToDo(taskName);
+        } else if (userCommand.startsWith("event")) {
+            String temp = userCommand.replaceFirst("event ", "");
+            String[] subStrings = temp.split(" /at ",2);
+            addEvent(subStrings[0], subStrings[1]);
         } else {
             addTask(userCommand);
         }
         border();
+    }
+
+    /**
+     * This method adds an Event to userTasks
+     *
+     * @param eventName name of the event
+     * @param eventTime time of the event
+     */
+    private void addEvent(String eventName, String eventTime) {
+        addTaskText();
+        Event newEvent = new Event(eventName, eventTime);
+        userTasks.add(newEvent);
+        System.out.println(newEvent);
+        taskNumberText();
     }
 
     /**
@@ -114,7 +132,7 @@ public class Sana {
      */
     private void taskNumberText() {
         String taskAmt = Integer.valueOf(userTasks.size()).toString();
-        System.out.println("You have " + taskAmt + " things to do. Time to get working!");
+        System.out.println("You have " + taskAmt + " things here. Time to get working!");
     }
 
     /**
