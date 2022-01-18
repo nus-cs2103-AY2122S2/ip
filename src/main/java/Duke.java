@@ -70,7 +70,7 @@ public class Duke {
                             counter++;
                         } catch (StringIndexOutOfBoundsException e) {
                             System.out.println(indentation + line);
-                            System.out.println("     ☹ OOPS!!! The description of a todo cannot be empty.");
+                            System.out.println("      OOPS!!! The description of a todo cannot be empty.");
                             System.out.println(indentation + line);
 
                         }
@@ -88,7 +88,7 @@ public class Duke {
 
                         } catch (StringIndexOutOfBoundsException e) {
                             System.out.println(indentation + line);
-                            System.out.println("     ☹ OOPS!!! Incorrect format for entering deadlines");
+                            System.out.println("      OOPS!!! Incorrect format for entering deadlines");
                             System.out.println(indentation + line);
 
                         }
@@ -105,11 +105,11 @@ public class Duke {
                             counter++;
                         } catch (StringIndexOutOfBoundsException e) {
                             System.out.println(indentation + line);
-                            System.out.println("     ☹ OOPS!!! Incorrect format for entering events");
+                            System.out.println("      OOPS!!! Incorrect format for entering events");
                             System.out.println(indentation + line);
                         }
                     } else {
-                        System.out.println(indentation + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        System.out.println(indentation + " OOPS!!! I'm sorry, but I don't know what that means :-(");
 
                     }
             }
