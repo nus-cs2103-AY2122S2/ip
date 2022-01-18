@@ -1,23 +1,31 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-        String botName = "Feline";
-        System.out.println("Yoooo! My name is " + botName + "!\n" + "How can I help you bro?\n");
+    private static final String botName = "Feline";
 
+    public Duke() {
+
+    }
+    private static void greet() {
+        System.out.println("Yoooo! My name is " + botName + "!\n" + "How can I help you bro?\n");
+    }
+    private static void farewell() {
+        System.out.println("See you next time!\n");
+    }
+    public static void main(String[] args) {
+
+        Duke.greet();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         while (!input.equals("bye")) {
-            System.out.println(input);
+//            if (input.equals(list)) {
+//
+//            }
+            System.out.println("added: " + input + "\n");
             input = sc.nextLine();
         }
         sc.close();
-        System.out.println("See you next time!\n");
+        Duke.farewell();
 
     }
 }
