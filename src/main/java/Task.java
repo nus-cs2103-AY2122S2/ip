@@ -19,4 +19,8 @@ public class Task {
     public void markAsUndone(){
         isDone = false;
     }
+
+    public String returnDescription() {
+        return this.description;
+    }
 }
