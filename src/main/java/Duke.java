@@ -38,6 +38,10 @@ public class Duke {
     }
 
     private static void listTask() {
+        if (numberOfTasks == 0) {
+            System.out.println("Congratulations! There are no tasks in your list :)");
+            return;
+        }
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < numberOfTasks; i++) {
             System.out.println((i + 1) + ". " + tasks.get(i));
@@ -56,6 +60,15 @@ public class Duke {
         System.out.println(tasks.get(taskNumber - 1));
     }
 
+    private static void deleteTask(int taskNumber) {
+        Task taskToBeRemoved = tasks.get(taskNumber - 1);
+        tasks.remove(taskNumber - 1);
+        numberOfTasks--;
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(taskToBeRemoved);
+        System.out.println("Now you have " + numberOfTasks + " tasks in the list.");
+    }
+    
     private static void execute(String command) throws DukeException, 
             NumberFormatException, ArrayIndexOutOfBoundsException {
         String[] commandTokens = command.split(" ", 2);
@@ -76,6 +89,13 @@ public class Duke {
                 throw new DukeException("The index of task to be unmarked is invalid!!");
             }
             unmarkTask(indexOfTaskToUnmark);
+            break;
+        case "delete":
+            int indexOfTaskToDelete = Integer.parseInt(commandTokens[1]);
+            if (!(1 <= indexOfTaskToDelete && indexOfTaskToDelete <= numberOfTasks)) {
+                throw new DukeException("The index of task to be deleted is invalid!!");
+            }
+            deleteTask(indexOfTaskToDelete);
             break;
         case "todo":
             addTask("todo", commandTokens[1], "");
