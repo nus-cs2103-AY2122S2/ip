@@ -89,8 +89,10 @@ public class Duke {
 
     public static void list(Collection<? extends Object> collection) {
         StringBuilder sb = new StringBuilder("");
+        int count = 0;
         for (Object var : collection) {
-            sb.append(var.toString() + "\n     ");
+            count++;
+            sb.append(count + ". " + var.toString() + "\n     ");
         }
         echo(sb.toString().trim());
     }
