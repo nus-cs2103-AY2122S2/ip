@@ -1,7 +1,8 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
-    private static Task[] taskList = new Task[100];
+    private static ArrayList<Task> taskList = new ArrayList<>();
     private static int taskNum = 0;
     private static String conformation = "Got it. I've added this task:";
     private static Scanner sc;
@@ -19,7 +20,7 @@ public class Duke {
      */
     private static void getUserInput(){
         String first_word = sc.next();
-        String remaining_word = sc.nextLine();
+        String remaining_word = sc.nextLine().trim();
         try {
             switch (first_word) {
             case "bye":
@@ -32,31 +33,37 @@ public class Duke {
                 if (remaining_word.equals("")) {
                     errorMessage("OOPS!!! The description of a deadline cannot be empty. :<");
                 }
-                deadlineTask(remaining_word.trim());
+                addDeadlineTask(remaining_word);
                 break;
             case "event":
                 if (remaining_word.equals("")) {
                     errorMessage("OOPS!!! The description of a event cannot be empty. :<");
                 }
-                eventTask(remaining_word.trim());
+                addEventTask(remaining_word);
                 break;
             case "todo":
                 if (remaining_word.equals("")) {
                     errorMessage("OOPS!!! The description of a todo cannot be empty. :<");
                 }
-                todoTask(remaining_word.trim());
+                addTodoTask(remaining_word);
                 break;
             case "mark":
                 if (remaining_word.equals("")) {
                     errorMessage("OOPS!!! Please input a number. :<");
                 }
-                markTaskList(remaining_word.trim());
+                markTaskList(remaining_word);
                 break;
             case "unmark":
                 if (remaining_word.equals("")) {
                     errorMessage("OOPS!!! Please input a number. :<");
                 }
-                unmarkTaskList(remaining_word.trim());
+                unmarkTaskList(remaining_word);
+                break;
+            case "delete":
+                if (remaining_word.equals("")) {
+                    errorMessage("OOPS!!! Please input a number. :<");
+                }
+                deleteTask(remaining_word);
                 break;
             default:
                 errorMessage("OOPS!!! I'm sorry, but I don't know what that means :<");
@@ -81,8 +88,7 @@ public class Duke {
      * To exit when user input "bye".
      */
     private static void exit() {
-        String goodbye = "Bye. Hope to see you again soon!";
-        System.out.println(goodbye);
+        System.out.println("Bye. Hope to see you again soon!");
     }
 
     /**
@@ -95,7 +101,7 @@ public class Duke {
         } else {
             System.out.println("Here are the tasks in your list:");
             for(int i = 1; i < taskNum + 1; i++){
-                Task currTask = taskList[i - 1];
+                Task currTask = taskList.get(i - 1);
                 System.out.println(i + ". " + currTask);
             }
             getUserInput();
@@ -103,15 +109,15 @@ public class Duke {
     }
 
     /**
-     * Handle the deadline task.
+     * To add the deadline task to the list.
      *
      * @param task the task with deadline.
      */
-    private static void deadlineTask(String task) {
+    private static void addDeadlineTask(String task) {
         System.out.println(conformation);
         String[] actions = task.split("/by", 2);
         Deadline currTask = new Deadline(actions[0].trim(), actions[1].trim());
-        taskList[taskNum] = currTask;
+        taskList.add(currTask);
         taskNum++;
         System.out.println(currTask + "\n" + "Now you have " + taskNum
                 + " tasks in the list.");
@@ -119,15 +125,15 @@ public class Duke {
     }
 
     /**
-     * Handle the event task.
+     * To add the event task to the list.
      *
      * @param task the task that represent the event.
      */
-    private static void eventTask(String task) {
+    private static void addEventTask(String task) {
         System.out.println(conformation);
         String[] actions = task.split("/at", 2);
         Event currTask = new Event(actions[0].trim(), actions[1].trim());
-        taskList[taskNum] = currTask;
+        taskList.add(currTask);
         taskNum++;
         System.out.println(currTask + "\n" + "Now you have " + taskNum
                 + " tasks in the list.");
@@ -135,14 +141,14 @@ public class Duke {
     }
 
     /**
-     * Handle the todo task.
+     * To add the todo task to the list.
      *
      * @param task the task that represent the todo.
      */
-    private static void todoTask(String task) {
+    private static void addTodoTask(String task) {
         System.out.println(conformation);
         ToDo currTask = new ToDo(task);
-        taskList[taskNum] = currTask;
+        taskList.add(currTask);
         taskNum++;
         System.out.println(currTask + "\n" + "Now you have " + taskNum
                 + " tasks in the list.");
@@ -156,7 +162,7 @@ public class Duke {
      */
     private static void markTaskList(String task){
         int currTaskNum = Integer.parseInt(task);
-        Task currTask = taskList[currTaskNum - 1];
+        Task currTask = taskList.get(currTaskNum - 1);
         currTask.setChecked();
         System.out.println("Nice! I've marked this task as done:\n"
                 + currTask);
@@ -170,10 +176,26 @@ public class Duke {
      */
     private static void unmarkTaskList(String task){
         int currTaskNum = Integer.parseInt(task);
-        Task currTask = taskList[currTaskNum - 1];
+        Task currTask = taskList.get(currTaskNum - 1);
         currTask.setUnchecked();
         System.out.println("OK, I've marked this task as not done yet:\n"
                 + currTask);
+        getUserInput();
+    }
+
+    /**
+     * Delete the tasks from the list.
+     *
+     * @param task task to be deleted.
+     */
+    private static void deleteTask(String task) {
+        System.out.println("Noted. I've removed this task:");
+        int currTaskNum = Integer.parseInt(task);
+        Task currTask = taskList.get(currTaskNum - 1);
+        taskList.remove(currTaskNum - 1);
+        taskNum--;
+        System.out.println(currTask + "\n" + "Now you have " + taskNum
+                + " tasks in the list.");
         getUserInput();
     }
 }

@@ -24,6 +24,17 @@ Here are the tasks in your list:
 2. [E][ ] group project meeting (at: Wed 1-4pm)
 3. [D][ ] return book (by: Sunday)
 OOPS!!! The description of a todo cannot be empty. :<
+Got it. I've added this task:
+[T][ ] hahahha
+Now you have 4 tasks in the list.
+Here are the tasks in your list:
+1. [T][X] borrow book
+2. [E][ ] group project meeting (at: Wed 1-4pm)
+3. [D][ ] return book (by: Sunday)
+4. [T][ ] hahahha
+Noted. I've removed this task:
+[T][ ] hahahha
+Now you have 3 tasks in the list.
 Here are the tasks in your list:
 1. [T][X] borrow book
 2. [E][ ] group project meeting (at: Wed 1-4pm)

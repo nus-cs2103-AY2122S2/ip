@@ -8,5 +8,8 @@ mark 3
 unmark 3
 list
 todo
+todo hahahha
+list
+delete 4
 list
 bye
