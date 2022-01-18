@@ -49,5 +49,14 @@ You have the following upcoming tasks:
 3.[E][ ] cs2103 lecture (at: Tomorrow)
 ____________________________
 ____________________________
+There is no task with index: 5
+____________________________
+____________________________
+Deadline task requires a task name!
+____________________________
+____________________________
+Oops! Your instructions were unclear!
+____________________________
+____________________________
 Good bye! Hope to see you again!
 ____________________________

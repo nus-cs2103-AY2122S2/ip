@@ -11,8 +11,12 @@ public class Duke {
         String out;
         do {
             if (userIn.length() > 0) {
-                out = processUserInput(userIn);
-                speech(out);
+                try {
+                    out = processUserInput(userIn);
+                    speech(out);
+                } catch (DukeException ex) {
+                    speech(ex.getMessage());
+                }
             }
             userIn = sc.nextLine();
         } while (!userIn.equals("bye"));
@@ -50,8 +54,9 @@ public class Duke {
      *
      * @param userIn user's input
      * @return response string to user
+     * @throws DukeException if user input is invalid
      */
-    private static String processUserInput(String userIn) {
+    private static String processUserInput(String userIn) throws DukeException {
         if (userIn.equals("list")) {
             return al.toString();
         } else if (userIn.equals("help")) {
@@ -67,19 +72,38 @@ public class Duke {
                     .replaceAll("[^\\d.]", "")) - 1)
                     .toString();
         } else if (Pattern.matches("^todo\\s(.*?)", userIn)) {
-            return al.addToDo(userIn.replace("todo ", ""));
+            String s = userIn.replace("todo ", "").trim();
+            if (s.length() == 0)
+                throw new DukeException("Todo task requires a task name!");
+            else return al.addToDo(s);
         } else if (Pattern.matches("^deadline\\s(.*s?)\\s/by\\s(.*s?)", userIn)) {
             String[] split = userIn
                     .replace("deadline ", "")
                     .split("\\s/by\\s", 2);
-            return al.addDeadline(split[0], split[1]);
+            split[0] = split[0].trim();
+            split[1] = split[1].trim();
+            if (split[0].length() == 0 && split[1].length() == 0)
+                throw new DukeException("Deadline task requires a task name and a date!");
+            else if (split[0].length() == 0)
+                throw new DukeException("Deadline task requires a task name!");
+            else if (split[1].length() == 0)
+                throw new DukeException("Deadline task requires a date!");
+            else return al.addDeadline(split[0], split[1]);
         } else if (Pattern.matches("^event\\s(.*s?)\\s/at\\s(.*s?)", userIn)) {
             String[] split = userIn
                     .replace("event ", "")
                     .split("\\s/at\\s", 2);
-            return al.addEvent(split[0], split[1]);
+            split[0] = split[0].trim();
+            split[1] = split[1].trim();
+            if (split[0].length() == 0 && split[1].length() == 0)
+                throw new DukeException("Event task requires a task name and a date!");
+            else if (split[0].length() == 0)
+                throw new DukeException("Event task requires a task name!");
+            else if (split[1].length() == 0)
+                throw new DukeException("Event task requires a date!");
+            else return al.addEvent(split[0], split[1]);
         } else {
-            return "Oops! Your instructions were unclear!";
+            throw new DukeException("Oops! Your instructions were unclear!");
         }
     }
 

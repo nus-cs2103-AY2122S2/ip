@@ -45,27 +45,37 @@ public class TaskList {
     }
 
     /**
-     * Marks activity in list as done.
+     * Marks task in list as done.
      *
-     * @param idx 1-based index of the activity
-     * @return the marked activity
+     * @param idx index of the task
+     * @return the marked task
+     * @throws TaskListException if index is out of bounds of task list size
      */
-    public Task markDone(int idx) {
-        Task ac = activities.get(idx);
-        ac.done();
-        return ac;
+    public Task markDone(int idx) throws TaskListException {
+        if (idx < 0 || idx >= activities.size())
+            throw new TaskListException("There is no task with index: " + (idx + 1));
+        else {
+            Task ac = activities.get(idx);
+            ac.done();
+            return ac;
+        }
     }
 
     /**
-     * Marks activity in list as undone.
+     * Marks task in list as undone.
      *
-     * @param idx 1-based index of the activity
-     * @return the unmarked activity
+     * @param idx index of the task
+     * @return the unmarked task
+     * @throws TaskListException if index is out of bounds of task list size
      */
-    public Task markUndone(int idx) {
-        Task ac = activities.get(idx);
-        ac.undone();
-        return ac;
+    public Task markUndone(int idx) throws TaskListException {
+        if (idx < 0 || idx >= activities.size())
+            throw new TaskListException("There is no task with index: " + (idx + 1));
+        else {
+            Task ac = activities.get(idx);
+            ac.undone();
+            return ac;
+        }
     }
 
     /**

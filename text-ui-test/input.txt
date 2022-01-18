@@ -6,4 +6,7 @@ mark 2
 list
 unmark 2
 list
+unmark 5
+deadline   /by a
+event a /at
 bye
