@@ -31,7 +31,7 @@ public class Task {
     }
 
     public String getType() {
-        return "Generic TaskObjects.Task";
+        return "Generic Task";
     }
 }
 

@@ -42,7 +42,7 @@ public class Duke {
             String listOutput = generateList();
             System.out.println(generateResponse(listOutput));
         } else if (command.equals("mark")) {
-            if (checkForInvalidIndex(inputArray[1])) {
+            if (checkForInvalidIndex(inputArray)) {
                 return true;
             }
             int taskNo = Integer.parseInt(inputArray[1]) - 1;
@@ -51,7 +51,7 @@ public class Duke {
             String output = "Marked as done:\n" + currentTask.getCurrentStatus();
             System.out.println(generateResponse(output));
         } else if (command.equals("unmark")) {
-            if (checkForInvalidIndex(inputArray[1])) {
+            if (checkForInvalidIndex(inputArray)) {
                 return true;
             }
             int taskNo = Integer.parseInt(inputArray[1]) - 1;
@@ -105,6 +105,15 @@ public class Duke {
             Event newTask = new Event(name, eventTime);
             toDoList.add(newTask);
             System.out.println(generateAddMessage(newTask));
+        } else if (command.equals("delete")) {
+            if (checkForInvalidIndex(inputArray)) {
+                return true;
+            }
+            int taskNo = Integer.parseInt(inputArray[1]) - 1;
+            Task currentTask = toDoList.get(taskNo);
+            String description = currentTask.getCurrentStatus();
+            toDoList.remove(taskNo);
+            System.out.println(generateRemoveMessage(description));
         } else {
             System.out.println(generateResponse("Unknown command: " + command));
         }
@@ -130,6 +139,12 @@ public class Duke {
         return generateResponse(message);
     }
 
+    private static String generateRemoveMessage(String des) {
+        String message = String.format("Removed this task:\n%s\nYou currently have %d tasks",
+                des, toDoList.size());
+        return generateResponse(message);
+    }
+
     private static String generateList() {
         StringBuilder newString = new StringBuilder("Tasklist:\n");
         for (int i = 0; i < toDoList.size(); i++) {
@@ -147,9 +162,9 @@ public class Duke {
         return generateResponse("ERROR: " + msg);
     }
 
-    private static boolean checkForInvalidIndex(String str) {
+    private static boolean checkForInvalidIndex(String[] strArr) {
         try {
-            int taskNo = Integer.parseInt(str) - 1;
+            int taskNo = Integer.parseInt(strArr[1]) - 1;
             if (taskNo < 0 || taskNo >= toDoList.size()) { // Check if index is out of bounds
                 throw new IndexOutOfBoundsException();
             }
