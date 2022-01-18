@@ -15,3 +15,6 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+
+# Just incase any class files are outside of the /out folder
+*.class
