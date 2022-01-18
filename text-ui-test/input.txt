@@ -4,4 +4,11 @@ event project meeting /at Mon 2-4pm
 list
 mark 1
 unmark 1
+todo
+deadline
+event
+todo
+deadline
+event
+blahhhhh
 bye
