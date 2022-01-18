@@ -1,5 +1,3 @@
-import java.util.*;
-
 /**
  * This class encapsulates a task input by the user.
  */
@@ -32,7 +30,7 @@ public abstract class Task {
 
     /**
      *
-     * @return: Returns a String of the description of the task
+     * @return Returns a String of the description of the task
      */
     @Override
     public String toString() {

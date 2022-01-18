@@ -1,5 +1,3 @@
-import java.util.*;
-
 /**
  * This class encapsulates a ToDos Task which inherits from Task.
  */

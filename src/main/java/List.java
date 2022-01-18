@@ -5,7 +5,7 @@ import java.util.*;
  */
 public class List {
     private ArrayList<Task> arrayList;//Array List to store the tasks.
-    private int maxSize;//the maximum number of tasks possible, defined by requirement.
+    private final int maxSize;//the maximum number of tasks possible, defined by requirement.
 
     /**
      *
@@ -23,7 +23,7 @@ public class List {
     /**
      * This method marks a task at a specific index in the list as done.
      * @param index: index of the task to be marked done in the array list of list
-     * @return: return the task that is marked as done.
+     * @return return the task that is marked as done.
      */
     public Task markDone(int index) {
         Task task = arrayList.get(index);
@@ -34,7 +34,7 @@ public class List {
     /**
      * This method marks a task at a specific index in the list as not done.
      * @param index: index of the task to be marked as not done in the array list of list.
-     * @return: return the task that is marked as not done.
+     * @return return the task that is marked as not done.
      */
     public Task unmarkDone(int index) {
         Task task = arrayList.get(index);
@@ -44,15 +44,23 @@ public class List {
 
     /**
      *  This method adds a task to the list.
-     * @param task: the task input from the user.
+     * @param task the task input from the user.
      */
     public void add(Task task) {
         arrayList.add(task);
     }
 
+    public Task delete(int index) throws ListException{
+        if (index < 1 || index > arrayList.size()) {
+            throw new ListException("Sorry. The task you indicated cannot be found.\n" +
+                                    "Please enter a new task.");
+        } else {
+            return arrayList.remove(index - 1);
+        }
+    }
     /**
      *
-     * @return: Returns a string which displays the list of tasks in order of them being added.
+     * @return Returns a string which displays the list of tasks in order of them being added.
      */
     @Override
     public String toString() {

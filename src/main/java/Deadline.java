@@ -1,5 +1,3 @@
-import java.util.*;
-
 /**
  * This class encapsulates a Deadline task which inherits from Task.
  */
