@@ -12,28 +12,36 @@ import java.util.Scanner;
  * @author Ong Han Yang
  */
 public class Fluffers<T> {
-    /** ASCII art for when Fluffers just wakes up*/
-    private static String AWAKE =
-            "    /\\_____/\\\n" +
-            "   /  o   o  \\\n" +
-            "  ( ==  ^  == )\n" +
-            "   )         (\n" +
-            "  (           )\n" +
-            " ( (  )   (  ) )\n" +
-            "(__(__)___(__)__)";
+    private enum AsciiArt {
+        /** ASCII art for when Fluffers just wakes up*/
+        AWAKE(
+                "    /\\_____/\\\n" +
+                "   /  o   o  \\\n" +
+                "  ( ==  ^  == )\n" +
+                "   )         (\n" +
+                "  (           )\n" +
+                " ( (  )   (  ) )\n" +
+                "(__(__)___(__)__)"
+        ),
+        /** ASCII art for when Fluffers goes back to sleep*/
+        ASLEEP(
+                "      |\\      _,,,---,,_\n" +
+                "ZZZzz /,`.-'`'    -.  ;-;;,_\n" +
+                "     |,4-  ) )-,_. ,\\ (  `'-'\n" +
+                "    '---''(_/--'  `-'\\_)"
+        ),
+        /** ASCII art for when Fluffers is displaying a list */
+        LIST_TOP(
+                "    |\\__/,|   (`\\\n" +
+                "  _.|o o  |_   ) )\n" +
+                "-(((---(((--------"
+        );
 
-    /** ASCII art for when Fluffers goes back to sleep*/
-    private static String ASLEEP =
-            "      |\\      _,,,---,,_\n" +
-            "ZZZzz /,`.-'`'    -.  ;-;;,_\n" +
-            "     |,4-  ) )-,_. ,\\ (  `'-'\n" +
-            "    '---''(_/--'  `-'\\_)";
-
-    /** ASCII art for when Fluffers is displaying a list */
-    private static String LIST_TOP =
-            "    |\\__/,|   (`\\\n" +
-            "  _.|o o  |_   ) )\n" +
-            "-(((---(((--------";
+        private final String art;
+        private AsciiArt(String art) {
+            this.art = art;
+        }
+    }
 
     /** The private task list that each Fluffers object will keep. */
     private TaskList tasks;
@@ -78,7 +86,7 @@ public class Fluffers<T> {
         return "Activating Cat Translator 2000...\n" +
                 "Waking Fluffers up...\n\n" +
                 "Meow! (Hello!)\n" +
-                Fluffers.AWAKE;
+                AsciiArt.AWAKE.art;
     }
 
     /**
@@ -88,7 +96,7 @@ public class Fluffers<T> {
      */
     private String farewell() {
         return "Meooow~ (Bye bye! See you again next time!)\n" +
-                Fluffers.ASLEEP;
+                AsciiArt.ASLEEP.art;
     }
 
     /**
@@ -125,7 +133,7 @@ public class Fluffers<T> {
      * @return the String representation of the tasks, with fancy formatting.
      */
     private String listTasks() {
-        return String.format("%s\n%s\n------------------", Fluffers.LIST_TOP, tasks.toString());
+        return String.format("%s\n%s\n------------------", AsciiArt.LIST_TOP.art, tasks.toString());
     }
 
     /**
@@ -194,7 +202,7 @@ public class Fluffers<T> {
      */
     public String feedCommandAndReply(String input) {
         if (!isAwake) {
-            return Fluffers.ASLEEP;
+            return AsciiArt.ASLEEP.art;
         } else {
             if (Objects.equals(input, "bye")) {
                 isAwake = false;
