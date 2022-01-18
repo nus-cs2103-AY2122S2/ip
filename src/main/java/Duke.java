@@ -2,6 +2,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class Duke {
+
     public static void main(String[] args) {
         Task[] listOfThings = new Task[100];
         int counter = 0;
@@ -54,40 +55,63 @@ public class Duke {
                 System.out.println(indentation + "  " + listOfThings[num-1].toString() + listOfThings[num-1].getStatus() + " " + listOfThings[num-1].getDescription());
                 System.out.println(indentation + line);
             } else {
+                    if (str.contains("todo")) {
+                        try {
+                            String newString = str.substring(5).trim();
+                            if (newString.length() == 0) {
+                                throw new StringIndexOutOfBoundsException();
+                            }
+                            listOfThings[counter] = new ToDos(newString);
+                            System.out.println(indentation + line);
+                            System.out.println(indentation + "Got it. I've added this task:");
+                            System.out.println(indentation + "  " + listOfThings[counter].toString() + listOfThings[counter].getStatus() + " " + listOfThings[counter].getDescription());
+                            System.out.println(indentation + "Now you have " + String.valueOf(counter + 1) + " tasks in the list.");
+                            System.out.println(indentation + line);
+                            counter++;
+                        } catch (StringIndexOutOfBoundsException e) {
+                            System.out.println(indentation + line);
+                            System.out.println("     ☹ OOPS!!! The description of a todo cannot be empty.");
+                            System.out.println(indentation + line);
 
-                if (str.contains("todo")) {
-                    String newString = str.substring(5).trim();
-                    listOfThings[counter] = new ToDos(newString);
-                    System.out.println(indentation + line);
-                    System.out.println(indentation + "Got it. I've added this task:");
-                    System.out.println(indentation + "  " + listOfThings[counter].toString() + listOfThings[counter].getStatus() + " " + listOfThings[counter].getDescription());
-                    System.out.println(indentation + "Now you have " + String.valueOf(counter + 1) + " tasks in the list.");
-                    System.out.println(indentation + line);
-                    counter++;
+                        }
+                    } else if (str.contains("deadline")) {
+                        try {
+                            String des = str.substring(9, str.indexOf('/') - 1).trim();
+                            String date = str.substring((str.indexOf('/') + 4)).trim();
+                            listOfThings[counter] = new Deadline(des, date);
+                            System.out.println(indentation + line);
+                            System.out.println(indentation + "Got it. I've added this task:");
+                            System.out.println(indentation + "  " + listOfThings[counter].toString() + listOfThings[counter].getStatus() + " " + listOfThings[counter].getDescription());
+                            System.out.println(indentation + "Now you have " + String.valueOf(counter + 1) + " tasks in the list.");
+                            System.out.println(indentation + line);
+                            counter++;
 
-                } else if (str.contains("deadline")) {
-                    String des = str.substring(9, str.indexOf('/')-1).trim();
-                    String date = str.substring((str.indexOf('/')+4)).trim();
-                    listOfThings[counter] = new Deadline(des,date);
-                    System.out.println(indentation + line);
-                    System.out.println(indentation + "Got it. I've added this task:");
-                    System.out.println(indentation + "  " + listOfThings[counter].toString() + listOfThings[counter].getStatus() + " " + listOfThings[counter].getDescription());
-                    System.out.println(indentation + "Now you have " + String.valueOf(counter + 1)+ " tasks in the list.");
-                    System.out.println(indentation + line);
-                    counter++;
-                } else if (str.contains("event")) {
-                    String des = str.substring(6, str.indexOf('/')-1).trim();
-                    String date = str.substring((str.indexOf('/')+4)).trim();
-                    listOfThings[counter] = new Event(des,date);
-                    System.out.println(indentation + line);
-                    System.out.println(indentation + "Got it. I've added this task:");
-                    System.out.println(indentation + "  " + listOfThings[counter].toString() + listOfThings[counter].getStatus() + " " + listOfThings[counter].getDescription());
-                    System.out.println(indentation + "Now you have " + String.valueOf(counter + 1) + " tasks in the list.");
-                    System.out.println(indentation + line);
-                    counter++;
-                } else {
-                    System.out.println("Unknown parameters, Try again");
-                }
+                        } catch (StringIndexOutOfBoundsException e) {
+                            System.out.println(indentation + line);
+                            System.out.println("     ☹ OOPS!!! Incorrect format for entering deadlines");
+                            System.out.println(indentation + line);
+
+                        }
+                    } else if (str.contains("event")) {
+                        try {
+                            String des = str.substring(6, str.indexOf('/') - 1).trim();
+                            String date = str.substring((str.indexOf('/') + 4)).trim();
+                            listOfThings[counter] = new Event(des, date);
+                            System.out.println(indentation + line);
+                            System.out.println(indentation + "Got it. I've added this task:");
+                            System.out.println(indentation + "  " + listOfThings[counter].toString() + listOfThings[counter].getStatus() + " " + listOfThings[counter].getDescription());
+                            System.out.println(indentation + "Now you have " + String.valueOf(counter + 1) + " tasks in the list.");
+                            System.out.println(indentation + line);
+                            counter++;
+                        } catch (StringIndexOutOfBoundsException e) {
+                            System.out.println(indentation + line);
+                            System.out.println("     ☹ OOPS!!! Incorrect format for entering events");
+                            System.out.println(indentation + line);
+                        }
+                    } else {
+                        System.out.println(indentation + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+
+                    }
             }
         }
     }
@@ -181,4 +205,3 @@ class Event extends Task {
         return this.description + " (at: " + date + ")";
     }
 }
-
