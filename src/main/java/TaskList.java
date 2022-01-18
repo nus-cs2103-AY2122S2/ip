@@ -1,21 +1,28 @@
 public class TaskList {
-    private final String[] taskArray = new String[100];
+    private final Task[] taskArray = new Task[100];
     private int index = 0;
 
-    String addTask(String newTask) {
+    String addTask(Task newTask) {
         taskArray[index] = newTask;
         index++;
         return "added: " + newTask;
     }
 
     String getTasks() {
-        String output = "";
+        String output = "Here are the tasks in your list:";
         for (int i = 0; i < index; i++) {
-            output += String.format("%d. %s", i + 1, taskArray[i]);
-            if (i != index - 1) {
-                output += "\n";
-            }
+            output += String.format("\n%d.%s", i + 1, taskArray[i]);
         }
         return output;
+    }
+
+    String mark(int id) {
+        if (id > index) {
+            return "Task has not been added yet";
+        } else if (id <= 0) {
+            return "invalid task number";
+        }
+        String out = taskArray[id - 1].switchMark();
+        return out;
     }
 }
