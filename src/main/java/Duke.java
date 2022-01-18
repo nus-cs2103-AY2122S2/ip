@@ -19,6 +19,9 @@ public class Duke {
         bye();
     }
 
+    /**
+     * This method greets the user at the start of the program.
+     */
     private static void greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -28,10 +31,19 @@ public class Duke {
         System.out.println("Hello I'm\n" + logo + "I am at your service.\n");
     }
 
+    /**
+     * This method bids farewell to the user at the end of the program.
+     */
     private static void bye() {
         System.out.println("Ciao! Hope to see you again!");
     }
 
+    /**
+     * This method process the user input.
+     * @param userInput user input
+     * @param list list of tasks
+     * @throws DukeException
+     */
     private static void processUserInput(String userInput, List list) throws DukeException {
         if (userInput.equals("list")) {
             System.out.println(list);
@@ -50,14 +62,24 @@ public class Duke {
             System.out.println("OK, I've marked this task as not done yet:\n  "
                     + unDoneTask.toString());
         }
+        else if (userInput.startsWith("delete")) {
+            String indexStr = userInput.substring(7);
+            int index = Integer.parseInt(indexStr);
+            Task task = list.delete(index);
+            System.out.println("Roger. I've deleted this task: \n  "
+                                +  task.toString() + "\n"
+                                + "Now you have "
+                                + list.getArrayList().size()
+                                + " tasks in the list");
+        }
         else if (userInput.startsWith("todo") || userInput.startsWith("deadline") ||
-                    userInput.startsWith("event")) { //userInput is a task.
+                    userInput.startsWith("event")) {
             try {
                 System.out.println("Got it. I've added this task:\n  "
                         + processTask(userInput, list)
                         + "\n" + "Now you have " + list.getArrayList().size()
                         + " tasks in the list.");
-            } catch (TaskException e) {
+            } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -67,16 +89,16 @@ public class Duke {
     }
 
     /**
-     * This method process the userInput if it is a Task(ToDos, Deadlines, Events).
+     * This method process the user input if it is a Task(ToDos, Deadlines, Events).
      *  and adds it to the list.
      * @param userInput
      * @param list: list of tasks.
-     * @return: returns the toString of the task.
+     * @return returns the toString of the task.
      */
-    private static String processTask(String userInput, List list) throws TaskException {
+    private static String processTask(String userInput, List list) throws DukeException {
         String str = userInput.trim();
         if (str.equals("todo") || str.equals("deadline") || str.equals("event")) {
-            throw new TaskException("OOPS!!! The description of a " + str + " cannot be empty.");
+            throw new DukeException("OOPS!!! The description of a " + str + " cannot be empty.");
         } else {
             if (userInput.startsWith("todo")) {
                 ToDo toDO = new ToDo(userInput.substring(5));
