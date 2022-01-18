@@ -3,13 +3,15 @@ public class Command {
     private String argument;
 
     public Command(String input) {
-        this.command = input;
+        this.command = input.trim();
     }
 
     public void run() {
         System.out.printf(" ");
 
-        if(command.equals("bye")) {
+        if(command.equals("")) {
+            return;
+        } else if (command.equals("bye")) {
             System.out.println("See you again! :)");
             System.exit(0);
         } else {
