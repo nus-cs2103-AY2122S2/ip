@@ -7,10 +7,6 @@ public class Deadline extends Task {
         this.by = by.trim();
     }
 
-    public static boolean checkDateline(String by) {
-        return by.equals("") ? false : true;
-    }
-
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";

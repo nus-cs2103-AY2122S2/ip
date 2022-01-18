@@ -31,52 +31,54 @@ public class Duke {
                 printLines();
 //                Handle Mark command
             } else {
+                boolean valid = true;
+                Task newTask = null;
+
                 printLines();
-                String[] split = response.split("\\s+");
-                if (split[0].contains("mark")) {
-                    int digit = Integer.parseInt(split[1]);
-                    if (digit > 0 && digit <= tasks.size()) {
-                        handleResponse(split[0]);
-                        Task t = tasks.get(digit - 1);
-                        t.unmark();
-                        System.out.println(t.toString());
-                    } else {
-                        System.out.println("Invalid range! Try again.");
-                    }
+
+                if (response.equals("")) {
+                    valid = false;
                 } else {
-                    boolean valid = false;
-                    Task newTask = null;
-                    if(split.length > 1) {
-                        valid = true;
-                        handleResponse(split[0]);
-                        String[] secondSplits;
-                        if (split[0].equals("todo")) {
-                            newTask = new Todo(removeSubString(response, "todo "));
-                        } else if(split[0].equals("deadline")) {
-                            secondSplits = response.split(" /by ");
-                            if (secondSplits.length > 1) {
-                                newTask = new Deadline(secondSplits[0].replace("deadline ", ""), secondSplits[1]);
-                            } else {
-                                valid = false;
-                            }
-                        } else if (split[0].equals("event")) {
-                            secondSplits = response.split(" /at ");
-                            if (secondSplits.length > 1) {
-                                newTask = new Event(secondSplits[0].replace("event ", ""), secondSplits[1]);
-                            } else {
-                                valid = false;
+                    String[] split = response.split("\\s+");
+                    if (split[0].contains("mark")) {
+                        int digit = Integer.parseInt(split[1]);
+                        if (digit > 0 && digit <= tasks.size()) {
+                            handleResponse(split[0]);
+                            Task t = tasks.get(digit - 1);
+                            t.unmark();
+                            System.out.println(t.toString());
+                        } else {
+                            System.out.println("Invalid range! Try again.");
+                        }
+                    } else {
+                        if (split.length > 1) {
+                            handleResponse(split[0]);
+                            String[] secondSplit;
+                            if (split[0].equals("todo")) {
+                                newTask = new Todo(removeSubString(response, "todo "));
+                            } else if (split[0].equals("deadline")) {
+                                secondSplit = response.split(" /by ");
+                                if (secondSplit.length > 1) {
+                                    newTask = new Deadline(removeSubString(secondSplit[0], "deadline "), secondSplit[1]);
+                                } else { valid = false; }
+                            } else if (split[0].equals("event")) {
+                                secondSplit = response.split(" /at ");
+                                if (secondSplit.length > 1) {
+                                    newTask = new Event(removeSubString(secondSplit[0], "event "), secondSplit[1]);
+                                } else { valid = false; }
+                            } else { valid = false; }
+                            if (valid) {
+                                tasks.add(newTask);
+                                System.out.println(newTask.toString());
+                                System.out.println("Now you have " + tasks.size() +  " tasks in the list.");
                             }
                         } else {
                             valid = false;
                         }
                     }
-                    if (valid) {
-                        tasks.add(newTask);
-                        System.out.println(newTask.toString());
-                        System.out.println("Now you have " + tasks.size() +  " tasks in the list.");
-                    } else {
-                        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    }
+                }
+                if (valid == false) {
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
                 printLines();
             }
