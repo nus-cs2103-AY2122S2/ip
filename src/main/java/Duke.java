@@ -14,6 +14,7 @@ public class Duke {
     private static final String COMMAND_CREATE_TODO = "todo";
     private static final String COMMAND_CREATE_DEADLINE = "deadline";
     private static final String COMMAND_CREATE_EVENT = "event";
+    private static final String COMMAND_DELETE = "delete";
 
     private static TaskStore taskStore;
 
@@ -85,37 +86,60 @@ public class Duke {
             parseCreateDeadline(linePrinter, args);
         } else if (commandLowerCase.equals(COMMAND_CREATE_EVENT)) {
             parseCreateEvent(linePrinter, args);
+        } else if (commandLowerCase.equals(COMMAND_DELETE)) {
+            parseDeleteEvent(linePrinter, args);
         } else {
             throw new DukeInvalidCommandException(String.format("No such command: %s", commandLowerCase));
         }
     }
 
-    private static void parseMarkCommand(IPrintable linePrinter, String args, boolean newState)
-            throws DukeIllegalArgumentException {
-        // Syntax Checking
+    private static int parseTaskNumber(String args) throws DukeIllegalArgumentException {
         int taskIndex = -1;
         try {
             taskIndex = Integer.parseInt(args);
         } catch (NumberFormatException ex) {
             throw new DukeIllegalArgumentException("Task Number must be a number");
         }
-
         // Note that task storage uses 0-based index
-        Task task = taskStore.getTaskByIndex(taskIndex - 1);
+        return taskIndex - 1;
+    }
+
+    private static Task parseSelectTask(String args) throws DukeIllegalArgumentException {
+        int taskIndex = parseTaskNumber(args);
+        Task task = taskStore.getTaskByIndex(taskIndex);
         if (task == null) {
             throw new DukeIllegalArgumentException("No matching task with given number");
-        } else {
-            if (task.isDone() == newState) {
-                linePrinter.print(String.format("Task is already %s:", newState ? "done" : "not done"));
-            } else if (newState) {
-                task.markAsDone();
-                linePrinter.print("Great Job Finishing the task:");
-            } else {
-                task.unmarkAsDone();
-                linePrinter.print("Marking the task as not done yet:");
-            }
-            linePrinter.print(String.format("\t %s", task.getReadableString()));
         }
+        return task;
+    }
+
+    private static void parseMarkCommand(IPrintable linePrinter, String args, boolean newState)
+            throws DukeIllegalArgumentException {
+        Task task = parseSelectTask(args);
+
+        if (task.isDone() == newState) {
+            linePrinter.print(String.format("Task is already %s:", newState ? "done" : "not done"));
+        } else if (newState) {
+            task.markAsDone();
+            linePrinter.print("Great Job Finishing the task:");
+        } else {
+            task.unmarkAsDone();
+            linePrinter.print("Marking the task as not done yet:");
+        }
+        linePrinter.print(String.format("\t %s", task.getReadableString()));
+    }
+
+    private static void parseDeleteEvent(IPrintable linePrinter, String args)
+            throws DukeIllegalArgumentException {
+        int taskIndex = parseTaskNumber(args);
+        Task deleted = taskStore.deleteTask(taskIndex);
+
+        if (deleted == null) {
+            throw new DukeIllegalArgumentException("No matching task with given number");
+        }
+
+        linePrinter.print("Deleted the task:");
+        linePrinter.print(String.format("\t %s", deleted.getReadableString()));
     }
 
     private static void parseCreateTodo(IPrintable linePrinter, String args)

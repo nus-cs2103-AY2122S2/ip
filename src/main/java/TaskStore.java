@@ -33,4 +33,11 @@ public class TaskStore {
         }
         return this.tasks.get(index);
     }
+
+    public Task deleteTask(int index) {
+        if (index >= this.tasks.size() || index < 0) {
+            return null;
+        }
+        return this.tasks.remove(index);
+    }
 }
