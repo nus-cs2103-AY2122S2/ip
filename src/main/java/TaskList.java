@@ -5,7 +5,7 @@ public class TaskList {
     String addTask(Task newTask) {
         taskArray[index] = newTask;
         index++;
-        String output = "Got it. I've added this task: \n  " + newTask + "\nnow you have " + this.index + " tasks in the list";
+        String output = "Got it. I've added this task:\n  " + newTask + "\nnow you have " + this.index + " tasks in the list";
         return output;
     }
 
