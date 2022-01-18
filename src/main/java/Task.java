@@ -11,8 +11,20 @@ public class Task {
     Task(String name) {
         this.name = name;
         this.id = counter + 1;
+        this.isDone = false;
         arrayOfTask[counter] = this;
         counter++;
+    }
+
+    public void markDone() {
+        this.isDone = true;
+    }
+
+    public void markNotDone() {
+        this.isDone = false;
+    }
+    public static Task[] getTaskList() {
+        return Task.arrayOfTask;
     }
 
     public static String printArray() {
@@ -21,7 +33,7 @@ public class Task {
 
         for(int i = 0; i < arrayLength; i++) {
             if(arrayOfTask[i] != null) {
-                output += "       " + arrayOfTask[i];
+                output += "       " + Integer.toString(i + 1) + "." + arrayOfTask[i];
                 if(i != arrayLength - 1) {
                     output += "\n";
                 }
@@ -33,7 +45,8 @@ public class Task {
     }
 
     public String toString() {
-        return Integer.toString(this.id) + ". " + arrayOfTask[this.id - 1].name;
+        String status = this.isDone ? "X" : " ";
+        return "[" + status + "] " + arrayOfTask[this.id - 1].name;
     }
 
 }

@@ -20,9 +20,9 @@ public class Duke {
     }
 
     private static void exit() {
-        String goodByeMessage = "   _____________________________________________\n"
+        String goodByeMessage = "   __________________________________________________\n"
                 + "       " + "Bye. I hope to see you soon." +"\n"
-                + "   _____________________________________________";
+                + "   __________________________________________________";
         System.out.println(goodByeMessage);
     }
 
@@ -34,17 +34,42 @@ public class Duke {
             return false;
         } else if (userInput.equals("list")) {
             String listTask = Task.printArray();
-            String output = "   _____________________________________________\n"
+            String output = "   __________________________________________________\n"
                     + listTask
-                    + "   _____________________________________________";
+                    + "   __________________________________________________";
+            System.out.println(output);
+
+            return true;
+        } else if (userInput.split(" ")[0].equals("mark")) {
+            String[] input = userInput.split(" ");
+            Task task =  Task.getTaskList()[Integer.parseInt(input[1]) - 1];
+            task.markDone();
+
+            String output = "   __________________________________________________\n"
+                    + "       I have marked the following task as done! :D \n"
+                    + "       " + task + "\n"
+                    + "   __________________________________________________";
+
+            System.out.println(output);
+            return true;
+
+        } else if (userInput.split(" ")[0].equals("unmark")) {
+            String[] input = userInput.split(" ");
+            Task task =  Task.getTaskList()[Integer.parseInt(input[1]) - 1];
+            task .markNotDone();
+
+            String output = "   __________________________________________________\n"
+                    + "       OK I have marked the following task as not done yet! :D \n"
+                    + "       " + task + "\n"
+                    + "   __________________________________________________";
             System.out.println(output);
 
             return true;
         } else {
             Task newTask = new Task(userInput);
-            String output = "   _____________________________________________\n"
+            String output = "   __________________________________________________\n"
                     + "       " + "added: " + userInput +"\n"
-                    + "   _____________________________________________";
+                    + "   __________________________________________________";
             System.out.println(output);
             return true;
         }
