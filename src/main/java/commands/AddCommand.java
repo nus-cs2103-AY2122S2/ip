@@ -5,13 +5,15 @@ public class AddCommand extends Command {
     private String input;
     private Task[] tasklist;
     private int size;
+    private Task added;
 
 
     public AddCommand(Task[] tasklist, int size,  String input){
         this.input = input;
         this.tasklist = tasklist;
         this.size = size;
-        tasklist[size] = new Task(input);
+        this.added = new Task(input);
+        tasklist[size] = added;
     }
 
     @Override
@@ -26,6 +28,6 @@ public class AddCommand extends Command {
 
     @Override
     public void execute() {
-        printFormatted(new String[]{"added: " + input});
+        printFormatted(new String[]{"added: " + added});
     }
 }
