@@ -18,7 +18,9 @@ public class Duke {
     private static final String BROKEN_MSG =
             "YOU BROKE ME :-(";
     private static final String INVALID_MARK_MSG =
-            "OOPS!!! I need a number to find that task :-(";
+            "OOPS!!! I need a number to update that task :-(";
+    private static final String INVALID_DELETE_MSG =
+            "OOPS!!! I need a number to delete that task :-(";
 
     private ArrayList<Task> tasks;
     
@@ -141,6 +143,48 @@ public class Duke {
         }
     }
 
+    public void delete(int index) {
+        try {
+            int noOfTasks = this.tasks.size();
+            String task = this.tasks.get(index - 1).toString();
+
+            this.tasks.remove(--index);
+
+            noOfTasks = this.tasks.size();
+
+            String result = "Noted. I've removed this task:\n";
+            String pluralTask = noOfTasks > 1 ? "tasks" : "task";
+
+            result += noOfTasks > 0 ?
+                    "  " + task +
+                    "\nNow you have " + noOfTasks + " " + pluralTask + " in the list." :
+                    "  " + task +
+                    "\nNow you have no task left.";
+
+            output(result);
+        } catch (IndexOutOfBoundsException e) {
+            output(INVALID_INDEX_MSG);
+        } catch (NumberFormatException e) {
+            output(INVALID_INDEX_MSG);
+        }
+    }
+
+    public boolean isNumeric(String arg) {
+        if (arg == null) {
+            output(INVALID_INDEX_MSG);
+            return false;
+        }
+
+        try {
+            Integer.parseInt(arg);
+        } catch (NumberFormatException nfe) {
+            output(INVALID_INDEX_MSG);
+            return false;
+        }
+
+        return true;
+    }
+
     public void start() {
         Input input = null;
         Scanner sc = new Scanner(System.in);
@@ -175,9 +219,22 @@ public class Duke {
                         if (input.getArgs().length() == 0) {
                             output(INVALID_MARK_MSG);
                             continue;
+                        } else if (isNumeric(input.getArgs())) {
+                            toggleCompleted(isMark, Integer.parseInt(input.getArgs()));
+                        } else {
+                            continue;
                         }
 
-                        toggleCompleted(isMark, Integer.parseInt(input.getArgs()));
+                        break;
+                    case DELETE:
+                        if (input.getArgs().length() == 0) {
+                            output(INVALID_DELETE_MSG);
+                            continue;
+                        } else if (isNumeric(input.getArgs())) {
+                            delete(Integer.parseInt(input.getArgs()));
+                        } else {
+                            continue;
+                        }
 
                         break;
                     default:

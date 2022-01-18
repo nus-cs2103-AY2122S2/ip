@@ -4,6 +4,7 @@ public class Input {
         ADD,
         LIST,
         TOGGLE,
+        DELETE,
         BYE
     }
 
@@ -23,6 +24,8 @@ public class Input {
         } else if (command.equalsIgnoreCase("mark") ||
                 command.equalsIgnoreCase("unmark")) {
             this.states = States.TOGGLE;
+        } else if (command.equalsIgnoreCase("delete")) {
+            this.states = States.DELETE;
         } else {
             this.states = States.ADD;
         }
