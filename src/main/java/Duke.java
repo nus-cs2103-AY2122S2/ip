@@ -131,31 +131,19 @@ public class Duke {
                         break;
 
                     case "mark":
-                        if (parseIntAble(userInputArr[1])) {
-                            int taskToMark = Integer.parseInt(userInputArr[1]);
-                            todoList[taskToMark - 1].markAsDone();
 
-                            System.out.println(lines);
-                            System.out.println("    Nice! I've marked this task as done: ");
+                        int taskToMark = Integer.parseInt(userInputArr[1]);
+                        todoList[taskToMark - 1].markAsDone();
 
-                            String taskString = String.format("%s", todoList[taskToMark - 1].toString());
-                            System.out.println("    " + taskString);
-                            System.out.println(lines);
-                        } else {
-                            // creating task
-                            Task inputTask = new Task(userInput);
+                        System.out.println(lines);
+                        System.out.println("    Nice! I've marked this task as done: ");
 
-                            // storing input task
-                            todoList[count] = inputTask;
+                        String taskMarkString = String.format("%s", todoList[taskToMark - 1].toString());
+                        System.out.println("    " + taskMarkString);
+                        System.out.println(lines);
 
-                            // displaying input task
-                            System.out.println(lines);
-                            System.out.println("    added: " + inputTask.toString());
-                            System.out.println(lines);
-                            count++;
-                        }
                         break;
-
+                        
                     case "unmark":
                         int taskToUnmark = Integer.parseInt(userInputArr[1]);
                         todoList[taskToUnmark - 1].markAsNotDone();
