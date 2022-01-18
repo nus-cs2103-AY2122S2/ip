@@ -1,21 +1,27 @@
 public class Command {
     private String command;
-    private String argument;
+    private String input;
 
     public Command(String input) {
-        this.command = input.trim();
+        String[] inputArgs = input.trim().split(" ");
+        this.command = inputArgs[0];
+        this.input = input.trim();
     }
 
     public void run() {
-        System.out.printf(" ");
-
         if(command.equals("")) {
             return;
-        } else if (command.equals("bye")) {
+        }
+
+        System.out.printf(" ");
+
+        if (command.equals("bye")) {
             System.out.println("See you again! :)");
             System.exit(0);
         } else {
-            System.out.println(command);
+            Task task = new Task(input);
+            Task.addToList(task);
+            System.out.println("added: " + input);
         }
         System.out.println("__________________________________________________________");
         return;
