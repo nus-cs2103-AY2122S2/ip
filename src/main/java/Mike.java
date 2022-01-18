@@ -21,35 +21,47 @@ public class Mike {
             if (!trimmedInputString.isEmpty()) {
                 String command = splitString[0];
                 //TODO: throw exceptions when command is not entered correctly
-                switch(command) {
-                    case "list":
-                        mike.printList();
-                        break;
-                    case "mark":
-                        int markNumber = Integer.parseInt(splitString[1]);
-                        mike.mark(markNumber);
-                        break;
-                    case "unmark":
-                        int unmarkNumber = Integer.parseInt(splitString[1]);
-                        mike.unmark(unmarkNumber);
-                        break;
-                    case "todo":
-                        String todoParameters =
-                                removeCommandFromString(trimmedInputString);
-                        mike.addTodo(todoParameters);
-                        break;
-                    case "deadline":
-                        String deadlineParameters =
-                                removeCommandFromString(trimmedInputString);
-                        mike.addDeadline(deadlineParameters);
-                        break;
-                    case "event":
-                        String eventParameters =
-                                removeCommandFromString(trimmedInputString);
-                        mike.addEvent(eventParameters);
-                        break;
-                    default:
-                        mike.printInvalidCommandMessage(trimmedInputString);
+                try {
+                    switch (command) {
+                        case "list":
+                            mike.printList();
+                            break;
+                        case "mark":
+                            int markNumber = Integer.parseInt(splitString[1]);
+                            mike.mark(markNumber);
+                            break;
+                        case "unmark":
+                            int unmarkNumber = Integer.parseInt(splitString[1]);
+                            mike.unmark(unmarkNumber);
+                            break;
+                        case "todo":
+                            String todoParameters =
+                                    removeCommandFromString(trimmedInputString);
+                            mike.addTodo(todoParameters);
+                            break;
+                        case "deadline":
+                            String deadlineParameters =
+                                    removeCommandFromString(trimmedInputString);
+                            mike.addDeadline(deadlineParameters);
+                            break;
+                        case "event":
+                            String eventParameters =
+                                    removeCommandFromString(trimmedInputString);
+                            mike.addEvent(eventParameters);
+                            break;
+                        default:
+                            String invalidCommandMessage =
+                                    String.format("I don't understand the command \"%s\"",trimmedInputString);
+                            throw new UnsupportedOperationException(invalidCommandMessage);
+                    }
+                } catch(UnsupportedOperationException e) {
+                    System.out.println(e);
+                } catch(StringIndexOutOfBoundsException e) {
+                    System.out.println(e);
+                    System.out.println("**Hmmm, you may have entered the command arguments incorrectly.**");
+                } catch(IndexOutOfBoundsException e) {
+                    System.out.println(e);
+                    System.out.println("**That item doesn't exist on your list :/**");
                 }
             } else {
                 mike.printNoCharactersMessage();
@@ -105,6 +117,7 @@ public class Mike {
         System.out.println("Enter next command:");
     }
 
+    //this has been converted to a thrown exception
     void printInvalidCommandMessage(String str) {
         printReply(String.format("I don't understand the command \"%s\"", str));
     }
