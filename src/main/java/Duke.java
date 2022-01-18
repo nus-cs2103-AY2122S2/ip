@@ -58,6 +58,14 @@ public class Duke {
                     System.out.println(e.getMessage());
                 }
             }
+            else if(inp.equals("delete")){
+                try {
+                    String n = s.nextLine();
+                    a.delete(n);
+                } catch(DukeTaskException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
             else {
                 System.out.println("\nDuke: OOPS!!! I'm sorry, but I don't know what that means :-(\n");
             }
