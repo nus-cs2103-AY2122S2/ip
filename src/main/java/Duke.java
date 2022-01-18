@@ -12,10 +12,16 @@ public class Duke {
     private static final String TEXT_GREETING = "Hello! I'm Duke\n" + "What can I do for you?";
     private static final String TEXT_GOODBYE = "Bye. Hope to see you again soon!";
     private static final String TEXT_DIVIDER = "____________________________________________________________";
+    private static final String TEXT_ACKNOWLEDGE_LIST = "Here are the tasks in your list:";
+    private static final String TEXT_ACKNOWLEDGE_MARK = "Nice! I've marked this task as done:";
+    private static final String TEXT_ACKNOWLEDGE_UNMARK = "OK, I've marked this task as not done yet:";
+
     private static final String KEY_EXIT = "bye";
     private static final String KEY_LIST = "list";
+    private static final String KEY_MARK = "mark";
+    private static final String KEY_UNMARK = "unmark";
 
-    private final List<String> tasks = new ArrayList<>();
+    private final List<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
         new Duke().run();
@@ -27,20 +33,49 @@ public class Duke {
 
         while (true) {
             String input = scanner.nextLine();
+            String[] strings = input.split(" ", 2);
+            String command = strings[0];
 
-            if (input.equals(KEY_EXIT)) {
+            switch (command) {
+            case KEY_EXIT:
                 sayGoodbye();
                 return;
-            } else if (input.equals(KEY_LIST)) {
+            case KEY_LIST:
                 listTasks();
-            } else {
+                break;
+            case KEY_MARK:
+                markTask(Integer.parseInt(strings[1]) - 1);
+                break;
+            case KEY_UNMARK:
+                unmarkTask(Integer.parseInt(strings[1]) - 1);
+                break;
+            default:
                 addTask(input);
+                break;
             }
         }
     }
 
+    private void markTask(int index) {
+        tasks.get(index).setDone(true);
+        printDivider();
+        printTabbed(TEXT_ACKNOWLEDGE_MARK, 1);
+        printTabbed(tasks.get(index).toString(), 3);
+        printDivider();
+        System.out.println();
+    }
+
+    private void unmarkTask(int index) {
+        tasks.get(index).setDone(false);
+        printDivider();
+        printTabbed(TEXT_ACKNOWLEDGE_UNMARK, 1);
+        printTabbed(tasks.get(index).toString(), 3);
+        printDivider();
+        System.out.println();
+    }
+
     private void addTask(String input) {
-        tasks.add(input);
+        tasks.add(new Task(input));
         printDivider();
         printTabbed("added: " + input, 1);
         printDivider();
@@ -49,9 +84,9 @@ public class Duke {
 
     private void listTasks() {
         printDivider();
-
+        printTabbed(TEXT_ACKNOWLEDGE_LIST, 1);
         for (int i = 0; i < tasks.size(); i++) {
-            String entry = (i + 1) + ". " + tasks.get(i);
+            String entry = (i + 1) + "." + tasks.get(i).toString();
             printTabbed(entry, 1);
         }
 
