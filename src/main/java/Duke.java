@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    private static final String INTRO_MESSAGE = "Hello! I'm Duke\n     What can I do for you?";
 
     private static final String COMMAND_BYE = "bye";
     private static final String MESSAGE_BYE = "Bye. Hope to see you again soon!";
@@ -20,46 +21,68 @@ public class Duke {
     private static final String COMMAND_EVENT = "event";
     private static final String MESSAGE_TASKADD = "Got it. I've added this task:";
 
+    private static final String ERROR_INVALID_COMMAND = "OOPS!!! You have entered an invalid command :(";
+    private static final String ERROR_INVALID_TODO_TITLE = "OOPS!!! The title of a todo cannot be empty :(";
+    private static final String ERROR_INVALID_DEADLINETASK_TITLE = "OOPS!!! The title of a deadline task cannot be empty :(";
+    private static final String ERROR_INVALID_DEADLINETASK_DEADLINE = "OOPS!!! The deadline of a deadline task cannot be empty :(";
+    private static final String ERROR_INVALID_EVENT_TITLE = "OOPS!!! The title of an event cannot be empty :(";
+    private static final String ERROR_INVALID_EVENT_TIME = "OOPS!!! The time of an event cannot be empty :(";
+
+
     public static void main(String[] args) {
-        printContent("Hello! I'm Duke\n     What can I do for you?");
+        printContent(INTRO_MESSAGE);
         ArrayList<Task> tasks = new ArrayList<Task>();
         Scanner sc = new Scanner(System.in);
-        while (true){
-            String line = sc.nextLine();
-            String[] splitted = line.split("\\s+");
-            String query = splitted[0];
-            if (query.compareTo(COMMAND_BYE) == 0){
-                printContent(MESSAGE_BYE);
-                break;
-            } else if (query.compareTo(COMMAND_LIST) == 0){
-                processList(tasks);
-            } else if (query.compareTo(COMMAND_MARK) == 0){
-                Task thisTask = tasks.get(Integer.parseInt(splitted[1])-1);
-                thisTask.markAsDone();
-                printContent(taskLine(thisTask, MESSAGE_MARK));
-            } else if (query.compareTo(COMMAND_UNMARK) == 0){
-                Task thisTask = tasks.get(Integer.parseInt(splitted[1])-1);
-                thisTask.markAsUndone();
-                printContent(taskLine(thisTask, MESSAGE_UNMARK));
-            } else if (query.compareTo(COMMAND_TODO) == 0){
-                Task thisTask = new TodoTask(line.substring(5));
-                tasks.add(thisTask);
-                printAddTaskSuccess(tasks, thisTask);
-            } else if (query.compareTo(COMMAND_DEADLINE) == 0){
-                String[] subSplit = line.split("/by");
-                Task thisTask = new DeadlineTask(subSplit[0].substring(9), subSplit[1]);
-                tasks.add(thisTask);
-                printAddTaskSuccess(tasks, thisTask);
-            } else if (query.compareTo(COMMAND_EVENT) == 0){
-                String[] subSplit = line.split("/at");
-                Task thisTask = new EventTask(subSplit[0].substring(6), subSplit[1]);
-                tasks.add(thisTask);
-                printAddTaskSuccess(tasks, thisTask);
-            } else{
-                printContent("Invalid input!");
+            while (true){
+                try{
+                    String line = sc.nextLine();
+                    String[] splitted = line.split("\\s+");
+                    String query = splitted[0];
+                    if (query.compareTo(COMMAND_BYE) == 0){
+                        printContent(MESSAGE_BYE);
+                        break;
+                    } else if (query.compareTo(COMMAND_LIST) == 0){
+                        processList(tasks);
+                    } else if (query.compareTo(COMMAND_MARK) == 0){
+                        Task thisTask = tasks.get(Integer.parseInt(splitted[1])-1);
+                        thisTask.markAsDone();
+                        printContent(taskLine(thisTask, MESSAGE_MARK));
+                    } else if (query.compareTo(COMMAND_UNMARK) == 0){
+                        Task thisTask = tasks.get(Integer.parseInt(splitted[1])-1);
+                        thisTask.markAsUndone();
+                        printContent(taskLine(thisTask, MESSAGE_UNMARK));
+                    } else if (query.compareTo(COMMAND_TODO) == 0){
+                        if (splitted.length == 1)
+                            throw new DukeException(ERROR_INVALID_TODO_TITLE);
+                        Task thisTask = new TodoTask(line.substring(5));
+                        tasks.add(thisTask);
+                        printAddTaskSuccess(tasks, thisTask);
+                    } else if (query.compareTo(COMMAND_DEADLINE) == 0){
+                        if (splitted.length == 1)
+                            throw new DukeException(ERROR_INVALID_DEADLINETASK_TITLE);
+                        if (!line.contains("/by"))
+                            throw new DukeException(ERROR_INVALID_DEADLINETASK_DEADLINE);
+                        String[] subSplit = line.split("/by");
+                        Task thisTask = new DeadlineTask(subSplit[0].substring(9), subSplit[1]);
+                        tasks.add(thisTask);
+                        printAddTaskSuccess(tasks, thisTask);
+                    } else if (query.compareTo(COMMAND_EVENT) == 0){
+                        if (splitted.length == 1)
+                            throw new DukeException(ERROR_INVALID_EVENT_TITLE);
+                        if (!line.contains("/at"))
+                            throw new DukeException(ERROR_INVALID_EVENT_TIME);
+                        String[] subSplit = line.split("/at");
+                        Task thisTask = new EventTask(subSplit[0].substring(6), subSplit[1]);
+                        tasks.add(thisTask);
+                        printAddTaskSuccess(tasks, thisTask);
+                    } else{
+                        throw new DukeException(ERROR_INVALID_COMMAND);
+                    }
+                } catch (DukeException e){
+                    printContent(e.getMessage());
+                }
             }
-        }
-        sc.close();
+            sc.close();
     }
 
     public static void printLine(){
