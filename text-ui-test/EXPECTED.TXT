@@ -39,7 +39,7 @@ OOPS!!! The argument MUST contain a single integer.
 
     ____________________________________________________________
      Nice! I've marked this task as done:
-       [X] borrow book
+       [T][X] borrow book
     ____________________________________________________________
 
     ____________________________________________________________
@@ -67,7 +67,7 @@ OOPS!!! The argument MUST contain a single integer.
 
     ____________________________________________________________
      OK, I've marked this task as not done yet:
-       [ ] borrow book
+       [T][ ] borrow book
     ____________________________________________________________
 
     ____________________________________________________________
@@ -107,6 +107,7 @@ OOPS!!! Insufficient arguments supplied :(
      Now you have 5 task/s in the list.
     ____________________________________________________________
 
+OOPS!!! The specified task ID is out of range. Please enter a number from 0 to 5.
     ____________________________________________________________
      Here are the tasks in your list:
 
@@ -119,6 +120,40 @@ OOPS!!! Insufficient arguments supplied :(
      4.[E][ ] new meeting without time and date (at: )
 
      5.[E][ ] tutorial (at: Monday 5pm)
+
+    ____________________________________________________________
+
+OOPS!!! The argument MUST contain a single integer.
+    ____________________________________________________________
+     Here are the tasks in your list:
+
+     1.[T][ ] borrow book
+
+     2.[D][ ] return book (by: )
+
+     3.[D][ ] finish work (by: Monday 3pm)
+
+     4.[E][ ] new meeting without time and date (at: )
+
+     5.[E][ ] tutorial (at: Monday 5pm)
+
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Noted. I've removed this task:
+       [T][ ] borrow book
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Here are the tasks in your list:
+
+     1.[D][ ] return book (by: )
+
+     2.[D][ ] finish work (by: Monday 3pm)
+
+     3.[E][ ] new meeting without time and date (at: )
+
+     4.[E][ ] tutorial (at: Monday 5pm)
 
     ____________________________________________________________
 

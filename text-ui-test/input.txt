@@ -26,5 +26,10 @@ event task without separator
 event incomplete
 event new meeting without time and date /at
 event tutorial /at Monday 5pm
+delete 0
+list
+delete x
+list
+delete 1
 list
 bye
