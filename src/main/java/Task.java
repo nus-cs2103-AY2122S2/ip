@@ -39,4 +39,14 @@ public class Task {
     public void setStatus(boolean isDone) {
         this.isDone = isDone;
     }
+
+    /**
+     * Prepends a status checkbox that shows if the task is done.
+     *
+     * @return String containing a status icon that is prepended in front of the task description.
+     */
+    @Override
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + getDescription() + "\n";
+    }
 }

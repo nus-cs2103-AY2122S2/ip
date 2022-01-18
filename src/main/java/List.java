@@ -45,8 +45,7 @@ public class List {
                 + "     Here are the tasks in your list:\n");
         for (int i = 1; i <= this.numberOfTasks; i++) {
             Task currTask = this.listOfTasks[i];
-            String output = "     " + i + ".[" + currTask.getStatusIcon() + "] "
-                    + currTask.getDescription() + "\n";
+            String output = "     " + i + "." + currTask;
             System.out.println(output);
         }
         System.out.println("    ____________________________________________________________\n");

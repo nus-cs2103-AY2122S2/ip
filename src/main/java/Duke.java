@@ -3,7 +3,7 @@ import java.util.Scanner;
 /**
  * KoroBot is a chatbot that tracks the list of tasks on hand.
  * @author Terng Yan Long
- * @version 3.0
+ * @version 4.0
  * @since 1.0
  */
 public class Duke {
