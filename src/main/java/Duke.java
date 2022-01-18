@@ -1,8 +1,11 @@
+import javafx.concurrent.Task;
+
 import java.util.Scanner;
 
 public class Duke {
     private static final String HORIZONTAL_LINE = "____________________________________________________________";
-    private static final String INDENT = "    ";
+    private static final String INDENT = "";
+    private static final TaskList taskList = new TaskList();
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -10,12 +13,14 @@ public class Duke {
         Duke.greet();
 
         while (true) {
-            String input = sc.next();
+            String input = sc.nextLine();
             if (input.equals("bye")) {
                 Duke.bye();
                 break;
+            } else if (input.equals("list")){
+                Duke.log(taskList.getTasks());
             } else {
-                Duke.echo(input);
+                Duke.log(taskList.addTask(input));
             }
         }
     }
@@ -33,7 +38,7 @@ public class Duke {
         System.out.println(Duke.INDENT + Duke.HORIZONTAL_LINE);
     }
 
-    public static void echo(String args) {
+    public static void log(String args) {
         System.out.println(Duke.INDENT + Duke.HORIZONTAL_LINE);
         System.out.println(Duke.INDENT + args);
         System.out.println(Duke.INDENT + Duke.HORIZONTAL_LINE);
