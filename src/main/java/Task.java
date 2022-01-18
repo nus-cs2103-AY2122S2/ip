@@ -1,7 +1,7 @@
 public abstract class Task {
     protected String title;
     protected Boolean isDone;
-    protected String type;
+    protected TaskType type;
 
     public Task(String title){
         this.title = title;
@@ -22,7 +22,7 @@ public abstract class Task {
     }
 
     public String getType(){
-        return this.type;
+        return this.type.getInitial();
     }
 
     public String getStatusIcon(){

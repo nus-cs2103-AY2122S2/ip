@@ -3,12 +3,12 @@ public class EventTask extends Task{
 
     public EventTask(String title, String eventTime){
         super(title);
-        this.type = "E";
+        this.type = TaskType.EVENT;
         this.eventTime = eventTime;
     }
     public EventTask(String title, Boolean isDone, String eventTime){
         super(title, isDone);
-        this.type = "E";
+        this.type = TaskType.EVENT;
         this.eventTime = eventTime;
     }
 
