@@ -24,40 +24,40 @@ public class Duke {
 
     private void deleteTask(Task t) { this.arr.remove(t); }
 
-    private boolean isType(String s, String type) throws DukeException {
+    private boolean isCommand(String s, Command command) throws DukeException {
         boolean res = false;
         boolean missingDesc = false;
         boolean missingTime = false;
-        switch (type) {
-            case "bye":
+        switch (command) {
+            case BYE:
                 res = s.equals("bye");
                 break;
-            case "list":
+            case LIST:
                 res = s.equals("list");
                 break;
-            case "delete":
+            case DELETE:
                 res = Pattern.matches("delete \\d+", s);
                 break;
-            case "toggleMark":
+            case TOGGLEMARK:
                 res = Pattern.matches("mark \\d+|unmark \\d+", s);
                 break;
-            case "todo":
+            case TODO:
                 res = Pattern.matches("todo .+", s);
                 missingDesc = !res && s.equals("todo ");
                 break;
-            case "deadline":
+            case DEADLINE:
                 res = Pattern.matches("deadline .+ /by .+", s);
                 missingDesc = !res && Pattern.matches("deadline\\s+|deadline\\s+/by.*", s);
                 missingTime = !res && !missingDesc && Pattern.matches("deadline .+", s);
                 break;
-            case "event":
+            case EVENT:
                 res = Pattern.matches("event .+ /at .+", s);
                 missingDesc = !res && Pattern.matches("event\\s+|event\\s+/at.*", s);
                 missingTime = !res && !missingDesc && Pattern.matches("event .+", s);
                 break;
         }
-        if (missingDesc) { throw new EmptyDescriptionException(type); }
-        if (missingTime) { throw new EmptyTimeException(type); }
+        if (missingDesc) { throw new EmptyDescriptionException(command.toString()); }
+        if (missingTime) { throw new EmptyTimeException(command.toString()); }
         return res;
     }
 
@@ -142,19 +142,19 @@ public class Duke {
     private void answer(String input) {
         String ans = "\t";
         try {
-            if (isType(input, "bye")) {
+            if (isCommand(input, Command.BYE)) {
                 onBye();
-            } else if (isType(input, "list")) {
+            } else if (isCommand(input, Command.LIST)) {
                 onList(ans);
-            } else if (isType(input, "delete")) {
+            } else if (isCommand(input, Command.DELETE)) {
                 onDelete(ans, input);
-            } else if (isType(input, "toggleMark")) {
+            } else if (isCommand(input, Command.TOGGLEMARK)) {
                 onToggleMark(ans, input);
-            } else if (isType(input, "todo")) {
+            } else if (isCommand(input, Command.TODO)) {
                 onTodo(ans, input);
-            } else if (isType(input, "deadline")) {
+            } else if (isCommand(input, Command.DEADLINE)) {
                 onDeadline(ans, input);
-            } else if (isType(input, "event")) {
+            } else if (isCommand(input, Command.EVENT)) {
                 onEvent(ans, input);
             } else {
                 throw new InvalidCommandException();

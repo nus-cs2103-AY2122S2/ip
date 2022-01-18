@@ -1,7 +1,7 @@
 package Exceptions;
 
 public class EmptyTimeException extends DukeException {
-    public EmptyTimeException (String type) {
-        super("OOPS!!! Time of " + type + " is missing. Please indicate a stipulated time.");
+    public EmptyTimeException (String command) {
+        super("OOPS!!! Time of " + command + " is missing. Please indicate a stipulated time.");
     }
 }
