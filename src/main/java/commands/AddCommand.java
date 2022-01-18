@@ -3,6 +3,7 @@ import tasks.*;
 
 public class AddCommand extends Command {
     private String input;
+    private String type;
     private Task[] tasklist;
     private int size;
     private Task added;
@@ -10,7 +11,7 @@ public class AddCommand extends Command {
 
     public AddCommand(Task[] tasklist, int size, String input){
         String[] processedInput = input.split(" ", 2);
-        String type = processedInput[0];
+        this.type = processedInput[0];
         this.input = processedInput[1];
         this.tasklist = tasklist;
         this.size = size;
