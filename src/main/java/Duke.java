@@ -1,6 +1,8 @@
-import java.util.Scanner; //Import the Scanner class
+import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
+    public static ArrayList<String> list = new ArrayList<>();
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -20,7 +22,16 @@ public class Duke {
 
         //continue the scanning if user does not say bye, else continue repeating what the user says
         while (!input.equals("bye")) {
-            System.out.println(input);
+            //prints the list of items when user inputs list
+            if (input.equals("list")) {
+                printList(list);
+            }
+
+            //adds user input to the list and notifies user
+            else {
+                addToList(input);
+                System.out.println("added: " + input);
+            }
 
             //create a scanner object which contains user input
             scanned = new Scanner(System.in);
@@ -32,5 +43,18 @@ public class Duke {
 
         //goodbye msg
         System.out.println("Sad to see you leave, come back soon!");
+    }
+
+    //to add the user's input to list
+    public static void addToList(String item) {
+        list.add(item);
+    }
+
+    //to print the current list of items
+    public static void printList(ArrayList<String> arraylist) {
+        for (int i = 0; i < arraylist.size(); i++) {
+            int count = i + 1;
+            System.out.println(count + ". " + arraylist.get(i));
+        }
     }
 }
