@@ -84,17 +84,17 @@ public class Duke {
         Task.TaskType type = null;
         if (str.matches("(todo|deadline|event).*")) {
             if (str.startsWith("todo")) {
-                if (!str.matches("todo\\s\\S+")) {
+                if (!str.matches("todo\\s\\S+.*")) {
                     throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                 }
                 type = Task.TaskType.TODO;
             } else if (str.startsWith("deadline")) {
-                if (!str.matches("deadline\\s\\S+\\s/by\\s\\S+")) {
+                if (!str.matches("deadline\\s\\S+.*\\s/by\\s\\S+.*")) {
                     throw new DukeException("☹ OOPS!!! The description/date of a deadline cannot be empty.");
                 }
                 type = Task.TaskType.DEADLINE;
             } else if (str.startsWith("event ")) {
-                 if (!str.matches("event\\s\\S+\\s/at\\s\\S+")) {
+                 if (!str.matches("event\\s\\S+.*\\s/at\\s\\S+.*")) {
                      throw new DukeException("☹ OOPS!!! The description/location of a event cannot be empty.");
                  }
                 type = Task.TaskType.EVENT;
