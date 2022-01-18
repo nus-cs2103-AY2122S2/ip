@@ -7,11 +7,19 @@ public class Task {
         this.description = description;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     public static void addToList(Task task) {
         taskList[taskCount++] = task;
     }
 
     public static Task[] getTaskList() {
         return taskList;
+    }
+
+    public static int getTaskCount() {
+        return taskCount;
     }
 }
