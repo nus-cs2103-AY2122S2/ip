@@ -1,0 +1,21 @@
+list
+read book
+list
+mark 1
+list
+unmark 1
+list
+todo
+todo borrow book
+deadline
+deadline task without separator
+deadline incomplete
+deadline return book /by
+deadline finish work /by Monday 3pm
+event
+event task without separator
+event incomplete
+event new meeting without time and date /at
+event tutorial /at Monday 5pm
+list
+bye
