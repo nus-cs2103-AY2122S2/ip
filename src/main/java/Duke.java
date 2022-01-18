@@ -73,7 +73,7 @@ public class Duke {
     }
 
     public static String createTask(String input) {
-        String[] splitString = input.split("/");
+        String[] splitString = input.split("/", 2);
         String[] instruction = splitString[0].split(" ");
         Task currentTask = null;
 

@@ -4,4 +4,59 @@ Hello from
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
+Hello! I'm JJ
+What do you want? :D 
 
+   __________________________________________________
+       Got it! I have added this following task :D 
+       [T][ ] housework
+       Now you have 1 tasks in your list.
+   __________________________________________________
+   __________________________________________________
+       This is the list of all tasks :D 
+       1.[T][ ] housework
+   __________________________________________________
+   __________________________________________________
+       Got it! I have added this following task :D 
+       [D][ ] CS3230 (by: Friday)
+       Now you have 2 tasks in your list.
+   __________________________________________________
+   __________________________________________________
+       This is the list of all tasks :D 
+       1.[T][ ] housework
+       2.[D][ ] CS3230 (by: Friday)
+   __________________________________________________
+   __________________________________________________
+       Got it! I have added this following task :D 
+       [E][ ] CCA meeting (at: Mon 1pm-3pm)
+       Now you have 3 tasks in your list.
+   __________________________________________________
+   __________________________________________________
+       This is the list of all tasks :D 
+       1.[T][ ] housework
+       2.[D][ ] CS3230 (by: Friday)
+       3.[E][ ] CCA meeting (at: Mon 1pm-3pm)
+   __________________________________________________
+   __________________________________________________
+       I have marked the following task as done! :D 
+       [T][X] housework
+   __________________________________________________
+   __________________________________________________
+       This is the list of all tasks :D 
+       1.[T][X] housework
+       2.[D][ ] CS3230 (by: Friday)
+       3.[E][ ] CCA meeting (at: Mon 1pm-3pm)
+   __________________________________________________
+   __________________________________________________
+       OK I have marked the following task as not done yet! :D 
+       [T][ ] housework
+   __________________________________________________
+   __________________________________________________
+       This is the list of all tasks :D 
+       1.[T][ ] housework
+       2.[D][ ] CS3230 (by: Friday)
+       3.[E][ ] CCA meeting (at: Mon 1pm-3pm)
+   __________________________________________________
+   __________________________________________________
+       Bye. I hope to see you soon.
+   __________________________________________________

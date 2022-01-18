@@ -1,0 +1,11 @@
+todo housework
+list
+deadline CS3230/by Friday
+list
+event CCA meeting/at Mon 1pm-3pm
+list
+mark 1
+list
+unmark 1
+list
+bye
