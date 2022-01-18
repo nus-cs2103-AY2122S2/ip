@@ -1,5 +1,6 @@
 package ui.command;
 
+import task.*;
 import java.util.ArrayList;
 
 /**
@@ -12,9 +13,9 @@ public class AddItemCommand extends Command {
     /**
      * List of items to add a new item to
      */
-    private final ArrayList<String> list;
+    private final ArrayList<Task> list;
 
-    public AddItemCommand(String name, String args, ArrayList<String> list) {
+    public AddItemCommand(String name, String args, ArrayList<Task> list) {
         super(name, args);
         this.list = list;
     }
@@ -23,7 +24,8 @@ public class AddItemCommand extends Command {
     public boolean execute() {
         // Args for this command represents item to add
         String item = super.getArgs();
-        this.list.add(item);
+        Task task = new Task(item);
+        this.list.add(task);
 
         ArrayList<String> response = new ArrayList<>();
         response.add(String.format("added: %s", item));

@@ -1,5 +1,6 @@
 package ui.command;
 
+import task.*;
 import java.util.ArrayList;
 
 /**
@@ -12,9 +13,9 @@ public class ListCommand extends Command {
     /**
      * List of items to print in the command
      */
-    private final ArrayList<String> list;
+    private final ArrayList<Task> list;
 
-    public ListCommand(String name, String args, ArrayList<String> list) {
+    public ListCommand(String name, String args, ArrayList<Task> list) {
         super(name, args);
         this.list = list;
     }
@@ -24,8 +25,8 @@ public class ListCommand extends Command {
         ArrayList<String> response = new ArrayList<>();
         // Prepend each list item with its numbering inside list
         for (int i = 0; i < this.list.size(); i++) {
-            String item = this.list.get(i);
-            response.add(String.format("%d. %s", i + 1, item));
+            Task task = this.list.get(i);
+            response.add(String.format("%d.%s", i + 1, task.getDescription()));
         }
         Command.styledPrint(response);
         return false;

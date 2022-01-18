@@ -1,5 +1,6 @@
 package ui.command;
 
+import task.*;
 import java.util.ArrayList;
 
 /**
@@ -48,7 +49,7 @@ public abstract class Command {
      * @param tasks Collection of tasks maintained by ChatBot
      * @return Command object corresponding to input
      */
-    public static Command parseCommand(String input, ArrayList<String> tasks) {
+    public static Command parseCommand(String input, ArrayList<Task> tasks) {
         String name = input;
         String args = null;
         // Separate command name and args
@@ -62,6 +63,12 @@ public abstract class Command {
         switch (name) {
             case "list":
                 command = new ListCommand(name, args, tasks);
+                break;
+            case "mark":
+                command = new MarkTaskCommand(name, args, tasks);
+                break;
+            case "unmark":
+                command = new UnmarkTaskCommand(name, args, tasks);
                 break;
             case "bye":
                 command = new ExitCommand(name, args);

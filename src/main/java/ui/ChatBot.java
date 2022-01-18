@@ -1,5 +1,6 @@
 package ui;
 
+import task.*;
 import ui.command.*;
 import java.util.ArrayList;
 
@@ -16,7 +17,7 @@ public class ChatBot {
     /**
      * ArrayList to keep track of text entered by user
      */
-    private final ArrayList<String> tasks;
+    private final ArrayList<Task> tasks;
 
     /**
      * Boolean to track if bot has received a termination command
