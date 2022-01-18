@@ -7,8 +7,8 @@ public class Event extends Task {
         this.at = at.trim();
     }
 
-    public boolean checkDestination() {
-        return at.compareTo("") == 0 ? false : true;
+    public static boolean checkDestination(String at) {
+        return at.equals("") ? false : true;
     }
 
     @Override

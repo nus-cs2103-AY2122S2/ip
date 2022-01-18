@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 
 public class Duke {
+
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String bot = "Hello! I'm Duke\nWhat can I do for you?";
@@ -18,12 +19,12 @@ public class Duke {
 
         do {
             response = reader.readLine().trim();
-            if (response.compareTo("bye") == 0) {
+            if (response.equals("bye")) {
                 printLines();
                 System.out.println("Bye. Hope to see you again soon!");
                 printLines();
                 break;
-            } else if (response.compareTo("list") == 0) {
+            } else if (response.equals("list")) {
                 printLines();
                 System.out.println("Here are the tasks in your list:");
                 listAllTasks(tasks);
@@ -49,20 +50,24 @@ public class Duke {
                         valid = true;
                         handleResponse(split[0]);
                         String[] secondSplits;
-                        switch (split[0]) {
-                            case "todo":
-                                newTask = new Todo(removeSubString(response, "todo "));
-                                break;
-                            case "deadline":
-                                secondSplits = response.split(" /by ");
+                        if (split[0].equals("todo")) {
+                            newTask = new Todo(removeSubString(response, "todo "));
+                        } else if(split[0].equals("deadline")) {
+                            secondSplits = response.split(" /by ");
+                            if (secondSplits.length > 1) {
                                 newTask = new Deadline(secondSplits[0].replace("deadline ", ""), secondSplits[1]);
-                                break;
-                            case "event":
-                                secondSplits = response.split(" /at ");
-                                newTask = new Event(secondSplits[0].replace("event ", ""), secondSplits[1]);
-                                break;
-                            default:
+                            } else {
                                 valid = false;
+                            }
+                        } else if (split[0].equals("event")) {
+                            secondSplits = response.split(" /at ");
+                            if (secondSplits.length > 1) {
+                                newTask = new Event(secondSplits[0].replace("event ", ""), secondSplits[1]);
+                            } else {
+                                valid = false;
+                            }
+                        } else {
+                            valid = false;
                         }
                     }
                     if (valid) {
@@ -75,7 +80,7 @@ public class Duke {
                 }
                 printLines();
             }
-        } while(response.compareTo("bye") != 0);
+        } while(!response.equals("bye"));
     }
 
 // ____________________________________________________________

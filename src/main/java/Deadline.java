@@ -7,8 +7,8 @@ public class Deadline extends Task {
         this.by = by.trim();
     }
 
-    public boolean checkDateline() {
-        return by.compareTo("") == 0 ? false : true;
+    public static boolean checkDateline(String by) {
+        return by.equals("") ? false : true;
     }
 
     @Override
