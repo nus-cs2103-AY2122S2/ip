@@ -5,9 +5,9 @@ public class Ultoi {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        String lineBreaker = "======U======L======T======O======I======\n";
-
         String indent = "    ";
+
+        String lineBreaker = indent + "======U======L======T======O======I======\n";
 
         String greetingMessage =
                 lineBreaker +
@@ -23,6 +23,14 @@ public class Ultoi {
 
         for ( ; ; ) {
             String cmd = sc.nextLine();
+
+            try {
+                checkCommand(cmd, logs);
+            } catch (UltoiException e) {
+                System.out.print(lineBreaker + indent + e.getMessage() + "\n" + lineBreaker);
+                continue;
+            }
+
             System.out.print(lineBreaker);
 
             if (cmd.equals("bye")) { // end the session
@@ -117,6 +125,70 @@ public class Ultoi {
             }
 
             System.out.print(lineBreaker);
+        }
+    }
+
+    // check whether a given command is valid
+    private static void checkCommand(String cmd, ArrayList<Task> logs) throws UltoiException {
+        String[] tokens = cmd.split(" ");
+
+        switch (tokens[0]) {
+            case "list":
+            case "bye":
+                if (tokens.length > 1) {
+                    throw new UltoiException("<OoO> Error! There should be nothing following this command.");
+                }
+                break;
+            case "mark":
+            case "unmark":
+                try {
+                    int taskIndex = Integer.parseInt(cmd.substring(tokens[0].length() + 1)) - 1;
+                    if (taskIndex < 0 || taskIndex >= logs.size()) {
+                        throw new UltoiException("<OoO> Error! You do not have a task of this number.");
+                    }
+                } catch (Exception e) {
+                    throw new UltoiException("<OoO> Error! Please key in a valid index after this command.");
+                }
+                break;
+            case "todo":
+                if (cmd.length() <= tokens[0].length() + 1) {
+                    throw new UltoiException("<OoO> Error! A todo requires a description.");
+                }
+                break;
+            case "deadline":
+                if (cmd.length() <= tokens[0].length() + 1) {
+                    throw new UltoiException("<OoO> Error! A deadline requires a description.");
+                } else {
+                    boolean hasBy = false;
+                    for (int i = 0; i < tokens.length; i++) {
+                        if (tokens[i].equals("/by")) {
+                            hasBy = true;
+                            break;
+                        }
+                    }
+                    if (!hasBy) {
+                        throw new UltoiException("<OoO> Error! A deadline requires a [/by] keyword followed by the time.");
+                    }
+                }
+                break;
+            case "event":
+                if (cmd.length() <= tokens[0].length() + 1) {
+                    throw new UltoiException("<OoO> Error! An event requires a description.");
+                } else {
+                    boolean hasAt = false;
+                    for (int i = 0; i < tokens.length; i++) {
+                        if (tokens[i].equals("/at")) {
+                            hasAt = true;
+                            break;
+                        }
+                    }
+                    if (!hasAt) {
+                        throw new UltoiException("<OoO> Error! An event requires a [/at] keyword followed by the time.");
+                    }
+                }
+                break;
+            default:
+                throw new UltoiException("<OoO> Error! I do not understand what that means.");
         }
     }
 }
