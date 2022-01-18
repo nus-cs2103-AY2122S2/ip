@@ -3,7 +3,7 @@ public class Deadline extends Task {
 
     public Deadline(String taskName, String by) {
         super(taskName);
-        this.by = by;
+        this.by = by.substring(by.indexOf(" ")+1);
     }
 
     @Override

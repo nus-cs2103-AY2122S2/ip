@@ -3,7 +3,7 @@ public class Event extends Task {
 
     public Event(String taskName, String at) {
         super(taskName);
-        this.at = at;
+        this.at = at.substring(at.indexOf(" ")+1);
     }
 
     @Override
