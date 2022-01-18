@@ -11,37 +11,98 @@ public class PaggroBot {
 //        String[] arr = input.split(" ", 2);
 //        String command = arr[0];
 //        String parameters = arr[1];
-        String command = sc.next();
+        String input = sc.nextLine();
+        String[] inputArr = input.split(" ", 2);
+        String command = inputArr[0];
         while (!command.equals("bye")) {
             if (command.equals("list")) {
                 paggro.list();
-            } else if (command.equals("mark") && sc.hasNextInt()) {
-                int i = sc.nextInt();
-                paggro.mark(i);
-            } else if (command.equals("unmark") && sc.hasNextInt()) {
-                int i = sc.nextInt();
-                paggro.unmark(i);
+            } else if (command.equals("mark")) {
+                try {
+                    String parameters = inputArr[1];
+                    int i = Integer.parseInt(parameters);
+                    paggro.mark(i);
+                } catch (NumberFormatException e) { // parameter was not a number
+                    System.out.println("   ________________________________________");
+                    System.out.println("    Really? Can you input an actual number this time... =.=");
+                    System.out.println("   ________________________________________");
+                } catch (ArrayIndexOutOfBoundsException e) { // no parameter given
+                    System.out.println("   ________________________________________");
+                    System.out.println("    Really? mark has to be used with a number... =.=");
+                    System.out.println("   ________________________________________");
+                }
+            } else if (command.equals("unmark")) {
+                try {
+                    String parameters = inputArr[1];
+                    int i = Integer.parseInt(parameters);
+                    paggro.unmark(i);
+                } catch (NumberFormatException e) { // parameter was not a number
+                    System.out.println("   ________________________________________");
+                    System.out.println("    Really? Can you input an actual number this time... =.=");
+                    System.out.println("   ________________________________________");
+                } catch (ArrayIndexOutOfBoundsException e) { // no parameter given
+                    System.out.println("   ________________________________________");
+                    System.out.println("    Really? unmark has to be used with a number... =.=");
+                    System.out.println("   ________________________________________");
+                }
             } else {
                 if (command.equals("todo")) {
-                    paggro.add(new ToDo(sc.nextLine()));
+                    try {
+                        String parameters = inputArr[1];
+                        paggro.add(new ToDo(parameters));
+                    } catch (ArrayIndexOutOfBoundsException e) { // no description given
+                        System.out.println("   ________________________________________");
+                        System.out.println("    Really? The description of a todo cannot be empty... =.=");
+                        System.out.println("   ________________________________________");
+                    }
                 } else if (command.equals("deadline")) {
-                    String details = sc.nextLine();
-                    String[] arr = details.split(" /", 2);
-                    String des = arr[0];
-                    String time = arr[1];
-                    paggro.add(new Deadline(des, time));
+                    try {
+                        String parameters = inputArr[1];
+                        String[] desArr = parameters.split(" /", 2);
+                        try {
+                            String des = desArr[0];
+                            String time = desArr[1];
+                            paggro.add(new Deadline(des, time));
+                        } catch (ArrayIndexOutOfBoundsException e) { // date not given or wrongly formatted
+                            System.out.println("   ________________________________________");
+                            System.out.println("    Really? =.= The use of the deadline command must be as follows:");
+                            System.out.println("         event <DESCRIPTION> /<DATE AND/OR TIME>");
+                            System.out.println("   ________________________________________");
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) { // no description given
+                        System.out.println("   ________________________________________");
+                        System.out.println("    Really? The description of a deadline cannot be empty... =.=");
+                        System.out.println("   ________________________________________");
+                    }
                 } else if (command.equals("event")) {
-                    String details = sc.nextLine();
-                    String[] arr = details.split(" /", 2);
-                    String des = arr[0];
-                    String time = arr[1];
-                    paggro.add(new Event(des, time));
-                } else {
-                    System.out.println("INVALID!!");
+                    try {
+                        String parameters = inputArr[1];
+                        String[] desArr = parameters.split(" /", 2);
+                        try {
+                            String des = desArr[0];
+                            String time = desArr[1];
+                            paggro.add(new Event(des, time));
+                        } catch (ArrayIndexOutOfBoundsException e) { // date not given or wrongly formatted
+                            System.out.println("   ________________________________________");
+                            System.out.println("    Really? =.= The use of the event command must be as follows:");
+                            System.out.println("         event <DESCRIPTION> /<DATE AND/OR TIME>");
+                            System.out.println("   ________________________________________");
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) { // no description given
+                        System.out.println("   ________________________________________");
+                        System.out.println("    Really? The description of an event cannot be empty... =.=");
+                        System.out.println("   ________________________________________");
+                    }
+                } else { // command not recognised
+                    System.out.println("   ________________________________________");
+                    System.out.println("    Come on... You don't actually expect me to understand that right... =.=");
+                    System.out.println("   ________________________________________");
                 }
 
             }
-            command = sc.next();
+            input = sc.nextLine();
+            inputArr = input.split(" ", 2);
+            command = inputArr[0];
         }
         System.out.println("   ________________________________________");
         System.out.println("    Oh finally. Please don't come back anytime soon. =.=");
