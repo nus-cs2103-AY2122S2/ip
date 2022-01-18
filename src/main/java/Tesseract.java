@@ -49,7 +49,7 @@ public class Tesseract {
                 } else if (indexBy != -1) { // Deadline
                     newTask = new Deadline(cmd.substring(0, indexBy - 1), cmd.substring(indexBy + 4));
                 } else { // _Todo
-                    newTask = new Todo(cmd);
+                    newTask = new Todo(cmd); 
                 }
                 taskList.add(newTask);
                 msg = "This has been added to your schedule. Wish you can finish it on time\n"
