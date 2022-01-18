@@ -5,21 +5,36 @@ public class Duke {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-
-        System.out.println("Hello from\n" + logo);
 
         System.out.println(chatBox("Hello! I'm Duke\n    What can I do for you?"));
+
+        String[] texts = new String[100];
+        String tab = "    ";
+
+        int items = 0;
 
         String command = sc.nextLine();
 
         while (!command.equals("bye")) {
-            System.out.println(chatBox(command));
-            System.out.println();
+            if (!command.equals("list")) {
+                items += 1;
+                texts[items] = command;
+                System.out.println(chatBox("added: " + command));
+                System.out.println();
+
+            } else {
+                String lists = "";
+                for (int i = 1; i <= items; i++) {
+                    if (i != 1) {
+                        lists += "\n" + tab;
+                    }
+                    lists += String.format("%d. %s", i, texts[i]);
+
+                }
+
+                System.out.println(chatBox(lists));
+            }
+
 
             command = sc.nextLine();
         }
