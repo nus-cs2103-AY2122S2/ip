@@ -2,8 +2,58 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Bobby {
+    static ArrayList<Task> taskArray = new ArrayList<Task>();
+
+    private static void addToDo(String task) throws BobbyException {
+        String[] inputs = task.split(" ", 2);
+        if (inputs.length > 1) {
+            Todo newTodo = new Todo(inputs[1]);
+            System.out.println("Bobby heard: " + newTodo);
+            taskArray.add(newTodo);
+            System.out.println("Bobby remembers " + taskArray.size() + " task(s).");
+        } else {
+            throw new BobbyException("Description cannot be empty");
+        }
+    }
+    private static void addDeadline(String task) throws BobbyException {
+        String[] inputs = task.split(" ", 2);
+        if (inputs.length > 1) {
+            String[] splitInputs = inputs[1].split(" /by ", 2);
+            if (splitInputs.length > 1) {
+                String description = splitInputs[0];
+                String by = splitInputs[1];
+                Deadline newDeadline = new Deadline(description, by);
+                System.out.println("Bobby heard: " + newDeadline);
+                taskArray.add(newDeadline);
+                System.out.println("Bobby remembers " + taskArray.size() + " task(s).");
+            } else {
+                throw new BobbyException("Date/Time format of Deadline is incorrect or empty");
+            }
+        } else {
+            throw new BobbyException("Description cannot be empty");
+        }
+
+    }
+    private static void addEvent(String task) throws BobbyException {
+        String[] inputs = task.split(" ", 2);
+        if (inputs.length > 1) {
+            String[] splitInputs = inputs[1].split(" /at ", 2);
+            if (splitInputs.length > 1) {
+                String description = splitInputs[0];
+                String at = splitInputs[1];
+                Event newEvent = new Event(description, at);
+                System.out.println("Bobby heard: " + newEvent);
+                taskArray.add(newEvent);
+                System.out.println("Bobby remembers " + taskArray.size() + " task(s).");
+            } else {
+                throw new BobbyException("Date/Time format of Event is incorrect or empty");
+            }
+        } else {
+            throw new BobbyException("Description cannot be empty");
+        }
+    }
+
     public static void main(String[] args) {
-        ArrayList<Task> taskArray = new ArrayList<Task>();
         System.out.println("Bobby greets you. Bobby is here to help.");
         Scanner scannerObj = new Scanner(System.in);
 
@@ -31,30 +81,29 @@ public class Bobby {
                 t.unmarkAsDone();
                 System.out.println("Bobby will remember that this task is not yet done:\n" + t);
             } else if (command.equals("todo")) {
-                Todo newTodo = new Todo(inputs[1]);
-                System.out.println("Bobby heard: " + newTodo);
-                taskArray.add(newTodo);
-                System.out.println("Bobby remembers " + taskArray.size() + " task(s).");
+                try {
+                    addToDo(userInput);
+                } catch (BobbyException e) {
+                    System.err.println(e);
+                }
             } else if (command.equals("deadline")) {
-                String[] splitInputs = inputs[1].split(" /by ", 2);
-                String description = splitInputs[0];
-                String by = splitInputs[1];
-                Deadline newDeadline = new Deadline(description, by);
-                System.out.println("Bobby heard: " + newDeadline);
-                taskArray.add(newDeadline);
-                System.out.println("Bobby remembers " + taskArray.size() + " task(s).");
+                try {
+                    addDeadline(userInput);
+                } catch (BobbyException e) {
+                    System.err.println(e);
+                }
             } else if (command.equals("event")) {
-                String[] splitInputs = inputs[1].split(" /at ", 2);
-                String description = splitInputs[0];
-                String at = splitInputs[1];
-                Event newEvent = new Event(description, at);
-                System.out.println("Bobby heard: " + newEvent);
-                taskArray.add(newEvent);
-                System.out.println("Bobby remembers " + taskArray.size() + " task(s).");
+                try {
+                    addEvent(userInput);
+                } catch (BobbyException e) {
+                    System.err.println(e);
+                }
             } else {
-                Task newTask = new Task(userInput);
-                System.out.println("Bobby heard: " + newTask.description);
-                taskArray.add(newTask);
+                try {
+                    throw new BobbyException("Bobby does not understand you. Please use valid inputs.");
+                } catch (BobbyException e) {
+                    System.err.println(e);
+                }
             }
         }
     }
