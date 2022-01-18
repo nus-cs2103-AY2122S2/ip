@@ -55,10 +55,28 @@ public class Sana {
             String temp = userCommand.replaceFirst("event ", "");
             String[] subStrings = temp.split(" /at ",2);
             addEvent(subStrings[0], subStrings[1]);
+        } else if (userCommand.startsWith("deadline ")) {
+            String temp = userCommand.replaceFirst("deadline ", "");
+            String[] subStrings = temp.split(" /by ",2);
+            addDeadline(subStrings[0], subStrings[1]);
         } else {
-            addTask(userCommand);
+            System.out.println("What did you say again?");
         }
         border();
+    }
+
+    /**
+     * This method adds a Deadline to userTasks
+     *
+     * @param deadlineName  name of the deadline
+     * @param deadlineTime  time of the deadline
+     */
+    private void addDeadline(String deadlineName, String deadlineTime) {
+        addTaskText();
+        Deadline newDeadline = new Deadline(deadlineName, deadlineTime);
+        userTasks.add(newDeadline);
+        System.out.println(newDeadline);
+        taskNumberText();
     }
 
     /**
@@ -105,16 +123,6 @@ public class Sana {
     }
 
     /**
-     * Adds given task to the list of tasks given to Sana.
-     *
-     * @param taskName  name of task
-     */
-    private void addTask(String taskName) {
-        userTasks.add(new Task(taskName));
-        System.out.println("added: " + taskName);
-    }
-
-    /**
      * This method lists the history of user inputs to Sana
      */
     private void list() {
@@ -155,6 +163,19 @@ public class Sana {
     private void border() {
         System.out.println(border);
     }
+
+    /** Obsolete
+     * Adds given task to the list of tasks given to Sana.
+     *
+     * @param taskName  name of task
+     */
+
+    /**
+     private void addTask(String taskName) {
+     userTasks.add(new Task(taskName));
+     System.out.println("added: " + taskName);
+     }
+     */
 
     public static void main(String[] args) {
         Sana sana = new Sana();
