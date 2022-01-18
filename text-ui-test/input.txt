@@ -15,7 +15,13 @@ blah
 todo adding this again
 abby breaks!
 mark 10
+mark read book
 unmark 10
+unmark readbook
 deadline everything works now? /by NOW!
+list
+delete 3
+list
+delete read book
 list
 bye

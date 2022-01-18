@@ -139,6 +139,16 @@ ____________________________________________________________
 
 ____________________________________________________________
 
+OOPS!!! I can't find that in your task list :-(
+____________________________________________________________
+
+____________________________________________________________
+
+OOPS!!! I can't find that in your task list :-(
+____________________________________________________________
+
+____________________________________________________________
+
 Got it. I've added this task:
   [D][ ] everything works now? (by: NOW!)
 Now you have 9 tasks in the list.
@@ -156,6 +166,44 @@ Here are the tasks in your list:
 7. [E][ ] project meeting (at: Mon 2-4pm)
 8. [T][ ] adding this again
 9. [D][ ] everything works now? (by: NOW!)
+____________________________________________________________
+
+____________________________________________________________
+
+Noted. I've removed this task:
+  [E][ ] project meeting (at: Aug 6th 2-4pm)
+Now you have 8 tasks in the list.
+____________________________________________________________
+
+____________________________________________________________
+
+Here are the tasks in your list:
+1. [T][X] read book
+2. [D][ ] return book (by: June 6th)
+3. [T][X] join sports club
+4. [T][ ] borrow book
+5. [D][ ] return book (by: Sunday)
+6. [E][ ] project meeting (at: Mon 2-4pm)
+7. [T][ ] adding this again
+8. [D][ ] everything works now? (by: NOW!)
+____________________________________________________________
+
+____________________________________________________________
+
+OOPS!!! I can't find that in your task list :-(
+____________________________________________________________
+
+____________________________________________________________
+
+Here are the tasks in your list:
+1. [T][X] read book
+2. [D][ ] return book (by: June 6th)
+3. [T][X] join sports club
+4. [T][ ] borrow book
+5. [D][ ] return book (by: Sunday)
+6. [E][ ] project meeting (at: Mon 2-4pm)
+7. [T][ ] adding this again
+8. [D][ ] everything works now? (by: NOW!)
 ____________________________________________________________
 
 ____________________________________________________________
