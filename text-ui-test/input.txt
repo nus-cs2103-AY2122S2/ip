@@ -1,0 +1,11 @@
+todo drink water
+list
+deadline finish week 2 task /by Thursday
+event collect parcel /at Tue 630-645pm
+list
+mark 2
+list
+mark 1
+unmark 1
+list
+bye
