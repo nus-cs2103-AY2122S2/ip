@@ -19,6 +19,7 @@ public class TaskList {
 
     /**
      * Method to add an item into the Task List
+     *
      * @param item the item to be added.
      */
     public void add(Task item) {
@@ -36,25 +37,34 @@ public class TaskList {
     /**
      * Method to mark a task as done or undone.
      *
-     * @param taskNum the task number to be marked.
+     * @param taskIndex the index of the task to be marked.
      * @param isDone whether the task is to be done or not.
+     * @throws NoSuchTaskException when there is no such task with the index taskNum.
      */
-    public void markTask(int taskNum, boolean isDone) {
-        this.list.get(taskNum).markAs(isDone);
+    public void markTask(int taskIndex, boolean isDone) throws NoSuchTaskException {
+        if (taskIndex >= this.list.size()) {
+            throw new NoSuchTaskException("There is no task with index " + taskIndex);
+        }
+        this.list.get(taskIndex).markAs(isDone);
     }
 
     /**
      * Method to display a stored task as a String.
      *
-     * @param taskNum the index of the task to be displayed.
+     * @param taskIndex the index of the task to be displayed.
      * @return String representation of the task.
+     * @throws NoSuchTaskException when there is no such task with the index taskNum.
      */
-    public String displayTask(int taskNum) {
-        return this.list.get(taskNum).toString();
+    public String displayTask(int taskIndex) throws NoSuchTaskException {
+        if (taskIndex >= this.list.size()) {
+            throw new NoSuchTaskException("There is no task with index " + taskIndex);
+        }
+        return this.list.get(taskIndex).toString();
     }
 
     /**
      * Overridden toString method to display the TaskList as a String.
+     *
      * @return String representation of the TaskList.
      */
     @Override

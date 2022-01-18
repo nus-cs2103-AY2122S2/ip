@@ -1,4 +1,3 @@
-import java.sql.SQLOutput;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -34,9 +33,7 @@ public class Fluffers<T> {
             "  _.|o o  |_   ) )\n" +
             "-(((---(((--------";
 
-    /**
-     * The private task list that each Fluffers object will keep.
-     */
+    /** The private task list that each Fluffers object will keep. */
     private TaskList tasks;
 
     /**
@@ -101,6 +98,7 @@ public class Fluffers<T> {
 
     /**
      * Asks Fluffers to display what they have kept track of.
+     *
      * @return the String representation of the tasks, with fancy formatting.
      */
     private String listTasks() {
@@ -112,8 +110,9 @@ public class Fluffers<T> {
      *
      * @param taskNum the task number to be marked (starts from 1).
      * @param isDone whether the task is done or not.
+     * @throws NoSuchTaskException when there is no such task with number taskNum
      */
-    private void markTask(int taskNum, boolean isDone) {
+    private void markTask(int taskNum, boolean isDone) throws NoSuchTaskException {
         this.tasks.markTask(taskNum - 1, isDone);
     }
 
@@ -122,8 +121,9 @@ public class Fluffers<T> {
      *
      * @param taskNum which task to be displayed (starts from 1).
      * @return the String representation of the task.
+     * @throws NoSuchTaskException when there is no such task with number taskNum
      */
-    private String displayTask(int taskNum) {
+    private String displayTask(int taskNum) throws NoSuchTaskException {
         return this.tasks.displayTask(taskNum - 1);
     }
 
@@ -153,17 +153,31 @@ public class Fluffers<T> {
 
             } else if (input.startsWith("mark")) {
                 int taskNum = Integer.parseInt(input.split(" ")[1]);
-                f.markTask(taskNum, true);
-                System.out.println(f.speak(
-                        "Okay! I've marked this task as done! " + f.displayTask(taskNum)
-                ));
+                try {
+                    f.markTask(taskNum, true);
+                    System.out.println(f.speak(
+                            "Okay! I've marked this task as done! " + f.displayTask(taskNum)
+                    ));
+                } catch (NoSuchTaskException e) {
+                    String reply = String.format(
+                            "There's no task %d to mark. Did you mean to do something else?",
+                            taskNum);
+                    System.out.println(f.speak(reply, true));
+                }
 
             } else if (input.startsWith("unmark")) {
                 int taskNum = Integer.parseInt(input.split(" ")[1]);
-                f.markTask(taskNum, false);
-                System.out.println(f.speak(
-                        "This task now needs to be done! " + f.displayTask(taskNum)
-                ));
+                try {
+                    f.markTask(taskNum, false);
+                    System.out.println(f.speak(
+                            "This task now needs to be done! " + f.displayTask(taskNum)
+                    ));
+                } catch (NoSuchTaskException e) {
+                    String reply = String.format(
+                            "There's no task %d to unmark. Did you mean to do something else?",
+                            taskNum);
+                    System.out.println(f.speak(reply, true));
+                }
 
             } else {
                 f.store(new Task(input));

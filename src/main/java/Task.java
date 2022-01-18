@@ -29,6 +29,10 @@ public class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Overridden toString method to represent the task as a String.
+     * @return String representation of the task.
+     */
     @Override
     public String toString() {
         return String.format("[%s] %s", isDone ? Task.TICK : " ", desc);
