@@ -6,6 +6,28 @@ import java.util.ArrayList;
 
 public class Duke {
 
+    public enum Commands {
+        TODO("todo"),
+        DEADLINE("deadline"),
+        EVENT("event"),
+        LIST("list"),
+        MARK("mark"),
+        UNMARK("unmark"),
+        DELETE("delete"),
+        BYE("bye");
+
+        private final String str;
+
+        Commands(String str) {
+            this.str = str;
+        }
+
+        @Override
+        public String toString() {
+            return str;
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String bot = "Hello! I'm Duke\nHere is a list of commands for your reference!\n";
@@ -20,12 +42,12 @@ public class Duke {
 
         do {
             response = reader.readLine().trim();
-            if (response.equals("bye")) {
+            if (response.equals(Commands.BYE.toString())) {
                 printLines();
                 System.out.println("Bye. Hope to see you again soon!");
                 printLines();
                 break;
-            } else if (response.equals("list")) {
+            } else if (response.equals(Commands.LIST.toString())) {
                 printLines();
                 System.out.println("Here are the tasks in your list:");
                 listAllTasks(tasks);
@@ -41,7 +63,9 @@ public class Duke {
                     valid = false;
                 } else {
                     String[] split = response.split("\\s+");
-                    if (split[0].contains("mark") || split[0].contains("delete")) {
+                    if (split[0].equals(Commands.MARK.toString()) ||
+                            split[0].equals(Commands.UNMARK.toString()) ||
+                            split[0].equals(Commands.DELETE.toString())) {
                         int digit = Integer.parseInt(split[1]);
                         if (digit > 0 && digit <= tasks.size()) {
                             handleResponse(split[0]);
@@ -60,14 +84,14 @@ public class Duke {
                     } else {
                         if (split.length > 1) {
                             String[] secondSplit;
-                            if (split[0].equals("todo")) {
+                            if (split[0].equals(Commands.TODO.toString())) {
                                 newTask = new Todo(removeSubString(response, "todo "));
-                            } else if (split[0].equals("deadline")) {
+                            } else if (split[0].equals(Commands.DEADLINE.toString())) {
                                 secondSplit = response.split(" /by ");
                                 if (secondSplit.length > 1) {
                                     newTask = new Deadline(removeSubString(secondSplit[0], "deadline "), secondSplit[1]);
                                 } else { valid = false; }
-                            } else if (split[0].equals("event")) {
+                            } else if (split[0].equals(Commands.EVENT.toString())) {
                                 secondSplit = response.split(" /at ");
                                 if (secondSplit.length > 1) {
                                     newTask = new Event(removeSubString(secondSplit[0], "event "), secondSplit[1]);
@@ -89,7 +113,7 @@ public class Duke {
                 }
                 printLines();
             }
-        } while(!response.equals("bye"));
+        } while(!response.equals(Commands.BYE.toString()));
     }
 
 // ____________________________________________________________
@@ -107,6 +131,7 @@ public class Duke {
         System.out.println("5. mark X (mark X task as done");
         System.out.println("6. unmark X (mark X task as undone");
         System.out.println("7. delete X (delete X task from the list");
+        System.out.println("8. bye - exit Duke bot");
     }
 
     public static void listAllTasks(ArrayList<Task> tasks) {
