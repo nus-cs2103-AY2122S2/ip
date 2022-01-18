@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private static final String TEXT_LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
+    private static final String TEXT_LOGO = " ____        _\n"
+            + "|  _ \\ _   _| | _____\n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|";
