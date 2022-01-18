@@ -1,16 +1,11 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static final int MAX_TASK = 100;
-    private static Task[] tasks;
-    private static int numberOfTasks;
     private static final String delimiter = "*******************************************************";
-
-    private static void init() {
-        tasks = new Task[MAX_TASK];
-        numberOfTasks = 0;
-    }
-
+    private static final ArrayList<Task> tasks = new ArrayList<>();
+    private static int numberOfTasks = 0;
+    
     private static void greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -35,7 +30,7 @@ public class Duke {
         } else {
             newTask = new Event(taskName, dateTime);
         }
-        tasks[numberOfTasks] = newTask;
+        tasks.add(newTask);
         numberOfTasks++;
         System.out.println("Got it. I've added this task: ");
         System.out.println(newTask);
@@ -45,20 +40,20 @@ public class Duke {
     private static void listTask() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < numberOfTasks; i++) {
-            System.out.println((i + 1) + ". " + tasks[i]);
+            System.out.println((i + 1) + ". " + tasks.get(i));
         }
     }
 
-    private static void mark(int taskNumber) {
-        tasks[taskNumber - 1].mark();
+    private static void markTask(int taskNumber) {
+        tasks.get(taskNumber - 1).mark();
         System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(tasks[taskNumber - 1]);
+        System.out.println(tasks.get(taskNumber - 1));
     }
 
-    private static void unmark(int taskNumber) {
-        tasks[taskNumber - 1].unmark();
+    private static void unmarkTask(int taskNumber) {
+        tasks.get(taskNumber - 1).unmark();
         System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println(tasks[taskNumber - 1]);
+        System.out.println(tasks.get(taskNumber - 1));
     }
 
     private static void execute(String command) throws DukeException, 
@@ -73,14 +68,14 @@ public class Duke {
             if (!(1 <= indexOfTaskToMark && indexOfTaskToMark <= numberOfTasks)) {
                 throw new DukeException("The index of task to be marked is invalid!!");
             }
-            mark(indexOfTaskToMark);
+            markTask(indexOfTaskToMark);
             break;
         case "unmark":
             int indexOfTaskToUnmark = Integer.parseInt(commandTokens[1]);
             if (!(1 <= indexOfTaskToUnmark && indexOfTaskToUnmark <= numberOfTasks)) {
                 throw new DukeException("The index of task to be unmarked is invalid!!");
             }
-            unmark(indexOfTaskToUnmark);
+            unmarkTask(indexOfTaskToUnmark);
             break;
         case "todo":
             addTask("todo", commandTokens[1], "");
@@ -123,7 +118,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        init();
         greet();
         run();
         exit();
