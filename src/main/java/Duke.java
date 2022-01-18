@@ -30,9 +30,10 @@ public class Duke {
                     System.out.println("Nice! I've marked this task as done:\n  " 
                             + list.get(indexToMark));
                 } catch (IndexOutOfBoundsException e) {
-                    System.out.println("Please choose a valid task! (Your list has " + list.size() + " tasks)");
+                    System.out.println("Please choose a valid task! (Your list has " 
+                            + list.size() + " tasks)");
                 } catch (NumberFormatException e) {
-                    System.out.println("Please choose a valid task! (Your list has " + list.size() + " tasks)");
+                    System.out.println("Please input an integer!");
                 }
             } else if (firstWord.equals("unmark")) {
                 try {
@@ -41,9 +42,10 @@ public class Duke {
                     System.out.println("OK, I've marked this task as not done yet:\n  " 
                             + list.get(indexToUnmark));
                 } catch (IndexOutOfBoundsException e) {
-                    System.out.println("Please choose a valid task! (Your list has " + list.size() + " tasks)");
+                    System.out.println("Please choose a valid task! (Your list has " 
+                            + list.size() + " tasks)");
                 } catch (NumberFormatException e) {
-                    System.out.println("Please choose a valid task! (Your list has " + list.size() + " tasks)");
+                    System.out.println("Please input an integer!");
                 }
             } else if (firstWord.equals("list")) {
                 if (nextLine.split(" ").length > 1) {
@@ -54,6 +56,19 @@ public class Duke {
                     for (int i = 0; i < list.size(); i++) {
                         System.out.println((i + 1) + "." + list.get(i));
                     }
+                }
+            } else if (firstWord.equals("delete")) {
+                try {
+                    int indexToDelete = Integer.parseInt(nextLine.substring(7)) - 1;
+                    Task deletedTask = list.remove(indexToDelete);
+                    System.out.println("Noted. I've removed this task:\n  " 
+                            + deletedTask 
+                            + "\n Now you have " + list.size() + " tasks in the list.");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Please choose a valid task! (Your list has " 
+                            + list.size() + " tasks)");
+                } catch (NumberFormatException e) {
+                    System.out.println("Please input an integer!");
                 }
             } else {
                 String taskType = nextLine.split(" ")[0];
