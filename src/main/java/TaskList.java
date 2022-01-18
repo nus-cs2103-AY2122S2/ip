@@ -1,5 +1,7 @@
+import java.util.ArrayList;
+
 public class TaskList {
-    private final Task[] listOfTasks;
+    private final ArrayList<Task> listOfTasks;
     private int numberOfTasks;
 
     /**
@@ -8,7 +10,7 @@ public class TaskList {
      * @param size Size of list of tasks.
      */
     public TaskList(int size) {
-        this.listOfTasks = new Task[size];
+        this.listOfTasks = new ArrayList<>(size);
         this.numberOfTasks = 0;
     }
 
@@ -20,22 +22,6 @@ public class TaskList {
     public int getNumberOfTasks() {
         return this.numberOfTasks;
     }
-    /**
-     * Adds the command that is inputted by the user into the list of tasks.
-     *
-     * @param userInput Command entered by the user.
-     */
-    public void add(String userInput) {
-        this.numberOfTasks++;
-
-        Task currentTask = new Task(userInput);
-        this.listOfTasks[numberOfTasks] = currentTask;
-
-        String output = "    ____________________________________________________________\n"
-                + "     added: " + userInput + "\n"
-                + "    ____________________________________________________________\n";
-        System.out.println(output);
-    }
 
     /**
      * Iterates through the list and prints out each task that is on the list.
@@ -44,7 +30,7 @@ public class TaskList {
         System.out.println("    ____________________________________________________________\n"
                 + "     Here are the tasks in your list:\n");
         for (int i = 1; i <= this.numberOfTasks; i++) {
-            Task currTask = this.listOfTasks[i];
+            Task currTask = this.listOfTasks.get(i - 1);
             String output = "     " + i + "." + currTask + "\n";
             System.out.println(output);
         }
@@ -57,7 +43,7 @@ public class TaskList {
      * @param taskId The taskID that corresponds to the task that is to be marked.
      */
     public void mark(int taskId) {
-        Task currTask = this.listOfTasks[taskId];
+        Task currTask = this.listOfTasks.get(taskId - 1);
         currTask.setStatus(true);
         System.out.println("    ____________________________________________________________\n"
                 + "     Nice! I've marked this task as done:\n"
@@ -71,7 +57,7 @@ public class TaskList {
      * @param taskId The taskID that corresponds to the task that is to be unmarked.
      */
     public void unmark(int taskId) {
-        Task currTask = this.listOfTasks[taskId];
+        Task currTask = this.listOfTasks.get(taskId - 1);
         currTask.setStatus(false);
         System.out.println("    ____________________________________________________________\n"
                 + "     OK, I've marked this task as not done yet:\n"
@@ -88,7 +74,7 @@ public class TaskList {
         this.numberOfTasks++;
 
         Task currentTask = new Todo(userInput);
-        this.listOfTasks[numberOfTasks] = currentTask;
+        this.listOfTasks.add(currentTask);
 
         String output = "    ____________________________________________________________\n"
                 + "     Got it. I've added this task:\n"
@@ -107,7 +93,7 @@ public class TaskList {
         this.numberOfTasks++;
 
         Task currentTask = new Deadline(userInput, by);
-        this.listOfTasks[numberOfTasks] = currentTask;
+        this.listOfTasks.add(currentTask);
 
         String output = "    ____________________________________________________________\n"
                 + "     Got it. I've added this task:\n"
@@ -126,7 +112,7 @@ public class TaskList {
         this.numberOfTasks++;
 
         Task currentTask = new Event(userInput, at);
-        this.listOfTasks[numberOfTasks] = currentTask;
+        this.listOfTasks.add(currentTask);
 
         String output = "    ____________________________________________________________\n"
                 + "     Got it. I've added this task:\n"
