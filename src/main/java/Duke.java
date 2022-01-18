@@ -7,6 +7,9 @@ public class Duke {
     private static final String COMMAND_LIST = "list";
     private static final String COMMAND_MARK = "mark";
     private static final String COMMAND_UNMARK = "unmark";
+    private static final String COMMAND_TODO = "todo";
+    private static final String COMMAND_DEADLINE = "deadline";
+    private static final String COMMAND_EVENT = "event";
 
     public static void main(String[] args) {
         printContent("Hello! I'm Duke\n     What can I do for you?");
@@ -31,7 +34,7 @@ public class Duke {
                 printContent("OK, I've marked this task as nto done yet:\n       [" + thisTask.getStatusIcon() + "] " + thisTask.getTitle());
             } else{
                 printContent("added: " + line);
-                tasks.add(new Task(line));
+                tasks.add(new TodoTask(line));
             }
         }
         sc.close();
