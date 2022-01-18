@@ -1,5 +1,5 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+
 /**
  * The FunBoxGear class contains all the functionalities of FunBox.
  */
@@ -56,8 +56,7 @@ public class FunBoxGear {
      * Add user's tasks to the list based on the type of task
      *
      * @param formattedMsg The original message from the users split by " " into an array
-     * @param type The type of task: event, deadline, todo
-     *
+     * @param type         The type of task: event, deadline, todo
      */
     private void addToList(String[] formattedMsg, String type) {
         String description = this.getMessage(formattedMsg);
@@ -95,7 +94,7 @@ public class FunBoxGear {
      * Check whether user input has a description
      *
      * @param description The description of the user input which usually comes after the command type
-     * @param type The type of tasks the user used
+     * @param type        The type of tasks the user used
      * @throws FunBoxExceptions If description == ""
      */
     private void isDescriptionError(String description, String type) throws FunBoxExceptions {
@@ -132,7 +131,6 @@ public class FunBoxGear {
      *
      * @param formattedMsg The message sent by the user which has been formatted
      * @return Return a string of the original message sent by the users without the command
-     *
      */
     private String getMessage(String[] formattedMsg) {
         StringBuilder sb = new StringBuilder();
@@ -155,7 +153,6 @@ public class FunBoxGear {
      * @param message The message to retrieve the date and time from
      * @return Return a String array of size 2 where the first item on the list contains the message and
      * the second item contains the date and time.
-     *
      */
     private String[] getDescriptionAndDate(String message, String type) {
         if (type.equals("event")) {
@@ -165,15 +162,35 @@ public class FunBoxGear {
     }
 
     /**
+     * Check if commands such as mark, unmark, delete has the correct input
+     *
+     * @param messageArr The commands to be checked against
+     * @throws FunBoxExceptions If messageArr.length != 2
+     */
+    private void checkTaskError(String[] messageArr) throws FunBoxExceptions {
+        if (messageArr.length != 2) {
+            if (messageArr.length == 1) {
+                throw new FunBoxExceptions("Missing Task No. !!!");
+            } else {
+                throw new FunBoxExceptions("Invalid input !!!");
+            }
+        }
+    }
+
+    /**
      * Mark the item on the list as done
      *
      * @param messageArr The formatted message of the user, the second item of the array typically contains the
      *                   taskNo to be mark as done
-     *
      */
     private void markDone(String[] messageArr) {
-        int taskNo = Integer.parseInt(messageArr[1]);
-        this.tasksList.get(taskNo - 1).setDone();
+        try {
+            this.checkTaskError(messageArr);
+            int taskNo = Integer.parseInt(messageArr[1]);
+            this.tasksList.get(taskNo - 1).setDone();
+        } catch (FunBoxExceptions e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -183,8 +200,13 @@ public class FunBoxGear {
      *                   taskNo to be mark as not done
      */
     private void markUndone(String[] messageArr) {
-        int taskNo = Integer.parseInt(messageArr[1]);
-        this.tasksList.get(taskNo - 1).setUndone();
+        try {
+            this.checkTaskError(messageArr);
+            int taskNo = Integer.parseInt(messageArr[1]);
+            this.tasksList.get(taskNo - 1).setUndone();
+        } catch (FunBoxExceptions e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -194,12 +216,17 @@ public class FunBoxGear {
      *                   taskNo to be deleted
      */
     private void deleteTask(String[] messageArr) {
-        int taskNo = Integer.parseInt(messageArr[1]) - 1;
-        Task temp = this.tasksList.get(taskNo);
-        this.tasksList.remove(taskNo);
-        System.out.println("Noted! I've removed this task:");
-        System.out.println(temp);
-        System.out.println("Now you have " + this.tasksList.size() + " tasks in the list");
+        try {
+            this.checkTaskError(messageArr);
+            int taskNo = Integer.parseInt(messageArr[1]) - 1;
+            Task temp = this.tasksList.get(taskNo);
+            this.tasksList.remove(taskNo);
+            System.out.println("Noted! I've removed this task:");
+            System.out.println(temp);
+            System.out.println("Now you have " + this.tasksList.size() + " tasks in the list");
+        } catch (FunBoxExceptions e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
