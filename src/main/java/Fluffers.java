@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 /**
@@ -8,7 +9,6 @@ import java.util.Scanner;
  * ASCII art credit: All ASCII art was found on https://www.asciiart.eu/animals/cats .
  *
  * @author Ong Han Yang
- * @version 0
  */
 public class Fluffers {
     /** ASCII art for when Fluffers just wakes up*/
@@ -33,6 +33,8 @@ public class Fluffers {
             "  _.|o o  |_   ) )\n" +
             "-(((---(((--------";
 
+    private static TaskList<String> tasks = new TaskList<>();
+
     /**
      * Asks Fluffers to speak with fancy formatting.
      *
@@ -55,27 +57,45 @@ public class Fluffers {
         return String.format("Meow%s (%s)\n", isQuestion ? "?" : "!", input);
     }
 
+    private static void store(String toStore) {
+        tasks.add(toStore);
+    }
+
+    private static String listTasks() {
+        return String.format("%s\n%s\n------------------", Fluffers.LIST_TOP, tasks.toString());
+    }
+
+
+
     /**
      * The main method to start the program/wake Fluffers up
      * @param args input CLI arguments.
      */
     public static void main(String[] args) {
         String openingText = "Activating Cat Translator 2000...\n" +
-                "Waking Fluffers up...\n" +
-                "Meow! (Hello!)\n\n" +
+                "Waking Fluffers up...\n\n" +
+                "Meow! (Hello!)\n" +
                 Fluffers.AWAKE;
 
         System.out.println(openingText);
 
         Scanner sc = new Scanner(System.in);
-        while (true) {
+        boolean isAwake = true;
+
+        while (isAwake) {
             String input = sc.nextLine();
-            if (input.equals("bye")) {
-                System.out.println(Fluffers.speak("Goodbye!"));
+            switch(input) {
+            case "bye":
+                System.out.println(Fluffers.speak("Bye bye!"));
                 System.out.println(Fluffers.ASLEEP);
+                isAwake = false;
                 break;
-            } else {
-                System.out.println(Fluffers.speak(input));
+            case "list":
+                System.out.println(Fluffers.listTasks());
+                break;
+            default:
+                tasks.add(input);
+                System.out.println(Fluffers.speak("Added: " + input));
             }
         }
 
