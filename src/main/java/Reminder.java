@@ -14,7 +14,7 @@ public class Reminder {
     }
 
     public void list() {
-        System.out.println("\tHere are the tasks in your list: ");
+        System.out.println("\tHere are the tasks in your list:");
         if (pointer == 0) {
             System.out.println("\tYou have no task in your list.");
         } else {
