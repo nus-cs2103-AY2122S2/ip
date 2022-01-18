@@ -19,6 +19,7 @@ public class Bobby {
                     System.out.println(count + ". " + stringArray.get(i));
                 }
             } else {
+                System.out.println("Bobby heard: " + userInput);
                 stringArray.add(userInput);
             }
         }
