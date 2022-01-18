@@ -20,4 +20,10 @@ deadline
 event
 deadline Deadline Title With No Deadline
 event Event Title With No Event
+mark invalid
+mark 7
+mark
+unmark invalid
+unmark 7
+unmark
 bye
