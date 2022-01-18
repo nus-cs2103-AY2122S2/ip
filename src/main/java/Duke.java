@@ -23,11 +23,13 @@ public class Duke {
             }
 
             else if (Objects.equals(input.toLowerCase(), "list")) {
-                System.out.println("Here are the tasks in your list: " + "\n");
                 if (!inputList.isEmpty()) {
+                    System.out.println("Here are the tasks in your list: " + "\n");
                     for (int i = 0; i < inputList.size(); i++) {
                         System.out.println( (i + 1) + ". "  + inputList.get(i) + "\n");
                     }
+                } else {
+                    System.out.println("You currently have no tasks.");
                 }
             }
 
@@ -95,6 +97,17 @@ public class Duke {
                         inputList.add(td);
                         System.out.println("Got it. I've added " + td + " to the list.");
                         System.out.println("Now you have " + inputList.size() + " tasks in the list.");
+                    }
+                }
+
+                else if (parsedString[0].equalsIgnoreCase("delete")) {
+                    String[] parsedInput = input.toLowerCase().split("\\s+");
+                    int idx = Integer.parseInt(parsedInput[1]);
+                    if (idx - 1 >= inputList.size()) {
+                        System.out.println("Index provided is out of range.");
+                    } else {
+                        System.out.println("OK. I've successfully deleted your task.");
+                        inputList.remove(idx - 1);
                     }
                 }
 
