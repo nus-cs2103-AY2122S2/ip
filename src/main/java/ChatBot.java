@@ -12,6 +12,15 @@ public class ChatBot {
 		"Don't be scared. Come in, have a seat!",
 	};
 	private static final Random RANDOM_INDEX_GENERATOR = new Random();
+	private static final String[] GUIDE = {
+		"list                                               View your task list",
+		"todo <name of task>                                Add a todo to your task list",
+		"deadline <name of task> /by <deadline of task>     Add a deadline to your task list",
+		"event <name of task> /at <timestamp of task>       Add an event to your task list",
+		"mark <index of task>                               Mark a task as complete in your task list",
+		"unmark <index of task>                             Unmark a task in your task list",
+		"bye                                                Exit the program",
+	};
 
 	public static void main(String[] args) {
 		greet();
@@ -58,6 +67,21 @@ public class ChatBot {
 				case "todo":
 					chat(taskList.addToDo(input));
 					printNumTasks(taskList.getNumTasks());
+					break;
+				case "guide":
+					chat(
+						"Here is a list of commands that you can use traveller!"
+					);
+					for (int i = 0; i < GUIDE.length; i++) {
+						System.out.println(
+							String.format(
+								"             %d. %s",
+								i + 1,
+								GUIDE[i]
+							)
+						);
+					}
+					System.out.println();
 					break;
 				default:
 					String[] temp = rawInput.split("/");
@@ -106,7 +130,7 @@ public class ChatBot {
 	public static void greet() {
 		System.out.println(BORDER + "\n");
 		chat("Greetings, traveller!");
-		chat(getRandomGreetingQuote());
+		// chat(getRandomGreetingQuote());
 		chat(
 			"I'm the innkeeper and im here to help you with whatever you need."
 		);

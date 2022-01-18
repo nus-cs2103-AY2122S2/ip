@@ -1,7 +1,134 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+*************************************************************************************
 
+Innkeeper: Greetings, traveller!
+
+Innkeeper: I'm the innkeeper and im here to help you with whatever you need.
+
+*************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+*************************************************************************************
+
+You: 
+Innkeeper: Here is a list of commands that you can use traveller!
+
+             1. list                                               View your task list
+             2. todo <name of task>                                Add a todo to your task list
+             3. deadline <name of task> /by <deadline of task>     Add a deadline to your task list
+             4. event <name of task> /at <timestamp of task>       Add an event to your task list
+             5. mark <index of task>                               Mark a task as complete in your task list
+             6. unmark <index of task>                             Unmark a task in your task list
+             7. bye                                                Exit the program
+
+*************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+*************************************************************************************
+
+You: 
+Innkeeper: Your task list is currently empty!
+
+*************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+*************************************************************************************
+
+You: 
+Innkeeper: This task has been added to your task list!
+
+             [T][ ] sometodo
+
+Innkeeper: You now have 1 task!
+
+*************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+*************************************************************************************
+
+You: 
+Innkeeper: This task has been added to your task list!
+
+             [D][ ] somedeadline (by: tomorrow)
+
+Innkeeper: You now have 2 tasks!
+
+*************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+*************************************************************************************
+
+You: 
+Innkeeper: This task has been added to your task list!
+
+             [E][ ] someevent (at: 2pm-4pm tomorrow)
+
+Innkeeper: You now have 3 tasks!
+
+*************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+*************************************************************************************
+
+You: 
+Innkeeper: This task has been marked as completed in your task list!
+
+             [D][X] somedeadline (by: tomorrow)
+
+*************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+*************************************************************************************
+
+You: 
+Innkeeper: This task has not been completed yet! No need to unmark it.
+
+*************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+*************************************************************************************
+
+You: 
+Innkeeper: This task was already completed! No need to mark it again.
+
+*************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+*************************************************************************************
+
+You: 
+Innkeeper: This task has been marked as completed in your task list!
+
+             [T][X] sometodo
+
+*************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+*************************************************************************************
+
+You: 
+Innkeeper: Here you go!
+
+             1. [T][X] sometodo
+             2. [D][X] somedeadline (by: tomorrow)
+             3. [E][ ] someevent (at: 2pm-4pm tomorrow)
+
+*************************************************************************************
+
+Innkeeper: What can I do for you today?
+
+*************************************************************************************
+
+You: 
+Innkeeper: Goodbye traveller! Hope to see you again soon!
+
+*************************************************************************************
