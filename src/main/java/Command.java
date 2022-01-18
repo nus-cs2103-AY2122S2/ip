@@ -1,4 +1,21 @@
 public class Command {
+    private static final String[] commands = {
+            "mark", "unmark"
+    };
+
+    /**
+     * Checks whether a command is valid
+     * @param cmd Command to check validity
+     * @return Validity of the command
+     */
+    public static Boolean isValidCommand(String cmd) {
+        for (String command : Command.commands) {
+            if (command.equals(cmd)) return true;
+        }
+
+        return false;
+    }
+
     private String name;
     private String[] arguments;
 
