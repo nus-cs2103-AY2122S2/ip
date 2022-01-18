@@ -1,6 +1,7 @@
-public class Task {
+public abstract class Task {
     protected String title;
     protected Boolean isDone;
+    protected String type;
 
     public Task(String title){
         this.title = title;
@@ -20,11 +21,16 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getTitle(){
-        return this.title;
+    public String getType(){
+        return this.type;
     }
 
     public String getStatusIcon(){
         return (isDone ? "X" : " ");
+    }
+
+    @Override
+    public String toString(){
+        return this.title;
     }
 }
