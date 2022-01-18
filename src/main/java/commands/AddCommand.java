@@ -8,12 +8,27 @@ public class AddCommand extends Command {
     private Task added;
 
 
-    public AddCommand(Task[] tasklist, int size,  String input){
-        this.input = input;
+    public AddCommand(Task[] tasklist, int size, String input){
+        String[] processedInput = input.split(" ", 2);
+        String type = processedInput[0];
+        this.input = processedInput[1];
         this.tasklist = tasklist;
         this.size = size;
-        this.added = new Task(input);
+        switch (type) {
+            case "todo":
+                this.added = new ToDos(input);
+                break;
+            case "event":
+                processedInput = input.split("/at", 2);
+                this.added = new Events(processedInput[0], processedInput[1]);
+                break;
+            case "deadline":
+                processedInput = input.split("/by", 2);
+                this.added = new Deadlines(processedInput[0], processedInput[1]);
+                break;
+        }
         tasklist[size] = added;
+        this.size++;
     }
 
     @Override
@@ -28,6 +43,9 @@ public class AddCommand extends Command {
 
     @Override
     public void execute() {
-        printFormatted(new String[]{"added: " + added});
+        printFormatted(new String[]{
+                "Got it. I've added this task:",
+                "  "+ added,
+                "Now you have " + size + " tasks in the list"});
     }
 }
