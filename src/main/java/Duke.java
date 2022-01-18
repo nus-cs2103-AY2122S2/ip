@@ -106,7 +106,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         drawDivider();
-        System.out.println("Hello! I'm Duke \n" + "What can I do for you?");
+        System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
         drawDivider();
     }
 
@@ -133,7 +133,7 @@ public class Duke {
     private void addTask(Task task, ArrayList<Task> list) {
         drawDivider();
         list.add(task);
-        System.out.println("Got it. I've added this task: ");
+        System.out.println("Got it. I've added this task:");
         System.out.println(task.toString());
         System.out.printf("Now you have %d tasks in the list%n", list.size());
         drawDivider();
