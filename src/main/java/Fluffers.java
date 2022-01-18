@@ -1,9 +1,4 @@
-import Tasks.NoSuchTaskException;
-import Tasks.Task;
-import Tasks.TaskList;
-import Tasks.ToDoTask;
-import Tasks.DeadlineTask;
-import Tasks.EventTask;
+import Tasks.*;
 
 import java.util.Objects;
 import java.util.Scanner;
@@ -49,7 +44,7 @@ public class Fluffers<T> {
      */
     public Fluffers() {
         tasks = new TaskList();
-        isAwake = false;
+        isAwake = true;
     }
 
     /**
@@ -92,7 +87,7 @@ public class Fluffers<T> {
      * @return String representation of the Farewell.
      */
     private String farewell() {
-        return "Bye bye!\n" +
+        return "Meooow~ (Bye bye! See you again next time!)\n" +
                 Fluffers.ASLEEP;
     }
 
@@ -165,7 +160,7 @@ public class Fluffers<T> {
      */
     public String invalidActionReply(String message) {
         String invalidMsg = String.format(
-                "I can't do that! %sDid you mean to do something else?", message + " ");
+                "I can't do that! %s\nDid you mean to do something else?", message);
         return this.speak(invalidMsg, true);
     }
 
@@ -177,7 +172,7 @@ public class Fluffers<T> {
      */
     public String storeTaskAndReply(Task task) {
         this.store(task);
-        String reply = String.format("Added: %s.\nYou now have %d tasks!", task, this.countTasks());
+        String reply = String.format("Added: %s.\nYou now have %d task(s)!", task, this.countTasks());
         return this.speak(reply);
     }
 
@@ -220,16 +215,28 @@ public class Fluffers<T> {
                 }
 
             } else if (input.startsWith("todo")){
-                ToDoTask task = ToDoTask.parseInput(input);
-                return this.storeTaskAndReply(task);
+                try {
+                    ToDoTask task = ToDoTask.parseInput(input);
+                    return this.storeTaskAndReply(task);
+                } catch (InvalidInputException e) {
+                    return this.invalidActionReply(e.getMessage());
+                }
 
             } else if (input.startsWith("deadline")){
-                DeadlineTask task = DeadlineTask.parseInput(input);
-                return this.storeTaskAndReply(task);
+                try {
+                    DeadlineTask task = DeadlineTask.parseInput(input);
+                    return this.storeTaskAndReply(task);
+                } catch (InvalidInputException e) {
+                    return this.invalidActionReply(e.getMessage());
+                }
 
             } else if (input.startsWith("event")) {
-                EventTask task = EventTask.parseInput(input);
-                return this.storeTaskAndReply(task);
+                try {
+                    EventTask task = EventTask.parseInput(input);
+                    return this.storeTaskAndReply(task);
+                } catch (InvalidInputException e) {
+                    return this.invalidActionReply(e.getMessage());
+                }
 
             } else {
                 return this.invalidActionReply("I don't understand what you said.");

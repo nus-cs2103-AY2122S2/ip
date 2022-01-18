@@ -48,9 +48,9 @@ public class EventTask extends Task {
         desc = desc.strip();
         int indexOfSplit = desc.indexOf(" /at ");
         if (indexOfSplit == -1) {
-            throw new InvalidInputException("No \" /at \" found in the message!");
+            throw new InvalidInputException("No \" /at \" found in the input!");
         }
-        String[] params = desc.split(" /by ");
+        String[] params = desc.split(" /at ");
         if (params[0].length() == 0) {
             throw new InvalidInputException("No description is provided for the Event Task!");
         }

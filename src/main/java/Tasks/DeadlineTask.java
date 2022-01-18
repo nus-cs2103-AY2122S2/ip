@@ -51,7 +51,7 @@ public class DeadlineTask extends Task{
         desc = desc.strip();
         int indexOfSplit = desc.indexOf(" /by ");
         if (indexOfSplit == -1) {
-            throw new InvalidInputException("No \" /by \" found in the message!");
+            throw new InvalidInputException("No \" /by \" found in the input!");
         }
         String[] params = desc.split(" /by ");
         if (params[0].length() == 0) {
