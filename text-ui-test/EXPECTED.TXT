@@ -30,11 +30,11 @@
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
     Nice! You've completed this task:
-    [T][X] buy lunch
+      [T][X] buy lunch
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
     Nice! You've completed this task:
-    [E][X] project meeting (at: Wednesday, 10am-11am)
+      [E][X] project meeting (at: Wednesday, 10am-11am)
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
     Here are the tasks in your list:
@@ -44,13 +44,25 @@
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
     Okay, I've marked this task as undone:
-    [E][ ] project meeting (at: Wednesday, 10am-11am)
+      [E][ ] project meeting (at: Wednesday, 10am-11am)
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
     Here are the tasks in your list:
     1.[T][X] buy lunch
     2.[D][ ] submit assignment (by: Friday, 2pm)
     3.[E][ ] project meeting (at: Wednesday, 10am-11am)
+    ――――――――――――――――――――――――――――――――――
+    ――――――――――――――――――――――――――――――――――
+    Oops, the task needs a description!
+    ――――――――――――――――――――――――――――――――――
+    ――――――――――――――――――――――――――――――――――
+    Oops, the task needs a description!
+    ――――――――――――――――――――――――――――――――――
+    ――――――――――――――――――――――――――――――――――
+    Oops, the task needs a description!
+    ――――――――――――――――――――――――――――――――――
+    ――――――――――――――――――――――――――――――――――
+    Sorry, I don't know which task you would like to mark :(
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
     Bye! Hope to see you again soon!
