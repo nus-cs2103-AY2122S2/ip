@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) throws MissingDescriptionException {
+    public static void main(String[] args) {
         String logo = "       __  \n"
                 + "(____()'`; \n"
                 + "/,    /` \n"
@@ -25,7 +25,7 @@ public class Duke {
                 }
                 else {
                     String[] temp = str.split(" ");
-                    if (temp[0].equals("unmark") || temp[0].equals("mark")) {
+                    if (temp[0].equals("unmark") || temp[0].equals("mark") || temp[0].equals("delete")) {
                             int taskNumber = Integer.parseInt(temp[1]);
                             if (tasks.size() < taskNumber){
                                 System.out.println("Invalid task number!");
@@ -35,6 +35,12 @@ public class Duke {
                                     Task currTask = tasks.get(taskNumber - 1);
                                     currTask.setDone();
                                     System.out.println("Nice! I've marked this task as done: \n" + "  " + currTask);
+                                }
+                                else if (temp[0].equals("delete")){
+                                    int index = Integer.parseInt(str.substring(7));
+                                    Task task = tasks.get(index - 1);
+                                    tasks.remove(index - 1);
+                                    System.out.println("Okay, I have deleted " + task);
                                 }
                                 else {
                                     Task currTask = tasks.get(taskNumber - 1);
@@ -61,10 +67,6 @@ public class Duke {
                             System.out.println("Got it. I've added this task: \n  " + deadline +
                                     "\nNow you have " + tasks.size() + " task(s) on the list.");
                         }
-                        else {
-                            System.out.println("added : " + str);
-                            tasks.add(new Task(str));
-                        }
                     }
                 }
            }
@@ -85,10 +87,11 @@ public class Duke {
         if (firstWord.equals("deadline") || firstWord.equals("event") || firstWord.equals("todo")
                 || firstWord.equals("list") || firstWord.equals("delete") || firstWord.equals("unmark")
                 || firstWord.equals("mark")){
-            if (firstWord.equals("deadline") || firstWord.equals("event") || firstWord.equals("todo") && strArr.length == 1) {
+            if ((firstWord.equals("deadline") || firstWord.equals("event") || firstWord.equals("todo")) && strArr.length == 1) {
+                System.out.println("here");
                 throw new MissingDescriptionException();
             }
-            if (firstWord.equals("unmark") || firstWord.equals("mark")){
+            if (firstWord.equals("unmark") || firstWord.equals("mark") || firstWord.equals("delete")){
                 if (strArr.length == 1) {
                     throw new DukeException();
                 }
