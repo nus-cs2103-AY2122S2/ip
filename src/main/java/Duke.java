@@ -27,14 +27,19 @@ public class Duke {
             } else if (query.compareTo(COMMAND_MARK) == 0){
                 Task thisTask = tasks.get(Integer.parseInt(splitted[1])-1);
                 thisTask.markAsDone();
-                printContent("Nice! I've marked this task as done:\n       [" + thisTask.getStatusIcon() + "] " + thisTask.getTitle());
+                printContent("Nice! I've marked this task as done:\n       [" + thisTask.getStatusIcon() + "] " + thisTask.toString());
             } else if (query.compareTo(COMMAND_UNMARK) == 0){
                 Task thisTask = tasks.get(Integer.parseInt(splitted[1])-1);
                 thisTask.markAsUndone();
-                printContent("OK, I've marked this task as nto done yet:\n       [" + thisTask.getStatusIcon() + "] " + thisTask.getTitle());
+                printContent("OK, I've marked this task as not done yet:\n       [" + thisTask.getStatusIcon() + "] " + thisTask.toString());
+            } else if (query.compareTo(COMMAND_TODO) == 0){
+                Task thisTask = new TodoTask(line.substring(5));
+                tasks.add(thisTask);
+                String content = "Got it. I've added this task:\n       [T][ ] " + thisTask.toString() + "\n";
+                content += printListSize(tasks);
+                printContent(content);
             } else{
-                printContent("added: " + line);
-                tasks.add(new TodoTask(line));
+                printContent("Invalid input!");
             }
         }
         sc.close();
@@ -42,6 +47,10 @@ public class Duke {
 
     public static void printLine(){
         System.out.println("    ____________________________________________________________");
+    }
+
+    public static String printListSize(ArrayList<Task> tasks){
+        return "     Now you have " + tasks.size() + " tasks in the list.";
     }
 
     public static void printContent(String text){
@@ -55,7 +64,7 @@ public class Duke {
     public static void processList(ArrayList<Task> tasks){
         String list = "Here are the tasks in your list:\n     ";
         for (int i = 0; i < tasks.size(); i++){
-            list += (i+1) + ". " + "[" + tasks.get(i).getStatusIcon() + "] " + tasks.get(i).getTitle();
+            list += (i+1) + ". " + "[" + tasks.get(i).getStatusIcon() + "] " + tasks.get(i).toString();
             if (i != tasks.size()-1)
                 list += "\n     ";
         }
