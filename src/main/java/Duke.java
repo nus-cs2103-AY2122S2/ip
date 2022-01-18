@@ -13,23 +13,22 @@ class Color {
 }
 
 public class Duke {
-    // Input Scanner for user input
-    private static final Scanner input = new Scanner(System.in);
+    private static void printBanner() {
+        String logo = "███╗░░██╗██╗██╗░░██╗██╗░░██╗██╗\n" +
+                      "████╗░██║██║██║░██╔╝██║░██╔╝██║\n" +
+                      "██╔██╗██║██║█████═╝░█████═╝░██║\n" +
+                      "██║╚████║██║██╔═██╗░██╔═██╗░██║\n" +
+                      "██║░╚███║██║██║░╚██╗██║░╚██╗██║\n" +
+                      "╚═╝░░╚══╝╚═╝╚═╝░░╚═╝╚═╝░░╚═╝╚═╝";
 
-    private static final String logo = "███╗░░██╗██╗██╗░░██╗██╗░░██╗██╗\n" +
-                                       "████╗░██║██║██║░██╔╝██║░██╔╝██║\n" +
-                                       "██╔██╗██║██║█████═╝░█████═╝░██║\n" +
-                                       "██║╚████║██║██╔═██╗░██╔═██╗░██║\n" +
-                                       "██║░╚███║██║██║░╚██╗██║░╚██╗██║\n" +
-                                       "╚═╝░░╚══╝╚═╝╚═╝░░╚═╝╚═╝░░╚═╝╚═╝";
+        String description = "Your Personal Assistant Chatbot that helps you keep track of the important things in life";
 
-    private static final String description =
-            "Your Personal Assistant Chatbot that helps you keep track of the important things in life";
-
-    private static final String introduction = "Hello, I'm Nikki\n" +
-                                               "What can I do for you?";
+        System.out.println(Color.purple + logo + Color.none);
+        System.out.println(description);
+    }
 
     private static TaskList tasks = new TaskList();
+    private static final CommandParser cmd = new CommandParser(new Scanner(System.in));
 
     /**
      * Method for chatbot to print message in a formatted style.
@@ -48,29 +47,50 @@ public class Duke {
         System.out.println(Color.none);
     }
 
-    public static void main(String[] args) {
-        // Program banner
-        System.out.println(Color.purple + logo + Color.none);
-        System.out.println(description);
+    private static void handleAction(Command action) {
+        switch (action.getName()) {
+            case "bye":
+                say("Bye! See you later!");
+                System.exit(0);
 
+            case "list":
+                say("Here are the tasks in your list:\n" +
+                    tasks.toString());
+                break;
+
+            case "mark":
+                // User input is 1-indexed, list uses 0-index
+                int mark_idx = Integer.parseInt(action.getArgs()[0]) - 1;
+                tasks.mark(mark_idx);
+                say("[*] Marked the following task as done:\n" +
+                    "\t" + tasks.getTask(mark_idx).nameWithStatus());
+                break;
+
+            case "unmark":
+                // User input is 1-indexed, list uses 0-index
+                int unmark_idx = Integer.parseInt(action.getArgs()[0]) - 1;
+                tasks.unmark(unmark_idx);
+                say("[*] Marked the following task as not done:\n" +
+                    "\t" + tasks.getTask(unmark_idx).nameWithStatus());
+                break;
+
+            default:
+                tasks.addTask(new Task(action.getName()));
+                say("[+] Added: " + action.getName());
+
+        }
+    }
+
+    public static void main(String[] args) {
+        printBanner();
+
+        String introduction = "Hello, I'm Nikki\n" +
+                              "What can I do for you?";
         say(introduction);
 
         while (true) {
-            String action = input.nextLine();
-            switch (action) {
-                case "bye":
-                    say("Bye! See you later!");
-                    System.exit(0);
-
-                case "list":
-                    say(tasks.toString());
-                    break;
-
-                default:
-                    tasks.addTask(new Task(action));
-                    say("[+] Added: " + action);
-
-            }
+            Command action = cmd.readAndParse();
+            handleAction(action);
         }
     }
 }

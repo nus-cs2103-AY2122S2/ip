@@ -14,17 +14,52 @@ public class TaskList {
         this.list.add(task);
     }
 
+    /**
+     * Marks the Task at specified index (marked as done)
+     *
+     * @param index Index of Task to mark
+     * @return True if the state of Task was changed by marking (not done -> done)
+     */
+    public Boolean mark(int index) {
+        Task target = this.list.get(index);
+        return target.mark();
+    }
+
+    /**
+     * Unmarks the Task (marked as not done)
+     *
+     * @param index Index of Task to unmark
+     * @return True if the state of Task was changed by unmarking (done -> not done)
+     */
+    public Boolean unmark(int index) {
+        Task target = this.list.get(index);
+        return target.unmark();
+    }
+
+    public Task getTask(int index) {
+        return this.list.get(index);
+    }
+
+    public int size() {
+        return this.list.size();
+    }
+
     @Override
     public String toString() {
+        if (this.size() == 0) {
+            return "[ list is empty ]";
+        }
+
         String result = "";
 
-        for (int task_idx = 0; task_idx < this.list.size(); task_idx++) {
+        for (int task_idx = 0; task_idx < this.size(); task_idx++) {
+            Task current = this.getTask(task_idx);
             result += String.format(
-                    "%d. %s",
+                    "%3d. %s",
                     task_idx + 1,
-                    this.list.get(task_idx));
+                    current.nameWithStatus());
 
-            if (task_idx != this.list.size() - 1) result += "\n";
+            if (task_idx != this.size() - 1) result += "\n";
         }
 
         return result;
