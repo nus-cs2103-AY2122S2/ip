@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+
 public class PikaBot {
     public static void main(String[] args) {
 
@@ -14,7 +15,7 @@ public class PikaBot {
                 "What can I do for you? \n" + indentation + line);
 
         String input = sc.nextLine();
-        String[] strInputArr = input.split(" ");
+        String[] strInputArr = input.split(" ", 2);
 
 
         while (!strInputArr[0].equals("bye")) {
@@ -36,7 +37,7 @@ public class PikaBot {
                     System.out.println(indentation + line);
 
                     input = sc.nextLine();
-                    strInputArr = input.split(" ");
+                    strInputArr = input.split(" ", 2);
 
                     break;
                 }
@@ -52,7 +53,7 @@ public class PikaBot {
                     System.out.println(indentation + line);
 
                     input = sc.nextLine();
-                    strInputArr = input.split(" ");
+                    strInputArr = input.split(" ",2);
                     break;
                 }
 
@@ -67,16 +68,68 @@ public class PikaBot {
                     System.out.println(indentation + line);
 
                     input = sc.nextLine();
-                    strInputArr = input.split(" ");
+                    strInputArr = input.split(" ", 2);
                     break;
                 }
+                case "todo": {
+                    String description = strInputArr[1];
+                    Todo currTodo = new Todo(description);
+                    inputArr.add(currTodo);
+                    System.out.println(indentation + line + "\n" +
+                            indentation + "Got it. I've added this task: " + "\n" +
+                            indentation + "  " + currTodo + "\n" +
+                            indentation + "Now you have " + inputArr.size() + " tasks in the list." +
+                            "\n" +
+                            indentation + line);
+
+                    input = sc.nextLine();
+                    strInputArr = input.split(" ", 2);
+                    break;
+                }
+
+                case "deadline": {
+                    String[] details = strInputArr[1].split("/by ");
+                    String description = details[0];
+                    String by = details[1];
+                    Deadline currDeadline = new Deadline(description, by);
+                    inputArr.add(currDeadline);
+                    System.out.println(indentation + line + "\n" +
+                            indentation + "Got it. I've added this task: " + "\n" +
+                            indentation + "  " + currDeadline + "\n" +
+                            indentation + "Now you have " + inputArr.size() + " tasks in the list." +
+                            "\n" +
+                            indentation + line);
+
+                    input = sc.nextLine();
+                    strInputArr = input.split(" ", 2);
+                    break;
+                }
+
+                case "event": {
+                    String[] details = strInputArr[1].split("/at ");
+                    String description = details[0];
+                    String at = details[1];
+                    Event currEvent = new Event(description, at);
+                    inputArr.add(currEvent);
+                    System.out.println(indentation + line + "\n" +
+                            indentation + "Got it. I've added this task: " + "\n" +
+                            indentation + "  " + currEvent + "\n" +
+                            indentation + "Now you have " + inputArr.size() + " tasks in the list." +
+                            "\n" +
+                            indentation + line);
+
+                    input = sc.nextLine();
+                    strInputArr = input.split(" ", 2);
+                    break;
+                }
+
                 default: {
                     inputArr.add(new Task(input));
                     System.out.println(indentation + line + "\n" + indentation + "added: " + input + "\n" + indentation +
                             line);
 
                     input = sc.nextLine();
-                    strInputArr = input.split(" ");
+                    strInputArr = input.split(" ", 2);
                 }
             }
         }
