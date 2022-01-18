@@ -1,0 +1,18 @@
+todo Todo Task 1
+deadline Deadline Task 2 /by Deadline
+event Event Task 3 /at Event Time
+list
+mark 1
+list
+mark 2
+list
+mark 3
+list
+unmark 1
+list
+unmark 2
+list
+unmark 3
+list
+invalid
+bye
