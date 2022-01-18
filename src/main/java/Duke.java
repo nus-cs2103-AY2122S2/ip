@@ -51,16 +51,48 @@ public class Duke {
                 unmarkHandler(str);
                 System.out.println(lineBreak());
             } else {
-                System.out.println("added: " + str);
-                addToList(str);
+                taskAdder(str);
                 System.out.println(lineBreak());
             }
         }
     }
 
-    private void addToList(String str) {
-        repeatList[repeatListSize] = new Task(str);
-        repeatListSize++;
+    private void taskAdder(String str) {
+        Task task = null;
+        switch (taskIdentifier(str)) {
+            case ("invalid") :
+                break;
+            case ("todo") :
+                task = new Todo(str.substring(5));
+                break;
+            case ("deadline") :
+                task = new Deadline(str.substring(9, str.lastIndexOf(" /by ")), str.substring(str.lastIndexOf(" /by " + 5)));
+                break;
+            case ("event") :
+                task = new Event(str.substring(6, str.lastIndexOf(" /at ")), str.substring(str.lastIndexOf(" /at ") + 5));
+                break;
+        }
+
+        if (task != null) {
+            repeatList[repeatListSize] = task;
+            repeatListSize++;
+            System.out.println(String.format("Got it. I've added this task:\n\t%s\nNow you have %d task(s) in the list", task.toString(), repeatListSize));
+        }
+    }
+
+    private String taskIdentifier(String str) {
+        String type = "invalid";
+        if (str.matches("(todo |deadline |event ).*")) {
+            if (str.startsWith("todo ")) {
+                type = "todo";
+            } else if (str.startsWith("deadline ") && (str.contains(" /by "))) {
+                type = "deadline";
+            } else if (str.startsWith("event ") && (str.contains(" /at "))) {
+                type = "event";
+            }
+        }
+        //System.out.println(type);
+        return type;
     }
 
     private void displayList() {
@@ -69,7 +101,7 @@ public class Duke {
         } else {
             for (int i = 0; i < repeatList.length && i < repeatListSize; i++) {
                 Task currTask = repeatList[i];
-                System.out.println(String.valueOf(i + 1) + ". " + "[" + currTask.getStatusIcon() + "] " + currTask.getDescription());
+                System.out.println(String.valueOf(i + 1) + ". " + currTask.toString());
             }
         }
     }
@@ -84,7 +116,7 @@ public class Duke {
                 Task currTask = repeatList[num - 1];
                 currTask.setStatus(true);
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println("[" + currTask.getStatusIcon() + "] " + currTask.getDescription());
+                System.out.println(currTask.toString());
             } else {
                 System.out.println("Invalid task!");
             }
@@ -101,7 +133,7 @@ public class Duke {
                 Task currTask = repeatList[num - 1];
                 currTask.setStatus(false);
                 System.out.println("OK, I've marked this task as not done yet:");
-                System.out.println("[" + currTask.getStatusIcon() + "] " + currTask.getDescription());
+                System.out.println(currTask.toString());
             } else {
                 System.out.println("Invalid task!");
             }
