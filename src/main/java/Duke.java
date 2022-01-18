@@ -22,7 +22,7 @@ public class Duke {
 
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
-            String[] breakdown = input.split(" ");
+            String[] breakdown = input.split(" ", 2);
             String command = breakdown[0];
             if (command.equals("bye")) {
                 break;
@@ -32,17 +32,35 @@ public class Duke {
                     result.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
                 }
                 System.out.println(wrap(result.toString()));
-            } else if (command.equals("mark")) {
-                Task task = tasks.get(Integer.parseInt(breakdown[1]) - 1);
-                task.markAsDone();
-                System.out.println(wrap("Nice! I've marked this task as done:\n" + task + "\n"));
-            } else if (command.equals("unmark")) {
-                Task task = tasks.get(Integer.parseInt(breakdown[1]) - 1);
-                task.markAsUndone();
-                System.out.println(wrap("OK, I've marked this task as not done yet:\n" + task + "\n"));
             } else {
-                tasks.add(new Task(input));
-                System.out.println(wrap("added: " + input + "\n"));
+                String options = breakdown[1];
+                if (command.equals("mark")) {
+                    Task task = tasks.get(Integer.parseInt(options) - 1);
+                    task.markAsDone();
+                    System.out.println(wrap("Nice! I've marked this task as done:\n" + task + "\n"));
+                } else if (command.equals("unmark")) {
+                    Task task = tasks.get(Integer.parseInt(options) - 1);
+                    task.markAsUndone();
+                    System.out.println(wrap("OK, I've marked this task as not done yet:\n" + task + "\n"));
+                } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
+                    Task task;
+                    if (command.equals("todo")) {
+                        task = new Todo(options);
+                    } else if (command.equals("deadline")) {
+                        String description = options.split(" /by ")[0];
+                        String byTime = options.split(" /by ")[1];
+                        task = new Deadline(description, byTime);
+                    } else {
+                        String description = options.split(" /at ")[0];
+                        String atTime = options.split(" /at ")[1];
+                        task = new Event(description, atTime);
+                    }
+                    tasks.add(task);
+
+                    System.out.println(wrap("Got it. I've added this task:\n"
+                            + task + "\n"
+                            + "Now you have " + tasks.size() + " task(s) in the list.\n"));
+                }
             }
         }
 
@@ -50,7 +68,7 @@ public class Duke {
         sc.close();
     }
 
-    public static String wrap(String text) {
+    protected static String wrap(String text) {
         return "__________________________________________________\n"
                 + text
                 + "__________________________________________________\n";
