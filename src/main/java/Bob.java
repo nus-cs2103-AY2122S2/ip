@@ -35,14 +35,25 @@ public class Bob {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         System.out.print(lineSplit);
-
         while(!input.equalsIgnoreCase("bye")) {
-            if (input.equalsIgnoreCase("list")) {
+            if (input.isBlank()) {
+                System.out.print("Bob: ╭∩╮༼ಠ益ಠ╭∩╮༽\n" + lineSplit + "You: ");
+            } else if (input.equalsIgnoreCase("list")) {
                 showList();
-            } else if (input.split(" ")[0].equalsIgnoreCase("mark")){
-                StringTokenizer command = new StringTokenizer(input);
-                command.nextToken();
-                markTaskDone(Integer.parseInt(command.nextToken()));
+            } else if (input.split(" ")[0].equalsIgnoreCase("mark")) {
+                String index = input.substring(4).trim();
+                try {
+                    markTaskDone(index);
+                } catch (BobException e) {
+                    System.out.print(e.getBobReply() + lineSplit + "You: ");
+                }
+            } else if (input.split(" ")[0].equalsIgnoreCase("delete")) {
+                String index = input.substring(6).trim();
+                try {
+                    deleteTask(index);
+                } catch (BobException e) {
+                    System.out.print(e.getBobReply() + lineSplit + "You: ");
+                }
             } else {
                 try {
                     addTask(input);
@@ -55,8 +66,30 @@ public class Bob {
         }
     }
 
-    public static void markTaskDone(int taskNumber) {
-        Task current = tasks.get(taskNumber - 1);
+    public static void deleteTask(String taskNumber) throws BobException {
+        int index;
+        Task currTask;
+        try {
+            index = Integer.parseInt(taskNumber);
+            currTask = tasks.get(index - 1);
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new BobException("invalid number");
+        }
+        tasks.remove(currTask);
+        System.out.println("Bob: I have removed the following task from your list. ᕙ(⇀‸↼‶)ᕗ");
+        System.out.println("\t" + currTask.printStatus());
+        System.out.print(lineSplit + "You: ");
+    }
+
+    public static void markTaskDone(String taskNumber) throws BobException {
+        int index;
+        Task current;
+        try {
+            index = Integer.parseInt(taskNumber);
+            current = tasks.get(index - 1);
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new BobException("invalid number");
+        }
         current.setStatus(1);
         System.out.println("Bob: Great job in completing your task! I've marked it as done. ᕕ(⌐■_■)ᕗ ♪♬");
         System.out.println("\t" + current.printStatus());
@@ -72,7 +105,7 @@ public class Bob {
         System.out.print(lineSplit + "You: ");
     }
 
-    public static void addTask(String input) throws BobException{
+    public static void addTask(String input) throws BobException {
         StringTokenizer line = new StringTokenizer(input);
         String taskType = line.nextToken();
         Task newTask;
