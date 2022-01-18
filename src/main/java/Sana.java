@@ -38,29 +38,33 @@ public class Sana {
      */
     public void commandParser(String userCommand) {
         border();
-        if (userCommand.equals("bye")) {
-            bye();
-        } else if (userCommand.equals("list")) {
-            list();
-        } else if (userCommand.startsWith("mark")) {
-            int taskIndex = Integer.parseInt(userCommand.split(" ", 2)[1]) - 1;
-            mark(taskIndex, true);
-        } else if (userCommand.startsWith("unmark")) {
-            int taskIndex = Integer.parseInt(userCommand.split(" ", 2)[1]) - 1;
-            mark(taskIndex, false);
-        } else if (userCommand.startsWith("todo")) {
-            String taskName = userCommand.replaceFirst("todo ", "");
-            addToDo(taskName);
-        } else if (userCommand.startsWith("event")) {
-            String temp = userCommand.replaceFirst("event ", "");
-            String[] subStrings = temp.split(" /at ",2);
-            addEvent(subStrings[0], subStrings[1]);
-        } else if (userCommand.startsWith("deadline ")) {
-            String temp = userCommand.replaceFirst("deadline ", "");
-            String[] subStrings = temp.split(" /by ",2);
-            addDeadline(subStrings[0], subStrings[1]);
-        } else {
-            System.out.println("What did you say again?");
+        try {
+            if (userCommand.equals("bye")) {
+                bye();
+            } else if (userCommand.equals("list")) {
+                list();
+            } else if (userCommand.startsWith("mark")) {
+                int taskIndex = Integer.parseInt(userCommand.split(" ", 2)[1]) - 1;
+                mark(taskIndex, true);
+            } else if (userCommand.startsWith("unmark")) {
+                int taskIndex = Integer.parseInt(userCommand.split(" ", 2)[1]) - 1;
+                mark(taskIndex, false);
+            } else if (userCommand.startsWith("todo")) {
+                String taskName = userCommand.replaceFirst("todo ", "");
+                addToDo(taskName);
+            } else if (userCommand.startsWith("event")) {
+                String temp = userCommand.replaceFirst("event ", "");
+                String[] subStrings = temp.split(" /at ", 2);
+                addEvent(subStrings[0], subStrings[1]);
+            } else if (userCommand.startsWith("deadline ")) {
+                String temp = userCommand.replaceFirst("deadline ", "");
+                String[] subStrings = temp.split(" /by ", 2);
+                addDeadline(subStrings[0], subStrings[1]);
+            } else {
+                throw new UnknownCommandException();
+            }
+        } catch (UnknownCommandException e) {
+            System.out.println(e.getMessage());
         }
         border();
     }
