@@ -5,14 +5,14 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         // Boot message
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+//        String logo = " ____        _        \n"
+//                + "|  _ \\ _   _| | _____ \n"
+//                + "| | | | | | | |/ / _ \\\n"
+//                + "| |_| | |_| |   <  __/\n"
+//                + "|____/ \\__,_|_|\\_\\___|\n";
         String intro = "Hello! I'm Duke\n"
                 + "What can I do for you?\n";
-        System.out.println(wrap(logo + "\n" + intro));
+        System.out.println(wrap(intro));
 
         // Setup scanner for user input
         Scanner sc = new Scanner(System.in);
