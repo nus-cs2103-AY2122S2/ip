@@ -7,10 +7,10 @@ public class Event extends Task {
     /**
      * Constructor for Event objects
      *
-     * @param taskName  the task name
+     * @param eventName  the event name
      */
-    public Event(String taskName, String time) {
-        super(taskName);
+    public Event(String eventName, String time) {
+        super(eventName);
         this.eventTime = time;
     }
 
