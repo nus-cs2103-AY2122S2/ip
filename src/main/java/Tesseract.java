@@ -4,20 +4,19 @@ public class Tesseract {
     public static void main(String[] args) {
         String INDENT1 = "    ";
         String INDENT2 = "        ";
-        String BREAKER = "    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+        String BREAKER = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
         List<Task> taskList = new ArrayList<Task>();
 
         Scanner sc = new Scanner(System.in);
 
-        String greetingMsg = BREAKER + "\n" +
-                INDENT1 + "Hi fellow! I am Tesseract\n" +
-                INDENT1 + "I can bring you to wherever you want in the universe\n" +
-                INDENT1 + "How can I help you?\n"
+        String greetingMsg = BREAKER + "\n" + "Hi fellow! I am Tesseract\n" +
+                "I can bring you to wherever you want in the universe\n" +
+                "How can I help you?\n"
                 + BREAKER;
 
         String farewellMsg = BREAKER + "\n" +
-                INDENT1 + "Ok I'm gonna travel to another planet now\n" +
-                INDENT1 + "Hope to see you again when I'm back :P\n"
+                "Ok I'm gonna travel to another planet now\n" +
+                "Hope to see you again when I'm back :P\n"
                 + BREAKER;
 
         // greet the user
@@ -57,7 +56,7 @@ public class Tesseract {
                         + "Now you have " + taskList.size() + " tasks waiting to be finished.\n";
             }
 
-            String out = BREAKER + "\n" + INDENT1 + msg + BREAKER + "\n";
+            String out = INDENT1 + BREAKER + "\n" + INDENT1 + msg + INDENT1 + BREAKER + "\n";
             System.out.println(out);
             cmd = sc.nextLine();
         }
