@@ -28,23 +28,38 @@ public class Duke {
 
         while (!task.equals("bye")) {
             if (task.equals("todo")) {
-                items += 1;
-                tasks[items] = new Todo(item);
-                System.out.println(chatBox(addTask(tasks[items], items)));
+                if (!item.equals("")) {
+                    items += 1;
+                    tasks[items] = new Todo(item);
+                    System.out.println(chatBox(addTask(tasks[items], items)));
+                } else {
+                    System.out.println(chatBox("☹ OOPS!!! The description of a todo cannot be empty."));
+                }
+
             } else if (task.equals("deadline")) {
-                items += 1;
-                System.out.println(item);
-                String thing = item.split(" /by ")[0];
-                String time = item.split(" /by ")[1];
-                tasks[items] = new Deadline(thing, time);
-                System.out.println(chatBox(addTask(tasks[items], items)));
+                if (!item.equals("")) {
+                    items += 1;
+                    System.out.println(item);
+                    String thing = item.split(" /by ")[0];
+                    String time = item.split(" /by ")[1];
+                    tasks[items] = new Deadline(thing, time);
+                    System.out.println(chatBox(addTask(tasks[items], items)));
+                } else {
+                    System.out.println(chatBox("☹ OOPS!!! The description of a deadline cannot be empty."));
+                }
+
             } else if (task.equals("event")) {
-                System.out.println(item);
-                items += 1;
-                String thing = item.split(" /at ")[0];
-                String time = item.split(" /at ")[1];
-                tasks[items] = new Event(thing, time);
-                System.out.println(chatBox(addTask(tasks[items], items)));
+                if (!item.equals("")) {
+                    System.out.println(item);
+                    items += 1;
+                    String thing = item.split(" /at ")[0];
+                    String time = item.split(" /at ")[1];
+                    tasks[items] = new Event(thing, time);
+                    System.out.println(chatBox(addTask(tasks[items], items)));
+                } else {
+                    System.out.println(chatBox("☹ OOPS!!! The description of an event cannot be empty."));
+                }
+
             } else if (task.equals("list")){
                 String lists = "";
                 for (int i = 1; i <= items; i++) {
@@ -67,45 +82,10 @@ public class Duke {
                 tasks[index].markAsUndone();
                 System.out.println(chatBox("OK, I've marked this task as not done yet:\n      "
                         + tasks[index].toString()));
-            }
-
-            /*
-            if (!task.equals("list") &&
-                    !command.split(" ")[0].equals("mark") &&
-                    !command.split(" ")[0].equals("unmark")) {
-                items += 1;
-                tasks[items] = new Task(command);
-                System.out.println(chatBox("added: " + command));
-                System.out.println();
-
             } else {
-                if (command.equals("list")){
-                    String lists = "";
-                    for (int i = 1; i <= items; i++) {
-                        if (i != 1) {
-                            lists += "\n" + tab;
-                        }
-                        lists += String.format("%d. %s", i, tasks[i].toString());
-
-                    }
-
-                    System.out.println(chatBox(lists));
-
-                } else if (command.split(" ")[0].equals("mark")) {
-                    int task = Integer.parseInt(command.split(" ")[1]);
-                    tasks[task].markAsDone();
-                    System.out.println(chatBox("Nice! I've marked this task as done:\n      "
-                            + tasks[task].toString()));
-                } else if (command.split(" ")[0].equals("unmark")) {
-                    int task = Integer.parseInt(command.split(" ")[1]);
-                    tasks[task].markAsUndone();
-                    System.out.println(chatBox("OK, I've marked this task as not done yet:\n      "
-                            + tasks[task].toString()));
-                }
-
+                System.out.println(chatBox("☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
             }
 
-*/
             inp = sc.nextLine().split(" ");
             task = inp[0];
             item = "";
@@ -140,7 +120,13 @@ public class Duke {
         String tab = "    ";
         String firstLine = "Got it. I've added this task:\n";
         String secondLine = tab + "  " + task.toString() + "\n";
-        String thirdLine = tab + "Now you have " + total + " tasks in the list.";
+        String thirdLine;
+        if (total == 1) {
+            thirdLine = tab + "Now you have " + total + " task in the list.";
+        } else {
+            thirdLine = tab + "Now you have " + total + " tasks in the list.";
+        }
+
         return firstLine + secondLine + thirdLine;
 
     }
