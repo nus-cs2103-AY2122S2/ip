@@ -8,17 +8,17 @@ Hello I'm
 Tell me about your upcoming activities!
 Input "help" for instructions.
 ____________________________
-Got it! I have added a new todo task:
+Got it! I have added a new Todo task:
 [T][ ] borrow book
 You have 1 tasks in your list.
 ____________________________
 ____________________________
-Got it! I have added a new deadline task:
+Got it! I have added a new Deadline task:
 [D][ ] return book (by: Saturday)
 You have 2 tasks in your list.
 ____________________________
 ____________________________
-Got it! I have added a new event task:
+Got it! I have added a new Event task:
 [E][ ] cs2103 lecture (at: Tomorrow)
 You have 3 tasks in your list.
 ____________________________

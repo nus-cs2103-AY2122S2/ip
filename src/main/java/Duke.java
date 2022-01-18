@@ -27,8 +27,8 @@ public class Duke {
      * Greets the user.
      */
     private static void greet() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
+        String logo = " ____        _\n"
+                + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
@@ -62,12 +62,12 @@ public class Duke {
         } else if (userIn.equals("help")) {
             return help();
         } else if (Pattern.matches("^mark\\s\\d+", userIn)) {
-            return "This activity is marked as done: \n"
+            return "This activity is marked as done:\n"
                     + tl.markDone(Integer.parseInt(userIn
                     .replaceAll("[^\\d.]", "")) - 1)
                     .toString();
         } else if (Pattern.matches("^unmark\\s\\d+", userIn)) {
-            return "This activity is unmarked as done: \n" +
+            return "This activity is unmarked as done:\n" +
                     tl.markUndone(Integer.parseInt(userIn
                     .replaceAll("[^\\d.]", "")) - 1)
                     .toString();
@@ -78,7 +78,7 @@ public class Duke {
             String s = userIn.replace("todo ", "").trim();
             if (s.length() == 0)
                 throw new DukeException("Todo task requires a task name!");
-            else return tl.addToDo(s);
+            else return tl.add(TaskType.Todo, s);
         } else if (Pattern.matches("^deadline\\s(.*s?)\\s/by\\s(.*s?)", userIn)) {
             String[] split = userIn
                     .replace("deadline ", "")
@@ -91,7 +91,7 @@ public class Duke {
                 throw new DukeException("Deadline task requires a task name!");
             else if (split[1].length() == 0)
                 throw new DukeException("Deadline task requires a date!");
-            else return tl.addDeadline(split[0], split[1]);
+            else return tl.add(TaskType.Deadline, split[0], split[1]);
         } else if (Pattern.matches("^event\\s(.*s?)\\s/at\\s(.*s?)", userIn)) {
             String[] split = userIn
                     .replace("event ", "")
@@ -104,11 +104,12 @@ public class Duke {
                 throw new DukeException("Event task requires a task name!");
             else if (split[1].length() == 0)
                 throw new DukeException("Event task requires a date!");
-            else return tl.addEvent(split[0], split[1]);
+            else return tl.add(TaskType.Event, split[0], split[1]);
         } else {
             throw new DukeException("Oops! Your instructions were unclear!");
         }
     }
+
 
     /**
      * Prints Duke's formatted speech.

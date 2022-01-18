@@ -9,38 +9,32 @@ public class TaskList {
     }
 
     /**
-     * Adds a new todo task
-     * @param activity name of task
-     * @return a response string
+     * Adds a task to the task list.
+     *
+     * @param type the type of task
+     * @param task description associated with the task
+     * @return a response string for the user
+     * @throws TaskListException if task type is unknown
      */
-    public String addToDo(String activity) {
-        Task ac = new ToDoTask(activity);
-        tasks.add(ac);
-        return "Got it! I have added a new todo task: \n" + ac
-                + "\nYou have " + tasks.size() + " tasks in your list.";
-    }
-
-    /**
-     * Adds a new deadline task
-     * @param activity name of task
-     * @return a response string
-     */
-    public String addDeadline(String activity, String date) {
-        Task ac = new DeadlineTask(activity, date);
-        tasks.add(ac);
-        return "Got it! I have added a new deadline task: \n" + ac
-                + "\nYou have " + tasks.size() + " tasks in your list.";
-    }
-
-    /**
-     * Adds a new event task
-     * @param activity name of task
-     * @return a response string
-     */
-    public String addEvent(String activity, String date) {
-        Task ac = new EventTask(activity, date);
-        tasks.add(ac);
-        return "Got it! I have added a new event task: \n" + ac
+    public String add(TaskType type, String... task) throws TaskListException{
+        Task newTask;
+        switch (type) {
+            case Todo:
+                newTask = new ToDoTask(task[0]);
+                tasks.add(newTask);
+                break;
+            case Event:
+                newTask = new EventTask(task[0], task[1]);
+                tasks.add(newTask);
+                break;
+            case Deadline:
+                newTask = new DeadlineTask(task[0], task[1]);
+                tasks.add(newTask);
+                break;
+            default:
+                throw new TaskListException("There is no such task!");
+        }
+        return "Got it! I have added a new " + type + " task:\n" + newTask
                 + "\nYou have " + tasks.size() + " tasks in your list.";
     }
 
@@ -91,7 +85,7 @@ public class TaskList {
         else {
             Task ac = tasks.get(idx);
             tasks.remove(idx);
-            return "I have deleted the following task: \n"
+            return "I have deleted the following task:\n"
                     + ac.toString()
                     + "\nYou have " + tasks.size() + " tasks left.";
         }
@@ -107,7 +101,7 @@ public class TaskList {
     public String toString() {
         if (tasks.size() == 0) return "Nothing is added yet.";
         StringBuilder sb = new StringBuilder();
-        sb.append("You have the following upcoming tasks: \n");
+        sb.append("You have the following upcoming tasks:\n");
         for (int i = 0; i < tasks.size(); i++) {
             sb.append((i + 1) + "." + tasks.get(i).toString() + "\n");
         }
