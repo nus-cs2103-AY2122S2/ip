@@ -21,6 +21,8 @@ public class Duke {
     private static final String COMMAND_EVENT = "event";
     private static final String MESSAGE_TASKADD = "Got it. I've added this task:";
 
+    private static final String ERROR_INVALID_MARK = "OOPS!!! Please indicate which task to mark";
+    private static final String ERROR_INVALID_UNMARK = "OOPS!!! Please indicate which task to unmark";
     private static final String ERROR_INVALID_COMMAND = "OOPS!!! You have entered an invalid command :(";
     private static final String ERROR_INVALID_TODO_TITLE = "OOPS!!! The title of a todo cannot be empty :(";
     private static final String ERROR_INVALID_DEADLINETASK_TITLE = "OOPS!!! The title of a deadline task cannot be empty :(";
@@ -44,10 +46,14 @@ public class Duke {
                     } else if (query.compareTo(COMMAND_LIST) == 0){
                         processList(tasks);
                     } else if (query.compareTo(COMMAND_MARK) == 0){
+                        if (splitted.length == 1 || !checkNumericString(splitted[1]) || Integer.parseInt(splitted[1]) > tasks.size())
+                            throw new DukeException(ERROR_INVALID_MARK);
                         Task thisTask = tasks.get(Integer.parseInt(splitted[1])-1);
                         thisTask.markAsDone();
                         printContent(taskLine(thisTask, MESSAGE_MARK));
                     } else if (query.compareTo(COMMAND_UNMARK) == 0){
+                        if (splitted.length == 1 || !checkNumericString(splitted[1]) || Integer.parseInt(splitted[1]) > tasks.size())
+                            throw new DukeException(ERROR_INVALID_UNMARK);
                         Task thisTask = tasks.get(Integer.parseInt(splitted[1])-1);
                         thisTask.markAsUndone();
                         printContent(taskLine(thisTask, MESSAGE_UNMARK));
@@ -120,5 +126,14 @@ public class Duke {
                 list += "\n     ";
         }
         printContent(list);
+    }
+
+    public static Boolean checkNumericString(String string){
+        try{
+            Integer.parseInt(string);
+            return true;
+        } catch (NumberFormatException e){
+            return false;
+        }
     }
 }
