@@ -28,12 +28,12 @@ public class Duke {
 
     private static void respond(String command) {
         if (command.equals("list")) {
-            System.out.println("list");;
+            displayList();
         } else if (command.equals("blah")) {
             System.out.println("blah");
         } else {
             toDoList.add(command);
-            System.out.println("added: " + command);
+            System.out.println("okie!! (✿◠‿◠)  i have added: " + command);
         }
     }
 
