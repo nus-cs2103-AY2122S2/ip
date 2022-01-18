@@ -1,6 +1,13 @@
 package main.java;
 
+/***
+ * The response created at the start of the chatbot
+ */
 public class StartResponse implements Response{
+
+    /**
+     * Callback function that displays the intended results
+     */
     @Override
     public void callback() {
         System.out.println(

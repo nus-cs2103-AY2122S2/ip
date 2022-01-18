@@ -2,14 +2,28 @@ package main.java;
 
 import java.util.ArrayList;
 
-public class AddTask implements Response{
+/**
+ * Response when added a Task
+ */
+
+public class AddTaskResponse implements Response{
     Task currTask;
     ArrayList<Task> tasklist;
 
-    AddTask(Task currTask, ArrayList tasklist) {
+    /**
+     * Constructor for the AddTaskResponse.
+     * @param currTask Task that is created.
+     * @param tasklist The List of Task.
+     */
+
+    AddTaskResponse(Task currTask, ArrayList tasklist) {
         this.currTask = currTask;
         this.tasklist = tasklist;
     }
+
+    /**
+     * Callback function that displays the intended results.
+     */
     @Override
     public void callback() {
         System.out.println(

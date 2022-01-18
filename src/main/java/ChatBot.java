@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * This is the chatbot
+ * This is the chatbot object.
  */
 public class ChatBot {
     String name = "Duke";
@@ -14,7 +14,7 @@ public class ChatBot {
 
 
     /**
-     * method that starts the chatbot
+     * method that starts the chatbot.
      */
     public void run() {
 
@@ -31,7 +31,13 @@ public class ChatBot {
                     stop.callback();
                     this.stop();
                     break;
-                } else if (Cmd.equals("list")) {
+                } else if (Marked[0].equals("delete")) {
+                    int index = Integer.parseInt(Marked[1]);
+                    Task rm = taskList.get(index - 1);
+                    taskList.remove(index - 1);
+                    Response curr = new DeleteResponse(rm, taskList.size());
+                    curr.callback();
+                }else if (Cmd.equals("list")) {
                     Response lst = new ListResponse(taskList);
                     lst.callback();
                 } else if (Marked[0].equals("mark")) {
@@ -45,18 +51,18 @@ public class ChatBot {
                     }
                     Task tempTask = new ToDo(ans[1]);
                     taskList.add(tempTask);
-                    new AddTask(tempTask, taskList).callback();
+                    new AddTaskResponse(tempTask, taskList).callback();
 
                 } else if (Marked[0].equals("deadline")) {
                     String[] ans = Cmd.split(" /by ");
                     Task tempTask = new Deadline(ans[0].replace("deadline ", "") ,ans[1]);
                     taskList.add(tempTask);
-                    new AddTask(tempTask, taskList).callback();
+                    new AddTaskResponse(tempTask, taskList).callback();
                 } else if (Marked[0].equals("event")) {
                     String[] ans = Cmd.split(" /at ");
                     Task tempTask = new Events(ans[0].replace("event ", "") ,ans[1]);
                     taskList.add(tempTask);
-                    new AddTask(tempTask, taskList).callback();
+                    new AddTaskResponse(tempTask, taskList).callback();
                 }
                 else {
                     throw new ForeignException("");
@@ -65,7 +71,7 @@ public class ChatBot {
                 System.out.println(
                         "____________________________________________________________"
                 );
-                System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                System.out.println("OOPS!!! The description of a todo cannot be empty.");
                 System.out.println(
                         "____________________________________________________________"
                 );
@@ -73,7 +79,7 @@ public class ChatBot {
                 System.out.println(
                         "____________________________________________________________"
                 );
-                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 System.out.println(
                         "____________________________________________________________"
                 );
@@ -87,10 +93,5 @@ public class ChatBot {
      */
     public void stop() {
         this.isRunning = false;
-    }
-
-    public static void main(String[] args) {
-        ChatBot cb = new ChatBot();
-        cb.run();
     }
 }
