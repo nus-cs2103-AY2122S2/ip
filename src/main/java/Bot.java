@@ -8,12 +8,12 @@
 import java.util.ArrayList;
 
 public class Bot {
-    Storage tasks;
+    TaskList tasks;
     /**
      * Constructs a new Bot containing a Storage
      */
     Bot() {
-        this.tasks = new Storage();
+        this.tasks = new TaskList();
     }
     void greet() {
         System.out.println("Hello! I'm Bernie\nWhat's up?");
@@ -33,6 +33,9 @@ public class Bot {
         } else if (input.equals("bye")) {
             leave();
             return true;
+        } else if (input.contains("mark") || input.contains("unmark")) {
+            tasks.mark(input);
+            return false;
         } else if (input.equals("")) {
             System.out.println("Say something!");
             return false;
