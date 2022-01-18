@@ -64,7 +64,8 @@ public class Duke {
     public static void processList(ArrayList<Task> tasks){
         String list = "Here are the tasks in your list:\n     ";
         for (int i = 0; i < tasks.size(); i++){
-            list += (i+1) + ". " + "[" + tasks.get(i).getStatusIcon() + "] " + tasks.get(i).toString();
+            Task thisTask = tasks.get(i);
+            list += (i+1) + ". " + "[" + thisTask.getType() + "]" +"[" + thisTask.getStatusIcon() + "] " + thisTask.toString();
             if (i != tasks.size()-1)
                 list += "\n     ";
         }
