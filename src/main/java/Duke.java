@@ -1,3 +1,4 @@
+import java.util.Date;
 import java.util.Scanner;
 
 public class Duke {
@@ -12,8 +13,9 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
 
+
+        System.out.println("Hello from\n" + logo);
         System.out.println(indentation + line);
         System.out.println(indentation + "Hello! I'm Duke\n" + indentation + "What can I do for you?");
         System.out.println(indentation + line);
@@ -21,6 +23,7 @@ public class Duke {
 
         Scanner sc= new Scanner(System.in);
         String str = " ";
+
         while(true){
             str = sc.nextLine();
             if (str.equals("list")) {
@@ -28,7 +31,7 @@ public class Duke {
 
                 for (int i = 0; i <  counter; i++) {
                     String tempNum = String.valueOf(i+1);
-                    System.out.println(indentation + tempNum + ". "  + listOfThings[i].getStatus() + " " + listOfThings[i].getDescription());
+                    System.out.println(indentation + tempNum + ". "  + listOfThings[i].toString() + listOfThings[i].getStatus() + " " + listOfThings[i].getDescription());
                 }
                 System.out.println(indentation + line);
             }  else if(str.equals("bye")) {
@@ -41,21 +44,50 @@ public class Duke {
                 listOfThings[num-1].unmarkDone();
                 System.out.println(indentation + line);
                 System.out.println(indentation + "OK, I've marked this task as not done yet:") ;
-                System.out.println(indentation + "  " + listOfThings[num-1].getStatus() + " " + listOfThings[num-1].getDescription());
+                System.out.println(indentation + "  " + listOfThings[num-1].toString() + listOfThings[num-1].getStatus() + " " + listOfThings[num-1].getDescription());
                 System.out.println(indentation + line);
             } else if (str.contains("mark")) {
                 int num = Integer.parseInt(str.split(" ")[1]);
                 listOfThings[num-1].markDone();
                 System.out.println(indentation + line);
                 System.out.println(indentation + "Nice! I've marked this task as done:") ;
-                System.out.println(indentation + "  " + listOfThings[num-1].getStatus() + " " + listOfThings[num-1].getDescription());
+                System.out.println(indentation + "  " + listOfThings[num-1].toString() + listOfThings[num-1].getStatus() + " " + listOfThings[num-1].getDescription());
                 System.out.println(indentation + line);
-            } else{
-                System.out.println(indentation + line);
-                System.out.println(indentation + "added: " + str);
-                System.out.println(indentation + line);
-                listOfThings[counter] = new Task(str);
-                counter++;
+            } else {
+
+                if (str.contains("todo")) {
+                    String newString = str.substring(5).trim();
+                    listOfThings[counter] = new ToDos(newString);
+                    System.out.println(indentation + line);
+                    System.out.println(indentation + "Got it. I've added this task:");
+                    System.out.println(indentation + "  " + listOfThings[counter].toString() + listOfThings[counter].getStatus() + " " + listOfThings[counter].getDescription());
+                    System.out.println(indentation + "Now you have " + String.valueOf(counter + 1) + " tasks in the list.");
+                    System.out.println(indentation + line);
+                    counter++;
+
+                } else if (str.contains("deadline")) {
+                    String des = str.substring(9, str.indexOf('/')-1).trim();
+                    String date = str.substring((str.indexOf('/')+1)).trim();
+                    listOfThings[counter] = new Deadline(des,date);
+                    System.out.println(indentation + line);
+                    System.out.println(indentation + "Got it. I've added this task:");
+                    System.out.println(indentation + "  " + listOfThings[counter].toString() + listOfThings[counter].getStatus() + " " + listOfThings[counter].getDescription());
+                    System.out.println(indentation + "Now you have " + String.valueOf(counter + 1)+ " tasks in the list.");
+                    System.out.println(indentation + line);
+                    counter++;
+                } else if (str.contains("event")) {
+                    String des = str.substring(6, str.indexOf('/')-1).trim();
+                    String date = str.substring((str.indexOf('/')+1)).trim();
+                    listOfThings[counter] = new Event(des,date);
+                    System.out.println(indentation + line);
+                    System.out.println(indentation + "Got it. I've added this task:");
+                    System.out.println(indentation + "  " + listOfThings[counter].toString() + listOfThings[counter].getStatus() + " " + listOfThings[counter].getDescription());
+                    System.out.println(indentation + "Now you have " + String.valueOf(counter + 1) + " tasks in the list.");
+                    System.out.println(indentation + line);
+                    counter++;
+                } else {
+                    System.out.println("Unknown parameters, Try again");
+                }
             }
         }
     }
@@ -86,4 +118,57 @@ class Task {
     String getDescription(){
         return this.description;
     }
+
 }
+
+class ToDos extends Task {
+
+    public ToDos(String description) {
+        super(description);
+    }
+
+    @Override
+    public String toString() {
+        return "[T]";
+    }
+
+}
+
+class Deadline extends Task {
+
+    private String date;
+
+    public Deadline(String description, String date) {
+        super(description);
+        this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "[D]";
+    }
+
+    public String getDate() {
+        return this.date;
+    }
+}
+
+class Event extends Task {
+
+    private String date;
+
+    public Event(String description, String date) {
+        super(description);
+        this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "[E]";
+    }
+
+    public String getDate() {
+        return this.date;
+    }
+}
+
