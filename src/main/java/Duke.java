@@ -26,6 +26,7 @@ public class Duke {
     private static final String KEY_EVENT = "event";
 
     private final List<Task> tasks = new ArrayList<>();
+    private boolean shouldExit = false;
 
     public static void main(String[] args) {
         new Duke().run();
@@ -35,7 +36,7 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         greet();
 
-        while (true) {
+        while (!shouldExit) {
             String input = scanner.nextLine();
             String[] tokens = input.split(" ", 2);
             String command = tokens[0];
@@ -47,31 +48,36 @@ public class Duke {
                 params = new String[0];
             }
 
-            switch (command) {
-            case KEY_EXIT:
-                sayGoodbye();
-                return;
-            case KEY_LIST:
-                listTasks();
-                break;
-            case KEY_MARK:
-                markTask(Integer.parseInt(params[0]) - 1);
-                break;
-            case KEY_UNMARK:
-                unmarkTask(Integer.parseInt(params[0]) - 1);
-                break;
-            case KEY_TODO:
-                addTask(new ToDo(params[0]));
-                break;
-            case KEY_DEADLINE:
-                addTask(new Deadline(params[0], params[1]));
-                break;
-            case KEY_EVENT:
-                addTask(new Event(params[0], params[1]));
-                break;
-            default:
-                break;
-            }
+            processInput(command, params);
+        }
+    }
+
+    private void processInput(String command, String[] params) {
+        switch (command) {
+        case KEY_EXIT:
+            sayGoodbye();
+            shouldExit = true;
+            break;
+        case KEY_LIST:
+            listTasks();
+            break;
+        case KEY_MARK:
+            markTask(Integer.parseInt(params[0]) - 1);
+            break;
+        case KEY_UNMARK:
+            unmarkTask(Integer.parseInt(params[0]) - 1);
+            break;
+        case KEY_TODO:
+            addTask(new ToDo(params[0]));
+            break;
+        case KEY_DEADLINE:
+            addTask(new Deadline(params[0], params[1]));
+            break;
+        case KEY_EVENT:
+            addTask(new Event(params[0], params[1]));
+            break;
+        default:
+            break;
         }
     }
 
