@@ -2,28 +2,62 @@ import java.util.*;
 
 public class Tesseract {
     public static void main(String[] args) {
-        String INDENT = "    ";
-        String BREAKER = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+        String INDENT1 = "    ";
+        String INDENT2 = "        ";
+        String BREAKER = "    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+        List<Task> taskList = new ArrayList<Task>();
 
         Scanner sc = new Scanner(System.in);
 
-        String greetingMsg = INDENT + "Hi fellow! I am Tesseract\n" +
-                INDENT + "I can bring you to wherever you want in the universe\n" +
-                INDENT + "How can I help you?";
-
-        String farewellMsg = BREAKER + "\n" +
-                INDENT + "Ok I'm gonna travel to another planet now\n" +
-                INDENT + "Hope to see you again when I'm back :P\n"
+        String greetingMsg = BREAKER + "\n" +
+                INDENT1 + "Hi fellow! I am Tesseract\n" +
+                INDENT1 + "I can bring you to wherever you want in the universe\n" +
+                INDENT1 + "How can I help you?\n"
                 + BREAKER;
 
-        System.out.println(BREAKER);
+        String farewellMsg = BREAKER + "\n" +
+                INDENT1 + "Ok I'm gonna travel to another planet now\n" +
+                INDENT1 + "Hope to see you again when I'm back :P\n"
+                + BREAKER;
+
+        // greet the user
         System.out.println(greetingMsg);
-        System.out.println(BREAKER);
 
         String cmd = sc.nextLine();
 
         while (!cmd.equals("bye")) {
-            String out = BREAKER + "\n" + INDENT + cmd + "\n" + BREAKER + "\n";
+            String msg = "";
+            if (cmd.equals("list")) {
+                msg = "Look what I have noted down for you~ \n";
+                for (int i = 0; i < taskList.size(); i++) {
+                    msg += INDENT2 + (i+1) + "." + taskList.get(i).toString() + "\n";
+                }
+            } else if (cmd.length() > 5 && cmd.substring(0, 4).equals("mark")) {
+                int index = Integer.parseInt(cmd.substring(5)) - 1;
+                taskList.get(index).markAsDone();
+                msg = "Wow you have finished a task! Excellent! \n" + INDENT2 + taskList.get(index).toString() + "\n";
+            } else if (cmd.length() > 7 && cmd.substring(0, 6).equals("unmark")) {
+                int index = Integer.parseInt(cmd.substring(7)) - 1;
+                taskList.get(index).markAsUndone();
+                msg = "Seems like you have successfully undone your done task \n" + INDENT2 + taskList.get(index).toString() + "\n";
+            } else {
+                int indexAt = cmd.indexOf("/at");
+                int indexBy = cmd.indexOf("/by");
+                Task newTask;
+                if (indexAt != -1) { // Event
+                    newTask = new Event(cmd.substring(0, indexAt - 1), cmd.substring(indexAt + 4));
+                } else if (indexBy != -1) { // Deadline
+                    newTask = new Deadline(cmd.substring(0, indexBy - 1), cmd.substring(indexBy + 4));
+                } else { // _Todo
+                    newTask = new Todo(cmd);
+                }
+                taskList.add(newTask);
+                msg = "This has been added to your schedule. Wish you can finish it on time\n"
+                        + INDENT2 + newTask.toString() + "\n" + INDENT1
+                        + "Now you have " + taskList.size() + " tasks waiting to be finished.\n";
+            }
+
+            String out = BREAKER + "\n" + INDENT1 + msg + BREAKER + "\n";
             System.out.println(out);
             cmd = sc.nextLine();
         }
