@@ -47,73 +47,84 @@ public class PaggroBot {
                         throw new PaggroException("    Really? unmark has to be used with a number... =.=");
                         //                    System.out.println("   ________________________________________");
                     }
-                } else {
-                    if (command.equals("todo")) {
+                } else if (command.equals("todo")) {
+                    try {
+                        String parameters = inputArr[1];
+                        paggro.add(new ToDo(parameters));
+                    } catch (ArrayIndexOutOfBoundsException e) { // no description given
+                        //                        System.out.println("   ________________________________________");
+                        throw new PaggroException("    Really? The description of a todo cannot be empty... =.=");
+                        //                        System.out.println("   ________________________________________");
+                    }
+                } else if (command.equals("deadline")) {
+                    try {
+                        String parameters = inputArr[1];
+                        String[] desArr = parameters.split(" /", 2);
                         try {
-                            String parameters = inputArr[1];
-                            paggro.add(new ToDo(parameters));
-                        } catch (ArrayIndexOutOfBoundsException e) { // no description given
-                            //                        System.out.println("   ________________________________________");
-                            throw new PaggroException("    Really? The description of a todo cannot be empty... =.=");
-                            //                        System.out.println("   ________________________________________");
+                            String des = desArr[0];
+                            String time = desArr[1];
+                            paggro.add(new Deadline(des, time));
+                        } catch (ArrayIndexOutOfBoundsException e) { // date not given or wrongly formatted
+                            //                            System.out.println("   ________________________________________");
+                            throw new PaggroException("    Really? =.= The use of the deadline command must be as follows:\n" +
+                                    "      deadline <DESCRIPTION> /<DATE AND/OR TIME>");
+                            //                            System.out.println("   ________________________________________");
                         }
-                    } else if (command.equals("deadline")) {
+                    } catch (ArrayIndexOutOfBoundsException e) { // no description given
+                        //                        System.out.println("   ________________________________________");
+                        throw new PaggroException("    Really? The description of a deadline cannot be empty... =.=");
+                        //                        System.out.println("   ________________________________________");
+                    }
+                } else if (command.equals("event")) {
+                    try {
+                        String parameters = inputArr[1];
+                        String[] desArr = parameters.split(" /", 2);
                         try {
-                            String parameters = inputArr[1];
-                            String[] desArr = parameters.split(" /", 2);
-                            try {
-                                String des = desArr[0];
-                                String time = desArr[1];
-                                paggro.add(new Deadline(des, time));
-                            } catch (ArrayIndexOutOfBoundsException e) { // date not given or wrongly formatted
-                                //                            System.out.println("   ________________________________________");
-                                throw new PaggroException("    Really? =.= The use of the deadline command must be as follows:\n" +
-                                        "      deadline <DESCRIPTION> /<DATE AND/OR TIME>");
-                                //                            System.out.println("   ________________________________________");
-                            }
-                        } catch (ArrayIndexOutOfBoundsException e) { // no description given
-                            //                        System.out.println("   ________________________________________");
-                            throw new PaggroException("    Really? The description of a deadline cannot be empty... =.=");
-                            //                        System.out.println("   ________________________________________");
+                            String des = desArr[0];
+                            String time = desArr[1];
+                            paggro.add(new Event(des, time));
+                        } catch (ArrayIndexOutOfBoundsException e) { // date not given or wrongly formatted
+                            //                            System.out.println("   ________________________________________");
+                            throw new PaggroException("    Really? =.= The use of the event command must be as follows:\n" +
+                                    "      event <DESCRIPTION> /<DATE AND/OR TIME>");
+                            //                            System.out.println("   ________________________________________");
                         }
-                    } else if (command.equals("event")) {
-                        try {
-                            String parameters = inputArr[1];
-                            String[] desArr = parameters.split(" /", 2);
-                            try {
-                                String des = desArr[0];
-                                String time = desArr[1];
-                                paggro.add(new Event(des, time));
-                            } catch (ArrayIndexOutOfBoundsException e) { // date not given or wrongly formatted
-                                //                            System.out.println("   ________________________________________");
-                                throw new PaggroException("    Really? =.= The use of the event command must be as follows:\n" +
-                                        "      event <DESCRIPTION> /<DATE AND/OR TIME>");
-                                //                            System.out.println("   ________________________________________");
-                            }
-                        } catch (ArrayIndexOutOfBoundsException e) { // no description given
-                            //                        System.out.println("   ________________________________________");
-                            throw new PaggroException("    Really? The description of an event cannot be empty... =.=");
-                            //                        System.out.println("   ________________________________________");
-                        }
-                    } else { // command not recognised
+                    } catch (ArrayIndexOutOfBoundsException e) { // no description given
+                        //                        System.out.println("   ________________________________________");
+                        throw new PaggroException("    Really? The description of an event cannot be empty... =.=");
+                        //                        System.out.println("   ________________________________________");
+                    }
+                } else if (command.equals("delete")) {
+                    try {
+                        String parameters = inputArr[1];
+                        int i = Integer.parseInt(parameters);
+                        paggro.delete(i);
+                    } catch (NumberFormatException e) { // parameter was not a number
                         //                    System.out.println("   ________________________________________");
-                        throw new PaggroException("    Come on... You don't actually expect me to understand that right... =.=");
+                        throw new PaggroException("    Really? Can you input an actual number this time... =.=");
+                        //                    System.out.println("   ________________________________________");
+                    } catch (ArrayIndexOutOfBoundsException e) { // no parameter given
+                        //                    System.out.println("   ________________________________________");
+                        throw new PaggroException("    Really? delete has to be used with a number... =.=");
                         //                    System.out.println("   ________________________________________");
                     }
-
+                } else { // command not recognised
+                    //                    System.out.println("   ________________________________________");
+                    throw new PaggroException("    Come on... You don't actually expect me to understand that right... =.=");
+                    //                    System.out.println("   ________________________________________");
                 }
-            } catch (PaggroException e) {
-                System.out.println("   ________________________________________");
-                System.out.println(e.getMessage());
-                System.out.println("   ________________________________________");
-            } finally {
-                input = sc.nextLine();
-                inputArr = input.split(" ", 2);
-                command = inputArr[0];
-            }
+        } catch(PaggroException e){
+            System.out.println("   ________________________________________");
+            System.out.println(e.getMessage());
+            System.out.println("   ________________________________________");
+        } finally{
+            input = sc.nextLine();
+            inputArr = input.split(" ", 2);
+            command = inputArr[0];
         }
+    }
         System.out.println("   ________________________________________");
         System.out.println("    Oh finally. Please don't come back anytime soon. =.=");
         System.out.println("   ________________________________________");
-    }
+}
 }
