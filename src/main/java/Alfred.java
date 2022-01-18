@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Alfred {
     // class constants
@@ -123,7 +124,7 @@ public class Alfred {
         // (UN)MARK and DELETE
         } else if (command.equals("mark") || command.equals("unmark") || command.equals("delete")) { // validity check for (un)mark
             if (arguments.length != 2) {
-                throw new MissingInputException();
+                throw new InvalidInputException();
             }
             int task_id;
             try {
@@ -143,11 +144,11 @@ public class Alfred {
                 this.delete_task(task_id);
             }
 
-
         // DEADLINE
         } else if (command.equals("deadline")) {
             String s = input.substring(8); // select those after keyword
-            String[] arg = s.split("/by ");
+            String[] arg = s.split(" /by ");
+            arg = Arrays.stream(arg).filter(in -> !in.isEmpty()).toArray(String[]::new); // filter away empty strings
             if (arg.length < 2) {
                 throw new InvalidInputException();
             }
@@ -162,7 +163,8 @@ public class Alfred {
 
         } else if (command.equals("event")) {
             String s = input.substring(5);
-            String[] arg = s.split("/at ");
+            String[] arg = s.split(" /at ");
+            arg = Arrays.stream(arg).filter(in -> !in.isEmpty()).toArray(String[]::new); // filter away empty strings
             if (arg.length < 2) {
                 throw new InvalidInputException();
             }
@@ -173,7 +175,7 @@ public class Alfred {
         }
     }
 
-    public void handle_alfredException(AlfredException e) {
+    private void handle_alfredException(AlfredException e) {
         this.sandwich_and_print(e.getMessage());
     }
 
@@ -194,7 +196,6 @@ public class Alfred {
             } catch(AlfredException e) {
                 bot.handle_alfredException(e);
             }
-
             input = sc.nextLine();
         }
 

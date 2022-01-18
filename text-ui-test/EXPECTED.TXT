@@ -16,13 +16,13 @@ Good job sir. I've marked this as complete.
 
 ----------------------------------------------------------------------------------------------------
 Yes sir, I've added this task.
-[D][ ]  return book (by: June 6th)
+[D][ ]  return book(by: June 6th)
 Now you have 2 task(s) in the your list.
 ----------------------------------------------------------------------------------------------------
 
 ----------------------------------------------------------------------------------------------------
 Yes sir, I've added this task.
-[E][ ]  project meeting (at: Aug 6th 2-4pm)
+[E][ ]  project meeting(at: Aug 6th 2-4pm)
 Now you have 3 task(s) in the your list.
 ----------------------------------------------------------------------------------------------------
 
@@ -45,25 +45,25 @@ Now you have 5 task(s) in the your list.
 
 ----------------------------------------------------------------------------------------------------
 Yes sir, I've added this task.
-[D][ ]  return book (by: Sunday)
+[D][ ]  return book(by: Sunday)
 Now you have 6 task(s) in the your list.
 ----------------------------------------------------------------------------------------------------
 
 ----------------------------------------------------------------------------------------------------
 Yes sir, I've added this task.
-[E][ ]  project meeting (at: Mon 2-4pm)
+[E][ ]  project meeting(at: Mon 2-4pm)
 Now you have 7 task(s) in the your list.
 ----------------------------------------------------------------------------------------------------
 
 ----------------------------------------------------------------------------------------------------
 Sir, here are the things you need to do:
 1. [T][X]  read book
-2. [D][ ]  return book (by: June 6th)
-3. [E][ ]  project meeting (at: Aug 6th 2-4pm)
+2. [D][ ]  return book(by: June 6th)
+3. [E][ ]  project meeting(at: Aug 6th 2-4pm)
 4. [T][X]  join sports club
 5. [T][ ]  borrow book
-6. [D][ ]  return book (by: Sunday)
-7. [E][ ]  project meeting (at: Mon 2-4pm)
+6. [D][ ]  return book(by: Sunday)
+7. [E][ ]  project meeting(at: Mon 2-4pm)
 ----------------------------------------------------------------------------------------------------
 
 ----------------------------------------------------------------------------------------------------
@@ -87,11 +87,11 @@ Invalid command, sir. I'm not sure what you want me to do.
 ----------------------------------------------------------------------------------------------------
 
 ----------------------------------------------------------------------------------------------------
-Missing input, sir. No valid input found after keyword arguments '(un)mark', 'todo', 'event' or 'deadline'.
+Sorry sir, that's a valid command but invalid input. Likely due to wrong format after '(un)mark', 'delete', 'todo', 'deadline' or 'event'.
 ----------------------------------------------------------------------------------------------------
 
 ----------------------------------------------------------------------------------------------------
-Missing input, sir. No valid input found after keyword arguments '(un)mark', 'todo', 'event' or 'deadline'.
+Sorry sir, that's a valid command but invalid input. Likely due to wrong format after '(un)mark', 'delete', 'todo', 'deadline' or 'event'.
 ----------------------------------------------------------------------------------------------------
 
 ----------------------------------------------------------------------------------------------------
@@ -112,6 +112,6 @@ Sorry sir, that's a valid command but invalid input. Likely due to wrong format 
 ----------------------------------------------------------------------------------------------------
 
 ----------------------------------------------------------------------------------------------------
-Missing input, sir. No valid input found after keyword arguments '(un)mark', 'todo', 'event' or 'deadline'.
+Sorry sir, that's a valid command but invalid input. Likely due to wrong format after '(un)mark', 'delete', 'todo', 'deadline' or 'event'.
 ----------------------------------------------------------------------------------------------------
 
