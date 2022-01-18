@@ -15,4 +15,9 @@ list
 unmark 3
 list
 invalid
+todo
+deadline
+event
+deadline Deadline Title With No Deadline
+event Event Title With No Event
 bye
