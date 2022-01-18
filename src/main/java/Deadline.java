@@ -4,7 +4,11 @@ public class Deadline extends Task {
 
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        this.by = by.trim();
+    }
+
+    public boolean checkDateline() {
+        return by.compareTo("") == 0 ? false : true;
     }
 
     @Override

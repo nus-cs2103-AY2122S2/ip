@@ -4,7 +4,11 @@ public class Event extends Task {
 
     public Event(String description, String at) {
         super(description);
-        this.at = at;
+        this.at = at.trim();
+    }
+
+    public boolean checkDestination() {
+        return at.compareTo("") == 0 ? false : true;
     }
 
     @Override

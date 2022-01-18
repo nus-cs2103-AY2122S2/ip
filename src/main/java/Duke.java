@@ -17,7 +17,7 @@ public class Duke {
         printLines();
 
         do {
-            response = reader.readLine();
+            response = reader.readLine().trim();
             if (response.compareTo("bye") == 0) {
                 printLines();
                 System.out.println("Bye. Hope to see you again soon!");
@@ -43,30 +43,34 @@ public class Duke {
                         System.out.println("Invalid range! Try again.");
                     }
                 } else {
-                    handleResponse(split[0]);
+                    boolean valid = false;
                     Task newTask = null;
-                    boolean valid = true;
-                    switch (split[0]) {
-                        case "todo":
-                            newTask = new Todo(removeSubString(response, "todo "));
-                            break;
-                        case "deadline":
-                            String[] deadlineSplit = response.split(" /by ");
-                            newTask = new Deadline(deadlineSplit[0].replace("deadline ", ""), deadlineSplit[1]);
-                            break;
-                        case "event":
-                            String[] eventSplit = response.split(" /at ");
-                            newTask = new Event(eventSplit[0].replace("event ", ""), eventSplit[1]);
-                            break;
-                        default:
-                            valid = false;
+                    if(split.length > 1) {
+                        valid = true;
+                        handleResponse(split[0]);
+                        String[] secondSplits;
+                        switch (split[0]) {
+                            case "todo":
+                                newTask = new Todo(removeSubString(response, "todo "));
+                                break;
+                            case "deadline":
+                                secondSplits = response.split(" /by ");
+                                newTask = new Deadline(secondSplits[0].replace("deadline ", ""), secondSplits[1]);
+                                break;
+                            case "event":
+                                secondSplits = response.split(" /at ");
+                                newTask = new Event(secondSplits[0].replace("event ", ""), secondSplits[1]);
+                                break;
+                            default:
+                                valid = false;
+                        }
                     }
-                    if (valid == true) {
+                    if (valid) {
                         tasks.add(newTask);
                         System.out.println(newTask.toString());
                         System.out.println("Now you have " + tasks.size() +  " tasks in the list.");
                     } else {
-                        System.out.println("Invalid command! Please try again.");
+                        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                 }
                 printLines();
@@ -90,7 +94,6 @@ public class Duke {
     public static String removeSubString(String response, String word) {
         return response.replace(word, "");
     }
-
 // ____________________________________________________________
 //                  START OF COMMAND HANDLER
 // ____________________________________________________________
