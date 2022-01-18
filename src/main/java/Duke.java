@@ -67,7 +67,7 @@ public class Duke {
 
                 } else if (str.contains("deadline")) {
                     String des = str.substring(9, str.indexOf('/')-1).trim();
-                    String date = str.substring((str.indexOf('/')+1)).trim();
+                    String date = str.substring((str.indexOf('/')+4)).trim();
                     listOfThings[counter] = new Deadline(des,date);
                     System.out.println(indentation + line);
                     System.out.println(indentation + "Got it. I've added this task:");
@@ -77,7 +77,7 @@ public class Duke {
                     counter++;
                 } else if (str.contains("event")) {
                     String des = str.substring(6, str.indexOf('/')-1).trim();
-                    String date = str.substring((str.indexOf('/')+1)).trim();
+                    String date = str.substring((str.indexOf('/')+4)).trim();
                     listOfThings[counter] = new Event(des,date);
                     System.out.println(indentation + line);
                     System.out.println(indentation + "Got it. I've added this task:");
@@ -151,6 +151,11 @@ class Deadline extends Task {
     public String getDate() {
         return this.date;
     }
+
+    @Override
+    String getDescription() {
+        return this.description + " (by: " + date + ")";
+    }
 }
 
 class Event extends Task {
@@ -169,6 +174,11 @@ class Event extends Task {
 
     public String getDate() {
         return this.date;
+    }
+
+    @Override
+    String getDescription() {
+        return this.description + " (at: " + date + ")";
     }
 }
 
