@@ -25,7 +25,7 @@ public class Duke {
             String firstWord = nextLine.split(" ")[0];
             if (firstWord.equals("mark")) {
                 try {
-                    int indexToMark = Integer.parseInt(nextLine.split(" ")[1]) - 1;
+                    int indexToMark = Integer.parseInt(nextLine.substring(5)) - 1;
                     list.set(indexToMark, list.get(indexToMark).mark());
                     System.out.println("Nice! I've marked this task as done:\n  " 
                             + list.get(indexToMark));
@@ -36,10 +36,10 @@ public class Duke {
                 }
             } else if (firstWord.equals("unmark")) {
                 try {
-                    int indexToMark = Integer.parseInt(nextLine.split(" ")[1]) - 1;
-                    list.set(indexToMark, list.get(indexToMark).unmark());
+                    int indexToUnmark = Integer.parseInt(nextLine.substring(7)) - 1;
+                    list.set(indexToUnmark, list.get(indexToUnmark).unmark());
                     System.out.println("OK, I've marked this task as not done yet:\n  " 
-                            + list.get(indexToMark));
+                            + list.get(indexToUnmark));
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("Please choose a valid task! (Your list has " + list.size() + " tasks)");
                 } catch (NumberFormatException e) {
