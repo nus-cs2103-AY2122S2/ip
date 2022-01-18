@@ -64,6 +64,11 @@ public abstract class Command {
             case "list":
                 command = new ListCommand(name, args, tasks);
                 break;
+            case "todo":
+            case "deadline":
+            case "event":
+                command = new AddTaskCommand(name, args, tasks);
+                break;
             case "mark":
                 command = new MarkTaskCommand(name, args, tasks);
                 break;
@@ -74,8 +79,7 @@ public abstract class Command {
                 command = new ExitCommand(name, args);
                 break;
             default:
-                // Special case with no valid command name
-                command = new AddItemCommand("add", input, tasks);
+                return null;
         }
         return command;
     }

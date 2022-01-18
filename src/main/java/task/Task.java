@@ -6,7 +6,15 @@ package task;
  * A class to represent a Task
  * inputted by the ChatBot user
  */
-public class Task {
+public abstract class Task {
+    /**
+     * Get the string representation of current
+     * task with its name and any additional info
+     *
+     * @return String representing current task
+     */
+    public abstract String getDescription();
+
     /**
      * String description of current task
      */
@@ -17,9 +25,19 @@ public class Task {
      */
     private boolean done;
 
-    public Task(String task) {
-        this.name = task;
+    protected Task(String name) {
+        this.name = name;
         this.done = false;
+    }
+
+    /**
+     * Get a checkbox describing whether the
+     * task is done or not
+     *
+     * @return String representing done status of task
+     */
+    protected String getDoneStatusCheckbox() {
+        return this.done ? "[X]" : "[ ]";
     }
 
     public void markDone() {
@@ -30,16 +48,7 @@ public class Task {
         this.done = false;
     }
 
-    /**
-     * Get the string representation of current
-     * task with its done status
-     *
-     * @return String representing current task
-     */
-    public String getDescription() {
-        String doneCheckBox = this.done
-                ? "[X]"
-                : "[ ]";
-        return doneCheckBox + " " + this.name;
+    public String getName() {
+        return this.name;
     }
 }
