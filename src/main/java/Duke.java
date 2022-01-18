@@ -8,7 +8,11 @@ public class Duke {
         String input;
         boolean quit = false;
         while(!quit) {
-            quit = duke.runCommand(sc.nextLine());
+            try {
+                quit = duke.runCommand(sc.nextLine());
+            } catch (DukeException e) {
+                duke.echo(e.getMessage());
+            }
         }
         sc.close();
     }

@@ -47,5 +47,42 @@ Here are the tasks in your list:
     [D][ ] return book (by: Sunday)
 -------------------------------------------------
 -------------------------------------------------
+Here are the tasks in your list:
+ 1.[T][X] read book
+ 2.[D][ ] return book (by: Sunday)
+ 3.[E][ ] project meeting (at: Mon 2-4pm)
+ 4.[D][ ] do homework (by: no idea :-p)
+-------------------------------------------------
+-------------------------------------------------
+ Missing details! Please use the format: todo <description>
+-------------------------------------------------
+-------------------------------------------------
+ Missing details! Please use the format: event <description> /at <date/time>
+-------------------------------------------------
+-------------------------------------------------
+ Missing details! Please use the format: event <description> /at <date/time>
+-------------------------------------------------
+-------------------------------------------------
+ Missing details! Please use the format: event <description> /at <date/time>
+-------------------------------------------------
+-------------------------------------------------
+ Missing details! Please use the format: deadline <description> /by <date/time>
+-------------------------------------------------
+-------------------------------------------------
+ Missing details! Please use the format: deadline <description> /by <date/time>
+-------------------------------------------------
+-------------------------------------------------
+ Missing details! Please use the format: deadline <description> /by <date/time>
+-------------------------------------------------
+-------------------------------------------------
+ I'm sorry, but I don't know what that means :-(
+-------------------------------------------------
+-------------------------------------------------
+ Please enter an integer!
+-------------------------------------------------
+-------------------------------------------------
+ Please enter an integer!
+-------------------------------------------------
+-------------------------------------------------
  Bye. Hope to see you again soon!
 -------------------------------------------------

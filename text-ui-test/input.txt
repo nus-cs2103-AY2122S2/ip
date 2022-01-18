@@ -7,4 +7,15 @@ mark 1
 mark 2
 list
 unmark 2
+list
+todo
+event
+event test
+event /at
+deadline
+deadline test
+deadline /by
+blah
+mark xx
+unmark xx
 bye

@@ -25,29 +25,53 @@ public class ChatBot {
                 break;
 
             case "mark":
-                markTask(Integer.parseInt(input[1].trim()) - 1);
+                try {
+                    markTask(Integer.parseInt(input[1].trim()) - 1);
+                } catch(NumberFormatException e) {
+                    throw new DukeException("Please enter an integer!", e);
+                }
                 break;
 
             case "unmark":
-                unmarkTask(Integer.parseInt(input[1].trim()) - 1);
+                try {
+                    unmarkTask(Integer.parseInt(input[1].trim()) - 1);
+                } catch (NumberFormatException e) {
+                    throw new DukeException("Please enter an integer!", e);
+                }
                 break;
 
             case "todo":
-                addTask(new ToDo(input[1]));
+                try {
+                    addTask(new ToDo(input[1]));
+                } catch(IndexOutOfBoundsException e) {
+                    throw new DukeException(
+                            "Missing details! Please use the format: todo <description>", e);
+                }
                 break;
 
             case "deadline":
-                String[] dDetail = input[1].split(" /by ");
-                addTask(new Deadline(dDetail[0], dDetail[1]));
+                try {
+                    String[] dDetail = input[1].split(" /by ");
+                    addTask(new Deadline(dDetail[0], dDetail[1]));
+                } catch(IndexOutOfBoundsException e) {
+                    throw new DukeException(
+                            "Missing details! Please use the format: deadline <description> /by <date/time>", e);
+                }
                 break;
 
             case "event":
-                String[] eDetail = input[1].split(" /at ");
-                addTask(new Event(eDetail[0], eDetail[1]));
+                try {
+                    String[] eDetail = input[1].split(" /at ");
+                    addTask(new Event(eDetail[0], eDetail[1]));
+                } catch(IndexOutOfBoundsException e) {
+                    throw new DukeException(
+                            "Missing details! Please use the format: event <description> /at <date/time>", e);
+                }
                 break;
 
             default:
-                System.out.println("Invalid input");
+                System.out.printf("%s%n %s%n%s%n", line, "I'm sorry, but I don't know what that means :-(",
+                        line);
                 break;
         }
         return false;
