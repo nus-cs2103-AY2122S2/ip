@@ -100,7 +100,7 @@ public class Duke {
                         int index = Integer.parseInt(splitted[1])-1;
                         Task thisTask = tasks.get(index);
                         tasks.remove(index);
-                        printAddDeleteTaskSuccess(tasks, thisTask, MESSAGE_TASKADD);
+                        printAddDeleteTaskSuccess(tasks, thisTask, MESSAGE_TASKDELETE);
                     } else{
                         throw new DukeException(ERROR_INVALID_COMMAND);
                     }
@@ -139,6 +139,9 @@ public class Duke {
 
     public static void processList(ArrayList<Task> tasks){
         String list = MESSAGE_LIST + "\n     ";
+        if(tasks.size() == 0){
+            list += "~~List is currently empty~~";
+        }
         for (int i = 0; i < tasks.size(); i++){
             Task thisTask = tasks.get(i);
             list += (i+1) + ". " + "[" + thisTask.getType() + "]" +"[" + thisTask.getStatusIcon() + "] " + thisTask.toString();
