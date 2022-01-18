@@ -2,6 +2,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
+import java.util.NoSuchElementException;
 
 public class Duke {
     public static void main(String[] args) throws IOException {
@@ -14,25 +16,40 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String nextLine = br.readLine();
+        String nextLine = br.readLine().strip().replaceAll(" +", " ");
 
         ArrayList<Task> list = new ArrayList<Task>();
 
         while (!nextLine.equals("bye")) {
             System.out.println("__________________________________________________");
-            if (nextLine.split(" ")[0].equals("mark")) {
-                int indexToMark = Integer.parseInt(nextLine.split(" ")[1]) - 1;
-                list.set(indexToMark, list.get(indexToMark).mark());
-                System.out.println("Nice! I've marked this task as done:\n  " 
-                        + list.get(indexToMark));
-            } else if (nextLine.split(" ")[0].equals("unmark")) {
-                int indexToMark = Integer.parseInt(nextLine.split(" ")[1]) - 1;
-                list.set(indexToMark, list.get(indexToMark).unmark());
-                System.out.println("OK, I've marked this task as not done yet:\n  " 
-                        + list.get(indexToMark));
-            } else if (nextLine.equals("list")) {
-                if (list.isEmpty()) {
-                    System.out.println("Uh-oh! List is empty");
+            String firstWord = nextLine.split(" ")[0];
+            if (firstWord.equals("mark")) {
+                try {
+                    int indexToMark = Integer.parseInt(nextLine.split(" ")[1]) - 1;
+                    list.set(indexToMark, list.get(indexToMark).mark());
+                    System.out.println("Nice! I've marked this task as done:\n  " 
+                            + list.get(indexToMark));
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Please choose a valid task! (Your list has " + list.size() + " tasks)");
+                } catch (NumberFormatException e) {
+                    System.out.println("Please choose a valid task! (Your list has " + list.size() + " tasks)");
+                }
+            } else if (firstWord.equals("unmark")) {
+                try {
+                    int indexToMark = Integer.parseInt(nextLine.split(" ")[1]) - 1;
+                    list.set(indexToMark, list.get(indexToMark).unmark());
+                    System.out.println("OK, I've marked this task as not done yet:\n  " 
+                            + list.get(indexToMark));
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Please choose a valid task! (Your list has " + list.size() + " tasks)");
+                } catch (NumberFormatException e) {
+                    System.out.println("Please choose a valid task! (Your list has " + list.size() + " tasks)");
+                }
+            } else if (firstWord.equals("list")) {
+                if (nextLine.split(" ").length > 1) {
+                    System.out.println("Uh-oh! There should not be any words after 'list'.");
+                } else if (list.isEmpty()) {
+                    System.out.println("Uh-oh! List is empty!");
                 } else {
                     for (int i = 0; i < list.size(); i++) {
                         System.out.println((i + 1) + "." + list.get(i));
@@ -40,26 +57,48 @@ public class Duke {
                 }
             } else {
                 String taskType = nextLine.split(" ")[0];
-                Task task;
+                Optional<Task> task = Optional.empty();
                 if (taskType.equals("todo")) {
-                    task = new Todo(nextLine.substring(5));
+                    if (nextLine.split(" ").length == 1) {
+                        System.out.println("Uh-oh! There is nothing to do here!");
+                    } else {
+                        task = Optional.of(new Todo(nextLine.substring(5)));
+                    }
                 } else if (taskType.equals("deadline")) {
-                    String description = nextLine.split(" /by ")[0].substring(9);
-                    String by = nextLine.split(" /by ")[1];
-                    task = new Deadline(description, by);
+                    try {
+                        String description = nextLine.split(" /by ")[0].substring(9);
+                        String by = nextLine.split(" /by ")[1];
+                        task = Optional.of(new Deadline(description, by));
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("Eh? Did you mistype the format?");
+                    } catch (StringIndexOutOfBoundsException e) {
+                        System.out.println("Uh-oh! There's no deadline here!");
+                    }
+                } else if (taskType.equals("event")) {
+                    try {
+                        String description = nextLine.split(" /at ")[0].substring(6);
+                        String at = nextLine.split(" /at ")[1];
+                        task = Optional.of(new Event(description, at));
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("Eh? Did you mistype the format?");
+                    } catch (StringIndexOutOfBoundsException e) {
+                        System.out.println("Uh-oh! There's no event here!");
+                    }
                 } else {
-                    String description = nextLine.split(" /at ")[0].substring(6);
-                    String at = nextLine.split(" /at ")[1];
-                    task = new Event(description, at);
+                    System.out.println("Sorry! Please speak Duke :(");
                 }
-                System.out.println("Got it. I've added this task:");
-                list.add(task);
-                System.out.println("  " + task);
-                System.out.println("Now you have " + list.size() + " tasks in the list.");
+                try {
+                    list.add(task.get());
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("  " + task.get());
+                    System.out.println("Now you have " + list.size() + " tasks in the list.");
+                } catch (NoSuchElementException e) {
+                    System.out.println("Please try again!");
+                }
             }
 
             System.out.println("__________________________________________________");
-            nextLine = br.readLine();
+            nextLine = br.readLine().strip().replaceAll(" +", " ");
         }
 
         System.out.println("__________________________________________________\n" 
