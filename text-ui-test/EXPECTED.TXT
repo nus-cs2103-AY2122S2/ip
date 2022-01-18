@@ -64,6 +64,21 @@ Hello from
      [D][ ] do homework  (by: no idea :-p)
     There are now 8 task(s) in the list.
     ==========================================
+Task ID must be provided!
+Task ID must be an integer!
+Task ID out of range!
+Task ID must be provided!
+Task ID must be an integer!
+Task ID out of range!
+Task Name must be provided!
+Task Name must be provided!
+/by flag not detected. Please specify deadline date using /by!
+Please specify deadline date after /by!
+Task Name must be provided!
+Task Name must be provided!
+/at flag not detected. Please specify event location using /at!
+Please specify deadline date after /at!
+Task Name must be provided!
     ==========================================
     Bye. Hope to see you again soon!
     ==========================================
