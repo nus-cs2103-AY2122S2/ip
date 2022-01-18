@@ -35,25 +35,27 @@ public class Duke {
 
     public void echo(String[] userInput) {
         System.out.println(hLine + "\n");
+        Type type = getEnumType(userInput[0]);
+
         try {
-            switch (userInput[0]) {
-                case "bye":
+            switch (type) {
+                case BYE:
                     System.out.println("Bye. Hope to see you again soon!");
                     break;
-                case "list":
+                case LIST:
                     readList();
                     break;
-                case "mark":
+                case MARK:
                     list.get(Integer.parseInt(userInput[1]) - 1).markTask(true);
                     break;
-                case "unmark":
+                case UNMARK:
                     list.get(Integer.parseInt(userInput[1]) - 1).markTask(false);
                     break;
-                case "delete":
+                case DELETE:
                     delete(Integer.parseInt(userInput[1]) - 1);
                     break;
                 default:
-                    addList(userInput);
+                    addList(userInput, type);
             }
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Duke has noticed that the number you provided does not \nmatch the number of task you have." +
@@ -62,7 +64,7 @@ public class Duke {
         System.out.println(hLine + "\n");
     }
 
-    public void addList(String[] userInput) {
+    public void addList(String[] userInput, Type type) {
         Task task = null;
 
         try {
@@ -76,14 +78,14 @@ public class Duke {
                 throw new ArrayIndexOutOfBoundsException();
             }
 
-            switch (userInput[0]) {
-                case "deadline":
+            switch (type) {
+                case DEADLINE:
                     task = new Deadline(strings[0], strings[1]);
                     break;
-                case "event":
+                case EVENT:
                     task = new Event(strings[0], strings[1]);
                     break;
-                case "todo":
+                case TODO:
                     task = new Todo(userInput[1]);
                     break;
             }
@@ -123,5 +125,44 @@ public class Duke {
         String description = this.list.get(pos).toString();
         this.list.remove(pos);
         System.out.println("Noted. I've removed this task:\n" + description + "\nNow you have " + this.list.size() + " tasks in the list.");
+    }
+
+    public Type getEnumType(String input) {
+        String temp = input.toLowerCase();
+        Type type;
+
+        switch (temp) {
+            case "todo":
+                type = Type.TODO;
+                break;
+            case "event":
+                type = Type.EVENT;
+                break;
+            case "deadline":
+                type = Type.DEADLINE;
+                break;
+            case "delete":
+                type = Type.DELETE;
+                break;
+            case "bye":
+                type = Type.BYE;
+                break;
+            default:
+                type = Type.NULL;
+        }
+
+        return type;
+    }
+
+    public enum Type {
+        BYE,
+        TODO,
+        EVENT,
+        DEADLINE,
+        DELETE,
+        MARK,
+        UNMARK,
+        LIST,
+        NULL
     }
 }
