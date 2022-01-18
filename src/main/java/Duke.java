@@ -105,5 +105,6 @@ public class Duke {
         }
         sc.close();
         Duke.farewell();
+
     }
 }
