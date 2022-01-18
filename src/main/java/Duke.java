@@ -68,65 +68,104 @@ public class Duke {
 
     /**
      * Calls different functions according to the user's input command.
-     * Any command that is not in the correct form will be treated as a normal addition to the list.
+     * Any command that is not in the correct form will be throw an "error" message.
      *
      * @param userInput Command entered by the user.
      */
-    private static void parse(String userInput) {
+    private static void parse(String userInput) throws DukeException {
         String[] wordArray = userInput.trim().split(" ");
         List<String> wordList = Arrays.asList(wordArray);
-        if (wordList.get(0).equals("list") & wordList.size() == 1) {
-            taskListOfTasks.display();
-        } else if (wordList.get(0).equals("todo") & wordList.size() > 1) {
-            taskListOfTasks.todo(userInput.substring(5));
-        } else if (wordList.get(0).equals("deadline") & wordList.size() >= 4 & wordList.contains("/by")) {
-            int separator = wordList.indexOf("/by");
-            String desc = "";
-            String dateTime = "";
-            for (int i = 1; i < separator; i++) {
-                desc += wordList.get(i);
-                desc += " ";
-            }
-            for (int i = separator + 1; i < wordList.size(); i++) {
-                dateTime += wordList.get(i);
-                dateTime += " ";
-            }
-            taskListOfTasks.deadline(removeLastChar(desc), removeLastChar(dateTime));
-        } else if (wordList.get(0).equals("event") & wordList.size() >= 4 & wordList.contains("/at")) {
-            int separator = wordList.indexOf("/at");
-            String desc = "";
-            String dateTime = "";
-            for (int i = 1; i < separator; i++) {
-                desc += wordList.get(i);
-                desc += " ";
-            }
-            for (int i = separator + 1; i < wordList.size(); i++) {
-                dateTime += wordList.get(i);
-                dateTime += " ";
-            }
-            taskListOfTasks.event(removeLastChar(desc), removeLastChar(dateTime));
-        } else if (wordList.size() == 2) { // Checks if command contains 2 arguments
-            if (wordList.get(0).equals("mark") & isInteger(wordList.get(1))) { // Check if command is of the
-                                                                               // form "mark int"
-                int currTaskId = Integer.parseInt(wordList.get(1));
-                if (currTaskId > 0 & currTaskId <= taskListOfTasks.getNumberOfTasks()) {
-                    taskListOfTasks.mark(currTaskId); // Valid taskID, proceed to mark task
+        String firstWord = wordList.get(0);
+
+        switch (firstWord) {
+            case ("list"):
+                if (wordList.size() == 1) {
+                    taskListOfTasks.display();
                 } else {
-                    taskListOfTasks.add(userInput);
+                    throw new InvalidCommand("This command should not have any arguments :(");
                 }
-            } else if (wordList.get(0).equals("unmark") & isInteger(wordList.get(1))) { // Check if command is of the
-                                                                                        // form "unmark int"
-                int currTaskId = Integer.parseInt(wordArray[1]);
-                if (currTaskId > 0 & currTaskId <= taskListOfTasks.getNumberOfTasks()) {
-                    taskListOfTasks.unmark(currTaskId); // Valid taskID, proceed to unmark task
+                break;
+            case ("todo"):
+                if (wordList.size() > 1) {
+                    taskListOfTasks.todo(userInput.substring(5));
                 } else {
-                    taskListOfTasks.add(userInput);
+                    throw new InvalidCommand("The description of a todo cannot be empty :(");
                 }
-            } else {
-                taskListOfTasks.add(userInput);
-            }
-        } else {
-            taskListOfTasks.add(userInput);
+                break;
+            case ("deadline"):
+                if (wordList.size() < 4) {
+                    throw new InvalidCommand("Insufficient arguments supplied :(");
+                } else if (!wordList.contains("/by")) {
+                    throw new InvalidCommand("Formatting error detected. " +
+                            "Please follow this format: deadline <description> /by <date/time>");
+                } else {
+                    int separator = wordList.indexOf("/by");
+                    String desc = "";
+                    String dateTime = "";
+                    for (int i = 1; i < separator; i++) {
+                        desc += wordList.get(i);
+                        desc += " ";
+                    }
+                    for (int i = separator + 1; i < wordList.size(); i++) {
+                        dateTime += wordList.get(i);
+                        dateTime += " ";
+                    }
+                    taskListOfTasks.deadline(removeLastChar(desc), removeLastChar(dateTime));
+                }
+                break;
+            case ("event"):
+                if (wordList.size() < 4) {
+                    throw new InvalidCommand("Insufficient arguments supplied :(");
+                } else if (!wordList.contains("/at")) {
+                    throw new InvalidCommand("Formatting error detected. " +
+                            "Please follow this format: event <description> /at <date/time>");
+                } else {
+                    int separator = wordList.indexOf("/at");
+                    String desc = "";
+                    String dateTime = "";
+                    for (int i = 1; i < separator; i++) {
+                        desc += wordList.get(i);
+                        desc += " ";
+                    }
+                    for (int i = separator + 1; i < wordList.size(); i++) {
+                        dateTime += wordList.get(i);
+                        dateTime += " ";
+                    }
+                    taskListOfTasks.event(removeLastChar(desc), removeLastChar(dateTime));
+                }
+                break;
+            case("mark"):
+                if (wordList.size() != 2) {
+                    throw new InvalidCommand("This command should have exactly 1 argument.");
+                } else if (!isInteger(wordList.get(1))) {
+                    throw new InvalidCommand("The argument MUST contain a single integer.");
+                } else {
+                    int currTaskId = Integer.parseInt(wordList.get(1));
+                    if (currTaskId > 0 & currTaskId <= taskListOfTasks.getNumberOfTasks()) {
+                        taskListOfTasks.mark(currTaskId); // Valid taskID, proceed to mark task
+                    } else {
+                        throw new InvalidIndex("The specified task ID is out of range. " +
+                                "Please enter a number from 0 to " + taskListOfTasks.getNumberOfTasks() + ".");
+                    }
+                }
+                break;
+            case("unmark"):
+                if (wordList.size() != 2) {
+                    throw new InvalidCommand("This command should have exactly 1 argument");
+                } else if (!isInteger(wordList.get(1))) {
+                    throw new InvalidCommand("The argument MUST contain a single integer.");
+                } else {
+                    int currTaskId = Integer.parseInt(wordList.get(1));
+                    if (currTaskId > 0 & currTaskId <= taskListOfTasks.getNumberOfTasks()) {
+                        taskListOfTasks.unmark(currTaskId); // Valid taskID, proceed to unmark task
+                    } else {
+                        throw new InvalidIndex("The specified task ID is out of range. " +
+                                "Please enter a number from 0 to " + taskListOfTasks.getNumberOfTasks() + ".");
+                    }
+                }
+                break;
+            default:
+                throw new InvalidCommand("I'm sorry, but I don't know what that means :(");
         }
     }
 
@@ -136,8 +175,13 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String userInput = sc.nextLine();
         while (!userInput.equals("bye")) {
-            parse(userInput);
-            userInput = sc.nextLine();
+            try {
+                parse(userInput);
+            } catch (DukeException e) {
+                System.out.println(e);
+            } finally {
+                userInput = sc.nextLine();
+            }
         }
         sc.close();
         exit();

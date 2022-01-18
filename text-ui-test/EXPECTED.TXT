@@ -2,132 +2,123 @@
      Hi! I'm KoroBot
      What can I do for you?
     ____________________________________________________________
+OOPS!!! This command should not have any arguments :(
     ____________________________________________________________
      Here are the tasks in your list:
 
     ____________________________________________________________
 
-    ____________________________________________________________
-     added: read book
-    ____________________________________________________________
-
+OOPS!!! I'm sorry, but I don't know what that means :(
     ____________________________________________________________
      Here are the tasks in your list:
 
-     1.[ ] read book
+    ____________________________________________________________
+
+OOPS!!! The description of a todo cannot be empty :(
+    ____________________________________________________________
+     Got it. I've added this task:
+       [T][ ] borrow book
+     Now you have 1 task/s in the list.
+    ____________________________________________________________
+
+OOPS!!! The specified task ID is out of range. Please enter a number from 0 to 1.
+    ____________________________________________________________
+     Here are the tasks in your list:
+
+     1.[T][ ] borrow book
+
+    ____________________________________________________________
+
+OOPS!!! The argument MUST contain a single integer.
+    ____________________________________________________________
+     Here are the tasks in your list:
+
+     1.[T][ ] borrow book
 
     ____________________________________________________________
 
     ____________________________________________________________
      Nice! I've marked this task as done:
-       [X] read book
+       [X] borrow book
     ____________________________________________________________
 
     ____________________________________________________________
      Here are the tasks in your list:
 
-     1.[X] read book
+     1.[T][X] borrow book
+
+    ____________________________________________________________
+
+OOPS!!! The specified task ID is out of range. Please enter a number from 0 to 1.
+    ____________________________________________________________
+     Here are the tasks in your list:
+
+     1.[T][X] borrow book
+
+    ____________________________________________________________
+
+OOPS!!! The argument MUST contain a single integer.
+    ____________________________________________________________
+     Here are the tasks in your list:
+
+     1.[T][X] borrow book
 
     ____________________________________________________________
 
     ____________________________________________________________
      OK, I've marked this task as not done yet:
-       [ ] read book
+       [ ] borrow book
     ____________________________________________________________
 
     ____________________________________________________________
      Here are the tasks in your list:
 
-     1.[ ] read book
+     1.[T][ ] borrow book
 
     ____________________________________________________________
 
-    ____________________________________________________________
-     added: todo
-    ____________________________________________________________
-
-    ____________________________________________________________
-     Got it. I've added this task:
-       [T][ ] borrow book
-     Now you have 3 task/s in the list.
-    ____________________________________________________________
-
-    ____________________________________________________________
-     added: deadline
-    ____________________________________________________________
-
-    ____________________________________________________________
-     added: deadline task without separator
-    ____________________________________________________________
-
-    ____________________________________________________________
-     added: deadline incomplete
-    ____________________________________________________________
-
+OOPS!!! Insufficient arguments supplied :(
+OOPS!!! Formatting error detected. Please follow this format: deadline <description> /by <date/time>
+OOPS!!! Insufficient arguments supplied :(
     ____________________________________________________________
      Got it. I've added this task:
        [D][ ] return book (by: )
-     Now you have 7 task/s in the list.
+     Now you have 2 task/s in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Got it. I've added this task:
        [D][ ] finish work (by: Monday 3pm)
-     Now you have 8 task/s in the list.
+     Now you have 3 task/s in the list.
     ____________________________________________________________
 
-    ____________________________________________________________
-     added: event
-    ____________________________________________________________
-
-    ____________________________________________________________
-     added: event task without separator
-    ____________________________________________________________
-
-    ____________________________________________________________
-     added: event incomplete
-    ____________________________________________________________
-
+OOPS!!! Insufficient arguments supplied :(
+OOPS!!! Formatting error detected. Please follow this format: event <description> /at <date/time>
+OOPS!!! Insufficient arguments supplied :(
     ____________________________________________________________
      Got it. I've added this task:
        [E][ ] new meeting without time and date (at: )
-     Now you have 12 task/s in the list.
+     Now you have 4 task/s in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Got it. I've added this task:
        [E][ ] tutorial (at: Monday 5pm)
-     Now you have 13 task/s in the list.
+     Now you have 5 task/s in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Here are the tasks in your list:
 
-     1.[ ] read book
+     1.[T][ ] borrow book
 
-     2.[ ] todo
+     2.[D][ ] return book (by: )
 
-     3.[T][ ] borrow book
+     3.[D][ ] finish work (by: Monday 3pm)
 
-     4.[ ] deadline
+     4.[E][ ] new meeting without time and date (at: )
 
-     5.[ ] deadline task without separator
-
-     6.[ ] deadline incomplete
-
-     7.[D][ ] return book (by: )
-
-     8.[D][ ] finish work (by: Monday 3pm)
-
-     9.[ ] event
-
-     10.[ ] event task without separator
-
-     11.[ ] event incomplete
-
-     12.[E][ ] new meeting without time and date (at: )
-
-     13.[E][ ] tutorial (at: Monday 5pm)
+     5.[E][ ] tutorial (at: Monday 5pm)
 
     ____________________________________________________________
 

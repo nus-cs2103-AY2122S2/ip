@@ -1,12 +1,21 @@
+list 2
 list
 read book
 list
+todo
+todo borrow book
+mark 0
+list
+mark x
+list
 mark 1
+list
+unmark 0
+list
+unmark x
 list
 unmark 1
 list
-todo
-todo borrow book
 deadline
 deadline task without separator
 deadline incomplete
