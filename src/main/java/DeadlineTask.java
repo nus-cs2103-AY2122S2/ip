@@ -3,12 +3,12 @@ public class DeadlineTask extends Task{
 
     public DeadlineTask(String title, String byTime){
         super(title);
-        this.type = "D";
+        this.type = TaskType.DEADLINE;
         this.byTime = byTime;
     }
     public DeadlineTask(String title, Boolean isDone, String byTime){
         super(title, isDone);
-        this.type = "D";
+        this.type = TaskType.DEADLINE;
         this.byTime = byTime;
     }
 
