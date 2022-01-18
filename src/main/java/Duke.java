@@ -2,7 +2,7 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         String line = "-------------------------------------------";
-        String start = "Hello! I'm \n" +
+        String start = "Hello there! I'm \n" +
                 " __          ___      .______      .______     ____    ____ \n" +
                 "|  |        /   \\     |   _  \\     |   _  \\    \\   \\  /   / \n" +
                 "|  |       /  ^  \\    |  |_)  |    |  |_)  |    \\   \\/   /  \n" +
@@ -21,6 +21,7 @@ public class Duke {
         String s = "";
         do {
             s = sc.nextLine();
+            String[] spliced = s.split("\\s+", 2);
             if (s.equals("bye") || s.equals("Bye")) {
                 System.out.println(line);
                 System.out.println("Bye. Hope to see you again soon!");
@@ -35,6 +36,18 @@ public class Duke {
                 System.out.println(line);
             }
             else if (s.equals(" "));
+            else if (spliced[0].equals("mark")) {
+               Integer index = Integer.parseInt(spliced[1]);
+               if (manager[index - 1] != null) {
+                   manager[index - 1].mark();
+               }
+            }
+            else if (spliced[0].equals("unmark")) {
+                Integer index = Integer.parseInt(spliced[1]);
+                if (manager[index - 1] != null) {
+                    manager[index - 1].unmark();
+                }
+            }
             else {
                 Task t = new Task(s);
                 System.out.println(line);
