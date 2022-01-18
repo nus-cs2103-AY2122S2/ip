@@ -67,7 +67,26 @@ public class Duke {
 
                     myPrint("OK, I've marked this task as not done yet:\n      " + list.get(idx - 1));
 
-                } else if (stringArr[0].equals("todo")) {
+                } else if (stringArr[0].equals("delete")) {
+
+                    if (list.size() == 0) {
+                        throw new DukeException("☹ OOPS!!! There is nothing on the list to delete!");
+                    }
+
+                    if (stringArr.length < 2) {
+                        throw new DukeAbsentInfoException(
+                            "☹ OOPS!!! Please specify the task to be unmarked using a int");
+                    }
+
+                    int idx = Integer.parseInt(stringArr[1]);
+
+                    if (idx < 1 || idx > list.size()) {
+                        throw new DukeIdxOOBException();
+                    }
+
+                    myPrint("Noted. I've removed this task:\n      " + list.remove(idx - 1) + countList(list));
+                    
+                }else if (stringArr[0].equals("todo")) {
 
                     if (stringArr.length < 2) {
                         throw new DukeAbsentInfoException("☹ OOPS!!! The description of a todo cannot be empty.");
