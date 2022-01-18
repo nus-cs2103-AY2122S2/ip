@@ -1,6 +1,9 @@
 public class Task {
   protected boolean status;
   protected String description;
+  protected TaskType type;
+
+  public static enum TaskType {TODO, DEADLINE, EVENT}
 
   public Task(String description) {
     this.description = description;

@@ -22,7 +22,8 @@ public class Duke {
     }
 
     private void botInitialize() {
-        String logo = " _       _   _   __  __   _   _ \n"
+        String logo
+            = " _       _   _   __  __   _   _ \n"
             + "| |     | | | | |  \\/  | | | | |\n"
             + "| |     | | | | | |\\/| | | | | |\n"
             + "| |___  | |_| | | |  | | | |_| |\n"
@@ -59,16 +60,15 @@ public class Duke {
 
     private void taskAdder(String str) {
         Task task = null;
-        switch (taskIdentifier(str)) {
-            case ("invalid") :
-                break;
-            case ("todo") :
+        Task.TaskType taskType = taskIdentifier(str);
+        switch (taskType) {
+            case TODO :
                 task = new Todo(str.substring(5));
                 break;
-            case ("deadline") :
+            case DEADLINE :
                 task = new Deadline(str.substring(9, str.lastIndexOf(" /by ")), str.substring(str.lastIndexOf(" /by ") + 5));
                 break;
-            case ("event") :
+            case EVENT :
                 task = new Event(str.substring(6, str.lastIndexOf(" /at ")), str.substring(str.lastIndexOf(" /at ") + 5));
                 break;
         }
@@ -80,18 +80,18 @@ public class Duke {
         }
     }
 
-    private String taskIdentifier(String str) {
-        String type = "invalid";
+    private Task.TaskType taskIdentifier(String str) {
+        Task.TaskType type = null;
         if (str.matches("(todo |deadline |event ).*")) {
             if (str.startsWith("todo ")) {
-                type = "todo";
+                type = Task.TaskType.TODO;
             } else if (str.startsWith("deadline ") && (str.contains(" /by "))) {
-                type = "deadline";
+                type = Task.TaskType.DEADLINE;
             } else if (str.startsWith("event ") && (str.contains(" /at "))) {
-                type = "event";
+                type = Task.TaskType.EVENT;
             }
         }
-        //System.out.println(type);
+
         return type;
     }
 
