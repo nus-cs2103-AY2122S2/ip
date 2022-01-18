@@ -22,6 +22,8 @@ public class Duke {
         this.arr.add(t);
     }
 
+    private void deleteTask(Task t) { this.arr.remove(t); }
+
     private boolean isType(String s, String type) throws DukeException {
         boolean res = false;
         boolean missingDesc = false;
@@ -32,6 +34,9 @@ public class Duke {
                 break;
             case "list":
                 res = s.equals("list");
+                break;
+            case "delete":
+                res = Pattern.matches("delete \\d+", s);
                 break;
             case "toggleMark":
                 res = Pattern.matches("mark \\d+|unmark \\d+", s);
@@ -69,6 +74,20 @@ public class Duke {
             } else {
                 ans += String.format("\t%d.%s \n", i + 1, t.toString());
             }
+        }
+        System.out.println(ans);
+    }
+
+    private void onDelete(String ans, String input) throws DukeException {
+        String[] strArr = input.split(" ");
+        int index = Integer.valueOf(strArr[1]) - 1;
+        if (index >= 0 && index < arr.size()) {
+            Task t = arr.get(index);
+                deleteTask(t);
+                ans += "Noted. I've removed this task:\n\t\t" + t.toString() +
+                        "\n\tNow you have " + numOfTasks() + " in the list.";;
+        } else {
+            throw new InvalidIndexException();
         }
         System.out.println(ans);
     }
@@ -127,6 +146,8 @@ public class Duke {
                 onBye();
             } else if (isType(input, "list")) {
                 onList(ans);
+            } else if (isType(input, "delete")) {
+                onDelete(ans, input);
             } else if (isType(input, "toggleMark")) {
                 onToggleMark(ans, input);
             } else if (isType(input, "todo")) {
