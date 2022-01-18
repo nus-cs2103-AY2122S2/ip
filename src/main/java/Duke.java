@@ -9,89 +9,138 @@ public class Duke {
     private String description = "";
     private String time = "";
 
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
         new Duke().startProgram();
     }
 
     private void startProgram() {
         welcomeMessage();
+
         while(!endProgram) {
-            String input = scanner.nextLine(); // user input
+            try {
+                String input = scanner.nextLine(); // user input
 
-            // handle user input to command, description and time of task if applicable
-            int cutPoint = input.indexOf(' ');
-            int cutPoint2 = input.indexOf('/');
-            processInput(input, cutPoint, cutPoint2);
+                // handle user input to command, description and time of task if applicable
+                int cutPoint = input.indexOf(' ');
+                int cutPoint2 = input.indexOf('/');
+                processInput(input, cutPoint, cutPoint2);
 
-            // exit program when user input "bye"
-            if(command.equals("bye")) {
-                endProgram();
-                endProgram = true;
-                break;
+                // exit program when user input "bye"
+                if(command.equals("bye")) {
+                    endProgram();
+                    endProgram = true;
+                    break;
+                }
+
+                // list out the tasks
+                if(command.equals("list")) {
+                    if(!description.equals("") || !time.equals("")) {
+                        // throw wrong command exception
+                        throw new DukeCommandDoesNotExistException("OOPS!!! This command does not exist.");
+                    }
+                    listTask(list);
+                    clearInput();
+                    continue;
+                }
+
+                // mark certain task as done
+                if(command.startsWith("mark")) {
+                    int n = Integer.parseInt(description.replaceAll("[\\D]", ""));
+                    markDone(n - 1, list);
+                    clearInput();
+                    continue;
+                }
+
+                // mark certain task as not done yet
+                if(command.startsWith("unmark")) {
+                    int n = Integer.parseInt(description.replaceAll("[\\D]", ""));
+                    markUndone(n - 1, list);
+                    clearInput();
+                    continue;
+                }
+
+                // create ToDoTask
+                if(command.equals("todo")) {
+                    if(description.equals("")) {
+                        // throw no description exception
+                        throw new DukeNoDescriptionException("OOPS!!! The description of a todo cannot be empty.");
+                    }
+                    addTask(new ToDoTask(description), list);
+                    clearInput();
+                    continue;
+                }
+
+                // create DeadlineTask
+                if(command.equals("deadline")) {
+                    if(description.equals("")) {
+                        // throw no description exception
+                        throw new DukeNoDescriptionException("OOPS!!! The description of a deadline cannot be empty.");
+                    } else if(time.equals("")) {
+                        // throw no time specified exception
+                        throw new DukeNoTimeSpecifiedException("OOPS!!! Remember to set a time.");
+                    }
+                    addTask(new DeadlineTask(description, time), list);
+                    clearInput();
+                    continue;
+                }
+
+                // create EventTask
+                if(command.equals("event")) {
+                    if(description.equals("")) {
+                        // throw no description exception
+                        throw new DukeNoDescriptionException("OOPS!!! The description of a event cannot be empty.");
+                    } else if(time.equals("")) {
+                        // throw no time specified exception
+                        throw new DukeNoTimeSpecifiedException("OOPS!!! Remember to set a time.");
+                    }
+                    addTask(new EventTask(description, time), list);
+                    clearInput();
+                    continue;
+                }
+
+                // Invalid command inputs result
+                throw new DukeCommandDoesNotExistException("OOPS!!! This command does not exist.");
+
+            } catch(DukeCommandDoesNotExistException | DukeNoDescriptionException | DukeNoTimeSpecifiedException e) {
+                drawDivider();
+                System.out.println(e.getMessage());
+                drawDivider();
+                clearInput();
             }
 
-            // list out the tasks
-            if(command.equals("list")) {
-                listTask(list);
-                continue;
-            }
-
-            // mark certain task as done
-            if(command.startsWith("mark")) {
-                int n = Integer.parseInt(description.replaceAll("[\\D]", ""));
-                markDone(n - 1, list);
-                continue;
-            }
-
-            // mark certain task as not done yet
-            if(command.startsWith("unmark")) {
-                int n = Integer.parseInt(description.replaceAll("[\\D]", ""));
-                markUndone(n - 1, list);
-                continue;
-            }
-
-            // create ToDoTask
-            if(command.equals("todo")) {
-                addTask(new ToDoTask(description), list);
-                continue;
-            }
-
-            // create DeadlineTask
-            if(command.equals("deadline")) {
-                addTask(new DeadlineTask(description, time), list);
-                continue;
-            }
-
-            // create EventTask
-            if(command.equals("event")) {
-                addTask(new EventTask(description, time), list);
-                continue;
-            }
-
-            // Invalid command inputs result
-            invalidInput();
         }
 
         // close the scanner
         scanner.close();
     }
 
-    private void processInput(String input, int cutPoint, int cutPoint2) {
-        if(cutPoint != -1) {
+    private void processInput(String input, int descriptionStart, int timeStart) {
+        // process the user input into different segments
+        if(descriptionStart != -1) {
             // sentence input
-            command = input.substring(0, cutPoint);
-            if(cutPoint2 != -1) {
+            command = input.substring(0, descriptionStart);
+            if(timeStart != -1) {
                 // has time input
-                description = input.substring(cutPoint + 1, cutPoint2 - 1);
-                time = input.substring(cutPoint2 + 1);
+                description = input.substring(descriptionStart, timeStart);
+                description = description.replaceFirst(" ", "");
+                time = input.substring(timeStart);
+                time = time.replaceFirst("/", "");
             } else {
                 // no time input
-                description = input.substring(cutPoint + 1);
+                description = input.substring(descriptionStart);
+                description = description.replaceFirst(" ", "");
             }
         } else {
             // single word input
             command = input;
         }
+    }
+
+    private void clearInput() {
+        // reset the state of user input to clean slate to prevent old commands from interfering with new ones
+        command = "";
+        description = "";
+        time = "";
     }
 
     private void drawDivider() {
@@ -112,7 +161,7 @@ public class Duke {
 
     private void endProgram() {
         drawDivider();
-        System.out.println("    " + "Bye. Hope to see you again soon!");
+        System.out.println("Bye. Hope to see you again soon!");
         drawDivider();
     }
 

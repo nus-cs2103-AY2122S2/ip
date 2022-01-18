@@ -14,6 +14,21 @@ Nothing on your list!
 Now you have 0 tasks in the list
 ________________________________________
 ________________________________________
+OOPS!!! The description of a todo cannot be empty.
+________________________________________
+________________________________________
+OOPS!!! The description of a deadline cannot be empty.
+________________________________________
+________________________________________
+OOPS!!! Remember to set a time.
+________________________________________
+________________________________________
+OOPS!!! The description of a event cannot be empty.
+________________________________________
+________________________________________
+OOPS!!! Remember to set a time.
+________________________________________
+________________________________________
 Got it. I've added this task:
 [T][ ] buy bread
 Now you have 1 tasks in the list
@@ -34,11 +49,20 @@ Here are the tasks in your list:
 Now you have 2 tasks in the list
 ________________________________________
 ________________________________________
+OOPS!!! This command does not exist.
+________________________________________
+________________________________________
+OOPS!!! This command does not exist.
+________________________________________
+________________________________________
 Invalid input
 ________________________________________
 ________________________________________
 Nice! I've marked this task as done:
 [T][X] sell bread
+________________________________________
+________________________________________
+OOPS!!! This command does not exist.
 ________________________________________
 ________________________________________
 Got it. I've added this task:
@@ -49,8 +73,32 @@ ________________________________________
 Invalid input
 ________________________________________
 ________________________________________
+OOPS!!! The description of a deadline cannot be empty.
+________________________________________
+________________________________________
+OOPS!!! This command does not exist.
+________________________________________
+________________________________________
+OOPS!!! This command does not exist.
+________________________________________
+________________________________________
+OOPS!!! Remember to set a time.
+________________________________________
+________________________________________
+OOPS!!! The description of a event cannot be empty.
+________________________________________
+________________________________________
+OOPS!!! This command does not exist.
+________________________________________
+________________________________________
+OOPS!!! Remember to set a time.
+________________________________________
+________________________________________
 OK, I've marked this task as not done yet:
 [T][ ] sell bread
+________________________________________
+________________________________________
+OOPS!!! This command does not exist.
 ________________________________________
 ________________________________________
 Here are the tasks in your list:
@@ -82,6 +130,9 @@ Got it. I've added this task:
 Now you have 5 tasks in the list
 ________________________________________
 ________________________________________
+OOPS!!! This command does not exist.
+________________________________________
+________________________________________
 Got it. I've added this task:
 [D][ ] return book (by: Sunday)
 Now you have 6 tasks in the list
@@ -97,10 +148,23 @@ Here are the tasks in your list:
 Now you have 6 tasks in the list
 ________________________________________
 ________________________________________
-Invalid input
+OOPS!!! The description of a todo cannot be empty.
 ________________________________________
 ________________________________________
-Invalid input
+Here are the tasks in your list:
+1.[T][ ] buy bread
+2.[T][ ] sell bread
+3.[D][ ] homework (by: Mon 3pm)
+4.[E][ ] movie date (at: next week)
+5.[E][ ] project meeting (at: Mon 2-4pm)
+6.[D][ ] return book (by: Sunday)
+Now you have 6 tasks in the list
+________________________________________
+________________________________________
+OOPS!!! This command does not exist.
+________________________________________
+________________________________________
+OOPS!!! This command does not exist.
 ________________________________________
 ________________________________________
 Here are the tasks in your list:
@@ -136,5 +200,5 @@ Here are the tasks in your list:
 Now you have 7 tasks in the list
 ________________________________________
 ________________________________________
-    Bye. Hope to see you again soon!
+Bye. Hope to see you again soon!
 ________________________________________

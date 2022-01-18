@@ -8,6 +8,6 @@ public class EventTask extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]" + super.toString() + " (%s)", this.time.replaceFirst(" ", ": "));
+        return String.format("[E]" + super.toString() + "(%s)", this.time.replaceFirst(" ", ": "));
     }
 }
