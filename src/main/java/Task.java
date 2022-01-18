@@ -1,34 +1,27 @@
 public class Task {
 
-  private final int index;
-  private final String title;
-  private boolean done;
+	private final String title;
+	private boolean done;
 
-  public Task(int index, String title) {
-    this.index = index;
-    this.title = title;
-    this.done = false;
-  }
+	public Task(String title) {
+		this.title = title;
+		this.done = false;
+	}
 
-  public boolean isCompleted() {
-    return done;
-  }
+	public boolean isCompleted() {
+		return done;
+	}
 
-  public void mark() {
-    done = true;
-  }
+	public void mark() {
+		done = true;
+	}
 
-  public void unmark() {
-    done = false;
-  }
+	public void unmark() {
+		done = false;
+	}
 
-  @Override
-  public String toString() {
-    return String.format(
-      "             %d. [%s] %s",
-      index,
-      done ? "X" : " ",
-      title
-    );
-  }
+	@Override
+	public String toString() {
+		return String.format("[%s] %s", done ? "X" : " ", title);
+	}
 }
