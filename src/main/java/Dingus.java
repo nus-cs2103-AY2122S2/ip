@@ -59,6 +59,7 @@ public class Dingus {
 			System.out.println(startLine);
 			System.out.println("DINGUS:	Please don't ever bother me again, bye");
 			System.out.println(endLine);
+			return;
 		}
 
 		if (words[0].equals("list")) {
@@ -71,27 +72,17 @@ public class Dingus {
 			output += "\n" + endLine;
 			System.out.println(output);
 		} else if (words[0].equals("mark")) {
-			// Marking task as Done
-			int pos = Integer.parseInt(words[1]) - 1;
-			tasks.get(pos).mark();
-			System.out.println(startLine);
-			System.out.println("Hooray...you've finally completed this task:");
-			System.out.println(tasks.get(pos));
-			System.out.println(endLine);
+			mark(input);
 		} else if (words[0].equals("unmark")) {
-			// Unmarking task
-			int pos = Integer.parseInt(words[1]) - 1;
-			tasks.get(pos).unmark();
-			System.out.println(startLine);
-			System.out.println("Faking your completed tasks again? I've unmarked this task:");
-			System.out.println(tasks.get(pos));
-			System.out.println(endLine);
+			unmark(input);
 		} else if (words[0].equals("todo")) {
 			todo(input);
 		} else if (words[0].equals("deadline")) {
 			deadline(input);
 		} else if (words[0].equals("event")) {
 			event(input);
+		} else if (words[0].equals("delete")) {
+			delete(input);
 		} else {
 			throw new DingusException("What kind of command is that?? I don't understand!");
 		}
@@ -153,5 +144,92 @@ public class Dingus {
 					: "Can you even finish " + tasks.size() + " task?");
 			System.out.println(endLine);
 		}
+	}
+
+	public static void delete(String input) throws DingusException {
+		String[] info = input.split(" ");
+		if (info.length == 1) {
+			throw new DingusException("How am I suppose to delete something without knowing which task?");
+		}
+
+		try {
+			Integer.parseInt(info[1]);
+		} catch (DingusException e) {
+			throw new DingusException("Are you incapable of understanding what's an integer?");
+		}
+
+		if (Integer.parseInt(info[1]) > tasks.size()) {
+			throw new DingusException("Can't you count? How am I supposed to delete something that doesn't exist?");
+		} else {
+			int pos = Integer.parseInt(info[1]) - 1;
+			System.out.println(startLine);
+			System.out.println("Knew that you couldn't finish that task, already deleted for you!");
+			System.out.println(tasks.get(pos));
+			System.out.println((tasks.size() > 1) ? "You have " + tasks.size() + " tasks left!"
+					: "You have " + tasks.size() + " task left!");
+			System.out.println(endLine);
+			tasks.remove(pos);
+		}
+
+	}
+
+	public static void mark(String input) throws DingusException {
+		String[] info = input.split(" ");
+		if (info.length == 1) {
+			throw new DingusException("How am I suppose to mark something without knowing which task?");
+		}
+
+		try {
+			Integer.parseInt(info[1]);
+		} catch (DingusException e) {
+			throw new DingusException("Are you incapable of understanding what's an integer?");
+		}
+
+		if (Integer.parseInt(info[1]) > tasks.size()) {
+			throw new DingusException("Can't you count? How am I supposed to mark something that doesn't exist?");
+		} else {
+			int pos = Integer.parseInt(info[1]) - 1;
+			if (tasks.get(pos).isDone) {
+				throw new DingusException("Your task has been marked before...");
+			}
+			tasks.get(pos).mark();
+			System.out.println(startLine);
+			System.out.println("Wasn't expecting you to finish that task, already marked for you!");
+			System.out.println(tasks.get(pos));
+			System.out.println((tasks.size() > 1) ? "You have " + tasks.size() + " tasks left!"
+					: "You have " + tasks.size() + " task left!");
+			System.out.println(endLine);
+		}
+
+	}
+
+	public static void unmark(String input) throws DingusException {
+		String[] info = input.split(" ");
+		if (info.length == 1) {
+			throw new DingusException("How am I suppose to unmark something without knowing which task?");
+		}
+
+		try {
+			Integer.parseInt(info[1]);
+		} catch (DingusException e) {
+			throw new DingusException("Are you incapable of understanding what's an integer?");
+		}
+
+		if (Integer.parseInt(info[1]) > tasks.size()) {
+			throw new DingusException("Can't you count? How am I supposed to unmark something that doesn't exist?");
+		} else {
+			int pos = Integer.parseInt(info[1]) - 1;
+			if (!tasks.get(pos).isDone) {
+				throw new DingusException("Your task is already unmarked, why unmark it again...");
+			}
+			tasks.get(pos).unmark();
+			System.out.println(startLine);
+			System.out.println("Knew that you didnt't finish that task, already unmarked it for you!");
+			System.out.println(tasks.get(pos));
+			System.out.println((tasks.size() > 1) ? "You have " + tasks.size() + " tasks left!"
+					: "You have " + tasks.size() + " task left!");
+			System.out.println(endLine);
+		}
+
 	}
 }
