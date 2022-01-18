@@ -61,9 +61,8 @@ public class Duke {
 
     private static String readInput(Scanner sc) {
         System.out.println("Enter a Command or New Task:");
-        String line = sc.nextLine();
 
-        return line;
+        return sc.nextLine();
     }
 
     private static void parseCommand(String command, IPrintable linePrinter)
@@ -72,29 +71,38 @@ public class Duke {
         final String commandLowerCase = commandParts[0].toLowerCase();
         final String args = command.substring(commandLowerCase.length()).trim();
 
-        if (commandLowerCase.equals(COMMAND_LIST)) {
+        switch (commandLowerCase) {
+        case COMMAND_LIST:
             linePrinter.print("This is your task list:");
             taskStore.forEach((index, task) -> {
                 // Note that index passed into this consumer is 0-based. Increment by 1 for readability
                 linePrinter.print(String.format("%d. %s", index + 1, task.getReadableString()));
             });
-        } else if (commandLowerCase.equals(COMMAND_MARK) || commandLowerCase.equals(COMMAND_UNMARK)) {
+            break;
+        case COMMAND_MARK:
+            // Fallthrough
+        case COMMAND_UNMARK:
             parseMarkCommand(linePrinter, args, commandLowerCase.equals(COMMAND_MARK));
-        } else if (commandLowerCase.equals(COMMAND_CREATE_TODO)) {
+            break;
+        case COMMAND_CREATE_TODO:
             parseCreateTodo(linePrinter, args);
-        } else if (commandLowerCase.equals(COMMAND_CREATE_DEADLINE)) {
+            break;
+        case COMMAND_CREATE_DEADLINE:
             parseCreateDeadline(linePrinter, args);
-        } else if (commandLowerCase.equals(COMMAND_CREATE_EVENT)) {
+            break;
+        case COMMAND_CREATE_EVENT:
             parseCreateEvent(linePrinter, args);
-        } else if (commandLowerCase.equals(COMMAND_DELETE)) {
+            break;
+        case COMMAND_DELETE:
             parseDeleteEvent(linePrinter, args);
-        } else {
+            break;
+        default:
             throw new DukeInvalidCommandException(String.format("No such command: %s", commandLowerCase));
         }
     }
 
     private static int parseTaskNumber(String args) throws DukeIllegalArgumentException {
-        int taskIndex = -1;
+        int taskIndex;
         try {
             taskIndex = Integer.parseInt(args);
         } catch (NumberFormatException ex) {
