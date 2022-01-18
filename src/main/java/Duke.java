@@ -36,16 +36,45 @@ public class Duke {
         printLine();
         String input = ioIn.nextLine();
         printLine();
-        if (input.equals("bye")) {
-            ioOut.println("Seeeee youuuu sooon...");
-            return false;
-        } else if (input.equals("list")) {
-            ioOut.print(todoList.showList());
-        } else {
-            todoList.addItem(input);
-            ioOut.println("added: " + input);
+
+        String[] splitInput = input.split("\\s+");
+        String command = splitInput[0];
+        switch (command) {
+            case "bye":
+                ioOut.println("Seeeee youuuu sooon...");
+                return false;
+            case "list":
+                list(); break;
+            case "mark":
+                mark(splitInput); break;
+            case "unmark":
+                unmark(splitInput); break;
+            default:
+                add(input); break;
         }
         return true;
+    }
+
+    private static void list() {
+        ioOut.println("Here are the tasks in your list:");
+        ioOut.print(todoList.showList());
+    }
+
+    private static void mark(String[] splitInput) {
+        int index = Integer.parseInt(splitInput[1]) - 1;
+        ioOut.println("Nice! I've marked this task as done: ");
+        ioOut.println(todoList.markItem(index));
+    }
+
+    private static void unmark(String[] splitInput) {
+        int index = Integer.parseInt(splitInput[1]) - 1;
+        ioOut.println("OK, I've marked this task as not done yet:");
+        ioOut.println(todoList.unmarkItem(index));
+    }
+
+    private static void add(String input) {
+        todoList.addItem(input);
+        ioOut.println("added: " + input);
     }
 
     public static void main(String[] args) {
