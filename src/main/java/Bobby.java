@@ -44,6 +44,9 @@ public class Bobby {
             throw new MarkException("negative");
         }
         Task t = Bobby.tasks.get(Integer.parseInt(inputs[1])-1);
+        if (t.done) {
+            throw new MarkException("alr_marked");
+        }
         t.markDone();
         System.out.println("    Finally... I've marked this task as done:");
         System.out.println("      " + t);
@@ -59,7 +62,9 @@ public class Bobby {
             throw new MarkException("negative");
         }
         Task t = Bobby.tasks.get(Integer.parseInt(inputs[1])-1);
-
+        if (!t.done) {
+            throw new MarkException("alr_unmarked");
+        }
         t.unmarkDone();
         System.out.println("    " + "Could you be any more lazy? I've marked this task as not done yet:");
         System.out.println("      " + t);
