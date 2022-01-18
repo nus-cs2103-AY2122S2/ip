@@ -43,12 +43,16 @@ public class Sana {
                 bye();
             } else if (userCommand.equals("list")) {
                 list();
-            } else if (userCommand.startsWith("mark")) {
-                int taskIndex = Integer.parseInt(userCommand.split(" ", 2)[1]) - 1;
-                mark(taskIndex, true);
-            } else if (userCommand.startsWith("unmark")) {
-                int taskIndex = Integer.parseInt(userCommand.split(" ", 2)[1]) - 1;
-                mark(taskIndex, false);
+            } else if (userCommand.startsWith("mark") || userCommand.startsWith("unmark")) {
+                String[] substringArr = userCommand.split(" ", 2);
+                if (substringArr.length == 1) {
+                    throw new IncompleteCommandException();
+                }
+                int taskIndex = Integer.parseInt(substringArr[1]) - 1;
+                if (taskIndex < 0 || taskIndex >= userTasks.size()) {
+                    throw new OutOfBoundsMarkException();
+                }
+                mark(taskIndex, userCommand.startsWith("mark"));
             } else if (userCommand.startsWith("todo ")) {
                 String taskName = userCommand.replaceFirst("todo ", "");
                 addToDo(taskName);
@@ -72,6 +76,8 @@ public class Sana {
         } catch (UnknownCommandException e) {
             System.out.println(e.getMessage());
         } catch (IncompleteCommandException e) {
+            System.out.println(e.getMessage());
+        } catch (OutOfBoundsMarkException e) {
             System.out.println(e.getMessage());
         }
         border();
