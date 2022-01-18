@@ -20,18 +20,16 @@ public class Bobby {
                 for (int i = 0; i < stringArray.size(); i++) {
                     Task t = stringArray.get(i);
                     int count = i + 1;
-                    System.out.println(count + ".[" + t.getStatusIcon() + "] " + t.description);
+                    System.out.println(count + "." + t);
                 }
             } else if (command.equals("mark")) {
                 Task t = stringArray.get(Integer.parseInt(inputs[1]) - 1);
                 t.markAsDone();
-                System.out.println("Bobby applauds you. This task is done:\n"
-                    + "[" + t.getStatusIcon() + "] " + t.description);
+                System.out.println("Bobby applauds you. This task is done:\n" + t);
             } else if (command.equals("unmark")) {
                 Task t = stringArray.get(Integer.parseInt(inputs[1]) - 1);
                 t.unmarkAsDone();
-                System.out.println("Bobby will remember that this task is not yet done:\n"
-                        + "[" + t.getStatusIcon() + "] " + t.description);
+                System.out.println("Bobby will remember that this task is not yet done:\n" + t);
             } else {
                 Task newTask = new Task(userInput);
                 System.out.println("Bobby heard: " + newTask.description);
