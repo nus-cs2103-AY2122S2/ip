@@ -9,10 +9,9 @@ public class Reminder {
         System.out.println("\tNow you have " + this.pointer + " tasks in the list.");
     }
 
-    public void mark(int position, boolean done) {
-        reminders[--position].setDone(done);
+    public int getSize() {
+        return this.pointer;
     }
-
     public void list() {
         System.out.println("\tHere are the tasks in your list:");
         if (pointer == 0) {
@@ -23,5 +22,9 @@ public class Reminder {
                 System.out.println("\t" + (i + 1) + ". " + task);
             }
         }
+    }
+
+    public void mark(int position, boolean done) {
+        reminders[--position].setDone(done);
     }
 }
