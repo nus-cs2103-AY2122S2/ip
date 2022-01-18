@@ -1,6 +1,7 @@
 package ui;
 
 import ui.command.*;
+import java.util.ArrayList;
 
 /**
  * @author Jiaaa-yang
@@ -13,12 +14,18 @@ public class ChatBot {
                                                 + "What can I do for you?";
 
     /**
+     * ArrayList to keep track of text entered by user
+     */
+    private final ArrayList<String> tasks;
+
+    /**
      * Boolean to track if bot has received a termination command
      */
     private boolean terminated;
 
     public ChatBot() {
         this.terminated = false;
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -37,11 +44,14 @@ public class ChatBot {
     public void runCommand(String input) {
         Command command;
         switch (input) {
+            case "list":
+                command = new ListCommand(input, this.tasks);
+                break;
             case "bye":
                 command = new ExitCommand(input);
                 break;
             default:
-                command = new EchoCommand(input);
+                command = new AddItemCommand("add", input, this.tasks);
         }
         this.terminated = command.execute();
     }
