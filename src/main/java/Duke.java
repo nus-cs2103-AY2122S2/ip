@@ -16,40 +16,42 @@ public class Duke {
                 + "     ____________________________________________________________";
 
         System.out.println(greeting);
-
         Scanner sc = new Scanner(System.in);
 
         ArrayList<String> list = new ArrayList<>();
 
         while (sc.hasNext()) {
-
-            String input = sc.next();
+            String input = sc.nextLine();
             String output = "";
             String line = "     ____________________________________________________________\n";
 
             if (input.equals("bye")) {
-
                 output = "Bye. Hope to see you again soon!";
-
                 System.out.println(line
                         + "     "
                         + output
                         + "\n"
                         + line);
-
                 break;
-            } else {
-                output = input;
-
-                System.out.println(line
-                        + "     "
-                        + output
-                        + "\n"
-                        + line);
+            }
+            else if (input.equals("list")) {
+                for (int i = 0; i < list.size(); i++)
+                    output += "     "
+                            + (i + 1)
+                            + ". "
+                            + list.get(i)
+                            + "\n";
+            }
+            else {
+                list.add(input);
+                output = "     "
+                        + "added: "
+                        + input
+                        + "\n";
             }
 
+            System.out.print(line + output + line);
         }
-
         sc.close();
     }
 }
