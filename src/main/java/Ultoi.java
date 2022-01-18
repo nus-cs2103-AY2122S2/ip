@@ -42,6 +42,13 @@ public class Ultoi {
                     Task curr = logs.get(i);
                     System.out.println(indent + (i + 1) + ". " + curr.toString());
                 }
+            } else if ((cmd.split(" "))[0].equals("delete")) {
+                String[] tokens = cmd.split(" ");
+                int taskIndex = Integer.parseInt(tokens[1]) - 1;
+                Task removed = logs.remove(taskIndex);
+                System.out.println(indent + "Noted. I have removed this task:");
+                System.out.println(indent.repeat(2) + removed.toString());
+                System.out.println(indent + "Now you have " + logs.size() + " tasks in the list.");
             } else if ((cmd.split(" "))[0].equals("mark")) {
                 String[] tokens = cmd.split(" ");
                 int taskIndex = Integer.parseInt(tokens[1]) - 1;
@@ -52,7 +59,7 @@ public class Ultoi {
                 String[] tokens = cmd.split(" ");
                 int taskIndex = Integer.parseInt(tokens[1]) - 1;
                 logs.get(taskIndex).markAsUndone();
-                System.out.println(indent + "Nice! I have marked this task as not done yet:");
+                System.out.println(indent + "Okay! I have marked this task as not done yet:");
                 System.out.println(indent.repeat(2) + logs.get(taskIndex).toString());
             } else if ((cmd.split(" "))[0].equals("todo")) { // add a ToDo event
                 Task curr = new ToDo(cmd.substring(5));
@@ -141,6 +148,7 @@ public class Ultoi {
                 break;
             case "mark":
             case "unmark":
+            case "delete":
                 try {
                     int taskIndex = Integer.parseInt(cmd.substring(tokens[0].length() + 1)) - 1;
                     if (taskIndex < 0 || taskIndex >= logs.size()) {
