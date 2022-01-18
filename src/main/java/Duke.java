@@ -66,13 +66,36 @@ public class Duke {
 
             return true;
         } else {
-            Task newTask = new Task(userInput);
-            String output = "   __________________________________________________\n"
-                    + "       " + "added: " + userInput +"\n"
-                    + "   __________________________________________________";
-            System.out.println(output);
+            String newTaskMessage = createTask(userInput);
+            System.out.println(newTaskMessage);
             return true;
         }
+    }
+
+    public static String createTask(String input) {
+        String[] splitString = input.split("/");
+        String[] instruction = splitString[0].split(" ");
+        Task currentTask = null;
+
+        switch(instruction[0]) {
+            case "todo":
+                currentTask = new ToDo(input.substring(4));
+                break;
+            case "event":
+                currentTask = new Event(splitString[0].substring(5), splitString[1].substring(3));
+                break;
+            case "deadline":
+                currentTask = new Deadline(splitString[0].substring(8), splitString[1].substring(3));
+                break;
+        }
+
+        String output = "   __________________________________________________\n"
+                + "       Got it! I have added this following task :D \n"
+                + "       " + currentTask + "\n"
+                + "       " + "Now you have " + Task.getCounter() + " tasks in your list.\n"
+                + "   __________________________________________________";
+
+        return output;
     }
 
     public static void main(String[] args) {

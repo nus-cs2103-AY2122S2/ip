@@ -26,6 +26,9 @@ public class Task {
     public static Task[] getTaskList() {
         return Task.arrayOfTask;
     }
+    public static String getCounter() {
+        return Integer.toString(counter);
+    }
 
     public static String printArray() {
         int arrayLength = arrayOfTask.length;
@@ -46,7 +49,7 @@ public class Task {
 
     public String toString() {
         String status = this.isDone ? "X" : " ";
-        return "[" + status + "] " + arrayOfTask[this.id - 1].name;
+        return "[" + status + "] " + this.name;
     }
 
 }
