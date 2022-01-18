@@ -3,12 +3,6 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-
-//        String logo = " ____        _        \n"
-//                    + "|  _ \\ _   _| | _____ \n"
-//                    + "| | | | | | | |/ / _ \\\n"
-//                    + "| |_| | |_| |   <  __/\n"
-//                    + "|____/ \\__,_|_|\\_\\___|\n";
         String logo =         "\n" +
                 "       _       _        \n" +
                 "      | |     | |       \n" +
@@ -96,8 +90,6 @@ public class Duke {
                 String totalString = "    ____________________________________________________________\n" +
                         "    Here are the tasks in your list:\n";
                 for (int i = 0; i < itemList.size(); i++) {
-//                    totalString += "    " + (i + 1) + ". " + "[" + itemList.get(i).getTaskType()
-//                            + "]" + "[" + itemList.get(i).getStatusIcon() + "] " + itemList.get(i).description + "\n";
                     totalString += "    " + (i + 1) + ". " + itemList.get(i).getDescription() + "\n";
                 }
                 totalString += "    ____________________________________________________________\n";
