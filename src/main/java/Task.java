@@ -1,10 +1,12 @@
-public class Task {
-    private final String action;
+public abstract class Task {
+    final String action;
     private boolean done;
+    private final String type;
 
-    Task(String action) {
+    Task(String action, String type) {
         this.action = action;
         this.done = false;
+        this.type = type;
     }
 
     void complete() {

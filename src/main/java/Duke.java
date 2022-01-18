@@ -13,40 +13,47 @@ public class Duke {
         Calendar calendar = new Calendar();
 
         while (true) {
+            String command = sc.next();
             String input = sc.nextLine();
-            String[] splitInput = input.split("\\s");
-            switch(splitInput[0]) {
+            command = command.trim(); //remove whitespace at back of input
+            input = input.trim(); // remove whitespace at front of input
+
+            switch(command) {
                 case "bye":
-                    System.out.println(new OutputPackager("Bye! Hope to see you again soon."));
+                    output("Bye! Hope to see you again soon.");
                     return;
                 case "list":
-                    System.out.println(new OutputPackager(calendar.toString()));
+                    output(calendar.toString());
                     continue;
-                case "mark":
-                    try {
-                        calendar.get(Integer.valueOf(splitInput[1])).complete();
-                        System.out.println(new OutputPackager("Nice! I've marked this task as done for you.\n   " + calendar.get(Integer.valueOf(splitInput[1]))));
-                    }
-                    catch ( IndexOutOfBoundsException e ) {
-                        System.out.println(new OutputPackager(String.format("Invalid task number. There are only %s tasks in the list.", calendar.size())));
-                    } catch ( NumberFormatException n ) {
-                        System.out.println(new OutputPackager(String.format("Invalid input. Expected integer value but obtained \"%s\".", splitInput[1])));
-                    }
+                case "todo":
+                    Todo newTodo = new Todo(input);
+                    calendar.add(newTodo);
+                    taskAdded(newTodo.toString(), calendar.size());
                     continue;
-                case "unmark":
-                    try {
-                        calendar.get(Integer.valueOf(splitInput[1])).incomplete();
-                        System.out.println(new OutputPackager("Ok. I've marked this task as not done yet.\n   " + calendar.get(Integer.valueOf(splitInput[1]))));
-                    } catch ( IndexOutOfBoundsException e) {
-                        System.out.println(new OutputPackager(String.format("Invalid task number. There are only %s tasks in the list.", calendar.size())));
-                    } catch ( NumberFormatException n) {
-                        System.out.println(new OutputPackager(String.format("Invalid input. Expected integer value but obtained \"%s\".", splitInput[1])));
-                    }
+                case "deadline":
+                    String[] processedDeadline = input.split("/", 2);
+                    Deadline newDeadline = new Deadline(processedDeadline[0], processedDeadline[1]);
+                    calendar.add(newDeadline);
+                    taskAdded(newDeadline.toString(), calendar.size());
+                    continue;
+                case "event":
+                    String[] processedEvent = input.split("/", 2);
+                    Event newEvent = new Event(processedEvent[0], processedEvent[1]);
+                    calendar.add(newEvent);
+                    taskAdded(newEvent.toString(), calendar.size());
                     continue;
                 default:
-                    calendar.add(new Task(input));
-                    System.out.println(new OutputPackager(String.format("added: %s", input)));
+                    output("OOPS!! I'm sorry, I don't know what that means");
+                    continue;
             }
         }
+    }
+
+    static void output(String message) {
+        System.out.println(String.format("____________________________________________________________\n%s\n____________________________________________________________", message));
+    }
+
+    static void taskAdded(String task, int size) {
+        output(String.format("Got it. I've added this task:\n   %s\nNow you have %s tasks in the list.", task, size));
     }
 }
