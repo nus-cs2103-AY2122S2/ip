@@ -11,8 +11,8 @@ public class PikaBot {
         String line = "_________________________________";
         String indentation = "     ";
 
-        System.out.println(indentation + line + "\n" + indentation + "Hello! I'm PikaBot " + "\n" + indentation +
-                "What can I do for you? \n" + indentation + line);
+        System.out.println(indentation + line + "\n" + indentation + "Hello! I'm PikaBot" + "\n" + indentation +
+                "What can I do for you?\n" + indentation + line);
 
         String input = sc.nextLine();
         String[] strInputArr = input.split(" ", 2);
@@ -76,7 +76,7 @@ public class PikaBot {
                     Todo currTodo = new Todo(description);
                     inputArr.add(currTodo);
                     System.out.println(indentation + line + "\n" +
-                            indentation + "Got it. I've added this task: " + "\n" +
+                            indentation + "Got it. I've added this task:" + "\n" +
                             indentation + "  " + currTodo + "\n" +
                             indentation + "Now you have " + inputArr.size() + " tasks in the list." +
                             "\n" +
@@ -94,7 +94,7 @@ public class PikaBot {
                     Deadline currDeadline = new Deadline(description, by);
                     inputArr.add(currDeadline);
                     System.out.println(indentation + line + "\n" +
-                            indentation + "Got it. I've added this task: " + "\n" +
+                            indentation + "Got it. I've added this task:" + "\n" +
                             indentation + "  " + currDeadline + "\n" +
                             indentation + "Now you have " + inputArr.size() + " tasks in the list." +
                             "\n" +
@@ -112,7 +112,7 @@ public class PikaBot {
                     Event currEvent = new Event(description, at);
                     inputArr.add(currEvent);
                     System.out.println(indentation + line + "\n" +
-                            indentation + "Got it. I've added this task: " + "\n" +
+                            indentation + "Got it. I've added this task:" + "\n" +
                             indentation + "  " + currEvent + "\n" +
                             indentation + "Now you have " + inputArr.size() + " tasks in the list." +
                             "\n" +
@@ -121,15 +121,6 @@ public class PikaBot {
                     input = sc.nextLine();
                     strInputArr = input.split(" ", 2);
                     break;
-                }
-
-                default: {
-                    inputArr.add(new Task(input));
-                    System.out.println(indentation + line + "\n" + indentation + "added: " + input + "\n" + indentation +
-                            line);
-
-                    input = sc.nextLine();
-                    strInputArr = input.split(" ", 2);
                 }
             }
         }
