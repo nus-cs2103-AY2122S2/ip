@@ -25,15 +25,35 @@ public class Duke {
 
         while (true) {
             String userInput = sc.nextLine();
-            executeCommand(userInput);
+            try {
+                executeCommand(userInput);
+            } catch (UnknownCommandException e) {
+                printUnknownCommandException();
+            } catch (EmptyTaskException e) {
+                printEmptyTaskException();
+            }
         }
-
     }
 
-    private static void executeCommand(String userInput) {
+    private static void printEmptyTaskException() {
+        System.out.println(HORIZONTAL_LINE);
+        System.out.println("\t" + "☹ OOPS!!! Missing arguments.");
+        System.out.println(HORIZONTAL_LINE);
+    }
+    private static void printUnknownCommandException() {
+        System.out.println(HORIZONTAL_LINE);
+        System.out.println("\t" + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        System.out.println(HORIZONTAL_LINE);
+    }
+
+    private static void executeCommand(String userInput) throws UnknownCommandException, EmptyTaskException {
         String[] command = parseUserInput(userInput);
         String commandType = command[0];
         String commandArgument = command[1];
+
+        if (commandArgument.equals("") && !commandType.equals(COMMAND_LIST) && !commandType.equals(COMMAND_BYE)) {
+            throw new EmptyTaskException();
+        }
 
         switch (commandType) {
             case COMMAND_BYE:
@@ -43,37 +63,70 @@ public class Duke {
                 executeList();
                 break;
             case COMMAND_MARK:
-                executeMark(commandArgument);
+                try {
+                    executeMark(commandArgument);
+                } catch (InvalidIndexException e) {
+                    printInvalidIndexException();
+                }
                 break;
             case COMMAND_UNMARK:
-                executeUnmark(commandArgument);
+                try {
+                    executeUnmark(commandArgument);
+                } catch (InvalidIndexException e) {
+                    printInvalidIndexException();
+                }
                 break;
             case COMMAND_TODO:
                 executeAddTodo(commandArgument);
                 break;
             case COMMAND_DEADLINE:
-                executeAddDeadline(commandArgument);
+                try {
+                    executeAddDeadline(commandArgument);
+                } catch (MissingDateTimeException e) {
+                    printMissingDateTimeException();
+                }
                 break;
             case COMMAND_EVENT:
-                executeAddEvent(commandArgument);
+                try {
+                    executeAddEvent(commandArgument);
+                } catch (MissingDateTimeException e) {
+                    printMissingDateTimeException();
+                }
                 break;
+            default:
+                throw new UnknownCommandException();
         }
-
     }
 
+    private static void printInvalidIndexException() {
+        System.out.println(HORIZONTAL_LINE);
+        System.out.println("\t" + "☹ OOPS!!! Invalid index.");
+        System.out.println(HORIZONTAL_LINE);
+    }
+    private static void printMissingDateTimeException() {
+        System.out.println(HORIZONTAL_LINE);
+        System.out.println("\t" + "☹ OOPS!!! Missing date/time. Please specify it.");
+        System.out.println(HORIZONTAL_LINE);
+    }
     private static void executeAddTodo(String commandArgument) {
         savedTask[numberOfTasks] = new Todo(commandArgument);
         printConfirmAdd();
     }
 
-    private static void executeAddDeadline(String commandArgument) {
-        String[] deadlineDetail = commandArgument.split(PREFIX_DEADLINE);
+    private static void executeAddDeadline(String commandArgument) throws MissingDateTimeException {
+        String[] deadlineDetail = commandArgument.split(PREFIX_DEADLINE, 2);
+        if (deadlineDetail.length != 2) {
+            throw new MissingDateTimeException();
+        }
         savedTask[numberOfTasks] = new Deadline(deadlineDetail[0], deadlineDetail[1]);
         printConfirmAdd();
     }
 
-    private static void executeAddEvent(String commandArgument) {
-        String[] eventDetail = commandArgument.split(PREFIX_EVENT);
+    private static void executeAddEvent(String commandArgument) throws MissingDateTimeException{
+        String[] eventDetail = commandArgument.split(PREFIX_EVENT, 2);
+        if (eventDetail.length != 2) {
+            throw new MissingDateTimeException();
+        }
         savedTask[numberOfTasks] = new Event(eventDetail[0], eventDetail[1]);
         printConfirmAdd();
     }
@@ -86,6 +139,7 @@ public class Duke {
         System.out.println(HORIZONTAL_LINE);
         numberOfTasks++;
     }
+
     private static String[] parseUserInput(String userInput) {
         final String[] args = userInput.strip().split(" ", 2);
         if (args.length == 2) {
@@ -95,23 +149,30 @@ public class Duke {
         }
     }
 
-    private static void executeMark(String commandArgument) {
+    private static void executeMark(String commandArgument) throws InvalidIndexException {
+        int index = Integer.parseInt(commandArgument) - 1;
+        if (index < 0 || index > numberOfTasks - 1) {
+            throw new InvalidIndexException();
+        }
+        savedTask[index].markAsDone();
         System.out.println(HORIZONTAL_LINE);
         System.out.println("\t" + "Nice! I've marked this task as done:");
-        int index = Integer.parseInt(commandArgument) - 1;
-        savedTask[index].markAsDone();
         System.out.println("\t" + savedTask[index].toString());
         System.out.println(HORIZONTAL_LINE);
     }
 
-    private static void executeUnmark(String commandArgument) {
+    private static void executeUnmark(String commandArgument) throws InvalidIndexException {
+        int index = Integer.parseInt(commandArgument) - 1;
+        if (index < 0 || index > numberOfTasks - 1) {
+            throw new InvalidIndexException();
+        }
+        savedTask[index].markAsNotDone();
         System.out.println(HORIZONTAL_LINE);
         System.out.println("\t" + "OK, I've marked this task as not done yet:");
-        int index = Integer.parseInt(commandArgument) - 1;
-        savedTask[index].markAsNotDone();
         System.out.println("\t" + savedTask[index].toString());
         System.out.println(HORIZONTAL_LINE);
     }
+
     private static void executeList() {
         System.out.println(HORIZONTAL_LINE);
         System.out.println("\t" + "Here are the tasks in your list:");
