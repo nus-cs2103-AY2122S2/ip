@@ -5,6 +5,7 @@ public class Duke {
 
     private final static Scanner ioIn = new Scanner(System.in);
     private final static PrintStream ioOut = System.out;
+    private final static TodoList todoList = new TodoList();
 
     private static void printLine() {
         String line = "\n~._.~\"~._.~\"~._.~\"~._.~\"~._.~\"~._.~\"" +
@@ -38,8 +39,12 @@ public class Duke {
         if (input.equals("bye")) {
             ioOut.println("Seeeee youuuu sooon...");
             return false;
+        } else if (input.equals("list")) {
+            ioOut.print(todoList.showList());
+        } else {
+            todoList.addItem(input);
+            ioOut.println("added: " + input);
         }
-        ioOut.println(input);
         return true;
     }
 
