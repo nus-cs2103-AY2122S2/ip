@@ -1,7 +1,71 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Activating Cat Translator 2000...
+Waking Fluffers up...
 
+Meow! (Hello!)
+    /\_____/\
+   /  o   o  \
+  ( ==  ^  == )
+   )         (
+  (           )
+ ( (  )   (  ) )
+(__(__)___(__)__)
+    |\__/,|   (`\
+  _.|o o  |_   ) )
+-(((---(((--------
+
+------------------
+Meow! (Added: [T][ ] CS2103T week 2 A-TextUiTesting.
+You now have 1 task(s)!)
+
+Meow! (Added: [D][ ] CS2103T week2 (by: Thurs night).
+You now have 2 task(s)!)
+
+Meow! (Added: [E][ ] CS2101 project meeting (at: Next week).
+You now have 3 task(s)!)
+
+    |\__/,|   (`\
+  _.|o o  |_   ) )
+-(((---(((--------
+1. [T][ ] CS2103T week 2 A-TextUiTesting
+2. [D][ ] CS2103T week2 (by: Thurs night)
+3. [E][ ] CS2101 project meeting (at: Next week)
+------------------
+Meow! (Okay! I've marked this task as done! [T][X] CS2103T week 2 A-TextUiTesting)
+
+    |\__/,|   (`\
+  _.|o o  |_   ) )
+-(((---(((--------
+1. [T][X] CS2103T week 2 A-TextUiTesting
+2. [D][ ] CS2103T week2 (by: Thurs night)
+3. [E][ ] CS2101 project meeting (at: Next week)
+------------------
+Meow! (Okay! I've marked this task as done! [D][X] CS2103T week2 (by: Thurs night))
+
+Meow! (Okay! I've marked this task as done! [E][X] CS2101 project meeting (at: Next week))
+
+    |\__/,|   (`\
+  _.|o o  |_   ) )
+-(((---(((--------
+1. [T][X] CS2103T week 2 A-TextUiTesting
+2. [D][X] CS2103T week2 (by: Thurs night)
+3. [E][X] CS2101 project meeting (at: Next week)
+------------------
+Meow! (This task now needs to be done! [D][ ] CS2103T week2 (by: Thurs night))
+
+Meow! (This task now needs to be done! [E][ ] CS2101 project meeting (at: Next week))
+
+    |\__/,|   (`\
+  _.|o o  |_   ) )
+-(((---(((--------
+1. [T][X] CS2103T week 2 A-TextUiTesting
+2. [D][ ] CS2103T week2 (by: Thurs night)
+3. [E][ ] CS2101 project meeting (at: Next week)
+------------------
+Meow? (I can't do that! I don't understand what you said.
+Did you mean to do something else?)
+
+Meooow~ (Bye bye! See you again next time!)
+      |\      _,,,---,,_
+ZZZzz /,`.-'`'    -.  ;-;;,_
+     |,4-  ) )-,_. ,\ (  `'-'
+    '---''(_/--'  `-'\_)

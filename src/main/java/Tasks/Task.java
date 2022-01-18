@@ -10,8 +10,8 @@ public abstract class Task {
     private String desc;
     /** Whether the task is done or not.*/
     private boolean isDone;
-    /** The Tick symbol used to show that a class is marked as done.*/
-    private static String TICK = "\u2713";
+    /** The Cross symbol used to show that a class is marked as done. Original: ✓ or \u2713*/
+    private static String TICK = "X";
 
     /**
      * Constructor to create a task.

@@ -152,8 +152,8 @@ public class Fluffers<T> {
     /**
      * Method for Fluffers to reply and describe an invalid action that they are asked to do.
      *
-     * This is used in place of an exception as Fluffers will be initiated in the main function,
-     * and there's no point if an exception is thrown and then caught immediately.
+     * This is used in place of an exception as there's no point if an exception is thrown
+     * and then caught immediately.
      *
      * @param message the sentence to be included in the reply. Include a fullstop.
      * @return a String representing the invalid action reply.
@@ -210,8 +210,7 @@ public class Fluffers<T> {
                     return this.speak("This task now needs to be done! " + this.displayTask(taskNum));
 
                 } catch (NoSuchTaskException e) {
-                    return this.invalidActionReply(String.format(
-                            "There's no task %d to unmark.", taskNum));
+                    return this.invalidActionReply(String.format("There's no task %d to unmark.", taskNum));
                 }
 
             } else if (input.startsWith("todo")){
