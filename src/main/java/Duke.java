@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Duke {
-    public static void main(String[] args) throws IOException, EmptyDescriptionException, InvalidMessageException {
+    public static void main(String[] args) throws IOException, DukeException {
 
         ArrayList<DukeBot.Task> arrayList = new ArrayList<>();
 
@@ -97,14 +97,28 @@ public class Duke {
 
                     pr.print(duke.successfulAdd(event, arrayList.size()));
                     pr.flush();
+                } else if (userInput.equals("delete")) {
+                    int index = Integer.parseInt(parts[1]);
+
+                    DukeBot.Task task = arrayList.remove(index-1);
+
+                    pr.print("Noted. I've removed this task:\n");
+                    pr.print(task.toString());
+                    pr.print("\nNow you have " + arrayList.size() + " tasks in the list.\n");
+                    pr.flush();
+
                 } else {
                     throw new InvalidMessageException();
                 }
-            } catch (InvalidMessageException invalidMessageException) {
-                pr.print("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+            } catch (DukeException e) {
+                pr.print(e.getMessage() + "\n");
                 pr.flush();
-            } catch (EmptyDescriptionException emptyDescriptionException) {
-                pr.print("☹ OOPS!!! The description of a todo cannot be empty.\n");
+            } catch (IndexOutOfBoundsException e) {
+                if (arrayList.size() == 0) {
+                    pr.print("List is empty! Please add a task before removing/marking it.\n");
+                } else {
+                    pr.print("Please enter a valid number in the list!\n");
+                }
                 pr.flush();
             }
         }
