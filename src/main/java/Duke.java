@@ -31,6 +31,9 @@ public class Duke {
                     } else if (command.equals("unmark")) {
                         int index = processNumericalDescription(s, "unmark", tl.size());
                         System.out.println(tl.markItemUndone(index));
+                    } else if (command.equals("delete")) {
+                        int index = processNumericalDescription(s, "delete", tl.size());
+                        System.out.println(tl.deleteItem(index));
                     } else {
                         if (command.equals("todo")) {
                             String description = processStringDescription(s, "todo");
@@ -59,7 +62,7 @@ public class Duke {
 
     private static String processCommand(String s) throws WrongInputException {
         String[] inputs = s.split(" ");
-        String[] acceptableInputs = new String[]{"mark","unmark","todo","deadline","event"};
+        String[] acceptableInputs = new String[]{"mark","unmark","todo","deadline","event","delete"};
         boolean isAcceptable = false;
         for (int i = 0; i < acceptableInputs.length; i++) {
             if (acceptableInputs[i].equals(inputs[0])) {

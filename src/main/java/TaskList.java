@@ -35,6 +35,11 @@ public class TaskList {
         return "Task not done =(\n " + t.toString();
     }
 
+    public String deleteItem(int index) {
+        Task t = list.remove(index);
+        return "deleted this item O_O:\n  " + t + "\nNow there are " + list.size() + " tasks on the list x)";
+    }
+
     public void printItems() {
         if (list.isEmpty()) {
             System.out.println("There are no tasks on your list :O");
