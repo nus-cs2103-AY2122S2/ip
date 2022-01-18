@@ -37,6 +37,19 @@ public class TaskList {
     }
 
     /**
+     * Method to remove an item from the list of tasks.
+     *
+     * @param taskIndex the index of the item to remove
+     * @return the removed task.
+     */
+    public Task delete(int taskIndex) throws NoSuchTaskException {
+        if (taskIndex >= this.list.size()) {
+            throw new NoSuchTaskException("There is no task with index " + taskIndex);
+        }
+        return this.list.remove(taskIndex);
+    }
+
+    /**
      * Method to return the length of the task list.
      * @return an integer representing the length of the list.
      */

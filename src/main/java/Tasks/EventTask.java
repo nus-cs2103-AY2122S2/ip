@@ -43,19 +43,22 @@ public class EventTask extends Task {
     public static EventTask parseInput(String input) throws InvalidInputException {
         String desc = input.substring(5);
         if (desc.length() <= 1) {
-            throw new InvalidInputException("No description or timing is provided for the Event Task!");
+            throw new InvalidInputException("No description and timing is provided for the Event Task!");
         }
-        desc = desc.strip();
+        desc = desc.substring(1);
         int indexOfSplit = desc.indexOf(" /at ");
         if (indexOfSplit == -1) {
             throw new InvalidInputException("No \" /at \" found in the input!");
         }
         String[] params = desc.split(" /at ");
-        if (params[0].length() == 0) {
-            throw new InvalidInputException("No description is provided for the Event Task!");
+        if (params.length == 0) { // happens when input is like "event  \at "
+            throw new InvalidInputException("No description and timing is provided for the Event Task!");
         }
-        if (params[1].length() == 0) {
+        if (params.length == 1) { // happens when input is like "event a \at "
             throw new InvalidInputException("No timing is provided for the Event Task!");
+        }
+        if (params[0].length() == 0) { // happens when input is like "event  \at a"
+            throw new InvalidInputException("No description is provided for the Event Task!");
         }
         return new EventTask(params[0], params[1]);
     }

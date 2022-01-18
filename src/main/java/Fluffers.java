@@ -101,12 +101,22 @@ public class Fluffers<T> {
     }
 
     /**
-     * Asks Fluffers to keep track of an item.
+     * Asks Fluffers to keep track of a Task.
      *
      * @param toStore the item to be tracked.
      */
     private void store(Task toStore) {
         tasks.add(toStore);
+    }
+
+    /**
+     * Asks Fluffers to stop keeping track of a Task.
+     *
+     * @param taskNum the task number to stop keeping track of.
+     * @return the task that was removed.
+     */
+    private Task removeTask(int taskNum) throws NoSuchTaskException {
+        return this.tasks.delete(taskNum - 1);
     }
 
     /**
@@ -160,8 +170,8 @@ public class Fluffers<T> {
      */
     public String invalidActionReply(String message) {
         String invalidMsg = String.format(
-                "I can't do that! %s\nDid you mean to do something else?", message);
-        return this.speak(invalidMsg, true);
+                "I can't do that! %s", message);
+        return this.speak(invalidMsg);
     }
 
     /**
@@ -194,23 +204,40 @@ public class Fluffers<T> {
                 return this.listTasks();
 
             } else if (input.startsWith("mark")) {
-                int taskNum = Integer.parseInt(input.split(" ")[1]);
+                int taskNum = -1;
                 try {
+                    taskNum = Integer.parseInt(input.split(" ")[1]);
                     this.markTask(taskNum, true);
                     return this.speak("Okay! I've marked this task as done! " + this.displayTask(taskNum));
 
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    return this.invalidActionReply("Please provide the task number to mark!");
                 } catch (NoSuchTaskException e) {
                     return this.invalidActionReply(String.format("There's no task %d to mark.", taskNum));
                 }
 
             } else if (input.startsWith("unmark")) {
-                int taskNum = Integer.parseInt(input.split(" ")[1]);
+                int taskNum = -1;
                 try {
+                    taskNum = Integer.parseInt(input.split(" ")[1]);
                     this.markTask(taskNum, false);
                     return this.speak("This task now needs to be done! " + this.displayTask(taskNum));
-
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    return this.invalidActionReply("Please provide the task number to unmark!");
                 } catch (NoSuchTaskException e) {
                     return this.invalidActionReply(String.format("There's no task %d to unmark.", taskNum));
+                }
+
+            } else if (input.startsWith("delete")) {
+                int taskNum = -1;
+                try {
+                    taskNum = Integer.parseInt(input.split(" ")[1]);
+                    Task removed = this.removeTask(taskNum);
+                    return this.speak("Okie dokie! I've removed this task! " + removed.toString());
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    return this.invalidActionReply("Please provide a task number to delete!");
+                } catch (NoSuchTaskException e) {
+                    return this.invalidActionReply(String.format("There's no task %d to remove.", taskNum));
                 }
 
             } else if (input.startsWith("todo")){

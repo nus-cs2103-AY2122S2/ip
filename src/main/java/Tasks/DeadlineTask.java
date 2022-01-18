@@ -46,19 +46,22 @@ public class DeadlineTask extends Task{
     public static DeadlineTask parseInput(String input) throws InvalidInputException {
         String desc = input.substring(8);
         if (desc.length() <= 1) {
-            throw new InvalidInputException("No description or timing is provided for the Deadline Task!");
+            throw new InvalidInputException("No description and timing is provided for the Deadline Task!");
         }
-        desc = desc.strip();
+        desc = desc.substring(1);
         int indexOfSplit = desc.indexOf(" /by ");
         if (indexOfSplit == -1) {
             throw new InvalidInputException("No \" /by \" found in the input!");
         }
         String[] params = desc.split(" /by ");
-        if (params[0].length() == 0) {
-            throw new InvalidInputException("No description is provided for the Deadline Task!");
+        if (params.length == 0) { // happens when input is like "deadline  \at "
+            throw new InvalidInputException("No description and timing is provided for the Deadline Task!");
         }
-        if (params[1].length() == 0) {
+        if (params.length == 1) { // happens when input is like "deadline a \at "
             throw new InvalidInputException("No timing is provided for the Deadline Task!");
+        }
+        if (params[0].length() == 0) { // happens when input is like "deadline  \at a"
+            throw new InvalidInputException("No description is provided for the Deadline Task!");
         }
         return new DeadlineTask(params[0], params[1]);
     }

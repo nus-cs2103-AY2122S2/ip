@@ -38,10 +38,10 @@ public class ToDoTask extends Task{
      */
     public static ToDoTask parseInput(String input) throws InvalidInputException {
         String desc = input.substring(4);
-        if (desc.length() <= 1) {
+        if (desc.length() <= 1) { //happens when input is like "todo " or "todo"
             throw new InvalidInputException("No description is provided for the ToDo Task!");
         } else {
-            return new ToDoTask(desc.strip());
+            return new ToDoTask(desc.substring(1));
         }
 
     }

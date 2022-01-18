@@ -9,61 +9,144 @@ Meow! (Hello!)
   (           )
  ( (  )   (  ) )
 (__(__)___(__)__)
+Meow! (I can't do that! I don't understand what you said.)
+
     |\__/,|   (`\
   _.|o o  |_   ) )
 -(((---(((--------
 
 ------------------
-Meow! (Added: [T][ ] CS2103T week 2 A-TextUiTesting.
+Meow! (I can't do that! There's no task 1 to mark.)
+
+Meow! (I can't do that! There's no task 2 to unmark.)
+
+Meow! (I can't do that! There's no task 3 to remove.)
+
+Meow! (I can't do that! No description is provided for the ToDo Task!)
+
+Meow! (I can't do that! No description is provided for the ToDo Task!)
+
+Meow! (Added: [T][ ] sample task.
 You now have 1 task(s)!)
 
-Meow! (Added: [D][ ] CS2103T week2 (by: Thurs night).
+Meow! (I can't do that! No description and timing is provided for the Deadline Task!)
+
+Meow! (I can't do that! No description and timing is provided for the Deadline Task!)
+
+Meow! (I can't do that! No " /by " found in the input!)
+
+Meow! (I can't do that! No description and timing is provided for the Deadline Task!)
+
+Meow! (I can't do that! No timing is provided for the Deadline Task!)
+
+Meow! (I can't do that! No description is provided for the Deadline Task!)
+
+Meow! (Added: [D][ ] task (by: end of year).
 You now have 2 task(s)!)
 
-Meow! (Added: [E][ ] CS2101 project meeting (at: Next week).
+Meow! (I can't do that! No description and timing is provided for the Event Task!)
+
+Meow! (I can't do that! No description and timing is provided for the Event Task!)
+
+Meow! (I can't do that! No " /at " found in the input!)
+
+Meow! (I can't do that! No description and timing is provided for the Event Task!)
+
+Meow! (I can't do that! No timing is provided for the Event Task!)
+
+Meow! (I can't do that! No description is provided for the Event Task!)
+
+Meow! (Added: [E][ ] event (at: 9 Aug).
 You now have 3 task(s)!)
 
-    |\__/,|   (`\
-  _.|o o  |_   ) )
--(((---(((--------
-1. [T][ ] CS2103T week 2 A-TextUiTesting
-2. [D][ ] CS2103T week2 (by: Thurs night)
-3. [E][ ] CS2101 project meeting (at: Next week)
-------------------
-Meow! (Okay! I've marked this task as done! [T][X] CS2103T week 2 A-TextUiTesting)
+Meow! (Okay! I've marked this task as done! [T][X] sample task)
 
     |\__/,|   (`\
   _.|o o  |_   ) )
 -(((---(((--------
-1. [T][X] CS2103T week 2 A-TextUiTesting
-2. [D][ ] CS2103T week2 (by: Thurs night)
-3. [E][ ] CS2101 project meeting (at: Next week)
+1. [T][X] sample task
+2. [D][ ] task (by: end of year)
+3. [E][ ] event (at: 9 Aug)
 ------------------
-Meow! (Okay! I've marked this task as done! [D][X] CS2103T week2 (by: Thurs night))
-
-Meow! (Okay! I've marked this task as done! [E][X] CS2101 project meeting (at: Next week))
+Meow! (Okay! I've marked this task as done! [D][X] task (by: end of year))
 
     |\__/,|   (`\
   _.|o o  |_   ) )
 -(((---(((--------
-1. [T][X] CS2103T week 2 A-TextUiTesting
-2. [D][X] CS2103T week2 (by: Thurs night)
-3. [E][X] CS2101 project meeting (at: Next week)
+1. [T][X] sample task
+2. [D][X] task (by: end of year)
+3. [E][ ] event (at: 9 Aug)
 ------------------
-Meow! (This task now needs to be done! [D][ ] CS2103T week2 (by: Thurs night))
-
-Meow! (This task now needs to be done! [E][ ] CS2101 project meeting (at: Next week))
+Meow! (Okay! I've marked this task as done! [E][X] event (at: 9 Aug))
 
     |\__/,|   (`\
   _.|o o  |_   ) )
 -(((---(((--------
-1. [T][X] CS2103T week 2 A-TextUiTesting
-2. [D][ ] CS2103T week2 (by: Thurs night)
-3. [E][ ] CS2101 project meeting (at: Next week)
+1. [T][X] sample task
+2. [D][X] task (by: end of year)
+3. [E][X] event (at: 9 Aug)
 ------------------
-Meow? (I can't do that! I don't understand what you said.
-Did you mean to do something else?)
+Meow! (This task now needs to be done! [D][ ] task (by: end of year))
 
+    |\__/,|   (`\
+  _.|o o  |_   ) )
+-(((---(((--------
+1. [T][X] sample task
+2. [D][ ] task (by: end of year)
+3. [E][X] event (at: 9 Aug)
+------------------
+Meow! (This task now needs to be done! [T][ ] sample task)
+
+    |\__/,|   (`\
+  _.|o o  |_   ) )
+-(((---(((--------
+1. [T][ ] sample task
+2. [D][ ] task (by: end of year)
+3. [E][X] event (at: 9 Aug)
+------------------
+Meow! (This task now needs to be done! [E][ ] event (at: 9 Aug))
+
+    |\__/,|   (`\
+  _.|o o  |_   ) )
+-(((---(((--------
+1. [T][ ] sample task
+2. [D][ ] task (by: end of year)
+3. [E][ ] event (at: 9 Aug)
+------------------
+Meow! (Okay! I've marked this task as done! [T][X] sample task)
+
+Meow! (Okay! I've marked this task as done! [E][X] event (at: 9 Aug))
+
+    |\__/,|   (`\
+  _.|o o  |_   ) )
+-(((---(((--------
+1. [T][X] sample task
+2. [D][ ] task (by: end of year)
+3. [E][X] event (at: 9 Aug)
+------------------
+Meow! (Okie dokie! I've removed this task! [D][ ] task (by: end of year))
+
+    |\__/,|   (`\
+  _.|o o  |_   ) )
+-(((---(((--------
+1. [T][X] sample task
+2. [E][X] event (at: 9 Aug)
+------------------
+Meow! (This task now needs to be done! [E][ ] event (at: 9 Aug))
+
+    |\__/,|   (`\
+  _.|o o  |_   ) )
+-(((---(((--------
+1. [T][X] sample task
+2. [E][ ] event (at: 9 Aug)
+------------------
+Meow! (Okie dokie! I've removed this task! [T][X] sample task)
+
+    |\__/,|   (`\
+  _.|o o  |_   ) )
+-(((---(((--------
+1. [E][ ] event (at: 9 Aug)
+------------------
 Meooow~ (Bye bye! See you again next time!)
       |\      _,,,---,,_
 ZZZzz /,`.-'`'    -.  ;-;;,_
