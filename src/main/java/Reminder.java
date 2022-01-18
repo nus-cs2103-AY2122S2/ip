@@ -1,10 +1,12 @@
 public class Reminder {
-    Task[] reminders = new Task[100];
-    int pointer = 0; // points to next empty slot in the array
+    protected Task[] reminders = new Task[100];
+    protected int pointer = 0; // points to next empty slot in the array
 
     public void add(Task task) {
         reminders[pointer++] = task;
-        System.out.println("\tadded: " + task.description);
+        System.out.println("\tGot it. I've added this task:");
+        System.out.println("\t" + task);
+        System.out.println("\tNow you have " + this.pointer + " tasks in the list.");
     }
 
     public void mark(int position, boolean done) {
@@ -18,7 +20,7 @@ public class Reminder {
         } else {
             for (int i = 0; i < pointer; i++) {
                 Task task = reminders[i];
-                System.out.println("\t" + (i + 1) + ". [" + task.getStatusIcon() + "] " + task.description);
+                System.out.println("\t" + (i + 1) + ". " + task);
             }
         }
     }

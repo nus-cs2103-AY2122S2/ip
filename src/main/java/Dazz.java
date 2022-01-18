@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Duke {
+public class Dazz {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String hr = "\t____________________________________________________________";
@@ -19,10 +19,10 @@ public class Duke {
 
         while (scanner.hasNext()) {
             String command = scanner.nextLine();
-            String[] arr = command.split("\\s+");
-            boolean byeFlag = arr[0].equals("bye");
+            String[] arr1 = command.split("\\s+");
+            boolean byeFlag = arr1[0].equals("bye");
             System.out.println(hr);
-            switch(arr[0]) {
+            switch(arr1[0]) {
                 case "bye":
                     System.out.println("\tBye. Hope to see you again soon!");
                     break;
@@ -32,15 +32,31 @@ public class Duke {
                     break;
 
                 case "mark":
-                    reminder.mark(Integer.parseInt(arr[1]), true);
+                    reminder.mark(Integer.parseInt(arr1[1]), true);
                     break;
 
                 case "unmark":
-                    reminder.mark(Integer.parseInt(arr[1]), false);
+                    reminder.mark(Integer.parseInt(arr1[1]), false);
+                    break;
+
+                case "todo":
+                    Task todo = new Todo(command.substring(5));
+                    reminder.add(todo);
+                    break;
+
+                case "deadline":
+                    String[] arr2 = command.split(" /by ");
+                    Task deadline = new Deadline(arr2[0].substring(9),arr2[1]);
+                    reminder.add(deadline);
+                    break;
+
+                case "event":
+                    String[] arr3 = command.split(" /at ");
+                    Task event = new Event(arr3[0].substring(6),arr3[1]);
+                    reminder.add(event);
                     break;
 
                 default:
-                    reminder.add(new Task(command));
                     break;
             }
             System.out.println(hr);
