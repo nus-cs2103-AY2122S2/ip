@@ -1,9 +1,13 @@
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 public class TaskList {
-    private final Task[] taskArray = new Task[100];
+    private final List<Task> tasks = new ArrayList<>();
     private int index = 0;
 
     String addTask(Task newTask) {
-        taskArray[index] = newTask;
+        tasks.add(newTask);
         index++;
         String output = "Got it. I've added this task:\n  " + newTask + "\nnow you have " + this.index + " tasks in the list";
         return output;
@@ -12,18 +16,16 @@ public class TaskList {
     String getTasks() {
         String output = "Here are the tasks in your list:";
         for (int i = 0; i < index; i++) {
-            output += String.format("\n%d.%s", i + 1, taskArray[i]);
+            output += String.format("\n%d.%s", i + 1, tasks.get(i));
         }
         return output;
     }
 
-    String mark(int id) {
-        if (id > index) {
-            return "Task has not been added yet";
-        } else if (id <= 0) {
-            return "invalid task number";
+    String mark(int id, String instr) throws InvalidTaskNumberException{
+        if (id > index || id <= 0) {
+            throw new InvalidTaskNumberException();
         }
-        String out = taskArray[id - 1].switchMark();
+        String out = tasks.get(id - 1).switchMark(instr);
         return out;
     }
 }

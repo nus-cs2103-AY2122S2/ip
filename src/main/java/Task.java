@@ -7,8 +7,10 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    public String switchMark() {
-        this.isDone = !this.isDone;
+    public String switchMark(String instr) {
+        if ((instr.equals("mark") && !isDone)|| (instr.equals("unmark") && isDone)) {
+            this.isDone = !this.isDone;
+        }
         if (isDone) {
             return "Nice! I've marked this task as done:\n  " + toString();
         }
