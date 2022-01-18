@@ -3,7 +3,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -56,34 +56,51 @@ public class Duke {
             else {
                 String[] parsedString = input.toLowerCase().split(" ", 2);
                 if (parsedString[0].equalsIgnoreCase("deadline")) {
-                   String [] dlParseBy = parsedString[1].split("/by");
-                   if (dlParseBy.length <= 1) {
-                       System.out.println("Please check that your input is correct.");
-                   } else {
-                       Deadline dl  = new Deadline(dlParseBy[0], dlParseBy[1]);
-                       inputList.add(dl);
-                       System.out.println("Got it. I've added " + dl + " to the list.");
-                   }
+                    if (parsedString.length <= 1) {
+                        System.out.println("The description cannot be empty!");
+                    } else {
+                        String [] dlParseBy = parsedString[1].split("/by");
+                        if (dlParseBy.length <= 1) {
+                            System.out.println("Please check that your input format is correct.");
+                        } else {
+                            Deadline dl  = new Deadline(dlParseBy[0], dlParseBy[1]);
+                            inputList.add(dl);
+                            System.out.println("Got it. I've added " + dl + " to the list.");
+                            System.out.println("Now you have " + inputList.size() + " tasks in the list.");
+                        }
+                    }
                 }
 
                 else if (parsedString[0].equalsIgnoreCase("event")) {
-                    String [] eventParseBy = parsedString[1].split("/at");
-                    if (eventParseBy.length <= 1) {
-                        System.out.println("Please check that your input is correct.");
+                    if (parsedString.length <= 1) {
+                        System.out.println("The description cannot be empty!");
                     } else {
-                        Event ev  = new Event(eventParseBy[0], eventParseBy[1]);
-                        inputList.add(ev);
-                        System.out.println("Got it. I've added " + ev + " to the list.");
+                        String [] eventParseBy = parsedString[1].split("/at");
+                        if (eventParseBy.length <= 1) {
+                            System.out.println("Please check that your input format is correct.");
+                        } else {
+                            Event ev  = new Event(eventParseBy[0], eventParseBy[1]);
+                            inputList.add(ev);
+                            System.out.println("Got it. I've added " + ev + " to the list.");
+                            System.out.println("Now you have " + inputList.size() + " tasks in the list.");
+                        }
                     }
                 }
 
                 else if (parsedString[0].equalsIgnoreCase("todo")) {
-                    ToDos td = new ToDos(parsedString[1]);
-                    inputList.add(td);
-                    System.out.println("Got it. I've added " + td + " to the list.");
+                    if (parsedString.length <= 1) {
+                        System.out.println("The description cannot be empty!");
+                    } else {
+                        ToDos td = new ToDos(parsedString[1]);
+                        inputList.add(td);
+                        System.out.println("Got it. I've added " + td + " to the list.");
+                        System.out.println("Now you have " + inputList.size() + " tasks in the list.");
+                    }
                 }
 
-                System.out.println("Now you have " + inputList.size() + " tasks in the list.");
+                else {
+                    System.out.println("Sorry, but I have no idea what you mean.");
+                }
             }
         }
     }
