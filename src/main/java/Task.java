@@ -1,8 +1,9 @@
 public class Task {
-    private String name;
-    private Boolean done;
     private static final char completedMark = 'X';
     private static final char incompleteMark = ' ';
+
+    private String name;
+    private Boolean done;
 
     public Task(String name) {
         this(name, false);
@@ -39,6 +40,15 @@ public class Task {
         }
 
         return false;
+    }
+
+    /**
+     * Getter for the name of the Task
+     *
+     * @return Name of the Task
+     */
+    public String getName() {
+        return this.name;
     }
 
     /**
