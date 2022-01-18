@@ -1,4 +1,5 @@
-import java.util.Scanner;
+import java.util.*;
+import java.util.regex.*;
 
 public class Duke {
     private static List list;
@@ -16,7 +17,24 @@ public class Duke {
         while (!userInput.equals("bye")) {
             if (userInput.equals("list")) {
                 System.out.println(list);
-            } else {
+            }
+            else if (Pattern.matches("mark \\d+", userInput)) {
+                String str = "";
+                for (int i = 5; i < userInput.length(); i++) {
+                    str = str + userInput.charAt(i);
+                }
+                int number = Integer.parseInt(str) - 1;
+                System.out.println(list.markDone(number));
+            }
+            else if (Pattern.matches("unmark \\d+", userInput)) {
+                String str = "";
+                for (int i = 7; i < userInput.length(); i++) {
+                    str = str + userInput.charAt(i);
+                }
+                int number = Integer.parseInt(str) - 1;
+                System.out.println(list.unmarkDone(number));
+            }
+            else {
                 Task task = new Task(userInput);
                 System.out.println(list.add(task));
             }

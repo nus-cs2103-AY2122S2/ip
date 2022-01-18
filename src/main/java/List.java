@@ -4,7 +4,7 @@ import java.util.*;
  * This class encapsulates a list of Tasks input from the user which is stored in an Array List.
  */
 public class List {
-    private ArrayList<Task> list;//Array List to store the tasks.
+    private ArrayList<Task> arrayList;//Array List to store the tasks.
     private int maxSize;//the maximum number of tasks possible, defined by requirement.
 
     /**
@@ -13,7 +13,27 @@ public class List {
      */
     public List(int size) {
         this.maxSize = size;
-        this.list = new ArrayList<Task>(maxSize);
+        this.arrayList = new ArrayList<Task>(maxSize);
+    }
+
+    /**
+     * This method marks a task at a specific index in the list as done.
+     * @param index: index of the task to be marked done in the array list of list
+     * @return: returns a String that verifies that the task is marked as done.
+     */
+    public String markDone(int index) {
+        Task task = arrayList.get(index);
+        return task.markDone();
+    }
+
+    /**
+     * This method marks a task at a specific index in the list as not done.
+     * @param index: index of the task to be marked as not done in the array list of list.
+     * @return: returns a String that verfies that the task is marked as done.
+     */
+    public String unmarkDone(int index) {
+        Task task = arrayList.get(index);
+        return task.unmarkDone();
     }
 
     /**
@@ -22,7 +42,7 @@ public class List {
      * @return: returns the confirmation of the task added to the list back to the user.
      */
     public String add(Task task) {
-        list.add(task);
+        arrayList.add(task);
         return "added: " + task.toString();
     }
 
@@ -32,10 +52,10 @@ public class List {
      */
     @Override
     public String toString() {
-        String str = "";
-        for (int i = 0; i < list.size(); i++) {
+        String str = "Here are the tasks in your list:\n";
+        for (int i = 0; i < arrayList.size(); i++) {
             int index = i + 1;
-            str = str + index + ". " + list.get(i).toString() + "\n";
+            str = str + index + ". " + arrayList.get(i).toString() + "\n";
         }
         return str;
     }
