@@ -1,6 +1,6 @@
 package Exceptions;
 
-public abstract class DukeExceptions extends Exception {
+public abstract class DukeException extends Exception {
     public final static String LINE = "    ____________________________________________________________\n";
     public final static String INDENT = "     ";
 

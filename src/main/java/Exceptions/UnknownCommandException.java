@@ -1,6 +1,6 @@
 package Exceptions;
 
-public class UnknownCommandException extends DukeExceptions{
+public class UnknownCommandException extends DukeException{
     public UnknownCommandException(){}
 
     @Override
