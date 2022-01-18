@@ -7,14 +7,16 @@ import java.util.ArrayList;
 public class Duke {
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String bot = "Hello! I'm Duke\nWhat can I do for you?", response = "";
+        String bot = "Hello! I'm Duke\nWhat can I do for you?";
+        String response = "";
+
         ArrayList<Task> tasks = new ArrayList<Task>();
 
         printLines();
         System.out.println(bot);
         printLines();
 
-        while(response.compareTo("bye") != 0) {
+        do {
             response = reader.readLine();
             if (response.compareTo("bye") == 0) {
                 printLines();
@@ -69,7 +71,7 @@ public class Duke {
                 }
                 printLines();
             }
-        }
+        } while(response.compareTo("bye") != 0);
     }
 
 // ____________________________________________________________
