@@ -1,8 +1,8 @@
 package tasks;
 
-public class Task {
-    private String detail;
-    private boolean marked;
+public abstract class Task {
+    protected String detail;
+    protected boolean marked;
 
     public void mark(){
         this.marked = true;
@@ -15,14 +15,5 @@ public class Task {
     public Task(String detail){
         this.detail = detail;
         this.marked = false;
-    }
-
-    @Override
-    public String toString(){
-        if(marked){
-            return "[X] " + detail;
-        } else {
-            return "[ ] " + detail;
-        }
     }
 }
