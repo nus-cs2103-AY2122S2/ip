@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -18,26 +19,37 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
 
-        while(sc.hasNext()) {
+        ArrayList<String> list = new ArrayList<>();
+
+        while (sc.hasNext()) {
 
             String input = sc.next();
             String output = "";
             String line = "     ____________________________________________________________\n";
 
-            if (input.equals("bye"))
+            if (input.equals("bye")) {
+
                 output = "Bye. Hope to see you again soon!";
-            else
+
+                System.out.println(line
+                        + "     "
+                        + output
+                        + "\n"
+                        + line);
+
+                break;
+            } else {
                 output = input;
 
-            System.out.println(line
-                    + "     "
-                    + output
-                    + "\n"
-                    + line);
+                System.out.println(line
+                        + "     "
+                        + output
+                        + "\n"
+                        + line);
+            }
 
-            if (!output.equals(input))
-                break;
         }
 
         sc.close();
     }
+}
