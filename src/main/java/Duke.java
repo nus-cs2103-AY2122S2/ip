@@ -60,11 +60,34 @@ public class Duke {
             return str;
         }
     }
+    public interface ICompletable {
+        public void setCompleted(boolean value);
+    }
+
+    public static class Task implements ICompletable {
+
+        protected Object item;
+        protected boolean completed;
+
+        public Task (Object obj) {
+            item = obj;
+            completed = false;
+        }
+
+        public void setCompleted(boolean value) {
+            completed = value;
+        }
+
+        public String toString() {
+            String display = completed ? "[X]" : "[ ]";
+            return display + " " + item.toString();
+        }
+    }
 
     public static void main(String[] args) {
 
         FastIO io = new FastIO();
-        ArrayList<String> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
 
         greet();
         boolean exited = false;
@@ -76,23 +99,45 @@ public class Duke {
             } else if (input.equals("list")) {
                 list(tasks);
             } else {
-                store(tasks, input);
+                String[] tokens = input.split(" ");
+                if (tokens[0].equals("mark")) {
+                    mark(tasks, tokens[1]);
+                } else if (tokens[0].equals("unmark")) {
+                    unMark(tasks, tokens[1]);
+                } else {
+                    Task newTask = new Task(input);
+                    store(tasks, newTask);
+                }
             }
         }
         bye();
     }
 
-    public static <T> void store(Collection<? super T> collection, T value) {
+    public static <T extends ICompletable> void mark(ArrayList<T> collection, String input) {
+        int index = Integer.parseInt(input) - 1;
+        String output = "Nice! I've marked this task as done:\n       ";
+        collection.get(index).setCompleted(true);
+        echo(output + collection.get(index).toString());
+    }
+
+    public static <T extends ICompletable> void unMark(ArrayList<T> collection, String input) {
+        int index = Integer.parseInt(input) - 1;
+        String output = "OK, I've marked this task as not done yet:\n       ";
+        collection.get(index).setCompleted(false);
+        echo(output + collection.get(index).toString());
+    }
+
+    public static <T> void store(ArrayList<? super T> collection, T value) {
         collection.add(value);
         echo("added: " + value.toString());
     }
 
-    public static void list(Collection<? extends Object> collection) {
-        StringBuilder sb = new StringBuilder("");
+    public static void list(ArrayList<? extends Object> collection) {
+        StringBuilder sb = new StringBuilder("Here are the tasks in your list:");
         int count = 0;
         for (Object var : collection) {
             count++;
-            sb.append(count + ". " + var.toString() + "\n     ");
+            sb.append("\n     " + count + ". " + var.toString());
         }
         echo(sb.toString().trim());
     }
