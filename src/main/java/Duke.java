@@ -21,8 +21,6 @@ public class Duke {
     private static final String COMMAND_EVENT = "event";
     private static final String MESSAGE_TASKADD = "Got it. I've added this task:";
 
-    private static final String ERROR_INVALID_MARK = "OOPS!!! Please indicate which task to mark";
-    private static final String ERROR_INVALID_UNMARK = "OOPS!!! Please indicate which task to unmark";
     private static final String ERROR_EMPTY_MARK = "OOPS!!! Task to mark cannot be empty:(";
     private static final String ERROR_EMPTY_UNMARK = "OOPS!!! Task to unmark cannot be empty:(";
     private static final String ERROR_INVALID_MARK = "OOPS!!! Invalid task number, please select a valid task to mark using the task's number";
