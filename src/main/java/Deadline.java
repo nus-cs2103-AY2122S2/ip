@@ -8,7 +8,7 @@ public class Deadline extends Task {
     @Override
     public void getStatus() {
         if (this.status == 0) {
-            System.out.println("[" + type + "][] " + activity + " (by " + by + " )");
+            System.out.println("[" + type + "][ ] " + activity + " (by " + by + " )");
         } else {
             System.out.println("[" + type + "][X] " + activity + " (by " + by + " )");
         }

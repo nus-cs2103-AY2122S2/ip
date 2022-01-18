@@ -1,7 +1,7 @@
 public abstract class Task {
     String activity;
     int status;
-    String type;
+    String type = " ";
 
     public Task(String activity, String type) {
         this.activity = activity;

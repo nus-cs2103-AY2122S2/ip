@@ -28,7 +28,7 @@ public class Duke {
                     }
                     break;
                 case "mark":
-                    try{
+                    try {
                         int index = Integer.parseInt(splitStr[1]);
                         index--;
                         if (index < list.size() && index > -1) {
@@ -101,6 +101,20 @@ public class Duke {
                         System.out.println("Now you've got " + list.size() +" tasks in the list.");
                     } catch (ArrayIndexOutOfBoundsException e) {
                         System.out.println("Invalid event command format.");
+                    }
+                    break;
+                case "delete":
+                    try {
+                        int index = Integer.parseInt(splitStr[1]);
+                        index--;
+                        if (index < list.size() && index > -1) {
+                            Task deletedT = list.remove(index);
+                            System.out.println("Noted. I've removed this task:");
+                            deletedT.getStatus();
+                            System.out.println("Now you have " + list.size() + " tasks in the list.");
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid deletion index.");
                     }
                     break;
                 default:
