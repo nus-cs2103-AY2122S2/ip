@@ -9,6 +9,7 @@ public class Duke {
         String goodBye = "Bye. Hope to see you again soon!";
 
         System.out.println(greet);
+        
         while (true) {
             Scanner cmd = new Scanner(System.in);  // Create a Scanner object
             String echo = cmd.nextLine();
