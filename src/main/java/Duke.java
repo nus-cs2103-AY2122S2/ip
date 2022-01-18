@@ -12,6 +12,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = "";
         ArrayList<Task> list = new ArrayList<Task>();
+        Task tempTask;
 
         myPrint("Hello! I'm Duke\n    What can I do for you?");
 
@@ -34,18 +35,36 @@ public class Duke {
                 int idx = Integer.parseInt(stringArr[1]);
                 list.get(idx - 1).mark();
 
-                myPrint("Nice! I've marked this task as done:\n  " + list.get(idx - 1));
+                myPrint("Nice! I've marked this task as done:\n      " + list.get(idx - 1));
 
             } else if (stringArr[0].equals("unmark")) {
                 int idx = Integer.parseInt(stringArr[1]);
                 list.get(idx -1).unmark();
 
-                myPrint("OK, I've marked this task as not done yet:\n  " + list.get(idx - 1));
+                myPrint("OK, I've marked this task as not done yet:\n      " + list.get(idx - 1));
 
-            } else {
-                Task tempTask = new Task(input);
+            } else if (stringArr[0].equals("todo")){
+                tempTask = new ToDo(stringArr[1]);
+
                 list.add(tempTask);
-                myPrint("added: " + tempTask);
+                myPrint("Got it. I've added this task:\n      " + tempTask + countList(list));
+
+            } else if (stringArr[0].equals("deadline")) {
+                String[] descriptionTime = stringArr[1].split("/", 2);
+                String[] prepoTime = descriptionTime[1].split(" ", 2);
+                tempTask = new Deadline(prepoTime[0] + ": " + prepoTime[1],descriptionTime[0]);
+
+                list.add(tempTask);
+                myPrint("Got it. I've added this task:\n      " + tempTask + countList(list));
+
+            } else if (stringArr[0].equals("event")) {
+                String[] descriptionTime = stringArr[1].split("/", 2);
+                String[] prepoTime = descriptionTime[1].split(" ", 2);
+                tempTask = new Event(prepoTime[0] + ": " + prepoTime[1],descriptionTime[0]);
+
+                list.add(tempTask);
+                myPrint("Got it. I've added this task:\n      " + tempTask + countList(list));
+
             }
 
             input = sc.nextLine();
@@ -63,6 +82,16 @@ public class Duke {
         System.out.println("    " + toPrint);
         System.out.println("    ________________________________________________________________\n");
 
+    }
+
+    public static String countList(ArrayList<Task> list) {
+        String isSingular = "s";
+
+        if (list.size() == 1) {
+            isSingular = "";
+        }
+
+        return  "\n    Now you have " + list.size() + " task" + isSingular + " in your list.";
     }
 
 }
