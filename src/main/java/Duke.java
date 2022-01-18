@@ -21,7 +21,6 @@ public class Duke {
         System.out.println(indentation + "Hello! I'm Duke\n" + indentation + "What can I do for you?");
         System.out.println(indentation + line);
 
-
         Scanner sc= new Scanner(System.in);
         String str = " ";
 
@@ -109,7 +108,9 @@ public class Duke {
                             System.out.println(indentation + line);
                         }
                     } else {
+                        System.out.println(indentation + line);
                         System.out.println(indentation + " OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        System.out.println(indentation + line);
 
                     }
             }
