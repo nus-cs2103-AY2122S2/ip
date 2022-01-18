@@ -64,27 +64,44 @@ public class Duke {
                     }
                     break;
                 case "todo":
+                    try {
+                        if (splitStr[1].trim().equals("")) {
+                            throw new ArrayIndexOutOfBoundsException("Blank");
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("Invalid todo command format.");
+                        break;
+                    }
                     Task newT = new Todo(splitStr[1], "T");
                     list.add(newT);
                     newT.addedTask();
                     newT.getStatus();
                     System.out.println("Now you've got " + list.size() +" tasks in the list.");
+
                     break;
                 case "deadline":
-                    String[] tempStr = splitStr[1].split(" /by ");
-                    Task newD = new Deadline(tempStr[0], "D", tempStr[1]);
-                    list.add(newD);
-                    newD.addedTask();
-                    newD.getStatus();
-                    System.out.println("Now you've got " + list.size() +" tasks in the list.");
+                    try {
+                        String[] tempStr = splitStr[1].split(" /by ");
+                        Task newD = new Deadline(tempStr[0], "D", tempStr[1]);
+                        list.add(newD);
+                        newD.addedTask();
+                        newD.getStatus();
+                        System.out.println("Now you've got " + list.size() +" tasks in the list.");
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("Invalid deadline command format.");
+                    }
                     break;
                 case "event":
-                    String[] tempStr2 = splitStr[1].split(" /at ");
-                    Task newE = new Event(tempStr2[0], "E", tempStr2[1]);
-                    list.add(newE);
-                    newE.addedTask();
-                    newE.getStatus();
-                    System.out.println("Now you've got " + list.size() +" tasks in the list.");
+                    try {
+                        String[] tempStr2 = splitStr[1].split(" /at ");
+                        Task newE = new Event(tempStr2[0], "E", tempStr2[1]);
+                        list.add(newE);
+                        newE.addedTask();
+                        newE.getStatus();
+                        System.out.println("Now you've got " + list.size() +" tasks in the list.");
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("Invalid event command format.");
+                    }
                     break;
                 default:
                     System.out.println("Invalid Task.\nValid tasks are: \"todo\", \"deadline\" and \"event\"");
