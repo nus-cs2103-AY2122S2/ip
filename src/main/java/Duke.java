@@ -50,7 +50,7 @@ public class Duke {
         if (isType(input, "bye")) {
             ans += "Bye. Hope to see you again soon!";
         } else if (isType(input, "list")) {
-            ans += "Here are the tasks in your list: \n";
+            ans += "Here are the tasks in your list:\n";
             for (int i = 0; i < arr.size(); i++) {
                 Task t = arr.get(i);
                 if (i == arr.size() - 1) {
@@ -106,7 +106,7 @@ public class Duke {
     public static void main(String[] args) {
         Duke duke = new Duke();
         Scanner sc = new Scanner(System.in);
-        System.out.println("Hello! I'm Duke \n" + "What can I do for you?");
+        System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
         String userInput = "";
 
         while (!userInput.equals("bye")) {
