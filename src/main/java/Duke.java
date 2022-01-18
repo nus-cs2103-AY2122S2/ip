@@ -15,11 +15,15 @@ public class Duke {
     private static final String TEXT_ACKNOWLEDGE_LIST = "Here are the tasks in your list:";
     private static final String TEXT_ACKNOWLEDGE_MARK = "Nice! I've marked this task as done:";
     private static final String TEXT_ACKNOWLEDGE_UNMARK = "OK, I've marked this task as not done yet:";
+    private static final String TEXT_ACKNOWLEDGE_TASK = "Got it. I've added this task:";
 
     private static final String KEY_EXIT = "bye";
     private static final String KEY_LIST = "list";
     private static final String KEY_MARK = "mark";
     private static final String KEY_UNMARK = "unmark";
+    private static final String KEY_TODO = "todo";
+    private static final String KEY_DEADLINE = "deadline";
+    private static final String KEY_EVENT = "event";
 
     private final List<Task> tasks = new ArrayList<>();
 
@@ -33,8 +37,15 @@ public class Duke {
 
         while (true) {
             String input = scanner.nextLine();
-            String[] strings = input.split(" ", 2);
-            String command = strings[0];
+            String[] tokens = input.split(" ", 2);
+            String command = tokens[0];
+            String[] params;
+
+            if (tokens.length > 1) {
+                params = tokens[1].split("\\s/\\w\\w\\s");
+            } else {
+                params = new String[0];
+            }
 
             switch (command) {
             case KEY_EXIT:
@@ -44,13 +55,21 @@ public class Duke {
                 listTasks();
                 break;
             case KEY_MARK:
-                markTask(Integer.parseInt(strings[1]) - 1);
+                markTask(Integer.parseInt(params[0]) - 1);
                 break;
             case KEY_UNMARK:
-                unmarkTask(Integer.parseInt(strings[1]) - 1);
+                unmarkTask(Integer.parseInt(params[0]) - 1);
+                break;
+            case KEY_TODO:
+                addTask(new ToDo(params[0]));
+                break;
+            case KEY_DEADLINE:
+                addTask(new Deadline(params[0], params[1]));
+                break;
+            case KEY_EVENT:
+                addTask(new Event(params[0], params[1]));
                 break;
             default:
-                addTask(input);
                 break;
             }
         }
@@ -74,10 +93,12 @@ public class Duke {
         System.out.println();
     }
 
-    private void addTask(String input) {
-        tasks.add(new Task(input));
+    private void addTask(Task task) {
+        tasks.add(task);
         printDivider();
-        printTabbed("added: " + input, 1);
+        printTabbed(TEXT_ACKNOWLEDGE_TASK, 1);
+        printTabbed(task.toString(), 3);
+        printTabbed("Now you have " + tasks.size() + " tasks in the list.", 1);
         printDivider();
         System.out.println();
     }
