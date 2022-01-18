@@ -5,9 +5,9 @@ public class Bobby {
     public static void main(String[] args) {
         ArrayList<Task> taskArray = new ArrayList<Task>();
         System.out.println("Bobby greets you. Bobby is here to help.");
+        Scanner scannerObj = new Scanner(System.in);
 
-        while(true) {
-            Scanner scannerObj = new Scanner(System.in);
+        while(scannerObj.hasNextLine()) {
             String userInput = scannerObj.nextLine();
             String[] inputs = userInput.split(" ", 2);
             String command = inputs[0];
@@ -34,7 +34,7 @@ public class Bobby {
                 Todo newTodo = new Todo(inputs[1]);
                 System.out.println("Bobby heard: " + newTodo);
                 taskArray.add(newTodo);
-                System.out.println("Bobby remembers " + taskArray.size() + " tasks.");
+                System.out.println("Bobby remembers " + taskArray.size() + " task(s).");
             } else if (command.equals("deadline")) {
                 String[] splitInputs = inputs[1].split(" /by ", 2);
                 String description = splitInputs[0];
@@ -42,7 +42,7 @@ public class Bobby {
                 Deadline newDeadline = new Deadline(description, by);
                 System.out.println("Bobby heard: " + newDeadline);
                 taskArray.add(newDeadline);
-                System.out.println("Bobby remembers " + taskArray.size() + " tasks.");
+                System.out.println("Bobby remembers " + taskArray.size() + " task(s).");
             } else if (command.equals("event")) {
                 String[] splitInputs = inputs[1].split(" /at ", 2);
                 String description = splitInputs[0];
