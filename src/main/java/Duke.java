@@ -1,8 +1,9 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     private int repeatListSize = 0;
-    private Task[] repeatList = new Task[100];
+    private ArrayList<Task> repeatList = new ArrayList<>();
     private Scanner scanner;
 
     public Duke(Scanner sc) {
@@ -44,10 +45,12 @@ public class Duke {
                     return;
                 } else if (str.compareToIgnoreCase("list") == 0) {
                     displayList();
-                } else if (str.startsWith("mark ") || str.equals("mark")) {
+                } else if (str.matches("(mark\\s.*|mark)")) {
                     markHandler(str);
-                } else if (str.startsWith("unmark ") || str.equals("unmark")) {
+                } else if (str.matches("(unmark\\s.*|unmark)")) {
                     unmarkHandler(str);
+                } else if (str.matches("(delete\\s.*|delete)")) {
+                    deleteHandler(str);
                 } else {
                     taskAdder(str);
                 }
@@ -74,9 +77,8 @@ public class Duke {
         }
 
         if (task != null) {
-            repeatList[repeatListSize] = task;
-            repeatListSize++;
-            System.out.println(String.format("Got it. I've added this task:\n\t%s\nNow you have %d task(s) in the list", task.toString(), repeatListSize));
+            repeatList.add(task);
+            System.out.println(String.format("Got it. I've added this task:\n\t%s\nNow you have %d task(s) in the list", task.toString(), repeatList.size()));
         }
     }
 
@@ -107,11 +109,11 @@ public class Duke {
     }
 
     private void displayList() {
-        if (repeatListSize == 0) {
+        if (repeatList.size() == 0) {
             System.out.println("LUMU: Your list is empty!");
         } else {
-            for (int i = 0; i < repeatList.length && i < repeatListSize; i++) {
-                Task currTask = repeatList[i];
+            for (int i = 0; i < repeatList.size(); i++) {
+                Task currTask = repeatList.get(i);
                 System.out.println(String.valueOf(i + 1) + ". " + currTask.toString());
             }
         }
@@ -122,9 +124,9 @@ public class Duke {
             throw new DukeException("Please choose which task you would like to mark.");
         } else {
             String listNumber = str.substring(5);
-            if ((listNumber.chars().allMatch(Character::isDigit)) && (Integer.parseInt(listNumber) <= repeatListSize)) {
+            if ((listNumber.chars().allMatch(Character::isDigit)) && (Integer.parseInt(listNumber) <= repeatList.size())) {
                 int num = Integer.parseInt(listNumber);
-                Task currTask = repeatList[num - 1];
+                Task currTask = repeatList.get(num - 1);
                 currTask.setStatus(true);
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(currTask.toString());
@@ -138,14 +140,31 @@ public class Duke {
             throw new DukeException("Please choose which task you would like to unmark.");
         } else {
             String listNumber = str.substring(7);
-            if ((listNumber.chars().allMatch(Character::isDigit)) && (Integer.parseInt(listNumber) <= repeatListSize)) {
+            if ((listNumber.chars().allMatch(Character::isDigit)) && (Integer.parseInt(listNumber) <= repeatList.size())) {
                 int num = Integer.parseInt(listNumber);
-                Task currTask = repeatList[num - 1];
+                Task currTask = repeatList.get(num - 1);
                 currTask.setStatus(false);
                 System.out.println("OK, I've marked this task as not done yet:");
                 System.out.println(currTask.toString());
             } else {
                 throw new DukeException("Invalid task chosen to be unmarked, please try again");
+            }
+        }
+    }
+
+    private void deleteHandler(String str) throws DukeException {
+        if (str.length() < 8) {
+            throw new DukeException("Please choose which task you would like to delete.");
+        } else {
+            String listNumber = str.substring(7);
+            if ((listNumber.chars().allMatch(Character::isDigit)) && (Integer.parseInt(listNumber) <= repeatList.size())) {
+                int num = Integer.parseInt(listNumber);
+                Task currTask = repeatList.get(num - 1);
+                repeatList.remove(num - 1);
+                System.out.println("Noted. I've removed this task:");
+                System.out.println(currTask.toString());
+            } else {
+                throw new DukeException("Invalid task chosen to be deleted, please try again");
             }
         }
     }
