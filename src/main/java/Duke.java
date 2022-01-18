@@ -29,7 +29,7 @@ public class Duke {
                     }
                     System.out.println(wrap("Here are the tasks in your list:\n" + result));
                 } else {
-                    if (command.equals("mark") || command.equals("unmark")) {
+                    if (command.equals("mark") || command.equals("unmark") || command.equals("delete")) {
                         int index;
                         try {
                             index = Integer.parseInt(breakdown[1]) - 1;
@@ -38,14 +38,21 @@ public class Duke {
                             }
                         } catch (NumberFormatException e) {
                             throw new DukeException("Invalid index format");
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new DukeException("Too few arguments supplied");
                         }
                         Task task = tasks.get(index);
                         if (command.equals("mark")) {
                             task.markAsDone();
                             System.out.println(wrap("Nice! I've marked this task as done:\n" + task + "\n"));
-                        } else {
+                        } else if (command.equals("unmark")) {
                             task.markAsUndone();
                             System.out.println(wrap("OK, I've marked this task as not done yet:\n" + task + "\n"));
+                        } else {
+                            tasks.remove(index);
+                            System.out.println(wrap("Noted. I've removed this task:\n"
+                                    + task + "\n"
+                                    + "Now you have " + tasks.size() + " task(s) in the list.\n"));
                         }
                     } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
                         String options;
