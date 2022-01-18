@@ -20,19 +20,22 @@ public class Mike {
 
             if (!trimmedInputString.isEmpty()) {
                 String command = splitString[0];
-                //TODO: throw exceptions when command is not entered correctly
                 try {
                     switch (command) {
                         case "list":
                             mike.printList();
                             break;
                         case "mark":
-                            int markNumber = Integer.parseInt(splitString[1]);
-                            mike.mark(markNumber);
+                            int markIndex = Integer.parseInt(splitString[1]);
+                            mike.mark(markIndex);
                             break;
                         case "unmark":
-                            int unmarkNumber = Integer.parseInt(splitString[1]);
-                            mike.unmark(unmarkNumber);
+                            int unmarkIndex = Integer.parseInt(splitString[1]);
+                            mike.unmark(unmarkIndex);
+                            break;
+                        case "remove":
+                            int removeIndex = Integer.parseInt(splitString[1]);
+                            mike.removeFromList(removeIndex);
                             break;
                         case "todo":
                             String todoParameters =
@@ -51,17 +54,18 @@ public class Mike {
                             break;
                         default:
                             String invalidCommandMessage =
-                                    String.format("I don't understand the command \"%s\"",trimmedInputString);
+                                    String.format("\n**Mike: I don't understand the command \"%s\"**",
+                                            trimmedInputString);
                             throw new UnsupportedOperationException(invalidCommandMessage);
                     }
                 } catch(UnsupportedOperationException e) {
-                    System.out.println(e);
+                    e.printStackTrace();
                 } catch(StringIndexOutOfBoundsException e) {
-                    System.out.println(e);
-                    System.out.println("**Hmmm, you may have entered the command arguments incorrectly.**");
+                    e.printStackTrace();
+                    System.out.println("**Mike: Hmm, you may have entered the command arguments incorrectly.**");
                 } catch(IndexOutOfBoundsException e) {
-                    System.out.println(e);
-                    System.out.println("**That item doesn't exist on your list :/**");
+                    e.printStackTrace();
+                    System.out.println("**Mike: That item number doesn't exist on your list :/**");
                 }
             } else {
                 mike.printNoCharactersMessage();
@@ -138,6 +142,15 @@ public class Mike {
         int noOfTasks = this.listOfTasks.size();
         String noOfTasksOutput = String.format("You now have *%d* task(s) in your list.", noOfTasks);
         printReply(String.format("%s\n%s", addTaskOutput, noOfTasksOutput));
+    }
+
+    void removeFromList(int removeIndex) {
+        Task removedTask = this.listOfTasks.remove(removeIndex - 1);
+        String taskName = removedTask.getTaskName();
+        String removeTaskOutput = "Removed \"" + taskName + "\" from the list!";
+        int noOfTasks = this.listOfTasks.size();
+        String noOfTasksOutput = String.format("You now have *%d* task(s) in your list.", noOfTasks);
+        printReply(String.format("%s\n%s", removeTaskOutput, noOfTasksOutput));
     }
 
     void addTodo(String str) {
