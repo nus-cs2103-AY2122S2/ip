@@ -13,7 +13,7 @@ public class DeadlineTask extends Task{
     }
 
     public String getByTime(){
-        return "(by: " + byTime + ")";
+        return "(by:" + byTime + ")";
     }
     @Override
     public String toString(){

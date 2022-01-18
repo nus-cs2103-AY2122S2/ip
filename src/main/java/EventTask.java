@@ -13,7 +13,7 @@ public class EventTask extends Task{
     }
 
     public String getEventTime(){
-        return "(by: " + eventTime + ")";
+        return "(by:" + eventTime + ")";
     }
 
     @Override

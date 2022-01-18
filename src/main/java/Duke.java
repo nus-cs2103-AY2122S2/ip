@@ -4,12 +4,21 @@ import java.util.Scanner;
 public class Duke {
 
     private static final String COMMAND_BYE = "bye";
+    private static final String MESSAGE_BYE = "Bye. Hope to see you again soon!";
+
     private static final String COMMAND_LIST = "list";
+    private static final String MESSAGE_LIST = "Here are the tasks in your list:";
+
     private static final String COMMAND_MARK = "mark";
+    private static final String MESSAGE_MARK = "Nice! I've marked this task as done:";
+
     private static final String COMMAND_UNMARK = "unmark";
+    private static final String MESSAGE_UNMARK = "OK, I've marked this task as not done yet:";
+
     private static final String COMMAND_TODO = "todo";
     private static final String COMMAND_DEADLINE = "deadline";
     private static final String COMMAND_EVENT = "event";
+    private static final String MESSAGE_TASKADD = "Got it. I've added this task:";
 
     public static void main(String[] args) {
         printContent("Hello! I'm Duke\n     What can I do for you?");
@@ -20,24 +29,32 @@ public class Duke {
             String[] splitted = line.split("\\s+");
             String query = splitted[0];
             if (query.compareTo(COMMAND_BYE) == 0){
-                printContent("Bye. Hope to see you again soon!");
+                printContent(MESSAGE_BYE);
                 break;
             } else if (query.compareTo(COMMAND_LIST) == 0){
                 processList(tasks);
             } else if (query.compareTo(COMMAND_MARK) == 0){
                 Task thisTask = tasks.get(Integer.parseInt(splitted[1])-1);
                 thisTask.markAsDone();
-                printContent("Nice! I've marked this task as done:\n       [" + thisTask.getStatusIcon() + "] " + thisTask.toString());
+                printContent(MESSAGE_MARK + "\n       [" + thisTask.getStatusIcon() + "] " + thisTask.toString());
             } else if (query.compareTo(COMMAND_UNMARK) == 0){
                 Task thisTask = tasks.get(Integer.parseInt(splitted[1])-1);
                 thisTask.markAsUndone();
-                printContent("OK, I've marked this task as not done yet:\n       [" + thisTask.getStatusIcon() + "] " + thisTask.toString());
+                printContent(MESSAGE_UNMARK + "\n       [" + thisTask.getStatusIcon() + "] " + thisTask.toString());
             } else if (query.compareTo(COMMAND_TODO) == 0){
                 Task thisTask = new TodoTask(line.substring(5));
                 tasks.add(thisTask);
-                String content = "Got it. I've added this task:\n       [T][ ] " + thisTask.toString() + "\n";
-                content += printListSize(tasks);
-                printContent(content);
+                printAddTaskSuccess(tasks, thisTask);
+            } else if (query.compareTo(COMMAND_DEADLINE) == 0){
+                String[] subSplit = line.split("/by");
+                Task thisTask = new DeadlineTask(subSplit[0].substring(9), subSplit[1]);
+                tasks.add(thisTask);
+                printAddTaskSuccess(tasks, thisTask);
+            } else if (query.compareTo(COMMAND_EVENT) == 0){
+                String[] subSplit = line.split("/at");
+                Task thisTask = new EventTask(subSplit[0].substring(6), subSplit[1]);
+                tasks.add(thisTask);
+                printAddTaskSuccess(tasks, thisTask);
             } else{
                 printContent("Invalid input!");
             }
@@ -47,6 +64,12 @@ public class Duke {
 
     public static void printLine(){
         System.out.println("    ____________________________________________________________");
+    }
+
+    public static void printAddTaskSuccess(ArrayList<Task> tasks, Task task){
+        String content = MESSAGE_TASKADD + "\n       [" + task.getType() + "][ ] " + task.toString() + "\n";
+        content += printListSize(tasks);
+        printContent(content);
     }
 
     public static String printListSize(ArrayList<Task> tasks){
@@ -62,7 +85,7 @@ public class Duke {
     }
 
     public static void processList(ArrayList<Task> tasks){
-        String list = "Here are the tasks in your list:\n     ";
+        String list = MESSAGE_LIST + "\n     ";
         for (int i = 0; i < tasks.size(); i++){
             Task thisTask = tasks.get(i);
             list += (i+1) + ". " + "[" + thisTask.getType() + "]" +"[" + thisTask.getStatusIcon() + "] " + thisTask.toString();
