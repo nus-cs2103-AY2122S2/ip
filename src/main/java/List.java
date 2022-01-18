@@ -16,34 +16,38 @@ public class List {
         this.arrayList = new ArrayList<Task>(maxSize);
     }
 
+    public ArrayList<Task> getArrayList() {
+        return this.arrayList;
+    }
+
     /**
      * This method marks a task at a specific index in the list as done.
      * @param index: index of the task to be marked done in the array list of list
-     * @return: returns a String that verifies that the task is marked as done.
+     * @return: return the task that is marked as done.
      */
-    public String markDone(int index) {
+    public Task markDone(int index) {
         Task task = arrayList.get(index);
-        return task.markDone();
+        task.markDone();
+        return task;
     }
 
     /**
      * This method marks a task at a specific index in the list as not done.
      * @param index: index of the task to be marked as not done in the array list of list.
-     * @return: returns a String that verfies that the task is marked as done.
+     * @return: return the task that is marked as not done.
      */
-    public String unmarkDone(int index) {
+    public Task unmarkDone(int index) {
         Task task = arrayList.get(index);
-        return task.unmarkDone();
+        task.unmarkDone();
+        return task;
     }
 
     /**
-     *  This method adds a task to the list and returns a confirmation of the task being added.
+     *  This method adds a task to the list.
      * @param task: the task input from the user.
-     * @return: returns the confirmation of the task added to the list back to the user.
      */
-    public String add(Task task) {
+    public void add(Task task) {
         arrayList.add(task);
-        return "added: " + task.toString();
     }
 
     /**
