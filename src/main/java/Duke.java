@@ -56,6 +56,10 @@ public class Duke {
 
                 this.tasks.add(new Event(taskData[0], taskData[1]));
             } else if (type.equalsIgnoreCase("todo")) {
+                if (taskArr[1].trim().length() == 0) {
+                    throw new IndexOutOfBoundsException();
+                }
+
                 this.tasks.add(new Todo(taskArr[1]));
             } else {
                 throw new IndexOutOfBoundsException();
