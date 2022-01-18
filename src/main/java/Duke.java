@@ -35,30 +35,30 @@ public class Duke {
 
     private void botResponse() {
         while (scanner.hasNextLine()) {
-            String str = scanner.nextLine();
+            String str = scanner.nextLine().trim();
 
-            if (str.compareToIgnoreCase("bye") == 0) {
-                System.out.println("LUMU: Goodbye. Hope to see you again soon");
-                System.out.println(lineBreak());
-                scanner.close();
-                return;
-            } else if (str.compareToIgnoreCase("list") == 0) {
-                displayList();
-                System.out.println(lineBreak());
-            } else if (str.startsWith("mark ")) {
-                markHandler(str);
-                System.out.println(lineBreak());
-            } else if (str.startsWith("unmark ")) {
-                unmarkHandler(str);
-                System.out.println(lineBreak());
-            } else {
-                taskAdder(str);
-                System.out.println(lineBreak());
+            try {
+                if (str.compareToIgnoreCase("bye") == 0) {
+                    System.out.println("LUMU: Goodbye. Hope to see you again soon");
+                    scanner.close();
+                    return;
+                } else if (str.compareToIgnoreCase("list") == 0) {
+                    displayList();
+                } else if (str.startsWith("mark ") || str.equals("mark")) {
+                    markHandler(str);
+                } else if (str.startsWith("unmark ") || str.equals("unmark")) {
+                    unmarkHandler(str);
+                } else {
+                    taskAdder(str);
+                }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
+            System.out.println(lineBreak());
         }
     }
 
-    private void taskAdder(String str) {
+    private void taskAdder(String str) throws DukeException {
         Task task = null;
         Task.TaskType taskType = taskIdentifier(str);
         switch (taskType) {
@@ -80,16 +80,27 @@ public class Duke {
         }
     }
 
-    private Task.TaskType taskIdentifier(String str) {
+    private Task.TaskType taskIdentifier(String str) throws DukeException{
         Task.TaskType type = null;
-        if (str.matches("(todo |deadline |event ).*")) {
-            if (str.startsWith("todo ")) {
+        if (str.matches("(todo|deadline|event).*")) {
+            if (str.startsWith("todo")) {
+                if (!str.matches("todo\\s\\S+")) {
+                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                }
                 type = Task.TaskType.TODO;
-            } else if (str.startsWith("deadline ") && (str.contains(" /by "))) {
+            } else if (str.startsWith("deadline")) {
+                if (!str.matches("deadline\\s\\S+\\s/by\\s\\S+")) {
+                    throw new DukeException("☹ OOPS!!! The description/date of a deadline cannot be empty.");
+                }
                 type = Task.TaskType.DEADLINE;
-            } else if (str.startsWith("event ") && (str.contains(" /at "))) {
+            } else if (str.startsWith("event ")) {
+                 if (!str.matches("event\\s\\S+\\s/at\\s\\S+")) {
+                     throw new DukeException("☹ OOPS!!! The description/location of a event cannot be empty.");
+                 }
                 type = Task.TaskType.EVENT;
             }
+        } else {
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
         return type;
@@ -106,9 +117,9 @@ public class Duke {
         }
     }
 
-    private void markHandler(String str) {
+    private void markHandler(String str) throws DukeException{
         if (str.length() < 6) {
-            System.out.println("Invalid task!");
+            throw new DukeException("Please choose which task you would like to mark.");
         } else {
             String listNumber = str.substring(5);
             if ((listNumber.chars().allMatch(Character::isDigit)) && (Integer.parseInt(listNumber) <= repeatListSize)) {
@@ -118,14 +129,13 @@ public class Duke {
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(currTask.toString());
             } else {
-                System.out.println("Invalid task!");
-            }
+                throw new DukeException("Invalid task chosen to be marked, please try again");            }
         }
     }
 
-    private void unmarkHandler(String str) {
+    private void unmarkHandler(String str) throws DukeException{
         if (str.length() < 8) {
-            System.out.println("Invalid task!");
+            throw new DukeException("Please choose which task you would like to unmark.");
         } else {
             String listNumber = str.substring(7);
             if ((listNumber.chars().allMatch(Character::isDigit)) && (Integer.parseInt(listNumber) <= repeatListSize)) {
@@ -135,7 +145,7 @@ public class Duke {
                 System.out.println("OK, I've marked this task as not done yet:");
                 System.out.println(currTask.toString());
             } else {
-                System.out.println("Invalid task!");
+                throw new DukeException("Invalid task chosen to be unmarked, please try again");
             }
         }
     }
