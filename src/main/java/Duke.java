@@ -21,38 +21,65 @@ public class Duke {
 
         while (!command.equals("bye")) {
 
-            if (command.equals("list")) { //Lists out all tasks in the array
-                System.out.println(bar);
-                System.out.println("Here are the tasks in your list: ");
-                displayList(count, listOfTasks);
-                System.out.println(bar);
-
-            } else if (command.equals("mark")) {
-                System.out.println(bar);
-                int number = Integer.parseInt(input.replaceAll("[^0-9]", ""));
-                Task t = listOfTasks.get(number - 1);
-                t.markTask();
-                System.out.println("Nice! I've marked this task as done!");
-                System.out.println(t.getSymbol() + " " + t.getName());
-                System.out.println(bar);
-
-            } else if (command.equals("unmark")) {
-                System.out.println(bar);
-                int number = Integer.parseInt(input.replaceAll("[^0-9]", ""));
-                Task t = listOfTasks.get(number - 1);
-                t.unmarkTask();
-                System.out.println("OK, I've marked this task as not done yet");
-                System.out.println(t.getSymbol() + " " + t.getName());
-                System.out.println(bar);
-
-            } else {
-                listOfTasks.add(new Task(input)); //Store the task into the array
-                count++;
-                System.out.println(bar);
-                System.out.println(indent + "added: " + input);
-                System.out.println(bar);
-                System.out.println();
+            switch (command) {
+                case "list":
+                    System.out.println(bar);
+                    System.out.println(indent + "Here are the tasks in your list: ");
+                    displayList(count, listOfTasks);
+                    System.out.println(bar);
+                    break;
+                case "mark":
+                    System.out.println(bar);
+                    int number = Integer.parseInt(input.replaceAll("[^0-9]", ""));
+                    Task markT = listOfTasks.get(number - 1);
+                    markT.markTask();
+                    System.out.println(indent + "Nice! I've marked this task as done!");
+                    System.out.println(indent + markT.toString());
+                    System.out.println(bar);
+                    break;
+                case "unmark":
+                    System.out.println(bar);
+                    int num = Integer.parseInt(input.replaceAll("[^0-9]", ""));
+                    Task unmarkT = listOfTasks.get(num - 1);
+                    unmarkT.unmarkTask();
+                    System.out.println(indent + "OK, I've marked this task as not done yet");
+                    System.out.println(indent + unmarkT.toString());
+                    System.out.println(bar);
+                    break;
+                case "todo":
+                    System.out.println(bar);
+                    Todo td = Todo.formatInput(input);
+                    System.out.println(indent + "Got it! I've added this task:");
+                    System.out.println(indent + td.toString());
+                    listOfTasks.add(td);
+                    count++;
+                    System.out.println(indent + "Now you have " + listOfTasks.size() + " tasks in the list");
+                    System.out.println(bar);
+                    break;
+                case "deadline":
+                    System.out.println(bar);
+                    Deadline dl = Deadline.formatInput(input);
+                    System.out.println(indent + "Got it! I've added this task:");
+                    System.out.println(indent + dl.toString());
+                    listOfTasks.add(dl);
+                    count++;
+                    System.out.println(indent + "Now you have " + listOfTasks.size() + " tasks in the list");
+                    System.out.println(bar);
+                    break;
+                case "event":
+                    System.out.println(bar);
+                    Event ev = Event.formatInput(input);
+                    System.out.println(indent + "Got it! I've added this task:");
+                    System.out.println(indent + ev.toString());
+                    listOfTasks.add(ev);
+                    count++;
+                    System.out.println(indent + "Now you have " + listOfTasks.size() + " tasks in the list");
+                    System.out.println(bar);
+                    break;
+                default:
+                    System.out.println("Nothing here yet");
             }
+            System.out.println();
             input = sc.nextLine();
             command = getCommand(input);
         }
@@ -69,10 +96,11 @@ public class Duke {
         }
         for (int i = 0; i < lenOfArray; i++) {
             Task t = arr.get(i);
-            System.out.println("      " + (i + 1) + ". " + t.getSymbol() + " " + t.getName());
+            System.out.println("      " + (i + 1) + ". " + t.toString());
         }
     }
 
+    //Gets the first word of every line of input, labelled as the "command" word
     public static String getCommand(String input) {
         int index = input.indexOf(' ');
         return (index >= 0) ? input.substring(0, index) : input;

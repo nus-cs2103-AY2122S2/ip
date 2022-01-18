@@ -15,12 +15,17 @@ public class Task {
     public void unmarkTask() {
         this.status = false;
     }
-    
+
     public String getName() {
         return this.name;
     }
 
     public String getSymbol() {
         return (this.status) ? "[X]" : "[ ]";
+    }
+    
+    @Override
+    public String toString() {
+        return this.name;
     }
 }
