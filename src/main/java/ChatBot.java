@@ -29,6 +29,8 @@ public class ChatBot {
                     markTask(Integer.parseInt(input[1].trim()) - 1);
                 } catch(NumberFormatException e) {
                     throw new DukeException("Please enter an integer!", e);
+                } catch(IndexOutOfBoundsException e) {
+                    throw new DukeException("Invalid task!", e);
                 }
                 break;
 
@@ -37,6 +39,8 @@ public class ChatBot {
                     unmarkTask(Integer.parseInt(input[1].trim()) - 1);
                 } catch (NumberFormatException e) {
                     throw new DukeException("Please enter an integer!", e);
+                } catch(IndexOutOfBoundsException e) {
+                    throw new DukeException("Invalid task!", e);
                 }
                 break;
 
@@ -69,6 +73,16 @@ public class ChatBot {
                 }
                 break;
 
+            case "delete":
+                try {
+                    deleteTask(Integer.parseInt(input[1].trim()) - 1);
+                } catch(NumberFormatException e) {
+                    throw new DukeException("Please enter an integer!", e);
+                } catch(IndexOutOfBoundsException e) {
+                    throw new DukeException("Invalid task!", e);
+                }
+                break;
+
             default:
                 System.out.printf("%s%n %s%n%s%n", line, "I'm sorry, but I don't know what that means :-(",
                         line);
@@ -81,7 +95,15 @@ public class ChatBot {
         tasks.add(t);
         System.out.printf("%s%n %s%n   %s%n %s%n%s%n",
                 line, "Got it. I've added this task:",
-                t.toString(), "Now you have " + tasks.size() + " tasks in the list",
+                t.toString(), "Now you have " + tasks.size() + " task(s) in the list.",
+                line);
+    }
+
+    public void deleteTask(int index) {
+        Task t = tasks.remove(index);
+        System.out.printf("%s%n %s%n   %s%n %s%n%s%n",
+                line, "Got it. I've removed this task:",
+                t.toString(), "Now you have " + tasks.size() + " task(s) in the list.",
                 line);
     }
 
@@ -99,7 +121,7 @@ public class ChatBot {
 
     public void printTasks() {
         String title = tasks.isEmpty() ? "You got no task now! Start by adding new tasks."
-                : "Here are the tasks in your list:";
+                : "Here are the task(s) in your list:";
         System.out.println(line);
         System.out.println(title);
         for (int i = 0; i < tasks.size(); ++i) {
