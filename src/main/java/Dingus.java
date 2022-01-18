@@ -5,7 +5,27 @@ import java.util.List;
 public class Dingus {
 	public static String startLine = "\n--------------------------------------------------------------------";
 	public static String endLine = "--------------------------------------------------------------------\n";
-	public static String greeting = "\nDingus:	Oh it's you again...\nDingus:	What kind of trouble would you inconvenience me with this time?\n";
+	public static String dingus = "░░░░░░░░░▄░░░░░░░░░░░░░░▄░░░░\n" +
+			"░░░░░░░░▌▒█░░░░░░░░░░░▄▀▒▌░░░\n" +
+			"░░░░░░░░▌▒▒█░░░░░░░░▄▀▒▒▒▐░░░\n" +
+			"░░░░░░░▐▄▀▒▒▀▀▀▀▄▄▄▀▒▒▒▒▒▐░░░\n" +
+			"░░░░░▄▄▀▒░▒▒▒▒▒▒▒▒▒█▒▒▄█▒▐░░░\n" +
+			"░░░▄▀▒▒▒░░░▒▒▒░░░▒▒▒▀██▀▒▌░░░\n" +
+			"░░▐▒▒▒▄▄▒▒▒▒░░░▒▒▒▒▒▒▒▀▄▒▒▌░░\n" +
+			"░░▌░░▌█▀▒▒▒▒▒▄▀█▄▒▒▒▒▒▒▒█▒▐░░\n" +
+			"░▐░░░▒▒▒▒▒▒▒▒▌██▀▒▒░░░▒▒▒▀▄▌░\n" +
+			"░▌░▒▄██▄▒▒▒▒▒▒▒▒▒░░░░░░▒▒▒▒▌░\n" +
+			"▀▒▀▐▄█▄█▌▄░▀▒▒░░░░░░░░░░▒▒▒▐░\n" +
+			"▐▒▒▐▀▐▀▒░▄▄▒▄▒▒▒▒▒▒░▒░▒░▒▒▒▒▌\n" +
+			"▐▒▒▒▀▀▄▄▒▒▒▄▒▒▒▒▒▒▒▒░▒░▒░▒▒▐░\n" +
+			"░▌▒▒▒▒▒▒▀▀▀▒▒▒▒▒▒░▒░▒░▒░▒▒▒▌░\n" +
+			"░▐▒▒▒▒▒▒▒▒▒▒▒▒▒▒░▒░▒░▒▒▄▒▒▐░░\n" +
+			"░░▀▄▒▒▒▒▒▒▒▒▒▒▒░▒░▒░▒▄▒▒▒▒▌░░\n" +
+			"░░░░▀▄▒▒▒▒▒▒▒▒▒▒▄▄▄▀▒▒▒▒▄▀░░░\n" +
+			"░░░░░░▀▄▄▄▄▄▄▀▀▀▒▒▒▒▒▄▄▀░░░░░\n" +
+			"░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▀▀░░░░░░░░\n";
+	public static String greeting = "\nDingus:	Oh it's you again...\nDingus:	What kind of trouble would you inconvenience me with this time?\n\n"
+			+ dingus;
 	public static List<Task> tasks = new ArrayList<>();
 
 	public static void main(String[] args) {
@@ -15,63 +35,123 @@ public class Dingus {
 
 		while (sc.hasNext()) {
 			String input = sc.nextLine().toLowerCase();
-			String[] words = input.split(" ");
 
-			// Exit
-			if (input.equals("bye")) {
-				System.out.println(startLine + "\nDingus:	Please don't ever bother me again, bye\n" + endLine);
-				sc.close();
-				return;
+			try {
+				response(input);
+			} catch (DingusException e) {
+				System.out.println(startLine);
+				System.out.println("<ERROR> " + e);
+				System.out.println(endLine);
 			}
 
-			if (words[0].equals("list")) {
-				// Output List
-				String output = startLine + "\nHere are the tasks in your list:";
-				for (int i = 0; i < tasks.size(); i++) {
-					int numbering = i + 1;
-					output += "\n" + numbering + ". " + tasks.get(i);
-				}
-				output += "\n" + endLine;
-				System.out.println(output);
-			} else if (words[0].equals("mark")) {
-				// Marking task as Done
-				int pos = Integer.parseInt(words[1]) - 1;
-				tasks.get(pos).mark();
-				System.out
-						.println(startLine + "\nHooray...you've finally completed this task:\n" + tasks.get(pos) + "\n" + endLine);
-			} else if (words[0].equals("unmark")) {
-				// Unmarking task
-				int pos = Integer.parseInt(words[1]) - 1;
-				tasks.get(pos).unmark();
-				System.out
-						.println(startLine + "\nFaking your completed tasks again? I've unmarked this task:\n" + tasks.get(pos)
-								+ "\n" + endLine);
-
-			} else if (words[0].equals("todo")) {
-				// Adding Todo
-				Task currTask = new Todo(input.substring(5));
-				tasks.add(currTask);
-				System.out.println(startLine + "\nStop troubling me, I've already added this task:\n" + currTask
-						+ "\nCan you even finish " + tasks.size() + " tasks?\n" + endLine);
-			} else if (words[0].equals("deadline")) {
-				// Adding Deadline
-				String[] deadline = input.split("/");
-				Task currTask = new Deadline(deadline[0].substring(9), deadline[1]);
-				tasks.add(currTask);
-				System.out.println(startLine + "\nStop troubling me, I've already added this task:\n" + currTask
-						+ "\nCan you even finish " + tasks.size() + " tasks?\n" + endLine);
-			} else if (words[0].equals("event")) {
-				// Adding Event
-				String[] event = input.split("/");
-				Task currTask = new Event(event[0].substring(6), event[1]);
-				tasks.add(currTask);
-				System.out.println(startLine + "\nStop troubling me, I've already added this task:\n" + currTask
-						+ "\nCan you even finish " + tasks.size() + " tasks?\n" + endLine);
-
+			if (input.equals("bye")) {
+				break;
 			}
 		}
-
 		sc.close();
 	}
 
+	public static void response(String input) throws DingusException {
+		String[] words = input.split(" ");
+
+		// Exit
+		if (input.equals("bye")) {
+			System.out.println(startLine);
+			System.out.println("DINGUS:	Please don't ever bother me again, bye");
+			System.out.println(endLine);
+		}
+
+		if (words[0].equals("list")) {
+			// Output List
+			String output = startLine + "\nHere are the tasks in your list:";
+			for (int i = 0; i < tasks.size(); i++) {
+				int numbering = i + 1;
+				output += "\n" + numbering + ". " + tasks.get(i);
+			}
+			output += "\n" + endLine;
+			System.out.println(output);
+		} else if (words[0].equals("mark")) {
+			// Marking task as Done
+			int pos = Integer.parseInt(words[1]) - 1;
+			tasks.get(pos).mark();
+			System.out.println(startLine);
+			System.out.println("Hooray...you've finally completed this task:");
+			System.out.println(tasks.get(pos));
+			System.out.println(endLine);
+		} else if (words[0].equals("unmark")) {
+			// Unmarking task
+			int pos = Integer.parseInt(words[1]) - 1;
+			tasks.get(pos).unmark();
+			System.out.println(startLine);
+			System.out.println("Faking your completed tasks again? I've unmarked this task:");
+			System.out.println(tasks.get(pos));
+			System.out.println(endLine);
+		} else if (words[0].equals("todo")) {
+			todo(input);
+		} else if (words[0].equals("deadline")) {
+			deadline(input);
+		} else if (words[0].equals("event")) {
+			event(input);
+		} else {
+			throw new DingusException("What kind of command is that?? I don't understand!");
+		}
+	}
+
+	public static void deadline(String input) throws DingusException {
+		// Adding Deadline
+		String[] deadline = input.split("/");
+		String description = deadline[0].substring(8);
+		if (description.isEmpty()) {
+			throw new DingusException("Is it even possible to have a deadline for NOTHING?");
+		} else if (deadline.length == 1) {
+			throw new DingusException("Is it even possible to have a deadline with no END DATE?");
+		} else {
+			Task currTask = new Deadline(description, deadline[1]);
+			tasks.add(currTask);
+			System.out.println(startLine);
+			System.out.println("Stop troubling me, I've alread added this task:");
+			System.out.println(currTask);
+			System.out.println((tasks.size() > 1) ? "Can you even finish " + tasks.size() + " tasks?"
+					: "Can you even finish " + tasks.size() + " task?");
+			System.out.println(endLine);
+		}
+	}
+
+	public static void todo(String input) throws DingusException {
+		// Adding Todo
+		String currTask = input.substring(4);
+		if (currTask.isEmpty()) {
+			throw new DingusException("So doing NOTHING is a task?");
+		} else {
+			tasks.add(new Todo(currTask));
+		}
+		System.out.println(startLine + "\nStop troubling me, I've already added this task:\n" + currTask
+				+ "\nCan you even finish " + tasks.size() + " tasks?\n" + endLine);
+		System.out.println(startLine);
+		System.out.println("Stop troubling me, I've already added this task:");
+		System.out.println(currTask);
+		System.out.println((tasks.size() > 1) ? "Can you even finish " + tasks.size() + " tasks?"
+				: "Can you even finish " + tasks.size() + " task?");
+		System.out.println(endLine);
+	}
+
+	public static void event(String input) throws DingusException {
+		// Adding Event
+		String[] event = input.split("/");
+		String description = event[0].substring(5);
+		if (description.isEmpty()) {
+			throw new DingusException("Is it even possible to have an event for NOTHING?");
+		} else if (event.length == 1) {
+			throw new DingusException("Is it even possible to have an event with no DATE?");
+		} else {
+			Task currTask = new Deadline(description, event[1]);
+			tasks.add(currTask);
+			System.out.println(startLine);
+			System.out.println("Stop troubling me, I've alread added this task:");
+			System.out.println(currTask);
+			System.out.println((tasks.size() > 1) ? "Can you even finish " + tasks.size() + " tasks?"
+					: "Can you even finish " + tasks.size() + " task?");
+			System.out.println(endLine);
+		}
+	}
 }
