@@ -73,6 +73,19 @@ Enter a Command or New Task:
 
 Enter a Command or New Task:
 	------------------------------------
+	Deleted the task:
+		 [D][ ] This is a deadline task (by: User Date 1)
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	This is your task list:
+	1. [T][X] This is a todo task
+	2. [E][ ] This is an event task (at: User Date 2)
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
 	There was a problem understanding you:
 	Task name cannot be empty
 	------------------------------------
@@ -134,7 +147,7 @@ Enter a Command or New Task:
 Enter a Command or New Task:
 	------------------------------------
 	Task is already not done:
-		 [D][ ] This is a deadline task (by: User Date 1)
+		 [E][ ] This is an event task (at: User Date 2)
 	------------------------------------
 
 Enter a Command or New Task:
@@ -147,6 +160,18 @@ Enter a Command or New Task:
 	------------------------------------
 	There was a problem understanding you:
 	Task Number must be a number
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	There was a problem understanding you:
+	No matching task with given number
+	------------------------------------
+
+Enter a Command or New Task:
+	------------------------------------
+	There was a problem understanding you:
+	No matching task with given number
 	------------------------------------
 
 Enter a Command or New Task:
