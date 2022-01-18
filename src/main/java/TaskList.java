@@ -28,4 +28,14 @@ public class TaskList {
         String out = tasks.get(id - 1).switchMark(instr);
         return out;
     }
+
+    String remove(int id) throws InvalidTaskNumberException {
+        if (id > index || id <= 0) {
+            throw new InvalidTaskNumberException();
+        }
+        Task removed = tasks.remove(id - 1);
+        index--;
+        String out = "Noted, I have removed this task:\n  " + removed + "\nnow you have " + index + " tasks in the list.";
+        return out;
+    }
 }

@@ -7,7 +7,7 @@ public class Duke {
     private static final String GREETINGS = "Hello there, I am Giga Chad Duke\nHow can I help you?";
     private static final String BYE = "Bye, hope to see you again soon!";
     private static final TaskList taskList = new TaskList();
-    private static final List<String> tasks = Arrays.asList("list", "bye", "todo", "event", "deadline", "mark", "unmark");
+    private static final List<String> tasks = Arrays.asList("list", "bye", "todo", "event", "deadline", "mark", "unmark", "delete");
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -32,14 +32,15 @@ public class Duke {
                     return;
                 } else if (input[0].equals("list")) {
                     Duke.log(taskList.getTasks());
-                } else if (input[0].equals("mark") || input[0].equals("unmark")) {
-                    int taskId = Integer.parseInt(input[1]);
-                    Duke.log(taskList.mark(taskId, input[0]));
                 } else {
                     if (input.length != 2) {
                         throw new InvalidArgumentException();
                     }
-                    if (input[0].equals("todo")) {
+
+                    if (input[0].equals("mark") || input[0].equals("unmark")) {
+                        int taskId = Integer.parseInt(input[1]);
+                        Duke.log(taskList.mark(taskId, input[0]));
+                    } else if (input[0].equals("todo")) {
                         String toDo = input[1].strip();
                         Duke.log(taskList.addTask(new ToDo(toDo)));
                     } else if (input[0].equals("event")) {
@@ -48,6 +49,9 @@ public class Duke {
                     } else if (input[0].equals("deadline")) {
                         String[] deadlineDetails = input[1].strip().split(" /by ", 2);
                         Duke.log(taskList.addTask(new Deadline(deadlineDetails[0], deadlineDetails[1])));
+                    } else if (input[0].equals("delete")) {
+                        int taskId = Integer.parseInt(input[1]);
+                        Duke.log(taskList.remove(taskId));
                     }
                 }
             } catch(DukeException e) {

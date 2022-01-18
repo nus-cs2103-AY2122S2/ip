@@ -10,4 +10,8 @@ unmark 3
 unmark 1
 list
 idk
+delete 1
+delete 1
+delete 1
+list
 bye
