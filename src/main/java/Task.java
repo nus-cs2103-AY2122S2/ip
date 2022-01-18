@@ -1,6 +1,8 @@
 public abstract class Task {
-    /** Name of the activity */
+    /** Name of the task */
     protected String name;
+
+    /** Status of the task */
     protected boolean isDone;
 
     public Task(String name) {
@@ -8,23 +10,23 @@ public abstract class Task {
     }
 
     /**
-     * Marks activity as done.
+     * Marks task as done.
      */
     public void done() {
         this.isDone = true;
     }
 
     /**
-     * Marks activity as undone.
+     * Marks task as undone.
      */
     public void undone() {
         this.isDone = false;
     }
 
     /**
-     * Returns a string representing the activity's name.
+     * Returns a string representing the task's name.
      *
-     * @return the name of the activity
+     * @return the name of the task
      */
     @Override
     public String toString() {

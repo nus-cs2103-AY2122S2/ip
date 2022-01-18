@@ -2,10 +2,10 @@ import java.util.ArrayList;
 
 public class TaskList {
     /** Array of Activity in the list */
-    ArrayList<Task> activities;
+    ArrayList<Task> tasks;
 
     public TaskList() {
-        activities = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
@@ -15,9 +15,9 @@ public class TaskList {
      */
     public String addToDo(String activity) {
         Task ac = new ToDoTask(activity);
-        activities.add(ac);
+        tasks.add(ac);
         return "Got it! I have added a new todo task: \n" + ac
-                + "\nYou have " + activities.size() + " tasks in your list.";
+                + "\nYou have " + tasks.size() + " tasks in your list.";
     }
 
     /**
@@ -27,9 +27,9 @@ public class TaskList {
      */
     public String addDeadline(String activity, String date) {
         Task ac = new DeadlineTask(activity, date);
-        activities.add(ac);
+        tasks.add(ac);
         return "Got it! I have added a new deadline task: \n" + ac
-                + "\nYou have " + activities.size() + " tasks in your list.";
+                + "\nYou have " + tasks.size() + " tasks in your list.";
     }
 
     /**
@@ -39,9 +39,9 @@ public class TaskList {
      */
     public String addEvent(String activity, String date) {
         Task ac = new EventTask(activity, date);
-        activities.add(ac);
+        tasks.add(ac);
         return "Got it! I have added a new event task: \n" + ac
-                + "\nYou have " + activities.size() + " tasks in your list.";
+                + "\nYou have " + tasks.size() + " tasks in your list.";
     }
 
     /**
@@ -52,10 +52,10 @@ public class TaskList {
      * @throws TaskListException if index is out of bounds of task list size
      */
     public Task markDone(int idx) throws TaskListException {
-        if (idx < 0 || idx >= activities.size())
+        if (idx < 0 || idx >= tasks.size())
             throw new TaskListException("There is no task with index: " + (idx + 1));
         else {
-            Task ac = activities.get(idx);
+            Task ac = tasks.get(idx);
             ac.done();
             return ac;
         }
@@ -69,12 +69,31 @@ public class TaskList {
      * @throws TaskListException if index is out of bounds of task list size
      */
     public Task markUndone(int idx) throws TaskListException {
-        if (idx < 0 || idx >= activities.size())
+        if (idx < 0 || idx >= tasks.size())
             throw new TaskListException("There is no task with index: " + (idx + 1));
         else {
-            Task ac = activities.get(idx);
+            Task ac = tasks.get(idx);
             ac.undone();
             return ac;
+        }
+    }
+
+    /**
+     * Deletes task in list by index.
+     *
+     * @param idx index of the task
+     * @return response string to user
+     * @throws TaskListException if index is out of bounds of task list size
+     */
+    public String delete(int idx) throws TaskListException {
+        if (idx < 0 || idx >= tasks.size())
+            throw new TaskListException("There is no task with index: " + (idx + 1));
+        else {
+            Task ac = tasks.get(idx);
+            tasks.remove(idx);
+            return "I have deleted the following task: \n"
+                    + ac.toString()
+                    + "\nYou have " + tasks.size() + " tasks left.";
         }
     }
 
@@ -86,11 +105,11 @@ public class TaskList {
      */
     @Override
     public String toString() {
-        if (activities.size() == 0) return "Nothing is added yet.";
+        if (tasks.size() == 0) return "Nothing is added yet.";
         StringBuilder sb = new StringBuilder();
         sb.append("You have the following upcoming tasks: \n");
-        for (int i = 0; i < activities.size(); i++) {
-            sb.append((i + 1) + "." + activities.get(i).toString() + "\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            sb.append((i + 1) + "." + tasks.get(i).toString() + "\n");
         }
         if(sb.length() > 0){
             sb.deleteCharAt(sb.length() - 1);

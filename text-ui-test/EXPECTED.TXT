@@ -23,39 +23,37 @@ Got it! I have added a new event task:
 You have 3 tasks in your list.
 ____________________________
 ____________________________
-You have the following upcoming tasks:
-1.[T][ ] borrow book
-2.[D][ ] return book (by: Saturday)
-3.[E][ ] cs2103 lecture (at: Tomorrow)
-____________________________
-____________________________
 This activity is marked as done:
 [D][X] return book (by: Saturday)
-____________________________
-____________________________
-You have the following upcoming tasks:
-1.[T][ ] borrow book
-2.[D][X] return book (by: Saturday)
-3.[E][ ] cs2103 lecture (at: Tomorrow)
 ____________________________
 ____________________________
 This activity is unmarked as done:
 [D][ ] return book (by: Saturday)
 ____________________________
 ____________________________
+There is no task with index: 5
+____________________________
+____________________________
 You have the following upcoming tasks:
 1.[T][ ] borrow book
 2.[D][ ] return book (by: Saturday)
 3.[E][ ] cs2103 lecture (at: Tomorrow)
 ____________________________
 ____________________________
-There is no task with index: 5
-____________________________
-____________________________
 Deadline task requires a task name!
 ____________________________
 ____________________________
 Oops! Your instructions were unclear!
+____________________________
+____________________________
+I have deleted the following task:
+[D][ ] return book (by: Saturday)
+You have 2 tasks left.
+____________________________
+____________________________
+You have the following upcoming tasks:
+1.[T][ ] borrow book
+2.[E][ ] cs2103 lecture (at: Tomorrow)
 ____________________________
 ____________________________
 Good bye! Hope to see you again!

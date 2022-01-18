@@ -2,10 +2,10 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Duke {
-    private static TaskList al;
+    private static TaskList tl;
     public static void main(String[] args) {
         greet();
-        al = new TaskList();
+        tl = new TaskList();
         Scanner sc = new Scanner(System.in);
         String userIn = "";
         String out;
@@ -58,24 +58,27 @@ public class Duke {
      */
     private static String processUserInput(String userIn) throws DukeException {
         if (userIn.equals("list")) {
-            return al.toString();
+            return tl.toString();
         } else if (userIn.equals("help")) {
             return help();
         } else if (Pattern.matches("^mark\\s\\d+", userIn)) {
             return "This activity is marked as done: \n"
-                    + al.markDone(Integer.parseInt(userIn
+                    + tl.markDone(Integer.parseInt(userIn
                     .replaceAll("[^\\d.]", "")) - 1)
                     .toString();
-        }else if (Pattern.matches("^unmark\\s\\d+", userIn)) {
+        } else if (Pattern.matches("^unmark\\s\\d+", userIn)) {
             return "This activity is unmarked as done: \n" +
-                    al.markUndone(Integer.parseInt(userIn
+                    tl.markUndone(Integer.parseInt(userIn
                     .replaceAll("[^\\d.]", "")) - 1)
                     .toString();
+        } else if (Pattern.matches("^delete\\s\\d+", userIn)) {
+            return tl.delete(Integer.parseInt(userIn
+                    .replaceAll("[^\\d.]", "")) - 1);
         } else if (Pattern.matches("^todo\\s(.*?)", userIn)) {
             String s = userIn.replace("todo ", "").trim();
             if (s.length() == 0)
                 throw new DukeException("Todo task requires a task name!");
-            else return al.addToDo(s);
+            else return tl.addToDo(s);
         } else if (Pattern.matches("^deadline\\s(.*s?)\\s/by\\s(.*s?)", userIn)) {
             String[] split = userIn
                     .replace("deadline ", "")
@@ -88,7 +91,7 @@ public class Duke {
                 throw new DukeException("Deadline task requires a task name!");
             else if (split[1].length() == 0)
                 throw new DukeException("Deadline task requires a date!");
-            else return al.addDeadline(split[0], split[1]);
+            else return tl.addDeadline(split[0], split[1]);
         } else if (Pattern.matches("^event\\s(.*s?)\\s/at\\s(.*s?)", userIn)) {
             String[] split = userIn
                     .replace("event ", "")
@@ -101,7 +104,7 @@ public class Duke {
                 throw new DukeException("Event task requires a task name!");
             else if (split[1].length() == 0)
                 throw new DukeException("Event task requires a date!");
-            else return al.addEvent(split[0], split[1]);
+            else return tl.addEvent(split[0], split[1]);
         } else {
             throw new DukeException("Oops! Your instructions were unclear!");
         }
