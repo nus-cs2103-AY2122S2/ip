@@ -42,17 +42,7 @@ public class ChatBot {
      * @param input String command by user to run
      */
     public void runCommand(String input) {
-        Command command;
-        switch (input) {
-            case "list":
-                command = new ListCommand(input, this.tasks);
-                break;
-            case "bye":
-                command = new ExitCommand(input);
-                break;
-            default:
-                command = new AddItemCommand("add", input, this.tasks);
-        }
+        Command command = Command.parseCommand(input, this.tasks);
         this.terminated = command.execute();
     }
 

@@ -14,23 +14,19 @@ public class AddItemCommand extends Command {
      */
     private final ArrayList<String> list;
 
-    /**
-     * Item to add to list
-     */
-    private final String item;
-
-    public AddItemCommand(String name, String item, ArrayList<String> list) {
-        super(name);
-        this.item = item;
+    public AddItemCommand(String name, String args, ArrayList<String> list) {
+        super(name, args);
         this.list = list;
     }
 
     @Override
     public boolean execute() {
-        this.list.add(this.item);
+        // Args for this command represents item to add
+        String item = super.getArgs();
+        this.list.add(item);
 
         ArrayList<String> response = new ArrayList<>();
-        response.add(String.format("added: %s", this.item));
+        response.add(String.format("added: %s", item));
         Command.styledPrint(response);
         return false;
     }

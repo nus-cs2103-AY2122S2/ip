@@ -14,8 +14,8 @@ public class ListCommand extends Command {
      */
     private final ArrayList<String> list;
 
-    public ListCommand(String name, ArrayList<String> list) {
-        super(name);
+    public ListCommand(String name, String args, ArrayList<String> list) {
+        super(name, args);
         this.list = list;
     }
 
@@ -24,7 +24,8 @@ public class ListCommand extends Command {
         ArrayList<String> response = new ArrayList<>();
         // Prepend each list item with its numbering inside list
         for (int i = 0; i < this.list.size(); i++) {
-            response.add(String.format("%d. %s", i + 1, this.list.get(i)));
+            String item = this.list.get(i);
+            response.add(String.format("%d. %s", i + 1, item));
         }
         Command.styledPrint(response);
         return false;

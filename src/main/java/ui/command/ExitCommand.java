@@ -11,8 +11,8 @@ import java.util.ArrayList;
 public class ExitCommand extends Command {
     private static final String GOODBYE_STRING = "Goodbye!";
 
-    public ExitCommand(String name) {
-        super(name);
+    public ExitCommand(String name, String args) {
+        super(name, args);
     }
 
     @Override

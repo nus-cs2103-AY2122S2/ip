@@ -9,14 +9,14 @@ import java.util.ArrayList;
  * command written by user.
  */
 public class EchoCommand extends Command {
-    public EchoCommand(String name) {
-        super(name);
+    public EchoCommand(String name, String args) {
+        super(name, args);
     }
 
     @Override
     public boolean execute() {
         ArrayList<String> response = new ArrayList<>();
-        response.add(this.getName());
+        response.add(super.getOriginalCommand());
         Command.styledPrint(response);
         return false;
     }

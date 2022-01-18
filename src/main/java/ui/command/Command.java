@@ -18,12 +18,59 @@ public abstract class Command {
     private final static String INDENT = " ".repeat(INDENT_SIZE);
 
     /**
-     * Name of current command, as inputted by user
+     * Execute current command in ChatBot context
+     *
+     * @return whether the command is a terminating command
+     */
+    public abstract boolean execute();
+
+    /**
+     * Name of current command
      */
     private final String name;
 
-    public Command(String name) {
+    /**
+     * String representation of arguments for command
+     */
+    private final String args;
+
+    protected Command(String name, String args) {
         this.name = name;
+        this.args = args;
+    }
+
+    /**
+     * Parse user inputted command to extract
+     * the name and args of the command, returning
+     * the concrete Command subclass for the input
+     *
+     * @param input Command inputted by user
+     * @param tasks Collection of tasks maintained by ChatBot
+     * @return Command object corresponding to input
+     */
+    public static Command parseCommand(String input, ArrayList<String> tasks) {
+        String name = input;
+        String args = null;
+        // Separate command name and args
+        if (input.contains(" ")) {
+            String[] command = input.split(" ", 2);
+            name = command[0];
+            args = command[1];
+        }
+
+        Command command;
+        switch (name) {
+            case "list":
+                command = new ListCommand(name, args, tasks);
+                break;
+            case "bye":
+                command = new ExitCommand(name, args);
+                break;
+            default:
+                // Special case with no valid command name
+                command = new AddItemCommand("add", input, tasks);
+        }
+        return command;
     }
 
     /**
@@ -44,18 +91,22 @@ public abstract class Command {
     }
 
     /**
-     * Execute current command in ChatBot context
+     * Reconstruct original command by user
      *
-     * @return whether the command is a terminating command
+     * @return String representing original command
      */
-    public abstract boolean execute();
+    protected String getOriginalCommand() {
+        if (this.args != null) {
+            return this.name + " " + this.args;
+        }
+        return this.name;
+    }
 
     protected String getName() {
         return this.name;
     }
 
-    @Override
-    public String toString() {
-        return this.name;
+    protected String getArgs() {
+        return this.args;
     }
 }
