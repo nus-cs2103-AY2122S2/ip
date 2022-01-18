@@ -36,11 +36,11 @@ public class Duke {
             } else if (query.compareTo(COMMAND_MARK) == 0){
                 Task thisTask = tasks.get(Integer.parseInt(splitted[1])-1);
                 thisTask.markAsDone();
-                printContent(MESSAGE_MARK + "\n       [" + thisTask.getStatusIcon() + "] " + thisTask.toString());
+                printContent(taskLine(thisTask, MESSAGE_MARK));
             } else if (query.compareTo(COMMAND_UNMARK) == 0){
                 Task thisTask = tasks.get(Integer.parseInt(splitted[1])-1);
                 thisTask.markAsUndone();
-                printContent(MESSAGE_UNMARK + "\n       [" + thisTask.getStatusIcon() + "] " + thisTask.toString());
+                printContent(taskLine(thisTask, MESSAGE_UNMARK));
             } else if (query.compareTo(COMMAND_TODO) == 0){
                 Task thisTask = new TodoTask(line.substring(5));
                 tasks.add(thisTask);
@@ -67,12 +67,16 @@ public class Duke {
     }
 
     public static void printAddTaskSuccess(ArrayList<Task> tasks, Task task){
-        String content = MESSAGE_TASKADD + "\n       [" + task.getType() + "][ ] " + task.toString() + "\n";
-        content += printListSize(tasks);
+        String content = taskLine(task, MESSAGE_TASKADD);
+        content += listSizeLine(tasks);
         printContent(content);
     }
 
-    public static String printListSize(ArrayList<Task> tasks){
+    public static String taskLine(Task task, String message){
+        return message + "\n       [" + task.getType() + "][" + task.getStatusIcon() + "] " + task.toString() + "\n";
+    }
+
+    public static String listSizeLine(ArrayList<Task> tasks){
         return "     Now you have " + tasks.size() + " tasks in the list.";
     }
 
