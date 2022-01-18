@@ -1,0 +1,7 @@
+todo borrow book
+event pokemon release /at 28th jan
+read book
+deadline return book /by Sunday
+mark 4
+list
+bye
