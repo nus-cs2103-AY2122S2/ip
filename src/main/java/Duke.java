@@ -3,8 +3,8 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private ArrayList<Task> list = new ArrayList<>();
-    private String hLine = "____________________________________________________________";
+    private final ArrayList<Task> list = new ArrayList<>();
+    private final String hLine = "____________________________________________________________";
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -56,51 +56,39 @@ public class Duke {
 
     public void addList(String[] userInput) {
         String temp;
+        Task task;
 
         if (userInput.length > 1) {
-            temp = userInput[0] + " " + userInput[1];
+            String[] strings = userInput[1].split("/");
+
+            switch (userInput[0]) {
+                case "deadline":
+                    task = new Deadline(strings[0], strings[1]);
+                    break;
+                case "event":
+                    task = new Event(strings[0], strings[1]);
+                    break;
+                case "todo":
+                    task = new Todo(userInput[1]);
+                    break;
+                default:
+                    temp = userInput[0] + " " + userInput[1];
+                    task = new Task(temp);
+            }
         } else {
             temp = userInput[0];
+            task = new Task(temp);
         }
 
-        list.add(new Task(temp));
-        System.out.println("added: " + temp);
+        list.add(task);
+        System.out.println("Got it. I have added this task:\n" + task
+                + "\nNow you have " + list.size() + " tasks in the list.");
     }
 
     public void readList() {
         System.out.println("Here are the task in your list:");
         for (int i = 0; i < list.size(); i++) {
-            System.out.println((i + 1) + ". [" + list.get(i).getMark() + "] " + list.get(i).getUserInput());
-        }
-    }
-
-    public class Task {
-        private boolean marked;
-        private String description;
-
-        Task(String description) {
-            this.marked = false;
-            this.description = description;
-        }
-
-        public void markTask(boolean mark) {
-            this.marked = mark;
-            String output;
-
-            if (mark) {
-                output = "Nice! I've marked this task as done: \n";
-            } else {
-                output = "OK, I've marked this task as not done yet: \n";
-            }
-            System.out.println(output + "[" + getMark() + "] " + getUserInput());
-        }
-
-        public char getMark() {
-            return this.marked ? 'X' : ' ';
-        }
-
-        public String getUserInput() {
-            return this.description;
+            System.out.println((i + 1) + ". " + list.get(i).toString());
         }
     }
 }
