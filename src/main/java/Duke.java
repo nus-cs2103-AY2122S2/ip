@@ -9,7 +9,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         Scanner sc = new Scanner(System.in);
-        String input = "";
+        String input = ""; 
 
         myPrint("Hello! I'm Duke\nWhat can I do for you?");
 
