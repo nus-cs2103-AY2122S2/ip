@@ -1,16 +1,11 @@
-public class Task {
-    private int Id;
-    private String name;
-    private boolean done;
+public abstract class Task {
+    protected String name;
+    protected boolean done;
+    protected Character type;
 
-    public Task(int id, String n, boolean d) {
-        Id = id;
+    public Task(String n, boolean d) {
         name = n;
         done = d;
-    }
-
-    public int getId() {
-        return Id;
     }
 
     public String getName() {
@@ -21,8 +16,8 @@ public class Task {
         return done;
     }
 
-    public void setId(int id) {
-        Id = id;
+    public Character getType() {
+        return type;
     }
 
     public void setName(String name) {
@@ -33,17 +28,19 @@ public class Task {
         this.done = done;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder res = new StringBuilder();
-        res.append(this.getId()).append(".");
-        if (this.done) {
-            res.append("[X] ");
-        } else {
-            res.append("[] ");
-        }
-        res.append(this.name);
-        res.append("\n");
-        return res.toString();
+    public void setType(Character type) {
+        this.type = type;
+    }
+
+    //for displaying if a task is done or not
+    public String getDoneIcon() {
+        return getDone()
+                ? "[X]"
+                : "[ ]";
+    }
+
+    //for displaying task's representation
+    public String getTaskIcon() {
+        return String.format("[%c]", type);
     }
 }
