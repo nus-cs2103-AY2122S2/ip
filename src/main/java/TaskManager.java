@@ -36,6 +36,12 @@ public class TaskManager {
         return this.tasks.get(taskId - 1).toString();
     }
 
+    public String delete(int taskId) {
+        Task toDelete = this.tasks.get(taskId - 1);
+        this.tasks.remove(taskId - 1);
+        return toDelete.toString();
+    }
+
     @Override
     public String toString() {
         String str = "";

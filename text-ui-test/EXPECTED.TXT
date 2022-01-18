@@ -136,4 +136,24 @@ DukeException$DukeNotAValidNumberException: Stop trying to be funny, enter a val
 
 You:
 Duke:
+DukeException$DukeTaskNotFoundException: please enter a task index from the LIST.
+
+You:
+Duke:
+Noted. I've removed this task-
+[D][ ] return book(by: Sunday)
+Now you have 2 tasks.
+
+You:
+Duke:
+Noted. I've removed this task-
+[T][X] borrow book
+Now you have 1 tasks.
+
+You:
+Duke:
+DukeException$DukeTaskNotFoundException: please enter a task index from the LIST.
+
+You:
+Duke:
 don't leave me don't leave me.

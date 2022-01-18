@@ -7,7 +7,8 @@ public enum Command {
     UNMARK,
     TODO,
     DEADLINE,
-    EVENT;
+    EVENT,
+    DELETE;
 
     private static HashMap<String, Command> commands = new HashMap<>();
 
@@ -19,6 +20,7 @@ public enum Command {
         commands.put("todo", Command.TODO);
         commands.put("deadline", Command.DEADLINE);
         commands.put("event", Command.EVENT);
+        commands.put("delete", Command.DELETE);
     }
 
     public static Command getCommand(String c) {

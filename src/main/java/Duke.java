@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -53,7 +52,11 @@ public class Duke {
                         output += notebook.addEvent(commandLine[1], commandLine[2]) + "\n";
                         output += "Now you have " + notebook.size() + " tasks.\n";
                         break;
-
+                    case DELETE:
+                        output += "Noted. I've removed this task-\n";
+                        output += notebook.delete(Integer.parseInt(commandLine[1])) + "\n";
+                        output += "Now you have " + notebook.size() + " tasks.\n";
+                        break;
                 }
                 System.out.println(output);
             } catch (DukeException e) {
@@ -66,19 +69,22 @@ public class Duke {
     public static String[] cleanInput(String input) throws DukeException {
         String[] commandLine = input.trim().split("\\s+", 2);
         String commandType = commandLine[0];
+        boolean commandWithNo = commandType.equals("mark") || commandType.equals("unmark") ||
+                commandType.equals("delete");
 
         // check if command exist.
         if (!Command.isValid(commandType)) throw new DukeException.DukeInvalidCommandException();
 
-        // commands that requires a description.
+        // commands that requires a description except list.
         if (commandLine.length == 1) {
             if ((commandType.equals("todo")) || commandType.equals("deadline") ||
                     commandType.equals("event")) {
                 throw new DukeException.DukeNoDescriptionFoundException();
             }
-            if (commandType.equals("mark") || commandType.equals("unmark")) {
+            if (commandWithNo) {
                 throw new DukeException.DukeTaskNotFoundException();
             }
+            // check if notebook is empty
             if (commandType.equals("list") & notebook.size() == 0) {
                 throw new DukeException.DukeEmptyTaskException();
             }
@@ -88,7 +94,7 @@ public class Duke {
             String commandInfo = commandLine[1];
             String[] essentialInfo = new String[0];
 
-            if (commandType.equals("mark") || commandType.equals("unmark")) {
+            if (commandWithNo) {
                 // check if task number is valid/
                 if (!Pattern.matches("^\\d*[1-9]\\d*$", commandInfo)) {
                     throw new DukeException.DukeNotAValidNumberException();
@@ -97,7 +103,7 @@ public class Duke {
                 if (notebook.size() == 0) {
                     throw new DukeException.DukeEmptyTaskException();
                 }
-                if (idx >= notebook.size()) {
+                if (idx > notebook.size()) {
                     throw new DukeException.DukeTaskNotFoundException();
                 }
                 return commandLine;
