@@ -1,3 +1,5 @@
+package TaskObjects;
+
 public class Task {
     protected String taskName;
     protected boolean done;
@@ -29,7 +31,7 @@ public class Task {
     }
 
     public String getType() {
-        return "Generic Task";
+        return "Generic TaskObjects.Task";
     }
 }
 
