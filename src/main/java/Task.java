@@ -1,6 +1,6 @@
-public class Task {
-    private final String name;
-    private final boolean isDone;
+abstract class Task {
+    protected final String name;
+    protected final boolean isDone;
 
     public Task(String name) {
         this(name, false);
@@ -11,22 +11,16 @@ public class Task {
         this.isDone = isDone;
     }
 
-    public Task markAsDone() {
-        return new Task(this.name, true);
+    public String getTaskName() {
+        return this.name;
     }
 
-    public Task markAsUndone() {
-        return new Task(this.name, false);
-    }
+    abstract Task markAsDone();
+
+    abstract Task markAsUndone();
 
     @Override
     public String toString() {
-        String mark;
-        if (this.isDone) {
-            mark = "X";
-        } else {
-            mark = " ";
-        }
-        return String.format("[%s] %s", mark, this.name);
+        return String.format("name of task: %s", this.name);
     }
 }

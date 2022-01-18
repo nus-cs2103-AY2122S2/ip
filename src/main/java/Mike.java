@@ -14,30 +14,58 @@ public class Mike {
         String trimmedInputString = inputString.trim();
         while(!trimmedInputString.equals("bye")) {
             String[] splitString = trimmedInputString.split(" ");
-            if ( trimmedInputString.isEmpty()) {
-                mike.printNoCharactersMessage();
-            } else {
+
+            if (!trimmedInputString.isEmpty()) {
                 String command = splitString[0];
-                if (command.equals("list")) {
-                    mike.printList();
-                } else if (command.equals("mark")) {
-                    int value = Integer.parseInt(splitString[1]);
-                    mike.mark(value);
-                } else if (command.equals("unmark")) {
-                    int value = Integer.parseInt(splitString[1]);
-                    mike.unmark(value);
+                //TODO: throw exceptions when command is not entered correctly
+                switch(command) {
+                    case "list":
+                        mike.printList();
+                        break;
+                    case "mark":
+                        int markNumber = Integer.parseInt(splitString[1]);
+                        mike.mark(markNumber);
+                        break;
+                    case "unmark":
+                        int unmarkNumber = Integer.parseInt(splitString[1]);
+                        mike.unmark(unmarkNumber);
+                        break;
+                    case "todo":
+                        String todoParameters =
+                                removeCommandFromString(trimmedInputString);
+                        mike.addTodo(todoParameters);
+                        break;
+                    case "deadline":
+                        String deadlineParameters =
+                                removeCommandFromString(trimmedInputString);
+                        mike.addDeadline(deadlineParameters);
+                        break;
+                    case "event":
+                        String eventParameters =
+                                removeCommandFromString(trimmedInputString);
+                        mike.addEvent(eventParameters);
+                        break;
+                    default:
+                        mike.printInvalidCommandMessage(trimmedInputString);
                 }
-                else {
-                    mike.addToList(trimmedInputString);
-                }
+            } else {
+                mike.printNoCharactersMessage();
             }
 
+            //this segment reads the next input
             sc = new Scanner(System.in);
             mike.printNextCommandInstruction();
             inputString = sc.nextLine();
             trimmedInputString = inputString.trim();
         }
+
         mike.printGoodbyeMessage();
+    }
+
+    public static String removeCommandFromString(String str) {
+        int indexOfFirstSpace = str.indexOf(" ");
+        int indexOfTaskParameters = indexOfFirstSpace + 1;
+        return str.substring(indexOfTaskParameters);
     }
 
     public Mike() {
@@ -83,6 +111,10 @@ public class Mike {
         System.out.println("Enter next command:");
     }
 
+    void printInvalidCommandMessage(String str) {
+        printReply(String.format("I don't understand the command \"%s\"", str));
+    }
+
     void printGoodbyeMessage() {
         String goodbyeMessage = "Goodbye and see you again :)";
         printReply(goodbyeMessage);
@@ -92,10 +124,36 @@ public class Mike {
         printReply("Hey! You didn't enter any characters!");
     }
 
-    void addToList(String str) {
-        Task task = new Task(str);
+    void addToList(Task task) {
         this.listOfTasks.add(task);
-        printReply("Added \"" + str + "\" to the list!");
+        String taskName = task.getTaskName();
+        String addTaskOutput = "Added \"" + taskName + "\" to the list!";
+        int noOfTasks = this.listOfTasks.size();
+        String noOfTasksOutput = String.format("You now have *%d* task(s) in your list.", noOfTasks);
+        printReply(String.format("%s\n%s", addTaskOutput, noOfTasksOutput));
+    }
+
+    void addTodo(String str) {
+        Todo todo = new Todo(str);
+        addToList(todo);
+    }
+
+    void addDeadline(String str) {
+        int indexOfBy = str.indexOf("/by");
+        int indexOfEndDate = indexOfBy + 4;
+        String name = str.substring(0, indexOfBy - 1);
+        String endDate = str.substring(indexOfEndDate);
+        Deadline deadline = new Deadline(name, endDate);
+        addToList(deadline);
+    }
+
+    void addEvent(String str) {
+        int indexOfAt = str.indexOf("/at");
+        int indexOfEventTime = indexOfAt + 4;
+        String name = str.substring(0, indexOfAt - 1);
+        String scheduledDate = str.substring(indexOfEventTime);
+        Event event = new Event(name, scheduledDate);
+        addToList(event);
     }
 
     void printList() {
@@ -109,23 +167,25 @@ public class Mike {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
 
-    void mark(int value) {
+    void mark(int value) { //mark should throw an exception if value is out of bounds
         int index = value - 1;
         Task oldTask = this.listOfTasks.get(index);
         Task newTask = oldTask.markAsDone();
         this.listOfTasks.set(index, newTask);
 
-        String outputMessage = String.format("Great job, %s marked as done!", newTask);
+        String outputMessage =
+                String.format("Great job, \"%s\" marked as done!", newTask.getTaskName());
         printReply(outputMessage);
     }
 
-    void unmark(int value) {
+    void unmark(int value) { //same as mark, should throw exception
         int index = value - 1;
         Task oldTask = this.listOfTasks.get(index);
         Task newTask = oldTask.markAsUndone();
         this.listOfTasks.set(index, newTask);
 
-        String outputMessage = String.format("Sure thing, %s marked as undone!", newTask);
+        String outputMessage =
+                String.format("Sure thing, \"%s\" marked as undone!", newTask.getTaskName());
         printReply(outputMessage);
     }
 }
