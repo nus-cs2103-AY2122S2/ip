@@ -36,16 +36,13 @@ public class Spark {
                     taskList.showTaskList();
 
                 } else if (command.equals("mark")) {
-                    int taskId = Integer.parseInt(tokens[1]);
-                    taskList.markTask(taskId);
+                    taskList.markTask(tokens[1]);
 
                 } else if (command.equals("unmark")) {
-                    int taskId = Integer.parseInt(tokens[1]);
-                    taskList.unMarkTask(taskId);
+                    taskList.unMarkTask(tokens[1]);
 
                 } else if (command.equals("delete")) {
-                    int taskId = Integer.parseInt(tokens[1]);
-                    taskList.deleteTask(taskId);
+                    taskList.deleteTask(tokens[1]);
 
                 } else {
                     if (command.equals("event")) {

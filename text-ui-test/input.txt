@@ -17,4 +17,5 @@ event biology class
 delete 5
 mark 5
 unmark 5
+mark A
 bye

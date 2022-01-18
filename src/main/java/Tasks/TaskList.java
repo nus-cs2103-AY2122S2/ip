@@ -41,8 +41,9 @@ public class TaskList {
         showNumberOfTasks();
     }
 
-    public void markTask(int taskId) {
+    public void markTask(String param) {
         try {
+            int taskId = Integer.parseInt(param);
             int index = taskId - 1;
             Task t = getTaskByIndex(index);
             t.mark();
@@ -51,11 +52,14 @@ public class TaskList {
             System.out.format("   %s\n", t);
         } catch (TaskNotFoundException e) {
             System.out.println(e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("That doesn't seem like a number. Task numbers are integers!");
         }
     }
 
-    public void unMarkTask(int taskId) {
+    public void unMarkTask(String param) {
         try {
+            int taskId = Integer.parseInt(param);
             int index = taskId - 1;
             Task t = getTaskByIndex(index);
             t.unMark();
@@ -64,11 +68,14 @@ public class TaskList {
             System.out.format("   %s\n", t);
         } catch (TaskNotFoundException e) {
             System.out.println(e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("That doesn't seem like a number. Task numbers are integers!");
         }
     }
 
-    public void deleteTask(int taskId) {
+    public void deleteTask(String param) {
         try {
+            int taskId = Integer.parseInt(param);
             int index = taskId - 1;
             Task t = getTaskByIndex(index);
 
@@ -79,6 +86,8 @@ public class TaskList {
             showNumberOfTasks();
         } catch (TaskNotFoundException e) {
             System.out.println(e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("That doesn't seem like a number. Task numbers are integers!");
         }
     }
 
