@@ -1,3 +1,6 @@
+/**
+ * Task is contained in the TaskList: it contains description, done status and id.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -24,7 +27,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return isDone ? String.format("%d.[X] %s\n", id, description) :
-                        String.format("%d.[ ] %s\n", id, description);
+        return isDone ? String.format("%d.[X] %s", id, description) :
+                        String.format("%d.[ ] %s", id, description);
     }
 }

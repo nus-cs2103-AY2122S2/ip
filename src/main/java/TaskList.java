@@ -1,46 +1,40 @@
-import java.security.InvalidParameterException;
-
 /**
  * TaskList helps to store tasks given by the user. TaskList is contained in
  * the Bot class.
- * marker helps to keep track of the tasks done.
  * 1st method: add, which adds inputs by the user into the storage.
- * 2nd method: list, which shows what's in the storage currently.
+ * 2nd method: list, which shows what's in the TaskList currently.
  */
 
 public class TaskList {
-    String[] tasks;
-    boolean[] taskMarker;
-    int id = 0;
+    Task[] tasks;
+    int index = 0;
 
     /**
-     * Constructs a TaskList containing an array to contain tasks and mark tasks as done/not
+     * Constructs a TaskList containing an array to contain tasks
      */
     TaskList() {
-        this.tasks = new String[100];
-        this.taskMarker = new boolean[100];
+        this.tasks = new Task[100];
     }
 
     /**
-     * Adds a given input to the tasks array
+     * Adds a given input to the tasks array by creating a Task object
      * @param input String, given by user
      */
     void add(String input) {
         System.out.printf("added: %s\n", input);
-        tasks[id] = input;
-        id++;
+        Task newTask = new Task(input, index + 1);
+        tasks[index] = newTask;
+        index++;
     }
 
     /**
-     * Prints out every item contained in the tasks array with done / not done status
+     * Prints out every item contained in the tasks array
      */
     void list() {
-        for (int i = 0; i < id; i++) {
-            if (taskMarker[i]) {
-                System.out.printf("%d.[X] %s\n", i + 1, tasks[i]);
-            } else {
-                System.out.printf("%d.[ ] %s\n", i + 1, tasks[i]);
-            }
+        System.out.println("Here's what you need to do buddy:");
+        for (int i = 0; i < index; i++) {
+            Task currentTask = tasks[i];
+            System.out.println(currentTask);
         }
     }
 
@@ -56,11 +50,11 @@ public class TaskList {
             int taskIndex = Integer.parseInt(num) - 1;
             if (checkTaskExistence(taskIndex)) {
                 if (type.equals("mark")) {
-                    taskMarker[taskIndex] = true;
-                    System.out.printf("This is now done: \n[X] %s\n", tasks[taskIndex]);
+                    tasks[taskIndex].markDone();
+                    System.out.printf("This is now done: \n%s\n", tasks[taskIndex]);
                 } else if (type.equals("unmark")) {
-                    taskMarker[taskIndex] = false;
-                    System.out.printf("This is now undone: \n[ ] %s\n", tasks[taskIndex]);
+                    tasks[taskIndex].markNotDone();
+                    System.out.printf("This is now undone:\n%s\n", tasks[taskIndex]);
                 } else {
                     System.out.println("Please check the action input!");
                 }
@@ -78,6 +72,6 @@ public class TaskList {
      * @return boolean value indicating if task exists
      */
     boolean checkTaskExistence(int index) {
-        return (index <= id);
+        return (index <= this.index);
     }
 }
