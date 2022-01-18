@@ -1,14 +1,10 @@
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        ArrayList<String> objList = new ArrayList<>();
         System.out.println("Hello! I'm Whey\n" + "What can I do for you today?");
         Scanner userInput = new Scanner(System.in);
         try {
@@ -17,8 +13,17 @@ public class Duke {
                 if (nextLine.equals("bye")) {
                     System.out.println("  " + "Bye beautiful! hope to see you again hehe");
                     break;
+                } else if (nextLine.equals("list")) {
+                    int counter = 1;
+                    for (String s : objList) {
+                        System.out.println("  " + counter + ". " + s);
+                        counter++;
+                    }
+                } else if (nextLine.isBlank()) {
+                    System.out.println("You didn't key in anything!! Feed me with a task!");
                 } else {
-                    System.out.println("  " + nextLine);
+                    objList.add(nextLine);
+                    System.out.println("  " + "added: " + nextLine);
                 }
             }
         } catch (IllegalStateException | NoSuchElementException e) {
