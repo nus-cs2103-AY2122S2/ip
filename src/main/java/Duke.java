@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Duke {
     private static Task[] taskList = new Task[100];
     private static int taskNum = 0;
@@ -5,7 +7,6 @@ public class Duke {
     private static Scanner sc;
 
     public static void main(String[] args) {
-<<<<<<< HEAD
         String greet = "Hello! I'm Duke\n" + "What can I do for you?";
         System.out.println(greet);
         sc = new Scanner(System.in);
@@ -176,13 +177,3 @@ public class Duke {
         getUserInput();
     }
 }
-=======
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-    }
-}
->>>>>>> parent of 01f2bfb (duke chatbot)
