@@ -52,6 +52,17 @@ public class Bobby {
             throw new BobbyException("Description cannot be empty");
         }
     }
+    private static void delete(String task) throws BobbyException {
+        String[] inputs = task.split(" ", 2);
+        if (inputs.length > 1) {
+            int i = Integer.parseInt(inputs[1]) - 1;
+            System.out.println("Bobby has forgotten this task:\n" + taskArray.get(i));
+            taskArray.remove(i);
+            System.out.println("Bobby remembers " + taskArray.size() + " task(s).");
+        } else {
+            throw new BobbyException("Indicate which task should be deleted.");
+        }
+    }
 
     public static void main(String[] args) {
         System.out.println("Bobby greets you. Bobby is here to help.");
@@ -95,6 +106,12 @@ public class Bobby {
             } else if (command.equals("event")) {
                 try {
                     addEvent(userInput);
+                } catch (BobbyException e) {
+                    System.err.println(e);
+                }
+            } else if (command.equals("delete")) {
+                try {
+                    delete(userInput);
                 } catch (BobbyException e) {
                     System.err.println(e);
                 }
