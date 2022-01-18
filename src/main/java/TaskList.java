@@ -1,4 +1,4 @@
-public class List {
+public class TaskList {
     private final Task[] listOfTasks;
     private int numberOfTasks;
 
@@ -7,7 +7,7 @@ public class List {
      *
      * @param size Size of list of tasks.
      */
-    public List(int size) {
+    public TaskList(int size) {
         this.listOfTasks = new Task[size];
         this.numberOfTasks = 0;
     }
@@ -45,7 +45,7 @@ public class List {
                 + "     Here are the tasks in your list:\n");
         for (int i = 1; i <= this.numberOfTasks; i++) {
             Task currTask = this.listOfTasks[i];
-            String output = "     " + i + "." + currTask;
+            String output = "     " + i + "." + currTask + "\n";
             System.out.println(output);
         }
         System.out.println("    ____________________________________________________________\n");
@@ -77,5 +77,62 @@ public class List {
                 + "     OK, I've marked this task as not done yet:\n"
                 + "       [ ] " + currTask.getDescription() + "\n"
                 + "    ____________________________________________________________\n");
+    }
+
+    /**
+     * Adds the to-do task into the list
+     *
+     * @param userInput Command entered by the user that describes the task.
+     */
+    public void todo(String userInput) {
+        this.numberOfTasks++;
+
+        Task currentTask = new Todo(userInput);
+        this.listOfTasks[numberOfTasks] = currentTask;
+
+        String output = "    ____________________________________________________________\n"
+                + "     Got it. I've added this task:\n"
+                + "       " + currentTask + "\n"
+                + "     Now you have " + this.numberOfTasks + " task/s in the list.\n"
+                + "    ____________________________________________________________\n";
+        System.out.println(output);
+    }
+
+    /**
+     * Adds the task (which has a deadline) into the list
+     *
+     * @param userInput Command entered by the user that describes the task.
+     */
+    public void deadline(String userInput, String by) {
+        this.numberOfTasks++;
+
+        Task currentTask = new Deadline(userInput, by);
+        this.listOfTasks[numberOfTasks] = currentTask;
+
+        String output = "    ____________________________________________________________\n"
+                + "     Got it. I've added this task:\n"
+                + "       " + currentTask + "\n"
+                + "     Now you have " + this.numberOfTasks + " task/s in the list.\n"
+                + "    ____________________________________________________________\n";
+        System.out.println(output);
+    }
+
+    /**
+     * Adds the event task into the list
+     *
+     * @param userInput Command entered by the user that describes the task.
+     */
+    public void event(String userInput, String at) {
+        this.numberOfTasks++;
+
+        Task currentTask = new Event(userInput, at);
+        this.listOfTasks[numberOfTasks] = currentTask;
+
+        String output = "    ____________________________________________________________\n"
+                + "     Got it. I've added this task:\n"
+                + "       " + currentTask + "\n"
+                + "     Now you have " + this.numberOfTasks + " task/s in the list.\n"
+                + "    ____________________________________________________________\n";
+        System.out.println(output);
     }
 }

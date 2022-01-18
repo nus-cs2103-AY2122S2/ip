@@ -1,3 +1,5 @@
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -15,7 +17,7 @@ public class Duke {
     private static final String EXIT_MESSAGE = "    ____________________________________________________________\n"
             + "     Bye! Hope to see you again soon :D\n"
             + "    ____________________________________________________________";
-    private static List listOfTasks;
+    private static TaskList taskListOfTasks;
 
     /**
      * Greets the user by printing the default welcome message.
@@ -49,6 +51,21 @@ public class Duke {
         }
         return isInt;
     }
+
+    /**
+     * Removes the last character of a string
+     *
+     * @param str Target String
+     * @return New string after removing the last character of the original string
+     */
+    public static String removeLastChar(String str) {
+        if (str == null || str.length() == 0) {
+            return null;
+        } else {
+            return str.substring(0, str.length() - 1);
+        }
+    }
+
     /**
      * Calls different functions according to the user's input command.
      * Any command that is not in the correct form will be treated as a normal addition to the list.
@@ -57,35 +74,65 @@ public class Duke {
      */
     private static void parse(String userInput) {
         String[] wordArray = userInput.trim().split(" ");
-        if (wordArray[0].equals("list") & wordArray.length == 1) {
-            listOfTasks.display();
-        } else if (wordArray.length == 2) { // Checks if command contains 2 arguments
-            if (wordArray[0].equals("mark") & isInteger(wordArray[1])) { // Check if command is of the form "mark int"
-                int currTaskId = Integer.parseInt(wordArray[1]);
-                if (currTaskId > 0 & currTaskId <= listOfTasks.getNumberOfTasks()) {
-                    listOfTasks.mark(currTaskId); // Valid taskID, proceed to mark task
+        List<String> wordList = Arrays.asList(wordArray);
+        if (wordList.get(0).equals("list") & wordList.size() == 1) {
+            taskListOfTasks.display();
+        } else if (wordList.get(0).equals("todo") & wordList.size() > 1) {
+            taskListOfTasks.todo(userInput.substring(5));
+        } else if (wordList.get(0).equals("deadline") & wordList.size() >= 4 & wordList.contains("/by")) {
+            int separator = wordList.indexOf("/by");
+            String desc = "";
+            String dateTime = "";
+            for (int i = 1; i < separator; i++) {
+                desc += wordList.get(i);
+                desc += " ";
+            }
+            for (int i = separator + 1; i < wordList.size(); i++) {
+                dateTime += wordList.get(i);
+                dateTime += " ";
+            }
+            taskListOfTasks.deadline(removeLastChar(desc), removeLastChar(dateTime));
+        } else if (wordList.get(0).equals("event") & wordList.size() >= 4 & wordList.contains("/at")) {
+            int separator = wordList.indexOf("/at");
+            String desc = "";
+            String dateTime = "";
+            for (int i = 1; i < separator; i++) {
+                desc += wordList.get(i);
+                desc += " ";
+            }
+            for (int i = separator + 1; i < wordList.size(); i++) {
+                dateTime += wordList.get(i);
+                dateTime += " ";
+            }
+            taskListOfTasks.event(removeLastChar(desc), removeLastChar(dateTime));
+        } else if (wordList.size() == 2) { // Checks if command contains 2 arguments
+            if (wordList.get(0).equals("mark") & isInteger(wordList.get(1))) { // Check if command is of the
+                                                                               // form "mark int"
+                int currTaskId = Integer.parseInt(wordList.get(1));
+                if (currTaskId > 0 & currTaskId <= taskListOfTasks.getNumberOfTasks()) {
+                    taskListOfTasks.mark(currTaskId); // Valid taskID, proceed to mark task
                 } else {
-                    listOfTasks.add(userInput);
+                    taskListOfTasks.add(userInput);
                 }
-            } else if (wordArray[0].equals("unmark") & isInteger(wordArray[1])) { // Check if command is of the form
-                                                                                  // "unmark int"
+            } else if (wordList.get(0).equals("unmark") & isInteger(wordList.get(1))) { // Check if command is of the
+                                                                                        // form "unmark int"
                 int currTaskId = Integer.parseInt(wordArray[1]);
-                if (currTaskId > 0 & currTaskId <= listOfTasks.getNumberOfTasks()) {
-                    listOfTasks.unmark(currTaskId); // Valid taskID, proceed to unmark task
+                if (currTaskId > 0 & currTaskId <= taskListOfTasks.getNumberOfTasks()) {
+                    taskListOfTasks.unmark(currTaskId); // Valid taskID, proceed to unmark task
                 } else {
-                    listOfTasks.add(userInput);
+                    taskListOfTasks.add(userInput);
                 }
             } else {
-                listOfTasks.add(userInput);
+                taskListOfTasks.add(userInput);
             }
         } else {
-            listOfTasks.add(userInput);
+            taskListOfTasks.add(userInput);
         }
     }
 
     public static void main(String[] args) {
         greet();
-        listOfTasks = new List(100); // Assume there will be no more than 100 tasks
+        taskListOfTasks = new TaskList(100); // Assume there will be no more than 100 tasks
         Scanner sc = new Scanner(System.in);
         String userInput = sc.nextLine();
         while (!userInput.equals("bye")) {
