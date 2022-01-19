@@ -24,7 +24,7 @@ public class Duke {
                 printMsg(sb.toString());
             } else if (commandSplitBySpace[0].equals("mark")) {
                 if (commandSplitBySpace.length > 1) {
-                    if (tasks.size() != 0 && Integer.parseInt(commandSplitBySpace[1]) - 1 <= tasks.size()) {
+                    if (tasks.size() != 0 && Integer.parseInt(commandSplitBySpace[1]) - 1 < tasks.size()) {
                         Task t = tasks.get(Integer.parseInt(commandSplitBySpace[1]) - 1);
                         t.markAsDone();
                         printMsg("Good job! I've marked this task as done:\n" + t);
@@ -36,7 +36,7 @@ public class Duke {
                 }
             } else if (commandSplitBySpace[0].equals("unmark")) {
                 if (commandSplitBySpace.length > 1) {
-                    if (tasks.size() != 0 && Integer.parseInt(commandSplitBySpace[1]) - 1 <= tasks.size()) {
+                    if (tasks.size() != 0 && Integer.parseInt(commandSplitBySpace[1]) - 1 < tasks.size()) {
                         Task t = tasks.get(Integer.parseInt(commandSplitBySpace[1]) - 1);
                         t.markAsNotDone();
                         printMsg("Okay, I've marked this task as not done yet:\n" + t);
@@ -81,7 +81,17 @@ public class Duke {
                 } else {
                     printMsg("☹ OOPS!!! The description of a event cannot be empty.");
                 }
-
+            } else if (commandSplitBySpace[0].equals("delete")) {
+                if (commandSplitBySpace.length > 1) {
+                    if (tasks.size() != 0 && Integer.parseInt(commandSplitBySpace[1]) - 1 < tasks.size()) {
+                        Task t = tasks.get(Integer.parseInt(commandSplitBySpace[1]) - 1);
+                        removeTask(tasks, t);
+                    } else {
+                        printMsg("☹ OOPS!!! The task to be deleted does not exist.");
+                    }
+                } else {
+                    printMsg("☹ OOPS!!! The task to be deleted has to be indicated.");
+                }
             } else {
                 printMsg("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
@@ -109,5 +119,15 @@ public class Duke {
     public static void addTask(ArrayList<Task> tasks, Task t) {
         tasks.add(t);
         printMsg("Got it. I've added this task:\n  " + t + "\n" + "Now you have " + tasks.size() + " tasks in the list.");
+    }
+
+    /**
+     * Removes Task from the ArrayList of Task and prints the success message
+     * @param tasks ArrayList of Task that contains the list of tasks added so far
+     * @param t Task to be removed
+     */
+    public static void removeTask(ArrayList<Task> tasks, Task t) {
+        tasks.remove(t);
+        printMsg("Noted. I've removed this task:\n  " + t + "\n" + "Now you have " + tasks.size() + " tasks in the list.");
     }
 }
