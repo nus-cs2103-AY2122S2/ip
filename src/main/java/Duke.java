@@ -15,18 +15,18 @@ public class Duke {
             // "bye" to end the program
             switch (s[0]) {
                 case "bye":
-                    System.out.println("Bye!! See you again soon!!");
+                    System.out.println("    Bye!! See you again soon!!");
                     break label;
 
                 // if user requests to list their tasks
                 case "list": {
-                    System.out.println("Here are the tasks in your lists:\n");
+                    System.out.println("    Here are the tasks in your lists:\n");
                     int n = 1;
                     for (Task t : tasks) {
                         String by = "";
                         if (t.getType().equals("D") || t.getType().equals("E"))
                             by = t.getBy();
-                        System.out.println(n + ". [" + t.getType() + "][" + t.getDone() + "] " + t.desc + by);
+                        System.out.println("    " + n + ". [" + t.getType() + "][" + t.getDone() + "] " + t.desc + by);
                         n++;
                     }
                     break;
@@ -35,7 +35,7 @@ public class Duke {
                     int n = Integer.parseInt(s[1]) - 1;
                     tasks.set(n, tasks.get(n).mark());
                     Task temp = tasks.get(n);
-                    System.out.println("Alright! I've marked this as done:\n  [" + temp.getDone() + "] " + temp.desc);
+                    System.out.println("    Alright! I've marked this as done:\n  [" + temp.getDone() + "] " + temp.desc);
 
                     break;
                 }
@@ -43,7 +43,7 @@ public class Duke {
                     int n = Integer.parseInt(s[1]) - 1;
                     tasks.set(n, tasks.get(n).unmark());
                     Task temp = tasks.get(n);
-                    System.out.println("Alright! I've marked this as not done:\n  [" + temp.getDone() + "] " + temp.desc);
+                    System.out.println("    Alright! I've marked this as not done:\n  [" + temp.getDone() + "] " + temp.desc);
 
                     break;
                 }
@@ -51,43 +51,46 @@ public class Duke {
                 case "todo":
                     Arrays.toString(full.split(" ", 2));
                     s = full.split(" ", 2);
-                    System.out.println("Okay! I've added this task:\n  ");
-                    tasks.add(new ToDo(s[1]));
-//                System.out.println("full  " + s[1]);
-                    System.out.println("[T][ ] " + s[1]);
-                    items++;
-                    System.out.println("\nNow you have " + items + " tasks on your list");
+                    if(s.length < 2) {
+                        System.out.println("    Oops!! Description of ToDo can't be empty!!\n ");
+                    }
+                    else {
+                        System.out.println("    Okay! I've added this task:\n  ");
+                        tasks.add(new ToDo(s[1]));
+                        System.out.println("    [T][ ] " + s[1]);
+                        items++;
+                        System.out.println("\n    Now you have " + items + " tasks on your list");
+                    }
 
                     break;
                 // user add a event task
                 case "event":
                     Arrays.toString(full.split(" ", 2));
                     s = findDate(full.split(" "));
-                    System.out.println("Okay! I've added this task:\n  ");
+                    System.out.println("    Okay! I've added this task:\n  ");
                     tasks.add(new Event(s[0], s[1]));
 //                System.out.println("full  " + s[1]);
                     System.out.println("[E][ ] " + s[0]);
                     items++;
-                    System.out.println("\nNow you have " + items + " tasks on your list");
+                    System.out.println("\n    Now you have " + items + " tasks on your list");
 
                     break;
                 // user add a deadline task
                 case "deadline":
                     Arrays.toString(full.split(" ", 2));
                     s = findDate(full.split(" "));
-                    System.out.println("Okay! I've added this task:\n  ");
+                    System.out.println("    Okay! I've added this task:\n  ");
                     tasks.add(new Deadline(s[0], s[1]));
 //                System.out.println("full  " + s[1]);
-                    System.out.println("[D][ ] " + s[0]);
+                    System.out.println("    [D][ ] " + s[0]);
                     items++;
-                    System.out.println("\nNow you have " + items + " tasks on your list");
+                    System.out.println("\n    Now you have " + items + " tasks on your list");
 
                     break;
                 // user add items to list
                 default:
-                    System.out.println("     added: " + full);
-                    tasks.add(new Task(full));
-                    items++;
+                    System.out.println("    Sorry! I don't know what that means :'(");
+
                     break;
             }
             full = br.readLine();
