@@ -90,17 +90,20 @@ public class Duke {
                 System.out.println(errorMsg);
             } catch (MissingNameException e ) {
                 String errorMsg = "   __________________________________________________\n"
+                        + "       You have entered \"" + userInput + "\".\n"
                         + "       You have to include name after command!\n"
                         + "   __________________________________________________";
                 System.out.println(errorMsg);
             } catch (MissingEventDateException e) {
                 String errorMsg = "   __________________________________________________\n"
+                        + "       You have entered \"" + userInput + "\".\n"
                         + "       You have to include date after command!\n"
                         + "       Please follow format [event <name>/at <date>]\n"
                         + "   __________________________________________________";
                 System.out.println(errorMsg);
             } catch (MissingDeadlineDateException e ) {
                 String errorMsg = "   __________________________________________________\n"
+                        + "       You have entered \"" + userInput + "\".\n"
                         + "       You have to include deadline after command!\n"
                         + "       Follow format [deadline <name>/by <date>]\n"
                         + "   __________________________________________________";
