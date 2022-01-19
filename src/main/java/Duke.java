@@ -25,8 +25,6 @@ public class Duke {
         }
 
         while (!task.equals("bye")) {
-            System.out.println(task);
-            System.out.println(item);
             if (task.equals("todo")) {
                 if (!item.equals("")) {
                     tasks.add(new Todo(item));

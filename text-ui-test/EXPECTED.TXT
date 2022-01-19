@@ -1,7 +1,59 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+    ___________________________________
+    Yawn... You woke me up! Urgh
+    What do you need?
+    ___________________________________
+    ___________________________________
+    Ah sure. I've added this task:
+      [T][ ] sleep
+    Now you have 1 task in the list.
+    ___________________________________
+    ___________________________________
+    Ah sure. I've added this task:
+      [E][ ] sleep (at: 10pm)
+    Now you have 2 tasks in the list.
+    ___________________________________
+    ___________________________________
+    Ah sure. I've added this task:
+      [D][ ] sleep (by: 10pm)
+    Now you have 3 tasks in the list.
+    ___________________________________
+    ___________________________________
+    1. [T][ ] sleep
+    2. [E][ ] sleep (at: 10pm)
+    3. [D][ ] sleep (by: 10pm)
+    ___________________________________
+    ___________________________________
+    Good job for accomplishing something today! I've marked this task as done:
+      [T][X] sleep
+    ___________________________________
+    ___________________________________
+    Stop procrastinating you lazy prick! I've marked this task as not done yet:
+      [T][ ] sleep
+    ___________________________________
+    ___________________________________
+    Good job for accomplishing something today! I've marked this task as done:
+      [E][X] sleep (at: 10pm)
+    ___________________________________
+    ___________________________________
+    1. [T][ ] sleep
+    2. [E][X] sleep (at: 10pm)
+    3. [D][ ] sleep (by: 10pm)
+    ___________________________________
+    ___________________________________
+    Less work for you then less work for me then. I've removed this task:
+      [T][ ] sleep
+    Now you have 2 tasks in the list.
+    ___________________________________
+    ___________________________________
+    1. [E][X] sleep (at: 10pm)
+    2. [D][ ] sleep (by: 10pm)
+    ___________________________________
+    ___________________________________
+    Can read instructions or not? Todo cannot be empty :/
+    ___________________________________
+    ___________________________________
+    What is this? Can you read English?
+    ___________________________________
+    ___________________________________
+    Bye. I don't hope to see you again soon :D
+    ___________________________________
