@@ -19,4 +19,8 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    public String toString() {
+        return "[" +getStatusIcon()+ "] " + this.description;
+    }
+
 }

@@ -11,6 +11,10 @@ public class ListStorage {
         myTasks = new ArrayList<Task>();
     }
 
+    public int length() {
+        return myTasks.size();
+    }
+
     public String addToList(Task task){
         myStorage.add(task.description);
         myTasks.add(task);
@@ -22,10 +26,9 @@ public class ListStorage {
         StringBuilder toPrint = new StringBuilder();
         for (Task item : myTasks) {
             toPrint.append(spacing)
-                    .append(i).append(".[")
-                    .append(item.getStatusIcon())
-                    .append("] ")
-                    .append(item.description)
+                    .append(i)
+                    .append(".")
+                    .append(item.toString())
                     .append("\n");
             //System.out.println(i + ". " + item);
             i++;
@@ -36,10 +39,7 @@ public class ListStorage {
     public String printTask(int taskNumber) {
         Task currentTask = myTasks.get(taskNumber - 1);
         return spacing
-                + "  ["
-                + currentTask.getStatusIcon()
-                + "] "
-                + currentTask.description
+                + currentTask.toString()
                 + "\n";
     }
 
