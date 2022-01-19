@@ -7,11 +7,15 @@ ____________________________________________________________
 Hello! I'm Puke, your friendly neighbourhood chatbot!
 What do you want to do?
 ____________________________________________________________
+> Are you sure you're making sense?
+____________________________________________________________
 > You have no task right now!
 ____________________________________________________________
 > Got it. I've added this task:
   [T][ ] finish level-4
 Now you have 1 task in the list.
+____________________________________________________________
+> I don't need any argument for list..
 ____________________________________________________________
 > Here are the tasks you have:
 1.[T][ ] finish level-4
@@ -21,7 +25,7 @@ ____________________________________________________________
 Now you have 2 tasks in the list.
 ____________________________________________________________
 > Got it. I've added this task:
-  [E][ ] lecture (at: Fri 2-4pm)
+  [E][ ] lecture  (at: Fri 2-4pm)
 Now you have 3 tasks in the list.
 ____________________________________________________________
 > Kudos! I've marked this task as done:
@@ -30,10 +34,17 @@ ____________________________________________________________
 > Kudos! I've marked this task as done:
   [D][X] iP this week  (by: Thursday 2359h)
 ____________________________________________________________
+> Kudos! I've marked this task as done:
+  [E][X] lecture  (at: Fri 2-4pm)
+____________________________________________________________
 > Here are the tasks you have:
 1.[T][X] finish level-4
 2.[D][X] iP this week  (by: Thursday 2359h)
-3.[E][ ] lecture (at: Fri 2-4pm)
+3.[E][X] lecture  (at: Fri 2-4pm)
+____________________________________________________________
+> I'll need a description for the task..
+____________________________________________________________
+> I'll need a date/time for this task..
 ____________________________________________________________
 > Alright, I've marked this task as not done yet:
   [T][ ] finish level-4
@@ -41,7 +52,7 @@ ____________________________________________________________
 > Here are the tasks you have:
 1.[T][ ] finish level-4
 2.[D][X] iP this week  (by: Thursday 2359h)
-3.[E][ ] lecture (at: Fri 2-4pm)
+3.[E][X] lecture  (at: Fri 2-4pm)
 ____________________________________________________________
 > Alright bye. Come back to Puke anytime!
 ____________________________________________________________
