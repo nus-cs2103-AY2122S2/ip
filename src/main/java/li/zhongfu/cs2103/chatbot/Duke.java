@@ -3,6 +3,8 @@ package li.zhongfu.cs2103.chatbot;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Duke {
     private static final String HLINE = "____________________________________________________________";
@@ -14,6 +16,15 @@ public class Duke {
             System.out.println("    " + line);
         }
         System.out.println("    " + HLINE + "\n");
+    }
+    
+    private static List<String> enumerateList(List<String> list) {
+        List<String> enumerated = new ArrayList<>();
+        int idx = 0;
+        for (String str : list) {
+            enumerated.add(String.format("%d. %s", ++idx, str));
+        }
+        return enumerated;
     }
 
     public static void main(String[] args) throws IOException {
@@ -30,17 +41,22 @@ public class Duke {
         });
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        List<String> tasks = new ArrayList<>();
         while (true) {
            String input = br.readLine();
            switch (input) {
+               case "list":
+                   dialog(enumerateList(tasks).toArray(String[]::new));
+                   break;
                case "bye":
                    dialog(new String[] {
                            "Bye. Hope to see you again soon!"
                    });
                    System.exit(0);
                default:
+                   tasks.add(input);
                    dialog(new String[] {
-                           input
+                           String.format("added: %s", input)
                    });
            }
         }
