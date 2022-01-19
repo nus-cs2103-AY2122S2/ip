@@ -1,29 +1,36 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
         String welcome = "Hi! I'm Ruby, How can I help you?";
         printMsg(welcome);
         String command = "";
         Scanner sc = new Scanner(System.in);
+        ArrayList<String> textsToDisplay = new ArrayList<>();
         while (true) {
-            command = sc.next();
+            command = sc.nextLine();
             if (command.equals("bye")) {
                 break;
+            } else if (command.equals("list")) {
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < textsToDisplay.size(); i++) {
+                    if (i > 0) {
+                        sb.append("\n");
+                    }
+                    sb.append(Integer.toString(i + 1) + ". " + textsToDisplay.get(i));
+                }
+                printMsg(sb.toString());
+            } else {
+                textsToDisplay.add(command);
+                printMsg("added: " + command);
             }
-            printMsg(command);
         }
         printMsg("Okay, bye! Hope to see you again :)");
     }
 
     /**
-     * Prints the message that is parsed into this method.
+     * Prints the message that is parsed into this method with dividers.
      *
      * @param msg a String containing the message to be printed.
      */
