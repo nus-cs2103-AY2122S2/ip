@@ -121,7 +121,7 @@ public class Duke {
     }
 
     public static void handleUnmarkTask(String command) {
-        String taskString = command.substring(7);  // "unmark " is 5 letters
+        String taskString = command.substring(7);  // "unmark " is 7 letters
         int taskToUnmark;
         try {
             taskToUnmark = Integer.parseInt(taskString);
@@ -146,6 +146,33 @@ public class Duke {
             thisTask.setDone(false);
             prettyPrint(new String[] {"Ok, I've marked this task as not done yet:", thisTask.toString()});
         }
+    }
+
+    public static void handleDeleteTask(String command) {
+        String taskString = command.substring(7);  // "delete " is 7 letters
+        int taskToDelete;
+        try {
+            taskToDelete = Integer.parseInt(taskString);
+        }
+        catch (NumberFormatException err) {
+            prettyPrint("Not a valid task number!");  // handle exception
+            return;
+        }
+
+        if (1 <= taskToDelete && taskToDelete <= allTasks.size()) {
+            deleteTask(taskToDelete - 1);
+        } else {
+            prettyPrint(String.format("Task %d does not exist!", taskToDelete));
+        }
+    }
+
+    public static void deleteTask(int taskNum) {
+        Task thisTask = allTasks.get(taskNum);
+        allTasks.remove(taskNum);
+        prettyPrint(new String[] {
+                "Noted. I've removed this task:",
+                thisTask.toString(),
+                String.format("Now you have %d tasks in the list.", allTasks.size())});
     }
 
     public static void main(String[] args) throws DukeException {
@@ -175,6 +202,8 @@ public class Duke {
                 handleMarkTask(userInput);
             } else if (userInput.startsWith("unmark ")) {  // mark task as undone
                 handleUnmarkTask(userInput);
+            } else if (userInput.startsWith("delete ")) {  // delete task
+                handleDeleteTask(userInput);
             } else {  // add task
                 addTask(userInput);
             }
