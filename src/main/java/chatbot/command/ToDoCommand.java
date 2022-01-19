@@ -1,6 +1,5 @@
 package chatbot.command;
 
-import chatbot.task.Event;
 import chatbot.task.Task;
 import chatbot.task.ToDo;
 

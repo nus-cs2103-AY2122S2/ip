@@ -11,7 +11,7 @@ public class UnmarkCommand implements Command {
     public String execute(String[] input, ArrayList<Task> tasks) {
         try {
             int index = Integer.parseInt(input[1]);
-            Task task = tasks.get(index-1);
+            Task task = tasks.get(index - 1);
             task.setDone(false);
             return String.format("OK, I've marked this task as not done yet:\n  %s", task);
         } catch (Exception e) {

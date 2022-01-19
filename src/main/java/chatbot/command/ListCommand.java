@@ -11,7 +11,7 @@ public class ListCommand implements Command {
     public String execute(String[] input, ArrayList<Task> tasks) {
         String output = "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); ++i) {
-            output += String.format("%d. %s\n", i+1, tasks.get(i).toString());
+            output += String.format("%d. %s%s", i + 1, tasks.get(i).toString(), i < tasks.size() - 1 ? "\n" : "");
         }
         return output;
     }

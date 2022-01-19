@@ -43,7 +43,7 @@ public class ChatBot {
 
         // User interaction.
         Scanner scanner = new Scanner(System.in);
-        while (true) {
+        while (scanner.hasNext()) {
             String[] input = scanner.nextLine().split("\\s+");
 
             // Close application.
