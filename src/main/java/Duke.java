@@ -48,7 +48,7 @@ public class Duke {
                         try {
                             newTask = makeDeadline(s[0], s[1]);
                         } catch (IndexOutOfBoundsException ex) {
-                            System.out.println(new DeadlineIllegalArgumentException("Invalid Argument").toString());
+                            System.out.println(new DeadlineIllegalArgumentException("Invalid Argument"));
                             break;
                         }
                     } else{
@@ -56,13 +56,13 @@ public class Duke {
                         try {
                             newTask = makeEvent(s[0], s[1]);
                         } catch (IndexOutOfBoundsException ex) {
-                            System.out.println(new EventIllegalArgumentException("Invalid Argument").toString());
+                            System.out.println(new EventIllegalArgumentException("Invalid Argument"));
                             break;
                         }
                     }
                     toDoList.add(newTask);
                     System.out.println("okie!! (✿◠‿◠)  i have added: \n" +
-                            newTask.toString() + "\n" +
+                            newTask + "\n" +
                             "now there are " + toDoList.size() + " tasks in the list! get to work (ง︡'-'︠)ง");
                     break;
                 case "delete":
