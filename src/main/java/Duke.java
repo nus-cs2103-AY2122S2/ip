@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -10,6 +11,28 @@ public class Duke {
         System.out.println("Hey there! I'm Mickey, your Mouse assistant.\nWhat can I do for you today?\n");
         for (String in = sc.next(); !in.equals("bye"); in = sc.next()) {
             switch (in) {
+                case "todo":
+                    ToDo newToDo = new ToDo(sc.nextLine().trim());
+                    tasks.add(newToDo);
+                    System.out.println("\tAw, gee! New todo:\n\t\t" + newToDo);
+                    System.out.println("\tHooray! You now have " + tasks.size() + " tasks");
+                    break;
+                case "deadline":
+                    String[] deadline = Arrays.stream(sc.nextLine().split("/by", 2)).map(String::trim)
+                            .toArray(String[]::new);
+                    Deadline newDeadline = new Deadline(deadline);
+                    tasks.add(newDeadline);
+                    System.out.println("\tAw, gee! New deadline:\n\t\t" + newDeadline);
+                    System.out.println("\tHooray! You now have " + tasks.size() + " tasks");
+                    break;
+                case "event":
+                    String[] event = Arrays.stream(sc.nextLine().split("/at", 2)).map(String::trim)
+                            .toArray(String[]::new);
+                    Event newEvent = new Event(event);
+                    tasks.add(new Event(event));
+                    System.out.println("\tAw, gee! New event:\n\t\t" + newEvent);
+                    System.out.println("\tHooray! You now have " + tasks.size() + " tasks");
+                    break;
                 case "list":
                     System.out.println("\tOh boy! Here are your tasks:");
                     for (int i = 0; i < tasks.size(); i++) {
@@ -25,9 +48,7 @@ public class Duke {
                     System.out.println("\t\t" + markAsDone(sc.nextInt()));
                     break;
                 default:
-                    Task newTask = new Task(in);
-                    tasks.add(newTask);
-                    System.out.println("\tAw, gee! New task: " + in);
+                    System.out.println("\tOh no! This is a disaster! I don't know what that means");
                     break;
             }
         }
