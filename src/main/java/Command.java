@@ -62,6 +62,15 @@ public class Command {
                 Deadline deadline = new Deadline(argument, extraInfo);
                 Task.addToList(deadline);
                 break;
+            case "delete":
+                if (argument == null) {
+                    System.out.println(" Please enter the task number as well!");
+                    System.out.println(" Command format: delete task-number");
+                    break;
+                }
+                System.out.println(" Okay, I've deleted this task.");
+                Task.removeFromList(Integer.parseInt(argument) - 1);
+                break;
             default:
                 System.out.println(" Sorry, I don't understand what that means.");
                 break;

@@ -60,6 +60,12 @@ public class Task {
         taskCount++;
     }
 
+    public static void removeFromList(int index) {
+        System.out.println("  " + taskList.get(index).toString());
+        taskList.remove(index);
+        taskCount--;
+    }
+
     public static void printAllTasks() {
         if (taskCount == 0) {
             System.out.println(" You have not added any tasks yet.");
