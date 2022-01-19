@@ -1,14 +1,24 @@
 Greetings from Ann
 What can I do for you?
+Currently, you have no tasks :)
+Oops! Please add a description for the todo!
 Alright! I've added this task:
 [T][ ] buy book
 Now there is 1 task in your list.
+Oops! Please use the following format:
+deadline [content] /by [deadline]
+Oops! Please use the following format:
+deadline [content] /by [deadline]
+Oops! Please add a description for the deadline!
 Alright! I've added this task:
 [D][ ] finish homework (by Saturday)
 Now there are 2 tasks in your list.
+Oops! Please enter a valid command!
+Oops! Please enter a valid command!
 Alright! I've added this task:
 [E][ ] meet Prof (at 10am Monday)
 Now there are 3 tasks in your list.
+Oops! Please add a time for the event!
 Here are the tasks in your list:
 1. [T][ ] buy book
 2. [D][ ] finish homework (by Saturday)
@@ -19,6 +29,7 @@ Alright! I've marked this task as done:
 [E][X] meet Prof (at 10am Monday)
 Alright! I've marked this task as not done yet:
 [E][ ] meet Prof (at 10am Monday)
+Oops! Please enter a number between 1 and 3!
 Here are the tasks in your list:
 1. [T][ ] buy book
 2. [D][X] finish homework (by Saturday)

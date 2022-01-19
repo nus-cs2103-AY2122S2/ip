@@ -1,9 +1,18 @@
+list
+todo
 todo buy book
+deadline
+deadline finish homework
+deadline  /by Saturday
 deadline finish homework /by Saturday
+blah
+boo
 event meet Prof /at 10am Monday
+event festival /at
 list
 mark 2
 mark 3
 unmark 3
+mark 4
 list
 bye
