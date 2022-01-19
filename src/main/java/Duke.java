@@ -24,8 +24,7 @@ public class Duke {
                 System.out.println(lines);
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0;i < counter;i++) {
-                    System.out.println(Integer.toString(i + 1) +
-                            ".[" + tasks[i].getStatusIcon() + "] " + tasks[i].getDescription());
+                    System.out.println(Integer.toString(i + 1) + "." + tasks[i].toString());
                 }
                 System.out.println(lines);
 
@@ -35,7 +34,7 @@ public class Duke {
                 if (number < counter) {
                     tasks[number].markAsDone();
                     System.out.println(lines + "\nNice! I've marked this task as done:\n" +
-                            "[X] " + tasks[number].getDescription() + "\n" + lines);
+                            tasks[number].toString() + "\n" + lines);
                 }
                 else {
                     System.out.println(lines + "\nNo such task exists. \n" + lines);
@@ -46,42 +45,39 @@ public class Duke {
                 if (number < counter) {
                     tasks[number].markAsNotDone();
                     System.out.println(lines + "\nOk, I've marked this task as not done yet:\n" +
-                            "[ ] " + tasks[number].getDescription() + "\n" + lines);
+                            tasks[number].toString() + "\n" + lines);
                 }
                 else {
                     System.out.println(lines + "\nNo such task exists. \n" + lines);
                 }
             }
-            else {
-                System.out.println(lines + "\nadded: " + input + "\n" + lines);
-                tasks[counter++] = new Task(input);
+            else if (split[0].equals("todo")){
+                tasks[counter++] = new Todo(input.replace("todo ",""));
+                System.out.println(lines + "\nGot it. I've added this task:\n" + tasks[counter - 1].toString()
+                        + "\n" + lines);
+            }
+            else if (split[0].equals("deadline")){
+                String[] newSplit = input.split("/by ");
+                if (newSplit.length > 1) {
+                    tasks[counter++] = new Deadline(newSplit[0].replace("deadline ",""),newSplit[1]);
+                    System.out.println(lines + "\nGot it. I've added this task:\n" + tasks[counter - 1].toString()
+                            + "\n" + lines);
+                }
+                else {
+                    System.out.println(lines + "\nInvalid input \n" + lines);
+                }
+            }
+            else if (split[0].equals("event")){
+                String[] newSplit = input.split("/at ");
+                if (newSplit.length > 1) {
+                    tasks[counter++] = new Event(newSplit[0].replace("event ", ""), newSplit[1]);
+                    System.out.println(lines + "\nGot it. I've added this task:\n" + tasks[counter - 1].toString()
+                            + "\n" + lines);
+                }
+                else {
+                    System.out.println(lines + "\nInvalid input \n" + lines);
+                }
             }
         }
-    }
-}
-
-class Task {
-    String description;
-    boolean isDone;
-
-    public Task(String description) {
-        this.description = description;
-        this.isDone = false;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    public String getStatusIcon() {
-        return (isDone ? "X" : " ");
-    }
-
-    public void markAsDone() {
-        this.isDone = true;
-    }
-
-    public void markAsNotDone() {
-        this.isDone = false;
     }
 }
