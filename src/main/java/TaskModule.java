@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class TaskModule {
   private ArrayList<Task> taskList;
+  public static enum ListOperation {MARK, UNMARK, DELETE}
 
   public TaskModule() {
     this.taskList = new ArrayList<>();
@@ -15,22 +16,18 @@ public class TaskModule {
         task = new Todo(str.substring(5));
         break;
       case DEADLINE :
-        task = new Deadline(str.substring(9, str.lastIndexOf(" /by ")), str.substring(str.lastIndexOf(" /by ") + 5));
+        task = new Deadline(str.substring(9, str.indexOf(" /by ")), str.substring(str.indexOf(" /by ") + 5));
         break;
       case EVENT :
-        task = new Event(str.substring(6, str.lastIndexOf(" /at ")), str.substring(str.lastIndexOf(" /at ") + 5));
+        task = new Event(str.substring(6, str.indexOf(" /at ")), str.substring(str.indexOf(" /at ") + 5));
         break;
     }
-
-    if (task != null) {
       taskList.add(task);
       System.out.println(String.format("Got it. I've added this task:\n\t%s\nNow you have %d task(s) in the list", task.toString(), taskList.size()));
-    }
   }
 
   public Task.TaskType taskIdentifier(String str) throws DukeException {
     Task.TaskType type = null;
-    if (str.matches("(todo|deadline|event).*")) {
       if (str.startsWith("todo")) {
         if (!str.matches("todo\\s\\S+.*")) {
           throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -41,69 +38,44 @@ public class TaskModule {
           throw new DukeException("☹ OOPS!!! The description/date of a deadline cannot be empty.");
         }
         type = Task.TaskType.DEADLINE;
-      } else if (str.startsWith("event ")) {
+      } else if (str.startsWith("event")) {
         if (!str.matches("event\\s\\S+.*\\s/at\\s\\S+.*")) {
           throw new DukeException("☹ OOPS!!! The description/location of a event cannot be empty.");
         }
         type = Task.TaskType.EVENT;
       }
-    } else {
-      throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-    }
 
     return type;
   }
 
-  public void markHandler(String[] strArr) throws DukeException{
+  public void listHandler(String[] strArr, ListOperation operation) throws DukeException {
     if (strArr.length < 2) {
-      throw new DukeException("Please choose which task you would like to mark.");
+      throw new DukeException(String.format("Please choose which task you would like to %s.", operation.name().toLowerCase()));
+    } else if (taskList.size() < 1) {
+      throw new DukeException("Your list is empty.");
     } else {
       String listNumber = strArr[1];
       if ((listNumber.chars().allMatch(Character::isDigit))
           && (Integer.parseInt(listNumber) <= taskList.size()) && strArr.length == 2) {
         int num = Integer.parseInt(listNumber);
         Task currTask = taskList.get(num - 1);
-        currTask.setStatus(true);
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(currTask.toString());
+        switch (operation) {
+          case MARK:
+            currTask.setStatus(true);
+            System.out.println("Nice! I've marked this task as done:");
+            break;
+          case UNMARK:
+            currTask.setStatus(false);
+            System.out.println("OK, I've marked this task as not done yet:");
+            break;
+          case DELETE:
+            taskList.remove(num - 1);
+            System.out.println("Noted. I've removed this task:");
+            break;
+        }
+        System.out.println("\t" + currTask.toString());
       } else {
-        throw new DukeException("Invalid task chosen to be marked, please try again");            }
-    }
-  }
-
-  public void unmarkHandler(String[] strArr) throws DukeException{
-    if (strArr.length < 2) {
-      throw new DukeException("Please choose which task you would like to unmark.");
-    } else {
-      String listNumber = strArr[1];
-      if ((listNumber.chars().allMatch(Character::isDigit))
-          && (Integer.parseInt(listNumber) <= taskList.size()) && strArr.length == 2) {
-        int num = Integer.parseInt(listNumber);
-        Task currTask = taskList.get(num - 1);
-        currTask.setStatus(false);
-        System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println(currTask.toString());
-      } else {
-        throw new DukeException("Invalid task chosen to be unmarked, please try again");
-      }
-    }
-  }
-
-  public void deleteHandler(String[] strArr) throws DukeException {
-    if (strArr.length < 2) {
-      throw new DukeException("Please choose which task you would like to delete.");
-    } else {
-      String listNumber = strArr[1];
-      if ((listNumber.chars().allMatch(Character::isDigit))
-          && (Integer.parseInt(listNumber) <= taskList.size()) && strArr.length == 2) {
-        int num = Integer.parseInt(listNumber);
-        Task currTask = taskList.get(num - 1);
-        taskList.remove(num - 1);
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(currTask.toString());
-      } else {
-        throw new DukeException("Invalid task chosen to be deleted, please try again");
-      }
+        throw new DukeException("Invalid task chosen, please try again");            }
     }
   }
 

@@ -29,13 +29,13 @@ public class CommandParser {
             if (commandsArr.length == 1) taskModule.displayList();
               break;
           case "mark":
-            taskModule.markHandler(commandsArr);
+            taskModule.listHandler(commandsArr, TaskModule.ListOperation.MARK);
             break;
           case "unmark":
-            taskModule.unmarkHandler(commandsArr);
+            taskModule.listHandler(commandsArr, TaskModule.ListOperation.UNMARK);
             break;
           case "delete":
-            taskModule.deleteHandler(commandsArr);
+            taskModule.listHandler(commandsArr, TaskModule.ListOperation.DELETE);
             break;
           case "todo":
           case "deadline":

@@ -16,7 +16,7 @@ Now you have 1 task(s) in the list
 ----------------------------------------
 
 Nice! I've marked this task as done:
-[D][X] iP (by: Feb)
+	[D][X] iP (by: Feb)
 
 ----------------------------------------
 
@@ -25,7 +25,7 @@ Nice! I've marked this task as done:
 ----------------------------------------
 
 OK, I've marked this task as not done yet:
-[D][ ] iP (by: Feb)
+	[D][ ] iP (by: Feb)
 
 ----------------------------------------
 
@@ -52,7 +52,7 @@ Now you have 3 task(s) in the list
 ----------------------------------------
 
 Nice! I've marked this task as done:
-[T][X] cut hair
+	[T][X] cut hair
 
 ----------------------------------------
 
@@ -63,7 +63,7 @@ Nice! I've marked this task as done:
 ----------------------------------------
 
 Noted. I've removed this task:
-[T][X] cut hair
+	[T][X] cut hair
 
 ----------------------------------------
 
