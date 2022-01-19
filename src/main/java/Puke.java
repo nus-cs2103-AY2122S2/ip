@@ -20,25 +20,45 @@ public class Puke {
 
     while (true) {
       System.out.print("> ");
+
       String[] input = sc.nextLine().split(" ", 2);
       String command = input[0]; // get the first word of the input
 
       if (command.equals("bye")) break;
-      else if (command.equals("list")) list_tasks(tasks);
-      else {
-        String argument = input[1]; // remaining input
 
+      String argument = null;
+      if (input.length > 1) {
+        argument = input[1]; // remaining input (if any)
+      }
+
+      try {
         switch (command) {
+          case "list":
+            if (argument == null) {
+              list_tasks(tasks);
+            } else {
+              System.out.println("I don't need any argument for list..");
+            }
+            break;
           case "mark":
             mark_task(tasks, Integer.parseInt(argument));
             break;
           case "unmark":
             unmark_task(tasks, Integer.parseInt(argument));
             break;
-          default:
+          case "todo":
+          case "deadline":
+          case "event":
             add_task(tasks, command, argument);
             break;
+          default:
+            System.out.println("Are you sure you're making sense?");
+            break;
         }
+      } catch (DukeException e) {
+        System.out.println(e.getMessage());
+      } catch (NumberFormatException e) {
+        System.out.println("I'll need a valid task number for it..");
       }
 
       System.out.print(line);
@@ -60,24 +80,45 @@ public class Puke {
     }
   }
 
-  public static void mark_task(ArrayList<Task> tasks, int taskNo) {
+  public static void mark_task(ArrayList<Task> tasks, int taskNo) throws DukeException {
+    if (taskNo < 1 || taskNo > tasks.size()) {
+      throw new DukeException(String.format("%d is not a valid task number!", taskNo));
+    }
     Task t = tasks.get(taskNo - 1);
+    if (t.isDone()) {
+      throw new DukeException(String.format("Task #%d is already marked as done!", taskNo));
+    }
     t.mark();
     System.out.println("Kudos! I've marked this task as done:\n  " + t);
   }
 
-  public static void unmark_task(ArrayList<Task> tasks, int taskNo) {
+  public static void unmark_task(ArrayList<Task> tasks, int taskNo) throws DukeException {
+    if (taskNo < 1 || taskNo > tasks.size()) {
+      throw new DukeException(String.format("%d is not a valid task number!", taskNo));
+    }
     Task t = tasks.get(taskNo - 1);
+    if (!t.isDone()) {
+      throw new DukeException(String.format("Task #%d is not yet marked as done!", taskNo));
+    }
     t.unmark();
     System.out.println("Alright, I've marked this task as not done yet:\n  " + t);
   }
 
-  public static void add_task(ArrayList<Task> tasks, String type, String args) {
+  public static void add_task(ArrayList<Task> tasks, String type, String args) throws DukeException {
+    if (args == null) {
+      throw new DukeException("I'll need a description for the task..");
+    }
+
     Task t;
     if (type.equals("todo")) {
       t = new Todo(args);
     } else {
-      String[] taskDetail = args.split("/");
+      String[] taskDetail = args.split("/.. ");
+
+      if (taskDetail.length < 2) {
+        throw new DukeException("I'll need a date/time for this task..");
+      }
+
       if (type.equals("deadline")) {
         t = new Deadline(taskDetail[0], taskDetail[1].split(" ", 2)[1]);
       } else {
@@ -87,7 +128,7 @@ public class Puke {
 
     tasks.add(t);
     System.out.println("Got it. I've added this task:\n  " + t
-                      + "\nNow you have " + Task.getNoOfTasks() +
-                      (Task.getNoOfTasks() <= 1 ? " task" : " tasks") + " in the list.");
+                      + "\nNow you have " + Task.getNoOfTasks()
+                      + (Task.getNoOfTasks() <= 1 ? " task" : " tasks") + " in the list.");
   }
 }
