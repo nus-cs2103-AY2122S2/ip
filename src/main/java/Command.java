@@ -14,7 +14,9 @@ public class Command {
         }
         if (extraArgs.length > 1) {
             this.argument = inputArgs[1].substring(0, inputArgs[1].indexOf("/") );
-            this.extraInfo = extraArgs[1].trim().split(" ", 2)[1];
+            if (extraArgs[1].trim().split(" ", 2).length > 1) {
+                this.extraInfo = extraArgs[1].trim().split(" ", 2)[1];
+            }
         }
     }
 
@@ -28,14 +30,23 @@ public class Command {
                 System.out.println(" See you again! :)");
                 System.exit(0);
             case "list":
-                System.out.println(" Here are your tasks. Make things happen!");
                 Task.printAllTasks();
                 break;
             case "mark":
+                if (argument == null) {
+                    System.out.println(" Please enter the task number as well!");
+                    System.out.println(" Command format: mark task-number");
+                    break;
+                }
                 System.out.println(" Well done!");
                 Task.markAsDone(Integer.parseInt(argument) - 1);
                 break;
             case "unmark":
+                if (argument == null) {
+                    System.out.println(" Please enter the task number as well!");
+                    System.out.println(" Command format: unmark task-number");
+                    break;
+                }
                 System.out.println(" Oops! Fixed that for you.");
                 Task.markAsNotDone(Integer.parseInt(argument) - 1);
                 break;
@@ -52,8 +63,7 @@ public class Command {
                 Task.addToList(deadline);
                 break;
             default:
-                Todo task = new Todo(input);
-                Task.addToList(task);
+                System.out.println(" Sorry, I don't understand what that means.");
                 break;
         }
         System.out.println("__________________________________________________________");

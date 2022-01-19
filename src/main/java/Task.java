@@ -24,6 +24,30 @@ public class Task {
     }
 
     public static void addToList(Task task) {
+        if (task.description == null) {
+            System.out.println(" Please enter the description as well!");
+            System.out.println(" Command format: task-type task-description /by task-duration OR /at task-deadline");
+            return;
+        }
+
+        if (task instanceof Event) {
+            Event event = (Event) task;
+            if (event.duration == null) {
+                System.out.println(" Please enter the duration as well!");
+                System.out.println(" Command format: task-type task-description /by task-duration");
+                return;
+            }
+        }
+
+        if (task instanceof Deadline) {
+            Deadline taskWithDeadline = (Deadline) task;
+            if (taskWithDeadline.deadline == null) {
+                System.out.println(" Please enter the deadline as well!");
+                System.out.println(" Command format: task-type task-description /at task-deadline");
+                return;
+            }
+        }
+
         if (taskCount == 0) {
             System.out.println(" Added! Now you have 1 item in your tasks list.");
         } else {
@@ -34,6 +58,11 @@ public class Task {
     }
 
     public static void printAllTasks() {
+        if (taskCount == 0) {
+            System.out.println(" You have not added any tasks yet.");
+            return;
+        }
+        System.out.println(" Here are your tasks. Make things happen!");
         for (int i = 0; i < taskCount; i++) {
             System.out.println("   " + (i + 1) + "." + taskList[i].toString());
         }
