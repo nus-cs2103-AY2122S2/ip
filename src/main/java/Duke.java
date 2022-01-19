@@ -23,7 +23,7 @@ public class Duke {
      */
     public void openingMessage() {
         System.out.println(logo);
-        System.out.println("Greetings, I'm Taskmaster, former S.H.I.E.L.D. agent turned mercenary and assassin");
+        System.out.println("Greetings, I'm Taskmaster, I'm super grumpy 24/7");
         System.out.println("....................................");
         System.out.println("Okay, what do you want?");
     }
