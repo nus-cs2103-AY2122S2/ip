@@ -18,8 +18,7 @@ public class Narcibot {
 
     private static boolean command(String command) {
         boolean end = false;
-        String delims ="[ ]+";
-        String[] tokens = command.split(delims);
+        String[] tokens = command.split(" ",2);
         switch(tokens[0]) {
             case "bye":
                 System.out.println("So you finally decided to leave. Goodbye! Not that I really care.");
@@ -28,21 +27,33 @@ public class Narcibot {
             case "list":
                 System.out.println("Do I have to remind you again?");
                 for(int i = 0; i < index; i++) {
-                    String status = list[i].getStatus() ? "x" : " ";
-                    System.out.println((i+1) + ".[" + status + "] " + list[i].getName());
+                    System.out.println((i+1) + "." + list[i].getStatus());
                 }
                 break;
             case "mark":
                 System.out.println("You finally did something? I'll mark it for you then.");
                 list[Integer.parseInt((tokens[1])) - 1].markDone();
-                String message1 = "[x] " + list[Integer.parseInt(tokens[1]) - 1].getName();
-                System.out.println(message1);
                 break;
             case "unmark":
                 System.out.println("As expected... another task that wasn't finished at all.");
                 list[Integer.parseInt((tokens[1])) - 1].markNotDone();
-                String message2 = "[ ] " + list[Integer.parseInt(tokens[1]) - 1].getName();
-                System.out.println(message2);
+                break;
+            case "todo":
+                System.out.println("I have added this task cause you won't remember it.");
+                list[index++] = new ToDo(tokens[1]);
+                System.out.println("You now have "+index+ " tasks");
+                break;
+            case "deadline":
+                System.out.println("I have added this task cause you won't remember it.");
+                String[] tokens2 = tokens[1].split("/by",2);
+                list[index++] = new Deadline(tokens2[0],tokens2[1]);
+                System.out.println("You now have "+index+ " tasks");
+                break;
+            case "event" :
+                System.out.println("I have added this task cause you won't remember it.");
+                String[] tokens3 = tokens[1].split("/at",2);
+                list[index++] = new Event(tokens3[0],tokens3[1]);
+                System.out.println("You now have "+index+ " tasks");
                 break;
             default:
                 System.out.println("added: " + command);

@@ -1,24 +1,23 @@
 public class Task {
     private String name;
     private boolean done;
-    Task(String name) {
+    public Task(String name) {
         this.name = name;
         this.done = false;
     }
 
-    public boolean getStatus() {
-        return done;
+    public String getStatus() {
+        String status = done ? "[X] " : "[ ] ";
+        return status + name;
     }
 
     public void markDone() {
+        System.out.print("[X] " + name);
         done = true;
     }
 
     public void markNotDone() {
+        System.out.print("[ ] " + name);
         done = false;
-    }
-
-    public String getName() {
-        return name;
     }
 }
