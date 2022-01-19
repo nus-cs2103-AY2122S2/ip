@@ -19,6 +19,7 @@ public class Duke {
     private static final String LIST_COMMAND = "list";
     private static final String MARK_COMMAND = "mark";
     private static final String UNMARK_COMMAND = "unmark";
+    private static final String DELETE_COMMAND = "delete";
     private static final String TODO_COMMAND = "todo";
     private static final String DEADLINE_COMMAND = "deadline";
     private static final String EVENT_COMMAND = "event";
@@ -88,6 +89,15 @@ public class Duke {
                 try {
                     idx = Integer.parseInt(argv[1]);
                     result = this.list.unmarkTask(idx);
+                } catch (IndexOutOfBoundsException e) {
+                    result = e.getMessage();
+                }
+                break;
+
+            case DELETE_COMMAND:
+                try {
+                    idx = Integer.parseInt(argv[1]);
+                    result = this.list.delete(idx);
                 } catch (IndexOutOfBoundsException e) {
                     result = e.getMessage();
                 }

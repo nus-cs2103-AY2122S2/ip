@@ -102,6 +102,13 @@ public class DukeList {
                 + String.format("\t%s", task);
     }
 
+    public String delete(int idx) throws IndexOutOfBoundsException {
+        Task task = this.list.remove(idx - 1);
+        return "Noted. I've removed this task:\n"
+                + String.format("\t%s\n", task)
+                + String.format("Now you have %d tasks in the list.", this.list.size());
+    }
+
     @Override
     public String toString() {
         int size = this.list.size();
