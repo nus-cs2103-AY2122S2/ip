@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Duke {
     public static void main(String[] args) {
         ArrayList<Task> taskList = new ArrayList<>();
-        System.out.println("Hello! I'm Whey\n" + "What can I do for you today?");
+        System.out.println("YO WHASSUPPP I'm Productivitisation\n" + "What can I do for you today?");
         Scanner userInput = new Scanner(System.in);
         DukeManager dukeManager = new DukeManager();
         while (true) {
@@ -15,7 +15,7 @@ public class Duke {
                 int counter = 1;
                 //Exiting the code when bye is inputted
                 if ((testedString.replaceAll("\\s+", "")).equals("bye")) {
-                    System.out.println("  " + "Bye beautiful! hope to see you again hehe");
+                    System.out.println("  " + "That's all?? lame!!!");
                     break;
                     //display the list of tasks
                 } else if ((testedString.replaceAll("\\s+", "")).equals("list")) {
@@ -24,33 +24,39 @@ public class Duke {
                         System.out.println("  " + counter + "." + s);
                         counter++;
                     }
-                    //unmarking a task
+                    //todocommand
+                } else if (testedString.startsWith("delete")) {
+                    delete(testedString, taskList);
+                    counter--;
                 } else if (testedString.startsWith("todo")) {
                     todo(testedString, taskList);
+                    //deadline command
                 } else if (testedString.startsWith("deadline")) {
                     deadline(testedString, taskList);
+                    //event command
                 } else if (testedString.startsWith("event")) {
                     event(testedString, taskList);
+                    //unmark commnd
                 } else if (testedString.startsWith("unmark")) {
                     int taskNumber = intSearch(testedString) - 1;
-                    if (taskNumber <= taskList.size()) {
+                    if (taskNumber < taskList.size() && taskNumber >= 0) {
                         Task intendedTask = taskList.get(taskNumber);
                         intendedTask.setDone(false);
-                        System.out.println("  " + "Ok! I've marked this task as not done yet:\n"
+                        System.out.println("  " + "AIYO! I've marked this task as not done yet:\n"
                                 + "    " + intendedTask);
                     } else {
-                        System.out.println("Task does not exist! Check again hehe");
+                        System.out.println("EH HULLO!! Task does not exist! Check again hehe");
                     }
-                    //marking a task
+                    //mark command
                 } else if (testedString.startsWith("mark")) {
                     int taskNumber = intSearch(testedString) - 1;
-                    if (taskNumber <= taskList.size()) {
+                    if (taskNumber < taskList.size() && taskNumber >= 0) {
                         Task intendedTask = taskList.get(taskNumber);
                         intendedTask.setDone(true);
-                        System.out.println("  " + "Nice! I've marked this task as done:\n"
+                        System.out.println("  " + "SOLID! I've marked this task as done:\n"
                                 + "    " + intendedTask);
                     } else {
-                        System.out.println("Task does not exist! Check again hehe");
+                        System.out.println("EH HULLO!! Task does not exist! Check again hehe");
                     }
                 }
             } catch (DukeException e) {
@@ -60,21 +66,27 @@ public class Duke {
     }
 
     public static int intSearch(String text) {
-        //replace non digit number with empty space
-        text = text.replaceAll("[^\\d]", "");
-        //replace every white space with empty space
-        text = text.replaceAll(" +", "");
-        if (text.equals("")) {
-            return -1;
+        String[] splicedString = text.split(" ");
+        return Integer.parseInt(splicedString[1]);
+    }
+
+    public static void delete(String text, ArrayList<Task> list) {
+        int indexToDelete = intSearch(text) - 1;
+        if (indexToDelete < 0 || indexToDelete >= list.size()) {
+            System.out.println("EH HULLO!! Task does not exist! Check again hehe");
+        } else {
+            Task deleteTask = list.get(indexToDelete);
+            list.remove(indexToDelete);
+            System.out.println("   " + "ALRIGHTY. I've removed this task:\n"
+                    + "    " + deleteTask + "\n" + "   Now you have " + list.size() + " tasks in the list.");
         }
-        return Integer.parseInt(text);
     }
 
     public static void todo(String text, ArrayList<Task> list) {
         String splicedString = text.substring(5);
         ToDo freshTodo = new ToDo(splicedString);
         list.add(freshTodo);
-        System.out.println("   " + "Got it. I've added this task:\n"
+        System.out.println("   " + "ALRIGHTY. I've added this task:\n"
                 + "    " + freshTodo + "\n" +  "   Now you have " + list.size() + " tasks in the list.");
     }
 
@@ -84,7 +96,7 @@ public class Duke {
         String dueDate = splicedString[1];
         Deadline freshDeadline = new Deadline(splicedDescription, dueDate);
         list.add(freshDeadline);
-        System.out.println("   " + "Got it. I've added this task:\n"
+        System.out.println("   " + "ALRIGHTY. I've added this task:\n"
                 + "    " + freshDeadline + "\n" +  "   Now you have " + list.size() + " tasks in the list.");
     }
 
@@ -94,7 +106,7 @@ public class Duke {
         String dueDate = splicedString[1];
         Event freshEvent = new Event(splicedDescription, dueDate);
         list.add(freshEvent);
-        System.out.println("   " + "Got it. I've added this task:\n"
+        System.out.println("   " + "ALRIGHTY. I've added this task:\n"
                 + "    " + freshEvent + "\n" +  "   Now you have " + list.size() + " tasks in the list.");
     }
 }
