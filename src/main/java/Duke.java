@@ -75,8 +75,8 @@ public class Duke {
         int n = 0;
 
         System.out.printf(greet);
+        Scanner cmd = new Scanner(System.in);  // Create a Scanner object
         while (true) {
-            Scanner cmd = new Scanner(System.in);  // Create a Scanner object
             String echo = cmd.nextLine();
             if (echo.equals("bye")) {
                 break;

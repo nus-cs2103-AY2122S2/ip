@@ -1,0 +1,5 @@
+event book sharing /at mon 3-4pm
+deadline sell bird /by today
+list
+mark 2
+bye
