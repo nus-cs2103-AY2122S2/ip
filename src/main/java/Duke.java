@@ -5,51 +5,38 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         String botName = "Duke";
-        printDivider();
+        Printer.printDivider();
         System.out.println("    Hello, I'm " + botName + ".");
         System.out.println("    What can I do for you?");
-        printDivider();
+        Printer.printDivider();
         Scanner inputScanner = new Scanner(System.in);
         String input = "";
-        ArrayList<String> todo = new ArrayList<>();
+        ArrayList<TodoObject> todo = new ArrayList<>();
 
         while (!input.equals("bye")) {
             input = inputScanner.nextLine();
+            String[] inputArray = input.split(" ");
+            TodoObject todoObj = new TodoObject(input);
             if (input.equals("bye")) {
-                printEndMessage();
+                Printer.printEndMessage();
             } else if(input.equals("list")) {
-                printTodo(todo);
-            } else {
-                echoForAdd(input);
-                todo.add(input);
+                Printer.printTodo(todo);
+            }
+            else if (inputArray.length > 1) {
+                String firstArg = input.substring(0, input.indexOf(" "));
+                if (firstArg.equals("mark")) {
+                    todo.get(Integer.parseInt(inputArray[1]) - 1).mark();
+                } else if (firstArg.equals("unmark")) {
+                    todo.get(Integer.parseInt(inputArray[1]) - 1).unmark();
+                } else {
+                    Printer.echoForAdd(input);
+                    todo.add(todoObj);
+                }
+            }
+            else {
+                Printer.echoForAdd(input);
+                todo.add(todoObj);
             }
         }
-    }
-
-    public static void printEndMessage() {
-        printDivider();
-        System.out.println("    Bye. Hope to see you again soon!");
-        printDivider();
-    }
-
-    public static void printDivider() {
-        String divider = "    ____________________________________________________________";
-        System.out.println(divider);
-    }
-
-    public static void printTodo(ArrayList<String> inputArray) {
-        printDivider();
-        for (int index = 0; index < inputArray.size(); index++) {
-            int order = (index + 1);
-            String result = "    " + order + ": " + inputArray.get(index);
-            System.out.println(result);
-        }
-        printDivider();
-    }
-
-    public static void echoForAdd(String input) {
-        printDivider();
-        System.out.println("    added: " + input);
-        printDivider();
     }
 }
