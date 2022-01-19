@@ -9,6 +9,34 @@ public class DukeEngine {
         return "added: " + text;
     }
 
+    public String markItem(int itemNumber) {
+        String message = "";
+
+        if (itemNumber <= 0 || itemNumber > itemList.size()) {
+            message = String.format("Invalid item number specified. Are you sure item #%s exists?", itemNumber);
+        } else {
+            Task task = itemList.get(itemNumber - 1);
+            task.markAsDone();
+            message = "Nice! I've marked this as done:\n  " + task;
+        }
+
+        return message;
+    }
+
+    public String unmarkItem(int itemNumber) {
+        String message = "";
+
+        if (itemNumber <= 0 || itemNumber > itemList.size()) {
+            message = String.format("Invalid item number specified. Are you sure item #%s exists?", itemNumber);
+        } else {
+            Task task = itemList.get(itemNumber - 1);
+            task.unmarkAsDone();
+            message = "OK, I've marked this task as not done yet:\n  " + task;
+        }
+
+        return message;
+    }
+
     public String listItems() {
         StringBuilder sb = new StringBuilder();
         if (itemList.isEmpty()) {

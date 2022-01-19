@@ -11,13 +11,26 @@ public class Duke {
 
         while(isPolling) {
             String command = sc.nextLine();
+            String[] commandArgs = command.split(" ");
+
             String replyMessage = "";
-            if (command.equals("bye")) {
+            if (commandArgs[0].equals("bye")) {
                 isPolling = false;
                 replyMessage = dukeEngine.byeMessage();
 
-            } else if (command.equals("list")){
+            } else if (commandArgs[0].equals("list")){
                 replyMessage = dukeEngine.listItems();
+            
+            } else if (commandArgs[0].equals("mark")) {
+
+                int itemNumber = Integer.parseInt(commandArgs[1]);
+                replyMessage = dukeEngine.markItem(itemNumber);
+
+            } else if (commandArgs[0].equals("unmark")) {
+
+                int itemNumber = Integer.parseInt(commandArgs[1]);
+                replyMessage = dukeEngine.unmarkItem(itemNumber);
+
             } else {
                 replyMessage = dukeEngine.addText(command);
             }
