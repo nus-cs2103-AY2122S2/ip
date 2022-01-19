@@ -108,7 +108,7 @@ public class Duke {
     }
     */
 
-    //Level 4
+    //Level 4, 5, 6, UiTesting
     abstract class Task{
         String name;
         boolean completed;
