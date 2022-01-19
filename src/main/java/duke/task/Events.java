@@ -4,6 +4,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a task that the user wants to do on a specific date and between a starting and ending time.
+ *
+ */
 public class Events extends Task{
     protected LocalDate date;
     protected LocalTime fromtime;

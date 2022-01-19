@@ -6,6 +6,10 @@ import duke.storage.*;
 
 import java.io.IOException;
 
+/**
+ * Represents command to mark a task in the task list.
+ *
+ */
 public class MarkCommand extends Command{
     protected boolean mark;
     protected Integer index;

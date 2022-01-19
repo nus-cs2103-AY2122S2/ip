@@ -9,6 +9,9 @@ import duke.parser.*;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Duke is a chat-bot that curates a todo list according to user's commands.
+ */
 public class Duke {
     protected Storage storage;
     protected TaskList tasks;
@@ -31,6 +34,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Start running the Duke program.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

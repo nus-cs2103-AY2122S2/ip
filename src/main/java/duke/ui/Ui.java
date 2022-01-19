@@ -8,6 +8,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * User Interface for user to interact with the program.
+ */
 public class Ui {
     private enum Dialogue {
         GREETING, FAREWELL, LIST, MARK, UNMARKED, ADDED, DELETE, NUMLEFT, LINE, LOADERROR, FIND, FINDDATE
@@ -46,6 +49,11 @@ public class Ui {
         speak(Dialogue.LINE);
     }
 
+    /**
+     * Prints the tasks from the TaskList to shell.
+     *
+     * @param tasks List of tasks to be printed.
+     */
     public void printList(TaskList tasks) {
         List<Task> t = tasks.getObjectives();
         speak(Dialogue.LIST);
@@ -76,6 +84,12 @@ public class Ui {
         }
     }
 
+
+    /**
+     * Prints the task that has been added.
+     *
+     * @param tasks TaskList containing task to be printed.
+     */
     public void addList(TaskList tasks) {
         speak(Dialogue.ADDED);
         Integer size = tasks.getSize();
@@ -83,6 +97,13 @@ public class Ui {
         speak(Dialogue.NUMLEFT, size);
     }
 
+    /**
+     * Prints the task that has been marked/unmarked.
+     *
+     * @param tasks TaskList containing task to be printed.
+     * @param mark Whether task is completed or uncompleted.
+     * @param index Index of the task stored in task list.
+     */
     public void markList(TaskList tasks, boolean mark, int index) {
         if (mark) {
             speak(Dialogue.MARK);
@@ -93,6 +114,12 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints the task that has been deleted.
+     *
+     * @param tasks TaskList containing task to be deleted.
+     * @param index Index of the task stored in task list.
+     */
     public void deleteList(TaskList tasks, int index) {
         speak(Dialogue.DELETE);
         System.out.println(tasks.getTask(index));

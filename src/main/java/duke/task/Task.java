@@ -2,6 +2,10 @@ package duke.task;
 
 import java.time.LocalDate;
 
+/**
+ * Represents a task that the user wants to do. Can set to completed and uncompleted.
+ *
+ */
 public abstract class Task {
     protected String objective;
     protected boolean done;
@@ -15,27 +19,51 @@ public abstract class Task {
         this.done = done;
     }
 
+    /**
+     * Task is completed. Mark it with a cross.
+     */
     public void mark() {
         this.done = true;
     }
 
+    /**
+     * Task is uncompleted. It is unmarked.
+     */
     public void unmarked() {
         this.done = false;
     }
 
+    /**
+     * Returns a serialized version of the string.
+     *
+     * @return Serialized form of the string.
+     */
     public abstract String serialize();
 
-    public abstract boolean sameTime(LocalDate date);
 
     public boolean contains(String keyword) {
         return this.objective.contains(keyword);
     }
+
+    /**
+     * Check if task occurs on a specific date.
+     *
+     * @param date Date to be compared to the date in task.
+     * @return True if task occurs on that date.
+     */
+    public abstract boolean sameTime(LocalDate date);
 
     @Override
     public String toString() {
         return (done ? "[X]" : "[ ]") + " " + this.objective;
     }
 
+    /**
+     * Convert an encoded string into a task.
+     *
+     * @param encoded Encoded string to be decoded into task.
+     * @return Task that is formed from the encoded string.
+     */
     public static Task deserialize(String encoded) {
         String[] arr = encoded.split("\\|");
         boolean completed = arr[1].equals("1");
