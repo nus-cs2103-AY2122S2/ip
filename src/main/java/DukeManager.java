@@ -20,24 +20,44 @@ public class DukeManager {
             case "unmark":
                 unMark(tokens);
                 return;
+            case "delete":
+                delete(tokens);
+                return;
             case "todo":
-                createTask(ToDo.createTask(tokens));
-                break;
+                store(ToDo.createTask(tokens));
+                return;
             case "deadline":
-                createTask(Deadline.createTask(tokens));
-                break;
+                store(Deadline.createTask(tokens));
+                return;
             case "event":
-                createTask(Event.createTask(tokens));
-                break;
+                store(Event.createTask(tokens));
+                return;
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
 
         }
     }
 
-    protected void createTask(Task task) {
+    protected void delete(String[] tokens) throws DukeException {
+        int index;
+        try {
+            index = Integer.parseInt(tokens[1]) - 1;
+        } catch (Exception exception) {
+            throw new DukeException("Invalid input! Please enter the number of the task you want to delete.");
+        }
+        if(index >= tasks.size() || index < 0)
+            throw new DukeException("Invalid input! This task number does not exist.");
+        Task task = tasks.remove(index);
+        echo("Noted. I've removed this task:\n       "
+                + task.toString()
+                + "\n     Now you have " + tasks.size() + " task(s) in the list.");
+    }
+
+    protected void store(Task task) {
         tasks.add(task);
-        echo("Got it. I've added this task:\n       " + task.toString() + "\n     Now you have " + tasks.size() + " tasks in the list.");
+        echo("Got it. I've added this task:\n       "
+                + task.toString()
+                + "\n     Now you have " + tasks.size() + " task(s) in the list.");
     }
 
     protected void mark(String[] tokens) throws DukeException {
@@ -66,12 +86,6 @@ public class DukeManager {
         String output = "OK, I've marked this task as not done yet:\n       ";
         tasks.get(index).setCompleted(false);
         echo(output + tasks.get(index).toString());
-    }
-
-    protected void store(Task value) {
-        tasks.add(value);
-        String output = "Got it. I've added this task:\n       " + value.toString() + "\n     Now you have " + tasks.size() + " tasks in the list.";
-        echo(output);
     }
 
     protected void list() {
