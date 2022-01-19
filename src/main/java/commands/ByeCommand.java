@@ -2,11 +2,13 @@ package commands;
 
 import tasks.Task;
 
+import java.util.ArrayList;
+
 public class ByeCommand extends Command{
 
     @Override
-    public Task[] getList(){
-        return new Task[0];
+    public ArrayList<Task> getList(){
+        return new ArrayList<Task>();
     }
 
     @Override

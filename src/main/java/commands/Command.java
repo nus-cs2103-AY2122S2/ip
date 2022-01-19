@@ -1,6 +1,8 @@
 package commands;
 import tasks.Task;
 
+import java.util.ArrayList;
+
 public abstract class Command {
     public final static String LINE = "    ____________________________________________________________\n";
     public final static String INDENT = "     ";
@@ -9,7 +11,7 @@ public abstract class Command {
 
     public abstract boolean ends();
 
-    public abstract Task[] getList();
+    public abstract ArrayList<Task> getList();
 
     public static void printFormatted(String[] msg){
         System.out.print(LINE);

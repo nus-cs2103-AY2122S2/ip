@@ -2,29 +2,22 @@ package commands;
 
 import tasks.*;
 
+import java.util.ArrayList;
+
 public class DeleteCommand extends Command{
-    private Task[] tasklist;
-    private int size;
+    private ArrayList<Task> tasklist;
     private int deleteIndex;
     private Task deleted;
 
-    public DeleteCommand(Task[] tasklist, int size, int deleteIndex){
+    public DeleteCommand(ArrayList<Task> tasklist, int deleteIndex){
         this.deleteIndex = deleteIndex - 1;
-        this.size = size;
         this.tasklist = tasklist;
-        this.deleted = tasklist[this.deleteIndex];
-        for(int i = this.deleteIndex; i < size; i++) {
-            if(i == 99){
-                this.tasklist[i] = null;
-                break;
-            }
-            this.tasklist[i] = this.tasklist[i+1];
-        }
-        this.size--;
+        this.deleted = tasklist.get(deleteIndex);
+        this.tasklist.remove(this.deleteIndex);
     }
 
     @Override
-    public Task[] getList(){
+    public ArrayList<Task> getList(){
         return tasklist;
     }
 
@@ -38,6 +31,6 @@ public class DeleteCommand extends Command{
         printFormatted(new String[]{
                 "Noted. I've removed this task:",
                 "  "+ deleted,
-                "Now you have " + size + " tasks in the list"});
+                "Now you have " + this.tasklist.size() + " tasks in the list"});
     }
 }

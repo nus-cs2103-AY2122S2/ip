@@ -2,15 +2,17 @@ package commands;
 
 import tasks.Task;
 
-public class ListCommand extends Command{
-    private static Task[] tasklist;
+import java.util.ArrayList;
 
-    public ListCommand(Task[] tasklist){
+public class ListCommand extends Command{
+    private static ArrayList<Task> tasklist;
+
+    public ListCommand(ArrayList<Task> tasklist){
         this.tasklist = tasklist;
     }
 
     @Override
-    public Task[] getList(){
+    public ArrayList<Task> getList(){
         return tasklist;
     }
 
@@ -24,13 +26,11 @@ public class ListCommand extends Command{
         printFormatted(tasklist);
     }
 
-    public static void printFormatted(Task[] tasklist){
+    public static void printFormatted(ArrayList<Task> tasklist){
         System.out.print(LINE);
         System.out.println(INDENT + "Here are the tasks in your list:");
-        for(int i = 0; i < tasklist.length; i++){
-            if(tasklist[i]!=null) {
-                System.out.println(INDENT + (i+1) + "." + tasklist[i]);
-            }
+        for(int i = 0; i < tasklist.size(); i++){
+            System.out.println(INDENT + (i+1) + "." + tasklist.get(i));
         }
         System.out.println(LINE);
     }

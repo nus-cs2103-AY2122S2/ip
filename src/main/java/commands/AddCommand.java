@@ -1,19 +1,18 @@
 package commands;
 import tasks.*;
+import java.util.ArrayList;
 
 public class AddCommand extends Command {
     private String input;
     private String type;
-    private Task[] tasklist;
-    private int size;
+    private ArrayList<Task> tasklist;
     private Task added;
 
 
-    public AddCommand(Task[] tasklist, int size, String commandType, String details){
+    public AddCommand(ArrayList<Task> tasklist, String commandType, String details){
         this.type = commandType;
         this.input = details;
         this.tasklist = tasklist;
-        this.size = size;
         String[] processedInput;
         switch (type) {
             case "todo":
@@ -28,12 +27,11 @@ public class AddCommand extends Command {
                 this.added = new Deadlines(processedInput[0], processedInput[1]);
                 break;
         }
-        tasklist[size] = added;
-        this.size++;
+        this.tasklist.add(added);
     }
 
     @Override
-    public Task[] getList(){
+    public ArrayList<Task> getList(){
         return tasklist;
     }
 
@@ -47,6 +45,6 @@ public class AddCommand extends Command {
         printFormatted(new String[]{
                 "Got it. I've added this task:",
                 "  "+ added,
-                "Now you have " + size + " tasks in the list"});
+                "Now you have " + tasklist.size() + " tasks in the list"});
     }
 }
