@@ -29,11 +29,13 @@ public class Tesseract {
             String[] cmdArr = cmdLine.split(" ");
             String cmd = cmdArr[0];
 
-            //try {
-            //    checkCommand(cmdArr);
-            //} catch () {
-
-            //}
+            try {
+                checkCommand(cmdLine, taskList);
+            } catch (TesseractException errMsg) {
+                System.out.println(errMsg);
+                cmdLine = sc.nextLine();
+                continue;
+            }
             // will if still be executed if error is thrown?
 
             if (cmd.equals("list")) {
@@ -42,13 +44,14 @@ public class Tesseract {
                     msg += INDENT2 + (i+1) + "." + taskList.get(i).toString() + "\n";
                 }
             } else if (cmd.equals("mark")) {
-                int index = Integer.parseInt(cmdArr[1]); // the 2nd element in the array is the index
+                int index = Integer.parseInt(cmdArr[1]) - 1; // the 2nd element in the array is the index
                 taskList.get(index).markAsDone();
                 msg = "Wow you have finished a task! Excellent! \n" + INDENT2 + taskList.get(index).toString() + "\n";
             } else if (cmd.equals("unmark")) {
-                int index = Integer.parseInt(cmdArr[1]);
+                int index = Integer.parseInt(cmdArr[1]) - 1;
                 taskList.get(index).markAsUndone();
-                msg = "Seems like you have successfully undone your done task \n" + INDENT2 + taskList.get(index).toString() + "\n";
+                msg = "Seems like you have successfully undone your done task \n"
+                        + INDENT2 + taskList.get(index).toString() + "\n";
             } else {
                 Task newTask;
                 if (cmd.equals("todo")) { // _Todo
@@ -97,10 +100,62 @@ public class Tesseract {
                         + "Now you have " + taskList.size() + " tasks waiting to be finished.\n";
             }
 
-            String out = INDENT1 + BREAKER + "\n" + INDENT1 + msg + INDENT1 + BREAKER + "\n";
+            String out = INDENT1 + BREAKER + "\n" + INDENT1 + + INDENT1 + BREAKER + "\n";msg
             System.out.println(out);
             cmdLine = sc.nextLine();
         }
         System.out.println(farewellMsg);
+    }
+
+    public static void checkCommand(String cmdLine, List<Task> taskList) throws TesseractException {
+        String[] cmdArr = cmdLine.split(" ");
+        int cmdLen = cmdArr.length;
+        switch (cmdArr[0]) {
+            case "list":
+            case "bye":
+                if (cmdLen > 1) {
+                    throw new TesseractException("You have entered an invalid command leh~");
+
+                }
+                break;
+            case "mark":
+            case "unmark":
+                if (cmdLen > 2 || !isInteger(cmdArr[1]) || Integer.parseInt(cmdArr[1]) > taskList.size()) {
+                    throw new TesseractException("You need to enter a valid list number mah~");
+                }
+                break;
+
+            case "event":
+                if (cmdLen == 1) {
+                    throw new TesseractException("Nah you need to provide me with the details of this event *_*");
+                } else if (cmdLine.indexOf("/at") < 0) {
+                    throw new TesseractException("When is the timing for your event again?");
+                }
+                break;
+            case "deadline":
+                if (cmdLen == 1) {
+                    throw new TesseractException("Sorry I can't create deadline without its details )-:");
+                } else if (cmdLine.indexOf("/by") < 0) {
+                    throw new TesseractException("When do you need to do this by again?");
+                }
+                break;
+            case "todo":
+                if (cmdLen == 1) {
+                    throw new TesseractException("I cannot create todo if you don't tell me what it's about eh :-(");
+                }
+                break;
+            default:
+                throw new TesseractException("Hey bro, not sure if this command is valid eh #_#");
+        }
+    }
+
+    // check if a command is valid
+    public static boolean isInteger(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }
