@@ -1,9 +1,9 @@
-public class Task implements ICompletable {
+public abstract class Task implements ICompletable {
 
-    protected Object item;
+    protected String item;
     protected boolean completed;
 
-    public Task (Object obj) {
+    public Task (String obj) {
         item = obj;
         completed = false;
     }
@@ -16,4 +16,6 @@ public class Task implements ICompletable {
         String display = completed ? "[X]" : "[ ]";
         return display + " " + item.toString();
     }
+
+
 }

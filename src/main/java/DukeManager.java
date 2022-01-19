@@ -9,19 +9,34 @@ public class DukeManager {
     }
 
     public void handle(String input) {
-        if (input.equals("list")) {
-            list();
-        } else {
-            String[] tokens = input.split(" ");
-            if (tokens[0].equals("mark")) {
+        String[] tokens = input.split(" ");
+        System.out.println(tokens[0]);
+        switch (tokens[0]) {
+            case "list":
+                list();
+                return;
+            case "mark":
                 mark(tokens[1]);
-            } else if (tokens[0].equals("unmark")) {
+                return;
+            case "unmark":
                 unMark(tokens[1]);
-            } else {
-                Task newTask = new Task(input);
-                store(newTask);
-            }
+                return;
+            case "todo":
+                createTask(ToDo.createTask(tokens));
+                break;
+            case "deadline":
+                createTask(Deadline.createTask(tokens));
+                break;
+            case "event":
+                createTask(Event.createTask(tokens));
+                break;
+
         }
+    }
+
+    protected void createTask(Task task) {
+        tasks.add(task);
+        echo("Got it. I've added this task:\n       " + task.toString() + "\n     Now you have " + tasks.size() + " tasks in the list.");
     }
 
     protected void mark(String input) {
@@ -40,7 +55,8 @@ public class DukeManager {
 
     protected void store(Task value) {
         tasks.add(value);
-        echo("added: " + value.toString());
+        String output = "Got it. I've added this task:\n       " + value.toString() + "\n     Now you have " + tasks.size() + " tasks in the list.";
+        echo(output);
     }
 
     protected void list() {
