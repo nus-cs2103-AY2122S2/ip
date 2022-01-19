@@ -248,6 +248,8 @@ public class Duke {
                                 + "Event cannot be empty.");
                     }
                     System.out.println(Duke.addEvent(tokens));
+                } else if (tokens[0].equals("delete")) {
+                    //ToDo
                 } else {
                     throw new UnkownCommandException();
                 }
