@@ -17,7 +17,7 @@ public abstract class Task {
     }
 
     protected String getStatusIcon() {
-        return isDone ? "✓" : "✗";
+        return isDone ? "X" : " ";
     }
 
     @Override
