@@ -7,13 +7,6 @@ import java.util.*;
 
 public class Duke {
     public static void main(String[] args) throws DukeException, DukeDeadlineException {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
         System.out.println("Oh hello dear, I'm Dukie, Zi Xin's favourite chattie box\n" +
                             "Nice to meet you dear:>\n" +
                             "What can I do for you?");
@@ -22,13 +15,16 @@ public class Duke {
         String input; //declare a string variable to store input
         List<Task> all = new ArrayList<Task>(); //ArrayList of Task
         while (myObj.hasNextLine()) {
-            while (!(input = myObj.nextLine()).equals("bye")) { //check input not "bye"
+            input = myObj.nextLine();
+
+            if (!input.equals("bye")) { //check input not "bye"
                 String[] words = input.split(" ", 2); //split input string to get first word (action)
 
                 if (input.equals("list")) { //if list
                     System.out.println("Here are the tasks in your list:");
                     for (int i = 1; i <= all.size(); i++) {
-                        System.out.println(i + ". " + all.get(i - 1).toString());
+//                        System.out.println(i + ". " + all.get(i - 1).toString());
+                        System.out.println(i + ". " + all.get(i - 1));
                     }
 
                 } else if (words[0].equals("mark")) {
@@ -51,7 +47,7 @@ public class Duke {
                             ToDo item = new ToDo(words[1]);
                             all.add(item);
                             System.out.println("Got it. I've added this task: ");
-                            System.out.println(item.toString());
+                            System.out.println(item);
                             System.out.println("Now you have " + all.size() + " tasks in the list."); //print when new task added
                         } catch (Exception e) {
                             DukeTodoException error = new DukeTodoException("OOPS!!! The description of a todo cannot be empty.");
@@ -92,8 +88,10 @@ public class Duke {
 
                 }
 
+            } else {
+                System.out.println("Bye. Hope to see you again soon!"); //ending sentence
+                System.exit(0);
             }
-            System.out.println("Bye. Hope to see you again soon!"); //ending sentence
         }
     }
 }

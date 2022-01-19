@@ -18,7 +18,7 @@ public class Deadline extends Task {
             taskby = split[1];
             Deadline d_line = new Deadline(taskname, taskby);
             System.out.println("Got it. I've added this task: ");
-            System.out.println(d_line.toString());
+            System.out.println(d_line);
             return d_line;
         } catch (Exception e) {
             DukeDeadlineException error = new DukeDeadlineException("OOPS!!! Please enter in format: deadline <task>/by<due date>");
