@@ -9,3 +9,5 @@ todo cut hair
 list
 mark 3
 list
+delete 3
+list

@@ -62,3 +62,13 @@ Nice! I've marked this task as done:
 
 ----------------------------------------
 
+Noted. I've removed this task:
+[T][X] cut hair
+
+----------------------------------------
+
+1. [D][ ] iP (by: Feb)
+2. [E][ ] movie (at: Waterway)
+
+----------------------------------------
+
