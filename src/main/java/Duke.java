@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -11,12 +14,12 @@ public class Duke {
 
         Scanner input = new Scanner(System.in);
         String intputText = "";
-        Task[] list = new Task[100];
-        int tasks = 0;
+        List<Task> list = new ArrayList<>();
 
         while (!intputText.equals("bye")) {
             intputText = input.nextLine();
             String[] tempList = intputText.split(" ", 2);
+            int tasks = list.size();
 
             try {
                 new DukeException().invalidChecker(tempList);
@@ -31,38 +34,48 @@ public class Duke {
             } else if (intputText.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < tasks; i++) {
-                    System.out.println((i + 1) + "." + list[i].toString());
+                    System.out.println((i + 1) + "." + list.get(i).toString());
                 }
-            } else if (tempList[0].equals("mark")) {
-                list[Integer.parseInt(tempList[1]) - 1].markAsDone();
-                System.out.println(list[Integer.parseInt(tempList[1]) - 1].toString());
-            } else if (tempList[0].equals("unmark")) {
-                list[Integer.parseInt(tempList[1]) - 1].markAsNotDone();
-                System.out.println(list[Integer.parseInt(tempList[1]) - 1].toString());
             } else {
-                System.out.println("Got it. I've added this task:");
                 if (tempList[0].equals("todo")) {
-                    list[tasks] = new Todo(tempList[1]);
-                    System.out.println(list[tasks].toString());
+                    list.add(new Todo(tempList[1]));
+                    System.out.println(list.get(tasks).toString());
+                    printTaskList(tasks + 1);
                 } else if (tempList[0].equals("deadline")){
                     String[] restOfPara  = tempList[1].split("/by ", 2);
-                    list[tasks] = new Deadline(restOfPara[0], restOfPara[1]);
-                    System.out.println(list[tasks].toString());
-                } else if (tempList[0].equals("event")){
-                    String[] restOfPara  = tempList[1].split("/at ", 2);
-                    list[tasks] = new Event(restOfPara[0], restOfPara[1]);
-                    System.out.println(list[tasks].toString());
-                }
-                tasks++;
-                if (tasks == 1) {
-                    System.out.println("Now you have " + tasks + " task in the list.");
+                    list.add(new Deadline(restOfPara[0], restOfPara[1]));
+                    System.out.println(list.get(tasks).toString());
+                    printTaskList(tasks + 1);
+                } else if (tempList[0].equals("event")) {
+                    String[] restOfPara = tempList[1].split("/at ", 2);
+                    list.add(new Event(restOfPara[0], restOfPara[1]));
+                    System.out.println(list.get(tasks).toString());
+                    printTaskList(tasks + 1);
                 } else {
-                    System.out.println("Now you have " + tasks + " tasks in the list.");
+                    int taskNumOrDes = Integer.parseInt(tempList[1]) - 1;
+                    if (tempList[0].equals("mark")) {
+                        System.out.println(list.get(taskNumOrDes).toString());
+                        list.get(taskNumOrDes).markAsDone();
+                    } else if (tempList[0].equals("unmark")) {
+                        System.out.println(list.get(taskNumOrDes).toString());
+                        list.get(taskNumOrDes).markAsNotDone();
+                    } else if (tempList[0].equals("delete")) {
+                        System.out.println("Noted. I've removed this task: ");
+                        System.out.println(list.get(taskNumOrDes).toString());
+                        list.remove(taskNumOrDes);
+                        printTaskList(tasks - 1);
+                    }
                 }
             }
             System.out.println("------------------------------------------------------------");
         }
+    }
 
+    public static void printTaskList(int tasks) {
+        if (tasks + 1 == 1) {
+            System.out.println("Now you have " + (tasks) + " task in the list.");
+        } else {
+            System.out.println("Now you have " + (tasks) + " tasks in the list.");
+        }
     }
 }
-
