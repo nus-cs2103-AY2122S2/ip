@@ -1,9 +1,10 @@
-Task 1
-Task 2
-Task 3
+todo buy book
+todo buy groceries
+deadline project-1 /by Friday
+event staff meeting /at Monday 3-4pm
 list
 mark 1
-mark 3
+mark 4
 unmark 1
 list
 bye
