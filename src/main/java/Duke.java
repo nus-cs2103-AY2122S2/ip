@@ -16,15 +16,36 @@ public class Duke {
                 "Hello! I'm Duke\n" + spacing +
                 "What can I do for you?\n" +
                 border);
-        String cmd = myScanner.nextLine();
-        while (!cmd.equals("bye")) {
+        while(myScanner.hasNextLine()) {
+            String cmd = myScanner.nextLine();
+            if (cmd.equals("bye")) {
+                break;
+            }
             if(cmd.equals("list")) {
-                System.out.println(border + myListStorage.printList() + border);
+                System.out.println(border + spacing
+                        + "Here are the tasks in your list:\n"
+                        + myListStorage.printList()
+                        + border);
+            } else if (cmd.contains("mark")){
+                int taskNumber = Character.getNumericValue(cmd.charAt(cmd.length() - 1));
+                if (cmd.contains("un")) {
+                    myListStorage.findTask(taskNumber).unmark();
+                    System.out.println(border
+                            + spacing
+                            + "OK, I've marked this task as not done yet:\n"
+                            + myListStorage.printTask(taskNumber) + border);
+                } else {
+                    myListStorage.findTask(taskNumber).markAsDone();
+                    System.out.println(border
+                            + spacing
+                            + "Nice! I've marked this task as done:\n"
+                            + myListStorage.printTask(taskNumber) + border);
+                }
             } else {
-                String toPrint = myListStorage.addToList(cmd);
+                Task newTask = new Task(cmd);
+                String toPrint = myListStorage.addToList(newTask);
                 System.out.println(border + spacing + toPrint + "\n" + border);
             }
-            cmd = myScanner.nextLine();
         }
         System.out.println(border + spacing + "Bye. Hope to see you again soon!\n" + border);
     }
