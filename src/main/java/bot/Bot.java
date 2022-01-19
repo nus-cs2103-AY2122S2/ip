@@ -27,19 +27,21 @@ public class Bot {
             output.println(this.greet());
             String query = input.nextLine();
             while (!this.detectTerminationRequest(query)) {
-                output.println(this.process(query));
+                try {
+                    output.println(this.process(query));
+                } catch (BotException e) {
+                    output.println(this.constructResponse(e.getMessage()));
+                }
                 query = input.nextLine();
             }
             output.println(this.bidFarewell());
-        } catch (Exception e) {
-            throw e;
         } finally {
             input.close();
             output.close();
         }
     }
 
-    private String process(String query) throws Exception {
+    private String process(String query) throws BotException {
         final String[] tokens = query.split(" ", 2);
         switch (tokens[0]) {
             case "list":
@@ -49,15 +51,15 @@ public class Bot {
             case "unmark":
                 return this.unmarkTask(Integer.parseInt(tokens[1]) - 1);
             case "todo":
-                return this.addTask(new Todo(tokens[1]));
+                return this.addTask(new Todo(tokens[1].trim()));
             case "deadline":
                 final String[] deadlineArgs = tokens[1].split(" /by ");
-                return this.addTask(new Deadline(deadlineArgs[0], deadlineArgs[1]));
+                return this.addTask(new Deadline(deadlineArgs[0].trim(), deadlineArgs[1].trim()));
             case "event":
                 final String[] eventArgs = tokens[1].split(" /at ");
-                return this.addTask(new Event(eventArgs[0], eventArgs[1]));
+                return this.addTask(new Event(eventArgs[0].trim(), eventArgs[1].trim()));
             default:
-                return "";
+                throw new BotException("I'm sorry, but I don't know what that means :-(");
         }
     }
 
@@ -78,7 +80,10 @@ public class Bot {
         return this.constructResponse(taskList);
     }
 
-    private String addTask(Task t) {
+    private String addTask(Task t) throws BotException {
+        if (t.getDescription().equals("")) {
+            throw new BotException("The description of a task cannot be empty.");
+        }
         this.tasks[this.nextItemIndex++] = t;
         final String response =
                 "Got it. I've added this task:\n  " + t + "\nNow you have " + this.nextItemIndex + " tasks in the list.";
