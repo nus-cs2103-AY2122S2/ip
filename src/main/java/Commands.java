@@ -12,7 +12,7 @@ public class Commands {
 
     void bye() {
         String bye = "_______________________________________________________\n"
-                + "Bye. Hope to see you again soon!\n"
+                + "Goodbye. I hope to be of service to you again soon!\n"
                 + "_______________________________________________________\n";
         System.out.println(bye);
     }
