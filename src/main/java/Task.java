@@ -1,7 +1,7 @@
 public class Task {
-    private boolean isDone;
-    private String taskDescription;
-    private StringBuilder sb;
+    protected boolean isDone;
+    protected String taskDescription;
+    protected StringBuilder sb;
 
     public Task() {
         this.isDone = false;
