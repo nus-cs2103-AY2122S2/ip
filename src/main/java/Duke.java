@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 import tasks.Task;
-import tasks.ToDo;
+import tasks.Todo;
 import tasks.Deadline;
 import tasks.Event;
 
@@ -35,7 +35,7 @@ public class Duke {
                         Duke.handleUnmark(Integer.parseInt(tokens[1]) - 1);
                         break;
                     case "todo":
-                        Duke.handleAdd(new ToDo(tokens[1]));
+                        Duke.handleAdd(new Todo(tokens[1]));
                         break;
                     case "deadline":
                         final String[] deadlineArgs = tokens[1].split(" /by ");
