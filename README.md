@@ -22,3 +22,17 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
+
+
+## Level-1
+
+#### UserGuide
+The task manager Conan, is at his infancy stage. He is able to remember your name for the session and <br/>
+echoes your messages or tasks. Given below are the instructions on how you could interact with conan.
+
+Your Interaction Guide:
++ run the program and let Conan get to know you!
++ First type in your name, so that he knows who is talking to him.
++ Type in your message and see what conan could do!
++ Conan echoes your messages or tasks that you type in.
++ If you would like to exit, please tell conan "Bye" in the command line.
