@@ -8,12 +8,15 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        //System.out.println("Hello from\n" + logo);
+        System.out.println("Hello from\n" + logo + "\n");
 
-        String greeting = "     ____________________________________________________________\n"
-                + "     Hello! I'm Duke\n"
-                + "     What can I do for you?\n"
-                + "     ____________________________________________________________";
+        String space = "     ";
+        String line = "____________________________________________________________";
+
+        String greeting = space + line + "\n"
+                + space + "Hello! I'm Duke\n"
+                + space + "What can I do for you?\n"
+                + space + line;
 
         System.out.println(greeting);
         Scanner sc = new Scanner(System.in);
@@ -23,34 +26,30 @@ public class Duke {
         while (sc.hasNext()) {
             String input = sc.nextLine();
             String output = "";
-            String line = "     ____________________________________________________________\n";
 
             if (input.equals("bye")) {
                 output = "Bye. Hope to see you again soon!";
-                System.out.println(line
-                        + "     "
-                        + output
-                        + "\n"
-                        + line);
+                System.out.print(space + line + "\n"
+                            + space + output + "\n"
+                            + space + line);
                 break;
             }
+
             else if (input.equals("list")) {
-                for (int i = 0; i < list.size(); i++)
-                    output += "     "
-                            + (i + 1)
-                            + ". "
-                            + list.get(i)
-                            + "\n";
-            }
-            else {
-                list.add(input);
-                output = "     "
-                        + "added: "
-                        + input
-                        + "\n";
+                for (int i = 0; i < list.size(); i++) {
+                    String bullet = space + (i + 1) + ". ";
+                    output += bullet + list.get(i) + "\n";
+                }
             }
 
-            System.out.print(line + output + line);
+            else {
+                list.add(input);
+                output = space + "added: " + input + "\n";
+            }
+
+            System.out.print(space + line + "\n"
+                        + output
+                        + space + line + "\n");
         }
         sc.close();
     }
