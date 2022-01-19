@@ -4,14 +4,21 @@ import java.util.Scanner;
 
 public class Duke {
     private enum Command {
-        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT
+        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, BANAN
     }
 
     public static void main(String[] args) {
         // Boot message
-        String intro = "Hello! I'm Duke\n"
-                + "What can I do for you?\n";
-        System.out.println(wrap(intro));
+        String logo = "\n" +
+                ".        :       ...     :::.    :::. :::  .   .,::::::\n" +
+                ";;,.    ;;;   .;;;;;;;.  `;;;;,  `;;; ;;; .;;,.;;;;''''\n" +
+                "[[[[, ,[[[[, ,[[     \\[[,  [[[[[. '[[ [[[[[/'   [[cccc\n" +
+                "$$$$$$$$\"$$$ $$$,     $$$  $$$ \"Y$c$$_$$$$,     $$\"\"\"\"\n" +
+                "888 Y88\" 888o\"888,_ _,88P  888    Y88\"888\"88o,  888oo,__\n" +
+                "MMM  M'  \"MMM  \"YMMMMMP\"   MMM     YM MMM \"MMP\" \"\"\"\"YUMMM\n";
+        String intro = "I MONKE.\n"
+                + "WHAT WANT?\n";
+        System.out.println(wrap(logo + "\n" + intro));
 
         // Setup scanner for user input
         Scanner sc = new Scanner(System.in);
@@ -27,7 +34,7 @@ public class Duke {
                 try {
                     command = Command.valueOf(breakdown[0].toUpperCase());
                 } catch (IllegalArgumentException e) {
-                    throw new DukeException("Invalid command");
+                    throw new DukeException("INVALID COMMAND");
                 }
                 switch (command) {
                     case BYE: {
@@ -38,7 +45,7 @@ public class Duke {
                         for (int i = 0; i < tasks.size(); i++) {
                             result.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
                         }
-                        System.out.println(wrap("Here are the tasks in your list:\n" + result));
+                        System.out.println(wrap("YOUR TASKS:\n" + result));
                         continue;
                     }
                     case MARK:
@@ -48,25 +55,25 @@ public class Duke {
                         try {
                             index = Integer.parseInt(breakdown[1]) - 1;
                             if (index < 0 || index >= tasks.size()) {
-                                throw new DukeException("Invalid index value");
+                                throw new DukeException("INVALID INDEX VALUE");
                             }
                         } catch (NumberFormatException e) {
-                            throw new DukeException("Invalid index format");
+                            throw new DukeException("INVALID INDEX FORMAT");
                         } catch (IndexOutOfBoundsException e) {
-                            throw new DukeException("Too few arguments supplied");
+                            throw new DukeException("TOO FEW ARGUMENTS SUPPLIED");
                         }
                         Task task = tasks.get(index);
                         if (command.equals(Command.MARK)) {
                             task.markAsDone();
-                            System.out.println(wrap("Nice! I've marked this task as done:\n" + task + "\n"));
+                            System.out.println(wrap("TASK DONE:\n" + task + "\n"));
                         } else if (command.equals(Command.UNMARK)) {
                             task.markAsUndone();
-                            System.out.println(wrap("OK, I've marked this task as not done yet:\n" + task + "\n"));
+                            System.out.println(wrap("TASK UNDONE:\n" + task + "\n"));
                         } else {
                             tasks.remove(index);
-                            System.out.println(wrap("Noted. I've removed this task:\n"
+                            System.out.println(wrap("TASK REMOVED:\n"
                                     + task + "\n"
-                                    + "Now you have " + tasks.size() + " task(s) in the list.\n"));
+                                    + tasks.size() + " TASK(S) NOW.\n"));
                         }
                         continue;
                     }
@@ -77,7 +84,7 @@ public class Duke {
                         try {
                             options = breakdown[1];
                         } catch (IndexOutOfBoundsException e) {
-                            throw new DukeException("Too few arguments supplied");
+                            throw new DukeException("TOO FEW ARGUMENTS SUPPLIED");
                         }
                         Task task;
                         if (command.equals(Command.TODO)) {
@@ -85,7 +92,7 @@ public class Duke {
                         } else if (command.equals(Command.DEADLINE)) {
                             String[] splitCommand = options.split(" /by ");
                             if (splitCommand.length < 2) {
-                                throw new DukeException("No deadline time supplied");
+                                throw new DukeException("NO DEADLINE TIME SUPPLIED");
                             }
                             String description = splitCommand[0];
                             String byTime = splitCommand[1];
@@ -93,7 +100,7 @@ public class Duke {
                         } else {
                             String[] splitCommand = options.split(" /at ");
                             if (splitCommand.length < 2) {
-                                throw new DukeException("No event time supplied");
+                                throw new DukeException("NO EVENT TIME SUPPLIED");
                             }
                             String description = splitCommand[0];
                             String atTime = splitCommand[1];
@@ -101,13 +108,16 @@ public class Duke {
                         }
                         tasks.add(task);
 
-                        System.out.println(wrap("Got it. I've added this task:\n"
+                        System.out.println(wrap("TASK ADDED:\n"
                                 + task + "\n"
-                                + "Now you have " + tasks.size() + " task(s) in the list.\n"));
+                                + tasks.size() + " TASK(S) NOW.\n"));
                         continue;
                     }
+                    case BANAN:
+                        System.out.println(wrap("OOH OOH AH AH!!! *screeches in delight*\n"));
+                        continue;
                     default:
-                        throw new DukeException("Invalid command");
+                        throw new DukeException("INVALID COMMAND");
                 }
                 break;
             } catch (DukeException e) {
@@ -115,13 +125,12 @@ public class Duke {
             }
         }
 
-        System.out.println(wrap("Bye. Hope to see you again soon!\n"));
+        System.out.println(wrap("BYE!!!\n"));
         sc.close();
     }
 
     protected static String wrap(String text) {
-        return "__________________________________________________\n"
-                + text
-                + "__________________________________________________\n";
+        String line = "____________________________________________________________\n";
+        return line + text + line;
     }
 }
