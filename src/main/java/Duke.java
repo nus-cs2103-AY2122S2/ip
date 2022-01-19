@@ -58,6 +58,10 @@ public class Duke {
         displayLine();
     }
 
+    void deleteTask(int taskIndex) {
+        dukeList.remove(taskIndex);
+    }
+
     void executeCommand(String command, String description) throws DukeException{
         try {
         if (command.equals("list")) {
@@ -75,8 +79,8 @@ public class Duke {
             //toBeCompleted.isComplete();
             displayIncompleteTask(toBeCompleted);
         } else {
-            displayLine();
-            System.out.println("Got it. I've added this task:");
+            //displayLine();
+            //System.out.println("Got it. I've added this task:");
             if (command.equals("event")) {
                 String[] descriptionAndTime = description.split("/");
                  String eventDescription = (descriptionAndTime[0].split(" ", 2))[1];
@@ -100,7 +104,15 @@ public class Duke {
                 ToDo newTodo = new ToDo(description.substring(1));
                 dukeList.add(newTodo);
                 System.out.println(newTodo);
-            } else {
+            } else if (command.equals("delete")){
+                int taskIndex = Integer.parseInt(description.substring(1)) - 1;
+                     displayLine();
+                     System.out.println("Noted. I've removed this task: ");
+                     Task taskToBeDeleted = dukeList.get(taskIndex);
+                     System.out.println("  " + taskToBeDeleted);
+                     deleteTask(taskIndex);
+            }
+            else {
                 throw new DukeUnknownCommandException();
             }
             System.out.println("Now you have " + dukeList.size() + " tasks in the list.");
