@@ -67,6 +67,7 @@ public class Duke {
                     break;
                 case "delete":
                     remove(sc.nextInt());
+                    break;
                 default:
                     System.out.println("sowwy i don't understand what that means ಠ_ಥ try something else pwease??");
             }
@@ -104,7 +105,7 @@ public class Duke {
     }
 
     private static Task makeEvent(String name, String at) {
-        return new Deadline(name, at);
+        return new Event(name, at);
     }
 
     private static void remove(int idx) {
