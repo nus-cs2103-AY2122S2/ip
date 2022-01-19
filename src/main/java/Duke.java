@@ -10,18 +10,25 @@ public class Duke {
         System.out.println(logo + "\nHello! I'm Duke\nWhat can i do for you?\n");
 
         Scanner input = new Scanner(System.in);
-        String text = "";
+        String intputText = "";
         Task[] list = new Task[100];
         int tasks = 0;
 
-        while (!text.equals("bye")) {
-            text = input.nextLine();
-            String[] tempList = text.split(" ", 2);
+        while (!intputText.equals("bye")) {
+            intputText = input.nextLine();
+            String[] tempList = intputText.split(" ", 2);
+
+            try {
+                new DukeException().invalidChecker(tempList);
+            } catch (DukeException e) {
+                System.err.println(e);
+                continue;
+            }
 
             System.out.println("------------------------------------------------------------");
-            if (text.equals("bye")) {
+            if (intputText.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
-            } else if (text.equals("list")) {
+            } else if (intputText.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < tasks; i++) {
                     System.out.println((i + 1) + "." + list[i].toString());
@@ -59,70 +66,3 @@ public class Duke {
     }
 }
 
-class Task {
-    protected String description;
-    protected String task;
-    protected boolean isDone;
-
-    public Task(String description) {
-        this.description = description;
-        this.isDone = false;
-    }
-
-    public String getStatusIcon() {
-        return (isDone ? "[X]" : "[ ]");
-    }
-
-    public void markAsDone() {
-        this.isDone = true;
-        System.out.println("Nice! I've marked this task as done:");
-    }
-
-    public void markAsNotDone() {
-        this.isDone = false;
-        System.out.println("OK, I've marked this task as not done yet:");
-    }
-
-    public String toString() {
-        return getStatusIcon() + " " + description;
-    }
-}
-
-class Todo extends Task {
-    public Todo(String description) {
-        super(description);
-    }
-
-    @Override
-    public String toString() {
-        return "[T]" + super.toString();
-    }
-}
-
-class Deadline extends Task {
-    protected String by;
-
-    public Deadline(String description, String by) {
-        super(description);
-        this.by = by;
-    }
-
-    @Override
-    public String toString() {
-        return "[D]" + super.toString() + "(by: " + by + ")";
-    }
-}
-
-class Event extends Task {
-    protected String by;
-
-    public Event(String description, String by) {
-        super(description);
-        this.by = by;
-    }
-
-    @Override
-    public String toString() {
-        return "[E]" + super.toString() + "(by: " + by + ")";
-    }
-}
