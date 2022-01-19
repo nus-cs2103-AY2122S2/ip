@@ -236,6 +236,26 @@ public class Duke {
                         break;
 
                     case "delete":
+                        // handle error when there is no specified task number to be deleted
+                        try {
+                            UserInputTaskValidator.deleteValidator(userInputTask);
+                        } catch (DukeException e) {
+                            System.out.println(lines);
+                            System.out.println("    Delete command must have a specified task number to be deleted.");
+                            System.out.println(lines);
+                            break;
+                        }
+
+                        // handle error when the task number specified is invalid
+                        try {
+                            UserInputTaskValidator.deleteTaskNumberValidator(todoList, userInputTask);
+                        } catch (DukeException e) {
+                            System.out.println(lines);
+                            System.out.println("    Invalid task number to be deleted.");
+                            System.out.println(lines);
+                            break;
+                        }
+
                         int taskToDelete = Integer.parseInt(userInputArr[1]) - 1;
                         // to be removed task
                         Task tobeRemoved = todoList.get(taskToDelete);
