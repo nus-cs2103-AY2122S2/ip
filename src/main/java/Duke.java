@@ -10,17 +10,23 @@ public class Duke {
     private static final String EXIT_MSG = "Bye. Hope to see you again soon!";
     private static final String GREET_MSG = "Hello! I'm Jarvis\nWhat can I do for you?";
 
-    private static final String QUIT_COMMAND = "bye";
     private static final String STATUS_RUNNING = "running";
     private static final String STATUS_STOPPED = "stopped";
 
+    private static final String QUIT_COMMAND = "bye";
+    private static final String LIST_COMMAND = "list";
+    private static final String MARK_COMMAND = "mark";
+    private static final String UNMARK_COMMAND = "unmark";
+
     private String status;
+    private DukeList list;
 
     /**
      * Constructor for the Duke bot
      */
     public Duke() {
         this.status = STATUS_RUNNING;
+        this.list = new DukeList();
     }
 
     /**
@@ -49,12 +55,34 @@ public class Duke {
      * @return result after executing the command
      */
     private String parseCommand(String cmd) {
+        String[] argv = cmd.split(" ");
+        String action = argv[0];
+
         String result;
-        if (cmd.equals(QUIT_COMMAND)) {
-            result = EXIT_MSG;
-            this.status = STATUS_STOPPED;
-        } else {
-            result = cmd;
+        int idx;
+        switch (action) {
+            case QUIT_COMMAND:
+                result = EXIT_MSG;
+                this.status = STATUS_STOPPED;
+                break;
+
+            case LIST_COMMAND:
+                result = this.list.toString();
+                break;
+
+            case MARK_COMMAND:
+                idx = Integer.parseInt(argv[1]);
+                result = this.list.markTask(idx);
+                break;
+
+            case UNMARK_COMMAND:
+                idx = Integer.parseInt(argv[1]);
+                result = this.list.unmarkTask(idx);
+                break;
+
+            default:
+                result = this.list.add(cmd);
+                break;
         }
         return result;
     }
