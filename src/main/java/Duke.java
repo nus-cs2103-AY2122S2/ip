@@ -68,8 +68,7 @@ public class Duke {
     private static void handleAdd(Task t) {
         Duke.tasks[Duke.nextItemIndex++] = t;
         final String response =
-                "Got it. I've added this task:\n  " + t + "\nNow you have " + (Duke.nextItemIndex + 1)
-                        + " tasks in the list.";
+                "Got it. I've added this task:\n  " + t + "\nNow you have " + Duke.nextItemIndex + " tasks in the list.";
         System.out.println(Duke.constructResponse(response));
     }
 
