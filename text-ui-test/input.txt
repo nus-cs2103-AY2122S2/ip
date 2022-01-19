@@ -7,9 +7,18 @@ mark 4
 todo borrow book
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
+todo
+todo a
+todo b
+todo c
+todo d
+todo e
+todo f
+todo g
+todo h
 list
-todo
-todo
+delete 10
+mark 10
 event without at
 deadline without by
 invalidrandomcommand

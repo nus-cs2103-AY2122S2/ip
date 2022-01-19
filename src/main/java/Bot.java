@@ -112,7 +112,7 @@ public class Bot {
         } else {
             Task removedTask = this.listOfTasks.remove(index);
             StringBuilder toPrint = new StringBuilder("Noted. I've removed this task:\n");
-            toPrint.append(removedTask.toString());
+            toPrint.append(removedTask.toString()).append("\n");
             toPrint.append(ListStatus());
             System.out.println(encloseWithin(toPrint.toString()));
         }
