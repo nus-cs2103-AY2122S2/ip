@@ -16,6 +16,8 @@ public class Arthur {
 
     public static void main(String[] args) {
         BufferedReader io = new BufferedReader(new InputStreamReader(System.in));
+        String input;
+        Notebook notebook = new Notebook();     // An object to store list of tasks
 
         // Greetings
         String logo = " / \\   _ |_ |_  | |  _  \n"
@@ -23,13 +25,11 @@ public class Arthur {
         printFormat("Greetings from\n" + logo
                 + "\n" + "How may I assist you today?");
 
-        // Echo and Exit Feature
-        String input;
         try {
             input = io.readLine();
-            // Checks for exit input 'bye'
+            // keeps running till exit input 'bye'
             while (!input.equals("bye")) {
-                printFormat(input);
+                printFormat(notebook.instruction(input));
                 input = io.readLine();
             }
             printFormat("Bye!" + "\n" + "Have a great day!");
