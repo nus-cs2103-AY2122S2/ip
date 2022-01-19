@@ -7,4 +7,10 @@ mark 1
 mark 4
 unmark 1
 list
+blah
+mark two
+unmark
+todo
+deadline return book
+event Tim's Birthday
 bye

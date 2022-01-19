@@ -28,13 +28,13 @@
 
     ____________________________________________________________
     Got it! I've added this Deadline task:
-     [D][ ] project-1 (by: Friday)
+     [D][ ] project-1  (by: Friday)
     Now you have 3 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
     Got it! I've added this Event task:
-     [E][ ] staff meeting (at: Monday 3-4pm)
+     [E][ ] staff meeting  (at: Monday 3-4pm)
     Now you have 4 tasks in the list.
     ____________________________________________________________
 
@@ -42,8 +42,8 @@
     Here are the tasks in your list:
     1.[T][ ] buy book
     2.[T][ ] buy groceries
-    3.[D][ ] project-1 (by: Friday)
-    4.[E][ ] staff meeting (at: Monday 3-4pm)
+    3.[D][ ] project-1  (by: Friday)
+    4.[E][ ] staff meeting  (at: Monday 3-4pm)
     ____________________________________________________________
 
     ____________________________________________________________
@@ -53,7 +53,7 @@
 
     ____________________________________________________________
     Great! I have marked this task as done:
-     [E][X] staff meeting (at: Monday 3-4pm)
+     [E][X] staff meeting  (at: Monday 3-4pm)
     ____________________________________________________________
 
     ____________________________________________________________
@@ -65,8 +65,32 @@
     Here are the tasks in your list:
     1.[T][ ] buy book
     2.[T][ ] buy groceries
-    3.[D][ ] project-1 (by: Friday)
-    4.[E][X] staff meeting (at: Monday 3-4pm)
+    3.[D][ ] project-1  (by: Friday)
+    4.[E][X] staff meeting  (at: Monday 3-4pm)
+    ____________________________________________________________
+
+    ____________________________________________________________
+    OOPS!!! I'm sorry, but I don't know what that means :-(
+    ____________________________________________________________
+
+    ____________________________________________________________
+    :-( OOPS!!! Please input an integer with the mark command.
+    ____________________________________________________________
+
+    ____________________________________________________________
+    :-( OOPS!!! Please indicate the task to be unmasked.
+    ____________________________________________________________
+
+    ____________________________________________________________
+    :-( OOPS!!! The description of ToDo cannot be empty.
+    ____________________________________________________________
+
+    ____________________________________________________________
+    :-( OOPS!!! Due date/time of deadline cannot be empty.
+    ____________________________________________________________
+
+    ____________________________________________________________
+    :-( OOPS!!! Start-End date/time of event cannot be empty.
     ____________________________________________________________
 
     ____________________________________________________________
