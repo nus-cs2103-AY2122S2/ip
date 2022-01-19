@@ -7,7 +7,7 @@ public class Task {
         this.isDone = false;
     }
 
-    public boolean checkisDone(){
+    public boolean checkIsDone(){
         return this.isDone;
     }
 
@@ -26,10 +26,10 @@ public class Task {
 
     public String toString(){
         String isDoneRepresentation;
-        if (this.checkisDone() == true) {
+        if (this.checkIsDone() == true) {
             isDoneRepresentation = "[Done!] ";
         } else {
-            isDoneRepresentation = "[Not Done Yet!] ";
+            isDoneRepresentation = "[] ";
         }
         return isDoneRepresentation + this.getTaskDescription();
     }
