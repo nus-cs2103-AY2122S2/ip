@@ -1,3 +1,16 @@
-no
-todo
+hi
+todo addsomething
+event die
+event die /at later
+deadline
+deadline woosh
+deadline woosh /by later
+list
+mark 2
+mark 0
+mark 1
+unmark 1
+delete 1
+delete 3
+list
 bye
