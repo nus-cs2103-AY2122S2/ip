@@ -1,29 +1,29 @@
 public class Task {
-    private String value;
-    private Boolean completed;
+    private String description;
+    private Boolean isDone;
 
     /**
      * Constructor for the task object.
      *
-     * @param value
+     * @param description
      */
-    public Task(String value) {
-        this.value = value;
-        this.completed = false;
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
     }
 
     /**
      * Mark the current task as completed.
      */
     public void markAsCompleted() {
-        this.completed = true;
+        this.isDone = true;
     }
 
     /**
      * Mark the current task as uncompleted.
      */
     public void markAsUncompleted() {
-        this.completed = false;
+        this.isDone = false;
     }
 
     /**
@@ -31,12 +31,12 @@ public class Task {
      *
      * @return 'x' or ' ' depending on the status
      */
-    public String getStatusString() {
-        return completed ? "x" : " ";
+    public String getStatusIcon() {
+        return isDone ? "x" : " ";
     }
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", getStatusString(), this.value);
+        return String.format("[%s] %s", getStatusIcon(), this.description);
     }
 }
