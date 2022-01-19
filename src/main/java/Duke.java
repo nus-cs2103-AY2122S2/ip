@@ -27,16 +27,35 @@ public class Duke {
             } else if (input.equals("list")) {
                 System.out.println("\t Here are the tasks in your list:");
                 for (int i=0; i<count; i++) {
-                    System.out.println("\t " + (i+1) + ".[" + items[i].getStatusIcon() + "] " + items[i].description);
+                    System.out.println("\t " + (i+1) + "." + items[i]);
                 }
             } else if (input.split(" ", 2)[0].equals("mark")) {
                 int pos = Integer.parseInt(input.split(" ", 2)[1]);
                 items[pos-1].markAsDone();
-                System.out.println("\t Nice! I've marked this task as done:\n" + "\t  [" + items[pos-1].getStatusIcon() + "] " + items[pos-1].description);
-            } else {
-                items[count] = new Task(input);
+                System.out.println("\t Nice! I've marked this task as done:\n" + "\t  " + items[pos-1]);
+            } else if (input.split(" ", 2)[0].equals("deadline")) {
+                String date = input.split("/", 2)[1].split(" ", 2)[1];
+                String des = input.split(" /", 2)[0].split(" ", 2)[1];
+                items[count] = new Deadline(des, date);
                 count++;
-                System.out.println("\t added: " + input);
+                System.out.println("\t Got it, I've added this task:");
+                System.out.println("\t  " + items[count-1]);
+                System.out.println("\t Now you have " + count + " tasks in the list.");
+            } else if (input.split(" ", 2)[0].equals("todo")) {
+                String des = input.split(" ", 2)[1];
+                items[count] = new Todo(des);
+                count++;
+                System.out.println("\t Got it, I've added this task:");
+                System.out.println("\t  " + items[count-1]);
+                System.out.println("\t Now you have " + count + " tasks in the list.");
+            } else if (input.split(" ", 2)[0].equals("event")) {
+                String date = input.split("/", 2)[1].split(" ", 2)[1];
+                String des = input.split(" /", 2)[0].split(" ", 2)[1];
+                items[count] = new Deadline(des, date);
+                count++;
+                System.out.println("\t Got it, I've added this task:");
+                System.out.println("\t  " + items[count-1]);
+                System.out.println("\t Now you have " + count + " tasks in the list.");
             }
             System.out.println(line);
         }
