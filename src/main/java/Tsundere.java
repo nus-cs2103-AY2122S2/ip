@@ -5,93 +5,129 @@ public class Tsundere {
     static final private String lines = "------------------------------------------------------------------------";
     static List<Task> aryLst = new ArrayList<>();
     static int countLst = 0;
-
+    enum Command {
+        BYE,
+        LIST,
+        UNMARK,
+        MARK,
+        TODO,
+        DEADLINE,
+        EVENT,
+        DELETE,
+        UNKNOWN
+    }
     public static void main(String[] args) {
 
         System.out.println("Hmph, it's you again...\n"); //+ logo);
         greet();
+
         boolean isBye = false;
 
         Scanner sc = new Scanner(System.in);
         while (!isBye) {
             String userInput =  sc.nextLine();
             String comUserInput = userInput.toUpperCase();
+            Command switchCommand = Command.UNKNOWN;
+            if (comUserInput.contains("BYE")) {
+                switchCommand = Command.BYE;
+            } else if (comUserInput.contains("LIST")) {
+                switchCommand = Command.LIST;
+            } else if (comUserInput.contains("UNMARK")) {
+                switchCommand = Command.UNMARK;
+            } else if (comUserInput.contains("MARK")) {
+                switchCommand = Command.MARK;
+            } else if (comUserInput.contains("TODO")) {
+                switchCommand = Command.TODO;
+            } else if (comUserInput.contains("DEADLINE")) {
+                switchCommand = Command.DEADLINE;
+            } else if (comUserInput.contains("EVENT")) {
+                switchCommand = Command.EVENT;
+            } else if (comUserInput.contains("DELETE")) {
+                switchCommand = Command.DELETE;
+            }
             try {
-                switch (comUserInput) {
-                    case "BYE":
+                String[] splitStr;
+                String[] splitStr2;
+                int num;
+                switch (switchCommand) {
+                    case BYE:
                          exit();
                         isBye = true;
                         break;
-                    case "LIST":
+                    case LIST:
                         list();
                         break;
-                    default:
-                        if (comUserInput.contains("UNMARK")) {
-                            String[] splitStr = userInput.split(" ");
-                            if (splitStr.length < 2) {
-                                throw new TsundereException("Hmph you baka, gimme a correct format. For example: unmark 1");
-                            }
-                            int num = Integer.parseInt(splitStr[1]);
-
-                            if (num > countLst) {
-                                throw new TsundereException("Hmph you baka, you gave a invalid number!");
-                            }
-                            unmark(num);
-                        } else if (comUserInput.contains("MARK")) {
-                            String[] splitStr = userInput.split(" ");
-
-                            if (splitStr.length < 2) {
-                                throw new TsundereException("Hmph you baka, gimme a correct format. For example: mark 1");
-                            }
-
-                            int num = Integer.parseInt(splitStr[1]);
-
-                            if (num > countLst) {
-                                throw new TsundereException("Hmph you baka, you gave a invalid number!");
-                            }
-                            mark(num);
-                        } else if (comUserInput.contains("TODO")) {
-                            String[] splitStr = userInput.split(" ", 2);
-                            if (splitStr.length < 2) {
-                                throw new TsundereException("Hmph you baka, gimme a correct format. For example, todo sleep");
-                            }
-                            todo(splitStr[1]);
-                        } else if (comUserInput.contains("DEADLINE")) {
-                            String[] splitStr = userInput.split("/by");
-                            if (splitStr.length < 2) {
-                                throw new TsundereException("Hmph you baka, gimme a correct format. For example, deadline sleep/by Sunday");
-                            }
-                            String[] splitStr2 = splitStr[0].split(" ",2);
-                            if (splitStr2.length < 2) {
-                                throw new TsundereException("Hmph you baka, gimme a correct format. For example, deadline sleep/by Sunday");
-                            }
-                            deadline(splitStr2[1], splitStr[1]);
-                        } else if (comUserInput.contains("EVENT")) {
-                            String[] splitStr = userInput.split("/at");
-                            if (splitStr.length < 2) {
-                                throw new TsundereException("Hmph you baka, gimme a correct format. For example, event sleep/at Sunday");
-                            }
-                            String[] splitStr2 = splitStr[0].split(" ",2);
-                            if (splitStr2.length < 2) {
-                                throw new TsundereException("Hmph you baka, gimme a correct format. For example, event sleep/at Sunday");
-                            }
-                            event(splitStr2[1], splitStr[1]);
-                        } else if (comUserInput.contains("DELETE")) {
-                            String[] splitStr = userInput.split(" ");
-
-                            if (splitStr.length < 2) {
-                                throw new TsundereException("Hmph you baka, gimme a correct format. For example: delete 1");
-                            }
-
-                            int num = Integer.parseInt(splitStr[1]);
-
-                            if (num > countLst) {
-                                throw new TsundereException("Hmph you baka, you gave a invalid number!");
-                            }
-                            delete(num);
-                        } else {
-                            throw new TsundereException("I don't know what you want! Say something valid.");
+                    case UNMARK:
+                        splitStr = userInput.split(" ");
+                        if (splitStr.length < 2) {
+                            throw new TsundereException("Hmph you baka, gimme a correct format. For example: unmark 1");
                         }
+                        num = Integer.parseInt(splitStr[1]);
+
+                        if (num > countLst) {
+                            throw new TsundereException("Hmph you baka, you gave a invalid number!");
+                        }
+                        unmark(num);
+                        break;
+                    case MARK:
+                        splitStr = userInput.split(" ");
+                        if (splitStr.length < 2) {
+                            throw new TsundereException("Hmph you baka, gimme a correct format. For example: mark 1");
+                        }
+
+                        num = Integer.parseInt(splitStr[1]);
+
+                        if (num > countLst) {
+                            throw new TsundereException("Hmph you baka, you gave a invalid number!");
+                        }
+                        mark(num);
+                        break;
+                    case TODO:
+                        splitStr = userInput.split(" ", 2);
+                        if (splitStr.length < 2) {
+                            throw new TsundereException("Hmph you baka, gimme a correct format. For example, todo sleep");
+                        }
+                        todo(splitStr[1]);
+                        break;
+                    case DEADLINE:
+                        splitStr = userInput.split("/by");
+                        if (splitStr.length < 2) {
+                            throw new TsundereException("Hmph you baka, gimme a correct format. For example, deadline sleep/by Sunday");
+                        }
+                        splitStr2 = splitStr[0].split(" ",2);
+                        if (splitStr2.length < 2) {
+                            throw new TsundereException("Hmph you baka, gimme a correct format. For example, deadline sleep/by Sunday");
+                        }
+                        deadline(splitStr2[1], splitStr[1]);
+                        break;
+                    case EVENT:
+                        splitStr = userInput.split("/at");
+                        if (splitStr.length < 2) {
+                            throw new TsundereException("Hmph you baka, gimme a correct format. For example, event sleep/at Sunday");
+                        }
+                        splitStr2 = splitStr[0].split(" ",2);
+                        if (splitStr2.length < 2) {
+                            throw new TsundereException("Hmph you baka, gimme a correct format. For example, event sleep/at Sunday");
+                        }
+                        event(splitStr2[1], splitStr[1]);
+                        break;
+                    case DELETE:
+                        splitStr = userInput.split(" ");
+
+                        if (splitStr.length < 2) {
+                            throw new TsundereException("Hmph you baka, gimme a correct format. For example: delete 1");
+                        }
+
+                        num = Integer.parseInt(splitStr[1]);
+
+                        if (num > countLst) {
+                            throw new TsundereException("Hmph you baka, you gave a invalid number!");
+                        }
+                        delete(num);
+                        break;
+                    default:
+                            throw new TsundereException("I don't know what you want! Say something valid.");
+
                 }
             } catch (TsundereException te) {
                 System.out.println(te.getMessage());
@@ -184,8 +220,8 @@ public class Tsundere {
 
     static private void delete(int num) {
         System.out.println(lines);
-        System.out.println("Deleting the task. You're not being lazy, are you?");
-        System.out.println(aryLst.get(num).toString());
+        System.out.println("Deleting the following task. You're not being lazy, are you?");
+        System.out.println(aryLst.get(num - 1).toString());
         aryLst.remove(num - 1);
         countLst--;
         System.out.println("You have " + countLst + " task(s) to do, you lazy bum!");
