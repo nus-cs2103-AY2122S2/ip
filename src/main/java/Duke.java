@@ -189,6 +189,12 @@ public class Duke {
         }
     }
 
+    class DukeException extends Exception{
+        public DukeException(String errorMessage){
+            super(errorMessage);
+        }
+    }
+
     public static void main(String[] args) {
         String hyphenate = "    ____________________________________________________________";
         System.out.println(hyphenate + "\n    Hello! I'm DockerHawker\n    I am your personal assistant! what can I do for you?\n" + hyphenate);
@@ -224,15 +230,24 @@ public class Duke {
             } else {
                 switch(commandSplit[0]){
                     case "todo":
-                        Todos newTask = new Duke().new Todos(commandSplit[1]);
-                        taskList.add(newTask); 
-                        System.out.println(hyphenate);
-                        System.out.println("    Wow, sounds fun! I have successfully added this task:");
-                        System.out.println("       " + taskList.get(taskList.size()-1));
-                        System.out.println("    Now you have " + taskList.size() + " tasks in the list!");
-                        System.out.println(hyphenate);
+                        try {
+                            Todos newTask = new Duke().new Todos(commandSplit[1]);
+                            taskList.add(newTask); 
+                            System.out.println(hyphenate);
+                            System.out.println("    Wow, sounds fun! I have successfully added this task:");
+                            System.out.println("       " + taskList.get(taskList.size()-1));
+                            System.out.println("    Now you have " + taskList.size() + " tasks in the list!");
+                            System.out.println(hyphenate);
+                        } catch(IndexOutOfBoundsException err) {
+                            System.out.println(hyphenate);
+                            System.out.println("");
+                            System.out.println("       YIKES!!! The description of a todo cannot be empty.");
+                            System.out.println(hyphenate);
+                        }
                         break;
+
                     case "deadline":
+                        try{
                         Deadlines newTask1 = new Duke().new Deadlines(commandSplit[1].split(" /by ", 2)[0], commandSplit[1].split(" /by ", 2)[1]);
                         taskList.add(newTask1); 
                         System.out.println(hyphenate);
@@ -240,8 +255,16 @@ public class Duke {
                         System.out.println("       " + newTask1);
                         System.out.println("    Now you have " + taskList.size() + " tasks in the list!");
                         System.out.println(hyphenate);
+                        } catch(IndexOutOfBoundsException err) {
+                            System.out.println(hyphenate);
+                            System.out.println("");
+                            System.out.println("       YIKES!!! We faced an issue creating an deadline, make sure to have both a \"/by\" and a description.");
+                            System.out.println(hyphenate);
+                        }
                         break;
+
                     case "event":
+                        try {
                         Events newTask2 = new Duke().new Events(commandSplit[1].split(" /at ",2)[0], commandSplit[1].split(" /at ",2)[1]);
                         taskList.add(newTask2); 
                         System.out.println(hyphenate);
@@ -249,10 +272,17 @@ public class Duke {
                         System.out.println("       " + newTask2);
                         System.out.println("    Now you have " + taskList.size() + " tasks in the list!");
                         System.out.println(hyphenate);
+                        } catch(IndexOutOfBoundsException err) {
+                            System.out.println(hyphenate);
+                            System.out.println("");
+                            System.out.println("       YIKES!!! We faced an issue creating an Event, make sure to have both an \"/at\" and a description.");
+                            System.out.println(hyphenate);
+                        }
                         break;
+
                     default:
                         System.out.println(hyphenate);
-                        System.out.println("\n    " + command); 
+                        System.out.println("\n       " + "YIKES!!! I'm sorry, but I don't know what that means :-("); 
                         System.out.println(hyphenate);
                         break;
                 }
