@@ -18,6 +18,7 @@ public class Duke {
         while (!command.equalsIgnoreCase(bye)) { // Checks if user wants to exit or not
             command = sc.nextLine();
             String requestNextCommand = "\tAye, Aye. Your next command:";
+            String requestNextCommandAngry = "\tAye Aye, better get it right this time. Your next command:";
             String reply = "\tAye, Aye. Your command:";
             String taskAdded = "\tTask Added, arrgh:\n";
             String taskCall = "\tAvast ye Matey. Here goes your task list:\n";
@@ -26,9 +27,11 @@ public class Duke {
             String[] splitCommand = command.split(" ", 2);
             switch (splitCommand[0].toLowerCase()) {
                 case "bye":
+                    // Error handling
                     System.out.println("\tFair winds adventurer, till we meet next time yarr. Bye for now.\n" + line);
                     break;
                 case "list":
+                    // Error handling
                     System.out.println(line + taskCall);
                     for (int i = 0; i < taskCount; i++) {
                         System.out.println("\t" + String.valueOf(i + 1) + "." + taskList[i].toString());
@@ -36,6 +39,7 @@ public class Duke {
                     System.out.println(line + requestNextCommand);
                     break;
                 case "mark":
+                    // Error handling
                     int taskIndex = Integer.parseInt(splitCommand[1]) - 1;
                     Task curr = taskList[taskIndex];
                     curr.markAsDone();
@@ -44,6 +48,7 @@ public class Duke {
                     System.out.println(line + requestNextCommand);
                     break;
                 case "unmark":
+                    // Error handling
                     taskIndex = Integer.parseInt(splitCommand[1]) - 1;
                     curr = taskList[taskIndex];
                     curr.markAsUndone();
@@ -52,6 +57,13 @@ public class Duke {
                     System.out.println(line + requestNextCommand);
                     break;
                 case "deadline":
+                    // Error handling
+                    if (splitCommand.length == 1) {
+                        System.out.println(line + "\tAaaarrrrgggghhhh deadline description can't be empty matey!\n");
+                        System.out.println("\tEnter something like this: deadline return book /by Sunday\n" + line);
+                        System.out.println(requestNextCommandAngry);
+                        break;
+                    }
                     String[] furtherSplitCommand = splitCommand[1].split(" /by ", 2);
                     taskList[taskCount] = new Deadline(furtherSplitCommand[0], furtherSplitCommand[1]);
                     taskCount++;
@@ -60,6 +72,13 @@ public class Duke {
                     System.out.println(line + requestNextCommand);
                     break;
                 case "event":
+                    // Error handling
+                    if (splitCommand.length == 1) {
+                        System.out.println(line + "\tAaaarrrrgggghhhh event description can't be empty matey!\n");
+                        System.out.println("\tEnter something like this: event project meeting /at Monday 2pm\n" + line);
+                        System.out.println(requestNextCommandAngry);
+                        break;
+                    }
                     furtherSplitCommand = splitCommand[1].split(" /at ", 2);
                     taskList[taskCount] = new Event(furtherSplitCommand[0], furtherSplitCommand[1]);
                     taskCount++;
@@ -68,6 +87,13 @@ public class Duke {
                     System.out.println(line + requestNextCommand);
                     break;
                 case "todo":
+                    // Error handling
+                    if (splitCommand.length == 1) {
+                        System.out.println(line + "\tAaaarrrrgggghhhh todo description can't be empty matey!\n");
+                        System.out.println("\tEnter something like this: todo return book\n" + line);
+                        System.out.println(requestNextCommandAngry);
+                        break;
+                    }
                     taskList[taskCount] = new Todo(splitCommand[1]);
                     taskCount++;
                     System.out.println(taskAdded + "\t" + taskList[taskCount - 1].toString());
@@ -75,10 +101,10 @@ public class Duke {
                     System.out.println(line + requestNextCommand);
                     break;
                 default:
-                    taskList[taskCount] = new Task(command);
-                    taskCount++;
-                    System.out.println(reply + "Add '" + command + "' into list\n");
-                    System.out.println(line + requestNextCommand);
+                    // Error handling
+                    System.out.println(line + "\tAaaarrrrgggghhhh this ain't no command matey!!\n" + line);
+                    System.out.println(requestNextCommandAngry);
+                    break;
             }
         }
     }
