@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Duke {
     
     //Level 1
+    /*
     public static void main(String[] args) {
         // String logo = " ____        _        \n"
         //         + "|  _ \\ _   _| | _____ \n"
@@ -25,11 +26,10 @@ public class Duke {
         System.out.println(hyphenate + "\n    Bye. Let's play some video games next time!\n" + hyphenate);
         sc.close();
     }
-    
+    */
 
 
     //Level 2
-    /*
     public static void main(String[] args) {
         String hyphenate = "    ____________________________________________________________";
         System.out.println(hyphenate + "\n    Hello! I'm DockerHawker\n    I am your personal assistant! what can I do for you?\n" + hyphenate);
@@ -58,5 +58,5 @@ public class Duke {
         System.out.println(hyphenate + "\n    Bye. Let's play some video games next time!\n" + hyphenate);
         sc.close();
     }
-    */
+    
 }
