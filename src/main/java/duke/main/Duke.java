@@ -1,10 +1,10 @@
 package duke.main;
 
-import duke.command.*;
-import duke.task.*;
-import duke.ui.*;
-import duke.storage.*;
-import duke.parser.*;
+import duke.command.Command;
+import duke.task.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
+import duke.parser.Parser;
 
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
