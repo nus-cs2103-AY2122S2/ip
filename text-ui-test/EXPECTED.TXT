@@ -37,12 +37,15 @@ Nice! I've marked this task as done:
 OK, I've marked this task as not done yet:
 [T][ ] read book
 
-Please specify a valid task.
+Please specify a valid task index.
+
+Noted. I've removed this task:
+[T][ ] read book
+Now you have 2 tasks in the list.
 
 Here are the tasks in your list:
 1.[E][X] borrow book (at: 20-01-2022)
-2.[T][ ] read book
-3.[D][ ] return book (by: 2 weeks later)
+2.[D][ ] return book (by: 2 weeks later)
 
 Sorry, the command 'doSomething' is not supported.
 

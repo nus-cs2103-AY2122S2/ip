@@ -15,6 +15,10 @@ public class TaskList {
         this.tasks.add(task);
     }
 
+    public void deleteTask(int index) {
+        this.tasks.remove(index - 1);
+    }
+
     public int getLength() {
         return this.tasks.size();
     }

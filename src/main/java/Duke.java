@@ -39,6 +39,8 @@ public class Duke {
                     Duke.addDeadline(details);
                 } else if (command.equals(ValidCommand.EVENT.label)) {
                     Duke.addEvent(details);
+                } else if (command.equals(ValidCommand.DELETE.label)) {
+                    Duke.deleteTask(details);
                 } else {
                     throw new IllegalArgumentException(
                             String.format("Sorry, the command '%s' is not supported.", command));
@@ -50,9 +52,9 @@ public class Duke {
         }
     }
 
-    private static void toggleTaskDone(ValidCommand cmd, String indexString) throws DukeException {
+    private static int convertIndex(String indexString) throws DukeException {
         if (indexString.strip().equals("")) {
-            throw new DukeException("Please specify a task to mark.");
+            throw new DukeException("Please specify a task.");
         }
         int index;
         try {
@@ -61,9 +63,14 @@ public class Duke {
             throw new DukeException("Please specify a task using its index in the task list.");
         }
         if (index < 1 || index > taskList.getLength()) {
-            throw new DukeException("Please specify a valid task.");
+            throw new DukeException("Please specify a valid task index.");
         }
-        Task task = taskList.getTask(index);
+        return index;
+    }
+
+    private static void toggleTaskDone(ValidCommand cmd, String indexString) throws DukeException {
+        int index = Duke.convertIndex(indexString);
+        Task task = Duke.taskList.getTask(index);
         if (cmd == ValidCommand.MARK) {
             task.markAsDone();
             System.out.println("Nice! I've marked this task as done:");
@@ -76,7 +83,7 @@ public class Duke {
     }
 
     private static void addTaskHelper(Task task) {
-        taskList.addTask(task);
+        Duke.taskList.addTask(task);
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
         System.out.println("Now you have " + taskList.getLength() + " tasks in the list.\n");
@@ -108,5 +115,14 @@ public class Duke {
         }
         Task task = new Event(eventInputs[0], eventInputs[1]);
         addTaskHelper(task);
+    }
+
+    private static void deleteTask(String indexString) throws DukeException {
+        int index = Duke.convertIndex(indexString);
+        Task task = Duke.taskList.getTask(index);
+        Duke.taskList.deleteTask(index);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(task);
+        System.out.println("Now you have " + taskList.getLength() + " tasks in the list.\n");
     }
 }
