@@ -1,6 +1,6 @@
 /**
  * TaskList helps to store tasks given by the user. TaskList is contained in
- * the Bot class.
+ * the Bot class and handles the Task for the Bot.
  * 1st method: add, which adds inputs by the user into the storage.
  * 2nd method: list, which shows what's in the TaskList currently.
  */
@@ -9,6 +9,7 @@ public class TaskList {
     Task[] tasks;
     int nextIndex = 0;
     int done = 0;
+    String lineBreak = "___________________________________________________________";
     /**
      * Constructs a TaskList containing an array to contain tasks
      */
@@ -44,10 +45,11 @@ public class TaskList {
         nextIndex++;
         System.out.printf("Got ya. Added:\n%s\nYou got %d tasks waiting for ya!\n",
                             newTask, nextIndex - done);
+        System.out.println(lineBreak);
     }
 
     /**
-     * Checks if the user input is of which task
+     * Verifies the user input is of which task
      * @param taskType String
      * @param input String
      * @return boolean to affirm if the input is of this task
@@ -99,6 +101,7 @@ public class TaskList {
             Task currentTask = tasks[i];
             System.out.printf("%d. %s\n", currentTask.id, currentTask);
         }
+        System.out.println(lineBreak);
     }
 
     /**
@@ -118,15 +121,18 @@ public class TaskList {
                         tasks[taskIndex].markDone();
                         done++;
                         System.out.printf("This is now done:\n%s\n", tasks[taskIndex]);
+                        System.out.println(lineBreak);
                     } else if (action.equals("unmark")) {
                         tasks[taskIndex].markNotDone();
                         done--;
                         System.out.printf("This is now undone:\n%s\n", tasks[taskIndex]);
+                        System.out.println(lineBreak);
                     }
                 }
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            System.out.println(lineBreak);
         }
     }
 
@@ -142,7 +148,7 @@ public class TaskList {
         if (inputArr.length == 2) {
             return true;
         } else {
-            throw new IllegalArgumentException("Only input: mark taskNumber");
+            throw new IllegalArgumentException("Wrong input. Type this: mark taskNumber");
         }
     }
 }

@@ -7,6 +7,7 @@
 
 public class Bot {
     TaskList tasks;
+    String lineBreak = "___________________________________________________________";
     /**
      * Constructs a new Bot containing a Storage
      */
@@ -15,6 +16,7 @@ public class Bot {
     }
     void greet() {
         System.out.println("Hello! I'm Bernie\nWhat's up?");
+        System.out.println(lineBreak);
     }
     void leave() {
         System.out.println("See ya!");
@@ -30,7 +32,7 @@ public class Bot {
                 tasks.list();
             } else if (input.equals("bye")) {
                 leave();
-            } else if (input.contains("mark") || input.contains("unmark")) {
+            } else if (isMarkInput(input)) {
                 tasks.mark(input);
             } else if (input.equals("")) {
                 throw new IllegalArgumentException("No input given!");
@@ -39,8 +41,13 @@ public class Bot {
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            System.out.println(lineBreak);
         } finally {
             return input.equals("bye");
         }
+    }
+
+    boolean isMarkInput(String input) {
+        return input.indexOf("mark") == 0 || input.indexOf("unmark") == 0;
     }
 }
