@@ -22,8 +22,6 @@ public class Commands {
 
     void list() { // Get DukeLCH to List cmdHistory
         String border = "_______________________________________________________\n";
-        System.out.println(border);
-        cmdHistory.printAll();
-        System.out.println(border);
+        System.out.println(border + cmdHistory.printAll() + border);
     }
 }
