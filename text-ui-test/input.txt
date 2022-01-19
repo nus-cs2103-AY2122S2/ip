@@ -1,3 +1,5 @@
+delete
+delete 1
 list
 todo
 todo buy book
@@ -14,5 +16,6 @@ mark 2
 mark 3
 unmark 3
 mark 4
+delete 2
 list
 bye

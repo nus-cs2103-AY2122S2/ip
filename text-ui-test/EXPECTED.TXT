@@ -1,5 +1,8 @@
 Greetings from Ann
 What can I do for you?
+Oops! Please use the following format:
+delete [task number]
+Oops! Currently, you have no tasks :)
 Currently, you have no tasks :)
 Oops! Please add a description for the todo!
 Alright! I've added this task:
@@ -18,7 +21,8 @@ Oops! Please enter a valid command!
 Alright! I've added this task:
 [E][ ] meet Prof (at 10am Monday)
 Now there are 3 tasks in your list.
-Oops! Please add a time for the event!
+Oops! Please use the following format:
+event [content] /at [time]
 Here are the tasks in your list:
 1. [T][ ] buy book
 2. [D][ ] finish homework (by Saturday)
@@ -30,8 +34,10 @@ Alright! I've marked this task as done:
 Alright! I've marked this task as not done yet:
 [E][ ] meet Prof (at 10am Monday)
 Oops! Please enter a number between 1 and 3!
+Alright! I've removed this task:
+[D][X] finish homework (by Saturday)
+Now you have 2 tasks in your list.
 Here are the tasks in your list:
 1. [T][ ] buy book
-2. [D][X] finish homework (by Saturday)
-3. [E][ ] meet Prof (at 10am Monday)
+2. [E][ ] meet Prof (at 10am Monday)
 Sad to see you go :( See you again soon!
