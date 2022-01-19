@@ -22,8 +22,10 @@ public abstract class Command {
      * Execute current command in ChatBot context
      *
      * @return whether the command is a terminating command
+     * @throws IllegalArgumentException if the command is executed
+     * with invalid args
      */
-    public abstract boolean execute();
+    public abstract boolean execute() throws IllegalArgumentException;
 
     /**
      * Name of current command
@@ -48,8 +50,9 @@ public abstract class Command {
      * @param input Command inputted by user
      * @param tasks Collection of tasks maintained by ChatBot
      * @return Command object corresponding to input
+     * @throws IllegalArgumentException if the command is not valid
      */
-    public static Command parseCommand(String input, ArrayList<Task> tasks) {
+    public static Command parseCommand(String input, ArrayList<Task> tasks) throws IllegalArgumentException {
         String name = input;
         String args = null;
         // Separate command name and args
@@ -79,7 +82,7 @@ public abstract class Command {
                 command = new ExitCommand(name, args);
                 break;
             default:
-                return null;
+                throw new IllegalArgumentException("Invalid command");
         }
         return command;
     }
@@ -91,7 +94,7 @@ public abstract class Command {
      *
      * @param response list of response to print
      */
-    protected static void styledPrint(ArrayList<String> response) {
+    public static void styledPrint(ArrayList<String> response) {
         response.add(0, DELIMITER);
         response.add(DELIMITER);
         // Prepend each response item with an indent and a line break

@@ -21,7 +21,7 @@ public class AddTaskCommand extends Command {
     }
 
     @Override
-    public boolean execute() {
+    public boolean execute() throws IllegalArgumentException {
         Task newTask = createTask(super.getName(), super.getArgs());
         this.list.add(newTask);
 
@@ -39,21 +39,31 @@ public class AddTaskCommand extends Command {
      *
      * @param name Name of task to create
      * @param args Args to create task with
-     * @return
+     * @return New Task created based on name and args
+     * @throws IllegalArgumentException if args are invalid for task
      */
-    private static Task createTask(String name, String args) {
+    private static Task createTask(String name, String args) throws IllegalArgumentException {
         Task task = null;
         switch (name) {
             case "todo":
+                if (args == null) {
+                    throw new IllegalArgumentException("TODOs description cannot be empty!");
+                }
                 task = new ToDo(args);
                 break;
             case "deadline":
+                if (!args.contains("/by")) {
+                    throw new IllegalArgumentException("Deadline requires a deadline!");
+                }
                 String[] deadlineInfo = args.split("/by", 2);
                 String deadlineName = deadlineInfo[0].strip();
                 String deadline = deadlineInfo[1].strip();
                 task = new Deadline(deadlineName, deadline);
                 break;
             case "event":
+                if (!args.contains("/at")) {
+                    throw new IllegalArgumentException("Events requires a time!");
+                }
                 String[] eventInfo = args.split("/at", 2);
                 String eventName = eventInfo[0].strip();
                 String time = eventInfo[1].strip();

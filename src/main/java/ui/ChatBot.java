@@ -43,8 +43,15 @@ public class ChatBot {
      * @param input String command by user to run
      */
     public void runCommand(String input) {
-        Command command = Command.parseCommand(input, this.tasks);
-        this.terminated = command.execute();
+        try {
+            Command command = Command.parseCommand(input, this.tasks);
+            this.terminated = command.execute();
+        } catch (IllegalArgumentException e) {
+            ArrayList<String> response = new ArrayList<>();
+            response.add("Sorry, the following problem has occurred:");
+            response.add(e.getMessage());
+            Command.styledPrint(response);
+        }
     }
 
     public boolean isTerminated() {

@@ -21,7 +21,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public boolean execute() {
+    public boolean execute() throws IllegalArgumentException {
         ArrayList<String> response = new ArrayList<>();
         // Prepend each list item with its numbering inside list
         for (int i = 0; i < this.list.size(); i++) {

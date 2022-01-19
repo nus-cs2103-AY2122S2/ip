@@ -16,7 +16,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public boolean execute() {
+    public boolean execute() throws IllegalArgumentException {
         ArrayList<String> response = new ArrayList<>();
         response.add(GOODBYE_STRING);
         styledPrint(response);

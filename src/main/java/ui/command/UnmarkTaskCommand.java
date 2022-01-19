@@ -21,10 +21,20 @@ public class UnmarkTaskCommand extends Command {
     }
 
     @Override
-    public boolean execute() {
+    public boolean execute() throws IllegalArgumentException {
         // Args for this command represents index of task to
         // mark as undone
-        int taskIndex = Integer.parseInt(super.getArgs()) - 1;
+        int taskIndex;
+        try {
+            taskIndex = Integer.parseInt(super.getArgs()) - 1;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Non-number passed to mark/unmark task");
+        }
+
+        if (taskIndex < 0 || taskIndex >= this.list.size()) {
+            throw new IllegalArgumentException("Mark/unmark index out of list range");
+        }
+
         Task task = this.list.get(taskIndex);
         task.unmarkDone();
 
