@@ -25,7 +25,7 @@ public class Duke {
             } else if (input.startsWith("todo") || input.startsWith("deadline") || input.startsWith("event")){
                 add(input);
             } else {
-                add(input);
+                invalid();
             }
         }
     }

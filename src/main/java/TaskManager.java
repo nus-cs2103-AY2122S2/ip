@@ -7,7 +7,7 @@ public class TaskManager {
 
     public String addTask(String s){
         try {
-            Task t = Task.addTask(s);
+            Task t = Task.newTask(s);
             list.add(t);
 
             String str = String.format("Got it. I've added this task:\n" +

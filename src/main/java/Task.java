@@ -1,24 +1,22 @@
 import javax.swing.tree.ExpandVetoException;
 
-public class Task{
+public abstract class Task{
     protected String taskName;
     protected char done = ' ';
 
     public Task(){}
 
-    public Task(String s){
-        this.taskName = s;
-    }
-
-    public static Task addTask(String s) throws InvalidTaskDataTimeException,InvalidTaskDescriptionException,InvalidTaskTypeException{
+    public static Task newTask(String s) throws InvalidTaskDataTimeException,InvalidTaskDescriptionException,InvalidTaskTypeException{
         if (s.startsWith("todo")){
             return newToDo(s);
-        } else if (s.startsWith("deadline")){
+        }
+        else if (s.startsWith("deadline")){
             return newDeadline(s);
-        } else if (s.startsWith("event")){
+        }
+        else if (s.startsWith("event")){
             return newEvent(s);
         } else {
-            return newTask(s);
+            throw new InvalidTaskTypeException(s);
         }
     }
 
@@ -35,10 +33,6 @@ public class Task{
     private static Deadline newDeadline(String s) throws InvalidTaskDataTimeException,InvalidTaskDescriptionException{
         String taskName =  s.replaceFirst("deadline","").strip();
         return new Deadline(taskName);
-    }
-
-    private static Task newTask(String s){
-        return new Task(s);
     }
 
     public void markDone(){
@@ -58,5 +52,5 @@ public class Task{
         return s;
     }
 
-    public char getType(){ return ' '; }
+    public abstract char getType();
 }
