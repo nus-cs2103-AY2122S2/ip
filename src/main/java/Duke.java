@@ -24,45 +24,89 @@ public class Duke {
                 }
             } else if (command.startsWith("mark ")) {
                 int taskNumber = Integer.parseInt(command.substring(5));
-                Task tobeMark = storeList.get(taskNumber - 1);
-                tobeMark.setMark();
-                System.out.println("You could have gotten me to help you. This task has been marked done");
-                System.out.println(tobeMark.toString());
-
+                if (taskNumber > storeList.size()) {
+                    System.out.println("Master, you do not have that many tasks, you currently only have "
+                                                + storeList.size() + " tasks. Please wish again");
+                    continue;
+                } else if (taskNumber <= 0) {
+                    System.out.println("Master, I am only a genie. Please choose a number between 1 and " + storeList.size());
+                    continue;
+                } else {
+                    Task tobeMark = storeList.get(taskNumber - 1);
+                    tobeMark.setMark();
+                    System.out.println("You could have gotten me to help you. This task has been marked done");
+                    System.out.println(tobeMark.toString());
+                }
             } else if (command.startsWith("unmark ")) {
                 int taskNumber1 = Integer.parseInt(command.substring(7));
-                Task tobeUnmark = storeList.get(taskNumber1 - 1);
-                tobeUnmark.setUnmark();
-                System.out.println("You probably need more genies to help you. This task has been marked as not done");
-                System.out.println(tobeUnmark.toString());
-
-            } else if (command.startsWith("deadline ")) {
+                if (taskNumber1 > storeList.size()) {
+                    System.out.println("Master, you do not have that many tasks, you currently only have "
+                            + storeList.size() + " tasks. Please wish again");
+                    continue;
+                } else if (taskNumber1 <= 0) {
+                    System.out.println("Master, I am only a genie. Please choose a number between 1 and " + storeList.size());
+                    continue;
+                } else {
+                    Task tobeUnmark = storeList.get(taskNumber1 - 1);
+                    tobeUnmark.setUnmark();
+                    System.out.println("You probably need more genies to help you. This task has been marked as not done");
+                    System.out.println(tobeUnmark.toString());
+                }
+            } else if (command.startsWith("deadline")) {
                 int slash = command.indexOf("/");
-                String newtask = command.substring(9, slash - 1);
-                String endtime = command.substring(slash + 1);
-                Deadline d = new Deadline(newtask, endtime);
-                storeList.add(d);
-                System.out.println("Added to my brain master:");
-                System.out.println(d.toString());
-                System.out.println("Currently I have " + storeList.size() + " things in my brain");
+                if (slash == -1 || slash <= 9) {
+                    System.out.println("Master, you wished wrongly. Remember you have to wish in this format " +
+                            "deadline task /by dateofdeadline. Please wish again");
+                    continue;
+                } else {
+                    String newtask = command.substring(9, slash - 1);
+                    if (newtask.equals("")) {
+                        System.out.println("Master, you wished wrongly. Remember you have to wish in this format " +
+                                "deadline task /by dateofdeadline. Please wish again");
+                        continue;
+                    } else {
+                        String endtime = command.substring(slash + 1);
+                        Deadline d = new Deadline(newtask, endtime);
+                        storeList.add(d);
+                        System.out.println("Added to my brain master:");
+                        System.out.println(d.toString());
+                        System.out.println("Currently I have " + storeList.size() + " things in my brain");
+                    }
+                }
 
-            } else if (command.startsWith("todo ")) {
-                String newtask = command.substring(5);
-                Todo t = new Todo(newtask);
-                storeList.add(t);
-                System.out.println("Added to my brain master:");
-                System.out.println(t.toString());
-                System.out.println("Currently I have " + storeList.size() + " things in my brain");
+            } else if (command.startsWith("todo")) {
+                if (command.length() < 5) {
+                    System.out.println("Master, I have all the knowledge in the world but I do not know what you want to do," +
+                            " Please wish again in the format todo task");
+                    continue;
+                } else {
+                    String newtask = command.substring(5);
+                    Todo t = new Todo(newtask);
+                    storeList.add(t);
+                    System.out.println("Added to my brain master:");
+                    System.out.println(t.toString());
+                    System.out.println("Currently I have " + storeList.size() + " things in my brain");
+                }
 
-            } else if (command.startsWith("event ")) {
+            } else if (command.startsWith("event")) {
                 int slash = command.indexOf("/");
-                String newtask = command.substring(6, slash - 1);
-                String attime = command.substring(slash + 1);
-                Event e = new Event(newtask, attime);
-                storeList.add(e);
-                System.out.println("Added to my brain master:");
-                System.out.println(e.toString());
-                System.out.println("Currently I have " + storeList.size() + " things in my brain");
+                if (slash == -1 || slash <= 6) {
+                    System.out.println("Master, you wished wrongly. Remember you have to wish in this format " +
+                            "deadline task /by dateofevent. Please wish again");
+                    continue;
+                } else {
+                    String newtask = command.substring(6, slash - 1);
+                    String attime = command.substring(slash + 1);
+                    Event e = new Event(newtask, attime);
+                    storeList.add(e);
+                    System.out.println("Added to my brain master:");
+                    System.out.println(e.toString());
+                    System.out.println("Currently I have " + storeList.size() + " things in my brain");
+                }
+            } else {
+                System.out.println("Master, I have all the knowledge in the world but I do not recognise that command," +
+                        " Please wish again");
+                continue;
             }
         }
         sc.close();
