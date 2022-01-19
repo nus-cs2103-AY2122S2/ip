@@ -1,77 +1,93 @@
-        Hello! I'm Duke
-        What can I do for you?
 
-        Got it. I've added this task:
-                [T][ ] read book
-        Now you have 1 tasks in the list.
+	Hello! I'm Duke
+	What can I do for you?
 
-        Got it. I've added this task:
-                [D][ ] return book (by: June 6th)
-        Now you have 2 tasks in the list.
+	Wrong command
 
-        Got it. I've added this task:
-                [E][ ] project meeting (by: Aug 6th 2-4pm)
-        Now you have 3 tasks in the list.
+	Empty list
 
-        Got it. I've added this task:
-                [T][ ] join sports club
-        Now you have 4 tasks in the list.
+	DukeException: Task does not exist
 
-        Got it. I've added this task:
-                [T][ ] borrow book
-        Now you have 5 tasks in the list.
+	DukeException: Task does not exist
 
-        Nice! I've marked this task as done:
-                1. [T][X] read book
+	DukeException: There is no index
 
-        Nice! I've marked this task as done:
-                4. [T][X] join sports club
+	DukeException: There is no index
 
-        Got it. I've added this task:
-                [D][ ] return book (by: Sunday)
-        Now you have 6 tasks in the list.
+	No task to do
 
-        Got it. I've added this task:
-                [E][ ] project meeting (by: Mon 2-4pm)
-        Now you have 7 tasks in the list.
+	DukeException: /at not found
 
-        Got it. I've added this task:
-                [D][ ] do homework (by: no idea :-p)
-        Now you have 8 tasks in the list.
+	DukeException: /by not found
 
-        1. [T][X] read book
-        2. [D][ ] return book (by: June 6th)
-        3. [E][ ] project meeting (by: Aug 6th 2-4pm)
-        4. [T][X] join sports club
-        5. [T][ ] borrow book
-        6. [D][ ] return book (by: Sunday)
-        7. [E][ ] project meeting (by: Mon 2-4pm)
-        8. [D][ ] do homework (by: no idea :-p)
+	DukeException: No task in instruction
 
-        Wrong command
+	DukeException: No task in instruction
 
-        Wrong command
+	DukeException: Description of task not found
 
-        Task does not exist
+	DukeException: Description of task not found
 
-        There is no a number
+	DukeException: Datetime of task not found
 
-        DukeException: /at not found
+	DukeException: Datetime of task not found
 
-        DukeException: /by not found
+	Got it. I've added this task:
+		[T][ ] C
+	Now you have 1 tasks in the list.
 
-        DukeException: No task in instruction
+	Got it. I've added this task:
+		[E][ ] C (by: D)
+	Now you have 2 tasks in the list.
 
-        DukeException: Description of task not found
+	Got it. I've added this task:
+		[D][ ] C (by: D)
+	Now you have 3 tasks in the list.
 
-        DukeException: Datetime of task not found
+	Task marked as done.
+		1. [T][X] C
 
-        DukeException: No task in instruction
+	Task marked as done.
+		2. [E][X] C (by: D)
 
-        DukeException: Description of task not found
+	Task marked as done.
+		3. [D][X] C (by: D)
 
-        DukeException: Datetime of task not found
+	DukeException: Task does not exist
 
-        No task to do
+	1. [T][X] C
+	2. [E][X] C (by: D)
+	3. [D][X] C (by: D)
 
-        Bye. Hope to see you again soon!
+	Task marked as not done yet.
+		1. [T][ ] C
+
+	Task marked as not done yet.
+		2. [E][ ] C (by: D)
+
+	Task marked as not done yet.
+		3. [D][ ] C (by: D)
+
+	DukeException: Task does not exist
+
+	1. [T][ ] C
+	2. [E][ ] C (by: D)
+	3. [D][ ] C (by: D)
+
+	Got it. I've deleted this task:
+		[T][ ] C
+	Now you have 3 tasks in the list.
+
+	Got it. I've deleted this task:
+		[D][ ] C (by: D)
+	Now you have 2 tasks in the list.
+
+	Got it. I've deleted this task:
+		[E][ ] C (by: D)
+	Now you have 1 tasks in the list.
+
+	DukeException: Task does not exist
+
+	Empty list
+
+	Bye. Hope to see you again soon!

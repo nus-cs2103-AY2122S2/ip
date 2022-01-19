@@ -1,18 +1,18 @@
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
-    public static final String goodbye = "\tBye. Hope to see you again soon!";
-    public static final String greeting = "\tHello! I'm Duke\n\tWhat can I do for you?\n";
+    private static ArrayList<Task> taskList;
+    private static final String goodbye = "\tBye. Hope to see you again soon!";
+    private static final String greeting = "\n\tHello! I'm Duke\n\tWhat can I do for you?\n";
 
     public static void main(String[] args) {
 
-        System.out.println(greeting);
-
-        ArrayList<Task> taskList = new ArrayList<>();
+        taskList = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
+
+        System.out.println(greeting);
         String input = sc.nextLine();
 
         while (!input.equals("bye")) {
@@ -25,25 +25,23 @@ public class Duke {
 
                 case "list":
 
-                    if (taskList.size() == 0) {
-                        System.out.println("\tEmpty list\n");
-                    }
+                    if (taskList.size() == 0)
+                        System.out.println("\tEmpty list");
 
                     else {
-                        for (int i = 0; i < taskList.size(); i++) {
-                            int idx = i + 1;
-                            System.out.println("\t" + idx + ". " + taskList.get(i).toString());
-                        }
-                        System.out.println();
+                        for (int i = 1; i < taskList.size()+1; i++)
+                            System.out.println("\t" + i + ". " + taskList.get(i-1).toString());
                     }
+
+                    System.out.println();
                     break;
 
                 case "mark":
-                    marking(taskList, var, true);
+                    marking(var, true);
                     break;
 
                 case "unmark":
-                    marking(taskList, var, false);
+                    marking(var, false);
                     break;
 
                 case "event":
@@ -55,11 +53,10 @@ public class Duke {
 
                     catch (DukeException ex) {
                         System.out.println("\t" + ex + "\n");
-                        input = sc.nextLine();
-                        continue;
+                        break;
                     }
 
-                    createNewTask(taskList, new Event(e[0], e[1]));
+                    createNewTask(new Event(e[0], e[1]));
                     break;
 
                 case "deadline":
@@ -71,40 +68,30 @@ public class Duke {
 
                     catch (DukeException ex) {
                         System.out.println("\t" + ex + "\n");
-                        input = sc.nextLine();
-                        continue;
+                        break;
                     }
 
-                    createNewTask(taskList, new Deadline(d[0], d[1]));
+                    createNewTask(new Deadline(d[0], d[1]));
                     break;
 
                 case "todo":
-                    if (var.equals("")) {
+                    if (var.equals(""))
                         System.out.println("\tNo task to do\n");
-                    }
 
-                    else {
-                        createNewTask(taskList, new ToDo(var));
-                    }
+                    else
+                        createNewTask(new ToDo(var));
 
                     break;
 
                 case "delete":
                     try {
-                        int i = Integer.parseInt(var) - 1;
-                        Task t = taskList.get(i);
-                        taskList.remove(i);
-                        System.out.println("\tNoted. I've removed this task:");
-                        System.out.println("\t\t" + t);
-                        System.out.println("\tNow you have "+ taskList.size() +" tasks in the list.\n");
+                        int idx = checkList(var);
+                        printOutput(taskList.get(idx), false);
+                        taskList.remove(idx);
                     }
 
-                    catch (NumberFormatException ex) {
-                        System.out.println("\tThere is no index\n");
-                    }
-
-                    catch (IndexOutOfBoundsException ex) {
-                        System.out.println("\tTask does not exist\n");
+                    catch (DukeException ex) {
+                        System.out.println("\t" + ex + "\n");
                     }
 
                     break;
@@ -119,28 +106,22 @@ public class Duke {
         System.out.println(goodbye);
     }
 
-    private static void createNewTask(ArrayList<Task> taskList, Task task) {
+    private static void createNewTask(Task task) {
         taskList.add(task);
-        System.out.println("\tGot it. I've added this task:");
-        System.out.println("\t\t" + task);
-        System.out.println("\tNow you have "+ taskList.size() +" tasks in the list.\n");
+        printOutput(task, true);
     }
 
-    private static void marking(ArrayList<Task> taskList, String idx, boolean state) {
+    private static void marking(String str_idx, boolean state) {
 
         try {
-            int i = Integer.parseInt(idx) - 1;
-            taskList.get(i).setCompleted(state);
-            System.out.println(state ? "\tNice! I've marked this task as done:" : "\tOK, I've marked this task as not done yet:");
-            System.out.println("\t\t" + idx + ". " + taskList.get(i).toString() + "\n");
+            int idx = checkList(str_idx);
+            taskList.get(idx).setCompleted(state);
+            String reply = "\tTask marked as " + (state ? "done." : "not done yet.") + "\n";
+            System.out.println(reply + "\t\t" + str_idx + ". " + taskList.get(idx).toString() + "\n");
         }
 
-        catch (NumberFormatException e) {
-            System.out.println("\tThere is no index\n");
-        }
-
-        catch (IndexOutOfBoundsException e) {
-            System.out.println("\tTask does not exist\n");
+        catch (DukeException ex) {
+            System.out.println("\t" + ex + "\n");
         }
     }
 
@@ -166,5 +147,28 @@ public class Duke {
                     throw new DukeException("Datetime of task not found");
                 }
         }
+    }
+
+    private static int checkList(String str_idx) throws DukeException {
+
+        try {
+            int idx = Integer.parseInt(str_idx) - 1;
+
+            if (!(idx >= 0 && idx < taskList.size())) {
+                throw new DukeException("Task does not exist");
+            }
+
+            return idx;
+        }
+
+        catch (NumberFormatException e) {
+            throw new DukeException("There is no index");
+        }
+    }
+
+    private static void printOutput(Task task, boolean isAdd) {
+        String out = "\tGot it. I've " + (isAdd ? "added" : "deleted") + " this task:\n";
+        System.out.println(out + "\t\t" + task);
+        System.out.println("\tNow you have "+ taskList.size() +" tasks in the list.\n");
     }
 }
