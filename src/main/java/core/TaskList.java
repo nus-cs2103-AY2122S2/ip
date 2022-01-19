@@ -36,6 +36,10 @@ public class TaskList {
         return this.taskList.get(index);
     }
 
+    public int getLength() {
+        return this.taskList.size();
+    }
+
     public Task getTaskByTaskId(int id) {
         for (Task task : taskList) {
             if (task.getTaskId() == id) {
@@ -58,7 +62,7 @@ public class TaskList {
         outputFormatter.appendAll("Here are the tasks in your list: ", "\n");
 
         for (Task task : this.taskList) {
-            outputFormatter.appendAll(task.getTaskId(), ".[", task.status(), "] ", task.getTaskDescription());
+            outputFormatter.appendAll(task.getTaskId(), ".", task.toString());
 
             if (task.getTaskId() < taskList.size()) {
                 outputFormatter.append("\n");

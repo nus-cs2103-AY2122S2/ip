@@ -18,7 +18,7 @@ public class Task {
         this.isCompleted = isDone;
     }
 
-    private Task(String taskDescription) {
+    public Task(String taskDescription) {
         this.taskDescription = taskDescription;
         this.isCompleted = false;
     }
