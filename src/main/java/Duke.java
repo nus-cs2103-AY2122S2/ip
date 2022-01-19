@@ -29,32 +29,46 @@ public class Duke {
                     displayList();
                     sc.nextLine();
                     break;
-                case "blah":
-                    System.out.println("blah");
-                    sc.nextLine();
-                    break;
                 case "mark": case "unmark":
                     mark(sc.nextInt());
                     sc.nextLine();
                     break;
-                default:
-                    // different cases add to different things
+                case "todo": case "deadline": case "event":
                     Task newTask;
                     if (command.equals("todo")) {
                         command = sc.nextLine();
-                        newTask = new ToDo(command);
+                        try {
+                            newTask = makeToDo(command);
+                        } catch (ToDoIllegalArgumentException ex) {
+                            System.out.println(ex);
+                            break;
+                        }
                     } else if (command.equals("deadline")) {
                         String[] s = sc.nextLine().split("/by");
-                        newTask = new Deadline(s[0], s[1]);
-                    } else {
+                        try {
+                            newTask = makeDeadline(s[0], s[1]);
+                        } catch (IndexOutOfBoundsException ex) {
+                            System.out.println(new DeadlineIllegalArgumentException("Invalid Argument").toString());
+                            break;
+                        }
+                    } else{
                         String[] s = sc.nextLine().split("/at");
-                        newTask = new Event(s[0], s[1]);
+                        try {
+                            newTask = makeEvent(s[0], s[1]);
+                        } catch (IndexOutOfBoundsException ex) {
+                            System.out.println(new EventIllegalArgumentException("Invalid Argument").toString());
+                            break;
+                        }
                     }
                     toDoList.add(newTask);
                     System.out.println("okie!! (✿◠‿◠)  i have added: \n" +
                             newTask.toString() + "\n" +
                             "now there are " + toDoList.size() + " tasks in the list! get to work (ง︡'-'︠)ง");
                     break;
+                case "delete":
+                    remove(sc.nextInt());
+                default:
+                    System.out.println("sowwy i don't understand what that means ಠ_ಥ try something else pwease??");
             }
         }
     }
@@ -76,5 +90,26 @@ public class Duke {
             System.out.println("this task is now marked as not done yet... do it soon! ᕙ(`▿´)ᕗ");
         }
         System.out.println(toDoList.get(idx - 1).toString());
+    }
+
+    private static Task makeToDo(String name) throws ToDoIllegalArgumentException {
+        if (name.isEmpty()) {
+            throw new ToDoIllegalArgumentException("Illegal Argument");
+        }
+        return new ToDo(name);
+    }
+
+    private static Task makeDeadline(String name, String by) {
+        return new Deadline(name, by);
+    }
+
+    private static Task makeEvent(String name, String at) {
+        return new Deadline(name, at);
+    }
+
+    private static void remove(int idx) {
+        System.out.println("OKI!! i have removed this task: \n" +
+                toDoList.remove(idx - 1) + "\n" +
+                "now there are " + toDoList.size() + " tasks in the list! get to work (ง︡'-'︠)ง");
     }
 }
