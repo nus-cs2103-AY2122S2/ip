@@ -1,5 +1,14 @@
+/**
+ * This is a type of Task: todo
+ *
+ */
 public class ToDo extends Task {
-
+    /**
+     * Constructor of Todo.
+     *
+     * @param input descriptor of task
+     * @param number task number
+     */
     public ToDo(String input, int number){
         super(input.substring(4,input.length()), number, null, "T");
     }

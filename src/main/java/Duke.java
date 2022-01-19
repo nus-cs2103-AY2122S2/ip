@@ -1,3 +1,10 @@
+/**
+ * This is the main Duke program that will be able to process a Task of 3 types: todo, deadline and task
+ * Duke is able to list, delete and mark/unmark tasks as done/undone.
+ *
+ * @author Toh Zhan Qing
+ */
+
 import java.util.*;
 
 public class Duke {

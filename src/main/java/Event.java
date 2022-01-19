@@ -1,7 +1,19 @@
+/**
+ * This is a type of Task: Event
+ *
+ */
 public class Event extends Task{
 
-    public Event(String input, int number, String deadline) {
-        super(input, number, deadline, "E");
+    /**
+     * Constructor of event.
+     * Have to strip/process the input first and remove 'event'
+     *
+     * @param input descriptor of task
+     * @param number task number
+     * @param time duration of event
+     */
+    public Event(String input, int number, String time) {
+        super(input, number, time, "E");
     }
 
     /**

@@ -1,10 +1,23 @@
+/**
+ * Class task that Duke creates
+ */
 public class Task {
+
     String deadline;
     String name;
     String type;
     int number;
     static int totalTask = 0;
     boolean done = false;
+
+    /**
+     * Constructor of task
+     *
+     * @param name Descriptor of task
+     * @param number Number associated with task
+     * @param deadline time associated with task
+     * @param type type of task. 'E' for Event, 'T' for Todo and 'D' for Deadline
+     */
     public Task(String name, int number, String deadline, String type){
         try {
             if (name.equals("")) {
