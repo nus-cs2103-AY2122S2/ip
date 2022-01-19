@@ -29,12 +29,12 @@ public class Duke {
                     cmd.list();
                     break;
                 case "mark": {
-                    int index = Integer.parseInt(temp.nextToken());
+                    int index = Integer.parseInt(temp.nextToken()) - 1;
                     cmd.mark(index);
                     break;
                 }
                 case "unmark": {
-                    int index = Integer.parseInt(temp.nextToken());
+                    int index = Integer.parseInt(temp.nextToken()) - 1;
                     cmd.unmark(index);
                     break;
                 }
