@@ -47,9 +47,25 @@ public class Commands {
 
     void unmark(int index) {
         taskHistory.getTask(index).unmarkTask();
+        Task currTask = taskHistory.getTask(index);
+        String tasking = "";
+        if (currTask instanceof ToDos) {
+            ToDos temp = (ToDos) currTask;
+            tasking = tasking.concat(temp.getToDo());
+        } else if (currTask instanceof Deadlines) {
+            Deadlines temp = (Deadlines) currTask;
+            tasking = tasking.concat(temp.getDeadline());
+        } else if (currTask instanceof Event) {
+            Event temp = (Event) currTask;
+            tasking = tasking.concat(temp.getEvent());
+        } else {
+            System.out.println("Error occured while processing " + currTask.getTask()); // Temporary error handler
+            exit(1);
+        }
+        taskHistory.getTask(index).unmarkTask();
         String msg = "_______________________________________________________\n"
                 + "A reminder that the following task has not been done:\n"
-                + taskHistory.getTask(index).getTask()
+                + "    " + tasking
                 + "_______________________________________________________\n";
         System.out.println(msg);
     }
