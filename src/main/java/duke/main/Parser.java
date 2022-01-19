@@ -6,36 +6,27 @@ import duke.commands.*;
 public class Parser {
 
     // logic that determines how Burp will reply
-    public static void parseCommands(Ui.Reply type, TaskList toDoList, String cmd) {
+    public static Command parseCommands(Ui.Reply type, TaskList toDoList, String cmd) {
         String[] cmd_split = cmd.split(" ");
         switch (type) {
         case LIST:
-            new ListCommand(toDoList, cmd);
-            break;
+            return new ListCommand(toDoList, cmd);
         case TODO:
-            new AddToDoCommand(toDoList, cmd);
-            break;
+            return new AddToDoCommand(toDoList, cmd);
         case DEADLINE:
-            new AddDeadlineCommand(toDoList, cmd);
-            break;
+            return new AddDeadlineCommand(toDoList, cmd);
         case EVENT:
-            new AddEventCommand(toDoList, cmd);
-            break;
+            return new AddEventCommand(toDoList, cmd);
         case MARK:
-            new MarkCommand(toDoList, Integer.parseInt(cmd_split[1]) - 1);
-            break;
+            return new MarkCommand(toDoList, Integer.parseInt(cmd_split[1]) - 1);
         case UNMARK:
-            new UnmarkCommand(toDoList, Integer.parseInt(cmd_split[1])-1);
-            break;
+            return new UnmarkCommand(toDoList, Integer.parseInt(cmd_split[1])-1);
         case DELETE:
-            new DeleteCommand(toDoList, Integer.parseInt(cmd_split[1])-1);
-            break;
+            return new DeleteCommand(toDoList, Integer.parseInt(cmd_split[1])-1);
         default:
-            System.out.println(new DukeException(formatMsg("☹ OOPS!!! I'm sorry, but I don't know what that means :-(")));
-            break;
+            return new WrongCommand();
         }
     }
-
     public static String formatMsg(String msg) {
         String tabbedLine = "\t----------------------------------------------";
         return (tabbedLine + "\n\t" + msg + "\n" + tabbedLine);
