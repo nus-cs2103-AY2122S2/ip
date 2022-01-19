@@ -11,6 +11,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo + "\n");
 
         String space = "     ";
+        String longSpace = "        ";
         String line = "____________________________________________________________";
 
         String greeting = space + line + "\n"
@@ -36,6 +37,7 @@ public class Duke {
             }
 
             else if (input.equals("list")) {
+                output += space + " Here are the tasks in your list:\n";
                 for (int i = 0; i < list.size(); i++) {
                     String bullet = space + (i + 1) + ".";
                     output += bullet + list.get(i).toString() + "\n";
@@ -48,8 +50,8 @@ public class Duke {
                 int index = Integer.parseInt(i2) - 1;
                 list.get(index).mark();
 
-                output += space + " Nice! I've marked this task as done:\n"
-                        + space + "   " + list.get(index).toString() + "\n";
+                output = space + " Nice! I've marked this task as done:\n"
+                        + longSpace + list.get(index).toString() + "\n";
             }
 
             else if (input.startsWith("unmark")) {
@@ -59,14 +61,39 @@ public class Duke {
                 list.get(index).unmark();
 
                 output += space + " Nice! I've marked this task as not done:\n"
-                        + space + "   " + list.get(index).toString() + "\n";
+                        + longSpace + list.get(index).toString() + "\n";
             }
 
-            else {
-                Task current = new Task(input);
+            else if (input.startsWith("todo")) {
+                Task current = new ToDo(input);
                 list.add(current);
-                output = space + "added: " + input + "\n";
+
+                output = space +  "Got it. I've added this task:\n"
+                        + longSpace + current.toString() + "\n"
+                        + space + "Now you have " + list.size() + " tasks in the list.\n";
             }
+
+            else if (input.startsWith("event")) {
+                String[] inputArray = input.split("/");
+                Task current = new Event(inputArray[0], inputArray[1]);
+                list.add(current);
+
+                output = space +  "Got it. I've added this task:\n"
+                        + longSpace + current.toString() + "\n"
+                        + space + "Now you have " + list.size() + " tasks in the list.\n";
+            }
+
+            else if (input.startsWith("deadline")) {
+                String[] inputArray = input.split("/");
+                Task current = new Deadline(inputArray[0], inputArray[1]);
+                list.add(current);
+
+                output = space +  "Got it. I've added this task:\n"
+                        + longSpace + current.toString() + "\n"
+                        + space + "Now you have " + list.size() + " tasks in the list.\n";
+            }
+
+            else {}
 
             System.out.print(space + line + "\n"
                         + output
