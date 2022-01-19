@@ -1,9 +1,19 @@
 import java.util.ArrayList;
+/**
+ * This is a DukeList class that handles the operations to the
+ * tasks in the list in the Duke system
+ *
+ * @author  Hsiao Jiet
+ * @version 1.0
+ * @since   2022-1-15
+ */
 
 public class DukeList {
     protected ArrayList<Task> tasks = new ArrayList<>();
 
-    //Add items
+    /**
+     * Adds Tasks into the list
+     */
     public String add(Task t) {
         StringBuilder res = new StringBuilder();
         String line = "____________________________________________________________ \n";
@@ -15,7 +25,32 @@ public class DukeList {
         return res.toString();
     }
 
-    //show items in list
+    /**
+     * Deletes Tasks from the list
+     */
+    public String delete(int i) throws DukeException {
+        Task t;
+        StringBuilder res = new StringBuilder();
+        String line = "____________________________________________________________ \n";
+        try {
+            t = tasks.get(i - 1);
+            tasks.remove(i - 1);
+        } catch (Exception e) {
+            StringBuilder error = new StringBuilder();
+            error.append("\n____________________________________________________________\n").append("☹ OOPS!!! Fam, you do not even have this numbered Task in your list.\n");
+            error.append("____________________________________________________________\n");
+            throw new DukeException(error.toString());
+        }
+        res.append(line).append("Noted. I've removed this task: \n");
+        res.append(t.toString()).append("\n");
+        res.append("Now you have ").append(tasks.size());
+        res.append(" tasks in the list.\n").append(line);
+        return res.toString();
+    }
+
+    /**
+     * Displays all Tasks in the list
+     */
     public String printTasks() {
         StringBuilder res = new StringBuilder();
         String line = "____________________________________________________________ \n";
@@ -29,7 +64,10 @@ public class DukeList {
         return res.toString();
     }
 
-    //mark an item in the list
+    /**
+     * Marks the Task as done by given index input.
+     * Index is based on the position the Task is in, in the list
+     */
     public String mark(int i) {
         StringBuilder res = new StringBuilder();
         String line = "____________________________________________________________ \n";
@@ -39,7 +77,11 @@ public class DukeList {
         res.append(t.toString()).append(line);
         return res.toString();
     }
-    //unmark an item in the list
+
+    /**
+     * Unmarks the Task as done by given index input.
+     * Index is based on the position the Task is in, in the list
+     */
     public String unmark(int i) {
         StringBuilder res = new StringBuilder();
         String line = "____________________________________________________________ \n";

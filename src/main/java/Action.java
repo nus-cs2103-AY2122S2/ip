@@ -41,6 +41,9 @@ public class Action {
             case "unmark":
                 System.out.println(unmark());
                 break;
+            case "delete":
+                System.out.println(delete());
+                break;
             case "bye":
                 bye();
                 break;
@@ -83,7 +86,7 @@ public class Action {
     /**
      * Makes a call on DukeList's delete()
      */
-    public String delete() {
+    public String delete() throws DukeException {
         return dL.delete(Integer.valueOf(inp[1]));
     }
 
