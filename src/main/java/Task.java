@@ -6,8 +6,16 @@
 
 public class Task {
 
-    // task variable stores the task
+    // symbol for indicating task is completed.
+    private static final String CROSS = "X";
+
+    // symbol for indicating task is yet to be completed.
+    private static final String SPACE = " ";
+
+    // task variable stores the task.
     private final String task;
+    // Tells if the task is completed.
+    private boolean done;
 
     /**
      * Constructor for Task.
@@ -16,6 +24,33 @@ public class Task {
      */
     Task(String task) {
         this.task = task;
+        this.done = false;
+    }
+
+    /**
+     * markDone marks the task completed.
+     * @return the String representation of the instance.
+     */
+    String markDone() {
+        this.done = true;
+        return toString();
+    }
+
+    /**
+     * markDone unmarks the task as not completed.
+     * @return the String representation of the instance.
+     */
+    String unMarkDone() {
+        this.done = false;
+        return toString();
+    }
+
+    /**
+     * returns the task to be performed.
+     * @return the task.
+     */
+    String getTask() {
+        return this.task;
     }
 
     /**
@@ -24,7 +59,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        return this.task;
+        return "[" +  (this.done ? CROSS : SPACE ) + "] " + this.task;
     }
 
 }

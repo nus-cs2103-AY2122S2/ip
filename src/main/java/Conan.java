@@ -46,6 +46,21 @@ public class Conan {
             + "Have a great day ahead, enjoy ! (^-^)/\n"
             + "Hope to see you next time! ";
 
+    // MARK stores the command mark.
+    private final static String MARK = "mark";
+
+    // DONE stores the message to be printed when a task is marked done.
+    private final static String DONE = "Great job, on completing this task! \\(^_^)/";
+
+    // UNDONE stores the meesage to be printed when a task is unmarked done.
+    private final static String UNDONE = "Sure, I have unmarked this task :";
+
+    // UNMARK stores the command unmark.
+    private final static String UNMARK = "unmark";
+
+    // starting index of a list or a char in string.
+    private final static int START_INDEX = 0;
+
     // username is an instance variable that stores the name of the user.
     private final String username;
 
@@ -114,6 +129,20 @@ public class Conan {
             return displayTasks();
         }
 
+        // check if the user message contains mark
+        if (message.contains(MARK)) {
+            if (message.substring(START_INDEX, MARK.length()).equalsIgnoreCase(MARK)) {
+                return mark(message);
+            }
+        }
+
+        // check if the user message contains unmark
+        if (message.contains(UNMARK)) {
+            if (message.substring(START_INDEX, UNMARK.length()).equalsIgnoreCase(UNMARK)) {
+                return unmark(message);
+            }
+        }
+
         return add(message);
     }
 
@@ -126,7 +155,39 @@ public class Conan {
 
         Task task = new Task(text);
         tasks.add(task);
-        System.out.println(this.username + ADDED + task);
+        System.out.println(this.username + ADDED + task.getTask());
+        System.out.println(ASK + this.username);
+        System.out.println(SEPARATOR);
+        return CarryOn.NEXT;
+    }
+
+    /**
+     * mark function marks a task as done.
+     * @param message the user command.
+     * @return CarryOn.NEXT to ask what else the user wants to do.
+     */
+    private CarryOn mark(String message) {
+        String[] arr = message.split(" ");
+        int num = Integer.valueOf(arr[1]);
+        tasks.get(num - 1).markDone();
+        System.out.println(DONE);
+        System.out.println(tasks.get(num - 1));
+        System.out.println(ASK + this.username);
+        System.out.println(SEPARATOR);
+        return CarryOn.NEXT;
+    }
+
+    /**
+     * unmark function marks a task as not done.
+     * @param message the user command.
+     * @return CarryOn.NEXT to ask what else the user wants to do.
+     */
+    private CarryOn unmark(String message) {
+        String[] arr = message.split(" ");
+        int num = Integer.valueOf(arr[1]);
+        tasks.get(num - 1).unMarkDone();
+        System.out.println(UNDONE);
+        System.out.println(tasks.get(num - 1));
         System.out.println(ASK + this.username);
         System.out.println(SEPARATOR);
         return CarryOn.NEXT;
