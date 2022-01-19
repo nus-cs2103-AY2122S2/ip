@@ -1,13 +1,10 @@
 public class Task {
-    private static int totalTasks = 0;
-    int index;
     boolean done;
     String taskName;
 
     public Task(String taskName) {
         this.done = false;
         this.taskName = taskName;
-        index = ++totalTasks;
     }
 
     public String markAsDone(boolean isDone) {
@@ -26,8 +23,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.index + "." +
-                "[" + (done ? "X" : " ") + "] " +
+        return "[" + (done ? "X" : " ") + "] " +
                 this.taskName + "\n";
     }
 }

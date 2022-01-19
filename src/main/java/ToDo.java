@@ -24,8 +24,7 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        return this.index + "." +
-                "[" + this.taskType + "]" +
+        return "[" + this.taskType + "]" +
                 "[" + (done ? "X" : " ") + "] " +
                 this.taskName + "\n";
     }

@@ -23,13 +23,13 @@ public class Duke {
                     dukeOutput(" Bye. Hope I never see you again!");
                     break;
                 } else if (userInput.equals("list")) { // list out everything in list
-                    StringBuilder tempOut = new StringBuilder(taskList.get(0).toString());
-                    for (int i = 1; i < taskList.size(); i++) {
-                        tempOut.append(" " + indent).append(taskList.get(i).toString());
+                    StringBuilder tempOut = new StringBuilder("");
+                    for (int i = 0; i < taskList.size(); i++) {
+                        tempOut.append(" " + indent).append((i + 1) + ".").append(taskList.get(i).toString());
                     }
                     hLineBreak();
                     printlnWithIndent(" Here are the tasks in your list:");
-                    System.out.print(indent + " " + tempOut); // newline in tempOut
+                    System.out.print(tempOut); // newline in tempOut
                     hLineBreak();
 
                 } else if (firstWord.equals("mark") || firstWord.equals("unmark")) {
@@ -44,12 +44,20 @@ public class Duke {
                         dukeOutput(currTask.markAsDone(false));
                     }
 
+                } else if (firstWord.equals("delete")) {
+                    int taskIndex = -1;
+                    taskIndex = Integer.parseInt(splitUserInput[1]) - 1;
+
+                    Task removedTask = taskList.remove(taskIndex);
+
+                    dukeDeleteTaskOutput(removedTask);
+
                 } else { // add task to list, todo, event or deadline
                     String remainingUserInput = "";
                     remainingUserInput = splitUserInput[1];
 
                     if (firstWord.equals("todo")) {
-                        ToDo newToDo = new ToDo(userInput);
+                        ToDo newToDo = new ToDo(remainingUserInput);
                         taskList.add(newToDo);
                         dukeAddTaskOutput(newToDo);
                     } else if (firstWord.equals("deadline")) {
@@ -102,7 +110,15 @@ public class Duke {
         hLineBreak();
         printlnWithIndent(" Got it. I've added this task:");
         System.out.print(indent + "   " + task);
-        printlnWithIndent("Now you have "+ taskList.size() +" tasks in the list.");
+        printlnWithIndent(" Now you have "+ taskList.size() +" tasks in the list.");
+        hLineBreak();
+    }
+
+    static void dukeDeleteTaskOutput(Task task) {
+        hLineBreak();
+        printlnWithIndent(" Noted. I've removed this task:");
+        System.out.print(indent + "   " + task);
+        printlnWithIndent(" Now you have "+ taskList.size() +" tasks in the list.");
         hLineBreak();
     }
 }
