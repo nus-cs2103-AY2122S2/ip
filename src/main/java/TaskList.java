@@ -34,7 +34,7 @@ public class TaskList {
         System.out.println("Here's what you need to do buddy:");
         for (int i = 0; i < index; i++) {
             Task currentTask = tasks[i];
-            System.out.println(currentTask);
+            System.out.printf("%d. %s", currentTask.id, currentTask);
         }
     }
 

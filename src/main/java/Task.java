@@ -27,7 +27,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return isDone ? String.format("%d.[X] %s", id, description) :
-                        String.format("%d.[ ] %s", id, description);
+        return isDone ? String.format("[X] %s", id, description) :
+                        String.format("[ ] %s", id, description);
     }
 }
