@@ -25,7 +25,13 @@ public class Duke {
                 //nothing inputted into system.in
                 } else if (nextLine.isBlank()) {
                     System.out.println("You didn't key in anything!! Feed me with a task!");
-                //unmarking a task
+                    //unmarking a task
+                } else if (nextLine.startsWith("todo")) {
+                    todo(nextLine, taskList);
+                } else if (nextLine.startsWith("deadline")) {
+                    deadline(nextLine, taskList);
+                } else if (nextLine.startsWith("event")) {
+                    event(nextLine, taskList);
                 } else if (nextLine.startsWith("unmark")) {
                     int taskNumber = intSearch(nextLine) - 1;
                     if (taskNumber <= taskList.size()) {
@@ -68,5 +74,32 @@ public class Duke {
             return -1;
         }
         return Integer.parseInt(text);
+    }
+
+    public static void todo(String text, ArrayList<Task> list) {
+        ToDo freshTodo = new ToDo(text);
+        list.add(freshTodo);
+        System.out.println("   " + "Got it. I've added this task:\n"
+                + "    " + freshTodo + "\n" +  "   Now you have " + list.size() + " tasks in the list.");
+    }
+
+    public static void deadline(String description, ArrayList<Task> list) {
+        String[] splicedString = description.split(" /by ");
+        String splicedDescription = splicedString[0].substring(9);
+        String dueDate = splicedString[1];
+        Deadline freshDeadline = new Deadline(splicedDescription, dueDate);
+        list.add(freshDeadline);
+        System.out.println("   " + "Got it. I've added this task:\n"
+                + "    " + freshDeadline + "\n" +  "   Now you have " + list.size() + " tasks in the list.");
+    }
+
+    public static void event(String description, ArrayList<Task> list) {
+        String[] splicedString = description.split(" /at ");
+        String splicedDescription = splicedString[0].substring(6);
+        String dueDate = splicedString[1];
+        Event freshEvent = new Event(splicedDescription, dueDate);
+        list.add(freshEvent);
+        System.out.println("   " + "Got it. I've added this task:\n"
+                + "    " + freshEvent + "\n" +  "   Now you have " + list.size() + " tasks in the list.");
     }
 }
