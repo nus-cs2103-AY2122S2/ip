@@ -24,23 +24,23 @@ public class Duke {
     }
 
     public void displayHelloMessage() {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        display("Hello! I'm Duke\nWhat can I do for you?");
         displayLine();
     }
 
     public void displayLine() {
-        System.out.println("--------------------------------------------------");
+        display("--------------------------------------------------");
     }
 
     public void displayByeMessage() {
         displayLine();
-        System.out.println("Bye. Hope to see you soon.");
+        display("Bye. Hope to see you soon.");
         displayLine();
     }
 
     public void displayMessage(String command) {
         displayLine();
-        System.out.println("added:" + command);
+        display("added:" + command);
         displayLine();
     }
 
@@ -51,9 +51,9 @@ public class Duke {
 
     public void displayList() {
         displayLine();
-        System.out.println("Here are the tasks in your list:");
+        display("Here are the tasks in your list:");
         for (int i = 1;i <= dukeList.size(); i++) {
-            System.out.println( (i) + ". " + dukeList.get(i-1));
+            display( (i) + ". " + dukeList.get(i-1));
         }
         displayLine();
     }
@@ -80,47 +80,47 @@ public class Duke {
             displayIncompleteTask(toBeCompleted);
         } else {
             //displayLine();
-            //System.out.println("Got it. I've added this task:");
+            //display("Got it. I've added this task:");
             if (command.equals("event")) {
                 String[] descriptionAndTime = description.split("/");
                  String eventDescription = (descriptionAndTime[0].split(" ", 2))[1];
                  String eventTime = (descriptionAndTime[1].split(" ", 2))[1];
                  Event newEvent = new Event(eventDescription, eventTime);
                  dukeList.add(newEvent);
-                 System.out.println(newEvent);
+                 display(newEvent);
             } else if (command.equals("deadline")) {
                 String[] descriptionAndTime = description.split("/");
                  String deadlineDescription = (descriptionAndTime[0].split(" ", 2))[1];
                  String deadlineTime = (descriptionAndTime[1].split(" ", 2))[1];
                  Deadline newDeadline = new Deadline(deadlineDescription, deadlineTime);
                  dukeList.add(newDeadline);
-                 System.out.println(newDeadline);
+                 display(newDeadline);
             } else if (command.equals("todo")) {
                 if (description.trim().equals("")) {
                     throw new DukeToDoEmptyException();
                 }
                 displayLine();
-                System.out.println("Got it. I've added this task: ");
+                display("Got it. I've added this task: ");
                 ToDo newTodo = new ToDo(description.substring(1));
                 dukeList.add(newTodo);
-                System.out.println(newTodo);
+                display(newTodo);
             } else if (command.equals("delete")){
                 int taskIndex = Integer.parseInt(description.substring(1)) - 1;
                      displayLine();
-                     System.out.println("Noted. I've removed this task: ");
+                     display("Noted. I've removed this task: ");
                      Task taskToBeDeleted = dukeList.get(taskIndex);
-                     System.out.println("  " + taskToBeDeleted);
+                     display("  " + taskToBeDeleted);
                      deleteTask(taskIndex);
             }
             else {
                 throw new DukeUnknownCommandException();
             }
-            System.out.println("Now you have " + dukeList.size() + " tasks in the list.");
+            display("Now you have " + dukeList.size() + " tasks in the list.");
             displayLine();
         }
 } catch ( DukeToDoEmptyException | DukeUnknownCommandException e) {
     displayLine();
-    System.out.println(e.getMessage());
+    display(e.getMessage());
     displayLine();
 }
 
@@ -128,20 +128,24 @@ public class Duke {
 
     void displayIncompleteTask(Task complete){
         displayLine();
-        System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println(complete);
+        display("OK, I've marked this task as not done yet:");
+        display(complete);
         displayLine();
     }
 
     void displayTaskCompletion(Task incomplete) {
         displayLine();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(incomplete);
+        display("Nice! I've marked this task as done:");
+        display(incomplete);
         displayLine();
     }
     
     public static void main(String[] args) throws DukeException {
         Duke duke = new Duke();
         duke.startDuke();
+    }
+
+    void display(Object command) {
+        System.out.println(command);
     }
 }
