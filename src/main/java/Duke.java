@@ -21,7 +21,6 @@ public class Duke {
                 list[listCount] = userInput;
                 listCount++;
             }
-            System.out.println(userInput);
         }
 
     }
