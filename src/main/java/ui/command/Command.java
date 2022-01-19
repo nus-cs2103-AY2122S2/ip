@@ -72,6 +72,9 @@ public abstract class Command {
             case "event":
                 command = new AddTaskCommand(name, args, tasks);
                 break;
+            case "delete":
+                command = new DeleteTaskCommand(name, args, tasks);
+                break;
             case "mark":
                 command = new MarkTaskCommand(name, args, tasks);
                 break;
