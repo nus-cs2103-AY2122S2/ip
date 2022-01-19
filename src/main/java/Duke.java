@@ -7,33 +7,32 @@ public class Duke {
         ArrayList<Task> taskList = new ArrayList<>();
         System.out.println("Hello! I'm Whey\n" + "What can I do for you today?");
         Scanner userInput = new Scanner(System.in);
-        try {
-            while (true) {
+        DukeManager dukeManager = new DukeManager();
+        while (true) {
+            try {
                 String nextLine = userInput.nextLine();
+                String testedString = dukeManager.test(nextLine);
                 int counter = 1;
                 //Exiting the code when bye is inputted
-                if (nextLine.equals("bye")) {
+                if ((testedString.replaceAll("\\s+", "")).equals("bye")) {
                     System.out.println("  " + "Bye beautiful! hope to see you again hehe");
                     break;
-                //display the list of tasks
-                } else if ((nextLine.replaceAll("\\s+", "")).equals("list")) {
-                   System.out.println("Here are the tasks in your list:\n");
+                    //display the list of tasks
+                } else if ((testedString.replaceAll("\\s+", "")).equals("list")) {
+                    System.out.println("Here are the tasks in your list:\n");
                     for (Task s : taskList) {
                         System.out.println("  " + counter + "." + s);
                         counter++;
                     }
-                //nothing inputted into system.in
-                } else if (nextLine.isBlank()) {
-                    System.out.println("You didn't key in anything!! Feed me with a task!");
                     //unmarking a task
-                } else if (nextLine.startsWith("todo")) {
-                    todo(nextLine, taskList);
-                } else if (nextLine.startsWith("deadline")) {
-                    deadline(nextLine, taskList);
-                } else if (nextLine.startsWith("event")) {
-                    event(nextLine, taskList);
-                } else if (nextLine.startsWith("unmark")) {
-                    int taskNumber = intSearch(nextLine) - 1;
+                } else if (testedString.startsWith("todo")) {
+                    todo(testedString, taskList);
+                } else if (testedString.startsWith("deadline")) {
+                    deadline(testedString, taskList);
+                } else if (testedString.startsWith("event")) {
+                    event(testedString, taskList);
+                } else if (testedString.startsWith("unmark")) {
+                    int taskNumber = intSearch(testedString) - 1;
                     if (taskNumber <= taskList.size()) {
                         Task intendedTask = taskList.get(taskNumber);
                         intendedTask.setDone(false);
@@ -42,9 +41,9 @@ public class Duke {
                     } else {
                         System.out.println("Task does not exist! Check again hehe");
                     }
-                //marking a task
-                } else if (nextLine.startsWith("mark")) {
-                    int taskNumber = intSearch(nextLine) - 1;
+                    //marking a task
+                } else if (testedString.startsWith("mark")) {
+                    int taskNumber = intSearch(testedString) - 1;
                     if (taskNumber <= taskList.size()) {
                         Task intendedTask = taskList.get(taskNumber);
                         intendedTask.setDone(true);
@@ -53,15 +52,10 @@ public class Duke {
                     } else {
                         System.out.println("Task does not exist! Check again hehe");
                     }
-                //adding a task to the list
-                } else {
-                    Task currentTask = new Task(nextLine);
-                    taskList.add(currentTask);
-                    System.out.println("  " + "added: " + nextLine);
                 }
+            } catch (DukeException e) {
+                System.err.print(e + "\n");
             }
-        } catch (IllegalStateException | NoSuchElementException e) {
-            System.out.println("Error detected, Whey is shutting down!");
         }
     }
 
