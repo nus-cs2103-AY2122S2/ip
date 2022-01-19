@@ -114,7 +114,7 @@ public class Commands {
             //Handle the case of having no second input
 
             if (splitString.length == 1 ) {
-                System.out.println("What?! Task description/name cannot be empty. Eg todo eat, deadline eat food /by 12pm, event concert /at 8pm\n");
+                System.out.println("What?! Task description cannot be empty. Eg todo eat, deadline eat food /by 12pm, event concert /at 8pm\n");
             } else {
                 String taskName = command.substring(command.indexOf(" "));
                 Task newTask = new Task("");
