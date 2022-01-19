@@ -15,22 +15,12 @@ public class Task {
         return this.taskName;
     }
 
-
-    public String toMarkedString() {
-        if (this.isMarked) {
-            return "[X] " + this.toString();
-        } else {
-            return "[ ] " + this.toString();
-        }
+    public String getMarkedStatus() {
+        return isMarked ? "X" : " ";
     }
 
     @Override
     public String toString() {
-        return this.taskName;
-//        if (this.isMarked) {
-//            return "[X] " + this.taskName;
-//        } else {
-//            return "[ ] " + this.taskName;
-//        }
+        return String.format("[%s] " + this.getTaskName(), this.getMarkedStatus());
     }
 }
