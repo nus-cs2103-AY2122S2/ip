@@ -1,25 +1,33 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    static Scanner sc = new Scanner(System.in);
     static String line = "\n_______________________^_^__________________________________\n";
 
-    public static void echo() {
+    public static void addList() {
+        Scanner sc = new Scanner(System.in);
         String input;
+        ArrayList<String> list = new ArrayList<>();
+
         while(true) {
-            input = sc.next();
+            input = sc.nextLine();
             if (input.equals("bye")) {
                 System.out.println(line + "Bye. Hope to see you again soon!\n" + line);
                 break;
+            } else if(input.equals("list")) {
+                System.out.println(line);
+                for(int i = 1; i <= list.size(); i++) {
+                    System.out.println(i + ". " + list.get(i - 1));
+                }
+                System.out.println(line);
             } else {
-                System.out.println(line + input + line);
+                list.add(input);
+                System.out.println(line + "added: " + input + line);
             }
         }
     }
 
     public static void main(String[] args) {
-
-
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -31,7 +39,7 @@ public class Duke {
         System.out.println(line + "Hello! I'm Duke\n" +
                 "What can I do for you?\n" + line);
 
-        Duke.echo();//level-1
+        Duke.addList();//level-2
 
 
     }
