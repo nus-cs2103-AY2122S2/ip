@@ -32,7 +32,7 @@ public class Task {
   }
 
   /**
-   * This method is used to change the status of the Task to done.
+   * This method is used to change the status of the Task to done. 
    */
   public void setAsDone() {
     this.done = true;

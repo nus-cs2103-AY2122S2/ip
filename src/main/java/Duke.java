@@ -3,7 +3,7 @@ import java.io.*;
 /**
  * This program is used to add, list & mark the status of your current tasks.
  * @author Sim Jun Heng
- * @version CS2103T AY21/22 Sem 2 
+ * @version CS2103T AY21/22 Sem 2
  */
 public class Duke {
     // ArrayList to store all your tasks
@@ -38,6 +38,7 @@ public class Duke {
                 System.out.println("OK, I've marked this task as not done yet:");
                 System.out.println(task.getTask());
             } else if (temp[0].equals("list")) {
+                System.out.println("Here are the tasks in your list:");
                 for (Task task : list) {
                     System.out.println(num + "." + task.getTask());
                     num++;
