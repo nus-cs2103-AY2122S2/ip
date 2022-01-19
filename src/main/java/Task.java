@@ -20,4 +20,9 @@ public abstract class Task {
         return isDone ? "✓" : "✗";
     }
 
+    @Override
+    public String toString() {
+        return String.format("[%s] %s", getStatusIcon(), this.name);
+    }
+
 }
