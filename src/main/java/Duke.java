@@ -66,9 +66,11 @@ public class Duke {
                 list_of_inputs.add(eventTemp);
                 System.out.println("I have added this task and the event time is: \n " + eventTemp.message() + "\n You have " + list_of_inputs.size() + " tasks in the list.");
 
-            } else {
-//                System.out.println("added:" + inp);
-//                list_of_inputs.add(new Task(inp));
+            } else if (temp[0].equals("delete")){
+                int curr_no = Integer.parseInt(temp[1]) - 1;
+                list_of_inputs.remove(curr_no);
+                Delete deleteTemp = new Delete(list_of_inputs.get(curr_no).description);
+                System.out.println(deleteTemp.message() + "\nYou have " + list_of_inputs.size() + " tasks in the list.");
 
             }
         }

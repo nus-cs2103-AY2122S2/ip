@@ -2,7 +2,8 @@ import java.util.Arrays;
 
 public class DukeException extends Exception{
 
-    String[] commands = new String[] {"deadline", "todo", "event"};
+    //all the commands
+    String[] commands = new String[] {"deadline", "todo", "event", "delete"};
 
     public DukeException(String message) {
         super(message);
@@ -10,27 +11,24 @@ public class DukeException extends Exception{
 
     public DukeException() {}
 
-//    public void hasDescription (int size) throws DukeException{
-//        if (size == 1) {
-//            throw new DukeException("Oopss!! The description cannot be empty");
-//        }
-//    }
-
     public void invalidCommands (String inp) throws DukeException{
         String[] temp =  inp.split(" ",2);
         String cmd = temp[0];
         int size = temp.length;
-//        String descrip = temp[1];
 
+        if (inp.equals("list")  || inp.equals("bye")) {
 
-        if ( !Arrays.asList(commands).contains(cmd)) {
-            throw new DukeException("Sorry!! There is no such command!!");
-        } else if (size == 1) {
-            throw new DukeException("Oopss!! The description cannot be empty");
-        } else if (cmd.equals("deadline")) {
-            invalidDeadline(temp[1]);
-        } else if (cmd.equals("event")) {
-            invalidEvent(temp[1]);
+        } else {
+
+            if (!Arrays.asList(commands).contains(cmd)) {
+                throw new DukeException("Sorry!! There is no such command!!");
+            } else if (size == 1) {
+                throw new DukeException("Oopss!! The description cannot be empty");
+            } else if (cmd.equals("deadline")) {
+                invalidDeadline(temp[1]);
+            } else if (cmd.equals("event")) {
+                invalidEvent(temp[1]);
+            }
         }
     }
 
