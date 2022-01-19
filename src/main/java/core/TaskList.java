@@ -1,5 +1,7 @@
 package core;
 
+import utilities.OutputFormatter;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -52,18 +54,17 @@ public class TaskList {
     }
 
     public String formattedOutput() {
-        StringBuilder output = new StringBuilder();
+        OutputFormatter outputFormatter = OutputFormatter.getInstance();
+        outputFormatter.appendAll("Here are the tasks in your list: ", "\n");
 
         for (Task task : this.taskList) {
-            output.append(task.getTaskId());
-            output.append(": ");
-            output.append(task.getTaskDescription());
+            outputFormatter.appendAll(task.getTaskId(), ".[", task.status(), "] ", task.getTaskDescription());
 
             if (task.getTaskId() < taskList.size()) {
-                output.append("\n");
+                outputFormatter.append("\n");
             }
         }
-        return output.toString();
+        return outputFormatter.getFormattedOutput();
     }
 
 }

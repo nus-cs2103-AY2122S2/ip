@@ -1,5 +1,7 @@
 package core;
 
+import utilities.OutputFormatter;
+
 public class Task {
     protected String taskDescription;
     protected boolean isCompleted;
@@ -39,9 +41,9 @@ public class Task {
 
     public String status() {
         if (this.isCompleted) {
-            return "\u2713";
+            return "X"; // "\u2713";
         } else {
-            return "\u2718";
+            return " "; // "\u2718";
         }
     }
 
@@ -49,7 +51,18 @@ public class Task {
         this.isCompleted = true;
     }
 
+    public void markAsNotComplete() {
+        this.isCompleted = false;
+    }
+
     public boolean isCompleted() {
         return this.isCompleted;
+    }
+
+    @Override
+    public String toString() {
+        OutputFormatter outputFormatter = OutputFormatter.getInstance();
+        outputFormatter.appendAll("[", status(), "] ", this.taskDescription);
+        return outputFormatter.getFormattedOutput();
     }
 }

@@ -1,5 +1,9 @@
 package core;
 
+import utilities.OutputFormatter;
+
+import static java.lang.Integer.parseInt;
+
 public class InputHandler {
     private TaskList taskList;
 
@@ -13,21 +17,31 @@ public class InputHandler {
 
     public String handleInput(String inputData) {
         InputType inputType = InputValidator.determineInputType(inputData);
-        StringBuilder output = new StringBuilder();
+        OutputFormatter outputFormatter = OutputFormatter.getInstance();
+        String[] inputSequenceSeparated = inputData.split(" ");
 
         switch (inputType) {
             case ADD :
                 taskList.addTask(Task.getInstance(inputData));
-                output.append("added: ");
-                output.append(inputData);
+                outputFormatter.appendAll("added: ", inputData);
+                break;
+            case MARK :
+                Task taskToBeMarked = taskList.getTaskByTaskId(parseInt(inputSequenceSeparated[1]));
+                taskToBeMarked.complete();
+                outputFormatter.appendAll("Nice! I've marked this task as done: ", "\n", taskToBeMarked);
+                break;
+            case UNMARK :
+                Task taskToBeUnmarked = taskList.getTaskByTaskId(parseInt(inputSequenceSeparated[1]));
+                taskToBeUnmarked.markAsNotComplete();
+                outputFormatter.appendAll("OK, I've marked this task as not done yet: ", "\n", taskToBeUnmarked);
                 break;
             case LIST :
-                output.append(taskList.formattedOutput());
+                outputFormatter.appendAll(taskList.formattedOutput());
                 break;
             case UNKNOWN :
-                output.append("This is an unknown command");
+                outputFormatter.appendAll("This is an unknown command");
                 break;
         }
-        return output.toString();
+        return outputFormatter.getFormattedOutput();
     }
 }
