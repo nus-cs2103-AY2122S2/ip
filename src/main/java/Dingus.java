@@ -5,27 +5,7 @@ import java.util.List;
 public class Dingus {
 	public static String startLine = "\n--------------------------------------------------------------------";
 	public static String endLine = "--------------------------------------------------------------------\n";
-	public static String dingus = "░░░░░░░░░▄░░░░░░░░░░░░░░▄░░░░\n" +
-			"░░░░░░░░▌▒█░░░░░░░░░░░▄▀▒▌░░░\n" +
-			"░░░░░░░░▌▒▒█░░░░░░░░▄▀▒▒▒▐░░░\n" +
-			"░░░░░░░▐▄▀▒▒▀▀▀▀▄▄▄▀▒▒▒▒▒▐░░░\n" +
-			"░░░░░▄▄▀▒░▒▒▒▒▒▒▒▒▒█▒▒▄█▒▐░░░\n" +
-			"░░░▄▀▒▒▒░░░▒▒▒░░░▒▒▒▀██▀▒▌░░░\n" +
-			"░░▐▒▒▒▄▄▒▒▒▒░░░▒▒▒▒▒▒▒▀▄▒▒▌░░\n" +
-			"░░▌░░▌█▀▒▒▒▒▒▄▀█▄▒▒▒▒▒▒▒█▒▐░░\n" +
-			"░▐░░░▒▒▒▒▒▒▒▒▌██▀▒▒░░░▒▒▒▀▄▌░\n" +
-			"░▌░▒▄██▄▒▒▒▒▒▒▒▒▒░░░░░░▒▒▒▒▌░\n" +
-			"▀▒▀▐▄█▄█▌▄░▀▒▒░░░░░░░░░░▒▒▒▐░\n" +
-			"▐▒▒▐▀▐▀▒░▄▄▒▄▒▒▒▒▒▒░▒░▒░▒▒▒▒▌\n" +
-			"▐▒▒▒▀▀▄▄▒▒▒▄▒▒▒▒▒▒▒▒░▒░▒░▒▒▐░\n" +
-			"░▌▒▒▒▒▒▒▀▀▀▒▒▒▒▒▒░▒░▒░▒░▒▒▒▌░\n" +
-			"░▐▒▒▒▒▒▒▒▒▒▒▒▒▒▒░▒░▒░▒▒▄▒▒▐░░\n" +
-			"░░▀▄▒▒▒▒▒▒▒▒▒▒▒░▒░▒░▒▄▒▒▒▒▌░░\n" +
-			"░░░░▀▄▒▒▒▒▒▒▒▒▒▒▄▄▄▀▒▒▒▒▄▀░░░\n" +
-			"░░░░░░▀▄▄▄▄▄▄▀▀▀▒▒▒▒▒▄▄▀░░░░░\n" +
-			"░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▀▀░░░░░░░░\n";
-	public static String greeting = "\nDingus:	Oh it's you again...\nDingus:	What kind of trouble would you inconvenience me with this time?\n\n"
-			+ dingus;
+	public static String greeting = "\nDingus:	Oh it's you again...\nDingus:	What kind of trouble would you inconvenience me with this time?\n";
 	public static List<Task> tasks = new ArrayList<>();
 
 	public static void main(String[] args) {
@@ -117,8 +97,6 @@ public class Dingus {
 		} else {
 			tasks.add(curr);
 		}
-		System.out.println(startLine + "\nStop troubling me, I've already added this task:\n" + currTask
-				+ "\nCan you even finish " + tasks.size() + " tasks?\n" + endLine);
 		System.out.println(startLine);
 		System.out.println("Stop troubling me, I've already added this task:");
 		System.out.println(curr);
@@ -139,7 +117,7 @@ public class Dingus {
 			Task currTask = new Deadline(description, event[1]);
 			tasks.add(currTask);
 			System.out.println(startLine);
-			System.out.println("Stop troubling me, I've alread added this task:");
+			System.out.println("Stop troubling me, I've already added this task:");
 			System.out.println(currTask);
 			System.out.println((tasks.size() > 1) ? "Can you even finish " + tasks.size() + " tasks?"
 					: "Can you even finish " + tasks.size() + " task?");
@@ -155,7 +133,7 @@ public class Dingus {
 
 		try {
 			Integer.parseInt(info[1]);
-		} catch (DingusException e) {
+		} catch (NumberFormatException e) {
 			throw new DingusException("Are you incapable of understanding what's an integer?");
 		}
 
@@ -164,12 +142,12 @@ public class Dingus {
 		} else {
 			int pos = Integer.parseInt(info[1]) - 1;
 			System.out.println(startLine);
-			System.out.println("Knew that you couldn't finish that task, already deleted for you!");
+			System.out.println("I've already deleted for you! You're welcome.");
 			System.out.println(tasks.get(pos));
+			tasks.remove(pos);
 			System.out.println((tasks.size() > 1) ? "You have " + tasks.size() + " tasks left!"
 					: "You have " + tasks.size() + " task left!");
 			System.out.println(endLine);
-			tasks.remove(pos);
 		}
 
 	}
@@ -182,7 +160,7 @@ public class Dingus {
 
 		try {
 			Integer.parseInt(info[1]);
-		} catch (DingusException e) {
+		} catch (NumberFormatException e) {
 			throw new DingusException("Are you incapable of understanding what's an integer?");
 		}
 
@@ -212,7 +190,7 @@ public class Dingus {
 
 		try {
 			Integer.parseInt(info[1]);
-		} catch (DingusException e) {
+		} catch (NumberFormatException e) {
 			throw new DingusException("Are you incapable of understanding what's an integer?");
 		}
 
