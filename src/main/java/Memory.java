@@ -1,39 +1,65 @@
 public class Memory {
-    private String[] textMem;
+    private Task[] taskMem;
     private int size;
     private Echo echo;
 
     public Memory() {
-        this.textMem = new String[100];
+        this.taskMem = new Task[100];
         this.size = 0;
         this.echo = new Echo();
     }
 
-    public void AddString(String text) {
-        textMem[size] = text;
+    public void addTask(String text) {
+        taskMem[size] = new Task(text);
         size++;
-        echo.EchoString("added: " + text);
+        echo.echoString("added: " + text);
     }
 
-    public int GetSize() {
+    public void setDone(int address) {
+        address--;
+        if (address >= size || address < 0) {
+            echo.echoString("Memory address requested out of bounds!");
+        } else {
+            getTask(address).setDone();
+            echo.echoString("Cool! You've done this task:\n  " +
+                    getString(address));
+        }
+    }
+
+    public void setUndone(int address) {
+        address--;
+        if (address >= size || address < 0) {
+            echo.echoString("Memory address requested out of bounds!");
+        } else {
+            getTask(address).setUndone();
+            echo.echoString("How did you undo this task?\n  " +
+                    getString(address));
+        }
+    }
+
+    public int getSize() {
         return size;
     }
 
-    public String GetString(int address) {
+    public String getString(int address) {
         // Simple error handling, should suffice but will update
         if (address >= size || address < 0) {
             return "Memory address requested out of bounds!";
         } else {
-            return textMem[address];
+            return taskMem[address].toString();
         }
     }
 
-    public void ListAll() {
+    public Task getTask(int address) {
+        return taskMem[address];
+    }
+
+    public void listAll() {
         if (size == 0) {
-            echo.EchoString("You've got nothing to do.");
+            echo.echoString("You've got nothing to do.");
         } else {
             for (int i = 1; i <= size; i++) {
-                echo.EchoString(i + ". " + this.GetString(i-1));
+                echo.echoString(i + ". " + this.getString(i-1));
             }
         }
     }

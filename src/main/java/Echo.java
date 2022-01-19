@@ -3,7 +3,7 @@ public class Echo {
     public Echo() {}
 
     // Echoes a string
-    public void EchoString (String temp) {
+    public void echoString (String temp) {
         System.out.println("  > " + temp + "\n");
     }
 
