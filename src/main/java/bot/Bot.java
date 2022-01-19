@@ -58,6 +58,8 @@ public class Bot {
             case "event":
                 final String[] eventArgs = tokens[1].split(" /at ");
                 return this.addTask(new Event(eventArgs[0].trim(), eventArgs[1].trim()));
+            case "delete":
+                return this.deleteTask(Integer.parseInt(tokens[1]) - 1);
             default:
                 throw new BotException("I'm sorry, but I don't know what that means :-(");
         }
@@ -101,6 +103,13 @@ public class Bot {
         final Task t = this.tasks.get(taskId);
         t.markAsUndone();
         final String response = "OK, I've marked this task as not done yet:\n  " + t;
+        return this.constructResponse(response);
+    }
+
+    private String deleteTask(int taskId) {
+        final String response = "Noted. I've removed this task:\n  " + this.tasks.get(taskId) + "\nNow you have " +
+                (this.tasks.size() - 1) + " tasks in the list.";
+        this.tasks.remove(taskId);
         return this.constructResponse(response);
     }
 
