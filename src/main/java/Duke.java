@@ -10,7 +10,7 @@ public class Duke {
     static String goodBye = "Bye. Hope to see you again soon!";
     static String added = lineDivider + "added: " + "%s" + "\n" + lineDivider;
     static String addedTask = lineDivider + "Got it. I've added this task:\n" +
-            "   %s" + "\nNow you have %d tasks in the list.\n" + lineDivider;
+            "   %s\nNow you have %d tasks in the list.\n" + lineDivider;
 
     public static void listOut(Task[] list, int n) {
         System.out.printf(lineDivider + "Here are the tasks in your list:\n");
@@ -19,94 +19,153 @@ public class Duke {
         }
     }
 
-    public static void markTask(Task[] list, String echo, int indexOfSpace) {
-        int targetIndex = Integer.parseInt(echo.substring(indexOfSpace + 1));
-        Task curr = list[targetIndex - 1];
-        curr.mark();
-        String status = curr.getStatus();
-        String description = curr.getDescription();
-        System.out.printf(lineDivider + "Nice! I've marked this task as done:\n" +
-                "[%s] " + " %s\n" + lineDivider, status, description);
+    public static void markTask(Task[] list, String[] echo, int size) throws DukeException{
+        String err = "Oh no! Which task do you wish to mark? Try again :)\n" + lineDivider;
+        String wrongNumber = "Oh no! This task number does not exist. Try again :)\n" + lineDivider;
+        String wrongFormat = "Oh no! Please do not spell out the number. Try again :)\n" + lineDivider;
+        int targetIndex;
+        if (echo.length == 1) {
+            throw new DukeException(err);
+        }
+        String taskNum = echo[1];
+        if (taskNum.isEmpty()) {
+            throw new DukeException(err);
+        }
+        try {
+            targetIndex = Integer.parseInt(taskNum);
+        } catch (Exception e) {
+            throw new DukeException(wrongFormat);
+        }
+        if (targetIndex > size || targetIndex <= 0) {
+            throw new DukeException(wrongNumber);
+        } else {
+            Task curr = list[targetIndex - 1];
+            curr.mark();
+            String status = curr.getStatus();
+            String description = curr.getDescription();
+            System.out.printf(lineDivider + "Nice! I've marked this task as done:\n" +
+                    "[%s] " + " %s\n" + lineDivider, status, description);
+        }
     }
 
-    public static void unMarkTask(Task[] list, String echo, int indexOfSpace) {
-        int targetIndex = Integer.parseInt(echo.substring(indexOfSpace + 1));
-        Task curr = list[targetIndex - 1];
-        curr.unMark();
-        String status = curr.getStatus();
-        String description = curr.getDescription();
-        System.out.printf(lineDivider + "Ok, I've marked this task as not done yet:\n" +
+    public static void unMarkTask(Task[] list, String[] echo, int size) throws DukeException {
+        String err = "Oh no! Which task do you wish to unmark? Try again :)\n" + lineDivider;
+        String wrongNumber = "Oh no! This task number does not exist. Try again :)\n" + lineDivider;
+        String wrongFormat = "Oh no! Please do not spell out the number. Try again :)\n" + lineDivider;
+        int targetIndex;
+        if (echo.length == 1) {
+            throw new DukeException(err);
+        }
+        String taskNum = echo[1];
+        if (taskNum.isEmpty()) {
+            throw new DukeException(err);
+        }
+        try {
+            targetIndex = Integer.parseInt(taskNum);
+        } catch (Exception e) {
+            throw new DukeException(wrongFormat);
+        }
+        if (targetIndex > size || targetIndex <= 0) {
+            throw new DukeException(wrongNumber);
+        } else {
+            Task curr = list[targetIndex - 1];
+            curr.unMark();
+            String status = curr.getStatus();
+            String description = curr.getDescription();
+            System.out.printf(lineDivider + "Ok, I've marked this task as not done yet:\n" +
                 "[%s] " + "%s\n" + lineDivider, status, description);
+        }
     }
 
-    public static void addTask(Task[] list, int n, String echo) {
-        Task newTask = new Task(echo);
-        list[n] = newTask;
-        System.out.printf(addedTask, echo, n+1);
-    }
-
-    public static void addDeadline(Task[] list, int n, String info) {
-        int indexOfSpace = info.indexOf("/");
-        String description = info.substring(0, indexOfSpace - 1);
-        String date = info.substring(indexOfSpace + 4);
-        Deadline curr = new Deadline(description, date);
+    public static void addDeadline(Task[] list, int n, String[] echo) throws DukeException {
+        String err = "Oh no! The description of deadline cannot be empty... Try again :)\n" + lineDivider;
+        String wrongFormat = "Oh no! The format for deadline task is wrong... Try again :)\n" + lineDivider;
+        if (echo.length == 1) {
+            throw new DukeException(err);
+        }
+        String description = echo[1];
+        if (description.isEmpty()) {
+            throw new DukeException(err);
+        }
+        String[] details = description.split(" /by ", 2);
+        if (details.length == 1) {
+            throw new DukeException(wrongFormat);
+        }
+        String info = details[0];
+        String date = details[1];
+        Deadline curr = new Deadline(info, date);
         list[n] = curr;
-        System.out.printf(addedTask, curr.toString(), n+1);
+        System.out.printf(addedTask, curr.toString(), n + 1);
     }
 
-    public static void addEvent(Task[] list, int n, String info) {
-        int indexOfSpace = info.indexOf("/");
-        String description = info.substring(0, indexOfSpace - 1);
-        String date = info.substring(indexOfSpace + 4);
-        Event curr = new Event(description, date);
+    public static void addEvent(Task[] list, int n, String[] echo) throws DukeException {
+        String err = "Oh no! The description of event cannot be empty... Try again :)\n" + lineDivider;
+        String wrongFormat = "Oh no! The format for event task is wrong... Try again :)\n" + lineDivider;
+        if (echo.length == 1) {
+            throw new DukeException(err);
+        }
+        String description = echo[1];
+        if (description.isEmpty()) {
+            throw new DukeException(err);
+        }
+        String[] details = description.split(" /at ", 2);
+        if (details.length == 1) {
+            throw new DukeException(wrongFormat);
+        }
+        String info = details[0];
+        String date = details[1];
+        Event curr = new Event(info, date);
         list[n] = curr;
-        System.out.printf(addedTask, curr.toString(), n+1);
+        System.out.printf(addedTask, curr.toString(), n + 1);
     }
 
-    public static void addTodo(Task[] list, int n,String info) {
-        String description = info;
+    public static void addTodo(Task[] list, int n,String[] echo) throws DukeException {
+        String err = "Oh no! The description of todo cannot be empty... Try again :)\n" + lineDivider;
+        if (echo.length == 1) {
+            throw new DukeException(err);
+        }
+        String description = echo[1];
+        if (description.isEmpty()) {
+            throw new DukeException(err);
+        }
         Todo curr = new Todo(description);
         list[n] = curr;
-        System.out.printf(addedTask, curr.toString(), n+1);
+        System.out.printf(addedTask, curr.toString(), n + 1);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         Task[] listOfTasks = new Task[100];
         int n = 0;
 
         System.out.printf(greet);
         Scanner cmd = new Scanner(System.in);  // Create a Scanner object
         while (true) {
-            String echo = cmd.nextLine();
-            if (echo.equals("bye")) {
-                break;
-            }
-            if (echo.equalsIgnoreCase("list")) {
-                listOut(listOfTasks, n);
-                System.out.printf(lineDivider);
-                continue;
-            } else if (echo.contains(" ")) {
-                int indexOfSpace = echo.indexOf(" ");
-                String wordOne = echo.substring(0, indexOfSpace);
-                if (wordOne.equalsIgnoreCase("mark")) {
-                    markTask(listOfTasks, echo, indexOfSpace);
-                    continue;
-                } else if (wordOne.equalsIgnoreCase("unmark")) {
-                    unMarkTask(listOfTasks, echo, indexOfSpace);
-                    continue;
-                } else if (wordOne.equalsIgnoreCase("deadline")) {
-                    addDeadline(listOfTasks, n, echo.substring(indexOfSpace + 1));
-                    n = n+1;
-                    continue;
-                } else if (wordOne.equalsIgnoreCase("event")) {
-                    addEvent(listOfTasks, n, echo.substring(indexOfSpace + 1));
-                    n = n+1;
-                    continue;
-                } else if (wordOne.equalsIgnoreCase("todo")) {
-                    addTodo(listOfTasks, n, echo.substring(indexOfSpace + 1));
-                    n = n+1;
-                    continue;
+            try {
+                String echo = cmd.nextLine();
+                if (echo.equals("bye")) {
+                    break;
                 }
+                if (echo.equalsIgnoreCase("list")) {
+                    listOut(listOfTasks, n);
+                    System.out.printf(lineDivider);
+                } else if (echo.toLowerCase().contains("todo")) {
+                    addTodo(listOfTasks, n, echo.split(" ", 2));
+                    n = n+1;
+                } else if (echo.toLowerCase().contains("event")) {
+                    addEvent(listOfTasks, n, echo.split(" ", 2));
+                    n = n+1;
+                } else if (echo.toLowerCase().contains("deadline")) {
+                    addDeadline(listOfTasks, n, echo.split(" ", 2));
+                    n = n+1;
+                } else if (echo.toLowerCase().contains("unmark")) {
+                    unMarkTask(listOfTasks, echo.split(" ", 2), n);
+                } else if (echo.toLowerCase().contains("mark")) {
+                    markTask(listOfTasks, echo.split(" ", 2), n);
+                } else {
+                    throw new DukeException("Oh no! I fear I don't understand! Try again!\n" + lineDivider);
+                }
+            } catch (DukeException e) {
+                System.err.print(e);
             }
         }
         System.out.printf(lineDivider + goodBye + "\n" + lineDivider);
