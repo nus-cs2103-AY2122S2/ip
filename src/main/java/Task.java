@@ -30,4 +30,14 @@ public class Task {
     public void markAsNotDone() {
         this.isDone = false;
     }
+
+    /**
+     * Returns the string representation of this Task object
+     *
+     * @return the string representation of this Task object
+     */
+    @Override
+    public String toString() {
+        return "[" + this.getStatusIcon() + "] " + this.description;
+    }
 }
