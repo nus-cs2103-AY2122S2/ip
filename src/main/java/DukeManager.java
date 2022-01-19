@@ -10,7 +10,6 @@ public class DukeManager {
 
     public void handle(String input) {
         String[] tokens = input.split(" ");
-        System.out.println(tokens[0]);
         switch (tokens[0]) {
             case "list":
                 list();
@@ -73,13 +72,13 @@ public class DukeManager {
         System.out.println("    ____________________________________________________________\n" +
                 "     Hello! I'm Duke\n" +
                 "     What can I do for you?\n" +
-                "    ____________________________________________________________\n");
+                "    ____________________________________________________________");
     }
 
     protected void echo(String input) {
         System.out.println("    ____________________________________________________________\n" +
                 "     " + input + "\n" +
-                "    ____________________________________________________________\n");
+                "    ____________________________________________________________");
     }
 
     public void bye() {
