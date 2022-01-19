@@ -7,6 +7,8 @@
 
 Heylo! What can I do for you today? :)
 
+ You have not added any tasks yet.
+__________________________________________________________
  Added! Now you have 1 item in your tasks list.
    [T][ ] borrow book
 __________________________________________________________
@@ -62,5 +64,13 @@ __________________________________________________________
 __________________________________________________________
  Please enter the task number as well!
  Command format: unmark task-number
+__________________________________________________________
+ Okay, I've deleted this task.
+   [D][ ] return book 	 (by Sunday)
+__________________________________________________________
+ Here are your tasks. Make things happen!
+   1. [T][ ] borrow book
+   2. [E][ ] project meeting 	 (at Mon 2-4pm)
+   3. [D][ ] do homework 	 (by no idea :-p)
 __________________________________________________________
  See you again! :)

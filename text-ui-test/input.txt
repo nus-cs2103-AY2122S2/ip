@@ -1,3 +1,4 @@
+list
 todo borrow book
 list
 deadline return book /by Sunday
@@ -14,4 +15,6 @@ event team meeting
 deadline assignment /by
 mark
 unmark
+delete 2
+list
 bye
