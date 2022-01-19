@@ -8,19 +8,13 @@ public class Duke {
     }
 
     public void printBye(){
-        this.print("Bye. Hope I've been helpful todayyy, and see you again!");
+        this.print("Bye. Hope I've motivated you as much as I could have!, and SMILE :D");
     }
 
     public static void main(String[] args) {
         Scanner sc= new Scanner(System.in);
         Duke duke = new Duke();
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-
-        duke.print("Hello, My Dear Friend... I'm Duke!");
+        duke.print("Hello, My Dear Friend... I'm Duke, your personal motivator!");
         Quote quoteOfTheDay = new Quote();
         duke.print(quoteOfTheDay.generateQuote());
         duke.print("What can i do for you today?");
