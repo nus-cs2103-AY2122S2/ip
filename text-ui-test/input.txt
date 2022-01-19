@@ -11,4 +11,8 @@ todo
 deadline
 event
 mark
+blah
+delete
+delete 2
+delete 4
 bye

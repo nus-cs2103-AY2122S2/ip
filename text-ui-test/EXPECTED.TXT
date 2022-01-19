@@ -10,17 +10,17 @@
     ――――――――――――――――――――――――――――――――――
     Got it! I've added this task:
       [T][ ] buy lunch
-    Now you have 1 task in the list.
+    There are 1 task in the list now.
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
     Got it! I've added this task:
       [D][ ] submit assignment (by: Friday, 2pm)
-    Now you have 2 tasks in the list.
+    There are 2 tasks in the list now.
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
     Got it! I've added this task:
       [E][ ] project meeting (at: Wednesday, 10am-11am)
-    Now you have 3 tasks in the list.
+    There are 3 tasks in the list now.
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
     Here are the tasks in your list:
@@ -63,6 +63,20 @@
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
     Sorry, I don't know which task you would like to mark :(
+    ――――――――――――――――――――――――――――――――――
+    ――――――――――――――――――――――――――――――――――
+    Oh no! I don't understand what that means...
+    ――――――――――――――――――――――――――――――――――
+    ――――――――――――――――――――――――――――――――――
+    Sorry, I don't know which task you would like to delete :(
+    ――――――――――――――――――――――――――――――――――
+    ――――――――――――――――――――――――――――――――――
+    Okay, I've deleted this task:
+      [D][ ] submit assignment (by: Friday, 2pm)
+    There are 2 tasks in the list now.
+    ――――――――――――――――――――――――――――――――――
+    ――――――――――――――――――――――――――――――――――
+    Invalid task number. There are 2 tasks in the list now.
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
     Bye! Hope to see you again soon!
