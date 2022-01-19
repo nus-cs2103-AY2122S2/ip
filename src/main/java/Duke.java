@@ -21,7 +21,7 @@ public class Duke {
         System.out.println(greeting);
         Scanner sc = new Scanner(System.in);
 
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<Task> list = new ArrayList<>();
 
         while (sc.hasNext()) {
             String input = sc.nextLine();
@@ -37,13 +37,34 @@ public class Duke {
 
             else if (input.equals("list")) {
                 for (int i = 0; i < list.size(); i++) {
-                    String bullet = space + (i + 1) + ". ";
-                    output += bullet + list.get(i) + "\n";
+                    String bullet = space + (i + 1) + ".";
+                    output += bullet + list.get(i).toString() + "\n";
                 }
             }
 
+            else if (input.startsWith("mark")) {
+                Character i1 = input.charAt(5);
+                String i2 = i1.toString();
+                int index = Integer.parseInt(i2) - 1;
+                list.get(index).mark();
+
+                output += space + " Nice! I've marked this task as done:\n"
+                        + space + "   " + list.get(index).toString() + "\n";
+            }
+
+            else if (input.startsWith("unmark")) {
+                Character i1 = input.charAt(7);
+                String i2 = i1.toString();
+                int index = Integer.parseInt(i2) - 1;
+                list.get(index).unmark();
+
+                output += space + " Nice! I've marked this task as not done:\n"
+                        + space + "   " + list.get(index).toString() + "\n";
+            }
+
             else {
-                list.add(input);
+                Task current = new Task(input);
+                list.add(current);
                 output = space + "added: " + input + "\n";
             }
 
