@@ -7,7 +7,7 @@ import java.time.LocalDate;
  * Represents a task that the user wants to do.
  *
  */
-public class ToDos extends Task{
+public class ToDos extends Task {
     public ToDos(String objective) {
         super(objective);
     }
@@ -18,14 +18,14 @@ public class ToDos extends Task{
 
     @Override
     public String serialize() {
-        return "T|" + (this.done ? "1|" : "0|") + this.objective +"\n";
+        return "T|" + (this.done ? "1|" : "0|") + this.objective + "\n";
     };
 
     @Override
     public boolean equals(Object o) {
         if (o instanceof ToDos) {
             ToDos t = (ToDos) o;
-            return this.objective.equals(t.objective) && (this.done==t.done);
+            return this.objective.equals(t.objective) && (this.done == t.done);
         } else {
             return false;
         }

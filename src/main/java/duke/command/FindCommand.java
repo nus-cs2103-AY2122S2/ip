@@ -1,17 +1,18 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-import java.io.IOException;
 
 /**
  * Represents command to find all the tasks in the task list that matches a keyword.
  *
  */
-public class FindCommand extends Command{
-    String keyword;
+public class FindCommand extends Command {
+    private String keyword;
 
     public FindCommand(String keyword) {
         this.keyword = keyword;

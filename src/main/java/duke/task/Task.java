@@ -10,10 +10,20 @@ public abstract class Task {
     protected String objective;
     protected boolean done;
 
+    /**
+     * Constructor for Task class where Task is by default uncompleted.
+     * @param objective Task to be done.
+     */
     public Task(String objective) {
         this.objective = objective;
         this.done = false;
     }
+
+    /**
+     * Constructor for Task class where Task is by default uncompleted.
+     * @param objective Task to be done.
+     * @param done Whether Task is completed.
+     */
     public Task(String objective, Boolean done) {
         this.objective = objective;
         this.done = done;

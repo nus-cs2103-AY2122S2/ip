@@ -1,13 +1,13 @@
 package duke.main;
 
-import duke.command.Command;
-import duke.task.TaskList;
-import duke.ui.Ui;
-import duke.storage.Storage;
-import duke.parser.Parser;
-
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
+
+import duke.command.Command;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Duke is a chat-bot that curates a todo list according to user's commands.
@@ -17,10 +17,10 @@ public class Duke {
     protected TaskList tasks;
     protected Ui ui;
 
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
-
+    /**
+     * Constructor for Duke class
+     * @param filePath Path for file where data is stored and loaded
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -32,6 +32,10 @@ public class Duke {
         } catch (IOException e) {
             ui.showError(e.getMessage());
         }
+    }
+
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
     }
 
     /**
@@ -53,7 +57,7 @@ public class Duke {
                 ui.showError(e.getMessage());
             } catch (IndexOutOfBoundsException e) {
                 ui.showError("You have no task with that number.\n");
-            } catch (DateTimeParseException e){
+            } catch (DateTimeParseException e) {
                 ui.showError("Your date and times have not been formatted properly.\n");
             } finally {
                 ui.showLine();

@@ -8,11 +8,18 @@ import java.time.format.DateTimeFormatter;
  * Represents a task that the user wants to do on a specific date and between a starting and ending time.
  *
  */
-public class Events extends Task{
+public class Events extends Task {
     protected LocalDate date;
     protected LocalTime fromtime;
     protected LocalTime bytime;
 
+    /**
+     * Constructor for Events class where Event is by default uncompleted.
+     * @param objective Task to be done.
+     * @param date Date by which task should be done.
+     * @param from Time by which task should start.
+     * @param to Time by which task should end.
+     */
     public Events(String objective, String date, String from, String to) {
         super(objective);
         this.date = LocalDate.parse(date);
@@ -20,11 +27,19 @@ public class Events extends Task{
         this.bytime = LocalTime.parse(to);
     }
 
-    public Events(String objective, Boolean done, String date, String fromtime, String bytime) {
+    /**
+     * Constructor for Events class where completion can be set.
+     * @param objective Task to be done.
+     * @param done Whether Task has been done.
+     * @param date Date by which task should be done.
+     * @param from Time by which task should start.
+     * @param by Time by which task should end.
+     */
+    public Events(String objective, Boolean done, String date, String from, String by) {
         super(objective, done);
         this.date = LocalDate.parse(date);
-        this.fromtime = LocalTime.parse(fromtime);
-        this.bytime = LocalTime.parse(bytime);
+        this.fromtime = LocalTime.parse(from);
+        this.bytime = LocalTime.parse(by);
     }
 
     @Override
@@ -45,8 +60,8 @@ public class Events extends Task{
 
     @Override
     public String serialize() {
-        return "E|" + (this.done ? "1|" : "0|") + this.objective + "|" + this.date.toString() +
-                "|" + this.fromtime.toString() + "|" + this.bytime.toString() +"\n";
+        return "E|" + (this.done ? "1|" : "0|") + this.objective + "|" + this.date.toString()
+                + "|" + this.fromtime.toString() + "|" + this.bytime.toString() + "\n";
     };
     @Override
     public String toString() {
