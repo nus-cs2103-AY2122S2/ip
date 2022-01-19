@@ -6,7 +6,7 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
 
-        System.out.println(chatBox("Hello! I'm Duke\n    What can I do for you?"));
+        System.out.println(chatBox("Yawn... You woke me up! Urgh\n    What do you need?"));
 
         List<Task> tasks = new ArrayList<Task>();
         String tab = "    ";
@@ -25,12 +25,14 @@ public class Duke {
         }
 
         while (!task.equals("bye")) {
+            System.out.println(task);
+            System.out.println(item);
             if (task.equals("todo")) {
                 if (!item.equals("")) {
                     tasks.add(new Todo(item));
                     System.out.println(chatBox(addTask(tasks.get(tasks.size() - 1), tasks.size())));
                 } else {
-                    System.out.println(chatBox("☹ OOPS!!! The description of a todo cannot be empty."));
+                    System.out.println(chatBox("Can read instructions or not? Todo cannot be empty :/"));
                 }
 
             } else if (task.equals("deadline")) {
@@ -40,7 +42,7 @@ public class Duke {
                     tasks.add(new Deadline(thing, time));
                     System.out.println(chatBox(addTask(tasks.get(tasks.size() - 1), tasks.size())));
                 } else {
-                    System.out.println(chatBox("☹ OOPS!!! The description of a deadline cannot be empty."));
+                    System.out.println(chatBox("Can read instructions or not? Deadline cannot be empty :/"));
                 }
 
             } else if (task.equals("event")) {
@@ -50,7 +52,7 @@ public class Duke {
                     tasks.add(new Event(thing, time));
                     System.out.println(chatBox(addTask(tasks.get(tasks.size() - 1), tasks.size())));
                 } else {
-                    System.out.println(chatBox("☹ OOPS!!! The description of an event cannot be empty."));
+                    System.out.println(chatBox("Can read instructions or not? Event cannot be empty :/"));
                 }
 
             } else if (task.equals("list")){
@@ -68,12 +70,12 @@ public class Duke {
             } else if (task.equals("mark")) {
                 int index = Integer.parseInt(item);
                 tasks.get(index - 1).markAsDone();
-                System.out.println(chatBox("Nice! I've marked this task as done:\n      "
+                System.out.println(chatBox("Good job for accomplishing something today! I've marked this task as done:\n      "
                         + tasks.get(index - 1).toString()));
             } else if (task.equals("unmark")) {
                 int index = Integer.parseInt(item);
                 tasks.get(index - 1).markAsUndone();
-                System.out.println(chatBox("OK, I've marked this task as not done yet:\n      "
+                System.out.println(chatBox("Stop procrastinating you lazy prick! I've marked this task as not done yet:\n      "
                         + tasks.get(index - 1).toString()));
             } else if (task.equals("delete")) {
                 int index = Integer.parseInt(item);
@@ -82,7 +84,7 @@ public class Duke {
                 System.out.println(chatBox(removeTask(t, tasks.size())));
 
             } else {
-                System.out.println(chatBox("☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
+                System.out.println(chatBox("What is this? Can you read English?"));
             }
 
             inp = sc.nextLine().split(" ");
@@ -100,9 +102,7 @@ public class Duke {
         }
 
 
-
-
-        System.out.println(chatBox("Bye. Hope to see you again soon!"));
+        System.out.println(chatBox("Bye. I don't hope to see you again soon :D"));
 
         sc.close();
     }
@@ -117,7 +117,7 @@ public class Duke {
 
     private static String addTask(Task task, int total) {
         String tab = "    ";
-        String firstLine = "Got it. I've added this task:\n";
+        String firstLine = "Ah sure. I've added this task:\n";
         String secondLine = tab + "  " + task.toString() + "\n";
         String thirdLine;
         if (total == 1) {
@@ -132,7 +132,7 @@ public class Duke {
 
     private static String removeTask(Task task, int total) {
         String tab = "    ";
-        String firstLine = "Noted. I've removed this task:\n";
+        String firstLine = "Less work for you then less work for me then. I've removed this task:\n";
         String secondLine = tab + "  " + task.toString() + "\n";
         String thirdLine;
         if (total == 1) {
