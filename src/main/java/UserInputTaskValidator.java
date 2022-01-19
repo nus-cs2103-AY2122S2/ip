@@ -3,7 +3,7 @@ import java.util.Arrays;
 
 
 public class UserInputTaskValidator {
-    static ArrayList<String> VALID_USER_COMMAND = new ArrayList<String>(Arrays.asList("todo", "event", "deadline", "mark", "unmark", "list", "bye"));
+    static ArrayList<String> VALID_USER_COMMAND = new ArrayList<String>(Arrays.asList("todo", "event", "deadline", "mark", "unmark", "list", "bye", "delete"));
 
     // check for error when there is no task description
     static void taskDescriptionValidator(String userCommand, String description) throws DukeException {
@@ -50,4 +50,19 @@ public class UserInputTaskValidator {
             throw new DukeException("Invalid at date and time for event task: " + description);
         }
     }
+
+    // check for when there is no task specify for delete
+    static void deleteValidator(String taskNumber) throws DukeException {
+        if (taskNumber.isEmpty()) {
+            throw new DukeException("Empty task number for delete task");
+        }
+    }
+
+    // check for when the task number specified is invalid for delete task
+    static void deleteTaskNumberValidator(ArrayList<Task> todoList, String taskNumber) throws DukeException {
+        if (Integer.parseInt(taskNumber) > todoList.size()) {
+            throw new DukeException("Invalid task number for delete task");
+        }
+    }
+
 }
