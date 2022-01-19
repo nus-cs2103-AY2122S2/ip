@@ -35,24 +35,25 @@ public class Duke {
 
     public static Command processInput(String input) throws UnknownCommandException, EmptyDescriptionException {
         Command cmd = null;
-        String[] inputSplit = input.split(" ");
-        if (inputSplit[0].equals("bye")) {
+        String[] inputSplit = input.split(" ", 2);
+        String commandType = inputSplit[0].toLowerCase();
+        if (commandType.equals("bye")) {
             cmd = new ByeCommand();
-        } else if (inputSplit[0].equals("list")) {
+        } else if (commandType.equals("list")) {
             cmd = new ListCommand(TASKLIST);
-        } else if (inputSplit[0].equals("mark")) {
+        } else if (commandType.equals("mark")) {
             cmd = new MarkCommand(TASKLIST, Integer.parseInt(inputSplit[1]));
-        } else if (inputSplit[0].equals("unmark")) {
+        } else if (commandType.equals("unmark")) {
             cmd = new UnMarkCommand(TASKLIST, Integer.parseInt(inputSplit[1]));
-        } else if(inputSplit[0].equals("delete")){
+        } else if(commandType.equals("delete")){
             cmd = new DeleteCommand(TASKLIST, LISTSIZE, Integer.parseInt(inputSplit[1]));
             TASKLIST = cmd.getList();
             LISTSIZE--;
-        } else if (inputSplit[0].equals("todo")||inputSplit[0].equals("event")||inputSplit[0].equals("deadline")){
+        } else if (commandType.equals("todo")||commandType.equals("event")||commandType.equals("deadline")){
             if(inputSplit.length<2){
-                throw new EmptyDescriptionException(inputSplit[0]);
+                throw new EmptyDescriptionException(commandType);
             }
-            cmd = new AddCommand(TASKLIST, LISTSIZE, input);
+            cmd = new AddCommand(TASKLIST, LISTSIZE, commandType, inputSplit[1]);
             TASKLIST = cmd.getList();
             LISTSIZE++;
         } else {

@@ -9,12 +9,12 @@ public class AddCommand extends Command {
     private Task added;
 
 
-    public AddCommand(Task[] tasklist, int size, String input){
-        String[] processedInput = input.split(" ", 2);
-        this.type = processedInput[0];
-        this.input = processedInput[1];
+    public AddCommand(Task[] tasklist, int size, String commandType, String details){
+        this.type = commandType;
+        this.input = details;
         this.tasklist = tasklist;
         this.size = size;
+        String[] processedInput;
         switch (type) {
             case "todo":
                 this.added = new ToDos(input);
