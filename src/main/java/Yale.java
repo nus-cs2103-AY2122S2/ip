@@ -15,7 +15,8 @@ class ToDoList {
     public String listOut() {
         String output = "";
         for (int i = 0; i < list.size(); i++) {
-            output += i+1 + "." + list.get(i).getStatusIcon() + " " + list.get(i) + "\n";
+            output += i+1 + "." + list.get(i).getStatusIcon()
+                    + " " + list.get(i) + "\n";
         }
         return output;
     }
@@ -39,11 +40,14 @@ class ToDoItem {
 
     public void markItem() {
         isMarked = true;
-        System.out.println("Nice! I've marked this task as done:\n" + "    " + getStatusIcon() + " " + name);
+        System.out.println("Nice! I've marked this task as done:\n"
+                + "  " + getStatusIcon() + " " + name);
     }
 
-    public boolean unmarkItem() {
-        return isMarked = false;
+    public void unmarkItem() {
+        isMarked = false;
+        System.out.println("OK, I've marked this task as not done yet:\n"
+                + "  " + getStatusIcon() + " " + name);
     }
 
     @Override
@@ -75,20 +79,19 @@ public class Yale {
     }
 
     public static String receiveInput(Scanner scanner) {
-        System.out.println("What can I do for you?");
+        System.out.println("Enter command below:");
         String input = scanner.nextLine();
         return input;
     }
 
     public static void performAction(String command, ToDoList list) {
         if (command.equals("list")) {
-            System.out.println("Here are the tasks in your list\n" + list.listOut());
+            System.out.println("Here are the tasks in your list\n"
+                    + list.listOut());
 
-        }
-        else if (command.equals("bye")) {
+        } else if (command.equals("bye")) {
             System.out.println("Bye. Hope to see you again soon!");
-        }
-        else {
+        } else {
             if (command.contains("mark") || command.contains("unmark")) {
                 String[] commandArray = command.split(" ");
                 String markStatus = commandArray[0];
@@ -98,18 +101,13 @@ public class Yale {
                 } else {
                     list.getItem(itemNo-1).unmarkItem();
                 }
-            }
-            else {
+            } else {
                 list.addTo(command, false);
             }
-
         }
-
     }
-
 
     public static boolean checkExit(String input) {
         return input.equals("bye");
     }
-
 }
