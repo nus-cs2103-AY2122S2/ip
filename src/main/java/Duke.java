@@ -5,6 +5,7 @@ public class Duke {
     private static final String botName = "Feline";
     private Task[] list;
     private int listIndex;
+    private static final String[] commands = {"bye", "mark", "unmark", "list", "todo", "deadline", "event"};
 
     public Duke() {
         this.list = new Task[100];
@@ -16,9 +17,32 @@ public class Duke {
     private static void farewell() {
         System.out.println("See you next time!\n");
     }
-    private void addToList(String str) {    //adds task to list
-        System.out.println("added: " + str + "\n");
-        this.list[this.listIndex] = new Task(str);
+
+    private void addTask(String str) {    //adds task to list
+        String action = Duke.getFirstWord(str);
+        switch (action) {
+            case "todo":
+                this.list[this.listIndex] = new Todo(str);
+                break;
+            case "deadline":
+                //deadline do hw /by no idea :-p
+                String[] arr = str.split("/by");
+                arr[0] = arr[0].split(" ")[1];  // removing the deadline keyword
+                this.list[this.listIndex] = new Deadline(arr[0].trim(), arr[1].trim());
+                break;
+            case "event":
+                //event project meeting /at Mon 2-4pm
+                String[] eventArr = str.split("/at");
+                eventArr[0] = eventArr[0].split(" ")[1];  //removing the event keyword
+                this.list[this.listIndex] = new Event(eventArr[0].trim(), eventArr[1].trim());
+                break;
+            default:
+                this.list[this.listIndex] = new Task(str);
+        }
+
+        System.out.println("Got it. I've added this task:");
+        System.out.println(this.list[this.listIndex].toString());
+        System.out.println("Now you have " + this.listIndex + " tasks in your list.");
         this.listIndex ++;
     }
 
@@ -27,8 +51,9 @@ public class Duke {
         return this.list[i].toString();
     }
     private void printList() {
+        System.out.println("Here are the tasks in your list:");
         for (int i = 1; i < this.listIndex; i++) {
-            System.out.println(i + "." + this.getTaskStatement(i) + "\n");
+            System.out.println(i + "." + this.getTaskStatement(i));
         }
     }
     private static String getFirstWord(String input) {
@@ -83,6 +108,7 @@ public class Duke {
         Duke.greet();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
+        // for each input, action = input.getfirstword. while input!eq bye, Duke.performAction(action, input)
         while (!input.equals("bye")) {  //terminates system when user says bye
             if (input.equals("list")) {
                 duke.printList();
@@ -93,7 +119,7 @@ public class Duke {
                 } else if (duke.isUnMarkAction(action, input)) {
                     duke.unmark(input);
                 } else {
-                    duke.addToList(input);
+                    duke.addTask(input);
                 }
             }
             input = sc.nextLine();
