@@ -33,4 +33,9 @@ event something /at
 event something /at this date
 list
 mark hello
+list
+delete 3
+delete 1
+delete hello
+list
 bye

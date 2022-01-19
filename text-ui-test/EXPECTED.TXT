@@ -341,6 +341,67 @@ Invalid input, you need to give a number/integer
 --------------------------------------------------------------------------------------------
 Duke Speaking:
 
+Here are the tasks in your list: 
+1. [T][ ] read book
+2. [D][X] return book (by: Sunday)
+3. [E][X] project meeting (at: Mon 2-4pm)
+4. [T][ ] go Swimming
+5. [E][X] dancing with someone (at: Wed 5-9pm)
+6. [D][ ] do homework (by: week 1)
+7. [D][ ] do homework (by: no idea :-p)
+8. [T][ ] save someone
+9. [T][ ] find meaning in life
+10. [D][ ] go to the wishing well (by: monday)
+11. [E][ ] something (at: this date)
+
+--------------------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------------------
+Duke Speaking:
+
+Got it, task has been removed: 
+[E][X] project meeting (at: Mon 2-4pm)
+Now you have 10 tasks in your list.
+--------------------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------------------
+Duke Speaking:
+
+Got it, task has been removed: 
+[T][ ] read book
+Now you have 9 tasks in your list.
+--------------------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------------------
+Duke Speaking:
+
+Invalid input, you need to give a number/integer
+--------------------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------------------
+Duke Speaking:
+
+Here are the tasks in your list: 
+1. [D][X] return book (by: Sunday)
+2. [T][ ] go Swimming
+3. [E][X] dancing with someone (at: Wed 5-9pm)
+4. [D][ ] do homework (by: week 1)
+5. [D][ ] do homework (by: no idea :-p)
+6. [T][ ] save someone
+7. [T][ ] find meaning in life
+8. [D][ ] go to the wishing well (by: monday)
+9. [E][ ] something (at: this date)
+
+--------------------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------------------
+Duke Speaking:
+
 See ya!
 --------------------------------------------------------------------------------------------
 

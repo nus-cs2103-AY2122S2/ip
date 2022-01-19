@@ -130,6 +130,26 @@ public class Duke {
             return;
         }
 
+        if (firstCommand.equals("delete")) {
+            int taskIndex = 0;
+            try {
+                taskIndex = Integer.parseInt(st.nextToken()) - 1;
+            } catch (NumberFormatException error) {
+                throw new DukeException("Invalid input, you need to give a number/integer");
+            }
+
+            if (taskIndex >= userTexts.size()) {
+                throw new DukeException("Yo yo yo, this task don't exist. Give a legitimate task number.");
+            }
+
+            Task task = userTexts.get(taskIndex);
+            userTexts.remove(taskIndex);
+            printDukeResponse("Got it, task has been removed: \n" + task.toString() + "\nNow you have "
+                    + String.valueOf(this.userTexts.size()) + " tasks in your list.");
+
+            return;
+        }
+
         throw new DukeException("HEY! I don't know what this mean, command doesn't exist.");
     }
 
