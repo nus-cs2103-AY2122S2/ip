@@ -9,4 +9,7 @@ todo borrow book
 deadline return book /by Sunday
 mark 2
 blah
+todo
+event
+deadline
 bye
