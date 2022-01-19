@@ -1,19 +1,23 @@
 import java.util.ArrayList;
 
-class ItemList{
-    protected ArrayList<String> itemList;
+class ItemList<T> {
+    protected ArrayList<T> itemList;
 
     ItemList() {
-        this.itemList = new ArrayList<String>();
+        this.itemList = new ArrayList<T>();
     }
 
-    void addItem(String item) {
+    T getItem(int index) {
+        return this.itemList.get(index - 1);
+    }
+
+    void addItem(T item) {
         itemList.add(item);
     } 
 
     void printList() {
         for (int index = 0; index < this.itemList.size(); index++) {
-            System.out.println(Integer.toString(index + 1) + ". " + itemList.get(index));
+            System.out.println(Integer.toString(index + 1) + ". " + itemList.get(index).toString());
         }
     }
 }

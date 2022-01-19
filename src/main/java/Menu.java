@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 class Menu {
     private static Scanner sc = new Scanner(System.in);
-    private static ItemList list = new ItemList();
+    private static ItemList<Task> list = new ItemList<Task>();
 
     static void run(){
         System.out.println("=========================");
@@ -10,6 +10,7 @@ class Menu {
         System.out.println(" How can I be of service ");
         System.out.println("=========================");
         while(true) {
+            System.out.print(">>> ");
             Command.runCommand(sc.nextLine(), list);
         }
     }
