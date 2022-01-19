@@ -49,7 +49,7 @@ public class Duke {
                     System.out.println("Got it. I've added this task:  ");
                     arr.add(new Deadline(eventName, eventDate));
                     System.out.println(arr.get(arr.size() - 1).toString());
-                    System.out.println("Now you have " + arr.size() + "  tasks in the list.");
+                    System.out.println("Now you have " + arr.size() + " tasks in the list.");
                     continue;
                 }
                 case "event": {
@@ -74,9 +74,10 @@ public class Duke {
     }
 
     public static void displayList(ArrayList<Task> arr) {
+        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < arr.size(); i++) {
             Task currentTask = arr.get(i);
-            System.out.println(i + 1 + ". " + currentTask.toString());
+            System.out.println(i + 1 + "." + currentTask.toString());
         }
     }
 }
