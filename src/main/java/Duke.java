@@ -28,10 +28,37 @@ public class Duke {
         System.out.println(segLine);
     }
 
-    private void add(String s) {
-        Task t = new Task(s);
+    private void addTodo(String s) {
+        Todo t = new Todo(s);
         tasks.add(t);
-        System.out.println(indent + "added: " + s);
+        this.printAdd();
+    }
+
+    private void addDdl(String s) {
+        int i = s.indexOf(" /by ");
+        if (i != -1) {
+            Deadline t = new Deadline(s.substring(0, i), s.substring(i + 5));
+            tasks.add(t);
+            this.printAdd();
+        }
+        // else exception
+    }
+
+    private void addEvt(String s) {
+        int i = s.indexOf(" /at ");
+        if (i != -1) {
+            Event t = new Event(s.substring(0, i), s.substring(i + 5));
+            tasks.add(t);
+            this.printAdd();
+        }
+        // else exception
+    }
+
+    private void printAdd() {
+        System.out.println(indent + "Got it. I've added this task:");
+        int n = tasks.size();
+        System.out.println(indent + "  " + tasks.get(n - 1));
+        System.out.println(indent + "Now you have " + n + " tasks in the list.");
     }
 
     private void list() {
@@ -47,7 +74,7 @@ public class Duke {
         }
     }
 
-    public void mark(int index, boolean done) {
+    private void mark(int index, boolean done) {
         tasks.set(index, tasks.get(index).mark(done));
         if (done) {
             System.out.println(indent + "Nice! I've marked this task as done:");
@@ -57,7 +84,11 @@ public class Duke {
         System.out.println(indent + "  " + tasks.get(index));
     }
 
-    private void bye() {
+    private static void unknown() {
+        System.out.println(indent + "Unknown Command.");
+    }
+
+    private static void bye() {
         System.out.println(indent + byePhrase);
         System.out.println(segLine);
     }
@@ -70,25 +101,31 @@ public class Duke {
         while (true) {
             String s = sc.nextLine();
             System.out.println(segLine);
-            if (s.equals("list")) {
+            if (s.startsWith("list")) {
                 cindy.list();
-            } else if (s.startsWith("mark")) {
+            } else if (s.startsWith("todo ")) {
+                cindy.addTodo(s.substring(5));
+            } else if (s.startsWith("deadline ")) {
+                cindy.addDdl(s.substring(9));
+            } else if (s.startsWith("event ")) {
+                cindy.addEvt(s.substring(6));
+            } else if (s.startsWith("mark ")) {
                 Scanner temp = new Scanner(s.substring(5));
                 if (temp.hasNextInt()) {
                     cindy.mark(temp.nextInt() - 1, true);
                 }
                 // else exception
-            } else if (s.startsWith("unmark")) {
+            } else if (s.startsWith("unmark ")) {
                 Scanner temp = new Scanner(s.substring(7));
                 if (temp.hasNextInt()) {
                     cindy.mark(temp.nextInt() - 1, false);
                 }
                 // else exception
-            } else if (s.equals("bye")) {
-                cindy.bye();
+            } else if (s.startsWith("bye")) {
+                Duke.bye();
                 break;
             } else {
-                cindy.add(s);
+                Duke.unknown();
             }
             System.out.println(segLine);
         }

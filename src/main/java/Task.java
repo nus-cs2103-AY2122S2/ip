@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     private final String content;
     private final boolean done;
 
@@ -7,17 +7,15 @@ public class Task {
         this.done = false;
     }
 
-    private Task(String content, boolean done) {
+    public Task(String content, boolean done) {
         this.content = content;
         this.done = done;
     }
 
-    public Task mark(boolean done) {
-        if (done == this.done) {
-            return this;
-        } else {
-            return new Task(this.content, done);
-        }
+    public abstract Task mark(boolean done);
+
+    public String getContent() {
+        return content;
     }
 
     @Override
