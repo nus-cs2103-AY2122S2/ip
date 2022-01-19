@@ -22,7 +22,10 @@ public class Commands {
 
     void list() { // Get DukeLCH to List cmdHistory
         String border = "_______________________________________________________\n";
-        System.out.println(border + taskHistory.printAll() + border);
+        System.out.println(border
+                + "These are your tasks that we have in our records:\n"
+                + taskHistory.printAll()
+                + border);
     }
 
     void mark(int index) {
@@ -37,7 +40,7 @@ public class Commands {
     void unmark(int index) {
         taskHistory.getTask(index).unmarkTask();
         String msg = "_______________________________________________________\n"
-                + "Well done! You have completed the task:\n"
+                + "A reminder that the following task has not been done:\n"
                 + taskHistory.getTask(index).getDescription()
                 + "_______________________________________________________\n";
         System.out.println(msg);
