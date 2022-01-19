@@ -5,14 +5,6 @@ public class Commands {
     public Commands() { // Empty Constructor
     }
 
-    void addTask(String input) { // Get DukeLCH to Echo
-        taskHistory.addTo(input); // Add new input entry into history
-        String echo = "_______________________________________________________\n"
-                + "added: " + input + "\n"
-                + "_______________________________________________________\n";
-        System.out.println(echo);
-    }
-
     void bye() { // Get DukeLCH to Exit
         String bye = "_______________________________________________________\n"
                 + "Goodbye. I hope to be of service to you again soon!\n"
@@ -57,7 +49,26 @@ public class Commands {
     }
 
     void deadline(String[] tokens) {
+        String description = "";
+        String timeFrame = "";
+        int timeStart = -1; // -1 is a placeholder to indicate /by has not been found
+        for (int i = 1; i < tokens.length; i++) {
+            if (tokens[i].startsWith("/")) {
+                timeStart = i;
+                break;
+            } else {
+                description = description.concat(tokens[i]);
+            }
+            description = description.concat(" ");
+        }
 
+        for (int j = timeStart + 1; j < tokens.length; j++) {
+            timeFrame = timeFrame.concat(tokens[j]);
+            if (j != (tokens.length - 1)) {
+                timeFrame = timeFrame.concat(" ");
+            }
+        }
+        taskHistory.addDeadline(description, timeFrame);
     }
 
     void event(String[] tokens) {

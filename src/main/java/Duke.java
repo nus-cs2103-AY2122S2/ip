@@ -1,4 +1,5 @@
 import java.util.Scanner; // Imported Scanner class
+import static java.lang.System.exit; // Imported System.exit
 
 public class Duke {
     public static void main(String[] args) {
@@ -50,7 +51,8 @@ public class Duke {
                     break;
                 }
                 default:
-                    cmd.addTask(input);
+                    System.out.println("Keyword not recognised!");
+                    exit(1);
                     break;
             }
         }

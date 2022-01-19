@@ -1,12 +1,12 @@
 public class Deadlines extends Task {
-    private final String time;
+    private final String timeFrame;
 
-    public Deadlines(String description, String time) {
+    public Deadlines(String description, String timeFrame) {
         super(description);
-        this.time = time;
+        this.timeFrame = timeFrame;
     }
 
     public String getDeadline() {
-        return "[D]" + this.getTask() + "(by: " + time + ")\n";
+        return "[D]" + this.getTask() + "(by: " + timeFrame + ")\n";
     }
 }

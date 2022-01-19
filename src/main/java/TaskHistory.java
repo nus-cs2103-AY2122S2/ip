@@ -1,5 +1,5 @@
 import java.lang.StringBuilder; // Imported StringBuilder class
-import static java.lang.System.exit; // Imported exit
+import static java.lang.System.exit; // Imported System.exit
 
 public class TaskHistory {
     private final Task[] record = new Task[100]; // ArrayList of size 100 by default
@@ -8,13 +8,8 @@ public class TaskHistory {
     public TaskHistory() { //Empty Constructor
     }
 
-    void addTo(String input) {
-        record[taskCounter] = new Task(input);
-        taskCounter++;
-    }
-
-    void addToDo(String input) {
-        ToDos tempToDo = new ToDos(input);
+    void addToDo(String description) {
+        ToDos tempToDo = new ToDos(description);
         record[taskCounter] = tempToDo;
         taskCounter++;
         String msg = "_______________________________________________________\n"
@@ -23,6 +18,10 @@ public class TaskHistory {
                 + "Currently you have " + taskCounter + " tasks in our records.\n"
                 + "_______________________________________________________\n";
         System.out.println(msg);
+    }
+
+    void addDeadline(String description, String timeFrame) {
+
     }
 
     String printAll() {
