@@ -1,0 +1,12 @@
+todo first todo
+todo second todo
+list
+mark 1
+list
+event first event /at first time
+deadline first deadline /by second time
+mark 2
+list
+unmark 1
+list
+bye
