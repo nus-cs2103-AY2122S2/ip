@@ -1,5 +1,9 @@
 import java.util.Scanner;
+
 import tasks.Task;
+import tasks.ToDo;
+import tasks.Deadline;
+import tasks.Event;
 
 public class Duke {
     private static final String INDENTATION = "    ";
@@ -16,7 +20,7 @@ public class Duke {
         try {
             while (true) {
                 final String query = input.nextLine();
-                final String[] tokens = query.split(" ");
+                final String[] tokens = query.split(" ", 2);
                 switch (tokens[0]) {
                     case "bye":
                         Duke.bidFarewell();
@@ -30,8 +34,17 @@ public class Duke {
                     case "unmark":
                         Duke.handleUnmark(Integer.parseInt(tokens[1]) - 1);
                         break;
-                    default:
-                        Duke.handleAdd(new Task(query));
+                    case "todo":
+                        Duke.handleAdd(new ToDo(tokens[1]));
+                        break;
+                    case "deadline":
+                        final String[] deadlineArgs = tokens[1].split(" /by ");
+                        Duke.handleAdd(new Deadline(deadlineArgs[0], deadlineArgs[1]));
+                        break;
+                    case "event":
+                        final String[] eventArgs = tokens[1].split(" /at ");
+                        Duke.handleAdd(new Event(eventArgs[0], eventArgs[1]));
+                        break;
                 }
             }
         } finally {
@@ -55,7 +68,10 @@ public class Duke {
 
     private static void handleAdd(Task t) {
         Duke.tasks[Duke.nextItemIndex++] = t;
-        System.out.println(Duke.constructResponse("added: " + t));
+        final String response =
+                "Got it. I've added this task:\n  " + t + "\nNow you have " + (Duke.nextItemIndex + 1)
+                        + " tasks in the list.";
+        System.out.println(Duke.constructResponse(response));
     }
 
     private static void handleMark(int taskId) {
