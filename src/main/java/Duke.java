@@ -4,6 +4,12 @@ import chatbot.*;
 public class Duke {
     protected static String straightLine = "____________________________________________________________";
     
+    // introduction message
+    public static void displayGreeting() {
+        String introductionMessage = "Good day Sir. My name is Dook. \n How may I be of assistance?";
+        System.out.println(straightLine + "\n " + introductionMessage + "\n" + straightLine);
+    }
+
     // farewell message
     public static void displayFarewell() {
         String byeMessage = "Farewell Sir. May you have a wonderful day.";
@@ -122,8 +128,7 @@ public class Duke {
         // System.out.println("Hello from\n" + logo);
 
         // print introduction message
-        String introductionMessage = "Good day Sir. My name is Dook. \n How may I be of assistance?";
-        System.out.println(straightLine + "\n " + introductionMessage + "\n" + straightLine);
+        displayGreeting();
         
         Scanner scanner = new Scanner(System.in);
         ArrayList<Task> taskList = new ArrayList<Task>();
