@@ -10,7 +10,8 @@ public class Duke {
                     "/\\__/ /  __/ |_| |_/ / (_) | |_ \n" +
                     "\\____/ \\___|\\__\\____/ \\___/ \\__|\n";
     private static final String BORDER = "________________________________\n";
-    private static ArrayList<String> taskList = new ArrayList<>();
+    private static ArrayList<Task> taskList = new ArrayList<>();
+    private static boolean end = false;
 
     /**
      * Greets the user.
@@ -28,26 +29,68 @@ public class Duke {
         System.exit(0);
     }
 
+    /**
+     * Returns a string of the specified task with its description and status icon.
+     */
+    private static String printStatusWithDesc(Task t) {
+        return "[" + t.getStatusIcon() + "] " + t.getDescription() + "\n";
+    }
+
+    /**
+     * Marks the specified task as done.
+     */
+    private static void mark(int tasknum) {
+        Task t = taskList.get(tasknum - 1);
+        System.out.println(BORDER + "Well done! I've marked this task as done: \n");
+        t.markAsDone();
+        System.out.println(printStatusWithDesc(t) + BORDER);
+    }
+
+    /**
+     * Unmarks the specified task.
+     */
+    private static void unmark(int tasknum) {
+        Task t = taskList.get(tasknum - 1);
+        System.out.println(BORDER + "No problem, I've marked this task as undone: \n");
+        t.unmarkAsDone();
+        System.out.println(printStatusWithDesc(t) + BORDER);
+    }
+
+    /**
+     * Processes the input.
+     */
+    private static void process(String input) {
+        String[] arr = input.split(" ");
+        String command = arr[0]; // first word of the user input
+        if (command.equals("bye")) {
+            end = true;
+            exit();
+        } else if (command.equals("list")) {
+            StringBuilder listString = new StringBuilder();
+            for (int i = 0; i < taskList.size(); i++) {
+                Task t = taskList.get(i);
+                listString.append(i + 1).append(".[").append(t.getStatusIcon()).append("] ").append(t.getDescription()).
+                        append("\n");
+            }
+            System.out.println(BORDER + listString + BORDER);
+        } else if (command.equals("mark")) {
+            int num = Integer.parseInt(arr[1]);
+            mark(num);
+        } else if (command.equals("unmark")) {
+            int num = Integer.parseInt(arr[1]);
+            unmark(num);
+        } else {
+            taskList.add(new Task(input));
+            System.out.println(BORDER + "added: " + input + "\n" + BORDER);
+        }
+    }
+
     public static void main(String[] args) {
         greet();
         Scanner s = new Scanner(System.in);
-        boolean end = false;
         while (!end) {
             String input = s.nextLine().toLowerCase();
-            if (input.equals("bye")) {
-                end = true;
-                exit();
-            }
-            else if (input.equals("list")) {
-                StringBuilder listString = new StringBuilder();
-                for (int i = 0; i < taskList.size(); i++) {
-                    listString.append(i + 1).append(". ").append(taskList.get(i)).append("\n");
-                }
-                System.out.println(BORDER + listString + BORDER);
-            } else {
-                taskList.add(input);
-                System.out.println(BORDER + "added: " + input + "\n" + BORDER);
-            }
+            process(input);
         }
     }
 }
