@@ -29,20 +29,16 @@ public class Task {
 
     /**
      * markDone marks the task completed.
-     * @return the String representation of the instance.
      */
-    String markDone() {
+    void markDone() {
         this.done = true;
-        return toString();
     }
 
     /**
      * markDone unmarks the task as not completed.
-     * @return the String representation of the instance.
      */
-    String unMarkDone() {
+    void unMarkDone() {
         this.done = false;
-        return toString();
     }
 
     /**
