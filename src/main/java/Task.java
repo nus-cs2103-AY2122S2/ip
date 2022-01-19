@@ -24,8 +24,4 @@ public class Task {
         System.out.println("Ok! I've marked this task as not done yet:\n" + this.getStatusIcon() + " "
                 + this.description);
     }
-
-    public String returnDescription() {
-        return this.description;
-    }
 }
