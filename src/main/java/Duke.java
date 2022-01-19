@@ -78,7 +78,6 @@ public class Duke {
                 for (int i=0; i<ID; i++){
                     System.out.println("    " + (i+1) + "." + "[" + (commandMark[i]==true?"X":" ") + "]" + " " + commandStorage[i]);
                 }
-                System.out.println("");
                 System.out.println(hyphenate);
             } else if (command.split(" ")[0].equals("mark")){
                 int markIndex = Integer.parseInt(command.split(" ")[1]) - 1; //Zero-indexed
