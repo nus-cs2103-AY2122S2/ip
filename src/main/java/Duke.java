@@ -20,7 +20,7 @@ public class Duke {
 
                 // if user requests to list their tasks
                 case "list": {
-                    System.out.println("    Here are the tasks in your lists:\n");
+                    System.out.println("    Here are the tasks in your lists:");
                     int n = 1;
                     for (Task t : tasks) {
                         String by = "";
@@ -35,7 +35,7 @@ public class Duke {
                     int n = Integer.parseInt(s[1]) - 1;
                     tasks.set(n, tasks.get(n).mark());
                     Task temp = tasks.get(n);
-                    System.out.println("    Alright! I've marked this as done:\n  [" + temp.getDone() + "] " + temp.desc);
+                    System.out.println("    Alright! I've marked this as done:\n      [" + temp.getDone() + "] " + temp.desc);
 
                     break;
                 }
@@ -43,7 +43,15 @@ public class Duke {
                     int n = Integer.parseInt(s[1]) - 1;
                     tasks.set(n, tasks.get(n).unmark());
                     Task temp = tasks.get(n);
-                    System.out.println("    Alright! I've marked this as not done:\n  [" + temp.getDone() + "] " + temp.desc);
+                    System.out.println("    Alright! I've marked this as not done:\n      [" + temp.getDone() + "] " + temp.desc);
+
+                    break;
+                }
+                case "delete": {
+                    int n = Integer.parseInt(s[1]) - 1;
+                    Task t = tasks.get(n);
+                    tasks.remove(n);
+                    System.out.println("    Alright! This task has been deleted:\n      [" + t.getType() + "][" + t.getDone() + "] " + t.desc + t.getBy());
 
                     break;
                 }
@@ -55,9 +63,9 @@ public class Duke {
                         System.out.println("    Oops!! Description of ToDo can't be empty!!\n ");
                     }
                     else {
-                        System.out.println("    Okay! I've added this task:\n  ");
+                        System.out.println("    Okay! I've added this task:  ");
                         tasks.add(new ToDo(s[1]));
-                        System.out.println("    [T][ ] " + s[1]);
+                        System.out.println("      [T][ ] " + s[1]);
                         items++;
                         System.out.println("\n    Now you have " + items + " tasks on your list");
                     }
@@ -67,10 +75,10 @@ public class Duke {
                 case "event":
                     Arrays.toString(full.split(" ", 2));
                     s = findDate(full.split(" "));
-                    System.out.println("    Okay! I've added this task:\n  ");
+                    System.out.println("    Okay! I've added this task into the list:\n  ");
                     tasks.add(new Event(s[0], s[1]));
 //                System.out.println("full  " + s[1]);
-                    System.out.println("[E][ ] " + s[0]);
+                    System.out.println("      [E][ ] " + s[0]);
                     items++;
                     System.out.println("\n    Now you have " + items + " tasks on your list");
 
@@ -82,7 +90,7 @@ public class Duke {
                     System.out.println("    Okay! I've added this task:\n  ");
                     tasks.add(new Deadline(s[0], s[1]));
 //                System.out.println("full  " + s[1]);
-                    System.out.println("    [D][ ] " + s[0]);
+                    System.out.println("      [D][ ] " + s[0]);
                     items++;
                     System.out.println("\n    Now you have " + items + " tasks on your list");
 
