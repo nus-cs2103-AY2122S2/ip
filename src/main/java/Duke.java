@@ -27,14 +27,16 @@ public class Duke {
                 break;
             } else if (instruct.equals("list")) {
                 reportList();
-            } else if (instruct.startsWith("mark")) {
-                String[] details = instruct.split(" ");
-                markAsDone(Integer.parseInt(details[1]));
-            } else if (instruct.startsWith("unmark")) {
-                String[] details = instruct.split(" ");
-                markNotDone(Integer.parseInt(details[1]));
             } else {
-                addTask(instruct);
+                String[] details = instruct.split(" ");
+                if (details[0].equals("mark")) {
+                    markAsDone(Integer.parseInt(details[1]));
+                } else if (details[0].equals("unmark")) {
+                    markNotDone(Integer.parseInt(details[1]));
+                } else {
+                    String taskType = details[0];
+                    addTask(taskType, instruct);
+                }
             }
             addLineBreak();
         }
@@ -65,9 +67,25 @@ public class Duke {
         }
     }
 
-    public static void addTask(String instruct) {
-        manager.add(new Task(instruct));
-        System.out.println("added: " + instruct);
+    public static void addTask(String taskType, String instruction) {
+        Task toAdd = new Task("empty task");
+        if (taskType.equals("todo")) {
+            toAdd = new Todo(instruction.substring(5));
+        } else if (taskType.equals("deadline")) {
+            int index = instruction.indexOf("/by");
+            String description = instruction.substring(9, index);
+            String time = instruction.substring(index + 4);
+            toAdd = new Deadline(description, time);
+        } else {
+            int index = instruction.indexOf("/at");
+            String description = instruction.substring(6, index);
+            String time = instruction.substring(index + 4);
+            toAdd = new Event(description, time);
+        }
+
+        manager.add(toAdd);
+        System.out.println("Rodger that! Todo item added:");
+        System.out.println(toAdd);
     }
 
     public static Task findTask(int num) {
@@ -84,13 +102,13 @@ public class Duke {
         Task t = findTask(num);
         t.markDone();
         System.out.println("Congrats! Keep going:)");
-        System.out.println(t.toString());
+        System.out.println(t);
     }
 
     public static void markNotDone(int num) {
         Task t = findTask(num);
         t.undo();
         System.out.println("No worries:) Stay motivated!");
-        System.out.println(t.toString());
+        System.out.println(t);
     }
 }
