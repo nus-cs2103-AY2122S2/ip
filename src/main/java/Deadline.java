@@ -15,10 +15,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        sb.setLength(0);
-        sb.append("[D]").append("[").append(this.isDone ? "X] " : " ] ").append(this.taskDescription);
-        sb.append("\n (by: ").append(this.deadline).append(")");
-
-        return sb.toString();
+        return "[D]" + super.toString() + "\n (at: " + this.deadline + ")";
     }
 }

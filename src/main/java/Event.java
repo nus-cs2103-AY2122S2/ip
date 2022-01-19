@@ -15,10 +15,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        sb.setLength(0);
-        sb.append("[E]").append("[").append(this.isDone ? "X] " : " ] ").append(this.taskDescription);
-        sb.append("\n (at: ").append(this.eventTime).append(")");
-
-        return sb.toString();
+        return "[E]" + super.toString() + "\n (at: " + this.eventTime + ")";
     }
 }

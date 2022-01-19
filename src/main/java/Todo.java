@@ -9,9 +9,6 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        sb.setLength(0);
-        sb.append("[T]").append("[").append(this.isDone ? "X] " : " ] ").append(this.taskDescription);
-
-        return sb.toString();
+        return "[T]" + super.toString();
     }
 }
