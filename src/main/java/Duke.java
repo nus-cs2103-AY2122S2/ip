@@ -2,23 +2,23 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- *  Runs a Personal Assistant Chatbot which helps users
- *  keep track of tasks and other things. The current
- *  iteration of the Chatbot is named Luca.
+ * Runs a Personal Assistant Chatbot which helps users
+ * keep track of tasks and other things. The current
+ * iteration of the Chatbot is named Luca.
  */
 public class Duke {
 
     /**
      * Logo of the Chatbot.
      */
-   public static final String logo = "888      888     888  .d8888b.         d8888 \n"
-           + "888      888     888 d88P  Y88b       d88888 \n"
-           + "888      888     888 888    888      d88P888 \n"
-           + "888      888     888 888            d88P 888 \n"
-           + "888      888     888 888           d88P  888 \n"
-           + "888      888     888 888    888   d88P   888 \n"
-           + "888      Y88b. .d88P Y88b  d88P  d8888888888 \n"
-           + "88888888  \"Y88888P\"   \"Y8888P\"  d88P     888 \n";
+    public static final String logo = "888      888     888  .d8888b.         d8888 \n"
+            + "888      888     888 d88P  Y88b       d88888 \n"
+            + "888      888     888 888    888      d88P888 \n"
+            + "888      888     888 888            d88P 888 \n"
+            + "888      888     888 888           d88P  888 \n"
+            + "888      888     888 888    888   d88P   888 \n"
+            + "888      Y88b. .d88P Y88b  d88P  d8888888888 \n"
+            + "88888888  \"Y88888P\"   \"Y8888P\"  d88P     888 \n";
 
     /**
      * The divder line used to wrap string before output.
@@ -44,7 +44,7 @@ public class Duke {
         Task task;
         for (int i = 0; i < list.size(); i++) {
             task = list.get(i);
-            stringBuilder.append((i + 1) +  "." + task.toString());
+            stringBuilder.append((i + 1) + "." + task.toString());
             if (i != list.size() - 1) {
                 stringBuilder.append("\n");
             }
@@ -73,10 +73,10 @@ public class Duke {
      * @see Task
      */
     private static String markTask(int point) {
-       Task task = list.get(point - 1);
-       task.markAsDone();
-       return Duke.formatString("Great! I have marked this task as done:\n "
-               + task.toString());
+        Task task = list.get(point - 1);
+        task.markAsDone();
+        return Duke.formatString("Great! I have marked this task as done:\n "
+                + task.toString());
     }
 
     /**
@@ -110,7 +110,7 @@ public class Duke {
         ToDo task = new ToDo(stringBuilder.toString());
         list.add(task);
         return Duke.formatString("Got it! I've added this ToDo task:\n "
-                + task.toString() +"\nNow you have " + list.size()
+                + task.toString() + "\nNow you have " + list.size()
                 + (list.size() == 1 ? " task" : " tasks") + " in the list.");
     }
 
@@ -124,28 +124,29 @@ public class Duke {
      */
     private static String addDeadline(String[] tokens) throws InvalidArgumentException {
         StringBuilder stringBuilder = new StringBuilder();
+        Boolean foundKeyword = false;
         String by = "";
         String description = "";
         for (int i = 1; i < tokens.length; i++) {
-            stringBuilder.append(tokens[i]);
-            if (i + 1 < tokens.length) {
-                if (tokens[i + 1].equals("/by")) {
-                   description = stringBuilder.toString();
-                   stringBuilder = new StringBuilder();
-                   i++;
-               } else {
-                   stringBuilder.append(" ");
-               }
+            if (tokens[i].equals("/by")) {
+                description = stringBuilder.toString();
+                stringBuilder = new StringBuilder();
+                foundKeyword = true;
+            } else {
+                stringBuilder.append(tokens[i]);
+                if (i != tokens.length - 1) {
+                    stringBuilder.append(" ");
+                }
             }
         }
-        by = stringBuilder.toString();
-        if (by.equals("")) {
-            throw new InvalidArgumentException("☹ OOPS!!! Due date/time of deadline cannot empty.");
+        if (!foundKeyword) {
+            throw new InvalidArgumentException(":-( OOPS!!! Due date/time of deadline cannot be empty.");
         }
+        by = stringBuilder.toString();
         Deadline task = new Deadline(description, by);
         list.add(task);
         return Duke.formatString("Got it! I've added this Deadline task:\n "
-                + task.toString() +"\nNow you have " + list.size()
+                + task.toString() + "\nNow you have " + list.size()
                 + (list.size() == 1 ? " task" : " tasks") + " in the list.");
     }
 
@@ -156,31 +157,34 @@ public class Duke {
      * @return formatted string with Event task.
      * @throws IllegalArgumentException if Event date/time is empty.
      */
-    private static String addEvent(String[] tokens) throws InvalidArgumentException{
+    private static String addEvent(String[] tokens) throws InvalidArgumentException {
         StringBuilder stringBuilder = new StringBuilder();
+        Boolean foundKeyword = false;
         String at = "";
         String description = "";
         for (int i = 1; i < tokens.length; i++) {
-            stringBuilder.append(tokens[i]);
-            if (i + 1 < tokens.length) {
-                if (tokens[i + 1].equals("/at")) {
-                    description = stringBuilder.toString();
-                    stringBuilder = new StringBuilder();
-                    i++;
-                } else {
+            if (tokens[i].equals("/at")) {
+                description = stringBuilder.toString();
+                stringBuilder = new StringBuilder();
+                foundKeyword = true;
+            } else {
+                stringBuilder.append(tokens[i]);
+                if (i != tokens.length - 1) {
                     stringBuilder.append(" ");
+                } else {
+                    at = stringBuilder.toString();
                 }
             }
         }
-        at = stringBuilder.toString();
-        if (at.equals("")) {
-            throw new InvalidArgumentException("☹ OOPS!!! Start and End date/time of event "
-                    + "cannot empty.");
+        if (!foundKeyword) {
+            throw new InvalidArgumentException(":-( OOPS!!! Start-End date/time of event "
+                    + "cannot be empty.");
         }
+        at = stringBuilder.toString();
         Event task = new Event(description, at);
         list.add(task);
         return Duke.formatString("Got it! I've added this Event task:\n "
-                + task.toString() +"\nNow you have " + list.size()
+                + task.toString() + "\nNow you have " + list.size()
                 + (list.size() == 1 ? " task" : " tasks") + " in the list.");
     }
 
@@ -194,7 +198,7 @@ public class Duke {
         Task task = list.get(point - 1);
         list.remove(point - 1);
         return Duke.formatString("Noted. I've removed this task:\n "
-                + task.toString() +"\nNow you have " + list.size()
+                + task.toString() + "\nNow you have " + list.size()
                 + (list.size() == 1 ? " task" : " tasks") + " in the list.");
     }
 
@@ -216,61 +220,61 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         String[] tokens = input.split("\\s+");
-        
+
 
         while (!tokens[0].equals("bye")) {
             try {
                 if (tokens[0].equals("list")) {
                     System.out.println(Duke.listToString());
-                } else if (tokens[0].equals("mark")){
+                } else if (tokens[0].equals("mark")) {
                     if (tokens.length < 2) {
-                        throw new InvalidArgumentException("☹ OOPS!!! Please indicate "
+                        throw new InvalidArgumentException(":-( OOPS!!! Please indicate "
                                 + "the task to be marked.");
                     }
                     try {
                         System.out.println(Duke.markTask(Integer.parseInt(tokens[1])));
                     } catch (NumberFormatException exception) {
-                        throw new InvalidArgumentException("☹ OOPS!!! Please input an "
+                        throw new InvalidArgumentException(":-( OOPS!!! Please input an "
                                 + "integer with the mark command.");
                     }
                 } else if (tokens[0].equals("unmark")) {
                     if (tokens.length < 2) {
-                        throw new InvalidArgumentException("☹ OOPS!!! Please indicate "
+                        throw new InvalidArgumentException(":-( OOPS!!! Please indicate "
                                 + "the task to be unmasked.");
                     }
                     try {
                         System.out.println(Duke.unmarkTask(Integer.parseInt(tokens[1])));
                     } catch (NumberFormatException exception) {
-                        throw new InvalidArgumentException("☹ OOPS!!! Please input an "
+                        throw new InvalidArgumentException(":-( OOPS!!! Please input an "
                                 + "integer with the unmark command.");
                     }
                 } else if (tokens[0].equals("todo")) {
                     if (tokens.length < 2) {
-                        throw new InvalidArgumentException("☹ OOPS!!! The description of "
+                        throw new InvalidArgumentException(":-( OOPS!!! The description of "
                                 + "ToDo cannot be empty.");
                     }
                     System.out.println(Duke.addToDo(tokens));
                 } else if (tokens[0].equals("deadline")) {
                     if (tokens.length < 2) {
-                        throw new InvalidArgumentException("☹ OOPS!!! The description of "
+                        throw new InvalidArgumentException(":-( OOPS!!! The description of "
                                 + "Deadline cannot be empty.");
                     }
                     System.out.println(Duke.addDeadline(tokens));
                 } else if (tokens[0].equals("event")) {
                     if (tokens.length < 2) {
-                        throw new InvalidArgumentException("☹ OOPS!!! The description of "
+                        throw new InvalidArgumentException(":-( OOPS!!! The description of "
                                 + "Event cannot be empty.");
                     }
                     System.out.println(Duke.addEvent(tokens));
                 } else if (tokens[0].equals("delete")) {
                     if (tokens.length < 2) {
-                        throw new InvalidArgumentException("☹ OOPS!!! Please indicate "
+                        throw new InvalidArgumentException(":-( OOPS!!! Please indicate "
                                 + "the task to be deleted.");
                     }
                     try {
                         System.out.println(Duke.deleteTask(Integer.parseInt(tokens[1])));
                     } catch (NumberFormatException exception) {
-                        throw new InvalidArgumentException("☹ OOPS!!! Please input an "
+                        throw new InvalidArgumentException(":-( OOPS!!! Please input an "
                                 + "integer with the delete command.");
                     }
                 } else {
