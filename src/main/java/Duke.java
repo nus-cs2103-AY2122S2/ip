@@ -65,14 +65,14 @@ public class Duke {
                         taskList.add(newEvent);
                         dukeAddTaskOutput(newEvent);
                     } else { // if none of the above tasks
-                        throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        throw new DukeException(" OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                 }
             } catch (StringIndexOutOfBoundsException ex) {
-                dukeOutput(" ☹ OOPS!!! Argument after missing /at or /by!!!");
+                dukeOutput(" OOPS!!! Argument after missing /at or /by!!!");
                 continue;
             } catch (ArrayIndexOutOfBoundsException e) {
-                dukeOutput(" ☹ OOPS!!! I think you're missing some arguments!");
+                dukeOutput(" OOPS!!! I think you're missing some arguments!");
                 continue;
             } catch (DukeException e) {
                 dukeOutput(e.getMessage());
