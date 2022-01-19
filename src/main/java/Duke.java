@@ -5,11 +5,27 @@ public class Duke {
     private static final String botName = "Feline";
     private Task[] list;
     private int listIndex;
-    private static final String[] commands = {"bye", "mark", "unmark", "list", "todo", "deadline", "event"};
+    //private static final String[] commands = {"bye", "mark", "unmark", "list", "todo", "deadline", "event"};
 
     public Duke() {
         this.list = new Task[100];
         this.listIndex = 1;
+    }
+
+    private void performAction(String action, String input) {
+        switch (action) {
+            case "mark":
+                mark(input);
+                break;
+            case "unmark":
+                unmark(input);
+                break;
+            case "list":
+                printList();
+                break;
+            default:
+                addTask(input);
+        }
     }
     private static void greet() {
         System.out.println("Yoooo! My name is " + botName + "!\n" + "How can I help you bro?\n");
@@ -110,18 +126,8 @@ public class Duke {
         String input = sc.nextLine();
         // for each input, action = input.getfirstword. while input!eq bye, Duke.performAction(action, input)
         while (!input.equals("bye")) {  //terminates system when user says bye
-            if (input.equals("list")) {
-                duke.printList();
-            } else {
-                String action = Duke.getFirstWord(input);
-                if (duke.isMarkAction(action, input)) {
-                    duke.mark(input);
-                } else if (duke.isUnMarkAction(action, input)) {
-                    duke.unmark(input);
-                } else {
-                    duke.addTask(input);
-                }
-            }
+            String action = Duke.getFirstWord(input);
+            duke.performAction(action, input);
             input = sc.nextLine();
         }
         sc.close();
