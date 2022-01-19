@@ -3,6 +3,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+    private enum Command {
+        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT
+    }
+
     public static void main(String[] args) {
         // Boot message
         String intro = "Hello! I'm Duke\n"
@@ -19,17 +23,27 @@ public class Duke {
             try {
                 String input = sc.nextLine();
                 String[] breakdown = input.split(" ", 2);
-                String command = breakdown[0];
-                if (command.equals("bye")) {
-                    break;
-                } else if (command.equals("list")) {
-                    StringBuilder result = new StringBuilder();
-                    for (int i = 0; i < tasks.size(); i++) {
-                        result.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
+                Command command;
+                try {
+                    command = Command.valueOf(breakdown[0].toUpperCase());
+                } catch (IllegalArgumentException e) {
+                    throw new DukeException("Invalid command");
+                }
+                switch (command) {
+                    case BYE: {
+                        break;
                     }
-                    System.out.println(wrap("Here are the tasks in your list:\n" + result));
-                } else {
-                    if (command.equals("mark") || command.equals("unmark") || command.equals("delete")) {
+                    case LIST: {
+                        StringBuilder result = new StringBuilder();
+                        for (int i = 0; i < tasks.size(); i++) {
+                            result.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
+                        }
+                        System.out.println(wrap("Here are the tasks in your list:\n" + result));
+                        continue;
+                    }
+                    case MARK:
+                    case UNMARK:
+                    case DELETE: {
                         int index;
                         try {
                             index = Integer.parseInt(breakdown[1]) - 1;
@@ -42,10 +56,10 @@ public class Duke {
                             throw new DukeException("Too few arguments supplied");
                         }
                         Task task = tasks.get(index);
-                        if (command.equals("mark")) {
+                        if (command.equals(Command.MARK)) {
                             task.markAsDone();
                             System.out.println(wrap("Nice! I've marked this task as done:\n" + task + "\n"));
-                        } else if (command.equals("unmark")) {
+                        } else if (command.equals(Command.UNMARK)) {
                             task.markAsUndone();
                             System.out.println(wrap("OK, I've marked this task as not done yet:\n" + task + "\n"));
                         } else {
@@ -54,7 +68,11 @@ public class Duke {
                                     + task + "\n"
                                     + "Now you have " + tasks.size() + " task(s) in the list.\n"));
                         }
-                    } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
+                        continue;
+                    }
+                    case TODO:
+                    case DEADLINE:
+                    case EVENT: {
                         String options;
                         try {
                             options = breakdown[1];
@@ -62,9 +80,9 @@ public class Duke {
                             throw new DukeException("Too few arguments supplied");
                         }
                         Task task;
-                        if (command.equals("todo")) {
+                        if (command.equals(Command.TODO)) {
                             task = new Todo(options);
-                        } else if (command.equals("deadline")) {
+                        } else if (command.equals(Command.DEADLINE)) {
                             String[] splitCommand = options.split(" /by ");
                             if (splitCommand.length < 2) {
                                 throw new DukeException("No deadline time supplied");
@@ -86,10 +104,12 @@ public class Duke {
                         System.out.println(wrap("Got it. I've added this task:\n"
                                 + task + "\n"
                                 + "Now you have " + tasks.size() + " task(s) in the list.\n"));
-                    } else {
-                        throw new DukeException("Invalid command");
+                        continue;
                     }
+                    default:
+                        throw new DukeException("Invalid command");
                 }
+                break;
             } catch (DukeException e) {
                 e.printStackTrace();
             }
