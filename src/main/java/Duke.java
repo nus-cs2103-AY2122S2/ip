@@ -77,7 +77,8 @@ public class Duke {
     }
 
     public static void todo(String text, ArrayList<Task> list) {
-        ToDo freshTodo = new ToDo(text);
+        String splicedString = text.substring(5);
+        ToDo freshTodo = new ToDo(splicedString);
         list.add(freshTodo);
         System.out.println("   " + "Got it. I've added this task:\n"
                 + "    " + freshTodo + "\n" +  "   Now you have " + list.size() + " tasks in the list.");
