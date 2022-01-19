@@ -1,8 +1,9 @@
 import javax.swing.tree.ExpandVetoException;
 
-public abstract class Task{
+public class Task{
     protected String taskName;
     protected char done = ' ';
+    protected String date="empty";
 
     public Task(){}
 
@@ -24,27 +25,63 @@ public abstract class Task{
         String taskName =  s.replaceFirst("todo","").strip();
         return new ToDo(taskName);
     }
-
     private static Event newEvent(String s) throws InvalidTaskDataTimeException,InvalidTaskDescriptionException{
         String taskName =  s.replaceFirst("event","").strip();
         return new Event(taskName);
     }
-
     private static Deadline newDeadline(String s) throws InvalidTaskDataTimeException,InvalidTaskDescriptionException{
         String taskName =  s.replaceFirst("deadline","").strip();
         return new Deadline(taskName);
     }
 
+    public static Task parse(String s){
+        // <type>\t<done>\t<name>\t<date>
+        String[] str = s.split("\t");
+        char type = str[0].toCharArray()[0];
+        char done = str[1].toCharArray()[0];
+        String name = str[2];
+
+        Task t = new Task();
+
+        try {
+            if (type=='T') {
+                t = newToDo(name);
+            } else if (type=='D'){
+                String date = str[3];
+                t = newDeadline(name + " /by " + date);
+            } else if (type=='E'){
+                String date = str[3];
+                t = newEvent(name + " /at " + date);
+            }
+
+            if ("X".equals(done)){
+                t.markDone();
+            }
+            return t;
+        } catch (InvalidTaskDescriptionException i){
+            System.out.println(i.toString());
+            return null;
+        } catch (InvalidTaskDataTimeException d){
+            System.out.printf(d.toString());
+            return null;
+        }
+    }
+
     public void markDone(){
         this.done = 'X';
     }
-
     public void markunDone(){
         this.done = ' ';
     }
 
+    public char getDone(){
+        return this.done;
+    }
     public String getTaskName(){
         return this.taskName;
+    }
+    public String getDate(){
+        return this.date;
     }
 
     public String toString(){
@@ -52,5 +89,7 @@ public abstract class Task{
         return s;
     }
 
-    public abstract char getType();
+    public char getType(){
+        return ' ';
+    }
 }

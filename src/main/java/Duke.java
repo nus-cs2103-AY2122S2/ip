@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.Scanner;
 
 public class Duke {
@@ -6,7 +7,8 @@ public class Duke {
     public static void main(String[] args) {
 
         start();
-
+        load();
+        //setup();
         Scanner s = new Scanner(System.in);
         String input;
 
@@ -46,7 +48,7 @@ public class Duke {
         System.out.println(line);
     }
     public static void list(){
-        System.out.println(manager.getTaskList());
+        System.out.println(manager.printTaskList());
     }
     public static void marking(String input){
 
@@ -69,6 +71,7 @@ public class Duke {
 
     }
     public static void bye(){
+        save();
         String bye = "Bye. Hope to see you again soon!";
         System.out.println(line);
         System.out.println(bye);
@@ -103,5 +106,72 @@ public class Duke {
         System.out.println(line);
         System.out.println(invalidText);
         System.out.println(line);
+    }
+    public static void setup(){
+        String FILE_PATH = "data/duke";
+        try {
+            File f = new File(FILE_PATH);
+            Scanner s = new Scanner(f);
+            System.out.println(s.nextLine());
+            FileWriter fw = new FileWriter(f);
+            fw.write("123456789");
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void save(){
+        String FILE_PATH = "data/duke";
+        File f = new File(FILE_PATH);
+        try {
+            FileWriter fw = new FileWriter(f);
+            for (Task t : manager.getTaskList()) {
+                fw.write(String.format("%c\t%c\t%s\t%s\n",t.getType(),t.getDone(),t.getTaskName(),t.getDate()));
+            }
+            fw.close();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        System.out.println("File Saved!");
+    }
+
+    public static void load(){
+        String FILE_PATH = "data/duke";
+        File f = new File(FILE_PATH);
+        if (f.exists()){
+            try{
+                Scanner s = new Scanner(f);
+                while(s.hasNext()){
+                    String input = s.nextLine();
+                    Task t = Task.parse(input);
+                    manager.addTask(t);
+                }
+                System.out.println("Loading Completed!");
+                list();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("File not found! Loading defaults...");
+            manager = new TaskManager();
+        }
+    }
+
+    public static void loadDefault(){
+        String DIR_PATH = "data";
+        String FILE_PATH = "data/duke";
+        File dir = new File(DIR_PATH);
+        File f = new File(FILE_PATH);
+
+        if (!dir.exists()){
+            boolean createFile = dir.mkdir();
+            if (createFile){
+                System.out.println();
+            }
+        }
+    }
+
+    public static void test(){
+        Task.parse("D\tX\tabcd\tdasd");
     }
 }
