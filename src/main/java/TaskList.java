@@ -47,7 +47,7 @@ public class TaskList {
         currTask.setStatus(true);
         System.out.println("    ____________________________________________________________\n"
                 + "     Nice! I've marked this task as done:\n"
-                + "       [X] " + currTask.getDescription() + "\n"
+                + "       " + currTask + "\n"
                 + "    ____________________________________________________________\n");
     }
 
@@ -61,7 +61,7 @@ public class TaskList {
         currTask.setStatus(false);
         System.out.println("    ____________________________________________________________\n"
                 + "     OK, I've marked this task as not done yet:\n"
-                + "       [ ] " + currTask.getDescription() + "\n"
+                + "       " + currTask + "\n"
                 + "    ____________________________________________________________\n");
     }
 
@@ -120,5 +120,20 @@ public class TaskList {
                 + "     Now you have " + this.numberOfTasks + " task/s in the list.\n"
                 + "    ____________________________________________________________\n";
         System.out.println(output);
+    }
+
+    /**
+     * Deletes task that corresponds to the specified task ID.
+     *
+     * @param taskId The taskID that corresponds to the task that is to be deleted.
+     */
+    public void delete(int taskId) {
+        Task currTask = this.listOfTasks.get(taskId - 1);
+        this.listOfTasks.remove(taskId - 1);
+        this.numberOfTasks--;
+        System.out.println("    ____________________________________________________________\n"
+                + "     Noted. I've removed this task:\n"
+                + "       " + currTask + "\n"
+                + "    ____________________________________________________________\n");
     }
 }

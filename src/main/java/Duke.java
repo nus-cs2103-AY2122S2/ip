@@ -164,6 +164,21 @@ public class Duke {
                     }
                 }
                 break;
+            case("delete"):
+                if (wordList.size() != 2) {
+                    throw new InvalidCommand("This command should have exactly 1 argument");
+                } else if (!isInteger(wordList.get(1))) {
+                    throw new InvalidCommand("The argument MUST contain a single integer.");
+                } else {
+                    int currTaskId = Integer.parseInt(wordList.get(1));
+                    if (currTaskId > 0 & currTaskId <= taskListOfTasks.getNumberOfTasks()) {
+                        taskListOfTasks.delete(currTaskId); // Valid taskID, proceed to unmark task
+                    } else {
+                        throw new InvalidIndex("The specified task ID is out of range. " +
+                                "Please enter a number from 0 to " + taskListOfTasks.getNumberOfTasks() + ".");
+                    }
+                }
+                break;
             default:
                 throw new InvalidCommand("I'm sorry, but I don't know what that means :(");
         }
