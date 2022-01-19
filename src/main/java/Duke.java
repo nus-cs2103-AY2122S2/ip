@@ -2,25 +2,53 @@ import java.util.*;
 
 public class Duke {
 
+    public static class ToDo extends Task {
+        public ToDo(String taskName) {
+            super(taskName);
+        }
+        @Override
+        public String toString() {
+            return String.format("[T][%s] %s", this.done ? "X" : " ", this.taskName);
+        }
+    }
+
+    public static class Deadline extends Task {
+        public String deadline;
+        public Deadline(String taskName, String deadline) {
+            super(taskName);
+            this.deadline = deadline;
+        }
+        @Override
+        public String toString() {
+            return String.format("[D][%s] %s (by: %s)",
+                    this.done ? "X" : " ", this.taskName, this.deadline);
+        }
+    }
+
+    public static class Event extends Task {
+        public String eventTime;
+        public Event(String taskName, String eventTime) {
+            super(taskName);
+            this.eventTime = eventTime;
+        }
+        @Override
+        public String toString() {
+            return String.format("[E][%s] %s (at: %s)",
+                    this.done ? "X" : " ", this.taskName, this.eventTime);
+        }
+    }
     public static class Task {
         public boolean done = false;
-        public String name;
-
+        public String taskName;
         public Task(String taskName) {
-            this.name = taskName;
+            this.taskName = taskName;
         }
-
         public void setDone(boolean newDone) {
             this.done = newDone;
         }
-
-        public boolean isDone() {
-            return this.done;
-        }
-
         @Override
         public String toString() {
-            return String.format("[%s] %s", this.done ? "X" : " ", this.name);
+            return String.format("[%s] %s", this.done ? "X" : " ", this.taskName);
         }
     }
 
@@ -56,10 +84,41 @@ public class Duke {
         printIndent(separator + "\n");
     }
 
-    public static void addTask(String taskName) {
-        Task t = new Task(taskName);
+    public static void addTask(String taskString) {
+        int firstSpace = taskString.indexOf(" ");
+        String firstWord = taskString.substring(0, firstSpace);
+
+        String taskName;
+        Task t;
+
+        switch (firstWord) {
+            case "todo":
+                taskName = taskString.substring(5);
+                t = new ToDo(taskName);
+                break;
+            case "deadline":
+                int byIdx = taskString.indexOf("/by");
+                taskName = taskString.substring(9, byIdx-1);  // "deadline " has 9 characters
+                String taskDeadline = taskString.substring(byIdx + 4);  // "/by " has 4 characters
+                t = new Deadline(taskName, taskDeadline);
+                break;
+            case "event":
+                int atIdx = taskString.indexOf("/at");
+                taskName = taskString.substring(6, atIdx-1);  // "event " has 9 characters
+                String taskTime = taskString.substring(atIdx + 4);  // "/at " has 4 characters
+                t = new Event(taskName, taskTime);
+                break;
+            default:
+                t = new Task(taskString);
+        }
         allTasks.add(t);
-        prettyPrint(String.format("added: %s", taskName));
+        String[] messages = new String[] {
+                "Got it. I've added this task:",
+                t.toString(),
+                "Now you have " + allTasks.size() + " tasks in the list."
+        };
+
+        prettyPrint(messages);
     }
 
     public static void markTask(int taskNum) {
@@ -92,20 +151,20 @@ public class Duke {
         while (!finished) {
             userInput = sc.nextLine();
 
-            if (userInput.equals("bye")) {
+            if (userInput.equals("bye")) {  // end
                 prettyPrint(closingMessage);
                 finished = true;
-            } else if (userInput.equals("list")) {
+            } else if (userInput.equals("list")) {  // display tasks
                 displayTasks();
-            } else if (userInput.startsWith("mark")) {
+            } else if (userInput.startsWith("mark")) {  // mark task as done
                 char lastChar = userInput.charAt(userInput.length() - 1);
                 int taskToMark = Character.getNumericValue(lastChar);
                 markTask(taskToMark - 1);
-            } else if (userInput.startsWith("unmark")) {
+            } else if (userInput.startsWith("unmark")) {  // mark task as undone
                 char lastChar = userInput.charAt(userInput.length() - 1);
                 int taskToUnmark = Character.getNumericValue(lastChar);
                 unmarkTask(taskToUnmark - 1);
-            } else {
+            } else {  // add task
                 addTask(userInput);
             }
 
