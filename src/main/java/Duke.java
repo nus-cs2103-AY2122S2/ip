@@ -25,7 +25,7 @@ public class Duke {
         System.out.println(logo);
         System.out.println("Greetings, I'm Taskmaster, I'm super grumpy 24/7");
         System.out.println("....................................");
-        System.out.println("Okay, what do you want?");
+        System.out.println("Okay, what do you want?\n");
     }
 
     /**

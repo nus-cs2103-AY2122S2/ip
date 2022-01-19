@@ -62,7 +62,7 @@ public class Commands {
             String deleted = "";
              //Handle the case of having no second input
              if (splitString.length == 1 ) {
-                 System.out.println("What?! You are to enter only 2 inputs. Eg mar k 1, unmark 2, delete 3\n");
+                 System.out.println("What?! You are to enter only 2 inputs. Eg mark 1, unmark 2, delete 3\n");
              }  else if (splitString.length > 2) {
                  //Handle the case of having more than 2 inputs
                  System.out.println("What?! You are to enter only 2 inputs. Eg mark 1, unmark 2, delete 3\n");

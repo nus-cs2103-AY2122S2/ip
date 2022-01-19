@@ -86,6 +86,7 @@ public class TaskList {
              System.out.println("    \nHere are the tasks in your list:");
              for (int i = 0; i < currentSize; i++)
                  System.out.println("    " + (i + 1) + ". " + this.tasklist.get(i));
+            System.out.println("\n");
          
         }
     }
