@@ -52,6 +52,18 @@ public class Duke {
                         taskList.add(new Deadline(input.split(" /by ")));
                         subtaskResponse(taskList);
                         break;
+                    case "remove":
+                    case "delete":
+                        int deleteIdx = Integer.parseInt(inputArr[1]) - 1;
+                        if (deleteIdx < 0 || deleteIdx >= taskList.size()) {
+                            throw new DukeException("Please enter a valid index.");
+                        }
+                        deleteResponse(taskList.remove(deleteIdx), taskList.size());
+                        break;
+                    case "clear-list":
+                        taskList.clear();
+                        botResponse("The list has been cleared!");
+                        break;
                     default:
                         throw new DukeException("Invalid command!");
                 }
@@ -62,6 +74,19 @@ public class Duke {
 
         }
         sc.close();
+    }
+
+    public static void deleteResponse(Task deletedTask, int size) {
+        String divString = "    ---------------------------------------------";
+        String strPadding = "      ";
+        String ackString = "Noted. I've removed this task: ";
+        String sizeString = String.format("Now you have %d tasks in the list.", size);
+
+        System.out.println(divString);
+        System.out.println(strPadding + ackString);
+        System.out.println(strPadding + "   " + deletedTask);
+        System.out.println(strPadding + sizeString);
+        System.out.println(divString);
     }
 
     public static void subtaskResponse(List<Task> taskList) {
