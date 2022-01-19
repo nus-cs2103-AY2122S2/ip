@@ -36,10 +36,11 @@ public class Duke {
             String command = tokens[0];
             int sizeOfInputArr = tokens.length;
             String name = "";
-            for (int i = 1; i < sizeOfInputArr; i++) {
+            for (int i = 1; i < sizeOfInputArr - 1; i++) {
                 name = name.concat(tokens[i]);
                 name = name.concat(" ");
             }
+            name = name.concat(tokens[sizeOfInputArr - 1]);
 
             // if command = "mark x" where x is the task number
             if (command.equals("mark")) {
@@ -69,7 +70,7 @@ public class Duke {
                 Todo todo = new Todo(name);
                 tasks[count] = todo;
                 System.out.println("\t____________________________________________________________");
-                System.out.println("\t Got it. I've added this task: ");
+                System.out.println("\t Got it. I've added this task:");
                 System.out.println("\t\t " + todo.track() + todo.status + " " + todo.toString());
                 System.out.println("\t Now you have " + (count + 1) + " tasks in the list.");
                 System.out.println("\t____________________________________________________________");
@@ -86,7 +87,7 @@ public class Duke {
                 tasks[count] = event;
 
                 System.out.println("\t____________________________________________________________");
-                System.out.println("\t Got it. I've added this task: ");
+                System.out.println("\t Got it. I've added this task:");
                 System.out.println("\t\t " + event.track() + event.status + " " + event.toString());
                 System.out.println("\t Now you have " + (count + 1) + " tasks in the list.");
                 System.out.println("\t____________________________________________________________");
@@ -103,10 +104,9 @@ public class Duke {
                 String deadlineName = tokensName[0];
                 Deadline deadline = new Deadline(deadlineName, date);
                 tasks[count] = deadline;
-                System.out.println("Printing name: " + deadlineName);
-
+                
                 System.out.println("\t____________________________________________________________");
-                System.out.println("\t Got it. I've added this task: ");
+                System.out.println("\t Got it. I've added this task:");
                 System.out.println("\t\t " + deadline.track() + deadline.status + " " + deadline.toString());
                 System.out.println("\t Now you have " + (count + 1) + " tasks in the list.");
                 System.out.println("\t____________________________________________________________");
