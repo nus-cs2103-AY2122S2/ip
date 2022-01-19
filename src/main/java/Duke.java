@@ -1,20 +1,21 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class Duke {
     private boolean isRunning;
     private ArrayList<Task> userTexts;
-
-    public Duke() {
-        this.userTexts = new ArrayList<Task>();
-        this.isRunning = true;
-    }
 
     public static void main(String[] args) {
         Duke duke = new Duke();
 
         duke.startGreeting();
         duke.runDuke();
+    }
+
+    public Duke() {
+        this.userTexts = new ArrayList<Task>();
+        this.isRunning = true;
     }
 
     /* Initial greeting for Duke */
@@ -49,14 +50,38 @@ public class Duke {
 
     /* Return true if command is successfully parsed */
     public boolean commandsParsed(String commands) {
-        if (commands.equals("bye")) { // quit application
+        StringTokenizer st = new StringTokenizer(commands, " ");
+        String firstCommand = st.nextToken();
+
+        // quit application
+        if (firstCommand.equals("bye")) {
             printDukeResponse("See ya!");
             this.isRunning = false;
             return true;
         }
 
-        if (commands.equals("list")) {
-            printDukeResponse(getListStr(userTexts)); // just copy user response
+        // print task list
+        if (firstCommand.equals("list")) {
+            printDukeResponse(getListStr(userTexts));
+            return true;
+        }
+
+        // mark task
+        if (firstCommand.equals("mark") || firstCommand.equals("unmark")) {
+            boolean markTask = firstCommand.equals("mark");
+            int taskIndex = Integer.parseInt(st.nextToken()) - 1;
+
+            if (taskIndex >= userTexts.size()) {
+                printDukeResponse("Yo yo yo, this task don't exist.");
+                return true;
+            }
+
+            Task task = userTexts.get(taskIndex);
+            task.setIsDone(markTask);
+            String cmdDescription = markTask ? "Nice I've marked this task as done: \n"
+                    : "Alright, I've marked the task as not completed yet: \n ";
+
+            printDukeResponse(cmdDescription + task.toString());
             return true;
         }
 

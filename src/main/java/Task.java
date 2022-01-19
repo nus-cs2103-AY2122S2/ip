@@ -17,6 +17,10 @@ public class Task {
         sb = new StringBuilder("");
     }
 
+    public void setIsDone(boolean isDone) {
+        this.isDone = isDone;
+    }
+
     @Override
     public String toString() {
         sb.setLength(0);
