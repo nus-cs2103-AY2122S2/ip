@@ -1,12 +1,11 @@
-import javax.sound.sampled.Line;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import Exceptions.*;
 import commands.*;
 import tasks.*;
 public class Duke {
-    private static Task[] TASKLIST = new Task[100];
-    private static int LISTSIZE = 0;
+    private static ArrayList<Task> TASKLIST = new ArrayList<>();
     public static void main(String[] args) {
         //intro messages
         Scanner sc =  new Scanner(System.in);
@@ -46,16 +45,14 @@ public class Duke {
         } else if (commandType.equals("unmark")) {
             cmd = new UnMarkCommand(TASKLIST, Integer.parseInt(inputSplit[1]));
         } else if(commandType.equals("delete")){
-            cmd = new DeleteCommand(TASKLIST, LISTSIZE, Integer.parseInt(inputSplit[1]));
+            cmd = new DeleteCommand(TASKLIST, Integer.parseInt(inputSplit[1]));
             TASKLIST = cmd.getList();
-            LISTSIZE--;
         } else if (commandType.equals("todo")||commandType.equals("event")||commandType.equals("deadline")){
             if(inputSplit.length<2){
                 throw new EmptyDescriptionException(commandType);
             }
-            cmd = new AddCommand(TASKLIST, LISTSIZE, commandType, inputSplit[1]);
+            cmd = new AddCommand(TASKLIST, commandType, inputSplit[1]);
             TASKLIST = cmd.getList();
-            LISTSIZE++;
         } else {
             throw new UnknownCommandException();
         }
