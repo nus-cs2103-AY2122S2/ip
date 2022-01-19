@@ -14,8 +14,6 @@ public class Duke {
         System.out.println("You can check your schedwle here (ɔ◔‿◔)ɔ ♥!");
 
         respond();
-
-        System.out.println("Cya later~ ≧◉◡◉≦");
     }
 
     private static void respond() {
@@ -25,6 +23,7 @@ public class Duke {
             String command = sc.next();
             switch (command) {
                 case "bye":
+                    System.out.println("Cya later~ ≧◉◡◉≦");
                     break label;
                 case "list":
                     displayList();
