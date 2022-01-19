@@ -12,6 +12,10 @@ public class Action {
     protected String[] inp;
     protected DukeList dL;
 
+    enum Commands {
+        todo, deadline, event, list, mark, unmark, delete, bye;
+    }
+
     public Action(String[] i, DukeList l) {
         inp = i;
         dL = l;
@@ -21,30 +25,30 @@ public class Action {
      * Based on supplied Action word, run the action
      */
     public void makeAction() throws DukeException {
-        String act = actWord();
+        Commands act = Commands.valueOf(actWord());
         switch (act) {
-            case "todo":
+            case todo:
                 System.out.println(createTodo());
                 break;
-            case "deadline":
+            case deadline:
                 System.out.println(createDeadline());
                 break;
-            case "event":
+            case event:
                 System.out.println(createEvent());
                 break;
-            case "list":
+            case list:
                 System.out.println(list());
                 break;
-            case "mark":
+            case mark:
                 System.out.println(mark());
                 break;
-            case "unmark":
+            case unmark:
                 System.out.println(unmark());
                 break;
-            case "delete":
+            case delete:
                 System.out.println(delete());
                 break;
-            case "bye":
+            case bye:
                 bye();
                 break;
             default:
