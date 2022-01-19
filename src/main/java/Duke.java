@@ -33,17 +33,21 @@ public class Duke {
         }
     }
 
-    public static Command processInput(String input) throws UnknownCommandException, EmptyDescriptionException{
+    public static Command processInput(String input) throws UnknownCommandException, EmptyDescriptionException {
         Command cmd = null;
         String[] inputSplit = input.split(" ");
-        if(inputSplit[0].equals("bye")){
+        if (inputSplit[0].equals("bye")) {
             cmd = new ByeCommand();
-        } else if(inputSplit[0].equals("list")){
+        } else if (inputSplit[0].equals("list")) {
             cmd = new ListCommand(TASKLIST);
-        } else if(inputSplit[0].equals("mark")) {
+        } else if (inputSplit[0].equals("mark")) {
             cmd = new MarkCommand(TASKLIST, Integer.parseInt(inputSplit[1]));
-        } else if(inputSplit[0].equals("unmark")){
+        } else if (inputSplit[0].equals("unmark")) {
             cmd = new UnMarkCommand(TASKLIST, Integer.parseInt(inputSplit[1]));
+        } else if(inputSplit[0].equals("delete")){
+            cmd = new DeleteCommand(TASKLIST, LISTSIZE, Integer.parseInt(inputSplit[1]));
+            TASKLIST = cmd.getList();
+            LISTSIZE--;
         } else if (inputSplit[0].equals("todo")||inputSplit[0].equals("event")||inputSplit[0].equals("deadline")){
             if(inputSplit.length<2){
                 throw new EmptyDescriptionException(inputSplit[0]);
