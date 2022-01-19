@@ -6,24 +6,19 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);  // Create a Scanner object
 
-        hLineBreak();
-        printlnWithIndent("Hello! I'm YourBoss.\n" +
+        dukeOutput("Hello! I'm YourBoss.\n" +
                 indent +
                 "What can you do for me?");
-        hLineBreak();
 
         String userInput = "";
+        userInput = scanner.nextLine();
 
-        while(userInput != "bye" || userInput != "Bye") {
+        while(!userInput.equals("bye")) {
+            dukeOutput(userInput);
             userInput = scanner.nextLine();
-            hLineBreak();
-            printlnWithIndent(userInput);
-            hLineBreak();
         }
 
-        hLineBreak();
-        printlnWithIndent("Bye. Hope I never see you again!");
-        hLineBreak();
+        dukeOutput("Bye. Hope I never see you again!");
 
         scanner.close();
     }
@@ -35,5 +30,11 @@ public class Duke {
     static void printlnWithIndent(String input) {
         System.out.print(indent);
         System.out.println(input);
+    }
+
+    static void dukeOutput(String output) {
+        hLineBreak();
+        printlnWithIndent(output);
+        hLineBreak();
     }
 }
