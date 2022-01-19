@@ -40,9 +40,6 @@ public class Duke {
             if (commandsParsed(userResponse)) {
                 continue;
             }
-
-            this.userTexts.add(new Task(userResponse));
-            printDukeResponse("added: " + userResponse);
         }
 
         sc.close();
