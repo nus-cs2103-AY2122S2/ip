@@ -3,6 +3,7 @@ package bot;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import tasks.Deadline;
@@ -16,8 +17,7 @@ public class Bot {
     private static final String GREETING = "Hello! I'm Duke\nWhat can I do for you?";
     private static final String FAREWELL = "Bye. Hope to see you again soon!";
 
-    private final Task[] tasks = new Task[100];
-    private int nextItemIndex = 0;
+    private final ArrayList<Task> tasks = new ArrayList<>();
 
     public void start(InputStream inputStream, OutputStream outputStream) throws Exception {
         final Scanner input = new Scanner(inputStream);
@@ -84,21 +84,21 @@ public class Bot {
         if (t.getDescription().equals("")) {
             throw new BotException("The description of a task cannot be empty.");
         }
-        this.tasks[this.nextItemIndex++] = t;
+        this.tasks.add(t);
         final String response =
-                "Got it. I've added this task:\n  " + t + "\nNow you have " + this.nextItemIndex + " tasks in the list.";
+                "Got it. I've added this task:\n  " + t + "\nNow you have " + this.tasks.size() + " tasks in the list.";
         return this.constructResponse(response);
     }
 
     private String markTask(int taskId) {
-        final Task t = this.tasks[taskId];
+        final Task t = this.tasks.get(taskId);
         t.markAsDone();
         final String response = "Nice! I've marked this task as done:\n  " + t;
         return this.constructResponse(response);
     }
 
     private String unmarkTask(int taskId) {
-        final Task t = this.tasks[taskId];
+        final Task t = this.tasks.get(taskId);
         t.markAsUndone();
         final String response = "OK, I've marked this task as not done yet:\n  " + t;
         return this.constructResponse(response);
@@ -111,18 +111,14 @@ public class Bot {
         return divider + response + divider;
     }
 
-    private String constructTaskList(Task[] tasks) {
+    private String constructTaskList(ArrayList<Task> tasks) {
         String taskList = "";
-        int currentTaskListItemIndex = 1;
-
-        for (int i = 0; i < tasks.length; i++) {
-            final Task task = tasks[i];
-            if (task == null) continue;
-            if (currentTaskListItemIndex > 1) taskList += "\n";
-            taskList += currentTaskListItemIndex + "." + task;
-            currentTaskListItemIndex++;
+        for (int i = 0; i < tasks.size(); i++) {
+            if (i > 0) {
+                taskList += "\n";
+            }
+            taskList += (i + 1) + "." + tasks.get(i);
         }
-
         return taskList;
     }
 }
