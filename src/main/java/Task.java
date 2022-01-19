@@ -58,4 +58,14 @@ public class Task {
     public void unmarkAsDone() {
         this.isDone = false;
     }
+
+    /**
+     * Outputs a string description of the task.
+     *
+     * @return description of the task.
+     */
+    @Override
+    public String toString() {
+        return "[" + this.getStatusIcon() + "] " + this.description;
+    }
 }
