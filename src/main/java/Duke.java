@@ -10,13 +10,23 @@ public class Duke {
 
         String input = sc.nextLine();
         String bye = "bye";
+        String list = "list";
+        List<String> store = new ArrayList<>();
+
         while (!input.equals(bye)) {
             System.out.println("____________________________________________________________");
-            System.out.println(input);
+            if (input.equals(list)) {
+                for (int i = 0; i < store.size(); i++) {
+                    System.out.println((i + 1) + ". " + store.get(i));
+                }
+            } else {
+                System.out.println("added: " + input);
+                store.add(input);
+            }
             System.out.println("____________________________________________________________");
             input = sc.nextLine();
         }
 
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("Bye. Stay safe and have a nice day!");
     }
 }
