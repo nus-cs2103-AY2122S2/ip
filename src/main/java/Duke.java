@@ -20,25 +20,49 @@ public class Duke {
                 System.out.println("Everything in my blue brain now: ");
                 for (int i = 1; i <= sizeOfList; i++) {
                     Task t = storeList.get(i - 1);
-                    System.out.println(i + "." + "[" + t.getStatusIcon() + "] " + t.getDescription());
+                    System.out.println(i + "." + t.toString());
                 }
             } else if (command.startsWith("mark ")) {
                 int taskNumber = Integer.parseInt(command.substring(5));
                 Task tobeMark = storeList.get(taskNumber - 1);
                 tobeMark.setMark();
                 System.out.println("You could have gotten me to help you. This task has been marked done");
-                System.out.println("[X] " + tobeMark.getDescription());
+                System.out.println(tobeMark.toString());
 
             } else if (command.startsWith("unmark ")) {
                 int taskNumber1 = Integer.parseInt(command.substring(7));
                 Task tobeUnmark = storeList.get(taskNumber1 - 1);
                 tobeUnmark.setUnmark();
                 System.out.println("You probably need more genies to help you. This task has been marked as not done");
-                System.out.println("[ ] " + tobeUnmark.getDescription());
-            } else {
-                storeList.add(new Task(command));
-                System.out.println("stored in my blue brain: " + command);
-                System.out.println("*-**-**-**-**-**-**-**-**-**-****-**-****-**-****-**");
+                System.out.println(tobeUnmark.toString());
+
+            } else if (command.startsWith("deadline ")) {
+                int slash = command.indexOf("/");
+                String newtask = command.substring(9, slash - 1);
+                String endtime = command.substring(slash + 1);
+                Deadline d = new Deadline(newtask, endtime);
+                storeList.add(d);
+                System.out.println("Added to my brain master: ");
+                System.out.println(d.toString());
+                System.out.println("Currently I have " + storeList.size() + " things in my brain");
+
+            } else if (command.startsWith("todo ")) {
+                String newtask = command.substring(5);
+                Todo t = new Todo(newtask);
+                storeList.add(t);
+                System.out.println("Added to my brain master: ");
+                System.out.println(t.toString());
+                System.out.println("Currently I have " + storeList.size() + " things in my brain");
+
+            } else if (command.startsWith("event ")) {
+                int slash = command.indexOf("/");
+                String newtask = command.substring(6, slash - 1);
+                String attime = command.substring(slash + 1);
+                Event e = new Event(newtask, attime);
+                storeList.add(e);
+                System.out.println("Added to my brain master: ");
+                System.out.println(e.toString());
+                System.out.println("Currently I have " + storeList.size() + " things in my brain");
             }
         }
         sc.close();
