@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -10,8 +12,7 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
 
-        Task[] tasks = new Task[100];
-        int counter = 0;
+        List<Task> tasks = new ArrayList<Task>();
 
         while (true) {
             try {
@@ -23,36 +24,72 @@ public class Duke {
                 } else if (input.equals("list")) {
                     System.out.println(lines);
                     System.out.println("Here are the tasks in your list:");
-                    for (int i = 0; i < counter; i++) {
-                        System.out.println(Integer.toString(i + 1) + "." + tasks[i].toString());
+                    for (int i = 0; i < tasks.size(); i++) {
+                        System.out.println(Integer.toString(i + 1) + "." + tasks.get(i).toString());
                     }
                     System.out.println(lines);
 
                 } else if (split[0].equals("mark")) {
-                    int number = Integer.parseInt(split[1]) - 1;
-                    if (number < counter) {
-                        tasks[number].markAsDone();
-                        System.out.println(lines + "\nNice! I've marked this task as done:\n" +
-                                tasks[number].toString() + "\n" + lines);
-                    } else {
-                        throw new DukeException("No such task exists.");
+                    if (split.length == 1) {
+                        throw new DukeException("What are you marking? Missing number!");
+                    }
+                    else {
+                        int number;
+                        try {
+                            number = Integer.parseInt(split[1]) - 1;
+                        } catch (NumberFormatException e) {
+                            throw new DukeException("That's not a number");
+                        }
+                        if (number < tasks.size()) {
+                            tasks.get(number).markAsDone();
+                            System.out.println(lines + "\nNice! I've marked this task as done:\n" +
+                                    tasks.get(number).toString() + "\n" + lines);
+                        } else {
+                            throw new DukeException("No such task exists.");
+                        }
                     }
                 } else if (split[0].equals("unmark")) {
-                    int number = Integer.parseInt(split[1]) - 1;
-                    if (number < counter) {
-                        tasks[number].markAsNotDone();
-                        System.out.println(lines + "\nOk, I've marked this task as not done yet:\n" +
-                                tasks[number].toString() + "\n" + lines);
-                    } else {
-                        throw new DukeException("No such task exists.");
+                    if (split.length == 1) {
+                        throw new DukeException("What are you unmarking? Missing number!");
+                    }
+                    else {
+                        int number;
+                        try {
+                            number = Integer.parseInt(split[1]) - 1;
+                        } catch (NumberFormatException e) {
+                            throw new DukeException("That's not a number");
+                        }
+                        if (number < tasks.size()) {
+                            tasks.get(number).markAsNotDone();
+                            System.out.println(lines + "\nOk, I've marked this task as not done yet:\n" +
+                                    tasks.get(number).toString() + "\n" + lines);
+                        } else {
+                            throw new DukeException("No such task exists.");
+                        }
+                    }
+                } else if (split[0].equals("delete")) {
+                    if (split.length == 1) {
+                        throw new DukeException("What are you deleting? Missing number!");
+                    }
+                    else {
+                        int number = Integer.parseInt(split[1]) - 1;
+                        if (number < tasks.size()) {
+                            System.out.println(lines + "\nNoted. I've removed this task:\n" +
+                                    tasks.get(number).toString() + "\n");
+                            tasks.remove(number);
+                            System.out.println("Now you have " + tasks.size() + " tasks in the list.\n" + lines);
+
+                        } else {
+                            throw new DukeException("No such task exists.");
+                        }
                     }
                 } else if (split[0].equals("todo")) {
                     if (split.length == 1) {
                         throw new DukeException("OH NO! The description of event cannot be empty.");
                     } else {
-                        tasks[counter++] = new Todo(input.replace("todo ", ""));
-                        System.out.println(lines + "\nGot it. I've added this task:\n" + tasks[counter - 1].toString()
-                                + "\n" + "Now you have " + counter + " tasks in the list.\n" + lines);
+                        tasks.add(new Todo(input.replace("todo ", "")));
+                        System.out.println(lines + "\nGot it. I've added this task:\n" + tasks.get(tasks.size()-1).toString()
+                                + "\n" + "Now you have " + tasks.size() + " tasks in the list.\n" + lines);
                     }
 
                 } else if (split[0].equals("deadline")) {
@@ -61,9 +98,9 @@ public class Duke {
                     } else {
                         String[] newSplit = input.split("/by ");
                         if (newSplit.length > 1) {
-                            tasks[counter++] = new Deadline(newSplit[0].replace("deadline ", ""), newSplit[1]);
-                            System.out.println(lines + "\nGot it. I've added this task:\n" + tasks[counter - 1].toString()
-                                    + "\n" + "Now you have " + counter + " tasks in the list.\n" + lines);
+                            tasks.add(new Deadline(newSplit[0].replace("deadline ", ""), newSplit[1]));
+                            System.out.println(lines + "\nGot it. I've added this task:\n" + tasks.get(tasks.size()-1).toString()
+                                    + "\n" + "Now you have " + tasks.size() + " tasks in the list.\n" + lines);
                         } else {
                             throw new DukeException("You are missing the date!.");
                         }
@@ -74,9 +111,9 @@ public class Duke {
                     } else {
                         String[] newSplit = input.split("/at ");
                         if (newSplit.length > 1) {
-                            tasks[counter++] = new Event(newSplit[0].replace("event ", ""), newSplit[1]);
-                            System.out.println(lines + "\nGot it. I've added this task:\n" + tasks[counter - 1].toString()
-                                    + "\n" + "Now you have " + counter + " tasks in the list.\n" + lines);
+                            tasks.add(new Event(newSplit[0].replace("event ", ""), newSplit[1]));
+                            System.out.println(lines + "\nGot it. I've added this task:\n" + tasks.get(tasks.size()-1).toString()
+                                    + "\n" + "Now you have " + tasks.size() + " tasks in the list.\n" + lines);
                         } else {
                             throw new DukeException("You are missing the location!.");
                         }
