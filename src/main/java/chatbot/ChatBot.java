@@ -23,6 +23,7 @@ public class ChatBot {
         this.tasks = new ArrayList<>();
         this.commands = new Hashtable<>();
         this.commands.put(DeadlineCommand.KEYWORD, new DeadlineCommand());
+        this.commands.put(DeleteCommand.KEYWORD, new DeleteCommand());
         this.commands.put(EventCommand.KEYWORD, new EventCommand());
         this.commands.put(ListCommand.KEYWORD, new ListCommand());
         this.commands.put(MarkCommand.KEYWORD, new MarkCommand());
