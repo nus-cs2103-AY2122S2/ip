@@ -9,9 +9,9 @@ public class Task {
 
     public String getTask() {
         if (this.isDone) {
-            return "[X] " + this.description + "\n";
+            return "[X] " + this.description;
         } else {
-            return "[ ] " + this.description + "\n";
+            return "[ ] " + this.description;
         }
     }
 

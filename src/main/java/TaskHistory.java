@@ -21,7 +21,15 @@ public class TaskHistory {
     }
 
     void addDeadline(String description, String timeFrame) {
-
+        Deadlines tempDeadline = new Deadlines(description, timeFrame);
+        record[taskCounter] = tempDeadline;
+        taskCounter++;
+        String msg = "_______________________________________________________\n"
+                + "Understood, adding this task now:\n"
+                + "    " + tempDeadline.getDeadline()
+                + "Currently you have " + taskCounter + " tasks in our records.\n"
+                + "_______________________________________________________\n";
+        System.out.println(msg);
     }
 
     String printAll() {
