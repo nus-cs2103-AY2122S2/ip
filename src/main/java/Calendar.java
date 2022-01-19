@@ -11,6 +11,10 @@ public class Calendar {
         calendar.add(newTask);
     }
 
+    void remove(int index) {
+        calendar.remove(index - 1);
+    }
+
     int size() {
         return this.calendar.size();
     }
@@ -34,4 +38,5 @@ public class Calendar {
         }
 
     }
+
 }

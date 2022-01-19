@@ -78,6 +78,20 @@ public class Duke {
                             throw new InvalidListIndex(String.format("Sorry! This command expected an integer value but obtained the value %s", input));
                         }
                         continue;
+                    case "delete":
+                        if (input.length() == 0) {
+                            throw new EmptyInputException("Sorry!! I need to know which task you want to mark as incomplete!");
+                        }
+                        try {
+                            String deletedTask = calendar.get(Integer.valueOf(input)).toString();
+                            calendar.remove(Integer.valueOf(input));
+                            output(String.format("Ok! I have deleted this task for you.\n   %s\nNow you have %s tasks in the list.", deletedTask, calendar.size()));
+                        } catch (IndexOutOfBoundsException ioobe) {
+                            throw new InvalidListIndex(String.format("Sorry! The list only has %s values but the input value was %s.", calendar.size(), input));
+                        } catch (NumberFormatException nfe) {
+                            throw new InvalidListIndex(String.format("Sorry! This command expected an integer value but obtained the value %s", input));
+                        }
+                        continue;
                     default:
                         throw new InvalidCommandException();
                 }
