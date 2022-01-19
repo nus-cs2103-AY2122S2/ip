@@ -224,7 +224,8 @@ public class Duke {
             } else {
                 switch(commandSplit[0]){
                     case "todo":
-                        taskList.add(new Duke().new Todos(commandSplit[1])); 
+                        Todos newTask = new Duke().new Todos(commandSplit[1]);
+                        taskList.add(newTask); 
                         System.out.println(hyphenate);
                         System.out.println("    Wow, sounds fun! I have successfully added this task:");
                         System.out.println("       " + taskList.get(taskList.size()-1));
@@ -232,18 +233,20 @@ public class Duke {
                         System.out.println(hyphenate);
                         break;
                     case "deadline":
-                        taskList.add(new Duke().new Deadlines(commandSplit[1].split(" /by ", 2)[0], commandSplit[1].split(" /by ", 2)[1])); 
+                        Deadlines newTask1 = new Duke().new Deadlines(commandSplit[1].split(" /by ", 2)[0], commandSplit[1].split(" /by ", 2)[1]);
+                        taskList.add(newTask1); 
                         System.out.println(hyphenate);
                         System.out.println("    Wow, sounds fun! I have successfully added this task:");
-                        System.out.println("       " + taskList.get(taskList.size()-1));
+                        System.out.println("       " + newTask1);
                         System.out.println("    Now you have " + taskList.size() + " tasks in the list!");
                         System.out.println(hyphenate);
                         break;
                     case "event":
-                        taskList.add(new Duke().new Events(commandSplit[1].split(" /at ",2)[0], commandSplit[1].split(" /at ",2)[1])); 
+                        Events newTask2 = new Duke().new Events(commandSplit[1].split(" /at ",2)[0], commandSplit[1].split(" /at ",2)[1]);
+                        taskList.add(newTask2); 
                         System.out.println(hyphenate);
                         System.out.println("    Wow, sounds fun! I have successfully added this task:");
-                        System.out.println("       " + taskList.get(taskList.size()-1));
+                        System.out.println("       " + newTask2);
                         System.out.println("    Now you have " + taskList.size() + " tasks in the list!");
                         System.out.println(hyphenate);
                         break;
