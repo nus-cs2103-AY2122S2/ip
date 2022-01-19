@@ -32,6 +32,18 @@ public class TaskHistory {
         System.out.println(msg);
     }
 
+    void addEvent(String description, String timeFrame) {
+        Event tempEvent = new Event(description, timeFrame);
+        record[taskCounter] = tempEvent;
+        taskCounter++;
+        String msg = "_______________________________________________________\n"
+                + "Understood, adding this task now:\n"
+                + "    " + tempEvent.getEvent()
+                + "Currently you have " + taskCounter + " tasks in our records.\n"
+                + "_______________________________________________________\n";
+        System.out.println(msg);
+    }
+
     String printAll() {
         int count = 1;
         StringBuilder result = new StringBuilder();
@@ -48,7 +60,6 @@ public class TaskHistory {
                 result.append(count).append(".").append(temp.getEvent());
             } else {
                 System.out.println("Error occured while processing " + nextTask.getTask()); // Temporary error handler
-                exit(1);
             }
             count++;
         }

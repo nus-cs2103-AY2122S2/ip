@@ -52,7 +52,6 @@ public class Duke {
                 }
                 default:
                     System.out.println("Keyword not recognised!");
-                    exit(1);
                     break;
             }
         }

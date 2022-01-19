@@ -36,7 +36,6 @@ public class Commands {
             tasking = tasking.concat(temp.getEvent());
         } else {
             System.out.println("Error occured while processing " + currTask.getTask()); // Temporary error handler
-            exit(1);
         }
         String msg = "_______________________________________________________\n"
                 + "Well done! You have completed the task:\n"
@@ -60,7 +59,6 @@ public class Commands {
             tasking = tasking.concat(temp.getEvent());
         } else {
             System.out.println("Error occured while processing " + currTask.getTask()); // Temporary error handler
-            exit(1);
         }
         taskHistory.getTask(index).unmarkTask();
         String msg = "_______________________________________________________\n"
@@ -98,7 +96,7 @@ public class Commands {
         if (timeStart == -1) {
             System.out.println("Error occured while processing " + description);
             System.out.println("'/' is missing in input, please restart and try again");
-            exit(1);
+            return;
         }
 
         for (int j = timeStart + 1; j < tokens.length; j++) {
@@ -111,6 +109,30 @@ public class Commands {
     }
 
     void event(String[] tokens) {
+        String description = "";
+        String timeFrame = "";
+        int timeStart = -1; // -1 is a placeholder to indicate /at has not been found
+        for (int i = 1; i < tokens.length; i++) {
+            if (tokens[i].startsWith("/")) {
+                timeStart = i;
+                break;
+            } else {
+                description = description.concat(tokens[i]);
+            }
+            description = description.concat(" ");
+        }
 
+        if (timeStart == -1) {
+            System.out.println("Error occured while processing " + description);
+            System.out.println("'/' is missing in input, please restart and try again");
+        }
+
+        for (int j = timeStart + 1; j < tokens.length; j++) {
+            timeFrame = timeFrame.concat(tokens[j]);
+            if (j != (tokens.length - 1)) {
+                timeFrame = timeFrame.concat(" ");
+            }
+        }
+        taskHistory.addEvent(description, timeFrame);
     }
 }

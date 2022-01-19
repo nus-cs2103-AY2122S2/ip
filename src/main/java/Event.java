@@ -1,12 +1,12 @@
 public class Event extends Task {
-    private final String time;
+    private final String timeFrame;
 
-    public Event(String description, String time) {
+    public Event(String description, String timeFrame) {
         super(description);
-        this.time = time;
+        this.timeFrame = timeFrame;
     }
 
     public String getEvent() {
-        return "[E]" + this.getTask() + "(at: " + time + ")\n";
+        return "[E]" + this.getTask() + "(at: " + timeFrame + ")\n";
     }
 }
