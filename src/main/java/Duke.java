@@ -76,7 +76,7 @@ public class Duke {
             Task task = userTexts.get(taskIndex);
             task.setIsDone(markTask);
             String cmdDescription = markTask ? "Nice I've marked this task as done: \n"
-                    : "Alright, I've marked the task as not completed yet: \n ";
+                    : "Alright, I've unmarked the task: \n ";
 
             printDukeResponse(cmdDescription + task.toString());
             return true;
@@ -88,10 +88,10 @@ public class Duke {
 
             String taskDescription = input.substring(input.indexOf(firstCommand) + firstCommand.length() + 1);
             if (firstCommand.equals("deadline")) {
-                newTask = new Deadline(taskDescription.substring(0, taskDescription.indexOf("/by")),
+                newTask = new Deadline(taskDescription.substring(0, taskDescription.indexOf(" /by")),
                         taskDescription.substring(taskDescription.indexOf("/by") + 4));
             } else if (firstCommand.equals("event")) {
-                newTask = new Event(taskDescription.substring(0, taskDescription.indexOf("/at")),
+                newTask = new Event(taskDescription.substring(0, taskDescription.indexOf(" /at")),
                         taskDescription.substring(taskDescription.indexOf("/at") + 4));
             } else {
                 newTask = new Todo(taskDescription);
