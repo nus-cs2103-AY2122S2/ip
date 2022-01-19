@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Dazz {
-    public static void main(String[] args) throws DazzException {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String hr = "\t____________________________________________________________";
         String logo = "\t  ____       _       _____   _____\n" +
@@ -38,18 +38,43 @@ public class Dazz {
                         } else if (reminder.getSize() == 0) {
                             throw new EmptyListException();
                         } else {
-                            reminder.mark(Integer.parseInt(arr1[1]), true);
-                            break;
+                            int index = Integer.parseInt(arr1[1]);
+                            if (reminder.getSize() < index || index <= 0) {
+                                throw new InvalidTaskIndexException();
+                            } else {
+                                reminder.mark(Integer.parseInt(arr1[1]), true);
+                                break;
+                            }
                         }
 
                     case "unmark":
                        if (arr1.length < 2) {
                            throw new IncompleteCommandException("unmark");
-                        } else if (reminder.getSize() == 0) {
+                       } else if (reminder.getSize() == 0) {
                            throw new EmptyListException();
+                       } else {
+                           int index = Integer.parseInt(arr1[1]);
+                           if (reminder.getSize() < index || index <= 0) {
+                               throw new InvalidTaskIndexException();
+                           } else {
+                               reminder.mark(Integer.parseInt(arr1[1]), false);
+                               break;
+                           }
+                       }
+
+                    case "delete":
+                        if (arr1.length < 2) {
+                            throw new IncompleteCommandException("delete");
+                        } else if (reminder.getSize() == 0) {
+                            throw new EmptyListException();
                         } else {
-                           reminder.mark(Integer.parseInt(arr1[1]), false);
-                           break;
+                            int index = Integer.parseInt(arr1[1]);
+                            if (reminder.getSize() < index || index <= 0) {
+                                throw new InvalidTaskIndexException();
+                            } else {
+                                reminder.delete(Integer.parseInt(arr1[1]));
+                                break;
+                            }
                         }
 
                     case "todo":

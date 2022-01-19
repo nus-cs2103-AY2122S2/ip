@@ -19,15 +19,20 @@ public class Task {
     }
 
     public void setDone(boolean done) {
-        if (done) {
-            this.isDone = true;
-            System.out.println("\tNice! I've marked this task as done:");
-            System.out.println("\t  [" + this.getStatusIcon() + "] " + this.description);
+        if (!this.isDone && !done) {
+            System.out.println("\tThis task is already unmarked!");
+        } else if (this.isDone && done) {
+            System.out.println("\tThis task is already marked!");
         } else {
-            this.isDone = false;
-            System.out.println("\tOK, I've marked this task as not done yet:");
-            System.out.println("\t  [" + this.getStatusIcon() + "] " + this.description);
+            if (done) {
+                this.isDone = true;
+                System.out.println("\tNice! I've marked this task as done:");
+                System.out.println("\t  [" + this.getStatusIcon() + "] " + this.description);
+            } else {
+                this.isDone = false;
+                System.out.println("\tOK, I've marked this task as not done yet:");
+                System.out.println("\t  [" + this.getStatusIcon() + "] " + this.description);
+            }
         }
-
     }
 }
