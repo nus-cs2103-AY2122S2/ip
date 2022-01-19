@@ -6,5 +6,10 @@ deadline return book /by Sunday
 event project meeting /at Wed 8pm
 unmark 1
 mark 2
+unmark 4
+mark x
+todo
+deadline sell book
+event /at MPH
 list
 bye

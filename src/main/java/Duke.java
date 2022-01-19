@@ -16,12 +16,14 @@ public class Duke {
             if (input.equals("bye")) {
                 exited = true;
             } else {
-                duke.handle(input);
+                try {
+                    duke.handle(input);
+                } catch (DukeException exception) {
+                    duke.echo(exception.getMessage());
+                }
             }
         }
-
         duke.bye();
-
         io.close();
     }
 

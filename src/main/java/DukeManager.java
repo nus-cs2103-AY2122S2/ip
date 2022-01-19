@@ -8,17 +8,17 @@ public class DukeManager {
         tasks = new ArrayList<>();
     }
 
-    public void handle(String input) {
+    public void handle(String input) throws DukeException {
         String[] tokens = input.split(" ");
         switch (tokens[0]) {
             case "list":
                 list();
                 return;
             case "mark":
-                mark(tokens[1]);
+                mark(tokens);
                 return;
             case "unmark":
-                unMark(tokens[1]);
+                unMark(tokens);
                 return;
             case "todo":
                 createTask(ToDo.createTask(tokens));
@@ -29,6 +29,8 @@ public class DukeManager {
             case "event":
                 createTask(Event.createTask(tokens));
                 break;
+            default:
+                throw new DukeException("I'm sorry, but I don't know what that means :-(");
 
         }
     }
@@ -38,15 +40,29 @@ public class DukeManager {
         echo("Got it. I've added this task:\n       " + task.toString() + "\n     Now you have " + tasks.size() + " tasks in the list.");
     }
 
-    protected void mark(String input) {
-        int index = Integer.parseInt(input) - 1;
+    protected void mark(String[] tokens) throws DukeException {
+        int index;
+        try {
+            index = Integer.parseInt(tokens[1]) - 1;
+        } catch (Exception exception) {
+            throw new DukeException("Invalid input! Please enter the number of the task you want to mark.");
+        }
+        if(index >= tasks.size() || index < 0)
+            throw new DukeException("Invalid input! This task number does not exist.");
         String output = "Nice! I've marked this task as done:\n       ";
         tasks.get(index).setCompleted(true);
         echo(output + tasks.get(index).toString());
     }
 
-    protected void unMark(String input) {
-        int index = Integer.parseInt(input) - 1;
+    protected void unMark(String[] tokens) throws DukeException {
+        int index;
+        try {
+            index = Integer.parseInt(tokens[1]) - 1;
+        } catch (Exception exception) {
+            throw new DukeException("Invalid input! Please enter the number of the task you want to unmark.");
+        }
+        if(index >= tasks.size() || index < 0)
+            throw new DukeException("Invalid input! This task number does not exist.");
         String output = "OK, I've marked this task as not done yet:\n       ";
         tasks.get(index).setCompleted(false);
         echo(output + tasks.get(index).toString());
@@ -75,7 +91,7 @@ public class DukeManager {
                 "    ____________________________________________________________");
     }
 
-    protected void echo(String input) {
+    public void echo(String input) {
         System.out.println("    ____________________________________________________________\n" +
                 "     " + input + "\n" +
                 "    ____________________________________________________________");

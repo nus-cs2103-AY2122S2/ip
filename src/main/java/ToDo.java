@@ -8,8 +8,11 @@ public class ToDo extends Task {
         return "[T]" + super.toString();
     }
 
-    public static ToDo createTask(String[] tokens) {
+    public static ToDo createTask(String[] tokens) throws DukeException {
         String item = "";
+        if (tokens.length == 1)
+            throw new DukeException("The description of a todo task cannot be empty!");
+
         for (String token : tokens) {
             if (token.equals("todo")) {
                 continue;

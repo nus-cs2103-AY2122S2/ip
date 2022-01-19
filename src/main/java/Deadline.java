@@ -12,7 +12,7 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + dateTime + ")";
     }
 
-    public static Deadline createTask(String[] tokens) {
+    public static Deadline createTask(String[] tokens) throws DukeException {
         boolean found = false;
         String item = "";
         String dateTime = "";
@@ -29,6 +29,11 @@ public class Deadline extends Task {
                 item += token + " ";
             }
         }
+        if (item.equals(""))
+            throw new DukeException("The description of a deadline task cannot be empty!");
+        else if (dateTime.equals(""))
+            throw new DukeException("Please specify a deadline!");
+
         return new Deadline(item.trim(), dateTime.trim());
     }
 }

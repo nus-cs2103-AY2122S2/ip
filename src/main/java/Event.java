@@ -12,10 +12,10 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: " + dateTime + ")";
     }
 
-    public static Event createTask(String[] tokens) {
+    public static Event createTask(String[] tokens) throws DukeException {
         boolean found = false;
         String item = "";
-        String dateTime = "";
+        String location = "";
         for (String token : tokens) {
             if (token.equals("event")) {
                 continue;
@@ -24,11 +24,17 @@ public class Event extends Task {
                 continue;
             }
             if (found) {
-                dateTime += token + " ";
+                location += token + " ";
             } else {
                 item += token + " ";
             }
         }
-        return new Event(item.trim(), dateTime.trim());
+
+        if (item.equals(""))
+            throw new DukeException("The description of an event task cannot be empty!");
+        else if (location.equals(""))
+            throw new DukeException("Please specify a location for the event!");
+
+        return new Event(item.trim(), location.trim());
     }
 }
