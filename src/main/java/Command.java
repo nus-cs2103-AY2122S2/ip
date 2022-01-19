@@ -33,7 +33,7 @@ abstract class listCommand extends Command {
         this.itemList = itemList;
     }
 
-    protected void printEndRun(Task task) {
+    protected void printAddEndRun(Task task) {
         System.out.println("Alright! Added this to the list:");
         System.out.println(task.toString());
         this.itemList.printNoItems();
@@ -112,7 +112,7 @@ class addTodoListCommand extends listCommand {
         String taskName = this.commandName.replaceFirst("todo ", "");
         Task newTask = new ToDo(taskName);
         itemList.addItem(newTask);
-        this.printEndRun(newTask);
+        this.printAddEndRun(newTask);
     }
 
 }
@@ -131,7 +131,7 @@ class addDeadlineListCommand extends listCommand {
         String deadline = filtered.substring(index + 1, filtered.length());
         Task newTask = new Deadline(taskName, deadline);
         itemList.addItem(newTask);
-        this.printEndRun(newTask);
+        this.printAddEndRun(newTask);
     }
 
 }
@@ -150,7 +150,7 @@ class addEventListCommand extends listCommand {
         String eventDate = filtered.substring(index + 1, filtered.length());
         Task newTask = new Event(taskName, eventDate);
         itemList.addItem(newTask);
-        this.printEndRun(newTask);
+        this.printAddEndRun(newTask);
     }
 
 }
