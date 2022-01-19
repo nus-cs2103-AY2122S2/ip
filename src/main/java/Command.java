@@ -1,11 +1,15 @@
 public class Command {
     private String command;
     private String input;
+    private String argument;
 
     public Command(String input) {
-        String[] inputArgs = input.trim().split(" ");
+        String[] inputArgs = input.trim().split(" ", 2);
         this.command = inputArgs[0];
         this.input = input.trim();
+        if (inputArgs.length > 1) {
+            this.argument = inputArgs[1];
+        }
     }
 
     public void run() {
@@ -13,21 +17,27 @@ public class Command {
             return;
         }
 
-        if (command.equals("bye")) {
-            System.out.println(" See you again! :)");
-            System.exit(0);
-        } else if (command.equals("list")) {
-            Task[] tasksList = Task.getTaskList();
-
-            for (int i = 0; i < Task.getTaskCount(); i++) {
-                System.out.println(" " + (i + 1) + ". " + tasksList[i].getDescription());
-            }
-        } else {
-            Task task = new Task(input);
-            Task.addToList(task);
-            System.out.println(" added: " + input);
+        switch (command) {
+            case "bye":
+                System.out.println(" See you again! :)");
+                System.exit(0);
+            case "list":
+                System.out.println(" Here's your to-do list. Make things happen!");
+                Task.printTasks();
+                break;
+            case "mark":
+                System.out.println(" Well done!");
+                Task.markAsDone(Integer.parseInt(argument) - 1);
+                break;
+            case "unmark":
+                System.out.println(" Oops! Fixed that for you.");
+                Task.markAsNotDone(Integer.parseInt(argument) - 1);
+                break;
+            default:
+                Task task = new Task(input);
+                Task.addToList(task);
+                break;
         }
         System.out.println("__________________________________________________________");
-        return;
     }
 }
