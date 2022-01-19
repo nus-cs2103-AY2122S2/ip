@@ -3,6 +3,11 @@ public class Event extends Task {
 
     public Event(String description, String at) {
         super(description);
+
+        if (at == null || at.isEmpty()) {
+            throw new DukeException("The time of an Event cannot be empty.");
+        }
+
         this.at = at;
     }
 

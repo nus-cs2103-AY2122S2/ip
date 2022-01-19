@@ -3,6 +3,11 @@ public class Deadline extends Task {
 
     public Deadline(String description, String by) {
         super(description);
+
+        if (by == null || by.isEmpty()) {
+            throw new DukeException("The deadline of a Deadline cannot be empty.");
+        }
+
         this.by = by;
     }
 

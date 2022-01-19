@@ -40,15 +40,22 @@ public class Duke {
             String input = scanner.nextLine();
             String[] tokens = input.split(" ", 2);
             String command = tokens[0];
-            String[] params;
+            String[] params = new String[0];
 
             if (tokens.length > 1) {
-                params = tokens[1].split("\\s/\\w\\w\\s");
-            } else {
-                params = new String[0];
+                params = tokens[1].split("\\s/\\w\\w\\s", 2);
             }
 
-            processInput(command, params);
+            String[] paramsPadded = Arrays.copyOf(params, 2);
+
+            try {
+                processInput(command, paramsPadded);
+            } catch (DukeException e) {
+                printDivider();
+                printTabbed(e.toString(), 1);
+                printDivider();
+                System.out.println();
+            }
         }
     }
 
@@ -77,7 +84,7 @@ public class Duke {
             addTask(new Event(params[0], params[1]));
             break;
         default:
-            break;
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
     }
 

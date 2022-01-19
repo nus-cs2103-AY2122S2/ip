@@ -3,6 +3,10 @@ public abstract class Task {
     protected boolean isDone = false;
 
     public Task(String description) {
+        if (description == null || description.isEmpty()) {
+            throw new DukeException("The description of a Task cannot be empty.");
+        }
+
         this.description = description;
     }
 
