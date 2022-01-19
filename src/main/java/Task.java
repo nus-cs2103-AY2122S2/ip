@@ -12,12 +12,17 @@ public class Task {
         return (isDone ? "[X]" : "[ ]"); // mark done task with X
     }
 
+    //marks a task as done and notifies the user
     public void markAsDone() {
         isDone = true;
+        System.out.println("Nice! I've marked this task as done:\n" + this.getStatusIcon() + " " + this.description);
     }
 
+    //mark a task as undone and notifies the user
     public void markAsUndone(){
         isDone = false;
+        System.out.println("Ok! I've marked this task as not done yet:\n" + this.getStatusIcon() + " "
+                + this.description);
     }
 
     public String returnDescription() {
