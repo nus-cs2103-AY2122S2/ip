@@ -7,7 +7,7 @@ import java.util.* ;
 public class Duke {
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws DukeException, IOException {
         String greeting = "Hello! I'm Duke\nWhat can I do for you?";
 
         String separation = "\n******************************\n";
@@ -18,6 +18,15 @@ public class Duke {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             String inp = br.readLine();
             String[] temp = inp.split(" ",2);
+
+
+            try {
+                DukeException d = new DukeException();
+                d.invalidCommands(inp);
+            } catch (DukeException e) {
+                System.err.println(e);
+                continue;
+            }
 
             if (inp.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
@@ -58,8 +67,9 @@ public class Duke {
                 System.out.println("I have added this task and the event time is: \n " + eventTemp.message() + "\n You have " + list_of_inputs.size() + " tasks in the list.");
 
             } else {
-                System.out.println("added:" + inp);
-                list_of_inputs.add(new Task(inp));
+//                System.out.println("added:" + inp);
+//                list_of_inputs.add(new Task(inp));
+
             }
         }
 
