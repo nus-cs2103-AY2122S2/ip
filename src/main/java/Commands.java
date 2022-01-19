@@ -125,6 +125,7 @@ public class Commands {
         if (timeStart == -1) {
             System.out.println("Error occured while processing " + description);
             System.out.println("'/' is missing in input, please restart and try again");
+            return;
         }
 
         for (int j = timeStart + 1; j < tokens.length; j++) {
