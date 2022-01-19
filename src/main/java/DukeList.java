@@ -1,6 +1,18 @@
+import exceptions.BaseException;
+import exceptions.InvalidCommandException;
+import exceptions.InvalidTaskParams;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
+
 import java.util.ArrayList;
 
 public class DukeList {
+    private static final String TODO = "todo";
+    private static final String DEADLINE = "deadline";
+    private static final String EVENT = "event";
+
     private static final int CAPACITY = 100;
     private ArrayList<Task> list;
 
@@ -14,12 +26,52 @@ public class DukeList {
     /**
      * Add a new item to the list.
      *
-     * @param item String to be added
+     * @param taskString
      */
-    public String add(String item) {
-        Task task = new Task(item);
+    public String add(String taskString) throws BaseException {
+        Task task = addTask(taskString);
+        return "Got it. I've added this task:\n"
+                + String.format("\t%s\n", task)
+                + String.format("Now you have %d tasks in the list.", this.list.size());
+    }
+
+    private Task addTask(String taskString) throws InvalidCommandException, InvalidTaskParams {
+        Task task;
+        String[] taskArr = taskString.split(" ", 2);
+        String taskType = taskArr[0];
+        String[] params;
+
+        if (taskArr.length <= 1) {
+            throw new InvalidTaskParams("Description cannot be empty!");
+        }
+
+        switch (taskType) {
+            case TODO:
+                task = new Todo(taskArr[1]);
+                break;
+
+            case DEADLINE:
+                params = taskArr[1].split(" /by ");
+                if (params.length <= 1) {
+                    throw new InvalidTaskParams("Deadline of the task must be set!");
+                }
+                task = new Deadline(params[0], params[1]);
+                break;
+
+            case EVENT:
+                params = taskArr[1].split(" /at ");
+                if (params.length <= 1) {
+                    throw new InvalidTaskParams("Time of the event must be set!");
+                }
+                task = new Event(params[0], params[1]);
+                break;
+
+            default:
+                throw new InvalidCommandException();
+        }
         this.list.add(task);
-        return String.format("added: %s", item);
+
+        return task;
     }
 
     /**

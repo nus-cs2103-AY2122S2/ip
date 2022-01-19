@@ -1,3 +1,5 @@
+package tasks;
+
 public class Task {
     private String description;
     private Boolean isDone;
@@ -10,6 +12,15 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    /**
+     * Get the description of the task.
+     *
+     * @return
+     */
+    public String getDescription() {
+        return this.description;
     }
 
     /**

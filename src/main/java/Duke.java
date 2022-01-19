@@ -1,3 +1,10 @@
+import exceptions.BaseException;
+import exceptions.InvalidCommandException;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Todo;
+
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -17,6 +24,9 @@ public class Duke {
     private static final String LIST_COMMAND = "list";
     private static final String MARK_COMMAND = "mark";
     private static final String UNMARK_COMMAND = "unmark";
+    private static final String TODO_COMMAND = "todo";
+    private static final String DEADLINE_COMMAND = "deadline";
+    private static final String EVENT_COMMAND = "event";
 
     private String status;
     private DukeList list;
@@ -55,7 +65,7 @@ public class Duke {
      * @return result after executing the command
      */
     private String parseCommand(String cmd) {
-        String[] argv = cmd.split(" ");
+        String[] argv = cmd.split(" ", 2);
         String action = argv[0];
 
         String result;
@@ -80,8 +90,18 @@ public class Duke {
                 result = this.list.unmarkTask(idx);
                 break;
 
+            case TODO_COMMAND:
+            case DEADLINE_COMMAND:
+            case EVENT_COMMAND:
+                try {
+                    result = this.list.add(cmd);
+                } catch (BaseException e) {
+                    result = e.getMessage();
+                }
+                break;
+
             default:
-                result = this.list.add(cmd);
+                result = "Unrecognised command.";
                 break;
         }
         return result;
