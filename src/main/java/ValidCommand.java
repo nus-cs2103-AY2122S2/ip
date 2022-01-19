@@ -1,4 +1,5 @@
 public enum ValidCommand {
+    LIST("list"),
     BYE("bye");
 
     public final String label;
