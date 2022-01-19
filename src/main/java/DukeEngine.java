@@ -2,10 +2,10 @@ import java.util.ArrayList;
 
 public class DukeEngine {
     
-    ArrayList<String> itemList = new ArrayList<>();
+    ArrayList<Task> itemList = new ArrayList<>();
 
     public String addText(String text) {
-        itemList.add(text);
+        itemList.add(new Task(text));
         return "added: " + text;
     }
 
