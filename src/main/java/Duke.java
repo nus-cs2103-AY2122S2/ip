@@ -16,7 +16,7 @@ public class Duke {
         String userInput = scanner.nextLine();
 
         while(true) {
-            String[] splitUserInput = userInput.split(" ");
+            String[] splitUserInput = userInput.split(" ",2);
             String firstWord = splitUserInput[0];
 
             if (userInput.equals("bye")) { // exit loop
@@ -28,7 +28,8 @@ public class Duke {
                     tempOut.append(" " + indent).append(taskList.get(i).toString());
                 }
                 hLineBreak();
-                System.out.print(indent + " " + tempOut);
+                printlnWithIndent(" Here are the tasks in your list:");
+                System.out.print(indent + " " + tempOut); // newline in tempOut
                 hLineBreak();
 
             } else if (firstWord.equals("mark") || firstWord.equals("unmark")) {
@@ -48,20 +49,27 @@ public class Duke {
                 }
 
             } else { // add task to list, todo, event or deadline
+
+                String remainingUserInput = splitUserInput[1];
+
                 if (firstWord.equals("todo")) {
                     ToDo newToDo = new ToDo(userInput);
                     taskList.add(newToDo);
                     dukeAddTaskOutput(newToDo);
                 } else if (firstWord.equals("deadline")) {
-                    String taskName = userInput.substring(0,userInput.indexOf("/by"));
-                    String timeBy = userInput.substring(userInput.indexOf("/by") + 4);
+                    String taskName = remainingUserInput.substring(0,remainingUserInput.indexOf("/by"));
+                    String timeBy = remainingUserInput.substring(remainingUserInput.indexOf("/by") + 4);
                     Deadline newDeadline = new Deadline(taskName,timeBy);
                     taskList.add(newDeadline);
                     dukeAddTaskOutput(newDeadline);
-                } else
-                {
-                    taskList.add(new Task(userInput));
-                    dukeOutput(" added: " + userInput);
+                } else if (firstWord.equals("event")) {
+                    String taskName = remainingUserInput.substring(0,remainingUserInput.indexOf("/at"));
+                    String timeRange = remainingUserInput.substring(remainingUserInput.indexOf("/at") + 4);
+                    Event newEvent = new Event(taskName,timeRange);
+                    taskList.add(newEvent);
+                    dukeAddTaskOutput(newEvent);
+                } else { // if none of the above tasks
+
                 }
             }
             userInput = scanner.nextLine();
