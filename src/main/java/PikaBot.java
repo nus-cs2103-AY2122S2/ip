@@ -3,16 +3,65 @@ import java.util.ArrayList;
 
 
 public class PikaBot {
+
+    static String line = "_________________________________";
+    static String indentation = "     ";
+
+    public static Todo addTodo(String[] todoArray) throws TodoException {
+        if (todoArray.length == 1) {
+            throw new TodoException();
+        } else {
+            String description = todoArray[1];
+            return new Todo(description);
+        }
+    }
+
+    public static Deadline addDeadline(String[] deadlineArray) throws DeadlineException {
+        if (deadlineArray.length == 1) {
+            throw new DeadlineException("The description of a deadline cannot be empty.");
+        } else {
+            String[] deadlineDetails = deadlineArray[1].split("/by ", 2);
+            if (deadlineDetails.length == 1) {
+                throw new DeadlineException("The description of a deadline must contain a deadline");
+            } else {
+                return new Deadline(deadlineDetails[0], deadlineDetails[1]);
+            }
+        }
+    }
+
+    public static Event addEvent(String[] eventArray) throws EventException {
+        if (eventArray.length == 1) {
+            throw new EventException("The description of an event cannot be empty.");
+        } else {
+            String[] eventDetails = eventArray[1].split("/at ", 2);
+            if (eventDetails.length == 1) {
+                throw new EventException("The description of an event must contain a specific time");
+            } else {
+                return new Event(eventDetails[0], eventDetails[1]);
+            }
+        }
+    }
+
+    public static void addedTask(Task task, ArrayList<Task> listOfTasks) {
+        System.out.println(indentation + line + "\n" +
+                indentation + "Got it. I've added this task:" + "\n" +
+                indentation + "  " + task + "\n" +
+                indentation + "Now you have " + listOfTasks.size() + " tasks in the list." +
+                "\n" +
+                indentation + line);
+    }
+
+    public static void invalidTask() throws InvalidTaskCommandException {
+        throw new InvalidTaskCommandException();
+    }
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> inputArr = new ArrayList<>();
 
-        String line = "_________________________________";
-        String indentation = "     ";
-
         System.out.println(indentation + line + "\n" + indentation + "Hello! I'm PikaBot" + "\n" + indentation +
-                "What can I do for you?\n" + indentation + line);
+                "What can I do for you? シ\n" + indentation + line);
 
         String input = sc.nextLine();
         String[] strInputArr = input.split(" ", 2);
@@ -53,7 +102,7 @@ public class PikaBot {
                     System.out.println(indentation + line);
 
                     input = sc.nextLine();
-                    strInputArr = input.split(" ",2);
+                    strInputArr = input.split(" ", 2);
                     break;
                 }
 
@@ -72,54 +121,64 @@ public class PikaBot {
                     break;
                 }
                 case "todo": {
-                    String description = strInputArr[1];
-                    Todo currTodo = new Todo(description);
-                    inputArr.add(currTodo);
-                    System.out.println(indentation + line + "\n" +
-                            indentation + "Got it. I've added this task:" + "\n" +
-                            indentation + "  " + currTodo + "\n" +
-                            indentation + "Now you have " + inputArr.size() + " tasks in the list." +
-                            "\n" +
-                            indentation + line);
-
-                    input = sc.nextLine();
-                    strInputArr = input.split(" ", 2);
+                    try {
+                        Todo currTodo = addTodo(strInputArr);
+                        inputArr.add(currTodo);
+                        addedTask(currTodo, inputArr);
+                    } catch (TodoException e) {
+                        System.out.println(indentation + line);
+                        System.out.println(indentation + e.getMessage());
+                        System.out.println(indentation + line);
+                    } finally {
+                        input = sc.nextLine();
+                        strInputArr = input.split(" ", 2);
+                    }
                     break;
                 }
 
                 case "deadline": {
-                    String[] details = strInputArr[1].split("/by ");
-                    String description = details[0];
-                    String by = details[1];
-                    Deadline currDeadline = new Deadline(description, by);
-                    inputArr.add(currDeadline);
-                    System.out.println(indentation + line + "\n" +
-                            indentation + "Got it. I've added this task:" + "\n" +
-                            indentation + "  " + currDeadline + "\n" +
-                            indentation + "Now you have " + inputArr.size() + " tasks in the list." +
-                            "\n" +
-                            indentation + line);
-
-                    input = sc.nextLine();
-                    strInputArr = input.split(" ", 2);
+                    try {
+                        Deadline currDeadline = addDeadline(strInputArr);
+                        inputArr.add(currDeadline);
+                        addedTask(currDeadline, inputArr);
+                    } catch (DeadlineException e) {
+                        System.out.println(indentation + line);
+                        System.out.println(indentation + e.getMessage());
+                        System.out.println(indentation + line);
+                    } finally {
+                        input = sc.nextLine();
+                        strInputArr = input.split(" ", 2);
+                    }
                     break;
                 }
 
                 case "event": {
-                    String[] details = strInputArr[1].split("/at ");
-                    String description = details[0];
-                    String at = details[1];
-                    Event currEvent = new Event(description, at);
-                    inputArr.add(currEvent);
-                    System.out.println(indentation + line + "\n" +
-                            indentation + "Got it. I've added this task:" + "\n" +
-                            indentation + "  " + currEvent + "\n" +
-                            indentation + "Now you have " + inputArr.size() + " tasks in the list." +
-                            "\n" +
-                            indentation + line);
+                    try {
+                        Event currEvent = addEvent(strInputArr);
+                        inputArr.add(currEvent);
+                        addedTask(currEvent, inputArr);
+                    } catch (EventException e) {
+                        System.out.println(indentation + line);
+                        System.out.println(indentation + e.getMessage());
+                        System.out.println(indentation + line);
+                    } finally {
+                        input = sc.nextLine();
+                        strInputArr = input.split(" ", 2);
+                    }
+                    break;
+                }
 
-                    input = sc.nextLine();
-                    strInputArr = input.split(" ", 2);
+                default: {
+                    try {
+                        invalidTask();
+                    } catch (InvalidTaskCommandException e) {
+                        System.out.println(indentation + line);
+                        System.out.println(indentation + e.getMessage());
+                        System.out.println(indentation + line);
+                    } finally {
+                        input = sc.nextLine();
+                        strInputArr = input.split(" ", 2);
+                    }
                     break;
                 }
             }

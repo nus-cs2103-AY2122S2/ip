@@ -1,6 +1,6 @@
      _________________________________
      Hello! I'm PikaBot
-     What can I do for you?
+     What can I do for you? シ
      _________________________________
      _________________________________
      Got it. I've added this task:
@@ -13,50 +13,43 @@
      Now you have 2 tasks in the list.
      _________________________________
      _________________________________
+     I'm sorry, but I don't know what that means :-(
+     _________________________________
+     _________________________________
      Got it. I've added this task:
        [E][ ] project meeting (at: Aug 6th 2-4pm)
      Now you have 3 tasks in the list.
      _________________________________
      _________________________________
+     ☹ OOPS!!! The description of a todo cannot be empty.
+     _________________________________
+     _________________________________
+     ☹ OOPS!!!The description of an event must contain a specific time
+     _________________________________
+     _________________________________
      Got it. I've added this task:
-       [T][ ] join sports club
+       [E][ ] 2nd project meeting (at: Aug 8th 2-4pm)
      Now you have 4 tasks in the list.
      _________________________________
      _________________________________
-     Got it. I've added this task:
-       [T][ ] borrow book
-     Now you have 5 tasks in the list.
-     _________________________________
-     _________________________________
      Nice! I've marked this task as done:
-     [T][X] read book
+     [D][X] return book (by: June 6th)
      _________________________________
      _________________________________
-     Nice! I've marked this task as done:
-     [T][X] join sports club
+     OK, I've marked this task as not done yet:
+     [D][ ] return book (by: June 6th)
      _________________________________
      _________________________________
      Here are the tasks in your list:
-     1.[T][X] read book
+     1.[T][ ] read book
      2.[D][ ] return book (by: June 6th)
      3.[E][ ] project meeting (at: Aug 6th 2-4pm)
-     4.[T][X] join sports club
-     5.[T][ ] borrow book
-     _________________________________
-     _________________________________
-     Got it. I've added this task:
-       [D][ ] return book (by: Sunday)
-     Now you have 6 tasks in the list.
-     _________________________________
-     _________________________________
-     Got it. I've added this task:
-       [E][ ] project meeting (at: Mon 2-4pm)
-     Now you have 7 tasks in the list.
+     4.[E][ ] 2nd project meeting (at: Aug 8th 2-4pm)
      _________________________________
      _________________________________
      Got it. I've added this task:
        [D][ ] do homework (by: no idea :-p)
-     Now you have 8 tasks in the list.
+     Now you have 5 tasks in the list.
      _________________________________
      _________________________________
      Bye. Hope to see you again!
