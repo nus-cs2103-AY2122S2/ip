@@ -15,15 +15,29 @@ public class Duke {
         Commands cmd = new Commands();
         Scanner io = new Scanner(System.in); // Scanner object created
 
+        label:
         while(true) {
             String input = io.nextLine();
-            if (input.equals("bye")) {
-                cmd.bye();
-                break;
-            } else if (input.equals("list")) {
-                cmd.list();
-            } else {
-                cmd.echoInput(input);
+            switch (input) {
+                case "bye":
+                    cmd.bye();
+                    break label;
+                case "list":
+                    cmd.list();
+                    break;
+                case "mark": {
+                    int index = io.nextInt();
+                    cmd.mark(index);
+                    break;
+                }
+                case "unmark": {
+                    int index = io.nextInt();
+                    cmd.unmark(index);
+                    break;
+                }
+                default:
+                    cmd.addTask(input);
+                    break;
             }
         }
     }

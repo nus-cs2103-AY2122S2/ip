@@ -1,12 +1,12 @@
 public class Commands {
 
-    InputHistory cmdHistory = new InputHistory();
+    private final TaskHistory taskHistory = new TaskHistory();
 
     public Commands() { // Empty Constructor
     }
 
-    void echoInput(String input) { // Get DukeLCH to Echo
-        cmdHistory.addTo(input); // Add new input entry into history
+    void addTask(String input) { // Get DukeLCH to Echo
+        taskHistory.addTo(input); // Add new input entry into history
         String echo = "_______________________________________________________\n"
                 + "added: " + input + "\n"
                 + "_______________________________________________________\n";
@@ -22,6 +22,24 @@ public class Commands {
 
     void list() { // Get DukeLCH to List cmdHistory
         String border = "_______________________________________________________\n";
-        System.out.println(border + cmdHistory.printAll() + border);
+        System.out.println(border + taskHistory.printAll() + border);
+    }
+
+    void mark(int index) {
+        taskHistory.getTask(index).markTask();
+        String msg = "_______________________________________________________\n"
+                + "Well done! You have completed the task:\n"
+                + taskHistory.getTask(index).getDescription()
+                + "_______________________________________________________\n";
+        System.out.println(msg);
+    }
+
+    void unmark(int index) {
+        taskHistory.getTask(index).unmarkTask();
+        String msg = "_______________________________________________________\n"
+                + "Well done! You have completed the task:\n"
+                + taskHistory.getTask(index).getDescription()
+                + "_______________________________________________________\n";
+        System.out.println(msg);
     }
 }
