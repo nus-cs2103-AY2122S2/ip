@@ -6,7 +6,9 @@ public class Duke {
     private static final String GREETING_MESSAGE = "Hey, Aeromon here! Fancy a cup of tea?";
     private static final String FAREWELL_MESSAGE = "Buai Buai! Ciao for now!";
     private static final String ADD_MESSAGE = "Nicely! I've added for you: ";
-    private static final List<String> toDoList = new ArrayList<>();
+    private static final String MARK_MESSAGE = "Naisu! You've completed: \n";
+    private static final String UNMARK_MESSAGE = "OI! What happened to completing: \n";
+    private static final List<Task> toDoList = new ArrayList<>();
 
     public static void main(String[] args) {
         System.out.println(GREETING_MESSAGE);
@@ -19,12 +21,24 @@ public class Duke {
                 break;
             } else if (input.equals("list")) {
                 int count = 1;
-                for (String item : toDoList) {
+                for (Task item : toDoList) {
                     System.out.println(String.format("%d: %s", count, item));
                     count++;
                 }
+            } else if (input.startsWith("mark")) {
+                String intValue = input.replaceAll("[^0-9]", "");
+                int index = Integer.parseInt(intValue) - 1;
+                Task temp = toDoList.get(index);
+                temp.markAsDone();
+                System.out.println(MARK_MESSAGE + temp);
+            } else if (input.startsWith("unmark")) {
+                String intValue = input.replaceAll("[^0-9]", "");
+                int index = Integer.parseInt(intValue);
+                Task temp = toDoList.get(index);
+                temp.markAsNotDone();
+                System.out.println(UNMARK_MESSAGE + temp);
             } else {
-                toDoList.add(input);
+                toDoList.add(new Task(input));
                 System.out.println(ADD_MESSAGE + input);
             }
         }
