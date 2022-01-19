@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -21,6 +22,7 @@ public class Duke {
 
         //continue the scanning if user does not say bye, else continue repeating what the user says
         while (!input.equals("bye")) {
+            System.out.println("=======================================================================");
 
             //prints the list of items when user inputs list
             if (input.equals("list")) {
@@ -45,10 +47,38 @@ public class Duke {
                 }
             }
 
+            //adds a task to the list if user inputs "todo xxx"
+            else if (input.length() > 4 && "todo".equals(input.substring(0, 4))) {
+                Task toDo = new Todo(stripDescription(input)[0]);
+                list.add(toDo);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(toDo.toString());
+                System.out.println("Now you have " + list.size() + " in the list.");
+            }
+
+            //schedules an event and stores the location of the event in the list in the format
+            //"event xxx /at xxx"
+            else if (input.length() > 5 && "event".equals(input.substring(0, 5))) {
+                Task event = new Event(stripDescription(input)[0], stripDescription(input)[1]);
+                System.out.println("Got it. I've added this task:");
+                list.add(event);
+                System.out.println(event.toString());
+                System.out.println("Now you have " + list.size() + " in the list.");
+            }
+
+            //adds a deadline and stores the date/time of the deadline in the list in the format
+            //"deadline xxx /by xxx"
+            else if (input.length() > 8 && "deadline".equals(input.substring(0, 8))) {
+                Task deadline = new Deadline(stripDescription(input)[0], stripDescription(input)[1]);
+                System.out.println("Got it. I've added this task:");
+                list.add(deadline);
+                System.out.println(deadline.toString());
+                System.out.println("Now you have " + list.size() + " in the list.");
+            }
+
             //adds user input to the list and notifies user
             else {
-                addToList(input);
-                System.out.println("added: " + input);
+                System.out.println("Sorry I didn't recognise that command, please try again.");
             }
 
             //to continue reading user input
@@ -72,7 +102,35 @@ public class Duke {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < arraylist.size(); i++) {
             int count = i + 1;
-            System.out.println(count + ". " + arraylist.get(i).getStatusIcon() + " " + arraylist.get(i).returnDescription());
+            System.out.println(count + ". " + arraylist.get(i).toString());
+        }
+    }
+
+    public static String[] stripDescription(String s) {
+        ArrayList<String> arr = new ArrayList<>(Arrays.asList(s.split(" ")));
+        if (arr.contains("/at")) {
+            int i = arr.indexOf("/at");
+            String str1 = String.join(" ", arr.subList(1, i));
+            String str2 = String.join(" ", arr.subList(i+1, arr.size()));
+            String[] str = new String[2];
+            str[0] = str1;
+            str[1] = str2;
+            return str;
+        } else if (arr.contains("/by")) {
+            int i = arr.indexOf("/by");
+            String str1 = String.join(" ", arr.subList(1, i));
+            String str2 = String.join(" ", arr.subList(i+1, arr.size()));
+            String[] str = new String[2];
+            str[0] = str1;
+            str[1] = str2;
+            return str;
+        } else{
+            String str1 = String.join(" ", arr.subList(1, arr.size()));
+            String str2 = "";
+            String[] str = new String[2];
+            str[0] = str1;
+            str[1] = str2;
+            return str;
         }
     }
 }
