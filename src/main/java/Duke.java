@@ -15,12 +15,14 @@ public class Duke {
     private static final String TEXT_ACKNOWLEDGE_LIST = "Here are the tasks in your list:";
     private static final String TEXT_ACKNOWLEDGE_MARK = "Nice! I've marked this task as done:";
     private static final String TEXT_ACKNOWLEDGE_UNMARK = "OK, I've marked this task as not done yet:";
+    private static final String TEXT_ACKNOWLEDGE_DELETE = "Noted. I've removed this task:";
     private static final String TEXT_ACKNOWLEDGE_TASK = "Got it. I've added this task:";
 
     private static final String KEY_EXIT = "bye";
     private static final String KEY_LIST = "list";
     private static final String KEY_MARK = "mark";
     private static final String KEY_UNMARK = "unmark";
+    private static final String KEY_DELETE = "delete";
     private static final String KEY_TODO = "todo";
     private static final String KEY_DEADLINE = "deadline";
     private static final String KEY_EVENT = "event";
@@ -74,6 +76,9 @@ public class Duke {
         case KEY_UNMARK:
             unmarkTask(Integer.parseInt(params[0]) - 1);
             break;
+        case KEY_DELETE:
+            deleteTask(Integer.parseInt(params[0]) - 1);
+            break;
         case KEY_TODO:
             addTask(new ToDo(params[0]));
             break;
@@ -111,6 +116,17 @@ public class Duke {
         printDivider();
         printTabbed(TEXT_ACKNOWLEDGE_TASK, 1);
         printTabbed(task.toString(), 3);
+        printTabbed("Now you have " + tasks.size() + " tasks in the list.", 1);
+        printDivider();
+        System.out.println();
+    }
+
+    private void deleteTask(int index) {
+        Task deleted = tasks.get(index);
+        tasks.remove(index);
+        printDivider();
+        printTabbed(TEXT_ACKNOWLEDGE_DELETE, 1);
+        printTabbed(deleted.toString(), 3);
         printTabbed("Now you have " + tasks.size() + " tasks in the list.", 1);
         printDivider();
         System.out.println();
