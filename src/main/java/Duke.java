@@ -31,25 +31,26 @@ public class Duke {
         System.out.println("Yoooo! My name is " + botName + "!\n" + "How can I help you bro?\n");
     }
     private static void farewell() {
-        System.out.println("See you next time!\n");
+        System.out.println("See you next time!");
     }
 
     private void addTask(String str) {    //adds task to list
         String action = Duke.getFirstWord(str);
         switch (action) {
             case "todo":
-                this.list[this.listIndex] = new Todo(str);
+                String[] todoArr = str.split(" ", 2);
+                this.list[this.listIndex] = new Todo(todoArr[1].trim());
                 break;
             case "deadline":
                 //deadline do hw /by no idea :-p
-                String[] arr = str.split("/by");
-                arr[0] = arr[0].split(" ")[1];  // removing the deadline keyword
+                String[] arr = str.split("/by", 2);
+                arr[0] = arr[0].split(" ", 2)[1];  // removing the deadline keyword
                 this.list[this.listIndex] = new Deadline(arr[0].trim(), arr[1].trim());
                 break;
             case "event":
                 //event project meeting /at Mon 2-4pm
-                String[] eventArr = str.split("/at");
-                eventArr[0] = eventArr[0].split(" ")[1];  //removing the event keyword
+                String[] eventArr = str.split("/at", 2);
+                eventArr[0] = eventArr[0].split(" ", 2)[1];  //removing the event keyword
                 this.list[this.listIndex] = new Event(eventArr[0].trim(), eventArr[1].trim());
                 break;
             default:
@@ -58,7 +59,7 @@ public class Duke {
 
         System.out.println("Got it. I've added this task:");
         System.out.println(this.list[this.listIndex].toString());
-        System.out.println("Now you have " + this.listIndex + " tasks in your list.");
+        System.out.println("Now you have " + this.listIndex + " task(s) in your list.");
         this.listIndex ++;
     }
 
@@ -83,26 +84,8 @@ public class Duke {
         }
     }
 
-    private boolean isMarkAction(String action, String input) {
-        if (!action.equals("mark")) return false;
-        // also need to make sure there is only 1 space, and the second "word" is an int character
-//        int wordCount = 0;
-//        String trim = input.trim();
-//        System.out.println("trim " + trim);
-//        wordCount = trim.split("\\s+").length;
-//        System.out.println("word count " + wordCount);
-//        if (wordCount != 2) return false;
-
-        return true;
-    }
-
-    private boolean isUnMarkAction(String action, String input) {
-        if (!action.equals("unmark")) return false;
-        return true;
-    }
-
     private void mark(String input) {
-        System.out.println("Nice! I've marked this task as done:\n");
+        System.out.println("Nice! I've marked this task as done:");
         String[] words = input.split(" ", 2);
         // the second word is expected to be a number for now
         int taskNumber = Integer.parseInt(words[1]);
@@ -111,7 +94,7 @@ public class Duke {
     }
 
     private void unmark(String input) {
-        System.out.println("OK, I've marked this task as not done yet:\n");
+        System.out.println("OK, I've marked this task as not done yet:");
         String[] words = input.split(" ", 2);
         // the second word is expected to be a number for now
         int taskNumber = Integer.parseInt(words[1]);
@@ -128,6 +111,7 @@ public class Duke {
         while (!input.equals("bye")) {  //terminates system when user says bye
             String action = Duke.getFirstWord(input);
             duke.performAction(action, input);
+            System.out.println("\n");
             input = sc.nextLine();
         }
         sc.close();
