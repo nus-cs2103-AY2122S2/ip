@@ -1,0 +1,25 @@
+public class Task {
+    private final String description;
+    private boolean isDone;
+
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
+    }
+
+    public String getDescription() {
+        if (this.isDone) {
+            return "[X] " + this.description + "\n";
+        } else {
+            return "[ ] " + this.description + "\n";
+        }
+    }
+
+    public void markTask() {
+        this.isDone = true;
+    }
+
+    public void unmarkTask() {
+        this.isDone = false;
+    }
+}

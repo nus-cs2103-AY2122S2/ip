@@ -3,7 +3,7 @@ import java.util.Iterator; // Imported Iterator class
 import java.lang.StringBuilder; // Imported StringBuilder class
 
 public class InputHistory {
-    ArrayList<String> record = new ArrayList<>(100); // ArrayList of size 100 by default
+    private final ArrayList<String> record = new ArrayList<>(100); // ArrayList of size 100 by default
 
     public InputHistory() { //Empty Constructor
     }
