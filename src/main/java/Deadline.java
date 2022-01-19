@@ -16,7 +16,7 @@ public class Deadline extends Task {
      * @param by date/time deadline is due.
      */
     public Deadline(String description, String by) {
-        super(description);
+        super(description, TaskType.DEADLINE);
         this.by = by;
     }
 

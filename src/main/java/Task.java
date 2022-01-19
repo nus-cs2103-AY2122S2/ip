@@ -15,13 +15,19 @@ public class Task {
     protected boolean isDone;
 
     /**
+     * Type of task.
+     */
+    public TaskType type;
+
+    /**
      * Contrustor to create Task object.
      *
      * @param description string representing the task.
      */
-    public Task(String description) {
+    public Task(String description, TaskType type) {
         this.description = description;
         this.isDone = false;
+        this.type = type;
     }
 
     /**
@@ -57,6 +63,15 @@ public class Task {
      */
     public void unmarkAsDone() {
         this.isDone = false;
+    }
+
+    /**
+     * Outputs the type of the task.
+     *
+     * @return TaskType representing the task.
+     */
+    public TaskType getType() {
+        return this.type;
     }
 
     /**

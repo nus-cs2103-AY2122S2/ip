@@ -216,8 +216,8 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         String[] tokens = input.split("\\s+");
+        
 
-        // Exit loop only after the user enters "Bye"
         while (!tokens[0].equals("bye")) {
             try {
                 if (tokens[0].equals("list")) {
@@ -279,7 +279,6 @@ public class Duke {
             } catch (DukeException dukeException) {
                 System.out.println(Duke.formatString(dukeException.getMessage()));
             }
-
             input = scanner.nextLine();
             tokens = input.split("\\s+");
         }
