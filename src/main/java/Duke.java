@@ -19,6 +19,10 @@ public class Duke {
                 TaskFunctions.checkInputValidity(input);
 
                 switch (input_split[0]) {
+                    case "delete":
+                        int delete_position = Integer.parseInt(input_split[1]);
+                        TaskFunctions.deleteTask(delete_position);
+                        break;
                     case "todo":
                         String todo_description = input.split("todo ", 2)[1];
                         TaskFunctions.addToList(new ToDo(todo_description));
