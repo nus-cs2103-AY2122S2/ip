@@ -1,3 +1,5 @@
+package task;
+
 public abstract class Task {
     protected String description;
     protected TaskStatus status;
@@ -6,6 +8,7 @@ public abstract class Task {
         this.description = description;
         this.status = TaskStatus.NOT_DONE;
     }
+    //test
     
     public void markAsDone() {
         this.status = TaskStatus.DONE;

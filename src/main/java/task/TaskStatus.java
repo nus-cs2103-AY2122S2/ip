@@ -1,3 +1,5 @@
+package task;
+
 public enum TaskStatus {
     NOT_DONE("\u2610"),
     DONE("\u2612");
