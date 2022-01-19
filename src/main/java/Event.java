@@ -1,6 +1,13 @@
-/*
-A type of task that accepts a start and end time
+/**
+ * This is a child class of Task, Event.
+ * Event accepts another variable, 'at' that
+ * stores the time this Event is taking place
+ *
+ * @author  Hsiao Jiet
+ * @version 1.0
+ * @since   2022-1-15
  */
+
 public class Event extends Task {
     protected String at;
 

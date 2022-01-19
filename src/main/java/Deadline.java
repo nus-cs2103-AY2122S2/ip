@@ -1,6 +1,13 @@
-/*
-A type of task that accepts an endTime
-*/
+/**
+ * This is a child class of Task, Deadline.
+ * Deadline accepts another variable, 'by' that
+ * stores the time this Deadline has to be completed
+ *
+ * @author  Hsiao Jiet
+ * @version 1.0
+ * @since   2022-1-15
+ */
+
 public class Deadline extends Task {
     protected String by;
 

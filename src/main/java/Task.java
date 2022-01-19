@@ -1,3 +1,13 @@
+/**
+ * This is an abstract Task class that creates task instances with a title,
+ * whether task is completed and the type of task.
+ *
+ *
+ * @author  Hsiao Jiet
+ * @version 1.0
+ * @since   2022-1-15
+ */
+
 public abstract class Task {
     protected String name;
     protected boolean done;
@@ -32,14 +42,18 @@ public abstract class Task {
         this.type = type;
     }
 
-    //for displaying if a task is done or not
+    /**
+     * Sets the Task to be done
+     */
     public String getDoneIcon() {
         return getDone()
                 ? "[X]"
                 : "[ ]";
     }
 
-    //for displaying task's representation
+    /**
+     * Sets the Task's type of: Todo, Deadline, Event
+     */
     public String getTaskIcon() {
         return String.format("[%c]", type);
     }
