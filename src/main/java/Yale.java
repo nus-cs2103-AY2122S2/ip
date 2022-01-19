@@ -1,6 +1,47 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+class ToDo extends Task {
+
+    public ToDo(String name, boolean isMarked) {
+        super(name, isMarked);
+    }
+
+    @Override
+    public String toString() {
+        return "[T]" + super.toString();
+    }
+}
+
+class Deadline extends Task {
+    protected String by;
+
+    public Deadline(String name, boolean isMarked, String by) {
+        super(name, isMarked);
+        this.by = by;
+    }
+
+    @Override
+    public String toString() {
+        return "[D]" + super.toString() + " (by: " + by + ")";
+    }
+}
+
+class Event extends Task {
+    protected String at;
+
+    public Event(String name, boolean isMarked, String at) {
+        super(name, isMarked);
+        this.at = at;
+    }
+
+    @Override
+    public String toString() {
+        return "[E]" + super.toString() + " (at: " + at + ")"   ;
+    }
+}
+
+
 class TaskList {
     ArrayList<Task> list;
     public TaskList() {
@@ -27,11 +68,14 @@ class TaskList {
 }
 
 class Task {
+    private static int totalTasks = 0;
     private String name;
     private boolean isMarked = false;
     public Task(String name, boolean isMarked) {
         this.name = name;
         this.isMarked = isMarked;
+        totalTasks++;
+
     }
 
     public String getStatusIcon() {
