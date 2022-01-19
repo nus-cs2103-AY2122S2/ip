@@ -21,19 +21,14 @@ public class Duke {
         this.list[this.listIndex] = new Task(str);
         this.listIndex ++;
     }
-    private String getTaskDescription(int i) {
-        return this.list[i].description;
-    }
-    private boolean getTaskStatus(int i) {
-        return this.list[i].isDone;
-    }
+
     private String getTaskStatement(int i) {
-        //[X] read book, or [ ] do sth
-        return "[" + this.list[i].getStatusIcon() + "] " + this.getTaskDescription(i) + "\n";
+        //[X] read book
+        return this.list[i].toString();
     }
     private void printList() {
         for (int i = 1; i < this.listIndex; i++) {
-            System.out.println(i + "." + this.getTaskStatement(i));
+            System.out.println(i + "." + this.getTaskStatement(i) + "\n");
         }
     }
     private static String getFirstWord(String input) {
@@ -71,7 +66,7 @@ public class Duke {
         // the second word is expected to be a number for now
         int taskNumber = Integer.parseInt(words[1]);
         this.list[taskNumber].markAsDone();
-        System.out.println(this.getTaskStatement(taskNumber) + "\n");
+        System.out.println(this.getTaskStatement(taskNumber));
     }
 
     private void unmark(String input) {
@@ -80,7 +75,7 @@ public class Duke {
         // the second word is expected to be a number for now
         int taskNumber = Integer.parseInt(words[1]);
         this.list[taskNumber].markAsUndone();
-        System.out.println(this.getTaskStatement(taskNumber) + "\n");
+        System.out.println(this.getTaskStatement(taskNumber));
     }
     public static void main(String[] args) {
 
