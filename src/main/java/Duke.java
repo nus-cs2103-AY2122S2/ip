@@ -1,6 +1,7 @@
 public class Duke {
 
-    private final static String paddingStr = "    ";
+    private final static String divPadding = "    ";
+    private final static String strPadding = "      ";
 
     public static void main(String[] args) {
         initialiseBot();
@@ -10,10 +11,10 @@ public class Duke {
         String divString = "-----------------------------------------";
         String botName = "Baymax";
 
-        System.out.println(paddingStr + divString);
-        System.out.println(paddingStr + paddingStr + "Greetings, I am " + botName + ".");
-        System.out.println(paddingStr + paddingStr + "What can I do you for?");
-        System.out.println(paddingStr + divString);
+        System.out.println(divPadding + divString);
+        System.out.println(strPadding + "Greetings, I am " + botName + ".");
+        System.out.println(strPadding + "What can I do you for?");
+        System.out.println(divPadding + divString);
 
     }
 }
