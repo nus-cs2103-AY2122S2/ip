@@ -62,6 +62,14 @@ public class Duke {
                     System.out.println("Now you have " + arr.size() + " tasks in the list.");
                     continue;
                 }
+                case "remove": {
+                    Task toRemove = arr.get(Integer.parseInt(strArr[1]) - 1);
+                    System.out.println("Noted. I've removed this task: ");
+                    System.out.println(toRemove.toString());
+                    arr.remove(toRemove);
+                    System.out.println("Now you have " + arr.size() + " tasks in the list.");
+                    continue;
+                }
                 case "bye":
                     break;
                 default:
