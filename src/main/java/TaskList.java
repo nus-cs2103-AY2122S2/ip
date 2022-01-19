@@ -1,16 +1,16 @@
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class TaskList {
 
-	private final Task[] list;
+	private final List<Task> list;
 	private final Set<String> set;
-	private int numItems;
 	private final Set<String> validTypes;
 
 	public TaskList() {
-		this.list = new Task[100];
-		this.numItems = 0;
+		this.list = new ArrayList<>();
 		this.set = new HashSet<>();
 
 		this.validTypes = new HashSet<>();
@@ -20,15 +20,19 @@ public class TaskList {
 	}
 
 	public Task getTask(int index) {
-		return list[index];
+		return list.get(index);
 	}
 
 	public int getNumTasks() {
-		return numItems;
+		return list.size();
+	}
+
+	public boolean isEmpty() {
+		return list.isEmpty();
 	}
 
 	public Boolean isValidIndex(int index) {
-		return index >= 0 && index < numItems;
+		return index >= 0 && index < list.size();
 	}
 
 	public String add(String[] titleArgs, String[] otherArgs)
@@ -73,7 +77,7 @@ public class TaskList {
 						);
 					} else {
 						Deadline deadline = new Deadline(title, other);
-						list[numItems++] = deadline;
+						list.add(deadline);
 						return String.format(
 							"This deadline has been added to your task list!%n%n             %s",
 							deadline
@@ -86,7 +90,7 @@ public class TaskList {
 						);
 					} else {
 						Event event = new Event(title, other);
-						list[numItems++] = event;
+						list.add(event);
 						return String.format(
 							"This event has been added to your task list!%n%n             %s",
 							event
@@ -102,7 +106,6 @@ public class TaskList {
 		if (!validTypes.contains(args[0])) {
 			throw new ChatBotException();
 		}
-
 		if (args.length <= 1) {
 			throw new ChatBotException(
 				"You need to key in the title of your todo traveller!"
@@ -117,7 +120,7 @@ public class TaskList {
 		} else {
 			set.add(title);
 			ToDo todo = new ToDo(title);
-			list[numItems++] = todo;
+			list.add(todo);
 			return String.format(
 				"This todo has been added to your task list!%n%n             %s",
 				todo
@@ -125,27 +128,53 @@ public class TaskList {
 		}
 	}
 
-	private String combineArgs(String[] input) {
+	public String delete(int index) throws ChatBotException {
+		if (!isValidIndex(index).equals(true)) {
+			throw new ChatBotException(
+				"This is an invalid task index traveller! You can type list to check all task indexes!"
+			);
+		}
+
+		Task removedTask = list.remove(index);
+		return String.format(
+			"This task has successfully been removed from your task list!%n%n             %s",
+			removedTask
+		);
+	}
+
+	private String combineArgs(String[] args) {
 		String title = "";
-		for (int i = 1; i < input.length; i++) {
-			if (i != input.length - 1) {
-				title = title.concat(input[i]).concat(" ");
+		for (int i = 1; i < args.length; i++) {
+			if (i != args.length - 1) {
+				title = title.concat(args[i]).concat(" ");
 			} else {
-				title = title.concat(input[i]);
+				title = title.concat(args[i]);
 			}
 		}
 		return title;
 	}
 
-	public void summary() {
-		for (int i = 0; i < numItems; i++) {
-			System.out.printf("             %d. %s%n", i + 1, list[i]);
+	public String summary() throws ChatBotException {
+		if (isEmpty()) {
+			throw new ChatBotException(
+				"Your task list is empty traveller! Add some tasks first!"
+			);
 		}
-		System.out.println();
+
+		String summary = "";
+		for (int i = 0; i < list.size(); i++) {
+			String taskString = String.format(
+				"             %d. %s%n",
+				i + 1,
+				list.get(i)
+			);
+			summary = summary.concat(taskString);
+		}
+		return summary;
 	}
 
 	public String mark(int index) {
-		Task task = list[index];
+		Task task = list.get(index);
 		if (task.isCompleted()) {
 			return "This task was already completed! No need to mark it again.";
 		} else {
@@ -158,7 +187,7 @@ public class TaskList {
 	}
 
 	public String unmark(int index) {
-		Task task = list[index];
+		Task task = list.get(index);
 		if (!task.isCompleted()) {
 			return "This task has not been completed yet! No need to unmark it.";
 		} else {
@@ -168,9 +197,5 @@ public class TaskList {
 				task
 			);
 		}
-	}
-
-	public boolean isEmpty() {
-		return numItems == 0;
 	}
 }

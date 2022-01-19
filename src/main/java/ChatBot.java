@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class ChatBot {
 
 	private static final String BORDER =
-		"*****************************************************************************************************************";
+		"**********************************************************************************************************************";
 	private static final String[] GREETING_QUOTES = {
 		"Welcome to my inn",
 		"Pull up a chair by the hearth!",
@@ -43,22 +43,33 @@ public class ChatBot {
 					loop = false;
 					break;
 				case "list":
-					if (taskList.isEmpty()) {
-						chat("Your task list is empty traveller!");
-					} else {
+					try {
+						String response = taskList.summary();
 						chat("Here you go!");
-						taskList.summary();
+						System.out.println(response);
+					} catch (Exception e) {
+						handleError(e.getMessage());
 					}
 					break;
 				case "mark":
 				case "unmark":
 					try {
-						String response = markOrUnmark(
-							taskList,
-							Integer.parseInt(input[1]) - 1,
-							input[0].equals("mark")
-						);
-						chat(response);
+						if (taskList.isEmpty()) {
+							throw new ChatBotException(
+								"Your task list is empty traveller! Add some tasks first before attempting to mark or unmark!"
+							);
+						} else if (input.length > 2) {
+							throw new ChatBotException(
+								"Thats too many inputs traveller! You only need to key in the index of the task you wish to mark or unmark!"
+							);
+						} else {
+							String response = markOrUnmark(
+								taskList,
+								Integer.parseInt(input[1]) - 1,
+								input[0].equals("mark")
+							);
+							chat(response);
+						}
 					} catch (ChatBotException e) {
 						handleError(e.getMessage());
 					} catch (NumberFormatException e) {
@@ -70,6 +81,7 @@ public class ChatBot {
 							"You need to key in the index of the task you wish to mark or unmark traveller!"
 						);
 					}
+
 					break;
 				case "todo":
 					try {
@@ -79,6 +91,36 @@ public class ChatBot {
 					} catch (ChatBotException e) {
 						handleError(e.getMessage());
 					}
+					break;
+				case "delete":
+					try {
+						if (taskList.isEmpty()) {
+							throw new ChatBotException(
+								"Your task list is empty traveller! Add some tasks first before attempting to delete!"
+							);
+						} else if (input.length > 2) {
+							throw new ChatBotException(
+								"Thats too many inputs traveller! You only need to key in the index of the task you wish to delete!"
+							);
+						} else {
+							String response = taskList.delete(
+								Integer.parseInt(input[1]) - 1
+							);
+							chat(response);
+							printNumTasks(taskList.getNumTasks());
+						}
+					} catch (ChatBotException e) {
+						handleError(e.getMessage());
+					} catch (NumberFormatException e) {
+						handleError(
+							"You should delete tasks using their index rather than title traveller!"
+						);
+					} catch (ArrayIndexOutOfBoundsException e) {
+						handleError(
+							"You need to key in the index of the task you wish to delete traveller!"
+						);
+					}
+
 					break;
 				case "guide":
 					chat(
@@ -112,7 +154,7 @@ public class ChatBot {
 									);
 								} else {
 									throw new ChatBotException(
-										"You need to include /by in your command to add a deadline!"
+										"You need to include /by in your command to add a deadline traveller!"
 									);
 								}
 							} else if (type.equals("event")) {
@@ -122,7 +164,7 @@ public class ChatBot {
 									);
 								} else {
 									throw new ChatBotException(
-										"You need to include /at in your command to add an event!"
+										"You need to include /at in your command to add an event traveller!"
 									);
 								}
 							}
