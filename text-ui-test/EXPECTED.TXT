@@ -9,6 +9,14 @@ ________________________________
 
 How may I help you today? Please enter your command:
 ________________________________
+The list is empty. Why not add some tasks?
+________________________________
+
+________________________________
+The specified task does not exist.
+________________________________
+
+________________________________
 Got it. I've added this task:
 [T][ ] aaa
 Now you have 1 task(s) in the list.
@@ -33,6 +41,19 @@ ________________________________
 Got it. I've added this task:
 [D][ ] ccc (by: ccc)
 Now you have 3 task(s) in the list.
+________________________________
+
+________________________________
+1.[T][ ] aaa
+2.[E][ ] bbb (at: bbb)
+3.[D][ ] ccc (by: ccc)
+________________________________
+
+Usage: deadline <description> /by <time>
+Usage: deadline <description> /by <time>
+Usage: deadline <description> /by <time>
+________________________________
+Deadline description cannot be empty.
 ________________________________
 
 ________________________________
