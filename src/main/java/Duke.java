@@ -181,26 +181,27 @@ public class Duke {
         String user_message = user_input.next();
 
         while (!user_message.equals("bye")) {
+            String[] split = user_message.split(" ");
             try {
                 if (user_message.equals("list")) {
                     message_list();
 
-                } else if (user_message.startsWith("mark")) { //todo: mark/unmark negative number?????
+                } else if (user_message.startsWith("mark") && split[0].equals("mark")) {
                     message_mark(user_message);
 
-                } else if (user_message.startsWith("unmark")) {
+                } else if (user_message.startsWith("unmark") && split[0].equals("unmark")) {
                     message_unmark(user_message);
 
-                } else if (user_message.startsWith("todo")) {
+                } else if (user_message.startsWith("todo") && split[0].equals("todo")) {
                     message_todo(user_message);
 
-                } else if (user_message.startsWith("deadline")) {
+                } else if (user_message.startsWith("deadline") && split[0].equals("deadline")) {
                     message_deadline(user_message);
 
-                } else if (user_message.startsWith("event")) {
+                } else if (user_message.startsWith("event") && split[0].equals("event")) {
                     message_event(user_message);
 
-                } else if (user_message.startsWith("delete")) {
+                } else if (user_message.startsWith("delete") && split[0].equals("delete")) {
                     message_delete(user_message);
 
                 } else {
