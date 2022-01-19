@@ -39,6 +39,24 @@ public class Duke {
                     database.set(num, taskToUnmark);
                 }
                 System.out.println("OK, I've marked this task as not done yet:\n  " + taskToUnmark);
+            } else if (input.description.startsWith("todo")) {
+                String description = input.description.substring(5);
+                Todo todoItem = new Todo(description);
+                database.add(todoItem);
+                System.out.println("Got it. I've added this task:\n  " + todoItem);
+                System.out.println("Now you have " + database.size() + " tasks in the list.");
+            } else if (input.description.startsWith("deadline")) {
+                String[] itemArr = input.description.substring(9).split(" /by ");
+                Deadline deadlineItem = new Deadline(itemArr[0], itemArr[1]);
+                database.add(deadlineItem);
+                System.out.println("Got it. I've added this task:\n  " + deadlineItem);
+                System.out.println("Now you have " + database.size() + " tasks in the list.");
+            } else if (input.description.startsWith("event")) {
+                String[] itemArr = input.description.substring(6).split(" /at ");
+                Event eventItem = new Event(itemArr[0], itemArr[1]);
+                database.add(eventItem);
+                System.out.println("Got it. I've added this task:\n  " + eventItem);
+                System.out.println("Now you have " + database.size() + " tasks in the list.");
             } else {
                 database.add(input);
                 System.out.println("added: " + input.description);
