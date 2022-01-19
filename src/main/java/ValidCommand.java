@@ -1,4 +1,6 @@
 public enum ValidCommand {
+    MARK("mark"),
+    UNMARK("unmark"),
     LIST("list"),
     BYE("bye");
 

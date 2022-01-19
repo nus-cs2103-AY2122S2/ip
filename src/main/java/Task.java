@@ -7,16 +7,16 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getStatusIcon() {
-        return this.isDone ? "X" : " ";
-    }
-
     public void markAsDone() {
         this.isDone = true;
     }
 
     public void markAsNotDone() {
         this.isDone = false;
+    }
+
+    private String getStatusIcon() {
+        return this.isDone ? "X" : " ";
     }
 
     @Override
