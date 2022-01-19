@@ -43,6 +43,11 @@ public class Tesseract {
                 for (int i = 0; i < taskList.size(); i++) {
                     msg += INDENT2 + (i+1) + "." + taskList.get(i).toString() + "\n";
                 }
+            } else if (cmd.equals("delete")) {
+                int index = Integer.parseInt(cmdArr[1]) - 1;
+                Task removed = taskList.remove(index);
+                msg = "Okies the following task has been removed:\n" + INDENT2 + removed.toString() + "\n"
+                        + INDENT1 + "Now you have " + taskList.size() + " tasks in the list~\n";
             } else if (cmd.equals("mark")) {
                 int index = Integer.parseInt(cmdArr[1]) - 1; // the 2nd element in the array is the index
                 taskList.get(index).markAsDone();
@@ -100,7 +105,7 @@ public class Tesseract {
                         + "Now you have " + taskList.size() + " tasks waiting to be finished.\n";
             }
 
-            String out = INDENT1 + BREAKER + "\n" + INDENT1 + + INDENT1 + BREAKER + "\n";msg
+            String out = INDENT1 + BREAKER + "\n" + INDENT1 + msg + INDENT1 + BREAKER + "\n";
             System.out.println(out);
             cmdLine = sc.nextLine();
         }
@@ -118,9 +123,12 @@ public class Tesseract {
 
                 }
                 break;
+            case "delete":
             case "mark":
             case "unmark":
-                if (cmdLen > 2 || !isInteger(cmdArr[1]) || Integer.parseInt(cmdArr[1]) > taskList.size()) {
+                if (cmdLen == 1) {
+                    throw new TesseractException("Which task you want to remove again?");
+                } else if (cmdLen > 2 || !isInteger(cmdArr[1]) || Integer.parseInt(cmdArr[1]) > taskList.size()) {
                     throw new TesseractException("You need to enter a valid list number mah~");
                 }
                 break;
