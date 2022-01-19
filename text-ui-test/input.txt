@@ -1,0 +1,14 @@
+list
+todo eat
+deadline
+deadline run/by Monday
+event walk/at Tuesday
+list
+mark 1
+mark 2
+mark 3
+unmark 2
+list
+delete 2
+list
+bye
