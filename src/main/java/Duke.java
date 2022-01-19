@@ -2,56 +2,6 @@ import java.util.*;
 
 public class Duke {
 
-    public static class ToDo extends Task {
-        public ToDo(String taskName) {
-            super(taskName);
-        }
-        @Override
-        public String toString() {
-            return String.format("[T][%s] %s", this.done ? "X" : " ", this.taskName);
-        }
-    }
-
-    public static class Deadline extends Task {
-        public String deadline;
-        public Deadline(String taskName, String deadline) {
-            super(taskName);
-            this.deadline = deadline;
-        }
-        @Override
-        public String toString() {
-            return String.format("[D][%s] %s (by: %s)",
-                    this.done ? "X" : " ", this.taskName, this.deadline);
-        }
-    }
-
-    public static class Event extends Task {
-        public String eventTime;
-        public Event(String taskName, String eventTime) {
-            super(taskName);
-            this.eventTime = eventTime;
-        }
-        @Override
-        public String toString() {
-            return String.format("[E][%s] %s (at: %s)",
-                    this.done ? "X" : " ", this.taskName, this.eventTime);
-        }
-    }
-    public static class Task {
-        public boolean done = false;
-        public String taskName;
-        public Task(String taskName) {
-            this.taskName = taskName;
-        }
-        public void setDone(boolean newDone) {
-            this.done = newDone;
-        }
-        @Override
-        public String toString() {
-            return String.format("[%s] %s", this.done ? "X" : " ", this.taskName);
-        }
-    }
-
     public static String indent = "    ";
     public static String separator = "--------------------------------------------";
     public static String[] openingMessage = new String[] {"Hello! I'm Duke", "What can I do for you?"};
@@ -77,39 +27,61 @@ public class Duke {
 
     public static void displayTasks() {
         printIndent(separator);
-        printIndent("Here are the tasks in your list:");
-        for (int i = 0; i < allTasks.size(); i++) {
-            printIndent(String.format("%d. %s", i+1, allTasks.get(i)));
+        if (allTasks.size() == 0) {
+            printIndent("You have no tasks");
+        } else {
+            printIndent("Here are the tasks in your list:");
+            for (int i = 0; i < allTasks.size(); i++) {
+                printIndent(String.format("%d. %s", i+1, allTasks.get(i)));
+            }
         }
         printIndent(separator + "\n");
     }
 
     public static void addTask(String taskString) {
-        int firstSpace = taskString.indexOf(" ");
-        String firstWord = taskString.substring(0, firstSpace);
-
         String taskName;
         Task t;
-
-        switch (firstWord) {
-            case "todo":
-                taskName = taskString.substring(5);
+        if (taskString.startsWith("todo ")) {
+            if (taskString.length() <= 5) {
+                prettyPrint("Description cannot be empty!");// handle exception
+                return;
+            } else {
+                taskName = taskString.substring(5);  // "todo " has 5 characters
                 t = new ToDo(taskName);
-                break;
-            case "deadline":
+            }
+        } else if (taskString.startsWith("deadline ")) {
+            if (taskString.length() <= 9) {
+                prettyPrint("Description cannot be empty!");  // handle exception
+                return;
+            } else {
                 int byIdx = taskString.indexOf("/by");
-                taskName = taskString.substring(9, byIdx-1);  // "deadline " has 9 characters
-                String taskDeadline = taskString.substring(byIdx + 4);  // "/by " has 4 characters
-                t = new Deadline(taskName, taskDeadline);
-                break;
-            case "event":
+                if (byIdx == -1) {
+                    prettyPrint("Format for deadlines: 'deadline [some task] /by [time]'");  // handle exception
+                    return;
+                } else {
+                    taskName = taskString.substring(9, byIdx-1);  // "deadline " has 9 characters
+                    String taskDeadline = taskString.substring(byIdx + 4);  // "/by " has 4 characters
+                    t = new Deadline(taskName, taskDeadline);
+                }
+            }
+        } else if (taskString.startsWith("event ")) {
+            if (taskString.length() <= 6) {
+                prettyPrint("Description cannot be empty!");// handle exception
+                return;
+            } else {
                 int atIdx = taskString.indexOf("/at");
-                taskName = taskString.substring(6, atIdx-1);  // "event " has 9 characters
-                String taskTime = taskString.substring(atIdx + 4);  // "/at " has 4 characters
-                t = new Event(taskName, taskTime);
-                break;
-            default:
-                t = new Task(taskString);
+                if (atIdx == -1) {
+                    prettyPrint("Format for events: 'event [some event] /at [time]'");  // handle exception
+                    return;
+                } else {
+                    taskName = taskString.substring(6, atIdx-1);  // "event " has 9 characters
+                    String taskTime = taskString.substring(atIdx + 4);  // "/at " has 4 characters
+                    t = new Event(taskName, taskTime);
+                }
+            }
+        } else {
+            prettyPrint("I don't think I know what this is!");  // handle exception
+            return;
         }
         allTasks.add(t);
         String[] messages = new String[] {
@@ -117,23 +89,66 @@ public class Duke {
                 t.toString(),
                 "Now you have " + allTasks.size() + " tasks in the list."
         };
-
         prettyPrint(messages);
+    }
+
+    public static void handleMarkTask(String command) {
+        String taskString = command.substring(5);  // "mark " is 5 letters
+        int taskToMark;
+        try {
+            taskToMark = Integer.parseInt(taskString);
+        }
+        catch (NumberFormatException err) {
+            prettyPrint("Not a valid task number!");  // handle exception
+            return;
+        }
+
+        if (1 <= taskToMark && taskToMark <= allTasks.size()) {
+            markTask(taskToMark - 1);
+        } else {
+            prettyPrint(String.format("Task %d does not exist!", taskToMark));
+        }
     }
 
     public static void markTask(int taskNum) {
         Task thisTask = allTasks.get(taskNum);
-        thisTask.setDone(true);
-        prettyPrint(new String[] {"Nice! I've marked this task as done:", thisTask.toString()});
+        if (thisTask.isDone()) {
+            prettyPrint("This task is already done!");
+        } else {
+            thisTask.setDone(true);
+            prettyPrint(new String[] {"Nice! I've marked this task as done:", thisTask.toString()});
+        }
+    }
+
+    public static void handleUnmarkTask(String command) {
+        String taskString = command.substring(7);  // "unmark " is 5 letters
+        int taskToUnmark;
+        try {
+            taskToUnmark = Integer.parseInt(taskString);
+        }
+        catch (NumberFormatException err) {
+            prettyPrint("Not a valid task number!");  // handle exception
+            return;
+        }
+
+        if (1 <= taskToUnmark && taskToUnmark <= allTasks.size()) {
+            unmarkTask(taskToUnmark - 1);
+        } else {
+            prettyPrint(String.format("Task %d does not exist!", taskToUnmark));
+        }
     }
 
     public static void unmarkTask(int taskNum) {
         Task thisTask = allTasks.get(taskNum);
-        thisTask.setDone(false);
-        prettyPrint(new String[] {"Ok, I've marked this task as not done yet:", thisTask.toString()});
+        if (!thisTask.isDone()) {
+            prettyPrint("This task has not been done yet!");
+        } else {
+            thisTask.setDone(false);
+            prettyPrint(new String[] {"Ok, I've marked this task as not done yet:", thisTask.toString()});
+        }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         String logo = indent + " ____        _        \n"
                 + indent + "|  _ \\ _   _| | _____ \n"
                 + indent + "| | | | | | | |/ / _ \\\n"
@@ -156,18 +171,13 @@ public class Duke {
                 finished = true;
             } else if (userInput.equals("list")) {  // display tasks
                 displayTasks();
-            } else if (userInput.startsWith("mark")) {  // mark task as done
-                char lastChar = userInput.charAt(userInput.length() - 1);
-                int taskToMark = Character.getNumericValue(lastChar);
-                markTask(taskToMark - 1);
-            } else if (userInput.startsWith("unmark")) {  // mark task as undone
-                char lastChar = userInput.charAt(userInput.length() - 1);
-                int taskToUnmark = Character.getNumericValue(lastChar);
-                unmarkTask(taskToUnmark - 1);
+            } else if (userInput.startsWith("mark ")) {  // mark task as done
+                handleMarkTask(userInput);
+            } else if (userInput.startsWith("unmark ")) {  // mark task as undone
+                handleUnmarkTask(userInput);
             } else {  // add task
                 addTask(userInput);
             }
-
         }
     }
 }
