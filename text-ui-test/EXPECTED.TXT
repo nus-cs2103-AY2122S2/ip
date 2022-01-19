@@ -7,4 +7,43 @@
 
 Heylo! What can I do for you today? :)
 
+ Added! Now you have 1 item in your tasks list.
+   [T][ ] borrow book
+__________________________________________________________
+ Here are your tasks. Make things happen!
+   1. [T][ ] borrow book
+__________________________________________________________
+ Added! Now you have 2 items in your tasks list.
+   [D][ ] return book 	 (by Sunday)
+__________________________________________________________
+ Added! Now you have 3 items in your tasks list.
+   [E][ ] project meeting 	 (at Mon 2-4pm)
+__________________________________________________________
+ Added! Now you have 4 items in your tasks list.
+   [D][ ] do homework 	 (by no idea :-p)
+__________________________________________________________
+ Here are your tasks. Make things happen!
+   1. [T][ ] borrow book
+   2. [D][ ] return book 	 (by Sunday)
+   3. [E][ ] project meeting 	 (at Mon 2-4pm)
+   4. [D][ ] do homework 	 (by no idea :-p)
+__________________________________________________________
+ Well done!
+   [D][X] return book 	 (by Sunday)
+__________________________________________________________
+ Here are your tasks. Make things happen!
+   1. [T][ ] borrow book
+   2. [D][X] return book 	 (by Sunday)
+   3. [E][ ] project meeting 	 (at Mon 2-4pm)
+   4. [D][ ] do homework 	 (by no idea :-p)
+__________________________________________________________
+ Oops! Fixed that for you.
+   [D][ ] return book 	 (by Sunday)
+__________________________________________________________
+ Here are your tasks. Make things happen!
+   1. [T][ ] borrow book
+   2. [D][ ] return book 	 (by Sunday)
+   3. [E][ ] project meeting 	 (at Mon 2-4pm)
+   4. [D][ ] do homework 	 (by no idea :-p)
+__________________________________________________________
  See you again! :)
