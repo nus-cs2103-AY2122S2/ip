@@ -7,6 +7,10 @@ import duke.ui.Ui;
 import java.io.IOException;
 import java.time.LocalDate;
 
+/**
+ * Represents command to find all the tasks in the task list that matches a date.
+ *
+ */
 public class FindDateCommand extends Command{
     LocalDate keyword;
 

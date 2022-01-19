@@ -1,8 +1,9 @@
 package duke.command;
 import java.io.IOException;
-import duke.task.*;
-import duke.ui.*;
-import duke.storage.*;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
 
 /**
  * Command represents the instructions interpreted by the parser.

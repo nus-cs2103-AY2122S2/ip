@@ -1,8 +1,19 @@
 package duke.parser;
 
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.DeleteCommand;
+import duke.command.FindCommand;
+import duke.command.FindDateCommand;
+
 import duke.main.DukeException;
-import duke.command.*;
-import duke.task.*;
+
+import duke.task.DeadLine;
+import duke.task.Events;
+import duke.task.ToDos;
 
 /**
  * Parser to read user commands and ensure that it is syntactically and semantically valid.

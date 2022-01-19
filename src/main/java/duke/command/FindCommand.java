@@ -6,6 +6,10 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Represents command to find all the tasks in the task list that matches a keyword.
+ *
+ */
 public class FindCommand extends Command{
     String keyword;
 
