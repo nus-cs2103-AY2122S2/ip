@@ -9,10 +9,11 @@ import java.io.PrintWriter;
 public class IOManager {
     private InputStream inputStream;
     private PrintWriter printWriter;
+    private InputHandler inputHandler;
 
     private final String WELCOME_MESSAGE = "Hello! I'm Duke\n What can I do for you?";
-    private final String ENDING_MESSAGE = "Bye. Hope to see you again soon!";
-    private final String BYE = "bye";
+    private final String BYE_COMMAND = "bye";
+    private final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
 
     public static IOManager getInstance() {
         return new IOManager();
@@ -24,11 +25,13 @@ public class IOManager {
 
     private IOManager() {
         this(System.in, new PrintWriter(System.out));
+        this.inputHandler = InputHandler.getInstance();
     }
 
     private IOManager(InputStream inputStream, PrintWriter printWriter) {
         this.inputStream = inputStream;
         this.printWriter = printWriter;
+        this.inputHandler = InputHandler.getInstance();
     }
 
     private void formattingBeforeInput() {
@@ -58,12 +61,12 @@ public class IOManager {
 
             while (true) {
                 String input = bufferedReader.readLine();
-                if (input.equalsIgnoreCase(BYE)) {
-                    display(ENDING_MESSAGE);
+                if (input.equalsIgnoreCase(BYE_COMMAND)) {
+                    display(BYE_MESSAGE);
                     break;
-                } else {
-                    display(input);
                 }
+                String output = inputHandler.handleInput(input);
+                display(output);
             }
 
         } catch (IOException ioException) {
