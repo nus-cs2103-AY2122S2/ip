@@ -52,7 +52,14 @@ public class Duke {
                     ToDo newToDo = new ToDo(userInput);
                     taskList.add(newToDo);
                     dukeAddTaskOutput(newToDo);
-                } else {
+                } else if (firstWord.equals("deadline")) {
+                    String taskName = userInput.substring(0,userInput.indexOf("/by"));
+                    String timeBy = userInput.substring(userInput.indexOf("/by") + 4);
+                    Deadline newDeadline = new Deadline(taskName,timeBy);
+                    taskList.add(newDeadline);
+                    dukeAddTaskOutput(newDeadline);
+                } else
+                {
                     taskList.add(new Task(userInput));
                     dukeOutput(" added: " + userInput);
                 }
