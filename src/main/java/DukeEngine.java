@@ -45,8 +45,13 @@ public class DukeEngine {
                     replyMessage = addTask(task);
                     break;
 
+                case "delete":
+                    assertValidItemNumber(commandDetails);
+                    replyMessage = deleteItem(Integer.parseInt(commandDetails));
+                    break;
+
                 default:
-                    replyMessage = "OOPS! I don't know what that means!";
+                    replyMessage = "OoPs! I don't know what that means :P";
             }
         } catch (DukeException e) {
             replyMessage = e.getMessage();
@@ -77,6 +82,13 @@ public class DukeEngine {
     public String addTask(Task task) {
         itemList.add(task);
         return String.format("Got it. I've added this task:\n  %s\nNow you have %s task(s) in the list",
+            task, itemList.size());
+    }
+
+    public String deleteItem(int itemNumber) {
+        Task task = itemList.remove(itemNumber - 1);
+        return String.format(
+            "Noted. I've removed this task:\n  %s\nNow you have %s task(s) in the list",
             task, itemList.size());
     }
 

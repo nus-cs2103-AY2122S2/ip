@@ -4,7 +4,7 @@ What can I do for you?
 ----------------------------------------
 
 ----------------------------------------
-OOPS! I don't know what that means!
+OoPs! I don't know what that means :P
 ----------------------------------------
 
 ----------------------------------------
@@ -43,6 +43,20 @@ Please specify a valid item number
 
 ----------------------------------------
 Please specify a numerical value for the item number instead of "exception!!"!
+----------------------------------------
+
+----------------------------------------
+Missing item number!
+----------------------------------------
+
+----------------------------------------
+Noted. I've removed this task:
+  [E][ ] barbarbar (at: idk when!)
+Now you have 1 task(s) in the list
+----------------------------------------
+
+----------------------------------------
+Please specify a valid item number
 ----------------------------------------
 
 ----------------------------------------
