@@ -10,12 +10,12 @@ public class Duke {
     public void startDuke() {
         displayHelloMessage();
         String command = sc.next();
-         String description = sc.nextLine();
-         while(!command.equals("Bye")) {
-             executeCommand(command, description);
-             command = sc.next();
-             description = sc.nextLine();
-         }
+        String description = sc.nextLine();
+        while(!command.equals("Bye")) {
+            executeCommand(command, description);
+            command = sc.next();
+            description = sc.nextLine();
+        }
         displayByeMessage();
     }
 
