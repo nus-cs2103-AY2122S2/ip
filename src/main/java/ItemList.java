@@ -20,4 +20,8 @@ class ItemList<T> {
             System.out.println(Integer.toString(index + 1) + ". " + itemList.get(index).toString());
         }
     }
+
+    void printNoItems() {
+        System.out.println("Now you have " + this.itemList.size() + " tasks in the list.");
+    }
 }
