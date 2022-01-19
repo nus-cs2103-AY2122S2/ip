@@ -118,6 +118,18 @@ public class Duke {
                                     + list.get(list.size() - 1) + "\n    Now you have " + list.size() + " tasks in the list."));
                         }
                         break;
+                    case "delete":
+                        try {
+                            int deleteIndex = Integer.parseInt(input.get(1)) - 1;
+                            Task delete = list.get(deleteIndex);
+                            list.remove(deleteIndex);
+                            System.out.println(output("Noted. I've removed this task: \n        "
+                                    + delete + "\n    Now you have " + list.size() + " tasks in the list."));
+                        } catch (IndexOutOfBoundsException | NumberFormatException ex) {
+                            DukeException exception = new DukeException("☹ OOPS!!! invalid index.");
+                            System.out.println(output(exception.toString()));
+                        }
+                        break;
                     default:
                         DukeException exception = new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                         System.out.println(output(exception.toString()));
