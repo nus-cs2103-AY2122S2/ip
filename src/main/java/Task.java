@@ -13,6 +13,10 @@ public class Task {
     return Task.noOfTasks;
   }
 
+  public static void removeTask() {
+    Task.noOfTasks--;
+  }
+
   public boolean isDone() {
     return status == 1;
   }

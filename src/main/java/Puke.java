@@ -51,6 +51,9 @@ public class Puke {
           case "event":
             add_task(tasks, command, argument);
             break;
+          case "delete":
+            delete_task(tasks, Integer.parseInt(argument));
+            break;
           default:
             System.out.println("Are you sure you're making sense?");
             break;
@@ -113,7 +116,7 @@ public class Puke {
     if (type.equals("todo")) {
       t = new Todo(args);
     } else {
-      String[] taskDetail = args.split("/.. ");
+      String[] taskDetail = args.split("/");
 
       if (taskDetail.length < 2) {
         throw new DukeException("I'll need a date/time for this task..");
@@ -128,6 +131,18 @@ public class Puke {
 
     tasks.add(t);
     System.out.println("Got it. I've added this task:\n  " + t
+                      + "\nNow you have " + Task.getNoOfTasks()
+                      + (Task.getNoOfTasks() <= 1 ? " task" : " tasks") + " in the list.");
+  }
+
+  public static void delete_task(ArrayList<Task> tasks, int taskNo) throws DukeException {
+    if (taskNo < 1 || taskNo > tasks.size()) {
+      throw new DukeException(String.format("%d is not a valid task number!", taskNo));
+    }
+    String taskInfo = tasks.get(taskNo - 1).toString();
+    tasks.remove(taskNo - 1);
+    Task.removeTask();
+    System.out.println("There's no going back now. I've removed this task:\n  " + taskInfo
                       + "\nNow you have " + Task.getNoOfTasks()
                       + (Task.getNoOfTasks() <= 1 ? " task" : " tasks") + " in the list.");
   }
