@@ -17,12 +17,19 @@ public class Siri {
 
         while (true) {
             String inputText = sc.nextLine();
+            String[] inputSplit = inputText.split(" ");
 
             if (inputText.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
+                System.out.println("Bye! Hope to see you again soon!");
                 break;
             } else if (inputText.equals("list")) {
                 toDoList.print();
+            } else if (inputSplit[0].equals("mark")) {
+                // to input index as per keyed in String (index process to 0-based will be done by ToDoList method)
+                toDoList.markItem(inputSplit[1]);
+            } else if (inputSplit[0].equals("unmark")) {
+                // to input index as per keyed in String (index process to 0-based will be done by ToDoList method)
+                toDoList.unmarkItem(inputSplit[1]);
             } else {
                 toDoList.addItem(inputText);
             }
