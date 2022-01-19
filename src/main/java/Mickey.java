@@ -93,7 +93,21 @@ public class Mickey {
                         System.out.println("\tHot dog! Complete this soon:");
                         System.out.println("\t\t" + tasks.get(toUnmark).markAsUndone());
                         break;
-                        
+
+                    case "delete":
+                        if (in.length() == 0) {
+                            throw new MickeyException.MissingInputException("\tWhoa! Minnie won't want to see a " +
+                                    "missing task.");
+                        }
+                        int toDelete = Integer.parseInt(in) - 1;
+                        if (toDelete >= tasks.size()) {
+                            throw new MickeyException.InvalidMarkException("\tNo such task!");
+                        }
+                        System.out.println("\tAlrighty. I've removed this task.");
+                        System.out.println("\t\t" + tasks.remove(toDelete));
+                        System.out.println("\tYou now have " + tasks.size() + " tasks");
+                        break;
+
                     default:
                         System.out.println("\tOh no! This is a disaster! I don't know what that means");
                         break;
