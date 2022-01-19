@@ -1,7 +1,9 @@
+import java.util.ArrayList;
+
 public class Task {
     private String description;
     private boolean isDone;
-    private static Task[] taskList = new Task[100];
+    private static ArrayList<Task> taskList = new ArrayList<Task>();
     private static int taskCount = 0;
 
     public Task(String description) {
@@ -14,13 +16,13 @@ public class Task {
     }
 
     public static void markAsDone(int index) {
-        taskList[index].isDone = true;
-        System.out.println("  " + taskList[index].toString());
+        taskList.get(index).isDone = true;
+        System.out.println("  " + taskList.get(index).toString());
     }
 
     public static void markAsNotDone(int index) {
-        taskList[index].isDone = false;
-        System.out.println("  " + taskList[index].toString());
+        taskList.get(index).isDone = false;
+        System.out.println("  " + taskList.get(index).toString());
     }
 
     public static void addToList(Task task) {
@@ -53,8 +55,9 @@ public class Task {
         } else {
             System.out.println(" Added! Now you have " + (taskCount + 1) + " items in your tasks list.");
         }
-        taskList[taskCount] = task;
-        System.out.println("  " + taskList[taskCount++].toString());
+        taskList.add(task);
+        System.out.println("  " + taskList.get(taskCount).toString());
+        taskCount++;
     }
 
     public static void printAllTasks() {
@@ -64,7 +67,7 @@ public class Task {
         }
         System.out.println(" Here are your tasks. Make things happen!");
         for (int i = 0; i < taskCount; i++) {
-            System.out.println("   " + (i + 1) + "." + taskList[i].toString());
+            System.out.println("   " + (i + 1) + "." + taskList.get(i).toString());
         }
     }
 
