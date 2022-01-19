@@ -1,0 +1,5 @@
+deadline hello \by 2024
+event bros \at 2pm-4pm
+todo haiya
+list
+bye
