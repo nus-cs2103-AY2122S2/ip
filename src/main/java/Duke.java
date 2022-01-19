@@ -77,7 +77,7 @@ public class Duke {
     }
 
     private void mark(int index, boolean done) {
-        if (index >= tasks.size()) {
+        if (index >= tasks.size() || index < 0) {
             throw new DukeException("Please enter a valid index.");
         }
         tasks.set(index, tasks.get(index).mark(done));
@@ -87,6 +87,16 @@ public class Duke {
             System.out.println(indent + "OK, I've marked this task as not done yet:");
         }
         System.out.println(indent + "  " + tasks.get(index));
+    }
+
+    private void delete(int index) {
+        if (index >= tasks.size() || index < 0) {
+            throw new DukeException("Please enter a valid index.");
+        }
+        Task t = tasks.remove(index);
+        System.out.println(indent + "Noted. I've removed this task:");
+        System.out.println(indent + "  " + t);
+        System.out.println(indent + "Now you have " + tasks.size() + " tasks in the list.");
     }
 
     private static void bye() {
@@ -132,6 +142,13 @@ public class Duke {
                         cindy.mark(temp.nextInt() - 1, false);
                     } else {
                         throw new DukeException("Please enter an index to unmark.");
+                    }
+                } else if (s.startsWith("delete")) {
+                    Scanner temp = new Scanner(s.substring(6));
+                    if (temp.hasNextInt()) {
+                        cindy.delete(temp.nextInt() - 1);
+                    } else {
+                        throw new DukeException("Please enter an index to delete.");
                     }
                 } else if (s.startsWith("bye")) {
                     Duke.bye();
