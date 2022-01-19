@@ -1,14 +1,14 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class ToDoList {
-    ArrayList<ToDoItem> list;
-    public ToDoList() {
-        this.list = new ArrayList<ToDoItem>();
+class TaskList {
+    ArrayList<Task> list;
+    public TaskList() {
+        this.list = new ArrayList<Task>();
     }
 
     public void addTo(String item, boolean marked) {
-        ToDoItem newItem = new ToDoItem(item, marked);
+        Task newItem = new Task(item, marked);
         list.add(newItem);
     }
 
@@ -21,15 +21,15 @@ class ToDoList {
         return output;
     }
 
-    public ToDoItem getItem(int itemNo) {
+    public Task getItem(int itemNo) {
         return list.get(itemNo);
     }
 }
 
-class ToDoItem {
+class Task {
     private String name;
     private boolean isMarked = false;
-    public ToDoItem(String name, boolean isMarked) {
+    public Task(String name, boolean isMarked) {
         this.name = name;
         this.isMarked = isMarked;
     }
@@ -68,7 +68,7 @@ public class Yale {
         System.out.println("Hello from\n" + logo);
         System.out.println("Hi, I'm Yale!\n" );
         Scanner scanner = new Scanner(System.in);
-        ToDoList list = new ToDoList();
+        TaskList list = new TaskList();
         while (true) {
             String command = receiveInput(scanner);
             performAction(command, list);
@@ -84,7 +84,7 @@ public class Yale {
         return input;
     }
 
-    public static void performAction(String command, ToDoList list) {
+    public static void performAction(String command, TaskList list) {
         if (command.equals("list")) {
             System.out.println("Here are the tasks in your list\n"
                     + list.listOut());
