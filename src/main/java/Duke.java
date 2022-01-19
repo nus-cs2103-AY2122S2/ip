@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -35,12 +36,13 @@ public class Duke {
         /**
          * current number of to do tasks
          */
-        int count = 0;
+//        int count = 0;
 
         /**
          * Array container for user's to do tasks
          */
-        Task[] todoList = new Task[100];
+//        Task[] todoList = new Task[100];
+        ArrayList<Task> todoList = new ArrayList<Task>();
 
         String userInput = sc.nextLine();
 
@@ -48,7 +50,7 @@ public class Duke {
             /**
              * A string to display the remaining task number
              */
-            String displayTaskAmount = String.format("Now you have %d tasks in the list.", count + 1);
+            String displayTaskAmount = String.format("Now you have %d tasks in the list.", todoList.size() + 1);
 
             if (userInput.equals("bye")) {
                 isBye = true;
@@ -74,8 +76,8 @@ public class Duke {
                     case "list":
                         System.out.println(lines);
                         System.out.println("    Here are the tasks in your list:");
-                        for (int i = 0; i < count; i++) {
-                            String display = String.format("    %d.%s", i + 1, todoList[i].toString());
+                        for (int i = 0; i < todoList.size(); i++) {
+                            String display = String.format("    %d.%s", i + 1, todoList.get(i).toString());
                             System.out.println(display);
                         }
                         System.out.println(lines);
@@ -97,7 +99,7 @@ public class Duke {
 
                         // adding task to todoList
                         Todo userToDoTask = new Todo(userInputTask);
-                        todoList[count] = userToDoTask;
+                        todoList.add(userToDoTask);
 
                         // display to do task
                         System.out.println("    Got it. I've added this task:");
@@ -105,7 +107,7 @@ public class Duke {
                         System.out.println("    " + displayTaskAmount);
                         System.out.println(lines);
 
-                        count++;
+//                        count++;
                         break;
 
                     case "deadline":
@@ -147,7 +149,7 @@ public class Duke {
                         System.out.println(lines);
                         // adding task to todoList
                         Deadline userDeadlineTask = new Deadline(deadlineDescription, by);
-                        todoList[count] = userDeadlineTask;
+                        todoList.add(userDeadlineTask);
 
                         // displaying
                         System.out.println("    Got it. I've added this task:");
@@ -155,7 +157,7 @@ public class Duke {
                         System.out.println("    " + displayTaskAmount);
                         System.out.println(lines);
 
-                        count++;
+//                        count++;
                         break;
 
                     case "event":
@@ -190,7 +192,7 @@ public class Duke {
                         }
 
                         System.out.println(lines);
-                        
+
                         // splitting event into description and dateTime
                         String[] eventTaskArr = userInputTask.split(" /at ");
                         String eventDescription = eventTaskArr[0];
@@ -198,24 +200,24 @@ public class Duke {
 
                         // adding task to todoList
                         Event userEventTask = new Event(eventDescription, eventDateTime);
-                        todoList[count] = userEventTask;
+                        todoList.add(userEventTask);
 
                         System.out.println("    Got it. I've added this task:");
                         System.out.println("        " + userEventTask.toString());
                         System.out.println("    " + displayTaskAmount);
                         System.out.println(lines);
 
-                        count++;
+//                        count++;
                         break;
 
                     case "mark":
                         int taskToMark = Integer.parseInt(userInputArr[1]);
-                        todoList[taskToMark - 1].markAsDone();
+                        todoList.get(taskToMark - 1).markAsDone();
 
                         System.out.println(lines);
                         System.out.println("    Nice! I've marked this task as done:");
 
-                        String taskMarkString = String.format("%s", todoList[taskToMark - 1].toString());
+                        String taskMarkString = String.format("%s", todoList.get(taskToMark - 1).toString());
                         System.out.println("    " + taskMarkString);
                         System.out.println(lines);
 
@@ -223,13 +225,30 @@ public class Duke {
 
                     case "unmark":
                         int taskToUnmark = Integer.parseInt(userInputArr[1]);
-                        todoList[taskToUnmark - 1].markAsNotDone();
+                        todoList.get(taskToUnmark - 1).markAsNotDone();
 
                         System.out.println(lines);
                         System.out.println("    OK, I've marked this task as not done yet:");
 
-                        String taskString = String.format("%s", todoList[taskToUnmark - 1].toString());
+                        String taskString = String.format("%s", todoList.get(taskToUnmark - 1).toString());
                         System.out.println("    " + taskString);
+                        System.out.println(lines);
+                        break;
+
+                    case "delete":
+                        int taskToDelete = Integer.parseInt(userInputArr[1]) - 1;
+                        // to be removed task
+                        Task tobeRemoved = todoList.get(taskToDelete);
+
+                        // deleting task from the array list
+                        todoList.remove(taskToDelete);
+
+                        System.out.println(lines);
+                        System.out.println("    Noted. I've removed this task:");
+                        System.out.println("        " + tobeRemoved.toString());
+
+                        String taskRemainingString = String.format("    Now you have %d tasks in the list.", todoList.size());
+                        System.out.println(taskRemainingString);
                         System.out.println(lines);
                         break;
                 }
