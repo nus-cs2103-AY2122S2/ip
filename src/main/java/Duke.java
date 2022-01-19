@@ -1,10 +1,25 @@
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        Duke duke = new Duke();
+        System.out.println(duke.formatAnswer("hello"));
     }
+
+    private String formatAnswer(String input) {
+        /**
+         * Prepares input for printing to System.out (adds top and bottom line)
+         */
+
+        // Variables
+        String output;
+        String line = "____________________________________________________________";
+
+        output = "\t" + line + "\n"
+                + "\t" + input + "\n"
+                + "\t" + line + "\n";
+
+        return output;
+
+    }
+
+    
 }
