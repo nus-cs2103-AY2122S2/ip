@@ -41,7 +41,6 @@ public class Karen {
     }
 
     protected boolean validateHelper(String command) throws KarenException {
-        System.out.println(command);
         if (command.equals("list") | command.equals("bye")) {
             return true;
         }
