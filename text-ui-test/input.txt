@@ -7,4 +7,17 @@ mark 4
 todo borrow book
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
+list
+todo
+todo
+event without at
+deadline without by
+invalidrandomcommand
+mark 1
+unmark 2
+mark 1
+unmark 2
+delete 1
+delete invalidnum
+delete
 bye

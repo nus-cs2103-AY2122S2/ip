@@ -5,7 +5,7 @@ public class DeadLines extends Task {
         super(task);
         this.deadline = deadline;
         if (task.length() < 8) {
-            throw new DukeException("     ☹ OOPS!!! The description of a deadline cannot be empty.");
+            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
         }
     }
 

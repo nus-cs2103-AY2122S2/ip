@@ -7,12 +7,6 @@ public class Task {
         this.done = false;
     }
 
-    // Default Constructor
-    public Task() {
-        this.task = null;
-        this.done = null;
-    }
-
     public void mark() {
         this.done = true;
     }
