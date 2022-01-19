@@ -1,9 +1,7 @@
 Yoooo! My name is Feline!
 How can I help you bro?
 
-Got it. I've added this task:
-[ ] drink coffee
-Now you have 1 task(s) in your list.
+I don't understand bro, pls specify what you wanna do.
 
 
 Got it. I've added this task:
