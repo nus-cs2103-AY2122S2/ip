@@ -51,7 +51,13 @@ public class Duke {
                 list_of_inputs.add(deadLineTemp);
                 System.out.println("Deadline for this task:\n " + deadLineTemp.message() + "\n You have " + list_of_inputs.size() + " tasks in the list.");
 
-             } else {
+             } else if (temp[0].equals("event")) {
+                String[] event = temp[1].split("/at", 2);
+                Event eventTemp = new Event(event[0],event[1]);
+                list_of_inputs.add(eventTemp);
+                System.out.println("I have added this task and the event time is: \n " + eventTemp.message() + "\n You have " + list_of_inputs.size() + " tasks in the list.");
+
+            } else {
                 System.out.println("added:" + inp);
                 list_of_inputs.add(new Task(inp));
             }
