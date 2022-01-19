@@ -13,15 +13,18 @@ public class Siri {
         System.out.println("What can I do for you?");
 
         Scanner sc = new Scanner(System.in);
+        ToDoList toDoList = new ToDoList();
 
         while (true) {
-            String inputText = sc.next();
+            String inputText = sc.nextLine();
 
             if (inputText.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
+            } else if (inputText.equals("list")) {
+                toDoList.print();
             } else {
-                System.out.printf("%s\n", inputText);
+                toDoList.addItem(inputText);
             }
         }
     }
