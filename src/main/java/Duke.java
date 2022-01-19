@@ -9,6 +9,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         String border = "    ____________________________________________________________\n";
         String spacing = "    ";
+        ListStorage myListStorage = new ListStorage();
         System.out.println("Hello from\n" + logo);
         Scanner myScanner = new Scanner(System.in);
         System.out.println(border + spacing +
@@ -17,7 +18,12 @@ public class Duke {
                 border);
         String cmd = myScanner.nextLine();
         while (!cmd.equals("bye")) {
-            System.out.println(border + spacing + cmd + "\n" + border);
+            if(cmd.equals("list")) {
+                System.out.println(border + myListStorage.printList() + border);
+            } else {
+                String toPrint = myListStorage.addToList(cmd);
+                System.out.println(border + spacing + toPrint + "\n" + border);
+            }
             cmd = myScanner.nextLine();
         }
         System.out.println(border + spacing + "Bye. Hope to see you again soon!\n" + border);
