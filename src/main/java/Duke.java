@@ -31,22 +31,11 @@ public class Duke {
      */
     private static ArrayList<Task> list = new ArrayList<>();
 
-    /**
-     * Adds texts to the list object and outputs the formatted
-     * string with the text
-     *
-     * @param text text added to the list.
-     * @return formatted string with added text
-     * @see Task
-     */
-    private static String addToList(String text) {
-        list.add(new Task(text));
-        return formatString("Added: " +  text);
-    }
 
     /**
      * Returns the string containing the task text on the list with
-     * formatting
+     * formatting.
+     *
      * @return formatted string with list text
      */
     private static String listToString() {
@@ -55,8 +44,7 @@ public class Duke {
         Task task;
         for (int i = 0; i < list.size(); i++) {
             task = list.get(i);
-            stringBuilder.append((i + 1) + ". [" + task.getStatusIcon() + "] "
-                    + list.get(i).getDescription());
+            stringBuilder.append((i + 1) +  "." + task.toString());
             if (i != list.size() - 1) {
                 stringBuilder.append("\n");
             }
@@ -87,8 +75,8 @@ public class Duke {
     private static String markTask(int point) {
        Task task = list.get(point - 1);
        task.markAsDone();
-       return Duke.formatString("Great! I have marked this task as done:\n"
-               + "[" + task.getStatusIcon() + "] " + task.getDescription());
+       return Duke.formatString("Great! I have marked this task as done:\n "
+               + task.toString());
     }
 
     /**
@@ -101,8 +89,90 @@ public class Duke {
     private static String unmarkTask(int point) {
         Task task = list.get(point - 1);
         task.unmarkAsDone();
-        return Duke.formatString("OK, I've marked this task as not done yet:\n"
-                + "[ ] " + task.getDescription());
+        return Duke.formatString("OK, I've marked this task as not done yet:\n "
+                + task.toString());
+    }
+
+    /**
+     * Creates and adds a ToDo task to the list.
+     *
+     * @param tokens input tokens to parse.
+     * @return formatted string with ToDo task.
+     */
+    private static String addToDo(String[] tokens) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 1; i < tokens.length; i++) {
+            stringBuilder.append(tokens[i]);
+            if (i != tokens.length - 1) {
+                stringBuilder.append(" ");
+            }
+        }
+        ToDo task = new ToDo(stringBuilder.toString());
+        list.add(task);
+        return Duke.formatString("Got it! I've added this ToDo task:\n " +
+                task.toString() +"\nNow you have " + list.size()
+                + (list.size() <= 1 ? " task" : " tasks") + " in the list.");
+    }
+
+
+    /**
+     * Creates and add a Deadline task.
+     *
+     * @param tokens input tokens to parse.
+     * @return formatted string with Deadline Task.
+     */
+    private static String addDeadline(String[] tokens) {
+        StringBuilder stringBuilder = new StringBuilder();
+        String by;
+        String description = "";
+        for (int i = 1; i < tokens.length; i++) {
+            stringBuilder.append(tokens[i]);
+            if (i + 1 < tokens.length) {
+                if (tokens[i + 1].equals("/by")) {
+                   description = stringBuilder.toString();
+                   stringBuilder = new StringBuilder();
+                   i++;
+               } else {
+                   stringBuilder.append(" ");
+               }
+            }
+        }
+        by = stringBuilder.toString();
+        Deadline task = new Deadline(description, by);
+        list.add(task);
+        return Duke.formatString("Got it! I've added this Deadline task:\n " +
+                task.toString() +"\nNow you have " + list.size()
+                        + (list.size() <= 1 ? " task" : " tasks") + " in the list.");
+    }
+
+    /**
+     * Creates and adds a Event.
+     *
+     * @param tokens input tokens to parse.
+     * @return formatted string with Event task.
+     */
+    private static String addEvent(String[] tokens) {
+        StringBuilder stringBuilder = new StringBuilder();
+        String at;
+        String description = "";
+        for (int i = 1; i < tokens.length; i++) {
+            stringBuilder.append(tokens[i]);
+            if (i + 1 < tokens.length) {
+                if (tokens[i + 1].equals("/at")) {
+                    description = stringBuilder.toString();
+                    stringBuilder = new StringBuilder();
+                    i++;
+                } else {
+                    stringBuilder.append(" ");
+                }
+            }
+        }
+        at = stringBuilder.toString();
+        Event task = new Event(description, at);
+        list.add(task);
+        return Duke.formatString("Got it! I've added this Event task:\n " +
+                task.toString() +"\nNow you have " + list.size()
+                + (list.size() <= 1 ? " task" : " tasks") + " in the list.");
     }
 
     /**
@@ -131,8 +201,12 @@ public class Duke {
                 System.out.println(Duke.markTask(Integer.parseInt(tokens[1])));
             } else if (tokens[0].equals("unmark")) {
                 System.out.println(Duke.unmarkTask(Integer.parseInt(tokens[1])));
-            } else {
-                System.out.println(Duke.addToList(input));
+            } else if (tokens[0].equals("todo")) {
+                System.out.println(Duke.addToDo(tokens));
+            } else if (tokens[0].equals("deadline")) {
+                System.out.println(Duke.addDeadline(tokens));
+            } else if (tokens[0].equals("event")) {
+                System.out.println(Duke.addEvent(tokens));
             }
             input = scanner.nextLine();
             tokens = input.split("\\s+");
