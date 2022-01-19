@@ -1,7 +1,7 @@
-public class Task {
+public abstract class Task {
 
-    private final String name;
-    private boolean isDone;
+    protected final String name;
+    protected boolean isDone;
 
     Task(String name) {
         this.name = name;
@@ -16,13 +16,8 @@ public class Task {
         isDone = false;
     }
 
-    private String getStatusIcon() {
-        return isDone ? "X" : " ";
-    }
-
-    @Override
-    public String toString() {
-        return String.format("[%s] %s", getStatusIcon(), this.name);
+    protected String getStatusIcon() {
+        return isDone ? "✓" : "✗";
     }
 
 }

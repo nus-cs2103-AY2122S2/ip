@@ -37,8 +37,9 @@ public class Duke {
         String input = ioIn.nextLine();
         printLine();
 
-        String[] splitInput = input.split("\\s+");
+        String[] splitInput = input.split("\\s+", 2);
         String command = splitInput[0];
+        String argument = splitInput.length == 2 ? splitInput[1] : "";
         switch (command) {
             case "bye":
                 ioOut.println("Seeeee youuuu sooon...");
@@ -46,35 +47,60 @@ public class Duke {
             case "list":
                 list(); break;
             case "mark":
-                mark(splitInput); break;
+                mark(argument); break;
             case "unmark":
-                unmark(splitInput); break;
+                unmark(argument); break;
+            case "todo":
+                todo(argument); break;
+            case "deadline":
+                deadline(argument); break;
+            case "event":
+                event(argument); break;
             default:
-                add(input); break;
+                break;
         }
         return true;
     }
 
     private static void list() {
         ioOut.println("Here are the tasks in your list:");
-        ioOut.print(todoList.showList());
+        ioOut.print(todoList.toString());
     }
 
-    private static void mark(String[] splitInput) {
-        int index = Integer.parseInt(splitInput[1]) - 1;
+    private static void mark(String argument) {
+        int index = Integer.parseInt(argument) - 1;
         ioOut.println("Nice! I've marked this task as done: ");
         ioOut.println(todoList.markItem(index));
     }
 
-    private static void unmark(String[] splitInput) {
-        int index = Integer.parseInt(splitInput[1]) - 1;
+    private static void unmark(String argument) {
+        int index = Integer.parseInt(argument) - 1;
         ioOut.println("OK, I've marked this task as not done yet:");
         ioOut.println(todoList.unmarkItem(index));
     }
 
-    private static void add(String input) {
-        todoList.addItem(input);
-        ioOut.println("added: " + input);
+    private static void todo(String argument) {
+        ioOut.println("Got it. I've added this task: ");
+        ioOut.println(todoList.addTodo(argument));
+        ioOut.println(todoList.listCount());
+    }
+
+    private static void deadline(String argument) {
+        String[] split = argument.split(" /by ", 2);
+        String name = split[0];
+        String date = split[1];
+        ioOut.println("Got it. I've added this task: ");
+        ioOut.println(todoList.addDeadline(name, date));
+        ioOut.println(todoList.listCount());
+    }
+
+    private static void event(String argument) {
+        String[] split = argument.split(" /at ", 2);
+        String name = split[0];
+        String date = split[1];
+        ioOut.println("Got it. I've added this task: ");
+        ioOut.println(todoList.addEvent(name, date));
+        ioOut.println(todoList.listCount());
     }
 
     public static void main(String[] args) {
