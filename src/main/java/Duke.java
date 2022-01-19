@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import tasks.Task;
 
 public class Duke {
     private static final String INDENTATION = "    ";
