@@ -1,4 +1,4 @@
-import exceptions.BaseException;
+import exceptions.DukeException;
 import exceptions.InvalidCommandException;
 import exceptions.InvalidTaskParams;
 import tasks.Deadline;
@@ -28,7 +28,7 @@ public class DukeList {
      *
      * @param taskString
      */
-    public String add(String taskString) throws BaseException {
+    public String add(String taskString) throws DukeException {
         Task task = addTask(taskString);
         return "Got it. I've added this task:\n"
                 + String.format("\t%s\n", task)
@@ -42,7 +42,7 @@ public class DukeList {
         String[] params;
 
         if (taskArr.length <= 1) {
-            throw new InvalidTaskParams("Description cannot be empty!");
+            throw new InvalidTaskParams("☹ OOPS!!! The description of a todo cannot be empty.");
         }
 
         switch (taskType) {
@@ -53,7 +53,7 @@ public class DukeList {
             case DEADLINE:
                 params = taskArr[1].split(" /by ");
                 if (params.length <= 1) {
-                    throw new InvalidTaskParams("Deadline of the task must be set!");
+                    throw new InvalidTaskParams("☹ OOPS!!! The deadline of a task cannot be empty.");
                 }
                 task = new Deadline(params[0], params[1]);
                 break;
@@ -61,7 +61,7 @@ public class DukeList {
             case EVENT:
                 params = taskArr[1].split(" /at ");
                 if (params.length <= 1) {
-                    throw new InvalidTaskParams("Time of the event must be set!");
+                    throw new InvalidTaskParams("☹ OOPS!!! The time of an event cannot be empty.");
                 }
                 task = new Event(params[0], params[1]);
                 break;
@@ -80,7 +80,7 @@ public class DukeList {
      * @param idx
      * @return
      */
-    public String markTask(int idx) {
+    public String markTask(int idx) throws IndexOutOfBoundsException {
         Task task = this.list.get(idx - 1);
         task.markAsCompleted();
 
@@ -94,7 +94,7 @@ public class DukeList {
      * @param idx
      * @return
      */
-    public String unmarkTask(int idx) {
+    public String unmarkTask(int idx) throws IndexOutOfBoundsException {
         Task task = this.list.get(idx - 1);
         task.markAsUncompleted();
 

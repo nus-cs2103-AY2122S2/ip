@@ -1,6 +1,6 @@
 package exceptions;
 
-public class InvalidCommandException extends BaseException {
+public class InvalidCommandException extends DukeException {
     /**
      * Constructor for InvalidCommandException.
      */

@@ -1,10 +1,5 @@
-import exceptions.BaseException;
-import exceptions.InvalidCommandException;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Todo;
+import exceptions.DukeException;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -81,13 +76,21 @@ public class Duke {
                 break;
 
             case MARK_COMMAND:
-                idx = Integer.parseInt(argv[1]);
-                result = this.list.markTask(idx);
+                try {
+                    idx = Integer.parseInt(argv[1]);
+                    result = this.list.markTask(idx);
+                } catch (IndexOutOfBoundsException e) {
+                    result = e.getMessage();
+                }
                 break;
 
             case UNMARK_COMMAND:
-                idx = Integer.parseInt(argv[1]);
-                result = this.list.unmarkTask(idx);
+                try {
+                    idx = Integer.parseInt(argv[1]);
+                    result = this.list.unmarkTask(idx);
+                } catch (IndexOutOfBoundsException e) {
+                    result = e.getMessage();
+                }
                 break;
 
             case TODO_COMMAND:
@@ -95,13 +98,13 @@ public class Duke {
             case EVENT_COMMAND:
                 try {
                     result = this.list.add(cmd);
-                } catch (BaseException e) {
+                } catch (DukeException e) {
                     result = e.getMessage();
                 }
                 break;
 
             default:
-                result = "Unrecognised command.";
+                result = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
                 break;
         }
         return result;

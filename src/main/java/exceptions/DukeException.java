@@ -1,10 +1,10 @@
 package exceptions;
 
-public class BaseException extends Exception {
+public class DukeException extends Exception {
     /**
      * Constructor for BaseException.
      */
-    public BaseException() {
+    public DukeException() {
         super();
     }
 
@@ -13,7 +13,7 @@ public class BaseException extends Exception {
      *
      * @param errMsg error message.
      */
-    public BaseException(String errMsg) {
+    public DukeException(String errMsg) {
         super(errMsg);
     }
 }

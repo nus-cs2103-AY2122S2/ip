@@ -1,6 +1,6 @@
 package exceptions;
 
-public class InvalidTaskParams extends BaseException {
+public class InvalidTaskParams extends DukeException {
     /**
      * Constructor for InvalidTaskParams.
      */
