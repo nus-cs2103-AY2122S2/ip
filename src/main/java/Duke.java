@@ -5,11 +5,10 @@ import java.util.ArrayList;
 
 
 public class Duke {
-    public static ArrayList <String > manager = new ArrayList<>();
+    public static ArrayList<Task> manager = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-//        ArrayList<String> manager = new ArrayList<String>();
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -28,6 +27,12 @@ public class Duke {
                 break;
             } else if (instruct.equals("list")) {
                 reportList();
+            } else if (instruct.startsWith("mark")) {
+                String[] details = instruct.split(" ");
+                markAsDone(Integer.parseInt(details[1]));
+            } else if (instruct.startsWith("unmark")) {
+                String[] details = instruct.split(" ");
+                markNotDone(Integer.parseInt(details[1]));
             } else {
                 addTask(instruct);
             }
@@ -56,12 +61,36 @@ public class Duke {
     public static void reportList() {
         int len = manager.size();
         for (int i = 0; i < len; i++) {
-            System.out.println((i + 1) + ": " + manager.get(i));
+            System.out.println((i + 1) + ". " + manager.get(i).toString());
         }
     }
 
     public static void addTask(String instruct) {
-        manager.add(instruct);
+        manager.add(new Task(instruct));
         System.out.println("added: " + instruct);
+    }
+
+    public static Task findTask(int num) {
+        Task desiredTask = new Task("empty task");
+        for (int i = 1; i <= manager.size(); i++) {
+            if (i == num) {
+                desiredTask = manager.get(i - 1);
+            }
+        }
+        return desiredTask;
+    }
+
+    public static void markAsDone(int num) {
+        Task t = findTask(num);
+        t.markDone();
+        System.out.println("Congrats! Keep going:)");
+        System.out.println(t.toString());
+    }
+
+    public static void markNotDone(int num) {
+        Task t = findTask(num);
+        t.undo();
+        System.out.println("No worries:) Stay motivated!");
+        System.out.println(t.toString());
     }
 }
