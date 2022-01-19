@@ -1,5 +1,6 @@
 public class ToDo extends Task {
 
+    public Duke.TaskType type = Duke.TaskType.TODO;
     public ToDo(String taskName) {
         super(taskName);
     }

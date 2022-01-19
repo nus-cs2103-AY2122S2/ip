@@ -1,6 +1,7 @@
 public class Event extends Task {
 
     public String eventTime;
+    public Duke.TaskType type = Duke.TaskType.EVENT;
 
     public Event(String taskName, String eventTime) {
         super(taskName);

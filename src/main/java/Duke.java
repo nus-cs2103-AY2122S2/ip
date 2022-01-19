@@ -9,6 +9,12 @@ public class Duke {
 
     public static ArrayList<Task> allTasks = new ArrayList<>();
 
+    public enum TaskType {
+        TODO,
+        EVENT,
+        DEADLINE
+    }
+
     public static void printIndent(String s) {
         System.out.println(indent + s);
     }
@@ -83,6 +89,7 @@ public class Duke {
             prettyPrint("I don't think I know what this is!");  // handle exception
             return;
         }
+
         allTasks.add(t);
         String[] messages = new String[] {
                 "Got it. I've added this task:",

@@ -1,6 +1,7 @@
 public class Deadline extends Task {
 
     public String deadline;
+    public Duke.TaskType type = Duke.TaskType.DEADLINE;
 
     public Deadline(String taskName, String deadline) {
         super(taskName);
