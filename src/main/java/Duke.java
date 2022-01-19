@@ -1,14 +1,15 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Duke {
 
-    private static boolean sizeCheck(List<Task> inputList) {
-        return inputList.size() < 100;
+
+    private static void sizeCheck(List<Task> inputList) throws DukeException {
+        if (inputList.size() >= 100)
+            throw new DukeException("Too many items in the list! Please consider deleting old items.");
     }
 
-    private static void run() {
+    // Included error handling for invalid commands, large list, and invalid list index.
+    private static void run() throws DukeException {
         Scanner sc = new Scanner(System.in);
         boolean exitFlag = false;
         List<Task> taskList = new ArrayList<>();
@@ -17,38 +18,48 @@ public class Duke {
             String input = sc.nextLine();
             String[] inputArr = input.split(" ");
 
-            switch (inputArr[0]) {
-                case "exit": botResponse("Pleasure to be of service, see you soon!");
-                             exitFlag = true;
-                             break;
-                case "list": listResponse(taskList);
-                             break;
-                case "mark":
-                case "unmark": Task toggleTask = taskList.get(Integer.parseInt(inputArr[1]) - 1);
-                               toggleTask.isMarked = inputArr[0].equals("mark");
-                               markResponse(toggleTask);
-                               break;
-                case "todo": ToDo newToDo = new ToDo(input);
-                             taskList.add(newToDo);
-                             subtaskResponse(taskList);
-                             break;
-                case "event": Event newEvent = new Event(input.split(" /at "));
-                              taskList.add(newEvent);
-                              subtaskResponse(taskList);
-                              break;
-                case "deadline": Deadline newDL = new Deadline(input.split(" /by "));
-                                 taskList.add(newDL);
-                                 subtaskResponse(taskList);
-                                 break;
-                default:
-                    if (sizeCheck(taskList)) {
-                        Task newTask = new Task(input);
-                        taskList.add(newTask);
-                        botResponse("added: " + input);
-                    } else {
-                        botResponse("List is full, sorry! :(");
-                    }
+            try {
+                switch (inputArr[0].toLowerCase()) {
+                    case "exit":
+                        botResponse("Pleasure to be of service, see you soon!");
+                        exitFlag = true;
+                        break;
+                    case "list":
+                        listResponse(taskList);
+                        break;
+                    case "mark":
+                    case "unmark":
+                        int lastIdx = Integer.parseInt(inputArr[1]) - 1;
+                        if (lastIdx < 0 || lastIdx >= taskList.size()) {
+                            throw new DukeException("Please enter a valid index.");
+                        }
+                        Task toggleTask = taskList.get(lastIdx);
+                        toggleTask.isMarked = inputArr[0].equals("mark");
+                        markResponse(toggleTask);
+                        break;
+                    case "todo":
+                        sizeCheck(taskList);
+                        taskList.add(new ToDo(input));
+                        subtaskResponse(taskList);
+                        break;
+                    case "event":
+                        sizeCheck(taskList);
+                        taskList.add(new Event(input.split(" /at ")));
+                        subtaskResponse(taskList);
+                        break;
+                    case "deadline":
+                        sizeCheck(taskList);
+                        taskList.add(new Deadline(input.split(" /by ")));
+                        subtaskResponse(taskList);
+                        break;
+                    default:
+                        throw new DukeException("Invalid command!");
+                }
+            } catch (DukeException e) {
+                botResponse(e.toString());
             }
+
+
         }
         sc.close();
     }
@@ -75,7 +86,7 @@ public class Duke {
 
         System.out.println(divString);
         System.out.println(strPadding + outString);
-        System.out.println(strPadding + "   " + task.toString());
+        System.out.println(strPadding + "   " + task);
         System.out.println(divString);
     }
 
@@ -92,7 +103,7 @@ public class Duke {
         }
         System.out.println(divString);
         System.out.println(strPadding + "Here are the tasks in your list: ");
-        System.out.println(sb.toString());
+        System.out.println(sb);
         System.out.println(divString);
     }
 
@@ -114,7 +125,7 @@ public class Duke {
         botResponse(greeting);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         greet();
         run();
     }
