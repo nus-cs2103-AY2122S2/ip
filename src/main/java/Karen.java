@@ -1,16 +1,13 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Karen {
-    Task[] toDos;
-    int runningIndex;
-    int tasksLength;
+    ArrayList<Task> toDos;
 
     public Karen() {
-        this.toDos = new Task[100];
-        this.runningIndex = 0;
-        this.tasksLength = 0;
+        this.toDos = new ArrayList<Task>();
     }
 
     public void echo(String statement) {
@@ -20,14 +17,16 @@ public class Karen {
     }
 
     public void addTask(Task item) {
-        this.toDos[this.runningIndex] = item;
-        this.runningIndex++;
-        this.tasksLength++;
+        this.toDos.add(item);
     }
+    public Task getTask(int index) {
+        return this.toDos.get(index);
+    }
+    public void deleteTask(int index) {this.toDos.remove(index);}
 
-    public String formatAddTask(Task item) {
-        return String.format("Fine. Task added:\n %s\nNow you have %d in total.",
-                item.toString(), this.tasksLength);
+    public String formatTask(Task item, String action) {
+        return String.format("Fine. Task %s:\n %s\nNow you have %d in total.",
+                action, item.toString(), this.toDos.size());
     }
 
     public boolean validateCommand(String command){
@@ -44,11 +43,15 @@ public class Karen {
         if (command.equals("list") | command.equals("bye")) {
             return true;
         }
-        else if (command.matches("(un)?mark.*")) {
-            if (command.matches("(un)?mark \\d+")) {
+        else if (command.matches("((un)?mark|delete).*")) {
+            if (command.matches("((un)?mark|delete) \\d+")) {
                 return true;
+            } else if (command.matches("^(un)?mark.*")) {
+                throw new KarenException("You can only mark/unmark with an integer index");
+            } else if (command.matches("^delete.*")) {
+                throw new KarenException("You can only delete with an integer index");
             }
-            throw new KarenException("You can only mark/unmark with an integer index");
+
         }
         else if (command.matches("todo.*")) {
             if (command.matches("todo (.*)")) {
@@ -95,19 +98,16 @@ public class Karen {
             System.exit(0);
         }
         else if (command.equals("list")) {
-            if (this.tasksLength==0)
+            if (this.toDos.size()==0)
             {
                 output = "Nothing is even added yet.";
             } else
             {
-                int counter = 0;
                 output = "";
+                int counter = 0;
                 for (Task item: this.toDos) {
                     output = output.concat(String.format("%d.%s\n", counter+1, item.toString()));
                     counter++;
-                    if (counter >= this.runningIndex) {
-                        break;
-                    }
                 }
             }
 
@@ -115,20 +115,34 @@ public class Karen {
         //  commands that require params
         else if (command.matches("(un)?mark .*")) {
             int index = Integer.valueOf(command.split(" ")[1]);
-            Task getTask = this.toDos[index-1];
-            if (command.startsWith("mark")) {
-                getTask.markDone();
-                output = String.format("This task is finally done:\n  %s",getTask.toString());
-            } else if (command.startsWith("unmark")) {
-                getTask.markUndone();
-                output = String.format("This task is now incomplete - unacceptable:\n  %s",getTask.toString());
+            try {
+                Task getTask = this.getTask(index-1);
+                if (command.startsWith("mark")) {
+                    getTask.markDone();
+                    output = String.format("This task is finally done:\n  %s",getTask.toString());
+                } else if (command.startsWith("unmark")) {
+                    getTask.markUndone();
+                    output = String.format("This task is now incomplete - unacceptable:\n  %s",getTask.toString());
+                }
+            } catch (IndexOutOfBoundsException err){
+                output = String.format("Are you sure that [%d] is even in the 'list' command?", index);
+            }
+        }
+        else if (command.matches("^delete .*")) {
+            int index = Integer.valueOf(command.split(" ")[1]);
+            try {
+                Task item = this.getTask(index-1);
+                this.deleteTask(index-1);
+                output = this.formatTask(item, "removed");
+            } catch (IndexOutOfBoundsException err) {
+                output = String.format("Are you sure that [%d] is even in the 'list' command?", index);
             }
         }
         else if (command.matches("todo (.*)"))  {
             String item_descriptor = command.split(" ", 2)[1];
             ToDo item = new ToDo(item_descriptor);
             this.addTask(item);
-            output = this.formatAddTask(item);
+            output = this.formatTask(item, "added");
         }
         else if (command.matches("deadline (.*) \\/by (.*)")) {
             Pattern p = Pattern.compile("deadline (.*) \\/by (.*)");
@@ -136,7 +150,7 @@ public class Karen {
             m.find();
             Deadline item = new Deadline(m.group(1), m.group(2));
             this.addTask(item);
-            output = this.formatAddTask(item);
+            output = this.formatTask(item, "added");
         }
         else if (command.matches("event (.*) \\/at (.*)")) {
             Pattern p = Pattern.compile("event (.*) \\/at (.*)");
@@ -144,7 +158,7 @@ public class Karen {
             m.find();
             Event item = new Event(m.group(1), m.group(2));
             this.addTask(item);
-            output = this.formatAddTask(item);
+            output = this.formatTask(item, "added");
         }
         this.echo(output);
     }
