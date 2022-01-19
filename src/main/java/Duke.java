@@ -227,6 +227,20 @@ public class Duke {
                 System.out.println("    Okay, I've marked this task as not done yet:");
                 System.out.println("       " + taskList.get(markIndex));
                 System.out.println(hyphenate);
+            } else if (commandSplit[0].equals("delete")) {
+                try{
+                    Task deletedTask = taskList.remove(Integer.parseInt(commandSplit[1])-1);
+                    System.out.println(hyphenate);
+                    System.out.println("    I have successfully removed this task from the system:");
+                    System.out.println("       " + deletedTask);
+                    System.out.println("    Now you have " + taskList.size() + " tasks left in the list!");
+                    System.out.println(hyphenate);
+                } catch (IndexOutOfBoundsException err) {
+                    System.out.println(hyphenate);
+                    System.out.println("");
+                    System.out.println("       YIKES!!! We failed to delete the task, make sure that the task ID entered exists.");
+                    System.out.println(hyphenate);
+                }
             } else {
                 switch(commandSplit[0]){
                     case "todo":
