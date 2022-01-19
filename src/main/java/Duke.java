@@ -105,19 +105,19 @@ public class Duke {
     private void mark(int index) {
         Item i = this.list.get(index - 1);
         i.mark();
-        System.out.println("Alright! I've marked this task as done: ");
+        System.out.println("Alright! I've marked this task as done:");
         System.out.println(i.noIndexToString());
     }
 
     private void unmark(int index) {
         Item i = this.list.get(index - 1);
         i.unmark();
-        System.out.println("Alright! I've marked this task as not done yet: ");
+        System.out.println("Alright! I've marked this task as not done yet:");
         System.out.println(i.noIndexToString());
     }
 
     private void listItems() {
-        System.out.println("Here are the tasks in your list: ");
+        System.out.println("Here are the tasks in your list:");
         for (Item i : this.list) {
             System.out.println(i.toString());
         }
@@ -125,22 +125,22 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke duke = new Duke();
-        String greetings = "Greetings from Ann \n" + "What can I do for you?";
+        String greetings = "Greetings from Ann\n" + "What can I do for you?";
         System.out.println(greetings);
 
         Scanner sc = new Scanner(System.in);
 
         while(true) {
-            String input = sc.nextLine().toLowerCase();
+            String input = sc.nextLine();
 
-            if(input.equals("bye")) {
+            if(input.toLowerCase().equals("bye")) {
                 System.out.println("Sad to see you go :( See you again soon!");
                 break;
-            } else if (input.equals("list")){
+            } else if (input.toLowerCase().equals("list")){
                 duke.listItems();
-            } else if(input.substring(0,4).equals("mark")) {
+            } else if(input.substring(0,4).toLowerCase().equals("mark")) {
                 duke.mark(Integer.parseInt(input.substring(5)));
-            } else if(input.substring(0,6).equals("unmark")) {
+            } else if(input.substring(0,6).toLowerCase().equals("unmark")) {
                 duke.unmark(Integer.parseInt(input.substring(7)));
             } else {
                 duke.addItem(input);

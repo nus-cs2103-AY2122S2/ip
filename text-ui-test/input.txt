@@ -1,0 +1,9 @@
+todo buy book
+deadline finish homework /by Saturday
+event meet Prof /at 10am Monday
+list
+mark 2
+mark 3
+unmark 3
+list
+bye
