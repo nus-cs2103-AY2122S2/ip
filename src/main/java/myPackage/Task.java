@@ -28,6 +28,10 @@ public class Task {
     public String getDescription() {
         return this.description;
     }
+
+    public String getTaskType() {
+        return " ";
+    }
 }
     //Task t = new Task("read book");
     //t.markAsDone();

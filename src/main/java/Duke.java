@@ -24,7 +24,7 @@ public class Duke {
                 case "list": {
                     System.out.println("Here are the tasks in your list:");
                     for (int i = 0; i < listCount; i++) {
-                        System.out.printf("%d.[%s] %s%n", i + 1,list[i].getStatusIcon(), list[i].getDescription());
+                        System.out.printf("%d.[%s][%s] %s%n", i + 1, list[i].getTaskType(), list[i].getStatusIcon(), list[i].getDescription());
                     }
                     break;
                 }
@@ -41,8 +41,22 @@ public class Duke {
                     break;
                 }
                 default: {
-                    System.out.println("added: " + userInput);
-                    list[listCount] = new Task(userInput);
+                    System.out.println("Got it, I've added this task:");
+                    switch (keyword) {
+                        case "todo": {
+                            list[listCount] = new ToDos(userInput);
+                            break;
+                        }
+                        case "deadline": {
+                            list[listCount] = new Deadlines(userInput.split("/")[0], userInput.split("/")[1]);
+                            break;
+                        }
+                        case "event": {
+                            list[listCount] = new Events(userInput.split("/")[0], userInput.split("/")[1]);
+                            break;
+                        }
+                    }
+                    System.out.printf("\nyou now have %d tasks in the list%n", listCount + 1);
                     listCount++;
                 }
             }
