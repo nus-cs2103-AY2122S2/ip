@@ -41,8 +41,10 @@ public class Duke {
             }
 
             // Check for keywords
-            String[] strArr = input.split(" ",3);
+            String[] strArr = input.split(" ",2);
+            String[] result;
             String keyword = strArr[0];
+            Task task = null;
             switch(keyword){
                 case "mark":
                     System.out.println(mark(strArr[1]));
@@ -50,12 +52,25 @@ public class Duke {
                 case "unmark":
                     System.out.println(unmark(strArr[1]));
                     break;
+                case "todo":
+                    task = new Todo((strArr[1]));
+                    break;
+                case "deadline":
+                    result = strArr[1].split("/by", 2);
+                    task = new Deadline(result[0],result[1]);
+                    break;
+                case "event":
+                    result = strArr[1].split("/at", 2);
+                    task = new Event(result[0],result[1]);
+                    break;
                 default:
-                    list.add(new Task(input));
-                    System.out.println("added: " + input);
                     break;
             }
 
+            if(task != null){
+                list.add(task);
+                System.out.println(taskAddedMessage(task));
+            }
             System.out.println(lineBreak);
         }
         sc.close();
@@ -97,5 +112,11 @@ public class Duke {
         Task task = list.get(index);
         task.unmark();
         return "OK! I've marked this task as not done yet:\n" + task;
+    }
+
+    private static String taskAddedMessage(Task task){
+        return "Got it. I've added this task:\n"
+                + task.toString()
+                + "\nNow you have " + list.size() + " tasks in the list.";
     }
 }
