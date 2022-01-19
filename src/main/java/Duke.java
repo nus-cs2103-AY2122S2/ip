@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -9,6 +10,7 @@ public class Duke {
                     "/\\__/ /  __/ |_| |_/ / (_) | |_ \n" +
                     "\\____/ \\___|\\__\\____/ \\___/ \\__|\n";
     private static final String BORDER = "________________________________\n";
+    private static ArrayList<String> taskList = new ArrayList<>();
 
     /**
      * Greets the user.
@@ -35,8 +37,16 @@ public class Duke {
             if (input.equals("bye")) {
                 end = true;
                 exit();
+            }
+            else if (input.equals("list")) {
+                StringBuilder listString = new StringBuilder();
+                for (int i = 0; i < taskList.size(); i++) {
+                    listString.append(i + 1).append(". ").append(taskList.get(i)).append("\n");
+                }
+                System.out.println(BORDER + listString + BORDER);
             } else {
-                System.out.println(BORDER + input + "\n" + BORDER);
+                taskList.add(input);
+                System.out.println(BORDER + "added: " + input + "\n" + BORDER);
             }
         }
     }
