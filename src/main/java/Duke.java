@@ -10,6 +10,7 @@ public class Duke {
                 "/_/  |_\\____/_____/   \n" +
                 "                      \n";
         Scanner reader = new Scanner(System.in);
+        TaskList taskList = new TaskList();
 
         printAce(logo);
         printAce("Hey, I'm Ace. What can I help you with?");
@@ -17,7 +18,15 @@ public class Duke {
         String userInput = reader.nextLine();
 
         while(!userInput.equals("bye")) {
-            printAce(userInput);
+            switch(userInput) {
+                case "list":
+                    String tasks = taskList.getAllTasks();
+                    printAce(tasks);
+                    break;
+                default:
+                    taskList.addTask((userInput));
+                    printAce("added: " + userInput);
+            }
             userInput = reader.nextLine();
         }
         printAce("See you later!");
