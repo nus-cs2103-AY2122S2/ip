@@ -66,27 +66,76 @@ public class Duke {
 
             return true;
         } else {
-            String newTaskMessage = createTask(userInput);
-            System.out.println(newTaskMessage);
+
+            try {
+                String newTaskMessage = createTask(userInput);
+                System.out.println(newTaskMessage);
+            } catch (InvalidTypeException e) {
+                String errorMsg = "   __________________________________________________\n"
+                        + "       Opps, the command \"" + userInput + "\" is not supported :(\n"
+                        + "   __________________________________________________";
+                System.out.println(errorMsg);
+            } catch (MissingNameException e ) {
+                String errorMsg = "   __________________________________________________\n"
+                        + "       You have to include name after command!\n"
+                        + "   __________________________________________________";
+                System.out.println(errorMsg);
+            } catch (MissingEventDateException e) {
+                String errorMsg = "   __________________________________________________\n"
+                        + "       You have to include date after command!\n"
+                        + "       Please follow format [event <name>/at <date>]\n"
+                        + "   __________________________________________________";
+                System.out.println(errorMsg);
+            } catch (MissingDeadlineDateException e ) {
+                String errorMsg = "   __________________________________________________\n"
+                        + "       You have to include deadline after command!\n"
+                        + "       Follow format [deadline <name>/by <date>]\n"
+                        + "   __________________________________________________";
+                System.out.println(errorMsg);
+            }
             return true;
         }
     }
 
-    public static String createTask(String input) {
+    public static String createTask(String input) throws InvalidTypeException, MissingNameException, MissingEventDateException, MissingDeadlineDateException{
         String[] splitString = input.split("/", 2);
-        String[] instruction = splitString[0].split(" ");
+        String[] instruction = splitString[0].split(" ", 2);
         Task currentTask = null;
 
         switch(instruction[0]) {
             case "todo":
+                if(instruction.length == 1 || instruction[1].equals("")) {
+                    throw new MissingNameException("Missing description");
+                }
+
                 currentTask = new ToDo(input.substring(4));
                 break;
             case "event":
+
+                if(instruction.length == 1 || instruction[1].equals("")) {
+                    throw new MissingNameException("Missing description");
+                }
+
+                if(splitString.length == 1 || !splitString[1].startsWith("at ")) {
+                    throw new MissingEventDateException("Missing date");
+                }
+
                 currentTask = new Event(splitString[0].substring(5), splitString[1].substring(3));
                 break;
             case "deadline":
+                if(instruction.length == 1 || instruction[1].equals("")) {
+                    throw new MissingNameException("Missing description");
+                }
+
+                if(splitString.length == 1 || !splitString[1].startsWith("by ")) {
+                    throw new MissingDeadlineDateException("Missing date");
+                }
+
                 currentTask = new Deadline(splitString[0].substring(8), splitString[1].substring(3));
                 break;
+
+            default:
+                throw new InvalidTypeException("Invalid type");
         }
 
         String output = "   __________________________________________________\n"
