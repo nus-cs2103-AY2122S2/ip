@@ -12,7 +12,8 @@ public class Duke {
 
     public static void addTodo(String s) {
         LIST.add(new Todo(s));
-        System.out.println(LINE + "\n Got it. I've added this task:");
+        System.out.println(LINE);
+        System.out.println(" Got it. I've added this task:");
         System.out.println("   " + LIST.get(LIST.size() - 1).toString());
         System.out.printf(" Now you have %d tasks in the list.\n", LIST.size());
         System.out.println(LINE);
@@ -56,6 +57,18 @@ public class Duke {
         System.out.println(LINE);
     }
 
+    public static void throwError(String type) {
+        System.out.println(LINE);
+        if (type.equals("")) {
+            DukeException error = new DukeException();
+            System.out.println(error.toString());
+        } else {
+            DukeException error = new DukeException(type);
+            System.out.println(error.toString());
+        }
+        System.out.println(LINE);
+    }
+
     public static void exit() {
         System.out.println(LINE + "\n Bye. Hope to see you again soon!\n" + LINE);
     }
@@ -86,10 +99,18 @@ public class Duke {
                 }
                 case "todo": {
                     usrInput = sc.nextLine();
+                    if (usrInput.equals("")) {
+                        throwError("todo");
+                        break;
+                    }
                     addTodo(usrInput.substring(1));
                     break;
                 }
                 case "deadline": {
+//                    if (!sc.hasNext()) {
+//                        throwError("deadline");
+//                        break;
+//                    }
                     task = sc.next();
                     while (sc.hasNext()) {
                         String currStr = sc.next();
@@ -104,6 +125,11 @@ public class Duke {
                     break;
                 }
                 case "event": {
+                    if (!sc.hasNext()) {
+                        System.out.println(1);
+                        throwError("event");
+                        break;
+                    }
                     task = sc.next();
                     while (sc.hasNext()) {
                         String currStr = sc.next();
@@ -118,8 +144,7 @@ public class Duke {
                     break;
                 }
                 default:
-                    usrInput += sc.nextLine();
-                    addTodo(usrInput);
+                    throwError("");
                     break;
             }
         }
