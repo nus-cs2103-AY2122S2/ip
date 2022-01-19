@@ -24,28 +24,27 @@ public class Duke {
 
     }
 
+    /**
+     * Prepares input for printing to System.out (adds top and bottom line)
+     */
     private String formatAnswer(String input) {
-        /**
-         * Prepares input for printing to System.out (adds top and bottom line)
-         */
 
         // Variables
         String output;
         String line = "____________________________________________________________";
 
         // Output
-        output = "\t" + line + "\n"
-                + "\t" + input + "\n"
-                + "\t" + line + "\n";
+        output = "\t" + line + "\n" + "\t" + input + "\n" + "\t" + line + "\n";
 
         return output;
 
     }
 
+    /**
+     * Checks if input is "bye"
+     */
     private boolean isBye(String input) {
-        /**
-         * Checks if input is "bye"
-         */
+
         return (input.equals("bye"));
     }
 }
