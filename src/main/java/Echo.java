@@ -3,8 +3,8 @@ public class Echo {
     public Echo() {}
 
     // Echoes a string
-    public void EchoStr (String temp) {
-        System.out.println("  > " + temp + "\n\n");
+    public void EchoString (String temp) {
+        System.out.println("  > " + temp + "\n");
     }
 
 }

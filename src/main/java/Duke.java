@@ -1,4 +1,3 @@
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Duke {
@@ -11,27 +10,39 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("Heya! I'm Duke!\n" +
-                "What can I do for ya?\n\n");
 
         // Create new variables
         String tempString;
         Echo tempEcho = new Echo();
+        Memory memory = new Memory();
+        boolean looping = true;
+
+        tempEcho.EchoString("Heya! I'm Duke!\n" +
+                "What can I do for ya?");
 
         // While loop
-        while(true) {
+        while(looping) {
 
             tempString = scanner.nextLine();
 
-            // Breaks the loop
-            if (tempString.equals("bye")) {
-                break;
-            }
+            // Switch case
+            switch (tempString) {
 
-            tempEcho.EchoStr(tempString);
+                case "bye":
+                    looping = false;
+                    break;
+
+                case "list":
+                    memory.ListAll();
+                    break;
+
+                default:
+                    memory.AddString(tempString);
+
+            }
         }
 
         // The last thing Duke says
-        System.out.println("  > Ok then, see ya!");
+        tempEcho.EchoString("Ok then, see ya!");
     }
 }
