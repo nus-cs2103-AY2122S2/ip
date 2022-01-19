@@ -12,7 +12,7 @@ public class Duke {
 
     public static void addTodo(String s) {
         LIST.add(new Todo(s));
-        System.out.println(LINE + "\n Got it. I've added this task: ");
+        System.out.println(LINE + "\n Got it. I've added this task:");
         System.out.println("   " + LIST.get(LIST.size() - 1).toString());
         System.out.printf(" Now you have %d tasks in the list.\n", LIST.size());
         System.out.println(LINE);
@@ -20,7 +20,7 @@ public class Duke {
 
     public static void addDeadline(String s, String time) {
         LIST.add(new Deadline(s, time));
-        System.out.println(LINE + "\n Got it. I've added this task: ");
+        System.out.println(LINE + "\n Got it. I've added this task:");
         System.out.println("   " + LIST.get(LIST.size() - 1).toString());
         System.out.printf(" Now you have %d tasks in the list.\n", LIST.size());
         System.out.println(LINE);
@@ -28,7 +28,7 @@ public class Duke {
 
     public static void addEvent(String s, String time) {
         LIST.add(new Event(s, time));
-        System.out.println(LINE + "\n Got it. I've added this task: ");
+        System.out.println(LINE + "\n Got it. I've added this task:");
         System.out.println("   " + LIST.get(LIST.size() - 1).toString());
         System.out.printf(" Now you have %d tasks in the list.\n", LIST.size());
         System.out.println(LINE);
@@ -43,7 +43,7 @@ public class Duke {
     }
 
     public static void mark(int i) {
-        System.out.println(LINE + "\n Nice! I've marked this task as done: ");
+        System.out.println(LINE + "\n Nice! I've marked this task as done:");
         LIST.get(i - 1).setDone();
         System.out.println("   " + LIST.get(i - 1).toString());
         System.out.println(LINE);
