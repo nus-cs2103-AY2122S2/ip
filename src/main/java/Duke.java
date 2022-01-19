@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;  // Import the Scanner class
 public class Duke {
     static String lineDivider = "____________________________________________________________\n";
@@ -8,18 +7,45 @@ public class Duke {
             + "What can I do for you?\n"
             + lineDivider;
     static String goodBye = "Bye. Hope to see you again soon!";
-    static String added = lineDivider + "added: " + "%s" + "\n" + lineDivider;
     static String addedTask = lineDivider + "Got it. I've added this task:\n" +
             "   %s\nNow you have %d tasks in the list.\n" + lineDivider;
 
-    public static void listOut(Task[] list, int n) {
+    public static void listOut(ArrayList<Task> list, int n) {
         System.out.printf(lineDivider + "Here are the tasks in your list:\n");
         for (int i = 0; i < n; i++) {
-            System.out.printf("%d." + list[i].toString() + "\n", i+1);
+            System.out.printf("%d." + list.get(i).toString() + "\n", i+1);
         }
     }
 
-    public static void markTask(Task[] list, String[] echo, int size) throws DukeException{
+    public static void deleteTask(ArrayList<Task> list, String[] echo, int size) throws DukeException {
+        String err = "Oh no! Which task do you wish to delete? Try again :)\n" + lineDivider;
+        String wrongNumber = "Oh no! This task number does not exist. Try again :)\n" + lineDivider;
+        String wrongFormat = "Oh no! Please do not spell out the number. Try again :)\n" + lineDivider;
+        int targetIndex;
+        if (echo.length == 1) {
+            throw new DukeException(err);
+        }
+        String taskNum = echo[1];
+        if (taskNum.isEmpty()) {
+            throw new DukeException(err);
+        }
+        try {
+            targetIndex = Integer.parseInt(taskNum);
+        } catch (Exception e) {
+            throw new DukeException(wrongFormat);
+        }
+        if (targetIndex > size || targetIndex <= 0) {
+            throw new DukeException(wrongNumber);
+        } else {
+            Task curr = list.get(targetIndex - 1);
+            list.remove(targetIndex - 1);
+            System.out.printf(lineDivider + "Noted. I've removed this task:\n   " +
+                    curr.toString() + "\nNow you have %d tasks in the list.\n" + lineDivider, size-1);
+        }
+    }
+
+
+    public static void markTask(ArrayList<Task> list, String[] echo, int size) throws DukeException{
         String err = "Oh no! Which task do you wish to mark? Try again :)\n" + lineDivider;
         String wrongNumber = "Oh no! This task number does not exist. Try again :)\n" + lineDivider;
         String wrongFormat = "Oh no! Please do not spell out the number. Try again :)\n" + lineDivider;
@@ -39,7 +65,7 @@ public class Duke {
         if (targetIndex > size || targetIndex <= 0) {
             throw new DukeException(wrongNumber);
         } else {
-            Task curr = list[targetIndex - 1];
+            Task curr = list.get(targetIndex - 1);
             curr.mark();
             String status = curr.getStatus();
             String description = curr.getDescription();
@@ -48,7 +74,7 @@ public class Duke {
         }
     }
 
-    public static void unMarkTask(Task[] list, String[] echo, int size) throws DukeException {
+    public static void unMarkTask(ArrayList<Task> list, String[] echo, int size) throws DukeException {
         String err = "Oh no! Which task do you wish to unmark? Try again :)\n" + lineDivider;
         String wrongNumber = "Oh no! This task number does not exist. Try again :)\n" + lineDivider;
         String wrongFormat = "Oh no! Please do not spell out the number. Try again :)\n" + lineDivider;
@@ -68,7 +94,7 @@ public class Duke {
         if (targetIndex > size || targetIndex <= 0) {
             throw new DukeException(wrongNumber);
         } else {
-            Task curr = list[targetIndex - 1];
+            Task curr = list.get(targetIndex - 1);
             curr.unMark();
             String status = curr.getStatus();
             String description = curr.getDescription();
@@ -77,7 +103,7 @@ public class Duke {
         }
     }
 
-    public static void addDeadline(Task[] list, int n, String[] echo) throws DukeException {
+    public static void addDeadline(ArrayList<Task> list, int n, String[] echo) throws DukeException {
         String err = "Oh no! The description of deadline cannot be empty... Try again :)\n" + lineDivider;
         String wrongFormat = "Oh no! The format for deadline task is wrong... Try again :)\n" + lineDivider;
         if (echo.length == 1) {
@@ -94,11 +120,11 @@ public class Duke {
         String info = details[0];
         String date = details[1];
         Deadline curr = new Deadline(info, date);
-        list[n] = curr;
+        list.add(curr);
         System.out.printf(addedTask, curr.toString(), n + 1);
     }
 
-    public static void addEvent(Task[] list, int n, String[] echo) throws DukeException {
+    public static void addEvent(ArrayList<Task> list, int n, String[] echo) throws DukeException {
         String err = "Oh no! The description of event cannot be empty... Try again :)\n" + lineDivider;
         String wrongFormat = "Oh no! The format for event task is wrong... Try again :)\n" + lineDivider;
         if (echo.length == 1) {
@@ -115,11 +141,11 @@ public class Duke {
         String info = details[0];
         String date = details[1];
         Event curr = new Event(info, date);
-        list[n] = curr;
+        list.add(curr);
         System.out.printf(addedTask, curr.toString(), n + 1);
     }
 
-    public static void addTodo(Task[] list, int n,String[] echo) throws DukeException {
+    public static void addTodo(ArrayList<Task> list, int n, String[] echo) throws DukeException {
         String err = "Oh no! The description of todo cannot be empty... Try again :)\n" + lineDivider;
         if (echo.length == 1) {
             throw new DukeException(err);
@@ -129,12 +155,12 @@ public class Duke {
             throw new DukeException(err);
         }
         Todo curr = new Todo(description);
-        list[n] = curr;
+        list.add(curr);
         System.out.printf(addedTask, curr.toString(), n + 1);
     }
 
-    public static void main(String[] args) throws DukeException {
-        Task[] listOfTasks = new Task[100];
+    public static void main(String[] args) {
+        ArrayList<Task> listOfTasks = new ArrayList<>(100);
         int n = 0;
 
         System.out.printf(greet);
@@ -161,6 +187,9 @@ public class Duke {
                     unMarkTask(listOfTasks, echo.split(" ", 2), n);
                 } else if (echo.toLowerCase().contains("mark")) {
                     markTask(listOfTasks, echo.split(" ", 2), n);
+                } else if (echo.toLowerCase().contains("delete")) {
+                    deleteTask(listOfTasks, echo.split(" ", 2), n);
+                    n = n - 1;
                 } else {
                     throw new DukeException("Oh no! I fear I don't understand! Try again!\n" + lineDivider);
                 }
