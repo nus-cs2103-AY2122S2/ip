@@ -36,22 +36,24 @@ public class Duke {
 
     private void addDdl(String s) {
         int i = s.indexOf(" /by ");
-        if (i != -1) {
+        if (i > 0 && i + 5 < s.length()) {
             Deadline t = new Deadline(s.substring(0, i), s.substring(i + 5));
             tasks.add(t);
             this.printAdd();
+        } else {
+            throw new DukeException("The description of a deadline should be \"<task> /by <time>\".");
         }
-        // else exception
     }
 
     private void addEvt(String s) {
         int i = s.indexOf(" /at ");
-        if (i != -1) {
+        if (i > 0 && i + 5 < s.length()) {
             Event t = new Event(s.substring(0, i), s.substring(i + 5));
             tasks.add(t);
             this.printAdd();
+        } else {
+            throw new DukeException("The description of an event should be \"<task> /at <time>\".");
         }
-        // else exception
     }
 
     private void printAdd() {
@@ -75,6 +77,9 @@ public class Duke {
     }
 
     private void mark(int index, boolean done) {
+        if (index >= tasks.size()) {
+            throw new DukeException("Please enter a valid index.");
+        }
         tasks.set(index, tasks.get(index).mark(done));
         if (done) {
             System.out.println(indent + "Nice! I've marked this task as done:");
@@ -84,13 +89,8 @@ public class Duke {
         System.out.println(indent + "  " + tasks.get(index));
     }
 
-    private static void unknown() {
-        System.out.println(indent + "Unknown Command.");
-    }
-
     private static void bye() {
         System.out.println(indent + byePhrase);
-        System.out.println(segLine);
     }
 
     public static void main(String[] args) {
@@ -99,35 +99,53 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         while (true) {
-            String s = sc.nextLine();
-            System.out.println(segLine);
-            if (s.startsWith("list")) {
-                cindy.list();
-            } else if (s.startsWith("todo ")) {
-                cindy.addTodo(s.substring(5));
-            } else if (s.startsWith("deadline ")) {
-                cindy.addDdl(s.substring(9));
-            } else if (s.startsWith("event ")) {
-                cindy.addEvt(s.substring(6));
-            } else if (s.startsWith("mark ")) {
-                Scanner temp = new Scanner(s.substring(5));
-                if (temp.hasNextInt()) {
-                    cindy.mark(temp.nextInt() - 1, true);
+            try {
+                String s = sc.nextLine();
+                System.out.println(segLine);
+                if (s.startsWith("list")) {
+                    cindy.list();
+                } else if (s.startsWith("todo")) {
+                    if (s.length() <= 5) {
+                        throw new DukeException("The description of a todo cannot be empty.");
+                    }
+                    cindy.addTodo(s.substring(5));
+                } else if (s.startsWith("deadline")) {
+                    if (s.length() <= 9) {
+                        throw new DukeException("The description of a deadline cannot be empty.");
+                    }
+                    cindy.addDdl(s.substring(9));
+                } else if (s.startsWith("event")) {
+                    if (s.length() <= 6) {
+                        throw new DukeException("The description of an event cannot be empty.");
+                    }
+                    cindy.addEvt(s.substring(6));
+                } else if (s.startsWith("mark")) {
+                    Scanner temp = new Scanner(s.substring(4));
+                    if (temp.hasNextInt()) {
+                        cindy.mark(temp.nextInt() - 1, true);
+                    } else {
+                        throw new DukeException("Please enter an index to mark.");
+                    }
+                } else if (s.startsWith("unmark")) {
+                    Scanner temp = new Scanner(s.substring(6));
+                    if (temp.hasNextInt()) {
+                        cindy.mark(temp.nextInt() - 1, false);
+                    } else {
+                        throw new DukeException("Please enter an index to unmark.");
+                    }
+                } else if (s.startsWith("bye")) {
+                    Duke.bye();
+                    break;
+                } else {
+                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
-                // else exception
-            } else if (s.startsWith("unmark ")) {
-                Scanner temp = new Scanner(s.substring(7));
-                if (temp.hasNextInt()) {
-                    cindy.mark(temp.nextInt() - 1, false);
-                }
-                // else exception
-            } else if (s.startsWith("bye")) {
-                Duke.bye();
-                break;
-            } else {
-                Duke.unknown();
             }
-            System.out.println(segLine);
+            catch (DukeException e) {
+                System.out.println(indent + e);
+            }
+            finally {
+                System.out.println(segLine);
+            }
         }
     }
 }
