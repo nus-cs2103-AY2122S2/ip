@@ -9,7 +9,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/| |_| |___|  _  |\n"
                 + "|____/ \\__,_|_|\\_\\___||___|\\____|_| |_|\n"
                 + "Hello! I'm DukeLCH\n"
-                + "How can I be of service?\n"
+                + "How can I be of service?\n" //Simple Greet
                 + "_______________________________________________________\n";
         System.out.println(logo);
         Commands cmd = new Commands();
