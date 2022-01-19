@@ -10,4 +10,7 @@ todo borrow book
 list
 todo 
 blah
+delete 3
+mark 2
+list
 bye
