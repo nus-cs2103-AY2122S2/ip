@@ -54,14 +54,14 @@ public class Duke {
             else if (split[0].equals("todo")){
                 tasks[counter++] = new Todo(input.replace("todo ",""));
                 System.out.println(lines + "\nGot it. I've added this task:\n" + tasks[counter - 1].toString()
-                        + "\n" + lines);
+                        + "\n" + "Now you have " + counter + " tasks in the list.\n" + lines);
             }
             else if (split[0].equals("deadline")){
                 String[] newSplit = input.split("/by ");
                 if (newSplit.length > 1) {
                     tasks[counter++] = new Deadline(newSplit[0].replace("deadline ",""),newSplit[1]);
                     System.out.println(lines + "\nGot it. I've added this task:\n" + tasks[counter - 1].toString()
-                            + "\n" + lines);
+                            + "\n" + "Now you have " + counter + " tasks in the list.\n" + lines);
                 }
                 else {
                     System.out.println(lines + "\nInvalid input \n" + lines);
@@ -72,7 +72,7 @@ public class Duke {
                 if (newSplit.length > 1) {
                     tasks[counter++] = new Event(newSplit[0].replace("event ", ""), newSplit[1]);
                     System.out.println(lines + "\nGot it. I've added this task:\n" + tasks[counter - 1].toString()
-                            + "\n" + lines);
+                            + "\n" + "Now you have " + counter + " tasks in the list.\n" + lines);
                 }
                 else {
                     System.out.println(lines + "\nInvalid input \n" + lines);
