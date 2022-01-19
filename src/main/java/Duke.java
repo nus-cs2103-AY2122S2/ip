@@ -62,8 +62,7 @@ public class Duke {
 
     private static void handleList() {
         final String taskList = "Here are the tasks in your list:\n" + Duke.constructTaskList(Duke.tasks);
-        final String response = Duke.constructResponse(taskList);
-        System.out.println(response);
+        System.out.println(Duke.constructResponse(taskList));
     }
 
     private static void handleAdd(Task t) {
@@ -77,14 +76,14 @@ public class Duke {
     private static void handleMark(int taskId) {
         final Task t = Duke.tasks[taskId];
         t.markAsDone();
-        final String response = "Nice! I've marked this task as done:\n  [" + t.getStatusIcon() + "] " + t;
+        final String response = "Nice! I've marked this task as done:\n  " + t;
         System.out.println(Duke.constructResponse(response));
     }
 
     private static void handleUnmark(int taskId) {
         final Task t = Duke.tasks[taskId];
         t.markAsUndone();
-        final String response = "OK, I've marked this task as not done yet:\n  [" + t.getStatusIcon() + "] " + t;
+        final String response = "OK, I've marked this task as not done yet:\n  " + t;
         System.out.println(Duke.constructResponse(response));
     }
 
@@ -103,7 +102,7 @@ public class Duke {
             final Task task = tasks[i];
             if (task == null) continue;
             if (currentTaskListItemIndex > 1) taskList += "\n";
-            taskList += currentTaskListItemIndex + ".[" + task.getStatusIcon() + "] " + task;
+            taskList += currentTaskListItemIndex + "." + task;
             currentTaskListItemIndex++;
         }
 
