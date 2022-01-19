@@ -12,6 +12,10 @@ public class TaskHistory {
         record.add(new Task(input));
     }
 
+    void addToDo(String input) {
+        record.add(new ToDos(input));
+    }
+
     String printAll() {
         Iterator<Task> iterator = record.iterator();
         int count = 1;

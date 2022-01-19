@@ -45,4 +45,8 @@ public class Commands {
                 + "_______________________________________________________\n";
         System.out.println(msg);
     }
+
+    void todo(String[] tokens) {
+        taskHistory.addToDo(description);
+    }
 }
