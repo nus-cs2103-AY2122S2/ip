@@ -1,4 +1,5 @@
 import java.util.Scanner; // Imported Scanner class
+import java.util.StringTokenizer; //Imported StringTokenizer
 
 public class Duke {
     public static void main(String[] args) {
@@ -18,7 +19,9 @@ public class Duke {
         label:
         while(true) {
             String input = io.nextLine();
-            switch (input) {
+            StringTokenizer temp = new StringTokenizer(input);
+            String keyword = temp.nextToken();
+            switch (keyword) {
                 case "bye":
                     cmd.bye();
                     break label;
@@ -26,12 +29,12 @@ public class Duke {
                     cmd.list();
                     break;
                 case "mark": {
-                    int index = io.nextInt();
+                    int index = Integer.parseInt(temp.nextToken());
                     cmd.mark(index);
                     break;
                 }
                 case "unmark": {
-                    int index = io.nextInt();
+                    int index = Integer.parseInt(temp.nextToken());
                     cmd.unmark(index);
                     break;
                 }

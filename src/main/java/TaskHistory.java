@@ -17,7 +17,7 @@ public class TaskHistory {
         int count = 1;
         StringBuilder result = new StringBuilder();
         while (iterator.hasNext()) {
-            result.append(count).append(".").append(iterator.next().getDescription()).append("\n");
+            result.append(count).append(".").append(iterator.next().getDescription());
             count++;
         }
         if (result.length() == 0) {
