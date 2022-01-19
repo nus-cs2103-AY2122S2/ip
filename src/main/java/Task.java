@@ -15,22 +15,32 @@ public class Task {
 
     public static void markAsDone(int index) {
         taskList[index].isDone = true;
-        System.out.println(taskList[index].getStatusIcon() + " " + taskList[index].description);
+        System.out.println("  " + taskList[index].toString());
     }
 
     public static void markAsNotDone(int index) {
         taskList[index].isDone = false;
-        System.out.println(taskList[index].getStatusIcon() + " " + taskList[index].description);
+        System.out.println("  " + taskList[index].toString());
     }
 
     public static void addToList(Task task) {
-        taskList[taskCount++] = task;
-        System.out.println(" added: " + task.description);
+        if (taskCount == 0) {
+            System.out.println(" Added! Now you have 1 item in your tasks list.");
+        } else {
+            System.out.println(" Added! Now you have " + (taskCount + 1) + " items in your tasks list.");
+        }
+        taskList[taskCount] = task;
+        System.out.println("  " + taskList[taskCount++].toString());
     }
 
-    public static void printTasks() {
+    public static void printAllTasks() {
         for (int i = 0; i < taskCount; i++) {
-            System.out.println(" " + (i + 1) + "." + taskList[i].getStatusIcon() + " " + taskList[i].description);
+            System.out.println("   " + (i + 1) + "." + taskList[i].toString());
         }
+    }
+
+    @Override
+    public String toString() {
+        return (this.getStatusIcon() + " " + this.description);
     }
 }
