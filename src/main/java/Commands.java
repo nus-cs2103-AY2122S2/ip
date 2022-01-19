@@ -1,9 +1,12 @@
 public class Commands {
 
+    InputHistory cmdHistory = new InputHistory();
+
     public Commands() { // Empty Constructor
     }
 
     void echoInput(String input) { // Get DukeLCH to Echo
+        cmdHistory.addTo(input); // Add new input entry into history
         String echo = "_______________________________________________________\n"
                 + input + "\n"
                 + "_______________________________________________________\n";
