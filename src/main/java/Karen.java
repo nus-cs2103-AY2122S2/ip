@@ -24,11 +24,22 @@ public class Karen {
     }
     public void deleteTask(int index) {this.toDos.remove(index);}
 
+    /**
+     *
+     * @param item Task object that has action applied to
+     * @param action that is applied to Task object (etc. delete, added)
+     * @return formatted string
+     */
     public String formatTask(Task item, String action) {
         return String.format("Fine. Task %s:\n %s\nNow you have %d in total.",
                 action, item.toString(), this.toDos.size());
     }
 
+    /**
+     *
+     * @param command user input from the command line
+     * @return boolean flag if correct input; echoes out error message and returns false if wrong
+     */
     public boolean validateCommand(String command){
         boolean flag = false;
         try {
@@ -39,6 +50,12 @@ public class Karen {
         return flag;
     }
 
+    /**
+     * Helper function for validateCommand to store cases to validate user input
+     * @param command user input from the command line
+     * @return boolean flag if success
+     * @throws KarenException if string input doesn't match what is needed
+     */
     protected boolean validateHelper(String command) throws KarenException {
         if (command.equals("list") | command.equals("bye")) {
             return true;
@@ -85,6 +102,10 @@ public class Karen {
         throw new KarenException("I don't understand anything - I want to speak with your manager");
     }
 
+    /**
+     * To execute commands based on input
+     * @param command user input from the command line
+     */
     public void processCommand(String command) {
         String output = command;
         if (!validateCommand(command)) {
