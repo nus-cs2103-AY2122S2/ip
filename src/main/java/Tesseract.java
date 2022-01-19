@@ -22,34 +22,75 @@ public class Tesseract {
         // greet the user
         System.out.println(greetingMsg);
 
-        String cmd = sc.nextLine();
+        String cmdLine = sc.nextLine();
 
-        while (!cmd.equals("bye")) {
+        while (!cmdLine.equals("bye")) {
             String msg = "";
+            String[] cmdArr = cmdLine.split(" ");
+            String cmd = cmdArr[0];
+
+            //try {
+            //    checkCommand(cmdArr);
+            //} catch () {
+
+            //}
+            // will if still be executed if error is thrown?
+
             if (cmd.equals("list")) {
                 msg = "Look what I have noted down for you~ \n";
                 for (int i = 0; i < taskList.size(); i++) {
                     msg += INDENT2 + (i+1) + "." + taskList.get(i).toString() + "\n";
                 }
-            } else if (cmd.length() > 5 && cmd.substring(0, 4).equals("mark")) {
-                int index = Integer.parseInt(cmd.substring(5)) - 1;
+            } else if (cmd.equals("mark")) {
+                int index = Integer.parseInt(cmdArr[1]); // the 2nd element in the array is the index
                 taskList.get(index).markAsDone();
                 msg = "Wow you have finished a task! Excellent! \n" + INDENT2 + taskList.get(index).toString() + "\n";
-            } else if (cmd.length() > 7 && cmd.substring(0, 6).equals("unmark")) {
-                int index = Integer.parseInt(cmd.substring(7)) - 1;
+            } else if (cmd.equals("unmark")) {
+                int index = Integer.parseInt(cmdArr[1]);
                 taskList.get(index).markAsUndone();
                 msg = "Seems like you have successfully undone your done task \n" + INDENT2 + taskList.get(index).toString() + "\n";
             } else {
-                int indexAt = cmd.indexOf("/at");
-                int indexBy = cmd.indexOf("/by");
                 Task newTask;
-                if (indexAt != -1) { // Event
-                    newTask = new Event(cmd.substring(0, indexAt - 1), cmd.substring(indexAt + 4));
-                } else if (indexBy != -1) { // Deadline
-                    newTask = new Deadline(cmd.substring(0, indexBy - 1), cmd.substring(indexBy + 4));
-                } else { // _Todo
-                    newTask = new Todo(cmd);
+                if (cmd.equals("todo")) { // _Todo
+                    newTask = new Todo(cmdLine.substring(5));
+                } else if (cmd.equals("event")) { // Event
+                    String description = "";
+                    String time = "";
+                    int cmdLen = 0;
+                    for (int i = 1; i < cmdArr.length; i++) {
+                        if (cmdArr[i].equals("/at")) {
+                            cmdLen = i;
+                            break;
+                        }
+                    }
+                    for (int j = 1; j < cmdArr.length; j++) {
+                        if (j < cmdLen) {
+                            description += cmdArr[j] + " ";
+                        } else if (j > cmdLen) {
+                            time += cmdArr[j] + " ";
+                        }
+                    }
+                    newTask = new Event(description, time);
+                } else { // if (cmd.equals("deadline")) { // Deadline
+                    String description = "";
+                    String time = "";
+                    int cmdLen = 0;
+                    for (int i = 1; i < cmdArr.length; i++) {
+                        if (cmdArr[i].equals("/by")) {
+                            cmdLen = i;
+                            break;
+                        }
+                    }
+                    for (int j = 1; j < cmdArr.length; j++) {
+                        if (j < cmdLen) {
+                            description += cmdArr[j] + " ";
+                        } else if (j > cmdLen) {
+                            time += cmdArr[j] + " ";
+                        }
+                    }
+                    newTask = new Deadline(description, time);
                 }
+
                 taskList.add(newTask);
                 msg = "This has been added to your schedule. Wish you can finish it on time\n"
                         + INDENT2 + newTask.toString() + "\n" + INDENT1
@@ -58,7 +99,7 @@ public class Tesseract {
 
             String out = INDENT1 + BREAKER + "\n" + INDENT1 + msg + INDENT1 + BREAKER + "\n";
             System.out.println(out);
-            cmd = sc.nextLine();
+            cmdLine = sc.nextLine();
         }
         System.out.println(farewellMsg);
     }
