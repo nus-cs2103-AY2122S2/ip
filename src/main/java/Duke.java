@@ -38,6 +38,9 @@ public class Duke {
                     Duke.addDeadline(input);
                 } else if (temp[0].equals("event")) {
                     Duke.addEvent(input);
+                } else if (temp[0].equals("delete")) {
+                    int index = Integer.parseInt(temp[1]) - 1;
+                    Duke.deleteTask(index);
                 } else {
                     Duke.notSpecified();
                 }
@@ -55,7 +58,7 @@ public class Duke {
      * in the list.
      *
      * @param index position of the task in the list
-     * @throws DukeException originating from rmType method back to main method
+     * @throws DukeException if position of the task exceeds what we have on the list
      */
     public static void markTask(int index) throws DukeException {
         if (index >= list.size()) {
@@ -73,7 +76,7 @@ public class Duke {
      * in the list.
      *
      * @param index position of the task in the list
-     * @throws DukeException originating from rmType method back to main method
+     * @throws DukeException if position of the task exceeds what we have on the list
      */
     public static void unMarkTask(int index) throws DukeException {
         if (index >= list.size()) {
@@ -144,6 +147,22 @@ public class Duke {
         System.out.println("Got it. I've added this task:");
         System.out.println(newTask.getTask());
         System.out.println("Now you have "+ list.size() +" tasks in the list.");
+    }
+    /**
+     * This method deletes Task from our list
+     *
+     * @param index the position of the task
+     * @throws DukeException if position of the task exceeds what we have on the list
+     */
+    public static void deleteTask(int index) throws DukeException {
+        if (index >= list.size()) {
+            throw new DukeException("☹ OOPS!!! I'm sorry, can't find task :-(");
+        } else {
+            Task task = list.remove(index);
+            System.out.println("Noted. I've removed this task:");
+            System.out.println(task.getTask());
+            System.out.println("Now you have "+ list.size() +" tasks in the list.");
+        }
     }
 
     /**
