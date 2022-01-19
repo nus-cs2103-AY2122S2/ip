@@ -39,6 +39,15 @@ public class Duke {
                 }
                 case "todo": {
                     cmd.todo(tokens);
+                    break;
+                }
+                case "deadline": {
+                    cmd.deadline(tokens);
+                    break;
+                }
+                case "event": {
+                    cmd.event(tokens);
+                    break;
                 }
                 default:
                     cmd.addTask(input);

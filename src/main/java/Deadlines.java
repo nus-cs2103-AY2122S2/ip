@@ -6,7 +6,7 @@ public class Deadlines extends Task {
         this.time = time;
     }
 
-    public String getDescription() {
-        return "[D]" + this.getDescription() + "(by: " + time + ")\n";
+    public String getDeadline() {
+        return "[D]" + this.getTask() + "(by: " + time + ")\n";
     }
 }

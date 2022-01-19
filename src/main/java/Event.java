@@ -6,7 +6,7 @@ public class Event extends Task {
         this.time = time;
     }
 
-    public String getDescription() {
-        return "[E]" + this.getDescription() + "(at: " + time + ")\n";
+    public String getEvent() {
+        return "[E]" + this.getTask() + "(at: " + time + ")\n";
     }
 }

@@ -7,7 +7,7 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getDescription() {
+    public String getTask() {
         if (this.isDone) {
             return "[X] " + this.description + "\n";
         } else {
@@ -21,5 +21,10 @@ public class Task {
 
     public void unmarkTask() {
         this.isDone = false;
+    }
+
+    @Override
+    public String toString() {
+        return description;
     }
 }
