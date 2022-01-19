@@ -86,6 +86,13 @@ public class Duke {
                 System.out.println("    Nice! I've marked this task as done:");
                 System.out.println("       [" + (commandMark[markIndex]==true?"X":" ") + "] " + commandStorage[markIndex]);
                 System.out.println(hyphenate);
+            } else if (command.split(" ")[0].equals("unmark")){
+                int markIndex = Integer.parseInt(command.split(" ")[1]) - 1; //Zero-indexed
+                commandMark[markIndex] = false;
+                System.out.println(hyphenate);
+                System.out.println("    Okay, I've marked this task as not done yet:");
+                System.out.println("       [" + (commandMark[markIndex]==true?"X":" ") + "] " + commandStorage[markIndex]);
+                System.out.println(hyphenate);
             } else {
                 commandStorage[ID] = command; 
                 System.out.println(hyphenate + "\n    added: " + command + "\n" + hyphenate);
