@@ -17,7 +17,7 @@ public class Duke {
                 break;
             } else if (command.equals("list")) {
                 int sizeOfList = storeList.size();
-                System.out.println("Everything in my blue brain now: ");
+                System.out.println("Everything in my blue brain now:");
                 for (int i = 1; i <= sizeOfList; i++) {
                     Task t = storeList.get(i - 1);
                     System.out.println(i + "." + t.toString());
@@ -42,7 +42,7 @@ public class Duke {
                 String endtime = command.substring(slash + 1);
                 Deadline d = new Deadline(newtask, endtime);
                 storeList.add(d);
-                System.out.println("Added to my brain master: ");
+                System.out.println("Added to my brain master:");
                 System.out.println(d.toString());
                 System.out.println("Currently I have " + storeList.size() + " things in my brain");
 
@@ -50,7 +50,7 @@ public class Duke {
                 String newtask = command.substring(5);
                 Todo t = new Todo(newtask);
                 storeList.add(t);
-                System.out.println("Added to my brain master: ");
+                System.out.println("Added to my brain master:");
                 System.out.println(t.toString());
                 System.out.println("Currently I have " + storeList.size() + " things in my brain");
 
@@ -60,7 +60,7 @@ public class Duke {
                 String attime = command.substring(slash + 1);
                 Event e = new Event(newtask, attime);
                 storeList.add(e);
-                System.out.println("Added to my brain master: ");
+                System.out.println("Added to my brain master:");
                 System.out.println(e.toString());
                 System.out.println("Currently I have " + storeList.size() + " things in my brain");
             }

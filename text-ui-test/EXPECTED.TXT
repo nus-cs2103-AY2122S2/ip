@@ -1,7 +1,19 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+A very good day to you master, I'm Blue the Genie
+What do you wish for today? Your wish is my command
+*-**-**-**-**-**-**-**-**-**-****-**-****-**-****-**
+Added to my brain master:
+[T][ ] borrow book
+Currently I have 1 things in my brain
+Added to my brain master:
+[D][ ] return book(by Sunday)
+Currently I have 2 things in my brain
+Added to my brain master:
+[E][ ] project meeting(at Mon 2-5pm)
+Currently I have 3 things in my brain
+Everything in my blue brain now:
+1.[T][ ] borrow book
+2.[D][ ] return book(by Sunday)
+3.[E][ ] project meeting(at Mon 2-5pm)
+Rub my lamp to summon me again
+Good bye for now master
+*-**-**-**-**-**-**-**-**-**-****-**-****-**-****-**
