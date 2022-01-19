@@ -75,13 +75,13 @@ public class Puke {
   public static void add_task(ArrayList<Task> tasks, String type, String args) {
     Task t;
     if (type.equals("todo")) {
-      t = new Task(args, 'T', null);
+      t = new Todo(args);
     } else {
       String[] taskDetail = args.split("/");
       if (type.equals("deadline")) {
-        t = new Task(taskDetail[0], 'D', taskDetail[1].split(" ", 2)[1]);
+        t = new Deadline(taskDetail[0], taskDetail[1].split(" ", 2)[1]);
       } else {
-        t = new Task(taskDetail[0], 'E', taskDetail[1].split(" ", 2)[1]);
+        t = new Event(taskDetail[0], taskDetail[1].split(" ", 2)[1]);
       }
     }
 
