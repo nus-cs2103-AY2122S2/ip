@@ -1,0 +1,24 @@
+list
+read book
+return book
+list
+mark 3
+mark 2
+list
+todo understand book
+list
+unmark 2
+list
+unmark -1
+list
+list
+deadline do code /by Sunday
+event Watch show /at Monday 10-11pm
+list
+mark 5
+mark 6
+list
+unmark 3
+unmark 5
+list
+bye
