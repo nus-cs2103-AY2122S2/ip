@@ -6,7 +6,7 @@ import duke.commands.*;
 public class Parser {
 
     // logic that determines how Burp will reply
-    public static Command parseCommands(Ui.Reply type, TaskList toDoList, String cmd) {
+    public static Command parseCommands(Ui.Reply type, TaskList toDoList, String cmd) throws DukeException {
         String[] cmd_split = cmd.split(" ");
         switch (type) {
         case LIST:

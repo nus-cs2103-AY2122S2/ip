@@ -6,11 +6,11 @@ import duke.main.TaskList;
 import duke.main.Parser;
 
 public class AddEventCommand extends Command<String> {
-    public AddEventCommand(TaskList toDoList, String cmd) {
+    public AddEventCommand(TaskList toDoList, String cmd) throws DukeException {
         this.runCommand(toDoList, cmd);
     }
 
-    public void runCommand(TaskList toDoList, String cmd) {
+    public void runCommand(TaskList toDoList, String cmd) throws DukeException {
         try {
             String[] eventDetails = cmd.split("event")[1].split("/at");
             String eventName = eventDetails[0];
@@ -19,7 +19,7 @@ public class AddEventCommand extends Command<String> {
             toDoList.add(newEvent);
             System.out.println(Parser.formatMsg("Got it. I've added this task:\n\t" + newEvent + "\n\tNow you have " + toDoList.size() + " tasks in the list."));
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(new DukeException(Parser.formatMsg("☹ OOPS!!! The description of an event cannot be empty.")));
+            throw new DukeException(Parser.formatMsg("☹ OOPS!!! The description of an event cannot be empty."));
         }
     }
 

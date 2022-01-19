@@ -6,11 +6,11 @@ import duke.main.TaskList;
 import duke.main.Parser;
 
 public class AddDeadlineCommand extends Command<String> {
-    public AddDeadlineCommand(TaskList toDoList, String cmd) {
+    public AddDeadlineCommand(TaskList toDoList, String cmd) throws DukeException {
         this.runCommand(toDoList, cmd);
     }
 
-    public void runCommand(TaskList toDoList, String cmd) {
+    public void runCommand(TaskList toDoList, String cmd) throws DukeException {
         try {
             String[] deadlineDetails = cmd.split("deadline")[1].split("/by");
             String deadlineName = deadlineDetails[0];
@@ -19,7 +19,7 @@ public class AddDeadlineCommand extends Command<String> {
             toDoList.add(newDeadline);
             System.out.println(Parser.formatMsg("Got it. I've added this task:\n\t" + newDeadline + "\n\tNow you have " + toDoList.size() + " tasks in the list."));
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(new DukeException(Parser.formatMsg("☹ OOPS!!! The description of a deadline cannot be empty.")));
+            throw new DukeException(Parser.formatMsg("☹ OOPS!!! The description of a deadline cannot be empty."));
         }
     }
 

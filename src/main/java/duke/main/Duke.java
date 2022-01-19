@@ -17,7 +17,6 @@ public class Duke {
         ui = new Ui();
         // Attempt to open the storage file. If file does not exist, then create a new file.
         try {
-            System.out.println("Loading content from file");
             toDoList = storage.addFileContent("./tasklist.txt");
         } catch (FileNotFoundException e) {
             Ui.handleLoadError();
@@ -27,7 +26,7 @@ public class Duke {
         }
     }
 
-    public void run() throws IOException {
+    public void run() throws DukeException, IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String cmd;
         Ui.showWelcome();
@@ -39,7 +38,7 @@ public class Duke {
         Ui.showBye();
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws DukeException, IOException {
         new Duke("./tasklist.txt").run();
     }
 }

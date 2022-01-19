@@ -6,17 +6,17 @@ import duke.main.TaskList;
 import duke.main.Parser;
 
 public class MarkCommand extends Command<Integer> {
-    public MarkCommand(TaskList toDoList, int numberToMark) {
+    public MarkCommand(TaskList toDoList, int numberToMark) throws DukeException {
         this.runCommand(toDoList, numberToMark);
     }
 
-    public void runCommand(TaskList toDoList, Integer numberToMark) {
+    public void runCommand(TaskList toDoList, Integer numberToMark) throws DukeException {
         try {
             Task taskToMark = toDoList.get(numberToMark);
             taskToMark.mark();
             System.out.println(Parser.formatMsg("OK, I've marked this task as done:\n\t" + taskToMark));
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(new DukeException(Parser.formatMsg("☹ OOPS!!! Item to mark does not exist.")));
+            throw new DukeException(Parser.formatMsg("☹ OOPS!!! Item to mark does not exist."));
         }
     }
 }

@@ -37,7 +37,7 @@ public class Ui {
         System.out.println(parser.formatMsg("Bye. Hope to see you again soon!"));
     }
 
-    public static void burpReply(Ui.Reply type, TaskList toDoList, String cmd) {
+    public static void burpReply(Ui.Reply type, TaskList toDoList, String cmd) throws DukeException {
         Parser.parseCommands(type, toDoList, cmd);
     }
 
