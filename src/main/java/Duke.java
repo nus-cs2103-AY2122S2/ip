@@ -20,11 +20,12 @@ public class Duke {
 
         do {
             input = Console.read();
-            String[] inputArg = input.split(" ", 2);
+            String[] inputArgs = input.split(" ", 2);
 
             try {
-                switch (inputArg[0].toLowerCase()) {
+                switch (inputArgs[0].toLowerCase()) {
                     case "bye": {
+                        Command.checkSingle(inputArgs);
                         switch (dot) {
                             case JJBA: {
                                 Console.println("Goodbye! Good luck!");
@@ -38,17 +39,36 @@ public class Duke {
                         break;
                     }
                     case "dio": {
+                        Command.checkSingle(inputArgs);
+
                         dot = BOT.DIO;
                         Console.println("ZA WARUDO!");
                         break;
                     }
                     case "jjba": {
+                        Command.checkSingle(inputArgs);
+
                         dot = BOT.JJBA;
                         Console.println("What can I do for you?");
                         break;
                     }
+                    case "list": {
+                        Command.checkSingle(inputArgs);
+                        switch (dot) {
+                            case JJBA: {
+                                Console.printList("Here are the things you will need to do:",
+                                        "There are no task available.",taskArr);
+                                break;
+                            }
+                            case DIO: {
+                                Console.printList("Oh? You're Approaching Me?",
+                                        "I reject my humanity, Jojo!", taskArr);
+                            }
+                        }
+                        break;
+                    }
                     case "delete" : {
-                        Task curTask = taskArr.remove(Integer.parseInt(inputArg[1]) - 1);
+                        Task curTask = taskArr.remove(Integer.parseInt(inputArgs[1]) - 1);
 
                         switch (dot) {
                             case JJBA: {
@@ -63,7 +83,7 @@ public class Duke {
                         break;
                     }
                     case "mark": {
-                        Task curTask = taskArr.get(Integer.parseInt(inputArg[1]) - 1);
+                        Task curTask = taskArr.get(Integer.parseInt(inputArgs[1]) - 1);
                         curTask.markTask();
 
                         switch (dot) {
@@ -78,8 +98,9 @@ public class Duke {
                         break;
                     }
                     case "unmark": {
-                        Task curTask = taskArr.get(Integer.parseInt(inputArg[1]) - 1);
+                        Task curTask = taskArr.get(Integer.parseInt(inputArgs[1]) - 1);
                         curTask.unmarkTask();
+
                         switch (dot) {
                             case JJBA: {
                                 Console.println("Done, remember to do your task.\n   " + curTask.toString());
@@ -91,64 +112,22 @@ public class Duke {
                         }
                         break;
                     }
-                    case "list": {
-
-                        switch (dot) {
-                            case JJBA: {
-                                Console.printList("Here are the things you will need to do:",
-                                        "There are no task available.",taskArr);
-                                break;
-                            }
-                            case DIO: {
-                                Console.printList("Oh? You're Approaching Me?",
-                                        "I reject my humanity, Jojo!", taskArr);
-                            }
-                        }
-                        break;
-                    }
                     case "todo": {
-
-                        if (inputArg.length < 2 || inputArg[1].isBlank()) {
-                            throw new DukeException("Description of a todo task cannot be empty.");
-                        }
-
-                        Task newTask = new Todo(inputArg[1]);
+                        Task newTask = Command.createTodo(inputArgs);
 
                         taskArr.add(newTask);
                         printTaskAdd(newTask);
                         break;
                     }
                     case "deadline": {
-
-                        if (inputArg.length < 2 || inputArg[1].isBlank()) {
-                            throw new DukeException("Time and Description of a deadline task cannot be empty.");
-                        }
-
-                        String[] oargs = inputArg[1].split("/");
-
-                        if (oargs.length < 2 || oargs[1].isBlank() || !oargs[1].startsWith("by")) {
-                            throw new DukeException("Invalid/Missing suffix, format is 'deadline [message] /by [date/time]'.");
-                        }
-
-                        Task newTask = new Deadline(oargs[0], oargs[1].substring(3));
+                        Task newTask = Command.createDeadline(inputArgs);
 
                         taskArr.add(newTask);
                         printTaskAdd(newTask);
                         break;
                     }
                     case "event": {
-
-                        if (inputArg.length < 2 || inputArg[1].isBlank()) {
-                            throw new DukeException("Time and Description of a event task cannot be empty.");
-                        }
-
-                        String[] oargs = inputArg[1].split("/");
-
-                        if (oargs.length < 2 || oargs[1].isBlank() || !oargs[1].startsWith("at")) {
-                            throw new DukeException("Invalid/Missing suffix, format is 'event [message] /at [date/time]'.");
-                        }
-
-                        Task newTask = new Event(oargs[0], oargs[1].substring(3));
+                        Task newTask = Command.createEvent(inputArgs);
 
                         taskArr.add(newTask);
                         printTaskAdd(newTask);
