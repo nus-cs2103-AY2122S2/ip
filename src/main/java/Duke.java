@@ -18,25 +18,40 @@ public class Duke {
         boolean exit = false;
         while (!exit) {
             Scanner sc = new Scanner(System.in);
-            String input = sc.nextLine();
-            if (input.equals("bye")) {
-                System.out.println(output("Bye. Hope to see you again soon!"));
-                exit = true;
-            } else if (input.equals("list")) {
-                StringBuilder text = new StringBuilder();
-                for (int i=0; i<list.size();i++){
-                    if (i == 0) {
-                        text.append(i + 1).append(". ").append(list.get(i).getTask()).append("\n");
-                    } else if (i == list.size() - 1){
-                        text.append("    ").append(i + 1).append(". ").append(list.get(i).getTask());
-                    } else{
-                        text.append("    ").append(i + 1).append(". ").append(list.get(i).getTask()).append("\n");
+            String[] input = sc.nextLine().split(" ");
+            switch (input[0]) {
+                case "bye":
+                    System.out.println(output("Bye. Hope to see you again soon!"));
+                    exit = true;
+                    break;
+                case "list":
+                    StringBuilder text = new StringBuilder();
+                    text.append("Here are the tasks in your list:\n");
+                    for (int i = 0; i < list.size(); i++) {
+                        text.append("    ").append(i + 1).append(". ")
+                                .append(list.get(i).getStatus())
+                                .append(list.get(i).getTask())
+                                .append("\n");
                     }
-                }
-                System.out.println(output(text.toString()));
-            } else {
-                list.add(new Task(input));
-                System.out.println(output("added: " + input));
+                    text.delete(text.length() - 1, text.length());
+                    System.out.println(output(text.toString()));
+                    break;
+                case "mark":
+                    int i = Integer.parseInt(input[1]) - 1;
+                    list.set(i, list.get(i).mark());
+                    System.out.println(output("Nice! I've marked this task as done:\n        "
+                            + list.get(i).getStatus() + list.get(i).getTask()));
+                    break;
+                case "unmark":
+                    int j = Integer.parseInt(input[1]) - 1;
+                    list.set(j, list.get(j).unmark());
+                    System.out.println(output("OK, I've marked this task as not done yet:\n        "
+                            + list.get(j).getStatus() + list.get(j).getTask()));
+                    break;
+                default:
+                    list.add(new Task(input[0]));
+                    System.out.println(output("added: " + input[0]));
+                    break;
             }
         }
     }
