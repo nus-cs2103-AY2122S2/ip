@@ -14,7 +14,7 @@ public class DukeException extends Exception{
 
     public DukeException() {}
 
-    public void invalidChecker (String[] tempList) throws DukeException {
+    public void invalidChecker (String[] tempList, int tasks) throws DukeException {
         if (inputList.contains(tempList[0])) {
             if (tempList.length == 1) {
                 throw new DukeException("☹ OOPS!!! The description of a task cannot be empty.");
@@ -36,8 +36,11 @@ public class DukeException extends Exception{
                 }
             }
         } else if (inputList2.contains(tempList[0])) {
+            int taskNum = Integer.parseInt(tempList[1]);
             if (tempList.length == 1) {
                 throw new DukeException("☹ OOPS!!! Please enter a task number.");
+            } else if (!(taskNum <= tasks && taskNum > 0)) {
+                throw new DukeException("☹ OOPS!!! Task number does not exist.");
             }
         } else if (!inputList3.contains(tempList[0])) {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
