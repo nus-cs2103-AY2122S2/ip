@@ -3,10 +3,10 @@
  * @author Sim Jun Heng
  * @version CS2103T AY21/22 Sem 2
  */
-public class Task {
+public abstract class Task {
   // Class variables
-  private boolean done = false;
-  private String desc;
+  protected boolean done = false;
+  protected String desc;
 
   /**
    * Method Constructor
@@ -18,21 +18,15 @@ public class Task {
   }
 
   /**
-   * This method is used to get the current status of the Task
+   * This abstract method is used to get the current status of the Task
    * Status can be defined as Done/Not Done
    *
    * @return a string denoting the task status.
    */
-  public String getTask() {
-    if (done) {
-      return ("[X] " + this.desc);
-    } else {
-      return ("[ ] " + this.desc);
-    }
-  }
+  public abstract String getTask();
 
   /**
-   * This method is used to change the status of the Task to done. 
+   * This method is used to change the status of the Task to done.
    */
   public void setAsDone() {
     this.done = true;
