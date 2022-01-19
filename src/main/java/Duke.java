@@ -1,13 +1,17 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import exceptions.DukeException;
+import exceptions.DukeToDoEmptyException;
+import exceptions.DukeUnknownCommandException;
+
 
 public class Duke {
 
     private ArrayList<Task> dukeList = new ArrayList<Task>();
     Scanner sc = new Scanner(System.in);
 
-    public void startDuke() {
+    public void startDuke() throws DukeException {
         displayHelloMessage();
         String command = sc.next();
         String description = sc.nextLine();
@@ -54,7 +58,8 @@ public class Duke {
         displayLine();
     }
 
-    void executeCommand(String command, String description) {
+    void executeCommand(String command, String description) throws DukeException{
+        try {
         if (command.equals("list")) {
             displayList();
         } else if (command.equals("mark")) {
@@ -71,7 +76,7 @@ public class Duke {
             displayIncompleteTask(toBeCompleted);
         } else {
             displayLine();
-            System.out.println("Got it. I've added this task: ");
+            System.out.println("Got it. I've added this task:");
             if (command.equals("event")) {
                 String[] descriptionAndTime = description.split("/");
                  String eventDescription = (descriptionAndTime[0].split(" ", 2))[1];
@@ -86,14 +91,26 @@ public class Duke {
                  Deadline newDeadline = new Deadline(deadlineDescription, deadlineTime);
                  dukeList.add(newDeadline);
                  System.out.println(newDeadline);
-            } else {
+            } else if (command.equals("todo")) {
+                if (description.trim().equals("")) {
+                    throw new DukeToDoEmptyException();
+                }
+                displayLine();
+                System.out.println("Got it. I've added this task: ");
                 ToDo newTodo = new ToDo(description.substring(1));
                 dukeList.add(newTodo);
                 System.out.println(newTodo);
+            } else {
+                throw new DukeUnknownCommandException();
+            }
+            System.out.println("Now you have " + dukeList.size() + " tasks in the list.");
+            displayLine();
         }
-        System.out.println("Now you have " + dukeList.size() + " tasks in the list.");
-        displayLine();
-    }
+} catch ( DukeToDoEmptyException | DukeUnknownCommandException e) {
+    displayLine();
+    System.out.println(e.getMessage());
+    displayLine();
+}
 
     }
 
@@ -106,12 +123,12 @@ public class Duke {
 
     void displayTaskCompletion(Task incomplete) {
         displayLine();
-        System.out.println("Nice! I've marked this task as done: ");
+        System.out.println("Nice! I've marked this task as done:");
         System.out.println(incomplete);
         displayLine();
     }
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         Duke duke = new Duke();
         duke.startDuke();
     }
