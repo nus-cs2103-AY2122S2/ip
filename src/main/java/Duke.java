@@ -16,6 +16,20 @@ public class Duke {
             String[] input_split = input.split(" ");
 
             switch (input_split[0]) {
+                case "todo":
+                    String todo_description = input.split("todo ", 2)[1];
+                    TaskFunctions.addToList(new ToDo(todo_description));
+                    break;
+                case "deadline":
+                    String deadline_description = input.split("deadline ", 2)[1].split("/by ")[0];
+                    String deadline_date = input.split("deadline ", 2)[1].split("/by ")[1];
+                    TaskFunctions.addToList(new Deadline(deadline_description, deadline_date));
+                    break;
+                case "event":
+                    String event_description = input.split("event ", 2)[1].split("/at ")[0];
+                    String event_date = input.split("event ", 2)[1].split("/at ")[1];
+                    TaskFunctions.addToList(new Deadline(event_description, event_date));
+                    break;
                 case "mark":
                     TaskFunctions.markTask(Integer.parseInt(input_split[1]));
                     break;

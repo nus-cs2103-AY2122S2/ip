@@ -6,11 +6,14 @@ public class TaskFunctions {
 
     static public void addToList(Task task) {
 
+        String task_type = task.type;
+
         if (pointer == 99) {
             System.out.println("Task list is full!");
         } else {
             taskList[pointer++] = task;
-            System.out.println("added: " + task.toString());
+            System.out.println("Got it. I've added this task: \n" + task.toString()
+                    + "\nNow you have " + pointer + " tasks in the list.");
         }
     }
 
