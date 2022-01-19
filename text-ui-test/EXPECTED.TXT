@@ -24,7 +24,7 @@
      ☹ OOPS!!! The description of a todo cannot be empty.
      _________________________________
      _________________________________
-     ☹ OOPS!!!The description of an event must contain a specific time
+     ☹ OOPS!!! The description of an event must contain a specific time
      _________________________________
      _________________________________
      Got it. I've added this task:
@@ -33,23 +33,23 @@
      _________________________________
      _________________________________
      Nice! I've marked this task as done:
-     [D][X] return book (by: June 6th)
+     [T][X] read book
      _________________________________
      _________________________________
-     OK, I've marked this task as not done yet:
-     [D][ ] return book (by: June 6th)
+     Noted. I've removed this task:
+       [T][X] read book
+     Now you have 3 tasks in the list
      _________________________________
      _________________________________
      Here are the tasks in your list:
-     1.[T][ ] read book
-     2.[D][ ] return book (by: June 6th)
-     3.[E][ ] project meeting (at: Aug 6th 2-4pm)
-     4.[E][ ] 2nd project meeting (at: Aug 8th 2-4pm)
+     1.[D][ ] return book (by: June 6th)
+     2.[E][ ] project meeting (at: Aug 6th 2-4pm)
+     3.[E][ ] 2nd project meeting (at: Aug 8th 2-4pm)
      _________________________________
      _________________________________
      Got it. I've added this task:
        [D][ ] do homework (by: no idea :-p)
-     Now you have 5 tasks in the list.
+     Now you have 4 tasks in the list.
      _________________________________
      _________________________________
      Bye. Hope to see you again!

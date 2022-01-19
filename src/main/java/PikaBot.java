@@ -168,6 +168,22 @@ public class PikaBot {
                     break;
                 }
 
+                case "delete": {
+                    int taskNumberToDelete = Integer.parseInt(strInputArr[1]);
+                    Task taskToDelete = inputArr.get(taskNumberToDelete - 1);
+                    inputArr.remove(taskNumberToDelete - 1);
+                    System.out.println(indentation + line);
+                    System.out.println(indentation + "Noted. I've removed this task:");
+                    System.out.println(indentation + "  " + taskToDelete);
+                    System.out.println(indentation + "Now you have " + inputArr.size() + " tasks in the list");
+                    System.out.println(indentation + line);
+
+
+                    input = sc.nextLine();
+                    strInputArr = input.split(" ", 2);
+                    break;
+                }
+
                 default: {
                     try {
                         invalidTask();
