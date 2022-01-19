@@ -38,57 +38,89 @@ public class Duke {
                         System.out.println(output(text.toString()));
                         break;
                     case "mark":
-                        int markIndex = Integer.parseInt(input.get(1)) - 1;
-                        list.set(markIndex, list.get(markIndex).mark());
-                        System.out.println(output("Nice! I've marked this task as done:\n        "
-                                + list.get(markIndex)));
+                        try {
+                            int markIndex = Integer.parseInt(input.get(1)) - 1;
+                            list.set(markIndex, list.get(markIndex).mark());
+                            System.out.println(output("Nice! I've marked this task as done:\n        "
+                                    + list.get(markIndex)));
+                        } catch (IndexOutOfBoundsException | NumberFormatException ex) {
+                            DukeException exception = new DukeException("☹ OOPS!!! invalid index.");
+                            System.out.println(output(exception.toString()));
+                        }
                         break;
                     case "unmark":
-                        int unmarkIndex = Integer.parseInt(input.get(1)) - 1;
-                        list.set(unmarkIndex, list.get(unmarkIndex).unmark());
-                        System.out.println(output("OK, I've marked this task as not done yet:\n        "
-                                + list.get(unmarkIndex)));
+                        try {
+                            int unmarkIndex = Integer.parseInt(input.get(1)) - 1;
+                            list.set(unmarkIndex, list.get(unmarkIndex).unmark());
+                            System.out.println(output("OK, I've marked this task as not done yet:\n        "
+                                    + list.get(unmarkIndex)));
+                        } catch (IndexOutOfBoundsException | NumberFormatException ex) {
+                            DukeException exception = new DukeException("☹ OOPS!!! invalid index.");
+                            System.out.println(output(exception.toString()));
+                        }
                         break;
                     case "todo":
                         StringBuilder todo = new StringBuilder();
-                        for (int i = 1; i < input.size(); i++) {
-                            todo.append(input.get(i)).append(" ");
+                        if (input.size() == 1) {
+                            DukeException exception = new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                            System.out.println(output(exception.toString()));
+                        } else {
+                            for (int i = 1; i < input.size(); i++) {
+                                todo.append(input.get(i)).append(" ");
+                            }
+                            list.add(new ToDo(todo.toString()));
+                            System.out.println(output("Got it. I've added this task: \n        "
+                                    + list.get(list.size() - 1) + "\n    Now you have " + list.size() + " tasks in the list."));
                         }
-                        list.add(new ToDo(todo.toString()));
-                        System.out.println(output("Got it. I've added this task: \n        "
-                                + list.get(list.size() - 1) + "\n    Now you have " + list.size() + " tasks in the list."));
                         break;
+
                     case "deadline":
                         StringBuilder deadline = new StringBuilder();
                         StringBuilder deadlineBy = new StringBuilder();
                         int byIndex = input.indexOf("/by");
-                        for (int i = 1; i < byIndex; i++) {
-                            deadline.append(input.get(i)).append(" ");
+                        if (input.size() == 1) {
+                            DukeException exception = new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                            System.out.println(output(exception.toString()));
+                        } else if (byIndex == -1) {
+                            DukeException exception = new DukeException("☹ OOPS!!! The datetime of a deadline cannot be empty.");
+                            System.out.println(output(exception.toString()));
+                        } else {
+                            for (int i = 1; i < byIndex; i++) {
+                                deadline.append(input.get(i)).append(" ");
+                            }
+                            for (int i = byIndex + 1; i < input.size(); i++) {
+                                deadlineBy.append(input.get(i)).append(" ");
+                            }
+                            list.add(new Deadline(deadline.toString(), deadlineBy.toString()));
+                            System.out.println(output("Got it. I've added this task: \n        "
+                                    + list.get(list.size() - 1) + "\n    Now you have " + list.size() + " tasks in the list."));
                         }
-                        for (int i = byIndex + 1; i < input.size(); i++) {
-                            deadlineBy.append(input.get(i)).append(" ");
-                        }
-                        list.add(new Deadline(deadline.toString(), deadlineBy.toString()));
-                        System.out.println(output("Got it. I've added this task: \n        "
-                                + list.get(list.size() - 1) + "\n    Now you have " + list.size() + " tasks in the list."));
                         break;
                     case "event":
-                        StringBuilder event = new StringBuilder();
-                        StringBuilder eventAt = new StringBuilder();
                         int atIndex = input.indexOf("/at");
-                        for (int i = 1; i < atIndex; i++) {
-                            event.append(input.get(i)).append(" ");
+                        if (input.size() == 1) {
+                            DukeException exception = new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+                            System.out.println(output(exception.toString()));
+                        } else if (atIndex == -1) {
+                            DukeException exception = new DukeException("☹ OOPS!!! The datetime of a event cannot be empty.");
+                            System.out.println(output(exception.toString()));
+                        } else {
+                            StringBuilder event = new StringBuilder();
+                            for (int i = 1; i < atIndex; i++) {
+                                event.append(input.get(i)).append(" ");
+                            }
+                            StringBuilder eventAt = new StringBuilder();
+                            for (int i = atIndex + 1; i < input.size(); i++) {
+                                eventAt.append(input.get(i)).append(" ");
+                            }
+                            list.add(new Event(event.toString(), eventAt.toString()));
+                            System.out.println(output("Got it. I've added this task: \n        "
+                                    + list.get(list.size() - 1) + "\n    Now you have " + list.size() + " tasks in the list."));
                         }
-                        for (int i = atIndex + 1; i < input.size(); i++) {
-                            eventAt.append(input.get(i)).append(" ");
-                        }
-                        list.add(new Event(event.toString(), eventAt.toString()));
-                        System.out.println(output("Got it. I've added this task: \n        "
-                                + list.get(list.size() - 1) + "\n    Now you have " + list.size() + " tasks in the list."));
                         break;
                     default:
-                        list.add(new Task(input.get(0)));
-                        System.out.println(output("added: " + input.get(0)));
+                        DukeException exception = new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        System.out.println(output(exception.toString()));
                         break;
                 }
             }
