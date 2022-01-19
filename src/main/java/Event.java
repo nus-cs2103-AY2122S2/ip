@@ -1,3 +1,6 @@
+/**
+ * Represents an event, is a subclass of task.
+ */
 public class Event extends Task{
     protected String at;
 

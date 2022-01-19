@@ -1,3 +1,7 @@
+/**
+ * Represents a chatbot used to keep track of various tasks.
+ */
+
 import java.util.ArrayList;
 
 public class ChatBot {
@@ -5,14 +9,29 @@ public class ChatBot {
     private String line = "-------------------------------------------------";
     private ArrayList<Task> tasks = new ArrayList<Task>();
 
+    /**
+     * Chatbot to be instantiated with a name.
+     *
+     * @param name The name of the chatbot.
+     */
     public ChatBot(String name) {
         this.name = name;
     }
 
+    /**
+     * Prints welcome message to the user.
+     */
     public void greet() {
         System.out.printf("%s%n %s%s%n %s%n%s%n", line, "Hello! I'm ", name, "What can I do for you", line);
     }
 
+    /**
+     * Takes in a string of command from the user,
+     * and performs the required actions or signal error for invalid command.
+     *
+     * @param command A string input from the user.
+     * @return The boolean value to signal the exit from chatbot.
+     */
     public boolean runCommand(String command) {
         String [] input = command.split(" ", 2);
         switch (input[0].toLowerCase()) {
@@ -91,6 +110,11 @@ public class ChatBot {
         return false;
     }
 
+    /**
+     * Add a task to the end of the list of current task(s).
+     *
+     * @param t The task to be added.
+     */
     public void addTask(Task t) {
         tasks.add(t);
         System.out.printf("%s%n %s%n   %s%n %s%n%s%n",
@@ -99,6 +123,11 @@ public class ChatBot {
                 line);
     }
 
+    /**
+     * Delete a task for the list of task(s).
+     *
+     * @param index The index of the task in the list.
+     */
     public void deleteTask(int index) {
         Task t = tasks.remove(index);
         System.out.printf("%s%n %s%n   %s%n %s%n%s%n",
@@ -107,18 +136,31 @@ public class ChatBot {
                 line);
     }
 
+    /**
+     * Mark a task as done.
+     *
+     * @param index The index of the task in the list.
+     */
     public void markTask(int index) {
         tasks.get(index).setDone(true);
         System.out.printf("%s%n %s%n    %s%n%s%n", line, "Nice! I've marked this task as done:",
                 tasks.get(index).toString(), line);
     }
 
+    /**
+     * Mark a task as not done yet.
+     *
+     * @param index The index of the task in the list.
+     */
     public void unmarkTask(int index) {
         tasks.get(index).setDone(false);
         System.out.printf("%s%n %s%n    %s%n%s%n", line, "Nice! I've marked this task as not done yet:",
                 tasks.get(index).toString(), line);
     }
 
+    /**
+     * Print out all the tasks in the list in the order as they were added in.
+     */
     public void printTasks() {
         String title = tasks.isEmpty() ? "You got no task now! Start by adding new tasks."
                 : "Here are the task(s) in your list:";
@@ -130,10 +172,18 @@ public class ChatBot {
         System.out.println(line);
     }
 
+    /**
+     * Echo a message.
+     *
+     * @param input Message to be echoed.
+     */
     public void echo(String input) {
         System.out.printf("%s%n %s%n%s%n", line, input, line);
     }
 
+    /**
+     * Prints the exit message.
+     */
     public void quit() {
         System.out.printf("%s%n %s%n%s%n", line, "Bye. Hope to see you again soon!", line);
     }

@@ -1,3 +1,6 @@
+/**
+ * Represents a task with deadline, is a subclass of task.
+ */
 public class Deadline extends Task{
     protected String by;
     protected String icon = "[D]";
