@@ -11,6 +11,7 @@ public class Duke {
                 + "What can I do for you?" + '\n'
                 + "____________________________________________________________");
 
+
         while (sc.hasNext()) {
             String curr = sc.nextLine();
 
