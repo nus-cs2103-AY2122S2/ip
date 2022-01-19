@@ -1,10 +1,24 @@
+import java.util.Scanner;
+
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        System.out.println("A very good day to you master, I'm Blue the Genie");
+        System.out.println("What do you wish for today? Your wish is my command");
+        System.out.println("*-**-**-**-**-**-**-**-**-**-****-**-****-**-****-**");
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            String command = sc.next();
+            if (command.equals("bye")) {
+                System.out.println("Rub my lamp to summon me again");
+                System.out.println("Good bye for now master");
+                System.out.println("*-**-**-**-**-**-**-**-**-**-****-**-****-**-****-**");
+                break;
+            } else {
+                System.out.println(command);
+                System.out.println("*-**-**-**-**-**-**-**-**-**-****-**-****-**-****-**");
+            }
+        }
+        sc.close();
+
     }
 }
