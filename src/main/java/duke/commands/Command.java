@@ -1,6 +1,6 @@
 package duke.commands;
 import duke.main.*;
 
-public abstract class Command {
-    public abstract void runCommand(TaskList todoList, String cmd);
+public abstract class Command<E> {
+    public abstract void runCommand(TaskList todoList, E cmd);
 }

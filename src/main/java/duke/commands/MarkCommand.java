@@ -5,12 +5,12 @@ import duke.main.DukeException;
 import duke.main.TaskList;
 import duke.main.Parser;
 
-public class MarkCommand {
+public class MarkCommand extends Command<Integer> {
     public MarkCommand(TaskList toDoList, int numberToMark) {
         this.runCommand(toDoList, numberToMark);
     }
 
-    public void runCommand(TaskList toDoList, int numberToMark) {
+    public void runCommand(TaskList toDoList, Integer numberToMark) {
         try {
             Task taskToMark = toDoList.get(numberToMark);
             taskToMark.mark();

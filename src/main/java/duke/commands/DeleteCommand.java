@@ -5,12 +5,12 @@ import duke.main.DukeException;
 import duke.main.TaskList;
 import duke.main.Parser;
 
-public class DeleteCommand {
-    public DeleteCommand(TaskList toDoList, int numberToDelete) {
+public class DeleteCommand extends Command<Integer> {
+    public DeleteCommand(TaskList toDoList, Integer numberToDelete) {
         this.runCommand(toDoList, numberToDelete);
     }
 
-    public void runCommand(TaskList toDoList, int numberToDelete) {
+    public void runCommand(TaskList toDoList, Integer numberToDelete) {
         try {
             Task deletedTask = toDoList.remove(numberToDelete);
             System.out.println(Parser.formatMsg("Noted. I've removed this task:\n\t" + deletedTask + "\n\tNow you have " + toDoList.size() + " tasks in the list."));

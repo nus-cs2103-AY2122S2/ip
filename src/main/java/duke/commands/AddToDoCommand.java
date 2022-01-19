@@ -5,7 +5,7 @@ import duke.main.DukeException;
 import duke.main.TaskList;
 import duke.main.Parser;
 
-public class AddToDoCommand {
+public class AddToDoCommand extends Command<String> {
     public AddToDoCommand(TaskList toDoList, String cmd) {
         this.runCommand(toDoList, cmd);
     }

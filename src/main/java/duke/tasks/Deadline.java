@@ -20,16 +20,16 @@ public class Deadline extends Task {
         return super.getMarkStatus() + "&D&" + super.getTask() + "&" + this.deadline;
     }
 
-    private void dateFormatter(String dateTime) {
+    private void dateFormatter(String dateTime) throws ArrayIndexOutOfBoundsException{
         // the string is of the form: 2/12/2019 1800
         dateTime = dateTime.replace('/', '-');
         String[] splitDateTime = dateTime.split(" ");
         try {
             this.date = LocalDate.parse(splitDateTime[0]);
+            this.time = splitDateTime[1];
         } catch (Exception e) {
             System.out.println("Wrong date format");
         }
-        this.time = splitDateTime[1];
     }
 
     public String getDate() {

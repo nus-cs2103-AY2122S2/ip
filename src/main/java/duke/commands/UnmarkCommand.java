@@ -5,12 +5,12 @@ import duke.main.DukeException;
 import duke.main.TaskList;
 import duke.main.Parser;
 
-public class UnmarkCommand {
-    public UnmarkCommand(TaskList toDoList, int numberToUnmark) {
+public class UnmarkCommand extends Command<Integer> {
+    public UnmarkCommand(TaskList toDoList, Integer numberToUnmark) {
         this.runCommand(toDoList, numberToUnmark);
     }
 
-    public void runCommand(TaskList toDoList, int numberToUnmark) {
+    public void runCommand(TaskList toDoList, Integer numberToUnmark) {
         try {
             Task taskToUnmark = toDoList.get(numberToUnmark);
             taskToUnmark.unmark();

@@ -5,7 +5,7 @@ import duke.main.DukeException;
 import duke.main.TaskList;
 import duke.main.Parser;
 
-public class AddDeadlineCommand {
+public class AddDeadlineCommand extends Command<String> {
     public AddDeadlineCommand(TaskList toDoList, String cmd) {
         this.runCommand(toDoList, cmd);
     }

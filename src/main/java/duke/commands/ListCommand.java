@@ -2,7 +2,7 @@ package duke.commands;
 
 import duke.main.TaskList;
 
-public class ListCommand extends Command {
+public class ListCommand extends Command<String> {
     private final String tabbedLine = "\t----------------------------------------------";
     public ListCommand(TaskList toDoList, String cmd) {
         this.runCommand(toDoList, cmd);
