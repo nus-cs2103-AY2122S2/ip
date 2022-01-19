@@ -20,6 +20,8 @@ public class Duke {
             if (input.equals("bye")) {
                 cmd.bye();
                 break;
+            } else if (input.equals("list")) {
+                cmd.list();
             } else {
                 cmd.echoInput(input);
             }
