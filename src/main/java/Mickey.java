@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Duke {
+public class Mickey {
     public static List<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
