@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 /**
  * Chatbot that supports tracking tasks as added by the user. Created as part of CS2103T.
+ *
  * @author Jet Tan
  */
 public class Duke {
@@ -63,7 +64,7 @@ public class Duke {
     /**
      * Processes the input.
      */
-    private static void process(String input) {
+    private static void process(String input) throws DukeException {
         String[] arr = input.split(" ");
         String command = arr[0]; // first word of the user input
         if (command.equals("bye")) {
@@ -84,25 +85,45 @@ public class Duke {
         } else if (command.equals("todo")) {
             String desc = input.replaceFirst("todo", "").trim();
             Todo newTodo = new Todo(desc);
+            if (desc.equals("")) {
+                throw new EmptyDescException(BORDER + "Todo description cannot be empty.\n" + BORDER);
+            }
             TASKS.add(newTodo);
             System.out.println(successMessage(newTodo));
         } else if (command.equals("event")) {
+            if (!input.contains("/at")) {
+                throw new InvalidInputException("Usage: event <description> /at <time>");
+            }
             String[] descTimePair = input.replaceFirst("event", "").trim().split("/at");
+            if (descTimePair.length < 2) {
+                throw new InvalidInputException("Usage: event <description> /at <time>");
+            }
             String desc = descTimePair[0];
+            if (desc.equals("")) {
+                throw new EmptyDescException(BORDER + "Event description cannot be empty.\n" + BORDER);
+            }
             String time = descTimePair[1];
             Event newEvent = new Event(desc, time);
             TASKS.add(newEvent);
             System.out.println(successMessage(newEvent));
         } else if (command.equals("deadline")) {
+            if (!input.contains("/by")) {
+                throw new InvalidInputException("Usage: deadline <description> /by <time>");
+            }
             String[] descTimePair = input.replaceFirst("deadline", "").trim().split("/by");
+            if (descTimePair.length < 2) {
+                throw new InvalidInputException("Usage: deadline <description> /by <time>");
+            }
             String desc = descTimePair[0];
+            if (desc.equals("")) {
+                throw new EmptyDescException(BORDER + "Deadline description cannot be empty.\n" + BORDER);
+            }
             String time = descTimePair[1];
             Deadline newDeadline = new Deadline(desc, time);
             TASKS.add(newDeadline);
             System.out.println(successMessage(newDeadline));
         } else {
-            TASKS.add(new Task(input));
-            System.out.println(BORDER + "added: " + input + "\n" + BORDER);
+            throw new UnknownCommandException(BORDER + "I'm sorry, but I don't know what that means.\n" + BORDER);
         }
     }
 
@@ -114,7 +135,11 @@ public class Duke {
         Scanner s = new Scanner(System.in);
         while (s.hasNextLine()) {
             String input = s.nextLine().toLowerCase().trim();
-            process(input);
+            try {
+                process(input);
+            } catch (DukeException e) {
+                System.out.println(e);
+            }
         }
     }
 }
