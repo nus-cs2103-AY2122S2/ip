@@ -1,7 +1,43 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello, My Dear Friend... I'm Duke, your personal motivator!
+____________________________________________________________________________________________________
+What can i do for you today?
+____________________________________________________________________________________________________
+You currently do not have any outstanding tasks! Great job! :D
+____________________________________________________________________________________________________
+Fantabulous! You have added this Todo Item:
+[T][] borrow book
+____________________________________________________________________________________________________
+Perfect! You have added this Deadline Item:
+[D][] return book (By: 24th january 8pm at amk library!)
+ Remember to stick to your objective date!
+____________________________________________________________________________________________________
+Perfect! You have added this Event Item:
+[E][] project meeting (At: 24th january 10pm for cs2103)
+ Remember to be there 5 minutes early!
+____________________________________________________________________________________________________
+Here are your tasks:
+1: [T][] borrow book
+2: [D][] return book (By: 24th january 8pm at amk library!)
+3: [E][] project meeting (At: 24th january 10pm for cs2103)
+These are all your tasks! Only 3 more remaining! Keep going!
+____________________________________________________________________________________________________
+Congratulations on completing the task!
+[D][Done!] return book (By: 24th january 8pm at amk library!)
+____________________________________________________________________________________________________
+Here are your tasks:
+1: [T][] borrow book
+2: [D][Done!] return book (By: 24th january 8pm at amk library!)
+3: [E][] project meeting (At: 24th january 10pm for cs2103)
+These are all your tasks! Only 2 more remaining! Keep going!
+____________________________________________________________________________________________________
+I have un-marked this task!
+[D][] return book (By: 24th january 8pm at amk library!)
+____________________________________________________________________________________________________
+Here are your tasks:
+1: [T][] borrow book
+2: [D][] return book (By: 24th january 8pm at amk library!)
+3: [E][] project meeting (At: 24th january 10pm for cs2103)
+These are all your tasks! Only 3 more remaining! Keep going!
+____________________________________________________________________________________________________
+Bye. Hope I've motivated you as much as I could have, and SMILE :D
+____________________________________________________________________________________________________

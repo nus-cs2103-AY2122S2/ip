@@ -1,0 +1,10 @@
+list
+todo borrow book
+deadline return book /by 24th january 8pm at amk library!
+event project meeting /at 24th january 10pm for cs2103
+list
+mark 2
+list
+unmark 2
+list
+bye
