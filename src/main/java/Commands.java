@@ -1,6 +1,6 @@
 public class Commands {
 
-    public Commands() {
+    public Commands() { // Empty Constructor
     }
 
     void echoInput(String input) { // Get DukeLCH to Echo
