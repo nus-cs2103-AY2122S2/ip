@@ -49,8 +49,8 @@ public class Duke {
     }
 
     /* Return true if command is successfully parsed */
-    public boolean commandsParsed(String commands) {
-        StringTokenizer st = new StringTokenizer(commands, " ");
+    public boolean commandsParsed(String input) {
+        StringTokenizer st = new StringTokenizer(input, " ");
         String firstCommand = st.nextToken();
 
         // quit application
@@ -62,7 +62,7 @@ public class Duke {
 
         // print task list
         if (firstCommand.equals("list")) {
-            printDukeResponse(getListStr(userTexts));
+            printDukeResponse("Here are the tasks in your list: \n" + getListStr(userTexts));
             return true;
         }
 
@@ -82,6 +82,29 @@ public class Duke {
                     : "Alright, I've marked the task as not completed yet: \n ";
 
             printDukeResponse(cmdDescription + task.toString());
+            return true;
+        }
+
+        // for adding the diff types of tasks
+        if (firstCommand.equals("todo") || firstCommand.equals("deadline") || firstCommand.equals("event")) {
+            Task newTask = null;
+
+            String taskDescription = input.substring(input.indexOf(firstCommand) + firstCommand.length() + 1);
+            if (firstCommand.equals("deadline")) {
+                newTask = new Deadline(taskDescription.substring(0, taskDescription.indexOf("/by")),
+                        taskDescription.substring(taskDescription.indexOf("/by") + 4));
+            } else if (firstCommand.equals("event")) {
+                newTask = new Event(taskDescription.substring(0, taskDescription.indexOf("/at")),
+                        taskDescription.substring(taskDescription.indexOf("/at") + 4));
+            } else {
+                newTask = new Todo(taskDescription);
+            }
+
+            this.userTexts.add(newTask);
+            String printStr = "Gotcha. Added the task: \n   " + newTask.toString()
+                    + "\nNow you have " + String.valueOf(this.userTexts.size()) + " tasks in your list.";
+
+            printDukeResponse(printStr);
             return true;
         }
 
