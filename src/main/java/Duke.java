@@ -1,3 +1,7 @@
+import Tasks.Event;
+import Tasks.Task;
+import Tasks.Deadline;
+import Tasks.ToDo;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -18,22 +22,50 @@ public class Duke {
             String strArr[] = curr.split(" ", 2);
             String command = strArr[0];
 
-            if (command.equals("list")) {
-                displayList(arr);
-            } else if (command.equals("bye")) {
-                break;
-            } else if (command.equals("mark")) {
-                arr.get(Integer.parseInt(strArr[1]) - 1).status = true;
-                System.out.println("Nice! I've marked this task as done: ");
-                displayList(arr);
-            } else if (command.equals("unmark")) {
-                arr.get(Integer.parseInt(strArr[1]) - 1).status = false;
-                System.out.println("OK, I've marked this task as not done yet: ");
-                displayList(arr);
-            } else {
-                arr.add(new Task(countId, curr, false));
-                System.out.println("added: " + curr);
-                countId++;
+            switch(command) {
+                case "list":
+                    displayList(arr);
+                    continue;
+                case "mark":
+                    arr.get(Integer.parseInt(strArr[1]) - 1).setComplete();
+                    System.out.println("Nice! I've marked this task as done: ");
+                    System.out.println(arr.get(Integer.parseInt(strArr[1]) - 1).toString());
+                    continue;
+                case "unmark":
+                    arr.get(Integer.parseInt(strArr[1]) - 1).setIncomplete();
+                    System.out.println("OK, I've marked this task as not done yet: ");
+                    System.out.println(arr.get(Integer.parseInt(strArr[1]) - 1).toString());
+                    continue;
+                case "todo":
+                    System.out.println("Got it. I've added this task:  ");
+                    arr.add(new ToDo(strArr[1]));
+                    System.out.println(arr.get(arr.size() - 1).toString());
+                    System.out.println("Now you have " + arr.size() + " tasks in the list.");
+                    continue;
+                case "deadline": {
+                    String strArrDate[] = strArr[1].split("/by ", 2);
+                    String eventName = strArrDate[0];
+                    String eventDate = strArrDate[1];
+                    System.out.println("Got it. I've added this task:  ");
+                    arr.add(new Deadline(eventName, eventDate));
+                    System.out.println(arr.get(arr.size() - 1).toString());
+                    System.out.println("Now you have " + arr.size() + "  tasks in the list.");
+                    continue;
+                }
+                case "event": {
+                    String strArrDate[] = strArr[1].split("/at ", 2);
+                    String eventName = strArrDate[0];
+                    String eventDate = strArrDate[1];
+                    System.out.println("Got it. I've added this task:  ");
+                    arr.add(new Event(eventName, eventDate));
+                    System.out.println(arr.get(arr.size() - 1).toString());
+                    System.out.println("Now you have " + arr.size() + " tasks in the list.");
+                    continue;
+                }
+                case "bye":
+                    break;
+                default:
+                    System.out.println("Invalid command, try again");
             }
         }
         System.out.println("____________________________________________________________" + '\n'
@@ -44,7 +76,7 @@ public class Duke {
     public static void displayList(ArrayList<Task> arr) {
         for (int i = 0; i < arr.size(); i++) {
             Task currentTask = arr.get(i);
-            System.out.println(currentTask.toString());
+            System.out.println(i + 1 + ". " + currentTask.toString());
         }
     }
 }
