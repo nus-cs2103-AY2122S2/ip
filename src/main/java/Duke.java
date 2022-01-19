@@ -35,7 +35,7 @@ public class Duke {
         } else if (userInput.equals("list")) {
             String listTask = Task.printArray();
             String output = "   __________________________________________________\n"
-                    + listTask
+                    + listTask + "\n"
                     + "   __________________________________________________";
             System.out.println(output);
 
@@ -56,11 +56,24 @@ public class Duke {
         } else if (userInput.split(" ")[0].equals("unmark")) {
             String[] input = userInput.split(" ");
             Task task =  Task.getTaskList()[Integer.parseInt(input[1]) - 1];
-            task .markNotDone();
+            task.markNotDone();
 
             String output = "   __________________________________________________\n"
                     + "       OK I have marked the following task as not done yet! :D \n"
                     + "       " + task + "\n"
+                    + "   __________________________________________________";
+            System.out.println(output);
+
+            return true;
+        } else if (userInput.split(" ")[0].equals("delete")) {
+            String[] input = userInput.split(" ");
+            Task task = Task.getTaskList()[Integer.parseInt(input[1]) - 1];
+            task.deleteTask(task);
+
+            String output = "   __________________________________________________\n"
+                    + "       OK I have delete the following task! :D \n"
+                    + "       " + task + "\n"
+                    + "       " + "Now you have " + Task.getCounter() + " tasks in your list.\n"
                     + "   __________________________________________________";
             System.out.println(output);
 
@@ -151,9 +164,6 @@ public class Duke {
         welcome();
         Scanner sc = new Scanner(System.in);
         String userInput = sc.nextLine();
-
-        String[] taskList = new String[100];
-
 
         while(processInput(userInput)) {
             userInput = sc.nextLine();

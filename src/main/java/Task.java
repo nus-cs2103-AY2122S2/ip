@@ -5,14 +5,14 @@ public class Task {
     protected boolean isDone;
     protected int id;
 
-    private static Task[] arrayOfTask = new Task[100];
+    private static ArrayList<Task> listOfTask = new ArrayList<>(100);
     private static int counter = 0;
 
     Task(String name) {
         this.name = name;
         this.id = counter + 1;
         this.isDone = false;
-        arrayOfTask[counter] = this;
+        listOfTask.add(this);
         counter++;
     }
 
@@ -23,20 +23,29 @@ public class Task {
     public void markNotDone() {
         this.isDone = false;
     }
+    
+    public void deleteTask(Task t) {
+        listOfTask.remove(t);
+        counter--;
+    }
+    
+    
     public static Task[] getTaskList() {
-        return Task.arrayOfTask;
+        Task[] newArray = listOfTask.toArray(new Task[0]);
+        return newArray;
     }
     public static String getCounter() {
         return Integer.toString(counter);
     }
 
     public static String printArray() {
-        int arrayLength = arrayOfTask.length;
+        int arrayLength = listOfTask.size();
+        Task[] tempArray = Task.getTaskList();
         String output = "       This is the list of all tasks :D \n";
 
         for(int i = 0; i < arrayLength; i++) {
-            if(arrayOfTask[i] != null) {
-                output += "       " + Integer.toString(i + 1) + "." + arrayOfTask[i];
+            if(tempArray[i] != null) {
+                output += "       " + Integer.toString(i + 1) + "." + tempArray[i];
                 if(i != arrayLength - 1) {
                     output += "\n";
                 }
