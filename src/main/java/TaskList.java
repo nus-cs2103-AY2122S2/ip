@@ -15,6 +15,10 @@ public class TaskList {
         this.tasks.add(task);
     }
 
+    public int getLength() {
+        return this.tasks.size();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

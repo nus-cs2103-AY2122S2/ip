@@ -1,4 +1,7 @@
 public enum ValidCommand {
+    TODO("todo"),
+    DEADLINE("deadline"),
+    EVENT("event"),
     MARK("mark"),
     UNMARK("unmark"),
     LIST("list"),

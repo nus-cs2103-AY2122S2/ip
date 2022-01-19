@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 public class Duke {
 
+    private static TaskList taskList;
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -13,7 +15,7 @@ public class Duke {
         System.out.println("What can I do for you?");
 
         Scanner sc = new Scanner(System.in);
-        TaskList taskList = new TaskList();
+        taskList = new TaskList();
 
         while (sc.hasNextLine()) {
             String userInput = sc.nextLine();
@@ -32,15 +34,35 @@ public class Duke {
                 task.markAsDone();
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(task);
+                System.out.println();
             } else if (command.equals(ValidCommand.UNMARK.label)) {
                 Task task = taskList.getTask(Integer.parseInt(details));
                 task.markAsNotDone();
                 System.out.println("OK, I've marked this task as not done yet:");
                 System.out.println(task);
+                System.out.println();
+            } else if (command.equals(ValidCommand.TODO.label)) {
+                Task task = new Todo(details);
+                addTaskHelper(task);
+            } else if (command.equals(ValidCommand.DEADLINE.label)) {
+                String[] deadlineInputs = details.split(" /by ");
+                Task task = new Deadline(deadlineInputs[0], deadlineInputs[1]);
+                addTaskHelper(task);
+            } else if (command.equals(ValidCommand.EVENT.label)) {
+                String[] eventInputs = details.split(" /at ");
+                Task task = new Event(eventInputs[0], eventInputs[1]);
+                addTaskHelper(task);
             } else {
-                taskList.addTask(new Task(userInput));
-                System.out.println("added: " + userInput);
+                System.out.println("Unknown input");
             }
         }
+    }
+
+    private static void addTaskHelper(Task task) {
+        taskList.addTask(task);
+        System.out.println("Got it. I've added this task:");
+        System.out.println(task);
+        System.out.println("Now you have " + taskList.getLength() + " tasks in the list.");
+        System.out.println();
     }
 }
