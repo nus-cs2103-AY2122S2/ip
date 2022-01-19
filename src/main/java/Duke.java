@@ -3,26 +3,48 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        ArrayList<String> database = new ArrayList<>();
+        ArrayList<Task> database = new ArrayList<>();
         String line = "_______________________________________________";
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        String intro = line + "\nHello! I am YQ\n" + "What can I do for you?\n" + logo + line;
+        String intro = line + "\nHello! I'm YQ\n" + "What can I do for you?\n" + logo + line;
         System.out.println(intro);
 
-        String input;
         Scanner sc = new Scanner(System.in);
-        input = sc.nextLine();
-        while (!input.equals("bye")) {
-            database.add(input);
-            for (int i = 0; i < database.size(); i++) {
-                System.out.println(i + 1 + ". " + database.get(i));
+        Task input = new Task(sc.nextLine());
+        while (!input.description.equals("bye")) {
+            System.out.println(line);
+            if (input.description.equals("list")) {
+                for (int i = 0; i < database.size(); i++) {
+                    System.out.println(i + 1 + "." + database.get(i));
+                }
+            } else if (input.description.startsWith("mark")) {
+                String itemNumber = input.description.substring(5);
+                int num = Integer.parseInt(itemNumber) - 1;
+                Task taskToMark = database.get(num);
+                if (!taskToMark.getStatusIcon().equals("X")) {
+                    taskToMark.markAsDone();
+                    database.set(num, taskToMark);
+                }
+                System.out.println("Nice! I've marked this task as done:\n  " + taskToMark);
+            } else if (input.description.startsWith("unmark")) {
+                String itemNumber = input.description.substring(7);
+                int num = Integer.parseInt(itemNumber) - 1;
+                Task taskToUnmark = database.get(num);
+                if (taskToUnmark.getStatusIcon().equals("X")) {
+                    taskToUnmark.markAsUndone();
+                    database.set(num, taskToUnmark);
+                }
+                System.out.println("OK, I've marked this task as not done yet:\n  " + taskToUnmark);
+            } else {
+                database.add(input);
+                System.out.println("added: " + input.description);
             }
             System.out.println(line);
-            input = sc.nextLine();
+            input = new Task(sc.nextLine());
         }
         System.out.println(line + "\n" + "Bye. Hope to see you again soon!" + "\n" + line);
     }
