@@ -30,14 +30,25 @@ public class Task {
         }
     }
 
+    /**
+     * Marks tasks as done.
+     */
     public void mark(){
         this.done = true;
     }
 
+    /**
+     * Unmarks tasks as not done.
+     */
     public void unmark(){
         this.done = false;
     }
 
+    /**
+     * Gets status of tasks based on if task is done/not done.
+     *
+     * @return X if task is done and empty string if task is not done
+     */
     public String getStatus(){
         if (this.done){
             return "X";
@@ -46,10 +57,18 @@ public class Task {
         }
     }
 
+    /**
+     * Decrements number associated with the task.
+     */
     public void decrementNum(){
         this.number--;
     }
 
+    /**
+     * Gets string representation of task.
+     *
+     * @return String representation of task.
+     */
     @Override
     public String toString(){
         String s = String.format("%d. [%s] %s\n", number+1, getStatus(), name);

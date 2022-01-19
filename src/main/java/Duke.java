@@ -51,6 +51,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Deletes a specified index (starts from 1) from the input ArrayList and shifts
+     * all subsequent task numbers accordingly by +1.
+     *
+     * @param taskList ArrayList of tasks
+     * @param num index (starts from 1) to delete
+     */
     public static void deleter(ArrayList<Task> taskList, int num){
         if (num > 0 && num < Task.totalTask){
             num--;
@@ -66,6 +73,14 @@ public class Duke {
             System.out.println("☹ OOPS!!! There is no such task found.");
         }
     }
+
+    /**
+     * Marks/Unmarks tasks as done/undone. Marking tasks that are already marked will have no change;
+     * same with unmarking unmarked tasks.
+     *
+     * @param input Original input string that was entered
+     * @param taskList ArrayList of tasks
+     */
     public static void markTask(String input, ArrayList<Task> taskList){
         String[] inputArr = input.split(" ");
         int taskNum = Integer.parseInt(inputArr[1]) - 1;
@@ -81,6 +96,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Lists all tasks in tasklist. (in input order)
+     *
+     * @param taskList  ArrayList of tasks
+     * @param taskNum total number of tasks that are currently present in taskList
+     */
     public static void listAllTask(ArrayList<Task> taskList, int taskNum){
         System.out.printf("Here are the tasks in your list:\n");
         for(int i=0; i<taskNum; i++){
