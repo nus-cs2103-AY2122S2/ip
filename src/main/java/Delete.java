@@ -7,7 +7,7 @@ public class Delete extends Task{
 
     @Override
     public String message() {
-        return "Noted. I've deleted this task: \n" + super.message() ;
+        return "Noted. I've deleted this task:\n" + super.message() ;
     }
 }
 

@@ -14,8 +14,9 @@ public class Duke {
         System.out.println(separation + greeting + separation);
         ArrayList<Task> list_of_inputs = new ArrayList<>();
 
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
         while(true) {
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             String inp = br.readLine();
             String[] temp = inp.split(" ",2);
 
@@ -41,13 +42,13 @@ public class Duke {
                 int curr_no = Integer.parseInt(temp[1]) - 1;
                 Task task_done = list_of_inputs.get(curr_no);
 
-                System.out.println("Good work!! I have marked it done: \n" + task_done.markedDone());
+                System.out.println("Good work!! I have marked it done:\n" + task_done.markedDone());
 
             } else if (temp[0].equals("unmark")) {
                 int curr_no = Integer.parseInt(temp[1]) - 1;
                 Task task_undone = list_of_inputs.get(curr_no);
                 task_undone.markedUndone();
-                System.out.println("Alrightt! I have marked it undone: \n" + task_undone.markedUndone());
+                System.out.println("Alrightt! I have marked it undone:\n" + task_undone.markedUndone());
 
             } else if (temp[0].equals("todo")) {
                 Todos todo = new Todos(temp[1]);
@@ -64,13 +65,13 @@ public class Duke {
                 String[] event = temp[1].split("/at", 2);
                 Event eventTemp = new Event(event[0],event[1]);
                 list_of_inputs.add(eventTemp);
-                System.out.println("I have added this task and the event time is: \n " + eventTemp.message() + "\n You have " + list_of_inputs.size() + " tasks in the list.");
+                System.out.println("I have added this task and the event time is:\n " + eventTemp.message() + "\n You have " + list_of_inputs.size() + " tasks in the list.");
 
             } else if (temp[0].equals("delete")){
                 int curr_no = Integer.parseInt(temp[1]) - 1;
                 list_of_inputs.remove(curr_no);
                 Delete deleteTemp = new Delete(list_of_inputs.get(curr_no).description);
-                System.out.println(deleteTemp.message() + "\nYou have " + list_of_inputs.size() + " tasks in the list.");
+                System.out.println(deleteTemp.message()+ "\nYou have " + list_of_inputs.size() + " tasks in the list.");
 
             }
         }

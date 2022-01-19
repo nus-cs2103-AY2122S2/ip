@@ -1,7 +1,37 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
 
+******************************
+Hello! I'm Duke
+What can I do for you?
+******************************
+
+Okayy!! I've added this task:
+ [T][ ] read books
+ You have 1 tasks in the list.
+Here are your task(s):
+1. [T][ ] read books
+Deadline for this task:
+ [D][ ] revision (by: Sunday)
+ You have 2 tasks in the list.
+Here are your task(s):
+1. [T][ ] read books
+2. [D][ ] revision (by: Sunday)
+I have added this task and the event time is:
+ [E][ ] party (at: 4pm)
+ You have 3 tasks in the list.
+Here are your task(s):
+1. [T][ ] read books
+2. [D][ ] revision (by: Sunday)
+3. [E][ ] party (at: 4pm)
+Good work!! I have marked it done:
+[X] read books
+Here are your task(s):
+1. [T][X] read books
+2. [D][ ] revision (by: Sunday)
+3. [E][ ] party (at: 4pm)
+Alrightt! I have marked it undone:
+[ ] read books
+Here are your task(s):
+1. [T][ ] read books
+2. [D][ ] revision (by: Sunday)
+3. [E][ ] party (at: 4pm)
+Bye. Hope to see you again soon!
