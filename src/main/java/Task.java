@@ -13,12 +13,14 @@ public class Task {
     public String markAsDone(boolean isDone) {
         if (isDone) {
             this.done = true;
-            return "[" + (done ? "X" : " ") + "] " +
-                    this.taskName + "\n";
+            return  " Nice! I've marked this task as done:" + "\n" + "  " +
+                    "     [" + (done ? "X" : " ") + "] " +
+                    this.taskName;
         } else {
             this.done = false;
-            return "[" + (done ? "X" : " ") + "] " +
-                    this.taskName + "\n";
+            return "OK, I've marked this task as not done yet:" + "\n" + "  " +
+                    "     [" + (done ? "X" : " ") + "] " +
+                    this.taskName;
         }
     }
 
