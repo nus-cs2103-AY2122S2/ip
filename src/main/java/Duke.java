@@ -10,15 +10,15 @@ public class Duke {
         System.out.println(line + welcomeMessage + welcomeQuestion + help + line);
 
         Scanner sc= new Scanner(System.in);
-        System.out.println("\tYour wish is my command. Your command: ");
+        System.out.println("\tYour wish is my command. Your command:");
         String command = ""; // Read user input
         String bye = "bye";
         Task[] taskList = new Task[100];
         int taskCount = 0;
         while (!command.equalsIgnoreCase(bye)) { // Checks if user wants to exit or not
             command = sc.nextLine();
-            String requestNextCommand = "\tAye, Aye. Your next command: ";
-            String reply = "\tAye, Aye. Your command: ";
+            String requestNextCommand = "\tAye, Aye. Your next command:";
+            String reply = "\tAye, Aye. Your command:";
             String taskAdded = "\tTask Added, arrgh:\n";
             String taskCall = "\tAvast ye Matey. Here goes your task list:\n";
             String taskCompleted = "\tTask completed, good job matey!\n";
