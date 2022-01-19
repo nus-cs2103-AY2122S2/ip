@@ -3,10 +3,11 @@ import java.util.ArrayList;
 
 public class Duke {
     static String indent = "    ";
+    static ArrayList<Task> taskList;
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);  // Create a Scanner object
-        ArrayList<Task> taskList = new ArrayList<>(); // arraylist to hold inputs
+        taskList = new ArrayList<>(); // arraylist to hold inputs
 
         dukeOutput(" Hello! I'm YourBoss.\n" +
                 indent +
@@ -38,7 +39,6 @@ public class Duke {
                     System.out.println("Argument after mark/unmark not an integer!");
                 }
 
-
                 Task currTask = taskList.get(taskIndex);
 
                 if (firstWord.equals("mark")) {
@@ -47,9 +47,15 @@ public class Duke {
                     dukeOutput(currTask.markAsDone(false));
                 }
 
-            } else { // add input to list
-                taskList.add(new Task(userInput));
-                dukeOutput(" added: " + userInput);
+            } else { // add task to list, todo, event or deadline
+                if (firstWord.equals("todo")) {
+                    ToDo newToDo = new ToDo(userInput);
+                    taskList.add(newToDo);
+                    dukeAddTaskOutput(newToDo);
+                } else {
+                    taskList.add(new Task(userInput));
+                    dukeOutput(" added: " + userInput);
+                }
             }
             userInput = scanner.nextLine();
         }
@@ -69,6 +75,14 @@ public class Duke {
     static void dukeOutput(String output) {
         hLineBreak();
         printlnWithIndent(output);
+        hLineBreak();
+    }
+
+    static void dukeAddTaskOutput(Task task) {
+        hLineBreak();
+        printlnWithIndent(" Got it. I've added this task:");
+        System.out.print(indent + "   " + task);
+        printlnWithIndent("Now you have "+ taskList.size() +" tasks in the list.");
         hLineBreak();
     }
 }
