@@ -25,7 +25,7 @@ public class Ultoi {
             String cmd = sc.nextLine();
 
             try {
-                checkCommand(cmd, logs);
+                checkInput(cmd, logs);
             } catch (UltoiException e) {
                 System.out.print(lineBreaker + indent + e.getMessage() + "\n" + lineBreaker);
                 continue;
@@ -135,8 +135,11 @@ public class Ultoi {
         }
     }
 
-    // check whether a given command is valid
-    private static void checkCommand(String cmd, ArrayList<Task> logs) throws UltoiException {
+    /* Checks whether a given command is valid.
+     *
+     * @return A Command enum representing the type of input.
+     */
+    private static Command checkInput(String cmd, ArrayList<Task> logs) throws UltoiException {
         String[] tokens = cmd.split(" ");
 
         switch (tokens[0]) {
