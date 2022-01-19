@@ -1,11 +1,21 @@
+import java.io.BufferedWriter;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.File;
+import java.io.FileReader;
+
 import java.util.ArrayList;
 import java.util.Scanner;
+
 
 public class Duke {
 
     public static String LINE = "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*";
     public static ArrayList<Task> tasks = new ArrayList<>(100);
     public static int tasksAdded_index = 0;
+    public static Boolean fileExists = true;
 
     public static boolean list_isEmpty() {
         return tasksAdded_index == 0;
@@ -45,7 +55,14 @@ public class Duke {
                     + "\nThere is no number " + (taskIndex + 1) + " in your task list!\n" + LINE);
         }
 
+        //user trying to mark a done task as done again
+        if (tasks.get(taskIndex).isDone) {
+            throw new DukeException(LINE
+                    + "\nYou have already finished this task! :D\n" + LINE);
+        }
+
         tasks.get(taskIndex).markAsDone();
+        changeMarking("0", "1", taskIndex);
         System.out.println(LINE + "\nYay! I've marked this task as done:\n"
                 + tasks.get(taskIndex).toString() + "\n" + LINE);
     }
@@ -73,18 +90,25 @@ public class Duke {
                     + LINE);
         }
 
+        //user trying to mark a undone task as undone again
+        if (!tasks.get(taskIndex).isDone) {
+            throw new DukeException(LINE
+                    + "\nYou have already unmarked this task!\n" + LINE);
+        }
+
         tasks.get(taskIndex).unmark();
+        changeMarking("1", "0", taskIndex);
         System.out.println(LINE + "\nAw man..I've marked this task as not done yet:\n"
                 + tasks.get(taskIndex).toString() + "\n" + LINE);
     }
 
-    private static void message_todo(String user_message) throws DukeException {
+    private static void message_todo(String user_message) throws DukeException, IOException {
         if (user_message.substring(4).replaceAll(" ", "").equals("")) {
             throw new DukeException(LINE + "\nOh no..did you forget to put what you need to do? :(\n" + LINE);
         } else {
             String task = user_message.substring(5);
             tasks.add(new Todo(task));
-
+            writeToFile("src/main/data/duke.txt", "T | 0 | " + task);
             System.out.println(LINE + "\nWokay! I've added this task:\n"
                     + tasks.get(tasksAdded_index).toString()
                     + "\nNow you have " + (tasksAdded_index + 1) + " task(s) in the list\n" + LINE);
@@ -92,7 +116,7 @@ public class Duke {
         }
     }
 
-    private static void message_deadline(String user_message) throws DukeException {
+    private static void message_deadline(String user_message) throws DukeException, IOException {
         //empty body
         if (user_message.substring(8).replaceAll(" ", "").equals("")) {
             throw new DukeException(LINE + "\nOh no..did you forget to put what you need to do?\n" + LINE);
@@ -113,13 +137,14 @@ public class Duke {
         }
 
         tasks.add(new Deadline(taskDetails[0], taskDetails[1]));
+        writeToFile("src/main/data/duke.txt", "D | 0 | " + taskDetails[0] + " | " + taskDetails[1]);
         System.out.println((LINE + "\nWokay! I've added this task:\n"
                 + tasks.get(tasksAdded_index).toString()
                 + "\nNow you have " + (tasksAdded_index + 1) + " task(s) in the list\n" + LINE));
         tasksAdded_index++;
     }
 
-    private static void message_event(String user_message) throws DukeException {
+    private static void message_event(String user_message) throws DukeException, IOException {
         //empty body
         if (user_message.substring(5).replaceAll(" ", "").equals("")) {
             throw new DukeException(LINE + "\nOh no..did you forget to put what you need to do?\n" + LINE);
@@ -140,6 +165,7 @@ public class Duke {
         }
 
         tasks.add(new Event(taskDetails[0], taskDetails[1]));
+        writeToFile("src/main/data/duke.txt", "E | 0 | " + taskDetails[0] + " | " + taskDetails[1]);
         System.out.println((LINE + "\nWokay! I've added this task:\n"
                 + tasks.get(tasksAdded_index).toString()
                 + "\nNow you have " + (tasksAdded_index + 1) + " task(s) in the list\n" + LINE));
@@ -172,9 +198,119 @@ public class Duke {
         System.out.println(LINE + "\nDone! I've removed this task:\n"
                 + tasks.get(taskIndex).toString() + "\n" + LINE);
         tasks.remove(taskIndex);
+        deleteFromFile(taskIndex);
         tasksAdded_index--;
     }
 
+    private static void processFileContents (String filePath) throws FileNotFoundException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+            String task = s.nextLine();
+            String[] taskDetail = task.split(" \\| ");
+
+            switch (taskDetail[0]) {
+                case "T":
+                    tasks.add(new Todo(taskDetail[2], Integer.parseInt(taskDetail[1])));
+                    break;
+
+                case "D":
+                    tasks.add(new Deadline(taskDetail[2], Integer.parseInt(taskDetail[1]), taskDetail[3]));
+                    break;
+
+                case "E":
+                    tasks.add(new Event(taskDetail[2], Integer.parseInt(taskDetail[1]), taskDetail[3]));
+                    break;
+            }
+            tasksAdded_index ++;
+        }
+    }
+
+    private static void writeToFile(String filePath, String taskToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true);
+        if (fileExists) {
+            if (tasksAdded_index == 0) {
+                fw.write(taskToAdd);
+            } else {
+                fw.write(System.lineSeparator() + taskToAdd);
+            }
+        } else {
+            fw.write(taskToAdd);
+            fileExists = true;
+        }
+        fw.close();
+    }
+
+    private static void changeMarking(String init, String goal, int taskToMark) {
+        String oldFileName = "src/main/data/duke.txt";
+        File tempFile = new File("src/main/data/tempDuke.txt");
+        String tempFileName = "src/main/data/tempDuke.txt";
+
+        int taskToChange = 0;
+
+        try (BufferedReader br = new BufferedReader(new FileReader(oldFileName));
+             BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile))) {
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (taskToChange == tasksAdded_index - 1) { //if it is the last line
+                    if (taskToChange == taskToMark) {
+                        line = line.replaceFirst(init, goal);
+                    }
+                    bw.write(line);
+                } else if (taskToChange == taskToMark) {
+                    line = line.replaceFirst(init, goal);
+                    bw.write(line + "\n");
+                } else {
+                    bw.write(line + "\n");
+                }
+                taskToChange++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        File oldFile = new File(oldFileName);
+        oldFile.delete();
+
+        File newFile = new File(tempFileName);
+        newFile.renameTo(oldFile);
+    }
+
+    private static void deleteFromFile(int taskToDelete) {
+        String oldFileName = "src/main/data/duke.txt";
+        File tempFile = new File("src/main/data/tempDuke.txt");
+        String tempFileName = "src/main/data/tempDuke.txt";
+
+        int indexAccessed = 0;
+
+        try (BufferedReader br = new BufferedReader(new FileReader(oldFileName));
+             BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile))) {
+
+            String line;
+            boolean first = true;
+            while ((line = br.readLine()) != null) {
+                if (indexAccessed != taskToDelete) {
+                    if (first) {
+                        bw.write(line);
+                        first = false;
+                    } else {
+                        bw.write("\n" + line);
+                    }
+                }
+                indexAccessed ++;
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        File oldFile = new File(oldFileName);
+        oldFile.delete();
+
+        File newFile = new File(tempFileName);
+        newFile.renameTo(oldFile);
+    }
 
     private static void messageProcess() {
         Scanner user_input = new Scanner(System.in).useDelimiter("\n");
@@ -207,7 +343,7 @@ public class Duke {
                 } else {
                     System.out.println(LINE + "\n" + user_message + "? Sorry, I don't understand what that means.. :(\n" + LINE);
                 }
-            } catch (DukeException err) {
+            } catch (DukeException | IOException err) {
                 System.out.println(err.getMessage());
             }
 
@@ -224,6 +360,13 @@ public class Duke {
                 + "*     `-----'   `-----'  `--'  `--' `--' `--'   *";
         System.out.println(logo);
         System.out.println("\nHi! You can call me Sona ^^~\nHow can I help you?");
+
+        try {
+            processFileContents("src/main/data/duke.txt");
+        } catch (FileNotFoundException e) {
+            fileExists = false;
+            System.out.println("Oh no... I couldn't find the task list in your hard disk! :(");
+        }
 
         messageProcess();
 
