@@ -5,6 +5,8 @@
  * 2nd method: list, which shows what's in the storage currently.
  */
 
+import com.sun.jdi.InvalidTypeException;
+
 import java.util.ArrayList;
 
 public class Bot {
@@ -27,21 +29,22 @@ public class Bot {
      * @return a boolean to indicate whether to end the program
      */
     boolean respond(String input) {
-        if (input.equals("list")) {
-            tasks.list();
-            return false;
-        } else if (input.equals("bye")) {
-            leave();
-            return true;
-        } else if (input.contains("mark") || input.contains("unmark")) {
-            tasks.mark(input);
-            return false;
-        } else if (input.equals("")) {
-            System.out.println("Say something!");
-            return false;
-        } else {
-            tasks.add(input);
-            return false;
+        try {
+            if (input.equals("list")) {
+                tasks.list();
+            } else if (input.equals("bye")) {
+                leave();
+            } else if (input.contains("mark") || input.contains("unmark")) {
+                tasks.mark(input);
+            } else if (input.equals("")) {
+                throw new InvalidTypeException("No input given!");
+            } else {
+                tasks.add(input);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            return input.equals("bye");
         }
     }
 }
