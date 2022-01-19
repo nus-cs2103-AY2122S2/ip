@@ -4,7 +4,7 @@
  */
 
 import java.util.Scanner;
-
+import java.util.ArrayList;
 
 public class Conan {
 
@@ -23,13 +23,20 @@ public class Conan {
     // NTMY variable is followed by after the username.
     private final static String NTMY = "!, Nice to meet you! (*^_^*)";
 
+    // INITIAL_ASK stores the text to be displayed at the start of the interaction.
     private final static String INITIAL_ASK = "So, tell me what would you like to do ";
 
     // ASK variable asks the user for tasks.
     private final static String ASK = "Please let me know if there's anything else you would like to add, ";
 
+    // ADDED variable stores the message displayed after the task is added.
+    private final static String ADDED = ", I have added ";
+
     // BYE variable stores bye, which recognises user exit command.
     private final static String BYE = "BYE";
+
+    // LIST variable store the list command
+    private final static String LIST = "LIST";
 
     // GOODBYE variable stores a farewell message.
     private final static String GOODBYE = "Goodbye, ";
@@ -39,9 +46,11 @@ public class Conan {
             + "Have a great day ahead, enjoy ! (^-^)/\n"
             + "Hope to see you next time! ";
 
-    // Username is an instance variable that stores the name of the user.
+    // username is an instance variable that stores the name of the user.
     private final String username;
 
+    // tasks store the list of all tasks given by the user.
+    private final ArrayList<Task> tasks;
 
     /**
      * Constructor returns a new Conan object.
@@ -59,6 +68,8 @@ public class Conan {
         System.out.println(SEPARATOR);
         System.out.println(HELLO + this.username + NTMY);
         System.out.println(INITIAL_ASK + this.username);
+
+        this.tasks = new ArrayList<>();
 
         System.out.println(SEPARATOR);
     }
@@ -85,7 +96,6 @@ public class Conan {
         return CarryOn.STOP;
     }
 
-
     /**
      * tell function gets the message from user and passes on to other
      *  function for a suitable response.
@@ -99,6 +109,45 @@ public class Conan {
             return bye();
         }
 
-        return echo(message);
+        // Checks if the user wants to display the tasks
+        if (message.equalsIgnoreCase(LIST)) {
+            return displayTasks();
+        }
+
+        return add(message);
     }
+
+    /**
+     * add function adds a task to the list of tasks to be performed.
+     * @param text the task to be added.
+     * @return CarryOn.NEXT to ask what else the user wants to do.
+     */
+    private CarryOn add(String text) {
+
+        Task task = new Task(text);
+        tasks.add(task);
+        System.out.println(this.username + ADDED + task);
+        System.out.println(ASK + this.username);
+        System.out.println(SEPARATOR);
+        return CarryOn.NEXT;
+    }
+
+    /**
+     * displayTasks shows all the tasks that are currently in the list of tasks.
+     * @return CarryOn.NEXT to ask what else the user wants to do.
+     */
+    CarryOn displayTasks() {
+        int taskNum = 1;
+
+        for (Task task: tasks) {
+            System.out.println(taskNum + ". " + task);
+            taskNum += 1;
+        }
+
+        System.out.println(ASK + this.username);
+        System.out.println(SEPARATOR);
+
+        return CarryOn.NEXT;
+    }
+
 }
