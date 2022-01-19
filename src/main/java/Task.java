@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected TaskStatus status;
     
@@ -19,12 +19,14 @@ public class Task {
         return this.status.getStatusIcon();
     }
     
-    public String fancyPrint() {
-        return this.getStatusIcon() + " " + this.toString();
+    public String getDescription() {
+        return this.description;
     }
+    
+    abstract String getTaskIcon();
     
     @Override
     public String toString() {
-        return this.description;
+        return this.getTaskIcon() + " " + this.getStatusIcon() + " " + this.getDescription();
     }
 }
