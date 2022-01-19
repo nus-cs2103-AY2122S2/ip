@@ -6,7 +6,7 @@ public class Duke {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);  // Create a Scanner object
-        ArrayList<String> list = new ArrayList<String>(); // arraylist to hold inputs
+        ArrayList<Task> list = new ArrayList<>(); // arraylist to hold inputs
 
         dukeOutput("Hello! I'm YourBoss.\n" +
                 indent +
@@ -15,18 +15,23 @@ public class Duke {
         String userInput = scanner.nextLine();
 
         while(true) {
+            String[] splitUserInput = userInput.split(" ");
+            String firstWord = splitUserInput[0];
+
             if (userInput.equals("bye")) { // exit loop
                 dukeOutput("Bye. Hope I never see you again!");
                 break;
             } else if (userInput.equals("list")) { // list out everything in list
-                String tempOut = "1. " + list.get(0);
+                StringBuilder tempOut = new StringBuilder(list.get(0).toString());
                 for (int i = 1; i<list.size();i++) {
-                    tempOut = tempOut + "\n" + indent + (i+1) + ". " + list.get(i);
+                    tempOut.append(indent).append(list.get(i).toString());
                 }
-                dukeOutput(tempOut);
+                dukeOutput(tempOut.toString());
 
+            } else if (firstWord.equals("mark")) {
+            } else if (firstWord.equals("unmark")) {
             } else { // add input to list
-                list.add(userInput);
+                list.add(new Task(userInput));
                 dukeOutput("added: " + userInput);
             }
             userInput = scanner.nextLine();
