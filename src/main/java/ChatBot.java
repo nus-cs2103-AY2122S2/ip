@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class ChatBot {
 
 	private static final String BORDER =
-		"*************************************************************************************";
+		"*****************************************************************************************************************";
 	private static final String[] GREETING_QUOTES = {
 		"Welcome to my inn",
 		"Pull up a chair by the hearth!",
@@ -17,12 +17,12 @@ public class ChatBot {
 		"todo <name of task>                                Add a todo to your task list",
 		"deadline <name of task> /by <deadline of task>     Add a deadline to your task list",
 		"event <name of task> /at <timestamp of task>       Add an event to your task list",
-		"mark <index of task>                               Mark a task as complete in your task list",
+		"mark <index of task>                               Mark a task as completed in your task list",
 		"unmark <index of task>                             Unmark a task in your task list",
 		"bye                                                Exit the program",
 	};
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ChatBotException {
 		greet();
 
 		TaskList taskList = new TaskList();
@@ -44,29 +44,41 @@ public class ChatBot {
 					break;
 				case "list":
 					if (taskList.isEmpty()) {
-						chat("Your task list is currently empty!");
+						chat("Your task list is empty traveller!");
 					} else {
 						chat("Here you go!");
 						taskList.summary();
 					}
 					break;
 				case "mark":
-					markOrUnmark(
-						taskList,
-						Integer.parseInt(input[1]) - 1,
-						true
-					);
-					break;
 				case "unmark":
-					markOrUnmark(
-						taskList,
-						Integer.parseInt(input[1]) - 1,
-						false
-					);
+					try {
+						String response = markOrUnmark(
+							taskList,
+							Integer.parseInt(input[1]) - 1,
+							input[0].equals("mark")
+						);
+						chat(response);
+					} catch (ChatBotException e) {
+						handleError(e.getMessage());
+					} catch (NumberFormatException e) {
+						handleError(
+							"You should mark and unmark tasks using their index rather than title traveller!"
+						);
+					} catch (ArrayIndexOutOfBoundsException e) {
+						handleError(
+							"You need to key in the index of the task you wish to mark or unmark traveller!"
+						);
+					}
 					break;
 				case "todo":
-					chat(taskList.addToDo(input));
-					printNumTasks(taskList.getNumTasks());
+					try {
+						String response = taskList.addToDo(input);
+						chat(response);
+						printNumTasks(taskList.getNumTasks());
+					} catch (ChatBotException e) {
+						handleError(e.getMessage());
+					}
 					break;
 				case "guide":
 					chat(
@@ -86,43 +98,77 @@ public class ChatBot {
 				default:
 					String[] temp = rawInput.split("/");
 					try {
-						if (temp.length != 2) {
-							throw new IllegalArgumentException();
+						if (temp.length == 1) {
+							String[] splitInput = temp[0].split(" ");
+							String type = splitInput[0];
+							if (temp[0].isBlank()) {
+								throw new ChatBotException(
+									"Don't be shy traveller! Type in a command and I will assist you!"
+								);
+							} else if (type.equals("deadline")) {
+								if (splitInput.length == 1) {
+									throw new ChatBotException(
+										"You need to key in the title as well as due date and time of your deadline traveller!"
+									);
+								} else {
+									throw new ChatBotException(
+										"You need to include /by in your command to add a deadline!"
+									);
+								}
+							} else if (type.equals("event")) {
+								if (splitInput.length == 1) {
+									throw new ChatBotException(
+										"You need to key in the title and timestamp of your event traveller!"
+									);
+								} else {
+									throw new ChatBotException(
+										"You need to include /at in your command to add an event!"
+									);
+								}
+							}
+							throw new ChatBotException();
+						} else if (temp.length > 2) {
+							String type = temp[0].trim();
+							if (type.equals("deadline")) {
+								throw new ChatBotException(
+									"The correct format for adding a deadline is deadline <name of task> /by <deadline of task>"
+								);
+							} else if (type.equals("event")) {
+								throw new ChatBotException(
+									"The correct format for adding an event is event <name of task> /at <timestamp of task>"
+								);
+							}
+							throw new ChatBotException();
 						} else {
-							chat(
-								taskList.add(
-									temp[0].split(" "),
-									temp[1].split(" ")
-								)
+							String response = taskList.add(
+								temp[0].split(" "),
+								temp[1].split(" ")
 							);
+							chat(response);
 							printNumTasks(taskList.getNumTasks());
 						}
-					} catch (IllegalArgumentException e) {
-						chat("Thats an invalid input traveller!");
+					} catch (ChatBotException e) {
+						handleError(e.getMessage());
 					}
 			}
 		}
 	}
 
-	public static void markOrUnmark(
+	public static String markOrUnmark(
 		TaskList taskList,
 		int index,
 		boolean mark
-	) {
-		try {
-			if (taskList.isValidIndex(index).equals(true)) {
-				if (mark) {
-					chat(taskList.mark(index));
-				} else {
-					chat(taskList.unmark(index));
-				}
+	)
+		throws ChatBotException {
+		if (taskList.isValidIndex(index).equals(true)) {
+			if (mark) {
+				return taskList.mark(index);
 			} else {
-				throw new NumberFormatException();
+				return taskList.unmark(index);
 			}
-		} catch (NumberFormatException e) {
-			chat("Something went wrong traveller.");
-			chat(
-				"Ensure that you are entering a valid index for the task you wish to unmark"
+		} else {
+			throw new ChatBotException(
+				"This is an invalid task index traveller! You can type list to check all task indexes!"
 			);
 		}
 	}
@@ -162,5 +208,10 @@ public class ChatBot {
 				numTasks == 1 ? "task" : "tasks"
 			)
 		);
+	}
+
+	public static void handleError(String errorMessage) {
+		chat(errorMessage);
+		chat("You can type guide for a list of valid commands to use!");
 	}
 }

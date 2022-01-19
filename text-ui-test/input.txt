@@ -1,11 +1,28 @@
+blablabla
 guide
 list
 todo sometodo
+todo
 deadline somedeadline /by tomorrow
+deadline
+deadline /by /at
+deadline /by tomorrow
+deadline somedeadline2 /by 
+deadline somedeadline3 /at tomorrow
+deadline somedeadline4 tomorrow
 event someevent /at 2pm-4pm tomorrow
+event
+event /at /by
+event /at 2pm-4pm tomorrow
+event someevent 2 /at
+event someevent3 /by 2pm-4pm tomorrow
+event someevent4 2pm-4pm tomorrow
 mark 2
 unmark 3
 mark 2
 mark 1
+mark someevent
+mark 4
+mark
 list
 bye

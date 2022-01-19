@@ -31,58 +31,95 @@ public class TaskList {
 		return index >= 0 && index < numItems;
 	}
 
-	public String add(String[] titleArgs, String[] otherArgs) {
-		if (titleArgs.length <= 1 || !validTypes.contains(titleArgs[0])) {
-			throw new IllegalArgumentException();
+	public String add(String[] titleArgs, String[] otherArgs)
+		throws ChatBotException {
+		String type = titleArgs[0];
+		if (!validTypes.contains(type)) {
+			throw new ChatBotException();
+		}
+		if (titleArgs.length <= 1) {
+			throw new ChatBotException(
+				String.format(
+					"You need to key in the title of your %s traveller!",
+					type
+				)
+			);
+		}
+		if (otherArgs.length <= 1) {
+			throw new ChatBotException(
+				String.format(
+					"You need to key in %s traveller!",
+					type.equals("deadline")
+						? "the due date and time of your deadline"
+						: "the timestamp of your event"
+				)
+			);
 		}
 
 		String title = combineArgs(titleArgs);
 		String other = combineArgs(otherArgs);
 
 		if (set.contains(title)) {
-			return "This task is already in your task list!";
+			throw new ChatBotException(
+				String.format("This %s is already in your task list!", type)
+			);
 		} else {
 			set.add(title);
-			String type = titleArgs[0];
-			String returnString =
-				"This task has been added to your task list!%n%n             %s";
 			switch (type) {
 				case "deadline":
 					if (!otherArgs[0].equals("by")) {
-						throw new IllegalArgumentException();
+						throw new ChatBotException(
+							"The correct format for adding a deadline is deadline <name of task> /by <deadline of task>"
+						);
 					} else {
 						Deadline deadline = new Deadline(title, other);
 						list[numItems++] = deadline;
-						return String.format(returnString, deadline);
+						return String.format(
+							"This deadline has been added to your task list!%n%n             %s",
+							deadline
+						);
 					}
 				case "event":
 					if (!otherArgs[0].equals("at")) {
-						throw new IllegalArgumentException();
+						throw new ChatBotException(
+							"The correct format for adding an event is event <name of task> /at <timestamp of task>"
+						);
 					} else {
 						Event event = new Event(title, other);
 						list[numItems++] = event;
-						return String.format(returnString, event);
+						return String.format(
+							"This event has been added to your task list!%n%n             %s",
+							event
+						);
 					}
 				default:
-					throw new IllegalArgumentException();
+					throw new ChatBotException();
 			}
 		}
 	}
 
-	public String addToDo(String[] args) {
-		if (args.length <= 1 || !validTypes.contains(args[0])) {
-			throw new IllegalArgumentException();
+	public String addToDo(String[] args) throws ChatBotException {
+		if (!validTypes.contains(args[0])) {
+			throw new ChatBotException();
+		}
+
+		if (args.length <= 1) {
+			throw new ChatBotException(
+				"You need to key in the title of your todo traveller!"
+			);
 		}
 
 		String title = combineArgs(args);
 		if (set.contains(title)) {
-			return "This task is already in your task list!";
+			throw new ChatBotException(
+				"This todo is already in your task list!"
+			);
 		} else {
 			set.add(title);
 			ToDo todo = new ToDo(title);
 			list[numItems++] = todo;
 			return String.format(
-				"This task has been added to your task list!%n%n             %s",
+				"This todo has been added to your task list!%n%n             %s",
 				todo
 			);
 		}
