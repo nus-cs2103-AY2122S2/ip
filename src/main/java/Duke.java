@@ -57,6 +57,24 @@ public class Duke {
                     System.out.println(bar);
                     break;
 
+                case "delete":
+                    System.out.println(bar);
+                    try {
+                        int deletedIndex = getIndex(input);
+                        Task deletedTask = listOfTasks.get(deletedIndex - 1);
+                        listOfTasks.remove(deletedIndex - 1);
+                        count--;
+                        System.out.println(indent + "Noted! I've removed this task:");
+                        System.out.println(indent + deletedTask.toString());
+                    } catch (NumberFormatException | IndexOutOfBoundsException | DukeException e) {
+                        System.out.println("Please enter a valid number!");
+                        System.out.println(bar);
+                        break;
+                    }
+                    System.out.println(indent + "Now you have " + count + " tasks in the list");
+                    System.out.println(bar);
+                    break;
+
                 case "todo":
                     System.out.println(bar);
                     try {
@@ -70,10 +88,10 @@ public class Duke {
                         break;
                     }
                     count++;
-                    System.out.println(indent + "Now you have " + listOfTasks.size() + " tasks in the list");
+                    System.out.println(indent + "Now you have " + count + " tasks in the list");
                     System.out.println(bar);
                     break;
-
+                    
                 case "deadline":
                     System.out.println(bar);
                     try {
@@ -91,7 +109,7 @@ public class Duke {
                         break;
                     }
                     count++;
-                    System.out.println(indent + "Now you have " + listOfTasks.size() + " tasks in the list");
+                    System.out.println(indent + "Now you have " + count + " tasks in the list");
                     System.out.println(bar);
                     break;
 
@@ -112,10 +130,10 @@ public class Duke {
                         break;
                     }
                     count++;
-                    System.out.println(indent + "Now you have " + listOfTasks.size() + " tasks in the list");
+                    System.out.println(indent + "Now you have " + count + " tasks in the list");
                     System.out.println(bar);
                     break;
-                    
+
                 default:
                     System.out.println(bar);
                     System.out.println("Please enter a valid command word (eg. list, mark, todo)!");
@@ -134,7 +152,7 @@ public class Duke {
     //Function that prints out all string elements in an array, line by line
     public static void displayList(int lenOfArray, ArrayList<Task> arr) {
         if (lenOfArray == 0) {
-            System.out.println("Nothing added yet!");
+            System.out.println("      " + "Nothing added yet!");
         }
         for (int i = 0; i < lenOfArray; i++) {
             Task t = arr.get(i);
