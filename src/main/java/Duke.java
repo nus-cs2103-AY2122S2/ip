@@ -17,19 +17,20 @@ class Duke {
         Scanner sc= new Scanner(System.in);
         String str = sc.nextLine();
 
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<Task> tasks = new ArrayList<Task>();
         
     
 
         while(!str.equals("bye")) {
             if(!str.equals("list")) {
-                list.add(str);
+                tasks.add(str);
                 System.out.println("added: " + str);
                 
 
             } else {
+                System.out.println("Here are the tasks in your list:");
                 for(int i = 0; i < list.size(); i++) {
-                    System.out.println((i+1) + ". " + list.get(i));
+                    System.out.println((i+1) + ". " + list.get(i).getStatusIcon() + list.get(i));
                 }
 
             }
