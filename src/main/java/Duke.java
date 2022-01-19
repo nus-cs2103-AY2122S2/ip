@@ -67,6 +67,6 @@ public class Duke {
 
     public static void addTask(ArrayList<Task> tasks, Task t) {
         tasks.add(t);
-        printMsg("Got it. I've added this task: \n  " + t + "\n" + "Now you have " + tasks.size() + " tasks in the list.");
+        printMsg("Got it. I've added this task:\n  " + t + "\n" + "Now you have " + tasks.size() + " tasks in the list.");
     }
 }
