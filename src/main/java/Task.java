@@ -1,0 +1,27 @@
+public class Task {
+    private boolean isDone;
+    private String taskDescription;
+    private StringBuilder sb;
+
+    public Task() {
+        this.isDone = false;
+        this.taskDescription = "";
+
+        sb = new StringBuilder("");
+    }
+
+    public Task(String taskDescription) {
+        this.isDone = false;
+        this.taskDescription = taskDescription;
+
+        sb = new StringBuilder("");
+    }
+
+    @Override
+    public String toString() {
+        sb.setLength(0);
+        sb.append("[").append(this.isDone ? "X] " : " ] ").append(this.taskDescription);
+
+        return sb.toString();
+    }
+}

@@ -45,11 +45,11 @@ public class Duke {
                 "--------------------------------------------------------------------------------------------\n");
     }
 
-    public static String getListStr(ArrayList<String> response) {
+    public static String getListStr(ArrayList<? extends Object> list) {
         StringBuilder sb = new StringBuilder("");
 
-        for (int i = 0; i < response.size(); ++i) {
-            sb.append(String.valueOf(i + 1)).append(". ").append(response.get(i)).append("\n");
+        for (int i = 0; i < list.size(); ++i) {
+            sb.append(String.valueOf(i + 1)).append(". ").append(list.get(i).toString()).append("\n");
         }
 
         return sb.toString();
