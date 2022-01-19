@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Objects;
 
 public class Duke {
     public static void main(String[] args) throws IOException {
@@ -14,7 +13,7 @@ public class Duke {
         String line = "\t_______________________________________________\n";
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        String items[] = new String[100];
+        Task[] items = new Task[100];
         int count = 0;
 
         System.out.println(line + logo + "\t Hello! I'm Duke\n" + "\t What can I do for you?\n" + line);
@@ -26,11 +25,16 @@ public class Duke {
                 System.out.println("\t Bye. Hope to see you again soon!\n" + line);
                 break;
             } else if (input.equals("list")) {
+                System.out.println("\t Here are the tasks in your list:");
                 for (int i=0; i<count; i++) {
-                    System.out.println("\t " + i + ". " + items[i]);
+                    System.out.println("\t " + (i+1) + ".[" + items[i].getStatusIcon() + "] " + items[i].description);
                 }
+            } else if (input.split(" ", 2)[0].equals("mark")) {
+                int pos = Integer.parseInt(input.split(" ", 2)[1]);
+                items[pos-1].markAsDone();
+                System.out.println("\t Nice! I've marked this task as done:\n" + "\t  [" + items[pos-1].getStatusIcon() + "] " + items[pos-1].description);
             } else {
-                items[count] = input;
+                items[count] = new Task(input);
                 count++;
                 System.out.println("\t added: " + input);
             }
