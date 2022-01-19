@@ -18,4 +18,19 @@ mark 5
 list
 todo save someone
 unmark 1
+mark 9
+unmark 10
+give me apples
+todo
+todo find meaning in life
+deadline
+deadline go to the event
+deadline /by
+deadline go to the wishing well /by monday
+list
+event
+event something /at
+event something /at this date
+list
+mark hello
 bye
