@@ -139,7 +139,7 @@ public class Ultoi {
      *
      * @return A Command enum representing the type of input.
      */
-    private static Command checkInput(String cmd, ArrayList<Task> logs) throws UltoiException {
+    private static void checkInput(String cmd, ArrayList<Task> logs) throws UltoiException {
         String[] tokens = cmd.split(" ");
 
         switch (tokens[0]) {
