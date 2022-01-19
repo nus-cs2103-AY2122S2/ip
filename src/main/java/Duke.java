@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -11,31 +10,55 @@ public class Duke {
         Printer.printDivider();
         Scanner inputScanner = new Scanner(System.in);
         String input = "";
-        ArrayList<TodoObject> todo = new ArrayList<>();
-
+        ArrayList<Task> taskList = new ArrayList<>();
         while (!input.equals("bye")) {
             input = inputScanner.nextLine();
+            int firstSpaceIndex = input.indexOf(" ");
+            String firstArg = "";
+            if (firstSpaceIndex != -1) { // input is more than one word
+                firstArg = input.substring(0, firstSpaceIndex);
+            } else { // input is a single word
+                firstArg = input;
+            }
+
             String[] inputArray = input.split(" ");
-            TodoObject todoObj = new TodoObject(input);
-            if (input.equals("bye")) {
-                Printer.printEndMessage();
-            } else if(input.equals("list")) {
-                Printer.printTodo(todo);
-            }
-            else if (inputArray.length > 1) {
-                String firstArg = input.substring(0, input.indexOf(" "));
-                if (firstArg.equals("mark")) {
-                    todo.get(Integer.parseInt(inputArray[1]) - 1).mark();
-                } else if (firstArg.equals("unmark")) {
-                    todo.get(Integer.parseInt(inputArray[1]) - 1).unmark();
+            if (inputArray.length < 1) {
+                System.out.println("Empty command");
+            } else if (inputArray.length == 1) {
+                if (inputArray[0].equals("list")) {
+                    Printer.printTodo(taskList);
+                } else if (inputArray[0].equals("bye")) {
+                    Printer.printEndMessage();
                 } else {
-                    Printer.echoForAdd(input);
-                    todo.add(todoObj);
+                    System.out.println("Unknown command: " + inputArray[0]);
                 }
-            }
-            else {
-                Printer.echoForAdd(input);
-                todo.add(todoObj);
+            } else {
+                if (firstArg.equals("mark")) {
+                    taskList.get(Integer.parseInt(inputArray[1]) - 1).mark();
+                } else if (firstArg.equals("unmark")) {
+                    taskList.get(Integer.parseInt(inputArray[1]) - 1).unmark();
+                } else if (firstArg.equals("deadline")) {
+                    int indexOfBy = input.indexOf("\\by ");
+                    String content = input.substring(firstArg.length() + 1, indexOfBy - 1);
+                    String by = input.substring(indexOfBy + 4);
+                    Task taskObj = new Deadline(content, by);
+                    Printer.echoForAdd(taskObj, taskList.size());
+                    taskList.add(taskObj);
+                } else if (firstArg.equals("event")) {
+                    int indexOfAt = input.indexOf("\\at ");
+                    String content = input.substring(firstArg.length() + 1, indexOfAt - 1);
+                    String at = input.substring(indexOfAt + 4);
+                    Task taskObj = new Event(content, at);
+                    Printer.echoForAdd(taskObj, taskList.size());
+                    taskList.add(taskObj);
+                } else if (firstArg.equals("todo")) {
+                    String content = input.substring(firstArg.length() + 1);
+                    Task taskObj = new ToDo(content);
+                    Printer.echoForAdd(taskObj, taskList.size());
+                    taskList.add(taskObj);
+                } else {
+                    System.out.println("Unknown Command: " + input);
+                }
             }
         }
     }

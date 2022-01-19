@@ -1,25 +1,33 @@
-public class TodoObject {
-    private boolean isDone;
-    private String content;
+public class Task {
+    protected boolean isDone;
+    protected String content;
 
-    public TodoObject(String content) {
+    public Task(String content) {
         this.isDone = false;
         this.content = content;
     }
 
-    public boolean getDone() {
+    public boolean getIsDone() {
         return isDone;
+    }
+
+    public void setIsDone(boolean done) {
+        isDone = done;
     }
 
     public String getContent() {
         return content;
     }
 
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public void mark() {
         this.isDone = true;
         Printer.printDivider();
         System.out.println("    Nice! I've marked this task as done: ");
-        System.out.println("    [X] " + content);
+        System.out.println(this.toString());
         Printer.printDivider();
     }
     public void unmark() {
@@ -28,14 +36,5 @@ public class TodoObject {
         System.out.println("    I've unmarked this task: ");
         System.out.println("    [ ] " + content);
         Printer.printDivider();
-    }
-
-    @Override
-    public String toString() {
-        if (isDone) {
-            return "[X] " + content;
-        } else {
-            return "[] " + content;
-        }
     }
 }

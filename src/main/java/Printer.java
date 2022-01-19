@@ -12,20 +12,22 @@ public class Printer {
         System.out.println(divider);
     }
 
-    public static void printTodo(ArrayList<TodoObject> inputArray) {
+    public static void printTodo(ArrayList<Task> inputList) {
         printDivider();
-        for (int index = 0; index < inputArray.size(); index++) {
+        for (int index = 0; index < inputList.size(); index++) {
             int order = (index + 1);
-            TodoObject todo = inputArray.get(index);
-            String result = "    " + order + ":" + todo.toString();
+            Task task = inputList.get(index);
+            String result = "    " + order + ":" + task.toString();
             System.out.println(result);
         }
         printDivider();
     }
 
-    public static void echoForAdd(String input) {
+    public static void echoForAdd(Task taskObj, int listLength) {
         printDivider();
-        System.out.println("    added: " + input);
+        System.out.println("    Adding a task: ");
+        System.out.println("  " + taskObj.toString());
+        System.out.println("    Now you got " + (listLength + 1) + " tasks in the list!");
         printDivider();
     }
 }
