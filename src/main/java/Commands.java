@@ -8,7 +8,7 @@ public class Commands {
     void echoInput(String input) { // Get DukeLCH to Echo
         cmdHistory.addTo(input); // Add new input entry into history
         String echo = "_______________________________________________________\n"
-                + input + "\n"
+                + "added: " + input + "\n"
                 + "_______________________________________________________\n";
         System.out.println(echo);
     }
