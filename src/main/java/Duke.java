@@ -11,29 +11,57 @@ public class Duke {
     }
 
     // insert new Task
-    public static void insertNewTask(String type, String inputText, ArrayList<Task> taskList) {
+    public static void insertNewTask(String type, String inputText, ArrayList<Task> taskList) throws DukeException {
         String reply = "";
         Task newTask;
-        try {
-            if (type.equals("deadline")) {
-                String[] inputStringArray = inputText.split("/by ");
-                newTask = new Deadline(inputStringArray[0].substring(9), inputStringArray[1]);
-            } else if (type.equals("event")) {
-                String[] inputStringArray = inputText.split("/at ");
-                newTask = new Event(inputStringArray[0].substring(6), inputStringArray[1]);
-            } else { // this is a to-do task
-                newTask = new Todo(inputText.substring(5));
+        String taskName = "";
+        String taskDateTime = "";
+        String missingDateTime = "Sorry Sir, the description of <" + type + "> is missing a date/time.";
+        String missingTaskInfo = "Sorry Sir, the <" + type + "> command cannot be empty.";
+
+        if (type.equals("deadline")) {
+            String[] inputStringArray = inputText.split(" /by ");
+            try { 
+                taskName = inputStringArray[0].substring(9);
+            } catch (StringIndexOutOfBoundsException exception) {
+                throw new DukeException(missingTaskInfo);
             }
-            taskList.add(newTask);
-            String taskListLength = Integer.toString(taskList.size());
-            reply += "Very well Sir. I have added this task:";
-            reply += "\n   " + newTask.toString();
-            reply += "\n You now have " + taskListLength + " tasks in the agenda Sir.";
-            System.out.println(straightLine + "\n " + reply + "\n" + straightLine);
-            
-        } catch (Exception ArrayIndexOutOfBoundsException) {
-            replyUnrecognizedCommand();
+            try {
+                taskDateTime = inputStringArray[1];
+            } catch (Exception ArrayIndexOutOfBoundsException) {
+                throw new DukeException(missingDateTime);
+            }
+            newTask = new Deadline(taskName, taskDateTime);
+
+        } else if (type.equals("event")) {
+            String[] inputStringArray = inputText.split(" /at ");
+            try { 
+                taskName = inputStringArray[0].substring(6);
+            } catch (StringIndexOutOfBoundsException exception) {
+                throw new DukeException(missingTaskInfo);
+            }
+            try {
+                taskDateTime = inputStringArray[1];
+            } catch (Exception ArrayIndexOutOfBoundsException) {
+                throw new DukeException(missingDateTime);
+            }
+            newTask = new Event(taskName, taskDateTime);
+
+        } else { // this is a to-do task
+            try { 
+                taskName = inputText.substring(5);
+            } catch (StringIndexOutOfBoundsException exception) {
+                throw new DukeException(missingTaskInfo);
+            }
+            newTask = new Todo(taskName);
         }
+
+        taskList.add(newTask);
+        String taskListLength = Integer.toString(taskList.size());
+        reply += "Very well Sir. I have added this task:";
+        reply += "\n   " + newTask.toString();
+        reply += "\n You now have " + taskListLength + " tasks in the agenda Sir.";
+        System.out.println(straightLine + "\n " + reply + "\n" + straightLine);
     }
 
     // display task list
@@ -50,7 +78,7 @@ public class Duke {
     }
 
     // mark / unmark command
-    public static void markCommand(String[] inputStringArray, ArrayList<Task> taskList) {
+    public static void markCommand(String[] inputStringArray, ArrayList<Task> taskList) throws DukeException {
         // check command
         boolean markAsDone = false;
         if (inputStringArray[0].equals("mark")) {
@@ -58,8 +86,7 @@ public class Duke {
         } else if (inputStringArray[0].equals("unmark")) {
             markAsDone = false;
         } else { // not a mark / unmark command
-            replyUnrecognizedCommand();
-            return;
+            throw new DukeException("Sorry Sir, I do not understand that command.");
         }
         
         // check if there is an integer after the text command input
@@ -83,14 +110,8 @@ public class Duke {
             System.out.println(straightLine + "\n " + reply + "\n" + straightLine);
 
         } catch (NumberFormatException exception) { // not a number, hence not a mark / unmark command
-            replyUnrecognizedCommand();
+            throw new DukeException("Please enter a valid number Sir.");
         }
-    }
-
-    // unrecognized command used
-    public static void replyUnrecognizedCommand() {
-        String reply = "Please use a valid command Sir.";
-        System.out.println(straightLine + "\n " + reply + "\n" + straightLine);
     }
     public static void main(String[] args) {
         // String logo = " ____        _        \n"
@@ -110,24 +131,28 @@ public class Duke {
         while (true) {
             String inputText = scanner.nextLine().trim();
             String[] inputStringArray = inputText.split(" ");
-            if (inputText.equals("bye")) { // bye command
-                displayFarewell();
-                scanner.close();
-                break;
-            
-            } else if (inputText.equals("list")) { // list command
-                displayTaskList(taskList);
+            try {
+                if (inputText.equals("bye")) { // bye command
+                    displayFarewell();
+                    scanner.close();
+                    break;
+                
+                } else if (inputText.equals("list")) { // list command
+                    displayTaskList(taskList);
 
-            } else if (inputStringArray[0].contains("mark")) { // mark / unmark command
-                markCommand(inputStringArray, taskList);
+                } else if (inputStringArray[0].contains("mark")) { // mark / unmark command
+                    markCommand(inputStringArray, taskList);
 
-            } else if (inputStringArray[0].equals("todo") 
-            || inputStringArray[0].equals("deadline") 
-            || inputStringArray[0].equals("event")){
-                insertNewTask(inputStringArray[0], inputText, taskList);
+                } else if (inputStringArray[0].equals("todo") 
+                || inputStringArray[0].equals("deadline") 
+                || inputStringArray[0].equals("event")){
+                    insertNewTask(inputStringArray[0], inputText, taskList);
 
-            } else { // other text input
-                replyUnrecognizedCommand();
+                } else { // other text input
+                    throw new DukeException("Sorry Sir, I do not understand that command.");
+                }
+            } catch (DukeException dukeException) {
+                System.out.println(straightLine + "\n " + dukeException.toString() + "\n" + straightLine);
             }
         }
     }
