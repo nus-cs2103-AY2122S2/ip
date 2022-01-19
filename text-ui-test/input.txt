@@ -19,4 +19,8 @@ mark 5
 unmark 5
 mark A
 mark 1.1
+mark 1
+mark 1
+unmark 1
+unmark 1
 bye

@@ -1,5 +1,8 @@
 package Tasks;
 
+import SparkExceptions.TaskModificationExceptions.TaskAlreadyMarked;
+import SparkExceptions.TaskModificationExceptions.TaskAlreadyUnMarked;
+
 public class Task {
     protected String title;
     protected boolean done;
@@ -12,11 +15,19 @@ public class Task {
         return title;
     }
 
-    public void mark() {
+    public void mark() throws TaskAlreadyMarked {
+        if (this.done) {
+            throw new TaskAlreadyMarked(this);
+        }
+
         this.done = true;
     }
 
-    public void unMark() {
+    public void unMark() throws TaskAlreadyUnMarked {
+        if (!this.done) {
+            throw new TaskAlreadyUnMarked(this);
+        }
+
         this.done = false;
     }
 

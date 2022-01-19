@@ -2,6 +2,6 @@ package SparkExceptions;
 
 public class SparkException extends Exception {
     public SparkException(String errorMessage) {
-        super("OOPS!!! " + errorMessage);
+        super(String.format("OOPS!!!\n%s",errorMessage));
     }
 }

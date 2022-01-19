@@ -1,5 +1,7 @@
 package Tasks;
 
+import SparkExceptions.TaskModificationExceptions.TaskAlreadyMarked;
+import SparkExceptions.TaskModificationExceptions.TaskAlreadyUnMarked;
 import SparkExceptions.TaskModificationExceptions.TaskNotFoundException;
 
 import java.util.*;
@@ -54,6 +56,8 @@ public class TaskList {
             System.out.println(e.getMessage());
         } catch (NumberFormatException e) {
             System.out.println("That doesn't seem like a number. Task numbers are integers!");
+        } catch (TaskAlreadyMarked e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -70,6 +74,8 @@ public class TaskList {
             System.out.println(e.getMessage());
         } catch (NumberFormatException e) {
             System.out.println("That doesn't seem like a number. Task numbers are integers!");
+        } catch (TaskAlreadyUnMarked e) {
+            System.out.println(e.getMessage());
         }
     }
 
