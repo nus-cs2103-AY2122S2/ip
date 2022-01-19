@@ -1,12 +1,18 @@
 public class Task {
-    private String info;
+    private String description;
+    protected boolean isDone;
 
-    public Task(String info){
-        this.info = info;
+    public Task(String description){
+        this.description = description;
+        this.isDone = false;
+    }
+
+    public String getStatusIcon() {
+        return (isDone ? "[X] " : " "); // mark done task with X
     }
 
     @Override
     public String toString(){
-        return this.info;
+        return this.description;
     }
 }

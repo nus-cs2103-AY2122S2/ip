@@ -15,15 +15,24 @@ public class Duke {
 
         while(scanner.hasNextLine()) {
             input = scanner.nextLine();
-            if(input.equals(bye)) {
+            String[] strArr = input.split(" ");
+            String command = strArr[0];
+            if(command.equals(bye)) {
                 System.out.println("Bye. Hope to see you again soon!");
                 return;
             }
-            if(input.equals("list")){
+            if(command.equals("list")){
                 for(int i = 1; i <= taskList.size(); i++){
                     int index = i - 1;
-                    System.out.println(i + ". " +  taskList.get(index).toString() );
+                    System.out.println(i + ". " + taskList.get(index).getStatusIcon()+  taskList.get(index).toString());
                 }
+                continue;
+            }
+            if(command.equals("mark")){
+                int index_andone =  Integer.parseInt(strArr[1]);
+                Task temp = taskList.get(index_andone - 1);
+                temp.isDone = true;
+                System.out.println("Nice! I've marked this task as done: \n" + temp.getStatusIcon() + temp.toString());
                 continue;
             }
 
