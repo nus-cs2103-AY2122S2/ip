@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -10,6 +11,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         Scanner scanner = new Scanner(System.in);
+        ArrayList<String> userTexts = new ArrayList<String>();
 
         printDukeResponse("Sup! Name's Duke \nHow can I help you today?");
 
@@ -21,10 +23,16 @@ public class Duke {
                 printDukeResponse("See ya!");
                 isRunning = false;
                 continue;
+            } else if (userResponse.equals("list")) {
+                printDukeResponse(getListStr(userTexts)); // just copy user response
+                continue;
             }
 
-            printDukeResponse(userResponse); // just copy user response
+            userTexts.add(userResponse);
+            printDukeResponse("added: " + userResponse);
         }
+
+        scanner.close();
     }
 
     /* Print in the Duke response format */
@@ -35,5 +43,15 @@ public class Duke {
         System.out.println(response);
         System.out.println(
                 "--------------------------------------------------------------------------------------------\n");
+    }
+
+    public static String getListStr(ArrayList<String> response) {
+        StringBuilder sb = new StringBuilder("");
+
+        for (int i = 0; i < response.size(); ++i) {
+            sb.append(String.valueOf(i + 1)).append(". ").append(response.get(i)).append("\n");
+        }
+
+        return sb.toString();
     }
 }
