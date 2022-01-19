@@ -54,6 +54,7 @@ public class Duke {
                 addTaskHelper(task);
             } else {
                 System.out.println("Unknown input");
+                System.out.println();
             }
         }
     }

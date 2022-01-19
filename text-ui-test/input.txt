@@ -1,0 +1,9 @@
+event borrow book /at 20-01-2022
+mark 1
+todo read book
+deadline return book /by 2 weeks later
+mark 2
+unmark 2
+list
+doSomething
+bye
