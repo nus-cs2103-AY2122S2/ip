@@ -4,8 +4,8 @@
  */
 
 class Task {
-    private int done;
-    private String item;
+    protected int done;
+    protected String item;
 
     Task(String item) {
         done = 0;
@@ -18,7 +18,7 @@ class Task {
      */
     private String donenessSymbol(int done) {
         if (done == 0) {
-            return "  ";
+            return " ";
         } else {
             return "X";
         }
@@ -29,7 +29,7 @@ class Task {
     */
     public void markDone() {
         done = 1;
-        System.out.printf("Great job for completing task: [%s] " + item +"\n", this.donenessSymbol(this.done));
+        System.out.printf("Great job for completing task: %s\n", this.getItemAndStatus());
     }
 
     /*
@@ -37,7 +37,7 @@ class Task {
     */
     public void markUndone() {
         done = 0;
-        System.out.printf("Task marked as uncompleted: [%s] " + item + "\n", this.donenessSymbol(this.done));
+        System.out.printf("Task marked as uncompleted: %s\n", this.getItemAndStatus());
     }
 
     /*
