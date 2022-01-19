@@ -17,12 +17,20 @@ public class Task {
         this.isDone = false;
     }
 
-    void markDone() {
-        this.isDone = true;
+    void markDone() throws Exception {
+        if (isDone) {
+            throw new Exception("Cannot mark a task already done!");
+        } else {
+            this.isDone = true;
+        }
     }
 
-    void markNotDone() {
-        this.isDone = false;
+    void markNotDone() throws Exception {
+        if (!isDone) {
+            throw new Exception("Cannot unmark a task not done!");
+        } else {
+            this.isDone = false;
+        }
     }
 
     @Override

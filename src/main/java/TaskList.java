@@ -1,5 +1,3 @@
-import com.sun.jdi.InvalidTypeException;
-
 /**
  * TaskList helps to store tasks given by the user. TaskList is contained in
  * the Bot class.
@@ -9,7 +7,7 @@ import com.sun.jdi.InvalidTypeException;
 
 public class TaskList {
     Task[] tasks;
-    int currentEndIndex = 0;
+    int nextIndex = 0;
     int done = 0;
     /**
      * Constructs a TaskList containing an array to contain tasks
@@ -23,29 +21,29 @@ public class TaskList {
      * class created is determined by what is contained in the input.
      * @param input String, given by user. Either contains todo, deadline or event.
      */
-    void add(String input) throws Exception {
+    void add(String input) throws IllegalArgumentException {
         Task newTask = null;
         if (isType("todo", input)) {
             String[] inputArr = getParams("todo", input);
             String description = inputArr[0];
-            newTask = new ToDo(description, currentEndIndex + 1);
+            newTask = new ToDo(description, nextIndex + 1);
         } else if (isType("deadline", input)) {
             String[] inputArr = getParams("deadline", input);
             String description = inputArr[0];
             String by = inputArr[1];
-            newTask = new Deadline(description, currentEndIndex + 1, by);
+            newTask = new Deadline(description, nextIndex + 1, by);
         } else if (isType("event", input)) {
             String[] inputArr = getParams("event", input);
             String description = inputArr[0];
             String at = inputArr[1];
-            newTask = new Event(description, currentEndIndex + 1, at);
+            newTask = new Event(description, nextIndex + 1, at);
         } else {
-            throw new InvalidTypeException("Not a valid type of task!");
+            throw new IllegalArgumentException("Not a valid type of task!");
         }
-        tasks[currentEndIndex] = newTask;
-        currentEndIndex++;
-        System.out.printf("Got ya. Added: \n%s\nYou got %d tasks waiting for ya!\n",
-                            newTask, currentEndIndex - done);
+        tasks[nextIndex] = newTask;
+        nextIndex++;
+        System.out.printf("Got ya. Added:\n%s\nYou got %d tasks waiting for ya!\n",
+                            newTask, nextIndex - done);
     }
 
     /**
@@ -65,7 +63,7 @@ public class TaskList {
      * @param input String, a user input
      * @return String[] inputArr. For "todo": an array of 1, containing description.
      * For "deadline": an array of 2: [description, by]
-     * For "event": an array of 2: [descrption, at]
+     * For "event": an array of 2: [description, at]
      */
     String[] getParams(String taskType, String input) {
         String description;
@@ -97,48 +95,54 @@ public class TaskList {
      */
     void list() {
         System.out.println("Here's what you need to do buddy:");
-        for (int i = 0; i < currentEndIndex; i++) {
+        for (int i = 0; i < nextIndex; i++) {
             Task currentTask = tasks[i];
             System.out.printf("%d. %s\n", currentTask.id, currentTask);
         }
     }
 
     /**
-     * Mark or unmark a task number depending on the input
+     * Mark or unmark a task number depending on the input. Catches errors if user
+     * enters invalid inputs etc.
      * @param input String, containing mark/unmark and the task number to perform action
      */
     void mark(String input) {
         String[] inputArr = input.split(" ");
-        if (inputArr.length == 2) {
-            String type = inputArr[0];
-            String num = inputArr[1];
-            int taskIndex = Integer.parseInt(num) - 1;
-            if (checkTaskExistence(taskIndex)) {
-                if (type.equals("mark")) { // future check: a marked task can't mark again
-                    tasks[taskIndex].markDone();
-                    done++;
-                    System.out.printf("This is now done: \n%s\n", tasks[taskIndex]);
-                } else if (type.equals("unmark")) {
-                    tasks[taskIndex].markNotDone();
-                    done--;
-                    System.out.printf("This is now undone:\n%s\n", tasks[taskIndex]);
-                } else {
-                    System.out.println("Please check the action input!");
+        try {
+            if (isValidInput(inputArr)) {
+                String action = inputArr[0];
+                String num = inputArr[1];
+                int taskIndex = Integer.parseInt(num) - 1;
+                if (taskExists(taskIndex)) {
+                    if (action.equals("mark")) {
+                        tasks[taskIndex].markDone();
+                        done++;
+                        System.out.printf("This is now done:\n%s\n", tasks[taskIndex]);
+                    } else if (action.equals("unmark")) {
+                        tasks[taskIndex].markNotDone();
+                        done--;
+                        System.out.printf("This is now undone:\n%s\n", tasks[taskIndex]);
+                    }
                 }
-            } else {
-                System.out.println("Task number does not exist!");
             }
-        } else {
-            System.out.println("Have you entered the correct input?");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
-    /**
-     * Checks if the task index is a valid one
-     * @param index int, index of the task
-     * @return boolean value indicating if task exists
-     */
-    boolean checkTaskExistence(int index) {
-        return (index <= this.currentEndIndex);
+    boolean taskExists(int index) throws IllegalArgumentException {
+        if (index >= 0 && index < this.nextIndex) {
+            return true;
+        } else {
+            throw new IllegalArgumentException("Task number does not exist!");
+        }
+    }
+
+    boolean isValidInput(String[] inputArr) throws IllegalArgumentException {
+        if (inputArr.length == 2) {
+            return true;
+        } else {
+            throw new IllegalArgumentException("Only input: mark taskNumber");
+        }
     }
 }

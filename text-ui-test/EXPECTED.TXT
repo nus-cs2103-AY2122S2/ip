@@ -3,4 +3,42 @@ What's up?
 Got ya. Added:
 [T][ ] borrow book
 You got 1 tasks waiting for ya!
+Here's what you need to do buddy:
+1. [T][ ] borrow book
+Got ya. Added:
+[D][ ] return book (by: Sunday)
+You got 2 tasks waiting for ya!
+Got ya. Added:
+[E][ ] project meeting (at: Mon 2-4pm)
+You got 3 tasks waiting for ya!
+Here's what you need to do buddy:
+1. [T][ ] borrow book
+2. [D][ ] return book (by: Sunday)
+3. [E][ ] project meeting (at: Mon 2-4pm)
+This is now done:
+[T][X] borrow book
+Here's what you need to do buddy:
+1. [T][X] borrow book
+2. [D][ ] return book (by: Sunday)
+3. [E][ ] project meeting (at: Mon 2-4pm)
+This is now undone:
+[T][ ] borrow book
+Here's what you need to do buddy:
+1. [T][ ] borrow book
+2. [D][ ] return book (by: Sunday)
+3. [E][ ] project meeting (at: Mon 2-4pm)
+This is now done:
+[D][X] return book (by: Sunday)
+Here's what you need to do buddy:
+1. [T][ ] borrow book
+2. [D][X] return book (by: Sunday)
+3. [E][ ] project meeting (at: Mon 2-4pm)
+Got ya. Added:
+[T][ ] clean dishes
+You got 3 tasks waiting for ya!
+Here's what you need to do buddy:
+1. [T][ ] borrow book
+2. [D][X] return book (by: Sunday)
+3. [E][ ] project meeting (at: Mon 2-4pm)
+4. [T][ ] clean dishes
 See ya!
