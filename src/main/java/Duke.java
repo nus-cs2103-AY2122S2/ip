@@ -109,9 +109,9 @@ public class Duke {
         }
         ToDo task = new ToDo(stringBuilder.toString());
         list.add(task);
-        return Duke.formatString("Got it! I've added this ToDo task:\n " +
-                task.toString() +"\nNow you have " + list.size()
-                + (list.size() <= 1 ? " task" : " tasks") + " in the list.");
+        return Duke.formatString("Got it! I've added this ToDo task:\n "
+                + task.toString() +"\nNow you have " + list.size()
+                + (list.size() == 1 ? " task" : " tasks") + " in the list.");
     }
 
 
@@ -144,9 +144,9 @@ public class Duke {
         }
         Deadline task = new Deadline(description, by);
         list.add(task);
-        return Duke.formatString("Got it! I've added this Deadline task:\n " +
-                task.toString() +"\nNow you have " + list.size()
-                        + (list.size() <= 1 ? " task" : " tasks") + " in the list.");
+        return Duke.formatString("Got it! I've added this Deadline task:\n "
+                + task.toString() +"\nNow you have " + list.size()
+                + (list.size() == 1 ? " task" : " tasks") + " in the list.");
     }
 
     /**
@@ -174,14 +174,28 @@ public class Duke {
         }
         at = stringBuilder.toString();
         if (at.equals("")) {
-            throw new InvalidArgumentException("☹ OOPS!!! Start and End date/time of event " +
-                    "cannot empty.");
+            throw new InvalidArgumentException("☹ OOPS!!! Start and End date/time of event "
+                    + "cannot empty.");
         }
         Event task = new Event(description, at);
         list.add(task);
-        return Duke.formatString("Got it! I've added this Event task:\n " +
-                task.toString() +"\nNow you have " + list.size()
-                + (list.size() <= 1 ? " task" : " tasks") + " in the list.");
+        return Duke.formatString("Got it! I've added this Event task:\n "
+                + task.toString() +"\nNow you have " + list.size()
+                + (list.size() == 1 ? " task" : " tasks") + " in the list.");
+    }
+
+    /**
+     * Deletes the task from the list.
+     *
+     * @param point 1-based index of the task in the list.
+     * @return formatted string stating task is deleted.
+     */
+    private static String deleteTask(int point) {
+        Task task = list.get(point - 1);
+        list.remove(point - 1);
+        return Duke.formatString("Noted. I've removed this task:\n "
+                + task.toString() +"\nNow you have " + list.size()
+                + (list.size() == 1 ? " task" : " tasks") + " in the list.");
     }
 
 
@@ -249,7 +263,16 @@ public class Duke {
                     }
                     System.out.println(Duke.addEvent(tokens));
                 } else if (tokens[0].equals("delete")) {
-                    //ToDo
+                    if (tokens.length < 2) {
+                        throw new InvalidArgumentException("☹ OOPS!!! Please indicate "
+                                + "the task to be deleted.");
+                    }
+                    try {
+                        System.out.println(Duke.deleteTask(Integer.parseInt(tokens[1])));
+                    } catch (NumberFormatException exception) {
+                        throw new InvalidArgumentException("☹ OOPS!!! Please input an "
+                                + "integer with the delete command.");
+                    }
                 } else {
                     throw new UnkownCommandException();
                 }
