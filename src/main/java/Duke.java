@@ -56,52 +56,52 @@ public class Duke {
         }
 
         switch (commandType) {
-            case COMMAND_BYE:
-                executeExit();
-                break;
-            case COMMAND_LIST:
-                executeList();
-                break;
-            case COMMAND_MARK:
-                try {
-                    executeMark(commandArgument);
-                } catch (InvalidIndexException e) {
-                    printInvalidIndexException();
-                }
-                break;
-            case COMMAND_UNMARK:
-                try {
-                    executeUnmark(commandArgument);
-                } catch (InvalidIndexException e) {
-                    printInvalidIndexException();
-                }
-                break;
-            case COMMAND_DELETE:
-                try {
-                    executeDelete(commandArgument);
-                } catch (InvalidIndexException e) {
-                    printInvalidIndexException();
-                }
-                break;
-            case COMMAND_TODO:
-                executeAddTodo(commandArgument);
-                break;
-            case COMMAND_DEADLINE:
-                try {
-                    executeAddDeadline(commandArgument);
-                } catch (MissingDateTimeException e) {
-                    printMissingDateTimeException();
-                }
-                break;
-            case COMMAND_EVENT:
-                try {
-                    executeAddEvent(commandArgument);
-                } catch (MissingDateTimeException e) {
-                    printMissingDateTimeException();
-                }
-                break;
-            default:
-                throw new UnknownCommandException();
+        case COMMAND_BYE:
+            executeExit();
+            break;
+        case COMMAND_LIST:
+            executeList();
+            break;
+        case COMMAND_MARK:
+            try {
+                executeMark(commandArgument);
+            } catch (InvalidIndexException e) {
+                printInvalidIndexException();
+            }
+            break;
+        case COMMAND_UNMARK:
+            try {
+                executeUnmark(commandArgument);
+            } catch (InvalidIndexException e) {
+                printInvalidIndexException();
+            }
+            break;
+        case COMMAND_DELETE:
+            try {
+                executeDelete(commandArgument);
+            } catch (InvalidIndexException e) {
+                printInvalidIndexException();
+            }
+            break;
+        case COMMAND_TODO:
+            executeAddTodo(commandArgument);
+            break;
+        case COMMAND_DEADLINE:
+            try {
+                executeAddDeadline(commandArgument);
+            } catch (MissingDateTimeException e) {
+                printMissingDateTimeException();
+            }
+            break;
+        case COMMAND_EVENT:
+            try {
+                executeAddEvent(commandArgument);
+            } catch (MissingDateTimeException e) {
+                printMissingDateTimeException();
+            }
+            break;
+        default:
+            throw new UnknownCommandException();
         }
     }
 
