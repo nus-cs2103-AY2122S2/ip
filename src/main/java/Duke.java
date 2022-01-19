@@ -12,7 +12,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+        System.out.println("What can I do for you?\n");
 
         Scanner sc = new Scanner(System.in);
         taskList = new TaskList();
@@ -22,48 +22,91 @@ public class Duke {
             String[] inputArr = userInput.split(" ", 2);
             String command = inputArr[0];
             String details = inputArr.length > 1 ? inputArr[1] : "";
-
-            if (command.equals(ValidCommand.BYE.label)) {
-                System.out.println("Bye. Hope to see you again soon!");
-                break;
-            } else if (command.equals(ValidCommand.LIST.label)) {
-                System.out.println("Here are the tasks in your list:");
-                System.out.println(taskList);
-            } else if (command.equals(ValidCommand.MARK.label)) {
-                Task task = taskList.getTask(Integer.parseInt(details));
-                task.markAsDone();
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println(task);
-                System.out.println();
-            } else if (command.equals(ValidCommand.UNMARK.label)) {
-                Task task = taskList.getTask(Integer.parseInt(details));
-                task.markAsNotDone();
-                System.out.println("OK, I've marked this task as not done yet:");
-                System.out.println(task);
-                System.out.println();
-            } else if (command.equals(ValidCommand.TODO.label)) {
-                Task task = new Todo(details);
-                addTaskHelper(task);
-            } else if (command.equals(ValidCommand.DEADLINE.label)) {
-                String[] deadlineInputs = details.split(" /by ");
-                Task task = new Deadline(deadlineInputs[0], deadlineInputs[1]);
-                addTaskHelper(task);
-            } else if (command.equals(ValidCommand.EVENT.label)) {
-                String[] eventInputs = details.split(" /at ");
-                Task task = new Event(eventInputs[0], eventInputs[1]);
-                addTaskHelper(task);
-            } else {
-                System.out.println("Unknown input");
+            try {
+                if (command.equals(ValidCommand.BYE.label)) {
+                    System.out.println("Bye. Hope to see you again soon!");
+                    break;
+                } else if (command.equals(ValidCommand.LIST.label)) {
+                    System.out.println("Here are the tasks in your list:");
+                    System.out.println(taskList);
+                } else if (command.equals(ValidCommand.MARK.label)) {
+                    Duke.toggleTaskDone(ValidCommand.MARK, details);
+                } else if (command.equals(ValidCommand.UNMARK.label)) {
+                    Duke.toggleTaskDone(ValidCommand.UNMARK, details);
+                } else if (command.equals(ValidCommand.TODO.label)) {
+                    Duke.addTodo(details);
+                } else if (command.equals(ValidCommand.DEADLINE.label)) {
+                    Duke.addDeadline(details);
+                } else if (command.equals(ValidCommand.EVENT.label)) {
+                    Duke.addEvent(details);
+                } else {
+                    throw new IllegalArgumentException(
+                            String.format("Sorry, the command '%s' is not supported.", command));
+                }
+            } catch (IllegalArgumentException | DukeException e) {
+                System.out.println(e.getMessage());
                 System.out.println();
             }
         }
+    }
+
+    private static void toggleTaskDone(ValidCommand cmd, String indexString) throws DukeException {
+        if (indexString.strip().equals("")) {
+            throw new DukeException("Please specify a task to mark.");
+        }
+        int index;
+        try {
+            index = Integer.parseInt(indexString);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Please specify a task using its index in the task list.");
+        }
+        if (index < 1 || index > taskList.getLength()) {
+            throw new DukeException("Please specify a valid task.");
+        }
+        Task task = taskList.getTask(index);
+        if (cmd == ValidCommand.MARK) {
+            task.markAsDone();
+            System.out.println("Nice! I've marked this task as done:");
+        } else {
+            task.markAsNotDone();
+            System.out.println("OK, I've marked this task as not done yet:");
+        }
+        System.out.println(task);
+        System.out.println();
     }
 
     private static void addTaskHelper(Task task) {
         taskList.addTask(task);
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
-        System.out.println("Now you have " + taskList.getLength() + " tasks in the list.");
-        System.out.println();
+        System.out.println("Now you have " + taskList.getLength() + " tasks in the list.\n");
+    }
+
+    private static void addTodo(String details) throws DukeException {
+        if (details.strip().equals("")) {
+            throw new DukeException("Please enter a description for the todo task.");
+        }
+        Task task = new Todo(details);
+        addTaskHelper(task);
+    }
+
+    private static void addDeadline(String details) throws DukeException {
+        String[] deadlineInputs = details.split(" /by ", 2);
+        if (deadlineInputs.length == 1 || deadlineInputs[1].strip().equals("")
+                || deadlineInputs[0].strip().equals("")) {
+            throw new DukeException("Please specify a deadline task as 'deadline [description] /by [date]'.");
+        }
+        Task task = new Deadline(deadlineInputs[0], deadlineInputs[1]);
+        addTaskHelper(task);
+    }
+
+    private static void addEvent(String details) throws DukeException {
+        String[] eventInputs = details.split(" /at ", 2);
+        if (eventInputs.length == 1 || eventInputs[1].strip().equals("")
+                || eventInputs[0].strip().equals("")) {
+            throw new DukeException("Please specify an event task as 'event [description] /at [date]'.");
+        }
+        Task task = new Event(eventInputs[0], eventInputs[1]);
+        addTaskHelper(task);
     }
 }
