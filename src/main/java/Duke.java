@@ -29,7 +29,7 @@ public class Duke {
     /**
      * List to store items. There will be no more than 100 items.
      */
-    private static ArrayList<String> list = new ArrayList<>();
+    private static ArrayList<Task> list = new ArrayList<>();
 
     /**
      * Adds texts to the list object and outputs the formatted
@@ -37,21 +37,26 @@ public class Duke {
      *
      * @param text text added to the list.
      * @return formatted string with added text
+     * @see Task
      */
     private static String addToList(String text) {
-        list.add(text);
+        list.add(new Task(text));
         return formatString("Added: " +  text);
     }
 
     /**
-     * Returns the string containg the text on the list with
+     * Returns the string containing the task text on the list with
      * formatting
      * @return formatted string with list text
      */
     private static String listToString() {
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Here are the tasks in your list:\n");
+        Task task;
         for (int i = 0; i < list.size(); i++) {
-            stringBuilder.append((i + 1) + ". " +list.get(i));
+            task = list.get(i);
+            stringBuilder.append((i + 1) + ". [" + task.getStatusIcon() + "] "
+                    + list.get(i).getDescription());
             if (i != list.size() - 1) {
                 stringBuilder.append("\n");
             }
@@ -73,6 +78,34 @@ public class Duke {
     }
 
     /**
+     * Changes the task status to done.
+     *
+     * @param point 1-based index of the task in the list.
+     * @return formatted success response string.
+     * @see Task
+     */
+    private static String markTask(int point) {
+       Task task = list.get(point - 1);
+       task.markAsDone();
+       return Duke.formatString("Great! I have marked this task as done:\n"
+               + "[" + task.getStatusIcon() + "] " + task.getDescription());
+    }
+
+    /**
+     * Changes the task status to not done.
+     *
+     * @param point 1-based index of the task in the list.
+     * @return formatted string stating task not done.
+     * @see Task
+     */
+    private static String unmarkTask(int point) {
+        Task task = list.get(point - 1);
+        task.unmarkAsDone();
+        return Duke.formatString("OK, I've marked this task as not done yet:\n"
+                + "[ ] " + task.getDescription());
+    }
+
+    /**
      * Runs the Personal Assistant Chatbot where
      * the user can input commands.
      *
@@ -87,16 +120,19 @@ public class Duke {
                 + startPrompt));
 
         Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-
+        String[] input = scanner.nextLine().split("\\s+");
         // Exit loop only after the user enters "Bye"
-        while (!input.equals("bye")) {
-            if (input.equals("list")) {
+        while (!input[0].equals("bye")) {
+            if (input[0].equals("list")) {
                 System.out.println(Duke.listToString());
+            } else if (input[0].equals("mark")){
+                System.out.println(Duke.markTask(Integer.parseInt(input[1])));
+            } else if (input[0].equals("unmark")) {
+                System.out.println(Duke.unmarkTask(Integer.parseInt(input[1])));
             } else {
-                System.out.println(Duke.addToList(input));
+                System.out.println(Duke.addToList(input[0]));
             }
-            input = scanner.nextLine();
+            input = scanner.nextLine().split("\\s+");
         }
 
         System.out.println(Duke.formatString("Bye. See you again soon!"));
