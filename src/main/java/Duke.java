@@ -10,29 +10,43 @@ public class Duke {
         System.out.println(chatBox(dukeEngine.greetingMessage()));
 
         while(isPolling) {
-            String command = sc.nextLine();
-            String[] commandArgs = command.split(" ");
+            String input = sc.nextLine();
+            String[] commandArgs = input.split(" ", 2);
+            String command = commandArgs[0];
+            String commandDetails = commandArgs.length == 2 ? commandArgs[1] : null;
 
             String replyMessage = "";
-            if (commandArgs[0].equals("bye")) {
+            if (command.equals("bye")) {
                 isPolling = false;
                 replyMessage = dukeEngine.byeMessage();
 
-            } else if (commandArgs[0].equals("list")){
+            } else if (command.equals("list")){
                 replyMessage = dukeEngine.listItems();
             
-            } else if (commandArgs[0].equals("mark")) {
+            } else if (command.equals("mark")) {
 
-                int itemNumber = Integer.parseInt(commandArgs[1]);
+                int itemNumber = Integer.parseInt(commandDetails);
                 replyMessage = dukeEngine.markItem(itemNumber);
 
-            } else if (commandArgs[0].equals("unmark")) {
+            } else if (command.equals("unmark")) {
 
                 int itemNumber = Integer.parseInt(commandArgs[1]);
                 replyMessage = dukeEngine.unmarkItem(itemNumber);
 
+            } else if (command.equals("todo")) {
+                replyMessage = dukeEngine.addTask(new ToDo(commandDetails));
+                
+            } else if (command.equals("deadline")) {
+                String[] taskArgs = commandDetails.split(" /by ");
+                String taskName = taskArgs[0], taskDate = taskArgs[1];
+                replyMessage = dukeEngine.addTask(new Deadline(taskName, taskDate));
+
+            } else if (command.equals("event")) {
+                String[] taskArgs = commandDetails.split(" /at ");
+                String taskName = taskArgs[0], taskDate = taskArgs[1];
+                replyMessage = dukeEngine.addTask(new Event(taskName, taskDate));
             } else {
-                replyMessage = dukeEngine.addText(command);
+                replyMessage = dukeEngine.echoInput(input);
             }
 
             System.out.println(chatBox(replyMessage));

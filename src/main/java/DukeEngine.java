@@ -4,9 +4,10 @@ public class DukeEngine {
     
     ArrayList<Task> itemList = new ArrayList<>();
 
-    public String addText(String text) {
-        itemList.add(new Task(text));
-        return "added: " + text;
+    public String addTask(Task task) {
+        itemList.add(task);
+        return String.format("Got it. I've added this task:\n  %s\nNow you have %s task(s) in the list",
+            task, itemList.size());
     }
 
     public String markItem(int itemNumber) {
@@ -57,7 +58,7 @@ public class DukeEngine {
         return greeting.toString();
     }
 
-    public String echoCommand(String msg) {
+    public String echoInput(String msg) {
         return msg;
     }
 

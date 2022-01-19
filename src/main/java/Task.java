@@ -1,6 +1,6 @@
-public class Task {
+public abstract class Task {
     private boolean isDone;
-    private String task;
+    protected String task;
 
     public Task(String task) {
         this.task = task;
@@ -15,8 +15,9 @@ public class Task {
         isDone = false;
     }
 
-    public String toString() {
-        String statusString = isDone ? "[X] " : "[ ] ";
-        return statusString + task;   
+    public String statusString() {
+        return isDone ? "[X]" : "[ ]";
     }
+
+    public abstract String toString();
 }
