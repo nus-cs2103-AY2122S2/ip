@@ -9,7 +9,7 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    private String getStatusIcon() {
+    protected String getStatusIcon() {
         return this.isDone ? "X" : " ";
     }
 
