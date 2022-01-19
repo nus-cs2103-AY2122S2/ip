@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;  // Import the Scanner class
 
 public class Duke {
@@ -13,7 +14,8 @@ public class Duke {
         System.out.println("\tYour wish is my command. Your command:");
         String command = ""; // Read user input
         String bye = "bye";
-        Task[] taskList = new Task[100];
+//        Task[] taskList = new Task[100];
+        ArrayList<Task> taskList = new ArrayList<Task>();
         int taskCount = 0;
         while (!command.equalsIgnoreCase(bye)) { // Checks if user wants to exit or not
             command = sc.nextLine();
@@ -23,6 +25,7 @@ public class Duke {
             String taskAdded = "\tTask Added, arrgh:\n";
             String taskCall = "\tAvast ye Matey. Here goes your task list:\n";
             String taskCompleted = "\tTask completed, good job matey!\n";
+            String taskDeleted = "\tAlright matey, task has been deleted good on ya.\n";
             String taskUnchecked = "\tAlright matey, hurry up and finish up this task arrr:\n";
             String[] splitCommand = command.split(" ", 2);
             switch (splitCommand[0].toLowerCase()) {
@@ -34,26 +37,35 @@ public class Duke {
                     // Error handling
                     System.out.println(line + taskCall);
                     for (int i = 0; i < taskCount; i++) {
-                        System.out.println("\t" + String.valueOf(i + 1) + "." + taskList[i].toString());
+                        System.out.println("\t" + (i + 1) + "." + taskList.get(i).toString());
                     }
+                    System.out.println(line + requestNextCommand);
+                    break;
+                case "delete":
+                    // Error handling
+                    int taskIndex = Integer.parseInt(splitCommand[1]) - 1;
+                    Task curr = taskList.get(taskIndex);
+                    taskList.remove(taskIndex);
+                    System.out.println(line + taskDeleted);
+                    System.out.println("\t" + curr);
                     System.out.println(line + requestNextCommand);
                     break;
                 case "mark":
                     // Error handling
-                    int taskIndex = Integer.parseInt(splitCommand[1]) - 1;
-                    Task curr = taskList[taskIndex];
+                    taskIndex = Integer.parseInt(splitCommand[1]) - 1;
+                    curr = taskList.get(taskIndex);
                     curr.markAsDone();
                     System.out.println(taskCompleted);
-                    System.out.println("\t" + curr.toString());
+                    System.out.println("\t" + curr);
                     System.out.println(line + requestNextCommand);
                     break;
                 case "unmark":
                     // Error handling
                     taskIndex = Integer.parseInt(splitCommand[1]) - 1;
-                    curr = taskList[taskIndex];
+                    curr = taskList.get(taskIndex);
                     curr.markAsUndone();
                     System.out.println(taskUnchecked);
-                    System.out.println("\t" + curr.toString());
+                    System.out.println("\t" + curr);
                     System.out.println(line + requestNextCommand);
                     break;
                 case "deadline":
@@ -65,9 +77,9 @@ public class Duke {
                         break;
                     }
                     String[] furtherSplitCommand = splitCommand[1].split(" /by ", 2);
-                    taskList[taskCount] = new Deadline(furtherSplitCommand[0], furtherSplitCommand[1]);
+                    taskList.add(new Deadline(furtherSplitCommand[0], furtherSplitCommand[1]));
                     taskCount++;
-                    System.out.println(taskAdded + "\t" + taskList[taskCount - 1].toString());
+                    System.out.println(taskAdded + "\t" + taskList.get(taskCount - 1).toString());
                     System.out.println("\tNow you have " + String.valueOf(taskCount) + " tasks in your task list arrr, better get workin' aye!\n");
                     System.out.println(line + requestNextCommand);
                     break;
@@ -80,9 +92,9 @@ public class Duke {
                         break;
                     }
                     furtherSplitCommand = splitCommand[1].split(" /at ", 2);
-                    taskList[taskCount] = new Event(furtherSplitCommand[0], furtherSplitCommand[1]);
+                    taskList.add(new Event(furtherSplitCommand[0], furtherSplitCommand[1]));
                     taskCount++;
-                    System.out.println(taskAdded + "\t" + taskList[taskCount - 1].toString());
+                    System.out.println(taskAdded + "\t" + taskList.get(taskCount - 1).toString());
                     System.out.println("\tNow you have " + String.valueOf(taskCount) + " tasks in your task list arrr, better get workin' aye!\n");
                     System.out.println(line + requestNextCommand);
                     break;
@@ -94,9 +106,9 @@ public class Duke {
                         System.out.println(requestNextCommandAngry);
                         break;
                     }
-                    taskList[taskCount] = new Todo(splitCommand[1]);
+                    taskList.add(new Todo(splitCommand[1]));
                     taskCount++;
-                    System.out.println(taskAdded + "\t" + taskList[taskCount - 1].toString());
+                    System.out.println(taskAdded + "\t" + taskList.get(taskCount - 1).toString());
                     System.out.println("\tNow you have " + String.valueOf(taskCount) + " tasks in your task list arrr, better get workin' aye!\n");
                     System.out.println(line + requestNextCommand);
                     break;
