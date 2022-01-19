@@ -31,7 +31,7 @@ public class Duke {
     private void add(String s) {
         Task t = new Task(s);
         tasks.add(t);
-        System.out.println(indent + "added:" + s);
+        System.out.println(indent + "added: " + s);
     }
 
     private void list() {
@@ -42,9 +42,19 @@ public class Duke {
             for (int i = 0; i < tasks.size(); i++) {
                 System.out.print(indent);
                 System.out.print(i + 1);
-                System.out.println(". " + tasks.get(i));
+                System.out.println("." + tasks.get(i));
             }
         }
+    }
+
+    public void mark(int index, boolean done) {
+        tasks.set(index, tasks.get(index).mark(done));
+        if (done) {
+            System.out.println(indent + "Nice! I've marked this task as done:");
+        } else {
+            System.out.println(indent + "OK, I've marked this task as not done yet:");
+        }
+        System.out.println(indent + "  " + tasks.get(index));
     }
 
     private void bye() {
@@ -60,11 +70,23 @@ public class Duke {
         while (true) {
             String s = sc.nextLine();
             System.out.println(segLine);
-            if (s.equals("bye")) {
+            if (s.equals("list")) {
+                cindy.list();
+            } else if (s.startsWith("mark")) {
+                Scanner temp = new Scanner(s.substring(5));
+                if (temp.hasNextInt()) {
+                    cindy.mark(temp.nextInt() - 1, true);
+                }
+                // else exception
+            } else if (s.startsWith("unmark")) {
+                Scanner temp = new Scanner(s.substring(7));
+                if (temp.hasNextInt()) {
+                    cindy.mark(temp.nextInt() - 1, false);
+                }
+                // else exception
+            } else if (s.equals("bye")) {
                 cindy.bye();
                 break;
-            } else if (s.equals("list")) {
-                cindy.list();
             } else {
                 cindy.add(s);
             }
