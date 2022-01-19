@@ -53,7 +53,7 @@ public class Task {
 
     /**
      * Sets the task as undone. Sets isDone
-     * to fasle.
+     * to false.
      */
     public void unmarkAsDone() {
         this.isDone = false;

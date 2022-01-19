@@ -120,19 +120,22 @@ public class Duke {
                 + startPrompt));
 
         Scanner scanner = new Scanner(System.in);
-        String[] input = scanner.nextLine().split("\\s+");
+        String input = scanner.nextLine();
+        String[] tokens = input.split("\\s+");
+
         // Exit loop only after the user enters "Bye"
-        while (!input[0].equals("bye")) {
-            if (input[0].equals("list")) {
+        while (!tokens[0].equals("bye")) {
+            if (tokens[0].equals("list")) {
                 System.out.println(Duke.listToString());
-            } else if (input[0].equals("mark")){
-                System.out.println(Duke.markTask(Integer.parseInt(input[1])));
-            } else if (input[0].equals("unmark")) {
-                System.out.println(Duke.unmarkTask(Integer.parseInt(input[1])));
+            } else if (tokens[0].equals("mark")){
+                System.out.println(Duke.markTask(Integer.parseInt(tokens[1])));
+            } else if (tokens[0].equals("unmark")) {
+                System.out.println(Duke.unmarkTask(Integer.parseInt(tokens[1])));
             } else {
-                System.out.println(Duke.addToList(input[0]));
+                System.out.println(Duke.addToList(input));
             }
-            input = scanner.nextLine().split("\\s+");
+            input = scanner.nextLine();
+            tokens = input.split("\\s+");
         }
 
         System.out.println(Duke.formatString("Bye. See you again soon!"));
