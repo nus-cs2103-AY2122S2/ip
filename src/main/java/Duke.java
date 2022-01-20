@@ -4,7 +4,7 @@ public class Duke {
     private static ArrayList<Task> list = new ArrayList<>();
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String lineBreak = "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★\n";
+        String lineBreak = "-------------------------------\n";
         String welcomeMessage =  lineBreak
                                  + "Hello! I'm Duke\n"
                                  + "What can I do for you?\n"
