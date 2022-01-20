@@ -35,6 +35,9 @@ public class Johnny {
             else if(input.length() >= 7 && input.substring(0, 7).equals("unmark ") && isNumeric(input.substring(7))) {
                 userList.unmark(Integer.parseInt(input.substring(7)));
             }
+            else if(input.length() >= 7 && input.substring(0, 7).equals("delete ") && isNumeric(input.substring(7))) {
+                userList.delete(Integer.parseInt(input.substring(7)));
+            }
             else if(tags[0].equals("todo")) {
                 if(tags.length == 1 || tags[1].equals("")) {
                     throw new EmptyDescriptionException();
