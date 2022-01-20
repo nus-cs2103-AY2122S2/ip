@@ -34,6 +34,8 @@ public class Duke {
                         markAsDone(Integer.parseInt(details[1]));
                     } else if (details[0].equals("unmark")) {
                         markNotDone(Integer.parseInt(details[1]));
+                    } else if (details[0].equals("delete")) {
+                        deleteTask(Integer.parseInt(details[1]));
                     } else {
                         String taskType = details[0];
                         if (!(taskType.equals("todo") || taskType.equals("deadline")
@@ -116,7 +118,18 @@ public class Duke {
         System.out.println(toAdd);
     }
 
-    public static Task findTask(int num) throws CustomException{
+    public static void deleteTask(int num) throws CustomException {
+        if (num <= 0) {
+            throw new CustomException("Invalid task ID: number must be a positive integer:)");
+        } else if ( num > manager.size()) {
+            throw new CustomException("Invalid task ID: this task number does not exist as of now.");
+        } else {
+            manager.remove(num - 1);
+            System.out.println("Sure! Task item " + num + " has now been deleted:)");
+        }
+    }
+
+    public static Task findTask(int num) throws CustomException {
         Task desiredTask = new Task("empty task");
         int len = manager.size();
 
