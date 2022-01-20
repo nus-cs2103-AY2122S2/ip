@@ -3,8 +3,8 @@ import java.util.*;
 public class Duke {
 
     static Scanner scanner = new Scanner(System.in);
-    static final String welcome_message = "Hello! I'm Duke\n" +
-            "What can I do for you?";
+    static final String welcome_message = "Ello, my name is Ekud, your personal task tracking bot.\n" +
+            "Enter \"commands\" for list of commands that I can handle";
 
     public static void main(String[] args) throws DukeException {
 
@@ -47,11 +47,12 @@ public class Duke {
                         TaskFunctions.showTaskList();
                         break;
                     case "bye":
-                        System.out.println("Bye. Hope to see you again soon!");
+                        System.out.println("Goodbye sir" +
+                                "\nQuote of the day: Success starts with SU!");
                         System.exit(0);
                     default:
-                        DukeException dukeException = new DukeException("☹ OOPS!!! I'm sorry, " +
-                                "but I don't know what that means :-(");
+                        DukeException dukeException = new DukeException("I'm so very sorry, but" +
+                                "Please make sure you enter a valid Ekud command");
                         System.err.println(dukeException);
                 }
             } catch (DukeException err) {

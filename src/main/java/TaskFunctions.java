@@ -11,25 +11,25 @@ public class TaskFunctions {
             String[] input_split = input.split(" ", 2);
             if (input_split.length == 1) {
                 if (DukeCommands.isDukeCommand(input_split[0])) {
-                    throw new DukeException("☹ OOPS!!! The description of a " + input_split[0] + " cannot be empty.");
+                    throw new DukeException("I'm so very sorry, the description of a " + input_split[0] + " cannot be empty.");
                 }
             } else if (input_split[0].equals("event")) {
                 if (!input.contains("/at")) {
-                    throw new DukeException("☹ OOPS!!! Please use the /at command for an event input");
+                    throw new DukeException("I'm so very sorry, please use the /at command for an event input");
                 }
                 if (input.split("event ")[1].split(" ", 2)[0].equals("/at")) {
-                    throw new DukeException("☹ OOPS!!! The description of a " + input_split[0] + " cannot be empty.");
+                    throw new DukeException("I'm so very sorry, the description of a " + input_split[0] + " cannot be empty.");
                 }
             } else if (input_split[0].equals("deadline")) {
                 if (!input.contains("/by")) {
-                    throw new DukeException("☹ OOPS!!! Please use the /by command for an event input");
+                    throw new DukeException("I'm so very sorry, please use the /by command for an event input");
                 }
                 if (input.split("deadline ")[1].split(" ", 2)[0].equals("/by")) {
-                    throw new DukeException("☹ OOPS!!! The description of a " + input_split[0] + " cannot be empty.");
+                    throw new DukeException("I'm so very sorry, the description of a " + input_split[0] + " cannot be empty.");
                 }
             } else if (input_split[0].equals("mark") || input_split[0].equals("unmark") || input_split[0].equals("delete")) {
                 if (input_split.length > 2) {
-                    throw new DukeException("☹ OOPS!!! Please make sure there is only one number following the " +
+                    throw new DukeException("I'm so very sorry, please make sure there is only one number following the " +
                             input_split[0] + " command");
                 }
                 try {
