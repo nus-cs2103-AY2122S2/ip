@@ -5,3 +5,29 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+  > Heya! I'm Duke!
+What can I do for ya?
+
+  > added task: [T][ ] Task 1
+
+  > added deadline: [D][ ] Task 2 (by: 8 pm)
+
+  > added event: [E][ ] Event 3 (at: 4 pm, Sunday)
+
+  > Cool! You've done this task:
+  [T][X] Task 1
+
+  > Cool! You've done this task:
+  [D][X] Task 2 (by: 8 pm)
+
+  > This task is now undone:
+  [T][ ] Task 1
+
+  > 1. [T][ ] Task 1
+
+  > 2. [D][X] Task 2 (by: 8 pm)
+
+  > 3. [E][ ] Event 3 (at: 4 pm, Sunday)
+
+  > Ok then, see ya!
+
