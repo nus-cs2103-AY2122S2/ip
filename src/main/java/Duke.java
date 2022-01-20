@@ -1,27 +1,37 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public Duke() {
-        String start =
-                "________________________________\n"
-                        + "Hello! I am Duke.\n"
-                        + "Your Personal Assistant.\n"
-                        + "What can I do for you?\n"
-                        + "________________________________";
-        System.out.println(start);
-    }
+//    private ArrayList<String> tasks;
+//    public Duke() {
+//        String start =
+//                "________________________________\n"
+//                        + "Hello! I am Duke.\n"
+//                        + "Your Personal Assistant.\n"
+//                        + "What can I do for you?\n"
+//                        + "________________________________";
+//        this.tasks = new ArrayList<>();
+//        System.out.println(start);
+//    }
+//
+//    public static void add(String task) {
+//        tasks.add(task);
+//        System.out.println("________________________________");
+//        System.out.println("Added to your tasks: " + task);
+//    }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Duke duke = new Duke();
+        Control control = new Control();
         while (true) {
             String command = scanner.nextLine();
             if (command.equals("bye")) {
-                String bye = "GoodBye! I hope to see you again!";
-                System.out.println(bye);
+                control.bye();
                 break;
+            }else if (command.equals("list")) {
+                control.list();
             } else {
-                System.out.println(command);
+                control.add(command);
             }
             System.out.println("________________________________");
         }
