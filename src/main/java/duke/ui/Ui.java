@@ -14,7 +14,8 @@ import java.util.Scanner;
  */
 public class Ui {
     private enum Dialogue {
-        GREETING, FAREWELL, LIST, MARK, UNMARKED, ADDED, DELETE, NUMLEFT, LINE, LOADERROR, FIND, FINDDATE
+        GREETING, FAREWELL, LIST, MARK, UNMARKED, ADDED, DELETE,
+        NUMLEFT, LINE, LOADERROR, FIND, FINDDATE
     }
     private final Scanner in;
     private final PrintStream out;
