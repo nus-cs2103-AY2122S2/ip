@@ -15,13 +15,16 @@ public class Duke {
         displayHelloMessage();
         String command = sc.next();
         String description = sc.nextLine();
-        while(!command.equals("Bye")) {
+        while(!command.equals("bye")) {
             executeCommand(command, description);
             command = sc.next();
-            description = sc.nextLine();
+            if(!command.equals("bye")) {
+                description = sc.nextLine();
+            }
         }
         displayByeMessage();
     }
+
 
     public void displayHelloMessage() {
         display("Hello! I'm Duke\nWhat can I do for you?");
