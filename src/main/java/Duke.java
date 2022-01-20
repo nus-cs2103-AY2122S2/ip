@@ -267,17 +267,18 @@ public class Duke {
 
     public static void displayDeletedMessage(Task deletedTask, int size) {
         String output = " Noted. I've removed this task:\n"
+                + "  "
                 + deletedTask
                 + "\n Now you have "
                 + size
-                + " tasks in the list.";
+                + " tasks in the list.\n";
         System.out.println(formatMsg(output));
     }
 
     /**
-     * Runs Level 5 version of the app, Exception handling
+     * Runs Level 5 & 6 version of the app, Exception handling
      */
-    public static void levelFive() throws DukeException {
+    public static void levelFinal() throws DukeException {
         displayWelcomeMsg();
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> data = new ArrayList<>();
@@ -285,7 +286,6 @@ public class Duke {
         for (int i = 0; i < 100; i++) {
             String input = sc.nextLine().trim();
             String command = input.split(" ")[0];
-            System.out.println(command);
 
             if (command.equals("bye")) {
                 displayExitMsg();
@@ -338,28 +338,26 @@ public class Duke {
                 data.add(newTask);
                 displayListedText(newTask, data.size());
 
-            }
-//            else if (command.equals("delete")) {
-//                if (input.split("").length <= 1) {
-//                    throw new DeleteEmptyException();
-//                }
-//
-//                int taskIndex = Integer.parseInt(input.split(" ")[1]);
-//                try {
-//                    Task deletedTask = data.remove(taskIndex - 1);
-//                    displayDeletedMessage(deletedTask, data.size());
-//                } catch (IndexOutOfBoundsException err) {
-//                    throw new DukeException("task index provided is invalid :(");
-//                }
-//
-//            }
-            else {
+            } else if (command.equals("delete")) {
+                if (input.split("").length <= 1) {
+                    throw new DeleteEmptyException();
+                }
+
+                int taskIndex = Integer.parseInt(input.split(" ")[1]);
+                try {
+                    Task deletedTask = data.remove(taskIndex - 1);
+                    displayDeletedMessage(deletedTask, data.size());
+                } catch (IndexOutOfBoundsException err) {
+                    throw new DukeException("task index provided is invalid :(");
+                }
+
+            } else {
                 throw new UnknownCommandException();
             }
         }
     }
 
     public static void main(String[] args) throws DukeException {
-        levelFive();
+        levelFinal();
     }
 }
