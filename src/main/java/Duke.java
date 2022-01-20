@@ -15,10 +15,10 @@ public class Duke {
         displayHelloMessage();
         String command = sc.next();
         String description = sc.nextLine();
-        while(!command.equals("bye")) {
+        while(!command.equals("Bye")) {
             executeCommand(command, description);
             command = sc.next();
-            if(!command.equals("bye")) {
+            if(!command.equals("Bye")) {
                 description = sc.nextLine();
             }
         }
@@ -82,9 +82,9 @@ public class Duke {
             //toBeCompleted.isComplete();
             displayIncompleteTask(toBeCompleted);
         } else {
-            //displayLine();
-            //display("Got it. I've added this task:");
             if (command.equals("event")) {
+                displayLine();
+                display("Got it. I've added this task:");
                 String[] descriptionAndTime = description.split("/");
                  String eventDescription = (descriptionAndTime[0].split(" ", 2))[1];
                  String eventTime = (descriptionAndTime[1].split(" ", 2))[1];
@@ -92,6 +92,8 @@ public class Duke {
                  dukeList.add(newEvent);
                  display(newEvent);
             } else if (command.equals("deadline")) {
+                displayLine();
+                display("Got it. I've added this task:");
                 String[] descriptionAndTime = description.split("/");
                  String deadlineDescription = (descriptionAndTime[0].split(" ", 2))[1];
                  String deadlineTime = (descriptionAndTime[1].split(" ", 2))[1];
@@ -103,7 +105,7 @@ public class Duke {
                     throw new DukeToDoEmptyException();
                 }
                 displayLine();
-                display("Got it. I've added this task: ");
+                display("Got it. I've added this task:");
                 ToDo newTodo = new ToDo(description.substring(1));
                 dukeList.add(newTodo);
                 display(newTodo);
