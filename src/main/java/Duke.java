@@ -44,27 +44,46 @@ public class Duke {
                     break;
                 case "todo" :
                     sc.reset();
-                    input = sc.nextLine().strip();
-                    tasks.add(new Todo(input));
-                    System.out.println("I've added this to your tasks sir: " + tasks.getLast());
-                    System.out.println("There are " + tasks.size() + " tasks on your list.");
-                    break;
+                    try {
+                        input = sc.nextLine().strip();
+                        if (input.isEmpty()) throw new DukeException("Do what, sir?");
+                        tasks.add(new Todo(input));
+                        System.out.println("I've added this to your tasks sir: " + tasks.getLast());
+                        System.out.println("There are " + tasks.size() + " tasks on your list.");
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    finally {
+                        break;
+                    }
                 case "deadline" :
                     sc.reset();
                     input = sc.nextLine().strip();
                     String[] deadline = input.split(" /by ");
-                    tasks.add(new Deadline(deadline[0], deadline[1]));
-                    System.out.println("I've added this to your tasks sir: " + tasks.getLast());
-                    System.out.println("There are " + tasks.size() + " tasks on your list.");
-                    break;
+                    try {
+                        if (deadline.length < 2) throw new DukeException("Invalid deadline task, sir.");
+                        tasks.add(new Deadline(deadline[0], deadline[1]));
+                        System.out.println("I've added this to your tasks sir: " + tasks.getLast());
+                        System.out.println("There are " + tasks.size() + " tasks on your list.");
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    } finally {
+                        break;
+                    }
                 case "event" :
                     sc.reset();
                     input = sc.nextLine().strip();
                     String[] event = input.split(" /at ");
-                    tasks.add(new Deadline(event[0], event[1]));
-                    System.out.println("I've added this to your tasks sir: " + tasks.getLast());
-                    System.out.println("There are " + tasks.size() + " tasks on your list.");
-                    break;
+                    try {
+                        if (event.length < 2) throw new DukeException("Invalid event task, sir.");
+                        tasks.add(new Event(event[0], event[1]));
+                        System.out.println("I've added this to your tasks sir: " + tasks.getLast());
+                        System.out.println("There are " + tasks.size() + " tasks on your list.");
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    } finally {
+                        break;
+                    }
                 default :
                     sc.reset();
                     sc.nextLine();
