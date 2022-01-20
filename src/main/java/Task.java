@@ -1,10 +1,12 @@
 public class Task {
     private String name;
     private boolean isChecked;
+    private String taskLabel;
 
-    public Task(String name, boolean isChecked) {
+    public Task(String name, boolean isChecked, String taskLabel) {
         this.name = name;
         this.isChecked = isChecked;
+        this.taskLabel = taskLabel;
     }
 
     @Override
@@ -14,6 +16,10 @@ public class Task {
 
     public boolean getChecked() {
         return this.isChecked;
+    }
+
+    public String getTaskLabel() {
+        return this.taskLabel;
     }
 
     public void setChecked(boolean check) {

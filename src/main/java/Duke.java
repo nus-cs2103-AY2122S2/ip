@@ -1,9 +1,10 @@
+import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        try {
+//        try {
             Scanner scanner = new Scanner(System.in);
             Control control = new Control();
             while (true) {
@@ -18,14 +19,20 @@ public class Duke {
                     control.list();
                 } else if (firstWord.equals("mark") || firstWord.equals("unmark")) {
                     control.taskCheck(command);
+                } else if (firstWord.equals("todo")) {
+                    control.todo(command);
+                } else if (firstWord.equals("deadline")) {
+                    control.deadline(command);
+                } else if (firstWord.equals("event")) {
+                    control.event(command);
                 } else {
-                    control.add(command);
+                    System.out.println(firstWord + " is a invalid Task");
                 }
                 System.out.println("________________________________");
             }
-        } catch (NumberFormatException e) {
-            System.out.println("An invalid task index has been inputted");
-        }
+//        } catch (NumberFormatException e) {
+//            // System.out.println("An invalid task index has been inputted");
+//        }
 
     }
 //    public static void main(String[] args) {
