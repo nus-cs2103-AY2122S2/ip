@@ -15,3 +15,10 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+
+# Personal flies
+*.class
+*.jar
+*.exe
+# log files, temprary files, settings of ide (local files)
+# sensitive content like personal information
