@@ -40,11 +40,11 @@ public class Duke {
                         "    ____________________________________________________________\n");
 
             } else if (splittedString[0].equals("todo")) { // check for todo tag
-                if (splittedString.length == 1) {
+                if (splittedString.length == 1) { //invalid todo command
                     System.out.println("    ____________________________________________________________\n" +
                             "     ☹ OOPS!!! The description of a todo cannot be empty.\n" +
                             "    ____________________________________________________________");
-                } else {
+                } else { //valid todo command
                     Task todoTask = new Todo(reply);
                     itemList.add(todoTask);
                     System.out.println("    ____________________________________________________________\n" +
@@ -54,11 +54,11 @@ public class Duke {
                             "    ____________________________________________________________");
                 }
             } else if (splittedString[0].equals("deadline")) { // check for deadline tag
-                if (splittedString.length == 1) {
+                if (splittedString.length == 1) { //invalid deadline command
                     System.out.println("    ____________________________________________________________\n" +
                             "     ☹ OOPS!!! The description of a deadline cannot be empty.\n" +
                             "    ____________________________________________________________");
-                } else {
+                } else { //valid deadline command
                     Task deadlineTask = new Deadline(reply);
                     itemList.add(deadlineTask);
                     System.out.println("    ____________________________________________________________\n" +
@@ -68,11 +68,11 @@ public class Duke {
                             "    ____________________________________________________________");
                 }
             } else if (splittedString[0].equals("event")) { // check for event tag
-                if (splittedString.length == 1) {
+                if (splittedString.length == 1) { //invalid event command
                     System.out.println("    ____________________________________________________________\n" +
                             "     ☹ OOPS!!! The description of a event cannot be empty.\n" +
                             "    ____________________________________________________________");
-                } else {
+                } else { //valid event command
                     Task eventTask = new Event(reply);
                     itemList.add(eventTask);
                     System.out.println("    ____________________________________________________________\n" +
@@ -94,7 +94,7 @@ public class Duke {
                 }
                 totalString += "    ____________________________________________________________\n";
                 System.out.println(totalString);
-            } else if (splittedString[0].equals("delete")) {
+            } else if (splittedString[0].equals("delete")) { //check for delete
                 int index = Integer.valueOf(splittedString[1]);
 
                 String toRemove = itemList.remove(index - 1).getDescription();
@@ -103,7 +103,7 @@ public class Duke {
                         "       " + toRemove + "\n" +
                         "     Now you have " + itemList.size() + " tasks in the list.\n" +
                         "    ____________________________________________________________");
-            } else {
+            } else { //check non-existing commands
                 System.out.println("    ____________________________________________________________\n" +
                         "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
                         "    ____________________________________________________________");
