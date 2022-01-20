@@ -21,8 +21,8 @@ public class Action {
     void showList(ArrayList<Task> arrlst) {
         System.out.println("Here are the tasks in your list:");
         for (int i =  0; i < arrlst.size(); i++) {
-            String output = String.format("%d.[%s] %s\n", i + 1, arrlst.get(i).getStatusIcon(),
-                                            arrlst.get(i).description);
+            String output = String.format("%d.[%s][%s]%s\n", i + 1, arrlst.get(i).sym,
+                                             arrlst.get(i).getStatusIcon(), arrlst.get(i).description);
             System.out.println(output);
         }
     }
