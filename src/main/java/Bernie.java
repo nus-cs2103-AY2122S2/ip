@@ -7,6 +7,16 @@ import java.util.Scanner;
 public class Bernie {
     TaskList tasks;
     String lineBreak = "___________________________________________________________";
+
+    enum Type {
+        TODO,
+        DEADLINE,
+        EVENT,
+        MARK,
+        UNMARK,
+        DELETE
+    }
+
     /**
      * Constructs a new Bot containing TaskList
      */
@@ -78,15 +88,15 @@ public class Bernie {
      * @throws BernieException, if the task is not a valid type.
      */
     void add(String input) throws BernieException {
-        Task newTask = null;
-        if (isType("todo", input)) {
-            String[] inputArr = getParams("todo", input);
+        Task newTask;
+        if (isType(Type.TODO, input)) {
+            String[] inputArr = getParams(Type.TODO, input);
             newTask = tasks.addTask(inputArr, "todo");
-        } else if (isType("deadline", input)) {
-            String[] inputArr = getParams("deadline", input);
+        } else if (isType(Type.DEADLINE, input)) {
+            String[] inputArr = getParams(Type.DEADLINE, input);
             newTask = tasks.addTask(inputArr, "deadline");
-        } else if (isType("event", input)) {
-            String[] inputArr = getParams("event", input);
+        } else if (isType(Type.EVENT, input)) {
+            String[] inputArr = getParams(Type.EVENT, input);
             newTask = tasks.addTask(inputArr, "event");
         } else {
             throw new BernieException("Not a valid type of task!");
@@ -102,13 +112,13 @@ public class Bernie {
      * @param input String
      * @return boolean to affirm if the input is of this task
      */
-    boolean isType(String taskType, String input) {
-        return input.indexOf(taskType) == 0;
+    boolean isType(Type taskType, String input) {
+        return input.indexOf(taskType.name().toLowerCase()) == 0;
     }
 
     void delete(String input) {
         try {
-            String taskNum = getParams("delete", input)[0];
+            String taskNum = getParams(Type.DELETE, input)[0];
             Task deletedTask = tasks.deleteTask(taskNum);
             System.out.printf("Got ya. Removed:\n%s\nYou got %d tasks waiting for ya!\n",
                     deletedTask, tasks.numTasksLeft());
@@ -132,35 +142,35 @@ public class Bernie {
      * For "mark": an array of 2: [action, taskNum]
      * For "delete": an array of 1: [taskNum]
      */
-    String[] getParams(String taskType, String input) throws BernieException {
+    String[] getParams(Type taskType, String input) throws BernieException {
         String description;
         String[] inputArr = null;
         switch (taskType) {
-            case "todo":
+            case TODO:
                 inputArr = input.split("todo ");
-                description = getDescription(inputArr, "todo");
+                description = getDescription(inputArr, Type.TODO);
                 inputArr = new String[]{description};
                 break;
-            case "deadline":
+            case DEADLINE:
                 inputArr = input.split(" /by ");
-                description = getDescription(inputArr, "deadline");
+                description = getDescription(inputArr, Type.DEADLINE);
                 String by = getTime(inputArr);
                 inputArr = new String[]{description, by};
                 break;
-            case "event":
+            case EVENT:
                 inputArr = input.split(" /at ");
-                description = getDescription(inputArr, "event");
+                description = getDescription(inputArr, Type.EVENT);
                 String at = getTime(inputArr);
                 inputArr = new String[]{description, at};
                 break;
-            case "mark":
+            case MARK:
                 inputArr = input.split(" ");
                 // check valid
-                checkMarkOrDeleteInput(inputArr, "mark");
+                checkMarkOrDeleteInput(inputArr, Type.MARK);
                 break;
-            case "delete":
+            case DELETE:
                 inputArr = input.split(" ");
-                checkMarkOrDeleteInput(inputArr, "delete");
+                checkMarkOrDeleteInput(inputArr, Type.DELETE);
                 inputArr = new String[]{inputArr[1]};
                 break;
             default:
@@ -185,15 +195,15 @@ public class Bernie {
      */
     void mark(String input) {
         try {
-            String[] inputArr = getParams("mark", input);
+            String[] inputArr = getParams(Type.MARK, input);
             String action = inputArr[0];
             String taskNum = inputArr[1];
             if (action.equals("mark")) {
-                Task markedTask = tasks.markTask("mark", taskNum);
+                Task markedTask = tasks.markTask(Type.MARK, taskNum);
                 System.out.printf("This is now done:\n%s\n", markedTask);
                 System.out.println(lineBreak);
             } else if (action.equals("unmark")) {
-                Task unmarkedTask = tasks.markTask("unmark", taskNum);
+                Task unmarkedTask = tasks.markTask(Type.UNMARK, taskNum);
                 System.out.printf("This is now undone:\n%s\n", unmarkedTask);
                 System.out.println(lineBreak);
             }
@@ -211,7 +221,7 @@ public class Bernie {
      *                 parameters for the action
      * @throws BernieException for invalid inputs
      */
-    void checkMarkOrDeleteInput(String[] inputArr, String action) throws BernieException {
+    void checkMarkOrDeleteInput(String[] inputArr, Type action) throws BernieException {
         if (inputArr.length == 2) {
             try {
                 String taskNum = inputArr[1];
@@ -221,7 +231,7 @@ public class Bernie {
                 throw new BernieException("That's not a task number! Put a number.");
             }
         } else {
-            if (action.equals("mark")) {
+            if (action.equals(Type.MARK)) {
                 throw new BernieException("Wrong input. Type this: mark/unmark taskNumber");
             } else {
                 throw new BernieException("Wrong input. Type this: delete taskNumber");
@@ -236,13 +246,14 @@ public class Bernie {
      * @return String description, for creating of Task
      * @throws BernieException for invalid descriptions such as empty or number description
      */
-    String getDescription(String[] inputArr, String taskType) throws BernieException {
-        String description = "";
+    String getDescription(String[] inputArr, Type taskType) throws BernieException {
+        String description;
         try {
-            if (taskType.equals("todo")) {
+            if (taskType.equals(Type.TODO)) {
                 description = inputArr[1];
             } else {
-                description = inputArr[0].split(taskType + " ")[1];
+                // can take note of lowercase/uppercase
+                description = inputArr[0].split(taskType.name().toLowerCase() + " ")[1];
             }
             checkDescriptionNotNumber(description);
             return description;
@@ -268,8 +279,7 @@ public class Bernie {
      */
     String getTime(String[] inputArr) throws BernieException {
         try {
-            String time = inputArr[1];
-            return time;
+            return inputArr[1];
         } catch (IndexOutOfBoundsException e) {
             throw new BernieException("Where's your time input?");
         }

@@ -80,11 +80,11 @@ public class TaskList {
      * @return the resulting Task after mark or unmark
      * @throws BernieException if we attempt to mark a marked Task or unmark an unnmarked Task
      */
-    Task markTask(String action, String taskNumber) throws BernieException {
+    Task markTask(Bernie.Type action, String taskNumber) throws BernieException {
         int taskIndex = Integer.parseInt(taskNumber) - 1;
-        if (action.equals("mark")) {
+        if (action.equals(Bernie.Type.MARK)) {
             tasks.get(taskIndex).markDone();
-        } else if (action.equals("unmark")) {
+        } else if (action.equals(Bernie.Type.UNMARK)) {
             tasks.get(taskIndex).markNotDone();
         }
         return tasks.get(taskIndex);
