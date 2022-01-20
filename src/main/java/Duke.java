@@ -65,6 +65,9 @@ public class Duke {
                         result = strArr[1].split("/at", 2);
                         task = new Event(result[0], result[1]);
                         break;
+                    case "delete":
+                        System.out.println(delete(strArr[1]));
+                        break;
                     default:
                         // Unknown keyword
                         System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -125,5 +128,24 @@ public class Duke {
         return "Got it. I've added this task:\n"
                 + task.toString()
                 + "\nNow you have " + list.size() + " tasks in the list.";
+    }
+
+    private static String delete(String input){
+        int index;
+
+        // Try to convert String input as index in list
+        try {
+            index = Integer.parseInt(input) - 1;
+        } catch (NumberFormatException e) {
+            index = -1;
+        }
+
+        // Check out of bounds
+        if(index < 0 || index >= list.size()) {
+            return "This is an invalid index, please try again!";
+        }
+        Task task = list.remove(index);
+        return  "OK! I've removed this task:\n" + task
+                    + "\nNow you have " + list.size() + " tasks in the list.";
     }
 }
