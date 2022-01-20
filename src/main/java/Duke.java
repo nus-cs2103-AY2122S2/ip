@@ -44,12 +44,12 @@ public class Duke {
                 int index_andone =  Integer.parseInt(strArr[1]);
                 Task temp = taskList.get(index_andone - 1);
                 temp.isDone = true;
-                System.out.println("Nice! I've marked this task as done: \n"+ temp.toString());
+                System.out.println("Nice! I've marked this task as done:\n"+ temp.toString());
                 continue;
             }
 
             if(command.equals("todo")) {
-                String title = input.substring("todo".length() + 1);
+                String title = input.substring("todo".length() + 1).trim();
                 System.out.println("Got it. I've added this task:");
                 Task task = new Todo(title);
                 taskList.add(task);
@@ -57,12 +57,10 @@ public class Duke {
             }
 
             if(command.equals("deadline")) {
-                System.out.println("test");
                 if(findKeyword(strArr, "/by")) {
-                    System.out.println("test1");
                     String[] splitArr = input.split("/by", 2);
-                    String title = splitArr[0].substring("deadline".length() + 1);
-                    String time = splitArr[1];
+                    String title = splitArr[0].substring("deadline".length() + 1).trim();
+                    String time = splitArr[1].trim();
                     System.out.println("Got it. I've added this task:");
                     Task task = new Deadline(title, time);
                     taskList.add(task);
@@ -73,8 +71,8 @@ public class Duke {
             if(command.equals("event")) {
                 if(findKeyword(strArr, "/at")) {
                     String[] splitArr = input.split("/at", 2);
-                    String title = splitArr[0].substring("event".length() + 1);
-                    String time = splitArr[1];
+                    String title = splitArr[0].substring("event".length() + 1).trim();
+                    String time = splitArr[1].trim();
                     System.out.println("Got it. I've added this task:");
                     Task task = new Event(title, time);
                     taskList.add(task);
