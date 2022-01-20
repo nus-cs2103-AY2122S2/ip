@@ -130,7 +130,19 @@ try {
         tasks.add(temp);
         System.out.println("Got it. I've added this task:");
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-    } else {
+    } else if (input[0].equals("delete")) {
+        if (input.length < 2) {
+            throw new EmptyArgumentException("delete");
+        }
+        Task remove = tasks.get(Integer.parseInt(input[1]) - 1);
+        System.out.println("Noted. I've removed this task: ");
+        System.out.println(remove.toString());
+        tasks.remove(Integer.parseInt(input[1]) - 1);
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+
+    }
+
+    else {
         throw new InvalidArgumentException();
     }
 } catch (DukeException exception)  {
