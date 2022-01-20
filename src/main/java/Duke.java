@@ -7,8 +7,6 @@ public class Duke {
         System.out.println("What can I do for you?");
         Scanner sc = new Scanner(System.in);
 
-        int counter = 0;
-
         List list = new ArrayList<Task>();
 
         while(sc.hasNext()) {
@@ -38,6 +36,29 @@ public class Duke {
                 System.out.println("OK, I've marked this task as not done yet:");
                 System.out.println(list.get(index-1));
             }
+            else if (splitStr[0].equals("todo") || splitStr[0].equals("deadline") || splitStr[0].equals("event")){
+                String[] parts = value.split("/");
+                String description = parts[0];
+                if (parts.length>1){ description+= "("+parts[1]+")";}
+
+                if (splitStr[0].equals("todo")) {
+                    description = description.substring(5);
+                    list.add(new ToDo(description));
+                }
+
+                else if (splitStr[0].equals("deadline")){
+                    description = description.substring(9);
+                    list.add(new Deadline(description));
+                }
+                else if (splitStr[0].equals("event")){
+                    description = description.substring(6);
+                    list.add(new Event(description));
+                }
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(list.get(list.size()-1));
+                System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
+            }
+
             else {
                 list.add(new Task(value));
                 System.out.println("added: "+ value);
