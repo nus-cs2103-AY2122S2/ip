@@ -32,12 +32,21 @@ public class Duke {
                 String numberOnly = input.replaceAll("[^0-9]", "");
                 int number = Integer.parseInt(numberOnly);
                 Task curr = taskList.get(number - 1);
-                curr.markAsDone();
 
-                System.out.println(bar);
-                System.out.println("Nice! I've marked this task as done: ");
-                System.out.println("[" + curr.getStatusIcon() + "] " + curr);
-                System.out.println(bar);
+                if (input.matches(".*\\bunmark\\b.*")) {
+                    curr.markAsUndone();
+                    System.out.println(bar);
+                    System.out.println("OK, I've marked this task as not done yet:");
+                    System.out.println("[" + curr.getStatusIcon() + "] " + curr);
+                    System.out.println(bar);
+                } else {
+                    curr.markAsDone();
+                    System.out.println(bar);
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println("[" + curr.getStatusIcon() + "] " + curr);
+                    System.out.println(bar);
+                }
+
             } else {
                 System.out.println(bar);
                 Task curr = new Task(input);
