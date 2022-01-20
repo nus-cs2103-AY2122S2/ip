@@ -62,7 +62,7 @@ public class Duke {
             }
             nextInput = userInput.nextLine();
         }
-
+ 
         System.out.println("Bye. Hope to see you again soon!");
     }
 }
