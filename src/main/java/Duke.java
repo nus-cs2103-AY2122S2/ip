@@ -32,7 +32,7 @@ public class Duke {
         }
     }
 
-    public static Command processInput(String input) throws UnknownCommandException, EmptyDescriptionException {
+    public static Command processInput(String input) throws UnknownCommandException, EmptyDescriptionException, IncorrectValueException , OutOfRangeException{
         Command cmd = null;
         String[] inputSplit = input.split(" ", 2);
         String commandType = inputSplit[0].toLowerCase();
@@ -40,13 +40,27 @@ public class Duke {
             cmd = new ByeCommand();
         } else if (commandType.equals("list")) {
             cmd = new ListCommand(TASKLIST);
-        } else if (commandType.equals("mark")) {
-            cmd = new MarkCommand(TASKLIST, Integer.parseInt(inputSplit[1]));
-        } else if (commandType.equals("unmark")) {
-            cmd = new UnMarkCommand(TASKLIST, Integer.parseInt(inputSplit[1]));
-        } else if(commandType.equals("delete")){
-            cmd = new DeleteCommand(TASKLIST, Integer.parseInt(inputSplit[1]));
-            TASKLIST = cmd.getList();
+        } else if(commandType.equals("mark")||commandType.equals("unmark")||commandType.equals("delete")) {
+            String detail = inputSplit[1];
+            if (!isInteger(detail)) {
+                throw new IncorrectValueException();
+            }
+            int inputVal = Integer.parseInt(detail);
+            if (inputVal > TASKLIST.size()){
+                throw new OutOfRangeException();
+            }
+            switch (commandType) {
+                case "mark":
+                    cmd = new MarkCommand(TASKLIST, inputVal);
+                    break;
+                case "unmark":
+                    cmd = new UnMarkCommand(TASKLIST, inputVal);
+                    break;
+                case "delete":
+                    cmd = new DeleteCommand(TASKLIST, inputVal);
+                    TASKLIST = cmd.getList();
+                    break;
+            }
         } else if (commandType.equals("todo")||commandType.equals("event")||commandType.equals("deadline")){
             if(inputSplit.length<2){
                 throw new EmptyDescriptionException(commandType);
