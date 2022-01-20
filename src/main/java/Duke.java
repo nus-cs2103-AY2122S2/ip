@@ -177,12 +177,13 @@ public class Duke {
         }
     }
 
-    public static String displayListedText(Task task, int size) {
-        return " Got it. I've added this task:\n   "
+    public static void displayListedText(Task task, int size) {
+        String output = " Got it. I've added this task:\n   "
                 + task.toString()
                 + "\n Now you have "
                 + size
                 + " tasks in the list.\n";
+        System.out.println(formatMsg(output));
     }
 
     public static String getEventTiming(String text) {
@@ -236,8 +237,7 @@ public class Duke {
                 Task newTask = new Task(taskName, timing);
                 newTask.setDeadline();
                 data.add(newTask);
-                String output = displayListedText(newTask, data.size());
-                System.out.println(formatMsg(output));
+                displayListedText(newTask, data.size());
             }
 
             if (input.split(" ")[0].equals("event")) {
@@ -246,16 +246,14 @@ public class Duke {
                 Task newTask = new Task(taskName, timing);
                 newTask.setEvent();
                 data.add(newTask);
-                String output = displayListedText(newTask, data.size());
-                System.out.println(formatMsg(output));
+                displayListedText(newTask, data.size());
             }
 
             if (input.split(" ")[0].equals("todo")) {
                 Task newTask = new Task(input.replaceAll("todo", ""));
                 newTask.setTodo();
                 data.add(newTask);
-                String output = displayListedText(newTask, data.size());
-                System.out.println(formatMsg(output));
+                displayListedText(newTask, data.size());
             }
 
             continue;
@@ -267,7 +265,101 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-        levelFour();
+    public static void displayDeletedMessage(Task deletedTask, int size) {
+        String output = " Noted. I've removed this task:\n"
+                + deletedTask
+                + "\n Now you have "
+                + size
+                + " tasks in the list.";
+        System.out.println(formatMsg(output));
+    }
+
+    /**
+     * Runs Level 5 version of the app, Exception handling
+     */
+    public static void levelFive() throws DukeException {
+        displayWelcomeMsg();
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Task> data = new ArrayList<>();
+
+        for (int i = 0; i < 100; i++) {
+            String input = sc.nextLine().trim();
+            String command = input.split(" ")[0];
+            System.out.println(command);
+
+            if (command.equals("bye")) {
+                displayExitMsg();
+                return;
+
+            } else if (command.equals("list")) {
+                System.out.println(formatMsg(renderTaskList(data)));
+                continue;
+
+            } else if (command.contains("mark")) {
+                int itemIndex = Integer.parseInt(input.split(" ")[1]);
+
+                if (itemIndex <= data.size()) {
+                    Task selectedTask = data.get(itemIndex - 1);
+                    if (command.contains("unmark")) {
+                        selectedTask.markAsIncomplete();
+                        displayUnmarkMsg(selectedTask.toString());
+                    } else {
+                        selectedTask.markAsComplete();
+                        displayMarkMsg(selectedTask.toString());
+                    }
+                }
+                continue;
+
+            } else if (command.equals("deadline")) {
+                String timing = getDeadlineTiming(input);
+                String taskName = input.replaceAll("deadline", "").split("/by")[0];
+                Task newTask = new Task(taskName, timing);
+                newTask.setDeadline();
+                data.add(newTask);
+                displayListedText(newTask, data.size());
+
+            } else if (command.equals("event")) {
+                String timing = getEventTiming(input);
+                String taskName = input.replaceAll("event", "").split("/at")[0];
+                Task newTask = new Task(taskName, timing);
+                newTask.setEvent();
+                data.add(newTask);
+                displayListedText(newTask, data.size());
+
+            } else if (command.equals("todo")) {
+                String taskName = input.replaceAll("todo", "");
+
+                if (input.split(" ").length <= 1) {
+                    throw new TodoEmptyException();
+                }
+
+                Task newTask = new Task(taskName);
+                newTask.setTodo();
+                data.add(newTask);
+                displayListedText(newTask, data.size());
+
+            }
+//            else if (command.equals("delete")) {
+//                if (input.split("").length <= 1) {
+//                    throw new DeleteEmptyException();
+//                }
+//
+//                int taskIndex = Integer.parseInt(input.split(" ")[1]);
+//                try {
+//                    Task deletedTask = data.remove(taskIndex - 1);
+//                    displayDeletedMessage(deletedTask, data.size());
+//                } catch (IndexOutOfBoundsException err) {
+//                    throw new DukeException("task index provided is invalid :(");
+//                }
+//
+//            }
+            else {
+                throw new UnknownCommandException();
+            }
+        }
+    }
+
+    public static void main(String[] args) throws DukeException {
+        levelFive();
     }
 }
