@@ -13,43 +13,40 @@ public class Duke {
 
         System.out.println(logo);
 
-        System.out.println("Test?");
         System.out.println("____________________________________________________________");
         System.out.println("I'm Saitama, a hero for fun.");
         System.out.println("What can I do for you?");
         System.out.println("____________________________________________________________");
-        System.out.println("Add country");
-        
+
         while (true) {
-            String[] command = sc.nextLine().trim().toLowerCase().split(" ", 2);
+            String[] str = sc.nextLine().trim().toUpperCase().split(" ", 2);
             System.out.println("____________________________________________________________");
 
-            if (command[0].equals("bye")) {
-                break;
-            }
-
             try {
-                switch (command[0]) {
-                case "list":
+                Command command = Command.getCommand(str);
+
+                switch (command) {
+                case BYE:
+                    break;
+                case LIST:
                     taskList.list();
-                    break;
-                case "mark":
-                    taskList.markTask(command);
-                    break;
-                case "unmark":
-                    taskList.unmarkTask(command);
-                    break;
-                case "delete":
-                    taskList.delete(command);
-                    break;
-                case "todo":
-                case "deadline":
-                case "event":
-                    taskList.add(command);
-                    break;
-                default:
-                    throw new InvalidCommandException("huh?!\nPlease enter a valid command.");
+                    continue;
+                case MARK:
+                    taskList.markTask(str);
+                    continue;
+                case UNMARK:
+                    taskList.unmarkTask(str);
+                    continue;
+                case DELETE:
+                    taskList.delete(str);
+                    continue;
+                case TODO:
+                case DEADLINE:
+                case EVENT:
+                    taskList.add(str);
+                    continue;
                 }
+                break;
             } catch (InvalidCommandException | InvalidTaskNumberException | EmptyDescriptionException e) {
                 System.out.println(e.getMessage());
             } finally {
@@ -59,3 +56,4 @@ public class Duke {
         System.out.println("OK...");
     }
 }
+
