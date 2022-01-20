@@ -2,6 +2,25 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    public enum Command {
+        BYE,
+        LIST,
+        MARK,
+        UNMARK,
+        DELETE,
+        DEADLINE,
+        EVENT,
+        TODO;
+
+        public boolean equals(String input) {
+            if (input.equalsIgnoreCase(this.name())) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
     public static void main(String[] args) throws DukeException {
         String botName = "Duke";
         Printer.printDivider();
@@ -11,7 +30,7 @@ public class Duke {
         Scanner inputScanner = new Scanner(System.in);
         String input = "";
         ArrayList<Task> taskList = new ArrayList<>();
-        while (!input.equals("bye")) {
+        while (!Command.BYE.equals(input)) {
             input = inputScanner.nextLine();
             int firstSpaceIndex = input.indexOf(" ");
             String firstArg = "";
@@ -29,29 +48,29 @@ public class Duke {
                     System.out.println(e);
                 }
             } else if (inputArray.length == 1) {
-                if (firstArg.equals("list")) {
+                if (Command.LIST.equals(firstArg)) {
                     Printer.printTodo(taskList);
-                } else if (firstArg.equals("bye")) {
+                } else if (Command.BYE.equals(firstArg)) {
                     Printer.printEndMessage();
-                } else if (firstArg.equals("delete")) {
+                } else if (Command.DELETE.equals(firstArg)) {
                     try {
                         throw new DukeMissingArgumentException("index");
                     } catch (DukeMissingArgumentException e) {
                         System.out.println(e);
                     }
-                } else if (firstArg.equals("deadline") || firstArg.equals("event") || firstArg.equals("todo")) {
+                } else if (Command.DEADLINE.equals(firstArg) || Command.EVENT.equals(firstArg) || Command.TODO.equals(firstArg)) {
                     try {
                         throw new DukeMissingArgumentException("task description");
                     } catch (DukeMissingArgumentException e) {
                         System.out.println(e);
                     }
-                } else if (firstArg.equals("mark")) {
+                } else if (Command.MARK.equals(firstArg)) {
                     try {
                         throw new DukeMissingArgumentException("index");
                     } catch (DukeMissingArgumentException e) {
                         System.out.println(e);
                     }
-                } else if (firstArg.equals("unmark")) {
+                } else if (Command.UNMARK.equals(firstArg)) {
                     try {
                         throw new DukeMissingArgumentException("index");
                     } catch (DukeMissingArgumentException e) {
@@ -65,11 +84,11 @@ public class Duke {
                     }
                 }
             } else {
-                if (firstArg.equals("mark")) {
+                if (Command.MARK.equals(firstArg)) {
                     taskList.get(Integer.parseInt(inputArray[1]) - 1).mark();
-                } else if (firstArg.equals("unmark")) {
+                } else if (Command.UNMARK.equals(firstArg)) {
                     taskList.get(Integer.parseInt(inputArray[1]) - 1).unmark();
-                } else if (firstArg.equals("delete")) {
+                } else if (Command.DELETE.equals(firstArg)) {
                     if (inputArray.length > 2) {
                         try {
                             throw new DukeInvalidArgumentException("Too many arguments!");
@@ -100,7 +119,7 @@ public class Duke {
                         }
                     }
 
-                } else if (firstArg.equals("deadline")) {
+                } else if (Command.DEADLINE.equals(firstArg)) {
                     int indexOfBy = input.indexOf("\\by ");
                     if (indexOfBy == -1) {
                         try {
@@ -115,7 +134,7 @@ public class Duke {
                         Printer.echoForAdd(taskObj, taskList.size());
                         taskList.add(taskObj);
                     }
-                } else if (firstArg.equals("event")) {
+                } else if (Command.EVENT.equals(firstArg)) {
                     int indexOfAt = input.indexOf("\\at ");
                     if (indexOfAt == -1) {
                         try {
@@ -130,7 +149,7 @@ public class Duke {
                         Printer.echoForAdd(taskObj, taskList.size());
                         taskList.add(taskObj);
                     }
-                } else if (firstArg.equals("todo")) {
+                } else if (Command.TODO.equals(firstArg)) {
                     String content = input.substring(firstArg.length() + 1);
                     Task taskObj = new ToDo(content);
                     Printer.echoForAdd(taskObj, taskList.size());
