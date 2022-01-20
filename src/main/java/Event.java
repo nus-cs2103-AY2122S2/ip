@@ -1,5 +1,4 @@
 public class Event extends Task {
-    private static final String tag = "E";
     private String dateRange;
 
     public Event(String name, String dateRange) {
@@ -13,10 +12,8 @@ public class Event extends Task {
 
     @Override
     public String nameWithStatus() {
-        return String.format("[%c][%c] %s (at: %s)",
-                this.tag,
-                super.isDone(),
-                super.getName(),
+        return String.format("[E]%s (at: %s)",
+                super.nameWithStatus(),
                 this.dateRange);
     }
 

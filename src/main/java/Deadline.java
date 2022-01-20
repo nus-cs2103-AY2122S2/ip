@@ -1,5 +1,4 @@
 public class Deadline extends Task {
-    private static final String tag = "D";
     private String date;
 
     public Deadline(String name, String deadline) {
@@ -13,10 +12,8 @@ public class Deadline extends Task {
 
     @Override
     public String nameWithStatus() {
-        return String.format("[%c][%c] %s (by: %s)",
-                this.tag,
-                super.isDone(),
-                super.getName(),
+        return String.format("[D]%s (by: %s)",
+                super.nameWithStatus(),
                 this.date);
     }
 }

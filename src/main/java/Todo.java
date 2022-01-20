@@ -1,6 +1,4 @@
 public class Todo extends Task {
-    private static final String tag = "T";
-
     public Todo(String name) {
         this(name, false);
     }
@@ -11,9 +9,6 @@ public class Todo extends Task {
 
     @Override
     public String nameWithStatus() {
-        return String.format("[%c][%c] %s",
-                this.tag,
-                super.isDone(),
-                super.getName());
+        return String.format("[T]%s", super.nameWithStatus());
     }
 }
