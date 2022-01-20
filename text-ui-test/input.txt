@@ -3,6 +3,9 @@ todo go run
 deadline assignment /by 6th June
 event wedding /at 20th June
 mark 1
+delete 1
 mark 2
 unmark 1
+hello
+delete 3
 bye
