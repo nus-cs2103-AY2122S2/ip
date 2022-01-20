@@ -19,6 +19,9 @@ public class Duke {
                 TaskFunctions.checkInputValidity(input);
 
                 switch (input_split[0]) {
+                    case "commands":
+                        TaskFunctions.getCommands();
+                        break;
                     case "delete":
                         int delete_position = Integer.parseInt(input_split[1]);
                         TaskFunctions.deleteTask(delete_position);
@@ -51,8 +54,8 @@ public class Duke {
                                 "\nQuote of the day: Success starts with SU!");
                         System.exit(0);
                     default:
-                        DukeException dukeException = new DukeException("I'm so very sorry, but" +
-                                "Please make sure you enter a valid Ekud command");
+                        DukeException dukeException = new DukeException("I'm so very sorry," +
+                                " please make sure you enter a valid Ekud command");
                         System.err.println(dukeException);
                 }
             } catch (DukeException err) {

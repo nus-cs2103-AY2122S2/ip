@@ -1,8 +1,16 @@
+import java.security.Key;
 import java.util.*;
 
 public class TaskFunctions {
 
     private static ArrayList<Task> taskList = new ArrayList<>();
+
+    public static void getCommands() {
+        HashMap<String, String> hashMap = DukeCommands.getDukeCommandsDescription();
+        for (Map.Entry<String, String> entry : hashMap.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+    }
 
     public static void checkInputValidity(String input) throws DukeException {
         if (input.isEmpty()) {
@@ -10,7 +18,7 @@ public class TaskFunctions {
         } else {
             String[] input_split = input.split(" ", 2);
             if (input_split.length == 1) {
-                if (DukeCommands.isDukeCommand(input_split[0])) {
+                if (DukeCommands.isDukeCommand(input_split[0]) && DukeCommands.isDukeDescriptionCommand(input_split[0])) {
                     throw new DukeException("I'm so very sorry, the description of a " + input_split[0] + " cannot be empty.");
                 }
             } else if (input_split[0].equals("event")) {
