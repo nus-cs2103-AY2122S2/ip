@@ -101,7 +101,7 @@ public class Duke {
         scanner.close();
     }
 
-    public static void list() {
+    public static void list()  {
         if (tasksArrayList.size() == 0) {
             System.out.println("You are done for the day, or are you?");
         } else {
