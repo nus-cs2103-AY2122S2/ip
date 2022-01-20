@@ -145,11 +145,24 @@ public class Duke {
                             + "_______________________________________________________\n";
                     System.out.println(err);
                     break;
-                }
+                    }
                 }
                 default:
-                    System.out.println("Keyword not recognised!");
-                    break;
+                    try {
+                        throw new MissingFormatArgumentException("invalid keywords");
+                    } catch (MissingFormatArgumentException ex) {
+                        String err = "_______________________________________________________\n"
+                                + "* Unrecognised keyword used *\n"
+                                + "Please try the keywords provided below:\n"
+                                + "    1. list\n"
+                                + "    2. todo [arg]\n"
+                                + "    3. deadline [arg] /by [arg]\n"
+                                + "    4. event [arg] /at [arg]\n"
+                                + "    5. bye\n"
+                                + "_______________________________________________________\n";
+                        System.out.println(err);
+                        break;
+                    }
             }
         }
     }
