@@ -60,7 +60,28 @@ public class Duke {
         List<Task> tasks = new ArrayList<>();
         while (true) {
             String input = br.readLine();
-            switch (input) {
+            String[] parts = input.split("\\s", 2); // split into command and args
+            String inCmd = parts[0];
+            String inArgs = parts.length == 2 ? parts[1] : "";
+            switch (inCmd) {
+                case "mark":
+                case "unmark":
+                    try {
+                        int idx = Integer.parseInt(inArgs) - 1; // list is 1-indexed
+                        Task task = tasks.get(idx);
+                        boolean done = inCmd.equals("mark"); // set as done if cmd == "mark", else (e.g. cmd == "unmark") set as undone
+                        task.setDone(done); 
+                        dialog(new String[] {
+                            String.format("Task marked as %sdone:", done ? "" : "un"),
+                            String.format(" %s", task)
+                        });
+                    } catch (NumberFormatException e) {
+                        dialog(String.format("Hmm, that doesn't seem like a valid task number! Try '%s <number>'.", inCmd));
+                    } catch (IndexOutOfBoundsException e) {
+                        dialog("That task doesn't exist!");
+                    }
+                    break;
+
                 case "list":
                     dialog(enumerateList(tasks).toArray(String[]::new));
                     break;
