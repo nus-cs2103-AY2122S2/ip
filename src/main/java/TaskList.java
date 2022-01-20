@@ -5,6 +5,10 @@ import java.util.Set;
 
 public class TaskList {
 
+	private static final String TODO = "todo";
+	private static final String DEADLINE = "deadline";
+	private static final String EVENT = "event";
+
 	private final List<Task> list;
 	private final Set<String> set;
 	private final Set<String> validTypes;
@@ -14,9 +18,9 @@ public class TaskList {
 		this.set = new HashSet<>();
 
 		this.validTypes = new HashSet<>();
-		this.validTypes.add("todo");
-		this.validTypes.add("deadline");
-		this.validTypes.add("event");
+		this.validTypes.add(TODO);
+		this.validTypes.add(DEADLINE);
+		this.validTypes.add(EVENT);
 	}
 
 	public Task getTask(int index) {
@@ -53,7 +57,7 @@ public class TaskList {
 			throw new ChatBotException(
 				String.format(
 					"You need to key in %s traveller!",
-					type.equals("deadline")
+					type.equals(DEADLINE)
 						? "the due date and time of your deadline"
 						: "the timestamp of your event"
 				)
@@ -70,7 +74,7 @@ public class TaskList {
 		} else {
 			set.add(title);
 			switch (type) {
-				case "deadline":
+				case DEADLINE:
 					if (!otherArgs[0].equals("by")) {
 						throw new ChatBotException(
 							"The correct format for adding a deadline is deadline <name of task> /by <deadline of task>"
@@ -83,7 +87,7 @@ public class TaskList {
 							deadline
 						);
 					}
-				case "event":
+				case EVENT:
 					if (!otherArgs[0].equals("at")) {
 						throw new ChatBotException(
 							"The correct format for adding an event is event <name of task> /at <timestamp of task>"
