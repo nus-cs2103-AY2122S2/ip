@@ -4,6 +4,18 @@ import java.util.Scanner;
 public class Duke {
     static String line = "\n_______________________^_^__________________________________\n";
 
+    public static boolean isInteger(String str) {
+        if (str == null) {
+            return false;
+        }
+        try {
+            double d = Integer.parseInt(str);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
+
     public static void addList() {
         Scanner sc = new Scanner(System.in);
         String input;
@@ -25,26 +37,24 @@ public class Duke {
                     System.out.println(line);
 
 
-                } else if (inputArr[0].equals("mark") ) {
+                } else if (inputArr[0].equals("mark") && isInteger(inputArr[1])) {
                     try {
                         int taskNum = Integer.parseInt(inputArr[1]) - 1;
                         taskList.get(taskNum).markAsDone();
                         System.out.println(line + "Nice! I've marked this task as done:\n");
-                        System.out.println("[" + taskList.get(taskNum).getStatusIcon() + "] "
-                                + taskList.get(taskNum).description + line);
+                        System.out.println(taskList.get(taskNum) + line);
                     } catch (IndexOutOfBoundsException exp) {
                         System.out.println(line + "☹ OOPS!!! this task number is invalid\n" +
                                 "enter: 'list' for all available task" + line);
                     }
 
 
-                } else if (inputArr[0].equals("unmark")) {
+                } else if (inputArr[0].equals("unmark") && isInteger(inputArr[1])) {
                     try {
                         int taskNum = Integer.parseInt(inputArr[1]) - 1;
                         taskList.get(taskNum).markAsNotDone();
                         System.out.println(line + "OK, I've marked this task as not done yet:\n");
-                        System.out.println("[" + taskList.get(taskNum).getStatusIcon() + "] "
-                                + taskList.get(taskNum).description + line);
+                        System.out.println(taskList.get(taskNum) + line);
                     } catch (IndexOutOfBoundsException exp) {
                         System.out.println(line + "☹ OOPS!!! this task number is invalid\n" +
                                 "enter: 'list' for all available task" + line);
@@ -74,16 +84,29 @@ public class Duke {
 
                 } else if (inputArr[0].equals("event")) {
                     try {
-                    String eventArr[] = inputArr[1].split("/", 2);
-                    Event e = new Event(eventArr[0], eventArr[1]);
-                    taskList.add(e);
-                    System.out.println(line + "Got it. I've added this task:\n");
-                    System.out.println(e);
-                    System.out.println("Now you have " + taskList.size() + " tasks in the list." + line);
-                    } catch(ArrayIndexOutOfBoundsException e) {
+                        String eventArr[] = inputArr[1].split("/", 2);
+                        Event e = new Event(eventArr[0], eventArr[1]);
+                        taskList.add(e);
+                        System.out.println(line + "Got it. I've added this task:\n");
+                        System.out.println(e);
+                        System.out.println("Now you have " + taskList.size() + " tasks in the list." + line);
+                    } catch (ArrayIndexOutOfBoundsException e) {
                         System.out.println(line + "☹ OOPS!!! event task need to be in this format:\n" +
                                 "(event description /at date and time)" + line);
                     }
+
+                } else if(inputArr[0].equals("delete") && isInteger(inputArr[1])) {
+                    try {
+                        int taskNum = Integer.parseInt(inputArr[1]) - 1;
+                        System.out.println(line + "Noted. I've removed this task: \n");
+                        System.out.println(taskList.get(taskNum));
+                        taskList.remove(taskNum);
+                        System.out.println("Now you have " + taskList.size() + " tasks in the list." + line);
+                    } catch (IndexOutOfBoundsException exp) {
+                        System.out.println(line + "☹ OOPS!!! this task number is invalid\n" +
+                                "enter: 'list' for all available task" + line);
+                    }
+
 
                 } else {
                     //taskList.add(new Task(input));
@@ -91,6 +114,7 @@ public class Duke {
                     System.out.println(line + "☹ OOPS!!! I'm sorry, but I don't know what that means :-( \n" +
                             "To view all task available: list\n" +
                             "To add more task: todo…… deadline……/……  event……/……  or mark/unmark taskNumber\n" +
+                            "To delete any task available: delete taskNumber\n" +
                             "please try again" + line);
                 }
             }
