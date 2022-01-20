@@ -99,8 +99,6 @@ public class Duke {
                     }
                     break;
 
-
-
                 default:
                     printAce("Sorry I couldn't understand that. Here are a list of valid commands.\n" +
                             "list: Displays all tasks in your list.\n" +
