@@ -1,10 +1,12 @@
 public class Task {
     boolean done;
     String task;
+    String type;
 
-    Task(String action) {
+    Task(String task, String type) {
         this.done = false;
-        this.task = action;
+        this.task = task;
+        this.type = type;
     }
 
     void mark() {
@@ -18,9 +20,9 @@ public class Task {
     @Override
     public String toString() {
         if (this.done) {
-            return "[X] " + this.task;
+            return "[" + this.type + "] [X] " + this.task;
         } else {
-            return "[ ] " + this.task;
+            return "[" + this.type + "] [ ] " + this.task;
         }
     }
 }

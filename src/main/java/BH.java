@@ -6,8 +6,8 @@ public class BH {
         this.list = new ArrayList<Task>();
     }
 
-    void addToList(String input) {
-        this.list.add(new Task(input));
+    void addToList(Task task) {
+        this.list.add(task);
     }
 
     String getList() {
