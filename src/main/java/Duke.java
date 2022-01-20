@@ -1,14 +1,13 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     private static final String botName = "Feline";
-    private Task[] list;
-    private int listIndex;
+    private ArrayList<Task> list;
     //private static final String[] commands = {"bye", "mark", "unmark", "list", "todo", "deadline", "event"};
 
     public Duke() {
-        this.list = new Task[100];
-        this.listIndex = 1;
+        this.list = new ArrayList<>();
     }
 
     private void performAction(String action, String input) {
@@ -22,6 +21,9 @@ public class Duke {
             case "list":
                 printList();
                 break;
+            case "delete":
+                delete(input);
+                break;
             default:
                 addTask(input);
         }
@@ -33,11 +35,13 @@ public class Duke {
         System.out.println("See you next time!");
     }
 
+    private void printTaskCount() {
+        System.out.println(String.format("Now you have %d task(s) in your list.", this.list.size()));
+    }
     private void taskAdded() {
         System.out.println("Got it. I've added this task:");
-        System.out.println(this.list[this.listIndex].toString());
-        System.out.println(String.format("Now you have %d task(s) in your list.", this.listIndex));
-        this.listIndex ++;
+        System.out.println(this.list.get(this.list.size() - 1).toString());
+        printTaskCount();
     }
 
     private void addTask(String str) {    //adds task to list
@@ -49,7 +53,7 @@ public class Duke {
                     if (todoArr.length <= 1) {
                         throw new InvalidArgumentException("todo.. todo what?");
                     }
-                    this.list[this.listIndex] = new Todo(todoArr[1].trim());
+                    this.list.add(new Todo(todoArr[1].trim()));
                     taskAdded();
                 } catch (InvalidArgumentException e) {
                     System.out.println(e.getMessage());
@@ -68,7 +72,7 @@ public class Duke {
                         throw new InvalidArgumentException("By when?? ..");
                     }
                     String description = deadlineSplit[1].trim();
-                    this.list[this.listIndex] = new Deadline(description, deadlineArr[1].trim());
+                    this.list.add(new Deadline(description, deadlineArr[1].trim()));
                     taskAdded();
                 } catch (InvalidArgumentException e) {
                     System.out.println(e.getMessage());
@@ -87,7 +91,7 @@ public class Duke {
                         throw new InvalidArgumentException("At where? Please specify again");
                     }
                     String description = eventSplit[1].trim();
-                    this.list[this.listIndex] = new Event(description, eventArr[1].trim());
+                    this.list.add(new Event(description, eventArr[1].trim()));
                     taskAdded();
                 } catch (InvalidArgumentException e){
                     System.out.println(e.getMessage());
@@ -108,12 +112,12 @@ public class Duke {
 
     private String getTaskStatement(int i) {
         //[X] read book
-        return this.list[i].toString();
+        return this.list.get(i).toString();
     }
     private void printList() {
         System.out.println("Here are the tasks in your list:");
-        for (int i = 1; i < this.listIndex; i++) {
-            System.out.println(i + "." + this.getTaskStatement(i));
+        for (int i = 0; i < this.list.size(); i++) {
+            System.out.println(i + 1 + "." + this.getTaskStatement(i));
         }
     }
     private static String getFirstWord(String input) {
@@ -131,13 +135,18 @@ public class Duke {
         try {
             String[] words = input.split(" ", 2);
             // the second word is expected to be a number for now
+            if (words.length <= 1) {
+                throw new InvalidArgumentException("Excuse me, but mark what?");
+            }
             int taskNumber = Integer.parseInt(words[1]);
-            if (taskNumber >= this.listIndex || taskNumber <= 0)
+            if (taskNumber > this.list.size() || taskNumber <= 0)
                 throw new OutOfBoundsException(String.format("The task %d does not exist!", taskNumber));
-            this.list[taskNumber].markAsDone();
+            this.list.get(taskNumber - 1).markAsDone();
             System.out.println("Nice! I've marked this task as done:");
-            System.out.println(this.getTaskStatement(taskNumber));
+            System.out.println(this.getTaskStatement(taskNumber - 1));
         } catch (OutOfBoundsException e) {
+            System.out.println(e.getMessage());
+        } catch (InvalidArgumentException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -145,17 +154,42 @@ public class Duke {
     private void unmark(String input) {
         try {
             String[] words = input.split(" ", 2);
-            // the second word is expected to be a number for now
+            if (words.length <= 1) {
+                throw new InvalidArgumentException("Excuse me, but mark what?");
+            }
             int taskNumber = Integer.parseInt(words[1]);
-            if (taskNumber >= this.listIndex || taskNumber <= 0)
-                throw new OutOfBoundsException(String.format("The task %d does not exist!", taskNumber));;
-            this.list[taskNumber].markAsUndone();
+            if (taskNumber > this.list.size() || taskNumber <= 0)
+                throw new OutOfBoundsException(String.format("The task %d does not exist!", taskNumber));
+            this.list.get(taskNumber - 1).markAsUndone();
             System.out.println("OK, I've marked this task as not done yet:");
-            System.out.println(this.getTaskStatement(taskNumber));
+            System.out.println(this.getTaskStatement(taskNumber - 1));
         } catch (OutOfBoundsException e) {
+            System.out.println(e.getMessage());
+        } catch (InvalidArgumentException e) {
             System.out.println(e.getMessage());
         }
     }
+    private void delete(String input) {
+        try {
+            String[] words = input.split(" ", 2);
+            if (words.length <= 1) {
+                throw new InvalidArgumentException("Excuse me, but delete what?");
+            }
+            int taskNumber = Integer.parseInt(words[1]);
+            if (taskNumber > this.list.size() || taskNumber <= 0)
+                throw new OutOfBoundsException(String.format("Cannot delete" +
+                        " as task %d does not exist!", taskNumber));
+            System.out.println("Noted. I've removed this task:");
+            System.out.println(getTaskStatement(taskNumber - 1));
+            this.list.remove(taskNumber - 1);
+            printTaskCount();
+        } catch (OutOfBoundsException e) {
+            System.out.println(e.getMessage());
+        } catch (InvalidArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
         Duke duke = new Duke(); //initializing a Duke instance
         Duke.greet();

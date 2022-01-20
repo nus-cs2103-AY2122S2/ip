@@ -20,23 +20,40 @@ Now you have 3 task(s) in your list.
 
 
 Nice! I've marked this task as done:
-[D][X] return book (by: Sunday)
+[T][X] borrow book
+
+
+The task 5 does not exist!
+
+
+Nice! I've marked this task as done:
+[E][X] project meeting (at: Mon 2-4pm)
 
 
 Here are the tasks in your list:
-1.[T][ ] borrow book
-2.[D][X] return book (by: Sunday)
-3.[E][ ] project meeting (at: Mon 2-4pm)
+1.[T][X] borrow book
+2.[D][ ] return book (by: Sunday)
+3.[E][X] project meeting (at: Mon 2-4pm)
 
 
 OK, I've marked this task as not done yet:
-[D][ ] return book (by: Sunday)
+[T][ ] borrow book
 
 
 Here are the tasks in your list:
 1.[T][ ] borrow book
 2.[D][ ] return book (by: Sunday)
-3.[E][ ] project meeting (at: Mon 2-4pm)
+3.[E][X] project meeting (at: Mon 2-4pm)
+
+
+Noted. I've removed this task:
+[D][ ] return book (by: Sunday)
+Now you have 2 task(s) in your list.
+
+
+Here are the tasks in your list:
+1.[T][ ] borrow book
+2.[E][X] project meeting (at: Mon 2-4pm)
 
 
 See you next time!
