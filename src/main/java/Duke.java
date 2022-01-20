@@ -63,23 +63,27 @@ public class Duke {
                     valid = false;
                 } else {
                     String[] split = response.split("\\s+");
-                    if (split[0].equals(Commands.MARK.toString()) ||
+                    if (split.length > 1 && split[0].equals(Commands.MARK.toString()) ||
                             split[0].equals(Commands.UNMARK.toString()) ||
                             split[0].equals(Commands.DELETE.toString())) {
-                        int digit = Integer.parseInt(split[1]);
-                        if (digit > 0 && digit <= tasks.size()) {
-                            handleResponse(split[0]);
-                            if (split[0].contains("mark")) {
-                                Task t = tasks.get(digit - 1);
-                                t.unmark();
-                                System.out.println(t.toString());
+                        try {
+                            int digit = Integer.parseInt(split[1]);
+                            if (digit > 0 && digit <= tasks.size()) {
+                                handleResponse(split[0]);
+                                if (split[0].contains("mark")) {
+                                    Task t = tasks.get(digit - 1);
+                                    t.unmark();
+                                    System.out.println(t.toString());
+                                } else {
+                                    System.out.println(tasks.get(digit - 1).toString());
+                                    tasks.remove(digit - 1);
+                                    printNumberOfTask(tasks);
+                                }
                             } else {
-                                System.out.println(tasks.get(digit - 1).toString());
-                                tasks.remove(digit - 1);
-                                printNumberOfTask(tasks);
+                                System.out.println("Task does not exist! Try again.");
                             }
-                        } else {
-                            System.out.println("Task does not exist! Try again.");
+                        } catch (Exception e) {
+                            System.out.println("Invalid number. Try again!");
                         }
                     } else {
                         if (split.length > 1) {
