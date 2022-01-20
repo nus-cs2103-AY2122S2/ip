@@ -89,4 +89,5 @@ public class Duke {
                     "\nNow you have " + (list.size() - 1) + " tasks left in this list");
         list.remove(num - 1);
     }
+
 }
