@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 public class Response {
     public static final
     String LOGO = " ____        _        \n"
@@ -15,10 +16,21 @@ public class Response {
         for (String line : splitted) {
             wrapee = wrapee.concat("    " + line + "\n");
         }
-        System.out.println(SEPARATOR + wrapee + SEPARATOR);
-
-
+        System.out.println(wrap(wrapee));
+    }
+    private static String wrap(String msg) {
+        return SEPARATOR + msg + SEPARATOR;
+    }
+    public static void list (ArrayList<String> todoList) {
+        String wrapee = "";
+        for (int i = 0; i < todoList.size(); i++) {
+            wrapee = wrapee + (i + 1) + ". " + todoList.get(i) + "\n";
+        }
+        wrapPrint(wrapee);
     }
 
+    public static void echo (String msg) {
+        wrapPrint(msg);
+    }
 
 }
