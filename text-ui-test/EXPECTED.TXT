@@ -1,7 +1,47 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+I'm Narcibot, the best bot ever created.
+Oh it's you, what a bother.
+Here's a hello as a formality. What do you want this time?
 
+todo read a book
+I have added this task cause you won't remember it.
+[T][ ] read a book
+You now have 1 tasks
+deadline homework /by 8pm
+I have added this task cause you won't remember it.
+[D][ ] homework  (by:  8pm)
+You now have 2 tasks
+event tutorial /at 3pm - 4pm
+I have added this task cause you won't remember it.
+[E][ ] tutorial  (at:  3pm - 4pm)
+You now have 3 tasks
+list
+Do I have to remind you again?
+1.[T][ ] read a book
+2.[D][ ] homework  (by:  8pm)
+3.[E][ ] tutorial  (at:  3pm - 4pm)
+mark 2
+You finally did something? I'll mark it for you then.
+[D][X] homework  (by:  8pm)
+list
+Do I have to remind you again?
+1.[T][ ] read a book
+2.[D][X] homework  (by:  8pm)
+3.[E][ ] tutorial  (at:  3pm - 4pm)
+mark 3
+You finally did something? I'll mark it for you then.
+[E][X] tutorial  (at:  3pm - 4pm)
+list
+Do I have to remind you again?
+1.[T][ ] read a book
+2.[D][X] homework  (by:  8pm)
+3.[E][X] tutorial  (at:  3pm - 4pm)
+unmark 2
+As expected... another task that wasn't finished at all.
+[D][ ] homework  (by:  8pm)
+list
+Do I have to remind you again?
+1.[T][ ] read a book
+2.[D][ ] homework  (by:  8pm)
+3.[E][X] tutorial  (at:  3pm - 4pm)
+bye
+So you finally decided to leave. Goodbye! Not that I really care.
