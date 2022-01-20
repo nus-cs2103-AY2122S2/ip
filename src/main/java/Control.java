@@ -27,14 +27,9 @@ public class Control {
 
     public void list() {
         int leng = tasks.toArray().length;
-        String isTaskCheck = "";
-        String taskLabel = "";
         for (int i = 0; i < leng; i++) {
             Task task = tasks.get(i);
             int num = i + 1;
-            isTaskCheck = task.getChecked() ? "X" : " ";
-            taskLabel = task.getTaskLabel();
-//            System.out.println(num + ": [" + taskLabel + "][" + isTaskCheck + "] " + task.toString());
             System.out.println(num + ": " + task.toString());
         }
     }
@@ -50,7 +45,6 @@ public class Control {
                 System.out.println("Nice! I've marked this task as done: \n\t" + task.toString());
             } else {
                 this.tasks.get(index).setChecked(false);
-//                isTaskCheck = task.getChecked() ? "X" : " ";
                 System.out.println("Alright, I've marked this task as not done yet: \n\t" + task.toString());
             }
         } catch (NumberFormatException e) {
@@ -65,8 +59,6 @@ public class Control {
         ToDo task = new ToDo(taskName, false, "T");
         this.tasks.add(task);
         System.out.println("________________________________");
-//        System.out.println("From Duke_two: \n\tAdded to your tasks: \n[" +
-//                task.getTaskLabel() + "][" + task.getChecked() + "] " + task.toString());
         System.out.println("From Duke_two: \n\tAdded to your tasks: \n\t" + task.toString());
         System.out.println("You now have " + tasks.toArray().length + " tasks in your list");
     }
@@ -80,8 +72,6 @@ public class Control {
         Deadline task = new Deadline(taskName, false, "D", date) ;
         this.tasks.add(task);
         System.out.println("________________________________");
-//        System.out.println("From Duke_two: \n\tAdded to your tasks: \n[" +
-//                task.getTaskLabel() + "][" + task.getChecked() + "] " + taskName);
         System.out.println("From Duke_two: \n\tAdded to your tasks: \n\t" + task.toString());
         System.out.println("You now have " + tasks.toArray().length + " tasks in your list");
     }
@@ -95,8 +85,6 @@ public class Control {
         Event task = new Event(taskName, false, "E", date) ;
         this.tasks.add(task);
         System.out.println("________________________________");
-//        System.out.println("From Duke_two: \n\tAdded to your tasks: \n[" +
-//                task.getTaskLabel() + "][" + task.getChecked() + "] " + taskName);
         System.out.println("From Duke_two: \n\tAdded to your tasks: \n\t" + task.toString());
         System.out.println("You now have " + tasks.toArray().length + " tasks in your list");
     }
