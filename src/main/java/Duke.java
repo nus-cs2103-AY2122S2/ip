@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 class Duke {
     public static void main(String[] args) {
-        
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -14,33 +14,48 @@ class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
 
-        Scanner sc= new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
 
         ArrayList<Task> tasks = new ArrayList<Task>();
-        
-    
+        String[] input = str.split(" ");
+        //TaskList tasks = new TaskList();
 
-        while(!str.equals("bye")) {
-            if(!str.equals("list")) {
-                tasks.add(str);
-                System.out.println("added: " + str);
-                
+        while (!input[0].equals("bye")) {
+            if (input[0].equals("list")) {
+
+                System.out.println("Here are the tasks in your list:");
+                for (int i = 0; i < tasks.size(); i++) {
+                    System.out.println((i + 1) + ". " + tasks.get(i).toString());
+
+                }
+            } else if (input[0].equals("mark")) {
+                System.out.println("Nice! I've marked this task as done: ");
+            Task temp = tasks.get(Integer.parseInt(input[1]) - 1);
+            temp.markAsDone();
+
+                System.out.println(temp.toString());
+
+            } else if (input[0].equals("unmark")) {
+                System.out.println("OK, I've marked this task as not done yet:");
+                Task temp = tasks.get(Integer.parseInt(input[1]) - 1);
+                temp.unmark();
+                System.out.println(temp.toString());
 
             } else {
-                System.out.println("Here are the tasks in your list:");
-                for(int i = 0; i < list.size(); i++) {
-                    System.out.println((i+1) + ". " + list.get(i).getStatusIcon() + list.get(i));
-                }
-
+                tasks.add(new Task(str));
             }
             str = sc.nextLine();
+             input = str.split(" ");
         }
-        
-            
-            System.out.println("Bye. Hope to see you again soon!");
-            sc.close();
-            
-        
+
+        System.out.println("Bye. Hope to see you again soon!");
+        sc.close();
+
     }
+
+
+
+
 }
+
