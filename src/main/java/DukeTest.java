@@ -15,9 +15,17 @@ public class DukeTest {
     }
 
     private static void addTask(Task task) {
-        System.out.println("Got it. I've added this task:\n" + task.toString());
         taskList.add(task);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        System.out.println("Got it. I've added this task:\n" + task.toString() +
+                "\nNow you have " + taskList.size() + " tasks in the list.");
+    }
+
+    private static void deleteTask(int idx) {
+        Task temp = taskList.get(idx - 1);
+        taskList.remove(idx - 1);
+        System.out.println("Noted. I've removed this task:\n" + temp.toString() +
+                "\nNow you have " + taskList.size() + " tasks in the list.");
+
     }
 
     private static void list() {
@@ -69,6 +77,9 @@ public class DukeTest {
                             addTask(new Events(splitInput[1]));
                             break;
                         }
+                    case "delete":
+                        deleteTask(Integer.parseInt(splitInput[1]));
+                        break;
                     default:
                         throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
