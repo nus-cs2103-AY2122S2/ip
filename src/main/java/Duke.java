@@ -5,11 +5,11 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____              _        \n"
-                    + "|  _ \\ _   _ _____| | _  _  _ \n"
+        String logo = " ____              _"
+                    + "\n|  _ \\ _   _ _____| | ____ __\n"
                     + "| | | | | | |  ___| |/ /\\ v /\n"
                     + "| |_| | |_| | |___|   <  | |\n"
-                    + "|____/ \\___,\\_____|_|\\_\\ |_|\n";
+                    + "|____/ \\___/\\_____|_|\\_\\ |_|\n";
 
         ArrayList<Task> tasks = new ArrayList<Task>();
 

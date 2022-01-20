@@ -1,10 +1,49 @@
  ____              _
-|  _ \ _   _ _____| | _  _  _
+|  _ \ _   _ _____| | ____ __
 | | | | | | |  ___| |/ /\ v /
 | |_| | |_| | |___|   <  | |
-|____/ \___,\_____|_|\_\ |_|
+|____/ \___/\_____|_|\_\ |_|
 Hello! I'm Ducky! :)
 I am a task manager.
 Type 'help' for more information on the commands you can give me.
 What can I do for you today?
 ---------------------------------------------
+> Type 'list' to see what you have in your task list
+> Type todo <message> to put a todo in your list
+> Type deadline <message> /by <deadline> to put a deadline in your list
+> Type event <message> /at <date> to put an event in your list
+> Type 'mark <x>' to mark a task in your list
+> Type 'unmark <x>' to unmark a task in your list
+---------------------------------------------
+I have added the following todo:
+[T][ ] Java week 2
+You now have 1 tasks
+---------------------------------------------
+I have added the following event:
+[E][ ] Ball  (at: 26th January 2021)
+You now have 2 tasks
+---------------------------------------------
+I have added the following deadline:
+[D][ ] quiz 2  (by: 19th January 2021)
+You now have 3 tasks
+---------------------------------------------
+Here are your tasks:
+1. [T][ ] Java week 2
+2. [E][ ] Ball  (at: 26th January 2021)
+3. [D][ ] quiz 2  (by: 19th January 2021)
+---------------------------------------------
+Ok, I have marked the following task:
+[E][X] Ball  (at: 26th January 2021)
+---------------------------------------------
+Ok, I have marked the following task:
+[D][X] quiz 2  (by: 19th January 2021)
+---------------------------------------------
+Sure, I have unmarked the following task:
+[E][ ] Ball  (at: 26th January 2021)
+---------------------------------------------
+Here are your tasks:
+1. [T][ ] Java week 2
+2. [E][ ] Ball  (at: 26th January 2021)
+3. [D][X] quiz 2  (by: 19th January 2021)
+---------------------------------------------
+Bye~ Hope to see you again soon!
