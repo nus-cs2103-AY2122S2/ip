@@ -34,8 +34,33 @@ public class Yale {
         }
         // List Feature
         else if (command.equals("list")) {
-            System.out.println("Here are the tasks in your list\n"
-                    + list.listOut());
+            if (list.getSize() == 0) {
+                System.out.println("You have no tasks at the moment!");
+            } else {
+                System.out.println("Here are the tasks in your list\n"
+                        + list.listOut());
+            }
+        }
+        // Delete Feature
+        else if (command.contains("delete")) {
+            try{
+                String[] commandArray = command.split(" ");
+                int itemNo = Integer.parseInt(commandArray[1]);
+                // Edge cases
+                if (itemNo > list.getSize() || itemNo < 1) {
+                    System.out.println("Error: That task does not exist!");
+                } else {
+                    System.out.println("Noted. I've removed this task:\n   " +
+                            list.getItem(itemNo-1).toString());
+                    list.deleteItem(itemNo-1);
+                    System.out.println("Now you have " + list.getSize() + " tasks in the list.");
+                }
+
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Please enter a valid task number");
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Error: You forgot to indicate the task number!");
+            }
         }
         // Mark & Unmark Feature
         else if (command.contains("mark") || command.contains("unmark")) {
@@ -56,7 +81,7 @@ public class Yale {
                     list.getItem(itemNo-1).unmarkItem();
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Error: Please enter a valid integer");
+                System.out.println("Error: Please enter a valid task number");
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Error: You forgot to indicate the task number!");
             }

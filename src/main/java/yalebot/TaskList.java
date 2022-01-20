@@ -30,5 +30,9 @@ public class TaskList {
     public int getSize() {
         return list.size();
     }
+
+    public void deleteItem(int itemNo) {
+        list.remove(itemNo);
+    }
 }
 
