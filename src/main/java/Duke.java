@@ -1,4 +1,5 @@
 import java.util.Scanner; //import Scanner
+import java.util.ArrayList; //import ArrayList
 
 public class Duke {
     public static void main(String[] args) {
@@ -10,24 +11,54 @@ public class Duke {
         String dukeGreeting = "Hello! I'm Duke \nWhat can I do for you?";
         boolean endChat = false;
         String endMessage = "Bye. Hope to see you again soon!";
-        Scanner sc = new Scanner(System.in);
+
+        //arraylist to store the list of tasks
+        ArrayList<String> arrayLst = new ArrayList<>();
+
         System.out.println(dukeGreeting);
-        while (!endChat) {
-            String userResponse = sc.nextLine();
-            endChat = levelOneRespond(userResponse);
-        }
+        levelTwoRespond(arrayLst);
         System.out.println(endMessage);
 
 
     }
-    public static boolean levelOneRespond (String input) {
+
+    /**
+     * Method that handles the response for Level-1.
+     */
+    public static void levelOneRespond () {
+        Scanner sc = new Scanner(System.in);
         String bye = "bye";
         String dukeMessage = "Duke: ";
+        String endMessage = "Bye. Hope to see you again soon!";
+        String input = sc.nextLine();
         if (!input.equals(bye)) {
             System.out.println(dukeMessage + input);
-            return false;
+            levelOneRespond();
+        }
+    }
+
+    /**
+     * Method that handles the response for Level-2. Includes Add and List
+     * @param arrayLst arraylist that stores the String entries for add and can be listed out.
+     */
+    public static void levelTwoRespond (ArrayList<String> arrayLst) {
+        Scanner sc = new Scanner(System.in);
+        String bye = "bye";
+        String lst = "list";
+        String input = sc.nextLine();
+        if (input.equals(bye));
+        else if (input.equals(lst)) {
+            int i = 0;
+            for (String item : arrayLst) {
+                i += 1;
+                System.out.println(i + ". " + item);
+            }
+            levelTwoRespond(arrayLst);
         } else {
-            return true;
+            String added = "added: ";
+            arrayLst.add(input);
+            System.out.println(added + input);
+            levelTwoRespond(arrayLst);
         }
     }
 }
