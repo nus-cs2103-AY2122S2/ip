@@ -29,7 +29,7 @@ class Task {
     */
     public void markDone() {
         done = 1;
-        System.out.printf("Great job for completing task: %s\n", this.getItemAndStatus());
+        System.out.printf("Great job for completing task:\n%s\n", this.getItemAndStatus());
     }
 
     /*
@@ -37,7 +37,7 @@ class Task {
     */
     public void markUndone() {
         done = 0;
-        System.out.printf("Task marked as uncompleted: %s\n", this.getItemAndStatus());
+        System.out.printf("Task marked as uncompleted:\n%s\n", this.getItemAndStatus());
     }
 
     /*
