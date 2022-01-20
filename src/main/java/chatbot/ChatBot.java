@@ -47,6 +47,11 @@ public class ChatBot {
         while (scanner.hasNext()) {
             String[] input = scanner.nextLine().split("\\s+");
 
+            // Check for blank input.
+            if (input.length == 0) {
+                continue;
+            }
+
             // Close application.
             if (input[0].equals(KEYWORD_QUIT)) {
                 System.out.println("Bye. Hope to see you again soon!");
