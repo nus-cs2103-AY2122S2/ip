@@ -1,0 +1,7 @@
+todo Work
+event Party /at Monday
+deadline Homework /by Sunday
+list
+mark 1
+list
+bye

@@ -83,7 +83,7 @@ public class TaskManager {
     }
 
     public void printTaskAddition(Task curr){
-        System.out.println("Got it! I've added this task: ");
+        System.out.println("Got it! I've added this task:");
         System.out.println(curr.toString());
         System.out.println("Now you have " + this.tasks.size() + " tasks in the list");
     }
