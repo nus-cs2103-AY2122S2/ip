@@ -1,13 +1,11 @@
 package yalebot;
 
 public class Task {
-    private static int totalTasks = 0;
     private String name;
     private boolean isMarked = false;
     public Task(String name, boolean isMarked) {
         this.name = name;
         this.isMarked = isMarked;
-        totalTasks++;
 
     }
 
