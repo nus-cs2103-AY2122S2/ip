@@ -1,3 +1,3 @@
 public abstract class Command {
-    abstract void execute();
+    public abstract void execute();
 }

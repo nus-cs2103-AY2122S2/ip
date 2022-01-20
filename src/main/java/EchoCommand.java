@@ -9,7 +9,7 @@ public class EchoCommand extends Command {
         this.input = input;
     }
     @Override
-    void execute() {
+    public void execute() {
         System.out.println(Duke.formatAnswer(input));
     }
 }
