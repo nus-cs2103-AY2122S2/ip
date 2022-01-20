@@ -12,7 +12,7 @@ public class DeleteCommand extends Command{
     public DeleteCommand(ArrayList<Task> tasklist, int deleteIndex){
         this.deleteIndex = deleteIndex - 1;
         this.tasklist = tasklist;
-        this.deleted = tasklist.get(deleteIndex);
+        this.deleted = tasklist.get(this.deleteIndex);
         this.tasklist.remove(this.deleteIndex);
     }
 
