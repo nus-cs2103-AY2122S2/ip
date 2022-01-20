@@ -1,14 +1,13 @@
 abstract class DukeExceptions extends Exception{
-    DukeExceptions(String s) {
+    protected DukeExceptions(String s) {
         super(s);
     }
 }
 
 abstract class InvalidCommand extends DukeExceptions {
 
-    InvalidCommand(String s) {
+    protected InvalidCommand(String s) {
         super(s);
-        //TODO Auto-generated constructor stub
     }
 
     static InvalidCommand createInvalidCommand(String cmd) throws InvalidCommand {
@@ -21,7 +20,14 @@ abstract class EmptyParameters extends DukeExceptions {
 
     EmptyParameters(String s) {
         super(s);
-        //TODO Auto-generated constructor stub
+    }
+    
+}
+
+final class ListIndexOutOfBound extends DukeExceptions {
+
+    ListIndexOutOfBound() {
+        super("Index is out of bond!");
     }
     
 }
@@ -34,7 +40,7 @@ final class EmptyTask extends EmptyParameters {
     }
     
     static EmptyTask createEmptyTask(String taskCmd) throws EmptyTask {
-        throw new EmptyTask("Are you tryng to add something to " + taskCmd);
+        throw new EmptyTask("Are you tryng to add something to " + taskCmd.toLowerCase());
     }
 }
 
@@ -46,7 +52,7 @@ final class EmptyDate extends EmptyParameters {
     }
     
     static EmptyDate createEmptyDate(String taskCmd) throws EmptyDate {
-        throw new EmptyDate(taskCmd + " needs a date");
+        throw new EmptyDate(taskCmd.substring(0, 1).toUpperCase() + taskCmd.substring(1) + " needs a date");
     }
 
 }
@@ -59,7 +65,7 @@ final class EmptyNumber extends EmptyParameters {
     }
 
     static EmptyNumber createEmptyNumber(String cmd) throws EmptyNumber {
-        throw new EmptyNumber(cmd + " needs a number");
+        throw new EmptyNumber(cmd.substring(0, 1).toUpperCase() + cmd.substring(1) + " needs a number");
     }
 
 }
@@ -76,12 +82,4 @@ final class IncorrectCommand extends InvalidCommand {
     IncorrectCommand() {
         super("Sorry! I don't undestand what are you saying!");
     }
-}
-
-final class ListIndexOutOfBound extends DukeExceptions {
-
-    ListIndexOutOfBound() {
-        super("The index is out of bond!");
-    }
-    
 }

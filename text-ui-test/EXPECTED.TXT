@@ -2,63 +2,40 @@
    Harro! I am Bob!    
  How can I be of service 
 =========================
-
 Error: Sorry! I don't undestand what are you saying!
-
-
-Alright! Added that to the list:
+Alright! Added that to the list: 
 [T][ ] read book
 Now you have 1 tasks in the list.
-
-
-Alright! Added that to the list:
+Alright! Added that to the list: 
 [D][ ] return book (by: June 6th)
 Now you have 2 tasks in the list.
-
-
-Alright! Added that to the list:
+Alright! Added that to the list: 
 [E][ ] project meeting (at: Aug 6th 2-4pm)
 Now you have 3 tasks in the list.
-
-
-Alright! Added that to the list:
+Alright! Added that to the list: 
 [T][ ] join sports club
 Now you have 4 tasks in the list.
-
-
-Alright! Added that to the list:
+Alright! Added that to the list: 
 [T][ ] borrow book
 Now you have 5 tasks in the list.
-
-
 Here you go sir:
 1. [T][ ] read book
 2. [D][ ] return book (by: June 6th)
 3. [E][ ] project meeting (at: Aug 6th 2-4pm)
 4. [T][ ] join sports club
 5. [T][ ] borrow book
-
-
-Alright! Added that to the list:
+Alright! Added that to the list: 
 [D][ ] return book (by: Sundy)
 Now you have 6 tasks in the list.
-
-
-Alright! Added that to the list:
+Alright! Added that to the list: 
 [E][ ] project meeting (at: Mon 2-4pm)
 Now you have 7 tasks in the list.
-
-
-Alright! Added that to the list:
+Alright! Added that to the list: 
 [D][ ] do homework (by: no idea :-p)
 Now you have 8 tasks in the list.
-
-
-Alright! Added that to the list:
+Alright! Added that to the list: 
 [E][ ] CS2103 finals (at: 2/1/2022)
 Now you have 9 tasks in the list.
-
-
 Here you go sir:
 1. [T][ ] read book
 2. [D][ ] return book (by: June 6th)
@@ -69,33 +46,15 @@ Here you go sir:
 7. [E][ ] project meeting (at: Mon 2-4pm)
 8. [D][ ] do homework (by: no idea :-p)
 9. [E][ ] CS2103 finals (at: 2/1/2022)
-
-
 Error: Are you tryng to add something to todo
-
-
-Error: Are you tryng to add something to deadline
-
-
+Error: Are you tryng to add something to dateline
 Error: Are you tryng to add something to event
-
-
-Error: Deadline needs a date
-
-
+Error: Dateline needs a date
 Error: Event needs a date
-
-
-Error: Deadline needs a date
-
-
+Error: Dateline needs a date
 Error: Event needs a date
-
-
 Alright! It's done:
 [T][X] read book
-
-
 Here you go sir:
 1. [T][X] read book
 2. [D][ ] return book (by: June 6th)
@@ -106,12 +65,8 @@ Here you go sir:
 7. [E][ ] project meeting (at: Mon 2-4pm)
 8. [D][ ] do homework (by: no idea :-p)
 9. [E][ ] CS2103 finals (at: 2/1/2022)
-
-
 Alright! It's done:
 [D][X] return book (by: June 6th)
-
-
 Here you go sir:
 1. [T][X] read book
 2. [D][X] return book (by: June 6th)
@@ -122,12 +77,8 @@ Here you go sir:
 7. [E][ ] project meeting (at: Mon 2-4pm)
 8. [D][ ] do homework (by: no idea :-p)
 9. [E][ ] CS2103 finals (at: 2/1/2022)
-
-
-Thats unfortunate!:
+Alright! It's done:
 [T][ ] read book
-
-
 Here you go sir:
 1. [T][ ] read book
 2. [D][X] return book (by: June 6th)
@@ -138,25 +89,13 @@ Here you go sir:
 7. [E][ ] project meeting (at: Mon 2-4pm)
 8. [D][ ] do homework (by: no idea :-p)
 9. [E][ ] CS2103 finals (at: 2/1/2022)
-
-
-Error: The index is out of bond!
-
-
+Error: Index is out of bond!
 Error: Mark needs a number
-
-
-Error: Mark needs a number
-
-
+Error: Unmark needs a number
 Error: Delete needs a number
-
-
 Alright, I've deleted this from the list:
 [T][ ] borrow book
 Now you have 8 tasks in the list.
-
-
 Here you go sir:
 1. [T][ ] read book
 2. [D][X] return book (by: June 6th)
@@ -166,9 +105,5 @@ Here you go sir:
 6. [E][ ] project meeting (at: Mon 2-4pm)
 7. [D][ ] do homework (by: no idea :-p)
 8. [E][ ] CS2103 finals (at: 2/1/2022)
-
-
-Error: The index is out of bond!
-
-
+Error: Index is out of bond!
 Arrivederci!

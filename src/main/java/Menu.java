@@ -15,7 +15,6 @@ class Menu {
             } catch (DukeExceptions e) {
                 // TODO Auto-generated catch block
                 System.out.println("Error: " + e.getMessage());
-                System.out.println("");
             }
         }
     }
