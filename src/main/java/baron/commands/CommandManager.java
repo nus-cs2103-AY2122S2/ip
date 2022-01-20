@@ -1,6 +1,7 @@
 package baron.commands;
 
 import baron.tasks.TaskManager;
+import baron.tasks.TaskType;
 
 public class CommandManager {
     private final TaskManager taskManager;
@@ -22,11 +23,17 @@ public class CommandManager {
                     return new MarkTaskCommand(this.taskManager, splitString[1]);
                 } else if (splitString[0].equals("unmark")) {
                     return new UnmarkTaskCommand(this.taskManager, splitString[1]);
+                } else if (splitString[0].equals("todo")) {
+                    return new AddTaskCommand(this.taskManager, TaskType.TODO, splitString[1]);
+                } else if (splitString[0].equals("deadline")) {
+                    return new AddTaskCommand(this.taskManager, TaskType.DEADLINE, splitString[1]);
+                } else if (splitString[0].equals("event")) {
+                    return new AddTaskCommand(this.taskManager, TaskType.EVENT, splitString[1]);
                 } else {
-                    return new AddTaskCommand(this.taskManager, fullCommand);
+                    return new AddTaskCommand(this.taskManager, TaskType.TODO, fullCommand);
                 }
             }
-            return new AddTaskCommand(this.taskManager, fullCommand);
+            return new AddTaskCommand(this.taskManager, TaskType.TODO, fullCommand);
         }
     }
 }
