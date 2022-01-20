@@ -7,4 +7,16 @@ mark 2
 list
 unmark 2
 list
+unmark 2
+mark 1
+mark text
+mark 50
+todo        
+deadline wrong format
+deadline taskName /by    
+deadline     /by date
+event wrong format
+event    /at date
+event taskName /at    
+blah blah
 bye

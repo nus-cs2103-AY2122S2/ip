@@ -23,6 +23,10 @@ public class Task {
         this.isDone = false;
     }
 
+    public boolean isMarked() {
+        return isDone;
+    }
+
     public String getFullDetails() {
         return this.taskName;
     }
