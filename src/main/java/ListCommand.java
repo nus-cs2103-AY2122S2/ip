@@ -10,12 +10,13 @@ public class ListCommand extends Command {
 
         // Formatting task list to be printed
         String formattedTaskList = formatTaskList(taskList);
-        String formattedAnswer = Duke.formatAnswer(formattedTaskList);
-        System.out.println(formattedAnswer);
+        String formattedTaskListWithLines = Duke.formatLines(formattedTaskList);
+        System.out.println(formattedTaskListWithLines);
     }
 
     /**
      * Formats the task list for readability
+     *
      * @param taskList ArrayList to be formatted
      * @return formattedTaskList Formatted task list
      */
@@ -26,18 +27,11 @@ public class ListCommand extends Command {
 
         for (Task i : taskList) {
             String item = String.valueOf(indexCounter) + ". " + i.toString();
-
-            // Correcting formatting caused by Duke.formatAnswer()
-            if (indexCounter == 1) {
-                formattedTaskList += (item + "\n");
-            } else if (indexCounter == taskListSize) {
-                formattedTaskList += ("\t" + item);
-            } else {
-                formattedTaskList += ("\t" + item + "\n");
-            }
-
+            formattedTaskList += Duke.indent(Duke.newLine(item), 1);
             indexCounter += 1;
         }
+
+        formattedTaskList = formattedTaskList.substring(0, formattedTaskList.length() - 1); // Remove last \n sequence
 
         return formattedTaskList;
     }

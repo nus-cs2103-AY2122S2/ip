@@ -4,8 +4,19 @@
 public class ByeCommand extends Command {
 
     final String EXIT = "Bye. Hope to see you again soon!";
+
+    private String formatOutput() {
+        String formattedBye = Duke.indent(EXIT, 1);
+        String finalFormatted = Duke.formatLines(formattedBye);
+
+        return finalFormatted;
+    }
     @Override
     public void execute() {
-        System.out.println(Duke.formatAnswer(EXIT));
+        // Console prints
+        String output = formatOutput();
+
+        System.out.println(output);
+
     }
 }

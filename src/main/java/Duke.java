@@ -7,7 +7,11 @@ public class Duke {
 
         // Init
         Scanner sc = new Scanner(System.in);
-        System.out.println(Duke.formatAnswer(INTRO));
+
+        // Printing Duke's intro
+        String formattedIntroText = Duke.indent(INTRO, 1);
+        String formattedIntro = Duke.formatLines(formattedIntroText);
+        System.out.println(formattedIntro);
 
         // Reading and processing inputs
         String nextLine = sc.nextLine();
@@ -25,28 +29,68 @@ public class Duke {
     }
 
     /**
-     * Prepares input for printing to System.out (adds top and bottom line)
-     */
-    public static String formatAnswer(String input) {
-
-        // Variables
-        String output;
-        String line = "____________________________________________________________";
-
-        // Output
-        output = "\t" + line + "\n"
-                + "\t" + input + "\n"
-                + "\t" + line + "\n";
-
-        return output;
-
-    }
-
-    /**
      * Checks if input is "bye"
      */
     private boolean isBye(String input) {
 
         return (input.equals("bye"));
+    }
+
+    /**
+     * Formats the given input between lines
+     * @param input Formatted input with proper indents and newlines.
+     */
+    public static String formatLines(String input) {
+        String output = "";
+        output += Duke.line();
+        output += input;
+        output += "\n" + Duke.line();
+
+        return output;
+    }
+
+    /**
+     * Provides a formatting line for Duke's responses
+     *
+     * @return A formatted line
+     */
+    public static String line() {
+        String line = "\t____________________________________________________________\n";
+        return line;
+    }
+
+    /**
+     * Formats a single line with a new line
+     *
+     * @param input Input string
+     * @return String with newline
+     */
+    public static String newLine(String input) {
+        String output = input + "\n";
+        return output;
+    }
+
+    /**
+     * Formats a single line with the specified number of indentations
+     *
+     * @param input   Input string
+     * @param indents Number of indents to add
+     * @return String with specified number of indents
+     */
+    public static String indent(String input, int indents) {
+        String indent = "";
+        String output = "";
+
+        // Adding the appropriate number of indents
+        for (int i = 0; i < indents; i++) {
+            indent += "\t";
+        }
+
+        // Forming the final string
+        output = indent + input;
+
+        return output;
+
+
     }
 }

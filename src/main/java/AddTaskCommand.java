@@ -14,16 +14,20 @@ public class AddTaskCommand extends Command {
      * Formats the echo for the task that was added to the user as confirmation
      * @return Formatted echo
      */
-    private String echoAddedTask() {
+    private String formatOutput() {
         String response = "added: " + input;
-        String formattedString = Duke.formatAnswer(response);
+        String formattedString = Duke.indent(response, 1);
+        String finalFormatted = Duke.formatLines(formattedString);
 
-        return formattedString;
+        return finalFormatted;
     }
 
     @Override
     public void execute() {
         TaskManager.taskList.add(new Task(input));
-        System.out.println(echoAddedTask()); // Echo confirmation
+
+        // Console prints
+        String output = formatOutput();
+        System.out.println(output); // Echo confirmation
     }
 }
