@@ -11,7 +11,7 @@ public class Johnny {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InvalidArgumentsException, EmptyDescriptionException, NoDateException {
         System.out.println("Hello! I'm Johnny \n" + "What can I do for you?");
         Scanner sc = new Scanner(System.in);
         String input;
@@ -36,8 +36,14 @@ public class Johnny {
                 userList.unmark(Integer.parseInt(input.substring(7)));
             }
             else if(tags[0].equals("todo")) {
-                String content = tags[1];
+                if(tags.length == 1 || tags[1].equals("")) {
+                    throw new EmptyDescriptionException();
+                }
 
+                String content = tags[1];
+                if(content.equals("")) {
+                    throw new EmptyDescriptionException();
+                }
                 Task newTask = new Todo(content);
                 userList.add(newTask);
 
@@ -45,7 +51,15 @@ public class Johnny {
                 System.out.println(newTask);
                 System.out.println("Now you have " + userList.getCount() + " tasks in your list.");
             }
-            else if(tags[0].equals("deadline") && tags[1].contains("/")) {
+            else if(tags[0].equals("deadline")) {
+                if(tags.length == 1 || tags[1].equals("")) {
+                    throw new EmptyDescriptionException();
+                }
+
+                if(!tags[1].contains("/")) {
+                    throw new NoDateException();
+                }
+
                 String content = tags[1];
                 String[] details = content.split("/", 2);
 
@@ -56,7 +70,15 @@ public class Johnny {
                 System.out.println(newTask);
                 System.out.println("Now you have " + userList.getCount() + " tasks in your list.");
             }
-            else if(tags[0].equals("event") && tags[1].contains("/")) {
+            else if(tags[0].equals("event")) {
+                if(tags.length == 1 || tags[1].equals("")) {
+                    throw new EmptyDescriptionException();
+                }
+
+                if(!tags[1].contains("/")) {
+                    throw new NoDateException();
+                }
+
                 String content = tags[1];
                 String[] details = content.split("/", 2);
 
@@ -68,7 +90,7 @@ public class Johnny {
                 System.out.println("Now you have " + userList.getCount() + " tasks in your list.");
             }
             else {
-                System.out.println("I'm sorry, I didn't quite get that");
+                throw new InvalidArgumentsException(input);
             }
         }
     }
