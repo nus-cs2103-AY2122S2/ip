@@ -17,8 +17,32 @@ public class Duke {
 
         while (!cmd.equals("bye")) {
 
+            // add functionalities
+            if (cmd.split(" ")[0].equals("todo") || cmd.split(" ")[0].equals("deadline") ||
+                    cmd.split(" ")[0].equals("event")) {
+                Task newTask;
+                cmd = cmd.strip();
+
+                if (cmd.split(" ")[0].equals("todo")) {
+                    newTask = new ToDo(cmd.substring(cmd.indexOf(" ") + 1));
+                } else if (cmd.split(" ")[0].equals("deadline")) {
+                    String by = cmd.split("/by ")[1];
+                    String desc = cmd.split("/by ")[0];
+                    desc = desc.substring(desc.indexOf(" ")).strip();
+                    newTask = new Deadline(desc, by);
+                } else {
+                    String time = cmd.substring(cmd.indexOf("/at ") + 4);
+                    String desc = cmd.split("/at ")[0].strip();
+                    desc = desc.substring(desc.indexOf(" ")).strip();
+                    newTask = new Event(desc, time);
+                }
+                list.add(newTask);
+                System.out.println(line + "    Got it. I've added this task:\n      " + newTask);
+                System.out.println("    Now you have " + list.size() + " tasks in the list.\n" + line);
+            }
+
             // list functionality
-            if (cmd.equals("list")) {
+            else if (cmd.equals("list")) {
                 int count = 1;
                 System.out.println(line + "    Here are the tasks in your list:");
                 for (Task entry : list) {
@@ -26,6 +50,7 @@ public class Duke {
                 }
                 System.out.println(line);
             }
+
             // mark functionality
             else if (cmd.split(" ")[0].equals("mark")) {
                 int idx = Integer.parseInt(cmd.split(" ")[1]);
@@ -35,6 +60,7 @@ public class Duke {
                 System.out.println(line + "    Nice! I've marked this task as done:\n      " + currTask);
                 System.out.println(line);
             }
+
             // unmark functionality
             else if (cmd.split(" ")[0].equals("unmark")) {
                 int idx = Integer.parseInt(cmd.split(" ")[1]);
@@ -43,11 +69,6 @@ public class Duke {
 
                 System.out.println(line + "    OK, I've marked this task as not done yet:\n      " + currTask);
                 System.out.println(line);
-            }
-            // add functionality
-            else {
-                list.add(new Task(cmd));
-                System.out.println(line + "    added: " + cmd + "\n" + line);
             }
             cmd = sc.nextLine();
         }
