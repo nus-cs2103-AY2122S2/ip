@@ -16,7 +16,9 @@ class TaskList {
     }
     
     public void deleteTask(Task task) {
+        System.out.println(" Noted. I've removed this task:");
         tasks.remove(task);
+        System.out.println("Now you have" + tasks.size() + "tasks in the list.");
     }
 
     public void markDone(int taskNo) {
