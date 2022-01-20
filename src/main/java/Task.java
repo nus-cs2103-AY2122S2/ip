@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected final String taskName;
     protected boolean taskComplete;
 
@@ -7,8 +7,8 @@ public class Task {
         this.taskComplete = false;
     }
 
-    public String getStatusIcon() {
-        return (taskComplete ? "X" : " ");
+    protected String getStatusIcon() {
+        return (taskComplete ? "[X]" : "[ ]");
     }
 
     public void markAsComplete() {
@@ -21,6 +21,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.taskName;
+        return getStatusIcon() + " " + this.taskName;
     }
 }
