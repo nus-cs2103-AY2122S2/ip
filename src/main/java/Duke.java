@@ -30,8 +30,8 @@ public class Duke {
         }
         if (task != null) {
             taskList.add(task);
+            System.out.println("  " + task);
             System.out.println("You have " + taskList.size() + " task(s) in the list.");
-            System.out.println(task);
         }
     }
 
@@ -41,7 +41,7 @@ public class Duke {
         } else {
             System.out.println("The tasks on your list. Get it done!");
             for (Task task : taskList) {
-                System.out.println(task);
+                System.out.println("  " + task);
             }
         }
     }
@@ -50,14 +50,14 @@ public class Duke {
         Task task = taskList.get(taskNumber - 1);
         task.markAsDone();
         System.out.println("Good job! This task is done:");
-        System.out.println(task);
+        System.out.println("  " + task);
     }
 
     public static void unmark(int taskNumber) {
         Task task = taskList.get(taskNumber - 1);
         task.unmark();
         System.out.println("Hurry up and get it done!");
-        System.out.println(task);
+        System.out.println("  " + task);
     }
 
     public static void bye() {
