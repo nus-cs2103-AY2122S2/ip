@@ -113,9 +113,23 @@ public class TaskManager {
             case "mark":
                 try {
                     Integer index2 = Integer.parseInt(spliced[1]);
-                    if (tasks.get(index2 - 1) != null) {
-                        tasks.get(index2 - 1).mark();
-                    }
+                    tasks.get(index2 - 1).mark();
+                } catch (NumberFormatException e) {
+                    this.Line();
+                    System.out.println("Give me the task number in numbers please!");
+                    this.Line();
+                } catch (IndexOutOfBoundsException e) {
+                    this.Line();
+                    System.out.println("I don't think we have that task!\nUse 'list' to check");
+                    this.Line();
+                }
+                break;
+            case "delete":
+                try {
+                    Integer deleteItem = Integer.parseInt(spliced[1]);
+                    System.out.println(this.line +"\n"+ "I removed this task for you:\n" + tasks.get(deleteItem - 1));
+                    this.Line();
+                    tasks.remove(deleteItem - 1);
                 } catch (NumberFormatException e) {
                     this.Line();
                     System.out.println("Give me the task number in numbers please!");
