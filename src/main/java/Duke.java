@@ -31,34 +31,32 @@ public class Duke {
                 } else if (inputArray[0].equals("unmark") && inputArray.length > 1) {
                     int index = Integer.parseInt(inputArray[1]) - 1;
                     System.out.println("Oh no! \n" + bh.unmark(index));
+                } else if (inputArray[0].equals("todo")) {
+                    String task = inputArray[1];
+                    Task newtask = new Todo(task);
+                    bh.addToList(newtask);
+                    System.out.println(line + "Task added: " + newtask.toString() + "\n" +
+                            "Now you have " + bh.getListSize() + " tasks in the list" + line);
+                } else if (inputArray[0].equals("deadline")) {
+                    String s = inputArray[1];
+                    String[] arr = s.split("/by");
+                    String task = arr[0];
+                    String time = arr[1];
+                    Task newtask = new Deadline(task, time);
+                    bh.addToList(newtask);
+                    System.out.println(line + "Task added:" + newtask.toString() + "\n" +
+                            "Now you have " + bh.getListSize() + " tasks in the list" + line);
+                } else if (inputArray[0].equals("event")) {
+                    String s = inputArray[1];
+                    String[] arr = s.split("/at");
+                    String task = arr[0];
+                    String time = arr[1];
+                    Task newtask = new Event(task, time);
+                    bh.addToList(newtask);
+                    System.out.println(line + "Task added:" + newtask.toString() + "\n" +
+                            "Now you have " + bh.getListSize() + " tasks in the list" + line);
                 } else {
-                    if (inputArray[0].equals("todo")) {
-                        String task = inputArray[1];
-                        Task newtask = new Todo(task);
-                        bh.addToList(newtask);
-                        System.out.println(line + "Task added: " + newtask.toString() + "\n" +
-                                "Now you have " + bh.getListSize() + " tasks in the list" + line);
-                    } else if (inputArray[0].equals("deadline")) {
-                        String s = inputArray[1];
-                        String[] arr = s.split("/by");
-                        String task = arr[0];
-                        String time = arr[1];
-                        Task newtask = new Deadline(task, time);
-                        bh.addToList(newtask);
-                        System.out.println(line + "Task added: " + newtask.toString() + "\n" +
-                                "Now you have " + bh.getListSize() + " tasks in the list" + line);
-                    } else if (inputArray[0].equals("event")) {
-                        String s = inputArray[1];
-                        String[] arr = s.split("/at");
-                        String task = arr[0];
-                        String time = arr[1];
-                        Task newtask = new Event(task, time);
-                        bh.addToList(newtask);
-                        System.out.println(line + "Task added: " + newtask.toString() + "\n" +
-                                "Now you have " + bh.getListSize() + " tasks in the list" + line);
-                    } else {
-                        throw new DukeException("Wrong input");
-                    }
+                    throw new DukeException("Wrong input");
                 }
             }
         } catch (DukeException e) {
