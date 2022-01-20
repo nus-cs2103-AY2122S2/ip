@@ -26,7 +26,7 @@ public class Duke {
                 name = name.concat(tokens[i]);
                 name = name.concat(" ");
             }
-            name = name.concat(tokens[sizeOfInputArr - 1]);
+            name = name.concat(tokens[sizeOfInputArr - 1]); // to eliminate white space at the end
 
             try {
                 if (sizeOfInputArr <= 0) {
