@@ -55,11 +55,20 @@ ________________________________________
 OOPS!!! This command does not exist.
 ________________________________________
 ________________________________________
-Invalid input
+OOPS!!! Please double check the task number
 ________________________________________
 ________________________________________
 Nice! I've marked this task as done:
 [T][X] sell bread
+________________________________________
+________________________________________
+OOPS!!! Please key in a positive number
+________________________________________
+________________________________________
+OOPS!!! Please key in a positive number
+________________________________________
+________________________________________
+OOPS!!! Please key in a positive number
 ________________________________________
 ________________________________________
 OOPS!!! This command does not exist.
@@ -70,7 +79,7 @@ Got it. I've added this task:
 Now you have 3 tasks in the list
 ________________________________________
 ________________________________________
-Invalid input
+OOPS!!! Please double check the task number
 ________________________________________
 ________________________________________
 OOPS!!! The description of a deadline cannot be empty.
@@ -80,6 +89,15 @@ OOPS!!! This command does not exist.
 ________________________________________
 ________________________________________
 OOPS!!! This command does not exist.
+________________________________________
+________________________________________
+OOPS!!! Please key in a positive number
+________________________________________
+________________________________________
+OOPS!!! Please key in a positive number
+________________________________________
+________________________________________
+OOPS!!! Please key in a positive number
 ________________________________________
 ________________________________________
 OOPS!!! Remember to set a time.
@@ -177,7 +195,7 @@ Here are the tasks in your list:
 Now you have 6 tasks in the list
 ________________________________________
 ________________________________________
-Invalid input
+OOPS!!! Please double check the task number
 ________________________________________
 ________________________________________
 Nice! I've marked this task as done:

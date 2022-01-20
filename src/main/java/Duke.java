@@ -5,9 +5,6 @@ public class Duke {
     private final Scanner scanner = new Scanner(System.in);
     private final ArrayList<Task> list = new ArrayList<>(); // arraylist to keep track of task
     private boolean endProgram = false; // state to terminate the program
-    private String command = "";
-    private String description = "";
-    private String time = "";
 
     public static void main(String[] args)  {
         new Duke().startProgram();
@@ -21,9 +18,10 @@ public class Duke {
                 String input = scanner.nextLine(); // user input
 
                 // handle user input to command, description and time of task if applicable
-                int cutPoint = input.indexOf(' ');
-                int cutPoint2 = input.indexOf('/');
-                processInput(input, cutPoint, cutPoint2);
+                UserInput userInput = new UserInput(input);
+                String command = userInput.getCommand();
+                String description = userInput.getDescription();
+                String time = userInput.getTime();
 
                 // exit program when user input "bye"
                 if(command.equals("bye")) {
@@ -39,23 +37,39 @@ public class Duke {
                         throw new DukeCommandDoesNotExistException("OOPS!!! This command does not exist.");
                     }
                     listTask(list);
-                    clearInput();
                     continue;
                 }
 
                 // mark certain task as done
                 if(command.startsWith("mark")) {
-                    int n = Integer.parseInt(description.replaceAll("[\\D]", ""));
+                    if(description.equals("")) {
+                        // throw no description exception
+                        throw new DukeNoDescriptionException("OOPS!!! Please specify a number.");
+                    }
+                    int n = Integer.parseInt(description.replaceAll("[^\\d-]", ""));
                     markDone(n - 1, list);
-                    clearInput();
                     continue;
                 }
 
                 // mark certain task as not done yet
                 if(command.startsWith("unmark")) {
-                    int n = Integer.parseInt(description.replaceAll("[\\D]", ""));
+                    if(description.equals("")) {
+                        // throw no description exception
+                        throw new DukeNoDescriptionException("OOPS!!! Please specify a number.");
+                    }
+                    int n = Integer.parseInt(description.replaceAll("[^\\d-]", ""));
                     markUndone(n - 1, list);
-                    clearInput();
+                    continue;
+                }
+
+                // delete task
+                if(command.startsWith("delete")) {
+                    if(description.equals("")) {
+                        // throw no description exception
+                        throw new DukeNoDescriptionException("OOPS!!! Please specify a number.");
+                    }
+                    int n = Integer.parseInt(description.replaceAll("[^\\d-]", ""));
+                    deleteTask(n - 1, list);
                     continue;
                 }
 
@@ -66,7 +80,6 @@ public class Duke {
                         throw new DukeNoDescriptionException("OOPS!!! The description of a todo cannot be empty.");
                     }
                     addTask(new ToDoTask(description), list);
-                    clearInput();
                     continue;
                 }
 
@@ -80,7 +93,6 @@ public class Duke {
                         throw new DukeNoTimeSpecifiedException("OOPS!!! Remember to set a time.");
                     }
                     addTask(new DeadlineTask(description, time), list);
-                    clearInput();
                     continue;
                 }
 
@@ -94,53 +106,21 @@ public class Duke {
                         throw new DukeNoTimeSpecifiedException("OOPS!!! Remember to set a time.");
                     }
                     addTask(new EventTask(description, time), list);
-                    clearInput();
                     continue;
                 }
 
                 // Invalid command inputs result
                 throw new DukeCommandDoesNotExistException("OOPS!!! This command does not exist.");
 
-            } catch(DukeCommandDoesNotExistException | DukeNoDescriptionException | DukeNoTimeSpecifiedException e) {
-                drawDivider();
-                System.out.println(e.getMessage());
-                drawDivider();
-                clearInput();
+            } catch(DukeCommandDoesNotExistException | DukeNoDescriptionException | DukeNoTimeSpecifiedException
+                    | DukeOutOfBoundException e) {
+                errorMessage(e);
             }
 
         }
 
         // close the scanner
         scanner.close();
-    }
-
-    private void processInput(String input, int descriptionStart, int timeStart) {
-        // process the user input into different segments
-        if(descriptionStart != -1) {
-            // sentence input
-            command = input.substring(0, descriptionStart);
-            if(timeStart != -1) {
-                // has time input
-                description = input.substring(descriptionStart, timeStart);
-                description = description.replaceFirst(" ", "");
-                time = input.substring(timeStart);
-                time = time.replaceFirst("/", "");
-            } else {
-                // no time input
-                description = input.substring(descriptionStart);
-                description = description.replaceFirst(" ", "");
-            }
-        } else {
-            // single word input
-            command = input;
-        }
-    }
-
-    private void clearInput() {
-        // reset the state of user input to clean slate to prevent old commands from interfering with new ones
-        command = "";
-        description = "";
-        time = "";
     }
 
     private void drawDivider() {
@@ -162,6 +142,12 @@ public class Duke {
     private void endProgram() {
         drawDivider();
         System.out.println("Bye. Hope to see you again soon!");
+        drawDivider();
+    }
+
+    private void errorMessage(DukeException e) {
+        drawDivider();
+        System.out.println(e.getMessage());
         drawDivider();
     }
 
@@ -188,33 +174,43 @@ public class Duke {
         drawDivider();
     }
 
-    private void markDone(int i, ArrayList<Task> list) {
-        if(i < 0 || i >= list.size()) {
-            // handle index out of bound
-            drawDivider();
-            System.out.println("Invalid input");
-            drawDivider();
-        } else {
-            drawDivider();
-            list.get(i).markDone();
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(list.get(i).toString());
-            drawDivider();
-        }
+    private void markDone(int i, ArrayList<Task> list) throws DukeOutOfBoundException {
+        // check if the user's input value is within the range of the list before mark done the task
+        checkOutOfBound(i);
+        drawDivider();
+        list.get(i).markDone();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(list.get(i).toString());
+        drawDivider();
     }
 
-    private void markUndone(int i, ArrayList<Task> list) {
-        if(i < 0 || i >= list.size()) {
-            // handle index out of bound
-            drawDivider();
-            System.out.println("Invalid input");
-            drawDivider();
-        } else {
-            drawDivider();
-            list.get(i).markUndone();
-            System.out.println("OK, I've marked this task as not done yet:");
-            System.out.println(list.get(i).toString());
-            drawDivider();
+    private void markUndone(int i, ArrayList<Task> list) throws DukeOutOfBoundException {
+        // check if the user's input value is within the range of the list before mark undone the task
+        checkOutOfBound(i);
+        drawDivider();
+        list.get(i).markUndone();
+        System.out.println("OK, I've marked this task as not done yet:");
+        System.out.println(list.get(i).toString());
+        drawDivider();
+    }
+
+    private void deleteTask(int i, ArrayList<Task> list) throws DukeOutOfBoundException {
+        // check if the user's input value is within the range of the list before deleting the task
+        checkOutOfBound(i);
+        drawDivider();
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(list.get(i).toString());
+        list.remove(i);
+        System.out.printf("Now you have %d tasks in the list%n", list.size());
+        drawDivider();
+    }
+
+    private void checkOutOfBound(int i) throws DukeOutOfBoundException {
+        // check if the user's input value is within the range of the list
+        if(i < 0) {
+            throw new DukeOutOfBoundException("OOPS!!! Please key in a positive number");
+        } else if(i >= list.size()) {
+            throw new DukeOutOfBoundException("OOPS!!! Please double check the task number");
         }
     }
 
