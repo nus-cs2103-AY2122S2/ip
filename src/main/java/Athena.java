@@ -36,15 +36,19 @@ public class Athena {
                 taskString = taskList.addEvent(eventArgs[0].strip(), eventArgs[1].strip());
                 sayTaskAddingLines(taskString);
                 break;
-            case "mark": // assume no user errors
-                int taskNumber = Integer.parseInt(arguments);
-                sayText("Alright, I've marked the following task as done:");
-                System.out.println(taskList.markTaskAsDone(taskNumber));
+            case "mark":
+                int taskNumber = readTaskNumberFromInput(arguments);
+                if (taskNumber != -1) {
+                    sayText("Alright, I've marked the following task as done:");
+                    System.out.println(taskList.markTaskAsDone(taskNumber));
+                }
                 break;
             case "unmark":
-                taskNumber = Integer.parseInt(arguments);
-                sayText("Alright, I've marked the following task as not done:");
-                System.out.println(taskList.markTaskAsNotDone(taskNumber));
+                taskNumber = readTaskNumberFromInput(arguments);
+                if (taskNumber != -1) {
+                    sayText("Alright, I've marked the following task as not done:");
+                    System.out.println(taskList.markTaskAsNotDone(taskNumber));
+                }
                 break;
             case "list":
                 sayText("Here's the current list of tasks:");
@@ -54,9 +58,25 @@ public class Athena {
                 shutdown();
                 break;
             default:
-                sayText("Invalid command.");
+                sayText("That's an invalid command. Please try again.");
                 break;
         }
+    }
+
+    // Returns - 1 if invalid.
+    private int readTaskNumberFromInput(String arguments) {
+        int taskNumber;
+        try {
+            taskNumber = Integer.parseInt(arguments);
+        } catch (NumberFormatException e) {
+            sayText("Error. I need a valid task number. Please try again.");
+            return -1;
+        }
+        if (taskNumber < 1 || taskNumber > this.taskList.getNumberOfTasks()) {
+            sayText("Error. The given task number does not exist. Please try again.");
+            return -1;
+        }
+        return taskNumber;
     }
 
     public boolean isActive() {
