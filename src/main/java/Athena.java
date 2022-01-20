@@ -23,18 +23,25 @@ public class Athena {
         }
         switch (command) {
             case "todo":
-                String taskString = taskList.addTodo(arguments.strip());
-                sayTaskAddingLines(taskString);
+                String taskName = readTaskNameForTodo(arguments);
+                if (!taskName.equals("")) {
+                    String taskString = taskList.addTodo(taskName);
+                    sayTaskAddingLines(taskString);
+                }
                 break;
             case "deadline":
-                String[] deadlineArgs = arguments.split("/by", 2);
-                taskString = taskList.addDeadline(deadlineArgs[0].strip(), deadlineArgs[1].strip());
-                sayTaskAddingLines(taskString);
+                String[] taskNameAndDate = readTaskNameAndDate(arguments, "/by");
+                if (taskNameAndDate.length != 0) {
+                    String taskString = taskList.addDeadline(taskNameAndDate[0], taskNameAndDate[1]);
+                    sayTaskAddingLines(taskString);
+                }
                 break;
             case "event":
-                String[] eventArgs = arguments.split("/at", 2);
-                taskString = taskList.addEvent(eventArgs[0].strip(), eventArgs[1].strip());
-                sayTaskAddingLines(taskString);
+                taskNameAndDate = readTaskNameAndDate(arguments, "/at");
+                if (taskNameAndDate.length != 0) {
+                    String taskString = taskList.addEvent(taskNameAndDate[0], taskNameAndDate[1]);
+                    sayTaskAddingLines(taskString);
+                }
                 break;
             case "mark":
                 int taskNumber = readTaskNumberFromInput(arguments);
@@ -64,10 +71,10 @@ public class Athena {
     }
 
     // Returns - 1 if invalid.
-    private int readTaskNumberFromInput(String arguments) {
+    private int readTaskNumberFromInput(String input) {
         int taskNumber;
         try {
-            taskNumber = Integer.parseInt(arguments);
+            taskNumber = Integer.parseInt(input);
         } catch (NumberFormatException e) {
             sayText("Error. I need a valid task number. Please try again.");
             return -1;
@@ -77,6 +84,40 @@ public class Athena {
             return -1;
         }
         return taskNumber;
+    }
+
+    // Returns "" if invalid.
+    private String readTaskNameForTodo(String input) {
+        if (input.equals("")) {
+            sayText("Error. Please provide a task name.");
+            return "";
+        }
+        return input.strip();
+    }
+
+    // Returns empty String array if invalid.
+    private String[] readTaskNameAndDate(String input, String separator) {
+        String missingTaskNameMsg = "Error. Please provide a task name.";
+        String missingDateTimeMsg = "Error. Please provide a date and/or time.";
+
+        if (input.equals("")) {
+            sayText(missingTaskNameMsg);
+            return new String[0];
+        } else if (!input.contains(separator)) {
+            sayText(missingDateTimeMsg);
+            return new String[0];
+        }
+        String[] taskNameAndDate = input.split(separator, 2);
+        taskNameAndDate[0] = taskNameAndDate[0].strip();
+        taskNameAndDate[1] = taskNameAndDate[1].strip();
+        if (taskNameAndDate[0].equals("")) {
+            sayText(missingTaskNameMsg);
+            return new String[0];
+        } else if (taskNameAndDate[1].equals("")) {
+            sayText(missingDateTimeMsg);
+            return new String[0];
+        }
+        return taskNameAndDate;
     }
 
     public boolean isActive() {
@@ -92,9 +133,9 @@ public class Athena {
         System.out.println("Athena: " + text);
     }
 
-    private void sayTaskAddingLines(String taskString) {
+    private void sayTaskAddingLines(String taskName) {
         sayText("Okay, I've added this task to your list.");
-        System.out.println(taskString);
+        System.out.println(taskName);
         if (this.taskList.getNumberOfTasks() == 1) {
             sayText("Now you have 1 task in your list.");
         } else {
