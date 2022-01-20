@@ -67,7 +67,7 @@ public class Duke {
                 System.exit(0);
 
             case "list":
-                say("Here are the tasks in your list:\n" +
+                say("[*] Here are the tasks in your list:\n" +
                     tasks.toString());
                 break;
 
