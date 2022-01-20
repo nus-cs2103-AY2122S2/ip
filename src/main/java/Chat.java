@@ -19,9 +19,7 @@ public class Chat {
 
         // an array of tasks
         Task[] list = new Task[100];
-
         int counter = 0;
-
         System.out.println(GREETING);
 
         // takes in the incoming prompt
@@ -35,7 +33,6 @@ public class Chat {
             // we will check from 0 to the first space
             // this will let us know of the command
             String[] command = input.split(" ");
-            // System.out.println("command : " + command[0]);
 
             if (input.equals("bye")) {
                 System.out.println(BYE);
@@ -51,7 +48,8 @@ public class Chat {
                     if (item != null) {
 
                         String description = item.getDescription();
-                        System.out.println(" " + internalCounter + ". " + "[" + item.getStatusIcon() + "] " + description);
+                        System.out.println(
+                                " " + internalCounter + ". " + "[" + item.getStatusIcon() + "] " + description);
                         ++internalCounter;
                     } else {
                         break;
@@ -59,12 +57,8 @@ public class Chat {
                 }
                 System.out.println(LINE_BREAK);
             } else if (command[0].equals("mark")) {
-                // System.out.println(" we reach hee");
-                // int number = Integer.parseInt(input.substring(input.indexOf(" "),
-                // input.length()));
-                int number = Integer.parseInt(command[1]) - 1;
 
-                // System.out.println("The number : " + number);
+                int number = Integer.parseInt(command[1]) - 1;
 
                 Task currTask = list[number];
                 boolean currState = currTask.getIsDone();
@@ -75,12 +69,7 @@ public class Chat {
                 System.out.println("        [X] " + currTask.getDescription());
                 System.out.println(LINE_BREAK);
             } else if (command[0].equals("unmark")) {
-                // int number = Integer.parseInt(input.substring(input.indexOf(" "),
-                // input.length()));
-
                 int number = Integer.parseInt(command[1]);
-
-                // System.out.println("The number : " + number);
 
                 Task currTask = list[number];
                 boolean currState = currTask.getIsDone();
@@ -92,11 +81,6 @@ public class Chat {
                 System.out.println(LINE_BREAK);
             } else {
                 // here we declare the new task to be added
-
-                // System.out.println("The counter : " + counter);
-
-                // System.out.println(" we enter else ");
-
                 Task t = new Task(input);
 
                 list[counter] = t;
