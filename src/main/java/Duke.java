@@ -20,8 +20,12 @@ public class Duke {
             return "Bye. Hope to see you again soon!";
         }
         else if (input.equals("list")) return listing();
-        else if (input.length() == 6 && input.startsWith("mark "))
+        else if (input.length() == 6
+                || input.length() == 7 && input.startsWith("mark "))
             return mark(input);
+//        else if (input.length() == 8
+//                || input.length() == 9 && input.startsWith("delete "))
+//            return delete(input);
         else return add(input);
     }
 
@@ -46,9 +50,25 @@ public class Duke {
             t.mark();
             return "Nice! I've marked this task as done:\n  " + t;
         }
-        catch (Exception e){
-            this.list.add(new Task(str, Type.TODO));
-            return "added: " + str;
+        catch (NumberFormatException e){
+            return "Please enter a number after mark! (E.g. mark 2)";
+        } catch (IndexOutOfBoundsException e) {
+            return "Please enter a valid number!";
+        }
+    }
+
+    private String delete(String str) {
+        try{
+            int i = Integer.parseInt(str.substring(7)) - 1;
+            Task t = list.get(i);
+            this.list.remove(t);
+            return "Noted. I've removed this task: \n  " +
+                    t + "     Now you have " + list.size() + " tasks in the list.";
+        }
+        catch (NumberFormatException e){
+            return "Please enter a number after delete! (E.g. delete 2)";
+        } catch (IndexOutOfBoundsException e) {
+            return "Please enter a valid number!";
         }
     }
 
