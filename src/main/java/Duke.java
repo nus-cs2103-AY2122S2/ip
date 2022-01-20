@@ -44,50 +44,52 @@ public class Duke {
         printIndent(separator + "\n");
     }
 
-    public static void addTask(String taskString) {
+    public static void addTask(String taskString) throws DukeException {
         String taskName;
         Task t;
         if (taskString.startsWith("todo ")) {
             if (taskString.length() <= 5) {
-                prettyPrint("Description cannot be empty!");// handle exception
-                return;
+                throw new DukeException("Description cannot be empty!");
             } else {
                 taskName = taskString.substring(5);  // "todo " has 5 characters
                 t = new ToDo(taskName);
             }
         } else if (taskString.startsWith("deadline ")) {
             if (taskString.length() <= 9) {
-                prettyPrint("Description cannot be empty!");  // handle exception
-                return;
+                throw new DukeException("Description cannot be empty!");
             } else {
                 int byIdx = taskString.indexOf("/by");
-                if (byIdx == -1) {
-                    prettyPrint("Format for deadlines: 'deadline [some task] /by [time]'");  // handle exception
-                    return;
+                if (byIdx <= 9) {  // either -1, or 0 to 9
+                    throw new DukeException("Format for deadlines: 'deadline [some task] /by [time]'");
                 } else {
                     taskName = taskString.substring(9, byIdx-1);  // "deadline " has 9 characters
-                    String taskDeadline = taskString.substring(byIdx + 4);  // "/by " has 4 characters
-                    t = new Deadline(taskName, taskDeadline);
+                    try {
+                        String taskDeadline = taskString.substring(byIdx + 4);  // "/by " has 4 characters
+                        t = new Deadline(taskName, taskDeadline);
+                    } catch (StringIndexOutOfBoundsException err) {
+                        throw new DukeException("Format for deadlines: 'deadline [some task] /by [time]'");
+                    }
                 }
             }
         } else if (taskString.startsWith("event ")) {
             if (taskString.length() <= 6) {
-                prettyPrint("Description cannot be empty!");// handle exception
-                return;
+                throw new DukeException("Description cannot be empty!");
             } else {
                 int atIdx = taskString.indexOf("/at");
-                if (atIdx == -1) {
-                    prettyPrint("Format for events: 'event [some event] /at [time]'");  // handle exception
-                    return;
+                if (atIdx <= 6) {  // either -1, or 0 to 6
+                    throw new DukeException("Format for events: 'event [some event] /at [time]'");
                 } else {
                     taskName = taskString.substring(6, atIdx-1);  // "event " has 9 characters
-                    String taskTime = taskString.substring(atIdx + 4);  // "/at " has 4 characters
-                    t = new Event(taskName, taskTime);
+                    try {
+                        String taskTime = taskString.substring(atIdx + 4);  // "/at " has 4 characters
+                        t = new Event(taskName, taskTime);
+                    } catch (StringIndexOutOfBoundsException err) {
+                        throw new DukeException("Format for events: 'event [some event] /at [time]'");
+                    }
                 }
             }
         } else {
-            prettyPrint("I don't think I know what this is!");  // handle exception
-            return;
+            throw new DukeException("I don't think I know what this is!");
         }
 
         allTasks.add(t);
@@ -99,21 +101,20 @@ public class Duke {
         prettyPrint(messages);
     }
 
-    public static void handleMarkTask(String command) {
+    public static void handleMarkTask(String command) throws DukeException {
         String taskString = command.substring(5);  // "mark " is 5 letters
         int taskToMark;
         try {
             taskToMark = Integer.parseInt(taskString);
         }
         catch (NumberFormatException err) {
-            prettyPrint("Not a valid task number!");  // handle exception
-            return;
+            throw new DukeException("Not a valid task number!");
         }
 
         if (1 <= taskToMark && taskToMark <= allTasks.size()) {
             markTask(taskToMark - 1);
         } else {
-            prettyPrint(String.format("Task %d does not exist!", taskToMark));
+            throw new DukeException(String.format("Task %d does not exist!", taskToMark));
         }
     }
 
@@ -127,21 +128,20 @@ public class Duke {
         }
     }
 
-    public static void handleUnmarkTask(String command) {
+    public static void handleUnmarkTask(String command) throws DukeException {
         String taskString = command.substring(7);  // "unmark " is 7 letters
         int taskToUnmark;
         try {
             taskToUnmark = Integer.parseInt(taskString);
         }
         catch (NumberFormatException err) {
-            prettyPrint("Not a valid task number!");  // handle exception
-            return;
+            throw new DukeException("Not a valid task number!");
         }
 
         if (1 <= taskToUnmark && taskToUnmark <= allTasks.size()) {
             unmarkTask(taskToUnmark - 1);
         } else {
-            prettyPrint(String.format("Task %d does not exist!", taskToUnmark));
+            throw new DukeException(String.format("Task %d does not exist!", taskToUnmark));
         }
     }
 
@@ -155,21 +155,20 @@ public class Duke {
         }
     }
 
-    public static void handleDeleteTask(String command) {
+    public static void handleDeleteTask(String command) throws DukeException {
         String taskString = command.substring(7);  // "delete " is 7 letters
         int taskToDelete;
         try {
             taskToDelete = Integer.parseInt(taskString);
         }
         catch (NumberFormatException err) {
-            prettyPrint("Not a valid task number!");  // handle exception
-            return;
+            throw new DukeException("Not a valid task number!");
         }
 
         if (1 <= taskToDelete && taskToDelete <= allTasks.size()) {
             deleteTask(taskToDelete - 1);
         } else {
-            prettyPrint(String.format("Task %d does not exist!", taskToDelete));
+            throw new DukeException("Task %d does not exist!");
         }
     }
 
@@ -182,7 +181,7 @@ public class Duke {
                 String.format("Now you have %d tasks in the list.", allTasks.size())});
     }
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) {
         String logo = indent + " ____        _        \n"
                 + indent + "|  _ \\ _   _| | _____ \n"
                 + indent + "| | | | | | | |/ / _ \\\n"
@@ -200,20 +199,25 @@ public class Duke {
         while (!finished) {
             userInput = sc.nextLine();
 
-            if (userInput.equals("bye")) {  // end
-                prettyPrint(closingMessage);
-                finished = true;
-            } else if (userInput.equals("list")) {  // display tasks
-                displayTasks();
-            } else if (userInput.startsWith("mark ")) {  // mark task as done
-                handleMarkTask(userInput);
-            } else if (userInput.startsWith("unmark ")) {  // mark task as undone
-                handleUnmarkTask(userInput);
-            } else if (userInput.startsWith("delete ")) {  // delete task
-                handleDeleteTask(userInput);
-            } else {  // add task
-                addTask(userInput);
+            try {
+                if (userInput.equals("bye")) {  // end
+                    prettyPrint(closingMessage);
+                    finished = true;
+                } else if (userInput.equals("list")) {  // display tasks
+                    displayTasks();
+                } else if (userInput.startsWith("mark ")) {  // mark task as done
+                    handleMarkTask(userInput);
+                } else if (userInput.startsWith("unmark ")) {  // mark task as undone
+                    handleUnmarkTask(userInput);
+                } else if (userInput.startsWith("delete ")) {  // delete task
+                    handleDeleteTask(userInput);
+                } else {  // add task
+                    addTask(userInput);
+                }
+            } catch (DukeException err) {
+                prettyPrint(err.getMessage());
             }
+
         }
     }
 }
