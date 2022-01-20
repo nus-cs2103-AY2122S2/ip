@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static ArrayList<DukePair> ls = new ArrayList<>();
+    private static final ArrayList<Task> ls = new ArrayList<>();
 
     public static void main(String[] args) {
         initDuke();
@@ -10,17 +10,39 @@ public class Duke {
         while (sc.hasNext()) {
             String userInput = sc.nextLine();
             String[] wordSplit = userInput.split(" ");
+            String action = wordSplit[0];
             if (userInput.equals("bye")) {
-                dukePrint("Bye. Hope to see you again soon!");
+                sayBye();
                 break;
             } else if (userInput.equals("list")) {
                 printList();
-            } else if (wordSplit[0].equals("mark")) {
-                mark(Integer.valueOf(wordSplit[1]) - 1);
-            } else if (wordSplit[0].equals("unmark")) {
-                unmark(Integer.valueOf(wordSplit[1]) - 1);
+            } else if (action.equals("mark")) {
+                mark(Integer.parseInt(wordSplit[1]) - 1);
+            } else if (action.equals("unmark")) {
+                unmark(Integer.parseInt(wordSplit[1]) - 1);
+            } else if (action.equals("todo")) {
+                //add ToDos
+                int start = userInput.indexOf(" ") + 1;
+                addInput(new ToDos(userInput.substring(start), false));
+            } else if (action.equals("deadline")) {
+                //add DeadLines
+                String[] split = userInput.split("/");
+                int start = userInput.indexOf(" ") + 1;
+                int end = userInput.lastIndexOf('/');
+                String task = userInput.substring(start, end - 1);
+                String details = split[1].substring(3);
+                addInput(new DeadLines(task, false, details));
+            } else if (action.equals("event")) {
+                //add Events
+                String[] split = userInput.split("/");
+                int start = userInput.indexOf(" ") + 1;
+                int end = userInput.lastIndexOf('/');
+                String task = userInput.substring(start, end - 1);
+                String details = split[1].substring(3);
+                addInput(new Events(task, false, details));
             } else {
-                dukePrint("added: " + addInput(userInput));
+                //add normal task
+                addInput(new Task(userInput, false));
             }
         }
         sc.close();
@@ -28,23 +50,27 @@ public class Duke {
 
     private static void mark(int indx) {
         System.out.println("Nice! I've marked this task as done: ");
-        DukePair dp = ls.get(indx);
-        dp.setValue(true);
-        System.out.println(dp);
+        Task t = ls.get(indx);
+        t.setMarked(true);
+        System.out.println(t);
         printHorizontalLine();
     }
 
     private static void unmark(int indx) {
         System.out.println("OK, I've marked this task as not done yet: ");
-        DukePair dp = ls.get(indx);
-        dp.setValue(false);
-        System.out.println(dp);
+        Task t = ls.get(indx);
+        t.setMarked(false);
+        System.out.println(t);
         printHorizontalLine();
     }
 
-    private static String addInput(String input) {
-        ls.add(new DukePair(input, false));
-        return input;
+    private static void addInput(Task t) {
+        printHorizontalLine();
+        ls.add(t);
+        System.out.println(" Got it. I've added this task: ");
+        System.out.println(" " + t);
+        String s = String.format("Now you have %d tasks in the list.", ls.size());
+        printHorizontalLine();
     }
 
     private static void printList() {
@@ -56,9 +82,9 @@ public class Duke {
         printHorizontalLine();
     }
 
-    private static void dukePrint(String input) {
+    private static void sayBye() {
         printHorizontalLine();
-        System.out.println(input);
+        System.out.println("Bye. Hope to see you again soon!");
         printHorizontalLine();
     }
 
