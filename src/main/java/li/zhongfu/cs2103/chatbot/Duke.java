@@ -97,14 +97,17 @@ public class Duke {
                     dialog("Bye. Hope to see you again soon!");
                     return; // to shut the linter up
 
-                // default action: add entire input as task
-                default:
-                    Task task = new Task(input);
+                case "todo":
+                    Task task = new Task(inArgs);
                     tasks.add(task);
                     dialog(new String[] {
                         "New task added:",
                         String.format(" %s", task)
                     });
+                    break;
+
+                default:
+                    dialog("I don't know what that means! Try: todo, list, mark, unmark, bye");
             }
         }
     }
