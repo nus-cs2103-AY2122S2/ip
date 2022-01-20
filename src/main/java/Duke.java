@@ -23,9 +23,9 @@ public class Duke {
         else if (input.length() == 6
                 || input.length() == 7 && input.startsWith("mark "))
             return mark(input);
-//        else if (input.length() == 8
-//                || input.length() == 9 && input.startsWith("delete "))
-//            return delete(input);
+        else if (input.length() == 8
+                || input.length() == 9 && input.startsWith("delete "))
+            return delete(input);
         else return add(input);
     }
 
@@ -63,7 +63,7 @@ public class Duke {
             Task t = list.get(i);
             this.list.remove(t);
             return "Noted. I've removed this task: \n  " +
-                    t + "     Now you have " + list.size() + " tasks in the list.";
+                    t + "\n     Now you have " + list.size() + " tasks in the list.";
         }
         catch (NumberFormatException e){
             return "Please enter a number after delete! (E.g. delete 2)";
