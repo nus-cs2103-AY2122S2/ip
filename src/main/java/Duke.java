@@ -14,36 +14,50 @@ public class Duke {
         System.out.println(line);
 
         // Data Structures
-        Map<Integer, Command> commands = new HashMap<Integer, Command>();
+        Map<Integer, Task> commands = new HashMap<>();
 
         Scanner in = new Scanner(System.in);
-        String cmd = in.nextLine();
-        while (!cmd.equals("bye")) {
+        String input = in.nextLine();
+
+        while (!input.equals("bye")) {
+            StringTokenizer st = new StringTokenizer(input);
             System.out.println(line);
-            StringTokenizer st = new StringTokenizer(cmd);
-            String token1 = st.nextToken();
+            String cmd = st.nextToken();
 
             if (cmd.equals("list")) {
+                System.out.println(indent+"Here are the tasks in your list:");
                 for (int i=1; i<=commands.size(); i++) {
                     System.out.println(indent+i+"."+commands.get(i));
                 }
-            } else if (token1.equals("mark")) {
+            } else if (cmd.equals("mark") || cmd.equals("unmark")) {
                 int rank = Integer.parseInt(st.nextToken());
-                commands.get(rank).setDone(true);
-                System.out.println(indent + "Nice! I've marked this task as done:");
+                commands.get(rank).setDone(cmd.equals("mark"));
+                if (cmd.equals("mark")) {
+                    System.out.println(indent + "Nice! I've marked this task as done:");
+                } else {
+                    System.out.println(indent + "OK, I've marked this task as not done yet:");
+                }
                 System.out.println(indent + "  " + commands.get(rank));
-            } else if (token1.equals("unmark")) {
-                int rank = Integer.parseInt(st.nextToken());
-                commands.get(rank).setDone(false);
-                System.out.println(indent + "OK, I've marked this task as not done yet:");
-                System.out.println(indent + "  " + commands.get(rank));
-            } else {
-                System.out.println(indent+"added: "+cmd);
-                commands.put(commands.size()+1, new Command(commands.size()+1, cmd));
-            }
-            System.out.println(line);
+            } else if (cmd.equals("todo") || cmd.equals("deadline") || cmd.equals("event")) {
 
-            cmd = in.nextLine();
+                System.out.println(indent+"Got it. I've added this task:");
+                switch (cmd) {
+                    case "todo":
+                        commands.put(commands.size()+1, new Todo(commands.size()+1, input.split(cmd)[1]));
+                        break;
+                    case "deadline":
+                        commands.put(commands.size()+1, new Deadline(commands.size()+1, input.split(cmd)[1]));
+                        break;
+                    case "event":
+                        commands.put(commands.size()+1, new Event(commands.size()+1, input.split(cmd)[1]));
+                        break;
+                }
+                System.out.println(indent+"  "+commands.get(commands.size()));
+                System.out.println(indent+"Now you have "+commands.size()+" tasks in the list.");
+            }
+
+            System.out.println(line);
+            input = in.nextLine();
         }
 
         // Exit Duke

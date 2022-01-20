@@ -1,15 +1,16 @@
 import java.lang.*;
 import java.util.*;
 
-public class Command {
+public class Task {
+
     int rank;
-    String command;
+    String task;
     boolean isDone;
 
-    public Command(int rank, String command) {
+    public Task(int rank, String task) {
         this.rank = rank;
-        this.command = command;
         this.isDone = false;
+        this.task = task;
     }
 
     public void setDone(boolean b) {
@@ -18,6 +19,6 @@ public class Command {
 
     public String toString() {
         String isDone = this.isDone ? "[X] " : "[ ] ";
-        return isDone + command;
+        return isDone + task;
     }
 }
