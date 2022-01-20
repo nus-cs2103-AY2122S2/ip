@@ -10,7 +10,6 @@ public class Duke {
         System.out.println(bar);
         System.out.println(greeting);
         System.out.println(bar);
-        ArrayList<String> storageList = new ArrayList<>();
         ArrayList<Task> taskList = new ArrayList<>();
 
         while (true) {
@@ -29,9 +28,18 @@ public class Duke {
                     System.out.println(i + "." + "[" + curr.getStatusIcon() + "] " + curr);
                 }
                 System.out.println(bar);
+            } else if (input.contains("mark")) {
+                String numberOnly = input.replaceAll("[^0-9]", "");
+                int number = Integer.parseInt(numberOnly);
+                Task curr = taskList.get(number - 1);
+                curr.markAsDone();
+
+                System.out.println(bar);
+                System.out.println("Nice! I've marked this task as done: ");
+                System.out.println("[" + curr.getStatusIcon() + "] " + curr);
+                System.out.println(bar);
             } else {
                 System.out.println(bar);
-                // storageList.add(input);
                 Task curr = new Task(input);
                 taskList.add(curr);
                 System.out.println("added: " + curr);

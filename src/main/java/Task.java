@@ -15,6 +15,16 @@ public class Task {
         return description;
     }
 
+    public String markAsDone() {
+        this.isDone = true;
+        return this.description + " is done!";
+    }
+
+    public String markAsUndone() {
+        this.isDone = false;
+        return this.description + " is undone!";
+    }
+
     @Override
     public String toString() {
         // TODO Auto-generated method stub
