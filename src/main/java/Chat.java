@@ -21,6 +21,8 @@ public class Chat {
         Task[] list = new Task[100];
         int counter = 0;
         System.out.println(GREETING);
+        // new Data Structure to hold the tasks
+        ArrayList<Task> tasks = new ArrayList<Task>();
 
         // takes in the incoming prompt
         Scanner sc = new Scanner(System.in);
