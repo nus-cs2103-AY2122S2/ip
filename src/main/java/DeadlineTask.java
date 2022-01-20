@@ -17,6 +17,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Find the index from which datetime information starts
+     *
      * @return Integer index
      */
     private int findDeadlineIndex() {
@@ -26,6 +27,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Gets the task information
+     *
      * @return Task information
      */
     private String getInfo() {
@@ -37,10 +39,11 @@ public class DeadlineTask extends Task {
 
     /**
      * Gets the deadline date
+     *
      * @return Deadline date string
      */
     private String getDate() {
-        int index = this.findDeadlineIndex()+ 4;
+        int index = this.findDeadlineIndex() + 4;
         String date = this.input.substring(index);
 
         return date;
