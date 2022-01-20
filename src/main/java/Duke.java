@@ -16,7 +16,7 @@ public class Duke {
         String commandLine = "";
 
         while (!commandLine.equals("bye")) {
-            System.out.print("Enter command: \t");
+            System.out.println("Enter command:");
             commandLine = sc.nextLine().trim();
 
             String[] commandLineParts = commandLine.split(" ", 2);
