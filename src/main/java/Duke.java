@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -11,12 +12,13 @@ public class Duke {
         // + "|____/ \\__,_|_|\\_\\___|\n";
         // System.out.println("Hello from\n" + logo);
         Scanner sc = new Scanner(System.in);
-        
+
         String greeting = "Hello! I'm Kizer\nWhat can I do for you?";
         String bar = "____________________________________________________________";
         System.out.println(bar);
         System.out.println(greeting);
         System.out.println(bar);
+        ArrayList<String> storageList = new ArrayList<>();
 
         while (true) {
             // String input = io.getWord();
@@ -28,9 +30,16 @@ public class Duke {
                 sc.close();
                 // System.out.close();
                 break;
+            } else if (input.equals("list")) {
+                System.out.println(bar);
+                for (int i = 1; i <= storageList.size(); i++) {
+                    System.out.println(i + ". " + storageList.get(i - 1));
+                }
+                System.out.println(bar);
             } else {
                 System.out.println(bar);
-                System.out.println(input);
+                storageList.add(input);
+                System.out.println("added: " + input);
                 System.out.println(bar);
             }
 
