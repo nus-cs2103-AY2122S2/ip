@@ -1,5 +1,3 @@
-import static java.lang.System.exit;
-
 public class Commands {
 
     private final TaskHistory taskHistory = new TaskHistory();
@@ -35,7 +33,7 @@ public class Commands {
             Event temp = (Event) currTask;
             tasking = tasking.concat(temp.getEvent());
         } else {
-            System.out.println("Error occured while processing " + currTask.getTask()); // Temporary error handler
+            System.out.println("Error occurred while processing " + currTask.getTask()); // Temporary error handler
         }
         String msg = "_______________________________________________________\n"
                 + "Well done! You have completed the task:\n"
@@ -58,7 +56,7 @@ public class Commands {
             Event temp = (Event) currTask;
             tasking = tasking.concat(temp.getEvent());
         } else {
-            System.out.println("Error occured while processing " + currTask.getTask()); // Temporary error handler
+            System.out.println("Error occurred while processing " + currTask.getTask()); // Temporary error handler
         }
         taskHistory.getTask(index).unmarkTask();
         String msg = "_______________________________________________________\n"

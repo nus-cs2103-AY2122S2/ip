@@ -1,45 +1,41 @@
 import java.lang.StringBuilder; // Imported StringBuilder class
-import static java.lang.System.exit; // Imported System.exit
+import java.util.ArrayList; // Imported ArrayList class
 
 public class TaskHistory {
-    private final Task[] record = new Task[100]; // ArrayList of size 100 by default
-    private int taskCounter = 0;
+    private final ArrayList<Task> record = new ArrayList<>(100); // ArrayList of size 100 by default
 
     public TaskHistory() { //Empty Constructor
     }
 
     void addToDo(String description) {
         ToDos tempToDo = new ToDos(description);
-        record[taskCounter] = tempToDo;
-        taskCounter++;
+        record.add(tempToDo);
         String msg = "_______________________________________________________\n"
                 + "Understood, adding this task now:\n"
                 + "    " + tempToDo.getToDo()
-                + "Currently you have " + taskCounter + " tasks in our records.\n"
+                + "Currently you have " + record.size() + " tasks in our records.\n"
                 + "_______________________________________________________\n";
         System.out.println(msg);
     }
 
     void addDeadline(String description, String timeFrame) {
         Deadlines tempDeadline = new Deadlines(description, timeFrame);
-        record[taskCounter] = tempDeadline;
-        taskCounter++;
+        record.add(tempDeadline);
         String msg = "_______________________________________________________\n"
                 + "Understood, adding this task now:\n"
                 + "    " + tempDeadline.getDeadline()
-                + "Currently you have " + taskCounter + " tasks in our records.\n"
+                + "Currently you have " + record.size() + " tasks in our records.\n"
                 + "_______________________________________________________\n";
         System.out.println(msg);
     }
 
     void addEvent(String description, String timeFrame) {
         Event tempEvent = new Event(description, timeFrame);
-        record[taskCounter] = tempEvent;
-        taskCounter++;
+        record.add(tempEvent);
         String msg = "_______________________________________________________\n"
                 + "Understood, adding this task now:\n"
                 + "    " + tempEvent.getEvent()
-                + "Currently you have " + taskCounter + " tasks in our records.\n"
+                + "Currently you have " + record.size() + " tasks in our records.\n"
                 + "_______________________________________________________\n";
         System.out.println(msg);
     }
@@ -47,8 +43,7 @@ public class TaskHistory {
     String printAll() {
         int count = 1;
         StringBuilder result = new StringBuilder();
-        for (int i = 0; i < taskCounter; i++) {
-            Task nextTask = record[i];
+        for (Task nextTask : record) {
             if (nextTask instanceof ToDos) {
                 ToDos temp = (ToDos) nextTask;
                 result.append(count).append(".").append(temp.getToDo());
@@ -59,7 +54,7 @@ public class TaskHistory {
                 Event temp = (Event) nextTask;
                 result.append(count).append(".").append(temp.getEvent());
             } else {
-                System.out.println("Error occured while processing " + nextTask.getTask()); // Temporary error handler
+                System.out.println("Error occurred while processing " + nextTask.getTask()); // Temporary error handler
             }
             count++;
         }
@@ -71,6 +66,6 @@ public class TaskHistory {
     }
 
     Task getTask(int index) {
-        return record[index];
+        return record.get(index);
     }
 }
