@@ -1,0 +1,9 @@
+list
+todo buy book
+mark 1
+unmark 1
+delete 7
+deadline sell book /by 2019-10-10 18:00:00
+list
+delete 7
+bye
