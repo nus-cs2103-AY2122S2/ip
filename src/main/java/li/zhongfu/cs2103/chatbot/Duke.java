@@ -136,19 +136,22 @@ public class Duke {
                 case "deadline":
                 case "event":
                     Task task;
+                    Map<String, String> taskArgs = parseArgString(inArgs);
+                    if (taskArgs.get("").isBlank()) { // includes strings with only whitespaces
+                        dialog("Task name cannot be empty!");
+                        break;
+                    }
 
                     if (inCmd.equals("todo")) {
-                        task = new ToDo(inArgs);
+                        task = new ToDo(taskArgs.get(""));
                     } else if (inCmd.equals("deadline")) {
-                        Map<String, String> taskArgs = parseArgString(inArgs);
-                        if (!taskArgs.containsKey("by")) {
+                        if (!taskArgs.containsKey("by") || taskArgs.get("by").isEmpty()) {
                             dialog(String.format("You need a time for your deadline! Try: deadline %s /by next Sunday", taskArgs.get("")));
                             break;
                         }
                         task = new Deadline(taskArgs.get(""), taskArgs.get("by"));
                     } else if (inCmd.equals("event")) {
-                        Map<String, String> taskArgs = parseArgString(inArgs);
-                        if (!taskArgs.containsKey("at")) {
+                        if (!taskArgs.containsKey("at") || taskArgs.get("at").isEmpty()) {
                             dialog(String.format("You need a time for your event! Try: event %s /at next Sunday", taskArgs.get("")));
                             break;
                         }
