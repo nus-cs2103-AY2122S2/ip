@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Duke {
     private static final String HLINE = "____________________________________________________________";
@@ -41,6 +43,39 @@ public class Duke {
             enumerated.add(String.format("%d. %s", ++idx, item));
         }
         return enumerated;
+    }
+
+    /**
+     * Parses a string in the form {@code positional argument /arg1 foo bar /arg2 baz bax /arg3}
+     * and returns a {@code Map<String, String>} containing the parsed arguments, e.g.:
+     * 
+     * <pre>{
+     *      "": "positional argument",
+     *      "arg1": "foo bar",
+     *      "arg2": "baz bax",
+     *      "arg3": ""
+     * }</pre>
+     * 
+     * Empty argument names will be dropped; other duplicate argument names will have the value of
+     * the last occurrence of the argument.
+     * 
+     * @param args a string containing unparsed arguments
+     * @return a Map containing parsed arguments
+     */
+    private static Map<String, String> parseArgString(String taskString) {
+        Map<String, String> args = new HashMap<>();
+        String[] parts = taskString.split("\\s/");
+        args.put("", parts[0]);
+
+        for (int i = 1; i < parts.length; i++) {
+            String[] arg = parts[i].split("\\s", 2);
+            if (arg[0] == "") {
+                continue;
+            }
+            args.put(arg[0], arg.length == 2 ? arg[1]: "");
+        }
+
+        return args;
     }
 
     public static void main(String[] args) throws IOException {
@@ -84,7 +119,7 @@ public class Duke {
 
                 case "list":
                     if (tasks.isEmpty()) {
-                        dialog("You have no tasks on your to-do list!");
+                        dialog("You have no tasks in your task list!");
                     } else {
                         List<String> output = new ArrayList<>();
                         output.add("Here are the tasks in your list:");
@@ -98,16 +133,40 @@ public class Duke {
                     return; // to shut the linter up
 
                 case "todo":
-                    Task task = new ToDo(inArgs);
+                case "deadline":
+                case "event":
+                    Task task;
+
+                    if (inCmd.equals("todo")) {
+                        task = new ToDo(inArgs);
+                    } else if (inCmd.equals("deadline")) {
+                        Map<String, String> taskArgs = parseArgString(inArgs);
+                        if (!taskArgs.containsKey("by")) {
+                            dialog(String.format("You need a time for your deadline! Try: deadline %s /by next Sunday", taskArgs.get("")));
+                            break;
+                        }
+                        task = new Deadline(taskArgs.get(""), taskArgs.get("by"));
+                    } else if (inCmd.equals("event")) {
+                        Map<String, String> taskArgs = parseArgString(inArgs);
+                        if (!taskArgs.containsKey("at")) {
+                            dialog(String.format("You need a time for your event! Try: event %s /at next Sunday", taskArgs.get("")));
+                            break;
+                        }
+                        task = new Event(taskArgs.get(""), taskArgs.get("at"));
+                    } else {
+                        throw new RuntimeException(String.format("Got unexpected command here: %s", inCmd));
+                    }
+                    
                     tasks.add(task);
                     dialog(new String[] {
                         "New task added:",
-                        String.format(" %s", task)
+                        String.format(" %s", task),
+                        String.format("You now have %d tasks in your task list.", tasks.size())
                     });
                     break;
 
                 default:
-                    dialog("I don't know what that means! Try: todo, list, mark, unmark, bye");
+                    dialog("I don't know what that means! Try: todo, deadline, event, list, mark, unmark, bye");
             }
         }
     }
