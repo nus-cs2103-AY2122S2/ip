@@ -27,4 +27,9 @@ public class Events extends Task{
     public String getDescription() {
         return String.format("%s (%s)", this.description, date);
     }
+
+    @Override
+    public String getFullDescription() {
+        return String.format("[E][ ] %s (%s)", this.description, date);
+    }
 }

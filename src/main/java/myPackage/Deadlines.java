@@ -28,4 +28,9 @@ public class Deadlines extends Task{
     public String getDescription() {
         return String.format("%s (%s)", this.description, deadline);
     }
+
+    @Override
+    public String getFullDescription() {
+        return String.format("[D][ ] %s (%s)", this.description, deadline);
+    }
 }

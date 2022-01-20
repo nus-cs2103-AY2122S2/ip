@@ -26,4 +26,9 @@ public class ToDos extends Task {
     public String getDescription() {
         return super.getDescription();
     }
+
+    @Override
+    public String getFullDescription() {
+        return String.format("[T][%s] %s%n", this.getStatusIcon(), this.description);
+    }
 }
