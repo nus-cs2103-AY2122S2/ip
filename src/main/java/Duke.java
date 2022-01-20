@@ -11,6 +11,16 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
+    private static boolean checkNumeric(String string) {
+        boolean numeric = true;
+        numeric = string.matches("-?\\d+(\\.\\d+)?");
+        if (numeric) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static void main(String[] args) {
         //String logo = " ____        _        \n"
         //        + "|  _ \\ _   _| | _____ \n"
@@ -22,46 +32,89 @@ public class Duke {
         System.out.println(" Hello! I'm Duke");
         System.out.println(" What can I do for you?");
         System.out.println("____________________________________________________________");
+
         Scanner sc = new Scanner(System.in);
-        String word = sc.nextLine();
+        String nextWord = sc.nextLine();
         int taskNumber = 0;
         ArrayList<TaskStorage> storingList = new ArrayList<>();
-        while (! word.equals("bye")) {
-            if (word.equals("list")) {
+        BotException exception = new BotException();
+        int commandIndex = nextWord.indexOf(" ");
+        String commandWord;
+        String restWord;
+        if (commandIndex == -1) {
+            commandWord = nextWord;
+            restWord = nextWord;
+        } else {
+            commandWord = nextWord.substring(0, commandIndex);
+            restWord = nextWord.substring(commandIndex + 1);
+        }
+
+        while (! nextWord.equals("bye")) {
+            if (commandWord.equals("list")) {
                 System.out.println("____________________________________________________________");
                 System.out.println(" Here are the tasks in your list:");
                 for (int i = 1; i <= storingList.size(); i++) {
                     System.out.println(" " + i + "." + storingList.get(i - 1));
                 }
                 System.out.println("____________________________________________________________");
-            } else if (word.substring(0,4).equals("mark")) {
-                TaskStorage temp = storingList.get(Integer.parseInt(word.substring(5)) - 1);
-                temp.taskDone();
-                System.out.println("____________________________________________________________");
-                System.out.println(" Nice! I've marked this task as done: ");
-                System.out.println("  " + temp);
-                System.out.println("____________________________________________________________");
-            } else if (word.substring(0,6).equals("unmark")) {
-                TaskStorage temp = storingList.get(Integer.parseInt(word.substring(7)) - 1);
-                temp.taskUndone();
-                System.out.println("____________________________________________________________");
-                System.out.println(" OK, I've marked this task as not done yet: ");
-                System.out.println("  " + temp);
-                System.out.println("____________________________________________________________");
-            } else if (word.substring(0,4).equals("todo")) {
-                taskNumber += 1;
-                storingList.add(new TaskStorage(word.substring(5), "T"));
-                addTask(storingList, taskNumber);
-            } else if (word.substring(0,8).equals("deadline")) {
-                taskNumber += 1;
-                storingList.add(new TaskStorage(word.substring(9), "D"));
-                addTask(storingList, taskNumber);
-            } else if (word.substring(0,5).equals("event")) {
-                taskNumber += 1;
-                storingList.add(new TaskStorage(word.substring(6), "E"));
-                addTask(storingList, taskNumber);
+            } else if (commandWord.equals("mark")) {
+                if (! checkNumeric(restWord)) {
+                    exception.notNumeric("mark");
+                } else {
+                    TaskStorage temp = storingList.get(Integer.parseInt(restWord) - 1);
+                    temp.taskDone();
+                    System.out.println("____________________________________________________________");
+                    System.out.println(" Nice! I've marked this task as done: ");
+                    System.out.println("  " + temp);
+                    System.out.println("____________________________________________________________");
+                }
+            } else if (commandWord.equals("unmark")) {
+                if (! checkNumeric(restWord)) {
+                    exception.notNumeric("unmark");
+                } else {
+                    TaskStorage temp = storingList.get(Integer.parseInt(restWord) - 1);
+                    temp.taskUndone();
+                    System.out.println("____________________________________________________________");
+                    System.out.println(" OK, I've marked this task as not done yet: ");
+                    System.out.println("  " + temp);
+                    System.out.println("____________________________________________________________");
+                }
+            } else if (commandWord.equals("todo")) {
+                if (nextWord.length() == 4) {
+                    exception.emptyDescription("todo");
+                } else {
+                    taskNumber += 1;
+                    storingList.add(new TaskStorage(restWord, "T"));
+                    addTask(storingList, taskNumber);
+                }
+            } else if (commandWord.equals("deadline")) {
+                if (nextWord.length() == 8) {
+                    exception.emptyDescription("deadline");
+                } else {
+                    taskNumber += 1;
+                    storingList.add(new TaskStorage(restWord, "D"));
+                    addTask(storingList, taskNumber);
+                }
+            } else if (commandWord.equals("event")) {
+                if (nextWord.length() == 5) {
+                    exception.emptyDescription("event");
+                } else {
+                    taskNumber += 1;
+                    storingList.add(new TaskStorage(restWord, "E"));
+                    addTask(storingList, taskNumber);
+                }
+            } else {
+                exception.wrongSyntax();
             }
-            word = sc.nextLine();
+            nextWord = sc.nextLine();
+            commandIndex = nextWord.indexOf(" ");
+            if (commandIndex == -1) {
+                commandWord = nextWord;
+                restWord = nextWord;
+            } else {
+                commandWord = nextWord.substring(0, commandIndex);
+                restWord = nextWord.substring(commandIndex + 1);
+            }
         }
         System.out.println("____________________________________________________________");
         System.out.println(" Bye. Hope to see you again soon!");

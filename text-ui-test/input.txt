@@ -1,11 +1,14 @@
+todo
 todo borrow book
 list
+mark
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
 list
 mark 1
 mark 3
 list
+lolah
 unmark 3
 list
 bye
