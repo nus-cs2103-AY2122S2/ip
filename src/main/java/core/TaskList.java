@@ -59,7 +59,7 @@ public class TaskList {
 
     public String formattedOutput() {
         OutputFormatter outputFormatter = OutputFormatter.getInstance();
-        outputFormatter.appendAll("Here are the tasks in your list: ", "\n");
+        outputFormatter.appendAll("Here are the tasks in your list:", "\n");
 
         for (Task task : this.taskList) {
             outputFormatter.appendAll(task.getTaskId(), ".", task.toString());

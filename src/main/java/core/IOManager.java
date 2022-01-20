@@ -11,7 +11,7 @@ public class IOManager {
     private PrintWriter printWriter;
     private InputHandler inputHandler;
 
-    private final String WELCOME_MESSAGE = "Hello! I'm Duke\n What can I do for you?";
+    private final String WELCOME_MESSAGE = "Hello! I'm Dooke\n What can I do for you?";
     private final String BYE_COMMAND = "bye";
     private final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
 
