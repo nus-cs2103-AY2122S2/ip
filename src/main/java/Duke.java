@@ -1,25 +1,40 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Duke {
-    public static ArrayList<String> todoList = new ArrayList<>();
+    public static TodoList todoList = new TodoList();
     public static void main(String[] args) {
         Scanner myScanner = new Scanner(System.in);
         System.out.println("Hello from\n" + Response.LOGO);
-        Response.wrapPrint(Response.WELCOME);
+        Format.wrapPrint(Response.WELCOME);
         boolean over = false;
         while (!over) {
             String command = myScanner.nextLine();
-            if (command.equals("bye")) {
-                Response.wrapPrint(Response.GOODBYE);
+            String[] words  = command.split(" ");
+            String firstWord = words[0];
+            if (firstWord.equals("bye")) {
+                Format.wrapPrint(Response.GOODBYE);
                 over = true;
                 continue;
-            } else if (command.equals("list")) {
-                Response.list(todoList);
+            } else if (firstWord.equals("list")) {
+                Format.wrapPrint(todoList.toString());
+            } else if (firstWord.equals("mark") && words.length == 2)  {
+                try {
+                    String change = todoList.markFinished(Integer.parseInt(words[1]));
+                    Format.wrapPrint(change);
+                } catch (NumberFormatException e) {
+                    Format.wrapPrint("mark command must precede with a decimal number!");
+                }
+            } else if (firstWord.equals("unmark") && words.length == 2)  {
+                try {
+                    String change = todoList.unmarkFinished(Integer.parseInt(words[1]));
+                    Format.wrapPrint(change);
+                } catch (NumberFormatException e) {
+                    Format.wrapPrint("unmark command must precede with a decimal number!");
+                }
             } else {
-                todoList.add(command);
-                Response.echo(command);
+                todoList.addItem(new Item(command));
+                Format.wrapPrint(command);
             }
-
         }
     }
 }
