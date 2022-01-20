@@ -15,10 +15,11 @@ public class Duke {
         while (true) {
             Command nextCommand = commandFactory.makeCommand(nextLine); // Creating the appropriate command
             nextCommand.execute();
+
             if (nextCommand instanceof ByeCommand) { // Check for exit command
                 break;
             }
-            nextLine = sc.nextLine();
+            nextLine = sc.nextLine(); // Update nextLine variable with next input
         }
 
     }
