@@ -5,9 +5,11 @@ import java.util.Scanner;
 public class Duke {
     private static final String GREETING_MESSAGE = "Hey, Aeromon here! Fancy a cup of tea?";
     private static final String FAREWELL_MESSAGE = "Buai Buai! Ciao for now!";
+    private static final String LIST_MESSAGE = "Konnichiwassup! Look at how much work you have to do!";
     private static final String ADD_MESSAGE = "Nicely! I've added for you: \n";
     private static final String MARK_MESSAGE = "Naisu! You've completed: \n";
     private static final String UNMARK_MESSAGE = "OI! What happened to completing: \n";
+    private static final String DELETE_MESSAGE = "Okies, one less thing on the list! \n";
     private static final List<Task> toDoList = new ArrayList<>();
 
     /**
@@ -31,13 +33,13 @@ public class Duke {
                 toReturn[0] = arr[1];
             } else if (command.equals("deadline")) {
                 test = arr[1];
-                toReturn = test.split("/by");
+                toReturn = test.split("/by ");
                 test = toReturn[1];
             } else if (command.equals("event")) {
                 test = arr[1];
-                toReturn = test.split("/at");
+                toReturn = test.split("/at ");
                 test = toReturn[1];
-            } else if (command.equals("mark") || command.equals("unmark")) {
+            } else if (command.equals("mark") || command.equals("unmark") || command.equals("delete")) {
                 toReturn[0] = arr[1];
                 int index = Integer.parseInt(arr[1]);
             }
@@ -65,8 +67,8 @@ public class Duke {
                         System.out.println(FAREWELL_MESSAGE);
                         break;
                     } else if (input.equals("list")) {
+                        System.out.println(LIST_MESSAGE);
                         int count = 1;
-
                         for (Task item : toDoList) {
                             System.out.println(String.format("%d: %s", count, item));
                             count++;
@@ -96,6 +98,12 @@ public class Duke {
                         toDoList.add(task);
                         System.out.println(ADD_MESSAGE + task);
                         System.out.println(String.format("Aiyo, now you have %d tasks in the list, jiayous!", toDoList.size()));
+                    } else if (command.equals("delete")) {
+                        int index = Integer.parseInt(info[0]) - 1;
+                        Task temp = toDoList.get(index);
+                        toDoList.remove(index);
+                        System.out.println(DELETE_MESSAGE + temp);
+                        System.out.println(String.format("Less burden for you since you only have %d tasks to do *smiles*", toDoList.size()));
                     } else {
                         throw new DukeException("Nani? Me no understand what you say .-.");
                     }
