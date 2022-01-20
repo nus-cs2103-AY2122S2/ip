@@ -10,9 +10,7 @@ public class TaskFunctions {
         } else {
             String[] input_split = input.split(" ", 2);
             if (input_split.length == 1) {
-                if (input_split[0].equals("todo") || input_split[0].equals("deadline") ||
-                        input_split[0].equals("event") || input_split[0].equals("mark") || input_split[0].equals("unmark")
-                        || input_split[0].equals("delete")) {
+                if (DukeCommands.isDukeCommand(input_split[0])) {
                     throw new DukeException("☹ OOPS!!! The description of a " + input_split[0] + " cannot be empty.");
                 }
             } else if (input_split[0].equals("event")) {
@@ -51,7 +49,7 @@ public class TaskFunctions {
     }
 
     public static void markTask(int position) throws DukeException {
-        if (position < 1 || position - 1 > taskList.size()) {
+        if (position < 1 || position > taskList.size()) {
             throw new DukeException("Task do not exist!");
         } else if (taskList.get(position - 1).isDone == true) {
             throw new DukeException("Task is already marked as done!");
@@ -63,7 +61,7 @@ public class TaskFunctions {
     }
 
     public static void unmarkTask(int position) throws DukeException {
-        if (position < 1 || position - 1 > taskList.size()) {
+        if (position < 1 || position > taskList.size()) {
             throw new DukeException("Task do not exist!");
         } else if (taskList.get(position - 1).isDone == false) {
             throw new DukeException("Task is already marked as not done!");
@@ -76,14 +74,14 @@ public class TaskFunctions {
 
 
     public static void deleteTask(int position) throws DukeException {
-        if (position < 0 || position - 1 > taskList.size()) {
+        if (position < 0 || position > taskList.size()) {
             throw new DukeException("Task do not exist!");
         } else {
             Task task = taskList.get(position - 1);
             taskList.remove(position - 1);
             System.out.println("Noted. I've removed this task:\n" +
                     task.toString() +
-                    "\nNow you have 4 tasks in the list.");
+                    "\nNow you have " + taskList.size() + " tasks in the list.");
         }
     }
 
