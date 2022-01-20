@@ -32,14 +32,14 @@ public class Duke {
         ioOut.println(greet);
     }
 
-    private static boolean takeInput() {
+    private static boolean takeInput() throws DukeException {
         printLine();
         String input = ioIn.nextLine();
         printLine();
 
         String[] splitInput = input.split("\\s+", 2);
         String command = splitInput[0];
-        String argument = splitInput.length == 2 ? splitInput[1] : "";
+        String argument = splitInput.length == 2 ? splitInput[1] : null;
         switch (command) {
             case "bye":
                 ioOut.println("Seeeee youuuu sooon...");
@@ -57,7 +57,7 @@ public class Duke {
             case "event":
                 event(argument); break;
             default:
-                break;
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         return true;
     }
@@ -79,7 +79,9 @@ public class Duke {
         ioOut.println(todoList.unmarkItem(index));
     }
 
-    private static void todo(String argument) {
+    private static void todo(String argument) throws DukeException {
+        if (argument == null)
+            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         ioOut.println("Got it. I've added this task: ");
         ioOut.println(todoList.addTodo(argument));
         ioOut.println(todoList.listCount());
@@ -106,7 +108,11 @@ public class Duke {
     public static void main(String[] args) {
         printMenu();
         while (true) {
-            if (!takeInput()) break;
+            try {
+                if (!takeInput()) break;
+            } catch (DukeException e) {
+                ioOut.println(e.getMessage());
+            }
         }
         printLine();
     }
