@@ -2,9 +2,17 @@ help
 todo Java week 2
 event Ball /at 26th January 2021
 deadline quiz 2 /by 19th January 2021
+deadline /by 615
+deadline /by 01/07/2022
+deadline drawing /by 01/07/2022
+deadline
+event ball /at 10/02/2022
+event
 list
 mark 2
+mark 100
 mark 3
 unmark 2
+unmark 20
 list
 bye
