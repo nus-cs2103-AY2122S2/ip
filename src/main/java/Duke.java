@@ -37,8 +37,22 @@ public class Duke {
                     i++;
                 }
             } else {
-                System.out.println("added: " + input);
-                store.add(new Task(input));
+                System.out.println("Task added!");
+                if (input.contains("todo")) {
+                    Task task = new Todo(input);
+                    store.add(task);
+                    System.out.println(task);
+                } else if (input.contains("deadline")) {
+                    Task task = new Deadline(input);
+                    store.add(task);
+                    System.out.println(task);
+                } else if (input.contains("event")) {
+                    Task task = new Event(input);
+                    store.add(task);
+                    System.out.println(task);
+                }
+
+                System.out.println("There are " + store.size() + " task(s) in the list.");
             }
             System.out.println("____________________________________________________________");
             input = sc.nextLine();
@@ -48,6 +62,6 @@ public class Duke {
     }
 
     public static void printTask(Task task) {
-        System.out.println("[" + task.getStatusIcon() + "] " + task.description);
+        System.out.println(task);
     }
 }
