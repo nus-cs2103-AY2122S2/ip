@@ -83,17 +83,28 @@ public class Duke {
                     break;
 
                 case "list":
-                    dialog(enumerateList(tasks).toArray(String[]::new));
+                    if (tasks.isEmpty()) {
+                        dialog("You have no tasks on your to-do list!");
+                    } else {
+                        List<String> output = new ArrayList<>();
+                        output.add("Here are the tasks in your list:");
+                        output.addAll(enumerateList(tasks));
+                        dialog(output.toArray(String[]::new));
+                    }
                     break;
 
                 case "bye":
                     dialog("Bye. Hope to see you again soon!");
                     return; // to shut the linter up
 
+                // default action: add entire input as task
                 default:
                     Task task = new Task(input);
                     tasks.add(task);
-                    dialog(String.format("added: %s", task));
+                    dialog(new String[] {
+                        "New task added:",
+                        String.format(" %s", task)
+                    });
             }
         }
     }
