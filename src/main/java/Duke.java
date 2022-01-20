@@ -10,7 +10,6 @@ import java.util.regex.Pattern;
 public class Duke {
     private static final Set<Task> taskSet = new HashSet<>();
     private final static ArrayList<Task> tasksArrayList = new ArrayList<>();
-    private static FileInputStream fileInputStream;
 
     public static void greet() {
         String logo = "\n" +
@@ -183,10 +182,12 @@ public class Duke {
         try {
             String path = Paths.get("").toAbsolutePath() + "/data/";
             File taskFile = new File(path + "task.txt");
-            fileInputStream = new FileInputStream(taskFile);
+            FileInputStream fileInputStream = new FileInputStream(taskFile);
             Scanner scanner = new Scanner(fileInputStream);
             while(scanner.hasNextLine()) {
-                tasksArrayList.add(parseTask(scanner.nextLine()));
+                Task taskToAdd = parseTask(scanner.nextLine());
+                taskSet.add(taskToAdd);
+                tasksArrayList.add(taskToAdd);
             }
         } catch (FileNotFoundException e) {
             System.out.println("File not found!");
@@ -207,16 +208,16 @@ public class Duke {
         char type = taskInString.charAt(1);
         boolean status = taskInString.charAt(4) == 'X';
         if (type == 'D') {
-            String[] actualTask = taskInString.substring(7).split("by: ");
-            String description = actualTask[0].substring(0, actualTask[0].length() - 2);
-            String by = actualTask[1];
+            String[] actualTask = taskInString.substring(7).split("\\(by: ");
+            String description = actualTask[0];
+            String by = actualTask[1].replaceAll("\\)", "");
             Deadline deadline = new Deadline(description, by);
             deadline.isDone = status;
             return deadline;
         } else if (type == 'E') {
-            String[] actualTask = taskInString.substring(7).split("at: ");
-            String description = actualTask[0].substring(0, actualTask[0].length() - 2);
-            String at = actualTask[1];
+            String[] actualTask = taskInString.substring(7).split("\\(at: ");
+            String description = actualTask[0];
+            String at = actualTask[1].replaceAll("\\)", "");
             Event event = new Event(description, at);
             event.isDone = status;
             return event;

@@ -1,0 +1,3 @@
+[T][ ] read book
+[E][ ] watch lecture (at: Friday 2-4pm)
+[D][X] watch lecture (by: Friday 2-4pm)
