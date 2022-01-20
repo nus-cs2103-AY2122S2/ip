@@ -9,4 +9,7 @@ list
 deadline /by 4pm
 mark 1
 list
+delete 1
+list
+delete 3
 bye

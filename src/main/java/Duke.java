@@ -79,7 +79,7 @@ public class Duke {
                         Task selectedTask = taskList.getTaskByNum(taskNum);
                         selectedTask.markAsComplete();
                         printAce("I've marked the following task as complete:\n" + selectedTask);
-                    } catch (NumberFormatException e) {
+                    } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
                         printAce("Please provide the number of the task you'd like to mark.");
                     } catch (DukeException e) {
                         printAce(e.getMessage());
@@ -92,8 +92,20 @@ public class Duke {
                         Task selectedTask = taskList.getTaskByNum(taskNum);
                         selectedTask.markAsIncomplete();
                         printAce("I've marked the following task as incomplete:\n" + selectedTask);
-                    } catch (NumberFormatException e) {
+                    } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
                         printAce("Please provide the number of the task you'd like to mark.");
+                    } catch (DukeException e) {
+                        printAce(e.getMessage());
+                    }
+                    break;
+
+                case "delete":
+                    try {
+                        int taskNum = Integer.parseInt(splitInput[1]);
+                        Task deletedTask = taskList.deleteTask(taskNum);
+                        printAce("I've deleted the following task from your list:\n" + deletedTask);
+                    } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                        printAce("Please provide the number of the task you'd like to delete.");
                     } catch (DukeException e) {
                         printAce(e.getMessage());
                     }

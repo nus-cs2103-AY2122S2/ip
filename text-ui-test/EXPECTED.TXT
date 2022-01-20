@@ -62,5 +62,17 @@ ________
     3. [T][ ] eat dinner
 
 ________
+    I've deleted the following task from your list:
+    [D][X] finish level-6 (by: midnight tonight)
+
+________
+    Here are the tasks in your list:
+    1. [E][ ] the weekend (at: this Saturday)
+    2. [T][ ] eat dinner
+
+________
+    There is no task 3 in the list. Type 'list' to view your tasks.
+
+________
     See you later!
 

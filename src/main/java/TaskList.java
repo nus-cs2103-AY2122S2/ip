@@ -99,6 +99,14 @@ public class TaskList {
         }
     }
 
+    public Task deleteTask(int i) throws TaskOutOfBoundsException {
+        if (i > 0 & i <= this.taskList.size()) {
+            return this.taskList.remove(i - 1);
+        } else {
+            throw new TaskOutOfBoundsException("There is no task " + i + " in the list. Type 'list' to view your tasks.");
+        }
+    }
+
     /**
      * Returns the number of tasks in taskList.
      * @return Number of tasks in taskList.
