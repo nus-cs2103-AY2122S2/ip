@@ -12,20 +12,21 @@ public class TaskList {
         System.out.println("Now you have " + this.numOfTasks() + " tasks in the list.");
     }
 
-    public void add(String[] command) throws EmptyDescriptionException {
-        if (command.length < 2) {
-            throw new EmptyDescriptionException(command[0]);
+    public void add(String[] str, Command command) throws EmptyDescriptionException {
+        if (str.length < 2) {
+            throw new EmptyDescriptionException(str[0]);
         } else {
             Task newTask;
             String[] substring;
-            switch (command[0]) {
-            case "todo":
-                newTask = new ToDo(command[1]);
+
+            switch (command) {
+            case TODO:
+                newTask = new ToDo(str[1]);
                 this.add(newTask);
                 break;
 
-            case "deadline":
-                substring = command[1].split("/by ", 2);
+            case DEADLINE:
+                substring = str[1].split("/by ", 2);
                 if (substring.length < 2) {
                     newTask = new Deadline(substring[0]);
                 } else {
@@ -34,31 +35,32 @@ public class TaskList {
                 this.add(newTask);
                 break;
 
-            case "event":
-                substring = command[1].split("/at ", 2);
+            case EVENT:
+                substring = str[1].split("/at ", 2);
                 if (substring.length < 2) {
                     newTask = new Event(substring[0]);
                 } else {
                     newTask = new Event(substring[0], substring[1]);
                 }
                 this.add(newTask);
+                break;
             }
         }
     }
 
-    public void markTask(String[] command) throws InvalidTaskNumberException {
-        if (command.length < 2 || !isNumeric(command[1]) || Integer.parseInt(command[1]) > ls.size()) {
-            throw new InvalidTaskNumberException(command[0]);
+    public void markTask(String[] str) throws InvalidTaskNumberException {
+        if (str.length < 2 || !isNumeric(str[1]) || Integer.parseInt(str[1]) > ls.size()) {
+            throw new InvalidTaskNumberException(str[0]);
         }
-        Task task = this.get(Integer.parseInt(command[1]));
+        Task task = this.get(Integer.parseInt(str[1]));
         task.markAsDone();
     }
 
-    public void unmarkTask(String[] command) throws InvalidTaskNumberException {
-        if (command.length < 2 || !isNumeric(command[1]) || Integer.parseInt(command[1]) > ls.size()) {
-            throw new InvalidTaskNumberException(command[0]);
+    public void unmarkTask(String[] str) throws InvalidTaskNumberException {
+        if (str.length < 2 || !isNumeric(str[1]) || Integer.parseInt(str[1]) > ls.size()) {
+            throw new InvalidTaskNumberException(str[0]);
         }
-        Task task = this.get(Integer.parseInt(command[1]));
+        Task task = this.get(Integer.parseInt(str[1]));
         task.markAsUndone();
     }
 
@@ -70,11 +72,11 @@ public class TaskList {
         System.out.println("Now you have " + this.numOfTasks() + " tasks in the list.");
     }
 
-    public void delete(String[] command) throws InvalidTaskNumberException {
-        if (command.length < 2 || !isNumeric(command[1]) || Integer.parseInt(command[1]) > ls.size()) {
-            throw new InvalidTaskNumberException(command[0]);
+    public void delete(String[] str) throws InvalidTaskNumberException {
+        if (str.length < 2 || !isNumeric(str[1]) || Integer.parseInt(str[1]) > ls.size()) {
+            throw new InvalidTaskNumberException(str[0]);
         }
-        this.delete(Integer.parseInt(command[1]));
+        this.delete(Integer.parseInt(str[1]));
     }
 
     public Task get(int item) {

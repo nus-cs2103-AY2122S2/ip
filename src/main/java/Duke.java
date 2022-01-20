@@ -16,10 +16,10 @@ public class Duke {
         System.out.println("____________________________________________________________");
         System.out.println("I'm Saitama, a hero for fun.");
         System.out.println("What can I do for you?");
-        System.out.println("____________________________________________________________");
 
         while (true) {
-            String[] str = sc.nextLine().trim().toUpperCase().split(" ", 2);
+            System.out.println("____________________________________________________________");
+            String[] str = sc.nextLine().trim().split(" ", 2);
             System.out.println("____________________________________________________________");
 
             try {
@@ -43,17 +43,16 @@ public class Duke {
                 case TODO:
                 case DEADLINE:
                 case EVENT:
-                    taskList.add(str);
+                    taskList.add(str, command);
                     continue;
                 }
                 break;
             } catch (InvalidCommandException | InvalidTaskNumberException | EmptyDescriptionException e) {
                 System.out.println(e.getMessage());
-            } finally {
-                System.out.println("____________________________________________________________");
             }
         }
         System.out.println("OK...");
+        System.out.println("____________________________________________________________");
     }
 }
 
