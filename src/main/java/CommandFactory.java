@@ -49,8 +49,14 @@ public class CommandFactory {
             return new MarkCommand(commandParameters);
         } else if (commandWord.equals("unmark")) {
             return new UnmarkCommand(commandParameters);
+        } else if (commandWord.equals("todo")) {
+            return new AddTaskCommand(commandParameters, "todo");
+        } else if (commandWord.equals("deadline")) {
+            return new AddTaskCommand(commandParameters, "deadline");
+        } else if (commandWord.equals("event")) {
+            return new AddTaskCommand(commandParameters, "event");
         } else {
-            return new AddTaskCommand(input);
+            return null;
         }
     }
 }
