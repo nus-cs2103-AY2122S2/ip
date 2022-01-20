@@ -20,6 +20,7 @@ public class Van {
                     for (int i = 0; i < counter; i++) {
                         System.out.println(i+1 + ". " + tasks[i].getStatus());
                     }
+                    System.out.println(divide);
                     break;
                 case "deadline":
                     para = parse[1].split("/by");
