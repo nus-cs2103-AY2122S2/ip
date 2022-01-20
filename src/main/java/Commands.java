@@ -79,12 +79,12 @@ public class Commands {
         taskHistory.addToDo(description);
     }
 
-    void deadline(String[] tokens) {
+    void deadline(String[] tokens) throws DukeException {
         String description = "";
         String timeFrame = "";
         int timeStart = -1; // -1 is a placeholder to indicate /by has not been found
         for (int i = 1; i < tokens.length; i++) {
-            if (tokens[i].startsWith("/")) {
+            if (tokens[i].equals("/by")) {
                 timeStart = i;
                 break;
             } else {
@@ -93,10 +93,9 @@ public class Commands {
             description = description.concat(" ");
         }
 
+        // Check for timeFrame
         if (timeStart == -1) {
-            System.out.println("Error occured while processing " + description);
-            System.out.println("'/' is missing in input, please restart and try again");
-            return;
+            throw new DukeException("'/by' not detected");
         }
 
         for (int j = timeStart + 1; j < tokens.length; j++) {

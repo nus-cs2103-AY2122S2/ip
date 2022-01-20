@@ -1,3 +1,4 @@
+import java.util.MissingFormatArgumentException;
 import java.util.Scanner; // Imported Scanner class
 import static java.lang.System.exit; // Imported System.exit
 
@@ -31,7 +32,7 @@ public class Duke {
                         break label;
                     } catch (DukeException ex) {
                         String err = "_______________________________________________________\n"
-                                + "Arguments detected!\n"
+                                + "* Arguments detected *\n"
                                 + "Are you trying to type 'bye' instead? If so, please try again!\n"
                                 + "_______________________________________________________\n";
                         System.out.println(err);
@@ -46,7 +47,7 @@ public class Duke {
                         break;
                     } catch (DukeException ex) {
                         String err = "_______________________________________________________\n"
-                                + "Arguments detected!\n"
+                                + "* Arguments detected *\n"
                                 + "Are you trying to type 'list' instead? If so, please try again!\n"
                                 + "_______________________________________________________\n";
                         System.out.println(err);
@@ -59,7 +60,7 @@ public class Duke {
                         break;
                     } catch (NumberFormatException | NullPointerException | ArrayIndexOutOfBoundsException ex) {
                         String err = "_______________________________________________________\n"
-                                + "Invalid entry detected!\n"
+                                + "* Invalid entry detected *\n"
                                 + "Please provide a valid entry!\n"
                                 + "_______________________________________________________\n";
                         System.out.println(err);
@@ -73,7 +74,7 @@ public class Duke {
                         break;
                     } catch (NumberFormatException | NullPointerException | ArrayIndexOutOfBoundsException ex) {
                         String err = "_______________________________________________________\n"
-                                + "Invalid entry detected!\n"
+                                + "* Invalid entry detected *\n"
                                 + "Please provide a valid entry!\n"
                                 + "_______________________________________________________\n";
                         System.out.println(err);
@@ -81,16 +82,61 @@ public class Duke {
                     }
                 }
                 case "todo": {
-                    cmd.todo(tokens);
-                    break;
+                    try {
+                        if (tokens.length <= 1) {
+                            throw new MissingFormatArgumentException("no argument detected");
+                        }
+                        cmd.todo(tokens);
+                        break;
+                    } catch (MissingFormatArgumentException ex) {
+                        String err = "_______________________________________________________\n"
+                                + "* No arguments detected *\n"
+                                + "Please provide a description for your ToDo!\n"
+                                + "_______________________________________________________\n";
+                        System.out.println(err);
+                        break;
+                    }
                 }
                 case "deadline": {
-                    cmd.deadline(tokens);
-                    break;
+                    try {
+                        if (tokens.length <= 1) {
+                            throw new MissingFormatArgumentException("no argument detected");
+                        }
+                        cmd.deadline(tokens);
+                        break;
+                    } catch (MissingFormatArgumentException ex) {
+                        String err = "_______________________________________________________\n"
+                                + "* No arguments detected *\n"
+                                + "Please provide a description for your Deadline!\n"
+                                + "_______________________________________________________\n";
+                        System.out.println(err);
+                        break;
+                    } catch (DukeException ex) {
+                        String err = "_______________________________________________________\n"
+                                + "* Time frame not detected *\n"
+                                + "Please provide a time frame for your Deadline!\n"
+                                + "Check if you have typed '/by' to indicate the time frame!\n"
+                                + "e.g. deadline return book /by Sunday\n"
+                                + "_______________________________________________________\n";
+                        System.out.println(err);
+                        break;
+                    }
                 }
                 case "event": {
-                    cmd.event(tokens);
-                    break;
+                    try {
+                        if (tokens.length <= 1) {
+                            throw new MissingFormatArgumentException("no argument detected");
+                        }
+                        cmd.event(tokens);
+                        break;
+                    } catch (MissingFormatArgumentException ex) {
+                        String err = "_______________________________________________________\n"
+                                + "No arguments detected!\n"
+                                + "Please provide a description for your Event!\n"
+                                + "_______________________________________________________\n";
+                        System.out.println(err);
+                        break;
+                    }
                 }
                 default:
                     System.out.println("Keyword not recognised!");
