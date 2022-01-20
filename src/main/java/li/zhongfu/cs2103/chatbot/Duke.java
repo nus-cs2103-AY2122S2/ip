@@ -98,7 +98,7 @@ public class Duke {
                     return; // to shut the linter up
 
                 case "todo":
-                    Task task = new Task(inArgs);
+                    Task task = new ToDo(inArgs);
                     tasks.add(task);
                     dialog(new String[] {
                         "New task added:",

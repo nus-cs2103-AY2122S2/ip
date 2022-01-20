@@ -3,7 +3,7 @@ package li.zhongfu.cs2103.chatbot;
 /**
  * Object that represents a to-do list task. Contains a name and a state.
  */
-public class Task {
+public abstract class Task {
     private String name;
     private boolean done = false;
     
@@ -12,7 +12,7 @@ public class Task {
      * 
      * @param name name of task
      */
-    public Task(String name) {
+    protected Task(String name) {
         this.name = name; 
     }
     
@@ -48,7 +48,5 @@ public class Task {
      * 
      * @return task details in a human-readable string
      */
-    public String toString() {
-        return String.format("[%s] %s", this.getDone() ? "X" : " ", this.getName());
-    }
+    abstract public String toString();
 }
