@@ -15,11 +15,14 @@ list
 unmark 3
 mark 1
 unmark 2
+delete 2
 list
 unmark 8
 unmark everything
 event eat /at noon
 list
 mark 4
+mark 3
 list
+unmark 1
 bye
