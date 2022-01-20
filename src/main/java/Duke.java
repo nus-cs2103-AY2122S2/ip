@@ -36,6 +36,14 @@ public class Duke {
         this.print("Perfect! You have added this Event Item:\n" + userEvent + "\nRemember to be there 5 minutes early!");
     }
 
+    public void deleteTask(int taskIndex) throws DukeException{
+        if (this.checkValidTask(taskIndex)) {
+            Task userTask = this.userTasks.get(taskIndex);
+            this.userTasks.remove(taskIndex);
+            this.print("I have removed " + userTask);
+        }
+    }
+
     public void printUserTasks(){
         int numberOfTasks = this.userTasks.size();
         int counter = 0;
@@ -59,31 +67,27 @@ public class Duke {
         }
     }
 
-    public boolean checkValidTask(int taskIndex){
-        if (taskIndex > this.userTasks.size()-1) {
-            return false;
+    public boolean checkValidTask(int taskIndex) throws DukeException {
+        if ((taskIndex > this.userTasks.size()-1) || (taskIndex <0)) {
+            throw new DukeException("There is no such task! Maybe you entered the wrong task?");
         } else {
             return true;
         }
     }
 
     public void markTaskDone(int taskIndex) throws DukeException { //This is the actual index for arraylist checking (minus one already)
-        if (checkValidTask(taskIndex)) {
+        if (this.checkValidTask(taskIndex)) {
             Task task = this.userTasks.get(taskIndex);
             task.markAsDone();
             this.print("Congratulations on completing the task!\n" + task);
-        } else {
-            throw new DukeException("There is no such task! Maybe you entered the wrong task?");
         }
     }
 
-    public void markTaskNotDone(int taskIndex) throws DukeException{ //This is the actual index for arraylist checking (minus one already)
-        if (checkValidTask(taskIndex)) {
+    public void markTaskNotDone(int taskIndex) throws DukeException { //This is the actual index for arraylist checking (minus one already)
+        if (this.checkValidTask(taskIndex)) {
             Task task = this.userTasks.get(taskIndex);
             task.markAsNotDone();
             this.print("I have un-marked this task!\n" + task);
-        } else {
-            throw new DukeException("There is no such task! Maybe you entered the wrong task?");
         }
     }
 
@@ -95,15 +99,30 @@ public class Duke {
                 throw new DukeException("You have not keyed in any task! Maybe you missed something? Don't worry, just try again!");
             } else if (userTaskString.equalsIgnoreCase("list")){
                 this.printUserTasks();
+            } else if (userTaskString.matches("^[deltDELT]{6}.*")){
+                Pattern pattern = Pattern.compile("^[deltDELT]{6}");
+                Matcher matcher = pattern.matcher(userTaskString);
+                if (matcher.find()) { // Finds first match (finds a match for each time .find() is run)
+                    try {
+                        this.deleteTask(Integer.parseInt(userTaskString.substring(matcher.end()+1))-1);
+                        //+1 is to take into account the " "after delete, -1 is to convert it into 0-based indexing
+                    } catch (StringIndexOutOfBoundsException err) { // For cases like "delete" without a number
+                        throw new DukeException("Please enter a task number to delete!");
+                    }catch (NumberFormatException err) { // For cases like "delete1" without a space in between or "delete 3b" where the term is not a number
+                        throw new DukeException("Please delete a task in the following format:\n" +
+                                "delete [number]");
+                    }
+                }
             } else if (userTaskString.matches("^[markMARK]{4}.*")){
                 Pattern pattern = Pattern.compile("^[markMARK]{4}");
                 Matcher matcher = pattern.matcher(userTaskString);
                 if (matcher.find()) { // Finds first match (finds a match for each time .find() is run)
                     try {
                         this.markTaskDone(Integer.parseInt(userTaskString.substring(matcher.end()+1))-1);
+                        //+1 is to take into account the " "after mark, -1 is to convert it into 0-based indexing
                     } catch (StringIndexOutOfBoundsException err) { // For cases like "mark" without a number
                         throw new DukeException("Please enter a task number to mark!");
-                     }catch (NumberFormatException err) { // For cases like "mark1" without a space in between
+                     }catch (NumberFormatException err) { // For cases like "mark1" without a space in between or "mark 3b" where the term is not a number
                         throw new DukeException("Please mark a task in the following format:\n" +
                                 "mark [number]");
                     }
@@ -114,9 +133,10 @@ public class Duke {
                 if (matcher.find()) { // Finds first match (finds a match for each time .find() is run)
                     try {
                         this.markTaskNotDone(Integer.parseInt(userTaskString.substring(matcher.end()+1))-1);
+                        //+1 is to take into account the " "after unmark, -1 is to convert it into 0-based indexing
                     } catch (StringIndexOutOfBoundsException err) { // For cases like "unmark" without a number
                         throw new DukeException("Please enter a task number to unmark!");
-                    } catch (NumberFormatException err) { // For cases like "unmark1" without a space in between
+                    } catch (NumberFormatException err) { // For cases like "unmark1" without a space in between or "unmark 3b" where the term is not a number
                         throw new DukeException("Please unmark a task in the following format:\n" +
                                 "unmark [number]");
                     }

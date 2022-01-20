@@ -65,5 +65,12 @@ Here are your tasks:
 3: [E][] project meeting (At: monday 15th jan 4pm)
 These are all your tasks! Only 2 more remaining! Keep going!
 ____________________________________________________________________________________________________
+I have removed [D][Done!] return book (By: Sunday 14th January)
+____________________________________________________________________________________________________
+Here are your tasks:
+1: [T][] borrow book
+2: [E][] project meeting (At: monday 15th jan 4pm)
+These are all your tasks! Only 2 more remaining! Keep going!
+____________________________________________________________________________________________________
 Bye. Hope I've motivated you as much as I could have, and SMILE :D
 ____________________________________________________________________________________________________
