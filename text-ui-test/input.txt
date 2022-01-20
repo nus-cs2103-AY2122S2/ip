@@ -1,5 +1,13 @@
+delete 1
+delete
 deadline hello \by 2024
 event bros \at 2pm-4pm
 todo haiya
+list
+mark 1
+mark 2
+list
+delete 4
+delete 3
 list
 bye
