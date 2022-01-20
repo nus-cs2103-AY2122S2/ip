@@ -45,26 +45,33 @@ public class Duke {
             String[] result;
             String keyword = strArr[0];
             Task task = null;
-            switch(keyword){
-                case "mark":
-                    System.out.println(mark(strArr[1]));
-                    break;
-                case "unmark":
-                    System.out.println(unmark(strArr[1]));
-                    break;
-                case "todo":
-                    task = new Todo((strArr[1]));
-                    break;
-                case "deadline":
-                    result = strArr[1].split("/by", 2);
-                    task = new Deadline(result[0],result[1]);
-                    break;
-                case "event":
-                    result = strArr[1].split("/at", 2);
-                    task = new Event(result[0],result[1]);
-                    break;
-                default:
-                    break;
+
+            try {
+                switch (keyword) {
+                    case "mark":
+                        System.out.println(mark(strArr[1]));
+                        break;
+                    case "unmark":
+                        System.out.println(unmark(strArr[1]));
+                        break;
+                    case "todo":
+                        task = new Todo((strArr[1]));
+                        break;
+                    case "deadline":
+                        result = strArr[1].split("/by", 2);
+                        task = new Deadline(result[0], result[1]);
+                        break;
+                    case "event":
+                        result = strArr[1].split("/at", 2);
+                        task = new Event(result[0], result[1]);
+                        break;
+                    default:
+                        // Unknown keyword
+                        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        break;
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Not enough fields, please check your inputs and try again.");
             }
 
             if(task != null){
