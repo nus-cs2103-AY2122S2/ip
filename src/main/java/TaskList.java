@@ -1,31 +1,48 @@
 import java.util.ArrayList;
 
-class TaskList<String> {
-    ArrayList<String> arrayList;
+public class TaskList<Task> {
+    ArrayList<Task> arrayList;
 
     TaskList() {
-        this.arrayList = new ArrayList<String>();
+        this.arrayList = new ArrayList<Task>();
     }
 
     public int length() {
         return this.arrayList.size();
     }
 
-    public void add(String item) {
+    public void add(Task item) {
         this.arrayList.add(item);
     }
 
     public void list() {
         for (int i = 0; i < arrayList.size(); i++) {
-            System.out.println((i + 1) + ". " + arrayList.get(i));
+            System.out.println((i + 1) + ". " + arrayList.get(i).toString());
         }
     }
 
-    public boolean allTasksCompleted() {
-        for (int i = 0; i < arrayList.size(); i++) {
-            String task = arrayList.get(i);
+    public void mark(int index) {
+        Task task = arrayList.get(index);
+        if (task != null) {
+            String taskName = "taskName";
+//            String taskName = task.getTaskName();
+            Task newTask = new Task(taskName, true);
+            arrayList.add(index, newTask);
         }
-        return true;
+    }
+
+    public void unmark(int index) {
+        Task task = arrayList.get(index);
+        if (task != null) {
+            String taskName = "taskName";
+//             String taskName = task.getTaskName();
+            Task newTask = new Task(taskName, false);
+            arrayList.add(index, newTask);
+        }
+    }
+
+    public Task getTask(int index) {
+        return arrayList.get(index);
     }
 
 }
