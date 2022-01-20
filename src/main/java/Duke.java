@@ -1,3 +1,6 @@
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -87,6 +90,8 @@ public class Duke {
                         }
                     } catch (CortanaException e) {
                         System.out.println(e.getMessage());
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                 }
             }
@@ -106,12 +111,13 @@ public class Duke {
         }
     }
 
-    public static void addTask(Task task) {
+    public static void addTask(Task task) throws IOException {
         if (taskSet.contains(task)) {
             System.out.println("Task already exists!");
         } else {
             taskSet.add(task);
             tasksArrayList.add(task);
+            writeFile();
             String taskOrTasks = tasksArrayList.size() <= 1 ? "task" : "tasks";
             System.out.println("Got it. I've added this task: \n" + " " + task +
                     "\nNow you have " + tasksArrayList.size() + " " + taskOrTasks + " in the list.");
@@ -122,6 +128,7 @@ public class Duke {
         try {
             Task task = tasksArrayList.get(index);
             task.markAsDone();
+            writeFile();
             System.out.println("Nice! I've marked this task as done: \n " + task);
         } catch (Exception e) {
             System.out.println("No such task!");
@@ -132,6 +139,7 @@ public class Duke {
         try {
             Task task = tasksArrayList.get(index);
             task.markAsUndone();
+            writeFile();
             System.out.println("OK, I've marked this task as not done yet: \n " + task);
         } catch (Exception e) {
             System.out.println("No such task!");
@@ -143,6 +151,7 @@ public class Duke {
             Task taskDeleted = tasksArrayList.get(index);
             tasksArrayList.remove(index);
             taskSet.remove(taskDeleted);
+            writeFile();
             String taskOrTasks = tasksArrayList.size() <= 1 ? "task" : "tasks";
             System.out.println("Noted. I've removed this task: \n" + " " + taskDeleted + "\n" +
                     "Now you have " + tasksArrayList.size() + " " + taskOrTasks + " in the list.");
@@ -151,8 +160,80 @@ public class Duke {
         }
     }
 
+    public static void createDirectoryAndFileIfNotExist() {
+        try {
+            String path = Paths.get("").toAbsolutePath() + "/data/";
+            File directory = new File(path);
+            boolean wasDirectoryCreated = directory.mkdir();
+            if (wasDirectoryCreated) {
+                System.out.println("Created directory " + directory);
+            }
+            File taskFile = new File(path + "task.txt");
+            boolean wasFileCreated = taskFile.createNewFile();
+            if (wasFileCreated) {
+                System.out.println("Created task.txt under " + directory);
+            }
+        } catch (IOException e) {
+            System.out.println("Something went wrong during creating directory or creating file");
+        }
+    }
+
+    public static void loadFile() {
+        try {
+            String path = Paths.get("").toAbsolutePath() + "/data/";
+            File taskFile = new File(path + "task.txt");
+            FileInputStream fileInputStream = new FileInputStream(taskFile);
+            Scanner scanner = new Scanner(fileInputStream);
+            while(scanner.hasNextLine()) {
+                Task taskToAdd = parseTask(scanner.nextLine());
+                taskSet.add(taskToAdd);
+                tasksArrayList.add(taskToAdd);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found!");
+        }
+    }
+
+    public static void writeFile() throws IOException {
+        String path = Paths.get("").toAbsolutePath() + "/data/";
+        File taskFile = new File(path + "task.txt");
+        FileOutputStream fileOutputStream = new FileOutputStream(taskFile, false);
+        for (Task task : tasksArrayList) {
+            String taskToWrite = task.toString() + '\n';
+            fileOutputStream.write(taskToWrite.getBytes(StandardCharsets.UTF_8));
+        }
+    }
+
+    public static Task parseTask(String taskInString) {
+        char type = taskInString.charAt(1);
+        boolean status = taskInString.charAt(4) == 'X';
+        if (type == 'D') {
+            String[] actualTask = taskInString.substring(7).split("\\(by: ");
+            String description = actualTask[0];
+            String by = actualTask[1].replaceAll("\\)", "");
+            Deadline deadline = new Deadline(description, by);
+            deadline.isDone = status;
+            return deadline;
+        } else if (type == 'E') {
+            String[] actualTask = taskInString.substring(7).split("\\(at: ");
+            String description = actualTask[0];
+            String at = actualTask[1].replaceAll("\\)", "");
+            Event event = new Event(description, at);
+            event.isDone = status;
+            return event;
+        } else if (type == 'T') {
+            String description = taskInString.substring(7);
+            Todo todo = new Todo(description);
+            todo.isDone = status;
+            return todo;
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         greet();
+        createDirectoryAndFileIfNotExist();
+        loadFile();
         simpleTodo();
     }
 }
