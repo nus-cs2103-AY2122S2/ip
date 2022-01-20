@@ -11,24 +11,33 @@ public class Duke {
         System.out.println("Hello I'm\n" + logo);
         System.out.println("What can I do for you?");
 
-        ArrayList<String> chatHistory = new ArrayList<String>();
+        ArrayList<Task> taskHistory = new ArrayList<Task>();
         Scanner userInput = new Scanner(System.in);
         String nextInput = userInput.nextLine();
 
         while (!nextInput.equals("bye")) {
-            switch (nextInput) {
-                case "list":
-                    int count = 1;
-                    for (String record : chatHistory) {
-                        System.out.println(count + ". " + record);
-                        count++;
-                    }
-                    break;
-
-                default:
-                    chatHistory.add(nextInput);
-                    System.out.println("added: " + nextInput);
-                
+            String[] words = nextInput.split(" ");
+            String command = words[0];
+            if (command.equals("list")) {
+                int count = 1;
+                for (Task record : taskHistory) {
+                    System.out.println(count + ". " + record.toString());
+                    count++;
+                }
+            } else if (command.equals("mark")) {
+                int taskID = Integer.valueOf(words[1]);
+                taskHistory.get(taskID -1).markDone();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(taskHistory.get(taskID -1).toString());
+            }else if (command.equals("unmark")) {
+                int taskID = Integer.valueOf(words[1]);
+                taskHistory.get(taskID -1).markUndone();
+                System.out.println("OK, I've marked this task as not done yet:");
+                System.out.println(taskHistory.get(taskID -1).toString());
+            } else {
+                Task t = new Task(nextInput);
+                taskHistory.add(t);
+                System.out.println("added: " + nextInput);
             }
             nextInput = userInput.nextLine();
         }
