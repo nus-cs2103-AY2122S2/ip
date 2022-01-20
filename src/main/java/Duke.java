@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Duke {
@@ -18,15 +20,6 @@ public class Duke {
     private static final String TEXT_ACKNOWLEDGE_DELETE = "Noted. I've removed this task:";
     private static final String TEXT_ACKNOWLEDGE_TASK = "Got it. I've added this task:";
 
-    private static final String KEY_EXIT = "bye";
-    private static final String KEY_LIST = "list";
-    private static final String KEY_MARK = "mark";
-    private static final String KEY_UNMARK = "unmark";
-    private static final String KEY_DELETE = "delete";
-    private static final String KEY_TODO = "todo";
-    private static final String KEY_DEADLINE = "deadline";
-    private static final String KEY_EVENT = "event";
-
     private final List<Task> tasks = new ArrayList<>();
     private boolean shouldExit = false;
 
@@ -41,17 +34,22 @@ public class Duke {
         while (!shouldExit) {
             String input = scanner.nextLine();
             String[] tokens = input.split(" ", 2);
-            String command = tokens[0];
-            String[] params = new String[0];
-
-            if (tokens.length > 1) {
-                params = tokens[1].split("\\s/\\w\\w\\s", 2);
-            }
-
-            String[] paramsPadded = Arrays.copyOf(params, 2);
 
             try {
-                processInput(command, paramsPadded);
+                CommandType commandType = CommandType.fromString(tokens[0]);
+                Map<String, String> paramMap = new HashMap<>();
+
+                if (commandType.getArgs().length > 0 && tokens.length > 1) {
+                    String regex = commandType.getRegex();
+                    String paramsRaw = tokens[1];
+                    String[] paramsSplit = (regex == null) ? new String[]{paramsRaw} : paramsRaw.split(regex);
+
+                    for (int i = 0; i < paramsSplit.length; i++) {
+                        paramMap.put(commandType.getArgs()[i], paramsSplit[i]);
+                    }
+                }
+
+                processInput(commandType, paramMap);
             } catch (DukeException e) {
                 printDivider();
                 printTabbed(e.toString(), 1);
@@ -61,35 +59,33 @@ public class Duke {
         }
     }
 
-    private void processInput(String command, String[] params) {
-        switch (command) {
-        case KEY_EXIT:
+    private void processInput(CommandType commandType, Map<String, String> paramMap) {
+        switch (commandType) {
+        case EXIT:
             sayGoodbye();
             shouldExit = true;
             break;
-        case KEY_LIST:
+        case LIST:
             listTasks();
             break;
-        case KEY_MARK:
-            markTask(Integer.parseInt(params[0]) - 1);
+        case MARK_TASK:
+            markTask(Integer.parseInt(paramMap.get("index")) - 1);
             break;
-        case KEY_UNMARK:
-            unmarkTask(Integer.parseInt(params[0]) - 1);
+        case UNMARK_TASK:
+            unmarkTask(Integer.parseInt(paramMap.get("index")) - 1);
             break;
-        case KEY_DELETE:
-            deleteTask(Integer.parseInt(params[0]) - 1);
+        case DELETE_TASK:
+            deleteTask(Integer.parseInt(paramMap.get("index")) - 1);
             break;
-        case KEY_TODO:
-            addTask(new ToDo(params[0]));
+        case ADD_TODO:
+            addTask(new ToDo(paramMap.get("description")));
             break;
-        case KEY_DEADLINE:
-            addTask(new Deadline(params[0], params[1]));
+        case ADD_DEADLINE:
+            addTask(new Deadline(paramMap.get("description"), paramMap.get("by")));
             break;
-        case KEY_EVENT:
-            addTask(new Event(params[0], params[1]));
+        case ADD_EVENT:
+            addTask(new Event(paramMap.get("description"), paramMap.get("at")));
             break;
-        default:
-            throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
     }
 
