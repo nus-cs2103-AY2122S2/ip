@@ -3,12 +3,36 @@ import java.util.Scanner;  // Import the Scanner class
 public class Duke {
     static String lineDivider = "____________________________________________________________\n";
     static String greet = lineDivider
-            + "Hello! I'm Mum!\n"
-            + "What can I do for you?\n"
+            + "Hello! I'm Mum!\nWhat can I do for you?\nType \"commands\" to get a list of all commands.\n"
             + lineDivider;
     static String goodBye = "Bye. Hope to see you again soon!";
     static String addedTask = lineDivider + "Got it. I've added this task:\n" +
             "   %s\nNow you have %d tasks in the list.\n" + lineDivider;
+
+    enum Command {list, todo, event, deadline, bye, mark, unmark, delete}
+
+    public static void printCommands() {
+        System.out.printf(lineDivider + "COMMANDS:\n" + lineDivider);
+            switch (Command.list) {
+                case list:
+                    System.out.println("list    | Get a list of tasks you have");
+                case todo:
+                    System.out.println("todo    | One of the 3 tasks type. eg: todo_<yourtask>");
+                case event:
+                    System.out.println("event   | One of the 3 tasks type. eg: event_<yourtask>_/at_<time>");
+                case deadline:
+                    System.out.println("deadline| One of the 3 tasks type. eg: deadline_<yourtask>_/by_<time>");
+                case bye:
+                    System.out.println("bye     | End this phone call");
+                case unmark:
+                    System.out.println("unmark  | Unmark the task as not done. eg: unmark_<task number>");
+                case mark:
+                    System.out.println("mark    | Mark the task as done. eg: mark_<task number>");
+                case delete:
+                    System.out.println("delete  | Delete the task from list. eg: delete_<task number>");
+            }
+        System.out.println(lineDivider);
+    }
 
     public static void listOut(ArrayList<Task> list, int n) {
         System.out.printf(lineDivider + "Here are the tasks in your list:\n");
@@ -171,7 +195,9 @@ public class Duke {
                 if (echo.equals("bye")) {
                     break;
                 }
-                if (echo.equalsIgnoreCase("list")) {
+                if (echo.equalsIgnoreCase("commands")) {
+                    printCommands();
+                } else if (echo.equalsIgnoreCase("list")) {
                     listOut(listOfTasks, n);
                     System.out.printf(lineDivider);
                 } else if (echo.toLowerCase().contains("todo")) {
