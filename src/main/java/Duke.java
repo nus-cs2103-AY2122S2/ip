@@ -7,21 +7,41 @@ public class Duke {
     public static void addList() {
         Scanner sc = new Scanner(System.in);
         String input;
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<Task> taskList = new ArrayList<>();
 
         while(true) {
             input = sc.nextLine();
-            if (input.equals("bye")) {
+            String inputArr[] = input.split(" ",2);
+
+            if (inputArr[0].equals("bye")) {
                 System.out.println(line + "Bye. Hope to see you again soon!\n" + line);
                 break;
-            } else if(input.equals("list")) {
-                System.out.println(line);
-                for(int i = 1; i <= list.size(); i++) {
-                    System.out.println(i + ". " + list.get(i - 1));
+            } else if(inputArr[0].equals("list")) {
+                System.out.println(line + "Here are the tasks in your list:\n");
+                for (int i = 1; i <= taskList.size(); i++) {
+                    System.out.println(i + ".[" + taskList.get(i - 1).getStatusIcon() + "] "
+                            + taskList.get(i - 1).description);
                 }
                 System.out.println(line);
+
+            } else if(inputArr[0].equals("mark") && Integer.parseInt(inputArr[1]) > 0
+                    && Integer.parseInt(inputArr[1]) <= taskList.size()) {
+                int taskNum = Integer.parseInt(inputArr[1]) - 1;
+                taskList.get(taskNum).markAsDone();
+                System.out.println(line + "Nice! I've marked this task as done:\n");
+                System.out.println("[" + taskList.get(taskNum).getStatusIcon() + "] "
+                        + taskList.get(taskNum).description + line);
+
+            } else if(inputArr[0].equals("unmark") && Integer.parseInt(inputArr[1]) > 0
+                    && Integer.parseInt(inputArr[1]) <= taskList.size()) {
+                    int taskNum = Integer.parseInt(inputArr[1]) - 1;
+                    taskList.get(taskNum).markAsNotDone();
+                    System.out.println(line + "OK, I've marked this task as not done yet:\n");
+                    System.out.println("[" + taskList.get(taskNum).getStatusIcon() + "] "
+                            + taskList.get(taskNum).description + line);
+
             } else {
-                list.add(input);
+                taskList.add(new Task(input));
                 System.out.println(line + "added: " + input + line);
             }
         }
@@ -39,7 +59,7 @@ public class Duke {
         System.out.println(line + "Hello! I'm Duke\n" +
                 "What can I do for you?\n" + line);
 
-        Duke.addList();//level-2
+        Duke.addList();//level-3
 
 
     }
