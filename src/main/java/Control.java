@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Control {
-    private ArrayList<String> tasks;
+    private ArrayList<Task> tasks;
     public Control() {
         String start =
                 "________________________________\n"
@@ -13,10 +13,11 @@ public class Control {
         System.out.println(start);
     }
 
-    public void add(String task) {
+    public void add(String taskStr) {
+        Task task = new Task(taskStr, false);
         this.tasks.add(task);
         System.out.println("________________________________");
-        System.out.println("From Duke_two: \n\tAdded to your tasks: " + task);
+        System.out.println("From Duke_two: \n\tAdded to your tasks: " + task.toString());
     }
 
     public void bye() {
@@ -26,11 +27,30 @@ public class Control {
 
     public void list() {
         int leng = tasks.toArray().length;
+        String isTaskCheck = "";
         for (int i = 0; i < leng; i++) {
-            String task = tasks.get(i);
+            Task task = tasks.get(i);
             int num = i + 1;
-            System.out.println(num + ": " + task);
+            isTaskCheck = task.getChecked() ? "X" : " ";
+            System.out.println(num + ": [" + isTaskCheck + "] " + task.toString());
         }
     }
+
+    public void taskCheck(String taskStr) {
+        String[] taskArr = taskStr.split(" ");
+        int index = Integer.parseInt(taskArr[1]) - 1;
+        Task task = this.tasks.get(index);
+        String isTaskCheck = "";
+        if (taskArr[0].equals("mark")) {
+            task.setChecked(true);
+            isTaskCheck = task.getChecked() ? "X" : " ";
+            System.out.println("Nice! I've marked this task as done: \n\t[" + isTaskCheck + "] " + task.toString());
+        } else {
+            this.tasks.get(index).setChecked(false);
+            isTaskCheck = task.getChecked() ? "X" : " ";
+            System.out.println("Alright, I've marked this task as not done yet: \n\t[" + isTaskCheck + "] " + task.toString());
+        }
+    }
+
 
 }

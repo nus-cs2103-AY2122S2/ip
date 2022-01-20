@@ -2,39 +2,31 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-//    private ArrayList<String> tasks;
-//    public Duke() {
-//        String start =
-//                "________________________________\n"
-//                        + "Hello! I am Duke.\n"
-//                        + "Your Personal Assistant.\n"
-//                        + "What can I do for you?\n"
-//                        + "________________________________";
-//        this.tasks = new ArrayList<>();
-//        System.out.println(start);
-//    }
-//
-//    public static void add(String task) {
-//        tasks.add(task);
-//        System.out.println("________________________________");
-//        System.out.println("Added to your tasks: " + task);
-//    }
-
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        Control control = new Control();
-        while (true) {
-            String command = scanner.nextLine();
-            if (command.equals("bye")) {
-                control.bye();
-                break;
-            }else if (command.equals("list")) {
-                control.list();
-            } else {
-                control.add(command);
+        try {
+            Scanner scanner = new Scanner(System.in);
+            Control control = new Control();
+            while (true) {
+                String command = scanner.nextLine();
+                String commandApp = command + " ";
+                String[] commandArr = commandApp.split(" ");
+                String firstWord = commandArr[0];
+                if (firstWord.equals("bye")) {
+                    control.bye();
+                    break;
+                }else if (firstWord.equals("list")) {
+                    control.list();
+                } else if (firstWord.equals("mark") || firstWord.equals("unmark")) {
+                    control.taskCheck(command);
+                } else {
+                    control.add(command);
+                }
+                System.out.println("________________________________");
             }
-            System.out.println("________________________________");
+        } catch (NumberFormatException e) {
+            System.out.println("An invalid task index has been inputted");
         }
+
     }
 //    public static void main(String[] args) {
 //        String logo = " ____        _        \n"
