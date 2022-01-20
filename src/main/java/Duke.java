@@ -11,81 +11,145 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
+        String nothing = "I can't read your mind, doc! Not yet, anyway.";
+
+        String specific = "You're gonna need to be more specific.\n";
+        String tryTodo = "Try 'todo An exciting human task'";
+        String tryDeadline = "Try 'deadline A task /by Sunday'";
+        String tryEvent = "Try 'event An event /at 7PM'";
+        String tryMark = "Try 'mark 2'";
+        String tryUnmark = "Try 'Unmark 1'";
+
+        String unknown = "Sorry, I don't quite understand what you mean by '";
+
         // Create new variables
         String tempString;
-        Echo tempEcho = new Echo();
+        Echo echo = new Echo();
         Memory memory = new Memory();
         boolean looping = true;
 
-        tempEcho.echoString("Heya! I'm Duke!\n" +
+        echo.echoString("Heya! I'm Duke!\n" +
                 "What can I do for ya?");
 
         // While loop
         while(looping) {
 
             tempString = scanner.nextLine();
+            String[] tempStrArray = tempString.split(" ", 2);
 
-            // If-else chain. Was switch case
-            if (tempString.equals("bye")) {
-                break;
-            } else if (tempString.equals("list")) {
-                memory.listAll();
-            } else if (tempString.equals("mark")) {         // Testing mark
-                tempEcho.echoString("'mark' is an incomplete command. \n" +
-                        "Try 'mark 1' to mark your task as done,\n" +
-                        "or 'mark my calendar' to add a task instead.");
-            } else if (tempString.startsWith("mark ")) {
-                String[] tempStrArray = tempString.split(" ", 2);
+            switch (tempStrArray[0]) {
 
-                // If user only inputs 'mark '
-                if (tempStrArray.length <= 1) {
-                    tempEcho.echoString("'mark' is an incomplete command. \n" +
-                            "Try 'mark 1' to mark your task as done,\n" +
-                            "or 'mark my calendar' to add a task instead.");
-                } else {
+                case "":
+                    echo.echoString(nothing);
+                    break;
 
-                    String testString = tempStrArray[1];
+                case "bye":
+                    looping = false;
+                    break;
 
-                    // Test if single number after 'mark'
-                    try {
-                        int address = Integer.parseInt(testString);
-                        memory.setDone(address);
+                case "list":
+                    memory.listAll();
+                    break;
+
+                case "todo":
+                    if (tempStrArray.length == 1) {
+                        echo.echoString(specific + tryTodo);
+                    } else {
+                        //Empty to-do
+                        if (tempStrArray[1] == "") {
+                            echo.echoString(specific + tryTodo);
+                        } else {
+                                memory.addTask(tempStrArray[1]);
+                        }
                     }
-                    catch (NumberFormatException exception){
-                        memory.addTask(tempString);
-                    }
-                }
-            } else if (tempString.equals("unmark")) {       // Testing unmark
-                tempEcho.echoString("'unmark' is an incomplete command. \n" +
-                        "Try 'unmark 1' to mark your task as undone,\n" +
-                        "or 'unmark my calendar' to add a task instead.");
-            } else if (tempString.startsWith("unmark ")) {
-                String[] tempStrArray = tempString.split(" ", 2);
+                    break;
 
-                // If user only inputs 'unmark '
-                if (tempStrArray.length <= 1) {
-                    tempEcho.echoString("'unmark' is an incomplete command. \n" +
-                            "Try 'unmark 1' to mark your task as undone,\n" +
-                            "or 'unmark my calendar' to add a task instead.");
-                } else {
+                case "deadline":
+                    if (tempStrArray.length == 1) {
+                        echo.echoString(specific + tryDeadline);
+                    } else {
+                        String[] tempDeadArray = tempStrArray[1].split(" /by ", 2);
 
-                    String testString = tempStrArray[1];
+                        if (tempDeadArray.length == 1) {
+                            echo.echoString(specific + tryDeadline);
+                        } else {
+                            if (tempDeadArray[0].equals("")) {
+                                echo.echoString(specific + "Don't forget the task's name");
+                            } else if (tempDeadArray[1].equals("")) {
+                                echo.echoString(specific + "Don't forget the task's deadline");
+                            } else {
+                                memory.addDeadline(tempDeadArray[0], tempDeadArray[1]);
+                            }
+                        }
+                    }
+                    break;
 
-                    // Test if single number after 'unmark'
-                    try {
-                        int address = Integer.parseInt(testString);
-                        memory.setUndone(address);
+                case "event":
+                    if (tempStrArray.length == 1) {
+                        echo.echoString(specific + tryEvent);
+                    } else {
+                        String[] tempEventArray = tempStrArray[1].split(" /at ", 2);
+
+                        if (tempEventArray.length == 1) {
+                            echo.echoString(specific + tryEvent);
+                        } else {
+                            if (tempEventArray[0].equals("")) {
+                                echo.echoString(specific + "Don't forget the event's name");
+                            } else if (tempEventArray[1].equals("")) {
+                                echo.echoString(specific + "Don't forget the event's time");
+                            } else {
+                                memory.addEvent(tempEventArray[0], tempEventArray[1]);
+                            }
+                        }
                     }
-                    catch (NumberFormatException exception){
-                        memory.addTask(tempString);
+                    break;
+
+                case "mark":
+                    if (tempStrArray.length == 1) {
+                        echo.echoString(specific + "Which task do you want me to mark as done?\n" +
+                                tryMark);
+                    } else {
+                        String testString = tempStrArray[1];
+
+                        // Test if single number after 'mark'
+                        try {
+                            int address = Integer.parseInt(testString);
+                            memory.setDone(address);
+                        }
+                        catch (NumberFormatException exception) {
+                            echo.echoString("You need to give me a number doc!\n" +
+                                    tryMark);
+                        }
                     }
-                }
-            } else {
-                memory.addTask(tempString);
+                    break;
+
+                case "unmark":
+                    if (tempStrArray.length == 1) {
+                        echo.echoString(specific + "Which task do you want me to mark as undone?\n" +
+                                tryUnmark);
+                    } else {
+                        String testString = tempStrArray[1];
+
+                        // Test if single number after 'unmark'
+                        try {
+                            int address = Integer.parseInt(testString);
+                            memory.setUndone(address);
+                        }
+                        catch (NumberFormatException exception) {
+                            echo.echoString("You need to give me a number doc!\n" +
+                                    tryUnmark);
+                        }
+                    }
+                    break;
+
+                    // If input is unexpected
+                default:
+                    echo.echoString(unknown + tempStrArray[0] + "'");
+                    break;
             }
         }
 
         // The last thing Duke says
-        tempEcho.echoString("Ok then, see ya!");
+        echo.echoString("Ok then, see ya!");
     }
 }

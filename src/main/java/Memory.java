@@ -12,7 +12,19 @@ public class Memory {
     public void addTask(String text) {
         taskMem[size] = new Task(text);
         size++;
-        echo.echoString("added: " + text);
+        echo.echoString("added task: " + getString(size - 1));
+    }
+
+    public void addDeadline(String name, String time) {
+        taskMem[size] = new Deadline(name, time);
+        size++;
+        echo.echoString("added deadline: " + getString(size - 1));
+    }
+
+    public void addEvent(String name, String time) {
+        taskMem[size] = new Event(name, time);
+        size++;
+        echo.echoString("added event: " + getString(size - 1));
     }
 
     public void setDone(int address) {
@@ -32,7 +44,7 @@ public class Memory {
             echo.echoString("Memory address requested out of bounds!");
         } else {
             getTask(address).setUndone();
-            echo.echoString("How did you undo this task?\n  " +
+            echo.echoString("This task is now undone:\n  " +
                     getString(address));
         }
     }

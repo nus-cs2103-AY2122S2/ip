@@ -30,6 +30,6 @@ public class Task {
         } else {
             mark = "[ ] ";
         }
-        return mark + this.name;
+        return "[T]" + mark + this.name;
     }
 }
