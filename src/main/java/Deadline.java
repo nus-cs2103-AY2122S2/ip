@@ -7,12 +7,8 @@ public class Deadline extends Task{
         this.deadline = deadline;
     }
 
-    public String isTaskCheck() {
-        return super.getChecked() ? "X" : " ";
-    }
-
     @Override
     public String toString() {
-        return "[" + super.getTaskLabel() + "][" + isTaskCheck() + "] " + super.toString() + " (by: " + this.deadline + ")";
+        return "[" + super.getTaskLabel() + "][" + super.isTaskCheck() + "] " + super.toString() + " (by: " + this.deadline + ")";
     }
 }

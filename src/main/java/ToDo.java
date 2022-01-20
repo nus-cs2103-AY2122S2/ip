@@ -3,12 +3,8 @@ public class ToDo extends Task{
         super(name, isChecked, taskLabel);
     }
 
-    public String isTaskCheck() {
-        return super.getChecked() ? "X" : " ";
-    }
-
     @Override
     public String toString() {
-        return "[" + super.getTaskLabel() + "][" + isTaskCheck() + "] " + super.toString();
+        return "[" + super.getTaskLabel() + "][" + super.isTaskCheck() + "] " + super.toString();
     }
 }

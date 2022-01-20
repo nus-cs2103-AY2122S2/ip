@@ -25,4 +25,8 @@ public class Task {
     public void setChecked(boolean check) {
         this.isChecked = check;
     }
+
+    public String isTaskCheck() {
+        return this.isChecked ? "X" : " ";
+    }
 }

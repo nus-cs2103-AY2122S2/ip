@@ -6,12 +6,8 @@ public class Event extends Task{
         this.eventDate = eventDate;
     }
 
-    public String isTaskCheck() {
-        return super.getChecked() ? "X" : " ";
-    }
-
     @Override
     public String toString() {
-        return "[" + super.getTaskLabel() + "][" + isTaskCheck() + "] " + super.toString() + " (at: " + this.eventDate + ")";
+        return "[" + super.getTaskLabel() + "][" + super.isTaskCheck() + "] " + super.toString() + " (at: " + this.eventDate + ")";
     }
 }
