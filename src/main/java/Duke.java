@@ -77,7 +77,18 @@ public class Duke {
 
 
             } else if (firstWord.equals("delete")) {
-                System.out.println("mark");
+                if (itemIndex > taskList.length()) {
+                    System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                    System.out.println("Out of bounds!");
+                    System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                } else {
+                    System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                    System.out.println("Noted. I've removed this task: ");
+                    System.out.println(taskList.getTask(itemIndex - 1).toString());
+                    taskList.delete(itemIndex - 1);
+                    System.out.println(String.format("Now you have %d task(s) in the list.", taskList.getSize()));
+                    System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                }
 
             } else if (firstWord.equals("todo")){
                 if (index == -1) {

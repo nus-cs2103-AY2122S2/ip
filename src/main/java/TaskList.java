@@ -35,6 +35,17 @@ public class TaskList {
         }
     }
 
+    public void delete(int index) {
+        Task task = arrayList.get(index);
+        if (task != null) {
+            arrayList.remove(index);
+        }
+    }
+
+    public int getSize() {
+        return this.arrayList.size();
+    }
+
     public Task getTask(int index) {
         return arrayList.get(index);
     }
