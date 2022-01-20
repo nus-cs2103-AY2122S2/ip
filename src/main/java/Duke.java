@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.List;
+import java.util.Arrays;
 import java.util.ArrayList;
 
 public class Duke {
@@ -43,10 +44,35 @@ public class Duke {
                     break;
                 }
 
-                default: {
-                    String instructionName = String.join(" ", instruction);
-                    tasks.add(new Task(instructionName));
-                    System.out.println("added: " + instructionName);
+                case "todo": {
+                    String instructionName = String.join(" ", Arrays.copyOfRange(instruction, 1, instruction.length));
+                    Task newTodo = new Todo(instructionName);
+                    tasks.add(newTodo);
+                    System.out.println("Got it. I've added this task\n" + newTodo);
+                    System.out.println(String.format("You have %d tasks in the list", tasks.size()));
+                    break;
+                }
+
+                case "event": {
+                    int index = Arrays.asList(instruction).indexOf("/at");
+                    String instructionName = String.join(" ", Arrays.copyOfRange(instruction, 1, index));
+                    String time = String.join(" ", Arrays.copyOfRange(instruction, index + 1, instruction.length));
+                    Task newEvent = new Event(instructionName, time);
+                    tasks.add(newEvent);
+                    System.out.println("Got it. I've added this task\n" + newEvent);
+                    System.out.println(String.format("You have %d tasks in the list", tasks.size()));
+                    break;
+                }
+
+                case "deadline": {
+                    int index = Arrays.asList(instruction).indexOf("/by");
+                    String instructionName = String.join(" ", Arrays.copyOfRange(instruction, 1, index));
+                    String time = String.join(" ", Arrays.copyOfRange(instruction, index + 1, instruction.length));
+                    Task newDeadline = new Deadline(instructionName, time);
+                    tasks.add(newDeadline);
+                    System.out.println("Got it. I've added this task\n" + newDeadline);
+                    System.out.println(String.format("You have %d tasks in the list", tasks.size()));
+                    break;
                 }
             }
             System.out.println("");
