@@ -9,7 +9,6 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> arr = new ArrayList<>();
-        int countId = 1;
 
         System.out.println("____________________________________________________________" + '\n'
                 + "Hello! I'm Duke" + '\n'
@@ -17,68 +16,102 @@ public class Duke {
                 + "____________________________________________________________");
 
 
-        while (sc.hasNext()) {
-            String curr = sc.nextLine();
-            String strArr[] = curr.split(" ", 2);
-            String command = strArr[0];
+        loop: while (sc.hasNext()) {
+            try {
+                String curr = sc.nextLine();
+                String strArr[] = curr.split(" ", 2);
+                String cmd = strArr[0];
 
-            switch(command) {
-                case "list":
-                    displayList(arr);
-                    continue;
-                case "mark":
-                    arr.get(Integer.parseInt(strArr[1]) - 1).setComplete();
-                    System.out.println("Nice! I've marked this task as done: ");
-                    System.out.println(arr.get(Integer.parseInt(strArr[1]) - 1).toString());
-                    continue;
-                case "unmark":
-                    arr.get(Integer.parseInt(strArr[1]) - 1).setIncomplete();
-                    System.out.println("OK, I've marked this task as not done yet: ");
-                    System.out.println(arr.get(Integer.parseInt(strArr[1]) - 1).toString());
-                    continue;
-                case "todo":
-                    System.out.println("Got it. I've added this task:  ");
-                    arr.add(new ToDo(strArr[1]));
-                    System.out.println(arr.get(arr.size() - 1).toString());
-                    System.out.println("Now you have " + arr.size() + " tasks in the list.");
-                    continue;
-                case "deadline": {
-                    String strArrDate[] = strArr[1].split("/by ", 2);
-                    String eventName = strArrDate[0];
-                    String eventDate = strArrDate[1];
-                    System.out.println("Got it. I've added this task:  ");
-                    arr.add(new Deadline(eventName, eventDate));
-                    System.out.println(arr.get(arr.size() - 1).toString());
-                    System.out.println("Now you have " + arr.size() + " tasks in the list.");
-                    continue;
+                Commands command = validateInput(cmd);
+
+                switch(command) {
+                    case LIST:
+                        displayList(arr);
+                        continue;
+                    case MARK: {
+                        try {
+                            Integer currentTask = Integer.parseInt(strArr[1]) - 1;
+                            arr.get(currentTask).setComplete();
+                            System.out.println("Nice! I've marked this task as done: ");
+                            System.out.println(arr.get(currentTask).toString());
+                            continue;
+                        } catch (NumberFormatException e){
+                            throw new DukeException("Please enter a number of the item in the list you wish to mark!");
+                        }
+                    }
+                    case UNMARK: {
+                        try {
+                            Integer currentTask = Integer.parseInt(strArr[1]) - 1;
+                            arr.get(currentTask).setIncomplete();
+                            System.out.println("OK, I've marked this task as not done yet: ");
+                            System.out.println(arr.get(currentTask).toString());
+                            continue;
+                        } catch (NumberFormatException e){
+                            throw new DukeException("Please enter a number of the item in the list you wish to unmark!");
+                        }
+                    }
+                    case TODO:
+                        try {
+                            arr.add(new ToDo(strArr[1]));
+                            System.out.println("Got it. I've added this task:  ");
+                            System.out.println(arr.get(arr.size() - 1).toString());
+                            System.out.println("Now you have " + arr.size() + " tasks in the list.");
+                            continue;
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            throw new DukeException("The description of a todo cannot be empty.");
+                        }
+                    case DEADLINE: {
+                        String strArrDate[] = strArr[1].split("/by ", 2);
+                        String eventName = strArrDate[0];
+                        String eventDate = strArrDate[1];
+                        System.out.println("Got it. I've added this task:  ");
+                        arr.add(new Deadline(eventName, eventDate));
+                        System.out.println(arr.get(arr.size() - 1).toString());
+                        System.out.println("Now you have " + arr.size() + " tasks in the list.");
+                        continue;
+                    }
+                    case EVENT: {
+                        String strArrDate[] = strArr[1].split("/at ", 2);
+                        String eventName = strArrDate[0];
+                        String eventDate = strArrDate[1];
+                        System.out.println("Got it. I've added this task:  ");
+                        arr.add(new Event(eventName, eventDate));
+                        System.out.println(arr.get(arr.size() - 1).toString());
+                        System.out.println("Now you have " + arr.size() + " tasks in the list.");
+                        continue;
+                    }
+                    case REMOVE: {
+                        try {
+                            Integer currentTask = Integer.parseInt(strArr[1]) - 1;
+                            Task toRemove = arr.get(currentTask);
+                            System.out.println("Noted. I've removed this task: ");
+                            System.out.println(toRemove.toString());
+                            arr.remove(toRemove);
+                            System.out.println("Now you have " + arr.size() + " tasks in the list.");
+                            continue;
+                        } catch (NumberFormatException e){
+                            throw new DukeException("Please enter the number of the item in the list you wish to remove!");
+                        }
+                    }
+                    case BYE:
+                        break loop;
                 }
-                case "event": {
-                    String strArrDate[] = strArr[1].split("/at ", 2);
-                    String eventName = strArrDate[0];
-                    String eventDate = strArrDate[1];
-                    System.out.println("Got it. I've added this task:  ");
-                    arr.add(new Event(eventName, eventDate));
-                    System.out.println(arr.get(arr.size() - 1).toString());
-                    System.out.println("Now you have " + arr.size() + " tasks in the list.");
-                    continue;
-                }
-                case "remove": {
-                    Task toRemove = arr.get(Integer.parseInt(strArr[1]) - 1);
-                    System.out.println("Noted. I've removed this task: ");
-                    System.out.println(toRemove.toString());
-                    arr.remove(toRemove);
-                    System.out.println("Now you have " + arr.size() + " tasks in the list.");
-                    continue;
-                }
-                case "bye":
-                    break;
-                default:
-                    System.out.println("Invalid command, try again");
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
         }
         System.out.println("____________________________________________________________" + '\n'
                 + "Bye. Hope to see you again soon!" + '\n'
                 + "____________________________________________________________");
+    }
+
+    public static Commands validateInput(String cmd) throws DukeException {
+        try {
+            Commands command = Commands.valueOf(cmd.toUpperCase());
+            return command;
+        } catch (IllegalArgumentException e) {
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+        }
     }
 
     public static void displayList(ArrayList<Task> arr) {
