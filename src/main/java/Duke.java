@@ -2,13 +2,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws EmptyDescriptionException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo + "\n");
+        System.out.print("Hello from\n" + logo + "\n");
 
         String space = "     ";
         String longSpace = "        ";
@@ -65,35 +65,58 @@ public class Duke {
             }
 
             else if (input.startsWith("todo")) {
-                Task current = new ToDo(input);
-                list.add(current);
+                try {
+                    String name = input.substring(5);
+                    Task current = new ToDo(name);
+                    list.add(current);
 
-                output = space +  "Got it. I've added this task:\n"
-                        + longSpace + current.toString() + "\n"
-                        + space + "Now you have " + list.size() + " tasks in the list.\n";
+                    output = space +  "Got it. I've added this task:\n"
+                            + longSpace + current.toString() + "\n"
+                            + space + "Now you have " + list.size() + " tasks in the list.\n";
+                } catch (IndexOutOfBoundsException e) {
+                    output += "     ☹ OOPS!!! The description of a todo cannot be empty.\n";
+                } catch (EmptyDescriptionException e) {
+                    output += "     ☹ OOPS!!! The description of a todo cannot be empty.\n";
+                }
             }
 
             else if (input.startsWith("event")) {
-                String[] inputArray = input.split("/");
-                Task current = new Event(inputArray[0], inputArray[1]);
-                list.add(current);
+                try {
+                    String name = input.substring(6);
+                    String[] inputArray = name.split("/");
+                    Task current = new Event(inputArray[0], inputArray[1]);
+                    list.add(current);
 
-                output = space +  "Got it. I've added this task:\n"
-                        + longSpace + current.toString() + "\n"
-                        + space + "Now you have " + list.size() + " tasks in the list.\n";
+                    output = space +  "Got it. I've added this task:\n"
+                            + longSpace + current.toString() + "\n"
+                            + space + "Now you have " + list.size() + " tasks in the list.\n";
+                } catch (IndexOutOfBoundsException e) {
+                    output += "     ☹ OOPS!!! The description of a todo cannot be empty.\n";
+                } catch (EmptyDescriptionException e) {
+                    output += "     ☹ OOPS!!! The description of a todo cannot be empty.\n";
+                }
             }
 
             else if (input.startsWith("deadline")) {
-                String[] inputArray = input.split("/");
-                Task current = new Deadline(inputArray[0], inputArray[1]);
-                list.add(current);
+                try {
+                    String name = input.substring(6);
+                    String[] inputArray = input.split("/");
+                    Task current = new Deadline(inputArray[0], inputArray[1]);
+                    list.add(current);
 
-                output = space +  "Got it. I've added this task:\n"
-                        + longSpace + current.toString() + "\n"
-                        + space + "Now you have " + list.size() + " tasks in the list.\n";
+                    output = space +  "Got it. I've added this task:\n"
+                            + longSpace + current.toString() + "\n"
+                            + space + "Now you have " + list.size() + " tasks in the list.\n";
+                } catch (IndexOutOfBoundsException e) {
+                    output += "     ☹ OOPS!!! The description of a todo cannot be empty.\n";
+                } catch (EmptyDescriptionException e) {
+                    output += "     ☹ OOPS!!! The description of a todo cannot be empty.\n";
+                }
             }
 
-            else {}
+            else {
+                output = "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n";
+            }
 
             System.out.print(space + line + "\n"
                         + output
