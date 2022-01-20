@@ -8,13 +8,18 @@ public class Chat {
      */
 
     public static String LINE_BREAK = "---------------";
-    public static String GREETING = "Wassup buddddyyyyyy! How you doin? \nWhat can I do you for fine sire?";
+    public static String GREETING = "FUNNY FELLA WEIIIIII! \nHow can I help Mr Singhhhhh?";
     public static String BYE = LINE_BREAK + "\n Byeeeee, come back again ah!\n" +
             LINE_BREAK;
+    public static String LINE_INTRO = "Nah, here's your list";
+    public static String MARK_MESSAGE = "Power la Mr Bosssssss, mark alr bro!";
+    public static String UNMARK_MESSAGE = "No probs bro, unmarked already!";
 
     public static void main(String[] args) {
 
-        String[] list = new String[100];
+        // an array of tasks
+        Task[] list = new Task[100];
+
         int counter = 0;
 
         System.out.println(GREETING);
@@ -27,26 +32,74 @@ public class Chat {
 
             String input = sc.nextLine();
 
+            // we will check from 0 to the first space
+            // this will let us know of the command
+            String[] command = input.split(" ");
+            // System.out.println("command : " + command[0]);
+
             if (input.equals("bye")) {
                 System.out.println(BYE);
                 break;
             } else if (input.equals("list")) {
 
                 System.out.println(LINE_BREAK);
+                System.out.println("  " + LINE_INTRO);
                 int internalCounter = 1;
 
                 // iterate through the list
-                for (String item : list) {
+                for (Task item : list) {
                     if (item != null) {
-                        System.out.println(" " + internalCounter + ". " + item);
+
+                        String description = item.getDescription();
+                        System.out.println(" " + internalCounter + ". " + "[" + item.getStatusIcon() + "] " + description);
                         ++internalCounter;
                     } else {
                         break;
                     }
                 }
                 System.out.println(LINE_BREAK);
+            } else if (command[0].equals("mark")) {
+                // System.out.println(" we reach hee");
+                // int number = Integer.parseInt(input.substring(input.indexOf(" "),
+                // input.length()));
+                int number = Integer.parseInt(command[1]) - 1;
+
+                // System.out.println("The number : " + number);
+
+                Task currTask = list[number];
+                boolean currState = currTask.getIsDone();
+                currTask.setDone(!currState);
+
+                System.out.println(LINE_BREAK);
+                System.out.println("   " + MARK_MESSAGE);
+                System.out.println("        [X] " + currTask.getDescription());
+                System.out.println(LINE_BREAK);
+            } else if (command[0].equals("unmark")) {
+                // int number = Integer.parseInt(input.substring(input.indexOf(" "),
+                // input.length()));
+
+                int number = Integer.parseInt(command[1]);
+
+                // System.out.println("The number : " + number);
+
+                Task currTask = list[number];
+                boolean currState = currTask.getIsDone();
+                currTask.setDone(!currState);
+
+                System.out.println(LINE_BREAK);
+                System.out.println("   " + UNMARK_MESSAGE);
+                System.out.println("        [ ] " + currTask.getDescription());
+                System.out.println(LINE_BREAK);
             } else {
-                list[counter] = input;
+                // here we declare the new task to be added
+
+                // System.out.println("The counter : " + counter);
+
+                // System.out.println(" we enter else ");
+
+                Task t = new Task(input);
+
+                list[counter] = t;
                 System.out.println(LINE_BREAK);
                 System.out.println(" ok added alr bro: " + input);
                 System.out.println(LINE_BREAK);
