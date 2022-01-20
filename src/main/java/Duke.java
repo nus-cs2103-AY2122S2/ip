@@ -20,10 +20,9 @@ public class Duke {
             return "Bye. Hope to see you again soon!";
         }
         else if (input.equals("list")) return listing();
-        else if (input.length() == 6 && input.substring(0, 5).equals("mark "))
+        else if (input.length() == 6 && input.startsWith("mark "))
             return mark(input);
-        else this.list.add(new Task(input));
-        return "added: " + input;
+        else return add(input);
     }
 
     private void respond(String respond) {
@@ -45,14 +44,34 @@ public class Duke {
             int i = Integer.parseInt(str.substring(5)) - 1;
             Task t = list.get(i);
             t.mark();
-            return "Nice! I've marked this task as done:\n  " + t.toString();
+            return "Nice! I've marked this task as done:\n  " + t;
         }
         catch (Exception e){
-            this.list.add(new Task(str));
+            this.list.add(new Task(str, Type.TODO));
             return "added: " + str;
         }
     }
 
+    private String add(String input) {
+        try {
+            Task t;
+            if (input.startsWith("todo ")) t = new Task(input, Type.TODO);
+            else if (input.startsWith("event ")) {
+                t = new Task(input.split("/")[0], Type.EVENT);
+                t.setTime(input.split("/at ", 2)[1]);
+            } else {
+                t = new Task(input.split("/")[0], Type.DEADLINE);
+                t.setTime(input.split("/by ", 2)[1]);
+            }
+            this.list.add((t));
+            return "Got it. I've added this task: \n  " +
+                    t + "\nNow you have " + this.list.size() + " tasks in the list.";
+        }
+        catch (Exception e) {   //array index out of bound
+            //do something
+            return "Bad input, please try again";
+        }
+    }
 
     public static void main(String[] args) {
         System.out.println(line);
