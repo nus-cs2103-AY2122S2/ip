@@ -16,8 +16,6 @@ class ToDoList {
     */
     public void handleCommand(String s) {
         String[] inputSplit = s.split(" ", 2);
-        
-        System.out.println(inputSplit[0]);
 
         switch (inputSplit[0]) {
             case "mark":
@@ -51,7 +49,7 @@ class ToDoList {
     */
     public void addItem(Task task) {
         lst.add(task);
-        System.out.printf("Got it! I've added this task:\n %s\n Total tasks on the list: %d\n",
+        System.out.printf("Got it! I've added this task:\n%s\nTotal tasks on the list: %d\n",
                             task.getItemAndStatus(), this.lst.size());
     }
 

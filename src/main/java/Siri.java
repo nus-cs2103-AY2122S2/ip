@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Siri {
     public static void main(String[] args) {
-        String logo = "   -----      O    -----      O \n" +
+        String logo = "   -----      O    -----      O\n" +
                       " /   _   \\   __   |       \\   __\n" + 
                       " |  | |__|  |  |  |   O   |  |  |\n" +
                       " |   ----\\  |  |  |       /  |  |\n" +
