@@ -10,13 +10,18 @@ public class Duke {
                     + "|____/  |_|  |_| |_|\n";
         System.out.println("Hello, I am B.H. How can I help you?\n" + logo + line);
 
+        BH bh = new BH();
+
         while(true) {
             String input = sc.nextLine();
             if (input.equals("bye") || input.equals("Bye")) {
                 System.out.println(line + "GoodBye! Thanks for using B.H!" + line);
                 break;
+            } else if (input.equals("list")) {
+                System.out.println(bh.getList());
             } else {
-                System.out.println(line + input + line);
+                bh.addToList(input);
+                System.out.println(line + "added: " + input + line);
             }
         }
     }
