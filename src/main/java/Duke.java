@@ -91,7 +91,7 @@ public class Duke {
 
             } else if (firstWord.equals("blah"))  {
                 //blah representative of random meaningless words
-                Format.wrapPrint("please specify the time");
+                Format.wrapPrint(Response.CANTUNDERSTAND);
 
             } else {
                 //adding tasks
