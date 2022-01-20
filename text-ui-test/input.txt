@@ -1,0 +1,10 @@
+deadline return book /by Mon 4pm
+event CS2101 team meeting /at Sat 8-10pm
+deadline mary has a little lamb /by little lamb little lamb
+list
+mark 1
+mark 2
+unmark 1
+list
+todo todo todo todo
+bye
