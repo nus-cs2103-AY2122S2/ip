@@ -9,4 +9,9 @@ unmark 1
 mark 2
 deadline find food /by noon
 list
+todo
+event
+deadline
+unmark
+mark
 bye
