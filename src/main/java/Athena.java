@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+// TODO: If have time, create own exceptions and encapsulate entire switch statement within try-catch
+
 public class Athena {
     private final TaskList taskList;
     private boolean isActive;
@@ -55,6 +57,14 @@ public class Athena {
                 if (taskNumber != -1) {
                     sayText("Alright, I've marked the following task as not done:");
                     System.out.println(taskList.markTaskAsNotDone(taskNumber));
+                }
+                break;
+            case "delete":
+                taskNumber = readTaskNumberFromInput(arguments);
+                if (taskNumber != -1) {
+                    sayText("Alright, I've deleted the following task from the list.");
+                    System.out.println(taskList.deleteTask(taskNumber));
+                    sayNumberOfTasksInList();
                 }
                 break;
             case "list":
@@ -133,9 +143,13 @@ public class Athena {
         System.out.println("Athena: " + text);
     }
 
-    private void sayTaskAddingLines(String taskName) {
+    private void sayTaskAddingLines(String taskString) {
         sayText("Okay, I've added this task to your list.");
-        System.out.println(taskName);
+        System.out.println(taskString);
+        sayNumberOfTasksInList();
+    }
+
+    private void sayNumberOfTasksInList() {
         if (this.taskList.getNumberOfTasks() == 1) {
             sayText("Now you have 1 task in your list.");
         } else {

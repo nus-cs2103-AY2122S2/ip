@@ -33,9 +33,13 @@ Athena: Here's the current list of tasks:
 Athena: Okay, I've added this task to your list.
 [D][ ] do homework (by: no idea :))
 Athena: Now you have 4 tasks in your list.
+Athena: Alright, I've deleted the following task from the list.
+[T][ ] borrow book
+Athena: Now you have 3 tasks in your list.
+Athena: Alright, I've deleted the following task from the list.
+[E][X] project meeting (at: Tues 2-4pm)
+Athena: Now you have 2 tasks in your list.
 Athena: Here's the current list of tasks:
-1. [T][ ] borrow book
-2. [D][ ] return book (by: this Sunday)
-3. [E][X] project meeting (at: Tues 2-4pm)
-4. [D][ ] do homework (by: no idea :))
+1. [D][ ] return book (by: this Sunday)
+2. [D][ ] do homework (by: no idea :))
 Athena: Farewell!

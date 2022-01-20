@@ -40,6 +40,13 @@ public class TaskList {
         return task.toString();
     }
 
+    // Return the deleted Task in String form. Assume valid inputs.
+    public String deleteTask(int taskNumber) {
+        Task task = this.taskList.get(taskNumber - 1);
+        this.taskList.remove(taskNumber - 1);
+        return task.toString();
+    }
+
     public int getNumberOfTasks() {
         return this.taskList.size();
     }
