@@ -8,6 +8,6 @@ public class TaskIndexException extends Exception{
 
     @Override
     public String toString() {
-        return "☹ OOPS!!! You didn't give me a proper " + this.message +" typed task to include!";
+        return "OOPS!!! You didn't give me a proper " + this.message +" typed task to include!";
     }
 }

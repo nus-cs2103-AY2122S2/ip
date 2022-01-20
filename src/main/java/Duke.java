@@ -15,7 +15,7 @@ public class Duke {
                 tm.execute(spliced);
             } catch (DukeException e) {
                 tm.Line();
-                System.out.println("☹ OOPS!!! You gave an invalid command!");
+                System.out.println("OOPS!!! You gave an invalid command!");
                 tm.Line();
             } catch (TaskIndexException e) {
                 tm.Line();

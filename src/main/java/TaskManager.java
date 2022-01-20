@@ -12,17 +12,16 @@ public class TaskManager {
     public TaskManager() {
         this.tasks = new ArrayList<>();
         this.status = true;
-        String start = "Hello there! I'm \n" +
-                " __          ___      .______      .______     ____    ____ \n" +
-                "|  |        /   \\     |   _  \\     |   _  \\    \\   \\  /   / \n" +
-                "|  |       /  ^  \\    |  |_)  |    |  |_)  |    \\   \\/   /  \n" +
-                "|  |      /  /_\\  \\   |      /     |      /      \\_    _/   \n" +
-                "|  `----./  _____  \\  |  |\\  \\----.|  |\\  \\----.   |  |     \n" +
-                "|_______/__/     \\__\\ | _| `._____|| _| `._____|   |__|     \n" +
-                "                                                            \n"+
-                "What can I do for you?";
+//        String start = "Hello there! I'm\n" +
+//                " __          ___      .______      .______     ____    ____ \n" +
+//                "|  |        /   \\     |   _  \\     |   _  \\    \\   \\  /   /\n" +
+//                "|  |       /  ^  \\    |  |_)  |    |  |_)  |    \\   \\/   /\n" +
+//                "|  |      /  /_\\  \\   |      /     |      /      \\_    _/\n" +
+//                "|  `----./  _____  \\  |  |\\  \\----.|  |\\  \\----.   |  |\n" +
+//                "|_______/__/     \\__\\ | _| `._____|| _| `._____|   |__|\n" +
+//                "What can I do for you?";
         System.out.println(line);
-        System.out.println(start);
+        System.out.println("Hello there, I'm Larry!");
         System.out.println(line);
     }
 
@@ -50,8 +49,8 @@ public class TaskManager {
                 Task newTodo = new ToDo(spliced[1]);
                 tasks.add(newTodo);
                 this.Line();
-                System.out.println("Got it, I added: \n"+ newTodo);
-                System.out.printf("Now you have %d item(s) in your list \n", tasks.size());
+                System.out.println("Got it, I added:\n"+ newTodo);
+                System.out.printf("Now you have %d item(s) in your list\n", tasks.size());
                 this.Line();
                 break;
 
@@ -63,12 +62,12 @@ public class TaskManager {
                     Task newDeadline = new Deadline(spliced[1]);
                     tasks.add(newDeadline);
                     this.Line();
-                    System.out.println("Got it, I added: \n" + newDeadline);
-                    System.out.printf("Now you have %d items in your list \n", tasks.size());
+                    System.out.println("Got it, I added:\n" + newDeadline);
+                    System.out.printf("Now you have %d items in your list\n", tasks.size());
                     this.Line();
                 } catch (DateException e) {
                     this.Line();
-                    System.out.println("☹ OOPS!!! You didn't specify date!\n"+
+                    System.out.println("OOPS!!! You didn't specify date!\n"+
                             "use the format:\n"+
                             "'deadline your task here /by time'");
                     this.Line();
@@ -83,12 +82,12 @@ public class TaskManager {
                     Task newEvent = new Event(spliced[1]);
                     tasks.add(newEvent);
                     this.Line();
-                    System.out.println("Got it, I added: \n"+ newEvent);
-                    System.out.printf("Now you have %d items in your list \n", tasks.size());
+                    System.out.println("Got it, I added:\n"+ newEvent);
+                    System.out.printf("Now you have %d items in your list\n", tasks.size());
                     this.Line();
                 }catch (DateException e) {
                     this.Line();
-                    System.out.println("☹ OOPS!!! You didn't specify date!\n"+
+                    System.out.println("OOPS!!! You didn't specify date!\n"+
                                     "use the format:\n"+
                             "'event your event here /at time'");
                     this.Line();
