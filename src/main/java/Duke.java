@@ -59,17 +59,20 @@ public class Duke {
             else if (input.startsWith("event ")) {
                 t = new Task(input.split("/")[0].split(" ", 2)[1], Type.EVENT);
                 t.setTime(input.split("/at ", 2)[1]);
-            } else {
+            } else if (input.startsWith("deadline ")){
                 t = new Task(input.split("/")[0].split(" ", 2)[1], Type.DEADLINE);
                 t.setTime(input.split("/by ", 2)[1]);
+            } else {
+                throw new NoGoodException("");
             }
             this.list.add((t));
             return "Got it. I've added this task:\n  " +
                     t + "\nNow you have " + this.list.size() + " tasks in the list.";
         }
-        catch (Exception e) {   //array index out of bound
-            //do something
-            return "Bad input, please try again";
+        catch (ArrayIndexOutOfBoundsException e) {
+            return "Your expression of time is not valid";
+        } catch (NoGoodException e) {
+            return " ☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
         }
     }
 
