@@ -41,11 +41,16 @@ public class Duke {
                 }
                 System.out.println("OK, I've marked this task as not done yet:\n  " + taskToUnmark);
             } else if (input.description.startsWith("todo")) {
-                String description = input.description.substring(5);
-                Todo todoItem = new Todo(description);
-                database.add(todoItem);
-                System.out.println("Got it. I've added this task:\n  " + todoItem);
-                System.out.println("Now you have " + database.size() + " tasks in the list.");
+                try{
+                    String description = input.description.substring(5);
+                    Todo todoItem = new Todo(description);
+                    database.add(todoItem);
+                    System.out.println("Got it. I've added this task:\n  " + todoItem);
+                    System.out.println("Now you have " + database.size() + " tasks in the list.");
+                }catch(StringIndexOutOfBoundsException e){
+                    DukeException error = new DukeException(e);
+                    System.out.println(error);
+                }
             } else if (input.description.startsWith("deadline")) {
                 String[] itemArr = input.description.substring(9).split(" /by ");
                 Deadline deadlineItem = new Deadline(itemArr[0], itemArr[1]);
@@ -59,8 +64,7 @@ public class Duke {
                 System.out.println("Got it. I've added this task:\n  " + eventItem);
                 System.out.println("Now you have " + database.size() + " tasks in the list.");
             } else {
-                database.add(input);
-                System.out.println("added: " + input.description);
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
             System.out.println(line);
             input = new Task(sc.nextLine());
