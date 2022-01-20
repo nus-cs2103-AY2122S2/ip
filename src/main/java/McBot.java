@@ -34,16 +34,24 @@ public class McBot {
                         break;
                     }
                     case "list": {
-                        int i = 1;
-                        System.out.println(frameLine);
-                        System.out.println("Here are yer tasks boi:");
-                        for (Task task : arrList) {
-                            System.out.print(i + ".[" + task.getTaskIcon() + "]");
-                            System.out.print("[" + task.getStatusIcon() + "] ");
-                            System.out.println(task.getFullDetails());
-                            i++;
+                        try {
+                            int i = 1;
+                            if (arrList.size() == 0) 
+                                throw new McBotException("Your list is empty boi");
+                            System.out.println(frameLine);
+                            System.out.println("Here are yer tasks boi:");
+                            for (Task task : arrList) {
+                                System.out.print(i + ".[" + task.getTaskIcon() + "]");
+                                System.out.print("[" + task.getStatusIcon() + "] ");
+                                System.out.println(task.getFullDetails());
+                                i++;
+                            }
+                            System.out.println(frameLine);
+                        } catch (McBotException e) {
+                            System.out.println(frameLine);
+                            System.out.println(e.getMessage());
+                            System.out.println(frameLine);
                         }
-                        System.out.println(frameLine);
                         break;
                     }
                     case "mark": {
@@ -70,7 +78,7 @@ public class McBot {
                             System.out.println(frameLine);
                         } catch (NumberFormatException e) {
                             System.out.println(frameLine);
-                            System.out.println("That ain't a number boi");
+                            System.out.println("That ain't a number that I accept boi");
                             System.out.println(frameLine);
                         } catch (IndexOutOfBoundsException e) {
                             System.out.println(frameLine);
@@ -181,6 +189,37 @@ public class McBot {
                         } catch (ArrayIndexOutOfBoundsException e) {
                             System.out.println(frameLine);
                             System.out.println("Fool, follow this format: event -TASKNAME- /at -DATE/TIME-");
+                            System.out.println(frameLine);
+                        }
+                        break;
+                    }
+                    case "delete": {
+                        try {
+                            if (command[1].isBlank())
+                                throw new McBotException("Fool, I need a number to know which one to delete");
+                            int num = Integer.parseInt(command[1]);
+                            if (num < 1 || num > arrList.size())
+                                throw new McBotException("Boi, I can't delete a number that ain't on the list");
+                            Task t = arrList.get(num - 1);
+                            arrList.remove(num - 1);
+                            System.out.println(frameLine);
+                            System.out.println("Aye, I 'ave deleted it");
+                            System.out.print("  [" + t.getTaskIcon() + "]");
+                            System.out.print("[" + t.getStatusIcon() + "] ");
+                            System.out.println(t.getFullDetails());
+                            System.out.println("Ye now have " + arrList.size() + " tasks in list lad");
+                            System.out.println(frameLine);
+                        } catch (McBotException e) {
+                            System.out.println(frameLine);
+                            System.out.println(e.getMessage());
+                            System.out.println(frameLine);
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            System.out.println(frameLine);
+                            System.out.println("Fool, I need a number to know which one to delete");
+                            System.out.println(frameLine);
+                        } catch (NumberFormatException e) {
+                            System.out.println(frameLine);
+                            System.out.println("Boi, I only accept integers here for deletion");
                             System.out.println(frameLine);
                         }
                         break;

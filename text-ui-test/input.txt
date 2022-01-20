@@ -9,6 +9,7 @@ unmark 2
 list
 unmark 2
 mark 1
+mark 1.1
 mark text
 mark 50
 todo        
@@ -19,4 +20,10 @@ event wrong format
 event    /at date
 event taskName /at    
 blah blah
+delete   
+delete 123abc
+delete 50
+delete 1
+list
+delete 1
 bye

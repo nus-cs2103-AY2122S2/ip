@@ -64,7 +64,10 @@ You fool!! It is already unmark'd
 You fool!! It is already mark'd
 ==========================================
 ==========================================
-That ain't a number boi
+That ain't a number that I accept boi
+==========================================
+==========================================
+That ain't a number that I accept boi
 ==========================================
 ==========================================
 Don't mess with me boi, that number is not in the list
@@ -92,6 +95,30 @@ you can't leave your event date/time empty
 ==========================================
 ==========================================
 I don't understand a word ye're sayin'
+==========================================
+==========================================
+Fool, I need a number to know which one to delete
+==========================================
+==========================================
+Boi, I only accept integers here for deletion
+==========================================
+==========================================
+Boi, I can't delete a number that ain't on the list
+==========================================
+==========================================
+Aye, I 'ave deleted it
+  [T][X] read book
+Ye now have 2 tasks in list lad
+==========================================
+==========================================
+Here are yer tasks boi:
+1.[D][ ] return book (by: Sunday)
+2.[E][ ] team meeting (at: Monday 2-4pm)
+==========================================
+==========================================
+Aye, I 'ave deleted it
+  [D][ ] return book (by: Sunday)
+Ye now have 1 tasks in list lad
 ==========================================
 ==========================================
 Arghh! This ain't the last time ye see me lad
