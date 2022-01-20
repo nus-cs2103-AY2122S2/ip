@@ -46,7 +46,7 @@ public class Duke {
                     }
 
                     case "todo": {
-                        if(instruction.length != 2) {
+                        if(instruction.length == 1) {
                             throw new InvalidArgumentException();
                         }
                         String instructionName = String.join(" ", Arrays.copyOfRange(instruction, 1, instruction.length));
