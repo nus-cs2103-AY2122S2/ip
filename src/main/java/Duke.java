@@ -29,6 +29,20 @@ public class Duke {
                     break;
                 }
 
+                case "mark": {
+                    int taskNum = Integer.parseInt(instruction[1]);
+                    tasks.get(taskNum - 1).markAsDone();
+                    System.out.println(String.format("Nice!, I have marked this task as done: \n %s", tasks.get(taskNum - 1)));
+                    break;
+                }
+
+                case "unmark": {
+                    int taskNum = Integer.parseInt(instruction[1]);
+                    tasks.get(taskNum - 1).markAsNotDone();
+                    System.out.println(String.format("Ok, I have marked this task as not done: \n %s", tasks.get(taskNum - 1)));
+                    break;
+                }
+
                 default: {
                     String instructionName = String.join(" ", instruction);
                     tasks.add(new Task(instructionName));
