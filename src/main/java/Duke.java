@@ -18,6 +18,12 @@ public class Duke {
         while(!end) {
             input = scanner.nextLine();
             String[] splitInput = input.split(" ", 2);
+            try {
+                new DukeException().checker(splitInput, curr);
+            } catch (DukeException e) {
+                System.err.println(e);
+                continue;
+            }
             // If user inputs bye, set end to be true and hence exiting out of the program
             if (input.equals("bye")) {
                 end = true;
