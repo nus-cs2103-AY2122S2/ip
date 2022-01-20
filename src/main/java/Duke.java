@@ -73,7 +73,7 @@ public class Duke {
                 System.out.println("Got it. I've added this task:");
                 list.add(deadline);
                 System.out.println(deadline.toString());
-                System.out.println("Now you have " + list.size() + " in the list.");
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
             }
 
             //adds user input to the list and notifies user
