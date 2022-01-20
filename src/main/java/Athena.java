@@ -86,7 +86,7 @@ public class Athena {
         Scanner scanner = new Scanner(System.in);
         Athena athena = new Athena();
         while (athena.isActive()) {
-            System.out.print("You: ");
+            // System.out.print("You: ");
             String rawInput = scanner.nextLine();
             athena.execute(rawInput);
         }

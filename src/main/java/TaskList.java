@@ -53,6 +53,6 @@ public class TaskList {
         for (int i = 1; i <= this.taskList.size(); i++) {
             output.append(String.format("%d. %s\n", i, this.taskList.get(i - 1)));
         }
-        return output.toString();
+        return output.toString().strip();
     }
 }
