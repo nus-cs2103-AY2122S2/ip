@@ -24,4 +24,8 @@ class ItemList<T> {
     void printNoItems() {
         System.out.println("Now you have " + this.itemList.size() + " tasks in the list.");
     }
+
+    void deleteFromIndex(int index) {
+        this.itemList.remove(index - 1);
+    }
 }

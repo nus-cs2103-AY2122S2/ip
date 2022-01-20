@@ -24,6 +24,8 @@ abstract class Command {
                 new addDeadlineListCommand(cmd, itemList).run();
             else if (cmd.startsWith("event"))
                 new addEventListCommand(cmd, itemList).run();
+            else if (cmd.startsWith("delete"))
+                new deleteItemFromList(cmd, itemList).run();
             else
                 throw InvalidCommand.createInvalidCommand(cmd);
             System.out.println("");
@@ -186,6 +188,29 @@ final class addEventListCommand extends listCommand {
         Task newTask = new Event(taskName, eventDate);
         itemList.addItem(newTask);
         this.printAddEndRun(newTask);
+    }
+
+}
+
+final class deleteItemFromList extends listCommand {
+
+    protected deleteItemFromList(String commandName, ItemList<Task> itemList) {
+        super(commandName, itemList);
+        //TODO Auto-generated constructor stub
+    }
+
+    @Override
+    protected void run() throws DukeExceptions {
+        // TODO Auto-generated method stub
+        String[] number = commandName.split("\\s+");
+        if (number.length < 2)
+            throw EmptyNumber.createEmptyNumber("Delete");
+        int index = Integer.valueOf(number[1]);
+        Task deletedTask = this.itemList.getItem(index);
+        this.itemList.deleteFromIndex(index);
+        System.out.println("Alright, I've deleted this from the list:");
+        System.out.println(deletedTask.toString());
+        this.itemList.printNoItems();
     }
 
 }

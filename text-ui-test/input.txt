@@ -3,7 +3,7 @@ todo read book
 deadline return book /by June 6th
 event project meeting /at Aug 6th 2-4pm
 todo join sports club
-todo brrow book
+todo borrow book
 list
 deadline return book /by Sundy
 event project meeting /at Mon 2-4pm
@@ -26,4 +26,8 @@ list
 mark 9999
 mark
 unmark
+delete
+delete 5
+list
+delete 9999
 bye

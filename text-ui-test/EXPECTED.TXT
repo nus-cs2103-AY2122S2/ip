@@ -27,7 +27,7 @@ Now you have 4 tasks in the list.
 
 
 Alright! Added that to the list:
-[T][ ] brrow book
+[T][ ] borrow book
 Now you have 5 tasks in the list.
 
 
@@ -36,7 +36,7 @@ Here you go sir:
 2. [D][ ] return book (by: June 6th)
 3. [E][ ] project meeting (at: Aug 6th 2-4pm)
 4. [T][ ] join sports club
-5. [T][ ] brrow book
+5. [T][ ] borrow book
 
 
 Alright! Added that to the list:
@@ -64,7 +64,7 @@ Here you go sir:
 2. [D][ ] return book (by: June 6th)
 3. [E][ ] project meeting (at: Aug 6th 2-4pm)
 4. [T][ ] join sports club
-5. [T][ ] brrow book
+5. [T][ ] borrow book
 6. [D][ ] return book (by: Sundy)
 7. [E][ ] project meeting (at: Mon 2-4pm)
 8. [D][ ] do homework (by: no idea :-p)
@@ -101,7 +101,7 @@ Here you go sir:
 2. [D][ ] return book (by: June 6th)
 3. [E][ ] project meeting (at: Aug 6th 2-4pm)
 4. [T][ ] join sports club
-5. [T][ ] brrow book
+5. [T][ ] borrow book
 6. [D][ ] return book (by: Sundy)
 7. [E][ ] project meeting (at: Mon 2-4pm)
 8. [D][ ] do homework (by: no idea :-p)
@@ -117,7 +117,7 @@ Here you go sir:
 2. [D][X] return book (by: June 6th)
 3. [E][ ] project meeting (at: Aug 6th 2-4pm)
 4. [T][ ] join sports club
-5. [T][ ] brrow book
+5. [T][ ] borrow book
 6. [D][ ] return book (by: Sundy)
 7. [E][ ] project meeting (at: Mon 2-4pm)
 8. [D][ ] do homework (by: no idea :-p)
@@ -133,7 +133,7 @@ Here you go sir:
 2. [D][X] return book (by: June 6th)
 3. [E][ ] project meeting (at: Aug 6th 2-4pm)
 4. [T][ ] join sports club
-5. [T][ ] brrow book
+5. [T][ ] borrow book
 6. [D][ ] return book (by: Sundy)
 7. [E][ ] project meeting (at: Mon 2-4pm)
 8. [D][ ] do homework (by: no idea :-p)
@@ -147,6 +147,28 @@ Error: Mark needs a number
 
 
 Error: Mark needs a number
+
+
+Error: Delete needs a number
+
+
+Alright, I've deleted this from the list:
+[T][ ] borrow book
+Now you have 8 tasks in the list.
+
+
+Here you go sir:
+1. [T][ ] read book
+2. [D][X] return book (by: June 6th)
+3. [E][ ] project meeting (at: Aug 6th 2-4pm)
+4. [T][ ] join sports club
+5. [D][ ] return book (by: Sundy)
+6. [E][ ] project meeting (at: Mon 2-4pm)
+7. [D][ ] do homework (by: no idea :-p)
+8. [E][ ] CS2103 finals (at: 2/1/2022)
+
+
+Error: The index is out of bond!
 
 
 Arrivederci!
