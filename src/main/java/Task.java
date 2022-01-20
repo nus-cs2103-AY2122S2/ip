@@ -1,4 +1,4 @@
-public class Task {
+abstract class Task {
     protected String taskName;
     protected boolean isMarked;
 

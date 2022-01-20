@@ -127,7 +127,7 @@ public class Duke {
 
         }
         System.out.println(divString);
-        System.out.println(strPadding + "Here are the tasks in your list: ");
+        System.out.println(strPadding + "Here are the tasks in your list: \n");
         System.out.println(sb);
         System.out.println(divString);
     }
