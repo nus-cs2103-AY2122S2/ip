@@ -10,7 +10,11 @@ public class Duke {
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.greet();
-        duke.take_notes();
+        try {
+            duke.take_notes();
+        } catch (DukeException e) {
+            System.out.println(e);
+        }
     }
 
     public Duke() {
@@ -23,58 +27,85 @@ public class Duke {
                 "task number!\n ======================================================");
     }
 
-    private void take_notes() {
+    private void take_notes() throws DukeException {
         Scanner sc = new Scanner(System.in);
         while(true) {
-            String input = sc.nextLine();
-            // if there is a command to mark or unmark, this will be the item's id in the list
-            int id = Character.getNumericValue(input.charAt(input.length() - 1));
-            if (input.equals("bye")) {
-                System.out.println("------------------------------------------------------");
-                System.out.println("    Bye. Have a great day!");
-                System.out.println("======================================================");
-                break;
+
+                String command = sc.next();
+                String details = sc.nextLine().trim();
+                // if there is a command to mark or unmark, this will be the item's id in the list
+                switch (command) {
+                    case "bye":
+                        System.out.println("------------------------------------------------------");
+                        System.out.println("    Bye. Have a great day!");
+                        System.out.println("======================================================");
+                        break;
+                    case "list":
+                        System.out.println("------------------------------------------------------");
+                        System.out.println("    Here are your tasks:");
+                        for (int i = 1; i <= this.list.size(); i++) {
+                            System.out.println("    " + i + ". " + this.list.get(i-1));
+                        }
+                        System.out.println("======================================================");
+                        break;
+                    case "unmark":
+                        System.out.println("------------------------------------------------------");
+                        Task unmark_task = this.list.get(Integer.parseInt(details) - 1);
+                        System.out.println(unmark_task.unmark());
+                        System.out.println("======================================================");
+                        break;
+                    case "mark":
+                        System.out.println("------------------------------------------------------");
+                        Task mark_test = this.list.get(Integer.parseInt(details) - 1);
+                        System.out.println(mark_test.mark());
+                        System.out.println("======================================================");
+                        break;
+                    case "deadline":
+                        try {
+                            System.out.println("------------------------------------------------------");
+                            is_valid_date_task(details, "deadline");
+                            String[] d_deets = details.split("/");
+                            Deadline deadline = new Deadline(d_deets[0].trim(), d_deets[1].trim().substring(3));
+                            add_task(deadline);
+                        } catch (ArrayIndexOutOfBoundsException e) { //if there is no date provided then there wont be an array
+                            throw new DukeException("please provide a date");
+                        }
+                        break;
+                    case "event":
+                        try {
+                            System.out.println("------------------------------------------------------");
+                            is_valid_date_task(details, "event");
+                            String[] e_deets = details.split("/");
+                            Event event = new Event(e_deets[0].trim(), e_deets[1].trim().substring(3));
+                            add_task(event);
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            throw e;
+                        }
+                        break;
+                    case "todo":
+                        System.out.println("------------------------------------------------------");
+                        is_valid_date_task(details, "todo");
+                        ToDo td = new ToDo(details);
+                        add_task(td);
+                        break;
+                    default:
+                        throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
-            else if (input.equals("list")) {
-                System.out.println("------------------------------------------------------");
-                System.out.println("    Here are your tasks:");
-                int count = 0;
-                while (count < list.size()) {
-                    int t = count + 1;
-                    System.out.println("    " + t + ". " + list.get(count));
-                    count++;
-                }
-                System.out.println("======================================================");
-            }
-            else if (input.contains("unmark")) {
-                System.out.println("------------------------------------------------------");
-                Task current_task = list.get(id - 1);
-                System.out.println(current_task.unmark());
-                System.out.println("======================================================");
-            }
-            else if (input.contains("mark")) {
-                System.out.println("------------------------------------------------------");
-                Task current_task = list.get(id - 1);
-                System.out.println(current_task.mark());
-                System.out.println("======================================================");
-            }
-            else if (input.contains("deadline")) {
-                System.out.println("------------------------------------------------------");
-                String [] temp = input.split("/");
-                Deadline t = new Deadline(temp[0].substring(9).trim(), temp[1].substring(3));
-                add_task(t);
-            }
-            else if (input.contains("event")){
-                System.out.println("------------------------------------------------------");
-                String [] temp = input.split("/");
-                Event t = new Event(temp[0].substring(6).trim(), temp[1].substring(3));
-                add_task(t);
-            }
-            else {
-                System.out.println("------------------------------------------------------");
-                ToDo t = new ToDo(input.substring(5).trim());
-                add_task(t);
-            }
+        }
+    }
+
+    private boolean is_valid_date_task(String details, String type) throws DukeException{
+        if (details.length() == 0) {
+            throw new DukeException("☹ OOPS!!! The description of a " + type + " cannot be empty.");
+        }
+        else if ((type.equals("deadline") || type.equals("event")) & !details.contains("/")) {
+            throw new DukeException("☹ OOPS!!! The date of a " + type + " cannot be empty. Use / and type the date after it");
+        }
+        else if ((type.equals("deadline") || type.equals("event")) & details.endsWith("/")) {
+            throw new DukeException("☹ OOPS!!! The date of a " + type + " cannot be empty. Type the date after your /");
+        }
+        else {
+            return true;
         }
     }
 
