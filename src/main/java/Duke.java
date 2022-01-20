@@ -112,7 +112,9 @@ public class Duke {
     }
     
     public static void save(){
-        String FILE_PATH = "data/duke";
+        String FILE_PATH = System.getProperty("user.home");
+        FILE_PATH += "/Duke/data";
+
         File f = new File(FILE_PATH);
         try {
             FileWriter fw = new FileWriter(f);
@@ -132,7 +134,9 @@ public class Duke {
     }
 
     public static void load(){
-        String FILE_PATH = "data/duke";
+        String FILE_PATH = System.getProperty("user.home");
+        FILE_PATH += "/Duke/data";
+        System.out.println(FILE_PATH);
         File f = new File(FILE_PATH);
         if (f.exists()){
             try{
@@ -157,8 +161,11 @@ public class Duke {
     }
 
     public static void loadDefault(){
-        String DIR_PATH = "data";
-        String FILE_PATH = "data/duke";
+
+        String FILE_PATH = System.getProperty("user.home");
+        String DIR_PATH = FILE_PATH + "/Duke";
+        FILE_PATH += "/Duke/data";
+
         File dir = new File(DIR_PATH);
         File f = new File(FILE_PATH);
 
