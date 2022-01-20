@@ -1,11 +1,21 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+
 public class Duke {
+
+    static ArrayList<String> list = new ArrayList<String>();
 
     public static String handle(String command) {
         if (command.equals("bye")) {
             return "See you later alligator :)\n";
+        } else if (command.equals("list")) {
+            for (Integer i = 0; i < list.size(); i++) {
+                System.out.println(i.toString() + " " + list.get(i));
+            }
+            return "";
         } else {
-            return command;
+            list.add(command);
+            return "added: " + command;
         }
     }
 
