@@ -33,38 +33,44 @@ public class Dingus {
 
 	public static void response(String input) throws DingusException {
 		String[] words = input.split(" ");
+		Command command = Command.valueOf(words[0].toLowerCase());
 
-		// Exit
-		if (input.equals("bye")) {
-			System.out.println(startLine);
-			System.out.println("DINGUS:	Please don't ever bother me again, bye");
-			System.out.println(endLine);
-			return;
-		}
-
-		if (words[0].equals("list")) {
-			// Output List
-			String output = startLine + "\nHere are the tasks in your list:";
-			for (int i = 0; i < tasks.size(); i++) {
-				int numbering = i + 1;
-				output += "\n" + numbering + ". " + tasks.get(i);
-			}
-			output += "\n" + endLine;
-			System.out.println(output);
-		} else if (words[0].equals("mark")) {
-			mark(input);
-		} else if (words[0].equals("unmark")) {
-			unmark(input);
-		} else if (words[0].equals("todo")) {
-			todo(input);
-		} else if (words[0].equals("deadline")) {
-			deadline(input);
-		} else if (words[0].equals("event")) {
-			event(input);
-		} else if (words[0].equals("delete")) {
-			delete(input);
-		} else {
-			throw new DingusException("What kind of command is that?? I don't understand!");
+		switch (command) {
+			case bye:
+				System.out.println(startLine);
+				System.out.println("DINGUS:	Please don't ever bother me again, bye");
+				System.out.println(endLine);
+				break;
+			case list:
+				// Output List
+				String output = startLine + "\nHere are the tasks in your list:";
+				for (int i = 0; i < tasks.size(); i++) {
+					int numbering = i + 1;
+					output += "\n" + numbering + ". " + tasks.get(i);
+				}
+				output += "\n" + endLine;
+				System.out.println(output);
+				break;
+			case todo:
+				todo(input);
+				break;
+			case deadline:
+				deadline(input);
+				break;
+			case event:
+				event(input);
+				break;
+			case delete:
+				delete(input);
+				break;
+			case mark:
+				mark(input);
+				break;
+			case unmark:
+				unmark(input);
+				break;
+			default:
+				throw new DingusException("What kind of command is that?? I don't understand!");
 		}
 	}
 
