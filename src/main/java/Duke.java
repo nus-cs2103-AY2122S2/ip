@@ -11,10 +11,28 @@ public class Duke {
         System.out.println(hl + "\nHi! I'm Duke\nWhat can I do for you?");
     }
 
-    public static void add(String ipt) {
-        Task newTask = new Task(ipt, taskList.size() + 1);
-        taskList.add(newTask);
-        System.out.println("added: " + ipt);
+    public static void add(String[] instructions) {
+        Task task = null;
+        if (instructions[0].equals("todo")) {
+            task = new Todo(instructions[1], taskList.size() + 1);
+            System.out.println("Added a to do task.");
+        } else if (instructions[0].equals("deadline")) {
+            String[] taskAndTime = instructions[1].split("/by");
+            task = new Deadline(taskAndTime[0], taskList.size() + 1, taskAndTime[1]);
+            System.out.println("Added a deadline.");
+        } else if (instructions[0].equals("event")) {
+            String[] taskAndTime = instructions[1].split("/at");
+            task = new Event(taskAndTime[0], taskList.size() + 1, taskAndTime[1]);
+            System.out.println("Added an event.");
+        } else {
+            task = new Task(String.join(" ", instructions), taskList.size() + 1);
+            System.out.println("Added: " + String.join(" ", instructions));
+        }
+        if (task != null) {
+            taskList.add(task);
+            System.out.println("You have " + taskList.size() + " task(s) in the list.");
+            System.out.println(task);
+        }
     }
 
     public static void list() {
@@ -54,21 +72,20 @@ public class Duke {
             System.out.println(hl);
             System.out.print("> ");
             String userInput = br.readLine();
-            StringTokenizer st = new StringTokenizer(userInput);
-            String instruction = st.nextToken();
-            if (instruction.equals("bye")) {
+            String[] instructions = userInput.split(" ", 2);
+            if (instructions[0].equals("bye")) {
                 bye();
                 break;
-            } else if (instruction.equals("list")) {
+            } else if (instructions[0].equals("list")) {
                 list();
-            } else if (instruction.equals("mark")) {
-                int taskNumber = Integer.parseInt(st.nextToken());
+            } else if (instructions[0].equals("mark")) {
+                int taskNumber = Integer.parseInt(instructions[1]);
                 mark(taskNumber);
-            } else if (instruction.equals("unmark")) {
-                int taskNumber = Integer.parseInt(st.nextToken());
+            } else if (instructions[0].equals("unmark")) {
+                int taskNumber = Integer.parseInt(instructions[1]);
                 unmark(taskNumber);
             } else {
-                add(userInput);
+                add(instructions);
             }
         }
     }
