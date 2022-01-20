@@ -70,15 +70,20 @@ public class Duke {
                             int digit = Integer.parseInt(split[1]);
                             if (digit > 0 && digit <= tasks.size()) {
                                 handleResponse(split[0]);
-                                if (split[0].contains("mark")) {
+                                if (split[0].equals(Commands.MARK.toString())) {
+                                    Task t = tasks.get(digit - 1);
+                                    t.mark();
+                                    System.out.println(t.toString());
+                                } else if (split[0].equals(Commands.UNMARK.toString())) {
                                     Task t = tasks.get(digit - 1);
                                     t.unmark();
                                     System.out.println(t.toString());
-                                } else {
+                                }
+                                else if (split[0].equals(Commands.DELETE.toString())) {
                                     System.out.println(tasks.get(digit - 1).toString());
                                     tasks.remove(digit - 1);
                                     printNumberOfTask(tasks);
-                                }
+                                } else { valid = false; }
                             } else {
                                 System.out.println("Task does not exist! Try again.");
                             }
