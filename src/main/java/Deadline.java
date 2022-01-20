@@ -1,5 +1,5 @@
 public class Deadline extends Task{
-    private String date;
+
     public Deadline(String taskName) throws InvalidTaskDescriptionException,InvalidTaskDataTimeException{
         super();
         String[] str =  taskName.split("/by");

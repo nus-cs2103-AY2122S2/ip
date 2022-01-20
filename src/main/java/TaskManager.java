@@ -22,6 +22,9 @@ public class TaskManager {
             return t.toString();
         }
     }
+    public void addTask(Task t){
+        this.list.add(t);
+    }
 
     public String deleteTask(int index){
         if (list.size() == 0){
@@ -86,7 +89,7 @@ public class TaskManager {
         }
     }
 
-    public String getTaskList(){
+    public String printTaskList(){
         int i = 1;
         if (list.size() == 0){
             String s =  "=====================================================================================\n";
@@ -102,6 +105,10 @@ public class TaskManager {
         }
         s +=        "=====================================================================================";
         return s;
+    }
+
+    public ArrayList<Task> getTaskList(){
+        return this.list;
     }
 
     public int size(){
