@@ -1,6 +1,7 @@
 package baron.tasks;
 
 import baron.exceptions.BaronException;
+import baron.messages.Messages;
 
 import java.util.ArrayList;
 
@@ -58,7 +59,7 @@ public class TaskManager {
 
     public boolean markTask(int index) throws BaronException {
         if (this.isEmpty()) {
-            throw new BaronException("The task list is empty.");
+            throw new BaronException(Messages.MESSAGE_NO_TASK);
         } else if (index > 0 && index <= this.getTaskCount()) {
             if (this.taskList.get(index - 1).mark()) {
                 return true;
@@ -73,7 +74,7 @@ public class TaskManager {
 
     public boolean unmarkTask(int index) throws BaronException {
         if (this.isEmpty()) {
-            throw new BaronException("The task list is empty.");
+            throw new BaronException(Messages.MESSAGE_NO_TASK);
         } else if (index > 0 && index <= this.getTaskCount()) {
             if (this.taskList.get(index - 1).unmark()) {
                 return true;
@@ -86,11 +87,24 @@ public class TaskManager {
         }
     }
 
+    public Task deleteTask(int index) throws BaronException {
+        if (this.isEmpty()) {
+            throw new BaronException(Messages.MESSAGE_NO_TASK);
+        } else if (index > 0 && index <= this.getTaskCount()) {
+            Task deletedTask = this.taskList.get(index - 1);
+            this.taskList.remove(index - 1);
+            return deletedTask;
+        } else {
+            throw new BaronException("The task index is invalid, only accepts 1 to "
+                    + this.getTaskCount() + ".");
+        }
+    }
+
     @Override
     public String toString() {
         String output = "";
         for (int i = 0; i < this.getTaskCount(); i++) {
-            output += (i + 1) + "." + this.taskList.get(i);
+            output += "  " + (i + 1) + "." + this.taskList.get(i);
 
             if (i != this.getTaskCount() - 1) {
                 output += "\n";

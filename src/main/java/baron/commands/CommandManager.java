@@ -40,6 +40,8 @@ public class CommandManager {
                     return new AddTaskCommand(this.taskManager, TaskType.DEADLINE, commandArg);
                 case "event":
                     return new AddTaskCommand(this.taskManager, TaskType.EVENT, commandArg);
+                case "delete":
+                    return new DeleteTaskCommand(this.taskManager, commandArg);
                 default:
                     return new InvalidCommand();
             }
