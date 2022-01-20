@@ -30,6 +30,17 @@ public class Duke {
                     System.out.println("Good job! The following task is marked as done:");
                     store.get(index).toggleStatus();
                     printTask(store.get(index));
+                } else if (input.contains("delete")) {
+                    if (trimmedText.length() == "delete".length()) {
+                        throw new DeleteIndexException();
+                    }
+                    int index = Integer.parseInt(input.substring(7));
+                    if (index > store.size()) {
+                        throw new InvalidIndexException();
+                    }
+                    System.out.println("OK, the following task is removed:");
+                    System.out.println(store.remove(index - 1));
+                    System.out.println("There are " + store.size() + " task(s) in the list.");
                 } else if (input.equals(list)) {
                     System.out.println("The tasks on your list are as follows:");
                     int i = 1;
