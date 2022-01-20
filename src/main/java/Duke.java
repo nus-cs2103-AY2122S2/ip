@@ -7,6 +7,7 @@ public class Duke {
             "____________________________________________________________\n";
     private final Scanner s = new Scanner(System.in);
     private boolean finished = false;
+    private final ArrayList<String> list = new ArrayList<>();
 
     public boolean isFinished() {
         return this.finished;
@@ -14,14 +15,27 @@ public class Duke {
 
     private String read() {
         String input = s.nextLine();
-        if (input.equals("bye")) this.finished = true;
-        return input;
+        if (input.equals("bye")) {
+            this.finished = true;
+            return "Bye. Hope to see you again soon!";
+        }
+        else if (input.equals("list")) return listing();
+        else this.list.add(input);
+        return "added: " + input;
     }
 
     private void respond(String respond) {
-        if (this.finished) respond = line + "Bye. Hope to see you again soon!\n" + line;
-        else respond = line + respond + "\n" + line;
+        respond = line + respond + "\n" + line;
         System.out.println(respond);
+    }
+
+    private String listing() {
+        String s = "";
+        for (int i = 1; i <= list.size(); i++) {
+            s += i + ". ";
+            s += list.get(i - 1) + "\n";
+        }
+        return s;
     }
 
     public static void main(String[] args) {
