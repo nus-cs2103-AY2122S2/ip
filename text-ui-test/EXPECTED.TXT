@@ -96,3 +96,12 @@ Use 'list' to check
 -------------------------------------------
 Give me the task number in numbers please!
 -------------------------------------------
+-------------------------------------------
+OOPS!!! You didn't give me a proper 'todo' typed task to include!
+-------------------------------------------
+-------------------------------------------
+OOPS!!! You didn't give me a proper 'deadline' typed task to include!
+-------------------------------------------
+-------------------------------------------
+OOPS!!! You didn't give me a proper 'event' typed task to include!
+-------------------------------------------

@@ -17,3 +17,6 @@ delete 3
 list
 delete 10
 delete one
+todo
+deadline
+event
