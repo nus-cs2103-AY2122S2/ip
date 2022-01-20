@@ -10,6 +10,6 @@ public class Deadline extends task {
 
     @Override
     public String toString() {
-        return this.name + " (" + this.deadline + ")";
+        return this.name + "(" + this.deadline + ")";
     }
 }

@@ -10,6 +10,6 @@ public class Event extends task {
 
     @Override
     public String toString() {
-        return this.name + " (" + this.timing + ")";
+        return this.name + "(" + this.timing + ")";
     }
 }
