@@ -12,6 +12,7 @@ public class Duke {
                 indent+
                 "What can I do for you?");
         System.out.println(line);
+        System.out.println();
 
         // Data Structures
         Map<Integer, Task> commands = new HashMap<>();
@@ -57,6 +58,7 @@ public class Duke {
             }
 
             System.out.println(line);
+            System.out.println();
             input = in.nextLine();
         }
 
