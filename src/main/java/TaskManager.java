@@ -127,8 +127,9 @@ public class TaskManager {
                 try {
                     Integer deleteItem = Integer.parseInt(spliced[1]);
                     System.out.println(this.line +"\n"+ "I removed this task for you:\n" + tasks.get(deleteItem - 1));
-                    this.Line();
                     tasks.remove(deleteItem - 1);
+                    System.out.printf("Now you have %d items in your list\n", tasks.size());
+                    this.Line();
                 } catch (NumberFormatException e) {
                     this.Line();
                     System.out.println("Give me the task number in numbers please!");

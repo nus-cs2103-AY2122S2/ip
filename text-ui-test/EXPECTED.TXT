@@ -82,6 +82,7 @@ Here's your list, Good Sir:
 -------------------------------------------
 I removed this task for you:
 [D][ ] return book (by: Sunday)
+Now you have 3 items in your list
 -------------------------------------------
 -------------------------------------------
 Here's your list, Good Sir:
