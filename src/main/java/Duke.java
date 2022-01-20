@@ -55,7 +55,12 @@ public class Duke {
                     bh.addToList(newtask);
                     System.out.println(line + "Task added:" + newtask.toString() + "\n" +
                             "Now you have " + bh.getListSize() + " tasks in the list" + line);
-                } else {
+                } else if (inputArray[0].equals("delete")) {
+                    int index = Integer.parseInt(inputArray[1]) - 1;
+                    System.out.println(line + "Okay, I have remove this task:\n" +
+                            bh.deleteTask(index) + line);
+                }
+                else {
                     throw new DukeException("Wrong input");
                 }
             }

@@ -10,6 +10,14 @@ public class BH {
         this.list.add(task);
     }
 
+    Task deleteTask(int index) {
+        Task task =  this.list.get(index);
+        this.list.remove(index);
+        return task;
+    }
+
+
+
     String getList() {
         String s = "";
         for (int i = 0; i < this.list.size(); i++) {
