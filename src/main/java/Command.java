@@ -1,38 +1,34 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class Command {
-    private static final String[] commands = {
-            "mark", "unmark"
-    };
-
-    /**
-     * Checks whether a command is valid
-     * @param cmd Command to check validity
-     * @return Validity of the command
-     */
-    public static Boolean isValidCommand(String cmd) {
-        for (String command : Command.commands) {
-            if (command.equals(cmd)) return true;
-        }
-
-        return false;
-    }
-
     private String name;
-    private String[] arguments;
+    private String argument;
+    private Map<String, String> kwargs;
 
     public Command(String name) {
-        this(name, new String[0]);
+        this(name, "", new HashMap<>());
     }
 
-    public Command(String name, String ...args) {
+    public Command(String name, String arg) {
+        this(name, arg, new HashMap<>());
+    }
+
+    public Command(String name, String arg, Map<String, String> kwargs) {
         this.name = name;
-        this.arguments = args;
+        this.argument = arg;
+        this.kwargs = kwargs;
     }
 
     public String getName() {
         return this.name;
     }
 
-    public String[] getArgs() {
-        return this.arguments;
+    public String getArgs() {
+        return this.argument;
+    }
+
+    public Map<String, String> getKwargs() {
+        return this.kwargs;
     }
 }
