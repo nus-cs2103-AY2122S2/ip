@@ -1,2 +1,5 @@
-package PACKAGE_NAME;public class BotException {
+public class BotException extends Exception {
+    BotException(String errorMessage) {
+        super(errorMessage);
+    }
 }
