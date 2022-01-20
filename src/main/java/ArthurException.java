@@ -23,6 +23,7 @@ public class ArthurException {
         case "todo":
         case "deadline":
         case "event":
+        case "delete":
             break;
         default:
             throw new InvalidInstructionException();

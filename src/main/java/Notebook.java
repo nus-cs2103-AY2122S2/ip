@@ -48,6 +48,9 @@ public class Notebook {
         case "event":
             e = this.event(temp[1]);
             break;
+        case "delete":
+            e = this.deleter(Integer.parseInt(temp[1]));
+            break;
         }
         return e;
     }
@@ -149,5 +152,20 @@ public class Notebook {
         return "You have "
                 + this.tasks.size()
                 + " tasks in list at the moment.";
+    }
+
+    /**
+     * Deletes the task from the list.
+     * @param i The task number to delete
+     * @return String conformation of the task deletion 
+     */
+    private String deleter(int i) {
+        try {
+            Task currTask = tasks.remove(i - 1);
+            return "Successfully removed this task: \n" + currTask
+                    + "\n" + outstanding();
+        } catch (IndexOutOfBoundsException e) {
+            return "Invalid task number. Please try again";
+        }
     }
 }
