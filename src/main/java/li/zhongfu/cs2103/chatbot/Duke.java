@@ -64,11 +64,11 @@ public class Duke {
      */
     private static Map<String, String> parseArgString(String taskString) {
         Map<String, String> args = new HashMap<>();
-        String[] parts = taskString.split("\\s/");
+        String[] parts = taskString.split("(^|\\s+)/");
         args.put("", parts[0]);
 
         for (int i = 1; i < parts.length; i++) {
-            String[] arg = parts[i].split("\\s", 2);
+            String[] arg = parts[i].split("\\s+", 2);
             if (arg[0] == "") {
                 continue;
             }
