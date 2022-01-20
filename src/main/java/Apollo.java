@@ -1,8 +1,8 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class Duke {
-    static ArrayList<String> list;
+public class Apollo {
+    public static ArrayList<String> list;
     private static Scanner sc;
     private static int numCmd;
 

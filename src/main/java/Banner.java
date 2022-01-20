@@ -19,6 +19,6 @@ public class Banner {
         String daytime = DayTime.dayTime();
         String msg = String.format("Good %s Sir, I am Apollo. \n" +
                 "How can I help you on this wonderful %s? ", daytime, daytime.toLowerCase());
-        Duke.msgWrap(msg);
+        Apollo.msgWrap(msg);
     }
 }

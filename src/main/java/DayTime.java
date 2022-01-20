@@ -1,14 +1,14 @@
 import java.time.LocalTime;
 
 public class DayTime {
+    // define the border values
+    static LocalTime eleven = LocalTime.of(11, 0);
+    static LocalTime four = LocalTime.of(4, 0);
+    static LocalTime fifteen = LocalTime.of(15, 0);
+    static LocalTime eighteenThirty = LocalTime.of(18, 30);
+
     public static String dayTime() {
         LocalTime now = LocalTime.now();
-        // define the border values
-        LocalTime eleven = LocalTime.of(11, 0);
-        LocalTime four = LocalTime.of(4, 0);
-        LocalTime fifteen = LocalTime.of(15, 0);
-        LocalTime eighteenThirty = LocalTime.of(18, 30);
-
         // check if the time is after four and either before or exactly eleven
         if (now.isAfter(four) &&
                 (now.isBefore(eleven) || now.equals(eleven)))
