@@ -21,12 +21,25 @@ public class Yale {
         }
     }
 
+    /**
+     * Method to receive input from the scanner and
+     * returns that input in a String format
+     * @param scanner
+     * @return Input
+     */
     public static String receiveInput(Scanner scanner) {
         System.out.println("Enter command below:");
         String input = scanner.nextLine();
         return input;
     }
 
+    /**
+     * Considers input cases and
+     * performs action in response to the information
+     * input by the user
+     * @param command
+     * @param list
+     */
     public static void performAction(String command, TaskList list) {
         // Exit Feature
         if (command.equals("bye")) {
@@ -135,6 +148,12 @@ public class Yale {
 
     }
 
+    /**
+     * Method to check if user input
+     * is equal to "bye"
+     * @param input
+     * @return
+     */
     public static boolean checkExit(String input) {
         return input.equals("bye");
     }
