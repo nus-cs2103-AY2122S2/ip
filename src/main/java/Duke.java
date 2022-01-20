@@ -14,13 +14,13 @@ public class Duke {
 
         while (true) {
             String input = sc.nextLine();
-            if (input.equals("bye")) {
+            if (input.matches(".*\\bbye\\b.*")) {
                 System.out.println(bar);
                 System.out.println("Bye. Hope to see you again soon!");
                 System.out.println(bar);
                 sc.close();
                 break;
-            } else if (input.equals("list")) {
+            } else if (input.matches(".*\\blist\\b.*")) {
                 System.out.println(bar);
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 1; i <= taskList.size(); i++) {
@@ -28,25 +28,27 @@ public class Duke {
                     System.out.println(i + "." + "[" + curr.getStatusIcon() + "] " + curr);
                 }
                 System.out.println(bar);
-            } else if (input.contains("mark")) {
+            } else if (input.matches(".*\\bmark\\b.*")) {
                 String numberOnly = input.replaceAll("[^0-9]", "");
                 int number = Integer.parseInt(numberOnly);
                 Task curr = taskList.get(number - 1);
 
-                if (input.matches(".*\\bunmark\\b.*")) {
-                    curr.markAsUndone();
-                    System.out.println(bar);
-                    System.out.println("OK, I've marked this task as not done yet:");
-                    System.out.println("[" + curr.getStatusIcon() + "] " + curr);
-                    System.out.println(bar);
-                } else {
-                    curr.markAsDone();
-                    System.out.println(bar);
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println("[" + curr.getStatusIcon() + "] " + curr);
-                    System.out.println(bar);
-                }
+                curr.markAsDone();
+                System.out.println(bar);
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println("[" + curr.getStatusIcon() + "] " + curr);
+                System.out.println(bar);
 
+            } else if (input.matches(".*\\bunmark\\b.*")) {
+                String numberOnly = input.replaceAll("[^0-9]", "");
+                int number = Integer.parseInt(numberOnly);
+                Task curr = taskList.get(number - 1);
+
+                curr.markAsUndone();
+                System.out.println(bar);
+                System.out.println("OK, I've marked this task as not done yet:");
+                System.out.println("[" + curr.getStatusIcon() + "] " + curr);
+                System.out.println(bar);
             } else {
                 System.out.println(bar);
                 Task curr = new Task(input);
