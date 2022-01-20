@@ -12,6 +12,8 @@ public class Duke {
         String mark = "Nice! I've marked this task as";
         String now1 = "Now you have ";
         String now2 = " tasks in the list.";
+        String gnum = "Give me a Number.";
+        String gdes = "Description is empty, give me a description.";
         String logo =
                   "||======||==||======|| !!!! ||====||    //===//======||\n"
                 + "||                  || !!!! ||    ||   //   //       ||\n"
@@ -29,38 +31,59 @@ public class Duke {
 
         while(!cmd.equals("bye")){
             String[] c = cmd.split(" ");
-            if (c[0].equals("list")) {
-                int m = 1;
-                int k = n;
-                System.out.println(line);
-                while(k > 0) {
-                    System.out.println(m + "." + list[m-1].toString());
-                    m+=1;
-                    k-=1;
+            try {
+                if (c[0].equals("list")) {
+                    int m = 1;
+                    int k = n;
+                    System.out.println(line);
+                    while(k > 0) {
+                        System.out.println(m + "." + list[m-1].toString());
+                        m+=1;
+                        k-=1;
+                    }
+                    System.out.println(line);
+                } else if (c[0].equals("mark")) {
+                    if (cmd.equals("mark")) {
+                        throw new DukeException(gnum);
+                    }
+                    int no = Integer.parseInt(c[1]) - 1;
+                    list[no].markAsDone();
+                    System.out.println(line + mark + " as done:\n" + list[no].toString() + line);
+                } else if (c[0].equals("unmark")) {
+                    if (cmd.equals("unmark")) {
+                        throw new DukeException(gnum);
+                    }
+                    int no = Integer.parseInt(c[1]) - 1;
+                    list[no].markAsUnDone();
+                    System.out.println(line + mark + " as not done yet:\n" + list[no].toString() + line);
+                } else if (c[0].equals("todo")) {
+                    if (cmd.equals("todo")) {
+                        throw new DukeException(gdes);
+                    }
+                    list[n] = new Todo(cmd.substring(4));
+                    System.out.println(line + gotit + list[n].toString() + "\n" + now1 + (n+1) + now2 + line);
+                    n+=1;
+                } else if (c[0].equals("deadline")) {
+                    if (cmd.equals("deadline")) {
+                        throw new DukeException(gdes);
+                    }
+                    String[] x = cmd.substring(8).split("/by ");
+                    list[n] = new Deadline(x[0],x[1]);
+                    System.out.println(line + gotit + list[n].toString() + "\n" + now1 + (n+1) + now2 + line);
+                    n+=1;
+                } else if (c[0].equals("event")) {
+                    if (cmd.equals("event")) {
+                        throw new DukeException(gdes);
+                    }
+                    String[] x = cmd.substring(5).split("/at ");
+                    list[n] = new Event(x[0],x[1]);
+                    System.out.println(line + gotit + list[n].toString() + "\n" + now1 + (n+1) + now2 + line);
+                    n+=1;
+                } else {
+                    throw new DukeException("INVALID Entry man, Try again :-( ");
                 }
-                System.out.println(line);
-            } else if (c[0].equals("mark")) {
-                int no = Integer.parseInt(c[1]) - 1;
-                list[no].markAsDone();
-                System.out.println(line + mark + " as done:\n" + list[no].toString() + line);
-            } else if (c[0].equals("unmark")) {
-                int no = Integer.parseInt(c[1]) - 1;
-                list[no].markAsUnDone();
-                System.out.println(line + mark + " as not done yet:\n" + list[no].toString() + line);
-            } else if (c[0].equals("todo")) {
-                list[n] = new Todo(cmd.substring(4));
-                System.out.println(line + gotit + list[n].toString() + "\n" + now1 + (n+1) + now2 + line);
-                n+=1;
-            } else if (c[0].equals("deadline")) {
-                String[] x = cmd.substring(8).split("/by ");
-                list[n] = new Deadline(x[0],x[1]);
-                System.out.println(line + gotit + list[n].toString() + "\n" + now1 + (n+1) + now2 + line);
-                n+=1;
-            } else if (c[0].equals("event")) {
-                String[] x = cmd.substring(5).split("/at ");
-                list[n] = new Event(x[0],x[1]);
-                System.out.println(line + gotit + list[n].toString() + "\n" + now1 + (n+1) + now2 + line);
-                n+=1;
+            } catch (DukeException e) {
+                System.out.println(line + e.getMessage() + line);
             }
             cmd = br.readLine();
         }
