@@ -1,0 +1,12 @@
+blah
+blah blah
+blah blah /by blah
+list
+todo wake up in the morning
+mark 1
+event go to sleep /at home
+unmark 1
+mark 2
+deadline find food /by noon
+list
+bye

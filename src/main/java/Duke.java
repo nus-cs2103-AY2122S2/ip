@@ -16,14 +16,37 @@ public class Duke {
         String nextInput = userInput.nextLine();
 
         while (!nextInput.equals("bye")) {
-            String[] words = nextInput.split(" ");
+            String[] words = nextInput.split(" ", 2);
             String command = words[0];
+
             if (command.equals("list")) {
                 int count = 1;
+                System.out.println("Here are the tasks in your list:");
                 for (Task record : taskHistory) {
                     System.out.println(count + ". " + record.toString());
                     count++;
                 }
+            } else if (command.equals("deadline")) {
+                String[] task = words[1].split("/by ");
+                Deadline t = new Deadline(task[0], task[1]);
+                taskHistory.add(t);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(t.toString());
+                System.out.println("Now you have " + taskHistory.size() + " tasks in the list.");
+            } else if (command.equals("todo")) {
+                String task = words[1];
+                Todo t = new Todo(task);
+                taskHistory.add(t);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(t.toString());
+                System.out.println("Now you have " + taskHistory.size() + " tasks in the list.");
+            } else if (command.equals("event")) {
+                String[] task = words[1].split("/at ");
+                Event t = new Event(task[0], task[1]);
+                taskHistory.add(t);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(t.toString());
+                System.out.println("Now you have " + taskHistory.size() + " tasks in the list.");
             } else if (command.equals("mark")) {
                 int taskID = Integer.valueOf(words[1]);
                 taskHistory.get(taskID -1).markDone();
@@ -35,9 +58,7 @@ public class Duke {
                 System.out.println("OK, I've marked this task as not done yet:");
                 System.out.println(taskHistory.get(taskID -1).toString());
             } else {
-                Task t = new Task(nextInput);
-                taskHistory.add(t);
-                System.out.println("added: " + nextInput);
+                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
             nextInput = userInput.nextLine();
         }

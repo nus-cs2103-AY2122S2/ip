@@ -1,7 +1,32 @@
-Hello from
+Hello I'm
  ____        _        
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+What can I do for you?
+OOPS!!! I'm sorry, but I don't know what that means :-(
+OOPS!!! I'm sorry, but I don't know what that means :-(
+OOPS!!! I'm sorry, but I don't know what that means :-(
+Here are the tasks in your list:
+Got it. I've added this task:
+[T][ ] wake up in the morning
+Now you have 1 tasks in the list.
+Nice! I've marked this task as done:
+[T][X] wake up in the morning
+Got it. I've added this task:
+[E][ ] go to sleep  (at: home)
+Now you have 2 tasks in the list.
+OK, I've marked this task as not done yet:
+[T][ ] wake up in the morning
+Nice! I've marked this task as done:
+[E][X] go to sleep  (at: home)
+Got it. I've added this task:
+[D][ ] find food  (by: noon)
+Now you have 3 tasks in the list.
+Here are the tasks in your list:
+1. [T][ ] wake up in the morning
+2. [E][X] go to sleep  (at: home)
+3. [D][ ] find food  (by: noon)
+Bye. Hope to see you again soon!
