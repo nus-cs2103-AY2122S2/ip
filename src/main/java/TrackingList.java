@@ -2,14 +2,28 @@ import java.util.ArrayList;
 import java.lang.StringBuilder;
 
 public class TrackingList {
-    private ArrayList<String> trackingList;
+    private ArrayList<Task> trackingList;
 
     public TrackingList() {
         this.trackingList = new ArrayList<>();
     }
 
     public void addToList(String toAdd) {
-        this.trackingList.add(toAdd);
+        this.trackingList.add(new Task(toAdd));
+    }
+
+    // Return the relevant Task in string form
+    public String markTaskAsDone(int taskNumber) {
+        Task task = this.trackingList.get(taskNumber - 1);
+        task.markAsDone();
+        return task.toString();
+    }
+
+    // Return the relevant Task in string form
+    public String maskTaskAsNotDone(int taskNumber) {
+        Task task = this.trackingList.get(taskNumber - 1);
+        task.markAsNotDone();
+        return task.toString();
     }
 
     @Override
