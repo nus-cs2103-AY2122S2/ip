@@ -11,7 +11,12 @@ list
 mark 1
 mark 2
 mark 3
-mark 10
 unmark 2
+mark 100
+mark
+list
+delete 2
+delete 100
+delete
 list
 bye
