@@ -22,26 +22,42 @@ public class Duke {
      * For mark and unmark, toReturn[0] contains the task number in String format.
      * @throws DukeException the exception specific to Duke
      */
-    private static String[] validate(String[] arr, String command) throws DukeException {
+    private static String[] validate(String[] arr, String command, int size) throws DukeException {
         String test;
         String[] temp;
         String[] toReturn = new String[2];
         try {
-            if (command.equals("bye") || command.equals("list")) {
-                // do nothing as it doesn't require more information
-            } else if (command.equals("todo")) {
-                toReturn[0] = arr[1];
-            } else if (command.equals("deadline")) {
-                test = arr[1];
-                toReturn = test.split("/by ");
-                test = toReturn[1];
-            } else if (command.equals("event")) {
-                test = arr[1];
-                toReturn = test.split("/at ");
-                test = toReturn[1];
-            } else if (command.equals("mark") || command.equals("unmark") || command.equals("delete")) {
-                toReturn[0] = arr[1];
-                int index = Integer.parseInt(arr[1]);
+            switch (command) {
+                case "bye":
+                case "list":
+                    // do nothing as it doesn't require more information
+                    break;
+
+                case "todo":
+                    toReturn[0] = arr[1];
+                    break;
+
+                case "deadline":
+                    test = arr[1];
+                    toReturn = test.split("/by ");
+                    test = toReturn[1];
+                    break;
+
+                case "event":
+                    test = arr[1];
+                    toReturn = test.split("/at ");
+                    test = toReturn[1];
+                    break;
+
+                case "mark":
+                case "unmark":
+                case "delete":
+                    toReturn[0] = arr[1];
+                    int index = Integer.parseInt(arr[1]);
+                    if (index <= 0 || index > size) {
+                        throw new DukeException("Nani is that task number sir?");
+                    }
+                    break;
             }
             return toReturn;
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -56,62 +72,83 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
 
-            while (sc.hasNextLine()) {
-                try {
-                    String input = sc.nextLine();
-                    String[] arr = input.split(" ", 2);
-                    String command = arr[0];
-                    String[] info = validate(arr, command);
+        execute:
+        while (sc.hasNextLine()) {
+            try {
+                String input = sc.nextLine();
+                String[] arr = input.split(" ", 2);
+                String command = arr[0];
+                String[] info = validate(arr, command, toDoList.size());
 
-                    if (input.equals("bye")) {
+                switch (command) {
+                    case "bye":
                         System.out.println(FAREWELL_MESSAGE);
-                        break;
-                    } else if (input.equals("list")) {
+                        break execute;
+
+                    case "list":
                         System.out.println(LIST_MESSAGE);
                         int count = 1;
                         for (Task item : toDoList) {
                             System.out.println(String.format("%d: %s", count, item));
                             count++;
                         }
-                    } else if (command.equals("mark")) {
+                        break;
+
+                    case "mark": {
                         int index = Integer.parseInt(info[0]) - 1;
                         Task temp = toDoList.get(index);
                         temp.markAsDone();
                         System.out.println(MARK_MESSAGE + temp);
-                    } else if (command.equals("unmark")) {
+                        break;
+                    }
+
+                    case "unmark": {
                         int index = Integer.parseInt(info[0]) - 1;
                         Task temp = toDoList.get(index);
                         temp.markAsNotDone();
                         System.out.println(UNMARK_MESSAGE + temp);
-                    } else if (command.equals("todo")) {
+                        break;
+                    }
+
+                    case "todo": {
                         Task task = new ToDo(info[0]);
                         toDoList.add(task);
                         System.out.println(ADD_MESSAGE + task);
                         System.out.println(String.format("Aiyo, now you have %d tasks in the list, jiayous!", toDoList.size()));
-                    } else if (command.equals("deadline")) {
+                        break;
+                    }
+
+                    case "deadline": {
                         Task task = new Deadline(info[0], info[1]);
                         toDoList.add(task);
                         System.out.println(ADD_MESSAGE + task);
                         System.out.println(String.format("Aiyo, now you have %d tasks in the list, jiayous!", toDoList.size()));
-                    } else if (command.equals("event")) {
+                        break;
+                    }
+
+                    case "event": {
                         Task task = new Event(info[0], info[1]);
                         toDoList.add(task);
                         System.out.println(ADD_MESSAGE + task);
                         System.out.println(String.format("Aiyo, now you have %d tasks in the list, jiayous!", toDoList.size()));
-                    } else if (command.equals("delete")) {
+                        break;
+                    }
+
+                    case "delete": {
                         int index = Integer.parseInt(info[0]) - 1;
                         Task temp = toDoList.get(index);
                         toDoList.remove(index);
                         System.out.println(DELETE_MESSAGE + temp);
                         System.out.println(String.format("Less burden for you since you only have %d tasks to do *smiles*", toDoList.size()));
-                    } else {
-                        throw new DukeException("Nani? Me no understand what you say .-.");
+                        break;
                     }
-                } catch (DukeException e) {
-                    System.out.println(e.getMessage());
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println("You don't have that many tasks to do, sir.");
+
+                    default:
+                        throw new DukeException("Nani? Me no understand what you say .-.");
                 }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
+        }
     }
 }
