@@ -14,7 +14,7 @@ public class Messages {
         return String.format("Now you have %d tasks in the list.", noOfTasks);
     }
 
-    public static String generateEmptyArgMessage(TaskType taskType) {
+    public static String generateEmptyDescMessage(TaskType taskType) {
         return "The description of a " + taskType.getCommand() + " cannot be empty.";
     }
 }

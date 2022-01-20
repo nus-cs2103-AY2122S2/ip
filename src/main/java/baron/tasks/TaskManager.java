@@ -34,7 +34,11 @@ public class TaskManager {
             if (splitString.length == 2) {
                 newTask = new Deadline(splitString[0], splitString[1]);
             } else if (splitString.length == 1) {
-                throw new BaronException("Please specify a deadline by the /by keyword.");
+                if (splitString[0].startsWith("/by")) {
+                    throw new BaronException(Messages.generateEmptyDescMessage(taskType));
+                } else {
+                    throw new BaronException("Please specify a deadline by the /by keyword.");
+                }
             } else  {
                 throw new BaronException("Please specify only one deadline.");
             }
@@ -43,6 +47,9 @@ public class TaskManager {
             if (splitString.length == 2) {
                 newTask = new Event(splitString[0], splitString[1]);
             } else if (splitString.length == 1) {
+                if (splitString[0].startsWith("/at")) {
+                    throw new BaronException(Messages.generateEmptyDescMessage(taskType));
+                }
                 throw new BaronException("Please specify a date by the /at keyword.");
             } else  {
                 throw new BaronException("Please specify only one date.");

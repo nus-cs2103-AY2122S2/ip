@@ -19,7 +19,7 @@ public class AddTaskCommand extends Command {
 
     public String execute() {
         if (this.commandArg.isBlank()) {
-            return (new BaronException(Messages.generateEmptyArgMessage(this.taskType))).toString();
+            return (new BaronException(Messages.generateEmptyDescMessage(this.taskType))).toString();
         }
 
         Task addTaskOutput;
