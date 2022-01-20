@@ -37,6 +37,7 @@
     ---------------------------------------------
     ---------------------------------------------
       Here are the tasks in your list: 
+
       01.[T][X] todo read book
       02.[D][ ] deadline return book (by: June 6th)
       03.[E][ ] event project meeting (at: Aug 6th 2-4pm)

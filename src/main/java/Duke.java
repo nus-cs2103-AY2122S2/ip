@@ -2,14 +2,8 @@ import java.util.*;
 
 public class Duke {
 
-
-    private static void sizeCheck(List<Task> inputList) throws DukeException {
-        if (inputList.size() >= 100)
-            throw new DukeException("Too many items in the list! Please consider deleting old items.");
-    }
-
     // Included error handling for invalid commands, large list, and invalid list index.
-    private static void run() throws DukeException {
+    private static void run() {
         Scanner sc = new Scanner(System.in);
         boolean exitFlag = false;
         List<Task> taskList = new ArrayList<>();
@@ -19,126 +13,40 @@ public class Duke {
             String[] inputArr = input.split(" ");
 
             try {
-                switch (inputArr[0].toLowerCase()) {
-                    case "exit":
-                        botResponse("Pleasure to be of service, see you soon!");
-                        exitFlag = true;
+                Command inputCmd = Command.getByName(inputArr[0]);
+                switch (inputCmd) {
+                    case EXIT:
+                        exitFlag = inputCmd.exitResponse();
                         break;
-                    case "list":
-                        listResponse(taskList);
+                    case LIST:
+                        inputCmd.listResponse(taskList);
                         break;
-                    case "mark":
-                    case "unmark":
-                        int lastIdx = Integer.parseInt(inputArr[1]) - 1;
-                        if (lastIdx < 0 || lastIdx >= taskList.size()) {
-                            throw new DukeException("Please enter a valid index.");
-                        }
-                        Task toggleTask = taskList.get(lastIdx);
-                        toggleTask.isMarked = inputArr[0].equals("mark");
-                        markResponse(toggleTask);
+                    case MARK:
+                    case UNMARK:
+                        inputCmd.toggleMarkResponse(taskList, inputArr);
                         break;
-                    case "todo":
-                        sizeCheck(taskList);
-                        taskList.add(new ToDo(input));
-                        subtaskResponse(taskList);
+                    case TODO:
+                    case EVENT:
+                    case DEADLINE:
+                        inputCmd.subtaskResponse(taskList, input);
                         break;
-                    case "event":
-                        sizeCheck(taskList);
-                        taskList.add(new Event(input.split(" /at ")));
-                        subtaskResponse(taskList);
+                    case REMOVE:
+                    case DELETE:
+                        inputCmd.deleteResponse(taskList, inputArr);
                         break;
-                    case "deadline":
-                        sizeCheck(taskList);
-                        taskList.add(new Deadline(input.split(" /by ")));
-                        subtaskResponse(taskList);
-                        break;
-                    case "remove":
-                    case "delete":
-                        int deleteIdx = Integer.parseInt(inputArr[1]) - 1;
-                        if (deleteIdx < 0 || deleteIdx >= taskList.size()) {
-                            throw new DukeException("Please enter a valid index.");
-                        }
-                        deleteResponse(taskList.remove(deleteIdx), taskList.size());
-                        break;
-                    case "clear-list":
-                        taskList.clear();
-                        botResponse("The list has been cleared!");
+                    case CLEAR:
+                        inputCmd.clearResponse(taskList);
                         break;
                     default:
                         throw new DukeException("Invalid command!");
                 }
             } catch (DukeException e) {
-                botResponse(e.toString());
+                e.exceptionResponse();
             }
 
 
         }
         sc.close();
-    }
-
-    public static void deleteResponse(Task deletedTask, int size) {
-        String divString = "    ---------------------------------------------";
-        String strPadding = "      ";
-        String ackString = "Noted. I've removed this task: ";
-        String sizeString = String.format("Now you have %d tasks in the list.", size);
-
-        System.out.println(divString);
-        System.out.println(strPadding + ackString);
-        System.out.println(strPadding + "   " + deletedTask);
-        System.out.println(strPadding + sizeString);
-        System.out.println(divString);
-    }
-
-    public static void subtaskResponse(List<Task> taskList) {
-        String divString = "    ---------------------------------------------";
-        String strPadding = "      ";
-        String ackString = "Got it. I've added this task: ";
-        String sizeString = String.format("Now you have %d tasks in the list.", taskList.size());
-
-        System.out.println(divString);
-        System.out.println(strPadding + ackString);
-        System.out.println(strPadding + "   " + taskList.get(taskList.size() - 1));
-        System.out.println(strPadding + sizeString);
-        System.out.println(divString);
-    }
-
-    private static void markResponse(Task task) {
-        String divString = "    ---------------------------------------------";
-        String strPadding = "      ";
-        String markedString = "Nice! I've marked this task as done: ";
-        String unmarkedString = "OK, I've marked this task as not done yet: ";
-        String outString = task.isMarked ? markedString : unmarkedString;
-
-        System.out.println(divString);
-        System.out.println(strPadding + outString);
-        System.out.println(strPadding + "   " + task);
-        System.out.println(divString);
-    }
-
-    private static void listResponse(List<Task> taskList) {
-        String divString = "    ---------------------------------------------";
-        String strPadding = "      ";
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < taskList.size(); i++) {
-            Task curr = taskList.get(i);
-            sb.append(String.format(strPadding + "%02d." + curr.toString(), i + 1));
-            if (i != taskList.size() - 1) { sb.append("\n"); }
-
-        }
-        System.out.println(divString);
-        System.out.println(strPadding + "Here are the tasks in your list: \n");
-        System.out.println(sb);
-        System.out.println(divString);
-    }
-
-    private static void botResponse(String resString) {
-        String divString = "    ---------------------------------------------";
-        String strPadding = "      ";
-
-        System.out.println(divString);
-        System.out.println(strPadding + resString);
-        System.out.println(divString);
     }
 
     private static void greet() {
@@ -147,10 +55,10 @@ public class Duke {
         String greeting = "Greetings, I am " + botName + ".\n" +
                 strPadding + "What can I do you for?";
 
-        botResponse(greeting);
+        Command.GREET.genericResponse(greeting);
     }
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) {
         greet();
         run();
     }

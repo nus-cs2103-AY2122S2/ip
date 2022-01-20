@@ -1,4 +1,5 @@
 abstract class Task {
+
     protected String taskName;
     protected boolean isMarked;
 
