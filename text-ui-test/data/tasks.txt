@@ -1,0 +1,6 @@
+T|0|borrow book 
+D|0|return book|2019-10-15|18:00
+D|0|return book|2019-10-15|18:00
+E|0|buy book|2019-10-15|18:00|20:00
+T|0|buy book 
+D|0|sell book|2019-10-10|18:00
