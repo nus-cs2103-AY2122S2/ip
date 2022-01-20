@@ -5,3 +5,43 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hi my name is Duke!
+How may I help you today?
+---------------------xx-------------------------
+Rodger that! Task item added:
+[T][ ] borrow book
+---------------------xx-------------------------
+1. [T][ ] borrow book
+---------------------xx-------------------------
+Rodger that! Task item added:
+[D][ ] return book (by: Sunday)
+---------------------xx-------------------------
+Rodger that! Task item added:
+[E][ ] project meeting (at: Mon 2-4pm)
+---------------------xx-------------------------
+Rodger that! Task item added:
+[D][ ] do homework (by: no idea :-p)
+---------------------xx-------------------------
+1. [T][ ] borrow book
+2. [D][ ] return book (by: Sunday)
+3. [E][ ] project meeting (at: Mon 2-4pm)
+4. [D][ ] do homework (by: no idea :-p)
+---------------------xx-------------------------
+Congrats! Keep going:)
+[D][X] return book (by: Sunday)
+---------------------xx-------------------------
+Congrats! Keep going:)
+[E][X] project meeting (at: Mon 2-4pm)
+---------------------xx-------------------------
+Congrats! Keep going:)
+[T][X] borrow book
+---------------------xx-------------------------
+No worries:) Stay motivated!
+[D][ ] return book (by: Sunday)
+---------------------xx-------------------------
+1. [T][X] borrow book
+2. [D][ ] return book (by: Sunday)
+3. [E][X] project meeting (at: Mon 2-4pm)
+4. [D][ ] do homework (by: no idea :-p)
+---------------------xx-------------------------
+Adios! See you soon:)

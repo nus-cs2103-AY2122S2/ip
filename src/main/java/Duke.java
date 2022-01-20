@@ -84,7 +84,7 @@ public class Duke {
         }
 
         manager.add(toAdd);
-        System.out.println("Rodger that! Todo item added:");
+        System.out.println("Rodger that! Task item added:");
         System.out.println(toAdd);
     }
 
