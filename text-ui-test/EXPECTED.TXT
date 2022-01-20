@@ -7,37 +7,63 @@ ________________________________________________________________________________
 Fantabulous! You have added this Todo Item:
 [T][] borrow book
 ____________________________________________________________________________________________________
-Perfect! You have added this Deadline Item:
-[D][] return book (By: 24th january 8pm at amk library!)
- Remember to stick to your objective date!
+Here are your tasks:
+1: [T][] borrow book
+These are all your tasks! Only 1 more remaining! Keep going!
 ____________________________________________________________________________________________________
-Perfect! You have added this Event Item:
-[E][] project meeting (At: 24th january 10pm for cs2103)
- Remember to be there 5 minutes early!
+Perfect! You have added this Deadline Item:
+[D][] return book (By: Sunday 14th January)
+Remember to stick to your objective date!
 ____________________________________________________________________________________________________
 Here are your tasks:
 1: [T][] borrow book
-2: [D][] return book (By: 24th january 8pm at amk library!)
-3: [E][] project meeting (At: 24th january 10pm for cs2103)
+2: [D][] return book (By: Sunday 14th January)
+These are all your tasks! Only 2 more remaining! Keep going!
+____________________________________________________________________________________________________
+Please enter an Event in the following format:
+event [description] /at [datetime]
+____________________________________________________________________________________________________
+Perfect! You have added this Event Item:
+[E][] project meeting (At: monday 15th jan 4pm)
+Remember to be there 5 minutes early!
+____________________________________________________________________________________________________
+Please enter a task number to mark!
+____________________________________________________________________________________________________
+Here are your tasks:
+1: [T][] borrow book
+2: [D][] return book (By: Sunday 14th January)
+3: [E][] project meeting (At: monday 15th jan 4pm)
 These are all your tasks! Only 3 more remaining! Keep going!
 ____________________________________________________________________________________________________
 Congratulations on completing the task!
-[D][Done!] return book (By: 24th january 8pm at amk library!)
+[T][Done!] borrow book
 ____________________________________________________________________________________________________
-Here are your tasks:
-1: [T][] borrow book
-2: [D][Done!] return book (By: 24th january 8pm at amk library!)
-3: [E][] project meeting (At: 24th january 10pm for cs2103)
-These are all your tasks! Only 2 more remaining! Keep going!
+Please mark a task in the following format:
+mark [number]
+____________________________________________________________________________________________________
+Congratulations on completing the task!
+[D][Done!] return book (By: Sunday 14th January)
 ____________________________________________________________________________________________________
 I have un-marked this task!
-[D][] return book (By: 24th january 8pm at amk library!)
+[T][] borrow book
 ____________________________________________________________________________________________________
 Here are your tasks:
 1: [T][] borrow book
-2: [D][] return book (By: 24th january 8pm at amk library!)
-3: [E][] project meeting (At: 24th january 10pm for cs2103)
-These are all your tasks! Only 3 more remaining! Keep going!
+2: [D][Done!] return book (By: Sunday 14th January)
+3: [E][] project meeting (At: monday 15th jan 4pm)
+These are all your tasks! Only 2 more remaining! Keep going!
+____________________________________________________________________________________________________
+Please enter a Deadline in the following format:
+deadline [description] /by [datetime]
+____________________________________________________________________________________________________
+Please enter an Event in the following format:
+event [description] /at [datetime]
+____________________________________________________________________________________________________
+Here are your tasks:
+1: [T][] borrow book
+2: [D][Done!] return book (By: Sunday 14th January)
+3: [E][] project meeting (At: monday 15th jan 4pm)
+These are all your tasks! Only 2 more remaining! Keep going!
 ____________________________________________________________________________________________________
 Bye. Hope I've motivated you as much as I could have, and SMILE :D
 ____________________________________________________________________________________________________

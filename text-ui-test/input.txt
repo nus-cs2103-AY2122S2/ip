@@ -1,10 +1,18 @@
 list
 todo borrow book
-deadline return book /by 24th january 8pm at amk library!
-event project meeting /at 24th january 10pm for cs2103
 list
+deadline return book /by Sunday 14th January
+list
+event project meeting
+event project meeting /at monday 15th jan 4pm
+mark
+list
+mark 1
+mark2
 mark 2
+unmark 1
 list
-unmark 2
+deadline
+event
 list
 bye
