@@ -12,23 +12,24 @@ public class Duke {
                     + "|____/ \\___,\\_____|_|\\_\\ |_|\n";
 
         ArrayList<Task> tasks = new ArrayList<Task>();
+
+        String helpResponse = "> Type 'list' to see what you have in your task list"+
+                "\n> Type todo <message> to put a todo in your list"+
+                "\n> Type deadline <message> /by <deadline> to put a deadline in your list"+
+                "\n> Type event <message> /at <date> to put an event in your list"+
+                "\n> Type 'mark <x>' to mark a task in your list" +
+                "\n> Type 'unmark <x>' to unmark a task in your list";;
+
         System.out.println("Hello! I'm \n" + logo + ":)" + "\nI am a task manager. " +
                 "\nType 'help' for more information on the commands you can give me." +
                 "\nWhat can I do for you today?" +
-                "\n-----------------");
-
-        String helpResponse = "> Type 'list' to see what you have in your task list"+
-                "\n> Type anything to put a task in your list"+
-                "\n> Type 'mark <x>' to mark a task in your list" +
-                "\n> Type 'unmark <x>' to unmark a task in your list";;
+                "\n---------------------------------------------");
 
         while(true){
             Scanner myObj = new Scanner(System.in);
             String response = myObj.nextLine();
-            Task entry = new Task(response);
             if (response.equals("bye")){
-                String byeResponse = "Bye. Hope to see you again soon! " +
-                        "\n-----------------";
+                String byeResponse = "Bye. Hope to see you again soon!";
                 System.out.println(byeResponse);
                 break;
             } else if(response.equals("help")){
@@ -40,6 +41,36 @@ public class Duke {
                     String message = currentTask.getTask();
                     System.out.println(i+1 +". " + message);
                 }
+            } else if(response.contains("todo")) {
+                String [] textEntered = response.split(" ", 2);
+                String description = textEntered[1];
+                Todo entry = new Todo(description);
+                tasks.add(entry);
+                String message = entry.getTask();
+                System.out.println("I have added the following todo:\n" + message);
+                System.out.println("You now have " + tasks.size() + " tasks");
+            } else if(response.contains("deadline")) {
+                String [] textEntered = response.split(" ", 2);
+                String text = textEntered[1];
+                String [] textArr = text.split("/by ");
+                String description = textArr[0];
+                String time = textArr[1];
+                Deadline entry = new Deadline(description, time);
+                tasks.add(entry);
+                String message = entry.getTask();
+                System.out.println("I have added the following deadline:\n" + message);
+                System.out.println("You now have " + tasks.size() + " tasks");
+            } else if(response.contains("event")) {
+                String [] textEntered = response.split(" ", 2);
+                String text = textEntered[1];
+                String [] textArr = text.split("/at ");
+                String description = textArr[0];
+                String time = textArr[1];
+                Event entry = new Event(description, time);
+                tasks.add(entry);
+                String message = entry.getTask();
+                System.out.println("I have added the following event:\n" + message);
+                System.out.println("You now have " + tasks.size() + " tasks");
             } else if(response.contains("unmark")) {
                 String strID = response.substring(response.length() - 1);
                 Task currentTask = tasks.get(Integer.parseInt(strID)-1);
@@ -53,9 +84,9 @@ public class Duke {
                 String message = currentTask.getTask();
                 System.out.println("Ok, I have marked the following task:\n" + message);
             } else {
-                tasks.add(entry);
-                System.out.println("I have added the following task:\n" + response + "\n-----------------");
+                System.out.println(helpResponse);
             }
+            System.out.println("---------------------------------------------");
         }
     }
 }

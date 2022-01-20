@@ -13,7 +13,7 @@ public class Task {
         return output;
     }
 
-    public String getStatusIcon() {
+    private String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
