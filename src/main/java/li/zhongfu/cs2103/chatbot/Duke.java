@@ -21,7 +21,7 @@ public class Duke {
     }
 
     private static void dialog(String line) {
-        dialog(new String[]{line});
+        dialog(line.split("\n"));
     }
 
     /**
