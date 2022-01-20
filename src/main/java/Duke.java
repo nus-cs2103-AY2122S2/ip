@@ -23,7 +23,8 @@ public class Duke {
             } else if (inputstring[0].equals("delete")) {
                 delete(inputstring[1]);
             } else {
-                System.out.println("OOPS!!! I'm sorry, but I don't know what that means O.o");
+                DukeException exception = new DukeException("OOPS!!! I'm sorry, but I don't know what that means O.o");
+                System.out.println(exception);
             }
             inputstring1 = sc.nextLine();
             inputstring = inputstring1.split(" ");
@@ -42,7 +43,9 @@ public class Duke {
 
     public static void addtolist(String[] stringtoadd) {
         if (stringtoadd.length < 2) {
-            System.out.println("OOPS!! The description of a " + stringtoadd[0] + " cannot be empty.");
+            DukeException exception = new DukeException("OOPS!! The description of a " + stringtoadd[0] +
+                    " cannot be empty.");
+            System.out.println(exception);
         } else {
             Task task;
             String returnstring = "";
