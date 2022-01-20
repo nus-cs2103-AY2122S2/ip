@@ -3,6 +3,9 @@ import java.util.Scanner;
 
 public class Bobby {
     static ArrayList<Task> tasks = new ArrayList<Task>();
+    enum Commands {
+        todo, bye, list, mark, unmark, deadline, event, delete, illegal
+    }
 
     public static void AddTask(Task t){
         tasks.add(t);
@@ -125,16 +128,22 @@ public class Bobby {
          while (true) {
              String input = sc.nextLine();
              String inputs[] = input.split(" ");
-             switch(inputs[0]) {
-                 case "bye":
+             Commands cmd = null;
+             try {
+                 cmd = Commands.valueOf(inputs[0]);
+             } catch (IllegalArgumentException e) {
+                 cmd = Commands.illegal;
+             }
+             switch(cmd) {
+                 case bye:
                      System.out.println(dash + "    Bye! Hope to see you again soon!\n" + dash2);
                      return;
-                 case "list" :
+                 case list:
                      System.out.println(dash);
                      ListTask();
                      System.out.println(dash2);
                      break;
-                 case "mark":
+                 case mark:
                      System.out.println(dash);
                      try {
                          markAsDone(input, inputs);
@@ -143,7 +152,7 @@ public class Bobby {
                      }
                      System.out.println(dash2);
                      break;
-                 case "unmark":
+                 case unmark:
                      System.out.println(dash);
                      try {
                          markAsNotDone(input, inputs);
@@ -152,7 +161,7 @@ public class Bobby {
                      }
                      System.out.println(dash2);
                      break;
-                 case "todo":
+                 case todo:
                      System.out.println(dash);
                      try {
                          AddToDo(input);
@@ -161,7 +170,7 @@ public class Bobby {
                      }
                      System.out.println(dash2);
                      break;
-                 case "deadline":
+                 case deadline:
                      System.out.println(dash);
                      try {
                          AddDeadline(input);
@@ -170,7 +179,7 @@ public class Bobby {
                      }
                      System.out.println(dash2);
                      break;
-                 case "event":
+                 case event:
                      System.out.println(dash);
                      try {
                          AddEvent(input);
@@ -179,7 +188,7 @@ public class Bobby {
                      }
                      System.out.println(dash2);
                      break;
-                 case "delete":
+                 case delete:
                      System.out.println(dash);
                      try {
                          DeleteTask(input, inputs);
@@ -188,7 +197,7 @@ public class Bobby {
                      }
                      System.out.println(dash2);
                      break;
-                 default:
+                 case illegal:
                      System.out.println(dash + "    Invalid command\n" + dash2);
              }
 
