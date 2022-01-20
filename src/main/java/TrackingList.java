@@ -14,14 +14,14 @@ public class TrackingList {
 
     // Return the relevant Task in string form
     public String markTaskAsDone(int taskNumber) {
-        Task task = this.trackingList.get(taskNumber - 1);
+        Task task = this.trackingList.get(taskNumber - 1); // assume valid taskNumber
         task.markAsDone();
         return task.toString();
     }
 
     // Return the relevant Task in string form
-    public String maskTaskAsNotDone(int taskNumber) {
-        Task task = this.trackingList.get(taskNumber - 1);
+    public String markTaskAsNotDone(int taskNumber) {
+        Task task = this.trackingList.get(taskNumber - 1); // assume valid taskNumber
         task.markAsNotDone();
         return task.toString();
     }
