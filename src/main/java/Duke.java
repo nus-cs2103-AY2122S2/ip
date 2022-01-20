@@ -12,24 +12,28 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         Scanner sc = new Scanner(System.in);
 
-        List<String> tasks = new ArrayList<String>();
+        List<Task> tasks = new ArrayList<Task>();
 
         while (true) {
-            String instruction = sc.nextLine();
-            switch(instruction){
-                case "bye":
+            String[] instruction = sc.nextLine().split(" ");
+            switch(instruction[0]){
+                case "bye": {
                     System.out.println("Bye. Hope to see you again soon!\n");
                     return;
+                }
 
-                case "list":
+                case "list": {
                     for (int i = 0; i < tasks.size(); i++) {
                         System.out.println(i + 1 + ". " + tasks.get(i));
                     }
                     break;
+                }
 
-                default:
-                    tasks.add(instruction);
-                    System.out.println("added: " + instruction);
+                default: {
+                    String instructionName = String.join(" ", instruction);
+                    tasks.add(new Task(instructionName));
+                    System.out.println("added: " + instructionName);
+                }
             }
             System.out.println("");
         }
