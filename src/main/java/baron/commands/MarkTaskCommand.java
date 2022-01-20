@@ -17,7 +17,7 @@ public class MarkTaskCommand extends Command {
     public String execute() {
         int index;
         try {
-            index = CommandParser.parseIntArg(this.commandArgs);
+            index = CommandParser.parseTaskIntArg(this.commandArgs);
             this.taskManager.markTask(index);
             return Messages.MESSAGE_MARK_SUCCESS + this.taskManager.getTask(index).toString();
         } catch (BaronException e) {

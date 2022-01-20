@@ -17,7 +17,7 @@ public class UnmarkTaskCommand extends Command {
     public String execute() {
         int index;
         try {
-            index = CommandParser.parseIntArg(this.commandArgs);
+            index = CommandParser.parseTaskIntArg(this.commandArgs);
             this.taskManager.unmarkTask(index);
             return Messages.MESSAGE_UNMARK_SUCCESS + this.taskManager.getTask(index).toString();
         } catch (BaronException e) {

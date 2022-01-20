@@ -18,6 +18,10 @@ public class AddTaskCommand extends Command {
     }
 
     public String execute() {
+        if (this.commandArg.isBlank()) {
+            return (new BaronException(Messages.generateEmptyArgMessage(this.taskType))).toString();
+        }
+
         Task addTaskOutput;
         try {
             addTaskOutput = this.taskManager.addTask(this.taskType, this.commandArg);
@@ -25,6 +29,6 @@ public class AddTaskCommand extends Command {
             return e.toString();
         }
         return Messages.MESSAGE_ADD_TASK_SUCCESS + addTaskOutput.toString() + "\n"
-                + Messages.getNoOfTasksMessage(this.taskManager.getTaskCount());
+                + Messages.generateNoOfTasksMessage(this.taskManager.getTaskCount());
     }
 }

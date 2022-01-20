@@ -18,22 +18,31 @@ public class CommandManager {
             return new ListCommand(this.taskManager);
         } else {
             String[] splitString = fullCommand.split("\\s+", 2);
-            if (splitString.length == 2) {
-                if (splitString[0].equals("mark")) {
-                    return new MarkTaskCommand(this.taskManager, splitString[1]);
-                } else if (splitString[0].equals("unmark")) {
-                    return new UnmarkTaskCommand(this.taskManager, splitString[1]);
-                } else if (splitString[0].equals("todo")) {
-                    return new AddTaskCommand(this.taskManager, TaskType.TODO, splitString[1]);
-                } else if (splitString[0].equals("deadline")) {
-                    return new AddTaskCommand(this.taskManager, TaskType.DEADLINE, splitString[1]);
-                } else if (splitString[0].equals("event")) {
-                    return new AddTaskCommand(this.taskManager, TaskType.EVENT, splitString[1]);
-                } else {
-                    return new AddTaskCommand(this.taskManager, TaskType.TODO, fullCommand);
-                }
+            String commandArg = "";
+
+            if (splitString.length == 0) {
+                return new EmptyCommand();
             }
-            return new AddTaskCommand(this.taskManager, TaskType.TODO, fullCommand);
+
+            // splitString is of length 1 or 2
+            if (splitString.length == 2) {
+                commandArg = splitString[1];
+            }
+
+            switch (splitString[0]) {
+                case "mark":
+                    return new MarkTaskCommand(this.taskManager, commandArg);
+                case "unmark":
+                    return new UnmarkTaskCommand(this.taskManager, commandArg);
+                case "todo":
+                    return new AddTaskCommand(this.taskManager, TaskType.TODO, commandArg);
+                case "deadline":
+                    return new AddTaskCommand(this.taskManager, TaskType.DEADLINE, commandArg);
+                case "event":
+                    return new AddTaskCommand(this.taskManager, TaskType.EVENT, commandArg);
+                default:
+                    return new InvalidCommand();
+            }
         }
     }
 }
