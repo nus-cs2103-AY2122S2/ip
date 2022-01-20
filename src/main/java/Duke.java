@@ -15,7 +15,7 @@ public class Duke {
         System.out.println();
 
         // Data Structures
-        Map<Integer, Task> commands = new HashMap<>();
+        ArrayList<Task> commands = new ArrayList<>();
 
         Scanner in = new Scanner(System.in);
         String input = in.nextLine();
@@ -26,34 +26,46 @@ public class Duke {
             String cmd = st.nextToken();
 
             if (cmd.equals("list")) {
+
                 System.out.println(indent+"Here are the tasks in your list:");
-                for (int i=1; i<=commands.size(); i++) {
-                    System.out.println(indent+i+"."+commands.get(i));
+                for (int i=0; i<commands.size(); i++) {
+                    System.out.println(indent+(i+1)+"."+commands.get(i));
                 }
+
             } else if (cmd.equals("mark") || cmd.equals("unmark")) {
-                int rank = Integer.parseInt(st.nextToken());
-                commands.get(rank).setDone(cmd.equals("mark"));
+
+                int index = Integer.parseInt(st.nextToken());
+                commands.get(index-1).setDone(cmd.equals("mark"));
                 if (cmd.equals("mark")) {
                     System.out.println(indent + "Nice! I've marked this task as done:");
                 } else {
                     System.out.println(indent + "OK, I've marked this task as not done yet:");
                 }
-                System.out.println(indent + "  " + commands.get(rank));
+                System.out.println(indent + "  " + commands.get(index-1));
+
             } else if (cmd.equals("todo") || cmd.equals("deadline") || cmd.equals("event")) {
 
                 System.out.println(indent+"Got it. I've added this task:");
                 switch (cmd) {
                     case "todo":
-                        commands.put(commands.size()+1, new Todo(commands.size()+1, input.split(cmd)[1]));
+                        commands.add(new Todo(commands.size()+1, input.split(cmd)[1]));
                         break;
                     case "deadline":
-                        commands.put(commands.size()+1, new Deadline(commands.size()+1, input.split(cmd)[1]));
+                        commands.add(new Deadline(commands.size()+1, input.split(cmd)[1]));
                         break;
                     case "event":
-                        commands.put(commands.size()+1, new Event(commands.size()+1, input.split(cmd)[1]));
+                        commands.add(new Event(commands.size()+1, input.split(cmd)[1]));
                         break;
                 }
-                System.out.println(indent+"  "+commands.get(commands.size()));
+                System.out.println(indent+"  "+commands.get(commands.size()-1));
+                System.out.println(indent+"Now you have "+commands.size()+" tasks in the list.");
+
+            } else if (cmd.equals("delete")) {
+
+                int index = Integer.parseInt(st.nextToken());
+                System.out.println(indent + "Noted. I've removed this task:");
+                System.out.println(indent + "  " + commands.get(index-1));
+                commands.remove(index-1);
                 System.out.println(indent+"Now you have "+commands.size()+" tasks in the list.");
             }
 
