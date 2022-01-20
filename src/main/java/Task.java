@@ -28,4 +28,14 @@ public class Task
     {
         this.status = 0;
     }
+
+    @Override
+    public String toString()
+    {
+        if (status == 1) {
+            return "[X] " + name + "\n";
+        } else {
+            return "[ ] " + name + "\n";
+        }
+    }
 }
