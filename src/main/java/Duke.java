@@ -30,7 +30,7 @@ public class Duke {
                 String[] strArr = input.split(" ");
                 String command = strArr[0];
                 if(!(command.equals("bye") || command.equals("list") || command.equals("mark") || command.equals("todo")
-                        || command.equals("deadline") || command.equals("event"))) {
+                        || command.equals("deadline") || command.equals("event") || command.equals("delete"))) {
                     throw new DukeInvalidCommandException();
                 }
                 if (command.equals(bye)) {
@@ -115,6 +115,20 @@ public class Duke {
                     else {
                         throw new DukeMissingArgumentException("/at");
                     }
+                }
+                if (command.equals("delete")){
+                    int index = Integer.parseInt(strArr[1]) - 1;
+                    Task task;
+                    try{
+                        task = taskList.get(index);
+                        taskList.remove(index);
+                    } catch(IndexOutOfBoundsException e) {
+                        throw new DukeInvalidIndexException();
+                    }
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(task.toString());
+                    System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+
                 }
             }
             catch (DukeException e) {
