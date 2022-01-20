@@ -7,14 +7,7 @@ import java.util.Scanner;
 
 public class Yale {
     public static void main(String[] args) {
-        String logo = "\n" +
-                " ____  ____     _       _____     ________  \n" +
-                "|_  _||_  _|   / \\     |_   _|   |_   __  | \n" +
-                "  \\ \\  / /    / _ \\      | |       | |_ \\_| \n" +
-                "   \\ \\/ /    / ___ \\     | |   _   |  _| _  \n" +
-                "   _|  |_  _/ /   \\ \\_  _| |__/ | _| |__/ | \n" +
-                "  |______||____| |____||________||________| \n" +
-                "                                            \n";
+        String logo = "----YALE----";
         System.out.println("Hello from\n" + logo);
         System.out.println("Hi, I'm Yale!\n" );
         Scanner scanner = new Scanner(System.in);
@@ -69,7 +62,7 @@ public class Yale {
             String date = command.split(" /by ", 2)[1]; // Retrieve date
             Deadline newDeadline = new Deadline(task, false, date);
             list.addTo(newDeadline);
-            System.out.println("Got it! I've added this task: \n    " +
+            System.out.println("Got it! I've added this task:\n    " +
                     newDeadline.toString() + "\n" +
                     "Now you have " + list.getSize() + " tasks in the list.");
         }
@@ -80,7 +73,7 @@ public class Yale {
             String date = command.split(" /at ", 2)[1]; // Retrieve date
             Event newEvent = new Event(task, false, date);
             list.addTo(newEvent);
-            System.out.println("Got it! I've added this task: \n    " +
+            System.out.println("Got it! I've added this task:\n    " +
                     newEvent.toString() + "\n" +
                     "Now you have " + list.getSize() + " tasks in the list.");
         }
@@ -88,7 +81,7 @@ public class Yale {
             String task = command.split("todo ", 2)[1]; // Remove word
             ToDo newToDo = new ToDo(task, false);
             list.addTo(newToDo);
-            System.out.println("Got it! I've added this task: \n    " +
+            System.out.println("Got it! I've added this task:\n    " +
                     newToDo.toString() + "\n" +
                     "Now you have " + list.getSize() + " tasks in the list.");
         }
