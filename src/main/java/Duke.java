@@ -17,6 +17,7 @@ public class Duke {
         System.out.println("I'm Saitama, a hero for fun.");
         System.out.println("What can I do for you?");
         System.out.println("____________________________________________________________");
+        System.out.println("Add Countries");
 
         while (true) {
             String[] command = sc.nextLine().trim().toLowerCase().split(" ", 2);
