@@ -1,3 +1,4 @@
+some random command
 todo read book
 deadline return book /by June 6th
 event project meeting /at Aug 6th 2-4pm
@@ -9,4 +10,20 @@ event project meeting /at Mon 2-4pm
 deadline do homework /by no idea :-p
 event CS2103 finals /at 2/1/2022
 list
+todo
+deadline
+event
+deadline event
+event event
+deadline event /by
+event event /by
+mark 1
+list
+mark 2
+list
+unmark 1
+list
+mark 9999
+mark
+unmark
 bye

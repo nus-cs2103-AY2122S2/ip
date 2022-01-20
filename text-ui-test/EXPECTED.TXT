@@ -3,6 +3,9 @@
  How can I be of service 
 =========================
 
+Error: Sorry! I don't undestand what are you saying!
+
+
 Alright! Added that to the list:
 [T][ ] read book
 Now you have 1 tasks in the list.
@@ -66,6 +69,84 @@ Here you go sir:
 7. [E][ ] project meeting (at: Mon 2-4pm)
 8. [D][ ] do homework (by: no idea :-p)
 9. [E][ ] CS2103 finals (at: 2/1/2022)
+
+
+Error: Are you tryng to add something to todo
+
+
+Error: Are you tryng to add something to deadline
+
+
+Error: Are you tryng to add something to event
+
+
+Error: Deadline needs a date
+
+
+Error: Event needs a date
+
+
+Error: Deadline needs a date
+
+
+Error: Event needs a date
+
+
+Alright! It's done:
+[T][X] read book
+
+
+Here you go sir:
+1. [T][X] read book
+2. [D][ ] return book (by: June 6th)
+3. [E][ ] project meeting (at: Aug 6th 2-4pm)
+4. [T][ ] join sports club
+5. [T][ ] brrow book
+6. [D][ ] return book (by: Sundy)
+7. [E][ ] project meeting (at: Mon 2-4pm)
+8. [D][ ] do homework (by: no idea :-p)
+9. [E][ ] CS2103 finals (at: 2/1/2022)
+
+
+Alright! It's done:
+[D][X] return book (by: June 6th)
+
+
+Here you go sir:
+1. [T][X] read book
+2. [D][X] return book (by: June 6th)
+3. [E][ ] project meeting (at: Aug 6th 2-4pm)
+4. [T][ ] join sports club
+5. [T][ ] brrow book
+6. [D][ ] return book (by: Sundy)
+7. [E][ ] project meeting (at: Mon 2-4pm)
+8. [D][ ] do homework (by: no idea :-p)
+9. [E][ ] CS2103 finals (at: 2/1/2022)
+
+
+Thats unfortunate!:
+[T][ ] read book
+
+
+Here you go sir:
+1. [T][ ] read book
+2. [D][X] return book (by: June 6th)
+3. [E][ ] project meeting (at: Aug 6th 2-4pm)
+4. [T][ ] join sports club
+5. [T][ ] brrow book
+6. [D][ ] return book (by: Sundy)
+7. [E][ ] project meeting (at: Mon 2-4pm)
+8. [D][ ] do homework (by: no idea :-p)
+9. [E][ ] CS2103 finals (at: 2/1/2022)
+
+
+Error: The index is out of bond!
+
+
+Error: Mark needs a number
+
+
+Error: Mark needs a number
 
 
 Arrivederci!

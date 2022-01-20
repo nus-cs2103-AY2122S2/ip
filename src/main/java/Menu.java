@@ -10,7 +10,13 @@ class Menu {
         System.out.println(" How can I be of service ");
         System.out.println("=========================");
         while(true) {
-            Command.runCommand(sc.nextLine(), list);
+            try {
+                Command.runCommand(sc.nextLine(), list);
+            } catch (DukeExceptions e) {
+                // TODO Auto-generated catch block
+                System.out.println("Error: " + e.getMessage());
+                System.out.println("");
+            }
         }
     }
 }

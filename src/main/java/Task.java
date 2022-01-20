@@ -16,7 +16,7 @@ abstract class Task {
     }
 }
 
-class ToDo extends Task {
+final class ToDo extends Task {
 
     ToDo(String taskName) {
         super(taskName);
@@ -30,7 +30,7 @@ class ToDo extends Task {
     }
 }
 
-class Deadline extends Task {
+final class Deadline extends Task {
     String deadline;
 
     Deadline(String taskName, String deadline) {
@@ -47,7 +47,7 @@ class Deadline extends Task {
     }
 }
 
-class Event extends Task {
+final class Event extends Task {
     String eventDate;
 
     Event(String taskName, String eventDate) {

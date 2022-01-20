@@ -5,25 +5,32 @@ abstract class Command {
         this.commandName = commandName;
     }
 
-    abstract protected void run();
+    abstract protected void run() throws DukeExceptions;
 
-    static void runCommand(String cmd, ItemList<Task> itemList) {
-        System.out.println("");
-        if (cmd.equals("bye"))
-            new ByeCommand().run();
-        else if (cmd.equals("list"))
-            new showListCommand(itemList).run();
-        else if (cmd.startsWith("mark"))
-            new markListCommand(cmd, itemList).run();
-        else if (cmd.startsWith("unmark"))
-            new unmarkListCommand(cmd, itemList).run();
-        else if (cmd.startsWith("todo"))
-            new addTodoListCommand(cmd, itemList).run();
-        else if (cmd.startsWith("deadline"))
-            new addDeadlineListCommand(cmd, itemList).run();
-        else if (cmd.startsWith("event"))
-            new addEventListCommand(cmd, itemList).run();
-        System.out.println("");
+    static void runCommand(String cmd, ItemList<Task> itemList) throws DukeExceptions {
+        try {
+            System.out.println("");
+            if (cmd.equals("bye"))
+                new ByeCommand().run();
+            else if (cmd.equals("list"))
+                new showListCommand(itemList).run();
+            else if (cmd.startsWith("mark"))
+                new markListCommand(cmd, itemList).run();
+            else if (cmd.startsWith("unmark"))
+                new unmarkListCommand(cmd, itemList).run();
+            else if (cmd.startsWith("todo"))
+                new addTodoListCommand(cmd, itemList).run();
+            else if (cmd.startsWith("deadline"))
+                new addDeadlineListCommand(cmd, itemList).run();
+            else if (cmd.startsWith("event"))
+                new addEventListCommand(cmd, itemList).run();
+            else
+                throw InvalidCommand.createInvalidCommand(cmd);
+            System.out.println("");
+        } catch (IndexOutOfBoundsException e) {
+            throw new ListIndexOutOfBound();
+        }
+        
     }
 }
 
@@ -43,7 +50,7 @@ abstract class listCommand extends Command {
 
 }
 
-class ByeCommand extends Command {
+final class ByeCommand extends Command {
     protected ByeCommand() {
         super("bye");
     }
@@ -55,7 +62,7 @@ class ByeCommand extends Command {
     }
 }
 
-class showListCommand extends listCommand {
+final class showListCommand extends listCommand {
 
     protected showListCommand(ItemList<Task> itemList) {
         super("list", itemList);
@@ -69,49 +76,59 @@ class showListCommand extends listCommand {
 
 }
 
-class markListCommand extends listCommand {
+final class markListCommand extends listCommand {
     int index;
 
-    protected markListCommand(String commandName, ItemList<Task> itemList) {
+    protected markListCommand(String commandName, ItemList<Task> itemList) throws EmptyParameters {
         super(commandName, itemList);
-        this.index = Integer.valueOf(commandName.split("\\s+")[1]);
+        String[] number = commandName.split("\\s+");
+        if (number.length < 2)
+            throw EmptyNumber.createEmptyNumber("Mark");
+        this.index = Integer.valueOf(number[1]);
     }
 
     @Override
     protected void run() {
-        System.out.println("Alright! It's done:");
         this.itemList.getItem(index).setDone();
+        System.out.println("Alright! It's done:");
         System.out.println(this.itemList.getItem(index).toString());
     }
     
 }
 
-class unmarkListCommand extends listCommand {
+final class unmarkListCommand extends listCommand {
     int index;
 
-    protected unmarkListCommand(String commandName, ItemList<Task> itemList) {
+    protected unmarkListCommand(String commandName, ItemList<Task> itemList) throws EmptyParameters {
         super(commandName, itemList);
-        this.index = Integer.valueOf(commandName.split("\\s+")[1]);
+        String[] number = commandName.split("\\s+");
+        if (number.length < 2)
+            throw EmptyNumber.createEmptyNumber("Mark");
+        this.index = Integer.valueOf(number[1]);
     }
 
     @Override
     protected void run() {
-        System.out.println("Thats unfortunate!:");
         this.itemList.getItem(index).setUndone();
+        System.out.println("Thats unfortunate!:");
         System.out.println(this.itemList.getItem(index).toString());
     }
     
 }
 
-class addTodoListCommand extends listCommand {
+final class addTodoListCommand extends listCommand {
 
     protected addTodoListCommand(String commandName, ItemList<Task> itemList) {
         super(commandName, itemList);
     }
 
     @Override
-    protected void run() {
+    protected void run() throws EmptyParameters {
+        if (!this.commandName.startsWith("todo "))
+            throw EmptyTask.createEmptyTask("todo");
         String taskName = this.commandName.replaceFirst("todo ", "");
+        if (taskName.isBlank())
+            throw EmptyTask.createEmptyTask("todo");
         Task newTask = new ToDo(taskName);
         itemList.addItem(newTask);
         this.printAddEndRun(newTask);
@@ -119,18 +136,26 @@ class addTodoListCommand extends listCommand {
 
 }
 
-class addDeadlineListCommand extends listCommand {
+final class addDeadlineListCommand extends listCommand {
 
     protected addDeadlineListCommand(String commandName, ItemList<Task> itemList) {
         super(commandName, itemList);
     }
 
     @Override
-    protected void run() {
+    protected void run() throws EmptyParameters {
+        if (!this.commandName.startsWith("deadline "))
+            throw EmptyTask.createEmptyTask("deadline");
         String filtered = this.commandName.replaceFirst("deadline ", "");
+        if (filtered.isBlank())
+            throw EmptyTask.createEmptyTask("deadline");
         int index = filtered.indexOf("/by");
+        if (index < 0)
+            throw EmptyDate.createEmptyDate("Deadline");
         String taskName = filtered.substring(0, index);
         String deadline = filtered.substring(index + 3, filtered.length());
+        if (deadline.isBlank())
+            throw EmptyDate.createEmptyDate("Deadline");
         Task newTask = new Deadline(taskName, deadline);
         itemList.addItem(newTask);
         this.printAddEndRun(newTask);
@@ -138,18 +163,26 @@ class addDeadlineListCommand extends listCommand {
 
 }
 
-class addEventListCommand extends listCommand {
+final class addEventListCommand extends listCommand {
 
     protected addEventListCommand(String commandName, ItemList<Task> itemList) {
         super(commandName, itemList);
     }
 
     @Override
-    protected void run() {
+    protected void run() throws EmptyParameters {
+        if (!this.commandName.startsWith("event "))
+            throw EmptyTask.createEmptyTask("event");
         String filtered = this.commandName.replaceFirst("event ", "");
+        if (filtered.isBlank())
+            throw EmptyTask.createEmptyTask("event");
         int index = filtered.indexOf("/at");
+        if (index < 0)
+            throw EmptyDate.createEmptyDate("Event");
         String taskName = filtered.substring(0, index);
         String eventDate = filtered.substring(index + 3, filtered.length());
+        if (eventDate.isBlank())
+            throw EmptyDate.createEmptyDate("Event");
         Task newTask = new Event(taskName, eventDate);
         itemList.addItem(newTask);
         this.printAddEndRun(newTask);
