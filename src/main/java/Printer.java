@@ -17,7 +17,7 @@ public class Printer {
         for (int index = 0; index < inputList.size(); index++) {
             int order = (index + 1);
             Task task = inputList.get(index);
-            String result = "    " + order + ":" + task.toString();
+            String result = "    " + order + ": " + task.toString();
             System.out.println(result);
         }
         printDivider();

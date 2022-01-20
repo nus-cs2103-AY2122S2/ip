@@ -10,7 +10,7 @@ public class Event extends Task {
         if (getIsDone()) {
             return "[E][X] " + getContent() + " (at: " + at + ")";
         } else {
-            return "[E][] " + getContent() + " (at: " + at + ")";
+            return "[E][ ] " + getContent() + " (at: " + at + ")";
         }
     }
 }
