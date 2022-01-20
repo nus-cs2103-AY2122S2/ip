@@ -1,3 +1,5 @@
+package duke;
+
 public class DukeInvalidFileException extends DukeException {
     @Override
     public String toString() {

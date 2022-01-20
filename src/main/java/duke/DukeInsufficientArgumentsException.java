@@ -1,3 +1,5 @@
+package duke;
+
 public class DukeInsufficientArgumentsException extends DukeException {
     @Override
     public String toString() {

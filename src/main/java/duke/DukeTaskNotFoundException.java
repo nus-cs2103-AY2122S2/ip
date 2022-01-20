@@ -1,3 +1,5 @@
+package duke;
+
 public class DukeTaskNotFoundException extends DukeException {
     @Override
     public String toString() {

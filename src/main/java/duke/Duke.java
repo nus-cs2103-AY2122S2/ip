@@ -1,3 +1,5 @@
+package duke;
+
 public class Duke {
     private TaskManager taskManager;
     private Ui ui;
