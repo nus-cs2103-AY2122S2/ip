@@ -1,0 +1,10 @@
+list
+todo work
+todo more work
+deadline many more work /by now
+event show up at friend's party /at when he calls me
+mark 1
+mark 2
+unmark 2
+list
+bye
