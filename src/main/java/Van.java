@@ -5,7 +5,7 @@ public class Van {
         int counter = 0, index = 0;
         String[] parse, para;
         String command = "null";
-        Task[] tasks = new Task[100];
+        ArrayList<Task> tasks = new ArrayList<Task>();
         Scanner input = new Scanner(System.in);
         String divide = "-------------------------------------------";
         System.out.println("Hello I am Van");
@@ -23,7 +23,7 @@ public class Van {
                     case "list":
                         System.out.println("Pending tasks:");
                         for (int i = 0; i < counter; i++) {
-                            System.out.println(i+1 + ". " + tasks[i].getStatus());
+                            System.out.println(i+1 + ". " + tasks.get(i).getStatus());
                         }
                         break;
                     case "deadline":
@@ -34,9 +34,9 @@ public class Van {
                         if (para.length != 2) {
                             throw new VanException("Invalid format. Please use: deadline <task> /by <date>");
                         }
-                        tasks[counter] = new Deadline(para[0], para[1]);
+                        tasks.add(new Deadline(para[0], para[1]));
                         System.out.println("Task added");
-                        System.out.println("  " + tasks[counter].getStatus());
+                        System.out.println("  " + tasks.get(counter).getStatus());
                         counter++;
                         System.out.println(counter + " tasks pending.");
                         break;
@@ -48,9 +48,9 @@ public class Van {
                         if (para.length != 2) {
                             throw new VanException("Invalid format. Please use: event <task> /at <date>");
                         }
-                        tasks[counter] = new Event(para[0], para[1]);
+                        tasks.add(new Event(para[0], para[1]));
                         System.out.println("Task added");
-                        System.out.println("  " + tasks[counter].getStatus());
+                        System.out.println("  " + tasks.get(counter).getStatus());
                         counter++;
                         System.out.println(counter + " tasks pending.");
                         break;
@@ -58,9 +58,9 @@ public class Van {
                         if (parse.length != 2) {
                             throw new VanException("Invalid format. Please use: todo <task>");
                         }
-                        tasks[counter] = new Todo(parse[1]);
+                        tasks.add(new Todo(parse[1]));
                         System.out.println("Task added");
-                        System.out.println("  " + tasks[counter].getStatus());
+                        System.out.println("  " + tasks.get(counter).getStatus());
                         counter++;
                         System.out.println(counter + " tasks pending.");
                         break;
@@ -76,7 +76,7 @@ public class Van {
                         if (index > counter) {
                             throw new VanException("Task number out of range");
                         }
-                        tasks[index - 1].setDone();
+                        tasks.get(index - 1).setDone();
                         break;
                     case "unmark":
                         if (parse.length != 2) {
@@ -90,7 +90,22 @@ public class Van {
                         if (index > counter) {
                             throw new VanException("Task number out of range");
                         }
-                        tasks[index - 1].setunDone();
+                        tasks.get(index - 1).setunDone();
+                        break;
+                    case "delete":
+                        if (parse.length != 2) {
+                            throw new VanException("Invalid format. Please use delete <task number>");
+                        }
+                        try {
+                            index = Integer.parseInt(parse[1]);
+                        } catch (NumberFormatException ex) {
+                            System.out.println("Please use integer numbers e.g. 1, 2");
+                        }
+                        if (index > counter) {
+                            throw new VanException("Task number out of range");
+                        }
+                        tasks.remove(index - 1);
+                        counter--;
                         break;
                     default:
                         System.out.println("Unrecognised command.");
