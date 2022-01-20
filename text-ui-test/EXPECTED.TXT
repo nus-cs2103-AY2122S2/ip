@@ -1,7 +1,45 @@
 Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+8888b.   dP"Yb   dP"Yb  88  dP 888888
+8I  Yb dP   Yb dP   Yb 88odP  88__
+8I  dY Yb   dP Yb   dP 88"Yb  88""
+8888Y"   YbodP   YbodP  88  Yb 888888
+-------------
+Hello! I'm Dooke
+ What can I do for you?
+- - - - - - -
+-------------
+Got it. I've added this task:
+[T][ ] borrow
+Now you have 1 task(s) in the list.
+- - - - - - -
+-------------
+Here are the tasks in your list:
+1.[T][ ] borrow
+- - - - - - -
+-------------
+Got it. I've added this task:
+[D][ ]  (by: Sunday)
+Now you have 2 task(s) in the list.
+- - - - - - -
+-------------
+Got it. I've added this task:
+[E][ ]  (at: Mon 2-4pm)
+Now you have 3 task(s) in the list.
+- - - - - - -
+-------------
+Nice! I've marked this task as done:
+[T][X] borrow
+- - - - - - -
+-------------
+Nice! I've marked this task as done:
+[D][X]  (by: Sunday)
+- - - - - - -
+-------------
+Here are the tasks in your list:
+1.[T][X] borrow
+2.[D][X]  (by: Sunday)
+3.[E][ ]  (at: Mon 2-4pm)
+- - - - - - -
+-------------
+Bye. Hope to see you again soon!
+- - - - - - -
