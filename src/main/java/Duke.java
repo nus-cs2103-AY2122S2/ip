@@ -3,19 +3,32 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    static ArrayList<String> list = new ArrayList<String>();
+    static ArrayList<Task> list = new ArrayList<Task>();
 
-    public static String handle(String command) {
+    public static void handle(String input) {
+        String[] split = input.split(" ");
+        String command = split[0];
         if (command.equals("bye")) {
-            return "See you later alligator :)\n";
+            System.out.println("See you later alligator :)");
         } else if (command.equals("list")) {
-            for (Integer i = 0; i < list.size(); i++) {
-                System.out.println(i.toString() + " " + list.get(i));
+            System.out.println("Here's everything on your list rn:");
+            for (Integer i = 1; i <= list.size(); i++) {
+                System.out.println(i.toString() + " " + list.get(i - 1));
             }
-            return "";
+        } else if (command.equals("mark")) {
+            Task t = list.get(Integer.parseInt(split[1]) - 1);
+            t.makeDone();
+            System.out.printf("Woohoo! I've marked task %s as done\n", split[1]);
+            System.out.println(t.toString());
+        } else if (command.equals("unmark")) {
+            Task t = list.get(Integer.parseInt(split[1]) - 1);
+            t.makeNotDone();
+            System.out.printf("Ok boss I've marked task %s as incomplete\n", split[1]);
+            System.out.println(t.toString());
         } else {
-            list.add(command);
-            return "added: " + command;
+            Task t = new Task(input);
+            list.add(t);
+            System.out.println("added: " + input);
         }
     }
 
@@ -38,7 +51,7 @@ public class Duke {
 
         while (true) {
             String command = sc.nextLine();
-            System.out.println(handle(command) + "\n");
+            handle(command);
             if (command.equals("bye")) {
                 break;
             }
