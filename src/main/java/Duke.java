@@ -11,89 +11,51 @@ public class Duke {
         while (true) {
             command = sc.nextLine();
             String[] commandSplitBySpace = command.split(" ");
-            if (commandSplitBySpace[0].equals("bye")) {
-                break;
-            } else if (commandSplitBySpace[0].equals("list")) {
-                StringBuilder sb = new StringBuilder("Here are the tasks in your list: \n");
-                for (int i = 0; i < tasks.size(); i++) {
-                    if (i > 0) {
-                        sb.append("\n");
+            try {
+                if (commandSplitBySpace[0].equals("bye")) {
+                    break;
+                } else if (commandSplitBySpace[0].equals("list")) {
+                    StringBuilder sb = new StringBuilder("Here are the tasks in your list: \n");
+                    for (int i = 0; i < tasks.size(); i++) {
+                        if (i > 0) {
+                            sb.append("\n");
+                        }
+                        sb.append(Integer.toString(i + 1) + "." + tasks.get(i));
                     }
-                    sb.append(Integer.toString(i + 1) + "." + tasks.get(i));
-                }
-                printMsg(sb.toString());
-            } else if (commandSplitBySpace[0].equals("mark")) {
-                if (commandSplitBySpace.length > 1) {
-                    if (tasks.size() != 0 && Integer.parseInt(commandSplitBySpace[1]) - 1 < tasks.size()) {
+                    printMsg(sb.toString());
+                } else {
+                    new DukeException().validateInputs(command, commandSplitBySpace, tasks);
+
+                    if (commandSplitBySpace[0].equals("mark")) {
                         Task t = tasks.get(Integer.parseInt(commandSplitBySpace[1]) - 1);
                         t.markAsDone();
                         printMsg("Good job! I've marked this task as done:\n" + t);
-                    } else {
-                        printMsg("☹ OOPS!!! The task to be marked does not exist.");
-                    }
-                } else {
-                    printMsg("☹ OOPS!!! The task to be marked has to be indicated.");
-                }
-            } else if (commandSplitBySpace[0].equals("unmark")) {
-                if (commandSplitBySpace.length > 1) {
-                    if (tasks.size() != 0 && Integer.parseInt(commandSplitBySpace[1]) - 1 < tasks.size()) {
+                    } else if (commandSplitBySpace[0].equals("unmark")) {
                         Task t = tasks.get(Integer.parseInt(commandSplitBySpace[1]) - 1);
                         t.markAsNotDone();
                         printMsg("Okay, I've marked this task as not done yet:\n" + t);
-                    } else {
-                        printMsg("☹ OOPS!!! The task to be unmarked does not exist.");
-                    }
-                } else {
-                    printMsg("☹ OOPS!!! The task to be unmarked has to be indicated.");
-                }
-            } else if (commandSplitBySpace[0].equals("todo")) {
-                if (commandSplitBySpace.length > 1) {
-                    Todo t = new Todo(command.substring(5));
-                    addTask(tasks, t);
-                } else {
-                    printMsg("☹ OOPS!!! The description of a todo cannot be empty.");
-                }
-            } else if (commandSplitBySpace[0].equals("deadline")) {
-                if (commandSplitBySpace.length > 1) {
-                    int indexOfBy = command.indexOf("/by");
-                    if (indexOfBy != -1) {
+                    } else if (commandSplitBySpace[0].equals("todo")) {
+                        Todo t = new Todo(command.substring(5));
+                        addTask(tasks, t);
+                    } else if (commandSplitBySpace[0].equals("deadline")) {
+                        int indexOfBy = command.indexOf("/by");
                         String desc = command.substring(9, indexOfBy - 1);
                         String by = command.substring(indexOfBy + 4);
                         Deadline d = new Deadline(desc, by);
                         addTask(tasks, d);
-                    } else {
-                        printMsg("☹ OOPS!!! The by of a deadline cannot be empty.");
-                    }
-                } else {
-                    printMsg("☹ OOPS!!! The description of a deadline cannot be empty.");
-                }
-            } else if (commandSplitBySpace[0].equals("event")) {
-                if (commandSplitBySpace.length > 1) {
-                    int indexOfAt = command.indexOf("/at");
-                    if (indexOfAt != -1) {
+                    } else if (commandSplitBySpace[0].equals("event")) {
+                        int indexOfAt = command.indexOf("/at");
                         String desc = command.substring(6, indexOfAt - 1);
                         String at = command.substring(indexOfAt + 4);
                         Event e = new Event(desc, at);
                         addTask(tasks, e);
-                    } else {
-                        printMsg("☹ OOPS!!! The at of a deadline cannot be empty.");
-                    }
-                } else {
-                    printMsg("☹ OOPS!!! The description of a event cannot be empty.");
-                }
-            } else if (commandSplitBySpace[0].equals("delete")) {
-                if (commandSplitBySpace.length > 1) {
-                    if (tasks.size() != 0 && Integer.parseInt(commandSplitBySpace[1]) - 1 < tasks.size()) {
+                    } else if (commandSplitBySpace[0].equals("delete")) {
                         Task t = tasks.get(Integer.parseInt(commandSplitBySpace[1]) - 1);
                         removeTask(tasks, t);
-                    } else {
-                        printMsg("☹ OOPS!!! The task to be deleted does not exist.");
                     }
-                } else {
-                    printMsg("☹ OOPS!!! The task to be deleted has to be indicated.");
                 }
-            } else {
-                printMsg("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            } catch (DukeException e) {
+                printMsg(e.getMessage());
             }
         }
         printMsg("Okay, bye! Hope to see you again :)");
