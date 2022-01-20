@@ -1,0 +1,10 @@
+event zoo visit with friends /at 4-6pm tomorrow
+todo pay electricity bills
+deadline school project /by 10pm next week monday
+list
+mark 1
+mark 3
+unmark 3
+mark 2
+list
+bye
