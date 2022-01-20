@@ -57,7 +57,7 @@ public class Duke {
             tasks.remove(index - 1);
             printMessage("Meow! Task is removed!\n" + t + "\n" + "Number of tasks in list: " + tasks.size());
         } catch (NullPointerException | IndexOutOfBoundsException e) {
-            printMessage("Meow! Task does not exist!");
+            printMessage(ErrorMessage.MESSAGE_INVALID_TASK);
         }
     }
 
@@ -72,7 +72,7 @@ public class Duke {
             System.out.print(lineBreak + "Meow! Task is done!" + catFace
                     + tasks.get(index - 1) + "\n" + lineBreak);
         } catch (NullPointerException | IndexOutOfBoundsException e) {
-            printMessage("Meow! Task does not exist!");
+            printMessage(ErrorMessage.MESSAGE_INVALID_TASK);
         }
     }
 
