@@ -58,6 +58,13 @@ public class chatbot {
                 ls.add(e);
                 System.out.println("added: " + e);
                 System.out.println("New list size is " + ls.size());
+            } else if(n.description.startsWith("delete")) {
+                String number = n.description.substring(7);
+                int x = Integer.parseInt(number);
+                Task item = ls.remove(x-1);
+                System.out.println("I've removed the item from the list, stop being so lazy");
+                System.out.println(item);
+                System.out.println("you now have " + ls.size() + " things to do");
             } else {
                 throw new DukeException("I dont know what you want but this aint it");
             }
