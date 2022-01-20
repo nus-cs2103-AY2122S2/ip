@@ -51,7 +51,7 @@ public class Duke {
         });
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        List<String> tasks = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
         while (true) {
            String input = br.readLine();
            switch (input) {
@@ -66,10 +66,11 @@ public class Duke {
                    return; // to shut the linter up
 
                default:
-                   tasks.add(input);
+                   Task task = new Task(input);
+                   tasks.add(task);
                    dialog(new String[] {
-                           String.format("added: %s", input)
-                   });
+                           String.format("added: %s", task)
+                        });
            }
         }
     }
