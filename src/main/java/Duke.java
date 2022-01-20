@@ -46,6 +46,8 @@ public class Duke {
                 return false;
             case "list":
                 list(); break;
+            case "delete":
+                delete(argument); break;
             case "mark":
                 mark(argument); break;
             case "unmark":
@@ -65,6 +67,13 @@ public class Duke {
     private static void list() {
         ioOut.println("Here are the tasks in your list:");
         ioOut.print(todoList.toString());
+    }
+
+    private static void delete(String argument) {
+        int index = Integer.parseInt(argument) - 1;
+        ioOut.println("Noted. I've removed this task: ");
+        ioOut.println(todoList.deleteItem(index));
+        ioOut.println(todoList.listCount());
     }
 
     private static void mark(String argument) {
