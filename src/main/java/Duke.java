@@ -63,6 +63,13 @@ public class Duke {
                 database.add(eventItem);
                 System.out.println("Got it. I've added this task:\n  " + eventItem);
                 System.out.println("Now you have " + database.size() + " tasks in the list.");
+            } else if (input.description.startsWith("delete")) {
+                String itemNumber = input.description.substring(7);
+                int num = Integer.parseInt(itemNumber) - 1;
+                Task itemToDelete = database.get(num);
+                database.remove(num);
+                System.out.println("Noted. I've removed this task:\n" + itemToDelete);
+                System.out.println("Now you have " + database.size() + " tasks in the list.");
             } else {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }

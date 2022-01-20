@@ -22,7 +22,7 @@ public class Task {
     @Override
     public String toString() {
         if (this.getStatusIcon().equals("X")) {
-            return "[x] " + this.description;
+            return "[X] " + this.description;
         } else {
             return "[ ] " + this.description;
         }
