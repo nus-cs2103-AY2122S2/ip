@@ -6,10 +6,10 @@ public class Level1 {
 		System.out.println("Hello! I'm Duke");
 		System.out.println("What can I do for you?");
 		
-		scanner sc = new scanner(System.in);
+		Scanner sc = new Scanner(System.in);
 		
-		While(sc.hasNext()){
-			String s = sc.nextline();
+		while(sc.hasNext()) {
+			String s = sc.nextLine();
 			if(s.equals("bye")) {
 				System.out.println("Bye. Hope to see you again soon!");
 				break;
