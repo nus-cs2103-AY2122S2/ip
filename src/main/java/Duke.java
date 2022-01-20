@@ -8,6 +8,26 @@ public class Duke {
     private static final ArrayList<Task> TaskList = new ArrayList<Task>();
     private static final Scanner myObj = new Scanner(System.in);
 
+    public enum Command{
+        BYE("bye"),
+        LIST("list"),
+        MARK("mark"),
+        UNMARK("unmark"),
+        DELETE("delete"),
+        TODO("todo"),
+        DEADLINE("deadline"),
+        EVENT("event");
+
+        private String command;
+        Command(String commandIN) {
+            this.command = commandIN;
+        }
+
+        public String getCommand() {
+            return command;
+        }
+    }
+
     public static void horizontalLine(){
         System.out.println("____________________________________________________________");
     }
@@ -21,26 +41,22 @@ public class Duke {
     }
 
     public static void echo() {
-          // Create a Scanner object
+        // Create a Scanner object
         String input = myObj.nextLine();
-        // default message
-        String result = null;
-
-        // detect bye
         try{
-            if (input.equals("bye")) {
-                Duke.isEnd = true;
-                result = "\tBye. Hope to see you again soon!";
-                myObj.close();
-            } else if (input.equals("list")){
+            if (input.equals(Command.BYE.getCommand())) {
+                // detect bye
+                Duke.bye();
+            } else if (input.equals(Command.LIST.getCommand())){
                 // detect list
                 Duke.list();
-                return;
             } else {
-                if (input.startsWith("mark") || input.startsWith("unmark") || input.startsWith("delete")){
+                if (input.startsWith(Command.MARK.getCommand())
+                        || input.startsWith(Command.UNMARK.getCommand())
+                        || input.startsWith(Command.DELETE.getCommand())){
                     boolean isDigit = !Character.isDigit(input.charAt(input.length() - 1));
                     int markDigit = Character.getNumericValue(input.charAt(input.length() - 1));
-                    if (input.startsWith("mark")){
+                    if (input.startsWith(Command.MARK.getCommand())){
                         // detect mark
                         if (isDigit) {
                             throw new DukeException("☹ OOPS!!! The mark cannot be done.");
@@ -51,7 +67,7 @@ public class Duke {
                         mark(markDigit - 1);
                         return;
                     }
-                    if (input.startsWith("unmark")) {
+                    if (input.startsWith(Command.UNMARK.getCommand())) {
                         // detect unmark
                         if (isDigit) {
                             throw new DukeException("☹ OOPS!!! The unmark cannot be done.");
@@ -62,7 +78,7 @@ public class Duke {
                         unmark(markDigit - 1);
                         return;
                     }
-                    if (input.startsWith("delete")) {
+                    if (input.startsWith(Command.DELETE.getCommand())) {
                         // detect delete
                         if (isDigit) {
                             throw new DukeException("☹ OOPS!!! The delete cannot be done.");
@@ -71,21 +87,17 @@ public class Duke {
                             throw new DukeException("☹ OOPS!!! The task of a delete cannot be reached.");
                         }
                         delete(markDigit - 1);
-                        return;
                     }
                 } else {
                     // add task
-                    if (input.startsWith("todo")) {
+                    if (input.startsWith(Command.TODO.getCommand())) {
                         // generate
                         String description = input.substring(4);
                         if (Duke.isEmpty(description)) {
                             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                         }
-                        ToDo temp = new ToDo(description);
-                        TaskList.add(temp);
-                        result = String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.",
-                                temp.toString(),TaskList.size());
-                    } else if (input.startsWith("deadline")) {
+                        addTodo(description);
+                    } else if (input.startsWith(Command.DEADLINE.getCommand())) {
                         if (Duke.isEmpty(input.substring(8))){
                             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
                         }
@@ -95,11 +107,8 @@ public class Duke {
                         int byPos = input.indexOf("/by");
                         String description = input.substring(9,byPos);
                         String by = input.substring(byPos+4);
-                        Deadline ddl = new Deadline(description, by);
-                        TaskList.add(ddl);
-                        result = String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.",
-                                ddl.toString(), TaskList.size());
-                    } else if (input.startsWith("event")) {
+                        addDdl(description, by);
+                    } else if (input.startsWith(Command.EVENT.getCommand())) {
                         if (Duke.isEmpty(input.substring(5))){
                             throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
                         }
@@ -109,19 +118,12 @@ public class Duke {
                         int atPos = input.indexOf("/at");
                         String description = input.substring(6,atPos);
                         String at = input.substring(atPos+4);
-                        Event event = new Event(description, at);
-                        TaskList.add(event);
-                        result = String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.",
-                                event.toString(), TaskList.size());
+                        addEvent(description, at);
                     } else {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                 }
             }
-            // print result
-            horizontalLine();
-            System.out.println(result);
-            horizontalLine();
         } catch (DukeException e){
             horizontalLine();
             System.out.println(e.getMessage());
@@ -141,6 +143,16 @@ public class Duke {
             curr++;
         }
         return true;
+    }
+
+    public static void bye(){
+        Duke.isEnd = true;
+        String result = "\tBye. Hope to see you again soon!";
+        // print result
+        horizontalLine();
+        System.out.println(result);
+        horizontalLine();
+        myObj.close();
     }
 
     public static void list(){
@@ -167,6 +179,36 @@ public class Duke {
         horizontalLine();
         System.out.println("OK, I've marked this task as not done yet:");
         System.out.println(TaskList.get(currTask).toString());
+        horizontalLine();
+    }
+
+    public static void addTodo(String description) {
+        ToDo temp = new ToDo(description);
+        TaskList.add(temp);
+        String result = String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.",
+                temp.toString(),TaskList.size());
+        horizontalLine();
+        System.out.println(result);
+        horizontalLine();
+    }
+
+    public static void addDdl(String description, String by){
+        Deadline ddl = new Deadline(description, by);
+        TaskList.add(ddl);
+        String result = String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.",
+                ddl.toString(), TaskList.size());
+        horizontalLine();
+        System.out.println(result);
+        horizontalLine();
+    }
+
+    public static void addEvent(String description, String at) {
+        Event event = new Event(description, at);
+        TaskList.add(event);
+        String result = String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.",
+                event.toString(), TaskList.size());
+        horizontalLine();
+        System.out.println(result);
         horizontalLine();
     }
 
