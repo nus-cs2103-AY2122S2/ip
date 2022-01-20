@@ -1,3 +1,5 @@
+// enums not applicable
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
