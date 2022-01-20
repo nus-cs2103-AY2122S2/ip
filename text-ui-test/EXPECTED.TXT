@@ -34,4 +34,15 @@ OOPS!!! The description of an event cannot be empty.
 OOPS!!! The description of a deadline cannot be empty.
 OOPS!!! You did not provide a task to unmark.
 OOPS!!! You did not provide a task to mark.
+Noted. I've removed this task:
+[T][ ] wake up in the morning
+Now you have 2 tasks in the list.
+Here are the tasks in your list:
+1. [E][X] go to sleep  (at: home)
+2. [D][ ] find food  (by: noon)
+Noted. I've removed this task:
+[E][X] go to sleep  (at: home)
+Now you have 1 tasks in the list.
+Here are the tasks in your list:
+1. [D][ ] find food  (by: noon)
 Bye. Hope to see you again soon!

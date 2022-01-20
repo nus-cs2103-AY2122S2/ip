@@ -84,6 +84,17 @@ public class Duke {
                             System.out.println(taskHistory.get(taskID - 1).toString());
                             break;
                         }
+                    case "delete":
+                        if (words.length == 1) {
+                            throw new DukeException("You did not provide a task to delete.");
+                        } else {
+                            int taskID = Integer.valueOf(words[1]);
+                            System.out.println("Noted. I've removed this task:");
+                            System.out.println(taskHistory.get(taskID - 1).toString());
+                            taskHistory.remove(taskID - 1);
+                            System.out.println("Now you have " + taskHistory.size() + " tasks in the list.");
+                            break;
+                        }
                     default:
                         throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
