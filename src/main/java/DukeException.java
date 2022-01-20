@@ -21,7 +21,7 @@ public class DukeException extends Exception{
 
         @Override
         public String toString(){
-            return super.toString() + "PLEASE ENTER A VALID NUMBER TO MARK/UNMARK";
+            return super.toString() + "PLEASE ENTER A VALID NUMBER TO MARK/UNMARK/DELETE";
         }
     }
 

@@ -25,10 +25,25 @@ Nice! I've marked this task as done:
 [T] [X]  Work
 -------------------
 -------------------
-1. [T] [X]  Work
-2. [E] [ ]  Party  (at: Monday)
-3. [D] [ ]  Homework  (by: Sunday)
+Got it! I've removed this task:
+[T] [X]  Work
+Now you have 2 tasks in the list
 -------------------
 -------------------
+Got it! I've removed this task:
+[D] [ ]  Homework  (by: Sunday)
+Now you have 1 tasks in the list
+-------------------
+-------------------
+ERROR: PLEASE ENTER A VALID NUMBER TO MARK/UNMARK/DELETE
+-------------------
+-------------------
+ERROR: PLEASE ENTER A VALID NUMBER TO MARK/UNMARK/DELETE
+-------------------
+-------------------
+1. [E] [ ]  Party  (at: Monday)
+-------------------
+-------------------
+ERROR: NO SUCH COMMAND FOUND
 -------------------
 Bye! Hope to see you again soon

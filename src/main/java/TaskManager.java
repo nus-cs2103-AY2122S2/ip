@@ -71,6 +71,18 @@ public class TaskManager {
         System.out.println("Now you have " + this.tasks.size() + " tasks in the list");
     }
 
+    private void printTaskDeletion(Task curr){
+        System.out.println("Got it! I've removed this task:");
+        System.out.println(curr.toString());
+        System.out.println("Now you have " + this.tasks.size() + " tasks in the list");
+    }
+
+    private void deleteTask(int index){
+        Task toBeRemoved = tasks.get(index - 1);
+        this.tasks.remove(index - 1);
+        this.printTaskDeletion(toBeRemoved);
+    }
+
     private void handleCommand(String curr, String userInput, StringTokenizer st) throws DukeException {
         switch (curr){
 
@@ -79,6 +91,7 @@ public class TaskManager {
                 break;
 
             case "mark":
+
                 try {
                     int toMark = Integer.parseInt(st.nextToken());
                     if(toMark < 0 || toMark > tasks.size()){
@@ -114,6 +127,7 @@ public class TaskManager {
                 break;
 
             case "deadline":
+
                 try {
                     userInput = userInput.replace(curr, "");
                     String[] spl = userInput.split("/by ");
@@ -127,6 +141,7 @@ public class TaskManager {
                 break;
 
             case "event":
+
                 try {
                     userInput = userInput.replace(curr, "");
                     String[] splo = userInput.split("/at ");
@@ -136,6 +151,19 @@ public class TaskManager {
                     this.addEvent(splo[0], splo[1]);
                 } catch (DukeException e){
                     throw e;
+                }
+                break;
+
+            case "delete":
+
+                try {
+                    int toDelete = Integer.parseInt(st.nextToken());
+                    if(toDelete < 0 || toDelete > tasks.size()){
+                        throw new DukeException.DukeInvalidNumberException();
+                    }
+                    this.deleteTask(toDelete);
+                } catch (DukeException e){
+                    throw new DukeException.DukeInvalidNumberException();
                 }
                 break;
 
