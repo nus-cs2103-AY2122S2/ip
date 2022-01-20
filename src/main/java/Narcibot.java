@@ -1,8 +1,8 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Narcibot {
-    private static Task[] list = new Task[100];
-    private static int index = 0;
+    private static ArrayList<Task> list = new ArrayList<>();
     public static void main(String[] args) {
         System.out.println("I'm Narcibot, the best bot ever created.\nOh it's you, what a bother.\nHere's a hello as a formality. What do you want this time?\n");
         String input;
@@ -33,8 +33,8 @@ public class Narcibot {
                         throw new IncorrectFormatException("Please enter only one word for this command.");
                     }
                     System.out.println("Do I have to remind you again?");
-                    for (int i = 0; i < index; i++) {
-                        System.out.println((i + 1) + "." + list[i].getStatus());
+                    for (int i = 0; i < list.size(); i++) {
+                        System.out.println((i + 1) + "." + list.get(i).getStatus());
                     }
                     break;
                 case "mark":
@@ -42,30 +42,41 @@ public class Narcibot {
                         throw new IncorrectFormatException("Please enter mark followed by a number for this command. Example: mark 8");
                     }
                     int index1 = Integer.parseInt((tokens[1]));
-                    if(index1 < 1 || index1 > index) {
+                    if(index1 < 1 || index1 > list.size()) {
                         throw new IncorrectFormatException("Please enter a valid task number.");
                     }
                     System.out.println("You finally did something? I'll mark it for you then.");
-                    list[index1 - 1].markDone();
+                    list.get(index1 - 1).markDone();
                     break;
                 case "unmark":
                     if(tokens.length != 2) {
                         throw new IncorrectFormatException("Please enter unmark followed by a number for this command. Example: unmark 7");
                     }
                     int index2 = Integer.parseInt((tokens[1]));
-                    if(index2 < 1 || index2 > index) {
+                    if(index2 < 1 || index2 > list.size()) {
                         throw new IncorrectFormatException("Please enter a valid task number.");
                     }
                     System.out.println("As expected... another task that wasn't finished at all.");
-                    list[Integer.parseInt((tokens[1])) - 1].markNotDone();
+                    list.get(index2 - 1).markNotDone();
+                    break;
+                case "delete":
+                    if(tokens.length != 2) {
+                        throw new IncorrectFormatException("Please enter delete followed by a number for this command. Example: delete 7");
+                    }
+                    int index3 = Integer.parseInt((tokens[1]));
+                    if(index3 < 1 || index3 > list.size()) {
+                        throw new IncorrectFormatException("Please enter a valid task number.");
+                    }
+                    System.out.println("Removing this task, guess you gave up after all.");
+                    list.remove(index3 - 1);
                     break;
                 case "todo":
                     if(tokens.length != 2) {
                         throw new IncorrectFormatException("You want me to remind you of something but you won't tell me of what it is?");
                     }
-                    list[index++] = new ToDo(tokens[1]);
+                    list.add(new ToDo(tokens[1]));
                     System.out.println("I have added this task cause you won't remember it.");
-                    System.out.println("You now have " + index + " tasks");
+                    System.out.println("You now have " + list.size() + " tasks");
                     break;
                 case "deadline":
                     if(tokens.length != 2) {
@@ -75,9 +86,9 @@ public class Narcibot {
                     if(tokens2.length != 2 || tokens2[1].equals("")) {
                         throw new IncorrectFormatException("Please tell me the deadline time using /by. Format: deadline (task) /by (time)");
                     }
-                    list[index++] = new Deadline(tokens2[0], tokens2[1]);
+                    list.add(new Deadline(tokens2[0], tokens2[1]));
                     System.out.println("I have added this task cause you won't remember it.");
-                    System.out.println("You now have " + index + " tasks");
+                    System.out.println("You now have " + list.size() + " tasks");
                     break;
                 case "event":
                     if(tokens.length != 2) {
@@ -87,9 +98,9 @@ public class Narcibot {
                     if(tokens3.length != 2 || tokens3[1].equals("")) {
                         throw new IncorrectFormatException("Please tell me the time of the event using /at. Format: event (task) /at (time)");
                     }
-                    list[index++] = new Event(tokens3[0], tokens3[1]);
+                    list.add(new Event(tokens3[0], tokens3[1]));
                     System.out.println("I have added this task cause you won't remember it.");
-                    System.out.println("You now have " + index + " tasks");
+                    System.out.println("You now have " + list.size() + " tasks");
                     break;
                 default:
                     System.out.println("Could you please talk some sense? I can't seem to comprehend what you're saying.");
