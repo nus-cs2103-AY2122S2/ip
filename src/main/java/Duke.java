@@ -57,6 +57,15 @@ public class Duke {
         System.out.println(LINE);
     }
 
+    public static void delete(int i) {
+        System.out.println(LINE + "\n Noted. I've removed this task:");
+        Task removed = LIST.get(i - 1);
+        LIST.remove(i - 1);
+        System.out.println("   " + removed.toString());
+        System.out.printf(" Now you have %d tasks in the list.\n", LIST.size());
+        System.out.println(LINE);
+    }
+
     public static void throwError(String type) {
         System.out.println(LINE);
         if (type.equals("")) {
@@ -96,6 +105,11 @@ public class Duke {
                 case "unmark": {
                     int taskNum = Integer.parseInt(sc.next());
                     unmark(taskNum);
+                    break;
+                }
+                case "delete": {
+                    int taskNum = Integer.parseInt(sc.next());
+                    delete(taskNum);
                     break;
                 }
                 case "todo": {
