@@ -7,4 +7,6 @@ mark 3
 unmark 2
 list
 event go out for dinner /at Friday night 6-8pm
+delete 3
+list
 bye
