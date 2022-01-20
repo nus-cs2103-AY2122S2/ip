@@ -75,6 +75,10 @@ public class Duke {
             taskNum = getTaskNumFromUnmarkCommand(commandInfo);
             unmarkTask(taskNum);
             break;
+        case "delete":
+            taskNum = getTaskNumFromDeleteCommand(commandInfo);
+            deleteTask(taskNum);
+            break;
         case "todo":
             taskDescription = getTaskDescriptionFromToDoCommand(commandInfo);
             task = new ToDo(taskDescription);
@@ -126,6 +130,18 @@ public class Duke {
             }
         } else {
             throw new DukeException("Please enter a task number to be marked as not done yet!");
+        }
+    }
+
+    private int getTaskNumFromDeleteCommand(String commandInfo) throws DukeException {
+        if (isCommandInfoPresent(commandInfo)) {
+            try {
+                return Integer.parseInt(commandInfo);
+            } catch (NumberFormatException e) {
+                throw new DukeException("Please enter a valid task number to be deleted!");
+            }
+        } else {
+            throw new DukeException("Please enter a task number to be deleted!");
         }
     }
 
@@ -313,6 +329,20 @@ public class Duke {
             task.setNotDone();
 
             String message = ui.taskNotDoneMessage(task);
+            ui.displayResponse(message);
+        } else {
+            throw new DukeException("Task not found. Please try again!");
+        }
+    }
+
+    public void deleteTask(int taskNum) throws DukeException {
+        if (taskNum > 0 && taskNum <= tasks.size()) {
+            Task task = tasks.get(taskNum - 1);
+            tasks.remove(task);
+
+            String message = ui.taskDeletedMessage(task)
+                    + System.lineSeparator()
+                    + ui.numOfTasksInListMessage(tasks);
             ui.displayResponse(message);
         } else {
             throw new DukeException("Task not found. Please try again!");

@@ -115,6 +115,17 @@ public class Ui {
     }
 
     /**
+     * Returns the message when the task is removed.
+     *
+     * @param task Task that is removed
+     * @return The string representation of the message
+     */
+    public String taskDeletedMessage(Task task) {
+        return "\t" + "Noted. I've removed this task:"
+                + System.lineSeparator() + "\t\t" + task;
+    }
+
+    /**
      * Returns the message with the number of tasks in the task list.
      *
      * @param tasks List containing all the tasks
