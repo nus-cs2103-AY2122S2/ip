@@ -10,42 +10,67 @@ public class Duke {
         while (sc.hasNext()) {
             String userInput = sc.nextLine();
             String[] wordSplit = userInput.split(" ");
+            try {
+                checker(wordSplit);
+            } catch(TaskException e) {
+                System.out.println(e.getMessage());
+                printHorizontalLine();
+                continue;
+            }
+
             String action = wordSplit[0];
+            String[] split = userInput.split("/");
+            int start = userInput.indexOf(" ") + 1;
+            int end = userInput.lastIndexOf('/');
+            String task = userInput.substring(start, end - 1);
+            String details = split[1].substring(3);
+
             if (userInput.equals("bye")) {
                 sayBye();
                 break;
             } else if (userInput.equals("list")) {
+                //prints the list
                 printList();
             } else if (action.equals("mark")) {
+                //mark
                 mark(Integer.parseInt(wordSplit[1]) - 1);
             } else if (action.equals("unmark")) {
+                //unmark
                 unmark(Integer.parseInt(wordSplit[1]) - 1);
             } else if (action.equals("todo")) {
                 //add ToDos
-                int start = userInput.indexOf(" ") + 1;
                 addInput(new ToDos(userInput.substring(start), false));
             } else if (action.equals("deadline")) {
                 //add DeadLines
-                String[] split = userInput.split("/");
-                int start = userInput.indexOf(" ") + 1;
-                int end = userInput.lastIndexOf('/');
-                String task = userInput.substring(start, end - 1);
-                String details = split[1].substring(3);
                 addInput(new DeadLines(task, false, details));
-            } else if (action.equals("event")) {
-                //add Events
-                String[] split = userInput.split("/");
-                int start = userInput.indexOf(" ") + 1;
-                int end = userInput.lastIndexOf('/');
-                String task = userInput.substring(start, end - 1);
-                String details = split[1].substring(3);
-                addInput(new Events(task, false, details));
             } else {
-                //add normal task
-                addInput(new Task(userInput, false));
+                //add Events
+                addInput(new Events(task, false, details));
             }
+
+
         }
         sc.close();
+    }
+
+    private static void checker(String[] splitInput) throws TaskException {
+        if (splitInput.length == 0 || (!splitInput[0].equals("bye") && !splitInput[0].equals("list") &&
+                !splitInput[0].equals("mark") && !splitInput[0].equals("unmark") && !splitInput[0].equals("todo")
+                && !splitInput[0].equals("deadline") && !splitInput[0].equals("event"))) {
+            throw new IncorrectInputException();
+
+        } else if (splitInput.length == 1) {
+            String command = splitInput[0];
+            if (command.equals("todo")) {
+                throw new ToDosException();
+            } else if (command.equals("deadline")) {
+                throw new DeadlineException();
+            } else if (command.equals("event")) {
+                throw new EventException();
+            } else if (!command.equals("bye") && !command.equals("list")) {
+                throw new IncorrectInputException();
+            }
+        }
     }
 
     private static void mark(int indx) {
