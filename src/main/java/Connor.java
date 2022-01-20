@@ -2,12 +2,36 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Connor {
-    private static final String CURRENT_VERSION = "Version 1.6";
+    private static final String CURRENT_VERSION = "Version 1.61";
     private static final String LINE = "┄".repeat(66);
     private static final String INDENT = " ".repeat(4);
 
-    private static boolean isActive = true;
+    private static final String GOODBYE = "Farewell. See you next time!";
+    private static final String EMPTY_TASK_LIST = "Your task list is empty.";
+    private static final String SHOW_TASKS = "Here are your current tasks: ";
+    private static final String ADD_NEW_TASK = "Alright, I've added a new task: ";
+    private static final String DELETE_TASK = "Alright, I've deleted the task: ";
+    private static final String MARK_TASK = "Good job! I've marked the following task as completed: ";
+    private static final String UNMARK_TASK = "Understood. I've unmarked the following task: ";
+    private static final String ERROR_EMPTY_INDEX = "Error! Index cannot be empty.";
+    private static final String ERROR_EMPTY_TASK_DESC = "Error! Tasks cannot have an empty description.";
+    private static final String ERROR_EMPTY_DL_DESC = "Error! Deadlines cannot have empty descriptions or dates.";
+    private static final String ERROR_EMPTY_EVENT_DESC = "Error! Events cannot have empty descriptions or dates.";
+    private static final String ERROR_INDEX_NOT_INTEGER = "Error! Index must be a valid integer.";
+    private static final String ERROR_INDEX_OUT_OF_RANGE = "Error! Given index is out of range.";
+    private static final String ERROR_INVALID_COMMAND_START = "My apologies, I don't understand what '";
+    private static final String ERROR_INVALID_COMMAND_END = "' means.";
+    private static final String ERROR_INVALID_DL_FORMAT = "Error! Wrong format for deadlines.\n\n"
+            + "Deadline tasks must include \"by\" in the description.\nExample: \n"
+            + ">>> deadline Finish project /by Monday Morning";
+    private static final String ERROR_INVALID_EVENT_FORMAT = "Error! Wrong format for events.\n\n"
+            + "Event tasks must include \"at\" in the description.\nExample: \n"
+            + ">>> event Birthday Party at May 5th";
+    private static final String ERROR_INVALID_TASK_TYPE = "Oh no! Incorrect Task type!";
+    private static final String ERROR_MARK_EMPTY = "Error! I can't mark an empty task list!";
+    private static final String ERROR_UNMARK_EMPTY = "Error! I can't unmark an empty task list!";
 
+    private static boolean isActive = true;
     private static ArrayList<Task> taskList = new ArrayList<>();
 
     private static void interpret(String s) {
@@ -19,7 +43,7 @@ public class Connor {
         case "exit":
         case "bye": {
             isActive = false;
-            print("Farewell. See you next time!");
+            print(GOODBYE);
             break;
         }
         case "list": {
@@ -32,12 +56,12 @@ public class Connor {
             try {
                 String desc = statement[1].trim();
                 if (desc.isBlank()) {
-                    print("Error! Tasks cannot have an empty description.");
+                    print(ERROR_EMPTY_TASK_DESC);
                     return;
                 }
                 addTask(x, desc);
             } catch (ArrayIndexOutOfBoundsException e) {
-                print("Error! Tasks cannot have an empty description.");
+                print(ERROR_EMPTY_TASK_DESC);
             }
             break;
         }
@@ -48,9 +72,9 @@ public class Connor {
                 print("");
                 viewTasks();
             } catch (NumberFormatException e) {
-                print("Error! Index must be a valid integer.");
+                print(ERROR_INDEX_NOT_INTEGER);
             } catch (ArrayIndexOutOfBoundsException e) {
-                print("Error! Index cannot be empty.");
+                print(ERROR_EMPTY_INDEX);
             }
             break;
         }
@@ -60,24 +84,24 @@ public class Connor {
                 int taskNo = Integer.parseInt(statement[1]) - 1;
                 markStatus(x, taskNo);
             } catch (NumberFormatException e) {
-                print("Error! Index must be a valid integer.");
+                print(ERROR_INDEX_NOT_INTEGER);
             } catch (ArrayIndexOutOfBoundsException e) {
-                print("Error! Index cannot be empty.");
+                print(ERROR_EMPTY_INDEX);
             }
             break;
         }
         default: {
-            print("My apologies, I don't understand what '" + statement[0] + "' means.");
+            print(ERROR_INVALID_COMMAND_START + statement[0] + ERROR_INVALID_COMMAND_END);
         }
         }
     }
 
     private static void viewTasks() {
         if (taskList.size() == 0) {
-            print("Your task list is empty.");
+            print(EMPTY_TASK_LIST);
             return;
         }
-        print("Here are your current tasks: ");
+        print(SHOW_TASKS);
         for (int i = 1; i <= taskList.size(); i++) {
             print(INDENT + Integer.toString(i) + ". " + taskList.get(i - 1));
         }
@@ -88,56 +112,48 @@ public class Connor {
         case "todo":
             ToDo todo = new ToDo(desc);
             taskList.add(todo);
-            print("Alright, I've added a new task: ");
+            print(ADD_NEW_TASK);
             print(INDENT + todo.toString());
             break;
         case "deadline": {
             if (!desc.contains("/by")) {
-                print("Error! Wrong format for deadlines.");
-                print("");
-                print("Deadline tasks must include \"/by\" in the description.");
-                print("Example: ");
-                print(">>> deadline Finish Project /by Monday Morning");
+                print(ERROR_INVALID_DL_FORMAT);
                 return;
             }
             String[] phrase = desc.split("/by", 2);
             String thing = phrase[0].trim();
             String when  = phrase[1].trim();
             if (thing.isBlank() || when.isBlank()) {
-                print("Error! Deadlines cannot have empty descriptions or dates.");
+                print(ERROR_EMPTY_DL_DESC);
                 return;
             }
             Deadline deadline = new Deadline(thing, when);
             taskList.add(deadline);
-            print("Alright, I've added a new task: ");
+            print(ADD_NEW_TASK);
             print(INDENT + deadline.toString());
             break;
         }
         case "event": {
             if (!desc.contains("/at")) {
-                print("Error! Wrong format for events.");
-                print("");
-                print("Event tasks must include \"/at\" in the description.");
-                print("Example: ");
-                print(">>> event Wedding Party /at May 5th");
+                print(ERROR_INVALID_EVENT_FORMAT);
                 return;
             }
             String[] phrase = desc.split("/at", 2);
             String thing = phrase[0].trim();
             String when  = phrase[1].trim();
             if (thing.isBlank() || when.isBlank()) {
-                print("Error! Events cannot have empty descriptions or dates.");
+                print(ERROR_EMPTY_EVENT_DESC);
                 return;
             }
             Event event = new Event(thing, when);
             taskList.add(event);
-            print("Alright, I've added a new task: ");
+            print(ADD_NEW_TASK);
             print(INDENT + event.toString());
             break;
         }
         default:
             // Something has gone wrong
-            print("Oh no! Incorrect Task type!");
+            print(ERROR_INVALID_TASK_TYPE);
             return;
         }
         // After task is added show current no. of tasks
@@ -149,10 +165,10 @@ public class Connor {
         try {
             Task t = taskList.get(index);
             taskList.remove(index);
-            print("Alright, I've deleted the task: ");
+            print(DELETE_TASK);
             print(INDENT + t);
         } catch (IndexOutOfBoundsException e) {
-            print("Error! Given index is out of range.");
+            print(ERROR_INDEX_OUT_OF_RANGE);
         }
     }
 
@@ -161,10 +177,14 @@ public class Connor {
             try {
                 Task t = taskList.get(index);
                 t.mark();
-                print("Good job! I've marked the following task as completed: ");
+                print(MARK_TASK);
                 print(INDENT + t);
             } catch (IndexOutOfBoundsException e) {
-                print("Error! Given index is out of range.");
+                if (taskList.isEmpty()) {
+                    print(ERROR_MARK_EMPTY);
+                    return;
+                }
+                print(ERROR_INDEX_OUT_OF_RANGE);
                 getNoOfTasks();
             }
         } else {
@@ -172,14 +192,14 @@ public class Connor {
             try {
                 Task t = taskList.get(index);
                 t.unmark();
-                print("Understood. I've unmarked the following task: ");
+                print(UNMARK_TASK);
                 print(INDENT + t);
             } catch (IndexOutOfBoundsException e) {
                 if (taskList.isEmpty()) {
-                    print("Error! I can't mark an empty task list!");
+                    print(ERROR_UNMARK_EMPTY);
                     return;
                 }
-                print("Error! Given index is out of range.");
+                print(ERROR_INDEX_OUT_OF_RANGE);
                 getNoOfTasks();
             }
         }
