@@ -87,6 +87,14 @@ public class Duke
                 System.out.printf("task added:\n%s", e.toString());
                 System.out.printf("you now have %d tasks\n", toDoList.size());
             }
+            else if (split[0].equals("delete") && split.length > 1 && isInteger(split[1]))
+            {
+                int toDelete = Integer.parseInt(split[1]);
+                Task t = toDoList.get(toDelete - 1);
+                toDoList.remove(toDelete - 1);
+                System.out.printf("task removed:\n%s", t.toString());
+                System.out.printf("you now have %d tasks\n", toDoList.size());
+            }
             else
             {
                 System.out.println("task added: " + userInput);
@@ -95,7 +103,7 @@ public class Duke
             userInput = sc.nextLine();
             split = userInput.split(" ");
         }
-        System.out.println("goodbye!");
+        System.out.println("goodbye!\n");
     }
 
 
