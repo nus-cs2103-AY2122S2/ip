@@ -5,3 +5,5 @@ list
 deadline homework /by tomorrow
 event birthday /at next year
 list
+delete 2
+list
