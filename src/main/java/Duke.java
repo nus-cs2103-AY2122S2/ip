@@ -1,8 +1,9 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) throws InvalidDescriptorException,
-            InvalidCommandException, MissingActionException {
+            InvalidCommandException, MissingActionException, IndexOutOfBoundsException {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("\t____________________________________________________________");
@@ -10,7 +11,8 @@ public class Duke {
         System.out.println("\t____________________________________________________________");
 
         // Initialise array of Tasks;
-        Task[] tasks = new Task[100];
+//        Task[] tasks = new Task[100];
+        ArrayList<Task> tasks = new ArrayList<>(100);
         int count = 0;
 
         while (true) {
@@ -40,7 +42,7 @@ public class Duke {
                         System.out.println("\t____________________________________________________________");
                         System.out.println("\t Here are the tasks in your list:");
                         for (int taskCount = 0; taskCount < count; taskCount++) {
-                            Task mainTask = tasks[taskCount];
+                            Task mainTask = tasks.get(taskCount);
                             System.out.println("\t " + (taskCount + 1) + "." + mainTask.track()
                                     + mainTask.status + " " + mainTask.toString());
                         }
@@ -51,34 +53,50 @@ public class Duke {
                     }
                 } else {
                     if (command.equals("todo") || command.equals("event") || command.equals("deadline")
-                            || command.equals("mark") || command.equals("unmark")) {
+                            || command.equals("mark") || command.equals("unmark") || command.equals("delete")) {
                         // if command = "mark x" where x is the task number
                         if (command.equals("mark")) {
                             String taskNumStr = tokens[1];
                             int taskNum = Integer.parseInt(taskNumStr) - 1;
-                            tasks[taskNum].mark();
-                            System.out.println("\t____________________________________________________________");
-                            System.out.println("\t Nice! I've marked this task as done:");
-                            System.out.println("\t\t" + tasks[taskNum].track() + tasks[taskNum].status + " " + tasks[taskNum]);
-                            System.out.println("\t____________________________________________________________");
-                            continue;
+                            try {
+                                tasks.get(taskNum).mark();
+                                System.out.println("\t____________________________________________________________");
+                                System.out.println("\t Nice! I've marked this task as done:");
+                                System.out.println("\t\t" + tasks.get(taskNum).track() + tasks.get(taskNum).status
+                                        + " " + tasks.get(taskNum));
+                                System.out.println("\t____________________________________________________________");
+                            } catch (IndexOutOfBoundsException e) {
+                                System.out.println("\t____________________________________________________________");
+                                System.out.println("\t☹ Woof Woof!!! This task cannot be found with my Wonka eyes!!!");
+                                System.out.println("\t____________________________________________________________");
+                            } finally {
+                                continue;
+                            }
                         }
                         // if command = "unmark x" where x is the task number
                         if (command.equals("unmark")) {
                             String taskNumStr = tokens[1];
                             int taskNum = Integer.parseInt(taskNumStr) - 1;
-                            tasks[taskNum].unmark();
-                            System.out.println("\t____________________________________________________________");
-                            System.out.println("\t OK, I've marked this task as not done yet:");
-                            System.out.println("\t\t" + tasks[taskNum].track() + tasks[taskNum].status + " " + tasks[taskNum]);
-                            System.out.println("\t____________________________________________________________");
-                            continue;
+                            try {
+                                tasks.get(taskNum).unmark();
+                                System.out.println("\t____________________________________________________________");
+                                System.out.println("\t OK, I've marked this task as not done yet:");
+                                System.out.println("\t\t" + tasks.get(taskNum).track() + tasks.get(taskNum).status
+                                        + " " + tasks.get(taskNum));
+                                System.out.println("\t____________________________________________________________");
+                            } catch (IndexOutOfBoundsException e) {
+                                System.out.println("\t____________________________________________________________");
+                                System.out.println("\t☹ Woof Woof!!! This task cannot be found with my Wonka eyes!!!");
+                                System.out.println("\t____________________________________________________________");
+                            } finally {
+                                continue;
+                            }
                         }
 
                         // if command = "todo"
                         if (command.equals("todo")) {
                             Todo todo = new Todo(name);
-                            tasks[count] = todo;
+                            tasks.add(todo);
                             System.out.println("\t____________________________________________________________");
                             System.out.println("\t Got it. I've added this task:");
                             System.out.println("\t\t " + todo.track() + todo.status + " " + todo.toString());
@@ -94,7 +112,7 @@ public class Duke {
                             String[] tokensName = name.split("/");
                             String eventName = tokensName[0];
                             Event event = new Event(eventName, time);
-                            tasks[count] = event;
+                            tasks.add(event);
 
                             System.out.println("\t____________________________________________________________");
                             System.out.println("\t Got it. I've added this task:");
@@ -113,13 +131,43 @@ public class Duke {
                             String[] tokensName = name.split("/");
                             String deadlineName = tokensName[0];
                             Deadline deadline = new Deadline(deadlineName, date);
-                            tasks[count] = deadline;
+                            tasks.add(deadline);
 
                             System.out.println("\t____________________________________________________________");
                             System.out.println("\t Got it. I've added this task:");
                             System.out.println("\t\t " + deadline.track() + deadline.status + " " + deadline.toString());
                             System.out.println("\t Now you have " + (count + 1) + " tasks in the list.");
                             System.out.println("\t____________________________________________________________");
+                        }
+
+                        // if command = "delete"
+                        if (command.equals("delete")) {
+                            int toBeDeleted = Integer.parseInt(tokens[1]) - 1;
+
+
+                            if (tokens.length == 1) {
+                                throw new InvalidCommandException(
+                                        "\t☹ Woof Woof!!! You haven't provided me a task number to delete!!!");
+                            }
+
+                            try {
+                                Task deleteTask = tasks.get(toBeDeleted);
+                                tasks.remove(toBeDeleted);
+                                count--;
+
+                                System.out.println("\t____________________________________________________________");
+                                System.out.println("\t Noted. I've removed this task:");
+                                System.out.println("\t\t " + deleteTask.track() + deleteTask.status + " " + deleteTask.toString());
+                                System.out.println("\t Now you have " + count + " tasks in the list.");
+                                System.out.println("\t____________________________________________________________");
+
+                            } catch (IndexOutOfBoundsException e) {
+                                System.out.println("\t____________________________________________________________");
+                                System.out.println("\t☹ Woof Woof!!! This task cannot be found with my Wonka eyes!!!");
+                                System.out.println("\t____________________________________________________________");
+                            } finally {
+                                continue;
+                            }
                         }
                         count++;
                     } else {
@@ -132,6 +180,7 @@ public class Duke {
                 System.out.println("\t____________________________________________________________");
             }
         }
+        tasks.clear();
         sc.close();
     }
 }
