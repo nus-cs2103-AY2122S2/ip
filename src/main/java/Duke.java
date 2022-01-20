@@ -49,38 +49,38 @@ public class Duke {
                         System.out.println("======================================================");
                         break;
                     case "unmark":
-                        System.out.println("------------------------------------------------------");
-                        Task unmark_task = this.list.get(Integer.parseInt(details) - 1);
-                        System.out.println(unmark_task.unmark());
-                        System.out.println("======================================================");
+                        try {
+                            System.out.println("------------------------------------------------------");
+                            Task unmark_task = this.list.get(Integer.parseInt(details) - 1);
+                            System.out.println(unmark_task.unmark());
+                            System.out.println("======================================================");
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new DukeException("No such task exists! Are you sure about that task number?");
+                        }
                         break;
                     case "mark":
-                        System.out.println("------------------------------------------------------");
-                        Task mark_test = this.list.get(Integer.parseInt(details) - 1);
-                        System.out.println(mark_test.mark());
-                        System.out.println("======================================================");
+                        try {
+                            System.out.println("------------------------------------------------------");
+                            Task mark_test = this.list.get(Integer.parseInt(details) - 1);
+                            System.out.println(mark_test.mark());
+                            System.out.println("======================================================");
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new DukeException("No such task exists! Are you sure about that task number?");
+                        }
                         break;
                     case "deadline":
-                        try {
-                            System.out.println("------------------------------------------------------");
-                            is_valid_date_task(details, "deadline");
-                            String[] d_deets = details.split("/");
-                            Deadline deadline = new Deadline(d_deets[0].trim(), d_deets[1].trim().substring(3));
-                            add_task(deadline);
-                        } catch (ArrayIndexOutOfBoundsException e) { //if there is no date provided then there wont be an array
-                            throw new DukeException("please provide a date");
-                        }
+                        System.out.println("------------------------------------------------------");
+                        is_valid_date_task(details, "deadline");
+                        String[] d_deets = details.split("/");
+                        Deadline deadline = new Deadline(d_deets[0].trim(), d_deets[1].trim().substring(3));
+                        add_task(deadline);
                         break;
                     case "event":
-                        try {
-                            System.out.println("------------------------------------------------------");
-                            is_valid_date_task(details, "event");
-                            String[] e_deets = details.split("/");
-                            Event event = new Event(e_deets[0].trim(), e_deets[1].trim().substring(3));
-                            add_task(event);
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            throw e;
-                        }
+                        System.out.println("------------------------------------------------------");
+                        is_valid_date_task(details, "event");
+                        String[] e_deets = details.split("/");
+                        Event event = new Event(e_deets[0].trim(), e_deets[1].trim().substring(3));
+                        add_task(event);
                         break;
                     case "todo":
                         System.out.println("------------------------------------------------------");
