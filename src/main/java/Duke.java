@@ -131,12 +131,21 @@ public class Duke {
                         break;
                     } catch (MissingFormatArgumentException ex) {
                         String err = "_______________________________________________________\n"
-                                + "No arguments detected!\n"
+                                + "* No arguments detected *\n"
                                 + "Please provide a description for your Event!\n"
                                 + "_______________________________________________________\n";
                         System.out.println(err);
                         break;
-                    }
+                    } catch (DukeException ex) {
+                    String err = "_______________________________________________________\n"
+                            + "* Time frame not detected *\n"
+                            + "Please provide a time frame for your Event!\n"
+                            + "Check if you have typed '/at' to indicate the time frame!\n"
+                            + "e.g. event project meeting /at Mon 2-4pm\n"
+                            + "_______________________________________________________\n";
+                    System.out.println(err);
+                    break;
+                }
                 }
                 default:
                     System.out.println("Keyword not recognised!");

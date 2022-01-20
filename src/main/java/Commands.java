@@ -107,7 +107,7 @@ public class Commands {
         taskHistory.addDeadline(description, timeFrame);
     }
 
-    void event(String[] tokens) {
+    void event(String[] tokens) throws DukeException {
         String description = "";
         String timeFrame = "";
         int timeStart = -1; // -1 is a placeholder to indicate /at has not been found
@@ -121,10 +121,9 @@ public class Commands {
             description = description.concat(" ");
         }
 
+        // Check for timeFrame
         if (timeStart == -1) {
-            System.out.println("Error occured while processing " + description);
-            System.out.println("'/' is missing in input, please restart and try again");
-            return;
+            throw new DukeException("'/at' not detected");
         }
 
         for (int j = timeStart + 1; j < tokens.length; j++) {
