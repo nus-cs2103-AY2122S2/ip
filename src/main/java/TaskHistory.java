@@ -54,7 +54,7 @@ public class TaskHistory {
                 Event temp = (Event) nextTask;
                 result.append(count).append(".").append(temp.getEvent());
             } else {
-                System.out.println("Error occurred while processing " + nextTask.getTask()); // Temporary error handler
+                System.out.println("Error occurred while processing " + nextTask.getTask()); // For some reason the task type is unknown
             }
             count++;
         }
@@ -70,6 +70,25 @@ public class TaskHistory {
     }
 
     void deleteTask(int index) {
-        record.remove(index);
+        StringBuilder description = new StringBuilder();
+        Task temp = record.remove(index);
+        if (temp instanceof ToDos) {
+            ToDos tempToDos = (ToDos) temp;
+            description.append(tempToDos.getToDo());
+        } else if (temp instanceof Deadlines) {
+            Deadlines tempDeadlines = (Deadlines) temp;
+            description.append(tempDeadlines.getDeadline());
+        } else if (temp instanceof Event) {
+            Event tempEvent = (Event) temp;
+            description.append(tempEvent.getEvent());
+        } else {
+            System.out.println("Error occurred while deleting " + temp.getTask()); // For some reason the task type is unknown
+        }
+        String msg = "_______________________________________________________\n"
+                + "Understood, removing this task now:\n"
+                + "    " + description
+                + "Now you have " + record.size() + " tasks in our records.\n"
+                + "_______________________________________________________\n";
+        System.out.println(msg);
     }
 }
