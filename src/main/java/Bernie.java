@@ -1,14 +1,14 @@
 import java.util.Scanner;
 /**
  * Bernie the bot that is the driver for the responses to the user.
- * Internally, Bernie has tasks, which is used whenever an input is given by the user.
+ * Internally, Bernie has Tasklist, which contain the Tasks that a user inputs
  */
 
 public class Bernie {
     TaskList tasks;
     String lineBreak = "___________________________________________________________";
     /**
-     * Constructs a new Bot containing a Storage
+     * Constructs a new Bot containing TaskList
      */
     Bernie() {
         this.tasks = new TaskList();
@@ -20,10 +20,12 @@ public class Bernie {
     void leave() {
         System.out.println("See ya!");
     }
+
     /**
-     * Displays to the user a message according to the input given
-     * @param input String, takes in an input and either adds or list the items
-     * @return a boolean to indicate whether to end the program
+     * Displays to the user a message according to their input. Actions are performed according
+     * to the input. Exceptions are caught and printed out for the user.
+     * @param input String, user input
+     * @return boolean value, indicating if the program will end or not.
      */
     boolean respond(String input) {
         try {
@@ -48,14 +50,22 @@ public class Bernie {
         }
     }
 
+    /**
+     * Verifies if an input is of "mark" type: meaning either "mark" or "unmark"
+     * @param input String, user input
+     * @return boolean
+     */
     boolean isMarkInput(String input) {
         return input.indexOf("mark") == 0 || input.indexOf("unmark") == 0;
     }
 
     /**
-     * Bernie will decide what kind of task is to be created
-     * @param input String, given by user. Either is todo, deadline or event
-     * @throws BernieException
+     * Bernie will decide what kind of task is to be created. Bernie splits the input accordingly,
+     * to get the parameters required to create the type of task. The creation and adding of task will be
+     * handled by the TaskList.
+     * @param input String, given by user. Bernie verifies the Task type and the Task either is todo,
+     * deadline or event
+     * @throws BernieException, if the task is not a valid type.
      */
     void add(String input) throws BernieException {
         Task newTask = null;
@@ -87,11 +97,12 @@ public class Bernie {
     }
 
     /**
-     * Splits a user input into an array accordingly depending on taskType.
-     * Array contains the respective Task parameters
-     * @param taskType String, what
-     * @param input String, a user input
-     * @return String[] inputArr. For "todo": an array of 1, containing description.
+     * Splits a user input into an array containing parameters for creating Task accordingly,
+     * depending on taskType.
+     * @param taskType String
+     * @param input String, a user input to be split into an array of parameters
+     * @return String[] inputArr.
+     * For "todo": an array of 1, containing description.
      * For "deadline": an array of 2: [description, by]
      * For "event": an array of 2: [description, at]
      */
@@ -136,7 +147,7 @@ public class Bernie {
     }
 
     /**
-     * Mark or unmark a task number depending on the input. Catches errors if user
+     * Mark or unmark a task number depending on the input. Handles error if user
      * enters invalid mark inputs etc.
      * @param input String, containing mark/unmark and the task number to perform action
      */
@@ -162,6 +173,12 @@ public class Bernie {
         }
     }
 
+    /**
+     * Checks for valid "mark" action inputs. Throws error if it is not valid.
+     * @param inputArr String[], the user input String split into an array of String for processing
+     *                 parameters for marking/unmarking a Task
+     * @throws BernieException for invalid inputs
+     */
     void checkMarkInput(String[] inputArr) throws BernieException {
         if (inputArr.length == 2) {
             try {
@@ -176,6 +193,13 @@ public class Bernie {
         }
     }
 
+    /**
+     * Gets the description from the inputArr which contains parameters for creating Task
+     * @param inputArr String[], parameters for creating Task, obtained from user input String.
+     * @param taskType String
+     * @return String description, for creating of Task
+     * @throws BernieException for invalid descriptions such as empty or number description
+     */
     String getDescription(String[] inputArr, String taskType) throws BernieException {
         String description = "";
         try {
@@ -200,6 +224,12 @@ public class Bernie {
         }
     }
 
+    /**
+     * Gets the time from the inputArr which contains parametrs for creating Task
+     * @param inputArr String[], parameters for creating Task, obtained from user input String.
+     * @return String time, for craeting of Task
+     * @throws BernieException if there is no time input given
+     */
     String getTime(String[] inputArr) throws BernieException {
         try {
             String time = inputArr[1];

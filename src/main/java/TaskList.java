@@ -9,7 +9,6 @@ public class TaskList {
     Task[] tasks;
     int nextIndex = 0;
     int done = 0;
-    String lineBreak = "___________________________________________________________";
     /**
      * Constructs a TaskList containing an array to contain tasks
      */
@@ -65,6 +64,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks or unmarks Task accordingly
+     * @param action String, mark or unmark
+     * @param taskNumber String, the taskNumber we want to mark or unmark
+     * @return the resulting Task after mark or unmark
+     * @throws BernieException if we attempt to mark a marked Task or unmark an unnmarked Task
+     */
     Task markTask(String action, String taskNumber) throws BernieException {
         int taskIndex = Integer.parseInt(taskNumber) - 1;
         if (action.equals("mark")) {
