@@ -1,23 +1,11 @@
-import exception.DukeException;
+import exception.*;
 import task.*;
+import enums.*;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private static final String INPUT_BYE = "bye";
-    private static final String INPUT_LIST = "list";
-    private static final String INPUT_MARK = "mark";
-    private static final String INPUT_UNMARK = "unmark";
-    private static final String INPUT_DELETE = "delete";
-
-    private static final String TASK_TODO = "todo";
-    private static final String TASK_DEADLINE = "deadline";
-    private static final String TASK_EVENT = "event";
-    private static final String TASK_BY = "/by";
-    private static final String TASK_AT = "/at";
-
     private static final ArrayList<Task> tasks = new ArrayList<>();
     private static int count = 0;
     private static boolean processNext = true;
@@ -31,30 +19,30 @@ public class Duke {
         while (processNext) {
             try {
                 String[] tokens = input.split(" ");
-                switch (tokens[0]) {
-                    case INPUT_BYE:
+                switch (Command.valueOf(tokens[0].trim().toUpperCase())) {
+                    case BYE:
                         processNext = false;
                         echo("Goodbye. J.A.R.V.I.S. systems powering off...");
                         return;
-                    case INPUT_LIST:
+                    case LIST:
                         printTasks();
                         break;
-                    case INPUT_MARK:
+                    case MARK:
                         markAsDone(tokens);
                         break;
-                    case INPUT_UNMARK:
+                    case UNMARK:
                         markAsUndone(tokens);
                         break;
-                    case INPUT_DELETE:
+                    case DELETE:
                         delete(tokens);
                         break;
-                    case TASK_TODO:
+                    case TODO:
                         addTodo(input);
                         break;
-                    case TASK_DEADLINE:
+                    case DEADLINE:
                         addDeadline(input);
                         break;
-                    case TASK_EVENT:
+                    case EVENT:
                         addEvent(input);
                         break;
                     default:
@@ -178,7 +166,7 @@ public class Duke {
     private static void addTodo(String input) throws DukeException {
         String description;
         try {
-            description = input.trim().substring(TASK_TODO.length() + 1);
+            description = input.trim().substring(Command.TODO.toString().length() + 1);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("The description of the todo cannot be empty.");
         }
@@ -193,10 +181,10 @@ public class Duke {
 
     private static void addDeadline(String input) throws DukeException {
         String description;
-        String[] split = input.split(TASK_BY);
+        String[] split = input.split("/by");
 
         try {
-            description = split[0].trim().substring(TASK_DEADLINE.length() + 1);
+            description = split[0].trim().substring(Command.DEADLINE.toString().length() + 1);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("The description of the deadline cannot be empty.");
         }
@@ -217,10 +205,10 @@ public class Duke {
 
     public static void addEvent(String input) throws DukeException {
         String description;
-        String[] split = input.split(TASK_AT);
+        String[] split = input.split("/at");
 
         try {
-            description = split[0].trim().substring(TASK_EVENT.length() + 1);
+            description = split[0].trim().substring(Command.EVENT.toString().length() + 1);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("The description of the event cannot be empty.");
         }
