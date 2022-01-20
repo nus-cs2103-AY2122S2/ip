@@ -17,76 +17,88 @@ public class Duke {
 
         System.out.println("What can I do for you?");
         while (true) {
-            String userInput = scanner.nextLine();
-            System.out.println("  ===================================");
+            try {
 
-            if (userInput.equals("bye")) {
-                break;
-            }
+                String userInput = scanner.nextLine();
+                System.out.println("  ===================================");
 
-            if (userInput.equals("list")) {
-                for (int i = 0; i < tasks.size(); i++) {
-                    System.out.println((i + 1) + ". " + tasks.get(i));
+                if (userInput.equals("bye")) {
+                    break;
                 }
 
-            } else if (parseUserInput(userInput).equals("mark")) {
-                String[] userInputArr = userInput.split(" ", 2);
-                Task task = tasks.get(Integer.parseInt(userInputArr[1]) - 1);
+                if (userInput.equals("list")) {
+                    for (int i = 0; i < tasks.size(); i++) {
+                        System.out.println((i + 1) + ". " + tasks.get(i));
+                    }
 
-                task.markAsDone();
+                } else if (parseUserInput(userInput).equals("mark")) {
+                    String[] userInputArr = userInput.split(" ", 2);
+                    Task task = tasks.get(Integer.parseInt(userInputArr[1]) - 1);
 
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println("  " + task.toString());
+                    task.markAsDone();
 
-            } else if (parseUserInput(userInput).equals("unmark")) {
-                String[] userInputArr = userInput.split(" ", 2);
-                Task task = tasks.get(Integer.parseInt(userInputArr[1]) - 1);
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println("  " + task.toString());
 
-                task.markAsNotDone();
+                } else if (parseUserInput(userInput).equals("unmark")) {
+                    String[] userInputArr = userInput.split(" ", 2);
+                    Task task = tasks.get(Integer.parseInt(userInputArr[1]) - 1);
 
-                System.out.println("OK, I've marked this task as not done yet:");
-                System.out.println("  " + task.toString());
-            } else {
-                String[] userInputArr = userInput.split(" ");
-                String instruction = userInputArr[0];
-                String title = String.join(" ",
-                        Arrays.copyOfRange(userInputArr, 1, userInputArr.length));
+                    task.markAsNotDone();
 
-                if (instruction.equals("todo")) {
-                    Task todo = new Todo(title);
-                    tasks.add(todo);
-
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println(todo);
-                } else if (instruction.equals("deadline")) {
-                    String[] taskArr = title.split(" /by");
-                    String taskTitle = taskArr[0];
-                    String dueBy = taskArr[1];
-
-                    Task deadline = new Deadline(taskTitle, dueBy);
-                    tasks.add(deadline);
-
-                    System.out.println("Got it. I've added this task: ");
-                    System.out.println(deadline.toString());
-                } else if (instruction.equals("event")) {
-                    String[] taskArr = title.split(" /at");
-                    String taskTitle = taskArr[0];
-                    String eventAt = taskArr[1];
-
-                    Task event = new Event(taskTitle, eventAt);
-                    tasks.add(event);
-
-                    System.out.println("Got it. I've added this task: ");
-                    System.out.println(event.toString());
+                    System.out.println("OK, I've marked this task as not done yet:");
+                    System.out.println("  " + task.toString());
                 } else {
-                    tasks.add(new Task(userInput));
-                    System.out.println("Added: " + userInput);
+                    String[] userInputArr = userInput.split(" ");
+                    String instruction = userInputArr[0];
+                    String title = String.join(" ",
+                            Arrays.copyOfRange(userInputArr, 1, userInputArr.length));
+
+                    if (instruction.equals("todo")) {
+                        if(title.isEmpty()) {
+                            throw new EmptyTodoException("☹ OOPS!!! The description of a todo cannot be empty.");
+                        }
+                        Task todo = new Todo(title);
+                        tasks.add(todo);
+
+                        System.out.println("Got it. I've added this task:");
+                        System.out.println(todo);
+                    } else if (instruction.equals("deadline")) {
+                        String[] taskArr = title.split(" /by");
+                        String taskTitle = taskArr[0];
+                        String dueBy = taskArr[1];
+
+                        Task deadline = new Deadline(taskTitle, dueBy);
+                        tasks.add(deadline);
+
+                        System.out.println("Got it. I've added this task: ");
+                        System.out.println(deadline.toString());
+                    } else if (instruction.equals("event")) {
+                        String[] taskArr = title.split(" /at");
+                        String taskTitle = taskArr[0];
+                        String eventAt = taskArr[1];
+
+                        Task event = new Event(taskTitle, eventAt);
+                        tasks.add(event);
+
+                        System.out.println("Got it. I've added this task: ");
+                        System.out.println(event.toString());
+                    } else {
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    }
+
+                    System.out.println("Now you have " + tasks.size() + " task" + parseTaskSize(tasks.size()) + "in the list.");
                 }
 
-                System.out.println("Now you have " + tasks.size() + " task" + parseTaskSize(tasks.size()) + "in the list.");
-            }
+                System.out.println("  ===================================");
+            } catch (DukeException e) {
+                System.out.println(e.toString());
+                System.out.println("  ===================================");
+            } catch (EmptyTodoException e) {
+                System.out.println(e.toString());
+                System.out.println("  ===================================");
 
-            System.out.println("  ===================================");
+            }
         }
 
         scanner.close();
