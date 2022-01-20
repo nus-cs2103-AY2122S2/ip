@@ -1,3 +1,6 @@
+import javax.swing.text.html.Option;
+import java.util.Optional;
+
 /**
  * Decides which type of command to generate given user input
  */
@@ -40,23 +43,28 @@ public class CommandFactory {
     public Command makeCommand(String input) {
         String commandWord = isolateCommand(input);
         String commandParameters = isolateParameters(input);
+        try {
+            if (commandWord.equals("bye")) {
+                return new ByeCommand();
+            } else if (commandWord.equals("list")) {
+                return new ListCommand();
+            } else if (commandWord.equals("mark")) {
+                return new MarkCommand(commandParameters);
+            } else if (commandWord.equals("unmark")) {
+                return new UnmarkCommand(commandParameters);
+            } else if (commandWord.equals("todo")) {
+                return new AddTaskCommand(commandParameters, "todo");
+            } else if (commandWord.equals("deadline")) {
+                return new AddTaskCommand(commandParameters, "deadline");
+            } else if (commandWord.equals("event")) {
+                return new AddTaskCommand(commandParameters, "event");
+            } else {
+                throw new DukeException();
+            }
 
-        if (commandWord.equals("bye")) {
+        } catch (DukeException e) {
+            System.out.println("Invalid command given");
             return new ByeCommand();
-        } else if (commandWord.equals("list")) {
-            return new ListCommand();
-        } else if (commandWord.equals("mark")) {
-            return new MarkCommand(commandParameters);
-        } else if (commandWord.equals("unmark")) {
-            return new UnmarkCommand(commandParameters);
-        } else if (commandWord.equals("todo")) {
-            return new AddTaskCommand(commandParameters, "todo");
-        } else if (commandWord.equals("deadline")) {
-            return new AddTaskCommand(commandParameters, "deadline");
-        } else if (commandWord.equals("event")) {
-            return new AddTaskCommand(commandParameters, "event");
-        } else {
-            return null;
         }
     }
 }

@@ -21,7 +21,15 @@ public class DeadlineTask extends Task {
      * @return Integer index
      */
     private int findDeadlineIndex() {
-        int index = this.input.indexOf("/by "); // "/" as delimiting character for events
+        int index = this.input.indexOf("/by "); // "/by" as delimiting character for events
+        try {
+            if (index == -1) {
+                throw new DukeException();
+            }
+        } catch (DukeException e) {
+            System.out.println("No /by date specified.");
+            System.exit(2);
+        }
         return index;
     }
 

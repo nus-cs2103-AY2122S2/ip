@@ -17,15 +17,25 @@ public class EventTask extends Task {
 
     /**
      * Find the index from which datetime information starts
+     *
      * @return Integer index
      */
     private int findEventIndex() {
         int index = this.input.indexOf("/at "); // "/at" as delimiting character for events
+        try {
+            if (index == -1) {
+                throw new DukeException();
+            }
+        } catch (DukeException e) {
+            System.out.println("No /at date specified.");
+            System.exit(2);
+        }
         return index;
     }
 
     /**
      * Gets the task information
+     *
      * @return Task information
      */
     private String getInfo() {
@@ -37,6 +47,7 @@ public class EventTask extends Task {
 
     /**
      * Gets the deadline date
+     *
      * @return Deadline date string
      */
     private String getDate() {
