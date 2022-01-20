@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static ArrayList<Task> tasks = new ArrayList<>();
+    private static final ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -16,22 +16,27 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("What can I do for you?");
-        while (true) {
-            try {
+
+        try {
+            while (true) {
 
                 String userInput = scanner.nextLine();
                 System.out.println("  ===================================");
 
-                if (userInput.equals("bye")) {
+                InstructionType instructionType = parseUserInput(userInput);
+
+                if (instructionType.equals(InstructionType.BYE)) {
+                    System.out.println("Bye. Hope to see you again soon!");
+                    System.out.println("  ===================================");
                     break;
                 }
 
-                if (userInput.equals("list")) {
+
+                if (instructionType.equals(InstructionType.LIST)) {
                     for (int i = 0; i < tasks.size(); i++) {
                         System.out.println((i + 1) + ". " + tasks.get(i));
                     }
-
-                } else if (parseUserInput(userInput).equals("mark")) {
+                } else if (instructionType.equals(InstructionType.MARK)) {
                     String[] userInputArr = userInput.split(" ", 2);
                     Task task = tasks.get(Integer.parseInt(userInputArr[1]) - 1);
 
@@ -39,8 +44,7 @@ public class Duke {
 
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println("  " + task.toString());
-
-                } else if (parseUserInput(userInput).equals("unmark")) {
+                } else if (instructionType.equals(InstructionType.UNMARK)) {
                     String[] userInputArr = userInput.split(" ", 2);
                     Task task = tasks.get(Integer.parseInt(userInputArr[1]) - 1);
 
@@ -48,7 +52,7 @@ public class Duke {
 
                     System.out.println("OK, I've marked this task as not done yet:");
                     System.out.println("  " + task.toString());
-                } else if (parseUserInput(userInput).equals("delete")) {
+                } else if (instructionType.equals(InstructionType.DELETE)) {
                     String[] userInputArr = userInput.split(" ", 2);
                     Task task = tasks.remove(Integer.parseInt(userInputArr[1]) - 1);
 
@@ -56,12 +60,11 @@ public class Duke {
                     System.out.println("  " + task.toString());
                 } else {
                     String[] userInputArr = userInput.split(" ");
-                    String instruction = userInputArr[0];
                     String title = String.join(" ",
                             Arrays.copyOfRange(userInputArr, 1, userInputArr.length));
 
-                    if (instruction.equals("todo")) {
-                        if(title.isEmpty()) {
+                    if (instructionType.equals(InstructionType.TODO)) {
+                        if (title.isEmpty()) {
                             throw new EmptyTodoException("☹ OOPS!!! The description of a todo cannot be empty.");
                         }
                         Task todo = new Todo(title);
@@ -69,7 +72,7 @@ public class Duke {
 
                         System.out.println("Got it. I've added this task:");
                         System.out.println(todo);
-                    } else if (instruction.equals("deadline")) {
+                    } else if (instructionType.equals(InstructionType.DEADLINE)) {
                         String[] taskArr = title.split(" /by");
                         String taskTitle = taskArr[0];
                         String dueBy = taskArr[1];
@@ -79,7 +82,7 @@ public class Duke {
 
                         System.out.println("Got it. I've added this task:");
                         System.out.println(deadline.toString());
-                    } else if (instruction.equals("event")) {
+                    } else if (instructionType.equals(InstructionType.EVENT)) {
                         String[] taskArr = title.split(" /at");
                         String taskTitle = taskArr[0];
                         String eventAt = taskArr[1];
@@ -92,37 +95,52 @@ public class Duke {
                     } else {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
-
                     System.out.println("Now you have " + tasks.size() + " task" + parseTaskSize(tasks.size()) + "in the list.");
                 }
-
                 System.out.println("  ===================================");
-            } catch (DukeException e) {
-                System.out.println(e.toString());
-                System.out.println("  ===================================");
-            } catch (EmptyTodoException e) {
-                System.out.println(e.toString());
-                System.out.println("  ===================================");
-
             }
+        } catch (DukeException e) {
+            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            System.out.println("  ===================================");
+        } catch (EmptyTodoException e) {
+            System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+            System.out.println("  ===================================");
+
+        } finally {
+            scanner.close();
         }
-
-        scanner.close();
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println("  ===================================");
-
     }
 
-    public static String parseUserInput(String userInput) {
+
+    public static InstructionType parseUserInput(String userInput) {
         String[] userInputArr = userInput.split(" ", 2);
         if (userInputArr.length > 2) {
-            return "";
+            return InstructionType.INVALID;
         }
 
-        return userInputArr[0];
+        switch (userInputArr[0]) {
+            case "mark":
+                return InstructionType.MARK;
+            case "unmark":
+                return InstructionType.UNMARK;
+            case "todo":
+                return InstructionType.TODO;
+            case "event":
+                return InstructionType.EVENT;
+            case "deadline":
+                return InstructionType.DEADLINE;
+            case "delete":
+                return InstructionType.DELETE;
+            case "list":
+                return InstructionType.LIST;
+            case "bye":
+                return InstructionType.BYE;
+            default:
+                return InstructionType.INVALID;
+        }
     }
 
-    public static String parseTaskSize (int size) {
+    public static String parseTaskSize(int size) {
         return size > 1 ? "s " : " ";
     }
 }
