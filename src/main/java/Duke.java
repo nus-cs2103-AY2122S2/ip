@@ -27,7 +27,7 @@ public class Duke {
         }
     }
     private static void greet() {
-        System.out.println("Yoooo! My name is " + botName + "!\n" + "How can I help you bro?\n");
+        System.out.println(String.format("Yoooo! My name is %s!\nHow can i help you bro?\n", botName));
     }
     private static void farewell() {
         System.out.println("See you next time!");
@@ -36,16 +36,17 @@ public class Duke {
     private void taskAdded() {
         System.out.println("Got it. I've added this task:");
         System.out.println(this.list[this.listIndex].toString());
-        System.out.println("Now you have " + this.listIndex + " task(s) in your list.");
+        System.out.println(String.format("Now you have %d task(s) in your list.", this.listIndex));
         this.listIndex ++;
     }
+
     private void addTask(String str) {    //adds task to list
         String action = Duke.getFirstWord(str);
         switch (action) {
             case "todo":
                 try {
                     String[] todoArr = str.split(" ", 2);
-                    if (todoArr.length == 1) {
+                    if (todoArr.length <= 1) {
                         throw new InvalidArgumentException("todo.. todo what?");
                     }
                     this.list[this.listIndex] = new Todo(todoArr[1].trim());
@@ -95,7 +96,8 @@ public class Duke {
                 }
             default:
                 try {
-                    throw new UnknownException("Sorry.. I don't know what u talking bout bro.");
+                    throw new UnknownException(String.format("Sorry.. I don't" +
+                            " know what u talking bout bro. What does \"%s\" mean?", str));
                 }
                 catch (UnknownException e) {
                 System.out.println(e.getMessage());
@@ -131,7 +133,7 @@ public class Duke {
             // the second word is expected to be a number for now
             int taskNumber = Integer.parseInt(words[1]);
             if (taskNumber >= this.listIndex || taskNumber <= 0)
-                throw new OutOfBoundsException("This task does not exist!");
+                throw new OutOfBoundsException(String.format("The task %d does not exist!", taskNumber));
             this.list[taskNumber].markAsDone();
             System.out.println("Nice! I've marked this task as done:");
             System.out.println(this.getTaskStatement(taskNumber));
@@ -146,7 +148,7 @@ public class Duke {
             // the second word is expected to be a number for now
             int taskNumber = Integer.parseInt(words[1]);
             if (taskNumber >= this.listIndex || taskNumber <= 0)
-                throw new OutOfBoundsException("This task does not exist!");
+                throw new OutOfBoundsException(String.format("The task %d does not exist!", taskNumber));;
             this.list[taskNumber].markAsUndone();
             System.out.println("OK, I've marked this task as not done yet:");
             System.out.println(this.getTaskStatement(taskNumber));
@@ -159,7 +161,6 @@ public class Duke {
         Duke.greet();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
-        // for each input, action = input.getfirstword. while input!eq bye, Duke.performAction(action, input)
         while (!input.equals("bye")) {  //terminates system when user says bye
             String action = Duke.getFirstWord(input);
             duke.performAction(action, input);
