@@ -2,9 +2,11 @@ public class Task {
 
     private boolean status;
     private String details;
+    private int id;
 
-    public Task(String s) {
-        this.details = s;
+    //ToDo
+    public Task(String details) {
+        this.details = details;
         this.status = false;
     }
 
@@ -18,6 +20,7 @@ public class Task {
         return "Task " + details + " has been marked incomplete.";
     }
 
+    @Override
     public String toString() {
         String out = "";
         if (status) {
