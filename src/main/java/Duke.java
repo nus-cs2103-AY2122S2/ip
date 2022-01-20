@@ -15,7 +15,7 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        TaskList<Task> taskList = new TaskList<>();
+        TaskList taskList = new TaskList();
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("Hello! I' Duke \nWhat can I do for you?");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -34,7 +34,7 @@ public class Duke {
             }
 
             if (firstWord.equals("mark") || firstWord.equals("unmark") || firstWord.equals("delete")) {
-                itemIndex = Integer.parseInt(command.substring(index));
+                itemIndex = Integer.parseInt(command.substring(index + 1));
             }
 
             if (command.equals("bye")) {
@@ -43,31 +43,56 @@ public class Duke {
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 System.exit(0);
                 sc.close();
+
             } else if (command.equals("list")) {
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 taskList.list();
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
             } else if (firstWord.equals("mark")) {
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                taskList.mark(itemIndex);
+                taskList.mark(itemIndex - 1);
                 System.out.println("Nice! I've marked this task as done: ");
-                System.out.println(taskList.getTask(itemIndex).toString());
-
+                System.out.println(taskList.getTask(itemIndex - 1).toString());
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
             } else if (firstWord.equals("unmark")) {
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                taskList.unmark(itemIndex);
+                taskList.unmark(itemIndex - 1);
                 System.out.println("OK, I've marked this task as not done yet: ");
-                System.out.println(taskList.getTask(itemIndex).toString());
+                System.out.println(taskList.getTask(itemIndex - 1).toString());
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
             } else if (firstWord.equals("delete")) {
                 System.out.println("mark");
-            } else {
-                Task task = new Task(command);
-                taskList.add(task);
+
+            } else if (firstWord.equals("todo")){
+                String toDoItem = command.substring(index + 1);
+                ToDo toDo = new ToDo(toDoItem);
+                taskList.add(toDo);
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                System.out.println(String.format("added: %s", command));
+                System.out.println("Got it, I have added this task:" );
+                System.out.println(toDo.toString());
+                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
+            } else if (firstWord.equals("deadline")){
+                String deadlineItem = command.substring(index + 1, command.indexOf("/by"));
+                String time = command.substring(command.indexOf("/by") + 1);
+                Deadline deadline = new Deadline(deadlineItem, time);
+                taskList.add(deadline);
+                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                System.out.println("Got it, I have added this task:" );
+                System.out.println(deadline.toString());
+                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
+            } else if (firstWord.equals("event")) {
+                String eventItem = command.substring(index + 1, command.indexOf("/at"));
+                String time = command.substring(command.indexOf("/at") + 1);
+                Event event = new Event(eventItem, time);
+                taskList.add(event);
+                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                System.out.println("Got it, I have added this task:" );
+                System.out.println(event.toString());
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             }
         }

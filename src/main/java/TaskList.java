@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class TaskList<Task> {
+public class TaskList {
     ArrayList<Task> arrayList;
 
     TaskList() {
@@ -24,20 +24,14 @@ public class TaskList<Task> {
     public void mark(int index) {
         Task task = arrayList.get(index);
         if (task != null) {
-            String taskName = "taskName";
-//            String taskName = task.getTaskName();
-            Task newTask = new Task(taskName, true);
-            arrayList.add(index, newTask);
+            task.setCompleted();
         }
     }
 
     public void unmark(int index) {
         Task task = arrayList.get(index);
         if (task != null) {
-            String taskName = "taskName";
-//             String taskName = task.getTaskName();
-            Task newTask = new Task(taskName, false);
-            arrayList.add(index, newTask);
+            task.setUncompleted();
         }
     }
 

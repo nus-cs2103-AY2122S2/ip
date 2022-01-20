@@ -1,6 +1,6 @@
 public class Task {
     private final String task;
-    private final boolean completed;
+    private boolean completed;
 
     public Task(String task) {
         this.task = task;
@@ -18,6 +18,14 @@ public class Task {
 
     public String getTaskName() {
         return this.task;
+    }
+
+    public void setCompleted() {
+        this.completed = true;
+    }
+
+    public void setUncompleted() {
+        this.completed = false;
     }
 
     @Override
