@@ -18,6 +18,7 @@ public class Duke {
         while (!input.description.equals("bye")) {
             System.out.println(line);
             if (input.description.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < database.size(); i++) {
                     System.out.println(i + 1 + "." + database.get(i));
                 }
