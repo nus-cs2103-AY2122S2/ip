@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class ListCommand extends Command {
     @Override
     public void execute() {
-        ArrayList<Task> taskList = TaskManager.taskList;
+        ArrayList<String> taskList = TaskManager.taskList;
 
         // Formatting task list to be printed
         String formattedTaskList = formatTaskList(taskList);
@@ -19,13 +19,13 @@ public class ListCommand extends Command {
      * @param taskList ArrayList to be formatted
      * @return formattedTaskList Formatted task list
      */
-    private String formatTaskList(ArrayList<Task> taskList) {
+    private String formatTaskList(ArrayList<String> taskList) {
         int indexCounter = 1;
         String formattedTaskList = "";
         int taskListSize = taskList.size();
 
-        for (Task i : taskList) {
-            String item = String.valueOf(indexCounter) + ". " + i.toString();
+        for (String i : taskList) {
+            String item = String.valueOf(indexCounter) + ". " + i;
 
             // Correcting formatting caused by Duke.formatAnswer()
             if (indexCounter == 1) {

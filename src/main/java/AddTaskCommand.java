@@ -23,7 +23,7 @@ public class AddTaskCommand extends Command {
 
     @Override
     public void execute() {
-        TaskManager.taskList.add(new Task(input));
+        TaskManager.taskList.add(input);
         System.out.println(echoAddedTask()); // Echo confirmation
     }
 }
