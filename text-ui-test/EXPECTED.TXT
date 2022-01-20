@@ -9,36 +9,51 @@ Hello! I'm Dooke
 - - - - - - -
 -------------
 Got it. I've added this task:
-[T][ ] borrow
+[T][ ]  borrow book
 Now you have 1 task(s) in the list.
 - - - - - - -
 -------------
 Here are the tasks in your list:
-1.[T][ ] borrow
+1.[T][ ]  borrow book
 - - - - - - -
 -------------
 Got it. I've added this task:
-[D][ ]  (by: Sunday)
+[D][ ] return book (by: Sunday)
 Now you have 2 task(s) in the list.
 - - - - - - -
 -------------
+No event locale mentioned!
+- - - - - - -
+-------------
 Got it. I've added this task:
-[E][ ]  (at: Mon 2-4pm)
+[E][ ] project meeting (at: Mon 2-4pm)
 Now you have 3 task(s) in the list.
 - - - - - - -
 -------------
-Nice! I've marked this task as done:
-[T][X] borrow
+No description given
 - - - - - - -
 -------------
 Nice! I've marked this task as done:
-[D][X]  (by: Sunday)
+[T][X]  borrow book
+- - - - - - -
+-------------
+This task was never complete!
+- - - - - - -
+-------------
+Nice! I've marked this task as done:
+[D][X] return book (by: Sunday)
+- - - - - - -
+-------------
+This task has already been done!
 - - - - - - -
 -------------
 Here are the tasks in your list:
-1.[T][X] borrow
-2.[D][X]  (by: Sunday)
-3.[E][ ]  (at: Mon 2-4pm)
+1.[T][X]  borrow book
+2.[D][X] return book (by: Sunday)
+3.[E][ ] project meeting (at: Mon 2-4pm)
+- - - - - - -
+-------------
+OOPS!!! The description of a todo cannot be empty.
 - - - - - - -
 -------------
 Bye. Hope to see you again soon!
