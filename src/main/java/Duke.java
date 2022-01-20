@@ -4,7 +4,7 @@ import java.io.*;
 public class Duke {
 
     public static final String hl = "------------------------------------------------------------------------";
-    public static ArrayList<String> task_list = new ArrayList<String>();
+    public static ArrayList<Task> taskList = new ArrayList<Task>();
 
     public static void greetings() {
         String logo = "";
@@ -12,19 +12,34 @@ public class Duke {
     }
 
     public static void add(String ipt) {
-        task_list.add(ipt);
+        Task newTask = new Task(ipt, taskList.size() + 1);
+        taskList.add(newTask);
         System.out.println("added: " + ipt);
     }
 
     public static void list() {
-        if (task_list.size() == 0) {
+        if (taskList.size() == 0) {
             System.out.println("You have no tasks!");
         } else {
-            for (int i = 0; i < task_list.size(); i++) {
-                int task_number = i + 1;
-                System.out.println(task_number + ". " + task_list.get(i));
+            System.out.println("The tasks on your list. Get it done!");
+            for (Task task : taskList) {
+                System.out.println(task);
             }
         }
+    }
+
+    public static void mark(int taskNumber) {
+        Task task = taskList.get(taskNumber - 1);
+        task.markAsDone();
+        System.out.println("Good job! This task is done:");
+        System.out.println(task);
+    }
+
+    public static void unmark(int taskNumber) {
+        Task task = taskList.get(taskNumber - 1);
+        task.unmark();
+        System.out.println("Hurry up and get it done!");
+        System.out.println(task);
     }
 
     public static void bye() {
@@ -38,14 +53,22 @@ public class Duke {
         while (true) {
             System.out.println(hl);
             System.out.print("> ");
-            String input = br.readLine();
-            if (input.equals("bye")) {
+            String userInput = br.readLine();
+            StringTokenizer st = new StringTokenizer(userInput);
+            String instruction = st.nextToken();
+            if (instruction.equals("bye")) {
                 bye();
                 break;
-            } else if (input.equals("list")) {
+            } else if (instruction.equals("list")) {
                 list();
+            } else if (instruction.equals("mark")) {
+                int taskNumber = Integer.parseInt(st.nextToken());
+                mark(taskNumber);
+            } else if (instruction.equals("unmark")) {
+                int taskNumber = Integer.parseInt(st.nextToken());
+                unmark(taskNumber);
             } else {
-                add(input);
+                add(userInput);
             }
         }
     }
