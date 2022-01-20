@@ -18,9 +18,9 @@ public class Duke {
     }
 
     private void greet() {
-        System.out.println("Hello! I'm Duke \n" + "What do you need me to note down for you? Type it below! \n" +
+        System.out.println("Hello! I'm Duke\n" + "What do you need me to note down for you? Type it below!\n" +
                 "Feel free to identify the status of your tasks by entering 'marked' or 'unmarked' along with the " +
-                "task number! \n ======================================================");
+                "task number!\n ======================================================");
     }
 
     private void take_notes() {
