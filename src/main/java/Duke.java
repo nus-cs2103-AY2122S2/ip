@@ -28,6 +28,13 @@ public class Duke {
                         arrlst.get(num - 1).markAsDone();
                     } else if (arrWords[0].equals("unmark")) {
                         arrlst.get(num - 1).markAsNotDone();
+                    } else if (arrWords[0].equals("delete")) {
+                        System.out.println("Noted. I've removed this task:");
+                        Task t = arrlst.get(num - 1);
+                        String output = String.format("[%s][%s]%s", t.getSym(), t.getStatusIcon(), t.description);
+                        System.out.println(output);
+                        System.out.println("Now you have 4 tasks in the list.");
+                        arrlst.remove(num - 1);
                     } else {
                         System.out.println("siao eh");
                     }
