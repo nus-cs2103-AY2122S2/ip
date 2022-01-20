@@ -10,5 +10,9 @@ public class Response {
                                          + "What can I do for you?";
     public static final String GOODBYE = "Bye. Hope to see you again soon!";
     public static final String MARKDONE = "Nice! I've marked this task as done: ";
+    public static final String ADDED = "Got it. I've added this task:";
+    public static String taskNo(int i) {
+        return "Now you have " + i + " tasks in the list.";
+    }
 
 }
