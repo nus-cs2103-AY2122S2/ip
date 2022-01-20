@@ -1,5 +1,7 @@
 package core;
 
+import core.exceptions.InvalidDeleteIndexException;
+import core.exceptions.NoTaskToDeleteException;
 import core.tasks.Task;
 import utilities.OutputFormatter;
 
@@ -37,6 +39,21 @@ public class TaskList {
         return this.taskList.get(index);
     }
 
+    public Task deleteTask(String input) throws InvalidDeleteIndexException, NoTaskToDeleteException, NumberFormatException {
+        if (input.isBlank() || input.isEmpty()) {
+            throw new InvalidDeleteIndexException();
+        }
+
+        int index = Integer.parseInt(input) - 1;
+
+        if (Integer.parseInt(input) >= this.taskList.size()) {
+            throw new NoTaskToDeleteException();
+        }
+        Task toDelete = getTaskByIndex(index);
+        this.taskList.remove(toDelete);
+        return toDelete;
+    }
+
     public int getLength() {
         return this.taskList.size();
     }
@@ -60,13 +77,18 @@ public class TaskList {
 
     public String formattedOutput() {
         OutputFormatter outputFormatter = OutputFormatter.getInstance();
-        outputFormatter.appendAll("Here are the tasks in your list:", "\n");
+        if (this.taskList.size() == 0) {
+            outputFormatter.append("The task list is empty!");
+        } else {
+            outputFormatter.appendAll("Here are the tasks in your list:", "\n");
+            int count = 1;
 
-        for (Task task : this.taskList) {
-            outputFormatter.appendAll(task.getTaskId(), ".", task.toString());
+            for (Task task : this.taskList) {
+                outputFormatter.appendAll(count, ".", task.toString());
 
-            if (task.getTaskId() < taskList.size()) {
-                outputFormatter.append("\n");
+                if (count++ < taskList.size()) {
+                    outputFormatter.append("\n");
+                }
             }
         }
         return outputFormatter.getFormattedOutput();

@@ -43,6 +43,9 @@ public class InputHandler {
             case EVENT :
                 handleEvent(inputData, outputFormatter);
                 break;
+            case DELETE :
+                handleDelete(inputData, outputFormatter);
+                break;
             case UNKNOWN :
                 handleUnknown(outputFormatter);
                 break;
@@ -150,6 +153,24 @@ public class InputHandler {
 
     private void handleUnknown(OutputFormatter outputFormatter) {
         outputFormatter.appendAll("OOPS!!! I'm sorry, but I don't know what that means :-(");
+    }
+
+    private void handleDelete(String inputData, OutputFormatter outputFormatter) {
+        try {
+            String[] indexRetriever = inputData.split("delete ");
+            Task toBeDeleted;
+            if (indexRetriever.length <= 1) {
+                toBeDeleted = this.taskList.deleteTask("");
+            } else {
+                toBeDeleted = this.taskList.deleteTask(indexRetriever[1]);
+            }
+            outputFormatter.appendAll("Noted. I've removed this task:", "\n", toBeDeleted, "\n", "Now you have ", taskList.getLength(), " task(s) in the list.");
+
+        } catch ( NumberFormatException e) {
+            outputFormatter.append("Please provide a number index to delete!");
+        } catch (InvalidDeleteIndexException | NoTaskToDeleteException e) {
+            outputFormatter.append(e.getMessage());
+        }
     }
 
 }
