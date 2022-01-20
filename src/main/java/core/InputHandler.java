@@ -1,13 +1,11 @@
 package core;
 
-import core.exceptions.TaskAlreadyDoneException;
-import core.exceptions.ToDoEmptyException;
+import core.exceptions.*;
 import core.tasks.Deadline;
 import core.tasks.Event;
 import core.tasks.Task;
 import core.tasks.ToDo;
 import utilities.OutputFormatter;
-import core.exceptions.TaskAlreadyUnmarkedException;
 
 import static java.lang.Integer.parseInt;
 
@@ -92,21 +90,62 @@ public class InputHandler {
         } catch (ToDoEmptyException e) {
             outputFormatter.append(e.getMessage());
         }
-
     }
 
     private void handleDeadline(String inputData, OutputFormatter outputFormatter) {
-        String deadlineBy = inputData.split("/by ")[1];
-        String description = inputData.split(" /by")[0].split("deadline ")[0];
-        taskList.addTask(Deadline.getInstance(description, deadlineBy));
-        outputFormatter.appendAll("Got it. I've added this task:", "\n", taskList.getTaskByIndex(taskList.getLength() - 1), "\n", "Now you have ", taskList.getLength(), " task(s) in the list.");
+        try {
+            String deadlineBy, description;
+            String[] inputSequence = inputData.split("deadline ");
+
+            if (inputSequence.length > 1) {
+                String[] bySeparator = inputSequence[1].split("/by");
+                if (bySeparator.length == 2) {
+                    deadlineBy = bySeparator[1].trim();
+                    description = bySeparator[0].trim();
+                } else if (bySeparator.length == 1) {
+                    deadlineBy = "";
+                    description = bySeparator[0].trim();
+                } else {
+                    deadlineBy = "";
+                    description = "";
+                }
+            } else {
+                deadlineBy = "";
+                description = "";
+            }
+            taskList.addTask(Deadline.getInstance(description, deadlineBy));
+            outputFormatter.appendAll("Got it. I've added this task:", "\n", taskList.getTaskByIndex(taskList.getLength() - 1), "\n", "Now you have ", taskList.getLength(), " task(s) in the list.");
+        } catch (NoDescriptionGivenException | NoDeadlineMentionedException e) {
+            outputFormatter.append(e.getMessage());
+        }
     }
 
     private void handleEvent(String inputData, OutputFormatter outputFormatter) {
-        String eventAt = inputData.split("/at ")[1];
-        String description = inputData.split(" /at")[0].split("event ")[0];
-        taskList.addTask(Event.getInstance(description, eventAt));
-        outputFormatter.appendAll("Got it. I've added this task:", "\n", taskList.getTaskByIndex(taskList.getLength() - 1), "\n", "Now you have ", taskList.getLength(), " task(s) in the list.");
+        try {
+            String eventAt, description;
+            String[] inputSequence = inputData.split("event ");
+
+            if (inputSequence.length > 1) {
+                String[] atSeparator = inputSequence[1].split("/at");
+                if (atSeparator.length == 2) {
+                    eventAt = atSeparator[1].trim();
+                    description = atSeparator[0].trim();
+                } else if (atSeparator.length == 1) {
+                    eventAt = "";
+                    description = atSeparator[0].trim();
+                } else {
+                    eventAt = "";
+                    description = "";
+                }
+            } else {
+                eventAt = "";
+                description = "";
+            }
+            taskList.addTask(Event.getInstance(description, eventAt));
+            outputFormatter.appendAll("Got it. I've added this task:", "\n", taskList.getTaskByIndex(taskList.getLength() - 1), "\n", "Now you have ", taskList.getLength(), " task(s) in the list.");
+        } catch (NoDescriptionGivenException | NoEventLocaleMentionedException e) {
+            outputFormatter.append(e.getMessage());
+        }
     }
 
     private void handleUnknown(OutputFormatter outputFormatter) {

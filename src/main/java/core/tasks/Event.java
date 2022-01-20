@@ -1,5 +1,7 @@
 package core.tasks;
 
+import core.exceptions.NoDescriptionGivenException;
+import core.exceptions.NoEventLocaleMentionedException;
 import utilities.OutputFormatter;
 
 public class Event extends Task {
@@ -10,7 +12,14 @@ public class Event extends Task {
         this.at = at;
     }
 
-    public static Event getInstance(String description, String at) {
+    public static Event getInstance(String description, String at) throws NoEventLocaleMentionedException, NoDescriptionGivenException {
+        if (description.isBlank() || description.isBlank()) {
+            throw new NoDescriptionGivenException();
+        }
+
+        if (at.isEmpty() || at.isBlank()) {
+            throw new NoEventLocaleMentionedException();
+        }
         return new Event(description, at);
     }
 
