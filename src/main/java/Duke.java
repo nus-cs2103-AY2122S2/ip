@@ -26,13 +26,19 @@ public class Duke {
                 }
                 System.out.println("____________________________________________________________\n");
             } else if (splitted[0].equals("todo")) {
-                taskList[currIndex] = new Task(input, false, "T");
-                currIndex += 1;
-                System.out.println("____________________________________________________________\n" +
-                        "Got it. I've added this task: \n" +
-                        "[T][] " + taskList[currIndex-1].task +
-                        "\nNow you have " + String.valueOf(currIndex) + " tasks in the list."
-                        + "\n____________________________________________________________");
+                if (input.equals("todo") || input.equals("todo ")) {
+                    System.out.println("____________________________________________________________\n" +
+                            " ☹ OOPS!!! Please describe your todo :-(\n" +
+                            "____________________________________________________________");
+                } else {
+                    taskList[currIndex] = new Task(input, false, "T");
+                    currIndex += 1;
+                    System.out.println("____________________________________________________________\n" +
+                            "Got it. I've added this task: \n" +
+                            "[T][] " + taskList[currIndex - 1].task +
+                            "\nNow you have " + String.valueOf(currIndex) + " tasks in the list."
+                            + "\n____________________________________________________________");
+                }
             } else if (splitted[0].equals("deadline")) {
                 String[] time = splitted[1].split("/by");
                 taskList[currIndex] = new Task(time[0] + "(by" + time[1] + ")", false, "D");
@@ -67,10 +73,8 @@ public class Duke {
                         + "\n____________________________________________________________");
             } else {
                 System.out.println("____________________________________________________________\n" +
-                        "added: " + input + "\n" +
+                        " ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
                         "____________________________________________________________");
-                taskList[currIndex] = new Task(input, false, "");
-                currIndex += 1;
             }
             input = sc.nextLine();
             splitted = input.split(" ");
