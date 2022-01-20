@@ -3,21 +3,19 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("____________________________________________________________");
-        System.out.println("Hello! I'm JiaMing\nWhat can I do for you? ");
-        System.out.println("____________________________________________________________");
+        String[] lst = new String[100];
+        Action act = new Action();
+
+        act.greet();
+
         while (sc.hasNext()) {
             String word = sc.next();
             if (word.equals("bye")) {
-                System.out.println("____________________________________________________________");
-                System.out.println("Bye. Hope to see you again soon!");
-                System.out.println("____________________________________________________________");
+                act.bye();
                 break;
+            } else {
+                act.echo(word);
             }
-
-            System.out.println("____________________________________________________________");
-            System.out.println(word);
-            System.out.println("____________________________________________________________");
         }
     }
 }
