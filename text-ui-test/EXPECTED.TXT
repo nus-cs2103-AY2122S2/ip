@@ -85,10 +85,16 @@ OOPS!!!
 I couldn't find the Task that you wanted :(
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
-That doesn't seem like a number. Task numbers are integers!
+OOPS!!!
+Your input:
+  A
+does not seem like an integer. Task numbers are integers!
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
-That doesn't seem like a number. Task numbers are integers!
+OOPS!!!
+Your input:
+  1.1
+does not seem like an integer. Task numbers are integers!
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
 Awesome! I've marked this task as done:

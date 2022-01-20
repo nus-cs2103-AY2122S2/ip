@@ -1,5 +1,8 @@
 package Tasks;
 
+import SparkExceptions.FormatExceptions.EmptyDateException;
+import SparkExceptions.FormatExceptions.EmptyTitleException;
+import SparkExceptions.TaskModificationExceptions.InvalidTaskIdException;
 import SparkExceptions.TaskModificationExceptions.TaskAlreadyMarked;
 import SparkExceptions.TaskModificationExceptions.TaskAlreadyUnMarked;
 import SparkExceptions.TaskModificationExceptions.TaskNotFoundException;
@@ -7,14 +10,20 @@ import SparkExceptions.TaskModificationExceptions.TaskNotFoundException;
 import java.util.*;
 
 public class TaskList {
-    private List<Task> tasks;
+    private final List<Task> tasks;
 
     public TaskList() {
         this.tasks = new ArrayList<>(100);
     }
 
-    public void addToDo(String name) {
-        ToDo toDo = new ToDo(name);
+    public void addToDo(String[] tokens) throws EmptyTitleException {
+        List<String> words = new ArrayList<>(Arrays.asList(tokens).subList(1, tokens.length));
+        String title = String.join(" ", words);
+        if (title.equals("")) { // ToDo must have a title
+            throw new EmptyTitleException();
+        }
+
+        ToDo toDo = new ToDo(title);
         tasks.add(toDo);
 
         System.out.println("Got it, I've added this todo:");
@@ -23,8 +32,35 @@ public class TaskList {
         showNumberOfTasks();
     }
 
-    public void addDeadline(String name, String by) {
-        Deadline deadline = new Deadline(name, by);
+    public void addDeadline(String[] tokens) throws EmptyTitleException, EmptyDateException {
+        List<String> firstHalf = new ArrayList<>();
+        List<String> secondHalf = new ArrayList<>();
+
+        boolean inSecondHalf = false;
+        for (int i=1; i<tokens.length; i++) {
+            if (tokens[i].equals("/by")) {
+                inSecondHalf = true;
+            } else if (!inSecondHalf) {
+                firstHalf.add(tokens[i]);
+            } else {
+                secondHalf.add(tokens[i]);
+            }
+        }
+
+        String title = String.join(" ", firstHalf);
+        String by = String.join(" ", secondHalf);
+
+        // Deadline must have a title
+        if (title.equals("")) {
+            throw new EmptyTitleException();
+        }
+
+        // Deadline must have a date
+        if (by.equals("")) {
+            throw new EmptyDateException();
+        }
+
+        Deadline deadline = new Deadline(title, by);
         tasks.add(deadline);
 
         System.out.println("Got it, I've added this deadline:");
@@ -33,8 +69,35 @@ public class TaskList {
         showNumberOfTasks();
     }
 
-    public void addEvent(String name, String at) {
-        Event event = new Event(name, at);
+    public void addEvent(String[] tokens) throws EmptyTitleException, EmptyDateException {
+        List<String> firstHalf = new ArrayList<>();
+        List<String> secondHalf = new ArrayList<>();
+
+        boolean inSecondHalf = false;
+        for (int i=1; i<tokens.length; i++) {
+            if (tokens[i].equals("/at")) {
+                inSecondHalf = true;
+            } else if (!inSecondHalf) {
+                firstHalf.add(tokens[i]);
+            } else {
+                secondHalf.add(tokens[i]);
+            }
+        }
+
+        String title = String.join(" ", firstHalf);
+        String at = String.join(" ", secondHalf);
+
+        // Event must have a title
+        if (title.equals("")) {
+            throw new EmptyTitleException();
+        }
+
+        // Event must have a date
+        if (at.equals("")) {
+            throw new EmptyDateException();
+        }
+
+        Event event = new Event(title, at);
         tasks.add(event);
 
         System.out.println("Got it, I've added this event:");
@@ -43,58 +106,40 @@ public class TaskList {
         showNumberOfTasks();
     }
 
-    public void markTask(String param) {
-        try {
-            int taskId = Integer.parseInt(param);
-            int index = taskId - 1;
-            Task t = getTaskByIndex(index);
-            t.mark();
+    public void markTask(String[] tokens) throws TaskNotFoundException, TaskAlreadyMarked, InvalidTaskIdException {
+        int taskId = getTaskId(tokens[1]);
 
-            System.out.println("Awesome! I've marked this task as done:");
-            System.out.format("   %s\n", t);
-        } catch (TaskNotFoundException e) {
-            System.out.println(e.getMessage());
-        } catch (NumberFormatException e) {
-            System.out.println("That doesn't seem like a number. Task numbers are integers!");
-        } catch (TaskAlreadyMarked e) {
-            System.out.println(e.getMessage());
-        }
+        int index = taskId - 1;
+        Task t = getTaskByIndex(index);
+        t.mark();
+
+        System.out.println("Awesome! I've marked this task as done:");
+        System.out.format("   %s\n", t);
     }
 
-    public void unMarkTask(String param) {
-        try {
-            int taskId = Integer.parseInt(param);
-            int index = taskId - 1;
-            Task t = getTaskByIndex(index);
-            t.unMark();
+    public void unMarkTask(String[] tokens) throws TaskNotFoundException, TaskAlreadyUnMarked, InvalidTaskIdException {
+        int taskId = getTaskId(tokens[1]);
 
-            System.out.println("Okay, I've marked this task as not done yet:");
-            System.out.format("   %s\n", t);
-        } catch (TaskNotFoundException e) {
-            System.out.println(e.getMessage());
-        } catch (NumberFormatException e) {
-            System.out.println("That doesn't seem like a number. Task numbers are integers!");
-        } catch (TaskAlreadyUnMarked e) {
-            System.out.println(e.getMessage());
-        }
+        int index = taskId - 1;
+        Task t = getTaskByIndex(index);
+        t.unMark();
+
+        System.out.println("Okay, I've marked this task as not done yet:");
+        System.out.format("   %s\n", t);
     }
 
-    public void deleteTask(String param) {
-        try {
-            int taskId = Integer.parseInt(param);
-            int index = taskId - 1;
-            Task t = getTaskByIndex(index);
+    public void deleteTask(String[] tokens) throws TaskNotFoundException, InvalidTaskIdException {
+        int taskId = getTaskId(tokens[1]);
 
-            System.out.println("Noted. I've removed this task:");
-            System.out.format("   %s\n", t);
+        int index = taskId - 1;
+        Task t = getTaskByIndex(index);
 
-            tasks.remove(t);
-            showNumberOfTasks();
-        } catch (TaskNotFoundException e) {
-            System.out.println(e.getMessage());
-        } catch (NumberFormatException e) {
-            System.out.println("That doesn't seem like a number. Task numbers are integers!");
-        }
+        System.out.println("Noted. I've removed this task:");
+        System.out.format("   %s\n", t);
+
+        tasks.remove(t);
+
+        showNumberOfTasks();
     }
 
     public void showTaskList() {
@@ -108,7 +153,7 @@ public class TaskList {
         }
     }
 
-    public void showNumberOfTasks() {
+    private void showNumberOfTasks() {
         System.out.format("Now you have %d tasks in the list.\n", this.tasks.size());
     }
 
@@ -118,5 +163,17 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e) {
             throw new TaskNotFoundException();
         }
+    }
+
+    private int getTaskId(String input) throws InvalidTaskIdException {
+        int taskId;
+
+        try {
+            taskId = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new InvalidTaskIdException(input);
+        }
+
+        return taskId;
     }
 }
