@@ -21,14 +21,11 @@ public class Duke {
             String action = wordSplit[0];
             String[] split = userInput.split("/");
             int start = userInput.indexOf(" ") + 1;
-            int end = userInput.lastIndexOf('/');
-            String task = userInput.substring(start, end - 1);
-            String details = split[1].substring(3);
 
             if (userInput.equals("bye")) {
                 sayBye();
                 break;
-            } else if (userInput.equals("list")) {
+            } else if (action.equals("list")) {
                 //prints the list
                 printList();
             } else if (action.equals("mark")) {
@@ -39,24 +36,37 @@ public class Duke {
                 unmark(Integer.parseInt(wordSplit[1]) - 1);
             } else if (action.equals("todo")) {
                 //add ToDos
-                addInput(new ToDos(userInput.substring(start), false));
-            } else if (action.equals("deadline")) {
-                //add DeadLines
-                addInput(new DeadLines(task, false, details));
-            } else {
-                //add Events
-                addInput(new Events(task, false, details));
+                addTask(new ToDos(userInput.substring(start), false));
+            } else if (action.equals("deadline") || action.equals("event")) {
+                int end = userInput.lastIndexOf('/');
+                String task = userInput.substring(start, end - 1);
+                String details = split[1].substring(3);
+                if (action.equals("deadline")) {
+                    //add DeadLines
+                    addTask(new DeadLines(task, false, details));
+                } else {
+                    //add Events
+                    addTask(new Events(task, false, details));
+                }
+            } else if (action.equals("delete")) {
+                //delete task
+                deleteTask(Integer.parseInt(wordSplit[1]) - 1);
             }
-
 
         }
         sc.close();
     }
 
+    private static void deleteTask(int indx) {
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(ls.remove(indx));
+        String s = String.format("Now you have %d tasks in the list.", ls.size());
+        System.out.println(s);
+        printHorizontalLine();
+    }
+
     private static void checker(String[] splitInput) throws TaskException {
-        if (splitInput.length == 0 || (!splitInput[0].equals("bye") && !splitInput[0].equals("list") &&
-                !splitInput[0].equals("mark") && !splitInput[0].equals("unmark") && !splitInput[0].equals("todo")
-                && !splitInput[0].equals("deadline") && !splitInput[0].equals("event"))) {
+        if (splitInput.length == 0 || notKeyWord(splitInput[0])) {
             throw new IncorrectInputException();
 
         } else if (splitInput.length == 1) {
@@ -71,6 +81,12 @@ public class Duke {
                 throw new IncorrectInputException();
             }
         }
+    }
+
+    private static boolean notKeyWord(String command) {
+        return (!command.equals("bye") && !command.equals("list")
+                && !command.equals("delete")  && !command.equals("mark") && !command.equals("unmark")
+                && !command.equals("todo") && !command.equals("deadline") && !command.equals("event"));
     }
 
     private static void mark(int indx) {
@@ -89,7 +105,7 @@ public class Duke {
         printHorizontalLine();
     }
 
-    private static void addInput(Task t) {
+    private static void addTask(Task t) {
         ls.add(t);
         System.out.println("Got it. I've added this task: ");
         System.out.println(" " + t);
