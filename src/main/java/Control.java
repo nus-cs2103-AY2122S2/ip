@@ -49,6 +49,8 @@ public class Control {
             }
         } catch (NumberFormatException e) {
             System.out.println("An invalid task index has been inputted");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("That index number is out of range! Please try again!");
         }
     }
 
@@ -58,7 +60,6 @@ public class Control {
         String taskName = taskArr[1];
         ToDo task = new ToDo(taskName, false, "T");
         this.tasks.add(task);
-        System.out.println("________________________________");
         System.out.println("From Duke_two: \n\tAdded to your tasks: \n\t" + task.toString());
         System.out.println("You now have " + tasks.toArray().length + " tasks in your list");
     }
@@ -71,7 +72,6 @@ public class Control {
         String date = taskDetails[1];
         Deadline task = new Deadline(taskName, false, "D", date) ;
         this.tasks.add(task);
-        System.out.println("________________________________");
         System.out.println("From Duke_two: \n\tAdded to your tasks: \n\t" + task.toString());
         System.out.println("You now have " + tasks.toArray().length + " tasks in your list");
     }
@@ -84,9 +84,26 @@ public class Control {
         String date = taskDetails[1];
         Event task = new Event(taskName, false, "E", date) ;
         this.tasks.add(task);
-        System.out.println("________________________________");
         System.out.println("From Duke_two: \n\tAdded to your tasks: \n\t" + task.toString());
         System.out.println("You now have " + tasks.toArray().length + " tasks in your list");
+    }
+
+    public void delete(String taskStr) {
+        try {
+            String[] taskArr = taskStr.split(" ", 2);
+            String deleteIndStr = taskArr[1];
+            int deleteInd = Integer.parseInt(deleteIndStr) - 1;
+            Task task = this.tasks.get(deleteInd);
+            System.out.println("From Duke_two: \n\tRemoved from your tasks: \n\t" + task.toString());
+            int num = tasks.toArray().length - 1;
+            System.out.println("You now have " + num + " tasks in your list");
+            this.tasks.remove(deleteInd);
+        } catch (NumberFormatException e) {
+            System.out.println("An invalid task index has been inputted! PLease try again!");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("That index number is out of range! Please try again!");
+        }
+
     }
 
 
