@@ -6,9 +6,8 @@ public class Duke {
     private static final String line = "-------------------------------------------------------------------------------------";
     public static void main(String[] args) {
 
-        start();
+        intro();
         load();
-        //setup();
         Scanner s = new Scanner(System.in);
         String input;
 
@@ -77,7 +76,7 @@ public class Duke {
         System.out.println(bye);
         System.out.println(line);
     }
-    public static void start(){
+    public static void intro(){
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -107,19 +106,7 @@ public class Duke {
         System.out.println(invalidText);
         System.out.println(line);
     }
-    public static void setup(){
-        String FILE_PATH = "data/duke";
-        try {
-            File f = new File(FILE_PATH);
-            Scanner s = new Scanner(f);
-            System.out.println(s.nextLine());
-            FileWriter fw = new FileWriter(f);
-            fw.write("123456789");
-            fw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    
     public static void save(){
         String FILE_PATH = "data/duke";
         File f = new File(FILE_PATH);
@@ -144,15 +131,18 @@ public class Duke {
                 while(s.hasNext()){
                     String input = s.nextLine();
                     Task t = Task.parse(input);
-                    manager.addTask(t);
+                    if (t != null){ manager.addTask(t); }
                 }
                 System.out.println("Loading Completed!");
                 list();
             } catch (IOException e){
-                e.printStackTrace();
+                System.out.println("Error reading from file! Initializing defaults...");
+                loadDefault();
+                manager = new TaskManager();
             }
         } else {
             System.out.println("File not found! Loading defaults...");
+            loadDefault();
             manager = new TaskManager();
         }
     }
@@ -164,9 +154,10 @@ public class Duke {
         File f = new File(FILE_PATH);
 
         if (!dir.exists()){
+            System.out.println("Directory not found! Creating /data/...");
             boolean createFile = dir.mkdir();
             if (createFile){
-                System.out.println();
+                System.out.println("Directory created. Starting application...");
             }
         }
     }

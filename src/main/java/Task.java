@@ -36,25 +36,36 @@ public class Task{
 
     public static Task parse(String s){
         // <type>\t<done>\t<name>\t<date>
-        String[] str = s.split("\t");
-        char type = str[0].toCharArray()[0];
-        char done = str[1].toCharArray()[0];
-        String name = str[2];
+        char type;
+        char done;
+        String name;
+        String date;
+        Task t;
 
-        Task t = new Task();
+        try {
+            String[] str = s.split("\t");
+            type = str[0].toCharArray()[0];
+            done = str[1].toCharArray()[0];
+            name = str[2];
+            date = str[3];
+
+            t = new Task();
+        } catch (IndexOutOfBoundsException i){
+            return null;
+        }
 
         try {
             if (type=='T') {
                 t = newToDo(name);
             } else if (type=='D'){
-                String date = str[3];
+
                 t = newDeadline(name + " /by " + date);
             } else if (type=='E'){
-                String date = str[3];
+
                 t = newEvent(name + " /at " + date);
             }
 
-            if ("X".equals(done)){
+            if (done=='X'){
                 t.markDone();
             }
             return t;
