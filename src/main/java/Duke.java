@@ -5,14 +5,18 @@ public class Duke {
 
     static ArrayList<Task> list = new ArrayList<Task>();
 
-    public static void handle(String input) {
+    public static void handle(String input) throws DukeException{
         String[] split = input.split(" ");
         String command = split[0];
         if (command.equals("todo")) {
-            Todo t = new Todo(input.substring(5));
-            list.add(t);
-            System.out.println("Got it. I've added: \n" + t.toString());
-            System.out.printf("Sheesh you've now got %d tasks in the list\n", list.size());
+            if (split.length == 1) {
+                throw new DukeException("It looks like you're missing the task description");
+            } else {
+                Todo t = new Todo(input.substring(5));
+                list.add(t);
+                System.out.println("Got it. I've added: \n" + t.toString());
+                System.out.printf("Sheesh you've now got %d tasks in the list\n", list.size());
+            }
         } else if (command.equals("deadline")) {
             String[] arr = input.substring(9).split("/by ");
             Deadline d = new Deadline(arr[0], arr[1]);
@@ -43,10 +47,12 @@ public class Duke {
             t.makeNotDone();
             System.out.printf("Ok boss I've marked task %s as incomplete\n", split[1]);
             System.out.println(t.toString());
+        } else {
+            throw new DukeException("I'm not sure what that means");
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException{
 
         String prince = "______       _\n"
                 +  "| ___ \\     (_)\n"
@@ -64,11 +70,16 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-            String command = sc.nextLine();
-            handle(command);
-            System.out.println(divider);
-            if (command.equals("bye")) {
-                break;
+            try {
+                String command = sc.nextLine();
+                handle(command);
+                System.out.println(divider);
+                if (command.equals("bye")) {
+                    break;
+                }
+            } catch (DukeException e) {
+                System.out.println(e);
+                System.out.println(divider);
             }
         }
     }
