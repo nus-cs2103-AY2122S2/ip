@@ -28,14 +28,15 @@ public class Duke {
         while(myScanner.hasNextLine()) {
             String cmd = myScanner.nextLine();
             if (cmd.equals("bye")) {
+                System.out.println(border + spacing + "Bye. Hope to see you again soon!\n" + border);
                 break;
             }
-            if(cmd.equals("list")) {
+            if (cmd.equals("list")) {
                 System.out.println(border + spacing
                         + "Here are the tasks in your list:\n"
                         + myListStorage.printList()
                         + border);
-            } else if (cmd.contains("mark")){
+            } else if (cmd.contains("mark")) {
                 int taskNumber = Character.getNumericValue(cmd.charAt(cmd.length() - 1));
                 if (cmd.contains("un")) {
                     myListStorage.findTask(taskNumber).unmark();
@@ -50,7 +51,7 @@ public class Duke {
                             + "Nice! I've marked this task as done:\n"
                             + myListStorage.printTask(taskNumber) + border);
                 }
-            } else if (cmd.contains("todo")){
+            } else if (cmd.contains("todo")) {
                 String[] parsedCmd = Parser.parseCmdAndDes(cmd);
                 Task newTask = new ToDo(parsedCmd[1]);
                 myListStorage.addToList(newTask);
@@ -59,11 +60,11 @@ public class Duke {
                         + "Got it. I've added this task:\n"
                         + spacing
                         + newTask.toString()
-                        +"\n"
+                        + "\n"
                         + spacing
                         + "Now you have " + myListStorage.length() + " tasks in the list.\n"
                         + border);
-            } else if (cmd.contains("deadline")){
+            } else if (cmd.contains("deadline")) {
                 String[] parsedCmd = Parser.parseCmdAndDes(cmd);
                 String[] deadline = Parser.splitDeadlineAndTime(parsedCmd[1]);
                 Task newTask = new Deadline(deadline[0], deadline[1]);
@@ -73,7 +74,7 @@ public class Duke {
                         + "Got it. I've added this task:\n"
                         + spacing
                         + newTask.toString()
-                        +"\n"
+                        + "\n"
                         + spacing
                         + "Now you have " + myListStorage.length() + " tasks in the list.\n"
                         + border);
@@ -87,7 +88,7 @@ public class Duke {
                         + "Got it. I've added this task:\n"
                         + spacing
                         + newTask.toString()
-                        +"\n"
+                        + "\n"
                         + spacing
                         + "Now you have " + myListStorage.length() + " tasks in the list.\n"
                         + border);
@@ -97,6 +98,5 @@ public class Duke {
                 System.out.println(border + spacing + toPrint + "\n" + border);
             }
         }
-        System.out.println(border + spacing + "Bye. Hope to see you again soon!\n" + border);
     }
 }

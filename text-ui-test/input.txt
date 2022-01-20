@@ -1,0 +1,11 @@
+todo Run 10km
+list
+deadline Assignment 1 due /by Sunday 2359
+event Dinner at Grandma's /at Saturday 1800
+list
+mark 1
+mark 2
+list
+unmark 2
+list
+bye
