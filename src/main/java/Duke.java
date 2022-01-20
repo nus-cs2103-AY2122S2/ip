@@ -1,14 +1,15 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class Duke {
 
-    private Task[] items;
+    private final ArrayList<Task> items;
     private int count;
 
     public Duke() {
-        this.items = new Task[100];
+        this.items = new ArrayList<>();
         this.count = 0;
     }
 
@@ -28,36 +29,43 @@ public class Duke {
         } else if (input.equals("list")) {
             System.out.println("\t Here are the tasks in your list:");
             for (int i=0; i<count; i++) {
-                System.out.println("\t " + (i+1) + "." + items[i]);
+                System.out.println("\t " + (i+1) + "." + items.get(i));
             }
         } else if (input.split(" ", 2)[0].equals("mark")) {
             int pos = Integer.parseInt(input.split(" ", 2)[1]);
-            items[pos-1].markAsDone();
-            System.out.println("\t Nice! I've marked this task as done:\n" + "\t  " + items[pos-1]);
+            items.get(pos-1).markAsDone();
+            System.out.println("\t Nice! I've marked this task as done:\n" + "\t  " + items.get(pos-1));
         } else if (input.split(" ", 2)[0].equals("deadline")) {
             String date = input.split("/", 2)[1].split(" ", 2)[1];
             String des = input.split(" /", 2)[0].split(" ", 2)[1];
-            items[count] = new Deadline(des, date);
+            items.add(new Deadline(des, date));
             count++;
             System.out.println("\t Got it, I've added this task:");
-            System.out.println("\t  " + items[count-1]);
+            System.out.println("\t  " + items.get(count-1));
             System.out.println("\t Now you have " + count + " tasks in the list.");
         } else if (input.split(" ", 2)[0].equals("todo")) {
             String des = input.split(" ", 2)[1];
-            items[count] = new Todo(des);
+            items.add(new Todo(des));
             count++;
             System.out.println("\t Got it, I've added this task:");
-            System.out.println("\t  " + items[count-1]);
+            System.out.println("\t  " + items.get(count-1));
             System.out.println("\t Now you have " + count + " tasks in the list.");
         } else if (input.split(" ", 2)[0].equals("event")) {
             String date = input.split("/", 2)[1].split(" ", 2)[1];
             String des = input.split(" /", 2)[0].split(" ", 2)[1];
-            items[count] = new Deadline(des, date);
+            items.add(new Deadline(des, date));
             count++;
             System.out.println("\t Got it, I've added this task:");
-            System.out.println("\t  " + items[count-1]);
+            System.out.println("\t  " + items.get(count-1));
             System.out.println("\t Now you have " + count + " tasks in the list.");
-        } else {
+        }else if (input.split(" ", 2)[0].equals("delete")) {
+            int pos = Integer.parseInt(input.split(" ", 2)[1]);
+            Task t = items.remove(pos-1);
+            count--;
+            System.out.println("\t Noted, I've removed this task:");
+            System.out.println("\t  " + t);
+            System.out.println("\t Now you have " + count + " tasks in the list.");
+        }else {
             throw new DukeException();
         }
     }
