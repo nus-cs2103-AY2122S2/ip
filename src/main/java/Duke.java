@@ -30,7 +30,7 @@ public class Duke {
                         desc = desc.substring(desc.indexOf(" ")).strip();
                         newTask = new Deadline(desc, by);
                     } else {
-                        String time = cmd.substring(cmd.indexOf("/at ") + 4);
+                        String time = cmd.split("/at ")[1];
                         String desc = cmd.split("/at ")[0].strip();
                         desc = desc.substring(desc.indexOf(" ")).strip();
                         newTask = new Event(desc, time);
@@ -75,15 +75,29 @@ public class Duke {
                     break;
                 }
 
+                // delete functionality
+                else if (cmd.split(" ")[0].equals("delete")) {
+                    int idx = Integer.parseInt(cmd.split(" ")[1]);
+                    Task currTask = list.remove(idx - 1);
+                    System.out.println(line + "    Noted. I've removed this task:\n      " + currTask);
+                    System.out.println("    Now you have " + list.size() + " tasks in the list.\n" + line);
+                }
+
                 // unrecognized commands
                 else {
                     System.out.println(line + "    :( OOPS!!! I'm sorry, but I don't know what that means :-(\n" + line);
                 }
+
+
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println(line + "    Insufficient arguments for this command! :(\n" + line);
             } catch (IndexOutOfBoundsException e) {
                 System.out.println(line + "    There is no such item! :0\n" + line);
+            } catch (NumberFormatException e) {
+                System.out.println(line + "    Please use a valid integer! 12345!\n" + line);
             }
+
+
             cmd = sc.nextLine().strip();
         }
         System.out.println(line + "    Bye. Hope to see you again soon!\n" + line);
