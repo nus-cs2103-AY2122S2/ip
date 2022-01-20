@@ -45,6 +45,13 @@ public class Duke {
                         break;
                     }
 
+                    case "delete": {
+                        int taskNum = Integer.parseInt(instruction[1]);
+                        System.out.println(String.format("Ok, I will remove this task: \n %s", tasks.get(taskNum - 1)));
+                        tasks.remove(taskNum - 1);
+                        break;
+                    }
+
                     case "todo": {
                         if(instruction.length == 1) {
                             throw new InvalidArgumentException();
