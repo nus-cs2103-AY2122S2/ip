@@ -1,5 +1,5 @@
-public class DukeArgumentException extends DukeException {
-    public DukeArgumentException(String message) {
+public class DukeMissingArgumentException extends DukeException {
+    public DukeMissingArgumentException(String message) {
         super(message);
     }
 

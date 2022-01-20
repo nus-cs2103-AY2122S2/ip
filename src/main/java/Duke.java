@@ -24,36 +24,42 @@ public class Duke {
             String[] inputArray = input.split(" ");
             if (input.length() < 1) {
                 try {
-                    throw new DukeCommandException(inputArray[0]);
+                    throw new DukeCommandException(firstArg);
                 } catch (DukeCommandException e) {
                     System.out.println(e);
                 }
             } else if (inputArray.length == 1) {
-                if (inputArray[0].equals("list")) {
+                if (firstArg.equals("list")) {
                     Printer.printTodo(taskList);
-                } else if (inputArray[0].equals("bye")) {
+                } else if (firstArg.equals("bye")) {
                     Printer.printEndMessage();
-                } else if (inputArray[0].equals("deadline") || inputArray[0].equals("event") || inputArray[0].equals("todo")) {
+                } else if (firstArg.equals("delete")) {
                     try {
-                        throw new DukeArgumentException("task description");
-                    } catch (DukeArgumentException e) {
+                        throw new DukeMissingArgumentException("index");
+                    } catch (DukeMissingArgumentException e) {
                         System.out.println(e);
                     }
-                } else if (inputArray[0].equals("mark")) {
+                } else if (firstArg.equals("deadline") || firstArg.equals("event") || firstArg.equals("todo")) {
                     try {
-                        throw new DukeArgumentException("index");
-                    } catch (DukeArgumentException e) {
+                        throw new DukeMissingArgumentException("task description");
+                    } catch (DukeMissingArgumentException e) {
                         System.out.println(e);
                     }
-                } else if (inputArray[0].equals("unmark")) {
+                } else if (firstArg.equals("mark")) {
                     try {
-                        throw new DukeArgumentException("index");
-                    } catch (DukeArgumentException e) {
+                        throw new DukeMissingArgumentException("index");
+                    } catch (DukeMissingArgumentException e) {
+                        System.out.println(e);
+                    }
+                } else if (firstArg.equals("unmark")) {
+                    try {
+                        throw new DukeMissingArgumentException("index");
+                    } catch (DukeMissingArgumentException e) {
                         System.out.println(e);
                     }
                 } else {
                     try {
-                        throw new DukeCommandException(inputArray[0]);
+                        throw new DukeCommandException(firstArg);
                     } catch (DukeCommandException e) {
                         System.out.println(e);
                     }
@@ -63,12 +69,43 @@ public class Duke {
                     taskList.get(Integer.parseInt(inputArray[1]) - 1).mark();
                 } else if (firstArg.equals("unmark")) {
                     taskList.get(Integer.parseInt(inputArray[1]) - 1).unmark();
+                } else if (firstArg.equals("delete")) {
+                    if (inputArray.length > 2) {
+                        try {
+                            throw new DukeInvalidArgumentException("Too many arguments!");
+                        } catch (DukeInvalidArgumentException e) {
+                            System.out.println(e);
+                        }
+                    } else {
+                        if (taskList.size() == 0) {
+                            Printer.printDivider();
+                            System.out.println("    No tasks are in the list right now!");
+                            Printer.printDivider();
+                        } else {
+                            try {
+                                int position = Integer.parseInt(inputArray[1]);
+                                if (position > 0 && position <= taskList.size()) {
+                                    Printer.echoForDelete(taskList.get(position - 1), taskList.size());
+                                    taskList.remove(position - 1);
+                                } else {
+                                    try {
+                                        throw new DukeInvalidArgumentException("Invalid task number");
+                                    } catch (DukeInvalidArgumentException e) {
+                                        System.out.println(e);
+                                    }
+                                }
+                            } catch (NumberFormatException e) {
+                                System.out.println("Second argument of delete must be a number!");
+                            }
+                        }
+                    }
+
                 } else if (firstArg.equals("deadline")) {
                     int indexOfBy = input.indexOf("\\by ");
                     if (indexOfBy == -1) {
                         try {
-                            throw new DukeArgumentException("\\by deadlineTime");
-                        } catch (DukeArgumentException e) {
+                            throw new DukeMissingArgumentException("\\by deadlineTime");
+                        } catch (DukeMissingArgumentException e) {
                             System.out.println(e);
                         }
                     } else {
@@ -82,8 +119,8 @@ public class Duke {
                     int indexOfAt = input.indexOf("\\at ");
                     if (indexOfAt == -1) {
                         try {
-                            throw new DukeArgumentException("\\at eventTime");
-                        } catch (DukeArgumentException e) {
+                            throw new DukeMissingArgumentException("\\at eventTime");
+                        } catch (DukeMissingArgumentException e) {
                             System.out.println(e);
                         }
                     } else {
@@ -100,7 +137,7 @@ public class Duke {
                     taskList.add(taskObj);
                 } else {
                     try {
-                        throw new DukeCommandException(inputArray[0]);
+                        throw new DukeCommandException(firstArg);
                     } catch (DukeCommandException e) {
                         System.out.println(e);
                     }

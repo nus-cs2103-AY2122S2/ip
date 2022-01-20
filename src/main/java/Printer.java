@@ -30,4 +30,11 @@ public class Printer {
         System.out.println("    Now you got " + (listLength + 1) + " tasks in the list!");
         printDivider();
     }
-}
+
+    public static void echoForDelete(Task taskObj, int listLength) {
+        printDivider();
+        System.out.println("    Ok, removing a task: ");
+        System.out.println("      " + taskObj.toString());
+        System.out.println("    Now you got " + (listLength - 1) + " tasks in the list!");
+        printDivider();
+    }}
