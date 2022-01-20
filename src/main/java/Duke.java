@@ -98,5 +98,6 @@ public class Duke {
         list.remove(num - 1);
         type.remove(num - 1);
         status.remove(num - 1);
+
     }
 }
