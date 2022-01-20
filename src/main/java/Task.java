@@ -36,6 +36,9 @@ public class Task {
     public boolean isDone() {
         return this.isDone;
     }
-
+   
+    public String toString() {
+        return getStatusIcon() + description;
+    }
     
 }
