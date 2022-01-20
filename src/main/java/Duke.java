@@ -11,4 +11,5 @@ public class Duke {
         duke.mainLogic();
         System.out.println("Bye! Hope to see you again soon");
     }
+
 }

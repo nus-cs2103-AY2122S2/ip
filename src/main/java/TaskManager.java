@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -21,37 +22,10 @@ public class TaskManager {
             StringTokenizer st = new StringTokenizer(userInput, " ");
             String curr = st.nextToken();
 
-            switch (curr){
-
-                case "list":
-                    this.printList();
-                    break;
-
-                case "mark":
-                    int toMark = Integer.parseInt(st.nextToken());
-                    tasks.get(toMark - 1).markCompleted();
-                    break;
-
-                case "unmark":
-                    int toUnmark = Integer.parseInt(st.nextToken());
-                    tasks.get(toUnmark - 1).markNotCompleted();
-                    break;
-
-                case "todo":
-                    this.addToDo(st.nextToken(""));
-                    break;
-
-                case "deadline":
-                    userInput = userInput.replace(curr, "");
-                    String[] spl=  userInput.split("/by ");
-                    this.addDeadline(spl[0], spl[1]);
-                    break;
-
-                case "event":
-                    userInput = userInput.replace(curr, "");
-                    String[] splo = userInput.split("/at ");
-                    this.addEvent(splo[0], splo[1]);
-                    break;
+            try{
+                this.handleCommand(curr, userInput, st);
+            } catch (DukeException e){
+                System.out.println(e.toString());
             }
 
             System.out.println("-------------------");
@@ -64,27 +38,111 @@ public class TaskManager {
         }
     }
 
-    private void addToDo(String desc){
+    private void addToDo(String desc) throws DukeException.DukeNoTaskGivenException {
+        if(desc.replace(" ", "").equals("")){
+            throw new DukeException.DukeNoTaskGivenException();
+        }
         ToDo curr = new ToDo(desc, false);
         this.tasks.add(curr);
         this.printTaskAddition(curr);
     }
 
-    private void addDeadline(String desc, String date) {
+    private void addDeadline(String desc, String date) throws DukeException.DukeNoTimeProvided {
+        if(date.replace(" ", "").equals("")){
+            throw new DukeException.DukeNoTimeProvided();
+        }
         Deadline curr = new Deadline(desc, false, date);
         this.tasks.add(curr);
         this.printTaskAddition(curr);
     }
 
-    private void addEvent(String desc, String date){
+    private void addEvent(String desc, String date) throws DukeException.DukeNoTimeProvided {
+        if(date.replace(" ", "").equals("")){
+            throw new DukeException.DukeNoTimeProvided();
+        }
         Event curr = new Event(desc, false, date);
         this.tasks.add(curr);
         this.printTaskAddition(curr);
     }
 
-    public void printTaskAddition(Task curr){
+    private void printTaskAddition(Task curr){
         System.out.println("Got it! I've added this task:");
         System.out.println(curr.toString());
         System.out.println("Now you have " + this.tasks.size() + " tasks in the list");
     }
+
+    private void handleCommand(String curr, String userInput, StringTokenizer st) throws DukeException {
+        switch (curr){
+
+            case "list":
+                this.printList();
+                break;
+
+            case "mark":
+                try {
+                    int toMark = Integer.parseInt(st.nextToken());
+                    if(toMark < 0 || toMark > tasks.size()){
+                        throw new DukeException.DukeInvalidNumberException();
+                    }
+                    tasks.get(toMark - 1).markCompleted();
+                } catch (Exception e){
+                    throw new DukeException.DukeInvalidNumberException();
+                }
+                break;
+
+            case "unmark":
+
+                try {
+                    int toUnmark = Integer.parseInt(st.nextToken());
+                    if(toUnmark < 0 || toUnmark > tasks.size()){
+                        throw new DukeException.DukeInvalidNumberException();
+                    }
+                    tasks.get(toUnmark - 1).markNotCompleted();
+                } catch (Exception e){
+                    throw new DukeException.DukeInvalidNumberException();
+                }
+                break;
+
+            case "todo":
+
+                try {
+                    this.addToDo(st.nextToken(""));
+                } catch (Exception e){
+                    throw new DukeException.DukeNoTaskGivenException();
+                }
+
+                break;
+
+            case "deadline":
+                try {
+                    userInput = userInput.replace(curr, "");
+                    String[] spl = userInput.split("/by ");
+                    if(spl.length <= 1){
+                        throw new DukeException.DukeNoTimeProvided();
+                    }
+                    this.addDeadline(spl[0], spl[1]);
+                } catch (DukeException e) {
+                    throw e;
+                }
+                break;
+
+            case "event":
+                try {
+                    userInput = userInput.replace(curr, "");
+                    String[] splo = userInput.split("/at ");
+                    if (splo.length <= 1) {
+                        throw new DukeException.DukeNoTimeProvided();
+                    }
+                    this.addEvent(splo[0], splo[1]);
+                } catch (DukeException e){
+                    throw e;
+                }
+                break;
+
+            default:
+                throw new DukeException.DukeInvalidCommandException();
+        }
+    }
+
+
 }
