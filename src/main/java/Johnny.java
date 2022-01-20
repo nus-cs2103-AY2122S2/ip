@@ -19,6 +19,8 @@ public class Johnny {
 
         while(true) {
             input = sc.nextLine();
+            String[] tags = input.split(" ", 2);
+
             if(input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
@@ -33,9 +35,40 @@ public class Johnny {
             else if(input.length() >= 7 && input.substring(0, 7).equals("unmark ") && isNumeric(input.substring(7))) {
                 userList.unmark(Integer.parseInt(input.substring(7)));
             }
-            else {
-                Task newTask = new Task(input);
+            else if(tags[0].equals("todo")) {
+                String content = tags[1];
+
+                Task newTask = new Todo(content);
                 userList.add(newTask);
+
+                System.out.println("Got it! I've added this task:");
+                System.out.println(newTask);
+                System.out.println("Now you have " + userList.getCount() + " tasks in your list.");
+            }
+            else if(tags[0].equals("deadline") && tags[1].contains("/")) {
+                String content = tags[1];
+                String[] details = content.split("/", 2);
+
+                Task newTask = new Deadline(details[0], details[1]);
+                userList.add(newTask);
+
+                System.out.println("Got it! I've added this task:");
+                System.out.println(newTask);
+                System.out.println("Now you have " + userList.getCount() + " tasks in your list.");
+            }
+            else if(tags[0].equals("event") && tags[1].contains("/")) {
+                String content = tags[1];
+                String[] details = content.split("/", 2);
+
+                Task newTask = new Event(details[0], details[1]);
+                userList.add(newTask);
+
+                System.out.println("Got it! I've added this task:");
+                System.out.println(newTask);
+                System.out.println("Now you have " + userList.getCount() + " tasks in your list.");
+            }
+            else {
+                System.out.println("I'm sorry, I didn't quite get that");
             }
         }
     }

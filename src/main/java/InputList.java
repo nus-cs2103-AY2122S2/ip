@@ -18,7 +18,6 @@ public class InputList {
     public void add(Task newTask) {
         this.tasks[count] = newTask;
         count++;
-        System.out.println("added: " + newTask.getDescription());
     }
 
     public void mark(int index) {
@@ -31,5 +30,9 @@ public class InputList {
         tasks[index - 1].markAsUndone();
         System.out.println("OK, I've marked this task as not done yet:");
         System.out.println(tasks[index - 1].toString());
+    }
+
+    public int getCount() {
+        return this.count;
     }
 }
