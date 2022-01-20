@@ -102,15 +102,25 @@ public class Duke {
                 switch (inCmd) {
                     case "mark":
                     case "unmark":
+                    case "delete":
                         try {
                             int idx = Integer.parseInt(inArgs) - 1; // list is 1-indexed
-                            Task task = tasks.get(idx);
-                            boolean done = inCmd.equals("mark"); // set as done if cmd == "mark", else (e.g. cmd == "unmark") set as undone
-                            task.setDone(done); 
-                            dialog(new String[] {
-                                String.format("Task marked as %sdone:", done ? "" : "un"),
-                                String.format(" %s", task)
-                            });
+
+                            if (inCmd.equals("delete")) {
+                                Task task = tasks.remove(idx);
+                                dialog(new String[] {
+                                    "Task removed:",
+                                    String.format(" %s", task)
+                                });
+                            } else {
+                                Task task = tasks.get(idx);
+                                boolean done = inCmd.equals("mark"); // set as done if cmd == "mark", else (e.g. cmd == "unmark") set as undone
+                                task.setDone(done); 
+                                dialog(new String[] {
+                                    String.format("Task marked as %sdone:", done ? "" : "un"),
+                                    String.format(" %s", task)
+                                });
+                            }
                         } catch (NumberFormatException e) {
                             throw new DukeException(String.format("Hmm, that doesn't seem like a valid task number! Try '%s <number>'.", inCmd), e);
                         } catch (IndexOutOfBoundsException e) {
@@ -165,7 +175,7 @@ public class Duke {
                         break;
 
                     default:
-                        throw new DukeException("I don't know what that means! Try: todo, deadline, event, list, mark, unmark, bye");
+                        throw new DukeException("I don't know what that means! Try: todo, deadline, event, list, delete, mark, unmark, bye");
                 }
             } catch (DukeException e) {
                 dialog(e.getMessage().split("\n"));
