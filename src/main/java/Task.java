@@ -1,8 +1,8 @@
-public  class Task {
-    private String input;
-    private boolean isComplete = false;
-    private String type;
-    private String description;
+public class Task {
+    protected String input;
+    protected boolean isComplete = false;
+    protected String type;
+    protected String description = ""; // Display format for Duke
     
     public Task(String input) {
         this.input = input;
@@ -20,7 +20,7 @@ public  class Task {
      * Gets the symbol for whether this task is complete or not
      * @return A string symbol
      */
-    private String getDoneSymbol() {
+    protected String getDoneSymbol() {
         if (this.isComplete) {
             return "[X]";
         } else {
@@ -32,7 +32,7 @@ public  class Task {
      * Returns description of task
      * @return Description string
      */
-    private String getDescription() {
+    protected String getDescription() {
         return this.description;
     }
 
@@ -40,7 +40,7 @@ public  class Task {
      * Gets the symbol for the type of this task
      * @return A string symbol
      */
-    private String getTaskTypeSymbol() {
+    protected String getTaskTypeSymbol() {
         if (this.type.equals("todo")) {
             return "[T]";
         } else if (this.type.equals("deadline")) {
@@ -56,7 +56,7 @@ public  class Task {
         String taskTypeSymbol = this.getTaskTypeSymbol();
         String description = this.getDescription();
 
-        String output = doneSymbol + taskTypeSymbol + " " + description;
+        String output = taskTypeSymbol + doneSymbol + " " + description;
 
         return output;
     }
