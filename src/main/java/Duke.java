@@ -29,13 +29,22 @@ public class Duke {
                 }
             } else if (firstWord.equals("mark") || firstWord.equals("unmark")) { // mark/unmark task
                 String secondWord = inputs[1];
+                int index = Integer.parseInt(secondWord);
+
                 if (firstWord.equals("mark")) {
-                    Task targetTask = list.get((Integer.parseInt(secondWord) - 1));
+                    Task targetTask = list.get((index - 1));
                     targetTask.mark();
                 } else {
-                    Task targetTask = list.get((Integer.parseInt(secondWord) - 1));
+                    Task targetTask = list.get((index - 1));
                     targetTask.unmark();
                 }
+            } else if (firstWord.equals("delete")) { // delete task
+                String secondWord = inputs[1];
+                int index = Integer.parseInt(secondWord);
+
+                Task targetTask = list.get((index - 1));
+                targetTask.delete();
+                System.out.println("Now you have " + list.size() + " tasks in your list.");
             } else if (firstWord.equals("todo")) { // adds a todo task
                 if (inputs.length == 1) {
                     System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -111,6 +120,11 @@ public class Duke {
                 System.out.println("This task has not been completed! \n"
                         + toString());
             }
+        }
+
+        public void delete() {
+            System.out.println("Noted. I've removed this task: \n"
+                        + toString());
         }
 
         @Override
