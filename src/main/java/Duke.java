@@ -68,13 +68,13 @@ public class Duke {
 
     public static void throwError(String type) {
         System.out.println(LINE);
+        DukeException error;
         if (type.equals("")) {
-            DukeException error = new DukeException();
-            System.out.println(error.toString());
+            error = new DukeException();
         } else {
-            DukeException error = new DukeException(type);
-            System.out.println(error.toString());
+            error = new DukeException(type);
         }
+        System.out.println(error);
         System.out.println(LINE);
     }
 
@@ -88,7 +88,7 @@ public class Duke {
         whileLoop:
         while (sc.hasNextLine()) {
             String usrInput = sc.next();
-            String task = "";
+            String task;
             switch (usrInput) {
                 case "bye":
                     exit();
