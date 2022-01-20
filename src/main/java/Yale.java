@@ -89,8 +89,9 @@ public class Yale {
         // Deadline feature
         else if (command.contains("deadline")) {
             try {
-                String task = command.split(" /by ", 2)[0]; // Retrieve task name
-                String date = command.split(" /by ", 2)[1]; // Retrieve date
+                String removeDeadline = command.split("deadline ", 2)[1]; // Remove Deadline word
+                String task = removeDeadline.split(" /by ", 2)[0]; // Retrieve task name
+                String date = removeDeadline.split(" /by ", 2)[1]; // Retrieve date
                 Deadline newDeadline = new Deadline(task, false, date);
                 list.addTo(newDeadline);
                 System.out.println("Got it! I've added this task:\n    " +
@@ -103,8 +104,9 @@ public class Yale {
         // Event feature
         else if (command.contains("event")){
             try {
-                String task = command.split(" /at ", 2)[0]; // Retrieve task name
-                String date = command.split(" /at ", 2)[1]; // Retrieve date
+                String removeEvent = command.split("event ", 2)[1]; // Remove Event word
+                String task = removeEvent.split(" /at ", 2)[0]; // Retrieve task name
+                String date = removeEvent.split(" /at ", 2)[1]; // Retrieve date
                 Event newEvent = new Event(task, false, date);
                 list.addTo(newEvent);
                 System.out.println("Got it! I've added this task:\n    " +
