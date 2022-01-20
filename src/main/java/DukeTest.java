@@ -27,45 +27,61 @@ public class DukeTest {
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Hello! I'm Duke\nWhat can I do for you?");
 
-        String input = scanner.nextLine();
-        String[] splitInput = new String[2];
-        String command;
-        splitInput = input.split(" ", 2);
-        command = splitInput[0];
-
-        while (!(isExit(command))) {
-            switch (command) {
-                case "list":
-                    list();
-                    break;
-                case "mark":
-                    taskList.get(Integer.parseInt(splitInput[1]) - 1).mark();
-                    break;
-                case "unmark":
-                    taskList.get(Integer.parseInt(splitInput[1]) - 1).unmark();
-                    break;
-                case "todo":
-                    addTask(new ToDos(splitInput[1]));
-                    break;
-                case "deadline":
-                    addTask(new Deadlines(splitInput[1]));
-                    break;
-                case "event":
-                    addTask(new Events(splitInput[1]));
-                    break;
-                default:
-                    break;
-            }
-
-            input = scanner.nextLine();
+            String input = scanner.nextLine();
+            String[] splitInput = new String[2];
+            String command;
             splitInput = input.split(" ", 2);
             command = splitInput[0];
-        }
 
-        exit();
-        scanner.close();
+            while (!(isExit(command))) {
+                switch (command) {
+                    case "list":
+                        list();
+                        break;
+                    case "mark":
+                        taskList.get(Integer.parseInt(splitInput[1]) - 1).mark();
+                        break;
+                    case "unmark":
+                        taskList.get(Integer.parseInt(splitInput[1]) - 1).unmark();
+                        break;
+                    case "todo":
+                        if (splitInput.length < 2) {
+                            throw new DukeException("The description of a todo cannot be empty.");
+                        } else {
+                            addTask(new ToDos(splitInput[1]));
+                            break;
+                        }
+                    case "deadline":
+                        if (splitInput.length < 2) {
+                            throw new DukeException("The description of a deadline cannot be empty.");
+                        } else {
+                            addTask(new Deadlines(splitInput[1]));
+                            break;
+                        }
+                    case "event":
+                        if (splitInput.length < 2) {
+                            throw new DukeException("The description of an event cannot be empty.");
+                        } else {
+                            addTask(new Events(splitInput[1]));
+                            break;
+                        }
+                    default:
+                        throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                }
+
+                input = scanner.nextLine();
+                splitInput = input.split(" ", 2);
+                command = splitInput[0];
+            }
+
+            exit();
+            scanner.close();
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
