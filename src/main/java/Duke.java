@@ -23,8 +23,8 @@ public class Duke {
      * This method greets the user at the start of the program.
      */
     private static void greet() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
+        String logo = " ____        _\n"
+                + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
@@ -42,7 +42,7 @@ public class Duke {
      * This method process the user input.
      * @param userInput user input
      * @param list list of tasks
-     * @throws DukeException
+     * @throws DukeException throws an exception when the user input is invalid
      */
     private static void processUserInput(String userInput, List list) throws DukeException {
         if (userInput.equals("list")) {
@@ -66,7 +66,7 @@ public class Duke {
             String indexStr = userInput.substring(7);
             int index = Integer.parseInt(indexStr);
             Task task = list.delete(index);
-            System.out.println("Roger. I've deleted this task: \n  "
+            System.out.println("Roger. I've deleted this task:\n  "
                                 +  task.toString() + "\n"
                                 + "Now you have "
                                 + list.getArrayList().size()
@@ -101,29 +101,31 @@ public class Duke {
             throw new DukeException("OOPS!!! The description of a " + str + " cannot be empty.");
         } else {
             if (userInput.startsWith("todo")) {
-                ToDo toDO = new ToDo(userInput.substring(5));
-                list.add(toDO);
-                return toDO.toString();
+                String description = userInput.substring(5);
+                Tasks taskType = Tasks.TODO;
+                Task toDo = list.add(taskType, description, "");
+                return toDo.toString();
             } else {
                 int start = userInput.indexOf("/");
                 String timing = userInput.substring(start + 3);
                 String output = "";
                 if (userInput.startsWith("deadline")) {
                     String description = userInput.substring(9, start - 1);
-                    Deadline deadline = new Deadline(description, timing);
-                    list.add(deadline);
+                    //Deadline deadline = new Deadline(description, timing);
+                    Tasks taskType = Tasks.DEADLINE;
+                    Task deadline =  list.add(taskType, description, timing);
                     output = output + deadline.toString();
                 }
 
                 if (userInput.startsWith("event")) {
                     String description = userInput.substring(6, start - 1);
-                    Event event = new Event(description, timing);
-                    list.add(event);
+                    //Event event = new Event(description, timing);
+                    Tasks taskType = Tasks.EVENT;
+                    Task event = list.add(taskType, description, timing);
                     output = output + event.toString();
                 }
                 return output;
             }
         }
     }
-
 }

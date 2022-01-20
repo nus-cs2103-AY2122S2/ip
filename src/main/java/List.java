@@ -16,13 +16,17 @@ public class List {
         this.arrayList = new ArrayList<Task>(maxSize);
     }
 
+    /**
+     * This method returns the arraylist of Tasks.
+     * @return returns arraylist of Tasks.
+     */
     public ArrayList<Task> getArrayList() {
         return this.arrayList;
     }
 
     /**
      * This method marks a task at a specific index in the list as done.
-     * @param index: index of the task to be marked done in the array list of list
+     * @param index index of the task to be marked done in the array list of list
      * @return return the task that is marked as done.
      */
     public Task markDone(int index) {
@@ -33,7 +37,7 @@ public class List {
 
     /**
      * This method marks a task at a specific index in the list as not done.
-     * @param index: index of the task to be marked as not done in the array list of list.
+     * @param index index of the task to be marked as not done in the array list of list.
      * @return return the task that is marked as not done.
      */
     public Task unmarkDone(int index) {
@@ -43,13 +47,36 @@ public class List {
     }
 
     /**
-     *  This method adds a task to the list.
-     * @param task the task input from the user.
+     *This method adds a todo task, deadline task or event task to the list.
+     * @param taskType Enum Tasks
+     * @param description Description of task
+     * @param timing date/time for Deadline and event task
+     * @return return a todo task, deadline task or event task that is added to the list
      */
-    public void add(Task task) {
-        arrayList.add(task);
+    public Task add(Tasks taskType, String description, String timing) throws DukeException {
+        switch (taskType) {
+            case TODO:
+                ToDo toDo = new ToDo(description);
+                arrayList.add(toDo);
+                return toDo;
+            case DEADLINE:
+                Deadline deadline = new Deadline(description, timing);
+                arrayList.add(deadline);
+                return deadline;
+            case EVENT:
+                Event event = new Event(description, timing);
+                arrayList.add(event);
+                return event;
+        }
+        return new ToDo(description);
     }
 
+    /**
+     * This method deletes a task from the list.
+     * @param index index of the task in the list.
+     * @return returns the task deleted
+     * @throws ListException catches an exception when the index is out of bound.
+     */
     public Task delete(int index) throws ListException{
         if (index < 1 || index > arrayList.size()) {
             throw new ListException("Sorry. The task you indicated cannot be found.\n" +
@@ -58,6 +85,7 @@ public class List {
             return arrayList.remove(index - 1);
         }
     }
+
     /**
      *
      * @return Returns a string which displays the list of tasks in order of them being added.
