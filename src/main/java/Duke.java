@@ -50,7 +50,7 @@ public class Duke {
                             throw new DukeException("Please enter a number of the item in the list you wish to unmark!");
                         }
                     }
-                    case TODO:
+                    case TODO: {
                         try {
                             arr.add(new ToDo(strArr[1]));
                             System.out.println("Got it. I've added this task:  ");
@@ -60,6 +60,7 @@ public class Duke {
                         } catch (ArrayIndexOutOfBoundsException e) {
                             throw new DukeException("The description of a todo cannot be empty.");
                         }
+                    }
                     case DEADLINE: {
                         String strArrDate[] = strArr[1].split("/by ", 2);
                         String eventName = strArrDate[0];
