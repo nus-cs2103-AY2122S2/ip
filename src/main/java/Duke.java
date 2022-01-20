@@ -4,7 +4,7 @@ import java.io.*;
 public class Duke {
 
     public static final String hl = "------------------------------------------------------------------------";
-    public static ArrayList<Task> taskList = new ArrayList<Task>();
+    public static ArrayList<Task> taskList = new ArrayList<>();
 
     public static void greetings() {
         String logo = "";
@@ -14,15 +14,15 @@ public class Duke {
     public static void add(String[] instructions) {
         Task task = null;
         if (instructions[0].equals("todo")) {
-            task = new Todo(instructions[1], taskList.size() + 1);
+            task = new Todo(instructions[1]);
             System.out.println("Added a to do task.");
         } else if (instructions[0].equals("deadline")) {
             String[] taskAndTime = instructions[1].split("/by");
-            task = new Deadline(taskAndTime[0], taskList.size() + 1, taskAndTime[1]);
+            task = new Deadline(taskAndTime[0], taskAndTime[1]);
             System.out.println("Added a deadline.");
         } else if (instructions[0].equals("event")) {
             String[] taskAndTime = instructions[1].split("/at");
-            task = new Event(taskAndTime[0], taskList.size() + 1, taskAndTime[1]);
+            task = new Event(taskAndTime[0], taskAndTime[1]);
             System.out.println("Added an event.");
         }
         if (task != null) {
@@ -32,13 +32,25 @@ public class Duke {
         }
     }
 
+    public static void modify(String[] instructions) {
+        int taskNumber = Integer.parseInt(instructions[1]);
+        if (instructions[0].equals("mark")) {
+            mark(taskNumber);
+        } else if (instructions[0].equals("unmark")) {
+            unmark(taskNumber);
+        } else if (instructions[0].equals("delete")) {
+            delete(taskNumber);
+        }
+    }
+
     public static void list() {
         if (taskList.size() == 0) {
             System.out.println("You have no tasks!");
         } else {
             System.out.println("The tasks on your list. Get it done!");
-            for (Task task : taskList) {
-                System.out.println("  " + task);
+            for (int i = 0; i < taskList.size(); i++) {
+                int taskNumber = i + 1;
+                System.out.println("  " + taskNumber + ". " + taskList.get(i));
             }
         }
     }
@@ -57,6 +69,14 @@ public class Duke {
         System.out.println("  " + task);
     }
 
+    public static void delete(int taskNumber) {
+        Task task = taskList.get(taskNumber - 1);
+        taskList.remove(taskNumber - 1);
+        System.out.println("This task has been removed:");
+        System.out.println("  " +  task);
+        System.out.println("Now you have " + taskList.size() + " task(s).");
+    }
+
     public static void bye() {
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(hl);
@@ -71,7 +91,7 @@ public class Duke {
                 if (instructions.length > 1) {
                     throw new DukeException("There's too many input!");
                 }
-            } else if (command.equals("mark") || command.equals("unmark")) {
+            } else if (command.equals("mark") || command.equals("unmark") || command.equals("delete")) {
                 if (instructions.length == 1) {
                     throw new DukeException("Please specify the task number to " + command + ".");
                 }
@@ -111,12 +131,8 @@ public class Duke {
                     break;
                 } else if (instructions[0].equals("list")) {
                     list();
-                } else if (instructions[0].equals("mark")) {
-                    int taskNumber = Integer.parseInt(instructions[1]);
-                    mark(taskNumber);
-                } else if (instructions[0].equals("unmark")) {
-                    int taskNumber = Integer.parseInt(instructions[1]);
-                    unmark(taskNumber);
+                } else if (instructions[0].equals("mark") || instructions[0].equals("unmark") || instructions[0].equals("delete")) {
+                    modify(instructions);
                 } else {
                     add(instructions);
                 }

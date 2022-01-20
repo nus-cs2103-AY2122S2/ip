@@ -1,10 +1,10 @@
 public class Todo extends Task{
-    public Todo(String description, int taskNumber) {
-        super(description, taskNumber);
+    public Todo(String description) {
+        super(description);
     }
 
     @Override
     public String toString() {
-        return super.taskNumber + "." + "[T]" + this.getStatusIcon() + " " + super.description;
+        return "[T]" + this.getStatusIcon() + " " + super.description;
     }
 }
