@@ -1,3 +1,6 @@
+import Exceptions.DateException;
+import Exceptions.DukeException;
+import Exceptions.TaskIndexException;
 import java.util.ArrayList;
 
 public class TaskManager {
@@ -27,13 +30,13 @@ public class TaskManager {
         tasks.add(t);
     }
 
-    public void execute(String[] spliced) {
+    public void execute(String[] spliced) throws DukeException, TaskIndexException {
         switch (spliced[0]) {
             case "bye":
                 this.status = false;
-                System.out.println(line);
+                this.Line();
                 System.out.println("Bye. Hope to see you again soon!");
-                System.out.println(line);
+                this.Line();
                 break;
 
             case "list":
@@ -41,50 +44,99 @@ public class TaskManager {
                 break;
 
             case "todo":
+                if (spliced.length == 1) {
+                    throw new TaskIndexException("'todo'");
+                }
                 Task newTodo = new ToDo(spliced[1]);
                 tasks.add(newTodo);
-                System.out.println(line);
+                this.Line();
                 System.out.println("Got it, I added: \n"+ newTodo);
                 System.out.printf("Now you have %d item(s) in your list \n", tasks.size());
-                System.out.println(line);
+                this.Line();
                 break;
 
             case "deadline":
-                Task newDeadline = new Deadline(spliced[1]);
-                tasks.add(newDeadline);
-                System.out.println(line);
-                System.out.println("Got it, I added: \n"+ newDeadline);
-                System.out.printf("Now you have %d items in your list \n", tasks.size());
-                System.out.println(line);
+                if (spliced.length == 1) {
+                    throw new TaskIndexException("'deadline'");
+                }
+                try {
+                    Task newDeadline = new Deadline(spliced[1]);
+                    tasks.add(newDeadline);
+                    this.Line();
+                    System.out.println("Got it, I added: \n" + newDeadline);
+                    System.out.printf("Now you have %d items in your list \n", tasks.size());
+                    this.Line();
+                } catch (DateException e) {
+                    this.Line();
+                    System.out.println("☹ OOPS!!! You didn't specify date!\n"+
+                            "use the format:\n"+
+                            "'deadline your task here /by time'");
+                    this.Line();
+                }
                 break;
 
             case "event":
-                Task newEvent = new Event(spliced[1]);
-                tasks.add(newEvent);
-                System.out.println(line);
-                System.out.println("Got it, I added: \n"+ newEvent);
-                System.out.printf("Now you have %d items in your list \n", tasks.size());
-                System.out.println(line);
+                if (spliced.length == 1) {
+                    throw new TaskIndexException("'event'");
+                }
+                try {
+                    Task newEvent = new Event(spliced[1]);
+                    tasks.add(newEvent);
+                    this.Line();
+                    System.out.println("Got it, I added: \n"+ newEvent);
+                    System.out.printf("Now you have %d items in your list \n", tasks.size());
+                    this.Line();
+                }catch (DateException e) {
+                    this.Line();
+                    System.out.println("☹ OOPS!!! You didn't specify date!\n"+
+                                    "use the format:\n"+
+                            "'event your event here /at time'");
+                    this.Line();
+                }
                 break;
 
             case "unmark":
-                Integer index = Integer.parseInt(spliced[1]);
-                if (tasks.get(index - 1) != null) {
+                try {
+                    Integer index = Integer.parseInt(spliced[1]);
                     tasks.get(index - 1).unmark();
+                } catch (NumberFormatException e) {
+                    this.Line();
+                    System.out.println("Give me the task number in numbers please!");
+                    this.Line();
+                } catch (IndexOutOfBoundsException e) {
+                    this.Line();
+                    System.out.println("I don't think we have that task!\nUse 'list' to check");
+                    this.Line();
                 }
                 break;
 
             case "mark":
-                Integer index2 = Integer.parseInt(spliced[1]);
-                if (tasks.get(index2 - 1) != null) {
-                    tasks.get(index2 - 1).mark();
+                try {
+                    Integer index2 = Integer.parseInt(spliced[1]);
+                    if (tasks.get(index2 - 1) != null) {
+                        tasks.get(index2 - 1).mark();
+                    }
+                } catch (NumberFormatException e) {
+                    this.Line();
+                    System.out.println("Give me the task number in numbers please!");
+                    this.Line();
+                } catch (IndexOutOfBoundsException e) {
+                    this.Line();
+                    System.out.println("I don't think we have that task!\nUse 'list' to check");
+                    this.Line();
                 }
                 break;
+            default:
+                throw new DukeException();
         }
     }
 
     public boolean open() {
         return this.status;
+    }
+
+    public void Line() {
+        System.out.println(line);
     }
 
     @Override

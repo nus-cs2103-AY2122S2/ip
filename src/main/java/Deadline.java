@@ -1,11 +1,16 @@
+import Exceptions.DateException;
+
 public class Deadline extends Task{
     private String item;
     private String date;
     private boolean done;
     private String line = "-------------------------------------------";
 
-    public Deadline(String details) {
+    public Deadline(String details) throws DateException {
         String[] spliced = details.split("/by", 2);
+        if (spliced.length == 1) {
+            throw new DateException();
+        }
         this.item = spliced[0];
         this.date = spliced[1];
     }
