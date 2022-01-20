@@ -36,9 +36,15 @@ public class Duke {
                         }
                         cmd.mark(index - 1);
                     } catch (NullPointerException ex) {
-                        System.out.println("This entry does not exist, please provide a valid entry");
+                        String err = "_______________________________________________________\n"
+                                + "This entry does not exist, please provide a valid entry!\n"
+                                + "_______________________________________________________\n";
+                        System.out.println(err);
                     } catch (DukeException ex) {
-                        System.out.println("Please provide a non-zero, positive entry value!");
+                        String err = "_______________________________________________________\n"
+                                + "Please provide a non-zero, positive entry value!\n"
+                                + "_______________________________________________________\n";
+                        System.out.println(err);
                     }
                     finally {
                         break;
@@ -52,9 +58,15 @@ public class Duke {
                         }
                         cmd.unmark(index - 1);
                     } catch (NullPointerException ex) {
-                        System.out.println("This entry does not exist, please provide a valid entry!");
+                        String err = "_______________________________________________________\n"
+                                + "This entry does not exist, please provide a valid entry!\n"
+                                + "_______________________________________________________\n";
+                        System.out.println(err);
                     } catch (DukeException ex) {
-                        System.out.println("Please provide a non-zero, positive entry value!");
+                        String err = "_______________________________________________________\n"
+                                + "Please provide a non-zero, positive entry value!\n"
+                                + "_______________________________________________________\n";
+                        System.out.println(err);
                     }
                     finally {
                         break;
