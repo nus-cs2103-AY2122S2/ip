@@ -36,15 +36,14 @@ public class Duke {
     }
     public static void add(String input){
         System.out.println(line);
-        String response = manager.addTask(input);
-        System.out.println(response);
+        manager.addTask(input);
         System.out.println(line);
     }
     public static void delete(String input){
         System.out.println(line);
         try {
             int index = Integer.parseInt(input.replaceFirst("delete", "").strip());
-            System.out.println(manager.deleteTask(index));
+            manager.deleteTask(index);
         } catch (NumberFormatException n){
             System.out.println("Invalid number entered! Please enter an integer");
         }
@@ -58,14 +57,14 @@ public class Duke {
         if (input.startsWith("mark")){
             try {
                 int index = Integer.parseInt(input.replaceFirst("mark", "").strip());
-                System.out.println(manager.markTaskDone(index));
+                manager.markTaskDone(index);
             } catch (NumberFormatException n){
                 System.out.println("Invalid number entered! Please enter an integer");
             }
         } else if (input.startsWith("unmark")){
             try {
                 int index = Integer.parseInt(input.replaceFirst("unmark", "").strip());
-                System.out.println(manager.markTaskUndone(index));
+                manager.markTaskUndone(index);
             } catch (NumberFormatException n){
                 System.out.println("Invalid number entered! Please enter an integer");
             }
@@ -136,7 +135,7 @@ public class Duke {
     public static void load(){
         String FILE_PATH = System.getProperty("user.home");
         FILE_PATH += "/Duke/data";
-        System.out.println(FILE_PATH);
+
         File f = new File(FILE_PATH);
         if (f.exists()){
             try{
@@ -145,6 +144,9 @@ public class Duke {
                     String input = s.nextLine();
                     Task t = Task.parse(input);
                     if (t != null){ manager.addTask(t); }
+                    else {
+                        System.out.println("Task not loaded. Details: " + input);
+                    }
                 }
                 System.out.println("Loading Completed!");
                 list();

@@ -75,7 +75,7 @@ public class Task{
             System.out.println(i.toString());
             return null;
         } catch (InvalidTaskDataTimeException d){
-            System.out.printf(d.toString());
+            System.out.println(d.toString());
             return null;
         }
     }
@@ -106,7 +106,6 @@ public class Task{
         return ' ';
     }
 
-
     public static LocalDateTime parseDateTime(String input){
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         DateTimeFormatter formatted = DateTimeFormatter.ofPattern("d MMM yyyy, K:mma");
@@ -115,7 +114,7 @@ public class Task{
             LocalDateTime dateTime = LocalDateTime.parse(input, format);
             return dateTime;
         } catch (DateTimeParseException e) {
-            System.out.println("Date/Time is in wrong format!");
+            System.out.println("Error parsing Date/Time!");
             System.out.println("Please enter Date/Time in the form DD/MM/YYYY HHMM");
             return null;
         }

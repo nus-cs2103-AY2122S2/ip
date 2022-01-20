@@ -5,7 +5,7 @@ public class TaskManager {
 
     public TaskManager(){}
 
-    public String addTask(String s){
+    public boolean addTask(String s){
         try {
             Task t = Task.newTask(s);
             list.add(t);
@@ -13,78 +13,86 @@ public class TaskManager {
             String str = String.format("Got it. I've added this task:\n" +
                     "\t%s\n" +
                     "Now you have %d tasks in the list.", t.toString(), list.size());
-            return str;
+            return true;
         } catch (InvalidTaskDescriptionException i){
-            return i.toString();
+            System.out.println(i.toString());
+            return false;
         } catch (InvalidTaskDataTimeException u){
-            return u.toString();
+            System.out.println(u.toString());
+            return false;
         } catch (InvalidTaskTypeException t){
-            return t.toString();
+            System.out.println(t.toString());
+            return false;
         }
     }
     public void addTask(Task t){
         this.list.add(t);
     }
 
-    public String deleteTask(int index){
+    public boolean deleteTask(int index){
         if (list.size() == 0){
-            return "There are no tasks in your task list to delete.";
+            System.out.println("There are no tasks in your task list to delete.");
+            return false;
         } else {
             if (index <= 0 || index >list.size()){
-                return String.format("Invalid number entered! The number entered must be between 1 and %s",list.size());
+                System.out.println(String.format("Invalid number entered! The number entered must be between 1 and %s",list.size()));
+                return false;
             } else {
                 Task t = list.get(index-1);
                 list.remove(index-1);
                 String s = String.format(   "Noted. I have removed this task:\n" +
                                             "\t%s\n" +
                                             "There are now %d tasks in your task list",t,list.size());
-                return s;
+                System.out.println(s);
+                return true;
             }
         }
     }
 
-    public String markTaskDone(int index){
+    public boolean markTaskDone(int index){
         if (list.size() <= 0){
-            return "There are no tasks in your task list to mark";
+            System.out.println("There are no tasks in your task list to mark");
+            return false;
         } else {
             if (index <= 0 || index > list.size()){
-                String s = String.format("Invalid number entered! No tasks marked.");
-                return s;
+                System.out.println(String.format("Invalid number entered! No tasks marked."));
+                return false;
             } else {
                 Task t = list.get(index - 1);
-                String s;
                 if (t.done == ' ') {
                     t.markDone();
-                    s = String.format("+++ Nice! I've marked this task as done:\n" +
-                            "+++ %s\n", t);
+                    System.out.println(String.format("+++ Nice! I've marked this task as done:\n" +
+                            "+++ %s\n", t));
+                    return true;
                 } else {
-                    s = String.format("+++ This task is already marked as done:\n" +
-                            "+++ %s\n", t);
+                    System.out.println(String.format("    This task is already marked as done:\n" +
+                            "    %s\n", t));
+                    return false;
                 }
-                return s;
             }
         }
     }
 
-    public String markTaskUndone(int index){
+    public boolean markTaskUndone(int index){
         if (list.size() <= 0){
-            return "There are no tasks in your task list to mark";
+            System.out.println("There are no tasks in your task list to mark");
+            return false;
         } else {
             if (index <= 0 || index > list.size()) {
-                String s = String.format("Invalid number entered! No tasks unmarked.");
-                return s;
+                System.out.println("Invalid number entered! No tasks unmarked.");
+                return false;
             } else {
                 Task t = list.get(index - 1);
-                String s;
                 if (t.done == 'X') {
                     t.markunDone();
-                    s = String.format("--- OK, I've marked this task as not done yet:\n" +
-                            "--- %s\n", t);
+                    System.out.println(String.format("--- OK, I've marked this task as not done yet:\n" +
+                            "--- %s\n", t));
+                    return true;
                 } else {
-                    s = String.format("--- This task has not been marked as done yet:\n" +
-                            "--- %s\n", t);
+                    System.out.println(String.format("    This task has not been marked as done yet:\n" +
+                            "    %s\n", t));
+                    return false;
                 }
-                return s;
             }
         }
     }
