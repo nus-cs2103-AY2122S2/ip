@@ -8,9 +8,9 @@ public class Event extends Task {
     @Override
     public String toString() {
         if (getIsDone()) {
-            return "    [E][X] " + getContent() + " (at: " + at + ")";
+            return "[E][X] " + getContent() + " (at: " + at + ")";
         } else {
-            return "    [E][] " + getContent() + " (at: " + at + ")";
+            return "[E][] " + getContent() + " (at: " + at + ")";
         }
     }
 }

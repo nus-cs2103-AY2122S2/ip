@@ -7,9 +7,9 @@ public class ToDo extends Task {
     @Override
     public String toString() {
         if (getIsDone()) {
-            return "    [T][X] " + getContent();
+            return "[T][X] " + getContent();
         } else {
-            return "    [T][ ] " + getContent();
+            return "[T][ ] " + getContent();
         }
     }
 }

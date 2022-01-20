@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public class Printer {
+    public static String divider = "    ____________________________________________________________";
     public static void printEndMessage() {
         printDivider();
         System.out.println("    Bye. Hope to see you again soon!");
@@ -8,7 +9,6 @@ public class Printer {
     }
 
     public static void printDivider() {
-        String divider = "    ____________________________________________________________";
         System.out.println(divider);
     }
 
@@ -26,7 +26,7 @@ public class Printer {
     public static void echoForAdd(Task taskObj, int listLength) {
         printDivider();
         System.out.println("    Adding a task: ");
-        System.out.println("  " + taskObj.toString());
+        System.out.println("      " + taskObj.toString());
         System.out.println("    Now you got " + (listLength + 1) + " tasks in the list!");
         printDivider();
     }

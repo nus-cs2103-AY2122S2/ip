@@ -8,9 +8,9 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         if (getIsDone()) {
-            return "    [D][X] " + getContent() + " (by: " + by + ")";
+            return "[D][X] " + getContent() + " (by: " + by + ")";
         } else {
-            return "    [D][ ] " + getContent() + " (by: " + by + ")";
+            return "[D][ ] " + getContent() + " (by: " + by + ")";
         }
     }
 }

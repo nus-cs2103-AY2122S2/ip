@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         String botName = "Duke";
         Printer.printDivider();
         System.out.println("    Hello, I'm " + botName + ".");
@@ -22,15 +22,41 @@ public class Duke {
             }
 
             String[] inputArray = input.split(" ");
-            if (inputArray.length < 1) {
-                System.out.println("Empty command");
+            if (input.length() < 1) {
+                try {
+                    throw new DukeCommandException(inputArray[0]);
+                } catch (DukeCommandException e) {
+                    System.out.println(e);
+                }
             } else if (inputArray.length == 1) {
                 if (inputArray[0].equals("list")) {
                     Printer.printTodo(taskList);
                 } else if (inputArray[0].equals("bye")) {
                     Printer.printEndMessage();
+                } else if (inputArray[0].equals("deadline") || inputArray[0].equals("event") || inputArray[0].equals("todo")) {
+                    try {
+                        throw new DukeArgumentException("task description");
+                    } catch (DukeArgumentException e) {
+                        System.out.println(e);
+                    }
+                } else if (inputArray[0].equals("mark")) {
+                    try {
+                        throw new DukeArgumentException("index");
+                    } catch (DukeArgumentException e) {
+                        System.out.println(e);
+                    }
+                } else if (inputArray[0].equals("unmark")) {
+                    try {
+                        throw new DukeArgumentException("index");
+                    } catch (DukeArgumentException e) {
+                        System.out.println(e);
+                    }
                 } else {
-                    System.out.println("Unknown command: " + inputArray[0]);
+                    try {
+                        throw new DukeCommandException(inputArray[0]);
+                    } catch (DukeCommandException e) {
+                        System.out.println(e);
+                    }
                 }
             } else {
                 if (firstArg.equals("mark")) {
@@ -39,25 +65,45 @@ public class Duke {
                     taskList.get(Integer.parseInt(inputArray[1]) - 1).unmark();
                 } else if (firstArg.equals("deadline")) {
                     int indexOfBy = input.indexOf("\\by ");
-                    String content = input.substring(firstArg.length() + 1, indexOfBy - 1);
-                    String by = input.substring(indexOfBy + 4);
-                    Task taskObj = new Deadline(content, by);
-                    Printer.echoForAdd(taskObj, taskList.size());
-                    taskList.add(taskObj);
+                    if (indexOfBy == -1) {
+                        try {
+                            throw new DukeArgumentException("\\by deadlineTime");
+                        } catch (DukeArgumentException e) {
+                            System.out.println(e);
+                        }
+                    } else {
+                        String content = input.substring(firstArg.length() + 1, indexOfBy - 1);
+                        String by = input.substring(indexOfBy + 4);
+                        Task taskObj = new Deadline(content, by);
+                        Printer.echoForAdd(taskObj, taskList.size());
+                        taskList.add(taskObj);
+                    }
                 } else if (firstArg.equals("event")) {
                     int indexOfAt = input.indexOf("\\at ");
-                    String content = input.substring(firstArg.length() + 1, indexOfAt - 1);
-                    String at = input.substring(indexOfAt + 4);
-                    Task taskObj = new Event(content, at);
-                    Printer.echoForAdd(taskObj, taskList.size());
-                    taskList.add(taskObj);
+                    if (indexOfAt == -1) {
+                        try {
+                            throw new DukeArgumentException("\\at eventTime");
+                        } catch (DukeArgumentException e) {
+                            System.out.println(e);
+                        }
+                    } else {
+                        String content = input.substring(firstArg.length() + 1, indexOfAt - 1);
+                        String at = input.substring(indexOfAt + 4);
+                        Task taskObj = new Event(content, at);
+                        Printer.echoForAdd(taskObj, taskList.size());
+                        taskList.add(taskObj);
+                    }
                 } else if (firstArg.equals("todo")) {
                     String content = input.substring(firstArg.length() + 1);
                     Task taskObj = new ToDo(content);
                     Printer.echoForAdd(taskObj, taskList.size());
                     taskList.add(taskObj);
                 } else {
-                    System.out.println("Unknown Command: " + input);
+                    try {
+                        throw new DukeCommandException(inputArray[0]);
+                    } catch (DukeCommandException e) {
+                        System.out.println(e);
+                    }
                 }
             }
         }
