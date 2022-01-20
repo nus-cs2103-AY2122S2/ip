@@ -107,6 +107,28 @@ class ToDoList {
                             break;
                         }
                     }
+                case "delete":
+                    if (inputSplit.length == 1 || inputSplit[1].trim().length() == 0) {
+                        throw new SiriException("Please ENTER the item number to delete!!");
+                    } else if (lst.size() == 0) {
+                        throw new SiriException("There is currently no tasks!!");
+                    } else {
+                        try {
+                            int index = Integer.parseInt(inputSplit[1]);
+                            index--;
+
+                            if (index >= lst.size() || index < 0) {
+                                throw new SiriException("Please ENTER a number within the number of tasks!!");
+                            } else {
+                                this.deleteTask(index);
+                                break;
+                            }
+                            
+                        } catch (NumberFormatException nfe) {
+                            throw new SiriException("Please ENTER a valid item number to unmark!!");
+                        }
+                    }
+
                 default:
                     throw new SiriException("OPPS!! I do not understand what you had keyed!! Please try again!!");
             }
@@ -121,6 +143,14 @@ class ToDoList {
         lst.add(task);
         System.out.printf("Got it! I've added this task:\n%s\nTotal tasks on the list: %d\n",
                             task.getItemAndStatus(), this.lst.size());
+    }
+
+    /*
+        Method to delete task from Task List
+    */
+    public void deleteTask(int index) {
+        Task removedTask = lst.remove(index);
+        System.out.printf("Successfully removed the following task:\n%s\nYou have %d tasks remaining!!\n", removedTask.getItemAndStatus(), this.lst.size());
     }
 
     /*
