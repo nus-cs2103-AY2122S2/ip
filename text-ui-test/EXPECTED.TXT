@@ -55,4 +55,18 @@ Here are the tasks in your list
 3.[E][ ] event project meeting (at: Mon 2-4pm)
 
 Enter command below:
+Noted. I've removed this task:
+   [E][ ] event project meeting (at: Mon 2-4pm)
+Now you have 2 tasks in the list.
+Enter command below:
+Noted. I've removed this task:
+   [D][ ] deadline return book (by: Sunday)
+Now you have 1 tasks in the list.
+Enter command below:
+Noted. I've removed this task:
+   [T][ ] borrow book
+Now you have 0 tasks in the list.
+Enter command below:
+You have no tasks at the moment!
+Enter command below:
 Bye. Hope to see you again soon!
