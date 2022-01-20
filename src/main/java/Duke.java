@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -46,8 +47,43 @@ public class Duke {
                 System.out.println("OK, I've marked this task as not done yet:");
                 System.out.println("  " + task.toString());
             } else {
-                tasks.add(new Task(userInput));
-                System.out.println("  Added:  " + userInput);
+                String[] userInputArr = userInput.split(" ");
+                String instruction = userInputArr[0];
+                String title = String.join(" ",
+                        Arrays.copyOfRange(userInputArr, 1, userInputArr.length));
+
+                if (instruction.equals("todo")) {
+                    Task todo = new Todo(title);
+                    tasks.add(todo);
+
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(todo);
+                } else if (instruction.equals("deadline")) {
+                    String[] taskArr = title.split(" /by");
+                    String taskTitle = taskArr[0];
+                    String dueBy = taskArr[1];
+
+                    Task deadline = new Deadline(taskTitle, dueBy);
+                    tasks.add(deadline);
+
+                    System.out.println("Got it. I've added this task: ");
+                    System.out.println(deadline.toString());
+                } else if (instruction.equals("event")) {
+                    String[] taskArr = title.split(" /at");
+                    String taskTitle = taskArr[0];
+                    String eventAt = taskArr[1];
+
+                    Task event = new Event(taskTitle, eventAt);
+                    tasks.add(event);
+
+                    System.out.println("Got it. I've added this task: ");
+                    System.out.println(event.toString());
+                } else {
+                    tasks.add(new Task(userInput));
+                    System.out.println("Added: " + userInput);
+                }
+
+                System.out.println("Now you have " + tasks.size() + " task" + parseTaskSize(tasks.size()) + "in the list.");
             }
 
             System.out.println("  ===================================");
@@ -61,10 +97,14 @@ public class Duke {
 
     public static String parseUserInput(String userInput) {
         String[] userInputArr = userInput.split(" ", 2);
-        if(userInputArr.length > 2) {
+        if (userInputArr.length > 2) {
             return "";
         }
 
         return userInputArr[0];
+    }
+
+    public static String parseTaskSize (int size) {
+        return size > 1 ? "s " : " ";
     }
 }
