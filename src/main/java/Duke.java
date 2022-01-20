@@ -1,6 +1,10 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+    private static final List<String> tasks = new ArrayList<>();
+
     public static void main(String[] args) {
         new Duke().run();
     }
@@ -15,10 +19,16 @@ public class Duke {
             System.out.print("Enter command: \t");
             commandLine = sc.nextLine().trim();
 
-            if ("bye".equals(commandLine)) {
+            switch (commandLine.toLowerCase()) {
+            case "bye":
                 exit();
-            } else {
-                echo("\t" + commandLine);
+                break;
+            case "list":
+                listTasks();
+                break;
+            default:
+                addTask(commandLine);
+                break;
             }
         }
     }
@@ -57,5 +67,24 @@ public class Duke {
     public void printLine() {
         String horizontalLine = "\t" + "________________________________________________________";
         System.out.println(horizontalLine);
+    }
+
+    public void addTask(String commandLine) {
+        tasks.add(commandLine);
+        echo("\t" + "added: " + commandLine);
+    }
+
+    public void listTasks() {
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < tasks.size(); i++) {
+            if (i != 0) {
+                sb.append(System.lineSeparator());
+            }
+
+            sb.append("\t").append(i + 1).append(". ").append(tasks.get(i));
+        }
+
+        echo(sb.toString());
     }
 }
