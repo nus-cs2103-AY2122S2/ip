@@ -10,7 +10,7 @@ public class EventTask extends Task {
     @Override
     public String toString() {
         return String.format("[E][%s] %s %s",
-                getStatusIcon(), name, String.format(" (at: %s)", this.date));
+                getStatusIcon(), name, String.format("(at: %s)", this.date));
     }
 
 }
