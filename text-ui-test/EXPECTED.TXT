@@ -1,9 +1,15 @@
 Hello! I'm Bernie
 What's up?
 ___________________________________________________________
-No input given!
+Say something???
+___________________________________________________________
+That's not a task number! Put a number.
 ___________________________________________________________
 Task number does not exist!
+___________________________________________________________
+Where's the description?
+___________________________________________________________
+Description can't be numbers? We need String!
 ___________________________________________________________
 Got ya. Added:
 [T][ ] borrow book
@@ -30,11 +36,31 @@ Here's what you need to do buddy:
 ___________________________________________________________
 Not a valid type of task!
 ___________________________________________________________
-Wrong input. Type this: mark taskNumber
+Wrong input. Type this: mark/unmark taskNumber
+___________________________________________________________
+Where's the description?
+___________________________________________________________
+Description can't be numbers? We need String!
+___________________________________________________________
+Where's your time input?
+___________________________________________________________
+Where's your time input?
+___________________________________________________________
+Where's the description?
 ___________________________________________________________
 Got ya. Added:
 [D][ ] return book (by: Sunday)
 You got 2 tasks waiting for ya!
+___________________________________________________________
+Where's the description?
+___________________________________________________________
+Description can't be numbers? We need String!
+___________________________________________________________
+Where's your time input?
+___________________________________________________________
+Where's your time input?
+___________________________________________________________
+Where's the description?
 ___________________________________________________________
 Got ya. Added:
 [E][ ] project meeting (at: Mon 2-4pm)

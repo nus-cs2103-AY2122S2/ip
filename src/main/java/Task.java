@@ -17,17 +17,17 @@ public class Task {
         this.isDone = false;
     }
 
-    void markDone() throws Exception {
+    void markDone() throws BernieException {
         if (isDone) {
-            throw new Exception("Cannot mark a task already done!");
+            throw new BernieException("Cannot mark a task already done!");
         } else {
             this.isDone = true;
         }
     }
 
-    void markNotDone() throws Exception {
+    void markNotDone() throws BernieException {
         if (!isDone) {
-            throw new Exception("Cannot unmark a task not done!");
+            throw new BernieException("Cannot unmark a task not done!");
         } else {
             this.isDone = false;
         }
