@@ -4,15 +4,11 @@ import java.util.ArrayList;
 public class Duke {
     private static ArrayList<Task> taskList = new ArrayList<>();
     private static int taskNum = 0;
-    private static String conformation = "Got it. I've added this task:";
     private static Scanner sc;
-
-    public static void main(String[] args) {
-        String greet = "Hello! I'm Duke\n" + "What can I do for you?";
-        System.out.println(greet);
-        sc = new Scanner(System.in);
-        getUserInput();
-        sc.close();
+    enum TaskType{
+        TODO,
+        DEADLINE,
+        EVENT
     }
 
     /**
@@ -33,19 +29,19 @@ public class Duke {
                 if (remaining_word.equals("")) {
                     errorMessage("OOPS!!! The description of a deadline cannot be empty. :<");
                 }
-                addDeadlineTask(remaining_word);
+                addTasks(remaining_word, TaskType.DEADLINE);
                 break;
             case "event":
                 if (remaining_word.equals("")) {
                     errorMessage("OOPS!!! The description of a event cannot be empty. :<");
                 }
-                addEventTask(remaining_word);
+                addTasks(remaining_word,TaskType.EVENT);
                 break;
             case "todo":
                 if (remaining_word.equals("")) {
                     errorMessage("OOPS!!! The description of a todo cannot be empty. :<");
                 }
-                addTodoTask(remaining_word);
+                addTasks(remaining_word,TaskType.TODO);
                 break;
             case "mark":
                 if (remaining_word.equals("")) {
@@ -96,7 +92,7 @@ public class Duke {
      */
     private static void displayList() {
         if (taskNum == 0) {
-            System.out.println("No task");
+            System.out.println("No task for now");
             getUserInput();
         } else {
             System.out.println("Here are the tasks in your list:");
@@ -109,54 +105,46 @@ public class Duke {
     }
 
     /**
-     * To add the deadline task to the list.
+     * To add the different tasks into the list.
      *
-     * @param task the task with deadline.
+     * @param task task to be added.
+     * @param type type of task.
      */
-    private static void addDeadlineTask(String task) {
-        System.out.println(conformation);
-        String[] actions = task.split("/by", 2);
-        Deadline currTask = new Deadline(actions[0].trim(), actions[1].trim());
-        taskList.add(currTask);
-        taskNum++;
-        System.out.println(currTask + "\n" + "Now you have " + taskNum
-                + " tasks in the list.");
-        getUserInput();
+    private static void addTasks(String task, TaskType type) {
+        System.out.println("Got it. I've added this task:");
+
+        switch (type) {
+        case TODO:
+            ToDo todoTask = new ToDo(task);
+            taskList.add(todoTask);
+            taskNum++;
+            System.out.println(todoTask + "\n" + "Now you have " + taskNum
+                    + " tasks in the list.");
+            getUserInput();
+            break;
+        case EVENT:
+            String[] eventActions = task.split("/at", 2);
+            Event eventTask = new Event(eventActions[0].trim(), eventActions[1].trim());
+            taskList.add(eventTask);
+            taskNum++;
+            System.out.println(eventTask + "\n" + "Now you have " + taskNum
+                    + " tasks in the list.");
+            getUserInput();
+            break;
+        case DEADLINE:
+            String[] deadlineActions = task.split("/by", 2);
+            Deadline deadlineTask = new Deadline(deadlineActions[0].trim(), deadlineActions[1].trim());
+            taskList.add(deadlineTask);
+            taskNum++;
+            System.out.println(deadlineTask + "\n" + "Now you have " + taskNum
+                    + " tasks in the list.");
+            getUserInput();
+            break;
+        }
     }
 
     /**
-     * To add the event task to the list.
-     *
-     * @param task the task that represent the event.
-     */
-    private static void addEventTask(String task) {
-        System.out.println(conformation);
-        String[] actions = task.split("/at", 2);
-        Event currTask = new Event(actions[0].trim(), actions[1].trim());
-        taskList.add(currTask);
-        taskNum++;
-        System.out.println(currTask + "\n" + "Now you have " + taskNum
-                + " tasks in the list.");
-        getUserInput();
-    }
-
-    /**
-     * To add the todo task to the list.
-     *
-     * @param task the task that represent the todo.
-     */
-    private static void addTodoTask(String task) {
-        System.out.println(conformation);
-        ToDo currTask = new ToDo(task);
-        taskList.add(currTask);
-        taskNum++;
-        System.out.println(currTask + "\n" + "Now you have " + taskNum
-                + " tasks in the list.");
-        getUserInput();
-    }
-
-    /**
-     * Marked the task as completed.
+     * To mark the task as completed.
      *
      * @param task the task that needed to be mark.
      */
@@ -184,7 +172,7 @@ public class Duke {
     }
 
     /**
-     * Delete the tasks from the list.
+     * To delete the tasks from the list.
      *
      * @param task task to be deleted.
      */
@@ -197,5 +185,13 @@ public class Duke {
         System.out.println(currTask + "\n" + "Now you have " + taskNum
                 + " tasks in the list.");
         getUserInput();
+    }
+
+    public static void main(String[] args) {
+        String greet = "Hello! I'm Duke\n" + "What can I do for you?";
+        System.out.println(greet);
+        sc = new Scanner(System.in);
+        getUserInput();
+        sc.close();
     }
 }
