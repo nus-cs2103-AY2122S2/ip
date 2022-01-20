@@ -1,6 +1,6 @@
 package core;
 
-public class InputValidator {
+public class InputIdentifier {
     private static final String LIST_COMMAND = "list";
     private static final String MARK_COMMAND = "mark";
     private static final String UNMARK_COMMAND = "unmark";
@@ -22,7 +22,7 @@ public class InputValidator {
         } else if (inputData.equalsIgnoreCase(LIST_COMMAND)) {
             return InputType.LIST;
         } else {
-            return InputType.ADD;
+            return InputType.UNKNOWN;
         }
     }
 }

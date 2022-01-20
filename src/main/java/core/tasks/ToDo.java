@@ -1,5 +1,6 @@
-package core.task;
+package core.tasks;
 
+import core.exceptions.ToDoEmptyException;
 import utilities.OutputFormatter;
 
 public class ToDo extends Task {
@@ -8,7 +9,10 @@ public class ToDo extends Task {
         super(description);
     }
 
-    public static ToDo getInstance(String description) {
+    public static ToDo getInstance(String description) throws ToDoEmptyException {
+        if (description.isEmpty() || description.isBlank()) {
+            throw new ToDoEmptyException();
+        }
         return new ToDo(description);
     }
 

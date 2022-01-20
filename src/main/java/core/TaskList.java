@@ -1,5 +1,6 @@
 package core;
 
+import core.tasks.Task;
 import utilities.OutputFormatter;
 
 import java.util.ArrayList;

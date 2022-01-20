@@ -1,6 +1,13 @@
 package core;
 
+import core.exceptions.TaskAlreadyDoneException;
+import core.exceptions.ToDoEmptyException;
+import core.tasks.Deadline;
+import core.tasks.Event;
+import core.tasks.Task;
+import core.tasks.ToDo;
 import utilities.OutputFormatter;
+import core.exceptions.TaskAlreadyUnmarkedException;
 
 import static java.lang.Integer.parseInt;
 
@@ -16,13 +23,10 @@ public class InputHandler {
     }
 
     public String handleInput(String inputData) {
-        InputType inputType = InputValidator.determineInputType(inputData);
+        InputType inputType = InputIdentifier.determineInputType(inputData);
         OutputFormatter outputFormatter = OutputFormatter.getInstance();
 
         switch (inputType) {
-            case ADD :
-                handleAdd(inputData, outputFormatter);
-                break;
             case MARK :
                 handleMark(inputData, outputFormatter);
                 break;
@@ -48,23 +52,32 @@ public class InputHandler {
         return outputFormatter.getFormattedOutput();
     }
 
-    private void handleAdd(String inputData, OutputFormatter outputFormatter) {
-        this.taskList.addTask(Task.getInstance(inputData));
-        outputFormatter.appendAll("added: ", inputData);
-    }
 
     private void handleMark(String inputData, OutputFormatter outputFormatter) {
-        String[] inputSequenceSeparated = inputData.split(" ");
-        Task taskToBeMarked = this.taskList.getTaskByTaskId(parseInt(inputSequenceSeparated[1]));
-        taskToBeMarked.complete();
-        outputFormatter.appendAll("Nice! I've marked this task as done:", "\n", taskToBeMarked);
+        try {
+            String[] inputSequenceSeparated = inputData.split(" ");
+            Task taskToBeMarked = this.taskList.getTaskByTaskId(parseInt(inputSequenceSeparated[1]));
+            taskToBeMarked.complete();
+            outputFormatter.appendAll("Nice! I've marked this task as done:", "\n", taskToBeMarked);
+        } catch (NumberFormatException e) {
+            outputFormatter.append("This is not a valid task number!");
+        } catch (IndexOutOfBoundsException | TaskAlreadyDoneException e) {
+            outputFormatter.append(e.getMessage());
+        }
+
     }
 
     private void handleUnmark(String inputData, OutputFormatter outputFormatter) {
-        String[] inputSequenceSeparated = inputData.split(" ");
-        Task taskToBeUnmarked = this.taskList.getTaskByTaskId(parseInt(inputSequenceSeparated[1]));
-        taskToBeUnmarked.markAsNotComplete();
-        outputFormatter.appendAll("OK, I've marked this task as not done yet:", "\n", taskToBeUnmarked);
+        try {
+            String[] inputSequenceSeparated = inputData.split(" ");
+            Task taskToBeUnmarked = this.taskList.getTaskByTaskId(parseInt(inputSequenceSeparated[1]));
+            taskToBeUnmarked.markAsNotComplete();
+            outputFormatter.appendAll("OK, I've marked this task as not done yet:", "\n", taskToBeUnmarked);
+        } catch (NumberFormatException e) {
+            outputFormatter.append("This is not a valid task number!");
+        } catch (IndexOutOfBoundsException | TaskAlreadyUnmarkedException e) {
+            outputFormatter.append(e.getMessage());
+        }
     }
 
     private void handleList(OutputFormatter outputFormatter) {
@@ -72,9 +85,14 @@ public class InputHandler {
     }
 
     private void handleToDo(String inputData, OutputFormatter outputFormatter) {
-        String[] inputSequenceSeparated = inputData.split(" ");
-        taskList.addTask(ToDo.getInstance(inputSequenceSeparated[1]));
-        outputFormatter.appendAll("Got it. I've added this task:", "\n", taskList.getTaskByIndex(taskList.getLength() - 1), "\n", "Now you have ", taskList.getLength(), " task(s) in the list.");
+        try {
+            String description = inputData.substring(4);
+            taskList.addTask(ToDo.getInstance(description));
+            outputFormatter.appendAll("Got it. I've added this task:", "\n", taskList.getTaskByIndex(taskList.getLength() - 1), "\n", "Now you have ", taskList.getLength(), " task(s) in the list.");
+        } catch (ToDoEmptyException e) {
+            outputFormatter.append(e.getMessage());
+        }
+
     }
 
     private void handleDeadline(String inputData, OutputFormatter outputFormatter) {
@@ -92,7 +110,7 @@ public class InputHandler {
     }
 
     private void handleUnknown(OutputFormatter outputFormatter) {
-        outputFormatter.appendAll("This is an unknown command");
+        outputFormatter.appendAll("OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
 }

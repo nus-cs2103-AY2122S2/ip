@@ -1,5 +1,7 @@
-package core.task;
+package core.tasks;
 
+import core.exceptions.TaskAlreadyDoneException;
+import core.exceptions.TaskAlreadyUnmarkedException;
 import utilities.OutputFormatter;
 
 public class Task {
@@ -47,11 +49,17 @@ public class Task {
         }
     }
 
-    public void complete() {
+    public void complete() throws TaskAlreadyDoneException {
+        if (this.isCompleted()) {
+            throw new TaskAlreadyDoneException();
+        }
         this.isCompleted = true;
     }
 
-    public void markAsNotComplete() {
+    public void markAsNotComplete() throws TaskAlreadyUnmarkedException {
+        if (!this.isCompleted()) {
+            throw new TaskAlreadyUnmarkedException();
+        }
         this.isCompleted = false;
     }
 
