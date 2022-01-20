@@ -1,21 +1,23 @@
 /**
- * Adds a task to the task list
+ * Generates the correct type of task and adds it to the task list
  */
 
 public class AddTaskCommand extends Command {
 
-    private String input;
+    private String input; // Details of the task
+    private String type; // Type of task
 
-    public AddTaskCommand(String input) {
+    public AddTaskCommand(String input, String type) {
         this.input = input;
+        this.type = type;
     }
 
     /**
      * Formats the echo for the task that was added to the user as confirmation
      * @return Formatted echo
      */
-    private String formatOutput() {
-        String response = "added: " + input;
+    private String formatOutput(Task newTask) {
+        String response = "added: " + newTask.toString();
         String formattedString = Duke.indent(response, 1);
         String finalFormatted = Duke.formatLines(formattedString);
 
@@ -24,10 +26,22 @@ public class AddTaskCommand extends Command {
 
     @Override
     public void execute() {
-        TaskManager.taskList.add(new Task(input));
+        Task newTask;
+        if (this.type.equals("todo")) {
+            newTask = new TodoTask(this.input);
+        } else if (this.type.equals("deadline")) {
+            newTask = new DeadlineTask(this.input);
+        } else if (this.type.equals("event")) {
+            newTask = new EventTask(this.input);
+        } else {
+            newTask = null;
+        }
 
-        // Console prints
-        String output = formatOutput();
-        System.out.println(output); // Echo confirmation
+        // Adding task to TaskManager
+        TaskManager.taskList.add(newTask);
+
+        // System prints
+        String output = formatOutput(newTask);
+        System.out.println(output);
     }
 }
