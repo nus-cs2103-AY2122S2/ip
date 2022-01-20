@@ -142,9 +142,7 @@ public class Duke {
                             throw new DukeException("Task name cannot be empty!");
                         }
 
-                        if (inCmd.equals("todo")) {
-                            task = new ToDo(taskArgs.get(""));
-                        } else if (inCmd.equals("deadline")) {
+                        if (inCmd.equals("deadline")) {
                             if (!taskArgs.containsKey("by") || taskArgs.get("by").isEmpty()) {
                                 throw new DukeException(String.format("You need a time for your deadline! Try: deadline %s /by next Sunday", taskArgs.get("")));
                             }
@@ -155,7 +153,7 @@ public class Duke {
                             }
                             task = new Event(taskArgs.get(""), taskArgs.get("at"));
                         } else {
-                            throw new RuntimeException(String.format("Got unexpected command here: %s", inCmd));
+                            task = new ToDo(taskArgs.get(""));
                         }
                         
                         tasks.add(task);
