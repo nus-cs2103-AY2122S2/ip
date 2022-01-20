@@ -48,11 +48,13 @@ public class Duke {
                case "list":
                    dialog(enumerateList(tasks).toArray(String[]::new));
                    break;
+
                case "bye":
                    dialog(new String[] {
                            "Bye. Hope to see you again soon!"
                    });
-                   System.exit(0);
+                   return; // to shut the linter up
+
                default:
                    tasks.add(input);
                    dialog(new String[] {
