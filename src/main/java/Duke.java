@@ -14,16 +14,43 @@ public class Duke {
         int currIndex = 0;
         System.out.println("____________________________________________________________\nHello! I'm Duke\nWhat can I do for you?\n____________________________________________________________");
         String input = sc.nextLine();
-        String[] splitted = input.split(" ");
+        String[] splitted = input.split(" ", 2);
         while (!input.equals("bye")) {
             if (input.equals("list")) {
                 System.out.println("____________________________________________________________\n");
-                System.out.print("Here are the tasks in your list:");
-                for (int i=0; i < currIndex; i++ ) {
-                    String checkbox = taskList[i].done? "[X]" : "[ ]";
-                    System.out.println(String.valueOf(i+1) + ". " + checkbox + " " + taskList[i].task);
+                System.out.println("Here are the tasks in your list:");
+                for (int i = 0; i < currIndex; i++) {
+                    String checkbox = taskList[i].done ? "[X]" : "[ ]";
+                    String statusbox = taskList[i].status.equals("") ? "" : "[" + taskList[i].status + "]";
+                    System.out.println(String.valueOf(i + 1) + ". " + statusbox + checkbox + " " + taskList[i].task);
                 }
                 System.out.println("____________________________________________________________\n");
+            } else if (splitted[0].equals("todo")) {
+                taskList[currIndex] = new Task(input, false, "T");
+                currIndex += 1;
+                System.out.println("____________________________________________________________\n" +
+                        "Got it. I've added this task: \n" +
+                        "[T][] " + taskList[currIndex-1].task +
+                        "\nNow you have " + String.valueOf(currIndex) + " tasks in the list."
+                        + "\n____________________________________________________________");
+            } else if (splitted[0].equals("deadline")) {
+                String[] time = splitted[1].split("/by");
+                taskList[currIndex] = new Task(time[0] + "(by" + time[1] + ")", false, "D");
+                currIndex += 1;
+                System.out.println("____________________________________________________________\n" +
+                        "Got it. I've added this task: \n" +
+                        "[D][] " + taskList[currIndex-1].task +
+                        "\nNow you have " + String.valueOf(currIndex) + " tasks in the list."
+                        + "\n____________________________________________________________");
+            } else if (splitted[0].equals("event")) {
+                String[] time = splitted[1].split("/at");
+                taskList[currIndex] = new Task(time[0] + "(at" + time[1] + ")", false, "E");
+                currIndex += 1;
+                System.out.println("____________________________________________________________\n" +
+                        "Got it. I've added this task: \n" +
+                        "[E][] " + taskList[currIndex-1].task +
+                        "\nNow you have " + String.valueOf(currIndex) + " tasks in the list."
+                        + "\n____________________________________________________________");
             } else if (splitted[0].equals("mark")) {
                 int index = Integer.valueOf(splitted[1]);
                 taskList[index-1].done = true;
@@ -42,7 +69,7 @@ public class Duke {
                 System.out.println("____________________________________________________________\n" +
                         "added: " + input + "\n" +
                         "____________________________________________________________");
-                taskList[currIndex] = new Task(input, false);
+                taskList[currIndex] = new Task(input, false, "");
                 currIndex += 1;
             }
             input = sc.nextLine();
