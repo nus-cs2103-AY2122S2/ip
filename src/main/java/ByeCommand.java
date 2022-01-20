@@ -3,7 +3,7 @@
  */
 public class ByeCommand extends Command {
 
-    final String EXIT = "Bye. Hope to see you again soon!";
+    final String EXIT = "Duke terminated";
 
     private String formatOutput() {
         String formattedBye = Duke.indent(EXIT, 1);

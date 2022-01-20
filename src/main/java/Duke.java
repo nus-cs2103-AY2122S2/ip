@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         // Constant strings
-        final String INTRO = "Hello! I'm Duke\n\tWhat can I do for you?";
+        final String INTRO = "Duke initialised";
 
         // Init
         Scanner sc = new Scanner(System.in);
