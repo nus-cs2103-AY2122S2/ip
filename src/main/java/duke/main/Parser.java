@@ -4,7 +4,6 @@ import duke.commands.*;
 
 
 public class Parser {
-
     // logic that determines how Burp will reply
     public static Command parseCommands(Ui.Reply type, TaskList toDoList, String cmd) throws DukeException {
         String[] cmd_split = cmd.split(" ");
@@ -12,11 +11,11 @@ public class Parser {
         case LIST:
             return new ListCommand(toDoList, cmd);
         case TODO:
-            return new AddToDoCommand(toDoList, cmd);
+            return new AddToDoCommand(toDoList, cmd, Duke.storage);
         case DEADLINE:
-            return new AddDeadlineCommand(toDoList, cmd);
+            return new AddDeadlineCommand(toDoList, cmd, Duke.storage);
         case EVENT:
-            return new AddEventCommand(toDoList, cmd);
+            return new AddEventCommand(toDoList, cmd, Duke.storage);
         case MARK:
             return new MarkCommand(toDoList, Integer.parseInt(cmd_split[1]) - 1);
         case UNMARK:

@@ -4,9 +4,13 @@ import duke.tasks.Deadline;
 import duke.main.DukeException;
 import duke.main.TaskList;
 import duke.main.Parser;
+import duke.main.Storage;
+import java.io.IOException;
 
 public class AddDeadlineCommand extends Command<String> {
-    public AddDeadlineCommand(TaskList toDoList, String cmd) throws DukeException {
+    private final Storage storage;
+    public AddDeadlineCommand(TaskList toDoList, String cmd, Storage storage) throws DukeException {
+        this.storage = storage;
         this.runCommand(toDoList, cmd);
     }
 
@@ -18,8 +22,11 @@ public class AddDeadlineCommand extends Command<String> {
             Deadline newDeadline = new Deadline(deadlineName, false, deadline);
             toDoList.add(newDeadline);
             System.out.println(Parser.formatMsg("Got it. I've added this task:\n\t" + newDeadline + "\n\tNow you have " + toDoList.size() + " tasks in the list."));
+            storage.writeFileContent(toDoList);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(Parser.formatMsg("☹ OOPS!!! The description of a deadline cannot be empty."));
+        } catch (IOException e) {
+            throw new DukeException(Parser.formatMsg("IOException caught") + e);
         }
     }
 

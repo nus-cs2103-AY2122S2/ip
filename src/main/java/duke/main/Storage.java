@@ -12,15 +12,15 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Storage {
-    String filepath;
+    private static String filepath;
 
     public Storage(String filepath) {
         this.filepath = filepath;
     }
 
     // Reads and adds the file's content into the array
-    public static TaskList addFileContent(String filePath) throws FileNotFoundException {
-        File f = new File(filePath);
+    public static TaskList addFileContent() throws FileNotFoundException {
+        File f = new File(Storage.filepath);
         TaskList toDoList = new TaskList();
         // save commands into the file
         Scanner s = new Scanner(f);
@@ -54,7 +54,7 @@ public class Storage {
 
     // Writes the contents of toDoList into storage with specific formatting
     public static void writeFileContent(TaskList toDoList) throws IOException {
-        FileWriter fw = new FileWriter("./tasklist.txt");
+        FileWriter fw = new FileWriter(Storage.filepath);
         for (int i = 0; i < toDoList.size(); i++) {
             Task currentTask = toDoList.get(i);
             fw.write(currentTask.getStringCmd());

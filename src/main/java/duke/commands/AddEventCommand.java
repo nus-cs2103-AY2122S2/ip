@@ -1,12 +1,16 @@
 package duke.commands;
 
+import java.io.IOException;
 import duke.tasks.Event;
 import duke.main.DukeException;
 import duke.main.TaskList;
 import duke.main.Parser;
+import duke.main.Storage;
 
 public class AddEventCommand extends Command<String> {
-    public AddEventCommand(TaskList toDoList, String cmd) throws DukeException {
+    private final Storage storage;
+    public AddEventCommand(TaskList toDoList, String cmd, Storage storage) throws DukeException {
+        this.storage = storage;
         this.runCommand(toDoList, cmd);
     }
 
@@ -18,8 +22,12 @@ public class AddEventCommand extends Command<String> {
             Event newEvent = new Event(eventName, false, eventDateTime);
             toDoList.add(newEvent);
             System.out.println(Parser.formatMsg("Got it. I've added this task:\n\t" + newEvent + "\n\tNow you have " + toDoList.size() + " tasks in the list."));
+            storage.writeFileContent(toDoList);
+
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(Parser.formatMsg("☹ OOPS!!! The description of an event cannot be empty."));
+        } catch (IOException e) {
+            throw new DukeException(Parser.formatMsg("IOException caught") + e);
         }
     }
 
