@@ -4,11 +4,10 @@ public class Deadline extends Task {
     /**
      * Constructs a Deadline class for tasks that needs to be done before a timing
      * @param description String
-     * @param id int, the task number
      * @param by String, the deadline to meet by
      */
-    Deadline(String description, int id, String by) {
-        super(description, id);
+    Deadline(String description, String by) {
+        super(description);
         this.by = by;
     }
 

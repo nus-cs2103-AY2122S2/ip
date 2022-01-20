@@ -37,6 +37,8 @@ public class Bernie {
                 mark(input);
             } else if (input.equals("")) {
                 throw new BernieException("Say something???");
+            } else if (isDeleteInput(input)) {
+                delete(input);
             } else {
                 add(input);
             }
@@ -57,6 +59,14 @@ public class Bernie {
      */
     boolean isMarkInput(String input) {
         return input.indexOf("mark") == 0 || input.indexOf("unmark") == 0;
+    }
+    /**
+     * Verifies if an input is of "delete" type
+     * @param input String, user input
+     * @return boolean
+     */
+    boolean isDeleteInput(String input) {
+        return input.indexOf("delete") == 0;
     }
 
     /**
@@ -96,6 +106,20 @@ public class Bernie {
         return input.indexOf(taskType) == 0;
     }
 
+    void delete(String input) {
+        try {
+            String taskNum = getParams("delete", input)[0];
+            Task deletedTask = tasks.deleteTask(taskNum);
+            System.out.printf("Got ya. Removed:\n%s\nYou got %d tasks waiting for ya!\n",
+                    deletedTask, tasks.numTasksLeft());
+            System.out.println(lineBreak);
+        } catch (BernieException e){
+            System.out.println(e.getMessage());
+            System.out.println(lineBreak);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * Splits a user input into an array containing parameters for creating Task accordingly,
      * depending on taskType.
@@ -105,6 +129,8 @@ public class Bernie {
      * For "todo": an array of 1, containing description.
      * For "deadline": an array of 2: [description, by]
      * For "event": an array of 2: [description, at]
+     * For "mark": an array of 2: [action, taskNum]
+     * For "delete": an array of 1: [taskNum]
      */
     String[] getParams(String taskType, String input) throws BernieException {
         String description;
@@ -130,7 +156,13 @@ public class Bernie {
             case "mark":
                 inputArr = input.split(" ");
                 // check valid
-                checkMarkInput(inputArr);
+                checkMarkOrDeleteInput(inputArr, "mark");
+                break;
+            case "delete":
+                inputArr = input.split(" ");
+                checkMarkOrDeleteInput(inputArr, "delete");
+                inputArr = new String[]{inputArr[1]};
+                break;
             default:
                 break;
         }
@@ -174,22 +206,26 @@ public class Bernie {
     }
 
     /**
-     * Checks for valid "mark" action inputs. Throws error if it is not valid.
+     * Checks for valid "mark" or "delete" action inputs. Throws error if it is not valid.
      * @param inputArr String[], the user input String split into an array of String for processing
-     *                 parameters for marking/unmarking a Task
+     *                 parameters for the action
      * @throws BernieException for invalid inputs
      */
-    void checkMarkInput(String[] inputArr) throws BernieException {
+    void checkMarkOrDeleteInput(String[] inputArr, String action) throws BernieException {
         if (inputArr.length == 2) {
             try {
-                String taskNumber = inputArr[1];
-                Integer.parseInt(taskNumber);
-                tasks.taskExists(taskNumber);
+                String taskNum = inputArr[1];
+                Integer.parseInt(taskNum);
+                tasks.taskExists(taskNum);
             } catch (NumberFormatException nfe) {
                 throw new BernieException("That's not a task number! Put a number.");
             }
         } else {
-            throw new BernieException("Wrong input. Type this: mark/unmark taskNumber");
+            if (action.equals("mark")) {
+                throw new BernieException("Wrong input. Type this: mark/unmark taskNumber");
+            } else {
+                throw new BernieException("Wrong input. Type this: delete taskNumber");
+            }
         }
     }
 

@@ -105,4 +105,43 @@ Here's what you need to do buddy:
 3. [E][ ] project meeting (at: Mon 2-4pm)
 4. [T][ ] clean dishes
 ___________________________________________________________
+Wrong input. Type this: delete taskNumber
+___________________________________________________________
+That's not a task number! Put a number.
+___________________________________________________________
+Task number does not exist!
+___________________________________________________________
+Got ya. Removed:
+[D][X] return book (by: Sunday)
+You got 3 tasks waiting for ya!
+___________________________________________________________
+Here's what you need to do buddy:
+1. [T][ ] borrow book
+2. [E][ ] project meeting (at: Mon 2-4pm)
+3. [T][ ] clean dishes
+___________________________________________________________
+Got ya. Removed:
+[T][ ] clean dishes
+You got 2 tasks waiting for ya!
+___________________________________________________________
+Here's what you need to do buddy:
+1. [T][ ] borrow book
+2. [E][ ] project meeting (at: Mon 2-4pm)
+___________________________________________________________
+Got ya. Removed:
+[E][ ] project meeting (at: Mon 2-4pm)
+You got 1 tasks waiting for ya!
+___________________________________________________________
+Here's what you need to do buddy:
+1. [T][ ] borrow book
+___________________________________________________________
+Got ya. Removed:
+[T][ ] borrow book
+You got 0 tasks waiting for ya!
+___________________________________________________________
+Here's what you need to do buddy:
+NOTHING! :D
+___________________________________________________________
+Task number does not exist!
+___________________________________________________________
 See ya!

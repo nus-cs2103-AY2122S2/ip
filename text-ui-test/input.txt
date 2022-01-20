@@ -35,4 +35,16 @@ mark 2
 list
 todo clean dishes
 list
+delete
+delete yo
+delete 5
+delete 2
+list
+delete 3
+list
+delete 2
+list
+delete 1
+list
+delete 1
 bye

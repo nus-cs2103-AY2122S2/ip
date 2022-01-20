@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * TaskList helps to store tasks given by the user. TaskList is contained in
  * the Bot class and handles the Task for the Bot.
@@ -6,18 +9,22 @@
  */
 
 public class TaskList {
-    Task[] tasks;
-    int nextIndex = 0;
-    int done = 0;
+    List<Task> tasks;
     /**
      * Constructs a TaskList containing an array to contain tasks
      */
     TaskList() {
-        this.tasks = new Task[100];
+        this.tasks = new ArrayList<>();
     }
 
     int numTasksLeft() {
-        return nextIndex - done;
+        int count = 0;
+        for (Task task : tasks) {
+            if (!task.isDone) {
+                count++;
+            }
+        }
+        return count;
     }
 
     /**
@@ -28,29 +35,28 @@ public class TaskList {
      */
     Task addTask(String[] inputArr, String taskType) throws IllegalArgumentException {
         Task newTask = null;
-        String description = "";
+        String description;
         String by;
         String at;
         switch (taskType) {
             case "todo":
                 description = inputArr[0];
-                newTask = new ToDo(description, nextIndex + 1);
+                newTask = new ToDo(description);
                 break;
             case "deadline":
                 description = inputArr[0];
                 by = inputArr[1];
-                newTask = new Deadline(description, nextIndex + 1, by);
+                newTask = new Deadline(description, by);
                 break;
             case "event":
                 description = inputArr[0];
                 at = inputArr[1];
-                newTask = new Event(description, nextIndex + 1, at);
+                newTask = new Event(description, at);
                 break;
             default:
                 break;
         }
-        tasks[nextIndex] = newTask;
-        nextIndex++;
+        tasks.add(newTask);
         return newTask;
     }
 
@@ -58,9 +64,12 @@ public class TaskList {
      * Prints out every item contained in the tasks array
      */
     void listTasks() {
-        for (int i = 0; i < nextIndex; i++) {
-            Task currentTask = tasks[i];
-            System.out.printf("%d. %s\n", currentTask.id, currentTask);
+        if (tasks.size() == 0) {
+            System.out.println("NOTHING! :D");
+        }
+        for (int i = 0; i < tasks.size(); i++) {
+            Task currentTask = tasks.get(i);
+            System.out.printf("%d. %s\n", i + 1, currentTask);
         }
     }
 
@@ -74,21 +83,25 @@ public class TaskList {
     Task markTask(String action, String taskNumber) throws BernieException {
         int taskIndex = Integer.parseInt(taskNumber) - 1;
         if (action.equals("mark")) {
-            tasks[taskIndex].markDone();
-            done++;
+            tasks.get(taskIndex).markDone();
         } else if (action.equals("unmark")) {
-            tasks[taskIndex].markNotDone();
-            done--;
+            tasks.get(taskIndex).markNotDone();
         }
-        return tasks[taskIndex];
+        return tasks.get(taskIndex);
     }
 
-    boolean taskExists(String taskNum) throws BernieException {
+    Task taskExists(String taskNum) throws BernieException {
         int index = Integer.parseInt(taskNum) - 1;
-        if (index >= 0 && index < this.nextIndex) {
-            return true;
-        } else {
+        try {
+            Task existingTask = tasks.get(index);
+            return existingTask;
+        } catch (IndexOutOfBoundsException e) {
             throw new BernieException("Task number does not exist!");
         }
+    }
+
+    Task deleteTask(String taskNum) {
+        int taskIndex = Integer.parseInt(taskNum) - 1;
+        return tasks.remove(taskIndex);
     }
 }
