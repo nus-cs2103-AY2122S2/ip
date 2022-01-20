@@ -65,7 +65,6 @@ public class Duke {
     }
 
     private static void addInput(Task t) {
-        printHorizontalLine();
         ls.add(t);
         System.out.println("Got it. I've added this task: ");
         System.out.println(" " + t);
@@ -84,7 +83,6 @@ public class Duke {
     }
 
     private static void sayBye() {
-        printHorizontalLine();
         System.out.println("Bye. Hope to see you again soon!");
         printHorizontalLine();
     }
