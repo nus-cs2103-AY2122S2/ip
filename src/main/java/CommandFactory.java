@@ -26,8 +26,10 @@ public class CommandFactory {
 
         if (commandWord.equals("bye")) {
             return new ByeCommand();
+        } else if (commandWord.equals("list")) {
+            return new ListCommand();
         } else {
-            return new EchoCommand(input);
+            return new AddTaskCommand(input);
         }
     }
 }
