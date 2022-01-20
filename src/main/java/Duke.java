@@ -64,6 +64,18 @@ public class Duke {
                         + longSpace + list.get(index).toString() + "\n";
             }
 
+            else if (input.startsWith("delete")) {
+                Character i1 = input.charAt(7);
+                String i2 = i1.toString();
+                int index = Integer.parseInt(i2) - 1;
+
+                output += space + " Noted. I've removed this task:\n"
+                        + longSpace + list.get(index).toString() + "\n"
+                        + space + "Now you have " + list.size() + " tasks in the list.\n";
+
+                list.remove(index);
+            }
+
             else if (input.startsWith("todo")) {
                 try {
                     String name = input.substring(5);
