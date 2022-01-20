@@ -1,104 +1,5 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
-class ToDo extends Task {
-
-    public ToDo(String name, boolean isMarked) {
-        super(name, isMarked);
-    }
-
-    @Override
-    public String toString() {
-        return "[T]" + super.toString();
-    }
-}
-
-class Deadline extends Task {
-    protected String by;
-
-    public Deadline(String name, boolean isMarked, String by) {
-        super(name, isMarked);
-        this.by = by;
-    }
-
-    @Override
-    public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
-    }
-}
-
-class Event extends Task {
-    protected String at;
-
-    public Event(String name, boolean isMarked, String at) {
-        super(name, isMarked);
-        this.at = at;
-    }
-
-    @Override
-    public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")"   ;
-    }
-}
-
-
-class TaskList {
-    ArrayList<Task> list;
-    public TaskList() {
-        this.list = new ArrayList<Task>();
-    }
-
-    public void addTo(String item, boolean marked) {
-        Task newItem = new Task(item, marked);
-        list.add(newItem);
-    }
-
-    public String listOut() {
-        String output = "";
-        for (int i = 0; i < list.size(); i++) {
-            output += i+1 + "." + list.get(i).getStatusIcon()
-                    + " " + list.get(i) + "\n";
-        }
-        return output;
-    }
-
-    public Task getItem(int itemNo) {
-        return list.get(itemNo);
-    }
-}
-
-class Task {
-    private static int totalTasks = 0;
-    private String name;
-    private boolean isMarked = false;
-    public Task(String name, boolean isMarked) {
-        this.name = name;
-        this.isMarked = isMarked;
-        totalTasks++;
-
-    }
-
-    public String getStatusIcon() {
-        return (isMarked ? "[X]" : "[ ]");
-    }
-
-    public void markItem() {
-        isMarked = true;
-        System.out.println("Nice! I've marked this task as done:\n"
-                + "  " + getStatusIcon() + " " + name);
-    }
-
-    public void unmarkItem() {
-        isMarked = false;
-        System.out.println("OK, I've marked this task as not done yet:\n"
-                + "  " + getStatusIcon() + " " + name);
-    }
-
-    @Override
-    public String toString() {
-        return this.name;
-    }
-}
 public class Yale {
     public static void main(String[] args) {
         String logo = "\n" +
@@ -146,7 +47,10 @@ public class Yale {
                     list.getItem(itemNo-1).unmarkItem();
                 }
             } else {
-                list.addTo(command, false);
+                if (command.contains("todo")) {
+                    list.addTo(command, false); // WAS LAST HERE!!
+                }
+
             }
         }
     }
