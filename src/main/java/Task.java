@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
 
     /** Stores a string description of the task **/
     protected String description;
