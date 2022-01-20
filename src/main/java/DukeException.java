@@ -21,7 +21,18 @@ public class DukeException extends Exception {
     public void checker(String[] arr, int curr) throws DukeException {
         String request = arr[0];
         int len = arr.length;
-        if (request.equals("mark")) {
+        if (request.equals("delete")) {
+            if (len == 1) {
+                throw new DukeException(" ☹ OOPS!!! Please tell me the task's" +
+                        " index number so that I can delete it from the list.");
+            } else {
+                Integer index = Integer.parseInt(arr[1]);
+                if (index < 1 || index > curr) {
+                    throw new DukeException(" ☹ OOPS!!! The task you want to delete is out of bounds," +
+                            " please double check the index number");
+                }
+            }
+        } else if (request.equals("mark")) {
             if (len == 1) {
                 throw new DukeException(" ☹ OOPS!!! Please tell me the task's" +
                         " index number so that I can mark it as done.");
