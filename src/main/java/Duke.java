@@ -1,11 +1,8 @@
-<<<<<<< HEAD
 import java.io.*;
-=======
 import javax.swing.text.DateFormatter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
->>>>>>> branch-level-8
 import java.util.Scanner;
 
 public class Duke {
@@ -113,7 +110,6 @@ public class Duke {
         System.out.println(invalidText);
         System.out.println(line);
     }
-<<<<<<< HEAD
     
     public static void save(){
         String FILE_PATH = "data/duke";
@@ -121,7 +117,12 @@ public class Duke {
         try {
             FileWriter fw = new FileWriter(f);
             for (Task t : manager.getTaskList()) {
-                fw.write(String.format("%c\t%c\t%s\t%s\n",t.getType(),t.getDone(),t.getTaskName(),t.getDate()));
+                String date ="None";
+                if (t.getDate() != null) {
+                    DateTimeFormatter format = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+                    date = t.getDate().format(format).toString();
+                }
+                fw.write(String.format("%c\t%c\t%s\t%s\n",t.getType(),t.getDone(),t.getTaskName(),date));
             }
             fw.close();
         } catch (IOException e){
@@ -170,9 +171,10 @@ public class Duke {
         }
     }
 
-    public static void test(){
+    public static void test() {
         Task.parse("D\tX\tabcd\tdasd");
-=======
+    }
+
 
     public static void parseDateTime(String s){
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
@@ -180,6 +182,6 @@ public class Duke {
 
         LocalDateTime dateTime = LocalDateTime.parse(s,format);
         System.out.println(dateTime.format(formatted));
->>>>>>> branch-level-8
+
     }
 }

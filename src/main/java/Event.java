@@ -2,7 +2,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task{
-    private LocalDateTime date;
+    //private LocalDateTime date;
     public Event(String taskName) throws InvalidTaskDataTimeException,InvalidTaskDescriptionException{
         super();
         String[] str =  taskName.split("/at");
@@ -35,7 +35,6 @@ public class Event extends Task{
     public String toString(){
         DateTimeFormatter formatted = DateTimeFormatter.ofPattern("d MMM yyyy, K:mma");
 
-        String s = String.format("[%c][%c] %s (at: %s)",this.getType(),this.done,this.taskName,this.date.format(formatted));
-        return s;
+        return String.format("[%c][%c] %s (at: %s)",this.getType(),this.done,this.taskName,this.date.format(formatted));
     }
 }

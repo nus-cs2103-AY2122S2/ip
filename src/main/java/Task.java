@@ -1,4 +1,3 @@
-import javax.swing.tree.ExpandVetoException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -6,7 +5,7 @@ import java.time.format.DateTimeParseException;
 public class Task{
     protected String taskName;
     protected char done = ' ';
-    protected String date="empty";
+    protected LocalDateTime date;
 
     public Task(){}
 
@@ -94,7 +93,7 @@ public class Task{
     public String getTaskName(){
         return this.taskName;
     }
-    public String getDate(){
+    public LocalDateTime getDate(){
         return this.date;
     }
 
@@ -103,11 +102,10 @@ public class Task{
         return s;
     }
 
-<<<<<<< HEAD
-    public char getType(){
+    public char getType() {
         return ' ';
-=======
-    public abstract char getType();
+    }
+
 
     public static LocalDateTime parseDateTime(String input){
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
@@ -121,6 +119,5 @@ public class Task{
             System.out.println("Please enter Date/Time in the form DD/MM/YYYY HHMM");
             return null;
         }
->>>>>>> branch-level-8
     }
 }
