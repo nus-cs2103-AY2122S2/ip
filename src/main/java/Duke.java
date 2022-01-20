@@ -10,6 +10,7 @@ public class Duke {
         while (sc.hasNext()) {
             String userInput = sc.nextLine();
             String[] wordSplit = userInput.split(" ");
+
             try {
                 checker(wordSplit);
             } catch(TaskException e) {
@@ -78,7 +79,7 @@ public class Duke {
             } else if (command.equals("event")) {
                 throw new EventException();
             } else if (!command.equals("bye") && !command.equals("list")) {
-                throw new IncorrectInputException();
+                throw new IncorrectLengthException();
             }
         }
     }
