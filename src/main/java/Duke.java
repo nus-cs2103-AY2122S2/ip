@@ -13,23 +13,24 @@ public class Duke {
 
         ArrayList<Task> tasks = new ArrayList<Task>();
 
-        String helpResponse = "> Type 'list' to see what you have in your task list"+
-                "\n> Type todo <message> to put a todo in your list"+
-                "\n> Type deadline <message> /by <deadline> to put a deadline in your list"+
+        String helpResponse = "> Type 'list' to see what you have in your task list\n"+
+                "> Type todo <message> to put a todo in your list\n"+
+                "> Type deadline <message> /by <deadline> to put a deadline in your list"+
                 "\n> Type event <message> /at <date> to put an event in your list"+
                 "\n> Type 'mark <x>' to mark a task in your list" +
                 "\n> Type 'unmark <x>' to unmark a task in your list";;
 
-        System.out.println("Hello! I'm \n" + logo + ":)" + "\nI am a task manager. " +
-                "\nType 'help' for more information on the commands you can give me." +
-                "\nWhat can I do for you today?" +
-                "\n---------------------------------------------");
+        System.out.println(logo + "Hello! I'm Ducky! :)\n" + "I am a task manager.\n" +
+                "Type 'help' for more information on the commands you can give me.\n" +
+                "What can I do for you today?\n" +
+                "---------------------------------------------");
+
+        Scanner myObj = new Scanner(System.in);
 
         while(true){
-            Scanner myObj = new Scanner(System.in);
             String response = myObj.nextLine();
             if (response.equals("bye")){
-                String byeResponse = "Bye. Hope to see you again soon!";
+                String byeResponse = "Bye~ Hope to see you again soon!";
                 System.out.println(byeResponse);
                 break;
             } else if(response.equals("help")){
