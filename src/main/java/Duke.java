@@ -23,11 +23,34 @@ public class Duke {
             String keyword = tokens[0];
             switch (keyword) {
                 case "bye":
-                    cmd.bye();
-                    break label;
+                    try {
+                        if (tokens.length != 1) {
+                            throw new DukeException("argument for bye detected");
+                        }
+                        cmd.bye();
+                        break label;
+                    } catch (DukeException ex) {
+                        String err = "_______________________________________________________\n"
+                                + "Arguments detected!\n"
+                                + "Are you trying to type 'bye' instead? If so, please try again!\n"
+                                + "_______________________________________________________\n";
+                        System.out.println(err);
+                        break;
+                    }
                 case "list":
-                    cmd.list();
-                    break;
+                    try {
+                        if (tokens.length != 1) {
+                            throw new DukeException("argument for list detected");
+                        }
+                        cmd.list();
+                        break;
+                    } catch (DukeException ex) {
+                        String err = "_______________________________________________________\n"
+                                + "Arguments detected!\n"
+                                + "Are you trying to type 'list' instead? If so, please try again!\n"
+                                + "_______________________________________________________\n";
+                        System.out.println(err);
+                    }
                 case "mark": {
                     try {
                         int index = Integer.parseInt(tokens[1]);
@@ -35,18 +58,27 @@ public class Duke {
                             throw new DukeException("index is negative or zero");
                         }
                         cmd.mark(index - 1);
+                        break;
                     } catch (NullPointerException ex) {
                         String err = "_______________________________________________________\n"
-                                + "This entry does not exist, please provide a valid entry!\n"
+                                + "Entry does not exist!\n"
+                                + "Please provide a valid entry!\n"
                                 + "_______________________________________________________\n";
                         System.out.println(err);
+                        break;
+                    } catch (NumberFormatException ex) {
+                        String err = "_______________________________________________________\n"
+                                + "Decimals detected!\n"
+                                + "Please provide a valid entry!\n"
+                                + "_______________________________________________________\n";
+                        System.out.println(err);
+                        break;
                     } catch (DukeException ex) {
                         String err = "_______________________________________________________\n"
+                                + "Invalid entry detected!\n"
                                 + "Please provide a non-zero, positive entry value!\n"
                                 + "_______________________________________________________\n";
                         System.out.println(err);
-                    }
-                    finally {
                         break;
                     }
                 }
@@ -57,18 +89,27 @@ public class Duke {
                             throw new DukeException("index is negative or zero");
                         }
                         cmd.unmark(index - 1);
+                        break;
                     } catch (NullPointerException ex) {
                         String err = "_______________________________________________________\n"
-                                + "This entry does not exist, please provide a valid entry!\n"
+                                + "Entry does not exist!\n"
+                                + "Please provide a valid entry!\n"
                                 + "_______________________________________________________\n";
                         System.out.println(err);
+                        break;
+                    } catch (NumberFormatException ex) {
+                        String err = "_______________________________________________________\n"
+                                + "Decimals detected!\n"
+                                + "Please provide a valid entry!\n"
+                                + "_______________________________________________________\n";
+                        System.out.println(err);
+                        break;
                     } catch (DukeException ex) {
                         String err = "_______________________________________________________\n"
+                                + "Invalid entry detected!\n"
                                 + "Please provide a non-zero, positive entry value!\n"
                                 + "_______________________________________________________\n";
                         System.out.println(err);
-                    }
-                    finally {
                         break;
                     }
                 }
