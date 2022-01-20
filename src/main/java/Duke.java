@@ -1,3 +1,7 @@
+import javax.swing.text.DateFormatter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Duke {
@@ -9,10 +13,8 @@ public class Duke {
 
         Scanner s = new Scanner(System.in);
         String input;
-
         while (true) {
             input = s.nextLine();
-
             if (input.equals("bye")) {
                 bye();
                 return;
@@ -103,5 +105,13 @@ public class Duke {
         System.out.println(line);
         System.out.println(invalidText);
         System.out.println(line);
+    }
+
+    public static void parseDateTime(String s){
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+        DateTimeFormatter formatted = DateTimeFormatter.ofPattern("d MMM yyyy, K:mma");
+
+        LocalDateTime dateTime = LocalDateTime.parse(s,format);
+        System.out.println(dateTime.format(formatted));
     }
 }
