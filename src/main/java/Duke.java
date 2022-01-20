@@ -48,6 +48,12 @@ public class Duke {
 
                     System.out.println("OK, I've marked this task as not done yet:");
                     System.out.println("  " + task.toString());
+                } else if (parseUserInput(userInput).equals("delete")) {
+                    String[] userInputArr = userInput.split(" ", 2);
+                    Task task = tasks.remove(Integer.parseInt(userInputArr[1]) - 1);
+
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println("  " + task.toString());
                 } else {
                     String[] userInputArr = userInput.split(" ");
                     String instruction = userInputArr[0];
