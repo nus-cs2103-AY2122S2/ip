@@ -1,5 +1,12 @@
-public class Deadline extends Task{
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
+public class Deadline extends Task{
+<<<<<<< HEAD
+
+=======
+    private LocalDateTime date;
+>>>>>>> branch-level-8
     public Deadline(String taskName) throws InvalidTaskDescriptionException,InvalidTaskDataTimeException{
         super();
         String[] str =  taskName.split("/by");
@@ -13,6 +20,7 @@ public class Deadline extends Task{
         try {
             this.date = str[1].strip();
             if (this.date.equals("")) this.date=null;
+            this.date = Task.parseDateTime(str[1].strip());
         } catch (IndexOutOfBoundsException i){
             this.date=null;
         }
@@ -32,6 +40,9 @@ public class Deadline extends Task{
     @Override
     public String toString(){
         String s = String.format("[%c][%c] %s (by: %s)",this.getType(),this.done,this.taskName,this.date);
+        DateTimeFormatter formatted = DateTimeFormatter.ofPattern("d MMM yyyy, K:mma");
+
+        String s = String.format("[%c][%c] %s (by: %s)",this.getType(),this.done,this.taskName,this.date.format(formatted));
         return s;
     }
 }

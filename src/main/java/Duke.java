@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 import java.io.*;
+=======
+import javax.swing.text.DateFormatter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+>>>>>>> branch-level-8
 import java.util.Scanner;
 
 public class Duke {
@@ -106,6 +113,7 @@ public class Duke {
         System.out.println(invalidText);
         System.out.println(line);
     }
+<<<<<<< HEAD
     
     public static void save(){
         String FILE_PATH = "data/duke";
@@ -164,5 +172,14 @@ public class Duke {
 
     public static void test(){
         Task.parse("D\tX\tabcd\tdasd");
+=======
+
+    public static void parseDateTime(String s){
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+        DateTimeFormatter formatted = DateTimeFormatter.ofPattern("d MMM yyyy, K:mma");
+
+        LocalDateTime dateTime = LocalDateTime.parse(s,format);
+        System.out.println(dateTime.format(formatted));
+>>>>>>> branch-level-8
     }
 }

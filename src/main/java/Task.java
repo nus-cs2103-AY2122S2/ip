@@ -1,4 +1,7 @@
 import javax.swing.tree.ExpandVetoException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Task{
     protected String taskName;
@@ -100,7 +103,24 @@ public class Task{
         return s;
     }
 
+<<<<<<< HEAD
     public char getType(){
         return ' ';
+=======
+    public abstract char getType();
+
+    public static LocalDateTime parseDateTime(String input){
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+        DateTimeFormatter formatted = DateTimeFormatter.ofPattern("d MMM yyyy, K:mma");
+
+        try {
+            LocalDateTime dateTime = LocalDateTime.parse(input, format);
+            return dateTime;
+        } catch (DateTimeParseException e) {
+            System.out.println("Date/Time is in wrong format!");
+            System.out.println("Please enter Date/Time in the form DD/MM/YYYY HHMM");
+            return null;
+        }
+>>>>>>> branch-level-8
     }
 }
