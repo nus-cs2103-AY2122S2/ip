@@ -14,12 +14,12 @@ public class Duke {
 
     /**
      * Private method that checks if the input is valid and returns the array which
-     * contains information for further evaluations
+     * contains information for further evaluations.
      * @param arr the array to checks for invalid inputs
      * @param command the command of the input
      * @return the array which contains information
-     * for tasks, toReturn[0] contains the task name, toReturn[1] contains the time (if any)
-     * for mark and unmark, toReturn[0] contains the task number in String format
+     * For tasks, toReturn[0] contains the task name, toReturn[1] contains the time (if any).
+     * For mark and unmark, toReturn[0] contains the task number in String format.
      * @throws DukeException the exception specific to Duke
      */
     private static String[] validate(String[] arr, String command) throws DukeException {
