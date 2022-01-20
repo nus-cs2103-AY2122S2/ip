@@ -17,7 +17,7 @@ public class Duke {
         Scanner io = new Scanner(System.in); // Scanner object created
 
         label:
-        while(true) {
+        while (true) {
             String input = io.nextLine();
             String[] tokens = input.split("\\s");
             String keyword = tokens[0];
@@ -136,14 +136,28 @@ public class Duke {
                         System.out.println(err);
                         break;
                     } catch (DukeException ex) {
-                    String err = "_______________________________________________________\n"
-                            + "* Time frame not detected *\n"
-                            + "Please provide a time frame for your Event!\n"
-                            + "Check if you have typed '/at' to indicate the time frame!\n"
-                            + "e.g. event project meeting /at Mon 2-4pm\n"
-                            + "_______________________________________________________\n";
-                    System.out.println(err);
-                    break;
+                        String err = "_______________________________________________________\n"
+                                + "* Time frame not detected *\n"
+                                + "Please provide a time frame for your Event!\n"
+                                + "Check if you have typed '/at' to indicate the time frame!\n"
+                                + "e.g. event project meeting /at Mon 2-4pm\n"
+                                + "_______________________________________________________\n";
+                        System.out.println(err);
+                        break;
+                    }
+                }
+                case "delete": {
+                    try {
+                        int index = Integer.parseInt(tokens[1]);
+                        cmd.delete(index - 1);
+                        break;
+                    } catch (NumberFormatException | NullPointerException | IndexOutOfBoundsException ex) {
+                        String err = "_______________________________________________________\n"
+                                + "* Invalid entry detected *\n"
+                                + "Please provide a valid entry!\n"
+                                + "_______________________________________________________\n";
+                        System.out.println(err);
+                        break;
                     }
                 }
                 default:

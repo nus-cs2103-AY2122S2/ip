@@ -68,4 +68,8 @@ public class TaskHistory {
     Task getTask(int index) {
         return record.get(index);
     }
+
+    void deleteTask(int index) {
+        record.remove(index);
+    }
 }

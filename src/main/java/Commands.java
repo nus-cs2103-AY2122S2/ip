@@ -132,4 +132,8 @@ public class Commands {
         }
         taskHistory.addEvent(description, timeFrame);
     }
+
+    void delete(int index) {
+        taskHistory.deleteTask(index);
+    }
 }
