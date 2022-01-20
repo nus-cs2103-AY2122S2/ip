@@ -57,6 +57,21 @@ public class Duke {
     }
 
     /*
+     * @param i which is the id of the task the user would like to delete
+     */
+    public void deleteTask(String i) throws DukeException{
+        try {
+            Task currTask = this.tasks.get(Integer.parseInt(i)-1);
+            this.tasks.remove(Integer.parseInt(i)-1);
+            System.out.println("I have removed this from your tasks:\n"+ currTask.getTask());
+            System.out.println("You now have " + this.tasks.size() + " tasks");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Oops! \\(@.@)/ This task does not exist." +
+                    "\nPlease type 'list' to see existing tasks *(^.^)*");
+        }
+    }
+
+    /*
      * @param description which is the task description from user
      */
     public void addTodo(String description) throws DukeException{
@@ -165,6 +180,15 @@ public class Duke {
             ducky.help();
         } else if(command.equals("list")){
             ducky.printTasks();
+        } else if(command.equals("delete")){
+            try {
+                String id = textEntered[1];
+                ducky.deleteTask(id);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Oops! \\(@.@)/ You have not keyed in an ID!\n" +
+                        "Let's try again ~(^.^)~\n" +
+                        "Type 'help' if you need to know how to use this command");
+            }
         } else if(command.equals("todo")) {
             try {
                 String description = textEntered[1];

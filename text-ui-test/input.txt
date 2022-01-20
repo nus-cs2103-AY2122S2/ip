@@ -9,6 +9,8 @@ deadline
 event ball /at 10/02/2022
 event
 list
+delete 100
+delete 2
 mark 2
 mark 100
 mark 3
