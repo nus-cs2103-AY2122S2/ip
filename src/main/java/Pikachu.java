@@ -129,7 +129,7 @@ public class Pikachu {
             System.out.println("You now have "+inputList.size()+" tasks in the list.");
             return;
             } catch (Exception e) {
-                System.out.println("Task description is empty/No deadline has been specified! Please specify a deadline using /.");
+                System.out.println("Task description is empty/No deadline timing has been specified! Please specify a deadline using /.");
                 return;
             }
         }
