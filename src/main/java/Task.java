@@ -7,6 +7,11 @@ public class Task {
         this.done = false;
     }
 
+    protected Task(String title,boolean done) {
+        this.title = title;
+        this.done = done;
+    }
+
     public String getTitle() {
         return title;
     }

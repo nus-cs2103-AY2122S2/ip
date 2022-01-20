@@ -3,6 +3,8 @@ public class ToDo extends Task {
         super(title);
     }
 
+    public ToDo(String title,boolean done){super(title,done);}
+
     @Override
     public String toString(){
 

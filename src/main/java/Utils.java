@@ -1,5 +1,7 @@
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public final class Utils {
     public static void printLogo() {
@@ -40,7 +42,8 @@ public final class Utils {
                 String[] output = arr[1].split("/", 2);
 
                 if (output.length == 1)
-                    throw new InvalidInputException("Invalid " + arr[0] + " format. eg. deadline return book /by Sunday.");
+                    throw new InvalidInputException(
+                            "Invalid " + arr[0] + " format. eg. deadline return book /by Sunday.");
 
                 String[] date = output[1].split(" ", 2);
 
@@ -63,12 +66,89 @@ public final class Utils {
         }
     }
 
-
     public static void printTaskList(List<Task> taskList) {
         int i = 1;
         for (Task task : taskList) {
             System.out.println("     " + i + ".  " + task.toString());
             i++;
         }
+    }
+
+    private static String getPath() {
+        String home = System.getProperty("user.dir");
+        // works on *nix
+        // works on Windows
+        String path = home + "/src/main/java/data.txt";
+        boolean directoryExists = new java.io.File(path).exists();
+        return path;
+    }
+
+    public static List<Task> readTaskFile() throws IOException {
+
+        List<Task> result = new ArrayList<>();
+        String path = getPath();
+        // Open the file
+        FileInputStream fstream = null;
+
+        try {
+            fstream = new FileInputStream(path);
+        } catch (FileNotFoundException e) {
+//            System.out.println("File not found under " + path);
+            throw new FileNotFoundException("File not found under " + path);
+        }
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+
+        String strLine;
+
+        // Read File Line By Line
+        while ((strLine = br.readLine()) != null) {
+            // Print the content on the console
+            System.out.println(strLine);
+            String[] parts = strLine.split("\\|");
+            //  remove leading and trailing spaces
+            for (int i = 0; i < parts.length; i++) {
+                parts[i] = parts[i].trim();
+            }
+
+            if (parts[0].equals("T")) {
+                result.add(new ToDo(parts[2], parts[1].equals("1")));
+            } else if (parts[0].equals("D")) {
+                result.add(new Deadline(parts[2], parts[1].equals("1"), parts[3]));
+            } else if (parts[0].equals("E")) {
+                result.add(new Event(parts[2], parts[1].equals("1"), parts[3]));
+            } else {
+                System.out.println(parts[0]);
+            }
+        }
+
+        // Close the input stream
+        fstream.close();
+        return result;
+    }
+
+
+    public static boolean saveTasktoFile(List<Task> taskList) throws FileNotFoundException {
+        String path = getPath();
+        try {
+            FileWriter fw = new FileWriter(path);
+            for (Task task : taskList) {
+                System.out.println(task.getClass());
+                if (task.getClass() == ToDo.class) {
+                    fw.write("T | " + (task.getDone() ? "1 | " : "0 | ") + task.getTitle() + System.lineSeparator());
+                } else if (task.getClass() == Deadline.class) {
+                    fw.write("D | " + (task.getDone() ? "1 | " : "0 | ") + task.getTitle() + " | " + ((Deadline) task).getDate() + System.lineSeparator());
+                } else if (task.getClass() == Event.class) {
+                    fw.write("E | " + (task.getDone() ? "1 | " : "0 | ") + task.getTitle() + " | " + ((Event) task).getDate() + System.lineSeparator());
+                }
+            }
+
+            fw.close();
+        } catch (IOException e) {
+            throw new FileNotFoundException("File not found under " + path);
+        }
+
+
+        return true;
     }
 }

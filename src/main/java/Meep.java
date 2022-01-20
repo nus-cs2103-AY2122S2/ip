@@ -2,28 +2,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Meep {
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         Utils.printLogo();
         String userInput = "In";
 
         FastIO sc = new FastIO();
         List<Task> taskList = new ArrayList<>();
 
+        try {
+            taskList.addAll(Utils.readTaskFile());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+
         while (true) {
             System.out.print("You:");
             userInput = sc.nextLine();
 
-            String[] parsedInput=null;
-            try{
-                parsedInput=Utils.parseUserInput(userInput,taskList);
-            }catch (InvalidInputException e){
+            String[] parsedInput = null;
+            try {
+                parsedInput = Utils.parseUserInput(userInput, taskList);
+            } catch (InvalidInputException e) {
                 System.out.print("Meep:");
                 System.out.println(e.getMessage());
                 continue;
             }
-            String userCommand=parsedInput[0];
+            String userCommand = parsedInput[0];
 
             if (userCommand.equals(Command.BYE.val)) {
+                try {
+                    Utils.saveTasktoFile(taskList);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+
                 System.out.println("Meep:Bye. Hope to see you again soon!");
                 break;
             } else if (userCommand.equals(Command.LIST.val)) {
@@ -61,11 +74,11 @@ public class Meep {
                 System.out.println("Meep:Got it. I've added this task:");
                 System.out.println(todo.toString());
                 System.out.println("Now you have " + taskList.size() + " tasks in the list.");
-            }else if(userCommand.equals(Command.DELETE.val)){
-                int index=Integer.parseInt(parsedInput[1]) - 1;
+            } else if (userCommand.equals(Command.DELETE.val)) {
+                int index = Integer.parseInt(parsedInput[1]) - 1;
                 Task task = taskList.get(index);
                 taskList.remove(index);
-                System.out.println("Meep: Noted. I've removed this task:" );
+                System.out.println("Meep: Noted. I've removed this task:");
                 System.out.println(task.toString());
                 System.out.println("Now you have " + taskList.size() + " tasks in the list.");
             }
