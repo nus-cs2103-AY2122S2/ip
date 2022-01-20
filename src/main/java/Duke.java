@@ -17,7 +17,7 @@ public class Duke {
         // While loop ends when user inputs bye
         while(!end) {
             input = scanner.nextLine();
-            String[] splitInput = input.split("\\s+");
+            String[] splitInput = input.split(" ", 2);
             // If user inputs bye, set end to be true and hence exiting out of the program
             if (input.equals("bye")) {
                 end = true;
@@ -26,27 +26,49 @@ public class Duke {
             else if (input.equals("list")) {
                 for (int n = 0; store[n] != null; n++) {
                     int temp = n + 1;
-                    System.out.println(temp + ".[" + store[n].getStatusIcon() + "] " + store[n].getDescription());
+                    System.out.println(temp + "." + store[n].toString());
                 }
             }
             // If user inputs keyword mark, mark the task
             else if (splitInput[0].equals("mark")) {
                 Integer num = Integer.parseInt(splitInput[1]) - 1;
                 store[num].setMark();
-                System.out.println("Nice! I've marked this task as done:\n  [X] " + store[num].getDescription());
+                System.out.println("Nice! I've marked this task as done:\n  " + store[num].toString());
             }
             // If user inputs keyword unmark, unmark the task
             else if (splitInput[0].equals("unmark")){
                 Integer num = Integer.parseInt(splitInput[1]) - 1;
                 store[num].setUnmark();
-                System.out.println("OK, I've marked this task as not done yet:\n  [ ] " + store[num].getDescription());
+                System.out.println("OK, I've marked this task as not done yet:\n  " + store[num].toString());
             }
-            // If user inputs anything else, program would add the input into the to do list in order
-            else {
-                store[curr] = new Task(input);
-                System.out.println("added: " + input);
+            // If user inputs keyword to-do, add this task as a Todo class
+            else if (splitInput[0].equals("todo")) {
+                store[curr] = new Todo(splitInput[1]);
+                int temp = curr + 1;
+                System.out.println("Got it. I've added this task:\n  " + store[curr].toString()
+                        + "\nNow you have " + temp + " tasks in the list.");
                 curr++;
             }
+            // If user inputs keyword deadline, add this task as a Deadline class
+            else if (splitInput[0].equals("deadline")) {
+                String[] splitInput2 = splitInput[1].split("/by", 2);
+                store[curr] = new Deadline(splitInput2[0], splitInput2[1]);
+                int temp = curr + 1;
+                System.out.println("Got it. I've added this task:\n  " + store[curr].toString()
+                        + "\nNow you have " + temp + " tasks in the list.");
+                curr++;
+            }
+            // If user inputs keyword event, add this task as a Event class
+            else if (splitInput[0].equals("event")) {
+                String[] splitInput2 = splitInput[1].split("/at", 2);
+                store[curr] = new Event(splitInput2[0], splitInput2[1]);
+                int temp = curr + 1;
+                System.out.println("Got it. I've added this task:\n  " + store[curr].toString()
+                        + "\nNow you have " + temp + " tasks in the list.");
+                curr++;
+            }
+            // Unused
+            else {}
         }
         System.out.println("Bye. Hope to see you again soon!");
     }

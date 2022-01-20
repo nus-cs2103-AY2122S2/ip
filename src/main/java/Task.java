@@ -4,7 +4,7 @@ public class Task {
 
     /**
      * Constructor for Task class, set isDone to false by default
-     * @param description Name of the to-do task
+     * @param description Name of the task
      */
     public Task(String description) {
         this.description = description;
@@ -15,9 +15,6 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    public String getDescription() {
-        return description; // Returns the name of the to-do
-    }
 
     public void setMark() {
         isDone = true; // Set the value of isDone to true
@@ -27,4 +24,7 @@ public class Task {
         isDone = false; // Set the value of isDone to false
     }
 
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + this.description;
+    }
 }
