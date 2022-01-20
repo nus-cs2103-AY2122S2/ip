@@ -13,3 +13,10 @@ unmark 3
 unmark 2
 unmark 1
 list
+delete 2
+list
+delete 1
+list
+delete 3
+list
+bye
