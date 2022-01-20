@@ -53,8 +53,8 @@ public class Duke {
         Pikachu pikachu = new Pikachu();
 
         while (true) {
-            currInput = sc.nextLine().toLowerCase(); //scan in user input, convert all the lowercase
-            if (currInput.equals("bye")) break; //if user input == bye, exit programme
+            currInput = sc.nextLine(); //scan in user input
+            if (currInput.toLowerCase().equals("bye")) break; //if user input == bye, exit programme
 
             System.out.println("________________________________________________________________");
             System.out.println("Pikachu says:");
