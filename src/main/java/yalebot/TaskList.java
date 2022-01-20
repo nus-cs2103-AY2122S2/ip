@@ -1,3 +1,7 @@
+package yalebot;
+
+import yalebot.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -6,22 +10,25 @@ public class TaskList {
         this.list = new ArrayList<Task>();
     }
 
-    public void addTo(String item, boolean marked) {
-        Task newItem = new Task(item, marked);
-        list.add(newItem);
+    public void addTo(Task taskItem) {
+        list.add(taskItem);
     }
 
     public String listOut() {
         String output = "";
         for (int i = 0; i < list.size(); i++) {
-            output += i+1 + "." + list.get(i).getStatusIcon()
-                    + " " + list.get(i) + "\n";
+            output += i+1 + "."
+                    + list.get(i) + "\n";
         }
         return output;
     }
 
     public Task getItem(int itemNo) {
         return list.get(itemNo);
+    }
+
+    public int getSize() {
+        return list.size();
     }
 }
 

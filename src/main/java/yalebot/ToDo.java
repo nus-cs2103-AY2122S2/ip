@@ -1,3 +1,7 @@
+package yalebot;
+
+import yalebot.Task;
+
 public class ToDo extends Task {
 
     public ToDo(String name, boolean isMarked) {

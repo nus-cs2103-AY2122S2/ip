@@ -1,3 +1,5 @@
+package yalebot;
+
 public class Task {
     private static int totalTasks = 0;
     private String name;
@@ -27,6 +29,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.name;
+        return getStatusIcon() + " " + this.name;
     }
 }
