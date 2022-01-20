@@ -37,25 +37,34 @@ public class Pikachu {
 
         if (split[0].toLowerCase().equals("mark")) {                  //MARK
             int index = Integer.parseInt(split[1])-1;
-            if (index >= inputList.size()) {                           //Prevent invalid array accesses
+            if (index >= inputList.size()) {                          //Prevent invalid array accesses
                 System.out.println("Invalid task number!");
                 return;
             }
             inputList.get(index).isDone = true;
-            System.out.println("Pikachu has marked this task as done!");
-            System.out.println("[X] " + inputList.get(index));
+            System.out.println("Pikachu has marked this task as done!\n   > "+inputList.get(index));
             return;
         }
 
         if (split[0].toLowerCase().equals("unmark")) {                //UNMARK
             int index = Integer.parseInt(split[1])-1;
-            if (index >= inputList.size()) {                           //Prevent invalid array accesses
+            if (index >= inputList.size()) {                          //Prevent invalid array accesses
                 System.out.println("Invalid task number!");
                 return;
             }
             inputList.get(index).isDone = false;
-            System.out.println("Pikachu has marked this task as not done yet!");
-            System.out.println("[ ] " + inputList.get(index));
+            System.out.println("Pikachu has marked this task as not done yet!\n   > "+inputList.get(index));
+            return;
+        }
+
+        if (split[0].toLowerCase().equals("delete")) {                //DELETE
+            int index = Integer.parseInt(split[1])-1;
+            if (index >= inputList.size()) {                          //Prevent invalid array accesses
+                System.out.println("Invalid task number!");
+                return;
+            }
+            task t = inputList.remove(index);
+            System.out.println("Pikachu has deleted this task! You now have "+inputList.size()+" tasks in the list.\n   > " + t);
             return;
         }
 
@@ -64,7 +73,7 @@ public class Pikachu {
             //System.out.printf("For debugging. split2[1] = %s\n", split2[1]);
             ToDo t = new ToDo(split2[1]);
             inputList.add(t);
-            System.out.println("Added this task to the list! You now have "+inputList.size()+" tasks in the list.");
+            System.out.println("Pikachu has added this task to the list! You now have "+inputList.size()+" tasks in the list.");
             System.out.println("[T] [ ] "+t);
             return;
         }
@@ -75,18 +84,18 @@ public class Pikachu {
             //System.out.printf("For debugging. split2[1] = %s, split3[1] = %s\n", split2[1], split3[1]);
             Deadline d = new Deadline(split3[0], split3[1]);
             inputList.add(d);
-            System.out.println("Added this task to the list! You now have "+inputList.size()+" tasks in the list.");
+            System.out.println("Pikachu has added this task to the list! You now have "+inputList.size()+" tasks in the list.");
             System.out.println("[D] [ ] "+d);
             return;
         }
 
-        if (split[0].toLowerCase().equals("event")) {               //EVENT
+        if (split[0].toLowerCase().equals("event")) {                  //EVENT
             String[] split2 = str.split(" ", 2);
             String[] split3 = split2[1].split("/");
             //System.out.printf("For debugging. split2[1] = %s, split3[1] = %s\n", split2[1], split3[1]);
             Event e = new Event(split3[0], split3[1]);
             inputList.add(e);
-            System.out.println("Added this task to the list! You now have "+inputList.size()+" tasks in the list.");
+            System.out.println("Pikachu has added this task to the list! You now have "+inputList.size()+" tasks in the list.");
             System.out.println("[E] [ ] "+e);
             return;
         }
