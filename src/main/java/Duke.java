@@ -52,6 +52,8 @@ public class Duke {
         String input = sc.nextLine();
 
         if (input.equals(bye)); //ends recursive loop, causing the bye statement in main to be executed
+
+        //list command
         else if (input.equals(lst)) {
             System.out.println(tasksInList);
             int i = 0;
@@ -64,22 +66,21 @@ public class Duke {
                 }
             }
             levelThreeRespond(arrayLst);
-
-        } else if (input.contains(unmarkCommand)) {
+        } else if (input.contains(unmarkCommand)) { //unmark command
             String stringIdx = input.split(" ")[1];
             int  idx = Integer.parseInt(stringIdx) - 1;
             Task unmarkTask = arrayLst.get(idx);
             unmarkTask.unmarkTask();
             levelThreeRespond(arrayLst);
 
-        } else if (input.contains(markCommand)){
+        } else if (input.contains(markCommand)){ //mark command
             String stringIdx = input.split(" ")[1];
             int idx = Integer.parseInt(stringIdx) - 1;
             Task markTask = arrayLst.get(idx);
             markTask.markTask();
             levelThreeRespond(arrayLst);
 
-        } else {
+        } else { //add task
             String added = "added: ";
             Task newTask = new Task(input);
             arrayLst.add(newTask);
@@ -96,24 +97,45 @@ public class Duke {
         private boolean mark;
         public String name;
 
+        /**
+         * Constructor
+         * @param name name of the task
+         */
         public Task (String name) {
             this.name = name;
             this.mark = false;
         }
 
+        /**
+         * markTask as done
+         */
         public void markTask () {
             String markedMessage = "Nice! I've marked this task as done:\n";
             this.mark = true;
             System.out.println(markedMessage + "  " + this);
         }
+
+        /**
+         * unmarkTask
+         */
         public void unmarkTask() {
             String unmarkedMessage = "OK, I've marked this task as not done yet:\n";
             this.mark = false;
             System.out.println(unmarkedMessage + "  " + this);
         }
+
+        /**
+         *
+         * @return boolean on whether task is marked
+         */
         public boolean isMark() {
             return this.mark;
         }
+
+        /**
+         *
+         * @return String version of task, with marked and name
+         */
         public String toString() {
             if (this.mark) {
                 String marked = "[X] ";
