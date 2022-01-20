@@ -47,6 +47,19 @@ public class Duke {
         System.out.println(Color.none);
     }
 
+    /**
+     * Log the addition of tasks in the same format
+     *
+     * @param task Task added to be logged
+     */
+    private static void logNewTask(Task task) {
+        say(String.format(
+                "[+] Added following task:\n" +
+                "\t%s\n" +
+                "Now you have %d tasks in the list.",
+                task.nameWithStatus(), tasks.size()));
+    }
+
     private static void handleAction(Command action) {
         switch (action.getName()) {
             case "bye":
@@ -60,23 +73,47 @@ public class Duke {
 
             case "mark":
                 // User input is 1-indexed, list uses 0-index
-                int mark_idx = Integer.parseInt(action.getArgs()[0]) - 1;
-                tasks.mark(mark_idx);
+                int markIdx = Integer.parseInt(action.getArgs()) - 1;
+                tasks.mark(markIdx);
                 say("[*] Marked the following task as done:\n" +
-                    "\t" + tasks.getTask(mark_idx).nameWithStatus());
+                    "\t" + tasks.getTask(markIdx).nameWithStatus());
                 break;
 
             case "unmark":
                 // User input is 1-indexed, list uses 0-index
-                int unmark_idx = Integer.parseInt(action.getArgs()[0]) - 1;
-                tasks.unmark(unmark_idx);
+                int unmarkIdx = Integer.parseInt(action.getArgs()) - 1;
+                tasks.unmark(unmarkIdx);
                 say("[*] Marked the following task as not done:\n" +
-                    "\t" + tasks.getTask(unmark_idx).nameWithStatus());
+                    "\t" + tasks.getTask(unmarkIdx).nameWithStatus());
+                break;
+
+            case "todo":
+                String todoName = action.getArgs();
+                Todo todo = new Todo(todoName);
+                tasks.addTask(todo);
+                logNewTask(todo);
+                break;
+
+            case "deadline":
+                String deadlineName = action.getArgs();
+                String deadlineDate = action.getKwargs().get("by");
+                Deadline deadline = new Deadline(deadlineName, deadlineDate);
+                tasks.addTask(deadline);
+                logNewTask(deadline);
+                break;
+
+            case "event":
+                String eventName = action.getArgs();
+                String eventDate = action.getKwargs().get("at");
+                Event event = new Event(eventName, eventDate);
+                tasks.addTask(event);
+                logNewTask(event);
                 break;
 
             default:
-                tasks.addTask(new Task(action.getName()));
-                say("[+] Added: " + action.getName());
+                Task task = new Task(action.getName());
+                tasks.addTask(task);
+                logNewTask(task);
 
         }
     }
