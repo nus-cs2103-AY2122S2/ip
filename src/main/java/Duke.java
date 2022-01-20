@@ -15,6 +15,7 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        TaskList<String> taskList = new TaskList<>();
 
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("Hello! I'm Duke \nWhat can I do for you?");
@@ -28,9 +29,14 @@ public class Duke {
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 System.exit(0);
                 sc.close();
+            } else if (command.equals("list")) {
+                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                taskList.list();
+                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             } else {
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                System.out.println(String.format("%s", command));
+                taskList.add(command);
+                System.out.println("added: " + command);
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             }
         }
