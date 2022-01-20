@@ -1,7 +1,289 @@
 Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+______                       
+| ___ \                      
+| |_/ / __ _ _ __ ___  _ __  
+| ___ \/ _` | '__/ _ \| '_ \ 
+| |_/ / (_| | | | (_) | | | |
+\____/ \__,_|_|  \___/|_| |_|
+What can I do for you?
+_____________________________________
+Got it. I've added this task:
+  [T][ ] testing todo
+Now you have 1 tasks in the list.
+_____________________________________
+
+_____________________________________
+Here are the tasks in your list:
+  1.[T][ ] testing todo
+_____________________________________
+
+_____________________________________
+☹ OOPS!!! The description of a todo cannot be empty.
+_____________________________________
+
+_____________________________________
+Here are the tasks in your list:
+  1.[T][ ] testing todo
+_____________________________________
+
+_____________________________________
+Got it. I've added this task:
+  [D][ ] testing deadline (by: today)
+Now you have 2 tasks in the list.
+_____________________________________
+
+_____________________________________
+Here are the tasks in your list:
+  1.[T][ ] testing todo
+  2.[D][ ] testing deadline (by: today)
+_____________________________________
+
+_____________________________________
+☹ OOPS!!! Please specify a deadline by the /by keyword.
+_____________________________________
+
+_____________________________________
+Here are the tasks in your list:
+  1.[T][ ] testing todo
+  2.[D][ ] testing deadline (by: today)
+_____________________________________
+
+_____________________________________
+☹ OOPS!!! Please specify a deadline by the /by keyword.
+_____________________________________
+
+_____________________________________
+Here are the tasks in your list:
+  1.[T][ ] testing todo
+  2.[D][ ] testing deadline (by: today)
+_____________________________________
+
+_____________________________________
+☹ OOPS!!! The description of a deadline cannot be empty.
+_____________________________________
+
+_____________________________________
+Here are the tasks in your list:
+  1.[T][ ] testing todo
+  2.[D][ ] testing deadline (by: today)
+_____________________________________
+
+_____________________________________
+☹ OOPS!!! The description of a deadline cannot be empty.
+_____________________________________
+
+_____________________________________
+Here are the tasks in your list:
+  1.[T][ ] testing todo
+  2.[D][ ] testing deadline (by: today)
+_____________________________________
+
+_____________________________________
+Got it. I've added this task:
+  [E][ ] testing event (at: today)
+Now you have 3 tasks in the list.
+_____________________________________
+
+_____________________________________
+Here are the tasks in your list:
+  1.[T][ ] testing todo
+  2.[D][ ] testing deadline (by: today)
+  3.[E][ ] testing event (at: today)
+_____________________________________
+
+_____________________________________
+☹ OOPS!!! Please specify a date by the /at keyword.
+_____________________________________
+
+_____________________________________
+Here are the tasks in your list:
+  1.[T][ ] testing todo
+  2.[D][ ] testing deadline (by: today)
+  3.[E][ ] testing event (at: today)
+_____________________________________
+
+_____________________________________
+☹ OOPS!!! Please specify a date by the /at keyword.
+_____________________________________
+
+_____________________________________
+Here are the tasks in your list:
+  1.[T][ ] testing todo
+  2.[D][ ] testing deadline (by: today)
+  3.[E][ ] testing event (at: today)
+_____________________________________
+
+_____________________________________
+☹ OOPS!!! The description of a event cannot be empty.
+_____________________________________
+
+_____________________________________
+Here are the tasks in your list:
+  1.[T][ ] testing todo
+  2.[D][ ] testing deadline (by: today)
+  3.[E][ ] testing event (at: today)
+_____________________________________
+
+_____________________________________
+☹ OOPS!!! The description of a event cannot be empty.
+_____________________________________
+
+_____________________________________
+Here are the tasks in your list:
+  1.[T][ ] testing todo
+  2.[D][ ] testing deadline (by: today)
+  3.[E][ ] testing event (at: today)
+_____________________________________
+
+_____________________________________
+Nice! I've marked this task as done:
+  [T][X] testing todo
+_____________________________________
+
+_____________________________________
+Here are the tasks in your list:
+  1.[T][X] testing todo
+  2.[D][ ] testing deadline (by: today)
+  3.[E][ ] testing event (at: today)
+_____________________________________
+
+_____________________________________
+☹ OOPS!!! The task is already marked.
+_____________________________________
+
+_____________________________________
+Here are the tasks in your list:
+  1.[T][X] testing todo
+  2.[D][ ] testing deadline (by: today)
+  3.[E][ ] testing event (at: today)
+_____________________________________
+
+_____________________________________
+☹ OOPS!!! Please enter the index of the task!
+_____________________________________
+
+_____________________________________
+Here are the tasks in your list:
+  1.[T][X] testing todo
+  2.[D][ ] testing deadline (by: today)
+  3.[E][ ] testing event (at: today)
+_____________________________________
+
+_____________________________________
+☹ OOPS!!! The task index is invalid, only accepts 1 to 3.
+_____________________________________
+
+_____________________________________
+Here are the tasks in your list:
+  1.[T][X] testing todo
+  2.[D][ ] testing deadline (by: today)
+  3.[E][ ] testing event (at: today)
+_____________________________________
+
+_____________________________________
+☹ OOPS!!! Invalid argument type, please give a valid integer!
+_____________________________________
+
+_____________________________________
+Here are the tasks in your list:
+  1.[T][X] testing todo
+  2.[D][ ] testing deadline (by: today)
+  3.[E][ ] testing event (at: today)
+_____________________________________
+
+_____________________________________
+OK, I've marked this task as not done yet:
+  [T][ ] testing todo
+_____________________________________
+
+_____________________________________
+Here are the tasks in your list:
+  1.[T][ ] testing todo
+  2.[D][ ] testing deadline (by: today)
+  3.[E][ ] testing event (at: today)
+_____________________________________
+
+_____________________________________
+☹ OOPS!!! The task is not marked.
+_____________________________________
+
+_____________________________________
+Here are the tasks in your list:
+  1.[T][ ] testing todo
+  2.[D][ ] testing deadline (by: today)
+  3.[E][ ] testing event (at: today)
+_____________________________________
+
+_____________________________________
+☹ OOPS!!! Please enter the index of the task!
+_____________________________________
+
+_____________________________________
+Here are the tasks in your list:
+  1.[T][ ] testing todo
+  2.[D][ ] testing deadline (by: today)
+  3.[E][ ] testing event (at: today)
+_____________________________________
+
+_____________________________________
+☹ OOPS!!! The task index is invalid, only accepts 1 to 3.
+_____________________________________
+
+_____________________________________
+Here are the tasks in your list:
+  1.[T][ ] testing todo
+  2.[D][ ] testing deadline (by: today)
+  3.[E][ ] testing event (at: today)
+_____________________________________
+
+_____________________________________
+☹ OOPS!!! Invalid argument type, please give a valid integer!
+_____________________________________
+
+_____________________________________
+Here are the tasks in your list:
+  1.[T][ ] testing todo
+  2.[D][ ] testing deadline (by: today)
+  3.[E][ ] testing event (at: today)
+_____________________________________
+
+_____________________________________
+Noted. I've removed this task:
+ [D][ ] testing deadline (by: today)
+Now you have 2 tasks in the list.
+_____________________________________
+
+_____________________________________
+Here are the tasks in your list:
+  1.[T][ ] testing todo
+  2.[E][ ] testing event (at: today)
+_____________________________________
+
+_____________________________________
+☹ OOPS!!! Please enter the index of the task!
+_____________________________________
+
+_____________________________________
+Here are the tasks in your list:
+  1.[T][ ] testing todo
+  2.[E][ ] testing event (at: today)
+_____________________________________
+
+_____________________________________
+☹ OOPS!!! The task index is invalid, only accepts 1 to 2.
+_____________________________________
+
+_____________________________________
+Here are the tasks in your list:
+  1.[T][ ] testing todo
+  2.[E][ ] testing event (at: today)
+_____________________________________
+
+_____________________________________
+☹ OOPS!!! Invalid argument type, please give a valid integer!
+_____________________________________
+
+_____________________________________
+Bye. Hope to see you again soon!
+_____________________________________
 

@@ -1,0 +1,52 @@
+todo testing todo
+list
+todo
+list
+deadline testing deadline /by today
+list
+deadline testing deadline w/o by
+list
+deadline testing deadline w/o by 2 /by
+list
+deadline /by no description
+list
+deadline
+list
+event testing event /at today
+list
+event testing event w/o at
+list
+event testing event w/o at 2 /at
+list
+event /at no description
+list
+event
+list
+mark 1
+list
+mark 1
+list
+mark
+list
+mark 22
+list
+mark wrong
+list
+unmark 1
+list
+unmark 1
+list
+unmark
+list
+unmark 33
+list
+unmark 3ee
+list
+delete 2
+list
+delete
+list
+delete 44
+list
+delete we
+bye
