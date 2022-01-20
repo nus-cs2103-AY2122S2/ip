@@ -2,7 +2,7 @@
  * Task class represents the tasks created by the user.
  * It keeps track of the task's description and its status.
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -12,6 +12,11 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
     }
 
     /**
@@ -30,6 +35,8 @@ public class Task {
     public void unmarkAsDone() {
         this.isDone = false;
     }
+
+    public abstract String formatForFile();
 
     /**
      * Returns status icon and description of the task.

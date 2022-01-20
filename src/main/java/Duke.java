@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -16,7 +17,7 @@ public class Duke {
     protected ArrayList<Task> tasks;
 
     public Duke() {
-        this.tasks = new ArrayList<>();
+        this.tasks = initialiseTasks();
     }
 
     /**
@@ -41,6 +42,28 @@ public class Duke {
         System.out.print(lineBreak + message + catFace + lineBreak);
     }
 
+    private ArrayList<Task> initialiseTasks() {
+        FileUtil.createFile();
+        ArrayList<Task> tasks = new ArrayList<>();
+        List<String> lines = FileUtil.readFromFile();
+        if (lines != null) {
+            for (String line : lines) {
+                String[] args = line.split(" \\| ");
+                switch(args[0]) {
+                case "D":
+                    tasks.add(new Deadline(args[2], args[1].equals("1"), args[3]));
+                    break;
+                case "E":
+                    tasks.add(new Event(args[2], args[1].equals("1"), args[3]));
+                    break;
+                default:
+                    tasks.add(new Todo(args[2], args[1].equals("1")));
+                }
+            }
+        }
+        return tasks;
+    }
+
     private void listTasks() {
         StringBuilder message = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
@@ -55,6 +78,7 @@ public class Duke {
             int index = Integer.parseInt(input);
             Task t = tasks.get(index - 1);
             tasks.remove(index - 1);
+            FileUtil.writeTasksToFile(tasks);
             printMessage("Meow! Task is removed!\n" + t + "\n" + "Number of tasks in list: " + tasks.size());
         } catch (NullPointerException | IndexOutOfBoundsException e) {
             printMessage(ErrorMessage.MESSAGE_INVALID_TASK);
@@ -66,11 +90,14 @@ public class Duke {
             int index = Integer.parseInt(input);
             if (command.equals(CommandType.MARK)) {
                 tasks.get(index - 1).markAsDone();
+                System.out.print(lineBreak + "Meow! Task is done!" + catFace
+                        + tasks.get(index - 1) + "\n" + lineBreak);
             } else {
                 tasks.get(index - 1).unmarkAsDone();
+                System.out.print(lineBreak + "Meow! Task is not done!" + catFace
+                        + tasks.get(index - 1) + "\n" + lineBreak);
             }
-            System.out.print(lineBreak + "Meow! Task is done!" + catFace
-                    + tasks.get(index - 1) + "\n" + lineBreak);
+            FileUtil.writeTasksToFile(tasks);
         } catch (NullPointerException | IndexOutOfBoundsException e) {
             printMessage(ErrorMessage.MESSAGE_INVALID_TASK);
         }
@@ -89,6 +116,7 @@ public class Duke {
             t = new Todo(args[0]);
         }
         tasks.add(t);
+        FileUtil.appendToFile(t.formatForFile());
         printMessage("Meow! Task is added!\n" + t + "\n"
                 + "Number of tasks in list: " + tasks.size());
     }
@@ -125,13 +153,12 @@ public class Duke {
 
     public void runChatbot() {
         Scanner sc = new Scanner(System.in);
-        Parser ps = new Parser();
         String input = sc.nextLine().strip();
 
         while (!input.equals("bye")) {
             try {
-                CommandType command = ps.parseCommand(input);
-                String[] args = ps.parseInput(input, command);
+                CommandType command = Parser.parseCommand(input);
+                String[] args = Parser.parseInput(input, command);
                 processCommand(command, args);
             } catch (DukeException e) {
                 printMessage(e.toString());
