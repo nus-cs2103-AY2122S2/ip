@@ -1,4 +1,5 @@
 import java.util.Scanner;
+//import duke.Pikachu;
 
 public class Duke {
     public static void main(String[] args) {
@@ -49,13 +50,16 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         String currInput = "";
+        Pikachu pikachu = new Pikachu();
 
         while (true) {
-            currInput = sc.nextLine().toLowerCase();
-            if (currInput.equals("bye")) break;
-            System.out.println("    ________________________________________________________________");
-            System.out.println("    Pikachu says "+currInput);
-            System.out.println("    ________________________________________________________________");
+            currInput = sc.nextLine().toLowerCase(); //scan in user input, convert all the lowercase
+            if (currInput.equals("bye")) break; //if user input == bye, exit programme
+
+            System.out.println("________________________________________________________________");
+            System.out.println("Pikachu says:");
+            pikachu.parseInput(currInput); //passes the current input to pikachu
+            System.out.println("________________________________________________________________");
         }
         System.out.println("Pika pika! \nPikachu says bye!");
     }
