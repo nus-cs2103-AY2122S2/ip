@@ -18,6 +18,10 @@ public class Duke {
         System.out.println("    " + HLINE + "\n");
     }
 
+    private static void dialog(String line) {
+        dialog(new String[]{line});
+    }
+
     /**
      * Takes a list of items and returns a list of strings representing the items in
      * an (1-indexed) ordered list.
@@ -62,17 +66,13 @@ public class Duke {
                     break;
 
                 case "bye":
-                    dialog(new String[] {
-                            "Bye. Hope to see you again soon!"
-                    });
+                    dialog("Bye. Hope to see you again soon!");
                     return; // to shut the linter up
 
                 default:
                     Task task = new Task(input);
                     tasks.add(task);
-                    dialog(new String[] {
-                            String.format("added: %s", task)
-                    });
+                    dialog(String.format("added: %s", task));
             }
         }
     }
