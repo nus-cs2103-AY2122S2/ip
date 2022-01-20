@@ -77,12 +77,13 @@ public class Duke {
         greet();
         Scanner sc = new Scanner(System.in);
         whileLoop:
-        while (sc.hasNext()) {
+        while (sc.hasNextLine()) {
             String usrInput = sc.next();
             String task = "";
             switch (usrInput) {
                 case "bye":
                     exit();
+                    sc.close();
                     break whileLoop;
                 case "list":
                     list();
@@ -107,10 +108,6 @@ public class Duke {
                     break;
                 }
                 case "deadline": {
-//                    if (!sc.hasNext()) {
-//                        throwError("deadline");
-//                        break;
-//                    }
                     task = sc.next();
                     while (sc.hasNext()) {
                         String currStr = sc.next();
@@ -125,11 +122,6 @@ public class Duke {
                     break;
                 }
                 case "event": {
-                    if (!sc.hasNext()) {
-                        System.out.println(1);
-                        throwError("event");
-                        break;
-                    }
                     task = sc.next();
                     while (sc.hasNext()) {
                         String currStr = sc.next();
