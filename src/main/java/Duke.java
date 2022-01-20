@@ -1,9 +1,11 @@
 import java.util.Scanner;
 
+
 public class Duke {
 
     public static Task[] strArray = new Task[100];
     public static int index = 0;
+
 
     public static void main(String[] args) throws DukeException {
 
@@ -60,6 +62,7 @@ public class Duke {
             } else if (echo.substring(0,6).equals("delete")) {
                 int deleteIndex = Integer.parseInt(echo.substring(echo.length() - 1));
                 Task deleteTask = strArray[deleteIndex - 1];
+                removeTask(deleteIndex, strArray);
                 System.out.println("ok i have removed" + deleteTask.toString());
             }
             else {
@@ -71,5 +74,18 @@ public class Duke {
         System.out.println("byebye see u!");
         sc.close();
     }
+
+    public static void removeTask(int deleteIndex, Task[] array){
+        Task[] copy = new Task[array.length - 1];
+
+        for (int i = 0, j = 0; i < array.length; i++) {
+            if (i != index) {
+                copy[j++] = array[i];
+            }
+        }
+        strArray = copy;
+    }
+
+
 
 }
