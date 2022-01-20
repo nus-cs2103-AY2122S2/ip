@@ -18,7 +18,7 @@ public class Duke {
         String tryDeadline = "Try 'deadline A task /by Sunday'";
         String tryEvent = "Try 'event An event /at 7PM'";
         String tryMark = "Try 'mark 2'";
-        String tryUnmark = "Try 'Unmark 1'";
+        String tryUnmark = "Try 'unmark 1'";
 
         String unknown = "Sorry, I don't quite understand what you mean by '";
 
