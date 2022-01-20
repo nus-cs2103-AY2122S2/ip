@@ -58,6 +58,8 @@ public class CommandFactory {
                 return new AddTaskCommand(commandParameters, "deadline");
             } else if (commandWord.equals("event")) {
                 return new AddTaskCommand(commandParameters, "event");
+            } else if (commandWord.equals("delete")) {
+                return new DeleteCommand(commandParameters);
             } else {
                 throw new DukeException();
             }
