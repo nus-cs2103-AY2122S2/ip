@@ -50,6 +50,7 @@ public class Duke {
                                 + "Are you trying to type 'list' instead? If so, please try again!\n"
                                 + "_______________________________________________________\n";
                         System.out.println(err);
+                        break;
                     }
                 case "mark": {
                     try {
