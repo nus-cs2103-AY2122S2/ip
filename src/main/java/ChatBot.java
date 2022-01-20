@@ -20,31 +20,34 @@ public class ChatBot {
 
         Response start = new StartResponse();
         start.callback();
+        Scanner sc = new Scanner(System.in);
 
         while (isRunning) {
-            Scanner sc = new Scanner(System.in);
             String Cmd = sc.nextLine();
             String[] Marked = Cmd.split(" ");
+
             try {
-                if (Cmd.equals("bye")) {
+                Command firstCmd = Command.valueOf(Marked[0]);
+
+                if (firstCmd == Command.bye) {
                     Response stop = new StopResponse();
                     stop.callback();
                     this.stop();
                     break;
-                } else if (Marked[0].equals("delete")) {
+                } else if (firstCmd == Command.delete) {
                     int index = Integer.parseInt(Marked[1]);
                     Task rm = taskList.get(index - 1);
                     taskList.remove(index - 1);
                     Response curr = new DeleteResponse(rm, taskList.size());
                     curr.callback();
-                }else if (Cmd.equals("list")) {
+                }else if (firstCmd == Command.list) {
                     Response lst = new ListResponse(taskList);
                     lst.callback();
-                } else if (Marked[0].equals("mark")) {
+                } else if (firstCmd == Command.mark) {
                     taskList.get(Integer.parseInt(Marked[1]) - 1).setMark(true);
-                } else if (Marked[0].equals("unmark")) {
+                } else if (firstCmd == Command.unmark) {
                     taskList.get(Integer.parseInt(Marked[1]) - 1).setMark(false);
-                } else if (Marked[0].equals("todo")) {
+                } else if (firstCmd == Command.todo) {
                     String[] ans = Cmd.split("todo ");
                     if (ans.length == 1) {
                         throw new ToDoException("");
@@ -53,12 +56,12 @@ public class ChatBot {
                     taskList.add(tempTask);
                     new AddTaskResponse(tempTask, taskList).callback();
 
-                } else if (Marked[0].equals("deadline")) {
+                } else if (firstCmd == Command.deadline) {
                     String[] ans = Cmd.split(" /by ");
                     Task tempTask = new Deadline(ans[0].replace("deadline ", "") ,ans[1]);
                     taskList.add(tempTask);
                     new AddTaskResponse(tempTask, taskList).callback();
-                } else if (Marked[0].equals("event")) {
+                } else if (firstCmd == Command.event) {
                     String[] ans = Cmd.split(" /at ");
                     Task tempTask = new Events(ans[0].replace("event ", "") ,ans[1]);
                     taskList.add(tempTask);
@@ -67,22 +70,8 @@ public class ChatBot {
                 else {
                     throw new ForeignException("");
                 }
-            } catch (ToDoException e)  {
-                System.out.println(
-                        "____________________________________________________________"
-                );
-                System.out.println("OOPS!!! The description of a todo cannot be empty.");
-                System.out.println(
-                        "____________________________________________________________"
-                );
-            } catch (ForeignException e) {
-                System.out.println(
-                        "____________________________________________________________"
-                );
-                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
-                System.out.println(
-                        "____________________________________________________________"
-                );
+            } catch (DukeException e)  {
+                e.callback();
             }
 
         }

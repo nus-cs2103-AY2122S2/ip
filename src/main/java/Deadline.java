@@ -25,6 +25,6 @@ public class Deadline extends Task{
 
     @Override
     String display() {
-        return "[" +this.type + "] " + "[" +this.done + "] " + this.name + "(by " + info + ")";
+        return "[" +this.type + "] " + "[" +this.done + "] " + this.name + " (by " + info + ")";
     }
 }

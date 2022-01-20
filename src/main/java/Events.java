@@ -20,7 +20,7 @@ public class Events extends Task {
 
     @Override
     String display() {
-        return "[" +this.type + "] " + "[" +this.done + "] " + this.name + "(at " + info + ")";
+        return "[" +this.type + "] " + "[" +this.done + "] " + this.name + " (at " + info + ")";
     }
 
 }

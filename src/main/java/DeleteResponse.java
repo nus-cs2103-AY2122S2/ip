@@ -29,7 +29,7 @@ public class DeleteResponse implements Response {
         System.out.println(
                 "____________________________________________________________"
         );
-        System.out.println("Noted. I've removed this task: ");
+        System.out.println("Noted. I've removed this task:");
         System.out.println(del.display());
         System.out.println("Now you have " + size + " in the list");
         System.out.println(

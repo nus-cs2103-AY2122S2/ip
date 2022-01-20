@@ -31,7 +31,7 @@ public class AddTaskResponse implements Response{
         );
 
         System.out.println(
-                "Got it. I've added this task: "
+                "Got it. I've added this task:"
         );
 
         System.out.println(

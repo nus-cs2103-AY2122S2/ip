@@ -9,4 +9,5 @@ public interface Response {
      * Callback function that displays the intended results
      */
     public void callback();
+
 }
