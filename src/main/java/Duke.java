@@ -5,7 +5,7 @@ public class Duke {
     public static Task[] strArray = new Task[100];
     public static int index = 0;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
 
         System.out.println("hello im duke wassup \n what can I help you?");
         Scanner sc = new Scanner(System.in);
@@ -31,11 +31,17 @@ public class Duke {
                 System.out.println("I have unmarked: " +
                          strArray[index - 1].getStatus()  + strArray[index - 1] );
             } else if(echo.substring(0,4).equals("todo")) {
-                Todo t = new Todo(echo);
-                strArray[index] = t;
-                System.out.println("ok i have added this task: ");
-                System.out.println(t.getTag() + t.getStatus() + " " + echo);
-                index++;
+                if(echo.equals("todo")){
+                    System.out.println("wrong");
+                    //throw new DukeException(echo);
+
+                } else {
+                    Todo t = new Todo(echo);
+                    strArray[index] = t;
+                    System.out.println("ok i have added this task: ");
+                    System.out.println(t.getTag() + t.getStatus() + " " + echo);
+                    index++;
+                }
             }
             else if(echo.substring(0,8).equals("deadline")){
                 String time = echo.substring(echo.lastIndexOf("/") + 1);
@@ -51,6 +57,13 @@ public class Duke {
                 System.out.println("ok i have added this task: ");
                 System.out.println(t.getTag() + t.getStatus() + "at" + t.getTime());
                 index++;
+            } else if (echo.substring(0,6).equals("delete")) {
+                int deleteIndex = Integer.parseInt(echo.substring(echo.length() - 1));
+                Task deleteTask = strArray[deleteIndex - 1];
+                System.out.println("ok i have removed" + deleteTask.toString());
+            }
+            else {
+                System.out.println("I dont understand what that means!!");
             }
             echo = sc.nextLine();
         }
