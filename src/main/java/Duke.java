@@ -14,13 +14,14 @@ public class Duke {
             System.out.println("Got it. I've added: \n" + t.toString());
             System.out.printf("Sheesh you've now got %d tasks in the list\n", list.size());
         } else if (command.equals("deadline")) {
-            String[] arr = input.substring(9).split("/by");
+            String[] arr = input.substring(9).split("/by ");
             Deadline d = new Deadline(arr[0], arr[1]);
             list.add(d);
             System.out.println("Got it. I've added: \n" + d.toString());
             System.out.printf("Sheesh you've now got %d tasks in the list\n", list.size());
         } else if (command.equals("event")) {
-            String[] arr = input.substring(9).split("/at");
+            String[] arr = input.substring(6).split("/at ");
+            System.out.println(arr[0]);
             Event e = new Event(arr[0], arr[1]);
             list.add(e);
             System.out.println("Got it. I've added: \n" + e.toString());
@@ -54,7 +55,7 @@ public class Duke {
                 + "| |   | |   | || | | || (__|  __/\n"
                 + "\\_|   |_|   |_||_| |_| \\___|\\___|\n";
 
-        String divider = "~~~~~~~~~~~~~~~~~~~~~~~\n";
+        String divider = "~~~~~~~~~~~~~~~~~~~~~~~";
 
         System.out.println("Hello I'm\n" + prince);
         System.out.println("How can I help you today?");
@@ -65,6 +66,7 @@ public class Duke {
         while (true) {
             String command = sc.nextLine();
             handle(command);
+            System.out.println(divider);
             if (command.equals("bye")) {
                 break;
             }

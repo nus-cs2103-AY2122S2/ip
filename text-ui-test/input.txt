@@ -1,0 +1,10 @@
+todo buy doge nft
+deadline sell doge nft /by Sunday
+todo profit
+list
+mark 2
+mark 3
+unmark 2
+list
+event go out for dinner /at Friday night 6-8pm
+bye
