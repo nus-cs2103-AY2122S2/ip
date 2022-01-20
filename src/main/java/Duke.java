@@ -10,7 +10,7 @@ public class Duke {
                 + "What can I do for you?\n";
         System.out.println(greeting); // print greeting message
 
-        ArrayList<Task> list = new ArrayList<Task>(); // init arraylist
+        ArrayList<Task> list = new ArrayList<>(); // init arraylist
         String input = "";
 
         while (!input.equals("bye")) {
@@ -37,6 +37,10 @@ public class Duke {
                     targetTask.unmark();
                 }
             } else if (firstWord.equals("todo")) { // adds a todo task
+                if (inputs.length == 1) {
+                    System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                    break;
+                }
                 ToDo toDo = new ToDo(input.substring(5));
                 list.add(toDo);
                 System.out.println("Got it. I've added this task:\n"
@@ -49,21 +53,27 @@ public class Duke {
                 }
                 String date = input.substring(start + 4);
                 if (firstWord.equals("deadline")) { // adds a deadline task
+                    if (inputs.length == 1) {
+                        System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
+                        break;
+                    }
                     Deadline deadline = new Deadline(input.substring(9, start - 1), date);
                     list.add(deadline);
                     System.out.println("Got it. I've added this task:\n"
                             + deadline + "\nNow you have " + list.size() + " tasks in your list.");
                 } else { // adds an event task
+                    if (inputs.length == 1) {
+                        System.out.println("☹ OOPS!!! The description of an event cannot be empty.");
+                        break;
+                    }
                     Event event = new Event(input.substring(6, start - 1), date);
                     list.add(event);
                     System.out.println("Got it. I've added this task:\n"
                             + event + "\nNow you have " + list.size() + " tasks in your list.");
                 }
-            } else { // default task that is not a todo/event/deadline
-                Task task = new Task(input);
-                list.add(task);
-                System.out.println("Got it. I've added this task:\n"
-                        + task + "\nNow you have " + list.size() + " tasks in your list.");
+            } else { // print error message
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                break;
             }
         }
     }
