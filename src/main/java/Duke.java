@@ -12,13 +12,7 @@ public class Duke {
     }
 
     private static boolean checkNumeric(String string) {
-        boolean numeric = true;
-        numeric = string.matches("-?\\d+(\\.\\d+)?");
-        if (numeric) {
-            return true;
-        } else {
-            return false;
-        }
+        return string.matches("-?\\d+(\\.\\d+)?");
     }
 
     public static void main(String[] args) {
@@ -38,6 +32,7 @@ public class Duke {
         int taskNumber = 0;
         ArrayList<TaskStorage> storingList = new ArrayList<>();
         BotException exception = new BotException();
+
         int commandIndex = nextWord.indexOf(" ");
         String commandWord;
         String restWord;
@@ -102,6 +97,18 @@ public class Duke {
                     taskNumber += 1;
                     storingList.add(new TaskStorage(restWord, "E"));
                     addTask(storingList, taskNumber);
+                }
+            } else if (commandWord.equals("delete")) {
+                if (! checkNumeric(restWord)) {
+                    exception.notNumeric("delete");
+                } else {
+                    TaskStorage temp = storingList.remove( Integer.parseInt(restWord) - 1);
+                    System.out.println("____________________________________________________________");
+                    System.out.println(" Noted. I've removed this task: ");
+                    System.out.println("  " + temp);
+                    taskNumber -= 1;
+                    System.out.println(" Now you have " + taskNumber + " tasks in the list.");
+                    System.out.println("____________________________________________________________");
                 }
             } else {
                 exception.wrongSyntax();

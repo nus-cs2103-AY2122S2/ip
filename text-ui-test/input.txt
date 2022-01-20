@@ -11,4 +11,6 @@ list
 lolah
 unmark 3
 list
+delete 2
+list
 bye
