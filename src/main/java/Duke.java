@@ -1,16 +1,27 @@
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.List;
 
 public class Duke {
     private static final String br = "\t____________________________________________________________\n";
+    private static List<String> lst = new ArrayList<String>();
 
     private static void greeting() {
-        String sentences = "\tHello! I'm Duke\n\tWhat can I do for you?\n";
-        System.out.println(Duke.br + sentences + Duke.br + "\n");
+        String sentences = "\t Hello! I'm Duke\n\t What can I do for you?\n";
+        System.out.println(Duke.br + sentences + Duke.br);
     }
 
     private static void bye() {
-        String sentences = "\tBye. Hope to see you again soon!\n";
-        System.out.println(Duke.br + sentences + Duke.br + "\n");
+        String sentences = "\t Bye. Hope to see you again soon!\n";
+        System.out.println(Duke.br + sentences + Duke.br);
+    }
+
+    private static void list() {
+        System.out.print(Duke.br);
+        for (int i = 1; i <= lst.size(); i++) {
+            System.out.println("\t " + i + ". " + lst.get(i-1));
+        }
+        System.out.println(Duke.br);
     }
 
     public static void main(String[] args) {
@@ -20,7 +31,13 @@ public class Duke {
         Duke.greeting();
         input = sc.nextLine();
         while (!input.equals("bye")) {
-            System.out.println(Duke.br + "\t" + input + "\n" + Duke.br + "\n");
+            if (input.equals("list")) {
+                Duke.list();
+                input = sc.nextLine();
+                continue;
+            }
+            Duke.lst.add(input);
+            System.out.println(Duke.br + "\t added: " + input + "\n" + Duke.br);
             input = sc.nextLine();
         }
         Duke.bye();
