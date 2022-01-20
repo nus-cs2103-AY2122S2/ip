@@ -55,29 +55,12 @@ public class Duke {
                 case "mark": {
                     try {
                         int index = Integer.parseInt(tokens[1]);
-                        if (index <= 0) {
-                            throw new DukeException("index is negative or zero");
-                        }
                         cmd.mark(index - 1);
                         break;
-                    } catch (NullPointerException ex) {
-                        String err = "_______________________________________________________\n"
-                                + "Entry does not exist!\n"
-                                + "Please provide a valid entry!\n"
-                                + "_______________________________________________________\n";
-                        System.out.println(err);
-                        break;
-                    } catch (NumberFormatException ex) {
-                        String err = "_______________________________________________________\n"
-                                + "Decimals detected!\n"
-                                + "Please provide a valid entry!\n"
-                                + "_______________________________________________________\n";
-                        System.out.println(err);
-                        break;
-                    } catch (DukeException ex) {
+                    } catch (NumberFormatException | NullPointerException | ArrayIndexOutOfBoundsException ex) {
                         String err = "_______________________________________________________\n"
                                 + "Invalid entry detected!\n"
-                                + "Please provide a non-zero, positive entry value!\n"
+                                + "Please provide a valid entry!\n"
                                 + "_______________________________________________________\n";
                         System.out.println(err);
                         break;
@@ -86,29 +69,12 @@ public class Duke {
                 case "unmark": {
                     try {
                         int index = Integer.parseInt(tokens[1]);
-                        if (index <= 0) {
-                            throw new DukeException("index is negative or zero");
-                        }
                         cmd.unmark(index - 1);
                         break;
-                    } catch (NullPointerException ex) {
-                        String err = "_______________________________________________________\n"
-                                + "Entry does not exist!\n"
-                                + "Please provide a valid entry!\n"
-                                + "_______________________________________________________\n";
-                        System.out.println(err);
-                        break;
-                    } catch (NumberFormatException ex) {
-                        String err = "_______________________________________________________\n"
-                                + "Decimals detected!\n"
-                                + "Please provide a valid entry!\n"
-                                + "_______________________________________________________\n";
-                        System.out.println(err);
-                        break;
-                    } catch (DukeException ex) {
+                    } catch (NumberFormatException | NullPointerException | ArrayIndexOutOfBoundsException ex) {
                         String err = "_______________________________________________________\n"
                                 + "Invalid entry detected!\n"
-                                + "Please provide a non-zero, positive entry value!\n"
+                                + "Please provide a valid entry!\n"
                                 + "_______________________________________________________\n";
                         System.out.println(err);
                         break;
