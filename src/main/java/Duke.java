@@ -1,5 +1,10 @@
 import java.util.Scanner;
 
+/**
+ * Duke Class contains a scanner to read user input and a TaskList that contains all tasks.
+ * Duke only handles the processing of user input and responding to the user. Task list logic is
+ * handled by the TaskList class.
+ */
 public class Duke {
     public static void main(String[] args) {
         String logo = "\n" +
@@ -113,50 +118,11 @@ public class Duke {
         reader.close();
     }
 
+    /**
+     * Stylises, indents, and prints the given string.
+     * @param str The String object to be stylised.
+     */
     private static void printAce(String str) {
         System.out.println("________\n" + str.indent(4));
     }
 }
-
-/*
-case list:
-    print tasks from taskList. If no tasks in list, string is empty. Print accordingly.
-
-case mark:
-    Split string at ' ' and get task from second part.
-    Two potential errors:
-        1. No number provided. Throw IncorrectInputFormatException.
-        2. Number is out of range. Throw IndexOutOfRangeException.
-    If task available, mark and print.
-
-case unmark:
-    Split string at ' ' and get task from second part.
-    Two potential errors:
-        1. No number provided. Throw IncorrectInputFormatException.
-        2. Number is out of range. Throw IndexOutOfRangeException.
-    If task available, unmark and print.
-
-case todo:
-    Split string at ' ' only once.
-    Pass both sections into taskList to addTask.
-    One potential error:
-        1. No second half provided. Throw IncorrectInputFormatException.
-    If task created, get the task and print. Print number of tasks.
-
-case deadline:
-    Split string once at ' ' and once at ' /by '.
-    Pass three sections into taskList to addTask.
-    One potential error:
-        1. One section is missing. Throw IncorrectInputFormatException.
-    If task created, get the task and print. Print number of tasks.
-
-case event:
-    Split string once at ' ' and once at ' /at '.
-    Pass three sections into taskList to addTask.
-    One potential error:
-        1. One section is missing. Throw IncorrectInputFormatException.
-    If task created, get the task and print. Print number of tasks.
-
-case default:
-    Print sorry I did not understand that command. Here are a list of commands.
- */
