@@ -18,11 +18,21 @@ public class Duke {
         System.out.println("    " + HLINE + "\n");
     }
     
-    private static List<String> enumerateList(List<String> list) {
+    /**
+     * Takes a list of items and returns a list of strings representing the items in an (1-indexed) ordered list.
+     * 
+     * Each string in the list is of the form {@code n. foo}, where {@code n} is the index of the item (starting from 1)
+     * and {@code foo} is the string representation of the item.
+     * 
+     * @param <T> the type of items in {@code items}
+     * @param items the list of items to be enumerated
+     * @return a list of strings representing the items in an 1-indexed ordered list
+     */
+    private static <T> List<String> enumerateList(List<T> items) {
         List<String> enumerated = new ArrayList<>();
         int idx = 0;
-        for (String str : list) {
-            enumerated.add(String.format("%d. %s", ++idx, str));
+        for (T item : items) {
+            enumerated.add(String.format("%d. %s", ++idx, item));
         }
         return enumerated;
     }
