@@ -55,16 +55,16 @@ public class Duke {
     private String add(String input) {
         try {
             Task t;
-            if (input.startsWith("todo ")) t = new Task(input, Type.TODO);
+            if (input.startsWith("todo ")) t = new Task(input.split(" ", 2)[1], Type.TODO);
             else if (input.startsWith("event ")) {
-                t = new Task(input.split("/")[0], Type.EVENT);
+                t = new Task(input.split("/")[0].split(" ", 2)[1], Type.EVENT);
                 t.setTime(input.split("/at ", 2)[1]);
             } else {
-                t = new Task(input.split("/")[0], Type.DEADLINE);
+                t = new Task(input.split("/")[0].split(" ", 2)[1], Type.DEADLINE);
                 t.setTime(input.split("/by ", 2)[1]);
             }
             this.list.add((t));
-            return "Got it. I've added this task: \n  " +
+            return "Got it. I've added this task:\n  " +
                     t + "\nNow you have " + this.list.size() + " tasks in the list.";
         }
         catch (Exception e) {   //array index out of bound
