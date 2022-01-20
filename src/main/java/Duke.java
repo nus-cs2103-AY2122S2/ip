@@ -38,14 +38,7 @@ public class Duke
                 for (int i = 0; i < toDoList.size(); i++)
                 {
                     Task t = toDoList.get(i);
-                    if (t.getStatus() == 1)
-                    {
-                        System.out.printf("%d. [X] " + t.getName() + "\n", i + 1);
-                    }
-                    else
-                    {
-                        System.out.printf("%d. [ ] " + t.getName() + "\n", i + 1);
-                    }
+                    System.out.printf("%d. " + t.toString(), i + 1);
                 }
             }
             else if (split[0].equals("unmark") && split.length > 1 && isInteger(split[1]))
@@ -61,6 +54,38 @@ public class Duke
                 Task t = toDoList.get(item - 1);
                 t.mark();
                 System.out.printf("great job! I've marked this task as done: %s\n", t.getName());
+            }
+            else if (split[0].equals("todo") && split.length > 1)
+            {
+                String name = userInput.substring(5);
+                ToDo t = new ToDo(name);
+                toDoList.add(t);
+                System.out.printf("task added:\n%s", t);
+                System.out.printf("you now have %d tasks\n",toDoList.size());
+
+            }
+            else if (split[0].equals("deadline") && split.length > 1 && userInput.contains("/"))
+            {
+                String item = userInput.substring(9);
+                String[] divide = item.split("/");
+                String name = divide[0];
+                String dueDate = divide[1];
+                Deadline d = new Deadline(name, dueDate.substring(3));
+                toDoList.add(d);
+                System.out.printf("task added:\n%s", d.toString());
+                System.out.printf("you now have %d tasks\n", toDoList.size());
+
+            }
+            else if (split[0].equals("event") && split.length > 1 && userInput.contains("/"))
+            {
+                String item = userInput.substring(6);
+                String[] divide = item.split("/");
+                String name = divide[0];
+                String time = divide[1];
+                Event e = new Event(name, time.substring(3));
+                toDoList.add(e);
+                System.out.printf("task added:\n%s", e.toString());
+                System.out.printf("you now have %d tasks\n", toDoList.size());
             }
             else
             {
