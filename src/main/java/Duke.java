@@ -10,56 +10,100 @@ public class Duke {
     private static final String UNMARK_MESSAGE = "OI! What happened to completing: \n";
     private static final List<Task> toDoList = new ArrayList<>();
 
+    /**
+     * Private method that checks if the input is valid and returns the array which
+     * contains information for further evaluations
+     * @param arr the array to checks for invalid inputs
+     * @param command the command of the input
+     * @return the array which contains information
+     * for tasks, toReturn[0] contains the task name, toReturn[1] contains the time (if any)
+     * for mark and unmark, toReturn[0] contains the task number in String format
+     * @throws DukeException the exception specific to Duke
+     */
+    private static String[] validate(String[] arr, String command) throws DukeException {
+        String test;
+        String[] temp;
+        String[] toReturn = new String[2];
+        try {
+            if (command.equals("bye") || command.equals("list")) {
+                // do nothing as it doesn't require more information
+            } else if (command.equals("todo")) {
+                toReturn[0] = arr[1];
+            } else if (command.equals("deadline")) {
+                test = arr[1];
+                toReturn = test.split("/by");
+                test = toReturn[1];
+            } else if (command.equals("event")) {
+                test = arr[1];
+                toReturn = test.split("/at");
+                test = toReturn[1];
+            } else if (command.equals("mark") || command.equals("unmark")) {
+                toReturn[0] = arr[1];
+                int index = Integer.parseInt(arr[1]);
+            }
+            return toReturn;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("I need more information than that aye >:(");
+        } catch (NumberFormatException e) {
+            throw new DukeException("numbers... Numbers... NUMBERS! Tell me WHICH task!");
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println(GREETING_MESSAGE);
 
         Scanner sc = new Scanner(System.in);
-        while (sc.hasNextLine()) {
-            String input = sc.nextLine();
-            if (input.equals("bye")) {
-                System.out.println(FAREWELL_MESSAGE);
-                break;
-            } else if (input.equals("list")) {
-                int count = 1;
-                for (Task item : toDoList) {
-                    System.out.println(String.format("%d: %s", count, item));
-                    count++;
+
+            while (sc.hasNextLine()) {
+                try {
+                    String input = sc.nextLine();
+                    String[] arr = input.split(" ", 2);
+                    String command = arr[0];
+                    String[] info = validate(arr, command);
+
+                    if (input.equals("bye")) {
+                        System.out.println(FAREWELL_MESSAGE);
+                        break;
+                    } else if (input.equals("list")) {
+                        int count = 1;
+
+                        for (Task item : toDoList) {
+                            System.out.println(String.format("%d: %s", count, item));
+                            count++;
+                        }
+                    } else if (command.equals("mark")) {
+                        int index = Integer.parseInt(info[0]) - 1;
+                        Task temp = toDoList.get(index);
+                        temp.markAsDone();
+                        System.out.println(MARK_MESSAGE + temp);
+                    } else if (command.equals("unmark")) {
+                        int index = Integer.parseInt(info[0]) - 1;
+                        Task temp = toDoList.get(index);
+                        temp.markAsNotDone();
+                        System.out.println(UNMARK_MESSAGE + temp);
+                    } else if (command.equals("todo")) {
+                        Task task = new ToDo(info[0]);
+                        toDoList.add(task);
+                        System.out.println(ADD_MESSAGE + task);
+                        System.out.println(String.format("Aiyo, now you have %d tasks in the list, jiayous!", toDoList.size()));
+                    } else if (command.equals("deadline")) {
+                        Task task = new Deadline(info[0], info[1]);
+                        toDoList.add(task);
+                        System.out.println(ADD_MESSAGE + task);
+                        System.out.println(String.format("Aiyo, now you have %d tasks in the list, jiayous!", toDoList.size()));
+                    } else if (command.equals("event")) {
+                        Task task = new Event(info[0], info[1]);
+                        toDoList.add(task);
+                        System.out.println(ADD_MESSAGE + task);
+                        System.out.println(String.format("Aiyo, now you have %d tasks in the list, jiayous!", toDoList.size()));
+                    } else {
+                        throw new DukeException("Nani? Me no understand what you say .-.");
+                    }
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("You don't have that many tasks to do, sir.");
                 }
-            } else if (input.startsWith("mark")) {
-                String intValue = input.replaceAll("[^0-9]", "");
-                int index = Integer.parseInt(intValue) - 1;
-                Task temp = toDoList.get(index);
-                temp.markAsDone();
-                System.out.println(MARK_MESSAGE + temp);
-            } else if (input.startsWith("unmark")) {
-                String intValue = input.replaceAll("[^0-9]", "");
-                int index = Integer.parseInt(intValue) - 1;
-                Task temp = toDoList.get(index);
-                temp.markAsNotDone();
-                System.out.println(UNMARK_MESSAGE + temp);
-            } else if (input.startsWith("todo")) {
-                String taskName = input.substring(5);
-                Task task = new ToDo(taskName);
-                toDoList.add(task);
-                System.out.println(ADD_MESSAGE + task);
-                System.out.println(String.format("Aiyo, now you have %d tasks in the list, jiayous!", toDoList.size()));
-            } else if (input.startsWith("deadline")) {
-                String[] splitString = input.split("/by ");
-                String taskName = splitString[0].substring(9);
-                String by = splitString[1];
-                Task task = new Deadline(taskName, by);
-                toDoList.add(task);
-                System.out.println(ADD_MESSAGE + task);
-                System.out.println(String.format("Aiyo, now you have %d tasks in the list, jiayous!", toDoList.size()));
-            } else if (input.startsWith("event")) {
-                String[] splitString = input.split("/at ");
-                String taskName = splitString[0].substring(6);
-                String at = splitString[1];
-                Task task = new Event(taskName, at);
-                toDoList.add(task);
-                System.out.println(ADD_MESSAGE + task);
-                System.out.println(String.format("Aiyo, now you have %d tasks in the list, jiayous!", toDoList.size()));
             }
-        }
     }
 }
