@@ -37,14 +37,14 @@ public class Duke {
                 switch (command) {
                     case "bye":
                         System.out.println("------------------------------------------------------");
-                        System.out.println("    Bye. Have a great day!");
+                        System.out.println("Bye. Have a great day!");
                         System.out.println("======================================================");
                         break;
                     case "list":
                         System.out.println("------------------------------------------------------");
-                        System.out.println("    Here are your tasks:");
+                        System.out.println("Here are your tasks:");
                         for (int i = 1; i <= this.list.size(); i++) {
-                            System.out.println("    " + i + ". " + this.list.get(i-1));
+                            System.out.println(i + ". " + this.list.get(i-1));
                         }
                         System.out.println("======================================================");
                         break;
@@ -88,10 +88,26 @@ public class Duke {
                         ToDo td = new ToDo(details);
                         add_task(td);
                         break;
+                    case "delete":
+                        try {
+                            System.out.println("------------------------------------------------------");
+                            delete_task(Integer.parseInt(details) - 1);
+                            System.out.println();
+                            System.out.println("======================================================");
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new DukeException("No such task exists! Are you sure about that task number?");
+                        }
+                        break;
                     default:
                         throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
+    }
+
+    private void delete_task(int i) {
+        Task removed_task = this.list.remove(i);
+        System.out.println("Noted. I've removed this task:\n" + removed_task +
+                "\nnow you have " + this.list.size() + " tasks in the list.");
     }
 
     private boolean is_valid_date_task(String details, String type) throws DukeException{
@@ -111,9 +127,8 @@ public class Duke {
 
     private void output(Task t) {
         System.out.println(
-                "   The following task has been added: \n" +
-                "     " + t + "\n" +
-                "   Now you have " + this.count + " tasks in the list \n" +
+                "The following task has been added: \n" + t + "\n" +
+                "Now you have " + this.count + " tasks in the list \n" +
                 "======================================================");
     }
 
