@@ -8,8 +8,22 @@ public class TrackingList {
         this.trackingList = new ArrayList<>();
     }
 
-    public void addToList(String toAdd) {
-        this.trackingList.add(new Task(toAdd));
+    public String addTodo(String description) {
+        ToDo toDo = new ToDo(description);
+        this.trackingList.add(toDo);
+        return toDo.toString();
+    }
+
+    public String addEvent(String description, String eventDate) {
+        Event event = new Event(description, eventDate);
+        this.trackingList.add(event);
+        return event.toString();
+    }
+
+    public String addDeadline(String description, String dueDate) {
+        Deadline deadline = new Deadline(description, dueDate);
+        this.trackingList.add(deadline);
+        return deadline.toString();
     }
 
     // Return the relevant Task in string form
@@ -24,6 +38,10 @@ public class TrackingList {
         Task task = this.trackingList.get(taskNumber - 1); // assume valid taskNumber
         task.markAsNotDone();
         return task.toString();
+    }
+
+    public int getNumberOfTasks() {
+        return this.trackingList.size();
     }
 
     @Override

@@ -1,5 +1,5 @@
-public class Task {
-    private String description;
+public abstract class Task {
+    private final String description;
     private boolean isDone;
 
     public Task(String description) {
@@ -15,9 +15,12 @@ public class Task {
         this.isDone = false;
     }
 
+    // Returns the icon of the type of task
+    public abstract String getIcon();
+
     @Override
     public String toString() {
         String completionMark = (this.isDone? "X" : " ");
-        return String.format("[%s] %s", completionMark, this.description);
+        return String.format("[%s][%s] %s ", getIcon(), completionMark, this.description);
     }
 }
