@@ -19,6 +19,7 @@ public class Duke {
         String tryEvent = "Try 'event An event /at 7PM'";
         String tryMark = "Try 'mark 2'";
         String tryUnmark = "Try 'unmark 1'";
+        String tryDelete = "Try 'delete 3'";
 
         String unknown = "Sorry, I don't quite understand what you mean by '";
 
@@ -138,6 +139,25 @@ public class Duke {
                         catch (NumberFormatException exception) {
                             echo.echoString("You need to give me a number doc!\n" +
                                     tryUnmark);
+                        }
+                    }
+                    break;
+
+                case "delete":
+                    if (tempStrArray.length == 1) {
+                        echo.echoString(specific + "Which task do you want me to delete?\n" +
+                                tryDelete);
+                    } else {
+                        String testString = tempStrArray[1];
+
+                        // Test if single number after 'delete'
+                        try {
+                            int address = Integer.parseInt(testString);
+                            memory.deleteTask(address);
+                        }
+                        catch (NumberFormatException exception) {
+                            echo.echoString("You need to give me a number doc!\n" +
+                                    tryDelete);
                         }
                     }
                     break;
