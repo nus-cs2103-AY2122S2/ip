@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.*;
 import myPackage.*;
+import exceptions.DukeException;
 
 public class Duke {
     public static void main(String[] args) {
@@ -41,29 +42,66 @@ public class Duke {
                     break;
                 }
                 default: {
-                    System.out.println("Got it, I've added this task:");
                     switch (keyword) {
                         case "todo": {
+                            try {
+                                if (userInputSplit.length < 2) {
+                                    throw new DukeException("TODO NEEDS SOMETHING");
+                                }
+                            } catch (DukeException e) {
+                                System.out.println(e);
+                                break;
+                            }
+                            System.out.println("Got it, I've added this task:");
                             list[listCount] = new ToDos(userInput);
+                            System.out.printf("\nyou now have %d tasks in the list%n", listCount + 1);
+                            listCount++;
                             break;
                         }
                         case "deadline": {
+                            try {
+                                if (userInputSplit.length < 2) {
+                                    throw new DukeException("Deadline what when how");
+                                }
+                            } catch (DukeException e) {
+                                System.out.println(e);
+                                break;
+                            }
+                            System.out.println("Got it, I've added this task:");
                             list[listCount] = new Deadlines(userInput.split("/")[0], userInput.split("/")[1]);
+                            System.out.printf("\nyou now have %d tasks in the list%n", listCount + 1);
+                            listCount++;
                             break;
                         }
                         case "event": {
+                            try {
+                                if (userInputSplit.length < 2) {
+                                    throw new DukeException("event when what how where what");
+                                }
+                            } catch (DukeException e) {
+                                System.out.println(e);
+                                break;
+                            }
+                            System.out.println("Got it, I've added this task:");
                             list[listCount] = new Events(userInput.split("/")[0], userInput.split("/")[1]);
+                            System.out.printf("\nyou now have %d tasks in the list%n", listCount + 1);
+                            listCount++;
+                            break;
+                        }
+                        default: {
+                            try {
+                                throw new DukeException("WDYM by " + userInput);
+                            } catch (DukeException e) {
+                                System.out.println(e);
+                            }
                             break;
                         }
                     }
-                    System.out.printf("\nyou now have %d tasks in the list%n", listCount + 1);
-                    listCount++;
+
                 }
             }
-
-
-
         }
+
 
     }
 }
