@@ -14,14 +14,24 @@ public class Duke {
 
         while(true) {
             String input = sc.nextLine();
-            if (input.equals("bye") || input.equals("Bye")) {
+            String[] inputArray = input.split(" ");
+            if (inputArray[0].equals("bye")) {
                 System.out.println(line + "GoodBye! Thanks for using B.H!" + line);
                 break;
-            } else if (input.equals("list")) {
+            } else if (inputArray[0].equals("list")) {
                 System.out.println(bh.getList());
-            } else {
-                bh.addToList(input);
-                System.out.println(line + "added: " + input + line);
+            } else if (inputArray[0].equals("mark") && inputArray.length > 1) {
+                int index = Integer.parseInt(inputArray[1]) - 1;
+                if (index < bh.getListSize()) {
+                    System.out.println("Well done! \n" + bh.mark(index));
+                } else {
+                    System.out.println("Index out of range");
+                }
+            } else if (inputArray[0].equals("unmark") && inputArray.length > 1) {
+                int index = Integer.parseInt(inputArray[1]) - 1;
+                System.out.println("Oh no! \n" + bh.unmark(index));
+            } else {bh.addToList(input);
+                    System.out.println(line + "added: " + input + line);
             }
         }
     }
