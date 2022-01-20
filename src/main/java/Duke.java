@@ -2,6 +2,63 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 class Duke {
+
+    public static Deadline createDeadline(String [] input) {
+       String description = "";
+       String by = "";
+        StringBuilder sb = new StringBuilder();
+        for(int i = 1; i < input.length; i++){
+            if(!(input[i]).equals("/by")) {
+                sb.append(input[i] + " ");
+
+            }
+            else {
+                description = sb.toString();
+                sb = new StringBuilder();
+            }
+
+        }
+
+      by = sb.toString();
+     return new Deadline(description, by);
+    }
+
+    public static Todo createTodo(String [] input) {
+        String description = "";
+        StringBuilder sb = new StringBuilder();
+        for(int i = 1; i < input.length; i++) {
+            sb.append(input[i] + " ");
+        }
+
+         description = sb.toString();
+        return new Todo(description);
+
+    }
+
+    public static Event createEvent(String [] input) {
+        String description = "";
+        String at = "";
+
+        StringBuilder sb = new StringBuilder();
+        for(int i = 1; i < input.length; i++){
+            if(!(input[i]).equals("/at")) {
+                sb.append(input[i] + " ");
+
+            }
+            else {
+                description = sb.toString();
+                sb = new StringBuilder();
+            }
+
+        }
+
+        at = sb.toString();
+        return new Event(description, at);
+    }
+
+
+
+
     public static void main(String[] args) {
 
         String logo = " ____        _        \n"
@@ -20,6 +77,8 @@ class Duke {
         ArrayList<Task> tasks = new ArrayList<Task>();
         String[] input = str.split(" ");
         //TaskList tasks = new TaskList();
+
+
 
         while (!input[0].equals("bye")) {
             if (input[0].equals("list")) {
@@ -42,8 +101,26 @@ class Duke {
                 temp.unmark();
                 System.out.println(temp.toString());
 
-            } else {
-                tasks.add(new Task(str));
+            } else if (input[0].equals("todo")) {
+                Todo temp = createTodo(input);
+                System.out.println(temp.toString());
+                tasks.add(temp);
+                System.out.println("Got it. I've added this task:");
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            }
+            else if (input[0].equals("event")) {
+                Event temp = createEvent(input);
+                System.out.println(temp.toString());
+                tasks.add(temp);
+                System.out.println("Got it. I've added this task:");
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            }
+            else {
+                Deadline temp = createDeadline(input);
+                System.out.println(temp.toString());
+                tasks.add(temp);
+                System.out.println("Got it. I've added this task:");
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
             }
             str = sc.nextLine();
              input = str.split(" ");
