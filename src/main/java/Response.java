@@ -10,7 +10,8 @@ public class Response {
                                          + "What can I do for you?";
     public static final String GOODBYE = "Bye. Hope to see you again soon!";
     public static final String MARKDONE = "Nice! I've marked this task as done: ";
-    public static final String ADDED = "Got it. I've added this task:";
+    public static final String ADDED = "Got it. I've added this task: ";
+    public static final String DELETED = "Noted. I've removed this task: ";
     public static final String MISSINGDATE = "please specify the date";
     public static final String MISSINGTIME = "please specify the time";
     public static final String CANTUNDERSTAND = "OOPS!!! I'm sorry, but I don't know what that means :-(";

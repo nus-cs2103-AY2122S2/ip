@@ -6,8 +6,14 @@ public class TaskList {
         this.todo = new ArrayList<>();
     }
 
-    public void addItem(Task item) {
-        todo.add(item);
+    public void addTask(Task task) {
+        todo.add(task);
+    }
+
+    public Task deleteTask(int num) {
+        Task deletee = todo.get(num - 1);
+        todo.remove(num - 1);
+        return deletee;
     }
 
     @Override
@@ -32,4 +38,6 @@ public class TaskList {
     public int size() {
         return this.todo.size();
     }
+
+
 }
