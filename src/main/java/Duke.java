@@ -6,7 +6,7 @@ public class Duke {
     private static ArrayList<Task> tasks = new ArrayList<>();
 
     private static String isPlural(int n) {
-        if (n > 1) {
+        if (n < 1 || n > 1) {
             return "s ";
         }
         return " ";
@@ -40,21 +40,28 @@ public class Duke {
                     String type = commandArr[0];
 
                     if (type.equals("mark")) {
-                        Task task = tasks.get(Integer.parseInt(commandArr[1]) - 1);
+                        int i = Integer.parseInt(commandArr[1]) - 1;
+                        Task task = tasks.get(i);
                         task.markAsDone();
 
                         System.out.println("Nice! I've marked this task as done:");
                         System.out.println(task);
                     } else if (type.equals("unmark")) {
-                        Task task = tasks.get(Integer.parseInt(commandArr[1]) - 1);
+                        int i = Integer.parseInt(commandArr[1]) - 1;
+                        Task task = tasks.get(i);
                         task.markAsNotDone();
 
                         System.out.println("OK, I've marked this task as not done yet:");
                         System.out.println(task);
+                    } else if (type.equals("delete")) {
+                        int i = Integer.parseInt(commandArr[1]) - 1;
+                        Task task = tasks.remove(i);
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println(task);
                     } else {
                         String[] descriptionArr = Arrays.copyOfRange(commandArr, 1, commandArr.length);
                         if (descriptionArr.length == 0) {
-                            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                         }
                         String description = String.join(" ", descriptionArr);
 
@@ -85,7 +92,7 @@ public class Duke {
                             System.out.println("Got it. I've added this task:");
                             System.out.println(deadline);
                         } else {
-                            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                         }
                     }
                     System.out.println("Now you have " + tasks.size() + " task" + isPlural(tasks.size()) + "in the list.");
