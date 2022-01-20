@@ -33,7 +33,13 @@ public class Dingus {
 
 	public static void response(String input) throws DingusException {
 		String[] words = input.split(" ");
-		Command command = Command.valueOf(words[0].toLowerCase());
+		Command command;
+
+		try {
+			command = Command.valueOf(words[0].toLowerCase());
+		} catch (IllegalArgumentException e) {
+			throw new DingusException("What kind of command is that?? I don't understand!");
+		}
 
 		switch (command) {
 			case bye:
@@ -69,8 +75,6 @@ public class Dingus {
 			case unmark:
 				unmark(input);
 				break;
-			default:
-				throw new DingusException("What kind of command is that?? I don't understand!");
 		}
 	}
 

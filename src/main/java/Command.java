@@ -6,5 +6,5 @@ public enum Command {
 	mark,
 	unmark,
 	bye,
-	list
+	list;
 }
