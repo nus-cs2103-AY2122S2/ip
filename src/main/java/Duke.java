@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -22,13 +23,27 @@ public class Duke {
             Scanner scanner = new Scanner(System.in);
             String farewell_words = "Bye. Hope to see you again soon!";
 
+            ArrayList<String> todo_list = new ArrayList<String>();
+
             while(true) {
                 String command = scanner.nextLine();
                 if (command.equals("bye") || command.equals("Bye")) {
                     System.out.print(output_chat_box(farewell_words));
                     break;
+                } else if (command.equals("list")){
+                    String output_list = "";
+                    if (todo_list.isEmpty()) {
+                        output_list = "Currently the list is empty. There is nothing to output.";
+                    } else {
+                        for (int i = 1; i <= todo_list.size(); i++) {
+                            output_list += i + ". " + todo_list.get(i - 1);
+                            if (i != todo_list.size()) output_list += "\n";
+                        }
+                    }
+                    System.out.print(output_chat_box(output_list));
                 } else {
-                    System.out.print(output_chat_box(command));
+                    todo_list.add(command);
+                    System.out.print(output_chat_box("added: " + command));
                 }
             }
 
