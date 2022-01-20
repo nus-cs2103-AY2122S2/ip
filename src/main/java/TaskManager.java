@@ -7,78 +7,60 @@ public class TaskManager {
         this.taskList = new ArrayList<>();
     }
 
-    TaskManager(ArrayList<Task> taskList) {
-        this.taskList = taskList;
-    }
-
-    ArrayList<Task> getTasks() {
-        return this.taskList;
-    }
-
     int countTasks() {
         return this.taskList.size();
     }
 
-    public String list() {
+    public void list() {
         if (this.countTasks() == 0) {
-            return "You have no tasks.";
+            System.out.println("You have no tasks.");
+            return;
         }
-        String response = "Here are the tasks in your list:\n";
+        System.out.println("Here are the tasks in your list:");
         for (int i = 1; i <= this.countTasks(); i++) {
-            response += (i + ". " + this.taskList.get(i - 1));
-            if (i != this.countTasks()) {
-                response += "\n";
-            }
+            System.out.println(i + ". " + this.taskList.get(i - 1));
         }
-        return response;
     }
 
-    public String mark(int index) {
-        String response = "";
+    public void mark(int index) {
         try {
             Task taskToMark = this.taskList.get(index);
             taskToMark.mark();
-            response += "Nice! I've marked this task as done:\n";
-            response += "    " + this.taskList.get(index);
+            System.out.println("Nice! I've marked this task as done:");
+            System.out.println("    " + this.taskList.get(index));
         } catch (IndexOutOfBoundsException e) {
             throw e;
         }
-        return response;
     }
 
-    public String delete(int index) {
-        String response = "";
+    public void delete(int index) {
         try {
             Task taskToDelete = this.taskList.get(index);
             this.taskList.remove(index);
-            response += "Noted. I've removed this task:\n";
-            response += "    " + taskToDelete + "\n";
-            response += String.format("Now you have %d tasks in the list.", this.countTasks());
+            System.out.println("Noted. I've removed this task:");
+            System.out.println("    " + taskToDelete);
+            System.out.println(String.format("Now you have %d tasks in the list.", this.countTasks()));
         } catch (IndexOutOfBoundsException e) {
             throw e;
         }
-        return response;
     }
 
-    public String add(Task task) {
+    public void add(Task task) {
         this.taskList.add(task);
-        String response = "Got it. I've added this task:\n";
-        response += "    " + task + "\n";
-        response += String.format("Now you have %d tasks in the list.", this.countTasks());
-        return response;
+        System.out.println("Got it. I've added this task:");
+        System.out.println("    " + task);
+        System.out.println(String.format("Now you have %d tasks in the list.", this.countTasks()));
     }
 
-    public String unmark(int index) {
-        String response = "";
+    public void unmark(int index) {
         try {
             Task taskToMark = this.taskList.get(index);
             taskToMark.unmark();
-            response += "OK, I've marked this task as not done yet:\n";
-            response += "    " + this.taskList.get(index);
+            System.out.println("OK, I've marked this task as not done yet:");
+            System.out.println("    " + this.taskList.get(index));
         } catch (IndexOutOfBoundsException e) {
             throw e;
         }
-        return response;
     }
 }
 
