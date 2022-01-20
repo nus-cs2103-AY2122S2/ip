@@ -11,7 +11,7 @@ public class Duke {
         }
         return false;
     }
-    public static void main(String[] args) {
+    public static void main(String[] args){
         String greeting = "Hello! I'm Duke\n" + "What can I do for you?";
         System.out.println(greeting);
 
@@ -25,62 +25,101 @@ public class Duke {
 
 
         while(scanner.hasNextLine()) {
-            input = scanner.nextLine();
-            String[] strArr = input.split(" ");
-            String command = strArr[0];
-            if(command.equals(bye)) {
-                System.out.println("Bye. Hope to see you again soon!");
-                return;
-            }
-            if(command.equals("list")){
-                System.out.println("Here are the tasks in your list:");
-                for(int i = 1; i <= taskList.size(); i++){
-                    int index = i - 1;
-                    System.out.println(i + ". " +taskList.get(index).toString());
+            try {
+                input = scanner.nextLine().trim();
+                String[] strArr = input.split(" ");
+                String command = strArr[0];
+                if(!(command.equals("bye") || command.equals("list") || command.equals("mark") || command.equals("todo")
+                        || command.equals("deadline") || command.equals("event"))) {
+                    throw new DukeInvalidCommandException();
                 }
-                continue;
-            }
-            if(command.equals("mark")){
-                int index_andone =  Integer.parseInt(strArr[1]);
-                Task temp = taskList.get(index_andone - 1);
-                temp.isDone = true;
-                System.out.println("Nice! I've marked this task as done:\n"+ temp.toString());
-                continue;
-            }
+                if (command.equals(bye)) {
+                    System.out.println("Bye. Hope to see you again soon!");
+                    return;
+                }
+                if (command.equals("list")) {
+                    System.out.println("Here are the tasks in your list:");
+                    for (int i = 1; i <= taskList.size(); i++) {
+                        int index = i - 1;
+                        System.out.println(i + ". " + taskList.get(index).toString());
+                    }
+                    continue;
+                }
+                if (command.equals("mark")) {
+                    int index = Integer.parseInt(strArr[1]) - 1;
+                    Task temp;
+                    try{
+                        temp = taskList.get(index);
+                    } catch(IndexOutOfBoundsException e) {
+                        throw new DukeInvalidIndexException();
+                    }
+                    temp.isDone = true;
+                    System.out.println("Nice! I've marked this task as done:\n" + temp.toString());
+                    continue;
+                }
 
-            if(command.equals("todo")) {
-                String title = input.substring("todo".length() + 1).trim();
-                System.out.println("Got it. I've added this task:");
-                Task task = new Todo(title);
-                taskList.add(task);
-                System.out.println("   " + task.toString() + "\n"+ "Now you have " + taskList.size() + " tasks in the list.");
-            }
+                if (command.equals("todo")) {
+                    String title;
+                    try{
+                        title = input.substring("todo".length() + 1).trim();
+                    }
+                    catch (StringIndexOutOfBoundsException e){
+                        throw new DukeEmptyArgumentException();
+                    }
 
-            if(command.equals("deadline")) {
-                if(findKeyword(strArr, "/by")) {
-                    String[] splitArr = input.split("/by", 2);
-                    String title = splitArr[0].substring("deadline".length() + 1).trim();
-                    String time = splitArr[1].trim();
                     System.out.println("Got it. I've added this task:");
-                    Task task = new Deadline(title, time);
+                    Task task = new Todo(title);
                     taskList.add(task);
-                    System.out.println("   " + task.toString() + "\n"+ "Now you have " + taskList.size() + " tasks in the list.");
+                    System.out.println("   " + task.toString() + "\n" + "Now you have " + taskList.size() + " tasks in the list.");
+                }
+
+                if (command.equals("deadline")) {
+                    if (strArr.length == 1) throw new DukeEmptyArgumentException();
+                    if (findKeyword(strArr, "/by")) {
+                        String title;
+                        String[] splitArr = input.split("/by", 2);
+                        try{
+                            title = splitArr[0].substring("deadline".length() + 1).trim();
+                        }
+                        catch (StringIndexOutOfBoundsException e){
+                            throw new DukeEmptyArgumentException();
+                        }
+                        String time = splitArr[1].trim();
+                        System.out.println("Got it. I've added this task:");
+                        Task task = new Deadline(title, time);
+                        taskList.add(task);
+                        System.out.println("   " + task.toString() + "\n" + "Now you have " + taskList.size() + " tasks in the list.");
+                    }
+                    else {
+                        throw new DukeMissingArgumentException("/by");
+                    }
+                }
+                if (command.equals("event")) {
+                    if (strArr.length == 1) throw new DukeEmptyArgumentException();
+                    if (findKeyword(strArr, "/at")) {
+                        String title;
+                        String[] splitArr = input.split("/at", 2);
+
+                        try{
+                            title = splitArr[0].substring("event".length() + 1).trim();
+                        }
+                        catch (StringIndexOutOfBoundsException e){
+                            throw new DukeEmptyArgumentException();
+                        }
+                        String time = splitArr[1].trim();
+                        System.out.println("Got it. I've added this task:");
+                        Task task = new Event(title, time);
+                        taskList.add(task);
+                        System.out.println("   " + task.toString() + "\n" + "Now you have " + taskList.size() + "tasks in the list.");
+                    }
+                    else {
+                        throw new DukeMissingArgumentException("/at");
+                    }
                 }
             }
-
-            if(command.equals("event")) {
-                if(findKeyword(strArr, "/at")) {
-                    String[] splitArr = input.split("/at", 2);
-                    String title = splitArr[0].substring("event".length() + 1).trim();
-                    String time = splitArr[1].trim();
-                    System.out.println("Got it. I've added this task:");
-                    Task task = new Event(title, time);
-                    taskList.add(task);
-                    System.out.println("   " + task.toString() + "\n"+  "Now you have " + taskList.size() + "tasks in the list.");
-                }
+            catch (DukeException e) {
+                System.out.println(e.toString());
             }
-
-
         }
     }
 }
