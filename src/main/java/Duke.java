@@ -85,8 +85,11 @@ public class Duke {
                         System.out.println(noOfTask);
                     }
                 } catch (ArrayIndexOutOfBoundsException aioobe) { // echo
-                    act.echo(phrase);
-                    System.out.println("sehh, what is this?");
+                    if (arrWords[0].equals("todo")) {
+                        System.out.println("OOPS!!! The description of a todo cannot be empty.");
+                    } else {
+                        System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    }
                 }
             }
             System.out.println(DASH);
