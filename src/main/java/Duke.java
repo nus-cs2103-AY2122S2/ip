@@ -11,22 +11,43 @@ public class Duke {
         String input = sc.nextLine();
         String bye = "bye";
         String list = "list";
-        List<String> store = new ArrayList<>();
+        String mark = "mark";
+        String unmark = "unmark";
+        List<Task> store = new ArrayList<>();
 
         while (!input.equals(bye)) {
             System.out.println("____________________________________________________________");
-            if (input.equals(list)) {
-                for (int i = 0; i < store.size(); i++) {
-                    System.out.println((i + 1) + ". " + store.get(i));
+            if (input.contains(unmark)) {
+                System.out.println(input);
+                int index = Integer.parseInt(input.substring(7)) - 1;
+                System.out.println("No problem! The following task is marked as not done yet: ");
+                store.get(index).toggleStatus();
+                printTask(store.get(index));
+            } else if (input.contains(mark)) {
+                int index = Integer.parseInt(input.substring(5)) - 1;
+                System.out.println("Good job! The following task is marked as done: ");
+                store.get(index).toggleStatus();
+                printTask(store.get(index));
+            } else if (input.equals(list)) {
+                System.out.println("The tasks on your list are as follows: ");
+                int i = 1;
+                for (Task task : store) {
+                    System.out.print(i + ".");
+                    printTask(task);
+                    i++;
                 }
             } else {
                 System.out.println("added: " + input);
-                store.add(input);
+                store.add(new Task(input));
             }
             System.out.println("____________________________________________________________");
             input = sc.nextLine();
         }
 
         System.out.println("Bye. Stay safe and have a nice day!");
+    }
+
+    public static void printTask(Task task) {
+        System.out.println("[" + task.getStatusIcon() + "] " + task.description);
     }
 }
