@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -10,11 +11,25 @@ public class Duke {
         System.out.println("Hello I'm\n" + logo);
         System.out.println("What can I do for you?");
 
+        ArrayList<String> chatHistory = new ArrayList<String>();
         Scanner userInput = new Scanner(System.in);
         String nextInput = userInput.nextLine();
 
-        while (!nextInput.equalsIgnoreCase("bye")) {
-            System.out.println(nextInput);
+        while (!nextInput.equals("bye")) {
+            switch (nextInput) {
+                case "list":
+                    int count = 1;
+                    for (String record : chatHistory) {
+                        System.out.println(count + ". " + record);
+                        count++;
+                    }
+                    break;
+
+                default:
+                    chatHistory.add(nextInput);
+                    System.out.println("added: " + nextInput);
+                
+            }
             nextInput = userInput.nextLine();
         }
 
