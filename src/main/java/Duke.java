@@ -8,7 +8,24 @@ public class Duke {
     public static void handle(String input) {
         String[] split = input.split(" ");
         String command = split[0];
-        if (command.equals("bye")) {
+        if (command.equals("todo")) {
+            Todo t = new Todo(input.substring(5));
+            list.add(t);
+            System.out.println("Got it. I've added: \n" + t.toString());
+            System.out.printf("Sheesh you've now got %d tasks in the list\n", list.size());
+        } else if (command.equals("deadline")) {
+            String[] arr = input.substring(9).split("/by");
+            Deadline d = new Deadline(arr[0], arr[1]);
+            list.add(d);
+            System.out.println("Got it. I've added: \n" + d.toString());
+            System.out.printf("Sheesh you've now got %d tasks in the list\n", list.size());
+        } else if (command.equals("event")) {
+            String[] arr = input.substring(9).split("/at");
+            Event e = new Event(arr[0], arr[1]);
+            list.add(e);
+            System.out.println("Got it. I've added: \n" + e.toString());
+            System.out.printf("Sheesh you've now got %d tasks in the list\n", list.size());
+        } else if (command.equals("bye")) {
             System.out.println("See you later alligator :)");
         } else if (command.equals("list")) {
             System.out.println("Here's everything on your list rn:");
@@ -25,10 +42,6 @@ public class Duke {
             t.makeNotDone();
             System.out.printf("Ok boss I've marked task %s as incomplete\n", split[1]);
             System.out.println(t.toString());
-        } else {
-            Task t = new Task(input);
-            list.add(t);
-            System.out.println("added: " + input);
         }
     }
 
