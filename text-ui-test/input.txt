@@ -1,24 +1,25 @@
+hi
+HEllo
 list
-read book
-return book
+list  
+mark 1
+todo
+todo  
+deadline
+deadline  
+event
+event  
+todo test
+list
+deadline test2
+deadline test2 /by Mon
 list
 mark 3
 mark 2
-list
-todo understand book
+event test3
+event test3 at
+event test3 /at Tues 5pm
 list
 unmark 2
 list
-unmark -1
-list
-list
-deadline do code /by Sunday
-event Watch show /at Monday 10-11pm
-list
-mark 5
-mark 6
-list
-unmark 3
-unmark 5
-list
-bye
+by

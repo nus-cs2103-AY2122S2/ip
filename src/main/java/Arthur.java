@@ -29,7 +29,12 @@ public class Arthur {
             input = io.readLine();
             // keeps running till exit input 'bye'
             while (!input.equals("bye")) {
-                printFormat(notebook.instruction(input));
+                input= input.toLowerCase();
+                if (input.equals("hello") || input.equals("hi")) {  // Hello inputs
+                    printFormat("Hello there!");
+                } else {
+                    printFormat(notebook.instruction(input));
+                }
                 input = io.readLine();
             }
             printFormat("Bye!" + "\n" + "Have a great day!");

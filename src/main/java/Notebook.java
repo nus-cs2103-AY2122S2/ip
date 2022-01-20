@@ -4,7 +4,7 @@ import java.util.ArrayList;
  * Stores and handles the list of tasks
  */
 public class Notebook {
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     /**
      * Constructor to initialise a new task list.
@@ -21,30 +21,35 @@ public class Notebook {
      * @return The string result
      */
     public String instruction(String e) {
-        if (e.equals("list")) {
+        try {
+            ArthurException.checkException(e);
+        } catch (InvalidInstructionException | EmptyDescriptionException f) {
+            return f.getMessage();
+        }
+
+
+        String[] temp = e.split(" ", 2);    // Gets the first word
+        String inst = temp[0];
+
+        switch (inst) {
+        case "list":
             e = this.listOut();
-        } else if (e.startsWith("mark") || e.startsWith("unmark")) {
+            break;
+        case "mark":
+        case "unmark":
             e = this.marker(e);
-        } else if (e.startsWith("todo")) {
-            e = this.todo(e);
-        } else if (e.startsWith("deadline")) {
-            e = this.deadline(e);
-        } else if (e.startsWith("event")) {
-            e = this.event(e);
-        } else {
-            e = this.add(e);
+            break;
+        case "todo":
+            e = this.todo(temp[1]);
+            break;
+        case "deadline":
+            e = this.deadline(temp[1]);
+            break;
+        case "event":
+            e = this.event(temp[1]);
+            break;
         }
         return e;
-    }
-
-    /**
-     * Adds a task to the list
-     * @param e The task to be added
-     * @return A string conformation of the input.
-     */
-    private String add(String e) {
-        tasks.add(new Task(e));
-        return "Added: " + e;
     }
 
     /**
@@ -86,12 +91,10 @@ public class Notebook {
 
     /**
      * Initialises and adds new Todo task to task list.
-     * @param e The todo task to be added
+     * @param e The description of the todo task to be added
      * @return String conformation of the input
      */
     private String todo(String e) {
-        e = e.replaceFirst("todo", "");
-        e = e.trim();
         Todo temp = new Todo(e);
         tasks.add(temp);
         return "Added a new Todo task: \n" + temp
@@ -101,14 +104,17 @@ public class Notebook {
     /**
      * Initialises and adds new task with deadline to task list.
      * String after "/by " will be taken as the deadline info.
-     * @param e The task with deadline info to be added
+     * @param e The description of the task with deadline info to be added
      * @return String conformation of the input
      */
     private String deadline(String e) {
-        e = e.replaceFirst("deadline", "");
-        e = e.trim();
-        String[] tempArr = e.split("/by ");
-        Deadline temp = new Deadline(tempArr[0], tempArr[1]);
+        Deadline temp;
+        try {
+            String[] tempArr = e.split("/by ");
+            temp = new Deadline(tempArr[0], tempArr[1]);
+        } catch (IndexOutOfBoundsException a) {
+            return "Please add the deadline date";
+        }
         tasks.add(temp);
         return "Added a new Deadline task: \n" + temp
                 + "\n" + this.outstanding();
@@ -118,14 +124,18 @@ public class Notebook {
      * Initialises and adds new task with timing to task list.
      * String after "/at " will be taken as the date/time the task
      * would occur.
-     * @param e The task with timing info to be added
+     * @param e The description of the task with timing info to be added
      * @return String conformation of the input
      */
     private String event(String e) {
-        e = e.replaceFirst("event", "");
-        e = e.trim();
-        String[] tempArr = e.split("/at ");
-        Event temp = new Event(tempArr[0], tempArr[1]);
+        Event temp;
+        try {
+            String[] tempArr = e.split("/at ");
+            temp = new Event(tempArr[0], tempArr[1]);
+        } catch (IndexOutOfBoundsException a) {
+            return "Please add the event Date and/or Time";
+        }
+
         tasks.add(temp);
         return "Added a new Event task: \n" + temp
                 + "\n" + this.outstanding();
