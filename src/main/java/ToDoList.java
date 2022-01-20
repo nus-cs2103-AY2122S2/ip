@@ -23,7 +23,7 @@ class ToDoList {
         } else {
             switch (inputSplit[0]) {
                 case "mark":
-                    if (inputSplit[1].equals("")) {
+                    if (inputSplit.length == 1 || inputSplit[1].trim().length() == 0) {
                         throw new SiriException("Please ENTER the item number to mark!!");
                     } else if (lst.size() == 0) {
                         throw new SiriException("There is currently no tasks!!");
@@ -34,16 +34,17 @@ class ToDoList {
 
                             if (index >= lst.size() || index < 0) {
                                 throw new SiriException("Please ENTER a number within the number of tasks!!");
-                            } 
-                            this.markItem(index);
-                            break;
+                            } else {
+                                this.markItem(index);
+                                break;
+                            }
                             
                         } catch (NumberFormatException nfe) {
                             throw new SiriException("Please ENTER a valid item number to mark!!");
                         }
                     }
                 case "unmark":
-                    if (inputSplit[1].equals("")) {
+                    if (inputSplit.length == 1 || inputSplit[1].trim().length() == 0) {
                         throw new SiriException("Please ENTER the item number to unmark!!");
                     } else if (lst.size() == 0) {
                         throw new SiriException("There is currently no tasks!!");
@@ -54,19 +55,24 @@ class ToDoList {
 
                             if (index >= lst.size() || index < 0) {
                                 throw new SiriException("Please ENTER a number within the number of tasks!!");
-                            } 
-                            this.unmarkItem(index);
-                            break;
+                            } else {
+                                this.unmarkItem(index);
+                                break;
+                            }
                             
                         } catch (NumberFormatException nfe) {
                             throw new SiriException("Please ENTER a valid item number to unmark!!");
                         }
                     }
                 case "list":
-                    this.print();
-                    break;
+                    if (inputSplit.length == 1 || inputSplit[1].trim().length() == 0) {
+                        this.print();
+                        break;
+                    } else {
+                        throw new SiriException("OPPS!! list does not take in any parameter!!");
+                    }
                 case "todo":
-                    if (inputSplit[1].equals("")) {
+                    if (inputSplit.length == 1 || inputSplit[1].trim().length() == 0) {
                         throw new SiriException("todo cannot be EMPTY!! Please ENTER something for todo!!");
                     } else {
                         ToDos todoTask = new ToDos(inputSplit[1]);
@@ -74,12 +80,12 @@ class ToDoList {
                         break;
                     }
                 case "deadline":
-                    if (inputSplit[1].equals("")) {
+                    if (inputSplit.length == 1 || inputSplit[1].trim().length() == 0) {
                         throw new SiriException("deadline cannot be EMPTY!! Please ENTER something for deadline!!");
                     } else {
                     String[] dlSplit = inputSplit[1].split(" /by ", 2);
 
-                        if (dlSplit[1].equals("")) {
+                        if (dlSplit.length == 1 || dlSplit[1].trim().length() == 0) {
                             throw new SiriException("deadline has no date/time!! Please ENTER a date/time for deadline!!");
                         } else {
                             Deadline dlTask = new Deadline(dlSplit[0], dlSplit[1]);
@@ -88,12 +94,12 @@ class ToDoList {
                         }
                     }
                 case "event":
-                    if (inputSplit[1].equals("")) {
+                    if (inputSplit.length == 1 || inputSplit[1].trim().length() == 0) {
                         throw new SiriException("event cannot be EMPTY!! Please ENTER something for event!!");
                     } else {
                         String[] eventSplit = inputSplit[1].split(" /at ", 2);
 
-                        if (eventSplit[1].equals("")) {
+                        if (eventSplit.length == 1 || eventSplit[1].trim().length() == 0) {
                             throw new SiriException("event has no date/time!! Please ENTER a date/time for event!!");
                         } else {
                             Event eventTask = new Event(eventSplit[0], eventSplit[1]);

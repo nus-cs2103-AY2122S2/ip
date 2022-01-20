@@ -17,6 +17,8 @@ Total tasks on the list: 2
 Got it! I've added this task:
 [E][ ] project meeting (at: 6 Mar 5pm)
 Total tasks on the list: 3
+Please ENTER a number within the number of tasks!!
+Please ENTER a number within the number of tasks!!
 Great job for completing task:
 [T][X] borrow book
 Great job for completing task:
@@ -27,4 +29,9 @@ Task List:
 1. [T][ ] borrow book
 2. [D][X] return book (by: 5 Mar)
 3. [E][ ] project meeting (at: 6 Mar 5pm)
+todo cannot be EMPTY!! Please ENTER something for todo!!
+deadline has no date/time!! Please ENTER a date/time for deadline!!
+Please ENTER the item number to unmark!!
+Please ENTER a valid item number to unmark!!
+OPPS!! list does not take in any parameter!!
 Bye! Hope to see you again soon!
