@@ -33,18 +33,40 @@ public class Duke {
                 //marks a task as done if the user inputs a string in format "mark xx"
                 //NOTE: currently, inputting "mark" alone results in a task named "mark" to be added to the list of tasks
                 else if (input.length() > 4 && "mark".equals(input.substring(0, 4))) {
-                    if (Integer.parseInt(input.substring(5)) <= list.size() && Integer.parseInt(input.substring(5)) > 0) {
+                    ArrayList<String> arr = new ArrayList<>(Arrays.asList(input.split(" ")));
+                    if (arr.get(1) == "") {
+                        throw new DukeException(
+                                "Oops! Which task would you like to mark?"
+                        );
+                    }
+                    int i = Integer.parseInt(arr.get(1));
+                    if (i <= list.size() && i > 0) {
                         Task toBeMarked = list.get(Integer.parseInt(input.substring(5)) - 1);
                         toBeMarked.markAsDone();
+                    } else {
+                        throw new DukeException(
+                                "That is not a valid task number!"
+                        );
                     }
                 }
 
                 //unmarks a task as undone if the user inputs a string in format "unmark xx"
                 //NOTE: currently, inputting "unmark" alone results in a task named "unmark" to be added to the list of tasks
                 else if (input.length() > 6 && "unmark".equals(input.substring(0, 6))) {
-                    if (Integer.parseInt(input.substring(7)) <= list.size() && Integer.parseInt(input.substring(7)) > 0) {
+                    ArrayList<String> arr = new ArrayList<>(Arrays.asList(input.split(" ")));
+                    if (arr.get(1) == "") {
+                        throw new DukeException(
+                                "Oops! Which task would you like to unmark?"
+                        );
+                    }
+                    int i = Integer.parseInt(arr.get(1));
+                    if (i <= list.size() && i > 0) {
                         Task toBeMarked = list.get(Integer.parseInt(input.substring(7)) - 1);
                         toBeMarked.markAsUndone();
+                    } else {
+                        throw new DukeException(
+                                "That is not a valid task number!"
+                        );
                     }
                 }
 
@@ -103,6 +125,31 @@ public class Duke {
                     System.out.println(deadline.toString());
                     System.out.println("Now you have " + list.size() + " tasks in the list.");
                 }
+
+
+                //delete a task from the list
+                else if (input.length() >= 6 && "delete".equals(input.substring(0, 6))) {
+                    ArrayList<String> arr = new ArrayList<>(Arrays.asList(input.split(" ")));
+                    if (arr.get(1) == "") {
+                        throw new DukeException(
+                                "Oops! Which task would you like to delete?"
+                        );
+                    }
+
+                    int i = Integer.parseInt(arr.get(1));
+                    if (i <= list.size() && i > 0) {
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println(list.get(i-1).toString());
+                        list.remove(i - 1);
+                        System.out.println("Now you have " + list.size() + " tasks in the list.");
+
+                    } else {
+                        throw new DukeException(
+                                "That is not a valid task number!"
+                        );
+                    }
+                }
+
 
                 //adds user input to the list and notifies user
                 else {
