@@ -10,7 +10,6 @@ class Menu {
         System.out.println(" How can I be of service ");
         System.out.println("=========================");
         while(true) {
-            System.out.print(">>> ");
             Command.runCommand(sc.nextLine(), list);
         }
     }

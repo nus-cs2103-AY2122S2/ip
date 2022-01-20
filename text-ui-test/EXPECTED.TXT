@@ -1,7 +1,71 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+=========================
+   Harro! I am Bob!    
+ How can I be of service 
+=========================
 
+Alright! Added that to the list:
+[T][ ] read book
+Now you have 1 tasks in the list.
+
+
+Alright! Added that to the list:
+[D][ ] return book (by: June 6th)
+Now you have 2 tasks in the list.
+
+
+Alright! Added that to the list:
+[E][ ] project meeting (at: Aug 6th 2-4pm)
+Now you have 3 tasks in the list.
+
+
+Alright! Added that to the list:
+[T][ ] join sports club
+Now you have 4 tasks in the list.
+
+
+Alright! Added that to the list:
+[T][ ] brrow book
+Now you have 5 tasks in the list.
+
+
+Here you go sir:
+1. [T][ ] read book
+2. [D][ ] return book (by: June 6th)
+3. [E][ ] project meeting (at: Aug 6th 2-4pm)
+4. [T][ ] join sports club
+5. [T][ ] brrow book
+
+
+Alright! Added that to the list:
+[D][ ] return book (by: Sundy)
+Now you have 6 tasks in the list.
+
+
+Alright! Added that to the list:
+[E][ ] project meeting (at: Mon 2-4pm)
+Now you have 7 tasks in the list.
+
+
+Alright! Added that to the list:
+[D][ ] do homework (by: no idea :-p)
+Now you have 8 tasks in the list.
+
+
+Alright! Added that to the list:
+[E][ ] CS2103 finals (at: 2/1/2022)
+Now you have 9 tasks in the list.
+
+
+Here you go sir:
+1. [T][ ] read book
+2. [D][ ] return book (by: June 6th)
+3. [E][ ] project meeting (at: Aug 6th 2-4pm)
+4. [T][ ] join sports club
+5. [T][ ] brrow book
+6. [D][ ] return book (by: Sundy)
+7. [E][ ] project meeting (at: Mon 2-4pm)
+8. [D][ ] do homework (by: no idea :-p)
+9. [E][ ] CS2103 finals (at: 2/1/2022)
+
+
+Arrivederci!

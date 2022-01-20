@@ -42,7 +42,7 @@ class Deadline extends Task {
     public String toString() {
         String tag = "[D]";
         String doneIndicator = "[" + (this.done ? "X" : " ") + "]";
-        String deadline = "(" + this.deadline + ")";
+        String deadline = "(by:" + this.deadline + ")";
         return tag + doneIndicator + " " + this.taskName + deadline;
     }
 }
@@ -59,7 +59,7 @@ class Event extends Task {
     public String toString() {
         String tag = "[E]";
         String doneIndicator = "[" + (this.done ? "X" : " ") + "]";
-        String deadline = "(" + this.eventDate + ")";
+        String deadline = "(at:" + this.eventDate + ")";
         return tag + doneIndicator + " " + this.taskName + deadline;
     }
 }

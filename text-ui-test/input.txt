@@ -1,0 +1,12 @@
+todo read book
+deadline return book /by June 6th
+event project meeting /at Aug 6th 2-4pm
+todo join sports club
+todo brrow book
+list
+deadline return book /by Sundy
+event project meeting /at Mon 2-4pm
+deadline do homework /by no idea :-p
+event CS2103 finals /at 2/1/2022
+list
+bye

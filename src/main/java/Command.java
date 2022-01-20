@@ -8,6 +8,7 @@ abstract class Command {
     abstract protected void run();
 
     static void runCommand(String cmd, ItemList<Task> itemList) {
+        System.out.println("");
         if (cmd.equals("bye"))
             new ByeCommand().run();
         else if (cmd.equals("list"))
@@ -22,6 +23,7 @@ abstract class Command {
             new addDeadlineListCommand(cmd, itemList).run();
         else if (cmd.startsWith("event"))
             new addEventListCommand(cmd, itemList).run();
+        System.out.println("");
     }
 }
 
@@ -34,7 +36,7 @@ abstract class listCommand extends Command {
     }
 
     protected void printAddEndRun(Task task) {
-        System.out.println("Alright! Added this to the list:");
+        System.out.println("Alright! Added that to the list:");
         System.out.println(task.toString());
         this.itemList.printNoItems();
     }
@@ -128,7 +130,7 @@ class addDeadlineListCommand extends listCommand {
         String filtered = this.commandName.replaceFirst("deadline ", "");
         int index = filtered.indexOf("/by");
         String taskName = filtered.substring(0, index);
-        String deadline = filtered.substring(index + 1, filtered.length());
+        String deadline = filtered.substring(index + 3, filtered.length());
         Task newTask = new Deadline(taskName, deadline);
         itemList.addItem(newTask);
         this.printAddEndRun(newTask);
@@ -147,7 +149,7 @@ class addEventListCommand extends listCommand {
         String filtered = this.commandName.replaceFirst("event ", "");
         int index = filtered.indexOf("/at");
         String taskName = filtered.substring(0, index);
-        String eventDate = filtered.substring(index + 1, filtered.length());
+        String eventDate = filtered.substring(index + 3, filtered.length());
         Task newTask = new Event(taskName, eventDate);
         itemList.addItem(newTask);
         this.printAddEndRun(newTask);
