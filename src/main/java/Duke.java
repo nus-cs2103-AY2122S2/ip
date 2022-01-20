@@ -77,7 +77,7 @@ public class Duke {
                         Task deadline = new Deadline(taskTitle, dueBy);
                         tasks.add(deadline);
 
-                        System.out.println("Got it. I've added this task: ");
+                        System.out.println("Got it. I've added this task:");
                         System.out.println(deadline.toString());
                     } else if (instruction.equals("event")) {
                         String[] taskArr = title.split(" /at");
@@ -87,7 +87,7 @@ public class Duke {
                         Task event = new Event(taskTitle, eventAt);
                         tasks.add(event);
 
-                        System.out.println("Got it. I've added this task: ");
+                        System.out.println("Got it. I've added this task:");
                         System.out.println(event.toString());
                     } else {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
