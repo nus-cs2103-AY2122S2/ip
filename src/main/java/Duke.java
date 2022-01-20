@@ -32,16 +32,31 @@ public class Duke {
                     break;
                 case "mark" :
                     id = sc.nextInt();
-                    tasks.get(id - 1).markAsDone();
-                    System.out.println("Good job sir, this task is marked done:");
-                    System.out.println("  " + tasks.get(id - 1));
-                    break;
+                    try {
+                        if (id > tasks.size()) throw new DukeException("Invalid task id, sir.");
+                        if (tasks.get(id - 1).isDone) throw new DukeException("This task was already completed, sir.");
+                        tasks.get(id - 1).markAsDone();
+                        System.out.println("Good job sir, this task is marked done:");
+                        System.out.println("  " + tasks.get(id - 1));
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    } finally {
+                        break;
+                    }
                 case "unmark" :
                     id = sc.nextInt();
-                    tasks.get(id - 1).markAsNotDone();
-                    System.out.println("Slacking off, sir? This task is marked not done:");
-                    System.out.println("  " + tasks.get(id - 1));
-                    break;
+                    try {
+                        if (id > tasks.size()) throw new DukeException("Invalid task id, sir.");
+                        if (!tasks.get(id - 1).isDone) throw new DukeException("It wasn't even done yet, sir.");
+                        tasks.get(id - 1).markAsNotDone();
+                        System.out.println("Slacking off, sir? This task is marked not done:");
+                        System.out.println("  " + tasks.get(id - 1));
+                        break;
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    } finally {
+                        break;
+                    }
                 case "todo" :
                     sc.reset();
                     try {
@@ -78,6 +93,17 @@ public class Duke {
                         if (event.length < 2) throw new DukeException("Invalid event task, sir.");
                         tasks.add(new Event(event[0], event[1]));
                         System.out.println("I've added this to your tasks sir: " + tasks.getLast());
+                        System.out.println("There are " + tasks.size() + " tasks on your list.");
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    } finally {
+                        break;
+                    }
+                case "remove" :
+                    id = sc.nextInt();
+                    try {
+                        if (id > tasks.size()) throw new DukeException("Invalid task id, sir.");
+                        System.out.println("Too weak to handle it? This task have been removed sir: \n" + "  " + tasks.remove(id - 1));
                         System.out.println("There are " + tasks.size() + " tasks on your list.");
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
