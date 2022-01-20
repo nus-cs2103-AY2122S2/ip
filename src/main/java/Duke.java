@@ -15,7 +15,7 @@ public class Duke {
 
         System.out.println("TEST");
         System.out.println("____________________________________________________________");
-        System.out.println("Hello! I'm Saitama.");
+        System.out.println("Hello! I'm Saitama, a hero for fun.");
         System.out.println("What can I do for you?");
         System.out.println("____________________________________________________________");
 
