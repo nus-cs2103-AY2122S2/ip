@@ -70,6 +70,7 @@ public class Duke {
         System.out.println(" Got it. I've added this task: ");
         System.out.println(" " + t);
         String s = String.format("Now you have %d tasks in the list.", ls.size());
+        System.out.println(s);
         printHorizontalLine();
     }
 
