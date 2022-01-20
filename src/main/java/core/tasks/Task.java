@@ -1,4 +1,4 @@
-package core;
+package core.task;
 
 import utilities.OutputFormatter;
 
