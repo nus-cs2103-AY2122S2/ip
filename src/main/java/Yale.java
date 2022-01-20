@@ -39,12 +39,13 @@ public class Yale {
         }
         // Mark & Unmark Feature
         else if (command.contains("mark") || command.contains("unmark")) {
+            try {
                 String[] commandArray = command.split(" ");
                 String markStatus = commandArray[0];
                 int itemNo = Integer.parseInt(commandArray[1]);
                 // Edge cases
                 if (itemNo > list.getSize() || itemNo < 1) {
-                    System.out.println("Error: That task number does not exist!");
+                    System.out.println("Error: That task does not exist!");
                 }
                 // Mark
                 else if (markStatus.equals("mark")) {
@@ -54,39 +55,55 @@ public class Yale {
                 else {
                     list.getItem(itemNo-1).unmarkItem();
                 }
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Please enter a valid integer");
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Error: You forgot to indicate the task number!");
+            }
             }
         // Deadline feature
         else if (command.contains("deadline")) {
-            String filterDeadline = command.split("deadline ", 2)[1]; // Remove deadline word
-            String task = command.split(" /by ", 2)[0]; // Retrieve task name
-            String date = command.split(" /by ", 2)[1]; // Retrieve date
-            Deadline newDeadline = new Deadline(task, false, date);
-            list.addTo(newDeadline);
-            System.out.println("Got it! I've added this task:\n    " +
-                    newDeadline.toString() + "\n" +
-                    "Now you have " + list.getSize() + " tasks in the list.");
+            try {
+                String task = command.split(" /by ", 2)[0]; // Retrieve task name
+                String date = command.split(" /by ", 2)[1]; // Retrieve date
+                Deadline newDeadline = new Deadline(task, false, date);
+                list.addTo(newDeadline);
+                System.out.println("Got it! I've added this task:\n    " +
+                        newDeadline.toString() + "\n" +
+                        "Now you have " + list.getSize() + " tasks in the list.");
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Error: The description of an event cannot be empty.");
+            }
         }
         // Event feature
         else if (command.contains("event")){
-            String filterEvent = command.split("event ", 2)[1]; // Remove Event word
-            String task = command.split(" /at ", 2)[0]; // Retrieve task name
-            String date = command.split(" /at ", 2)[1]; // Retrieve date
-            Event newEvent = new Event(task, false, date);
-            list.addTo(newEvent);
-            System.out.println("Got it! I've added this task:\n    " +
-                    newEvent.toString() + "\n" +
-                    "Now you have " + list.getSize() + " tasks in the list.");
+            try {
+                String task = command.split(" /at ", 2)[0]; // Retrieve task name
+                String date = command.split(" /at ", 2)[1]; // Retrieve date
+                Event newEvent = new Event(task, false, date);
+                list.addTo(newEvent);
+                System.out.println("Got it! I've added this task:\n    " +
+                        newEvent.toString() + "\n" +
+                        "Now you have " + list.getSize() + " tasks in the list.");
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Error: The description of an event cannot be empty.");
+            }
         }
         else if (command.contains("todo")){
-            String task = command.split("todo ", 2)[1]; // Remove word
-            ToDo newToDo = new ToDo(task, false);
-            list.addTo(newToDo);
-            System.out.println("Got it! I've added this task:\n    " +
-                    newToDo.toString() + "\n" +
-                    "Now you have " + list.getSize() + " tasks in the list.");
+            try{
+                String task = command.split("todo ", 2)[1]; // Remove word
+                ToDo newToDo = new ToDo(task, false);
+                list.addTo(newToDo);
+                System.out.println("Got it! I've added this task:\n    " +
+                        newToDo.toString() + "\n" +
+                        "Now you have " + list.getSize() + " tasks in the list.");
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Error: The description of a todo cannot be empty.");
+            }
         }
         else {
-            System.out.println(command + " is not a valid command. Please try again.");
+            System.out.println("Error: " + command
+                    + " is not a valid command. Please try again.");
             }
 
     }
