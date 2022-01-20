@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 
 /**
@@ -25,10 +24,19 @@ public class MarkCommand extends Command {
         this.index = index - 1;
     }
     @Override
-    public void execute(TaskList task, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList task, Storage storage) throws IOException {
         task.mark(this.index, this.isMark);
-        ui.markList(task, this.isMark, this.index);
         storage.overWriteFile(task);
+
+        StringBuilder reply = new StringBuilder();
+        if (this.isMark) {
+            reply.append(this.speak(Dialogue.MARK));
+        } else {
+            reply.append(this.speak(Dialogue.UNMARKED));
+        }
+        reply.append("\n");
+        reply.append(task.getTask(this.index).toString());
+        return reply.toString();
     }
 
     @Override

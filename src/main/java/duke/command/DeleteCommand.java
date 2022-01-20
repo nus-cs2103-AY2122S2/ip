@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 
 /**
@@ -19,10 +18,18 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList task, Ui ui, Storage storage) throws IOException {
-        ui.deleteList(task, this.index);
+    public String execute(TaskList task, Storage storage) throws IOException {
+        String deletedTask = (task.getTask(this.index)).toString();
         task.delete(this.index);
         storage.overWriteFile(task);
+
+        StringBuilder reply = new StringBuilder();
+        reply.append(this.speak(Dialogue.DELETE));
+        reply.append("\n");
+        reply.append(deletedTask);
+        reply.append("\n");
+        reply.append(this.speak(Dialogue.NUMLEFT, task.getSize()));
+        return reply.toString();
     }
 
     @Override
