@@ -7,12 +7,29 @@ public abstract class Task {
         this.completed = false;
     }
 
+    Task(String description, Boolean completed) {
+        this.description = description;
+        this.completed = completed;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public boolean isCompleted() {
+        return this.completed;
+    }
+
     public void mark() {
         this.completed = true;
     }
 
     public void unmark() {
         this.completed = false;
+    }
+
+    public String getType() {
+        return "Task";
     }
 
     @Override
