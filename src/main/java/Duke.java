@@ -29,14 +29,36 @@ public class Duke {
                     cmd.list();
                     break;
                 case "mark": {
-                    int index = Integer.parseInt(tokens[1]) - 1;
-                    cmd.mark(index);
-                    break;
+                    try {
+                        int index = Integer.parseInt(tokens[1]);
+                        if (index <= 0) {
+                            throw new DukeException("index is negative or zero");
+                        }
+                        cmd.mark(index - 1);
+                    } catch (NullPointerException ex) {
+                        System.out.println("This entry does not exist, please provide a valid entry");
+                    } catch (DukeException ex) {
+                        System.out.println("Please provide a non-zero, positive entry value!");
+                    }
+                    finally {
+                        break;
+                    }
                 }
                 case "unmark": {
-                    int index = Integer.parseInt(tokens[1]) - 1;
-                    cmd.unmark(index);
-                    break;
+                    try {
+                        int index = Integer.parseInt(tokens[1]);
+                        if (index <= 0) {
+                            throw new DukeException("index is negative or zero");
+                        }
+                        cmd.unmark(index - 1);
+                    } catch (NullPointerException ex) {
+                        System.out.println("This entry does not exist, please provide a valid entry!");
+                    } catch (DukeException ex) {
+                        System.out.println("Please provide a non-zero, positive entry value!");
+                    }
+                    finally {
+                        break;
+                    }
                 }
                 case "todo": {
                     cmd.todo(tokens);
