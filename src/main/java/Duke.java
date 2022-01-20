@@ -1,10 +1,12 @@
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class Duke {
@@ -43,6 +45,8 @@ public class Duke {
                 } else if (input.toLowerCase().matches("^delete \\d+|^delete -\\d+")) { //delete a task
                     int index = Integer.parseInt(input.replaceAll("delete ", "")) - 1;
                     delete(index);
+                } else if (input.toLowerCase().matches("^delete all")) { //delete a task
+                    deleteAll();
                 } else { //add task
                     try {
                         //only input the task type and nothing else
@@ -64,14 +68,40 @@ public class Duke {
                                 String[] actualTask = input.replaceAll("deadline ", "").split("/by ");
                                 String description = actualTask[0];
                                 String by = actualTask[1];
-                                Deadline deadline = new Deadline(description, by);
-                                addTask(deadline);
+                                boolean correctTimeFormat = Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2}( \\d{4})?").matcher(by).find();
+                                if (correctTimeFormat) {
+                                    boolean hasTime = Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2} \\d{4}").matcher(by).find();
+                                    Deadline deadline;
+                                    if (hasTime) {
+                                        LocalDateTime localDateTime = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy-M-d HHmm"));
+                                        deadline = new Deadline(description, localDateTime);
+                                    } else {
+                                        LocalDate localDate = LocalDate.parse(by, DateTimeFormatter.ofPattern("yyyy-M-d"));
+                                        deadline = new Deadline(description, LocalDateTime.of(localDate, LocalTime.MAX));
+                                    }
+                                    addTask(deadline);
+                                } else {
+                                    throw new CortanaException("Invalid date time format! Please follow the format yyyy-M-d HHmm!");
+                                }
                             } else if (isNotEmptyEvent && hasAt) { //valid event command
                                 String[] actualTask = input.replaceAll("event ", "").split("/at ");
                                 String description = actualTask[0];
                                 String at = actualTask[1];
-                                Event event = new Event(description, at);
-                                addTask(event);
+                                boolean correctTimeFormat = Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2}( \\d{4})?").matcher(at).find();
+                                if (correctTimeFormat) {
+                                    boolean hasTime = Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2} \\d{4}").matcher(at).find();
+                                    Event event;
+                                    if (hasTime) {
+                                        LocalDateTime localDateTime = LocalDateTime.parse(at, DateTimeFormatter.ofPattern("yyyy-M-d HHmm"));
+                                        event = new Event(description, localDateTime);
+                                    } else {
+                                        LocalDate localDate = LocalDate.parse(at, DateTimeFormatter.ofPattern("yyyy-M-d"));
+                                        event = new Event(description, LocalDateTime.of(localDate, LocalTime.MAX));
+                                    }
+                                    addTask(event);
+                                } else {
+                                    throw new CortanaException("Invalid date time format! Please follow the format yyyy-M-d HHmm!");
+                                }
                             } else if (isNotEmptyTodo) { //valid todo command
                                 String description = input.replaceAll("todo ", "");
                                 Todo todo = new Todo(description);
@@ -92,6 +122,8 @@ public class Duke {
                         System.out.println(e.getMessage());
                     } catch (IOException e) {
                         e.printStackTrace();
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Invalid input time!");
                     }
                 }
             }
@@ -160,6 +192,17 @@ public class Duke {
         }
     }
 
+    public static void deleteAll () {
+        try {
+            taskSet.clear();
+            tasksArrayList.clear();
+            writeFile();
+            System.out.println("All tasks have been removed!");
+        } catch (Exception e) {
+            System.out.println("No such task!");
+        }
+    }
+
     public static void createDirectoryAndFileIfNotExist() {
         try {
             String path = Paths.get("").toAbsolutePath() + "/data/";
@@ -207,27 +250,52 @@ public class Duke {
     public static Task parseTask(String taskInString) {
         char type = taskInString.charAt(1);
         boolean status = taskInString.charAt(4) == 'X';
-        if (type == 'D') {
-            String[] actualTask = taskInString.substring(7).split("\\(by: ");
-            String description = actualTask[0];
-            String by = actualTask[1].replaceAll("\\)", "");
-            Deadline deadline = new Deadline(description, by);
-            deadline.isDone = status;
-            return deadline;
-        } else if (type == 'E') {
-            String[] actualTask = taskInString.substring(7).split("\\(at: ");
-            String description = actualTask[0];
-            String at = actualTask[1].replaceAll("\\)", "");
-            Event event = new Event(description, at);
-            event.isDone = status;
-            return event;
-        } else if (type == 'T') {
-            String description = taskInString.substring(7);
-            Todo todo = new Todo(description);
-            todo.isDone = status;
-            return todo;
+        DateTimeFormatter formatter;
+        LocalDateTime localDateTime;
+        LocalDate localDate;
+        try {
+            if (type == 'D') {
+                String[] actualTask = taskInString.substring(7).split("\\(by: ");
+                String description = actualTask[0];
+                String by = actualTask[1].replaceAll("\\)", "");
+                boolean hasTime = Pattern.compile("[A-Za-z]* \\d{1,2}, \\d{4} \\d{4}(AM|PM)").matcher(by).find();
+                if (hasTime) {
+                    formatter = DateTimeFormatter.ofPattern("EEEE MMMM dd, yyyy hhmma", Locale.ENGLISH);
+                    localDateTime = LocalDateTime.parse(by, formatter);
+                } else {
+                    formatter = DateTimeFormatter.ofPattern("EEEE MMMM dd, yyyy", Locale.ENGLISH);
+                    localDate = LocalDate.parse(by, formatter);
+                    localDateTime = LocalDateTime.of(localDate, LocalTime.MAX);
+                }
+                Deadline deadline = new Deadline(description, localDateTime);
+                deadline.isDone = status;
+                return deadline;
+            } else if (type == 'E') {
+                String[] actualTask = taskInString.substring(7).split("\\(at: ");
+                String description = actualTask[0];
+                String at = actualTask[1].replaceAll("\\)", "");
+                boolean hasTime = Pattern.compile("[A-Za-z]* \\d{1,2}, \\d{4} \\d{4}(AM|PM)").matcher(at).find();
+                if (hasTime) {
+                    formatter = DateTimeFormatter.ofPattern("EEEE MMMM dd, yyyy hhmma", Locale.ENGLISH);
+                    localDateTime = LocalDateTime.parse(at, formatter);
+                } else {
+                    formatter = DateTimeFormatter.ofPattern("EEEE MMMM dd, yyyy", Locale.ENGLISH);
+                    localDate = LocalDate.parse(at, formatter);
+                    localDateTime = LocalDateTime.of(localDate, LocalTime.MAX);
+                }
+                Event event = new Event(description, localDateTime);
+                event.isDone = status;
+                return event;
+            } else {
+                String description = taskInString.substring(7);
+                Todo todo = new Todo(description);
+                todo.isDone = status;
+                return todo;
+            }
+        } catch (DateTimeParseException e) {
+            e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
     public static void main(String[] args) {
