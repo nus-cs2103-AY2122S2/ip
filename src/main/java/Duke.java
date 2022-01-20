@@ -47,6 +47,12 @@ public class Duke {
             t.makeNotDone();
             System.out.printf("Ok boss I've marked task %s as incomplete\n", split[1]);
             System.out.println(t.toString());
+        } else if (command.equals("delete")) {
+            Task t = list.get(Integer.parseInt(split[1]) - 1);
+            list.remove(Integer.parseInt(split[1]) - 1);
+            System.out.printf("Alrighty I've removed this task\n");
+            System.out.println(t.toString());
+            System.out.printf("K you've now got %d tasks in the list\n", list.size());
         } else {
             throw new DukeException("I'm not sure what that means");
         }
