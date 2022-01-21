@@ -5,6 +5,12 @@ public class Todo extends Task {
   }
 
   @Override
+  public String getSaveDescription() {
+    return String.format("%s | %s | %s ",
+        getClass().getName(), status == true ? 1 : 0, description);
+  }
+
+  @Override
   public String toString() {
     return "[T]" + super.toString();
   }

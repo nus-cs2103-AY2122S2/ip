@@ -3,12 +3,14 @@ import java.util.Scanner;
 
 public class CommandParser {
   private Scanner scanner;
+  private Storage storage;
   private TaskModule taskModule;
   private String lineBreak = "\n----------------------------------------\n";
 
   public CommandParser() {
     this.scanner = new Scanner(System.in);
-    this.taskModule = new TaskModule();
+    this.storage = new Storage();
+    this.taskModule = new TaskModule(this.storage);
   }
 
   public void start() {
