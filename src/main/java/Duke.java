@@ -48,6 +48,11 @@ public class Duke {
                         +  pastCommands.get(index)
                 ));
             } else if (command.split(" ")[0].equals("todo")) {
+                if (command.length() == 4) {
+                    System.out.println(buildMessage("☹ OOPS!!! The description of a todo cannot be empty."));
+                    continue;
+                }
+
                 // Extract name from todo command, eg. todo borrow book
                 String name = command.substring(5);
                 pastCommands.add(new TaskToDos(false, name));
@@ -76,7 +81,7 @@ public class Duke {
                         pastCommands.size() == 1 ? "task" : "tasks"
                 )));
             }
-            else { // Events
+            else if (command.split(" ")[0].equals("event")) {
                 // Extract name and time to be done by from event command, eg. event project meeting /at Mon 2-4pm
                 String temp = command.substring(6);
                 String name = temp.split("/")[0].trim();
@@ -91,6 +96,8 @@ public class Duke {
                         pastCommands.size(),
                         pastCommands.size() == 1 ? "task" : "tasks"
                 )));
+            } else {
+                System.out.println(buildMessage("☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
             }
         }
 
