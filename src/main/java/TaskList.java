@@ -21,6 +21,10 @@ public class TaskList {
         return output;
     }
 
+    List<Task> listTasks() {
+        return tasks;
+    }
+
     String mark(int id, String instr) throws InvalidTaskNumberException{
         if (id > index || id <= 0) {
             throw new InvalidTaskNumberException();
