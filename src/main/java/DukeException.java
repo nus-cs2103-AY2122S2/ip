@@ -9,4 +9,3 @@ public class DukeException extends Exception {
         return super.toString();
     }
 }
-
