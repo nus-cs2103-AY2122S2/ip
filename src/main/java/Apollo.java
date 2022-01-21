@@ -10,10 +10,22 @@ public class Apollo {
                 "\n\t________________________________________________________________________\n");
     }
 
-    private static void start() {
+    private static void initialise() {
         tasks = new ArrayList<>();
         input = new Commands();
         Banner.welcomeMsg();
+    }
+
+    private static void run() {
+        try {
+            input.response();
+        } catch (ApolloException error) {
+            printMessage(error.getMessage());
+            run();
+        } catch (NumberFormatException error) {
+            printMessage("Please enter an Integer instead.");
+            run();
+        }
     }
 
     public static void stop() {
@@ -66,7 +78,7 @@ public class Apollo {
     }
 
     public static void main(String[] args) {
-        start();
-        input.response();
+        initialise();
+        run();
     }
 }
