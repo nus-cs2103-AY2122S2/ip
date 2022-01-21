@@ -7,12 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represents a <code>Storage</code> object to handle saving and loading.
+ */
+
+
 public class Storage {
     private String filepath;
     public Storage(String filepath) {
         this.filepath = filepath;
     }
 
+    /**
+     * Saves current tasklist as a file in specified filepath.
+     * @param tasklist
+     */
     public void save(TaskList tasklist) {
         try {
             List<Task> ls = tasklist.getList();
@@ -29,6 +38,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads contents of current saved file into tasklist.
+     * @return The list containing the pre-saved tasks.
+     */
     public List<Task> load() {
         List<Task> ls = new ArrayList<>();
         File directory = new File("../../../data/");

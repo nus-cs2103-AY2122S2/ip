@@ -2,14 +2,26 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * <code>Ui</code> class which encapsulates and drives
+ * the display of the user interface when the code is run.
+ */
+
+
 public class Ui {
 
     Parser parser = new Parser();
 
+    /**
+     * Prints a fixed line separator.
+     */
     public void printLine() {
         System.out.println("____________________________________________________________");
     }
 
+    /**
+     * Prints the Welcome message.
+     */
     public void printWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -19,6 +31,10 @@ public class Ui {
         System.out.println(logo);
     }
 
+    /**
+     * Begins displaying the User Interface in Terminal.
+     * @param tasklist
+     */
     public void start(TaskList tasklist) {
         Scanner scan = new Scanner(System.in);
         printLine();

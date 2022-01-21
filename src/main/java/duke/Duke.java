@@ -1,5 +1,10 @@
 package duke;
 
+/**
+ * Represents an instance of the <code>Duke</code> chatbot, which
+ * can then be run.
+ */
+
 
 public class Duke {
     private Storage storage;
@@ -12,6 +17,9 @@ public class Duke {
         tasks = new TaskList(storage.load());
     }
 
+    /**
+     * Begins operation of the chatbot.
+     */
     public void run() {
         ui.printWelcome();
         ui.start(this.tasks);

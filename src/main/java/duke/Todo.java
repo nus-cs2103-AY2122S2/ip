@@ -1,5 +1,10 @@
 package duke;
 
+/**
+ * Represents a <code>Todo</code> Task.
+ */
+
+
 public class Todo extends Task {
 
     public Todo(String name) {

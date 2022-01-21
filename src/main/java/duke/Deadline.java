@@ -3,9 +3,20 @@ package duke;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a Deadline Task. A <code>Deadline</code> object corresponds to
+ * a Task which contains a <code>LocalDateTime</code> field.
+ */
+
 public class Deadline extends Task {
     private String deadline;
     private LocalDateTime dateTime;
+
+    /**
+     * Constructor for Deadline object.
+     * @param name Name of deadline task
+     * @param deadline Deadline in yyyy/mm/dd HHmm format
+     */
     public Deadline(String name, String deadline) {
         super(name, "D", deadline);
         this.deadline = deadline;

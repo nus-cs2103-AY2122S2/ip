@@ -1,9 +1,21 @@
 package duke;
 
+/**
+ * Represents a <code>Parser</code> which parses input strings
+ * to <code>Duke</code> and returns the appropriate enum type
+ * defining the command.
+ */
+
+
 public class Parser {
 
     public Parser() {}
 
+    /**
+     * Parses input string to return appropriate enum type.
+     * @param input
+     * @return The appropriate enum type.
+     */
     public CommandType parse(String input) {
         if (input.startsWith("bye")) {
             return CommandType.BYE;
