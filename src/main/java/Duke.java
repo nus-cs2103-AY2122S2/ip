@@ -1,3 +1,4 @@
+import javax.xml.crypto.Data;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -6,10 +7,11 @@ import java.util.Scanner;
 
 public class Duke {
     private static final TaskList taskList = new TaskList();
+    private static final Database db = new Database(taskList);
 
     public static void main(String[] args) {
         Duke.log(Constants.GREETINGS);
-        Duke.setup();
+        Duke.db.setup();
         Duke.run();
         Duke.log(Constants.BYE);
     }
@@ -53,7 +55,7 @@ public class Duke {
             } catch (Exception e) {
                 Duke.log(e.getMessage());
             }
-            Duke.update();
+            Duke.db.update();
         }
     }
 
@@ -61,69 +63,5 @@ public class Duke {
         System.out.println(Constants.HORIZONTAL_LINE);
         System.out.println(args);
         System.out.println(Constants.HORIZONTAL_LINE);
-    }
-
-    public static void setup() {
-        try {
-            File directory = new File(Constants.DATA_DIRECTORY);
-            if (!directory.exists()) {
-                if (!directory.mkdirs()) {
-                    throw new IOException("Cannot create new directory");
-                }
-            }
-            File dataFile = new File(directory, Constants.FILE_NAME);
-
-            if (!dataFile.createNewFile()) {
-                Scanner sc = new Scanner(dataFile);
-                while (sc.hasNext()) {
-                    String[] line = sc.nextLine().strip().split(" <> ");
-                    Task currentTask;
-                    switch (line[0]) {
-                        case "T":
-                            currentTask = new ToDo(line[2], line[1].equals("1"));
-                            break;
-                        case "D":
-                            currentTask = new Deadline(line[2], line[1].equals("1"), line[3]);
-                            break;
-                        default:
-                            currentTask = new Event(line[2], line[1].equals("1"), line[3]);
-                            break;
-                    }
-                    taskList.addTask(currentTask);
-                }
-                sc.close();
-            }
-        } catch (IOException e) {
-            Duke.log("Cannot read data, please restart the application");
-            e.printStackTrace();
-        }
-
-    }
-
-    public static void update() {
-        try {
-            File directory = new File(Constants.DATA_DIRECTORY);
-            File tempFile = new File(directory, Constants.TEMP_FILE_NAME);
-            File originalFile = new File(directory, Constants.FILE_NAME);
-
-            PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
-
-            for (Task task : taskList.listTasks()) {
-                pw.write(task.encode());
-            }
-
-            pw.close();
-
-            if (!originalFile.delete()) {
-                throw new IOException("Cannot update file");
-            }
-
-            if (!tempFile.renameTo(originalFile)) {
-                throw new IOException("Cannot update file");
-            }
-        } catch (Exception e) {
-            Duke.log("Failed to update the data");
-            e.printStackTrace();
-        }
     }
 }
