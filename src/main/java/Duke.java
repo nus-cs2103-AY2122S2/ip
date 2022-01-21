@@ -39,6 +39,7 @@ public class Duke {
                     if (markTask.isDone == true) {
                         System.out.println("You have already done this task!");
                         System.out.println(markTask.markAsDone());
+                        System.out.println(endline);
                         continue;
                     }
                     System.out.println("Good Job! You have marked this task as done!");
@@ -52,6 +53,7 @@ public class Duke {
                     if (markTask.isDone == false) {
                         System.out.println("This task is already in undone status");
                         System.out.println(markTask.markAsUndone());
+                        System.out.println(endline);
                         continue;
                     }
                     System.out.println("OK, I have marked this as not done yet:");
@@ -61,6 +63,9 @@ public class Duke {
                 }
                 if (parts[0].equals("todo")) {
 //                String todoDesription = Arrays.toString(Arrays.copyOfRange(parts,1,parts.length));
+                    if (parts.length == 1) {
+                        throw new TodoException("☹ OOPS!!! The description of a todo cannot be empty.(please insert again)");
+                    }
                     String todoDesription = input.substring(5);
                     Task todo = new Todo(todoDesription);
                     allTasks.add(todo);
@@ -72,7 +77,13 @@ public class Duke {
                     continue;
                 }
                 if (parts[0].equals("deadline")) {
+                    if (parts.length == 1) {
+                        throw new DeadlineException("Emm, what is your task again? (please insert again)");
+                    }
                     String[] split1 = input.split("/by ");
+                    if (split1.length == 1) {
+                        throw new DeadlineException("You need to tell me your deadline date\n e.g deadline <yourtask> /by <deadline date>");
+                    }
                     String deadlineDesription = split1[0].substring(9);
                     String deadlineDate = split1[1];
                     Task deadline = new Deadline(deadlineDesription, deadlineDate);
@@ -85,7 +96,13 @@ public class Duke {
                     continue;
                 }
                 if (parts[0].equals("event")) {
+                    if (parts.length == 1) {
+                        throw new EventException("Hmm, you have an empty event isit?(please insert again)");
+                    }
                     String[] split1 = input.split("/at ");
+                    if (split1.length == 1) {
+                        throw new EventException("You need to tell me your event date\n e.g deadline <yourtask> /by <event date>");
+                    }
                     String eventDesription = split1[0].substring(6);
                     String eventDate = split1[1];
                     Task event = new Event(eventDesription, eventDate);
@@ -97,9 +114,9 @@ public class Duke {
                     System.out.println(endline);
                     continue;
                 }
-                throw new DukeException("Sorry, I don't know what you mean");
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             } catch (DukeException e) {
-                System.out.println(e);
+                System.out.println(e.getMessage());
             }
 //            System.out.println(lines);
 //            allTasks.add(new Task(input));
