@@ -1,12 +1,20 @@
+import java.time.LocalDateTime;
+
 public class Event extends Task{
-    protected String on;
-    public Event(String title,String on) {
+    protected LocalDateTime on;
+    public Event(String title,LocalDateTime on) {
         super(title);
         this.on = on;
     }
 
+    public LocalDateTime getDate() {
+        return on;
+    }
+
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (on: " + on + ")";
+        return "[E]" + super.toString() + " (on: " + Utils.printDate(on) + ")";
     }
+
+
 }

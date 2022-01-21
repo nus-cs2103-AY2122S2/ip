@@ -1,3 +1,5 @@
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,8 +29,23 @@ public class Meep {
                 System.out.println("Meep:Bye. Hope to see you again soon!");
                 break;
             } else if (userCommand.equals(Command.LIST.val)) {
-                System.out.println("Meep:");
-                Utils.printTaskList(taskList);
+
+                // print all tasks
+                if(parsedInput.length == 1) {
+                    System.out.println("Meep:");
+                    Utils.printTaskList(taskList);
+                }else{
+                    // print task before given date
+                    try {
+                        LocalDateTime formattedDate=Utils.parseDate(parsedInput[1]);
+                        Utils.printTaskList(taskList,formattedDate);
+                    } catch (DateTimeException e) {
+                        System.out.print("Meep:");
+                        System.out.println(e.getMessage());
+                    }
+
+                }
+
             } else if (userCommand.equals(Command.MARK.val)) {
                 Task task = taskList.get(Integer.parseInt(parsedInput[1]) - 1);
                 task.markDone();
@@ -41,19 +58,30 @@ public class Meep {
                 System.out.println("Meep:OK, I've marked this task as not done yet:");
                 System.out.println("     " + task.toString());
             } else if (userCommand.equals(Command.DEADLINE.val)) {
-                Deadline deadline = new Deadline(parsedInput[1], parsedInput[3]);
-                taskList.add(deadline);
+                try {
+                    Deadline deadline = new Deadline(parsedInput[1], Utils.parseDate(parsedInput[3]));
+                    taskList.add(deadline);
 
-                System.out.println("Meep:Got it. I've added this task:");
-                System.out.println(deadline.toString());
-                System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                    System.out.println("Meep:Got it. I've added this task:");
+                    System.out.println(deadline.toString());
+                    System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                } catch (DateTimeException e) {
+                    System.out.print("Meep:");
+                    System.out.println(e.getMessage());
+                }
             } else if (userCommand.equals(Command.EVENT.val)) {
-                Event event = new Event(parsedInput[1], parsedInput[3]);
-                taskList.add(event);
+                try {
+                    Event event = new Event(parsedInput[1], Utils.parseDate(parsedInput[3]));
+                    taskList.add(event);
 
-                System.out.println("Meep:Got it. I've added this task:");
-                System.out.println(event.toString());
-                System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                    System.out.println("Meep:Got it. I've added this task:");
+                    System.out.println(event.toString());
+                    System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                } catch (DateTimeException e) {
+                    System.out.print("Meep:");
+                    System.out.println(e.getMessage());
+                }
+
             } else if (userCommand.equals(Command.TODO.val)) {
                 ToDo todo = new ToDo(parsedInput[1]);
                 taskList.add(todo);
