@@ -1,22 +1,19 @@
+import java.lang.invoke.ConstantCallSite;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private static final String HORIZONTAL_LINE = "____________________________________________________________";
-    private static final String GREETINGS = "Hello there, I am Giga Chad Duke\nHow can I help you?";
-    private static final String BYE = "Bye, hope to see you again soon!";
     private static final TaskList taskList = new TaskList();
-    private static final List<String> tasks = Arrays.asList("list", "bye", "todo", "event", "deadline", "mark", "unmark", "delete");
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        Duke.log(GREETINGS);
+        Duke.log(Constants.GREETINGS);
 
         Duke.run(sc);
 
-        Duke.log(BYE);
+        Duke.log(Constants.BYE);
     }
 
     public static void run(Scanner sc) {
@@ -24,7 +21,7 @@ public class Duke {
             try {
                 String[] input = sc.nextLine().strip().split(" ", 2);
 
-                if (!tasks.contains(input[0])) {
+                if (!Constants.tasks.contains(input[0])) {
                     throw new CommandNotFoundException();
                 }
 
@@ -54,17 +51,19 @@ public class Duke {
                         Duke.log(taskList.remove(taskId));
                     }
                 }
-            } catch(DukeException e) {
-                System.out.println(e.getMessage());
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                Duke.log(e.getMessage());
             }
         }
     }
 
     public static void log(String args) {
-        System.out.println(Duke.HORIZONTAL_LINE);
+        System.out.println(Constants.HORIZONTAL_LINE);
         System.out.println(args);
-        System.out.println(Duke.HORIZONTAL_LINE);
+        System.out.println(Constants.HORIZONTAL_LINE);
+    }
+
+    public static void setup() {
+
     }
 }
