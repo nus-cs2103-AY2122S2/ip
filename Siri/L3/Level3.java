@@ -14,8 +14,7 @@ public class Level3 {
                 System.out.println(line + "     Goodbye.\n" + line);
                 break; //end while loop
             } else if (word.equals("list")) { //print all elements in a list with index in front
-                System.out.print(line);
-                System.out.println("     Tasks to do:");
+                System.out.println(line + "     Tasks to do:");
                 int s = arrList.size();
                 for (int i = 0; i < s; i++) {
                     String currTask = arrList.get(i).toString();
@@ -28,25 +27,26 @@ public class Level3 {
                 Task t = arrList.get(index);
                 t.markAsDone();
                 arrList.set(index, t);
-                System.out.print(line);
-                System.out.println("     This task has been marked as done:");
-                System.out.println("       " + t.toString());
-                System.out.println(line);
+                System.out.println(line + "     This task has been marked:\n"
+                        + "       " + t.toString() + "\n"
+                        + line);
             } else if (word.equals("unmark")) {
                 int num = sc.nextInt();
                 int index = num - 1;
                 Task t = arrList.get(index);
                 t.markAsNotDone();
                 arrList.set(index, t);
-                System.out.print(line);
-                System.out.println("     This task has been unmarked:");
-                System.out.println("       " + t.toString());
-                System.out.println(line);
-            } else { //print whatever user inputed with "added" infront
-                String taskToDo = word + sc.nextLine();
+                System.out.println(line + "     This task has been unmarked:\n"
+                        + "       " + t.toString() + "\n"
+                        + line);
+            } else { //print everything user inputed with "added: " infront
+                String restOfInput = sc.nextLine();
+                String taskToDo = word + restOfInput;
                 Task t = new Task(taskToDo);
                 arrList.add(t);
-                System.out.println(line + "     added: " + word + "\n" + line);
+                System.out.println(line + "     This task has been added to your list:\n"
+                        + "     added: " + taskToDo + "\n"
+                        + line);
             }
         }
     }
