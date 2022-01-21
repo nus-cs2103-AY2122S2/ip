@@ -1,21 +1,12 @@
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Duke {
 
-    private static String getFirstWord(String text) {
-        int index = text.indexOf(' ');
-        String word;
-        if (index > -1) {
-            word = text.substring(0, index);
-        } else {
-            word = text;
-        }
-        return word;
-    }
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         TaskList taskList = new TaskList();
+
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("Hello! I' Duke \nWhat can I do for you?");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -25,16 +16,11 @@ public class Duke {
             String command = sc.nextLine().toLowerCase();
             String firstWord;
             int itemIndex = -1;
-
             int index = command.indexOf(' ');
             if (index > -1) {
                 firstWord = command.substring(0, index);
             } else {
                 firstWord = command;
-            }
-
-            if (firstWord.equals("mark") || firstWord.equals("unmark") || firstWord.equals("delete")) {
-                itemIndex = Integer.parseInt(command.substring(index + 1));
             }
 
             if (command.equals("bye")) {
@@ -137,6 +123,12 @@ public class Duke {
                     System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 }
 
+            } else {
+                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                System.out.println("Please give a proper command!");
+                System.out.println("List of commands: ");
+                System.out.println("1. todo\n2. deadline\n3. event\n4. list\n5. mark\n6. unmark\n7. delete \n8. bye");
+                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             }
         }
     }
