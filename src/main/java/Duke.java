@@ -19,6 +19,11 @@ public class Duke {
         String message = "Got it. I've added this task:\n";
         taskList.add(t);
         numOfTask++;
+        try {
+            writeToFile("C:\\data\\TaskData.txt");
+        } catch (IOException e ) {
+            System.out.println("Something happened to the text file !" + e.getMessage());
+        }
         System.out.println(message + t.toString() + "\nNow you have " + numOfTask + " tasks in the list.");
     }
 
@@ -33,6 +38,7 @@ public class Duke {
         System.out.println(message + taskList.get(actualTaskNum).toString());
         taskList.remove(actualTaskNum);
         numOfTask--;
+        updateTextFile();
         System.out.println("Now you have " + numOfTask + " tasks in the list.");
     }
 
@@ -41,6 +47,7 @@ public class Duke {
         int actualTaskNum = taskNum - 1; //minus 1 as list index is from 0
         Task t = taskList.get(actualTaskNum); // get the task from the array
         t.setTaskDone();
+        updateTextFile();
         System.out.println(message + t.toString());
     }
 
@@ -49,6 +56,7 @@ public class Duke {
         int actualTaskNum = taskNum - 1;
         Task t = taskList.get(actualTaskNum); // get the task from the array
         t.setTaskNotDone();
+        updateTextFile();
         System.out.println(message + t.toString());
     }
 
@@ -126,6 +134,14 @@ public class Duke {
         return output;
     }
 
+    public static void updateTextFile() {
+        try {
+            writeToFile("C:\\data\\TaskData.txt");
+        } catch (IOException e ) {
+            System.out.println("Something happened to the text file !" + e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
         //checkfile
         try {
@@ -164,11 +180,6 @@ public class Duke {
                 String command = inputSplit[0];
 
                 if (command.equals("bye")) {
-                    try {
-                        writeToFile("C:\\data\\TaskData.txt");
-                    } catch (IOException e ) {
-                        System.out.println("Something happened to the text file !" + e.getMessage());
-                    }
                     System.out.print(ending);
                     break;
 
