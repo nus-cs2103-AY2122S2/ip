@@ -1,35 +1,41 @@
-import java.awt.desktop.AppForegroundListener;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Commands {
     private String[] fullCommand;
     static Scanner scanner;
+    private enum Command {
+        BYE,LIST,MARK,UNMARK,TODO,DEADLINE,EVENT,DELETE, INVALID
+    }
 
     Commands() {
         scanner = new Scanner(System.in);
     }
 
     private void next() {
-        this.fullCommand = scanner.nextLine().split(" ", 2);
+        this.fullCommand = scanner.nextLine().trim().split(" ", 2);
     }
 
     public void response() throws ApolloException {
         next();
-        String instruction = this.fullCommand[0];
-        Task newTask;
-        switch (instruction.toLowerCase()) {
-            case "":
+        Command command = Command.INVALID;
+        try {
+            command = Command.valueOf(this.fullCommand[0].toUpperCase());
+        } catch (IllegalArgumentException error) {
+            if (this.fullCommand[0].equals("")) {
                 response();
-                break;
-            case "bye":
+            }
+        }
+
+        Task newTask;
+        switch (command) {
+            case BYE:
                 Apollo.stop();
                 break;
-            case "list":
+            case LIST:
                 Apollo.printList();
                 response();
                 break;
-            case "mark":
+            case MARK:
                 if (this.fullCommand.length == 1) {
                     throw new ApolloException("Please specify which task to mark as done. \n" +
                             "  mark <task number>");
@@ -37,7 +43,7 @@ public class Commands {
                 Apollo.mark(Integer.parseInt(this.fullCommand[1]), true);
                 response();
                 break;
-            case "unmark":
+            case UNMARK:
                 if (this.fullCommand.length == 1) {
                     throw new ApolloException("Please specify which task to mark as not done yet. \n" +
                             "  unmark <task number>");
@@ -45,7 +51,7 @@ public class Commands {
                 Apollo.mark(Integer.parseInt(this.fullCommand[1]), false);
                 response();
                 break;
-            case "todo":
+            case TODO:
                 if (this.fullCommand.length == 1) {
                     throw new ApolloException("Please specify the description of the task. \n" +
                             "  todo <description>");
@@ -54,7 +60,7 @@ public class Commands {
                 Apollo.addTask(newTask);
                 response();
                 break;
-            case "deadline":
+            case DEADLINE:
                 if (this.fullCommand.length == 1) {
                     throw new ApolloException("Please specify the description and deadline of the task. \n" +
                             "  deadline <description> /by <time>");
@@ -68,7 +74,7 @@ public class Commands {
                 Apollo.addTask(newTask);
                 response();
                 break;
-            case "event":
+            case EVENT:
                 if (this.fullCommand.length == 1) {
                     throw new ApolloException("Please specify the description and period of the task. \n" +
                             "  event <description> /at <period>");
@@ -82,7 +88,7 @@ public class Commands {
                 Apollo.addTask(newTask);
                 response();
                 break;
-            case "delete":
+            case DELETE:
                 if (this.fullCommand.length == 1) {
                     throw new ApolloException("Please specify which task to delete. \n" +
                             "  delete <task number>");
