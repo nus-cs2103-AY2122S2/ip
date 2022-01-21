@@ -1,28 +1,37 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends Action{
-    private final String by;
+    private LocalDate date;
 
     public Deadline(String task, String by)  {
         super(task);
-        this.by  = by;
+        try {
+            this.date = LocalDate.parse(by);
+        } catch (DateTimeParseException e) {
+            System.out.println("Wrong date format: Please use yyyy-mm-dd");
+        }
     }
 
-    public Deadline(String task, String by, boolean bool)  {
+    public Deadline(String task, LocalDate by, boolean bool)  {
         super(task, bool);
-        this.by = by;
+        this.date = date;
     }
 
     @Override
     public Action setDone()  {
-        return new Deadline(act, by, true);
+        return new Deadline(act, date, true);
     }
 
     @Override
     public Action setUnDone()  {
-        return new Deadline(act, by, false);
+        return new Deadline(act, date, false);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by:" + by + ")";
+        return "[D]" + super.toString() + "(by: "
+                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

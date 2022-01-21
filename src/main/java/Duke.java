@@ -66,11 +66,11 @@ public class Duke {
                 continue;
             }
             if (action.isDeadline()) {
-                String[] sarr = action.getBody().split("/by");
+                String[] sarr = action.getBody().split("/by ");
                 action = new Deadline(sarr[0], sarr[1]);
             }
             if (action.isEvent()) {
-                String[] sarr = action.getBody().split("/at");
+                String[] sarr = action.getBody().split("/at ");
                 action = new Event(sarr[0], sarr[1]);
             }
             if (action.isTodo()) {
