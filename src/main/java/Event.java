@@ -18,6 +18,6 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (on: " + Utils.printDate(on) + ")";
+        return "[E]" + super.toString() + " (on: " + Parser.printDate(on) + ")";
     }
 }
