@@ -6,4 +6,6 @@ public abstract class Task {
         this.task = task;
         this.done = done;
     }
+
+    abstract String fileFormat();
 }
