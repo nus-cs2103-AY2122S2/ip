@@ -19,6 +19,9 @@ public class Task {
         this.extension = extension;
     }
 
+    public String getName() {
+        return this.name;
+    }
 
     public void setDone() {
         this.completed = true;

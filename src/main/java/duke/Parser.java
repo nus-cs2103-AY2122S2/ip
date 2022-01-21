@@ -19,8 +19,10 @@ public class Parser {
             return CommandType.DEADLINE;
         } else if (input.startsWith("delete")) {
             return CommandType.DELETE;
-        } else {
+        } else if (input.startsWith("event")){
             return CommandType.EVENT;
+        } else {
+            return CommandType.FIND;
         }
     }
 

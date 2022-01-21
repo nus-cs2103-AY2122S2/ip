@@ -20,6 +20,14 @@ public class TaskList {
         }
     }
 
+    public void findAndPrintTasks(String keyword) {
+        for (int i = 0; i < ls.size(); i++) {
+            if (ls.get(i).getName().contains(keyword)) {
+                System.out.println((i + 1) + ". " + ls.get(i));
+            }
+        }
+    }
+
     public Task setDone(int index) {
         ls.get(index).setDone();
         return ls.get(index);

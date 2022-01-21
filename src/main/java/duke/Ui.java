@@ -59,7 +59,7 @@ public class Ui {
                     int index = Integer.valueOf(splitted[1]);
                     Task unset = tasklist.setUndone(index - 1);
                     printLine();
-                    System.out.println("OK, I've marked this task as not dont yet:  ");
+                    System.out.println("OK, I've marked this task as not done yet:  ");
                     System.out.println(unset);
                     printLine();
                     break;
@@ -129,6 +129,14 @@ public class Ui {
                     printLine();
                     break;
                 }
+            case FIND:
+                String[] splitted = input.split(" ");
+                printLine();
+                System.out.println("Here are the matching tasks in your list:");
+                tasklist.findAndPrintTasks(splitted[1]);
+                printLine();
+                break;
+
             default:
                 System.out.println("OOPS!!! I'm sorry, but I do not know what that means :-(");
                 printLine();
