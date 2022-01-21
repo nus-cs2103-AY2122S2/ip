@@ -2,6 +2,12 @@ public class EventTask extends Task {
     String preposition;
     String time;
 
+    EventTask(String name) {
+        super(name);
+        this.preposition = "";
+        this.time = "";
+    }
+
     EventTask(String name,String preposition, String time) {
         super(name);
         this.preposition = preposition;

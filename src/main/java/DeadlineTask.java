@@ -2,6 +2,12 @@ public class DeadlineTask extends Task {
     String preposition;
     String deadline;
 
+    DeadlineTask(String name) {
+        super(name);
+        this.preposition = "";
+        this.deadline = "";
+    }
+
     DeadlineTask(String name, String preposition, String deadline) {
         super(name);
         this.preposition = preposition;
