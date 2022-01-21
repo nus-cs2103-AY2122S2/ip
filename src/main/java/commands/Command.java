@@ -1,3 +1,7 @@
+package commands;
+
+import task.ListTask;
+
 public class Command {
     public static final String COMMAND_WORD = "command";
 

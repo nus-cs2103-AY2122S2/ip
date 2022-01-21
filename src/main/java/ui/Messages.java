@@ -1,3 +1,5 @@
+package ui;
+
 public class Messages {
 
     public static final String MESSAGE_LOGO = "" +

@@ -1,4 +1,10 @@
-public class DeleteCommand extends Command{
+package commands;
+
+
+import task.ListTask;
+import task.Task;
+
+public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
     public static final String MESSAGE_DELETE = "Noted. I've removed this task:\n";
 
