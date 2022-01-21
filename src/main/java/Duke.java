@@ -98,6 +98,17 @@ public class Duke {
                     "\t" + tasks.getTask(unmarkIdx).nameWithStatus());
                 break;
 
+            case "delete":
+                // User input is 1-indexed, list uses 0-index
+                int dltIdx = Integer.parseInt(action.getArgs()) - 1;
+                Task deletedTask = tasks.removeTask(dltIdx);
+                say(String.format(
+                        "[-] Removed this task:\n" +
+                                "\t%s\n" +
+                                "Now you have %d tasks in the list.",
+                        deletedTask.nameWithStatus(), tasks.size()));
+                break;
+
             case "todo":
                 String todoName = action.getArgs();
                 Todo todo = new Todo(todoName);

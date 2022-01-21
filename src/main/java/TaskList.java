@@ -14,6 +14,11 @@ public class TaskList {
         this.list.add(task);
     }
 
+    public Task removeTask(int index) throws DukeException {
+        checkIndex(index);
+        return this.list.remove(index);
+    }
+
     /**
      * Checks if index is in range of current List
      *

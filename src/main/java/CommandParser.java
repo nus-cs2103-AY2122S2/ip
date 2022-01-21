@@ -20,7 +20,8 @@ public class CommandParser {
             { "unmark", "unmark (\\d+)", "unmark <task number>" },
             { "todo", "todo (.*)", "todo <description>" },
             { "deadline", "deadline (.*) /(by) (.*)", "deadline <description> /by <date>" },
-            { "event", "event (.*) /(at) (.*)", "event <description> /at <date>" }
+            { "event", "event (.*) /(at) (.*)", "event <description> /at <date>" },
+            { "delete", "delete (\\d+)", "delete <task number>" },
     };
 
     public CommandParser(Scanner input) {
