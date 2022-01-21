@@ -1,4 +1,0 @@
-T <> 1 <> hello world
-T <> 1 <> some task
-D <> 1 <> PR <> tmr night
-T <> 0 <> idk
