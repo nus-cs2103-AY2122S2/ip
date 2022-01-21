@@ -1,5 +1,11 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
     public static void main(String[] args) {
@@ -15,6 +21,44 @@ public class Duke {
         String inputData;
         ArrayList<Task> list = new ArrayList<>();
         Scanner scan = new Scanner(System.in);
+        String PATH = "./src/main/data/data.txt";
+        String FILE_DIR = "./src/main/data";
+
+        //Level 7 - Check if data folder exists
+        try {
+            File file = new File(PATH); // create a File for the given file path
+            if (file.exists()) {
+                Scanner sc = new Scanner(file); // create a Scanner using the File as the source
+                while (sc.hasNextLine()) {
+                    String[] taskLine = sc.nextLine().split("~");
+                    Task task;
+                    String taskType = taskLine[0];
+                    try {
+                        if (taskType.equals("T")) {
+                            task = new Todo(taskLine[2]);
+                        } else if (taskType.equals("D")) {
+                            String date = taskLine[3];
+                            date = "by " + date;
+                            task = new Deadline(taskLine[2], date);
+                        } else if (taskType.equals("E")) {
+                            String date = taskLine[3];
+                            date = "at " + date;
+                            task = new Event(taskLine[2], date);
+                        } else {
+                            throw new DukeException("Invalid task was read");
+                        }
+                        if (taskLine[1].equals("X")) {
+                            task.setDone(true);
+                        }
+                        list.add(task);
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
 
         while(true) {
 
@@ -99,16 +143,16 @@ public class Duke {
                         if(spl.length < 2){
                             throw new DukeException("Description of deadline must include a date/time! Did you miss out a /by?");
                         }
-                        String details=spl[0];
-                        String date=spl[1];
+                        String details=spl[0].trim();
+                        String date=spl[1].trim();
                         newTask = new Deadline(details,date);
                     } else if(taskType.equals("event")){
                         String[] spl=taskDetails.split("/");
                         if(spl.length < 2){
                             throw new DukeException("Description of event must include a date/time! Did you miss out a /at?");
                         }
-                        String details=spl[0];
-                        String date=spl[1];
+                        String details=spl[0].trim();
+                        String date=spl[1].trim();
                         newTask = new Event(details,date);
                     }
 
@@ -125,7 +169,61 @@ public class Duke {
                 System.out.println(e);
                 System.out.println("-----------------------------------");
             }
-        } 
+
+            //Saving the changes back to file
+            File file = new File(FILE_DIR);
+            //if prev file exists, delete it and replace with new empty file
+            try {
+                if (!file.exists()) {
+                    file.mkdir();
+                }
+            } catch(Exception e) {
+                System.out.println(e);
+            }
+
+            //Writing to empty txt file
+            try {
+                FileWriter fileWriter = new FileWriter(PATH,false);
+                PrintWriter printWriter = new PrintWriter(fileWriter);
+                for (Task t: list) {
+                    String taskToAppend = "";
+
+                    //Identify task type
+                    if(t instanceof Todo) {
+                        taskToAppend += "T~";
+                    } else if(t instanceof Deadline) {
+                        taskToAppend += "D~";
+                    } else if(t instanceof Event) {
+                        taskToAppend += "E~";
+                    }
+
+                    //Identify if task is done
+                    if(t.done) {
+                        taskToAppend += "X~";
+                    } else {
+                        taskToAppend += " ~";
+                    }
+                    taskToAppend += t.taskName + "~";
+                    if(t instanceof Deadline) {
+                        Deadline tempTask = (Deadline) t;
+                        String date = tempTask.date;
+                        date = date.replace("(by:","");
+                        date = date.replace(")","");
+                        taskToAppend += date.trim();
+                    } else if (t instanceof Event) {
+                        Event tempTask = (Event) t;
+                        String date = tempTask.date;
+                        date = date.replace("(at:","");
+                        date = date.replace(")","");
+                        taskToAppend += date.trim();
+                    }
+                    printWriter.println(taskToAppend);
+                }
+                printWriter.close();
+            } catch(IOException e) {
+                System.out.println("Something went wrong: " + e.getMessage());
+            }
+        }
 
         scan.close();
     }
