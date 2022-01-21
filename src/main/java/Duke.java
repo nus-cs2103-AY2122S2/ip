@@ -15,19 +15,32 @@ public class Duke {
         list = new ArrayList<String>();
         while(sc.hasNextLine()) {
             String str = sc.nextLine();
+            String[] strArr = str.split(" ");
             if (str.equals("bye")) {
                 System.out.println("Bye for now!");
                 return;
             }
-            if (str.equals("list")) showList();
-            list.add(str);
-            System.out.println(String.format("added: %s", str));
+            else if (str.equals("list")) showList();
+            else if (strArr[0].equals("mark")) {
+                int taskNum = String.parseInt(strArr[1]);
+                list.get(taskNum).setStatus(true);
+            }
+            else if (strArr[0].equals("unmark")) {
+                int taskNum = String.parseInt(strArr[1]);
+                list.get(taskNum).setStatus(false);
+            }
+            else {
+                list.add(new Task(str));
+                System.out.println(String.format("added: %s", str));
+            }
         }
     }
 
     public showList() {
         for(int i = 0; i < list.size(); i++) {
-            System.out.println(String.format("%d. %s", i, list.get(i)));
+            Task task = list.get(i);
+            String status = task.getStatus() ? "X" : " ";
+            System.out.println(String.format("%d. [%s] %s", i, status, task.getStr()));
         }
     }
 }
