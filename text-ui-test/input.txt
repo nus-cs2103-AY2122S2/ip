@@ -1,0 +1,5 @@
+list
+todo A NEW TODO TASK
+event go eat dinner with friends /at Monday 4pm-to-6pm
+deadline project end at tmr! /by 22 Jab 11:59pm
+blah
