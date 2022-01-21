@@ -116,7 +116,7 @@ public class Duke {
                 }
             }
         } catch (Exception e) {
-            System.out.println(buildMessage("☹ OOPS!!! " + e.getMessage()));
+            System.out.println(buildMessage(":( OOPS!!! " + e.getMessage()));
         }
 
         sc.close();
