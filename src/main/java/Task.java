@@ -30,6 +30,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + getDescription().substring(DESCRIPTION_OFFSET); // start from 1 because 0 is a space
+        return "[" + getStatusIcon() + "] " + getDescription(); // start from 1 because 0 is a space
     }
 }

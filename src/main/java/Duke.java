@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import java.time.LocalDate;
+
 public class Duke {
 
     private static ArrayList<Task> taskList = new ArrayList<>();
@@ -77,7 +79,7 @@ public class Duke {
                     printList();
 
                 } else if (command.equals("todo")) {
-                    String description = input.substring(TODO_OFFSET);
+                    String description = input.substring(TODO_OFFSET).trim();
 
                     if(description.length() == 0) {
                         throw new IncompleteCommandException(command);
@@ -87,7 +89,7 @@ public class Duke {
 
                 } else if (command.equals("deadline")) {
                     String[] inputSlash = input.split("/");
-                    String description = inputSlash[0].substring(DEADLINE_OFFSET);
+                    String description = inputSlash[0].substring(DEADLINE_OFFSET).trim();
 
                     if(description.length() == 0) {
                         throw new IncompleteCommandException(command);
@@ -98,7 +100,7 @@ public class Duke {
 
                 } else if (command.equals("event")) {
                     String[] inputSlash = input.split("/");
-                    String description = inputSlash[0].substring(EVENT_OFFSET);
+                    String description = inputSlash[0].substring(EVENT_OFFSET).trim();
 
                     if(description.length() == 0) {
                         throw new IncompleteCommandException(command);
