@@ -1,3 +1,6 @@
+import Commands.DeadlineCommand;
+import Commands.EventCommand;
+import Commands.ToDoCommand;
 import Exceptions.DukeException;
 import Exceptions.EmptyDescriptionException;
 import Exceptions.InvalidMessageException;
@@ -65,36 +68,18 @@ public class Duke {
                     pr.print(task.toString() + "\n");
                     pr.flush();
                 } else if (userInput.equals("todo")) {
-                    duke.checks("todo", parts);
-
-                    String description = input.substring(5);
-                    DukeBot.ToDo toDo = new DukeBot.ToDo(description);
+                    DukeBot.ToDo toDo = ToDoCommand.preProcessing(input, parts);
                     arrayList.add(toDo);
-
                     pr.print(duke.successfulAdd(toDo, arrayList.size()));
                     pr.flush();
                 } else if (userInput.equals("deadline")) {
-                    duke.checks("deadline", parts);
-
-                    String description = input.substring(9);
-                    String deadlineParts[] = description.split("/");
-                    String byWhen = deadlineParts[1].substring(3);
-
-                    DukeBot.Deadline deadline = new DukeBot.Deadline(deadlineParts[0], byWhen);
+                    DukeBot.Deadline deadline = DeadlineCommand.preProcessing(input, parts);
                     arrayList.add(deadline);
-
                     pr.print(duke.successfulAdd(deadline, arrayList.size()));
                     pr.flush();
                 } else if (userInput.equals("event")) {
-                    duke.checks("event", parts);
-
-                    String description = input.substring(6);
-                    String deadlineParts[] = description.split("/");
-                    String atWhichDay = deadlineParts[1].substring(3);
-
-                    DukeBot.Event event = new DukeBot.Event(deadlineParts[0], atWhichDay);
+                    DukeBot.Event event = EventCommand.preProcessing(input, parts);
                     arrayList.add(event);
-
                     pr.print(duke.successfulAdd(event, arrayList.size()));
                     pr.flush();
                 } else if (userInput.equals("delete")) {
@@ -121,12 +106,6 @@ public class Duke {
                 }
                 pr.flush();
             }
-        }
-    }
-
-    public void checks(String type, String[] parts) throws EmptyDescriptionException{
-        if (parts.length == 1) {
-            throw new EmptyDescriptionException(type);
         }
     }
 
