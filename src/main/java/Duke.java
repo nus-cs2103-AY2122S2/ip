@@ -2,13 +2,19 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    // Create an empty array list
+    // Creates an empty ArrayList to store Tasks
     private static ArrayList<Task> taskArr = new ArrayList<>();
 
+    /**
+     * Prints a line
+     */
     public static void line() {
         System.out.println("____________________________________________________________");
     }
 
+    /**
+     * Prints a logo
+     */
     public static void logo() {
         System.out.println(" ____                         _____       _\n"
                 + "| |_) |_   _ ___ ___ _   _  | (___   __ _| | ____ _\n"
@@ -19,6 +25,11 @@ public class Duke {
                 + "                      |___/ \n");
     }
 
+    /**
+     * Prints the total number of tasks
+     *
+     * @param num Total number of tasks
+     */
     public static void totalTasks(int num) {
         if(num == 1) {
             System.out.println("     You currently have " + num + " task in your device.");
@@ -27,6 +38,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Marks the respective task with a tick
+     *
+     * @param num The index of the task to be marked
+     */
     public static void mark(int num) {
         line();
         Task currTask = taskArr.get(num - 1);
@@ -36,6 +52,11 @@ public class Duke {
         line();
     }
 
+    /**
+     * Unmarks the respective task with a tick
+     *
+     * @param num The index of the task to be unmarked
+     */
     public static void unmark(int num) {
         line();
         Task currTask = taskArr.get(num - 1);
@@ -45,12 +66,22 @@ public class Duke {
         line();
     }
 
+    /**
+     * Adds a Task to the Task ArrayList
+     *
+     * @param task Task to be added into the ArrayList
+     */
     public static void addToList(Task task) {
         taskArr.add(task);
         System.out.println("       " + task.toString());
         totalTasks(taskArr.size());
     }
 
+    /**
+     * Deletes a Task from the Task ArrayList
+     *
+     * @param task Task to be deleted from the ArrayList
+     */
     public static void deleteFromList(Task task) {
         taskArr.remove(task);
         line();
@@ -60,6 +91,9 @@ public class Duke {
         line();
     }
 
+    /**
+     * Prints all the Tasks in the ArrayList in sequential order
+     */
     public static void printList() {
         line();
         System.out.println("     Here are the tasks in your device:");
@@ -72,7 +106,8 @@ public class Duke {
     public static void main(String[] args) {
         line();
         System.out.println("Tell me... have you seen a RED imposter among us?");
-        System.out.println("If you have seen this SUSSY imposter, please let me know immediately... otherwise how may I be of assistance?");
+        System.out.println("If you have seen this SUSSY imposter, please let me know immediately..."
+                + " otherwise how may I be of assistance?");
         line();
 
         Scanner sc = new Scanner(System.in);
