@@ -1,6 +1,15 @@
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Duke {
     public static void listOut(ArrayList<Action> list) {
         int count = 1;
@@ -15,6 +24,26 @@ public class Duke {
         }
     }
 
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    static void save(File file, ArrayList<Action> list) {
+        if (!list.isEmpty()) {
+            StringBuilder s = new StringBuilder();
+            for (Action act : list) {
+                s.append(act.toString()).append("\n");
+            }
+            try {
+                writeToFile(file.getPath(), s.toString());
+            } catch (IOException e) {
+                System.out.println("Error: " + e);
+            }
+        }
+    }
+
     public static void testForUnknown(Action act) throws DukeException {
         if (!act.known()) {
             throw new DukeException("What is this nonsense?");
@@ -25,6 +54,22 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        Path directoryExists = Paths.get("C:/repos/ip/data");
+        //check if directory exists
+        if (!Files.exists(directoryExists)) {
+            new File("data").mkdir();
+        }
+        File f = new File("data/savedata.txt");
+        //delete first
+        f.delete();
+        //Create file
+        try {
+            List<String> lines = Arrays.asList("");
+            Path file = Paths.get("data/savedata.txt");
+            Files.write(file, lines, StandardCharsets.UTF_8);
+        } catch (IOException ignored) {
+        }
+        //greeting
         String greeting = "Hello!! I am Duke, your humble personal chatbot.\n" +
                 "What can I do for you?";
         System.out.println(greeting);
@@ -32,6 +77,7 @@ public class Duke {
         ArrayList<Action> store = new ArrayList<>();
         Action action = new Action(sc.nextLine());
         while (!action.isBye()) {
+            //catch errors
             try {
                 testForUnknown(action);
             } catch (DukeException Dukex) {
@@ -78,6 +124,7 @@ public class Duke {
                 action = new Todo(action.getBody());
             }
             store.add(action);
+            save(f, store);
             System.out.println("Got it. I have added this task:\n  " + action +
                     "\nNow you have " + store.size() + " tasks in the list.");
             action = new Action(sc.nextLine());
