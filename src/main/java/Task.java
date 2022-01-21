@@ -35,9 +35,6 @@ abstract class Task {
         return this.type;
     }
 
-    abstract String getTaskTime();
-
-
     @Override
     public String toString() {
         if (this.completed) {

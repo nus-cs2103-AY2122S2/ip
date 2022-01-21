@@ -4,11 +4,6 @@ class ToDo extends Task {
         super(task, "T");
     }
 
-    public ToDo(String task, boolean complete) {
-        super(task, "T", complete);
-
-    }
-
     public String getTaskTime() {
         return "";
     }
