@@ -3,7 +3,7 @@
  */
 public class Task {
     /** Description of task. */
-    private final String desc;
+    private final String DESCRIPTION;
 
     /** Status of task. */
     private boolean isDone;
@@ -14,7 +14,7 @@ public class Task {
      * @param desc Description of task.
      */
     public Task(String desc) {
-        this.desc = desc;
+        this.DESCRIPTION = desc;
         this.isDone = false;
     }
 
@@ -48,6 +48,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.getStatusIcon(), desc);
+        return String.format("[%s] %s", this.getStatusIcon(), DESCRIPTION);
     }
 }
