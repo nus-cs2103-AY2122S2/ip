@@ -96,6 +96,18 @@ public class Duke {
                         pastCommands.size(),
                         pastCommands.size() == 1 ? "task" : "tasks"
                 )));
+            } else if (command.split(" ")[0].equals("delete")) {
+                Task removedTask = pastCommands.remove(Integer.parseInt(command.split(" ")[1]) - 1);
+
+                System.out.println(buildMessage(String.format("""
+                                Noted. I've removed this task:
+                                 %s
+                                Now you have %d %s in the list.""",
+                        removedTask,
+                        pastCommands.size(),
+                        pastCommands.size() == 1 ? "task" : "tasks"
+                )));
+
             } else {
                 System.out.println(buildMessage("☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
             }
