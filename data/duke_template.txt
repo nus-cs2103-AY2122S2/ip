@@ -1,0 +1,4 @@
+Todo/;DONE/;read book
+Deadline/;NOT_DONE/;return book/;June 6th
+Event/;NOT_DONE/;project meeting/;Aug 6th 2-4pm
+Todo/;DONE/;join sports club
