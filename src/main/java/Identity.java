@@ -21,6 +21,14 @@ public class Identity {
         return key.equals(LISTKEY);
     }
 
+    public static boolean markMatch(String nextKey) {
+        return nextKey.matches("mark\\s\\d");
+    }
+
+    public static boolean unmarkMatch(String nextKey) {
+        return nextKey.matches("unmark\\s\\d");
+    }
+
     public static void exitProg() {
         System.out.println("--------------------------------" +
                 "------------------------\n"
@@ -29,11 +37,5 @@ public class Identity {
                 + "--------------------------------------------------------");
     }
 
-    public static boolean markMatch(String nextKey) {
-        return nextKey.matches("mark");
-    }
 
-    public static boolean unmarkMatch(String nextKey) {
-        return nextKey.matches("unmark");
-    }
 }

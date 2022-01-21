@@ -9,6 +9,32 @@ public class TaskList {
         this.itemList.add(task);
     }
 
+    public void markTask(String taskKey) {
+        String[] tokens = taskKey.split(" ");
+        String strIndex = tokens[1]; //error here
+        int index = Integer.parseInt(strIndex);
+        Task targetTask = this.itemList.get(index);
+        Task newTask = targetTask.markTask();
+        this.itemList.set(index, newTask);
+        System.out.println(
+                "Nice! I've marked this task as done:"
+                        + "\n" + newTask
+        );
+    }
+
+    public void unmarkTask(String taskKey) {
+        String[] tokens = taskKey.split(" ");
+        String strIndex = tokens[1]; //error here
+        int index = Integer.parseInt(strIndex);
+        Task targetTask = this.itemList.get(index);
+        Task newTask = targetTask.unmarkTask();
+        this.itemList.set(index, newTask);
+        System.out.println(
+                "OK, I've marked this task as not done yet:"
+                        + "\n" + newTask
+        );
+    }
+
     public String printList() {
         StringBuilder initList = new StringBuilder();
 

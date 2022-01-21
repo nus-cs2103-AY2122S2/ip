@@ -36,13 +36,13 @@ public class Duke {
 
             if (Identity.markMatch(nextKey)) {
                 //mark
-                System.out.println("found mark");
+                Duke.thisList.markTask(nextKey);
                 continue;
             }
 
             if (Identity.unmarkMatch(nextKey)) {
                 //unmark
-                System.out.println("found unmark");
+                Duke.thisList.unmarkTask(nextKey);
                 continue;
             }
 
