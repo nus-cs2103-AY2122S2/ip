@@ -12,8 +12,8 @@ public class Event extends Task{
      * @param number task number
      * @param time duration of event
      */
-    public Event(String input, int number, String time) {
-        super(input, number, time, "E");
+    public Event(String input, int number, String time, boolean reading) {
+        super(input, number, time, "E", reading);
     }
 
     /**

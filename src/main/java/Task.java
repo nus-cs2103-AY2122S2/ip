@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
  * Class task that Duke creates
  */
@@ -9,6 +13,7 @@ public class Task {
     int number;
     static int totalTask = 0;
     boolean done = false;
+    static File pathToFile;
 
     /**
      * Constructor of task
@@ -18,7 +23,7 @@ public class Task {
      * @param deadline time associated with task
      * @param type type of task. 'E' for Event, 'T' for Todo and 'D' for Deadline
      */
-    public Task(String name, int number, String deadline, String type){
+    public Task(String name, int number, String deadline, String type, boolean reading){
         try {
             if (name.equals("")) {
                 throw new EmptyDescriptorExceptions();
@@ -27,20 +32,41 @@ public class Task {
             this.number = number;
             this.deadline = deadline;
             this.type = type;
-            System.out.println("Got it. I've added this task: ");
-            if (type.equals("D")){
-                System.out.printf(" [D][%s] %s (by: %s) \n", this.getStatus(),  this.name, this.deadline);
-            } else if (type.equals("T")){
-                System.out.printf(" [T][%s] %s\n", this.getStatus(),  this.name);
-            } else {
-                System.out.printf(" [E][%s] %s (on: %s) \n", this.getStatus(),  this.name, this.deadline);
+            if (!reading) {
+                System.out.println("Got it. I've added this task: ");
+                if (type.equals("D")) {
+                    System.out.printf(" [D][%s] %s (by: %s) \n", this.getStatus(), this.name, this.deadline);
+                } else if (type.equals("T")) {
+                    System.out.printf(" [T][%s] %s\n", this.getStatus(), this.name);
+                } else {
+                    System.out.printf(" [E][%s] %s (on: %s) \n", this.getStatus(), this.name, this.deadline);
+                }
+                addLineToFile();
+                totalTask++;
+                System.out.printf("Now you have %d task on the list.\n", Task.totalTask);
             }
-            totalTask++;
-            System.out.printf("Now you have %d task on the list.\n", Task.totalTask);
+            else {
+                totalTask++;
+            }
         }
         catch (EmptyDescriptorExceptions e){
             System.out.println("☹ OOPS!!! The description of a task cannot be empty.");
         }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public String getDataToWrite(){
+        return String.format("%s---%s---%s---%s \n", this.type, this.done, this.name, this.deadline);
+    }
+
+    public void addLineToFile() throws IOException {
+        FileWriter fw = new FileWriter(pathToFile, true); // create a FileWriter in append mode
+        String s = String.format("%s---%s---%s---%s \n", this.type, this.done, this.name, this.deadline);
+        fw.write(s);
+        fw.close();
     }
 
     /**
