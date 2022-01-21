@@ -7,6 +7,11 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public Task(String taskName, boolean isDone) {
+        this.taskName = taskName;
+        this.isDone = isDone;
+    }
+
     public String switchMark(String instr) {
         if ((instr.equals("mark") && !isDone)|| (instr.equals("unmark") && isDone)) {
             this.isDone = !this.isDone;
@@ -24,5 +29,9 @@ public abstract class Task {
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), taskName);
+    }
+
+    public String encode() {
+        return String.format("%d <> %s", isDone? 1: 0, taskName);
     }
 }
