@@ -10,34 +10,35 @@ public class Command {
     }
 
     public void execute(TaskList taskList) throws DukeException {
-        if (command.equals("bye")) {
-            System.out.println("Bye. Hope to see you again soon!");
-        }
-        else {
-            if (command.equals("list")) {
+        try {
+            if (command.equals("bye")) {
+                System.out.println("Bye. Hope to see you again soon!");
+            } else if (command.equals("list")) {
                 taskList.listTasks();
-            }
-            else if (command.equals("mark")) {
+            } else if (command.equals("mark")) {
                 taskList.markTask(scan.nextInt());
-            }
-            else if (command.equals("unmark")) {
+            } else if (command.equals("unmark")) {
                 taskList.unmarkTask(scan.nextInt());
-            }
-            else if (command.equals("delete")) {
+            } else if (command.equals("delete")) {
                 taskList.deleteTask(scan.nextInt());
-            }
-            else if (command.equals("todo") || command.equals("deadline") || command.equals("event")){
+            } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
                 String description = scan.nextLine();
                 if (description.equals("")) {
-                    throw new DukeException(String.format("OOPS!!! The description of a %s cannot be empty.", command));
+                    throw new DukeException(String.format("OOPS!!! The description of a %s cannot be empty.", command), taskList);
                 }
                 taskList.addTask(command, description);
+            } else {
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(", taskList);
             }
-            else {
-                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+        catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
+        finally {
+            if (!command.equals("bye")) {
+                Command nextCommand = new Command(scan, scan.next());
+                nextCommand.execute(taskList);
             }
-            Command nextCommand = new Command(scan,scan.next());
-            nextCommand.execute(taskList);
         }
     }
 }
