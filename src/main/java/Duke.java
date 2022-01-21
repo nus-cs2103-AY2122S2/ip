@@ -34,11 +34,11 @@ public class Duke {
      * List out the current tasks as well as their status.
      */
     private void list() {
-		String msg = "";
+        String msg = "";
         for (int i = 1; i <= lst.size(); i++) {
-			msg += "\t " + i + "." + lst.get(i-1).print() + "\n";
+            msg += "\t " + i + "." + lst.get(i-1).print() + "\n";
         }
-		this.printMsg(msg);
+        this.printMsg(msg);
     }
 
     /**
@@ -72,6 +72,9 @@ public class Duke {
         this.printMsg("\t OK, I've marked this task as not done yet:\n\t   " + lst.get(num).print() + "\n");
     }
 
+    /**
+     * Give the bot intructions and let it do the corresponding job.
+     */
     private void run() {
         Scanner sc= new Scanner(System.in);
         String input = sc.nextLine();
@@ -87,6 +90,8 @@ public class Duke {
                 this.mark(num-1);
             } catch (NumberFormatException e) {
                 this.add(input);
+            } catch (IndexOutOfBoundsException e) {
+                this.printMsg("\t Opps! The item you wanna mark is out of bounds.\n");
             }
         } else if (splitted.length == 2 && splitted[0].equals("unmark")) {
             try {
@@ -94,6 +99,8 @@ public class Duke {
                 this.unmark(num-1);
             } catch (NumberFormatException e) {
                 this.add(input);
+            } catch (IndexOutOfBoundsException e) {
+                this.printMsg("\t Opps! The item you wanna unmark is out of bounds.\n");
             }
         } else {
             this.add(input);
