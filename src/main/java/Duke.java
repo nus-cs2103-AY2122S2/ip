@@ -114,6 +114,16 @@ public class Duke {
                     System.out.println(endline);
                     continue;
                 }
+                if (parts[0].equals("delete")) {
+                    Task taskToBeDelete = allTasks.get(Integer.parseInt(parts[1]) - 1);
+                    System.out.println(lines);
+                    System.out.println("Okay, I have removed this task:");
+                    System.out.println(taskToBeDelete);
+                    allTasks.remove(Integer.parseInt(parts[1]) - 1);
+                    System.out.println("Now you have " + allTasks.size() + " tasks in the list.");
+                    System.out.println(endline);
+                    continue;
+                }
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
