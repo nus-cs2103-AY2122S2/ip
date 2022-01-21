@@ -4,6 +4,64 @@ import java.util.Scanner;
 public class Duke {
     private static ArrayList<Task> taskList = new ArrayList<>();
 
+    enum Command {
+        LIST("list"),
+        MARK("mark"),
+        UNMARK("unmark"),
+        DELETE("delete"),
+        TODO("todo"),
+        DEADLINE("deadline"),
+        EVENT("event");
+
+        String command;
+
+        private Command (String command) {
+            this.command = command;
+        }
+
+        public String getCommand() {
+            return this.command;
+        }
+
+        public static void process(Command c, String command, String[] commandWords) {
+            switch (c) {
+                case LIST:
+                    printList();
+                    break;
+                case MARK:
+                    try {
+                        mark(commandWords);
+                    } catch (DukeException d) {
+                        printMsg(d.toString());
+                    }
+                    break;
+                case UNMARK:
+                    try {
+                        unmark(commandWords);
+                    } catch (DukeException d) {
+                        printMsg(d.toString());
+                    }
+                    break;
+                case DELETE:
+                    try{
+                        delete(commandWords);
+                    } catch (DukeException d) {
+                        printMsg(d.toString());
+                    }
+                    break;
+                case TODO:
+                case DEADLINE:
+                case EVENT:
+                    try {
+                        addTask(command, commandWords);
+                    } catch (DukeException d) {
+                        printMsg(d.toString());
+                    }
+                    break;
+            }
+        }
+    }
+
     public static void main(String[] args) {
         printMsg("Hello! I am Spike ⊂( ・ ̫・)⊃\nWhat can I do for you?");
 
@@ -13,13 +71,21 @@ public class Duke {
             String command = sc.nextLine();
             // Also split the command into words for easy processing
             String[] commandWords =  command.split(" ");
-            if (commandWords.length >0) {
+            if (commandWords.length > 0) {
+                // If user want to exit the program
                 if (commandWords[0].equals("bye")) {
+                    // If user want to exit the program
                     printMsg("See you soon! ﾍ(=￣∇￣)ﾉ");
                     break;
+                } else {
+                    // else we check if it is a valid command to decide how to process it
+                    Command c = isValidCommand(commandWords[0]);
+                    if (c != null) {
+                        Command.process(c, command, commandWords);
+                    } else {
+                        printMsg("Sorry, I am not programmed to do this yet :(");
+                    }
                 }
-                processCommand(command, commandWords);
-
             }
         }
         sc.close();
@@ -27,48 +93,17 @@ public class Duke {
     }
 
     /**
-     * Process the command entered by user.
+     * Check whether it is a valid command, if valid, return that command enum number
      */
-    public static void processCommand(String command, String[] commandWords) {
-        switch (commandWords[0]) {
-            case "list":
-                printList();
-                break;
-            case "mark":
-                try {
-                    mark(commandWords);
-                } catch (DukeException d) {
-                    printMsg(d.toString());
-                }
-                break;
-            case "unmark":
-                try {
-                    unmark(commandWords);
-                } catch (DukeException d) {
-                    printMsg(d.toString());
-                }
-                break;
-            case "delete":
-                try{
-                    delete(commandWords);
-                } catch (DukeException d) {
-                    printMsg(d.toString());
-                }
-                break;
-            case "todo":
-            case "deadline":
-            case "event":
-                try {
-                    addTask(command, commandWords);
-                } catch (DukeException d) {
-                    printMsg(d.toString());
-                }
-                break;
-            default:
-                printMsg("Sorry, I am not programmed to do this yet :(");
+    public static Command isValidCommand(String command) {
+        for (Command c : Command.values()) {
+            if (c.getCommand().equals(command)) {
+                return c;
+            }
         }
+        return null;
     }
-
+    
     /**
      * Add task into the list and print
      */
