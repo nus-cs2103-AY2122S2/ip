@@ -17,9 +17,9 @@ class Event extends Task implements DateTimeInterface {
     @Override
     public String toString() {
         if (super.isCompleted()) {
-            return "[E][x] " + super.getTaskName() + "(at: " + this.date + ")";
+            return "[E][x] " + super.getTaskName() + " (at: " + this.date + ")";
         } else {
-            return "[E][ ] " + super.getTaskName() + "(at: " + this.date + ")";
+            return "[E][ ] " + super.getTaskName() + " (at: " + this.date + ")";
         }
     }
 

@@ -1,8 +1,17 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+import java.io.IOException;
+import java.io.FileWriter;
+
 
 public class Duke {
+
+    public static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -99,7 +108,7 @@ public class Duke {
                     System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 } else {
                     try {
-                        String deadlineItem = command.substring(index + 1, command.indexOf("/by"));
+                        String deadlineItem = command.substring(index + 1, command.indexOf("/by") - 1);
                         LocalDate date = LocalDate.parse(command.substring(command.indexOf("/by") + 4));
                         Deadline deadline = new Deadline(deadlineItem, date);
                         taskList.add(deadline);
@@ -122,19 +131,29 @@ public class Duke {
                     System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 } else {
                     try {
-                        String eventItem = command.substring(index + 1, command.indexOf("/at"));
+                        String eventItem = command.substring(index + 1, command.indexOf("/at") - 1);
                         LocalDate date = LocalDate.parse(command.substring(command.indexOf("/at") + 4));
                         Event event = new Event(eventItem, date);
                         taskList.add(event);
                         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                        System.out.println("Got it, I have added this task:" );
+                        System.out.println("Got it, I have added this task:");
                         System.out.println(event);
                         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                    } catch (DateTimeParseException e){
+                    } catch (DateTimeParseException e) {
                         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                         System.out.println("Date must be in yyyy-mm-dd format!");
                         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                     }
+                }
+
+            } else if (command.equals("save")) {
+                try {
+                    writeToFile("data/tasklist.txt", taskList.saveText());
+                    System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                    System.out.println("File saved!");
+                    System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                } catch (IOException e) {
+                    System.out.println("Something went wrong: " + e.getMessage());
                 }
 
             } else {

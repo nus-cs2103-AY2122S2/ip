@@ -17,9 +17,9 @@ class Deadline extends Task implements DateTimeInterface {
     @Override
     public String toString() {
         if (super.isCompleted()) {
-            return "[D][x] " + super.getTaskName() + "(by: " + this.date.toString() + ")";
+            return "[D][x] " + super.getTaskName() + " (by: " + this.date.toString() + ")";
         } else {
-            return "[D][ ] " + super.getTaskName() + "(by: " + this.date.toString() + ")";
+            return "[D][ ] " + super.getTaskName() + " (by: " + this.date.toString() + ")";
         }
     }
 
