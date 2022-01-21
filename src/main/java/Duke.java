@@ -3,29 +3,25 @@ import java.util.Scanner;
 
 public class Duke {
     private static final String botName = "Feline";
-    private ArrayList<Task> list;
+    private static ArrayList<Task> list = new ArrayList<>();
     //private static final String[] commands = {"bye", "mark", "unmark", "list", "todo", "deadline", "event"};
 
-    public Duke() {
-        this.list = new ArrayList<>();
-    }
-
-    private void performAction(String action, String input) {
+    private static void performAction(String action, String input) {
         switch (action) {
             case "mark":
-                mark(input);
+                Duke.mark(input);
                 break;
             case "unmark":
-                unmark(input);
+                Duke.unmark(input);
                 break;
             case "list":
-                printList();
+                Duke.printList();
                 break;
             case "delete":
-                delete(input);
+                Duke.delete(input);
                 break;
             default:
-                addTask(input);
+                Duke.addTask(input);
         }
     }
     private static void greet() {
@@ -35,16 +31,16 @@ public class Duke {
         System.out.println("See you next time!");
     }
 
-    private void printTaskCount() {
-        System.out.println(String.format("Now you have %d task(s) in your list.", this.list.size()));
+    private static void printTaskCount() {
+        System.out.println(String.format("Now you have %d task(s) in your list.", list.size()));
     }
-    private void taskAdded() {
+    private static void taskAdded() {
         System.out.println("Got it. I've added this task:");
-        System.out.println(this.list.get(this.list.size() - 1).toString());
+        System.out.println(list.get(list.size() - 1).toString());
         printTaskCount();
     }
 
-    private void addTask(String str) {    //adds task to list
+    private static void addTask(String str) {    //adds task to list
         String action = Duke.getFirstWord(str);
         switch (action) {
             case "todo":
@@ -53,7 +49,7 @@ public class Duke {
                     if (todoArr.length <= 1) {
                         throw new InvalidArgumentException("todo.. todo what?");
                     }
-                    this.list.add(new Todo(todoArr[1].trim()));
+                    list.add(new Todo(todoArr[1].trim()));
                     taskAdded();
                 } catch (InvalidArgumentException e) {
                     System.out.println(e.getMessage());
@@ -72,7 +68,7 @@ public class Duke {
                         throw new InvalidArgumentException("By when?? ..");
                     }
                     String description = deadlineSplit[1].trim();
-                    this.list.add(new Deadline(description, deadlineArr[1].trim()));
+                    list.add(new Deadline(description, deadlineArr[1].trim()));
                     taskAdded();
                 } catch (InvalidArgumentException e) {
                     System.out.println(e.getMessage());
@@ -91,7 +87,7 @@ public class Duke {
                         throw new InvalidArgumentException("At where? Please specify again");
                     }
                     String description = eventSplit[1].trim();
-                    this.list.add(new Event(description, eventArr[1].trim()));
+                    list.add(new Event(description, eventArr[1].trim()));
                     taskAdded();
                 } catch (InvalidArgumentException e){
                     System.out.println(e.getMessage());
@@ -110,14 +106,14 @@ public class Duke {
 
     }
 
-    private String getTaskStatement(int i) {
+    private static String getTaskStatement(int i) {
         //[X] read book
-        return this.list.get(i).toString();
+        return list.get(i).toString();
     }
-    private void printList() {
+    private static void printList() {
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < this.list.size(); i++) {
-            System.out.println(i + 1 + "." + this.getTaskStatement(i));
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(i + 1 + "." + getTaskStatement(i));
         }
     }
     private static String getFirstWord(String input) {
@@ -131,7 +127,7 @@ public class Duke {
         }
     }
 
-    private void mark(String input) {
+    private static void mark(String input) {
         try {
             String[] words = input.split(" ", 2);
             // the second word is expected to be a number for now
@@ -139,11 +135,11 @@ public class Duke {
                 throw new InvalidArgumentException("Excuse me, but mark what?");
             }
             int taskNumber = Integer.parseInt(words[1]);
-            if (taskNumber > this.list.size() || taskNumber <= 0)
+            if (taskNumber > list.size() || taskNumber <= 0)
                 throw new OutOfBoundsException(String.format("The task %d does not exist!", taskNumber));
-            this.list.get(taskNumber - 1).markAsDone();
+            list.get(taskNumber - 1).markAsDone();
             System.out.println("Nice! I've marked this task as done:");
-            System.out.println(this.getTaskStatement(taskNumber - 1));
+            System.out.println(Duke.getTaskStatement(taskNumber - 1));
         } catch (OutOfBoundsException e) {
             System.out.println(e.getMessage());
         } catch (InvalidArgumentException e) {
@@ -151,53 +147,48 @@ public class Duke {
         }
     }
 
-    private void unmark(String input) {
+    private static void unmark(String input) {
         try {
             String[] words = input.split(" ", 2);
             if (words.length <= 1) {
                 throw new InvalidArgumentException("Excuse me, but mark what?");
             }
             int taskNumber = Integer.parseInt(words[1]);
-            if (taskNumber > this.list.size() || taskNumber <= 0)
+            if (taskNumber > list.size() || taskNumber <= 0)
                 throw new OutOfBoundsException(String.format("The task %d does not exist!", taskNumber));
-            this.list.get(taskNumber - 1).markAsUndone();
+            list.get(taskNumber - 1).markAsUndone();
             System.out.println("OK, I've marked this task as not done yet:");
-            System.out.println(this.getTaskStatement(taskNumber - 1));
-        } catch (OutOfBoundsException e) {
-            System.out.println(e.getMessage());
-        } catch (InvalidArgumentException e) {
+            System.out.println(getTaskStatement(taskNumber - 1));
+        } catch (OutOfBoundsException | InvalidArgumentException e) {
             System.out.println(e.getMessage());
         }
     }
-    private void delete(String input) {
+    private static void delete(String input) {
         try {
             String[] words = input.split(" ", 2);
             if (words.length <= 1) {
                 throw new InvalidArgumentException("Excuse me, but delete what?");
             }
             int taskNumber = Integer.parseInt(words[1]);
-            if (taskNumber > this.list.size() || taskNumber <= 0)
+            if (taskNumber > list.size() || taskNumber <= 0)
                 throw new OutOfBoundsException(String.format("Cannot delete" +
                         " as task %d does not exist!", taskNumber));
             System.out.println("Noted. I've removed this task:");
             System.out.println(getTaskStatement(taskNumber - 1));
-            this.list.remove(taskNumber - 1);
+            list.remove(taskNumber - 1);
             printTaskCount();
-        } catch (OutOfBoundsException e) {
-            System.out.println(e.getMessage());
-        } catch (InvalidArgumentException e) {
+        } catch (OutOfBoundsException | InvalidArgumentException e) {
             System.out.println(e.getMessage());
         }
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke(); //initializing a Duke instance
         Duke.greet();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         while (!input.equals("bye")) {  //terminates system when user says bye
             String action = Duke.getFirstWord(input);
-            duke.performAction(action, input);
+            Duke.performAction(action, input);
             System.out.println("\n");
             input = sc.nextLine();
         }
