@@ -18,7 +18,7 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
 
-        List<String> pastCommands = new ArrayList<>();
+        List<Task> pastCommands = new ArrayList<>();
 
         while (true) {
             String command = sc.nextLine().trim();
@@ -29,11 +29,27 @@ public class Duke {
             } else if (command.equals("list")) {
                 StringBuilder list = new StringBuilder();
                 for (int i = 0; i < pastCommands.size(); i++) {
-                    list.append(String.format("%d. %s\n", i + 1, pastCommands.get(i)));
+                    list.append(String.format("%d.%s\n", i + 1, pastCommands.get(i)));
                 }
                 System.out.println(buildMessage(list.toString().trim()));
-            } else {
-                pastCommands.add(command);
+
+            } else if (command.split(" ")[0].equals("mark")) {
+                int index = Integer.parseInt(command.split(" ")[1]) - 1;
+                pastCommands.get(index).isDone = true;
+                System.out.println(buildMessage("Nice! I've marked this task as done: \n  "
+                                + pastCommands.get(index))
+                        );
+
+            } else if (command.split(" ")[0].equals("unmark")) {
+                int index = Integer.parseInt(command.split(" ")[1]) - 1;
+                pastCommands.get(index).isDone = false;
+
+                System.out.println(buildMessage("OK, I've marked this task as not done yet:\n  "
+                        +  pastCommands.get(index)
+                ));
+            }
+            else {
+                pastCommands.add(new Task(false, command));
                 System.out.println(buildMessage(String.format("added: %s", command)));
             }
         }
