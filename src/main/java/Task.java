@@ -1,4 +1,6 @@
-public class Task {
+import java.io.Serializable;
+
+public class Task implements Serializable {
     protected String name;
     protected boolean done;
     protected final String mark = "[X]";
