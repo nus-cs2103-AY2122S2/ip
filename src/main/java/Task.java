@@ -29,6 +29,8 @@ public class Task {
     return (status ? "X" : " "); // mark done task with X
   }
 
+  public String getSaveDescription() { return ""; }
+
   @Override
   public String toString() {
     return String.format("[%s] %s", getStatusIcon(), getDescription());

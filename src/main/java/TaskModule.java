@@ -1,11 +1,14 @@
 import java.util.ArrayList;
 
 public class TaskModule {
+  private Storage storage;
   private ArrayList<Task> taskList;
   public static enum ListOperation {MARK, UNMARK, DELETE}
 
-  public TaskModule() {
+  public TaskModule(Storage storage) {
     this.taskList = new ArrayList<>();
+    this.storage = storage;
+    storage.loadList(taskList);
   }
 
   public void taskAdder(String str) throws DukeException {
@@ -22,8 +25,14 @@ public class TaskModule {
         task = new Event(str.substring(6, str.indexOf(" /at ")), str.substring(str.indexOf(" /at ") + 5));
         break;
     }
-      taskList.add(task);
-      System.out.println(String.format("Got it. I've added this task:\n\t%s\nNow you have %d task(s) in the list", task.toString(), taskList.size()));
+
+    taskList.add(task);
+    if (storage.saveList(taskList)) {
+      System.out.println(String.format("Got it. I've added this task:\n\t%s\nNow you have %d task(s) in the list",
+          task.toString(), taskList.size()));
+    } else {
+      taskList.remove(task);
+    }
   }
 
   public Task.TaskType taskIdentifier(String str) throws DukeException {
@@ -73,6 +82,7 @@ public class TaskModule {
             System.out.println("Noted. I've removed this task:");
             break;
         }
+        storage.saveList(taskList);
         System.out.println("\t" + currTask.toString());
       } else {
         throw new DukeException("Invalid task chosen, please try again");            }
