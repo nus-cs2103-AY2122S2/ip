@@ -1,6 +1,10 @@
 import java.util.Scanner;
 
 public class Duke {
+    //In future iterations: Make Identity, TaskList as a initialized class.
+    private final static Identity thisIdentity = new Identity();
+    private final static TaskList thisList = new TaskList();
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -14,14 +18,27 @@ public class Duke {
         while (true) {
             String nextKey = scanner.nextLine();
 
+            //use Enum for command keys?
+
             if (Identity.exitMatch(nextKey)) {
                 break;
             }
 
+            if (Identity.listMatch(nextKey)) {
+                System.out.println(
+                        "----------------------------" +
+                                "----------------------------\n"
+                        + Duke.thisList.printList()
+                        + "--------------------------------------------------------"
+                );
+                continue;
+            }
+
+            Duke.thisList.addItem(nextKey);
+
             System.out.println(
                     "--------------------------------------------------------\n"
-                    + nextKey
-                            + "\n"
+                    + "added: " + nextKey + "\n"
                     + "--------------------------------------------------------"
             );
 

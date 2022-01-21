@@ -9,10 +9,16 @@ public class Identity {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
     private final static String GOODBYE = "Bye. Hope to see you again soon!";
+    //command keys to enum
     private final static String EXITKEY = "bye";
+    private final static String LISTKEY = "list";
 
     public static boolean exitMatch(String key) {
         return key.equals(EXITKEY);
+    }
+
+    public static boolean listMatch(String key) {
+        return key.equals(LISTKEY);
     }
 
     public static void exitProg() {
