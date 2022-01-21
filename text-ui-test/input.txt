@@ -1,6 +1,14 @@
+list
 todo Eat dinner
 Deadline CS2103T IP /by Jan 20
 Event Movie /at Jan 18 2-3
 invalidinput
+
+mark 1
+mark 1
+delete 2
+todo
+deadline do something by today
+event some event on jan 20
 list
 bye
