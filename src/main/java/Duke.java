@@ -34,7 +34,20 @@ public class Duke {
                 continue;
             }
 
-            Duke.thisList.addItem(nextKey);
+            if (Identity.markMatch(nextKey)) {
+                //mark
+                System.out.println("found mark");
+                continue;
+            }
+
+            if (Identity.unmarkMatch(nextKey)) {
+                //unmark
+                System.out.println("found unmark");
+                continue;
+            }
+
+            UnmarkedTask nextTask = new UnmarkedTask(nextKey);
+            Duke.thisList.addItem(nextTask);
 
             System.out.println(
                     "--------------------------------------------------------\n"

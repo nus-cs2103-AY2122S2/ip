@@ -28,4 +28,12 @@ public class Identity {
                 + "\n"
                 + "--------------------------------------------------------");
     }
+
+    public static boolean markMatch(String nextKey) {
+        return nextKey.matches("mark");
+    }
+
+    public static boolean unmarkMatch(String nextKey) {
+        return nextKey.matches("unmark");
+    }
 }
