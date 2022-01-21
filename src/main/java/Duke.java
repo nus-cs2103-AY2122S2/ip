@@ -47,10 +47,50 @@ public class Duke {
                 System.out.println(buildMessage("OK, I've marked this task as not done yet:\n  "
                         +  pastCommands.get(index)
                 ));
+            } else if (command.split(" ")[0].equals("todo")) {
+                // Extract name from todo command, eg. todo borrow book
+                String name = command.substring(5);
+                pastCommands.add(new TaskToDos(false, name));
+
+                System.out.println(buildMessage(String.format("""
+                                Got it. I've added this task:
+                                 %s
+                                Now you have %d %s in the list.""",
+                        pastCommands.get(pastCommands.size() - 1),
+                        pastCommands.size(),
+                        pastCommands.size() == 1 ? "task" : "tasks"
+                )));
+            } else if (command.split(" ")[0].equals("deadline")) {
+                // Extract name and time to be done by from deadline command, eg. deadline return book /by Sunday.
+                String temp = command.substring(9);
+                String name = temp.split("/")[0].trim();
+                String doneBy = temp.split("/")[1].substring(3).trim();
+
+                pastCommands.add(new TaskDeadlines(false, name, doneBy));
+                System.out.println(buildMessage(String.format("""
+                                Got it. I've added this task:
+                                 %s
+                                Now you have %d %s in the list.""",
+                        pastCommands.get(pastCommands.size() - 1),
+                        pastCommands.size(),
+                        pastCommands.size() == 1 ? "task" : "tasks"
+                )));
             }
-            else {
-                pastCommands.add(new Task(false, command));
-                System.out.println(buildMessage(String.format("added: %s", command)));
+            else { // Events
+                // Extract name and time to be done by from event command, eg. event project meeting /at Mon 2-4pm
+                String temp = command.substring(6);
+                String name = temp.split("/")[0].trim();
+                String startAt = temp.split("/")[1].substring(3).trim();
+
+                pastCommands.add(new TaskEvents(false, name, startAt));
+                System.out.println(buildMessage(String.format("""
+                                Got it. I've added this task:
+                                 %s
+                                Now you have %d %s in the list.""",
+                        pastCommands.get(pastCommands.size() - 1),
+                        pastCommands.size(),
+                        pastCommands.size() == 1 ? "task" : "tasks"
+                )));
             }
         }
 
