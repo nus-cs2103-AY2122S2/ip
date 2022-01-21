@@ -5,6 +5,10 @@ public class Duke {
 
     private static ArrayList<Task> taskList = new ArrayList<>();
     private static int numOfTask = 0;
+    private static final int EVENT_OFFSET = 5;
+    private static final int TODO_OFFSET = 4;
+    private static final int DEADLINE_OFFSET = 8;
+    private static final int INPUT_OFFSET = 3;
 
     public static void addToList(Task t){
         String message = "Got it. I've added this task:\n";
@@ -73,7 +77,7 @@ public class Duke {
                     printList();
 
                 } else if (command.equals("todo")) {
-                    String description = input.substring(4);
+                    String description = input.substring(TODO_OFFSET);
 
                     if(description.length() == 0) {
                         throw new IncompleteCommandException(command);
@@ -83,24 +87,24 @@ public class Duke {
 
                 } else if (command.equals("deadline")) {
                     String[] inputSlash = input.split("/");
-                    String description = inputSlash[0].substring(8);
+                    String description = inputSlash[0].substring(DEADLINE_OFFSET);
 
                     if(description.length() == 0) {
                         throw new IncompleteCommandException(command);
                     }
 
-                    String time = inputSlash[1].substring(3);
+                    String time = inputSlash[1].substring(INPUT_OFFSET);
                     addToList(new Deadline(description, time));
 
                 } else if (command.equals("event")) {
                     String[] inputSlash = input.split("/");
-                    String description = inputSlash[0].substring(5);
+                    String description = inputSlash[0].substring(EVENT_OFFSET);
 
                     if(description.length() == 0) {
                         throw new IncompleteCommandException(command);
                     }
 
-                    String time = inputSlash[1].substring(3);
+                    String time = inputSlash[1].substring(INPUT_OFFSET);
                     addToList(new Event(description, time));
 
                 } else if (command.equals("mark")) {

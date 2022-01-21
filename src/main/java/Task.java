@@ -1,6 +1,7 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    private static final int DESCRIPTION_OFFSET = 1;
 
     public Task(String description) {
         this.description = description;
@@ -29,6 +30,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + getDescription().substring(1); // start from 1 because 0 is a space
+        return "[" + getStatusIcon() + "] " + getDescription().substring(DESCRIPTION_OFFSET); // start from 1 because 0 is a space
     }
 }
