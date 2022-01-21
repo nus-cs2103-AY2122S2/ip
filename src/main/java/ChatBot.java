@@ -6,7 +6,7 @@ class ChatBot {
     }
 
     public String toString() {
-        return this.input;
+        return "added: " + this.input;
     }
 
 }
