@@ -1,5 +1,16 @@
 list
-todo A NEW TODO TASK
-event go eat dinner with friends /at Monday 4pm-to-6pm
-deadline project end at tmr! /by 22 Jab 11:59pm
 blah
+todo task1
+todo task2 task2
+todo
+list
+deadline dltask1 /by date1
+deadline dltask2 /by
+deadline dltask3
+deadline
+list
+event ev1 /at evdate1
+event ev2 /at
+event ev3
+event
+list
