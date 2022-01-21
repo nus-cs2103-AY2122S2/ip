@@ -1,61 +1,68 @@
 import java.util.ArrayList;
 
 public class Apollo {
-    private static ArrayList<String> items;
+    private static ArrayList<Task> tasks;
     private static Commands input;
 
-    public static void printMsg(String msg) {
+    protected static void printMessage(String message) {
         System.out.println("\t________________________________________________________________________\n\t " +
-                msg.replace("\n","\n\t ") +
+                message.replace("\n","\n\t ") +
                 "\n\t________________________________________________________________________\n");
     }
 
     private static void start() {
-        items = new ArrayList<>();
+        tasks = new ArrayList<>();
         input = new Commands();
         Banner.welcomeMsg();
     }
 
     public static void stop() {
-        printMsg("See you next time. \n" +
+        printMessage("See you next time. \n" +
                 "I am always available when you need me. ");
     }
 
-    public static void addItem(String item) {
-        items.add("[ ] " + item);
-        printMsg("added: " + item);
+    public static void addTask(Task newTask) {
+        tasks.add(newTask);
+        printMessage(String.format("I've added this task:\n  %s\nThere's a total of %d tasks now. ",
+                newTask, tasks.size()));
     }
 
     public static void printList() {
-        if (items.isEmpty()) {
-            printMsg("You have no tasks left. ");
+        if (tasks.isEmpty()) {
+            printMessage("You have no tasks left. ");
             return;
         }
+
         StringBuilder list = new StringBuilder();
         list.append("These are your current tasks. ");
         var counter = new Object() {
             int num = 1;
         };
-        items.forEach(i -> {
+        tasks.forEach(i -> {
             list.append("\n  ").append(counter.num).append(".").append(i);
             counter.num++;
         });
-        printMsg(list.toString());
+
+        printMessage(list.toString());
     }
 
-    public static void mark(int i, Commands.Mark m) {
-        if (i > items.size()) {
-            printMsg("Please add more items first. ");
-        } else {
-            String mark = m == Commands.Mark.MARK
-                    ? "X"
-                    : " ";
-            items.set(i-1, items.get(i-1).substring(0,1) + mark + items.get(i-1).substring(2));
+    public static void mark(int i, boolean mark) {
+        if (i > tasks.size()) {
+            printMessage("Please add more items first. ");
+            return;
         }
-        String msg = m == Commands.Mark.MARK
-                ? "Alright, I've mark this task as done.\n  "
-                : "Noted, I've marked this task as not done yet.\n  ";
-        printMsg(msg + items.get(i-1));
+
+        Task task = tasks.get(i-1);
+        String msg;
+        if (mark) {
+            task.markAsDone();
+            msg = "Alright, I've mark this task as done.\n  ";
+        } else {
+            task.markAsNotDone();
+            msg = "Noted, I've marked this task as not done yet.\n  ";
+        }
+//        System.out.println(items.size());
+        printMessage(msg + task);
     }
 
     public static void main(String[] args) {

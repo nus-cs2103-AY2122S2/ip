@@ -1,6 +1,6 @@
 import java.time.LocalTime;
 
-public class Banner {
+public class Banner extends Apollo{
     static String logo = "       @@@%      @@@@@@*.      :@@@@@.    %@@@@@+    @@@@@@        #@@@@=       \n" +
             "       @@@@=     @@@@@@@@@    @@@@@@@@#   @@@@@@*    @@@@@@.     -@@@@@@@@      \n" +
             "       @@@@@     @@@@@@@@@*  %@@@@@@@@@+  @@@@@@*    @@@@@@.    .@@@@@@@@@@     \n" +
@@ -45,6 +45,6 @@ public class Banner {
         String daytime = dayTime();
         String msg = String.format("Good %s Sir, I am Apollo. \n" +
                 "How can I help you on this wonderful %s? ", daytime, daytime.toLowerCase());
-        Apollo.printMsg(msg);
+        Apollo.printMessage(msg);
     }
 }
