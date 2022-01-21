@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
@@ -116,15 +117,13 @@ public class Duke {
             System.out.println(i + 1 + "." + getTaskStatement(i));
         }
     }
+
+    private static String[] parseInput(String input) {
+        return input.split(" ");
+    }
     private static String getFirstWord(String input) {
-        int index = input.indexOf(' ');
-        if (index > -1) {
-            // more than one word
-            return input.substring(0, index).trim();   // Extract first word
-        } else {
-            // there is only one word
-            return input;
-        }
+        String[] arr = parseInput(input);
+        return arr[0].toLowerCase();
     }
 
     private static void mark(String input) {
