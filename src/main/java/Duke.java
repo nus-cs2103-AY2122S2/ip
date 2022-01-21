@@ -5,6 +5,7 @@ class Color {
 
     // Foreground colors
     public static final String green  = "\033[92m";
+    public static final String red  = "\033[31m";
     public static final String purple = "\033[35m";
 
     // Background colors
@@ -41,10 +42,20 @@ public class Duke {
 
         System.out.println("<<<<<<<<");
         System.out.println(message);
-        System.out.println(">>>>>>>>");
+        // Default back to green to allow different colored messages
+        System.out.println(Color.green + ">>>>>>>>");
 
         // Reset to default
         System.out.println(Color.none);
+    }
+
+    /**
+     * Method for chatbot to print error messages.
+     *
+     * @param message Error message to print
+     */
+    private static void error(String message) {
+        say(Color.red + message);
     }
 
     /**
@@ -60,7 +71,7 @@ public class Duke {
                 task.nameWithStatus(), tasks.size()));
     }
 
-    private static void handleAction(Command action) {
+    private static void handleAction(Command action) throws DukeException {
         switch (action.getName()) {
             case "bye":
                 say("Bye! See you later!");
@@ -111,9 +122,7 @@ public class Duke {
                 break;
 
             default:
-                Task task = new Task(action.getName());
-                tasks.addTask(task);
-                logNewTask(task);
+                throw new DukeException("I don't know what to do");
 
         }
     }
@@ -126,8 +135,12 @@ public class Duke {
         say(introduction);
 
         while (true) {
-            Command action = cmd.readAndParse();
-            handleAction(action);
+            try {
+                Command action = cmd.readAndParse();
+                handleAction(action);
+            } catch (DukeException e) {
+                error("!( ｀Д´)ﾉ  " + e.getLocalizedMessage());
+            }
         }
     }
 }
