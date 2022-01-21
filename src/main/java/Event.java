@@ -20,7 +20,7 @@ public class Event extends Task {
     public String toString() {
         LocalDate localDate = at.toLocalDate();
         LocalTime localTime = at.toLocalTime();
-        String displayDate = String.format("%s %s %s, %s",
+        String displayDate = String.format("%s, %s %s, %s",
                 localDate.getDayOfWeek().toString().substring(0, 1).toUpperCase() + localDate.getDayOfWeek().toString().substring(1).toLowerCase(),
                 localDate.getMonth().toString().substring(0, 1).toUpperCase() + localDate.getMonth().toString().substring(1).toLowerCase(),
                 localDate.getDayOfMonth(),

@@ -45,8 +45,19 @@ public class Duke {
                 } else if (input.toLowerCase().matches("^delete \\d+|^delete -\\d+")) { //delete a task
                     int index = Integer.parseInt(input.replaceAll("delete ", "")) - 1;
                     delete(index);
-                } else if (input.toLowerCase().matches("^delete all")) { //delete a task
+                } else if (input.toLowerCase().matches("^delete all")) { //delete all tasks
                     deleteAll();
+                } else if (input.toLowerCase().matches("^show all( \\d{4}-\\d{1,2}-\\d{1,2})?( \\d{4})?")) { //show all tasks on a date
+                    try {
+                        if (input.toLowerCase().replaceAll(" ", "").matches("showall")) {
+                            throw new CortanaException("Please specify the date time you are looking for!");
+                        } else {
+                            String time = input.replaceAll("show all ", "");
+                            taskOnSameDate(time);
+                        }
+                    } catch (CortanaException e) {
+                        System.out.println(e.getMessage());
+                    }
                 } else { //add task
                     try {
                         //only input the task type and nothing else
@@ -249,52 +260,101 @@ public class Duke {
 
     public static Task parseTask(String taskInString) {
         char type = taskInString.charAt(1);
-        boolean status = taskInString.charAt(4) == 'X';
+        boolean isDone = taskInString.charAt(4) == 'X';
         DateTimeFormatter formatter;
         LocalDateTime localDateTime;
         LocalDate localDate;
         try {
-            if (type == 'D') {
+            if (type == 'D') { //deadline
                 String[] actualTask = taskInString.substring(7).split("\\(by: ");
                 String description = actualTask[0];
                 String by = actualTask[1].replaceAll("\\)", "");
                 boolean hasTime = Pattern.compile("[A-Za-z]* \\d{1,2}, \\d{4} \\d{4}(AM|PM)").matcher(by).find();
                 if (hasTime) {
-                    formatter = DateTimeFormatter.ofPattern("EEEE MMMM dd, yyyy hhmma", Locale.ENGLISH);
-                    localDateTime = LocalDateTime.parse(by, formatter);
+                    formatter = DateTimeFormatter.ofPattern("EEEE, MMMM dd, yyyy hhmma", Locale.ENGLISH);
+                    localDateTime = LocalDateTime.parse(by, formatter); //convert from hhmmaa to HHmm
                 } else {
-                    formatter = DateTimeFormatter.ofPattern("EEEE MMMM dd, yyyy", Locale.ENGLISH);
+                    formatter = DateTimeFormatter.ofPattern("EEEE, MMMM dd, yyyy", Locale.ENGLISH);
                     localDate = LocalDate.parse(by, formatter);
                     localDateTime = LocalDateTime.of(localDate, LocalTime.MAX);
                 }
                 Deadline deadline = new Deadline(description, localDateTime);
-                deadline.isDone = status;
+                deadline.isDone = isDone;
                 return deadline;
-            } else if (type == 'E') {
+            } else if (type == 'E') { //event
                 String[] actualTask = taskInString.substring(7).split("\\(at: ");
                 String description = actualTask[0];
                 String at = actualTask[1].replaceAll("\\)", "");
                 boolean hasTime = Pattern.compile("[A-Za-z]* \\d{1,2}, \\d{4} \\d{4}(AM|PM)").matcher(at).find();
                 if (hasTime) {
-                    formatter = DateTimeFormatter.ofPattern("EEEE MMMM dd, yyyy hhmma", Locale.ENGLISH);
-                    localDateTime = LocalDateTime.parse(at, formatter);
+                    formatter = DateTimeFormatter.ofPattern("EEEE, MMMM dd, yyyy hhmma", Locale.ENGLISH);
+                    localDateTime = LocalDateTime.parse(at, formatter); //convert from hhmmaa to HHmm
                 } else {
-                    formatter = DateTimeFormatter.ofPattern("EEEE MMMM dd, yyyy", Locale.ENGLISH);
+                    formatter = DateTimeFormatter.ofPattern("EEEE, MMMM dd, yyyy", Locale.ENGLISH);
                     localDate = LocalDate.parse(at, formatter);
                     localDateTime = LocalDateTime.of(localDate, LocalTime.MAX);
                 }
                 Event event = new Event(description, localDateTime);
-                event.isDone = status;
+                event.isDone = isDone;
                 return event;
-            } else {
+            } else { //todo
                 String description = taskInString.substring(7);
                 Todo todo = new Todo(description);
-                todo.isDone = status;
+                todo.isDone = isDone;
                 return todo;
             }
         } catch (DateTimeParseException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public static void taskOnSameDate(String time) {
+        boolean correctTimeFormat = Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2}( \\d{4})?").matcher(time).find();
+        LocalDateTime localDateTime;
+        LocalDate localDate;
+        int tasksOnSameDate = 0;
+        if (correctTimeFormat) {
+            for(Task task: tasksArrayList) {
+                boolean hasTime = Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2} \\d{4}").matcher(time).find();
+                if (task instanceof Deadline) { //task is a deadline
+                    if (hasTime) { //deadline has date and time
+                        localDateTime = LocalDateTime.parse(time, DateTimeFormatter.ofPattern("yyyy-M-d HHmm"));
+                        if (((Deadline) task).by.equals(localDateTime)) { //all deadlines with the exact same date and time
+                            tasksOnSameDate ++;
+                            System.out.println(task.toString().split("\\(by: ")[0]);
+                        }
+                    } else { //deadline only has date
+                        localDate = LocalDate.parse(time, DateTimeFormatter.ofPattern("yyyy-M-d"));
+                        if (((Deadline) task).by.toLocalDate().equals(localDate)) { //all deadlines with the same date regardless of time
+                            tasksOnSameDate ++;
+                            System.out.println(task.toString().split("\\(by: ")[0]);
+                        }
+                    }
+                } else if (task instanceof Event) { //task is an event
+                    if (hasTime) { //event has date and time
+                        localDateTime = LocalDateTime.parse(time, DateTimeFormatter.ofPattern("yyyy-M-d HHmm"));
+                        if (((Event) task).at.equals(localDateTime)) { //all events with the exact same date and time
+                            tasksOnSameDate ++;
+                            System.out.println(task.toString().split("\\(by: ")[0]);
+                        }
+                    } else { //event only has date
+                        localDate = LocalDate.parse(time, DateTimeFormatter.ofPattern("yyyy-M-d"));
+                        if (((Event) task).at.toLocalDate().equals(localDate)) { //all events with the same date regardless of time
+                            tasksOnSameDate ++;
+                            System.out.println(task.toString().split("\\(by: ")[0]);
+                        }
+                    }
+                }
+            }
+            if (tasksOnSameDate == 0) { //no tasks found
+                System.out.println("No task found on " + time + "!");
+            } else {
+                String taskOrTasks = tasksOnSameDate <= 1 ? "task" : "tasks";
+                System.out.printf("Found %d %s with date/time %s.\n", tasksOnSameDate, taskOrTasks, time);
+            }
+        } else {
+            System.out.println("Invalid date time format! Please follow the format yyyy-M-d HHmm!");
         }
     }
 
