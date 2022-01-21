@@ -1,22 +1,35 @@
-class Deadline extends Task {
-    private final String time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
-    public Deadline(String task, String time) {
+class Deadline extends Task implements DateTimeInterface {
+    private final LocalDate date;
+
+    public Deadline(String task, LocalDate date) {
         super(task);
-        this.time = time;
+        this.date = date;
     }
 
-    public Deadline(String task, boolean complete, String time) {
+    public Deadline(String task, boolean complete, LocalDate date) {
         super(task, complete);
-        this.time = time;
+        this.date = date;
     }
 
     @Override
     public String toString() {
         if (super.isCompleted()) {
-            return "[D][x] " + super.getTaskName() + "(by: " + this.time + ")";
+            return "[D][x] " + super.getTaskName() + "(by: " + this.date.toString() + ")";
         } else {
-            return "[D][ ] " + super.getTaskName() + "(by: " + this.time + ")";
+            return "[D][ ] " + super.getTaskName() + "(by: " + this.date.toString() + ")";
         }
+    }
+
+    @Override
+    public LocalDate getDate() {
+        return this.date;
+    }
+
+    @Override
+    public LocalTime getTime() {
+        return null;
     }
 }

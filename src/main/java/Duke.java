@@ -1,4 +1,6 @@
 import java.sql.SQLOutput;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Duke {
@@ -97,14 +99,21 @@ public class Duke {
                     System.out.println("OOPS!!! The description of a deadline cannot be empty.");
                     System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 } else {
-                    String deadlineItem = command.substring(index + 1, command.indexOf("/by"));
-                    String time = command.substring(command.indexOf("/by") + 1);
-                    Deadline deadline = new Deadline(deadlineItem, time);
-                    taskList.add(deadline);
-                    System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                    System.out.println("Got it, I have added this task:" );
-                    System.out.println(deadline.toString());
-                    System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                    try {
+                        String deadlineItem = command.substring(index + 1, command.indexOf("/by"));
+                        LocalDate date = LocalDate.parse(command.substring(command.indexOf("/by") + 4));
+                        Deadline deadline = new Deadline(deadlineItem, date);
+                        taskList.add(deadline);
+                        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                        System.out.println("Got it, I have added this task:" );
+                        System.out.println(deadline.toString());
+                        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                    } catch (DateTimeParseException e) {
+                        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                        System.out.println("Date must be in yyyy-mm-dd format!");
+                        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                    }
+
                 }
 
             } else if (firstWord.equals("event")) {
@@ -113,14 +122,20 @@ public class Duke {
                     System.out.println("OOPS!!! The description of an event cannot be empty.");
                     System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 } else {
-                    String eventItem = command.substring(index + 1, command.indexOf("/at"));
-                    String time = command.substring(command.indexOf("/at") + 1);
-                    Event event = new Event(eventItem, time);
-                    taskList.add(event);
-                    System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                    System.out.println("Got it, I have added this task:" );
-                    System.out.println(event.toString());
-                    System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                    try {
+                        String eventItem = command.substring(index + 1, command.indexOf("/at"));
+                        LocalDate date = LocalDate.parse(command.substring(command.indexOf("/by") + 4));
+                        Event event = new Event(eventItem, date);
+                        taskList.add(event);
+                        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                        System.out.println("Got it, I have added this task:" );
+                        System.out.println(event.toString());
+                        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                    } catch (DateTimeParseException e){
+                        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                        System.out.println("Date must be in yyyy-mm-dd format!");
+                        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                    }
                 }
 
             } else {
