@@ -11,4 +11,11 @@ event project meeting /at Mon 2-4pm
 list
 unmark 1
 list
+whats up
+mark 15
+mark twenty
+todo
+event
+deadline
+Todo  finish project
 bye
