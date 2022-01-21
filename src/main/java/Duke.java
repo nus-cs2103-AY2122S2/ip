@@ -9,19 +9,21 @@ public class Duke {
     //Taskmaster logo 
     protected String logo = "  _____\n" + " /     \\\n" + "| () () |\n" + " \\  ^  /\n" + "  |||||\n" + "  |||||\n"; 
     protected TaskList tasklist;
+    protected Storage storage;
     
     /**
      * Constructor for Duke the chatbot 
      */
-    public Duke () {
+    private Duke () {
         this.tasklist = new TaskList();
+        this.storage = new Storage();
     }
 
     /**
      * The opening message we see when the program runs
      * 
      */
-    public void openingMessage() {
+    private void openingMessage() {
         System.out.println(logo);
         System.out.println("Greetings, I'm Taskmaster, I'm super grumpy 24/7");
         System.out.println("....................................");
@@ -33,7 +35,7 @@ public class Duke {
      * 
      */
 
-    public void chatBot() {
+    private void chatBot() {
          //Scanner initialization for user input
          Scanner sc = new Scanner(System.in);
          String userInput = sc.nextLine();
@@ -50,14 +52,25 @@ public class Duke {
      * 
      */
 
-    public void bye() {
+    private void bye() {
         System.out.println("See you around kiddo, I'm an angsty dude but deep down i'm a lonely man");
+    }
+
+    private void loadingExistingFile() {
+        System.out.println("\nLoading up saved task files ...\n");
+        storage.loadFile(tasklist);
+    }
+
+    private void updateList() {
+        storage.updateList(tasklist);
     }
 
     public static void main(String[] args) {
         Duke taskMaster = new Duke(); //Creates Chatbot
         taskMaster.openingMessage(); //Display opening message
+        taskMaster.loadingExistingFile(); //Load existing file
         taskMaster.chatBot(); //Runs the chatbot
         taskMaster.bye(); //Exits
+        taskMaster.updateList(); //Save tasks in the hard disk if task list changes
     }
 }

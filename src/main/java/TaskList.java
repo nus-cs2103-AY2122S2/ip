@@ -39,6 +39,7 @@ public class TaskList {
     public void add(Task task) {
         tasklist.add(task);
         currentSize+=1;
+
     }
 
     /**
@@ -91,5 +92,13 @@ public class TaskList {
         }
     }
 
-    
+    public String listTasksInTextFormat() {
+        String result = "";
+        for (Task task:tasklist) {
+            result = result.concat(task.saveToFileFormat());
+            result = result.concat("\n");
+        }
+
+        return result.trim();
+    }
 }

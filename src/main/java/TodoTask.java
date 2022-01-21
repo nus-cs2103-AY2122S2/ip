@@ -29,4 +29,12 @@ public class TodoTask extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    @Override
+    public String saveToFileFormat() {
+        String result = "T";
+        String mark = this.completed? "1":"0";
+        return result + " | " + mark + " | " + taskName;
+    }
+    
 }
