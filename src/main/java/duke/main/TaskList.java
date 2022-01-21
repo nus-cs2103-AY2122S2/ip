@@ -1,7 +1,8 @@
 package duke.main;
 
-import duke.tasks.*;
-import java.util.*;
+import duke.tasks.Task;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TaskList {
     private List<Task> toDoList;

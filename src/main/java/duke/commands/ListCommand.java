@@ -1,6 +1,5 @@
 package duke.commands;
 
-import duke.main.DukeException;
 import duke.main.TaskList;
 
 public class ListCommand extends Command<String> {

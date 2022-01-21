@@ -1,7 +1,7 @@
 package duke.tasks;
 
 public class Event extends Task {
-    String dateTime; // (at: date time)
+    private String dateTime; // (at: date time)
 
     public Event(String task, boolean markStatus, String dateTime) {
         super(task, markStatus);

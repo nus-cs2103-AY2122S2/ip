@@ -1,14 +1,12 @@
 package duke.tasks;
 
-import duke.main.DukeException;
-
 import java.time.LocalDate;
 
 public class Deadline extends Task {
-    String time;
+    private String time;
     // Keeping this for now since we do not know what to use LocalDate date for...
-    String deadline;
-    LocalDate date;
+    private String deadline;
+    private LocalDate date;
 
     public Deadline(String task, boolean markStatus, String deadline) {
         super(task, markStatus);

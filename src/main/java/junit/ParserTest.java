@@ -1,5 +1,13 @@
 package junit;
-import duke.commands.*;
+
+import duke.commands.AddEventCommand;
+import duke.commands.AddDeadlineCommand;
+import duke.commands.AddToDoCommand;
+import duke.commands.ListCommand;
+import duke.commands.MarkCommand;
+import duke.commands.UnmarkCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.WrongCommand;
 import duke.main.Parser;
 import duke.main.TaskList;
 import duke.main.Ui;
@@ -8,7 +16,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParserTest  {
-    private final String tabbedLine = "\t----------------------------------------------";
     TaskList toDoList = new TaskList();
     @Test
     void parserTest() throws DukeException {
