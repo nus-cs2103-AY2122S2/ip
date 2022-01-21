@@ -12,7 +12,6 @@ public class Duke {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
         while (sc.hasNextLine()) {
-
             String command = sc.nextLine().toLowerCase();
             String firstWord;
             int itemIndex = -1;
