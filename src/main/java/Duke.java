@@ -3,34 +3,37 @@ import java.util.Scanner;
 import java.util.List;
 
 public class Duke {
-    private static final String br = "\t____________________________________________________________\n";
-    private static List<Task> lst = new ArrayList<Task>();
+    private List<Task> lst = new ArrayList<Task>();
+
+	private void printMsg(String msg) {
+   		String br = "\t____________________________________________________________\n";
+		System.out.println(br + msg + br);
+		return;
+	}
 
     /**
      * Print out the greeting words.
      */
-    private static void greeting() {
-        String sentences = "\t Hello! I'm Duke\n\t What can I do for you?\n";
-        System.out.println(Duke.br + sentences + Duke.br);
+    private void greeting() {
+        this.printMsg("\t Hello! I'm Duke\n\t What can I do for you?\n");
     }
 
     /**
      * Print out the goodbye words.
      */
-    private static void bye() {
-        String sentences = "\t Bye. Hope to see you again soon!\n";
-        System.out.println(Duke.br + sentences + Duke.br);
+    private void bye() {
+        this.printMsg("\t Bye. Hope to see you again soon!\n");
     }
 
 	/**
 	 * List out the current tasks as well as their status.
 	 */
-    private static void list() {
-        System.out.print(Duke.br);
+    private void list() {
+		String msg = "";
         for (int i = 1; i <= lst.size(); i++) {
-            System.out.println("\t " + i + "." + lst.get(i-1).print());
+			msg += "\t " + i + "." + lst.get(i-1).print() + "\n";
         }
-        System.out.println(Duke.br);
+		this.printMsg(msg);
     }
 
 	/**
@@ -38,10 +41,10 @@ public class Duke {
 	 *
 	 * @param description The description of the task to be added.
 	 */
-	private static void add(String description) {
+	private void add(String description) {
 		Task t = new Task(description);
-		Duke.lst.add(t);
-        System.out.println(Duke.br + "\t added: " + description + "\n" + Duke.br);
+		this.lst.add(t);
+		this.printMsg("\t added: " + description + "\n");
 	}
 
 	/**
@@ -49,9 +52,9 @@ public class Duke {
 	 *
 	 * @param num The number of the task to be marked.
 	 */
-	private static void mark(int num) {
-		lst.get(num).markAsDone();
-		System.out.println(Duke.br + "\t Nice! I've marked this task as done:\n\t   " + lst.get(num).print() + "\n" + Duke.br); 
+	private void mark(int num) {
+		this.lst.get(num).markAsDone();
+		this.printMsg("\t Nice! I've marked this task as done:\n\t   " + lst.get(num).print() + "\n"); 
 	}
 
 	/**
@@ -59,20 +62,21 @@ public class Duke {
 	 *
 	 * @param num The number of the task to be unmarked.
 	 */
-	private static void unmark(int num) {
-		lst.get(num).unmarkAsDone();
-		System.out.println(Duke.br + "\t OK, I've marked this task as not done yet:\n\t   " + lst.get(num).print() + "\n" + Duke.br);
+	private void unmark(int num) {
+		this.lst.get(num).unmarkAsDone();
+		this.printMsg("\t OK, I've marked this task as not done yet:\n\t   " + lst.get(num).print() + "\n");
 	}
 
     public static void main(String[] args) {
+		Duke bot = new Duke();
 		Scanner sc= new Scanner(System.in);
         String input;
 
-        Duke.greeting();
+        bot.greeting();
         input = sc.nextLine();
         while (!input.equals("bye")) {
             if (input.equals("list")) {
-                Duke.list();
+                bot.list();
                 input = sc.nextLine();
                 continue;
             }
@@ -80,25 +84,25 @@ public class Duke {
             if (splitted.length == 2 && splitted[0].equals("mark")) {
 				try {
 					int num = Integer.parseInt(splitted[1]);
-					Duke.mark(num-1);
+					bot.mark(num-1);
 					input = sc.nextLine();
 					continue;
 				} catch (NumberFormatException e) {
-					Duke.add(input);
+					bot.add(input);
 				}
             } else if (splitted.length == 2 && splitted[0].equals("unmark")) {
 				try {
 					int num = Integer.parseInt(splitted[1]);
-					Duke.unmark(num-1);
+					bot.unmark(num-1);
 					input = sc.nextLine();
 					continue;
 				} catch (NumberFormatException e) {
-					Duke.add(input);
+					bot.add(input);
 				}
 			}
-			Duke.add(input);
+			bot.add(input);
             input = sc.nextLine();
         }
-        Duke.bye();
+        bot.bye();
     }
 }
