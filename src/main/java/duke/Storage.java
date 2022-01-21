@@ -32,7 +32,9 @@ public class Storage {
     public List<Task> load() {
         List<Task> ls = new ArrayList<>();
         File directory = new File("../../../data/");
-        if (!directory.exists()) directory.mkdir();
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
         try {
             File saved = new File(filepath);
             if (!saved.exists()) {
