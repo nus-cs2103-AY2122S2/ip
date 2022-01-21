@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -80,10 +81,12 @@ public class Duke {
         Task t;
         switch (command) {
         case DEADLINE:
-            t = new Deadline(args[0], args[1]);
+            t = new Deadline(args[0], LocalDate.of(Integer.parseInt(args[1]),
+                    Integer.parseInt(args[2]), Integer.parseInt(args[3])));
             break;
         case EVENT:
-            t = new Event(args[0], args[1]);
+            t = new Event(args[0],  LocalDate.of(Integer.parseInt(args[1]),
+                    Integer.parseInt(args[2]), Integer.parseInt(args[3])));
             break;
         default:
             t = new Todo(args[0]);

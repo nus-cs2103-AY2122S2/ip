@@ -5,4 +5,5 @@ public class ErrorMessage {
     public static final String MESSAGE_UNKNOWN_TASK = "Meow! Enter a valid task!";
     public static final String MESSAGE_UNKNOWN_DESC = "Meow! A task needs a description!";
     public static final String MESSAGE_UNKNOWN_DATE = "Meow! A date is required!";
+    public static final String MESSAGE_INVALID_DATE_FORMAT = "Meow! A date should be in yyyy-mm-dd format!";
 }

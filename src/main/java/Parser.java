@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Parser {
 
     public CommandType parseCommand(String input) throws DukeException {
@@ -26,7 +28,7 @@ public class Parser {
     }
 
     public String[] parseInput(String input, CommandType command) throws DukeException {
-        String[] args = new String[2];
+        String[] args = new String[4];
         args[0] = (input + " ").split(" ", 2)[1].trim(); // description
         if (command.equals(CommandType.DELETE) || command.equals(CommandType.MARK)
                 || command.equals(CommandType.UNMARK)) {
@@ -44,20 +46,33 @@ public class Parser {
                 }
                 args[1] = args[0].split("/by", 2)[1].trim();
                 args[0] = args[0].split("/by", 2)[0].trim();
-                if (args[1].isBlank()) {
-                    throw new DukeException(ErrorMessage.MESSAGE_UNKNOWN_DATE);
-                }
+                parseDate(args[1]);
+                args[3] = args[1].split("-")[2];
+                args[2] = args[1].split("-")[1];
+                args[1] = args[1].split("-")[0];
             } else if (command.equals(CommandType.EVENT)) {
                 if (!input.contains("/at")) {
                     throw new DukeException(ErrorMessage.MESSAGE_UNKNOWN_DATE);
                 }
                 args[1] = args[0].split("/at", 2)[1].trim();
                 args[0] = args[0].split("/at", 2)[0].trim();
-                if (args[1].isBlank()) {
-                    throw new DukeException(ErrorMessage.MESSAGE_UNKNOWN_DATE);
-                }
+                parseDate(args[1]);
+                args[3] = args[1].split("-")[2];
+                args[2] = args[1].split("-")[1];
+                args[1] = args[1].split("-")[0];
             }
         }
         return args;
+    }
+
+    public void parseDate(String input) throws DukeException {
+        if (input.isBlank()) {
+            throw new DukeException(ErrorMessage.MESSAGE_UNKNOWN_DATE);
+        }
+
+        String[] splitDate = input.split("-"); // yyyy-mm-dd
+        if (splitDate.length != 3) {
+            throw new DukeException(ErrorMessage.MESSAGE_INVALID_DATE_FORMAT);
+        }
     }
 }
