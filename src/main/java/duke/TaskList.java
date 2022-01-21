@@ -31,6 +31,18 @@ public class TaskList {
     }
 
     /**
+     * Prints tasks in the list that has name containing the specified keyword.
+     * @param keyword
+     */
+    public void findAndPrintTasks(String keyword) {
+        for (int i = 0; i < ls.size(); i++) {
+            if (ls.get(i).getName().contains(keyword)) {
+                System.out.println((i + 1) + ". " + ls.get(i));
+            }
+        }
+    }
+
+    /**
      * Sets the task at specified index in the list as done.
      * @param index
      * @return The task that was affected.
