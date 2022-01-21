@@ -13,7 +13,7 @@ public class Duke {
                 String input = sc.nextLine();
                 String[] parts = input.split(" ");
             try {
-                //level-1 feature: for exit
+
                 if (input.equals("bye")) {
                     System.out.println(lines);
                     System.out.println("Bye! See you again");
@@ -97,11 +97,11 @@ public class Duke {
                 }
                 if (parts[0].equals("event")) {
                     if (parts.length == 1) {
-                        throw new EventException("Hmm, you have an empty event isit?(please insert again)");
+                        throw new EventException("The format should be: event <description> /at <date>");
                     }
                     String[] split1 = input.split("/at ");
                     if (split1.length == 1) {
-                        throw new EventException("You need to tell me your event date\n e.g deadline <yourtask> /by <event date>");
+                        throw new EventException("You need to tell me your event date\n e.g event <description> /at <date>");
                     }
                     String eventDesription = split1[0].substring(6);
                     String eventDate = split1[1];
@@ -115,14 +115,31 @@ public class Duke {
                     continue;
                 }
                 if (parts[0].equals("delete")) {
-                    Task taskToBeDelete = allTasks.get(Integer.parseInt(parts[1]) - 1);
-                    System.out.println(lines);
-                    System.out.println("Okay, I have removed this task:");
-                    System.out.println(taskToBeDelete);
-                    allTasks.remove(Integer.parseInt(parts[1]) - 1);
-                    System.out.println("Now you have " + allTasks.size() + " tasks in the list.");
-                    System.out.println(endline);
-                    continue;
+                    try {
+                        if (parts.length == 1) {
+                            System.out.println("Which task are you deleting? Insert a number like this: delete <task number>");
+                            continue;
+                        }
+                        if (parts.length > 2) {
+                            throw new NumberFormatException();
+                        }
+                        int index = Integer.parseInt(parts[1]) - 1;
+                        Task taskToBeDelete = allTasks.get(index);
+                        System.out.println(lines);
+                        System.out.println("Okay, I have removed this task:");
+                        System.out.println(taskToBeDelete);
+                        allTasks.remove(index);
+                        System.out.println("Now you have " + allTasks.size() + " tasks in the list.");
+                        System.out.println(endline);
+                        continue;
+                    } catch (IndexOutOfBoundsException e) {
+                        throw new DeleteException("This task does not exist, there are " + allTasks.size() + " tasks now");
+                    }
+//                  catch (ArrayIndexOutOfBoundsException e) {
+//                        throw new DeleteException("You need to delete like this: delete <task number> , do not put extra wording");
+                    catch (NumberFormatException e) {
+                        throw new DeleteException("format must be: delete <task number> , other format is not acceptable");
+                    }
                 }
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             } catch (DukeException e) {
