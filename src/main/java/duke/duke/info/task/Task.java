@@ -1,26 +1,29 @@
+package duke.info.task;
+
 public abstract class Task {
-    final String action;
-    private boolean done;
+
+    private final String action;
+    private boolean isComplete;
     private final String type;
 
-    Task(String action, String type) {
+    Task(String action, String type, boolean isComplete) {
         this.action = action;
-        this.done = false;
         this.type = type;
+        this.isComplete = isComplete; // task added is not complete by default
     }
 
     void complete() {
-        this.done = true;
+        this.isComplete = true;
     }
 
     void incomplete() {
-        this.done = false;
+        this.isComplete = false;
     }
 
     @Override
     public String toString() {
         String product = "";
-        if (done) {
+        if (isComplete) {
             product += "[X] ";
         } else {
             product += "[ ] ";
