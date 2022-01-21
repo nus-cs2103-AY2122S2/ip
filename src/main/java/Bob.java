@@ -7,9 +7,6 @@ public class Bob {
     private static final String lineSplit = "====================================================================\n";
     private static final String lineSplit2 = "====================================================================";
     private static List<Task> tasks;
-    private enum command {
-        mark, delete, bye, list, deadline, event, todo;
-    }
 
     public static void main(String[] args) {
         initializeBob();
@@ -38,19 +35,19 @@ public class Bob {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         System.out.print(lineSplit);
-        while(!input.equalsIgnoreCase(command.bye.name())) {
+        while(!Command.isBye(input)) {
             if (input.isBlank()) {
                 System.out.print("Bob: ╭∩╮༼ಠ益ಠ╭∩╮༽\n" + lineSplit + "You: ");
-            } else if (input.equalsIgnoreCase(command.list.name())) {
+            } else if (Command.isList(input)) {
                 showList();
-            } else if (input.split(" ")[0].equalsIgnoreCase(command.mark.name())) {
+            } else if (Command.isMark(input.split(" ")[0])) {
                 String index = input.substring(4).trim();
                 try {
                     markTaskDone(index);
                 } catch (BobException e) {
                     System.out.print(e.getBobReply() + lineSplit + "You: ");
                 }
-            } else if (input.split(" ")[0].equalsIgnoreCase(command.delete.name())) {
+            } else if (Command.isDelete(input.split(" ")[0])) {
                 String index = input.substring(6).trim();
                 try {
                     deleteTask(index);
@@ -76,7 +73,7 @@ public class Bob {
             index = Integer.parseInt(taskNumber);
             currTask = tasks.get(index - 1);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new BobException("invalid number");
+            throw new BobException("delete");
         }
         tasks.remove(currTask);
         System.out.println("Bob: I have removed the following task from your list. ᕙ(⇀‸↼‶)ᕗ");
@@ -91,7 +88,7 @@ public class Bob {
             index = Integer.parseInt(taskNumber);
             current = tasks.get(index - 1);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new BobException("invalid number");
+            throw new BobException("mark");
         }
         if (current.getStatus() == 1) {
             System.out.println("Bob: You already did this task... or did you? (ಠ_⊙)");
@@ -122,7 +119,7 @@ public class Bob {
         StringTokenizer line = new StringTokenizer(input);
         String taskType = line.nextToken();
         Task newTask;
-        if (taskType.equalsIgnoreCase(command.todo.name())) {
+        if (Command.isTodo(taskType)) {
             String[] strArr = input.substring(4).split(" ");
             if (strArr.length == 1) {
                 if (strArr[0].isBlank()) {
@@ -133,13 +130,13 @@ public class Bob {
                 throw new BobException("todo");
             }
             newTask = new Todo(input.substring(4).trim());
-        } else if (taskType.equalsIgnoreCase(command.deadline.name())) {
+        } else if (Command.isDeadline(taskType)) {
             String[] strArr = input.substring(8).split("/by");
             if (strArr.length <= 1) {
                 throw new BobException("deadline");
             }
             newTask = new Deadline(strArr[0].trim(), strArr[1].trim());
-        } else if (taskType.equalsIgnoreCase(command.event.name())) {
+        } else if (Command.isEvent(taskType)) {
             String[] strArr = input.substring(5).split("/at");
             if (strArr.length <= 1) {
                 throw new BobException("event");
