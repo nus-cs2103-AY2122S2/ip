@@ -1,4 +1,7 @@
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class Storage {
@@ -54,7 +57,9 @@ public class Storage {
             taskList.add(todoTask);
             break;
           case "Deadline":
-            Deadline deadlineTask = new Deadline(task[2], task[3]);
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_DATE_TIME;
+            LocalDateTime dateTime = LocalDateTime.parse(task[3], dateTimeFormatter);
+            Deadline deadlineTask = new Deadline(task[2], dateTime);
             deadlineTask.setStatus((task[1].equals("1") ? true : false));
             taskList.add(deadlineTask);
             break;
@@ -71,6 +76,8 @@ public class Storage {
       System.out.println("Unable to load list." +
           "Please check if you have permission to read from files in the following directory: " +
           directoryPath);
+    } catch (DateTimeParseException e) {
+      System.out.println("fail");
     }
     return success;
   }

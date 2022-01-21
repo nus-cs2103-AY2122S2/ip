@@ -1,4 +1,9 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.zip.DataFormatException;
 
 public class TaskModule {
   private Storage storage;
@@ -14,26 +19,33 @@ public class TaskModule {
   public void taskAdder(String str) throws DukeException {
     Task task = null;
     Task.TaskType taskType = taskIdentifier(str);
-    switch (taskType) {
-      case TODO :
-        task = new Todo(str.substring(5));
-        break;
-      case DEADLINE :
-        task = new Deadline(str.substring(9, str.indexOf(" /by ")), str.substring(str.indexOf(" /by ") + 5));
-        break;
-      case EVENT :
-        task = new Event(str.substring(6, str.indexOf(" /at ")), str.substring(str.indexOf(" /at ") + 5));
-        break;
-    }
-
-    taskList.add(task);
-    if (storage.saveList(taskList)) {
-      System.out.println(String.format("Got it. I've added this task:\n\t%s\nNow you have %d task(s) in the list",
+    try {
+      switch (taskType) {
+        case TODO:
+          task = new Todo(str.substring(5));
+          break;
+        case DEADLINE:
+          String timeDate = str.substring(str.indexOf(" /by ") + 5);
+          System.out.println(timeDate);
+          DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+          task = new Deadline(str.substring(9, str.indexOf(" /by ")), LocalDateTime.parse(timeDate, dateTimeFormatter));
+          break;
+        case EVENT:
+          task = new Event(str.substring(6, str.indexOf(" /at ")), str.substring(str.indexOf(" /at ") + 5));
+          break;
+      }
+      taskList.add(task);
+      if (storage.saveList(taskList)) {
+         System.out.println(String.format("Got it. I've added this task:\n\t%s\nNow you have %d task(s) in the list",
           task.toString(), taskList.size()));
-    } else {
-      taskList.remove(task);
+      } else {
+         taskList.remove(task);
+      }
+    } catch (DateTimeParseException e) {
+      System.out.println("Valid date and time must be given in this format: DD/MM/YYYY HHmm" + "\nEg: 24/12/2022 2359");
     }
   }
+
 
   public Task.TaskType taskIdentifier(String str) throws DukeException {
     Task.TaskType type = null;
