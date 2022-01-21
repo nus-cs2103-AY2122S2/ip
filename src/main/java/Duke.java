@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Duke {
 
     public static void main(String[] args) {
@@ -45,16 +48,16 @@ public class Duke {
                             + "\n____________________________________________________________");
                 }
             } else if (splitted[0].equals("deadline")) {
-                String[] time = splitted[1].split("/by", 2);
-                taskList.add(new Deadline(time[0], false, time[1]));
+                String[] time = splitted[1].split("/by ", 2);
+                taskList.add(new Deadline(time[0], false, LocalDate.parse(time[1])));
                 System.out.println("____________________________________________________________\n" +
                         "Got it. I've added this task: \n" +
                         taskList.get(taskList.size() -1) +
                         "\nNow you have " + taskList.size() + " tasks in the list."
                         + "\n____________________________________________________________");
             } else if (splitted[0].equals("event")) {
-                String[] time = splitted[1].split("/at");
-                taskList.add(new Event(time[0], false, time[1]));
+                String[] time = splitted[1].split("/at ");
+                taskList.add(new Event(time[0], false, LocalDate.parse(time[1])));
                 System.out.println("____________________________________________________________\n" +
                         "Got it. I've added this task: \n" +
                         taskList.get(taskList.size() - 1) +
