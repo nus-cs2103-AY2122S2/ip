@@ -28,7 +28,7 @@ public class Calendar {
         calendar.get(indexToMark - 1).complete();
     }
 
-    public void markAsNotDone (int indexToMark) {
+    public void markAsNotDone(int indexToMark) {
         calendar.get(indexToMark - 1).incomplete();
     }
 
