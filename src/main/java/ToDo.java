@@ -9,8 +9,8 @@ public class ToDo extends Task {
      * @param input descriptor of task
      * @param number task number
      */
-    public ToDo(String input, int number){
-        super(input.substring(4,input.length()), number, null, "T");
+    public ToDo(String input, int number, boolean reading){
+        super(input, number, null, "T", reading);
     }
 
     /**

@@ -12,8 +12,8 @@ public class Deadline extends Task{
      * @param number task number
      * @param deadline deadline to complete task
      */
-    public Deadline(String input, int number, String deadline) {
-        super(input, number, deadline, "D");
+    public Deadline(String input, int number, String deadline, boolean reading) {
+        super(input, number, deadline, "D", reading);
     }
 
     /**
