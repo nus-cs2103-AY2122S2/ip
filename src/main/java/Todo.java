@@ -9,6 +9,15 @@ public class Todo extends Task {
         super(description);
     }
 
+    public Todo(String description, boolean isDone) {
+        super(description, isDone);
+    }
+
+    @Override
+    public String formatForFile() {
+        return "T | " + (super.isDone ? "1" : "0") + " | " + super.description + "\n";
+    }
+
     /**
      * Returns type and description of the task.
      */

@@ -1,6 +1,6 @@
 public class Parser {
 
-    public CommandType parseCommand(String input) throws DukeException {
+    public static CommandType parseCommand(String input) throws DukeException {
         if (input.isBlank()) {
             throw new DukeException(ErrorMessage.MESSAGE_INVALID_INPUT);
         }
@@ -25,7 +25,7 @@ public class Parser {
         }
     }
 
-    public String[] parseInput(String input, CommandType command) throws DukeException {
+    public static String[] parseInput(String input, CommandType command) throws DukeException {
         String[] args = new String[2];
         args[0] = (input + " ").split(" ", 2)[1].trim(); // description
         if (command.equals(CommandType.DELETE) || command.equals(CommandType.MARK)
