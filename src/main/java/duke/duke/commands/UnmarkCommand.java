@@ -18,7 +18,7 @@ public class UnmarkCommand extends Command {
     public void execute(Calendar calendar, Ui ui, Storage storage) throws InvalidInputException {
         try {
             Integer index = Integer.parseInt(indexToUnmark);
-            calendar.markAsDone(index);
+            calendar.markAsNotDone(index);
             ui.showTaskIncomplete(calendar.taskAtIndex(index));
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidInputException(String.format(Text.TEXT_INVALID_LIST_INDEX, calendar.numOfEntries(), Integer.parseInt(indexToUnmark)));
