@@ -1,10 +1,9 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class Level2 {
+public class Level3 {
     public static void main(String[] args) {
-        Scanner sc = new
-                Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         ArrayList<String> arrList = new ArrayList<String>();
         String line = "    __________________________________________________\n";
         System.out.println(line + "     Hi there. I'm Siri \n" + "     How may I help you? \n" + line);
