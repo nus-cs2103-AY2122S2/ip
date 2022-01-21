@@ -34,6 +34,19 @@ public class Level3 {
                     System.out.println("     " + (i + 1) + "." + currTask);
                 }
                 System.out.println(line);
+            } else if (word.equals("unmark")) {
+                int num = sc.nextInt();
+                int index = num - 1;
+                Task t = arrList.get(index);
+                t.markAsNotDone();
+                arrList.set(index, t);
+                System.out.print(line);
+                int s = arrList.size();
+                for (int i = 0; i < s; i++) {
+                    String currTask = arrList.get(i).toString();
+                    System.out.println("     " + (i + 1) + "." + currTask);
+                }
+                System.out.println(line);
             } else { //print whatever user inputed with "added" infront
                 String taskToDo = word + sc.nextLine();
                 Task t = new Task(taskToDo);
