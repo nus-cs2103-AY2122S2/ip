@@ -1,39 +1,46 @@
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * Class task that Duke creates
  */
 public class Task {
 
-    String deadline;
+    String time;
     String name;
     String type;
     int number;
     static int totalTask = 0;
-    boolean done = false;
+    boolean isdone = false;
 
     /**
      * Constructor of task
      *
      * @param name Descriptor of task
      * @param number Number associated with task
-     * @param deadline time associated with task
+     * @param time time associated with task
      * @param type type of task. 'E' for Event, 'T' for Todo and 'D' for Deadline
      */
-    public Task(String name, int number, String deadline, String type){
+    public Task(String name, int number, String time, String type){
         try {
             if (name.equals("")) {
                 throw new EmptyDescriptorExceptions();
             }
             this.name = name;
             this.number = number;
-            this.deadline = deadline;
+            this.type = type;
+            setDate(time);
             this.type = type;
             System.out.println("Got it. I've added this task: ");
             if (type.equals("D")){
-                System.out.printf(" [D][%s] %s (by: %s) \n", this.getStatus(),  this.name, this.deadline);
+                System.out.printf(" [D][%s] %s (by: %s) \n", this.getStatus(),  this.name, this.time);
             } else if (type.equals("T")){
                 System.out.printf(" [T][%s] %s\n", this.getStatus(),  this.name);
             } else {
-                System.out.printf(" [E][%s] %s (on: %s) \n", this.getStatus(),  this.name, this.deadline);
+                System.out.printf(" [E][%s] %s (on: %s) \n", this.getStatus(),  this.name, this.time);
             }
             totalTask++;
             System.out.printf("Now you have %d task on the list.\n", Task.totalTask);
@@ -43,18 +50,35 @@ public class Task {
         }
     }
 
+    public void setDate(String input){
+        try {
+            if (this.type.equals("D") || this.type.equals("E")) {
+                input = input.replaceAll("/", "-");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HHmm");
+                LocalDateTime lt = LocalDateTime.parse(input, formatter);
+                DateTimeFormatter out = DateTimeFormatter.ofPattern("MMM dd uuuu hh:mm a");
+                this.time = lt.format(out);
+            }
+        }
+        catch(DateTimeParseException e){
+            System.out.println("Note that dates should be in <<YYYY-MM-DD HHMM>> format");
+            this.time = input;
+        }
+    }
+
+
     /**
      * Marks tasks as done.
      */
     public void mark(){
-        this.done = true;
+        this.isdone = true;
     }
 
     /**
      * Unmarks tasks as not done.
      */
     public void unmark(){
-        this.done = false;
+        this.isdone = false;
     }
 
     /**
@@ -63,7 +87,7 @@ public class Task {
      * @return X if task is done and empty string if task is not done
      */
     public String getStatus(){
-        if (this.done){
+        if (this.isdone){
             return "X";
         } else {
             return " ";
