@@ -1,6 +1,9 @@
+import java.io.File;
 import java.lang.reflect.Array;
 import java.nio.charset.Charset;
 import java.util.*;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
 
@@ -9,14 +12,49 @@ public class Duke {
     }
 
 
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
+        File directory = new File("../../../data/");
+        if (!directory.exists()) directory.mkdir();
 
         List<Task> ls = new ArrayList<>();
+
+        try {
+            File saved = new File("../../../data/duke.txt");
+            if (!saved.exists()) {
+                saved.createNewFile();
+            } else {
+                Scanner scan = new Scanner(saved);
+                while (scan.hasNextLine()) {
+                    String line = scan.nextLine();
+                    String[] splitted = line.split("\\|");
+                    boolean completed = splitted[1].equals("1");
+                    if (splitted[0].equals("D")) {
+                        Deadline toAdd = new Deadline(splitted[2], splitted[3]);
+                        ls.add(toAdd);
+                        if (completed) toAdd.setDone();
+                    }
+                    if (splitted[0].equals("T")) {
+                        Todo toAdd = new Todo(splitted[2]);
+                        ls.add(toAdd);
+                        if (completed) toAdd.setDone();
+                    }
+                    if (splitted[0].equals("E")) {
+                        Event toAdd = new Event(splitted[2], splitted[3]);
+                        ls.add(toAdd);
+                        if (completed) toAdd.setDone();
+                    }
+                }
+            }
+        } catch(IOException e) {
+            System.out.println(e);
+        }
+
         Scanner scan = new Scanner(System.in);
         printLine();
         System.out.println("Hello! I'm Duke");
@@ -129,8 +167,20 @@ public class Duke {
                 System.out.println("OOPS!!! I'm sorry, but I do not know what that means :-(");
                 printLine();
             }
-
         }
+        try {
+            File f = new File("../../../data/duke.txt");
+            f.delete();
+            f.createNewFile();
+            FileWriter fw = new FileWriter("../../../data/duke.txt");
+            for (Task t : ls) {
+                fw.write(t.saveString() + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
         printLine();
         System.out.println("Bye. Hope to see you again soon!");
         printLine();
