@@ -1,8 +1,5 @@
 import java.util.*;
 
-/**
- * The type Duke.
- */
 public class Duke {
 
     private static void run() {
@@ -11,10 +8,9 @@ public class Duke {
         List<Task> taskList = new ArrayList<>();
 
         while(!exitFlag) {
-            String[] input = sc.nextLine().split(" ", 2);
-
             try {
-                Command inputCmd = Command.getByName(input[0]);
+                String[] input = sc.nextLine().split(" ", 2);
+                Command inputCmd = Command.getByName(input[0]);     //input[1] = params
                 switch (inputCmd) {
                     case EXIT:
                         exitFlag = inputCmd.exitResponse();
@@ -24,17 +20,29 @@ public class Duke {
                         break;
                     case MARK:
                     case UNMARK:
-                        inputCmd.toggleMarkResponse(taskList, input);
-                        break;
+                        if (input.length == 2) {
+                            inputCmd.toggleMarkResponse(taskList, input[0], input[1]);
+                            break;
+                        } else {
+                            throw new DukeException("Invalid number of inputs!");
+                        }
                     case TODO:
                     case EVENT:
                     case DEADLINE:
-                        inputCmd.subtaskResponse(taskList, input[1]);
-                        break;
+                        if (input.length == 2) {
+                            inputCmd.subtaskResponse(taskList, input[1]);
+                            break;
+                        } else {
+                            throw new DukeException("Task description cannot be empty!");
+                        }
                     case REMOVE:
                     case DELETE:
-                        inputCmd.deleteResponse(taskList, input);
-                        break;
+                        if (input.length == 2) {
+                            inputCmd.deleteResponse(taskList, input[1]);
+                            break;
+                        } else {
+                            throw new DukeException("Invalid number of inputs!");
+                        }
                     case CLEAR:
                         inputCmd.clearResponse(taskList);
                         break;
@@ -59,11 +67,6 @@ public class Duke {
         Command.GREET.genericResponse(greeting);
     }
 
-    /**
-     * The entry point of application.
-     *
-     * @param args the input arguments
-     */
     public static void main(String[] args) {
         greet();
         run();

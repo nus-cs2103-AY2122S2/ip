@@ -8,3 +8,14 @@ todo borrow book
 list
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
+mark 0
+mark one
+mark 50
+unmark 0
+unmark 50
+remove 0
+delete zero
+remove 50
+remove 4
+list
+exit

@@ -1,65 +1,16 @@
 import java.util.List;
 
-/**
- * The enum Command.
- */
 public enum Command {
-    /**
-     * Greet command.
-     */
     GREET,
-    /**
-     * Exit command.
-     */
-    EXIT,
-    /**
-     * List command.
-     */
-    LIST,
-    /**
-     * Mark command.
-     */
-    MARK,
-    /**
-     * Unmark command.
-     */
-    UNMARK,
-    /**
-     * To-do command.
-     */
-    TODO,
-    /**
-     * Event command.
-     */
-    EVENT,
-    /**
-     * Deadline command.
-     */
-    DEADLINE,
-    /**
-     * Remove command.
-     */
-    REMOVE,
-    /**
-     * Delete command.
-     */
-    DELETE,
-    /**
-     * Clear command.
-     */
-    CLEAR;
+    EXIT, LIST,
+    MARK, UNMARK,
+    TODO, EVENT, DEADLINE,
+    REMOVE, DELETE, CLEAR;
 
     private final String divString = "    ---------------------------------------------";
     private final String strPadding = "      ";
 
 
-    /**
-     * Gets the enum with the corresponding name.
-     *
-     * @param input the input
-     * @return the by name
-     * @throws DukeException the duke exception
-     */
     public static Command getByName(String input) throws DukeException {
         for (Command cmd : values()) {
             if (cmd.toString().equalsIgnoreCase(input)) return cmd;
@@ -67,33 +18,17 @@ public enum Command {
         throw new DukeException("Invalid command!");
     }
 
-    /**
-     * Generic response.
-     *
-     * @param resString the res string
-     */
     public void genericResponse(String resString) {
         System.out.println(divString);
         System.out.println(strPadding + resString);
         System.out.println(divString);
     }
 
-    /**
-     * Outputs an exit response using {@link #genericResponse(String)} method
-     * and returns a `true` flag to signal the app to gracefully close.
-     *
-     * @return the boolean
-     */
     public boolean exitResponse() {
         genericResponse("Pleasure to be of service, see you soon!");
         return true;
     }
 
-    /**
-     * List response by displaying the contents of the list.
-     *
-     * @param taskList the task list
-     */
     public void listResponse(List<Task> taskList) {
         if (taskList.isEmpty()) {
             genericResponse("Your list is empty!");
@@ -116,17 +51,15 @@ public enum Command {
         }
     }
 
-    /**
-     * Toggle mark response to indicate when a task has been un-/marked.
-     *
-     * @param taskList the task list
-     * @param inputArr the input array
-     * @throws DukeException invalid index exception from {@link #validIdx(List, String[])}
-     */
-    public void toggleMarkResponse(List<Task> taskList, String[] inputArr) throws DukeException {
-        int toggleIdx = validIdx(taskList, inputArr);
-        Task toggleTask = taskList.get(toggleIdx);
-        toggleTask.isMarked = inputArr[0].equals("mark");
+    public void toggleMarkResponse(List<Task> taskList, String cmd, String toggleIdx) throws DukeException {
+        if (taskList.isEmpty()) { throw new DukeException("The list is empty!"); }
+        if (!argumentsCheck(toggleIdx)) { throw new DukeException("Invalid number of arguments!"); }
+
+        int index = isValidInt(toggleIdx) - 1;
+        if (!isValidIndex(index, taskList.size())) { throw new DukeException("Entry out of range!"); }
+
+        Task toggleTask = taskList.get(index);
+        toggleTask.isMarked = cmd.equals("mark");
 
         String markedString = "Nice! I've marked this task as done: ";
         String unmarkedString = "OK, I've marked this task as not done yet: ";
@@ -138,14 +71,6 @@ public enum Command {
         System.out.println(divString);
     }
 
-    /**
-     * Subtask response to indicate whether a `TO-DO`, `EVENT`, or `DEADLINE` has been added to
-     * the input `taskList`.
-     *
-     * @param taskList the task list
-     * @param input    the command given after splitting it by the keyword
-     * @throws DukeException large list exception
-     */
     public void subtaskResponse(List<Task> taskList, String input) throws DukeException {
         if (taskList.size() >= 100) {
             throw new DukeException("Too many items in the list! Please consider deleting old items.");
@@ -183,46 +108,47 @@ public enum Command {
         System.out.println(divString);
     }
 
-    /**
-     * Delete response indicating when a task at the given index has been deleted.
-     *
-     * @param taskList the task list
-     * @param inputArr the input arr
-     * @throws DukeException invalid index exception from {@link #validIdx(List, String[])}
-     */
-    public void deleteResponse(List<Task> taskList, String[] inputArr) throws DukeException {
-        int deleteIdx = validIdx(taskList, inputArr);
-        String ackString = "Noted. I've removed this task: ";
-        Task removedTask = taskList.remove(deleteIdx);
-        String sizeString = String.format("Now you have %d tasks in the list.", taskList.size());
+    public void deleteResponse(List<Task> taskList, String deletionIdx) throws DukeException {
+        if (taskList.isEmpty()) { throw new DukeException("The list is empty!"); }
+        if (!argumentsCheck(deletionIdx)) { throw new DukeException("Invalid number of arguments!"); }
 
-        System.out.println(divString);
-        System.out.println(strPadding + ackString);
-        System.out.println(strPadding + "   " + removedTask);
-        System.out.println(strPadding + sizeString);
-        System.out.println(divString);
+        int index = isValidInt(deletionIdx) - 1;
+        if (!isValidIndex(index, taskList.size())) { throw new DukeException("Entry out of range!"); }
+
+        try {
+            String ackString = "Noted. I've removed this task: ";
+            Task removedTask = taskList.remove(index);
+            String sizeString = String.format("Now you have %d tasks in the list.", taskList.size());
+
+            System.out.println(divString);
+            System.out.println(strPadding + ackString);
+            System.out.println(strPadding + "   " + removedTask);
+            System.out.println(strPadding + sizeString);
+            System.out.println(divString);
+        } catch (Exception e) {
+            throw new DukeException("Enter which entry you would like to delete.");
+        }
     }
 
-    /**
-     * Clear response to indicate that the input list has been cleared.
-     *
-     * @param taskList the task list
-     */
     public void clearResponse(List<Task> taskList) {
         genericResponse("The list has been cleared!");
         taskList.clear();
     }
 
-    private int validIdx(List<Task> taskList, String[] inputArr) throws DukeException {
-        int idx;
-        if (inputArr.length != 2) {
-            throw new DukeException("Number of arguments should only be 2.");
-        } else {
-            idx = Integer.parseInt(inputArr[1]) - 1;
-            if (idx < 0 || idx > taskList.size()) {
-                throw new DukeException("Please enter a valid index.");
-            }
+    private int isValidInt(String intStr) throws DukeException {
+        try {
+            return Integer.parseInt(intStr);
+        } catch (Exception e) {
+            throw new DukeException("Please enter the entry NUMBER.");
         }
-        return idx;
     }
+
+    private boolean isValidIndex(int index, int listSize) {
+        return (index >= 0 && index < listSize);
+    }
+
+    private boolean argumentsCheck(String input) {
+        return (input.split(" ").length == 1);
+    }
+
 }
