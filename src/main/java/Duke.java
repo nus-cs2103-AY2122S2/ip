@@ -1,9 +1,30 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import java.io.File;
+
 public class Duke {
+    static String PATH = "data";
+    static String FILENAME = "todolist.txt";
+
+    public void writeToFile(File file, ArrayList<Task> taskArrayList) {
+        try {
+            FileWriter fileWriter = new FileWriter(file, false);
+            for (Task task : taskArrayList) {
+                fileWriter.write(task.fileFormat() + "\n");
+            }
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error with writing to the file occurred.");
+            e.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) {
+        Duke dk = new Duke();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -12,6 +33,26 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> taskList = new ArrayList<>();
+
+        System.out.println(PATH);
+        File directory = new File(PATH + "/");
+        if (! directory.exists()){
+            boolean created = directory.mkdir();
+        }
+
+        File file = new File(PATH, FILENAME);
+        try {
+            boolean isNotMadeYet = file.createNewFile();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+        /* Create file, directory
+        How to write to file
+        How to delete line number from file
+         */
+
         System.out.println("____________________________________________________________\nHello! I'm Duke\nWhat can I do for you?\n____________________________________________________________");
         String input = sc.nextLine();
         String[] splitted = input.split(" ", 2);
@@ -31,6 +72,8 @@ public class Duke {
                         "\nNow you have " + taskList.size() + " tasks in the list."
                         + "\n____________________________________________________________");
                 taskList.remove(index -1);
+                dk.writeToFile(file, taskList);
+
             } else if (splitted[0].equals("todo")) {
                 if (input.equals("todo") || input.equals("todo ")) {
                     System.out.println("____________________________________________________________\n" +
@@ -43,6 +86,7 @@ public class Duke {
                             taskList.get(taskList.size() -1) +
                             "\nNow you have " + taskList.size() + " tasks in the list."
                             + "\n____________________________________________________________");
+                    dk.writeToFile(file, taskList);
                 }
             } else if (splitted[0].equals("deadline")) {
                 String[] time = splitted[1].split("/by", 2);
@@ -52,6 +96,7 @@ public class Duke {
                         taskList.get(taskList.size() -1) +
                         "\nNow you have " + taskList.size() + " tasks in the list."
                         + "\n____________________________________________________________");
+                dk.writeToFile(file, taskList);
             } else if (splitted[0].equals("event")) {
                 String[] time = splitted[1].split("/at");
                 taskList.add(new Event(time[0], false, time[1]));
@@ -60,6 +105,7 @@ public class Duke {
                         taskList.get(taskList.size() - 1) +
                         "\nNow you have " + taskList.size() + " tasks in the list."
                         + "\n____________________________________________________________");
+                dk.writeToFile(file, taskList);
             } else if (splitted[0].equals("mark")) {
                 int index = Integer.parseInt(splitted[1]);
                 taskList.get(index - 1).done = true;
@@ -67,6 +113,7 @@ public class Duke {
                         "Nice! I've marked this task as done: \n" +
                         taskList.get(index - 1)
                 + "\n____________________________________________________________");
+                dk.writeToFile(file, taskList);
             } else if (splitted[0].equals("unmark")) {
                 int index = Integer.parseInt(splitted[1]);
                 taskList.get(index - 1).done = false;
@@ -74,6 +121,7 @@ public class Duke {
                         "OK, I've marked this task as not done yet: \n" +
                         taskList.get(index - 1)
                         + "\n____________________________________________________________");
+                dk.writeToFile(file, taskList);
             } else {
                 // throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 System.out.println("____________________________________________________________\n" +
