@@ -1,14 +1,16 @@
 public class TaskEvents extends Task {
     String startAt;
 
-    /** Constructor
+    /**
+     * Constructor
      */
     public TaskEvents(boolean isDone, String name, String startAt) {
         super(isDone, name);
         this.startAt = startAt;
     }
 
-    /** Returns String representation of the Task
+    /**
+     * Returns String representation of the Task
      */
     @Override
     public String toString() {

@@ -1,14 +1,16 @@
 public class TaskDeadlines extends Task {
     String doneBy;
 
-    /** Constructor
+    /**
+     * Constructor
      */
     public TaskDeadlines(boolean isDone, String name, String doneBy) {
         super(isDone, name);
         this.doneBy = doneBy;
     }
 
-    /** Returns String representation of the Task
+    /**
+     * Returns String representation of the Task
      */
     @Override
     public String toString() {

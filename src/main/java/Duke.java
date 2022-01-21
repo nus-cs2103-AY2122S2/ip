@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    /** Main class
+    /**
+     * Main class
      */
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -15,9 +16,9 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         System.out.println(buildMessage("""
-            Hello! I'm Duke
-            What can I do for you?""")
-            );
+                Hello! I'm Duke
+                What can I do for you?""")
+        );
 
         Scanner sc = new Scanner(System.in);
 
@@ -121,7 +122,9 @@ public class Duke {
         sc.close();
     }
 
-    /** Given a message, returns the formatted message for Duke to display
+    /**
+     * Given a message, returns the formatted message for Duke to display
+     *
      * @param message The message to display
      */
     public static String buildMessage(String message) {

@@ -1,12 +1,13 @@
 public class TaskToDos extends Task {
-
-    /** Constructor
+    /**
+     * Constructor
      */
     public TaskToDos(boolean isDone, String name) {
         super(isDone, name);
     }
 
-    /** Returns String representation of the Task
+    /**
+     * Returns String representation of the Task
      */
     @Override
     public String toString() {
