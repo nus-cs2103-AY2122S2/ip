@@ -56,4 +56,14 @@ public class Printer {
                 + "Nice! I've marked this task as done:\n"
                 + myStorage.printTask(taskNumber) + border);
     }
+
+    public void printDelete(ListStorage myStorage, int taskNumber) {
+        System.out.println(border
+                + spacing
+                + "Noted. I've removed this task:\n"
+                + myStorage.printTask(taskNumber)
+                + spacing
+                + "Now you have " + (myStorage.length() - 1) + " tasks in the list.\n"
+                + border);
+    }
 }

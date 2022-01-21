@@ -44,11 +44,16 @@ public class ListStorage {
     }
 
     public Task findTask(int taskNumber) {
-        Task result = null;
-        for (int i = 0; i < taskNumber; i++) {
-            result = myTasks.get(i);
-        }
-        return result;
+        return myTasks.get(taskNumber - 1);
+//        Task result = null;
+//        for (int i = 0; i < taskNumber; i++) {
+//            result = myTasks.get(i);
+//        }
+//        return result;
+    }
+
+    public void deleteTask(int taskNumber) {
+        myTasks.remove(taskNumber - 1);
     }
 
 }

@@ -68,4 +68,9 @@ public class Commands {
         myStorage.findTask(taskNumber).markAsDone();
         myPrinter.printMark(myStorage, taskNumber);
     }
+
+    public void cmdDelete(int taskNumber) {
+        myPrinter.printDelete(myStorage, taskNumber);
+        myStorage.deleteTask(taskNumber);
+    }
 }
