@@ -10,7 +10,7 @@ public class Level3 {
 
         while (true) { //will keep querying user for input until user inputs "bye" into system
             String word = sc.next();
-            if (word.equals("bye")) { //print goodbye text
+            if (word.equals("bye")) { //print goodbye text and exit while loop,stop scanner from scanning
                 System.out.println(line + "     Goodbye.\n" + line);
                 break; //end while loop
             } else if (word.equals("list")) { //print all elements in a list with index in front
