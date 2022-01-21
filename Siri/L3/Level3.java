@@ -15,6 +15,7 @@ public class Level3 {
                 break; //end while loop
             } else if (word.equals("list")) { //print all elements in a list with index in front
                 System.out.print(line);
+                System.out.println("     Tasks to do:");
                 int s = arrList.size();
                 for (int i = 0; i < s; i++) {
                     String currTask = arrList.get(i).toString();
@@ -28,11 +29,8 @@ public class Level3 {
                 t.markAsDone();
                 arrList.set(index, t);
                 System.out.print(line);
-                int s = arrList.size();
-                for (int i = 0; i < s; i++) {
-                    String currTask = arrList.get(i).toString();
-                    System.out.println("     " + (i + 1) + "." + currTask);
-                }
+                System.out.println("     This task has been marked as done:");
+                System.out.println("       " + t.toString());
                 System.out.println(line);
             } else if (word.equals("unmark")) {
                 int num = sc.nextInt();
@@ -41,11 +39,8 @@ public class Level3 {
                 t.markAsNotDone();
                 arrList.set(index, t);
                 System.out.print(line);
-                int s = arrList.size();
-                for (int i = 0; i < s; i++) {
-                    String currTask = arrList.get(i).toString();
-                    System.out.println("     " + (i + 1) + "." + currTask);
-                }
+                System.out.println("     This task has been unmarked:");
+                System.out.println("       " + t.toString());
                 System.out.println(line);
             } else { //print whatever user inputed with "added" infront
                 String taskToDo = word + sc.nextLine();
