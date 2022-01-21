@@ -1,17 +1,12 @@
-import javax.xml.crypto.Data;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Duke {
-    private static final TaskList taskList = new TaskList();
-    private static final Database db = new Database(taskList);
+    private static TaskList taskList = new TaskList();
+    private static Database db = new Database(taskList);
 
     public static void main(String[] args) {
         Duke.log(Constants.GREETINGS);
-        Duke.db.setup();
+        Duke.setup();
         Duke.run();
         Duke.log(Constants.BYE);
     }
@@ -55,7 +50,7 @@ public class Duke {
             } catch (Exception e) {
                 Duke.log(e.getMessage());
             }
-            Duke.db.update();
+            Duke.update();
         }
     }
 
@@ -63,5 +58,14 @@ public class Duke {
         System.out.println(Constants.HORIZONTAL_LINE);
         System.out.println(args);
         System.out.println(Constants.HORIZONTAL_LINE);
+    }
+
+    public static void setup() {
+        taskList = new TaskList();
+        db = new Database(taskList);
+    }
+
+    public static void update() {
+        db.update();
     }
 }
