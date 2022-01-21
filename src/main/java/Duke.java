@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -18,7 +22,7 @@ public class Duke {
         DEADLINE("deadline"),
         EVENT("event");
 
-        private String command;
+        private final String command;
         Command(String commandIN) {
             this.command = commandIN;
         }
@@ -92,7 +96,7 @@ public class Duke {
                     // add task
                     if (input.startsWith(Command.TODO.getCommand())) {
                         // generate
-                        String description = input.substring(4);
+                        String description = input.substring(5);
                         if (Duke.isEmpty(description)) {
                             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                         }
@@ -172,6 +176,7 @@ public class Duke {
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(TaskList.get(currTask).toString());
         horizontalLine();
+        writeToFile();
     }
 
     public static void unmark(int currTask){
@@ -180,6 +185,7 @@ public class Duke {
         System.out.println("OK, I've marked this task as not done yet:");
         System.out.println(TaskList.get(currTask).toString());
         horizontalLine();
+        writeToFile();
     }
 
     public static void addTodo(String description) {
@@ -190,6 +196,7 @@ public class Duke {
         horizontalLine();
         System.out.println(result);
         horizontalLine();
+        writeToFile();
     }
 
     public static void addDdl(String description, String by){
@@ -200,6 +207,7 @@ public class Duke {
         horizontalLine();
         System.out.println(result);
         horizontalLine();
+        writeToFile();
     }
 
     public static void addEvent(String description, String at) {
@@ -210,6 +218,7 @@ public class Duke {
         horizontalLine();
         System.out.println(result);
         horizontalLine();
+        writeToFile();
     }
 
     public static void delete(int currTask) {
@@ -219,9 +228,85 @@ public class Duke {
         TaskList.remove(currTask);
         System.out.format("Now you have %d tasks in the list.\n",TaskList.size());
         horizontalLine();
+        writeToFile();
+    }
+
+    public static void createNewFile(){
+        try {
+            File myObj = new File("./taskRecord.txt");
+            if (myObj.createNewFile()) {
+                System.out.println("File created: " + myObj.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("IO exception occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    public static void writeToFile(){
+        try {
+            FileWriter myWriter = new FileWriter("./taskRecord.txt", false);
+            for (Task task : TaskList) {
+                String output = String.format("%s\n", task.toString());
+                myWriter.write(output);
+            }
+            myWriter.close();
+        } catch (IOException e) {
+            System.out.println("IO exception occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    public static void readFromSaved(){
+        try {
+            File myObj = new File("./taskRecord.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                String tempType = data.substring(1,2);
+
+                switch (tempType) {
+                    case "T":
+                        Task tempTask = new ToDo(data.substring(7));
+                        if (data.charAt(4) == 'X') {
+                            tempTask.markAsDone();
+                        }
+                        TaskList.add(tempTask);
+                        break;
+                    case "D":
+                        int byPos = data.indexOf("(by:");
+                        String by = data.substring(byPos+5, data.length()-1);
+                        String description = data.substring(7, byPos - 1);
+                        tempTask = new Deadline(description,by);
+                        if (data.charAt(4) == 'X') {
+                            tempTask.markAsDone();
+                        }
+                        TaskList.add(tempTask);
+                        break;
+                    case "E":
+                        int atPos = data.indexOf("(at:");
+                        String at = data.substring(atPos+5, data.length()-1);
+                        description = data.substring(7, atPos - 1);
+                        tempTask = new Event(description,at);
+                        if (data.charAt(4) == 'X') {
+                            tempTask.markAsDone();
+                        }
+                        TaskList.add(tempTask);
+                        break;
+                }
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found error occurred.");
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
+        createNewFile();
+        readFromSaved();
         greet();
         while (!isEnd) {
             echo();
