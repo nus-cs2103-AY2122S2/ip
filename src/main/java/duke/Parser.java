@@ -39,8 +39,10 @@ public class Parser {
             boolean completed;
             if (lineArguments[lineArguments.length - 1].equals("done")) {
                 completed = true;
-            } else {
+            } else if (lineArguments[lineArguments.length - 1].equals("undone")) {
                 completed = false;
+            } else {
+                throw new DukeInvalidFileException();
             }
             lineArguments = Arrays.copyOf(lineArguments, lineArguments.length-1);
             line = String.join(" ", lineArguments);
