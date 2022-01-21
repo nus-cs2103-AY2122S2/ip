@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -16,14 +18,23 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
 
+        List<String> pastCommands = new ArrayList<>();
+
         while (true) {
             String command = sc.nextLine().trim();
 
             if (command.equals("bye")) {
                 System.out.println(buildMessage("Bye. Hope to see you again soon!"));
                 break;
+            } else if (command.equals("list")) {
+                StringBuilder list = new StringBuilder();
+                for (int i = 0; i < pastCommands.size(); i++) {
+                    list.append(String.format("%d. %s\n", i + 1, pastCommands.get(i)));
+                }
+                System.out.println(buildMessage(list.toString().trim()));
             } else {
-                System.out.println(buildMessage(command));
+                pastCommands.add(command);
+                System.out.println(buildMessage(String.format("added: %s", command)));
             }
         }
 
