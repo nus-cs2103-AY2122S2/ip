@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import java.io.File;
 
 public class Duke {
@@ -89,8 +92,8 @@ public class Duke {
                     dk.writeToFile(file, taskList);
                 }
             } else if (splitted[0].equals("deadline")) {
-                String[] time = splitted[1].split("/by", 2);
-                taskList.add(new Deadline(time[0], false, time[1]));
+                String[] time = splitted[1].split("/by ", 2);
+                taskList.add(new Deadline(time[0], false, LocalDate.parse(time[1])));
                 System.out.println("____________________________________________________________\n" +
                         "Got it. I've added this task: \n" +
                         taskList.get(taskList.size() -1) +
@@ -98,8 +101,8 @@ public class Duke {
                         + "\n____________________________________________________________");
                 dk.writeToFile(file, taskList);
             } else if (splitted[0].equals("event")) {
-                String[] time = splitted[1].split("/at");
-                taskList.add(new Event(time[0], false, time[1]));
+                String[] time = splitted[1].split("/at ");
+                taskList.add(new Event(time[0], false, LocalDate.parse(time[1])));
                 System.out.println("____________________________________________________________\n" +
                         "Got it. I've added this task: \n" +
                         taskList.get(taskList.size() - 1) +
