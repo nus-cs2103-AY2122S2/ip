@@ -23,7 +23,7 @@ public class Apollo {
             printMessage(error.getMessage());
             run();
         } catch (NumberFormatException error) {
-            printMessage("Please enter an Integer instead.");
+            printMessage("Please enter an Integer instead. ");
             run();
         }
     }
@@ -37,6 +37,16 @@ public class Apollo {
         tasks.add(newTask);
         printMessage(String.format("I've added this task:\n  %s\nThere's a total of %d tasks now. ",
                 newTask, tasks.size()));
+    }
+
+    public static void deleteTask(int i) throws ApolloException {
+        if (i > tasks.size()) {
+            throw new ApolloException(String.format("Task %d. does not exist, unable to delete. ", i));
+        }
+        String message = String.format("Alright, I've remove this task. \n" +
+                "  %s\nThere's a total of %d tasks now. ", tasks.get(i-1), tasks.size()-1);
+        tasks.remove(i-1);
+        printMessage(message);
     }
 
     public static void printList() {
@@ -58,23 +68,21 @@ public class Apollo {
         printMessage(list.toString());
     }
 
-    public static void mark(int i, boolean mark) {
+    public static void mark(int i, boolean mark) throws ApolloException {
         if (i > tasks.size()) {
-            printMessage("Please add more items first. ");
-            return;
+            throw new ApolloException(String.format("Task %d. does not exist, unable to mark or unmark. ", i));
         }
 
         Task task = tasks.get(i-1);
-        String msg;
+        String message;
         if (mark) {
             task.markAsDone();
-            msg = "Alright, I've mark this task as done.\n  ";
+            message = "Alright, I've mark this task as done. \n  ";
         } else {
             task.markAsNotDone();
-            msg = "Noted, I've marked this task as not done yet.\n  ";
+            message = "Noted, I've marked this task as not done yet. \n  ";
         }
-//        System.out.println(items.size());
-        printMessage(msg + task);
+        printMessage(message + task);
     }
 
     public static void main(String[] args) {

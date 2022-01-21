@@ -61,7 +61,8 @@ public class Commands {
                 }
                 String[] descTime = this.fullCommand[1].split(" */[Bb][Yy] *", 2);
                 if (descTime.length == 1) {
-                    throw new ApolloException("Please add the time this task is due with:\n  /by <time>");
+                    throw new ApolloException("Please add the time that this task is due. \n" +
+                            "  deadline <description> /by <time>");
                 }
                 newTask = new Deadline(descTime[0], descTime[1]);
                 Apollo.addTask(newTask);
@@ -74,10 +75,19 @@ public class Commands {
                 }
                 String[] descPeriod = this.fullCommand[1].split(" */[Aa][Tt] *", 2);
                 if (descPeriod.length == 1) {
-                    throw new ApolloException("Please add the period this task happens with:\n  /at <period>");
+                    throw new ApolloException("Please add the period that this task happens. \n" +
+                            "  event <description> /at <period>");
                 }
                 newTask = new Event(descPeriod[0], descPeriod[1]);
                 Apollo.addTask(newTask);
+                response();
+                break;
+            case "delete":
+                if (this.fullCommand.length == 1) {
+                    throw new ApolloException("Please specify which task to delete. \n" +
+                            "  delete <task number>");
+                }
+                Apollo.deleteTask(Integer.parseInt(this.fullCommand[1]));
                 response();
                 break;
             default:
