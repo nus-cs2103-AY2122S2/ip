@@ -1,3 +1,6 @@
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +24,10 @@ public final class Utils {
             throw new InvalidInputException("Empty");
         String[] arr = userInput.split(" ", 2);
         // command might be "list" or "bye"
-        if (arr.length == 1) {
-            if (arr[0].equals("list") || arr[0].equals("bye"))
-                return arr;
-            else
-                throw new InvalidInputException("Invalid length 1 command. Please try 'list/bye'.");
+        if (arr[0].equals("bye") && arr.length == 1) {
+            return arr;
+        } else if (arr[0].equals("list")&& (arr.length == 1||arr.length==2)) {
+            return arr;
         } else {
             if (arr[0].equals("mark") || arr[0].equals("unmark") || arr[0].equals("delete")) {
                 String theRest = arr[1];
@@ -42,8 +44,7 @@ public final class Utils {
                 String[] output = arr[1].split("/", 2);
 
                 if (output.length == 1)
-                    throw new InvalidInputException(
-                            "Invalid " + arr[0] + " format. eg. deadline return book /by Sunday.");
+                    throw new InvalidInputException("Invalid " + arr[0] + " format. eg. deadline return book /by 02/12/2019 18:00.");
 
                 String[] date = output[1].split(" ", 2);
 
@@ -61,15 +62,47 @@ public final class Utils {
             } else if (arr[0].equals("todo")) {
                 return arr;
             } else {
-                throw new InvalidInputException("Invalid command. Please try 'mark/unmark/event/deadline/todo'. ");
+                throw new InvalidInputException("Invalid command. Please try 'list/bye/mark/unmark/event/deadline/todo'. ");
             }
         }
     }
+
+    public static LocalDateTime parseDate(String date) {
+        try {
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+            LocalDateTime formattedDate = LocalDateTime.parse(date, format);
+            return formattedDate;
+        } catch (DateTimeException e) {
+            throw new DateTimeException(date + " can't be formatted! Please format the date/time as dd/MM/yyyy HH:mm");
+        }
+    }
+
+    public static String printDate(LocalDateTime date) {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a");
+        return date.format(format);
+    }
+
 
     public static void printTaskList(List<Task> taskList) {
         int i = 1;
         for (Task task : taskList) {
             System.out.println("     " + i + ".  " + task.toString());
+            i++;
+        }
+    }
+
+    public static void printTaskList(List<Task> taskList,LocalDateTime date) {
+        int i = 1;
+        for (Task task : taskList) {
+            if(task instanceof Deadline){
+                if(((Deadline) task).getDate().isBefore(date)){
+                    System.out.println("     " + i + ".  " + task.toString());
+                }
+            }else if(task instanceof Event) {
+                if (((Event) task).getDate().isBefore(date)) {
+                    System.out.println("     " + i + ".  " + task.toString());
+                }
+            }
             i++;
         }
     }
@@ -114,9 +147,9 @@ public final class Utils {
             if (parts[0].equals("T")) {
                 result.add(new ToDo(parts[2], parts[1].equals("1")));
             } else if (parts[0].equals("D")) {
-                result.add(new Deadline(parts[2], parts[1].equals("1"), parts[3]));
+                result.add(new Deadline(parts[2], parts[1].equals("1"), parseDate(parts[3])));
             } else if (parts[0].equals("E")) {
-                result.add(new Event(parts[2], parts[1].equals("1"), parts[3]));
+                result.add(new Event(parts[2], parts[1].equals("1"), parseDate(parts[3])));
             } else {
                 System.out.println(parts[0]);
             }
@@ -130,6 +163,7 @@ public final class Utils {
 
     public static boolean saveTasktoFile(List<Task> taskList) throws FileNotFoundException {
         String path = getPath();
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         try {
             FileWriter fw = new FileWriter(path);
             for (Task task : taskList) {
@@ -137,9 +171,9 @@ public final class Utils {
                 if (task.getClass() == ToDo.class) {
                     fw.write("T | " + (task.getDone() ? "1 | " : "0 | ") + task.getTitle() + System.lineSeparator());
                 } else if (task.getClass() == Deadline.class) {
-                    fw.write("D | " + (task.getDone() ? "1 | " : "0 | ") + task.getTitle() + " | " + ((Deadline) task).getDate() + System.lineSeparator());
+                    fw.write("D | " + (task.getDone() ? "1 | " : "0 | ") + task.getTitle() + " | " + ((Deadline) task).getDate().format(format) + System.lineSeparator());
                 } else if (task.getClass() == Event.class) {
-                    fw.write("E | " + (task.getDone() ? "1 | " : "0 | ") + task.getTitle() + " | " + ((Event) task).getDate() + System.lineSeparator());
+                    fw.write("E | " + (task.getDone() ? "1 | " : "0 | ") + task.getTitle() + " | " +  ((Event) task).getDate().format(format) + System.lineSeparator());
                 }
             }
 
