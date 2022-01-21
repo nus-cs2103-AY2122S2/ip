@@ -1,9 +1,20 @@
+/**
+ * The type Event.
+ */
 public class Event extends Task {
+    /**
+     * The time that the task is supposed to be carried out at.
+     */
     protected String at;
 
-    public Event(String[] input) {
-        super(input[0]);
-        this.at = input[1];
+    /**
+     * Instantiates a new Event.
+     *
+     * @param input the input
+     */
+    public Event(String eventName, String at) {
+        super(eventName);
+        this.at = at;
     }
 
     @Override

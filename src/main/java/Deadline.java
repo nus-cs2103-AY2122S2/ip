@@ -1,9 +1,20 @@
+/**
+ * The type Deadline.
+ */
 public class Deadline extends Task{
+    /**
+     * The due date for the given task.
+     */
     protected String by;
 
-    public Deadline(String[] input) {
-        super(input[0]);
-        this.by = input[1];
+    /**
+     * Instantiates a new Deadline.
+     *
+     * @param by the input that has been delimited by " /by "
+     */
+    public Deadline(String deadlineName, String by) {
+        super(deadlineName);
+        this.by = by;
     }
 
     @Override
