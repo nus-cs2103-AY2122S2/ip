@@ -23,15 +23,18 @@ public class Echo {
     public void read(String s) throws EchoException {
         String[] split = s.split(" ");
         String command = split[0];
+        StringBuilder message = new StringBuilder();
         switch (command) {
             case "list":
                 if (tasks.size() == 0) {
-                    System.out.println("        Task list is empty!");
+                    printFormat("        Task list is empty!");
                 } else {
-                    for (int i = 0; i < tasks.size(); i++)
-                        System.out.printf("        %d. %s%n", i + 1, tasks.get(i));
+                    for (int i = 0; i < tasks.size(); i++) {
+                        message.append(String.format("        %d. %s \n", i + 1, tasks.get(i)));
+                    }
+                    message.setLength(message.length() - 2); // remove last /n
+                    printFormat(message.toString());
                 }
-                System.out.println("");
                 break;
             case "mark":
             case "unmark":
@@ -40,28 +43,26 @@ public class Echo {
                     throw new EchoException("Please specify the task number. Eg. mark 1, unmark 1, delete 1");
                 try {
                     int taskIndex = Integer.parseInt(split[1]) - 1;
-                    String message = "";
                     if (command.equals("mark")) {
                         tasks.get(taskIndex).mark();
-                        message = "        Nice! The task is marked as done: ";
+                        message.append("        Nice! The task is marked as done: \n");
                     } else if (command.equals("unmark")) {
                         tasks.get(taskIndex).unmark();
-                        message = "        OK! The task is unmarked.";
+                        message.append("        OK! The task is unmarked. \n");
                     } else {
-                        message = String.format("        %d. %s", taskIndex + 1, tasks.get(taskIndex).toString());
+                        message.append("        Noted. I've removed the task: \n");
+                        message.append(String.format("          %d. %s \n", taskIndex + 1, tasks.get(taskIndex).toString()));
                         tasks.remove(taskIndex);
-                        System.out.println("        Noted. I've removed the task:");
                     }
-                    System.out.println(message);
                     if (command.equals("delete"))
-                        System.out.printf("        Now you have %d tasks in the list.%n", tasks.size());
+                        message.append(String.format("        Now you have %d tasks in the list.", tasks.size()));
                     else
-                        taskStatus(taskIndex);
-                    System.out.println("");
+                        message.append(taskStatus(taskIndex));
+                    printFormat(message.toString());
                 } catch (NumberFormatException nfe) {
-                    System.out.println("        Second input must be an integer. Eg. mark 1, unmark 1, delete 1");
+                    printFormat("        Second input must be an integer. Eg. mark 1, unmark 1, delete 1");
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("        Task does not exist!");
+                    printFormat("        Task does not exist!");
                 }
                 break;
             case "todo":
@@ -69,35 +70,28 @@ public class Echo {
             case "event":
                 String[] desc;
                 if (split.length == 1)
-                    throw new EchoException(String.format("The description of a %s cannot be empty.", s));
+                    throw new EchoException(String.format("        The description of a %s cannot be empty.", s));
 
                 if (command.equals("todo")) {
                     tasks.add(new TodoTask(s.substring(command.length() + 1)));
                 } else if (command.equals("deadline")) {
                     if (!s.contains("/by"))
-                        throw new EchoException("Please specify the deadline of the task. E.g. deadline return book /by Sunday");
+                        throw new EchoException("        Please specify the deadline of the task. E.g. deadline return book /by Sunday");
                     desc = s.split("/");
                     tasks.add(new DeadlineTask(desc[0].substring(command.length() + 1), desc[1].substring(desc[1].indexOf(" ") + 1)));
                 } else {
                     if (!s.contains("/at"))
-                        throw new EchoException("Please specify the time of the event. E.g. event meeting /at Mon");
+                        throw new EchoException("        Please specify the time of the event. E.g. event meeting /at Mon");
                     desc = s.split("/");
                     tasks.add(new EventTask(desc[0].substring(command.length() + 1), desc[1].substring(desc[1].indexOf(" ") + 1)));
                 }
-                System.out.println("        Got it. I've added this task:");
-                taskStatus(tasks.size() - 1);
-                System.out.printf("        Now you have %d tasks in the list.%n%n", tasks.size());
+                message.append("        Got it. I've added this task: \n");
+                message.append(taskStatus(tasks.size() - 1)).append("\n");
+                message.append(String.format("        Now you have %d tasks in the list.", tasks.size()));
+                printFormat(message.toString());
                 break;
             default:
-                System.out.println("       Commands:");
-                System.out.println("       List                                | List current tasks.");
-                System.out.println("       todo <description>                  | Adds a todo task.");
-                System.out.println("       deadline <description> /by <time>   | Adds a deadline task to be done before a specified time.");
-                System.out.println("       event <description> /at <time>      | Adds an event task that occurs at a specified time.");
-                System.out.println("       mark <task number>                  | Marks task as completed.");
-                System.out.println("       unmark <task number>                | Unmark task as uncompleted.");
-                System.out.println("       delete <task number>                | Deletes task.");
-                System.out.println("       bye                                 | exit.");
+                commands();
                 break;
 
         }
@@ -106,15 +100,60 @@ public class Echo {
      * Prints string representation of task index and description.
      *
      * @param i Task index.
+     *
+     * @return String representing task status.
      */
-    private void taskStatus(int i) {
-        System.out.printf("          %d. %s%n", i+1, tasks.get(i).toString());
+    private String taskStatus(int i) {
+        return String.format("          %d. %s", i+1, tasks.get(i).toString());
+    }
+
+    /**
+     * Prints hello.
+     */
+    public void hello() {
+        String logo = "U _____ u    ____    _   _      U  ___ u \n" +
+                "\\| ___\"|/ U /\"___|  |'| |'|      \\/\"_ \\/ \n" +
+                " |  _|\"   \\| | u   /| |_| |\\     | | | | \n" +
+                " | |___    | |/__  U|  _  |u .-,_| |_| | \n" +
+                " |_____|    \\____|  |_| |_|   \\_)-\\___/  \n" +
+                " <<   >>   _// \\\\   //   \\\\        \\\\    \n" +
+                "(__) (__) (__)(__) (_\") (\"_)      (__) \n";
+        System.out.print(logo);
     }
 
     /**
      * Prints goodbye.
      */
     public void exit() {
-        System.out.println("        Goodbye!");
+        printFormat("        Goodbye!");
     }
+
+    /**
+     * Prints response.
+     *
+     * @param s String to be printed.
+     */
+    public void printFormat(String s) {
+        System.out.println("        ____________________________________________________________");
+        System.out.println(s);
+        System.out.println("        ____________________________________________________________");
+    }
+
+    /**
+     * Prints commands.
+     */
+    private void commands() {
+        printFormat(
+        "        Commands: \n" +
+        "        List                                | List current tasks. \n" +
+        "        todo <description>                  | Adds a todo task. \n" +
+        "        deadline <description> /by <time>   | Adds a deadline task to be done before a specified time. \n" +
+        "        event <description> /at <time>      | Adds an event task that occurs at a specified time. \n" +
+        "        mark <task number>                  | Marks task as completed. \n" +
+        "        unmark <task number>                | Unmark task as uncompleted. \n" +
+        "        delete <task number>                | Deletes task. \n" +
+        "        bye                                 | exit. ");
+    }
+
+
 }

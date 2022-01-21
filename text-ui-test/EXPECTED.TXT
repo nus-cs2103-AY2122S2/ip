@@ -1,41 +1,49 @@
-Hello I'm
 U _____ u    ____    _   _      U  ___ u 
 \| ___"|/ U /"___|  |'| |'|      \/"_ \/ 
  |  _|"   \| | u   /| |_| |\     | | | | 
  | |___    | |/__  U|  _  |u .-,_| |_| | 
  |_____|    \____|  |_| |_|   \_)-\___/  
  <<   >>   _// \\   //   \\        \\    
-(__) (__) (__)(__) (_") ("_)      (__)
-        Got it. I've added this task:
+(__) (__) (__)(__) (_") ("_)      (__) 
+        ____________________________________________________________
+        Got it. I've added this task: 
           1. [T][ ] borrow book
         Now you have 1 tasks in the list.
-
-        Got it. I've added this task:
+        ____________________________________________________________
+        ____________________________________________________________
+        Got it. I've added this task: 
           2. [D][ ] return book  (by: Sunday)
         Now you have 2 tasks in the list.
-
-        Got it. I've added this task:
+        ____________________________________________________________
+        ____________________________________________________________
+        Got it. I've added this task: 
           3. [E][ ] project meeting  (at: Mon 2-4pm)
         Now you have 3 tasks in the list.
-
-        1. [T][ ] borrow book
-        2. [D][ ] return book  (by: Sunday)
+        ____________________________________________________________
+        ____________________________________________________________
+        1. [T][ ] borrow book 
+        2. [D][ ] return book  (by: Sunday) 
         3. [E][ ] project meeting  (at: Mon 2-4pm)
-
+        ____________________________________________________________
+        ____________________________________________________________
         Nice! The task is marked as done: 
           1. [T][X] borrow book
-
+        ____________________________________________________________
+        ____________________________________________________________
         Nice! The task is marked as done: 
           2. [D][X] return book  (by: Sunday)
-
-        1. [T][X] borrow book
-        2. [D][X] return book  (by: Sunday)
+        ____________________________________________________________
+        ____________________________________________________________
+        1. [T][X] borrow book 
+        2. [D][X] return book  (by: Sunday) 
         3. [E][ ] project meeting  (at: Mon 2-4pm)
-
-        Noted. I've removed the task:
-        2. [D][X] return book  (by: Sunday)
+        ____________________________________________________________
+        ____________________________________________________________
+        Noted. I've removed the task: 
+          2. [D][X] return book  (by: Sunday) 
         Now you have 2 tasks in the list.
-
-        1. [T][X] borrow book
+        ____________________________________________________________
+        ____________________________________________________________
+        1. [T][X] borrow book 
         2. [E][ ] project meeting  (at: Mon 2-4pm)
-
+        ____________________________________________________________
