@@ -1,19 +1,24 @@
 class ToDo extends Task {
 
     public ToDo(String task) {
-        super(task);
+        super(task, "T");
     }
 
     public ToDo(String task, boolean complete) {
-        super(task, complete);
+        super(task, "T", complete);
+
+    }
+
+    public String getTaskTime() {
+        return "";
     }
 
     @Override
     public String toString() {
         if (super.isCompleted()) {
-            return "[T][x] " + super.getTaskName();
+            return "[" + super.getType() + "][x] " + super.getTaskName();
         } else {
-            return "[T][ ] " + super.getTaskName();
+            return "[" + super.getType() + "][ ] " + super.getTaskName();
         }
     }
 }

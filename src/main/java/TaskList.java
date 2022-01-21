@@ -50,4 +50,18 @@ public class TaskList {
         return arrayList.get(index);
     }
 
+    public String saveText() {
+        String s = "";
+        for (int i = 0; i < arrayList.size(); i++) {
+            Task task = arrayList.get(i);
+            String taskString = String.format("%s | %d | %s | %s",
+                        task.getType(), task.isCompleted() ? 1 : 0, task.getTaskName(), task.getTaskTime());
+            if (i == 0) {
+                s = taskString;
+            } else {
+                s = s + "\n" + taskString;
+            }
+        }
+        return s;
+    }
 }

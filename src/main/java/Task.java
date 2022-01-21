@@ -1,14 +1,17 @@
-public class Task {
+abstract class Task {
     private final String task;
+    private final String type;
     private boolean completed;
 
-    public Task(String task) {
+    public Task(String task, String type) {
         this.task = task;
+        this.type = type;
         this.completed = false;
     }
 
-    public Task(String task, boolean completed) {
+    public Task(String task, String type, boolean completed) {
         this.task = task;
+        this.type = type;
         this.completed = completed;
     }
 
@@ -27,6 +30,13 @@ public class Task {
     public void setUncompleted() {
         this.completed = false;
     }
+
+    public String getType() {
+        return this.type;
+    }
+
+    abstract String getTaskTime();
+
 
     @Override
     public String toString() {

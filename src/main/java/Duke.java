@@ -1,7 +1,18 @@
-import java.sql.SQLOutput;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.io.FileWriter;
 import java.util.Scanner;
 
 public class Duke {
+
+    public static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -20,6 +31,10 @@ public class Duke {
                 firstWord = command.substring(0, index);
             } else {
                 firstWord = command;
+            }
+
+            if (firstWord.equals("mark") || firstWord.equals("unmark") || firstWord.equals("delete")) {
+                itemIndex = Integer.parseInt(command.substring(index + 1));
             }
 
             if (command.equals("bye")) {
@@ -75,7 +90,7 @@ public class Duke {
                     System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 }
 
-            } else if (firstWord.equals("todo")){
+            } else if (firstWord.equals("todo")) {
                 if (index == -1) {
                     System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                     System.out.println("OOPS!!! The description of a todo cannot be empty.");
@@ -90,20 +105,27 @@ public class Duke {
                     System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 }
 
-            } else if (firstWord.equals("deadline")){
+            } else if (firstWord.equals("deadline")) {
                 if (index == -1) {
                     System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                     System.out.println("OOPS!!! The description of a deadline cannot be empty.");
                     System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 } else {
-                    String deadlineItem = command.substring(index + 1, command.indexOf("/by"));
-                    String time = command.substring(command.indexOf("/by") + 1);
-                    Deadline deadline = new Deadline(deadlineItem, time);
-                    taskList.add(deadline);
-                    System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                    System.out.println("Got it, I have added this task:" );
-                    System.out.println(deadline.toString());
-                    System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                    // add exception checking here
+                    if (!command.contains("/by") || command.indexOf("/by") == command.length()) {
+                        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                        System.out.println("Please add a date using /by in dd/mm/yyyy format :)" );
+                        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                    } else {
+                        String deadlineItem = command.substring(index + 1, command.indexOf("/by") - 1);
+                        String time = command.substring(command.indexOf("/by") + 4);
+                        Deadline deadline = new Deadline(deadlineItem, time);
+                        taskList.add(deadline);
+                        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                        System.out.println("Got it, I have added this task:" );
+                        System.out.println(deadline.toString());
+                        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                    }
                 }
 
             } else if (firstWord.equals("event")) {
@@ -112,14 +134,30 @@ public class Duke {
                     System.out.println("OOPS!!! The description of an event cannot be empty.");
                     System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 } else {
-                    String eventItem = command.substring(index + 1, command.indexOf("/at"));
-                    String time = command.substring(command.indexOf("/at") + 1);
-                    Event event = new Event(eventItem, time);
-                    taskList.add(event);
+                    if (!command.contains("/at") || command.indexOf("/at") == command.length()) {
+                        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                        System.out.println("Please add a date using /at in dd/mm/yyyy format :)");
+                        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                    } else {
+                        String eventItem = command.substring(index + 1, command.indexOf("/at") - 1);
+                        String time = command.substring(command.indexOf("/at") + 4);
+                        Event event = new Event(eventItem, time);
+                        taskList.add(event);
+                        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                        System.out.println("Got it, I have added this task:");
+                        System.out.println(event.toString());
+                        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                    }
+                }
+
+            } else if (command.equals("save")) {
+                try {
+                    writeToFile("data/tasklist.txt", taskList.saveText());
                     System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                    System.out.println("Got it, I have added this task:" );
-                    System.out.println(event.toString());
+                    System.out.println("File saved!");
                     System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                } catch (IOException e) {
+                    System.out.println("Something went wrong: " + e.getMessage());
                 }
 
             } else {
