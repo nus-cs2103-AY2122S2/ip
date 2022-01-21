@@ -1,8 +1,6 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+package duke;
+
 import java.util.Scanner;
-import java.util.List;
 
 public class Ui {
 
