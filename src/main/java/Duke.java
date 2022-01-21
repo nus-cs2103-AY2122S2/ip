@@ -72,42 +72,39 @@ public class Duke {
         this.printMsg("\t OK, I've marked this task as not done yet:\n\t   " + lst.get(num).print() + "\n");
     }
 
+    private void run() {
+        Scanner sc= new Scanner(System.in);
+        String input = sc.nextLine();
+        String[] splitted = input.split("\\s+");
+        if (input.equals("bye")) {
+            this.bye();
+            return;
+        } else if (input.equals("list")) {
+            this.list();
+        } else if (splitted.length == 2 && splitted[0].equals("mark")) {
+            try {
+                int num = Integer.parseInt(splitted[1]);
+                this.mark(num-1);
+            } catch (NumberFormatException e) {
+                this.add(input);
+            }
+        } else if (splitted.length == 2 && splitted[0].equals("unmark")) {
+            try {
+                int num = Integer.parseInt(splitted[1]);
+                this.unmark(num-1);
+            } catch (NumberFormatException e) {
+                this.add(input);
+            }
+        } else {
+            this.add(input);
+        }
+        this.run();
+    }
+
     public static void main(String[] args) {
         Duke bot = new Duke();
-        Scanner sc= new Scanner(System.in);
-        String input;
 
         bot.greeting();
-        input = sc.nextLine();
-        while (!input.equals("bye")) {
-            if (input.equals("list")) {
-                bot.list();
-                input = sc.nextLine();
-                continue;
-            }
-            String[] splitted = input.split("\\s+");
-            if (splitted.length == 2 && splitted[0].equals("mark")) {
-                try {
-                    int num = Integer.parseInt(splitted[1]);
-                    bot.mark(num-1);
-                    input = sc.nextLine();
-                    continue;
-                } catch (NumberFormatException e) {
-                    bot.add(input);
-                }
-            } else if (splitted.length == 2 && splitted[0].equals("unmark")) {
-                try {
-                    int num = Integer.parseInt(splitted[1]);
-                    bot.unmark(num-1);
-                    input = sc.nextLine();
-                    continue;
-                } catch (NumberFormatException e) {
-                    bot.add(input);
-                }
-            }
-            bot.add(input);
-            input = sc.nextLine();
-        }
-        bot.bye();
+        bot.run();
     }
 }
