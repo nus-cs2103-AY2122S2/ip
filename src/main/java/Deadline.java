@@ -23,7 +23,7 @@ public class Deadline extends Task{
      */
     @Override
     public String toString(){
-        String s = String.format("%d. [D][%s] %s (by: %s)\n", number+1, getStatus(), name, deadline);
+        String s = String.format("%d. [D][%s] %s (by: %s)\n", number+1, getStatus(), name, time);
         return s;
     }
 }
