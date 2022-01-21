@@ -75,6 +75,7 @@ public class Duke {
                         taskList.get(index - 1)
                         + "\n____________________________________________________________");
             } else {
+                // throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 System.out.println("____________________________________________________________\n" +
                         " ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
                         "____________________________________________________________");
