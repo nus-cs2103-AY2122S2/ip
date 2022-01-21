@@ -25,39 +25,42 @@ public class Duke {
 
         public static void process(Command c, String command, String[] commandWords) {
             switch (c) {
-                case LIST:
-                    printList();
-                    break;
-                case MARK:
-                    try {
-                        mark(commandWords);
-                    } catch (DukeException d) {
-                        printMsg(d.toString());
-                    }
-                    break;
-                case UNMARK:
-                    try {
-                        unmark(commandWords);
-                    } catch (DukeException d) {
-                        printMsg(d.toString());
-                    }
-                    break;
-                case DELETE:
-                    try{
-                        delete(commandWords);
-                    } catch (DukeException d) {
-                        printMsg(d.toString());
-                    }
-                    break;
-                case TODO:
-                case DEADLINE:
-                case EVENT:
-                    try {
-                        addTask(command, commandWords);
-                    } catch (DukeException d) {
-                        printMsg(d.toString());
-                    }
-                    break;
+            case LIST:
+                printList();
+                break;
+            case MARK:
+                try {
+                    mark(commandWords);
+                } catch (DukeException d) {
+                    printMsg(d.toString());
+                }
+                break;
+            case UNMARK:
+                try {
+                    unmark(commandWords);
+                } catch (DukeException d) {
+                    printMsg(d.toString());
+                }
+                break;
+            case DELETE:
+                try {
+                    delete(commandWords);
+                } catch (DukeException d) {
+                    printMsg(d.toString());
+                }
+                break;
+            case TODO:
+                // Fallthrough
+            case DEADLINE:
+            case EVENT:
+                try {
+                    addTask(command, commandWords);
+                } catch (DukeException d) {
+                    printMsg(d.toString());
+                }
+                break;
+            default:
+                break;
             }
         }
     }
@@ -93,7 +96,8 @@ public class Duke {
     }
 
     /**
-     * Check whether it is a valid command, if valid, return that command enum number
+     * Checks whether it is a valid command.
+     * If valid, return that command enum number, else return null.
      */
     public static Command isValidCommand(String command) {
         for (Command c : Command.values()) {
@@ -103,49 +107,52 @@ public class Duke {
         }
         return null;
     }
-    
+
     /**
-     * Add task into the list and print
+     * Adds task into the list and prints.
      */
     public static void addTask(String command, String[] commandWords) throws DukeException {
         switch (commandWords[0]) {
-            case "todo":
-                if (command.length() <= 5) {
-                    throw new DukeException("Hmmmm what to do? Think again?");
-                }
-                ToDo newTD = new ToDo(command.substring(command.indexOf("todo") + 5));
-                taskList.add(newTD);
-                printAddedTask(newTD);
-                break;
-            case "deadline":
-                // Extract description and deadline and pass to constructor
-                if (commandWords.length <= 2 || command.indexOf("/by") == -1
-                        || commandWords[1].equals("/by") || command.indexOf("/by") + 3 == command.length()) {
-                    throw new DukeException("Deadline or task description missing.");
-                }
-                Deadline newD = new Deadline(command.substring(command.indexOf("deadline") + 9, command.indexOf("/by") - 1)
-                        , command.substring(command.indexOf("/by") + 4));
-                taskList.add(newD);
-                printAddedTask(newD);
-                break;
-            case "event":
-                if (commandWords.length <= 2 || command.indexOf("/at") == -1
-                        || commandWords[1].equals("/at") || command.indexOf("/at") + 3 == command.length()) {
-                    throw new DukeException("Event time or event description missing.");
-                }
-                Event newE = new Event(command.substring(command.indexOf("event") + 6, command.indexOf("/at") - 1)
-                        , command.substring(command.indexOf("/at") + 4));
-                taskList.add(newE);
-                printAddedTask(newE);
-                break;
+        case "todo":
+            if (command.length() <= 5) {
+                throw new DukeException("Hmmmm what to do? Think again?");
+            }
+            ToDo newTD = new ToDo(command.substring(command.indexOf("todo") + 5));
+            taskList.add(newTD);
+            printAddedTask(newTD);
+            break;
+        case "deadline":
+            // Extract description and deadline and pass to constructor
+            if (commandWords.length <= 2 || command.indexOf("/by") == -1
+                    || commandWords[1].equals("/by") || command.indexOf("/by") + 3 == command.length()) {
+                throw new DukeException("Deadline or task description missing.");
+            }
+            Deadline newD = new Deadline(command.substring(command.indexOf("deadline") + 9,
+                    command.indexOf("/by") - 1), command.substring(command.indexOf("/by") + 4));
+            taskList.add(newD);
+            printAddedTask(newD);
+            break;
+        case "event":
+            if (commandWords.length <= 2 || command.indexOf("/at") == -1
+                    || commandWords[1].equals("/at") || command.indexOf("/at") + 3 == command.length()) {
+                throw new DukeException("Event time or event description missing.");
+            }
+            Event newE = new Event(command.substring(command.indexOf("event") + 6,
+                    command.indexOf("/at") - 1), command.substring(command.indexOf("/at") + 4));
+            taskList.add(newE);
+            printAddedTask(newE);
+            break;
+        default:
+            break;
         }
     }
 
     /**
-     * Mark the task as done
+     * Marks the task as done.
      */
     public static void mark(String[] commandWords) throws DukeException {
-        if (commandWords.length != 2 || isInt(commandWords[1]) == -1 || isInt(commandWords[1]) > taskList.size()) {
+        if (commandWords.length != 2 || isInt(commandWords[1]) == -1
+                || isInt(commandWords[1]) > taskList.size()) {
             throw new DukeException("Invalid arguments for marking. Please check again!");
         }
         Task toMark = taskList.get(Integer.parseInt(commandWords[1]) - 1);
@@ -154,10 +161,11 @@ public class Duke {
     }
 
     /**
-     * Mark the task as undone
+     * Marks the task as undone.
      */
     public static void unmark(String[] commandWords) throws DukeException {
-        if (commandWords.length != 2 || isInt(commandWords[1]) == -1 || isInt(commandWords[1]) > taskList.size()) {
+        if (commandWords.length != 2 || isInt(commandWords[1]) == -1
+                || isInt(commandWords[1]) > taskList.size()) {
             throw new DukeException("Invalid arguments for unmarking. Please check again!");
         }
         Task toUnmark = taskList.get(Integer.parseInt(commandWords[1]) - 1);
@@ -166,10 +174,11 @@ public class Duke {
     }
 
     /**
-     * Delete task from the list
+     * Deletes task from the list.
      */
     public static void delete(String[] commandWords) throws DukeException {
-        if (commandWords.length != 2 || isInt(commandWords[1]) == -1 || isInt(commandWords[1]) > taskList.size()) {
+        if (commandWords.length != 2 || isInt(commandWords[1]) == -1
+                || isInt(commandWords[1]) > taskList.size()) {
             throw new DukeException("Invalid arguments for deletion. Please check again!");
         }
         Task toDelete = taskList.get(Integer.parseInt(commandWords[1]) - 1);
@@ -180,7 +189,8 @@ public class Duke {
     }
 
     /**
-     * Checking whether the input string is integer, if yes, return it, else return -1
+     * Checks whether the input string is integer.
+     * If yes, return it, else return -1.
      */
     public static int isInt(String str) {
         try {
@@ -194,7 +204,7 @@ public class Duke {
 
 
     /**
-     * Format and print general response
+     * Formats and prints general response.
      */
     public static void printMsg(String msg) {
         System.out.println("-------------------------------------------------\n"
@@ -203,7 +213,7 @@ public class Duke {
     }
 
     /**
-     * Format response to request to add task
+     * Formats response to request to add task.
      */
     public static void printAddedTask(Task task) {
         System.out.println("-------------------------------------------------\n"
@@ -214,7 +224,7 @@ public class Duke {
     }
 
     /**
-     * Print all items in the list
+     * Prints all items in the list.
      */
     public static void printList() {
         int i = 1;
