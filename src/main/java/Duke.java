@@ -3,13 +3,16 @@ import java.util.Scanner;
 import java.util.List;
 
 public class Duke {
+    /**
+     * Enum of different types of tasks.
+     */
     private enum TaskType {
         TODO,
         EVENT,
         DEADLINE
     }
 
-    private List<Task> lst = new ArrayList<Task>();
+    private List<Task> lst = new ArrayList<Task>(); // a list to collect tasks
 
     /**
      * Print the msg between line breaks.
@@ -48,9 +51,11 @@ public class Duke {
     }
 
     /**
-     * Add a task to the todo list.
+     * Add a task to the list.
+     * A task can be one of 'todo', 'event' or 'deadline', whilst 'event'
+     * and 'deadline' have a time specified after the keyword '/at' or '/by'.
      *
-     * @param input The description of the task to be added.
+     * @param input The user input of adding a task. 
      */
     private void addTask(TaskType type, String input) {
         String description;
