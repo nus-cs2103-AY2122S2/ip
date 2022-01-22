@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -62,7 +64,9 @@ public class InputParser {
                 if (ss.substring(9, ss.length()).split("/by")[0].trim().equals(""))
                     throw new DukeException("Task Name must be provided!");
 
-                DeadlineTask newTask = new DeadlineTask(ss.substring(9, ss.length()).split("/by")[0], ss.split("/by")[1]);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-M-yyyy hh:mm");
+                //System.out.println(ss.split("/by")[1].substring(1, ss.split("/by")[1].length()));
+                DeadlineTask newTask = new DeadlineTask(ss.substring(9, ss.length()).split("/by")[0], LocalDate.parse(ss.split("/by")[1].substring(1, ss.split("/by")[1].length()),formatter));
                 arr.add(newTask);
                 p.print("Added Task: ", " " + newTask.toString(), String.format("There are now %d task(s) in the list.", arr.size()));
             } else if (action.equals("event")) {
@@ -76,7 +80,9 @@ public class InputParser {
                 if (ss.substring(6, ss.length()).split("/at")[0].trim().equals(""))
                     throw new DukeException("Task Name must be provided!");
 
-                EventTask newTask = new EventTask(ss.substring(6, ss.length()).split("/at")[0], ss.split("/at")[1]);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-M-yyyy hh:mm");
+                //System.out.println(ss.split("/by")[1].substring(1, ss.split("/by")[1].length()));
+                EventTask newTask = new EventTask(ss.substring(9, ss.length()).split("/by")[0], LocalDate.parse(ss.split("/by")[1].substring(1, ss.split("/by")[1].length()),formatter));
                 arr.add(newTask);
                 p.print("Added Task: ", " " + newTask.toString(), String.format("There are now %d task(s) in the list.", arr.size()));
             } else if (action.equals("delete")) {

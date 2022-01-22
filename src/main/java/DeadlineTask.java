@@ -4,10 +4,10 @@ import java.time.format.DateTimeFormatter;
 public class DeadlineTask extends Task{
     private LocalDate d;
 
-    DeadlineTask(String ss, String date) {
+    DeadlineTask(String ss, LocalDate date) {
         this.taskName = ss;
         this.isDone = false;
-        this.d = LocalDate.parse(date);
+        this.d = date;
     }
 
     @Override

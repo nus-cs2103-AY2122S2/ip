@@ -4,10 +4,10 @@ import java.time.format.DateTimeFormatter;
 public class EventTask extends Task{
     private LocalDate d;
 
-    EventTask(String ss, String date) {
+    EventTask(String ss, LocalDate date) {
         this.taskName = ss;
         this.isDone = false;
-        this.d = LocalDate.parse(date);
+        this.d = date;
     }
 
     @Override
