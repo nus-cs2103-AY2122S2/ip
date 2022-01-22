@@ -17,4 +17,10 @@ public class Deadline extends Task {
         return String.format("[D]%s %s (by: %s)",
                 super.getDoneStatusCheckbox(), super.getName(), this.deadline);
     }
+
+    @Override
+    public String getSeralisedTaskData() {
+        String doneString = this.isDone() ? "Y" : "N";
+        return String.format("D,%s,%s,%s", super.getName(), doneString, this.deadline);
+    }
 }

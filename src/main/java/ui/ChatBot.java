@@ -3,7 +3,10 @@ package ui;
 import task.Task;
 import ui.command.Command;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * @author Jiaaa-yang
@@ -16,6 +19,11 @@ public class ChatBot {
                                                 + "What can I do for you?";
 
     /**
+     * File instance storing tasks data for ChatBot instance
+     */
+    private final File dataFile;
+
+    /**
      * ArrayList to keep track of text entered by user
      */
     private final ArrayList<Task> tasks;
@@ -25,9 +33,10 @@ public class ChatBot {
      */
     private boolean hasTerminated;
 
-    public ChatBot() {
-        this.hasTerminated = false;
+    public ChatBot(File dataFile) {
+        this.dataFile = dataFile;
         this.tasks = new ArrayList<>();
+        this.hasTerminated = false;
     }
 
     /**
@@ -36,6 +45,7 @@ public class ChatBot {
      */
     public void initialise() {
         System.out.println(WELCOME_STRING);
+        this.loadTasksList();
     }
 
     /**
@@ -45,7 +55,7 @@ public class ChatBot {
      */
     public void runCommand(String input) {
         try {
-            Command command = Command.parseCommand(input, this.tasks);
+            Command command = Command.parseCommand(input, this.tasks, this.dataFile);
             this.hasTerminated = command.execute();
         } catch (IllegalArgumentException e) {
             ArrayList<String> response = new ArrayList<>();
@@ -57,5 +67,19 @@ public class ChatBot {
 
     public boolean hasTerminated() {
         return this.hasTerminated;
+    }
+
+    private void loadTasksList() {
+        try {
+            Scanner scanner = new Scanner(this.dataFile);
+            while (scanner.hasNextLine()) {
+                String taskData = scanner.nextLine();
+                Task savedTask = Task.decodeTaskData(taskData);
+                this.tasks.add(savedTask);
+            }
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+
     }
 }

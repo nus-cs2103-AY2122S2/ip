@@ -17,4 +17,10 @@ public class Event extends Task {
         return String.format("[E]%s %s (at: %s)",
                 super.getDoneStatusCheckbox(), super.getName(), this.time);
     }
+
+    @Override
+    public String getSeralisedTaskData() {
+        String doneString = this.isDone() ? "Y" : "N";
+        return String.format("E,%s,%s,%s", super.getName(), doneString, this.time);
+    }
 }

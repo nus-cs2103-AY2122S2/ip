@@ -5,6 +5,7 @@ import task.Event;
 import task.Task;
 import task.ToDo;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -13,26 +14,23 @@ import java.util.ArrayList;
  * Command which adds a given task
  * to a given list.
  */
-public class AddTaskCommand extends Command {
-    /**
-     * List of tasks to add a new task to
-     */
-    private final ArrayList<Task> list;
+public class AddTaskCommand extends TaskCommand {
 
-    public AddTaskCommand(String name, String args, ArrayList<Task> list) {
-        super(name, args);
-        this.list = list;
+    public AddTaskCommand(String name, String args, ArrayList<Task> list, File dataFile) {
+        super(name, args, list, dataFile);
     }
 
     @Override
     public boolean execute() throws IllegalArgumentException {
+        ArrayList<Task> taskList = this.getTaskList();
         Task newTask = createTask(super.getName(), super.getArgs());
-        this.list.add(newTask);
+        taskList.add(newTask);
+        this.saveTasksToFile();
 
         ArrayList<String> response = new ArrayList<>();
         response.add("The following new task has been added:");
         response.add(newTask.getDescription());
-        response.add(String.format("You now have %d tasks!", this.list.size()));
+        response.add(String.format("You now have %d tasks!", taskList.size()));
         Command.styledPrint(response);
         return false;
     }
