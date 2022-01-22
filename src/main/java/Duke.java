@@ -165,7 +165,7 @@ public class Duke {
         return finalOutput;
     }
 
-    public static void readTxtFile() {
+    public static void readTextFile() {
         try {
             readFileContents(DUKE_SAVE_TXT);
         } catch (FileNotFoundException e) {
@@ -236,7 +236,8 @@ public class Duke {
                 throw new FileNotFoundException("DukeSaveFile not found! Please create one!");
             }
 
-            readTxtFile();
+            // Load save file from C drive
+            readTextFile();
 
             line();
             System.out.println("Tell me... have you seen a RED imposter among us?");
