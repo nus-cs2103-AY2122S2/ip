@@ -10,8 +10,13 @@ public class Deadline extends Task{
             String[] strArr = description.split("/by ");
             String[] DateAndTime = strArr[1].split(" ");
             LocalDate date = LocalDate.parse(DateAndTime[0]);
-            this.description = strArr[0] + "||" + "By: " + date.format(DateTimeFormatter.ofPattern("MMM d YYYY")) +
-                    "(" + DAYS.between(LocalDate.now(), date) + " days from now)";
+            if (DateAndTime[1] != null) {
+                this.description = strArr[0] + "| " + "by: " + date.format(DateTimeFormatter.ofPattern("MMM d YYYY"))
+                        + " " + DateAndTime[1];
+            }
+            else{
+                this.description = strArr[0] + "| " + "by: " + date.format(DateTimeFormatter.ofPattern("MMM d YYYY"));
+            }
         }
         catch (ArrayIndexOutOfBoundsException e){
             throw new DukeException();
