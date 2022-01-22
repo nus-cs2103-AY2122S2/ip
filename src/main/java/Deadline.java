@@ -29,9 +29,11 @@ public class Deadline extends Task{
         return deadLine.format(form);
     }
 
-    @Override
+   @Override
     public String formatSave() {
-        return "D |" + (super.isDone ? "1| " : "0| ") + super.description + " /by " + deadLine;
+        DateTimeFormatter form = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        String date = this.deadLine.format(form);
+        return "D |" + (super.isDone ? "1| " : "0| ") + super.description + " /by " + date;
     }
 
     /*
