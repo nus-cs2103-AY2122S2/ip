@@ -1,6 +1,8 @@
+import Exceptions.UnknownFileEntry;
 import Tasks.Task;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -13,17 +15,12 @@ public class TaskManager {
 
     /**
      * Initialises the taskManager
+     * @throws IOException if file io error occurs.
+     * @throws UnknownFileEntry if unknown file entry found.
      */
-    public TaskManager() {
+    public TaskManager() throws IOException, UnknownFileEntry {
         storage = new Storage();
-        try {
-            tasks = storage.readTasks();
-        } catch (FileNotFoundException e) {
-            //duke.txt dosent exist, so create fresh arrayList.
-            tasks = new ArrayList<Task>();
-        }
-        this.storage = new Storage();
-
+        tasks = storage.readTasks();
     }
 
     /**
@@ -83,6 +80,14 @@ public class TaskManager {
             i++;
         }
         return str.toString();
+    }
+
+    /**
+     * Saves all the tasks in this task manager.
+     * @throws IOException if a error occurs interacting with the task file.
+     */
+    public void saveTasks() throws IOException{
+        storage.writeTasks(tasks);
     }
 
 }

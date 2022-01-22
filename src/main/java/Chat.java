@@ -2,15 +2,32 @@ import Tasks.Deadline;
 import Tasks.Event;
 import Tasks.Task;
 
+import java.io.IOException;
 import java.util.Scanner;
 import Exceptions.*;
+
+import javax.imageio.IIOException;
 
 /**
  * Main Chat interface class.
  */
 public class Chat {
-    TaskManager taskManager = new TaskManager();
-    Scanner scanner = new Scanner(System.in);
+    TaskManager taskManager;
+    Scanner scanner;
+
+    /**
+     * Creates instance of Duke Chat.
+     */
+    public Chat() {
+        try {
+            this.taskManager = new TaskManager();
+        } catch (IOException e) {
+            System.out.println("An error occured while reading task file.");
+        } catch (UnknownFileEntry e) {
+            System.out.println(e);
+        }
+        this.scanner = new Scanner(System.in);
+    }
 
     /**
      * Starts the chat between Duke and the User.
@@ -108,6 +125,13 @@ public class Chat {
                 catch (UnknownCommandException e) {
                     System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
+            }
+            //save all the tasks
+            try {
+                taskManager.saveTasks();
+
+            } catch (IOException e) {
+                System.out.println("An error occured with the tasks file while saving tasks.");
             }
             //get next command
             input = scanner.nextLine();

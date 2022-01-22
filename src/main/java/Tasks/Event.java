@@ -28,6 +28,15 @@ public class Event extends Task{
     }
 
     /**
+     * Returns the string representation of this event for storage.
+     * @return
+     */
+    @Override
+    public String toFileString() {
+        return "E : " + (isCompleted ? "1 : " : "0 : ") + name + " : " + eventTime;
+    }
+
+    /**
      * Overriden toString method for Event.
      * @return String representation of Event.
      */

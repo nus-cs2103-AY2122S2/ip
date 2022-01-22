@@ -16,7 +16,25 @@ public class Deadline extends Task{
         this.deadline = deadline;
     }
 
+    /**
+     * Constructor for Deadline with completion status.
+     * @param name
+     * @param deadline
+     * @param isCompleted
+     */
+    public Deadline(String name, String deadline, boolean isCompleted) {
+        super(name, isCompleted);
+        this.deadline = deadline;
+    }
 
+
+    /**
+     * Returns the file string representation of this deadline.
+     */
+    @Override
+    public String toFileString() {
+        return "D : " + (isCompleted ? "1 : " : "0 : ") + name + " : " + deadline;
+    }
     /**
      * Overriden toString method for deadline object.
      * @return String representation of deadline object

@@ -22,7 +22,8 @@ public class Task {
      * @param isCompleted
      */
     public Task(String name, boolean isCompleted) {
-
+        this.name = name;
+        this.isCompleted = isCompleted;
     }
 
     /**
@@ -37,6 +38,14 @@ public class Task {
      */
     public void removeCompletedStatus() {
         isCompleted = false;
+    }
+
+    /**
+     * Returns the file string representation of this task.
+     * @return
+     */
+    public String toFileString() {
+        return "T : " + (isCompleted ? "1 : " : "0 : ") + name;
     }
 
     /**
