@@ -35,6 +35,30 @@ public class InputParser {
                                 .collect(Collectors.toList()));
                         p.print(result);
 
+                    } else if(args[1].equals("/before")) {
+                        ArrayList<Task> result = (ArrayList<Task>) arr
+                                .stream()
+                                .filter(t -> t instanceof DeadlineTask)
+                                .filter(t -> ((DeadlineTask)t).getDueDate().isBefore(LocalDate.parse(args[2], DateTimeFormatter.ofPattern("dd/M/yyyy"))))
+                                .collect(Collectors.toList());
+                        result.addAll(arr
+                                .stream()
+                                .filter(t -> t instanceof EventTask)
+                                .filter(t -> ((EventTask)t).getDate().isBefore(LocalDate.parse(args[2], DateTimeFormatter.ofPattern("dd/M/yyyy"))))
+                                .collect(Collectors.toList()));
+                        p.print(result);
+                    } else if(args[1].equals("/after")) {
+                        ArrayList<Task> result = (ArrayList<Task>) arr
+                                .stream()
+                                .filter(t -> t instanceof DeadlineTask)
+                                .filter(t -> ((DeadlineTask)t).getDueDate().isAfter(LocalDate.parse(args[2], DateTimeFormatter.ofPattern("dd/M/yyyy"))))
+                                .collect(Collectors.toList());
+                        result.addAll(arr
+                                .stream()
+                                .filter(t -> t instanceof EventTask)
+                                .filter(t -> ((EventTask)t).getDate().isAfter(LocalDate.parse(args[2], DateTimeFormatter.ofPattern("dd/M/yyyy"))))
+                                .collect(Collectors.toList()));
+                        p.print(result);
                     }
                 } else {
                     p.print(arr);
@@ -77,7 +101,7 @@ public class InputParser {
         switch(action) {
             case "list":
                 if(args.length > 1) {
-                    if(args[1].equals("/on")) {
+                    if(args[1].equals("/on") || args[1].equals("/before") || args[1].equals("/after")) {
                         try {
                             LocalDate.parse(args[2],formatter);
                         } catch (DateTimeParseException e) {
