@@ -1,6 +1,6 @@
 public abstract class Command {
     protected Task task;
-    protected int num;
+    protected Integer num;
 
     public Command(Task task, Integer num) {
         this.task = task;

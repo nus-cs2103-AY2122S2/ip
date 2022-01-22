@@ -5,19 +5,19 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Storage {
-    private String filePath;
+    protected static String filePath;
+    protected static String currWorkingDirectory;
     private static final int IS_UNMARKED = 0;
     private static final int IS_MARKED = 1;
-    private static final String DUKE_SAVE_DIRECTORY = "C:\\DukeSaveDirectory";
-    private static final String DUKE_SAVE_TXT = "C:\\DukeSaveDirectory\\DukeSave.txt";
 
-    public Storage(String filePath) {
-        this.filePath = filePath;
+    public Storage(String filePath, String currWorkingDirectory) {
+        Storage.filePath = filePath;
+        Storage.currWorkingDirectory = currWorkingDirectory;
     }
 
     public static void updateTextFile() {
         try {
-            writeToFile(DUKE_SAVE_TXT);
+            writeToFile(filePath);
         } catch (IOException e) {
             System.out.println("Cannot write to txt file!");
         }
@@ -51,13 +51,23 @@ public class Storage {
         return finalOutput;
     }
 
-    public static void load() throws FileNotFoundException{
-        File directory = new File()
-        try {
-            readFileContents(DUKE_SAVE_TXT);
-        } catch (FileNotFoundException e) {
-            System.out.println("Cannot read txt file!");
+    public static void load() throws IOException {
+        // Create a new directory from current working directory
+        File directory = new File(currWorkingDirectory + "/data");
+
+        // Create a new txt in filepath
+        File txtFile = new File(currWorkingDirectory + filePath);
+
+        if (directory.mkdir()) {
+            System.out.println("Hmm kinda sussy you don't have the directory... lemme help you with that.");
         }
+
+        if (txtFile.createNewFile()) {
+            System.out.println("Hmm kinda sussy you don't have the txt file... lemme help you with that.");
+        }
+
+        readFileContents(txtFile.toString());
+
     }
 
     public static void readFileContents(String filePath) throws FileNotFoundException {

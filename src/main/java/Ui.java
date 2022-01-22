@@ -53,7 +53,7 @@ public class Ui {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         // Handle empty command
-        if (sc.nextLine().equals("")) {
+        if (input.equals("")) {
             throw new EmptyInputException();
         }
         return input;
