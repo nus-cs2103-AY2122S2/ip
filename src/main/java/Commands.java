@@ -1,6 +1,13 @@
 //Author: Tan Ting Yu
 //Student Number: A218235J
 
+
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+
 /*
  * Commands encapsulates the operations that will be performed based on the user's response
  */
@@ -39,6 +46,7 @@ public class Commands {
         System.out.println("____________________________________________________________\n");
     }
 
+
     /**
      * Function that works as a switch for user's input
      * 
@@ -73,7 +81,7 @@ public class Commands {
                      int index = Integer.parseInt(splitString[1]);
                      //If index is out of range, throw illegal argument exception
                      if (index <= 0 || index > tasklist.currentSize) {
-                         throw new DukeExceptions("  Index is out of task range\n");
+                         throw new DukeExceptions("BRAT ! Your index is out of range! Number has to in the range of the list\n");
                      }
                      //If no errors, continue
                        //Task that we are going to mark/unmark/delete
@@ -100,7 +108,7 @@ public class Commands {
                      System.out.println("What? Second input has to be an integer! Eg mark 1, unmark 2\n");
                      //Out of task range is thrown if the second input is out of range
                  } catch (DukeExceptions e) {
-                     System.out.println("BRAT ! Your index is out of range! Number has to in the range of the list\n");
+                     System.out.println(e.getMessage());
                  }
 
              }
@@ -110,13 +118,14 @@ public class Commands {
          else if (firstWord.equals("todo") || firstWord.equals("deadline") || firstWord.equals("event")) {
             //Pass to check whether task is to be created
             boolean created = false;
+            try {
+                //Handle the case of having no second input
 
-            //Handle the case of having no second input
-
-            if (splitString.length == 1 ) {
-                System.out.println("What?! Task description cannot be empty. Eg todo eat, deadline eat food /by 12pm, event concert /at 8pm\n");
-            } else {
+                if (splitString.length == 1 ) 
+                    throw new DukeExceptions("What?! Task description cannot be empty. Eg todo eat, deadline eat food /by 12pm, event concert /at 8pm\n");
+                
                 String taskName = command.substring(command.indexOf(" "));
+                String msg = "Quit fooling around kid!";
                 Task newTask = new Task("");
                 if (firstWord.equals("todo")) {
                     newTask = new TodoTask(taskName);
@@ -124,37 +133,43 @@ public class Commands {
                 } else {
                     //Handle the case of having no "/" to specify deadline or time of occurrences for deadline and event tasks
                     if (!taskName.contains("/")) {
-                        System.out.println("Quit fooling around kid!");
-                        System.out.println("Deadline and event tasks require /by and /at to specify the deadline or time of occurrence.\n");
-                        System.out.println("Eg Deadline eat food /by 12pm, event concert /at 8pm\n");
-                    } else {
-                        String temp = taskName.substring(taskName.indexOf("/"));
-                        String taskNameWithoutBack = taskName.substring(0, taskName.indexOf("/"));
-                        //String that states by ... or at....
-                        if (firstWord.equals("deadline")) {
-                            //Handle the case of deadline task having no /by
-                            if (!temp.contains("by")) {
-                                System.out.println("Quit fooling around kid!");
-                                System.out.println("Deadline tasks require /by specify the deadline.");
-                                System.out.println("Eg deadline eat food /by 12pm\n");
-                            } else {
-                                String timeOfOccurrence = temp.substring(temp.indexOf(" ") + 1);
-                                newTask = new DeadlineTask(taskNameWithoutBack, timeOfOccurrence);
-                                created = true;
-                            }
-                        } else {
-                            //Handle the case of event task having no /at
-                            if (!temp.contains("at")) {
-                                System.out.println("Quit fooling around kid!");
-                                System.out.println("Event tasks require /at specify the time of occurrence.");
-                                System.out.println("music concert /at 8pm\n");
-                            } else {
-                                String timeOfOccurrence = temp.substring(temp.indexOf(" ") + 1);
-                                newTask = new EventTask(taskNameWithoutBack, timeOfOccurrence);
-                                created = true;
-                            }
-                        }
+                        msg.concat("Deadline and event tasks require /by and /at to specify the deadline or time of occurrence.\n");
+                        msg.concat("Eg Deadline eat food /by 12pm, event concert /at 8pm\n");
+                        throw new DukeExceptions(msg);
                     }
+                   
+                    String temp = taskName.substring(taskName.indexOf("/"));
+                    String taskNameWithoutBack = taskName.substring(0, taskName.indexOf("/"));
+                    String oldDateTime = temp.substring(temp.indexOf(" ") + 1);
+                    
+                    DateTimeFormatter oldFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+                    LocalDateTime dateTime = LocalDateTime.parse(oldDateTime, oldFormat);
+
+
+                    //String that states by ... or at....
+                    if (firstWord.equals("deadline")) {
+                        //Handle the case of deadline task having no /by
+                        if (!temp.contains("by")) {
+                                msg.concat("Deadline tasks require /by specify the deadline.");
+                                msg.concat("Eg deadline eat food /by 12pm\n");
+                                throw new DukeExceptions(msg);
+                        } 
+                        
+                        newTask = new DeadlineTask(taskNameWithoutBack, dateTime);
+                        created = true;
+                        
+                    } else {
+                        //Handle the case of event task having no /at
+                        if (!temp.contains("at")) {
+                            msg.concat("Event tasks require /at specify the time of occurrence.");
+                            msg.concat("music concert /at 8pm\n");
+                            throw new DukeExceptions(msg);
+                        } 
+                        
+                        newTask = new EventTask(taskNameWithoutBack, dateTime);
+                        created = true;
+                    }
+                        
                 }
 
                 //Only tasks that pass the check can be created
@@ -165,7 +180,14 @@ public class Commands {
                     System.out.println("    " + newTask);
                     System.out.println("Now you have " + tasklist.currentSize + " tasks in the list.\n");
                 }
-
+                    
+            
+            } catch (DukeExceptions e) {
+                System.out.println(e.getMessage());
+            } catch (NumberFormatException e) {
+                System.out.println("ERROR! Expected Numbers for date and time!\n");
+            } catch (DateTimeParseException e) {
+                System.out.println("ERROR! Time or Date is in wrong format! 2/12/2019 1800\n");
             }
         }
 

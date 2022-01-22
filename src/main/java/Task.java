@@ -9,8 +9,8 @@
 
 
 public class Task {
-    private String taskName;
-    private Boolean completed;
+    protected String taskName;
+    protected Boolean completed;
 
     /**
      * Constructor for Task Objects
@@ -53,6 +53,14 @@ public class Task {
         String completedOrNah = this.completed? "X":"";
          return "[" + completedOrNah + "] " + taskName;
 
+    }
+
+    /**
+     * Save format in the hard disk
+     * For Overriding purposes only
+     */
+    protected String saveToFileFormat() {
+        return taskName;
     }
 
 
