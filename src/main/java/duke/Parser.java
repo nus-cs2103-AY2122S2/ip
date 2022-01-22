@@ -47,21 +47,21 @@ public class Parser {
             lineArguments = Arrays.copyOf(lineArguments, lineArguments.length-1);
             line = String.join(" ", lineArguments);
             switch (taskType) {
-                case "ToDo":
-                    taskName = line.substring("ToDo".length() + 1).trim();
-                    return new ToDo(taskName, completed);
-                case "Deadline":
-                    String[] deadlineDetails = line.split("/by", 2);
-                    String deadlineTime = deadlineDetails[1].trim();
-                    taskName = deadlineDetails[0].substring("deadline".length() + 1).trim();
-                    return new Deadline(taskName, deadlineTime, completed);
-                case "Event":
-                    String[] eventDetails = line.split("/at", 2);
-                    String eventTime = eventDetails[1].trim();
-                    taskName = eventDetails[0].substring("event".length() + 1).trim();
-                    return new Event(taskName, eventTime, completed);
-                default:
-                    throw new DukeInvalidFileException();
+            case "ToDo":
+                taskName = line.substring("ToDo".length() + 1).trim();
+                return new ToDo(taskName, completed);
+            case "Deadline":
+                String[] deadlineDetails = line.split("/by", 2);
+                String deadlineTime = deadlineDetails[1].trim();
+                taskName = deadlineDetails[0].substring("deadline".length() + 1).trim();
+                return new Deadline(taskName, deadlineTime, completed);
+            case "Event":
+                String[] eventDetails = line.split("/at", 2);
+                String eventTime = eventDetails[1].trim();
+                taskName = eventDetails[0].substring("event".length() + 1).trim();
+                return new Event(taskName, eventTime, completed);
+            default:
+                throw new DukeInvalidFileException();
             }
         } catch (IndexOutOfBoundsException e) {
             throw new DukeInvalidFileException();
@@ -197,22 +197,22 @@ public class Parser {
             }
             String operation = commandArguments[0];
             switch (operation) {
-                case "list":
-                    return taskManager.list();
-                case "mark":
-                    return parseMarkCommand(commandArguments, taskManager);
-                case "unmark":
-                    return parseUnmarkCommand(commandArguments, taskManager);
-                case "delete":
-                    return parseDeleteCommand(commandArguments, taskManager);
-                case "event":
-                    return parseEventCommand(commandArguments, taskManager);
-                case "todo":
-                    return parseTodoCommand(commandArguments, taskManager);
-                case "deadline":
-                    return parseDeadlineCommand(commandArguments, taskManager);
-                default:
-                    throw new DukeInvalidCommandException();
+            case "list":
+                return taskManager.list();
+            case "mark":
+                return parseMarkCommand(commandArguments, taskManager);
+            case "unmark":
+                return parseUnmarkCommand(commandArguments, taskManager);
+            case "delete":
+                return parseDeleteCommand(commandArguments, taskManager);
+            case "event":
+                return parseEventCommand(commandArguments, taskManager);
+            case "todo":
+                return parseTodoCommand(commandArguments, taskManager);
+            case "deadline":
+                return parseDeadlineCommand(commandArguments, taskManager);
+            default:
+                throw new DukeInvalidCommandException();
             }
         } catch (DukeException e) {
             return e.toString();

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ParserFileTest {
+public class ParserTest {
     @Test
     public void parseFileToDo() {
         try {
@@ -40,6 +40,16 @@ public class ParserFileTest {
         } catch (DukeException e) {
             assertEquals("Backup file cannot be read.", e.toString());
         }
+    }
+
+    @Test
+    public void parseSavedTasks() {
+        assertEquals((Parser.parseSavedEventTask(new Event("sleep", "9pm"))),
+                "Event sleep /at 9pm");
+        assertEquals((Parser.parseSavedDeadlineTask(new Deadline("sleep", "9pm"))),
+                "Deadline sleep /by 9pm");
+        assertEquals((Parser.parseSavedToDoTask(new ToDo("sleep"))),
+                "ToDo sleep");
     }
 
 }

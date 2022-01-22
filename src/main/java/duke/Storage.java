@@ -52,15 +52,15 @@ public class Storage {
             String type = task.getType();
             String savedTask = "";
             switch (type) {
-                case "ToDo":
-                    savedTasks += Parser.parseSavedToDoTask((ToDo)task);
-                    break;
-                case "Deadline":
-                    savedTasks += Parser.parseSavedDeadlineTask((Deadline)task);
-                    break;
-                case "Event":
-                    savedTasks += Parser.parseSavedEventTask((Event)task);
-                    break;
+            case "ToDo":
+                savedTasks += Parser.parseSavedToDoTask((ToDo)task);
+                break;
+            case "Deadline":
+                savedTasks += Parser.parseSavedDeadlineTask((Deadline)task);
+                break;
+            case "Event":
+                savedTasks += Parser.parseSavedEventTask((Event)task);
+                break;
             }
             savedTasks += " " + completed;
             savedTasks += "\n";
