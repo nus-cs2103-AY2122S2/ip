@@ -1,10 +1,18 @@
 package tasks;
+<<<<<<< HEAD:src/main/java/tasks/Deadline.java
+=======
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+>>>>>>> branch-Level-8:src/main/java/Tasks/Deadline.java
 
 /**
  * Deadline type of Task, with a date and time that the task must be completed.
  */
 public class Deadline extends Task{
     private String deadline;
+    LocalDate date;
 
     /**
      * Constructor for Deadline.
@@ -14,6 +22,12 @@ public class Deadline extends Task{
     public Deadline(String name, String deadline) {
         super(name);
         this.deadline = deadline;
+        //try parsing the eventTime as a date to set date
+        try {
+            this.date = LocalDate.parse(deadline);
+        } catch (DateTimeParseException e) {
+            //dont set date if not in right format
+        }
     }
 
     /**
@@ -48,7 +62,8 @@ public class Deadline extends Task{
             str += "[ ] ";
         }
         str += name + " ";
-        str += "(by: " + deadline + ")";
+        //prints out special date format if it was entered as a recognised date format initially.
+        str += "(by: " + (date != null ? date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) : deadline) + ")";
         return str;
     }
 

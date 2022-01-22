@@ -1,8 +1,9 @@
+import exceptions.RequiredInformationMissingException;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
-import exceptions.RequiredInformationMissingException;
 import exceptions.UnknownCommandException;
+
 
 import java.io.IOException;
 import java.util.Scanner;
