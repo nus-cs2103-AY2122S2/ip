@@ -10,7 +10,7 @@ import duke.task.Task;
  * Represents delete command
  */
 public class DeleteCommand extends Command{
-    protected int number;
+    private int number;
 
     public DeleteCommand(int number) {
         this.number = number - 1;

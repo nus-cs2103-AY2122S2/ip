@@ -28,6 +28,5 @@ public class Command {
      * @throws DukeException if I0Exception occurs
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-
     }
 }

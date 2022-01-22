@@ -9,7 +9,7 @@ import duke.exception.DukeException;
  * Represents unmark command
  */
 public class UnmarkCommand extends Command {
-    protected int number;
+    private int number;
 
     public UnmarkCommand(int number) {
         this.number = number - 1;

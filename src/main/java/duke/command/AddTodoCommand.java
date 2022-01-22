@@ -11,7 +11,7 @@ import duke.task.Todo;
  * Represents add todo task command
  */
 public class AddTodoCommand extends Command {
-    protected String description;
+    private String description;
 
     public AddTodoCommand(String description) {
         this.description = description;
