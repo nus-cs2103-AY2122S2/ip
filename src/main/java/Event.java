@@ -8,6 +8,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.getGenericTaskName(), at);
+        return String.format("[E]%s /at %s", super.getGenericTaskName(), at);
     }
 }

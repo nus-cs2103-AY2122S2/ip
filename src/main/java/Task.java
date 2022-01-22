@@ -25,6 +25,8 @@ public class Task {
         this.done = false;
     }
 
+    public String getName() {return this.taskName;}
+
     public String getGenericTaskName() {
         return String.format("[%s] %s", this.done ? "X" : " ", this.taskName);
     }
