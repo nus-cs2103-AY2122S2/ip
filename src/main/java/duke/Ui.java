@@ -1,7 +1,9 @@
 package duke;
 import java.util.Scanner;
+
 //Deals with interactions with users
 public class Ui {
+
     /**
      * Prints out the statement "LOADING ERROR".
      */

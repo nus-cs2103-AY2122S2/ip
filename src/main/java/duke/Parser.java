@@ -1,5 +1,12 @@
 package duke;
-import duke.command.*;
+
+import duke.command.Command;
+import duke.command.AddCommand;
+import duke.command.UnmarkCommand;
+import duke.command.MarkCommand;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
 
 //deals with making sense of the user duke.command
 public class Parser {
@@ -29,16 +36,20 @@ public class Parser {
             if (firstWord.equals("delete")) {
                 return new DeleteCommand(number);
             }
+
             if (firstWord.equals("mark")) {
                 return new MarkCommand(number);
             }
+
             if (firstWord.equals("unmark")) {
                 return new UnmarkCommand(number);
             }
         }
+
         if (!firstWord.equals("deadline") && !firstWord.equals("todo") && !firstWord.equals("event")) {
             throw new DukeException("Unknown Command");
         }
+
         String details = twoWords[1];
         return new AddCommand(firstWord, details);
     }

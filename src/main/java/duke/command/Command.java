@@ -1,8 +1,11 @@
 package duke.command;
+
 import duke.TaskList;
 import duke.Ui;
 import duke.Storage;
+
 public abstract class Command {
+
     /**
      * Executes a certain function depending on the nature of the subclass.
      * @param taskList a list of the current tasks

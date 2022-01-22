@@ -1,8 +1,11 @@
 package duke.command;
+
 import duke.TaskList;
 import duke.Ui;
 import duke.Storage;
+
 public class ListCommand extends Command {
+
     /**
      * Executes a method from taskList which prints
      * out the contents from the taskList with numeric

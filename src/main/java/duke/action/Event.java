@@ -3,7 +3,9 @@ package duke.action;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
 public class Event extends Action {
+
     private LocalDate date;
 
     public Event(String task, String at) {
