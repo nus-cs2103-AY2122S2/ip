@@ -10,30 +10,50 @@ import duke.commands.UnmarkCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.WrongCommand;
 
-
+/**
+ * Parser class.
+ * This class handles the parsing of all user inputs and decides what to do
+ * based on the user input.
+ */
 public class Parser {
-    // logic that determines how Burp will reply
+
+    /**
+     * This method determines what Burp should do when the user gives an input
+     *
+     * @param type     the Reply type, determined by Ui
+     * @param toDoList the user's List of Tasks
+     * @param cmd      the user's input to Burp
+     * @return Returns a Command to indicate what the last Command run was
+     * @throws DukeException when a WrongCommand is given
+     */
     public static Command parseCommands(Ui.Reply type, TaskList toDoList, String cmd) throws DukeException {
         String[] cmd_split = cmd.split(" ");
         switch (type) {
-        case LIST:
-            return new ListCommand(toDoList, cmd);
-        case TODO:
-            return new AddToDoCommand(toDoList, cmd, Duke.storage);
-        case DEADLINE:
-            return new AddDeadlineCommand(toDoList, cmd, Duke.storage);
-        case EVENT:
-            return new AddEventCommand(toDoList, cmd, Duke.storage);
-        case MARK:
-            return new MarkCommand(toDoList, Integer.parseInt(cmd_split[1]) - 1);
-        case UNMARK:
-            return new UnmarkCommand(toDoList, Integer.parseInt(cmd_split[1])-1);
-        case DELETE:
-            return new DeleteCommand(toDoList, Integer.parseInt(cmd_split[1])-1);
-        default:
-            return new WrongCommand();
+            case LIST:
+                return new ListCommand(toDoList, cmd);
+            case TODO:
+                return new AddToDoCommand(toDoList, cmd, Duke.storage);
+            case DEADLINE:
+                return new AddDeadlineCommand(toDoList, cmd, Duke.storage);
+            case EVENT:
+                return new AddEventCommand(toDoList, cmd, Duke.storage);
+            case MARK:
+                return new MarkCommand(toDoList, Integer.parseInt(cmd_split[1]) - 1);
+            case UNMARK:
+                return new UnmarkCommand(toDoList, Integer.parseInt(cmd_split[1]) - 1);
+            case DELETE:
+                return new DeleteCommand(toDoList, Integer.parseInt(cmd_split[1]) - 1);
+            default:
+                return new WrongCommand();
         }
     }
+
+    /**
+     * Method to format strings accordingly.
+     *
+     * @param msg the String to be formatted
+     * @return a nicely formatted String.
+     */
     public static String formatMsg(String msg) {
         String tabbedLine = "\t----------------------------------------------";
         return (tabbedLine + "\n\t" + msg + "\n" + tabbedLine);

@@ -1,17 +1,31 @@
 package duke.tasks;
 
-// duke.Tasks.ToDo is a duke.Tasks.Task
+/**
+ * ToDo is a Task.
+ * This is a simple Task that only has a description.
+ */
 public class ToDo extends Task {
-    public ToDo(String task, boolean markStatus) {
-        super(task, markStatus);
+    public ToDo(String task, boolean isDone) {
+        super(task, isDone);
     }
 
-    @Override
+
+    /**
+     * Get the Command (in String form) to add this ToDo to the TaskList.
+     * Useful for saving/reading from the save file.
+     *
+     * @return a String formatted specially for a ToDo Task.
+     */
     public String getStringCmd() {
         // mark status | type | descriptor
-        return super.getMarkStatus() + "&T&" + super.getTask();
+        return super.getIsDone() + "&T&" + super.getTask();
     }
 
+    /**
+     * Gets the String version of a ToDo
+     *
+     * @return String-formatted ToDo
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();

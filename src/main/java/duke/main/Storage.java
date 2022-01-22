@@ -11,14 +11,33 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Storage class.
+ * This class handles the storing of the user's TaskList.
+ */
 public class Storage {
     private static String filepath;
 
+    /**
+     * Constructor for Storage.
+     * This tells Burp where to retrieve and save the user's TaskList to.
+     *
+     * @param filepath the path to read from, or write to
+     */
     public Storage(String filepath) {
         this.filepath = filepath;
     }
 
     // Reads and adds the file's content into the array
+
+    /**
+     * Method to add the file's content to a new TaskList.
+     * Tries to read from the given filepath. If the file exists, then this method
+     * will retrieve its contents. Otherwise, a blank TaskList is returned
+     *
+     * @return the saved TaskList based on the filepath, or an empty TaskList if pathfile does not exist
+     * @throws FileNotFoundException when the file cannot be found from the given path
+     */
     public static TaskList addFileContent() throws FileNotFoundException {
         File f = new File(Storage.filepath);
         TaskList toDoList = new TaskList();
@@ -31,28 +50,36 @@ public class Storage {
             boolean mark = cmd_split[0].equals("[X]") ? true : false;
 
             switch (cmd_split[1]) {
-            case "T":
-                // ToDo(String task, boolean markStatus)
-                toDoList.add(new ToDo(cmd_split[2], mark));
-                break;
-            case "E":
-                // Event(String task, boolean markStatus, String dateTime)
-                toDoList.add(new Event(cmd_split[2], mark, cmd_split[3]));
-                break;
-            case "D":
-                // Deadline(String task, boolean markStatus, String deadline)
-                toDoList.add(new Deadline(cmd_split[2], mark, cmd_split[3]));
-                break;
-            default:
-                // do nothing
-                System.out.println("aaaa");
-                break;
+                case "T":
+                    // ToDo(String task, boolean isDone)
+                    toDoList.add(new ToDo(cmd_split[2], mark));
+                    break;
+                case "E":
+                    // Event(String task, boolean isDone, String dateTime)
+                    toDoList.add(new Event(cmd_split[2], mark, cmd_split[3]));
+                    break;
+                case "D":
+                    // Deadline(String task, boolean isDone, String deadline)
+                    toDoList.add(new Deadline(cmd_split[2], mark, cmd_split[3]));
+                    break;
+                default:
+                    // do nothing
+                    System.out.println("aaaa");
+                    break;
             }
         }
         return toDoList;
     }
 
     // Writes the contents of toDoList into storage with specific formatting
+
+    /**
+     * This method writes to the given filepath.
+     * Executed whenever a new Task is added to the TaskList.
+     *
+     * @param toDoList the user's List of Tasks
+     * @throws IOException when IO error occurs
+     */
     public static void writeFileContent(TaskList toDoList) throws IOException {
         FileWriter fw = new FileWriter(Storage.filepath);
         for (int i = 0; i < toDoList.size(); i++) {

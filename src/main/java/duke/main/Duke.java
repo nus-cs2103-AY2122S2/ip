@@ -6,13 +6,22 @@ import java.io.InputStreamReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-
+/**
+ * The main class for running Duke.
+ * This class contains all the abstracted details for Duke.
+ */
 public class Duke {
     private TaskList toDoList;
     public static Storage storage;
     private Ui ui;
     private final String filepath;
 
+    /**
+     * Constructor for Duke.
+     * Tries to retrieve the list of Tasks from the given path.
+     *
+     * @param filepath to read/retrieve the list of Tasks from
+     */
     public Duke(String filepath) {
         this.filepath = filepath;
         storage = new Storage(this.filepath);
@@ -28,6 +37,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Driver for Duke.
+     * Runs Duke and awaits for Commands from the user.
+     *
+     * @throws DukeException when a WrongCommand is given
+     * @throws IOException   when an IO error occurs while reading user input
+     */
     public void run() throws DukeException, IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String cmd;
@@ -39,6 +55,13 @@ public class Duke {
         Ui.showBye();
     }
 
+    /**
+     * Main method. Used for CLI programs
+     *
+     * @param args unused
+     * @throws DukeException when a WrongCommand is given
+     * @throws IOException   when an IO error occurs
+     */
     public static void main(String[] args) throws DukeException, IOException {
         new Duke("./tasklist.txt").run();
     }
