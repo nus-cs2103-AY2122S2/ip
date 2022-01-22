@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -126,32 +127,36 @@ public class TaskList {
             System.out.println("\t" + emptyEx.getMessage());
         } catch (DateFormatException dateEx) {
             System.out.println("\t" + dateEx.getMessage());
+        } catch (DateTimeParseException dateTimeEx) {
+            System.out.println("\tDear Master, please enter the date using \"YYYY-MM-DD\" format");
         }
     }
 
     public void addTask(String inst, String task) {
         try {
             switch (inst) {
-            case "todo":
-                addTask(new ToDoTask(task));
-                break;
-            case "deadline":
-                addTask(new DeadlineTask(task));
-                break;
-            case "event":
-                addTask(new EventTask(task));
-                break;
+                case "todo":
+                    addTask(new ToDoTask(task));
+                    break;
+                case "deadline":
+                    addTask(new DeadlineTask(task));
+                    break;
+                case "event":
+                    addTask(new EventTask(task));
+                    break;
             }
 
             save();
 
             System.out.println(String.format("\tUnderstood, I have added this task to the list:\n"
-                + "\t    %s\n"
-                + "\tYou have %d task(s) currently", task, size));
+                    + "\t    %s\n"
+                    + "\tYou have %d task(s) currently", task, size));
         } catch (EmptyMessageException emptyEx) {
             System.out.println("\t" + emptyEx.getMessage());
         } catch (DateFormatException dateEx) {
             System.out.println("\t" + dateEx.getMessage());
+        } catch (DateTimeParseException dateTimeEx) {
+            System.out.println("\tDear Master, please enter the date using \"YYYY-MM-DD\" format");
         }
     }
 
@@ -177,7 +182,7 @@ public class TaskList {
             System.out.println(String.format("\tYes Master, I have removed this task:\n"
                     + "\t    %s\n"
                     + "\tYou have %d task(s) currently", delTask, size));
-            
+
             save();
         } catch (NumberFormatException numEx) {
             System.out.println("\tSorry Master, you have to enter an integer after the \"delete\" command");
