@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -24,6 +26,18 @@ public class TaskList {
     }
 
     /**
+     * Retrieves the array list of task.
+     *
+     * @return The list of tasks.
+     */
+    public ArrayList<Task> getListOfTasks() {
+        return this.listOfTasks;
+    }
+
+    public void incrementTasks(){
+        this.numberOfTasks++;
+    }
+    /**
      * Iterates through the list and prints out each task that is on the list.
      */
     public void display() {
@@ -45,6 +59,7 @@ public class TaskList {
     public void mark(int taskId) {
         Task currTask = this.listOfTasks.get(taskId - 1);
         currTask.setStatus(true);
+        writeToFile();
         System.out.println("    ____________________________________________________________\n"
                 + "     Nice! I've marked this task as done:\n"
                 + "       " + currTask + "\n"
@@ -59,6 +74,7 @@ public class TaskList {
     public void unmark(int taskId) {
         Task currTask = this.listOfTasks.get(taskId - 1);
         currTask.setStatus(false);
+        writeToFile();
         System.out.println("    ____________________________________________________________\n"
                 + "     OK, I've marked this task as not done yet:\n"
                 + "       " + currTask + "\n"
@@ -75,6 +91,7 @@ public class TaskList {
 
         Task currentTask = new Todo(userInput);
         this.listOfTasks.add(currentTask);
+        writeToFile();
 
         String output = "    ____________________________________________________________\n"
                 + "     Got it. I've added this task:\n"
@@ -94,6 +111,7 @@ public class TaskList {
 
         Task currentTask = new Deadline(userInput, by);
         this.listOfTasks.add(currentTask);
+        writeToFile();
 
         String output = "    ____________________________________________________________\n"
                 + "     Got it. I've added this task:\n"
@@ -113,6 +131,7 @@ public class TaskList {
 
         Task currentTask = new Event(userInput, at);
         this.listOfTasks.add(currentTask);
+        writeToFile();
 
         String output = "    ____________________________________________________________\n"
                 + "     Got it. I've added this task:\n"
@@ -131,9 +150,42 @@ public class TaskList {
         Task currTask = this.listOfTasks.get(taskId - 1);
         this.listOfTasks.remove(taskId - 1);
         this.numberOfTasks--;
+        writeToFile();
+
         System.out.println("    ____________________________________________________________\n"
                 + "     Noted. I've removed this task:\n"
                 + "       " + currTask + "\n"
                 + "    ____________________________________________________________\n");
+    }
+
+    /**
+     * Converts the TaskList into a single string file, to be stored in data.txt on the hard disk.
+     *
+     * @return All tasks in the form of a String.
+     */
+    private String parseList() {
+        StringBuilder res = new StringBuilder();
+        for (Task listOfTask : listOfTasks) {
+            String currTask = listOfTask.toString();
+            res.append(currTask).append("\n");
+        }
+        return res.toString();
+    }
+
+    /**
+     * Save the tasks in the hard disk automatically whenever the task list changes.
+     */
+    private void writeToFile() {
+        String filePath = Duke.DATA_PATH;
+        FileWriter fw;
+        try {
+            fw = new FileWriter(filePath);
+            fw.write(parseList());
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("An error has occured when writing to data file!\n"
+                    + "Please try again later.");
+            e.printStackTrace();
+        }
     }
 }

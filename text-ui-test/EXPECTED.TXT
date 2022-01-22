@@ -1,7 +1,16 @@
     ____________________________________________________________
-     Hi! I'm KoroBot
+     Hi! I'm KoroBot~
+    ____________________________________________________________
+     Data folder not found... Creating folder now...
+     Success in creating folder!
+     Data file not found... Creating data file now...
+     Success in creating data file!
+
+     Here are the records in the hard disk:
+    ____________________________________________________________
      What can I do for you?
     ____________________________________________________________
+
 OOPS!!! This command should not have any arguments :(
     ____________________________________________________________
      Here are the tasks in your list:

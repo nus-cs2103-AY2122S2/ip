@@ -8,7 +8,7 @@ import java.util.Scanner;
 /**
  * KoroBot is a chatbot that tracks the list of tasks on hand.
  * @author Terng Yan Long
- * @version 4.0
+ * @version 7.0
  * @since 1.0
  */
 public class Duke {
@@ -19,8 +19,8 @@ public class Duke {
     private static final String EXIT_MESSAGE = "    ____________________________________________________________\n"
             + "     Bye! Hope to see you again soon :D\n"
             + "    ____________________________________________________________";
-    private static final String DATA_FOLDER_PATH = "src/data";
-    private static final String DATA_PATH = "src/data/data.txt";
+    public static final String DATA_FOLDER_PATH = "./data";
+    public static final String DATA_PATH = "./data/data.txt";
     private static TaskList taskListOfTasks;
 
     /**
@@ -193,19 +193,19 @@ public class Duke {
      *
      * @throws IOException Failed to create data file/folder in the correct location
      */
-    public static void initTaskList() throws IOException {
+    private static void initTaskList() throws IOException {
         // Check if folder exist
         File dataFolder = new File(DATA_FOLDER_PATH);
         // Create new folder if it does not exist
         if (!dataFolder.isDirectory()) {
-            System.out.println("    Data folder not found... Creating folder now...");
+            System.out.println("     Data folder not found... Creating folder now...");
             boolean isSuccess = dataFolder.mkdirs();
             if (isSuccess) {
-                System.out.println("    Success in creating folder!");
+                System.out.println("     Success in creating folder!");
             } else {
-                throw new IOException("    Failed to create folder.\n"
-                        + "    Please create a folder named 'data' in src manually"
-                        + "    , before running this program!");
+                throw new IOException("     Failed to create folder.\n"
+                        + "     Please create a folder named 'data' in src manually"
+                        + "     , before running this program!");
             }
         }
 
@@ -213,26 +213,79 @@ public class Duke {
         File dataFile = new File(DATA_PATH);
         // Create new data.txt file if it does not exist
         if (!dataFile.isFile()) {
-            System.out.println("    Data file not found... Creating data file now...");
+            System.out.println("     Data file not found... Creating data file now...");
             boolean isSuccess = dataFile.createNewFile();
             if (isSuccess) {
-                System.out.println("    Success in creating data file!");
+                System.out.println("     Success in creating data file!" + "\n");
             } else {
-                throw new IOException("    Failed to create datafile.\n"
-                        + "    Please create a data.txt in src/data manually"
-                        + "    , before running this program!");
+                throw new IOException("     Failed to create datafile.\n"
+                        + "     Please create a data.txt in src/data manually"
+                        + "     , before running this program!");
             }
         }
     }
 
-    private static void loadData() throws FileNotFoundException {
+    /**
+     * Prints each line in the data file.
+     *
+     * @throws FileNotFoundException If file is not found.
+     */
+    private static void readData() throws FileNotFoundException {
         File dataFile = new File(DATA_PATH);
         Scanner s = new Scanner(dataFile);
-        System.out.println("    Here are the records in the hard disk:");
+        System.out.println("     Here are the records in the hard disk:\n");
         while (s.hasNext()) {
-            System.out.println("    " + s.nextLine());
+            System.out.println("     " + s.nextLine());
         }
     }
+
+    /**
+     * Loads data from the data.txt file in the TaskList.
+     *
+     * @param f File that contains the data.
+     * @param listOfTasks Target TaskList to store the data.
+     */
+    private static void loadData(File f, TaskList listOfTasks) {
+        try {
+            Scanner sc = new Scanner(f);
+            while (sc.hasNextLine()) {
+                String currCommand = sc.nextLine();
+                if (currCommand.startsWith("[T]") & currCommand.length() > 7) { // Valid To-do task
+                    boolean isMarked = currCommand.startsWith("[X]", 3);
+                    String currDesc = currCommand.substring(7);
+                    Task currTask = new Todo(currDesc);
+                    currTask.setStatus(isMarked);
+                    listOfTasks.getListOfTasks().add(currTask);
+                    listOfTasks.incrementTasks();
+                } else if (currCommand.startsWith("[D]")
+                        & currCommand.contains("(by:")
+                        & currCommand.length() >= 16) { // Valid Deadline task
+                    boolean isMarked = currCommand.startsWith("[X]", 3);
+                    int indexBy = currCommand.indexOf("(by:");
+                    String currDesc = currCommand.substring(7, indexBy - 1);
+                    String currBy = currCommand.substring(indexBy + 5, currCommand.length() - 1);
+                    Task currTask = new Deadline(currDesc, currBy);
+                    currTask.setStatus(isMarked);
+                    listOfTasks.getListOfTasks().add(currTask);
+                    listOfTasks.incrementTasks();
+                } else if (currCommand.startsWith("[E]")
+                        & currCommand.contains("(at:")
+                        & currCommand.length() >= 16) { // Valid Event task
+                    boolean isMarked = currCommand.startsWith("[X]", 3);
+                    int indexAt = currCommand.indexOf("(at:");
+                    String currDesc = currCommand.substring(7, indexAt - 1);
+                    String currAt = currCommand.substring(indexAt + 5, currCommand.length() - 1);
+                    Task currTask = new Event(currDesc, currAt);
+                    currTask.setStatus(isMarked);
+                    listOfTasks.getListOfTasks().add(currTask);
+                    listOfTasks.incrementTasks();
+                } // else invalid command => do nothing
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         greet();
         try {
@@ -241,7 +294,7 @@ public class Duke {
             System.out.println(e);
         }
         try {
-            loadData();
+            readData();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -249,7 +302,13 @@ public class Duke {
         System.out.println("    ____________________________________________________________\n"
                 + "     What can I do for you?\n"
                 + "    ____________________________________________________________\n");
+        File dataFile = new File(DATA_PATH);
         taskListOfTasks = new TaskList(100); // Assume there will be no more than 100 tasks
+
+        if (dataFile.length() != 0) {
+            loadData(dataFile, taskListOfTasks);
+        }
+
         Scanner sc = new Scanner(System.in);
         String userInput = sc.nextLine();
         while (!userInput.equals("bye")) {
