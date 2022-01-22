@@ -1,6 +1,6 @@
-import java.util.*;
-import java.io.*;
-import java.util.regex.Pattern;
+import java.util.Scanner;
+import java.io.BufferedWriter;
+import java.io.OutputStreamWriter;
 
 public class Duke {
     public static void main(String[] args) throws Exception{
