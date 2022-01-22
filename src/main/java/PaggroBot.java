@@ -1,16 +1,64 @@
-import java.util.*;
+import java.io.File;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class PaggroBot {
-    public static void main(String[] args) throws PaggroException {
-        Lister paggro = new Lister();
+    public static void main(String[] args) throws IOException {
+        File paggroData = new File("../../../data/paggro.txt");
+        Lister paggro = null;
+        if (!paggroData.exists()) {
+            try {
+                paggroData.createNewFile();
+                paggro = new Lister(paggroData);
+            } catch (IOException e) {
+                System.out.println(e);
+            }
+        } else {
+            Scanner sc = new Scanner(paggroData);
+            ArrayList<Task> tasks = new ArrayList<>();
+            while (sc.hasNextLine()) {
+                String taskString = sc.nextLine();
+                char type = taskString.charAt(0);
+                String[] details;
+                boolean isDone;
+                String des;
+                String time;
+                switch (type) {
+                case 'T':
+                    details = taskString.split(" ");
+                    isDone = Boolean.parseBoolean(details[2]);
+                    des = details[4];
+                    System.out.println(des);
+                    System.out.println(isDone);
+                    tasks.add(new ToDo(des, isDone));
+                    break;
+                case 'E':
+                    details = taskString.split(" ");
+                    isDone = Boolean.parseBoolean(details[2]);
+                    des = details[4];
+                    time = details[6];
+                    tasks.add(new Event(des, time, isDone));
+                    break;
+                case 'D':
+                    details = taskString.split(" ");
+                    isDone = Boolean.parseBoolean(details[2]);
+                    des = details[4];
+                    time = details[6];
+                    tasks.add(new Deadline(des, time, isDone));
+                    break;
+                default:
+                    System.out.println("File format error!");
+                }
+            }
+            paggro = new Lister(tasks, paggroData);
+        }
+
         Scanner sc = new Scanner(System.in);
         System.out.println("   ________________________________________");
         System.out.println("    Hi I'm PaggroBot =.=\n    What do you want? =.=");
         System.out.println("   ________________________________________");
-//        String input = sc.nextLine();
-//        String[] arr = input.split(" ", 2);
-//        String command = arr[0];
-//        String parameters = arr[1];
         String input = sc.nextLine();
         String[] inputArr = input.split(" ", 2);
         String command = inputArr[0];

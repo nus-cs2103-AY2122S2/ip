@@ -1,14 +1,35 @@
+import java.nio.file.*;
 import java.util.ArrayList;
-import java.util.Collections;
+
+import java.io.File;
+import java.io.FileWriter;
+
+
+import java.io.IOException;
+import java.util.Scanner;
 
 public class Lister {
     ArrayList<Task> tasks;
+    File data;
 
-    public Lister() {
+    public Lister(File data) {
         tasks = new ArrayList<>();
+        this.data = data;
     }
 
-    public void add(Task task) {
+    public Lister(ArrayList<Task> tasks, File data) {
+        this.tasks = tasks;
+        this.data = data;
+    }
+
+    public void add(Task task) throws IOException {
+        try {
+            FileWriter fw = new FileWriter("../../../data/paggro.txt", true);
+            fw.write(task.parseTask() + System.lineSeparator());
+            fw.close();
+        } catch (IOException e) {
+            throw e;
+        }
         tasks.add(task);
         System.out.println("   ________________________________________");
         System.out.println("    Fine I'll add this task in:\n      " + task);
@@ -36,31 +57,98 @@ public class Lister {
         System.out.println("   ________________________________________");
     }
 
-    public void mark(int i) {
+    public void mark(int i) throws IOException {
         Task task = tasks.get(i - 1);
         System.out.println("   ________________________________________");
         if (i < 0 || i > tasks.size()) {
             System.out.println("    Invalid entry number entered! =.=");
         } else {
-            task.markDone();
+            task.setDone();
             System.out.println("    You've finished this task. Good for you... =.=\n      " + task);
         }
         System.out.println("   ________________________________________");
+
+        File updated = new File("../../../data/updated_paggro.txt");
+        try {
+            Scanner sc = new Scanner(data);
+            updated.createNewFile();
+            FileWriter fw = new FileWriter(updated);
+            int j = 1;
+            while (sc.hasNext()) {
+                String currLine = sc.nextLine();
+                if (j != i) {
+                    fw.write(currLine + System.lineSeparator());
+                } else {
+                    fw.write(task.parseTask());
+                }
+                j++;
+            }
+            fw.close();
+            Files.delete(Paths.get("../../../data/paggro.txt"));
+            Files.copy(Paths.get("../../../data/updated_paggro.txt"), Paths.get("../../../data/paggro.txt"));
+            Files.delete(Paths.get("../../../data/updated_paggro.txt"));
+        } catch (IOException e) {
+            throw e;
+        }
     }
 
-    public void unmark(int i) {
+    public void unmark(int i) throws IOException {
         Task task = tasks.get(i - 1);
         System.out.println("   ________________________________________");
         if (i < 0 || i > tasks.size()) {
             System.out.println("    Invalid entry number entered! =.=");
         } else {
-            task.markUndone();
+            task.setUndone();
             System.out.println("    Marked undone. Stop slacking off... =.=\n      " + task);
         }
         System.out.println("   ________________________________________");
+
+        File updated = new File("../../../data/updated_paggro.txt");
+        try {
+            Scanner sc = new Scanner(data);
+            updated.createNewFile();
+            FileWriter fw = new FileWriter(updated);
+            int j = 1;
+            while (sc.hasNext()) {
+                String currLine = sc.nextLine();
+                if (j != i) {
+                    fw.write(currLine + System.lineSeparator());
+                } else {
+                    fw.write(task.parseTask());
+                }
+                j++;
+            }
+            fw.close();
+            Files.delete(Paths.get("../../../data/paggro.txt"));
+            Files.copy(Paths.get("../../../data/updated_paggro.txt"), Paths.get("../../../data/paggro.txt"));
+            Files.delete(Paths.get("../../../data/updated_paggro.txt"));
+        } catch (IOException e) {
+            throw e;
+        }
     }
 
-    public void delete(int i) {
+    public void delete(int i) throws IOException {
+        File updated = new File("../../../data/updated_paggro.txt");
+        try {
+            Scanner sc = new Scanner(data);
+            updated.createNewFile();
+            FileWriter fw = new FileWriter(updated);
+            int j = 1;
+            while (sc.hasNext()) {
+                String currLine = sc.nextLine();
+                if (j != i) {
+                    fw.write(currLine + System.lineSeparator());
+                }
+                j++;
+            }
+            fw.close();
+            Files.delete(Paths.get("../../../data/paggro.txt"));
+            Files.copy(Paths.get("../../../data/updated_paggro.txt"), Paths.get("../../../data/paggro.txt"));
+            Files.delete(Paths.get("../../../data/updated_paggro.txt"));
+        } catch (IOException e) {
+            throw e;
+        }
+
         System.out.println("   ________________________________________");
         if (i < 0 || i > tasks.size()) {
             System.out.println("    Invalid entry number entered! =.=");

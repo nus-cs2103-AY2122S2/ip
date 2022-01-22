@@ -5,6 +5,16 @@ public class Event extends Task {
         this.time = time;
     }
 
+    public Event(String des, String time, boolean isDone) {
+        super(des, TaskType.EVENT, isDone);
+        this.time = time;
+    }
+
+    @Override
+    public String parseTask() {
+        return "E | " + Boolean.toString(isDone) + " | " + description + " | " + time;
+    }
+
     @Override
     public String toString() {
         if (isDone) {

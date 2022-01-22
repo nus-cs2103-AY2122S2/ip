@@ -3,6 +3,15 @@ public class ToDo extends Task {
         super(des, TaskType.TODO);
     }
 
+    public ToDo(String des, boolean isDone) {
+        super(des, TaskType.EVENT, isDone);
+    }
+
+    @Override
+    public String parseTask() {
+        return "T | " + Boolean.toString(isDone) + " | " + description;
+    }
+
     @Override
     public String toString() {
         if (isDone) {

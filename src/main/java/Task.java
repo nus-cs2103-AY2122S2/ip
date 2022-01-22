@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     public enum TaskType {
         TODO,
         DEADLINE,
@@ -14,13 +14,21 @@ public class Task {
         isDone = false;
     }
 
-    public void markDone() {
+    public Task(String des, TaskType type, boolean isDone) {
+        description = des;
+        this.type = type;
+        this.isDone = isDone;
+    }
+
+    public void setDone() {
         isDone = true;
     }
 
-    public void markUndone() {
+    public void setUndone() {
         isDone = false;
     }
+
+    public abstract String parseTask();
 
     @Override
     public String toString() {
