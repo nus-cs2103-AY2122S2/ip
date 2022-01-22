@@ -31,4 +31,11 @@ public class EventTask extends Task{
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.eventDate + ")";
     }
+
+    @Override
+    public String saveToFileFormat() {
+        String result = "E";
+        String mark = this.completed? "1":"0";
+        return result + " | " + mark + " | " + taskName + " | " + eventDate;
+    }
 }

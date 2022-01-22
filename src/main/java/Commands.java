@@ -73,7 +73,7 @@ public class Commands {
                      int index = Integer.parseInt(splitString[1]);
                      //If index is out of range, throw illegal argument exception
                      if (index <= 0 || index > tasklist.currentSize) {
-                         throw new DukeExceptions("  Index is out of task range\n");
+                         throw new DukeExceptions("BRAT ! Your index is out of range! Number has to in the range of the list\n");
                      }
                      //If no errors, continue
                        //Task that we are going to mark/unmark/delete
@@ -100,7 +100,7 @@ public class Commands {
                      System.out.println("What? Second input has to be an integer! Eg mark 1, unmark 2\n");
                      //Out of task range is thrown if the second input is out of range
                  } catch (DukeExceptions e) {
-                     System.out.println("BRAT ! Your index is out of range! Number has to in the range of the list\n");
+                     System.out.println(e.getMessage());
                  }
 
              }
