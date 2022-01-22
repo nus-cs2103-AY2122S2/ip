@@ -1,22 +1,32 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * A deadline task that has a deadline property.
  */
 public class DeadlineTask extends Task {
     /**
-     * The deadline of the task.
+     * The deadline of the task, in yyyy-mm-dd format
      */
-    protected String deadline;
+    private LocalDate deadline;
 
     /**
-     * Constructs a new deadline task from the description
-     * and the deadline.
+     * The deadline of the task parsed in MMM dd yy format.
+     */
+    private String deadlineString;
+
+    /**
+     * Constructs a new deadline task from the description and the
+     * deadline. Accepts date in the format of yyyy-mm-dd;
      *
      * @param description description of the task
      * @param deadline deadline of the task
      */
     public DeadlineTask(String description, String deadline) {
         super(description);
-        this.deadline = deadline;
+        this.deadline = LocalDate.parse(deadline);
+        this.deadlineString = this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 
     /**
@@ -26,6 +36,6 @@ public class DeadlineTask extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " " + "(by: " + this.deadline + ")";
+        return "[D]" + super.toString() + " " + "(by: " + this.deadlineString + ")";
     }
 }
