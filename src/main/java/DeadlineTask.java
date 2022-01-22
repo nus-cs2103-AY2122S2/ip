@@ -35,7 +35,7 @@ public class DeadlineTask extends Task {
 
     @Override
     public String textToFile() {
-        return "D "+ super.textToFile() + " /by" + time;
+        return "D "+ super.textToFile() + " /by" + time.toString();
     }
 
 }

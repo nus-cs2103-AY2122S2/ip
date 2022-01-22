@@ -36,6 +36,6 @@ public class EventTask extends Task {
 
     @Override
     public String textToFile() {
-        return "E "+ super.textToFile() + " /at " + time;
+        return "E "+ super.textToFile() + " /at " + nowTime.toString();
     }
 }
