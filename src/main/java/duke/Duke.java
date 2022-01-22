@@ -1,5 +1,7 @@
+package duke;
+
 /**
- * Duke Chatbot main method class.
+ * duke.Duke Chatbot main method class.
  */
 
 public class Duke {

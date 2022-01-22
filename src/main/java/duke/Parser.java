@@ -1,5 +1,7 @@
-import exceptions.RequiredInformationMissingException;
-import exceptions.UnknownCommandException;
+package duke;
+
+import duke.exceptions.RequiredInformationMissingException;
+import duke.exceptions.UnknownCommandException;
 
 import java.util.ArrayList;
 

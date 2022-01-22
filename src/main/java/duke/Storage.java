@@ -1,7 +1,9 @@
-import exceptions.UnknownFileEntry;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
+package duke;
+
+import duke.exceptions.UnknownFileEntry;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -10,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Handles all storage of tasks to a file.
+ * Handles all storage of duke.tasks to a file.
  */
 
 public class Storage {
@@ -35,8 +37,8 @@ public class Storage {
     }
 
     /**
-     * Writes all the tasks in the list to the file.
-     * @param tasks list of tasks to write.
+     * Writes all the duke.tasks in the list to the file.
+     * @param tasks list of duke.tasks to write.
      * @throws IOException if io failed.
      */
     public void writeTasks(ArrayList<Task> tasks) throws IOException{
@@ -48,8 +50,8 @@ public class Storage {
     }
 
     /**
-     * Read entire file, return the tasks as a list of tasks.
-     * @return list of all tasks in the file.
+     * Read entire file, return the duke.tasks as a list of duke.tasks.
+     * @return list of all duke.tasks in the file.
      * @throws IOException if file cannot be acessed or created.
      * @throws UnknownFileEntry if file contains an unknown entry.
      */
@@ -63,7 +65,7 @@ public class Storage {
             String s = scanner.nextLine();
             String[] sections = s.split(" : ");
 
-            //create task based on the string read, add to tasks
+            //create task based on the string read, add to duke.tasks
             if (sections[0].equals("T")) {
                 tasks.add(new Task(sections[2], sections[1] == "1"));
             } else  if (sections[0].equals("D")) {

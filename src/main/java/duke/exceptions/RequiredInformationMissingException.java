@@ -1,4 +1,4 @@
-package exceptions;
+package duke.exceptions;
 
 /**
  * Exception that occurs when users does not give a description when adding a task.

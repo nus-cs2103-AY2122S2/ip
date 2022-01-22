@@ -1,11 +1,13 @@
-import exceptions.UnknownFileEntry;
-import tasks.Task;
+package duke;
+
+import duke.exceptions.UnknownFileEntry;
+import duke.tasks.Task;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * TaskManager that manages all the tasks that we log in the chatbot.
+ * duke.TaskManager that manages all the duke.tasks that we log in the chatbot.
  */
 
 public class TaskManager {
@@ -40,8 +42,8 @@ public class TaskManager {
     }
 
     /**
-     * return the total number of tasks in the task manager list.
-     * @return total number of tasks in the task manager list.
+     * return the total number of duke.tasks in the task manager list.
+     * @return total number of duke.tasks in the task manager list.
      */
     public int getNumberOfTasks() {
         return tasks.size();
@@ -68,8 +70,8 @@ public class TaskManager {
     }
 
     /**
-     * Return a nice printable numbered list of the tasks.
-     * @return a String representing the tasks in nice format
+     * Return a nice printable numbered list of the duke.tasks.
+     * @return a String representing the duke.tasks in nice format
      */
     public String getPrintableListOfTasks() {
         StringBuilder str = new StringBuilder();
@@ -82,7 +84,7 @@ public class TaskManager {
     }
 
     /**
-     * Saves all the tasks in this task manager.
+     * Saves all the duke.tasks in this task manager.
      * @throws IOException if a error occurs interacting with the task file.
      */
     public void saveTasks() throws IOException{

@@ -1,8 +1,10 @@
-import exceptions.RequiredInformationMissingException;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import exceptions.UnknownCommandException;
+package duke;
+
+import duke.exceptions.RequiredInformationMissingException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.exceptions.UnknownCommandException;
 
 
 import java.io.IOException;
@@ -11,31 +13,31 @@ import java.util.Scanner;
 
 
 /**
- * Main UI interface class.
+ * Main duke.UI interface class.
  */
 public class UI {
     TaskManager taskManager;
     Scanner scanner;
 
     /**
-     * Creates instance of Duke UI.
+     * Creates instance of duke.Duke duke.UI.
      */
     public UI() {
         try {
             this.taskManager = new TaskManager();
         } catch (IOException e) {
             System.out.println("An error occured while reading task file.");
-        } catch (exceptions.UnknownFileEntry e) {
+        } catch (duke.exceptions.UnknownFileEntry e) {
             System.out.println(e);
         }
         this.scanner = new Scanner(System.in);
     }
 
     /**
-     * Starts the chat between Duke and the User.
+     * Starts the chat between duke.Duke and the User.
      */
     public void start() {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        System.out.println("Hello! I'm duke.Duke\nWhat can I do for you?");
         while (true) {
             String input = scanner.nextLine();
             try {
@@ -56,25 +58,25 @@ public class UI {
                     taskManager.addTask(task);
                     System.out.println("Got it. I've added this task:");
                     System.out.println("  " + task);
-                    System.out.println("Now you have " + taskManager.getNumberOfTasks() + " tasks in the list.");
+                    System.out.println("Now you have " + taskManager.getNumberOfTasks() + " duke.tasks in the list.");
                 } else if (command.equals("event")) {
                     Event task = new Event(parsedInput.get(1), parsedInput.get(2));
                     taskManager.addTask(task);
                     System.out.println("Got it. I've added this task:");
                     System.out.println("  " + task);
-                    System.out.println("Now you have " + taskManager.getNumberOfTasks() + " tasks in the list.");
+                    System.out.println("Now you have " + taskManager.getNumberOfTasks() + " duke.tasks in the list.");
                 } else if (command.equals("deadline")) {
                     Deadline task = new Deadline(parsedInput.get(1), parsedInput.get(2));
                     taskManager.addTask(task);
                     System.out.println("Got it. I've added this task:");
                     System.out.println("  " + task);
-                    System.out.println("Now you have " + taskManager.getNumberOfTasks() + " tasks in the list.");
+                    System.out.println("Now you have " + taskManager.getNumberOfTasks() + " duke.tasks in the list.");
                 } else if (command.equals("delete")) {
                     int indexOfTask = Integer.parseInt(parsedInput.get(1));
                     Task task = taskManager.removeTask(indexOfTask);
                     System.out.println("Noted. I've removed this task:");
                     System.out.println("  " + task);
-                    System.out.println("Now you have " + taskManager.getNumberOfTasks() + " tasks left in the list.");
+                    System.out.println("Now you have " + taskManager.getNumberOfTasks() + " duke.tasks left in the list.");
                 }
             } catch (RequiredInformationMissingException e){
                 System.out.println("ERROR " + e.getMessage());
@@ -86,7 +88,7 @@ public class UI {
                 taskManager.saveTasks();
 
             } catch (IOException e) {
-                System.out.println("An error occured with the tasks file while saving tasks.");
+                System.out.println("An error occured with the duke.tasks file while saving duke.tasks.");
             }
         }
         System.out.println("Bye. Hope to see you again soon!");
