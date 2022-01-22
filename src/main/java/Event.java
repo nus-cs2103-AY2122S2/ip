@@ -1,16 +1,26 @@
-public class Event extends Task {
-    protected String at;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
+public class Event extends Task {
+    private LocalDate eventDate;
+    private LocalTime eventStartTime;
+    private LocalTime eventEndTime;
     /**
-     * Initializes a new event task
+     * Initializes a new event task.
      * By default, the new task is set to "not done".
      * This task has a specific date as well as a start and end time.
      *
-     * @param description Describes what needs to be done in this task
+     * @param description Describes what needs to be done in this task.
+     * @param eventDate Date of event.
+     * @param eventStartTime Start time of event.
+     * @param eventEndTime End time of event.
      */
-    public Event(String description, String at) {
+    public Event(String description, LocalDate eventDate, LocalTime eventStartTime, LocalTime eventEndTime) {
         super(description);
-        this.at = at;
+        this.eventDate = eventDate;
+        this.eventStartTime = eventStartTime;
+        this.eventEndTime = eventEndTime;
     }
 
     /**
@@ -20,7 +30,17 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.at + ")";
+        String formattedDate = this.eventDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String formattedStartTime = "";
+        String formattedEndTime = "";
+        if (eventStartTime != null) {
+            formattedStartTime = " " + eventStartTime.toString();
+        }
+        if (eventEndTime != null) {
+            formattedEndTime = "-" + eventEndTime.toString();
+        }
+        return "[E]" + super.toString() + " (at: "
+                + formattedDate + formattedStartTime + formattedEndTime + ")";
     }
 
 }

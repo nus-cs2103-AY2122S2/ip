@@ -1,5 +1,7 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -105,11 +107,13 @@ public class TaskList {
      * Adds the task (which has a deadline) into the list
      *
      * @param userInput Command entered by the user that describes the task.
+     * @param dueDate Specifies the date that this task has to be done by.
+     * @param dueTime Specifies the time that this task has to be done by.
      */
-    public void deadline(String userInput, String by) {
+    public void deadline(String userInput, LocalDate dueDate, LocalTime dueTime) {
         this.numberOfTasks++;
 
-        Task currentTask = new Deadline(userInput, by);
+        Task currentTask = new Deadline(userInput, dueDate, dueTime);
         this.listOfTasks.add(currentTask);
         writeToFile();
 
@@ -126,10 +130,11 @@ public class TaskList {
      *
      * @param userInput Command entered by the user that describes the task.
      */
-    public void event(String userInput, String at) {
+    public void event(String userInput, LocalDate eventDate,
+                      LocalTime eventStartTime, LocalTime eventEndTime) {
         this.numberOfTasks++;
 
-        Task currentTask = new Event(userInput, at);
+        Task currentTask = new Event(userInput, eventDate, eventStartTime, eventEndTime);
         this.listOfTasks.add(currentTask);
         writeToFile();
 
@@ -183,7 +188,7 @@ public class TaskList {
             fw.write(parseList());
             fw.close();
         } catch (IOException e) {
-            System.out.println("An error has occured when writing to data file!\n"
+            System.out.println("An error has occurred when writing to data file!\n"
                     + "Please try again later.");
             e.printStackTrace();
         }

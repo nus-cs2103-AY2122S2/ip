@@ -1,6 +1,11 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.Clock;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -8,7 +13,7 @@ import java.util.Scanner;
 /**
  * KoroBot is a chatbot that tracks the list of tasks on hand.
  * @author Terng Yan Long
- * @version 7.0
+ * @version 8.0
  * @since 1.0
  */
 public class Duke {
@@ -97,46 +102,108 @@ public class Duke {
             }
             break;
         case ("deadline"):
-            if (wordList.size() < 4) {
-                throw new InvalidCommand("Insufficient arguments supplied :(");
-            } else if (!wordList.contains("/by")) {
-                throw new InvalidCommand("Formatting error detected. " +
-                        "Please follow this format: deadline <description> /by <date/time>");
-            } else {
-                int separator = wordList.indexOf("/by");
-                String desc = "";
-                String dateTime = "";
-                for (int i = 1; i < separator; i++) {
-                    desc += wordList.get(i);
-                    desc += " ";
+                if (wordList.size() < 4) {
+                    throw new InvalidCommand("Incorrect number of arguments supplied :(");
+                } else if (!wordList.contains("/by")) {
+                    throw new InvalidCommand("Please follow this format: deadline <task> " +
+                            "/by <date in yyyy-MM-dd> <time in 24hrs format> ");
+                } else {
+                    int separator = wordList.indexOf("/by");
+                    String desc = "";
+                    String dateTime = "";
+                    for (int i = 1; i < separator; i++) {
+                        desc += wordList.get(i);
+                        desc += " ";
+                    }
+                    for (int i = separator + 1; i < wordList.size(); i++) {
+                        dateTime += wordList.get(i);
+                        dateTime += " ";
+                    }
+                    dateTime = removeLastChar(dateTime);
+                    String[] dateTimeArray = dateTime.split(" ");
+
+                    if (dateTimeArray.length > 2 || dateTimeArray.length < 1) {
+                        throw new InvalidCommand("Incorrect number of arguments supplied :(");
+                    }
+
+                    // Parse user input into LocalDate/LocalTime if it is in the correct format.
+                    LocalDate newDate = convertDate(dateTimeArray[0]);
+                    LocalTime newTime = null;
+                    if (dateTimeArray.length > 1) { // Optional time input
+                       newTime = convertTime(dateTimeArray[1]);
+                    }
+
+                    // Check if date/time specified is in the present.
+                    Clock cl = Clock.systemUTC();
+                    LocalDate nowDate = LocalDate.now(cl);
+                    LocalTime nowTime = LocalTime.now(cl);
+                    if (newDate.isBefore(nowDate)) {
+                        throw new InvalidDateTime("You cannot travel back in time!");
+                    }
+                    if (newTime != null) {
+                        if (newDate.isEqual(nowDate) & newTime.isBefore(nowTime)) {
+                            throw new InvalidDateTime("You cannot travel back in time!");
+                        }
+                    }
+                    taskListOfTasks.deadline(removeLastChar(desc), newDate, newTime);
                 }
-                for (int i = separator + 1; i < wordList.size(); i++) {
-                    dateTime += wordList.get(i);
-                    dateTime += " ";
+                break;
+            case ("event"):
+                if (wordList.size() < 4) {
+                    throw new InvalidCommand("Incorrect number of arguments supplied :(");
+                } else if (!wordList.contains("/at")) {
+                    throw new InvalidCommand("Please follow this format: event <task> " +
+                            "/at <date in yyyy-MM-dd> <time in 24hrs format> ");
+                } else {
+                    int separator = wordList.indexOf("/at");
+                    String desc = "";
+                    String dateTime = "";
+                    for (int i = 1; i < separator; i++) {
+                        desc += wordList.get(i);
+                        desc += " ";
+                    }
+                    for (int i = separator + 1; i < wordList.size(); i++) {
+                        dateTime += wordList.get(i);
+                        dateTime += " ";
+                    }
+                    dateTime = removeLastChar(dateTime);
+                    String[] dateTimeArray = dateTime.split(" ");
+
+                    if (dateTimeArray.length > 3 || dateTimeArray.length < 1) {
+                        throw new InvalidCommand("Incorrect number of arguments supplied :(");
+                    }
+
+                    // Parse user input into LocalDate/LocalTime if it is in the correct format.
+                    LocalDate newDate = convertDate(dateTimeArray[0]);
+                    LocalTime newStartTime = null;
+                    LocalTime newEndTime = null;
+                    if (dateTimeArray.length > 1) { // Optional start time input
+                        newStartTime = convertTime(dateTimeArray[1]);
+                    }
+                    if (dateTimeArray.length > 2) { // Optional end time input
+                        newEndTime = convertTime(dateTimeArray[2]);
+                    }
+
+                    // Check if date/time specified is in the present.
+                    Clock cl = Clock.systemUTC();
+                    LocalDate nowDate = LocalDate.now(cl);
+                    LocalTime nowTime = LocalTime.now(cl);
+                    if (newDate.isBefore(nowDate)) {
+                        throw new InvalidDateTime("You cannot travel back in time!");
+                    }
+                    if (newStartTime != null) {
+                        if (newDate.isEqual(nowDate) & newStartTime.isBefore(nowTime)) {
+                            throw new InvalidDateTime("You cannot travel back in time!");
+                        } else if (newEndTime != null) {
+                            if (newDate.isEqual(nowDate) & newEndTime.isBefore(nowTime)) {
+                                throw new InvalidDateTime("You cannot travel back in time!");
+                            } else if (!newEndTime.isAfter(newStartTime)) {
+                                throw new InvalidDateTime("The end time must be after the start time");
+                            }
+                        }
+                    }
+                    taskListOfTasks.event(removeLastChar(desc), newDate, newStartTime, newEndTime);
                 }
-                taskListOfTasks.deadline(removeLastChar(desc), removeLastChar(dateTime));
-            }
-            break;
-        case ("event"):
-            if (wordList.size() < 4) {
-                throw new InvalidCommand("Insufficient arguments supplied :(");
-            } else if (!wordList.contains("/at")) {
-                throw new InvalidCommand("Formatting error detected. " +
-                        "Please follow this format: event <description> /at <date/time>");
-            } else {
-                int separator = wordList.indexOf("/at");
-                String desc = "";
-                String dateTime = "";
-                for (int i = 1; i < separator; i++) {
-                    desc += wordList.get(i);
-                    desc += " ";
-                }
-                for (int i = separator + 1; i < wordList.size(); i++) {
-                    dateTime += wordList.get(i);
-                    dateTime += " ";
-                }
-                taskListOfTasks.event(removeLastChar(desc), removeLastChar(dateTime));
-            }
             break;
         case("mark"):
             if (wordList.size() != 2) {
@@ -264,7 +331,33 @@ public class Duke {
                     int indexBy = currCommand.indexOf("(by:");
                     String currDesc = currCommand.substring(7, indexBy - 1);
                     String currBy = currCommand.substring(indexBy + 5, currCommand.length() - 1);
-                    Task currTask = new Deadline(currDesc, currBy);
+
+                    String[] dateTimeArray = currBy.split(" ");
+
+                    if (dateTimeArray.length > 2 || dateTimeArray.length < 1) {
+                        throw new InvalidCommand("Incorrect number of arguments supplied :(");
+                    }
+
+                    // Parse user input into LocalDate/LocalTime if it is in the correct format.
+                    LocalDate newDate = convertDate(dateTimeArray[0]);
+                    LocalTime newTime = null;
+                    if (dateTimeArray.length > 1) { // Optional time input
+                        newTime = convertTime(dateTimeArray[1]);
+                    }
+
+                    // Check if date/time specified is in the present.
+                    Clock cl = Clock.systemUTC();
+                    LocalDate nowDate = LocalDate.now(cl);
+                    LocalTime nowTime = LocalTime.now(cl);
+                    if (newDate.isBefore(nowDate)) {
+                        throw new InvalidDateTime("You cannot travel back in time!");
+                    }
+                    if (newTime != null) {
+                        if (newDate.isEqual(nowDate) & newTime.isBefore(nowTime)) {
+                            throw new InvalidDateTime("You cannot travel back in time!");
+                        }
+                    }
+                    Task currTask = new Deadline(currDesc, newDate, newTime);
                     currTask.setStatus(isMarked);
                     listOfTasks.getListOfTasks().add(currTask);
                     listOfTasks.incrementTasks();
@@ -275,7 +368,43 @@ public class Duke {
                     int indexAt = currCommand.indexOf("(at:");
                     String currDesc = currCommand.substring(7, indexAt - 1);
                     String currAt = currCommand.substring(indexAt + 5, currCommand.length() - 1);
-                    Task currTask = new Event(currDesc, currAt);
+
+                    String[] dateTimeArray = currAt.split(" ");
+
+                    if (dateTimeArray.length > 3 || dateTimeArray.length < 1) {
+                        throw new InvalidCommand("Incorrect number of arguments supplied :(");
+                    }
+
+                    // Parse user input into LocalDate/LocalTime if it is in the correct format.
+                    LocalDate newDate = convertDate(dateTimeArray[0]);
+                    LocalTime newStartTime = null;
+                    LocalTime newEndTime = null;
+                    if (dateTimeArray.length > 1) { // Optional start time input
+                        newStartTime = convertTime(dateTimeArray[1]);
+                    }
+                    if (dateTimeArray.length > 2) { // Optional end time input
+                        newEndTime = convertTime(dateTimeArray[2]);
+                    }
+
+                    // Check if date/time specified is in the present.
+                    Clock cl = Clock.systemUTC();
+                    LocalDate nowDate = LocalDate.now(cl);
+                    LocalTime nowTime = LocalTime.now(cl);
+                    if (newDate.isBefore(nowDate)) {
+                        throw new InvalidDateTime("You cannot travel back in time!");
+                    }
+                    if (newStartTime != null) {
+                        if (newDate.isEqual(nowDate) & newStartTime.isBefore(nowTime)) {
+                            throw new InvalidDateTime("You cannot travel back in time!");
+                        } else if (newEndTime != null) {
+                            if (newDate.isEqual(nowDate) & newEndTime.isBefore(nowTime)) {
+                                throw new InvalidDateTime("You cannot travel back in time!");
+                            } else if (!newEndTime.isAfter(newStartTime)) {
+                                throw new InvalidDateTime("The end time must be after the start time");
+                            }
+                        }
+                    }
+                    Task currTask = new Event(currDesc, newDate, newStartTime, newEndTime);
                     currTask.setStatus(isMarked);
                     listOfTasks.getListOfTasks().add(currTask);
                     listOfTasks.incrementTasks();
@@ -286,6 +415,40 @@ public class Duke {
         }
     }
 
+    /**
+     * Checks if the input date is in the correct format.
+     *
+     * @param date Date to be tested.
+     */
+    private static LocalDate convertDate(String date) {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate convertedDate;
+        try {
+            convertedDate = LocalDate.parse(date, format);
+        } catch (DateTimeParseException | NullPointerException e) {
+            throw new InvalidDateTime("Please enter date in this format: <yyyy-MM-dd>");
+        }
+        return convertedDate;
+    }
+
+    /**
+     * Checks if the input date is in the correct format.
+     *
+     * @param time Time to be tested.
+     */
+    private static LocalTime convertTime(String time) {
+        if (time == null) { // Time is optional
+            return null;
+        }
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("HHmm");
+        LocalTime convertedTime;
+        try {
+            convertedTime = LocalTime.parse(time, format);
+        } catch (DateTimeParseException | NullPointerException e) {
+            throw new InvalidDateTime("Please enter time in this 24hrs-format: <HHmm>");
+        }
+        return convertedTime;
+    }
     public static void main(String[] args) {
         greet();
         try {
