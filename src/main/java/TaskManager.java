@@ -1,7 +1,6 @@
-import Exceptions.UnknownFileEntry;
-import Tasks.Task;
+import exceptions.UnknownFileEntry;
+import tasks.Task;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 

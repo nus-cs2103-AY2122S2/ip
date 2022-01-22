@@ -1,10 +1,15 @@
-package Tasks;
+package tasks;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Event type of Task. Has specific time of occurence.
  */
 public class Event extends Task{
     private String eventTime;
+    private LocalDate date;
 
     /**
      * Constructor of Event.
@@ -14,6 +19,13 @@ public class Event extends Task{
     public Event(String name, String eventTime) {
         super(name);
         this.eventTime = eventTime;
+
+        //try parsing the eventTime as a date to set date
+        try {
+            this.date = LocalDate.parse(eventTime);
+        } catch (DateTimeParseException e) {
+            //dont set date if not in right format
+        }
     }
 
     /**
@@ -49,7 +61,7 @@ public class Event extends Task{
             str += "[ ] ";
         }
         str += name + " ";
-        str += "(at: " + eventTime + ")";
+        str += "(at: " + (date != null ? date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) : eventTime) + ")";
         return str;
     }
 }

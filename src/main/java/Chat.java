@@ -1,12 +1,10 @@
-import Tasks.Deadline;
-import Tasks.Event;
-import Tasks.Task;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
 
 import java.io.IOException;
 import java.util.Scanner;
-import Exceptions.*;
-
-import javax.imageio.IIOException;
+import exceptions.*;
 
 /**
  * Main Chat interface class.
@@ -43,43 +41,43 @@ public class Chat {
             } else if (command.equals("mark")) {
                 try {
                     if (input.length() < 6) {
-                        throw new RequiredInformationMissingException("missing mark index");
+                        throw new RequiredInformationMissingException1("missing mark index");
                     }
                     int indexOfTask = Integer.parseInt(input.substring(5));
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(taskManager.completeTask(indexOfTask));
-                } catch (RequiredInformationMissingException e) {
+                } catch (RequiredInformationMissingException1 e) {
                     System.out.println("OOPS!!! The index of the task to complete cannot be missing.");
                 }
             } else if (command.equals("unmark")) {
                 try {
                     if (input.length() < 8) {
-                        throw new RequiredInformationMissingException("missing unmark index");
+                        throw new RequiredInformationMissingException1("missing unmark index");
                     }
                     int indexOfTask = Integer.parseInt(input.substring(7));
                     System.out.println("OK, I've marked this task as not done yet:");
                     System.out.println(taskManager.removeCompletedStatusOfTask(indexOfTask));
-                } catch (RequiredInformationMissingException e) {
+                } catch (RequiredInformationMissingException1 e) {
                     System.out.println("OOPS!!! The index of the task to uncomplete cannot be missing.");
                 }
             } else if (command.equals("todo")) {
                 try {
                     if (input.length() < 6) {
-                        throw new RequiredInformationMissingException("empty todo description");
+                        throw new RequiredInformationMissingException1("empty todo description");
                     }
                     Task task = new Task(input.substring(5));
                     taskManager.addTask(task);
                     System.out.println("Got it. I've added this task:");
                     System.out.println("  " + task);
                     System.out.println("Now you have " + taskManager.getNumberOfTasks() + " tasks in the list.");
-                } catch (RequiredInformationMissingException e) {
+                } catch (RequiredInformationMissingException1 e) {
                     System.out.println("OOPS!!! The description of a todo cannot be empty.");
                 }
 
             } else if (command.equals("event")) {
                 try {
                     if (input.length() < 7) {
-                        throw new RequiredInformationMissingException("empty event description");
+                        throw new RequiredInformationMissingException1("empty event description");
                     }
                     int indexOfStartDate = input.indexOf(" /") + 5;
                     Event task = new Event(input.substring(6, input.indexOf(" /")), input.substring(indexOfStartDate));
@@ -87,13 +85,13 @@ public class Chat {
                     System.out.println("Got it. I've added this task:");
                     System.out.println("  " + task);
                     System.out.println("Now you have " + taskManager.getNumberOfTasks() + " tasks in the list.");
-                } catch (RequiredInformationMissingException e) {
+                } catch (RequiredInformationMissingException1 e) {
                     System.out.println("OOPS!!! The description of a event cannot be empty.");
                 }
             } else if (command.equals("deadline")) {
                 try {
                     if (input.length() < 10) {
-                        throw new RequiredInformationMissingException("empty deadline description");
+                        throw new RequiredInformationMissingException1("empty deadline description");
                     }
                     int indexOfStartDate = input.indexOf(" /") + 5;
                     Deadline task = new Deadline(input.substring(9, input.indexOf(" /")), input.substring(indexOfStartDate));
@@ -101,21 +99,21 @@ public class Chat {
                     System.out.println("Got it. I've added this task:");
                     System.out.println("  " + task);
                     System.out.println("Now you have " + taskManager.getNumberOfTasks() + " tasks in the list.");
-                } catch (RequiredInformationMissingException e) {
+                } catch (RequiredInformationMissingException1 e) {
                     System.out.println("OOPS!!! The description of a deadline cannot be empty.");
                 }
 
             } else if (command.equals("delete")) {
                 try {
                    if (input.length() < 8) {
-                       throw new RequiredInformationMissingException("missing delete index");
+                       throw new RequiredInformationMissingException1("missing delete index");
                    }
                    int index = Integer.parseInt(input.substring(7));
                    Task task = taskManager.removeTask(index);
                    System.out.println("Noted. I've removed this task:");
                    System.out.println("  " + task);
                    System.out.println("Now you have " + taskManager.getNumberOfTasks() + " tasks left in the list.");
-                } catch (RequiredInformationMissingException e) {
+                } catch (RequiredInformationMissingException1 e) {
                    System.out.println("OOPS!!! Index of the task to remove cannot be missing!");
                 }
             } else {
