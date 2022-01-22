@@ -1,4 +1,8 @@
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Duke {
@@ -103,6 +107,24 @@ public class Duke {
         line();
     }
 
+    public static String formatDateTime(String str) {
+        // Date/time pattern of input string
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy HHmm");
+        // Date/time pattern of desired output
+        DateFormat outputFormat = new SimpleDateFormat("dd MMM yyyy hh:mm aa");
+        Date date = null;
+        String output = null;
+        try{
+            //Conversion of input String to date
+            date= df.parse(str);
+            //old date format to new date format
+            output = outputFormat.format(date);
+        } catch(ParseException pe){
+            pe.printStackTrace();
+        }
+        return output;
+    }
+
     public static void main(String[] args) {
         line();
         System.out.println("Tell me... have you seen a RED imposter among us?");
@@ -162,7 +184,8 @@ public class Duke {
                             throw new UnknownInputException();
                         } else {
                             String deadlineDate = temp[1].substring(3); // retrieves the String after '/by'
-                            Task deadline = new Deadline(temp[0], deadlineDate);
+                            String formattedDate = formatDateTime(deadlineDate); // format date
+                            Task deadline = new Deadline(temp[0], formattedDate);
                             line();
                             System.out.println("     This task is on a timer!");
                             addToList(deadline);
@@ -179,7 +202,8 @@ public class Duke {
                             throw new UnknownInputException();
                         } else {
                             String eventDate = temp[1].substring(3); // retrieves the String after '/at'
-                            Task event = new Event(temp[0], eventDate);
+                            String formattedDate = formatDateTime(eventDate); // format date
+                            Task event = new Event(temp[0], formattedDate);
                             line();
                             System.out.println("     Emergency event on this date!");
                             addToList(event);
