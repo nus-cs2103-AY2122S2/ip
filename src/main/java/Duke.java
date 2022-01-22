@@ -11,6 +11,7 @@ public class Duke {
         while(sc.hasNextLine()) {
             String str = sc.nextLine();
             String[] strArr = str.split(" ");
+            String cmd = strArr[0];
             if (str.equals("bye")) {
                 System.out.println("Bye for now!");
                 return;
@@ -20,7 +21,7 @@ public class Duke {
                 int taskNum = String.parseInt(strArr[1]);
                 list.get(taskNum).setStatus(true);
             }
-            else if (strArr[0].equals("unmark")) {
+            else if (cmd.equals("unmark")) {
                 int taskNum = String.parseInt(strArr[1]);
                 list.get(taskNum).setStatus(false);
             }
@@ -35,9 +36,11 @@ public class Duke {
                 System.out.println(String.format("added: %s", str));
             }
             else if (strArr[0].equals("todo")) { {
+                if (strArr.length < 2) throw new DukeException("Todo needs a description");
                 list.add(new Todo(str));
                 System.out.println(String.format("added: %s", str));
             }
+            else throw new DukeException("I don't recognize that command.");
         }
     }
 
