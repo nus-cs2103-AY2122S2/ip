@@ -1,7 +1,8 @@
 package ui;
 
-import task.*;
-import ui.command.*;
+import task.Task;
+import ui.command.Command;
+
 import java.util.ArrayList;
 
 /**
@@ -22,10 +23,10 @@ public class ChatBot {
     /**
      * Boolean to track if bot has received a termination command
      */
-    private boolean terminated;
+    private boolean hasTerminated;
 
     public ChatBot() {
-        this.terminated = false;
+        this.hasTerminated = false;
         this.tasks = new ArrayList<>();
     }
 
@@ -45,7 +46,7 @@ public class ChatBot {
     public void runCommand(String input) {
         try {
             Command command = Command.parseCommand(input, this.tasks);
-            this.terminated = command.execute();
+            this.hasTerminated = command.execute();
         } catch (IllegalArgumentException e) {
             ArrayList<String> response = new ArrayList<>();
             response.add("Sorry, the following problem has occurred:");
@@ -54,7 +55,7 @@ public class ChatBot {
         }
     }
 
-    public boolean isTerminated() {
-        return this.terminated;
+    public boolean hasTerminated() {
+        return this.hasTerminated;
     }
 }

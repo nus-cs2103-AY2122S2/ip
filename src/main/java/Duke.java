@@ -13,7 +13,7 @@ public class Duke {
         ChatBot chatBot = new ChatBot();
         chatBot.initialise();
 
-        while (!chatBot.isTerminated()) {
+        while (!chatBot.hasTerminated()) {
             String input = scanner.nextLine();
             chatBot.runCommand(input);
         }

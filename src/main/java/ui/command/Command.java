@@ -1,6 +1,7 @@
 package ui.command;
 
-import task.*;
+import task.Task;
+
 import java.util.ArrayList;
 
 /**
@@ -64,28 +65,29 @@ public abstract class Command {
 
         Command command;
         switch (name) {
-            case "list":
-                command = new ListCommand(name, args, tasks);
-                break;
-            case "todo":
-            case "deadline":
-            case "event":
-                command = new AddTaskCommand(name, args, tasks);
-                break;
-            case "delete":
-                command = new DeleteTaskCommand(name, args, tasks);
-                break;
-            case "mark":
-                command = new MarkTaskCommand(name, args, tasks);
-                break;
-            case "unmark":
-                command = new UnmarkTaskCommand(name, args, tasks);
-                break;
-            case "bye":
-                command = new ExitCommand(name, args);
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid command");
+        case "list":
+            command = new ListCommand(name, args, tasks);
+            break;
+        case "todo":
+        case "deadline":
+        case "event":
+            // Fallthrough for add task commands
+            command = new AddTaskCommand(name, args, tasks);
+            break;
+        case "delete":
+            command = new DeleteTaskCommand(name, args, tasks);
+            break;
+        case "mark":
+            command = new MarkTaskCommand(name, args, tasks);
+            break;
+        case "unmark":
+            command = new UnmarkTaskCommand(name, args, tasks);
+            break;
+        case "bye":
+            command = new ExitCommand(name, args);
+            break;
+        default:
+            throw new IllegalArgumentException("Invalid command");
         }
         return command;
     }

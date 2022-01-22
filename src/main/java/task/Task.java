@@ -23,11 +23,11 @@ public abstract class Task {
     /**
      * Whether the task is marked as done
      */
-    private boolean done;
+    private boolean isDone;
 
     protected Task(String name) {
         this.name = name;
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -37,15 +37,15 @@ public abstract class Task {
      * @return String representing done status of task
      */
     protected String getDoneStatusCheckbox() {
-        return this.done ? "[X]" : "[ ]";
+        return this.isDone ? "[X]" : "[ ]";
     }
 
     public void markDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     public void unmarkDone() {
-        this.done = false;
+        this.isDone = false;
     }
 
     public String getName() {
