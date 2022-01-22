@@ -230,10 +230,10 @@ public class Duke {
             File dukeSaveFile = new File(DUKE_SAVE_TXT);
 
             if (!saveDirectory.exists()) {
-                throw new FileNotFoundException("DukeSaveDirectory not found! Please create one!");
+                throw new FileNotFoundException("DukeSaveDirectory not found! Please create one in your C drive!");
             }
             if (!dukeSaveFile.exists()) {
-                throw new FileNotFoundException("DukeSave.txt not found! Please create one!");
+                throw new FileNotFoundException("DukeSave.txt not found! Please create one in DukeSaveDirectory!");
             }
 
             // Load save file from C drive
