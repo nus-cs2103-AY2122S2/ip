@@ -1,12 +1,11 @@
-import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) throws DukeException{
-        Printer p = new Printer();
+        Ui p = new Ui();
         Scanner in = new Scanner(System.in);
-        InputParser ip = new InputParser();
+        Parser ip = new Parser();
         ArrayList<Task> arr = new ArrayList<>();
         Storage.loadFile(System.getProperty("user.dir") + "\\data\\duke.txt", arr);
 
