@@ -1,3 +1,12 @@
+package echo.main;
+
+import echo.command.Command;
+import echo.parser.Parser;
+
+import echo.storage.Storage;
+import echo.task.TaskList;
+import echo.ui.Ui;
+
 import java.io.FileNotFoundException;
 
 /**

@@ -1,3 +1,10 @@
+package echo.command;
+
+import echo.storage.Storage;
+import echo.task.TaskList;
+import echo.ui.Ui;
+import echo.main.EchoException;
+
 import java.io.IOException;
 
 public class MarkCommand extends Command {

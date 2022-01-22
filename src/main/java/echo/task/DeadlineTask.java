@@ -1,3 +1,5 @@
+package echo.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -7,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 public class DeadlineTask extends Task {
 
     /** Deadline of task. */
-    private LocalDateTime by;
+    private final LocalDateTime BY;
 
     /**
      * Constructor for DeadlineTask class.
@@ -17,7 +19,7 @@ public class DeadlineTask extends Task {
      */
     public DeadlineTask(String desc, LocalDateTime by) {
         super(desc);
-        this.by = by;
+        this.BY = by;
     }
 
     /**
@@ -28,7 +30,7 @@ public class DeadlineTask extends Task {
     @Override
     public String saveFormat() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-M-d HHmm");
-        return "D | " + super.saveFormat() + " | " + this.by.format(format);
+        return "D | " + super.saveFormat() + " | " + this.BY.format(format);
     }
 
     /**
@@ -39,6 +41,6 @@ public class DeadlineTask extends Task {
     @Override
     public String toString() {
         DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mma");
-        return "[D]" + super.toString() + " (by: " + this.by.format(formatDateTime) + ")";
+        return "[D]" + super.toString() + " (by: " + this.BY.format(formatDateTime) + ")";
     }
 }

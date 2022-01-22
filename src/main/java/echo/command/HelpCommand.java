@@ -1,3 +1,9 @@
+package echo.command;
+
+import echo.storage.Storage;
+import echo.task.TaskList;
+import echo.ui.Ui;
+
 public class HelpCommand extends Command {
 
     public static final String COMMAND = "help";

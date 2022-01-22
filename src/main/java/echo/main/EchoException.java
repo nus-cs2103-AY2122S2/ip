@@ -1,3 +1,5 @@
+package echo.main;
+
 /**
  * EchoException class that handles exceptions related to user inputs.
  */

@@ -1,3 +1,5 @@
+package echo.ui;
+
 import java.util.Scanner;
 
 /**

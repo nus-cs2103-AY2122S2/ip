@@ -1,3 +1,12 @@
+package echo.command;
+
+import echo.storage.Storage;
+import echo.task.TaskList;
+import echo.ui.Ui;
+import echo.main.EchoException;
+
+import echo.task.EventTask;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 

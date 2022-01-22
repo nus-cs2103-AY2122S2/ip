@@ -1,3 +1,5 @@
+package echo.task;
+
 /**
  * Encapsulates a task.
  */
