@@ -91,6 +91,18 @@ public class Ui {
     }
 
     /**
+     * Prints list of matching tasks in the given format
+     *
+     * @param tasks list of matching tasks
+     */
+    public void showMatchingTasks(ArrayList<Task> tasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println(String.format("%d.%s", i + 1, tasks.get(i)));
+        }
+    }
+
+    /**
      * Prints line
      */
     public void showLine() {

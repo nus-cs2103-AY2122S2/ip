@@ -59,5 +59,21 @@ public class TaskList {
     public void addTask(Task task) {
         tasks.add(task);
     }
+
+    /**
+     * Returns list of tasks with specified keyword
+     *
+     * @param keyword keyword to be searched
+     * @return list of matching tasks
+     */
+    public ArrayList<Task> findTasks(String keyword) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task task: tasks) {
+            if (task.getDescription().contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
+    }
 }
 

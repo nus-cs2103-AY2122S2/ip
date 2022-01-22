@@ -1,14 +1,6 @@
 package duke.parser;
 
-import duke.command.Command;
-import duke.command.AddDeadlineCommand;
-import duke.command.AddEventCommand;
-import duke.command.AddTodoCommand;
-import duke.command.DeleteCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
-import duke.command.UnmarkCommand;
+import duke.command.*;
 import duke.exception.DukeException;
 
 import java.time.LocalDate;
@@ -31,7 +23,11 @@ public class Parser {
             return new ExitCommand();
         } else if (fullCommand.startsWith("list")) {
             return new ListCommand();
-        } else if (fullCommand.startsWith("mark")) {
+        } else if (fullCommand.startsWith("find")) {
+            String remainingCommand = fullCommand.split(" ", 2)[1];
+            return new FindCommand(remainingCommand);
+        }
+        else if(fullCommand.startsWith("mark")) {
             String remainingCommand = fullCommand.split(" ", 2)[1];
             return new MarkCommand(Integer.parseInt(remainingCommand));
         } else if (fullCommand.startsWith("unmark")) {
