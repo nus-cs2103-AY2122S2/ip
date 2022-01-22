@@ -13,7 +13,18 @@ public class InputParser {
                 return -1;
             } else if (action.equals("list")) {
                 // Empty List handled by Printer
-                p.print(arr);
+                if(args[1].equals("/on")) {
+                    //System.out.println("!!");
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-M-yyyy");
+                    arr.stream()
+                            .filter(t -> t instanceof DeadlineTask)
+                            .filter(t -> ((DeadlineTask)t).getDueDate().equals(LocalDate.parse(args[2],formatter))).forEach(System.out::println);
+                    arr.stream()
+                            .filter(t -> t instanceof EventTask)
+                            .filter(t -> ((EventTask)t).getDate().equals(LocalDate.parse(args[2],formatter))).forEach(System.out::println);
+                } else {
+                    p.print(arr);
+                }
             } else if (action.equals("mark")) {
 
                 if(args.length == 1)
@@ -82,7 +93,7 @@ public class InputParser {
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-M-yyyy hh:mm");
                 //System.out.println(ss.split("/by")[1].substring(1, ss.split("/by")[1].length()));
-                EventTask newTask = new EventTask(ss.substring(9, ss.length()).split("/by")[0], LocalDate.parse(ss.split("/by")[1].substring(1, ss.split("/by")[1].length()),formatter));
+                EventTask newTask = new EventTask(ss.substring(6, ss.length()).split("/at")[0], LocalDate.parse(ss.split("/at")[1].substring(1, ss.split("/at")[1].length()),formatter));
                 arr.add(newTask);
                 p.print("Added Task: ", " " + newTask.toString(), String.format("There are now %d task(s) in the list.", arr.size()));
             } else if (action.equals("delete")) {
