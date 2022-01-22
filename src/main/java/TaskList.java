@@ -1,3 +1,8 @@
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -39,12 +44,32 @@ public class TaskList {
             tasks.add(new Todo(description));
         }
         else if (command.equals("deadline")) {
-            String[] splitDescription = description.split("/by");
-            tasks.add(new Deadline(splitDescription[0], splitDescription[1]));
+            String[] splitDescription = description.split(" /by ");
+            if (!isDateTime(splitDescription[1])) {
+                tasks.add(new Deadline(splitDescription[0], splitDescription[1]));
+            }
+            else {
+                if (splitDescription[1].length() == 10) {
+                    tasks.add(new Deadline(splitDescription[0], LocalDate.parse(splitDescription[1])));
+                }
+                else {
+                    tasks.add(new Deadline(splitDescription[0], LocalDateTime.parse(splitDescription[1])));
+                }
+            }
         }
         else {
-            String[] splitDescription = description.split("/at");
-            tasks.add(new Event(splitDescription[0], splitDescription[1]));
+            String[] splitDescription = description.split(" /at ");
+            if (!isDateTime(splitDescription[1])) {
+                tasks.add(new Event(splitDescription[0], splitDescription[1]));
+            }
+            else {
+                if (splitDescription[1].length() == 10) {
+                    tasks.add(new Event(splitDescription[0], LocalDate.parse(splitDescription[1])));
+                }
+                else {
+                    tasks.add(new Event(splitDescription[0], LocalDateTime.parse(splitDescription[1])));
+                }
+            }
         }
         System.out.println(tasks.get(tasks.size() - 1));
         if (tasks.size() <= 1) {
@@ -52,6 +77,31 @@ public class TaskList {
         }
         else {
             System.out.println(String.format("Now you have %d tasks in the list.", tasks.size()));
+        }
+    }
+
+    public boolean isDateTime(String s) {
+        //assuming DateTime in format 2019-10-15T06:30:00 or Date in format 2019-10-15
+        if (s.length() == 10) {
+            try {
+                LocalDate.parse(s);
+            }
+            catch (DateTimeParseException e) {
+               return false;
+            }
+            return true;
+        }
+        else if (s.length() == 19) {
+            try {
+                LocalDateTime.parse(s);
+            }
+            catch (DateTimeParseException e) {
+                return false;
+            }
+            return true;
+        }
+        else {
+            return false;
         }
     }
 }
