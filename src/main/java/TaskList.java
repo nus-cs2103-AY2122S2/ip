@@ -19,9 +19,13 @@ public class TaskList {
         Task newTask = new UnmarkedTask(taskTitle, taskType);
         this.itemList.add(newTask);
         System.out.println(
+                "----------------------------" +
+                        "----------------------------\n" +
                 "Got it. I've added this task:\n"
                         + "  " + newTask + "\n"
                         + "Now you have " + this.itemList.size() + " tasks in the list."
+                        + "\n"
+                        + "--------------------------------------------------------"
         );
     }
 
@@ -42,9 +46,13 @@ public class TaskList {
         Task newTask = new UnmarkedTask(taskTitle, deadline, taskType);
         this.itemList.add(newTask);
         System.out.println(
+                "----------------------------" +
+                        "----------------------------\n" +
                 "Got it. I've added this task:\n"
                         + "  " + newTask + "\n"
                         + "Now you have " + this.itemList.size() + " tasks in the list."
+                        + "\n"
+                        + "--------------------------------------------------------"
         );
     }
 
@@ -65,9 +73,13 @@ public class TaskList {
         Task newTask = new UnmarkedTask(taskTitle, deadline, taskType);
         this.itemList.add(newTask);
         System.out.println(
+                "----------------------------" +
+                        "----------------------------\n" +
                 "Got it. I've added this task:\n"
                 + "  " + newTask + "\n"
                 + "Now you have " + this.itemList.size() + " tasks in the list."
+                        + "\n"
+                        + "--------------------------------------------------------"
         );
     }
 
@@ -79,8 +91,12 @@ public class TaskList {
         Task newTask = targetTask.markTask();
         this.itemList.set(index, newTask);
         System.out.println(
+                "----------------------------" +
+                        "----------------------------\n" +
                 "Nice! I've marked this task as done:"
                         + "\n" + "  " + newTask
+                        + "\n"
+                        + "--------------------------------------------------------"
         );
     }
 
@@ -92,8 +108,12 @@ public class TaskList {
         Task newTask = targetTask.unmarkTask();
         this.itemList.set(index, newTask);
         System.out.println(
+                "----------------------------" +
+                        "----------------------------\n" +
                 "OK, I've marked this task as not done yet:"
                         + "\n" + "  " + newTask
+                        + "\n"
+                        + "--------------------------------------------------------"
         );
     }
 

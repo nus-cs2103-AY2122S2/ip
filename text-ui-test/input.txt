@@ -1,0 +1,16 @@
+event meeting tomorrow /at Sunday 6pm
+event lunch /at Sunday 12pm
+list
+deadline meeting slides /by Sunday 4pm
+deadline lunch /by Sunday 11am
+list
+todo meeting
+todo lunch
+list
+mark 0
+list
+unmark 0
+mark 1
+list
+unmark 1
+list
