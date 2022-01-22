@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 public class Duke {
@@ -24,7 +26,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String greeting = "Hello!! I am Duke, your humble personal chatbot.\n" +
+        String greeting = "Hello!! I am duke.Duke, your humble personal chatbot.\n" +
                 "What can I do for you?";
         System.out.println(greeting);
         Scanner sc = new Scanner(System.in);

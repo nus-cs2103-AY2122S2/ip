@@ -1,4 +1,4 @@
-Hello!! I am Duke, your humble pesonal chatbot.
+Hello!! I am duke.Duke, your humble pesonal chatbot.
 What can I do for you?
 Got it. I have added this task:
   [T][ ] read book

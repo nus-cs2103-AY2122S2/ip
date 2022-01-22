@@ -21,7 +21,7 @@ fi
 
 # run the program, feed commands from input.txt file and redirect the output to the level_1_ACTUAL.TXT
 java -classpath ../bin Duke < input.txt > ACTUAL.TXT
-#java Duke < input.txt > ACTUAL.TXT
+#java duke.Duke < input.txt > ACTUAL.TXT
 
 # convert to UNIX format
 cp expected.txt EXPECTED-UNIX.TXT
