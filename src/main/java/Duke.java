@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
-    private ArrayList<String> list;
+    private ArrayList<Task> list;
 
     public static void main(String[] args) {
         System.out.println("Hello from Duke!");
@@ -20,6 +20,11 @@ public class Duke {
             else if (strArr[0].equals("mark")) {
                 int taskNum = String.parseInt(strArr[1]);
                 list.get(taskNum).setStatus(true);
+            }
+            else if (cmd.equals("delete")) {
+                int taskNum = String.parseInt(strArr[1]);
+                list.delete(taskNum);
+                System.out.println("I've deleted this task.");
             }
             else if (cmd.equals("unmark")) {
                 int taskNum = String.parseInt(strArr[1]);
