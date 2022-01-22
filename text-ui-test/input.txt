@@ -1,7 +1,7 @@
-list
 mark -1
 add task
 todo
+todo buy|choya
 todo borrow book
 deadline /by Sunday
 deadline return book /by Sunday
