@@ -44,6 +44,19 @@ public class TaskList {
         return list.remove(taskNo);
     }
 
+    public String findMatching(String task) {
+        int notation = 1;
+        StringBuilder result = new StringBuilder();
+        for (Action action : list) {
+            if (action.getTask().contains(task)) {
+                result.append(notation).append(".").append(action)
+                        .append("\n");
+                notation++;
+            }
+        }
+        return result.toString();
+    }
+
     public void listOut() {
         int count = 1;
         System.out.println("Here are the tasks in your list:");

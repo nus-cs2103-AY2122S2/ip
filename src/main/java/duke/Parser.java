@@ -28,6 +28,10 @@ public class Parser {
                 return new UnmarkCommand(number);
             }
         }
+        if (firstWord.equals("find")) {
+            String task = twoWords[1];
+            return new FindCommand(task);
+        }
         if (!firstWord.equals("deadline") && !firstWord.equals("todo") && !firstWord.equals("event")) {
             throw new DukeException("Unknown Command");
         }

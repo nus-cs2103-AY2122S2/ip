@@ -18,6 +18,10 @@ public class Action {
         return isDone ? "X" : " ";
     }
 
+    public String getTask() {
+        return act;
+    }
+
     public Action setDone() {
         return new Action(act, true);
     }
