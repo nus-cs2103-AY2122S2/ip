@@ -1,5 +1,3 @@
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -16,7 +14,6 @@ public class Task {
     String type;
     int number;
     static int totalTask = 0;
-    static File pathToFile;
     boolean isdone = false;
 
     /**
@@ -46,7 +43,7 @@ public class Task {
                 } else {
                     System.out.printf(" [E][%s] %s (on: %s) \n", this.getStatus(), this.name, this.time);
                 }
-                addLineToFile();
+                Storage.addLineToFile(this.getDataRepresentation());
                 totalTask++;
                 System.out.printf("Now you have %d task on the list.\n", Task.totalTask);
             }
@@ -63,15 +60,8 @@ public class Task {
 
     }
 
-    public String getDataToWrite(){
+    public String getDataRepresentation(){
         return String.format("%s---%s---%s---%s \n", this.type, this.isdone, this.name, this.time);
-    }
-
-    public void addLineToFile() throws IOException {
-        FileWriter fw = new FileWriter(pathToFile, true); // create a FileWriter in append mode
-        String s = String.format("%s---%s---%s---%s \n", this.type, this.isdone, this.name, this.time);
-        fw.write(s);
-        fw.close();
     }
 
     public void setDate(String input, boolean isReading){
@@ -90,7 +80,6 @@ public class Task {
             this.time = input;
         }
     }
-
 
     /**
      * Marks tasks as done.

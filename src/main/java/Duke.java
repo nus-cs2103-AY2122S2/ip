@@ -11,7 +11,6 @@ import java.util.*;
 
 public class Duke {
 
-    static File savedata;
     static ArrayList<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args){
@@ -23,9 +22,9 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         Scanner sc = new Scanner(System.in);
         boolean isBye = false;
-        savedata = load();
-        Task.pathToFile = savedata;
         System.out.println("What can i do for you?");
+        Storage storage = new Storage();
+        storage.load();
         while(!isBye) {
             try {
                 String input = sc.nextLine();
@@ -71,67 +70,6 @@ public class Duke {
         }
     }
 
-    public static File load(){
-        try {
-            String currDir = System.getProperty("user.dir");
-            java.nio.file.Path pathDir = java.nio.file.Paths.get(currDir, "data", "Duke");
-            Path pathToFile = java.nio.file.Paths.get(currDir, "data", "Duke", "tasks.txt");
-            boolean directoryExists = java.nio.file.Files.exists(pathToFile);
-            if (!directoryExists) {
-                System.out.println("Unable to find existing data. Creating new file(s)...");
-                new File(pathDir.toString()).mkdirs();
-                pathToFile.toFile().createNewFile();
-                System.out.println("Successfully created " + pathToFile);
-            } else {
-                System.out.println("Resuming previous saved state.");
-            }
-            readSavedData(pathToFile.toFile(), taskList);
-            return pathToFile.toFile();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
-    public static void writeAllToFile() {
-        try {
-            FileWriter fw = new FileWriter(savedata);
-            for (int i = 0; i < Task.totalTask; i++) {
-                fw.write(taskList.get(i).getDataToWrite());
-            }
-            fw.close();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void readSavedData(File pathToFile, ArrayList<Task> taskList) throws FileNotFoundException{
-        Scanner s = new Scanner(pathToFile);
-        while(s.hasNext()){
-            fileParse(s.nextLine());
-        }
-    }
-
-    public static void fileParse(String input){
-        if (input == null || input == ""){
-            return;
-        }
-        String[] stringArr = input.split("---");
-        int taskNum = Task.totalTask;
-        if (stringArr[0].equals("T")){
-            taskList.add(new ToDo(stringArr[2], taskNum, true));
-            markTaskNum(taskNum, stringArr[1]);
-        } else if (stringArr[0].equals("D")){
-            taskList.add(new Deadline(stringArr[2], taskNum, stringArr[3], true));
-            markTaskNum(taskNum, stringArr[1]);
-        } else {
-            taskList.add(new Event(stringArr[2], taskNum, stringArr[3], true));
-            markTaskNum(taskNum, stringArr[1]);
-        }
-    }
 
     public static void markTaskNum(int taskNum, String check){
         if (check.equals("true")) {
@@ -159,7 +97,7 @@ public class Duke {
         } else {
             System.out.println("☹ OOPS!!! There is no such task found.");
         }
-        writeAllToFile();
+        Storage.writeAllToFile();
     }
 
     /**
@@ -181,7 +119,7 @@ public class Duke {
             System.out.println("OK, I've marked this task as not done yet: ");
             System.out.printf("  [%s][%s] %s\n", curr.type, curr.getStatus(), curr.name);
         }
-        writeAllToFile();
+        Storage.writeAllToFile();
     }
 
     /**
