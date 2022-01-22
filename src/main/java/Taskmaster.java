@@ -5,16 +5,16 @@ import java.util.Scanner;
 
 
 
-public class Duke {
+public class Taskmaster {
     //Taskmaster logo 
     protected String logo = "  _____\n" + " /     \\\n" + "| () () |\n" + " \\  ^  /\n" + "  |||||\n" + "  |||||\n"; 
     protected TaskList tasklist;
     protected Storage storage;
     
     /**
-     * Constructor for Duke the chatbot 
+     * Constructor for Taskmaster the chatbot 
      */
-    private Duke () {
+    private Taskmaster () {
         this.tasklist = new TaskList();
         this.storage = new Storage();
     }
@@ -66,7 +66,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke taskMaster = new Duke(); //Creates Chatbot
+        Taskmaster taskMaster = new Taskmaster(); //Creates Chatbot
         taskMaster.openingMessage(); //Display opening message
         taskMaster.loadingExistingFile(); //Load existing file
         taskMaster.chatBot(); //Runs the chatbot

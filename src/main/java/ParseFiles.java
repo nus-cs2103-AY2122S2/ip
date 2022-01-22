@@ -2,7 +2,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Parser {
+public class ParseFiles {
     
     private String[] splitStringIntoParts(String s) {
         String[] splitBasedOnDelimiter = s.split("\\|");

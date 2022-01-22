@@ -62,7 +62,7 @@ public class Storage {
             }
 
             Scanner reader = new Scanner(fileToBeLoaded);
-            Parser parser = new Parser();
+            ParseFiles parser = new ParseFiles();
             while (reader.hasNextLine()) {
                 Task currentTask = parser.parseTask(reader.nextLine());
                 tasklist.add(currentTask);

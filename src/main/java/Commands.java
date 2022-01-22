@@ -62,62 +62,62 @@ public class Commands {
                 tasklist.list();
          } 
          
-         //Case "mark" & Case("unmark") & Case"delete"
-         //Collated together because it works similarly
+        //Case "mark" & Case("unmark") & Case"delete"
+        //Collated together because it works similarly
         else if (firstWord.equals("mark") || firstWord.equals("unmark") || firstWord.equals("delete")) {
-            //String to contain successful deleted message if its a delete command
-            String deleted = "";
-             //Handle the case of having no second input
-             if (splitString.length == 1 ) {
-                 System.out.println("What?! You are to enter only 2 inputs. Eg mark 1, unmark 2, delete 3\n");
-             }  else if (splitString.length > 2) {
-                 //Handle the case of having more than 2 inputs
-                 System.out.println("What?! You are to enter only 2 inputs. Eg mark 1, unmark 2, delete 3\n");
-             } else {
-                 try {
-                     //Handle error if the second input is not an integer
-                     //Gets the index of the task in the task list
-                     int index = Integer.parseInt(splitString[1]);
-                     //If index is out of range, throw illegal argument exception
-                     if (index <= 0 || index > tasklist.currentSize) {
+            try {
+                //String to contain successful deleted message if its a delete command
+                String deleted = "";
+                //Handle the case of having no second input
+                if (splitString.length == 1 ) 
+                    throw new DukeExceptions("What?! You are to enter only 2 inputs. Eg mark 1, unmark 2, delete 3\n");
+                //Handle the case of having more than 2 inputs
+                if (splitString.length > 2)
+                    throw new DukeExceptions("What?! You are to enter only 2 inputs. Eg mark 1, unmark 2, delete 3\n");
+            
+                //Handle error if the second input is not an integer
+                //Gets the index of the task in the task list
+                int index = Integer.parseInt(splitString[1]);
+                //If index is out of range, throw illegal argument exception
+                if (index <= 0 || index > tasklist.currentSize) {
                          throw new DukeExceptions("BRAT ! Your index is out of range! Number has to in the range of the list\n");
-                     }
-                     //If no errors, continue
-                       //Task that we are going to mark/unmark/delete
-                    Task thatTask = tasklist.get(index - 1);
-                     String displayMessage = "";
-                     if (firstWord.equals("mark")) {
-                         displayMessage = "Aye! I've marked this task as completed:\n";
-                         tasklist.mark(index - 1);
-                     } else if (firstWord.equals("unmark")){
-                         displayMessage = "Aye kid! I've marked this task as uncompleted:\n";
-                         tasklist.unmark(index - 1);
-                     } else {
-                         tasklist.delete(index - 1);
-                         displayMessage = "YES! I've removed this task and soon I'll remove you as well!:\n";
-                         deleted = "Now you have " + tasklist.currentSize + " tasks in the list\n";
-                     }
+                }
+                //If no errors, continue
+                //Task that we are going to mark/unmark/delete
+                Task thatTask = tasklist.get(index - 1);
+                String displayMessage = "";
+                if (firstWord.equals("mark")) {
+                    displayMessage = "Aye! I've marked this task as completed:\n";
+                    tasklist.mark(index - 1);
+                } else if (firstWord.equals("unmark")){
+                    displayMessage = "Aye kid! I've marked this task as uncompleted:\n";
+                    tasklist.unmark(index - 1);
+                } else {
+                    tasklist.delete(index - 1);
+                    displayMessage = "YES! I've removed this task and soon I'll remove you as well!:\n";
+                    deleted = "Now you have " + tasklist.currentSize + " tasks in the list\n";
+                }
                     
-                     System.out.println(displayMessage);
-                     System.out.println("    " + thatTask.toString());
-                     System.out.println(deleted);
+                System.out.println(displayMessage);
+                System.out.println("    " + thatTask.toString());
+                System.out.println(deleted);
                     
-                     //NumberFormatException is thrown if the second input is not an integer
-                 } catch (NumberFormatException nfe) {
-                     System.out.println("What? Second input has to be an integer! Eg mark 1, unmark 2\n");
-                     //Out of task range is thrown if the second input is out of range
-                 } catch (DukeExceptions e) {
-                     System.out.println(e.getMessage());
-                 }
+                //NumberFormatException is thrown if the second input is not an integer
+                } catch (NumberFormatException nfe) {
+                    System.out.println("What? Second input has to be an integer! Eg mark 1, unmark 2\n");
+                    //Out of task range is thrown if the second input is out of range
+                } catch (DukeExceptions e) {
+                    System.out.println(e.getMessage());
+                }
 
              }
-         }  
-          //Case "mark" & Case("unmark") & Case"delete"
-         //Collated together because it works similarly
-         else if (firstWord.equals("todo") || firstWord.equals("deadline") || firstWord.equals("event")) {
-            //Pass to check whether task is to be created
-            boolean created = false;
-            try {
+         
+          
+            
+            else if (firstWord.equals("todo") || firstWord.equals("deadline") || firstWord.equals("event")) {
+                //Pass to check whether task is to be created
+                boolean created = false;
+                try {
                 //Handle the case of having no second input
 
                 if (splitString.length == 1 ) 
@@ -188,9 +188,25 @@ public class Commands {
             } catch (DateTimeParseException e) {
                 System.out.println("ERROR! Time or Date is in wrong format! 2/12/2019 1800\n");
             }
+        } 
+
+        //Case "Find"
+        else if (firstWord.equals("find")) {
+            try {
+                if (splitString.length == 1)
+                    throw new DukeExceptions("ERROR: find command requires a parameter to specify what keyword to find");
+                
+                String toFind = this.command.substring(this.command.indexOf(" ") + 1);
+                
+                tasklist.find(toFind);
+
+            } catch (DukeExceptions e) {
+                System.out.println(e.getMessage());
+            }
+                
         }
 
-         //Case "help""
+        //Case "help""
         //List out all commands 
         else if (firstWord.equals("help")) {
           listOfCommand();

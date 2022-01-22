@@ -101,4 +101,18 @@ public class TaskList {
 
         return result.trim();
     }
+
+    public void find(String strToFind) {
+        int count = 1;
+        for (Task task:tasklist) {
+            if (task.taskName.contains(strToFind)) {
+                System.out.println(count + ". " + task);
+                count++;
+            }
+        }
+
+        if (count == 1) {
+            System.out.println("No task with that keyword\n");
+        }
+    }
 }
