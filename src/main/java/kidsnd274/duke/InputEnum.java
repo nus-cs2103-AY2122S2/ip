@@ -1,3 +1,5 @@
+package kidsnd274.duke;
+
 public enum InputEnum {
     QUIT("quit"),
     EXIT("exit"),

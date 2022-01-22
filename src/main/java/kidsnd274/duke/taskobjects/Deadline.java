@@ -1,7 +1,7 @@
-package TaskObjects;
+package kidsnd274.duke.taskobjects;
 
 public class Deadline extends Task {
-    protected String deadline;
+    private String deadline;
 
     public Deadline(String name, String deadline) {
         super(name);

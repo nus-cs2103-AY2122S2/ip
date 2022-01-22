@@ -1,7 +1,7 @@
-package TaskObjects;
+package kidsnd274.duke.taskobjects;
 
 public class Event extends Task {
-    protected String time;
+    private String time;
 
     public Event(String name, String time) {
         super(name);

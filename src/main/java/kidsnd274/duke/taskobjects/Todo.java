@@ -1,4 +1,4 @@
-package TaskObjects;
+package kidsnd274.duke.taskobjects;
 
 public class Todo extends Task {
     public Todo(String name) {

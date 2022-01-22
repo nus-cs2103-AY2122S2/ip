@@ -1,4 +1,4 @@
-package DukeException;
+package kidsnd274.duke.exceptions;
 
 public class NullDateProvidedException extends RuntimeException {
     public NullDateProvidedException(String str) {

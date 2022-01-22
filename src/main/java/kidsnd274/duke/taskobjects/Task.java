@@ -1,8 +1,8 @@
-package TaskObjects;
+package kidsnd274.duke.taskobjects;
 
 public class Task {
-    protected String taskName;
-    protected boolean done;
+    private String taskName;
+    private boolean done;
 
     public Task(String taskName) {
         this.taskName = taskName;

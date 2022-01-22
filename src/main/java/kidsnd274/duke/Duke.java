@@ -1,5 +1,10 @@
-import DukeException.NullDateProvidedException;
-import TaskObjects.*;
+package kidsnd274.duke;
+
+import kidsnd274.duke.exceptions.NullDateProvidedException;
+import kidsnd274.duke.taskobjects.Event;
+import kidsnd274.duke.taskobjects.Deadline;
+import kidsnd274.duke.taskobjects.Todo;
+import kidsnd274.duke.taskobjects.Task;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -7,9 +12,10 @@ import java.lang.StringBuilder;
 
 public class Duke {
     // Global Variables
-    static ArrayList<Task> toDoList;
-    static String welcomeMessage = "Hello! I'm Duke, your personal assistant\nWhat can I do for you?";
-    static String goodbyeMessage = "Goodbye!";
+    private static final String MESSAGE_WELCOME = "Hello! I'm Duke, your personal assistant\nWhat can I do for you?";
+    private static final String MESSAGE_GOODBYE = "Goodbye!";
+
+    private static ArrayList<Task> toDoList;
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -126,11 +132,11 @@ public class Duke {
     }
 
     private static String generateIntro() {
-        return generateResponse(welcomeMessage);
+        return generateResponse(MESSAGE_WELCOME);
     }
 
     private static String generateGoodbye() {
-        return generateResponse(goodbyeMessage);
+        return generateResponse(MESSAGE_GOODBYE);
     }
 
     private static String generateAddMessage(Task newTask) {
