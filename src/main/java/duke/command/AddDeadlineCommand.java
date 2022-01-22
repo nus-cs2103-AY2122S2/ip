@@ -8,6 +8,9 @@ import duke.task.Task;
 import duke.task.Deadline;
 import java.time.LocalDate;
 
+/**
+ * Represents add deadline task command
+ */
 public class AddDeadlineCommand extends Command {
     protected String description;
     protected String by;
@@ -17,11 +20,20 @@ public class AddDeadlineCommand extends Command {
         this.description = description;
         this.by = by;
     }
+
     public AddDeadlineCommand(String description, LocalDate date) {
         this.description = description;
         this.date = date;
     }
 
+    /**
+     * Adds deadline task to list
+     *
+     * @param tasks contains list of tasks
+     * @param ui interact with user
+     * @param storage save tasks to file
+     * @throws DukeException if I0Exception occurs
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task;

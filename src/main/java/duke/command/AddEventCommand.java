@@ -8,6 +8,9 @@ import duke.task.Task;
 import duke.task.Event;
 import java.time.LocalDate;
 
+/**
+ * Represents add event task command
+ */
 public class AddEventCommand extends Command {
     protected String description;
     protected String at;
@@ -17,11 +20,20 @@ public class AddEventCommand extends Command {
         this.description = description;
         this.at = at;
     }
+
     public AddEventCommand(String description, LocalDate date) {
         this.description = description;
         this.date = date;
     }
 
+    /**
+     * Adds event task to list
+     *
+     * @param tasks contains list of tasks
+     * @param ui interact with user
+     * @param storage save tasks to file
+     * @throws DukeException if I0Exception occurs
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task;

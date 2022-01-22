@@ -3,6 +3,9 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a deadline task
+ */
 public class Deadline extends Task {
     protected String by;
     protected LocalDate date;
@@ -18,11 +21,21 @@ public class Deadline extends Task {
         this.date = date;
     }
 
+    /**
+     * Get format to display deadline task on file
+     *
+     * @return format to display deadline task on file
+     */
     @Override
     public String getFileFormat() {
-        return "D" + super.getFileFormat() + "|" + by;
+        return "D" + super.getFileFormat() + " | " + by;
     }
 
+    /**
+     * Get general format to display deadline task
+     *
+     * @return general format to display deadline task
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";

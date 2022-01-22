@@ -7,6 +7,9 @@ import duke.exception.DukeException;
 import duke.command.Command;
 import duke.parser.Parser;
 
+/**
+ * Represents Duke main class
+ */
 public class Duke {
 
     private Storage storage;
@@ -23,6 +26,10 @@ public class Duke {
             tasks = new TaskList();
         }
     }
+
+    /**
+     * Runs duke program until exit command is made
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -41,6 +48,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Instantiate Duke and run it
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
