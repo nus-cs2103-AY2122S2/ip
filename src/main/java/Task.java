@@ -7,6 +7,11 @@ public abstract class Task {
         this.name = name;
     }
 
+    public Task(String name, boolean isDone) {
+        this.name = name;
+        this.isDone = isDone;
+    }
+
     public void markTask() {
         isDone = true;
     }
@@ -17,5 +22,9 @@ public abstract class Task {
 
     public String toString() {
         return String.format("[%s] %s", isDone? "X" : " ", name);
+    }
+
+    public String toData() {
+        return String.format("%d|%s", isDone? 1 : 0, name);
     }
 }
