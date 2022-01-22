@@ -24,6 +24,10 @@ public class Action {
         return isDone ? "X" : " ";
     }
 
+    public String getTask() {
+        return act;
+    }
+
     /**
      * Returns a new Action object signifiying that
      * it has been marked as done. The isDone variable

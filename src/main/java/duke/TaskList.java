@@ -82,6 +82,19 @@ public class TaskList {
         return list.remove(taskNo);
     }
 
+    public String findMatching(String task) {
+        int notation = 1;
+        StringBuilder result = new StringBuilder();
+        for (Action action : list) {
+            if (action.getTask().contains(task)) {
+                result.append(notation).append(".").append(action)
+                        .append("\n");
+                notation++;
+            }
+        }
+        return result.toString();
+    }
+
     /**
      * Prints out the contents of the list
      * in a numeric notation.
