@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
 
     protected String description;
     protected boolean isDone;
@@ -8,21 +8,30 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, Boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     @Override
     public String toString() {
-        return getStatusIcon() + " " + description;
+        if (isDone) {
+            return "[X] " + description;
+        } else {
+            return "[ ] " + description;
+        }
     }
 
-    public String getStatusIcon() {
-        return (isDone ? "[X]" : "[ ]"); // mark done task with X
+    public int getStatus() {
+        return isDone ? 1 : 0;
     }
 
-    public void markAsDone() {
-        isDone = true;
-    }
+    public abstract String getDescription();
 
-    public void markNotDone() {
-        isDone = false;
-    }
+    public abstract String getIcon();
+
+    public abstract Task mark();
+
+    public abstract Task unmark();
 
 }
