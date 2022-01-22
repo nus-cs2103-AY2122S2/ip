@@ -11,6 +11,6 @@ public abstract class Task {
         System.out.println("Got it. I've added this task");
     }
 
-    public abstract void getStatus();
+    public abstract String getStatus();
 
 }

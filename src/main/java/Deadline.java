@@ -1,16 +1,21 @@
 public class Deadline extends Task {
     String by;
 
-    public Deadline(String activity, String type, String by) {
-        super(activity, type);
+    public Deadline(String activity, String by) {
+        super(activity, "D");
         this.by = by;
     }
     @Override
-    public void getStatus() {
+    public String getStatus() {
         if (this.status == 0) {
-            System.out.println("[" + type + "][ ] " + activity + " (by " + by + " )");
+            return "[" + type + "][ ] " + activity + " (by " + by + ")";
         } else {
-            System.out.println("[" + type + "][X] " + activity + " (by " + by + " )");
+            return "[" + type + "][X] " + activity + " (by " + by + ")";
         }
+    }
+
+    @Override
+    public String toString() {
+        return type + "|" + status + "|" + activity + "|" + by + "|\n";
     }
 }
