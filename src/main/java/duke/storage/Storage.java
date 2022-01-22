@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Deals with loading tasks from the file and saving tasks in the file
  */
 public class Storage {
-    protected String filePath;
+    private String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;

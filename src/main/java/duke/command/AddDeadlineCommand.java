@@ -12,9 +12,9 @@ import java.time.LocalDate;
  * Represents add deadline task command
  */
 public class AddDeadlineCommand extends Command {
-    protected String description;
-    protected String by;
-    protected LocalDate date;
+    private String description;
+    private String by;
+    private LocalDate date;
 
     public AddDeadlineCommand(String description, String by) {
         this.description = description;

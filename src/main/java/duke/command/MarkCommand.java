@@ -9,7 +9,7 @@ import duke.exception.DukeException;
  * Represents mark command
  */
 public class MarkCommand extends Command {
-    protected int number;
+    private int number;
 
     public MarkCommand(int number) {
         this.number = number - 1;

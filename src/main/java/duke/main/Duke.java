@@ -11,7 +11,6 @@ import duke.parser.Parser;
  * Represents Duke main class
  */
 public class Duke {
-
     private Storage storage;
     private TaskList tasks;
     private Ui ui;

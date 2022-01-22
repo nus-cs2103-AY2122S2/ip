@@ -12,9 +12,9 @@ import java.time.LocalDate;
  * Represents add event task command
  */
 public class AddEventCommand extends Command {
-    protected String description;
-    protected String at;
-    protected LocalDate date;
+    private String description;
+    private String at;
+    private LocalDate date;
 
     public AddEventCommand(String description, String at) {
         this.description = description;
