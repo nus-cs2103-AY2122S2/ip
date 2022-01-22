@@ -1,11 +1,8 @@
 package tasks;
-<<<<<<< HEAD:src/main/java/tasks/Deadline.java
-=======
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
->>>>>>> branch-Level-8:src/main/java/Tasks/Deadline.java
 
 /**
  * Deadline type of Task, with a date and time that the task must be completed.

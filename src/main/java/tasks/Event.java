@@ -1,11 +1,8 @@
 package tasks;
-<<<<<<< HEAD:src/main/java/tasks/Event.java
-=======
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
->>>>>>> branch-Level-8:src/main/java/Tasks/Event.java
 
 /**
  * Event type of Task. Has specific time of occurence.
