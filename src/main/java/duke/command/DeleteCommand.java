@@ -1,12 +1,12 @@
 package duke.command;
 
+import duke.Ui;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.action.Action;
 
 public class DeleteCommand extends Command {
-    private int taskNo;
+    private final int taskNo;
 
     public DeleteCommand(int taskNo) {
         this.taskNo = taskNo - 1;

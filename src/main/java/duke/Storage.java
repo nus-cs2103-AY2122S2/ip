@@ -1,6 +1,6 @@
 package duke;
-import duke.action.Action;
 
+import duke.action.Action;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 //deals with loading tasks from the file and saving tasks in the file
 public class Storage {
+
     private File file;
 
     public Storage(String filePath) {

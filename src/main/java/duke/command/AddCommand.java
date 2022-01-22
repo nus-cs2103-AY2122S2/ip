@@ -1,12 +1,16 @@
 package duke.command;
-import duke.*;
+
+import duke.Ui;
+import duke.Storage;
+import duke.TaskList;
 import duke.action.Action;
 import duke.action.Deadline;
 import duke.action.Event;
 import duke.action.Todo;
 
 public class AddCommand extends Command {
-    Action action;
+
+    private final Action action;
 
     public AddCommand(String command, String details) {
         if (command.equals("todo")) {

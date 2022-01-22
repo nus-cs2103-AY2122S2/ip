@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Action {
+
     private LocalDate date;
 
     public Deadline(String task, String by)  {

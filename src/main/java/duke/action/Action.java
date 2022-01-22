@@ -1,6 +1,7 @@
 package duke.action;
 
 public class Action {
+
     protected final String act;
     protected final boolean isDone;
 
