@@ -1,16 +1,14 @@
 import java.io.*;
-import javax.swing.text.DateFormatter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.Scanner;
 
 public class Duke {
     static TaskManager manager = new TaskManager();
     public static void main(String[] args) {
 
-        UI.showBanner();
-        UI.showStarting();
+        Ui.showBanner();
+        Ui.showStarting();
         load();
 
         Scanner s = new Scanner(System.in);
@@ -21,10 +19,10 @@ public class Duke {
 
             if (input.equals("bye")) {
                 save();
-                UI.showBye();
+                Ui.showBye();
                 return;
             } else if (input.equals("list")) {
-                UI.showList(manager);
+                Ui.showList(manager);
             } else if (input.startsWith("unmark") || input.startsWith("mark")) {
                 marking(input);
             } else if (input.startsWith("delete")) {
@@ -32,7 +30,7 @@ public class Duke {
             } else if (input.startsWith("todo") || input.startsWith("deadline") || input.startsWith("event")){
                 manager.addTask(input);
             } else {
-                UI.showHelpMenu();
+                Ui.showHelpMenu();
             }
         }
     }
@@ -42,7 +40,7 @@ public class Duke {
             int index = Integer.parseInt(input.replaceFirst("delete", "").strip());
             manager.deleteTask(index);
         } catch (NumberFormatException n){
-            UI.showInvalidIntegerError();
+            Ui.showInvalidIntegerError();
         }
     }
 
@@ -53,14 +51,14 @@ public class Duke {
                 int index = Integer.parseInt(input.replaceFirst("mark", "").strip());
                 manager.markTaskDone(index);
             } catch (NumberFormatException n){
-                UI.showInvalidIntegerError();
+                Ui.showInvalidIntegerError();
             }
         } else if (input.startsWith("unmark")){
             try {
                 int index = Integer.parseInt(input.replaceFirst("unmark", "").strip());
                 manager.markTaskUndone(index);
             } catch (NumberFormatException n){
-                UI.showInvalidIntegerError();
+                Ui.showInvalidIntegerError();
             }
         }
 
@@ -87,7 +85,7 @@ public class Duke {
         } catch (IOException e){
             e.printStackTrace();
         }
-        UI.showSavingComplete();
+        Ui.showSavingComplete();
     }
     public static void load(){
         String FILE_PATH = System.getProperty("user.home");
@@ -102,17 +100,17 @@ public class Duke {
                     Task t = Task.parse(input);
                     if (t != null){ manager.addTask(t); }
                     else {
-                        UI.showTaskLoadFail(input);
+                        Ui.showTaskLoadFail(input);
                     }
                 }
-                UI.showLoadingComplete();
-                UI.showList(manager);
+                Ui.showLoadingComplete();
+                Ui.showList(manager);
             } catch (IOException e){
-                UI.showFileReadError();
+                Ui.showFileReadError();
                 loadDefault();
             }
         } else {
-            UI.showFileNotFound();
+            Ui.showFileNotFound();
             loadDefault();
         }
     }
@@ -129,11 +127,11 @@ public class Duke {
         manager = new TaskManager();
 
         if (!dir.exists()){
-            UI.showDirNotFound();
-            UI.showDirCreating(DIR_PATH);
+            Ui.showDirNotFound();
+            Ui.showDirCreating(DIR_PATH);
             boolean createFile = dir.mkdir();
             if (createFile){
-                UI.showDirCreated();
+                Ui.showDirCreated();
             }
         }
     }

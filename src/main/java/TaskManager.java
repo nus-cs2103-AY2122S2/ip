@@ -1,22 +1,25 @@
 import java.util.ArrayList;
 
 public class TaskManager {
-    private ArrayList<Task> list= new ArrayList<Task>();
+    private ArrayList<Task> tasks = new ArrayList<Task>();
 
     public TaskManager(){}
+    public TaskManager(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
 
     public boolean addTask(String s){
         try {
             Task t = Task.newTask(s);
-            list.add(t);
-            UI.showAddedTask(t,list.size());
+            tasks.add(t);
+            Ui.showAddedTask(t, tasks.size());
 
             return true;
         } catch (InvalidTaskDescriptionException i){
-            UI.showInvalidTaskNameError();
+            Ui.showInvalidTaskNameError();
             return false;
         } catch (InvalidTaskDataTimeException u){
-            UI.showInvalidDateTimeError();
+            Ui.showInvalidDateTimeError();
             return false;
         } catch (InvalidTaskTypeException t){
             System.out.println(t.toString());
@@ -24,42 +27,42 @@ public class TaskManager {
         }
     }
     public void addTask(Task t){
-        this.list.add(t);
+        this.tasks.add(t);
     }
 
     public boolean deleteTask(int index){
-        if (list.size() == 0){
-            UI.showDeleteEmptyList();
+        if (tasks.size() == 0){
+            Ui.showDeleteEmptyList();
             return false;
         } else {
-            if (index <= 0 || index >list.size()){
-                UI.showDeleteOutOfBounds(list.size());
+            if (index <= 0 || index > tasks.size()){
+                Ui.showDeleteOutOfBounds(tasks.size());
                 return false;
             } else {
-                Task t = list.get(index-1);
-                list.remove(index-1);
-                UI.showDeletedTask(t,list.size());
+                Task t = tasks.get(index-1);
+                tasks.remove(index-1);
+                Ui.showDeletedTask(t, tasks.size());
                 return true;
             }
         }
     }
 
     public boolean markTaskDone(int index){
-        if (list.size() <= 0){
-            UI.showMarkEmptyList();
+        if (tasks.size() <= 0){
+            Ui.showMarkEmptyList();
             return false;
         } else {
-            if (index <= 0 || index > list.size()){
-                UI.showMarkOutOfBounds();
+            if (index <= 0 || index > tasks.size()){
+                Ui.showMarkOutOfBounds();
                 return false;
             } else {
-                Task t = list.get(index - 1);
+                Task t = tasks.get(index - 1);
                 if (t.done == ' ') {
                     t.markDone();
-                    UI.showMarked(t);
+                    Ui.showMarked(t);
                     return true;
                 } else {
-                    UI.showMarkNotNeeded(t);
+                    Ui.showMarkNotNeeded(t);
                     return false;
                 }
             }
@@ -67,21 +70,21 @@ public class TaskManager {
     }
 
     public boolean markTaskUndone(int index){
-        if (list.size() <= 0){
-            UI.showUnmarkEmptyList();
+        if (tasks.size() <= 0){
+            Ui.showUnmarkEmptyList();
             return false;
         } else {
-            if (index <= 0 || index > list.size()) {
-                UI.showUnmarkOutOfBounds();
+            if (index <= 0 || index > tasks.size()) {
+                Ui.showUnmarkOutOfBounds();
                 return false;
             } else {
-                Task t = list.get(index - 1);
+                Task t = tasks.get(index - 1);
                 if (t.done == 'X') {
                     t.markunDone();
-                    UI.showUnmarked(t);
+                    Ui.showUnmarked(t);
                     return true;
                 } else {
-                    UI.showUnmarkNotNeeded(t);
+                    Ui.showUnmarkNotNeeded(t);
                     return false;
                 }
             }
@@ -89,10 +92,10 @@ public class TaskManager {
     }
 
     public ArrayList<Task> getTaskList(){
-        return this.list;
+        return this.tasks;
     }
 
     public int size(){
-        return list.size();
+        return tasks.size();
     }
 }

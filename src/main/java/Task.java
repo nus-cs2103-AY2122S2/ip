@@ -23,15 +23,15 @@ public class Task{
         }
     }
 
-    private static ToDo newToDo(String s) throws InvalidTaskDescriptionException{
+    public static ToDo newToDo(String s) throws InvalidTaskDescriptionException{
         String taskName =  s.replaceFirst("todo","").strip();
         return new ToDo(taskName);
     }
-    private static Event newEvent(String s) throws InvalidTaskDataTimeException,InvalidTaskDescriptionException{
+    public static Event newEvent(String s) throws InvalidTaskDataTimeException,InvalidTaskDescriptionException{
         String taskName =  s.replaceFirst("event","").strip();
         return new Event(taskName);
     }
-    private static Deadline newDeadline(String s) throws InvalidTaskDataTimeException,InvalidTaskDescriptionException{
+    public static Deadline newDeadline(String s) throws InvalidTaskDataTimeException,InvalidTaskDescriptionException{
         String taskName =  s.replaceFirst("deadline","").strip();
         return new Deadline(taskName);
     }

@@ -5,8 +5,8 @@ public class ToDo extends Task{
         super();
         if (taskName.strip().equals("")) throw new InvalidTaskDescriptionException("To Do");
         this.taskName = taskName;
-
     }
+
 
     public char getType(){
         return 'T';
