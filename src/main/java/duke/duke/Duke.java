@@ -17,7 +17,7 @@ public class Duke {
     private Ui ui;
 
     public static void main (String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke("tasks.txt").run();
     }
 
     public Duke(String filePath) {

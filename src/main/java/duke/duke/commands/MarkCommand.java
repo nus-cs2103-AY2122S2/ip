@@ -6,6 +6,8 @@ import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.utils.Text;
 
+import java.io.IOException;
+
 public class MarkCommand extends Command {
 
     private final String indexToMark;
@@ -20,10 +22,13 @@ public class MarkCommand extends Command {
             Integer index = Integer.parseInt(indexToMark);
             calendar.markAsDone(index);
             ui.showTaskComplete(calendar.taskAtIndex(index));
+            storage.save(calendar);
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidInputException(String.format(Text.TEXT_INVALID_LIST_INDEX, calendar.numOfEntries(), Integer.parseInt(indexToMark)));
         } catch (NumberFormatException e) {
             throw new InvalidInputException(String.format(Text.TEXT_NON_INTEGER_LIST_INDEX, this.indexToMark));
+        } catch (IOException e) {
+            ui.showError(e.getMessage());
         }
     }
 }

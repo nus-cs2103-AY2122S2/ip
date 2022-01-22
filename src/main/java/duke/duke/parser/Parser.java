@@ -33,10 +33,10 @@ public class Parser {
             case "todo":
                 return new TodoCommand(input);
             case "deadline":
-                String[] splitDeadline = input.split("/by", 2); // splits the action from the date
+                String[] splitDeadline = input.split(" /by ", 2); // splits the action from the date
                 return new DeadlineCommand(splitDeadline[0], splitDeadline[1]);
             case "event":
-                String[] splitEvent = input.split("/at", 2);
+                String[] splitEvent = input.split(" /at ", 2);
                 return new EventCommand(splitEvent[0], splitEvent[1]);
             case "mark":
                 return new MarkCommand(input);

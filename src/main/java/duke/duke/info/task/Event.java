@@ -9,10 +9,14 @@ public class Event extends Task {
         this.date = date;
     }
 
+    @Override
+    public String saveFormat() {
+        return super.saveFormat() + "|" + this.date;
+    }
 
     @Override
     public String toString() {
         System.out.println(date);
-        return String.format("[E]%s(at:%s)", super.toString(), this.date);
+        return String.format("[E]%s (at: %s)", super.toString(), this.date);
     }
 }

@@ -5,6 +5,8 @@ import duke.info.task.Task;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
+import java.io.IOException;
+
 public abstract class AddCommand extends Command {
 
     private final Task taskToAdd;
@@ -15,7 +17,12 @@ public abstract class AddCommand extends Command {
 
     @Override
     public void execute(Calendar calendar, Ui ui, Storage storage) {
-        calendar.add(taskToAdd);
-        ui.showTaskAdded(taskToAdd, calendar.numOfEntries());
+        try {
+            calendar.add(taskToAdd);
+            ui.showTaskAdded(taskToAdd, calendar.numOfEntries());
+            storage.save(calendar);
+        } catch (IOException e) {
+            ui.showError(e.getMessage());
+        }
     }
 }
