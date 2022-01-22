@@ -5,11 +5,18 @@ import java.util.Scanner;
 
 public class Duke {
     static TaskManager manager = new TaskManager();
+
+
+
     public static void main(String[] args) {
+
+        Storage storage = new Storage("duke/data");
+        manager = storage.loadTaskManagerFromFile();
 
         Ui.showBanner();
         Ui.showStarting();
-        load();
+        Ui.showList(manager);
+
 
         Scanner s = new Scanner(System.in);
         String input;
@@ -18,7 +25,7 @@ public class Duke {
             input = s.nextLine();
 
             if (input.equals("bye")) {
-                save();
+                storage.saveTaskManager(manager);
                 Ui.showBye();
                 return;
             } else if (input.equals("list")) {

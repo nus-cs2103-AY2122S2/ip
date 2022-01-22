@@ -7,12 +7,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    private final String FILE_PATH = System.getProperty("user.home") + "Duke/data";
-    private final String DIR_PATH = System.getProperty("user.home") + "/Duke";
+    private String FILE_PATH = "";
+    private String DIR_PATH = "";
+    private final String FILE_SEPERATOR = "/";
     File file;
 
-    public Storage(){
-
+    public Storage(String path) {
+        FILE_PATH = System.getProperty("user.home") + FILE_SEPERATOR + path;
+        String dir = path.substring(0,path.lastIndexOf("/"));
+        DIR_PATH = System.getProperty("user.home") + FILE_SEPERATOR + dir;
     }
 
     public TaskManager loadTaskManagerFromFile() {
@@ -33,10 +36,10 @@ public class Storage {
                 }
                 return new TaskManager(tasks);
             } else {
-                return null;
+                return new TaskManager();
             }
         } catch (SecurityException | IOException exception) {
-            return null;
+            return new TaskManager();
         }
     }
     public boolean saveTaskManager(TaskManager taskManager) {
@@ -59,82 +62,13 @@ public class Storage {
             return false;
         }
     }
+
+    public boolean dirExists() {
+        File dir = new File(DIR_PATH);
+        return dir.exists();
+    }
+    public boolean createDir() {
+        File dir = new File(DIR_PATH);
+        return dir.mkdir();
+    }
 }
-
-
-
-
-
-/**
-
- public static void save(){
- String FILE_PATH = System.getProperty("user.home");
- FILE_PATH += "/Duke/data";
-
- File f = new File(FILE_PATH);
- try {
- FileWriter fw = new FileWriter(f);
- for (Task t : manager.getTaskList()) {
- String date ="None";
- if (t.getDate() != null) {
- DateTimeFormatter format = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
- date = t.getDate().format(format).toString();
- }
- fw.write(String.format("%c\t%c\t%s\t%s\n",t.getType(),t.getDone(),t.getTaskName(),date));
- }
- fw.close();
- } catch (IOException e){
- e.printStackTrace();
- }
- Ui.showSavingComplete();
- }
- public static void load(){
- String FILE_PATH = System.getProperty("user.home");
- FILE_PATH += "/Duke/data";
-
- File f = new File(FILE_PATH);
- if (f.exists()){
- try{
- Scanner s = new Scanner(f);
- while(s.hasNext()){
- String input = s.nextLine();
- Task t = Task.parse(input);
- if (t != null){ manager.addTask(t); }
- else {
- Ui.showTaskLoadFail(input);
- }
- }
- Ui.showLoadingComplete();
- Ui.showList(manager);
- } catch (IOException e){
- Ui.showFileReadError();
- loadDefault();
- }
- } else {
- Ui.showFileNotFound();
- loadDefault();
- }
- }
-
- public static void loadDefault(){
-
- String FILE_PATH = System.getProperty("user.home");
- String DIR_PATH = FILE_PATH + "/Duke";
- FILE_PATH += "/Duke/data";
-
- File dir = new File(DIR_PATH);
- File f = new File(FILE_PATH);
-
- manager = new TaskManager();
-
- if (!dir.exists()){
- Ui.showDirNotFound();
- Ui.showDirCreating(DIR_PATH);
- boolean createFile = dir.mkdir();
- if (createFile){
- Ui.showDirCreated();
- }
- }
- }
-
- */
