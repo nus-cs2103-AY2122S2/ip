@@ -1,8 +1,13 @@
 public class Deadline extends Task{
-    public Deadline(String description) {
+    public Deadline(String description) throws DukeException {
         super(description);
-        String[] strArr = description.split("/by");
-        this.description = strArr[0] + "(" + "by:" + strArr[1] + ")";
+        try {
+            String[] strArr = description.split("/at");
+            this.description = strArr[0] + "(" + "at:" + strArr[1] + ")";
+        }
+        catch (ArrayIndexOutOfBoundsException e){
+            throw new DukeException();
+        }
     }
     @Override
     public String toString() {

@@ -1,9 +1,14 @@
 public class Event extends Task{
 
-    public Event(String description) {
+    public Event(String description) throws DukeException {
         super(description);
-        String[] strArr = description.split("/at");
-        this.description = strArr[0] + "(" + "at:" + strArr[1] + ")";
+        try {
+            String[] strArr = description.split("/at");
+            this.description = strArr[0] + "(" + "at:" + strArr[1] + ")";
+        }
+        catch (ArrayIndexOutOfBoundsException e){
+            throw new DukeException();
+        }
     }
 
     @Override

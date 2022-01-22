@@ -1,3 +1,8 @@
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,59 +18,107 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
         List<Task> tasks = new ArrayList<>();
+        int count = 0;
         while (!str.equals("bye")){
             try {
                 errorHandling(str);
                 if (str.equals("list")){
-                    for (int i = 0; i < tasks.size(); i++) {
-                        Task task = tasks.get(i);
-                        System.out.println(i + 1 + "." + task);
+                    try {
+                        Scanner s = new Scanner(new File("Data/tasks.txt"));
+                        while (s.hasNext()) {
+                            System.out.println(s.nextLine());
+                        }
+                        s.close();
                     }
-                    str = sc.nextLine();
+                    catch (IOException e){
+                        System.out.println("List is empty!");
+                    }
                 }
                 else {
                     String[] temp = str.split(" ");
                     if (temp[0].equals("unmark") || temp[0].equals("mark") || temp[0].equals("delete")) {
                             int taskNumber = Integer.parseInt(temp[1]);
-                            if (tasks.size() < taskNumber){
-                                System.out.println("Invalid task number!");
+                            Path path = Paths.get("Data/tasks.txt");
+                            long lines = 0;
+                            try {
+                                lines = Files.lines(path).count();
+                                if (lines < taskNumber) {
+                                    System.out.println("Invalid Task number!");
+                                } else {
+                                    if (temp[0].equals("mark")) {
+                                        Task currTask = tasks.get(taskNumber - 1);
+                                        currTask.setDone();
+                                        System.out.println("Nice! I've marked this task as done: \n" + "  " + currTask);
+                                    } else if (temp[0].equals("delete")) {
+                                        int index = Integer.parseInt(str.substring(7));
+                                        String text = "";
+                                        Scanner scanner = new Scanner(new File("Data/tasks.txt"));
+                                        File nFile = new File("Data/task2.txt");
+                                        for (int i = 0; scanner.hasNext(); i++) {
+                                            if (i != index - 1) {
+                                                writeToFile("Data/tasks2.txt", scanner.nextLine() + System.lineSeparator());
+                                            } else {
+                                                text = scanner.nextLine();
+                                            }
+                                        }
+                                        Files.move(Paths.get("Data/tasks2.txt"), Paths.get("Data/tasks.txt"), StandardCopyOption.REPLACE_EXISTING);
+                                        System.out.println("Okay, I have deleted " + text);
+                                    } else {
+                                        Task currTask = tasks.get(taskNumber - 1);
+                                        currTask.setNotDone();
+                                        System.out.println("OK, I've marked this task as not done yet:: \n" + "  " + currTask);
+                                    }
+                                }
                             }
-                            else {
-                                if (temp[0].equals("mark")) {
-                                    Task currTask = tasks.get(taskNumber - 1);
-                                    currTask.setDone();
-                                    System.out.println("Nice! I've marked this task as done: \n" + "  " + currTask);
-                                }
-                                else if (temp[0].equals("delete")){
-                                    int index = Integer.parseInt(str.substring(7));
-                                    Task task = tasks.get(index - 1);
-                                    tasks.remove(index - 1);
-                                    System.out.println("Okay, I have deleted " + task);
-                                }
-                                else {
-                                    Task currTask = tasks.get(taskNumber - 1);
-                                    currTask.setNotDone();
-                                    System.out.println("OK, I've marked this task as not done yet:: \n" + "  " + currTask);
-                                }
+                            catch (IOException e) {
+                                System.out.println("List is empty!");
                             }
                     }
                     else {
                         if (temp[0].equals("todo")){
                             Todo todo = new Todo(str.substring(5));
-                            tasks.add(todo);System.out.println("Got it. I've added this task: \n  " + todo +
-                                    "\nNow you have " + tasks.size() + " task(s) on the list.");
+                            try {
+                                writeToFile("Data/tasks.txt", todo.toString() + System.lineSeparator());
+                                count++;
+                            }
+                            catch (IOException e){
+                                File f = new File("Data");
+                                f.mkdirs();
+                                writeToFile("Data/tasks.txt", todo.toString() + System.lineSeparator());
+                                count++;
+                            }
+                            System.out.println("Got it. I've added this task: \n  " + todo +
+                                    "\nNow you have " +  count + " task(s) on the list.");
                         }
                         else if (temp[0].equals("event")){
                             Event event = new Event(str.substring(6));
-                            tasks.add(event);
+                            try {
+                                writeToFile("Data/tasks.txt", event.toString() + System.lineSeparator());
+                                count++;
+                            }
+                            catch (IOException e){
+                                File f = new File("Data");
+                                f.mkdirs();
+                                writeToFile("Data/tasks.txt", event.toString() + System.lineSeparator());
+                                count++;
+                            }
                             System.out.println("Got it. I've added this task: \n  " + event +
-                                    "\nNow you have " + tasks.size() + " task(s) on the list.");
+                                    "\nNow you have " + count + " task(s) on the list.");
                         }
                         else if (temp[0].equals("deadline")){
                             Deadline deadline = new Deadline(str.substring(9));
-                            tasks.add(deadline);
+                            try {
+                                writeToFile("Data/tasks.txt", deadline.toString() + System.lineSeparator());
+                                count++;
+                            }
+                            catch (IOException e){
+                                File f = new File("Data");
+                                f.mkdirs();
+                                writeToFile("Data/tasks.txt", deadline.toString() + System.lineSeparator());
+                                count++;
+                            }
                             System.out.println("Got it. I've added this task: \n  " + deadline +
-                                    "\nNow you have " + tasks.size() + " task(s) on the list.");
+                                    "\nNow you have " + count + " task(s) on the list.");
                         }
                     }
                 }
@@ -81,6 +134,12 @@ public class Duke {
         sc.close();
     }
 
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
     private static void errorHandling(String str) throws MissingDescriptionException, DukeException {
         String[] strArr = str.split(" ");
         String firstWord = strArr[0];
@@ -88,7 +147,6 @@ public class Duke {
                 || firstWord.equals("list") || firstWord.equals("delete") || firstWord.equals("unmark")
                 || firstWord.equals("mark")){
             if ((firstWord.equals("deadline") || firstWord.equals("event") || firstWord.equals("todo")) && strArr.length == 1) {
-                System.out.println("here");
                 throw new MissingDescriptionException();
             }
             if (firstWord.equals("unmark") || firstWord.equals("mark") || firstWord.equals("delete")){
