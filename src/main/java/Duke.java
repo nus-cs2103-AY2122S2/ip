@@ -30,6 +30,7 @@ public class Duke {
                 ui.showDukeError(e.getMessage());
             }
         }
+        ui.showGoodbye();
     }
 
     public static void main(String[] args) {

@@ -27,14 +27,14 @@ public class Ui {
         System.out.println(str);
     }
 
-    public static void showWelcome() {
+    public void showWelcome() {
         printMessage(DIVIDER);
         printMessage(WELCOME_MESSAGE_ONE);
         printMessage(WELCOME_MESSAGE_TWO);
         printMessage(DIVIDER);
     }
 
-    public static void showGoodbye() {
+    public void showGoodbye() {
         printMessage(DIVIDER);
         printMessage(GOODBYE_MESSAGE);
         printMessage(SIGNATURE);

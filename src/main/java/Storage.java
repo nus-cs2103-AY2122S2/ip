@@ -17,7 +17,7 @@ public class Storage {
 
     public static void updateTextFile() {
         try {
-            writeToFile(filePath);
+            writeToFile(currWorkingDirectory + filePath);
         } catch (IOException e) {
             System.out.println("Cannot write to txt file!");
         }
@@ -51,7 +51,7 @@ public class Storage {
         return finalOutput;
     }
 
-    public static void load() throws IOException {
+    public void load() throws IOException {
         // Create a new directory from current working directory
         File directory = new File(currWorkingDirectory + "/data");
 
@@ -78,35 +78,35 @@ public class Storage {
             String[] lineArr = currentLine.split("\\|");
             int checkMarked = Integer.parseInt(lineArr[1]);
             switch (lineArr[0]) {
-                case "T":
-                    Task toDo = new ToDo(lineArr[2]);
-                    if (isMarked(checkMarked)) {
-                        toDo.mark();
-                    } else {
-                        toDo.unmark();
-                    }
-                    TaskList.addToListNoPrint(toDo);
-                    break;
-                case "D":
-                    Task deadline = new Deadline(lineArr[2], lineArr[3]);
-                    if (isMarked(checkMarked)) {
-                        deadline.mark();
-                    } else {
-                        deadline.unmark();
-                    }
-                    TaskList.addToListNoPrint(deadline);
-                    break;
-                case "E":
-                    Task event = new Event(lineArr[2], lineArr[3]);
-                    if (isMarked(checkMarked)) {
-                        event.mark();
-                    } else {
-                        event.unmark();
-                    }
-                    TaskList.addToListNoPrint(event);
-                    break;
-                default:
-                    break;
+            case "T":
+                Task toDo = new ToDo(lineArr[2]);
+                if (isMarked(checkMarked)) {
+                    toDo.mark();
+                } else {
+                    toDo.unmark();
+                }
+                TaskList.addToListNoPrint(toDo);
+                break;
+            case "D":
+                Task deadline = new Deadline(lineArr[2], lineArr[3]);
+                if (isMarked(checkMarked)) {
+                    deadline.mark();
+                } else {
+                    deadline.unmark();
+                }
+                TaskList.addToListNoPrint(deadline);
+                break;
+            case "E":
+                Task event = new Event(lineArr[2], lineArr[3]);
+                if (isMarked(checkMarked)) {
+                    event.mark();
+                } else {
+                    event.unmark();
+                }
+                TaskList.addToListNoPrint(event);
+                break;
+            default:
+                break;
             }
         }
     }
