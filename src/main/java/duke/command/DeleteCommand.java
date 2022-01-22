@@ -1,12 +1,17 @@
-public class MarkCommand extends Command {
+package duke.command;
 
-    public MarkCommand(Integer number) {
+import duke.TaskList;
+
+public class DeleteCommand extends Command {
+
+    public DeleteCommand(Integer number) {
+
         super(null, number);
     }
 
     @Override
     public void execute(TaskList tasks) {
-        tasks.markTask(super.index);
+        tasks.deleteTask(super.index);
     }
 
     @Override

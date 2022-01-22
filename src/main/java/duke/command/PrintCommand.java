@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.TaskList;
+
 public class PrintCommand extends Command{
 
     public PrintCommand() {

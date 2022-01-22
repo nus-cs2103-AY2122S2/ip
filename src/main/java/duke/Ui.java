@@ -1,4 +1,9 @@
+package duke;
+
+import duke.exception.BlankCommandException;
+
 import java.util.Scanner;
+
 
 public class Ui {
     private String greeting = "Hello! I'm TaskJamie\nWhat can i do for you?";
