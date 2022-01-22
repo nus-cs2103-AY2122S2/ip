@@ -1,12 +1,34 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Chi {
     /** Stores the messages sent by the user. */
     private List<Task> messages;
+    private static final String DATA_FILE = "/data/tasks.txt";
 
     public Chi() {
         this.messages = new ArrayList<>();
+        // Make sure data file exists in directory
+        this.getDataFile();
+    }
+
+    private void getDataFile() {
+        File dataFile = new File(DATA_FILE);
+        try {
+            if (!dataFile.exists()) {
+                throw new FileNotFoundException();
+            }
+        } catch (FileNotFoundException e) {
+            try {
+                System.out.println("Let's start tasking nyan!");
+                dataFile.createNewFile();
+            } catch (IOException e1) {
+                System.out.println("Oops something went wrong nyan!");
+            }
+        }
     }
     /**
      * Displays a message based on the user input.
