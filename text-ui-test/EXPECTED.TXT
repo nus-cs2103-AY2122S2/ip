@@ -31,7 +31,7 @@ Marked as incomplete
 3.[E][ ] lecture  (at: friday 2-4pm)
 Sorry, i don't understand what you are saying
 Description of task can't be empty
-Failed to add
+Failed to add 
 Number of tasks: 3
 Noted. I've removed this task:
 [E][ ] lecture  (at: friday 2-4pm)
