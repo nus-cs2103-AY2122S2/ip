@@ -1,5 +1,9 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 import helperClasses.*;
 
@@ -7,7 +11,7 @@ public class Duke {
     private static boolean isEnd = false;
     private static final ArrayList<Task> TaskList = new ArrayList<Task>();
     private static final Scanner myObj = new Scanner(System.in);
-
+    private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
     public enum Command{
         BYE("bye"),
         LIST("list"),
@@ -107,7 +111,12 @@ public class Duke {
                         int byPos = input.indexOf("/by");
                         String description = input.substring(9,byPos);
                         String by = input.substring(byPos+4);
-                        addDdl(description, by);
+                        if (isValidDate(by)){
+                            LocalDateTime dateTime = LocalDateTime.parse(by, dateFormat);
+                            addDdl(description, dateTime);
+                        } else {
+                            throw new DukeException("☹ OOPS!!! The date time is not of correct format dd/MM/yyyy HHmm.");
+                        }
                     } else if (input.startsWith(Command.EVENT.getCommand())) {
                         if (Duke.isEmpty(input.substring(5))){
                             throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
@@ -118,7 +127,12 @@ public class Duke {
                         int atPos = input.indexOf("/at");
                         String description = input.substring(6,atPos);
                         String at = input.substring(atPos+4);
-                        addEvent(description, at);
+                        if (isValidDate(at)){
+                            LocalDateTime dateTime = LocalDateTime.parse(at, dateFormat);
+                            addEvent(description, dateTime);
+                        } else {
+                            throw new DukeException("☹ OOPS!!! The date time is not of correct format dd/MM/yyyy HHmm.");
+                        }
                     } else {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
@@ -128,6 +142,15 @@ public class Duke {
             horizontalLine();
             System.out.println(e.getMessage());
             horizontalLine();
+        }
+    }
+
+    public static boolean isValidDate(String input) {
+        try {
+            LocalDateTime dateTime = LocalDateTime.parse(input, dateFormat);
+            return true;
+        } catch (DateTimeParseException dtpe) {
+            return false;
         }
     }
 
@@ -192,7 +215,7 @@ public class Duke {
         horizontalLine();
     }
 
-    public static void addDdl(String description, String by){
+    public static void addDdl(String description, LocalDateTime by){
         Deadline ddl = new Deadline(description, by);
         TaskList.add(ddl);
         String result = String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.",
@@ -202,7 +225,7 @@ public class Duke {
         horizontalLine();
     }
 
-    public static void addEvent(String description, String at) {
+    public static void addEvent(String description, LocalDateTime at) {
         Event event = new Event(description, at);
         TaskList.add(event);
         String result = String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.",
