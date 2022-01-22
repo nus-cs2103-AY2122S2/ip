@@ -3,11 +3,16 @@ import java.util.*;
 import tasks.*;
 
 public class Pikachu {
-    ArrayList<task> inputList;
+    ArrayList<Task> inputList;
 
     //Constructor
     public Pikachu() {
-        inputList = new ArrayList<task>();
+        inputList = new ArrayList<Task>();
+    }
+
+    //Constructor for existing tasklist
+    public Pikachu(ArrayList<Task> inputList) {
+        this.inputList = inputList;
     }
 
     public void parseInput(String str) {
@@ -19,7 +24,7 @@ public class Pikachu {
             int count = 1;
             String currBool = "[error]"; 
             String currTask = "[error]";
-            for (task t : inputList) {
+            for (Task t : inputList) {
                 if (t.isDone) { currBool = "[X]";
                 } else { currBool = "[ ]"; }
 
@@ -28,23 +33,23 @@ public class Pikachu {
                 } else if (t.getClass().getSimpleName().equals("Event")) { currTask = "[E]"; }
 
                 System.out.println("   " + count + ". " + currTask + currBool + " " + t);
-                count+=1;
+                count += 1;
             }
-            count-=1;
+            count -= 1;
             System.out.println("Now you have "+count+" task(s) in the list.");
             return;
         }
 
         if (split[0].toLowerCase().equals("mark")) {                  //MARK
             int index = 0;
-            try { index = Integer.parseInt(split[1])-1;
+            try { index = Integer.parseInt(split[1]) - 1;
             } catch (Exception e) { System.out.println("Invalid input for mark!"); return; }
             if (index >= inputList.size() || index <= -1) {                          //Prevent invalid array accesses
                 System.out.println("Invalid task number!");
                 return;
             }
-            task t = inputList.get(index);
-            t.isDone = true;
+            Task t = inputList.get(index);
+            t.mark();
 
             String currBool = "[error]"; 
             String currTask = "[error]";
@@ -53,20 +58,20 @@ public class Pikachu {
             if (t.getClass().getSimpleName().equals("ToDo")) { currTask = "[T]";
             } else if (t.getClass().getSimpleName().equals("Deadline")) { currTask = "[D]";
             } else if (t.getClass().getSimpleName().equals("Event")) { currTask = "[E]"; }
-            System.out.println("Pikachu has marked this task as done!\n   > "+currTask+currBool+" "+t);
+            System.out.println("Pikachu has marked this task as done!\n   > " + currTask + currBool + " " + t);
             return;
         }
 
         if (split[0].toLowerCase().equals("unmark")) {                //UNMARK
             int index = 0;
-            try { index = Integer.parseInt(split[1])-1;
+            try { index = Integer.parseInt(split[1]) - 1;
             } catch (Exception e) { System.out.println("Invalid input for unmark!"); return; }
             if (index >= inputList.size() || index <= -1) {                          //Prevent invalid array accesses
                 System.out.println("Invalid task number!");
                 return;
             }
-            task t = inputList.get(index);
-            t.isDone = false;
+            Task t = inputList.get(index);
+            t.unmark();
 
             String currBool = "[error]"; 
             String currTask = "[error]";
@@ -75,19 +80,19 @@ public class Pikachu {
             if (t.getClass().getSimpleName().equals("ToDo")) { currTask = "[T]";
             } else if (t.getClass().getSimpleName().equals("Deadline")) { currTask = "[D]";
             } else if (t.getClass().getSimpleName().equals("Event")) { currTask = "[E]"; }
-            System.out.println("Pikachu has marked this task as not done yet!\n   > "+currTask+currBool+" "+t);
+            System.out.println("Pikachu has marked this task as not done yet!\n   > " + currTask + currBool + " " + t);
             return;
         }
 
         if (split[0].toLowerCase().equals("delete")) {                //DELETE
             int index = 0;
-            try { index = Integer.parseInt(split[1])-1;
+            try { index = Integer.parseInt(split[1]) - 1;
             } catch (Exception e) { System.out.println("Invalid input for delete!"); return; }
             if (index >= inputList.size() || index <= -1) {                          //Prevent invalid array accesses
                 System.out.println("Invalid task number!");
                 return;
             }
-            task t = inputList.remove(index);
+            Task t = inputList.remove(index);
 
             String currBool = "[error]"; 
             String currTask = "[error]";
@@ -96,8 +101,8 @@ public class Pikachu {
             if (t.getClass().getSimpleName().equals("ToDo")) { currTask = "[T]";
             } else if (t.getClass().getSimpleName().equals("Deadline")) { currTask = "[D]";
             } else if (t.getClass().getSimpleName().equals("Event")) { currTask = "[E]"; }
-            System.out.println("Pikachu has deleted this task!\n   > "+currTask+currBool+" "+t);
-            System.out.println("You now have "+inputList.size()+" tasks in the list.");
+            System.out.println("Pikachu has deleted this task!\n   > " + currTask + currBool + " " + t);
+            System.out.println("You now have " + inputList.size() + " tasks in the list.");
             return;
         }
 
@@ -108,8 +113,8 @@ public class Pikachu {
             ToDo t = new ToDo(split2[1]);
             inputList.add(t);
             System.out.println("Pikachu has added this task to the list!");
-            System.out.println("   > [T][ ] "+t);
-            System.out.println("You now have "+inputList.size()+" tasks in the list.");
+            System.out.println("   > [T][ ] " + t);
+            System.out.println("You now have " + inputList.size() + " tasks in the list.");
             return;
             } catch (Exception e) {
                 System.out.println("Task description is empty!");
@@ -125,8 +130,8 @@ public class Pikachu {
             Deadline d = new Deadline(split3[0], split3[1]);
             inputList.add(d);
             System.out.println("Pikachu has added this task to the list!");
-            System.out.println("   > [D][ ] "+d);
-            System.out.println("You now have "+inputList.size()+" tasks in the list.");
+            System.out.println("   > [D][ ] " + d);
+            System.out.println("You now have " + inputList.size() + " tasks in the list.");
             return;
             } catch (Exception e) {
                 System.out.println("Task description is empty/No deadline timing has been specified! Please specify a deadline using /.");
@@ -142,8 +147,8 @@ public class Pikachu {
             Event e = new Event(split3[0], split3[1]);
             inputList.add(e);
             System.out.println("Pikachu has added this task to the list!");
-            System.out.println("   > [E][ ] "+e);
-            System.out.println("You now have "+inputList.size()+" tasks in the list.");
+            System.out.println("   > [E][ ] " + e);
+            System.out.println("You now have " + inputList.size() + " tasks in the list.");
             return;
             } catch (Exception e) {
                 System.out.println("Task description is empty/No event duration has been specified! Please specify a duration using /.");
