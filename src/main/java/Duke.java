@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 
 /**
  * Project Duke is a educational software project designed to take you
@@ -12,12 +13,23 @@ import java.io.OutputStreamWriter;
  */
 public class Duke {
     private static final String LINE_BREAK = "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+    private static final ArrayList<String> masterList = new ArrayList<>();
     /**
      * Prints line break
      * @return void
      */
     private static final void printLineBreak() {
         System.out.println(LINE_BREAK);
+    }
+
+    private static final void printList(BufferedWriter bw) throws Exception {
+        Object[] masterListArr = masterList.toArray();
+        int x = 1;
+        for (Object s : masterListArr) {
+            bw.write(x++ + ". " + s);
+            bw.newLine();
+        }
+        bw.flush();
     }
 
     public static void main(String[] args) throws Exception {
@@ -44,8 +56,13 @@ public class Duke {
                     System.out.println("Bye. Hope to see you again soon!");
                     break;
 
+                case "list":
+                    printList(bw);
+                    break;
+
                 default:
-                    System.out.println(inputCommand);
+                    masterList.add(inputCommand);
+                    System.out.println("added: " + inputCommand);
             }
         } while (!ifBye);
         printLineBreak();
