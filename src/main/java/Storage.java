@@ -2,11 +2,15 @@ import java.io.*;
 import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
     public static int saveFile(String folderName, String fileName, ArrayList<Task> arr) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy");
         try {
             String dir = System.getProperty("user.dir");
             java.nio.file.Path pp = java.nio.file.Paths.get(dir, folderName);
@@ -19,8 +23,11 @@ public class Storage {
             for(Task t : arr) {
                 if(t.toString().charAt(1) == 'T')
                     sb.append(String.format("%s,%s,%s,", t.toString().charAt(1), t.isDone?"T":"F", t.getTaskName()) + ";");
-                else
-                    sb.append(String.format("%s,%s,%s,%s", t.toString().charAt(1), t.isDone?"T":"F", t.getTaskName(), t.getDesc()) + ";");
+                else if(t.toString().charAt(1) == 'D')
+                    sb.append(String.format("%s,%s,%s,%s", t.toString().charAt(1), t.isDone?"T":"F", t.getTaskName(), ((DeadlineTask)t).getDueDate().format(formatter)) + ";");
+                else if(t.toString().charAt(1) == 'E')
+                    sb.append(String.format("%s,%s,%s,%s", t.toString().charAt(1), t.isDone?"T":"F", t.getTaskName(), ((EventTask)t).getDate().format(formatter)) + ";");
+
             }
             sb.setLength((sb.length() - 1));
             writer.write(sb.toString());
@@ -33,6 +40,7 @@ public class Storage {
         }
     }
     public static int loadFile(String filePath, ArrayList<Task> arr) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy");
         try {
             FileInputStream fs = new FileInputStream(filePath);
             Scanner sc = new Scanner(fs);
@@ -46,9 +54,9 @@ public class Storage {
                 if(args[0].equals("T")) {
                     arr.add(new ToDoTask(args[2], args[1] == "T"));
                 } else if (args[0].equals("D")) {
-                    arr.add(new DeadlineTask(args[2], args[1] == "T", args[3]));
+                    arr.add(new DeadlineTask(args[2], args[1] == "T", LocalDate.parse(args[3], formatter)));
                 } else if (args[0].equals("E")) {
-                    arr.add(new EventTask(args[2], args[1] == "T", args[3]));
+                    arr.add(new EventTask(args[2], args[1] == "T", LocalDate.parse(args[3], formatter)));
                 }
             }
             return 0;

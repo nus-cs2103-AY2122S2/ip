@@ -10,18 +10,14 @@ public class DeadlineTask extends Task{
         this.d = date;
     }
 
+    DeadlineTask(String ss, boolean isDone, LocalDate date) {
+        this.taskName = ss;
+        this.isDone = isDone;
+        this.d = date;
+    }
+
     public LocalDate getDueDate() {
         return this.d;
-    }
-
-    DeadlineTask(String ss, boolean b, String by) {
-        this.taskName = ss;
-        this.isDone = b;
-        this.by = by;
-    }
-
-    public String getDesc() {
-        return this.by;
     }
 
     @Override

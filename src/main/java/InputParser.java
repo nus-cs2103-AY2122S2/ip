@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class InputParser {
     public int run(String ss, Printer p, ArrayList<Task> arr) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy hh:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy");
         String[] args = ss.split("\\s+");
         String action = args[0];
         try {

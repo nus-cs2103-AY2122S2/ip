@@ -31,10 +31,6 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getDesc(){
-        return "";
-    }
-
     @Override
     public String toString() {
         return String.format("[%s] %s", this.isDone?"X":" ", taskName);
