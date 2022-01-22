@@ -49,7 +49,7 @@ public class Task {
      * @return format to display task on file
      */
     public String getFileFormat() {
-        return String.format(" | %d |%s", isDone ? 1 : 0, description);
+        return String.format(" | %d | %s", isDone ? 1 : 0, description);
     }
 
     /**

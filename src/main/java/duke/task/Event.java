@@ -29,7 +29,7 @@ public class Event extends Task {
      */
     @Override
     public String getFileFormat() {
-        return "E" + super.getFileFormat() + "|" + at;
+        return "E" + super.getFileFormat() + " | " + at;
     }
 
     /**

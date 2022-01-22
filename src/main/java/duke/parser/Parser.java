@@ -38,30 +38,28 @@ public class Parser {
             return new DeleteCommand(Integer.parseInt(remainingCommand));
         } else if (fullCommand.startsWith("todo") || fullCommand.startsWith("deadline") ||fullCommand.startsWith("event")) {
             if (fullCommand.split(" ").length == 1) {
-                throw new DukeException(String.format("OOPS!!! The description of a %s cannot be empty.", fullCommand));
-            } else {
-                String command = fullCommand.split(" ", 2)[0];
-                String remainingCommand = fullCommand.split(" ", 2)[1];
-                if (command.equals("todo")) {
-                    return new AddTodoCommand(remainingCommand);
-                }
-                else if (command.equals("deadline")) {
-                    String[] splitDescription = remainingCommand.split(" /by ");
-                    if (!isDate(splitDescription[1])) {
-                       return new AddDeadlineCommand(splitDescription[0], splitDescription[1]);
-                    }
-                    else {
-                        return new AddDeadlineCommand(splitDescription[0], LocalDate.parse(splitDescription[1]));
-                    }
+                throw new DukeException(String.format("OOPS!!! The description of a %s cannot be empty.", fullCommand.split(" ")[0]));
+            }
+            String command = fullCommand.split(" ", 2)[0];
+            String remainingCommand = fullCommand.split(" ", 2)[1];
+            if (command.equals("todo")) {
+                return new AddTodoCommand(remainingCommand);
+            }
+            else if (command.equals("deadline")) {
+                String[] splitDescription = remainingCommand.split(" /by ");
+                if (!isDate(splitDescription[1])) {
+                    return new AddDeadlineCommand(splitDescription[0], splitDescription[1]);
                 }
                 else {
-                    String[] splitDescription = remainingCommand.split(" /at ");
-                    if (!isDate(splitDescription[1])) {
-                        return new AddEventCommand(splitDescription[0], splitDescription[1]);
-                    }
-                    else {
-                        return new AddEventCommand(splitDescription[0], LocalDate.parse(splitDescription[1]));
-                    }
+                    return new AddDeadlineCommand(splitDescription[0], LocalDate.parse(splitDescription[1]));
+                }
+            }
+            else {
+                String[] splitDescription = remainingCommand.split(" /at ");
+                if (!isDate(splitDescription[1])) {
+                    return new AddEventCommand(splitDescription[0], splitDescription[1]);
+                } else {
+                    return new AddEventCommand(splitDescription[0], LocalDate.parse(splitDescription[1]));
                 }
             }
         } else {

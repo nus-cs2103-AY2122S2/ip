@@ -28,7 +28,8 @@ public class Storage {
         try {
             File file = new File(filePath);
             if (file.exists()) {
-                BufferedReader br = new BufferedReader(new FileReader(file));
+                FileReader fr = new FileReader(file);
+                BufferedReader br = new BufferedReader(fr);
                 String line;
                 ArrayList<Task> tasks = new ArrayList<>();
                 while ((line = br.readLine()) != null) {
@@ -71,11 +72,11 @@ public class Storage {
     public void save(ArrayList<Task> tasks) throws DukeException {
         try {
             File file = new File("./data/duke.txt");
-            file.getParentFile().mkdirs();
-            BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(fw);
             for (Task task: tasks) {
-                bw.append(task.getFileFormat());
-                bw.append("\n");
+                bw.write(task.getFileFormat());
+                bw.newLine();
             }
             bw.close();
         }
