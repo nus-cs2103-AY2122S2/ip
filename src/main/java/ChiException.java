@@ -1,9 +1,9 @@
-public class DukeException extends Exception {
+public class ChiException extends Exception {
 
     /** The original message sent. */
     private String msg;
 
-    public DukeException(String exn) {
+    public ChiException(String exn) {
         super(exn);
         this.msg = exn;
     }

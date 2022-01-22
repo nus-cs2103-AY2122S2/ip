@@ -1,17 +1,19 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-public class Duke {
+public class Chi {
     /** Stores the messages sent by the user. */
-    private static List<Task> messages = new ArrayList<>();
+    private List<Task> messages;
 
+    public Chi() {
+        this.messages = new ArrayList<>();
+    }
     /**
      * Displays a message based on the user input.
      * @param msg The message inputted by the user.
-     * @throws DukeException if messages are invalid.
+     * @throws ChiException if messages are invalid.
      */
-    public static void respondToMsg(String msg) throws DukeException {
+    public void respondToMsg(String msg) throws ChiException {
         // Obtain 1st word
         String[] command = msg.trim().split(" ");
         if (command.length == 1) {
@@ -26,7 +28,7 @@ public class Duke {
                 return;
             }
             // Unknown message, or command lacks task
-            throw new DukeException(msg.trim().toLowerCase());
+            throw new ChiException(msg.trim().toLowerCase());
         } else {
             // Check for keywords
             switch(command[0].toLowerCase()) {
@@ -57,7 +59,7 @@ public class Duke {
                     String[] content = msg.substring(8).split("/by");
                     // Create new Deadline object
                     if (content[0].trim().equals("")) {
-                        throw new DukeException("deadline");
+                        throw new ChiException("deadline");
                     }
                     // Create new Deadline object
                     Task newTask1 = new Deadline(content[0].trim(), content[1].trim());
@@ -69,7 +71,7 @@ public class Duke {
                     // Separate task and timing
                     String[] content1 = msg.substring(5).split("/at");
                     if (content1[0].trim().equals("")) {
-                        throw new DukeException("event");
+                        throw new ChiException("event");
                     }
                     // Create new Event object
                     Task newTask2 = new Event(content1[0].trim(), content1[1].trim());
@@ -85,34 +87,9 @@ public class Duke {
                     break;
                 default:
                     // Some message which does not start with a keyword
-                    throw new DukeException(msg);
+                    throw new ChiException(msg);
             }
         }
 
-    }
-
-    public static void main(String[] args) {
-        // Initialize a scanner object
-        Scanner userInput = new Scanner(System.in);
-        System.out.println("Hello master I am Chi\nHow may I serve you today nyan~?");
-
-        // Stores the text input of user
-        String echo;
-        // Request for user input
-        echo = userInput.nextLine();
-        // Check if bye has been said
-        while (!echo.equals("bye")) {
-            try {
-                respondToMsg(echo);
-                echo = userInput.nextLine();
-            } catch (DukeException e) {
-                // Output error message
-                System.out.println(e);
-                echo = userInput.nextLine();
-            }
-        }
-        // Ending statement and close scanner
-        System.out.println("Sayonara, see you next time nyan~");
-        userInput.close();
     }
 }
