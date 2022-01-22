@@ -1,3 +1,10 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -19,6 +26,8 @@ public class Duke {
     private static final String TEXT_ACKNOWLEDGE_UNMARK = "OK, I've marked this task as not done yet:";
     private static final String TEXT_ACKNOWLEDGE_DELETE = "Noted. I've removed this task:";
     private static final String TEXT_ACKNOWLEDGE_TASK = "Got it. I've added this task:";
+    private static final String SAVE_DIR = "data";
+    private static final String FILE_NAME = SAVE_DIR + "/duke.txt";
 
     private final List<Task> tasks = new ArrayList<>();
     private boolean shouldExit = false;
@@ -30,6 +39,7 @@ public class Duke {
     public void run() {
         Scanner scanner = new Scanner(System.in);
         greet();
+        loadTasks();
 
         while (!shouldExit) {
             String input = scanner.nextLine();
@@ -50,6 +60,7 @@ public class Duke {
                 }
 
                 processInput(commandType, paramMap);
+                saveTasks();
             } catch (DukeException e) {
                 printDivider();
                 printTabbed(e.toString(), 1);
@@ -86,6 +97,52 @@ public class Duke {
         case ADD_EVENT:
             addTask(new Event(paramMap.get("description"), paramMap.get("at")));
             break;
+        }
+    }
+
+    private void saveTasks() {
+        try {
+            Path path = Paths.get(SAVE_DIR);
+            Files.createDirectories(path);
+            PrintWriter writer = new PrintWriter(FILE_NAME);
+
+            for (Task task : tasks) {
+                writer.println(task.toSaveData());
+            }
+
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadTasks() {
+        try {
+            File file = new File(FILE_NAME);
+            Scanner scanner = new Scanner(file);
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] lineSplit = line.split(" \\| ");
+
+                boolean isDone = lineSplit[1].equals("1");
+                String description = lineSplit[2];
+
+                switch (lineSplit[0]) {
+                case "T":
+                    tasks.add(new ToDo(description, isDone));
+                    break;
+                case "E":
+                    tasks.add(new Event(description, lineSplit[3], isDone));
+                    break;
+                case "D":
+                    tasks.add(new Deadline(description, lineSplit[3], isDone));
+                    break;
+                default:
+                    throw new DukeException("Invalid save data");
+                }
+            }
+        } catch (FileNotFoundException ignored) {
         }
     }
 

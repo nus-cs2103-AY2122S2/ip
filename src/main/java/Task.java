@@ -10,6 +10,11 @@ public abstract class Task {
         this.description = description;
     }
 
+    public Task(String description, boolean isDone) {
+        this(description);
+        this.isDone = isDone;
+    }
+
     void setDone(boolean isDone) {
         this.isDone = isDone;
     }
@@ -22,4 +27,6 @@ public abstract class Task {
     protected String getStatusIcon() {
         return isDone ? "X" : " ";
     }
+
+    public abstract String toSaveData();
 }
