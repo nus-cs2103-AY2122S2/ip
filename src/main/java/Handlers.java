@@ -1,12 +1,12 @@
 public enum Handlers {
-    BYE("bye"),
-    DEADLINE("deadline"),
-    DELETE("delete"),
-    EVENT("event"),
-    MARK("mark"),
-    LIST("list"),
-    TODO("todo"),
-    UNMARK("unmark");
+    Bye("bye"),
+    Deadline("deadline"),
+    Delete("delete"),
+    Event("event"),
+    Mark("mark"),
+    List("list"),
+    Todo("todo"),
+    Unmark("unmark");
 
     public final String label;
 
