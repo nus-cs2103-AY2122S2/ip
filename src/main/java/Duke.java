@@ -86,6 +86,21 @@ public class Duke {
                     } catch (StringIndexOutOfBoundsException e) {
                         System.out.println("☹ OOPS!!! The description of a event cannot be empty.");
                     }
+                } else if (checkType[0].equals("delete")) {
+
+                    try {
+                        int index = Integer.parseInt(checkType[1]) - 1;
+                        String toBeRemoved = taskArray.get(index).toString();
+                        taskArray.remove(index);
+                        String noOfTask = String.valueOf(taskArray.size());
+                        String messageDeleted = "Noted. I've removed this task: \n" +
+                                                toBeRemoved + "\n" +
+                                                "Now you have " + noOfTask + " tasks in the list.";
+                        System.out.println(messageDeleted);
+
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("There are no tasks to be deleted!");
+                    }
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
