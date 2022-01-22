@@ -62,12 +62,9 @@ public class TaskList {
     }
 
     public void load() {
-        String[] paths = filePath.split("/");
-        File folder = new File(paths[0]);
-        folder.mkdir();
-
         try {
             File file = new File(filePath);
+            file.createNewFile();
             Scanner reader = new Scanner(file);
             while (reader.hasNextLine()) {
                 String d = reader.nextLine();
