@@ -39,14 +39,18 @@ public class Duke {
         }
     }
 
-    public static void listTasks() {
+    private static void goodbye() {
+        System.out.println("    Goodbye! Till the next time we meet!");
+    }
+
+    private static void listTasks() {
         System.out.println("    Your outstanding tasks as of now are as listed:");
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println("    " + (i + 1) + ". " + tasks.get(i));
         }
     }
 
-    public static void markTask(String[] parsedReq) throws DukeException {
+    private static void markTask(String[] parsedReq) throws DukeException {
         if (parsedReq.length != 2) {
             throw new DukeException("Please tell me which task you would like to be marked as done.");
         } else {
@@ -64,7 +68,7 @@ public class Duke {
         }
     }
 
-    public static void unmarkTask(String[] parsedReq) throws DukeException {
+    private static void unmarkTask(String[] parsedReq) throws DukeException {
         if (parsedReq.length != 2) {
             throw new DukeException("Please tell me which task you would like to be marked as undone.");
         } else {
@@ -82,7 +86,7 @@ public class Duke {
         }
     }
 
-    public static void createTodo(String request, String[] parsedReq) throws DukeException {
+    private static void createTodo(String request, String[] parsedReq) throws DukeException {
         if (parsedReq.length == 1) {
             throw new DukeException("The description of a todo cannot be empty.");
         } else {
@@ -93,7 +97,7 @@ public class Duke {
         }
     }
 
-    public static void createDeadline(String request, String[] parsedReq) throws DukeException {
+    private static void createDeadline(String request, String[] parsedReq) throws DukeException {
         if (parsedReq.length == 1) {
             throw new DukeException("The description of a deadline cannot be empty.");
         } else if (!request.contains(" /by ")) {
@@ -107,7 +111,7 @@ public class Duke {
         }
     }
 
-    public static void createEvent(String request, String[] parsedReq) throws DukeException {
+    private static void createEvent(String request, String[] parsedReq) throws DukeException {
         if (parsedReq.length == 1) {
             throw new DukeException("The description of an event cannot be empty.");
         } else if (!request.contains(" /at ")) {
@@ -121,7 +125,7 @@ public class Duke {
         }
     }
 
-    public static void deleteTask(String[] parsedReq) throws DukeException {
+    private static void deleteTask(String[] parsedReq) throws DukeException {
         if (parsedReq.length != 2) {
             throw new DukeException("Please tell me which task you would like to delete.");
         } else {
@@ -169,7 +173,7 @@ public class Duke {
             try {
                 switch (c) {
                 case BYE:
-                    System.out.println("    Goodbye! Till the next time we meet!");
+                    goodbye();
                     break;
                 case LIST:
                     listTasks();
