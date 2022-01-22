@@ -21,9 +21,8 @@ public class Duke {
         while(ip.run(userInput, p, arr) != -1)
             userInput = in.nextLine();
 
+        Storage.saveFile("./data", "duke.txt", arr);
     }
-
-
 
 }
 
