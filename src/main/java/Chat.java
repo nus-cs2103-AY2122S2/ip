@@ -1,12 +1,12 @@
-import Tasks.Deadline;
-import Tasks.Event;
-import Tasks.Task;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import exceptions.RequiredInformationMissingException;
+import exceptions.UnknownCommandException;
 
 import java.io.IOException;
 import java.util.Scanner;
-import Exceptions.*;
 
-import javax.imageio.IIOException;
 
 /**
  * Main Chat interface class.
@@ -23,7 +23,7 @@ public class Chat {
             this.taskManager = new TaskManager();
         } catch (IOException e) {
             System.out.println("An error occured while reading task file.");
-        } catch (UnknownFileEntry e) {
+        } catch (exceptions.UnknownFileEntry e) {
             System.out.println(e);
         }
         this.scanner = new Scanner(System.in);

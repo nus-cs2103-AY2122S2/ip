@@ -2,7 +2,7 @@ todo read book
 event watch movie /at 12pm
 list
 mark 1
-deadline brush teeth /by 12am
+deadline brush teeth /by 2012-04-04
 mark 2
 unmark 1
 event test deletion /at now

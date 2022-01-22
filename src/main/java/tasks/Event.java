@@ -1,4 +1,4 @@
-package Tasks;
+package tasks;
 
 /**
  * Event type of Task. Has specific time of occurence.

@@ -1,4 +1,4 @@
-package Tasks;
+package tasks;
 
 /**
  * Deadline type of Task, with a date and time that the task must be completed.

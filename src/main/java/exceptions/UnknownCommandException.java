@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 /**
  * Exception thrown when user enters a command that Duke has not been programmed to handle.
