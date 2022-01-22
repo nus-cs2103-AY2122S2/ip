@@ -12,6 +12,7 @@ public class Duke {
                 " |_____/ \\__,_|_|\\__\\__,_|_| |_| |_|\\__,_|\n";
 
         System.out.println(logo);
+        System.out.println("Feature1 Test");
         
         System.out.println("____________________________________________________________");
         System.out.println("Hello! I'm Saitama, a hero for fun.");
