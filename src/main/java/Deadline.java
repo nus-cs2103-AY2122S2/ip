@@ -4,10 +4,10 @@ import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task{
     private final String DEADLINE_STRING;
-    private final LocalDateTime deadLine;
+    private final LocalDateTime DEADLINE;
     public Deadline(String description, String deadLine) throws DukeException{
         super(description);
-        this.deadLine = this.parseDeadline(deadLine);
+        this.DEADLINE = this.parseDeadline(deadLine);
         this.DEADLINE_STRING = this.formatDeadline();
     }
 
@@ -26,13 +26,13 @@ public class Deadline extends Task{
 
     private String formatDeadline() {
         DateTimeFormatter form = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
-        return deadLine.format(form);
+        return DEADLINE.format(form);
     }
 
    @Override
     public String formatSave() {
         DateTimeFormatter form = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-        String date = this.deadLine.format(form);
+        String date = this.DEADLINE.format(form);
         return "D |" + (super.isDone ? "1| " : "0| ") + super.description + " /by " + date;
     }
 
