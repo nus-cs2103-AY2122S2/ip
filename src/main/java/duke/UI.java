@@ -93,19 +93,4 @@ public class UI {
         }
         System.out.println("Bye. Hope to see you again soon!");
     }
-
-    /**
-     * Extracts the command from a given input.
-     * @param input
-     * @return the command
-     */
-    private String getCommandFromInput(String input) {
-        int indexOfWhitespace = input.indexOf(" ");
-        if (indexOfWhitespace == -1) {
-            //1 word input
-            return input;
-        } else {
-            return input.substring(0, indexOfWhitespace);
-        }
-    }
 }
