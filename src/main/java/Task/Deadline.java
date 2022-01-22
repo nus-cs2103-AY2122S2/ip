@@ -1,3 +1,4 @@
+package Task;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -9,7 +10,7 @@ import java.util.Locale;
 import java.util.Objects;
 
 public class Deadline extends Task {
-    protected LocalDateTime by;
+    public LocalDateTime by;
 
     public Deadline(String description, LocalDateTime by) {
         super(description);
