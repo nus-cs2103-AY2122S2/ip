@@ -1,3 +1,4 @@
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Duke {
@@ -15,55 +16,65 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
 
-        while (true) {
-            String nextKey = scanner.nextLine();
+        while (scanner.hasNextLine()) {
+            try {
+                String nextKey = scanner.nextLine();
 
-            //use Enum for command keys?
+                if (Identity.exitMatch(nextKey)) {
+                    break;
+                }
 
-            if (Identity.exitMatch(nextKey)) {
-                break;
+                if (Identity.listMatch(nextKey)) {
+                    System.out.println(
+                            "----------------------------" +
+                                    "----------------------------\n"
+                                    + Duke.thisList.printList()
+                                    + "--------------------------------------------------------"
+                    );
+                    continue;
+                }
+
+                if (Identity.markMatch(nextKey)) {
+                    //mark
+                    Duke.thisList.markTask(nextKey);
+                    continue;
+                }
+
+                if (Identity.unmarkMatch(nextKey)) {
+                    //unmark
+                    Duke.thisList.unmarkTask(nextKey);
+                    continue;
+                }
+
+                if (Identity.todoMatch(nextKey)) {
+                    //unmark
+                    Duke.thisList.addTodo(nextKey);
+                    continue;
+                }
+
+                if (Identity.eventMatch(nextKey)) {
+                    //unmark
+                    Duke.thisList.addEvent(nextKey);
+                    continue;
+                }
+
+                if (Identity.deadlineMatch(nextKey)) {
+                    //unmark
+                    Duke.thisList.addDeadline(nextKey);
+                    continue;
+                } else {
+                    String errMsg = "----------------------------" +
+                            "----------------------------\n" +
+                            "OOPS!!! I'm sorry, but I don't know what that means :-(" + "\n"
+                            + "--------------------------------------------------------";
+                    throw new UnrecognizedCommandException(errMsg);
+                }
+            } catch (UnrecognizedCommandException e) {
+                System.out.println("----------------------------" +
+                        "----------------------------\n" +
+                        "OOPS!!! I'm sorry, but I don't know what that means :-(" + "\n"
+                        + "--------------------------------------------------------");
             }
-
-            if (Identity.listMatch(nextKey)) {
-                System.out.println(
-                        "----------------------------" +
-                                "----------------------------\n"
-                        + Duke.thisList.printList()
-                        + "--------------------------------------------------------"
-                );
-                continue;
-            }
-
-            if (Identity.markMatch(nextKey)) {
-                //mark
-                Duke.thisList.markTask(nextKey);
-                continue;
-            }
-
-            if (Identity.unmarkMatch(nextKey)) {
-                //unmark
-                Duke.thisList.unmarkTask(nextKey);
-                continue;
-            }
-
-            if (Identity.todoMatch(nextKey)) {
-                //unmark
-                Duke.thisList.addTodo(nextKey);
-                continue;
-            }
-
-            if (Identity.eventMatch(nextKey)) {
-                //unmark
-                Duke.thisList.addEvent(nextKey);
-                continue;
-            }
-
-            if (Identity.deadlineMatch(nextKey)) {
-                //unmark
-                Duke.thisList.addDeadline(nextKey);
-                continue;
-            }
-
         }
 
         Identity.exitProg();
