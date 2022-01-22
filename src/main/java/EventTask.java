@@ -27,7 +27,8 @@ public class EventTask extends Task {
      */
     @Override
     public String saveFormat() {
-        return "E | " + super.saveFormat() + " | " + at;
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-M-d HHmm");
+        return "E | " + super.saveFormat() + " | " + this.at.format(format);
     }
 
     /**
@@ -37,7 +38,7 @@ public class EventTask extends Task {
      */
     @Override
     public String toString() {
-        DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("MMM dd yyyy, K:mma");
+        DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mma");
         return "[E]" + super.toString() + " (at: " + this.at.format(formatDateTime)  + ")";
     }
 }

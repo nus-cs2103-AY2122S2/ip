@@ -39,6 +39,8 @@ public class Echo {
             parseFile();
         } catch (FileNotFoundException e) {
             printFormat("        Welcome new user!");
+        } catch (EchoException ee) {
+            printFormat(ee.getMessage());
         }
 
         // Read inputs.
@@ -139,7 +141,7 @@ public class Echo {
                 String[] splitSlash = input.split("/");
 
                 // Description of task.
-                String desc = splitSlash[0].substring(command.length() + 1);
+                String desc = splitSlash[0].substring(command.length() + 1).trim();
 
                 String dateTimeString;
                 LocalDateTime localDateTime;
@@ -157,8 +159,8 @@ public class Echo {
                     // "/" not specified in input.
                     if (!input.contains("/")) {
                         throw new EchoException("    Please specify the time of the task: \n"
-                                + "    deadline <description> /by <time> \n"
-                                + "    event <description> /at <time>");
+                                + "    deadline <description> /by <yyyy-mm-dd> <24hr time> \n"
+                                + "    event <description> /at <yyyy-mm-dd> <24hr time>");
                     }
 
                     dateTimeString = splitSlash[1].substring(splitSlash[1].indexOf(" ") + 1);
@@ -167,8 +169,8 @@ public class Echo {
                     if (command.equals("deadline")) {
                         // If /by is not specified, throw EchoException.
                         if (!input.contains("/by")) {
-                            throw new EchoException("    Please specify the deadline of the task. "
-                                    + "E.g. deadline return book /by 2019-10-15 1800");
+                            throw new EchoException("    Invalid input. Make sure to include '/by'\n"
+                                    + "    E.g. deadline return book /by 2019-10-15 1800");
                         }
 
                         // Add DeadlineTask.
@@ -176,8 +178,8 @@ public class Echo {
                     } else {
                         // If /at is not specified, throw EchoException.
                         if (!input.contains("/at")) {
-                            throw new EchoException("    Please specify the date and time of the event. "
-                                    + "E.g. event meeting /at 2019-10-15 1800");
+                            throw new EchoException("    Invalid input. Make sure to include '/at' \n."
+                                    + "    E.g. event meeting /at 2019-10-15 1800");
                         }
 
                         // Add EventTask task.
@@ -211,7 +213,7 @@ public class Echo {
             // Unable to access FILE_PATH to save the tasks.
             printFormat("        Unable to access folder: " + FILE_PATH);
         } catch (DateTimeParseException e) {
-            printFormat("    Wrong format for date and time. Follow the <yyyy-mm-dd> <24hr time> format. \n"
+            printFormat("    Invalid format for date and time. Follow the <yyyy-mm-dd> <24hr time> format. \n"
                     + "    E.g. 2019-10-15 1800");
         }
     }
@@ -221,7 +223,7 @@ public class Echo {
      *
      * @throws FileNotFoundException If file at FILE_PATH does not exist.
      */
-    private static void parseFile() throws FileNotFoundException {
+    private static void parseFile() throws FileNotFoundException, EchoException {
         // Create directory if it does not exist.
         File directory = new File(FILE_DIR);
         if (!directory.exists()){
@@ -235,17 +237,21 @@ public class Echo {
             try {
                 String[] split = line.split(Pattern.quote(" | "));
                 String type = split[0];
-                LocalDateTime localDateTime = LocalDateTime.parse(split[3], DateTimeFormatter.ofPattern("yyyy-M-d HHmm"));
+                LocalDateTime localDateTime;
+
                 switch (type) {
                     case "T":
                     case "D":
                     case "E":
                         if (type.equals("T")) {
                             TASKS.add(new TodoTask(split[2]));
-                        } else if (type.equals("D")) {
-                            TASKS.add(new DeadlineTask(split[2],localDateTime));
                         } else {
-                            TASKS.add(new EventTask(split[2], localDateTime));
+                            localDateTime = LocalDateTime.parse(split[3], DateTimeFormatter.ofPattern("yyyy-M-d HHmm"));
+                            if (type.equals("D")) {
+                                TASKS.add(new DeadlineTask(split[2],localDateTime));
+                            } else {
+                                TASKS.add(new EventTask(split[2], localDateTime));
+                            }
                         }
 
                         if (Integer.parseInt(split[1]) == 1) {
@@ -254,9 +260,12 @@ public class Echo {
                         break;
                 }
             } catch (NumberFormatException nfe) {
-                System.out.println(FILE_PATH + "| Second input must be 1 or 0: " + line);
+                throw new EchoException("    " + FILE_PATH + "\n    Second input must be 1 or 0 at line: " + line);
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println(FILE_PATH + "| Invalid format at line: " + line);
+                throw new EchoException("    " + FILE_PATH + "\n    Invalid format at line at line: " + line);
+            } catch (DateTimeParseException e) {
+                throw new EchoException("    " + FILE_PATH + "\n    Invalid date time format at line at line: " + line
+                        + "\n" + "    Follow the <yyyy-mm-dd> <24hr time> format. E.g. 2019-10-15 1800");
             }
         }
         s.close();
@@ -308,7 +317,7 @@ public class Echo {
      * Prints the exit message.
      */
     private static void goodbye() {
-        printFormat("        Goodbye!");
+        printFormat("    Goodbye!");
     }
 
     /**
