@@ -1,15 +1,29 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends Task{
     String time;
+    LocalDate date;
 
     Deadline(String description, String time) {
         super(description);
         this.time = time;
+        try {
+            date = LocalDate.parse(time);
+        } catch (DateTimeParseException e) {
+            date = null;
+        }
     }
 
     public void print() {
         System.out.print("[D]");
         System.out.print("[" + (this.completed ? "x" : " ") +  "] " + this.description);
-        System.out.println(" (by: " + this.time + ")");
+        if (date == null) {
+            System.out.println(" (by: " + this.time + ")");
+        } else {
+            System.out.println(" (by: " + this.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + ")");
+        }
     }
 
     @Override
