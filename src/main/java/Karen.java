@@ -40,85 +40,52 @@ public class Karen {
      * @param command user input from the command line
      * @return boolean flag if correct input; echoes out error message and returns false if wrong
      */
-    public boolean validateCommand(String command){
-        boolean flag = false;
-        try {
-            flag = this.validateHelper(command);
-        } catch (KarenException err) {
-            this.echo(err.toString());
-        }
-        return flag;
+    public Command validateCommand(String command){
+        // extract first word
+        String keyWord = command.contains(" ") ? command.split(" ")[0] : command;
+
+        Command commandType;
+        switch (keyWord) {
+            case "list":
+                commandType = Command.LIST;
+                break;
+            case "bye":
+                commandType = Command.BYE;
+                break;
+            case "todo":
+                commandType = Command.TODO;
+                break;
+            case "deadline":
+                commandType = Command.DEADLINE;
+                break;
+            case "event":
+                commandType = Command.EVENT;
+                break;
+            case "mark":
+                commandType = Command.MARK;
+                break;
+            case "unmark":
+                commandType = Command.UNMARK;
+                break;
+            case "delete":
+                commandType = Command.DELETE;
+                break;
+            default:
+                commandType = Command.NA;
+                break;
+        };
+        return commandType;
     }
 
-    /**
-     * Helper function for validateCommand to store cases to validate user input
-     * @param command user input from the command line
-     * @return boolean flag if success
-     * @throws KarenException if string input doesn't match what is needed
-     */
-    protected boolean validateHelper(String command) throws KarenException {
-        if (command.equals("list") | command.equals("bye")) {
-            return true;
+    public String executeCommand(String command, Command commandType) {
+        String output = "";
+        if (commandType==Command.NA) {
+            return "";
         }
-        else if (command.matches("((un)?mark|delete).*")) {
-            if (command.matches("((un)?mark|delete) \\d+")) {
-                return true;
-            } else if (command.matches("^(un)?mark.*")) {
-                throw new KarenException("You can only mark/unmark with an integer index");
-            } else if (command.matches("^delete.*")) {
-                throw new KarenException("You can only delete with an integer index");
-            }
-
-        }
-        else if (command.matches("todo.*")) {
-            if (command.matches("todo (.*)")) {
-                return true;
-            } else {
-                throw new KarenException("I can't understand what todo you want to add.");
-            }
-        }
-        else if (command.matches("deadline.*")) {
-            if (command.matches("deadline (.*) \\/by (.*)")) {
-                return true;
-            }
-            else if (command.matches("^((?!\\/by).)*$")) {
-                throw new KarenException("You're missing an /by flag needed to add an deadline");
-            }
-            else {
-                throw new KarenException("I can't understand what deadline you want to add.");
-            }
-        }
-        else if (command.matches("event.*")) {
-            if (command.matches("event (.*) \\/at (.*)")) {
-                return true;
-            }
-            else if (command.matches("^((?!\\/at).)*$")) {
-                throw new KarenException("You're missing an /at flag needed to add an event");
-            }
-            else {
-                throw new KarenException("I can't understand what event you want to add.");
-            }
-        }
-        throw new KarenException("I don't understand anything - I want to speak with your manager");
-    }
-
-    /**
-     * To execute commands based on input
-     * @param command user input from the command line
-     */
-    public void processCommand(String command) {
-        String output = command;
-        if (!validateCommand(command)) {
-            return;
-        }
-
-        // commands that don't depend on user input/extra params
-        if (command.equals("bye")) {
+        else if (commandType==Command.BYE) {
             output = "Goodbye - I'll be seeing your manager's manager next.";
-            this.echo(output);
-            System.exit(0);
         }
-        else if (command.equals("list")) {
+        else if (commandType==Command.LIST) {
             if (this.toDos.size()==0)
             {
                 output = "Nothing is even added yet.";
@@ -131,25 +98,8 @@ public class Karen {
                     counter++;
                 }
             }
-
         }
-        //  commands that require params
-        else if (command.matches("(un)?mark .*")) {
-            int index = Integer.valueOf(command.split(" ")[1]);
-            try {
-                Task getTask = this.getTask(index-1);
-                if (command.startsWith("mark")) {
-                    getTask.markDone();
-                    output = String.format("This task is finally done:\n  %s",getTask.toString());
-                } else if (command.startsWith("unmark")) {
-                    getTask.markUndone();
-                    output = String.format("This task is now incomplete - unacceptable:\n  %s",getTask.toString());
-                }
-            } catch (IndexOutOfBoundsException err){
-                output = String.format("Are you sure that [%d] is even in the 'list' command?", index);
-            }
-        }
-        else if (command.matches("^delete .*")) {
+        else if (commandType==Command.DELETE) {
             int index = Integer.valueOf(command.split(" ")[1]);
             try {
                 Task item = this.getTask(index-1);
@@ -159,13 +109,28 @@ public class Karen {
                 output = String.format("Are you sure that [%d] is even in the 'list' command?", index);
             }
         }
-        else if (command.matches("todo (.*)"))  {
+        else if (commandType==Command.MARK || commandType==Command.UNMARK){
+            int index = Integer.valueOf(command.split(" ")[1]);
+            try {
+                Task getTask = this.getTask(index-1);
+                if (commandType==Command.MARK) {
+                    getTask.markDone();
+                    output = String.format("This task is finally done:\n  %s",getTask.toString());
+                } else if (commandType==Command.UNMARK) {
+                    getTask.markUndone();
+                    output = String.format("This task is now incomplete - unacceptable:\n  %s",getTask.toString());
+                }
+            } catch (IndexOutOfBoundsException err){
+                output = String.format("Are you sure that [%d] is even in the 'list' command?", index);
+            }
+        }
+        else if (commandType==Command.TODO) {
             String item_descriptor = command.split(" ", 2)[1];
             ToDo item = new ToDo(item_descriptor);
             this.addTask(item);
             output = this.formatTask(item, "added");
         }
-        else if (command.matches("deadline (.*) \\/by (.*)")) {
+        else if (commandType==Command.DEADLINE) {
             Pattern p = Pattern.compile("deadline (.*) \\/by (.*)");
             Matcher m = p.matcher(command);
             m.find();
@@ -173,7 +138,7 @@ public class Karen {
             this.addTask(item);
             output = this.formatTask(item, "added");
         }
-        else if (command.matches("event (.*) \\/at (.*)")) {
+        else if (commandType==Command.EVENT) {
             Pattern p = Pattern.compile("event (.*) \\/at (.*)");
             Matcher m = p.matcher(command);
             m.find();
@@ -181,14 +146,35 @@ public class Karen {
             this.addTask(item);
             output = this.formatTask(item, "added");
         }
-        this.echo(output);
+        return output;
+    }
+
+    /**
+     * To execute commands based on input
+     * @param inputCommand user input from the command line
+     */
+    public void processCommand(String inputCommand) {
+        Command getCommandType = this.validateCommand(inputCommand);
+        String result = "";
+        try {
+            boolean flag = getCommandType.isValid(inputCommand);
+            if (flag) {
+                result = this.executeCommand(inputCommand, getCommandType);
+            }
+        } catch (KarenException err) {
+            result = err.toString();
+        } finally {
+            this.echo(result);
+            if (getCommandType==Command.BYE) {
+                System.exit(0);
+            }
+        }
     }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Karen manager = new Karen();
 
-        // greet
         manager.echo("Hello, my name is Karen.\nI'll be speaking (to) as your manager today.");
         while (true) {
             // take in input as commands
