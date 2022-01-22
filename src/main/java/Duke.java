@@ -13,8 +13,6 @@ public class Duke {
 
         System.out.println(logo);
 
-        System.out.println("Feature1 Test");
-
         System.out.println("____________________________________________________________");
         System.out.println("I'm Saitama, a hero for fun.");
         System.out.println("What can I do for you?");
