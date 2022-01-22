@@ -1,5 +1,7 @@
 public class Todo extends Task{
 
+    private static final String taskType = "T";
+
     public Todo(String name) {
         super(name);
     }
@@ -16,9 +18,17 @@ public class Todo extends Task{
         return new Todo(this.name, false);
     }
 
+    public String convertToStoredListFormat() {
+        String doneIndicator = "false";
+        if (super.isDone) {
+            doneIndicator = "true";
+        }
+        String storedListFormat = String.format("%s|%s|%s|", taskType, doneIndicator, super.name);
+        return storedListFormat;
+    }
+
     @Override
     public String toString() {
-        String taskType = "T";
         String doneMark;
         if (super.isDone) {
             doneMark = "X";

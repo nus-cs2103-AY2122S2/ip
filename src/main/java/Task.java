@@ -19,6 +19,8 @@ abstract class Task {
 
     abstract Task markAsUndone();
 
+    abstract String convertToStoredListFormat();
+
     @Override
     public String toString() {
         return String.format("name of task: %s", this.name);

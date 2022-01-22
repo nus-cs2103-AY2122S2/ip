@@ -1,6 +1,6 @@
 public class Deadline extends Task {
     private final String endDate;
-
+    private static final String taskType = "D";
     public Deadline(String name, String endDate) {
         super(name);
         this.endDate = endDate;
@@ -19,9 +19,17 @@ public class Deadline extends Task {
         return new Deadline(this.name, this.endDate, false);
     }
 
+    public String convertToStoredListFormat() {
+        String doneIndicator = "false";
+        if (super.isDone) {
+            doneIndicator = "true";
+        }
+        String storedListFormat = String.format("%s|%s|%s|%s", taskType, doneIndicator, super.name, this.endDate);
+        return storedListFormat;
+    }
+
     @Override
     public String toString() {
-        String taskType = "D";
         String doneMark;
         if (super.isDone) {
             doneMark = "X";

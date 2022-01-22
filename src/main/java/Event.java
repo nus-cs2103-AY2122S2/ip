@@ -1,6 +1,6 @@
 public class Event extends Task {
     private final String eventTime;
-
+    private static final String taskType = "E";
     public Event(String name, String eventTime) {
         super(name);
         this.eventTime = eventTime;
@@ -11,17 +11,25 @@ public class Event extends Task {
         this.eventTime = eventTime;
     }
 
-    public Deadline markAsDone() {
-        return new Deadline(this.name, this.eventTime, true);
+    public Event markAsDone() {
+        return new Event(this.name, this.eventTime, true);
     }
 
-    public Deadline markAsUndone() {
-        return new Deadline(this.name, this.eventTime, false);
+    public Event markAsUndone() {
+        return new Event(this.name, this.eventTime, false);
+    }
+
+    public String convertToStoredListFormat() {
+        String doneIndicator = "false";
+        if (super.isDone) {
+            doneIndicator = "true";
+        }
+        String storedListFormat = String.format("%s|%s|%s|%s", taskType, doneIndicator, super.name, this.eventTime);
+        return storedListFormat;
     }
 
     @Override
     public String toString() {
-        String taskType = "E";
         String doneMark;
         if (super.isDone) {
             doneMark = "X";
