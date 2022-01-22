@@ -1,5 +1,8 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     public static void main(String[] args) {
@@ -69,18 +72,24 @@ public class Duke {
                 if (processedCommand.length <= 1) {
                     new DukeException();
                     break;
-                } else if (!processedCommand[1].contains("/") || processedCommand[1].startsWith(("/"))) {
+                } else if (!processedCommand[1].contains("/by")) {
                     new DukeException();
                     break;
                 }
 
                 //Processing input
-                String[] inputForDeadlineConstructor = processedCommand[1].split("/", 2);
-                inputForDeadlineConstructor[0] = inputForDeadlineConstructor[0].subSequence(0,
-                    inputForDeadlineConstructor[0].length() - 1).toString();
+                String[] inputForDeadlineConstructor = processedCommand[1].split("/by", 2);
+                inputForDeadlineConstructor[0] = inputForDeadlineConstructor[0].trim();
+                LocalDate deadlineDate = null;
+                try {
+                    deadlineDate = LocalDate.parse(inputForDeadlineConstructor[1].trim());
+                } catch (DateTimeParseException e) {
+                    new DukeException();
+                    break;
+                }
 
                 //Create deadline
-                Deadline deadline = new Deadline(inputForDeadlineConstructor[0], inputForDeadlineConstructor[1]);
+                Deadline deadline = new Deadline(inputForDeadlineConstructor[0], deadlineDate);
                 System.out.println(String.format(
                     "%s      %s", Commands.ADD.toString(), deadline.identify()));
                 tasks.add(deadline);
@@ -105,18 +114,24 @@ public class Duke {
                 if (processedCommand.length <= 1) {
                     new DukeException();
                     break;
-                } else if (!processedCommand[1].contains("/") || processedCommand[1].startsWith(("/"))) {
+                } else if (!processedCommand[1].contains("/by")) {
                     new DukeException();
                     break;
                 }
 
                 //Input processing
-                String[] inputForEventConstructor = processedCommand[1].split("/", 2);
-                inputForEventConstructor[0] = inputForEventConstructor[0].subSequence(0,
-                    inputForEventConstructor[0].length() - 1).toString();
+                String[] inputForEventConstructor = processedCommand[1].split("/by", 2);
+                inputForEventConstructor[0] = inputForEventConstructor[0].trim();
+                LocalDate eventDate = null;
+                try {
+                    eventDate = LocalDate.parse(inputForEventConstructor[1].trim());
+                } catch (DateTimeParseException e) {
+                    new DukeException();
+                    break;
+                }
 
                 //Create event
-                Event event = new Event(inputForEventConstructor[0], inputForEventConstructor[1]);
+                Event event = new Event(inputForEventConstructor[0], eventDate);
                 System.out.println(String.format(
                     "%s      %s", Commands.ADD.toString(), event.identify()));
                 tasks.add(event);
