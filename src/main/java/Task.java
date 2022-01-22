@@ -35,7 +35,7 @@ public class Task {
      *
      * @return A string includes status and description.
      */
-    public String print() {
+    public String toString() {
         return ("[" + this.getStatusIcon() + "] " + this.description);
     }
 }
