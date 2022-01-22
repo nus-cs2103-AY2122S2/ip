@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 /**
  * A task represents an instruction inputted to Duke by a user.
  * At this stage, a task has minimally a name (description).
@@ -32,27 +30,27 @@ abstract class Instruction {
         String type = words[0];
 
         switch (type) {
-            case "list":
-                return new ListTasks();
-            case Instruction.TERMINATE_INSTRUCTION:
-                return new Quit(Instruction.TERMINATE_INSTRUCTION);
-            case "mark":
-                // Mark the task as done. If the second parameter is not an integer, or if the task does not exit, throw
-                // an exception. (To be implemented later)
-                return new MarkAsDone(instruction);
-            case "unmark":
-                // Mark the task as not done. If the second parameter is not an integer, or if the task does not exit,
-                // throw an exception. (To be implemented later)
-                return new UnmarkAsDone(instruction);
-            case "todo":
-            case "event":
-            case "deadline":
-                // These three cases are used to add tasks of different types.
-                return new Add(Task.of(instruction));
-            case "delete":
-                return new Delete(instruction);
-            default:
-                throw new IllegalArgumentException("Oops, I'm not sure what you mean.");
+        case "list":
+            return new ListTasks();
+        case Instruction.TERMINATE_INSTRUCTION:
+            return new Quit(Instruction.TERMINATE_INSTRUCTION);
+        case "mark":
+            // Mark the task as done. If the second parameter is not an integer, or if the task does not exit, throw
+            // an exception. (To be implemented later)
+            return new MarkAsDone(instruction);
+        case "unmark":
+            // Mark the task as not done. If the second parameter is not an integer, or if the task does not exit,
+            // throw an exception. (To be implemented later)
+            return new UnmarkAsDone(instruction);
+        case "todo":
+        case "event":
+        case "deadline":
+            // These three cases are used to add tasks of different types.
+            return new Add(Task.of(instruction));
+        case "delete":
+            return new Delete(instruction);
+        default:
+            throw new IllegalArgumentException("Oops, I'm not sure what you mean.");
         }
     }
 
