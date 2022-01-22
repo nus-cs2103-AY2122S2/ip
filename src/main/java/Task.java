@@ -11,6 +11,10 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    public String getFileFormat() {
+        return String.format(" | %d |%s", isDone ? 1 : 0, description);
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), description);
