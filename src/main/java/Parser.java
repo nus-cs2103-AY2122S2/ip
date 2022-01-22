@@ -20,7 +20,7 @@ public class Parser {
             case "bye":
                 p.print("Bye. Hope to see you again soon!");
                 return -1;
-            case "list":
+            case "list": 
                 if(args.length > 1) {
                     if(args[1].equals("/on")) {
                         ArrayList<Task> result = (ArrayList<Task>) arr
