@@ -4,6 +4,10 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -171,7 +175,20 @@ public class Mnsky {
 
         String deadlineName = String.join(" ", Arrays.copyOfRange(inputSplit, 1, by_index));
         String by = String.join(" ", Arrays.copyOfRange(inputSplit, by_index + 1, inputSplit.length));
-        return new Deadline(deadlineName, by);
+        LocalDate byDate = null;
+        LocalTime byTime = null;
+
+        // Check to see if there are any dates or times in the first two words after the /by command
+        if (by_index + 1 < inputSplit.length) {
+            byDate = this.parseDate(inputSplit[by_index + 1]);
+            if (byDate != null && by_index + 2 < inputSplit.length) {
+                byTime = this.parseTime(inputSplit[by_index + 2]);
+            } else {
+                byTime = this.parseTime(inputSplit[by_index + 1]);
+            }
+        }
+
+        return new Deadline(deadlineName, by, byDate, byTime);
     }
 
     /**
@@ -198,7 +215,20 @@ public class Mnsky {
 
         String eventName = String.join(" ", Arrays.copyOfRange(inputSplit, 1, at_index));
         String at = String.join(" ", Arrays.copyOfRange(inputSplit, at_index + 1, inputSplit.length));
-        return new Event(eventName, at);
+        LocalDate atDate = null;
+        LocalTime atTime = null;
+
+        // Check to see if there are any dates or times in the first two words after the /by command
+        if (at_index + 1 < inputSplit.length) {
+            atDate = this.parseDate(inputSplit[at_index + 1]);
+            if (atDate != null && at_index + 2 < inputSplit.length) {
+                atTime = this.parseTime(inputSplit[at_index + 2]);
+            } else {
+                atTime = this.parseTime(inputSplit[at_index + 1]);
+            }
+        }
+
+        return new Event(eventName, at, atDate, atTime);
     }
 
     /**
@@ -208,7 +238,7 @@ public class Mnsky {
      */
     private void delete(String[] inputSplit) throws MnskyException {
         int index = this.retrieveIndex("delete", inputSplit);
-        System.out.printf("[MNSKY has deleted the task %s from the list.]\n", this.list.get(index));
+        System.out.printf("[MNSKY has deleted the task %s from the list.]\n", this.list.get(index).getName());
         this.list.remove(index);
     }
 
@@ -238,7 +268,7 @@ public class Mnsky {
             BufferedWriter bufferedWriter  = new BufferedWriter(fileWriter);
 
             for (int i = 0; i < this.list.size(); i++) {
-                bufferedWriter.write(this.list.get(i).toString());
+                bufferedWriter.write(this.list.get(i).getSaveData());
                 bufferedWriter.newLine();
             }
 
@@ -251,6 +281,19 @@ public class Mnsky {
     }
 
     /**
+     * Creates a LocalDate object based on the input string.
+     * @param input The input string to create a LocalDate object from
+     * @return The created LocalDate object if the input string is in a valid date format, null otherwise.
+     */
+    private LocalDate parseDate(String input) {
+        try {
+            return LocalDate.parse(input);
+        } catch (DateTimeParseException e) {
+            return null;
+        }
+    }
+
+    /**
      * Adds all the tasks from the data file into the list.
      */
     private void readFromDataFile() {
@@ -259,13 +302,9 @@ public class Mnsky {
 
             while (fileScanner.hasNext()) {
                 String nextLine = fileScanner.nextLine();
-                if (nextLine.charAt(4) == ' ') {
-                    nextLine = nextLine.replaceFirst(" ", "Y");
-                }
-
                 String[] nextLineSplit = nextLine.split(" ");
                 Task nextTask = null;
-                
+
                 if (nextLine.charAt(1) == 'T') {
                     nextTask = this.parseTask(nextLine);
                 } else if (nextLine.charAt(1) == 'D') {
@@ -286,6 +325,19 @@ public class Mnsky {
             this.writeToDataFile();
         } catch (MnskyException e) {
             System.out.println("[MNSKY is having trouble remembering the previous task list...]");
+        }
+    }
+
+    /**
+     * Creates a LocalTime object based on the input string.
+     * @param input The input string to create a LocalTime object from
+     * @return The created LocalTime object if the input string is in a valid time format, null otherwise.
+     */
+    private LocalTime parseTime(String input) {
+        try {
+            return LocalTime.parse(input);
+        } catch (DateTimeParseException e) {
+            return null;
         }
     }
 

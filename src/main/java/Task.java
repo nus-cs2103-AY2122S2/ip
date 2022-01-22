@@ -28,7 +28,7 @@ public class Task {
     public String getName() {return this.taskName;}
 
     public String getGenericTaskName() {
-        return String.format("[%s] %s", this.done ? "X" : " ", this.taskName);
+        return String.format("[%s] %s", this.done ? "X" : "?", this.taskName);
     }
 
     /**
@@ -38,5 +38,9 @@ public class Task {
     @Override
     public String toString() {
         return "[T]" + this.getGenericTaskName();
+    }
+
+    public String getSaveData() {
+        return this.toString();
     }
 }
