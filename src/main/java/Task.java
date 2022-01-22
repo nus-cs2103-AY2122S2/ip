@@ -11,6 +11,14 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    public void markTaskDone() {
+        this.isDone = true;
+    }
+
+    public void unmarkTaskDone() {
+        this.isDone = false;
+    }
+
     public String getFileFormat() {
         return String.format(" | %d |%s", isDone ? 1 : 0, description);
     }
