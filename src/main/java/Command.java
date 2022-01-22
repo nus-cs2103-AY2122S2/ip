@@ -13,6 +13,7 @@ public class Command {
         put("event", CommandAction.EVENT);
         put("deadline", CommandAction.DEADLINE);
         put("delete", CommandAction.DELETE);
+        put("save", CommandAction.SAVE);
     }};
 
     Command(CommandAction commandAction, Map<String, String> arguments) {

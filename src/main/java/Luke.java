@@ -87,6 +87,9 @@ public class Luke {
                                 printOutput(String.format("Forcing it out... Success! I've removed the following task:\n\t%s", removedTask));
                         }
                         break;
+                    case SAVE:
+                        //TODO add save methods (create a Storage, an encoder and a decoder)
+                        break;
                     default:
                         break;
                 }
