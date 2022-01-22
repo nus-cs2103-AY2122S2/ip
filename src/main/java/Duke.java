@@ -18,14 +18,8 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-<<<<<<< HEAD
         String frame = "______________________________________________";
         System.out.println(frame + "\nHello! I\'m " + name + "\nWhat can I do for you?\n" + frame + "\n");
-=======
-        String frame = "_____________________________________________";
-        System.out.println(frame + "\nHello! I'm " + name
-                + "\nWhat can I do for you?\n" + frame + "\n");
->>>>>>> branch-Level-7
 
         Scanner sc = new Scanner(System.in);
         String input;
