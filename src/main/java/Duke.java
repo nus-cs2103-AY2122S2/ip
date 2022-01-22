@@ -1,3 +1,4 @@
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
@@ -121,6 +122,7 @@ public class Duke {
     }
 
     public static Command parseCommand(String command) throws CommandNotFoundException {
+        command = command.toLowerCase();
         if (command.equals("list")) {
             return Command.LIST;
         } else if(command.equals("mark")) {
