@@ -19,11 +19,7 @@ public class Duke {
         String message = "Got it. I've added this task:\n";
         taskList.add(t);
         numOfTask++;
-        try {
-            writeToFile("C:\\data\\TaskData.txt");
-        } catch (IOException e ) {
-            System.out.println("Something happened to the text file !" + e.getMessage());
-        }
+        updateTextFile();
         System.out.println(message + t.toString() + "\nNow you have " + numOfTask + " tasks in the list.");
     }
 
