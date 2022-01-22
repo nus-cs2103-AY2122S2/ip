@@ -62,7 +62,7 @@ public class Mnsky {
             System.out.println("[MNSKY presents an empty task list.]");
         } else {
             for (int i = 0; i < this.list.size(); i++) {
-                System.out.println(String.format("%d. %s", i + 1, this.list.get(i)));
+                System.out.printf("%d. %s\n", i + 1, this.list.get(i));
             }
         }
     }
@@ -127,7 +127,7 @@ public class Mnsky {
 
         String taskName = input_split[1];
         this.list.add(new Task(taskName));
-        System.out.println(String.format("[MNSKY added task %s to their list]", taskName));
+        System.out.printf("[MNSKY added task %s to their list]\n", taskName);
     }
 
     /**
@@ -154,7 +154,7 @@ public class Mnsky {
         String deadlineName = String.join(" ", Arrays.copyOfRange(input_split, 1, by_index));
         String by = String.join(" ", Arrays.copyOfRange(input_split, by_index + 1, input_split.length));
         this.list.add(new Deadline(deadlineName, by));
-        System.out.println(String.format("[MNSKY added deadline %s to their list]", deadlineName));
+        System.out.printf("[MNSKY added deadline %s to their list]\n", deadlineName);
     }
 
     /**
@@ -181,7 +181,7 @@ public class Mnsky {
         String eventName = String.join(" ", Arrays.copyOfRange(input_split, 1, at_index));
         String at = String.join(" ", Arrays.copyOfRange(input_split, at_index + 1, input_split.length));
         this.list.add(new Event(eventName, at));
-        System.out.println(String.format("[MNSKY added event %s to their list]", eventName));
+        System.out.printf("[MNSKY added event %s to their list]\n", eventName);
     }
 
     /**
@@ -191,7 +191,7 @@ public class Mnsky {
      */
     private void delete(String[] input_split) throws MnskyException {
         int index = this.retrieveIndex("delete", input_split);
-        System.out.println(String.format("[MNSKY has deleted the task %s from the list.]", this.list.get(index)));
+        System.out.printf("[MNSKY has deleted the task %s from the list.]\n", this.list.get(index));
         this.list.remove(index);
     }
 
