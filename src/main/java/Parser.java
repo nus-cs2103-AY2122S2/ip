@@ -40,7 +40,7 @@ public class Parser {
 
         String[] split = fileInput.split("\t");
         type = split[0].toCharArray()[0];
-        done = split[1].toCharArray()[1];
+        done = split[1].toCharArray()[0];
         name = split[2];
         date = split[3];
 
