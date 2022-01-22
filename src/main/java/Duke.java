@@ -1,5 +1,4 @@
 import java.time.format.DateTimeParseException;
-import java.util.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.io.FileNotFoundException;
@@ -10,8 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.ObjectOutputStream;
-import java.io.FileOutputStream;
 
 public class Duke {
 
