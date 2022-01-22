@@ -1,3 +1,7 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -14,26 +18,29 @@ public class TaskList {
         }
     }
 
-    public void markTask(int number) {
+    public void markTask(int number) throws IOException {
         tasks.get(number - 1).isDone = true;
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(tasks.get(number - 1));
+        saveToList();
     }
 
-    public void unmarkTask(int number) {
+    public void unmarkTask(int number) throws IOException {
         tasks.get(number - 1).isDone = false;
         System.out.println("OK, I've marked this task as not done yet:");
         System.out.println(tasks.get(number - 1));
+        saveToList();
     }
 
-    public void deleteTask(int number) {
+    public void deleteTask(int number) throws IOException {
         Task removedTask = tasks.remove(number - 1);
         System.out.println("Noted. I've removed this task:");
         System.out.println(removedTask);
         System.out.println(String.format("Now you have %d tasks in the list.", tasks.size()));
+        saveToList();
     }
 
-    public void addTask(String command, String description) {
+    public void addTask(String command, String description) throws IOException {
         System.out.println("Got it. I've added this task:");
         if (command.equals("todo")) {
             tasks.add(new Todo(description));
@@ -53,5 +60,18 @@ public class TaskList {
         else {
             System.out.println(String.format("Now you have %d tasks in the list.", tasks.size()));
         }
+        saveToList();
+    }
+
+    public void saveToList() throws IOException {
+        File file = new File("./data/duke.txt");
+        file.getParentFile().mkdirs();
+
+        BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+        for (Task task : tasks) {
+            bw.append(task.getFileFormat());
+            bw.append("\n");
+        }
+        bw.close();
     }
 }

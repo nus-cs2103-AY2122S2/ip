@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Command {
@@ -31,7 +32,7 @@ public class Command {
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(", taskList);
             }
         }
-        catch (DukeException e) {
+        catch (DukeException | IOException e) {
             System.out.println(e.getMessage());
         }
         finally {
