@@ -6,27 +6,27 @@ public class Parser {
             return true;
         } else {
             if (input.equals("list")) {
-                Duke.listAllTask();
+                TaskList.listAllTask();
             } else if (input.startsWith("mark") || input.startsWith("unmark")) {
-                Duke.markTask(input);
+                TaskList.markTask(input);
             } else if (input.startsWith("todo")) {
-                Duke.taskList.add(new ToDo(input.substring(4,input.length()), Task.totalTask, false));
+                TaskList.addTask(input.substring(4,input.length()), null, "T", false);
             } else if (input.startsWith("deadline") || input.startsWith("event")) {
                 if (input.startsWith("deadline")) {
                     String[] inputArr = input.split("/by ");
                     if (inputArr.length == 1) {
                         throw new EmptyDescriptorExceptions();
                     }
-                    Duke.taskList.add(new Deadline(inputArr[0].substring(8, inputArr[0].length()), Task.totalTask, inputArr[1], false));
+                    TaskList.addTask(inputArr[0].substring(8, inputArr[0].length()), inputArr[1], "D", false);
                 } else {
                     String[] inputArr = input.split("/at ");
                     if (inputArr.length == 1) {
                         throw new EmptyDescriptorExceptions();
                     }
-                    Duke.taskList.add(new Event(inputArr[0].substring(5, inputArr[0].length()), Task.totalTask, inputArr[1], false));
+                    TaskList.addTask(inputArr[0].substring(5, inputArr[0].length()), inputArr[1], "E", false);
                 }
             } else if (input.startsWith("delete")) {
-                Duke.deleter(Integer.parseInt(input.substring(7, input.length())));
+                TaskList.deleter(Integer.parseInt(input.substring(7, input.length())));
             } else {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what does that mean :-(");
             }
@@ -41,14 +41,14 @@ public class Parser {
         String[] stringArr = input.split("---");
         int taskNum = Task.totalTask;
         if (stringArr[0].equals("T")){
-            Duke.taskList.add(new ToDo(stringArr[2], taskNum, true));
-            Duke.markTaskNum(taskNum, stringArr[1]);
+            TaskList.addTask(stringArr[2], null, "T", true);
+            TaskList.markTaskNum(taskNum, stringArr[1]);
         } else if (stringArr[0].equals("D")){
-            Duke.taskList.add(new Deadline(stringArr[2], taskNum, stringArr[3], true));
-            Duke.markTaskNum(taskNum, stringArr[1]);
+            TaskList.addTask(stringArr[2], stringArr[3], "D", true);
+            TaskList.markTaskNum(taskNum, stringArr[1]);
         } else {
-            Duke.taskList.add(new Event(stringArr[2], taskNum, stringArr[3], true));
-            Duke.markTaskNum(taskNum, stringArr[1]);
+            TaskList.addTask(stringArr[2], stringArr[3], "E", true);
+            TaskList.markTaskNum(taskNum, stringArr[1]);
         }
     }
 }

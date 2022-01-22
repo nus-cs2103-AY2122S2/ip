@@ -14,7 +14,7 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(savedata);
             for (int i = 0; i < Task.totalTask; i++) {
-                fw.write(Duke.taskList.get(i).getDataRepresentation());
+                fw.write(TaskList.tasklist.get(i).getDataRepresentation());
             }
             fw.close();
         }
