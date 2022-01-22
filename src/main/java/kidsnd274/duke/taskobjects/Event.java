@@ -8,6 +8,11 @@ public class Event extends Task {
         this.time = time;
     }
 
+    public Event(String name, boolean isDone, String time) {
+        super(name, isDone);
+        this.time = time;
+    }
+
     @Override
     public String toString() {
         return super.toString() + "(at: " + this.time + ")";
@@ -19,7 +24,12 @@ public class Event extends Task {
     }
 
     @Override
-    public String getType() {
-        return "Event Task";
+    public Types getType() {
+        return Types.EVENT;
+    }
+
+    @Override
+    public String getDetails() {
+        return time;
     }
 }
