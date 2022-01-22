@@ -1,19 +1,21 @@
 public class Event extends Task {
-    String type = "[E]";
-    String time;
+	private final String TYPE = "[E]";
+	private final String TIME;
+	private final String NAME;
 
-    public Event(String name, String time) {
-        super(name);
-        this.time = time;
-    }
+	public Event(String name, String time) {
+		super(name);
+		this.NAME = name;
+		this.TIME = time;
+	}
 
-    @Override
-    public String toString() {
-        return super.description + "(" + time + ")";
-    }
+	@Override
+	public String toString() {
+		return this.NAME + "(" + this.TIME + ")";
+	}
 
-    @Override
-    public String track() {
-        return this.type;
-    }
+	@Override
+	public String track() {
+		return this.TYPE;
+	}
 }

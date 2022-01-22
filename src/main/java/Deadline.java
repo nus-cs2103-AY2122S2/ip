@@ -1,19 +1,21 @@
 public class Deadline extends Task {
-    String type = "[D]";
-    String date;
+	private final String TYPE = "[D]";
+	private final String date;
+	private final String NAME;
 
-    public Deadline(String name, String date) {
-        super(name);
-        this.date = date;
-    }
+	public Deadline(String name, String date) {
+		super(name);
+		this.NAME = name;
+		this.date = date;
+	}
 
-    @Override
-    public String toString() {
-        return super.description + "(" + date + ")";
-    }
+	@Override
+	public String toString() {
+		return this.NAME + "(" + date + ")";
+	}
 
-    @Override
-    public String track() {
-        return this.type;
-    }
+	@Override
+	public String track() {
+		return this.TYPE;
+	}
 }
