@@ -3,11 +3,12 @@ import java.util.Scanner;
 public class Commands {
     private String[] fullCommand;
     static Scanner scanner;
+
     private enum Command {
-        BYE,LIST,MARK,UNMARK,TODO,DEADLINE,EVENT,DELETE, INVALID
+        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, INVALID
     }
 
-    Commands() {
+    public Commands() {
         scanner = new Scanner(System.in);
     }
 
@@ -28,76 +29,76 @@ public class Commands {
 
         Task newTask;
         switch (command) {
-            case BYE:
-                Apollo.stop();
-                break;
-            case LIST:
-                Apollo.printList();
-                response();
-                break;
-            case MARK:
-                if (this.fullCommand.length == 1) {
-                    throw new ApolloException("Please specify which task to mark as done. \n" +
-                            "  mark <task number>");
-                }
-                Apollo.mark(Integer.parseInt(this.fullCommand[1]), true);
-                response();
-                break;
-            case UNMARK:
-                if (this.fullCommand.length == 1) {
-                    throw new ApolloException("Please specify which task to mark as not done yet. \n" +
-                            "  unmark <task number>");
-                }
-                Apollo.mark(Integer.parseInt(this.fullCommand[1]), false);
-                response();
-                break;
-            case TODO:
-                if (this.fullCommand.length == 1) {
-                    throw new ApolloException("Please specify the description of the task. \n" +
-                            "  todo <description>");
-                }
-                newTask = new Todo(this.fullCommand[1]);
-                Apollo.addTask(newTask);
-                response();
-                break;
-            case DEADLINE:
-                if (this.fullCommand.length == 1) {
-                    throw new ApolloException("Please specify the description and deadline of the task. \n" +
-                            "  deadline <description> /by <time>");
-                }
-                String[] descTime = this.fullCommand[1].split(" */[Bb][Yy] *", 2);
-                if (descTime.length == 1) {
-                    throw new ApolloException("Please add the time that this task is due. \n" +
-                            "  deadline <description> /by <time>");
-                }
-                newTask = new Deadline(descTime[0], descTime[1]);
-                Apollo.addTask(newTask);
-                response();
-                break;
-            case EVENT:
-                if (this.fullCommand.length == 1) {
-                    throw new ApolloException("Please specify the description and period of the task. \n" +
-                            "  event <description> /at <period>");
-                }
-                String[] descPeriod = this.fullCommand[1].split(" */[Aa][Tt] *", 2);
-                if (descPeriod.length == 1) {
-                    throw new ApolloException("Please add the period that this task happens. \n" +
-                            "  event <description> /at <period>");
-                }
-                newTask = new Event(descPeriod[0], descPeriod[1]);
-                Apollo.addTask(newTask);
-                response();
-                break;
-            case DELETE:
-                if (this.fullCommand.length == 1) {
-                    throw new ApolloException("Please specify which task to delete. \n" +
-                            "  delete <task number>");
-                }
-                Apollo.deleteTask(Integer.parseInt(this.fullCommand[1]));
-                response();
-                break;
-            default:
-                throw new ApolloException("Apologies, I do not understand that. ");
+        case BYE:
+            Apollo.stop();
+            break;
+        case LIST:
+            Apollo.printList();
+            response();
+            break;
+        case MARK:
+            if (this.fullCommand.length == 1) {
+                throw new ApolloException("Please specify which task to mark as done. \n"
+                        + "  mark <task number>");
+            }
+            Apollo.mark(Integer.parseInt(this.fullCommand[1]), true);
+            response();
+            break;
+        case UNMARK:
+            if (this.fullCommand.length == 1) {
+                throw new ApolloException("Please specify which task to mark as not done yet. \n"
+                        + "  unmark <task number>");
+            }
+            Apollo.mark(Integer.parseInt(this.fullCommand[1]), false);
+            response();
+            break;
+        case TODO:
+            if (this.fullCommand.length == 1) {
+                throw new ApolloException("Please specify the description of the task. \n"
+                        + "  todo <description>");
+            }
+            newTask = new Todo(this.fullCommand[1]);
+            Apollo.addTask(newTask);
+            response();
+            break;
+        case DEADLINE:
+            if (this.fullCommand.length == 1) {
+                throw new ApolloException("Please specify the description and deadline of the task. \n"
+                        + "  deadline <description> /by <time>");
+            }
+            String[] descTime = this.fullCommand[1].split(" */[Bb][Yy] *", 2);
+            if (descTime.length == 1) {
+                throw new ApolloException("Please add the time that this task is due. \n"
+                        + "  deadline <description> /by <time>");
+            }
+            newTask = new Deadline(descTime[0], descTime[1]);
+            Apollo.addTask(newTask);
+            response();
+            break;
+        case EVENT:
+            if (this.fullCommand.length == 1) {
+                throw new ApolloException("Please specify the description and period of the task. \n"
+                        + "  event <description> /at <period>");
+            }
+            String[] descPeriod = this.fullCommand[1].split(" */[Aa][Tt] *", 2);
+            if (descPeriod.length == 1) {
+                throw new ApolloException("Please add the period that this task happens. \n"
+                        + "  event <description> /at <period>");
+            }
+            newTask = new Event(descPeriod[0], descPeriod[1]);
+            Apollo.addTask(newTask);
+            response();
+            break;
+        case DELETE:
+            if (this.fullCommand.length == 1) {
+                throw new ApolloException("Please specify which task to delete. \n"
+                        + "  delete <task number>");
+            }
+            Apollo.deleteTask(Integer.parseInt(this.fullCommand[1]));
+            response();
+            break;
+        default:
+            throw new ApolloException("Apologies, I do not understand that. ");
         }
     }
 }

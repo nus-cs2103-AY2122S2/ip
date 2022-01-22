@@ -1,28 +1,14 @@
 import java.time.LocalTime;
 
 public class Banner extends Apollo{
-    static String logo = "       @@@%      @@@@@@*.      :@@@@@.    %@@@@@+    @@@@@@        #@@@@=       \n" +
-            "       @@@@=     @@@@@@@@@    @@@@@@@@#   @@@@@@*    @@@@@@.     -@@@@@@@@      \n" +
-            "       @@@@@     @@@@@@@@@*  %@@@@@@@@@+  @@@@@@*    @@@@@@.    .@@@@@@@@@@     \n" +
-            "      #@@@@@     +@@@@+@@@@  @@@@%+%@@@@   @@@@       @@@@      @@@@@**@@@@=    \n" +
-            "      @@@@@@+     %@@@  @@@ =@@@#   @@@@:  @@@@       @@@@      @@@@    @@@@    \n" +
-            "      @@@.@@@     #@@@ @@@@ %@@@     @@@#  @@@@       @@@%      @@@*    @@@@    \n" +
-            "     .@@@ @@@     *@@@@@@@= @@@@     @@@@  @@@@       @@@#      @@@-    @@@@    \n" +
-            "     =@@@@@@@*    *@@@@@@%  @@@@     @@@@  @@@@       @@@*      @@@-    @@@@    \n" +
-            "     @@@@@@@@@    +@@@@%    #@@@.    @@@+  @@@@  @@%  @@@+  @@* @@@@    @@@@    \n" +
-            "     @@@-:-@@@.   +@@@      -@@@@   @@@@   @@@@  @@@  @@@=  @@% @@@@*  *@@@%    \n" +
-            "     @@@.  @@@#   +@@@       @@@@@@@@@@@  -@@@@-=@@@ -@@@*-*@@% #@@@@@@@@@@.    \n" +
-            "    @@@@@:@@@@@@ @@@@@@@     =@@@@@@@@@   @@@@@@@@@@ @@@@@@@@@%  @@@@@@@@@%     \n" +
-            "    @@@@@-@@@@@@ @@@@@@@      =@@@@@@@-   @@@@@@@@@@ @@@@@@@@@%   @@@@@@@@      \n" +
-            "    @%#*+:+%#*+= -=+++++        =%@%=     --======== --=======-    :*@@*.       \n";
-
-    // define the border values
-    static LocalTime eleven = LocalTime.of(11, 0);
-    static LocalTime four = LocalTime.of(4, 0);
-    static LocalTime fifteen = LocalTime.of(15, 0);
-    static LocalTime eighteenThirty = LocalTime.of(18, 30);
 
     public static String dayTime() {
+        // define the border values
+        LocalTime eleven = LocalTime.of(11, 0);
+        LocalTime four = LocalTime.of(4, 0);
+        LocalTime fifteen = LocalTime.of(15, 0);
+        LocalTime eighteenThirty = LocalTime.of(18, 30);
+
         LocalTime now = LocalTime.now();
         // check if the time is after four and either before or exactly eleven
         if (now.isAfter(four) &&
@@ -41,10 +27,24 @@ public class Banner extends Apollo{
     }
 
     public static void welcomeMsg() {
+        String logo = "       @@@%      @@@@@@*.      :@@@@@.    %@@@@@+    @@@@@@        #@@@@=       \n"
+                + "       @@@@=     @@@@@@@@@    @@@@@@@@#   @@@@@@*    @@@@@@.     -@@@@@@@@      \n"
+                + "       @@@@@     @@@@@@@@@*  %@@@@@@@@@+  @@@@@@*    @@@@@@.    .@@@@@@@@@@     \n"
+                + "      #@@@@@     +@@@@+@@@@  @@@@%+%@@@@   @@@@       @@@@      @@@@@**@@@@=    \n"
+                + "      @@@@@@+     %@@@  @@@ =@@@#   @@@@:  @@@@       @@@@      @@@@    @@@@    \n"
+                + "      @@@.@@@     #@@@ @@@@ %@@@     @@@#  @@@@       @@@%      @@@*    @@@@    \n"
+                + "     .@@@ @@@     *@@@@@@@= @@@@     @@@@  @@@@       @@@#      @@@-    @@@@    \n"
+                + "     =@@@@@@@*    *@@@@@@%  @@@@     @@@@  @@@@       @@@*      @@@-    @@@@    \n"
+                + "     @@@@@@@@@    +@@@@%    #@@@.    @@@+  @@@@  @@%  @@@+  @@* @@@@    @@@@    \n"
+                + "     @@@-:-@@@.   +@@@      -@@@@   @@@@   @@@@  @@@  @@@=  @@% @@@@*  *@@@%    \n"
+                + "     @@@.  @@@#   +@@@       @@@@@@@@@@@  -@@@@-=@@@ -@@@*-*@@% #@@@@@@@@@@.    \n"
+                + "    @@@@@:@@@@@@ @@@@@@@     =@@@@@@@@@   @@@@@@@@@@ @@@@@@@@@%  @@@@@@@@@%     \n"
+                + "    @@@@@-@@@@@@ @@@@@@@      =@@@@@@@-   @@@@@@@@@@ @@@@@@@@@%   @@@@@@@@      \n"
+                + "    @%#*+:+%#*+= -=+++++        =%@%=     --======== --=======-    :*@@*.       \n";
         System.out.println("Hello from\n" + logo);
         String daytime = dayTime();
-        String msg = String.format("Good %s Sir, I am Apollo. \n" +
-                "How can I help you on this wonderful %s? ", daytime, daytime.toLowerCase());
+        String msg = String.format("Good %s Sir, I am Apollo. \nHow can I help you on this wonderful %s? ",
+                daytime, daytime.toLowerCase());
         Apollo.printMessage(msg);
     }
 }

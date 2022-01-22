@@ -5,9 +5,9 @@ public class Apollo {
     private static Commands input;
 
     protected static void printMessage(String message) {
-        System.out.println("\t________________________________________________________________________\n\t " +
-                message.replace("\n","\n\t ") +
-                "\n\t________________________________________________________________________\n");
+        System.out.println("\t________________________________________________________________________\n\t "
+                + message.replace("\n","\n\t ")
+                + "\n\t________________________________________________________________________\n");
     }
 
     private static void initialise() {
@@ -29,8 +29,8 @@ public class Apollo {
     }
 
     public static void stop() {
-        printMessage("See you next time. \n" +
-                "I am always available when you need me. ");
+        printMessage("See you next time. \n"
+                + "I am always available when you need me. ");
     }
 
     public static void addTask(Task newTask) {
@@ -43,8 +43,8 @@ public class Apollo {
         if (i > tasks.size()) {
             throw new ApolloException(String.format("Task %d. does not exist, unable to delete. ", i));
         }
-        String message = String.format("Alright, I've remove this task. \n" +
-                "  %s\nThere's a total of %d tasks now. ", tasks.get(i-1), tasks.size()-1);
+        String message = String.format("Alright, I've remove this task. \n"
+                + "  %s\nThere's a total of %d tasks now. ", tasks.get(i-1), tasks.size()-1);
         tasks.remove(i-1);
         printMessage(message);
     }
@@ -70,7 +70,8 @@ public class Apollo {
 
     public static void mark(int i, boolean mark) throws ApolloException {
         if (i > tasks.size()) {
-            throw new ApolloException(String.format("Task %d. does not exist, unable to mark or unmark. ", i));
+            throw new ApolloException(
+                    String.format("Task %d. does not exist, unable to mark or unmark. ", i));
         }
 
         Task task = tasks.get(i-1);
