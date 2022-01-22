@@ -18,7 +18,6 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
         List<Task> tasks = new ArrayList<>();
-        int count = 0;
         while (!str.equals("bye")){
             try {
                 errorHandling(str);
@@ -79,46 +78,37 @@ public class Duke {
                             Todo todo = new Todo(str.substring(5));
                             try {
                                 writeToFile("Data/tasks.txt", todo.toString() + System.lineSeparator());
-                                count++;
                             }
                             catch (IOException e){
                                 File f = new File("Data");
                                 f.mkdirs();
                                 writeToFile("Data/tasks.txt", todo.toString() + System.lineSeparator());
-                                count++;
                             }
-                            System.out.println("Got it. I've added this task: \n  " + todo +
-                                    "\nNow you have " +  count + " task(s) on the list.");
+                            System.out.println("Got it. I've added this task: \n  " + todo);
                         }
                         else if (temp[0].equals("event")){
                             Event event = new Event(str.substring(6));
                             try {
                                 writeToFile("Data/tasks.txt", event.toString() + System.lineSeparator());
-                                count++;
                             }
                             catch (IOException e){
                                 File f = new File("Data");
                                 f.mkdirs();
                                 writeToFile("Data/tasks.txt", event.toString() + System.lineSeparator());
-                                count++;
                             }
-                            System.out.println("Got it. I've added this task: \n  " + event +
-                                    "\nNow you have " + count + " task(s) on the list.");
+                            System.out.println("Got it. I've added this task: \n  " + event);
                         }
                         else if (temp[0].equals("deadline")){
                             Deadline deadline = new Deadline(str.substring(9));
                             try {
                                 writeToFile("Data/tasks.txt", deadline.toString() + System.lineSeparator());
-                                count++;
                             }
                             catch (IOException e){
                                 File f = new File("Data");
                                 f.mkdirs();
                                 writeToFile("Data/tasks.txt", deadline.toString() + System.lineSeparator());
-                                count++;
                             }
-                            System.out.println("Got it. I've added this task: \n  " + deadline +
-                                    "\nNow you have " + count + " task(s) on the list.");
+                            System.out.println("Got it. I've added this task: \n  " + deadline);
                         }
                     }
                 }
