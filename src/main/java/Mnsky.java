@@ -1,9 +1,3 @@
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-
 import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -15,15 +9,15 @@ import java.util.Arrays;
 public class Mnsky {
     private ArrayList<Task> list;
     private Scanner con;
-    private static final String dataFileName = "data/MnskyData.txt";
+    private Storage storage;
 
     /**
      * Constructor for the Mnsky object.
      */
     public Mnsky() {
-         this.list = new ArrayList<>();
          this.con = new Scanner(System.in);
-         this.readFromDataFile();
+         this.storage = new Storage("data/MnskyData.txt");
+         this.list = this.parseStorageData(this.storage.readFromDataFile());
     }
 
     /**
@@ -243,44 +237,6 @@ public class Mnsky {
     }
 
     /**
-     * Creates the data folder.
-     */
-    private void createDataFolder() {
-        File newFolder = new File("data/");
-        newFolder.mkdir();
-    }
-
-    /**
-     * Saves the current state of the list to the data file.
-     */
-    private void writeToDataFile() {
-        FileWriter fileWriter;
-
-        // If directory for data file doesn't exist, create it first
-        try {
-            fileWriter = new FileWriter(Mnsky.dataFileName);
-        } catch (IOException e) {
-            this.createDataFolder();
-        }
-
-        try {
-            fileWriter = new FileWriter(Mnsky.dataFileName);
-            BufferedWriter bufferedWriter  = new BufferedWriter(fileWriter);
-
-            for (int i = 0; i < this.list.size(); i++) {
-                bufferedWriter.write(this.list.get(i).getSaveData());
-                bufferedWriter.newLine();
-            }
-
-            bufferedWriter.flush();
-            bufferedWriter.close();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-            System.out.println("[MNSKY had trouble committing the task list to its memory!]");
-        }
-    }
-
-    /**
      * Creates a LocalDate object based on the input string.
      * @param input The input string to create a LocalDate object from
      * @return The created LocalDate object if the input string is in a valid date format, null otherwise.
@@ -296,36 +252,37 @@ public class Mnsky {
     /**
      * Adds all the tasks from the data file into the list.
      */
-    private void readFromDataFile() {
+    private ArrayList<Task> parseStorageData(ArrayList<String> rawTaskList) {
         try {
-            Scanner fileScanner = new Scanner(new File(Mnsky.dataFileName));
+            ArrayList<Task> taskList = new ArrayList<>();
 
-            while (fileScanner.hasNext()) {
-                String nextLine = fileScanner.nextLine();
-                String[] nextLineSplit = nextLine.split(" ");
+            for (String line : rawTaskList) {
+                String[] lineSplit = line.split(" ");
                 Task nextTask = null;
 
-                if (nextLine.charAt(1) == 'T') {
-                    nextTask = this.parseTask(nextLine);
-                } else if (nextLine.charAt(1) == 'D') {
-                    nextTask = this.parseDeadline(nextLineSplit);
-                } else if (nextLine.charAt(1) == 'E') {
-                    nextTask = this.parseEvent(nextLineSplit);
+                if (line.charAt(1) == 'T') {
+                    nextTask = this.parseTask(line);
+                } else if (line.charAt(1) == 'D') {
+                    nextTask = this.parseDeadline(lineSplit);
+                } else if (line.charAt(1) == 'E') {
+                    nextTask = this.parseEvent(lineSplit);
                 }
 
                 if (nextTask != null) {
-                    this.list.add(nextTask);
+                    taskList.add(nextTask);
 
-                    if (nextLine.charAt(4) == 'X') {
+                    if (line.charAt(4) == 'X') {
                         nextTask.mark();
                     }
                 }
             }
-        } catch (FileNotFoundException e) {
-            this.writeToDataFile();
+
+            return taskList;
         } catch (MnskyException e) {
             System.out.println("[MNSKY is having trouble remembering the previous task list...]");
         }
+
+        return new ArrayList<>();
     }
 
     /**
@@ -362,32 +319,32 @@ public class Mnsky {
 
                 case "mark":
                     this.mark(inputSplit);
-                    this.writeToDataFile();
+                    this.storage.writeToDataFile(this.list);
                     break;
 
                 case "unmark":
                     this.unmark(inputSplit);
-                    this.writeToDataFile();
+                    this.storage.writeToDataFile(this.list);
                     break;
 
                 case "todo":
                     this.addTask(this.parseTask(input));
-                    this.writeToDataFile();
+                    this.storage.writeToDataFile(this.list);
                     break;
 
                 case "event":
                     this.addTask(this.parseEvent(inputSplit));
-                    this.writeToDataFile();
+                    this.storage.writeToDataFile(this.list);
                     break;
 
                 case "deadline":
                     this.addTask(this.parseDeadline(inputSplit));
-                    this.writeToDataFile();
+                    this.storage.writeToDataFile(this.list);
                     break;
 
                 case "delete":
                     this.delete(inputSplit);
-                    this.writeToDataFile();
+                    this.storage.writeToDataFile(this.list);
                     break;
 
                 default:
