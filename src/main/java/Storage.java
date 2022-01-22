@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class Storage {
 
     static File savedata;
+    static Parser parser;
 
     public static void writeAllToFile() {
         try {
@@ -54,25 +55,8 @@ public class Storage {
     public static void readSavedData() throws FileNotFoundException {
         Scanner s = new Scanner(savedata);
         while(s.hasNext()){
-            fileParse(s.nextLine());
+            parser.parseFileData(s.nextLine());
         }
     }
 
-    public static void fileParse(String input){
-        if (input == null || input == ""){
-            return;
-        }
-        String[] stringArr = input.split("---");
-        int taskNum = Task.totalTask;
-        if (stringArr[0].equals("T")){
-            Duke.taskList.add(new ToDo(stringArr[2], taskNum, true));
-            Duke.markTaskNum(taskNum, stringArr[1]);
-        } else if (stringArr[0].equals("D")){
-            Duke.taskList.add(new Deadline(stringArr[2], taskNum, stringArr[3], true));
-            Duke.markTaskNum(taskNum, stringArr[1]);
-        } else {
-            Duke.taskList.add(new Event(stringArr[2], taskNum, stringArr[3], true));
-            Duke.markTaskNum(taskNum, stringArr[1]);
-        }
-    }
 }

@@ -64,7 +64,7 @@ public class Task {
         return String.format("%s---%s---%s---%s \n", this.type, this.isdone, this.name, this.time);
     }
 
-    public void setDate(String input, boolean isReading){
+    private void setDate(String input, boolean isReading){
         try {
             if ((this.type.equals("D") || this.type.equals("E")) && input != null) {
                 input = input.replaceAll("/", "-");

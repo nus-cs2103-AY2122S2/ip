@@ -5,8 +5,6 @@
  * @author Toh Zhan Qing
  */
 
-import java.io.*;
-import java.nio.file.Path;
 import java.util.*;
 
 public class Duke {
@@ -25,51 +23,18 @@ public class Duke {
         System.out.println("What can i do for you?");
         Storage storage = new Storage();
         storage.load();
+        Parser parser = new Parser();
+        Storage.parser = parser;
         while(!isBye) {
             try {
                 String input = sc.nextLine();
-                isBye = parse(input);
+                isBye = Parser.parseInput(input);
             }
             catch (EmptyDescriptorExceptions e){
                 System.out.println("☹ OOPS!!! The description of a task cannot be empty.");
             }
         }
     }
-
-    public static boolean parse(String input) throws EmptyDescriptorExceptions{
-        if (input.equals("bye")) {
-            System.out.println("Bye. I hope to see you sometime soon! :)");
-            return true;
-        } else {
-            if (input.equals("list")) {
-                listAllTask();
-            } else if (input.startsWith("mark") || input.startsWith("unmark")) {
-                markTask(input);
-            } else if (input.startsWith("todo")) {
-                taskList.add(new ToDo(input.substring(4,input.length()), Task.totalTask, false));
-            } else if (input.startsWith("deadline") || input.startsWith("event")) {
-                if (input.startsWith("deadline")) {
-                    String[] inputArr = input.split("/by ");
-                    if (inputArr.length == 1) {
-                        throw new EmptyDescriptorExceptions();
-                    }
-                    taskList.add(new Deadline(inputArr[0].substring(8, inputArr[0].length()), Task.totalTask, inputArr[1], false));
-                } else {
-                    String[] inputArr = input.split("/at ");
-                    if (inputArr.length == 1) {
-                        throw new EmptyDescriptorExceptions();
-                    }
-                    taskList.add(new Event(inputArr[0].substring(5, inputArr[0].length()), Task.totalTask, inputArr[1], false));
-                }
-            } else if (input.startsWith("delete")) {
-                deleter(Integer.parseInt(input.substring(7, input.length())));
-            } else {
-                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what does that mean :-(");
-            }
-            return false;
-        }
-    }
-
 
     public static void markTaskNum(int taskNum, String check){
         if (check.equals("true")) {
@@ -84,7 +49,7 @@ public class Duke {
      * @param num index (starts from 1) to delete
      */
     public static void deleter(int num){
-        if (num > 0 && num < Task.totalTask){
+        if (num > 0 && num <= Task.totalTask){
             num--;
             System.out.println(" Noted. I've removed this task: ");
             System.out.printf("  [%s][%s] %s\n",taskList.get(num).type, taskList.get(num).getStatus(), taskList.get(num).name);
