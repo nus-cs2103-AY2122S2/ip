@@ -1,10 +1,9 @@
-import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) throws DukeException{
-        Printer p = new Printer();
+        ui p = new ui();
         Scanner in = new Scanner(System.in);
         Parser ip = new Parser();
         ArrayList<Task> arr = new ArrayList<>();

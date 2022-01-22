@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.ArrayList;
 
-class Printer {
+class ui {
     public void print(String ... args) {
         System.out.println(String.format("    %s", "=========================================="));
         Arrays.asList(args).forEach((x) -> { System.out.println(String.format("    %s", x.toString())); } );

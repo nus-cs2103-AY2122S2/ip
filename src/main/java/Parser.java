@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class Parser {
-    public int run(String ss, Printer p, ArrayList<Task> arr) {
+    public int run(String ss, ui p, ArrayList<Task> arr) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy");
         String[] args = ss.split("\\s+");
         String action = args[0];
