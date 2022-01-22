@@ -18,9 +18,6 @@ public class Duke {
     // Creates an empty ArrayList to store Tasks
     private static ArrayList<Task> taskArr = new ArrayList<>();
 
-    // Create an empty ArrayList for String to ArrayList conversion
-    private static ArrayList<String> taskArrStr = new ArrayList<>();
-
     /**
      * Prints a line
      */
