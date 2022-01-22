@@ -14,10 +14,6 @@ Welcome!
 **Tip: type bye to end conversation**
 Enter next command:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Mike: I don't understand the command "test 123"
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Enter next command:
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Mike: Added "todo1" to the list!
 You now have *1* task(s) in your list.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
