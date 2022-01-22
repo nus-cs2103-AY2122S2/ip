@@ -1,10 +1,15 @@
 package kidsnd274.duke.taskobjects;
 
 public class Deadline extends Task {
-    private String deadline;
+    private String deadline; // can maybe encapsulate to TaskWithDate
 
     public Deadline(String name, String deadline) {
         super(name);
+        this.deadline = deadline;
+    }
+
+    public Deadline(String name, boolean isDone, String deadline) {
+        super(name, isDone);
         this.deadline = deadline;
     }
 
@@ -19,7 +24,12 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String getType() {
-        return "Deadline Task";
+    public Types getType() {
+        return Types.DEADLINE;
+    }
+
+    @Override
+    public String getDetails() {
+        return deadline;
     }
 }

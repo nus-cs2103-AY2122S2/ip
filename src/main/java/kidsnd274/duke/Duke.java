@@ -1,5 +1,6 @@
 package kidsnd274.duke;
 
+import kidsnd274.duke.FileHandler;
 import kidsnd274.duke.exceptions.NullDateProvidedException;
 import kidsnd274.duke.taskobjects.Event;
 import kidsnd274.duke.taskobjects.Deadline;
@@ -14,8 +15,10 @@ public class Duke {
     // Global Variables
     private static final String MESSAGE_WELCOME = "Hello! I'm Duke, your personal assistant\nWhat can I do for you?";
     private static final String MESSAGE_GOODBYE = "Goodbye!";
+    private static final String FILENAME = "task.txt";
 
     private static ArrayList<Task> toDoList;
+    private static FileHandler fh;
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -24,11 +27,13 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println(generateIntro());
+        // Handling files
+        fh = new FileHandler(FILENAME);
         // Starting input loop
         Scanner sc = new Scanner(System.in);
-        toDoList = new ArrayList<>();
+        toDoList = fh.importTasks();
 
+        System.out.println(generateIntro());
         while (true) {
             String input = sc.nextLine();
             if (!processInput(input)) {
@@ -38,15 +43,23 @@ public class Duke {
     }
 
     private static boolean processInput(String input) {
+        if (input.contains("`")) {
+            System.out.println(generateResponse("\"`\" character is not allowed"));
+            return true;
+        }
+
         String[] inputArray = input.split(" ");
         String command = inputArray[0];
 
         if (command.equals("quit") || command.equals("exit")) {
             System.out.println(generateGoodbye());
             return false;
+
         } else if (command.equals("list")) {
             String listOutput = generateList();
             System.out.println(generateResponse(listOutput));
+            return true;
+
         } else if (command.equals("mark")) {
             if (checkForInvalidIndex(inputArray)) {
                 return true;
@@ -56,6 +69,7 @@ public class Duke {
             currentTask.markAsDone();
             String output = "Marked as done:\n" + currentTask.getCurrentStatus();
             System.out.println(generateResponse(output));
+
         } else if (command.equals("unmark")) {
             if (checkForInvalidIndex(inputArray)) {
                 return true;
@@ -71,11 +85,11 @@ public class Duke {
                 System.out.println(generateErrorMessage("The description of a todo cannot be empty"));
                 return true;
             }
-
             String name = inputSplit[1];
             Todo newTask = new Todo(name);
             toDoList.add(newTask);
             System.out.println(generateAddMessage(newTask));
+
         } else if (command.equals("deadline")) {
             // Checking for date
             try {
@@ -94,6 +108,7 @@ public class Duke {
             Deadline newTask = new Deadline(name, deadline);
             toDoList.add(newTask);
             System.out.println(generateAddMessage(newTask));
+
         } else if (command.equals("event")) {
             // Checking for date
             try {
@@ -111,6 +126,7 @@ public class Duke {
             Event newTask = new Event(name, eventTime);
             toDoList.add(newTask);
             System.out.println(generateAddMessage(newTask));
+
         } else if (command.equals("delete")) {
             if (checkForInvalidIndex(inputArray)) {
                 return true;
@@ -120,9 +136,11 @@ public class Duke {
             String description = currentTask.getCurrentStatus();
             toDoList.remove(taskNo);
             System.out.println(generateRemoveMessage(description));
+
         } else {
             System.out.println(generateResponse("Unknown command: " + command));
         }
+        fh.exportTasks(toDoList);
         return true;
     }
 

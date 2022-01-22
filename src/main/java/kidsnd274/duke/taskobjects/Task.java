@@ -2,11 +2,16 @@ package kidsnd274.duke.taskobjects;
 
 public class Task {
     private String taskName;
-    private boolean done;
+    private boolean isDone;
 
     public Task(String taskName) {
         this.taskName = taskName;
-        this.done = false;
+        this.isDone = false;
+    }
+
+    public Task(String taskName, boolean isDone) {
+        this.taskName = taskName;
+        this.isDone = isDone;
     }
 
     @Override
@@ -15,23 +20,35 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (done ? "x" : " ");
+        return (isDone ? "x" : " ");
     }
 
     public void markAsDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     public void markAsUndone() {
-        this.done = false;
+        this.isDone = false;
     }
 
     public String getCurrentStatus() {
         return "[" + getStatusIcon() + "] " + this;
     }
 
-    public String getType() {
-        return "Generic Task";
+    public Types getType() {
+        return Types.TASK;
+    }
+
+    public String getTaskName() {
+        return taskName;
+    }
+
+    public String getDetails() {
+        return "";
+    }
+
+    public boolean isDone() {
+        return isDone;
     }
 }
 
