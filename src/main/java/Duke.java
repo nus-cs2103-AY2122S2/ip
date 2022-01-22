@@ -4,8 +4,8 @@ import DukeUtils.*;
 import java.nio.file.Paths;
 
 public class Duke {
-    private Storage storage;
-    private TaskList tasks;
+    private final Storage storage;
+    private final TaskList tasks;
     private final Ui ui;
 
     public Duke(String filePath) {
