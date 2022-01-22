@@ -13,7 +13,7 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        String frame = "_____________________________________________";
+        String frame = "______________________________________________";
         System.out.println(frame + "\nHello! I\'m " + name + "\nWhat can I do for you?\n" + frame + "\n");
 
         Scanner sc = new Scanner(System.in);
