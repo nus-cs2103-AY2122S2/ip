@@ -1,3 +1,7 @@
+import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -153,7 +157,20 @@ public class Mnsky {
 
         String deadlineName = String.join(" ", Arrays.copyOfRange(input_split, 1, by_index));
         String by = String.join(" ", Arrays.copyOfRange(input_split, by_index + 1, input_split.length));
-        this.list.add(new Deadline(deadlineName, by));
+        LocalDate byDate = null;
+        LocalTime byTime = null;
+
+        // Check to see if there are any dates or times in the first two words after the /by command
+        if (by_index + 1 < input_split.length) {
+            byDate = parseDate(input_split[by_index + 1]);
+            if (byDate != null && by_index + 2 < input_split.length) {
+                byTime = parseTime(input_split[by_index + 2]);
+            } else {
+                byTime = parseTime(input_split[by_index + 1]);
+            }
+        }
+
+        this.list.add(new Deadline(deadlineName, by, byDate, byTime));
         System.out.println(String.format("[MNSKY added deadline %s to their list]", deadlineName));
     }
 
@@ -180,7 +197,20 @@ public class Mnsky {
 
         String eventName = String.join(" ", Arrays.copyOfRange(input_split, 1, at_index));
         String at = String.join(" ", Arrays.copyOfRange(input_split, at_index + 1, input_split.length));
-        this.list.add(new Event(eventName, at));
+        LocalDate atDate = null;
+        LocalTime atTime = null;
+
+        // Check to see if there are any dates or times in the first two words after the /by command
+        if (at_index + 1 < input_split.length) {
+            atDate = parseDate(input_split[at_index + 1]);
+            if (atDate != null && at_index + 2 < input_split.length) {
+                atTime = parseTime(input_split[at_index + 2]);
+            } else {
+                atTime = parseTime(input_split[at_index + 1]);
+            }
+        }
+
+        this.list.add(new Event(eventName, at, atDate, atTime));
         System.out.println(String.format("[MNSKY added event %s to their list]", eventName));
     }
 
@@ -193,6 +223,32 @@ public class Mnsky {
         int index = this.retrieveIndex("delete", input_split);
         System.out.println(String.format("[MNSKY has deleted the task %s from the list.]", this.list.get(index)));
         this.list.remove(index);
+    }
+
+    /**
+     * Creates a LocalDate object based on the input string.
+     * @param input The input string to create a LocalDate object from
+     * @return The created LocalDate object if the input string is in a valid date format, null otherwise.
+     */
+    private LocalDate parseDate(String input) {
+        try {
+            return LocalDate.parse(input);
+        } catch (DateTimeParseException e) {
+            return null;
+        }
+    }
+
+    /**
+     * Creates a LocalTime object based on the input string.
+     * @param input The input string to create a LocalTime object from
+     * @return The created LocalTime object if the input string is in a valid time format, null otherwise.
+     */
+    private LocalTime parseTime(String input) {
+        try {
+            return LocalTime.parse(input);
+        } catch (DateTimeParseException e) {
+            return null;
+        }
     }
 
     /**
