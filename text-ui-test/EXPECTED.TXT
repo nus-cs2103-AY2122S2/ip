@@ -7,6 +7,7 @@
      Success in creating data file!
 
      Here are the records in the hard disk:
+
     ____________________________________________________________
      What can I do for you?
     ____________________________________________________________
@@ -95,7 +96,7 @@ OOPS!!! Please enter time in this 24hrs-format: <HHmm>
 OOPS!!! Please enter time in this 24hrs-format: <HHmm>
     ____________________________________________________________
      Got it. I've added this task:
-       [D][ ] correct format date only (by: Dec 12 2022 )
+       [D][ ] correct format date only (by: Dec 12 2022)
      Now you have 2 task/s in the list.
     ____________________________________________________________
 
@@ -138,7 +139,7 @@ OOPS!!! The specified task ID is out of range. Please enter a number from 0 to 6
 
      1.[T][ ] borrow book
 
-     2.[D][ ] correct format date only (by: Dec 12 2022 )
+     2.[D][ ] correct format date only (by: Dec 12 2022)
 
      3.[D][ ] correct format date and time (by: Dec 12 2022 12:00)
 
@@ -156,7 +157,7 @@ OOPS!!! The argument MUST contain a single integer.
 
      1.[T][ ] borrow book
 
-     2.[D][ ] correct format date only (by: Dec 12 2022 )
+     2.[D][ ] correct format date only (by: Dec 12 2022)
 
      3.[D][ ] correct format date and time (by: Dec 12 2022 12:00)
 
@@ -176,7 +177,7 @@ OOPS!!! The argument MUST contain a single integer.
     ____________________________________________________________
      Here are the tasks in your list:
 
-     1.[D][ ] correct format date only (by: Dec 12 2022 )
+     1.[D][ ] correct format date only (by: Dec 12 2022)
 
      2.[D][ ] correct format date and time (by: Dec 12 2022 12:00)
 
