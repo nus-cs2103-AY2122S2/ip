@@ -5,7 +5,23 @@ public class UnmarkedTask extends Task {
     public UnmarkedTask(String taskTitle) {
         super(taskTitle);
         this.taskTitle = taskTitle;
-        this.unmarkedTitle = "[ ] " + taskTitle;
+        this.unmarkedTitle = "[ ][ ] " + taskTitle;
+    }
+
+    public UnmarkedTask(String taskTitle, String taskType) {
+        super(taskTitle);
+        this.taskTitle = taskTitle;
+        String codedType = taskType.equals("todo") ? "[T]" : "";
+        this.unmarkedTitle = codedType + "[ ] " + taskTitle;
+    }
+
+    public UnmarkedTask(String taskTitle, String deadline, String taskType) {
+        super(taskTitle);
+        this.taskTitle = taskTitle;
+        String codedType = taskType.equals("event") ? "[E]" : "[D]";
+        String timing = taskType.equals("event") ? "(at: " + deadline + ")"
+                : "(by: " + deadline + ")";
+        this.unmarkedTitle = codedType + "[ ] " + taskTitle + " " + timing;
     }
 
     public Task markTask() {

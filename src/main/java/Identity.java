@@ -29,6 +29,18 @@ public class Identity {
         return nextKey.matches("unmark\\s\\d");
     }
 
+    public static boolean todoMatch(String nextKey) {
+        return nextKey.matches("^todo.*$");
+    }
+
+    public static boolean eventMatch(String nextKey) {
+        return nextKey.matches("^event.*$");
+    }
+
+    public static boolean deadlineMatch(String nextKey) {
+        return nextKey.matches("^deadline.*$");
+    }
+
     public static void exitProg() {
         System.out.println("--------------------------------" +
                 "------------------------\n"

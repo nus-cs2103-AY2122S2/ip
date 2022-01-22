@@ -46,6 +46,24 @@ public class Duke {
                 continue;
             }
 
+            if (Identity.todoMatch(nextKey)) {
+                //unmark
+                Duke.thisList.addTodo(nextKey);
+                continue;
+            }
+
+            if (Identity.eventMatch(nextKey)) {
+                //unmark
+                Duke.thisList.addEvent(nextKey);
+                continue;
+            }
+
+            if (Identity.deadlineMatch(nextKey)) {
+                //unmark
+                Duke.thisList.addDeadline(nextKey);
+                continue;
+            }
+
             UnmarkedTask nextTask = new UnmarkedTask(nextKey);
             Duke.thisList.addItem(nextTask);
 
