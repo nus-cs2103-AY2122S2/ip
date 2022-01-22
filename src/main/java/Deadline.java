@@ -30,8 +30,8 @@ public class Deadline extends Task {
         String formattedDate = this.dueDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         String formattedTime = "";
         if (dueTime != null) {
-            formattedTime = dueTime.toString();
+            formattedTime = " " + dueTime.toString();
         }
-        return "[D]" + super.toString() + " (by: " + formattedDate + " " + formattedTime + ")";
+        return "[D]" + super.toString() + " (by: " + formattedDate + formattedTime + ")";
     }
 }

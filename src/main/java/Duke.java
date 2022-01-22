@@ -313,6 +313,8 @@ public class Duke {
      * @param listOfTasks Target TaskList to store the data.
      */
     private static void loadData(File f, TaskList listOfTasks) {
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
         try {
             Scanner sc = new Scanner(f);
             while (sc.hasNextLine()) {
@@ -334,15 +336,16 @@ public class Duke {
 
                     String[] dateTimeArray = currBy.split(" ");
 
-                    if (dateTimeArray.length > 2 || dateTimeArray.length < 1) {
+                    if (dateTimeArray.length > 4 || dateTimeArray.length < 3) {
                         throw new InvalidCommand("Incorrect number of arguments supplied :(");
                     }
 
                     // Parse user input into LocalDate/LocalTime if it is in the correct format.
-                    LocalDate newDate = convertDate(dateTimeArray[0]);
+                    String currDate = dateTimeArray[0] + " " + dateTimeArray[1] + " " + dateTimeArray[2];
+                    LocalDate newDate = LocalDate.parse(currDate, dateFormatter);
                     LocalTime newTime = null;
-                    if (dateTimeArray.length > 1) { // Optional time input
-                        newTime = convertTime(dateTimeArray[1]);
+                    if (dateTimeArray.length > 3) { // Optional time input
+                        newTime = LocalTime.parse(dateTimeArray[3], timeFormatter);
                     }
 
                     // Check if date/time specified is in the present.
@@ -371,19 +374,21 @@ public class Duke {
 
                     String[] dateTimeArray = currAt.split(" ");
 
-                    if (dateTimeArray.length > 3 || dateTimeArray.length < 1) {
+                    if (dateTimeArray.length > 4 || dateTimeArray.length < 3) {
                         throw new InvalidCommand("Incorrect number of arguments supplied :(");
                     }
 
                     // Parse user input into LocalDate/LocalTime if it is in the correct format.
-                    LocalDate newDate = convertDate(dateTimeArray[0]);
+                    String currDate = dateTimeArray[0] + " " + dateTimeArray[1] + " " + dateTimeArray[2];
+                    LocalDate newDate = LocalDate.parse(currDate, dateFormatter);
                     LocalTime newStartTime = null;
                     LocalTime newEndTime = null;
-                    if (dateTimeArray.length > 1) { // Optional start time input
-                        newStartTime = convertTime(dateTimeArray[1]);
-                    }
-                    if (dateTimeArray.length > 2) { // Optional end time input
-                        newEndTime = convertTime(dateTimeArray[2]);
+                    if (dateTimeArray.length > 3) { // Optional start time input
+                        String[] startEndTime = dateTimeArray[3].split("-");
+                        newStartTime = LocalTime.parse(startEndTime[0], timeFormatter);
+                        if (startEndTime.length == 2) {
+                            newEndTime = LocalTime.parse(startEndTime[1], timeFormatter);
+                        }
                     }
 
                     // Check if date/time specified is in the present.
