@@ -22,42 +22,43 @@ public class Mike {
             if (!trimmedInputString.isEmpty()) {
                 String command = splitString[0];
                 try {
+                    //Todo: ask in forum how to use enum for switch statement when strings are used
                     switch (command) {
-                        case "list":
-                            mike.printList();
-                            break;
-                        case "mark":
-                            int markIndex = Integer.parseInt(splitString[1]);
-                            mike.mark(markIndex);
-                            break;
-                        case "unmark":
-                            int unmarkIndex = Integer.parseInt(splitString[1]);
-                            mike.unmark(unmarkIndex);
-                            break;
-                        case "remove":
-                            int removeIndex = Integer.parseInt(splitString[1]);
-                            mike.removeFromList(removeIndex);
-                            break;
-                        case "todo":
-                            String todoParameters =
-                                    removeCommandFromString(trimmedInputString);
-                            mike.addTodo(todoParameters);
-                            break;
-                        case "deadline":
-                            String deadlineParameters =
-                                    removeCommandFromString(trimmedInputString);
-                            mike.addDeadline(deadlineParameters);
-                            break;
-                        case "event":
-                            String eventParameters =
-                                    removeCommandFromString(trimmedInputString);
-                            mike.addEvent(eventParameters);
-                            break;
-                        default:
-                            String invalidCommandMessage =
-                                    String.format("\n**Mike: I don't understand the command \"%s\"**",
-                                            trimmedInputString);
-                            throw new UnsupportedOperationException(invalidCommandMessage);
+                    case "list":
+                        mike.printList();
+                        break;
+                    case "mark":
+                        int markIndex = Integer.parseInt(splitString[1]);
+                        mike.mark(markIndex);
+                        break;
+                    case "unmark":
+                        int unmarkIndex = Integer.parseInt(splitString[1]);
+                        mike.unmark(unmarkIndex);
+                        break;
+                    case "remove":
+                        int removeIndex = Integer.parseInt(splitString[1]);
+                        mike.removeFromList(removeIndex);
+                        break;
+                    case "todo":
+                        String todoParameters =
+                                removeCommandFromString(trimmedInputString);
+                        mike.addTodo(todoParameters);
+                        break;
+                    case "deadline":
+                        String deadlineParameters =
+                                removeCommandFromString(trimmedInputString);
+                        mike.addDeadline(deadlineParameters);
+                        break;
+                    case "event":
+                        String eventParameters =
+                                removeCommandFromString(trimmedInputString);
+                        mike.addEvent(eventParameters);
+                        break;
+                    default:
+                        String invalidCommandMessage =
+                                String.format("\n**Mike: I don't understand the command \"%s\"**",
+                                        trimmedInputString);
+                        throw new UnsupportedOperationException(invalidCommandMessage);
                     }
                 } catch(UnsupportedOperationException e) {
                     e.printStackTrace();
@@ -82,6 +83,9 @@ public class Mike {
         return str.substring(indexOfTaskParameters);
     }
 
+    /**
+     * Constructor for Mike
+     */
     public Mike() {
         this.listOfTasks = new ArrayList<>();
     }
@@ -112,6 +116,12 @@ public class Mike {
         System.out.println(tip);
     }
 
+    /**
+     * Prints a string with line separators to make it
+     * visually appealing
+     *
+     * @param str The string that will be printed
+     */
     void printReply(String str){
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("Mike: " + str);
@@ -131,6 +141,7 @@ public class Mike {
         printReply("Hey! You didn't enter any characters!");
     }
 
+    //TODO: consider making Mike immutable (return Mike with new list each time)
     void addToList(Task task) {
         this.listOfTasks.add(task);
         String taskName = task.getTaskName();
