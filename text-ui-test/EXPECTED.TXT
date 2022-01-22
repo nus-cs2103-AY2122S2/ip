@@ -1,3 +1,6 @@
+Oh no... I couldn't find the task list in your hard disk...
+Don't worry! I will create one for you now :)
+
   *    ,---.    ,-----.  ,--.  ,--.   ,---.      *
       '   .-'  '  .-.  ' |  ,'.|  |  /  O  \    *
  *    `.  `-.  |  | |  | |  |' '  | |  .-.  |
@@ -6,13 +9,11 @@
 
 Hi! You can call me Sona ^^~
 How can I help you?
-Oh no... I couldn't find the task list in your hard disk!
-I will create one for you now :)
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 blah? Sorry, I don't understand what that means.. :(
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*
-Your list is empty~
+Oops... your list is empty! :(
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 Oh no..did you forget to put what you need to do? :(
@@ -26,7 +27,7 @@ Wokay! I've added this task:
 Now you have 1 task(s) in the list
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*
-Oh no..did you forget to put what you need to do?
+Oh no..did you forget to put what you need to do? :(
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 When is the event happening? Add '/' and the date after the event to make me record ;)
@@ -35,7 +36,7 @@ When is the event happening? Add '/' and the date after the event to make me rec
 When is the event happening? Add '/' and the date after the event to make me record ;)
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*
-Oops! You forgot to add the due date after '/'.. try again? :)
+Oops! You forgot to add the event date after '/'.. try again? :)
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 Oh no... the format or the date/time you entered is wrong! The correct format should be YYYY-MM-DD HHMM
@@ -64,13 +65,13 @@ Wokay! I've added this task:
 Now you have 3 task(s) in the list
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*
-Oh no..did you forget to put what you need to do?
+Oh no..did you forget to put what you need to do? :(
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 deadlinehomework? Sorry, I don't understand what that means.. :(
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*
-When is the deadline? Add '/' and the due date after your task to make me record ;)
+When is the deadline? Add '/' and the date after your task to make me record ;)
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 Oh no... the format or the date/time you entered is wrong! The correct format should be YYYY-MM-DD HHMM
