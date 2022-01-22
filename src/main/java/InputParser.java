@@ -1,11 +1,13 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class InputParser {
     public int run(String ss, Printer p, ArrayList<Task> arr) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-M-yyyy hh:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy hh:mm");
         String[] args = ss.split("\\s+");
         String action = args[0];
         try {
@@ -19,7 +21,25 @@ public class InputParser {
                 p.print("Bye. Hope to see you again soon!");
                 return -1;
             case "list":
-                p.print(arr);
+                if(args.length > 1) {
+                    if(args[1].equals("/on")) {
+                        ArrayList<Task> result = (ArrayList<Task>) arr
+                                .stream()
+                                .filter(t -> t instanceof DeadlineTask)
+                                .filter(t -> ((DeadlineTask)t).getDueDate().equals(LocalDate.parse(args[2], DateTimeFormatter.ofPattern("dd/M/yyyy"))))
+                                .collect(Collectors.toList());
+                        result.addAll(arr
+                                .stream()
+                                .filter(t -> t instanceof EventTask)
+                                .filter(t -> ((EventTask)t).getDate().equals(LocalDate.parse(args[2], DateTimeFormatter.ofPattern("dd/M/yyyy"))))
+                                .collect(Collectors.toList()));
+                        p.print(result);
+
+                    }
+                } else {
+                    p.print(arr);
+                }
+                break;
             case "mark":
                 arr.get(Integer.parseInt(args[1]) - 1).mark();
                 p.print("Task marked as done: ", " " + arr.get(Integer.parseInt(args[1]) - 1).toString());
@@ -53,7 +73,19 @@ public class InputParser {
     }
 
     public void validate(String input, String action, String[] args, ArrayList<Task> arr) throws DukeException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy");
         switch(action) {
+            case "list":
+                if(args.length > 1) {
+                    if(args[1].equals("/on")) {
+                        try {
+                            LocalDate.parse(args[2],formatter);
+                        } catch (DateTimeParseException e) {
+                            throw new DukeException("Provide the date in the format dd-mm-yyyy!");
+                        }
+                    }
+                }
+                break;
             case "mark":
             case "unmark":
             case "delete":
@@ -75,7 +107,7 @@ public class InputParser {
                 break;
             case "deadline":
             case "event":
-                String flag = action == "deadline" ? "/by" : "/at";
+                String flag = action.equals("deadline") ? "/by" : "/at";
                 int actionLength = action == "deadline" ? 9 : 6;
                 if(args.length == 1)
                     throw new DukeException("Task Name must be provided!");
