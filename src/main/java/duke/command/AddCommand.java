@@ -1,5 +1,9 @@
 package duke.command;
 import duke.*;
+import duke.action.Action;
+import duke.action.Deadline;
+import duke.action.Event;
+import duke.action.Todo;
 
 public class AddCommand extends Command {
     Action action;

@@ -1,4 +1,6 @@
 package duke;
+import duke.action.Action;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;

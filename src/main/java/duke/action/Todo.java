@@ -1,6 +1,6 @@
-package duke;
+package duke.action;
 
-public class Todo  extends Action{
+public class Todo  extends Action {
 
     public Todo(String s)  {
         super(s);

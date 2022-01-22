@@ -3,7 +3,7 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Action;
+import duke.action.Action;
 
 public class DeleteCommand extends Command {
     private int taskNo;
