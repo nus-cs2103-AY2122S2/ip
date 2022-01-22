@@ -6,6 +6,11 @@ public class Deadline extends Task{
         this.deadLine = deadLine;
     }
 
+    @Override
+    public String formatSave() {
+        return "D |" + (super.isDone ? "1| " : "0| ") + super.description + " /by " + deadLine;
+    }
+
     /*
      * Customized toString method for Deadline task
      */

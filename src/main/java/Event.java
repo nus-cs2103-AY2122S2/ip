@@ -6,6 +6,11 @@ public class Event extends Task{
         this.scheduledTime = scheduledTime;
     }
 
+    @Override
+    public String formatSave() {
+        return "E |" + (super.isDone ? "1| " : "0| ") +super.description +" /at " + scheduledTime;
+    }
+
     /*
      * Customized toString method for Event task
      */
