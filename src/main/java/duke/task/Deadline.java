@@ -7,8 +7,8 @@ import java.time.format.DateTimeFormatter;
  * Represents a deadline task
  */
 public class Deadline extends Task {
-    protected String by;
-    protected LocalDate date;
+    private String by;
+    private LocalDate date;
 
     public Deadline(String description, String by) {
         super(description);
@@ -28,7 +28,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getFileFormat() {
-        return "D" + super.getFileFormat() + "|" + by;
+        return "D" + super.getFileFormat() + " | " + by;
     }
 
     /**

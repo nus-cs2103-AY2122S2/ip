@@ -7,8 +7,8 @@ import java.time.format.DateTimeFormatter;
  * Represents an event task
  */
 public class Event extends Task {
-    protected String at;
-    protected LocalDate date;
+    private String at;
+    private LocalDate date;
 
     public Event(String description, String at) {
         super(description);
@@ -29,7 +29,7 @@ public class Event extends Task {
      */
     @Override
     public String getFileFormat() {
-        return "E" + super.getFileFormat() + "|" + at;
+        return "E" + super.getFileFormat() + " | " + at;
     }
 
     /**

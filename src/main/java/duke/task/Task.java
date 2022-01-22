@@ -4,8 +4,8 @@ package duke.task;
  * Represents a task
  */
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     public Task(String description) {
         this.description = description;
@@ -41,7 +41,7 @@ public class Task {
      * @return format to display task on file
      */
     public String getFileFormat() {
-        return String.format(" | %d |%s", isDone ? 1 : 0, description);
+        return String.format(" | %d | %s", isDone ? 1 : 0, description);
     }
 
     /**

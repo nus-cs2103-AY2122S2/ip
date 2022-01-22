@@ -8,10 +8,10 @@ import java.util.Scanner;
  * Deals with interactions with the user
  */
 public class Ui {
-    protected Scanner scan;
+    private Scanner scan;
 
     public Ui() {
-        scan = new Scanner(System.in);
+        this.scan = new Scanner(System.in);
     }
 
     /**
