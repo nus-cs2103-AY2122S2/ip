@@ -28,7 +28,7 @@ public class Duke {
         System.out.println(message + t.toString() + "\nNow you have " + numOfTask + " tasks in the list.");
     }
 
-    public static void storeToList(Task t) { //same as addtoList but no printing
+    public static void storeToList(Task t) { //same as addToList but no printing
         taskList.add(t);
         numOfTask++;
     }
@@ -146,19 +146,19 @@ public class Duke {
     public static String formatTime(String input){
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HHmm");
         DateFormat outputFormat = new SimpleDateFormat("MMM dd yyyy hh:mm aa");
-        Date date = null;
+        Date date;
         String output = "";
         try {
             date = df.parse(input);
             output = outputFormat.format(date);
         } catch (ParseException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
         return output;
     }
 
     public static void main(String[] args) {
-        //checkfile
+        //check file
         try {
             File directory = new File("C:\\data");
             File inputFile = new File("C:\\data\\TaskData.txt");
@@ -220,7 +220,7 @@ public class Duke {
 
                     String timeInput = inputSlash[1].substring(INPUT_OFFSET);
                     String time = formatTime(timeInput);
-                    String duration = "";
+                    String duration;
                     if(time.equals("")){
                         duration = timeInput;
                     } else {
@@ -238,7 +238,7 @@ public class Duke {
 
                     String timeInput = inputSlash[1].substring(INPUT_OFFSET);
                     String time = formatTime(timeInput);
-                    String duration = "";
+                    String duration;
                     if(time.equals("")){
                         duration = timeInput;
                     } else {
