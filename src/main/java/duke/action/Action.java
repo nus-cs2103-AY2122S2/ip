@@ -24,6 +24,10 @@ public class Action {
         return isDone ? "X" : " ";
     }
 
+    /**
+     * Returns the task
+     * @return task
+     */
     public String getTask() {
         return act;
     }

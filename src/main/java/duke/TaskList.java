@@ -82,6 +82,12 @@ public class TaskList {
         return list.remove(taskNo);
     }
 
+    /**
+     * Returns an ordered list of tasks that matches
+     * witht the input.
+     * @param task input to be matched
+     * @return list of matching tasks
+     */
     public String findMatching(String task) {
         int notation = 1;
         StringBuilder result = new StringBuilder();

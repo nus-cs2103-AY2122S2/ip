@@ -7,6 +7,7 @@ import duke.command.MarkCommand;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
 import duke.command.ListCommand;
+import duke.command.FindCommand;
 
 //deals with making sense of the user duke.command
 public class Parser {
@@ -29,6 +30,7 @@ public class Parser {
         if (command.equals("bye")) {
             return new ExitCommand();
         }
+
         String[] twoWords = command.split(" ", 2);
         String firstWord = twoWords[0];
         if (firstWord.equals("delete") || firstWord.contains("mark")) {
