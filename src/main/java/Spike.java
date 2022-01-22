@@ -1,7 +1,14 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Duke {
+public class Spike {
     private static ArrayList<Task> taskList = new ArrayList<>();
 
     enum Command {
@@ -23,7 +30,7 @@ public class Duke {
             return this.command;
         }
 
-        public static void process(Command c, String command, String[] commandWords) {
+        public static void processCommand(Command c, String command, String[] commandWords) {
             switch (c) {
             case LIST:
                 printList();
@@ -31,21 +38,21 @@ public class Duke {
             case MARK:
                 try {
                     mark(commandWords);
-                } catch (DukeException d) {
+                } catch (SpikeException d) {
                     printMsg(d.toString());
                 }
                 break;
             case UNMARK:
                 try {
                     unmark(commandWords);
-                } catch (DukeException d) {
+                } catch (SpikeException d) {
                     printMsg(d.toString());
                 }
                 break;
             case DELETE:
                 try {
                     delete(commandWords);
-                } catch (DukeException d) {
+                } catch (SpikeException d) {
                     printMsg(d.toString());
                 }
                 break;
@@ -54,8 +61,8 @@ public class Duke {
             case DEADLINE:
             case EVENT:
                 try {
-                    addTask(command, commandWords);
-                } catch (DukeException d) {
+                    addTask(c, command, commandWords);
+                } catch (SpikeException d) {
                     printMsg(d.toString());
                 }
                 break;
@@ -66,7 +73,59 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        printMsg("Hello! I am Spike ⊂( ・ ̫・)⊃\nWhat can I do for you?");
+        // Check first whether the data folder exists, if not, create it
+        File dataDir = new File("data/");
+        if (!dataDir.exists()) {
+            dataDir.mkdir();
+        }
+
+        // Check whether the data file exists, if not, create it
+        File dataFile = new File("data/Spike.txt");
+        if (!dataFile.exists()) {
+            try {
+                dataFile.createNewFile();
+            } catch (IOException e) {
+                printMsg("Sorry, I couldn't create the task list file for you.");
+            }
+        }
+
+        // Load data from the file if it is not empty
+        if (!(dataFile.length() == 0)) {
+            try {
+                Scanner fileRead = new Scanner(dataFile);
+                while (fileRead.hasNextLine()) {
+                    String currLine = fileRead.nextLine();
+                    String[] info = currLine.split(" \\| ");
+                    Task task = null;
+                    switch (info[0]) {
+                    case "T":
+                        task = new ToDo(info[2]);
+                        break;
+                    case "E":
+                        task = new Event(info[2], info[3]);
+                        break;
+                    case "D":
+                        task = new Deadline(info[2], info[3]);
+                        break;
+                    default:
+                        break;
+                    }
+                    taskList.add(task);
+                    if (info[1].equals("1")) {
+                        task.markAsDone();
+                    }
+                }
+            } catch (FileNotFoundException e) {
+                printMsg("I couldn't find your task list file :(");
+            }
+        }
+
+        if (dataFile.length() == 0) {
+            printMsg("Hello! I am Spike ⊂( ・ ̫・)⊃ Nice to meet you!\nWhat can I do for you?");
+        } else {
+            printMsg("Welcome back! Enter 'list' to see your saved task(s).");
+        }
+
 
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
@@ -78,13 +137,14 @@ public class Duke {
                 // If user want to exit the program
                 if (commandWords[0].equals("bye")) {
                     // If user want to exit the program
+                    saveChanges();
                     printMsg("See you soon! ﾍ(=￣∇￣)ﾉ");
                     break;
                 } else {
                     // else we check if it is a valid command to decide how to process it
                     Command c = isValidCommand(commandWords[0]);
                     if (c != null) {
-                        Command.process(c, command, commandWords);
+                        Command.processCommand(c, command, commandWords);
                     } else {
                         printMsg("Sorry, I am not programmed to do this yet :(");
                     }
@@ -109,33 +169,50 @@ public class Duke {
     }
 
     /**
+     * Saves the latest task list into hard disk when user exits.
+     */
+    public static void saveChanges() {
+        try {
+            FileWriter fw = new FileWriter("data/Spike.txt");
+            String latestList = "";
+            for (Task task : taskList) {
+                latestList = latestList + task.toFileFormat() + "\n";
+            }
+            fw.write(latestList);
+            fw.close();
+        } catch (IOException e) {
+            printMsg("Oops, something went wrong with saving your file :(");
+        }
+    }
+
+    /**
      * Adds task into the list and prints.
      */
-    public static void addTask(String command, String[] commandWords) throws DukeException {
-        switch (commandWords[0]) {
-        case "todo":
+    public static void addTask(Command c, String command, String[] commandWords) throws SpikeException {
+        switch (c) {
+        case TODO:
             if (command.length() <= 5) {
-                throw new DukeException("Hmmmm what to do? Think again?");
+                throw new SpikeException("Hmmmm what to do? Think again?");
             }
             ToDo newTD = new ToDo(command.substring(command.indexOf("todo") + 5));
             taskList.add(newTD);
             printAddedTask(newTD);
             break;
-        case "deadline":
+        case DEADLINE:
             // Extract description and deadline and pass to constructor
             if (commandWords.length <= 2 || command.indexOf("/by") == -1
                     || commandWords[1].equals("/by") || command.indexOf("/by") + 3 == command.length()) {
-                throw new DukeException("Deadline or task description missing.");
+                throw new SpikeException("Deadline or task description missing.");
             }
             Deadline newD = new Deadline(command.substring(command.indexOf("deadline") + 9,
                     command.indexOf("/by") - 1), command.substring(command.indexOf("/by") + 4));
             taskList.add(newD);
             printAddedTask(newD);
             break;
-        case "event":
+        case EVENT:
             if (commandWords.length <= 2 || command.indexOf("/at") == -1
                     || commandWords[1].equals("/at") || command.indexOf("/at") + 3 == command.length()) {
-                throw new DukeException("Event time or event description missing.");
+                throw new SpikeException("Event time or event description missing.");
             }
             Event newE = new Event(command.substring(command.indexOf("event") + 6,
                     command.indexOf("/at") - 1), command.substring(command.indexOf("/at") + 4));
@@ -150,10 +227,10 @@ public class Duke {
     /**
      * Marks the task as done.
      */
-    public static void mark(String[] commandWords) throws DukeException {
+    public static void mark(String[] commandWords) throws SpikeException {
         if (commandWords.length != 2 || isInt(commandWords[1]) == -1
                 || isInt(commandWords[1]) > taskList.size()) {
-            throw new DukeException("Invalid arguments for marking. Please check again!");
+            throw new SpikeException("Invalid arguments for marking. Please check again!");
         }
         Task toMark = taskList.get(Integer.parseInt(commandWords[1]) - 1);
         toMark.markAsDone();
@@ -163,10 +240,10 @@ public class Duke {
     /**
      * Marks the task as undone.
      */
-    public static void unmark(String[] commandWords) throws DukeException {
+    public static void unmark(String[] commandWords) throws SpikeException {
         if (commandWords.length != 2 || isInt(commandWords[1]) == -1
                 || isInt(commandWords[1]) > taskList.size()) {
-            throw new DukeException("Invalid arguments for unmarking. Please check again!");
+            throw new SpikeException("Invalid arguments for unmarking. Please check again!");
         }
         Task toUnmark = taskList.get(Integer.parseInt(commandWords[1]) - 1);
         toUnmark.markAsNotDone();
@@ -176,10 +253,10 @@ public class Duke {
     /**
      * Deletes task from the list.
      */
-    public static void delete(String[] commandWords) throws DukeException {
+    public static void delete(String[] commandWords) throws SpikeException {
         if (commandWords.length != 2 || isInt(commandWords[1]) == -1
                 || isInt(commandWords[1]) > taskList.size()) {
-            throw new DukeException("Invalid arguments for deletion. Please check again!");
+            throw new SpikeException("Invalid arguments for deletion. Please check again!");
         }
         Task toDelete = taskList.get(Integer.parseInt(commandWords[1]) - 1);
         taskList.remove(toDelete);

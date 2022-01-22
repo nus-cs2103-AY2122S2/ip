@@ -35,6 +35,13 @@ public class Task {
     }
 
     /**
+     * Returns the representative string for saving in data file.
+     */
+    public String toFileFormat() {
+        return "";
+    }
+
+    /**
      * Format the string representation of Task objects.
      */
     @Override
