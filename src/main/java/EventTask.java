@@ -1,3 +1,7 @@
+/**
+ * A type of task that can be characterised as an event. An <code>EventTask</code> contains
+ * a name and an event date.
+ */
 public class EventTask extends Task{
     private String date;
 

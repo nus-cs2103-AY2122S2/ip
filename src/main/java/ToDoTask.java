@@ -1,6 +1,11 @@
+/**
+ * A type of task that can be characterised as an to-do. A <code>ToDoTask</code> contains
+ * a name.
+ */
 public class ToDoTask extends Task {
     /**
      * Constructor for a todo task.
+     *
      * @param name name of the task
      */
     public ToDoTask(String name) {

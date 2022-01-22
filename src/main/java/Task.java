@@ -1,3 +1,6 @@
+/**
+ * Represents a simple task.
+ */
 public abstract class Task {
     /** Name of the task */
     protected String name;

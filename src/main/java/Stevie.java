@@ -1,12 +1,20 @@
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-public class Duke {
+/**
+ * Stevie is a class that serves as a user interface to allow access to an underlying
+ * task manager. Users can use Stevie to add in their upcoming tasks/events/deadlines,
+ * and to mark them as completed when necessary.
+ */
+public class Stevie {
     private static TaskList tl;
+
     public static void main(String[] args) {
-        greet();
         tl = new TaskList();
         Scanner sc = new Scanner(System.in);
+
+        greet();
+
         String userIn = "";
         String out;
         do {
@@ -14,7 +22,7 @@ public class Duke {
                 try {
                     out = processUserInput(userIn);
                     speech(out);
-                } catch (DukeException ex) {
+                } catch (StevieException ex) {
                     speech(ex.getMessage());
                 }
             }
@@ -38,15 +46,18 @@ public class Duke {
     }
 
     /**
-     * Helper text on the special keywords to instruct Duke.
+     * Helper text on the special keywords to instruct Stevie.
      *
      * @return instruction for user
      */
     private static String help() {
         return "\"list\": to display your activities.\n" +
                 "\"bye\": to end our session.\n" +
-                "\"mark [i]\" to mark the i-th task as done.\n" +
-                "\"unmark [i]\" to unmark the i-th task as done.";
+                "\"mark <i>\" to mark the i-th task as done.\n" +
+                "\"unmark <i>\" to unmark the i-th task as done.\n" +
+                "\"todo <task_name>\" to add a todo task.\n" +
+                "\"deadline <task_name> /by <date>\" to add a deadline.\n" +
+                "\"event <event_name> /at <date>\" to add an event.";
     }
 
     /**
@@ -54,9 +65,9 @@ public class Duke {
      *
      * @param userIn user's input
      * @return response string to user
-     * @throws DukeException if user input is invalid
+     * @throws StevieException if user input is invalid
      */
-    private static String processUserInput(String userIn) throws DukeException {
+    private static String processUserInput(String userIn) throws StevieException {
         if (userIn.equals("list")) {
             return tl.toString();
         } else if (userIn.equals("help")) {
@@ -69,52 +80,72 @@ public class Duke {
         } else if (Pattern.matches("^unmark\\s\\d+", userIn)) {
             return "This activity is unmarked as done:\n" +
                     tl.markUndone(Integer.parseInt(userIn
-                    .replaceAll("[^\\d.]", "")) - 1)
-                    .toString();
+                            .replaceAll("[^\\d.]", "")) - 1)
+                            .toString();
         } else if (Pattern.matches("^delete\\s\\d+", userIn)) {
             return tl.delete(Integer.parseInt(userIn
                     .replaceAll("[^\\d.]", "")) - 1);
-        } else if (Pattern.matches("^todo\\s(.*?)", userIn)) {
+        } else {
+            return processAddTask(userIn);
+        }
+    }
+
+    /**
+     * Processes user's attempt to add a task. Type of tasks is identifiable by the
+     * first word in the user's input. Task entry should match the task's format, in
+     * order to be added successfully.
+     *
+     * @param userIn user's input
+     * @return response string to user
+     * @throws StevieException if user input is invalid
+     */
+    private static String processAddTask(String userIn) throws StevieException {
+        if (Pattern.matches("^todo\\s(.*?)", userIn)) {
             String s = userIn.replace("todo ", "").trim();
-            if (s.length() == 0)
-                throw new DukeException("Todo task requires a task name!");
-            else return tl.add(TaskType.Todo, s);
+            if (s.length() == 0) {
+                throw new StevieException("Todo task requires a task name!");
+            } else {
+                return tl.add(TaskType.Todo, s);
+            }
         } else if (Pattern.matches("^deadline\\s(.*s?)\\s/by\\s(.*s?)", userIn)) {
             String[] split = userIn
                     .replace("deadline ", "")
                     .split("\\s/by\\s", 2);
             split[0] = split[0].trim();
             split[1] = split[1].trim();
-            if (split[0].length() == 0 && split[1].length() == 0)
-                throw new DukeException("Deadline task requires a task name and a date!");
-            else if (split[0].length() == 0)
-                throw new DukeException("Deadline task requires a task name!");
-            else if (split[1].length() == 0)
-                throw new DukeException("Deadline task requires a date!");
-            else return tl.add(TaskType.Deadline, split[0], split[1]);
+            if (split[0].length() == 0 && split[1].length() == 0) {
+                throw new StevieException("Deadline task requires a task name and a date!");
+            } else if (split[0].length() == 0) {
+                throw new StevieException("Deadline task requires a task name!");
+            } else if (split[1].length() == 0) {
+                throw new StevieException("Deadline task requires a date!");
+            } else {
+                return tl.add(TaskType.Deadline, split[0], split[1]);
+            }
         } else if (Pattern.matches("^event\\s(.*s?)\\s/at\\s(.*s?)", userIn)) {
             String[] split = userIn
                     .replace("event ", "")
                     .split("\\s/at\\s", 2);
             split[0] = split[0].trim();
             split[1] = split[1].trim();
-            if (split[0].length() == 0 && split[1].length() == 0)
-                throw new DukeException("Event task requires a task name and a date!");
-            else if (split[0].length() == 0)
-                throw new DukeException("Event task requires a task name!");
-            else if (split[1].length() == 0)
-                throw new DukeException("Event task requires a date!");
-            else return tl.add(TaskType.Event, split[0], split[1]);
+            if (split[0].length() == 0 && split[1].length() == 0) {
+                throw new StevieException("Event task requires a task name and a date!");
+            } else if (split[0].length() == 0) {
+                throw new StevieException("Event task requires a task name!");
+            } else if (split[1].length() == 0) {
+                throw new StevieException("Event task requires a date!");
+            } else {
+                return tl.add(TaskType.Event, split[0], split[1]);
+            }
         } else {
-            throw new DukeException("Oops! Your instructions were unclear!");
+            throw new StevieException("Oops! Your instructions were unclear!");
         }
     }
 
-
     /**
-     * Prints Duke's formatted speech.
+     * Prints Stevie's formatted speech.
      *
-     * @param text Duke's speech
+     * @param text Stevie's speech
      */
     private static void speech(String text) {
         System.out.println("____________________________");
