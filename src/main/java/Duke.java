@@ -1,7 +1,10 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import java.time.LocalDate;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.DateFormat;
+import java.text.ParseException;
 
 public class Duke {
 
@@ -54,6 +57,20 @@ public class Duke {
         }
     }
 
+    public static String formatTime(String input){
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HHmm");
+        DateFormat outputFormat = new SimpleDateFormat("MMM dd yyyy hh:mm aa");
+        Date date = null;
+        String output = "";
+        try {
+            date = df.parse(input);
+            output = outputFormat.format(date);
+        } catch (ParseException e) {
+            e.getMessage();
+        }
+        return output;
+    }
+
     public static void main(String[] args) {
         String greeting = "Hello! I'm TaskJamie\nWhat can i do for you?";
         String ending =  "Bye. Hope to see you again soon!";
@@ -95,8 +112,15 @@ public class Duke {
                         throw new IncompleteCommandException(command);
                     }
 
-                    String time = inputSlash[1].substring(INPUT_OFFSET);
-                    addToList(new Deadline(description, time));
+                    String timeInput = inputSlash[1].substring(INPUT_OFFSET);
+                    String time = formatTime(timeInput);
+                    String duration = "";
+                    if(time.equals("")){
+                        duration = timeInput;
+                    } else {
+                        duration = time;
+                    }
+                    addToList(new Deadline(description, duration));
 
                 } else if (command.equals("event")) {
                     String[] inputSlash = input.split("/");
@@ -106,8 +130,15 @@ public class Duke {
                         throw new IncompleteCommandException(command);
                     }
 
-                    String time = inputSlash[1].substring(INPUT_OFFSET);
-                    addToList(new Event(description, time));
+                    String timeInput = inputSlash[1].substring(INPUT_OFFSET);
+                    String time = formatTime(timeInput);
+                    String duration = "";
+                    if(time.equals("")){
+                        duration = timeInput;
+                    } else {
+                        duration = time;
+                    }
+                    addToList(new Event(description, duration));
 
                 } else if (command.equals("mark")) {
                     markTask(Integer.parseInt(inputSplit[1]));
