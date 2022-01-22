@@ -34,6 +34,12 @@ public class Duke {
                     continue;
                 }
 
+                if (Identity.deleteMatch(nextKey)) {
+                    //mark
+                    Duke.thisList.deleteTask(nextKey);
+                    continue;
+                }
+
                 if (Identity.markMatch(nextKey)) {
                     //mark
                     Duke.thisList.markTask(nextKey);

@@ -12,9 +12,14 @@ public class Identity {
     //command keys to enum
     private final static String EXITKEY = "bye";
     private final static String LISTKEY = "list";
+    private final static String DELETEKEY = "delete";
 
     public static boolean exitMatch(String key) {
         return key.equals(EXITKEY);
+    }
+
+    public static boolean deleteMatch(String nextKey) {
+        return nextKey.matches("delete\\s\\d");
     }
 
     public static boolean listMatch(String key) {
