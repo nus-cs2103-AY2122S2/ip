@@ -19,6 +19,7 @@ public class Duke {
 		System.out.println("Hello from\n" + logo);
 		Command cmd = new WelcomeCommand();
 		cmd.execute();
+
 		//main program loop
 		while (true) {
 			try {
@@ -34,7 +35,7 @@ public class Duke {
 		}
 	}
 
-	public static Command processInput(String input) throws UnknownCommandException, EmptyDescriptionException, IncorrectValueException, OutOfRangeException {
+	public static Command processInput(String input) throws DukeException {
 		Command cmd = null;
 		String[] inputSplit = input.split(" ", 2);
 		String commandType = inputSplit[0].toLowerCase();
