@@ -1,6 +1,9 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 
 public class Duke {
@@ -139,6 +142,11 @@ public class Duke {
             System.out.println(line);
         }
     }
+
+    public LocalDate getDate(String s) {
+        return LocalDate.parse(s);
+    }
+
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
