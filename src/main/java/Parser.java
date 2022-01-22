@@ -78,7 +78,7 @@ public class Parser {
                         pa = new ParsedAnswer("error", -1);
                         pa.setDesc("Please check that your input format is correct.");
                     } else {
-                        pa = new ParsedAnswer("event", -1);
+                        pa = new ParsedAnswer("deadline", -1);
                         pa.setDesc(dlParseBy[0]);
                         pa.setDate(dlParseBy[1]);
                     }
