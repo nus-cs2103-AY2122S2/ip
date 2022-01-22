@@ -8,7 +8,7 @@ public class Duke {
         Scanner in = new Scanner(System.in);
         InputParser ip = new InputParser();
         ArrayList<Task> arr = new ArrayList<>();
-//        Storage.loadFile(System.getProperty("user.dir") + "\\data\\duke.txt", arr);
+        Storage.loadFile(System.getProperty("user.dir") + "\\data\\duke.txt", arr);
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

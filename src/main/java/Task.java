@@ -12,6 +12,11 @@ public class Task {
         this.isDone = false;
     }
 
+    Task(String ss, boolean b) {
+        this.taskName = ss;
+        this.isDone = b;
+    }
+
     public String getTaskName() {
         return this.taskName;
     }

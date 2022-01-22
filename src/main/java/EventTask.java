@@ -7,6 +7,12 @@ public class EventTask extends Task{
         this.location = at;
     }
 
+    EventTask(String ss, boolean b, String at) {
+        this.taskName = ss;
+        this.isDone = b;
+        this.location = at;
+    }
+
     public String getDesc() {
         return this.location;
     }
