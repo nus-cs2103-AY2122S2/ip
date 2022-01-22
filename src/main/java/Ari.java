@@ -1,14 +1,17 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Duke {
+public class Ari {
     private static int LINE_BREAK_LENGTH = 60; // length for line break
     private static String LINE_BREAK = "_".repeat(LINE_BREAK_LENGTH); // string for horizontal line break
 
     private static int MAX_SIZE = 100;
-    private static TaskList toDoList = new TaskList(MAX_SIZE);
+    private static String filePath = "data/ari.txt";
+    
+    private static TaskList toDoList = new TaskList(MAX_SIZE, filePath);
 
     public static void main(String[] args) {
+        toDoList.load();
         Scanner scanner = new Scanner(System.in);
 
         String logo = "             ___      .______       __         \n"

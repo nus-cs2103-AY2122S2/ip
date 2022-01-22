@@ -43,4 +43,9 @@ public class Task {
     public String getTask() {
         return taskMessage;
     }
+
+    public String textToFile() {
+        int bool = isDone ? 1 : 0;
+        return String.format("%d %s", bool, taskMessage);
+    }
 }

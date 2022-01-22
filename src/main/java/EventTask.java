@@ -23,4 +23,9 @@ public class EventTask extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + time + ")";
     }
+
+    @Override
+    public String textToFile() {
+        return "E "+ super.textToFile() + " /at " + time;
+    }
 }

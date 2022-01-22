@@ -24,4 +24,9 @@ public class DeadlineTask extends Task {
         return "[D]" + super.toString() + " (by: " + time + ")";
     }
 
+    @Override
+    public String textToFile() {
+        return "D "+ super.textToFile() + " /by" + time;
+    }
+
 }
