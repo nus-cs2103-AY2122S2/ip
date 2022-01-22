@@ -24,4 +24,10 @@ public class Task {
     return status;
   }
 
+  public String getType() {
+    return type;
+  }
+
+  public abstract String toString();
+
 }

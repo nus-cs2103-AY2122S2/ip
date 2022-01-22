@@ -4,12 +4,7 @@ public class Duke {
     private ArrayList<String> list;
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello from Duke!");
 
         Scanner sc = new Scanner(System.in);
         list = new ArrayList<String>();
@@ -29,8 +24,18 @@ public class Duke {
                 int taskNum = String.parseInt(strArr[1]);
                 list.get(taskNum).setStatus(false);
             }
-            else {
-                list.add(new Task(str));
+            else if (strArr[0].equals("deadline")) { {
+                String[] strParts = str.split("/by ");
+                list.add(new Deadline(str, strParts[1]));
+                System.out.println(String.format("added: %s", str));
+            }
+            else if (strArr[0].equals("event")) { {
+                String[] strParts = str.split("/at ");
+                list.add(new Event(str, strParts[1]));
+                System.out.println(String.format("added: %s", str));
+            }
+            else if (strArr[0].equals("todo")) { {
+                list.add(new Todo(str));
                 System.out.println(String.format("added: %s", str));
             }
         }
@@ -40,7 +45,7 @@ public class Duke {
         for(int i = 0; i < list.size(); i++) {
             Task task = list.get(i);
             String status = task.getStatus() ? "X" : " ";
-            System.out.println(String.format("%d. [%s] %s", i, status, task.getStr()));
+            System.out.println(String.format("%d. %s", i, task.toString()));
         }
     }
 }
