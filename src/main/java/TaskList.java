@@ -7,15 +7,25 @@ public class TaskList {
         if (inputs[0].equals("")) {
             throw new EmptyDescriptionException("ToDo cannot be empty");
         }
+
+        boolean isAddSuccess = false;
         switch (type) {
         case TODO :
-            return actions.add(new ToDo(inputs[0]));
+            isAddSuccess = actions.add(new ToDo(inputs[0]));
+            break;
         case DEADLINE:
-            return actions.add(new Deadlines(inputs[0],inputs[1]));
+            isAddSuccess = actions.add(new Deadlines(inputs[0],inputs[1]));
+            break;
         case EVENTS:
-            return actions.add(new Events(inputs[0],inputs[1]));
+            isAddSuccess = actions.add(new Events(inputs[0],inputs[1]));
+            break;
         }
-         return false;
+
+        if (isAddSuccess) {
+            DataStore.saveData(type,inputs);
+        }
+
+        return isAddSuccess;
     }
 
     public void print(){
