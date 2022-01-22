@@ -35,17 +35,10 @@ public class Task {
             setDate(time, isReading);
             this.type = type;
             if (!isReading) {
-                System.out.println("Got it. I've added this task: ");
-                if (type.equals("D")) {
-                    System.out.printf(" [D][%s] %s (by: %s) \n", this.getStatus(), this.name, this.time);
-                } else if (type.equals("T")) {
-                    System.out.printf(" [T][%s] %s\n", this.getStatus(), this.name);
-                } else {
-                    System.out.printf(" [E][%s] %s (on: %s) \n", this.getStatus(), this.name, this.time);
-                }
+                Ui.printAddingTasks(this);
                 Storage.addLineToFile(this.getDataRepresentation());
                 totalTask++;
-                System.out.printf("Now you have %d task on the list.\n", Task.totalTask);
+                Ui.printTotalTasks();
             }
             else {
                 totalTask++;
