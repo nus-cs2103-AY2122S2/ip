@@ -1,14 +1,25 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
     private final String eventTime;
+    private final LocalDate date;
     private static final String taskType = "E";
+
+    private static LocalDate convertToDate(String endDate) {
+        return LocalDate.parse(endDate);
+    }
+
     public Event(String name, String eventTime) {
         super(name);
         this.eventTime = eventTime;
+        this.date = convertToDate(eventTime);
     }
 
     public Event(String name, String eventTime, boolean isDone) {
         super(name, isDone);
         this.eventTime = eventTime;
+        this.date = convertToDate(eventTime);
     }
 
     public Event markAsDone() {
@@ -24,7 +35,7 @@ public class Event extends Task {
         if (super.isDone) {
             doneIndicator = "true";
         }
-        String storedListFormat = String.format("%s|%s|%s|%s", taskType, doneIndicator, super.name, this.eventTime);
+        String storedListFormat = String.format("%s|%s|%s|%s", taskType, doneIndicator, super.name, this.date);
         return storedListFormat;
     }
 
@@ -36,7 +47,8 @@ public class Event extends Task {
         } else {
             doneMark = " ";
         }
+        String dateOutput = this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return String.format("[%s][%s] %s (at: %s)",
-                taskType, doneMark, super.name, eventTime);
+                taskType, doneMark, super.name, dateOutput);
     }
 }

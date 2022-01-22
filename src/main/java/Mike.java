@@ -51,7 +51,8 @@ public class Mike {
      * Prints instructions to guide a user on how to use "Mike".
      */
     void printStartingInstruction() {
-        String tip = "**Tip: type bye to end conversation**";
+        String tip = "**Tip 1: type bye to end conversation**\n"
+                + "**Tip 2: enter dates in the format yyyy-mm-dd**";
         System.out.println(tip);
     }
 
