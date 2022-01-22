@@ -77,6 +77,19 @@ public class UI {
                     System.out.println("Noted. I've removed this task:");
                     System.out.println("  " + task);
                     System.out.println("Now you have " + taskManager.getNumberOfTasks() + " duke.tasks left in the list.");
+                } else if (command.equals("list")) {
+                    System.out.println("Heres a list of your items");
+                    System.out.println(taskManager.getPrintableListOfTasks());
+                } else if (command.equals("find")) {
+                    ArrayList<Task> matchingTasks = taskManager.findListOfMatchingTasks(parsedInput.get(1));
+                    if (matchingTasks.isEmpty()) {
+                        System.out.println("No matching tasks found.");
+                    } else {
+                        System.out.println("Here are the matching tasks in your list:");
+                        for (int i = 0; i < matchingTasks.size(); i++) {
+                            System.out.println(String.valueOf(i + 1) + ". " + matchingTasks.get(i));
+                        }
+                    }
                 }
             } catch (RequiredInformationMissingException e){
                 System.out.println("ERROR " + e.getMessage());

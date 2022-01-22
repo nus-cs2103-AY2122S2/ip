@@ -49,6 +49,15 @@ public class Task {
     }
 
     /**
+     * Returns a boolean representing if the task name has the given expr.
+     * @param expr keyword to match in the task name.
+     * @return true if keyword found in task name, false otherwise.
+     */
+    public boolean nameMatchesKeyword(String expr) {
+        return name.contains(expr);
+    }
+
+    /**
      * Overriden toString function. Prints the completion status and the task name in this format:
      * "[ ] taskname" if incomplete, "[X] taskname" if complete.
      * @return String representation of this task.

@@ -61,7 +61,9 @@ public class Parser {
                 throw new RequiredInformationMissingException("missing delete index");
             }
             parsedInput.add(input.substring(7));
-        } else if (command.equals("bye")) {
+        } else if (command.equals("find")) {
+            parsedInput.add(input.substring(5));
+        } else if (command.equals("bye") || command.equals("list")) {
         } else {
             throw new UnknownCommandException("unknown command entered");
         }

@@ -84,6 +84,21 @@ public class TaskManager {
     }
 
     /**
+     * Returns a list of tasks with name matching the expr.
+     * @param expr the keyword used to search for matching tasks.
+     * @return list of tasks with names matching the expr.
+     */
+    public ArrayList<Task> findListOfMatchingTasks(String expr) {
+        ArrayList<Task> matches = new ArrayList<>();
+        for (Task task : tasks)  {
+            if (task.nameMatchesKeyword(expr)) {
+                matches.add(task);
+            }
+        }
+        return matches;
+    }
+
+    /**
      * Saves all the duke.tasks in this task manager.
      * @throws IOException if a error occurs interacting with the task file.
      */
