@@ -14,8 +14,18 @@ import duke.exception.DukeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Deals with making sense of the user command
+ */
 public class Parser {
 
+    /**
+     * Returns command to be carried out
+     *
+     * @param fullCommand input command typed by user
+     * @return command to be carried out
+     * @throws DukeException if input command is invalid
+     */
     static public Command parse(String fullCommand) throws DukeException {
         if (fullCommand.startsWith("bye")) {
             return new ExitCommand();
@@ -63,9 +73,15 @@ public class Parser {
         }
     }
 
-    public static boolean isDate(String s) {
+    /**
+     * Validates whether string input can be parsed into local date
+     *
+     * @param input string input typed by user
+     * @return true if string input can be parsed into local date, otherwise false
+     */
+    public static boolean isDate(String input) {
         try {
-            LocalDate.parse(s);
+            LocalDate.parse(input);
         }
         catch (DateTimeParseException e) {
             return false;

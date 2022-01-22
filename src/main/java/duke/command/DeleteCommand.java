@@ -6,6 +6,9 @@ import duke.ui.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 
+/**
+ * Represents delete command
+ */
 public class DeleteCommand extends Command{
     protected int number;
 
@@ -13,6 +16,14 @@ public class DeleteCommand extends Command{
         this.number = number - 1;
     }
 
+    /**
+     * Deletes task from the list
+     *
+     * @param tasks contains list of tasks
+     * @param ui interact with user
+     * @param storage save tasks to file
+     * @throws DukeException if I0Exception occurs
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = tasks.getTasks().get(number);

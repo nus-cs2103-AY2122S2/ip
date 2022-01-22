@@ -8,6 +8,9 @@ import duke.task.Event;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
     protected String filePath;
 
@@ -15,6 +18,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads list of tasks from file
+     *
+     * @return list of tasks from file
+     * @throws DukeException if task type is invalid or when I0Exception occurs
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
             File file = new File(filePath);
@@ -49,10 +58,16 @@ public class Storage {
             }
         }
         catch (IOException e) {
-            throw new DukeException(e.getMessage());
+            throw new DukeException("OOPS!!! An I0Exception occurred.");
         }
     }
 
+    /**
+     * Save list of tasks into file
+     *
+     * @param tasks list of tasks
+     * @throws DukeException if I0Exception occurs
+     */
     public void save(ArrayList<Task> tasks) throws DukeException {
         try {
             File file = new File("./data/duke.txt");
@@ -65,7 +80,7 @@ public class Storage {
             bw.close();
         }
         catch (IOException e) {
-            throw new DukeException(e.getMessage());
+            throw new DukeException("OOPS!!! An I0Exception occurred.");
         }
     }
 }
