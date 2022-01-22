@@ -14,10 +14,8 @@ public class Parser {
         if (s.equals("bye")) {
             return new ExitCommand();
         }
-
         String[] twoWords = s.split(" ", 2);
         String firstWord = twoWords[0];
-
         if (firstWord.equals("delete") || firstWord.contains("mark")) {
             int number = Integer.parseInt(twoWords[1]);
             if (firstWord.equals("delete")) {
@@ -30,14 +28,10 @@ public class Parser {
                 return new UnmarkCommand(number);
             }
         }
-
-        String action = firstWord;
-
-        if (!action.equals("deadline") && !action.equals("todo") && !action.equals("event")) {
+        if (!firstWord.equals("deadline") && !firstWord.equals("todo") && !firstWord.equals("event")) {
             throw new DukeException("Unknown Command");
         }
-
         String details = twoWords[1];
-        return new AddCommand(action, details);
+        return new AddCommand(firstWord, details);
     }
 }

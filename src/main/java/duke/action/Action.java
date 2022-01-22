@@ -14,15 +14,6 @@ public class Action {
         isDone = status;
     }
 
-    /**
-     * Returns the first word of the input
-     * which is the action
-     * @return head of message/the action
-     */
-    public String getAction() {
-        return act.split(" ")[0];
-    }
-
     public String getStatus() {
         return isDone ? "X" : " ";
     }
