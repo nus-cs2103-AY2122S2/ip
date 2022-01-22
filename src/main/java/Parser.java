@@ -6,12 +6,12 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class Parser {
-    public int run(String ss, Ui p, ArrayList<Task> arr) {
+    public int run(String ss, Ui p, TaskList tl) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy");
         String[] args = ss.split("\\s+");
         String action = args[0];
         try {
-            validate(ss, action, args, arr);
+            validate(ss, action, args, tl.getList());
         } catch (DukeException de) {
             System.out.println(de.getMessage());
             return 1;
@@ -23,12 +23,12 @@ public class Parser {
             case "list": 
                 if(args.length > 1) {
                     if(args[1].equals("/on")) {
-                        ArrayList<Task> result = (ArrayList<Task>) arr
+                        ArrayList<Task> result = (ArrayList<Task>) tl.getList()
                                 .stream()
                                 .filter(t -> t instanceof DeadlineTask)
                                 .filter(t -> ((DeadlineTask)t).getDueDate().equals(LocalDate.parse(args[2], DateTimeFormatter.ofPattern("dd/M/yyyy"))))
                                 .collect(Collectors.toList());
-                        result.addAll(arr
+                        result.addAll(tl.getList()
                                 .stream()
                                 .filter(t -> t instanceof EventTask)
                                 .filter(t -> ((EventTask)t).getDate().equals(LocalDate.parse(args[2], DateTimeFormatter.ofPattern("dd/M/yyyy"))))
@@ -36,24 +36,24 @@ public class Parser {
                         p.print(result);
 
                     } else if(args[1].equals("/before")) {
-                        ArrayList<Task> result = (ArrayList<Task>) arr
+                        ArrayList<Task> result = (ArrayList<Task>) tl.getList()
                                 .stream()
                                 .filter(t -> t instanceof DeadlineTask)
                                 .filter(t -> ((DeadlineTask)t).getDueDate().isBefore(LocalDate.parse(args[2], DateTimeFormatter.ofPattern("dd/M/yyyy"))))
                                 .collect(Collectors.toList());
-                        result.addAll(arr
+                        result.addAll(tl.getList()
                                 .stream()
                                 .filter(t -> t instanceof EventTask)
                                 .filter(t -> ((EventTask)t).getDate().isBefore(LocalDate.parse(args[2], DateTimeFormatter.ofPattern("dd/M/yyyy"))))
                                 .collect(Collectors.toList()));
                         p.print(result);
                     } else if(args[1].equals("/after")) {
-                        ArrayList<Task> result = (ArrayList<Task>) arr
+                        ArrayList<Task> result = (ArrayList<Task>) tl.getList()
                                 .stream()
                                 .filter(t -> t instanceof DeadlineTask)
                                 .filter(t -> ((DeadlineTask)t).getDueDate().isAfter(LocalDate.parse(args[2], DateTimeFormatter.ofPattern("dd/M/yyyy"))))
                                 .collect(Collectors.toList());
-                        result.addAll(arr
+                        result.addAll(tl.getList()
                                 .stream()
                                 .filter(t -> t instanceof EventTask)
                                 .filter(t -> ((EventTask)t).getDate().isAfter(LocalDate.parse(args[2], DateTimeFormatter.ofPattern("dd/M/yyyy"))))
@@ -61,33 +61,33 @@ public class Parser {
                         p.print(result);
                     }
                 } else {
-                    p.print(arr);
+                    p.print(tl.getList());
                 }
                 break;
             case "mark":
-                arr.get(Integer.parseInt(args[1]) - 1).mark();
-                p.print("Task marked as done: ", " " + arr.get(Integer.parseInt(args[1]) - 1).toString());
+                tl.getTask(Integer.parseInt(args[1]) - 1).mark();
+                p.print("Task marked as done: ", " " + tl.getTask(Integer.parseInt(args[1]) - 1).toString());
                 break;
             case "unmark":
-                arr.get(Integer.parseInt(args[1]) - 1).unmark();
-                p.print("Task as not done yet: "," " + arr.get(Integer.parseInt(args[1]) - 1).toString());
+                tl.getTask(Integer.parseInt(args[1]) - 1).unmark();
+                p.print("Task as not done yet: "," " + tl.getTask(Integer.parseInt(args[1]) - 1).toString());
                 break;
             case "todo":
-                arr.add(new ToDoTask((ss).substring(5, ss.length())));
-                p.print("Added Task: ", " " + arr.get(arr.size() - 1).toString(), String.format("There are now %d task(s) in the list.", arr.size()));
+                tl.addTask(new ToDoTask((ss).substring(5, ss.length())));
+                p.print("Added Task: ", " " + tl.getLast().toString(), String.format("There are now %d task(s) in the list.", tl.getSize()));
                 break;
             case "deadline":
-                arr.add(new DeadlineTask(ss.substring(9, ss.length()).split("/by")[0], LocalDate.parse(ss.split("/by")[1].substring(1, ss.split("/by")[1].length()),formatter)));
-                p.print("Added Task: ", " " + arr.get(arr.size() - 1).toString(), String.format("There are now %d task(s) in the list.", arr.size()));
+                tl.addTask(new DeadlineTask(ss.substring(9, ss.length()).split("/by")[0], LocalDate.parse(ss.split("/by")[1].substring(1, ss.split("/by")[1].length()),formatter)));
+                p.print("Added Task: ", " " + tl.getLast().toString(), String.format("There are now %d task(s) in the list.", tl.getSize()));
                 break;
             case "event":
-                arr.add(new EventTask(ss.substring(6, ss.length()).split("/at")[0], LocalDate.parse(ss.split("/at")[1].substring(1, ss.split("/at")[1].length()),formatter)));
-                p.print("Added Task: ", " " + arr.get(arr.size() - 1).toString(), String.format("There are now %d task(s) in the list.", arr.size()));
+                tl.addTask(new EventTask(ss.substring(6, ss.length()).split("/at")[0], LocalDate.parse(ss.split("/at")[1].substring(1, ss.split("/at")[1].length()),formatter)));
+                p.print("Added Task: ", " " + tl.getLast().toString(), String.format("There are now %d task(s) in the list.", tl.getSize()));
                 break;
             case "delete":
-                Task deletedTask = arr.get(Integer.parseInt(args[1]) - 1);
-                arr.remove(Integer.parseInt(args[1]) - 1);
-                p.print("Deleted Task:", " " + deletedTask.toString(), String.format("There are now %d task(s) in the list.", arr.size()));
+                Task deletedTask = tl.getTask(Integer.parseInt(args[1]) - 1);
+                tl.removeTask(Integer.parseInt(args[1]) - 1);
+                p.print("Deleted Task:", " " + deletedTask.toString(), String.format("There are now %d task(s) in the list.", tl.getSize()));
                 break;
             default:
                 System.out.println("Unknown Command");

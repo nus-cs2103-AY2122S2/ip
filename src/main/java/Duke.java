@@ -6,8 +6,8 @@ public class Duke {
         Ui p = new Ui();
         Scanner in = new Scanner(System.in);
         Parser ip = new Parser();
-        ArrayList<Task> arr = new ArrayList<>();
-        Storage.loadFile(System.getProperty("user.dir") + "\\data\\duke.txt", arr);
+        TaskList tl = new TaskList();
+        Storage.loadFile(System.getProperty("user.dir") + "\\data\\duke.txt", tl);
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -19,9 +19,9 @@ public class Duke {
 
 
         String userInput = in.nextLine();
-        while(ip.run(userInput, p, arr) != -1)
+        while(ip.run(userInput, p, tl) != -1)
             userInput = in.nextLine();
-        Storage.saveFile("data", "duke.txt", arr);
+        Storage.saveFile("data", "duke.txt", tl.getList());
     }
 
 }
