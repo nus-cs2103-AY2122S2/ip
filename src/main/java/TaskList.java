@@ -5,10 +5,6 @@ public class TaskList {
 
     public TaskList() {}
 
-    public void addItem(Task task) {
-        this.itemList.add(task);
-    }
-
     public void addTodo(String taskKey) {
         String[] tokens = taskKey.split(" ");
         String taskType = tokens[0];
@@ -24,7 +20,7 @@ public class TaskList {
         this.itemList.add(newTask);
         System.out.println(
                 "Got it. I've added this task:\n"
-                        + "  " + newTask
+                        + "  " + newTask + "\n"
                         + "Now you have " + this.itemList.size() + " tasks in the list."
         );
     }
@@ -47,7 +43,7 @@ public class TaskList {
         this.itemList.add(newTask);
         System.out.println(
                 "Got it. I've added this task:\n"
-                        + "  " + newTask
+                        + "  " + newTask + "\n"
                         + "Now you have " + this.itemList.size() + " tasks in the list."
         );
     }
@@ -70,7 +66,7 @@ public class TaskList {
         this.itemList.add(newTask);
         System.out.println(
                 "Got it. I've added this task:\n"
-                + "  " + newTask
+                + "  " + newTask + "\n"
                 + "Now you have " + this.itemList.size() + " tasks in the list."
         );
     }
@@ -84,7 +80,7 @@ public class TaskList {
         this.itemList.set(index, newTask);
         System.out.println(
                 "Nice! I've marked this task as done:"
-                        + "\n" + newTask
+                        + "\n" + "  " + newTask
         );
     }
 
@@ -97,7 +93,7 @@ public class TaskList {
         this.itemList.set(index, newTask);
         System.out.println(
                 "OK, I've marked this task as not done yet:"
-                        + "\n" + newTask
+                        + "\n" + "  " + newTask
         );
     }
 

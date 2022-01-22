@@ -5,7 +5,7 @@ public class MarkedTask extends Task {
     public MarkedTask(String taskTitle) {
         super(taskTitle);
         this.taskTitle = taskTitle;
-        this.markedTitle = "[X] " + taskTitle;
+        this.markedTitle = taskTitle.replace("[ ]", "[X]");
     }
 
     public Task unmarkTask() {

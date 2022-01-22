@@ -5,7 +5,7 @@ public class UnmarkedTask extends Task {
     public UnmarkedTask(String taskTitle) {
         super(taskTitle);
         this.taskTitle = taskTitle;
-        this.unmarkedTitle = "[ ][ ] " + taskTitle;
+        this.unmarkedTitle = taskTitle.replace("[X]", "[ ]");
     }
 
     public UnmarkedTask(String taskTitle, String taskType) {
@@ -26,7 +26,7 @@ public class UnmarkedTask extends Task {
 
     public Task markTask() {
         if (!this.isMarked()) {
-            return new MarkedTask(this.taskTitle);
+            return new MarkedTask(this.unmarkedTitle);
         }
         else return this;
     }

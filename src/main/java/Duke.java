@@ -64,15 +64,6 @@ public class Duke {
                 continue;
             }
 
-            UnmarkedTask nextTask = new UnmarkedTask(nextKey);
-            Duke.thisList.addItem(nextTask);
-
-            System.out.println(
-                    "--------------------------------------------------------\n"
-                    + "added: " + nextKey + "\n"
-                    + "--------------------------------------------------------"
-            );
-
         }
 
         Identity.exitProg();
