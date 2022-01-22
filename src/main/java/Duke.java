@@ -1,4 +1,5 @@
-import command.*;
+import command.Command;
+import exception.DukeException;
 import storage.Storage;
 import task.TaskList;
 import ui.Ui;
@@ -30,9 +31,14 @@ public class Duke {
 
         String input = ui.getCommand();
         while (!input.equals("bye")) {
-            Command c = Parser.parse(input);
-            c.execute(ui, storage, taskList);
-            input = ui.getCommand();
+            try {
+                Command c = Parser.parse(input);
+                c.execute(ui, storage, taskList);
+            } catch (DukeException e) {
+                ui.showError(e);
+            } finally {
+                input = ui.getCommand();
+            }
         }
 
         ui.exit();

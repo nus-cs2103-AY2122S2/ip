@@ -24,13 +24,6 @@ public class TaskList { //figure out how to process existing taskList from stora
         taskList.remove(serialNumber -1);
     }
 
-    public void mark(int serialNumber) { //additional behavior- print message if already done?
-        taskList.get(serialNumber -1).done = true;
-    }
-
-    public void unmark(int serialNumber) { //additional behavior- print message if still pending?
-        taskList.get(serialNumber -1).done = false;
-    }
 
     public String toString() {
         String s = "";

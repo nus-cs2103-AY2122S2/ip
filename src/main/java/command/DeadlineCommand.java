@@ -1,11 +1,13 @@
 package command;
 
+import exception.DukeException;
 import storage.Storage;
 import task.Deadline;
 import task.TaskList;
 import ui.Ui;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class DeadlineCommand extends Command {
     String message;
@@ -17,8 +19,12 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, Storage storage, TaskList taskList) { //throw exception if necessary
-        taskList.add(new Deadline(this.message, false, LocalDate.parse(this.time)));
+    public void execute(Ui ui, Storage storage, TaskList taskList) throws DukeException { //throw exception if necessary
+        try {
+            taskList.add(new Deadline(this.message, false, LocalDate.parse(this.time)));
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Have you entered the date in yyyy-mm-dd format?");
+        }
         storage.writeToFile(taskList);
         ui.outputMessage("Got it. I've added this task: \n" +
                 taskList.get(taskList.size() -1) +

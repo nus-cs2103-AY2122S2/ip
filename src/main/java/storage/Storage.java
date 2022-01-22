@@ -1,5 +1,6 @@
 package storage;
 
+import exception.DukeException;
 import task.TaskList;
 import ui.Ui;
 
@@ -27,7 +28,7 @@ public class Storage {
 
     }
 
-    public void writeToFile(TaskList taskList) {
+    public void writeToFile(TaskList taskList) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(this.file, false);
             for (int i=0; i < taskList.size(); i++) {
@@ -35,7 +36,7 @@ public class Storage {
             }
             fileWriter.close();
         } catch (IOException e) {
-            Ui.outputError("Sorry, couldn't write to the file this time!");
+            throw new DukeException("Sorry, couldn't write to the file this time!");
         }
     }
 }

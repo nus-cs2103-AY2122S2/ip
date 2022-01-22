@@ -1,20 +1,24 @@
 package command;
 
+import exception.DukeException;
 import storage.Storage;
 import task.TaskList;
 import ui.Ui;
 
 public class DeleteCommand extends Command {
-    int index;
+    int serialNumber;
 
     public DeleteCommand(int serialNumber) {
-        this.index = serialNumber -1;
+        this.serialNumber = serialNumber;
     }
 
     @Override
-    public void execute(Ui ui, Storage storage, TaskList taskList) {
-        String taskDescription = taskList.get(this.index).description;
-        taskList.delete(this.index);
+    public void execute(Ui ui, Storage storage, TaskList taskList) throws DukeException {
+        if (this.serialNumber < 1 || this.serialNumber > taskList.size()) {
+            throw new DukeException("Have you entered the correct number?");
+        }
+        String taskDescription = taskList.get(this.serialNumber - 1).description;
+        taskList.delete(this.serialNumber);
         storage.writeToFile(taskList);
         ui.outputMessage("Noted. I've removed this task:\n" +
                 taskDescription +

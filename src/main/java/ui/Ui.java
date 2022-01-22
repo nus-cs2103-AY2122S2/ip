@@ -1,5 +1,7 @@
 package ui;
 
+import exception.DukeException;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -26,6 +28,10 @@ public class Ui {
     public String getCommand() {
         return sc.nextLine(); //figure out how to return split version
         // make a Command interface/class too later!
+    }
+
+    public void showError(DukeException e) {
+        System.out.println(e.getMessage());
     }
 
     public void exit() {
