@@ -6,8 +6,8 @@ public class InvalidArgumentsException extends Exception{
         this.invalidInput = invalidInput;
     }
 
-    @Override
-    public String toString() {
+    public String errorMessage() {
         return "I'm sorry, I didn't quite get that";
     }
+
 }

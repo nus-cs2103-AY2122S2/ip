@@ -18,82 +18,94 @@ public class Johnny {
         InputList userList = new InputList();
 
         while(true) {
-            input = sc.nextLine();
-            String[] tags = input.split(" ", 2);
 
-            if(input.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                break;
-            }
-            else if(input.equals("list")) {
-                System.out.println("Here are the tasks in your list:");
-                userList.printList();
-            }
-            else if(input.length() >= 5 && input.substring(0, 5).equals("mark ") && isNumeric(input.substring(5))) {
-                userList.mark(Integer.parseInt(input.substring(5)));
-            }
-            else if(input.length() >= 7 && input.substring(0, 7).equals("unmark ") && isNumeric(input.substring(7))) {
-                userList.unmark(Integer.parseInt(input.substring(7)));
-            }
-            else if(input.length() >= 7 && input.substring(0, 7).equals("delete ") && isNumeric(input.substring(7))) {
-                userList.delete(Integer.parseInt(input.substring(7)));
-            }
-            else if(tags[0].equals("todo")) {
-                if(tags.length == 1 || tags[1].equals("")) {
-                    throw new EmptyDescriptionException();
+            try {
+                input = sc.nextLine();
+                String[] tags = input.split(" ", 2);
+
+                if(input.equals("bye")) {
+                    System.out.println("Bye. Hope to see you again soon!");
+                    break;
                 }
-
-                String content = tags[1];
-                if(content.equals("")) {
-                    throw new EmptyDescriptionException();
+                else if(input.equals("list")) {
+                    System.out.println("Here are the tasks in your list:");
+                    userList.printList();
                 }
-                Task newTask = new Todo(content);
-                userList.add(newTask);
+                else if(input.length() >= 5 && input.substring(0, 5).equals("mark ") && isNumeric(input.substring(5))) {
+                    userList.mark(Integer.parseInt(input.substring(5)));
+                }
+                else if(input.length() >= 7 && input.substring(0, 7).equals("unmark ") && isNumeric(input.substring(7))) {
+                    userList.unmark(Integer.parseInt(input.substring(7)));
+                }
+                else if(input.length() >= 7 && input.substring(0, 7).equals("delete ") && isNumeric(input.substring(7))) {
+                    userList.delete(Integer.parseInt(input.substring(7)));
+                }
+                else if(tags[0].equals("todo")) {
+                    if(tags.length == 1 || tags[1].equals("")) {
+                        throw new EmptyDescriptionException();
+                    }
 
-                System.out.println("Got it! I've added this task:");
-                System.out.println(newTask);
-                System.out.println("Now you have " + userList.getCount() + " tasks in your list.");
+                    String content = tags[1];
+                    if(content.equals("")) {
+                        throw new EmptyDescriptionException();
+                    }
+                    Task newTask = new Todo(content);
+                    userList.add(newTask);
+
+                    System.out.println("Got it! I've added this task:");
+                    System.out.println(newTask);
+                    System.out.println("Now you have " + userList.getCount() + " tasks in your list.");
+                }
+                else if(tags[0].equals("deadline")) {
+                    if(tags.length == 1 || tags[1].equals("")) {
+                        throw new EmptyDescriptionException();
+                    }
+
+                    if(!tags[1].contains("/")) {
+                        throw new NoDateException();
+                    }
+
+                    String content = tags[1];
+                    String[] details = content.split("/", 2);
+
+                    Task newTask = new Deadline(details[0], details[1]);
+                    userList.add(newTask);
+
+                    System.out.println("Got it! I've added this task:");
+                    System.out.println(newTask);
+                    System.out.println("Now you have " + userList.getCount() + " tasks in your list.");
+                }
+                else if(tags[0].equals("event")) {
+                    if(tags.length == 1 || tags[1].equals("")) {
+                        throw new EmptyDescriptionException();
+                    }
+
+                    if(!tags[1].contains("/")) {
+                        throw new NoDateException();
+                    }
+
+                    String content = tags[1];
+                    String[] details = content.split("/", 2);
+
+                    Task newTask = new Event(details[0], details[1]);
+                    userList.add(newTask);
+
+                    System.out.println("Got it! I've added this task:");
+                    System.out.println(newTask);
+                    System.out.println("Now you have " + userList.getCount() + " tasks in your list.");
+                }
+                else {
+                    throw new InvalidArgumentsException(input);
+                }
             }
-            else if(tags[0].equals("deadline")) {
-                if(tags.length == 1 || tags[1].equals("")) {
-                    throw new EmptyDescriptionException();
-                }
-
-                if(!tags[1].contains("/")) {
-                    throw new NoDateException();
-                }
-
-                String content = tags[1];
-                String[] details = content.split("/", 2);
-
-                Task newTask = new Deadline(details[0], details[1]);
-                userList.add(newTask);
-
-                System.out.println("Got it! I've added this task:");
-                System.out.println(newTask);
-                System.out.println("Now you have " + userList.getCount() + " tasks in your list.");
+            catch (InvalidArgumentsException e) {
+                System.out.println(e.errorMessage());
             }
-            else if(tags[0].equals("event")) {
-                if(tags.length == 1 || tags[1].equals("")) {
-                    throw new EmptyDescriptionException();
-                }
-
-                if(!tags[1].contains("/")) {
-                    throw new NoDateException();
-                }
-
-                String content = tags[1];
-                String[] details = content.split("/", 2);
-
-                Task newTask = new Event(details[0], details[1]);
-                userList.add(newTask);
-
-                System.out.println("Got it! I've added this task:");
-                System.out.println(newTask);
-                System.out.println("Now you have " + userList.getCount() + " tasks in your list.");
+            catch (EmptyDescriptionException e) {
+                System.out.println(e.errorMessage());
             }
-            else {
-                throw new InvalidArgumentsException(input);
+            catch (NoDateException e) {
+                System.out.println(e.errorMessage());
             }
         }
     }
