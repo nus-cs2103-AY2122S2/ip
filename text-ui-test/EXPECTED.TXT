@@ -1,3 +1,6 @@
+MNSKY: ..?
+[MNSKY is having trouble remembering the previous task list...]
+
 MNSKY: Hi, I'm
 MNSKY: MM      MM  NN      NN   SSSSSSS   KK     KK  YY      YY
 MNSKY: MMMM  MMMM  NNNN    NN  SSSS       KK   KK      YY  YY
