@@ -6,7 +6,7 @@ public class Duke {
     public static void main(String[] args) throws DukeException{
         Printer p = new Printer();
         Scanner in = new Scanner(System.in);
-        Parser ip = new Parser();
+        InputParser ip = new InputParser();
         ArrayList<Task> arr = new ArrayList<>();
         Storage.loadFile(System.getProperty("user.dir") + "\\data\\duke.txt", arr);
 
