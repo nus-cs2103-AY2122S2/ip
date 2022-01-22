@@ -7,8 +7,11 @@ import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-
 import java.util.regex.Pattern;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Echo, a Personal Assistant Chatbot that helps a person to keep track of various things.
@@ -66,22 +69,25 @@ public class Echo {
 
         try {
             // Split input based on white spaces.
-            String[] split = input.split(" ");
-            String command = split[0];
+            String[] splitSpace = input.split(" ");
+            String command = splitSpace[0];
 
             // Message to be printed, StringBuilder used for concatenation in O(1).
             StringBuilder message = new StringBuilder();
 
             // Switch to identify the command and perform the appropriate operations.
             switch (command) {
+            case "commands":
+                printCommands();
+                break;
             case "list":
                 if (TASKS.size() == 0) {
                     // Task list is empty.
-                    printFormat("        Task list is empty!");
+                    printFormat("    Task list is empty!");
                 } else {
                     // Task list is not empty. Prints all tasks.
                     for (int i = 0; i < TASKS.size(); i++) {
-                        message.append(String.format("        %d. %s \n", i + 1, TASKS.get(i)));
+                        message.append(String.format("    %d. %s \n", i + 1, TASKS.get(i)));
                     }
                     message.setLength(message.length() - 2);
                     printFormat(message.toString());
@@ -91,39 +97,38 @@ public class Echo {
             case "unmark":
             case "delete":
                 // If second input (task number) is not specified, throw EchoException.
-                if (split.length == 1) {
-                    throw new EchoException("Please specify the task number. Eg. mark 1, unmark 1, delete 1");
+                if (splitSpace.length == 1) {
+                    throw new EchoException("    Please specify the task number. Eg. mark 1, unmark 1, delete 1");
                 }
 
                 // Parse second input into an int, throws NumberFormatException if it's not an int.
-                int taskIndex = Integer.parseInt(split[1]) - 1;
+                int taskIndex = Integer.parseInt(splitSpace[1]) - 1;
 
                 // Condition to identify the command.
                 if (command.equals("mark")) {
                     // Mark the task specified.
                     TASKS.get(taskIndex).mark();
-                    message.append("        Nice! The task is marked as done: \n");
+                    message.append("    Nice! The task is marked as done: \n");
                 } else if (command.equals("unmark")) {
                     // Unmark the task specified.
                     TASKS.get(taskIndex).unmark();
-                    message.append("        OK! The task is unmarked. \n");
+                    message.append("    OK! The task is unmarked. \n");
                 } else {
                     // Delete the task specified.
-                    message.append("        Noted. I've removed the task: \n");
-                    message.append(String.format("          %d. %s \n", taskIndex + 1, TASKS.get(taskIndex).toString()));
+                    message.append("    Noted. I've removed the task: \n");
+                    message.append(String.format("      %d. %s \n", taskIndex + 1, TASKS.get(taskIndex).toString()));
                     TASKS.remove(taskIndex);
                 }
 
                 // If command is "delete", append number of task remaining; Otherwise, append status of current task.
                 if (command.equals("delete")) {
-                    message.append(String.format("        Now you have %d tasks in the list.", TASKS.size()));
+                    message.append(String.format("    Now you have %d tasks in the list.", TASKS.size()));
                 } else {
                     message.append(taskStatus(taskIndex));
                 }
 
                 // Print message.
                 printFormat(message.toString());
-
                 // Save TaskList.
                 saveTaskList();
                 break;
@@ -131,39 +136,59 @@ public class Echo {
             case "deadline":
             case "event":
                 // Split input based on /.
-                String[] desc = input.split("/");
+                String[] splitSlash = input.split("/");
+
+                // Description of task.
+                String desc = splitSlash[0].substring(command.length() + 1);
+
+                String dateTimeString;
+                LocalDateTime localDateTime;
 
                 // If second input (description) is not specified, throw EchoException.
-                if (split.length == 1) {
-                    throw new EchoException(String.format("        The description of a %s cannot be empty.", input));
+                if (splitSpace.length == 1) {
+                    throw new EchoException(String.format("    The description of a %s cannot be empty.", input));
                 }
 
                 // Condition to identify the command.
                 if (command.equals("todo")) {
-                    // Add TOdoTask.
-                    TASKS.add(new TodoTask(input.substring(command.length() + 1)));
-                } else if (command.equals("deadline")) {
-                    // If /by is not specified, throw EchoException.
-                    if (!input.contains("/by")) {
-                        throw new EchoException("        Please specify the deadline of the task. E.g. deadline return book /by Sunday");
-                    }
-
-                    // Add DeadlineTask.
-                    TASKS.add(new DeadlineTask(desc[0].substring(command.length() + 1).trim(), desc[1].substring(desc[1].indexOf(" ") + 1)));
+                    // Add TodoTask.
+                    TASKS.add(new TodoTask(desc));
                 } else {
-                    // If /at is not specified, throw EchoException.
-                    if (!input.contains("/at")) {
-                        throw new EchoException("        Please specify the time of the event. E.g. event meeting /at Mon");
+                    // "/" not specified in input.
+                    if (!input.contains("/")) {
+                        throw new EchoException("    Please specify the time of the task: \n"
+                                + "    deadline <description> /by <time> \n"
+                                + "    event <description> /at <time>");
                     }
 
-                    // Add EventTask task.
-                    TASKS.add(new EventTask(desc[0].substring(command.length() + 1).trim(), desc[1].substring(desc[1].indexOf(" ") + 1)));
+                    dateTimeString = splitSlash[1].substring(splitSlash[1].indexOf(" ") + 1);
+                    localDateTime = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern("yyyy-M-d HHmm"));
+
+                    if (command.equals("deadline")) {
+                        // If /by is not specified, throw EchoException.
+                        if (!input.contains("/by")) {
+                            throw new EchoException("    Please specify the deadline of the task. "
+                                    + "E.g. deadline return book /by 2019-10-15 1800");
+                        }
+
+                        // Add DeadlineTask.
+                        TASKS.add(new DeadlineTask(desc, localDateTime));
+                    } else {
+                        // If /at is not specified, throw EchoException.
+                        if (!input.contains("/at")) {
+                            throw new EchoException("    Please specify the date and time of the event. "
+                                    + "E.g. event meeting /at 2019-10-15 1800");
+                        }
+
+                        // Add EventTask task.
+                        TASKS.add(new EventTask(desc, localDateTime));
+                    }
                 }
 
                 // Message to inform user of successful execution.
-                message.append("        Got it. I've added this task: \n");
+                message.append("    Got it. I've added this task: \n");
                 message.append(taskStatus(TASKS.size() - 1)).append("\n");
-                message.append(String.format("        Now you have %d tasks in the list.", TASKS.size()));
+                message.append(String.format("    Now you have %d tasks in the list.", TASKS.size()));
 
                 // Print message.
                 printFormat(message.toString());
@@ -172,19 +197,22 @@ public class Echo {
                 saveTaskList();
                 break;
             default:
-                // Input is not recognised, print commands available.
-                printCommands();
-                break;
+                // Input not recognised.
+                throw new EchoException("    I'm sorry, but I don't know what that means :-(\n"
+                        + "    Type <commands> for a list of available commands");
             }
         } catch (NumberFormatException nfe) {
             // Second input provided by user is not an int.
-            printFormat("        Second input must be an integer. Eg. mark 1, unmark 1, delete 1");
+            printFormat("    Second input must be an integer. Eg. mark 1, unmark 1, delete 1");
         } catch (ArrayIndexOutOfBoundsException e) {
             // Task number provided by user does not exist in TASKS.
-            printFormat("        Task does not exist!");
+            printFormat("    Task does not exist!");
         } catch (IOException e) {
             // Unable to access FILE_PATH to save the tasks.
             printFormat("        Unable to access folder: " + FILE_PATH);
+        } catch (DateTimeParseException e) {
+            printFormat("    Wrong format for date and time. Follow the <yyyy-mm-dd> <24hr time> format. \n"
+                    + "    E.g. 2019-10-15 1800");
         }
     }
 
@@ -207,6 +235,7 @@ public class Echo {
             try {
                 String[] split = line.split(Pattern.quote(" | "));
                 String type = split[0];
+                LocalDateTime localDateTime = LocalDateTime.parse(split[3], DateTimeFormatter.ofPattern("yyyy-M-d HHmm"));
                 switch (type) {
                     case "T":
                     case "D":
@@ -214,9 +243,9 @@ public class Echo {
                         if (type.equals("T")) {
                             TASKS.add(new TodoTask(split[2]));
                         } else if (type.equals("D")) {
-                            TASKS.add(new DeadlineTask(split[2], split[3]));
+                            TASKS.add(new DeadlineTask(split[2],localDateTime));
                         } else {
-                            TASKS.add(new EventTask(split[2], split[3]));
+                            TASKS.add(new EventTask(split[2], localDateTime));
                         }
 
                         if (Integer.parseInt(split[1]) == 1) {
@@ -288,24 +317,24 @@ public class Echo {
      * @param s String to be printed.
      */
     private static void printFormat(String s) {
-        System.out.println("        ____________________________________________________________");
+        System.out.println("    ____________________________________________________________");
         System.out.println(s);
-        System.out.println("        ____________________________________________________________");
+        System.out.println("    ____________________________________________________________");
     }
 
     /**
      * Prints user commands.
      */
     private static void printCommands() {
-        printFormat("        Commands: \n"
-                + "        List                                | List current tasks. \n"
-                + "        todo <description>                  | Adds a todo task. \n"
-                + "        deadline <description> /by <time>   | Adds a deadline task to be done before a specified time. \n"
-                + "        event <description> /at <time>      | Adds an event task that occurs at a specified time. \n"
-                + "        mark <task number>                  | Marks task as completed. \n"
-                + "        unmark <task number>                | Unmark task as uncompleted. \n"
-                + "        delete <task number>                | Deletes task. \n"
-                + "        bye                                 | exit. ");
+        printFormat("    Commands: \n"
+                + "    list                                | List current tasks. \n"
+                + "    todo <description>                  | Adds a todo task. \n"
+                + "    deadline <description> /by <time>   | Adds a deadline task to be done before a specified time. \n"
+                + "    event <description> /at <time>      | Adds an event task that occurs at a specified time. \n"
+                + "    mark <task number>                  | Marks task as completed. \n"
+                + "    unmark <task number>                | Unmark task as uncompleted. \n"
+                + "    delete <task number>                | Deletes task. \n"
+                + "    bye                                 | exit. ");
     }
 
 
