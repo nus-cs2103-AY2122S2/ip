@@ -17,7 +17,13 @@ public class Mnsky {
     public Mnsky() {
          this.con = new Scanner(System.in);
          this.storage = new Storage("data/MnskyData.txt");
-         this.list = this.parseStorageData(this.storage.readFromDataFile());
+
+         try {
+             this.list = this.parseStorageData(this.storage.readFromDataFile());
+         } catch (MnskyException e) {
+             System.out.println(e.getMessage());
+             this.list = new ArrayList<>();
+         }
     }
 
     /**
@@ -252,7 +258,7 @@ public class Mnsky {
     /**
      * Adds all the tasks from the data file into the list.
      */
-    private ArrayList<Task> parseStorageData(ArrayList<String> rawTaskList) {
+    private ArrayList<Task> parseStorageData(ArrayList<String> rawTaskList) throws MnskyException {
         try {
             ArrayList<Task> taskList = new ArrayList<>();
 
@@ -279,10 +285,8 @@ public class Mnsky {
 
             return taskList;
         } catch (MnskyException e) {
-            System.out.println("[MNSKY is having trouble remembering the previous task list...]");
+            throw new MnskyException("[MNSKY is having trouble remembering the previous task list...]");
         }
-
-        return new ArrayList<>();
     }
 
     /**
@@ -352,7 +356,7 @@ public class Mnsky {
             }
         } catch (MnskyException m) {
             this.printMnsky("..?");
-            System.out.println(m);
+            System.out.println(m.getMessage());
         }
 
         this.printMnsky("I can help!");

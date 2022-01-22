@@ -1,6 +1,15 @@
 public class MnskyException extends RuntimeException {
+    private String message;
+
+    public MnskyException(String message) {
+        this.message = message;
+    }
+    /**
+     * Gets the message of the exception.
+     * @return The message of the exception.
+     */
     @Override
-    public String toString() {
-        return "[MNSKY ran into an unknown exception.]";
+    public String getMessage() {
+        return this.message;
     }
 }

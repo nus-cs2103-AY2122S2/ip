@@ -25,7 +25,7 @@ public class Storage {
     /**
      * Saves the current state of the list to the data file.
      */
-    public void writeToDataFile(ArrayList<Task> list) {
+    public void writeToDataFile(ArrayList<Task> list) throws MnskyException {
         FileWriter fileWriter;
 
         // If directory for data file doesn't exist, try to create it first
@@ -47,7 +47,7 @@ public class Storage {
             bufferedWriter.flush();
             bufferedWriter.close();
         } catch (IOException e) {
-            System.out.println("[MNSKY had trouble committing the task list to its memory!]");
+            throw new MnskyException("[MNSKY had trouble committing the task list to its memory!]");
         }
     }
 
@@ -56,7 +56,7 @@ public class Storage {
      * @return A list of all the tasks from the data file in its raw string format,
      *  or an empty list if an error occurred.
      */
-    public ArrayList<String> readFromDataFile() {
+    public ArrayList<String> readFromDataFile() throws MnskyException {
         try {
             Scanner fileScanner = new Scanner(new File(this.dataFilePath));
             ArrayList<String> taskList = new ArrayList<>();
@@ -67,9 +67,7 @@ public class Storage {
 
             return taskList;
         } catch (FileNotFoundException e) {
-            this.writeToDataFile(new ArrayList<Task>());
+            throw new MnskyException("[MNSKY is having trouble remembering the previous task list...]");
         }
-
-        return new ArrayList<String>();
     }
 }
