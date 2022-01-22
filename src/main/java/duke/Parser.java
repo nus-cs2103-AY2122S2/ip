@@ -1,5 +1,4 @@
 package duke;
-
 import duke.command.*;
 
 //deals with making sense of the user duke.command
@@ -34,7 +33,7 @@ public class Parser {
 
         String action = firstWord;
 
-        if (!action.equals("deadline") || !action.equals("todo") || !action.equals("event")) {
+        if (!action.equals("deadline") && !action.equals("todo") && !action.equals("event")) {
             throw new DukeException("Unknown Command");
         }
 

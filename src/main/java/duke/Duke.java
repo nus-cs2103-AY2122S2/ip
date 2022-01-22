@@ -1,12 +1,12 @@
 package duke;
 import duke.command.Command;
 
-public class Dukee {
-    private Storage storage;
+public class Duke {
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
 
-    public Dukee(String filePath) {
+    public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -23,19 +23,16 @@ public class Dukee {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                //ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
-            } finally {
-                //i.showLine();
             }
         }
     }
 
     public static void main(String[] args) {
-        new Dukee("data/tasks.txt").run();
+        new Duke("data/tasks.txt").run();
     }
 }

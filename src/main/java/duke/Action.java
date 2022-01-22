@@ -14,27 +14,13 @@ public class Action {
         isDone = status;
     }
 
-    public String getFull() {
-        return act;
-    }
-
     /**
      * Returns the first word of the input
      * which is the action
      * @return head of message/the action
      */
     public String getAction() {
-        String head = act.split(" ")[0];
-        return head;
-    }
-
-    /**
-     * Returns the input without the head
-     * @return the body of the input
-     */
-    public String getBody() {
-        String bod = act.split(" ", 2)[1];
-        return bod;
+        return act.split(" ")[0];
     }
 
     public String getStatus() {
@@ -47,43 +33,6 @@ public class Action {
 
     public Action setUnDone() {
         return new Action(act, false);
-    }
-
-    public boolean known() {
-        return isList() || isMark() || isUnmark() || isDeadline() || isEvent()
-                || isTodo() || isDelete();
-    }
-
-    public boolean isBye() {
-        return act.equals("bye");
-    }
-
-    public boolean isList() {
-        return act.equals("list");
-    }
-
-    public boolean isMark() {
-        return getAction().contains("mark");
-    }
-
-    public boolean isUnmark() {
-        return getAction().equals("unmark");
-    }
-
-    public boolean isDeadline() {
-        return getAction().equals(("deadline"));
-    }
-
-    public boolean isEvent() {
-        return getAction().equals("event");
-    }
-
-    public boolean isTodo() {
-        return getAction().equals("todo");
-    }
-
-    public boolean isDelete() {
-        return getAction().equals("delete");
     }
 
     @Override

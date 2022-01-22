@@ -1,5 +1,4 @@
 package duke;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -18,7 +17,7 @@ public class Deadline extends Action{
 
     public Deadline(String task, LocalDate by, boolean bool)  {
         super(task, bool);
-        this.date = date;
+        this.date = by;
     }
 
     @Override

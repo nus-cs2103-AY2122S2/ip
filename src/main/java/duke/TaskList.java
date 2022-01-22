@@ -1,54 +1,57 @@
 package duke;
-
 import java.util.ArrayList;
 
 //contains the task list e.g., it has operations to add/delete tasks in the list
 public class TaskList {
-     Storage storage;
-     ArrayList<Action> list;
+    private final Storage storage;
+    private final ArrayList<Action> list = new ArrayList<>();
 
-     public TaskList() {
-          storage = new Storage();
-     }
+    public TaskList() {
+        storage = new Storage();
+    }
 
-     public TaskList(Storage storage) {
-          this.storage = storage;
-     }
+    public TaskList(Storage storage) {
+        this.storage = storage;
+    }
 
-     public void add(Action action) {
-          list.add(action);
-     }
+    public void add(Action action) {
+        list.add(action);
+    }
 
-     public int size() {
-          return list.size();
-     }
+    public ArrayList<Action> getList() {
+        return list;
+    }
 
-     public void setDone(int taskNo) {
-          list.set(taskNo, list.get(taskNo).setDone());
-     }
+    public int size() {
+        return list.size();
+    }
 
-     public void setUnDone(int taskNo) {
-          list.set(taskNo, list.get(taskNo).setUnDone());
-     }
+    public void setDone(int taskNo) {
+        list.set(taskNo, list.get(taskNo).setDone());
+    }
 
-     public Action getAction(int taskNo) {
-          return list.get(taskNo);
-     }
+    public void setUnDone(int taskNo) {
+        list.set(taskNo, list.get(taskNo).setUnDone());
+    }
 
-     public Action delete(int taskNo) {
-          return list.remove(taskNo);
-     }
+    public Action getAction(int taskNo) {
+        return list.get(taskNo);
+    }
 
-     public void listOut() {
-          int count = 1;
-          System.out.println("Here are the tasks in your list:");
-          if (list.isEmpty()) {
-               System.out.println("Oh, you have nothing to do, how free you are!");
-          } else {
-               for (Action act : list) {
-                    System.out.println(count + "." + act);
-                    count++;
-               }
-          }
-     }
+    public Action delete(int taskNo) {
+        return list.remove(taskNo);
+    }
+
+    public void listOut() {
+        int count = 1;
+        System.out.println("Here are the tasks in your list:");
+        if (list.isEmpty()) {
+            System.out.println("Oh, you have nothing to do, how free you are!");
+        } else {
+            for (Action act : list) {
+                System.out.println(count + "." + act);
+                count++;
+            }
+        }
+    }
 }
