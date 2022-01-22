@@ -1,266 +1,42 @@
-import java.util.ArrayList;
-import java.util.Scanner;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
-
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.text.DateFormat;
-import java.text.ParseException;
 
 public class Duke {
 
-    private static ArrayList<Task> taskList = new ArrayList<>();
-    private static int numOfTask = 0;
-    private static final int EVENT_OFFSET = 5;
-    private static final int TODO_OFFSET = 4;
-    private static final int DEADLINE_OFFSET = 8;
-    private static final int INPUT_OFFSET = 3;
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+    private Parser parser;
 
-    public static void addToList(Task t) {
-        String message = "Got it. I've added this task:\n";
-        taskList.add(t);
-        numOfTask++;
-        updateTextFile();
-        System.out.println(message + t.toString() + "\nNow you have " + numOfTask + " tasks in the list.");
-    }
-
-    public static void storeToList(Task t) { //same as addToList but no printing
-        taskList.add(t);
-        numOfTask++;
-    }
-
-    public static void deleteTask(int taskNum) {
-        String message = "Noted. I've removed this task:\n";
-        int actualTaskNum = taskNum - 1;
-        System.out.println(message + taskList.get(actualTaskNum).toString());
-        taskList.remove(actualTaskNum);
-        numOfTask--;
-        updateTextFile();
-        System.out.println("Now you have " + numOfTask + " tasks in the list.");
-    }
-
-    public static void markTask(int taskNum) {
-        String message = "Nice! I've marked this task as done:\n" ;
-        int actualTaskNum = taskNum - 1; //minus 1 as list index is from 0
-        Task t = taskList.get(actualTaskNum); // get the task from the array
-        t.setTaskDone();
-        updateTextFile();
-        System.out.println(message + t.toString());
-    }
-
-    public static void unMarkTask(int taskNum) {
-        String message = "OK, I've marked this task as not done yet:\n";
-        int actualTaskNum = taskNum - 1;
-        Task t = taskList.get(actualTaskNum); // get the task from the array
-        t.setTaskNotDone();
-        updateTextFile();
-        System.out.println(message + t.toString());
-    }
-
-    public static void printList(){
-        String message = "Here are the tasks in your list:";
-        System.out.println(message);
-
-        for(int i = 0; i < numOfTask; i++){
-            String output = i + 1 + "." + taskList.get(i).toString();
-            System.out.println(output);
-        }
-    }
-
-    public static void readFileDataAndStoreInList(File f) throws FileNotFoundException {
-        Scanner sc = new Scanner(f);
-        while ((sc.hasNextLine())) {
-            String input = sc.nextLine();
-            String[] inputSplit = input.split("\\|"); //split input by |
-            String task = inputSplit[0];
-            Integer mark = Integer.parseInt(inputSplit[1]);
-            if(task.equals("T")) {
-                Todo tempTask = new Todo(inputSplit[2]);
-                if(mark == 1) {
-                    tempTask.setTaskDone();
-                }
-                storeToList(tempTask);
-            } else if(task.equals("D")) {
-                Deadline tempTask = new Deadline(inputSplit[2],inputSplit[3]);
-                if(mark == 1) {
-                    tempTask.setTaskDone();
-                }
-                storeToList(tempTask);
-            } else if (task.equals("E")) {
-                Event tempTask = new Event(inputSplit[2],inputSplit[3]);
-                if(mark == 1) {
-                    tempTask.setTaskDone();
-                }
-                storeToList(tempTask);
-            }
-        }
-    }
-
-    public static void writeToFile(String path) throws IOException {
-        FileWriter fw = new FileWriter(path);
-        for(int i = 0; i < taskList.size(); i++) {
-            Task t = taskList.get(i);
-            fw.write(craftOutput(t));
-            fw.write(System.lineSeparator());
-        }
-        fw.close();
-    }
-
-    public static String craftOutput(Task t) {
-        String output = "";
-        String doneIcon = t.getStatusIcon();
-        if(t instanceof Todo) {
-            if(doneIcon.equals("X")) {
-                output = "T|1|" + t.getDescription();
-            } else {
-                output = "T|0|" + t.getDescription();
-            }
-        } else if(t instanceof Deadline) {
-            if(doneIcon.equals("X")) {
-                output = "D|1|" + t.getDescription() + "|" + ((Deadline) t).getBy();
-            } else {
-                output = "D|0|" + t.getDescription() + "|" + ((Deadline) t).getBy();
-            }
-        } else if(t instanceof Event) {
-            if(doneIcon.equals("X")) {
-                output = "E|1|" + t.getDescription() + "|" + ((Event) t).getAt();
-            } else {
-                output = "E|0|" + t.getDescription() + "|" + ((Event) t).getAt();
-            }
-        }
-        return output;
-    }
-
-    public static void updateTextFile() {
+    public Duke(String pwd, String filePath) {
+        this.ui = new Ui();
+        this.storage = new Storage(pwd, filePath);
+        this.parser = new Parser();
         try {
-            writeToFile("C:\\data\\TaskData.txt");
+            this.tasks = new TaskList();
+            storage.load();
         } catch (IOException e) {
-            System.out.println("Something happened to the text file !" + e.getMessage());
+            ui.showLoadingError(e.getMessage());
         }
     }
 
-    public static String formatTime(String input){
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HHmm");
-        DateFormat outputFormat = new SimpleDateFormat("MMM dd yyyy hh:mm aa");
-        Date date;
-        String output = "";
-        try {
-            date = df.parse(input);
-            output = outputFormat.format(date);
-        } catch (ParseException e) {
-            System.out.println(e.getMessage());
+    public void run() {
+        this.ui.showGreeting();
+        boolean isExit = false;
+        while(!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                Command c = parser.parse(fullCommand);
+                c.execute(tasks);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            }
         }
-        return output;
+        ui.showEnding();
     }
 
     public static void main(String[] args) {
-        //check file
-        try {
-            File directory = new File("C:\\data");
-            File inputFile = new File("C:\\data\\TaskData.txt");
-            if(!directory.exists()) {
-                throw new FileNotFoundException("Please create a data directory in C:");
-            } else if(directory.exists() && !inputFile.exists()) {
-                throw new FileNotFoundException("Please create a TaskData.txt file under C:\\data");
-            } else { //both have
-                try {
-                    readFileDataAndStoreInList(inputFile);
-                } catch (FileNotFoundException e) {
-                    System.out.println("FileNotFound");
-                }
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-            return;
-        }
-
-        String greeting = "Hello! I'm TaskJamie\nWhat can i do for you?";
-        String ending =  "Bye. Hope to see you again soon!";
-        System.out.println(greeting);
-
-        Scanner sc = new Scanner(System.in);
-        while(sc.hasNextLine()) {
-            try {
-                String input = sc.nextLine();
-
-                if(input.length() == 0) {
-                    throw new BlankCommandException();
-                }
-
-                String[] inputSplit = input.split(" "); //split input by space
-                String command = inputSplit[0];
-
-                if (command.equals("bye")) {
-                    System.out.print(ending);
-                    break;
-
-                } else if (command.equals("list")) {
-                    printList();
-
-                } else if (command.equals("todo")) {
-                    String description = input.substring(TODO_OFFSET).trim();
-
-                    if(description.length() == 0) {
-                        throw new IncompleteCommandException(command);
-                    }
-
-                    addToList(new Todo(description));
-
-                } else if (command.equals("deadline")) {
-                    String[] inputSlash = input.split("/");
-                    String description = inputSlash[0].substring(DEADLINE_OFFSET).trim();
-
-                    if(description.length() == 0) {
-                        throw new IncompleteCommandException(command);
-                    }
-
-                    String timeInput = inputSlash[1].substring(INPUT_OFFSET);
-                    String time = formatTime(timeInput);
-                    String duration;
-                    if(time.equals("")){
-                        duration = timeInput;
-                    } else {
-                        duration = time;
-                    }
-                    addToList(new Deadline(description, duration));
-
-                } else if (command.equals("event")) {
-                    String[] inputSlash = input.split("/");
-                    String description = inputSlash[0].substring(EVENT_OFFSET).trim();
-
-                    if(description.length() == 0) {
-                        throw new IncompleteCommandException(command);
-                    }
-
-                    String timeInput = inputSlash[1].substring(INPUT_OFFSET);
-                    String time = formatTime(timeInput);
-                    String duration;
-                    if(time.equals("")){
-                        duration = timeInput;
-                    } else {
-                        duration = time;
-                    }
-                    addToList(new Event(description, duration));
-
-                } else if (command.equals("mark")) {
-                    markTask(Integer.parseInt(inputSplit[1]));
-
-                } else if (command.equals("unmark")) {
-                    unMarkTask(Integer.parseInt(inputSplit[1]));
-
-                } else if (command.equals("delete")) {
-                    deleteTask(Integer.parseInt(inputSplit[1]));
-
-                } else {
-                    throw new InvalidCommandException();
-                }
-            }  catch (IncompleteCommandException | InvalidCommandException | BlankCommandException e) {
-                System.out.println(e.getMessage());
-            }
-        }
+        String home = System.getProperty("user.home");
+        new Duke(home,"/data/TaskData.txt").run();
     }
 }
