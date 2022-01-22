@@ -25,7 +25,7 @@ public class Duke {
                 command = sc.next();
                 input = sc.nextLine();
                 input = input.equals("")? input : input.substring(1);
-                actionType = ParseCommand(command);
+                actionType = parseCommand(command);
             } catch (CommandNotFoundException e) {
                 System.out.println("Sorry, i don't understand what you are saying");
             }
@@ -51,7 +51,7 @@ public class Duke {
                     break;
                 case EVENT:
                     try {
-                        addSuccess = list.add(TaskType.EVENTS, input);
+                        addSuccess = list.add(TaskType.EVENTS, parseInput(input));
                     } catch (EmptyDescriptionException e) {
                         System.out.println("Description of task can't be empty");
                         addSuccess = false;
@@ -66,7 +66,7 @@ public class Duke {
                     break;
                 case DEADLINE:
                     try {
-                        addSuccess = list.add(TaskType.DEADLINE, input);
+                        addSuccess = list.add(TaskType.DEADLINE, parseInput(input));
                     } catch (EmptyDescriptionException e) {
                         System.out.println("Description of task can't be empty");
                         addSuccess = false;
@@ -81,7 +81,7 @@ public class Duke {
                     break;
                 case TODO:
                     try {
-                        addSuccess = list.add(TaskType.TODO, input);
+                        addSuccess = list.add(TaskType.TODO, parseInput(input));
                     } catch (EmptyDescriptionException e) {
                         System.out.println("Description of task can't be empty");
                         addSuccess = false;
@@ -108,7 +108,7 @@ public class Duke {
                     command = sc.next();
                     input = sc.nextLine();
                     input = input.equals("")? input : input.substring(1);
-                    actionType = ParseCommand(command);
+                    actionType = parseCommand(command);
                 } catch (CommandNotFoundException e) {
                     System.out.println("Sorry, i don't understand what you are saying");
                     actionType = null;
@@ -120,7 +120,7 @@ public class Duke {
 
     }
 
-    public static Command ParseCommand(String command) throws CommandNotFoundException {
+    public static Command parseCommand(String command) throws CommandNotFoundException {
         if (command.equals("list")) {
             return Command.LIST;
         } else if(command.equals("mark")) {
@@ -140,5 +140,22 @@ public class Duke {
         } else {
             throw new CommandNotFoundException("Unrecognised Command");
         }
+    }
+
+    public static String[] parseInput(String input) {
+        String[] inputs = new String[2];
+        if (input.indexOf("/by") != -1) {
+            int indexOfTime = input.indexOf("/by");
+            inputs[0] = input.substring(0,indexOfTime);
+            inputs[1] = input.substring(indexOfTime+4);
+        } else if (input.indexOf("/at") != -1) {
+            int indexOfTime = input.indexOf("/at");
+            inputs[0] = input.substring(0,indexOfTime);
+            inputs[1] = input.substring(indexOfTime+4);
+        } else {
+            inputs[0] = input;
+            inputs[1] = "";
+        }
+        return inputs;
     }
 }
