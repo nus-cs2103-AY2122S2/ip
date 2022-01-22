@@ -2,8 +2,8 @@
  * Class that encapsulates a Task
  */
 public abstract class Task {
-    private final String description;
-    private boolean isDone;
+    protected final String description;
+    protected boolean isDone;
 
     /*
      * Constructor that accepts a String as description
@@ -19,6 +19,7 @@ public abstract class Task {
     public void setDone(boolean done) {
         this.isDone = done;
     }
+    public abstract String formatSave();
 
     /*
      * Customized toString method to display done status of task as well as the task description
