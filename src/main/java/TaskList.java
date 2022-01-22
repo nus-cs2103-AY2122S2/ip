@@ -7,6 +7,11 @@ public class TaskList {
         this.arrayList = new ArrayList<Task>();
     }
 
+    TaskList(String string) {
+        // converting txt to String
+        this.arrayList = new ArrayList<Task>();
+    }
+
     public int length() {
         return this.arrayList.size();
     }
