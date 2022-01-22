@@ -1,3 +1,7 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Parser {
     
     private String[] splitStringIntoParts(String s) {
@@ -9,7 +13,7 @@ public class Parser {
     }
 
 
-    private Task handlesEventTasks(int isMark, String description, String eventAt) {
+    private Task handlesEventTasks(int isMark, String description, LocalDateTime eventAt) {
         EventTask eventTask = new EventTask(description, eventAt);
         if (isMark == 1)
             eventTask.markTask();
@@ -17,7 +21,7 @@ public class Parser {
      }
 
     
-    private Task handlesDeadlineTasks(int isMark, String description, String deadlineBy) {
+    private Task handlesDeadlineTasks(int isMark, String description, LocalDateTime deadlineBy) {
         DeadlineTask deadlineTask = new DeadlineTask(description, deadlineBy);
         if (isMark == 1)    
             deadlineTask.markTask();
@@ -76,13 +80,17 @@ public class Parser {
                 if (taskType == 'D' || taskType == 'E') {
                     //Case 4: Assume that the 3rd input is the description of the task and the user is missing the deadline by/time of event
                     if (stringIntoParts.length != 4) {
-                        throw new DukeExceptions("ERROR! Deadline and Event tasks is missing the deadline/time which the event occur on");
+                        throw new DukeExceptions("ERROR! Deadline and Event tasks is missing the date which the event occur on/deadline");
                     } else {
-                        if (taskType == 'D') {
-                            taskToBeReturned = handlesDeadlineTasks(index, stringIntoParts[2], stringIntoParts[3]);
-                        } else {
-                            taskToBeReturned = handlesEventTasks(index, stringIntoParts[2], stringIntoParts[3]);
-                        }
+                            String timeAndDate = stringIntoParts[3];
+                            DateTimeFormatter oldFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+                            LocalDateTime dateTime = LocalDateTime.parse(timeAndDate, oldFormat);
+
+                            if (taskType == 'D') {
+                                taskToBeReturned = handlesDeadlineTasks(index, stringIntoParts[2],dateTime);
+                            } else {
+                                taskToBeReturned = handlesEventTasks(index, stringIntoParts[2],dateTime);
+                            }
                     }  
                 } else {
                 //Todo Task
@@ -97,7 +105,9 @@ public class Parser {
         } catch (DukeExceptions e) {
             System.out.println(e.getMessage());
         } catch (NumberFormatException nfe) {
-            System.out.println("What? Second input has to be an integer! Eg T | 1 | read book, D | 0 | return book | June 6th \n");
+            System.out.println("What? Second input has to be an integer! Eg T | 1 | read book, D | 0 | return book | 27/02/1998 1800 \n");
+        } catch (DateTimeParseException e) {
+            System.out.println("ERROR: Date and time is entered in the wrong format eg 27/02/1998 1800");
         }
 
         return taskToBeReturned;
