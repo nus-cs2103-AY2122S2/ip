@@ -196,49 +196,49 @@ public class Duke {
                 input = new Input(sc.nextLine());
 
                 switch (input.getStates()) {
-                    case ECHO:
-                        output(input.getInput());
+                case ECHO:
+                    output(input.getInput());
 
-                        break;
-                    case BYE:
-                        output(bye());
+                    break;
+                case BYE:
+                    output(bye());
 
-                        break;
-                    case ADD:
-                        add(input.getInput());
+                    break;
+                case ADD:
+                    add(input.getInput());
 
-                        break;
-                    case LIST:
-                        list();
+                    break;
+                case LIST:
+                    list();
 
-                        break;
-                    case TOGGLE:
-                        boolean isMark =
-                                input.getInput().split(" ")[0].equalsIgnoreCase("mark");
+                    break;
+                case TOGGLE:
+                    boolean isMark =
+                            input.getInput().split(" ")[0].equalsIgnoreCase("mark");
 
-                        if (input.getArgs().length() == 0) {
-                            output(INVALID_MARK_MSG);
-                            continue;
-                        } else if (isNumeric(input.getArgs())) {
-                            toggleCompleted(isMark, Integer.parseInt(input.getArgs()));
-                        } else {
-                            continue;
-                        }
+                    if (input.getArgs().length() == 0) {
+                        output(INVALID_MARK_MSG);
+                        continue;
+                    } else if (isNumeric(input.getArgs())) {
+                        toggleCompleted(isMark, Integer.parseInt(input.getArgs()));
+                    } else {
+                        continue;
+                    }
 
-                        break;
-                    case DELETE:
-                        if (input.getArgs().length() == 0) {
-                            output(INVALID_DELETE_MSG);
-                            continue;
-                        } else if (isNumeric(input.getArgs())) {
-                            delete(Integer.parseInt(input.getArgs()));
-                        } else {
-                            continue;
-                        }
+                    break;
+                case DELETE:
+                    if (input.getArgs().length() == 0) {
+                        output(INVALID_DELETE_MSG);
+                        continue;
+                    } else if (isNumeric(input.getArgs())) {
+                        delete(Integer.parseInt(input.getArgs()));
+                    } else {
+                        continue;
+                    }
 
-                        break;
-                    default:
-                        throw new DukeException(UNKNOWN_MSG);
+                    break;
+                default:
+                    throw new DukeException(UNKNOWN_MSG);
                 }
 
                 if (input.getStates() == Input.States.BYE) {
