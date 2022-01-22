@@ -1,11 +1,13 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.io.File;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Duke {
 
@@ -38,19 +40,13 @@ public class Duke {
                         tasks.add(new Todo(record[2]));
                         break;
                     case "D":
-                        String[] desc_by = record[2].split(" */by *", 2);
-                        String by = "";
-                        if (desc_by.length == 2) {
-                            by = desc_by[1];
-                        }
+                        String[] desc_by = record[2].split(" /by ", 2);
+                        DukeDateTime by = DukeDateTime.parse(desc_by[1]);
                         tasks.add(new Deadline(desc_by[0], by));
                         break;
                     case "E":
-                        String[] desc_at = record[2].split(" */at *", 2);
-                        String at = "";
-                        if (desc_at.length == 2) {
-                            at = desc_at[1];
-                        }
+                        String[] desc_at = record[2].split(" /at ", 2);
+                        DukeDateTime at = DukeDateTime.parse(desc_at[1]);
                         tasks.add(new Event(desc_at[0], at));
                         break;
                 }
@@ -64,7 +60,7 @@ public class Duke {
             String[] splited = input.split(" ", 2);
             String firstWord = splited[0];
             String remaining = "";
-            Boolean modifiedTasks = false;
+            boolean modifiedTasks = false;
             if (splited.length == 2) {
                 remaining = splited[1];
             }
@@ -81,7 +77,7 @@ public class Duke {
                         System.out.println((i + 1) + ". " + tasks.get(i));
                     }
                 }
-            } else if (input.matches("delete \\d*[1-9]+\\d*")) {
+            } else if (input.matches("delete [1-9]+\\d*")) {
                 int i = Integer.parseInt(remaining);
                 if (i <= tasks.size()) {
                     modifiedTasks = true;
@@ -90,7 +86,7 @@ public class Duke {
                 } else {
                     System.out.println("Index is invalid");
                 }
-            } else if (input.matches("(un)?mark \\d*[1-9]+\\d*")) {
+            } else if (input.matches("(un)?mark [1-9]+\\d*")) {
                 int i = Integer.parseInt(remaining);
                 if (firstWord.equals("unmark")) {
                     if (i <= tasks.size()) {
@@ -125,12 +121,17 @@ public class Duke {
                 if (remaining.equals("")) {
                     System.out.println("The description of a deadline cannot be empty");
                 } else {
-                    modifiedTasks = true;
-                    String[] desc_by = remaining.split(" */by *", 2);
-                    String by = "";
-                    if (desc_by.length == 2) {
-                        by = desc_by[1];
+                    String[] desc_by = remaining.split(" /by ", 2);
+                    if (desc_by.length < 2) {
+                        System.out.println("Must specify a deadline\n" + frame + "\n");
+                        continue;
                     }
+                    DukeDateTime by = DukeDateTime.parse(desc_by[1]);
+                    if (by == null) {
+                        System.out.println("Invalid input for date/time\n" + frame + "\n");
+                        continue;
+                    }
+                    modifiedTasks = true;
                     Task t = new Deadline(desc_by[0], by);
                     tasks.add(t);
                     System.out.println("Got it. I've added this task:\n" + t
@@ -141,12 +142,18 @@ public class Duke {
                     System.out.println("The description of an event cannot be empty");
                 } else {
                     modifiedTasks = true;
-                    String[] desc_at = remaining.split(" */at *", 2);
-                    String at = "";
-                    if (desc_at.length == 2) {
-                        at = desc_at[1];
+                    String[] desc_at = remaining.split(" /at ", 2);
+                    if (desc_at.length < 2) {
+                        System.out.println("Must specify the time of event\n" + frame + "\n");
+                        continue;
                     }
-                    Task t = new Event(desc_at[0], at);
+                    DukeDateTime at = DukeDateTime.parse(desc_at[1]);
+                    if (at == null) {
+                        System.out.println("Invalid input for date/time\n" + frame + "\n");
+                        continue;
+                    }
+                    modifiedTasks = true;
+                    Task t = new Deadline(desc_at[0], at);
                     tasks.add(t);
                     System.out.println("Got it. I've added this task:\n" + t
                             + "\nNow you have " + tasks.size() + " tasks in your list.");
@@ -166,24 +173,6 @@ public class Duke {
                 fw.close();
             }
         }
-    }
-
-    private void createDeadline(ArrayList<Task> tasks, String description) {
-        String[] desc_by = description.split(" */by *", 2);
-        String by = "";
-        if (desc_by.length == 2) {
-            by = desc_by[1];
-        }
-        tasks.add(new Deadline(desc_by[0], by));
-    }
-
-    private void createEvent(ArrayList<Task> tasks, String description) {
-        String[] desc_at = description.split(" */at *", 2);
-        String at = "";
-        if (desc_at.length == 2) {
-            at = desc_at[1];
-        }
-        tasks.add(new Deadline(desc_at[0], at));
     }
 
 }
