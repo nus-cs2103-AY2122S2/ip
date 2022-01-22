@@ -5,7 +5,7 @@ public class DeadlineTask extends Task {
     /**
      * The deadline of the task.
      */
-    protected String deadline;
+    private String deadline;
 
     /**
      * Constructs a new deadline task from the description
@@ -14,6 +14,11 @@ public class DeadlineTask extends Task {
      * @param description description of the task
      * @param deadline deadline of the task
      */
+    public DeadlineTask(String description, String deadline, boolean done) {
+        super(description, done);
+        this.deadline = deadline;
+    }
+
     public DeadlineTask(String description, String deadline) {
         super(description);
         this.deadline = deadline;

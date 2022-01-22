@@ -7,6 +7,9 @@ public class TodoTask extends Task {
      *
      * @param description description of the task
      */
+    public TodoTask(String description, boolean done) {
+        super(description, done);
+    }
     public TodoTask(String description) {
         super(description);
     }

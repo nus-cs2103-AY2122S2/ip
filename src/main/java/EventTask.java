@@ -2,7 +2,7 @@
  * A event task that has a deadline property.
  */
 public class EventTask extends Task {
-    protected String deadline;
+    private String deadline;
 
     /**
      * Constructs a new event task from the description
@@ -11,6 +11,11 @@ public class EventTask extends Task {
      * @param description description of the task
      * @param deadline deadline of the task
      */
+    public EventTask(String description, String deadline, boolean done) {
+        super(description, done);
+        this.deadline = deadline;
+    }
+
     public EventTask(String description, String deadline) {
         super(description);
         this.deadline = deadline;

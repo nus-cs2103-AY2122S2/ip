@@ -16,6 +16,11 @@ public class Task {
      *
      * @param description description of a task
      */
+    public Task(String description, boolean done) {
+        this.description = description;
+        this.done = done;
+    }
+
     public Task(String description) {
         this.description = description;
         this.done = false;
