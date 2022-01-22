@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Duke {
     // Array containing tasks
     private static final ArrayList<Task> tasks = new ArrayList<>();
+
     private enum Command {
         BYE,
         LIST,
@@ -167,32 +168,32 @@ public class Duke {
             System.out.print(divider);
             try {
                 switch (c) {
-                    case BYE:
-                        System.out.println("    Goodbye! Till the next time we meet!");
-                        break;
-                    case LIST:
-                        listTasks();
-                        break;
-                    case MARK:
-                        markTask(parsedReq);
-                        break;
-                    case UNMARK:
-                        unmarkTask(parsedReq);
-                        break;
-                    case TODO:
-                        createTodo(request, parsedReq);
-                        break;
-                    case DEADLINE:
-                        createDeadline(request, parsedReq);
-                        break;
-                    case EVENT:
-                        createEvent(request, parsedReq);
-                        break;
-                    case DELETE:
-                        deleteTask(parsedReq);
-                        break;
-                    case INVALID:
-                        throw new DukeException("My apologies, but it seems that I do not understand your request.");
+                case BYE:
+                    System.out.println("    Goodbye! Till the next time we meet!");
+                    break;
+                case LIST:
+                    listTasks();
+                    break;
+                case MARK:
+                    markTask(parsedReq);
+                    break;
+                case UNMARK:
+                    unmarkTask(parsedReq);
+                    break;
+                case TODO:
+                    createTodo(request, parsedReq);
+                    break;
+                case DEADLINE:
+                    createDeadline(request, parsedReq);
+                    break;
+                case EVENT:
+                    createEvent(request, parsedReq);
+                    break;
+                case DELETE:
+                    deleteTask(parsedReq);
+                    break;
+                case INVALID:
+                    throw new DukeException("My apologies, but it seems that I do not understand your request.");
                 }
             } catch (DukeException e) {
                 System.out.println("    " + e.getMessage());
