@@ -3,9 +3,9 @@ public class Task {
     private String task;
     private boolean completed;
 
-    public Task(String task) {
+    public Task(String task, boolean completed) {
         this.task = task;
-        this.completed = false;
+        this.completed = completed;
     }
 
     public void mark() {
@@ -14,6 +14,14 @@ public class Task {
 
     public void unmark() {
         this.completed = false;
+    }
+
+    public boolean isCompleted() {
+        return this.completed;
+    }
+
+    public String getTaskName() {
+        return this.task;
     }
 
     @Override

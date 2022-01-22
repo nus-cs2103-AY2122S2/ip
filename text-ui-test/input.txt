@@ -1,11 +1,11 @@
-list
 mark -1
 add task
 todo
 todo borrow book
-deadline /by Sunday
-deadline return book /by Sunday
-event project meeting /at Monday 2-4pm
+deadline /by 25/01/2022
+deadline impossible date /by -1/01/2022
+deadline return book /by 25/01/2022 6pm
+event project meeting /at 01/02/2022
 event festival /at
 mark 47
 deadline
