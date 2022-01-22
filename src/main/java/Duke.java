@@ -1,6 +1,12 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
+import java.io.FileWriter;
 
 public class Duke {
     private static final ArrayList<Task> tasks = new ArrayList<>();
@@ -20,11 +26,102 @@ public class Duke {
 
     private static final String divider = "\n______________________________________\n";
 
-    public static void addTask(Task task) {
+
+
+    public static void addTask(Task task) throws DukeException {
         System.out.println("Added as per your request: " + task);
         tasks.add(task);
+        writeToDukeFile();
         System.out.println("You now have a total of " + tasks.size() + " tasks in your list! Subarashii!");
     }
+
+
+    public static void writeToDukeFile() throws DukeException {
+        try{
+            FileWriter fw = new FileWriter("./data/duke.txt");
+            for (Task task: tasks) {
+                fw.write(task.toFileFormat() + "\n");
+            }
+            fw.close();
+        } catch (IOException exception){
+            throw new DukeException("Duke file cannot be found!! Make sure it exists in the data folder.");
+        }
+    }
+
+
+    public static void readFromDukeFile() throws DukeException, FileNotFoundException {
+        String path = "./data/";
+        boolean directoryExists = new File(path).exists();
+        boolean fileExists = new File(path + "/duke.txt").exists();
+        try {
+            if (!directoryExists) {
+                Files.createDirectories(Path.of(path));
+                File dukeFile = new File(path + "/duke.txt");
+                if (!dukeFile.createNewFile()) {
+                    throw new IOException("Unable to create file at specified path. It already exists");
+                }
+            } else {
+                if (!fileExists) {
+                    File dukeFile = new File(path + "/duke.txt");
+                    if (!dukeFile.createNewFile()) {
+                        throw new IOException("Unable to create file at specified path. It already exists");
+                    }
+                }
+            }
+        } catch (Exception e) {
+            throw new DukeException("Error with file/directory initialization!");
+        }
+
+
+
+        Scanner readFile = new Scanner(new File(path + "/duke.txt"));
+        while (readFile.hasNextLine()) {
+            Task taskToAdd;
+            String taskData = readFile.nextLine();
+            String[] taskArray = taskData.split(",");
+            String taskInput = taskArray[0].toUpperCase(Locale.ROOT);
+            switch (taskInput) {
+                case "E":
+                    if (taskArray.length == 4) {
+                        taskToAdd = new Event(taskArray[2], taskArray[3]);
+                        if (taskArray[1].equals("1")) {
+                            taskToAdd.markIsDone();
+                        }
+                        tasks.add(taskToAdd);
+                    } else {
+                        throw new DukeException("Unable to read file format!");
+                    }
+                    break;
+                case "T":
+                    if (taskArray.length == 3) {
+                        taskToAdd = new Todo(taskArray[2]);
+                        if (taskArray[1].equals("1")) {
+                            taskToAdd.markIsDone();
+                        }
+                        tasks.add(taskToAdd);
+                    } else {
+                        throw new DukeException("Unable to read file format!");
+                    }
+                    break;
+                case "D":
+                    if (taskArray.length == 4) {
+                        taskToAdd = new Deadline(taskArray[2], taskArray[3]);
+                        if (taskArray[1].equals("1")) {
+                            taskToAdd.markIsDone();
+                        }
+                        tasks.add(taskToAdd);
+                    } else {
+                        throw new DukeException("Unable to read file format!");
+                    }
+                    break;
+                default:
+                    System.out.println("No tasks in file!");
+            }
+        }
+        System.out.println("Here is the list of tasks we have saved!");
+        listTasks();
+    }
+
 
     public static void listTasks() {
         if (tasks.size() == 0) {
@@ -37,22 +134,27 @@ public class Duke {
         System.out.println(listOfTasks);
     }
 
-    public static void deleteTask(int taskId) {
+
+    public static void deleteTask(int taskId) throws DukeException {
         Task preview = tasks.get(taskId - 1);
         tasks.remove(taskId - 1);
+        writeToDukeFile();
         System.out.println("Otsukaresamadeshita! You have finally completed one task.\n" + preview);
     }
+
 
     public static void markTask(int taskId, boolean mark) throws DukeException {
         Task toSet = tasks.get(taskId - 1);
         if (mark) {
             toSet.markIsDone();
             tasks.set(taskId - 1, toSet);
+            writeToDukeFile();
             System.out.println("Sugoi! I have marked this task as done!\n" + tasks.get(taskId - 1).toString());
         } else {
             if (toSet.isDone) {
                 toSet.markUndone();
                 tasks.set(taskId - 1, toSet);
+                writeToDukeFile();
                 System.out.println("Daijoubu! I have unmarked this task for you!\n" + tasks.get(taskId - 1).toString());
             } else {
                 throw new DukeException("This task has yet to be done!");
@@ -85,7 +187,7 @@ public class Duke {
 
     }
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws DukeException, FileNotFoundException {
 
 
         String logo = " ____        _\n"
@@ -94,6 +196,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Konnichiwassup from\n" + logo);
+        readFromDukeFile();
         Scanner scanner = new Scanner(System.in);
 
 
@@ -103,7 +206,6 @@ public class Duke {
 
 
         while (!(inputArray[0].equalsIgnoreCase("bye") && inputArray.length == 1)) {
-
             // single command
             if (inputArray.length == 1) {
                 if (inputArray[0].equalsIgnoreCase("list")) {
