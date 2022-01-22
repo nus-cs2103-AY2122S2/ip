@@ -17,13 +17,9 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         p.print("Hello! I'm Duke," , "What can I do for you?");
 
-
-
         String userInput = in.nextLine();
         while(ip.run(userInput, p, arr) != -1)
             userInput = in.nextLine();
-
-        Storage.saveFile("./data","/duke.txt", arr);
 
     }
 
