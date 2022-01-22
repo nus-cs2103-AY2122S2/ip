@@ -12,12 +12,20 @@ public class Task {
         this.isDone = false;
     }
 
+    public String getTaskName() {
+        return this.taskName;
+    }
+
     public void mark() {
         this.isDone = true;
     }
 
     public void unmark() {
         this.isDone = false;
+    }
+
+    public String getDesc(){
+        return "";
     }
 
     @Override

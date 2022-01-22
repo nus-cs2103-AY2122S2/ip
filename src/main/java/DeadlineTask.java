@@ -7,6 +7,10 @@ public class DeadlineTask extends Task{
         this.by = by;
     }
 
+    public String getDesc() {
+        return this.by;
+    }
+
     @Override
     public String toString() {
         return String.format("[D][%s] %s (by:%s)", this.isDone?"X":" ", this.taskName, this.by);

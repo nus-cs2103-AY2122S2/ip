@@ -8,6 +8,7 @@ public class Duke {
         Scanner in = new Scanner(System.in);
         InputParser ip = new InputParser();
         ArrayList<Task> arr = new ArrayList<>();
+//        Storage.loadFile(System.getProperty("user.dir") + "\\data\\duke.txt", arr);
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -16,6 +17,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         p.print("Hello! I'm Duke," , "What can I do for you?");
+
 
         String userInput = in.nextLine();
         while(ip.run(userInput, p, arr) != -1)

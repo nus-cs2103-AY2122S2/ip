@@ -1,4 +1,5 @@
 import java.io.*;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -14,7 +15,10 @@ public class Storage {
             FileWriter writer = new FileWriter(filePath);
             StringBuilder sb = new StringBuilder();
             for(Task t : arr) {
-                sb.append(t.toString() + ";");
+                if(t.toString().charAt(1) == 'T')
+                    sb.append(String.format("%s|%s|%s|", t.toString().charAt(1), t.isDone?"T":"F", t.getTaskName()) + ";");
+                else
+                    sb.append(String.format("%s|%s|%s|%s", t.toString().charAt(1), t.isDone?"T":"F", t.getTaskName(), t.getDesc()) + ";");
             }
             sb.setLength((sb.length() - 1));
             writer.write(sb.toString());
