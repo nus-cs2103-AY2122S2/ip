@@ -4,14 +4,14 @@ import Commands.ToDoCommand;
 import Exceptions.DukeException;
 import Exceptions.EmptyDescriptionException;
 import Exceptions.InvalidMessageException;
+import util.Database;
 
 import java.io.*;
 import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) throws IOException, DukeException {
-
-        ArrayList<DukeBot.Task> arrayList = new ArrayList<>();
+        ArrayList<DukeBot.Task> arrayList = Database.load();
 
         System.out.println("Hello! I'm Duke \nWhat can I do for you?");
 
@@ -54,6 +54,7 @@ public class Duke {
 
                     DukeBot.Task task = arrayList.get(index);
                     task.toggleCompleted();
+                    Database.save(arrayList);
 
                     pr.print("Nice! I've marked this task as done:" + "\n");
                     pr.print(task.toString() + "\n");
@@ -63,6 +64,7 @@ public class Duke {
 
                     DukeBot.Task task = arrayList.get(index);
                     task.toggleUncompleted();
+                    Database.save(arrayList);
 
                     pr.print("OK, I've marked this task as not done yet:" + "\n");
                     pr.print(task.toString() + "\n");
@@ -70,22 +72,26 @@ public class Duke {
                 } else if (userInput.equals("todo")) {
                     DukeBot.ToDo toDo = ToDoCommand.preProcessing(input, parts);
                     arrayList.add(toDo);
+                    Database.save(arrayList);
                     pr.print(duke.successfulAdd(toDo, arrayList.size()));
                     pr.flush();
                 } else if (userInput.equals("deadline")) {
                     DukeBot.Deadline deadline = DeadlineCommand.preProcessing(input, parts);
                     arrayList.add(deadline);
+                    Database.save(arrayList);
                     pr.print(duke.successfulAdd(deadline, arrayList.size()));
                     pr.flush();
                 } else if (userInput.equals("event")) {
                     DukeBot.Event event = EventCommand.preProcessing(input, parts);
                     arrayList.add(event);
+                    Database.save(arrayList);
                     pr.print(duke.successfulAdd(event, arrayList.size()));
                     pr.flush();
                 } else if (userInput.equals("delete")) {
                     int index = Integer.parseInt(parts[1]);
 
                     DukeBot.Task task = arrayList.remove(index-1);
+                    Database.save(arrayList);
 
                     pr.print("Noted. I've removed this task:\n");
                     pr.print(task.toString());
