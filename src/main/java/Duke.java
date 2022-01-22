@@ -31,19 +31,11 @@ public class Duke {
                     }
                     // Deadline Task
                     else if (line[0].equals("D")) {
-                        try {
-                            task = new DeadlineTask(line[2], line[3], line[4]);
-                        } catch (IndexOutOfBoundsException e) {
-                            task = new DeadlineTask(line[2]);
-                        }
+                        task = new DeadlineTask(line[2], line[3], line[4]);
                     }
-                    // Event T ask
+                    // Event Task
                     else if (line[0].equals("E")) {
-                        try {
-                            task = new EventTask(line[2], line[3], line[4]);
-                        } catch (IndexOutOfBoundsException e) {
-                            task = new EventTask(line[2]);
-                        }
+                        task = new EventTask(line[2], line[3], line[4]);
                     } else {
                         throw new Exception("An invalid task type was read");
                     }
@@ -62,8 +54,6 @@ public class Duke {
         // Scanner for reading user input
         Scanner sc = new Scanner(System.in);
         String command = ""; //Where user input will be stored
-
-
 
         // Program will keep taking in new user input until terminated
         while (true) {
@@ -107,6 +97,7 @@ public class Duke {
                     }
                 }
                 String name = String.join(" ", nameArray);
+                //Error handling for no name
                 if (name.equals("")) {
                     System.out.println("Please add a description of your todo as it cannot be empty! *quack*");
                     continue;
@@ -117,6 +108,16 @@ public class Duke {
                     deadlineOrDateArray.add(st.nextToken());
                 }
                 String deadlineOrDate = String.join(" ", deadlineOrDateArray);
+                //Error handling for no preposition or date/time
+                if ((preposition.equals("") || deadlineOrDate.equals(""))) {
+                    if (command.equals("deadline")) {
+                        System.out.println("Please add a deadline for your task in the format 'deadline <name> /by <deadline>'! *quack*");
+                        continue;
+                    } else if (command.equals("event")) {
+                        System.out.println("Please add a date for your event in the format 'event <name> /on <date>'! *quack*");
+                        continue;
+                    }
+                }
                 //Creating the new task
                 Task newTask = new Task("placeholder task");
                 if (command.equals("todo")) newTask = new ToDoTask(name);
