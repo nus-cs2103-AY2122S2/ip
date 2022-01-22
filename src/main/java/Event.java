@@ -10,11 +10,11 @@ public class Event extends Task{
             String[] DateAndTime = strArr[1].split(" ");
             LocalDate date = LocalDate.parse(DateAndTime[0]);
             if (DateAndTime[1] != null) {
-                this.description = strArr[0] + "| " + "at: " + date.format(DateTimeFormatter.ofPattern("MMM d YYYY")) +
+                this.description = strArr[0] + "| " + "AT: " + date.format(DateTimeFormatter.ofPattern("MMM d YYYY")) +
                         " " + DateAndTime[1];
             }
             else{
-                this.description = strArr[0] + "| " + "at: " + date.format(DateTimeFormatter.ofPattern("MMM d YYYY"));
+                this.description = strArr[0] + "| " + "AT: " + date.format(DateTimeFormatter.ofPattern("MMM d YYYY"));
             }
         }
         catch (ArrayIndexOutOfBoundsException e){
