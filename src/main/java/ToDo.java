@@ -3,13 +3,13 @@
  *
  * @author Abdulelah Faisal S Al Ghrairy
  */
-public class Todo extends Task {
+public class ToDo extends Task {
 
     /**
      * Constructor for Todo class
      * @param d a string representing a description of the task
      */
-    public Todo(String d) {
+    public ToDo(String d) {
         super(d);
     }
 

@@ -1,15 +1,14 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
 /**
- * Program that represents a Personal Assistant Chatbot based on Project Duke.
+ * Represents a Personal Assistant Chatbot based on Project Duke.
  *
  * @author Abdulelah Faisal S Al Ghrairy
  */
 public class Duke {
     /**
-     * contains a list of tasks stored for the user
+     * Contains a list of tasks stored for the user
      */
     private static List<Task> tasks;
     /**
@@ -45,6 +44,7 @@ public class Duke {
 
     private static String processMessage(String message) throws DukeException {
         String currMessage;
+        String[] messageArr;
         Task currTask;
         int index;
 
@@ -88,18 +88,21 @@ public class Duke {
             message = confirmAction(tasks.remove(index), ConfirmCodes.DELETION);
             break;
         case "todo":
-            currTask = new Todo(retrieveMessageTodo(message));
+            messageArr = getMessageContents(message, TaskTypes.TODO);
+            currTask = new ToDo(messageArr[1]);
 
             tasks.add(currTask);
             message = confirmAction(currTask, ConfirmCodes.ADDITION);
             break;
         case "deadline":
-            currTask = new Deadline(retrieveMessage(message), retrieveDateAndTime(message));
+            messageArr = getMessageContents(message, TaskTypes.DEADLINE);
+            currTask = new Deadline(messageArr[0], messageArr[1]);
             tasks.add(currTask);
             message = confirmAction(currTask, ConfirmCodes.ADDITION);
             break;
         case "event":
-            currTask = new Event(retrieveMessage(message), retrieveDateAndTime(message));
+            messageArr = getMessageContents(message, TaskTypes.EVENT);
+            currTask = new Event(messageArr[0], messageArr[1]);
             tasks.add(currTask);
             message = confirmAction(currTask, ConfirmCodes.ADDITION);
             break;
@@ -107,6 +110,52 @@ public class Duke {
             throw new DukeException("Pardon me, but I did not understand what you said.");
         }
         return DIVIDER + message + DIVIDER;
+    }
+
+    /**
+     * Transforms the message input into a String array separated by " ", then modifies the array to order the contents
+     * of the array based on the TaskType object for the processMessage() method to process and returns it
+     * @param message the message from the User
+     * @param type The type of the task
+     * @return String array containing ordered based on contents of the task in String format
+     */
+    private static String[] getMessageContents(String message, TaskTypes type) throws DukeException {
+        String[] messageArr;
+        switch (type) {
+        case TODO:
+            messageArr = message.split(" ", 2);
+            if (messageArr.length <= 1) {
+                throw new DukeException("Pardon me, but the description of a todo cannot be empty.");
+            } else {
+                return messageArr;
+            }
+        case DEADLINE: //both cases have similar outcomes
+        case EVENT:
+            int indexOfSpace = message.indexOf(" ");
+            int indexOfSlash = message.indexOf("/");
+
+            if (indexOfSpace == -1) {
+                throw new DukeException("Pardon me, but the description of a deadline/event cannot be empty.");
+            } else if (indexOfSlash == -1) {
+                throw new DukeException("Pardon me, but the format is incorrect. The format should be:\n\t" +
+                        "[Task] [Description] /[by\\at] [date\\time]");
+            }
+
+            String messageWithoutCommand = message.substring(message.indexOf(" ") + 1);
+
+            messageArr = messageWithoutCommand.split("/");
+
+            if (messageArr[1].length() < 4) {
+                throw new DukeException("Pardon me, but the date/time cannot be empty.");
+            }
+
+            messageArr[0] = messageArr[0].substring(0, messageArr[0].length() - 1); //remove last " "
+            messageArr[1] = messageArr[1].substring(3);
+
+            return messageArr;
+        default:
+            throw new DukeException("INTERNAL ERROR: Invalid Type Declaration");
+        }
     }
 
     private static int getIndexFromMessage(String message) throws DukeException {
@@ -129,35 +178,6 @@ public class Duke {
             throw new DukeException("Pardon me, but the provided index does not exist in your list.");
         }
         return indexOfItem;
-    }
-
-    private static String retrieveMessageTodo(String message) throws DukeException {
-        int index = message.indexOf(" ");
-
-        if (index == -1) {
-            throw new DukeException("Pardon me, but the description of a todo cannot be empty.");
-        }
-        return message.substring(message.indexOf(" ") + 1);
-    }
-
-    private static String retrieveMessage(String message) throws DukeException {
-        int indexOfSpace = message.indexOf(" ");
-        int indexOfSlash = message.indexOf("/");
-
-        if (indexOfSpace == -1) {
-            throw new DukeException("Pardon me, but the description of a deadline/event cannot be empty.");
-        } else if (indexOfSlash == -1) {
-            throw new DukeException("Pardon me, but the format is incorrect. The format should be:\n\t" +
-                    "[Task] [Description] /[by\\at] [date\\time]");
-        }
-        return message.substring(message.indexOf(" ") + 1, message.indexOf("/") - 1);
-    }
-
-    private static String retrieveDateAndTime(String message) throws DukeException {
-        if (message.substring(message.indexOf("/")).length() < 4) {
-            throw new DukeException("Pardon me, but the date/time cannot be empty.");
-        }
-        return message.substring(message.indexOf("/") + 4);
     }
 
     private static String confirmAction(Task task, ConfirmCodes code) {
