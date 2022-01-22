@@ -67,7 +67,7 @@ public class Storage {
 
             return taskList;
         } catch (FileNotFoundException e) {
-            throw new MnskyException("[MNSKY is having trouble remembering the previous task list...]");
+            throw new MnskyException("[MNSKY is having trouble remembering the previous task list...]\n");
         }
     }
 }

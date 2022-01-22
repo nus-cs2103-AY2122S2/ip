@@ -8,62 +8,24 @@ import java.util.Arrays;
 
 public class Mnsky {
     private ArrayList<Task> list;
-    private Scanner con;
+    private Ui ui;
     private Storage storage;
 
     /**
      * Constructor for the Mnsky object.
      */
     public Mnsky() {
-         this.con = new Scanner(System.in);
+         this.ui = new Ui();
          this.storage = new Storage("data/MnskyData.txt");
 
          try {
              this.list = this.parseStorageData(this.storage.readFromDataFile());
          } catch (MnskyException e) {
-             System.out.println(e.getMessage());
+             ui.printException(e);
              this.list = new ArrayList<>();
          }
-    }
 
-    /**
-     * Prints the passed message with "MNSKY: " before it.
-     * @param msg The message that should be printed after "MNSKY: "
-     */
-    private void printMnsky(String msg) {
-        System.out.print("MNSKY: ");
-        System.out.println(msg);
-    }
-
-    /**
-     * Prints the greeting message for the chatbot.
-     */
-    public void greeting() {
-        this.printMnsky("Hi, I'm");
-        this.printMnsky("MM      MM  NN      NN   SSSSSSS   KK     KK  YY      YY");
-        this.printMnsky("MMMM  MMMM  NNNN    NN  SSSS       KK   KK      YY  YY");
-        this.printMnsky("MM  MM  MM  NN  NN  NN    SSSSS    KKKKK          YY");
-        this.printMnsky("MM      MM  NN    NNNN       SSSS  KK   KK        YY");
-        this.printMnsky("MM      MM  NN      NN  SSSSSSS    KK     KK      YY");
-        this.printMnsky("I can help!");
-    }
-
-    /**
-     * Retrieves user input from stdin.
-     * @return The user's input
-     */
-    private String getInput() {
-        System.out.println();
-        System.out.print("> ");
-        return this.con.nextLine();
-    }
-
-    /**
-     * Prints out the bye messages.
-     */
-    private void bye() {
-        this.printMnsky("I can help!");
-        System.out.println("[MNSKY has shut itself down]");
+         this.ui.greeting();
     }
 
     /**
@@ -112,7 +74,7 @@ public class Mnsky {
     private void mark(String[] inputSplit) {
         int index = this.retrieveIndex("mark", inputSplit);
         this.list.get(index).mark();
-        System.out.println(this.list.get(index));
+        this.ui.printTask(this.list.get(index));
     }
 
     /**
@@ -123,7 +85,7 @@ public class Mnsky {
     private void unmark(String[] inputSplit) throws MnskyException {
         int index = this.retrieveIndex("mark", inputSplit);
         this.list.get(index).unmark();
-        System.out.println(this.list.get(index));
+        this.ui.printTask(this.list.get(index));
     }
 
     /**
@@ -132,7 +94,7 @@ public class Mnsky {
      */
     private void addTask(Task task) {
         this.list.add(task);
-        System.out.printf("[MNSKY added task %s to their list]\n", task.getName());
+        this.ui.printAddedTask(task);
     }
 
     /**
@@ -238,7 +200,7 @@ public class Mnsky {
      */
     private void delete(String[] inputSplit) throws MnskyException {
         int index = this.retrieveIndex("delete", inputSplit);
-        System.out.printf("[MNSKY has deleted the task %s from the list.]\n", this.list.get(index).getName());
+        this.ui.printDeletedTask(this.list.get(index));
         this.list.remove(index);
     }
 
@@ -285,7 +247,7 @@ public class Mnsky {
 
             return taskList;
         } catch (MnskyException e) {
-            throw new MnskyException("[MNSKY is having trouble remembering the previous task list...]");
+            throw new MnskyException("[MNSKY is having trouble remembering the previous task list...]\n");
         }
     }
 
@@ -308,13 +270,13 @@ public class Mnsky {
      *          False otherwise.
      */
     public boolean parseInput() {
-        String input = this.getInput();
+        String input = this.ui.getInput();
         String[] inputSplit = input.split(" ");
 
         try {
             switch (inputSplit[0]) {
                 case "bye":
-                    this.bye();
+                    this.ui.bye();
                     return false;
 
                 case "list":
@@ -352,20 +314,18 @@ public class Mnsky {
                     break;
 
                 default:
-                    this.printMnsky("...");
+                    this.ui.printMnsky("...");
             }
-        } catch (MnskyException m) {
-            this.printMnsky("..?");
-            System.out.println(m.getMessage());
+        } catch (MnskyException e) {
+            this.ui.printException(e);
         }
 
-        this.printMnsky("I can help!");
+        this.ui.printMnsky("I can help!");
         return true;
     }
 
     public static void main(String[] args) {
         Mnsky mnsky = new Mnsky();
-        mnsky.greeting();
 
         while (mnsky.parseInput()) {}
     }
