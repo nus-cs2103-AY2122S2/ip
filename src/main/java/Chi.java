@@ -3,11 +3,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Chi {
     /** Stores the messages sent by the user. */
     private List<Task> messages;
-    private static final String DATA_FILE = "/data/tasks.txt";
+    private static final String DATA_FOLDER = "../../data/";
+    private static final String DATA_FILE = "../../data/tasks.txt";
 
     public Chi() {
         this.messages = new ArrayList<>();
@@ -17,18 +19,66 @@ public class Chi {
 
     private void getDataFile() {
         File dataFile = new File(DATA_FILE);
+        File dataFolder = new File(DATA_FOLDER);
         try {
-            if (!dataFile.exists()) {
-                throw new FileNotFoundException();
+            if (!dataFolder.exists()) {
+                throw new FileNotFoundException("no folder");
+            } else if (!dataFile.exists()) {
+                throw new FileNotFoundException("no file");
             }
         } catch (FileNotFoundException e) {
             try {
-                System.out.println("Let's start tasking nyan!");
-                dataFile.createNewFile();
+                if (e.getMessage().equals("no folder")) {
+                    boolean f1 = dataFolder.mkdir();
+                }
+                boolean f2 = dataFile.createNewFile();
             } catch (IOException e1) {
                 System.out.println("Oops something went wrong nyan!");
             }
         }
+    }
+
+    private void getTasksFromFile() throws FileNotFoundException {
+        try {
+            File dataFile = new File(DATA_FILE);
+            Scanner s = new Scanner(dataFile);
+            while (s.hasNext()) {
+                String task = s.nextLine();
+                if (task.charAt(0) == 'T') {
+                    if (task.charAt(1) == 'X') {
+                        
+                    } else {
+
+                    }
+                } else if (task.charAt(0) == 'D') {
+                    if (task.charAt(1) == 'X') {
+
+                    } else {
+
+                    }
+                } else {
+                    if (task.charAt(1) == 'X') {
+
+                    } else {
+
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            File dataFolder = new File(DATA_FOLDER);
+            try {
+                if (!dataFolder.isDirectory()) {
+                    boolean f1 = dataFolder.mkdir();
+                }
+                boolean f1 = dataFolder.mkdir();
+                File newDataFile = new File(DATA_FILE);
+                boolean f2 = newDataFile.createNewFile();
+                getTasksFromFile();
+            } catch (IOException e1) {
+                System.out.println("oopsies something went wrong!");
+            }
+        }
+
     }
     /**
      * Displays a message based on the user input.
