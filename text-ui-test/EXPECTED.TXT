@@ -18,9 +18,21 @@ MNSKY: I can help!
 > [MNSKY added event the purge to their list]
 MNSKY: I can help!
 
+> [MNSKY added task lol to their list]
+MNSKY: I can help!
+
+> [MNSKY added deadline submit project to their list]
+MNSKY: I can help!
+
+> [MNSKY added event prayer to their list]
+MNSKY: I can help!
+
 > 1. [T][ ] remove abornacee mavee
 2. [D][ ] finish coding problem four (by: idk when im free lol)
 3. [E][ ] the purge (at: november 31 2022 4:33 pm)
+4. [T][ ] lol
+5. [D][ ] submit project (by: May 13 2022, 8:00 am)
+6. [E][ ] prayer (at: 11:10 pm)
 MNSKY: I can help!
 
 > [D][X] finish coding problem four (by: idk when im free lol)
@@ -32,9 +44,14 @@ MNSKY: I can help!
 > [E][ ] the purge (at: november 31 2022 4:33 pm)
 MNSKY: I can help!
 
+> [MNSKY has deleted the task [T][ ] lol from the list.]
+MNSKY: I can help!
+
 > 1. [T][ ] remove abornacee mavee
 2. [D][X] finish coding problem four (by: idk when im free lol)
 3. [E][ ] the purge (at: november 31 2022 4:33 pm)
+4. [D][ ] submit project (by: May 13 2022, 8:00 am)
+5. [E][ ] prayer (at: 11:10 pm)
 MNSKY: I can help!
 
 > MNSKY: I can help!
