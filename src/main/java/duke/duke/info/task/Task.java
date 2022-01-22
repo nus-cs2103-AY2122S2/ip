@@ -20,6 +20,10 @@ public abstract class Task {
         this.isComplete = false;
     }
 
+    public String saveFormat() {
+        return String.format("%s|%s|%s", this.type, this.isComplete ? "1" : "0", this.action);
+    }
+
     @Override
     public String toString() {
         String product = "";

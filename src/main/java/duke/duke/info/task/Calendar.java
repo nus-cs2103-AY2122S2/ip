@@ -40,6 +40,16 @@ public class Calendar {
         return this.calendar.get(index - 1).toString();
     }
 
+    public String saveFormat() {
+        String product = "";
+        for (int i = 0; i < this.calendar.size() - 1; i++) {
+            product += this.calendar.get(i).saveFormat();
+            product += "\n";
+        }
+        product += this.calendar.get(this.calendar.size() - 1).saveFormat();
+        return product;
+    }
+
     @Override
     public String toString() {
         if (calendar.size() == 0) {
