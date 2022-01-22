@@ -5,21 +5,21 @@ import duke.tasks.*;
 import duke.Pikachu;
 
 public class Storage {
+    private String filePath;
     public Pikachu pikachu;
 
     //Constructor
-    public Storage(Pikachu pikachu) {
+    public Storage(String filePath, Pikachu pikachu) {
+        this.filePath = filePath;
         this.pikachu = pikachu;
     }
 
     public void readTaskList() throws IOException {
-        String fileName = "./src/main/java/duke/tasklist/Tasklist.txt";
-
         //Create file
-        File tasklist = new File(fileName);
+        File tasklist = new File(filePath);
         tasklist.createNewFile(); //if file already exists, will do nothing
 
-        FileReader fw = new FileReader(fileName);
+        FileReader fw = new FileReader(filePath);
         BufferedReader br = new BufferedReader(fw);
 
         //Reading of lines
@@ -47,7 +47,7 @@ public class Storage {
     }
 
     public void writeTaskList() throws IOException {
-        FileWriter fw = new FileWriter("./src/main/java/duke/tasklist/Tasklist.txt", false);
+        FileWriter fw = new FileWriter(filePath, false);
 
         //Writing of tasks into tasklist
         for (Task t : this.pikachu.inputList) {

@@ -55,7 +55,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String currInput = null;
         Pikachu pikachu = new Pikachu();
-        Storage storage = new Storage(pikachu);
+        Storage storage = new Storage("Tasklist.txt", pikachu);
         storage.readTaskList();
 
         //Start accepting commands
