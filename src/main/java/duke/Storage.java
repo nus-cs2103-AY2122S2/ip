@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -32,8 +34,8 @@ public class Storage {
     public static void load(){
         try {
             String currDir = System.getProperty("user.dir");
-            java.nio.file.Path pathDir = java.nio.file.Paths.get(currDir, "data", "Duke");
-            Path pathToFile = java.nio.file.Paths.get(currDir, "data", "Duke", "tasks.txt");
+            java.nio.file.Path pathDir = java.nio.file.Paths.get(currDir, "data", "duke.Duke");
+            Path pathToFile = java.nio.file.Paths.get(currDir, "data", "duke.Duke", "tasks.txt");
             boolean directoryExists = java.nio.file.Files.exists(pathToFile);
             if (!directoryExists) {
                 System.out.println("Unable to find existing data. Creating new file(s)...");

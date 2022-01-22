@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -5,7 +7,7 @@ import java.time.format.DateTimeParseException;
 
 
 /**
- * Class task that Duke creates
+ * Class task that duke.Duke creates
  */
 public class Task {
 
@@ -22,7 +24,7 @@ public class Task {
      * @param name Descriptor of task
      * @param number Number associated with task
      * @param time time associated with task
-     * @param type type of task. 'E' for Event, 'T' for Todo and 'D' for Deadline
+     * @param type type of task. 'E' for duke.Event, 'T' for Todo and 'D' for duke.Deadline
      */
     public Task(String name, int number, String time, String type, boolean isReading){
         try {

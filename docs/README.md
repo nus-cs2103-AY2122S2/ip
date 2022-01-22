@@ -4,23 +4,23 @@ ________________________________________________________________________________
 
 ### Feature-Add
 
-Duke is able to add 3 types of tasks: ToDo, Event and Deadline.
+duke.Duke is able to add 3 types of tasks: duke.ToDo, duke.Event and duke.Deadline.
 
 ### Feature-Mark/Unmark
 
-Duke is able to mark and unmark tasks.
+duke.Duke is able to mark and unmark tasks.
 
 ### Feature-list
 
-Duke is able to list out all currently tracked tasks.
+duke.Duke is able to list out all currently tracked tasks.
 
 ### Feature-Bye
 
-Duke is able to exit.
+duke.Duke is able to exit.
 ________________________________________________________________________________________________________________________
 ##Keywords
 
-### `ToDo` - Adds tasks of type: todo
+### `duke.ToDo` - Adds tasks of type: todo
 
 Adds one task of type 'todo' with following input as task name.
 
@@ -34,7 +34,7 @@ Expected outcome:
        [T][ ] borrow book
      Now you have 5 tasks in the list.
 
-### `Deadline` - Adds tasks of type: deadline
+### `duke.Deadline` - Adds tasks of type: deadline
 
 Adds one task of type 'deadline' with following input as task name and input after /by as deadline.
 
@@ -48,7 +48,7 @@ Expected outcome:
        [D][ ] return book (by: Sunday)
      Now you have 6 tasks in the list.
 
-### `Event` - Adds tasks of type: event
+### `duke.Event` - Adds tasks of type: event
 
 Adds one task of type 'event' with following input as task name and input after /at as deadline.
 
