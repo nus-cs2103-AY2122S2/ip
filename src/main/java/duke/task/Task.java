@@ -1,4 +1,4 @@
-import java.time.LocalDate;
+package duke.task;
 
 public class Task {
     protected String taskName;
@@ -29,6 +29,10 @@ public class Task {
 
     public void unmark() {
         this.isDone = false;
+    }
+
+    public boolean isDone() {
+        return this.isDone;
     }
 
     @Override

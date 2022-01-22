@@ -1,7 +1,10 @@
+package duke.ui;
+
 import java.util.Arrays;
 import java.util.ArrayList;
+import duke.task.Task;
 
-class Ui {
+public class Ui {
     public void print(String ... args) {
         System.out.println(String.format("    %s", "=========================================="));
         Arrays.asList(args).forEach((x) -> { System.out.println(String.format("    %s", x.toString())); } );

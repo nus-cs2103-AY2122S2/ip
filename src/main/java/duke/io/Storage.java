@@ -1,3 +1,5 @@
+package duke.io;
+
 import java.io.*;
 import java.lang.reflect.Array;
 import java.nio.file.Files;
@@ -7,6 +9,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import duke.task.*;
 
 public class Storage {
     public static int saveFile(String folderName, String fileName, ArrayList<Task> arr) {
@@ -22,11 +25,11 @@ public class Storage {
             StringBuilder sb = new StringBuilder();
             for(Task t : arr) {
                 if(t.toString().charAt(1) == 'T')
-                    sb.append(String.format("%s,%s,%s,", t.toString().charAt(1), t.isDone?"T":"F", t.getTaskName()) + ";");
+                    sb.append(String.format("%s,%s,%s,", t.toString().charAt(1), t.isDone()?"T":"F", t.getTaskName()) + ";");
                 else if(t.toString().charAt(1) == 'D')
-                    sb.append(String.format("%s,%s,%s,%s", t.toString().charAt(1), t.isDone?"T":"F", t.getTaskName(), ((DeadlineTask)t).getDueDate().format(formatter)) + ";");
+                    sb.append(String.format("%s,%s,%s,%s", t.toString().charAt(1), t.isDone()?"T":"F", t.getTaskName(), ((DeadlineTask)t).getDueDate().format(formatter)) + ";");
                 else if(t.toString().charAt(1) == 'E')
-                    sb.append(String.format("%s,%s,%s,%s", t.toString().charAt(1), t.isDone?"T":"F", t.getTaskName(), ((EventTask)t).getDate().format(formatter)) + ";");
+                    sb.append(String.format("%s,%s,%s,%s", t.toString().charAt(1), t.isDone()?"T":"F", t.getTaskName(), ((EventTask)t).getDate().format(formatter)) + ";");
 
             }
             sb.setLength((sb.length() - 1));
