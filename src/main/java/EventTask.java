@@ -18,6 +18,16 @@ public class EventTask extends Task {
     }
 
     /**
+     * String representation of EventTask for saving.
+     *
+     * @return String representation of EventTask for saving.
+     */
+    @Override
+    public String saveFormat() {
+        return "E | " + super.saveFormat() + " | " + at;
+    }
+
+    /**
      * String representation of EventTask.
      *
      * @return String representation of EventTask.

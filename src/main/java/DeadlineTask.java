@@ -18,6 +18,16 @@ public class DeadlineTask extends Task {
     }
 
     /**
+     * String representation of DeadlineTask for saving.
+     *
+     * @return String representation of DeadlineTask for saving.
+     */
+    @Override
+    public String saveFormat() {
+        return "D | " + super.saveFormat() + " | " + by;
+    }
+
+    /**
      * String representation of DeadlineTask.
      *
      * @return String representation of DeadlineTask.
