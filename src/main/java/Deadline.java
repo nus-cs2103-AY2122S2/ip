@@ -1,21 +1,27 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends Task {
 
     protected String icon = "D";
-    protected String by;
+    protected DukeDateTime by;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, DukeDateTime by) {
         super(description);
         this.by = by;
     }
 
-    public Deadline(String description, Boolean isDone, String by) {
+    public Deadline(String description, Boolean isDone, DukeDateTime by) {
         super(description, isDone);
         this.by = by;
     }
 
     @Override
     public String toString() {
-        return "[" + icon + "]" + super.toString() + " (by: " + by + ")";
+        return "[" + icon + "]" + super.toString() + " (by: " + by.format("d MMM yyyy") + ")";
     }
 
     @Override
@@ -25,7 +31,7 @@ public class Deadline extends Task {
 
     @Override
     public String getDescription() {
-        return description + " /by " + by;
+        return description + " /by " + by.format("yyyy-M-d");
     }
 
     @Override
