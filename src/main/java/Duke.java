@@ -1,4 +1,3 @@
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
@@ -14,7 +13,7 @@ public class Duke {
 
         System.out.println("Welcome to Duke! \nWhat can i do for you?\n");
 
-        TaskList list = new TaskList();
+        TaskList list = DataStore.loadData();
         Scanner sc = new Scanner(System.in);
 
         String command = "";
@@ -52,7 +51,7 @@ public class Duke {
                     break;
                 case EVENT:
                     try {
-                        addSuccess = list.add(TaskType.EVENTS, parseInput(input));
+                        addSuccess = list.add(TaskType.EVENT, parseInput(input));
                     } catch (EmptyDescriptionException e) {
                         System.out.println("Description of task can't be empty");
                         addSuccess = false;
@@ -102,6 +101,8 @@ public class Duke {
                     list.delete(indexOfList);
                     System.out.println("Now you have " + Integer.toString(list.getLength()) + " tasks in the list.");
             }
+
+            DataStore.saveData(list);
 
             actionType = null;
             while (actionType == null) {
