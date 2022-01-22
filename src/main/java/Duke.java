@@ -11,8 +11,7 @@ import java.io.OutputStreamWriter;
  * @author AdrianOngJJ
  */
 public class Duke {
-    private static final String LINE_BREAK = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-
+    private static final String LINE_BREAK = "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
     /**
      * Prints line break
      * @return void
@@ -32,22 +31,24 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         printLineBreak();
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-        printLineBreak();
         String inputCommand = "";
         boolean ifBye = false;
         do {
+            printLineBreak();
+            System.out.println();
             inputCommand = br.readLine();
+            printLineBreak();
             switch (inputCommand) {
                 case "bye":
                     ifBye = true;
-                    bw.write("Bye. Hope to see you again soon!");
-                    bw.close();
+                    System.out.println("Bye. Hope to see you again soon!");
                     break;
 
                 default:
                     System.out.println(inputCommand);
             }
         } while (!ifBye);
+        printLineBreak();
 
     }
 }
