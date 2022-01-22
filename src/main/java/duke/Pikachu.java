@@ -1,9 +1,10 @@
+package duke;
 import java.io.*;
 import java.util.*;
-import tasks.*;
+import duke.tasks.*;
 
 public class Pikachu {
-    ArrayList<Task> inputList;
+    public ArrayList<Task> inputList;
 
     //Constructor
     public Pikachu() {

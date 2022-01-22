@@ -1,57 +1,10 @@
+package duke;
 import java.io.*;
 import java.util.*;
-import tasks.*;
-//import duke.Pikachu;
+import duke.tasks.*;
+import duke.tasklist.*;
 
 public class Duke {
-
-    public static void readTaskList(Pikachu pikachu) throws IOException {
-        String dirName = "./src/main/java/tasklist";
-        String fileName = "./src/main/java/tasklist/Tasklist.txt";
-
-        //Create directory & file
-        File directory = new File(dirName);
-        if (!directory.exists()) directory.mkdir();
-        File tasklist = new File(fileName);
-        tasklist.createNewFile(); //if file already exists, will do nothing
-
-        FileReader fw = new FileReader(fileName);
-        BufferedReader br = new BufferedReader(fw);
-
-        //Reading of lines
-        String currLine = null;
-        while ((currLine = br.readLine()) != null) {
-            //System.out.println("For debugging. Am I running too many times?");
-            String[] split = currLine.split(",");
-            if (split[0].equals("T")) {
-                ToDo t = new ToDo(split[2]);
-                pikachu.inputList.add(t);
-                if (split[1].equals("1")) t.mark(); 
-            } else if (split[0].equals("D")) {
-                Deadline d = new Deadline(split[2], split[3]);
-                pikachu.inputList.add(d);
-                if (split[1].equals("1")) d.mark(); 
-            } else if (split[0].equals("E")) {
-                Event e = new Event(split[2], split[3]);
-                pikachu.inputList.add(e);
-                if (split[1].equals("1")) e.mark(); 
-            }
-        }
-
-        fw.close();
-        br.close();
-    }
-
-    public static void writeTaskList(Pikachu pikachu) throws IOException {
-        FileWriter fw = new FileWriter("./src/main/java/tasklist/Tasklist.txt", false);
-
-        //Writing of tasks into tasklist
-        for (Task t : pikachu.inputList) {
-            fw.write(t.info + "\n");
-        }
-
-        fw.close();
-    }
 
     public static void main(String[] args) throws IOException {
         
@@ -100,9 +53,10 @@ public class Duke {
         System.out.printf("             _'....----\"\"\"\"\" \n");
 
         Scanner sc = new Scanner(System.in);
-        String currInput = "";
+        String currInput = null;
         Pikachu pikachu = new Pikachu();
-        readTaskList(pikachu);
+        Storage storage = new Storage(pikachu);
+        storage.readTaskList();
 
         //Start accepting commands
         while (true) {
@@ -115,7 +69,7 @@ public class Duke {
             System.out.println("________________________________________________________________");
         }
 
-        writeTaskList(pikachu);
+        storage.writeTaskList();
         System.out.println("Pika pika! \nPikachu says bye!");
         sc.close();
     }
