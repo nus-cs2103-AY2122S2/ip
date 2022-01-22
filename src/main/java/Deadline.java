@@ -3,8 +3,13 @@ public class Deadline extends Task {
     private String by;
 
     public Deadline(String description, String by) {
-        super(description);
+        super(description, "D");
         this.by = by;
+    }
+
+    @Override
+    public String getTime() {
+        return this.by;
     }
 
     @Override

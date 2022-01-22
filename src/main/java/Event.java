@@ -2,8 +2,13 @@ public class Event extends Task {
     private String time;
 
     public Event(String description, String time) {
-        super(description);
+        super(description, "E");
         this.time = time;
+    }
+
+    @Override
+    public String getTime() {
+        return this.time;
     }
 
     @Override

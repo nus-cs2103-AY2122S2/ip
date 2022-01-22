@@ -1,5 +1,7 @@
 import Exceptions.*;
 
+import java.io.*;
+import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -8,8 +10,77 @@ public class Duke {
 
     private ArrayList<Task> arr;
 
-    public Duke(){
+    public Duke() {
         this.arr = new ArrayList<Task>();
+    }
+
+    private void loadFileContents() throws IOException {
+        String dirPath = "./src/main/data";
+        String filePath = "./src/main/data/duke.txt";
+
+        if (!new File(dirPath).exists()) {
+            Files.createDirectory(Path.of(dirPath));
+        }
+
+        if (!new File(filePath).exists()) {
+            File newFile = new File(filePath);
+            newFile.createNewFile();
+        }
+
+
+        try {
+            java.nio.file.Path path = java.nio.file.Paths.get("src/main/data/duke.txt");
+            BufferedReader reader = java.nio.file.Files.newBufferedReader(path);
+            String line;
+            while((line = reader.readLine()) != null) {
+                String[] temp = line.split("#");
+                String command = temp[0];
+                boolean isMarked = temp[1].equals("X");
+                String desc = temp[2];
+                Task t;
+                if (command.equals("T")) {
+                    t = new ToDo(desc);
+                } else if (command.equals("D")) {
+                    String by = temp[3];
+                    t = new Deadline(desc, by);
+                } else {
+                    String time = temp[3];
+                    t = new Event(desc, time);
+                }
+                addTask(t);
+                if (isMarked) {
+                    t.markDone();
+                } else {
+                    t.markUndone();
+                }
+            }
+        } catch (NoSuchFileException e) {
+            System.out.println("File not found");
+        }
+    }
+
+    private void saveToFile() {
+        try {
+            java.nio.file.Path path = java.nio.file.Paths.get("src/main/data/duke.txt");
+            BufferedWriter writer = java.nio.file.Files.newBufferedWriter(path);
+            for (Task t : this.arr) {
+                String toSave;
+                String separator = "#";
+                String command = t.getType();
+                String mark = t.getStatusIcon();
+                String desc = t.getDescription();
+                String time = t.getTime();
+                if (command.equals("D") | command.equals("E")) {
+                    toSave = String.join(separator, command, mark, desc, time);
+                } else {
+                    toSave = String.join(separator, command, mark, desc);
+                }
+                writer.write(toSave + System.lineSeparator());
+            }
+                writer.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private String numOfTasks() {
@@ -78,7 +149,7 @@ public class Duke {
         System.out.println(ans);
     }
 
-    private void onDelete(String ans, String input) throws DukeException {
+    private void onDelete(String ans, String input) throws DukeException, IOException {
         String[] strArr = input.split(" ");
         int index = Integer.valueOf(strArr[1]) - 1;
         if (index >= 0 && index < arr.size()) {
@@ -89,10 +160,11 @@ public class Duke {
         } else {
             throw new InvalidIndexException();
         }
+        saveToFile();
         System.out.println(ans);
     }
 
-    private void onToggleMark(String ans, String input) throws DukeException {
+    private void onToggleMark(String ans, String input) throws DukeException, IOException {
         String[] strArr = input.split(" ");
         int index = Integer.valueOf(strArr[1]) - 1;
         if (index >= 0 && index < arr.size()) {
@@ -107,33 +179,37 @@ public class Duke {
         } else {
             throw new InvalidIndexException();
         }
+        saveToFile();
         System.out.println(ans);
     }
 
-    private void onTodo(String ans, String input) {
+    private void onTodo(String ans, String input) throws java.io.IOException {
         String desc = input.substring(5);
-        Task t = new ToDo(desc);
+        ToDo t = new ToDo(desc);
         addTask(t);
+        saveToFile();
         ans += "Got it. I've added this task:\n\t\t" + t.toString() +
                 "\n\tNow you have " + numOfTasks() + " in the list.";
         System.out.println(ans);
     }
 
-    private void onDeadline(String ans, String input) {
+    private void onDeadline(String ans, String input) throws java.io.IOException {
         String desc = input.substring(9, input.indexOf("/by") - 1);
         String by = input.substring(input.indexOf("/by") + 4);
-        Task t = new Deadline(desc, by);
+        Deadline t = new Deadline(desc, by);
         addTask(t);
+        saveToFile();
         ans += "Got it. I've added this task:\n\t\t" + t.toString() +
                 "\n\tNow you have " + numOfTasks() + " in the list.";
         System.out.println(ans);
     }
 
-    private void onEvent(String ans, String input) {
+    private void onEvent(String ans, String input) throws java.io.IOException {
         String desc = input.substring(6, input.indexOf("/at") - 1);
         String time = input.substring(input.indexOf("/at") + 4);
-        Task t = new Event(desc, time);
+        Event t = new Event(desc, time);
         addTask(t);
+        saveToFile();
         ans += "Got it. I've added this task:\n\t\t" + t.toString() +
                 "\n\tNow you have " + numOfTasks() + " in the list.";
         System.out.println(ans);
@@ -159,16 +235,19 @@ public class Duke {
             } else {
                 throw new InvalidCommandException();
             }
-        } catch (DukeException e) {
+        } catch (DukeException | java.io.IOException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Duke duke = new Duke();
         Scanner sc = new Scanner(System.in);
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
         String userInput = "";
+        duke.loadFileContents();
+
+
 
         while (!userInput.equals("bye")) {
             userInput = sc.nextLine();
