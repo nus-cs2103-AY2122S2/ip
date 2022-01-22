@@ -12,9 +12,12 @@ public class Storage {
             File myObj = new File(filePath);
             myObj.createNewFile();
             FileWriter writer = new FileWriter(filePath);
+            StringBuilder sb = new StringBuilder();
             for(Task t : arr) {
-                writer.write(t.toString());
+                sb.append(t.toString() + ";");
             }
+            sb.setLength((sb.length() - 1));
+            writer.write(sb.toString());
             writer.close();
             return 0;
         }
