@@ -1,17 +1,23 @@
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+package duke.command;
 
-public class AddDeadlineCommand extends Command {
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.task.Event;
+import java.time.LocalDate;
+
+public class AddEventCommand extends Command {
     protected String description;
-    protected String by;
+    protected String at;
     protected LocalDate date;
 
-    public AddDeadlineCommand(String description, String by) {
+    public AddEventCommand(String description, String at) {
         this.description = description;
-        this.by = by;
+        this.at = at;
     }
-    public AddDeadlineCommand(String description, LocalDate date) {
+    public AddEventCommand(String description, LocalDate date) {
         this.description = description;
         this.date = date;
     }
@@ -20,10 +26,10 @@ public class AddDeadlineCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task;
         if (date == null) {
-            task = new Deadline(description, by);
+            task = new Event(description, at);
         }
         else {
-            task = new Deadline(description, date);
+            task = new Event(description, date);
         }
         tasks.addTask(task);
         ui.showAddTask(task, tasks.getTasks());

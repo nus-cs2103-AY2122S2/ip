@@ -1,4 +1,10 @@
-import java.io.IOException;
+package duke.command;
+
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+import duke.exception.DukeException;
+import duke.task.Task;
 
 public class DeleteCommand extends Command{
     protected int number;
