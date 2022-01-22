@@ -13,6 +13,16 @@ public class TodoTask extends Task {
     }
 
     /**
+     * String representation of TodoTask for saving.
+     *
+     * @return String representation of TodoTask for saving.
+     */
+    @Override
+    public String saveFormat() {
+        return "T | " + super.saveFormat();
+    }
+
+    /**
      * String representation of TodoTask.
      *
      * @return String representation of TodoTask.

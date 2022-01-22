@@ -42,6 +42,15 @@ public class Task {
     }
 
     /**
+     * String representation of task for saving.
+     *
+     * @return String representation of task for saving.
+     */
+    public String saveFormat() {
+        return String.format("%s | %s", isDone ? 1 : 0, DESCRIPTION);
+    }
+
+    /**
      * String representation of task.
      *
      * @return String representation of task.
