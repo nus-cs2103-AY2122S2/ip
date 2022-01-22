@@ -22,7 +22,7 @@ public class Duke {
         String userInput = in.nextLine();
         while(ip.run(userInput, p, arr) != -1)
             userInput = in.nextLine();
-        Storage.saveFile(System.getProperty("user.dir") + "\\data", "duke.txt", arr);
+        Storage.saveFile("data", "duke.txt", arr);
     }
 
 }

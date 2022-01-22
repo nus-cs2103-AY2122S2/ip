@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    public static int saveFile(String path, String fileName, ArrayList<Task> arr) {
+    public static int saveFile(String folderName, String fileName, ArrayList<Task> arr) {
         try {
-            Files.createDirectories(Paths.get(path));
-            String filePath = path + "/" + fileName;
+            String dir = System.getProperty("user.dir");
+            java.nio.file.Path pp = java.nio.file.Paths.get(dir, folderName);
+            Files.createDirectories(Paths.get(folderName));
+            String filePath = folderName + "/" + fileName;
             File myObj = new File(filePath);
             myObj.createNewFile();
             FileWriter writer = new FileWriter(filePath);
