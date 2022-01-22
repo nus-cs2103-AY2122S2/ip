@@ -12,12 +12,25 @@ public class Task {
         this.isDone = false;
     }
 
+    Task(String ss, boolean b) {
+        this.taskName = ss;
+        this.isDone = b;
+    }
+
+    public String getTaskName() {
+        return this.taskName;
+    }
+
     public void mark() {
         this.isDone = true;
     }
 
     public void unmark() {
         this.isDone = false;
+    }
+
+    public String getDesc(){
+        return "";
     }
 
     @Override
