@@ -32,6 +32,14 @@ public class Task {
     }
 
     /**
+     * Returns the task properties in the format of the task to be saved onto hard disk (to be Overridden)
+     * @return String representing the task toString in hard-disk format
+     */
+    public String toStringInFileFormat() {
+        return null;
+    }
+
+    /**
      * Retrieves the status of the task
      * @return If marked as "Done", returns "X", otherwise returns " "
      */

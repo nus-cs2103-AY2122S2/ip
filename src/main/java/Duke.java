@@ -1,6 +1,10 @@
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.io.File;
 /**
  * Represents a Personal Assistant Chatbot based on Project Duke.
  *
@@ -17,8 +21,24 @@ public class Duke {
     public static final String DIVIDER = "\n____________________________________________________________\n";
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        File dukeFile = new File("data/duke.txt");
+        File folderPath = new File("data");
         tasks = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+
+        if (!folderPath.exists()) {
+            folderPath.mkdirs();
+        } else if (!dukeFile.exists()) { //checks if duke.txt exists, if yes, then write the tasks to the "tasks" object
+            try {
+                dukeFile.createNewFile();
+            } catch (IOException e) {
+                System.out.println("File cannot be created. Check directory.");
+                System.exit(0);
+            }
+        } else {
+            readDukeFile();
+        }
+
         String userInput = "";
 
         System.out.println(DIVIDER + "Why hello there! My name is Wensleydale.\nWhat do you need?" + DIVIDER);
@@ -40,6 +60,53 @@ public class Duke {
         }
 
         System.out.println(DIVIDER + "Farewell then!" + DIVIDER);
+    }
+
+    private static void readDukeFile() {
+        try {
+            File dukeFile = new File("data/duke.txt");
+            Scanner s = new Scanner(dukeFile);
+
+            while (s.hasNext()) {
+                String currLine = s.nextLine();
+                String[] currLineArr = currLine.split("\\|");
+
+                switch (currLineArr[0]) {
+                case "T":
+                    Task tempT = new ToDo(currLineArr[2]);
+
+                    if (currLineArr[1].equals("X")) {
+                        tempT.markDone();
+                    }
+
+                    tasks.add(tempT);
+                    break;
+                case "D":
+                    Task tempD = new Deadline(currLineArr[2], currLineArr[3]);
+
+                    if (currLineArr[1].equals("X")) {
+                        tempD.markDone();
+                    }
+
+                    tasks.add(tempD);
+                    break;
+                case "E":
+                    Task tempE = new Event(currLineArr[2], currLineArr[3]);
+
+                    if (currLineArr[1].equals("X")) {
+                        tempE.markDone();
+                    }
+
+                    tasks.add(tempE);
+                    break;
+                default:
+                    //empty
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found"); //code should not reach here since file is automatically created
+            System.exit(0);
+        }
     }
 
     private static String processMessage(String message) throws DukeException {
@@ -180,19 +247,43 @@ public class Duke {
         return indexOfItem;
     }
 
-    private static String confirmAction(Task task, ConfirmCodes code) {
-        switch (code) {
-        case ADDITION:
-            return "Alright then! I've added the task to your list:" + "\n\t" + task.toString() + viewTasksCount();
-        case DELETION:
-            return "As you wish. I've removed the task from your list:" + "\n\t" + task.toString()
-                    + "\nI hope it was nothing important..." + viewTasksCount();
-        default:
-            return "FILLER MESSAGE HERE";
+    private static String confirmAction(Task task, ConfirmCodes code) throws DukeException {
+        try {
+            FileWriter fw;
+            switch (code) {
+            case ADDITION:
+                fw = new FileWriter("data/duke.txt", true);
+                fw.write(task.toStringInFileFormat());
+                fw.close();
+                return "Alright then! I've added the task to your list:" + "\n\t" + task + viewTasksCount();
+            case DELETION:
+                fw = new FileWriter("data/duke.txt");
+                fw.write(listInFileFormat());
+                fw.close();
+                return "As you wish. I've removed the task from your list:" + "\n\t" + task.toString()
+                        + "\nI hope it was nothing important..." + viewTasksCount();
+            default:
+                throw new DukeException("INTERNAL ERROR: Invalid Type Declaration");
+            }
+        } catch (IOException e) {
+            System.out.println("INTERNAL ERROR: File cannot be accessed. Check directory.");
+            System.exit(0);
         }
+
+        return null; //code should not reach here
     }
 
     private static String viewTasksCount() {
         return "\nYou currently have " + tasks.size() + " task(s) remaining in your list.";
+    }
+
+    private static String listInFileFormat() {
+        StringBuilder list = new StringBuilder();
+
+        for (Task t : tasks) {
+            list.append(t.toStringInFileFormat()).append(System.lineSeparator());
+        }
+
+        return list.toString();
     }
 }

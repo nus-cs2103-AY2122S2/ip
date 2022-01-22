@@ -19,6 +19,15 @@ public class Event extends Task {
     }
 
     @Override
+    /**
+     * Returns the task properties in the format of the task to be saved onto hard disk
+     * @return String representing the task toString in hard-disk format
+     */
+    public String toStringInFileFormat() {
+        return "E|" + this.getStatusIcon() + "|" + this.description + "|" + this.at;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
