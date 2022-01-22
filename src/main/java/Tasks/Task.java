@@ -6,7 +6,7 @@ package Tasks;
 
 public class Task {
     protected String name;
-    protected boolean completed = false;
+    protected boolean isCompleted = false;
 
     /**
      * Construct a task.
@@ -17,17 +17,26 @@ public class Task {
     }
 
     /**
+     * Alternative constructor for Task, to create a task with a preset completion status.
+     * @param name
+     * @param isCompleted
+     */
+    public Task(String name, boolean isCompleted) {
+
+    }
+
+    /**
      * Complete the task.
      */
     public void complete() {
-        completed = true;
+        isCompleted = true;
     }
 
     /**
      * Make the task uncomplete.
      */
     public void removeCompletedStatus() {
-        completed = false;
+        isCompleted = false;
     }
 
     /**
@@ -37,7 +46,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        if (this.completed) {
+        if (this.isCompleted) {
             return "[X] " + name;
         } else {
             return "[ ] " + name;

@@ -17,13 +17,24 @@ public class Event extends Task{
     }
 
     /**
+     * Aleternative Construcotr of Event to set completion status.
+     * @param name
+     * @param eventTime
+     * @param isCompleted
+     */
+    public Event(String name, String eventTime, boolean isCompleted) {
+        super(name, isCompleted);
+        this.eventTime = eventTime;
+    }
+
+    /**
      * Overriden toString method for Event.
      * @return String representation of Event.
      */
     @Override
     public String toString() {
         String str = "[E]";
-        if (this.completed) {
+        if (this.isCompleted) {
             str += "[X] ";
         } else {
             str += "[ ] ";

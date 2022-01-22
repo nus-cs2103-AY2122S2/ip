@@ -1,5 +1,7 @@
-public class DukeException extends Throwable {
-    public DukeException(m) {
+package Exceptions;
 
+public class DukeException extends Throwable {
+    public DukeException(String message) {
+        super(message);
     }
 }

@@ -1,5 +1,6 @@
 import Tasks.Task;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /**
@@ -7,7 +8,23 @@ import java.util.ArrayList;
  */
 
 public class TaskManager {
-    private ArrayList<Task> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks;
+    private Storage storage;
+
+    /**
+     * Initialises the taskManager
+     */
+    public TaskManager() {
+        storage = new Storage();
+        try {
+            tasks = storage.readTasks();
+        } catch (FileNotFoundException e) {
+            //duke.txt dosent exist, so create fresh arrayList.
+            tasks = new ArrayList<Task>();
+        }
+        this.storage = new Storage();
+
+    }
 
     /**
      * Add a task to the task manager.
@@ -15,6 +32,15 @@ public class TaskManager {
      */
     public void addTask(Task task) {
         tasks.add(task);
+    }
+
+    /**
+     * remove a task from the task manager.
+     * @param index index to remove, indexed from 1.
+     * @return the task that was removed.
+     */
+    public Task removeTask(int index) {
+        return tasks.remove(index - 1);
     }
 
     /**

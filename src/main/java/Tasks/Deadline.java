@@ -24,7 +24,7 @@ public class Deadline extends Task{
     @Override
     public String toString() {
         String str = "[D]";
-        if (this.completed) {
+        if (this.isCompleted) {
             str += "[X] ";
         } else {
             str += "[ ] ";
