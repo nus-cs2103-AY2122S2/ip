@@ -55,11 +55,11 @@ public class Storage {
             for(String s : ss.split(";")) {
                 String[] args = s.split(",");
                 if(args[0].equals("T")) {
-                    tl.addTask(new ToDoTask(args[2], args[1] == "T"));
+                    tl.addTask(new ToDoTask(args[2], args[1].equals("T")));
                 } else if (args[0].equals("D")) {
-                    tl.addTask(new DeadlineTask(args[2], args[1] == "T", LocalDate.parse(args[3], formatter)));
+                    tl.addTask(new DeadlineTask(args[2], args[1].equals("T"), LocalDate.parse(args[3], formatter)));
                 } else if (args[0].equals("E")) {
-                    tl.addTask(new EventTask(args[2], args[1] == "T", LocalDate.parse(args[3], formatter)));
+                    tl.addTask(new EventTask(args[2], args[1].equals("T"), LocalDate.parse(args[3], formatter)));
                 }
             }
             return 0;
