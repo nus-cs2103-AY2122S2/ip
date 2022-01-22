@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -70,6 +71,8 @@ public class TaskList {
             System.out.println("\t" + emptyEx.getMessage());
         } catch (DateFormatException dateEx) {
             System.out.println("\t" + dateEx.getMessage());
+        } catch (DateTimeParseException dateTimeEx) {
+            System.out.println("\tDear Master, please enter the date using \"YYYY-MM-DD\" format");
         }
     }
 
