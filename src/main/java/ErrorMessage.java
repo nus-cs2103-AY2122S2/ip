@@ -1,4 +1,5 @@
 public class ErrorMessage {
+    public static final String MESSAGE_LOADING_ERROR = "Meow! The app cannot be loaded!";
     public static final String MESSAGE_INVALID_INPUT = "Meow! Enter a valid command!";
     public static final String MESSAGE_UNKNOWN_COMMAND = "Meow? I don't know what that means.";
     public static final String MESSAGE_INVALID_TASK = "Meow! Task does not exist!";

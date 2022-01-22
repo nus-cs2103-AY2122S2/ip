@@ -6,16 +6,11 @@ public class Todo extends Task {
      * Class constructor specifying the task's description.
      */
     public Todo(String description) {
-        super(description);
+        super(description, TaskType.TODO);
     }
 
     public Todo(String description, boolean isDone) {
-        super(description, isDone);
-    }
-
-    @Override
-    public String formatForFile() {
-        return "T | " + (super.isDone ? "1" : "0") + " | " + super.description + "\n";
+        super(description, isDone, TaskType.TODO);
     }
 
     /**

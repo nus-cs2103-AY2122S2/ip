@@ -6,25 +6,24 @@ import java.time.format.DateTimeFormatter;
  * and ends at a specific time.
  */
 public class Event extends Task {
-    protected LocalDate at;
+    private LocalDate at;
 
     /**
      * Class constructor specifying the task's description
      * and time period.
      */
     public Event(String description, LocalDate at) {
-        super(description);
+        super(description, TaskType.EVENT);
         this.at = at;
     }
 
-    public Event(String description, boolean isDone, String at) {
-        super(description, isDone);
+    public Event(String description, boolean isDone, LocalDate at) {
+        super(description, isDone, TaskType.EVENT);
         this.at = at;
     }
 
-    @Override
-    public String formatForFile() {
-        return "E | " + (super.isDone ? "1" : "0") + " | " + super.description + " | " + this.at + "\n";
+    public LocalDate getAt() {
+        return at;
     }
 
     /**

@@ -6,25 +6,24 @@ import java.time.format.DateTimeFormatter;
  * before a specific date/time.
  */
 public class Deadline extends Task {
-    protected LocalDate by;
+    private LocalDate by;
 
     /**
      * Class constructor specifying the task's description
      * and deadline.
      */
     public Deadline(String description, LocalDate by) {
-        super(description);
+        super(description, TaskType.DEADLINE);
         this.by = by;
     }
 
-    public Deadline(String description, boolean isDone, String by) {
-        super(description, isDone);
+    public Deadline(String description, boolean isDone, LocalDate by) {
+        super(description, isDone, TaskType.DEADLINE);
         this.by = by;
     }
 
-    @Override
-    public String formatForFile() {
-        return "D | " + (super.isDone ? "1" : "0") + " | " + super.description + " | " + this.by + "\n";
+    public LocalDate getBy() {
+        return by;
     }
 
     /**

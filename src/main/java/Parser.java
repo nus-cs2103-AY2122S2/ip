@@ -1,5 +1,4 @@
-import java.time.LocalDate;
-
+// deals with making sense of the user command
 public class Parser {
 
     public static CommandType parseCommand(String input) throws DukeException {
@@ -27,7 +26,7 @@ public class Parser {
         }
     }
 
-    public String[] parseInput(String input, CommandType command) throws DukeException {
+    public static String[] parseInput(String input, CommandType command) throws DukeException {
         String[] args = new String[4];
         args[0] = (input + " ").split(" ", 2)[1].trim(); // description
         if (command.equals(CommandType.DELETE) || command.equals(CommandType.MARK)
@@ -65,7 +64,7 @@ public class Parser {
         return args;
     }
 
-    public void parseDate(String input) throws DukeException {
+    public static void parseDate(String input) throws DukeException {
         if (input.isBlank()) {
             throw new DukeException(ErrorMessage.MESSAGE_UNKNOWN_DATE);
         }

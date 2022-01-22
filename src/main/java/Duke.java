@@ -8,121 +8,67 @@ import java.util.Scanner;
  * helps a person to keep track of various things.
  */
 public class Duke {
-    protected String lineBreak = "____________________________________________________________\n";
-    protected String catFace = " =^_^=\n";
-    protected String logo = " ____        _\n"
-            + "|  _ \\ _   _| | _____      /\\_/\\           ___\n"
-            + "| | | | | | | |/ / _      = o_o =_______    \\ \\  -Julie Rhodes-\\\n"
-            + "| |_| | |_| |   <  __/     __^      __(  \\.__) )\n"
-            + "|____/ \\__,_|_|\\_\\___| (@)<_____>__(_____)____/\n";
-    protected ArrayList<Task> tasks;
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-    public Duke() {
-        this.tasks = initialiseTasks();
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (Exception e) {
+            ui.showLoadingError();
+        }
     }
 
-    /**
-     * Prints the greeting and logo.
-     */
-    public void greet() {
-        System.out.print(logo);
-        printMessage("Meow! I'm Duke!\nWhat can I do for you?");
-    }
+    public void run() {
+        ui.printGreeting();
+        String input = ui.getInput();
 
-    /**
-     * Prints the farewell.
-     */
-    public void exit() {
-        printMessage("Bye. Meow!");
-    }
-
-    /**
-     * @param message The message to be printed.
-     */
-    private void printMessage(String message) {
-        System.out.print(lineBreak + message + catFace + lineBreak);
-    }
-
-    private ArrayList<Task> initialiseTasks() {
-        FileUtil.createFile();
-        ArrayList<Task> tasks = new ArrayList<>();
-        List<String> lines = FileUtil.readFromFile();
-        if (lines != null) {
-            for (String line : lines) {
-                String[] args = line.split(" \\| ");
-                switch(args[0]) {
-                case "D":
-                    tasks.add(new Deadline(args[2], args[1].equals("1"), args[3]));
-                    break;
-                case "E":
-                    tasks.add(new Event(args[2], args[1].equals("1"), args[3]));
-                    break;
-                default:
-                    tasks.add(new Todo(args[2], args[1].equals("1")));
-                }
+        while (!input.equals("bye")) {
+            try {
+                CommandType command = Parser.parseCommand(input);
+                String[] args = Parser.parseInput(input, command);
+                processCommand(command, args);
+            } catch (Exception e) {
+                ui.printMessage(e.toString());
+            } finally {
+                input = ui.getInput();
             }
         }
-        return tasks;
-    }
 
-    private void listTasks() {
-        StringBuilder message = new StringBuilder();
-        for (int i = 0; i < tasks.size(); i++) {
-            message.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
-        }
-        message.append("Number of tasks in list: ").append(tasks.size());
-        printMessage(message.toString());
-    }
-
-    private void deleteTask(String input) {
         try {
-            int index = Integer.parseInt(input);
-            Task t = tasks.get(index - 1);
-            tasks.remove(index - 1);
-            FileUtil.writeTasksToFile(tasks);
-            printMessage("Meow! Task is removed!\n" + t + "\n" + "Number of tasks in list: " + tasks.size());
-        } catch (NullPointerException | IndexOutOfBoundsException e) {
-            printMessage(ErrorMessage.MESSAGE_INVALID_TASK);
+            storage.save(tasks);
+        } catch (Exception e) {
+            ui.printMessage(e.toString());
+        } finally {
+            ui.printGoodbye();
         }
     }
 
-    private void toggleTaskStatus(String input, CommandType command) {
-        try {
-            int index = Integer.parseInt(input);
-            if (command.equals(CommandType.MARK)) {
-                tasks.get(index - 1).markAsDone();
-                System.out.print(lineBreak + "Meow! Task is done!" + catFace
-                        + tasks.get(index - 1) + "\n" + lineBreak);
-            } else {
-                tasks.get(index - 1).unmarkAsDone();
-                System.out.print(lineBreak + "Meow! Task is not done!" + catFace
-                        + tasks.get(index - 1) + "\n" + lineBreak);
-            }
-            FileUtil.writeTasksToFile(tasks);
-        } catch (NullPointerException | IndexOutOfBoundsException e) {
-            printMessage(ErrorMessage.MESSAGE_INVALID_TASK);
-        }
-    }
-
-    private void addTask(String[] args, CommandType command) {
-        Task t;
-        switch (command) {
-        case DEADLINE:
-            t = new Deadline(args[0], LocalDate.of(Integer.parseInt(args[1]),
-                    Integer.parseInt(args[2]), Integer.parseInt(args[3])));
-            break;
-        case EVENT:
-            t = new Event(args[0],  LocalDate.of(Integer.parseInt(args[1]),
-                    Integer.parseInt(args[2]), Integer.parseInt(args[3])));
-            break;
-        default:
-            t = new Todo(args[0]);
-        }
-        tasks.add(t);
-        FileUtil.appendToFile(t.formatForFile());
-        printMessage("Meow! Task is added!\n" + t + "\n"
-                + "Number of tasks in list: " + tasks.size());
-    }
+//    public void run() {
+//        ui.printGreeting();
+//        boolean isExit = false;
+//        while (!isExit) {
+//            try {
+//                String fullCommand = ui.getInput();
+//                Command c = Parser.parse(fullCommand);
+//                c.execute(tasks, ui, storage);
+//                isExit = c.isExit();
+//            } catch (DukeException e) {
+//                ui.printMessage(e.getMessage());
+//            }
+//        }
+//
+//        try {
+//            storage.save(tasks);
+//        } catch (Exception e) {
+//            ui.printMessage(e.toString());
+//        } finally {
+//            ui.printGoodbye();
+//        }
+//    }
 
     /**
      * Processes the command from the user.
@@ -132,7 +78,7 @@ public class Duke {
     private void processCommand(CommandType command, String[] args) {
         switch (command) {
         case LIST:
-            listTasks();
+            ui.printList(tasks.getAllTasks());
             break;
         case DELETE:
             deleteTask(args[0]);
@@ -154,29 +100,52 @@ public class Duke {
         }
     }
 
-    public void runChatbot() {
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine().strip();
-
-        while (!input.equals("bye")) {
-            try {
-                CommandType command = Parser.parseCommand(input);
-                String[] args = Parser.parseInput(input, command);
-                processCommand(command, args);
-            } catch (DukeException e) {
-                printMessage(e.toString());
-            } finally {
-                input = sc.nextLine().strip();
-            }
+    private void deleteTask(String input) {
+        try {
+            int index = Integer.parseInt(input);
+            Task t = tasks.getTask(index);
+            tasks.deleteTask(index);
+            ui.printMessage("Meow! Task is removed!\n" + t + "\n" + "Number of tasks in list: " + tasks.getSize());
+        } catch (NullPointerException | IndexOutOfBoundsException e) {
+            ui.printMessage(ErrorMessage.MESSAGE_INVALID_TASK);
         }
+    }
 
-        sc.close();
+    private void toggleTaskStatus(String input, CommandType command) {
+        try {
+            int index = Integer.parseInt(input);
+            if (command.equals(CommandType.MARK)) {
+                tasks.getTask(index).markAsDone();
+                ui.printMessage("Meow! Task is done!" + tasks.getTask(index) + "\n");
+            } else {
+                tasks.getTask(index).unmarkAsDone();
+                ui.printMessage("Meow! Task is not done!" + tasks.getTask(index) + "\n");
+            }
+        } catch (NullPointerException | IndexOutOfBoundsException e) {
+            ui.printMessage(ErrorMessage.MESSAGE_INVALID_TASK);
+        }
+    }
+
+    private void addTask(String[] args, CommandType command) {
+        Task t;
+        switch (command) {
+        case DEADLINE:
+            t = new Deadline(args[0], LocalDate.of(Integer.parseInt(args[1]),
+                    Integer.parseInt(args[2]), Integer.parseInt(args[3])));
+            break;
+        case EVENT:
+            t = new Event(args[0],  LocalDate.of(Integer.parseInt(args[1]),
+                    Integer.parseInt(args[2]), Integer.parseInt(args[3])));
+            break;
+        default:
+            t = new Todo(args[0]);
+        }
+        tasks.addTask(t);
+        ui.printMessage("Meow! Task is added!\n" + t + "\n"
+                + "Number of tasks in list: " + tasks.getSize());
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.greet();
-        duke.runChatbot();
-        duke.exit();
+        new Duke("data/tasks.txt").run();
     }
 }
