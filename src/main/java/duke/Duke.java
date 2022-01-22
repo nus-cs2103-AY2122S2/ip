@@ -17,6 +17,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Executes the Duke ChatBot App
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -33,6 +36,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke("C:/repos/ip/data/tasks.txt").run();
     }
 }

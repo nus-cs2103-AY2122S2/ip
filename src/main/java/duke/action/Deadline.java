@@ -21,11 +21,21 @@ public class Deadline extends Action {
         this.date = by;
     }
 
+    /**
+     * Returns a new Deadline object with same variable values except
+     * isDone which is now true
+     * @return marked Deadline object
+     */
     @Override
     public Action setDone()  {
         return new Deadline(act, date, true);
     }
 
+    /**
+     * Returns a new Deadline object with same variable values except
+     * isDone which is now false
+     * @return unmarked Deadline object
+     */
     @Override
     public Action setUnDone()  {
         return new Deadline(act, date, false);

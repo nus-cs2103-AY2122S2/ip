@@ -26,6 +26,14 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Executes the adding of a task onto the taskList
+     * as well as saving the contents of the taskList
+     * onto the file.
+     * @param taskList a list of the current tasks
+     * @param ui user interface
+     * @param storage file storage
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         //storage must save
@@ -35,6 +43,10 @@ public class AddCommand extends Command {
         storage.save(taskList);
     }
 
+    /**
+     * Returns false for non-ExitCommands.
+     * @return false
+     */
     @Override
     public boolean isExit() {
         return false;

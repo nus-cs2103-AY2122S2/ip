@@ -4,17 +4,25 @@ import duke.command.*;
 //deals with making sense of the user duke.command
 public class Parser {
 
-    public static Command parse(String s) throws DukeException {
-        if (s.equals("todo") || s.equals("todo ")) {
+    /**
+     * Returns a Commmand object which nature depends on
+     * the type of command input.
+     * @param command the first word of the input sent to the chatbot
+     * @return command object
+     * @throws DukeException if an input containing todo only contains
+     * todo or if the input contains unacceptable commands
+     */
+    public static Command parse(String command) throws DukeException {
+        if (command.equals("todo") || command.equals("todo ")) {
             throw new DukeException("Todo cannot be empty");
         }
-        if (s.equals("list")) {
+        if (command.equals("list")) {
             return new ListCommand();
         }
-        if (s.equals("bye")) {
+        if (command.equals("bye")) {
             return new ExitCommand();
         }
-        String[] twoWords = s.split(" ", 2);
+        String[] twoWords = command.split(" ", 2);
         String firstWord = twoWords[0];
         if (firstWord.equals("delete") || firstWord.contains("mark")) {
             int number = Integer.parseInt(twoWords[1]);

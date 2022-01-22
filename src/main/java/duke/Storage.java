@@ -1,6 +1,5 @@
 package duke;
 import duke.action.Action;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,12 +19,25 @@ public class Storage {
     public Storage() {
     }
 
+    /**
+     * Writes the input text to the file
+     * given by its file path.
+     * @param filePath the path of the file
+     * @param textToAdd the text to add to the file
+     * @throws IOException if file path is not found
+     */
     private static void writeToFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
     }
 
+    /**
+     * Returns the same storage object after verifying
+     * the existence of the required directory and file.
+     * @return this storage object
+     * @throws DukeException if the required directory or file is missing
+     */
     public Storage load() throws DukeException {
         Path directoryExists = Paths.get("C:/repos/ip/data");
         //check if directory exists
@@ -38,6 +50,12 @@ public class Storage {
         return this;
     }
 
+    /**
+     * Executes the writing of the contents of the
+     * taskLst onto the file.
+     * @param taskList the taskList containing a list of the
+     *                 tasks
+     */
     public void save(TaskList taskList) {
         ArrayList<Action> list = taskList.getList();
         if (!list.isEmpty()) {
