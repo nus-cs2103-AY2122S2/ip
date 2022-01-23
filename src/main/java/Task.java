@@ -1,4 +1,6 @@
-public abstract class Task implements ICompletable {
+import java.io.Serializable;
+
+public abstract class Task implements ICompletable, Serializable {
 
     protected String item;
     protected boolean completed;
