@@ -10,13 +10,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parser encapsulates a parser to deal with making sense of the user command.
+ */
 public class Parser {
 
     /**
-     * Reads input string and determines action to perform.
+     * Parse user command and determines action to perform.
      *
-     * @param input Input string from user.
-     * @throws EchoException If input is missing details or badly formatted.
+     * @param input Input command from user.
+     * @return Command to be executed.
+     *
+     * @throws EchoException If input is invalid.
      */
     public static Command parse(String input) throws EchoException {
 
@@ -100,14 +105,36 @@ public class Parser {
         }
     }
 
+    /**
+     * Prepare list command.
+     *
+     * @return ListCommand.
+     */
     private static Command prepareListCommand() {
         return new ListCommand();
     }
 
+    /**
+     * Prepare list command.
+     *
+     * @param desc Description of todo command.
+     * @return TodoCommand.
+     */
     private static Command prepareTodoCommand(String desc) {
         return new TodoCommand(desc);
     }
 
+    /**
+     * Prepare deadline command.
+     *
+     * @param input Input from user.
+     * @param desc Description of deadline command.
+     * @param localDateTime Local date and time.
+     *
+     * @return DeadlineCommand.
+     *
+     * @throws EchoException If input is invalid.
+     */
     private static Command prepareDeadlineCommand(String input, String desc, LocalDateTime localDateTime)
             throws EchoException {
         if (!input.contains("/by")) {
@@ -118,6 +145,17 @@ public class Parser {
         return new DeadlineCommand(desc, localDateTime);
     }
 
+    /**
+     * Prepare event command.
+     *
+     * @param input Input from user.
+     * @param desc Description of event command.
+     * @param localDateTime Local date and time.
+     *
+     * @return EventCommand.
+     *
+     * @throws EchoException If input is invalid.
+     */
     private static Command prepareEventCommand(String input, String desc, LocalDateTime localDateTime)
             throws EchoException {
         if (!input.contains("/at")) {
@@ -128,18 +166,44 @@ public class Parser {
         return new EventCommand(desc, localDateTime);
     }
 
+    /**
+     * Prepare mark command.
+     *
+     * @param i Index of task.
+     *
+     * @return MarkCommand.
+     */
     private static Command prepareMark(int i) {
         return new MarkCommand(i);
     }
 
+    /**
+     * Prepare unmark command.
+     *
+     * @param i Index of task.
+     *
+     * @return UnmarkCommand.
+     */
     private static Command prepareUnmark(int i) {
         return new UnmarkCommand(i);
     }
 
+    /**
+     * Prepare delete command.
+     *
+     * @param i Index of task.
+     *
+     * @return DeleteCommand.
+     */
     private static Command prepareDelete(int i) {
         return new DeleteCommand(i);
     }
 
+    /**
+     * Prepare help command.
+     *
+     * @return HelpCommand.
+     */
     private static Command prepareHelpCommand() {
         return new HelpCommand();
     }

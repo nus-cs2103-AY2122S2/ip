@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * DeadlineTask which inherits from Task class.
+ * This class inherits from Task class and encapsulates a deadline task.
  */
 public class DeadlineTask extends Task {
 

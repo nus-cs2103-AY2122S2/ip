@@ -4,12 +4,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * EventTask task which inherits from Task class.
+ * This class inherits from Task class and encapsulates a event task.
  */
 public class EventTask extends Task {
 
     /** Duration of event. */
-    private LocalDateTime at;
+    private final LocalDateTime AT;
 
     /**
      * Constructor for EventTask class.
@@ -19,7 +19,7 @@ public class EventTask extends Task {
      */
     public EventTask(String desc, LocalDateTime at) {
         super(desc);
-        this.at = at;
+        this.AT = at;
     }
 
     /**
@@ -30,7 +30,7 @@ public class EventTask extends Task {
     @Override
     public String saveFormat() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-M-d HHmm");
-        return "E | " + super.saveFormat() + " | " + this.at.format(format);
+        return "E | " + super.saveFormat() + " | " + this.AT.format(format);
     }
 
     /**
@@ -41,6 +41,6 @@ public class EventTask extends Task {
     @Override
     public String toString() {
         DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mma");
-        return "[E]" + super.toString() + " (at: " + this.at.format(formatDateTime)  + ")";
+        return "[E]" + super.toString() + " (at: " + this.AT.format(formatDateTime)  + ")";
     }
 }

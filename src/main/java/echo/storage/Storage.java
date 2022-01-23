@@ -20,11 +20,11 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 /**
- * This class deals with loading tasks from the file and saving tasks in the file.
+ * Storage deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
 
-    /** File path containing the saved task list.*/
+    /** File path containing the saved task list. */
     private final String FILE_PATH;
 
     /**
@@ -36,12 +36,19 @@ public class Storage {
         this.FILE_PATH = filePath;
     }
 
+    /**
+     * Returns FILE_PATH.
+     *
+     * @return FILE_PATH.
+     */
     public String filePath() {
         return this.FILE_PATH;
     }
 
     /**
      * Load user save file from FILE_PATH.
+     *
+     * @return TaskList loaded from FILE_PATH.
      *
      * @throws FileNotFoundException If file at FILE_PATH does not exist.
      * @throws EchoException If file at FILE_PATH is not formatted properly.

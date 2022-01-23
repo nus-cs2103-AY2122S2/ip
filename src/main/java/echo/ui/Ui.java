@@ -26,12 +26,15 @@ public class Ui {
     private final Scanner sc = new Scanner(System.in);
 
     /**
-     * Prints the welcome message upon the start of the application.
+     * Prints the welcome message on start of the application.
      */
     public void showWelcome() {
         System.out.println(LOGO);
     }
 
+    /**
+     * Prints the goodbye message on exit of the application.
+     */
     public void sayBye() {
         System.out.println(PREFIX + "Goodbye!");
         sc.close();
@@ -60,44 +63,87 @@ public class Ui {
         System.out.println(addPrefix("Welcome new user!"));
     }
 
+    /**
+     * Read a line of user input.
+     *
+     * @return String of user input.
+     */
     public String readCommand() {
         return sc.nextLine();
     }
 
+    /**
+     * Append PREFIX to a string.
+     *
+     * @return String appended with PREFIX.
+     */
     public static String addPrefix(String s) {
         return PREFIX + s;
     }
 
-    public void showAddSuccess(String taskStatus, int size) {
+    /**
+     * Prints the task status after adding a task.
+     *
+     * @param taskStatus String representation of task status.
+     * @param size Size of TaskList.
+     */
+    public void showAdd(String taskStatus, int size) {
         System.out.println(addPrefix("Got it. I've added this task: \n")
                 + "  " + addPrefix(taskStatus) + "\n"
                 + addPrefix(String.format("Now you have %d tasks in the list.", size)));
     }
 
+    /**
+     * Prints a message that the task list is empty.
+     */
     public void showEmptyList() {
         System.out.println(addPrefix("Task list is empty!"));
     }
 
+    /**
+     * Prints the task list.
+     *
+     * @param s String representation of task list.
+     */
     public void showList(String s) {
         System.out.println(addPrefix(s));
     }
 
+    /**
+     * Prints the task status after marking a task.
+     *
+     * @param taskStatus String representation of task status.
+     */
     public void showMark(String taskStatus) {
         System.out.println(addPrefix("Nice! The task is marked as done: \n")
                 + "  " + addPrefix(taskStatus));
     }
 
+    /**
+     * Prints the task status after unmarking a task.
+     *
+     * @param taskStatus String representation of task status.
+     */
     public void showUnmark(String taskStatus) {
         System.out.println(addPrefix("OK! The task is unmarked: \n")
                 + "  " + addPrefix(taskStatus));
     }
 
+    /**
+     * Prints the task status after deleting a task.
+     *
+     * @param taskStatus String representation of task status.
+     * @param size Size of TaskList.
+     */
     public void showDelete(String taskStatus, int size) {
         System.out.println(addPrefix("Noted. I've removed the task: \n")
                 + "  " + addPrefix(taskStatus) + "\n"
                 + addPrefix(String.format("Now you have %d tasks in the list.", size)));
     }
 
+    /**
+     * Prints the list of commands.
+     */
     public void showHelp() {
         System.out.println(addPrefix("Commands: \n")
                 + addPrefix("list                                | List current tasks. \n")

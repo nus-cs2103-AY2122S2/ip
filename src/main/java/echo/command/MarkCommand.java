@@ -7,16 +7,36 @@ import echo.main.EchoException;
 
 import java.io.IOException;
 
+/**
+ * This class inherits from the Command class and encapsulates the mark command.
+ */
 public class MarkCommand extends Command {
 
+    /** String that represents the mark command. */
     public static final String COMMAND = "mark";
 
+    /** Task index to mark. */
     private final int TASK_INDEX;
 
+    /**
+     * Constructor for MarkCommand.
+     *
+     * @param taskIndex Task index to Mark.
+     */
     public MarkCommand(int taskIndex) {
         this.TASK_INDEX = taskIndex;
     }
 
+    /**
+     * Execute command.
+     *
+     * @param tasks TaskList containing list of tasks.
+     * @param ui Ui that deals with user interactions.
+     * @param storage Storage deals with loading tasks from the file and saving tasks in the file.
+     *
+     * @throws EchoException If input is invalid.
+     */
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws EchoException {
         try {
             tasks.mark(TASK_INDEX);

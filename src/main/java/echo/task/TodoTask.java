@@ -1,7 +1,7 @@
 package echo.task;
 
 /**
- * TodoTask task which inherits from Task class.
+ * This class inherits from Task class and encapsulates a todo task.
  */
 public class TodoTask extends Task {
 
