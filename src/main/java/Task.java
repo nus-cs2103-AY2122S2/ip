@@ -1,27 +1,55 @@
 public class Task {
 
-	private final String title;
-	private boolean done;
+    private final String title;
+    private final String type;
+    private final ChatBotDateTime datetime;
+    private String done;
 
-	public Task(String title) {
-		this.title = title;
-		this.done = false;
-	}
+    public Task(String title, String type, ChatBotDateTime datetime) {
+        this.title = title;
+        this.type = type;
+        this.datetime = datetime;
+        this.done = " ";
+    }
 
-	public boolean isCompleted() {
-		return done;
-	}
+    public Task(
+        String title,
+        String type,
+        String done,
+        ChatBotDateTime datetime
+    ) {
+        this.title = title;
+        this.type = type;
+        this.done = done;
+        this.datetime = datetime;
+    }
 
-	public void mark() {
-		done = true;
-	}
+    public String isCompleted() {
+        return done;
+    }
 
-	public void unmark() {
-		done = false;
-	}
+    public String getType() {
+        return type;
+    }
 
-	@Override
-	public String toString() {
-		return String.format("[%s] %s", done ? "X" : " ", title);
-	}
+    public String getTitle() {
+        return title;
+    }
+
+    public ChatBotDateTime getDateTime() {
+        return datetime;
+    }
+
+    public void mark() {
+        done = "X";
+    }
+
+    public void unmark() {
+        done = " ";
+    }
+
+    @Override
+    public String toString() {
+        return String.format("[%s][%s] %s", type, done, title);
+    }
 }

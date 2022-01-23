@@ -1,11 +1,10 @@
 public class ToDo extends Task {
 
-	public ToDo(String title) {
-		super(title);
-	}
+    public ToDo(String title) {
+        super(title, "T", null);
+    }
 
-	@Override
-	public String toString() {
-		return String.format("[T]%s", super.toString());
-	}
+    public ToDo(String title, String done) {
+        super(title, "T", done, null);
+    }
 }

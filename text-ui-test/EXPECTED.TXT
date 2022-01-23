@@ -24,13 +24,17 @@ Innkeeper: What can I do for you today?
 You: 
 Innkeeper: Here is a list of commands that you can use traveller!
 
-             1. list                                               View your task list
-             2. todo <name of task>                                Add a todo to your task list
-             3. deadline <name of task> /by <deadline of task>     Add a deadline to your task list
-             4. event <name of task> /at <timestamp of task>       Add an event to your task list
-             5. mark <index of task>                               Mark a task as completed in your task list
-             6. unmark <index of task>                             Unmark a task in your task list
-             7. bye                                                Exit the program
+             1. list                                                            View your task list
+             2. get <date*>                                                     View the tasks that you have on the specified date
+             3. todo <name of task>                                             Add a todo to your task list
+             4. deadline <name of task> /by <date* or timestamp* of task>       Add a deadline to your task list
+             5. event <name of task> /at <date* or timestamp* of task>          Add an event to your task list
+             6. mark <index of task>                                            Mark a task as completed in your task list
+             7. unmark <index of task>                                          Unmark a task in your task list
+             8. bye                                                             Exit the program
+
+             * date format is dd/MM/YYYY                                        eg; 24/04/2022
+             * timestamp format is dd/MM/YYYY HHmm                              eg; 23/03/2022 1800
 
 **********************************************************************************************************************
 
@@ -87,7 +91,7 @@ Innkeeper: What can I do for you today?
 You: 
 Innkeeper: This deadline has been added to your task list!
 
-             [D][ ] somedeadline (by: tomorrow)
+             [D][ ] somedeadline (by: 24 April 2022)
 
 Innkeeper: You now have 2 tasks!
 
@@ -109,7 +113,7 @@ Innkeeper: What can I do for you today?
 **********************************************************************************************************************
 
 You: 
-Innkeeper: The correct format for adding a deadline is deadline <name of task> /by <deadline of task>
+Innkeeper: You need to key in the title of your deadline traveller!
 
 Innkeeper: You can type guide for a list of valid commands to use!
 
@@ -120,7 +124,7 @@ Innkeeper: What can I do for you today?
 **********************************************************************************************************************
 
 You: 
-Innkeeper: You need to key in the title of your deadline traveller!
+Innkeeper: That's an invalid timestamp format traveller!
 
 Innkeeper: You can type guide for a list of valid commands to use!
 
@@ -142,7 +146,7 @@ Innkeeper: What can I do for you today?
 **********************************************************************************************************************
 
 You: 
-Innkeeper: The correct format for adding a deadline is deadline <name of task> /by <deadline of task>
+Innkeeper: The correct format for adding a deadline is deadline <name of task> /by <timestamp of task>
 
 Innkeeper: You can type guide for a list of valid commands to use!
 
@@ -167,7 +171,7 @@ You:
 Innkeeper: Here you go!
 
              1. [T][ ] sometodo
-             2. [D][ ] somedeadline (by: tomorrow)
+             2. [D][ ] somedeadline (by: 24 April 2022)
 
 **********************************************************************************************************************
 
@@ -178,7 +182,7 @@ Innkeeper: What can I do for you today?
 You: 
 Innkeeper: This event has been added to your task list!
 
-             [E][ ] someevent (at: 2pm-4pm tomorrow)
+             [E][ ] someevent (at: 23 March 2022, 6:00 PM)
 
 Innkeeper: You now have 3 tasks!
 
@@ -200,7 +204,7 @@ Innkeeper: What can I do for you today?
 **********************************************************************************************************************
 
 You: 
-Innkeeper: The correct format for adding an event is event <name of task> /at <timestamp of task>
+Innkeeper: You need to key in the title of your event traveller!
 
 Innkeeper: You can type guide for a list of valid commands to use!
 
@@ -211,7 +215,7 @@ Innkeeper: What can I do for you today?
 **********************************************************************************************************************
 
 You: 
-Innkeeper: You need to key in the title of your event traveller!
+Innkeeper: That's an invalid timestamp format traveller!
 
 Innkeeper: You can type guide for a list of valid commands to use!
 
@@ -258,8 +262,8 @@ You:
 Innkeeper: Here you go!
 
              1. [T][ ] sometodo
-             2. [D][ ] somedeadline (by: tomorrow)
-             3. [E][ ] someevent (at: 2pm-4pm tomorrow)
+             2. [D][ ] somedeadline (by: 24 April 2022)
+             3. [E][ ] someevent (at: 23 March 2022, 6:00 PM)
 
 **********************************************************************************************************************
 
@@ -270,7 +274,7 @@ Innkeeper: What can I do for you today?
 You: 
 Innkeeper: This task has been marked as completed in your task list!
 
-             [D][X] somedeadline (by: tomorrow)
+             [D][X] somedeadline (by: 24 April 2022)
 
 **********************************************************************************************************************
 
@@ -355,8 +359,8 @@ You:
 Innkeeper: Here you go!
 
              1. [T][X] sometodo
-             2. [D][X] somedeadline (by: tomorrow)
-             3. [E][ ] someevent (at: 2pm-4pm tomorrow)
+             2. [D][X] somedeadline (by: 24 April 2022)
+             3. [E][ ] someevent (at: 23 March 2022, 6:00 PM)
 
 **********************************************************************************************************************
 
@@ -380,8 +384,8 @@ Innkeeper: What can I do for you today?
 You: 
 Innkeeper: Here you go!
 
-             1. [D][X] somedeadline (by: tomorrow)
-             2. [E][ ] someevent (at: 2pm-4pm tomorrow)
+             1. [D][X] somedeadline (by: 24 April 2022)
+             2. [E][ ] someevent (at: 23 March 2022, 6:00 PM)
 
 **********************************************************************************************************************
 
@@ -436,8 +440,8 @@ Innkeeper: What can I do for you today?
 You: 
 Innkeeper: Here you go!
 
-             1. [D][X] somedeadline (by: tomorrow)
-             2. [E][ ] someevent (at: 2pm-4pm tomorrow)
+             1. [D][X] somedeadline (by: 24 April 2022)
+             2. [E][ ] someevent (at: 23 March 2022, 6:00 PM)
 
 **********************************************************************************************************************
 
@@ -448,7 +452,7 @@ Innkeeper: What can I do for you today?
 You: 
 Innkeeper: This task has successfully been removed from your task list!
 
-             [D][X] somedeadline (by: tomorrow)
+             [D][X] somedeadline (by: 24 April 2022)
 
 Innkeeper: You now have 1 task!
 
@@ -461,7 +465,7 @@ Innkeeper: What can I do for you today?
 You: 
 Innkeeper: This task has successfully been removed from your task list!
 
-             [E][ ] someevent (at: 2pm-4pm tomorrow)
+             [E][ ] someevent (at: 23 March 2022, 6:00 PM)
 
 Innkeeper: You now have 0 tasks!
 
