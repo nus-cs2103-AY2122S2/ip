@@ -12,6 +12,15 @@ public class MarkCommand extends Command {
         this.index = serialNumber - 1;
     }
 
+    /**
+     * Mark Task in TaskList as done.
+     * Also overwrite Storage.
+     *
+     * @param ui Ui for outputting message.
+     * @param storage Storage for rewriting TaskList.
+     * @param taskList TaskList that stores Tasks.
+     * @throws DukeException If index number out of bounds or problems with writing to Storage.
+     */
     @Override
     public void execute(Ui ui, Storage storage, TaskList taskList) throws DukeException {
         if (this.index < 0 || this.index >= taskList.size()) {

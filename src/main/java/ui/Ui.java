@@ -4,6 +4,10 @@ import exception.DukeException;
 
 import java.util.Scanner;
 
+/**
+ * Ui interface that the user interacts with.
+ * Involves a scanner to read user inputs.
+ */
 public class Ui {
     Scanner sc;
 
@@ -11,28 +15,40 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
+    /**
+     * Ouputs the message according to a particular format.
+     * @param message Text that must be formatted.
+     */
     public void outputMessage(String message) {
         System.out.println("____________________________________________________________\n"
                 + message + "\n____________________________________________________________");
     }
 
-    public static void outputError(String errorMessage) {
-        System.out.println("____________________________________________________________\n"
-                + "ERROR!!! " + errorMessage + "\n____________________________________________________________");
-    }
-
+    /** Outputs the hello message when the bot starts. */
     public void sayHello() {
         outputMessage("Hello! I'm Duke\nWhat can I do for you?");
     }
 
+    /**
+     * Returns input message from the user.
+     * @return String that the user outputted.
+     */
     public String getCommand() {
         return sc.nextLine();
     }
 
+    /**
+     * Outputs the error message of a DukeException.
+     * @param e DukeException whose error message must be outputted.
+     */
     public void showError(DukeException e) {
         System.out.println(e.getMessage());
     }
 
+    /**
+     * Outputs the goodbye message when the bot session ends.
+     * Also closes the Scanner associated with the Ui.
+     */
     public void exit() {
         outputMessage("Bye. Hope to see you again soon!");
         sc.close();

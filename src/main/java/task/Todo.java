@@ -7,6 +7,8 @@ public class Todo extends Task {
     public String fileFormat() {
         return String.format("T | %s | %s", this.isDone ? "X" : " ", this.description);
     }
+
+    @Override
     public String toString() {
         return String.format("[T][%s] %s", this.isDone ? "X" : " ", this.description);
     }

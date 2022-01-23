@@ -15,6 +15,7 @@ public class Event extends Task {
         return String.format("E | %s | %s | %s", this.isDone ? "X" : " ", this.description, this.time);
     }
 
+    @Override
     public String toString() {
         return String.format("[E][%s] %s (at %s)", this.isDone ? "X" : " ", this.description, this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
