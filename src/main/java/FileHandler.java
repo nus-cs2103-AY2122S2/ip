@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 
@@ -70,12 +71,12 @@ public class FileHandler {
                 case DEADLINE:
                     Deadline deadline = (Deadline) task;
                     writer.write("D | " + doneIndicator + " | " + task.getDescription()
-                            + " | " + deadline.getBy());
+                            + " | " + deadline.byToString());
                     break;
                 case EVENT:
                     Event event = (Event) task;
                     writer.write("T | " + doneIndicator + " | " + task.getDescription()
-                            + " | " + event.getAt());
+                            + " | " + event.startToString() + " | " + event.endToString());
 
                     break;
                 }
@@ -104,9 +105,10 @@ public class FileHandler {
                 if (tokens[0].equals("T")) {
                     task = new ToDo(tokens[2].trim());
                 } else if (tokens[0].equals("D")) {
-                    task = new Deadline(tokens[2].trim(), tokens[3].trim());
+                    task = new Deadline(tokens[2].trim(), LocalDateTime.parse(tokens[3].trim()));
                 } else if (tokens[0].equals("E")) {
-                    task = new Event(tokens[2].trim(), tokens[3].trim());
+                    task = new Event(tokens[2].trim(), LocalDateTime.parse(tokens[3].trim()),
+                            LocalDateTime.parse(tokens[4].trim()));
                 } else {
                     throw new InvalidFileSyntaxException("Failed to load task: Unknown Task type");
                 }
