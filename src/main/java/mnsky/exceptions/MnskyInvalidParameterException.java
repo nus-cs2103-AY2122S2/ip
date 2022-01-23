@@ -1,3 +1,5 @@
+package mnsky.exceptions;
+
 public class MnskyInvalidParameterException extends MnskyException {
     /**
      * Constructor for the class.

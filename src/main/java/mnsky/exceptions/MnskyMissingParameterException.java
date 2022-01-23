@@ -1,3 +1,5 @@
+package mnsky.exceptions;
+
 public class MnskyMissingParameterException extends MnskyException {
     /**
      * Constructor for the class.

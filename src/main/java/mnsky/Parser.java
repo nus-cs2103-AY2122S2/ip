@@ -1,3 +1,8 @@
+package mnsky;
+
+import mnsky.exceptions.MnskyException;
+import mnsky.exceptions.MnskyMissingParameterException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,9 +13,9 @@ public class Parser {
      * @param command The name of the command that called this function.
      * @param inputSplit The input, split into an array using space.
      * @return The value of the index parameter.
-     * @throws MnskyException Thrown if the index parameter is missing, not an integer, or out of bounds of the list.
+     * @throws MnskyMissingParameterException Thrown if the index parameter is missing..
      */
-    private static String retrieveIndex(String command, String[] inputSplit) throws MnskyException {
+    private static String retrieveIndex(String command, String[] inputSplit) throws MnskyMissingParameterException {
         if (inputSplit.length < 2) {
             throw new MnskyMissingParameterException(command, "index");
         }
@@ -21,10 +26,10 @@ public class Parser {
     /**
      * Creates a new task by parsing the input.
      * @param input The input string.
-     * @throws MnskyException Thrown if the name parameter is missing.
+     * @throws MnskyMissingParameterException Thrown if the name parameter is missing.
      * @return The new task.
      */
-    private static ArrayList<String> parseTask(String input) throws MnskyException {
+    private static ArrayList<String> parseTask(String input) throws MnskyMissingParameterException {
         String[] inputSplit = input.split(" ", 2);
         if (inputSplit.length < 2) {
             throw new MnskyMissingParameterException("todo", "name");
@@ -36,10 +41,10 @@ public class Parser {
     /**
      * Creates a new deadline (a task with a "by" parameter included) by parsing the input.
      * @param inputSplit The input, split into an array using space.
-     * @throws MnskyException Thrown if the name or the by parameter is missing.
+     * @throws MnskyMissingParameterException Thrown if the name or the by parameter is missing.
      * @return The new deadline.
      */
-    private static ArrayList<String> parseDeadline(String[] inputSplit) throws MnskyException {
+    private static ArrayList<String> parseDeadline(String[] inputSplit) throws MnskyMissingParameterException {
         if (inputSplit.length < 2) {
             throw new MnskyMissingParameterException("deadline", "name");
         }
@@ -64,10 +69,10 @@ public class Parser {
     /**
      * Creates a new event (a task with an "at" parameter included) by parsing the input.
      * @param inputSplit The input, split into an array using space.
-     * @throws MnskyException Thrown if the name or the at parameter is missing.
+     * @throws MnskyMissingParameterException Thrown if the name or the at parameter is missing.
      * @return The new event.
      */
-    private static ArrayList<String> parseEvent(String[] inputSplit) throws MnskyException {
+    private static ArrayList<String> parseEvent(String[] inputSplit) throws MnskyMissingParameterException {
         if (inputSplit.length < 2) {
             throw new MnskyMissingParameterException("event", "name");
         }

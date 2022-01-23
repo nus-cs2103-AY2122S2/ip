@@ -1,3 +1,9 @@
+package mnsky;
+
+import mnsky.exceptions.MnskyException;
+import mnsky.exceptions.MnskyInvalidParameterException;
+import mnsky.task.*;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
@@ -12,6 +18,8 @@ public class TaskList {
      * @param storage The storage object, to be used for retrieving the storage data.
      */
     public TaskList(Ui ui, Storage storage) {
+        this.list = new ArrayList<>();
+
         try {
             this.getStorageData(storage);
         } catch (MnskyException e) {
@@ -172,7 +180,7 @@ public class TaskList {
     private void getStorageData(Storage storage) throws MnskyException {
         ArrayList<ArrayList<String>> taskList = Parser.parseStorageData(storage.readFromDataFile());
         for (ArrayList<String> task : taskList) {
-            Task actualTask = null;
+            Task actualTask;
             switch (task.get(0)) {
                 case "task":
                     actualTask = this.addTask(task.get(1));

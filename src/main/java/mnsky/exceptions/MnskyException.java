@@ -1,3 +1,5 @@
+package mnsky.exceptions;
+
 public class MnskyException extends RuntimeException {
     private String message;
 

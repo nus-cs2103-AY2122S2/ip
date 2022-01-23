@@ -1,3 +1,8 @@
+package mnsky;
+
+import mnsky.exceptions.MnskyException;
+import mnsky.task.Task;
+
 import java.util.Scanner;
 
 public class Ui {
