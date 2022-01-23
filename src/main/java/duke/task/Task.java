@@ -12,14 +12,14 @@ public class Task {
         this.isDone = false;
     }
 
-    Task(String ss) {
-        this.taskName = ss;
+    Task(String taskName) {
+        this.taskName = taskName;
         this.isDone = false;
     }
 
-    Task(String ss, boolean b) {
-        this.taskName = ss;
-        this.isDone = b;
+    Task(String taskName, boolean isDone) {
+        this.taskName = taskName;
+        this.isDone = isDone;
     }
 
     public String getTaskName() {

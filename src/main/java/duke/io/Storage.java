@@ -1,11 +1,9 @@
 package duke.io;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -31,8 +29,6 @@ public class Storage {
     public static int saveFile(String folderName, String fileName, ArrayList<Task> arr) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy");
         try {
-            String dir = System.getProperty("user.dir");
-            java.nio.file.Path pp = java.nio.file.Paths.get(dir, folderName);
             Files.createDirectories(Paths.get(folderName));
             String filePath = folderName + "/" + fileName;
             File myObj = new File(filePath);
@@ -40,13 +36,23 @@ public class Storage {
             FileWriter writer = new FileWriter(filePath);
             StringBuilder sb = new StringBuilder();
             for(Task t : arr) {
-                if(t.toString().charAt(1) == 'T')
-                    sb.append(String.format("%s,%s,%s,", t.toString().charAt(1), t.isDone()?"T":"F", t.getTaskName()) + ";");
-                else if(t.toString().charAt(1) == 'D')
-                    sb.append(String.format("%s,%s,%s,%s", t.toString().charAt(1), t.isDone()?"T":"F", t.getTaskName(), ((DeadlineTask)t).getDueDate().format(formatter)) + ";");
-                else if(t.toString().charAt(1) == 'E')
-                    sb.append(String.format("%s,%s,%s,%s", t.toString().charAt(1), t.isDone()?"T":"F", t.getTaskName(), ((EventTask)t).getDate().format(formatter)) + ";");
-
+                if(t.toString().charAt(1) == 'T') {
+                    sb.append(String.format("%s,%s,%s,",
+                            t.toString().charAt(1), t.isDone() ? "T" : "F",
+                            t.getTaskName()))
+                        .append(";");
+                } else if(t.toString().charAt(1) == 'D') {
+                    sb.append(String.format("%s,%s,%s,%s",
+                            t.toString().charAt(1),
+                            t.isDone() ? "T" : "F",
+                            t.getTaskName(), ((DeadlineTask) t).getDueDate().format(formatter)))
+                        .append(";");
+                } else if(t.toString().charAt(1) == 'E')
+                    sb.append(String.format("%s,%s,%s,%s",
+                            t.toString().charAt(1),
+                            t.isDone() ? "T" : "F", t.getTaskName(),
+                            ((EventTask) t).getDate().format(formatter)))
+                        .append(";");
             }
             sb.setLength((sb.length() - 1));
             writer.write(sb.toString());
@@ -71,12 +77,12 @@ public class Storage {
         try {
             FileInputStream fs = new FileInputStream(filePath);
             Scanner sc = new Scanner(fs);
-            String ss = "";
+            StringBuilder ss = new StringBuilder();
             while (sc.hasNextLine()) {
-                ss += sc.nextLine();
+                ss.append(sc.nextLine());
             }
             sc.close();
-            for(String s : ss.split(";")) {
+            for(String s : ss.toString().split(";")) {
                 String[] args = s.split(",");
                 if(args[0].equals("T")) {
                     tl.addTask(new ToDoTask(args[2], args[1].equals("T")));
