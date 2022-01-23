@@ -106,7 +106,7 @@ public class Duke {
 
             } else if (cmd.equals(Commands.DEADLINE.command)) {
                 String info = sc.nextLine();
-                String[] split = info.split("/by ");
+                String[] split = info.split(" /by ");
                 String description = split[0];
                 String time = split[1];
                 Deadline deadline = new Deadline(description, time);
@@ -114,7 +114,7 @@ public class Duke {
 
             } else if (cmd.equals(Commands.EVENT.command)) {
                 String info = sc.nextLine();
-                String[] split = info.split("/at ");
+                String[] split = info.split(" /at ");
                 String description = split[0];
                 String time = split[1];
                 Event event = new Event(description, time);
