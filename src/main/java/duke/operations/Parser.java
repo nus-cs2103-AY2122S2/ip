@@ -14,28 +14,63 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a parser for Duke. It deals with making sense of the user command.
+ */
 public class Parser {
 
+    /**
+     * Converts an input of type String into LocalDate. E.g., 12-12-2022.
+     *
+     * @param str input date of format "dd-MM-yyyy". E.g., 12-12-2022.
+     * @return input of type LocalDate of format "dd-MM-yyyy". E.g., 12-12-2022.
+     */
     public static LocalDate stringToLocalDate(String str) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return LocalDate.parse(str, formatter);
     }
 
+    /**
+     * Converts an input of type String into LocalTime. E.g., 1900.
+     *
+     * @param str input time of format "HHmm". E.g., 1900.
+     * @return input of type LocalTime of format "HHmm". E.g., 1900.
+     */
     public static LocalTime stringToLocalTime(String str) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
         return LocalTime.parse(str, formatter);
     }
 
+    /**
+     * Converts an input of type LocalDate into String. E.g., 12-12-2022.
+     *
+     * @param date input date of format "dd-MM-yyyy". E.g., 12-12-2022.
+     * @return input of type String of format "dd-MM-yyyy". E.g., 12-12-2022.
+     */
     public static String localDateToString(LocalDate date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return date.format(formatter);
     }
 
+    /**
+     * Converts an input of type LocalTime into String. E.g., 1900.
+     *
+     * @param time input time of format "HHmm". E.g., 1900.
+     * @return input of type String of format "HHmm". E.g., 1900.
+     */
     public static String localTimeToString(LocalTime time) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
         return time.format(formatter);
     }
 
+    /**
+     * Parse the user input and handles the various commands depending on the input.
+     * E.g., if user keys in "todo run", this task will go to the respective if block and handle it.
+     *
+     * @param input the user input.
+     * @return a <code>Command</code> that executes the logic.
+     * @throws DukeException handles incomplete and unknown inputs. E.g., "deadline do project /by 12312312".
+     */
     public static Command parse(String input) throws DukeException {
         // Create a String array to read various functions
         String[] strs = input.split(" ");
