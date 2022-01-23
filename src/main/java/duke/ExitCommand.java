@@ -2,6 +2,9 @@ package duke;
 
 import duke.Command;
 
+/**
+ * Command to exit Duke
+ */
 class ExitCommand extends Command {
 
     ExitCommand(String command) {

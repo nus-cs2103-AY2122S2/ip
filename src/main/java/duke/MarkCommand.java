@@ -1,5 +1,10 @@
 package duke;
 
+import duke.Command;
+
+/**
+ * Command to mark task as completed
+ */
 public class MarkCommand extends Command {
     private final int index;
 

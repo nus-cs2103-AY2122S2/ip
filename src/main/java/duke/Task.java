@@ -1,5 +1,9 @@
 package duke;
 
+
+/**
+ * Abstract class task
+ */
 abstract class Task {
     private final String task;
     private final String type;

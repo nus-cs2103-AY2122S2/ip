@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Todo task
+ */
 class ToDo extends Task {
 
     public ToDo(String task) {

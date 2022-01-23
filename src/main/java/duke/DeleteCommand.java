@@ -2,6 +2,9 @@ package duke;
 
 import duke.Command;
 
+/**
+ * Command to delete tasks in tasklist
+ */
 public class DeleteCommand extends Command {
     private final int index;
 

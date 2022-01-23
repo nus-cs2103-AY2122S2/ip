@@ -3,6 +3,9 @@ package duke;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * Deadline task
+ */
 class Deadline extends Task implements DateTimeInterface {
     private final LocalDate date;
 

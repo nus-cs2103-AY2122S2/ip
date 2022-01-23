@@ -3,6 +3,10 @@ package duke;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+
+/**
+ * Event task
+ */
 class Event extends Task implements DateTimeInterface {
     private final LocalDate date;
 
