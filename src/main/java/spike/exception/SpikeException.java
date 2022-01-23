@@ -1,3 +1,5 @@
+package spike;
+
 /**
  * Class for all Spike specific exceptions
  */

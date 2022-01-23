@@ -1,16 +1,18 @@
+package spike.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Encapsulate information of event task.
+ * Encapsulate information of task with deadline.
  */
-public class Event extends Task {
+public class Deadline extends Task{
 
     /**
      * Normal constructor.
      */
-    public Event(String description, LocalDateTime at) {
-        super(description, at);
+    public Deadline(String description, LocalDateTime by) {
+        super(description, by);
     }
 
     /**
@@ -20,12 +22,12 @@ public class Event extends Task {
     public String toFileFormat() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         int status = super.isDone ? 1 : 0;
-        return "E" + " | " + status + " | " + super.description + " | " + dtf.format(super.dateTime);
+        return "D" + " | " + status + " | " + super.description + " | " + dtf.format(super.dateTime);
     }
 
     @Override
     public String toString() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        return "[E]" + super.toString() + " (at: " + dtf.format(super.dateTime) + ")";
+        return "[D]" + super.toString() + " (by: " + dtf.format(super.dateTime) + ")";
     }
 }

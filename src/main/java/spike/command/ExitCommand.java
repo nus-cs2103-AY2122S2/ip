@@ -1,0 +1,26 @@
+package spike.command;
+
+import spike.task.Task;
+import spike.task.TaskList;
+
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class ExitCommand extends Command {
+
+    @Override
+    public String execute(TaskList tasks) {
+        try {
+            FileWriter fw = new FileWriter("data/Spike.txt");
+            String latestList = "";
+            for (Task task : tasks.getTasks()) {
+                latestList = latestList + task.toFileFormat() + "\n";
+            }
+            fw.write(latestList);
+            fw.close();
+        } catch (IOException e) {
+            return "Oops, something went wrong with saving your file :(";
+        }
+        return "See you soon! ﾍ(=￣∇￣)ﾉ";
+    }
+}

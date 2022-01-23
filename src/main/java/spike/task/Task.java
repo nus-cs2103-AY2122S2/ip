@@ -1,3 +1,5 @@
+package spike.task;
+
 import java.time.LocalDateTime;
 
 /**
@@ -9,7 +11,7 @@ public class Task {
     protected LocalDateTime dateTime;
 
     /**
-     * Constructor for Task objects.
+     * Constructor for spike.task.Task objects.
      */
     public Task(String description) {
         this.description = description;
@@ -52,7 +54,7 @@ public class Task {
     }
 
     /**
-     * Format the string representation of Task objects.
+     * Format the string representation of spike.task.Task objects.
      * Gets the date and time for tasks with such information.
      */
     public LocalDateTime getDateTime() {
@@ -60,7 +62,7 @@ public class Task {
     }
 
     /**
-     * Formats the string representation of Task objects.
+     * Formats the string representation of spike.task.Task objects.
      */
     @Override
     public String toString() {

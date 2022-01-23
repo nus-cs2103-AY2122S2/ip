@@ -1,3 +1,5 @@
+package spike.task;
+
 /**
  * Encapsulate information of pure to-do task.
  */
