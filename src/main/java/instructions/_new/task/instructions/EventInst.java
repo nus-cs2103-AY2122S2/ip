@@ -13,8 +13,8 @@ import java.time.LocalDateTime;
  * This class represents an instruction for a new Event task.
  * Format: "event P /at Q /until R",
  *         where P is the task description,
- *         and Q is the start time, in yyyy-mm-dd hh:mm.
- *         and R is the end time, in yyyy-mm-dd hh:mm
+ *         Q is the start time, in yyyy-mm-dd hh:mm,
+ *         and R is the end time, in yyyy-mm-dd hh:mm.
  *
  * @author Ong Han Yang
  */
@@ -44,7 +44,7 @@ public class EventInst extends NewTaskInst {
      *
      * @param taskDetails the details of the instruction. This includes both
      *                    the description and the timing.
-     * @return the Event Instruction
+     * @return the Event Instruction.
      * @throws InvalidInputException when no details are provided, the wrong
      *                               number of details provided, when either
      *                               the timing or description is omitted, or

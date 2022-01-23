@@ -21,28 +21,25 @@ import java.util.Scanner;
  */
 public class Fluffers extends TaskManagerChatbot {
     private enum AsciiArt {
-        /** ASCII art for when Fluffers just wakes up*/
-        AWAKE(
-                "    /\\_____/\\\n" +
-                "   /  o   o  \\\n" +
-                "  ( ==  ^  == )\n" +
-                "   )         (\n" +
-                "  (           )\n" +
-                " ( (  )   (  ) )\n" +
-                "(__(__)___(__)__)"
+        /** ASCII art for when Fluffers just wakes up */
+        AWAKE(    "    /\\_____/\\\n"
+                + "   /  o   o  \\\n"
+                + "  ( ==  ^  == )\n"
+                + "   )         (\n"
+                + "  (           )\n"
+                + " ( (  )   (  ) )\n"
+                + "(__(__)___(__)__)"
         ),
-        /** ASCII art for when Fluffers goes back to sleep*/
-        ASLEEP(
-                "      |\\      _,,,---,,_\n" +
-                "ZZZzz /,`.-'`'    -.  ;-;;,_\n" +
-                "     |,4-  ) )-,_. ,\\ (  `'-'\n" +
-                "    '---''(_/--'  `-'\\_)"
+        /** ASCII art for when Fluffers goes back to sleep */
+        ASLEEP(   "      |\\      _,,,---,,_\n"
+                + "ZZZzz /,`.-'`'    -.  ;-;;,_\n"
+                + "     |,4-  ) )-,_. ,\\ (  `'-'\n"
+                + "    '---''(_/--'  `-'\\_)"
         ),
         /** ASCII art for when Fluffers is displaying a list */
-        LIST_TOP(
-                "    |\\__/,|   (`\\\n" +
-                "  _.|o o  |_   ) )\n" +
-                "-(((---(((--------"
+        LIST_TOP( "    |\\__/,|   (`\\\n"
+                + "  _.|o o  |_   ) )\n"
+                + "-(((---(((--------"
         );
 
         private final String art;
@@ -119,7 +116,7 @@ public class Fluffers extends TaskManagerChatbot {
     }
 
     /**
-     * Starts the program/wakes Fluffers up
+     * Starts the program/wakes Fluffers up.
      *
      * @param args input CLI arguments.
      * @throws SaveFileModifiedException when the save file contains invalid symbols that could
