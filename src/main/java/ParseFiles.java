@@ -46,7 +46,7 @@ public class ParseFiles {
      * 
      * 
      * @param str Line from the file that is to be read
-     * @return
+     * @return Task after reading input
      */
     
     
@@ -60,9 +60,9 @@ public class ParseFiles {
             if (taskType == 'T' || taskType == 'D' || taskType == 'E') {
                 //Handle Wrong Inputs
                 //Case 1: user only specified Task type
-                if (stringIntoParts.length == 1) 
+                if (stringIntoParts.length == 1) {
                     throw new DukeExceptions("ERROR! You've only specified the task type, you need to specify whether task is completed or not and the description of the task \n");
-
+                }
                 //Case 2: If second input(completed/uncompleted) is not an integer, throw exception
                 int index = Integer.parseInt(stringIntoParts[1]);
 
