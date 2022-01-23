@@ -79,7 +79,7 @@ public class Ui {
     }
 
     public void showList(String s) {
-        System.out.println(addPrefix(s));
+        System.out.println(s);
     }
 
     public void showMark(String taskStatus) {
@@ -96,6 +96,14 @@ public class Ui {
         System.out.println(addPrefix("Noted. I've removed the task: \n")
                 + "  " + addPrefix(taskStatus) + "\n"
                 + addPrefix(String.format("Now you have %d tasks in the list.", size)));
+    }
+
+    public void showFind(String s) {
+        System.out.println(addPrefix("Here are the matching tasks in your list:\n") + s);
+    }
+
+    public void showCantFind() {
+        System.out.println(addPrefix("No task with that description"));
     }
 
     public void showHelp() {

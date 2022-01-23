@@ -18,9 +18,7 @@ public class ListCommand extends Command {
             StringBuilder listDescription = new StringBuilder();
             for (int i = 0; i < tasks.size(); i++) {
                 String taskStatus = tasks.taskStatus(i) + ("\n");
-                if (i != 0) {
-                    taskStatus = Ui.addPrefix(taskStatus);
-                }
+                taskStatus = Ui.addPrefix(taskStatus);
                 listDescription.append(taskStatus);
             }
             listDescription.setLength(listDescription.length() - 1);

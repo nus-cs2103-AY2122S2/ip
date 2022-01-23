@@ -1,6 +1,10 @@
 package echo.task;
 
+import echo.ui.Ui;
+
 import java.util.ArrayList;
+
+import static echo.ui.Ui.addPrefix;
 
 /**
  * This class encapsulates the list of tasks associated with Echo.
@@ -56,4 +60,17 @@ public class TaskList {
         return size() == 0;
     }
 
+    public String find(String s) {
+        StringBuilder tasksString = new StringBuilder();
+        for (int i = 0; i < size(); i++) {
+            String desc = TASKS.get(i).DESCRIPTION;
+            if (desc.contains(s)) {
+                tasksString.append(addPrefix(taskStatus(i).concat("\n")));
+            }
+        }
+        if (tasksString.length() != 0) {
+            tasksString.setLength(tasksString.length() - 1);
+        }
+        return tasksString.toString();
+    }
 }
