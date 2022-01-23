@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -52,11 +54,19 @@ public class Duke {
             if (type.equalsIgnoreCase("deadline")) {
                 String[] taskData = taskArr[1].split(" /by ");
 
-                this.tasks.add(new Deadline(taskData[0], taskData[1]));
+                System.out.println(taskData[1]);
+
+                LocalDate by = LocalDate.parse(taskData[1]);
+
+                this.tasks.add(new Deadline(taskData[0], by));
             } else if (type.equalsIgnoreCase("event")) {
                 String[] taskData = taskArr[1].split(" /at ");
 
-                this.tasks.add(new Event(taskData[0], taskData[1]));
+                System.out.println(taskData[1]);
+
+                LocalDate at = LocalDate.parse(taskData[1]);
+
+                this.tasks.add(new Event(taskData[0], at));
             } else if (type.equalsIgnoreCase("todo")) {
                 if (taskArr[1].trim().length() == 0) {
                     throw new IndexOutOfBoundsException();
@@ -85,6 +95,9 @@ public class Duke {
             } else {
                 output(UNKNOWN_MSG);
             }
+        } catch (DateTimeParseException e) {
+            output("OOPS!!! I cannot recognise that date format. :-("
+                    + "\nIn this date format yyyy-mm-dd please!");
         }
     }
 
