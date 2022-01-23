@@ -2,6 +2,12 @@ import command.*;
 import exception.DukeException;
 
 public class Parser {
+    /**
+     * Returns the appropriate Command with appropriate arguments according to user input.
+     * @param input Input that determines command type and parameters.
+     * @return Command that will be subsequently executed.
+     * @throws DukeException If input message does not make sense.
+     */
     public static Command parse(String input) throws DukeException {
         String[] commandSeperated = input.split(" ", 2);
         if (input.strip().equals("list")) {

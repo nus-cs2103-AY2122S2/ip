@@ -12,6 +12,15 @@ public class DeleteCommand extends Command {
         this.serialNumber = serialNumber;
     }
 
+    /**
+     * Deletes Task from TaskList that has the serialNumber given.
+     * Also overwrite Storage.
+     *
+     * @param ui Ui for outputting message.
+     * @param storage Storage for rewriting TaskList.
+     * @param taskList TaskList that stores Tasks.
+     * @throws DukeException If index number out of bounds or problems with writing to Storage.
+     */
     @Override
     public void execute(Ui ui, Storage storage, TaskList taskList) throws DukeException {
         if (this.serialNumber < 1 || this.serialNumber > taskList.size()) {
