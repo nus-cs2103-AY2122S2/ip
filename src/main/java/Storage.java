@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Storage {
 
-    static ArrayList<Task> readFile() throws DukeException, IOException{
+    static TaskList readFile() throws DukeException, IOException{
         File f = new File("src/main/data/duke.txt");
         if (!f.exists()) {
             if (!f.createNewFile()) {
@@ -14,7 +14,7 @@ public class Storage {
             }
         }
         Scanner sc = new Scanner(f);
-        ArrayList<Task> listOfSavedTasks = new ArrayList<>();
+        TaskList listOfSavedTasks = new TaskList();
 
         while (sc.hasNextLine()) {
             String currLine = sc.nextLine();
@@ -23,7 +23,7 @@ public class Storage {
         return listOfSavedTasks;
     }
 
-    static void addLineToTasks(String currLine, ArrayList<Task> listOfSavedTasks) {
+    static void addLineToTasks(String currLine, TaskList listOfSavedTasks) {
         String[] currLineContents = currLine.split(" ~ ");
         String taskType = currLineContents[0];
         boolean isDone = currLineContents[1].equals("X") ? true : false ;
@@ -37,9 +37,10 @@ public class Storage {
         }
     }
 
-    static void saveToFile(ArrayList<Task> tasks) throws IOException {
+    static void saveToFile(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter("src/main/data/duke.txt", false);
-        for (Task task : tasks) {
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
             String currTask = String.format("%s ~ %s ~ %s ~ %s\n",
                     task.getTaskType(),
                     task.getStatusIcon(),
