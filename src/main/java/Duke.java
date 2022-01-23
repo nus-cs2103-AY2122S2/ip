@@ -13,6 +13,7 @@ public class Duke {
 
             Parser p = new Parser(input);
             ParsedAnswer pa = p.parse();
+            System.out.println(storage.taskList);
             break;
         }
     }
