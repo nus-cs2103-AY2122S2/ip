@@ -76,7 +76,6 @@ public class Storage {
         }
 
         readFileContents(txtFile.toString());
-
     }
 
     public static void readFileContents(String filePath) throws FileNotFoundException {

@@ -5,7 +5,6 @@ import duke.exceptions.EmptyInputException;
 import java.util.Scanner;
 
 public class Ui {
-
     public static final String DIVIDER = "____________________________________________________________";
     private static final String SIGNATURE = " ____                         _____       _\n"
             + "| |_) |_   _ ___ ___ _   _  | (___   __ _| | ____ _\n"
