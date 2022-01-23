@@ -12,7 +12,7 @@ import java.io.FileNotFoundException;
  */
 public class Duke {
     private TaskList toDoList;
-    public static Storage storage;
+    private Storage storage;
     private Ui ui;
     private final String filepath;
 
@@ -50,7 +50,7 @@ public class Duke {
         Ui.showWelcome();
         while (!(cmd = br.readLine()).equals("bye")) {
             String commandType = cmd.split(" ")[0];
-            ui.burpReply(ui.determineType(commandType), toDoList, cmd);
+            ui.burpReply(ui.determineType(commandType), toDoList, cmd, this.storage);
         }
         Ui.showBye();
     }

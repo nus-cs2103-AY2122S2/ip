@@ -65,8 +65,8 @@ public class Ui {
      * @param cmd the user's input to Burp
      * @throws DukeException when a WrongCommand is given
      */
-    public static void burpReply(Ui.Reply type, TaskList toDoList, String cmd) throws DukeException {
-        Parser.parseCommands(type, toDoList, cmd);
+    public static void burpReply(Ui.Reply type, TaskList toDoList, String cmd, Storage storage) throws DukeException {
+        Parser.parseCommands(type, toDoList, cmd, storage);
     }
 
     /**

@@ -26,17 +26,17 @@ public class Parser {
      * @return Returns a Command to indicate what the last Command run was
      * @throws DukeException when a WrongCommand is given
      */
-    public static Command parseCommands(Ui.Reply type, TaskList toDoList, String cmd) throws DukeException {
+    public static Command parseCommands(Ui.Reply type, TaskList toDoList, String cmd, Storage storage) throws DukeException {
         String[] cmd_split = cmd.split(" ");
         switch (type) {
             case LIST:
                 return new ListCommand(toDoList, cmd);
             case TODO:
-                return new AddToDoCommand(toDoList, cmd, Duke.storage);
+                return new AddToDoCommand(toDoList, cmd, storage);
             case DEADLINE:
-                return new AddDeadlineCommand(toDoList, cmd, Duke.storage);
+                return new AddDeadlineCommand(toDoList, cmd, storage);
             case EVENT:
-                return new AddEventCommand(toDoList, cmd, Duke.storage);
+                return new AddEventCommand(toDoList, cmd, storage);
             case MARK:
                 return new MarkCommand(toDoList, Integer.parseInt(cmd_split[1]) - 1);
             case UNMARK:
