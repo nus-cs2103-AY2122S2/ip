@@ -16,6 +16,22 @@ import duke.task.*;
  * Handles user input entered into Duke by validating it and making sense out of it. <br>
  */
 public class Parser {
+
+    /**
+     * Validates and processes input entered by the user. <br>
+     * Inputs of incorrect format will not be processed, and an error message will be shown instead. <br>
+     * <br>
+     * Returns the following: <br>
+     * <li>-1: Indicates command to terminate </li>
+     * <li>0 : Indicates command ran successfully, without changes to the task list</li>
+     * <li>1 : Indicates command ran successfully, with changes to the task list</li>
+     * <li>Element</li>
+     *
+     * @param inputString The input that is entered by the user
+     * @param ui The Ui object that used to output the appropriate messages to the user
+     * @param taskList: The taskList that is used to maintain list of tasks in Duke
+     * @return: Returns an integer that indicate the result of the run.
+     */
     public int run(String inputString, Ui ui, TaskList taskList) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy");
         String[] args = inputString.split("\\s+");
@@ -91,47 +107,58 @@ public class Parser {
             } else {
                 ui.print(taskList.getList());
             }
-            break;
+            return 0;
         case "mark":
             taskList.getTask(Integer.parseInt(args[1]) - 1).mark();
             ui.print("Task marked as done: ", " " + taskList.getTask(Integer.parseInt(args[1]) - 1).toString());
-            break;
+            return 1;
         case "unmark":
             taskList.getTask(Integer.parseInt(args[1]) - 1).unmark();
             ui.print("Task as not done yet: "," " + taskList.getTask(Integer.parseInt(args[1]) - 1).toString());
-            break;
+            return 1;
         case "todo":
             taskList.addTask(new ToDoTask((inputString).substring(5).trim()));
             ui.print("Added Task: ", " " + taskList.getLast().toString(),
                     String.format("There are now %d task(s) in the list.", taskList.getSize()));
-            break;
+            return 1;
         case "deadline":
             taskList.addTask(new DeadlineTask(inputString.substring(9).split("/by")[0].trim(),
                     LocalDate.parse(inputString.split("/by")[1].substring(1),formatter)));
             ui.print("Added Task: ", " " + taskList.getLast().toString(),
                     String.format("There are now %d task(s) in the list.", taskList.getSize()));
-            break;
+            return 1;
         case "event":
             taskList.addTask(new EventTask(inputString.substring(6).split("/at")[0].trim(),
                     LocalDate.parse(inputString.split("/at")[1].substring(1),formatter)));
             ui.print("Added Task: ", " " + taskList.getLast().toString(),
                     String.format("There are now %d task(s) in the list.", taskList.getSize()));
-            break;
+            return 1;
         case "delete":
             Task deletedTask = taskList.getTask(Integer.parseInt(args[1]) - 1);
             taskList.removeTask(Integer.parseInt(args[1]) - 1);
             ui.print("Deleted Task:", " " + deletedTask.toString(),
                     String.format("There are now %d task(s) in the list.", taskList.getSize()));
-            break;
+            return 1;
         case "find":
             ui.print(taskList.findTasksContaining(args[1]),"Here are the matching tasks in your list:");
-            break;
+            return 1;
         default:
             System.out.println("Unknown Command");
         }
         return 0;
 
     }
+
+    /**
+     * Validates a given String and argument list based on the given action and task list.
+     * A DukeException is thrown when the String or argument do not fit the corresponding action and task list provided <br>
+     * <br>
+     *
+     * @param inputString The string to be checked
+     * @param action The type action to be checked with
+     * @param args: The argument list to be checked
+     * @param taskArrayList: The list of task to be checked with
+     */
 
     public void validate(String inputString, String action, String[] args, ArrayList<Task> taskArrayList) throws DukeException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy");
