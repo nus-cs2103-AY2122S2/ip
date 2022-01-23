@@ -1,7 +1,7 @@
 todo eat
 todo sleep
 event party /at my house
-deadline cs2103t ip /by 20 Jan
+deadline cs2103t ip /by 20/01/2022
 list
 mark 2
 unmark 2

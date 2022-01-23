@@ -1,27 +1,25 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
 
-    protected String by;
-    private static boolean tipShown = false;
+    protected LocalDate by;
 
     public Deadline(String description) {
         super(description);
-        if (!tipShown) {
-            System.out.println("Tip: You can specify due dates");
-            System.out.println("eg. deadline CS2103T /by today\n");
-            tipShown = true;
-        }
     }
 
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
-        tipShown = true;
+        String[] time = by.split("/");
+        LocalDate deadline = LocalDate.parse(time[2] + "-" + time[1] + "-" + time[0]);
+        this.by = deadline;
     }
 
     @Override
     public String toString() {
         if (by != null) {
-            return "[D]" + super.toString() + " (by: " + by + ")";
+            return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
         } else {
             return "[D]" + super.toString();
         }
