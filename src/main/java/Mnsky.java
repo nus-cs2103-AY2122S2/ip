@@ -19,13 +19,41 @@ public class Mnsky {
          this.storage = new Storage("data/MnskyData.txt");
 
          try {
-             this.list = this.parseStorageData(this.storage.readFromDataFile());
+             this.getStorageData();
          } catch (MnskyException e) {
              ui.printException(e);
              this.list = new ArrayList<>();
          }
 
          this.ui.greeting();
+    }
+
+    private void getStorageData() throws MnskyException {
+        ArrayList<ArrayList<String>> taskList = Parser.parseStorageData(this.storage.readFromDataFile());
+        for (ArrayList<String> task : taskList) {
+            Task actualTask = null;
+            switch (task.get(0)) {
+                case "task":
+                    actualTask = this.addTask(task.get(1));
+                    break;
+
+                case "event":
+                    actualTask = this.addEvent(task.get(1), task.get(2));
+
+                case "deadline":
+                    actualTask = this.addDeadline(task.get(1), task.get(2));
+                    break;
+
+                default:
+                    throw new MnskyException("????");
+            }
+
+            if (actualTask != null) {
+                if (task.get(3).equals("X")) {
+                    actualTask.mark();
+                }
+            }
+        }
     }
 
     /**
@@ -42,164 +70,84 @@ public class Mnsky {
     }
 
     /**
-     * Retrieves and returns the value of the index parameter from the input.
-     * @param command The name of the command that called this function.
-     * @param inputSplit The input, split into an array using space.
-     * @return The value of the index parameter.
-     * @throws MnskyException Thrown if the index parameter is missing, not an integer, or out of bounds of the list.
-     */
-    private int retrieveIndex(String command, String[] inputSplit) throws MnskyException {
-        if (inputSplit.length < 2) {
-            throw new MnskyMissingParameterException(command, "index");
-        }
-
-        if (!inputSplit[1].matches("\\d+")) {
-            throw new MnskyInvalidParameterException(command, "index");
-        }
-
-        int index = Integer.parseInt(inputSplit[1]) - 1;
-
-        if (index < 0 || index >= this.list.size()) {
-            throw new MnskyInvalidParameterException(command, "index");
-        }
-
-        return index;
-    }
-
-    /**
      * Marks the task corresponding to the given index parameter as done, if it exists.
-     * @param inputSplit The input, split into an array using space.
-     * @throws MnskyException Thrown if the index parameter is missing, not an integer, or out of bounds of the list.
+     * @param index The input, split into an array using space.
      */
-    private void mark(String[] inputSplit) {
-        int index = this.retrieveIndex("mark", inputSplit);
+    private void mark(int index) {
         this.list.get(index).mark();
         this.ui.printTask(this.list.get(index));
     }
 
     /**
      * Unmarks the task corresponding to the given index parameter so it is not done, if it exists.
-     * @param inputSplit The input, split into an array using space.
-     * @throws MnskyException Thrown if the index parameter is missing, not an integer, or out of bounds of the list.
+     * @param index The input, split into an array using space.
      */
-    private void unmark(String[] inputSplit) throws MnskyException {
-        int index = this.retrieveIndex("mark", inputSplit);
+    private void unmark(int index) {
         this.list.get(index).unmark();
         this.ui.printTask(this.list.get(index));
     }
 
-    /**
-     * Adds the given task to the list while printing a message.
-     * @param task The task to be added to the list.
-     */
-    private void addTask(Task task) {
+    private Task addTask(String name) {
+        Task task = new Task(name);
         this.list.add(task);
-        this.ui.printAddedTask(task);
-    }
-
-    /**
-     * Creates a new task by parsing the input.
-     * @param input The input string.
-     * @throws MnskyException Thrown if the name parameter is missing.
-     * @return The new task.
-     */
-    private Task parseTask(String input) throws MnskyException {
-        String[] inputSplit = input.split(" ", 2);
-        if (inputSplit.length < 2) {
-            throw new MnskyMissingParameterException("todo", "name");
-        }
-
-        String taskName = inputSplit[1];
-        return new Task(taskName);
+        return task;
     }
 
     /**
      * Creates a new deadline (a task with a "by" parameter included) by parsing the input.
-     * @param inputSplit The input, split into an array using space.
      * @throws MnskyException Thrown if the name or the by parameter is missing.
      * @return The new deadline.
      */
-    private Deadline parseDeadline(String[] inputSplit) throws MnskyException {
-        if (inputSplit.length < 2) {
-            throw new MnskyMissingParameterException("deadline", "name");
-        }
-
-        int by_index = 1;
-        for (; by_index < inputSplit.length; by_index++) {
-            if (inputSplit[by_index].equals("/by")) {
-                break;
-            }
-        }
-
-        if (by_index >= inputSplit.length) {
-            throw new MnskyMissingParameterException("deadline", "by");
-        }
-
-        String deadlineName = String.join(" ", Arrays.copyOfRange(inputSplit, 1, by_index));
-        String by = String.join(" ", Arrays.copyOfRange(inputSplit, by_index + 1, inputSplit.length));
+    private Deadline addDeadline(String name, String by) {
+        String[] bySplit = by.split(" ");
         LocalDate byDate = null;
         LocalTime byTime = null;
 
         // Check to see if there are any dates or times in the first two words after the /by command
-        if (by_index + 1 < inputSplit.length) {
-            byDate = this.parseDate(inputSplit[by_index + 1]);
-            if (byDate != null && by_index + 2 < inputSplit.length) {
-                byTime = this.parseTime(inputSplit[by_index + 2]);
+        if (bySplit.length >= 1) {
+            byDate = this.parseDate(bySplit[0]);
+            if (byDate != null && bySplit.length >= 2) {
+                byTime = this.parseTime(bySplit[1]);
             } else {
-                byTime = this.parseTime(inputSplit[by_index + 1]);
+                byTime = this.parseTime(bySplit[0]);
             }
         }
 
-        return new Deadline(deadlineName, by, byDate, byTime);
+        Deadline deadline = new Deadline(name, by, byDate, byTime);
+        this.list.add(deadline);
+        return deadline;
     }
 
     /**
      * Creates a new event (a task with an "at" parameter included) by parsing the input.
-     * @param inputSplit The input, split into an array using space.
      * @throws MnskyException Thrown if the name or the at parameter is missing.
      * @return The new event.
      */
-    private Event parseEvent(String[] inputSplit) throws MnskyException {
-        if (inputSplit.length < 2) {
-            throw new MnskyMissingParameterException("event", "name");
-        }
-
-        int at_index = 1;
-        for (; at_index < inputSplit.length; at_index++) {
-            if (inputSplit[at_index].equals("/at")) {
-                break;
-            }
-        }
-
-        if (at_index >= inputSplit.length) {
-            throw new MnskyMissingParameterException("event", "at");
-        }
-
-        String eventName = String.join(" ", Arrays.copyOfRange(inputSplit, 1, at_index));
-        String at = String.join(" ", Arrays.copyOfRange(inputSplit, at_index + 1, inputSplit.length));
+    private Event addEvent(String name, String at) throws MnskyException {
+        String[] atSplit = at.split(" ");
         LocalDate atDate = null;
         LocalTime atTime = null;
 
         // Check to see if there are any dates or times in the first two words after the /by command
-        if (at_index + 1 < inputSplit.length) {
-            atDate = this.parseDate(inputSplit[at_index + 1]);
-            if (atDate != null && at_index + 2 < inputSplit.length) {
-                atTime = this.parseTime(inputSplit[at_index + 2]);
+        if (atSplit.length >= 1) {
+            atDate = this.parseDate(atSplit[0]);
+            if (atDate != null && atSplit.length >= 2) {
+                atTime = this.parseTime(atSplit[1]);
             } else {
-                atTime = this.parseTime(inputSplit[at_index + 1]);
+                atTime = this.parseTime(atSplit[0]);
             }
         }
 
-        return new Event(eventName, at, atDate, atTime);
+        Event event = new Event(name, at, atDate, atTime);
+        this.list.add(event);
+        return event;
     }
 
     /**
      * Deletes the task corresponding to the given index parameter, if it exists.
-     * @param inputSplit The input, split into an array using space.
-     * @throws MnskyException Thrown if the index parameter is missing, not an integer, or out of bounds of the list.
+     * @param index The input, split into an array using space.
      */
-    private void delete(String[] inputSplit) throws MnskyException {
-        int index = this.retrieveIndex("delete", inputSplit);
+    private void delete(int index) throws MnskyException {
         this.ui.printDeletedTask(this.list.get(index));
         this.list.remove(index);
     }
@@ -218,40 +166,6 @@ public class Mnsky {
     }
 
     /**
-     * Adds all the tasks from the data file into the list.
-     */
-    private ArrayList<Task> parseStorageData(ArrayList<String> rawTaskList) throws MnskyException {
-        try {
-            ArrayList<Task> taskList = new ArrayList<>();
-
-            for (String line : rawTaskList) {
-                String[] lineSplit = line.split(" ");
-                Task nextTask = null;
-
-                if (line.charAt(1) == 'T') {
-                    nextTask = this.parseTask(line);
-                } else if (line.charAt(1) == 'D') {
-                    nextTask = this.parseDeadline(lineSplit);
-                } else if (line.charAt(1) == 'E') {
-                    nextTask = this.parseEvent(lineSplit);
-                }
-
-                if (nextTask != null) {
-                    taskList.add(nextTask);
-
-                    if (line.charAt(4) == 'X') {
-                        nextTask.mark();
-                    }
-                }
-            }
-
-            return taskList;
-        } catch (MnskyException e) {
-            throw new MnskyException("[MNSKY is having trouble remembering the previous task list...]\n");
-        }
-    }
-
-    /**
      * Creates a LocalTime object based on the input string.
      * @param input The input string to create a LocalTime object from
      * @return The created LocalTime object if the input string is in a valid time format, null otherwise.
@@ -264,60 +178,78 @@ public class Mnsky {
         }
     }
 
-    /**
-     * Parses the input and executes the logic depending on the type of input.
-     * @return True if the user input "bye" and thus wants to stop talking to the chatbot.
-     *          False otherwise.
-     */
-    public boolean parseInput() {
+
+    private boolean isWriteCommand(String searchedCommand) {
+        String[] writeCommands = {"mark", "unmark", "todo", "event", "deadline", "delete"};
+
+        for (String command : writeCommands) {
+            if (command.equals(searchedCommand)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private int stringToIndex(String command, String stringIndex) throws MnskyInvalidParameterException {
+        int index = Integer.parseInt(stringIndex) - 1;
+        if (index < 0 || index >= this.list.size()) {
+            throw new MnskyInvalidParameterException(command, "index");
+        }
+
+        return index;
+    }
+
+    public boolean run() {
         String input = this.ui.getInput();
-        String[] inputSplit = input.split(" ");
+        ArrayList<String> parsedInput = Parser.parseInput(input);
 
         try {
-            switch (inputSplit[0]) {
-                case "bye":
-                    this.ui.bye();
-                    return false;
+            switch (parsedInput.get(0)) {
+            case "bye":
+                this.ui.bye();
+                return false;
 
-                case "list":
-                    this.printList();
-                    break;
+            case "list":
+                this.printList();
+                break;
 
-                case "mark":
-                    this.mark(inputSplit);
-                    this.storage.writeToDataFile(this.list);
-                    break;
+            case "mark":
+                this.mark(this.stringToIndex("mark", parsedInput.get(1)));
+                break;
 
-                case "unmark":
-                    this.unmark(inputSplit);
-                    this.storage.writeToDataFile(this.list);
-                    break;
+            case "unmark":
+                this.unmark(this.stringToIndex("unmark", parsedInput.get(1)));
+                break;
 
-                case "todo":
-                    this.addTask(this.parseTask(input));
-                    this.storage.writeToDataFile(this.list);
-                    break;
+            case "task":
+                Task task = this.addTask(parsedInput.get(1));
+                this.ui.printAddedTask(task);
+                break;
 
-                case "event":
-                    this.addTask(this.parseEvent(inputSplit));
-                    this.storage.writeToDataFile(this.list);
-                    break;
+            case "event":
+                Event event = this.addEvent(parsedInput.get(1), parsedInput.get(2));
+                this.ui.printAddedTask(event);
+                break;
 
-                case "deadline":
-                    this.addTask(this.parseDeadline(inputSplit));
-                    this.storage.writeToDataFile(this.list);
-                    break;
+            case "deadline":
+                Deadline deadline = this.addDeadline(parsedInput.get(1), parsedInput.get(2));
+                this.ui.printAddedTask(deadline);
+                break;
 
-                case "delete":
-                    this.delete(inputSplit);
-                    this.storage.writeToDataFile(this.list);
-                    break;
+            case "delete":
+                this.delete(this.stringToIndex("delete", parsedInput.get(1)));
+                break;
 
-                default:
-                    this.ui.printMnsky("...");
+            default:
+                this.ui.printMnsky("...");
             }
         } catch (MnskyException e) {
             this.ui.printException(e);
+        }
+
+        if (this.isWriteCommand(parsedInput.get(0))) {
+            this.storage.writeToDataFile(this.list);
         }
 
         this.ui.printMnsky("I can help!");
@@ -327,6 +259,6 @@ public class Mnsky {
     public static void main(String[] args) {
         Mnsky mnsky = new Mnsky();
 
-        while (mnsky.parseInput()) {}
+        while (mnsky.run()) {}
     }
 }
