@@ -1,12 +1,6 @@
 package Alfred.UI;
 
-import Alfred.Alfred;
 import Alfred.Exceptions.AlfredException;
-import Alfred.Exceptions.InvalidCommandException;
-import Alfred.Exceptions.InvalidDateTimeException;
-import Alfred.Exceptions.InvalidIndexException;
-import Alfred.Exceptions.InvalidInputException;
-import Alfred.Exceptions.MissingInputException;
 import java.util.Scanner;
 
 public class AlfredUserInterface {
