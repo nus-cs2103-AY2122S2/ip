@@ -1,7 +1,7 @@
 list
 todo buy milk
-deadline do assignment 1 /by Friday
-event biology class /at Wednesday 1-2pm
+deadline do assignment 1 /by 11-25-2022 1800
+event biology class /at 11-25-2022 1800
 list
 mark 1
 list

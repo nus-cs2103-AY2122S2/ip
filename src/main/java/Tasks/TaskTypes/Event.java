@@ -1,7 +1,11 @@
 package Tasks.TaskTypes;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 public class Event extends Task {
-    protected String at;
+    private LocalDateTime eventDateTime;
+    private static final DateTimeFormatter inputDateTimeFormatter = DateTimeFormatter.ofPattern("M-d-yyyy Hmm");
+    private static final DateTimeFormatter outputDateTimeFormatter = DateTimeFormatter.ofPattern("d MMM yyyy, h:mm a");
 
     /**
      * Creates a new Event.
@@ -11,7 +15,8 @@ public class Event extends Task {
      */
     public Event(String title, String at) {
         super(title);
-        this.at = at;
+
+        this.eventDateTime = LocalDateTime.parse(at, inputDateTimeFormatter);
     }
 
     /**
@@ -23,16 +28,16 @@ public class Event extends Task {
      */
     public Event(boolean isDone, String title, String at) {
         super(isDone, title);
-        this.at = at;
+        this.eventDateTime = LocalDateTime.parse(at, inputDateTimeFormatter);
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), this.at);
+        return String.format("[E]%s (at: %s)", super.toString(), this.eventDateTime.format(outputDateTimeFormatter));
     }
 
     @Override
     public String encodeTask() {
-        return String.format("E @@@ %b @@@ %s @@@ %s", super.isDone(), super.getTitle(), this.at);
+        return String.format("E @@@ %b @@@ %s @@@ %s", super.isDone(), super.getTitle(), this.eventDateTime.format(inputDateTimeFormatter));
     }
 }

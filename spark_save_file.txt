@@ -1,1 +1,1 @@
-T | false | read bookT | false | hello
+E @@@ false @@@ biology class @@@ 11-25-2022 1800

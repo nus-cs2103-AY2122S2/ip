@@ -1,3 +1,0 @@
-T @@@ false @@@ buy milk
-D @@@ false @@@ do assignment 1 @@@ Friday
-T @@@ false @@@ biology class @@@ Wednesday 1-2pm
