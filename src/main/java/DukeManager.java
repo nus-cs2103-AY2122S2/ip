@@ -4,11 +4,39 @@ public class DukeManager {
 
     protected ArrayList<Task> tasks;
 
-    public DukeManager() {
-        tasks = new ArrayList<>();
+    protected Storage storage;
+
+    public DukeManager(String storagePath) {
+        storage = new Storage(storagePath);
+        try {
+            tasks = storage.load();
+        } catch (DukeException e) {
+            tasks = new ArrayList<>();
+            echo(e.getMessage());
+        }
     }
 
-    public void handle(String input) throws DukeException {
+    public void run() {
+        FastIO io = new FastIO();
+        greet();
+        boolean exited = false;
+        while (!exited) {
+            String input = io.nextLine();
+            if (input.equals("bye")) {
+                exited = true;
+            } else {
+                try {
+                    handle(input);
+                } catch (DukeException exception) {
+                    echo(exception.getMessage());
+                }
+            }
+        }
+        bye();
+        io.close();
+    }
+
+    protected void handle(String input) throws DukeException {
         String[] tokens = input.split(" ");
         switch (tokens[0]) {
             case "list":
@@ -115,5 +143,6 @@ public class DukeManager {
         System.out.println("    ____________________________________________________________\n" +
                 "     Bye. Hope to see you again soon!\n" +
                 "    ____________________________________________________________");
+        storage.save(tasks);
     }
 }
