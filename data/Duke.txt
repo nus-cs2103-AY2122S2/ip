@@ -1,10 +1,4 @@
-E | X | project meeting | Mon 2-4pm
+E | X | project meeting | Dec 02 2019
 T |   | borrow book
-D |   | return book | Sunday
-E |   | project meeting | Mon 2-4pm
-T |   | borrow book
-D |   | return book | Sunday
-E |   | project meeting | Mon 2-4pm
-T |   | borrow book
-D |   | return book | Sunday
-E |   | project meeting | Mon 2-4pm
+D |   | return book | Dec 01 2019
+E |   | project meeting | Dec 02 2019
