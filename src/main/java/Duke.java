@@ -1,4 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Duke {
@@ -26,16 +29,35 @@ public class Duke {
         }
     }
 
-    private static void addTask(ArrayList<TaskStorage> taskStorages, int numTask) {
+    private static void addTask(ArrayList<TaskStorage> storingList, int numTask,
+                                HashMap<LocalDate, ArrayList<TaskStorage>> dateMap) {
+        TaskStorage taskStorage = storingList.get(storingList.size() - 1);
         System.out.println(TypicalString.LONG_LINE);
         System.out.println(TypicalString.ADDED_TASK);
-        System.out.println("  " + taskStorages.get(taskStorages.size() - 1));
-        System.out.println(" Now you have " + numTask +  " tasks in the list.");
+        System.out.println("  " + taskStorage);
+        System.out.println(" Now you have " + numTask + " tasks in the list.");
         System.out.println(TypicalString.LONG_LINE);
+        if (!taskStorage.getType().equals("T")) {
+            addDate(dateMap, taskStorage);
+        }
     }
 
     private static boolean checkNumeric(String string) {
         return string.matches("-?\\d+(\\.\\d+)?");
+    }
+
+    private static void addDate(
+            HashMap<LocalDate, ArrayList<TaskStorage>> dateMap,
+            TaskStorage taskStorage) {
+        LocalDate localDate = taskStorage.getTime();
+        if (dateMap.containsKey(localDate)) {
+            ArrayList<TaskStorage> eventList = dateMap.get(localDate);
+            eventList.add(taskStorage);
+        } else {
+            ArrayList<TaskStorage> eventList = new ArrayList<>();
+            eventList.add(taskStorage);
+            dateMap.put(localDate, eventList);
+        }
     }
 
     public static void main(String[] args) {
@@ -54,6 +76,7 @@ public class Duke {
         String nextWord = sc.nextLine();
         int taskNumber = 0;
         ArrayList<TaskStorage> storingList = new ArrayList<>();
+        HashMap<LocalDate, ArrayList<TaskStorage>> dateMap = new HashMap<>();
         BotException exception = new BotException();
 
         int commandIndex = nextWord.indexOf(" ");
@@ -103,7 +126,7 @@ public class Duke {
                 } else {
                     taskNumber += 1;
                     storingList.add(new TaskStorage(restWord, "T"));
-                    addTask(storingList, taskNumber);
+                    addTask(storingList, taskNumber, dateMap);
                 }
             } else if (commandWord.equals("deadline")) {
                 if (nextWord.length() == 8) {
@@ -111,7 +134,7 @@ public class Duke {
                 } else {
                     taskNumber += 1;
                     storingList.add(new TaskStorage(restWord, "D"));
-                    addTask(storingList, taskNumber);
+                    addTask(storingList, taskNumber, dateMap);
                 }
             } else if (commandWord.equals("event")) {
                 if (nextWord.length() == 5) {
@@ -119,7 +142,7 @@ public class Duke {
                 } else {
                     taskNumber += 1;
                     storingList.add(new TaskStorage(restWord, "E"));
-                    addTask(storingList, taskNumber);
+                    addTask(storingList, taskNumber, dateMap);
                 }
             } else if (commandWord.equals("delete")) {
                 if (! checkNumeric(restWord)) {
@@ -132,6 +155,21 @@ public class Duke {
                     taskNumber -= 1;
                     System.out.println(" Now you have " + taskNumber + " tasks in the list.");
                     System.out.println(TypicalString.LONG_LINE);
+                }
+            } else if (commandWord.equals("date")) {
+                LocalDate date = LocalDate.parse(restWord,
+                        DateTimeFormatter.ofPattern("d/M/yyyy"));
+                if (dateMap.containsKey(date)) {
+                    System.out.println(TypicalString.LONG_LINE);
+                    ArrayList<TaskStorage> eventList = dateMap.get(date);
+                    System.out.println("You have " + eventList.size() +
+                            " deadlines/events in the day:");
+                    for (int i = 1; i <= eventList.size(); i++) {
+                        System.out.println(i + "." + eventList.get(i - 1));
+                    }
+                    System.out.println(TypicalString.LONG_LINE);
+                } else {
+                    exception.dateNotFound();
                 }
             } else {
                 exception.wrongSyntax();

@@ -1,21 +1,25 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class TaskStorage {
     private String description;
     private boolean complete;
     private String type;
-    private String time;
+    private LocalDate time;
     private String command;
 
     public TaskStorage(String description, String type) {
         int slashIndex;
         int command;
         if (! type.equals("T")) {
-            slashIndex = description.lastIndexOf("/");
+            slashIndex = description.indexOf("/");
             command = description.indexOf(" ", slashIndex);
-            this.time = description.substring(command + 1);
+            String timeString = description.substring(command + 1);
+            this.time = LocalDate.parse(timeString,
+                    DateTimeFormatter.ofPattern("d/M/yyyy"));
             this.command = description.substring(slashIndex + 1, command);
         } else {
             slashIndex = description.length();
-            this.time = "";
             this.command = "";
         }
         this.description = description.substring(0, slashIndex);
@@ -31,6 +35,14 @@ public class TaskStorage {
         this.complete = false;
     }
 
+    public LocalDate getTime() {
+        return this.time;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
     @Override
     public String toString() {
         String temp = "[ ]";
@@ -38,8 +50,9 @@ public class TaskStorage {
             temp = "[X]";
         }
         String timeCommand = "";
-        if (! time.equals("")) {
-            timeCommand = "(" + command + ": " + time + ")";
+        if (! command.equals("")) {
+            timeCommand = "(" + command + ": " +
+                    time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         }
         return "[" + type + "]" + temp + " " + description + timeCommand;
     }
