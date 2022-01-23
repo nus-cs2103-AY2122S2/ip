@@ -9,4 +9,9 @@ public class Event extends Task {
     public String toString() {
         return String.format("%s (at: %s)", super.toString(), this.time);
     }
+
+    @Override
+    public String getFileSaveFormat() {
+        return String.format("%s | %s", super.getFileSaveFormat(), time);
+    }
 }
