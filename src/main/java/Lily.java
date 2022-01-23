@@ -92,10 +92,15 @@ public class Lily {
                     break;
 
                 case "todo":
-                    String todoDesc = sentence.substring(5); // "todo " is 5 char long
-                    Todo t = new Todo(todoDesc);
-                    list.add(t);
-                    taskAddedMsg(t);
+                    try {
+                        Todo t = new Todo(sentence);
+                        list.add(t);
+                        taskAddedMsg(t);
+                    } catch (LilyException le) {
+                        System.err.println("Todo description cannot be empty!");
+                    } catch (Exception e) { // can't figure out how to structure this
+                        System.err.println("LilyException Failed, todo description cannot be empty!");
+                    }
                     break;
                 case "deadline":
                     /*
@@ -104,11 +109,15 @@ public class Lily {
                         if user didnt' type a desc
                             throew new error you didnt type a description man, try again
                     */
-                    int byIdx = sentence.indexOf("/by");
-                    Deadline d = new Deadline(sentence.substring(9, byIdx - 1), 
-                                              sentence.substring(byIdx + 4));
+                    try {
+                    Deadline d = new Deadline(sentence);
                     list.add(d);
                     taskAddedMsg(d);
+                    } catch (LilyException le) {
+                        System.err.println("Deadline description cannot be empty!");
+                    } catch (Exception e) { // can't figure out how to structure this
+                        System.err.println("LilyException Failed, deadline description cannot be empty!");
+                    }
                     break;
                 case "event":
                     /*
@@ -117,11 +126,15 @@ public class Lily {
                         if user didnt' type a desc
                             throew new error you didnt type a description man, try again
                     */
-                    int atIdx = sentence.indexOf("/at");
-                    Event e = new Event(sentence.substring(6, atIdx - 1), 
-                                        sentence.substring(atIdx + 4));
-                    list.add(e);
-                    taskAddedMsg(e);
+                    try {
+                        Event e = new Event(sentence);
+                        list.add(e);
+                        taskAddedMsg(e);
+                    } catch (LilyException le) {
+                        System.err.println("Event description cannot be empty!");
+                    } catch (Exception e) { // can't figure out how to structure this
+                        System.err.println("LilyException Failed, event description cannot be empty!");
+                    }
                     break;
 
                 default:
