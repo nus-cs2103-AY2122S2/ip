@@ -19,7 +19,6 @@ public class Parser {
      * @throws EchoException If input is missing details or badly formatted.
      */
     public static Command parse(String input) throws EchoException {
-
         try {
             // Split input based on white spaces.
             String[] splitSpace = input.split(" ");
