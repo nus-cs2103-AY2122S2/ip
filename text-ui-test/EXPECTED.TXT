@@ -24,10 +24,12 @@ There are now 1 tasks in the list.
 
 Please key in a valid task name.
 
-Deadline Added: [D][ ] return book (by: Sunday)
+Please provide time in the format 'DD/MM/YYYY <time>'.
+
+Deadline Added: [D][ ] return book (by: 25 Jan 2022, 6pm)
 There are now 2 tasks in the list.
 
-Event Added: [E][ ] project meeting (at: Monday 2-4pm)
+Event Added: [E][ ] project meeting (at: 1 Feb 2022)
 There are now 3 tasks in the list.
 
 Please key in a valid time.
@@ -38,22 +40,22 @@ Please specify a date using '/by'.
 
 Fetching all records...
 1. [T][ ] borrow book
-2. [D][ ] return book (by: Sunday)
-3. [E][ ] project meeting (at: Monday 2-4pm)
+2. [D][ ] return book (by: 25 Jan 2022, 6pm)
+3. [E][ ] project meeting (at: 1 Feb 2022)
 
 Nice! I've marked this task as done!
-[D][X] return book (by: Sunday)
+[D][X] return book (by: 25 Jan 2022, 6pm)
 
 Fetching all records...
 1. [T][ ] borrow book
-2. [D][X] return book (by: Sunday)
-3. [E][ ] project meeting (at: Monday 2-4pm)
+2. [D][X] return book (by: 25 Jan 2022, 6pm)
+3. [E][ ] project meeting (at: 1 Feb 2022)
 
 Okay! I've marked this as undone!
-[D][ ] return book (by: Sunday)
+[D][ ] return book (by: 25 Jan 2022, 6pm)
 
 Noted. Deleting this task...
-[E][ ] project meeting (at: Monday 2-4pm)
+[E][ ] project meeting (at: 1 Feb 2022)
 There are now 2 tasks in the list.
 
 Noted. Deleting this task...
@@ -63,7 +65,7 @@ There are now 1 tasks in the list.
 No task with this number exists yet!
 
 Noted. Deleting this task...
-[D][ ] return book (by: Sunday)
+[D][ ] return book (by: 25 Jan 2022, 6pm)
 There are now 0 tasks in the list.
 
 Fetching all records...

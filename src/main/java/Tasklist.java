@@ -19,10 +19,21 @@ public class Tasklist {
                     this.addTask(new Todo(completed, taskInfo[2]));
                     break;
                 case "D":
-                    this.addTask(new Deadline(completed, taskInfo[2], taskInfo[3]));
+                    if (taskInfo.length == 4) {
+                        this.addTask(new Deadline(completed, taskInfo[2],
+                                Time.convertToDate(taskInfo[3]), ""));
+                    } else {
+                        this.addTask(new Deadline(completed, taskInfo[2],
+                                Time.convertToDate(taskInfo[3]), taskInfo[4]));
+                    }
                     break;
                 case "E":
-                    this.addTask(new Event(completed, taskInfo[2], taskInfo[3]));
+                    if (taskInfo.length == 4) {
+                        this.addTask(new Event(completed, taskInfo[2],
+                                Time.convertToDate(taskInfo[3]), ""));
+                    }
+                    this.addTask(new Event(completed, taskInfo[2],
+                            Time.convertToDate(taskInfo[3]), taskInfo[4]));
             }
         }
     }
@@ -41,10 +52,12 @@ public class Tasklist {
                 writeTasks.append("T|").append(digit).append(t.getTaskName()).append("\n");
             } else if (t instanceof Event) {
                 writeTasks.append("E|").append(digit).append(t.getTaskName()).append("|")
+                        .append(((Event) t).getTime()).append("|")
                         .append(((Event) t).getTime()).append("\n");
             } else {
                 writeTasks.append("D|").append(digit).append(t.getTaskName()).append("|")
-                        .append(((Deadline) t).getDeadline()).append("\n");
+                        .append(((Deadline) t).getDeadline()).append("|")
+                        .append(((Deadline) t).getTime()).append("\n");
             }
         }
         FileCreator.writeToFile(path, writeTasks.toString());

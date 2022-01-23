@@ -8,11 +8,6 @@ public class Task {
         this.completed = completed;
     }
 
-    public Task(String task) {
-        this.task = task;
-        this.completed = false;
-    }
-
     public void mark() {
         this.completed = true;
     }

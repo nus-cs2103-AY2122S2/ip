@@ -1,10 +1,12 @@
+import java.util.regex.Pattern;
+
 public class DukeException extends Exception {
 
     public DukeException(String message) {
         super(message);
     }
 
-    public static void taskValidity(int index, String input, String taskType) throws DukeException {
+    public static String[] taskValidity(int index, String input, String taskType) throws DukeException {
         if (taskType.equals("event")) {
             if (index == -1) {
                 throw new DukeException("Please specify a date using '/at'.\n");
@@ -25,6 +27,27 @@ public class DukeException extends Exception {
         }
         if (input.contains("|")) {
             throw new DukeException("Sorry, avoid using '|' as it is a special character.\n");
+        }
+        String timeString = input.substring(index + 4);
+        String[] timeArray = timeString.split(" ");
+        if (timeArray.length == 0 || timeArray.length > 2) {
+            throw new DukeException("Please provide time in the format 'DD/MM/YYYY <time>'.\n");
+        }
+        String[] dateArray = timeArray[0].split("/");
+        if (dateArray.length != 3) {
+            throw new DukeException("Please provide time in the format 'DD/MM/YYYY <time>'.\n");
+        }
+        String regex = "[0-9]+";
+        Pattern p = Pattern.compile(regex);
+        for (int i = 0; i < 3; i++) {
+            if (!p.matcher(dateArray[i]).matches()) {
+                throw new DukeException("Please provide time in the format 'DD/MM/YYYY <time>'.\n");
+            }
+        }
+        if (timeArray.length == 1) {
+            return dateArray;
+        } else {
+            return new String[]{dateArray[0], dateArray[1], dateArray[2], timeArray[1]};
         }
     }
 

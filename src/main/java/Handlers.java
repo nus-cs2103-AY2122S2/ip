@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.time.LocalDate;
 
 public enum Handlers {
     Bye("bye"),
@@ -24,8 +25,17 @@ public enum Handlers {
     public static void deadlineHandler(Tasklist list, String path, String input, String cmd) {
         try {
             int index = input.indexOf("/by");
-            DukeException.taskValidity(index, input, cmd);
-            Deadline task = new Deadline(input.substring(9, index - 1), input.substring(index + 4));
+            String[] time = DukeException.taskValidity(index, input, cmd);
+            Deadline task;
+            LocalDate date = LocalDate.of(
+                    Integer.parseInt(time[2]),
+                    Integer.parseInt(time[1]),
+                    Integer.parseInt(time[0]));
+            if (time.length == 3) {
+                task = new Deadline(false, input.substring(9, index - 1), date, "");
+            } else {
+                task = new Deadline(false, input.substring(9, index - 1), date, time[3]);
+            }
             list.addTask(task);
             list.writeTaskList(String.valueOf(path));
             System.out.println("Deadline Added: " + task.toString());
@@ -51,8 +61,17 @@ public enum Handlers {
     public static void eventHandler(Tasklist list, String path, String input, String cmd) {
         try {
             int index = input.indexOf("/at");
-            DukeException.taskValidity(index, input, cmd);
-            Event task = new Event(input.substring(6, index - 1), input.substring(index + 4));
+            String[] time = DukeException.taskValidity(index, input, cmd);
+            Event task;
+            LocalDate date = LocalDate.of(
+                    Integer.parseInt(time[2]),
+                    Integer.parseInt(time[1]),
+                    Integer.parseInt(time[0]));
+            if (time.length == 3) {
+                task = new Event(false, input.substring(6, index - 1), date, "");
+            } else {
+                task = new Event(false, input.substring(6, index - 1), date, time[3]);
+            }
             list.addTask(task);
             list.writeTaskList(String.valueOf(path));
             System.out.println("Event Added: " + task.toString());
@@ -81,7 +100,7 @@ public enum Handlers {
     public static void todoHandler(Tasklist list, String path, String input) {
         try {
             DukeException.taskValidity(input);
-            Todo task = new Todo(input.substring(5));
+            Todo task = new Todo(false, input.substring(5));
             list.addTask(task);
             list.writeTaskList(String.valueOf(path));
             System.out.println("Todo Added: " + task.toString());
