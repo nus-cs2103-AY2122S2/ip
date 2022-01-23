@@ -16,7 +16,7 @@ import java.util.List;
 // deals with loading tasks from the file and saving tasks in the file
 public class Storage {
     public static final String DEFAULT_FILEPATH = "duke.txt";
-    public final Path filePath;
+    private final Path filePath;
 
     public Storage() {
         this(DEFAULT_FILEPATH);
@@ -69,13 +69,13 @@ public class Storage {
         }
     }
 
-    public static List<String> encodeTaskList(TaskList tasks) {
+    private List<String> encodeTaskList(TaskList tasks) {
         final List<String> encodedTasks = new ArrayList<>();
         tasks.getAllTasks().forEach(task -> encodedTasks.add(encodeTaskToString(task)));
         return encodedTasks;
     }
 
-    private static String encodeTaskToString(Task task) {
+    private String encodeTaskToString(Task task) {
         final StringBuilder encodedTaskBuilder = new StringBuilder();
         encodedTaskBuilder.append(task.getTypeAsPrefix()).append(" | ");
         encodedTaskBuilder.append(task.getIsDone() ? 1 : 0).append(" | ");
@@ -93,7 +93,7 @@ public class Storage {
         return encodedTaskBuilder.toString();
     }
 
-    public static ArrayList<Task> decodeTaskList(List<String> encodedTaskList) {
+    private ArrayList<Task> decodeTaskList(List<String> encodedTaskList) {
         final ArrayList<Task> decodedTasks = new ArrayList<>();
         for (String encodedTask : encodedTaskList) {
             decodedTasks.add(decodeTaskFromString(encodedTask));
@@ -101,7 +101,7 @@ public class Storage {
         return decodedTasks;
     }
 
-    private static Task decodeTaskFromString(String encodedTask) {
+    private Task decodeTaskFromString(String encodedTask) {
         String[] args = encodedTask.split(" \\| ");
         switch(args[0]) {
         case "D":

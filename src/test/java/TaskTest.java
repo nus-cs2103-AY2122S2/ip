@@ -1,12 +1,7 @@
-import duke.exception.DukeException;
 import duke.task.Deadline;
-import duke.task.Task;
-import duke.task.TaskType;
-import duke.util.TaskList;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

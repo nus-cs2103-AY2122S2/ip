@@ -20,21 +20,25 @@ public class Parser {
         switch (command) {
         case "list":
             return new ListCommand();
+            // Fallthrough
         case "delete":
             if (args.length == 1) {
                 throw new DukeException(ErrorMessage.MESSAGE_UNKNOWN_INDEX);
             }
             return new DeleteCommand(Integer.parseInt(args[1]));
+            // Fallthrough
         case "mark":
             if (args.length == 1) {
                 throw new DukeException(ErrorMessage.MESSAGE_UNKNOWN_INDEX);
             }
             return new MarkCommand(Integer.parseInt(args[1]));
+            // Fallthrough
         case "unmark":
             if (args.length == 1) {
                 throw new DukeException(ErrorMessage.MESSAGE_UNKNOWN_INDEX);
             }
             return new UnmarkCommand(Integer.parseInt(args[1]));
+            // Fallthrough
         case "deadline":
             if (args.length == 1) {
                 throw new DukeException(ErrorMessage.MESSAGE_UNKNOWN_DESC);
@@ -44,6 +48,7 @@ public class Parser {
                 throw new DukeException(ErrorMessage.MESSAGE_UNKNOWN_DATE);
             }
             return new AddCommand(new Deadline(deadline[0], parseDate(deadline[1])));
+            // Fallthrough
         case "event":
             if (args.length == 1) {
                 throw new DukeException(ErrorMessage.MESSAGE_UNKNOWN_DESC);
@@ -53,20 +58,23 @@ public class Parser {
                 throw new DukeException(ErrorMessage.MESSAGE_UNKNOWN_DATE);
             }
             return new AddCommand(new Event(event[0], parseDate(event[1])));
+            // Fallthrough
         case "todo":
             if (args.length == 1) {
                 throw new DukeException(ErrorMessage.MESSAGE_UNKNOWN_DESC);
             }
             return new AddCommand(new Todo(args[1]));
+            // Fallthrough
         case "bye":
             return new ExitCommand();
+            // Fallthrough
         default:
             throw new DukeException(ErrorMessage.MESSAGE_UNKNOWN_COMMAND);
         }
     }
 
     public static LocalDate parseDate(String date) throws DukeException {
-        String[] splitDate = date.trim().split("-"); // yyyy-mm-dd
+        String[] splitDate = date.trim().split("-");
         if (splitDate.length != 3) {
             throw new DukeException(ErrorMessage.MESSAGE_INVALID_DATE_FORMAT);
         }
