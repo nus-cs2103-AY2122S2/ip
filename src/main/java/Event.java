@@ -7,7 +7,18 @@ public class Event extends Task {
         this.time = time;
     }
 
+    Event(String description, boolean isDone, String time) {
+        super(description, isDone);
+        this.time = time;
+    }
+
+    String getTaskType() {
+        return "E";
+    }
+
     public String toString() {
-        return "[E]" + super.toString() + String.format(" (at: %s)", time);
+        return String.format("[%s]", getTaskType())
+                + super.toString()
+                + String.format(" (at: %s)", time);
     }
 }

@@ -1,9 +1,16 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
 
 public class Duke {
 
-    ArrayList<Task> tasks = new ArrayList<>();
+    ArrayList<Task> tasks;
+
+    Duke(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
 
     private void listTasks() {
         System.out.println("Here are the tasks in your list:");
@@ -57,6 +64,18 @@ public class Duke {
                 , tasks.size()));
     }
 
+    private void saveToFile() throws IOException {
+        FileWriter fw = new FileWriter("src/main/data/duke.txt", false);
+        for (Task task : tasks) {
+            String currTask = String.format("%s ~ %s ~ %s\n",
+                    task.getTaskType(),
+                    task.getStatusIcon(),
+                    task.getDescription());
+            fw.write(currTask);
+        }
+        fw.close();
+    }
+
     enum Commands {
         LIST("list"),
         MARK("mark"),
@@ -73,7 +92,7 @@ public class Duke {
         }
     }
 
-    public void run() throws DukeException {
+    public void run() throws DukeException, IOException {
         Scanner sc = new Scanner(System.in);
         String intro = "Hello! I'm Duke\n" +
                 "What can I do for you?";
@@ -128,13 +147,45 @@ public class Duke {
                 throw new DukeException("OOPS!!! I'm sorry, " +
                         "but I don't know what that means :-(");
             }
+            saveToFile();
             cmd = sc.next();
 
         }
         System.out.println("Bye. Hope to see you again soon!");
     }
-    public static void main(String[] args) throws DukeException{
-        Duke duke = new Duke();
+
+    private static ArrayList<Task> fileToArrayList(String[] currLineContents) {
+        ArrayList<Task> listOfSavedTasks = new ArrayList<>();
+        String taskType = currLineContents[0];
+        boolean isDone = currLineContents[1].equals("X") ? true : false ;
+        String description = currLineContents[2];
+        if (taskType.equals("T")) {
+            listOfSavedTasks.add(new ToDo(description, isDone));
+        } else if (taskType.equals("D")) {
+            listOfSavedTasks.add(new Deadline(description, isDone, currLineContents[3]));
+        } else if (taskType.equals("E")) {
+            listOfSavedTasks.add(new Event(description, isDone, currLineContents[3]));
+        }
+        return listOfSavedTasks;
+    }
+
+    public static void main(String[] args) throws DukeException, IOException {
+        File f = new File("src/main/data/duke.txt");
+        if (!f.exists()) {
+            if (!f.createNewFile()) {
+                throw new DukeException("Data file could not be created");
+            }
+        }
+        Scanner sc = new Scanner(f);
+        ArrayList<Task> listOfSavedTasks = new ArrayList<>();
+
+        while (sc.hasNextLine()) {
+            String currLine = sc.nextLine();
+            String[] currLineContents = currLine.split(" ~ ");
+            listOfSavedTasks = fileToArrayList(currLineContents);
+        }
+
+        Duke duke = new Duke(listOfSavedTasks);
         duke.run();
     }
 }
