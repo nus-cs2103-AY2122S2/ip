@@ -23,6 +23,10 @@ public class Task {
             isDone = false;
         }
 
+    public String saveString() {
+        return "X" + "|" + (this.isDone ? "1" : "0") + "|" + this.description;
+    }
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;

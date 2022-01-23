@@ -1,4 +1,6 @@
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Tsundere {
 
@@ -24,6 +26,7 @@ public class Tsundere {
         boolean isBye = false;
 
         Scanner sc = new Scanner(System.in);
+        read();
         while (!isBye) {
             String userInput =  sc.nextLine();
             String comUserInput = userInput.toUpperCase();
@@ -64,8 +67,8 @@ public class Tsundere {
                         }
                         num = Integer.parseInt(splitStr[1]);
 
-                        if (num > countLst) {
-                            throw new TsundereException("Hmph you baka, you gave a invalid number!");
+                        if (num > countLst || num <= 0) {
+                            throw new TsundereException("Hmph you baka, you gave an invalid number!");
                         }
                         unmark(num);
                         break;
@@ -77,8 +80,8 @@ public class Tsundere {
 
                         num = Integer.parseInt(splitStr[1]);
 
-                        if (num > countLst) {
-                            throw new TsundereException("Hmph you baka, you gave a invalid number!");
+                        if (num > countLst || num <= 0) {
+                            throw new TsundereException("Hmph you baka, you gave an invalid number!");
                         }
                         mark(num);
                         break;
@@ -120,8 +123,8 @@ public class Tsundere {
 
                         num = Integer.parseInt(splitStr[1]);
 
-                        if (num > countLst) {
-                            throw new TsundereException("Hmph you baka, you gave a invalid number!");
+                        if (num > countLst || num <= 0) {
+                            throw new TsundereException("Hmph you baka, you gave an invalid number!");
                         }
                         delete(num);
                         break;
@@ -177,6 +180,7 @@ public class Tsundere {
         aryLst.get(realNum).markDone();
         System.out.println("[" +  aryLst.get(realNum).getStatusIcon()  +"] " +  aryLst.get(realNum).getDescription());
         System.out.println(lines);
+        save();
     }
 
     static private void unmark(int num) {
@@ -186,6 +190,7 @@ public class Tsundere {
         aryLst.get(realNum).markNotDone();
         System.out.println("[" +  aryLst.get(realNum).getStatusIcon()  +"] " +  aryLst.get(realNum).getDescription());
         System.out.println(lines);
+        save();
     }
 
     static private void todo(String strTask) {
@@ -196,6 +201,7 @@ public class Tsundere {
         countLst++;
         System.out.println("You have " + countLst + " task(s) to do you lazy bum!");
         System.out.println(lines);
+        save();
     }
 
     static private void deadline(String strTask, String by) {
@@ -206,6 +212,7 @@ public class Tsundere {
         countLst++;
         System.out.println("You have " + countLst + " task(s) to do you lazy bum!");
         System.out.println(lines);
+        save();
     }
 
     static private void event(String strTask, String at) {
@@ -216,6 +223,7 @@ public class Tsundere {
         countLst++;
         System.out.println("You have " + countLst + " task(s) to do, you lazy bum!");
         System.out.println(lines);
+        save();
     }
 
     static private void delete(int num) {
@@ -226,8 +234,75 @@ public class Tsundere {
         countLst--;
         System.out.println("You have " + countLst + " task(s) to do, you lazy bum!");
         System.out.println(lines);
+        save();
     }
 
+    static private void save() {
+        FileOps.saveFile(tasksToString());
+    }
 
+    static private void read() {
+        String strRead = FileOps.readFile();
+        if (strRead == "") {
+            //nothing to read;
+            return;
+        }
+
+
+        //convert Strings to tasks
+        Scanner c = new Scanner(strRead);
+
+        while (c.hasNextLine()) {
+            String strLine = c.nextLine();
+            String[] strWords =  strLine.split("[|]");
+            try {
+                switch (strWords[0]) {
+                    case "T" :
+                        if (strWords.length < 3) {
+                            throw new TsundereException("Save File Corrupted... One task can't be read!");
+                        }
+                        aryLst.add(new ToDo(strWords[2]));
+                        break;
+                    case "E":
+                        if (strWords.length < 4) {
+                            throw new TsundereException("Save File Corrupted... One task can't be read!");
+                        }
+                        aryLst.add(new Event(strWords[2], strWords[3]));
+                        break;
+                    case "D":
+                        if (strWords.length < 4) {
+                            throw new TsundereException("Save File Corrupted... One task can't be read!");
+                        }
+                        aryLst.add(new Deadline(strWords[2], strWords[3]));
+                        break;
+                }
+
+                if (strWords[1].equals("1")) {
+                    aryLst.get(countLst).markDone();
+                }
+
+                countLst++;
+            } catch (TsundereException te) {
+                System.out.println(te.getMessage());
+                System.out.println(lines);
+            }
+        }
+
+
+
+    }
+
+    static private String tasksToString() {
+        //converts the list of tasks to string for file IO
+        String strReturn = "";
+        for (int i = 0; i < countLst; i++) {
+            if (i == 0) {
+                strReturn = aryLst.get(i).saveString();
+            } else {
+                strReturn += "\n" + aryLst.get(i).saveString();
+            }
+        }
+        return strReturn;
+    }
 
 }
