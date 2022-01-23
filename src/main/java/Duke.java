@@ -2,6 +2,10 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 
 public class Duke {
@@ -56,7 +60,7 @@ public class Duke {
         System.out.print(indent + t + "\n" + bottomLine);
     }
 
-    private static void addTask(Command command, String input) throws DukeException {
+    private static void addTask(Command command, String input) throws DukeException, DateTimeParseException {
         if (command.equals(Command.TODO)) {
             String str = input.substring(5);
             tasks.add(new Todo(str));
@@ -65,26 +69,33 @@ public class Duke {
             String str = input.substring(9);
             String[] strArr = str.split(" /by ");
             if (strArr.length == 1) {
-                throw new DukeException(topLine + "Oops, please set a date/time for this task!\n"
+                throw new DukeException(topLine + "Oops, please set a date and time for this task!\n"
                         + bottomLine);
             } else {
-                tasks.add(new Deadline(strArr[0], strArr[1]));
+                LocalDateTime dateTime = parseDateTime(strArr[1]);
+                tasks.add(new Deadline(strArr[0], dateTime));
             }
 
         } else {
             String str = input.substring(6);
             String[] strArr = str.split(" /at ");
             if (strArr.length == 1) {
-                throw new DukeException(topLine + "Oops, please set a date/time for this task!\n"
+                throw new DukeException(topLine + "Oops, please set a date and time for this task!\n"
                         + bottomLine);
             } else {
-                tasks.add(new Event(strArr[0], strArr[1]));
+                LocalDateTime dateTime = parseDateTime(strArr[1]);
+                tasks.add(new Event(strArr[0], dateTime));
             }
         }
         totalTasks++;
         System.out.print(topLine + "Got it! I've added this task:\n  "
                 + indent + tasks.get(totalTasks - 1).toString() + "\n"
                 + indent + listStatus(totalTasks) + bottomLine);
+    }
+
+    public static LocalDateTime parseDateTime(String dt) throws DateTimeParseException {
+        return LocalDateTime.parse(dt,
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
     public static void main(String[] args) throws IOException {
@@ -154,6 +165,9 @@ public class Duke {
                 System.out.print(topLine + "Invalid task number. " + listStatus(totalTasks) + bottomLine);
             } catch (IllegalArgumentException e) {
                 System.out.print(topLine + "Oh no! I don't understand what that means...\n" + bottomLine);
+            } catch (DateTimeParseException e) {
+                System.out.print(topLine + "Please specify date and time in this format: yyyy-mm-dd HH:mm.\n"
+                        + bottomLine);
             } finally {
                 input = br.readLine();
             }

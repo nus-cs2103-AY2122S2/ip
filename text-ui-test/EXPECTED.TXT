@@ -14,19 +14,19 @@
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
     Got it! I've added this task:
-      [D][ ] submit assignment (by: Friday, 2pm)
+      [D][ ] submit assignment (by: 29 Jan 2022, 2:00 PM)
     There are 2 tasks in the list now.
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
     Got it! I've added this task:
-      [E][ ] project meeting (at: Wednesday, 10am-11am)
+      [E][ ] project meeting (at: 25 Jan 2022, 10:30 AM)
     There are 3 tasks in the list now.
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
     Here are the tasks in your list:
     1.[T][ ] buy lunch
-    2.[D][ ] submit assignment (by: Friday, 2pm)
-    3.[E][ ] project meeting (at: Wednesday, 10am-11am)
+    2.[D][ ] submit assignment (by: 29 Jan 2022, 2:00 PM)
+    3.[E][ ] project meeting (at: 25 Jan 2022, 10:30 AM)
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
     Nice! You've completed this task:
@@ -34,23 +34,23 @@
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
     Nice! You've completed this task:
-      [E][X] project meeting (at: Wednesday, 10am-11am)
+      [E][X] project meeting (at: 25 Jan 2022, 10:30 AM)
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
     Here are the tasks in your list:
     1.[T][X] buy lunch
-    2.[D][ ] submit assignment (by: Friday, 2pm)
-    3.[E][X] project meeting (at: Wednesday, 10am-11am)
+    2.[D][ ] submit assignment (by: 29 Jan 2022, 2:00 PM)
+    3.[E][X] project meeting (at: 25 Jan 2022, 10:30 AM)
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
     Okay, I've marked this task as undone:
-      [E][ ] project meeting (at: Wednesday, 10am-11am)
+      [E][ ] project meeting (at: 25 Jan 2022, 10:30 AM)
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
     Here are the tasks in your list:
     1.[T][X] buy lunch
-    2.[D][ ] submit assignment (by: Friday, 2pm)
-    3.[E][ ] project meeting (at: Wednesday, 10am-11am)
+    2.[D][ ] submit assignment (by: 29 Jan 2022, 2:00 PM)
+    3.[E][ ] project meeting (at: 25 Jan 2022, 10:30 AM)
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
     Oops, the task needs a description!
@@ -72,11 +72,17 @@
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
     Okay, I've deleted this task:
-      [D][ ] submit assignment (by: Friday, 2pm)
+      [D][ ] submit assignment (by: 29 Jan 2022, 2:00 PM)
     There are 2 tasks in the list now.
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
     Invalid task number. There are 2 tasks in the list now.
+    ――――――――――――――――――――――――――――――――――
+    ――――――――――――――――――――――――――――――――――
+    Please specify date and time in this format: yyyy-mm-dd HH:mm.
+    ――――――――――――――――――――――――――――――――――
+    ――――――――――――――――――――――――――――――――――
+    Please specify date and time in this format: yyyy-mm-dd HH:mm.
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
     Bye! Hope to see you again soon!
