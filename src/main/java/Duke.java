@@ -1,16 +1,45 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.IOException;
-
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Duke {
     private static ArrayList<Task> tasks = new ArrayList<>();
     private static int totalTasks = 0;
 
-    private static String topLine = "    ――――――――――――――――――――――――――――――――――\n    ";
-    private static String bottomLine = "    ――――――――――――――――――――――――――――――――――\n";
-    private static String indent = "    ";
+    private static final String topLine = "    ――――――――――――――――――――――――――――――――――\n    ";
+    private static final String bottomLine = "    ――――――――――――――――――――――――――――――――――\n";
+    private static final String indent = "    ";
+
+    private static final String filePath = "data/duke.txt";
+
+    private static void loadTaskList(File f) throws FileNotFoundException {
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+            String task = s.nextLine();
+            String[] taskComponents = task.split(" [|] "); // [type, status, description, time(if any)]
+            Task t;
+
+            switch (taskComponents[0]) {
+            case "T":
+                t = new Todo(taskComponents[2]);
+                break;
+            case "D":
+                t = new Deadline(taskComponents[2], taskComponents[3]);
+                break;
+            case "E":
+                t = new Event(taskComponents[2], taskComponents[3]);
+                break;
+            default:
+                t = new Task(taskComponents[2]);
+            }
+            tasks.add(t);
+            totalTasks++;
+
+            if (taskComponents[1].equals("1")) {
+                t.markAsDone();
+            }
+        }
+    }
 
     private static String listStatus(int totalTasks) {
         if (totalTasks > 1) {
@@ -22,15 +51,16 @@ public class Duke {
 
     private static void printList() {
         if (totalTasks == 0) {
-            System.out.print("There are no tasks in your list.\n");
+            System.out.print(topLine + "There are no tasks in your list.\n");
         } else {
-            System.out.print("Here are the tasks in your list:\n");
+            System.out.print(topLine + "Here are the tasks in your list:\n");
             int index = 1;
             for (int n = 0; n < totalTasks; n++) {
                 Task t = tasks.get(n);
                 System.out.println(indent + index + "." + t.toString());
                 index++;
             }
+            System.out.print(bottomLine);
         }
     }
 
@@ -57,34 +87,54 @@ public class Duke {
     }
 
     private static void addTask(Command command, String input) throws DukeException {
+        String descr;
+
         if (command.equals(Command.TODO)) {
-            String str = input.substring(5);
-            tasks.add(new Todo(str));
+            descr = input.substring(5);
+            tasks.add(new Todo(descr));
 
         } else if (command.equals(Command.DEADLINE)) {
-            String str = input.substring(9);
-            String[] strArr = str.split(" /by ");
-            if (strArr.length == 1) {
+            descr = input.substring(9);
+            String[] descrArr = descr.split(" /by ");
+            if (descrArr.length == 1) {
                 throw new DukeException(topLine + "Oops, please set a date/time for this task!\n"
                         + bottomLine);
             } else {
-                tasks.add(new Deadline(strArr[0], strArr[1]));
+                tasks.add(new Deadline(descrArr[0], descrArr[1]));
             }
 
         } else {
-            String str = input.substring(6);
-            String[] strArr = str.split(" /at ");
-            if (strArr.length == 1) {
+            descr = input.substring(6);
+            String[] descrArr = descr.split(" /at ");
+            if (descrArr.length == 1) {
                 throw new DukeException(topLine + "Oops, please set a date/time for this task!\n"
                         + bottomLine);
             } else {
-                tasks.add(new Event(strArr[0], strArr[1]));
+                tasks.add(new Event(descrArr[0], descrArr[1]));
             }
         }
         totalTasks++;
         System.out.print(topLine + "Got it! I've added this task:\n  "
                 + indent + tasks.get(totalTasks - 1).toString() + "\n"
                 + indent + listStatus(totalTasks) + bottomLine);
+    }
+
+    private static String getListToSave() {
+        String list = "";
+        for (Task t: tasks) {
+            list = list + t.getType() + " | " + (t.getIsDone() ? "1" : "0") + " | " + t.getDescription() + "\n";
+        }
+        return list;
+    }
+
+    private static void saveToHardDisk(String filePath, String textToAdd) {
+        try {
+            FileWriter fw = new FileWriter(filePath);
+            fw.write(textToAdd);
+            fw.close();
+        } catch (IOException e) {
+            System.out.print(topLine + "Unable to save changes to hard disk :(" + bottomLine);
+        }
     }
 
     public static void main(String[] args) throws IOException {
@@ -100,10 +150,22 @@ public class Duke {
         // Print introduction
         System.out.print(logo + "\n" + intro + bottomLine);
 
+        // Load task list saved in hard disk, else create file to save task list
+        File file = new File(filePath);
+        if (file.exists()) {
+            loadTaskList(file);
+        } else { // create folder and file
+            File folder = new File("data");
+            if (folder.mkdir()) {
+                boolean isCreated = file.createNewFile();
+            }
+        }
+
+        // Get user input
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String input = br.readLine();
 
-        while (!input.equals("bye")) {
+        while (!input.equals("bye")) { // Program only ends when user enters 'bye' command
 
             try {
                 String[] inputArr = input.split(" ");
@@ -112,9 +174,7 @@ public class Duke {
 
                 switch (command) {
                 case LIST:
-                    System.out.print(topLine);
                     printList();
-                    System.out.print(bottomLine);
                     break;
                 case MARK:
                     // Fallthrough
@@ -155,6 +215,10 @@ public class Duke {
             } catch (IllegalArgumentException e) {
                 System.out.print(topLine + "Oh no! I don't understand what that means...\n" + bottomLine);
             } finally {
+                // Save changes to hard disk
+                saveToHardDisk(filePath, getListToSave());
+
+                // Get next input from user
                 input = br.readLine();
             }
         }
