@@ -1,18 +1,30 @@
-public class Event extends Task {
-    private final String at;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String description, String at) {
+public class Event extends Task {
+    private final LocalDateTime at;
+    private final Duration duration;
+
+    public Event(String description, LocalDateTime at, Duration duration) {
         super(description);
 
-        if (at == null || at.isEmpty()) {
-            throw new DukeException("The time of an Event cannot be empty.");
+        if (at == null) {
+            throw new DukeException("The time of an Event must be specified");
+        }
+
+        if (duration == null) {
+            throw new DukeException("The duration of an Event must be specified");
         }
 
         this.at = at;
+        this.duration = duration;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy h:mm a");
+        return "[E]" + super.toString() + " (at: " + at.format(formatter) + " - " +
+                at.plus(duration).format(formatter) + ")";
     }
 }

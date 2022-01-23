@@ -1,11 +1,14 @@
-public class Deadline extends Task {
-    private final String by;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String description, String by) {
+public class Deadline extends Task {
+    private final LocalDateTime by;
+
+    public Deadline(String description, LocalDateTime by) {
         super(description);
 
-        if (by == null || by.isEmpty()) {
-            throw new DukeException("The deadline of a Deadline cannot be empty.");
+        if (by == null) {
+            throw new DukeException("The deadline of a Deadline must be specified");
         }
 
         this.by = by;
@@ -13,6 +16,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy h:mm a");
+        return "[D]" + super.toString() + " (by: " + by.format(formatter) + ")";
     }
 }

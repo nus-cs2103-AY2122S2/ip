@@ -2,14 +2,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum CommandType {
-    ADD_TODO("todo", null, "description"),
-    ADD_DEADLINE("deadline", " /by ", "description", "by"),
-    ADD_EVENT("event", " /at ", "description", "at"),
-    DELETE_TASK("delete", null, "index"),
-    MARK_TASK("mark", null, "index"),
-    UNMARK_TASK("unmark", null, "index"),
-    EXIT("bye", null),
-    LIST("list", null);
+    ADD_TODO("todo", "desc"),
+    ADD_DEADLINE("deadline", "desc", "by"),
+    ADD_EVENT("event", "desc", "at", "dur"),
+    DELETE_TASK("delete", "id"),
+    MARK_TASK("mark", "id"),
+    UNMARK_TASK("unmark", "id"),
+    EXIT("bye"),
+    LIST("list");
 
     private static final Map<String, CommandType> typeMap = new HashMap<>();
 
@@ -20,13 +20,11 @@ public enum CommandType {
     }
 
     private final String command;
-    private final String regex;
-    private final String[] args;
+    private final String[] params;
 
-    CommandType(String command, String regex, String... args) {
+    CommandType(String command, String... params) {
         this.command = command;
-        this.regex = regex;
-        this.args = args;
+        this.params = params;
     }
 
     public static CommandType fromString(String commandString) {
@@ -39,11 +37,7 @@ public enum CommandType {
         return c;
     }
 
-    public String[] getArgs() {
-        return args;
-    }
-
-    public String getRegex() {
-        return regex;
+    public String[] getParams() {
+        return params;
     }
 }
