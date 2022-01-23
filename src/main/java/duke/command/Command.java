@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.task.Task;
+import duke.operations.TaskList;
+
 public abstract class Command {
     protected Task task;
     protected Integer num;

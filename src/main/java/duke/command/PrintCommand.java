@@ -1,4 +1,8 @@
-public class PrintCommand extends Command{
+package duke.command;
+
+import duke.operations.TaskList;
+
+public class PrintCommand extends Command {
     public PrintCommand() {
         super(null, null);
     }

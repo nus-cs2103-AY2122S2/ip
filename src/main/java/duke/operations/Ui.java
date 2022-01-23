@@ -1,3 +1,7 @@
+package duke.operations;
+
+import duke.exceptions.EmptyInputException;
+
 import java.util.Scanner;
 
 public class Ui {

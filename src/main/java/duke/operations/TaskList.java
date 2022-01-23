@@ -1,3 +1,7 @@
+package duke.operations;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -55,9 +59,9 @@ public class TaskList {
     }
 
     /**
-     * Adds a Task to the Task ArrayList without print statements
+     * Adds a duke.task.Task to the duke.task.Task ArrayList without print statements
      *
-     * @param task Task to be added into the ArrayList
+     * @param task duke.task.Task to be added into the ArrayList
      */
     public static void addToListNoPrint(Task task) {
         taskArr.add(task);
@@ -65,9 +69,9 @@ public class TaskList {
     }
 
     /**
-     * Deletes a Task from the Task ArrayList
+     * Deletes a duke.task.Task from the duke.task.Task ArrayList
      *
-     * @param task Task to be deleted from the ArrayList
+     * @param task duke.task.Task to be deleted from the ArrayList
      */
     public void deleteFromList(Task task) {
         taskArr.remove(task);

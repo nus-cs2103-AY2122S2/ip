@@ -1,3 +1,13 @@
+package duke.operations;
+
+import duke.command.*;
+import duke.exceptions.IncompleteInputException;
+import duke.exceptions.UnknownInputException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
