@@ -3,9 +3,9 @@ import java.util.Scanner;
 
 public class Lily {
     private static final String indent = "    ";
+    private static LinkedList<Task> list;
     public static void main(String[] args) {
-        LinkedList<Task> list = new LinkedList<>();
-
+        list = new LinkedList<>();
         Scanner sc = new Scanner(System.in);
 
         // welcome message
@@ -31,6 +31,7 @@ public class Lily {
         userInteracting: while (true) {
             String sentence = sc.nextLine();
             String[] parsedSentence = sentence.split(" ");
+            // add functionality to detect the /by and /at
             String action = parsedSentence[0];
             switch(action) {
                 // throw error if input doesn't match enums later on
@@ -82,18 +83,26 @@ public class Lily {
 
                 /*
                 case "todo":
+                    desc from 2nd word onwards
+                    list.add(new Todo(sentence))
+                    addTaskMsg(sentence);
                     break;
                 case "deadline":
+                    desc from 2nd word onwards to the /by
+                    by afterwards
+                    list.add(new Deadline(sentence))
+                    addTaskMsg(sentence);
                     break;
                 case "event":
+                    desc from 2nd word onwards to the /at
+                    at afterwards
+                    list.add(new Event(sentence))
+                    addTaskMsg(sentence);
                     break;
                 */
 
                 default:
-                    list.add(new Task(sentence));
-                    prettyPrint("i've dumped \"" + sentence + "\" into your list\n"
-                    + "\n"
-                    + indent + "hope you're happy");
+                    prettyPrint("sorry i don't understand what you want me to do. you can try these instead:");
             }
         }
         sc.close();
@@ -104,5 +113,12 @@ public class Lily {
         + indent + "▼＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝▼\n"
         + indent + s + "\n"
         + indent + "▼＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝▼\n");
+    }
+
+    protected static void addTaskMsg(String s) {
+        prettyPrint("i've dumped \"" + s + "\" into your list\n"
+            + indent + "so now you have " + list.size() + " tasks happening"
+            + "\n"
+            + indent + "hope you're happy");
     }
 }
