@@ -1,8 +1,7 @@
 package ui.command;
 
-import task.Task;
+import data.TaskList;
 
-import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -50,11 +49,11 @@ public abstract class Command {
      * the concrete Command subclass for the input
      *
      * @param input Command inputted by user
-     * @param tasks Collection of tasks maintained by ChatBot
+     * @param taskList TaskList maintained by ChatBot
      * @return Command object corresponding to input
      * @throws IllegalArgumentException if the command is not valid
      */
-    public static Command parseCommand(String input, ArrayList<Task> tasks, File dataFile) throws IllegalArgumentException {
+    public static Command parseCommand(String input, TaskList taskList) throws IllegalArgumentException {
         String name = input;
         String args = null;
         // Separate command name and args
@@ -67,22 +66,22 @@ public abstract class Command {
         Command command;
         switch (name) {
         case "list":
-            command = new ShowTaskListCommand(name, args, tasks, dataFile);
+            command = new ShowTaskListCommand(name, args, taskList);
             break;
         case "todo":
         case "deadline":
         case "event":
             // Fallthrough for add task commands
-            command = new AddTaskCommand(name, args, tasks, dataFile);
+            command = new AddTaskCommand(name, args, taskList);
             break;
         case "delete":
-            command = new DeleteTaskCommand(name, args, tasks, dataFile);
+            command = new DeleteTaskCommand(name, args, taskList);
             break;
         case "mark":
-            command = new MarkTaskCommand(name, args, tasks, dataFile);
+            command = new MarkTaskCommand(name, args, taskList);
             break;
         case "unmark":
-            command = new UnmarkTaskCommand(name, args, tasks, dataFile);
+            command = new UnmarkTaskCommand(name, args, taskList);
             break;
         case "bye":
             command = new ExitCommand(name, args);

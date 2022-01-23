@@ -19,7 +19,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String getSeralisedTaskData() {
+    public String encodeTaskData() {
         String doneString = this.isDone() ? "Y" : "N";
         return String.format("E,%s,%s,%s", super.getName(), doneString, this.time);
     }

@@ -43,8 +43,9 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String getSeralisedTaskData() {
+    public String encodeTaskData() {
         String doneString = this.isDone() ? "Y" : "N";
-        return String.format("D,%s,%s,%s", super.getName(), doneString, this.deadline);
+        String inputFormattedDeadline = inputDateFormat.format(this.deadline);
+        return String.format("D,%s,%s,%s", super.getName(), doneString, inputFormattedDeadline);
     }
 }

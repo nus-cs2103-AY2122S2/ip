@@ -21,7 +21,7 @@ public abstract class Task {
      *
      * @return String representing data of current task
      */
-    public abstract String getSeralisedTaskData();
+    public abstract String encodeTaskData();
 
     /**
      * Decodes task data previously saved to file to

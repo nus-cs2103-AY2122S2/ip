@@ -1,7 +1,10 @@
+import data.Storage;
+import data.TaskList;
 import ui.ChatBot;
 
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 /**
@@ -10,42 +13,18 @@ import java.util.Scanner;
  * Main entry class to run ChatBot instance.
  */
 public class Duke {
-    private static final String DATA_FOLDER_PATH = "data";
-    private static final String TASK_FILE_PATH = "duke.txt";
-
+    private static final Path DEFAULT_FILE_PATH = Paths.get("data", "duke.txt");
     public static void main(String[] args) throws IOException {
-        Scanner scanner = new Scanner(System.in);
-        File dataFile = null;
-        try {
-            dataFile = getDataFile();
-        } catch (IOException e) {
-            System.err.println("Failed to connect to data file: " + e.getMessage());
-            System.exit(1);
-        }
+        Storage store = Storage.initStorage(DEFAULT_FILE_PATH);
+        TaskList taskList = TaskList.initTaskList(store);
 
-        ChatBot chatBot = new ChatBot(dataFile);
+        ChatBot chatBot = new ChatBot(taskList);
         chatBot.initialise();
 
+        Scanner scanner = new Scanner(System.in);
         while (!chatBot.hasTerminated()) {
             String input = scanner.nextLine();
             chatBot.runCommand(input);
         }
-    }
-
-    /**
-     * Gets File instance corresponding to the data file
-     * storing saved tasks.
-     *
-     * @return File object containing saved tasks.
-     * @throws IOException if the file cannot be created
-     */
-    private static File getDataFile() throws IOException {
-        File dataFolder = new File(DATA_FOLDER_PATH);
-        dataFolder.mkdir();
-
-        String filePath = DATA_FOLDER_PATH + File.separator + TASK_FILE_PATH;
-        File dataFile = new File(filePath);
-        dataFile.createNewFile();
-        return dataFile;
     }
 }

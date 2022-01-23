@@ -13,7 +13,7 @@ public class ToDo extends Task {
     }
 
     @Override
-    public String getSeralisedTaskData() {
+    public String encodeTaskData() {
         String doneString = this.isDone() ? "Y" : "N";
         return String.format("T,%s,%s,%s", super.getName(), doneString, "NA");
     }

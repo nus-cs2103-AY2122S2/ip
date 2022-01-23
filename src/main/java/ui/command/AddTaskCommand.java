@@ -1,5 +1,6 @@
 package ui.command;
 
+import data.TaskList;
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -14,23 +15,22 @@ import java.util.ArrayList;
  * Command which adds a given task
  * to a given list.
  */
-public class AddTaskCommand extends TaskCommand {
+public class AddTaskCommand extends TaskListCommand {
 
-    public AddTaskCommand(String name, String args, ArrayList<Task> list, File dataFile) {
-        super(name, args, list, dataFile);
+    public AddTaskCommand(String name, String args, TaskList taskList) {
+        super(name, args, taskList);
     }
 
     @Override
     public boolean execute() throws IllegalArgumentException {
-        ArrayList<Task> taskList = this.getTaskList();
+        TaskList taskList = this.getTaskList();
         Task newTask = createTask(super.getName(), super.getArgs());
-        taskList.add(newTask);
-        this.saveTasksToFile();
+        taskList.addTask(newTask);
 
         ArrayList<String> response = new ArrayList<>();
         response.add("The following new task has been added:");
         response.add(newTask.getDescription());
-        response.add(String.format("You now have %d tasks!", taskList.size()));
+        response.add(String.format("You now have %d tasks!", taskList.getTaskListSize()));
         Command.styledPrint(response);
         return false;
     }
@@ -46,11 +46,11 @@ public class AddTaskCommand extends TaskCommand {
      */
     private static Task createTask(String name, String args) throws IllegalArgumentException {
         Task task = null;
+        if (args == null) {
+            throw new IllegalArgumentException("Tasks description cannot be empty");
+        }
         switch (name) {
         case "todo":
-            if (args == null) {
-                throw new IllegalArgumentException("TODOs description cannot be empty!");
-            }
             task = new ToDo(args);
             break;
         case "deadline":

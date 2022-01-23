@@ -1,8 +1,8 @@
 package ui.command;
 
+import data.TaskList;
 import task.Task;
 
-import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -11,15 +11,14 @@ import java.util.ArrayList;
  * Command which deletes a previously
  * added task.
  */
-public class DeleteTaskCommand extends TaskCommand {
+public class DeleteTaskCommand extends TaskListCommand {
 
-    public DeleteTaskCommand(String name, String args, ArrayList<Task> list, File dataFile) {
-        super(name, args, list, dataFile);
+    public DeleteTaskCommand(String name, String args, TaskList taskList) {
+        super(name, args, taskList);
     }
 
     @Override
     public boolean execute() throws IllegalArgumentException {
-        ArrayList<Task> taskList = this.getTaskList();
         // Args for this command represents index of task to delete
         int taskIndex;
         try {
@@ -28,17 +27,14 @@ public class DeleteTaskCommand extends TaskCommand {
             throw new IllegalArgumentException("Non-number passed to delete task");
         }
 
-        if (taskIndex < 0 || taskIndex >= taskList.size()) {
-            throw new IllegalArgumentException("Delete index out of list range");
-        }
 
-        Task deletedTask = taskList.remove(taskIndex);
-        this.saveTasksToFile();
+        TaskList taskList = this.getTaskList();
+        Task deletedTask = taskList.deleteTask(taskIndex);
 
         ArrayList<String> response = new ArrayList<>();
         response.add("Noted. The following task has been deleted:");
         response.add(deletedTask.getDescription());
-        response.add(String.format("You now have %d tasks!", taskList.size()));
+        response.add(String.format("You now have %d tasks!", taskList.getTaskListSize()));
         Command.styledPrint(response);
         return false;
     }
