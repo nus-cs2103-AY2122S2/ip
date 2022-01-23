@@ -26,54 +26,54 @@ public class Command {
         }
 
         switch (command) {
-            case "bye":
-                System.out.println(" See you again! :)");
-                System.exit(0);
-            case "list":
-                Task.printAllTasks();
+        case "bye":
+            System.out.println(" See you again! :)");
+            System.exit(0);
+        case "list":
+            Task.printAllTasks();
+            break;
+        case "mark":
+            if (argument == null) {
+                System.out.println(" Please enter the task number as well!");
+                System.out.println(" Command format: mark task-number");
                 break;
-            case "mark":
-                if (argument == null) {
-                    System.out.println(" Please enter the task number as well!");
-                    System.out.println(" Command format: mark task-number");
-                    break;
-                }
-                System.out.println(" Well done!");
-                Task.markAsDone(Integer.parseInt(argument) - 1);
+            }
+            System.out.println(" Well done!");
+            Task.markAsDone(Integer.parseInt(argument) - 1);
+            break;
+        case "unmark":
+            if (argument == null) {
+                System.out.println(" Please enter the task number as well!");
+                System.out.println(" Command format: unmark task-number");
                 break;
-            case "unmark":
-                if (argument == null) {
-                    System.out.println(" Please enter the task number as well!");
-                    System.out.println(" Command format: unmark task-number");
-                    break;
-                }
-                System.out.println(" Oops! Fixed that for you.");
-                Task.markAsNotDone(Integer.parseInt(argument) - 1);
+            }
+            System.out.println(" Oops! Fixed that for you.");
+            Task.markAsNotDone(Integer.parseInt(argument) - 1);
+            break;
+        case "todo":
+            Todo todo = new Todo(argument);
+            Task.addToList(todo);
+            break;
+        case "event":
+            Event event = new Event(argument, extraInfo);
+            Task.addToList(event);
+            break;
+        case "deadline":
+            Deadline deadline = new Deadline(argument, extraInfo);
+            Task.addToList(deadline);
+            break;
+        case "delete":
+            if (argument == null) {
+                System.out.println(" Please enter the task number as well!");
+                System.out.println(" Command format: delete task-number");
                 break;
-            case "todo":
-                Todo todo = new Todo(argument);
-                Task.addToList(todo);
-                break;
-            case "event":
-                Event event = new Event(argument, extraInfo);
-                Task.addToList(event);
-                break;
-            case "deadline":
-                Deadline deadline = new Deadline(argument, extraInfo);
-                Task.addToList(deadline);
-                break;
-            case "delete":
-                if (argument == null) {
-                    System.out.println(" Please enter the task number as well!");
-                    System.out.println(" Command format: delete task-number");
-                    break;
-                }
-                System.out.println(" Okay, I've deleted this task.");
-                Task.removeFromList(Integer.parseInt(argument) - 1);
-                break;
-            default:
-                System.out.println(" Sorry, I don't understand what that means.");
-                break;
+            }
+            System.out.println(" Okay, I've deleted this task.");
+            Task.removeFromList(Integer.parseInt(argument) - 1);
+            break;
+        default:
+            System.out.println(" Sorry, I don't understand what that means.");
+            break;
         }
         System.out.println("__________________________________________________________");
     }
