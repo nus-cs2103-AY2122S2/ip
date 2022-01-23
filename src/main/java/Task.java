@@ -26,6 +26,8 @@ abstract class Task {
 
     abstract String getTaskType();
 
+    abstract String getDate();
+
     public String getDescription() {
         return this.description;
     }

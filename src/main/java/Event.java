@@ -10,17 +10,21 @@ public class Event extends Task {
         this.time = LocalDate.parse(time);
     }
 
-    private String dateToString() {
-        return time.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-    }
-
     Event(String description, boolean isDone, String time) {
         super(description, isDone);
         this.time = LocalDate.parse(time);
     }
 
+    private String dateToString() {
+        return time.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+    }
+
     String getTaskType() {
         return "E";
+    }
+
+    String getDate() {
+        return time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     public String toString() {

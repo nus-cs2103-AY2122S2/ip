@@ -10,17 +10,21 @@ public class Deadline extends Task {
         this.deadline = LocalDate.parse(deadline);
     }
 
-    private String dateToString() {
-        return deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-    }
-
     Deadline(String description, boolean isDone, String deadline) {
         super(description, isDone);
         this.deadline = LocalDate.parse(deadline);
     }
 
+    private String dateToString() {
+        return deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+    }
+
     String getTaskType() {
         return "D";
+    }
+
+    String getDate() {
+        return deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     public String toString() {

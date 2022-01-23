@@ -12,6 +12,10 @@ public class ToDo extends Task {
         return "T";
     }
 
+    String getDate() {
+        return "";
+    }
+
     public String toString() {
         return String.format("[%s]", getTaskType()) + super.toString();
     }
