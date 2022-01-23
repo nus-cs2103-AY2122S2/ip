@@ -4,7 +4,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task{
     LocalDate date;
-    LocalTime time;
+    LocalTime time = null;
 
     public Deadline(String taskName, String dateTime) throws DukeException {
         super(taskName);

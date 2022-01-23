@@ -16,6 +16,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         String note = "NOTE: For events and deadlines do remember to include a date in the format of YYYY-MM-DD.\n" +
                 "Adding time for events and deadlines are optional, but the format is in the form HH:mm";
+
         System.out.println("Howdy and welcome to\n" + logo + "\n" + "Feel free to tell duke any tasks you'd like!");
         System.out.println(note);
         System.out.println("-----------------------------------");
@@ -41,11 +42,19 @@ public class Duke {
                             task = new Todo(taskLine[2]);
                         } else if (taskType.equals("D")) {
                             String date = taskLine[3];
-                            date = "by " + date;
+//                            date = "by " + date;
+                            //Time is added
+                            if(taskLine.length == 5) {
+                                date += " " + taskLine[4];
+                            }
                             task = new Deadline(taskLine[2], date);
                         } else if (taskType.equals("E")) {
                             String date = taskLine[3];
-                            date = "at " + date;
+//                            date = "at " + date;
+                            //Time is added
+                            if(taskLine.length == 5) {
+                                date += " " + taskLine[4];
+                            }
                             task = new Event(taskLine[2], date);
                         } else {
                             throw new DukeException("Invalid task was read");
@@ -176,15 +185,17 @@ public class Duke {
                     taskToAppend += t.taskName + "~";
                     if(t instanceof Deadline) {
                         Deadline tempTask = (Deadline) t;
-                        String date = tempTask.date;
-                        date = date.replace("(by:","");
-                        date = date.replace(")","");
+                        String date = tempTask.date.toString();
+                        if(tempTask.time != null) {
+                            date += "~" + tempTask.time.toString();
+                        }
                         taskToAppend += date.trim();
                     } else if (t instanceof Event) {
                         Event tempTask = (Event) t;
-                        String date = tempTask.date;
-                        date = date.replace("(at:","");
-                        date = date.replace(")","");
+                        String date = tempTask.date.toString();
+                        if(tempTask.time != null) {
+                            date += "~" + tempTask.time.toString();
+                        }
                         taskToAppend += date.trim();
                     }
                     printWriter.println(taskToAppend);

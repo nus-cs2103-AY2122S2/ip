@@ -4,7 +4,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task{
     LocalDate date;
-    LocalTime time;
+    LocalTime time = null;
 
     //date is entered as "__date__ __time__"
     public Event(String taskName, String dateTime) throws DukeException {
