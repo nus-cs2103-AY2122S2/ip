@@ -1,16 +1,17 @@
 public class Event extends Task {
-    String time;
-    public Event(String des, String time) {
+    NotableDate date;
+
+    public Event(String des, NotableDate date) {
         super(des, TaskType.EVENT);
-        this.time = time;
+        this.date = date;
     }
 
     @Override
     public String toString() {
         if (isDone) {
-            return  "[E][X] " + description + " (at: " + time + ")";
+            return  "[E][X] " + description + " (at: " + date + ")";
         } else {
-            return "[E][ ] " + description + " (at: " + time + ")";
+            return "[E][ ] " + description + " (at: " + date + ")";
         }
     }
 }

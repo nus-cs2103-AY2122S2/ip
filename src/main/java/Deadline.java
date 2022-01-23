@@ -1,16 +1,17 @@
 public class Deadline extends Task {
-    String time;
-    public Deadline(String des, String time) {
+    NotableDate date;
+
+    public Deadline(String des, NotableDate date) {
         super(des, TaskType.DEADLINE);
-        this.time = time;
+        this.date = date;
     }
 
     @Override
     public String toString() {
         if (isDone) {
-            return  "[D][X] " + description + " (by: " + time + ")";
+            return  "[D][X] " + description + " (by: " + date + ")";
         } else {
-            return "[D][ ] " + description + " (by: " + time + ")";
+            return "[D][ ] " + description + " (by: " + date + ")";
         }
     }
 }
