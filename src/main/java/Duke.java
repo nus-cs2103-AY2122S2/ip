@@ -35,6 +35,6 @@ public class Duke {
 
     public static void main(String[] args) {
         String home = System.getProperty("user.home");
-        new Duke(home,"/data/tasks.txt").run();
+        new Duke(home,"/DukeSaveDirectory/DukeSaveFile.txt").run();
     }
 }

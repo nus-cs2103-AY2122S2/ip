@@ -53,17 +53,21 @@ public class Storage {
 
     public void load() throws IOException {
         // Create a new directory from current working directory
-        File directory = new File(currWorkingDirectory + "/data");
+        File directory = new File(currWorkingDirectory + "/DukeSaveDirectory");
 
         // Create a new txt in filepath
         File txtFile = new File(currWorkingDirectory + filePath);
 
+        // returns true if directory is created
         if (directory.mkdir()) {
-            System.out.println("Hmm kinda sussy you don't have the directory... lemme help you with that.");
+            System.out.println("Hmm kinda sussy you don't have the directory... it's aite, "
+                    + "lemme help you with that.");
         }
 
+        // returns true if file is created
         if (txtFile.createNewFile()) {
-            System.out.println("Hmm kinda sussy you don't have the txt file... lemme help you with that.");
+            System.out.println("Hmm kinda sussy you don't have the txt save file... it's aite, "
+                    + "lemme help you with that.");
         }
 
         readFileContents(txtFile.toString());
