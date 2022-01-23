@@ -1,3 +1,12 @@
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -23,19 +32,77 @@ public class Duke {
     private static final String FORMAT_EVENT = "Try using \"event <task_name> /by <event_time>\".";
     private static final int BORDER_LENGTH = 80;
     private static ArrayList<Task> tasks;
+    private static final String FILE_PATH = "data/tasks.txt";
 
     public static void main(String[] args) {
-        tasks = new ArrayList<Task>();
-        greet();
-        Scanner sc = new Scanner(System.in);
-        System.out.println(QUESTION_MESSAGE);
-        String input = sc.nextLine();
-        while (input.compareToIgnoreCase("bye") != 0) {
-            processInput(input);
+        try {
+            tasks = loadTaskData();
+            greet();
+            Scanner sc = new Scanner(System.in);
             System.out.println(QUESTION_MESSAGE);
-            input = sc.nextLine();
+            String input = sc.nextLine();
+            while (input.compareToIgnoreCase("bye") != 0) {
+                processInput(input);
+                System.out.println(QUESTION_MESSAGE);
+                input = sc.nextLine();
+            }
+            exit();
+        } catch (DukeException e) {
+            System.out.println("Error loading or saving data\n" + e.getMessage());
         }
-        exit();
+    }
+
+    private static ArrayList<Task> loadTaskData() throws DukeException{
+        File file = new File(FILE_PATH);
+        if (!file.exists()) {
+            return new ArrayList<Task>();
+        }
+        try {
+            BufferedReader fileReader = new BufferedReader(new FileReader(FILE_PATH));
+            String taskInput;
+            ArrayList<Task> readTasks = new ArrayList<Task>();
+            while ((taskInput = fileReader.readLine()) != null) {
+                String[] splitTaskInput = taskInput.split(" \\| ");
+                Task newTask;
+                if (splitTaskInput[0].equals("T")) {
+                    newTask = new ToDo(splitTaskInput[2]);
+                } else if (splitTaskInput[0].equals("D")) {
+                    newTask = new Deadline(splitTaskInput[2], splitTaskInput[3]);
+                } else if (splitTaskInput[0].equals("E")) {
+                    newTask = new Event(splitTaskInput[2], splitTaskInput[3]);
+                } else {
+                    throw new DukeException("Error: Task type is not T,D or E in file\n");
+                }
+                int i = Integer.parseInt(splitTaskInput[1]);
+                if (i == 1) {
+                    newTask.mark(true);
+                }
+                readTasks.add(newTask);
+            }
+            return readTasks;
+        } catch (IOException e) {
+            throw new DukeException("Error: File input cannot be read\n" + e.getMessage());
+        } catch (NumberFormatException e) {
+            throw new DukeException("Error: isDone field is not indicated by 0 or 1 in file\n" + e.getMessage());
+        }
+    }
+
+    private static void saveFileData() throws DukeException{
+        try {
+            if(Files.notExists(Paths.get(FILE_PATH))) {
+                Files.createDirectories(Paths.get("data/"));
+                Files.createFile(Paths.get(FILE_PATH));
+            }
+
+            BufferedWriter bw = Files.newBufferedWriter(Paths.get(FILE_PATH), Charset.forName("UTF-8"));
+            for (Task t : tasks) {
+                bw.append(t.getFileSaveFormat());
+                bw.append("\n");
+            }
+            bw.close();
+        } catch (IOException e) {
+            throw new DukeException("Unable to write to file\n" + e.getMessage());
+        }
     }
 
     public static void show(String message) {
@@ -167,6 +234,11 @@ public class Duke {
         drawBorder(BORDER_LENGTH);
         System.out.println(BYE_MESSAGE);
         drawBorder(BORDER_LENGTH);
+        try {
+            saveFileData();
+        } catch (DukeException e) {
+            System.out.println("Error: Unable to save file\n" + e.getMessage());
+        }
     }
 
     public static void greet() {

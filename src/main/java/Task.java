@@ -34,6 +34,11 @@ abstract class Task {
         return this.description;
     }
 
+    public String getFileSaveFormat() {
+        String doneString = isDone ? "1" : "0";
+        return String.format("%s | %s | %s", getSymbol(), doneString, description);
+    }
+
     @Override
     public String toString() {
         return String.format("[%s][%s] %s", getSymbol(), getStatusSymbol(), this.description);
