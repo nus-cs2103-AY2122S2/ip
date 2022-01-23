@@ -4,106 +4,129 @@ What can I do for you?
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-As an ISTJBot, I don't understand what that command means.
+As an ISTJBot, I present you the task(s) in your list:
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-As an ISTJBot, I present you the task(s) in your list:
+As an ISTJBot, I cannot find any description for your task.
 *__________________________________________________________* 
 
 *__________________________________________________________* 
 As an ISTJBot, I will add this task right now. 
-[T][ ] event 
-Now you have 1 task in the list. Let's go.
+[T][ ] something 
+Now you have 1 task in the list.
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-As an ISTJBot, I present you the task(s) in your list:
-1. [T][ ] event 
+As an ISTJBot, I cannot add a special task with no timing attached.
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-As an ISTJBot, I will add this task right now. 
-[D][ ] return book (by: Sunday)
-Now you have 2 tasks in the list. Let's go.
-*__________________________________________________________* 
-
-*__________________________________________________________* 
-As an ISTJBot, I present you the task(s) in your list:
-1. [T][ ] event 
-2. [D][ ] return book (by: Sunday)
+As an ISTJBot, I cannot add a special task with no timing attached.
 *__________________________________________________________* 
 
 *__________________________________________________________* 
 As an ISTJBot, I will add this task right now. 
-[E][ ] project meeting (at: Mon 2-4pm)
-Now you have 3 tasks in the list. Let's go.
+[D][ ] homework (by: 2pm)
+Now you have 2 tasks in the list.
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-As an ISTJBot, I've marked this task as done: 
-[T][X] event 
+As an ISTJBot, I cannot add a special task with no timing attached.
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-As an ISTJBot, I've marked this task as done: 
-[D][X] return book (by: Sunday)
-*__________________________________________________________* 
-
-*__________________________________________________________* 
-As an ISTJBot, I've marked this task as done: 
-[E][X] project meeting (at: Mon 2-4pm)
+As an ISTJBot, I will add this task right now. 
+[E][ ] party (at: Monday Jenny's)
+Now you have 3 tasks in the list.
 *__________________________________________________________* 
 
 *__________________________________________________________* 
 As an ISTJBot, I present you the task(s) in your list:
-1. [T][X] event 
-2. [D][X] return book (by: Sunday)
-3. [E][X] project meeting (at: Mon 2-4pm)
+1. [T][ ] something 
+2. [D][ ] homework (by: 2pm)
+3. [E][ ] party (at: Monday Jenny's)
+*__________________________________________________________* 
+
+*__________________________________________________________* 
+As an ISTJBot, I cannot modify your task with that command.
+*__________________________________________________________* 
+
+*__________________________________________________________* 
+As an ISTJBot, I cannot find a task with that index.
+*__________________________________________________________* 
+
+*__________________________________________________________* 
+As an ISTJBot, I cannot find a task with that index.
+*__________________________________________________________* 
+
+*__________________________________________________________* 
+As an ISTJBot, I've marked this task as done: 
+[T][X] something 
+*__________________________________________________________* 
+
+*__________________________________________________________* 
+As an ISTJBot, I've marked this task as done: 
+[D][X] homework (by: 2pm)
+*__________________________________________________________* 
+
+*__________________________________________________________* 
+As an ISTJBot, I've marked this task as done: 
+[E][X] party (at: Monday Jenny's)
+*__________________________________________________________* 
+
+*__________________________________________________________* 
+As an ISTJBot, I cannot modify your task with that command.
 *__________________________________________________________* 
 
 *__________________________________________________________* 
 As an ISTJBot, I've unmarked this task: 
-[E][ ] project meeting (at: Mon 2-4pm)
+[D][ ] homework (by: 2pm)
 *__________________________________________________________* 
 
 *__________________________________________________________* 
 As an ISTJBot, I've unmarked this task: 
-[D][ ] return book (by: Sunday)
-*__________________________________________________________* 
-
-*__________________________________________________________* 
-As an ISTJBot, I've unmarked this task: 
-[T][ ] event 
+[E][ ] party (at: Monday Jenny's)
 *__________________________________________________________* 
 
 *__________________________________________________________* 
 As an ISTJBot, I present you the task(s) in your list:
-1. [T][ ] event 
-2. [D][ ] return book (by: Sunday)
-3. [E][ ] project meeting (at: Mon 2-4pm)
+1. [T][X] something 
+2. [D][ ] homework (by: 2pm)
+3. [E][ ] party (at: Monday Jenny's)
+*__________________________________________________________* 
+
+*__________________________________________________________* 
+As an ISTJBot, I've unmarked this task: 
+[T][ ] something 
 *__________________________________________________________* 
 
 *__________________________________________________________* 
 As an ISTJBot, I've removed this task: 
-[D][ ] return book (by: Sunday)
-Now you have 2 tasks in the list. Let's go.
-*__________________________________________________________* 
-
-*__________________________________________________________* 
-As an ISTJBot, I present you the task(s) in your list:
-1. [T][ ] event 
-2. [E][ ] project meeting (at: Mon 2-4pm)
+[T][ ] something 
+Now you have 2 tasks in the list.
 *__________________________________________________________* 
 
 *__________________________________________________________* 
 As an ISTJBot, I've removed this task: 
-[T][ ] event 
-Now you have 1 task in the list. Let's go.
+[E][ ] party (at: Monday Jenny's)
+Now you have 1 task in the list.
+*__________________________________________________________* 
+
+*__________________________________________________________* 
+As an ISTJBot, I cannot find a task with that index.
 *__________________________________________________________* 
 
 *__________________________________________________________* 
 As an ISTJBot, I present you the task(s) in your list:
-1. [E][ ] project meeting (at: Mon 2-4pm)
+1. [D][ ] homework (by: 2pm)
+*__________________________________________________________* 
+
+*__________________________________________________________* 
+As an ISTJBot, I cannot understand more than bye.
+*__________________________________________________________* 
+
+*__________________________________________________________* 
+Bye, I, ISTJBot, will be organizing your tasks until you come back.
 *__________________________________________________________* 
 

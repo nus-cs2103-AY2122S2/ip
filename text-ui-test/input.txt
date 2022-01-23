@@ -1,22 +1,26 @@
-what
 list
-todo event
+todo
+todo something
+deadline description
+deadline description /by
+deadline homework /by 2pm
+event description
+event party /at Monday Jenny's
 list
-deadline return book /by Sunday
-list
-event project meeting /at Mon 2-4pm
+mark
+mark 0
+mark 4
 mark 1
 mark 2
 mark 3
-list
-unmark 3
+mark 1 2
 unmark 2
+unmark 3
+list
 unmark 1
-list
-delete 2
-list
 delete 1
-list
+delete 2
 delete 3
 list
+bye now
 bye
