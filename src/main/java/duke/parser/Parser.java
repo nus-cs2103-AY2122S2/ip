@@ -64,7 +64,15 @@ public class Parser {
                 throw new DukeException(ErrorMessage.MESSAGE_UNKNOWN_DESC);
             }
             return new AddCommand(new Todo(args[1]));
+<<<<<<< HEAD
             // Fallthrough
+=======
+        case "find":
+            if (args.length == 1) {
+                throw new DukeException(ErrorMessage.MESSAGE_UNKNOWN_KEYWORD);
+            }
+            return new FindCommand(args[1]);
+>>>>>>> branch-Level-9
         case "bye":
             return new ExitCommand();
             // Fallthrough
