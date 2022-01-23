@@ -5,12 +5,20 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Duke {
     private static final String TEXT_LOGO = " ____        _\n"
@@ -49,13 +57,16 @@ public class Duke {
                 CommandType commandType = CommandType.fromString(tokens[0]);
                 Map<String, String> paramMap = new HashMap<>();
 
-                if (commandType.getArgs().length > 0 && tokens.length > 1) {
-                    String regex = commandType.getRegex();
-                    String paramsRaw = tokens[1];
-                    String[] paramsSplit = (regex == null) ? new String[]{paramsRaw} : paramsRaw.split(regex);
+                for (String param : commandType.getParams()) {
+                    String regex = "(?<=/" + param + "\\s)([^/].*?)(?=\\s*/|$)";
+                    Pattern pattern = Pattern.compile(regex);
+                    Matcher matcher = pattern.matcher(input);
 
-                    for (int i = 0; i < paramsSplit.length; i++) {
-                        paramMap.put(commandType.getArgs()[i], paramsSplit[i]);
+                    if (matcher.find()) {
+                        String arg = matcher.group();
+                        paramMap.put(param, arg);
+                    } else {
+                        throw new DukeException("Missing parameter: " + param);
                     }
                 }
 
@@ -80,23 +91,60 @@ public class Duke {
             listTasks();
             break;
         case MARK_TASK:
-            markTask(Integer.parseInt(paramMap.get("index")) - 1);
+            markTask(getParamAsInt(paramMap, "id") - 1);
             break;
         case UNMARK_TASK:
-            unmarkTask(Integer.parseInt(paramMap.get("index")) - 1);
+            unmarkTask(getParamAsInt(paramMap, "id") - 1);
             break;
         case DELETE_TASK:
-            deleteTask(Integer.parseInt(paramMap.get("index")) - 1);
+            deleteTask(getParamAsInt(paramMap, "id") - 1);
             break;
         case ADD_TODO:
-            addTask(new ToDo(paramMap.get("description")));
+            addTask(new ToDo(paramMap.get("desc")));
             break;
         case ADD_DEADLINE:
-            addTask(new Deadline(paramMap.get("description"), paramMap.get("by")));
+            addTask(new Deadline(paramMap.get("desc"), getParamAsDateTime(paramMap, "by")));
             break;
         case ADD_EVENT:
-            addTask(new Event(paramMap.get("description"), paramMap.get("at")));
+            addTask(new Event(paramMap.get("desc"), getParamAsDateTime(paramMap, "at"),
+                    getParamAsDuration(paramMap, "dur")));
             break;
+        }
+    }
+
+    private int getParamAsInt(Map<String, String> map, String param) {
+        String strVal = map.get(param);
+
+        try {
+            return Integer.parseInt(strVal);
+        } catch (NumberFormatException e) {
+            throw new DukeException(strVal + " is not an integer");
+        }
+    }
+
+    private LocalDateTime getParamAsDateTime(Map<String, String> map, String param) {
+        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                .appendPattern("yyyy-M-d[ HHmm]")
+                .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
+                .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
+                .toFormatter();
+        String strVal = map.get(param);
+
+        try {
+            return LocalDateTime.parse(strVal, formatter);
+
+        } catch (DateTimeParseException e) {
+            throw new DukeException(strVal + " is not a valid date. Example: 2022-3-15 1630");
+        }
+    }
+
+    private Duration getParamAsDuration(Map<String, String> map, String param) {
+        String strVal = map.get(param);
+
+        try {
+            return Duration.parse("PT" + strVal);
+        } catch (DateTimeParseException e) {
+            throw new DukeException(strVal + " is not a valid duration. Example: 1h5m");
         }
     }
 
@@ -126,6 +174,7 @@ public class Duke {
                 String[] lineSplit = line.split(" \\| ");
 
                 boolean isDone = lineSplit[1].equals("1");
+                LocalDateTime dateTime;
                 String description = lineSplit[2];
 
                 switch (lineSplit[0]) {
@@ -133,10 +182,13 @@ public class Duke {
                     tasks.add(new ToDo(description, isDone));
                     break;
                 case "E":
-                    tasks.add(new Event(description, lineSplit[3], isDone));
+                    dateTime = LocalDateTime.parse(lineSplit[3]);
+                    Duration duration = Duration.parse(lineSplit[4]);
+                    tasks.add(new Event(description, dateTime, duration, isDone));
                     break;
                 case "D":
-                    tasks.add(new Deadline(description, lineSplit[3], isDone));
+                    dateTime = LocalDateTime.parse(lineSplit[3]);
+                    tasks.add(new Deadline(description, dateTime, isDone));
                     break;
                 default:
                     throw new DukeException("Invalid save data");
