@@ -1,5 +1,6 @@
 import exceptions.InvalidInputException;
 import chatbots.TaskManagerChatbot;
+import exceptions.SaveFileModifiedException;
 import instructions.ExitInst;
 import instructions.Instruction;
 import instructions.list.instructions.DisplayListInst;
@@ -52,9 +53,15 @@ public class Fluffers extends TaskManagerChatbot {
 
     /**
      * Constructs an awake Fluffers.
+     *
+     * @throws SaveFileModifiedException when the save file contains invalid
+     *                                   symbols that could not have been from
+     *                                   the string representation of a task,
+     *                                   indicating external modification to
+     *                                   the file.
      */
-    public Fluffers() {
-        super(new TaskList());
+    public Fluffers() throws SaveFileModifiedException {
+        super(TaskList.loadFromFile());
     }
 
     /**
@@ -118,8 +125,13 @@ public class Fluffers extends TaskManagerChatbot {
      * Starts the program/wakes Fluffers up
      *
      * @param args input CLI arguments.
+     * @throws SaveFileModifiedException when the save file contains invalid
+     *                                   symbols that could not have been from
+     *                                   the string representation of a task,
+     *                                   indicating external modification to
+     *                                   the file.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SaveFileModifiedException {
         Fluffers f = new Fluffers();
 
         System.out.println(f.greet());

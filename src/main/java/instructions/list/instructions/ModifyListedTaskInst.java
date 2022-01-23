@@ -15,12 +15,12 @@ import instructions.Instruction;
 public abstract class ModifyListedTaskInst extends Instruction {
     /** Reusable Invalid Input Exception for when there is no provided task
      * number */
-    private static InvalidInputException NO_TASK_NUM_EXCEPTION
+    private static final InvalidInputException NO_TASK_NUM_EXCEPTION
             = new InvalidInputException("Cannot delete without a specified task number!");
 
     /** Reusable Invalid Input Exception for when the provided task number is
      * not an integer */
-    private static InvalidInputException NOT_INTEGER_EXCEPTION
+    private static final InvalidInputException NOT_INTEGER_EXCEPTION
             = new InvalidInputException("Given task number is not an integer!");
 
     /** The taskNumber to modify */

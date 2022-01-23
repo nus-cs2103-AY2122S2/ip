@@ -20,4 +20,12 @@ public abstract class TaskManagerChatbot extends Chatbot{
         this.taskList = taskList;
         instHandler = InstructionHandler.of(taskList);
     }
+
+    /**
+     * Sets the taskList to a custom one.
+     * @param taskList the taskList to use instead.
+     */
+    public void setTaskList(TaskList taskList) {
+        this.taskList = taskList;
+    }
 }

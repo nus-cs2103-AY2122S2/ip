@@ -18,7 +18,7 @@ import tasks.TaskList;
 public abstract class Instruction {
     /** Reusable Invalid Input Exception for when an unknown input is given to
      * create an instruction */
-    private static InvalidInputException UNKNOWN_INPUT
+    private static final InvalidInputException UNKNOWN_INPUT
             = new InvalidInputException("I don't understand what you said!");
 
     /**
