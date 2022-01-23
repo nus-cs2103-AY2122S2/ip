@@ -1,15 +1,19 @@
 import java.util.ArrayList;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 public class TaskStore {
     private ArrayList<Task> tasks;
+    private ArrayList<Consumer<TaskStore>> changeListeners;
 
     public TaskStore() {
         this.tasks = new ArrayList<>();
+        this.changeListeners = new ArrayList<>();
     }
 
     public Task addTask(Task task) {
         this.tasks.add(task);
+        this.notifyListeners();
         return task;
     }
 
@@ -38,6 +42,22 @@ public class TaskStore {
         if (index >= this.tasks.size() || index < 0) {
             return null;
         }
-        return this.tasks.remove(index);
+        Task deleted = this.tasks.remove(index);
+        this.notifyListeners();
+        return deleted;
+    }
+
+    public void registerListener(Consumer<TaskStore> listener) {
+        changeListeners.add(listener);
+    }
+
+    public void removeListener(Consumer<TaskStore> listener) {
+        changeListeners.remove(listener);
+    }
+
+    public void notifyListeners() {
+        this.changeListeners.forEach(handler -> {
+            handler.accept(this);
+        });
     }
 }

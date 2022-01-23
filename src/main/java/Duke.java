@@ -48,7 +48,20 @@ public class Duke {
     }
 
     private static void init() {
-        taskStore = new TaskStore();
+        try {
+            taskStore = TaskStoreSerializer.inflate();
+            taskStore.registerListener(store -> {
+                try {
+                    TaskStoreSerializer.deflate(store);
+                } catch (DukeIOException ex) {
+                    System.out.println("Warning: An error occurred while saving Task list");
+                }
+            });
+        } catch (DukeIOException ex) {
+            System.out.println("Cannot write to working directory.\n"
+                    + "Please check that you have write to the directory permissions.\n"
+                    + "Will not save any changes!");
+        }
     }
 
     private static void greet() {
@@ -129,9 +142,11 @@ public class Duke {
             linePrinter.print(String.format("Task is already %s:", newState ? "done" : "not done"));
         } else if (newState) {
             task.markAsDone();
+            taskStore.notifyListeners();
             linePrinter.print("Great Job Finishing the task:");
         } else {
             task.unmarkAsDone();
+            taskStore.notifyListeners();
             linePrinter.print("Marking the task as not done yet:");
         }
         linePrinter.print(String.format("\t %s", task.getReadableString()));
