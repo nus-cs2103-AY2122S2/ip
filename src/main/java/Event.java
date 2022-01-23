@@ -1,18 +1,18 @@
-class Deadline extends Task {
+public class Event extends Task {
     private String metaInfo;
 
-    public Deadline(String description, String metaInfo) {
+    public Event(String description, String metaInfo) {
         super(description);
         this.metaInfo = metaInfo;
     }
 
     @Override
     public String getTaskIcon() {
-        return "[D]";
+        return "[E]";
     }
 
     @Override
     public String toString() {
-        return super.toString() + "(by:" + this.metaInfo + ")";
+        return super.toString() + "(at:" + this.metaInfo + ")";
     }
 }

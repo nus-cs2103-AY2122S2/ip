@@ -9,7 +9,7 @@ public class Duke {
     }
 
     private void printTask(Task curr) {
-        System.out.println(curr.getTaskIcon() + " [" + curr.getStatusIcon() + "] " + curr);
+        System.out.println(curr.getTaskIcon() + " [" + curr.getStatusIcon() + "]" + curr);
     }
 
     private void printNoOfTasks() {
@@ -51,8 +51,6 @@ public class Duke {
                 }
                 System.out.println(bar);
             } else if (command.matches(".*\\bmark\\b.*")) {
-                // String numberOnly = command.replaceAll("[^0-9]", "");
-                // int number = Integer.parseInt(numberOnly);
                 int number = Integer.parseInt(inputArray[1]);
                 Task curr = taskList.get(number - 1);
 
@@ -63,8 +61,6 @@ public class Duke {
                 System.out.println(bar);
 
             } else if (command.matches(".*\\bunmark\\b.*")) {
-                // String numberOnly = command.replaceAll("[^0-9]", "");
-                // int number = Integer.parseInt(numberOnly);
                 int number = Integer.parseInt(inputArray[1]);
                 Task curr = taskList.get(number - 1);
 
@@ -85,6 +81,14 @@ public class Duke {
                 System.out.println(bar);
                 System.out.println("Got it. I've added this task:");
                 Task curr = new Deadline(strippedCommand.split("/")[0], metaInfo);
+                processNewTask(curr);
+                System.out.println(bar);
+            } else if (command.matches(".*\\bevent\\b.*")) {
+                String metaInfo = originalInput.split("/at")[1];
+                String strippedCommand = originalInput.replaceAll(".*\\bevent\\.*", "");
+                System.out.println(bar);
+                System.out.println("Got it. I've added this task:");
+                Task curr = new Event(strippedCommand.split("/")[0], metaInfo);
                 processNewTask(curr);
                 System.out.println(bar);
             } else {
