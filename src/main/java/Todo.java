@@ -1,15 +1,20 @@
 public class Todo extends Task {
 
-    public Todo(String activity, String type ) {
-        super(activity, type);
+    public Todo(String activity) {
+        super(activity, "T");
     }
 
     @Override
-    public void getStatus() {
+    public String getStatus() {
         if (this.status == 0) {
-            System.out.println("[" + type + "][ ] " + activity);
+            return "[" + type + "][ ] " + activity;
         } else {
-            System.out.println("[" + type + "][X] " + activity);
+            return "[" + type + "][X] " + activity;
         }
+    }
+
+    @Override
+    public String toString() {
+        return type + "|" + status + "|" + activity + "|\n";
     }
 }
