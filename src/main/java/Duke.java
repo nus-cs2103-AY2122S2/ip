@@ -1,5 +1,10 @@
+import java.io.File;
+import java.nio.file.*;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.io.FileWriter;
 
 public class Duke {
 
@@ -11,6 +16,14 @@ public class Duke {
 
         taskList = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
+
+        try {
+            FileOperations();
+        }
+
+        catch (IOException ex) {
+            return;
+        }
 
         System.out.println(greeting);
         String input = sc.nextLine();
@@ -88,6 +101,7 @@ public class Duke {
                         int idx = checkList(var);
                         printOutput(taskList.get(idx), false);
                         taskList.remove(idx);
+                        try {copyToFile();} catch (IOException ex) {return;}
                     }
 
                     catch (DukeException ex) {
@@ -108,6 +122,7 @@ public class Duke {
 
     private static void createNewTask(Task task) {
         taskList.add(task);
+        try {copyToFile();} catch (IOException e) {return;}
         printOutput(task, true);
     }
 
@@ -170,5 +185,47 @@ public class Duke {
         String out = "\tGot it. I've " + (isAdd ? "added" : "deleted") + " this task:\n";
         System.out.println(out + "\t\t" + task);
         System.out.println("\tNow you have "+ taskList.size() +" tasks in the list.\n");
+    }
+
+    private static void FileOperations() throws IOException {
+
+        Path folder = Paths.get(System.getProperty("user.dir"), "data");
+        Path file = Paths.get(System.getProperty("user.dir"), "data", "duke.txt");
+
+        if (!Files.exists(folder)) {
+            Files.createDirectories(folder);
+        }
+
+        if (!Files.exists(file)) {
+            Files.createFile(file);
+        }
+
+        File f = new File(String.valueOf(file));
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+            String[] task = s.nextLine().trim().split(" -- ");
+
+            switch (task[0].trim()) {
+            case "T":
+                taskList.add(new ToDo(task[2], task[1].equals("true")));
+                break;
+            case "D":
+                taskList.add(new Deadline(task[2], task[3], task[1].equals("true")));
+                break;
+            case "E":
+                taskList.add(new Event(task[2], task[3], task[1].equals("true")));
+            break;
+            }
+        }
+    }
+
+    private static void copyToFile() throws IOException {
+        FileWriter fw = new FileWriter(String.valueOf(Paths.get(System.getProperty("user.dir"), "data", "duke.txt")));
+
+        for (Task t : taskList) {
+            fw.write(t.toFile() + "\n");
+        }
+
+        fw.close();
     }
 }

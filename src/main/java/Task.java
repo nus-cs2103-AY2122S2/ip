@@ -20,6 +20,10 @@ public class Task {
         return completed ? "X" : " ";
     }
 
+    public String toFile() {
+        return this.completed + " -- " + this.description;
+    }
+
     @Override
     public String toString() {
         return "[" + this.getCompleted() + "] " + this.description;
