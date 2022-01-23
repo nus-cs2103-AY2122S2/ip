@@ -18,6 +18,10 @@ public class TaskList {
         return output;
     }
 
+    public int numTasks() {
+        return this.index;
+    }
+
     public String getTasks() {
         String output = "Here are the tasks in your list:";
         for (int i = 0; i < index; i++) {
