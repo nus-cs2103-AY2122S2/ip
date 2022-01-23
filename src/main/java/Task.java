@@ -1,9 +1,6 @@
-<<<<<<< HEAD
-public abstract class Task {
-=======
 import java.time.LocalDate;
 
->>>>>>> branch-Level-8
+public abstract class Task {
     public String description;
     protected boolean done;
 
@@ -24,9 +21,7 @@ import java.time.LocalDate;
         return (this.done) ? "X" : " ";
     }
 
-<<<<<<< HEAD
     public abstract String toSaveData();
-=======
     /**
      * Accepts string in yyyy-mm-dd format
      * @param dateString
@@ -35,7 +30,6 @@ import java.time.LocalDate;
     public LocalDate parseDate(String dateString) {
         return LocalDate.parse(dateString);
     }
->>>>>>> branch-Level-8
 
     @Override
     public String toString() {
