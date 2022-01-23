@@ -1,3 +1,7 @@
+package Duke.Managers;
+
+import Duke.External.FastIO;
+
 public class Ui {
 
     protected FastIO io;

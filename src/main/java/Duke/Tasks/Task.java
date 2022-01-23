@@ -1,6 +1,7 @@
+package Duke.Tasks;
 import java.io.Serializable;
 
-public abstract class Task implements ICompletable, Serializable {
+public abstract class Task implements Serializable {
 
     protected String item;
     protected boolean completed;

@@ -1,3 +1,10 @@
+package Duke.Commands;
+
+import Duke.Managers.TaskList;
+import Duke.Managers.Ui;
+import Duke.Managers.Storage;
+import Duke.Tasks.Task;
+
 public class StoreCommand extends Command {
     protected Task task;
     public StoreCommand(Task task) {

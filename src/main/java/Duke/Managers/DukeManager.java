@@ -1,4 +1,7 @@
-import java.util.*;
+package Duke.Managers;
+
+import Duke.Exception.DukeException;
+import Duke.Commands.*;
 
 public class DukeManager {
 

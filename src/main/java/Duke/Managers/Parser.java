@@ -1,6 +1,8 @@
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-import java.util.function.Function;
+package Duke.Managers;
+
+import Duke.Commands.*;
+import Duke.Tasks.*;
+import Duke.Exception.DukeException;
 
 public class Parser {
     public Command parse(String input) throws DukeException {
@@ -14,6 +16,8 @@ public class Parser {
                 return mark(tokens, false);
             case "delete":
                 return delete(tokens);
+            case "bye":
+                return exit();
             case "todo":
                 return store(ToDo.createTask(tokens));
             case "deadline":
@@ -23,6 +27,10 @@ public class Parser {
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
+    }
+
+    protected ExitCommand exit() {
+        return new ExitCommand();
     }
 
     protected DeleteCommand delete(String[] tokens) throws DukeException {

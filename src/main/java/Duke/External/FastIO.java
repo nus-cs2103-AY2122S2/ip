@@ -1,3 +1,5 @@
+package Duke.External;
+
 import java.io.*;
 import java.util.StringTokenizer;
 
@@ -13,7 +15,7 @@ import java.util.StringTokenizer;
                     InputStreamReader(System.in));
         }
 
-        String next()
+        public String next()
         {
             while (st == null || !st.hasMoreElements())
             {
@@ -29,22 +31,22 @@ import java.util.StringTokenizer;
             return st.nextToken();
         }
 
-        int nextInt()
+        public int nextInt()
         {
             return Integer.parseInt(next());
         }
 
-        long nextLong()
+        public long nextLong()
         {
             return Long.parseLong(next());
         }
 
-        double nextDouble()
+        public double nextDouble()
         {
             return Double.parseDouble(next());
         }
 
-        String nextLine()
+        public String nextLine()
         {
             String str = "";
             try
