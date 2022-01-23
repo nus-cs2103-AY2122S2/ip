@@ -15,6 +15,7 @@ public abstract class Command{
      * Constructor of Command class.
      * @param task task object created from user input.
      * @param number an indicator to the index of the taskList in TaskList class.
+     * @param word keyword used to find similar tasks in taskList of TaskList class.
      */
     public Command(Task task, Integer number, String word) {
         this.task = task;
