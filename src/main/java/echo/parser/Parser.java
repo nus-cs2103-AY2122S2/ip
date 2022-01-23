@@ -204,6 +204,12 @@ public class Parser {
         return new DeleteCommand(i);
     }
 
+    /**
+     * Prepare find command.
+     *
+     * @param desc Description to find.
+     * @return FindCommand.
+     */
     private static Command prepareFind(String desc) {
         return new FindCommand(desc);
     }

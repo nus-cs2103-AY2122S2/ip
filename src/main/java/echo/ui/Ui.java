@@ -141,10 +141,18 @@ public class Ui {
                 + addPrefix(String.format("Now you have %d tasks in the list.", size)));
     }
 
+    /**
+     * Prints a list of task status that matches the user input.
+     *
+     * @param s String representation of task that matches the user input.
+     */
     public void showFind(String s) {
         System.out.println(addPrefix("Here are the matching tasks in your list:\n") + s);
     }
 
+    /**
+     * Prints a message that no task fits the description.
+     */
     public void showCantFind() {
         System.out.println(addPrefix("No task with that description"));
     }
