@@ -1,12 +1,16 @@
 package duke.handler;
 
-import duke.exception.DukeException;
-import duke.task.*;
-
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.Scanner;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Tasklist;
+import duke.task.Todo;
 
 /**
  * Enum class used to handle the different commands used in the application.
@@ -53,7 +57,7 @@ public enum Handlers {
                 } else if (cmd.equals(Deadline.label)) {
                     Handlers.deadlineHandler(list, input, cmd);
                 } else if (cmd.equals(Event.label)) {
-                    Handlers.eventHandler(list, input, cmd );
+                    Handlers.eventHandler(list, input, cmd);
                 } else if (cmd.equals(Todo.label)) {
                     Handlers.todoHandler(list, input);
                 } else if (cmd.equals(Mark.label)) {

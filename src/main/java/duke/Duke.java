@@ -1,15 +1,21 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.handler.FileHandler;
 import duke.handler.Handlers;
 import duke.task.Tasklist;
 
-import java.util.Scanner;
-
 /**
- * Entry point of the application.
+ * Our very own task manager, Duke!
  */
 public class Duke {
+
+    /**
+     * Main function to execute the application.
+     *
+     * @param args Arguments, if any, to be passed for execution.
+     */
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

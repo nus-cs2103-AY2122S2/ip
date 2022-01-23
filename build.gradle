@@ -22,9 +22,5 @@ dependencies {
 }
 
 checkstyle {
-<<<<<<< HEAD
-    toolVersion = '9.21'
-=======
     toolVersion = '8.29'
->>>>>>> branch-A-CodingStandard
 }

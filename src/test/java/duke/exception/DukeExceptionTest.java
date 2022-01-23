@@ -2,8 +2,9 @@ package duke.exception;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import duke.task.Tasklist;
 import org.junit.jupiter.api.Test;
+
+import duke.task.Tasklist;
 
 public class DukeExceptionTest {
     @Test

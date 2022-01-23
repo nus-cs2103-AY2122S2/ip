@@ -1,8 +1,8 @@
 package duke.exception;
 
-import duke.task.Tasklist;
-
 import java.util.regex.Pattern;
+
+import duke.task.Tasklist;
 
 /**
  * A custom exception used to handle edge cases in our application.

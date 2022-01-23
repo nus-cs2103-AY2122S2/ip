@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.time.Time;
-
 import java.time.LocalDate;
+
+import duke.time.Time;
 
 /**
  * A type of task with a pending date, and may contain a time.
