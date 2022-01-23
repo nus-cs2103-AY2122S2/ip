@@ -7,6 +7,14 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public boolean isDone() {
+        return this.isDone;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
     public void markAsDone() {
         this.isDone = true;
     }

@@ -7,6 +7,10 @@ public class Event extends Task {
         this.startTime = time;
     }
 
+    public String getStartTime() {
+        return this.startTime;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

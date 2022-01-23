@@ -7,6 +7,10 @@ public class Deadline extends Task {
         this.deadline = time;
     }
 
+    public String getDeadline() {
+        return this.deadline;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
