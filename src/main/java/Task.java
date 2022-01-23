@@ -5,11 +5,11 @@
  * @author  Jan Alfenson Tan
  * @version 1.0
  */
-public class Task {
+public abstract class Task {
     /**
      * true when task is done, false otherwise
      */
-    private boolean done;
+    private boolean isDone;
 
     /**
      * name of the task
@@ -23,9 +23,19 @@ public class Task {
      */
     public Task(String taskName) {
         this.taskName = taskName;
-        this.done = false;
+        this.isDone = false;
     }
 
+    /**
+     * Constructor for the task object
+     *
+     * @param taskName  the task name
+     * @param isDone      whether the task is done
+     */
+    public Task(String taskName, boolean isDone) {
+        this.taskName = taskName;
+        this.isDone = isDone;
+    }
     /**
      * Returns the task name
      *
@@ -41,7 +51,7 @@ public class Task {
      * @return  done
      */
     public boolean getDone() {
-        return done;
+        return isDone;
     }
 
     /**
@@ -50,6 +60,7 @@ public class Task {
      * @param done  sets the task's completion
      */
     public void setDone(boolean done) {
-        this.done = done;
+        this.isDone = done;
     }
+
 }

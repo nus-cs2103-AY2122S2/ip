@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.*; // Import java utils
 
 /**
@@ -24,8 +25,8 @@ public class Sana {
      * Constructor for the Sana class
      */
     public Sana() {
-        this.userTasks = new LinkedList<>();
         this.taskMem = new Memory();
+        this.userTasks = taskMem.memToList();
     }
 
     /**
@@ -90,6 +91,7 @@ public class Sana {
         } catch (OutOfBoundsTaskException e) {
             System.out.println(e.getMessage());
         }
+        Memory.update
         border();
     }
 

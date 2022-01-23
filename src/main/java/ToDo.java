@@ -15,6 +15,16 @@ public class ToDo extends Task {
     }
 
     /**
+     * Constructor for ToDo objects
+     *
+     * @param taskName  the task name
+     * @param isDone      whether the task is done
+     */
+    public ToDo(String taskName, boolean isDone) {
+        super(taskName, isDone);
+    }
+
+    /**
      * Returns a String representation of the ToDo
      *
      * @return  ToDo in String
@@ -29,5 +39,24 @@ public class ToDo extends Task {
             doneness = "[ ] ";
         }
         return box1 + doneness + super.toString();
+    }
+
+    /**
+     * Converts the strings in mem to a ToDo
+     *
+     * @param taskStr   the string in mem
+     */
+    public static ToDo memToTask(String taskStr) {
+        // Example str = T|1|read book
+        String[] args = taskStr.split("|");
+        boolean isDone = args[1].equals('1');
+        return new ToDo(args[2], isDone);
+        /**
+        try {
+
+        } catch (IndexOutOfBoundsException e) {
+            throw new MemoryCorruptedException();
+        }
+         */
     }
 }

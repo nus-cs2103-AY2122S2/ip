@@ -8,10 +8,23 @@ public class Event extends Task {
      * Constructor for Event objects
      *
      * @param eventName  the event name
+     * @param eventTime  time of the event
      */
-    public Event(String eventName, String time) {
+    public Event(String eventName, String eventTime) {
         super(eventName);
-        this.eventTime = time;
+        this.eventTime = eventTime;
+    }
+
+    /**
+     * Constructor for Event objects
+     *
+     * @param eventName the event name
+     * @param isDone    if the event is done
+     * @param eventTime the time of the event
+     */
+    public Event(String eventName, boolean isDone, String eventTime) {
+        super(eventName, isDone);
+        this.eventTime = eventTime;
     }
 
     /**
@@ -31,5 +44,24 @@ public class Event extends Task {
         String eventName = super.toString();
         String time = " (at: " + eventTime + ")";
         return box1 + doneness + eventName + time;
+    }
+
+    /**
+     * Converts the strings in mem to an Event
+     *
+     * @param taskStr   the string in mem
+     */
+    public static Event memToTask(String taskStr) {
+        // Example str = E|0|return book|June 6th
+        String[] args = taskStr.split("|");
+        boolean isDone = args[1].equals('1');
+        return new Event(args[2], isDone, args[3]);
+        /**
+         try {
+
+         } catch (IndexOutOfBoundsException e) {
+         throw new MemoryCorruptedException();
+         }
+         */
     }
 }

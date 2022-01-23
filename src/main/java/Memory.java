@@ -1,5 +1,11 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.FileWriter;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * The Memory class abstracts the leading and saving of tasks given to Sana
@@ -42,6 +48,51 @@ public class Memory {
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * Converts the memory of tasks to a List of tasks
+     *
+     * @return  a List of tasks
+     */
+    public LinkedList<Task> memToList() {
+        Scanner s = null;
+        try {
+            s = new Scanner(memFile);
+        } catch (FileNotFoundException e) {
+            System.out.println("I can't read the memory. Let's just start afresh!");
+            return  new LinkedList<>();
+        }
+        LinkedList<Task> taskList = new LinkedList<>();
+        while (s.hasNext()) {
+            String task = s.nextLine();
+            if (task.charAt(0) == 'T') { // a todo task
+                taskList.add(ToDo.memToTask(task));
+                /**
+                try {
+
+                } catch (MemoryCorruptedException e) {
+
+                }
+                 */
+            } else if (task.charAt(0) == 'D') { // a Deadline task
+                taskList.add(Deadline.memToTask(task));
+            } else if (task.charAt(0) == 'E') { // an Event task
+                taskList.add(Event.memToTask(task));
+            }
+        }
+        s.close();
+        return taskList;
+    }
+
+    /**
+     * Updates the memory of tasks
+     *
+     * @param taskList  the list of tasks
+     */
+    public void updateMemory(LinkedList<Task> taskList) {
+        FileWriter fw = new FileWriter(memPath);
+
     }
 
 
