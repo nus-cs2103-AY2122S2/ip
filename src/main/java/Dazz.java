@@ -19,7 +19,7 @@ public class Dazz {
 
         while (scanner.hasNextLine()) {
             String command = scanner.nextLine();
-            String[] arr1 = command.split("\\s+");
+            String[] arr1 = command.split(" ");
             boolean byeFlag = arr1[0].equals("bye");
             System.out.println(hr);
             try {
@@ -36,13 +36,9 @@ public class Dazz {
                     } else if (reminder.getSize() == 0) {
                         throw new EmptyListException();
                     } else {
-                        int index = Integer.parseInt(arr1[1]); // include checking if integer cants be parsed
-                        if (reminder.getSize() < index || index <= 0) {
-                            throw new InvalidTaskIndexException();
-                        } else {
-                            reminder.mark(Integer.parseInt(arr1[1]), true);
-                            break;
-                        }
+                        int index = Integer.parseInt(arr1[1]);
+                        reminder.mark(index);
+                        break;
                     }
                 case "unmark":
                     if (arr1.length < 2) {
@@ -51,12 +47,8 @@ public class Dazz {
                         throw new EmptyListException();
                     } else {
                         int index = Integer.parseInt(arr1[1]);
-                        if (reminder.getSize() < index || index <= 0) {
-                            throw new InvalidTaskIndexException();
-                        } else {
-                            reminder.mark(Integer.parseInt(arr1[1]), false);
-                            break;
-                        }
+                        reminder.unmark(index);
+                        break;
                     }
                 case "delete":
                     if (arr1.length < 2) {
@@ -65,18 +57,14 @@ public class Dazz {
                         throw new EmptyListException();
                     } else {
                         int index = Integer.parseInt(arr1[1]);
-                        if (reminder.getSize() < index || index <= 0) {
-                            throw new InvalidTaskIndexException();
-                        } else {
-                            reminder.delete(Integer.parseInt(arr1[1]));
-                            break;
-                        }
+                        reminder.delete(index);
+                        break;
                     }
                 case "todo":
                     if (arr1.length < 2) {
                         throw new IncompleteCommandException("todo");
                     } else {
-                        Task todo = new Todo(command.substring(5));
+                        Task todo = new Todo(command.split("todo ")[1], TaskType.TODO.getTaskType());
                         reminder.add(todo);
                         break;
                     }
@@ -88,7 +76,8 @@ public class Dazz {
                         if (arr2.length < 2) {
                             throw new IncompleteCommandException("'date' in deadline");
                         } else {
-                            Task deadline = new Deadline(arr2[0].substring(9), arr2[1]);
+                            String description = arr2[0].substring(9) + " (by: " + arr2[1] + ")";
+                            Task deadline = new Deadline(description, TaskType.DEADLINE.getTaskType());
                             reminder.add(deadline);
                             break;
                         }
@@ -101,7 +90,8 @@ public class Dazz {
                         if (arr3.length < 2) {
                             throw new IncompleteCommandException("'date' in event");
                         } else {
-                            Task event = new Event(arr3[0].substring(6), arr3[1]);
+                            String description = arr3[0].substring(6) + " (at: " + arr3[1] + ")";
+                            Task event = new Event(description, TaskType.EVENT.getTaskType());
                             reminder.add(event);
                             break;
                         }

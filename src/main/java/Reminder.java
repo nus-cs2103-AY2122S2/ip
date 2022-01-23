@@ -10,15 +10,20 @@ public class Reminder {
         printTaskAndSize(task);
     }
 
-    public void delete(int position) {
-        Task task = reminders.remove(--position);
-        System.out.println("\tNoted. I've removed this task:");
-        printTaskAndSize(task);
+    public void delete(int position) throws InvalidTaskIndexException {
+        if (position > this.getSize()) {
+            throw new InvalidTaskIndexException();
+        } else {
+            Task task = reminders.remove(--position);
+            System.out.println("\tNoted. I've removed this task:");
+            printTaskAndSize(task);
+        }
     }
 
     public int getSize() {
         return reminders.size();
     }
+
     public void list() {
         System.out.println("\tHere are the tasks in your list:");
         if (reminders.size() == 0) {
@@ -31,8 +36,20 @@ public class Reminder {
         }
     }
 
-    public void mark(int position, boolean done) {
-        reminders.get(--position).setDone(done);
+    public void mark(int position) throws InvalidTaskIndexException {
+        if (position > this.getSize()) {
+            throw new InvalidTaskIndexException();
+        } else {
+            reminders.get(--position).setDone();
+        }
+    }
+
+    public void unmark(int position) throws InvalidTaskIndexException {
+        if (position > this.getSize()) {
+            throw new InvalidTaskIndexException();
+        } else {
+            reminders.get(--position).setUndone();
+        }
     }
 
     public void printTaskAndSize(Task task) {
