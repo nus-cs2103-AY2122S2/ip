@@ -1,20 +1,24 @@
 package tasks;
 
 /**
- * This class encapsulates a tasks.Task, which contains a String and a checkbox to indicate if it is done.
+ * This class encapsulates a task, which contains a String and a checkbox
+ * to indicate if it is done.
  *
  * @author Ong Han Yang
  */
 public abstract class Task {
     /** The description of the task.*/
     private String desc;
+
     /** Whether the task is done or not.*/
     private boolean isDone;
-    /** The Cross symbol used to show that a class is marked as done. Original: ✓ or \u2713*/
+
+    /** The Cross symbol used to show that a class is marked as done.
+     * Original: ✓ or \u2713 */
     private static String TICK = "X";
 
     /**
-     * Constructor to create a task.
+     * Constructs a task.
      * Abstract class Task so this should not be used normally.
      *
      * @param desc the description of the task.
@@ -33,7 +37,7 @@ public abstract class Task {
     }
 
     /**
-     * Overridden toString method to represent the task as a String.
+     * Represents the task as a String.
      * @return String representation of the task.
      */
     @Override

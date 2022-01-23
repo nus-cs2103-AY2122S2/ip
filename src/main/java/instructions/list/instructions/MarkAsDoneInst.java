@@ -1,4 +1,7 @@
-package instructions.modify.listed.task.instructions;
+package instructions.list.instructions;
+
+import Exceptions.NoSuchTaskException;
+import tasks.TaskList;
 
 /**
  * This class represents a Mark Task as Done Instruction.
@@ -24,5 +27,20 @@ public class MarkAsDoneInst extends ModifyListedTaskInst {
      */
     protected static MarkAsDoneInst of(int taskNum) {
         return new MarkAsDoneInst(taskNum);
+    }
+
+    /**
+     * Marks a task from the taskList as done.
+     *
+     * @param taskList the taskList to modify.
+     * @return the feedback message after performing this instruction.
+     * @throws NoSuchTaskException when there does not exist a task with the
+     *                             given index.
+     */
+    @Override
+    public String doInst(TaskList taskList) throws NoSuchTaskException {
+        taskList.markTask(super.getTaskNum() - 1, true);
+        return String.format("Okay, this task is done:\n%s"
+                , taskList.displayTask(super.getTaskNum() - 1));
     }
 }

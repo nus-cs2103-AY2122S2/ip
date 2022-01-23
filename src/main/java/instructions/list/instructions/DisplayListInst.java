@@ -1,4 +1,8 @@
-package instructions;
+package instructions.list.instructions;
+
+import Exceptions.NoSuchTaskException;
+import instructions.Instruction;
+import tasks.TaskList;
 
 /**
  * This class represents a display list instruction.
@@ -29,5 +33,16 @@ public class DisplayListInst extends Instruction {
      */
     public static DisplayListInst of() {
         return FIXED_DISPLAY_INST;
+    }
+
+    /**
+     * Displays the taskList as a string.
+     *
+     * @param taskList the taskList to show.
+     * @return the feedback message after performing this instruction.
+     */
+    @Override
+    public String doInst(TaskList taskList) throws NoSuchTaskException {
+        return taskList.toString();
     }
 }

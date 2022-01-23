@@ -1,5 +1,8 @@
 package instructions;
 
+import Exceptions.NoSuchTaskException;
+import tasks.TaskList;
+
 /**
  * This class represents an exit instruction.
  * Format: "bye"
@@ -15,18 +18,29 @@ public class ExitInst extends Instruction {
             = new ExitInst();
 
     /**
-     * Private default constructor for an Exit Instruction.
+     * Constructs an Exit Instruction.
      */
     private ExitInst() {
 
     }
 
     /**
-     * Factory method to produce an Exit Instruction.
+     * Produces an Exit Instruction.
      *
      * @return the Exit Instruction
      */
     public static ExitInst of() {
         return FIXED_EXIT_INST;
+    }
+
+    /**
+     * Does nothing.
+     *
+     * @param taskList the taskList to modify.
+     * @return the feedback message after performing this instruction.
+     */
+    @Override
+    public String doInst(TaskList taskList) throws NoSuchTaskException {
+        return "";
     }
 }

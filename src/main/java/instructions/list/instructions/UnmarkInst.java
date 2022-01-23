@@ -1,4 +1,7 @@
-package instructions.modify.listed.task.instructions;
+package instructions.list.instructions;
+
+import Exceptions.NoSuchTaskException;
+import tasks.TaskList;
 
 /**
  * This class represents a Mark Task as Undone Instruction.
@@ -24,5 +27,20 @@ public class UnmarkInst extends ModifyListedTaskInst {
      */
     protected static UnmarkInst of(int taskNum) {
         return new UnmarkInst(taskNum);
+    }
+
+    /**
+     * Marks a task from the taskList as undone.
+     *
+     * @param taskList the taskList to modify.
+     * @return the feedback message after performing this instruction.
+     * @throws NoSuchTaskException when there does not exist a task with the
+     *                             given index.
+     */
+    @Override
+    public String doInst(TaskList taskList) throws NoSuchTaskException {
+        taskList.markTask(super.getTaskNum() - 1, false);
+        return String.format("Okay, this task needs to be done:\n%s"
+                , taskList.displayTask(super.getTaskNum() - 1));
     }
 }

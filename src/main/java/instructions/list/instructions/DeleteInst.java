@@ -1,4 +1,8 @@
-package instructions.modify.listed.task.instructions;
+package instructions.list.instructions;
+
+import Exceptions.NoSuchTaskException;
+import tasks.Task;
+import tasks.TaskList;
 
 /**
  * This class represents a Delete Task Instruction.
@@ -24,5 +28,21 @@ public class DeleteInst extends ModifyListedTaskInst {
      */
     protected static DeleteInst of(int taskNum) {
         return new DeleteInst(taskNum);
+    }
+
+    /**
+     * Deletes a task from the taskList.
+     *
+     * @param taskList the taskList to modify.
+     * @return the feedback message after performing this instruction.
+     * @throws NoSuchTaskException when there does not exist a task with the
+     *                             given index.
+     */
+    @Override
+    public String doInst(TaskList taskList) throws NoSuchTaskException {
+        Task deleted = taskList.delete(super.getTaskNum() - 1);
+        return String.format("Okay, I've removed this task:\n%s\nThere are " +
+                "%d tasks left in the list!"
+                , deleted.toString(), taskList.length());
     }
 }

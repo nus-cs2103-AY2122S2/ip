@@ -9,7 +9,7 @@ package tasks;
  */
 public class ToDoTask extends Task{
     /**
-     * Constructor for a To Do task.
+     * Constructs a To Do task.
      *
      * @param desc the description of the task.
      */
@@ -18,31 +18,24 @@ public class ToDoTask extends Task{
     }
 
     /**
-     * Overridden toString method to display the TO-DO task as a String.
+     * Produces a To Do task.
      *
-     * @return String representation of a TO-DO task.
+     * @param desc the description of the task
+     * @return the To Do task.
+     */
+    public static ToDoTask of(String desc) {
+        return new ToDoTask(desc);
+    }
+
+    /**
+     * Represents the To Do task as a String.
+     *
+     * @return String representation of a To Do task.
      */
     @Override
     public String toString() {
         return String.format("[T]%s", super.toString());
     }
 
-    /**
-     * Method to parse a String to obtain an To-Do Task.
-     *
-     * Expected format: todo <desc>
-     *
-     * @param input the String command used to build the Task from.
-     * @return the ToDoTask obtained.
-     * @throws InvalidInputException when no description is given.
-     */
-    public static ToDoTask parseInput(String input) throws InvalidInputException {
-        String desc = input.substring(4);
-        if (desc.length() <= 1) { //happens when input is like "todo " or "todo"
-            throw new InvalidInputException("No description is provided for the ToDo Task!");
-        } else {
-            return new ToDoTask(desc.substring(1));
-        }
 
-    }
 }

@@ -16,8 +16,20 @@ import instructions.Instruction;
 public abstract class NewTaskInst extends Instruction {
     /** Reusable Invalid Input Exception for when there is no provided task
      * number */
-    protected static InvalidInputException NO_TASK_DETAILS
-            = new InvalidInputException("No task details is provided!");
+    protected static InvalidInputException MISSING_TASK_DETAILS_EXCEPTION
+            = new InvalidInputException("There are missing task details!");
+
+    /** Reusable Invalid Input Exception for when too many arguments are
+     * specified. Happens with multiple " /at "s or " /by "s in the input.
+     * Mainly used by subclasses.*/
+    protected static InvalidInputException TOO_MANY_ARGUMENTS_EXCEPTION
+            = new InvalidInputException("Too many arguments are supplied. "
+            + "Check your input format.");
+
+    /** Reusable Invalid Input Exception for when the input command has missing
+     * spaces */
+    protected static InvalidInputException MISSING_SPACES_EXCEPTION
+            = new InvalidInputException("There are missing spaces in the command!");
 
     /** The provided description for the task to be added */
     private String taskDesc;
@@ -33,30 +45,51 @@ public abstract class NewTaskInst extends Instruction {
 
     /**
      /**
-     * Factory method to produce a New Task Instruction, according to the
-     * specified instruction type.
+     * Produces a New Task Instruction, according to the specified instruction
+     * type.
      *
-     * @param instType the type of new task instruction to use.
-     * @param taskDetails the task number to modify, as a String.
+     * @param input the original command called.
      * @return the Modify Listed Task Instruction with the specified task number
      *         to delete.
-     * @throws InvalidInputException when no task number is provided, or the provided task number
-     *      is not an integer.
+     * @throws InvalidInputException when no details are provided, or the format
+     *                               of the input is wrong.
      */
-    public static NewTaskInst of(String instType, String taskDetails) throws InvalidInputException {
-        if (taskDetails.length() == 0) {
-            throw NO_TASK_DETAILS;
+    public static NewTaskInst of(String input) throws InvalidInputException {
+        //to do tasks are not shown to prevent improper highlighting of comments
+        String[] split = input.split(" ", 2);
+
+        if (split.length == 1) { // happens when: "deadline", "event"
+            throw MISSING_TASK_DETAILS_EXCEPTION;
         }
+
+        String taskDetails = split[1].strip();
+        if (taskDetails.length() == 0) { // happens when: "deadline ", "event "
+            throw MISSING_TASK_DETAILS_EXCEPTION;
+        }
+
+        // At this point, the instruction must be: "deadline <x>" with x being
+        // not completely full of spaces.
+        String instType = split[0];
         switch (instType) {
         case "todo":
             return TodoInst.of(taskDetails);
         case "deadline":
             return DeadlineInst.of(taskDetails);
         case "event":
-            return Event.of(taskDetails);
+            return EventInst.of(taskDetails);
         default:
-            // will not reach here, as Instruction.of controls the main flow of instructions
+            // will not reach here, as Instruction.of controls the main flow
+            // of instructions
             return null;
         }
+    }
+
+    /**
+     * Gets the task details of this New Task Instruction.
+     *
+     * @return the task details.
+     */
+    public String getTaskDesc() {
+        return taskDesc;
     }
 }

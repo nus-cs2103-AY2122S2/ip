@@ -1,4 +1,4 @@
-package instructions.modify.listed.task.instructions;
+package instructions.list.instructions;
 
 import Exceptions.InvalidInputException;
 import instructions.Instruction;
@@ -39,15 +39,20 @@ public abstract class ModifyListedTaskInst extends Instruction {
      * Produces a Modify Listed Task Instruction, according to the specified
      * instruction type.
      *
-     * @param instType the type of modify listed task instruction to use.
-     * @param taskNum the task number to modify, as a String.
+     * @param input the original command called.
      * @return the Modify Listed Task Instruction with the specified task
      *         number to delete.
      * @throws InvalidInputException when no task number is provided, or the
      *                               provided task number is not an integer.
      */
-    public static ModifyListedTaskInst of(String instType, String taskNum)
+    public static ModifyListedTaskInst of(String input)
             throws InvalidInputException {
+
+        String[] split = input.split(" ", 2);
+        if (split.length == 1) {
+            throw NO_TASK_NUM_EXCEPTION;
+        }
+        String taskNum = split[1].strip();
         if (taskNum.length() == 0) {
             throw NO_TASK_NUM_EXCEPTION;
         }
@@ -57,6 +62,8 @@ public abstract class ModifyListedTaskInst extends Instruction {
         } catch (NumberFormatException e) {
             throw NOT_INTEGER_EXCEPTION;
         }
+
+        String instType = split[0];
         switch (instType) {
         case "mark":
             return MarkAsDoneInst.of(taskNumInteger);
