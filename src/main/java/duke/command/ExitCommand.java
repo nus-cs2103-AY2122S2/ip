@@ -4,7 +4,7 @@ import duke.operations.TaskList;
 
 public class ExitCommand extends Command {
     public ExitCommand() {
-        super(null, null);
+        super(null, null,null);
     }
 
     @Override

@@ -2,14 +2,15 @@ package duke.command;
 
 import duke.operations.TaskList;
 
-public class PrintCommand extends Command {
-    public PrintCommand() {
-        super(null, null,null);
+public class FindCommand extends Command{
+
+    public FindCommand(String keyword) {
+        super(null, null, keyword);
     }
 
     @Override
     public void execute(TaskList tasks) {
-        tasks.printList();
+        tasks.findTaskInList(keyword);
     }
 
     @Override

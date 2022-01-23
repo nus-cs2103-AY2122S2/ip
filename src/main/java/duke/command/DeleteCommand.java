@@ -5,7 +5,7 @@ import duke.operations.TaskList;
 
 public class DeleteCommand extends Command {
     public DeleteCommand(Task task) {
-        super(task, null);
+        super(task, null,null);
     }
 
     @Override

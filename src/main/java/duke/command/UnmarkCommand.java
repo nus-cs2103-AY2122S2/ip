@@ -4,7 +4,7 @@ import duke.operations.TaskList;
 
 public class UnmarkCommand extends Command {
     public UnmarkCommand(Integer num) {
-        super(null, num);
+        super(null, num,null);
     }
 
     @Override
