@@ -1,3 +1,9 @@
+package duke;
+
+import duke.handler.FileHandler;
+import duke.handler.Handlers;
+import duke.task.Tasklist;
+
 import java.util.Scanner;
 
 public class Duke {

@@ -1,11 +1,15 @@
+package duke.task;
+
+import duke.time.Time;
+
 import java.time.LocalDate;
 
-public class Event extends Task {
+public class Deadline extends Task {
 
     private LocalDate deadline;
     private String time;
 
-    public Event(boolean completed, String task, LocalDate deadline, String time) {
+    public Deadline(boolean completed, String task, LocalDate deadline, String time) {
         super(task, completed);
         this.deadline = deadline;
         this.time = time;
@@ -22,9 +26,9 @@ public class Event extends Task {
     @Override
     public String toString() {
         if (this.time.equals("")) {
-            return "[E]" + super.toString() + " (at: " + Time.convertToString(this.deadline) + ")";
+            return "[D]" + super.toString() + " (by: " + Time.convertToString(this.deadline) + ")";
         } else {
-            return "[E]" + super.toString() + " (at: " + Time.convertToString(this.deadline) + ", " + this.time + ")";
+            return "[D]" + super.toString() + " (by: " + Time.convertToString(this.deadline) + ", " + this.time + ")";
         }
     }
 }

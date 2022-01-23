@@ -1,3 +1,7 @@
+package duke.exception;
+
+import duke.task.Tasklist;
+
 import java.util.regex.Pattern;
 
 public class DukeException extends Exception {
