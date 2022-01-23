@@ -1,7 +1,14 @@
-public class DeleteCommand extends Command{
+package saitama.commands;
+
+import saitama.Storage;
+import saitama.TaskList;
+import saitama.Ui;
+import saitama.exceptions.InvalidTaskNumberException;
+
+public class UnmarkCommand extends Command{
     private int taskNumber;
 
-    public DeleteCommand(int taskNumber) {
+    public UnmarkCommand(int taskNumber) {
         this.taskNumber = taskNumber;
     }
 
@@ -10,7 +17,7 @@ public class DeleteCommand extends Command{
         if (taskNumber > taskList.numOfTasks()) {
             throw new InvalidTaskNumberException();
         }
-        taskList.delete(taskNumber);
+        taskList.unmarkTask(taskNumber);
     }
 
     @Override

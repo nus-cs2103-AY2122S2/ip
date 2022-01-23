@@ -1,5 +1,4 @@
-import java.io.FileWriter;
-import java.io.IOException;
+package saitama.tasks;
 
 public class ToDo extends Task {
 

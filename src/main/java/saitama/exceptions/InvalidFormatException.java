@@ -1,5 +1,7 @@
+package saitama.exceptions;
+
 public class InvalidFormatException extends SaitamaException {
-    InvalidFormatException(String message) {
+    public InvalidFormatException(String message) {
         super(message);
     }
 }

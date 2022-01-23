@@ -1,5 +1,7 @@
+package saitama.exceptions;
+
 public class SaitamaException extends Exception{
-    SaitamaException(String message) {
+    public SaitamaException(String message) {
         super(message);
     }
 }

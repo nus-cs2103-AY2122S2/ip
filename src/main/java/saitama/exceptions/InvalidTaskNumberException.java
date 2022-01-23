@@ -1,5 +1,7 @@
+package saitama.exceptions;
+
 public class InvalidTaskNumberException extends SaitamaException {
-    InvalidTaskNumberException() {
+    public InvalidTaskNumberException() {
         super("Please enter a valid task number!");
     }
 }

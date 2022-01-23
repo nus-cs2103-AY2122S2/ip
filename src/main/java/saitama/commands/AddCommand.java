@@ -1,3 +1,10 @@
+package saitama.commands;
+
+import saitama.Storage;
+import saitama.TaskList;
+import saitama.Ui;
+import saitama.tasks.Task;
+
 public class AddCommand extends Command{
     private Task task;
 

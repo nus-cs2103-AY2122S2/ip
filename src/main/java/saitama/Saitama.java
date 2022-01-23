@@ -1,3 +1,8 @@
+package saitama;
+
+import saitama.commands.Command;
+import saitama.exceptions.SaitamaException;
+
 public class Saitama {
     private static String filePath = "data/Saitama.txt";
     private Storage storage;

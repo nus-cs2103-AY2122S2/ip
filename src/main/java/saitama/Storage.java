@@ -1,3 +1,11 @@
+package saitama;
+
+import saitama.exceptions.InvalidFormatException;
+import saitama.tasks.Deadline;
+import saitama.tasks.Event;
+import saitama.tasks.Task;
+import saitama.tasks.ToDo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -63,7 +71,7 @@ public class Storage {
         }
     }
 
-    public void save(TaskList taskList) {
+    public void save(saitama.TaskList taskList) {
         File f = new File(filePath);
         String directoryName = filePath.replace(f.getName(), "");
         File directory = new File(directoryName);

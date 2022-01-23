@@ -1,3 +1,5 @@
+package saitama.tasks;
+
 import java.io.IOException;
 
 abstract public class Task {

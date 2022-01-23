@@ -1,3 +1,12 @@
+package saitama;
+
+import saitama.commands.*;
+import saitama.exceptions.*;
+import saitama.tasks.Deadline;
+import saitama.tasks.Task;
+import saitama.tasks.ToDo;
+import saitama.tasks.Event;
+
 public class Parser {
     public static Command parse(String fullCommand) throws SaitamaException {
         String[] splitCommand = fullCommand.split(" ", 2);

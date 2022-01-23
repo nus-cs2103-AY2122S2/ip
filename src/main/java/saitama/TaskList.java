@@ -1,3 +1,7 @@
+package saitama;
+
+import saitama.tasks.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
