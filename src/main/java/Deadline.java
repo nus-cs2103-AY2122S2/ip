@@ -1,15 +1,22 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
 
-    protected String deadline;
+    protected LocalDate deadline;
 
     Deadline(String description, String deadline) {
         super(description);
-        this.deadline = deadline;
+        this.deadline = LocalDate.parse(deadline);
+    }
+
+    private String dateToString() {
+        return deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     Deadline(String description, boolean isDone, String deadline) {
         super(description, isDone);
-        this.deadline = deadline;
+        this.deadline = LocalDate.parse(deadline);
     }
 
     String getTaskType() {
@@ -19,6 +26,6 @@ public class Deadline extends Task {
     public String toString() {
         return String.format("[%s]", getTaskType())
                 + super.toString()
-                + String.format(" (by: %s)", deadline);
+                + String.format(" (by: %s)", dateToString());
     }
 }
