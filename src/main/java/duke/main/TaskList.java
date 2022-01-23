@@ -1,9 +1,10 @@
 package duke.main;
 
-import duke.tasks.Task;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.tasks.Task;
+
 
 /**
  * TaskList class.

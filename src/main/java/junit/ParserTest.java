@@ -1,5 +1,15 @@
 package junit;
 
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import duke.main.Parser;
+import duke.main.TaskList;
+import duke.main.Ui;
+import duke.main.DukeException;
+
+
 import duke.commands.AddEventCommand;
 import duke.commands.AddDeadlineCommand;
 import duke.commands.AddToDoCommand;
@@ -8,15 +18,11 @@ import duke.commands.MarkCommand;
 import duke.commands.UnmarkCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.WrongCommand;
-import duke.main.Parser;
-import duke.main.TaskList;
-import duke.main.Ui;
-import duke.main.DukeException;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ParserTest  {
+
+public class ParserTest {
     TaskList toDoList = new TaskList();
+
     @Test
     void parserTest() throws DukeException {
         assertTrue(Parser.parseCommands(Ui.Reply.LIST, toDoList, "list") instanceof ListCommand);

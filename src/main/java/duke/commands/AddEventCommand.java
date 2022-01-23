@@ -2,11 +2,12 @@ package duke.commands;
 
 import java.io.IOException;
 
-import duke.tasks.Event;
 import duke.main.DukeException;
 import duke.main.TaskList;
 import duke.main.Parser;
 import duke.main.Storage;
+
+import duke.tasks.Event;
 
 /**
  * AddEventCommand is a Command.

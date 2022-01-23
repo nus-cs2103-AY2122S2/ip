@@ -5,6 +5,14 @@ package duke.tasks;
  * This is a simple Task that only has a description.
  */
 public class ToDo extends Task {
+
+    /**
+     * Constructor for ToDo.
+     * This is a Task with only a description
+     *
+     * @param task     the task description
+     * @param isDone   the mark status of this deadline
+     */
     public ToDo(String task, boolean isDone) {
         super(task, isDone);
     }

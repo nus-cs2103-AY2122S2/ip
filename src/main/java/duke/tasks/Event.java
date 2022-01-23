@@ -3,6 +3,14 @@ package duke.tasks;
 public class Event extends Task {
     private String dateTime; // (at: date time)
 
+    /**
+     * Constructor for Event.
+     * This is a Task with at a certain date/time.
+     *
+     * @param task     the task description
+     * @param isDone   the mark status of this deadline
+     * @param dateTime the date/time of this Task
+     */
     public Event(String task, boolean isDone, String dateTime) {
         super(task, isDone);
         this.dateTime = dateTime;

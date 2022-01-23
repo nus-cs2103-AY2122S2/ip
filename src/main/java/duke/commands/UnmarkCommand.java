@@ -1,9 +1,9 @@
 package duke.commands;
 
-import duke.tasks.Task;
 import duke.main.DukeException;
 import duke.main.TaskList;
 import duke.main.Parser;
+import duke.tasks.Task;
 
 /**
  * UnmarkCommand is a Command.

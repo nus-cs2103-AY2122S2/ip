@@ -1,12 +1,14 @@
 package duke.commands;
 
-import duke.tasks.ToDo;
+import java.io.IOException;
+
 import duke.main.DukeException;
 import duke.main.TaskList;
 import duke.main.Parser;
 import duke.main.Storage;
 
-import java.io.IOException;
+import duke.tasks.ToDo;
+
 
 /**
  * AddToDoCommand is a Command.

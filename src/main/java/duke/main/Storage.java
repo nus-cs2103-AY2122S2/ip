@@ -1,15 +1,17 @@
 package duke.main;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import java.util.Scanner;
+
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Storage class.
@@ -50,22 +52,22 @@ public class Storage {
             boolean mark = cmd_split[0].equals("[X]") ? true : false;
 
             switch (cmd_split[1]) {
-                case "T":
-                    // ToDo(String task, boolean isDone)
-                    toDoList.add(new ToDo(cmd_split[2], mark));
-                    break;
-                case "E":
-                    // Event(String task, boolean isDone, String dateTime)
-                    toDoList.add(new Event(cmd_split[2], mark, cmd_split[3]));
-                    break;
-                case "D":
-                    // Deadline(String task, boolean isDone, String deadline)
-                    toDoList.add(new Deadline(cmd_split[2], mark, cmd_split[3]));
-                    break;
-                default:
-                    // do nothing
-                    System.out.println("aaaa");
-                    break;
+            case "T":
+                // ToDo(String task, boolean isDone)
+                toDoList.add(new ToDo(cmd_split[2], mark));
+                break;
+            case "E":
+                // Event(String task, boolean isDone, String dateTime)
+                toDoList.add(new Event(cmd_split[2], mark, cmd_split[3]));
+                break;
+            case "D":
+                // Deadline(String task, boolean isDone, String deadline)
+                toDoList.add(new Deadline(cmd_split[2], mark, cmd_split[3]));
+                break;
+            default:
+                // do nothing
+                System.out.println("aaaa");
+                break;
             }
         }
         return toDoList;
