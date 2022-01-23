@@ -1,15 +1,24 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+/**
+ * This class represents the Event task
+ *
+ * @author Jan
+ * @version 1.0
+ */
 public class Event extends Task {
     /**
      * The time of this event
      */
-    private String eventTime;
+    private LocalDate eventTime;
 
     /**
      * Constructor for Event objects
      *
      * @param eventName  the event name
      */
-    public Event(String eventName, String time) {
+    public Event(String eventName, LocalDate time) {
         super(eventName);
         this.eventTime = time;
     }
@@ -29,7 +38,16 @@ public class Event extends Task {
             doneness = "[ ] ";
         }
         String eventName = super.toString();
-        String time = " (at: " + eventTime + ")";
+        String time = " (at: " + eventTimeToString()+ ")";
         return box1 + doneness + eventName + time;
+    }
+
+    /**
+     * Returns a string representation of the event time
+     *
+     * @return  event time in string
+     */
+    private String eventTimeToString() {
+        return eventTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 }
