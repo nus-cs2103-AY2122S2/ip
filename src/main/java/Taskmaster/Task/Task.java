@@ -1,6 +1,4 @@
-//Author: Tan Ting Yu
-//Student Number: A218235J
-
+package Taskmaster.Task;
 
 
 /*
@@ -59,9 +57,15 @@ public class Task {
      * Save format in the hard disk
      * For Overriding purposes only
      */
-    protected String saveToFileFormat() {
+    public String saveToFileFormat() {
         return taskName;
     }
+
+    public boolean containsKeyword(String keyword) {
+            return this.taskName.contains(keyword);
+    }
+
+
 
 
 }

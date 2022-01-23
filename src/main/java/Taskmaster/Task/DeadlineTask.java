@@ -1,5 +1,4 @@
-//Author: Tan Ting Yu
-//Student Number: A218235J
+package Taskmaster.Task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

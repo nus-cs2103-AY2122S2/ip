@@ -1,10 +1,19 @@
+package Taskmaster.UserInterface;
+import Taskmaster.util.TaskList;
+import Taskmaster.util.Storage;
+import Taskmaster.Commands.AddCommands;
+import Taskmaster.Commands.DeleteCommands;
+import Taskmaster.Commands.MarkCommands;
+import Taskmaster.Exception.DukeExceptions;
+
+
 import java.util.Scanner;
 public class UserInterface {
     protected TaskList tasklist;
     protected Storage storage;
     protected final String LOGO = "  _____\n" + " /     \\\n" + "| () () |\n" + " \\  ^  /\n" + "  |||||\n" + "  |||||\n";
 
-    protected UserInterface() {
+    public UserInterface() {
         this.tasklist = new TaskList();
         this.storage = new Storage();
     }

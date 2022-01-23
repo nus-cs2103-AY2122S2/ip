@@ -1,3 +1,12 @@
+package Taskmaster.Commands;
+
+import Taskmaster.Exception.DukeExceptions;
+import Taskmaster.util.TaskList;
+import Taskmaster.Task.Task;
+import Taskmaster.Task.TodoTask;
+import Taskmaster.Task.DeadlineTask;
+import Taskmaster.Task.EventTask;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -5,7 +14,7 @@ import java.time.format.DateTimeParseException;
 public class AddCommands extends Commands {
     private TaskList tasklist;
 
-    protected AddCommands(String command, TaskList tasklist) {
+    public AddCommands(String command, TaskList tasklist) {
         super(command);
         this.tasklist = tasklist;
     }

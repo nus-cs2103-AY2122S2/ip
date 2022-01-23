@@ -1,4 +1,1 @@
-D | 0 | eat mcdonalds | 24/2/1998 1800
-E | 1 |  hello  | 2/11/1998 0200
-D | 0 |  feed bird  | 24/2/1998 0900
-T | 0 |  me
+D | 1 |  finish this code lol  | 23/1/2022 2300

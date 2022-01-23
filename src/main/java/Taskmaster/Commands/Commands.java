@@ -1,7 +1,4 @@
-//Author: Tan Ting Yu
-//Student Number: A218235J
-
-
+package Taskmaster.Commands;
 /*
  * Commands deals with the interactions with the user and making sense of the user command
  */

@@ -1,7 +1,15 @@
+package Taskmaster.Commands;
+
+import Taskmaster.Exception.DukeExceptions;
+import Taskmaster.util.TaskList;
+import Taskmaster.Task.Task;
+
+
+
 public class DeleteCommands extends Commands {
     private TaskList tasklist;
 
-    protected DeleteCommands(String command, TaskList tasklist) {
+    public DeleteCommands(String command, TaskList tasklist) {
         super(command);
         this.tasklist = tasklist;
     }
