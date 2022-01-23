@@ -1,22 +1,25 @@
 package DukeBot;
 
-public class Event extends Task {
-    private String time;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String description, String time) {
+public class Event extends Task {
+    private LocalDateTime dateTime;
+
+    public Event(String description, LocalDateTime dateTime) {
         super("E", description);
-        this.time = time;
+        this.dateTime = dateTime;
     }
 
     public String toString() {
-        return super.toString() + "(at: " + time + ")";
+        return super.toString() + "(at: " +
+                this.dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy h:mm a")) + ")";
     }
 
     @Override
     public String dBText() {
         String complete = this.getCompleted() ? "1" : "0";
-        String saveText = String.format("E|%s|%s|%s", complete, this.getDescription(), this.time);
-        return saveText;
+        return String.format("E|%s|%s|%s", complete, this.getDescription(), this.dateTime.toString());
     }
 
 }

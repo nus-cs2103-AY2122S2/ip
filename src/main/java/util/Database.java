@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -25,10 +26,10 @@ public class Database {
                 task = new DukeBot.ToDo(taskSplit[2]);
 
             } else if (taskSplit[0].equals("D")) {
-                task = new DukeBot.Deadline(taskSplit[2], taskSplit[3]);
+                task = new DukeBot.Deadline(taskSplit[2], LocalDateTime.parse(taskSplit[3]));
 
             } else if (taskSplit[0].equals("E")) {
-                task = new DukeBot.Event(taskSplit[2], taskSplit[3]);
+                task = new DukeBot.Event(taskSplit[2], LocalDateTime.parse(taskSplit[3]));
             }
 
             if (taskSplit[1].equals("1")) {
