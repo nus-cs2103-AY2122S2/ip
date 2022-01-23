@@ -1,3 +1,4 @@
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -7,6 +8,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import java.time.LocalDateTime;
 
 public class Duke {
     public static void main(String[] args) throws FileNotFoundException, IOException {
@@ -31,11 +34,11 @@ public class Duke {
                     }
                     // Deadline Task
                     else if (line[0].equals("D")) {
-                        task = new DeadlineTask(line[2], line[3], line[4]);
+                        task = new DeadlineTask(line[2], line[3], LocalDateTime.parse(line[4]));
                     }
                     // Event Task
                     else if (line[0].equals("E")) {
-                        task = new EventTask(line[2], line[3], line[4]);
+                        task = new EventTask(line[2], line[3], LocalDateTime.parse(line[4]));
                     } else {
                         throw new Exception("An invalid task type was read");
                     }
@@ -103,26 +106,36 @@ public class Duke {
                     continue;
                 }
                 //Setting up deadline/ date
-                List<String> deadlineOrDateArray = new ArrayList<>();
-                while (st.hasMoreTokens()) {
-                    deadlineOrDateArray.add(st.nextToken());
-                }
-                String deadlineOrDate = String.join(" ", deadlineOrDateArray);
-                //Error handling for no preposition or date/time
-                if ((preposition.equals("") || deadlineOrDate.equals(""))) {
+                String date = "";
+                String time = "";
+                if (st.hasMoreTokens()) date = st.nextToken();
+                if (st.hasMoreTokens()) time = st.nextToken();
+                if ((date.equals("") || time.equals(""))) {
                     if (command.equals("deadline")) {
-                        System.out.println("Please add a deadline for your task in the format 'deadline <name> /by <deadline>'! *quack*");
+                        System.out.println("Please add a date and time for your deadline in the following format 'deadline <name> /by <YYYY-MM-DD> <HH:MM>' ! *quack*");
                         continue;
                     } else if (command.equals("event")) {
-                        System.out.println("Please add a date for your event in the format 'event <name> /on <date>'! *quack*");
+                        System.out.println("Please add a date and time for your event in the following format 'event <name> /on <YYYY-MM-DD> <HH:MM>' ! *quack*");
+                        continue;
+                    }
+                }
+                LocalDateTime dateTime = LocalDateTime.now();
+                try {
+                    dateTime = LocalDateTime.parse(date + "T" + time);
+                } catch (Exception e) {
+                    if (command.equals("deadline")) {
+                        System.out.println("Please add a date and time for your deadline in the following format 'deadline <name> /by <YYYY-MM-DD> <HH:MM>' ! *quack*");
+                        continue;
+                    } else if (command.equals("event")) {
+                        System.out.println("Please add a date and time for your event in the following format 'event <name> /on <YYYY-MM-DD> <HH:MM>' ! *quack*");
                         continue;
                     }
                 }
                 //Creating the new task
                 Task newTask = new Task("placeholder task");
                 if (command.equals("todo")) newTask = new ToDoTask(name);
-                else if (command.equals("deadline")) newTask = new DeadlineTask(name, preposition, deadlineOrDate);
-                else if (command.equals("event")) newTask = new EventTask(name, preposition, deadlineOrDate);
+                else if (command.equals("deadline")) newTask = new DeadlineTask(name, preposition, dateTime);
+                else if (command.equals("event")) newTask = new EventTask(name, preposition, dateTime);
                 tasks.add(newTask);
                 hasUpdated = true;
                 //Output to update user
@@ -172,6 +185,23 @@ public class Duke {
                     }
                 }
             }
+            // User deletes a task
+            else if (command.equals("delete")) {
+                // Error handling if user does not input a second argument
+                if (!st.hasMoreTokens()) {
+                    System.out.println("Please input an item number when deleting (eg. 'delete 1')");
+                } else {
+                    // Error handling if user inputs strings
+                    try {
+                        int number = Integer.parseInt(st.nextToken());
+                        Task removedTask = tasks.remove(number - 1);
+                        System.out.println(String.format("I've deleted task %d! *quack*", number));
+                        System.out.println(String.format("  %s", removedTask.toString()));
+                    } catch (Exception e) {
+                        System.out.println("Please ONLY input integers when deleting (eg. 'delete 1')");
+                    }
+                }
+            }
             // Help command
             else if (command.equals("help")) {
                 System.out.println("These are the commands you can use *quack*:");
@@ -214,13 +244,13 @@ public class Duke {
                         taskString += ";";
                         taskString += dTask.preposition;
                         taskString += ";";
-                        taskString += dTask.deadline;
+                        taskString += dTask.dateTime.format(DateTimeFormatter.ISO_DATE_TIME);
                     } else if (task instanceof EventTask) {
                         EventTask dTask = (EventTask) task;
                         taskString += ";";
                         taskString += dTask.preposition;
                         taskString += ";";
-                        taskString += dTask.time;
+                        taskString += dTask.dateTime.format(DateTimeFormatter.ISO_DATE_TIME);
                     }
                     fileWriter.write(taskString);
                     fileWriter.write(System.lineSeparator());
