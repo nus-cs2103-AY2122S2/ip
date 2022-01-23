@@ -8,7 +8,9 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-// deals with interactions with the user
+/**
+ * Creates a UI that deals with interactions with the user.
+ * */
 public class Ui {
     private static final String LINE_BREAK
             = "____________________________________________________________\n";
@@ -30,16 +32,29 @@ public class Ui {
         this(System.in, System.out);
     }
 
+    /**
+     * Creates an Ui with the specified objects.
+     *
+     * @param in InputStream to read input from console.
+     * @param out PrintStream to print output to console.
+     */
     public Ui(InputStream in, PrintStream out) {
         this.in = new Scanner(in);
         this.out = out;
     }
 
+    /**
+     * Reads user input from the console.
+     *
+     * @return User input.
+     */
     public String getInput() {
         return in.nextLine().strip();
     }
 
     /**
+     * Prints output to the console with the specified message.
+     *
      * @param message The message to be printed.
      */
     public void printMessage(String message) {
@@ -61,6 +76,9 @@ public class Ui {
         printMessage(GOODBYE);
     }
 
+    /**
+     * Prints an error when data cannot be loaded.
+     */
     public void showLoadingError() {
         printMessage(ErrorMessage.MESSAGE_LOADING_ERROR);
     }

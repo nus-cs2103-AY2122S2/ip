@@ -13,7 +13,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-// deals with loading tasks from the file and saving tasks in the file
+/**
+ * Storage class that deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     public static final String DEFAULT_FILEPATH = "duke.txt";
     private final Path filePath;
@@ -22,10 +24,21 @@ public class Storage {
         this(DEFAULT_FILEPATH);
     }
 
+    /**
+     * Creates a new storage with the given file path.
+     *
+     * @param filePath Path of the file containing stored tasks.
+     */
     public Storage(String filePath) {
         this.filePath = Paths.get(filePath);
     }
 
+    /**
+     * Saves the tasks in the list to a file.
+     *
+     * @param tasks List of tasks to be saved.
+     * @throws StorageException if the tasks cannot be written to the file.
+     */
     public void save(TaskList tasks) throws StorageException {
         try {
             List<String> encodedTaskList = encodeTaskList(tasks);
@@ -35,6 +48,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the saved tasks from file if they exist.
+     *
+     * @return Saved tasks, else empty list.
+     * @throws StorageException if the file cannot be loaded.
+     */
     public ArrayList<Task> load() throws StorageException {
         if (!checkIfFileExists(filePath)) {
             createFile(filePath);

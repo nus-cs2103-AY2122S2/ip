@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * Container for user visible error messages.
+ */
 public class ErrorMessage {
     public static final String MESSAGE_LOADING_ERROR = "Meow! The app cannot be loaded!";
     public static final String MESSAGE_INVALID_INDEX = "Meow! Enter a valid task index!";
