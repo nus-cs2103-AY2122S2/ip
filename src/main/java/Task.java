@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 abstract public class Task {
 
     protected String description;
@@ -8,7 +10,12 @@ abstract public class Task {
         this.isDone = false;
     }
 
-    public String getStatusIcon() {
+    Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
+    protected String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
@@ -25,6 +32,8 @@ abstract public class Task {
         System.out.println("The following task has been marked as not done: ");
         System.out.println(this);
     }
+
+    abstract public String getTaskData() throws IOException;
 
     @Override
     public String toString() {

@@ -1,9 +1,11 @@
 import java.util.Scanner;
 
-public class Duke {
+public class Saitama {
+
+    private static String filePath = "data/Saitama.txt";
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        TaskList taskList = new TaskList();
         String logo = "   _____       _ _                        \n" +
                 "  / ____|     (_) |                       \n" +
                 " | (___   __ _ _| |_ __ _ _ __ ___   __ _ \n" +
@@ -12,6 +14,10 @@ public class Duke {
                 " |_____/ \\__,_|_|\\__\\__,_|_| |_| |_|\\__,_|\n";
 
         System.out.println(logo);
+        System.out.println("____________________________________________________________");
+        System.out.println("loading...");
+        TaskList taskList = new TaskList(filePath);
+        taskList.load();
 
         System.out.println("____________________________________________________________");
         System.out.println("I'm Saitama, a hero for fun.");
@@ -53,6 +59,10 @@ public class Duke {
         }
         System.out.println("OK...");
         System.out.println("____________________________________________________________");
+        System.out.println("Saving...");
+        taskList.save();
+        System.out.println("____________________________________________________________");
+
     }
 }
 
