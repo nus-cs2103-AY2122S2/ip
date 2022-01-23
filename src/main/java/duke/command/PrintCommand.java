@@ -2,8 +2,7 @@ package duke.command;
 
 import duke.functionality.TaskList;
 
-public class PrintCommand extends Command{
-
+public class PrintCommand extends Command {
     public PrintCommand() {
         super(null, null);
     }

@@ -9,8 +9,8 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getStatusIcon(){
-        if(this.isDone) {
+    public String getStatusIcon() {
+        if (this.isDone) {
             return "X";
         } else {
             return " ";
@@ -25,7 +25,7 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
 

@@ -2,8 +2,7 @@ package duke.command;
 
 import duke.functionality.TaskList;
 
-public class ExitCommand extends Command{
-
+public class ExitCommand extends Command {
     public ExitCommand() {
         super(null, null);
     }

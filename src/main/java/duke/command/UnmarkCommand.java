@@ -2,8 +2,7 @@ package duke.command;
 
 import duke.functionality.TaskList;
 
-public class UnmarkCommand extends Command{
-
+public class UnmarkCommand extends Command {
     public UnmarkCommand(Integer number) {
         super(null, number);
     }

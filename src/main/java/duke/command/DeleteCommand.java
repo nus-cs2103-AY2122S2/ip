@@ -3,9 +3,7 @@ package duke.command;
 import duke.functionality.TaskList;
 
 public class DeleteCommand extends Command {
-
     public DeleteCommand(Integer number) {
-
         super(null, number);
     }
 

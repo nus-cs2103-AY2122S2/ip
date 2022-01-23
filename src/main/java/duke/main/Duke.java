@@ -10,7 +10,6 @@ import duke.functionality.Ui;
 import duke.exception.DukeException;
 
 public class Duke {
-
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;

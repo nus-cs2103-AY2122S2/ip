@@ -23,22 +23,22 @@ public class TaskList {
     public void markTask(int taskNum) {
         String message = "Nice! I've marked this task as done:\n" ;
         int actualTaskNum = taskNum - 1; //minus 1 as list index is from 0
-        Task t = taskList.get(actualTaskNum); // get the task from the array
-        t.setTaskDone();
+        Task task = taskList.get(actualTaskNum); // get the task from the array
+        task.setTaskDone();
         Storage.updateTextFile();
-        System.out.println(message + t.toString());
+        System.out.println(message + task.toString());
     }
 
     public void unMarkTask(int taskNum) {
         String message = "OK, I've marked this task as not done yet:\n";
         int actualTaskNum = taskNum - 1;
-        Task t = taskList.get(actualTaskNum); // get the task from the array
-        t.setTaskNotDone();
+        Task task = taskList.get(actualTaskNum); // get the task from the array
+        task.setTaskNotDone();
         Storage.updateTextFile();
-        System.out.println(message + t.toString());
+        System.out.println(message + task.toString());
     }
 
-    public void printList(){
+    public void printList() {
         String message = "Here are the tasks in your list:";
         System.out.println(message);
 
@@ -48,11 +48,11 @@ public class TaskList {
         }
     }
 
-    public void addToList(Task t) {
+    public void addToList(Task task) {
         String message = "Got it. I've added this task:\n";
-        taskList.add(t);
+        taskList.add(task);
         numOfTask++;
         Storage.updateTextFile();
-        System.out.println(message + t.toString() + "\nNow you have " + numOfTask + " tasks in the list.");
+        System.out.println(message + task.toString() + "\nNow you have " + numOfTask + " tasks in the list.");
     }
 }
