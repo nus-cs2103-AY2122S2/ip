@@ -4,8 +4,10 @@
 public class InvalidCommandException extends DukeException {
     /**
      * Constructs an invalid command exception.
+     *
+     * @param errorMessage error message.
      */
-    public InvalidCommandException() {
-        super("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    public InvalidCommandException(String errorMessage) {
+        super(errorMessage);
     }
 }

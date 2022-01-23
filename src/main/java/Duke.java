@@ -1,90 +1,61 @@
-import java.util.Scanner;
+import java.io.FileNotFoundException;
 
 public class Duke {
-    private Scanner scanner;
+    private static boolean running;
+
+    private Ui ui;
+    private Parser parser;
     private TaskList taskList;
+    private Storage storage;
 
     /**
-     * Prints out the default greeting.
+     * Sets up the required objects and loads up data from the storage file.
      */
-    public void greet() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("____________________________________________________________");
-        System.out.println(logo);
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-        System.out.println("____________________________________________________________");
+    public Duke() {
+        this.ui = new Ui();
+        this.parser = new Parser();
+        this.running = true;
+        try {
+            this.storage = new Storage();
+            this.taskList = new TaskList(storage.load());
+        } catch (ResourceNotFoundException | FileNotFoundException e) {
+            ui.send(e.getMessage());
+            this.taskList = new TaskList();
+        }
     }
 
     /**
-     * Exits from the program.
+     * Starts the program
      */
-    public void exit() {
-        System.out.println("____________________________________________________________");
-        System.out.println("Bye. Hope to see you again soon!");
-        scanner.close();
+    public void run() {
+        ui.greet();
+        commandLoop();
+        exit();
     }
 
     /**
-     * Starts the program.
+     * Takes input from user until exit command is issued
      */
-    public void start() {
-        this.scanner = new Scanner(System.in);
-        this.taskList = new TaskList();
-
-        this.greet();
-        String scannedInput = "";
+    public void commandLoop() {
         while (true) {
             try {
-                scannedInput = scanner.nextLine();
-                String[] input = scannedInput.split(" ", 2);
-                String command = input[0];
-                String arguments = input.length > 1 ? input[1] : "";
-
-                if (!Command.isValidCommand(command)) {
-                    throw new InvalidCommandException();
-                }
-
-                if (command.equals("bye")) {
+                String input = ui.getNextLine();
+                Command command = parser.parse(input);
+                command.setData(taskList, this, storage);
+                String response = command.execute();
+                if (response.equals("EXIT")) {
                     break;
-                } else if (command.equals("list")) {
-                    taskList.listTasks();
-                } else if (command.equals("mark")) {
-                    int index = Integer.parseInt(arguments);
-                    if (index > taskList.size) {
-                        throw new InvalidParameterException("☹ OOPS!!! The index provided is invalid.");
-                    }
-                    taskList.completeTask(index);
-                } else if (command.equals("unmark")) {
-                    int index = Integer.parseInt(arguments);
-                    if (index > taskList.size) {
-                        throw new InvalidParameterException("☹ OOPS!!! The index provided is invalid.");
-                    }
-                    taskList.undoTask(index);
-                } else if (command.equals("todo")) {
-                    if (arguments == "") {
-                        throw new InvalidParameterException("☹ OOPS!!! The description of a task cannot be empty.");
-                    }
-                    taskList.addTodoTask(arguments);
-                } else if (command.equals("deadline")) {
-                    String[] argsArray = arguments.split(" /by ");
-                    taskList.addDeadlineTask(argsArray[0], argsArray[1]);
-                } else if (command.equals("event")) {
-                    String[] argsArray = arguments.split(" /at ");
-                    taskList.addEventTask(argsArray[0], argsArray[1]);
-                } else if (command.equals("delete")) {
-                    taskList.deleteTask(Integer.parseInt(arguments));
                 }
-            } catch (DukeException exception) {
-                System.out.println("____________________________________________________________");
-                System.out.println(exception.getMessage());
-                System.out.println("____________________________________________________________");
+                ui.send(response);
+            } catch (Exception exception) {
+                ui.send(exception.getMessage());
             }
         }
-        this.exit();
+    }
+
+    private void exit() {
+        ui.exit();
+        System.exit(0);
     }
 
     /**
@@ -93,7 +64,6 @@ public class Duke {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.start();
+        new Duke().run();
     }
 }

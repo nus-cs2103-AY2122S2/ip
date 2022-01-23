@@ -1,59 +1,47 @@
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
- * A list of tasks
+ * Contains a list of tasks, and offers operations on the tasks.
  */
 public class TaskList {
-    private static ArrayList<Task> taskList;
-    private Storage storage;
-    private static int id;
-    public static int size;
+    private ArrayList<Task> taskList;
 
     /**
-     * Constructs a task list from storage
+     * Constructs an empty task list.
      */
     public TaskList() {
-        this.id = this.size;
-
-        try {
-            this.storage = new Storage();
-            this.taskList = this.storage.retrieveTasks();
-            this.size = taskList.size();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        this.taskList = new ArrayList<>();
     }
 
     /**
-     * Prints out the response when successfully adding a task.
-     *
-     * @param task a new task that was added to the task list.
+     * Constructs the task list from storage.
      */
-    public void printAddTaskSuccess(Task task) {
-        System.out.println("____________________________________________________________");
-        System.out.printf("Got it. I've added this task:%n%s%n", task);
-        System.out.printf("Now you have %d tasks in the list.%n", taskList.size());
-        System.out.println("____________________________________________________________");
+    public TaskList(ArrayList<Task> taskList) {
+        this.taskList = taskList;
+    }
+
+    /**
+     * Retrieves the size of the task list.
+     *
+     * @return size of the task list.
+     */
+    public int getSize() {
+        return taskList.size();
     }
 
     /**
      * Adds a TodoTask to the task list.
      *
      * @param input the content of a todo task.
+     * @return the added todo task.
      */
-    public void addTodoTask(String input) {
+    public Task addTodoTask(String input) {
         TodoTask newTask = new TodoTask(input);
         taskList.add(newTask);
-        printAddTaskSuccess(newTask);
-
-        String s = String.format("%d|T|0|%s%n", id, input);
-        id++;
-        try {
-            storage.appendToFile(String.valueOf(s));
-        } catch (IOException e) {
-            System.out.println("Cannot write to file");
-        }
+        return newTask;
     }
 
     /**
@@ -61,19 +49,12 @@ public class TaskList {
      *
      * @param input the content of a deadline task.
      * @param deadline the deadline of a deadline task.
+     * @return the added deadline task.
      */
-    public void addDeadlineTask(String input, String deadline) {
+    public Task addDeadlineTask(String input, String deadline) {
         DeadlineTask newTask = new DeadlineTask(input, deadline);
         taskList.add(newTask);
-        printAddTaskSuccess(newTask);
-
-        String s = String.format("%d|D|0|%s|%s%n", id, input, deadline);
-        id++;
-        try {
-            storage.appendToFile(String.valueOf(s));
-        } catch (IOException e) {
-            System.out.println("Cannot write to file");
-        }
+        return newTask;
     }
 
     /**
@@ -81,81 +62,62 @@ public class TaskList {
      *
      * @param input the content of an event task.
      * @param deadline the deadline of an event task.
+     * @return the added event task.
      */
-    public void addEventTask(String input, String deadline) {
+    public Task addEventTask(String input, String deadline) {
         EventTask newTask = new EventTask(input, deadline);
         taskList.add(newTask);
-        printAddTaskSuccess(newTask);
-
-        String s = String.format("%d|E|0|%s|%s%n", id, input, deadline);
-        id++;
-        try {
-            storage.appendToFile(String.valueOf(s));
-        } catch (IOException e) {
-            System.out.println("Cannot write to file");
-        }
+        return newTask;
     }
 
     /**
      * Complete a Task.
      *
      * @param taskIndex the index of a task to complete.
+     * @return the completed task.
      */
-    public void completeTask(int taskIndex) {
+    public Task completeTask(int taskIndex) {
         Task foundTask = taskList.get(taskIndex - 1);
         foundTask.markDone();
-        try {
-            storage.updateTask(taskIndex - 1, true);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        return foundTask;
     }
 
     /**
      * Undo the completion of a task with the given index.
      *
      * @param taskIndex the index of a task to undo completion.
+     * @return the task that was undone.
      */
-    public void undoTask(int taskIndex) {
+    public Task undoTask(int taskIndex) {
         Task foundTask = taskList.get(taskIndex - 1);
         foundTask.markUndone();
-        try {
-            storage.updateTask(taskIndex - 1, false);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        return foundTask;
     }
 
     /**
      * List all the tasks in the task list.
+     *
+     * @return the list of tasks as a string.
      */
-    public void listTasks() {
-        System.out.println("____________________________________________________________");
-        System.out.println("Here are the tasks in your list:");
+    public String listTasks() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the tasks in your list:\n");
         for (int i = 1; i < taskList.size() + 1; i++) {
-            System.out.printf("%d. %s%n", i, taskList.get(i - 1));
+            String str = String.format("%d. %s%n", i, taskList.get(i - 1));
+            sb.append(str);
         }
-        System.out.println("____________________________________________________________");
+        return String.valueOf(sb);
     }
 
     /**
      * Deletes a task from the task list with the given index.
      *
      * @param index index of the task to be deleted.
+     * @return the deleted task.
      */
-    public void deleteTask(int index) {
+    public Task deleteTask(int index) {
         Task foundTask = taskList.get(index - 1);
         taskList.remove(index - 1);
-        System.out.println("____________________________________________________________");
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(foundTask);
-        System.out.printf("Now you have %d tasks in the list.%n", taskList.size());
-        System.out.println("____________________________________________________________");
-
-        try {
-            storage.removeTask(index - 1);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        return foundTask;
     }
 }

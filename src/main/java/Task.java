@@ -1,3 +1,5 @@
+import java.util.UUID;
+
 /**
  * A task class.
  */
@@ -6,30 +8,49 @@ public class Task {
      * The description of a task.
      */
     protected String description;
+
     /**
      * Completion status of a task.
      */
     protected boolean done;
 
     /**
-     * Constructs a task from given description.
-     *
-     * @param description description of a task
+     * id of the task.
      */
-    public Task(String description, boolean done) {
+    protected String id;
+
+    /**
+     * Constructs a task from given description, id and completion status.
+     *
+     * @param description description of the task.
+     * @param done completion status of the task.
+     * @param id id of the task.
+     */
+    public Task(String description, boolean done, String id) {
         this.description = description;
         this.done = done;
+        this.id = id;
     }
 
+    /**
+     * Constructs a new task from given description.
+     *
+     * @param description description of a task.
+     */
     public Task(String description) {
         this.description = description;
         this.done = false;
+        this.id = UUID.randomUUID().toString();
+    }
+
+    public String getId() {
+        return this.id;
     }
 
     /**
      * Returns the description property of the task.
      *
-     * @return the description of the task
+     * @return the description of the task.
      */
     public String getDescription() {
         return this.description;
@@ -40,10 +61,6 @@ public class Task {
      */
     public void markDone() {
         this.done = true;
-        System.out.println("____________________________________________________________");
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(this.toString());
-        System.out.println("____________________________________________________________");
     }
 
     /**
@@ -51,10 +68,6 @@ public class Task {
      */
     public void markUndone() {
         this.done = false;
-        System.out.println("____________________________________________________________");
-        System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println(this.toString());
-        System.out.println("____________________________________________________________");
     }
 
     /**

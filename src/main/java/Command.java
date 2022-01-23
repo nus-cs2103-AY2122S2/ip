@@ -1,73 +1,31 @@
+import java.io.IOException;
+
 /**
- * Valid commands.
+ * Represents an executable command.
  */
-public enum Command {
-    /**
-     * Bye command.
-     */
-    BYE("bye"),
+public abstract class Command {
+    protected TaskList taskList;
+    protected Duke duke;
+    protected Storage storage;
 
     /**
-     * List command.
-     */
-    LIST("list"),
-
-    /**
-     * Mark command.
-     */
-    MARK("mark"),
-
-    /**
-     * Unmark command.
-     */
-    UNMARK("unmark"),
-
-    /**
-     * Todo command.
-     */
-    TODO("todo"),
-
-    /**
-     * Deadline command.
-     */
-    DEADLINE("deadline"),
-
-    /**
-     * Event command.
-     */
-    EVENT("event"),
-
-    /**
-     * Delete command.
-     */
-    DELETE("delete");
-
-    /**
-     * Command string.
-     */
-    private final String command;
-
-    /**
-     * Constructor for the Command enum.
+     * Executes the command and returns the result.
      *
-     * @param command command string
+     * @return result of the execution.
+     * @throws Exception if there is an error executing the command.
      */
-    Command(String command) {
-        this.command = command;
-    }
+    abstract String execute() throws Exception;
 
     /**
-     * Checks that the given command is a valid command.
+     * Supplies the data the command will operate on.
      *
-     * @param command command to be validated
-     * @return boolean, whether the command is valid or not
+     * @param taskList task list.
+     * @param duke the duke object.
+     * @param storage the storage object.
      */
-    public static boolean isValidCommand(String command) {
-        for (Command e : values()) {
-            if (e.command.equals(command)) {
-                return true;
-            }
-        }
-        return false;
+    public void setData(TaskList taskList, Duke duke, Storage storage) {
+        this.taskList = taskList;
+        this.duke = duke;
+        this.storage = storage;
     }
 }
