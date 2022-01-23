@@ -95,9 +95,7 @@ public enum Handlers {
             int index = input.indexOf("/by");
             String[] time = DukeException.taskValidity(index, input, cmd);
             Deadline task;
-            LocalDate date = LocalDate.of(
-                    Integer.parseInt(time[2]),
-                    Integer.parseInt(time[1]),
+            LocalDate date = LocalDate.of(Integer.parseInt(time[2]), Integer.parseInt(time[1]),
                     Integer.parseInt(time[0]));
             if (time.length == 3) {
                 task = new Deadline(false, input.substring(9, index - 1), date, "");
@@ -144,9 +142,7 @@ public enum Handlers {
             int index = input.indexOf("/at");
             String[] time = DukeException.taskValidity(index, input, cmd);
             Event task;
-            LocalDate date = LocalDate.of(
-                    Integer.parseInt(time[2]),
-                    Integer.parseInt(time[1]),
+            LocalDate date = LocalDate.of(Integer.parseInt(time[2]), Integer.parseInt(time[1]),
                     Integer.parseInt(time[0]));
             if (time.length == 3) {
                 task = new Event(false, input.substring(6, index - 1), date, "");

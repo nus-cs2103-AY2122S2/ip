@@ -89,10 +89,7 @@ public class Tasklist {
             return allTasks.append("No entries found, start by adding one!\n").toString();
         }
         for (int i = 0; i < list.size(); i++) {
-            allTasks.append(i + 1)
-                    .append(". ")
-                    .append(list.get(i).toString())
-                    .append("\n");
+            allTasks.append(i + 1).append(". ").append(list.get(i).toString()).append("\n");
         }
         return allTasks.toString();
     }
