@@ -2,6 +2,9 @@ import java.io.*;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Duke {
@@ -33,12 +36,20 @@ public class Duke {
         }
     }
 
-    private static void printTask(ArrayList<TaskStorage> taskStorages, int numTask) {
+
+    private static void printTask(ArrayList<TaskStorage> storingList, int numTask,
+                                HashMap<LocalDate, ArrayList<TaskStorage>> dateMap)
+                                        throws IOException {
+        TaskStorage taskStorage = storingList.get(storingList.size() - 1);
         System.out.println(TypicalString.LONG_LINE);
         System.out.println(TypicalString.ADDED_TASK);
-        System.out.println("  " + taskStorages.get(taskStorages.size() - 1));
-        System.out.println(" Now you have " + numTask +  " tasks in the list.");
+        System.out.println("  " + taskStorage);
+        System.out.println(" Now you have " + numTask + " tasks in the list.");
         System.out.println(TypicalString.LONG_LINE);
+        if (!taskStorage.getType().equals("T")) {
+            addDate(dateMap, taskStorage);
+        }
+        addTaskToText(storingList);
     }
 
     private static void readFileContent(File database, ArrayList<TaskStorage> storingList) throws IOException {
@@ -66,7 +77,6 @@ public class Duke {
         return string.matches("-?\\d+(\\.\\d+)?");
     }
 
-
     private static void changeStatusTask(
             int lineNumber, File database, ArrayList<TaskStorage> storingList)
             throws IOException {
@@ -88,6 +98,20 @@ public class Duke {
         Files.write(database.toPath(), lines);
     }
 
+    private static void addDate(
+            HashMap<LocalDate, ArrayList<TaskStorage>> dateMap,
+            TaskStorage taskStorage) {
+        LocalDate localDate = taskStorage.getTime();
+        if (dateMap.containsKey(localDate)) {
+            ArrayList<TaskStorage> eventList = dateMap.get(localDate);
+            eventList.add(taskStorage);
+        } else {
+            ArrayList<TaskStorage> eventList = new ArrayList<>();
+            eventList.add(taskStorage);
+            dateMap.put(localDate, eventList);
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         //String logo = " ____        _        \n"
         //        + "|  _ \\ _   _| | _____ \n"
@@ -105,6 +129,7 @@ public class Duke {
         String nextWord = sc.nextLine();
         int taskNumber = 0;
         ArrayList<TaskStorage> storingList = new ArrayList<>();
+        HashMap<LocalDate, ArrayList<TaskStorage>> dateMap = new HashMap<>();
         BotException exception = new BotException();
 
         if (! database.exists()) {
@@ -169,8 +194,7 @@ public class Duke {
                 } else {
                     taskNumber += 1;
                     storingList.add(new TaskStorage(restWord, "T"));
-                    printTask(storingList, taskNumber);
-                    addTaskToText(storingList);
+                    printTask(storingList, taskNumber, dateMap);
                 }
             } else if (commandWord.equals("deadline")) {
                 if (nextWord.length() == 8) {
@@ -178,8 +202,7 @@ public class Duke {
                 } else {
                     taskNumber += 1;
                     storingList.add(new TaskStorage(restWord, "D"));
-                    printTask(storingList, taskNumber);
-                    addTaskToText(storingList);
+                    printTask(storingList, taskNumber, dateMap);
                 }
             } else if (commandWord.equals("event")) {
                 if (nextWord.length() == 5) {
@@ -187,8 +210,7 @@ public class Duke {
                 } else {
                     taskNumber += 1;
                     storingList.add(new TaskStorage(restWord, "E"));
-                    printTask(storingList, taskNumber);
-                    addTaskToText(storingList);
+                    printTask(storingList, taskNumber, dateMap);
                 }
             } else if (commandWord.equals("delete")) {
                 if (! checkNumeric(restWord)) {
@@ -203,6 +225,21 @@ public class Duke {
                     System.out.println(" Now you have " + taskNumber + " tasks in the list.");
                     System.out.println(TypicalString.LONG_LINE);
                     deleteTask(index, database);
+                }
+            } else if (commandWord.equals("date")) {
+                LocalDate date = LocalDate.parse(restWord,
+                        DateTimeFormatter.ofPattern("d/M/yyyy"));
+                if (dateMap.containsKey(date)) {
+                    System.out.println(TypicalString.LONG_LINE);
+                    ArrayList<TaskStorage> eventList = dateMap.get(date);
+                    System.out.println("You have " + eventList.size() +
+                            " deadlines/events in the day:");
+                    for (int i = 1; i <= eventList.size(); i++) {
+                        System.out.println(i + "." + eventList.get(i - 1));
+                    }
+                    System.out.println(TypicalString.LONG_LINE);
+                } else {
+                    exception.dateNotFound();
                 }
             } else {
                 exception.wrongSyntax();
