@@ -1,7 +1,8 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
-
 
 public class Alfred {
   // class constants
@@ -114,7 +115,7 @@ public class Alfred {
 
   private void read_input(String input)
       throws InvalidCommandException, InvalidInputException, InvalidIndexException,
-      MissingInputException {
+      MissingInputException, InvalidDateTimeException {
     // read in arguments
     String[] arguments = input.split(" ");
     String command = arguments[0];
@@ -157,8 +158,12 @@ public class Alfred {
       if (arg.length < 2) {
         throw new InvalidInputException();
       }
-      this.add_deadline(arg[0], arg[1]);
-
+      try {
+        LocalDateTime dateTime = LocalDateTime.parse(arg[1]);
+        this.add_deadline(arg[0], arg[1]);
+      } catch (DateTimeParseException dte) {
+        throw new InvalidDateTimeException();
+      }
     } else if (command.equals("todo")) {
       String descripton = input.substring(4);
       if ((descripton.length() < 1) || descripton.split(" ").length == 0) {
@@ -174,7 +179,13 @@ public class Alfred {
       if (arg.length < 2) {
         throw new InvalidInputException();
       }
-      this.add_event(arg[0], arg[1]);
+      try {
+        LocalDateTime dateTime = LocalDateTime.parse(arg[1]);
+        this.add_event(arg[0], arg[1]);
+      } catch (DateTimeParseException dte) {
+        throw new InvalidDateTimeException();
+      }
+
     } else {
       // invalid command
       throw new InvalidCommandException();
