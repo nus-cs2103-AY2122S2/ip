@@ -40,4 +40,12 @@ public class Task {
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
+
+    /**
+     * Returns the save format in String of this Task object
+     * @return A String for the save format of this Task object
+     */
+    public String getSaveFormat() {
+        return this.description;
+    }
 }
