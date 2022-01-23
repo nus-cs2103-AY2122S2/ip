@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     public String description;
     protected boolean done;
 
@@ -18,6 +18,8 @@ public class Task {
     public String getDoneIcon () {
         return (this.done) ? "X" : " ";
     }
+
+    public abstract String toSaveData();
 
     @Override
     public String toString() {

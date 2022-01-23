@@ -6,6 +6,11 @@ public class Deadline extends Task{
     }
 
     @Override
+    public String toSaveData() {
+        return String.format("D|%s|%s|%s", this.done, this.description, this.by);
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.by + ")";
     }

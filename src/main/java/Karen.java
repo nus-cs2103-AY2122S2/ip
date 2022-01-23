@@ -1,13 +1,17 @@
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Karen {
-    ArrayList<Task> toDos;
+    ArrayList<Task> taskList;
+    public String DATA_FOLDER = "./data/";
+    public String DATA_DIR = "./data/karen.txt";
 
     public Karen() {
-        this.toDos = new ArrayList<Task>();
+        this.taskList = this.loadTask();
     }
 
     public void echo(String statement) {
@@ -15,14 +19,112 @@ public class Karen {
         System.out.println(statement);
         System.out.println("~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*\n");
     }
-
+    public void echoWarning(String statement) {
+        System.out.println("-------------------------------------------------");
+        System.out.println(String.format("\t%s", statement));
+        System.out.println("-------------------------------------------------\n");
+    }
     public void addTask(Task item) {
-        this.toDos.add(item);
+        this.taskList.add(item);
     }
     public Task getTask(int index) {
-        return this.toDos.get(index);
+        return this.taskList.get(index);
     }
-    public void deleteTask(int index) {this.toDos.remove(index);}
+    public void deleteTask(int index) {this.taskList.remove(index);}
+
+    protected Task createTask(String taskType, String[] taskArgs) {
+        Task initTask;
+
+        switch (taskType) {
+            case "T":
+                initTask = new ToDo(taskArgs[0]);
+                break;
+            case "D":
+                initTask = new Deadline(taskArgs[0], taskArgs[1]);
+                break;
+            case "E":
+                initTask = new Event(taskArgs[0], taskArgs[1]);
+                break;
+            default:
+                initTask = null;
+                break;
+        }
+        return initTask;
+    }
+
+    protected ArrayList<Task> loadTask() {
+        ArrayList<Task> taskList = new ArrayList<>();
+        BufferedReader br = null;
+        try {
+            FileInputStream readStream = new FileInputStream(DATA_DIR);
+            DataInputStream in = new DataInputStream(readStream);
+            br = new BufferedReader(new InputStreamReader(in));
+
+            String readLine;
+            while ((readLine=br.readLine()) != null) {
+                String[] data = readLine.split("\\|");
+                Task item = this.createTask(data[0], Arrays.copyOfRange(data, 2, data.length));
+                if (Boolean.parseBoolean(data[1])) {
+                    item.markDone();
+                }
+                taskList.add(item);
+            }
+            in.close();
+        }
+        catch (FileNotFoundException err) {
+            this.echoWarning("No previous session/data found");
+
+            File dir = new File(DATA_FOLDER);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            return taskList;
+        }
+        catch (IOException err) {
+            this.echoWarning("Something went wrong with reading the previous session..");
+            return taskList;
+        }
+        finally {
+            try {
+                br.close();
+            } catch (Exception err) {
+                // do nothing
+            }
+        }
+        return taskList;
+    }
+
+    protected void saveTask() {
+        // formatting data for writing
+        String data = "";
+        for (Task item: this.taskList) {
+            data = data.concat(String.format("%s\n", item.toSaveData()));
+        }
+
+        // writing data to local dir
+        Writer writer = null;
+        try {
+            FileOutputStream writeStream = new FileOutputStream(DATA_DIR);
+            OutputStreamWriter out = new OutputStreamWriter(writeStream);
+            writer = new BufferedWriter(out);
+            writer.write(data);
+        }
+        catch (FileNotFoundException err) {
+            this.echoWarning(String.format("Improper access for file writing.\n\tCheck if %s exists.",DATA_DIR));
+        }
+        catch (IOException err) {
+            this.echoWarning("Something went wrong with writing to file");
+        }
+        finally {
+            try {
+                writer.close();
+            }
+            catch (Exception err) {
+                // do nothing
+            }
+        }
+
+    }
 
     /**
      *
@@ -32,7 +134,7 @@ public class Karen {
      */
     public String formatTask(Task item, String action) {
         return String.format("Fine. Task %s:\n %s\nNow you have %d in total.",
-                action, item.toString(), this.toDos.size());
+                action, item.toString(), this.taskList.size());
     }
 
     /**
@@ -83,17 +185,17 @@ public class Karen {
             return "";
         }
         else if (commandType==Command.BYE) {
-            output = "Goodbye - I'll be seeing your manager's manager next.";
+            output = "Goodbye - I'll be seeing your manager's manager next.\nI'll remember this.";
         }
         else if (commandType==Command.LIST) {
-            if (this.toDos.size()==0)
+            if (this.taskList.size()==0)
             {
                 output = "Nothing is even added yet.";
             } else
             {
                 output = "";
                 int counter = 0;
-                for (Task item: this.toDos) {
+                for (Task item: this.taskList) {
                     output = output.concat(String.format("%d.%s\n", counter+1, item.toString()));
                     counter++;
                 }
@@ -165,7 +267,10 @@ public class Karen {
             result = err.toString();
         } finally {
             this.echo(result);
+
+            // Cleanup Functions if user exits
             if (getCommandType==Command.BYE) {
+                this.saveTask();
                 System.exit(0);
             }
         }

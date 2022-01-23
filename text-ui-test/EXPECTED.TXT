@@ -1,3 +1,7 @@
+-------------------------------------------------
+	No previous session/data found
+-------------------------------------------------
+
 ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 Hello, my name is Karen.
 I'll be speaking (to) as your manager today.
@@ -81,5 +85,6 @@ Are you sure that [3] is even in the 'list' command?
 
 ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 Goodbye - I'll be seeing your manager's manager next.
+I'll remember this.
 ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 
