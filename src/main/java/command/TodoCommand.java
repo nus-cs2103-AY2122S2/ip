@@ -16,14 +16,18 @@ public class TodoCommand extends Command {
     public TodoCommand(String message) {
         this.message = message;
     }
-
+    /**
+     * Add Todo Task to TaskList.
+     * Also overwrite Storage.
+     *
+     * @param ui Ui for outputting message.
+     * @param storage Storage for rewritting TaskList.
+     * @param taskList TaskList that stores Tasks.
+     * @throws DukeException If problems with writing to Storage.
+     */
     @Override
     public void execute(Ui ui, Storage storage, TaskList taskList) throws DukeException {
-        try {
-            taskList.add(new Todo(this.message, false));
-        } catch (DateTimeParseException e) {
-            throw new DukeException("Have you entered the date in yyyy-mm-dd format?");
-        }
+        taskList.add(new Todo(this.message, false));
         storage.writeToFile(taskList);
         ui.outputMessage("Got it. I've added this task: \n" +
                 taskList.get(taskList.size() -1) +

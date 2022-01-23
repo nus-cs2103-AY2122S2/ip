@@ -18,6 +18,15 @@ public class EventCommand extends Command {
         this.time = time;
     }
 
+    /**
+     * Add Event Task to TaskList.
+     * Also overwrite Storage.
+     *
+     * @param ui Ui for outputting message.
+     * @param storage Storage for rewriting TaskList.
+     * @param taskList TaskList that stores Tasks.
+     * @throws DukeException If time is in wrong format or problems with writing to Storage.
+     */
     @Override
     public void execute(Ui ui, Storage storage, TaskList taskList) throws DukeException {
         try {

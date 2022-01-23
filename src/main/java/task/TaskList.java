@@ -2,12 +2,16 @@ package task;
 
 import java.util.ArrayList;
 
+/**
+ * TaskList represents the list of the tasks in the user's todo-list.
+ * Functions below basically all apply to the ArrayList made in the constructor.
+ */
 public class TaskList { //figure out how to process existing taskList from storage
     ArrayList<Task> taskList;
-
     public TaskList() {
         taskList = new ArrayList<>();
     }
+
     public int size() {
         return taskList.size();
     }
