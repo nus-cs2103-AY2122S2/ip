@@ -5,7 +5,7 @@ import tasks.ToDoTask;
 
 /**
  * This class represents an instruction for a new To Do task.
- * Format: "to_do xyz" where xyz is the task description (omit the _)
+ * Format: "to_do xyz" where xyz is the task description (omit the _).
  *
  * @author Ong Han Yang
  */
@@ -22,8 +22,8 @@ public class TodoInst extends NewTaskInst {
     /**
      * Produces a To Do Instruction with the given description.
      *
-     * @param taskDesc the description for the instruction
-     * @return the To Do Instruction
+     * @param taskDesc the description for the instruction.
+     * @return the To Do Instruction.
      */
     public static TodoInst of(String taskDesc) {
         return new TodoInst(taskDesc);

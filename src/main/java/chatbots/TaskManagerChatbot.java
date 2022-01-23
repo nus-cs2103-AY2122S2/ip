@@ -4,7 +4,7 @@ import instructions.InstructionHandler;
 import tasks.TaskList;
 
 /**
- * This class is a specialised Chatbot, that manages tasks.
+ * This class is a specialised Chatbot that manages tasks.
  *
  * @author Ong Han Yang
  */

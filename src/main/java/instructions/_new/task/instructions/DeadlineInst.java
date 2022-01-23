@@ -23,8 +23,8 @@ public class DeadlineInst extends NewTaskInst {
     /**
      * Constructs a Deadline Instruction for a Deadline Task.
      *
-     * @param taskDesc the task description
-     * @param deadline the deadline for the task
+     * @param taskDesc the task description.
+     * @param deadline the deadline for the task.
      */
     private DeadlineInst(String taskDesc, LocalDateTime deadline) {
         super(taskDesc);
@@ -36,7 +36,7 @@ public class DeadlineInst extends NewTaskInst {
      *
      * @param taskDetails the details of the instruction. This includes both
      *                    the description and the deadline.
-     * @return the Deadline Instruction
+     * @return the Deadline Instruction.
      * @throws InvalidInputException when no details are provided, the wrong number of details
      *          provided, when either the timing or description is omitted, or when the given
      *          time/date format is wrong.

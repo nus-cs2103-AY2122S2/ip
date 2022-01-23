@@ -20,7 +20,7 @@ public class ToDoTask extends Task{
     /**
      * Produces a To Do task.
      *
-     * @param desc the description of the task
+     * @param desc the description of the task.
      * @return the To Do task.
      */
     public static ToDoTask of(String desc) {

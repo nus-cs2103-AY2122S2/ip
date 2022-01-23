@@ -24,13 +24,13 @@ import exceptions.SaveFileModifiedException;
  * @author Ong Han Yang
  */
 public class TaskList {
-    /** The container for the items, implemented as an ArrayList*/
+    /** The container for the items, implemented as an ArrayList */
     private ArrayList<Task> list;
 
     /** Name of the saved file */
     private static String fileName = "saved-taskList.txt";
 
-    /** Folder path to the saved file*/
+    /** Folder path to the saved file */
     private static String filePath = "data";
 
     /**
@@ -63,7 +63,7 @@ public class TaskList {
     /**
      * Removes an item from the list of tasks.
      *
-     * @param taskIndex the index of the item to remove
+     * @param taskIndex the index of the item to remove.
      * @return the removed task.
      */
     public Task delete(int taskIndex) throws NoSuchTaskException {
@@ -192,7 +192,7 @@ public class TaskList {
      *  TODO: FIX THIS ASSUMPTION, maybe make this method cleaner
      *
      * @param input the String form of the Task.
-     * @return the Task that corresponds to the input String
+     * @return the Task that corresponds to the input String.
      * @throws SaveFileModifiedException when the save file contains invalid symbols that could not
      *          have been from the string representation of a task, indicating external modification
      *          to the file.

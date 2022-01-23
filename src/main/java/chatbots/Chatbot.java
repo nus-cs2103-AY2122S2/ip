@@ -15,7 +15,7 @@ public abstract class Chatbot {
     /**
      * Asks the chatbot to speak with given input.
      *
-     * @param input the input words to speak
+     * @param input the input words to speak.
      * @return the formatted string of the input words.
      */
     protected abstract String speak(String input);
@@ -54,7 +54,7 @@ public abstract class Chatbot {
     /**
      * Sets the state of isAwake.
      *
-     * @param awake the state to set the chatbot to
+     * @param awake the state to set the chatbot to.
      */
     public void setAwake(boolean awake) {
         this.isAwake = awake;

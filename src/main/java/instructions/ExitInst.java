@@ -27,7 +27,7 @@ public class ExitInst extends Instruction {
     /**
      * Produces an Exit Instruction.
      *
-     * @return the Exit Instruction
+     * @return the Exit Instruction.
      */
     public static ExitInst of() {
         return FIXED_EXIT_INST;

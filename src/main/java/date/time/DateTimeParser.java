@@ -17,7 +17,7 @@ public final class DateTimeParser {
      * yyyy is the year and hh:mm is the 24 hour time, to produce a LocalDateTime object
      * with the provided date and time.
      *
-     * @param input the string input in the form yyyy-mm-dd xx:xx
+     * @param input the string input in the form yyyy-mm-dd xx:xx .
      * @return the LocalDateTime corresponding to the input.
      */
     public static LocalDateTime parse(String input) {
@@ -38,7 +38,7 @@ public final class DateTimeParser {
      * Checks if a given string input has a valid format to be converted into
      * a LocalDateTime using the DateTimeParser::parse method.
      *
-     * @param input The string to be checked if it follows yyyy-mm-dd hh:mm
+     * @param input The string to be checked if it follows yyyy-mm-dd hh:mm .
      * @return a boolean value indicating if the format is valid.
      */
     public static boolean checkValidFormat(String input) {
