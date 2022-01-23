@@ -14,7 +14,7 @@ public class Console {
         }
     }
 
-    public static void printList(String msg, String emptymsg, ArrayList<Task> arr) {
+    public static void printList(String msg, String emptymsg, TaskList arr) {
 
         if (arr.isEmpty()) {
             System.out.println("      " + emptymsg);

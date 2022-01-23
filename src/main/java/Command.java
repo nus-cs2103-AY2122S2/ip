@@ -27,13 +27,13 @@ public class Command {
             throw new DukeException("Time and Description of a event task cannot be empty.");
         }
 
-        String[] oargs = inputArgs[1].split("/");
+        String[] oArgs = inputArgs[1].split("/");
 
-        if (oargs.length < 2 || oargs[1].isBlank() || !oargs[1].startsWith("at")) {
+        if (oArgs.length < 2 || oArgs[1].isBlank() || !oArgs[1].startsWith("at")) {
             throw new DukeException("Invalid/Missing suffix, format is 'event [message] /at [date/time]'.");
         }
 
-        return new Event(oargs[0], oargs[1].substring(3));
+        return new Event(oArgs[0], oArgs[1].substring(3));
     }
 
     public static void checkSingle(String[] inputArgs) throws DukeException {

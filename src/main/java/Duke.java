@@ -1,7 +1,8 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Duke {
-    public static ArrayList<Task> taskArr = new ArrayList<>();
+    public static TaskList taskList = new TaskList();
     public static BOT dot = BOT.JJBA;
 
 
@@ -18,158 +19,156 @@ public class Duke {
         String input = "";
         boolean exitProg = false;
 
+        Storage.initDataInfo();
+        taskList = Storage.loadTaskList();
+
         do {
             input = Console.read();
             String[] inputArgs = input.split(" ", 2);
 
             try {
                 switch (inputArgs[0].toLowerCase()) {
-                    case "bye": {
-                        Command.checkSingle(inputArgs);
-                        switch (dot) {
-                            case JJBA: {
-                                Console.println("Goodbye! Good luck!");
-                                break;
-                            }
-                            case DIO: {
-                                Console.println("What?! I-Impossible... I-I am Dio... I am the mighty Dio!");
-                            }
-                        }
-                        exitProg = true;
+                case "bye":
+                    Command.checkSingle(inputArgs);
+                    switch (dot) {
+                    case JJBA:
+                        Console.println("Goodbye! Good luck!");
+                        break;
+                    case DIO:
+                        Console.println("What?! I-Impossible... I-I am Dio... I am the mighty Dio!");
                         break;
                     }
-                    case "dio": {
-                        Command.checkSingle(inputArgs);
+                    exitProg = true;
+                    break;
 
-                        dot = BOT.DIO;
-                        Console.println("ZA WARUDO!");
-                        break;
-                    }
-                    case "jjba": {
-                        Command.checkSingle(inputArgs);
+                case "dio":
+                    Command.checkSingle(inputArgs);
 
-                        dot = BOT.JJBA;
-                        Console.println("What can I do for you?");
-                        break;
-                    }
-                    case "list": {
-                        Command.checkSingle(inputArgs);
-                        switch (dot) {
-                            case JJBA: {
-                                Console.printList("Here are the things you will need to do:",
-                                        "There are no task available.",taskArr);
-                                break;
-                            }
-                            case DIO: {
-                                Console.printList("Oh? You're Approaching Me?",
-                                        "I reject my humanity, Jojo!", taskArr);
-                            }
-                        }
-                        break;
-                    }
-                    case "delete" : {
-                        Task curTask = taskArr.remove(Integer.parseInt(inputArgs[1]) - 1);
+                    dot = BOT.DIO;
+                    Console.println("ZA WARUDO!");
+                    break;
 
-                        switch (dot) {
-                            case JJBA: {
-                                Console.print("Task removed!\n   " + curTask.toString());
-                                break;
-                            }
-                            case DIO: {
-                                Console.print("*throws knifes\n   " + curTask.toString());
-                            }
-                        }
-                        printTaskLeft();
-                        break;
-                    }
-                    case "mark": {
-                        Task curTask = taskArr.get(Integer.parseInt(inputArgs[1]) - 1);
-                        curTask.markTask();
+                case "jjba":
+                    Command.checkSingle(inputArgs);
 
-                        switch (dot) {
-                            case JJBA: {
-                                Console.println("Good job on completing your task!\n   " + curTask.toString());
-                                break;
-                            }
-                            case DIO: {
-                                Console.println("KONO DIO DA!\n   " + curTask.toString());
-                            }
-                        }
-                        break;
-                    }
-                    case "unmark": {
-                        Task curTask = taskArr.get(Integer.parseInt(inputArgs[1]) - 1);
-                        curTask.unmarkTask();
+                    dot = BOT.JJBA;
+                    Console.println("What can I do for you?");
+                    break;
 
-                        switch (dot) {
-                            case JJBA: {
-                                Console.println("Done, remember to do your task.\n   " + curTask.toString());
-                                break;
-                            }
-                            case DIO: {
-                                Console.println("Hinjaku! Hinjaku!\n   " + curTask.toString());
-                            }
-                        }
+                case "list":
+                    Command.checkSingle(inputArgs);
+                    switch (dot) {
+                    case JJBA:
+                        Console.printList("Here are the things you will need to do:",
+                                    "There are no task available.", taskList);
+                        break;
+                    case DIO:
+                        Console.printList("Oh? You're Approaching Me?",
+                                "I reject my humanity, Jojo!", taskList);
                         break;
                     }
-                    case "todo": {
-                        Task newTask = Command.createTodo(inputArgs);
+                    break;
 
-                        taskArr.add(newTask);
-                        printTaskAdd(newTask);
-                        break;
-                    }
-                    case "deadline": {
-                        Task newTask = Command.createDeadline(inputArgs);
+                case "delete" :
+                    Task curTask = taskList.get(Integer.parseInt(inputArgs[1]) - 1);
 
-                        taskArr.add(newTask);
-                        printTaskAdd(newTask);
-                        break;
-                    }
-                    case "event": {
-                        Task newTask = Command.createEvent(inputArgs);
+                    taskList.remove(curTask);
 
-                        taskArr.add(newTask);
-                        printTaskAdd(newTask);
+                    switch (dot) {
+                        case JJBA:
+                            Console.print("Task removed!\n   " + curTask.toString());
+                            break;
+                        case DIO:
+                            Console.print("*throws knifes\n   " + curTask.toString());
+                            break;
+                    }
+                    printTaskLeft();
+                    break;
+
+                case "mark":
+                    curTask = taskList.get(Integer.parseInt(inputArgs[1]) - 1);
+                    curTask.markTask();
+
+                    switch (dot) {
+                    case JJBA:
+                        Console.println("Good job on completing your task!\n   " + curTask.toString());
+                        break;
+                    case DIO:
+                        Console.println("KONO DIO DA!\n   " + curTask.toString());
                         break;
                     }
-                    default: {
-                        throw new DukeException("Invalid Command.");
+                    break;
+
+                case "unmark":
+                    curTask = taskList.get(Integer.parseInt(inputArgs[1]) - 1);
+                    curTask.unmarkTask();
+
+                    switch (dot) {
+                    case JJBA:
+                        Console.println("Done, remember to do your task.\n   " + curTask.toString());
+                        break;
+                    case DIO:
+                        Console.println("Hinjaku! Hinjaku!\n   " + curTask.toString());
+                        break;
                     }
+                    break;
+                case "todo":
+                    Task newTask = Command.createTodo(inputArgs);
+
+                    taskList.add(newTask);
+                    printTaskAdd(newTask);
+                    break;
+                case "deadline":
+                    newTask = Command.createDeadline(inputArgs);
+
+                    taskList.add(newTask);
+                    printTaskAdd(newTask);
+                    break;
+                case "event":
+                    newTask = Command.createEvent(inputArgs);
+
+                    taskList.add(newTask);
+                    printTaskAdd(newTask);
+                    break;
+                default:
+                    throw new DukeException("Invalid Command.");
                 }
+
+                Storage.saveTaskList(taskList);
+
             } catch (DukeException e) {
                 switch (dot) {
-                    case JJBA: {
-                        Console.println("⚠ " + e.getMessage());
-                        break;
-                    }
-                    case DIO: {
-                        Console.println("⚠ RODA ROLLA DA!");
-                    }
+                case JJBA:
+                    Console.println("⚠ " + e.getMessage());
+                    break;
+                case DIO:
+                    Console.println("⚠ RODA ROLLA DA!");
+                    break;
                 }
 
             } catch (NumberFormatException e) {
                 switch (dot) {
-                    case JJBA: {
+                    case JJBA:
                         Console.println("⚠ Invalid input, please enter a task number.");
                         break;
-                    }
-                    case DIO: {
+                    case DIO:
                         Console.println("⚠ RODA ROLLA DA!");
-                    }
+                        break;
                 }
 
             } catch (IndexOutOfBoundsException e) {
                 switch (dot) {
-                    case JJBA: {
+                    case JJBA:
                         Console.println("⚠ Invalid task number, pleased enter a valid task number.");
                         break;
-                    }
-                    case DIO: {
+                    case DIO:
                         Console.println("⚠ RODA ROLLA DA!");
-                    }
+                        break;
                 }
+            } catch (IOException e) {
+                Console.println(e.getMessage());
             }
+
 
         } while (!exitProg);
 
@@ -177,38 +176,34 @@ public class Duke {
 
     public static void printTaskAdd(Task newTask) {
         switch(dot) {
-            case JJBA: {
-                Console.print("Task added: \n" + newTask);
-                break;
-            }
-            case DIO: {
-                Console.print("WRYYYYYYYYYYYY! \n" + newTask);
-                break;
-            }
+        case JJBA:
+            Console.print("Task added: \n" + newTask);
+            break;
+        case DIO:
+            Console.print("WRYYYYYYYYYYYY! \n" + newTask);
+            break;
         }
         printTaskLeft();
     }
 
     public static void printTaskLeft() {
         switch(dot) {
-            case JJBA: {
-                Console.println(String.format("You have %s task%s in your list.",
-                        (taskArr.size() > 0) ? taskArr.size() : "no", (taskArr.size() <= 1) ? "" : "s"));
-                break;
+        case JJBA:
+            Console.println(String.format("You have %s task%s in your list.",
+                    (taskList.size() > 0) ? taskList.size() : "no", (taskList.size() <= 1) ? "" : "s"));
+            break;
+        case DIO:
+            String muda = "";
+            for (int i = 0; i < taskList.size(); i++) {
+                muda += (i == taskList.size() - 1) ? "MUDA!" : "MUDA ";
             }
-            case DIO: {
-                String muda = "";
-                for (int i = 0; i < taskArr.size(); i++) {
-                    muda += (i == taskArr.size() - 1) ? "MUDA!" : "MUDA ";
-                }
 
-                if (muda.isEmpty()) {
-                    Console.println("NANI!");
-                } else {
-                    Console.println(muda);
-                }
-
+            if (muda.isEmpty()) {
+                Console.println("NANI!");
+            } else {
+                Console.println(muda);
             }
+            break;
         }
     }
 
