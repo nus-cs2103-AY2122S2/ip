@@ -1,16 +1,23 @@
-public class UnmarkCommand extends Command {
+package duke.command;
+
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.Ui;
+import duke.Storage;
+
+public class DeleteCommand extends Command {
 
     private final int index;
 
-    public UnmarkCommand(int index) {
+    public DeleteCommand(int index) {
         this.index = index;
     }
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         Task task = taskList.getTask(index);
-        task.markAsNotDone();
-        ui.showTaskUnmarked(task);
+        taskList.deleteTask(index);
+        ui.showTaskDeleted(task, taskList);
         storage.saveData(taskList, ui);
     }
 
