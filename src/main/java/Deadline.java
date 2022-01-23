@@ -37,7 +37,7 @@ public class Deadline extends Task {
     public String toString() {
         String box1 = "[D]";
         String doneness;
-        if (super.getDone()) {
+        if (super.isDone()) {
             doneness = "[X] ";
         } else {
             doneness = "[ ] ";
@@ -64,5 +64,26 @@ public class Deadline extends Task {
          throw new MemoryCorruptedException();
          }
          */
+    }
+
+    /**
+     * Converts Deadline into a string to be stored in mem
+     *
+     * @return string   string of deadline to be stored in mem
+     */
+    @Override
+    public String taskToMemStr() {
+        // Example str = D|0|return book|June 6th
+        StringBuilder sb = new StringBuilder();
+        sb.append("D|");
+        if (this.isDone()) {
+            sb.append("1|");
+        } else {
+            sb.append("0|");
+        }
+        sb.append(super.toString());
+        sb.append("|");
+        sb.append(this.deadlineTime);
+        return sb.toString();
     }
 }

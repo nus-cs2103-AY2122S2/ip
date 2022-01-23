@@ -50,7 +50,7 @@ public abstract class Task {
      * Returns whether the task is done
      * @return  done
      */
-    public boolean getDone() {
+    public boolean isDone() {
         return isDone;
     }
 
@@ -62,5 +62,12 @@ public abstract class Task {
     public void setDone(boolean done) {
         this.isDone = done;
     }
+
+    /**
+     * Converts task into a string to be stored in mem
+     *
+     * @return  String representation of the task in mem
+     */
+    public abstract String taskToMemStr();
 
 }

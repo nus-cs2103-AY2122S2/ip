@@ -91,7 +91,7 @@ public class Sana {
         } catch (OutOfBoundsTaskException e) {
             System.out.println(e.getMessage());
         }
-        Memory.update
+        taskMem.updateMemory(userTasks);
         border();
     }
 

@@ -33,7 +33,7 @@ public class ToDo extends Task {
     public String toString() {
         String box1 = "[T]";
         String doneness;
-        if (super.getDone()) {
+        if (super.isDone()) {
             doneness = "[X] ";
         } else {
             doneness = "[ ] ";
@@ -45,6 +45,7 @@ public class ToDo extends Task {
      * Converts the strings in mem to a ToDo
      *
      * @param taskStr   the string in mem
+     * @return ToDo     the ToDo represented by taskStr
      */
     public static ToDo memToTask(String taskStr) {
         // Example str = T|1|read book
@@ -58,5 +59,24 @@ public class ToDo extends Task {
             throw new MemoryCorruptedException();
         }
          */
+    }
+
+    /**
+     * Converts ToDo into a String to be stored in mem
+     *
+     * @return string   string of todo to be stored in mem
+     */
+    @Override
+    public String taskToMemStr() {
+        // Example str = T|1|read book
+        StringBuilder sb = new StringBuilder();
+        sb.append("T|");
+        if (this.isDone()) {
+            sb.append("1|");
+        } else {
+            sb.append("0|");
+        }
+        sb.append(super.toString());
+        return sb.toString();
     }
 }

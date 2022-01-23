@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.FileWriter;
 
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -33,21 +32,26 @@ public class Memory {
      * The constructor for a Memory object
      */
     public Memory() {
-        memFile = new File(memPath);
-        File dir = new File(dirPath);
+        initialiseMem();
+    }
 
+    /**
+     * Create new sana.txt file and data dir in case of corruption
+     */
+    private void initialiseMem() {
+        File dir = new File(dirPath);
         if (!dir.exists()) {
             dir.mkdir();
-
         }
+        memFile = new File(memPath);
         if (!memFile.exists()) {
             try {
                 memFile.createNewFile();
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+        this.memFile = new File(memPath);
     }
 
     /**
@@ -56,12 +60,13 @@ public class Memory {
      * @return  a List of tasks
      */
     public LinkedList<Task> memToList() {
-        Scanner s = null;
+        Scanner s;
         try {
             s = new Scanner(memFile);
         } catch (FileNotFoundException e) {
             System.out.println("I can't read the memory. Let's just start afresh!");
-            return  new LinkedList<>();
+            initialiseMem();
+            return new LinkedList<>();
         }
         LinkedList<Task> taskList = new LinkedList<>();
         while (s.hasNext()) {
@@ -91,8 +96,16 @@ public class Memory {
      * @param taskList  the list of tasks
      */
     public void updateMemory(LinkedList<Task> taskList) {
-        FileWriter fw = new FileWriter(memPath);
-
+        try {
+            FileWriter fw = new FileWriter(memFile);
+            for (Task task: taskList) {
+                fw.write(task.taskToMemStr() + System.lineSeparator());
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("My memory was messed with while running, I'll reinitialise it :)");
+            initialiseMem();
+        }
     }
 
 
