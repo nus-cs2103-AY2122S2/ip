@@ -56,6 +56,7 @@ public class UI {
         System.out.println("todo: Create a todo task. Syntax: todo <taskname>");
         System.out.println("deadline: Create a deadline. Syntax: deadline <taskname> /<yyyy-mm-dd hhmm of deadline>");
         System.out.println("event: Create an event. Syntax: event <taskname> /<yyyy-mm-dd hhmm of start> <yymmdd hhmm of end>");
+        System.out.println("find: Search for tasks containing a given keyword. Syntax: find <keyword>");
     }
 
     public static void printGoodbye() {

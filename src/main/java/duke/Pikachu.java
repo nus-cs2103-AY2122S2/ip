@@ -205,6 +205,23 @@ public class Pikachu {
             }
         }
         
+        /**
+         * "find"
+         * Returns a list of all tasks containing the given keyword.
+         * Syntax: find <keyword>
+         */
+        if (split[0].toLowerCase().equals("find")) {
+            System.out.println("Here are the matching tasks in your list:");
+            int count = 1;
+            String[] split2 = str.split(" ", 2);
+            for (Task t : inputList) {
+                if (!t.name.contains(split2[1])) continue; //Current task does not contain the keyword
+                System.out.println("   " + count + ". " + t);
+                count += 1;
+            }
+            return;
+        }
+
         //For non-recognizable inputs
         System.out.println("Pikachu does not understand...");
     }
