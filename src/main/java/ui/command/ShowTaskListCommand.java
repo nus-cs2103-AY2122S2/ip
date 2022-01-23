@@ -2,6 +2,7 @@ package ui.command;
 
 import task.Task;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -10,23 +11,19 @@ import java.util.ArrayList;
  * Command which prints out a list of item
  * stored by user.
  */
-public class ListCommand extends Command {
-    /**
-     * List of items to print in the command
-     */
-    private final ArrayList<Task> list;
+public class ShowTaskListCommand extends TaskCommand {
 
-    public ListCommand(String name, String args, ArrayList<Task> list) {
-        super(name, args);
-        this.list = list;
+    public ShowTaskListCommand(String name, String args, ArrayList<Task> list, File dataFile) {
+        super(name, args, list, dataFile);
     }
 
     @Override
     public boolean execute() throws IllegalArgumentException {
+        ArrayList<Task> taskList = this.getTaskList();
         ArrayList<String> response = new ArrayList<>();
         // Prepend each list item with its numbering inside list
-        for (int i = 0; i < this.list.size(); i++) {
-            Task task = this.list.get(i);
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
             response.add(String.format("%d.%s", i + 1, task.getDescription()));
         }
         Command.styledPrint(response);
