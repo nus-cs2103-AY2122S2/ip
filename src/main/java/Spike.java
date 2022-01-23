@@ -1,7 +1,10 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Duke {
+public class Spike {
     private static ArrayList<Task> taskList = new ArrayList<>();
 
     enum Command {
@@ -26,26 +29,34 @@ public class Duke {
         public static void process(Command c, String command, String[] commandWords) {
             switch (c) {
             case LIST:
-                printList();
+                try {
+                    if (commandWords.length >= 2) {
+                        printListByDate(command);
+                    } else {
+                        printList();
+                    }
+                } catch (SpikeException d) {
+                    printMsg(d.toString());
+                }
                 break;
             case MARK:
                 try {
                     mark(commandWords);
-                } catch (DukeException d) {
+                } catch (SpikeException d) {
                     printMsg(d.toString());
                 }
                 break;
             case UNMARK:
                 try {
                     unmark(commandWords);
-                } catch (DukeException d) {
+                } catch (SpikeException d) {
                     printMsg(d.toString());
                 }
                 break;
             case DELETE:
                 try {
                     delete(commandWords);
-                } catch (DukeException d) {
+                } catch (SpikeException d) {
                     printMsg(d.toString());
                 }
                 break;
@@ -55,7 +66,7 @@ public class Duke {
             case EVENT:
                 try {
                     addTask(command, commandWords);
-                } catch (DukeException d) {
+                } catch (SpikeException d) {
                     printMsg(d.toString());
                 }
                 break;
@@ -111,11 +122,13 @@ public class Duke {
     /**
      * Adds task into the list and prints.
      */
-    public static void addTask(String command, String[] commandWords) throws DukeException {
+    public static void addTask(String command, String[] commandWords) throws SpikeException {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+
         switch (commandWords[0]) {
         case "todo":
             if (command.length() <= 5) {
-                throw new DukeException("Hmmmm what to do? Think again?");
+                throw new SpikeException("Hmmmm what to do? Think again?");
             }
             ToDo newTD = new ToDo(command.substring(command.indexOf("todo") + 5));
             taskList.add(newTD);
@@ -125,22 +138,28 @@ public class Duke {
             // Extract description and deadline and pass to constructor
             if (commandWords.length <= 2 || command.indexOf("/by") == -1
                     || commandWords[1].equals("/by") || command.indexOf("/by") + 3 == command.length()) {
-                throw new DukeException("Deadline or task description missing.");
+                throw new SpikeException("Deadline or task description missing.");
             }
-            Deadline newD = new Deadline(command.substring(command.indexOf("deadline") + 9,
-                    command.indexOf("/by") - 1), command.substring(command.indexOf("/by") + 4));
-            taskList.add(newD);
-            printAddedTask(newD);
+            LocalDateTime deadlineT = parseDateTime(command.substring(command.indexOf("/by") + 4), dtf);
+            if (!(deadlineT == null)) {
+                Deadline newD = new Deadline(command.substring(command.indexOf("deadline") + 9,
+                        command.indexOf("/by") - 1), deadlineT);
+                taskList.add(newD);
+                printAddedTask(newD);
+            }
             break;
         case "event":
             if (commandWords.length <= 2 || command.indexOf("/at") == -1
                     || commandWords[1].equals("/at") || command.indexOf("/at") + 3 == command.length()) {
-                throw new DukeException("Event time or event description missing.");
+                throw new SpikeException("Event time or event description missing.");
             }
-            Event newE = new Event(command.substring(command.indexOf("event") + 6,
-                    command.indexOf("/at") - 1), command.substring(command.indexOf("/at") + 4));
-            taskList.add(newE);
-            printAddedTask(newE);
+            LocalDateTime eventT = parseDateTime(command.substring(command.indexOf("/at") + 4), dtf);
+            if (!(eventT == null)) {
+                Event newE = new Event(command.substring(command.indexOf("event") + 6,
+                        command.indexOf("/at") - 1), eventT);
+                taskList.add(newE);
+                printAddedTask(newE);
+            }
             break;
         default:
             break;
@@ -148,12 +167,25 @@ public class Duke {
     }
 
     /**
+     * Parses date and time input by user and returns valid LocalDateTime object
+     */
+    public static LocalDateTime parseDateTime(String s, DateTimeFormatter dtf) {
+        try {
+            LocalDateTime dateTime = LocalDateTime.parse(s, dtf);
+            return dateTime;
+        } catch (DateTimeParseException e) {
+            printMsg("Please enter a valid date in the format yyyy-MM-dd HHmm");
+            return null;
+        }
+    }
+
+    /**
      * Marks the task as done.
      */
-    public static void mark(String[] commandWords) throws DukeException {
+    public static void mark(String[] commandWords) throws SpikeException {
         if (commandWords.length != 2 || isInt(commandWords[1]) == -1
                 || isInt(commandWords[1]) > taskList.size()) {
-            throw new DukeException("Invalid arguments for marking. Please check again!");
+            throw new SpikeException("Invalid arguments for marking. Please check again!");
         }
         Task toMark = taskList.get(Integer.parseInt(commandWords[1]) - 1);
         toMark.markAsDone();
@@ -163,10 +195,10 @@ public class Duke {
     /**
      * Marks the task as undone.
      */
-    public static void unmark(String[] commandWords) throws DukeException {
+    public static void unmark(String[] commandWords) throws SpikeException {
         if (commandWords.length != 2 || isInt(commandWords[1]) == -1
                 || isInt(commandWords[1]) > taskList.size()) {
-            throw new DukeException("Invalid arguments for unmarking. Please check again!");
+            throw new SpikeException("Invalid arguments for unmarking. Please check again!");
         }
         Task toUnmark = taskList.get(Integer.parseInt(commandWords[1]) - 1);
         toUnmark.markAsNotDone();
@@ -176,10 +208,10 @@ public class Duke {
     /**
      * Deletes task from the list.
      */
-    public static void delete(String[] commandWords) throws DukeException {
+    public static void delete(String[] commandWords) throws SpikeException {
         if (commandWords.length != 2 || isInt(commandWords[1]) == -1
                 || isInt(commandWords[1]) > taskList.size()) {
-            throw new DukeException("Invalid arguments for deletion. Please check again!");
+            throw new SpikeException("Invalid arguments for deletion. Please check again!");
         }
         Task toDelete = taskList.get(Integer.parseInt(commandWords[1]) - 1);
         taskList.remove(toDelete);
@@ -230,10 +262,32 @@ public class Duke {
         int i = 1;
         String result = "Here are the task(s) in your list:\n";
         for (Task task : taskList) {
-            if (i == taskList.size()) {
+            result += i + "." + task;
+            if (i != taskList.size()) {
+                result += "\n";
+            }
+            i++;
+        }
+        printMsg(result);
+    }
+
+    /**
+     * Prints deadlines/events occurring on the given date.
+     */
+    public static void printListByDate(String command) throws SpikeException {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        LocalDateTime ldt = parseDateTime(command.substring(5), dtf);
+        if (ldt == null) {
+            throw new SpikeException("Kindly enter the date in the format yyyy-MM-dd 0000 to filter by date");
+        }
+        int i = 1;
+        String result = "Here are the task(s) in your list filtered by date:\n";
+        for (Task task : taskList) {
+            if (task.getDateTime().toLocalDate().equals(ldt.toLocalDate())) {
                 result = result + i + "." + task;
-            } else {
-                result = result + i + "." + task + "\n";
+                if (i != taskList.size()) {
+                    result += "\n";
+                }
             }
             i++;
         }
