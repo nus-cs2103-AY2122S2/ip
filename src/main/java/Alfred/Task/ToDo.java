@@ -1,7 +1,9 @@
+package Alfred.Task;
+
 public class ToDo extends Task {
     String type = "T";
 
-    ToDo(String description) {
+    public ToDo(String description) {
         super(description);
     }
 

@@ -1,10 +1,12 @@
+package Alfred.Task;
+
 import java.time.LocalDateTime;
 
 public class Event extends Task {
   String type = "E";
   LocalDateTime dateTime;
 
-  Event(String description, String dateAndTime) {
+  public Event(String description, String dateAndTime) {
     super(description);
     this.dateTime = LocalDateTime.parse(dateAndTime);;
   }

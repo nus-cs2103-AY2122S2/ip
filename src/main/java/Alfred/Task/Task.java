@@ -1,3 +1,5 @@
+package Alfred.Task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -28,15 +30,15 @@ public abstract class Task {
     }
   }
 
-  protected void markComplete() {
+  public void markComplete() {
     this.completed = true;
   }
 
-  protected void markIncomplete() {
+  public void markIncomplete() {
     this.completed = false;
   }
 
-  protected static String localDateTimeToString(LocalDateTime dateTime) {
+  public static String localDateTimeToString(LocalDateTime dateTime) {
     return dateTime.format(Task.dateTimeFormatter);
   }
 
