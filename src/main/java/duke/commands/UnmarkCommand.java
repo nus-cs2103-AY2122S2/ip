@@ -32,8 +32,11 @@ public class UnmarkCommand extends Command<Integer> {
      */
     public void runCommand(TaskList toDoList, Integer numberToUnmark) throws DukeException {
         try {
+            // Unmark the task
             Task taskToUnmark = toDoList.get(numberToUnmark);
             taskToUnmark.unmark();
+
+            // Print out the formatted message after unmarking
             System.out.println(Parser.formatMsg("OK, I've marked this task as not done yet:\n\t" + taskToUnmark));
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(Parser.formatMsg("☹ OOPS!!! Item to unmark does not exist."));

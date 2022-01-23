@@ -26,6 +26,7 @@ public class Duke {
         this.filepath = filepath;
         storage = new Storage(this.filepath);
         ui = new Ui();
+
         // Attempt to open the storage file. If file does not exist, then create a new file.
         try {
             toDoList = storage.addFileContent();
@@ -45,8 +46,11 @@ public class Duke {
      * @throws IOException   when an IO error occurs while reading user input
      */
     public void run() throws DukeException, IOException {
+        // Declaration of variables
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String cmd;
+
+        // Print out the welcome message and await user input
         Ui.showWelcome();
         while (!(cmd = br.readLine()).equals("bye")) {
             String commandType = cmd.split(" ")[0];

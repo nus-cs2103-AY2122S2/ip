@@ -27,6 +27,7 @@ public class ListCommand extends Command<String> {
      * @param cmd the user input to Burp
      */
     public void runCommand(TaskList toDoList, String cmd) {
+        // Prints out the list of items in the TaskList
         System.out.println(tabbedLine);
         for (int i = 0; i < toDoList.size(); i++) {
             System.out.println(i + 1 + "." + toDoList.get(i).toString());

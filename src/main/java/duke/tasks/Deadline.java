@@ -47,6 +47,9 @@ public class Deadline extends Task {
         // the string is of the form: 2/12/2019 1800
         dateTime = dateTime.replace('/', '-');
         String[] splitDateTime = dateTime.split(" ");
+
+        // Attempt to format the date. If it cannot be formatted, it means
+        // User did not give in a proper date format
         try {
             this.date = LocalDate.parse(splitDateTime[0]);
             this.time = splitDateTime[1];

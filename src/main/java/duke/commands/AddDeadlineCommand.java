@@ -40,12 +40,20 @@ public class AddDeadlineCommand extends Command<String> {
      */
     public void runCommand(TaskList toDoList, String cmd) throws DukeException {
         try {
+            // Reformat the command to get the Task's description and deadline
             String[] deadlineDetails = cmd.split("deadline")[1].split("/by");
             String deadlineName = deadlineDetails[0];
             String deadline = deadlineDetails[1];
+
+            // Create a new Deadline to add to TaskList
             Deadline newDeadline = new Deadline(deadlineName, false, deadline);
             toDoList.add(newDeadline);
-            System.out.println(Parser.formatMsg("Got it. I've added this task:\n\t" + newDeadline + "\n\tNow you have " + toDoList.size() + " tasks in the list."));
+
+            // Print out the formatted message after adding to TaskList
+            System.out.println(Parser.formatMsg("Got it. I've added this task:\n\t" + newDeadline
+                    + "\n\tNow you have " + toDoList.size() + " tasks in the list."));
+
+            // Write the contents of the TaskList to our storage
             storage.writeFileContent(toDoList);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(Parser.formatMsg("☹ OOPS!!! The description of a deadline cannot be empty."));

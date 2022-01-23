@@ -33,8 +33,11 @@ public class MarkCommand extends Command<Integer> {
      */
     public void runCommand(TaskList toDoList, Integer numberToMark) throws DukeException {
         try {
+            // Mark the task
             Task taskToMark = toDoList.get(numberToMark);
             taskToMark.mark();
+
+            // Print out the formatted message after marking
             System.out.println(Parser.formatMsg("OK, I've marked this task as done:\n\t" + taskToMark));
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(Parser.formatMsg("☹ OOPS!!! Item to mark does not exist."));

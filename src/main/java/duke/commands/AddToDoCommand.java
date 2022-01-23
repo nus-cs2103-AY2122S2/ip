@@ -40,9 +40,15 @@ public class AddToDoCommand extends Command<String> {
      */
     public void runCommand(TaskList toDoList, String cmd) throws DukeException {
         try {
+            // Create a new ToDo and add to TaskList
             ToDo newToDo = new ToDo(cmd.split("todo")[1], false);
             toDoList.add(newToDo);
-            System.out.println(Parser.formatMsg("Got it. I've added this task:\n\t" + newToDo + "\n\tNow you have " + toDoList.size() + " tasks in the list."));
+
+            // Print out the formatted message after adding to TaskList
+            System.out.println(Parser.formatMsg("Got it. I've added this task:\n\t" + newToDo
+                    + "\n\tNow you have " + toDoList.size() + " tasks in the list."));
+
+            // Write the contents of the TaskList to our storage
             storage.writeFileContent(toDoList);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(Parser.formatMsg("☹ OOPS!!! The description of a todo cannot be empty."));

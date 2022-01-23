@@ -46,7 +46,7 @@ public class Storage {
         // save commands into the file
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
-            // mark status & type & descriptor & additional
+            // Read the saved command from file
             String cmd = s.nextLine();
             String[] cmd_split = cmd.split("&");
             boolean mark = cmd_split[0].equals("[X]") ? true : false;
@@ -83,6 +83,7 @@ public class Storage {
      * @throws IOException when IO error occurs
      */
     public static void writeFileContent(TaskList toDoList) throws IOException {
+        // Create a new file writer to that filepath
         FileWriter fw = new FileWriter(Storage.filepath);
         for (int i = 0; i < toDoList.size(); i++) {
             Task currentTask = toDoList.get(i);
