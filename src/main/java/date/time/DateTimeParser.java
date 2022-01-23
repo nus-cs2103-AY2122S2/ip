@@ -23,9 +23,13 @@ public final class DateTimeParser {
     public static LocalDateTime parse(String input) {
         String[] split = input.split(" ", 2);
         int[] date = Arrays.stream(split[0]
-                .split("-", 3)).mapToInt(Integer::parseInt).toArray();
+                .split("-", 3))
+                .mapToInt(Integer::parseInt)
+                .toArray();
         int[] time = Arrays.stream(split[1]
-                .split(":", 2)).mapToInt(Integer::parseInt).toArray();
+                .split(":", 2))
+                .mapToInt(Integer::parseInt)
+                .toArray();
         return LocalDateTime.of(
                 date[0],
                 date[1],
@@ -91,7 +95,7 @@ public final class DateTimeParser {
 
         // check valid numbers for hours and min
         int hours = Integer.parseInt(input.substring(11, 13));
-        int mins = Integer.parseInt((input.substring(14,16)));
+        int mins = Integer.parseInt((input.substring(14, 16)));
         if (hours > 23 || mins > 59) {
             return false;
         }

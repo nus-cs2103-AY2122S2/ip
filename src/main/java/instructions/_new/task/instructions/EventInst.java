@@ -32,8 +32,7 @@ public class EventInst extends NewTaskInst {
      * @param startTime the starting time of the event.
      * @param endTime the ending time of the event.
      */
-    private EventInst(String taskDesc, LocalDateTime startTime,
-                      LocalDateTime endTime) {
+    private EventInst(String taskDesc, LocalDateTime startTime, LocalDateTime endTime) {
         super(taskDesc);
         this.startTime = startTime;
         this.endTime = endTime;
@@ -50,11 +49,11 @@ public class EventInst extends NewTaskInst {
      *                               the timing or description is omitted, or
      *                               when the given time/date format is wrong.
      */
-    public static EventInst of(String taskDetails)
-            throws InvalidInputException {
+    public static EventInst of(String taskDetails) throws InvalidInputException {
         String[] split = taskDetails.split(" /at ");
         // a correct format will produce a String[2].
 
+        // check for the " /at " and figure out where the problem is if it is missing
         if (split.length == 1) {
             //happens in "event /at ", event /at b", "event a /atb" etc
             split = taskDetails.split("/at");
@@ -67,9 +66,12 @@ public class EventInst extends NewTaskInst {
         if (split.length >= 3) { // happens with multiple " /at "s
             throw NewTaskInst.TOO_MANY_ARGUMENTS_EXCEPTION;
         }
+
+
         String[] timings = split[1].split(" /until ");
         // a correct format will produce a String[2].
 
+        // check for the " /until " and figure out where the problem is if it is missing
         if (timings.length == 1) {
             //happens in "/at /until", "/at a /until " or similar
             split = split[1].split("/until");
@@ -103,11 +105,9 @@ public class EventInst extends NewTaskInst {
      */
     @Override
     public String doInst(TaskList taskList) {
-        EventTask task = new EventTask(super.getTaskDesc(),
-                this.startTime, this.endTime);
+        EventTask task = new EventTask(super.getTaskDesc(), this.startTime, this.endTime);
         taskList.add(task);
-        return String.format("Okay, added this task:\n%s\nThere are %d tasks " +
-                "in the list now."
+        return String.format("Okay, added this task:\n%s\nThere are %d tasks in the list now."
                 , task, taskList.length());
     }
 }

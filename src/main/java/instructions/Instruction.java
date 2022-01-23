@@ -27,6 +27,7 @@ public abstract class Instruction {
      * This is to allow inheritance from subclasses.
      */
     protected Instruction() {
+
     }
 
     /**
@@ -56,5 +57,13 @@ public abstract class Instruction {
         }
     }
 
+    /**
+     * Performs the instruction's instruction. Some instructions may need a task list.
+     *
+     * @param taskList the task list for the instruction to perform its action on.
+     * @return a String feedback onto the state of the instruction.
+     * @throws NoSuchTaskException when the instruction is a ModifyListedTaskInstruction and there
+     *          is no specified task number.
+     */
     public abstract String doInst(TaskList taskList) throws NoSuchTaskException;
 }

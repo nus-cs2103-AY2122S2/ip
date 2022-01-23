@@ -8,7 +8,7 @@ import tasks.TaskList;
  *
  * @author Ong Han Yang
  */
-public abstract class TaskManagerChatbot extends Chatbot{
+public abstract class TaskManagerChatbot extends Chatbot {
     /** The taskList that the chatbot is responsible for */
     protected TaskList taskList;
 

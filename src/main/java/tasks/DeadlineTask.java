@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
  *
  * @author Ong Han Yang
  */
-public class DeadlineTask extends Task{
+public class DeadlineTask extends Task {
     /** The deadline for the task.*/
     private LocalDateTime deadline;
 
