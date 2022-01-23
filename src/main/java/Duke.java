@@ -11,25 +11,22 @@ public class Duke {
         boolean isExit = false;
 
         System.out.println(WELCOME_MESSAGE);
-        while (true) {
+        while (!isExit) {
             String userInput = sc.nextLine();
             switch (userInput) {
-            case "bye":
-                isExit = true;
-                System.out.println(GOODBYE_MESSAGE);
-                break;
-            case "list":
-                for (int i = 0; i < TO_DO_LIST.size(); i++) {
-                    System.out.println(String.format("%d. %s", i + 1, TO_DO_LIST.get(i)));
-                }
-                break;
-            default:
-                TO_DO_LIST.add(userInput);
-                System.out.println(String.format("added: %s", userInput));
-                break;
-            }
-            if (isExit) {
-                break;
+                case "bye":
+                    isExit = true;
+                    System.out.println(GOODBYE_MESSAGE);
+                    break;
+                case "list":
+                    for (int i = 0; i < TO_DO_LIST.size(); i++) {
+                        System.out.printf("%d. %s%n", i + 1, TO_DO_LIST.get(i));
+                    }
+                    break;
+                default:
+                    TO_DO_LIST.add(userInput);
+                    System.out.printf("added: %s%n", userInput);
+                    break;
             }
         }
     }
