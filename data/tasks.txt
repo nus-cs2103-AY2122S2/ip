@@ -1,2 +1,3 @@
-T | 1 | test
-D | 0 | test1 | Sunday
+T | 0 | test
+D | 1 | cs2103 level 8 | 2022/01/24 0200
+E | 0 | cs2010 lect | 2022/01/24 0800

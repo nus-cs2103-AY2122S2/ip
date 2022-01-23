@@ -1,17 +1,22 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task{
-    String deadline;
-    public Deadline(String description, String deadline) {
+    LocalDateTime deadline;
+    public Deadline(String description, LocalDateTime deadline) {
         super(description, TaskType.DEADLINE);
         this.deadline = deadline;
     }
 
     @Override
     public String toString() {
-        return String.format("%s (by: %s)", super.toString(), this.deadline);
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
+        return String.format("%s (by: %shrs)", super.toString(), this.deadline.format(format));
     }
 
     @Override
     public String getFileSaveFormat() {
-        return String.format("%s | %s", super.getFileSaveFormat(), deadline);
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
+        return String.format("%s | %s", super.getFileSaveFormat(), deadline.format(format));
     }
 }
