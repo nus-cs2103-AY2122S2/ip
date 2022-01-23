@@ -15,9 +15,9 @@ public class Event extends Task{
     public String identify(){
         String dateString = deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy" ));
         if (super.getIsDone()) {
-            return String.format("[D][X] %s (by: %s)", super.getDescription(), dateString);
+            return String.format("[E][X] %s (by: %s)", super.getDescription(), dateString);
         } else {
-            return String.format("[D][ ] %s (by: %s)", super.getDescription(), dateString);
+            return String.format("[E][ ] %s (by: %s)", super.getDescription(), dateString);
         }
     }
 }
