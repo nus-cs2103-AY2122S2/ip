@@ -8,7 +8,7 @@ package instructions.modify.listed.task.instructions;
  */
 public class DeleteInst extends ModifyListedTaskInst {
     /**
-     * Private constructor for a Delete Task Instruction.
+     * Constructs a Delete Task Instruction.
      *
      * @param taskNum the task number to delete.
      */
@@ -17,7 +17,7 @@ public class DeleteInst extends ModifyListedTaskInst {
     }
 
     /**
-     * Factory method to produce a Delete Task Instruction.
+     * Produces a Delete Task Instruction.
      *
      * @param taskNum the task number to delete.
      * @return the Delete Task Instruction.

@@ -8,7 +8,7 @@ package instructions.modify.listed.task.instructions;
  */
 public class MarkAsDoneInst extends ModifyListedTaskInst {
     /**
-     * Private constructor for a Mark Task as Done Instruction.
+     * Constructs a Mark Task as Done Instruction.
      *
      * @param taskNum the task number to mark as done.
      */
@@ -17,7 +17,7 @@ public class MarkAsDoneInst extends ModifyListedTaskInst {
     }
 
     /**
-     * Factory method to produce a Mark Task as Done Instruction.
+     * Produces a Mark Task as Done Instruction.
      *
      * @param taskNum the task number to mark as done.
      * @return the Mark Task as Done Instruction.

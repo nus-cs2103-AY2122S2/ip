@@ -13,19 +13,21 @@ import instructions.Instruction;
  * @author Ong Han Yang
  */
 public abstract class ModifyListedTaskInst extends Instruction {
-    /** Reusable Invalid Input Exception for when there is no provided task number */
-    protected static InvalidInputException NO_TASK_NUM
+    /** Reusable Invalid Input Exception for when there is no provided task
+     * number */
+    private static InvalidInputException NO_TASK_NUM_EXCEPTION
             = new InvalidInputException("Cannot delete without a specified task number!");
 
-    /** Reusable Invalid Input Exception for when the provided task number is not an integer */
-    protected static InvalidInputException NOT_INTEGER
+    /** Reusable Invalid Input Exception for when the provided task number is
+     * not an integer */
+    private static InvalidInputException NOT_INTEGER_EXCEPTION
             = new InvalidInputException("Given task number is not an integer!");
 
     /** The taskNumber to modify */
     private int taskNum;
 
     /**
-     * Private constructor for a Modify Listed Task Instruction.
+     * Constructs a Modify Listed Task Instruction.
      *
      * @param taskNum the task number to delete.
      */
@@ -34,24 +36,26 @@ public abstract class ModifyListedTaskInst extends Instruction {
     }
 
     /**
-     * Factory method to produce a Modify Listed Task Instruction, according to the specified instruction
-     * type.
+     * Produces a Modify Listed Task Instruction, according to the specified
+     * instruction type.
      *
      * @param instType the type of modify listed task instruction to use.
      * @param taskNum the task number to modify, as a String.
-     * @return the Modify Listed Task Instruction with the specified task number to delete.
-     * @throws InvalidInputException when no task number is provided, or the provided task number
-     *      is not an integer.
+     * @return the Modify Listed Task Instruction with the specified task
+     *         number to delete.
+     * @throws InvalidInputException when no task number is provided, or the
+     *                               provided task number is not an integer.
      */
-    public static ModifyListedTaskInst of(String instType, String taskNum) throws InvalidInputException {
+    public static ModifyListedTaskInst of(String instType, String taskNum)
+            throws InvalidInputException {
         if (taskNum.length() == 0) {
-            throw NO_TASK_NUM;
+            throw NO_TASK_NUM_EXCEPTION;
         }
         int taskNumInteger;
         try {
             taskNumInteger  = Integer.parseInt(taskNum);
         } catch (NumberFormatException e) {
-            throw NOT_INTEGER;
+            throw NOT_INTEGER_EXCEPTION;
         }
         switch (instType) {
         case "mark":
@@ -61,13 +65,14 @@ public abstract class ModifyListedTaskInst extends Instruction {
         case "delete":
             return DeleteInst.of(taskNumInteger);
         default:
-            // will not reach here, as Instruction.of controls the main flow of instructions
+            // will not reach here, as Instruction.of controls the main flow
+            // of instructions
             return null;
         }
     }
 
     /**
-     * Getter for the task number to delete.
+     * Gets the task number to modify.
      *
      * @return the task number as an int.
      */

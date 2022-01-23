@@ -8,7 +8,7 @@ package instructions.modify.listed.task.instructions;
  */
 public class UnmarkInst extends ModifyListedTaskInst {
     /**
-     * Private constructor for a Mark Task as Undone Instruction.
+     * Constructs a Mark Task as Undone Instruction.
      *
      * @param taskNum the task number to mark as undone.
      */
@@ -17,7 +17,7 @@ public class UnmarkInst extends ModifyListedTaskInst {
     }
 
     /**
-     * Factory method to produce a Mark Task as Undone Instruction.
+     * Produces a Mark Task as Undone Instruction.
      *
      * @param taskNum the task number to mark as undone.
      * @return the Mark Task as Undone Instruction.

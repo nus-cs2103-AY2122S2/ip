@@ -8,8 +8,8 @@ package instructions;
  */
 public class DisplayListInst extends Instruction {
     /**
-     * A fixed/static display instruction as there are no differences between multiple
-     * display list instructions.
+     * A fixed/static display instruction as there are no differences between
+     * multiple display list instructions.
      * TODO:
      * Maybe allow a "list x", to list up to the first x tasks of the list.
      */
@@ -17,13 +17,13 @@ public class DisplayListInst extends Instruction {
             = new DisplayListInst();
 
     /**
-     * Private default constructor for a Display List Instruction.
+     * Constructs a Display List Instruction.
      */
     private DisplayListInst() {
     }
 
     /**
-     * Factory method to produce a Display List Instruction.
+     * Produces a Display List Instruction.
      *
      * @return the Display List Instruction.
      */
