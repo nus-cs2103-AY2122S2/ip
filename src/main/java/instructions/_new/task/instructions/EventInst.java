@@ -1,30 +1,40 @@
 package instructions._new.task.instructions;
 
+import date.time.DateTimeParser;
 import exceptions.InvalidInputException;
 import tasks.EventTask;
 import tasks.TaskList;
 
+import java.time.LocalDateTime;
+
 /**
  * This class represents an instruction for a new Event task.
- * Format: "event P /at Q",
+ * Format: "event P /at Q /until R",
  *         where P is the task description,
- *         and Q is the date and time of the event.
+ *         and Q is the start time, in yyyy-mm-dd hh:mm.
+ *         and R is the end time, in yyyy-mm-dd hh:mm
  *
  * @author Ong Han Yang
  */
 public class EventInst extends NewTaskInst {
-    /** The timing, stored as a String. */
-    private String timing;
+    /** The start time. */
+    private LocalDateTime startTime;
+
+    /** The end time. */
+    private LocalDateTime endTime;
 
     /**
-     * Constructs an Event Instruction for an Event Task.
+     * Constructs an Event Task Instruction.
      *
-     * @param taskDesc the task description
-     * @param timing   the deadline for the task
+     * @param taskDesc description for the task.
+     * @param startTime the starting time of the event.
+     * @param endTime the ending time of the event.
      */
-    private EventInst(String taskDesc, String timing) {
+    private EventInst(String taskDesc, LocalDateTime startTime,
+                      LocalDateTime endTime) {
         super(taskDesc);
-        this.timing = timing;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     /**
@@ -34,8 +44,9 @@ public class EventInst extends NewTaskInst {
      *                    the description and the timing.
      * @return the Event Instruction
      * @throws InvalidInputException when no details are provided, the wrong
-     *                               number of details provided, or when either
-     *                               the timing or description is omitted.
+     *                               number of details provided, when either
+     *                               the timing or description is omitted, or
+     *                               when the given time/date format is wrong.
      */
     public static EventInst of(String taskDetails)
             throws InvalidInputException {
@@ -51,31 +62,47 @@ public class EventInst extends NewTaskInst {
             }
             throw NewTaskInst.MISSING_TASK_DETAILS_EXCEPTION;
         }
-        if (split.length >= 3) { // happens with multiple " /by "s
+        if (split.length >= 3) { // happens with multiple " /at "s
+            throw NewTaskInst.TOO_MANY_ARGUMENTS_EXCEPTION;
+        }
+        String[] timings = split[1].split(" /until ");
+        // a correct format will produce a String[2].
+
+        if (timings.length == 1) {
+            //happens in "/at /until", "/at a /until " or similar
+            split = split[1].split("/until");
+            if (split.length == 2 && split[0].length() != 0) {
+                // happens in "/at a/until b" or similar
+                throw NewTaskInst.MISSING_SPACES_EXCEPTION;
+            }
+            throw NewTaskInst.MISSING_TASK_DETAILS_EXCEPTION;
+        }
+        if (timings.length >= 3) {
             throw NewTaskInst.TOO_MANY_ARGUMENTS_EXCEPTION;
         }
 
-        return new EventInst(split[0], split[1]);
+        boolean startTimeIsValid = DateTimeParser.checkValidFormat(timings[0]);
+        boolean endTimeIsValid = DateTimeParser.checkValidFormat(timings[1]);
+        if (!startTimeIsValid || !endTimeIsValid) {
+            throw NewTaskInst.INVALID_DATE_TIME_FORMAT;
+        }
+
+        LocalDateTime startTime = DateTimeParser.parse(timings[0]);
+        LocalDateTime endTime = DateTimeParser.parse(timings[1]);
+
+        return new EventInst(split[0], startTime, endTime);
     }
 
     /**
-     * Gets the deadline for this task.
-     *
-     * @return the deadline for this task.
-     */
-    public String getTiming() {
-        return this.timing;
-    }
-
-    /**
-     * Adds an evennt task to the given taskList.
+     * Adds an event task to the given taskList.
      *
      * @param taskList the taskList to have an event task added to.
      * @return the feedback message after performing this instruction.
      */
     @Override
     public String doInst(TaskList taskList) {
-        EventTask task = new EventTask(super.getTaskDesc(), this.timing);
+        EventTask task = new EventTask(super.getTaskDesc(),
+                this.startTime, this.endTime);
         taskList.add(task);
         return String.format("Okay, added this task:\n%s\nThere are %d tasks " +
                 "in the list now."

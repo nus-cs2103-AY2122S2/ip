@@ -1,5 +1,7 @@
 package tasks;
 
+import java.time.LocalDateTime;
+
 /**
  * This class encapsulates an Event Task that occurs at a specific time frame.
  *
@@ -8,29 +10,34 @@ package tasks;
  * @author Ong Han Yang
  */
 public class EventTask extends Task {
-    /** start/end time of the event, temporarily as a String */
-    private String startEndTime;
+    /** start time of the event. */
+    private LocalDateTime startTime;
+    /** end time of the event. */
+    private LocalDateTime endTime;
 
     /**
      * Constructs an Event Task.
      *
      * @param desc description for the task.
-     * @param startEndTime the start/end time of the task.
+     * @param startTime the start/end time of the task.
      */
-    public EventTask(String desc, String startEndTime) {
+    public EventTask(String desc, LocalDateTime startTime, LocalDateTime endTime) {
         super(desc);
-        this.startEndTime = startEndTime;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     /**
      * Produces an Event Task.
      *
      * @param desc description for the task.
-     * @param startEndTime the start/end time of the task.
+     * @param startTime the start/end time of the task.
      * @return the Event Task.
      */
-    public static EventTask of(String desc, String startEndTime) {
-        return new EventTask(desc, startEndTime);
+    public static EventTask of(String desc,
+                               LocalDateTime startTime,
+                               LocalDateTime endTime) {
+        return new EventTask(desc, startTime, endTime);
     }
 
     /**
@@ -40,6 +47,13 @@ public class EventTask extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), startEndTime);
+        boolean isSameDay = startTime.toLocalDate().equals(endTime.toLocalDate());
+        return String.format("[E]%s (at: %s %s, until: %s)",
+                super.toString(),
+                startTime.toLocalDate(),
+                startTime.toLocalTime(),
+                isSameDay
+                        ? endTime.toLocalTime()
+                        : endTime.toLocalDate() + " " + endTime.toLocalTime());
     }
 }

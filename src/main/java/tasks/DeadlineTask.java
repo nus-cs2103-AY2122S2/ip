@@ -1,5 +1,7 @@
 package tasks;
 
+import java.time.LocalDateTime;
+
 /**
  * This class encapsulates a Deadline Task.
  *
@@ -8,8 +10,8 @@ package tasks;
  * @author Ong Han Yang
  */
 public class DeadlineTask extends Task{
-    /** The deadline for the task, temporarily in String format,*/
-    private String deadline;
+    /** The deadline for the task.*/
+    private LocalDateTime deadline;
 
     /**
      * Constructs a Deadline task.
@@ -17,7 +19,7 @@ public class DeadlineTask extends Task{
      * @param desc the description for the task.
      * @param deadline the deadline for the task.
      */
-    public DeadlineTask(String desc, String deadline) {
+    public DeadlineTask(String desc, LocalDateTime deadline) {
         super(desc);
         this.deadline = deadline;
     }
@@ -29,7 +31,7 @@ public class DeadlineTask extends Task{
      * @param deadline the deadline of the task.
      * @return the deadline task.
      */
-    public static DeadlineTask of(String desc, String deadline) {
+    public static DeadlineTask of(String desc, LocalDateTime deadline) {
         return new DeadlineTask(desc, deadline);
     }
 
@@ -40,6 +42,9 @@ public class DeadlineTask extends Task{
      */
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), deadline);
+        return String.format("[D]%s (by: %s %s)",
+                super.toString(),
+                deadline.toLocalDate(),
+                deadline.toLocalTime());
     }
 }

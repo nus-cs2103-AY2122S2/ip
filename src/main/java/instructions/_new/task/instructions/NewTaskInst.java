@@ -31,6 +31,11 @@ public abstract class NewTaskInst extends Instruction {
     protected static final InvalidInputException MISSING_SPACES_EXCEPTION
             = new InvalidInputException("There are missing spaces in the command!");
 
+    /** Reusable Invalid Input Exception for when the input command has missing
+     * spaces */
+    protected static final InvalidInputException INVALID_DATE_TIME_FORMAT
+            = new InvalidInputException("The date/time format is wrong!");
+
     /** The provided description for the task to be added */
     private String taskDesc;
 
