@@ -45,7 +45,17 @@ public class UI {
         System.out.printf("                   .'         /\n");
         System.out.printf("                 .'          /\n");
         System.out.printf("               ,'           /\n");
-        System.out.printf("             _'....----\"\"\"\"\" \n");
+        System.out.printf("             _'....----\"\"\"\"\" \n\n");
+    }
+
+    public static void printCommands() {
+        System.out.println("The available commands are:\ncommands: See list of commands\nlist: See list of current tasks");
+        System.out.println("mark: Mark a task as completed. Syntax: mark <index of task>");
+        System.out.println("unmark: Mark a task as not completed. Syntax: unmark <index of task>");
+        System.out.println("delete: Delete a task. Syntax: delete <index of task>");
+        System.out.println("todo: Create a todo task. Syntax: todo <taskname>");
+        System.out.println("deadline: Create a deadline. Syntax: deadline <taskname> /<yy-mm-dd hhmm of deadline>");
+        System.out.println("event: Create an event. Syntax: event <taskname> /<yy-mm-dd hhmm of start> <yymmdd hhmm of end>");
     }
 
     public static void printGoodbye() {

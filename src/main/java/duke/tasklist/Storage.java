@@ -2,6 +2,8 @@ package duke.tasklist;
 import java.io.*;
 import java.util.*;
 import duke.tasks.*;
+import java.time.*;
+import java.time.format.*;
 import duke.Pikachu;
 
 public class Storage {
@@ -32,11 +34,17 @@ public class Storage {
                 this.pikachu.inputList.add(t);
                 if (split[1].equals("1")) t.mark(); 
             } else if (split[0].equals("D")) {
-                Deadline d = new Deadline(split[2], split[3]);
+                LocalDateTime deadline = LocalDateTime.of(Integer.parseInt(split[3]), Integer.parseInt(split[4]), 
+                        Integer.parseInt(split[5]), Integer.parseInt(split[6]), Integer.parseInt(split[7]));
+                Deadline d = new Deadline(split[2], deadline);
                 this.pikachu.inputList.add(d);
                 if (split[1].equals("1")) d.mark(); 
             } else if (split[0].equals("E")) {
-                Event e = new Event(split[2], split[3]);
+                LocalDateTime start = LocalDateTime.of(Integer.parseInt(split[3]), Integer.parseInt(split[4]), 
+                        Integer.parseInt(split[5]), Integer.parseInt(split[6]), Integer.parseInt(split[7]));
+                LocalDateTime end = LocalDateTime.of(Integer.parseInt(split[8]), Integer.parseInt(split[9]), 
+                        Integer.parseInt(split[10]), Integer.parseInt(split[11]), Integer.parseInt(split[12]));
+                Event e = new Event(split[2], start, end);
                 this.pikachu.inputList.add(e);
                 if (split[1].equals("1")) e.mark(); 
             }

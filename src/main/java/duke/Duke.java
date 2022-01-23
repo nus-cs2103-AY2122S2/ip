@@ -9,6 +9,7 @@ public class Duke {
 
     public static void main(String[] args) throws IOException {
         UI.printGreeting();
+        UI.printCommands();
         Scanner sc = new Scanner(System.in);
         String currInput = null;
         Pikachu pikachu = new Pikachu();
@@ -22,6 +23,11 @@ public class Duke {
 
             System.out.println("________________________________________________________________");
             System.out.println("Pikachu says:");
+            if (currInput.toLowerCase().equals("commands")) { //if user input == commands, print commands
+                UI.printCommands();
+                System.out.println("________________________________________________________________");
+                continue;
+            } 
             pikachu.parseInput(currInput); //passes the current input to pikachu
             System.out.println("________________________________________________________________");
         }
