@@ -1,4 +1,4 @@
-package duke;
+package duke.functionality;
 
 import duke.exception.BlankCommandException;
 

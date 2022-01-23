@@ -1,4 +1,4 @@
-package duke;
+package duke.functionality;
 
 import duke.task.Deadline;
 import duke.task.Event;
@@ -58,13 +58,15 @@ public class Storage {
                 }
                 storeToList(tempTask);
             } else if(task.equals("D")) {
-                Deadline tempTask = new Deadline(inputSplit[2],inputSplit[3]);
+                Deadline tempTask = new Deadline(inputSplit[2], Parser.formatDate(inputSplit[3]),
+                        Parser.formatTime(inputSplit[4]));
                 if(mark == 1) {
                     tempTask.setTaskDone();
                 }
                 storeToList(tempTask);
             } else if (task.equals("E")) {
-                Event tempTask = new Event(inputSplit[2],inputSplit[3]);
+                Event tempTask = new Event(inputSplit[2], Parser.formatDate(inputSplit[3]) ,
+                        Parser.formatTime(inputSplit[4]), Parser.formatTime(inputSplit[5]));
                 if(mark == 1) {
                     tempTask.setTaskDone();
                 }
@@ -84,15 +86,21 @@ public class Storage {
             }
         } else if(t instanceof Deadline) {
             if(doneIcon.equals("X")) {
-                output = "D|1|" + t.getDescription() + "|" + ((Deadline) t).getBy();
+                output = "D|1|" + t.getDescription() + "|" + Parser.dateToString(((Deadline) t).getDate())
+                        + "|" + Parser.timeToString(((Deadline) t).getTime());
             } else {
-                output = "D|0|" + t.getDescription() + "|" + ((Deadline) t).getBy();
+                output = "D|0|" + t.getDescription() + "|" + Parser.dateToString(((Deadline) t).getDate())
+                        + "|" + Parser.timeToString(((Deadline) t).getTime());
             }
         } else if(t instanceof Event) {
             if(doneIcon.equals("X")) {
-                output = "E|1|" + t.getDescription() + "|" + ((Event) t).getAt();
+                output = "E|1|" + t.getDescription() + "|" + Parser.dateToString(((Event) t).getDate())
+                        + "|" + Parser.timeToString(((Event) t).getStartTime())
+                        + "|" + Parser.timeToString(((Event) t).getEndTime());
             } else {
-                output = "E|0|" + t.getDescription() + "|" + ((Event) t).getAt();
+                output = "E|0|" + t.getDescription() + "|" + Parser.dateToString(((Event) t).getDate())
+                        + "|" + Parser.timeToString(((Event) t).getStartTime())
+                        + "|" + Parser.timeToString(((Event) t).getEndTime());
             }
         }
         return output;

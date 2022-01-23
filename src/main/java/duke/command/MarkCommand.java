@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.TaskList;
+import duke.functionality.TaskList;
 
 public class MarkCommand extends Command {
 
