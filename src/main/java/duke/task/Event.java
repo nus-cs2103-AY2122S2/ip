@@ -1,4 +1,3 @@
-
 package duke.task;
 
 import java.time.LocalDate;
@@ -28,15 +27,15 @@ public class Event extends Task {
         this.endTime = endTime;
     }
 
-    public LocalDate getDate(){
+    public LocalDate getDate() {
         return this.date;
     }
 
-    public LocalTime getStartTime(){
+    public LocalTime getStartTime() {
         return this.startTime;
     }
 
-    public LocalTime getEndTime(){
+    public LocalTime getEndTime() {
         return this.endTime;
     }
 

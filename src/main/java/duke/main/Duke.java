@@ -14,7 +14,6 @@ import duke.exception.DukeException;
  * to a TaskBot that helps keep tracks of all tasks inputted by a user.
  */
 public class Duke {
-
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;

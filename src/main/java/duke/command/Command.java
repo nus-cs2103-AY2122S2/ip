@@ -12,11 +12,11 @@ public abstract class Command{
 
     /**
      * Constructor of Command class.
-     * @param t task object created from user input.
+     * @param task task object created from user input.
      * @param number an indicator to the index of the taskList in TaskList class.
      */
-    public Command(Task t, Integer number) {
-        this.task = t;
+    public Command(Task task, Integer number) {
+        this.task = task;
         this.index = number;
     }
 

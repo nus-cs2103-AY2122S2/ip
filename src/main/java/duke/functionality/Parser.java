@@ -25,7 +25,6 @@ import duke.exception.InvalidCommandException;
  * to the actions taken to parse and format user inputs.
  */
 public class Parser {
-
     private static final int EVENT_OFFSET = 5;
     private static final int TODO_OFFSET = 4;
     private static final int DEADLINE_OFFSET = 8;
@@ -110,10 +109,10 @@ public class Parser {
             String[] splitDuration = durationInput.split(" ");
             LocalDate date;
             LocalTime time;
-            try{
+            try {
                 date = formatDate(splitDuration[0]);
                 time = formatTime(splitDuration[1]);
-            } catch(DateTimeParseException e) {
+            } catch (DateTimeParseException e) {
                 throw new DukeException("The expected input form is deadline ____ /by yyyy-mm-dd hhmm");
             }
 
@@ -132,11 +131,11 @@ public class Parser {
             LocalDate date;
             LocalTime startTime;
             LocalTime endTime;
-            try{
+            try {
                 date = formatDate(splitDuration[0]);
                 startTime = formatTime(splitDuration[1]);
                 endTime = formatTime(splitDuration[2]);
-            } catch(DateTimeParseException e) {
+            } catch (DateTimeParseException e) {
                 throw new DukeException("The expected input form is event ____ /at yyyy-mm-dd hhmm hhmm");
             }
 

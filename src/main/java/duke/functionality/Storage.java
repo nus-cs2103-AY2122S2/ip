@@ -32,10 +32,10 @@ public class Storage {
 
     /**
      * Returns nothing, but stores the specified task into the taskList in TaskList class.
-     * @param t the task created in Parser class.
+     * @param task the task created in Parser class.
      */
-    public static void storeToList(Task t) { //same as addToList but no printing
-        TaskList.taskList.add(t);
+    public static void storeToList(Task task) { //same as addToList but no printing
+        TaskList.taskList.add(task);
         TaskList.numOfTask++;
     }
 
@@ -46,9 +46,9 @@ public class Storage {
      */
     public static void writeToFile(String path) throws IOException {
         FileWriter fw = new FileWriter(path);
-        for(int i = 0; i < TaskList.numOfTask; i++) {
-            Task t = TaskList.taskList.get(i);
-            fw.write(craftOutput(t));
+        for (int i = 0; i < TaskList.numOfTask; i++) {
+            Task task = TaskList.taskList.get(i);
+            fw.write(craftOutput(task));
             fw.write(System.lineSeparator());
         }
         fw.close();
@@ -67,33 +67,33 @@ public class Storage {
 
     /**
      * Returns nothing, but reads the input from the specified file and stores them in the taskList in TaskList class.
-     * @param f the text file that stores all tasks.
+     * @param file the text file that stores all tasks.
      * @throws FileNotFoundException if the file is missing.
      */
-    public static void readFileDataAndStoreInList(File f) throws FileNotFoundException {
-        Scanner sc = new Scanner(f);
+    public static void readFileDataAndStoreInList(File file) throws FileNotFoundException {
+        Scanner sc = new Scanner(file);
         while ((sc.hasNextLine())) {
             String input = sc.nextLine();
             String[] inputSplit = input.split("\\|"); //split input by |
             String task = inputSplit[0];
             Integer mark = Integer.parseInt(inputSplit[1]);
-            if(task.equals("T")) {
+            if (task.equals("T")) {
                 Todo tempTask = new Todo(inputSplit[2]);
-                if(mark == 1) {
+                if (mark == 1) {
                     tempTask.setTaskDone();
                 }
                 storeToList(tempTask);
-            } else if(task.equals("D")) {
+            } else if (task.equals("D")) {
                 Deadline tempTask = new Deadline(inputSplit[2], Parser.formatDate(inputSplit[3]),
                         Parser.formatTime(inputSplit[4]));
-                if(mark == 1) {
+                if (mark == 1) {
                     tempTask.setTaskDone();
                 }
                 storeToList(tempTask);
             } else if (task.equals("E")) {
                 Event tempTask = new Event(inputSplit[2], Parser.formatDate(inputSplit[3]) ,
                         Parser.formatTime(inputSplit[4]), Parser.formatTime(inputSplit[5]));
-                if(mark == 1) {
+                if (mark == 1) {
                     tempTask.setTaskDone();
                 }
                 storeToList(tempTask);
@@ -103,35 +103,35 @@ public class Storage {
 
     /**
      * Returns a crafted output to be stored in the text file.
-     * @param t the task created in Parser class.
+     * @param task the task created in Parser class.
      * @return crafted output.
      */
-    public static String craftOutput(Task t) {
+    public static String craftOutput(Task task) {
         String output = "";
-        String doneIcon = t.getStatusIcon();
-        if(t instanceof Todo) {
+        String doneIcon = task.getStatusIcon();
+        if (task instanceof Todo) {
             if(doneIcon.equals("X")) {
-                output = "T|1|" + t.getDescription();
+                output = "T|1|" + task.getDescription();
             } else {
-                output = "T|0|" + t.getDescription();
+                output = "T|0|" + task.getDescription();
             }
-        } else if(t instanceof Deadline) {
+        } else if (task instanceof Deadline) {
             if(doneIcon.equals("X")) {
-                output = "D|1|" + t.getDescription() + "|" + Parser.dateToString(((Deadline) t).getDate())
-                        + "|" + Parser.timeToString(((Deadline) t).getTime());
+                output = "D|1|" + task.getDescription() + "|" + Parser.dateToString(((Deadline) task).getDate())
+                        + "|" + Parser.timeToString(((Deadline) task).getTime());
             } else {
-                output = "D|0|" + t.getDescription() + "|" + Parser.dateToString(((Deadline) t).getDate())
-                        + "|" + Parser.timeToString(((Deadline) t).getTime());
+                output = "D|0|" + task.getDescription() + "|" + Parser.dateToString(((Deadline) task).getDate())
+                        + "|" + Parser.timeToString(((Deadline) task).getTime());
             }
-        } else if(t instanceof Event) {
+        } else if (task instanceof Event) {
             if(doneIcon.equals("X")) {
-                output = "E|1|" + t.getDescription() + "|" + Parser.dateToString(((Event) t).getDate())
-                        + "|" + Parser.timeToString(((Event) t).getStartTime())
-                        + "|" + Parser.timeToString(((Event) t).getEndTime());
+                output = "E|1|" + task.getDescription() + "|" + Parser.dateToString(((Event) task).getDate())
+                        + "|" + Parser.timeToString(((Event) task).getStartTime())
+                        + "|" + Parser.timeToString(((Event) task).getEndTime());
             } else {
-                output = "E|0|" + t.getDescription() + "|" + Parser.dateToString(((Event) t).getDate())
-                        + "|" + Parser.timeToString(((Event) t).getStartTime())
-                        + "|" + Parser.timeToString(((Event) t).getEndTime());
+                output = "E|0|" + task.getDescription() + "|" + Parser.dateToString(((Event) task).getDate())
+                        + "|" + Parser.timeToString(((Event) task).getStartTime())
+                        + "|" + Parser.timeToString(((Event) task).getEndTime());
             }
         }
         return output;
@@ -144,10 +144,10 @@ public class Storage {
     public void load() throws IOException {
         File directory = new File(pwd + "/data");
         File inputFile = new File(pwd + path);
-        if(directory.mkdir()) {
+        if (directory.mkdir()) {
             System.out.println("You do not have the Directory, do not worry! I will create the directory for you");
         }
-        if(inputFile.createNewFile()) {
+        if (inputFile.createNewFile()) {
             System.out.println("You do not have the file, do not worry! I will create the file for you");
         }
         readFileDataAndStoreInList(inputFile);
