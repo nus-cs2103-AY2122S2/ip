@@ -9,7 +9,6 @@ public class Deadline extends Task{
     public Deadline(String taskName, String dateTime) throws DukeException {
         super(taskName);
         dateTime = dateTime.trim();
-        System.out.println(dateTime);
         String[] spl = dateTime.split(" ");
         if(spl.length == 1) {
             try {

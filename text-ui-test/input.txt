@@ -1,5 +1,9 @@
-todo borrow book
+todo t1
+event e1 /at 1999-01-01 23:30
+deadline d1 /by 1999-09-09 23:12
+event e2 /at 1999-01-01
+deadline d2 /by 1999-09-09
 list
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
-bye
+mark 1
+unmark 1
+delete 1
