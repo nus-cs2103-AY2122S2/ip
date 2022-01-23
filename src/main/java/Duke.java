@@ -9,7 +9,7 @@ public class Duke {
     public static String firstSixChar;
     public static String firstSevenChar;
     public static String firstEightChar;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoDescException, InvalidInputException{
         // Declare Task ArrayList to keep tasks and starting Task number
         taskList = new ArrayList<>();
         // Print welcome message
@@ -19,64 +19,81 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         // Loop to keep getting input until bye
         while (true) {
-            String input = scanner.nextLine();
-            int inputLength = input.length();
-            // setFirstChars
-            setFirstChars(input,inputLength);
-            if (firstThreeChar.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
+            try {
+                String input = scanner.nextLine();
+                int inputLength = input.length();
+                // setFirstChars
+                setFirstChars(input,inputLength);
+                if (firstThreeChar.equals("bye")) {
+                    System.out.println("Bye. Hope to see you again soon!");
+                    printLine();
+                    break;
+                }
+                if (firstFourChar.equals("list")) {
+                    printTaskList();
+                    continue;
+                }
+                if (firstFourChar.equals("mark")) {
+                    int selectedTaskNum = Character.getNumericValue(input.charAt(inputLength-1));
+                    Task selectedTask = taskList.get(selectedTaskNum-1);
+                    selectedTask.markAsDone();
+                    System.out.println(String.format("Ok, I've marked this task as done:\n%s",selectedTask.toString()));
+                    printLine();
+                    continue;
+                }
+                if (firstFourChar.equals("todo")) {
+                    // if no description, throw error
+                    if(input.equals("todo")) {
+                        throw new NoDescException("todo");
+                    }
+                    String description = input.substring(5,inputLength);
+                    Todo newTask = new Todo(description);
+                    taskList.add(newTask);
+                    printAddedAck(newTask);
+                    printLine();
+                    continue;
+                }
+                if (firstFiveChar.equals("event")){
+                    String descriptionAndSetAt = input.substring(6,inputLength);
+                    String[] split = descriptionAndSetAt.split("/");
+                    Event newTask = new Event(split[0], split[1]);
+                    taskList.add(newTask);
+                    printAddedAck(newTask);
+                    printLine();
+                    continue;
+                }
+                if (firstSixChar.equals("unmark")) {
+                    int selectedTaskNum = Character.getNumericValue(input.charAt(inputLength-1));
+                    Task selectedTask = taskList.get(selectedTaskNum-1);
+                    selectedTask.markAsUndone();
+                    System.out.println(String.format("Ok, I've marked this task as not done yet:\n%s",selectedTask.toString()));
+                    printLine();
+                    continue;
+                }
+                if (firstSixChar.equals("delete")) {
+                    int selectedTaskNum = Character.getNumericValue(input.charAt(inputLength-1));
+                    Task selectedTask = taskList.get(selectedTaskNum-1);
+                    taskList.remove(selectedTaskNum-1);
+                    printRemovedAck(selectedTask);
+                    printLine();
+                    continue;
+                }
+                if (firstEightChar.equals("deadline")) {
+                    String descriptionAndDueBy = input.substring(9,inputLength);
+                    String[] split = descriptionAndDueBy.split("/");
+                    Deadline newTask = new Deadline(split[0], split[1]);
+                    taskList.add(newTask);
+                    printAddedAck(newTask);
+                    printLine();
+                    continue;
+                } else {
+                    throw new InvalidInputException("Invalid Input");
+                }
+            } catch(NoDescException error) {
+                System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
                 printLine();
-                break;
-            }
-            if (firstFourChar.equals("list")) {
-                printTaskList();
-                continue;
-            }
-            if (firstFourChar.equals("mark")) {
-                int selectedTaskNum = Character.getNumericValue(input.charAt(inputLength-1));
-                Task selectedTask = taskList.get(selectedTaskNum-1);
-                selectedTask.markAsDone();
-                System.out.println(String.format("Ok, I've marked this task as done:\n%s",selectedTask.toString()));
-                printLine();
-                continue;
-            }
-            if (firstFourChar.equals("todo")) {
-                String description = input.substring(5,inputLength);
-                Todo newTask = new Todo(description);
-                taskList.add(newTask);
-                printAck(newTask);
-                printLine();
-                continue;
-            }
-            if (firstFiveChar.equals("event")){
-                String descriptionAndSetAt = input.substring(6,inputLength);
-                String[] split = descriptionAndSetAt.split("/");
-                Event newTask = new Event(split[0], split[1]);
-                taskList.add(newTask);
-                printAck(newTask);
-                printLine();
-                continue;
-            }
-            if (firstSixChar.equals("unmark")) {
-                int selectedTaskNum = Character.getNumericValue(input.charAt(inputLength-1));
-                Task selectedTask = taskList.get(selectedTaskNum-1);
-                selectedTask.markAsUndone();
-                System.out.println(String.format("Ok, I've marked this task as not done yet:\n%s",selectedTask.toString()));
-                printLine();
-                continue;
-            }
-            if (firstEightChar.equals("deadline")) {
-                String descriptionAndDueBy = input.substring(9,inputLength);
-                String[] split = descriptionAndDueBy.split("/");
-                Deadline newTask = new Deadline(split[0], split[1]);
-                taskList.add(newTask);
-                printAck(newTask);
-                printLine();
-                continue;
-            } else {
-                System.out.println("added: " + input);
-                Task newTask = new Task(input);
-                taskList.add(newTask);
+            } catch(Exception error) {
+                System.out.println("☹ OOPS!!! I'm sorry but I don't know what that means :-(");
                 printLine();
             }
         }
@@ -85,8 +102,11 @@ public class Duke {
     private static void printLine() {
         System.out.println("--------------------------------------------------");
     }
-    private static void printAck(Task task) {
+    private static void printAddedAck(Task task) {
         System.out.println(String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list",task.toString(),taskList.size()));
+    }
+    private static void printRemovedAck(Task task) {
+        System.out.println(String.format("Noted. I've removed this task:\n%s\nNow you have %d tasks in the list",task.toString(),taskList.size()));
     }
 
     private static void printTaskList() {
