@@ -107,6 +107,7 @@ public class Fluffers extends TaskManagerChatbot {
         } catch (InvalidInputException e) {
             return this.speak(e.getMessage());
         }
+        // check for special inst
         if (inst instanceof ExitInst) {
             this.isAwake = false;
             return farewell();
@@ -115,6 +116,7 @@ public class Fluffers extends TaskManagerChatbot {
             return String.format("%s\n%s\n------------------", AsciiArt.LIST_TOP.art
                     , super.instHandler.doInstruction(inst));
         }
+
         return this.speak(super.instHandler.doInstruction(inst));
     }
 

@@ -37,7 +37,7 @@ public class TaskList {
      * Constructs a taskList.
      */
     public TaskList() {
-        this.list = new ArrayList<>();
+        this.list = new ArrayList<Task>();
     }
 
     /**
@@ -67,7 +67,8 @@ public class TaskList {
      * @return the removed task.
      */
     public Task delete(int taskIndex) throws NoSuchTaskException {
-        if (taskIndex >= this.list.size() || taskIndex < 0) {
+        boolean isWithinIndex = taskIndex > 0 && taskIndex < this.list.size();
+        if (!isWithinIndex) {
             throw new NoSuchTaskException("There is no task with index " + taskIndex);
         }
         Task output = this.list.remove(taskIndex);
@@ -92,7 +93,8 @@ public class TaskList {
      * @throws NoSuchTaskException when there is no such task with the index taskNum.
      */
     public void markTask(int taskIndex, boolean isDone) throws NoSuchTaskException {
-        if (taskIndex >= this.list.size() || taskIndex < 0) {
+        boolean isWithinIndex = taskIndex > 0 && taskIndex < this.list.size();
+        if (!isWithinIndex) {
             throw new NoSuchTaskException("There is no task with index " + taskIndex);
         }
         this.list.get(taskIndex).markAs(isDone);
@@ -107,7 +109,8 @@ public class TaskList {
      * @throws NoSuchTaskException when there is no such task with the index taskNum.
      */
     public String displayTask(int taskIndex) throws NoSuchTaskException {
-        if (taskIndex >= this.list.size() || taskIndex < 0) {
+        boolean isWithinIndex = taskIndex > 0 && taskIndex < this.list.size();
+        if (!isWithinIndex) {
             throw new NoSuchTaskException("There is no task with index " + taskIndex);
         }
         return this.list.get(taskIndex).toString();
@@ -148,7 +151,7 @@ public class TaskList {
             FileWriter fileWriter = new FileWriter(combinedFilePath);
             fileWriter.write(this.toString());
             fileWriter.close();
-            //System.out.println("Successfully wrote to the file.");
+
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
@@ -169,6 +172,7 @@ public class TaskList {
         try {
             File file = new File(filePath + "/" + fileName);
             Scanner sc = new Scanner(file);
+            // parses each line
             while (sc.hasNextLine()) {
                 String data = sc.nextLine();
                 Task task = TaskList.parseLine(data);
@@ -232,10 +236,9 @@ public class TaskList {
 
             // if the format is the shortened form of hh:mm
             if (!DateTimeParser.checkValidFormat(end) && end.length() == 5) {
-                int hour = Integer.parseInt(end.substring(0,2));
-                int min = Integer.parseInt(end.substring(3,5));
-                endTime = LocalDateTime.of(startTime.toLocalDate(),
-                        LocalTime.of(hour, min));
+                int hour = Integer.parseInt(end.substring(0, 2));
+                int min = Integer.parseInt(end.substring(3, 5));
+                endTime = LocalDateTime.of(startTime.toLocalDate(), LocalTime.of(hour, min));
             } else {
                 endTime = DateTimeParser.parse(end);
             }

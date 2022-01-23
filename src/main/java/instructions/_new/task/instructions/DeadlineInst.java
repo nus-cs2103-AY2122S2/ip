@@ -41,8 +41,7 @@ public class DeadlineInst extends NewTaskInst {
      *          provided, when either the timing or description is omitted, or when the given
      *          time/date format is wrong.
      */
-    public static DeadlineInst of(String taskDetails)
-            throws InvalidInputException {
+    public static DeadlineInst of(String taskDetails) throws InvalidInputException {
         String[] split = taskDetails.split(" /by ");
         // a correct format will produce a String[2].
 
@@ -77,8 +76,6 @@ public class DeadlineInst extends NewTaskInst {
         return this.deadline;
     }
 
-
-
     /**
      * Adds a deadline task to the given taskList.
      *
@@ -89,8 +86,7 @@ public class DeadlineInst extends NewTaskInst {
     public String doInst(TaskList taskList) {
         DeadlineTask task = DeadlineTask.of(super.getTaskDesc(), this.deadline);
         taskList.add(task);
-        return String.format("Okay, added this task:\n%s\nThere are %d tasks " +
-                "in the list now."
+        return String.format("Okay, added this task:\n%s\nThere are %d tasks in the list now."
                 , task, taskList.length());
     }
 }

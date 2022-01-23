@@ -41,8 +41,7 @@ public abstract class ModifyListedTaskInst extends Instruction {
      * @throws InvalidInputException when no task number is provided, or the provided task number
      *          is not an integer.
      */
-    public static ModifyListedTaskInst of(String input)
-            throws InvalidInputException {
+    public static ModifyListedTaskInst of(String input) throws InvalidInputException {
 
         // for task number validation
         String[] split = input.split(" ", 2);
