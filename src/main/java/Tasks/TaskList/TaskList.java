@@ -1,30 +1,44 @@
-package Tasks;
+package Tasks.TaskList;
 
+import SparkExceptions.FileExceptions.FileException;
+import SparkExceptions.FileExceptions.TaskDecodingException;
 import SparkExceptions.FormatExceptions.EmptyDateException;
 import SparkExceptions.FormatExceptions.EmptyTitleException;
 import SparkExceptions.TaskModificationExceptions.InvalidTaskIdException;
 import SparkExceptions.TaskModificationExceptions.TaskAlreadyMarked;
 import SparkExceptions.TaskModificationExceptions.TaskAlreadyUnMarked;
 import SparkExceptions.TaskModificationExceptions.TaskNotFoundException;
+import Tasks.TaskTypes.Deadline;
+import Tasks.TaskTypes.Event;
+import Tasks.TaskTypes.Task;
+import Tasks.TaskTypes.ToDo;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
 
 public class TaskList {
-    private final List<Task> tasks;
+    protected List<Task> tasks;
+    private final TaskFile taskFile;
 
-    public TaskList() {
-        this.tasks = new ArrayList<>(100);
+    public TaskList() throws FileException, TaskDecodingException {
+        // read the save-file from the user's hard-disk
+        this.taskFile = new TaskFile();
+
+        // read the Tasks from the save-file
+        this.tasks = taskFile.readTasksFile();
     }
 
-    public void addToDo(String[] tokens) throws EmptyTitleException {
+    public void addToDo(String[] tokens) throws EmptyTitleException, FileException {
         List<String> words = new ArrayList<>(Arrays.asList(tokens).subList(1, tokens.length));
         String title = String.join(" ", words);
-        if (title.equals("")) { // ToDo must have a title
+        if (title.equals("")) { // To-Do must have a title
             throw new EmptyTitleException();
         }
 
         ToDo toDo = new ToDo(title);
         tasks.add(toDo);
+        taskFile.writeNewTaskToTaskFile(toDo);
 
         System.out.println("Got it, I've added this todo:");
         System.out.format("   %s\n", toDo);
@@ -32,7 +46,7 @@ public class TaskList {
         showNumberOfTasks();
     }
 
-    public void addDeadline(String[] tokens) throws EmptyTitleException, EmptyDateException {
+    public void addDeadline(String[] tokens) throws EmptyTitleException, EmptyDateException, FileException {
         List<String> firstHalf = new ArrayList<>();
         List<String> secondHalf = new ArrayList<>();
 
@@ -62,6 +76,7 @@ public class TaskList {
 
         Deadline deadline = new Deadline(title, by);
         tasks.add(deadline);
+        taskFile.writeNewTaskToTaskFile(deadline);
 
         System.out.println("Got it, I've added this deadline:");
         System.out.format("   %s\n", deadline);
@@ -69,7 +84,7 @@ public class TaskList {
         showNumberOfTasks();
     }
 
-    public void addEvent(String[] tokens) throws EmptyTitleException, EmptyDateException {
+    public void addEvent(String[] tokens) throws EmptyTitleException, EmptyDateException, FileException {
         List<String> firstHalf = new ArrayList<>();
         List<String> secondHalf = new ArrayList<>();
 
@@ -99,6 +114,7 @@ public class TaskList {
 
         Event event = new Event(title, at);
         tasks.add(event);
+        taskFile.writeNewTaskToTaskFile(event);
 
         System.out.println("Got it, I've added this event:");
         System.out.format("   %s\n", event);

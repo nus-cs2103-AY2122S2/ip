@@ -1,14 +1,31 @@
-package Tasks;
+package Tasks.TaskTypes;
 
 import SparkExceptions.TaskModificationExceptions.TaskAlreadyMarked;
 import SparkExceptions.TaskModificationExceptions.TaskAlreadyUnMarked;
 
-public class Task {
+public abstract class Task {
     protected String title;
     protected boolean done;
 
-    public Task(String name) {
-        this.title = name;
+    /**
+     * Creates a new Task.
+     *
+     * @param title
+     */
+    protected Task(String title) {
+        this.title = title;
+    }
+
+    /**
+     * Generates a new Task and initialises it with the
+     * given completion status.
+     *
+     * @param isDone
+     * @param title
+     */
+    protected Task(boolean isDone, String title) {
+        this.title = title;
+        this.done = isDone;
     }
 
     public String getTitle() {
@@ -31,9 +48,15 @@ public class Task {
         this.done = false;
     }
 
-    public String getStatusIcon() {
+    public boolean isDone() {
+        return this.done;
+    }
+
+    private String getStatusIcon() {
         return this.done ? "[X]" : "[]";
     }
+
+    public abstract String encodeTask();
 
     @Override
     public String toString() {

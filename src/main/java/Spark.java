@@ -1,13 +1,11 @@
-import java.util.*;
 import java.util.Scanner;
 
 import SparkExceptions.FormatExceptions.*;
 import SparkExceptions.SparkException;
-import Tasks.TaskList;
+import Tasks.TaskList.TaskList;
 
 public class Spark {
-    public static void main(String[] args) {
-        // assuming that there will be no more than 100 tasks,
+    public static void main(String[] args) throws SparkException {
         TaskList taskList = new TaskList();
 
         Scanner sc = new Scanner(System.in);

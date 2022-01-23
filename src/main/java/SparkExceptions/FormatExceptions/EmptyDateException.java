@@ -2,7 +2,7 @@ package SparkExceptions.FormatExceptions;
 
 /**
  * An exception thrown when the user attempts to create a new
- * Tasks.Deadline or Tasks.Event with no name.
+ * Tasks.TaskTypes.Deadline or Tasks.TaskTypes.Event with no name.
  */
 public class EmptyDateException extends FormatException {
     public EmptyDateException() {

@@ -1,7 +1,7 @@
 package SparkExceptions.TaskModificationExceptions;
 
 import SparkExceptions.SparkException;
-import Tasks.Task;
+import Tasks.TaskTypes.Task;
 
 public class TaskAlreadyUnMarked extends SparkException {
     public TaskAlreadyUnMarked(Task t) {
