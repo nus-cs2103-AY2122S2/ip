@@ -13,7 +13,7 @@ public class DeleteCommand extends Command {
      * @param number an indicator to the index of the taskList in TaskList class.
      */
     public DeleteCommand(Integer number) {
-        super(null, number);
+        super(null, number, null);
     }
 
     /**

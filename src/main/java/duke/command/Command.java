@@ -9,15 +9,17 @@ import duke.functionality.TaskList;
 public abstract class Command{
     protected Task task;
     protected Integer index;
+    protected String word;
 
     /**
      * Constructor of Command class.
      * @param task task object created from user input.
      * @param number an indicator to the index of the taskList in TaskList class.
      */
-    public Command(Task task, Integer number) {
+    public Command(Task task, Integer number, String word) {
         this.task = task;
         this.index = number;
+        this.word = word;
     }
 
     /**

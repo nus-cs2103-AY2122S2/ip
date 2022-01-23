@@ -6,13 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 
-import duke.command.Command;
-import duke.command.AddCommand;
-import duke.command.DeleteCommand;
-import duke.command.PrintCommand;
-import duke.command.UnmarkCommand;
-import duke.command.ExitCommand;
-import duke.command.MarkCommand;
+import duke.command.*;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -149,6 +143,9 @@ public class Parser {
 
         } else if (command.equals("delete")) {
             return new DeleteCommand(Integer.parseInt(inputSplit[1]));
+
+        } else if(command.equals("find")) {
+            return new FindCommand(inputSplit[1]);
 
         } else {
             throw new InvalidCommandException();

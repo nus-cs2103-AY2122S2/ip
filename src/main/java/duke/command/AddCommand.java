@@ -9,12 +9,13 @@ import duke.functionality.TaskList;
  */
 public class AddCommand extends Command {
 
+
     /**
      * Constructor of AddCommand class.
      * @param task task object created from user input.
      */
     public AddCommand(Task task) {
-        super(task, null);
+        super(task, null, null);
     }
 
     /**

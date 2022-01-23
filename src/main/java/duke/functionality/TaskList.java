@@ -80,4 +80,16 @@ public class TaskList {
         Storage.updateTextFile();
         System.out.println(message + task.toString() + "\nNow you have " + numOfTask + " tasks in the list.");
     }
+
+    public void findWord(String word) {
+        String message = "Here are the matching tasks in your list:\n";
+        System.out.print(message);
+        for(int i = 0; i < numOfTask; i++) {
+            Task t = taskList.get(i);
+            if(t.getDescription().contains(word)) {
+                String output = i + 1 + "." + t.toString();
+                System.out.println(output);
+            }
+        }
+    }
 }

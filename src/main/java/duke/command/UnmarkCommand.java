@@ -13,7 +13,7 @@ public class UnmarkCommand extends Command{
      * @param number an indicator to the index of the taskList in TaskList class.
      */
     public UnmarkCommand(Integer number) {
-        super(null, number);
+        super(null, number, null);
     }
 
     /**
