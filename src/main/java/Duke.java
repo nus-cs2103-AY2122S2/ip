@@ -1,4 +1,4 @@
-import Duke.Managers.DukeManager;
+import duke.managers.DukeManager;
 
 public class Duke {
     public static void main(String[] args) {

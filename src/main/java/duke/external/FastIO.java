@@ -1,4 +1,4 @@
-package Duke.External;
+package duke.external;
 
 import java.io.*;
 import java.util.StringTokenizer;

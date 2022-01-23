@@ -1,6 +1,6 @@
-package Duke.Managers;
+package duke.managers;
 
-import Duke.External.FastIO;
+import duke.external.FastIO;
 
 public class Ui {
 

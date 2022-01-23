@@ -1,8 +1,8 @@
-package Duke.Managers;
+package duke.managers;
 
-import Duke.Commands.*;
-import Duke.Tasks.*;
-import Duke.Exception.DukeException;
+import duke.commands.*;
+import duke.tasks.*;
+import duke.exceptions.DukeException;
 
 public class Parser {
     public Command parse(String input) throws DukeException {

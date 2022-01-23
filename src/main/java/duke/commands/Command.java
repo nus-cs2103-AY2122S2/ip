@@ -1,9 +1,9 @@
-package Duke.Commands;
+package duke.commands;
 
-import Duke.Exception.DukeException;
-import Duke.Managers.TaskList;
-import Duke.Managers.Ui;
-import Duke.Managers.Storage;
+import duke.exceptions.DukeException;
+import duke.managers.TaskList;
+import duke.managers.Ui;
+import duke.managers.Storage;
 
 public abstract class Command {
     protected boolean exit = false;

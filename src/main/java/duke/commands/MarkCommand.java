@@ -1,10 +1,10 @@
-package Duke.Commands;
+package duke.commands;
 
-import Duke.Managers.TaskList;
-import Duke.Managers.Ui;
-import Duke.Managers.Storage;
-import Duke.Tasks.Task;
-import Duke.Exception.DukeException;
+import duke.managers.TaskList;
+import duke.managers.Ui;
+import duke.managers.Storage;
+import duke.tasks.Task;
+import duke.exceptions.DukeException;
 
 public class MarkCommand extends Command {
     protected boolean isMark;
