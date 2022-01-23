@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Duke {
     private static Storage storage;
     private static InputDecoder inputDecoder;
+    private static TaskList taskList;
 
     public static void main(String[] args) throws DukeException {
         Scanner sc = new Scanner(System.in);
@@ -18,17 +19,17 @@ public class Duke {
 
         storage = new Storage();
         ArrayList<Task> tasks = storage.loadList();
+        taskList.tasks = tasks;
         System.out.println(tasks.size());
-        inputDecoder = new InputDecoder(tasks);
+        inputDecoder = new InputDecoder();
 
         while (true) {
             String str = sc.nextLine();
             if (str.equals("bye")) {
                 break;
             } else {
-                ArrayList<Task> currentTasks = inputDecoder.decode(str);
-                inputDecoder.updateTasks(currentTasks);
-                storage.updateTasks(currentTasks);
+                inputDecoder.decode(str);
+                storage.updateTasks(taskList.tasks);
             }
         }
     }
