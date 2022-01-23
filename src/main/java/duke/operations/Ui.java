@@ -4,8 +4,10 @@ import duke.exceptions.EmptyInputException;
 
 import java.util.Scanner;
 
+/**
+ * Deals with interactions with the user.
+ */
 public class Ui {
-
     public static final String DIVIDER = "____________________________________________________________";
     private static final String SIGNATURE = " ____                         _____       _\n"
             + "| |_) |_   _ ___ ___ _   _  | (___   __ _| | ____ _\n"
@@ -23,14 +25,25 @@ public class Ui {
             + " Keep going!";
     protected static final String UNMARK_MESSAGE = "     Surely you aren't the imposter... right??";
 
+    /**
+     * Prints a line.
+     */
     public static void line() {
         printMessage(DIVIDER);
     }
 
+    /**
+     * Prints a String.
+     *
+     * @param str the string to be printed.
+     */
     public static void printMessage(String str) {
         System.out.println(str);
     }
 
+    /**
+     * Prints a welcome message.
+     */
     public void showWelcome() {
         printMessage(DIVIDER);
         printMessage(WELCOME_MESSAGE_ONE);
@@ -38,6 +51,9 @@ public class Ui {
         printMessage(DIVIDER);
     }
 
+    /**
+     * Prints a goodbye message.
+     */
     public void showGoodbye() {
         printMessage(DIVIDER);
         printMessage(GOODBYE_MESSAGE);
@@ -45,14 +61,30 @@ public class Ui {
         printMessage(DIVIDER);
     }
 
+    /**
+     * Prints out the error.
+     *
+     * @param msg the string to be printed.
+     */
     public void showError(String msg) {
         printMessage(msg);
     }
 
+    /**
+     * Prints out the duke error.
+     *
+     * @param msg the string to be printed.
+     */
     public void showDukeError(String msg) {
         printMessage(msg);
     }
 
+    /**
+     * Reads the user input.
+     *
+     * @return returns the input keyed in by the user.
+     * @throws EmptyInputException throws an exception when there is no input. E.g., "".
+     */
     public String readCommand() throws EmptyInputException {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();

@@ -11,17 +11,31 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Represents a storage of Duke. It deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     protected static String filePath;
     protected static String currWorkingDirectory;
     private static final int IS_UNMARKED = 0;
     private static final int IS_MARKED = 1;
 
+    /**
+     * A Storage constructor to initialise a <code>Storage</code> object. A <code>Storage</code>
+     * is represented by a String, String.
+     * E.g., <code>System.getProperty("user.home"), /DukeSaveDirectory/DukeSaveFile.txt</code>.
+     *
+     * @param filePath the txt file to store the task data.
+     * @param currWorkingDirectory the directory where the txt file should be stored.
+     */
     public Storage(String filePath, String currWorkingDirectory) {
         Storage.filePath = filePath;
         Storage.currWorkingDirectory = currWorkingDirectory;
     }
 
+    /**
+     * Updates the task data into the txt file.
+     */
     public static void updateTextFile() {
         try {
             writeToFile(currWorkingDirectory + filePath);
@@ -30,6 +44,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the task data into the txt file.
+     *
+     * @param filePath the txt file to store the task data.
+     * @throws IOException the txt file cannot be written into.
+     */
     public static void writeToFile(String filePath) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (Task str : TaskList.taskArr) {
@@ -38,6 +58,12 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Formats the task data before writing into the txt file.
+     *
+     * @param task the task to be formatted.
+     * @return the formatted task data.
+     */
     public static String formatTextFileLine(Task task) {
         String finalOutput= null;
         int mark = (task.getStatusIcon().equals("X") ? IS_MARKED : IS_UNMARKED);
@@ -56,6 +82,12 @@ public class Storage {
         return finalOutput;
     }
 
+    /**
+     * Loads the txt file into Duke. It retrieves the task data from its previous use.
+     * Creates a directory or txt file if it does not exist.
+     *
+     * @throws IOException the txt file cannot be loaded.
+     */
     public void load() throws IOException {
         // Create a new directory from current working directory
         File directory = new File(currWorkingDirectory + "/DukeSaveDirectory");
@@ -79,6 +111,12 @@ public class Storage {
 
     }
 
+    /**
+     * Reads the task data from the txt file and formats it to be input into a new <code>Task</code> object.
+     *
+     * @param filePath the txt file that stores the task data.
+     * @throws FileNotFoundException the file does not exist.
+     */
     public static void readFileContents(String filePath) throws FileNotFoundException {
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
@@ -122,6 +160,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Checks whether the task in the task data is marked or not.
+     *
+     * @param markedNum 0 means unmarked, 1 means marked.
+     * @return true if marked, else false.
+     */
     public static boolean isMarked(int markedNum) {
         return markedNum == 1;
     }

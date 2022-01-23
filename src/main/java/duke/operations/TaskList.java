@@ -4,13 +4,17 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a TaskList of Duke. A <code>TaskList</code> corresponds to
+ * containing the tasklist operations. e.g., it has operations to add/delete tasks in the list.
+ */
 public class TaskList {
     protected static final ArrayList<Task> taskArr = new ArrayList<>();
 
     /**
-     * Prints the total number of tasks
+     * Prints the total number of tasks.
      *
-     * @param num Total number of tasks
+     * @param num total number of tasks.
      */
     public void totalTasks(int num) {
         if (num == 1) {
@@ -21,9 +25,9 @@ public class TaskList {
     }
 
     /**
-     * Marks the respective task with a tick
+     * Marks the respective task with a tick.
      *
-     * @param num The index of the task to be marked
+     * @param num the index of the task to be marked.
      */
     public void mark(int num) {
         Ui.line();
@@ -36,9 +40,9 @@ public class TaskList {
     }
 
     /**
-     * Unmarks the respective task with a tick
+     * Unmarks the respective task with a tick.
      *
-     * @param num The index of the task to be unmarked
+     * @param num the index of the task to be unmarked.
      */
     public void unmark(int num) {
         Ui.line();
@@ -50,6 +54,11 @@ public class TaskList {
         Ui.line();
     }
 
+    /**
+     * Adds a Task to the ArrayList with print statements.
+     *
+     * @param task task to be added into the ArrayList.
+     */
     public void addToList(Task task) {
         taskArr.add(task);
         System.out.println("       " + task.toString());
@@ -59,9 +68,9 @@ public class TaskList {
     }
 
     /**
-     * Adds a duke.task.Task to the duke.task.Task ArrayList without print statements
+     * Adds a Task to the ArrayList without print statements.
      *
-     * @param task duke.task.Task to be added into the ArrayList
+     * @param task task to be added into the ArrayList.
      */
     public static void addToListNoPrint(Task task) {
         taskArr.add(task);
@@ -69,9 +78,9 @@ public class TaskList {
     }
 
     /**
-     * Deletes a duke.task.Task from the duke.task.Task ArrayList
+     * Deletes a Task from the ArrayList.
      *
-     * @param task duke.task.Task to be deleted from the ArrayList
+     * @param task task to be deleted from the ArrayList.
      */
     public void deleteFromList(Task task) {
         taskArr.remove(task);
@@ -84,7 +93,7 @@ public class TaskList {
     }
 
     /**
-     * Prints all the Tasks in the ArrayList in sequential order
+     * Prints all the Tasks in the ArrayList in sequential order.
      */
     public void printList() {
         Ui.line();
