@@ -5,37 +5,38 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class Storage {
+  public static Storage INSTANCE;
   private String directoryPath = System.getProperty("user.dir") + "/data/";
   private String listFile = "listData.txt";
 
   public Storage() {
-
   }
 
-  public boolean saveList(ArrayList<Task> taskList) {
+  public static Storage getInstance() {
+    INSTANCE = (INSTANCE == null) ? new Storage() : INSTANCE;
+    return INSTANCE;
+  }
+
+  public boolean saveList(ArrayList<Task> taskList) throws IOException {
     boolean success = false;
-    try {
-      File file = new File(this.directoryPath + this.listFile);
-      file.getParentFile().mkdirs();
-      file.createNewFile();
+    File file = new File(this.directoryPath + this.listFile);
+    file.getParentFile().mkdirs();
+    file.createNewFile();
 
-      FileWriter writer = new FileWriter(this.directoryPath + this.listFile);
-      BufferedWriter bufferedWriter = new BufferedWriter(writer);
+    FileWriter writer = new FileWriter(this.directoryPath + this.listFile);
+    BufferedWriter bufferedWriter = new BufferedWriter(writer);
 
-      for (Task t : taskList) {
-        bufferedWriter.write(t.getSaveDescription());
-        bufferedWriter.newLine();
-      }
-
-      bufferedWriter.close();
-      success = true;
-    } catch (IOException e) {
-      System.out.println("Unable to save list." +
-          "Please check if you have permission to write to files in the following directory: " +
-          directoryPath);
+    for (Task t : taskList) {
+      bufferedWriter.write(t.getSaveDescription());
+      bufferedWriter.newLine();
     }
+
+    bufferedWriter.close();
+    success = true;
     return success;
   }
+
+
 
   public boolean loadList(ArrayList<Task> taskList) {
     boolean success = false;
@@ -72,13 +73,17 @@ public class Storage {
       }
 
       bufferedReader.close();
+    } catch (DateTimeParseException e) {
+      System.out.println("Invalid save file format. Save file may have been edited or corrupted.");
     } catch (IOException e) {
       System.out.println("Unable to load list." +
           "Please check if you have permission to read from files in the following directory: " +
           directoryPath);
-    } catch (DateTimeParseException e) {
-      System.out.println("fail");
     }
     return success;
+  }
+
+  public String getDirectoryPath() {
+    return directoryPath;
   }
 }
