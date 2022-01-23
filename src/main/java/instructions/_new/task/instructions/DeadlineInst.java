@@ -1,17 +1,18 @@
 package instructions._new.task.instructions;
 
-import date.time.DateTimeParser;
 import exceptions.InvalidInputException;
+
 import tasks.DeadlineTask;
 import tasks.TaskList;
+
+import date.time.DateTimeParser;
 
 import java.time.LocalDateTime;
 
 /**
  * This class represents an instruction for a new Deadline task.
  * Format: "deadline P /by Q",
- *         where P is the task description,
- *         and Q is the deadline, in yyyy-mm-dd hh:mm.
+ *         where P is the task description, and Q is the deadline, in yyyy-mm-dd hh:mm.
  *
  * @author Ong Han Yang
  */
@@ -36,10 +37,9 @@ public class DeadlineInst extends NewTaskInst {
      * @param taskDetails the details of the instruction. This includes both
      *                    the description and the deadline.
      * @return the Deadline Instruction
-     * @throws InvalidInputException when no details are provided, the wrong
-     *                               number of details provided, when either
-     *                               the timing or description is omitted, or
-     *                               when the given time/date format is wrong.
+     * @throws InvalidInputException when no details are provided, the wrong number of details
+     *          provided, when either the timing or description is omitted, or when the given
+     *          time/date format is wrong.
      */
     public static DeadlineInst of(String taskDetails)
             throws InvalidInputException {
@@ -58,8 +58,8 @@ public class DeadlineInst extends NewTaskInst {
         if (split.length >= 3) { // happens with multiple " /by "s
             throw NewTaskInst.TOO_MANY_ARGUMENTS_EXCEPTION;
         }
-        boolean isValidDateTimeFormat
-                = DateTimeParser.checkValidFormat(split[1]);
+
+        boolean isValidDateTimeFormat = DateTimeParser.checkValidFormat(split[1]);
         if (!isValidDateTimeFormat) {
             throw NewTaskInst.INVALID_DATE_TIME_FORMAT;
         }

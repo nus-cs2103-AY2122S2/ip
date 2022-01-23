@@ -2,9 +2,11 @@ package chatbots;
 
 import exceptions.InvalidInputException;
 import exceptions.SaveFileModifiedException;
+
 import instructions.ExitInst;
 import instructions.Instruction;
 import instructions.list.instructions.DisplayListInst;
+
 import tasks.TaskList;
 
 import java.util.Scanner;
@@ -14,7 +16,6 @@ import java.util.Scanner;
  * Fluffers is a chatbot that helps to manage a task list.
  *
  * ASCII art credit: All ASCII art was found on https://www.asciiart.eu/animals/cats .
- *
  *
  * @author Ong Han Yang
  */
@@ -55,11 +56,9 @@ public class Fluffers extends TaskManagerChatbot {
     /**
      * Constructs an awake Fluffers.
      *
-     * @throws SaveFileModifiedException when the save file contains invalid
-     *                                   symbols that could not have been from
-     *                                   the string representation of a task,
-     *                                   indicating external modification to
-     *                                   the file.
+     * @throws SaveFileModifiedException when the save file contains invalid symbols that could
+     *          not have been from the string representation of a task, indicating external
+     *          modification to the file.
      */
     public Fluffers() throws SaveFileModifiedException {
         super(TaskList.loadFromFile());
@@ -81,10 +80,8 @@ public class Fluffers extends TaskManagerChatbot {
      * @return String representation of the greeting.
      */
     protected String greet() {
-        return "Activating Cat Translator 2000...\n" +
-                "Waking Fluffers up...\n\n" +
-                "Meow! (Hello!)\n" +
-                AsciiArt.AWAKE.art;
+        return "Activating Cat Translator 2000...\nWaking Fluffers up...\n\nMeow! (Hello!)\n"
+                + AsciiArt.AWAKE.art;
     }
 
     /**
@@ -93,8 +90,8 @@ public class Fluffers extends TaskManagerChatbot {
      * @return String representation of the Farewell.
      */
     protected String farewell() {
-        return "Meooow~ (Bye bye! See you again next time!)\n" +
-                AsciiArt.ASLEEP.art;
+        return "Meooow~ (Bye bye! See you again next time!)\n"
+                + AsciiArt.ASLEEP.art;
     }
 
     /**
@@ -115,8 +112,7 @@ public class Fluffers extends TaskManagerChatbot {
             return farewell();
         }
         if (inst instanceof DisplayListInst) {
-            return String.format("%s\n%s\n------------------"
-                    , AsciiArt.LIST_TOP.art
+            return String.format("%s\n%s\n------------------", AsciiArt.LIST_TOP.art
                     , super.instHandler.doInstruction(inst));
         }
         return this.speak(super.instHandler.doInstruction(inst));
@@ -126,11 +122,9 @@ public class Fluffers extends TaskManagerChatbot {
      * Starts the program/wakes Fluffers up
      *
      * @param args input CLI arguments.
-     * @throws SaveFileModifiedException when the save file contains invalid
-     *                                   symbols that could not have been from
-     *                                   the string representation of a task,
-     *                                   indicating external modification to
-     *                                   the file.
+     * @throws SaveFileModifiedException when the save file contains invalid symbols that could
+     *          not have been from the string representation of a task, indicating external
+     *          modification to the file.
      */
     public static void main(String[] args) throws SaveFileModifiedException {
         Fluffers f = new Fluffers();

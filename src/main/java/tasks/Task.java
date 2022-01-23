@@ -1,8 +1,7 @@
 package tasks;
 
 /**
- * This class encapsulates a task, which contains a String and a checkbox
- * to indicate if it is done.
+ * This class encapsulates a task, which contains a String and a checkbox to indicate if it is done.
  *
  * @author Ong Han Yang
  */
@@ -13,8 +12,7 @@ public abstract class Task {
     /** Whether the task is done or not.*/
     private boolean isDone;
 
-    /** The Cross symbol used to show that a class is marked as done.
-     * Original: ✓ or \u2713 */
+    /** The Cross symbol used to show that a class is marked as done. Original: ✓ or \u2713 */
     private static String TICK = "X";
 
     /**
@@ -30,6 +28,7 @@ public abstract class Task {
 
     /**
      * Marks the task as done/undone.
+     *
      * @param isDone whether the task is done or not.
      */
     public void markAs(boolean isDone) {
@@ -38,6 +37,7 @@ public abstract class Task {
 
     /**
      * Represents the task as a String.
+     *
      * @return String representation of the task.
      */
     @Override

@@ -13,13 +13,11 @@ import instructions.Instruction;
  * @author Ong Han Yang
  */
 public abstract class ModifyListedTaskInst extends Instruction {
-    /** Reusable Invalid Input Exception for when there is no provided task
-     * number */
+    /** Reusable Invalid Input Exception for when there is no provided task number */
     private static final InvalidInputException NO_TASK_NUM_EXCEPTION
             = new InvalidInputException("Cannot delete without a specified task number!");
 
-    /** Reusable Invalid Input Exception for when the provided task number is
-     * not an integer */
+    /** Reusable Invalid Input Exception for when the provided task number is not an integer */
     private static final InvalidInputException NOT_INTEGER_EXCEPTION
             = new InvalidInputException("Given task number is not an integer!");
 
@@ -36,18 +34,17 @@ public abstract class ModifyListedTaskInst extends Instruction {
     }
 
     /**
-     * Produces a Modify Listed Task Instruction, according to the specified
-     * instruction type.
+     * Produces a Modify Listed Task Instruction, according to the specified instruction type.
      *
      * @param input the original command called.
-     * @return the Modify Listed Task Instruction with the specified task
-     *         number to delete.
-     * @throws InvalidInputException when no task number is provided, or the
-     *                               provided task number is not an integer.
+     * @return the Modify Listed Task Instruction with the specified task number to delete.
+     * @throws InvalidInputException when no task number is provided, or the provided task number
+     *          is not an integer.
      */
     public static ModifyListedTaskInst of(String input)
             throws InvalidInputException {
 
+        // for task number validation
         String[] split = input.split(" ", 2);
         if (split.length == 1) {
             throw NO_TASK_NUM_EXCEPTION;
@@ -63,6 +60,7 @@ public abstract class ModifyListedTaskInst extends Instruction {
             throw NOT_INTEGER_EXCEPTION;
         }
 
+        // for splitting into individual instruction
         String instType = split[0];
         switch (instType) {
         case "mark":

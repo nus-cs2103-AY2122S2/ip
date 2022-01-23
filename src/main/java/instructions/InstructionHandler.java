@@ -5,8 +5,8 @@ import instructions.list.instructions.*;
 import tasks.TaskList;
 
 /**
- * This class encapsulates an handler for instructions. It allows instructions
- * to perform their action on a given input.
+ * This class encapsulates an handler for instructions. It allows instructions to perform their
+ * action on a given input.
  *
  * @author Ong Han Yang
  */
@@ -16,6 +16,7 @@ public class InstructionHandler {
 
     /**
      * Constructs an Instruction Handler.
+     *
      * @param taskList the tasklist to initialise the handler with.
      */
     private InstructionHandler(TaskList taskList) {
@@ -32,8 +33,8 @@ public class InstructionHandler {
     }
 
     /**
-     * Allows the instruction to perform its function. Returns a feedback
-     * message about the status of the action.
+     * Allows the instruction to perform its function. Returns a feedback message about the
+     * status of the action.
      *
      * @param inst the given instruction to perform.
      * @return the feedback message about the status of the action.

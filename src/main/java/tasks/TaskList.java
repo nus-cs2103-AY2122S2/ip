@@ -1,19 +1,22 @@
 package tasks;
 
-import date.time.DateTimeParser;
-import exceptions.NoSuchTaskException;
-import exceptions.SaveFileModifiedException;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.function.Supplier;
+
+import date.time.DateTimeParser;
+
+import exceptions.NoSuchTaskException;
+import exceptions.SaveFileModifiedException;
 
 /**
  * This class encapsulates a taskList.
@@ -153,15 +156,13 @@ public class TaskList {
     }
 
     /**
-     * Loads from the designated file to obtain a TaskList
-     * that is identical to one that produced the file.
+     * Loads from the designated file to obtain a TaskList that is identical to one that
+     * produced the file.
      *
      * @return an identical TaskList to one that produced the saved file.
-     * @throws SaveFileModifiedException when the save file contains invalid
-     *                                   symbols that could not have been from
-     *                                   the string representation of a task,
-     *                                   indicating external modification to
-     *                                   the file.
+     * @throws SaveFileModifiedException when the save file contains invalid symbols that could not
+     *          have been from the string representation of a task, indicating external modification
+     *          to the file.
      */
     public static TaskList loadFromFile() throws SaveFileModifiedException {
         TaskList output = new TaskList();
@@ -181,23 +182,20 @@ public class TaskList {
     }
 
     /**
-     * Parses a String representation of a task to get back the original Task's
-     * details.
+     * Parses a String representation of a task to get back the original Task's details.
      *
      *  1. [T][X] sample task
      *  2. [D][ ] task (by: yyyy-mm-dd hh:mm)
      *  3. [E][ ] event (at: yyyy-mm-dd hh:mm, until: yyyy-mm-dd hh:mm)
      *
-     *  An assumption is made where the time values are not modified to be
-     *  invalid. TODO: FIX THIS ASSUMPTION, maybe make this method cleaner
+     *  An assumption is made where the time values are not modified to be  invalid.
+     *  TODO: FIX THIS ASSUMPTION, maybe make this method cleaner
      *
      * @param input the String form of the Task.
      * @return the Task that corresponds to the input String
-     * @throws SaveFileModifiedException when the save file contains invalid
-     *                                   symbols that could not have been from
-     *                                   the string representation of a task,
-     *                                   indicating external modification to
-     *                                   the file.
+     * @throws SaveFileModifiedException when the save file contains invalid symbols that could not
+     *          have been from the string representation of a task, indicating external modification
+     *          to the file.
      */
     private static Task parseLine(String input) throws SaveFileModifiedException {
         Task output;

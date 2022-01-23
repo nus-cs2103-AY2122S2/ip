@@ -2,8 +2,10 @@ package exceptions;
 
 /**
  * This class represents a exception that is raised when reading a save file.
- * In particular, this will be thrown when the reader encounters a character
- * that the file-saver cannot have written.
+ * In particular, this will be thrown when the reader encounters a character that the file-saver
+ * cannot have written.
+ *
+ * @author Ong Han Yang
  */
 public class SaveFileModifiedException extends Exception {
     /**

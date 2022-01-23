@@ -35,14 +35,12 @@ public class DeleteInst extends ModifyListedTaskInst {
      *
      * @param taskList the taskList to modify.
      * @return the feedback message after performing this instruction.
-     * @throws NoSuchTaskException when there does not exist a task with the
-     *                             given index.
+     * @throws NoSuchTaskException when there does not exist a task with the given index.
      */
     @Override
     public String doInst(TaskList taskList) throws NoSuchTaskException {
         Task deleted = taskList.delete(super.getTaskNum() - 1);
-        return String.format("Okay, I've removed this task:\n%s\nThere are " +
-                "%d tasks left in the list!"
+        return String.format("Okay, I've removed this task:\n%s\nThere are %d tasks left in the list!"
                 , deleted.toString(), taskList.length());
     }
 }

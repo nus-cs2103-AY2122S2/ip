@@ -34,9 +34,7 @@ public class EventTask extends Task {
      * @param startTime the start/end time of the task.
      * @return the Event Task.
      */
-    public static EventTask of(String desc,
-                               LocalDateTime startTime,
-                               LocalDateTime endTime) {
+    public static EventTask of(String desc, LocalDateTime startTime, LocalDateTime endTime) {
         return new EventTask(desc, startTime, endTime);
     }
 
@@ -49,10 +47,10 @@ public class EventTask extends Task {
     public String toString() {
         boolean isSameDay = startTime.toLocalDate().equals(endTime.toLocalDate());
         return String.format("[E]%s (at: %s %s, until: %s)",
-                super.toString(),
-                startTime.toLocalDate(),
-                startTime.toLocalTime(),
-                isSameDay
+                super.toString()
+                , startTime.toLocalDate()
+                , startTime.toLocalTime()
+                , isSameDay
                         ? endTime.toLocalTime()
                         : endTime.toLocalDate() + " " + endTime.toLocalTime());
     }

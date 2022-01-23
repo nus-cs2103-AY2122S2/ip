@@ -6,14 +6,16 @@ import java.time.Year;
 import java.util.Arrays;
 
 /**
- * This class encapsulates a Date Time Parser. It contains methods to parse
- * inputs into a LocalDateTime object, as well as a checker for the format.
+ * This class encapsulates a Date Time Parser. It contains methods to parse inputs into a
+ * LocalDateTime object, as well as a checker for the format.
+ *
+ * @author Ong Han Yang
  */
 public final class DateTimeParser {
     /**
-     * Parses a string input in the form yyyy-mm-dd hh:mm, where dd is the day
-     * mm is the month, yyyy is the year and hh:mm is the 24 hour time, to
-     * produce a LocalDateTime object with the provided date and time.
+     * Parses a string input in the form yyyy-mm-dd hh:mm, where dd is the day, mm is the month,
+     * yyyy is the year and hh:mm is the 24 hour time, to produce a LocalDateTime object
+     * with the provided date and time.
      *
      * @param input the string input in the form yyyy-mm-dd xx:xx
      * @return the LocalDateTime corresponding to the input.

@@ -12,8 +12,8 @@ import tasks.TaskList;
  */
 public class DisplayListInst extends Instruction {
     /**
-     * A fixed/static display instruction as there are no differences between
-     * multiple display list instructions.
+     * A fixed/static display instruction as there are no differences between multiple display
+     * list instructions.
      * TODO:
      * Maybe allow a "list x", to list up to the first x tasks of the list.
      */

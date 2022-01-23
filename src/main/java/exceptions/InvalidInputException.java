@@ -1,8 +1,10 @@
 package exceptions;
 
 /**
- * This class encapsulates an invalid input exception, thrown when some parts
- * of an input is expected but not obtained.
+ * This class encapsulates an invalid input exception, thrown when some parts of an input is
+ * expected but not obtained.
+ *
+ * @author Ong Han Yang
  */
 public class InvalidInputException extends Exception {
     /**

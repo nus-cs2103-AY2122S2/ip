@@ -12,6 +12,7 @@ import tasks.ToDoTask;
 public class TodoInst extends NewTaskInst {
     /**
      * Constructs a To Do Instruction
+     *
      * @param taskDesc
      */
     private TodoInst(String taskDesc) {
@@ -38,8 +39,7 @@ public class TodoInst extends NewTaskInst {
     public String doInst(TaskList taskList) {
         ToDoTask task = ToDoTask.of(super.getTaskDesc());
         taskList.add(task);
-        return String.format("Okay, added this task:\n%s\nThere are %d tasks " +
-                "in the list now."
-                , task, taskList.length());
+        return String.format("Okay, added this task:\n%s\nThere are %d tasks "
+                        + "in the list now.", task, taskList.length());
     }
 }
