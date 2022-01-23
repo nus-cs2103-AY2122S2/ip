@@ -1,6 +1,12 @@
 import java.util.LinkedList;
 import java.util.Scanner;
 
+/**
+ * Author: Hong Yi En, Ian
+ * Last Updated: 23 Jan 2022
+ * 
+ * An interactive CLI-based chatbot to store todos
+ */
 public class Lily {
     private static final String indent = "    ";
     private static LinkedList<Task> list;
