@@ -18,7 +18,11 @@ public class Parser {
                 Printer.unmark(numToUnmark, taskList);
                 break;
             case("todo"):
-                String todoString = input.substring(input.indexOf(' '));
+                String todoString = input.substring(input.indexOf(' ')).trim();
+                if (todoString.equals("")) {
+                    throw new EmptyDescriptionException("\n" + Printer.BLANK_LINE
+                            + "    The description of a todo cannot be empty.:-(\n" + Printer.BLANK_LINE);
+                }
                 Todo newTodo = new Todo(todoString);
                 taskList.add(newTodo);
                 Printer.todo(todoString, taskList);
@@ -40,8 +44,8 @@ public class Parser {
                 Printer.event(eventName, eventTime, taskList);
                 break;
             default:
-                Printer.add(input);
-                taskList.add(new Task(input));
+                throw new UnknownCommandException("\n" + Printer.BLANK_LINE
+                        + "    I'm sorry, but I don't know what that means :-(\n" + Printer.BLANK_LINE);
         }
     }
 }

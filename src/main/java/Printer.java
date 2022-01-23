@@ -17,7 +17,7 @@ public class Printer {
             + "     Bye. Hope to see you again soon!" + "\n"
             + "    ____________________________________________________________\n";
 
-    private static final String BLANK_LINE = "    ____________________________________________________________\n";
+    public static final String BLANK_LINE = "    ____________________________________________________________\n";
 
     public static void welcome() {
         System.out.println(WELCOME_MESSAGE);
