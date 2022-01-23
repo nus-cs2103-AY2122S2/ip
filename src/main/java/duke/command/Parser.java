@@ -144,9 +144,8 @@ public class Parser {
             return 1;
         default:
             System.out.println("Unknown Command");
+            return 0;
         }
-        return 0;
-
     }
 
     /**

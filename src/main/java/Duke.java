@@ -20,13 +20,20 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         p.print("Hello! I'm Duke," , "What can I do for you?");
 
-
         String userInput = in.nextLine();
-        while(ip.run(userInput, p, tl) != -1)
-            userInput = in.nextLine();
+        int runResult = ip.run(userInput, p, tl);
 
-        if(Storage.saveFile("data", "duke.txt", tl.getList()) == 0)
-            System.out.println("Tasks saved!");
+        if(runResult == 1) {
+            Storage.saveFile("data", "duke.txt", tl.getList());
+        }
+
+        while(runResult != -1) {
+            if(runResult == 1) {
+                Storage.saveFile("data", "duke.txt", tl.getList());
+            }
+            userInput = in.nextLine();
+            runResult = ip.run(userInput, p, tl);
+        }
     }
 
 }
