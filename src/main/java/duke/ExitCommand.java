@@ -1,16 +1,20 @@
-class ListCommand extends Command {
+package duke;
 
-    ListCommand(String command) {
+import duke.Command;
+
+class ExitCommand extends Command {
+
+    ExitCommand(String command) {
         super(command);
     }
 
     @Override
     void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.list(taskList);
+        ui.showBye();
     }
 
     @Override
     boolean isExit() {
-        return false;
+        return true;
     }
 }

@@ -1,3 +1,5 @@
+package duke;
+
 abstract class Command {
     private final String command;
 

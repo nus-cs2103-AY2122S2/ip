@@ -1,3 +1,7 @@
+package duke;
+
+import duke.Command;
+
 import java.io.IOException;
 
 class SaveCommand extends Command {

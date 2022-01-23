@@ -1,3 +1,7 @@
+package duke;
+
+import duke.Command;
+
 public class DeleteCommand extends Command {
     private final int index;
 
