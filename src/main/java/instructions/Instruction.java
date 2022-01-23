@@ -5,6 +5,7 @@ import exceptions.NoSuchTaskException;
 
 import instructions._new.task.instructions.NewTaskInst;
 import instructions.list.instructions.DisplayListInst;
+import instructions.list.instructions.FindInst;
 import instructions.list.instructions.ModifyListedTaskInst;
 
 import tasks.TaskList;
@@ -52,6 +53,8 @@ public abstract class Instruction {
         case "deadline":
         case "event":
             return NewTaskInst.of(input);
+        case "find":
+            return FindInst.of(input);
         default:
             throw UNKNOWN_INPUT;
         }

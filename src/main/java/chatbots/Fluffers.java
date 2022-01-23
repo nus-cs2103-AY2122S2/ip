@@ -7,6 +7,7 @@ import instructions.ExitInst;
 import instructions.Instruction;
 import instructions.list.instructions.DisplayListInst;
 
+import instructions.list.instructions.FindInst;
 import tasks.TaskList;
 
 import java.util.Scanner;
@@ -109,9 +110,14 @@ public class Fluffers extends TaskManagerChatbot {
             this.isAwake = false;
             return farewell();
         }
-        if (inst instanceof DisplayListInst) {
-            return String.format("%s\n%s\n------------------", AsciiArt.LIST_TOP.art
+        if (inst instanceof DisplayListInst || inst instanceof FindInst) {
+            String output = String.format("%s\n%s------------------", AsciiArt.LIST_TOP.art
                     , super.instHandler.doInstruction(inst));
+            if (inst instanceof FindInst) {
+                output = this.speak("Here's what I found! (the numbering is the kept the "
+                        + "same as the \"list\" command") + output;
+            }
+            return output;
         }
 
         return this.speak(super.instHandler.doInstruction(inst));

@@ -125,12 +125,7 @@ public class TaskList {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < list.size(); i++) {
-            if (i == list.size() - 1) {
-                // For the last item, don't append a newline character.
-                sb.append(String.format("%d. %s", i + 1, list.get(i).toString()));
-            } else {
-                sb.append(String.format("%d. %s\n", i + 1, list.get(i).toString()));
-            }
+            sb.append(String.format("%d. %s\n", i + 1, list.get(i).toString()));
         }
         return sb.toString();
     }
