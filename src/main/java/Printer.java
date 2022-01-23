@@ -36,10 +36,17 @@ public class Printer {
     public static void list(TaskList taskList) {
         System.out.println("\n" + BLANK_LINE);
         for (int i = 1; i < taskList.size() + 1; i++) {
-            String curr = taskList.get(i - 1);
+            Task curr = taskList.get(i - 1);
             String toPrint = "     " + i + "." + curr;
             System.out.println(toPrint);
         }
         System.out.println("\n" + BLANK_LINE);
+    }
+
+    public static void mark(int numToMark, TaskList taskList) {
+        Task markedTask = taskList.get(numToMark - 1);
+        markedTask.markAsDone();
+        System.out.println(BLANK_LINE + "     Nice! I've marked this task as done: " + "\n" + "     " + markedTask
+                + "\n" + BLANK_LINE);
     }
 }
