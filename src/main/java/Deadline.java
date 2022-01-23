@@ -16,9 +16,9 @@ public class Deadline extends Task{
         System.out.print("[D]");
 
         if(this.done){
-            System.out.print("[X] " + this.taskName);
+            System.out.print("[X] " + this.taskName + " ");
         } else {
-            System.out.print("[ ] " + this.taskName);
+            System.out.print("[ ] " + this.taskName + " ");
         }
 
         System.out.println(this.date);
