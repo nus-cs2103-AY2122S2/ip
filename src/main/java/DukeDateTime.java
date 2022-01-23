@@ -12,23 +12,13 @@ public class DukeDateTime {
         String[] splited = s.split(" ");
         DukeDateTime datetime = new DukeDateTime();
         if (splited.length == 2) {
-            try {
-                datetime = new DukeDateTime(LocalDate.parse(splited[0],
-                        DateTimeFormatter.ofPattern("yyyy-M-d")),
-                        LocalTime.parse(splited[1],
-                                DateTimeFormatter.ofPattern("H:mm")));
-            } catch (DateTimeParseException ex) {
-                System.out.println(ex.getMessage());
-                return null;
-            }
+            datetime = new DukeDateTime(LocalDate.parse(splited[0],
+                    DateTimeFormatter.ofPattern("yyyy-M-d")),
+                    LocalTime.parse(splited[1],
+                            DateTimeFormatter.ofPattern("H:mm")));
         } else {
-            try {
-                datetime = new DukeDateTime(LocalDate.parse(splited[0],
-                        DateTimeFormatter.ofPattern("yyyy-M-d")));
-            } catch (DateTimeParseException ex) {
-                System.out.println(ex.getMessage());
-                return null;
-            }
+            datetime = new DukeDateTime(LocalDate.parse(splited[0],
+                    DateTimeFormatter.ofPattern("yyyy-M-d")));
         }
         return datetime;
     }
