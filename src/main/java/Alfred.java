@@ -1,6 +1,10 @@
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.File;
 
 
 public class Alfred {
@@ -10,12 +14,40 @@ public class Alfred {
   private static final String BYE = "Bye! Hope I was of service.";
   private static final int BREAK_CHAR_LENGTH = 100;
   private final String BREAK_LINE = this.line();
+  private String projectRoot = ".";
+  private String DATA_PATH = String.join(File.separator, projectRoot, "data", "Alfred.txt");
 
   // functional attributes
-  ArrayList<Task> task_list;
+  ArrayList<Task> taskList;
 
   Alfred() {
-    this.task_list = new ArrayList<Task>();
+    this.taskList = new ArrayList<Task>();
+  }
+
+  private void saveToFile() throws IOException {
+    System.out.println(new File(".").getCanonicalPath());
+    FileWriter fw;
+    try {
+      fw = new FileWriter(this.DATA_PATH);
+      String newList = this.listToString();
+      fw.write(newList);
+      fw.close();
+    } catch (FileNotFoundException fe) {
+      System.out.println("Alfred.txt not created. Will create at: " + this.DATA_PATH);
+      try {
+        // create the file
+        File output = new File(this.DATA_PATH);
+        output.createNewFile();
+        fw = new FileWriter(output);
+        String newList = this.listToString();
+        fw.write(newList);
+        fw.close();
+
+        // write to it
+      } catch (IOException ioe) {
+        throw ioe;
+      }
+    }
   }
 
   private String line() {
@@ -27,7 +59,7 @@ public class Alfred {
     return out;
   }
 
-  private void sandwich_and_print(String text) {
+  private void sandwichAndPrint(String text) {
     String out = "";
     out += this.BREAK_LINE;
     out += text + "\n";
@@ -36,153 +68,186 @@ public class Alfred {
   }
 
   private void greeting() {
-    this.sandwich_and_print(Alfred.GREETING);
+    this.sandwichAndPrint(Alfred.GREETING);
   }
 
   private void bye() {
-    this.sandwich_and_print(Alfred.BYE);
+    this.sandwichAndPrint(Alfred.BYE);
   }
 
-  private void add_task(Task task) {
-    this.task_list.add(task);
+  private void addTask(Task task) {
+    this.taskList.add(task);
     String text = "Yes sir, I've added this task.\n";
     text += task.toString() + "\n";
-    text += this.summarize_list();
-    this.sandwich_and_print(text);
+    text += this.summarizeList();
+    this.sandwichAndPrint(text);
   }
 
-  private void add_todo(String description) {
+  private void addTodo(String description) {
     Task task = new ToDo(description);
-    this.add_task(task);
+    this.addTask(task);
   }
 
-  private void add_deadline(String description, String deadline) {
+  private void addDeadline(String description, String deadline) {
     Task task = new Deadline(description, deadline);
-    this.add_task(task);
+    this.addTask(task);
   }
 
-  private void add_event(String description, String dateAndTime) {
+  private void addEvent(String description, String dateAndTime) {
     Task task = new Event(description, dateAndTime);
-    this.add_task(task);
+    this.addTask(task);
   }
 
-  private String summarize_list() {
-    return "Now you have " + this.task_list.size() + " task(s) in the your list.";
+  private String summarizeList() {
+    return "Now you have " + this.taskList.size() + " task(s) in the your list.";
   }
 
 
-  private void list_tasks() {
+  private void listTasks() {
     String out = "";
     out += this.BREAK_LINE;
     out += "Sir, here are the things you need to do:\n";
-    for (int i = 1; i < this.task_list.size() + 1; i++) {
-      out += i + ". " + this.task_list.get(i - 1).toString() + "\n";
-    }
+    out += this.listToString();
     out += this.BREAK_LINE;
     System.out.println(out);
   }
 
-  private void mark_task(int task_id) {
+  private String listToString() {
+    String out = "";
+    for (int i = 1; i < this.taskList.size() + 1; i++) {
+      out += i + ". " + this.taskList.get(i - 1).toString() + "\n";
+    }
+    return out;
+  }
+
+  private void markTask(int taskId) {
     // update data state
-    this.task_list.get(task_id).mark_complete();
+    this.taskList.get(taskId).mark_complete();
 
     // return representation
     String text = "Good job sir. I've marked this as complete.\n";
-    text += this.task_list.get(task_id).toString();
-    this.sandwich_and_print(text);
+    text += this.taskList.get(taskId).toString();
+    this.sandwichAndPrint(text);
   }
 
-  private void unmark_task(int task_id) {
+  private void unmarkTask(int taskId) {
     // update data state
-    this.task_list.get(task_id).mark_incomplete();
+    this.taskList.get(taskId).mark_incomplete();
 
     // return representation
     String text = "I see, no worries sir. I've marked this as to-be-done.\n";
-    text += this.task_list.get(task_id).toString();
-    this.sandwich_and_print(text);
+    text += this.taskList.get(taskId).toString();
+    this.sandwichAndPrint(text);
   }
 
-  private void delete_task(int task_id) {
+  private void deleteTask(int taskId) {
     // update data state
-    Task task = this.task_list.remove(task_id);
+    Task task = this.taskList.remove(taskId);
 
     // return representation
     String text = "Noted sir. I've removed the following task:\n";
     text += task.toString();
-    this.sandwich_and_print(text);
+    this.sandwichAndPrint(text);
   }
 
-  private void read_input(String input)
+  private void callCommand(String command, String[] arguments) throws InvalidCommandException {
+    int taskId;
+    switch (command) {
+      case "list":
+        this.listTasks();
+        break;
+      case "mark":
+        taskId = Integer.valueOf(arguments[1]) - 1;
+        this.markTask(taskId);
+        break;
+      case "unmark":
+        taskId = Integer.valueOf(arguments[1]) - 1;
+        this.unmarkTask(taskId);
+        break;
+      case "delete":
+        taskId = Integer.valueOf(arguments[1]) - 1;
+        this.deleteTask(taskId);
+        break;
+      case "todo":
+        this.addTodo(arguments[0]);
+        break;
+      case "event":
+        this.addEvent(arguments[0], arguments[1]);
+        break;
+      case "deadline":
+        this.addDeadline(arguments[0], arguments[1]);
+        break;
+      default:
+        throw new InvalidCommandException();
+    }
+    try {
+      this.saveToFile();
+    } catch (IOException ioe){
+      System.out.println("Something went wrong trying to save the file: " + ioe.getMessage());
+    }
+  }
+
+  private void readInput(String input)
       throws InvalidCommandException, InvalidInputException, InvalidIndexException,
       MissingInputException {
     // read in arguments
     String[] arguments = input.split(" ");
     String command = arguments[0];
 
-    // case by case, with checks
+    // case by case, check for valid input
     // LIST
     if ((command.equals("list")) && (arguments.length == 1)) {
-      this.list_tasks();
+      // do nothing
 
-      // (UN)MARK and DELETE
+    // (UN)MARK and DELETE
     } else if (command.equals("mark") || command.equals("unmark")
-        || command.equals("delete")) { // validity check for (un)mark
+        || command.equals("delete")) {
       if (arguments.length != 2) {
         throw new InvalidInputException();
       }
-      int task_id;
+      int taskId;
       try {
-        task_id = Integer.valueOf(arguments[1]) - 1;
+        taskId = Integer.valueOf(arguments[1]) - 1;
       } catch (NumberFormatException nfe) {
         throw new InvalidInputException();
       }
-      if (task_id >= this.task_list.size()) {
+      if (taskId >= this.taskList.size()) {
         throw new InvalidIndexException();
       }
-      // checks complete
-      if (command.equals("mark")) {
-        this.mark_task(task_id);
-      } else if (command.equals("unmark")) {
-        this.unmark_task(task_id);
-      } else {
-        this.delete_task(task_id);
-      }
 
-      // DEADLINE
+    // DEADLINE
     } else if (command.equals("deadline")) {
       String s = input.substring(8); // select those after keyword
-      String[] arg = s.split(" /by ");
-      arg = Arrays.stream(arg).filter(in -> !in.isEmpty())
+      arguments = s.split(" /by ");
+      arguments = Arrays.stream(arguments).filter(in -> !in.isEmpty())
           .toArray(String[]::new); // filter away empty strings
-      if (arg.length < 2) {
+      if (arguments.length != 2) {
         throw new InvalidInputException();
       }
-      this.add_deadline(arg[0], arg[1]);
 
+    // T0D0
     } else if (command.equals("todo")) {
-      String descripton = input.substring(4);
-      if ((descripton.length() < 1) || descripton.split(" ").length == 0) {
+      String description = input.substring(4);
+      if ((description.length() < 1) || description.split(" ").length == 0) {
         throw new MissingInputException();
       }
-      this.add_todo(descripton);
+      arguments = new String[]{description}; // wrap
 
+    // EVENT
     } else if (command.equals("event")) {
       String s = input.substring(5);
-      String[] arg = s.split(" /at ");
-      arg = Arrays.stream(arg).filter(in -> !in.isEmpty())
+      arguments = s.split(" /at ");
+      arguments = Arrays.stream(arguments).filter(in -> !in.isEmpty())
           .toArray(String[]::new); // filter away empty strings
-      if (arg.length < 2) {
+      if (arguments.length != 2) {
         throw new InvalidInputException();
       }
-      this.add_event(arg[0], arg[1]);
-    } else {
-      // invalid command
-      throw new InvalidCommandException();
     }
+    this.callCommand(command, arguments);
   }
 
-  private void handle_alfredException(AlfredException e) {
-    this.sandwich_and_print(e.getMessage());
+  private void handleAlfredException(AlfredException e) {
+    this.sandwichAndPrint(e.getMessage());
   }
 
 
@@ -198,9 +263,9 @@ public class Alfred {
     String input = sc.nextLine();
     while (!input.equals("bye")) {
       try {
-        bot.read_input(input);
+        bot.readInput(input);
       } catch (AlfredException e) {
-        bot.handle_alfredException(e);
+        bot.handleAlfredException(e);
       }
       input = sc.nextLine();
     }
