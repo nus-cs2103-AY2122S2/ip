@@ -1,39 +1,72 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
 public class Deadline extends Task {
 
-    public String dateTime;
+    protected LocalDate date;
+    protected LocalTime time;
+    protected boolean hasTime;
 
-    public Deadline(String item, String dateTime) {
+    public Deadline(String item, LocalDate date) {
         super(item);
-        this.dateTime = dateTime;
+        this.date = date;
+        hasTime = false;
+    }
+
+    public Deadline(String item, LocalDate date, LocalTime time) {
+        super(item);
+        this.date = date;
+        this.time = time;
+        hasTime = true;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + dateTime + ")";
+        if (hasTime) {
+            return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + time.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)) + ")";
+        } else {
+            return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        }
     }
 
     public static Deadline createTask(String[] tokens) throws DukeException {
-        boolean found = false;
         String item = "";
-        String dateTime = "";
-        for (String token : tokens) {
-            if (token.equals("deadline")) {
+        int idx = 0;
+        for (;idx < tokens.length; idx++) {
+            if (tokens[idx].equals("deadline")) {
                 continue;
-            } else if (token.equals("/by")) {
-                found = true;
-                continue;
+            } else if (tokens[idx].equals("/by")) {
+                idx++;
+                break;
             }
-            if (found) {
-                dateTime += token + " ";
-            } else {
-                item += token + " ";
-            }
+            item += tokens[idx] + " ";
         }
+
+
         if (item.equals(""))
             throw new DukeException("The description of a deadline task cannot be empty!");
-        else if (dateTime.equals(""))
-            throw new DukeException("Please specify a deadline!");
 
-        return new Deadline(item.trim(), dateTime.trim());
+        LocalDate date;
+        LocalTime time;
+
+        try {
+            date = LocalDate.parse(tokens[idx]);
+            idx++;
+        } catch (Exception e) {
+            throw new DukeException("Please specify a valid date!");
+        }
+
+        if (idx == tokens.length)
+            return new Deadline(item.trim(), date);
+        else {
+            try {
+                time = LocalTime.parse(tokens[idx]);
+                return new Deadline(item.trim(), date, time);
+            } catch (Exception e) {
+                throw new DukeException("Please specify a valid time! (hh:mm)");
+            }
+        }
     }
 }
