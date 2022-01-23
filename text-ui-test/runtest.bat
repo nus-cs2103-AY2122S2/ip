@@ -7,7 +7,7 @@ REM delete output from previous run
 if exist ACTUAL.TXT del ACTUAL.TXT
 
 REM compile the code into the bin folder
-javac  -cp ..\src\main\java -Xlint:none -d ..\bin ..\src\main\java\*.java
+javac -cp ..\src\main\java\chatbot\ChatBot.java -Xlint:none -d ..\bin ..\src\main\java\chatbot\exception\*.java ..\src\main\java\chatbot\datetime\*.java ..\src\main\java\chatbot\task\*.java ..\src\main\java\chatbot\util\*.java
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
     exit /b 1
