@@ -6,11 +6,16 @@ public class Event extends Task {
     }
 
     @Override
-    public void getStatus() {
+    public String getStatus() {
         if (this.status == 0) {
-            System.out.println("[" + type + "][ ] " + activity + " (at " + at + " )");
+            return "[" + type + "][ ] " + activity + " (at " + at + ")";
         } else {
-            System.out.println("[" + type + "][X] " + activity + " (at " + at + " )");
+            return "[" + type + "][X] " + activity + " (at " + at + ")";
         }
+    }
+
+    @Override
+    public String toString() {
+        return type + "|" + status + "|" + activity + "|" + at + "|\n";
     }
 }
