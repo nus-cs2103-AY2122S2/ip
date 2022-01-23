@@ -1,4 +1,4 @@
-D | 1 | hello | 27/2/1998 1800
-E | 0 | feed dog | 1/1/1998 0100
-E | 1 | feed dog | 1/1/1998 1300
-T | 0 | me
+D | 0 | eat mcdonalds | 24/2/1998 1800
+E | 1 |  hello  | 2/11/1998 0200
+D | 0 |  feed bird  | 24/2/1998 0900
+T | 0 |  me
