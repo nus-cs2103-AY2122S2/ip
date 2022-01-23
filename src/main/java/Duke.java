@@ -30,11 +30,7 @@ public class Duke {
 
                 //Check if input == list
                 else if(inputData.equals("list")){
-                    for(int i = 1; i <= list.size(); i++){
-                        Task task = list.get(i-1);
-                        System.out.print(i + ": ");
-                        task.printTask();
-                    }
+                    printList(list);
 
                 //Check if input == unmark
                 } else if(inputData.contains("unmark")){
@@ -132,5 +128,14 @@ public class Duke {
         } 
 
         scan.close();
+    }
+
+    //Abstracted methods
+    public static void printList(ArrayList<Task> taskArrayList) {
+        for(int i = 1; i <= taskArrayList.size(); i++){
+            Task task = taskArrayList.get(i-1);
+            System.out.print(i + ": ");
+            task.printTask();
+        }
     }
 }
