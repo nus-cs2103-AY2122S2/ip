@@ -6,17 +6,17 @@ import duke.task.Task;
 
 public class Ui {
     public void print(String ... args) {
-        System.out.println(String.format("    %s", "=========================================="));
-        Arrays.asList(args).forEach((x) -> { System.out.println(String.format("    %s", x.toString())); } );
-        System.out.println(String.format("    %s", "=========================================="));
+        System.out.printf("    %s%n", "==========================================");
+        Arrays.asList(args).forEach((x) -> System.out.printf("    %s%n", x));
+        System.out.printf("    %s%n", "==========================================");
     }
 
     public void print(ArrayList<Task> arr) {
-        System.out.println(String.format("    %s", "=========================================="));
+        System.out.printf("    %s%n", "==========================================");
         if(arr.size() == 0)
             System.out.println("    Nothing to show!");
         else
-            arr.forEach((x) -> { System.out.println(String.format("    %d. %s", arr.indexOf(x) + 1, x.toString())); } );
-        System.out.println(String.format("    %s", "=========================================="));
+            arr.forEach((x) -> System.out.printf("    %d. %s%n", arr.indexOf(x) + 1, x.toString()));
+        System.out.printf("    %s%n", "==========================================");
     }
 }

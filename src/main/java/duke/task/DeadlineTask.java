@@ -6,14 +6,14 @@ import java.time.format.DateTimeFormatter;
 public class DeadlineTask extends Task{
     private LocalDate d;
 
-    public DeadlineTask(String ss, LocalDate date) {
-        this.taskName = ss;
+    public DeadlineTask(String taskName, LocalDate date) {
+        this.taskName = taskName;
         this.isDone = false;
         this.d = date;
     }
 
-    public DeadlineTask(String ss, boolean isDone, LocalDate date) {
-        this.taskName = ss;
+    public DeadlineTask(String taskName, boolean isDone, LocalDate date) {
+        this.taskName = taskName;
         this.isDone = isDone;
         this.d = date;
     }
@@ -24,6 +24,7 @@ public class DeadlineTask extends Task{
 
     @Override
     public String toString() {
-        return String.format("[D][%s] %s (by:%s)", this.isDone?"X":" ", this.taskName, this.d.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        return String.format("[D][%s] %s (by:%s)", this.isDone?"X":" ", this.taskName,
+                this.d.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 }

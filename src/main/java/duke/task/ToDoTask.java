@@ -1,14 +1,14 @@
 package duke.task;
 
 public class ToDoTask extends Task{
-    public ToDoTask(String ss) {
-        this.taskName = ss;
+    public ToDoTask(String taskName) {
+        this.taskName = taskName;
         this.isDone = false;
     }
 
-    public ToDoTask(String ss, boolean b) {
-        this.taskName = ss;
-        this.isDone = b;
+    public ToDoTask(String taskName, boolean isDone) {
+        this.taskName = taskName;
+        this.isDone = isDone;
     }
 
     @Override
