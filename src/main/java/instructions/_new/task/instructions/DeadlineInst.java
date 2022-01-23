@@ -1,6 +1,6 @@
 package instructions._new.task.instructions;
 
-import Exceptions.InvalidInputException;
+import exceptions.InvalidInputException;
 import tasks.DeadlineTask;
 import tasks.TaskList;
 

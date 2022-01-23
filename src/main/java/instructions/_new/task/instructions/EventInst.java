@@ -1,6 +1,6 @@
 package instructions._new.task.instructions;
 
-import Exceptions.InvalidInputException;
+import exceptions.InvalidInputException;
 import tasks.EventTask;
 import tasks.TaskList;
 
@@ -44,7 +44,7 @@ public class EventInst extends NewTaskInst {
 
         if (split.length == 1) {
             //happens in "event /at ", event /at b", "event a /atb" etc
-            split = taskDetails.split("/by");
+            split = taskDetails.split("/at");
             if (split.length == 2 && split[0].length() != 0) {
                 //happens in "event a/at b", "event a /atb", "event a/atb"
                 throw NewTaskInst.MISSING_SPACES_EXCEPTION;

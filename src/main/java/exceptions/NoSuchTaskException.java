@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 /**
  * This class encapsulates a "No Such tasks.Task" exception, that occurs when trying to

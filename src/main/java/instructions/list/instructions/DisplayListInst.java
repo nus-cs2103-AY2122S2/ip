@@ -1,6 +1,6 @@
 package instructions.list.instructions;
 
-import Exceptions.NoSuchTaskException;
+import exceptions.NoSuchTaskException;
 import instructions.Instruction;
 import tasks.TaskList;
 

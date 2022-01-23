@@ -1,8 +1,7 @@
-import Exceptions.InvalidInputException;
+import exceptions.InvalidInputException;
 import chatbots.TaskManagerChatbot;
 import instructions.ExitInst;
 import instructions.Instruction;
-import instructions.InstructionHandler;
 import instructions.list.instructions.DisplayListInst;
 import tasks.TaskList;
 

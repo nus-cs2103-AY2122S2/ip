@@ -1,6 +1,6 @@
 package instructions.list.instructions;
 
-import Exceptions.InvalidInputException;
+import exceptions.InvalidInputException;
 import instructions.Instruction;
 
 /**

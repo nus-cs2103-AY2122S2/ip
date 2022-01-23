@@ -9,57 +9,69 @@ Meow! (Hello!)
   (           )
  ( (  )   (  ) )
 (__(__)___(__)__)
-Meow! (I can't do that! I don't understand what you said.)
+Meow! (I don't understand what you said!)
 
     |\__/,|   (`\
   _.|o o  |_   ) )
 -(((---(((--------
 
 ------------------
-Meow! (I can't do that! There's no task 1 to mark.)
+Meow! (There is no task 1!)
 
-Meow! (I can't do that! There's no task 2 to unmark.)
+Meow! (There is no task 2!)
 
-Meow! (I can't do that! There's no task 3 to remove.)
+Meow! (There is no task 3!)
 
-Meow! (I can't do that! No description is provided for the ToDo Task!)
+Meow! (There are missing task details!)
 
-Meow! (I can't do that! No description is provided for the ToDo Task!)
+Meow! (There are missing task details!)
 
-Meow! (Added: [T][ ] sample task.
-You now have 1 task(s)!)
+Meow! (Okay, added this task:
+[T][ ] sample task
+There are 1 tasks in the list now.)
 
-Meow! (I can't do that! No description and timing is provided for the Deadline Task!)
+Meow! (There are missing task details!)
 
-Meow! (I can't do that! No description and timing is provided for the Deadline Task!)
+Meow! (There are missing task details!)
 
-Meow! (I can't do that! No " /by " found in the input!)
+Meow! (There are missing task details!)
 
-Meow! (I can't do that! No description and timing is provided for the Deadline Task!)
+Meow! (There are missing task details!)
 
-Meow! (I can't do that! No timing is provided for the Deadline Task!)
+Meow! (There are missing task details!)
 
-Meow! (I can't do that! No description is provided for the Deadline Task!)
+Meow! (There are missing task details!)
 
-Meow! (Added: [D][ ] task (by: end of year).
-You now have 2 task(s)!)
+Meow! (There are missing task details!)
 
-Meow! (I can't do that! No description and timing is provided for the Event Task!)
+Meow! (There are missing spaces in the command!)
 
-Meow! (I can't do that! No description and timing is provided for the Event Task!)
+Meow! (Okay, added this task:
+[D][ ] task (by: end of year)
+There are 2 tasks in the list now.)
 
-Meow! (I can't do that! No " /at " found in the input!)
+Meow! (There are missing task details!)
 
-Meow! (I can't do that! No description and timing is provided for the Event Task!)
+Meow! (There are missing task details!)
 
-Meow! (I can't do that! No timing is provided for the Event Task!)
+Meow! (There are missing task details!)
 
-Meow! (I can't do that! No description is provided for the Event Task!)
+Meow! (There are missing task details!)
 
-Meow! (Added: [E][ ] event (at: 9 Aug).
-You now have 3 task(s)!)
+Meow! (There are missing task details!)
 
-Meow! (Okay! I've marked this task as done! [T][X] sample task)
+Meow! (There are missing task details!)
+
+Meow! (There are missing task details!)
+
+Meow! (There are missing spaces in the command!)
+
+Meow! (Okay, added this task:
+[E][ ] event (at: 9 Aug)
+There are 3 tasks in the list now.)
+
+Meow! (Okay, this task is done:
+[T][X] sample task)
 
     |\__/,|   (`\
   _.|o o  |_   ) )
@@ -68,7 +80,8 @@ Meow! (Okay! I've marked this task as done! [T][X] sample task)
 2. [D][ ] task (by: end of year)
 3. [E][ ] event (at: 9 Aug)
 ------------------
-Meow! (Okay! I've marked this task as done! [D][X] task (by: end of year))
+Meow! (Okay, this task is done:
+[D][X] task (by: end of year))
 
     |\__/,|   (`\
   _.|o o  |_   ) )
@@ -77,7 +90,8 @@ Meow! (Okay! I've marked this task as done! [D][X] task (by: end of year))
 2. [D][X] task (by: end of year)
 3. [E][ ] event (at: 9 Aug)
 ------------------
-Meow! (Okay! I've marked this task as done! [E][X] event (at: 9 Aug))
+Meow! (Okay, this task is done:
+[E][X] event (at: 9 Aug))
 
     |\__/,|   (`\
   _.|o o  |_   ) )
@@ -86,7 +100,8 @@ Meow! (Okay! I've marked this task as done! [E][X] event (at: 9 Aug))
 2. [D][X] task (by: end of year)
 3. [E][X] event (at: 9 Aug)
 ------------------
-Meow! (This task now needs to be done! [D][ ] task (by: end of year))
+Meow! (Okay, this task needs to be done:
+[D][ ] task (by: end of year))
 
     |\__/,|   (`\
   _.|o o  |_   ) )
@@ -95,7 +110,8 @@ Meow! (This task now needs to be done! [D][ ] task (by: end of year))
 2. [D][ ] task (by: end of year)
 3. [E][X] event (at: 9 Aug)
 ------------------
-Meow! (This task now needs to be done! [T][ ] sample task)
+Meow! (Okay, this task needs to be done:
+[T][ ] sample task)
 
     |\__/,|   (`\
   _.|o o  |_   ) )
@@ -104,7 +120,8 @@ Meow! (This task now needs to be done! [T][ ] sample task)
 2. [D][ ] task (by: end of year)
 3. [E][X] event (at: 9 Aug)
 ------------------
-Meow! (This task now needs to be done! [E][ ] event (at: 9 Aug))
+Meow! (Okay, this task needs to be done:
+[E][ ] event (at: 9 Aug))
 
     |\__/,|   (`\
   _.|o o  |_   ) )
@@ -113,9 +130,17 @@ Meow! (This task now needs to be done! [E][ ] event (at: 9 Aug))
 2. [D][ ] task (by: end of year)
 3. [E][ ] event (at: 9 Aug)
 ------------------
-Meow! (Okay! I've marked this task as done! [T][X] sample task)
+Meow! (There is no task 0!)
 
-Meow! (Okay! I've marked this task as done! [E][X] event (at: 9 Aug))
+Meow! (There is no task -1!)
+
+Meow! (There is no task 0!)
+
+Meow! (Okay, this task is done:
+[T][X] sample task)
+
+Meow! (Okay, this task is done:
+[E][X] event (at: 9 Aug))
 
     |\__/,|   (`\
   _.|o o  |_   ) )
@@ -124,7 +149,9 @@ Meow! (Okay! I've marked this task as done! [E][X] event (at: 9 Aug))
 2. [D][ ] task (by: end of year)
 3. [E][X] event (at: 9 Aug)
 ------------------
-Meow! (Okie dokie! I've removed this task! [D][ ] task (by: end of year))
+Meow! (Okay, I've removed this task:
+[D][ ] task (by: end of year)
+There are 2 tasks left in the list!)
 
     |\__/,|   (`\
   _.|o o  |_   ) )
@@ -132,7 +159,8 @@ Meow! (Okie dokie! I've removed this task! [D][ ] task (by: end of year))
 1. [T][X] sample task
 2. [E][X] event (at: 9 Aug)
 ------------------
-Meow! (This task now needs to be done! [E][ ] event (at: 9 Aug))
+Meow! (Okay, this task needs to be done:
+[E][ ] event (at: 9 Aug))
 
     |\__/,|   (`\
   _.|o o  |_   ) )
@@ -140,7 +168,9 @@ Meow! (This task now needs to be done! [E][ ] event (at: 9 Aug))
 1. [T][X] sample task
 2. [E][ ] event (at: 9 Aug)
 ------------------
-Meow! (Okie dokie! I've removed this task! [T][X] sample task)
+Meow! (Okay, I've removed this task:
+[T][X] sample task
+There are 1 tasks left in the list!)
 
     |\__/,|   (`\
   _.|o o  |_   ) )
@@ -152,3 +182,4 @@ Meooow~ (Bye bye! See you again next time!)
 ZZZzz /,`.-'`'    -.  ;-;;,_
      |,4-  ) )-,_. ,\ (  `'-'
     '---''(_/--'  `-'\_)
+
