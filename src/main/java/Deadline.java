@@ -13,14 +13,14 @@ public class Deadline extends Task {
     @Override
     public String getStatus() {
         if (this.status == 0) {
-            return "[" + type + "][ ] " + activity + " (by " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+            return "[" + type + "][ ] " + activity + " (by " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
         } else {
-            return "[" + type + "][X] " + activity + " (by " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+            return "[" + type + "][X] " + activity + " (by " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
         }
     }
 
     @Override
     public String toString() {
-        return type + "|" + status + "|" + activity + "|" + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "|\n";
+        return type + "|" + status + "|" + activity + "|" + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + "|\n";
     }
 }

@@ -1,3 +1,6 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.io.*;
 import java.nio.file.Files;
@@ -84,7 +87,16 @@ public class Duke {
                         int status = Integer.parseInt(s.next());
                         String activity = s.next();
                         String by = s.next();
-                        Task newD = new Deadline(activity ,by);
+                        SimpleDateFormat savedFormat = new SimpleDateFormat("MMM dd yyyy");
+                        SimpleDateFormat strFormat = new SimpleDateFormat("yyyy-MM-dd");
+                        Task newD = null;
+                        String tmp = null;
+                        try {
+                            tmp = strFormat.format(savedFormat.parse(by));
+                        } catch (ParseException e) {
+                            System.exit(1);
+                        }
+                        newD = new Deadline(activity , tmp);
                         newD.status = status;
                         list.add(newD);
                         s.nextLine();
@@ -115,7 +127,7 @@ public class Duke {
                     for (int i = 0; i < list.size(); i++) {
                         int num = i + 1;
                         System.out.print(num + ". ");
-                        list.get(i).getStatus();
+                        System.out.println(list.get(i).getStatus());
                     }
                     break;
                 case "mark":
@@ -179,7 +191,7 @@ public class Duke {
                     list.add(newT);
                     appendToFile(f.getPath(), newT.toString());
                     newT.addedTask();
-                    newT.getStatus();
+                    System.out.println(newT.getStatus());
                     System.out.println("Now you've got " + list.size() +" tasks in the list.");
 
                     break;
@@ -195,7 +207,7 @@ public class Duke {
                         list.add(newD);
                         appendToFile(f.getPath(), newD.toString());
                         newD.addedTask();
-                        newD.getStatus();
+                        System.out.println(newD.getStatus());
                         System.out.println("Now you've got " + list.size() +" tasks in the list.");
                     } catch (ArrayIndexOutOfBoundsException e) {
                         System.out.println("Invalid deadline command format.\nDate Format: yyyy-mm-dd");
@@ -208,7 +220,7 @@ public class Duke {
                         list.add(newE);
                         appendToFile(f.getPath(), newE.toString());
                         newE.addedTask();
-                        newE.getStatus();
+                        System.out.println(newE.getStatus());
                         System.out.println("Now you've got " + list.size() +" tasks in the list.");
                     } catch (ArrayIndexOutOfBoundsException e) {
                         System.out.println("Invalid event command format.");
@@ -221,7 +233,7 @@ public class Duke {
                         if (index < list.size() && index > -1) {
                             Task deletedT = list.remove(index);
                             System.out.println("Noted. I've removed this task:");
-                            deletedT.getStatus();
+                            System.out.println(deletedT.getStatus());
                             System.out.println("Now you have " + list.size() + " tasks in the list.");
                             try {
                                 changeLine(index,"",f.getPath());
