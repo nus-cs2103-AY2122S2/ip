@@ -1,5 +1,5 @@
-import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Scanner;
 
 public enum Handlers {
     Bye("bye"),
@@ -13,16 +13,48 @@ public enum Handlers {
 
     public final String label;
 
-    private Handlers(String label) {
+    Handlers(String label) {
         this.label = label;
     }
 
-    public static void byeHandler(Tasklist list, String path) throws IOException {
-        System.out.println("Bye. Hope to see you again soon!");
-        list.writeTaskList(path);
+    public static void commandHandler(Tasklist list, Scanner scn) {
+        while (scn.hasNextLine()) {
+            String input = scn.nextLine();
+            String[] inputArr = input.split(" ");
+            String cmd = inputArr[0];
+            try {
+                if (cmd.equals(Bye.label)) {
+                    Handlers.byeHandler(list);
+                    break;
+                } else if (cmd.equals(List.label)) {
+                    Handlers.listHandler(list);
+                } else if (cmd.equals(Deadline.label)) {
+                    Handlers.deadlineHandler(list, input, cmd);
+                } else if (cmd.equals(Event.label)) {
+                    Handlers.eventHandler(list, input, cmd );
+                } else if (cmd.equals(Todo.label)) {
+                    Handlers.todoHandler(list, input);
+                } else if (cmd.equals(Mark.label)) {
+                    Handlers.markHandler(list, input);
+                } else if (cmd.equals(Unmark.label)) {
+                    Handlers.unmarkHandler(list, input);
+                } else if (cmd.equals(Delete.label)) {
+                    Handlers.deleteHandler(list, input);
+                } else {
+                    throw new IllegalArgumentException("Sorry, this is not a recognized command.\n");
+                }
+            } catch (IllegalArgumentException err) {
+                System.out.println(err.getMessage());
+            }
+        }
     }
 
-    public static void deadlineHandler(Tasklist list, String path, String input, String cmd) {
+    public static void byeHandler(Tasklist list) {
+        System.out.println("Bye. Hope to see you again soon!");
+        FileHandler.writeToFile(list);
+    }
+
+    public static void deadlineHandler(Tasklist list, String input, String cmd) {
         try {
             int index = input.indexOf("/by");
             String[] time = DukeException.taskValidity(index, input, cmd);
@@ -37,28 +69,28 @@ public enum Handlers {
                 task = new Deadline(false, input.substring(9, index - 1), date, time[3]);
             }
             list.addTask(task);
-            list.writeTaskList(String.valueOf(path));
+            FileHandler.writeToFile(list);
             System.out.println("Deadline Added: " + task.toString());
             System.out.println("There are now " + list.getTotalTasks() + " tasks in the list.\n");
-        } catch (DukeException | IOException err) {
+        } catch (DukeException err) {
             System.out.println(err.getMessage());
         }
     }
 
-    public static void deleteHandler(Tasklist list, String path, String input) {
+    public static void deleteHandler(Tasklist list, String input) {
         try {
             int index = DukeException.indexValidity(input, list);
             System.out.println("Noted. Deleting this task...");
             Task t = list.delete(index);
-            list.writeTaskList(String.valueOf(path));
+            FileHandler.writeToFile(list);
             System.out.println(t.toString());
             System.out.println("There are now " + list.getTotalTasks() + " tasks in the list.\n");
-        } catch (DukeException | IOException err) {
+        } catch (DukeException err) {
             System.out.println(err.getMessage());
         }
     }
 
-    public static void eventHandler(Tasklist list, String path, String input, String cmd) {
+    public static void eventHandler(Tasklist list, String input, String cmd) {
         try {
             int index = input.indexOf("/at");
             String[] time = DukeException.taskValidity(index, input, cmd);
@@ -73,22 +105,22 @@ public enum Handlers {
                 task = new Event(false, input.substring(6, index - 1), date, time[3]);
             }
             list.addTask(task);
-            list.writeTaskList(String.valueOf(path));
+            FileHandler.writeToFile(list);
             System.out.println("Event Added: " + task.toString());
             System.out.println("There are now " + list.getTotalTasks() + " tasks in the list.\n");
-        } catch (DukeException | IOException err) {
+        } catch (DukeException err) {
             System.out.println(err.getMessage());
         }
     }
 
-    public static void markHandler(Tasklist list, String path, String input) {
+    public static void markHandler(Tasklist list, String input) {
         try {
             int index = DukeException.indexValidity(input, list);
             System.out.println("Nice! I've marked this task as done!");
             Task t = list.mark(index);
-            list.writeTaskList(String.valueOf(path));
+            FileHandler.writeToFile(list);
             System.out.println(t.toString() + "\n");
-        } catch (DukeException | IOException err) {
+        } catch (DukeException err) {
             System.out.println(err.getMessage());
         }
     }
@@ -97,27 +129,27 @@ public enum Handlers {
         System.out.println(list.toString());
     }
 
-    public static void todoHandler(Tasklist list, String path, String input) {
+    public static void todoHandler(Tasklist list, String input) {
         try {
             DukeException.taskValidity(input);
             Todo task = new Todo(false, input.substring(5));
             list.addTask(task);
-            list.writeTaskList(String.valueOf(path));
+            FileHandler.writeToFile(list);
             System.out.println("Todo Added: " + task.toString());
             System.out.println("There are now " + list.getTotalTasks() + " tasks in the list.\n");
-        } catch (DukeException | IOException err) {
+        } catch (DukeException err) {
             System.out.println(err.getMessage());
         }
     }
 
-    public static void unmarkHandler(Tasklist list, String path, String input) {
+    public static void unmarkHandler(Tasklist list, String input) {
         try {
             int index = DukeException.indexValidity(input, list);
             System.out.println("Okay! I've marked this as undone!");
             Task t = list.unmark(index);
-            list.writeTaskList(String.valueOf(path));
+            FileHandler.writeToFile(list);
             System.out.println(t.toString() + "\n");
-        } catch (DukeException | IOException err) {
+        } catch (DukeException err) {
             System.out.println(err.getMessage());
         }
     }
