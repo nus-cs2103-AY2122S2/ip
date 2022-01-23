@@ -40,7 +40,7 @@ public class TaskList {
 
     public ArrayList<Task> findTasksContaining(String keyword) {
         ArrayList<Task> result = new ArrayList<>();
-        for(Task t : arr) {
+        for(Task t : tasks) {
             if(t.getTaskName().contains(keyword)) {
                 result.add(t);
             }

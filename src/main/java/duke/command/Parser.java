@@ -123,6 +123,9 @@ public class Parser {
             ui.print("Deleted Task:", " " + deletedTask.toString(),
                     String.format("There are now %d task(s) in the list.", taskList.getSize()));
             break;
+        case "find":
+            ui.print(taskList.findTasksContaining(args[1]),"Here are the matching tasks in your list:");
+            break;
         default:
             System.out.println("Unknown Command");
         }
@@ -182,6 +185,12 @@ public class Parser {
                 throw new DukeException("Provide the date in the format dd-mm-yyyy!");
             }
             break;
+        case "find":
+            if(args.length == 1) {
+                throw new DukeException("Provide keyword");
+            }
+            break;
         }
+
     }
 }
