@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Task {
     public String description;
     protected boolean done;
@@ -17,6 +19,15 @@ public class Task {
 
     public String getDoneIcon () {
         return (this.done) ? "X" : " ";
+    }
+
+    /**
+     * Accepts string in yyyy-mm-dd format
+     * @param dateString
+     * @return
+     */
+    public LocalDate parseDate(String dateString) {
+        return LocalDate.parse(dateString);
     }
 
     @Override
