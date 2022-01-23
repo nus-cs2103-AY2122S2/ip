@@ -108,21 +108,21 @@ public class Parser {
             }
         }
 
-        else if(firstWord.equalsIgnoreCase("deadline")) {
+        else if (firstWord.equalsIgnoreCase("deadline")) {
             String subString = input.substring(8).trim(); // take the remaining of the input String
             if (subString.length() == 0) {
                 throw new IncompleteInputException(firstWord);
             } else {
-                String[] temp = subString.split(" /"); // breaks the subString into 2 parts
-                if (!temp[1].substring(0,3).equals("by ")) {
+                String[] inputArgs = subString.split(" /"); // breaks the subString into 2 parts
+                if (!inputArgs[1].substring(0,3).equals("by ")) {
                     throw new UnknownInputException();
                 } else {
-                    String deadlineDateTime = temp[1].substring(3); // retrieves the String after '/by'
-                    String[] temp1 = deadlineDateTime.split(" ");
+                    String deadlineDateTime = inputArgs[1].substring(3); // retrieves the String after '/by'
+                    String[] dateTimeArgs = deadlineDateTime.split(" ");
                     try {
-                        LocalDate deadlineDate = stringToLocalDate(temp1[0]);
-                        LocalTime deadlineTime = stringToLocalTime(temp1[1]);
-                        Task deadline = new Deadline(temp[0], deadlineDate, deadlineTime);
+                        LocalDate deadlineDate = stringToLocalDate(dateTimeArgs[0]);
+                        LocalTime deadlineTime = stringToLocalTime(dateTimeArgs[1]);
+                        Task deadline = new Deadline(inputArgs[0], deadlineDate, deadlineTime);
                         Ui.line();
                         System.out.println("     This task is on a timer!");
                         return new AddCommand(deadline);
@@ -138,19 +138,19 @@ public class Parser {
             if (subString.length() == 0) {
                 throw new IncompleteInputException(firstWord);
             } else {
-                String[] temp = subString.split(" /"); // breaks the subString into 2 parts
-                if (!temp[1].substring(0,3).equals("at ")) {
+                String[] inputArgs = subString.split(" /"); // breaks the subString into 2 parts
+                if (!inputArgs[1].substring(0,3).equals("at ")) {
                     throw new UnknownInputException();
                 } else {
-                    String eventDateTime = temp[1].substring(3); // retrieves the String after '/at'
-                    String[] temp1 = eventDateTime.split(" ");
+                    String eventDateTime = inputArgs[1].substring(3); // retrieves the String after '/at'
+                    String[] dateTimeArgs = eventDateTime.split(" ");
                     try {
-                        LocalDate eventDate = stringToLocalDate(temp1[0]);
-                        String eventTime = temp1[1];
+                        LocalDate eventDate = stringToLocalDate(dateTimeArgs[0]);
+                        String eventTime = dateTimeArgs[1];
                         String[] splitEventTimes = eventTime.split("-");
                         LocalTime eventStartTime = stringToLocalTime(splitEventTimes[0]);
                         LocalTime eventEndTime = stringToLocalTime(splitEventTimes[1]);
-                        Task event = new Event(temp[0], eventDate, eventStartTime, eventEndTime);
+                        Task event = new Event(inputArgs[0], eventDate, eventStartTime, eventEndTime);
                         Ui.line();
                         System.out.println("     Emergency event on this date!");
                         return new AddCommand(event);

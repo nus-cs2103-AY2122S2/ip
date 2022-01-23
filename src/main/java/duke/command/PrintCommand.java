@@ -32,6 +32,4 @@ public class PrintCommand extends Command {
     public boolean isExit() {
         return false;
     }
-
-
 }

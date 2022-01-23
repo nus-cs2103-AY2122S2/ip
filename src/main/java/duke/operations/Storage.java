@@ -108,7 +108,6 @@ public class Storage {
         }
 
         readFileContents(txtFile.toString());
-
     }
 
     /**

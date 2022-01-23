@@ -10,7 +10,6 @@ import java.util.ArrayList;
  */
 public class TaskList {
     protected static final ArrayList<Task> taskArr = new ArrayList<>();
-
     /**
      * Prints the total number of tasks.
      *

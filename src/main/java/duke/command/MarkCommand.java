@@ -34,6 +34,4 @@ public class MarkCommand extends Command {
     public boolean isExit() {
         return false;
     }
-
-
 }
