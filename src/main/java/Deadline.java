@@ -1,8 +1,17 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+/**
+ * This class represents the Deadline task
+ *
+ * @author Jan
+ * @version 1.0
+ */
 public class Deadline extends Task {
     /**
      * The deadline
      */
-    private String deadlineTime;
+    private LocalDate deadlineTime;
 
     /**
      * Constructor for Deadline objects
@@ -10,7 +19,7 @@ public class Deadline extends Task {
      * @param deadlineName  the deadline name
      * @param deadlineTime  the deadline
      */
-    public Deadline(String deadlineName, String deadlineTime) {
+    public Deadline(String deadlineName, LocalDate deadlineTime) {
         super(deadlineName);
         this.deadlineTime = deadlineTime;
     }
@@ -24,7 +33,7 @@ public class Deadline extends Task {
      */
     public Deadline(String deadlineName, boolean isDone, String deadlineTime) {
         super(deadlineName, isDone);
-        this.deadlineTime = deadlineTime;
+        this.deadlineTime = LocalDate.parse(deadlineTime);
     }
 
 
@@ -43,7 +52,7 @@ public class Deadline extends Task {
             doneness = "[ ] ";
         }
         String deadlineName = super.toString();
-        String time = " (by: " + deadlineTime + ")";
+        String time = " (by: " + deadlineTimeToString() + ")";
         return box1 + doneness + deadlineName + time;
     }
 
@@ -85,5 +94,14 @@ public class Deadline extends Task {
         sb.append(":");
         sb.append(this.deadlineTime);
         return sb.toString();
+    }
+
+    /**
+     * Returns a string representation of the deadline time
+     *
+     * @return  deadline time in string
+     */
+    private String deadlineTimeToString() {
+        return deadlineTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 }

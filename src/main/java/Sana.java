@@ -1,11 +1,16 @@
 import java.io.FileNotFoundException;
-import java.util.*; // Import java utils
+
+import java.time.format.DateTimeParseException;
+import java.util.LinkedList;
+import java.util.Scanner;
+
+import java.time.LocalDate;
 
 /**
  * Sana is a BIG program!
  *
  * @author  Jan Alfenson Tan
- * @version 1.2
+ * @version 1.7
  */
 public class Sana {
     // The border for Sana's replies
@@ -48,8 +53,10 @@ public class Sana {
         try {
             if (userCommand.equals("bye")) {
                 bye();
+
             } else if (userCommand.equals("list")) {
                 list();
+
             } else if (userCommand.startsWith("mark") || userCommand.startsWith("unmark")) {
                 String[] substringArr = userCommand.split(" ", 2);
                 if (substringArr.length == 1) {
@@ -57,23 +64,29 @@ public class Sana {
                 }
                 int taskIndex = Integer.parseInt(substringArr[1]) - 1;
                 mark(taskIndex, userCommand.startsWith("mark"));
+
             } else if (userCommand.startsWith("todo ")) {
                 String taskName = userCommand.replaceFirst("todo ", "");
                 addToDo(taskName);
+
             } else if (userCommand.startsWith("event ")) {
                 String temp = userCommand.replaceFirst("event ", "");
                 if (!temp.contains(" /at ")) {
                     throw new IncompleteCommandException();
                 }
                 String[] subStrings = temp.split(" /at ", 2);
-                addEvent(subStrings[0], subStrings[1]);
+                LocalDate eventDate = LocalDate.parse(subStrings[1]);
+                addEvent(subStrings[0], eventDate);
+
             } else if (userCommand.startsWith("deadline ")) {
                 String temp = userCommand.replaceFirst("deadline ", "");
                 if (!temp.contains(" /by ")) {
                     throw new IncompleteCommandException();
                 }
                 String[] subStrings = temp.split(" /by ", 2);
-                addDeadline(subStrings[0], subStrings[1]);
+                LocalDate deadlineDate = LocalDate.parse(subStrings[1]);
+                addDeadline(subStrings[0], deadlineDate);
+
             } else if (userCommand.startsWith("delete ")) {
                 String[] substringArr = userCommand.split(" ", 2);
                 if (substringArr.length == 1) {
@@ -81,8 +94,10 @@ public class Sana {
                 }
                 int taskIndex = Integer.parseInt(substringArr[1]) - 1;
                 delete(taskIndex);
+
             } else {
                 throw new UnknownCommandException();
+
             }
         } catch (UnknownCommandException e) {
             System.out.println(e.getMessage());
@@ -92,6 +107,8 @@ public class Sana {
             System.out.println(e.getMessage());
         } catch (NumberFormatException e) {
             System.out.println("Where's my number!");
+        } catch (DateTimeParseException e) {
+            System.out.println(e);
         }
         taskMem.updateMemory(userTasks);
         border();
@@ -116,14 +133,14 @@ public class Sana {
      * This method adds a Deadline to userTasks
      *
      * @param deadlineName  name of the deadline
-     * @param deadlineTime  time of the deadline
+     * @param deadlineDate  time of the deadline
      */
-    private void addDeadline(String deadlineName, String deadlineTime) throws IncompleteCommandException {
-        if (deadlineName.isBlank() || deadlineTime.isBlank()) {
+    private void addDeadline(String deadlineName, LocalDate deadlineDate) throws IncompleteCommandException {
+        if (deadlineName.isBlank()) {
             throw new IncompleteCommandException();
         }
         addTaskText();
-        Deadline newDeadline = new Deadline(deadlineName, deadlineTime);
+        Deadline newDeadline = new Deadline(deadlineName, deadlineDate);
         userTasks.add(newDeadline);
         System.out.println(newDeadline);
         taskNumberText();
@@ -135,8 +152,8 @@ public class Sana {
      * @param eventName name of the event
      * @param eventTime time of the event
      */
-    private void addEvent(String eventName, String eventTime) throws IncompleteCommandException {
-        if (eventName.isBlank() || eventTime.isBlank()) {
+    private void addEvent(String eventName, LocalDate eventTime) throws IncompleteCommandException {
+        if (eventName.isBlank()) {
             throw new IncompleteCommandException();
         }
         addTaskText();
@@ -222,19 +239,6 @@ public class Sana {
     private void border() {
         System.out.println(border);
     }
-
-    /** Obsolete
-     * Adds given task to the list of tasks given to Sana.
-     *
-     * @param taskName  name of task
-     */
-
-    /**
-     private void addTask(String taskName) {
-     userTasks.add(new Task(taskName));
-     System.out.println("added: " + taskName);
-     }
-     */
 
     public static void main(String[] args) {
         Sana sana = new Sana();
