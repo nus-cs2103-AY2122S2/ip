@@ -1,10 +1,23 @@
+import javax.swing.text.StyledEditorKit;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends Task {
 
-    protected String by;
+    protected Boolean useLocalDate = false;
+    protected LocalDate by;
+    protected String strBy;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String strBy) {
         super(description);
-        this.by = by;
+        strBy = strBy.trim();
+        try {
+            this.by = LocalDate.parse(strBy);
+            useLocalDate = true;
+        } catch (DateTimeParseException e){
+            this.strBy = strBy;
+        }
     }
 
     @Override
@@ -14,6 +27,10 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" +  super.toString() + " (by:" + by + ")";
+        if (useLocalDate) {
+            return "[D]" +  super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        } else {
+            return "[D]" +  super.toString() + " (by: " + strBy + ")";
+        }
     }
 }

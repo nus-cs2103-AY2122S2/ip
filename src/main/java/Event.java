@@ -1,10 +1,22 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Event extends Task {
 
-    protected String at;
+    boolean useLocalDate = false;
+    protected LocalDate at;
+    protected String strAt = "";
 
-    public Event(String description, String at) {
+    public Event(String description, String strAt) {
         super(description);
-        this.at = at;
+        strAt = strAt.trim();
+        try {
+            this.at = LocalDate.parse(strAt);
+            useLocalDate = true;
+        } catch (DateTimeParseException e){
+            this.strAt = strAt;
+        }
     }
 
     @Override
@@ -14,6 +26,10 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at:" + at + ")";
+        if (useLocalDate) {
+            return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        } else {
+            return "[E]" + super.toString() + " (at: " + strAt + ")";
+        }
     }
 }
