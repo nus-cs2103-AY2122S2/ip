@@ -22,7 +22,7 @@ public class Event extends Task {
             return LocalDateTime.parse(temp[0] + "T" + temp[1].charAt(0) + temp[1].charAt(1)
                     + ":" + temp[1].charAt(2) + temp[1].charAt(3) + ":00");
         } catch (DateTimeParseException e) {
-            throw new DukeWrongInputFormatException("Format for deadline is wrong. Please refer to list of commands.");
+            throw new DukeWrongInputFormatException("Format for event is wrong. Please refer to list of commands.");
         }
     }
 
