@@ -71,7 +71,7 @@ public class Storage {
             reader.close();
            
         } catch (IOException e) {
-            System.out.println("\nWhat's this? An error occured when I tried to load the file");
+            System.out.println("\nWhat's this? An error occurred when I tried to load the file");
         }
     }
     
