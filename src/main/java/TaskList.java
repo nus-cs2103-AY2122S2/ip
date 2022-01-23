@@ -64,7 +64,7 @@ public class TaskList {
                 case "E":
                     substring = data[2].split("/at ", 2);
                     if (substring.length < 2) {
-                        newTask = new Event(substring[0]);
+                        newTask = new Event(substring[0], isDone);
                     } else {
                         newTask = new Event(substring[0], substring[1], isDone);
                     }

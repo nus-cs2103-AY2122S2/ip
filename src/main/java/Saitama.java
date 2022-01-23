@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 public class Saitama {
-
     private static String filePath = "data/Saitama.txt";
 
     public static void main(String[] args) {

@@ -23,9 +23,9 @@ public class Event extends Task {
     public String getTaskData() {
         String isDone = this.getStatusIcon() == "X" ? "1" : "0";
         if (at != null) {
-            return "T " + isDone + " " + this.description + "/at " + this.at + "\n";
+            return "E " + isDone + " " + this.description + "/at " + this.at + "\n";
         } else {
-            return "T " + isDone + " " + this.description + "\n";
+            return "E " + isDone + " " + this.description + "\n";
         }
     }
 
