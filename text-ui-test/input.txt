@@ -7,6 +7,10 @@ event first event /at first time
 deadline first deadline /by second time
 mark 2
 list
+delete 2
+list
+deadline first deadline /by 01/01/2022
+list
 unmark 1
 list
 bye
