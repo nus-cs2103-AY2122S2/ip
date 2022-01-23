@@ -87,6 +87,12 @@ public class Ui {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
 
+    public void showEmptyTask() {
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("OOPS!!! Task description cannot be empty.");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    }
+
     public void showSaveError(IOException e) {
         System.out.println("Something went wrong: " + e.getMessage());
     }
@@ -110,12 +116,27 @@ public class Ui {
     }
 
     public boolean isValidTask(String fullCommand) {
-        int index = fullCommand.indexOf(' ');
-        if (index == -1) {
-            return false;
-        } else {
-            return true;
+        if (getCommandWord(fullCommand).equals("todo")) {
+            int index = fullCommand.indexOf(' ');
+            if (index == -1) {
+                return false;
+            } else {
+                return true;
+            }
+        } else if (getCommandWord(fullCommand).equals("deadline")) {
+            if (fullCommand.indexOf("deadline") + 9 >= fullCommand.indexOf("/by")) {
+                return false;
+            } else {
+                return true;
+            }
+        } else if (getCommandWord(fullCommand).equals("event")) {
+            if (fullCommand.indexOf("event") + 6 >= fullCommand.indexOf("/at")) {
+                return false;
+            } else {
+                return true;
+            }
         }
+        return false;
     }
 
     public boolean isValidDeadline(String fullCommand) {
@@ -127,19 +148,61 @@ public class Ui {
     }
 
     public boolean isValidMark(String fullCommand) {
-        return true;
+        try {
+            Integer.parseInt(fullCommand.substring(fullCommand.indexOf(' ') + 1));
+            return true;
+        } catch (NumberFormatException e) {
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            System.out.println("Wrong mark format!");
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            return false;
+        }
+    }
+
+    public boolean isValidUnmark(String fullCommand) {
+        try {
+            Integer.parseInt(fullCommand.substring(fullCommand.indexOf(' ') + 1));
+            return true;
+        } catch (NumberFormatException e) {
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            System.out.println("Wrong unmark format!");
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            return false;
+        }
+    }
+
+    public int markIndex(String fullCommand) {
+        return Integer.parseInt(fullCommand.substring(fullCommand.indexOf(' ') + 1));
     }
 
     public String getTaskName(String fullCommand) {
         if (getCommandWord(fullCommand).equals("todo")) {
             return fullCommand.substring(fullCommand.indexOf(' ') + 1);
         } else if (getCommandWord(fullCommand).equals("deadline")) {
-            return fullCommand.substring(fullCommand.indexOf(' ') + 1, fullCommand.indexOf("/by") - 1);
+                return fullCommand.substring(fullCommand.indexOf(' ') + 1, fullCommand.indexOf("/by") - 1);
         } else {
             return fullCommand.substring(fullCommand.indexOf(' ') + 1, fullCommand.indexOf("/at") - 1);
         }
     }
 
-    public LocalDate getTaskDate
+    public LocalDate getTaskDate(String fullCommand) {
+        if (getCommandWord(fullCommand).equals("deadline")) {
+            return LocalDate.parse(fullCommand.substring(fullCommand.indexOf("/by") + 4));
+        } else {
+            return LocalDate.parse(fullCommand.substring(fullCommand.indexOf("/at") + 4));
+        }
+    }
+
+    public void showInvalidDeadline() {
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("Deadlines must include \"/by\"");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    }
+
+    public void showInvalidEvent() {
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("Events must include \"/at\"");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    }
 
 }

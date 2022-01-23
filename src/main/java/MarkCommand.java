@@ -8,8 +8,12 @@ public class MarkCommand extends Command {
 
     @Override
     void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.mark(index);
-        ui.showMark(taskList.getTask(index));
+        if (index > taskList.length()) {
+            ui.showOutOfBounds();
+        } else {
+            taskList.mark(index);
+            ui.showMark(taskList.getTask(index));
+        }
     }
 
     @Override

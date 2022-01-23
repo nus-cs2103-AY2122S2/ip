@@ -171,6 +171,9 @@
 //    }
 //}
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 public class Duke {
     private Storage storage;
     private TaskList taskList;
@@ -208,10 +211,74 @@ public class Duke {
                 isExit = c.isExit();
             } else if (ui.getCommandWord(fullCommand).equals("todo")) {
                 if (ui.isValidTask(fullCommand)) {
-                    AddCommand addCommand = new AddCommand("todo", )
+                    String taskName = ui.getTaskName(fullCommand);
+                    ToDo todo = new ToDo(taskName);
+                    AddCommand addCommand = new AddCommand("todo", todo);
+                    addCommand.execute(taskList, ui, storage);
+                    isExit = addCommand.isExit();
+                } else {
+                    ui.showEmptyTask();
                 }
+            } else if (ui.getCommandWord(fullCommand).equals("deadline")) {
+                if (ui.isValidTask(fullCommand)) {
+                    if (ui.isValidDeadline(fullCommand)) {
+                        try {
+                            String taskName = ui.getTaskName(fullCommand);
+                            LocalDate localDate = ui.getTaskDate(fullCommand);
+                            Deadline deadline = new Deadline(taskName, localDate);
+                            AddCommand addCommand = new AddCommand("deadline", deadline);
+                            addCommand.execute(taskList, ui, storage);
+                            isExit = addCommand.isExit();
+                        } catch (DateTimeParseException e) {
+                            ui.showDateTimeParseException();
+                        }
+                    } else {
+                        ui.showInvalidDeadline();
+                    }
+                } else {
+                    ui.showEmptyTask();
+                }
+            } else if (ui.getCommandWord(fullCommand).equals("event")) {
+                if (ui.isValidTask(fullCommand)) {
+                    if (ui.isValidEvent(fullCommand)) {
+                        try {
+                            String taskName = ui.getTaskName(fullCommand);
+                            LocalDate localDate = ui.getTaskDate(fullCommand);
+                            Event event = new Event(taskName, localDate);
+                            AddCommand addCommand = new AddCommand("event", event);
+                            addCommand.execute(taskList, ui, storage);
+                            isExit = addCommand.isExit();
+                        } catch (DateTimeParseException e) {
+                            ui.showDateTimeParseException();
+                        }
+                    } else {
+                        ui.showInvalidEvent();
+                    }
+                } else {
+                    ui.showEmptyTask();
+                }
+            } else if (ui.getCommandWord(fullCommand).equals("mark")) {
+                if (ui.isValidMark(fullCommand)) {
+                    MarkCommand markCommand = new MarkCommand(fullCommand,
+                            ui.markIndex(fullCommand));
+                    markCommand.execute(taskList, ui, storage);
+                    isExit = markCommand.isExit();
+                }
+            } else if (ui.getCommandWord(fullCommand).equals("unmark")) {
+                if (ui.isValidUnmark(fullCommand)) {
+                    UnmarkCommand unmarkCommand = new UnmarkCommand(fullCommand,
+                            ui.markIndex(fullCommand));
+                    unmarkCommand.execute(taskList, ui, storage);
+                    isExit = unmarkCommand.isExit();
+                }
+            } else {
+                ui.showGeneralException();
             }
         }
+    }
+
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
     }
 
 }
