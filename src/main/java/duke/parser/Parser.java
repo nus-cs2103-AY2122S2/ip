@@ -66,7 +66,7 @@ public class Parser {
     }
 
     public static LocalDate parseDate(String date) throws DukeException {
-        String[] splitDate = date.split("-"); // yyyy-mm-dd
+        String[] splitDate = date.trim().split("-"); // yyyy-mm-dd
         if (splitDate.length != 3) {
             throw new DukeException(ErrorMessage.MESSAGE_INVALID_DATE_FORMAT);
         }
