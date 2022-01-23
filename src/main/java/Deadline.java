@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 public class Deadline extends Task {
     private LocalDateTime by;
@@ -11,6 +12,11 @@ public class Deadline extends Task {
 
     public LocalDateTime getBy() {
         return this.by;
+    }
+
+    @Override
+    public Optional<LocalDateTime> getDate() {
+        return Optional.of(this.by);
     }
 
     @Override

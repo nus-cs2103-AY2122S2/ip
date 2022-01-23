@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.util.Optional;
+
 public abstract class Task {
     private TaskType type;
     private String description;
@@ -27,6 +30,10 @@ public abstract class Task {
 
     public String getStatusIcon() {
         return (this.isDone ? "X" : " ");
+    }
+
+    public Optional<LocalDateTime> getDate() {
+        return Optional.empty();
     }
 
     public String getReadableString() {

@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 public class Event extends Task {
     private LocalDateTime at;
@@ -11,6 +12,10 @@ public class Event extends Task {
 
     public LocalDateTime getAt() {
         return this.at;
+    }
+
+    public Optional<LocalDateTime> getDate() {
+        return Optional.of(this.at);
     }
 
     @Override
