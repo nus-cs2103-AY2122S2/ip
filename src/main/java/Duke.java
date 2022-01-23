@@ -78,49 +78,16 @@ public class Duke {
 
                 //Check if input == unmark
                 } else if(inputData.contains("unmark")){
-                    //split string by space
-                    String[] splitted = inputData.split("\\s+");
-                    int index = Integer.parseInt(splitted[1]);
-                    if(index > list.size() || index <= 0){
-                        System.out.println("Index out of bounds, please try again");
-                    } else {
-                        list.get(index-1).setDone(false);
-                        for (int i = 1; i <= list.size(); i++) {
-                            Task task = list.get(i - 1);
-                            System.out.print(i + ": ");
-                            task.printTask();
-                        }
-                    }
+
+                    unmark(inputData,list);
+
                 //Check if input == mark
                 } else if(inputData.contains("mark")){
-                    //split string by space
-                    String[] splitted = inputData.split("\\s+");
-                    int index = Integer.parseInt(splitted[1]);
-                    if(index > list.size() || index <= 0){
-                        System.out.println("Index out of bounds, please try again");
-                    } else {
-                        list.get(index-1).setDone(true);
-                        for (int i = 1; i <= list.size(); i++) {
-                            Task task = list.get(i - 1);
-                            System.out.print(i + ": ");
-                            task.printTask();
-                        }
-                    }
+                    mark(inputData,list);
                 }
                 // check if input == delete
                 else if(inputData.contains("delete")){
-                    String[] splitted = inputData.split("\\s+");
-                    int index = Integer.parseInt(splitted[1]);
-                    if(index > list.size() || index <= 0){
-                        System.out.println("Index out of bounds, please try again");
-                    } else {
-                        list.remove(index-1);
-                        for (int i = 1; i <= list.size(); i++) {
-                            Task task = list.get(i - 1);
-                            System.out.print(i + ": ");
-                            task.printTask();
-                        }
-                    }
+                    delete(inputData, list);
                 }
                 //input is a new type of task
                 else if(inputData.contains("todo") || inputData.contains("event") || inputData.contains("deadline")) {
@@ -234,6 +201,50 @@ public class Duke {
             Task task = taskArrayList.get(i-1);
             System.out.print(i + ": ");
             task.printTask();
+        }
+    }
+    public static void unmark(String input, ArrayList<Task> taskArrayList) {
+        String[] splitted = input.split("\\s+");
+        try {
+            int index = Integer.parseInt(splitted[1]);
+            if(index > taskArrayList.size() || index <= 0){
+                System.out.println("Index out of bounds, please try again");
+            } else {
+                taskArrayList.get(index-1).setDone(false);
+                printList(taskArrayList);
+            }
+        } catch (Exception e) {
+            System.out.println("You have entered an invalid input");
+        }
+    }
+
+    public static void mark(String input, ArrayList<Task> taskArrayList) {
+        String[] splitted = input.split("\\s+");
+        try {
+            int index = Integer.parseInt(splitted[1]);
+            if(index > taskArrayList.size() || index <= 0){
+                System.out.println("Index out of bounds, please try again");
+            } else {
+                taskArrayList.get(index-1).setDone(true);
+                printList(taskArrayList);
+            }
+        } catch (Exception e) {
+            System.out.println("You have entered an invalid input");
+        }
+    }
+
+    public static void delete(String input, ArrayList<Task> taskArrayList) {
+        String[] splitted = input.split("\\s+");
+        try {
+            int index = Integer.parseInt(splitted[1]);
+            if (index > taskArrayList.size() || index <= 0) {
+                System.out.println("Index out of bounds, please try again");
+            } else {
+                taskArrayList.remove(index - 1);
+                printList(taskArrayList);
+            }
+        } catch (Exception e) {
+            System.out.println("You have entered an invalid input");
         }
     }
 }
