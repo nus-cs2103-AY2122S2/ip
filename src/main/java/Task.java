@@ -1,6 +1,8 @@
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.Optional;
 
 public abstract class Task implements ISerializable {
     private final TaskType type;
@@ -31,6 +33,10 @@ public abstract class Task implements ISerializable {
 
     public String getStatusIcon() {
         return (this.isDone ? "X" : " ");
+    }
+
+    public Optional<LocalDateTime> getDate() {
+        return Optional.empty();
     }
 
     public String getReadableString() {
