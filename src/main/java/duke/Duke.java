@@ -1,3 +1,7 @@
+package duke;
+
+import duke.util.Parser;
+
 import java.util.Scanner;
 
 public class Duke {

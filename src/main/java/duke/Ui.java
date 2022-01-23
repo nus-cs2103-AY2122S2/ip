@@ -1,3 +1,7 @@
+package duke;
+
+import duke.util.Constants;
+
 public class Ui {
     public void greetings() {
         log(Constants.GREETINGS);

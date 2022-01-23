@@ -1,3 +1,13 @@
+package duke.util;
+
+import duke.TaskList;
+import duke.exception.CommandNotFoundException;
+import duke.exception.DukeException;
+import duke.exception.InvalidArgumentException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
+
 public class Parser {
     public static String parse(String line, TaskList taskList) throws DukeException {
         String[] input = line.strip().split(" ", 2);
