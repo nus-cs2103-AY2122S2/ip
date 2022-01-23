@@ -1,14 +1,18 @@
 import main.java.Event;
 import main.java.Task;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 import main.java.ToDo;
 import main.java.Deadline;
 import java.util.ArrayList;
-import main.java.Event;
+import java.io.File;
+import java.io.FileWriter;
+import java.nio.file.Paths;
 
 public class Duke {
 
-    private static int level = 6;
+    private static int level = 7;
     private ArrayList<Task> taskArr;
     private int currTask;
 
@@ -17,8 +21,64 @@ public class Duke {
         this.currTask = 0;
     }
 
+    public void load(String filePath) throws FileNotFoundException {
+        try {
+            File directory = new File("data");
+            if (directory.mkdirs()) {
+                System.out.println("Created new directory /data");
+            }
+            File taskTextFile = new File("data/task.txt");
+            if (taskTextFile.createNewFile()){
+                System.out.println("Created text file as /data/task.txt");
+            }
+
+            Scanner s = new Scanner(Paths.get("data/task.txt")); // create a Scanner using the File as the source
+            while (s.hasNext()) {
+                String words[] = s.nextLine().split(",");
+                String done = words[1];
+                String description = words[2];
+                switch (words[0]) {
+                case ("T"):
+                    this.taskArr.add(new ToDo(description));
+                    break;
+                case ("D"):
+                    this.taskArr.add(new Deadline(description, words[3]));
+                    break;
+                case ("E"):
+                    this.taskArr.add(new Event(description, words[3]));
+                    break;
+                } if (done.equals("true")) {
+                    taskArr.get(currTask).markDone();
+                }
+                this.currTask++;
+            } if (this.currTask != 0) {
+                System.out.println("Previously, you are left with these tasks:");
+                list();
+                horizontal();
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println("failed111");
+        }
+    }
+
+    private void writeToFile() throws IOException {
+        FileWriter fw = new FileWriter("data/task.txt");
+
+        for (Task i : taskArr) {
+            fw.write(i.toFileFormat());
+            fw.write("\n");
+        }
+        fw.close();
+    }
+
     public void run() {
         welcome();
+        try {
+            load("data/task.txt");
+        } catch (Exception e) {
+            System.out.println("failed");
+        }
         Scanner sc = new Scanner(System.in);
         boolean end = false;
         while (!end) {
@@ -68,6 +128,11 @@ public class Duke {
             }
         } else {
             System.out.println("Idk what you mean! :-(");
+        }
+        try {
+            writeToFile();
+        } catch (Exception IOException) {
+            System.out.println("Something went wrong");
         }
         horizontal();
     }
