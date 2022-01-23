@@ -1,6 +1,9 @@
-public class DukeException {
+import java.lang.Exception;
 
-    public DukeException() {
-        System.out.println("    Invalid input detected. Please check your input");
+public class DukeException extends Exception {
+
+    public DukeException(){
+        super("    Invalid input detected. Please check your input");
     }
+
 }
