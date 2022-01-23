@@ -11,15 +11,21 @@ public class Sana {
     private static final String border = "_____________________________________________";
 
     /**
-     * userCommands stores the commands given to Sana from the user
+     * userTasks stores the commands given to Sana from the user
      */
     private LinkedList<Task> userTasks;
+
+    /**
+     * taskMem stores the tasks given to Sana in a txt file
+     */
+    private Memory taskMem;
 
     /**
      * Constructor for the Sana class
      */
     public Sana() {
         this.userTasks = new LinkedList<>();
+        this.taskMem = new Memory();
     }
 
     /**
