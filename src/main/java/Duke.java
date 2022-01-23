@@ -16,14 +16,14 @@ public class Duke {
     public void printMsg(String input) {
         try {
             inputMsg(input);
-        } catch (IndexOutOfBoundsException e) {
+        } catch (ToDoException e) {
             System.out.println("\t ☹ OOPS!!! The description of a todo cannot be empty.");
         } catch (DukeException e) {
-            System.out.println("\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            System.out.println(e.getMessage());
         }
     }
 
-    public void inputMsg(String input) throws DukeException {
+    public void inputMsg(String input) throws DukeException, ToDoException {
         if (input.equals("bye")) {
             System.out.println("\t Bye. Hope to see you again soon!");
         } else if (input.equals("list")) {
@@ -44,7 +44,11 @@ public class Duke {
             System.out.println("\t  " + items.get(count-1));
             System.out.println("\t Now you have " + count + " tasks in the list.");
         } else if (input.split(" ", 2)[0].equals("todo")) {
-            String des = input.split(" ", 2)[1];
+            String[] ls = input.split(" ", 2);
+            if (ls.length <= 1) {
+                throw new ToDoException();
+            }
+            String des = ls[0];
             items.add(new Todo(des));
             count++;
             System.out.println("\t Got it, I've added this task:");
