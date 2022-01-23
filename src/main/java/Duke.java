@@ -6,26 +6,26 @@ import duke.ui.Ui;
 
 public class Duke {
     public static void main(String[] args) {
-        Ui p = new Ui();
+        Ui ui = new Ui();
         Scanner in = new Scanner(System.in);
-        Parser ip = new Parser();
-        TaskList tl = new TaskList();
-        Storage.loadFile(System.getProperty("user.dir") + "\\data\\duke.txt", tl);
+        Parser parser = new Parser();
+        TaskList taskList = new TaskList();
+        int runResult = parser.run(userInput, ui, taskList);
 
-        p.printLogo();
+        Storage.loadFile(System.getProperty("user.dir") + "\\data\\duke.txt", taskList);
+
+        ui.printLogo();
         String userInput = in.nextLine();
-        int runResult = ip.run(userInput, p, tl);
-
         if(runResult == 1) {
-            Storage.saveFile("data", "duke.txt", tl.getList());
+            Storage.saveFile("data", "duke.txt", taskList.getList());
         }
 
         while(runResult != -1) {
             if(runResult == 1) {
-                Storage.saveFile("data", "duke.txt", tl.getList());
+                Storage.saveFile("data", "duke.txt", taskList.getList());
             }
             userInput = in.nextLine();
-            runResult = ip.run(userInput, p, tl);
+            runResult = parser.run(userInput, ui, taskList);
         }
     }
 
