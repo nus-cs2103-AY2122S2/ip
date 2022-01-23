@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Represents the Duke application
+ */
 public class Duke {
     private TaskManager taskManager;
     private Ui ui;
@@ -17,6 +20,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke application
+     */
     public void run() {
         ui.greet();
         while (true) {
@@ -34,6 +40,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Main driver function of the Duke application
+     * @param args Command line arguments
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }

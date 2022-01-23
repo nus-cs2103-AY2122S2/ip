@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
+/**
+ * Represents a <code>Task</code> with a deadline date
+ */
 public class Deadline extends Task {
     private String deadlineDate;
     private LocalDate date;
@@ -30,15 +33,27 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Obtain the type of <code>Task</code>
+     * @return String corresponding to the type of <code>Task</code>
+     */
     @Override
     public String getType() {
         return "Deadline";
     }
 
+    /**
+     * Obtain the due date of the <code>Deadline</code> object
+     * @return String corresponding to the deadline date of the <code>Task</code>
+     */
     public String getTime() {
         return this.deadlineDate;
     }
 
+    /**
+     * Obtains the string representation of the <code>Deadline</code> object
+     * @return String corresponding to the <code>Deadline</code> object
+     */
     @Override
     public String toString() {
         String printedDate;

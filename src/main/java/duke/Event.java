@@ -4,6 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
+/**
+ * Represents a <code>Task</code> that occurs at a given time
+ */
 public class Event extends Task{
     private String eventTime;
     private LocalDate date;
@@ -30,15 +33,27 @@ public class Event extends Task{
         }
     }
 
+    /**
+     * Obtain the type of <code>Task</code>
+     * @return String corresponding to the type of <code>Task</code>
+     */
     @Override
     public String getType() {
         return "Event";
     }
 
+    /**
+     * Obtain the time of the <code>Event</code> object
+     * @return String corresponding to the time of the <code>Task</code>
+     */
     public String getTime() {
         return this.eventTime;
     }
 
+    /**
+     * Obtains the string representation of the <code>Event</code> object
+     * @return String corresponding to the <code>Event</code> object
+     */
     @Override
     public String toString() {
         String printedDate;

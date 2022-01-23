@@ -2,11 +2,24 @@ package duke;
 
 import java.util.Arrays;
 
+/**
+ * Parser class to parse user commands and arguments into strings
+ */
 public class Parser {
+
+    /**
+     * Exit response of the Duke application
+     * @return String representing exit message
+     */
     public static String exitResponse() {
         return "Bye. Hope to see you again soon!";
     }
 
+    /**
+     * Determine if user command is the exit command
+     * @param command User input
+     * @return Returns true if user input is the exit command
+     */
     public static boolean isExit(String command) {
         if (command.equals("bye")) {
             return true;
@@ -14,23 +27,44 @@ public class Parser {
         return false;
     }
 
+    /**
+     * Parse a <code>ToDo</code> object into a String to be saved to the backup file
+     * @param task <code>ToDo</code> object to be parsed
+     * @return String corresponding to the <code>ToDo</code> object
+     */
     public static String parseSavedToDoTask(ToDo task) {
         String taskName = task.getDescription();
         return String.join(" ", "ToDo",taskName);
     }
 
+    /**
+     * Parse a <code>Event</code> object into a String to be saved to the backup file
+     * @param task <code>Event</code> object to be parsed
+     * @return String corresponding to the <code>Event</code> object
+     */
     public static String parseSavedEventTask(Event task) {
         String taskName = task.getDescription();
         String taskTime = task.getTime();
         return String.join(" ", "Event", taskName, "/at", taskTime);
     }
 
+    /**
+     * Parse a <code>Deadline</code> object into a String to be saved to the backup file
+     * @param task <code>Deadline</code> object to be parsed
+     * @return String corresponding to the <code>Deadline</code> object
+     */
     public static String parseSavedDeadlineTask(Deadline task) {
         String taskName = task.getDescription();
         String taskTime = task.getTime();
         return String.join(" ", "Deadline", taskName, "/by", taskTime);
     }
 
+    /**
+     *
+     * @param line A line representing a saved <code>Task</code> found in the backup file
+     * @return <code>Task</code> represented by the String input found in the backup file
+     * @throws DukeInvalidFileException Throws exception if file contents are invalid and cannot be parsed
+     */
     public static Task parseFile(String line) throws DukeInvalidFileException {
         try {
             String[] lineArguments = line.split(" ");
@@ -68,6 +102,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parse a command to mark a <code>Task</code>
+     * @param commandArguments User input arguments supplied
+     * @param taskManager Handle the marking, unmarking, deleting and adding of tasks
+     * @return String representing the response by the Duke application as a result of the user command
+     * @throws DukeException Handles any errors that occur during the function
+     */
     public static String parseMarkCommand(String[] commandArguments, TaskManager taskManager) throws DukeException {
         String response = "";
         if (commandArguments.length < 2) {
@@ -84,6 +125,13 @@ public class Parser {
         return response;
     }
 
+    /**
+     * Parse a command to unmark a <code>Task</code>
+     * @param commandArguments User input arguments supplied
+     * @param taskManager Handle the marking, unmarking, deleting and adding of tasks
+     * @return String representing the response by the Duke application as a result of the user command
+     * @throws DukeException Handles any errors that occur during the function
+     */
     public static String parseUnmarkCommand(String[] commandArguments, TaskManager taskManager) throws DukeException {
         String response = "";
         if (commandArguments.length < 2) {
@@ -100,6 +148,13 @@ public class Parser {
         return response;
     }
 
+    /**
+     * Parse a command to delete a <code>Task</code>
+     * @param commandArguments User input arguments supplied
+     * @param taskManager Handle the marking, unmarking, deleting and adding of tasks
+     * @return String representing the response by the Duke application as a result of the user command
+     * @throws DukeException Handles any errors that occur during the function
+     */
     public static String parseDeleteCommand(String[] commandArguments, TaskManager taskManager) throws DukeException {
         String response = "";
         if (commandArguments.length < 2) {
@@ -116,6 +171,13 @@ public class Parser {
         return response;
     }
 
+    /**
+     * Parse a command to add a <code>ToDo</code> object
+     * @param commandArguments User input arguments supplied
+     * @param taskManager Handle the marking, unmarking, deleting and adding of tasks
+     * @return String representing the response by the Duke application as a result of the user command
+     * @throws DukeException Handles any errors that occur during the function
+     */
     public static String parseTodoCommand(String[] commandArguments, TaskManager taskManager) throws DukeException {
         if (commandArguments.length < 2) {
             throw new DukeInsufficientArgumentsException();
@@ -127,6 +189,13 @@ public class Parser {
         return response;
     }
 
+    /**
+     * Parse a command to add a <code>Deadline</code> object
+     * @param commandArguments User input arguments supplied
+     * @param taskManager Handle the marking, unmarking, deleting and adding of tasks
+     * @return String representing the response by the Duke application as a result of the user command
+     * @throws DukeException Handles any errors that occur during the function
+     */
     public static String parseDeadlineCommand(String[] commandArguments, TaskManager taskManager) throws DukeException {
         if (commandArguments.length < 2) {
             throw new DukeInsufficientArgumentsException();
@@ -155,6 +224,13 @@ public class Parser {
         return response;
     }
 
+    /**
+     * Parse a command to add an <code>Event</code> object
+     * @param commandArguments User input arguments supplied
+     * @param taskManager Handle the marking, unmarking, deleting and adding of tasks
+     * @return String representing the response by the Duke application as a result of the user command
+     * @throws DukeException Handles any errors that occur during the function
+     */
     public static String parseEventCommand(String[] commandArguments, TaskManager taskManager) throws DukeException {
         if (commandArguments.length < 2) {
             throw new DukeInsufficientArgumentsException();
@@ -183,6 +259,12 @@ public class Parser {
         return response;
     }
 
+    /**
+     * Parse user input and invokes other functions depending on the type of user command
+     * @param command User input
+     * @param taskManager Handle the marking, unmarking, deleting and adding of tasks
+     * @return String representing the response by the Duke application as a result of the user command
+     */
     public static String parseCommand(String command, TaskManager taskManager) {
         try {
             if (command.equals("bye")) {

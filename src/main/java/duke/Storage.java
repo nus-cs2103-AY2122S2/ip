@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.io.FileWriter;
 
+/**
+ * Represents the file storing saved user tasks
+ */
 public class Storage {
     private String filePath;
     private File file;
@@ -24,6 +27,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Load tasks from the saved file to the user application
+     * @return List of tasks found in the saved file
+     * @throws DukeInvalidFileException Throws error when file saved is invalid
+     */
     public ArrayList<Task> load() throws DukeInvalidFileException {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
@@ -40,6 +48,11 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Save tasks into a file
+     * @param taskList <code>ArrayList</code> of tasks
+     * @throws DukeInvalidFileSaveException Throws exception when tasks cannot be saved
+     */
     public void save(ArrayList<Task> taskList) throws DukeInvalidFileSaveException {
         String savedTasks = "";
         for (Task task: taskList) {

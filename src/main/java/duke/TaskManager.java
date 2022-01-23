@@ -2,6 +2,10 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the list of tasks and functions to carry out task-related functions such as marking, unmarking, deleting
+ * and adding tasks
+ */
 public class TaskManager {
     private ArrayList<Task> taskList;
 
@@ -13,14 +17,26 @@ public class TaskManager {
         this.taskList = taskList;
     }
 
+    /**
+     * Obtain the list of tasks
+     * @return <code>ArrayList</code> representing the list of tasks
+     */
     ArrayList<Task> getTasks() {
         return this.taskList;
     }
 
+    /**
+     * Obtain the number of tasks
+     * @return Integer representing the number of tasks
+     */
     int countTasks() {
         return this.taskList.size();
     }
 
+    /**
+     * Listing out the tasks
+     * @return String representing the list of tasks
+     */
     public String list() {
         if (this.countTasks() == 0) {
             return "You have no tasks.";
@@ -35,6 +51,11 @@ public class TaskManager {
         return response;
     }
 
+    /**
+     * Marking a task as completed
+     * @param index Index of task to be marked
+     * @return String representing the response when a task is marked
+     */
     public String mark(int index) {
         String response = "";
         try {
@@ -47,7 +68,11 @@ public class TaskManager {
         }
         return response;
     }
-
+    /**
+     * Deleting a task
+     * @param index Index of task to be deleted
+     * @return String representing the response when a task is deleted
+     */
     public String delete(int index) {
         String response = "";
         try {
@@ -62,6 +87,11 @@ public class TaskManager {
         return response;
     }
 
+    /**
+     * Adding a task
+     * @param task Task to be added to the list
+     * @return String representing the response when a task is added
+     */
     public String add(Task task) {
         this.taskList.add(task);
         String response = "Got it. I've added this task:\n";
@@ -70,6 +100,11 @@ public class TaskManager {
         return response;
     }
 
+    /**
+     * Marking a task as not completed
+     * @param index Index of task to be unmarked
+     * @return String representing the response when a task is unmarked
+     */
     public String unmark(int index) {
         String response = "";
         try {
