@@ -1,6 +1,10 @@
-package helperClasses.command;
+package duke.command;
 
-import helperClasses.*;
+import duke.helpTool.DukeException;
+import duke.helpTool.Storage;
+import duke.helpTool.TaskList;
+import duke.helpTool.Ui;
+import duke.task.*;
 
 import java.time.LocalDateTime;
 

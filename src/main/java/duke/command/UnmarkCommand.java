@@ -1,9 +1,9 @@
-package helperClasses.command;
+package duke.command;
 
-import helperClasses.DukeException;
-import helperClasses.Storage;
-import helperClasses.TaskList;
-import helperClasses.Ui;
+import duke.helpTool.DukeException;
+import duke.helpTool.Storage;
+import duke.helpTool.TaskList;
+import duke.helpTool.Ui;
 
 public class UnmarkCommand extends Command {
     private final int currTask;

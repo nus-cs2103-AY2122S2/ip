@@ -1,8 +1,8 @@
-package helperClasses.command;
+package duke.command;
 
-import helperClasses.Storage;
-import helperClasses.TaskList;
-import helperClasses.Ui;
+import duke.helpTool.Storage;
+import duke.helpTool.TaskList;
+import duke.helpTool.Ui;
 
 public class ListCommand extends Command{
 

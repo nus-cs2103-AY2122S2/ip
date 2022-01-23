@@ -1,5 +1,7 @@
-import helperClasses.*;
-import helperClasses.command.Command;
+package duke;
+
+import duke.command.*;
+import duke.helpTool.*;
 
 public class Duke {
     private TaskList tasks;

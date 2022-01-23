@@ -1,6 +1,6 @@
-package helperClasses;
+package duke.helpTool;
 
-import helperClasses.command.*;
+import duke.command.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

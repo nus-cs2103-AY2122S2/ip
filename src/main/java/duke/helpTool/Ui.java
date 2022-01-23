@@ -1,4 +1,4 @@
-package helperClasses;
+package duke.helpTool;
 
 import java.util.Scanner;
 

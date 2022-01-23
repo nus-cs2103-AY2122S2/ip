@@ -1,4 +1,6 @@
-package helperClasses;
+package duke.helpTool;
+
+import duke.task.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
