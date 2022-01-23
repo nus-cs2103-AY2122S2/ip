@@ -16,6 +16,12 @@ public class Duke {
         System.out.println("Now you have " + taskList.size() + " tasks in the list");
     }
 
+    private void processNewTask(Task curr) {
+        taskList.add(curr);
+        printTask(curr);
+        printNoOfTasks();
+    }
+
     private void Run() {
         Scanner sc = new Scanner(System.in);
 
@@ -70,13 +76,18 @@ public class Duke {
             } else if (command.matches(".*\\btodo\\b.*")) {
                 System.out.println(bar);
                 System.out.println("Got it. I've added this task:");
-                Task curr = new Task(originalInput.replaceAll(".*\\btodo\\.*", ""));
-                taskList.add(curr);
-                printTask(curr);
-                printNoOfTasks();
+                Task curr = new Todo(originalInput.replaceAll(".*\\btodo\\.*", ""));
+                processNewTask(curr);
+                System.out.println(bar);
+            } else if (command.matches(".*\\bdeadline\\b.*")) {
+                String metaInfo = originalInput.split("/by")[1];
+                String strippedCommand = originalInput.replaceAll(".*\\bdeadline\\.*", "");
+                System.out.println(bar);
+                System.out.println("Got it. I've added this task:");
+                Task curr = new Deadline(strippedCommand.split("/")[0], metaInfo);
+                processNewTask(curr);
                 System.out.println(bar);
             } else {
-
                 System.out.println("no command given");
             }
 
