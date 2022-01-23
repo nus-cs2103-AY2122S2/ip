@@ -1,10 +1,10 @@
-import Alfred.Alfred;
+import alfred.Alfred;
 
 public class Run {
 
-  public static void main(String[] args) {
-    Alfred bot = new Alfred();
-    bot.run();
-  }
+    public static void main(String[] args) {
+        Alfred bot = new Alfred();
+        bot.run();
+    }
 
 }

@@ -1,15 +1,15 @@
-package Alfred.Task;
+package alfred.task;
 
 public class ToDo extends Task {
-  String type = "T";
+    String type = "T";
 
-  public ToDo(String description) {
-    super(description);
-  }
+    public ToDo(String description) {
+        super(description);
+    }
 
-  @Override
-  public String toString() {
-    return "[" + this.type + "]" + super.toString();
-  }
+    @Override
+    public String toString() {
+        return "[" + this.type + "]" + super.toString();
+    }
 
 }

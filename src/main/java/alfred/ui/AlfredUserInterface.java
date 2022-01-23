@@ -1,6 +1,6 @@
-package Alfred.UI;
+package alfred.ui;
 
-import Alfred.Exceptions.AlfredException;
+import alfred.exceptions.AlfredException;
 import java.util.Scanner;
 
 public class AlfredUserInterface {

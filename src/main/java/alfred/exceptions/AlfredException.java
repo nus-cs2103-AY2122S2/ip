@@ -1,4 +1,4 @@
-package Alfred.Exceptions;
+package alfred.exceptions;
 
 public class AlfredException extends Exception {
     public AlfredException(String errorMessage) {
