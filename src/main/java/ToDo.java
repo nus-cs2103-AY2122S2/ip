@@ -76,7 +76,7 @@ public class ToDo extends Task {
         } else {
             sb.append("0:");
         }
-        sb.append(getTaskName());
+        sb.append(super.toString());
         return sb.toString();
     }
 }

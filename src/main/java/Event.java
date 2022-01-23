@@ -80,7 +80,7 @@ public class Event extends Task {
         } else {
             sb.append("0:");
         }
-        sb.append(getTaskName());
+        sb.append(super.toString());
         sb.append(":");
         sb.append(this.eventTime);
         return sb.toString();
