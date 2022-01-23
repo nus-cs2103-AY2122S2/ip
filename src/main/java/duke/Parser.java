@@ -41,7 +41,7 @@ public class Parser {
         return output;
     }
 
-    public Command parse(String input) throws IncompleteCommandException, InvalidCommandException {
+    public static Command parse(String input) throws IncompleteCommandException, InvalidCommandException {
         String[] inputSplit = input.split(" "); //split input by space
         String command = inputSplit[0];
         if (command.equals("bye")) {

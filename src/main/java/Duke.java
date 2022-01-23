@@ -9,15 +9,13 @@ import duke.exception.DukeException;
 
 public class Duke {
 
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
-    private Parser parser;
+    private final Ui ui;
 
     public Duke(String pwd, String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(pwd, filePath);
-        this.parser = new Parser();
         try {
             this.tasks = new TaskList();
             storage.load();
@@ -32,7 +30,7 @@ public class Duke {
         while(!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                Command c = parser.parse(fullCommand);
+                Command c = Parser.parse(fullCommand);
                 c.execute(tasks);
                 isExit = c.isExit();
             } catch (DukeException e) {

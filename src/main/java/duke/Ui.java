@@ -25,7 +25,7 @@ public class Ui {
 
     public String readCommand() throws BlankCommandException {
         Scanner sc = new Scanner(System.in);
-        String input = "";
+        String input;
         input = sc.nextLine();
         if (input.length() == 0) {
             throw new BlankCommandException();
