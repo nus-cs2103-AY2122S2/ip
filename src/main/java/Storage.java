@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    String homeDir;
-    ArrayList<Task> taskList;
+    private final String homeDir;
+    static ArrayList<Task> taskList;
 
     Storage() {
         this.homeDir = System.getProperty("user.dir");
-        this.taskList = new ArrayList<>();
+        taskList = new ArrayList<>();
     }
 
     void load() {
