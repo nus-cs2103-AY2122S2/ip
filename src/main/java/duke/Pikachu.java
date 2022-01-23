@@ -3,9 +3,8 @@ import java.io.*;
 import java.util.*;
 import java.time.*;
 
-import duke.UI.UI;
 import duke.tasks.*;
-
+import duke.UI.UI;
 
 public class Pikachu {
     public ArrayList<Task> inputList;
