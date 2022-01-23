@@ -13,6 +13,11 @@ public class ToDoTask extends Task {
     }
 
     @Override
+    public String generateTaskSaveData() {
+        return "T|" + (isDone ? "1" : "0") + "|" + name;
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }

@@ -8,10 +8,14 @@ import java.util.Date;
  */
 public class TaskList {
     /** Array of Activity in the list */
-    ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     public TaskList() {
-        tasks = new ArrayList<>();
+        this.tasks = new ArrayList<>();
+    }
+
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
@@ -54,6 +58,7 @@ public class TaskList {
         default:
             throw new TaskListException("There is no such task!");
         }
+        saveData();
         return "Got it! I have added a new " + type + " task:\n" + newTask
                 + "\nYou have " + tasks.size() + " tasks in your list.";
     }
@@ -71,6 +76,7 @@ public class TaskList {
         } else {
             Task ac = tasks.get(idx);
             ac.done();
+            saveData();
             return ac;
         }
     }
@@ -88,6 +94,7 @@ public class TaskList {
         } else {
             Task ac = tasks.get(idx);
             ac.undone();
+            saveData();
             return ac;
         }
     }
@@ -105,10 +112,15 @@ public class TaskList {
         } else {
             Task ac = tasks.get(idx);
             tasks.remove(idx);
+            saveData();
             return "I have deleted the following task:\n"
                     + ac.toString()
                     + "\nYou have " + tasks.size() + " tasks left.";
         }
+    }
+
+    private void saveData() {
+        TaskDataHandler.saveTasks(tasks);
     }
 
     /**

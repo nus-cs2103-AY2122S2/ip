@@ -20,6 +20,11 @@ public class EventTask extends Task{
     }
 
     @Override
+    public String generateTaskSaveData() {
+        return "E|" + (isDone ? "1" : "0") + "|" + name + "|" + date;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.date + ")";
     }

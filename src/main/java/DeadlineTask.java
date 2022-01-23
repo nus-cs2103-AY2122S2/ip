@@ -23,6 +23,11 @@ public class DeadlineTask extends Task {
     }
 
     @Override
+    public String generateTaskSaveData() {
+        return "D|" + (isDone ? "1" : "0") + "|" + name + "|" + date;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.date + ")";
     }

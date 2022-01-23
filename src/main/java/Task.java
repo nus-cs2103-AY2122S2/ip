@@ -36,4 +36,6 @@ public abstract class Task {
         String status = isDone ? "[X] " : "[ ] ";
         return status + this.name;
     }
+
+    public abstract String generateTaskSaveData();
 }
