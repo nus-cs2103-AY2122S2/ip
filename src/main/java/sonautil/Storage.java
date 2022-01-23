@@ -1,5 +1,8 @@
-import java.util.ArrayList;
+package sonautil;
 
+import task.*;
+
+import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 
