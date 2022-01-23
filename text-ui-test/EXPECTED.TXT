@@ -21,21 +21,21 @@ ____________________________________________________________
 
 ____________________________________________________________
 Alright then! I've added the task to your list:
-	[D][ ] return book (by: Sunday)
+	[D][ ] return book (by: Mar 5 2022)
 You currently have 3 task(s) remaining in your list.
 ____________________________________________________________
 
 
 ____________________________________________________________
 Alright then! I've added the task to your list:
-	[E][ ] project meeting (at: Mon 2-4pm)
+	[E][ ] project meeting (at: Apr 26 2022 from 12:00 PM to 02:30 PM)
 You currently have 4 task(s) remaining in your list.
 ____________________________________________________________
 
 
 ____________________________________________________________
 Alright then! I've marked that task as done:
-	[D][X] return book (by: Sunday)
+	[D][X] return book (by: Mar 5 2022)
 ____________________________________________________________
 
 
@@ -43,15 +43,15 @@ ____________________________________________________________
 Provided are the tasks currently in your list:
 1.[T][ ] borrow book
 2.[T][ ] buy milk
-3.[D][X] return book (by: Sunday)
-4.[E][ ] project meeting (at: Mon 2-4pm)
+3.[D][X] return book (by: Mar 5 2022)
+4.[E][ ] project meeting (at: Apr 26 2022 from 12:00 PM to 02:30 PM)
 
 ____________________________________________________________
 
 
 ____________________________________________________________
 Alright then! I've marked that task as not done:
-	[D][ ] return book (by: Sunday)
+	[D][ ] return book (by: Mar 5 2022)
 ____________________________________________________________
 
 
@@ -75,6 +75,18 @@ ____________________________________________________________
 
 ____________________________________________________________
 Pardon me, but the provided index was not an integer.
+____________________________________________________________
+
+
+____________________________________________________________
+Pardon me, but the Event format is incorrect. The format should be:
+	[Task] [Description] /at yyyy-mm-dd/HH:mm/HH:mm
+____________________________________________________________
+
+
+____________________________________________________________
+Pardon me, but the Deadline format is incorrect. The format should be:
+	[Task] [Description] /by yyyy-mm-dd/HH:mm (leave "/HH:mm" empty if no time in current task)
 ____________________________________________________________
 
 

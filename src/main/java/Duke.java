@@ -1,3 +1,7 @@
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -44,7 +48,6 @@ public class Duke {
 
     private static String processMessage(String message) throws DukeException {
         String currMessage;
-        String[] messageArr;
         Task currTask;
         int index;
 
@@ -88,21 +91,18 @@ public class Duke {
             message = confirmAction(tasks.remove(index), ConfirmCodes.DELETION);
             break;
         case "todo":
-            messageArr = getMessageContents(message, TaskTypes.TODO);
-            currTask = new ToDo(messageArr[1]);
+            currTask = parseMessageContents(message, TaskTypes.TODO);
 
             tasks.add(currTask);
             message = confirmAction(currTask, ConfirmCodes.ADDITION);
             break;
         case "deadline":
-            messageArr = getMessageContents(message, TaskTypes.DEADLINE);
-            currTask = new Deadline(messageArr[0], messageArr[1]);
+            currTask = parseMessageContents(message, TaskTypes.DEADLINE);
             tasks.add(currTask);
             message = confirmAction(currTask, ConfirmCodes.ADDITION);
             break;
         case "event":
-            messageArr = getMessageContents(message, TaskTypes.EVENT);
-            currTask = new Event(messageArr[0], messageArr[1]);
+            currTask = parseMessageContents(message, TaskTypes.EVENT);
             tasks.add(currTask);
             message = confirmAction(currTask, ConfirmCodes.ADDITION);
             break;
@@ -113,46 +113,96 @@ public class Duke {
     }
 
     /**
-     * Transforms the message input into a String array separated by " ", then modifies the array to order the contents
-     * of the array based on the TaskType object for the processMessage() method to process and returns it
+     * Parses the message contents and returns the suitable Task object.
      * @param message the message from the User
      * @param type The type of the task
-     * @return String array containing ordered based on contents of the task in String format
+     * @return Task object
      */
-    private static String[] getMessageContents(String message, TaskTypes type) throws DukeException {
+    private static Task parseMessageContents(String message, TaskTypes type) throws DukeException {
+        DukeException wrongDeadlineFormat = new DukeException("Pardon me, but the Deadline format is incorrect." +
+                " The format should be:\n\t[Task] [Description] /by yyyy-mm-dd/HH:mm (leave \"/HH:mm\"" +
+                " empty if no time in current task)");
+        DukeException wrongEventFormat = new DukeException("Pardon me, but the Event format is incorrect." +
+                " The format should be:\n\t[Task] [Description] /at yyyy-mm-dd/HH:mm/HH:mm");
+
+        LocalDate date;
+        LocalTime timeBegin, timeEnd;
         String[] messageArr;
+        String description;
+        String dateString, timeBeginString, timeEndString;
+
         switch (type) {
         case TODO:
             messageArr = message.split(" ", 2);
             if (messageArr.length <= 1) {
                 throw new DukeException("Pardon me, but the description of a todo cannot be empty.");
             } else {
-                return messageArr;
+                return new ToDo(messageArr[1]);
             }
-        case DEADLINE: //both cases have similar outcomes
-        case EVENT:
+        case DEADLINE:
             int indexOfSpace = message.indexOf(" ");
-            int indexOfSlash = message.indexOf("/");
 
             if (indexOfSpace == -1) {
                 throw new DukeException("Pardon me, but the description of a deadline/event cannot be empty.");
-            } else if (indexOfSlash == -1) {
-                throw new DukeException("Pardon me, but the format is incorrect. The format should be:\n\t" +
-                        "[Task] [Description] /[by\\at] [date\\time]");
             }
 
             String messageWithoutCommand = message.substring(message.indexOf(" ") + 1);
 
             messageArr = messageWithoutCommand.split("/");
 
-            if (messageArr[1].length() < 4) {
+            if (messageArr.length < 2) {
+                throw wrongDeadlineFormat;
+            } else if (messageArr[1].length() < 4) {
                 throw new DukeException("Pardon me, but the date/time cannot be empty.");
             }
 
-            messageArr[0] = messageArr[0].substring(0, messageArr[0].length() - 1); //remove last " "
-            messageArr[1] = messageArr[1].substring(3);
+            description = messageArr[0].substring(0, messageArr[0].length() - 1); //remove last " "
+            dateString = messageArr[1].substring(3);
+            timeBeginString = messageArr.length == 3 ? messageArr[2] : null;
 
-            return messageArr;
+            //check to see if date/time format is correct
+            try {
+                date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                timeBegin = timeBeginString == null ? null : LocalTime.parse(timeBeginString,
+                        DateTimeFormatter.ofPattern("HH:mm"));
+            }  catch (DateTimeException e) {
+                throw wrongDeadlineFormat;
+            }
+
+            return timeBeginString == null ? new Deadline(description, date) :
+                    new Deadline(description, date, timeBegin);
+        case EVENT:
+            int indexOfSpaceEvent = message.indexOf(" ");
+
+            if (indexOfSpaceEvent == -1) {
+                throw new DukeException("Pardon me, but the description of a deadline/event cannot be empty.");
+            }
+
+            String messageWithoutCommandEvent = message.substring(message.indexOf(" ") + 1);
+
+            messageArr = messageWithoutCommandEvent.split("/");
+
+            if (messageArr.length < 4) {
+                throw wrongEventFormat;
+            } else if (messageArr[1].length() < 4) {
+                throw new DukeException("Pardon me, but the date/time cannot be empty.");
+            }
+
+            description = messageArr[0].substring(0, messageArr[0].length() - 1); //remove last " "
+            dateString = messageArr[1].substring(3);
+            timeBeginString = messageArr[2];
+            timeEndString = messageArr[3];
+
+            //check to see if date/time format is correct
+            try {
+                date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                timeBegin = LocalTime.parse(timeBeginString, DateTimeFormatter.ofPattern("HH:mm"));
+                timeEnd = LocalTime.parse(timeEndString, DateTimeFormatter.ofPattern("HH:mm"));
+            }  catch (DateTimeException e) {
+                throw wrongEventFormat;
+            }
+
+            return new Event(description, date, timeBegin, timeEnd);
         default:
             throw new DukeException("INTERNAL ERROR: Invalid Type Declaration");
         }
