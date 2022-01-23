@@ -20,7 +20,7 @@ public class Meep {
         ListTask taskList = new ListTask();
 
         try {
-            taskList.addTaskList(storage.readTaskFile());
+            taskList.addTaskList(storage.readTaskFile(storage.getPath()));
         } catch (IOException | InvalidInputException e) {
             ui.print(e.getMessage());
             // exit if no data file

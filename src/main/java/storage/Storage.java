@@ -13,15 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
-    public static final String DEFAULT_FILEPATH = "/src/main/java/data.txt";
+    public static final String DEFAULT_FILEPATH = "/java/data.txt";
 
     public final String path;
 
-    public Storage()  {
-        this.path=getPath();
+    public Storage() {
+        this.path = getPath();
     }
 
-    private String getPath() {
+    public String getPath() {
         String home = System.getProperty("user.dir");
         // works on *nix
         // works on Windows
@@ -30,17 +30,17 @@ public class Storage {
         return path;
     }
 
-    public List<Task> readTaskFile() throws IOException, InvalidInputException {
+    public List<Task> readTaskFile(String path) throws IOException, InvalidInputException {
 
         List<Task> result = new ArrayList<>();
-        String path = getPath();
+//        String path = getPath();
         // Open the file
         FileInputStream fstream = null;
 
         try {
             fstream = new FileInputStream(path);
         } catch (FileNotFoundException e) {
-//            System.out.println("File not found under " + path);
+            //System.out.println("File not found under " + path);
             throw new FileNotFoundException("File not found under " + path);
         }
 
@@ -88,7 +88,7 @@ public class Storage {
                 } else if (task.getClass() == Deadline.class) {
                     fw.write("D | " + (task.getDone() ? "1 | " : "0 | ") + task.getTitle() + " | " + ((Deadline) task).getDate().format(format) + System.lineSeparator());
                 } else if (task.getClass() == Event.class) {
-                    fw.write("E | " + (task.getDone() ? "1 | " : "0 | ") + task.getTitle() + " | " +  ((Event) task).getDate().format(format) + System.lineSeparator());
+                    fw.write("E | " + (task.getDone() ? "1 | " : "0 | ") + task.getTitle() + " | " + ((Event) task).getDate().format(format) + System.lineSeparator());
                 }
             }
 
