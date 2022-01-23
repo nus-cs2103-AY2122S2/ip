@@ -18,7 +18,7 @@ public class Event extends Task {
     }
 
     private String dateToString() {
-        return time.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return time.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 
     String getTaskType() {

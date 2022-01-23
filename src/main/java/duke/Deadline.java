@@ -18,7 +18,7 @@ public class Deadline extends Task {
     }
 
     private String dateToString() {
-        return deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 
     String getTaskType() {
