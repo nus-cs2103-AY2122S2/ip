@@ -1,4 +1,4 @@
-package Tasks;
+package Exceptions;
 
 /**
  * This class encapsulates an invalid input exception, thrown when some parts of an input is expected

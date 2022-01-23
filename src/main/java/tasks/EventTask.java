@@ -1,4 +1,4 @@
-package Tasks;
+package tasks;
 
 /**
  * This class encapsulates an Event Task that occurs at a specific time frame.

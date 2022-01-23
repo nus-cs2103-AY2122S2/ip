@@ -1,4 +1,4 @@
-package Tasks;
+package tasks;
 
 /**
  * This class encapsulates a tasks.Task, which contains a String and a checkbox to indicate if it is done.

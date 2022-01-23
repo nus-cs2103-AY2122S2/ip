@@ -1,6 +1,4 @@
-package Tasks;
-
-import java.util.Objects;
+package tasks;
 
 /**
  * This class encapsulates a Deadline Task.
