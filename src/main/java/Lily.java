@@ -101,6 +101,8 @@ public class Lily {
                     /*
                         if user didn't type "/by" (byIdx == -1)
                             throw new Error "you didnt' type /by bro, try again"
+                        if user didnt' type a desc
+                            throew new error you didnt type a description man, try again
                     */
                     int byIdx = sentence.indexOf("/by");
                     Deadline d = new Deadline(sentence.substring(9, byIdx - 1), 
@@ -112,6 +114,8 @@ public class Lily {
                     /*
                         if user didn't type "/at" (atIdx == -1)
                             throw new Error "you didnt' type /at bro, try again"
+                        if user didnt' type a desc
+                            throew new error you didnt type a description man, try again
                     */
                     int atIdx = sentence.indexOf("/at");
                     Event e = new Event(sentence.substring(6, atIdx - 1), 
