@@ -1,11 +1,13 @@
+
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.File;
-
 
 public class Alfred {
   // class constants
@@ -13,9 +15,9 @@ public class Alfred {
       + "How can I be of service?";
   private static final String BYE = "Bye! Hope I was of service.";
   private static final int BREAK_CHAR_LENGTH = 100;
-  private final String BREAK_LINE = this.line();
-  private String projectRoot = ".";
-  private String DATA_PATH = String.join(File.separator, projectRoot, "data", "Alfred.txt");
+  private static final String BREAK_LINE = Alfred.line();
+  private static final String projectRoot = ".";
+  private static final String DATA_PATH = String.join(File.separator, projectRoot, "data", "Alfred.txt");
 
   // functional attributes
   ArrayList<Task> taskList;
@@ -28,15 +30,15 @@ public class Alfred {
     System.out.println(new File(".").getCanonicalPath());
     FileWriter fw;
     try {
-      fw = new FileWriter(this.DATA_PATH);
+      fw = new FileWriter(Alfred.DATA_PATH);
       String newList = this.listToString();
       fw.write(newList);
       fw.close();
     } catch (FileNotFoundException fe) {
-      System.out.println("Alfred.txt not created. Will create at: " + this.DATA_PATH);
+      System.out.println("Alfred.txt not created. Will create at: " + Alfred.DATA_PATH);
       try {
         // create the file
-        File output = new File(this.DATA_PATH);
+        File output = new File(Alfred.DATA_PATH);
         output.createNewFile();
         fw = new FileWriter(output);
         String newList = this.listToString();
@@ -50,7 +52,7 @@ public class Alfred {
     }
   }
 
-  private String line() {
+  private static String line() {
     String out = "";
     for (int i = 0; i < Alfred.BREAK_CHAR_LENGTH; i++) {
       out += "-";
@@ -61,9 +63,9 @@ public class Alfred {
 
   private void sandwichAndPrint(String text) {
     String out = "";
-    out += this.BREAK_LINE;
+    out += Alfred.BREAK_LINE;
     out += text + "\n";
-    out += this.BREAK_LINE;
+    out += Alfred.BREAK_LINE;
     System.out.println(out);
   }
 
@@ -105,10 +107,10 @@ public class Alfred {
 
   private void listTasks() {
     String out = "";
-    out += this.BREAK_LINE;
+    out += Alfred.BREAK_LINE;
     out += "Sir, here are the things you need to do:\n";
     out += this.listToString();
-    out += this.BREAK_LINE;
+    out += Alfred.BREAK_LINE;
     System.out.println(out);
   }
 
@@ -122,7 +124,7 @@ public class Alfred {
 
   private void markTask(int taskId) {
     // update data state
-    this.taskList.get(taskId).mark_complete();
+    this.taskList.get(taskId).markComplete();
 
     // return representation
     String text = "Good job sir. I've marked this as complete.\n";
@@ -132,7 +134,7 @@ public class Alfred {
 
   private void unmarkTask(int taskId) {
     // update data state
-    this.taskList.get(taskId).mark_incomplete();
+    this.taskList.get(taskId).markIncomplete();
 
     // return representation
     String text = "I see, no worries sir. I've marked this as to-be-done.\n";
@@ -182,14 +184,14 @@ public class Alfred {
     }
     try {
       this.saveToFile();
-    } catch (IOException ioe){
+    } catch (IOException ioe) {
       System.out.println("Something went wrong trying to save the file: " + ioe.getMessage());
     }
   }
 
   private void readInput(String input)
       throws InvalidCommandException, InvalidInputException, InvalidIndexException,
-      MissingInputException {
+      MissingInputException, InvalidDateTimeException {
     // read in arguments
     String[] arguments = input.split(" ");
     String command = arguments[0];
@@ -199,7 +201,7 @@ public class Alfred {
     if ((command.equals("list")) && (arguments.length == 1)) {
       // do nothing
 
-    // (UN)MARK and DELETE
+      // (UN)MARK and DELETE
     } else if (command.equals("mark") || command.equals("unmark")
         || command.equals("delete")) {
       if (arguments.length != 2) {
@@ -215,7 +217,7 @@ public class Alfred {
         throw new InvalidIndexException();
       }
 
-    // DEADLINE
+      // DEADLINE
     } else if (command.equals("deadline")) {
       String s = input.substring(8); // select those after keyword
       arguments = s.split(" /by ");
@@ -224,16 +226,21 @@ public class Alfred {
       if (arguments.length != 2) {
         throw new InvalidInputException();
       }
+      try {
+        LocalDateTime.parse(arguments[1]);
+      } catch (DateTimeParseException dte) {
+        throw new InvalidDateTimeException();
+      }
 
-    // T0D0
+      // T0D0
     } else if (command.equals("todo")) {
       String description = input.substring(4);
       if ((description.length() < 1) || description.split(" ").length == 0) {
         throw new MissingInputException();
       }
-      arguments = new String[]{description}; // wrap
+      arguments = new String[] {description}; // wrap
 
-    // EVENT
+      // EVENT
     } else if (command.equals("event")) {
       String s = input.substring(5);
       arguments = s.split(" /at ");
@@ -241,6 +248,11 @@ public class Alfred {
           .toArray(String[]::new); // filter away empty strings
       if (arguments.length != 2) {
         throw new InvalidInputException();
+      }
+      try {
+        LocalDateTime.parse(arguments[1]);
+      } catch (DateTimeParseException dte) {
+        throw new InvalidDateTimeException();
       }
     }
     this.callCommand(command, arguments);

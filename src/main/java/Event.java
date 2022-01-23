@@ -1,14 +1,16 @@
+import java.time.LocalDateTime;
+
 public class Event extends Task {
-    String type = "E";
-    String dateAndTime;
+  String type = "E";
+  LocalDateTime dateTime;
 
-    Event(String description, String dateAndTime) {
-        super(description);
-        this.dateAndTime = dateAndTime;
-    }
+  Event(String description, String dateAndTime) {
+    super(description);
+    this.dateTime = LocalDateTime.parse(dateAndTime);;
+  }
 
-    @Override
-    public String toString() {
-        return "[" + this.type + "]" + super.toString() + " (at: "+ this.dateAndTime + ")";
-    }
+  @Override
+  public String toString() {
+    return "[" + this.type + "]" + super.toString() + " (at: " + super.localDateTimeToString(this.dateTime) + ")";
+  }
 }

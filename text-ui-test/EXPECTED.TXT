@@ -9,56 +9,73 @@ Yes sir, I've added this task.
 Now you have 1 task(s) in the your list.
 ----------------------------------------------------------------------------------------------------
 
+/mnt/c/Users/tanna/OneDrive - National University of Singapore/Desktop/CS2103/ip/text-ui-test
 ----------------------------------------------------------------------------------------------------
 Good job sir. I've marked this as complete.
 [T][X]  read book
 ----------------------------------------------------------------------------------------------------
 
+/mnt/c/Users/tanna/OneDrive - National University of Singapore/Desktop/CS2103/ip/text-ui-test
+----------------------------------------------------------------------------------------------------
+Invalid date time format, sir. Check that it follows ISO local format, of <YYYY>-<MM>-<DD>T<HH>:<MINMIN>:<SS>
+----------------------------------------------------------------------------------------------------
+
 ----------------------------------------------------------------------------------------------------
 Yes sir, I've added this task.
-[D][ ]  return book(by: June 6th)
+[D][ ]  return book (by: Jan 2, 2021, 10:00:00 AM)
 Now you have 2 task(s) in the your list.
 ----------------------------------------------------------------------------------------------------
 
+/mnt/c/Users/tanna/OneDrive - National University of Singapore/Desktop/CS2103/ip/text-ui-test
 ----------------------------------------------------------------------------------------------------
 Yes sir, I've added this task.
-[E][ ]  project meeting(at: Aug 6th 2-4pm)
+[E][ ]  project meeting (at: Nov 3, 2022, 10:00:00 PM)
 Now you have 3 task(s) in the your list.
 ----------------------------------------------------------------------------------------------------
 
+/mnt/c/Users/tanna/OneDrive - National University of Singapore/Desktop/CS2103/ip/text-ui-test
 ----------------------------------------------------------------------------------------------------
 Yes sir, I've added this task.
 [T][ ]  join sports club
 Now you have 4 task(s) in the your list.
 ----------------------------------------------------------------------------------------------------
 
+/mnt/c/Users/tanna/OneDrive - National University of Singapore/Desktop/CS2103/ip/text-ui-test
 ----------------------------------------------------------------------------------------------------
 Good job sir. I've marked this as complete.
 [T][X]  join sports club
 ----------------------------------------------------------------------------------------------------
 
+/mnt/c/Users/tanna/OneDrive - National University of Singapore/Desktop/CS2103/ip/text-ui-test
 ----------------------------------------------------------------------------------------------------
 Yes sir, I've added this task.
 [T][ ]  borrow book
 Now you have 5 task(s) in the your list.
 ----------------------------------------------------------------------------------------------------
 
+/mnt/c/Users/tanna/OneDrive - National University of Singapore/Desktop/CS2103/ip/text-ui-test
 ----------------------------------------------------------------------------------------------------
 Yes sir, I've added this task.
-[D][ ]  return book(by: Sunday)
+[D][ ]  return book (by: May 28, 2021, 9:01:00 AM)
 Now you have 6 task(s) in the your list.
 ----------------------------------------------------------------------------------------------------
 
+/mnt/c/Users/tanna/OneDrive - National University of Singapore/Desktop/CS2103/ip/text-ui-test
 ----------------------------------------------------------------------------------------------------
 Sorry sir, that's a valid command but invalid input. Likely due to wrong format after '(un)mark', 'delete', 'todo', 'deadline' or 'event'.
 ----------------------------------------------------------------------------------------------------
 
 ----------------------------------------------------------------------------------------------------
+Invalid date time format, sir. Check that it follows ISO local format, of <YYYY>-<MM>-<DD>T<HH>:<MINMIN>:<SS>
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
 Yes sir, I've added this task.
-[E][ ]  project meeting(at: Mon 2-4pm)
+[E][ ]  project meeting (at: May 3, 2023, 12:43:00 PM)
 Now you have 7 task(s) in the your list.
 ----------------------------------------------------------------------------------------------------
 
+/mnt/c/Users/tanna/OneDrive - National University of Singapore/Desktop/CS2103/ip/text-ui-test
 ----------------------------------------------------------------------------------------------------
 Sorry sir, that's a valid command but invalid input. Likely due to wrong format after '(un)mark', 'delete', 'todo', 'deadline' or 'event'.
 ----------------------------------------------------------------------------------------------------
@@ -66,14 +83,15 @@ Sorry sir, that's a valid command but invalid input. Likely due to wrong format 
 ----------------------------------------------------------------------------------------------------
 Sir, here are the things you need to do:
 1. [T][X]  read book
-2. [D][ ]  return book(by: June 6th)
-3. [E][ ]  project meeting(at: Aug 6th 2-4pm)
+2. [D][ ]  return book (by: Jan 2, 2021, 10:00:00 AM)
+3. [E][ ]  project meeting (at: Nov 3, 2022, 10:00:00 PM)
 4. [T][X]  join sports club
 5. [T][ ]  borrow book
-6. [D][ ]  return book(by: Sunday)
-7. [E][ ]  project meeting(at: Mon 2-4pm)
+6. [D][ ]  return book (by: May 28, 2021, 9:01:00 AM)
+7. [E][ ]  project meeting (at: May 3, 2023, 12:43:00 PM)
 ----------------------------------------------------------------------------------------------------
 
+/mnt/c/Users/tanna/OneDrive - National University of Singapore/Desktop/CS2103/ip/text-ui-test
 ----------------------------------------------------------------------------------------------------
 Missing input, sir. No valid input found after keyword arguments '(un)mark', 'todo', 'event' or 'deadline'.
 ----------------------------------------------------------------------------------------------------
@@ -115,6 +133,7 @@ Noted sir. I've removed the following task:
 [T][X]  read book
 ----------------------------------------------------------------------------------------------------
 
+/mnt/c/Users/tanna/OneDrive - National University of Singapore/Desktop/CS2103/ip/text-ui-test
 ----------------------------------------------------------------------------------------------------
 Sorry sir, that's a valid command but invalid input. Likely due to wrong format after '(un)mark', 'delete', 'todo', 'deadline' or 'event'.
 ----------------------------------------------------------------------------------------------------

@@ -1,37 +1,47 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
 public abstract class Task {
-    // class constants
-    private static String COMPLETION_MARK = "X";
-    private static String INCOMPLETE_MARK = " ";
+  // class constants
+  private static final String COMPLETION_MARK = "X";
+  private static final String INCOMPLETE_MARK = " ";
+  private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(
+      FormatStyle.MEDIUM, FormatStyle.MEDIUM);
 
 
-    // instance attributes
-    private String description;
-    private boolean completed;
+  // instance attributes
+  private final String description;
+  private boolean completed;
 
 
-    Task (String description) {
-        this.description = description;
-        this.completed = false;
+  Task(String description) {
+    this.description = description;
+    this.completed = false;
+  }
+
+  private String markIfComplete() {
+    if (this.completed) {
+      return Task.COMPLETION_MARK;
+    } else {
+      return Task.INCOMPLETE_MARK;
     }
+  }
 
-    private String check_if_complete() {
-        if (this.completed) {
-            return Task.COMPLETION_MARK;
-        } else {
-            return Task.INCOMPLETE_MARK;
-        }
-    }
+  protected void markComplete() {
+    this.completed = true;
+  }
 
-    public void mark_complete() {
-        this.completed = true;
-    }
+  protected void markIncomplete() {
+    this.completed = false;
+  }
 
-    public void mark_incomplete() {
-        this.completed = false;
-    }
+  protected static String localDateTimeToString(LocalDateTime dateTime) {
+    return dateTime.format(Task.dateTimeFormatter);
+  }
 
-    @Override
-    public String toString() {
-        return "[" + this.check_if_complete() + "] " + this.description;
-    }
+  @Override
+  public String toString() {
+    return "[" + this.markIfComplete() + "] " + this.description;
+  }
 }
