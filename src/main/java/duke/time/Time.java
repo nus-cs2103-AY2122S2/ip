@@ -3,18 +3,27 @@ package duke.time;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Custom class to handle conversions between the different formats of time.
+ */
 public class Time {
 
-    public final int label;
-
-    private Time(int label) {
-        this.label = label;
-    }
-
+    /**
+     * Returns the date in string format.
+     *
+     * @param date Date in LocalDate format.
+     * @return Same date represented in string form.
+     */
     public static String convertToString(LocalDate date) {
         return date.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
     }
 
+    /**
+     * Returns the date in LocalDate format.
+     *
+     * @param date Date in string format.
+     * @return Same date represented in LocalDate form.
+     */
     public static LocalDate convertToDate(String date) {
         String[] dates = date.split(" ");
         int year = Integer.parseInt(dates[2]);
