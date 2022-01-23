@@ -1,5 +1,6 @@
 package duke;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class TaskManager {
@@ -67,6 +68,26 @@ public class TaskManager {
         String response = "Got it. I've added this task:\n";
         response += "    " + task + "\n";
         response += String.format("Now you have %d tasks in the list.", this.countTasks());
+        return response;
+    }
+
+    public String find(String description) {
+        ArrayList<Task> tasks = new ArrayList<Task>();
+        for (Task task: this.taskList) {
+            if (task.getDescription().contains(description)) {
+                tasks.add(task);
+            }
+        }
+        if (tasks.size() == 0) {
+            return "There are no tasks matching this description.";
+        }
+        String response = "Here are the tasks matching the description:\n";
+        for (int i = 1; i <= tasks.size(); i++) {
+            response += (i + ". " + tasks.get(i - 1));
+            if (i != tasks.size()) {
+                response += "\n";
+            }
+        }
         return response;
     }
 

@@ -183,6 +183,16 @@ public class Parser {
         return response;
     }
 
+    public static String parseFindCommand(String[] commandArguments, TaskManager taskManager) throws DukeException {
+        if (commandArguments.length < 2) {
+            throw new DukeInsufficientArgumentsException();
+        }
+        String command = String.join(" ", commandArguments);
+        String queryName = command.substring("find".length() + 1);
+        String response = taskManager.find(queryName);
+        return response;
+    }
+
     public static String parseCommand(String command, TaskManager taskManager) {
         try {
             if (command.equals("bye")) {
@@ -211,6 +221,8 @@ public class Parser {
                 return parseTodoCommand(commandArguments, taskManager);
             case "deadline":
                 return parseDeadlineCommand(commandArguments, taskManager);
+            case "find":
+                return parseFindCommand(commandArguments, taskManager);
             default:
                 throw new DukeInvalidCommandException();
             }
