@@ -2,7 +2,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-public abstract class Task implements ISerializable<Task> {
+public abstract class Task implements ISerializable {
     private final TaskType type;
     private String description;
     private boolean isDone;
@@ -42,7 +42,7 @@ public abstract class Task implements ISerializable<Task> {
     public void serialize(DataOutputStream dOut) throws IOException {
         dOut.writeShort(this.type.getTypeId());
         dOut.writeUTF(this.description);
-        dOut.writeBoolean(isDone);
+        dOut.writeBoolean(this.isDone);
     }
 
     protected Task readSerializedData(DataInputStream dIn) throws IOException {

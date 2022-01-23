@@ -1,5 +1,4 @@
 import java.io.*;
-import java.nio.file.Paths;
 
 /**
  * Serializes and Deserializes Task objects into Data Streams.
@@ -10,11 +9,11 @@ public class TaskSerializer {
         ByteArrayInputStream memStream = new ByteArrayInputStream(data);
         DataInputStream dataStream = new DataInputStream(memStream);
 
-        try {
+        try (dataStream) {
             int typeId = dataStream.readShort();
             TaskType taskType = TaskType.matchType(typeId);
             if (taskType == null) {
-                return null;
+                throw new DukeIOException("Encountered unknown format in database");
             }
             return Task.inflate(taskType, dataStream);
         } catch (IOException ex) {
@@ -26,12 +25,11 @@ public class TaskSerializer {
         ByteArrayOutputStream memStream = new ByteArrayOutputStream();
         DataOutputStream dataStream = new DataOutputStream(memStream);
 
-        try {
+        try (dataStream) {
             task.serialize(dataStream);
+            return memStream.toByteArray();
         } catch (IOException ex) {
             throw new DukeIOException("Failed to serialize Task");
         }
-
-        return memStream.toByteArray();
     }
 }
