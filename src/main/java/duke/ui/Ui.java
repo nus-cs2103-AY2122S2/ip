@@ -48,4 +48,14 @@ public class Ui {
             arr.forEach((x) -> System.out.printf("    %d. %s%n", arr.indexOf(x) + 1, x.toString()));
         System.out.printf("    %s%n", "==========================================");
     }
+
+    public void print(ArrayList<Task> arr, String header) {
+        System.out.println(String.format("    %s", "=========================================="));
+        System.out.println(String.format("    %s", header));
+        if(arr.size() == 0)
+            System.out.println("    Nothing to show!");
+        else
+            arr.forEach((x) -> { System.out.println(String.format("    %d. %s", arr.indexOf(x) + 1, x.toString())); } );
+        System.out.println(String.format("    %s", "=========================================="));
+    }
 }

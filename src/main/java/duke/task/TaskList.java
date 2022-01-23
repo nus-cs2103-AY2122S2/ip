@@ -1,5 +1,6 @@
 package duke.task;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -35,6 +36,16 @@ public class TaskList {
 
     public void removeTask(int index) {
         tasks.remove(index);
+    }
+
+    public ArrayList<Task> findTasksContaining(String keyword) {
+        ArrayList<Task> result = new ArrayList<>();
+        for(Task t : arr) {
+            if(t.getTaskName().contains(keyword)) {
+                result.add(t);
+            }
+        }
+        return result;
     }
 
     public int getSize() {
