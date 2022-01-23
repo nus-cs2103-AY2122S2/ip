@@ -1,5 +1,6 @@
 package tasks;
 
+import date.time.DateTimeParser;
 import exceptions.NoSuchTaskException;
 import exceptions.SaveFileModifiedException;
 
@@ -7,6 +8,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -177,15 +180,16 @@ public class TaskList {
         return output;
     }
 
-
-
     /**
      * Parses a String representation of a task to get back the original Task's
      * details.
      *
      *  1. [T][X] sample task
-     *  2. [D][ ] task (by: end of year)
-     *  3. [E][ ] event (at: 9 Aug)
+     *  2. [D][ ] task (by: yyyy-mm-dd hh:mm)
+     *  3. [E][ ] event (at: yyyy-mm-dd hh:mm, until: yyyy-mm-dd hh:mm)
+     *
+     *  An assumption is made where the time values are not modified to be
+     *  invalid. TODO: FIX THIS ASSUMPTION, maybe make this method cleaner
      *
      * @param input the String form of the Task.
      * @return the Task that corresponds to the input String
@@ -196,39 +200,63 @@ public class TaskList {
      *                                   the file.
      */
     private static Task parseLine(String input) throws SaveFileModifiedException {
-        Task output = null;
-        String desc = null;
+        Task output;
+        String desc;
         int indexAftNumber = input.indexOf("[");
         int indexAftDesc = input.lastIndexOf("(");
 
-        Supplier<String> timingSupplier = () -> input.substring(indexAftDesc + 5
-                , input.length() - 1);
-        Supplier<String> descSupplier = () -> input.substring(indexAftNumber + 7
-                , indexAftDesc - 1);
-        switch (input.charAt(indexAftNumber + 1)) {
-        case 'T':
+        // so that the function does not call immediately because of indexAftDesc
+        Supplier<LocalDateTime> deadlineSupplier = () -> {
+            String s = input.substring(indexAftDesc + 5, input.length() - 1);
+            return DateTimeParser.parse(s);
+        };
+
+        // so that the function does not call immediately because of indexAftDesc
+        Supplier<String> descSupplier = () -> input.substring
+                (indexAftNumber + 7, indexAftDesc - 1);
+
+        switch (input.charAt(indexAftNumber + 1)) { // the type of tasks
+        case 'T': // To Do task
             desc = input.substring(indexAftNumber + 7);
             output = ToDoTask.of(desc);
             break;
-        case 'D':
-            output = DeadlineTask.of(descSupplier.get(), timingSupplier.get());
+        case 'D': // Deadline task
+            output = DeadlineTask.of(descSupplier.get(), deadlineSupplier.get());
             break;
-        case 'E':
-            output = EventTask.of(descSupplier.get(), timingSupplier.get());
+        case 'E': // Event task
+            int indexAtUntil = input.indexOf(", until:");
+            // start time
+            String start = input.substring(indexAftDesc + 5, indexAtUntil);
+            LocalDateTime startTime = DateTimeParser.parse(start);
+            // end time
+            String end = input.substring(indexAtUntil + 9, input.length() - 1);
+            LocalDateTime endTime;
+
+            // if the format is the shortened form of hh:mm
+            if (!DateTimeParser.checkValidFormat(end) && end.length() == 5) {
+                int hour = Integer.parseInt(end.substring(0,2));
+                int min = Integer.parseInt(end.substring(3,5));
+                endTime = LocalDateTime.of(startTime.toLocalDate(),
+                        LocalTime.of(hour, min));
+            } else {
+                endTime = DateTimeParser.parse(end);
+            }
+
+            output = EventTask.of(descSupplier.get(), startTime, endTime);
             break;
-        default:
+        default: //unknown task
             throw new SaveFileModifiedException("Unknown task type detected!");
         }
-        switch (input.charAt(indexAftNumber + 4)) {
+        switch (input.charAt(indexAftNumber + 4)) { // check if task is done
         case 'X':
             output.markAs(true);
             break;
         case ' ':
             output.markAs(false);
             break;
-        default:
+        default: //unknown state
             throw new SaveFileModifiedException("Unknown task state detected!");
-        }
+        } // the Task output
         return output;
     }
 }
