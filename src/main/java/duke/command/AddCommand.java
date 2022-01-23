@@ -13,7 +13,7 @@ public class AddCommand extends Command {
      * @param task the task to be instantiated with.
      */
     public AddCommand(Task task) {
-        super(task,null);
+        super(task,null, null);
     }
 
     /**

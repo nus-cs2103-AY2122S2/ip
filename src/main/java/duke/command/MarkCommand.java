@@ -12,7 +12,7 @@ public class MarkCommand extends Command {
      * @param num the index in the arraylist to be marked.
      */
     public MarkCommand(Integer num) {
-        super(null, num);
+        super(null, num,null);
     }
 
     /**

@@ -167,6 +167,11 @@ public class Parser {
             return new DeleteCommand(taskToBeDeleted);
         }
 
+        else if (firstWord.equalsIgnoreCase("find")) {
+            String keyword = input.substring(4).trim(); // take the remaining of the input String
+            return new FindCommand(keyword);
+        }
+
         else {
             throw new UnknownInputException();
         }

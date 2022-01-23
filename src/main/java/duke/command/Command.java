@@ -9,6 +9,7 @@ import duke.operations.TaskList;
 public abstract class Command {
     protected Task task;
     protected Integer num;
+    protected String keyword;
 
     /**
      * A constructor for <code>Command</code>.
@@ -16,10 +17,12 @@ public abstract class Command {
      *
      * @param task the task to be stored.
      * @param num the number to be stored.
+     * @param keyword the keyword to be stored.
      */
-    public Command(Task task, Integer num) {
+    public Command(Task task, Integer num, String keyword) {
         this.task = task;
         this.num = num;
+        this.keyword = keyword;
     }
 
     /**

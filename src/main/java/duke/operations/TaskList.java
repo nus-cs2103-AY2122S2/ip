@@ -102,4 +102,19 @@ public class TaskList {
         }
         Ui.line();
     }
+
+    public void findTaskInList(String keyword) {
+        Ui.line();
+        int counter = 1;
+        for (int i = 0; i < taskArr.size(); i++) {
+            if(taskArr.get(i).getDescription().contains(keyword)) {
+                System.out.println("     " + counter + ": " + taskArr.get(i).toString());
+                counter++;
+            }
+        }
+        if(counter == 1) {
+            System.out.println("     I can't understand this SUSSY language! Please use proper english!");
+        }
+        Ui.line();
+    }
 }

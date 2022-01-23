@@ -13,7 +13,7 @@ public class DeleteCommand extends Command {
      * @param task the task to be instantiated with.
      */
     public DeleteCommand(Task task) {
-        super(task, null);
+        super(task, null,null);
     }
 
     /**
