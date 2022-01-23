@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -8,7 +8,8 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        // mark done task with X
+        return (isDone ? "X" : " ");
     }
 
     public void markAsDone() {
@@ -18,6 +19,10 @@ public class Task {
     public void markAsUndone() {
         this.isDone = false;
     }
+
+    public abstract boolean isHasDate();
+
+    public abstract boolean isHasTime();
 
     @Override
     public String toString() {
