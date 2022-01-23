@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -23,6 +24,11 @@ public class Duke {
             "OOPS!!! I need a number to update that task :-(";
     private static final String INVALID_DELETE_MSG =
             "OOPS!!! I need a number to delete that task :-(";
+    private static final String INVALID_DATE_MSG =
+            "OOPS!!! I cannot recognise that date format. :-("
+                    + "\nAlso, in this date format yyyy-mm-dd please!";
+    private static final String NO_TASK_SEARCH_MSG =
+            "I can't find any tasks of that date. :-(";
 
     private ArrayList<Task> tasks;
     
@@ -58,7 +64,7 @@ public class Duke {
 
                 LocalDate by = LocalDate.parse(taskData[1]);
 
-                this.tasks.add(new Deadline(taskData[0], by));
+                this.tasks.add(new Deadline(taskData[0], by, 'D'));
             } else if (type.equalsIgnoreCase("event")) {
                 String[] taskData = taskArr[1].split(" /at ");
 
@@ -66,13 +72,13 @@ public class Duke {
 
                 LocalDate at = LocalDate.parse(taskData[1]);
 
-                this.tasks.add(new Event(taskData[0], at));
+                this.tasks.add(new Event(taskData[0], at, 'E'));
             } else if (type.equalsIgnoreCase("todo")) {
                 if (taskArr[1].trim().length() == 0) {
                     throw new IndexOutOfBoundsException();
                 }
 
-                this.tasks.add(new Todo(taskArr[1]));
+                this.tasks.add(new Todo(taskArr[1], 'T'));
             } else {
                 throw new IndexOutOfBoundsException();
             }
@@ -96,8 +102,7 @@ public class Duke {
                 output(UNKNOWN_MSG);
             }
         } catch (DateTimeParseException e) {
-            output("OOPS!!! I cannot recognise that date format. :-("
-                    + "\nIn this date format yyyy-mm-dd please!");
+            output(INVALID_DATE_MSG);
         }
     }
 
@@ -198,6 +203,50 @@ public class Duke {
         return true;
     }
 
+    public void search(String dateString) {
+        try {
+            LocalDate date = LocalDate.parse(dateString);
+            int index = 0;
+            int length = this.tasks.size();
+            StringBuilder sb = new StringBuilder();
+
+            if (length == 0) {
+                output("No tasks found based on given date! Also, quit lazing around!");
+                return;
+            }
+
+            sb.append("Here are the tasks with date, "
+                    + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
+                    + ", in your list:\n");
+
+            for (int i = 0; i < length; ++i) {
+                Task task = this.tasks.get(i);
+
+                if (task.getType() == 'D') {
+                    Deadline deadline = (Deadline) this.tasks.get(i);
+
+                    if (deadline.getDate().isEqual(date)) {
+                        sb.append(++index + ". " + deadline.toString());
+                    }
+                } else if (task.getType() == 'E') {
+                    Event event = (Event) this.tasks.get(i);
+
+                    if (event.getDate().isEqual(date)) {
+                        sb.append(++index + ". " + event.toString());
+                    }
+                }
+
+                if (i + 1 != length) {
+                    sb.append("\n");
+                }
+            }
+
+            output(index > 0 ? sb.toString() : NO_TASK_SEARCH_MSG);
+        } catch (DateTimeParseException e) {
+            output(INVALID_DATE_MSG);
+        }
+    }
+
     public void start() {
         Input input = null;
         Scanner sc = new Scanner(System.in);
@@ -248,6 +297,10 @@ public class Duke {
                     } else {
                         continue;
                     }
+
+                    break;
+                case SEARCH:
+                    search(input.getArgs());
 
                     break;
                 default:
