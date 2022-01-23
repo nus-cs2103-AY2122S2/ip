@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Duke {
@@ -101,20 +103,33 @@ public class Duke {
         String[] deadlineInputs = details.split(" /by ", 2);
         if (deadlineInputs.length == 1 || deadlineInputs[1].strip().equals("")
                 || deadlineInputs[0].strip().equals("")) {
-            throw new DukeException("Please specify a deadline task as 'deadline [description] /by [date]'.");
+            throw new DukeException("Please specify a deadline task as:\n" +
+                    "deadline [description] /by [date in yyyy-mm-dd format].");
         }
-        Task task = new Deadline(deadlineInputs[0], deadlineInputs[1]);
-        addTaskHelper(task);
+        try {
+            LocalDate parsedDate = LocalDate.parse(deadlineInputs[1]);
+            Task task = new Deadline(deadlineInputs[0], parsedDate);
+            addTaskHelper(task);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please specify your date in the yyyy-mm-dd format");
+        }
+
     }
 
     private static void addEvent(String details) throws DukeException {
         String[] eventInputs = details.split(" /at ", 2);
         if (eventInputs.length == 1 || eventInputs[1].strip().equals("")
                 || eventInputs[0].strip().equals("")) {
-            throw new DukeException("Please specify an event task as 'event [description] /at [date]'.");
+            throw new DukeException("Please specify an event task as:\n" +
+                    "deadline [description] /by [date in yyyy-mm-dd format].");
         }
-        Task task = new Event(eventInputs[0], eventInputs[1]);
-        addTaskHelper(task);
+        try {
+            LocalDate parsedDate = LocalDate.parse(eventInputs[1]);
+            Task task = new Event(eventInputs[0], parsedDate);
+            addTaskHelper(task);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please specify your date in the yyyy-mm-dd format");
+        }
     }
 
     private static void deleteTask(String indexString) throws DukeException {

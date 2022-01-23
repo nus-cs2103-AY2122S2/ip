@@ -1,8 +1,11 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
 
-    private String deadline;
+    private LocalDate deadline;
 
-    public Deadline(String description, String time) {
+    public Deadline(String description, LocalDate time) {
         super(description);
         this.deadline = time;
     }
@@ -13,7 +16,7 @@ public class Deadline extends Task {
         sb.append("[D]")
                 .append(super.toString())
                 .append(" (by: ")
-                .append(this.deadline)
+                .append(this.deadline.format(DateTimeFormatter.ofPattern("dd MMM yyyy")))
                 .append(")");
         return sb.toString();
     }
