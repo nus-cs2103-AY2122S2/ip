@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.exception.DukeException;
+import duke.exception.DukeWrongInputFormatException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -40,7 +45,7 @@ public class Event extends Task {
 
 
     /*
-     * Customized toString method for Event task
+     * Customized toString method for duke.task.Event task
      */
     @Override
     public String toString() {

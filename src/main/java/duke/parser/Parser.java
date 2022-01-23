@@ -1,3 +1,9 @@
+package duke.parser;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.exception.DukeWrongInputFormatException;
+
 public class Parser {
     public static Command parseString(String[] command) throws DukeException {
         switch (command[0].toLowerCase()) {

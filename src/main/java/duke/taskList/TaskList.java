@@ -1,3 +1,14 @@
+package duke.taskList;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.exception.DukeInvalidTaskNumberException;
+import duke.exception.DukeWrongInputFormatException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -8,7 +19,7 @@ public class TaskList {
     }
 
     public String printTasks() {
-        StringBuilder output = new StringBuilder("\n");
+        StringBuilder output = new StringBuilder("\n\tHere are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
             output.append("\t").append(i + 1).append(". ").append(tasks.get(i).toString()).append("\n");
         }

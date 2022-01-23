@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.exception.DukeException;
+import duke.exception.DukeWrongInputFormatException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -5,7 +10,7 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task{
     private final String DEADLINE_STRING;
     private final LocalDateTime DEADLINE;
-    public Deadline(String description, String deadLine) throws DukeException{
+    public Deadline(String description, String deadLine) throws DukeException {
         super(description);
         this.DEADLINE = this.parseDeadline(deadLine);
         this.DEADLINE_STRING = this.formatDeadline();
@@ -37,7 +42,7 @@ public class Deadline extends Task{
     }
 
     /*
-     * Customized toString method for Deadline task
+     * Customized toString method for duke.task.Deadline task
      */
     @Override
     public String toString() {

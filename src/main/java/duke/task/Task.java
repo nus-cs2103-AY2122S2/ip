@@ -1,5 +1,7 @@
+package duke.task;
+
 /**
- * Class that encapsulates a Task
+ * Class that encapsulates a duke.task.Task
  */
 public abstract class Task {
     protected final String description;
@@ -8,13 +10,13 @@ public abstract class Task {
     /*
      * Constructor that accepts a String as description
      */
-    public Task(String description) {
+    protected Task(String description) {
         this.description = description;
         setDone(false);
     }
 
     /*
-     * Setting for done variable of Task
+     * Setting for done variable of duke.task.Task
      */
     public void setDone(boolean done) {
         this.isDone = done;
