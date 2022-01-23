@@ -1,7 +1,10 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -174,14 +177,45 @@ public class Duke {
         try {
             this.tasks.get(--index).setCompleted(isMark);
 
+            Path filePath = Paths.get(FILE_PATH, FILE_NAME);
+            ArrayList<String> fileContent = new ArrayList<>(
+                    Files.readAllLines(filePath, StandardCharsets.UTF_8));
+            Task updatedTask = this.tasks.get(index);
+            String taskString = updatedTask.toString();
+            String updateString = "";
+
+            if (taskString.charAt(1) == 'D') {
+                updateString = String.format(
+                        "D | %s | %s | %s",
+                        updatedTask.getCompleted() ? "1" : "0",
+                        updatedTask.getDescription(),
+                        ((Deadline) updatedTask).getDateTime());
+            } else if (taskString.charAt(1) == 'E') {
+                updateString = String.format(
+                        "E | %s | %s | %s",
+                        updatedTask.getCompleted() ? "1" : "0",
+                        updatedTask.getDescription(),
+                        ((Event) updatedTask).getDateTime());
+            } else {
+                updateString = String.format(
+                        "T | %s | %s",
+                        updatedTask.getCompleted() ? "1" : "0",
+                        updatedTask.getDescription());
+            }
+
+            fileContent.set(index, updateString);
+
+            Files.write(filePath, fileContent);
+            
             String output = isMark ?
                     "Nice! I've marked this task as done:\n" :
                     "OK, I've marked this task as not done yet:\n";
-            String task = "  " + this.tasks.get(index).toString();
 
-            output(output + task);
+            output(output + taskString);
         } catch (IndexOutOfBoundsException e) {
             output(INVALID_INDEX_MSG);
+        } catch (IOException e) {
+            output("OOPS!!! Facing some issues in updating your task to disk. :-(");
         }
     }
 
@@ -239,6 +273,10 @@ public class Duke {
             }
 
             File file = new File(FILE_PATH + FILE_NAME);
+
+            if (!file.exists()) {
+                file.createNewFile();
+            }
 
             sc = new Scanner(file);
 
