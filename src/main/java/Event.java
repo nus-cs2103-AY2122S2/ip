@@ -55,9 +55,7 @@ public class Event extends Task {
 
         try {
             String[] timeString = tokens[idx].split("-");
-            System.out.println(timeString[0]);
             startTime = LocalTime.parse(timeString[0]);
-            System.out.println(timeString[1]);
             endTime = LocalTime.parse(timeString[1]);
         } catch (Exception e) {
             throw new DukeException("Please specify a valid start time and end time! (hh:mm)");
