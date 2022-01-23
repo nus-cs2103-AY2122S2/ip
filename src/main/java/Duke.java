@@ -1,4 +1,9 @@
 import java.io.*;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -24,10 +29,10 @@ public class Duke {
                 t = new Todo(taskComponents[2]);
                 break;
             case "D":
-                t = new Deadline(taskComponents[2], taskComponents[3]);
+                t = new Deadline(taskComponents[2], parseDateTime(taskComponents[3]));
                 break;
             case "E":
-                t = new Event(taskComponents[2], taskComponents[3]);
+                t = new Event(taskComponents[2], parseDateTime(taskComponents[3]));
                 break;
             default:
                 t = new Task(taskComponents[2]);
@@ -86,7 +91,7 @@ public class Duke {
         System.out.print(indent + t + "\n" + bottomLine);
     }
 
-    private static void addTask(Command command, String input) throws DukeException {
+    private static void addTask(Command command, String input) throws DukeException, DateTimeParseException {
         String descr;
 
         if (command.equals(Command.TODO)) {
@@ -100,7 +105,8 @@ public class Duke {
                 throw new DukeException(topLine + "Oops, please set a date/time for this task!\n"
                         + bottomLine);
             } else {
-                tasks.add(new Deadline(descrArr[0], descrArr[1]));
+                LocalDateTime dateTime = parseDateTime(descrArr[1]);
+                tasks.add(new Deadline(descrArr[0], dateTime));
             }
 
         } else {
@@ -110,7 +116,8 @@ public class Duke {
                 throw new DukeException(topLine + "Oops, please set a date/time for this task!\n"
                         + bottomLine);
             } else {
-                tasks.add(new Event(descrArr[0], descrArr[1]));
+                LocalDateTime dateTime = parseDateTime(descrArr[1]);
+                tasks.add(new Event(descrArr[0], dateTime));
             }
         }
         totalTasks++;
@@ -127,7 +134,7 @@ public class Duke {
         return list;
     }
 
-    private static void saveToHardDisk(String filePath, String textToAdd) {
+    private static void saveToHardDisk(String filePath, String textToAdd){
         try {
             FileWriter fw = new FileWriter(filePath);
             fw.write(textToAdd);
@@ -135,6 +142,11 @@ public class Duke {
         } catch (IOException e) {
             System.out.print(topLine + "Unable to save changes to hard disk :(" + bottomLine);
         }
+    }
+
+    public static LocalDateTime parseDateTime(String dt) throws DateTimeParseException {
+        return LocalDateTime.parse(dt,
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
     public static void main(String[] args) throws IOException {
@@ -214,6 +226,9 @@ public class Duke {
                 System.out.print(topLine + "Invalid task number. " + listStatus(totalTasks) + bottomLine);
             } catch (IllegalArgumentException e) {
                 System.out.print(topLine + "Oh no! I don't understand what that means...\n" + bottomLine);
+            } catch (DateTimeParseException e) {
+                System.out.print(topLine + "Please specify date and time in this format: yyyy-mm-dd HH:mm.\n"
+                        + bottomLine);
             } finally {
                 // Save changes to hard disk
                 saveToHardDisk(filePath, getListToSave());
