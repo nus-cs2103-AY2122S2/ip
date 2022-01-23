@@ -40,7 +40,7 @@ public class Ui {
 
     /**
      * Returns a full command gotten from user input.
-     * @return string containing full command.
+     * @return full command.
      * @throws BlankCommandException if user inputs nothing. Eg, " ".
      */
     public String readCommand() throws BlankCommandException {

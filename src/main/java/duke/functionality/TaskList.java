@@ -3,6 +3,7 @@ package duke.functionality;
 import java.util.ArrayList;
 
 import duke.task.Task;
+
 /**
  * Represents the Tasks of the Duke project. A <code> TaskList </code> object corresponds
  * to the actions available on a Task object.
