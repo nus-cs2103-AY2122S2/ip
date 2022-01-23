@@ -5,8 +5,8 @@ public enum TaskType {
     DEADLINE("D", 2),
     EVENT("E", 3);
 
-    private String shorthand;
-    private int typeId;
+    private final String shorthand;
+    private final int typeId;
     TaskType(String shorthand, int typeId) {
         this.shorthand = shorthand;
         this.typeId = typeId;
