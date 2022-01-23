@@ -95,6 +95,9 @@ public class Parser {
                 tl.removeTask(Integer.parseInt(args[1]) - 1);
                 p.print("Deleted Task:", " " + deletedTask.toString(), String.format("There are now %d task(s) in the list.", tl.getSize()));
                 break;
+            case "find":
+                p.print(tl.findTasksContaining(args[1]), "Here are the matching tasks in your list:");
+                break;
             default:
                 System.out.println("Unknown Command");
         }
@@ -153,6 +156,11 @@ public class Parser {
                     LocalDate.parse(input.split(flag)[1].substring(1, input.split(flag)[1].length()),formatter);
                 } catch (DateTimeParseException e ) {
                     throw new DukeException("Provide the date in the format dd-mm-yyyy!");
+                }
+                break;
+            case "find":
+                if(args.length == 1) {
+                    throw new DukeException("Provide keyword!");
                 }
                 break;
         }
