@@ -5,11 +5,11 @@ package task;
  */
 public abstract class Task {
     public String description;
-    public boolean done;
+    public boolean isDone;
 
-    public Task (String description, boolean done) {
-        this.description = description;
-        this.done = done;
+    public Task (String task, boolean isDone) {
+        this.description = task;
+        this.isDone = isDone;
     }
 
     /**

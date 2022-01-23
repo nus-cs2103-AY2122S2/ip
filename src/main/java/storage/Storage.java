@@ -20,7 +20,7 @@ public class Storage {
     public Storage() throws DukeException{
         File directory = new File(PATH + "/");
         if (! directory.exists()){
-            boolean created = directory.mkdir();
+            boolean wasCreated = directory.mkdir();
         }
 
         this.file = new File(PATH, FILENAME);
@@ -40,7 +40,7 @@ public class Storage {
     public void writeToFile(TaskList taskList) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(this.file, false);
-            for (int i=0; i < taskList.size(); i++) {
+            for (int i = 0; i < taskList.size(); i++) {
                 fileWriter.write(taskList.get(i).fileFormat() + "\n");
             }
             fileWriter.close();

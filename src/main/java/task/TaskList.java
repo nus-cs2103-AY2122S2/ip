@@ -6,32 +6,33 @@ import java.util.ArrayList;
  * TaskList represents the list of the tasks in the user's todo-list.
  * Functions below basically all apply to the ArrayList made in the constructor.
  */
-public class TaskList { //figure out how to process existing taskList from storage
-    ArrayList<Task> taskList;
+public class TaskList {
+    ArrayList<Task> tasks;
+
     public TaskList() {
-        taskList = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     public int size() {
-        return taskList.size();
+        return tasks.size();
     }
 
     public void add(Task task) {
-        taskList.add(task);
+        tasks.add(task);
     }
 
     public Task get(int index) {
-        return taskList.get(index);
+        return tasks.get(index);
     }
 
     public void delete(int serialNumber) {
-        taskList.remove(serialNumber -1);
+        tasks.remove(serialNumber - 1);
     }
 
     public String toString() {
         String s = "";
-        for (int i = 0; i < taskList.size(); i++) {
-            s += (i + 1 + ". " + taskList.get(i) + "\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            s += (i + 1 + ". " + tasks.get(i) + "\n");
         }
         return s.trim();
     }

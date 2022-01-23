@@ -30,7 +30,7 @@ public class TodoCommand extends Command {
         taskList.add(new Todo(this.message, false));
         storage.writeToFile(taskList);
         ui.outputMessage("Got it. I've added this task: \n" +
-                taskList.get(taskList.size() -1) +
+                taskList.get(taskList.size() - 1) +
                 "\nNow you have " + taskList.size() + " tasks in the list.");
     }
 }
