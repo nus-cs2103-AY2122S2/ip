@@ -101,6 +101,31 @@ public class TaskManager {
     }
 
     /**
+     * Finding tasks that match a description
+     * @param description String describing task
+     * @return String representing tasks matching the description
+     */
+    public String find(String description) {
+        ArrayList<Task> tasks = new ArrayList<Task>();
+        for (Task task: this.taskList) {
+            if (task.getDescription().contains(description)) {
+                tasks.add(task);
+            }
+        }
+        if (tasks.size() == 0) {
+            return "There are no tasks matching this description.";
+        }
+        String response = "Here are the tasks matching the description:\n";
+        for (int i = 1; i <= tasks.size(); i++) {
+            response += (i + ". " + tasks.get(i - 1));
+            if (i != tasks.size()) {
+                response += "\n";
+            }
+        }
+        return response;
+    }
+
+    /**
      * Marking a task as not completed
      * @param index Index of task to be unmarked
      * @return String representing the response when a task is unmarked
