@@ -1,4 +1,6 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Represents the a list of Tasks. <code>TaskList</code> object stores and handles users'
@@ -20,19 +22,33 @@ public class TaskList {
      * @return a response string for the user
      * @throws TaskListException if task type is unknown
      */
-    public String add(TaskType type, String... task) throws TaskListException{
+    public String add(TaskType type, String taskName) throws TaskListException{
         Task newTask;
         switch (type) {
         case Todo:
-            newTask = new ToDoTask(task[0]);
+            newTask = new ToDoTask(taskName);
+            tasks.add(newTask);
+            break;
+        default:
+            throw new TaskListException("There is no such task!");
+        }
+        return "Got it! I have added a new " + type + " task:\n" + newTask
+                + "\nYou have " + tasks.size() + " tasks in your list.";
+    }
+
+    public String add(TaskType type, String taskName, Date date) throws TaskListException{
+        Task newTask;
+        switch (type) {
+        case Todo:
+            newTask = new ToDoTask(taskName);
             tasks.add(newTask);
             break;
         case Event:
-            newTask = new EventTask(task[0], task[1]);
+            newTask = new EventTask(taskName, date);
             tasks.add(newTask);
             break;
         case Deadline:
-            newTask = new DeadlineTask(task[0], task[1]);
+            newTask = new DeadlineTask(taskName, date);
             tasks.add(newTask);
             break;
         default:

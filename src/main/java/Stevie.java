@@ -1,3 +1,6 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -55,9 +58,11 @@ public class Stevie {
                 "\"bye\": to end our session.\n" +
                 "\"mark <i>\" to mark the i-th task as done.\n" +
                 "\"unmark <i>\" to unmark the i-th task as done.\n" +
+                "\"delete <i>\" to delete the i-th task.\n" +
                 "\"todo <task_name>\" to add a todo task.\n" +
                 "\"deadline <task_name> /by <date>\" to add a deadline.\n" +
-                "\"event <event_name> /at <date>\" to add an event.";
+                "\"event <event_name> /at <date>\" to add an event.\n" +
+                "Date should in format of dd/mm/yyyy HH:mm";
     }
 
     /**
@@ -113,14 +118,16 @@ public class Stevie {
                     .split("\\s/by\\s", 2);
             split[0] = split[0].trim();
             split[1] = split[1].trim();
-            if (split[0].length() == 0 && split[1].length() == 0) {
+            if (split[0].length() == 0 || split[1].length() == 0) {
                 throw new StevieException("Deadline task requires a task name and a date!");
-            } else if (split[0].length() == 0) {
-                throw new StevieException("Deadline task requires a task name!");
-            } else if (split[1].length() == 0) {
-                throw new StevieException("Deadline task requires a date!");
             } else {
-                return tl.add(TaskType.Deadline, split[0], split[1]);
+                Date date;
+                try {
+                    date = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(split[1]);
+                } catch (ParseException ex) {
+                    throw new StevieException("Date format is unacceptable!");
+                }
+                return tl.add(TaskType.Deadline, split[0], date);
             }
         } else if (Pattern.matches("^event\\s(.*s?)\\s/at\\s(.*s?)", userIn)) {
             String[] split = userIn
@@ -130,12 +137,14 @@ public class Stevie {
             split[1] = split[1].trim();
             if (split[0].length() == 0 && split[1].length() == 0) {
                 throw new StevieException("Event task requires a task name and a date!");
-            } else if (split[0].length() == 0) {
-                throw new StevieException("Event task requires a task name!");
-            } else if (split[1].length() == 0) {
-                throw new StevieException("Event task requires a date!");
             } else {
-                return tl.add(TaskType.Event, split[0], split[1]);
+                Date date;
+                try {
+                    date = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(split[1]);
+                } catch (ParseException ex) {
+                    throw new StevieException("Date format is unacceptable!");
+                }
+                return tl.add(TaskType.Event, split[0], date);
             }
         } else {
             throw new StevieException("Oops! Your instructions were unclear!");

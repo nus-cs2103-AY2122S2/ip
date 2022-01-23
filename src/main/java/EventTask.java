@@ -1,9 +1,12 @@
+import java.time.LocalDate;
+import java.util.Date;
+
 /**
  * A type of task that can be characterised as an event. An <code>EventTask</code> contains
  * a name and an event date.
  */
 public class EventTask extends Task{
-    private String date;
+    private Date date;
 
     /**
      * Constructor for an event task.
@@ -11,7 +14,7 @@ public class EventTask extends Task{
      * @param name name of the event
      * @param date date of the event
      */
-    public EventTask(String name, String date) {
+    public EventTask(String name, Date date) {
         super(name);
         this.date = date;
     }

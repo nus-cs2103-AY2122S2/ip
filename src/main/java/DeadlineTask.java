@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.util.Date;
+
 /**
  * A type of task that can be characterised as an deadline. A <code>DeadlineTask</code> contains
  * a name and an deadline.
@@ -6,7 +9,7 @@ public class DeadlineTask extends Task {
     /**
      * Deadline of the task
      */
-    private String date;
+    private Date date;
 
     /**
      * Constructor for a deadline task
@@ -14,7 +17,7 @@ public class DeadlineTask extends Task {
      * @param name name of the task
      * @param date deadline of the task
      */
-    public DeadlineTask(String name, String date) {
+    public DeadlineTask(String name, Date date) {
         super(name);
         this.date = date;
     }
