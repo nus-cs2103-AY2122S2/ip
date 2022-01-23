@@ -7,8 +7,8 @@ public class Event extends Task {
         this.dateTime = dateTime;
     }
 
-    public Event(String name, boolean isDone,String dateTime) {
-        super(name, isDone);
+    public Event(String name, boolean isMark, String dateTime) {
+        super(name, isMark);
         this.dateTime = dateTime;
     }
 

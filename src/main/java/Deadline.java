@@ -7,8 +7,8 @@ public class Deadline extends Task {
         this.dateTime = dateTime;
     }
 
-    public Deadline(String name, boolean isDone,String dateTime) {
-        super(name, isDone);
+    public Deadline(String name, boolean isMark, String dateTime) {
+        super(name, isMark);
         this.dateTime = dateTime;
     }
 

@@ -67,22 +67,22 @@ public class Storage {
 
         try {
             int taskDone = Integer.parseInt(dataArgs[1]);
-            boolean isTaskDoneValid = taskDone == 1 || taskDone == 0;
-            boolean isTaskDone = taskDone == 1;
+            boolean isMarkValid = taskDone == 1 || taskDone == 0;
+            boolean isTaskMark = taskDone == 1;
 
-            if (!isTaskDoneValid) {
+            if (!isMarkValid) {
                 throw new DukeException("Invalid File");
             }
 
             switch (dataArgs[0]) {
             case "T":
-                return new Todo(dataArgs[2], isTaskDone);
+                return new Todo(dataArgs[2], isTaskMark);
 
             case "D":
-                return new Deadline(dataArgs[2], isTaskDone, dataArgs[3]);
+                return new Deadline(dataArgs[2], isTaskMark, dataArgs[3]);
 
             case "E":
-                return new Event(dataArgs[2], isTaskDone, dataArgs[3]);
+                return new Event(dataArgs[2], isTaskMark, dataArgs[3]);
             }
         } catch (NumberFormatException e) {
             throw new DukeException("Invalid File");
