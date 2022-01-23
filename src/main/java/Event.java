@@ -1,8 +1,8 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-
     protected LocalDate eventDate;
     protected LocalTime startTime;
     protected LocalTime endTime;
@@ -14,18 +14,24 @@ public class Event extends Task {
         this.endTime = endTime;
     }
 
-    public Event(String name, boolean isMark, String dateTime) {
+    public Event(String name, boolean isMark, LocalDate eventDate, LocalTime startTime, LocalTime endTime) {
         super(name, isMark);
-        this.dateTime = dateTime;
+        this.eventDate = eventDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s %s-%s)", super.toString(), eventDate, startTime, endTime);
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d MMM yyyy");
+        DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("h:mma");
+
+        return String.format("[E]%s (at: %s %s - %s)", super.toString(), eventDate.format(dateFormat),
+                startTime.format(timeFormat), endTime.format(timeFormat));
     }
 
     @Override
     public String toData() {
-        return "E|" + super.toData() + "|" + dateTime;
+        return "E|" + super.toData() + "|" + eventDate + "|" + startTime + "|" + endTime;
     }
 }

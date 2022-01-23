@@ -1,8 +1,8 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-
     protected LocalDate dueDate;
     protected LocalTime dueTime;
 
@@ -12,18 +12,23 @@ public class Deadline extends Task {
         this.dueTime = dueTime;
     }
 
-    public Deadline(String name, boolean isMark, String dateTime) {
+    public Deadline(String name, boolean isMark, LocalDate dueDate, LocalTime dueTime) {
         super(name, isMark);
-        this.dateTime = dateTime;
+        this.dueDate = dueDate;
+        this.dueTime = dueTime;
     }
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s %s)", super.toString(), dueDate, dueTime);
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d MMM yyyy");
+        DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("h:mma");
+
+        return String.format("[D]%s (by: %s %s)", super.toString(), dueDate.format(dateFormat),
+                dueTime.format(timeFormat));
     }
 
     @Override
     public String toData() {
-        return "D|" + super.toData() + "|" + dateTime;
+        return "D|" + super.toData() + "|" + dueDate + "|" + dueTime;
     }
 }
