@@ -90,6 +90,8 @@ public class Sana {
             System.out.println(e.getMessage());
         } catch (OutOfBoundsTaskException e) {
             System.out.println(e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("Where's my number!");
         }
         taskMem.updateMemory(userTasks);
         border();

@@ -53,8 +53,8 @@ public class Event extends Task {
      */
     public static Event memToTask(String taskStr) {
         // Example str = E|0|return book|June 6th
-        String[] args = taskStr.split("|");
-        boolean isDone = args[1].equals('1');
+        String[] args = taskStr.split(":");
+        boolean isDone = args[1].equals("1");
         return new Event(args[2], isDone, args[3]);
         /**
          try {
@@ -74,14 +74,14 @@ public class Event extends Task {
     public String taskToMemStr() {
         // Example str = E|0|return book|June 6th
         StringBuilder sb = new StringBuilder();
-        sb.append("E|");
+        sb.append("E:");
         if (this.isDone()) {
-            sb.append("1|");
+            sb.append("1:");
         } else {
-            sb.append("0|");
+            sb.append("0:");
         }
-        sb.append(super.toString());
-        sb.append("|");
+        sb.append(getTaskName());
+        sb.append(":");
         sb.append(this.eventTime);
         return sb.toString();
     }

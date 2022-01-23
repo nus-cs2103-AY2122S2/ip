@@ -47,6 +47,15 @@ public abstract class Task {
     }
 
     /**
+     * Returns task name
+     *
+     * @return taskName
+     */
+    public String getTaskName() {
+        return taskName;
+    }
+
+    /**
      * Returns whether the task is done
      * @return  done
      */

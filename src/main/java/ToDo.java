@@ -49,8 +49,8 @@ public class ToDo extends Task {
      */
     public static ToDo memToTask(String taskStr) {
         // Example str = T|1|read book
-        String[] args = taskStr.split("|");
-        boolean isDone = args[1].equals('1');
+        String[] args = taskStr.split(":");
+        boolean isDone = args[1].equals("1");
         return new ToDo(args[2], isDone);
         /**
         try {
@@ -70,13 +70,13 @@ public class ToDo extends Task {
     public String taskToMemStr() {
         // Example str = T|1|read book
         StringBuilder sb = new StringBuilder();
-        sb.append("T|");
+        sb.append("T:");
         if (this.isDone()) {
-            sb.append("1|");
+            sb.append("1:");
         } else {
-            sb.append("0|");
+            sb.append("0:");
         }
-        sb.append(super.toString());
+        sb.append(getTaskName());
         return sb.toString();
     }
 }

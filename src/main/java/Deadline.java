@@ -54,8 +54,8 @@ public class Deadline extends Task {
      */
     public static Deadline memToTask(String taskStr) {
         // Example str = D|0|return book|June 6th
-        String[] args = taskStr.split("|");
-        boolean isDone = args[1].equals('1');
+        String[] args = taskStr.split(":");
+        boolean isDone = args[1].equals("1");
         return new Deadline(args[2], isDone, args[3]);
         /**
          try {
@@ -75,14 +75,14 @@ public class Deadline extends Task {
     public String taskToMemStr() {
         // Example str = D|0|return book|June 6th
         StringBuilder sb = new StringBuilder();
-        sb.append("D|");
+        sb.append("D:");
         if (this.isDone()) {
-            sb.append("1|");
+            sb.append("1:");
         } else {
-            sb.append("0|");
+            sb.append("0:");
         }
-        sb.append(super.toString());
-        sb.append("|");
+        sb.append(getTaskName());
+        sb.append(":");
         sb.append(this.deadlineTime);
         return sb.toString();
     }
