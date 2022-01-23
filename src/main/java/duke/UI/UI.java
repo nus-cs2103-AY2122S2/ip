@@ -54,8 +54,8 @@ public class UI {
         System.out.println("unmark: Mark a task as not completed. Syntax: unmark <index of task>");
         System.out.println("delete: Delete a task. Syntax: delete <index of task>");
         System.out.println("todo: Create a todo task. Syntax: todo <taskname>");
-        System.out.println("deadline: Create a deadline. Syntax: deadline <taskname> /<yy-mm-dd hhmm of deadline>");
-        System.out.println("event: Create an event. Syntax: event <taskname> /<yy-mm-dd hhmm of start> <yymmdd hhmm of end>");
+        System.out.println("deadline: Create a deadline. Syntax: deadline <taskname> /<yyyy-mm-dd hhmm of deadline>");
+        System.out.println("event: Create an event. Syntax: event <taskname> /<yyyy-mm-dd hhmm of start> <yymmdd hhmm of end>");
     }
 
     public static void printGoodbye() {

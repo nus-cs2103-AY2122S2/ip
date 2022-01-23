@@ -2,7 +2,8 @@ package duke;
 import java.io.*;
 import java.util.*;
 import java.time.*;
-import java.time.format.*;
+
+import duke.UI.UI;
 import duke.tasks.*;
 
 
@@ -22,25 +23,21 @@ public class Pikachu {
     public void parseInput(String str) {
         String[] split = str.split(" ");
 
+        if (str.toLowerCase().equals("commands")) {
+            UI.printCommands();
+            return;
+        }
+
         if (str.toLowerCase().equals("list")) {                        //LIST
             //System.out.println("list command reached!");
             System.out.println("Here are the tasks in your list:");
             int count = 1;
-            String currBool = "[error]"; 
-            String currTask = "[error]";
             for (Task t : inputList) {
-                if (t.isDone) { currBool = "[X]";
-                } else { currBool = "[ ]"; }
-
-                if (t.getClass().getSimpleName().equals("ToDo")) { currTask = "[T]";
-                } else if (t.getClass().getSimpleName().equals("Deadline")) { currTask = "[D]";
-                } else if (t.getClass().getSimpleName().equals("Event")) { currTask = "[E]"; }
-
-                System.out.println("   " + count + ". " + currTask + currBool + " " + t);
+                System.out.println("   " + count + ". " + t);
                 count += 1;
             }
             count -= 1;
-            System.out.println("Now you have "+count+" task(s) in the list.");
+            System.out.println("Now you have " + count + " task(s) in the list.");
             return;
         }
 
@@ -48,21 +45,14 @@ public class Pikachu {
             int index = 0;
             try { index = Integer.parseInt(split[1]) - 1;
             } catch (Exception e) { System.out.println("Invalid input for mark!"); return; }
-            if (index >= inputList.size() || index <= -1) {                          //Prevent invalid array accesses
+            if (index >= inputList.size() || index <= -1) { //Prevent invalid array accesses
                 System.out.println("Invalid task number!");
                 return;
             }
             Task t = inputList.get(index);
             t.mark();
 
-            String currBool = "[error]"; 
-            String currTask = "[error]";
-            if (t.isDone) { currBool = "[X]";
-            } else { currBool = "[ ]"; }
-            if (t.getClass().getSimpleName().equals("ToDo")) { currTask = "[T]";
-            } else if (t.getClass().getSimpleName().equals("Deadline")) { currTask = "[D]";
-            } else if (t.getClass().getSimpleName().equals("Event")) { currTask = "[E]"; }
-            System.out.println("Pikachu has marked this task as done!\n   > " + currTask + currBool + " " + t);
+            System.out.println("Pikachu has marked this task as done!\n   > " + t);
             return;
         }
 
@@ -77,14 +67,7 @@ public class Pikachu {
             Task t = inputList.get(index);
             t.unmark();
 
-            String currBool = "[error]"; 
-            String currTask = "[error]";
-            if (t.isDone) { currBool = "[X]";
-            } else { currBool = "[ ]"; }
-            if (t.getClass().getSimpleName().equals("ToDo")) { currTask = "[T]";
-            } else if (t.getClass().getSimpleName().equals("Deadline")) { currTask = "[D]";
-            } else if (t.getClass().getSimpleName().equals("Event")) { currTask = "[E]"; }
-            System.out.println("Pikachu has marked this task as not done yet!\n   > " + currTask + currBool + " " + t);
+            System.out.println("Pikachu has marked this task as not done yet!\n   > " + t);
             return;
         }
 
@@ -92,20 +75,13 @@ public class Pikachu {
             int index = 0;
             try { index = Integer.parseInt(split[1]) - 1;
             } catch (Exception e) { System.out.println("Invalid input for delete!"); return; }
-            if (index >= inputList.size() || index <= -1) {                          //Prevent invalid array accesses
+            if (index >= inputList.size() || index <= -1) { //Prevent invalid array accesses
                 System.out.println("Invalid task number!");
                 return;
             }
             Task t = inputList.remove(index);
 
-            String currBool = "[error]"; 
-            String currTask = "[error]";
-            if (t.isDone) { currBool = "[X]";
-            } else { currBool = "[ ]"; }
-            if (t.getClass().getSimpleName().equals("ToDo")) { currTask = "[T]";
-            } else if (t.getClass().getSimpleName().equals("Deadline")) { currTask = "[D]";
-            } else if (t.getClass().getSimpleName().equals("Event")) { currTask = "[E]"; }
-            System.out.println("Pikachu has deleted this task!\n   > " + currTask + currBool + " " + t);
+            System.out.println("Pikachu has deleted this task!\n   > " + t);
             System.out.println("You now have " + inputList.size() + " tasks in the list.");
             return;
         }
@@ -117,7 +93,7 @@ public class Pikachu {
             ToDo t = new ToDo(split2[1]);
             inputList.add(t);
             System.out.println("Pikachu has added this task to the list!");
-            System.out.println("   > [T][ ] " + t);
+            System.out.println("   > " + t);
             System.out.println("You now have " + inputList.size() + " tasks in the list.");
             return;
             } catch (Exception e) {
@@ -141,7 +117,7 @@ public class Pikachu {
             Deadline d = new Deadline(name, deadline);
             inputList.add(d);
             System.out.println("Pikachu has added this task to the list!");
-            System.out.println("   > [D][ ] " + d);
+            System.out.println("   > " + d);
             System.out.println("You now have " + inputList.size() + " tasks in the list.");
             return;
             } catch (Exception e) {
@@ -174,7 +150,7 @@ public class Pikachu {
             Event e = new Event(name, start, end);
             inputList.add(e);
             System.out.println("Pikachu has added this task to the list!");
-            System.out.println("   > [E][ ] " + e);
+            System.out.println("   > " + e);
             System.out.println("You now have " + inputList.size() + " tasks in the list.");
             return;
             } catch (Exception e) {

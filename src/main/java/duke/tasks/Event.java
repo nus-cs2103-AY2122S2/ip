@@ -33,7 +33,11 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"); 
-        return this.name + "(From " + this.start.format(format) + " to " + this.end.format(format) + ")";
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        if (isDone) { //Task is done
+            return "[E][X] " + this.name + "(From " + this.start.format(format) + " to " + this.end.format(format) + ")";
+        } else { //Task not done
+            return "[E][ ] " + this.name + "(From " + this.start.format(format) + " to " + this.end.format(format) + ")";
+        }
     }
 }
