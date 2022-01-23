@@ -24,4 +24,9 @@ public class TaskList {
     public int getTaskListSize() {
         return this.taskListSize;
     }
+
+    public void remove(int numToDelete) {
+        Task currTask = this.taskList.get(numToDelete - 1);
+        this.taskList.remove(numToDelete - 1);
+    }
 }

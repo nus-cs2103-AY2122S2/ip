@@ -76,4 +76,11 @@ public class Printer {
                 "     Now you have " + taskList.size() + " task(s) in the list.\n" + BLANK_LINE;
         System.out.println(temp);
     }
+
+    public static void delete(int numToDelete, TaskList taskList) {
+        Task deleteTask = taskList.get(numToDelete - 1);
+        taskList.remove(numToDelete);
+        System.out.println(BLANK_LINE + "     Noted. I've removed this task: " + "\n" + "     " + deleteTask
+                + "\n" + "     Now you have " + taskList.size() + " task(s) in the list.\n" + BLANK_LINE);
+    }
 }

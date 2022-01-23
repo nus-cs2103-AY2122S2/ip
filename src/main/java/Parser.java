@@ -88,6 +88,14 @@ public class Parser {
                 taskList.add(newEvent);
                 Printer.event(eventName, eventTime, taskList);
                 break;
+            case("delete"):
+                int numToDelete = Integer.parseInt(array[1]);
+                if (numToDelete > taskList.size() || numToDelete < 0) {
+                    throw new InvalidInputException("\n" + Printer.BLANK_LINE
+                            + "    Please select a valid task number to delete!\n" + Printer.BLANK_LINE);
+                }
+                Printer.delete(numToDelete, taskList);
+                break;
             default:
                 throw new UnknownCommandException("\n" + Printer.BLANK_LINE
                         + "    I'm sorry, but I don't know what that means :-(\n" + Printer.BLANK_LINE);
