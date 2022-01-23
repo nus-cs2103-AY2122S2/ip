@@ -1,14 +1,17 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
 
-    private String startTime;
+    private LocalDate startTime;
 
-    public Event(String description, String time) {
+    public Event(String description, LocalDate time) {
         super(description);
         this.startTime = time;
     }
 
     public String getStartTime() {
-        return this.startTime;
+        return this.startTime.toString();
     }
 
     @Override
@@ -17,7 +20,7 @@ public class Event extends Task {
         sb.append("[E]")
                 .append(super.toString())
                 .append(" (at: ")
-                .append(this.startTime)
+                .append(this.startTime.format(DateTimeFormatter.ofPattern("dd MMM yyyy")))
                 .append(")");
         return sb.toString();
     }

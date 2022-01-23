@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.File;
@@ -6,7 +8,6 @@ import java.io.File;
 public class Duke {
 
     private static TaskList taskList;
-    private static FileWriter dataWriter;
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -56,7 +57,7 @@ public class Duke {
                     throw new IllegalArgumentException(
                             String.format("Sorry, the command '%s' is not supported.", command));
                 }
-            } catch (IOException | IllegalArgumentException | DukeException e) {
+            } catch (IllegalArgumentException | DukeException e) {
                 System.out.println(e.getMessage());
                 System.out.println();
             }
@@ -77,10 +78,10 @@ public class Duke {
                         taskList.addTask(new Todo(currTask[2]));
                         break;
                     case "D":
-                        taskList.addTask(new Deadline(currTask[2], currTask[3]));
+                        taskList.addTask(new Deadline(currTask[2], LocalDate.parse(currTask[3])));
                         break;
                     case "E":
-                        taskList.addTask(new Event(currTask[2], currTask[3]));
+                        taskList.addTask(new Event(currTask[2], LocalDate.parse(currTask[3])));
                         break;
                     }
                     if (currTask[1].equals("1")) {
@@ -134,7 +135,7 @@ public class Duke {
         return index;
     }
 
-    private static void toggleTaskDone(ValidCommand cmd, String indexString) throws DukeException, IOException {
+    private static void toggleTaskDone(ValidCommand cmd, String indexString) throws DukeException {
         int index = Duke.convertIndex(indexString);
         Task task = Duke.taskList.getTask(index);
         if (cmd == ValidCommand.MARK) {
@@ -149,7 +150,7 @@ public class Duke {
         Duke.saveData();
     }
 
-    private static void addTaskHelper(Task task) throws IOException {
+    private static void addTaskHelper(Task task) {
         Duke.taskList.addTask(task);
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
@@ -157,7 +158,7 @@ public class Duke {
         Duke.saveData();
     }
 
-    private static void addTodo(String details) throws DukeException, IOException {
+    private static void addTodo(String details) throws DukeException{
         if (details.strip().equals("")) {
             throw new DukeException("Please enter a description for the todo task.");
         }
@@ -165,27 +166,40 @@ public class Duke {
         addTaskHelper(task);
     }
 
-    private static void addDeadline(String details) throws DukeException, IOException {
+    private static void addDeadline(String details) throws DukeException {
         String[] deadlineInputs = details.split(" /by ", 2);
         if (deadlineInputs.length == 1 || deadlineInputs[1].strip().equals("")
                 || deadlineInputs[0].strip().equals("")) {
-            throw new DukeException("Please specify a deadline task as 'deadline [description] /by [date]'.");
+            throw new DukeException("Please specify a deadline task as:\n" +
+                    "deadline [description] /by [date in yyyy-mm-dd format].");
         }
-        Task task = new Deadline(deadlineInputs[0], deadlineInputs[1]);
-        addTaskHelper(task);
+        try {
+            LocalDate parsedDate = LocalDate.parse(deadlineInputs[1]);
+            Task task = new Deadline(deadlineInputs[0], parsedDate);
+            addTaskHelper(task);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please specify your date in the yyyy-mm-dd format");
+        }
+
     }
 
-    private static void addEvent(String details) throws DukeException, IOException {
+    private static void addEvent(String details) throws DukeException {
         String[] eventInputs = details.split(" /at ", 2);
         if (eventInputs.length == 1 || eventInputs[1].strip().equals("")
                 || eventInputs[0].strip().equals("")) {
-            throw new DukeException("Please specify an event task as 'event [description] /at [date]'.");
+            throw new DukeException("Please specify an event task as:\n" +
+                    "deadline [description] /by [date in yyyy-mm-dd format].");
         }
-        Task task = new Event(eventInputs[0], eventInputs[1]);
-        addTaskHelper(task);
+        try {
+            LocalDate parsedDate = LocalDate.parse(eventInputs[1]);
+            Task task = new Event(eventInputs[0], parsedDate);
+            addTaskHelper(task);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please specify your date in the yyyy-mm-dd format");
+        }
     }
 
-    private static void deleteTask(String indexString) throws DukeException, IOException {
+    private static void deleteTask(String indexString) throws DukeException {
         int index = Duke.convertIndex(indexString);
         Task task = Duke.taskList.getTask(index);
         Duke.taskList.deleteTask(index);
