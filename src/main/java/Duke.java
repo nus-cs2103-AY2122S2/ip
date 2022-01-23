@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
@@ -134,10 +133,10 @@ public class Duke {
 
                 if (taskDetails.contains("/by")) {
                     description = taskDetails.split("/by", 2)[0];
-                    date = taskDetails.split("/by", 2)[1];
+                    date = taskDetails.split("/by", 2)[1].substring(1);
                 } else if (taskDetails.contains("/at")) {
                     description = taskDetails.split("/at", 2)[0];
-                    dateTime = taskDetails.split("/at", 2)[1];
+                    dateTime = taskDetails.split("/at", 2)[1].substring(1);
                 }
 
                 switch (commandType) {
