@@ -8,10 +8,10 @@ import java.util.Scanner;
  * Deals with interactions with the user
  */
 public class Ui {
-    private Scanner scan;
+    private Scanner sc;
 
     public Ui() {
-        this.scan = new Scanner(System.in);
+        this.sc = new Scanner(System.in);
     }
 
     /**
@@ -133,6 +133,6 @@ public class Ui {
      * @return user input
      */
     public String readCommand() {
-        return scan.nextLine();
+        return sc.nextLine();
     }
 }

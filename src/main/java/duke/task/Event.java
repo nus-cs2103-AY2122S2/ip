@@ -19,7 +19,6 @@ public class Event extends Task {
         super(description);
         this.at = date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         this.date = date;
-
     }
 
     /**

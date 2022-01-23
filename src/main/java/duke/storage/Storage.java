@@ -7,6 +7,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file
@@ -29,11 +30,11 @@ public class Storage {
             File file = new File(filePath);
             if (file.exists()) {
                 FileReader fr = new FileReader(file);
-                BufferedReader br = new BufferedReader(fr);
-                String line;
+                Scanner sc = new Scanner(fr);
                 ArrayList<Task> tasks = new ArrayList<>();
-                while ((line = br.readLine()) != null) {
+                while (sc.hasNextLine()) {
                     Task task;
+                    String line = sc.nextLine();
                     String[] splitLine  = line.split(" | ");
                     if (splitLine[0].equals("T")) {
                        task = new Todo(splitLine[2]);
@@ -73,12 +74,10 @@ public class Storage {
         try {
             File file = new File("./data/duke.txt");
             FileWriter fw = new FileWriter(file);
-            BufferedWriter bw = new BufferedWriter(fw);
             for (Task task: tasks) {
-                bw.write(task.getFileFormat());
-                bw.newLine();
+                fw.write(task.getFileFormat() + "\n");
             }
-            bw.close();
+            fw.close();
         }
         catch (IOException e) {
             throw new DukeException("OOPS!!! An I0Exception occurred.");
