@@ -49,4 +49,11 @@ public class Printer {
         System.out.println(BLANK_LINE + "     Nice! I've marked this task as done: " + "\n" + "     " + markedTask
                 + "\n" + BLANK_LINE);
     }
+
+    public static void unmark(int numToUnmark, TaskList taskList) {
+        Task markedTask = taskList.get(numToUnmark - 1);
+        markedTask.markAsNotDone();
+        System.out.println(BLANK_LINE + "     OK, I've marked this task as not done yet: " + "\n" + "     " + markedTask
+                + "\n" + BLANK_LINE);
+    }
 }

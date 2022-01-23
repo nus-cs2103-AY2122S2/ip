@@ -13,6 +13,10 @@ public class Parser {
                 int numToMark = Integer.parseInt(array[1]);
                 Printer.mark(numToMark, taskList);
                 break;
+            case("unmark"):
+                int numToUnmark = Integer.parseInt(array[1]);
+                Printer.unmark(numToUnmark, taskList);
+                break;
             default:
                 Printer.add(input);
                 taskList.add(new Task(input));
