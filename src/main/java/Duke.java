@@ -1,5 +1,7 @@
 import main.java.Event;
 import main.java.Task;
+
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import main.java.ToDo;
 import main.java.Deadline;
@@ -49,12 +51,12 @@ public class Duke {
                 System.out.println("Oh dear. You need to follow the proper format of providing a description for " + command + "!");
                 if (command.equals("deadline")) {
                     System.out.println("Follow this format:");
-                    System.out.println("deadline YOUR_TASK /by YOUR_DATE");
-                    System.out.println("eg: deadline return book /by Sunday");
+                    System.out.println("deadline YOUR_TASK /by yyyy-mm-dd TIME");
+                    System.out.println("eg: deadline return book /by 2019-10-15 18:00");
                 } else if (command.equals("event")) {
                     System.out.println("Follow this format:");
-                    System.out.println("event YOUR_TASK /at YOUR_DATE");
-                    System.out.println("eg: event project meeting /at Mon 2-4pm");
+                    System.out.println("event YOUR_TASK /at yyyy-mm-dd TIME");
+                    System.out.println("eg: event project meeting /at 2019-10-15 18:00");
                 } else {
                     System.out.println("Follow this format:");
                     System.out.println("todo YOUR_TASK");
@@ -100,21 +102,23 @@ public class Duke {
     }
 
     public void addTask(String userCommand, String type) {
-        if (type.equals("todo")) {
-            taskArr.add(new ToDo(userCommand));
-        } else if (type.equals("deadline")) {
-            String words[] = userCommand.split(" /by ", 2);
-            taskArr.add(new Deadline(words[0], words[1]));
-        } else {
-            String words[] = userCommand.split(" /at ", 2);
-            taskArr.add(new Event(words[0], words[1]));
+        try {
+            if (type.equals("todo")) {
+                taskArr.add(new ToDo(userCommand));
+            } else if (type.equals("deadline")) {
+                String words[] = userCommand.split(" /by ", 2);
+                taskArr.add(new Deadline(words[0], words[1]));
+            } else {
+                String words[] = userCommand.split(" /at ", 2);
+                taskArr.add(new Event(words[0], words[1]));
+            }
+            System.out.println("Roger, I got you. I've added this task:");
+            System.out.println(taskArr.get(currTask).toString());
+            currTask++;
+            System.out.println("Now you have " + currTask + " tasks in the list.");
+        } catch (DateTimeParseException e) {
+            System.out.println("Please enter the correct format for Datetime! yyyy-mm-dd HH:mm");
         }
-
-        System.out.println("Roger, I got you. I've added this task:");
-        System.out.println(taskArr.get(currTask).toString());
-        currTask++;
-        System.out.println("Now you have " + currTask + " tasks in the list.");
-
     }
 
     public void delete(int taskNum) {
