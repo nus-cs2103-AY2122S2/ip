@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represents a Task that the user wants to keep track of
+ */
 public class Task {
     protected String taskName;
     protected boolean isDone;

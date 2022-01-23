@@ -11,7 +11,20 @@ import duke.task.TaskList;
 import duke.error.DukeException;
 import duke.task.*;
 
+/**
+ * Handles user input entered into Duke by validating it and making sense out of it. <br>
+ */
 public class Parser {
+    /**
+     * Processes and runs the command input by the user.
+     * Validation is performed to ensure that the input from the user is of the
+     * correct format before it is processed and run.
+     *
+     * @param ss input entered by the user
+     * @param p ui object used to output results
+     * @param tl list of task to be updated
+     * @return -1: user enters bye, 0 successful run, 1: DukeException is thrown
+     */
     public int run(String ss, Ui p, TaskList tl) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy");
         String[] args = ss.split("\\s+");
@@ -102,6 +115,15 @@ public class Parser {
 
     }
 
+    /**
+     * Validates the user input to ensure it follows the correct format.
+     * Throws DukeException when an incorrect format is detected
+     *
+     * @param input input entered by the user
+     * @param action action performed by the user
+     * @param args list of arguments entered by the user
+     * @param arr task arrayList to be updated
+     */
     public void validate(String input, String action, String[] args, ArrayList<Task> arr) throws DukeException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy");
         switch(action) {

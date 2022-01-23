@@ -3,6 +3,9 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A task that should be completed before the specified date
+ */
 public class DeadlineTask extends Task{
     private LocalDate d;
 

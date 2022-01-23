@@ -2,6 +2,9 @@ package duke.task;
 
 import java.util.ArrayList;
 
+/**
+ * Container class to hold a list of tasks
+ */
 public class TaskList {
     private ArrayList<Task> arr;
 
@@ -13,6 +16,11 @@ public class TaskList {
         return arr;
     }
 
+    /**
+     * Returns the Task that is located at the highest index
+     *
+     * @return Task located at last index
+     */
     public Task getLast() {
         return arr.get(arr.size() - 1);
     }
