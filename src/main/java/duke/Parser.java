@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -76,17 +78,17 @@ public class Parser {
     }
 
     /**
-     * Parses the message contents and returns the suitable Task object.
+     * Parses the message contents and returns the suitable duke.Task object.
      * @param message the message from the User
      * @param type The type of the task
-     * @return Task object
+     * @return duke.Task object
      */
     private static Task parseMessageContents(String message, TaskTypes type) throws DukeException {
-        DukeException wrongDeadlineFormat = new DukeException("Pardon me, but the Deadline format is incorrect." +
-                " The format should be:\n\t[Task] [Description] /by yyyy-mm-dd/HH:mm (leave \"/HH:mm\"" +
+        DukeException wrongDeadlineFormat = new DukeException("Pardon me, but the duke.Deadline format is incorrect." +
+                " The format should be:\n\t[duke.Task] [Description] /by yyyy-mm-dd/HH:mm (leave \"/HH:mm\"" +
                 " empty if no time in current task)");
-        DukeException wrongEventFormat = new DukeException("Pardon me, but the Event format is incorrect." +
-                " The format should be:\n\t[Task] [Description] /at yyyy-mm-dd/HH:mm/HH:mm");
+        DukeException wrongEventFormat = new DukeException("Pardon me, but the duke.Event format is incorrect." +
+                " The format should be:\n\t[duke.Task] [Description] /at yyyy-mm-dd/HH:mm/HH:mm");
 
         LocalDate date;
         LocalTime timeBegin, timeEnd;

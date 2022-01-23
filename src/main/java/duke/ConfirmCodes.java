@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Used to help confirm actions being completed (e.g. adding or deleting a task)
  *

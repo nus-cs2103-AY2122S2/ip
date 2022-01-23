@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Represents the types of Tasks that can be stored
  *

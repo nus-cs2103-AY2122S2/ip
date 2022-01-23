@@ -79,14 +79,14 @@ ____________________________________________________________
 
 
 ____________________________________________________________
-Pardon me, but the Event format is incorrect. The format should be:
-	[Task] [Description] /at yyyy-mm-dd/HH:mm/HH:mm
+Pardon me, but the duke.Event format is incorrect. The format should be:
+	[duke.Task] [Description] /at yyyy-mm-dd/HH:mm/HH:mm
 ____________________________________________________________
 
 
 ____________________________________________________________
-Pardon me, but the Deadline format is incorrect. The format should be:
-	[Task] [Description] /by yyyy-mm-dd/HH:mm (leave "/HH:mm" empty if no time in current task)
+Pardon me, but the duke.Deadline format is incorrect. The format should be:
+	[duke.Task] [Description] /by yyyy-mm-dd/HH:mm (leave "/HH:mm" empty if no time in current task)
 ____________________________________________________________
 
 

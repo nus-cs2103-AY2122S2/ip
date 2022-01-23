@@ -1,7 +1,9 @@
+package duke;
+
 import java.io.IOException;
 
 /**
- * Represents a Personal Assistant Chatbot based on Project Duke.
+ * Represents a Personal Assistant Chatbot based on Project duke.Duke.
  *
  * @author Abdulelah Faisal S Al Ghrairy
  */

@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Represents a task to be completed. Includes a description of the task and a boolean representing
  * whether it has been completed.
@@ -9,7 +11,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Constructor for Task class
+     * Constructor for duke.Task class
      * @param d a string representing a description of the task
      */
     public Task(String d) {
@@ -48,7 +50,7 @@ public class Task {
     }
 
     /**
-     * ToString implementation of the Task class
+     * ToString implementation of the duke.Task class
      * @return String representation of the status of the task along with its description
      */
     @Override
