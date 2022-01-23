@@ -1,12 +1,14 @@
-public class Event extends Task {
-    private String at;
+import java.time.LocalDateTime;
 
-    public Event(String task, String at) {
+public class Event extends Task {
+    private LocalDateTime at;
+
+    public Event(String task, LocalDateTime at) {
         super(TaskType.EVENT, task);
         this.at = at;
     }
 
-    public String getAt() {
+    public LocalDateTime getAt() {
         return this.at;
     }
 

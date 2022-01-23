@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.function.Consumer;
 
@@ -172,7 +175,7 @@ public class Duke {
         }
 
         final String taskDescription = argParts[0];
-        final String taskBy = argParts[1];
+        final LocalDateTime taskBy = parseDate(argParts[1]);
         final Task task = taskStore.addTask(new Deadline(taskDescription, taskBy));
         linePrinter.print("Added the following Deadline Task:");
         linePrinter.print(String.format("\t%s", task.getReadableString()));
@@ -188,11 +191,20 @@ public class Duke {
         }
 
         final String taskDescription = argParts[0];
-        final String taskAt = argParts[1];
+        final LocalDateTime taskAt = parseDate(argParts[1]);
         final Task task = taskStore.addTask(new Event(taskDescription, taskAt));
         linePrinter.print("Added the following Event Task:");
         linePrinter.print(String.format("\t%s", task.getReadableString()));
         linePrinter.print(String.format("Now you have %d task(s) in the list", taskStore.getTaskCount()));
+    }
+
+    private static LocalDateTime parseDate(String dateString) throws DukeIllegalArgumentException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        try {
+            return LocalDateTime.parse(dateString, formatter);
+        } catch (DateTimeParseException ex) {
+            throw new DukeIllegalArgumentException("Date not in the format dd/mm/yyyy hh:mm");
+        }
     }
 
     private static void printBlock(Consumer<IPrintable> action) {
