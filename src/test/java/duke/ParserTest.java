@@ -5,7 +5,14 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Represents tests for the <code>Parser</code> class
+ */
 public class ParserTest {
+
+    /**
+     * Tests the parsing of Strings from a backup file for <code>ToDo</code> objects
+     */
     @Test
     public void parseFileToDo() {
         try {
@@ -18,6 +25,9 @@ public class ParserTest {
         }
     }
 
+    /**
+     * Tests the parsing of Strings from a backup file for <code>Deadline</code> objects
+     */
     @Test
     public void parseFileDeadline() {
         try {
@@ -30,6 +40,9 @@ public class ParserTest {
         }
     }
 
+    /**
+     * Tests the parsing of Strings from a backup file for <code>Event</code> objects
+     */
     @Test
     public void parseFileEvent() {
         try {
@@ -42,6 +55,9 @@ public class ParserTest {
         }
     }
 
+    /**
+     * Tests the parsing of Tasks to be saved into a backup file
+     */
     @Test
     public void parseSavedTasks() {
         assertEquals((Parser.parseSavedEventTask(new Event("sleep", "9pm"))),
