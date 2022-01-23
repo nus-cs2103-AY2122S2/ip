@@ -8,7 +8,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    //private Storage storage = new Storage("Data/tasks.txt");;
+    //private TaskList taskList = new TaskList(storage.load());
+
+    public static void main(String[] args) throws DukeException, IOException {
         String logo = "       __  \n"
                 + "(____()'`; \n"
                 + "/,    /` \n"
@@ -17,20 +20,15 @@ public class Duke {
         System.out.println("Woof, I am (supposed to look like) a dog bot. \n" + logo + "\n" +  "What do you want from me?\n");
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
-        List<Task> tasks = new ArrayList<>();
+        Storage storage = new Storage("Data/tasks.txt");
+        TaskList taskList = new TaskList(storage.load());
         while (!str.equals("bye")){
             try {
                 errorHandling(str);
                 if (str.equals("list")){
-                    try {
-                        Scanner s = new Scanner(new File("Data/tasks.txt"));
-                        while (s.hasNext()) {
-                            System.out.println(s.nextLine());
-                        }
-                        s.close();
-                    }
-                    catch (IOException e){
-                        System.out.println("List is empty!");
+                    System.out.println(taskList.getTasks().size());
+                    for(Task t : taskList.getTasks()){
+                        System.out.println(t);
                     }
                 }
                 else {
@@ -45,9 +43,9 @@ public class Duke {
                                     System.out.println("Invalid Task number!");
                                 } else {
                                     if (temp[0].equals("mark")) {
-                                        Task currTask = tasks.get(taskNumber - 1);
-                                        currTask.setDone();
-                                        System.out.println("Nice! I've marked this task as done: \n" + "  " + currTask);
+                                        //Task currTask = tasks.get(taskNumber - 1);
+                                        //currTask.setDone();
+                                        //System.out.println("Nice! I've marked this task as done: \n" + "  " + currTask);
                                     } else if (temp[0].equals("delete")) {
                                         int index = Integer.parseInt(str.substring(7));
                                         String text = "";
@@ -63,9 +61,9 @@ public class Duke {
                                         Files.move(Paths.get("Data/tasks2.txt"), Paths.get("Data/tasks.txt"), StandardCopyOption.REPLACE_EXISTING);
                                         System.out.println("Okay, I have deleted " + text);
                                     } else {
-                                        Task currTask = tasks.get(taskNumber - 1);
-                                        currTask.setNotDone();
-                                        System.out.println("OK, I've marked this task as not done yet:: \n" + "  " + currTask);
+                                        //Task currTask = tasks.get(taskNumber - 1);
+                                        //currTask.setNotDone();
+                                        //System.out.println("OK, I've marked this task as not done yet:: \n" + "  " + currTask);
                                     }
                                 }
                             }
@@ -76,38 +74,18 @@ public class Duke {
                     else {
                         if (temp[0].equals("todo")){
                             Todo todo = new Todo(str.substring(5));
-                            try {
-                                writeToFile("Data/tasks.txt", todo.toString() + System.lineSeparator());
-                            }
-                            catch (IOException e){
-                                File f = new File("Data");
-                                f.mkdirs();
-                                writeToFile("Data/tasks.txt", todo.toString() + System.lineSeparator());
-                            }
+                            taskList.getTasks().add(todo);
                             System.out.println("Got it. I've added this task: \n  " + todo);
                         }
                         else if (temp[0].equals("event")){
                             Event event = new Event(str.substring(6));
-                            try {
-                                writeToFile("Data/tasks.txt", event.toString() + System.lineSeparator());
-                            }
-                            catch (IOException e){
-                                File f = new File("Data");
-                                f.mkdirs();
-                                writeToFile("Data/tasks.txt", event.toString() + System.lineSeparator());
-                            }
+                            taskList.getTasks().add(event);
                             System.out.println("Got it. I've added this task: \n  " + event);
+                            //storage.save(taskList);
                         }
                         else if (temp[0].equals("deadline")){
                             Deadline deadline = new Deadline(str.substring(9));
-                            try {
-                                writeToFile("Data/tasks.txt", deadline.toString() + System.lineSeparator());
-                            }
-                            catch (IOException e){
-                                File f = new File("Data");
-                                f.mkdirs();
-                                writeToFile("Data/tasks.txt", deadline.toString() + System.lineSeparator());
-                            }
+                            taskList.getTasks().add(deadline);
                             System.out.println("Got it. I've added this task: \n  " + deadline);
                         }
                     }
@@ -120,6 +98,7 @@ public class Duke {
                 str = sc.nextLine();
             }
         }
+        storage.save(taskList);
         System.out.println("Bye! Hope not to see you again :)");
         sc.close();
     }

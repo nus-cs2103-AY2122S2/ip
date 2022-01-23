@@ -1,5 +1,8 @@
+import java.io.FileInputStream;
+
 public class Task {
     protected String description;
+    public String saveFormat;
     protected boolean isDone;
 
     public Task(String description) {
@@ -16,6 +19,10 @@ public class Task {
     public void setNotDone(){
         isDone = false;
     }
+    public String getDescription(){
+        return this.description;
+    }
+
     @Override
     public String toString(){
         return "[" + getStatusIcon() +"] " + description;
