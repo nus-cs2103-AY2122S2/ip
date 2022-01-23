@@ -1,7 +1,5 @@
 package duke;
 
-import duke.DateTimeInterface;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 

@@ -1,7 +1,5 @@
 package duke;
 
-import duke.Command;
-
 public class MarkCommand extends Command {
     private final int index;
 
