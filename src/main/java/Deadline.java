@@ -21,6 +21,15 @@ public class Deadline extends Task {
     }
 
     /**
+     * Outputs the due date of deadline.
+     *
+     * @return string with by date/times.
+     */
+    public String getBy() {
+        return this.by;
+    }
+
+    /**
      * Outputs the string to represent deadline with
      * description and due date/time
      *
