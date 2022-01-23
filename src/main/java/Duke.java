@@ -20,6 +20,7 @@ public class Duke {
     private static final String COMMAND_CREATE_EVENT = "event";
     private static final String COMMAND_DELETE = "delete";
     private static final String COMMAND_UPCOMING = "upcoming";
+    private static final String COMMAND_BETWEEN = "between";
     private static final String COMMAND_SCHEDULE = "schedule";
 
     private static TaskStore taskStore;
@@ -107,6 +108,9 @@ public class Duke {
             break;
         case COMMAND_SCHEDULE:
             parseSchedule(linePrinter, args);
+            break;
+        case COMMAND_BETWEEN:
+            parseBetween(linePrinter, args);
             break;
         default:
             throw new DukeInvalidCommandException(String.format("No such command: %s", commandLowerCase));
@@ -237,6 +241,23 @@ public class Duke {
         taskStore.forEach((idx, task) -> {
             task.getDate().ifPresent(date -> {
                 if (date.isBefore(dayEnd) && date.isAfter(dayStart)) {
+                    linePrinter.print(task.getReadableString());
+                }
+            });
+        });
+    }
+
+    private static void parseBetween(IPrintable linePrinter, String args)
+            throws DukeIllegalArgumentException {
+        final String[] argParts = args.split(" and ");
+        if (argParts.length < 2) {
+            throw new DukeIllegalArgumentException("Not in the format <date> and <date>");
+        }
+        LocalDateTime start = parseDateTime(argParts[0]);
+        LocalDateTime end = parseDateTime(argParts[1]);
+        taskStore.forEach((idx, task) -> {
+            task.getDate().ifPresent(date -> {
+                if (date.isBefore(end) && date.isAfter(start)) {
                     linePrinter.print(task.getReadableString());
                 }
             });
