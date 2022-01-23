@@ -2,11 +2,11 @@ package task;
 
 public abstract class Task {
     public String description;
-    public boolean done;
+    public boolean isDone;
 
-    public Task (String task, boolean done) {
+    public Task (String task, boolean isDone) {
         this.description = task;
-        this.done = done;
+        this.isDone = isDone;
     }
 
     public abstract String fileFormat();

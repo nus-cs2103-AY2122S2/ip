@@ -9,7 +9,7 @@ public class MarkCommand extends Command {
     int index;
 
     public MarkCommand(int serialNumber) {
-        this.index = serialNumber -1;
+        this.index = serialNumber - 1;
     }
 
     @Override
@@ -17,7 +17,7 @@ public class MarkCommand extends Command {
         if (this.index < 0 || this.index >= taskList.size()) {
             throw new DukeException("Have you entered the correct number?");
         }
-        taskList.get(this.index).done = true;
+        taskList.get(this.index).isDone = true;
         storage.writeToFile(taskList);
         ui.outputMessage("Nice! I've marked this task as done: \n" +
                 taskList.get(this.index));

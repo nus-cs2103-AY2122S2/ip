@@ -27,7 +27,7 @@ public class EventCommand extends Command {
         }
         storage.writeToFile(taskList);
         ui.outputMessage("Got it. I've added this task: \n" +
-                taskList.get(taskList.size() -1) +
+                taskList.get(taskList.size() - 1) +
                 "\nNow you have " + taskList.size() + " tasks in the list.");
     }
 }

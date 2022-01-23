@@ -26,8 +26,7 @@ public class Ui {
     }
 
     public String getCommand() {
-        return sc.nextLine(); //figure out how to return split version
-        // make a Command interface/class too later!
+        return sc.nextLine();
     }
 
     public void showError(DukeException e) {
