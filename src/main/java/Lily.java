@@ -23,8 +23,7 @@ public class Lily {
         + indent + "but i guess i have no choice (っ◞‸◟c)\n"
         + indent + "need help with something?\n"
         + "\n"
-        + indent + "Commands you can type\n"
-        + indent + "> bye: stop talking with Lily\n";
+        + indent + "Things you can type\n" + listCommands();
         prettyPrint(welcomeMessage);
 
         // Lily accepts inputs from user
@@ -40,19 +39,20 @@ public class Lily {
                     break userInteracting;
 
                 case "list":
-                    /*
-                    if (list.isEmpty())
-                        throw new Error("There's nothing in the list bro");
-                        */
-                    String listMsg = "";
-                    int i = 1;
-                    for (Task t : list) {
-                        listMsg += indent + i + "."
-                        + t.toString()
-                        + (i == list.size() ? "" : "\n");
-                        i++;
+                    if (list.isEmpty()) {
+                        prettyPrint("there's nothing in the list bro");
+                    } else {
+                        String listMsg = "";
+                        // Add items in the list to the string
+                        int i = 1;
+                        for (Task t : list) {
+                            listMsg += indent + i + "."
+                            + t.toString()
+                            + (i == list.size() ? "" : "\n");
+                            i++;
+                        }
+                        prettyPrint("you told me you had to\n" + listMsg);
                     }
-                    prettyPrint("you told me you had to\n" + listMsg);
                     break;
 
                 case "mark":
@@ -60,6 +60,8 @@ public class Lily {
                     /*
                     if (list.isEmpty())
                         throw new Error("you cant mark something that isn't there");
+                    else if (already marked)
+                        throw new error you've already finished this
                         */
                     list.get(addIdx).mark();
                     String markMsg = "oh. you've finished it. okay\n"
@@ -72,7 +74,9 @@ public class Lily {
                     int delIdx = Integer.parseInt(parsedSentence[1]) - 1;
                     /*
                     if (list.isEmpty())
-                        throw new Error("you can't mark something thaj isn't there");
+                        throw new Error("you can't unmark something thaj isn't there");
+                    else if (not marked yet)
+                        throw new error you havent done this
                         */
                     list.get(delIdx).unmark();
                     String unmarkMsg = "hey, you gotta get it done later, okay?\n"
@@ -81,28 +85,39 @@ public class Lily {
                     prettyPrint(unmarkMsg);
                     break;
 
-                /*
                 case "todo":
-                    desc from 2nd word onwards
-                    list.add(new Todo(sentence))
-                    addTaskMsg(sentence);
+                    String todoDesc = sentence.substring(5); // "todo " is 5 char long
+                    Todo t = new Todo(todoDesc);
+                    list.add(t);
+                    taskAddedMsg(t);
                     break;
                 case "deadline":
-                    desc from 2nd word onwards to the /by
-                    by afterwards
-                    list.add(new Deadline(sentence))
-                    addTaskMsg(sentence);
+                    /*
+                        if user didn't type "/by" (byIdx == -1)
+                            throw new Error "you didnt' type /by bro, try again"
+                    */
+                    int byIdx = sentence.indexOf("/by");
+                    Deadline d = new Deadline(sentence.substring(9, byIdx - 1), 
+                                              sentence.substring(byIdx + 4));
+                    list.add(d);
+                    taskAddedMsg(d);
                     break;
                 case "event":
-                    desc from 2nd word onwards to the /at
-                    at afterwards
-                    list.add(new Event(sentence))
-                    addTaskMsg(sentence);
+                    /*
+                        if user didn't type "/at" (atIdx == -1)
+                            throw new Error "you didnt' type /at bro, try again"
+                    */
+                    int atIdx = sentence.indexOf("/at");
+                    Event e = new Event(sentence.substring(6, atIdx - 1), 
+                                        sentence.substring(atIdx + 4));
+                    list.add(e);
+                    taskAddedMsg(e);
                     break;
-                */
 
                 default:
-                    prettyPrint("sorry i don't understand what you want me to do. you can try these instead:");
+                    prettyPrint("sorry i don't understand what you meant by\n\n"
+                    + indent + sentence + "\n\n"
+                    + indent + "you can try these instead:\n" + listCommands());
             }
         }
         sc.close();
@@ -115,10 +130,20 @@ public class Lily {
         + indent + "▼＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝▼\n");
     }
 
-    protected static void addTaskMsg(String s) {
-        prettyPrint("i've dumped \"" + s + "\" into your list\n"
-            + indent + "so now you have " + list.size() + " tasks happening"
-            + "\n"
-            + indent + "hope you're happy");
+    protected static void taskAddedMsg(Task t) {
+        String no = list.size() == 1 ? " task " : " tasks ";
+        prettyPrint("i've dumped this into your list:\n"
+            + indent + t.toString() + "\n"
+            + indent + "so now you have " + list.size() + no + "happening. hope you're happy");
+    }
+
+    protected static String listCommands() {
+        return indent + "> todo: record a task which has no date\n"
+             + indent + "> event: note an event with its date after /at\n"
+             + indent + "> deadline: note something with its date after /by\n"
+             + indent + "> list: show what you have to do\n"
+             + indent + "> mark: indicate which numbered task you completed\n"
+             + indent + "> unmark: indicate which task you havent completed\n"
+             + indent + "> bye: stop talking with Lily";
     }
 }
