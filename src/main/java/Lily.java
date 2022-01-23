@@ -11,6 +11,10 @@ public class Lily {
     private static final String indent = "    ";
     private static LinkedList<Task> list;
 
+    private enum Cmd {
+        EXIT, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, REMOVE, INVALID
+    }
+
     public static void main(String[] args) {
         list = new LinkedList<>();
         Scanner sc = new Scanner(System.in);
@@ -37,23 +41,55 @@ public class Lily {
         userInteracting: while (true) {
             String sentence = sc.nextLine();
             String[] parsedSentence = sentence.split(" ");
-            String action = parsedSentence[0];
+            String command = parsedSentence[0];
+            Cmd action; 
+            switch (command) {
+                case "bye":
+                    action = Cmd.EXIT;
+                    break;
+                case "list":
+                    action = Cmd.LIST;
+                    break;
+                case "mark":
+                    action = Cmd.MARK;
+                    break;
+                case "unmark":
+                    action = Cmd.UNMARK;
+                    break;
+                case "todo":
+                    action = Cmd.TODO;
+                    break;
+                case "deadline":
+                    action = Cmd.DEADLINE;
+                    break;
+                case "event":
+                    action = Cmd.EVENT;
+                    break;
+                case "delete":
+                case "remove":
+                    action = Cmd.REMOVE;
+                    break;
+                default:
+                    action = Cmd.INVALID;
+            }
+
             switch (action) {
                 // throw error if input doesn't match enums later on
-                case "bye":
+                case EXIT:
                     prettyPrint("finally. what took you so long? (´-ω-`)");
                     break userInteracting;
 
-                case "list":
+                case LIST:
                     // throw error instead
                     if (list.isEmpty()) {
-                        prettyPrint("there's nothing in the list bro");
+                       prettyPrint("there's 
+                       nothing in the list bro");
                     } else {
                         prettyPrint("you told me you had to\n" + printList());
                     }
                     break;
 
-                case "mark":
+                case MARK:
                     int addIdx = Integer.parseInt(parsedSentence[1]) - 1;
                     /*
                      * if (list.isEmpty())
@@ -68,7 +104,7 @@ public class Lily {
                     prettyPrint(markMsg);
                     break;
 
-                case "unmark":
+                case UNMARK:
                     int delIdx = Integer.parseInt(parsedSentence[1]) - 1;
                     /*
                      * if (list.isEmpty())
@@ -83,7 +119,7 @@ public class Lily {
                     prettyPrint(unmarkMsg);
                     break;
 
-                case "todo":
+                case TODO:
                     try {
                         Todo t = new Todo(sentence);
                         list.add(t);
@@ -92,7 +128,7 @@ public class Lily {
                         errorPretty("Todo description cannot be empty!");
                     }
                     break;
-                case "deadline":
+                case DEADLINE:
                     try {
                         Deadline d = new Deadline(sentence);
                         list.add(d);
@@ -101,7 +137,7 @@ public class Lily {
                         errorPretty("Deadline description cannot be empty!");
                     }
                     break;
-                case "event":
+                case EVENT:
                     try {
                         Event e = new Event(sentence);
                         list.add(e);
@@ -111,13 +147,12 @@ public class Lily {
                     }
                     break;
 
-                case "delete":
-                case "remove":
+                case REMOVE:
                     try {
                         prettyPrint("hmph. then why did you make me track your\n"
-                        + indent + list.remove(Integer.parseInt(parsedSentence[1]) - 1)
-                        + "\n"
-                        + indent + "anyway, now you're left with\n" + printList());
+                                + indent + list.remove(Integer.parseInt(parsedSentence[1]) - 1)
+                                + "\n"
+                                + indent + "anyway, now you're left with\n" + printList());
                     } catch (IndexOutOfBoundsException e) { // new error: catch no int input also
                         errorPretty("eh bro your list is shorter than that");
                     }
@@ -132,13 +167,6 @@ public class Lily {
         sc.close();
     }
 
-    protected static void prettyPrint(String s) {
-        System.out.println("\n"
-                + indent + "▼＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝▼\n"
-                + indent + s + "\n"
-                + indent + "▼＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝▼\n");
-    }
-
     protected static String printList() {
         String listMsg = "";
         int i = 1;
@@ -151,11 +179,14 @@ public class Lily {
         return listMsg;
     }
 
-    protected static void errorPretty(String s) {
-        System.err.println("\n"
-                + indent + "▼＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝▼\n"
-                + indent + s + "\n"
-                + indent + "▼＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝▼\n");
+    protected static String listCommands() {
+        return indent + "> todo: record a task which has no date\n"
+                + indent + "> event: note an event with its date after /at\n"
+                + indent + "> deadline: note something with its date after /by\n"
+                + indent + "> list: show what you have to do\n"
+                + indent + "> mark: indicate which numbered task you completed\n"
+                + indent + "> unmark: indicate which task you havent completed\n"
+                + indent + "> bye: stop talking with Lily";
     }
 
     protected static void taskAddedMsg(Task t) {
@@ -165,13 +196,17 @@ public class Lily {
                 + indent + "so now you have " + list.size() + no + "happening. hope you're happy");
     }
 
-    protected static String listCommands() {
-        return indent + "> todo: record a task which has no date\n"
-                + indent + "> event: note an event with its date after /at\n"
-                + indent + "> deadline: note something with its date after /by\n"
-                + indent + "> list: show what you have to do\n"
-                + indent + "> mark: indicate which numbered task you completed\n"
-                + indent + "> unmark: indicate which task you havent completed\n"
-                + indent + "> bye: stop talking with Lily";
+    protected static void prettyPrint(String s) {
+        System.out.println("\n"
+                + indent + "▼＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝▼\n"
+                + indent + s + "\n"
+                + indent + "▼＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝▼\n");
+    }
+
+    protected static void errorPretty(String s) {
+        System.err.println("\n"
+                + indent + "▼＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝▼\n"
+                + indent + s + "\n"
+                + indent + "▼＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝▼\n");
     }
 }
