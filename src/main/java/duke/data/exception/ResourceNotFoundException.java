@@ -1,3 +1,5 @@
+package duke.data.exception;
+
 /**
  * An exception that occurs when the requested resource cannot be located.
  */

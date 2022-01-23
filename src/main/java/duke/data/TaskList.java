@@ -1,7 +1,11 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
+package duke.data;
+
 import java.util.ArrayList;
-import java.util.UUID;
+
+import duke.data.task.Task;
+import duke.data.task.TodoTask;
+import duke.data.task.DeadlineTask;
+import duke.data.task.EventTask;
 
 /**
  * Contains a list of tasks, and offers operations on the tasks.

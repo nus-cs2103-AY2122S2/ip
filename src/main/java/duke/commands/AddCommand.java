@@ -1,4 +1,12 @@
+package duke.commands;
+
 import java.io.IOException;
+
+import duke.data.exception.InvalidParameterException;
+import duke.data.task.CommandType;
+import duke.data.task.Task;
+import duke.data.task.DeadlineTask;
+import duke.data.task.EventTask;
 
 /**
  * Adds a task to the task list

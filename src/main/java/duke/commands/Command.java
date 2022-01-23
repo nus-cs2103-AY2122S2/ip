@@ -1,4 +1,8 @@
-import java.io.IOException;
+package duke.commands;
+
+import duke.Duke;
+import duke.data.TaskList;
+import duke.storage.Storage;
 
 /**
  * Represents an executable command.
@@ -14,7 +18,7 @@ public abstract class Command {
      * @return result of the execution.
      * @throws Exception if there is an error executing the command.
      */
-    abstract String execute() throws Exception;
+    public abstract String execute() throws Exception;
 
     /**
      * Supplies the data the command will operate on.

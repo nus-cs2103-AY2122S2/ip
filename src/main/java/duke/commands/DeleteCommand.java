@@ -1,4 +1,8 @@
+package duke.commands;
+
 import java.io.IOException;
+
+import duke.data.task.Task;
 
 /**
  * Deletes a task from the task list.

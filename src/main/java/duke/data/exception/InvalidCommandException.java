@@ -1,3 +1,5 @@
+package duke.data.exception;
+
 /**
  * Exception that occurs when an invalid command is provided.
  */

@@ -1,3 +1,14 @@
+package duke.parser;
+
+import duke.commands.Command;
+import duke.commands.ExitCommand;
+import duke.commands.InfoCommand;
+import duke.commands.AddCommand;
+import duke.commands.UpdateCommand;
+import duke.commands.DeleteCommand;
+import duke.data.TaskList;
+import duke.data.exception.InvalidCommandException;
+
 /**
  * Makes sense of the user command.
  */

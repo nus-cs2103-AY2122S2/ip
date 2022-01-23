@@ -1,3 +1,5 @@
+package duke.storage;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.nio.charset.StandardCharsets;
@@ -8,6 +10,12 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.IOException;
 import java.io.FileNotFoundException;
+
+import duke.data.task.Task;
+import duke.data.task.TodoTask;
+import duke.data.task.DeadlineTask;
+import duke.data.task.EventTask;
+import duke.data.exception.ResourceNotFoundException;
 
 /**
  * Represents a file used to store the task list data.

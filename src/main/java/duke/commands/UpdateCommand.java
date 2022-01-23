@@ -1,4 +1,9 @@
+package duke.commands;
+
 import java.io.IOException;
+
+import duke.data.exception.InvalidParameterException;
+import duke.data.task.Task;
 
 /**
  * Updates a task.

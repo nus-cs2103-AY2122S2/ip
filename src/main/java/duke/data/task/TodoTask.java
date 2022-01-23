@@ -1,3 +1,5 @@
+package duke.data.task;
+
 /**
  * A todo task.
  */

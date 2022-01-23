@@ -1,4 +1,13 @@
+package duke;
+
 import java.io.FileNotFoundException;
+
+import duke.commands.Command;
+import duke.data.TaskList;
+import duke.data.exception.ResourceNotFoundException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.ui.Ui;
 
 public class Duke {
     private static boolean running;

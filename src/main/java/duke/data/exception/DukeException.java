@@ -1,3 +1,5 @@
+package duke.data.exception;
+
 /**
  * An exception for the Duke class.
  */
