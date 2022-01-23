@@ -40,20 +40,18 @@ public class Storage {
 
     public static String formatTextFileLine(Task task) {
         String finalOutput= null;
-        String description = task.toString().substring(7);
         int mark = (task.getStatusIcon().equals("X") ? IS_MARKED : IS_UNMARKED);
         if (task instanceof ToDo) {
-            finalOutput = "T|" + mark + "|" + description;
+            finalOutput = "T|" + mark + "|" + task.getDescription();
         } else if (task instanceof Deadline) {
-            String[] str = description.split(" \\(by: ");
-            String deadLineTask = str[0];
-            String dateTime = str[1].substring(0, str[1].length() - 1);
-            finalOutput = "D|" + mark + "|" + deadLineTask + "|" + dateTime;
+            finalOutput = "D|" + mark + "|" + task.getDescription()
+                    + "|" + Parser.localDateToString(((Deadline) task).getDate())
+                    + "|" + Parser.localTimeToString(((Deadline) task).getTime());
         } else if (task instanceof Event) {
-            String[] str = description.split(" \\(at: ");
-            String eventTask = str[0];
-            String dateTime = str[1].substring(0, str[1].length() - 1);
-            finalOutput = "E|" + mark + "|" + eventTask + "|" + dateTime;
+            finalOutput = "E|" + mark + "|" + task.getDescription()
+                    + "|" + Parser.localDateToString(((Event) task).getDate())
+                    + "|" + Parser.localTimeToString(((Event) task).getStartTime())
+                    + "|" + Parser.localTimeToString(((Event) task).getEndTime());
         }
         return finalOutput;
     }
@@ -99,7 +97,8 @@ public class Storage {
                 TaskList.addToListNoPrint(toDo);
                 break;
             case "D":
-                Task deadline = new Deadline(lineArr[2], lineArr[3]);
+                Task deadline = new Deadline(lineArr[2], Parser.stringToLocalDate(lineArr[3]),
+                        Parser.stringToLocalTime(lineArr[4]));
                 if (isMarked(checkMarked)) {
                     deadline.mark();
                 } else {
@@ -108,7 +107,8 @@ public class Storage {
                 TaskList.addToListNoPrint(deadline);
                 break;
             case "E":
-                Task event = new Event(lineArr[2], lineArr[3]);
+                Task event = new Event(lineArr[2], Parser.stringToLocalDate(lineArr[3]),
+                        Parser.stringToLocalTime(lineArr[4]), Parser.stringToLocalTime(lineArr[5]));
                 if (isMarked(checkMarked)) {
                     event.mark();
                 } else {

@@ -1,6 +1,7 @@
 package duke.operations;
 
 import duke.command.*;
+import duke.exceptions.DukeException;
 import duke.exceptions.IncompleteInputException;
 import duke.exceptions.UnknownInputException;
 import duke.task.Deadline;
@@ -11,9 +12,33 @@ import duke.task.ToDo;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 
 public class Parser {
+
+    public static LocalDate stringToLocalDate(String str) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return LocalDate.parse(str, formatter);
+    }
+
+    public static LocalTime stringToLocalTime(String str) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
+        return LocalTime.parse(str, formatter);
+    }
+
+    public static String localDateToString(LocalDate date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return date.format(formatter);
+    }
+
+    public static String localTimeToString(LocalTime time) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
+        return time.format(formatter);
+    }
 
     public static String formatDateTime(String str) {
         // Date/time pattern of input string
@@ -33,7 +58,7 @@ public class Parser {
         return output;
     }
 
-    public static Command parse(String input) throws UnknownInputException, IncompleteInputException {
+    public static Command parse(String input) throws DukeException {
         // Create a String array to read various functions
         String[] strs = input.split(" ");
 
@@ -79,12 +104,18 @@ public class Parser {
                 if (!temp[1].substring(0,3).equals("by ")) {
                     throw new UnknownInputException();
                 } else {
-                    String deadlineDate = temp[1].substring(3); // retrieves the String after '/by'
-                    String formattedDate = formatDateTime(deadlineDate); // format date
-                    Task deadline = new Deadline(temp[0], formattedDate);
-                    Ui.line();
-                    System.out.println("     This task is on a timer!");
-                    return new AddCommand(deadline);
+                    String deadlineDateTime = temp[1].substring(3); // retrieves the String after '/by'
+                    String[] temp1 = deadlineDateTime.split(" ");
+                    try {
+                        LocalDate deadlineDate = stringToLocalDate(temp1[0]);
+                        LocalTime deadlineTime = stringToLocalTime(temp1[1]);
+                        Task deadline = new Deadline(temp[0], deadlineDate, deadlineTime);
+                        Ui.line();
+                        System.out.println("     This task is on a timer!");
+                        return new AddCommand(deadline);
+                    } catch (DateTimeParseException e) {
+                        throw new DukeException("baka, that's the wrong format. Enter dd-MM-yyyy HHmm");
+                    }
                 }
             }
         }
@@ -98,12 +129,21 @@ public class Parser {
                 if (!temp[1].substring(0,3).equals("at ")) {
                     throw new UnknownInputException();
                 } else {
-                    String eventDate = temp[1].substring(3); // retrieves the String after '/at'
-                    String formattedDate = formatDateTime(eventDate); // format date
-                    Task event = new Event(temp[0], formattedDate);
-                    Ui.line();
-                    System.out.println("     Emergency event on this date!");
-                    return new AddCommand(event);
+                    String eventDateTime = temp[1].substring(3); // retrieves the String after '/at'
+                    String[] temp1 = eventDateTime.split(" ");
+                    try {
+                        LocalDate eventDate = stringToLocalDate(temp1[0]);
+                        String eventTime = temp1[1];
+                        String[] splitEventTimes = eventTime.split("-");
+                        LocalTime eventStartTime = stringToLocalTime(splitEventTimes[0]);
+                        LocalTime eventEndTime = stringToLocalTime(splitEventTimes[1]);
+                        Task event = new Event(temp[0], eventDate, eventStartTime, eventEndTime);
+                        Ui.line();
+                        System.out.println("     Emergency event on this date!");
+                        return new AddCommand(event);
+                    } catch (DateTimeParseException e) {
+                        throw new DukeException("baka, that's the wrong format. Enter dd-MM-yyyy HHmm-HHmm");
+                    }
                 }
             }
         }
