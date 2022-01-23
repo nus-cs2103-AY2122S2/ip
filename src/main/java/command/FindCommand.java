@@ -12,8 +12,15 @@ public class FindCommand extends Command {
         this.searchPhrase = searchPhrase;
     }
 
+    /**
+     * Output Tasks that contain a certain word/phrase in their descriptions.
+     *
+     * @param ui Ui for outputting message.
+     * @param storage Storage for rewriting TaskList.
+     * @param taskList TaskList that stores Tasks.
+     */
     @Override
-    public void execute(Ui ui, Storage storage, TaskList taskList) throws DukeException { //throw exception if necessary
+    public void execute(Ui ui, Storage storage, TaskList taskList) {
         TaskList parsedTaskList = new TaskList();
         for (int i=0; i < taskList.size(); i++) {
             if (taskList.get(i).description.contains(this.searchPhrase)) {

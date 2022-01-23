@@ -16,7 +16,7 @@ public class Ui {
     }
 
     /**
-     * Ouputs the message according to a particular format.
+     * Outputs the message according to a particular format.
      * @param message Text that must be formatted.
      */
     public void outputMessage(String message) {

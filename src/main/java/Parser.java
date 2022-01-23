@@ -68,10 +68,10 @@ public class Parser {
                     throw new DukeException("Have you typed in your number correctly in numerals?");
                 }
             case "find":
-                if (commandSeperated.length == 1 || commandSeperated[1].isBlank()) {
+                if (commandWords.length == 1 || commandWords[1].isBlank()) {
                     throw new DukeException("Can't find any info after your command! Have you typed it correctly?");
                 }
-                return new FindCommand(commandSeperated[1].trim());
+                return new FindCommand(commandWords[1].trim());
             default:
                 throw new DukeException("Sorry, but I don't know what that means :-(");
         }
