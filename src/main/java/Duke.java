@@ -11,7 +11,6 @@ public class Duke {
         Parser parser = new Parser();
         TaskList taskList = new TaskList();
 
-
         Storage.loadFile(System.getProperty("user.dir") + "\\data\\duke.txt", taskList);
 
         ui.printLogo();
