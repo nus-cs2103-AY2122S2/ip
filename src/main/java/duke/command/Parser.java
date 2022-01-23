@@ -79,15 +79,15 @@ public class Parser {
                 p.print("Task as not done yet: "," " + tl.getTask(Integer.parseInt(args[1]) - 1).toString());
                 break;
             case "todo":
-                tl.addTask(new ToDoTask((ss).substring(5, ss.length())));
+                tl.addTask(new ToDoTask((ss).substring(5, ss.length()).trim()));
                 p.print("Added Task: ", " " + tl.getLast().toString(), String.format("There are now %d task(s) in the list.", tl.getSize()));
                 break;
             case "deadline":
-                tl.addTask(new DeadlineTask(ss.substring(9, ss.length()).split("/by")[0], LocalDate.parse(ss.split("/by")[1].substring(1, ss.split("/by")[1].length()),formatter)));
+                tl.addTask(new DeadlineTask(ss.substring(9, ss.length()).split("/by")[0].trim(), LocalDate.parse(ss.split("/by")[1].substring(1, ss.split("/by")[1].length()),formatter)));
                 p.print("Added Task: ", " " + tl.getLast().toString(), String.format("There are now %d task(s) in the list.", tl.getSize()));
                 break;
             case "event":
-                tl.addTask(new EventTask(ss.substring(6, ss.length()).split("/at")[0], LocalDate.parse(ss.split("/at")[1].substring(1, ss.split("/at")[1].length()),formatter)));
+                tl.addTask(new EventTask(ss.substring(6, ss.length()).split("/at")[0].trim(), LocalDate.parse(ss.split("/at")[1].substring(1, ss.split("/at")[1].length()),formatter)));
                 p.print("Added Task: ", " " + tl.getLast().toString(), String.format("There are now %d task(s) in the list.", tl.getSize()));
                 break;
             case "delete":
@@ -110,7 +110,9 @@ public class Parser {
                     if(args[1].equals("/on") || args[1].equals("/before") || args[1].equals("/after")) {
                         try {
                             LocalDate.parse(args[2],formatter);
-                        } catch (DateTimeParseException e) {
+                        } catch (DateTimeParseException e ) {
+                            throw new DukeException("Provide the date in the format dd-mm-yyyy!");
+                        } catch (ArrayIndexOutOfBoundsException e ) {
                             throw new DukeException("Provide the date in the format dd-mm-yyyy!");
                         }
                     }
@@ -138,7 +140,7 @@ public class Parser {
             case "deadline":
             case "event":
                 String flag = action.equals("deadline") ? "/by" : "/at";
-                int actionLength = action == "deadline" ? 9 : 6;
+                int actionLength = action.equals("deadline") ? 9 : 6;
                 if(args.length == 1)
                     throw new DukeException("Task Name must be provided!");
                 if(!Arrays.stream(args).anyMatch(flag::equals))
@@ -147,6 +149,11 @@ public class Parser {
                     throw new DukeException(String.format("Please specify deadline date after %s!",flag));
                 if (input.substring(actionLength, input.length()).split(flag)[0].trim().equals(""))
                     throw new DukeException("Task Name must be provided!");
+                try {
+                    LocalDate.parse(input.split(flag)[1].substring(1, input.split(flag)[1].length()),formatter);
+                } catch (DateTimeParseException e ) {
+                    throw new DukeException("Provide the date in the format dd-mm-yyyy!");
+                }
                 break;
         }
     }
