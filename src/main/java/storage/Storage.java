@@ -12,15 +12,27 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents the file used to store tasks data.
+ */
 public class Storage {
+
     public static final String DEFAULT_FILEPATH = "/java/data.txt";
 
     public final String path;
 
+    /**
+     * Constructor for class Storage.
+     */
     public Storage() {
         this.path = getPath();
     }
 
+    /**
+     * Gets path.
+     *
+     * @return the path.
+     */
     public String getPath() {
         String home = System.getProperty("user.dir");
         // works on *nix
@@ -30,10 +42,18 @@ public class Storage {
         return path;
     }
 
+    /**
+     * Read task date file.
+     *
+     * @param path the path of the file.
+     * @return the list of tasks.
+     * @throws IOException           If the file path is invalid.
+     * @throws InvalidInputException If the datetime format is invalid.
+     */
     public List<Task> readTaskFile(String path) throws IOException, InvalidInputException {
 
         List<Task> result = new ArrayList<>();
-//        String path = getPath();
+        // String path = getPath();
         // Open the file
         FileInputStream fstream = null;
 
@@ -76,6 +96,13 @@ public class Storage {
     }
 
 
+    /**
+     * Saves task list to file.
+     *
+     * @param taskList the task list
+     * @return status of saving
+     * @throws FileNotFoundException If the file not found.
+     */
     public boolean saveTasktoFile(List<Task> taskList) throws FileNotFoundException {
         String path = getPath();
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");

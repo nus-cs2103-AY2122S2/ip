@@ -9,14 +9,32 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+/**
+ * Parses user input.
+ */
 public class Parser {
-    public String checkTaskFormat(String task) throws InvalidInputException {
+    /**
+     * Checks task title is empty or not.
+     *
+     * @param task the task.
+     * @return the task title after removing leading and trailing spaces.
+     * @throws InvalidInputException If the input can't be split into two part.
+     */
+    public String checkEmptyTask(String task) throws InvalidInputException {
         if (task.trim().length() == 0)
             throw new InvalidInputException("Task description can not be empty!");
         return task.trim();
 
     }
 
+    /**
+     * Parses list index.
+     *
+     * @param index the index.
+     * @param tasks the tasks list.
+     * @return the formatted index int.
+     * @throws InvalidInputException If the index is out of bound.
+     */
     public int parseListIndex(String index, List<Task> tasks) throws InvalidInputException {
         int num = 0;
         try {
@@ -29,6 +47,13 @@ public class Parser {
         return num;
     }
 
+    /**
+     * Separates the inputs by '/' into two part.
+     *
+     * @param str the str to parse.
+     * @return the parsed string.
+     * @throws InvalidInputException If the input can't be split into two part.
+     */
     public String[] parseTaskFormat(String str) throws InvalidInputException {
         String[] output = str.split("/", 2);
 
@@ -38,6 +63,14 @@ public class Parser {
         return output;
     }
 
+    /**
+     * Checks preposition before the datetime.
+     *
+     * @param str     the datetime string.
+     * @param command the command.
+     * @return the parsed datetime.
+     * @throws InvalidInputException If the prepositions is invalid.
+     */
     public String checkPrepositionFormat(String str, String command) throws InvalidInputException {
         String[] date = str.split(" ", 2);
 
@@ -55,6 +88,14 @@ public class Parser {
     }
 
 
+    /**
+     * Parses user input command.
+     *
+     * @param userInput the user input.
+     * @param tasks     the tasks lsit.
+     * @return the command.
+     * @throws InvalidInputException If the input is invalid.
+     */
     public Command parseUserInput(String userInput, List<Task> tasks) throws InvalidInputException {
         // catch empty input
         if (userInput.trim().length() == 0)
@@ -82,21 +123,28 @@ public class Parser {
             case DeleteCommand.COMMAND_WORD:
                 return new DeleteCommand(parseListIndex(arr[1], tasks));
             case AddCommand.COMMAND_TODO:
-                return new AddCommand(new ToDo(checkTaskFormat(arr[1])));
+                return new AddCommand(new ToDo(checkEmptyTask(arr[1])));
             case AddCommand.COMMAND_DEADLINE:
                 String[] deadline = parseTaskFormat(arr[1]);
                 String deadline_date = checkPrepositionFormat(deadline[1], AddCommand.COMMAND_DEADLINE);
-                return new AddCommand(new Deadline(checkTaskFormat(deadline[0]), parseDate(deadline_date)));
+                return new AddCommand(new Deadline(checkEmptyTask(deadline[0]), parseDate(deadline_date)));
             case AddCommand.COMMAND_EVENT:
                 String[] event = parseTaskFormat(arr[1]);
                 String event_date = checkPrepositionFormat(event[1], AddCommand.COMMAND_EVENT);
-                return new AddCommand(new Event(checkTaskFormat(event[0]), parseDate(event_date)));
+                return new AddCommand(new Event(checkEmptyTask(event[0]), parseDate(event_date)));
             default:
                 throw new InvalidInputException("Invalid command. Please try 'list/bye/mark/unmark/event/deadline/todo'. ");
         }
         throw new InvalidInputException("Invalid command. Please try 'list/bye/mark/unmark/event/deadline/todo'. ");
     }
 
+    /**
+     * Parses string to datetime.
+     *
+     * @param date the date
+     * @return the local date time
+     * @throws InvalidInputException If the datetime format is invalid.
+     */
     public static LocalDateTime parseDate(String date) throws InvalidInputException {
         try {
             DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
@@ -107,6 +155,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Prints date in string.
+     *
+     * @param date the date.
+     * @return the datetime string.
+     */
     public static String printDate(LocalDateTime date) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a");
         return date.format(format);

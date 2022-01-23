@@ -3,6 +3,9 @@ package commands;
 import task.ListTask;
 import task.Task;
 
+/**
+ * Marks a task as undone in task list.
+ */
 public class UnMarkCommand extends Command {
 
     public static final String COMMAND_WORD = "unmark";
@@ -10,10 +13,23 @@ public class UnMarkCommand extends Command {
 
     private final int index;
 
+
+    /**
+     * Constructor for class UnMarkCommand
+     *
+     * @param index index of task to unmark
+     */
     public UnMarkCommand(int index) {
         this.index = index;
     }
 
+
+    /**
+     * Returns successfully unmarked message.
+     *
+     * @param tasks task list.
+     * @return successfully unmarked message.
+     */
     @Override
     public String execute(ListTask tasks) {
         Task task = tasks.get(index);
@@ -21,6 +37,12 @@ public class UnMarkCommand extends Command {
         return MESSAGE_UNMARK+task.toString();
     }
 
+
+    /**
+     * Returns command word.
+     *
+     * @return command word.
+     */
     @Override
     public String toString() {
         return COMMAND_WORD;
