@@ -22,6 +22,7 @@ public class Duke {
                 this.list = (ArrayList<Task>) ois.readObject();
                 ois.close();
             } else {
+                f.getParentFile().mkdir();
                 f.createNewFile();
             }
         } catch (IOException | ClassNotFoundException e){
