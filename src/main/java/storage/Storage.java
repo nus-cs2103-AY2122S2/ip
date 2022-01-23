@@ -115,7 +115,7 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(path);
             for (Task task : taskList) {
-                System.out.println(task.getClass());
+//                System.out.println(task.getClass());
                 if (task.getClass() == ToDo.class) {
                     fw.write("T | " + (task.getDone() ? "1 | " : "0 | ") +
                             task.getTitle() + System.lineSeparator());

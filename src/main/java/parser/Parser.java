@@ -111,48 +111,56 @@ public class Parser {
         }
 
         String[] arr = userInput.split(" ", 2);
-        int cmmand_len = arr.length;
+        int command_len = arr.length;
         switch (arr[0]) {
             case ExitCommand.COMMAND_WORD:
-                if (cmmand_len == 1) {
+                if (command_len == 1) {
                     return new ExitCommand();
                 }
                 break;
             case ListCommand.COMMAND_WORD:
-                if (cmmand_len == 1) {
+                if (command_len == 1) {
                     // list without date
                     return new ListCommand();
-                } else if (arr.length == 2) {
+                } else if (command_len == 2) {
                     // list with date given
                     return new ListCommand(true, parseDate(arr[1]));
                 }
                 break;
             case MarkCommand.COMMAND_WORD:
-                return new MarkCommand(parseListIndex(arr[1], tasks));
-                // Fallthrough
+                if (command_len == 2)
+                    return new MarkCommand(parseListIndex(arr[1], tasks));
+                break;
             case UnMarkCommand.COMMAND_WORD:
-                return new UnMarkCommand(parseListIndex(arr[1], tasks));
-                // Fallthrough
+                if (command_len == 2)
+                    return new UnMarkCommand(parseListIndex(arr[1], tasks));
+                break;
             case DeleteCommand.COMMAND_WORD:
-                return new DeleteCommand(parseListIndex(arr[1], tasks));
-                // Fallthrough
+                if (command_len == 2)
+                    return new DeleteCommand(parseListIndex(arr[1], tasks));
+                break;
             case AddCommand.COMMAND_TODO:
                 return new AddCommand(new ToDo(checkEmptyTask(arr[1])));
-                // Fallthrough
+            // Fallthrough
             case AddCommand.COMMAND_DEADLINE:
                 String[] deadline = parseTaskFormat(arr[1]);
                 String deadline_date = checkPrepositionFormat(deadline[1], AddCommand.COMMAND_DEADLINE);
                 return new AddCommand(new Deadline(checkEmptyTask(deadline[0]), parseDate(deadline_date)));
-                // Fallthrough
+            // Fallthrough
             case AddCommand.COMMAND_EVENT:
                 String[] event = parseTaskFormat(arr[1]);
                 String event_date = checkPrepositionFormat(event[1], AddCommand.COMMAND_EVENT);
                 return new AddCommand(new Event(checkEmptyTask(event[0]), parseDate(event_date)));
-                // Fallthrough
+            // Fallthrough
+            case FindCommand.COMMAND_WORD:
+                if (command_len == 2)
+                    return new FindCommand(arr[1]);
+                break;
+
             default:
-                throw new InvalidInputException("Invalid command. Please try 'list/bye/mark/unmark/event/deadline/todo'. ");
+                throw new InvalidInputException("Invalid command. Please try 'list/bye/mark/unmark/event/deadline/todo/find'. ");
         }
-        throw new InvalidInputException("Invalid command. Please try 'list/bye/mark/unmark/event/deadline/todo'. ");
+        throw new InvalidInputException("Invalid command. Please try 'list/bye/mark/unmark/event/deadline/todo/find'. ");
     }
 
     /**

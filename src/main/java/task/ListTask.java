@@ -82,6 +82,18 @@ public class ListTask {
         this.tasks.remove(index - 1);
     }
 
+    public ListTask findTasks(String keyword) {
+        ListTask result = new ListTask();
+        for (int i = 0; i < tasks.size(); i++) {
+            String input=tasks.get(i).toString().substring(7);
+            if (input.contains(keyword)) {
+                result.addTask(tasks.get(i));
+//                System.out.println(input);
+            }
+        }
+        return result;
+    }
+
     /**
      * Gets task according to the index.
      *
