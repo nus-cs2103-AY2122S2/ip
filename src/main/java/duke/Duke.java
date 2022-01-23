@@ -1,5 +1,7 @@
-import Exceptions.DukeException;
-import Exceptions.TaskIndexException;
+package duke;
+
+import exceptions.DukeException;
+import exceptions.TaskIndexException;
 import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {

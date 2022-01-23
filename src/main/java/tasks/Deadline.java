@@ -1,6 +1,8 @@
-import Exceptions.DateException;
+package tasks;
 
-public class Deadline extends Task{
+import exceptions.DateException;
+
+public class Deadline extends Task {
     private String item;
     private String date;
     private boolean done;

@@ -1,32 +1,31 @@
-import Exceptions.DateException;
-import Exceptions.DukeException;
-import Exceptions.TaskIndexException;
+package duke;
+
+import exceptions.DateException;
+import exceptions.DukeException;
+import exceptions.TaskIndexException;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.ToDo;
 import java.util.ArrayList;
 
 public class TaskManager {
-    private final String line = "-------------------------------------------";
-    private ArrayList<Task> tasks;
+    private final String LINE = "-------------------------------------------";
+    private ArrayList<Task> TASKS;
     private boolean status;
+    private String TASKLIST;
 
 
     public TaskManager() {
-        this.tasks = new ArrayList<>();
+        this.TASKS = new ArrayList<>();
         this.status = true;
-//        String start = "Hello there! I'm\n" +
-//                " __          ___      .______      .______     ____    ____ \n" +
-//                "|  |        /   \\     |   _  \\     |   _  \\    \\   \\  /   /\n" +
-//                "|  |       /  ^  \\    |  |_)  |    |  |_)  |    \\   \\/   /\n" +
-//                "|  |      /  /_\\  \\   |      /     |      /      \\_    _/\n" +
-//                "|  `----./  _____  \\  |  |\\  \\----.|  |\\  \\----.   |  |\n" +
-//                "|_______/__/     \\__\\ | _| `._____|| _| `._____|   |__|\n" +
-//                "What can I do for you?";
-        System.out.println(line);
+        System.out.println(LINE);
         System.out.println("Hello there, I'm Larry!");
-        System.out.println(line);
+        System.out.println(LINE);
     }
 
     public void addTask(Task t) {
-        tasks.add(t);
+        TASKS.add(t);
     }
 
     public void execute(String[] spliced) throws DukeException, TaskIndexException {
@@ -47,10 +46,10 @@ public class TaskManager {
                     throw new TaskIndexException("'todo'");
                 }
                 Task newTodo = new ToDo(spliced[1]);
-                tasks.add(newTodo);
+                TASKS.add(newTodo);
                 this.Line();
                 System.out.println("Got it, I added:\n"+ newTodo);
-                System.out.printf("Now you have %d item(s) in your list\n", tasks.size());
+                System.out.printf("Now you have %d item(s) in your list\n", TASKS.size());
                 this.Line();
                 break;
 
@@ -60,10 +59,10 @@ public class TaskManager {
                 }
                 try {
                     Task newDeadline = new Deadline(spliced[1]);
-                    tasks.add(newDeadline);
+                    TASKS.add(newDeadline);
                     this.Line();
                     System.out.println("Got it, I added:\n" + newDeadline);
-                    System.out.printf("Now you have %d items in your list\n", tasks.size());
+                    System.out.printf("Now you have %d items in your list\n", TASKS.size());
                     this.Line();
                 } catch (DateException e) {
                     this.Line();
@@ -80,10 +79,10 @@ public class TaskManager {
                 }
                 try {
                     Task newEvent = new Event(spliced[1]);
-                    tasks.add(newEvent);
+                    TASKS.add(newEvent);
                     this.Line();
                     System.out.println("Got it, I added:\n"+ newEvent);
-                    System.out.printf("Now you have %d items in your list\n", tasks.size());
+                    System.out.printf("Now you have %d items in your list\n", TASKS.size());
                     this.Line();
                 }catch (DateException e) {
                     this.Line();
@@ -97,7 +96,7 @@ public class TaskManager {
             case "unmark":
                 try {
                     Integer index = Integer.parseInt(spliced[1]);
-                    tasks.get(index - 1).unmark();
+                    TASKS.get(index - 1).unmark();
                 } catch (NumberFormatException e) {
                     this.Line();
                     System.out.println("Give me the task number in numbers please!");
@@ -112,7 +111,7 @@ public class TaskManager {
             case "mark":
                 try {
                     Integer index2 = Integer.parseInt(spliced[1]);
-                    tasks.get(index2 - 1).mark();
+                    TASKS.get(index2 - 1).mark();
                 } catch (NumberFormatException e) {
                     this.Line();
                     System.out.println("Give me the task number in numbers please!");
@@ -126,9 +125,9 @@ public class TaskManager {
             case "delete":
                 try {
                     Integer deleteItem = Integer.parseInt(spliced[1]);
-                    System.out.println(this.line +"\n"+ "I removed this task for you:\n" + tasks.get(deleteItem - 1));
-                    tasks.remove(deleteItem - 1);
-                    System.out.printf("Now you have %d items in your list\n", tasks.size());
+                    System.out.println(this.LINE +"\n"+ "I removed this task for you:\n" + TASKS.get(deleteItem - 1));
+                    TASKS.remove(deleteItem - 1);
+                    System.out.printf("Now you have %d items in your list\n", TASKS.size());
                     this.Line();
                 } catch (NumberFormatException e) {
                     this.Line();
@@ -150,17 +149,19 @@ public class TaskManager {
     }
 
     public void Line() {
-        System.out.println(line);
+
+        System.out.println(LINE);
     }
 
     @Override
     public String toString() {
-        String s = line + "\n";
+        String s = LINE + "\n";
         s += "Here's your list, Good Sir:\n";
-        for (int i = 0; i < tasks.size(); i++) {
-            s += i + 1 + ". "+ tasks.get(i).toString() + "\n";
+        for (int i = 0; i < TASKS.size(); i++) {
+            s += i + 1 + ". "+ TASKS.get(i).toString() + "\n";
         }
-        s += line;
+        s += LINE;
+        this.TASKLIST = s;
         return s;
     }
 

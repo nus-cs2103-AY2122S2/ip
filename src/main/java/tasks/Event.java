@@ -1,11 +1,21 @@
-public class ToDo extends Task{
-    private String description;
+package tasks;
+
+import exceptions.DateException;
+
+
+public class Event extends Task {
+    private String item;
+    private String date;
     private boolean done;
     private String line = "-------------------------------------------";
 
-    public ToDo(String details) {
-        this.description = details;
-
+    public Event(String details) throws DateException {
+        String[] spliced = details.split("/at", 2);
+        if (spliced.length == 1) {
+            throw new DateException();
+        }
+        this.item = spliced[0];
+        this.date = spliced[1];
     }
 
     @Override
@@ -35,11 +45,10 @@ public class ToDo extends Task{
     @Override
     public String toString() {
         if (done) {
-            return "[T]"+"[X] " + this.description;
+            return "[E]"+"[X] " + item + "(at:" + date + ")";
         }
         else {
-            return "[T]"+"[ ] "+ this.description;
+            return "[E]"+"[ ] "+ item + "(at:" + date + ")";
         }
     }
-
 }

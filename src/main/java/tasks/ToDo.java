@@ -1,19 +1,13 @@
-import Exceptions.DateException;
+package tasks;
 
-
-public class Event extends Task{
-    private String item;
-    private String date;
+public class ToDo extends Task {
+    private String description;
     private boolean done;
     private String line = "-------------------------------------------";
 
-    public Event(String details) throws DateException {
-        String[] spliced = details.split("/at", 2);
-        if (spliced.length == 1) {
-            throw new DateException();
-        }
-        this.item = spliced[0];
-        this.date = spliced[1];
+    public ToDo(String details) {
+        this.description = details;
+
     }
 
     @Override
@@ -43,10 +37,11 @@ public class Event extends Task{
     @Override
     public String toString() {
         if (done) {
-            return "[E]"+"[X] " + item + "(at:" + date + ")";
+            return "[T]"+"[X] " + this.description;
         }
         else {
-            return "[E]"+"[ ] "+ item + "(at:" + date + ")";
+            return "[T]"+"[ ] "+ this.description;
         }
     }
+
 }
