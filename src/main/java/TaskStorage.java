@@ -1,6 +1,6 @@
 public class TaskStorage {
     private String description;
-    private boolean complete;
+    private boolean isComplete;
     private String type;
     private String time;
     private String command;
@@ -19,22 +19,40 @@ public class TaskStorage {
             this.command = "";
         }
         this.description = description.substring(0, slashIndex);
-        this.complete = false;
+        this.isComplete = false;
         this.type = type;
     }
 
     public void taskDone() {
-        this.complete = true;
+        this.isComplete = true;
     }
 
     public void taskUndone() {
-        this.complete = false;
+        this.isComplete = false;
+    }
+
+    public String toFileText() {
+        String done;
+        String timeDue;
+        if (isComplete) {
+            done = "1";
+        } else {
+            done = "0";
+        }
+
+        if (this.time.equals("")) {
+            timeDue = " |";
+        } else {
+            timeDue = "| " + command + " " +  this.time + " |";
+        }
+
+        return "| " + type + " | " + done + " | " + description + timeDue;
     }
 
     @Override
     public String toString() {
         String temp = "[ ]";
-        if (complete) {
+        if (isComplete) {
             temp = "[X]";
         }
         String timeCommand = "";
