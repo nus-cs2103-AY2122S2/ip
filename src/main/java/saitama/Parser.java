@@ -7,8 +7,22 @@ import saitama.tasks.Task;
 import saitama.tasks.ToDo;
 import saitama.tasks.Event;
 
+/**
+ * Interprets the user input.
+ */
 public class Parser {
-    public static Command parse(String fullCommand) throws SaitamaException {
+    /**
+     * Returns a Command object corresponding to the input given by the user.
+     *
+     * @param fullCommand The command input given by the user.
+     * @return Command object corresponding to the user input.
+     * @throws InvalidFormatException if command exists but is in invalid format.
+     * @throws EmptyDescriptionException if command exists but no details are given.
+     * @throws InvalidCommandException if command does not exist.
+     * @throws InvalidTaskNumberException if given command takes in a task number but the number does not exist.
+     */
+    public static Command parse(String fullCommand) throws InvalidFormatException,
+            EmptyDescriptionException, InvalidCommandException, InvalidTaskNumberException {
         String[] splitCommand = fullCommand.split(" ", 2);
         String command = splitCommand[0].toUpperCase();
         splitCommand[0] = command;
@@ -33,6 +47,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Creates a MarkCommand object that marks the corresponding task number.
+     *
+     * @param splitCommand The split command array.
+     * @return A MarkCommand object.
+     * @throws InvalidTaskNumberException if the provided task number is not an integer or does not exist.
+     */
     private static Command prepareMark(String[] splitCommand) throws InvalidTaskNumberException {
         if (splitCommand.length < 2 || !isNumeric(splitCommand[1])) {
             throw new InvalidTaskNumberException();
@@ -41,6 +62,13 @@ public class Parser {
         return new MarkCommand(taskNumber);
     }
 
+    /**
+     * Creates an UnmarkCommand object that unmarks the corresponding task number.
+     *
+     * @param splitCommand The split command array.
+     * @return An UnmarkCommand object.
+     * @throws InvalidTaskNumberException if the provided task number is not an integer or does not exist.
+     */
     private static Command prepareUnmark(String[] splitCommand) throws InvalidTaskNumberException {
         if (splitCommand.length < 2 || !isNumeric(splitCommand[1])) {
             throw new InvalidTaskNumberException();
@@ -49,6 +77,13 @@ public class Parser {
         return new UnmarkCommand(taskNumber);
     }
 
+    /**
+     * Creates a DeleteCommand object that deletes the corresponding task number.
+     *
+     * @param splitCommand The split command array.
+     * @return A DeleteCommand object.
+     * @throws InvalidTaskNumberException if the provided task number is not an integer or does not exist.
+     */
     private static Command prepareDelete(String[] splitCommand) throws InvalidTaskNumberException {
         if (splitCommand.length < 2 || !isNumeric(splitCommand[1])) {
             throw new InvalidTaskNumberException();
@@ -57,7 +92,16 @@ public class Parser {
         return new DeleteCommand(taskNumber);
     }
 
-    private static Command prepareAdd(String[] splitCommand) throws SaitamaException {
+    /**
+     * Creates an AddCommand object that adds the corresponding task to the task list.
+     * @param splitCommand The split command array.
+     * @return An AddCommand object.
+     * @throws InvalidFormatException if command exists but is in the wrong format.
+     * @throws EmptyDescriptionException if no details of the task are given.
+     * @throws InvalidCommandException if command does not exist.
+     */
+    private static Command prepareAdd(String[] splitCommand) throws
+            InvalidFormatException, EmptyDescriptionException, InvalidCommandException {
         if (splitCommand.length < 2) {
             throw new EmptyDescriptionException();
         }
@@ -75,7 +119,8 @@ public class Parser {
         case "DEADLINE":
             taskArgumentsList = taskArguments.split(" /by ", 2);
             if (taskArgumentsList.length < 2) {
-                throw new InvalidFormatException("You need to specify the date of the deadline! <Deadline> /by <dd/mm/yyyy>");
+                throw new InvalidFormatException("You need to specify " +
+                        "the date of the deadline! <Deadline> /by <dd/mm/yyyy>");
             }
             taskDescription = taskArgumentsList[0];
             String deadline = taskArgumentsList[1];
@@ -94,6 +139,12 @@ public class Parser {
         throw new InvalidCommandException();
     }
 
+    /**
+     * A helper function to test if a String can be converted to integer.
+     *
+     * @param string The string to be converted to integer.
+     * @return Whether the string can be converted to integer.
+     */
     private static boolean isNumeric(String string) {
         int intValue;
 

@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Helps with the storing and loading of the task list data.
+ */
 public class Storage {
 
     private String filePath;
@@ -21,6 +24,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads a task list from the given text file stored in filePath.
+     *
+     * @return An array list of tasks.
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> ls = new ArrayList<Task>();
         File f = new File(filePath);
@@ -71,6 +79,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the current task list to the specified filePath.
+     *
+     * @param taskList The task list to be saved.
+     */
     public void save(saitama.TaskList taskList) {
         File f = new File(filePath);
         String directoryName = filePath.replace(f.getName(), "");

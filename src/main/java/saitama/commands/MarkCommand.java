@@ -5,6 +5,9 @@ import saitama.TaskList;
 import saitama.Ui;
 import saitama.exceptions.InvalidTaskNumberException;
 
+/**
+ * A Command object that marks a given task.
+ */
 public class MarkCommand extends Command{
     private int taskNumber;
 

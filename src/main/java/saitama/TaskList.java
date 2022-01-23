@@ -4,6 +4,9 @@ import saitama.tasks.Task;
 
 import java.util.ArrayList;
 
+/**
+ * A task list to keep track of tasks.
+ */
 public class TaskList {
 
     private String filePath;
@@ -13,6 +16,11 @@ public class TaskList {
         this.taskList = taskList;
     }
 
+    /**
+     * Adds a task to the list.
+     *
+     * @param task The task to be added.
+     */
     public void add(Task task) {
         taskList.add(task);
         System.out.println("OK...");
@@ -21,16 +29,31 @@ public class TaskList {
         System.out.println("Now you have " + this.numOfTasks() + " tasks in the list.");
     }
 
-    public void markTask(int index) {
-        Task task = this.get(index);
+    /**
+     * Marks the given task number.
+     *
+     * @param taskNumber The task number of the task to be marked.
+     */
+    public void markTask(int taskNumber) {
+        Task task = this.get(taskNumber);
         task.markAsDone();
     }
 
-    public void unmarkTask(int index) {
-        Task task = this.get(index);
+    /**
+     * Unmarks the given task number.
+     *
+     * @param taskNumber The task number of the task to be unmarked.
+     */
+    public void unmarkTask(int taskNumber) {
+        Task task = this.get(taskNumber);
         task.markAsUndone();
     }
 
+    /**
+     * Deletes the given task number.
+     *
+     * @param taskNumber The task number to be deleted.
+     */
     public void delete(int taskNumber) {
         System.out.println("OK...");
         System.out.println("The following task has been removed from the list: ");
@@ -39,14 +62,28 @@ public class TaskList {
         System.out.println("Now you have " + this.numOfTasks() + " tasks in the list.");
     }
 
-    public Task get(int item) {
-        return taskList.get(item - 1);
+    /**
+     * Retrieves the given task number.
+     *
+     * @param taskNumber The task number ot get.
+     * @return The given task number.
+     */
+    public Task get(int taskNumber) {
+        return taskList.get(taskNumber - 1);
     }
 
+    /**
+     * Returns the number of tasks in the task list.
+     *
+     * @return The number of tasks in the task list.
+     */
     public int numOfTasks() {
         return taskList.size();
     }
 
+    /**
+     * Prints the list of tasks currently in the task list.
+     */
     public void list() {
         if (numOfTasks() == 0) {
             System.out.println("There are no tasks in your list!");
@@ -55,6 +92,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns the string format of a task list.
+     *
+     * @return The string format of a task list.
+     */
     @Override
     public String toString() {
         int counter = 1;
@@ -66,21 +108,11 @@ public class TaskList {
         return output.substring(0,output.length() - 1);
     }
 
-    private boolean isNumeric(String string) {
-        int intValue;
-
-        if(string == null || string.equals("")) {
-            return false;
-        }
-
-        try {
-            intValue = Integer.parseInt(string);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
+    /**
+     * Returns the ArrayList format of a task list.
+     *
+     * @return The ArrayList format of a task list.
+     */
     public ArrayList<Task> toArrayList() {
         return this.taskList;
     }

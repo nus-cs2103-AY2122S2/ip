@@ -5,6 +5,9 @@ import saitama.TaskList;
 import saitama.Ui;
 import saitama.tasks.Task;
 
+/**
+ * A Command object that adds a task to the task list.
+ */
 public class AddCommand extends Command{
     private Task task;
 

@@ -9,12 +9,20 @@ public class Saitama {
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Creates a chatbot that can keep track of your tasks.
+     *
+     * @param filePath The file path of the stored task list.
+     */
     public Saitama(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         taskList = new TaskList(storage.load());
     }
 
+    /**
+     * Run the chatbot.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
