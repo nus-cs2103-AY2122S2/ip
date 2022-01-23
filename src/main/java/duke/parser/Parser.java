@@ -4,7 +4,18 @@ import duke.command.Command;
 import duke.exception.DukeException;
 import duke.exception.DukeWrongInputFormatException;
 
+/**
+ * Utility Class to parse the command given by the user.
+ */
 public class Parser {
+
+    /**
+     * Parse the command given by the user.
+     *
+     * @param command Command given by user.
+     * @return duke.command.Command based on what the user gave.
+     * @throws DukeWrongInputFormatException If the format of the input given by the user is invalid.
+     */
     public static Command parseString(String[] command) throws DukeException {
         switch (command[0].toLowerCase()) {
         case "":

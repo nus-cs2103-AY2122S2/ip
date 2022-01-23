@@ -10,14 +10,28 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+/**
+ * Represents the hard disk that stores the tasks between sessions.
+ */
 public class Storage {
     private final TaskList tasks;
 
+    /**
+     * Returns a Storage Object and loads the task in the current file.
+     *
+     * @param tasks TaskList to be used.
+     * @throws IOException If there was an error of I/O while loading the tasks.
+     */
     public Storage(TaskList tasks) throws IOException {
         this.tasks = tasks;
         this.loadTask();
     }
 
+    /**
+     * Loads the tasks from file.
+     *
+     * @throws IOException If there was an error of I/O while loading the tasks.
+     */
     private void loadTask() throws IOException {
         try {
             Path path = Paths.get(".", "data", "duke.txt");
@@ -47,6 +61,11 @@ public class Storage {
         } catch (DukeException ignored) {}
     }
 
+    /**
+     * Saves the tasks in TaskList into the file.
+     *
+     * @throws IOException If there was an error of I/O while saving the tasks.
+     */
     public void saveTask() throws IOException {
         Path path = Paths.get("data","duke.txt");
         Files.write(path, tasks.saveToFile());

@@ -9,11 +9,17 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Represents the start of the program and the main run loop.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Returns a Duke Object with helper classes initialized according to the /data/duke.txt file.
+     */
     public Duke() {
         this.ui = new Ui();
         ui.showStartUpMessage();
@@ -26,7 +32,7 @@ public class Duke {
     }
 
     /**
-     * Executes the instructions given by user
+     * Executes the instructions given by user until a Command.BYE is issued by the user.
      */
     public void execute() {
         boolean exit = false;
