@@ -83,4 +83,11 @@ public class DukeException extends Exception {
         }
         return index;
     }
+
+    public static String wordValidity(String input) throws DukeException {
+        if (input.length() < 6) {
+            throw new DukeException("Please type in a word to search through the tasks.\n");
+        }
+        return input.substring(5);
+    }
 }

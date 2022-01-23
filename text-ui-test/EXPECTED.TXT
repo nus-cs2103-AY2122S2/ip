@@ -13,6 +13,8 @@ No entries found, start by adding one!
 
 Please key in a number starting from 1.
 
+Sorry, but we could not find any tasks containing the search term.
+
 Sorry, this is not a recognized command.
 
 Please key in a valid task name.
@@ -45,6 +47,11 @@ Fetching all records...
 
 Nice! I've marked this task as done!
 [D][X] return book (by: 25 Jan 2022, 6pm)
+
+Here are the matching tasks!
+Fetching all records...
+1. [T][ ] borrow book
+2. [D][X] return book (by: 25 Jan 2022, 6pm)
 
 Fetching all records...
 1. [T][ ] borrow book

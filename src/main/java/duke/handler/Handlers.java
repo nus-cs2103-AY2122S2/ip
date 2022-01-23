@@ -5,6 +5,7 @@ import duke.task.*;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public enum Handlers {
@@ -12,6 +13,7 @@ public enum Handlers {
     Deadline("deadline"),
     Delete("delete"),
     Event("event"),
+    Find("find"),
     Mark("mark"),
     List("list"),
     Todo("todo"),
@@ -44,6 +46,8 @@ public enum Handlers {
                     Handlers.markHandler(list, input);
                 } else if (cmd.equals(Unmark.label)) {
                     Handlers.unmarkHandler(list, input);
+                } else if (cmd.equals(Find.label)) {
+                    Handlers.findHandler(list, input);
                 } else if (cmd.equals(Delete.label)) {
                     Handlers.deleteHandler(list, input);
                 } else {
@@ -115,6 +119,26 @@ public enum Handlers {
             System.out.println("Event Added: " + task.toString());
             System.out.println("There are now " + list.getTotalTasks() + " tasks in the list.\n");
         } catch (DukeException | DateTimeException err) {
+            System.out.println(err.getMessage());
+        }
+    }
+
+    public static void findHandler(Tasklist list, String input) {
+        try {
+            String searchPhrase = DukeException.wordValidity(input);
+            LinkedList<Task> filtered = new LinkedList<>();
+            for (int i = 0; i < list.getTotalTasks(); i++) {
+                if (list.getTask(i).getTaskName().contains(searchPhrase)) {
+                    filtered.add(list.getTask(i));
+                }
+            }
+            if (filtered.size() == 0) {
+                System.out.println("Sorry, but we could not find any tasks containing the search term.\n");
+            } else {
+                System.out.println("Here are the matching tasks!");
+                System.out.println(Tasklist.taskFormatter(filtered));
+            }
+        } catch (DukeException err) {
             System.out.println(err.getMessage());
         }
     }

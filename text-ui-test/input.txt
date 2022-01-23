@@ -1,4 +1,5 @@
 mark -1
+find book
 add task
 todo
 todo buy|choya
@@ -12,6 +13,7 @@ mark 47
 deadline
 list
 mark 2
+find book
 list
 unmark 2
 delete 3
