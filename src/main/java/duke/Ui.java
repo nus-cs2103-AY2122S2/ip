@@ -6,7 +6,7 @@ import java.util.Scanner;
  * Represents the user interface
  */
 public class Ui {
-    Scanner scanner;
+    private Scanner scanner;
 
     Ui() {
         this.scanner = new Scanner(System.in);

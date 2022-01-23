@@ -1,8 +1,8 @@
 package duke;
 
-import java.time.LocalDate;
-import java.text.SimpleDateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 /**
  * Represents a <code>Task</code> with a deadline date

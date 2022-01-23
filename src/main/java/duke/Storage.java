@@ -3,9 +3,9 @@ package duke;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.io.FileWriter;
 
 /**
  * Represents the file storing saved user tasks
@@ -42,7 +42,7 @@ public class Storage {
                 taskList.add(Parser.parseFile(nextLine));
                 nextLine = bufferedReader.readLine();
             }
-        } catch (IOException  | DukeInvalidFileException e) {
+        } catch (IOException | DukeInvalidFileException e) {
             throw new DukeInvalidFileException();
         }
         return taskList;
@@ -66,13 +66,15 @@ public class Storage {
             String savedTask = "";
             switch (type) {
             case "ToDo":
-                savedTasks += Parser.parseSavedToDoTask((ToDo)task);
+                savedTasks += Parser.parseSavedToDoTask((ToDo) task);
                 break;
             case "Deadline":
-                savedTasks += Parser.parseSavedDeadlineTask((Deadline)task);
+                savedTasks += Parser.parseSavedDeadlineTask((Deadline) task);
                 break;
             case "Event":
-                savedTasks += Parser.parseSavedEventTask((Event)task);
+                savedTasks += Parser.parseSavedEventTask((Event) task);
+                break;
+            default:
                 break;
             }
             savedTasks += " " + completed;

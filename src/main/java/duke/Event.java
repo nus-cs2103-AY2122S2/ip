@@ -7,7 +7,7 @@ import java.time.LocalDate;
 /**
  * Represents a <code>Task</code> that occurs at a given time
  */
-public class Event extends Task{
+public class Event extends Task {
     private String eventTime;
     private LocalDate date;
 
