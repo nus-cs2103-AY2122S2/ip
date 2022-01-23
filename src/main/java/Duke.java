@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class Duke {
@@ -82,13 +83,18 @@ public class Duke {
                 case "deadline":
                     try {
                         String[] tempStr = splitStr[1].split(" /by ");
-                        Task newD = new Deadline(tempStr[0], "D", tempStr[1]);
+                        Task newD = null;
+                        try {
+                            newD = new Deadline(tempStr[0], "D", tempStr[1]);
+                        } catch (DateTimeParseException e) {
+                            throw new ArrayIndexOutOfBoundsException();
+                        }
                         list.add(newD);
                         newD.addedTask();
                         newD.getStatus();
                         System.out.println("Now you've got " + list.size() +" tasks in the list.");
                     } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println("Invalid deadline command format.");
+                        System.out.println("Invalid deadline command format.\nDate Format: yyyy-mm-dd");
                     }
                     break;
                 case "event":
