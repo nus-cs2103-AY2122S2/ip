@@ -6,7 +6,7 @@ public class DeleteCommand extends Command {
 
     public DeleteCommand(Integer number) {
 
-        super(null, number);
+        super(null, number, null);
     }
 
     @Override

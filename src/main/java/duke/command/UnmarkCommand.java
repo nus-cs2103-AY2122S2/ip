@@ -5,7 +5,7 @@ import duke.functionality.TaskList;
 public class UnmarkCommand extends Command{
 
     public UnmarkCommand(Integer number) {
-        super(null, number);
+        super(null, number, null);
     }
 
     @Override

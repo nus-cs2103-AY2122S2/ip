@@ -5,7 +5,7 @@ import duke.functionality.TaskList;
 public class PrintCommand extends Command{
 
     public PrintCommand() {
-        super(null, null);
+        super(null, null, null);
     }
 
     @Override

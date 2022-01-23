@@ -6,7 +6,7 @@ import duke.functionality.TaskList;
 public class AddCommand extends Command {
 
     public AddCommand(Task t){
-        super(t, null);
+        super(t, null, null);
     }
 
     @Override
