@@ -1,11 +1,15 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import tasks.*;
+import backend.InputDecoder;
+import backend.TaskList;
+import exception.DukeException;
+import storage.Storage;
 
 
 public class Duke {
     private static Storage storage;
     private static InputDecoder inputDecoder;
-    private static TaskList taskList;
 
     public static void main(String[] args) throws DukeException {
         Scanner sc = new Scanner(System.in);
@@ -19,7 +23,7 @@ public class Duke {
 
         storage = new Storage();
         ArrayList<Task> tasks = storage.loadList();
-        taskList.tasks = tasks;
+        TaskList.initialise(tasks);
         System.out.println(tasks.size());
         inputDecoder = new InputDecoder();
 
@@ -29,7 +33,7 @@ public class Duke {
                 break;
             } else {
                 inputDecoder.decode(str);
-                storage.updateTasks(taskList.tasks);
+                storage.updateTasks(TaskList.getTasks());
             }
         }
     }
