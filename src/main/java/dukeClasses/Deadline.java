@@ -1,10 +1,12 @@
+package dukeClasses;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task{
+public class Deadline extends Task{
     private LocalDate deadline;
 
-    public Event(String description, LocalDate deadline) {
+    public Deadline(String description, LocalDate deadline) {
         super(description);
         this.deadline = deadline;
     }

@@ -1,3 +1,5 @@
+package dukeClasses;
+
 public enum Commands {
     HI{
         @Override
