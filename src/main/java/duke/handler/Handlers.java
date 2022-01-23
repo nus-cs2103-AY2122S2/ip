@@ -3,6 +3,7 @@ package duke.handler;
 import duke.exception.DukeException;
 import duke.task.*;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -77,7 +78,7 @@ public enum Handlers {
             FileHandler.writeToFile(list);
             System.out.println("Deadline Added: " + task.toString());
             System.out.println("There are now " + list.getTotalTasks() + " tasks in the list.\n");
-        } catch (DukeException err) {
+        } catch (DukeException | DateTimeException err) {
             System.out.println(err.getMessage());
         }
     }
@@ -113,7 +114,7 @@ public enum Handlers {
             FileHandler.writeToFile(list);
             System.out.println("Event Added: " + task.toString());
             System.out.println("There are now " + list.getTotalTasks() + " tasks in the list.\n");
-        } catch (DukeException err) {
+        } catch (DukeException | DateTimeException err) {
             System.out.println(err.getMessage());
         }
     }
