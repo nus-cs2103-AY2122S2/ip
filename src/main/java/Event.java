@@ -12,6 +12,15 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * Returns the representative string for saving in data file.
+     */
+    @Override
+    public String toFileFormat() {
+        int status = super.isDone ? 1 : 0;
+        return "E" + " | " + status + " | " + super.description + " | " + at;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";

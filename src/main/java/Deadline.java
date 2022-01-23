@@ -12,6 +12,15 @@ public class Deadline extends Task{
         this.by = by;
     }
 
+    /**
+     * Returns the representative string for saving in data file.
+     */
+    @Override
+    public String toFileFormat() {
+        int status = super.isDone ? 1 : 0;
+        return "E" + " | " + status + " | " + super.description + " | " + by;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
