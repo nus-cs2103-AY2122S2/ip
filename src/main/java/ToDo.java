@@ -4,7 +4,15 @@ public class ToDo extends Task {
         super(description);
     }
 
+    ToDo(String description, boolean isDone) {
+        super(description, isDone);
+    }
+
+    String getTaskType() {
+        return "T";
+    }
+
     public String toString() {
-        return "[T]" + super.toString();
+        return String.format("[%s]", getTaskType()) + super.toString();
     }
 }
