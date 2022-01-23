@@ -56,7 +56,9 @@ public class Event extends Task {
 
     @Override
     public String getAppendData() {
-        return "E | " + (super.isDone ? "1" : "0") + " | " + description + " | " + at;
+        return "E | " + (super.isDone ? "1" : "0") + " | " + description + " | " +
+                (hasDate ? d.toString() : "0") + " | " +
+                (hasTime ? t.toString() : "0");
     }
 
     @Override

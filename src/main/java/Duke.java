@@ -196,6 +196,7 @@ public class Duke {
                 LocalTime t = LocalTime.parse(s[1], timeIn);
                 Deadline deadline = new Deadline(desc, d, t);
                 tasks.add(deadline);
+                appendToData(deadline.getAppendData());
                 System.out.println("    Task added:");
                 System.out.println("    " + deadline);
                 break;
@@ -204,6 +205,7 @@ public class Duke {
                 LocalDate d = LocalDate.parse(by, dateIn);
                 Deadline deadline = new Deadline(desc, d);
                 tasks.add(deadline);
+                appendToData(deadline.getAppendData());
                 System.out.println("    Task added:");
                 System.out.println("    " + deadline);
                 break;
@@ -212,6 +214,7 @@ public class Duke {
                 LocalTime t = LocalTime.parse(by, timeIn);
                 Deadline deadline = new Deadline(desc, t);
                 tasks.add(deadline);
+                appendToData(deadline.getAppendData());
                 System.out.println("    Task added:");
                 System.out.println("    " + deadline);
                 break;
@@ -252,6 +255,7 @@ public class Duke {
                 LocalTime t = LocalTime.parse(s[1], timeIn);
                 Event event = new Event(desc, d, t);
                 tasks.add(event);
+                appendToData(event.getAppendData());
                 System.out.println("    Task added:");
                 System.out.println("    " + event);
                 break;
@@ -260,6 +264,7 @@ public class Duke {
                 LocalDate d = LocalDate.parse(at, dateIn);
                 Event event = new Event(desc, d);
                 tasks.add(event);
+                appendToData(event.getAppendData());
                 System.out.println("    Task added:");
                 System.out.println("    " + event);
                 break;
@@ -268,6 +273,7 @@ public class Duke {
                 LocalTime t = LocalTime.parse(at, timeIn);
                 Event event = new Event(desc, t);
                 tasks.add(event);
+                appendToData(event.getAppendData());
                 System.out.println("    Task added:");
                 System.out.println("    " + event);
                 break;
@@ -327,27 +333,66 @@ public class Duke {
                 String task = s.nextLine();
                 String[] parsedTask = task.split(" \\| ");
                 switch (parsedTask[0]) {
-                case "T":
+                case "T": {
                     Todo t = new Todo(parsedTask[2]);
                     if (parsedTask[1].equals("1")) {
                         t.markAsDone();
                     }
                     tasks.add(t);
                     break;
-                case "D":
-                    Deadline d = new Deadline(parsedTask[2], parsedTask[3]);
-                    if (parsedTask[1].equals("1")) {
-                        d.markAsDone();
+                }
+                case "D": {
+                    String done = parsedTask[1];
+                    String desc = parsedTask[2];
+                    String date = parsedTask[3];
+                    String time = parsedTask[4];
+                    if (!date.equals("0") && !time.equals("0")) {
+                        Deadline d = new Deadline(desc, LocalDate.parse(date), LocalTime.parse(time));
+                        if (done.equals("1")) {
+                            d.markAsDone();
+                        }
+                        tasks.add(d);
+                    } else if (!date.equals("0")) {
+                        Deadline d = new Deadline(desc, LocalDate.parse(date));
+                        if (done.equals("1")) {
+                            d.markAsDone();
+                        }
+                        tasks.add(d);
+                    } else {
+                        Deadline d = new Deadline(desc, LocalTime.parse(time));
+                        if (done.equals("1")) {
+                            d.markAsDone();
+                        }
+                        tasks.add(d);
                     }
-                    tasks.add(d);
                     break;
-                case "E":
-                    Event e = new Event(parsedTask[2], parsedTask[3]);
-                    if (parsedTask[1].equals("1")) {
-                        e.markAsDone();
+                }
+                case "E": {
+                    String done = parsedTask[1];
+                    String desc = parsedTask[2];
+                    String date = parsedTask[3];
+                    String time = parsedTask[4];
+                    if (!date.equals("0") && !time.equals("0")) {
+                        Event e = new Event(desc, LocalDate.parse(date), LocalTime.parse(time));
+                        if (done.equals("1")) {
+                            e.markAsDone();
+                        }
+                        tasks.add(e);
+                    } else if (!date.equals("0")) {
+                        Event e = new Event(desc, LocalDate.parse(date));
+                        if (done.equals("1")) {
+                            e.markAsDone();
+                        }
+                        tasks.add(e);
+                    } else {
+                        Event e = new Event(desc, LocalTime.parse(time));
+                        if (done.equals("1")) {
+                            e.markAsDone();
+                        }
+                        tasks.add(e);
                     }
-                    tasks.add(e);
                     break;
+                }
                 }
             }
         } catch (IOException e) {

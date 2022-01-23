@@ -56,7 +56,9 @@ public class Deadline extends Task {
 
     @Override
     public String getAppendData() {
-        return "D | " + (super.isDone ? "1" : "0") + " | " + description + " | " + by;
+        return "D | " + (super.isDone ? "1" : "0") + " | " + description + " | " +
+                (hasDate ? d.toString() : "0") + " | " +
+                (hasTime ? t.toString() : "0");
     }
 
     @Override
