@@ -1,18 +1,17 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class EventTask extends Task {
     String preposition;
-    String time;
+    LocalDateTime dateTime;
 
-    EventTask(String name,String preposition, String time) {
+    EventTask(String name,String preposition, LocalDateTime dateTime) {
         super(name);
         this.preposition = preposition;
-        this.time = time;
+        this.dateTime = dateTime;
     }
 
     public String toString() {
-        String res = "[E]" + super.toString();
-        if (this.preposition != "" && this.time != "") {
-            res += String.format(" (%s: %s)",this.preposition, this.time);
-        }
-        return res;
+        return "[E]" + super.toString() + String.format(" (%s: %s)",this.preposition, this.dateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")));
     }
 }

@@ -1,18 +1,17 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class DeadlineTask extends Task {
     String preposition;
-    String deadline;
+    LocalDateTime dateTime;
 
-    DeadlineTask(String name, String preposition, String deadline) {
+    DeadlineTask(String name, String preposition, LocalDateTime dateTime) {
         super(name);
         this.preposition = preposition;
-        this.deadline = deadline;
+        this.dateTime = dateTime;
     }
 
     public String toString() {
-        String res = "[D]" + super.toString();
-        if (this.preposition != "" && this.deadline != "") {
-            res += String.format(" (%s: %s)",this.preposition, this.deadline);
-        }
-        return res;
+        return "[D]" + super.toString() + String.format(" (%s: %s)",this.preposition, this.dateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")));
     }
 }

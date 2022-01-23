@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
+import java.time.LocalDateTime;
+
 public class Duke {
     public static void main(String[] args) {
         // Introduction
@@ -63,16 +65,36 @@ public class Duke {
                     continue;
                 }
                 //Setting up deadline/ date
-                List<String> deadlineOrDateArray = new ArrayList<>();
-                while (st.hasMoreTokens()) {
-                    deadlineOrDateArray.add(st.nextToken());
+                String date = "";
+                String time = "";
+                if (st.hasMoreTokens()) date = st.nextToken();
+                if (st.hasMoreTokens()) time = st.nextToken();
+                if ((date.equals("") || time.equals(""))) {
+                    if (command.equals("deadline")) {
+                        System.out.println("Please add a date and time for your deadline in the following format 'deadline <name> /by <YYYY-MM-DD> <HH:MM>' ! *quack*");
+                        continue;
+                    } else if (command.equals("event")) {
+                        System.out.println("Please add a date and time for your event in the following format 'event <name> /on <YYYY-MM-DD> <HH:MM>' ! *quack*");
+                        continue;
+                    }
                 }
-                String deadlineOrDate = String.join(" ", deadlineOrDateArray);
+                LocalDateTime dateTime = LocalDateTime.now();
+                try {
+                    dateTime = LocalDateTime.parse(date + "T" + time);
+                } catch (Exception e) {
+                    if (command.equals("deadline")) {
+                        System.out.println("Please add a date and time for your deadline in the following format 'deadline <name> /by <YYYY-MM-DD> <HH:MM>' ! *quack*");
+                        continue;
+                    } else if (command.equals("event")) {
+                        System.out.println("Please add a date and time for your event in the following format 'event <name> /on <YYYY-MM-DD> <HH:MM>' ! *quack*");
+                        continue;
+                    }
+                }
                 //Creating the new task
                 Task newTask = new Task("placeholder task");
                 if (command.equals("todo")) newTask = new ToDoTask(name);
-                else if (command.equals("deadline")) newTask = new DeadlineTask(name, preposition, deadlineOrDate);
-                else if (command.equals("event")) newTask = new EventTask(name, preposition, deadlineOrDate);
+                else if (command.equals("deadline")) newTask = new DeadlineTask(name, preposition, dateTime);
+                else if (command.equals("event")) newTask = new EventTask(name, preposition, dateTime);
                 tasks.add(newTask);
                 //Output to update user
                 System.out.println("Got it. I've added this task *quack*:");
