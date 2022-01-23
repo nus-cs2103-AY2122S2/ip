@@ -1,11 +1,4 @@
-import command.Command;
-import command.DeadlineCommand;
-import command.DeleteCommand;
-import command.EventCommand;
-import command.ListCommand;
-import command.MarkCommand;
-import command.TodoCommand;
-import command.UnmarkCommand;
+import command.*;
 import exception.DukeException;
 
 public class Parser {
@@ -68,6 +61,11 @@ public class Parser {
                 } catch (NumberFormatException e) {
                     throw new DukeException("Have you typed in your number correctly in numerals?");
                 }
+            case "find":
+                if (commandSeperated.length == 1 || commandSeperated[1].isBlank()) {
+                    throw new DukeException("Can't find any info after your command! Have you typed it correctly?");
+                }
+                return new FindCommand(commandSeperated[1].trim());
             default:
                 throw new DukeException("Sorry, but I don't know what that means :-(");
         }
