@@ -21,11 +21,11 @@ public abstract class Task implements ISerializable<Task> {
         return this.isDone;
     }
 
-    public void markAsDone() {
+    protected void markAsDone() {
         this.isDone = true;
     }
 
-    public void unmarkAsDone() {
+    protected void unmarkAsDone() {
         this.isDone = false;
     }
 

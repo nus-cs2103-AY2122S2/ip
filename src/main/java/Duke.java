@@ -50,10 +50,17 @@ public class Duke {
     private static void init() {
         try {
             taskStore = TaskStoreSerializer.inflate();
+            taskStore.registerListener(store -> {
+                try {
+                    TaskStoreSerializer.deflate(store);
+                } catch (DukeIOException ex) {
+                    System.out.println("Warning: An error occurred while saving Task list");
+                }
+            });
         } catch (DukeIOException ex) {
-            System.out.println("Cannot write to working directory. "
-                    + "Please check that you have write to the directory permissions");
-            System.exit(1);
+            System.out.println("Cannot write to working directory.\n"
+                    + "Please check that you have write to the directory permissions.\n"
+                    + "Will not save any changes!");
         }
     }
 
@@ -135,11 +142,11 @@ public class Duke {
             linePrinter.print(String.format("Task is already %s:", newState ? "done" : "not done"));
         } else if (newState) {
             task.markAsDone();
-            writeTaskStore();
+            taskStore.notifyListeners();
             linePrinter.print("Great Job Finishing the task:");
         } else {
             task.unmarkAsDone();
-            writeTaskStore();
+            taskStore.notifyListeners();
             linePrinter.print("Marking the task as not done yet:");
         }
         linePrinter.print(String.format("\t %s", task.getReadableString()));
@@ -154,7 +161,6 @@ public class Duke {
             throw new DukeIllegalArgumentException("No matching task with given number");
         }
 
-        writeTaskStore();
         linePrinter.print("Deleted the task:");
         linePrinter.print(String.format("\t %s", deleted.getReadableString()));
     }
@@ -167,7 +173,6 @@ public class Duke {
         }
 
         final Task task = taskStore.addTask(new Todo(args));
-        writeTaskStore();
         linePrinter.print("Added the following Todo Task:");
         linePrinter.print(String.format("\t%s", task.getReadableString()));
         linePrinter.print(String.format("Now you have %d task(s) in the list", taskStore.getTaskCount()));
@@ -184,7 +189,6 @@ public class Duke {
         final String taskDescription = argParts[0];
         final String taskBy = argParts[1];
         final Task task = taskStore.addTask(new Deadline(taskDescription, taskBy));
-        writeTaskStore();
         linePrinter.print("Added the following Deadline Task:");
         linePrinter.print(String.format("\t%s", task.getReadableString()));
         linePrinter.print(String.format("Now you have %d task(s) in the list", taskStore.getTaskCount()));
@@ -201,7 +205,6 @@ public class Duke {
         final String taskDescription = argParts[0];
         final String taskAt = argParts[1];
         final Task task = taskStore.addTask(new Event(taskDescription, taskAt));
-        writeTaskStore();
         linePrinter.print("Added the following Event Task:");
         linePrinter.print(String.format("\t%s", task.getReadableString()));
         linePrinter.print(String.format("Now you have %d task(s) in the list", taskStore.getTaskCount()));
@@ -213,14 +216,5 @@ public class Duke {
             System.out.println("\t" + line);
         });
         System.out.println(SEPARATOR);
-    }
-
-    private static void writeTaskStore() {
-        try {
-            TaskStoreSerializer.deflate(taskStore);
-        } catch (DukeIOException ex) {
-            System.out.println("Warning: An error occurred while saving Task list");
-        }
-
     }
 }
