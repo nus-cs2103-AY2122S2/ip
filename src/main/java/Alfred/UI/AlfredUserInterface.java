@@ -3,6 +3,10 @@ package Alfred.UI;
 import Alfred.Exceptions.AlfredException;
 import java.util.Scanner;
 
+/**
+ * Encapsulates the logic and handling of interactions between the internal
+ * workings of Alfred and the input/output with the user.
+ */
 public class AlfredUserInterface {
   // class constants
   private static final String GREETING = "Hello! My name is Alfred.\n"
@@ -14,6 +18,10 @@ public class AlfredUserInterface {
   // instance variables
   Scanner io;
 
+  /**
+   * Creates an AlfredUserInterface object, and begins reading from
+   * console inputs.
+   */
   public AlfredUserInterface() {
     io = new Scanner(System.in);
   }
@@ -27,6 +35,12 @@ public class AlfredUserInterface {
     return out;
   }
 
+  /**
+   * Wraps a given text input between break lines (e.g. ===)
+   * and prints them to console.
+   *
+   * @param text Text to be wrapped.
+   */
   public void sandwichAndPrint(String text) {
     String out = "";
     out += AlfredUserInterface.BREAK_LINE;
@@ -35,18 +49,35 @@ public class AlfredUserInterface {
     System.out.println(out);
   }
 
+  /**
+   * Prints a predetermined greeting message to the console.
+   */
   public void greeting() {
     this.sandwichAndPrint(AlfredUserInterface.GREETING);
   }
 
+  /**
+   * Prints a predetermined goodbye message to the console.
+   */
   public void bye() {
     this.sandwichAndPrint(AlfredUserInterface.BYE);
   }
 
+  /**
+   * Handles AlfredExceptions by printing its internal message
+   * to the console.
+   *
+   * @param e AlfredException thrown by other methods in the Alfred package.
+   */
   public void handleAlfredException(AlfredException e) {
     this.sandwichAndPrint(e.getMessage());
   }
 
+  /**
+   * Returns console input.
+   *
+   * @return String input from the console.
+   */
   public String readInput() {
     return this.io.nextLine();
   }

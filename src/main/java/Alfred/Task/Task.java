@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+/**
+ * Encapsulates all Alfred Tasks.
+ */
 public abstract class Task {
   // class constants
   private static final String COMPLETION_MARK = "X";
@@ -11,12 +14,16 @@ public abstract class Task {
   private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(
       FormatStyle.MEDIUM, FormatStyle.MEDIUM);
 
-
   // instance attributes
   private final String description;
   private boolean completed;
 
-
+  /**
+   * Constructor of the parent class, so every task must have
+   * some description and completion status.
+   *
+   * @param description Task name.
+   */
   Task(String description) {
     this.description = description;
     this.completed = false;
@@ -30,14 +37,27 @@ public abstract class Task {
     }
   }
 
+  /**
+   * Updates internal state of the task to be complete.
+   */
   public void markComplete() {
     this.completed = true;
   }
 
+  /**
+   * Updates internal state of the task to be incomplete.
+   */
   public void markIncomplete() {
     this.completed = false;
   }
 
+  /**
+   * Returns formatted date and time given a LocalDateTime object.
+   * Intended as a helper method.
+   *
+   * @param dateTime LocalDateTime object encapsulating date and time.
+   * @return String format as defined by an internal format.
+   */
   public static String localDateTimeToString(LocalDateTime dateTime) {
     return dateTime.format(Task.dateTimeFormatter);
   }

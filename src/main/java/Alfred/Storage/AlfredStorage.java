@@ -9,15 +9,30 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Encapsulates the logic for managing the internal data states
+ * of Alfred.
+ */
 public class AlfredStorage {
-  private ArrayList<Task> taskList;
-  private String dataPath;
+  private final ArrayList<Task> taskList;
+  private final String dataPath;
 
+  /**
+   * Constructs an AlfredStorage object.
+   *
+   * @param dataPath Data path to where Alfred.txt file should be saved.
+   */
   public AlfredStorage(String dataPath) {
     this.taskList = new ArrayList<Task>();
     this.dataPath = dataPath;
   }
 
+  /**
+   * Returns a string representation of the list of tasks being
+   * tracked by the object.
+   *
+   * @return String object representing the list of tasks.
+   */
   public String listToString() {
     String out = "";
     for (int i = 1; i < this.taskList.size() + 1; i++) {
@@ -26,24 +41,52 @@ public class AlfredStorage {
     return out;
   }
 
+  /**
+   * Updates internal data state to mark the defined task
+   * as complete.
+   *
+   * @param taskId Integer as 0-indexed key.
+   * @throws InvalidIndexException if index is out of bounds.
+   */
   public void markTask(int taskId) throws InvalidIndexException {
     this.checkValidListIndex(taskId);
     this.taskList.get(taskId).markComplete();
     this.saveToFile();
   }
 
-  public void unmarkTask(int taskId)  throws InvalidIndexException {
+  /**
+   * Updates internal data state to mark the defined task
+   * as incomplete.
+   *
+   * @param taskId Integer as 0-indexed key.
+   * @throws InvalidIndexException if index is out of bounds.
+   */
+  public void unmarkTask(int taskId) throws InvalidIndexException {
     this.checkValidListIndex(taskId);
     this.taskList.get(taskId).markIncomplete();
     this.saveToFile();
   }
 
+  /**
+   * Updates internal data state to delete the defined task.
+   *
+   * @param taskId Integer as 0-indexed key.
+   * @throws InvalidIndexException if index is out of bounds.
+   */
   public void deleteTasK(int taskId) throws InvalidIndexException {
     this.checkValidListIndex(taskId);
     this.taskList.remove(taskId);
     this.saveToFile();
   }
 
+  /**
+   * Updates the internal data state to add a Task object
+   * to the list.
+   *
+   * @param task Task object.
+   * @param ui   AlfredInterface object used by Alfred to handle inputs
+   *             and outputs with the user.
+   */
   public void addTask(Task task, AlfredUserInterface ui) {
     this.taskList.add(task);
     String out = "Yes sir, I've added this task.\n";
@@ -53,6 +96,13 @@ public class AlfredStorage {
     this.saveToFile();
   }
 
+  /**
+   * Gets the string representation of a given task.
+   *
+   * @param taskId 0-indexed id of a task.
+   * @return String representation of the task.
+   * @throws InvalidIndexException If the index is out of bounds.
+   */
   public String taskToString(int taskId) throws InvalidIndexException {
     this.checkValidListIndex(taskId);
     return this.taskList.get(taskId).toString();

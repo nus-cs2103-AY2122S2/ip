@@ -5,13 +5,32 @@ import Alfred.Exceptions.InvalidInputException;
 import Alfred.Storage.AlfredStorage;
 import Alfred.UI.AlfredUserInterface;
 
+/**
+ * Encapsulates the unmark command.
+ */
 public class UnmarkCommand extends Command {
-  private String[] arguments;
+  private final String[] arguments;
 
+  /**
+   * Constructs an UnmarkCommand object.
+   *
+   * @param input input from the console. Assumes that input is
+   *              *         correctly formatted, such that first word is "unmark".
+   */
   public UnmarkCommand(String input) {
     this.arguments = input.split(" ");
   }
 
+  /**
+   * Executes the unmark command, by modifying the internal data state
+   * of Alfred and then printing the change to console.
+   *
+   * @param ui      AlfredUserInterface object used as the UI interface for Alfred.
+   * @param storage AlfredStorage object used to handle internal storage for Alfred.
+   * @throws InvalidInputException If there is more than 1 argument following "mark"
+   *                               in the input.
+   * @throws InvalidIndexException If object to be unmarked is at an invalid index.
+   */
   @Override
   public void execute(AlfredUserInterface ui, AlfredStorage storage) throws InvalidInputException,
       InvalidIndexException {
