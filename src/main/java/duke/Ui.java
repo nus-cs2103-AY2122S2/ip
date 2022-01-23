@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -27,7 +29,7 @@ public class Ui {
 
     void run() throws DukeException, IOException {
         Scanner sc = new Scanner(System.in);
-        String intro = "Hello! I'm Duke\n" +
+        String intro = "Hello! I'm duke.Duke\n" +
                 "What can I do for you?";
         System.out.println(intro);
 
