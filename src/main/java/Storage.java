@@ -4,6 +4,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Storage {
+
     protected Path absoluteFilePath;
 
     public Storage(String filePath) {
@@ -11,12 +12,12 @@ public class Storage {
         this.absoluteFilePath = Paths.get(currentDir, filePath);
     }
 
-    public ArrayList<Task> load() throws DukeException  {
+    public TaskList load() throws DukeException  {
 
         try {
             FileInputStream fis = new FileInputStream(absoluteFilePath.toString());
             ObjectInputStream ois = new ObjectInputStream(fis);
-            ArrayList<Task> tasks = (ArrayList<Task>) ois.readObject();
+            TaskList tasks = (TaskList) ois.readObject();
             fis.close();
             ois.close();
             return tasks;
@@ -25,7 +26,7 @@ public class Storage {
         }
     }
 
-    public void save(ArrayList<Task> tasks) {
+    public void save(TaskList tasks) {
         File file = new File(absoluteFilePath.toString());
         file.getParentFile().mkdirs();
         try {
