@@ -9,6 +9,12 @@ import duke.task.Task;
  *
  */
 public class Ui {
+    String logo = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+
     /**
      * Outputs the specified strings entered in the following format:
      * ========================================== <br>
@@ -58,4 +64,12 @@ public class Ui {
             arr.forEach((x) -> { System.out.println(String.format("    %d. %s", arr.indexOf(x) + 1, x.toString())); } );
         System.out.println(String.format("    %s", "=========================================="));
     }
+
+
+    public void printLogo() {
+        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello! I'm Duke, What can I do for you?");
+        System.out.println("-------------------------------------------\n");
+    }
+
 }

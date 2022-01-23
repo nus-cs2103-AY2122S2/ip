@@ -12,14 +12,7 @@ public class Duke {
         TaskList tl = new TaskList();
         Storage.loadFile(System.getProperty("user.dir") + "\\data\\duke.txt", tl);
 
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        p.print("Hello! I'm Duke," , "What can I do for you?");
-
+        p.printLogo();
         String userInput = in.nextLine();
         int runResult = ip.run(userInput, p, tl);
 
