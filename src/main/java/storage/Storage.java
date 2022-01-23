@@ -1,14 +1,18 @@
 package storage;
 
 import exception.InvalidInputException;
+
 import parser.Parser;
+
 import task.Deadline;
 import task.Event;
 import task.Task;
 import task.ToDo;
 
 import java.io.*;
+
 import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,9 +86,11 @@ public class Storage {
             if (parts[0].equals("T")) {
                 result.add(new ToDo(parts[2], parts[1].equals("1")));
             } else if (parts[0].equals("D")) {
-                result.add(new Deadline(parts[2], parts[1].equals("1"), parser.parseDate(parts[3])));
+                result.add(new Deadline(parts[2],
+                        parts[1].equals("1"), parser.parseDate(parts[3])));
             } else if (parts[0].equals("E")) {
-                result.add(new Event(parts[2], parts[1].equals("1"), parser.parseDate(parts[3])));
+                result.add(new Event(parts[2],
+                        parts[1].equals("1"), parser.parseDate(parts[3])));
             } else {
                 System.out.println(parts[0]);
             }
@@ -99,11 +105,11 @@ public class Storage {
     /**
      * Saves task list to file.
      *
-     * @param taskList the task list
-     * @return status of saving
+     * @param taskList the task list.
+     * @return status of saving.
      * @throws FileNotFoundException If the file not found.
      */
-    public boolean saveTasktoFile(List<Task> taskList) throws FileNotFoundException {
+    public boolean saveTaskToFile(List<Task> taskList) throws FileNotFoundException {
         String path = getPath();
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         try {
@@ -111,11 +117,16 @@ public class Storage {
             for (Task task : taskList) {
                 System.out.println(task.getClass());
                 if (task.getClass() == ToDo.class) {
-                    fw.write("T | " + (task.getDone() ? "1 | " : "0 | ") + task.getTitle() + System.lineSeparator());
+                    fw.write("T | " + (task.getDone() ? "1 | " : "0 | ") +
+                            task.getTitle() + System.lineSeparator());
                 } else if (task.getClass() == Deadline.class) {
-                    fw.write("D | " + (task.getDone() ? "1 | " : "0 | ") + task.getTitle() + " | " + ((Deadline) task).getDate().format(format) + System.lineSeparator());
+                    fw.write("D | " + (task.getDone() ? "1 | " : "0 | ") +
+                            task.getTitle() + " | " +
+                            ((Deadline) task).getDate().format(format) + System.lineSeparator());
                 } else if (task.getClass() == Event.class) {
-                    fw.write("E | " + (task.getDone() ? "1 | " : "0 | ") + task.getTitle() + " | " + ((Event) task).getDate().format(format) + System.lineSeparator());
+                    fw.write("E | " + (task.getDone() ? "1 | " : "0 | ") +
+                            task.getTitle() + " | " +
+                            ((Event) task).getDate().format(format) + System.lineSeparator());
                 }
             }
 

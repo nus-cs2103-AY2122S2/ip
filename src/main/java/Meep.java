@@ -47,7 +47,7 @@ public class Meep {
         }
 
         try {
-            storage.saveTasktoFile(taskList.getList());
+            storage.saveTaskToFile(taskList.getList());
         } catch (FileNotFoundException e) {
             ui.print(e.getMessage());
         }

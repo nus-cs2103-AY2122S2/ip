@@ -1,6 +1,7 @@
 package task;
 
 import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -113,11 +114,13 @@ public class ListTask {
         for (Task task : tasks) {
             if (task instanceof Deadline) {
                 if (((Deadline) task).getDate().isBefore(date)) {
-                    System.out.println("     " + i + ".  " + task.toString());
+                    System.out.println("     " + i + ".  " +
+                            task.toString());
                 }
             } else if (task instanceof Event) {
                 if (((Event) task).getDate().isBefore(date)) {
-                    System.out.println("     " + i + ".  " + task.toString());
+                    System.out.println("     " + i + ".  " +
+                            task.toString());
                 }
             }
             i++;
@@ -134,7 +137,8 @@ public class ListTask {
         stringBuilder.append(System.lineSeparator());
         int i = 1;
         for (Task task : tasks) {
-            stringBuilder.append("     " + i + ".  " + task.toString() + System.lineSeparator());
+            stringBuilder.append("     " + i + ".  " +
+                    task.toString() + System.lineSeparator());
             i++;
         }
         return stringBuilder.toString();
@@ -153,11 +157,13 @@ public class ListTask {
         for (Task task : tasks) {
             if (task instanceof Deadline) {
                 if (((Deadline) task).getDate().isBefore(date)) {
-                    stringBuilder.append("     " + i + ".  " + task.toString() + System.lineSeparator());
+                    stringBuilder.append("     " + i + ".  " +
+                            task.toString() + System.lineSeparator());
                 }
             } else if (task instanceof Event) {
                 if (((Event) task).getDate().isBefore(date)) {
-                    stringBuilder.append("     " + i + ".  " + task.toString() + System.lineSeparator());
+                    stringBuilder.append("     " + i + ".  " +
+                            task.toString() + System.lineSeparator());
                 }
             }
             i++;

@@ -32,7 +32,8 @@ public class DeleteCommand extends Command {
     public String execute(ListTask tasks) {
         Task task = tasks.get(index);
         tasks.deleteTask(index);
-        return MESSAGE_DELETE + task.toString() + "\nNow you have " + tasks.size() + " tasks in the list.";
+        return MESSAGE_DELETE + task.toString() +
+                "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 
     /**

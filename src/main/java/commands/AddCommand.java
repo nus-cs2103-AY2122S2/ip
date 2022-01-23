@@ -3,7 +3,6 @@ package commands;
 import task.ListTask;
 import task.Task;
 
-
 /**
  * Adds a task to task list.
  */
@@ -35,7 +34,9 @@ public class AddCommand extends Command {
     public String execute(ListTask tasks) {
         tasks.addTask(task);
 
-        return MESSAGE_ADD + task.toString() + "\nNow you have " + tasks.size() + " tasks in the list.";
+        return MESSAGE_ADD +
+                task.toString() +
+                "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 
     /**
