@@ -1,21 +1,32 @@
 public class Event extends Task {
 
     protected String at;
-    private static boolean tipShown = false;
 
     public Event(String description) {
         super(description);
-        if (!tipShown) {
-            System.out.println("Tip: You can specify event location");
-            System.out.println("eg. event party /at My House\n");
-            tipShown = true;
-        }
     }
 
     public Event(String description, String at) {
         super(description);
         this.at = at;
-        tipShown = true;
+    }
+
+    public Event(String description, boolean isDone) {
+        super(description, isDone);
+    }
+
+    public Event(String description, String at, boolean isDone) {
+        super(description, isDone);
+        this.at = at;
+    }
+
+    public String getTaskData() {
+        String isDone = this.getStatusIcon() == "X" ? "1" : "0";
+        if (at != null) {
+            return "T " + isDone + " " + this.description + "/at " + this.at + "\n";
+        } else {
+            return "T " + isDone + " " + this.description + "\n";
+        }
     }
 
     @Override

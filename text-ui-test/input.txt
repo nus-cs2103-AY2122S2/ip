@@ -1,18 +1,16 @@
 todo eat
-todo sleep
-event party /at my house
 deadline cs2103t ip /by 20 Jan
+event party /at my house
+deadline cs2105
+event ceremony
 list
+mark 1
+unmark 1
 mark 2
-unmark 2
-mark 3
 list
-delete 2
+delete 1
 list
-dagagga
-todo
-event
-deadline
+FAKE COMMANDDDDDDDDDDD
 delete
 mark
 unmark

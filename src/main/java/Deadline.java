@@ -1,21 +1,32 @@
 public class Deadline extends Task {
 
     protected String by;
-    private static boolean tipShown = false;
 
     public Deadline(String description) {
         super(description);
-        if (!tipShown) {
-            System.out.println("Tip: You can specify due dates");
-            System.out.println("eg. deadline CS2103T /by today\n");
-            tipShown = true;
-        }
     }
 
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
-        tipShown = true;
+    }
+
+    public Deadline(String description, boolean isDone) {
+        super(description, isDone);
+    }
+
+    public Deadline(String description, String by, boolean isDone) {
+        super(description, isDone);
+        this.by = by;
+    }
+
+    public String getTaskData() {
+        String isDone = this.getStatusIcon() == "X" ? "1" : "0";
+        if (by != null) {
+            return "T " + isDone + " " + this.description + "/by " + this.by + "\n";
+        } else {
+            return "T " + isDone + " " + this.description + "\n";
+        }
     }
 
     @Override
