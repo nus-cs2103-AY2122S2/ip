@@ -23,40 +23,40 @@ public class Duke {
 
                 // main
                 switch (c) {
-                    case BYE:
-                        output += "don't leave me don't leave me.";
-                        break;
-                    case LIST:
-                        output += "Here are the tasks in your list-\n" + notebook;
-                        break;
-                    case MARK:
-                        output += "I have marked this as done.\n";
-                        output += notebook.markTask(Integer.parseInt(commandLine[1])) + "\n";
-                        break;
-                    case UNMARK:
-                        output += "I have unmarked this task.\n";
-                        output += notebook.unmarkTask(Integer.parseInt(commandLine[1])) + "\n";
-                        break;
-                    case TODO:
-                        output += "Got it. I have added this task-\n";
-                        output += notebook.addToDo(commandLine[1]) + "\n";
-                        output += "Now you have " + notebook.size() + " tasks.\n";
-                        break;
-                    case DEADLINE:
-                        output += "Got it. I have added this task-\n";
-                        output += notebook.addDeadline(commandLine[1], commandLine[2]) + "\n";
-                        output += "Now you have " + notebook.size() + " tasks.\n";
-                        break;
-                    case EVENT:
-                        output += "Got it. I have added this task-\n";
-                        output += notebook.addEvent(commandLine[1], commandLine[2]) + "\n";
-                        output += "Now you have " + notebook.size() + " tasks.\n";
-                        break;
-                    case DELETE:
-                        output += "Noted. I've removed this task-\n";
-                        output += notebook.delete(Integer.parseInt(commandLine[1])) + "\n";
-                        output += "Now you have " + notebook.size() + " tasks.\n";
-                        break;
+                case BYE:
+                    output += "don't leave me don't leave me.";
+                    break;
+                case LIST:
+                    output += "Here are the tasks in your list-\n" + notebook;
+                    break;
+                case MARK:
+                    output += "I have marked this as done.\n";
+                    output += notebook.markTask(Integer.parseInt(commandLine[1])) + "\n";
+                    break;
+                case UNMARK:
+                    output += "I have unmarked this task.\n";
+                    output += notebook.unmarkTask(Integer.parseInt(commandLine[1])) + "\n";
+                    break;
+                case TODO:
+                    output += "Got it. I have added this task-\n";
+                    output += notebook.addToDo(commandLine[1]) + "\n";
+                    output += "Now you have " + notebook.size() + " tasks.\n";
+                    break;
+                case DEADLINE:
+                    output += "Got it. I have added this task-\n";
+                    output += notebook.addDeadline(commandLine[1], commandLine[2]) + "\n";
+                    output += "Now you have " + notebook.size() + " tasks.\n";
+                    break;
+                case EVENT:
+                    output += "Got it. I have added this task-\n";
+                    output += notebook.addEvent(commandLine[1], commandLine[2]) + "\n";
+                    output += "Now you have " + notebook.size() + " tasks.\n";
+                    break;
+                case DELETE:
+                    output += "Noted. I've removed this task-\n";
+                    output += notebook.delete(Integer.parseInt(commandLine[1])) + "\n";
+                    output += "Now you have " + notebook.size() + " tasks.\n";
+                    break;
                 }
                 System.out.println(output);
             } catch (DukeException e) {
@@ -135,7 +135,7 @@ public class Duke {
                 essentialInfo = commandInfo.split("/at");
             }
 
-            return new String[] {commandType, essentialInfo[0].trim(), essentialInfo[1].trim()};
+            return new String[]{commandType, essentialInfo[0].trim(), essentialInfo[1].trim()};
         }
         return commandLine;
     }

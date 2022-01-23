@@ -1,4 +1,4 @@
-public class DukeException extends Exception{
+public class DukeException extends Exception {
 
     public static class DukeInvalidCommandException extends DukeException {
         @Override

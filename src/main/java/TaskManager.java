@@ -46,7 +46,7 @@ public class TaskManager {
     public String toString() {
         String str = "";
         for (int i = 1; i <= this.tasks.size(); i++) {
-            str += i +  "." + this.tasks.get(i - 1) + "\n";
+            str += i + "." + this.tasks.get(i - 1) + "\n";
         }
         return str;
     }
