@@ -17,7 +17,7 @@ public enum TaskType {
     }
 
     public int getTypeId() {
-        return this.getTypeId();
+        return this.typeId;
     }
 
     static TaskType matchType(int typeId) {
