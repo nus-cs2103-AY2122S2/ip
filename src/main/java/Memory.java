@@ -64,6 +64,7 @@ public class Memory {
         try {
             s = new Scanner(memFile);
         } catch (FileNotFoundException e) {
+            // Shouldn't happen since memory is initialised during initialisation of Sana
             System.out.println("I can't read the memory. Let's just start afresh!");
             initialiseMem();
             return new LinkedList<>();
