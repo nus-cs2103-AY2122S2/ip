@@ -56,4 +56,24 @@ public class Printer {
         System.out.println(BLANK_LINE + "     OK, I've marked this task as not done yet: " + "\n" + "     " + markedTask
                 + "\n" + BLANK_LINE);
     }
+
+    public static void todo(String todoString, TaskList taskList) {
+        String temp = "\n" + BLANK_LINE + "     Got it. I've added this task: \n" + "       [T][ ]" + todoString
+                + "\n" + "     Now you have " + taskList.size() + " task(s) in the list.\n" + BLANK_LINE;
+        System.out.println(temp);
+    }
+
+    public static void deadline(String deadlineName, String deadlineTime, TaskList taskList) {
+        String temp = "\n" + BLANK_LINE + "     Got it. I've added this task: \n" + "       [D][ ]" + deadlineName +
+                "(by:" + deadlineTime + ")" + "\n" +
+                "     Now you have " + taskList.size() + " task(s) in the list.\n" + BLANK_LINE;
+        System.out.println(temp);
+    }
+
+    public static void event(String eventName, String eventTime, TaskList taskList) {
+        String temp = "\n" + BLANK_LINE + "     Got it. I've added this task: \n" + "       [E][ ]" + eventName +
+                "(at: " + eventTime + ")" + "\n" +
+                "     Now you have " + taskList.size() + " task(s) in the list.\n" + BLANK_LINE;
+        System.out.println(temp);
+    }
 }
