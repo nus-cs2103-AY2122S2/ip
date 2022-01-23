@@ -14,10 +14,20 @@ import java.io.FileNotFoundException;
  */
 public class Echo {
 
+    /** Storage deals with loading tasks from the file and saving tasks in the file. */
     private final Storage STORAGE;
+
+    /** TaskList containing list of tasks. */
     private TaskList tasks;
+
+    /** Ui that deals with user interactions. */
     private final Ui UI;
 
+    /**
+     * Constructor for Echo.
+     *
+     * @param filePath File path of the saved task list.
+     */
     public Echo(String filePath) {
         UI = new Ui();
         STORAGE = new Storage(filePath);
@@ -32,6 +42,9 @@ public class Echo {
         }
     }
 
+    /**
+     * Run echo.
+     */
     public void run() {
         UI.showWelcome();
         String fullCommand = UI.readCommand();
@@ -50,6 +63,11 @@ public class Echo {
         UI.sayBye();
     }
 
+    /**
+     * Main.
+     *
+     * @param args Arguments.
+     */
     public static void main(String[] args) {
         String filePath = System.getProperty("user.home") + "/git/CS2103ip/data/echo.txt";
         new Echo(filePath).run();
