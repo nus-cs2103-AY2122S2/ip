@@ -8,6 +8,14 @@ public class Duke {
         taskList = new ArrayList<>();
     }
 
+    private void printTask(Task curr) {
+        System.out.println(curr.getTaskIcon() + " [" + curr.getStatusIcon() + "] " + curr);
+    }
+
+    private void printNoOfTasks() {
+        System.out.println("Now you have " + taskList.size() + " tasks in the list");
+    }
+
     private void Run() {
         Scanner sc = new Scanner(System.in);
 
@@ -32,7 +40,8 @@ public class Duke {
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 1; i <= taskList.size(); i++) {
                     Task curr = taskList.get(i - 1);
-                    System.out.println(i + "." + "[" + curr.getStatusIcon() + "] " + curr);
+                    System.out.print(i + ".");
+                    printTask(curr);
                 }
                 System.out.println(bar);
             } else if (command.matches(".*\\bmark\\b.*")) {
@@ -44,7 +53,7 @@ public class Duke {
                 curr.markAsDone();
                 System.out.println(bar);
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println("[" + curr.getStatusIcon() + "] " + curr);
+                printTask(curr);
                 System.out.println(bar);
 
             } else if (command.matches(".*\\bunmark\\b.*")) {
@@ -56,13 +65,15 @@ public class Duke {
                 curr.markAsUndone();
                 System.out.println(bar);
                 System.out.println("OK, I've marked this task as not done yet:");
-                System.out.println("[" + curr.getStatusIcon() + "] " + curr);
+                printTask(curr);
                 System.out.println(bar);
             } else if (command.matches(".*\\btodo\\b.*")) {
                 System.out.println(bar);
-                Task curr = new Task(originalInput);
+                System.out.println("Got it. I've added this task:");
+                Task curr = new Task(originalInput.replaceAll(".*\\btodo\\.*", ""));
                 taskList.add(curr);
-                System.out.println("added: " + curr);
+                printTask(curr);
+                printNoOfTasks();
                 System.out.println(bar);
             } else {
 
