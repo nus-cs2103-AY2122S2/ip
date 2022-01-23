@@ -63,4 +63,8 @@ public class Ui {
     public void printDeletedTask(Task task) {
         System.out.printf("[MNSKY has deleted the task %s from the list.]\n", task.getName());
     }
+
+    public void printList(TaskList taskList) {
+        System.out.print(taskList.toString());
+    }
 }

@@ -15,10 +15,6 @@ public class Parser {
             throw new MnskyMissingParameterException(command, "index");
         }
 
-        if (!inputSplit[1].matches("\\d+")) {
-            throw new MnskyInvalidParameterException(command, "index");
-        }
-
         return inputSplit[1];
     }
 
@@ -94,7 +90,10 @@ public class Parser {
     }
 
     /**
-     * Adds all the tasks from the data file into the list.
+     * Parses all the tasks in the storage data.
+     * @param rawTaskList
+     * @return
+     * @throws MnskyException
      */
     public static ArrayList<ArrayList<String>> parseStorageData(ArrayList<String> rawTaskList) throws MnskyException {
         try {

@@ -25,7 +25,7 @@ public class Storage {
     /**
      * Saves the current state of the list to the data file.
      */
-    public void writeToDataFile(ArrayList<Task> list) throws MnskyException {
+    public void writeToDataFile(TaskList taskList) throws MnskyException {
         FileWriter fileWriter;
 
         // If directory for data file doesn't exist, try to create it first
@@ -38,6 +38,7 @@ public class Storage {
         try {
             fileWriter = new FileWriter(this.dataFilePath);
             BufferedWriter bufferedWriter  = new BufferedWriter(fileWriter);
+            ArrayList<Task> list = taskList.getTaskList();
 
             for (int i = 0; i < list.size(); i++) {
                 bufferedWriter.write(list.get(i).getSaveData());
