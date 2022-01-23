@@ -20,15 +20,31 @@ public class Pikachu {
         this.inputList = inputList;
     }
 
+    /**
+     * Parses input from the user. This is the main command for Pikachu.
+     * 
+     * @param str Input from user.
+     * @return Depends on the input.
+     */
     public void parseInput(String str) {
         String[] split = str.split(" ");
 
+        /**
+         * "commands"
+         * Prints list of available commands.
+         * Syntax: commands
+         */
         if (str.toLowerCase().equals("commands")) {
             UI.printCommands();
             return;
         }
 
-        if (str.toLowerCase().equals("list")) {                        //LIST
+        /**
+         * "list"
+         * Prints current list of tasks in tasklist.
+         * Syntax: list
+         */
+        if (str.toLowerCase().equals("list")) {
             //System.out.println("list command reached!");
             System.out.println("Here are the tasks in your list:");
             int count = 1;
@@ -41,7 +57,12 @@ public class Pikachu {
             return;
         }
 
-        if (split[0].toLowerCase().equals("mark")) {                  //MARK
+        /**
+         * "mark"
+         * Marks the task at the given index as done.
+         * Syntax: mark <index of task>
+         */
+        if (split[0].toLowerCase().equals("mark")) {
             int index = 0;
             try { index = Integer.parseInt(split[1]) - 1;
             } catch (Exception e) { System.out.println("Invalid input for mark!"); return; }
@@ -56,7 +77,12 @@ public class Pikachu {
             return;
         }
 
-        if (split[0].toLowerCase().equals("unmark")) {                //UNMARK
+        /**
+         * "unmark"
+         * Marks the task at the given index as not done.
+         * Syntax: unmark <index of task>
+         */
+        if (split[0].toLowerCase().equals("unmark")) {
             int index = 0;
             try { index = Integer.parseInt(split[1]) - 1;
             } catch (Exception e) { System.out.println("Invalid input for unmark!"); return; }
@@ -71,7 +97,12 @@ public class Pikachu {
             return;
         }
 
-        if (split[0].toLowerCase().equals("delete")) {                //DELETE
+        /**
+         * "delete"
+         * Deletes the task at the given index.
+         * Syntax: delete <index of task>
+         */
+        if (split[0].toLowerCase().equals("delete")) {
             int index = 0;
             try { index = Integer.parseInt(split[1]) - 1;
             } catch (Exception e) { System.out.println("Invalid input for delete!"); return; }
@@ -86,7 +117,12 @@ public class Pikachu {
             return;
         }
 
-        if (split[0].toLowerCase().equals("todo")) {                    //TODO
+        /**
+         * "todo"
+         * Creates a todo task. 
+         * Syntax: todo <taskname>
+         */
+        if (split[0].toLowerCase().equals("todo")) {
             String[] split2 = str.split(" ", 2);
             //System.out.printf("For debugging. split2[1] = %s\n", split2[1]);
             try {
@@ -102,7 +138,12 @@ public class Pikachu {
             }
         }
 
-        if (split[0].toLowerCase().equals("deadline")) {               //DEADLINE
+        /**
+         * "deadline"
+         * Creates a deadline task.
+         * Syntax: deadline <taskname> /<yyyy-mm-dd hhmm of deadline>
+         */
+        if (split[0].toLowerCase().equals("deadline")) {
             try {
             String[] split2 = str.split("/");
             String[] split3 = split2[1].split(" ");
@@ -126,7 +167,12 @@ public class Pikachu {
             }
         }
 
-        if (split[0].toLowerCase().equals("event")) {                  //EVENT
+        /**
+         * "event"
+         * Creates an event task.
+         * Syntax: event <taskname> /<yyyy-mm-dd hhmm of start> <yymmdd hhmm of end>
+         */
+        if (split[0].toLowerCase().equals("event")) {
             try {
             String[] split2 = str.split("/");
             String[] split3 = split2[1].split(" ");

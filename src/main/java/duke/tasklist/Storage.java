@@ -15,6 +15,12 @@ public class Storage {
         this.pikachu = pikachu;
     }
 
+    /**
+     * Reads the tasklist stored in Tasklist.txt, or creates one if it does not exist.
+     * Stores the read data into Pikachu's tasklist.
+     * 
+     * @throws IOException If the content in Tasklist.txt is in the wrong format.
+     */
     public void readTaskList() throws IOException {
         //Create file
         File tasklist = new File(filePath);
@@ -53,6 +59,11 @@ public class Storage {
         br.close();
     }
 
+    /**
+     * Writes the current tasklist into Tasklist.txt.
+     * 
+     * @throws IOException If there is a problem with accessing and/or writing to Tasklist.txt.
+     */
     public void writeTaskList() throws IOException {
         FileWriter fw = new FileWriter(filePath, false);
 
