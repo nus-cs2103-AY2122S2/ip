@@ -10,7 +10,10 @@ public class Task {
     private TaskType type;
 
     /**
-     * Class constructor specifying the task's description and type.
+     * Creates a task with the given data.
+     *
+     * @param description Description of the task to be created.
+     * @param type Type of the task to be created.
      */
     public Task(String description, TaskType type) {
         this.description = description;
@@ -18,6 +21,13 @@ public class Task {
         this.type = type;
     }
 
+    /**
+     * Creates a task with the given data.
+     *
+     * @param description Description of the task to be created.
+     * @param isDone Status of the task to be created.
+     * @param type Type of the task to be created.
+     */
     public Task(String description, boolean isDone, TaskType type) {
         this.description = description;
         this.isDone = isDone;
@@ -35,16 +45,23 @@ public class Task {
     /**
      * Returns status icon "X" of the task.
      * If the task is not done, " " is returned.
+     *
      * @return Status icon.
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    /**
+     * Marks a task as done.
+     */
     public void markAsDone() {
         this.isDone = true;
     }
 
+    /**
+     * Unmarks a task as done.
+     */
     public void unmarkAsDone() {
         this.isDone = false;
     }
@@ -53,6 +70,11 @@ public class Task {
         return type;
     }
 
+    /**
+     * Returns a prefix denoting the task type.
+     *
+     * @return Prefix of the task type.
+     */
     public String getTypeAsPrefix() {
         switch(type) {
         case DEADLINE:

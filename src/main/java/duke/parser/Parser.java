@@ -9,8 +9,17 @@ import duke.task.Todo;
 
 import java.time.LocalDate;
 
-// deals with making sense of the user command
+/**
+ * Parser class that deals with making sense of the user input.
+ */
 public class Parser {
+    /**
+     * Parses the input string and returns a matching Command object that executes the command.
+     *
+     * @param input String representing user input.
+     * @return Command object.
+     * @throws DukeException if the input is not a valid command.
+     */
     public static Command parseCommand(String input) throws DukeException {
         if (input.isBlank()) {
             throw new DukeException(ErrorMessage.MESSAGE_INVALID_INPUT);
@@ -65,6 +74,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the date string and returns a LocalDate object.
+     *
+     * @param date Date string to be parsed.
+     * @return LocalDate object.
+     * @throws DukeException if the date is invalid.
+     */
     public static LocalDate parseDate(String date) throws DukeException {
         String[] splitDate = date.trim().split("-"); // yyyy-mm-dd
         if (splitDate.length != 3) {

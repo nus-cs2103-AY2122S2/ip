@@ -4,21 +4,29 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Deadline class represents tasks that need to be done
- * before a specific date/time.
+ * Deadline class represents tasks that need to be done before a specific date/time.
  */
 public class Deadline extends Task {
     private LocalDate by;
 
     /**
-     * Class constructor specifying the task's description
-     * and deadline.
+     * Creates a deadline task with the given data.
+     *
+     * @param description Description of the task to be created.
+     * @param by Deadline of the task to be created.
      */
     public Deadline(String description, LocalDate by) {
         super(description, TaskType.DEADLINE);
         this.by = by;
     }
 
+    /**
+     * Creates a deadline task with the given data.
+     *
+     * @param description Description of the task to be created.
+     * @param isDone Status of the task to be created.
+     * @param by Deadline of the task to be created.
+     */
     public Deadline(String description, boolean isDone, LocalDate by) {
         super(description, isDone, TaskType.DEADLINE);
         this.by = by;
@@ -29,7 +37,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns type and description of the task.
+     * Returns type, description and deadline of the task.
      */
     @Override
     public String toString() {
