@@ -1,3 +1,5 @@
+package Taskmaster.util;
+import Taskmaster.Task.Task;
 import java.util.ArrayList;
 
 //Author: Tan Ting Yu
@@ -105,7 +107,7 @@ public class TaskList {
     public void find(String strToFind) {
         int count = 1;
         for (Task task:tasklist) {
-            if (task.taskName.contains(strToFind)) {
+            if (task.containsKeyword(strToFind)) {
                 System.out.println(count + ". " + task);
                 count++;
             }

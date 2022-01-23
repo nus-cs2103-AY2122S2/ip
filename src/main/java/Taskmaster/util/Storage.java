@@ -1,3 +1,6 @@
+package Taskmaster.util;
+import Taskmaster.Task.Task;
+
 import java.io.IOException;
 import java.io.File;
 import java.util.Scanner;

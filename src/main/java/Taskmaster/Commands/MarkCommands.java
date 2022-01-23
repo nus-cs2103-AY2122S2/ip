@@ -1,6 +1,13 @@
+package Taskmaster.Commands;
+import Taskmaster.Exception.DukeExceptions;
+import Taskmaster.util.TaskList;
+import Taskmaster.Task.Task;
+
+
+
 public class MarkCommands extends Commands {
     private TaskList tasklist;
-    protected MarkCommands(String command, TaskList tasklist) {
+    public MarkCommands(String command, TaskList tasklist) {
         super(command);
         this.tasklist = tasklist;
     }

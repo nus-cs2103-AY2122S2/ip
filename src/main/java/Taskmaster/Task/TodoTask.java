@@ -1,5 +1,4 @@
-//Author: Tan Ting Yu
-//Student Number: A218235J
+package Taskmaster.Task;
 
 
 
@@ -15,7 +14,7 @@ public class TodoTask extends Task {
      *
      * @param taskname - Name/Description of a TodoTask Object
      */
-    TodoTask(String taskname) {
+    public TodoTask(String taskname) {
         super(taskname);
     }
 

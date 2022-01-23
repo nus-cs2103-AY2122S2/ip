@@ -1,5 +1,4 @@
-//Author: Tan Ting Yu
-//Student Number: A218235J
+import Taskmaster.UserInterface.UserInterface;
 
 public class Taskmaster {
     //Taskmaster logo 

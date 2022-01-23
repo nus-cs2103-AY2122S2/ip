@@ -1,5 +1,4 @@
-//Author: Tan Ting Yu
-//Student Number: A218235J
+package Taskmaster.Exception;
 
 /*
  * DukeExceptions encapsulates exceptions in the Duke Program
