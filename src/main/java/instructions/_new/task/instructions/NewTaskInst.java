@@ -16,19 +16,19 @@ import instructions.Instruction;
 public abstract class NewTaskInst extends Instruction {
     /** Reusable Invalid Input Exception for when there is no provided task
      * number */
-    protected static InvalidInputException MISSING_TASK_DETAILS_EXCEPTION
+    protected static final InvalidInputException MISSING_TASK_DETAILS_EXCEPTION
             = new InvalidInputException("There are missing task details!");
 
     /** Reusable Invalid Input Exception for when too many arguments are
      * specified. Happens with multiple " /at "s or " /by "s in the input.
      * Mainly used by subclasses.*/
-    protected static InvalidInputException TOO_MANY_ARGUMENTS_EXCEPTION
+    protected static final InvalidInputException TOO_MANY_ARGUMENTS_EXCEPTION
             = new InvalidInputException("Too many arguments are supplied. "
             + "Check your input format.");
 
     /** Reusable Invalid Input Exception for when the input command has missing
      * spaces */
-    protected static InvalidInputException MISSING_SPACES_EXCEPTION
+    protected static final InvalidInputException MISSING_SPACES_EXCEPTION
             = new InvalidInputException("There are missing spaces in the command!");
 
     /** The provided description for the task to be added */

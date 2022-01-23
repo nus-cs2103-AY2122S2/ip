@@ -1,12 +1,13 @@
 package exceptions;
 
 /**
- * This class encapsulates a "No Such tasks.Task" exception, that occurs when trying to
- * access a task that is not in a tasks.TaskList.
+ * This class encapsulates a "No Such tasks.Task" exception, that occurs when
+ * trying to access a task that is not in a taskList.
  */
 public class NoSuchTaskException extends Exception {
     /**
-     * Constructor.
+     * Constructs a No Such Task Exception.
+     *
      * @param message the message to be included in the exception.
      */
     public NoSuchTaskException(String message) {
