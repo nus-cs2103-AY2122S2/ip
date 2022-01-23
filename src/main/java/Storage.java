@@ -40,11 +40,11 @@ public class Storage {
             }
             ui.showLoadingSuccess(taskList);
         } catch (IOException e) {
-            ui.showLoadingError();
+            ui.showLoadingError(e.getMessage());
         }
     }
 
-    public void saveData(TaskList taskList) {
+    public void saveData(TaskList taskList, Ui ui) {
         StringBuilder tasksToSave = new StringBuilder();
         for (int i = 1; i < taskList.getLength()+1; i++) {
             Task currTask = taskList.getTask(i);
@@ -65,7 +65,7 @@ public class Storage {
             writer.write(tasksToSave.toString());
             writer.close();
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            ui.showSavingError(e.getMessage());
         }
     }
 }
