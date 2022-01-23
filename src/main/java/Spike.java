@@ -2,9 +2,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -33,7 +33,15 @@ public class Spike {
         public static void processCommand(Command c, String command, String[] commandWords) {
             switch (c) {
             case LIST:
-                printList();
+                try {
+                    if (commandWords.length >= 2) {
+                        printListByDate(command);
+                    } else {
+                        printList();
+                    }
+                } catch (SpikeException d) {
+                    printMsg(d.toString());
+                }
                 break;
             case MARK:
                 try {
@@ -97,15 +105,16 @@ public class Spike {
                     String currLine = fileRead.nextLine();
                     String[] info = currLine.split(" \\| ");
                     Task task = null;
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
                     switch (info[0]) {
                     case "T":
                         task = new ToDo(info[2]);
                         break;
                     case "E":
-                        task = new Event(info[2], info[3]);
+                        task = new Event(info[2], LocalDateTime.parse(info[3], dtf));
                         break;
                     case "D":
-                        task = new Deadline(info[2], info[3]);
+                        task = new Deadline(info[2], LocalDateTime.parse(info[3], dtf));
                         break;
                     default:
                         break;
@@ -189,6 +198,7 @@ public class Spike {
      * Adds task into the list and prints.
      */
     public static void addTask(Command c, String command, String[] commandWords) throws SpikeException {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         switch (c) {
         case TODO:
             if (command.length() <= 5) {
@@ -204,23 +214,42 @@ public class Spike {
                     || commandWords[1].equals("/by") || command.indexOf("/by") + 3 == command.length()) {
                 throw new SpikeException("Deadline or task description missing.");
             }
-            Deadline newD = new Deadline(command.substring(command.indexOf("deadline") + 9,
-                    command.indexOf("/by") - 1), command.substring(command.indexOf("/by") + 4));
-            taskList.add(newD);
-            printAddedTask(newD);
+            LocalDateTime deadlineT = parseDateTime(command.substring(command.indexOf("/by") + 4), dtf);
+            if (!(deadlineT == null)) {
+                Deadline newD = new Deadline(command.substring(command.indexOf("deadline") + 9,
+                        command.indexOf("/by") - 1), deadlineT);
+                taskList.add(newD);
+                printAddedTask(newD);
+            }
             break;
         case EVENT:
             if (commandWords.length <= 2 || command.indexOf("/at") == -1
                     || commandWords[1].equals("/at") || command.indexOf("/at") + 3 == command.length()) {
                 throw new SpikeException("Event time or event description missing.");
             }
-            Event newE = new Event(command.substring(command.indexOf("event") + 6,
-                    command.indexOf("/at") - 1), command.substring(command.indexOf("/at") + 4));
-            taskList.add(newE);
-            printAddedTask(newE);
+            LocalDateTime eventT = parseDateTime(command.substring(command.indexOf("/at") + 4), dtf);
+            if (!(eventT == null)) {
+                Event newE = new Event(command.substring(command.indexOf("event") + 6,
+                        command.indexOf("/at") - 1), eventT);
+                taskList.add(newE);
+                printAddedTask(newE);
+            }
             break;
         default:
             break;
+        }
+    }
+
+    /**
+     * Parses date and time input by user and returns valid LocalDateTime object
+     */
+    public static LocalDateTime parseDateTime(String s, DateTimeFormatter dtf) {
+        try {
+            LocalDateTime dateTime = LocalDateTime.parse(s, dtf);
+            return dateTime;
+        } catch (DateTimeParseException e) {
+            printMsg("Please enter a valid date in the format yyyy-MM-dd HHmm");
+            return null;
         }
     }
 
@@ -307,10 +336,32 @@ public class Spike {
         int i = 1;
         String result = "Here are the task(s) in your list:\n";
         for (Task task : taskList) {
-            if (i == taskList.size()) {
+            result += i + "." + task;
+            if (i != taskList.size()) {
+                result += "\n";
+            }
+            i++;
+        }
+        printMsg(result);
+    }
+
+    /**
+     * Prints deadlines/events occurring on the given date.
+     */
+    public static void printListByDate(String command) throws SpikeException {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        LocalDateTime ldt = parseDateTime(command.substring(5), dtf);
+        if (ldt == null) {
+            throw new SpikeException("Kindly enter the date in the format yyyy-MM-dd 0000 to filter by date");
+        }
+        int i = 1;
+        String result = "Here are the task(s) in your list filtered by date:\n";
+        for (Task task : taskList) {
+            if (task.getDateTime().toLocalDate().equals(ldt.toLocalDate())) {
                 result = result + i + "." + task;
-            } else {
-                result = result + i + "." + task + "\n";
+                if (i != taskList.size()) {
+                    result += "\n";
+                }
             }
             i++;
         }
