@@ -79,22 +79,31 @@ public class Tasklist {
     }
 
     /**
+     * Writes the tasks in a list format.
+     *
+     * @return A string representing all the details of the tasks.
+     */
+    public static String taskFormatter(LinkedList<Task> list) {
+        StringBuilder allTasks = new StringBuilder("Fetching all records...\n");
+        if (list.size() == 0) {
+            return allTasks.append("No entries found, start by adding one!\n").toString();
+        }
+        for (int i = 0; i < list.size(); i++) {
+            allTasks.append(i + 1)
+                    .append(". ")
+                    .append(list.get(i).toString())
+                    .append("\n");
+        }
+        return allTasks.toString();
+    }
+
+    /**
      * Writes the tasks in a readable form.
      *
      * @return A string representing all the details of the tasks.
      */
     @Override
     public String toString() {
-        StringBuilder allTasks = new StringBuilder("Fetching all records...\n");
-        if (this.tasks.size() == 0) {
-            return allTasks.append("No entries found, start by adding one!\n").toString();
-        }
-        for (int i = 0; i < this.tasks.size(); i++) {
-            allTasks.append(i + 1)
-                    .append(". ")
-                    .append(this.tasks.get(i).toString())
-                    .append("\n");
-        }
-        return allTasks.toString();
+        return Tasklist.taskFormatter(this.tasks);
     }
 }

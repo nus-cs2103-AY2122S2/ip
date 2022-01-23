@@ -114,4 +114,18 @@ public class DukeException extends Exception {
         }
         return index;
     }
+
+    /**
+     * Function to test if the word provided is valid.
+     *
+     * @param input The string that the user has entered following the command.
+     * @return The word to be used.
+     * @throws DukeException If any of the params do not satisfy conditions for processing.
+     */
+    public static String wordValidity(String input) throws DukeException {
+        if (input.length() < 6) {
+            throw new DukeException("Please type in a word to search through the tasks.\n");
+        }
+        return input.substring(5);
+    }
 }
