@@ -1,4 +1,2 @@
-T:0:smth
-E:1:do smth:21st jan
-D:1:this ip:tmr
-T:0:smth
+E:0:smth:2020-02-03
+D:0:return book:2022-03-04
