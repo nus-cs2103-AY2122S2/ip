@@ -44,26 +44,26 @@ public class DukeManager {
                 return;
             case "mark":
                 mark(tokens);
-                return;
+                break;
             case "unmark":
                 unMark(tokens);
-                return;
+                break;
             case "delete":
                 delete(tokens);
-                return;
+                break;
             case "todo":
                 store(ToDo.createTask(tokens));
-                return;
+                break;
             case "deadline":
                 store(Deadline.createTask(tokens));
-                return;
+                break;
             case "event":
                 store(Event.createTask(tokens));
-                return;
+                break;
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
-
         }
+        storage.save(tasks);
     }
 
     protected void delete(String[] tokens) throws DukeException {
@@ -143,6 +143,5 @@ public class DukeManager {
         System.out.println("    ____________________________________________________________\n" +
                 "     Bye. Hope to see you again soon!\n" +
                 "    ____________________________________________________________");
-        storage.save(tasks);
     }
 }
