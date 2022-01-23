@@ -34,9 +34,8 @@ What can I do for you?
     _________________________
 
     _________________________
-    The following new task has been added:
-    [D][ ] first deadline (by: second time)
-    You now have 4 tasks!
+    Sorry, the following problem has occurred:
+    Invalid date format: Dates should be in DD/MM/YYYY
     _________________________
 
     _________________________
@@ -48,7 +47,29 @@ What can I do for you?
     1.[T][X] first todo
     2.[T][X] second todo
     3.[E][ ] first event (at: first time)
-    4.[D][ ] first deadline (by: second time)
+    _________________________
+
+    _________________________
+    Noted. The following task has been deleted:
+    [T][X] second todo
+    You now have 2 tasks!
+    _________________________
+
+    _________________________
+    1.[T][X] first todo
+    2.[E][ ] first event (at: first time)
+    _________________________
+
+    _________________________
+    The following new task has been added:
+    [D][ ] first deadline (by: 01 Jan)
+    You now have 3 tasks!
+    _________________________
+
+    _________________________
+    1.[T][X] first todo
+    2.[E][ ] first event (at: first time)
+    3.[D][ ] first deadline (by: 01 Jan)
     _________________________
 
     _________________________
@@ -58,9 +79,8 @@ What can I do for you?
 
     _________________________
     1.[T][ ] first todo
-    2.[T][X] second todo
-    3.[E][ ] first event (at: first time)
-    4.[D][ ] first deadline (by: second time)
+    2.[E][ ] first event (at: first time)
+    3.[D][ ] first deadline (by: 01 Jan)
     _________________________
 
     _________________________
