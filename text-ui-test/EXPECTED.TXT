@@ -17,6 +17,8 @@ Sorry, this is not a recognized command.
 
 Please key in a valid task name.
 
+Sorry, avoid using '|' as it is a special character.
+
 Todo Added: [T][ ] borrow book
 There are now 1 tasks in the list.
 

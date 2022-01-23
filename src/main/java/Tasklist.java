@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.LinkedList;
 
 public class Tasklist {
@@ -8,12 +9,49 @@ public class Tasklist {
         this.tasks = new LinkedList<Task>();
     }
 
-    public void addTask(Task t) {
-        this.tasks.add(t);
+    public void setTaskList(String input) {
+        String[] tasks = input.split("\\r?\\n");
+        for (int i = 0; i < tasks.length; i++) {
+            String[] taskInfo = tasks[i].split("\\|");
+            boolean completed = taskInfo[1].equals("1");
+            switch (taskInfo[0]) {
+                case "T":
+                    this.addTask(new Todo(completed, taskInfo[2]));
+                    break;
+                case "D":
+                    this.addTask(new Deadline(completed, taskInfo[2], taskInfo[3]));
+                    break;
+                case "E":
+                    this.addTask(new Event(completed, taskInfo[2], taskInfo[3]));
+            }
+        }
     }
 
-    public Task getTask(int index) {
-        return this.tasks.get(index);
+    public void writeTaskList(String path) throws IOException {
+        StringBuilder writeTasks = new StringBuilder();
+        for (int i = 0; i < this.tasks.size(); i++) {
+            String digit;
+            Task t = this.tasks.get(i);
+            if (t.isCompleted()) {
+                digit = "1|";
+            } else {
+                digit = "0|";
+            }
+            if (t instanceof Todo) {
+                writeTasks.append("T|").append(digit).append(t.getTaskName()).append("\n");
+            } else if (t instanceof Event) {
+                writeTasks.append("E|").append(digit).append(t.getTaskName()).append("|")
+                        .append(((Event) t).getTime()).append("\n");
+            } else {
+                writeTasks.append("D|").append(digit).append(t.getTaskName()).append("|")
+                        .append(((Deadline) t).getDeadline()).append("\n");
+            }
+        }
+        FileCreator.writeToFile(path, writeTasks.toString());
+    }
+
+    public void addTask(Task t) {
+        this.tasks.add(t);
     }
 
     public int getTotalTasks() {
@@ -38,16 +76,16 @@ public class Tasklist {
 
     @Override
     public String toString() {
-        StringBuilder allTodos = new StringBuilder();
+        StringBuilder allTasks = new StringBuilder("Fetching all records...\n");
+        if (this.tasks.size() == 0) {
+            return allTasks.append("No entries found, start by adding one!\n").toString();
+        }
         for (int i = 0; i < this.tasks.size(); i++) {
-            allTodos.append(i + 1)
+            allTasks.append(i + 1)
                     .append(". ")
                     .append(this.tasks.get(i).toString())
                     .append("\n");
         }
-        if (allTodos.length() == 0) {
-            return "No entries found, start by adding one!\n";
-        }
-        return allTodos.toString();
+        return allTasks.toString();
     }
 }
