@@ -5,7 +5,7 @@ package echo.task;
  */
 public class Task {
     /** Description of task. */
-    private final String DESCRIPTION;
+    protected final String DESCRIPTION;
 
     /** Status of task. */
     private boolean isDone;

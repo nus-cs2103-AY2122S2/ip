@@ -95,6 +95,12 @@ public class Parser {
                     // Second input provided by user is not an int.
                     throw new EchoException("Second input must be an integer. Eg. mark 1, unmark 1, delete 1");
                 }
+            case FindCommand.COMMAND:
+                if (splitSpace.length == 1) {
+                    // If second input (description) is not specified
+                    throw new EchoException("Please specify the description to find!");
+                }
+                return prepareFind(input.substring(command.length() + 1).trim());
             default:
                 return prepareHelpCommand();
             }
@@ -196,6 +202,10 @@ public class Parser {
      */
     private static Command prepareDelete(int i) {
         return new DeleteCommand(i);
+    }
+
+    private static Command prepareFind(String desc) {
+        return new FindCommand(desc);
     }
 
     /**
