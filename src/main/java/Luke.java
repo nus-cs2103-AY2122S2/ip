@@ -52,43 +52,43 @@ public class Luke {
             try {
                 cmd = Command.parseCommand(sc.nextLine());
                 switch (cmd.getCommandAction().getCommandActionType()) {
-                    case READ:
-                        printTaskList();
+                case READ:
+                    printTaskList();
+                    break;
+                case ADD:
+                    Task task;
+                    switch (cmd.getCommandAction()) {
+                    case DEADLINE:
+                        task = new Deadline(cmd.getArguments());
                         break;
-                    case ADD:
-                        Task task;
-                        switch (cmd.getCommandAction()) {
-                            case DEADLINE:
-                                task = new Deadline(cmd.getArguments());
-                                break;
-                            case EVENT:
-                                task = new Event(cmd.getArguments());
-                                break;
-                            default:
-                                task = new ToDo(cmd.getArguments());
-                                break;
-                        }
-                        taskList.add(task);
-                        printOutput(String.format("I have added the following task into list: \n\t%s\nnow you have %d tasks in the list.", task, taskList.size()));
-                        break;
-                    case UPDATE:
-                        int index = Integer.parseInt(cmd.getArgumentByKey("index")) - 1;
-                        switch (cmd.getCommandAction()) {
-                            case MARK:
-                                taskList.get(index).markAsDone();
-                                printOutput("Using the force... Great! I have forced this task as done.");
-                                break;
-                            case UNMARK:
-                                taskList.get(index).unmarkAsDone();
-                                printOutput("Force should be used for greater good!\nI've forced this task as not done yet...");
-                                break;
-                            case DELETE:
-                                Task removedTask = taskList.remove(index);
-                                printOutput(String.format("Forcing it out... Success! I've removed the following task:\n\t%s", removedTask));
-                        }
+                    case EVENT:
+                        task = new Event(cmd.getArguments());
                         break;
                     default:
+                        task = new ToDo(cmd.getArguments());
                         break;
+                    }
+                    taskList.add(task);
+                    printOutput(String.format("I have added the following task into list: \n\t%s\nnow you have %d tasks in the list.", task, taskList.size()));
+                    break;
+                case UPDATE:
+                    int index = Integer.parseInt(cmd.getArgumentByKey("index")) - 1;
+                    switch (cmd.getCommandAction()) {
+                    case MARK:
+                        taskList.get(index).markAsDone();
+                        printOutput("Using the force... Great! I have forced this task as done.");
+                        break;
+                    case UNMARK:
+                        taskList.get(index).unmarkAsDone();
+                        printOutput("Force should be used for greater good!\nI've forced this task as not done yet...");
+                        break;
+                    case DELETE:
+                        Task removedTask = taskList.remove(index);
+                        printOutput(String.format("Forcing it out... Success! I've removed the following task:\n\t%s", removedTask));
+                    }
+                    break;
+                default:
+                    break;
                 }
             } catch (UnknownCommandException e) {
                 printOutput("Oops, the force does not support this action.\nPlease try again :(");

@@ -49,37 +49,37 @@ public class Command {
         if (!cmdAction.getArgumentKeys().isBlank()) {
 
             switch (cmdAction.getCommandActionType()) {
-                case ADD:
-                    if (args.length < 2) {
-                        throw new IllegalArgumentException(String.format("The description of %s cannot be empty.", args[0]));
+            case ADD:
+                if (args.length < 2) {
+                    throw new IllegalArgumentException(String.format("The description of %s cannot be empty.", args[0]));
+                }
+                String[] inputs = args[1].split("/", 2);
+                if (inputs[0].isBlank()) {
+                    throw new IllegalArgumentException(String.format("The description of %s cannot be empty.", args[0]));
+                }
+                argsMap.put("description", inputs[0]);
+                if (cmdAction != CommandAction.TODO) {
+                    String extraArg = cmdAction.getArgumentKeys().split(",", 2)[1];
+                    if (inputs.length < 2) {
+                        throw new IllegalArgumentException(String.format("%s require the %s argument.", args[0], extraArg));
                     }
-                    String[] inputs = args[1].split("/", 2);
-                    if(inputs[0].isBlank()) {
-                        throw new IllegalArgumentException(String.format("The description of %s cannot be empty.", args[0]));
+                    inputs = inputs[1].split(" ", 2);
+                    if (inputs[0].equalsIgnoreCase(extraArg)) {
+                        argsMap.put(extraArg, inputs[1]);
+                    } else {
+                        throw new IllegalArgumentException(String.format("%s require the %s argument.", args[0], extraArg));
                     }
-                    argsMap.put("description", inputs[0]);
-                    if (cmdAction != CommandAction.TODO) {
-                        String extraArg = cmdAction.getArgumentKeys().split(",",2)[1];
-                        if (inputs.length < 2) {
-                            throw new IllegalArgumentException(String.format("%s require the %s argument.", args[0], extraArg));
-                        }
-                        inputs = inputs[1].split(" ", 2);
-                        if (inputs[0].equalsIgnoreCase(extraArg)) {
-                            argsMap.put(extraArg, inputs[1]);
-                        } else {
-                            throw new IllegalArgumentException(String.format("%s require the %s argument.", args[0], extraArg));
-                        }
-                    }
-                    break;
-                case UPDATE:
-                    if (args.length < 2) {
-                        throw new IllegalArgumentException(String.format("The index of %s cannot be empty.", args[0]));
-                    }
-                    Integer.parseInt(args[1]);
-                    argsMap.put("index", args[1]);
-                    break;
-                default:
-                    break;
+                }
+                break;
+            case UPDATE:
+                if (args.length < 2) {
+                    throw new IllegalArgumentException(String.format("The index of %s cannot be empty.", args[0]));
+                }
+                Integer.parseInt(args[1]);
+                argsMap.put("index", args[1]);
+                break;
+            default:
+                break;
             }
         }
         return argsMap;

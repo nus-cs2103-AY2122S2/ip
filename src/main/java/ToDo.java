@@ -5,9 +5,10 @@ public class ToDo extends Task {
         super(description);
     }
 
-    public ToDo(Map<String,String> args) {
+    public ToDo(Map<String, String> args) {
         this(args.get("description"));
     }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();

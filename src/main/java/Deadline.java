@@ -9,7 +9,7 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    public Deadline(Map<String,String> args) {
+    public Deadline(Map<String, String> args) {
         this(args.get("description"), args.get("by"));
     }
 
