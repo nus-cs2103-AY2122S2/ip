@@ -21,6 +21,15 @@ public class Event extends Task {
     }
 
     /**
+     * Outputs the start and end date/times.
+     *
+     * @return string with at date/times.
+     */
+    public String getAt() {
+        return this.at;
+    }
+
+    /**
      * Outputs the string to represent Event with
      * description and at dates/times.
      *

@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,7 +12,7 @@ public class Duke {
     /**
      * Logo of the Chatbot.
      */
-    public static final String logo = "888      888     888  .d8888b.         d8888 \n"
+    public static final String LOGO = "888      888     888  .d8888b.         d8888 \n"
             + "888      888     888 d88P  Y88b       d88888 \n"
             + "888      888     888 888    888      d88P888 \n"
             + "888      888     888 888            d88P 888 \n"
@@ -23,13 +24,18 @@ public class Duke {
     /**
      * The divder line used to wrap string before output.
      */
-    private static final String dividerLine = "___________________"
+    private static final String DIVIDER_LINE = "___________________"
             + "_________________________________________\n";
+
+    /**
+     * File used to store tasks.
+     */
+    private static final File TASK_FILE = new File("..\\..\\..\\data\\duke.txt");
 
     /**
      * List to store items. There will be no more than 100 items.
      */
-    private static ArrayList<Task> list = new ArrayList<>();
+    private static final ArrayList<Task> TASK_LIST = new ArrayList<>();
 
 
     /**
@@ -42,10 +48,10 @@ public class Duke {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Here are the tasks in your list:\n");
         Task task;
-        for (int i = 0; i < list.size(); i++) {
-            task = list.get(i);
+        for (int i = 0; i < TASK_LIST.size(); i++) {
+            task = TASK_LIST.get(i);
             stringBuilder.append((i + 1) + "." + task.toString());
-            if (i != list.size() - 1) {
+            if (i != TASK_LIST.size() - 1) {
                 stringBuilder.append("\n");
             }
         }
@@ -60,7 +66,7 @@ public class Duke {
      * @return indented string with divider lines.
      */
     private static String formatString(String input) {
-        String temp = dividerLine + input + "\n" + dividerLine;
+        String temp = DIVIDER_LINE + input + "\n" + DIVIDER_LINE;
         String indented = temp.replaceAll("(?m)^", "    ");
         return indented;
     }
@@ -73,7 +79,7 @@ public class Duke {
      * @see Task
      */
     private static String markTask(int point) {
-        Task task = list.get(point - 1);
+        Task task = TASK_LIST.get(point - 1);
         task.markAsDone();
         return Duke.formatString("Great! I have marked this task as done:\n "
                 + task.toString());
@@ -87,7 +93,7 @@ public class Duke {
      * @see Task
      */
     private static String unmarkTask(int point) {
-        Task task = list.get(point - 1);
+        Task task = TASK_LIST.get(point - 1);
         task.unmarkAsDone();
         return Duke.formatString("OK, I've marked this task as not done yet:\n "
                 + task.toString());
@@ -108,10 +114,10 @@ public class Duke {
             }
         }
         ToDo task = new ToDo(stringBuilder.toString());
-        list.add(task);
+        TASK_LIST.add(task);
         return Duke.formatString("Got it! I've added this ToDo task:\n "
-                + task.toString() + "\nNow you have " + list.size()
-                + (list.size() == 1 ? " task" : " tasks") + " in the list.");
+                + task.toString() + "\nNow you have " + TASK_LIST.size()
+                + (TASK_LIST.size() == 1 ? " task" : " tasks") + " in the list.");
     }
 
 
@@ -144,10 +150,10 @@ public class Duke {
         }
         by = stringBuilder.toString();
         Deadline task = new Deadline(description, by);
-        list.add(task);
+        TASK_LIST.add(task);
         return Duke.formatString("Got it! I've added this Deadline task:\n "
-                + task.toString() + "\nNow you have " + list.size()
-                + (list.size() == 1 ? " task" : " tasks") + " in the list.");
+                + task.toString() + "\nNow you have " + TASK_LIST.size()
+                + (TASK_LIST.size() == 1 ? " task" : " tasks") + " in the list.");
     }
 
     /**
@@ -182,10 +188,10 @@ public class Duke {
         }
         at = stringBuilder.toString();
         Event task = new Event(description, at);
-        list.add(task);
+        TASK_LIST.add(task);
         return Duke.formatString("Got it! I've added this Event task:\n "
-                + task.toString() + "\nNow you have " + list.size()
-                + (list.size() == 1 ? " task" : " tasks") + " in the list.");
+                + task.toString() + "\nNow you have " + TASK_LIST.size()
+                + (TASK_LIST.size() == 1 ? " task" : " tasks") + " in the list.");
     }
 
     /**
@@ -195,11 +201,11 @@ public class Duke {
      * @return formatted string stating task is deleted.
      */
     private static String deleteTask(int point) {
-        Task task = list.get(point - 1);
-        list.remove(point - 1);
+        Task task = TASK_LIST.get(point - 1);
+        TASK_LIST.remove(point - 1);
         return Duke.formatString("Noted. I've removed this task:\n "
-                + task.toString() + "\nNow you have " + list.size()
-                + (list.size() == 1 ? " task" : " tasks") + " in the list.");
+                + task.toString() + "\nNow you have " + TASK_LIST.size()
+                + (TASK_LIST.size() == 1 ? " task" : " tasks") + " in the list.");
     }
 
 
@@ -211,15 +217,25 @@ public class Duke {
      */
     public static void main(String[] args) {
 
+        FileHandler fileHandler = new FileHandler(TASK_LIST);
+
         String startPrompt = "Hi! I'm Luca\n"
                 + "How may I help you?\n";
 
-        System.out.println(Duke.formatString("\n" + logo + "\n"
+        System.out.println(Duke.formatString("\n" + LOGO + "\n"
                 + startPrompt));
+
+        try {
+            fileHandler.readFromFile();
+        } catch (DukeException exception) {
+            System.out.println(Duke.formatString(exception.getMessage()));
+        }
+
 
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         String[] tokens = input.split("\\s+");
+
 
 
         while (!tokens[0].equals("bye")) {
@@ -237,6 +253,7 @@ public class Duke {
                         throw new InvalidArgumentException(":-( OOPS!!! Please input an "
                                 + "integer with the mark command.");
                     }
+                    fileHandler.saveToFile();
                 } else if (tokens[0].equals("unmark")) {
                     if (tokens.length < 2) {
                         throw new InvalidArgumentException(":-( OOPS!!! Please indicate "
@@ -248,24 +265,28 @@ public class Duke {
                         throw new InvalidArgumentException(":-( OOPS!!! Please input an "
                                 + "integer with the unmark command.");
                     }
+                    fileHandler.saveToFile();
                 } else if (tokens[0].equals("todo")) {
                     if (tokens.length < 2) {
                         throw new InvalidArgumentException(":-( OOPS!!! The description of "
                                 + "ToDo cannot be empty.");
                     }
                     System.out.println(Duke.addToDo(tokens));
+                    fileHandler.saveToFile();
                 } else if (tokens[0].equals("deadline")) {
                     if (tokens.length < 2) {
                         throw new InvalidArgumentException(":-( OOPS!!! The description of "
                                 + "Deadline cannot be empty.");
                     }
                     System.out.println(Duke.addDeadline(tokens));
+                    fileHandler.saveToFile();
                 } else if (tokens[0].equals("event")) {
                     if (tokens.length < 2) {
                         throw new InvalidArgumentException(":-( OOPS!!! The description of "
                                 + "Event cannot be empty.");
                     }
                     System.out.println(Duke.addEvent(tokens));
+                    fileHandler.saveToFile();
                 } else if (tokens[0].equals("delete")) {
                     if (tokens.length < 2) {
                         throw new InvalidArgumentException(":-( OOPS!!! Please indicate "
@@ -277,9 +298,12 @@ public class Duke {
                         throw new InvalidArgumentException(":-( OOPS!!! Please input an "
                                 + "integer with the delete command.");
                     }
+                    fileHandler.saveToFile();
                 } else {
                     throw new UnkownCommandException();
                 }
+
+
             } catch (DukeException dukeException) {
                 System.out.println(Duke.formatString(dukeException.getMessage()));
             }

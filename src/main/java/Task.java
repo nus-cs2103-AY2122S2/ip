@@ -31,6 +31,14 @@ public class Task {
     }
 
     /**
+     * Outputs boolean to show whether task is done or not.
+     *
+     * @return true if task is done, false otherwise.
+     */
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+    /**
      * Outputs the icon representing the
      * status of the task.
      *
