@@ -12,36 +12,22 @@ import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
 
 public class Parser {
-    static boolean isExit;
-    static boolean isListCommand;
-    static boolean isMarkCommand;
-    static boolean isUnmarkCommand;
-    static boolean isDeleteCommand;
-    static boolean isDeleteAllCommand;
-    static boolean isShowAllOnSameDate;
-    static boolean isEmptyDeadline;
-    static boolean isEmptyEvent;
-    static boolean isEmptyTodo;
-    static boolean isNotEmptyDeadline;
-    static boolean isNotEmptyEvent;
-    static boolean isNotEmptyTodo;
-
     public Parser() {}
 
     public static Command parse(String input) throws CortanaException {
-        isExit = input.toLowerCase().replaceAll("[ |\\t]", "").equals("bye");
-        isListCommand = input.toLowerCase().replaceAll("[ |\\t]", "").equals("list");
-        isMarkCommand = input.toLowerCase().matches("^mark \\d+|^mark -\\d+");
-        isUnmarkCommand = input.toLowerCase().matches("^unmark \\d+|^unmark -\\d+");
-        isDeleteCommand = input.toLowerCase().matches("^delete \\d+|^delete -\\d+");
-        isDeleteAllCommand = input.toLowerCase().matches("^delete all");
-        isShowAllOnSameDate = input.toLowerCase().matches("^show all( \\d{4}-\\d{1,2}-\\d{1,2})?( \\d{4})?");
-        isEmptyDeadline = input.toLowerCase().replaceAll("[ |\\t]", "").equals("deadline");
-        isEmptyEvent = input.toLowerCase().replaceAll("[ |\\t]", "").equals("event");
-        isEmptyTodo = input.toLowerCase().replaceAll("[ |\\t]", "").equals("todo");
-        isNotEmptyDeadline = input.toLowerCase().matches("^deadline .*");
-        isNotEmptyEvent = input.toLowerCase().matches("^event .*");
-        isNotEmptyTodo = input.toLowerCase().matches("^todo .*");
+        boolean isExit = input.toLowerCase().replaceAll("[ |\\t]", "").equals("bye");
+        boolean isListCommand = input.toLowerCase().replaceAll("[ |\\t]", "").equals("list");
+        boolean isMarkCommand = input.toLowerCase().matches("^mark \\d+|^mark -\\d+");
+        boolean isUnmarkCommand = input.toLowerCase().matches("^unmark \\d+|^unmark -\\d+");
+        boolean isDeleteCommand = input.toLowerCase().matches("^delete \\d+|^delete -\\d+");
+        boolean isDeleteAllCommand = input.toLowerCase().matches("^delete all");
+        boolean isShowAllOnSameDate = input.toLowerCase().matches("^show all( \\d{4}-\\d{1,2}-\\d{1,2})?( \\d{4})?");
+        boolean isEmptyDeadline = input.toLowerCase().replaceAll("[ |\\t]", "").equals("deadline");
+        boolean isEmptyEvent = input.toLowerCase().replaceAll("[ |\\t]", "").equals("event");
+        boolean isEmptyTodo = input.toLowerCase().replaceAll("[ |\\t]", "").equals("todo");
+        boolean isNotEmptyDeadline = input.toLowerCase().matches("^deadline .*");
+        boolean isNotEmptyEvent = input.toLowerCase().matches("^event .*");
+        boolean isNotEmptyTodo = input.toLowerCase().matches("^todo .*");
         if (isExit) {
             return new ExitCommand(true);
         } else {

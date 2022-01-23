@@ -6,8 +6,6 @@ import DukeUtils.TaskList;
 import DukeUtils.Ui;
 import Task.Task;
 
-import java.io.IOException;
-
 public class AddCommand extends Command {
     private final Task task;
 

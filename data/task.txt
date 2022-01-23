@@ -1,7 +1,1 @@
-[T][ ] read book
-[D][ ] hey (by: Monday, February 28, 2022)
-[E][ ] conference (at: Tuesday, February 28, 2023)
-[D][ ] asf (by: Saturday, February 29, 2020)
-[D][ ] asfg (by: Sunday, February 28, 2021)
-[E][ ] asgag (at: Monday, February 28, 2022)
-[E][ ] asgija (at: Monday, February 28, 2022 0700PM)
+[T][X] read book

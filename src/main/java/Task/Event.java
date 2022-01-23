@@ -10,11 +10,15 @@ import java.util.Locale;
 import java.util.Objects;
 
 public class Event extends Task {
-    public LocalDateTime at;
+    private LocalDateTime at;
 
     public Event(String description, LocalDateTime at) {
         super(description);
         this.at = at;
+    }
+
+    public LocalDateTime getAt() {
+        return this.at;
     }
 
     @Override

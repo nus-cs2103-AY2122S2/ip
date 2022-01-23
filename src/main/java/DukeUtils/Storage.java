@@ -12,7 +12,6 @@ import java.util.regex.Pattern;
 
 public class Storage {
     private final String filePath;
-    //private static final ArrayList<Task> tasksArrayList = new ArrayList<>();
     private static File taskFile;
 
     public Storage(String filePath) {
@@ -22,7 +21,6 @@ public class Storage {
 
     public void createDirectoryAndFileIfNotExist() {
         try {
-            //String path = Paths.get("").toAbsolutePath() + "/data/";
             File directory = new File(filePath);
             boolean wasDirectoryCreated = directory.mkdir();
             if (wasDirectoryCreated) {
@@ -42,7 +40,6 @@ public class Storage {
         createDirectoryAndFileIfNotExist();
         ArrayList<Task> tasksArrayList = new ArrayList<>();
         try {
-            //String path = Paths.get("").toAbsolutePath() + "/data/";
             FileInputStream fileInputStream = new FileInputStream(taskFile);
             Scanner scanner = new Scanner(fileInputStream);
             while(scanner.hasNextLine()) {

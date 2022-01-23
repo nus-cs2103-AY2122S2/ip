@@ -5,7 +5,6 @@ import Task.Task;
 import java.util.Scanner;
 
 public class Ui {
-
     public void showWelcome() {
         String logo = "\n" +
                 "   ____                  _                           \n" +

@@ -5,7 +5,7 @@ import DukeUtils.TaskList;
 import DukeUtils.Ui;
 
 public class ExitCommand extends Command {
-    public static boolean isExit = false;
+    private static boolean isExit = false;
 
     public ExitCommand(boolean isExit) {
         ExitCommand.isExit = isExit;
@@ -15,5 +15,9 @@ public class ExitCommand extends Command {
         if (isExit) {
             ui.exited();
         }
+    }
+
+    public static boolean getIsExit() {
+        return isExit;
     }
 }

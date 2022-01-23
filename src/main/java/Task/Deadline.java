@@ -10,11 +10,15 @@ import java.util.Locale;
 import java.util.Objects;
 
 public class Deadline extends Task {
-    public LocalDateTime by;
+    private final LocalDateTime by;
 
     public Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;
+    }
+
+    public LocalDateTime getBy() {
+        return this.by;
     }
 
     @Override
