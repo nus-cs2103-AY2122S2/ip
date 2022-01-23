@@ -1,7 +1,12 @@
 package Tasks.TaskTypes;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
-    protected String by;
+    private LocalDateTime deadlineDateTime;
+    private static final DateTimeFormatter inputDateTimeFormatter = DateTimeFormatter.ofPattern("M-d-yyyy Hmm");
+    private static final DateTimeFormatter outputDateTimeFormatter = DateTimeFormatter.ofPattern("d MMM yyyy, h:mm a");
 
     /**
      * Creates a new Deadline.
@@ -11,7 +16,7 @@ public class Deadline extends Task {
      */
     public Deadline (String name, String by) {
         super(name);
-        this.by = by;
+        this.deadlineDateTime = LocalDateTime.parse(by, inputDateTimeFormatter);
     }
 
     /**
@@ -24,16 +29,21 @@ public class Deadline extends Task {
      */
     public Deadline (boolean isDone, String title, String by) {
         super(isDone, title);
-        this.by = by;
+        this.deadlineDateTime = LocalDateTime.parse(by, inputDateTimeFormatter);
     }
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), this.by);
+        return String.format("[D]%s (by: %s)",
+                super.toString(),
+                this.deadlineDateTime.format(outputDateTimeFormatter));
     }
 
     @Override
     public String encodeTask() {
-        return String.format("D @@@ %b @@@ %s @@@ %s", super.isDone(), super.getTitle(), this.by);
+        return String.format("D @@@ %b @@@ %s @@@ %s",
+                super.isDone(),
+                super.getTitle(),
+                this.deadlineDateTime.format(inputDateTimeFormatter));
     }
 }

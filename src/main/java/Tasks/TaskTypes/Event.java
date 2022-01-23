@@ -15,7 +15,6 @@ public class Event extends Task {
      */
     public Event(String title, String at) {
         super(title);
-
         this.eventDateTime = LocalDateTime.parse(at, inputDateTimeFormatter);
     }
 
