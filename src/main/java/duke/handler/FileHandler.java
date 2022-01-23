@@ -28,26 +28,26 @@ public class FileHandler {
                     String[] taskInfo = tasks[i].split("\\|");
                     boolean completed = taskInfo[1].equals("1");
                     switch (taskInfo[0]) {
-                        case "T":
-                            list.addTask(new Todo(completed, taskInfo[2]));
-                            break;
-                        case "D":
-                            if (taskInfo.length == 4) {
-                                list.addTask(new Deadline(completed, taskInfo[2],
-                                        Time.convertToDate(taskInfo[3]), ""));
-                            } else {
-                                list.addTask(new Deadline(completed, taskInfo[2],
-                                        Time.convertToDate(taskInfo[3]), taskInfo[4]));
-                            }
-                            break;
-                        case "E":
-                            if (taskInfo.length == 4) {
-                                list.addTask(new Event(completed, taskInfo[2],
-                                        Time.convertToDate(taskInfo[3]), ""));
-                            } else {
-                                list.addTask(new Event(completed, taskInfo[2],
-                                        Time.convertToDate(taskInfo[3]), taskInfo[4]));
-                            }
+                    case "T":
+                        list.addTask(new Todo(completed, taskInfo[2]));
+                        break;
+                    case "D":
+                        if (taskInfo.length == 4) {
+                            list.addTask(new Deadline(completed, taskInfo[2],
+                                    Time.convertToDate(taskInfo[3]), ""));
+                        } else {
+                            list.addTask(new Deadline(completed, taskInfo[2],
+                                    Time.convertToDate(taskInfo[3]), taskInfo[4]));
+                        }
+                        break;
+                    case "E":
+                        if (taskInfo.length == 4) {
+                            list.addTask(new Event(completed, taskInfo[2],
+                                    Time.convertToDate(taskInfo[3]), ""));
+                        } else {
+                            list.addTask(new Event(completed, taskInfo[2],
+                                    Time.convertToDate(taskInfo[3]), taskInfo[4]));
+                        }
                     }
                 }
             } catch (IOException err) {
@@ -76,11 +76,11 @@ public class FileHandler {
             } else if (t instanceof Event) {
                 writeTasks.append("E|").append(digit).append(t.getTaskName()).append("|")
                         .append(((Event) t).getDeadline()).append("|")
-                        .append(((Event) t).getTime()).append("\n");
+                                .append(((Event) t).getTime()).append("\n");
             } else {
                 writeTasks.append("D|").append(digit).append(t.getTaskName()).append("|")
                         .append(((Deadline) t).getDeadline()).append("|")
-                        .append(((Deadline) t).getTime()).append("\n");
+                                .append(((Deadline) t).getTime()).append("\n");
             }
         }
         String content = writeTasks.toString();
