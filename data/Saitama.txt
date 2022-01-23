@@ -1,8 +1,2 @@
-E 1 party /at my house
-D 0 cs2105
-E 0 ceremony
 T 0 eat
-D 0 cs2103t ip /by 20/01/2022
-E 0 party /at my house
-D 0 cs2105
-E 0 ceremony
+T 0 eat

@@ -1,5 +1,5 @@
 public class InvalidCommandException extends SaitamaException {
-    InvalidCommandException(String message) {
-        super(message);
+    InvalidCommandException() {
+        super("huh?!\nPlease enter a valid command!");
     }
 }
