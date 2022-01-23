@@ -24,104 +24,97 @@ public class Dazz {
             System.out.println(hr);
             try {
                 switch (arr1[0]) {
-                    case "bye":
-                        System.out.println("\tBye. Hope to see you again soon!");
-                        break;
-
-                    case "list":
-                        reminder.list();
-                        break;
-
-                    case "mark":
-                        if (arr1.length < 2) {
-                            throw new IncompleteCommandException("mark");
-                        } else if (reminder.getSize() == 0) {
-                            throw new EmptyListException();
+                case "bye":
+                    System.out.println("\tBye. Hope to see you again soon!");
+                    break;
+                case "list":
+                    reminder.list();
+                    break;
+                case "mark":
+                    if (arr1.length < 2) {
+                        throw new IncompleteCommandException("mark");
+                    } else if (reminder.getSize() == 0) {
+                        throw new EmptyListException();
+                    } else {
+                        int index = Integer.parseInt(arr1[1]); // include checking if integer cants be parsed
+                        if (reminder.getSize() < index || index <= 0) {
+                            throw new InvalidTaskIndexException();
                         } else {
-                            int index = Integer.parseInt(arr1[1]);
-                            if (reminder.getSize() < index || index <= 0) {
-                                throw new InvalidTaskIndexException();
-                            } else {
-                                reminder.mark(Integer.parseInt(arr1[1]), true);
-                                break;
-                            }
-                        }
-
-                    case "unmark":
-                       if (arr1.length < 2) {
-                           throw new IncompleteCommandException("unmark");
-                       } else if (reminder.getSize() == 0) {
-                           throw new EmptyListException();
-                       } else {
-                           int index = Integer.parseInt(arr1[1]);
-                           if (reminder.getSize() < index || index <= 0) {
-                               throw new InvalidTaskIndexException();
-                           } else {
-                               reminder.mark(Integer.parseInt(arr1[1]), false);
-                               break;
-                           }
-                       }
-
-                    case "delete":
-                        if (arr1.length < 2) {
-                            throw new IncompleteCommandException("delete");
-                        } else if (reminder.getSize() == 0) {
-                            throw new EmptyListException();
-                        } else {
-                            int index = Integer.parseInt(arr1[1]);
-                            if (reminder.getSize() < index || index <= 0) {
-                                throw new InvalidTaskIndexException();
-                            } else {
-                                reminder.delete(Integer.parseInt(arr1[1]));
-                                break;
-                            }
-                        }
-
-                    case "todo":
-                        if (arr1.length < 2) {
-                            throw new IncompleteCommandException("todo");
-                        } else {
-                            Task todo = new Todo(command.substring(5));
-                            reminder.add(todo);
+                            reminder.mark(Integer.parseInt(arr1[1]), true);
                             break;
                         }
-
-                    case "deadline":
-                        if (arr1.length < 2) {
-                            throw new IncompleteCommandException("deadline");
+                    }
+                case "unmark":
+                    if (arr1.length < 2) {
+                        throw new IncompleteCommandException("unmark");
+                    } else if (reminder.getSize() == 0) {
+                        throw new EmptyListException();
+                    } else {
+                        int index = Integer.parseInt(arr1[1]);
+                        if (reminder.getSize() < index || index <= 0) {
+                            throw new InvalidTaskIndexException();
                         } else {
-                            String[] arr2 = command.split(" /by ");
-                            if (arr2.length < 2) {
-                                throw new IncompleteCommandException("'date' in deadline");
-                            } else {
-                                Task deadline = new Deadline(arr2[0].substring(9), arr2[1]);
-                                reminder.add(deadline);
-                                break;
-                            }
+                            reminder.mark(Integer.parseInt(arr1[1]), false);
+                            break;
                         }
-
-                    case "event":
-                        if (arr1.length < 2) {
-                            throw new IncompleteCommandException("event");
+                    }
+                case "delete":
+                    if (arr1.length < 2) {
+                        throw new IncompleteCommandException("delete");
+                    } else if (reminder.getSize() == 0) {
+                        throw new EmptyListException();
+                    } else {
+                        int index = Integer.parseInt(arr1[1]);
+                        if (reminder.getSize() < index || index <= 0) {
+                            throw new InvalidTaskIndexException();
                         } else {
-                            String[] arr3 = command.split(" /at ");
-                            if (arr3.length < 2) {
-                                throw new IncompleteCommandException("'date' in event");
-                            } else {
-                                Task event = new Event(arr3[0].substring(6), arr3[1]);
-                                reminder.add(event);
-                                break;
-                            }
+                            reminder.delete(Integer.parseInt(arr1[1]));
+                            break;
                         }
-
-                    case "":
-                        throw new EmptyCommandException();
-
-                    default:
-                        throw new InvalidCommandException();
+                    }
+                case "todo":
+                    if (arr1.length < 2) {
+                        throw new IncompleteCommandException("todo");
+                    } else {
+                        Task todo = new Todo(command.substring(5));
+                        reminder.add(todo);
+                        break;
+                    }
+                case "deadline":
+                    if (arr1.length < 2) {
+                        throw new IncompleteCommandException("deadline");
+                    } else {
+                        String[] arr2 = command.split(" /by ");
+                        if (arr2.length < 2) {
+                            throw new IncompleteCommandException("'date' in deadline");
+                        } else {
+                            Task deadline = new Deadline(arr2[0].substring(9), arr2[1]);
+                            reminder.add(deadline);
+                            break;
+                        }
+                    }
+                case "event":
+                    if (arr1.length < 2) {
+                        throw new IncompleteCommandException("event");
+                    } else {
+                        String[] arr3 = command.split(" /at ");
+                        if (arr3.length < 2) {
+                            throw new IncompleteCommandException("'date' in event");
+                        } else {
+                            Task event = new Event(arr3[0].substring(6), arr3[1]);
+                            reminder.add(event);
+                            break;
+                        }
+                    }
+                case "":
+                    throw new EmptyCommandException();
+                default:
+                    throw new InvalidCommandException();
                 }
             } catch (DazzException e) {
                 System.out.println(e.getMessage());
+            } catch (NumberFormatException e) {
+                System.out.println("\tOOPS!!! The index you have provided is invalid!");
             }
             System.out.println(hr);
             if (byeFlag) {
