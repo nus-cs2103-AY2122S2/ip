@@ -312,7 +312,7 @@ public class Duke {
             switch (code) {
             case ADDITION:
                 fw = new FileWriter("data/duke.txt", true);
-                fw.write(task.toStringInFileFormat());
+                fw.write(task.toStringInFileFormat() + System.lineSeparator());
                 fw.close();
                 return "Alright then! I've added the task to your list:" + "\n\t" + task + viewTasksCount();
             case DELETION:
