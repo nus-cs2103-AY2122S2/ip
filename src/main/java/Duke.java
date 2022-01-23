@@ -1,5 +1,7 @@
+import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
+
 public class Duke {
     private ArrayList<Task> list = new ArrayList<>();
     private String lineBreak = "-------------------------------\n";
@@ -9,6 +11,38 @@ public class Duke {
             + lineBreak;
     private String goodbyeMessage = "Bye. Hope to see you again soon!";
     public boolean isListening = true;
+    private final String filePath = "data/data.bin";
+
+    public Duke(){
+        File f = new File(filePath);
+        try {
+            if (f.exists()) {
+                FileInputStream fis = new FileInputStream(filePath);
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                this.list = (ArrayList<Task>) ois.readObject();
+                ois.close();
+            } else {
+                f.createNewFile();
+            }
+        } catch (IOException | ClassNotFoundException e){
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+    }
+
+    public String getWelcomeMessage() {
+        return welcomeMessage;
+    }
+
+    private void saveToFile(){
+        try {
+            FileOutputStream fos = new FileOutputStream(filePath);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(list);
+            oos.close();
+        } catch (IOException e){
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+    }
 
     public void ask(String input){
         // Format input to remove leading and trailing spaces
@@ -72,6 +106,7 @@ public class Duke {
 
         if(task != null){
             list.add(task);
+            saveToFile();
             System.out.println(taskAddedMessage(task));
         }
 
@@ -104,6 +139,7 @@ public class Duke {
         }
         Task task = list.get(index);
         task.mark();
+        saveToFile();
         return "Nice! I've marked this task as done:\n" + task;
     }
 
@@ -115,6 +151,7 @@ public class Duke {
         }
         Task task = list.get(index);
         task.unmark();
+        saveToFile();
         return "OK! I've marked this task as not done yet:\n" + task;
     }
 
@@ -131,6 +168,7 @@ public class Duke {
             return "This is an invalid index, please try again!";
         }
         Task task = list.remove(index);
+        saveToFile();
         return  "OK! I've removed this task:\n" + task
                     + "\nNow you have " + list.size() + " tasks in the list.";
     }
