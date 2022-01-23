@@ -13,7 +13,7 @@ public abstract class Command{
     /**
      * Constructor of Command class.
      * @param t task object created from user input.
-     * @param number An indicator to the index of the ArrayList in TaskList class.
+     * @param number an indicator to the index of the taskList in TaskList class.
      */
     public Command(Task t, Integer number) {
         this.task = t;
@@ -22,7 +22,7 @@ public abstract class Command{
 
     /**
      * Returns nothing, but used to execute the respective methods in TaskList class.
-     * @param tasks an Object of TaskList, used to access public methods in TaskList class.
+     * @param tasks an object of TaskList, used to access public methods in TaskList class.
      */
     public abstract void execute(TaskList tasks);
 

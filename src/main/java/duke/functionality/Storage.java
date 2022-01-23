@@ -32,7 +32,7 @@ public class Storage {
 
     /**
      * Returns nothing, but stores the specified task into the taskList in TaskList class.
-     * @param t The task created in Parser class.
+     * @param t the task created in Parser class.
      */
     public static void storeToList(Task t) { //same as addToList but no printing
         TaskList.taskList.add(t);
@@ -42,7 +42,7 @@ public class Storage {
     /**
      * Returns nothing, but stores all task into the text file specified by path.
      * @param path path to "/data/TaskData.txt".
-     * @throws IOException If the text file is missing.
+     * @throws IOException if the text file is missing.
      */
     public static void writeToFile(String path) throws IOException {
         FileWriter fw = new FileWriter(path);
@@ -66,9 +66,9 @@ public class Storage {
     }
 
     /**
-     * Returns nothing, but reads the input from the specified file and stores them in taskList in TaskList class.
-     * @param f The text file that stores all tasks.
-     * @throws FileNotFoundException
+     * Returns nothing, but reads the input from the specified file and stores them in the taskList in TaskList class.
+     * @param f the text file that stores all tasks.
+     * @throws FileNotFoundException if the file is missing.
      */
     public static void readFileDataAndStoreInList(File f) throws FileNotFoundException {
         Scanner sc = new Scanner(f);
@@ -103,7 +103,7 @@ public class Storage {
 
     /**
      * Returns a crafted output to be stored in the text file.
-     * @param t The task created in Parser class.
+     * @param t the task created in Parser class.
      * @return crafted output.
      */
     public static String craftOutput(Task t) {
@@ -139,7 +139,7 @@ public class Storage {
 
     /**
      * Returns nothing, but loads all tasks from the specified path.
-     * @throws IOException If the file is missing.
+     * @throws IOException if the file is missing.
      */
     public void load() throws IOException {
         File directory = new File(pwd + "/data");

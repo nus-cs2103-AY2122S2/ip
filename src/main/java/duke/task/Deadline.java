@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Represents the deadline a user would create. A <code>Deadline</code> object is a subclass of the Task class
- * and corresponds to a deadline inputted by a user.
+ * and corresponds to a deadline input by a user.
  */
 public class Deadline extends Task {
     protected LocalTime time;
@@ -34,7 +34,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the string representation of a deadline.
-     * @return A string representation of the deadline, consisting of its description
+     * @return a string representation of the deadline, consisting of its description
      * and formatted date and time.
      */
     @Override

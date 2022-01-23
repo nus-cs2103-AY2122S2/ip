@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 /**
  * Represents the User Interface of the Duke project. A <code> Ui </code> object corresponds
- * to all user interface displays. Such as the different messages.
+ * to all user interface displays. Such as the messages.
  */
 public class Ui {
     private String greeting = "Hello! I'm TaskJamie\nWhat can i do for you?";
@@ -40,8 +40,8 @@ public class Ui {
 
     /**
      * Returns a full command gotten from user input.
-     * @return String containing full command.
-     * @throws BlankCommandException If user inputs nothing. Eg, " ".
+     * @return string containing full command.
+     * @throws BlankCommandException if user inputs nothing. Eg, " ".
      */
     public String readCommand() throws BlankCommandException {
         Scanner sc = new Scanner(System.in);

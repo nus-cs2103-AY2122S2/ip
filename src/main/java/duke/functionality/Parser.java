@@ -78,7 +78,7 @@ public class Parser {
     /**
      * Returns the respective command from user input.
      * @param input user input. Eg, "todo run".
-     * @return A command.
+     * @return the command.
      * @throws DukeException when user input for date and time are not of the correct form.
      */
     public static Command parse(String input) throws DukeException {

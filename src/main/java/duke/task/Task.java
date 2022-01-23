@@ -39,7 +39,7 @@ public class Task {
 
     /**
      * Returns the string representation of the task.
-     * @return A string representation of the task, consisting of its description and whether its done or not.
+     * @return a string representation of the task, consisting of its description and whether its done or not.
      */
     @Override
     public String toString() {

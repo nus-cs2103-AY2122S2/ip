@@ -57,7 +57,7 @@ public class Duke {
 
     /**
      * This is the main method which makes use of run method.
-     * @param args Unused.
+     * @param args unused.
      */
     public static void main(String[] args) {
         String home = System.getProperty("user.home");

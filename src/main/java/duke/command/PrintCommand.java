@@ -3,8 +3,7 @@ package duke.command;
 import duke.functionality.TaskList;
 
 /**
- * Represents the print command. A <code>PrintCommand</code> object allows users to see the accumulated task in
- * Duke TaskBot.
+ * Represents the print command. A <code>PrintCommand</code> object allows users to see all task in Duke TaskBot.
  */
 public class PrintCommand extends Command{
 
@@ -17,7 +16,7 @@ public class PrintCommand extends Command{
 
     /**
      * Returns nothing, but prints out all the task in the taskList in TaskList class.
-     * @param tasks an Object of TaskList, used to access public methods in TaskList class.
+     * @param tasks an object of TaskList, used to access public methods in TaskList class.
      */
     @Override
     public void execute(TaskList tasks) {
@@ -25,7 +24,7 @@ public class PrintCommand extends Command{
     }
 
     /**
-     * Returns false as the command is not an ExitCommand.
+     * Returns false as the Command is not an ExitCommand.
      * @return false.
      */
     @Override

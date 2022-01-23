@@ -10,7 +10,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructor for DeleteCommand class.
-     * @param number
+     * @param number an indicator to the index of the taskList in TaskList class.
      */
     public DeleteCommand(Integer number) {
 
@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Returns nothing, but deletes the specified task in the taskList in TaskList class.
-     * @param tasks an Object of TaskList, used to access public methods in TaskList class.
+     * @param tasks an object of TaskList, used to access public methods in TaskList class.
      */
     @Override
     public void execute(TaskList tasks) {
@@ -27,7 +27,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Returns false as the command is not an ExitCommand.
+     * Returns false as the Command is not an ExitCommand.
      * @return false.
      */
     @Override

@@ -18,7 +18,7 @@ public class AddCommand extends Command {
 
     /**
      * Returns nothing, but adds the specified task in the taskList in TaskList class.
-     * @param tasks an Object of TaskList, used to access public methods in TaskList class.
+     * @param tasks an object of TaskList, used to access public methods in TaskList class.
      */
     @Override
     public void execute(TaskList tasks) {
@@ -26,7 +26,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Returns false as the command is not an ExitCommand.
+     * Returns false as the Command is not an ExitCommand.
      * @return false.
      */
     @Override

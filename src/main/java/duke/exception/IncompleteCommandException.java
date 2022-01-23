@@ -2,7 +2,7 @@ package duke.exception;
 
 /**
  * Represents the IncompleteCommandException the Duke program would handle. A <code> IncompleteCommandException </code>
- * object corresponds to a incomplete command inputted by a user. Eg, event sleep /at
+ * object corresponds to a incomplete command inputted by a user. Eg, event sleep /at.
  */
 public class IncompleteCommandException extends DukeException {
 

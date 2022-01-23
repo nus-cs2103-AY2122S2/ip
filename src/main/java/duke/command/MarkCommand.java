@@ -9,7 +9,7 @@ public class MarkCommand extends Command {
 
     /**
      * Constructor for MarkCommand class.
-     * @param number An indicator to the index of the ArrayList in TaskList class.
+     * @param number an indicator to the index of the taskList in TaskList class.
      */
     public MarkCommand(Integer number) {
         super(null, number);
@@ -17,7 +17,7 @@ public class MarkCommand extends Command {
 
     /**
      * Returns nothing, but marks the corresponding task in the taskList in TaskList class as done.
-     * @param tasks an Object of TaskList, used to access public methods in TaskList class.
+     * @param tasks an object of TaskList, used to access public methods in TaskList class.
      */
     @Override
     public void execute(TaskList tasks) {
@@ -25,7 +25,7 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * Returns false as the command is not an ExitCommand.
+     * Returns false as the Command is not an ExitCommand.
      * @return false.
      */
     @Override

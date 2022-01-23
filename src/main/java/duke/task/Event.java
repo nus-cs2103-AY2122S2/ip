@@ -42,7 +42,7 @@ public class Event extends Task {
 
     /**
      * Returns the string representation of an event.
-     * @return A string representation of the event, consisting of its description, formatted date,
+     * @return a string representation of the event, consisting of its description, formatted date,
      * starting time and ending time.
      */
     @Override

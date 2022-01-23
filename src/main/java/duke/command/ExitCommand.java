@@ -16,13 +16,13 @@ public class ExitCommand extends Command{
 
     /**
      * Returns nothing & does not execute anything.
-     * @param tasks an Object of TaskList, used to access public methods in TaskList class.
+     * @param tasks an object of TaskList, used to access public methods in TaskList class.
      */
     @Override
     public void execute(TaskList tasks) { }
 
     /**
-     * Returns true as the command is an ExitCommand.
+     * Returns true as the Command is an ExitCommand.
      * @return true.
      */
     @Override
