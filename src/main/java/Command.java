@@ -8,11 +8,12 @@ public enum Command {
     BYE,
     DELETE;
 
-    public static Command stringToType(String info) {
+    public static Command stringToCommand(String info) throws BotException {
         for (Command command : values()) {
-            if (command.toString().equalsIgnoreCase(info)) {
+            if (info.equalsIgnoreCase(command.toString())) {
                 return command;
             }
         }
+        throw new BotException("As an ISTJBot, I don't understand what that command means.");
     }
 }
