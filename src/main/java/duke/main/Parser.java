@@ -9,6 +9,7 @@ import duke.commands.MarkCommand;
 import duke.commands.UnmarkCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.WrongCommand;
+import duke.commands.FindCommand;
 
 /**
  * Parser class.
@@ -27,24 +28,26 @@ public class Parser {
      * @throws DukeException when a WrongCommand is given
      */
     public static Command parseCommands(Ui.Reply type, TaskList toDoList, String cmd, Storage storage) throws DukeException {
-        String[] cmd_split = cmd.split(" ");
+        String[] cmdSplit = cmd.split(" ");
         switch (type) {
-            case LIST:
-                return new ListCommand(toDoList, cmd);
-            case TODO:
-                return new AddToDoCommand(toDoList, cmd, storage);
-            case DEADLINE:
-                return new AddDeadlineCommand(toDoList, cmd, storage);
-            case EVENT:
-                return new AddEventCommand(toDoList, cmd, storage);
-            case MARK:
-                return new MarkCommand(toDoList, Integer.parseInt(cmd_split[1]) - 1);
-            case UNMARK:
-                return new UnmarkCommand(toDoList, Integer.parseInt(cmd_split[1]) - 1);
-            case DELETE:
-                return new DeleteCommand(toDoList, Integer.parseInt(cmd_split[1]) - 1);
-            default:
-                return new WrongCommand();
+        case LIST:
+            return new ListCommand(toDoList, cmd);
+        case TODO:
+            return new AddToDoCommand(toDoList, cmd, storage);
+        case DEADLINE:
+            return new AddDeadlineCommand(toDoList, cmd, storage);
+        case EVENT:
+            return new AddEventCommand(toDoList, cmd, storage);
+        case MARK:
+            return new MarkCommand(toDoList, Integer.parseInt(cmdSplit[1]) - 1);
+        case UNMARK:
+            return new UnmarkCommand(toDoList, Integer.parseInt(cmdSplit[1]) - 1);
+        case DELETE:
+            return new DeleteCommand(toDoList, Integer.parseInt(cmdSplit[1]) - 1);
+        case FIND:
+            return new FindCommand(toDoList, cmd);
+        default:
+            return new WrongCommand();
         }
     }
 

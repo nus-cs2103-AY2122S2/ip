@@ -48,21 +48,21 @@ public class Storage {
         while (s.hasNext()) {
             // Read the saved command from file
             String cmd = s.nextLine();
-            String[] cmd_split = cmd.split("&");
-            boolean mark = cmd_split[0].equals("[X]") ? true : false;
+            String[] cmdSplit = cmd.split("&");
+            boolean mark = cmdSplit[0].equals("[X]") ? true : false;
 
-            switch (cmd_split[1]) {
+            switch (cmdSplit[1]) {
             case "T":
                 // ToDo(String task, boolean isDone)
-                toDoList.add(new ToDo(cmd_split[2], mark));
+                toDoList.add(new ToDo(cmdSplit[2], mark));
                 break;
             case "E":
                 // Event(String task, boolean isDone, String dateTime)
-                toDoList.add(new Event(cmd_split[2], mark, cmd_split[3]));
+                toDoList.add(new Event(cmdSplit[2], mark, cmdSplit[3]));
                 break;
             case "D":
                 // Deadline(String task, boolean isDone, String deadline)
-                toDoList.add(new Deadline(cmd_split[2], mark, cmd_split[3]));
+                toDoList.add(new Deadline(cmdSplit[2], mark, cmdSplit[3]));
                 break;
             default:
                 // do nothing
