@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -117,33 +119,65 @@ public class Duke {
 
     /**
      * Creates and add a Deadline task.
+     * Default time t
      *
      * @param tokens input tokens to parse.
      * @return formatted string with Deadline Task.
      * @throws InvalidArgumentException if due date/time is empty.
+     * @throws InvalidDateTimeFormatException if the date/time is in incorrect format.
      */
-    private static String addDeadline(String[] tokens) throws InvalidArgumentException {
+    private static String addDeadline(String[] tokens) throws InvalidArgumentException,
+            InvalidDateTimeFormatException {
         StringBuilder stringBuilder = new StringBuilder();
         Boolean foundKeyword = false;
-        String by = "";
+        LocalDateTime dateTime = null;
         String description = "";
         for (int i = 1; i < tokens.length; i++) {
-            if (tokens[i].equals("/by")) {
-                description = stringBuilder.toString();
-                stringBuilder = new StringBuilder();
-                foundKeyword = true;
+            if (!foundKeyword) {
+                if (tokens[i].equals("/by")) {
+                    description = stringBuilder.toString();
+                    foundKeyword = true;
+                } else {
+                    stringBuilder.append(tokens[i]);
+                    if (i != tokens.length - 1) {
+                        stringBuilder.append(" ");
+                    }
+                }
             } else {
-                stringBuilder.append(tokens[i]);
-                if (i != tokens.length - 1) {
-                    stringBuilder.append(" ");
+                if (i == tokens.length - 1) {
+                    dateTime = LocalDateTime.parse(tokens[i] + "T06:00:00");
+                } else {
+                    try {
+                        int time = Integer.parseInt(tokens[i + 1]);
+                        String hours;
+                        String minutes;
+
+                        if (time / 100 > 9) {
+                            hours = Integer.toString(time / 100);
+                        } else {
+                            hours = "0" + Integer.toString(time / 100);
+                        }
+
+                        if (time % 100 > 9) {
+                            minutes = Integer.toString(time % 100);
+                        } else {
+                            minutes = "0" + Integer.toString(time % 100);
+                        }
+
+                        dateTime = LocalDateTime.parse(tokens[i] + "T" + hours + ":" + minutes + ":00");
+                    } catch (NumberFormatException | DateTimeParseException exception) {
+                        throw new InvalidDateTimeFormatException("Please enter the date/time in "
+                                + "the following format:\n yyyy-mm-dd HHMM in the 24 hour format");
+                    }
+                    i++;
                 }
             }
+
         }
         if (!foundKeyword) {
             throw new InvalidArgumentException(":-( OOPS!!! Due date/time of deadline cannot be empty.");
         }
-        by = stringBuilder.toString();
-        Deadline task = new Deadline(description, by);
+        Deadline task = new Deadline(description, dateTime);
         list.add(task);
         return Duke.formatString("Got it! I've added this Deadline task:\n "
                 + task.toString() + "\nNow you have " + list.size()
@@ -156,32 +190,71 @@ public class Duke {
      * @param tokens input tokens to parse.
      * @return formatted string with Event task.
      * @throws IllegalArgumentException if Event date/time is empty.
+     * @throws InvalidDateTimeFormatException if date/time is in the incorrect format.
      */
-    private static String addEvent(String[] tokens) throws InvalidArgumentException {
+    private static String addEvent(String[] tokens) throws InvalidArgumentException,
+            InvalidDateTimeFormatException {
         StringBuilder stringBuilder = new StringBuilder();
         Boolean foundKeyword = false;
-        String at = "";
+        LocalDateTime start = null;
+        LocalDateTime end = null;
         String description = "";
         for (int i = 1; i < tokens.length; i++) {
-            if (tokens[i].equals("/at")) {
-                description = stringBuilder.toString();
-                stringBuilder = new StringBuilder();
-                foundKeyword = true;
-            } else {
-                stringBuilder.append(tokens[i]);
-                if (i != tokens.length - 1) {
-                    stringBuilder.append(" ");
+            if (!foundKeyword) {
+                if (tokens[i].equals("/at")) {
+                    description = stringBuilder.toString();
+                    foundKeyword = true;
                 } else {
-                    at = stringBuilder.toString();
+                    stringBuilder.append(tokens[i]);
+                    if (i != tokens.length - 1) {
+                        stringBuilder.append(" ");
+                    }
                 }
+            } else {
+
+                    try {
+                        int time = 0;
+                        if (i != tokens.length) {
+                            time = Integer.parseInt(tokens[i + 1]);
+                        } else {
+                            throw new InvalidDateTimeFormatException("Please enter the start and end date/time in "
+                                    + "the following format:\n yyyy-mm-dd HHMM  yy-mm-dd HHMM in the 24 hour format");
+                        }
+
+                        String hours;
+                        String minutes;
+
+                        if (time / 100 > 9) {
+                            hours = Integer.toString(time / 100);
+                        } else {
+                            hours = "0" + Integer.toString(time / 100);
+                        }
+
+                        if (time % 100 > 9) {
+                            minutes = Integer.toString(time % 100);
+                        } else {
+                            minutes = "0" + Integer.toString(time % 100);
+                        }
+
+                        if (start == null) {
+                            start = LocalDateTime.parse(tokens[i] + "T" + hours + ":" + minutes + ":00");
+                        } else {
+                            end = LocalDateTime.parse(tokens[i] + "T" + hours + ":" + minutes + ":00");
+                        }
+
+                    } catch (NumberFormatException | DateTimeParseException exception) {
+                        throw new InvalidDateTimeFormatException("Please enter the start and end date/time in "
+                                + "the following format:\n yyyy-mm-dd HHMM  yy-mm-dd HHMM in the 24 hour format");
+                    }
+                    i++;
             }
+
         }
         if (!foundKeyword) {
             throw new InvalidArgumentException(":-( OOPS!!! Start-End date/time of event "
                     + "cannot be empty.");
         }
-        at = stringBuilder.toString();
-        Event task = new Event(description, at);
+        Event task = new Event(description, start, end);
         list.add(task);
         return Duke.formatString("Got it! I've added this Event task:\n "
                 + task.toString() + "\nNow you have " + list.size()
@@ -220,7 +293,6 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         String[] tokens = input.split("\\s+");
-
 
         while (!tokens[0].equals("bye")) {
             try {
