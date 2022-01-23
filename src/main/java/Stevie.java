@@ -10,7 +10,7 @@ public class Stevie {
     private static TaskList tl;
 
     public static void main(String[] args) {
-        tl = new TaskList();
+        tl = new TaskList(TaskDataHandler.loadTasks());
         Scanner sc = new Scanner(System.in);
 
         greet();
@@ -35,11 +35,21 @@ public class Stevie {
      * Greets the user.
      */
     private static void greet() {
-        String logo = " ____        _\n"
-                + "|  _ \\ _   _| | _____\n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        // Logo generated from:
+        // https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20
+        String logo = "  .--.--.       ___\n" +
+                " /  /    '.   ,--.'|_                        ,--,\n" +
+                "|  :  /`. /   |  | :,'                     ,--.'|\n" +
+                ";  |  |--`    :  : ' :                .---.|  |,\n" +
+                "|  :  ;_    .;__,'  /     ,---.     /.  ./|`--'_       ,---.\n" +
+                " \\  \\    `. |  |   |     /     \\  .-' . ' |,' ,'|     /     \\\n" +
+                "  `----.   \\:__,'| :    /    /  |/___/ \\: |'  | |    /    /  |\n" +
+                "  __ \\  \\  |  '  : |__ .    ' / |.   \\  ' .|  | :   .    ' / |\n" +
+                " /  /`--'  /  |  | '.'|'   ;   /| \\   \\   ''  : |__ '   ;   /|\n" +
+                "'--'.     /   ;  :    ;'   |  / |  \\   \\   |  | '.'|'   |  / |\n" +
+                "  `--'---'    |  ,   / |   :    |   \\   \\ |;  :    ;|   :    |\n" +
+                "               ---`-'   \\   \\  /     '---\" |  ,   /  \\   \\  /\n" +
+                "                         `----'             ---`-'    `----'   ";
         System.out.println("Hello I'm\n" + logo);
         System.out.println("Tell me about your upcoming activities!");
         System.out.println("Input \"help\" for instructions.");
