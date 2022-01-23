@@ -38,7 +38,9 @@ public class TaskList {
 
         ToDo toDo = new ToDo(title);
         tasks.add(toDo);
-        taskFile.writeNewTaskToTaskFile(toDo);
+
+        // save changes to save-file in user's hard disk
+        taskFile.writeTasksFile(this.tasks);
 
         System.out.println("Got it, I've added this todo:");
         System.out.format("   %s\n", toDo);
@@ -76,7 +78,9 @@ public class TaskList {
 
         Deadline deadline = new Deadline(title, by);
         tasks.add(deadline);
-        taskFile.writeNewTaskToTaskFile(deadline);
+
+        // save changes to save-file in user's hard disk
+        taskFile.writeTasksFile(this.tasks);
 
         System.out.println("Got it, I've added this deadline:");
         System.out.format("   %s\n", deadline);
@@ -114,7 +118,9 @@ public class TaskList {
 
         Event event = new Event(title, at);
         tasks.add(event);
-        taskFile.writeNewTaskToTaskFile(event);
+
+        // save changes to save-file in user's hard disk
+        taskFile.writeTasksFile(this.tasks);
 
         System.out.println("Got it, I've added this event:");
         System.out.format("   %s\n", event);
@@ -122,29 +128,35 @@ public class TaskList {
         showNumberOfTasks();
     }
 
-    public void markTask(String[] tokens) throws TaskNotFoundException, TaskAlreadyMarked, InvalidTaskIdException {
+    public void markTask(String[] tokens) throws TaskNotFoundException, TaskAlreadyMarked, InvalidTaskIdException, FileException {
         int taskId = getTaskId(tokens[1]);
 
         int index = taskId - 1;
         Task t = getTaskByIndex(index);
         t.mark();
 
+        // save changes to save-file in user's hard disk
+        taskFile.writeTasksFile(this.tasks);
+
         System.out.println("Awesome! I've marked this task as done:");
         System.out.format("   %s\n", t);
     }
 
-    public void unMarkTask(String[] tokens) throws TaskNotFoundException, TaskAlreadyUnMarked, InvalidTaskIdException {
+    public void unMarkTask(String[] tokens) throws TaskNotFoundException, TaskAlreadyUnMarked, InvalidTaskIdException, FileException {
         int taskId = getTaskId(tokens[1]);
 
         int index = taskId - 1;
         Task t = getTaskByIndex(index);
         t.unMark();
 
+        // save changes to save-file in user's hard disk
+        taskFile.writeTasksFile(this.tasks);
+
         System.out.println("Okay, I've marked this task as not done yet:");
         System.out.format("   %s\n", t);
     }
 
-    public void deleteTask(String[] tokens) throws TaskNotFoundException, InvalidTaskIdException {
+    public void deleteTask(String[] tokens) throws TaskNotFoundException, InvalidTaskIdException, FileException {
         int taskId = getTaskId(tokens[1]);
 
         int index = taskId - 1;
@@ -154,6 +166,9 @@ public class TaskList {
         System.out.format("   %s\n", t);
 
         tasks.remove(t);
+
+        // save changes to save-file in user's hard disk
+        taskFile.writeTasksFile(this.tasks);
 
         showNumberOfTasks();
     }

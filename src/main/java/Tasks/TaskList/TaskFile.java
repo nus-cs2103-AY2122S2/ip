@@ -51,9 +51,12 @@ class TaskFile {
 
         try {
             Scanner sc = new Scanner(this.tasksFile);
-            while (sc.hasNext()) {
-                Task t = TaskDecoder.decodeTask(sc.nextLine());
-                tasks.add(t);
+            while (sc.hasNextLine()) {
+                String encodedTask = sc.nextLine();
+                if (!encodedTask.isBlank()) {
+                    Task t = TaskDecoder.decodeTask(encodedTask);
+                    tasks.add(t);
+                }
             }
         } catch (FileNotFoundException e) {
             // do nothing
@@ -74,24 +77,6 @@ class TaskFile {
         try {
             FileWriter fw = new FileWriter(defaultFilePath.toString());
             fw.write(encodedTasks);
-            fw.close();
-        } catch (IOException e) {
-            throw new WriteFileException();
-        }
-    }
-
-    /**
-     * Appends the encoded Task into the save-file in the user's hard disk.
-     *
-     * @param t
-     * @throws FileException
-     */
-    protected void writeNewTaskToTaskFile(Task t) throws FileException {
-        String encodedTask = t.encodeTask();
-
-        try {
-            FileWriter fw = new FileWriter(defaultFilePath.toString(), true);
-            fw.write(encodedTask + System.lineSeparator());
             fw.close();
         } catch (IOException e) {
             throw new WriteFileException();

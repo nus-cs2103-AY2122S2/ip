@@ -33,6 +33,6 @@ public class Event extends Task {
 
     @Override
     public String encodeTask() {
-        return String.format("T @@@ %b @@@ %s @@@ %s", super.isDone(), super.getTitle(), this.at);
+        return String.format("E @@@ %b @@@ %s @@@ %s", super.isDone(), super.getTitle(), this.at);
     }
 }
