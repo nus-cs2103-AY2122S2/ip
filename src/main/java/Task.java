@@ -25,6 +25,10 @@ public class Task {
         return this.description + " is undone!";
     }
 
+    public String getTaskIcon() {
+        return "[T]";
+    }
+
     @Override
     public String toString() {
         // TODO Auto-generated method stub

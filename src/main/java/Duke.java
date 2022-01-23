@@ -2,7 +2,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    ArrayList<Task> taskList;
+
+    private Duke() {
+        taskList = new ArrayList<>();
+    }
+
+    private void Run() {
         Scanner sc = new Scanner(System.in);
 
         String greeting = "Hello! I'm Kizer\nWhat can I do for you?";
@@ -10,7 +16,6 @@ public class Duke {
         System.out.println(bar);
         System.out.println(greeting);
         System.out.println(bar);
-        ArrayList<Task> taskList = new ArrayList<>();
 
         while (true) {
             String originalInput = sc.nextLine();
@@ -53,15 +58,23 @@ public class Duke {
                 System.out.println("OK, I've marked this task as not done yet:");
                 System.out.println("[" + curr.getStatusIcon() + "] " + curr);
                 System.out.println(bar);
-            } else {
+            } else if (command.matches(".*\\btodo\\b.*")) {
                 System.out.println(bar);
                 Task curr = new Task(originalInput);
                 taskList.add(curr);
                 System.out.println("added: " + curr);
                 System.out.println(bar);
+            } else {
+
+                System.out.println("no command given");
             }
 
         }
 
+    }
+
+    public static void main(String[] args) {
+        Duke kizer = new Duke();
+        kizer.Run();
     }
 }
