@@ -5,6 +5,7 @@ public class Input {
         LIST,
         TOGGLE,
         DELETE,
+        SEARCH,
         BYE
     }
 
@@ -26,6 +27,8 @@ public class Input {
             this.states = States.TOGGLE;
         } else if (command.equalsIgnoreCase("delete")) {
             this.states = States.DELETE;
+        } else if (command.equalsIgnoreCase("search")) {
+            this.states = States.SEARCH;
         } else {
             this.states = States.ADD;
         }

@@ -5,6 +5,9 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -30,6 +33,11 @@ public class Duke {
             "OOPS!!! I need a number to delete that task :-(";
     private static final String FILE_PATH = "data/";
     private static final String FILE_NAME = "duke.txt";
+    private static final String INVALID_DATE_MSG =
+            "OOPS!!! I cannot recognise that date format. :-("
+                    + "\nAlso, in this date format yyyy-mm-dd please!";
+    private static final String NO_TASK_SEARCH_MSG =
+            "I can't find any tasks of that date. :-(";
 
     private ArrayList<Task> tasks;
     
@@ -61,8 +69,9 @@ public class Duke {
 
             if (type.equalsIgnoreCase("deadline")) {
                 String[] taskData = taskArr[1].split(" /by ");
+                LocalDate by = LocalDate.parse(taskData[1]);
 
-                this.tasks.add(new Deadline(taskData[0], taskData[1]));
+                this.tasks.add(new Deadline(taskData[0], by));
 
                 Deadline deadline = (Deadline) this.tasks.get(this.tasks.size() - 1);
 
@@ -70,11 +79,12 @@ public class Duke {
                         "D | %s | %s | %s",
                         deadline.getCompleted() ? "1" : "0",
                         deadline.getDescription(),
-                        deadline.getDateTime());
+                        taskData[1]);
             } else if (type.equalsIgnoreCase("event")) {
                 String[] taskData = taskArr[1].split(" /at ");
+                LocalDate at = LocalDate.parse(taskData[1]);
 
-                this.tasks.add(new Event(taskData[0], taskData[1]));
+                this.tasks.add(new Event(taskData[0], at));
 
                 Event event = (Event) this.tasks.get(this.tasks.size() - 1);
 
@@ -82,13 +92,11 @@ public class Duke {
                         "E | %s | %s | %s",
                         event.getCompleted() ? "1" : "0",
                         event.getDescription(),
-                        event.getDateTime());
+                        taskData[1]);
             } else if (type.equalsIgnoreCase("todo")) {
                 if (taskArr[1].trim().length() == 0) {
                     throw new IndexOutOfBoundsException();
                 }
-
-                this.tasks.add(new Todo(taskArr[1]));
 
                 Todo todo = (Todo) this.tasks.get(this.tasks.size() - 1);
 
@@ -96,6 +104,7 @@ public class Duke {
                         "T | %s | %s",
                         todo.getCompleted() ? "1" : "0",
                         todo.getDescription());
+                this.tasks.add(new Todo(taskArr[1]));
             } else {
                 throw new IndexOutOfBoundsException();
             }
@@ -122,6 +131,8 @@ public class Duke {
             }
         } catch (IOException e) {
             output("OOPS!!! Facing some issues in saving your task to disk. :-(");
+        } catch (DateTimeParseException e) {
+            output(INVALID_DATE_MSG);
         }
     }
     
@@ -185,17 +196,25 @@ public class Duke {
             String updateString = "";
 
             if (taskString.charAt(1) == 'D') {
+                String date = ((Deadline) updatedTask)
+                        .getDate()
+                        .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
                 updateString = String.format(
                         "D | %s | %s | %s",
                         updatedTask.getCompleted() ? "1" : "0",
                         updatedTask.getDescription(),
-                        ((Deadline) updatedTask).getDateTime());
+                        date);
             } else if (taskString.charAt(1) == 'E') {
+                String date = ((Event) updatedTask)
+                        .getDate()
+                        .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
                 updateString = String.format(
                         "E | %s | %s | %s",
                         updatedTask.getCompleted() ? "1" : "0",
                         updatedTask.getDescription(),
-                        ((Event) updatedTask).getDateTime());
+                        date);
             } else {
                 updateString = String.format(
                         "T | %s | %s",
@@ -271,6 +290,50 @@ public class Duke {
         return true;
     }
 
+    public void search(String dateString) {
+        try {
+            LocalDate date = LocalDate.parse(dateString);
+            int index = 0;
+            int length = this.tasks.size();
+            StringBuilder sb = new StringBuilder();
+
+            if (length == 0) {
+                output("No tasks found based on given date! Also, quit lazing around!");
+                return;
+            }
+
+            sb.append("Here are the tasks with date, "
+                    + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
+                    + ", in your list:\n");
+
+            for (int i = 0; i < length; ++i) {
+                Task task = this.tasks.get(i);
+
+                if (task.getType() == 'D') {
+                    Deadline deadline = (Deadline) this.tasks.get(i);
+
+                    if (deadline.getDate().isEqual(date)) {
+                        sb.append(++index + ". " + deadline.toString());
+                    }
+                } else if (task.getType() == 'E') {
+                    Event event = (Event) this.tasks.get(i);
+
+                    if (event.getDate().isEqual(date)) {
+                        sb.append(++index + ". " + event.toString());
+                    }
+                }
+
+                if (i + 1 != length) {
+                    sb.append("\n");
+                }
+            }
+
+            output(index > 0 ? sb.toString() : NO_TASK_SEARCH_MSG);
+        } catch (DateTimeParseException e) {
+            output(INVALID_DATE_MSG);
+        }
+    }
+
     public void start() {
         Input input = null;
         Scanner sc = null;
@@ -301,12 +364,14 @@ public class Duke {
                     todo.setCompleted(completed);
                     this.tasks.add(todo);
                 } else if (task.charAt(0) == 'D') {
-                    Deadline deadline = new Deadline(taskData[2], taskData[3]);
+                    Deadline deadline = new Deadline(
+                            taskData[2], LocalDate.parse(taskData[3]));
 
                     deadline.setCompleted(completed);
                     this.tasks.add(deadline);
                 } else if (task.charAt(0) == 'E') {
-                    Event event = new Event(taskData[2], taskData[3]);
+                    Event event = new Event(
+                            taskData[2], LocalDate.parse(taskData[3]));
 
                     event.setCompleted(completed);
                     this.tasks.add(event);
@@ -364,6 +429,10 @@ public class Duke {
                     } else {
                         continue;
                     }
+
+                    break;
+                case SEARCH:
+                    search(input.getArgs());
 
                     break;
                 default:
