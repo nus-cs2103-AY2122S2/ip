@@ -2,12 +2,37 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 
 public class Duke {
     static String line = "------------------------------------";
+    private Ui ui;
+    private TaskList tasks;
+    private Storage storage;
+
+    public Duke (String filePath) {
+        ui = new Ui(); // Setting up new UI
+        storage = new Storage(filePath); // Searching for File
+        try {
+            tasks = new TaskList(storage.load()); // Loading if Found
+        }
+        catch(Exception e) {
+            ArrayList<Task> arr = new ArrayList<>();
+            tasks = new TaskList(arr); // Creating new file if not
+        }
+    }
+
+    public void run() {
+        ui.showWelcome(); // Welcome Page
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            // Let's Go!
+            String fullCommand = ui.readCommand();
+            ui.showLine();
+            Parser command = new Parser(fullCommand);
+
+
+    }
 
     public void hello() {
         String logo = " ____        _        \n"
@@ -143,16 +168,9 @@ public class Duke {
         }
     }
 
-    public LocalDate getDate(String s) {
-        return LocalDate.parse(s);
-    }
-
-
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         ArrayList<Task> arr = new ArrayList<>();
-        Duke robot = new Duke();
-        robot.hello();
+        new Duke("data/duke.ser").run();
 
         // Load
         try {
@@ -168,7 +186,7 @@ public class Duke {
 
         // Let's Go!
         while (true) {
-            String input = scanner.nextLine();
+
             // Exit Feature
             if (input.equals("bye")) {
                 robot.exit(arr);
