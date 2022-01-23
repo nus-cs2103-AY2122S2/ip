@@ -1,16 +1,43 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.IOException;
-
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Duke {
     private static ArrayList<Task> tasks = new ArrayList<>();
     private static int totalTasks = 0;
 
-    private static String topLine = "    ――――――――――――――――――――――――――――――――――\n    ";
-    private static String bottomLine = "    ――――――――――――――――――――――――――――――――――\n";
-    private static String indent = "    ";
+    private static final String topLine = "    ――――――――――――――――――――――――――――――――――\n    ";
+    private static final String bottomLine = "    ――――――――――――――――――――――――――――――――――\n";
+    private static final String indent = "    ";
+
+    private static void loadTaskList(File f) throws FileNotFoundException {
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+            String task = s.nextLine();
+            String[] taskComponents = task.split(" [|] "); // [type, status, description, time(if any)]
+            Task t;
+
+            switch (taskComponents[0]) {
+            case "T":
+                t = new Todo(taskComponents[0]);
+                break;
+            case "D":
+                t = new Deadline(taskComponents[0], taskComponents[3]);
+                break;
+            case "E":
+                t = new Event(taskComponents[0], taskComponents[3]);
+                break;
+            default:
+                t = new Task(taskComponents[0]);
+            }
+            tasks.add(t);
+            totalTasks++;
+
+            if (taskComponents[1].equals("1")) {
+                t.markAsDone();
+            }
+        }
+    }
 
     private static String listStatus(int totalTasks) {
         if (totalTasks > 1) {
@@ -100,10 +127,23 @@ public class Duke {
         // Print introduction
         System.out.print(logo + "\n" + intro + bottomLine);
 
+        // Load task list saved in hard disk, else create file to save task list
+        String filePath = "data/duke.txt";
+        File file = new File(filePath);
+        if (file.exists()) {
+            loadTaskList(file);
+        } else { // create folder and file
+            File folder = new File("data");
+            if (folder.mkdir()) {
+                boolean isCreated = file.createNewFile();
+            }
+        }
+
+        // Get user input
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String input = br.readLine();
 
-        while (!input.equals("bye")) {
+        while (!input.equals("bye")) { // Program only ends when user enters 'bye' command
 
             try {
                 String[] inputArr = input.split(" ");
