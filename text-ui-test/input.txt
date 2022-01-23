@@ -2,9 +2,11 @@ hi
 todo addsomething
 event die
 event die /at later
+event die /at 2021-12-31
 deadline
 deadline woosh
 deadline woosh /by later
+deadline woosh /by 2021-12-30
 list
 mark 2
 mark 0
