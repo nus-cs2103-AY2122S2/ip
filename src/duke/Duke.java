@@ -1,4 +1,7 @@
+package duke;
+
 import java.io.IOException;
+import duke.command.Command;
 
 public class Duke {
 
@@ -7,11 +10,11 @@ public class Duke {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private String name;
-    private String frame = "______________________________________________";
-    private Storage storage;
+    private final String name;
+    private final String frame = "______________________________________________";
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
 
     public Duke(String name, String filePath) {
         this.name = name;
@@ -20,7 +23,7 @@ public class Duke {
         try {
             tasks = storage.load();
         } catch (IOException e) {
-            ui.showLoadingError(e.getMessage());
+            ui.showMessage(e.getMessage());
             tasks = new TaskList();
         }
     }

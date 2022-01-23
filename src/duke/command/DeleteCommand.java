@@ -1,8 +1,14 @@
+package duke.command;
+
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
+
 public class DeleteCommand extends Command {
 
     private final int index;
 
-    DeleteCommand(int index) {
+    public DeleteCommand(int index) {
         super(Keyword.DELETE);
         this.index = index;
     }

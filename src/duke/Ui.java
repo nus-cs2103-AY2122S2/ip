@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -10,7 +12,7 @@ public class Ui {
     }
 
     public void showLine() {
-        System.out.println("_________________________________________");
+        System.out.println("____________________________________________");
     }
 
     public void showList(TaskList tasks) {

@@ -1,6 +1,12 @@
+package duke.command;
+
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
+
 public abstract class Command {
 
-    enum Keyword {
+    public enum Keyword {
         BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, UNRECOGNIZED
     }
 

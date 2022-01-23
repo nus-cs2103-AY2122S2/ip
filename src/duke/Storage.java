@@ -1,7 +1,12 @@
+package duke;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
 
 public class Storage {
 
