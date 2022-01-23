@@ -118,7 +118,7 @@ public class Ui {
     }
 
     public boolean isValidTask(String fullCommand) {
-        if (getCommandWord(fullCommand).equals("todo")) {
+        if (getCommandWord(fullCommand).equals("todo") || getCommandWord(fullCommand).equals("find")) {
             int index = fullCommand.indexOf(' ');
             if (index == -1) {
                 return false;
@@ -178,7 +178,7 @@ public class Ui {
     }
 
     public String getTaskName(String fullCommand) {
-        if (getCommandWord(fullCommand).equals("todo")) {
+        if (getCommandWord(fullCommand).equals("todo") || getCommandWord(fullCommand).equals("find")) {
             return fullCommand.substring(fullCommand.indexOf(' ') + 1);
         } else if (getCommandWord(fullCommand).equals("deadline")) {
                 return fullCommand.substring(fullCommand.indexOf(' ') + 1, fullCommand.indexOf("/by") - 1);
@@ -207,4 +207,10 @@ public class Ui {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
 
+    public void findTask(String fullCommand, TaskList taskList) {
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        String taskName = getTaskName(fullCommand);
+        taskList.find(taskName);
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    }
 }

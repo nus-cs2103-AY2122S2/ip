@@ -100,8 +100,14 @@ public class Duke {
                     unmarkCommand.execute(taskList, ui, storage);
                     isExit = unmarkCommand.isExit();
                 }
+            } else if (ui.getCommandWord(fullCommand).equals("find")) {
+                if (ui.isValidTask(fullCommand)) {
+                    FindCommand findCommand = new FindCommand(fullCommand);
+                    findCommand.execute(taskList, ui, storage);
+                    isExit = findCommand.isExit();
             } else {
-                ui.showGeneralException();
+                    ui.showGeneralException();
+                }
             }
         }
     }

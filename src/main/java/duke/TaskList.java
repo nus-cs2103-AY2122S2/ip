@@ -83,4 +83,14 @@ public class TaskList {
         }
         return s;
     }
+
+    public void find(String string) {
+        String lowercase = string.toLowerCase();
+        for (int i = 0; i < arrayList.size(); i++) {
+            Task task = arrayList.get(i);
+            if (task.getTaskName().toLowerCase().contains(lowercase)) {
+                System.out.println(task);
+            }
+        }
+    }
 }
