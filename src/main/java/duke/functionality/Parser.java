@@ -20,6 +20,10 @@ import duke.task.Todo;
 import duke.exception.IncompleteCommandException;
 import duke.exception.InvalidCommandException;
 
+/**
+ * Represents the Parsing capabilities of the Duke project. A <code> Parse </code> object corresponds
+ * to the actions taken to parse and format user inputs.
+ */
 public class Parser {
 
     private static final int EVENT_OFFSET = 5;
@@ -27,30 +31,56 @@ public class Parser {
     private static final int DEADLINE_OFFSET = 8;
     private static final int INPUT_OFFSET = 3;
 
+    /**
+     * Returns the formatted date.
+     * @param input date specified by user input. Eg, "2020-06-06".
+     * @return formatted date.
+     */
     public static LocalDate formatDate(String input){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern( "yyyy-MM-dd");
         LocalDate date = LocalDate.parse(input, dtf);
         return date;
     }
 
+    /**
+     * Returns the formatted time.
+     * @param input time specified by user input. Eg, "1800".
+     * @return formatted time.
+     */
     public static LocalTime formatTime(String input) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern( "HHmm");
         LocalTime time = LocalTime.parse(input, dtf);
         return time;
     }
 
+    /**
+     * Returns the date.
+     * @param input formatted date. Eg, "2020-06-06".
+     * @return date but as a String.
+     */
     public static String dateToString(LocalDate input) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern( "yyyy-MM-dd");
         String date = input.format(dtf);
         return date;
     }
 
+    /**
+     * Returns the time.
+     * @param input formatted time Eg, "1800".
+     * @return time but as a String.
+     */
     public static String timeToString(LocalTime input) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern( "HHmm");
         String time = input.format(dtf);
         return time;
     }
 
+    /**
+     * Returns the respective command from user input.
+     * @param input user input. Eg, "todo run".
+     * @return A command.
+     * @throws DukeException when user input for date and time are not of the correct form.
+     */
     public static Command parse(String input) throws DukeException {
         String[] inputSplit = input.split(" "); //split input by space
         String command = inputSplit[0];

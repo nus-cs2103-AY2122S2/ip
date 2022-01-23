@@ -12,20 +12,38 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Represents the Storage capabilities of the Duke project. A <code> Storage </code> object corresponds
+ * to the actions available to write and read data/task.
+ */
 public class Storage {
     protected static String pwd;
     protected static String path;
 
+    /**
+     * Constructor for Storage class.
+     * @param pwd user's current working directory.
+     * @param path path to "/data/TaskData.txt".
+     */
     public Storage(String pwd, String path){
         Storage.pwd = pwd;
         Storage.path = path;
     }
 
+    /**
+     * Returns nothing, but stores the specified task into the taskList in TaskList class.
+     * @param t The task created in Parser class.
+     */
     public static void storeToList(Task t) { //same as addToList but no printing
         TaskList.taskList.add(t);
         TaskList.numOfTask++;
     }
 
+    /**
+     * Returns nothing, but stores all task into the text file specified by path.
+     * @param path path to "/data/TaskData.txt".
+     * @throws IOException If the text file is missing.
+     */
     public static void writeToFile(String path) throws IOException {
         FileWriter fw = new FileWriter(path);
         for(int i = 0; i < TaskList.numOfTask; i++) {
@@ -36,6 +54,9 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Returns nothing, but calls writeToFile to update the text file.
+     */
     public static void updateTextFile() {
         try {
             writeToFile(Storage.pwd + Storage.path);
@@ -44,6 +65,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns nothing, but reads the input from the specified file and stores them in taskList in TaskList class.
+     * @param f The text file that stores all tasks.
+     * @throws FileNotFoundException
+     */
     public static void readFileDataAndStoreInList(File f) throws FileNotFoundException {
         Scanner sc = new Scanner(f);
         while ((sc.hasNextLine())) {
@@ -75,6 +101,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns a crafted output to be stored in the text file.
+     * @param t The task created in Parser class.
+     * @return crafted output.
+     */
     public static String craftOutput(Task t) {
         String output = "";
         String doneIcon = t.getStatusIcon();
@@ -106,6 +137,10 @@ public class Storage {
         return output;
     }
 
+    /**
+     * Returns nothing, but loads all tasks from the specified path.
+     * @throws IOException If the file is missing.
+     */
     public void load() throws IOException {
         File directory = new File(pwd + "/data");
         File inputFile = new File(pwd + path);
