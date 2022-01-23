@@ -4,8 +4,8 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private LocalDate date;
 
-    public Deadline(String description, LocalDate date) {
-        super(description);
+    public Deadline(String description, LocalDate date, char type) {
+        super(description, type);
         this.date = date;
     }
 

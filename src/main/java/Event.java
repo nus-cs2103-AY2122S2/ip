@@ -4,8 +4,8 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private LocalDate date;
 
-    public Event(String description, LocalDate date) {
-        super(description);
+    public Event(String description, LocalDate date, char type) {
+        super(description, type);
         this.date = date;
     }
 
