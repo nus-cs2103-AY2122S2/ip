@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.*;
 
 public class Duke {
@@ -24,8 +25,12 @@ public class Duke {
                 "WHAT YOU WANT?";
         format(welcome);
 
-        //Create ArrayList to store tasks
-        ArrayList<Task> tasks = new ArrayList<>();
+        //Checks if prev. tasks exist
+        String logPath = "data/log.txt";
+        DukeFile log = new DukeFile(logPath);
+
+        //Create ArrayList to store prev tasks
+        ArrayList<Task> tasks = log.readTasks();
 
         Scanner input = new Scanner(System.in);
         String toEcho = input.nextLine();
@@ -104,8 +109,8 @@ public class Duke {
                         if (incomplete) {
                             throw new DukeException("WHAT YOU WANT DO? NOTHING AH HELLOOOOOO?");
                         } else {
-                            String task = rem.split("/by")[0];
-                            String dead = rem.split("/by")[1];
+                            String task = rem.split(" /by ")[0];
+                            String dead = rem.split(" /by ")[1];
                             Task tempTask = new Deadline(task, dead);
                             tasks.add(tempTask);
                             String confirm =
@@ -119,8 +124,8 @@ public class Duke {
                         if (incomplete) {
                             throw new DukeException("WHAT YOU WANT DO? NOTHING AH HELLOOOOOO?");
                         } else {
-                            String task = rem.split("/at")[0];
-                            String dead = rem.split("/at")[1];
+                            String task = rem.split(" /at ")[0];
+                            String dead = rem.split(" /at ")[1];
                             Task tempTask = new Event(task, dead);
                             tasks.add(tempTask);
                             String confirm =
@@ -144,6 +149,13 @@ public class Duke {
                         }
                     } else {
                         throw new DukeException("WHAT TALKING YOU? CHAO RECRUIT YOU BETTER WAKE UP YOUR IDEA!");
+                    }
+
+                    // Updates log file
+                    try {
+                        log.updateTasks(tasks);
+                    } catch (IOException e) {
+                        System.out.printf(e.getMessage());
                     }
                 }
             } catch (DukeException e) {

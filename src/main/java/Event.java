@@ -2,7 +2,7 @@ public class Event extends Task{
     protected String dead;
 
     public Event(String name, String dead) {
-        super(name);
+        super("E", name, dead);
         this.dead = dead;
     }
 

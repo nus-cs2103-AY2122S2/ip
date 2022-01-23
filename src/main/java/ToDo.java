@@ -1,9 +1,6 @@
 public class ToDo extends Task{
-    protected String dead;
-
     public ToDo(String name) {
-        super(name);
-        this.dead = dead;
+        super("T", name);
     }
 
     @Override
