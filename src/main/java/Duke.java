@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -21,6 +25,8 @@ public class Duke {
             "OOPS!!! I need a number to update that task :-(";
     private static final String INVALID_DELETE_MSG =
             "OOPS!!! I need a number to delete that task :-(";
+    private static final String FILE_PATH = "data/";
+    private static final String FILE_NAME = "duke.txt";
 
     private ArrayList<Task> tasks;
     
@@ -44,6 +50,7 @@ public class Duke {
         String[] taskArr = null;
         String type = "";
         String result = "Got it. I've added this task:\n";
+        String textToAdd = "";
 
         try {
             taskArr = task.split(" ", 2);
@@ -53,19 +60,44 @@ public class Duke {
                 String[] taskData = taskArr[1].split(" /by ");
 
                 this.tasks.add(new Deadline(taskData[0], taskData[1]));
+
+                Deadline deadline = (Deadline) this.tasks.get(this.tasks.size() - 1);
+
+                textToAdd = String.format(
+                        "D | %s | %s | %s",
+                        deadline.getCompleted() ? "1" : "0",
+                        deadline.getDescription(),
+                        deadline.getDateTime());
             } else if (type.equalsIgnoreCase("event")) {
                 String[] taskData = taskArr[1].split(" /at ");
 
                 this.tasks.add(new Event(taskData[0], taskData[1]));
+
+                Event event = (Event) this.tasks.get(this.tasks.size() - 1);
+
+                textToAdd = String.format(
+                        "E | %s | %s | %s",
+                        event.getCompleted() ? "1" : "0",
+                        event.getDescription(),
+                        event.getDateTime());
             } else if (type.equalsIgnoreCase("todo")) {
                 if (taskArr[1].trim().length() == 0) {
                     throw new IndexOutOfBoundsException();
                 }
 
                 this.tasks.add(new Todo(taskArr[1]));
+
+                Todo todo = (Todo) this.tasks.get(this.tasks.size() - 1);
+
+                textToAdd = String.format(
+                        "T | %s | %s",
+                        todo.getCompleted() ? "1" : "0",
+                        todo.getDescription());
             } else {
                 throw new IndexOutOfBoundsException();
             }
+
+            writeToFile(FILE_PATH + FILE_NAME, textToAdd);
 
             int noOfTasks = this.tasks.size();
             String pluralTask = noOfTasks > 1 ? "tasks" : "task";
@@ -85,7 +117,17 @@ public class Duke {
             } else {
                 output(UNKNOWN_MSG);
             }
+        } catch (IOException e) {
+            output("OOPS!!! Facing some issues in saving your task to disk. :-(");
         }
+    }
+    
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true);
+
+        fw.write(textToAdd);
+        fw.write(System.getProperty("line.separator"));
+        fw.close();
     }
 
     public boolean isValidType(String type) {
@@ -187,7 +229,46 @@ public class Duke {
 
     public void start() {
         Input input = null;
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = null;
+
+        try {
+            File directory = new File(FILE_PATH);
+
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+
+            File file = new File(FILE_PATH + FILE_NAME);
+
+            sc = new Scanner(file);
+
+            while (sc.hasNext()) {
+                String task = sc.nextLine();
+                String[] taskData = task.split("\\s\\|\\s");
+                Boolean completed = Integer.parseInt(taskData[1]) == 1;
+
+                if (task.charAt(0) == 'T') {
+                    Todo todo = new Todo(taskData[2]);
+
+                    todo.setCompleted(completed);
+                    this.tasks.add(todo);
+                } else if (task.charAt(0) == 'D') {
+                    Deadline deadline = new Deadline(taskData[2], taskData[3]);
+
+                    deadline.setCompleted(completed);
+                    this.tasks.add(deadline);
+                } else if (task.charAt(0) == 'E') {
+                    Event event = new Event(taskData[2], taskData[3]);
+
+                    event.setCompleted(completed);
+                    this.tasks.add(event);
+                }
+            }
+        } catch (IOException e) {
+            output("OOPS!!! Facing some issues in reading your tasks from disk. :-(");
+        }
+
+        sc = new Scanner(System.in);
 
         output(BOT_ART + "\nHello! I'm " + BOT_NAME + "\nWhat can I do for you?\n");
             

@@ -6,6 +6,10 @@ public class Event extends Task {
         this.dateTime = dateTime;
     }
 
+    public String getDateTime() {
+        return this.dateTime;
+    }
+
     @Override
     public String toString() {
         return String.format("[E][%s] %s (at: %s)",
