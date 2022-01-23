@@ -3,6 +3,11 @@ package duke;
 import java.io.FileWriter;
 import java.io.IOException;
 
+
+/**
+ * Class containing UI functions
+ */
+
 class Storage {
     private final String filePath;
 

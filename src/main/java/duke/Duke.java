@@ -3,6 +3,10 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+
+/**
+ * Class containing Duke and main function
+ */
 public class Duke {
     private Storage storage;
     private TaskList taskList;

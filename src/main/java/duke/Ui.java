@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+/**
+ * Contains all ui functions.
+ */
 public class Ui {
     private final Scanner sc;
 

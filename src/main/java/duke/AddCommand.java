@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Command to add task to list
+ */
 class AddCommand extends Command {
     Task task;
 
