@@ -1,6 +1,12 @@
 public class Deadline extends Task {
     protected String by;
 
+    /*
+        if user didn't type "/by" (byIdx == -1)
+            throw new Error "you didnt' type /by bro, try again"
+        if user didnt' type a desc
+            throew new error you didnt type a description man, try again
+    */
     public Deadline(String s) throws LilyException {
         super(findDescStart(s));
         this.by = s.substring(s.indexOf("/by") + 4);

@@ -36,7 +36,6 @@ public class Lily {
         userInteracting: while (true) {
             String sentence = sc.nextLine();
             String[] parsedSentence = sentence.split(" ");
-            // add functionality to detect the /by and /at
             String action = parsedSentence[0];
             switch(action) {
                 // throw error if input doesn't match enums later on
@@ -49,7 +48,7 @@ public class Lily {
                         prettyPrint("there's nothing in the list bro");
                     } else {
                         String listMsg = "";
-                        // Add items in the list to the string
+                        // list the items in the list to the string
                         int i = 1;
                         for (Task t : list) {
                             listMsg += indent + i + "."
@@ -97,48 +96,30 @@ public class Lily {
                         list.add(t);
                         taskAddedMsg(t);
                     } catch (LilyException le) {
-                        System.err.println("Todo description cannot be empty!");
-                    } catch (Exception e) { // can't figure out how to structure this
-                        System.err.println("LilyException Failed, todo description cannot be empty!");
+                        errorPretty("Todo description cannot be empty!");
                     }
                     break;
                 case "deadline":
-                    /*
-                        if user didn't type "/by" (byIdx == -1)
-                            throw new Error "you didnt' type /by bro, try again"
-                        if user didnt' type a desc
-                            throew new error you didnt type a description man, try again
-                    */
                     try {
-                    Deadline d = new Deadline(sentence);
-                    list.add(d);
-                    taskAddedMsg(d);
-                    } catch (LilyException le) {
-                        System.err.println("Deadline description cannot be empty!");
-                    } catch (Exception e) { // can't figure out how to structure this
-                        System.err.println("LilyException Failed, deadline description cannot be empty!");
+                        Deadline d = new Deadline(sentence);
+                        list.add(d);
+                        taskAddedMsg(d);
+                    } catch (LilyException le) { // need catch "no-/by" error
+                        errorPretty("Deadline description cannot be empty!");
                     }
                     break;
                 case "event":
-                    /*
-                        if user didn't type "/at" (atIdx == -1)
-                            throw new Error "you didnt' type /at bro, try again"
-                        if user didnt' type a desc
-                            throew new error you didnt type a description man, try again
-                    */
                     try {
                         Event e = new Event(sentence);
                         list.add(e);
                         taskAddedMsg(e);
-                    } catch (LilyException le) {
-                        System.err.println("Event description cannot be empty!");
-                    } catch (Exception e) { // can't figure out how to structure this
-                        System.err.println("LilyException Failed, event description cannot be empty!");
+                    } catch (LilyException le) { // need catch "no-/at" error
+                        errorPretty("Event description cannot be empty!");
                     }
                     break;
 
                 default:
-                    prettyPrint("sorry i don't understand what you meant by\n\n"
+                    errorPretty("sorry i don't understand what you meant by\n\n"
                     + indent + sentence + "\n\n"
                     + indent + "you can try these instead:\n" + listCommands());
             }
@@ -148,6 +129,13 @@ public class Lily {
 
     protected static void prettyPrint(String s) {
         System.out.println("\n"
+        + indent + "▼＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝▼\n"
+        + indent + s + "\n"
+        + indent + "▼＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝▼\n");
+    }
+
+    protected static void errorPretty(String s) {
+        System.err.println("\n"
         + indent + "▼＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝▼\n"
         + indent + s + "\n"
         + indent + "▼＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝▼\n");
