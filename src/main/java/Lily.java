@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 /**
  * Author: Hong Yi En, Ian
- * Last Updated: 23 Jan 2022
+ * Last Updated: 23 Jan 2022 (Year 2 Sem 2)
  * 
  * An interactive CLI-based chatbot to store todos
  */
