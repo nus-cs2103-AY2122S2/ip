@@ -1,5 +1,11 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Duke {
     private static final String GREET_MESSAGE
@@ -86,6 +92,16 @@ public class Duke {
         show(message);
     }
 
+    public static LocalDateTime parseDateTime(String input) throws DukeException {
+        try {
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
+            LocalDateTime dateTime = LocalDateTime.parse(input, format);
+            return dateTime;
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Date and time must be in yyyy/MM/dd HHmm format.\n");
+        }
+    }
+
     public static String processMark(String input, boolean isDone) throws DukeException {
         try {
             int taskId = Integer.parseInt(input) - 1;
@@ -139,7 +155,8 @@ public class Duke {
             throw new DukeException(ERROR_TOO_MANY_DATES);
         }
         String description = splitInput[0].trim();
-        String deadline = splitInput[1].trim();
+        String deadlineString = splitInput[1].trim();
+        LocalDateTime deadline = parseDateTime(deadlineString);
         Deadline newDeadline = new Deadline(description, deadline);
         tasks.add(newDeadline);
         String message = String.format("%s\n  %s\nThere are %d tasks in the burning list.",
@@ -155,7 +172,8 @@ public class Duke {
             throw new DukeException(ERROR_TOO_MANY_DATES);
         }
         String description = splitInput[0].trim();
-        String time = splitInput[1].trim();
+        String timeString = splitInput[1].trim();
+        LocalDateTime time = parseDateTime(timeString);
         Event newEvent = new Event(description, time);
         tasks.add(newEvent);
         String message = String.format("%s\n  %s\nThere are %d tasks in the burning list.",

@@ -1,12 +1,16 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
-    String time;
-    public Event(String description, String time) {
+    LocalDateTime time;
+    public Event(String description, LocalDateTime time) {
         super(description, TaskType.EVENT);
         this.time = time;
     }
 
     @Override
     public String toString() {
-        return String.format("%s (at: %s)", super.toString(), this.time);
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
+        return String.format("%s (at: %shrs)", super.toString(), this.time.format(format));
     }
 }
