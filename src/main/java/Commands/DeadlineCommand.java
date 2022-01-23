@@ -1,52 +1,32 @@
 package Commands;
 
-import Exceptions.EmptyDescriptionException;
 import Exceptions.DukeException;
+import Tasks.TaskList;
+import util.Parser;
+import util.Storage;
+import util.Ui;
 
-import java.time.DateTimeException;
-import java.time.LocalDate;
+
+import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
 
-public class DeadlineCommand {
-    public static DukeBot.Deadline preProcessing(String input, String[] parts) throws DukeException {
-        if (parts.length == 1) {
-            throw new EmptyDescriptionException("deadline");
-        }
-        String description = input.substring(9);
-        String deadlineParts[] = description.split("/");
-        String[] dateTime = deadlineParts[1].substring(3).split(" ");
-        String date = dateTime[0];
+public class DeadlineCommand extends DukeCommand {
 
-        if (dateTime.length < 2) {
-            throw new DukeException("Please enter a time");
-        }
+    public DeadlineCommand(String description) {
+        super(description);
+    }
 
-        int time = Integer.parseInt(dateTime[1]);
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
 
-        if (dateTime[1].length() < 4 || time < 0000 || time >= 2400) {
-            throw new DukeException("Please enter a valid time");
-        }
+        String deadlineName = Parser.parseDescription(this.description);
+        LocalDateTime localDateTime = Parser.parseDateTime(description, "deadline");
 
-        int hour = Integer.parseInt(dateTime[1].substring(0,2));;
-        int minute = Integer.parseInt(dateTime[1].substring(2,4));
+        Tasks.Deadline deadlineTask = new Tasks.Deadline(deadlineName, localDateTime);
+        tasks.add(deadlineTask);
 
-        LocalTime localTime;
+        storage.save(tasks);
+        ui.successfulAdd(deadlineTask, tasks.getSize());
 
-        LocalDate deadline = LocalDate.parse("2010-01-01");
-        try {
-            deadline = LocalDate.parse(date);
-            localTime = LocalTime.of(hour, minute);
-        } catch (DateTimeParseException e) {
-            throw new DukeException("Please enter a valid date in the format yyyy-mm-dd");
-        } catch (DateTimeException e) {
-            throw new DukeException("Please enter a valid time");
-        }
-
-        LocalDateTime localDateTime = LocalDateTime.of(deadline, localTime);
-
-        DukeBot.Deadline deadlineTask = new DukeBot.Deadline(deadlineParts[0], localDateTime);
-        return deadlineTask;
     }
 }

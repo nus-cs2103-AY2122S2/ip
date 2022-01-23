@@ -1,52 +1,32 @@
 package Commands;
 
-import Exceptions.EmptyDescriptionException;
+import Tasks.TaskList;
+import util.Parser;
+import util.Storage;
+import util.Ui;
+
+
 import Exceptions.DukeException;
 
-import java.time.DateTimeException;
-import java.time.LocalDate;
+import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
 
-public class EventCommand {
-    public static DukeBot.Event preProcessing(String input, String[] parts) throws DukeException {
-        if (parts.length == 1) {
-            throw new EmptyDescriptionException("event");
-        }
-        String description = input.substring(6);
-        String eventParts[] = description.split("/");
-        String[] dateTime = eventParts[1].substring(3).split(" ");
-        String date = dateTime[0];
+public class EventCommand extends DukeCommand {
 
-        if (dateTime.length < 2) {
-            throw new DukeException("Please enter a time");
-        }
+    public EventCommand(String description) {
+        super(description);
+    }
 
-        int time = Integer.parseInt(dateTime[1]);
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
 
-        if (dateTime[1].length() < 4 || time < 0000 || time >= 2400) {
-            throw new DukeException("Please enter a valid time");
-        }
+        String deadlineName = Parser.parseDescription(this.description);
+        LocalDateTime localDateTime = Parser.parseDateTime(description, "event");
 
-        int hour = Integer.parseInt(dateTime[1].substring(0,2));;
-        int minute = Integer.parseInt(dateTime[1].substring(2,4));
+        Tasks.Deadline deadlineTask = new Tasks.Deadline(deadlineName, localDateTime);
+        tasks.add(deadlineTask);
 
-        LocalTime localTime;
-
-        LocalDate localDate = LocalDate.parse("2010-01-01");
-        try {
-            localDate = LocalDate.parse(date);
-            localTime = LocalTime.of(hour, minute);
-        } catch (DateTimeParseException e) {
-            throw new DukeException("Please enter a valid date in the format yyyy-mm-dd");
-        } catch (DateTimeException e) {
-            throw new DukeException("Please enter a valid time");
-        }
-
-        LocalDateTime localDateTime = LocalDateTime.of(localDate, localTime);
-
-        DukeBot.Event eventTask = new DukeBot.Event(eventParts[0], localDateTime);
-        return eventTask;
+        storage.save(tasks);
+        ui.successfulAdd(deadlineTask, tasks.getSize());
     }
 }

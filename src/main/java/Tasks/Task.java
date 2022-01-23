@@ -1,4 +1,4 @@
-package DukeBot;
+package Tasks;
 
 public class Task {
     private boolean completed;

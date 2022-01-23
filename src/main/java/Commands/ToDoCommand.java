@@ -1,17 +1,29 @@
 package Commands;
 
+import Tasks.TaskList;
+import Tasks.ToDo;
+import Tasks.Task;
+import util.Storage;
+import util.Ui;
+
+
 import Exceptions.DukeException;
 import Exceptions.EmptyDescriptionException;
 
-public class ToDoCommand {
-    public static DukeBot.ToDo preProcessing(String input, String[] parts) throws DukeException {
-        if (parts.length == 1) {
-            throw new EmptyDescriptionException("todo");
-        }
+import java.io.IOException;
 
-        String description = input.substring(5);
-        DukeBot.ToDo toDo = new DukeBot.ToDo(description);
+public class ToDoCommand extends DukeCommand {
 
-        return toDo;
+    public ToDoCommand(String description) {
+        super(description);
+    }
+
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+
+        Tasks.ToDo toDoTask = new Tasks.ToDo(this.description);
+        tasks.add(toDoTask);
+        storage.save(tasks);
+        ui.successfulAdd(toDoTask, tasks.getSize());
     }
 }
