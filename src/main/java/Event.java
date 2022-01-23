@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents a task that starts and ends at a specific date/time.
  * Includes a String representation of the date/time.
@@ -6,29 +10,45 @@
  */
 public class Event extends Task {
 
-    protected String at;
+    protected LocalDate date;
+    protected LocalTime timeBeginning, timeEnd;
 
     /**
      * Constructor for Event class
      * @param d a string representing a description of the task
-     * @param a a string representing the start and end date/time
+     * @param date the date of the task
+     * @param time1 the starting time of the event
+     * @param time2 the ending time of the event
      */
-    public Event(String d, String a) {
+    public Event(String d, LocalDate date, LocalTime time1, LocalTime time2) {
         super(d);
-        this.at = a;
+        this.date = date;
+        this.timeBeginning = time1;
+        this.timeEnd = time2;
     }
 
-    @Override
     /**
      * Returns the task properties in the format of the task to be saved onto hard disk
      * @return String representing the task toString in hard-disk format
      */
+    @Override
     public String toStringInFileFormat() {
-        return "E|" + this.getStatusIcon() + "|" + this.description + "|" + this.at;
+        return "E|" + this.getStatusIcon() + "|" + this.description + "|" +
+                this.date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "|" +
+                this.timeBeginning.format(DateTimeFormatter.ofPattern("HH:mm")) + "|" +
+                this.timeEnd.format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
+    /**
+     * toString implementation of task.
+     *
+     * @return String implementation of task
+     */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        String dateAndTime = date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " from " +
+                timeBeginning.format(DateTimeFormatter.ofPattern("hh:mm a")) + " to " +
+                timeEnd.format(DateTimeFormatter.ofPattern("hh:mm a"));
+        return "[E]" + super.toString() + " (at: " + dateAndTime + ")";
     }
 }
