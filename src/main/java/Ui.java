@@ -1,6 +1,3 @@
-package sonautil;
-import task.*;
-
 public class Ui {
 
     public static final String LINE = "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*";

@@ -1,5 +1,4 @@
-package sonautil;
-
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
@@ -14,12 +13,9 @@ public class Parser {
             command[0] = "list";
 
         } else if (userMessage.startsWith("mark") && split[0].equals("mark")) {
-            if (userMessage.replaceAll(" ", "").equals("mark")) {
-                throw new DukeException(Ui.markNoNumberMessage());
-            }
 
             //invalid number
-            boolean isMarkCommand = userMessage.toLowerCase().matches("^mark \\d+|^mark -\\d+");
+            Boolean isMarkCommand = userMessage.toLowerCase().matches("^mark \\d+|^mark -\\d+");
             if (!isMarkCommand) {
                 throw new DukeException(Ui.userUnknownInputMessage(userMessage));
             }
@@ -36,11 +32,8 @@ public class Parser {
 
         } else if (userMessage.startsWith("unmark") && split[0].equals("unmark")) {
 
-            if (userMessage.replaceAll(" ", "").equals("unmark")) {
-                throw new DukeException(Ui.unmarkNoNumberMessage());
-            }
             //invalid number
-            boolean isUnmarkCommand = userMessage.toLowerCase().matches("^unmark \\d+|^unmark -\\d+");
+            Boolean isUnmarkCommand = userMessage.toLowerCase().matches("^unmark \\d+|^unmark -\\d+");
             if (!isUnmarkCommand) {
                 throw new DukeException(Ui.userUnknownInputMessage(userMessage));
             }
@@ -153,12 +146,8 @@ public class Parser {
 
         } else if (userMessage.startsWith("delete") && split[0].equals("delete")) {
 
-            if (userMessage.replaceAll(" ", "").equals("delete")) {
-                throw new DukeException(Ui.taskRemoveEmptyMessage());
-            }
-
             //invalid number
-            boolean isValidCommand = userMessage.toLowerCase().matches("^delete \\d+|^delete -\\d+");
+            Boolean isValidCommand = userMessage.toLowerCase().matches("^delete \\d+|^delete -\\d+");
             if (!isValidCommand) {
                 throw new DukeException(Ui.userUnknownInputMessage(userMessage));
             }
