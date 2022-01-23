@@ -71,4 +71,24 @@ public class Task {
     public String toString() {
         return "[" + getStatusIcon() + "] " + this.description;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Task task = (Task) o;
+
+        if (isDone != task.isDone) {
+            return false;
+        }
+        if (!description.equals(task.description)) {
+            return false;
+        }
+        return type == task.type;
+    }
 }
