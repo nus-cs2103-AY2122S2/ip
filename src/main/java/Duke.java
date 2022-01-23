@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 import java.io.FileWriter;
+
 
 public class Duke {
     private static final ArrayList<Task> tasks = new ArrayList<>();
@@ -260,17 +262,17 @@ public class Duke {
                         addTask(ToDo);
                         break;
                     case DEADLINE:
-                        Task Deadline = new Deadline(description, date);
                         if (description.equals("") || date.equals("")) {
                             throw new DukeException("Deadline command is invalid!");
                         }
+                        Task Deadline = new Deadline(description, date);
                         addTask(Deadline);
                         break;
                     case EVENT:
-                        Task Event = new Event(description, dateTime);
                         if (dateTime.equals("") || description.equals("")) {
                             throw new DukeException("Event command is invalid");
                         }
+                        Task Event = new Event(description, dateTime);
                         addTask(Event);
                         break;
                     default:

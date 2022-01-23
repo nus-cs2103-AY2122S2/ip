@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -26,7 +25,11 @@ public class Event extends Task {
 
     @Override
     public String toFileFormat() {
-        return "E" + super.toFileFormat() + "," + at;
+        if (at != null) {
+            return "E" + super.toFileFormat() + "," + formatDate(at);
+        } else {
+            return "E" + super.toFileFormat() + "," + formatDateTime(atTime);
+        }
     }
 
     @Override
@@ -43,7 +46,7 @@ public class Event extends Task {
             LocalDateTime.parse(dateTimeString, dateTimeFormat);
             return true;
         } catch (DateTimeParseException e) {
-            System.out.println("Not Datetime!");
+            System.out.println("Checking DateTime Format!");
         }
         return false;
     }
@@ -54,26 +57,26 @@ public class Event extends Task {
             LocalDate.parse(dateString, dateFormat);
             return true;
         } catch (DateTimeParseException e) {
-            System.out.println("Not Date!");
+            System.out.println("Checking Date Format!");
         }
         return false;
     }
 
 
     public String formatDateTime(LocalDateTime dateTime) {
-        Integer day = dateTime.getDayOfMonth();
-        Month month = dateTime.getMonth();
+        String day = dateTime.getDayOfMonth() < 10 ? "0" + dateTime.getDayOfMonth() : "" + dateTime.getDayOfMonth();
+        String month = dateTime.getMonthValue() < 10 ? "0" + dateTime.getMonthValue() : "" + dateTime.getMonthValue();
         Integer year = dateTime.getYear();
-        Integer hour = dateTime.getHour();
-        Integer minute = dateTime.getMinute();
-        return day + " " + month + " " + year + " " + hour + ":" + minute;
+        String hour = dateTime.getHour() < 10 ? "0" + dateTime.getHour() : "" + dateTime.getHour();
+        String minute = dateTime.getMinute() < 10 ? "0" + dateTime.getMinute() : "" +  dateTime.getMinute();
+        return day + "-" + month + "-" + year + " " + hour + ":" + minute;
     }
 
     public String formatDate(LocalDate date) {
-        Integer day = date.getDayOfMonth();
-        Month month = date.getMonth();
+        String day = date.getDayOfMonth() < 10 ? "0" + date.getDayOfMonth() : "" + date.getDayOfMonth();
+        String month = date.getMonthValue() < 10 ? "0" + date.getMonthValue() : "" + date.getMonthValue();
         Integer year = date.getYear();
-        return day + " " + month + " " + year;
+        return day + "-" + month + "-" + year;
     }
 
 }
