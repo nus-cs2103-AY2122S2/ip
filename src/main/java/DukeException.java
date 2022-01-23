@@ -32,3 +32,17 @@ class EmptyDescriptionException extends DukeException {
         return "    OH NO! :(" + this.message;
     }
 }
+
+class InvalidInputException extends DukeException {
+    private final String message;
+
+    public InvalidInputException(String e) {
+        super(e);
+        this.message = e;
+    }
+
+    @Override
+    public String toString(){
+        return "    OH NO! :(" + this.message;
+    }
+}
