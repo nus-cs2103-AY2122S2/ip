@@ -5,7 +5,9 @@ import task.Task;
 
 public class AddCommand extends Command {
 
-    public static final String COMMAND_WORD = "task";
+    public static final String COMMAND_TODO = "todo";
+    public static final String COMMAND_DEADLINE = "deadline";
+    public static final String COMMAND_EVENT = "event";
     public static final String MESSAGE_ADD = "Got it. I've added this task:\n";
 
     private final Task task;
