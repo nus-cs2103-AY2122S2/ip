@@ -9,14 +9,27 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * A class to handle reading, writing, creating and updating functionalities regarding external files.
+ */
 public class FileHandler {
 
+    /**
+     * Used to get the desired path where the output file is stored.
+     *
+     * @return The path in string format.
+     */
     public static String getFilePath() {
         String home = System.getProperty("user.home");
         java.nio.file.Path path = java.nio.file.Paths.get(home, "desktop", "ip", "data", "duke.txt");
         return String.valueOf(path);
     }
 
+    /**
+     * Attempts to read from the output file. If it does not exist, creates one. Afterwards, updates the list of tasks.
+     *
+     * @param list Tasklist that contains all tasks.
+     */
     public static void readFromFile(Tasklist list) {
         String home = System.getProperty("user.home");
         java.nio.file.Path path = java.nio.file.Paths.get(home, "desktop", "ip", "data", "duke.txt");
@@ -60,6 +73,11 @@ public class FileHandler {
         }
     }
 
+    /**
+     * Writes to the output file in the specified format.
+     *
+     * @param list Tasklist that contains all tasks.
+     */
     public static void writeToFile(Tasklist list) {
         String path = FileHandler.getFilePath();
         StringBuilder writeTasks = new StringBuilder();
@@ -93,6 +111,9 @@ public class FileHandler {
         }
     }
 
+    /**
+     * Creates directory for the output file.
+     */
     public static void createFolder() {
         String home = System.getProperty("user.home");
         java.nio.file.Path path = java.nio.file.Paths.get(home, "desktop", "ip", "data");

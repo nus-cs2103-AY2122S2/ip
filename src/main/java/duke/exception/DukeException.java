@@ -4,12 +4,29 @@ import duke.task.Tasklist;
 
 import java.util.regex.Pattern;
 
+/**
+ * A custom exception used to handle edge cases in our application.
+ */
 public class DukeException extends Exception {
 
+    /**
+     * Constructor to initialize the error, calls upon parent constructor.
+     *
+     * @param message This is the error message returned to users.
+     */
     public DukeException(String message) {
         super(message);
     }
 
+    /**
+     * Function to specifically test Deadline and Event tasks.
+     *
+     * @param index Index of the keyword '/by' or '/at' that is too be used in the tasks.
+     * @param input The string that the user has entered following the command.
+     * @param taskType Specifies the task type of either Deadline or Event.
+     * @return An array of the date and time format, if specified.
+     * @throws DukeException If any of the params do not satisfy conditions for processing.
+     */
     public static String[] taskValidity(int index, String input, String taskType) throws DukeException {
         if (taskType.equals("event")) {
             if (index == -1) {
@@ -55,6 +72,12 @@ public class DukeException extends Exception {
         }
     }
 
+    /**
+     * Function to specifically test Todo tasks.
+     *
+     * @param input The string that the user has entered following the command.
+     * @throws DukeException If any of the params do not satisfy conditions for processing.
+     */
     public static void taskValidity(String input) throws DukeException {
         if (input.length() < 5 || input.substring(5).strip().equals("")) {
             throw new DukeException("Please key in a valid task name.\n");
@@ -64,7 +87,15 @@ public class DukeException extends Exception {
         }
     }
 
-    public static int indexValidity(String input, Tasklist l) throws DukeException {
+    /**
+     * Function to test if the digit provided is valid.
+     *
+     * @param input The string that the user has entered following the command.
+     * @param list Tasklist that contains all tasks.
+     * @return The index to be used.
+     * @throws DukeException If any of the params do not satisfy conditions for processing.
+     */
+    public static int indexValidity(String input, Tasklist list) throws DukeException {
         String [] keywords = input.split(" ");
         int index;
         if (keywords.length != 2) {
@@ -75,7 +106,7 @@ public class DukeException extends Exception {
             if (index < 0) {
                 throw new DukeException("Please key in a number starting from 1.\n");
             }
-            if (index >= l.getTotalTasks()) {
+            if (index >= list.getTotalTasks()) {
                 throw new DukeException("No task with this number exists yet!\n");
             }
         } catch (NumberFormatException err) {

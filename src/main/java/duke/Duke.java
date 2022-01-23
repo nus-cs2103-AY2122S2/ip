@@ -6,6 +6,9 @@ import duke.task.Tasklist;
 
 import java.util.Scanner;
 
+/**
+ * Entry point of the application.
+ */
 public class Duke {
     public static void main(String[] args) {
         String logo = " ____        _        \n"

@@ -7,6 +7,9 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+/**
+ * Enum class used to handle the different commands used in the application.
+ */
 public enum Handlers {
     Bye("bye"),
     Deadline("deadline"),
@@ -19,10 +22,21 @@ public enum Handlers {
 
     public final String label;
 
+    /**
+     * Enum constructor to reference the exact commands used.
+     *
+     * @param label Exact commands used in the application.
+     */
     Handlers(String label) {
         this.label = label;
     }
 
+    /**
+     * Handles and distributes all commands to the respective handlers.
+     *
+     * @param list Tasklist that contains all tasks.
+     * @param scn Scanner used to read in the arguments.
+     */
     public static void commandHandler(Tasklist list, Scanner scn) {
         while (scn.hasNextLine()) {
             String input = scn.nextLine();
@@ -55,11 +69,23 @@ public enum Handlers {
         }
     }
 
+    /**
+     * Handles the command 'bye'. Ends the program.
+     *
+     * @param list Tasklist that contains all tasks.
+     */
     public static void byeHandler(Tasklist list) {
         System.out.println("Bye. Hope to see you again soon!");
         FileHandler.writeToFile(list);
     }
 
+    /**
+     * Handles the command 'deadline'.
+     *
+     * @param list Tasklist that contains all tasks.
+     * @param input The string that the user has entered following the command.
+     * @param cmd String representing the command being used.
+     */
     public static void deadlineHandler(Tasklist list, String input, String cmd) {
         try {
             int index = input.indexOf("/by");
@@ -83,6 +109,12 @@ public enum Handlers {
         }
     }
 
+    /**
+     * Handles the command 'delete'.
+     *
+     * @param list Tasklist that contains all tasks.
+     * @param input The string that the user has entered following the command.
+     */
     public static void deleteHandler(Tasklist list, String input) {
         try {
             int index = DukeException.indexValidity(input, list);
@@ -96,6 +128,13 @@ public enum Handlers {
         }
     }
 
+    /**
+     * Handles the command 'event'.
+     *
+     * @param list Tasklist that contains all tasks.
+     * @param input The string that the user has entered following the command.
+     * @param cmd String representing the command being used.
+     */
     public static void eventHandler(Tasklist list, String input, String cmd) {
         try {
             int index = input.indexOf("/at");
@@ -119,6 +158,12 @@ public enum Handlers {
         }
     }
 
+    /**
+     * Handles the command 'mark'.
+     *
+     * @param list Tasklist that contains all tasks.
+     * @param input The string that the user has entered following the command.
+     */
     public static void markHandler(Tasklist list, String input) {
         try {
             int index = DukeException.indexValidity(input, list);
@@ -135,6 +180,12 @@ public enum Handlers {
         System.out.println(list.toString());
     }
 
+    /**
+     * Handles the command 'todo'.
+     *
+     * @param list Tasklist that contains all tasks.
+     * @param input The string that the user has entered following the command.
+     */
     public static void todoHandler(Tasklist list, String input) {
         try {
             DukeException.taskValidity(input);
@@ -148,6 +199,12 @@ public enum Handlers {
         }
     }
 
+    /**
+     * Handles the command 'unmark'.
+     *
+     * @param list Tasklist that contains all tasks.
+     * @param input The string that the user has entered following the command.
+     */
     public static void unmarkHandler(Tasklist list, String input) {
         try {
             int index = DukeException.indexValidity(input, list);
