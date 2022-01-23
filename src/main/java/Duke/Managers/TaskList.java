@@ -1,6 +1,8 @@
+package Duke.Managers;
+
 import java.io.Serializable;
 import java.util.ArrayList;
-
+import Duke.Tasks.Task;
 public class TaskList implements Serializable {
     protected ArrayList<Task> tasks;
 
