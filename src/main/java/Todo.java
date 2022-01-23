@@ -9,6 +9,16 @@ public class Todo extends Task {
     }
 
     @Override
+    public boolean isHasDate() {
+        return false;
+    }
+
+    @Override
+    public boolean isHasTime() {
+        return false;
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }

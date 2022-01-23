@@ -1,3 +1,8 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,6 +17,15 @@ public class Duke {
     // contain tasks in array
     private static final ArrayList<Task> tasks = new ArrayList<>();
 
+    // Input formats of date and times
+    private static final DateTimeFormatter dateTimeIn = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private static final DateTimeFormatter dateIn = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter timeIn = DateTimeFormatter.ofPattern("HHmm");
+
+    // Output formats of date and times
+    private static final DateTimeFormatter dateTimeOut = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a");
+    private static final DateTimeFormatter dateOut = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    private static final DateTimeFormatter timeOut = DateTimeFormatter.ofPattern("hh:mm a");
 
     private enum Command {
         BYE,
@@ -22,6 +36,13 @@ public class Duke {
         DEADLINE,
         EVENT,
         DELETE,
+        INVALID
+    }
+
+    private enum Format {
+        DATE,
+        TIME,
+        DATETIME,
         INVALID
     }
 
@@ -44,6 +65,45 @@ public class Duke {
             return Command.DELETE;
         } else {
             return Command.INVALID;
+        }
+    }
+
+    private static boolean isValidDateTime(String dt) {
+        try {
+            LocalDateTime.parse(dt, dateTimeIn);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+        return true;
+    }
+
+    private static boolean isValidDate(String d) {
+        try {
+            LocalDate.parse(d, dateIn);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+        return true;
+    }
+
+    private static boolean isValidTime(String t) {
+        try {
+            LocalTime.parse(t, timeIn);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+        return true;
+    }
+
+    private static Format dateTimeParser(String input) {
+        if (isValidDateTime(input)) {
+            return Format.DATETIME;
+        } else if (isValidTime(input)) {
+            return Format.TIME;
+        } else if (isValidDate(input)) {
+            return Format.DATE;
+        } else {
+            return Format.INVALID;
         }
     }
 
@@ -114,46 +174,111 @@ public class Duke {
     private static void createDeadline(String request) throws DukeException {
         if (request.strip().length() == 8) {
             throw new DukeException("The description of a deadline cannot be empty.");
+        } else if (!request.contains(" /by ")) {
+            throw new DukeException("You left the date/time of the deadline empty!");
         }
+
         String next = request.substring(8);
         String[] parsedReq = next.split("/by");
         String desc = parsedReq[0].strip();
         String by = parsedReq[1].strip();
-        if (!request.contains(" /by ")) {
-            throw new DukeException("You left the deadline of the deadline empty!");
-        } else if (desc.length() == 0) {
+
+        if (desc.length() == 0) {
             throw new DukeException("The description of a deadline cannot be empty.");
         } else if (by.length() == 0) {
-            throw new DukeException("You left the deadline of the deadline empty!");
+            throw new DukeException("You left the date/time of the deadline empty!");
         } else {
-            Deadline deadline = new Deadline(desc, by);
-            tasks.add(deadline);
-            appendToData(deadline.getAppendData());
-            System.out.println("    Task added:");
-            System.out.println("    " + deadline);
+            Format f = dateTimeParser(by);
+            switch (f) {
+            case DATETIME: {
+                String[] s = by.split(" ");
+                LocalDate d = LocalDate.parse(s[0], dateIn);
+                LocalTime t = LocalTime.parse(s[1], timeIn);
+                Deadline deadline = new Deadline(desc, d, t);
+                tasks.add(deadline);
+                System.out.println("    Task added:");
+                System.out.println("    " + deadline);
+                break;
+            }
+            case DATE: {
+                LocalDate d = LocalDate.parse(by, dateIn);
+                Deadline deadline = new Deadline(desc, d);
+                tasks.add(deadline);
+                System.out.println("    Task added:");
+                System.out.println("    " + deadline);
+                break;
+            }
+            case TIME: {
+                LocalTime t = LocalTime.parse(by, timeIn);
+                Deadline deadline = new Deadline(desc, t);
+                tasks.add(deadline);
+                System.out.println("    Task added:");
+                System.out.println("    " + deadline);
+                break;
+            }
+            case INVALID: {
+                throw new DukeException("Please enter the date and/or time in the specified format:\n" +
+                        "    yyyy-MM-dd HHmm\n" +
+                        "    or yyyy-MM-dd\n" +
+                        "    or HHmm");
+            }
+            }
         }
     }
+
 
     private static void createEvent(String request) throws DukeException {
         if (request.strip().length() == 5) {
             throw new DukeException("The description of an event cannot be empty.");
+        } else if (!request.contains(" /at ")) {
+            throw new DukeException("You left the date/time of the event empty!");
         }
+
         String next = request.substring(5);
         String[] parsedReq = next.split("/at");
         String desc = parsedReq[0].strip();
         String at = parsedReq[1].strip();
-        if (!request.contains(" /at ")) {
-            throw new DukeException("You left the date/time of the event empty!");
-        } else if (desc.length() == 0) {
+
+        if (desc.length() == 0) {
             throw new DukeException("The description of an event cannot be empty.");
         } else if (at.length() == 0 ) {
             throw new DukeException("You left the date/time of the event empty!");
         } else {
-            Event event = new Event(desc, at);
-            tasks.add(event);
-            appendToData(event.getAppendData());
-            System.out.println("    Task added:");
-            System.out.println("    " + event);
+            Format f = dateTimeParser(at);
+            switch (f) {
+            case DATETIME: {
+                String[] s = at.split(" ");
+                LocalDate d = LocalDate.parse(s[0], dateIn);
+                LocalTime t = LocalTime.parse(s[1], timeIn);
+                Event event = new Event(desc, d, t);
+                tasks.add(event);
+                System.out.println("    Task added:");
+                System.out.println("    " + event);
+                break;
+            }
+            case DATE: {
+                LocalDate d = LocalDate.parse(at, dateIn);
+                Event event = new Event(desc, d);
+                tasks.add(event);
+                System.out.println("    Task added:");
+                System.out.println("    " + event);
+                break;
+            }
+            case TIME: {
+                LocalTime t = LocalTime.parse(at, timeIn);
+                Event event = new Event(desc, t);
+                tasks.add(event);
+                System.out.println("    Task added:");
+                System.out.println("    " + event);
+                break;
+            }
+            case INVALID: {
+                throw new DukeException("Please enter the date and/or time in the specified format:\n" +
+                        "    yyyy-MM-dd HHmm\n" +
+                        "    or yyyy-MM-dd\n" +
+                        "    or HHmm");
+            }
+            }
         }
     }
 
@@ -169,7 +294,7 @@ public class Duke {
                 updateData();
                 System.out.println("    No problem, I've deleted that task for you:");
                 System.out.println("    " + t);
-                System.out.println("    You now have " + tasks.size() + " tasks remaining on your list.");
+                System.out.println("    You now have " + tasks.size() + " task(s) remaining on your list.");
             } catch (NumberFormatException n) {
                 throw new DukeException("Please enter a valid task number to delete!");
             } catch (IndexOutOfBoundsException e) {
@@ -277,6 +402,7 @@ public class Duke {
             String request = userInput.nextLine();
             Command c = parser(request);
 
+            // main response
             System.out.print(divider);
             try {
                 switch (c) {
