@@ -1,3 +1,8 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public enum Command {
     LIST {
         @Override
@@ -24,6 +29,18 @@ public enum Command {
         @Override
         boolean isValid(String fullCommand) throws KarenException {
             if (fullCommand.matches("^deadline .* \\/by .*$")) {
+                Pattern p = Pattern.compile("deadline .* \\/by (.*)");
+                Matcher m = p.matcher(fullCommand);
+                m.find();
+
+                // date validation
+                try {
+                    LocalDate.parse(m.group(1));
+                }
+                catch (DateTimeParseException err) {
+                    throw new KarenException("Wrong date formatting. It should be in yyyy-mm-dd");
+                }
+
                 return true;
             } else if (fullCommand.matches("^((?!\\/by).)*$")) {
                 throw new KarenException("You're missing an /by flag needed to add deadlines");
@@ -35,6 +52,17 @@ public enum Command {
         @Override
         boolean isValid(String fullCommand) throws KarenException {
             if (fullCommand.matches("^event .* \\/at .*$")) {
+                Pattern p = Pattern.compile("event .* \\/at (.*)");
+                Matcher m = p.matcher(fullCommand);
+                m.find();
+
+                // date validation
+                try {
+                    LocalDate.parse(m.group(1));
+                }
+                catch (DateTimeParseException err) {
+                    throw new KarenException("Wrong date formatting. It should be in yyyy-mm-dd");
+                }
                 return true;
             } else if (fullCommand.matches("^((?!\\/at).)*$")) {
                 throw new KarenException("You're missing an /at flag needed to add events");
