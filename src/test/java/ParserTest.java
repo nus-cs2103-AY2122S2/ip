@@ -10,11 +10,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class ParserTest {
     @Test
-    public void dummyTest(){
-        assertEquals(2, 2);
-    }
-
-    @Test
     public void testParseDate_success() throws DukeException {
         assertEquals(LocalDate.of(2022, 1, 23), Parser.parseDate("2022-01-23"));
     }

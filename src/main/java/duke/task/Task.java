@@ -38,7 +38,7 @@ public class Task {
      * @return Status icon.
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone ? "X" : " ");
     }
 
     public void markAsDone() {
@@ -57,8 +57,10 @@ public class Task {
         switch(type) {
         case DEADLINE:
             return "D";
+            // Fallthrough
         case EVENT:
             return "E";
+            // Fallthrough
         default:
             return "T";
         }
@@ -82,13 +84,13 @@ public class Task {
         }
 
         Task task = (Task) o;
-
         if (isDone != task.isDone) {
             return false;
         }
         if (!description.equals(task.description)) {
             return false;
         }
+
         return type == task.type;
     }
 }

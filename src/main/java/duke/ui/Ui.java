@@ -61,6 +61,10 @@ public class Ui {
         printMessage(GOODBYE);
     }
 
+    public void showLoadingError() {
+        printMessage(ErrorMessage.MESSAGE_LOADING_ERROR);
+    }
+
     public void printList(ArrayList<Task> listItems) {
         StringBuilder formatted = new StringBuilder();
         int displayIndex = 1;
@@ -74,9 +78,5 @@ public class Ui {
 
     private String formatListItem(int visibleIndex, String listItem) {
         return String.format(MESSAGE_INDEXED_LIST_ITEM, visibleIndex, listItem);
-    }
-
-    public void showLoadingError() {
-        printMessage(ErrorMessage.MESSAGE_LOADING_ERROR);
     }
 }
