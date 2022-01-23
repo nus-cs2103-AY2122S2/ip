@@ -17,7 +17,7 @@ public class Heylo {
         while (true) {
             String input = sc.nextLine();
             Command cmd = new Command(input);
-            cmd.run();
+            cmd.run(sc);
         }
     }
 }

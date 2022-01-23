@@ -1,6 +1,7 @@
+import java.util.*;
+
 public class Command {
     private String command;
-    private String input;
     private String argument;
     private String extraInfo;
 
@@ -8,7 +9,6 @@ public class Command {
         String[] inputArgs = input.trim().split(" ", 2);
         String[] extraArgs = input.trim().split("/", 2);
         this.command = inputArgs[0];
-        this.input = input.trim();
         if (inputArgs.length > 1) {
             this.argument = inputArgs[1];
         }
@@ -20,7 +20,7 @@ public class Command {
         }
     }
 
-    public void run() {
+    public void run(Scanner sc) {
         if(command.equals("")) {
             return;
         }
@@ -28,6 +28,7 @@ public class Command {
         switch (command) {
         case "bye":
             System.out.println(" See you again! :)");
+            sc.close();
             System.exit(0);
         case "list":
             Task.printAllTasks();
