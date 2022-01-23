@@ -4,7 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
-public class Event extends Task{
+public class Event extends Task {
     private String eventTime;
     private LocalDate date;
 

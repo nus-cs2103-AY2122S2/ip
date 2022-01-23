@@ -16,7 +16,7 @@ public class Parser {
 
     public static String parseSavedToDoTask(ToDo task) {
         String taskName = task.getDescription();
-        return String.join(" ", "ToDo",taskName);
+        return String.join(" ", "ToDo", taskName);
     }
 
     public static String parseSavedEventTask(Event task) {
@@ -44,7 +44,7 @@ public class Parser {
             } else {
                 throw new DukeInvalidFileException();
             }
-            lineArguments = Arrays.copyOf(lineArguments, lineArguments.length-1);
+            lineArguments = Arrays.copyOf(lineArguments, lineArguments.length - 1);
             line = String.join(" ", lineArguments);
             switch (taskType) {
             case "ToDo":
