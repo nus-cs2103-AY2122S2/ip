@@ -14,7 +14,7 @@ public class Storage {
     private final ArrayList<Task> tasks = new ArrayList<>();
 
     public Storage() {
-        this.pathName = Paths.get("../data/Duke.txt");
+        this.pathName = Paths.get("./data/Duke.txt");
         this.save = new File(pathName.toString());
         try {
             if (save.getParentFile().mkdir()) {
@@ -26,7 +26,7 @@ public class Storage {
     }
 
     public ArrayList<Task> loadList() {
-        Decoder decoder = new Decoder();
+        FileDecoder decoder = new FileDecoder();
         try {
             Scanner s = new Scanner(save);
             while (s.hasNextLine()) {

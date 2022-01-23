@@ -3,8 +3,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Decoder {
-    public Decoder() {
+public class FileDecoder {
+    public FileDecoder() {
     }
 
     public Task decode(String tasks) {
