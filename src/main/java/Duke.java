@@ -228,6 +228,14 @@ public class Duke {
 
             noOfTasks = this.tasks.size();
 
+            Path filePath = Paths.get(FILE_PATH, FILE_NAME);
+            ArrayList<String> fileContent = new ArrayList<>(
+                    Files.readAllLines(filePath, StandardCharsets.UTF_8));
+
+            fileContent.remove(index);
+
+            Files.write(filePath, fileContent);
+
             String result = "Noted. I've removed this task:\n";
             String pluralTask = noOfTasks > 1 ? "tasks" : "task";
 
@@ -242,6 +250,8 @@ public class Duke {
             output(INVALID_INDEX_MSG);
         } catch (NumberFormatException e) {
             output(INVALID_INDEX_MSG);
+        } catch (IOException e) {
+            output("OOPS!!! Facing some issues in deleting your task to disk. :-(");
         }
     }
 
