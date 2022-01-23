@@ -8,7 +8,7 @@ public class Ui {
      * a Command
      */
     public enum Reply {
-        LIST, TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, DEFAULT
+        LIST, TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, DEFAULT, FIND
     }
 
     /**
@@ -44,6 +44,8 @@ public class Ui {
             return Reply.UNMARK;
         case "delete":
             return Reply.DELETE;
+        case "find":
+            return Reply.FIND;
         default:
             return Reply.DEFAULT;
         }
@@ -60,9 +62,9 @@ public class Ui {
      * Passes down the parameters to Parser in order to determine
      * what Burp should reply with.
      *
-     * @param type the type of Reply Burp should give
+     * @param type     the type of Reply Burp should give
      * @param toDoList the user's List of Tasks
-     * @param cmd the user's input to Burp
+     * @param cmd      the user's input to Burp
      * @throws DukeException when a WrongCommand is given
      */
     public static void burpReply(Ui.Reply type, TaskList toDoList, String cmd, Storage storage) throws DukeException {
