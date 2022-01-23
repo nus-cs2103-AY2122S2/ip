@@ -1,7 +1,7 @@
 package DukeBot;
 
 public class Event extends Task {
-    String time;
+    private String time;
 
     public Event(String description, String time) {
         super("E", description);
@@ -10,6 +10,13 @@ public class Event extends Task {
 
     public String toString() {
         return super.toString() + "(at: " + time + ")";
+    }
+
+    @Override
+    public String dBText() {
+        String complete = this.getCompleted() ? "1" : "0";
+        String saveText = String.format("E|%s|%s|%s", complete, this.getDescription(), this.time);
+        return saveText;
     }
 
 }

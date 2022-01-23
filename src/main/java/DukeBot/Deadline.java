@@ -2,7 +2,7 @@ package DukeBot;
 
 public class Deadline extends Task {
 
-    public String deadline;
+    private String deadline;
 
     public Deadline(String description, String deadline) {
         super("D", description);
@@ -11,6 +11,13 @@ public class Deadline extends Task {
 
     public String toString() {
         return super.toString() + "(by: " + deadline + ")";
+    }
+
+    @Override
+    public String dBText() {
+        String complete = this.getCompleted() ? "1" : "0";
+        String saveText = String.format("D|%s|%s|%s", complete, this.getDescription(), this.deadline);
+        return saveText;
     }
 
 }

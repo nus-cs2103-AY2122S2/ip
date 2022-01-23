@@ -1,0 +1,3 @@
+T|0|what
+E|0|proj meeting |2100
+D|1|cs3230 assign |Sunday 2359

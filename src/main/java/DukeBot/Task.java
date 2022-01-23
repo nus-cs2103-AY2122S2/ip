@@ -42,4 +42,8 @@ public class Task {
         }
     }
 
+    public String dBText() {
+        String complete = this.getCompleted() ? "1" : "0";
+        return String.format("T|%s|%s", complete, this.getDescription());
+    }
 }
