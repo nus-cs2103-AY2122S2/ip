@@ -9,14 +9,10 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
 
 public class Parser {
 
@@ -38,24 +34,6 @@ public class Parser {
     public static String localTimeToString(LocalTime time) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
         return time.format(formatter);
-    }
-
-    public static String formatDateTime(String str) {
-        // Date/time pattern of input string
-        DateFormat df = new SimpleDateFormat("dd-MM-yyyy HHmm");
-        // Date/time pattern of desired output
-        DateFormat outputFormat = new SimpleDateFormat("dd MMM yyyy hh:mm aa");
-        Date date = null;
-        String output = null;
-        try{
-            //Conversion of input String to date
-            date= df.parse(str);
-            //old date format to new date format
-            output = outputFormat.format(date);
-        } catch(ParseException pe){
-            pe.printStackTrace();
-        }
-        return output;
     }
 
     public static Command parse(String input) throws DukeException {

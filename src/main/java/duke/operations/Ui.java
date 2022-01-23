@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Ui {
 
-    private static final String DIVIDER = "____________________________________________________________";
+    public static final String DIVIDER = "____________________________________________________________";
     private static final String SIGNATURE = " ____                         _____       _\n"
             + "| |_) |_   _ ___ ___ _   _  | (___   __ _| | ____ _\n"
             + "|  _ <| | | / __/ __| | | |  \\___ \\ / _` | |/ / _` |\\\n"
