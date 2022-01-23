@@ -10,16 +10,13 @@ public class Duke {
         Scanner in = new Scanner(System.in);
         Parser parser = new Parser();
         TaskList taskList = new TaskList();
-        int runResult = parser.run(userInput, ui, taskList);
+
 
         Storage.loadFile(System.getProperty("user.dir") + "\\data\\duke.txt", taskList);
 
         ui.printLogo();
         String userInput = in.nextLine();
-        if(runResult == 1) {
-            Storage.saveFile("data", "duke.txt", taskList.getList());
-        }
-
+        int runResult = parser.run(userInput, ui, taskList);
         while(runResult != -1) {
             if(runResult == 1) {
                 Storage.saveFile("data", "duke.txt", taskList.getList());
