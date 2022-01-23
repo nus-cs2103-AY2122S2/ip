@@ -307,6 +307,7 @@ public class Duke {
                     + ", in your list:\n");
 
             for (int i = 0; i < length; ++i) {
+                boolean shouldAppend = false;
                 Task task = this.tasks.get(i);
 
                 if (task.getType() == 'D') {
@@ -314,16 +315,18 @@ public class Duke {
 
                     if (deadline.getDate().isEqual(date)) {
                         sb.append(++index + ". " + deadline.toString());
+                        shouldAppend = true;
                     }
                 } else if (task.getType() == 'E') {
                     Event event = (Event) this.tasks.get(i);
 
                     if (event.getDate().isEqual(date)) {
                         sb.append(++index + ". " + event.toString());
+                        shouldAppend = true;
                     }
                 }
 
-                if (i + 1 != length) {
+                if (shouldAppend) {
                     sb.append("\n");
                 }
             }
