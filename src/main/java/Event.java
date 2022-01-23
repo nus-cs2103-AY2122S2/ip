@@ -1,14 +1,45 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task{
-    String date;
+    LocalDate date;
+    LocalTime time;
 
-    public Event(String taskName, String date){
+    //date is entered as "__date__ __time__"
+    public Event(String taskName, String dateTime) throws DukeException {
         super(taskName);
-        this.date = addChar("(" + date + ")", ':', 3);    }
+        dateTime = dateTime.trim();
+        String[] spl = dateTime.split(" ");
+        if(spl.length == 1) {
+            try {
+                this.date = LocalDate.parse(spl[0]);
+            } catch (Exception e) {
+                throw new DukeException("Invalid input into date");
+            }
+        } else if(spl.length == 2) {
+            try {
+                this.date = LocalDate.parse(spl[0]);
+                this.time = LocalTime.parse(spl[1]);
+            } catch (Exception e) {
+                throw new DukeException("Invalid input into date/time");
+            }
+        } else {
+            throw new DukeException("Please input for a date (optional: time)");
+        }
+    }
 
-    public String addChar(String str, char ch, int position) {
-        StringBuilder sb = new StringBuilder(str);
-        sb.insert(position, ch);
-        return sb.toString();
+    public void printDate() {
+        System.out.print("(at: ");
+        System.out.print(this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        printTime();
+        System.out.println(")");
+    }
+
+    public void printTime() {
+        if((this.time != null)){
+            System.out.print(" " + this.time.format(DateTimeFormatter.ofPattern(("HH:mm"))));
+        }
     }
 
     @Override public void printTask(){
@@ -20,6 +51,6 @@ public class Event extends Task{
         } else {
             System.out.print("[ ] " + this.taskName);
         }
-        System.out.println(this.date);
+        printDate();
     }
 }

@@ -8,7 +8,10 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
+        String note = "NOTE: For events and deadlines do remember to include a date in the format of YYYY-MM-DD.\n" +
+                "Adding time for events and deadlines are optional, but the format is in the form HH:mm";
         System.out.println("Howdy and welcome to\n" + logo + "\n" + "Feel free to tell duke any tasks you'd like!");
+        System.out.println(note);
         System.out.println("-----------------------------------");
 
         //Initialise objects needed
@@ -62,21 +65,21 @@ public class Duke {
                     if(taskType.equals("todo")){
                         newTask = new Todo(taskDetails);
                     } else if(taskType.equals("deadline")){
-                        String[] spl=taskDetails.split("/");
+                        String[] spl = taskDetails.split("/by");
                         if(spl.length < 2){
                             throw new DukeException("Description of deadline must include a date/time! Did you miss out a /by?");
                         }
-                        String details=spl[0];
-                        String date=spl[1];
-                        newTask = new Deadline(details,date);
+                        String details = spl[0];
+                        String dateTime = spl[1];
+                        newTask = new Deadline(details,dateTime);
                     } else if(taskType.equals("event")){
-                        String[] spl=taskDetails.split("/");
+                        String[] spl = taskDetails.split("/at");
                         if(spl.length < 2){
                             throw new DukeException("Description of event must include a date/time! Did you miss out a /at?");
                         }
-                        String details=spl[0];
-                        String date=spl[1];
-                        newTask = new Event(details,date);
+                        String details = spl[0];
+                        String dateTime = spl[1];
+                        newTask = new Event(details,dateTime);
                     }
 
                     list.add(newTask);
