@@ -1,42 +1,48 @@
+package tasks;
+
+import duke.DukeException;
+import tasks.Task;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-// Deadline class
-public class Deadline extends Task {
 
-    protected LocalDate by;
-    protected LocalDateTime byTime;
+public class Event extends Task {
+
+    protected LocalDate at;
+    protected LocalDateTime atTime;
     private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private static final DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
-    public Deadline(String description, String by) throws DukeException {
+
+    public Event(String description, String at) throws DukeException {
         super(description);
-        if (isDateFormat(by)) {
-            this.by = LocalDate.parse(by, dateFormat);
-        } else if (isDateTimeFormat(by)) {
-            this.byTime = LocalDateTime.parse(by, dateTimeFormat);
+        if (isDateFormat(at)) {
+            this.at = LocalDate.parse(at, dateFormat);
+        } else if (isDateTimeFormat(at)) {
+            this.atTime = LocalDateTime.parse(at, dateTimeFormat);
         } else {
             throw new DukeException("The date format parsed is incorrect! It should be dd-MM-yyyy or dd-MM-yyyy HH:mm!");
         }
     }
 
-
     @Override
     public String toFileFormat() {
-        if (by != null) {
-            return "D" + super.toFileFormat() + "," + formatDate(by);
+        if (at != null) {
+            return "E" + super.toFileFormat() + "," + formatDate(at);
         } else {
-            return "D" + super.toFileFormat() + "," + formatDateTime(byTime);
+            return "E" + super.toFileFormat() + "," + formatDateTime(atTime);
         }
     }
 
     @Override
     public String toString() {
-        if (this.by != null) {
-            return "[D]" + super.toString() + " (by: " + formatDate(by) + ")";
+        if (this.at != null) {
+            return "[E]" + super.toString() + " (at: " + formatDate(at) + ")";
         } else {
-            return "[D]" + super.toString() + " (by: " + formatDateTime(byTime) + ")";
+            return "[E]" + super.toString() + " (at: " + formatDateTime(atTime) + ")";
         }
     }
 
@@ -44,21 +50,23 @@ public class Deadline extends Task {
         try {
             LocalDateTime.parse(dateTimeString, dateTimeFormat);
             return true;
-        } catch (Exception e) {
+        } catch (DateTimeParseException e) {
             System.out.println("Checking DateTime Format!");
         }
         return false;
     }
 
-    private boolean isDateFormat(String dateString)  {
+
+    private boolean isDateFormat(String dateString) {
         try {
             LocalDate.parse(dateString, dateFormat);
             return true;
-        } catch (Exception e) {
+        } catch (DateTimeParseException e) {
             System.out.println("Checking Date Format!");
         }
         return false;
     }
+
 
     public String formatDateTime(LocalDateTime dateTime) {
         String day = dateTime.getDayOfMonth() < 10 ? "0" + dateTime.getDayOfMonth() : "" + dateTime.getDayOfMonth();
@@ -77,4 +85,3 @@ public class Deadline extends Task {
     }
 
 }
-

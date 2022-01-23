@@ -1,4 +1,5 @@
-// Todo class : tasks without date and time
+package tasks;
+
 public class Todo extends Task {
 
     public Todo(String description) {
