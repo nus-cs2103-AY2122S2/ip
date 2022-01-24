@@ -1,5 +1,4 @@
-import java.io.FileWriter;
-import java.io.IOException;
+package duke;
 
 public class Todos extends Task {
 

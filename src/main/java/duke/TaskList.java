@@ -1,3 +1,4 @@
+package duke;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -47,7 +48,6 @@ public class TaskList {
         String[] deadL = str.split("/by ", 2);
         Deadline deadLineTemp = new Deadline(deadL[0], deadL[1]);
         list_of_inputs.add(deadLineTemp);
-        //deadLineTemp.updateData(filePath);
         storage.updateData(deadLineTemp.message(),filePath);
         System.out.println("Deadline for this task:\n " + deadLineTemp.message() + "\n You have " + list_of_inputs.size() + " tasks in the list.");
 
@@ -57,7 +57,6 @@ public class TaskList {
         String[] event = str.split("/at ", 2);
         Event eventTemp = new Event(event[0], event[1]);
         list_of_inputs.add(eventTemp);
-        //eventTemp.updateData(filePath);
         storage.updateData(eventTemp.message(),filePath);
         System.out.println("I have added this task and the event time is:\n " + eventTemp.message() + "\n You have " + list_of_inputs.size() + " tasks in the list.");
 

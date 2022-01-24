@@ -1,3 +1,4 @@
+package duke;
 public class Delete extends Task{
 
     public Delete(String description) {

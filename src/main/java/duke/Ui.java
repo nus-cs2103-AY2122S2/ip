@@ -1,7 +1,8 @@
+package duke;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
+
 
 public class Ui {
 
@@ -39,11 +40,9 @@ public class Ui {
             isExit = true;
         }
 
-            ExitCommand ec = new ExitCommand(DUKE_DIRECTORY,DUKE_TXTFILE);
 
             if (inp.equals("bye")) {
-                ec.quit();
-                isExit = ec.isExit;
+                isExit = true;
                 storage.reSavingFiles(taskList.list_of_inputs);
                 System.out.println("Bye. Hope to see you again soon!");
             } else if (inp.equals("list")) {
