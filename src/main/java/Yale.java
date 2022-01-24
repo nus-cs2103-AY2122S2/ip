@@ -1,8 +1,9 @@
-import yalebot.Deadline;
-import yalebot.TaskList;
-import yalebot.Event;
-import yalebot.ToDo;
+import yale.task.Deadline;
+import yale.task.TaskList;
+import yale.task.Event;
+import yale.task.ToDo;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Yale {
@@ -52,6 +53,12 @@ public class Yale {
             } else {
                 System.out.println("Here are the tasks in your list\n"
                         + list.listOut());
+                String file2 = "data/yale.txt";
+                try {
+                    FileWrite.writeToFile(file2, list.listOut() + System.lineSeparator() + "second line");
+                } catch (IOException e) {
+                    System.out.println("Something went wrong: " + e.getMessage());
+                }
             }
         }
         // Delete Feature
