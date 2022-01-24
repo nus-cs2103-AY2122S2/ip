@@ -6,6 +6,7 @@ public class Ui {
     private static final String BOT_NAME = "Megumin";
     private static final String ERROR_INVALID_COMMAND = "I do not understand you!";
     private static final String ERROR_INVALID_SYNTAX = "There was a problem understanding you:";
+    private static final String ERROR_IO = "I had a problem reading / writing my memory!";
 
     private static Ui instance;
 
@@ -47,6 +48,8 @@ public class Ui {
         } else if (ex instanceof DukeIllegalArgumentException) {
             linePrinter.print(ERROR_INVALID_SYNTAX);
             linePrinter.print(ex.getMessage());
+        } else if (ex instanceof DukeIOException) {
+            linePrinter.print(ERROR_IO);
         }
     }
 
