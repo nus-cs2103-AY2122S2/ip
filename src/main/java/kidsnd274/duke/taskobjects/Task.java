@@ -1,6 +1,6 @@
 package kidsnd274.duke.taskobjects;
 
-public class Task {
+public abstract class Task {
     private String taskName;
     private boolean done;
 
@@ -30,8 +30,6 @@ public class Task {
         return "[" + getStatusIcon() + "] " + this;
     }
 
-    public String getType() {
-        return "Generic Task";
-    }
+    public abstract String getType();
 }
 

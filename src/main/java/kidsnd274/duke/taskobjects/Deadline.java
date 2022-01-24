@@ -1,16 +1,13 @@
 package kidsnd274.duke.taskobjects;
 
-public class Deadline extends Task {
-    private String deadline;
-
+public class Deadline extends TaskWithDate {
     public Deadline(String name, String deadline) {
-        super(name);
-        this.deadline = deadline;
+        super(name, deadline);
     }
 
     @Override
     public String toString() {
-        return super.toString() + "(by: " + this.deadline + ")";
+        return super.toString() + "(by: " + super.getDate() + ")";
     }
 
     @Override
