@@ -12,47 +12,25 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class Duke {
-    public static void main(String[] args) throws FileNotFoundException, IOException {
-        String SAVE_FILE_PATH = "src/main/data/save.txt";
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-        // Storage for all the items listed by the user
-        List<Task> tasks = new ArrayList<Task>();
-        boolean hasUpdated = false;
 
-        // Loading up the file
-        File file = new File(SAVE_FILE_PATH);
-        if (file.exists()) {
-            Scanner fileSc = new Scanner(file);
-            List<String> errors = new ArrayList<String>();
-            while (fileSc.hasNextLine()) {
-                String[] line = fileSc.nextLine().split(";");
-                Task task;
-                try {
-                    // TODO Task
-                    if (line[0].equals("T")) {
-                        task = new ToDoTask(line[2]);
-                    }
-                    // Deadline Task
-                    else if (line[0].equals("D")) {
-                        task = new DeadlineTask(line[2], line[3], LocalDateTime.parse(line[4]));
-                    }
-                    // Event Task
-                    else if (line[0].equals("E")) {
-                        task = new EventTask(line[2], line[3], LocalDateTime.parse(line[4]));
-                    } else {
-                        throw new Exception("An invalid task type was read");
-                    }
-                    if (line[1].equals("X")) task.mark();
-                    tasks.add(task);
-                } catch (Exception e) {
-                    System.out.println("An error occurred while restoring your saved tasks");
-                    System.out.println(e.getMessage());
-                }
-            }
-            System.out.println("Hello! I'm Duck\nWelcome back, your tasks have been restored! *quack*");
-        } else {
-            System.out.println("Hello! I'm Duck\nWhat can I do for you? *quack*");
+    public Duke(String filePath) {
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
+        try {
+            this.tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.printException(e);
+            ui.printLoadingError();
+            tasks = new TaskList();
         }
+    }
+
+    public void run() throws FileNotFoundException, IOException {
+        this.ui.printBootUp();
 
         // Scanner for reading user input
         Scanner sc = new Scanner(System.in);
@@ -65,7 +43,7 @@ public class Duke {
             System.out.println("____________________________________________________________");
 
             // User terminates the program
-            if (command.equals("bye"))  {
+            if (command.equals("bye")) {
                 System.out.println("Aww. Hope to see you again soon! *quack*");
                 return;
             }
@@ -77,10 +55,9 @@ public class Duke {
                 }
 
                 System.out.println("These are your tasks *quack*:");
-                for (int i = 0; i < tasks.size(); i++) {
-                    int number = i + 1;
-                    Task task = tasks.get(i);
-                    System.out.println(String.format("%d. %s", number, task.toString()));
+                for (int i = 1; i <= tasks.size(); i++) {
+                    Task task = tasks.getByNumber(i);
+                    System.out.println(String.format("%d. %s", i, task.toString()));
                 }
             }
             // Add a ToDo Task OR Deadline Task OR Event Task
@@ -137,7 +114,7 @@ public class Duke {
                 else if (command.equals("deadline")) newTask = new DeadlineTask(name, preposition, dateTime);
                 else if (command.equals("event")) newTask = new EventTask(name, preposition, dateTime);
                 tasks.add(newTask);
-                hasUpdated = true;
+                this.storage.markUpdated();
                 //Output to update user
                 System.out.println("Got it. I've added this task *quack*:");
                 System.out.println(String.format("  %s", newTask.toString()));
@@ -154,27 +131,27 @@ public class Duke {
                         int number = Integer.parseInt(st.nextToken());
                         //If the number given is out of range
                         if (number <= 0 || number > tasks.size()) throw new DukeException("OutOfTaskRangeException");
-                        Task task = tasks.get(number - 1);
+                        Task task = tasks.getByNumber(number);
                         String action = "";
                         String additionalText = "";
                         //Deleting a task
                         if (command.equals("delete")) {
-                            tasks.remove(number - 1);
+                            tasks.deleteByNumber(number);
                             action = "delet";
-                            hasUpdated = true;
+                            this.storage.markUpdated();
                         }
                         //Marking a task as done
                         else if (command.equals("mark")) {
                             task.mark();
                             additionalText = " as done";
                             action = command;
-                            hasUpdated = true;
+                            this.storage.markUpdated();
                         }
                         //Unmarking a task
                         else if (command.equals("unmark")) {
                             task.unmark();
                             action = command;
-                            hasUpdated = true;
+                            this.storage.markUpdated();
                         }
                         System.out.println(String.format("I've %sed task %d%s! *quack*", action, number, additionalText));
                         System.out.println(String.format("  %d. %s", number, task.toString()));
@@ -194,7 +171,7 @@ public class Duke {
                     // Error handling if user inputs strings
                     try {
                         int number = Integer.parseInt(st.nextToken());
-                        Task removedTask = tasks.remove(number - 1);
+                        Task removedTask = tasks.deleteByNumber(number);
                         System.out.println(String.format("I've deleted task %d! *quack*", number));
                         System.out.println(String.format("  %s", removedTask.toString()));
                     } catch (Exception e) {
@@ -219,45 +196,16 @@ public class Duke {
             else {
                 System.out.println(String.format("That is not a valid command *quack*\nType 'help' to see a list of valid commands"));
             }
-            System.out.println("____________________________________________________________");
-
-            // Saving changes
-            if (hasUpdated) {
-                FileWriter fileWriter = new FileWriter(SAVE_FILE_PATH);
-                for (Task task: tasks) {
-                    String taskString = "";
-                    if (task instanceof ToDoTask) {
-                        taskString += "T;";
-                    } else if (task instanceof DeadlineTask) {
-                        taskString += "D;";
-                    } else if (task instanceof EventTask) {
-                        taskString += "E;";
-                    }
-                    if (task.done) {
-                        taskString += "X;";
-                    } else {
-                        taskString += "O;";
-                    }
-                    taskString += task.name;
-                    if (task instanceof DeadlineTask) {
-                        DeadlineTask dTask = (DeadlineTask) task;
-                        taskString += ";";
-                        taskString += dTask.preposition;
-                        taskString += ";";
-                        taskString += dTask.dateTime.format(DateTimeFormatter.ISO_DATE_TIME);
-                    } else if (task instanceof EventTask) {
-                        EventTask dTask = (EventTask) task;
-                        taskString += ";";
-                        taskString += dTask.preposition;
-                        taskString += ";";
-                        taskString += dTask.dateTime.format(DateTimeFormatter.ISO_DATE_TIME);
-                    }
-                    fileWriter.write(taskString);
-                    fileWriter.write(System.lineSeparator());
-                }
-                fileWriter.close();
-                hasUpdated = false;
+            this.ui.printLineSeparator();
+            try {
+                this.storage.save(this.tasks);
+            } catch (DukeException e) {
+                this.ui.printException(e);
             }
         }
+    }
+
+    public static void main(String[] args) throws FileNotFoundException, IOException {
+        new Duke("src/main/data/save.txt").run();
     }
 }
