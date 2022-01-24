@@ -2,7 +2,10 @@ package task;
 
 import java.time.LocalDateTime;
 
-public class Deadline extends Task{
+/**
+ * Represents the task (with deadline) entered by user
+ */
+public class Deadline extends Task {
 
     protected LocalDateTime by;
 
@@ -16,6 +19,11 @@ public class Deadline extends Task{
         this.by = by;
     }
 
+    /**
+     * Returns the time of deadline
+     *
+     * @return LocalDateTime deadline
+     */
     public LocalDateTime getBy() {
         return by;
     }

@@ -6,6 +6,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * contains the task list. Has operations to add/delete tasks in the list
+ */
 public class TaskList {
 
     private final ArrayList<Task> list;
@@ -21,6 +24,12 @@ public class TaskList {
         tasksAdded_index = 0;
     }
 
+    /**
+     * Executes the user command on the task list. Does nothing when keyword is "unknown"
+     *
+     * @param command details of command retrieved from Parser
+     * @throws DukeException if command is invalid
+     */
     public void executeCommand(String[] command) throws DukeException {
         String keyword = command[0];
         switch (keyword) {
@@ -150,21 +159,40 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns the task of the given index
+     *
+     * @param index index of task in the list
+     * @return Task of the given index
+     */
     public Task getTask(int index) {
         return list.get(index);
     }
 
+    /**
+     * Prints out all tasks in the list
+     */
     private void showList() {
         for (int i = 0; i < tasksAdded_index; i++) {
             System.out.println((i + 1) + "." + list.get(i).toString());
         }
     }
 
+    /**
+     * Adds task into the list
+     *
+     * @param task task to be added into the list
+     */
     private void addTask(Task task) {
         list.add(task);
         tasksAdded_index ++;
     }
 
+    /**
+     * Removes task from the list
+     *
+     * @param taskIndex index of the task to be removed
+     */
     private void removeTask(int taskIndex) {
         list.remove(taskIndex);
         tasksAdded_index --;

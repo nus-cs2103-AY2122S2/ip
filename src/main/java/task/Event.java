@@ -2,6 +2,9 @@ package task;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents the event (with date) entered by user
+ */
 public class Event extends Task{
 
     protected LocalDateTime at;
@@ -16,6 +19,11 @@ public class Event extends Task{
         this.at = at;
     }
 
+    /**
+     * Returns the time of the event happening
+     *
+     * @return LocalDateTime of the event
+     */
     public LocalDateTime getAt() {
         return at;
     }
