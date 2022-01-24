@@ -39,7 +39,7 @@ public class Task {
    * @param bool representing the completeness of the task.
    */
 
-  void setMark(boolean bool) {
+  public void setMark(boolean bool) {
     this.isMarked = bool;
     MarkResponse(this.isMarked);
   }
@@ -51,7 +51,7 @@ public class Task {
    * @param val representing the completeness of the task.
    */
 
-  void MarkResponse(boolean val) {
+  public void MarkResponse(boolean val) {
     System.out.println(
         "____________________________________________________________");
     if (val) {
@@ -65,7 +65,7 @@ public class Task {
         "____________________________________________________________");
   }
 
-  String markDisplay() {
+  public String markDisplay() {
     if (this.isMarked) {
       return "X";
     } else {
@@ -73,7 +73,7 @@ public class Task {
     }
   }
 
-  String markStore() {
+  public String markStore() {
     if (this.isMarked) {
       return "1";
     } else {
@@ -81,7 +81,7 @@ public class Task {
     }
   }
 
-  String toStore() {
+  public String toStore() {
     return "";
   }
 
@@ -90,7 +90,7 @@ public class Task {
    * 
    * @return a String representation fo the task.
    */
-  String display() {
+  public String display() {
     return "[" + markDisplay() + "] " + this.name;
   }
 }

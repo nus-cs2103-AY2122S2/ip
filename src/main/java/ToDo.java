@@ -22,7 +22,7 @@ public class ToDo extends Task {
   }
 
   @Override
-  String toStore() {
+  public String toStore() {
     return this.type + " | " + this.markStore() + " | " + this.name;
   }
 
@@ -33,7 +33,7 @@ public class ToDo extends Task {
    */
 
   @Override
-  String display() {
+  public String display() {
     return "[" + this.type + "] " + "[" + markDisplay() + "] " + this.name;
   }
 }

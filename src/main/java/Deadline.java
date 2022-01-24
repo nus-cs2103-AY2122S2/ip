@@ -32,7 +32,7 @@ public class Deadline extends Task {
   }
 
   @Override
-  String toStore() {
+  public String toStore() {
     return this.type + " | " + this.markStore() + " | " + this.name + " | " + this.info;
   }
 
@@ -41,7 +41,7 @@ public class Deadline extends Task {
    */
 
   @Override
-  String display() {
+  public String display() {
     return "[" + this.type + "] " + "[" + markDisplay() + "] " + this.name + " (by " + dateInfo.format(this.dateTimeFormatterOut) + ")";
   }
 }

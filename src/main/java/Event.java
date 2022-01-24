@@ -30,12 +30,12 @@ public class Event extends Task {
   }
 
   @Override
-  String toStore() {
+  public String toStore() {
     return this.type + " | " + this.markStore() + " | " + this.name + " | " + this.info;
   }
 
   @Override
-  String display() {
+  public String display() {
     return "[" + this.type + "] " + "[" + markDisplay() + "] " + this.name + " (at " + dateInfo.format(this.dateTimeFormatterOut) + ")";
   }
 

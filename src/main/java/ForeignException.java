@@ -7,7 +7,7 @@ public class ForeignException extends DukeException {
     }
 
     @Override
-    void callback() {
+    public void callback() {
         System.out.println(
                 "____________________________________________________________"
         );

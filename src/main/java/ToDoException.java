@@ -5,7 +5,7 @@ public class ToDoException extends DukeException{
         super(msg);
     }
     @Override
-    void callback() {
+    public void callback() {
         System.out.println(
                 "____________________________________________________________"
         );
