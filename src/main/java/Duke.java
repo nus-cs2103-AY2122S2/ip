@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-
     public static boolean findKeyword(String[] nextLineArr, String keyword){
         for(int i = 0; i < nextLineArr.length; i++) {
             if(nextLineArr[i].equals(keyword)) {
@@ -15,7 +14,7 @@ public class Duke {
         String greeting = "Hello! I'm Duke\n" + "What can I do for you?";
         System.out.println(greeting);
 
-        ArrayList<Task> taskList = new ArrayList<>();
+        TaskList taskList = new TaskList();
 
 
         Scanner scanner = new Scanner(System.in);
@@ -69,7 +68,7 @@ public class Duke {
 
                     System.out.println("Got it. I've added this task:");
                     Task task = new Todo(title);
-                    taskList.add(task);
+                    taskList.insert(task);
                     System.out.println("   " + task.toString() + "\n" + "Now you have " + taskList.size() + " tasks in the list.");
                 }
 
@@ -87,7 +86,7 @@ public class Duke {
                         String time = splitArr[1].trim();
                         System.out.println("Got it. I've added this task:");
                         Task task = new Deadline(title, time);
-                        taskList.add(task);
+                        taskList.insert(task);
                         System.out.println("   " + task.toString() + "\n" + "Now you have " + taskList.size() + " tasks in the list.");
                     }
                     else {
@@ -109,7 +108,7 @@ public class Duke {
                         String time = splitArr[1].trim();
                         System.out.println("Got it. I've added this task:");
                         Task task = new Event(title, time);
-                        taskList.add(task);
+                        taskList.insert(task);
                         System.out.println("   " + task.toString() + "\n" + "Now you have " + taskList.size() + "tasks in the list.");
                     }
                     else {
@@ -121,7 +120,7 @@ public class Duke {
                     Task task;
                     try{
                         task = taskList.get(index);
-                        taskList.remove(index);
+                        taskList.delete(index);
                     } catch(IndexOutOfBoundsException e) {
                         throw new DukeInvalidIndexException();
                     }
