@@ -1,11 +1,17 @@
-import java.util.StringTokenizer;
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.function.TaskList;
+import duke.function.Ui;
+import duke.function.Storage;
+import duke.task.Task;
 
 public class DeleteCommand extends Command {
 
     int taskNumber;
     DukeException exception;
 
-    DeleteCommand(String fullCommand) {
+    public DeleteCommand(String fullCommand) {
         super(fullCommand);
 
         String[] fullCommandSplit = fullCommand.split(" ");
@@ -19,7 +25,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (this.exception != null) throw this.exception;
         if (this.taskNumber <= 0 || this.taskNumber > tasks.size())
             throw new DukeException("Please only input integers within the range of your tasks");
@@ -30,7 +36,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 }

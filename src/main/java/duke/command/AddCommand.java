@@ -1,8 +1,19 @@
+package duke.command;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
+
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.task.ToDoTask;
+import duke.task.EventTask;
+import duke.task.DeadlineTask;
+import duke.function.Ui;
+import duke.function.TaskList;
+import duke.function.Storage;
 
 public class AddCommand extends Command {
     String taskType;
@@ -11,7 +22,7 @@ public class AddCommand extends Command {
     LocalDateTime taskDate;
     DukeException exception;
 
-    AddCommand(String fullCommand) {
+    public AddCommand(String fullCommand) {
         super(fullCommand);
 
         StringTokenizer st = new StringTokenizer(fullCommand);
@@ -46,10 +57,12 @@ public class AddCommand extends Command {
         if (st.hasMoreTokens()) time = st.nextToken();
         if ((date.equals("") || time.equals(""))) {
             if (command.equals("deadline")) {
-                this.exception = new DukeException("Please add a date and time for your deadline in the following format:\n'deadline <name> /by <YYYY-MM-DD> <HH:MM>' ! *quack*");
+                this.exception = new DukeException("Please add a date and time for your deadline in the following" +
+                        "format:\n'deadline <name> /by <YYYY-MM-DD> <HH:MM>' ! *quack*");
                 return;
             } else if (command.equals("event")) {
-                this.exception = new DukeException("Please add a date and time for your event in the following format:\n'event <name> /on <YYYY-MM-DD> <HH:MM>' ! *quack*");
+                this.exception = new DukeException("Please add a date and time for your event in the following" +
+                        "format:\n" + "'event <name> /on <YYYY-MM-DD> <HH:MM>' ! *quack*");
                 return;
             }
         }
@@ -59,10 +72,12 @@ public class AddCommand extends Command {
                 dateTime = LocalDateTime.parse(date + "T" + time);
             } catch (DateTimeParseException e) {
                 if (command.equals("deadline")) {
-                    this.exception = new DukeException("Please add a date and time for your deadline in the following format:\n'deadline <name> /by <YYYY-MM-DD> <HH:MM>' ! *quack*");
+                    this.exception = new DukeException("Please add a date and time for your deadline in the following" +
+                            "format:\n'deadline <name> /by <YYYY-MM-DD> <HH:MM>' ! *quack*");
                     return;
                 } else if (command.equals("event")) {
-                    this.exception = new DukeException("Please add a date and time for your event in the following format:\n'event <name> /on <YYYY-MM-DD> <HH:MM>' ! *quack*");
+                    this.exception = new DukeException("Please add a date and time for your event in the following" +
+                            "format:\n'event <name> /on <YYYY-MM-DD> <HH:MM>' ! *quack*");
                     return;
                 }
             }
@@ -74,7 +89,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (this.exception != null) throw this.exception;
 
         //Creating the new task
@@ -92,14 +107,16 @@ public class AddCommand extends Command {
         //Output to update user
         ui.print("Got it. I've added this task *quack*:");
         ui.print(String.format("  %s", newTask.toString()));
-        ui.print(String.format("Now you have %d task%s in the list *quack*.", tasks.size(), tasks.size() == 1 ? "" : "s"));
+        ui.print(String.format(
+                "Now you have %d task%s in the list *quack*.",
+                tasks.size(), tasks.size() == 1 ? "" : "s"));
 
         //Saving the task to the save file
         storage.save(tasks);
     }
 
     @Override
-    boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 }

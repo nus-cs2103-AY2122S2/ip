@@ -1,19 +1,25 @@
-import java.util.StringTokenizer;
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.function.TaskList;
+import duke.function.Storage;
+import duke.function.Ui;
+import duke.task.Task;
 
 public class MarkCommand extends Command {
 
-    boolean markOrUnmark;
+    boolean isMark;
     int taskNumber;
     DukeException exception;
 
-    MarkCommand(String fullCommand) {
+    public MarkCommand(String fullCommand) {
         super(fullCommand);
         String[] fullCommandSplit = fullCommand.split(" ");
         String command = fullCommandSplit[0];
         if (command.equals("mark")) {
-            this.markOrUnmark = true;
+            this.isMark = true;
         } else if (command.equals("unmark")) {
-            this.markOrUnmark = false;
+            this.isMark = false;
         }
 
         try {
@@ -27,13 +33,13 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (this.exception != null) throw this.exception;
         if (this.taskNumber <= 0 || this.taskNumber > tasks.size())
             throw new DukeException("Please only input integers within the range of your tasks");
 
         Task task = tasks.getByNumber(this.taskNumber);
-        if (this.markOrUnmark) {
+        if (this.isMark) {
             task.mark();
             ui.print(String.format("I've marked task %d as done! *quack*", this.taskNumber));
         } else {
@@ -44,7 +50,7 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 }

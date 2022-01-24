@@ -1,21 +1,29 @@
+package duke.function;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.task.ToDoTask;
+import duke.task.EventTask;
+import duke.task.DeadlineTask;
 
 public class Storage {
     String filePath;
 
-    Storage(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    List<Task> load() throws DukeException {
+    public List<Task> load() throws DukeException {
         List<Task> tasks = new ArrayList<Task>();
         File file = new File(this.filePath);
 
@@ -49,7 +57,7 @@ public class Storage {
         return tasks;
     }
 
-    void save(TaskList tasks) throws DukeException {
+    public void save(TaskList tasks) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(this.filePath);
             for (Task task : tasks.getTasks()) {
@@ -61,24 +69,24 @@ public class Storage {
                 } else if (task instanceof EventTask) {
                     taskString += "E;";
                 }
-                if (task.done) {
+                if (task.isDone()) {
                     taskString += "X;";
                 } else {
                     taskString += "O;";
                 }
-                taskString += task.name;
+                taskString += task.getName();
                 if (task instanceof DeadlineTask) {
                     DeadlineTask dTask = (DeadlineTask) task;
                     taskString += ";";
-                    taskString += dTask.preposition;
+                    taskString += dTask.getPreposition();
                     taskString += ";";
-                    taskString += dTask.dateTime.format(DateTimeFormatter.ISO_DATE_TIME);
+                    taskString += dTask.getDateTime().format(DateTimeFormatter.ISO_DATE_TIME);
                 } else if (task instanceof EventTask) {
                     EventTask dTask = (EventTask) task;
                     taskString += ";";
-                    taskString += dTask.preposition;
+                    taskString += dTask.getPreposition();
                     taskString += ";";
-                    taskString += dTask.dateTime.format(DateTimeFormatter.ISO_DATE_TIME);
+                    taskString += dTask.getDateTime().format(DateTimeFormatter.ISO_DATE_TIME);
                 }
                 fileWriter.write(taskString);
                 fileWriter.write(System.lineSeparator());

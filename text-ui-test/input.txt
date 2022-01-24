@@ -1,0 +1,13 @@
+hello
+help
+list
+todo homework
+list
+deadline project /by 2022-01-30 23:59
+list
+mark 2
+event festival /on 2022-04-14 09:00
+list
+mark 3
+delete 3
+bye

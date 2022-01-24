@@ -1,30 +1,33 @@
+package duke.function;
+
 import java.util.Scanner;
-import java.util.StringTokenizer;
+
+import duke.exception.DukeException;
 
 public class Ui {
     Scanner sc;
 
-    Ui() {
+    public Ui() {
         this.sc = new Scanner(System.in);
     }
 
-    void printBootUp() {
+    public void printBootUp() {
         System.out.println("Hello! I am Duck 🐥\nWhat can I do for you?");
     }
 
-    void printLoadingError() {
+    public void printLoadingError() {
         System.out.println("Since loading the save file has failed, your task list is currently empty");
     }
 
-    void printLineSeparator() {
+    public void printLineSeparator() {
         System.out.println("____________________________________________________________");
     }
 
-    void printException(DukeException e) {
+    public void printException(DukeException e) {
         System.out.println(String.format("%s *quack*", e.getMessage()));
     }
 
-    void printHelp() {
+    public void printHelp() {
         System.out.println("These are the commands you can use *quack*:");
         System.out.println("  'list' to list out all your tasks");
         System.out.println("  'todo <description>' to add a todo task");
@@ -37,11 +40,11 @@ public class Ui {
         System.out.println("*quack*");
     }
 
-    void print(String message) {
+    public void print(String message) {
         System.out.println(message);
     }
 
-    String readCommand() {
+    public String readCommand() {
         return this.sc.nextLine();
     }
 }

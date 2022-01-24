@@ -1,15 +1,19 @@
+package duke.function;
+
 import java.util.List;
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 public class TaskList {
 
     List<Task> tasks;
 
-    TaskList() {
+    public TaskList() {
         this.tasks = new ArrayList<Task>();
     }
 
-    TaskList(List<Task> tasks) {
+    public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
 
@@ -17,19 +21,19 @@ public class TaskList {
         return this.tasks;
     }
 
-    Integer size() {
+    public Integer size() {
         return this.tasks.size();
     }
 
-    Task getByNumber(int number) {
+    public Task getByNumber(int number) {
         return this.tasks.get(number - 1);
     }
 
-    Task deleteByNumber(int number) {
+    public Task deleteByNumber(int number) {
         return tasks.remove(number - 1);
     }
 
-    void add(Task task) {
+    public void add(Task task) {
         this.tasks.add(task);
     }
 
