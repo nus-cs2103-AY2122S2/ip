@@ -18,8 +18,8 @@ public abstract class Task {
     /*
      * Setting for done variable of duke.task.Task
      */
-    public void setDone(boolean done) {
-        this.isDone = done;
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
     public abstract String formatSave();
 

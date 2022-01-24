@@ -21,7 +21,7 @@ public class Event extends Task {
     private LocalDateTime parseScheduledTime(String scheduledTime) throws DukeException {
         String[] temp = scheduledTime.split(" ", 2);
         if (temp.length <= 1 || temp[1].length() < 4) {
-            throw new DukeWrongInputFormatException("Format for deadline is wrong. Please refer to list of commands.");
+            throw new DukeWrongInputFormatException("Format for event is wrong. Please refer to list of commands.");
         }
         try {
             return LocalDateTime.parse(temp[0] + "T" + temp[1].charAt(0) + temp[1].charAt(1)

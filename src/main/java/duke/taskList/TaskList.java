@@ -14,6 +14,7 @@ import java.util.Iterator;
 
 public class TaskList {
     private ArrayList<Task> tasks;
+
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
@@ -25,11 +26,12 @@ public class TaskList {
         }
         return output.toString();
     }
+
     public int size() {
         return this.tasks.size();
     }
 
-    public String addTask(Command c, String task, boolean showMessage) throws DukeException {
+    public String addTask(Command c, String task, boolean canShowMessage) throws DukeException {
         Task t;
         switch (c) {
         case TODO:
@@ -54,29 +56,31 @@ public class TaskList {
             break;
         }
         this.tasks.add(t);
-        if(showMessage) {
-            return "\n\tGot it. I've added this task:\n\t\t" + t + "\n\t" +
-                    "Now you have " + tasks.size() + " in the list.\n" ;
+        if(canShowMessage) {
+            return "\n\tGot it. I've added this task:\n\t\t" + t + "\n\t"
+                    + "Now you have " + tasks.size() + " in the list.\n" ;
         } else {
             return null;
         }
     }
 
-    public String markAsDone(String in, boolean showMessage) throws DukeException {
+    public String markAsDone(String in, boolean canShowMessage) throws DukeException {
         try {
             int index = Integer.parseInt(in);
             if (index > this.tasks.size() || index < 1) {
                 throw new DukeInvalidTaskNumberException("Task number: " + index + " does not exist");
             } else {
                 this.tasks.get(index-1).setDone(true);
-                if (showMessage) {
-                    return "\n\tNice! I've marked this task as done:\n\t\t" + this.tasks.get(index-1).toString() + "\n";
+                if (canShowMessage) {
+                    return "\n\tNice! I've marked this task as done:\n\t\t"
+                            + this.tasks.get(index-1).toString() + "\n";
                 } else {
                     return null;
                 }
             }
         } catch (NumberFormatException e) {
-            throw new DukeWrongInputFormatException("Please input a valid Task number after typing mark: mark <taskNum>");
+            throw new DukeWrongInputFormatException("Please input a valid Task number "
+                    + "after typing mark: mark <taskNum>");
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeWrongInputFormatException("Please input a valid mark command: mark <taskNum>");
         }
@@ -89,10 +93,12 @@ public class TaskList {
                 throw new DukeInvalidTaskNumberException("Task number: " + index + " does not exist");
             } else {
                 this.tasks.get(index-1).setDone(false);
-                return "\n\tOK, I've marked this task as not done yet:\n\t\t" + this.tasks.get(index-1).toString() + "\n";
+                return "\n\tOK, I've marked this task as not done yet:\n\t\t"
+                        + this.tasks.get(index-1).toString() + "\n";
             }
         } catch (NumberFormatException e) {
-            throw new DukeWrongInputFormatException("Please input a valid Task number after typing unmark: unmark <taskNum>");
+            throw new DukeWrongInputFormatException("Please input a valid Task number "
+                    + "after typing unmark: unmark <taskNum>");
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeWrongInputFormatException("Please input a valid mark command: unmark <taskNum>");
         }
@@ -109,7 +115,8 @@ public class TaskList {
                         + "\n\tNow you have " + tasks.size() + " tasks in the list.\n";
             }
         } catch (NumberFormatException e) {
-            throw new DukeWrongInputFormatException("Please input a valid Task number after typing delete: delete <taskNum>");
+            throw new DukeWrongInputFormatException("Please input a valid Task number "
+                    + "after typing delete: delete <taskNum>");
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeWrongInputFormatException("Please input a valid delete command: delete <taskNum>");
         }

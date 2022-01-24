@@ -10,6 +10,7 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task{
     private final String DEADLINE_STRING;
     private final LocalDateTime DEADLINE;
+
     public Deadline(String description, String deadLine) throws DukeException {
         super(description);
         this.DEADLINE = this.parseDeadline(deadLine);

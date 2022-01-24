@@ -33,15 +33,21 @@ public class Storage {
                 if (s.charAt(0) == 'T') {
                     String[] temp = s.split(" ", 3);
                     tasks.addTask(Command.TODO, temp[2], false);
-                    if (temp[1].charAt(1) == '1') tasks.markAsDone(String.valueOf(tasks.size()), false);
+                    if (temp[1].charAt(1) == '1') {
+                        tasks.markAsDone(String.valueOf(tasks.size()), false);
+                    }
                 } else if (s.charAt(0) == 'D') {
                     String[] temp = s.split(" ", 3);
                     tasks.addTask(Command.DEADLINE, temp[2], false);
-                    if (temp[1].charAt(1) == '1') tasks.markAsDone(String.valueOf(tasks.size()), false);
+                    if (temp[1].charAt(1) == '1') {
+                        tasks.markAsDone(String.valueOf(tasks.size()), false);
+                    }
                 } else if (s.charAt(0) == 'E') {
                     String[] temp = s.split(" ", 3);
                     tasks.addTask(Command.EVENT, temp[2], false);
-                    if (temp[1].charAt(1) == '1') tasks.markAsDone(String.valueOf(tasks.size()), false);
+                    if (temp[1].charAt(1) == '1') {
+                        tasks.markAsDone(String.valueOf(tasks.size()), false);
+                    }
                 }
             }
         } catch (DukeException ignored) {}
