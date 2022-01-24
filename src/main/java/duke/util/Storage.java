@@ -1,3 +1,7 @@
+package duke.util;
+
+import duke.task.*;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -67,7 +71,7 @@ public class Storage {
         return currentTasks;
     }
 
-    public void saveToHardDisk(TaskList taskList) throws DukeException{
+    public void saveToHardDisk(TaskList taskList) throws DukeException {
         try {
             String formattedTaskList = taskList.formatListForSaving();
             FileWriter fw = new FileWriter(filePath + fileName);

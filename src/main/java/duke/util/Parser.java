@@ -1,3 +1,8 @@
+package duke.util;
+
+import duke.command.*;
+import duke.task.*;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -6,7 +11,7 @@ public class Parser {
 
     public Parser() {}
 
-    public static Command parse(String fullInput) throws DukeException{
+    public static Command parse(String fullInput) throws DukeException {
         String[] inputArr = fullInput.split(" ");
         String command = inputArr[0].toLowerCase();
         String description = fullInput.replace(command + " ", "");

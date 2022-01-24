@@ -1,3 +1,8 @@
+package duke;
+
+import duke.command.Command;
+import duke.util.*;
+
 import java.io.IOException;
 
 public class Duke {
@@ -26,9 +31,7 @@ public class Duke {
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } catch (IOException e) {
+            } catch (DukeException | IOException e) {
                 ui.showError(e.getMessage());
             }
         }
