@@ -109,12 +109,19 @@ public class Doge {
         String[] temp = input.split(" ");
         String[] date = temp[0].split("-");
         int time = Integer.parseInt(temp[1]);
+        LocalDateTime currDateTime = LocalDateTime.now();
+        LocalDateTime inputDateTime;
 
         try {
-            return LocalDateTime.of(Integer.parseInt(date[0]), Integer.parseInt(date[1]),
+            inputDateTime = LocalDateTime.of(Integer.parseInt(date[0]), Integer.parseInt(date[1]),
                     Integer.parseInt(date[2]), time / 100, time % 100);
+            if (inputDateTime.isAfter(currDateTime)) {
+                return inputDateTime;
+            } else {
+              throw new DateTimeException("Invalid date/time!");
+            }
         } catch (DateTimeException e) {
-           throw new DogeException("Are you lacking common sense? Invalid date/time!");
+            throw new DogeException("Are you lacking common sense? Invalid date/time!");
         }
     }
 
