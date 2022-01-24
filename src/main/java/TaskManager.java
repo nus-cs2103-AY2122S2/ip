@@ -1,10 +1,20 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class TaskManager {
     private ArrayList<Task> tasks;
+    private  Storage storage;
 
     public TaskManager() {
         this.tasks = new ArrayList<>();
+        this.storage = new Storage();
+
+        try {
+            storage.loadFileToTasks(this);
+        } catch (FileNotFoundException e) {
+            System.out.println("Error! File not found");
+        }
     }
 
     public String addToDo(String description) {
@@ -40,6 +50,14 @@ public class TaskManager {
         Task toDelete = this.tasks.get(taskId - 1);
         this.tasks.remove(taskId - 1);
         return toDelete.toString();
+    }
+
+    public void save() {
+        try {
+            this.storage.saveTasksToFile(tasks);
+        } catch (IOException e) {
+                System.out.println("Unable to read file, \n" + e.getMessage());
+        }
     }
 
     @Override

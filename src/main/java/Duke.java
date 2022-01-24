@@ -24,6 +24,7 @@ public class Duke {
                 // main
                 switch (c) {
                 case BYE:
+                    notebook.save();
                     output += "don't leave me don't leave me.";
                     break;
                 case LIST:
