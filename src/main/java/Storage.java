@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
@@ -69,12 +68,9 @@ public class Storage {
 
     }
 
-    public void store(List<Task> savedTasks) throws IOException {
+    public void store(TaskList tl) throws IOException {
         FileWriter fw = new FileWriter(dataFilePath);
-        for (Task t: savedTasks) {
-            String des = t.writeToFile() + "\n";
-            fw.write(des);
-        }
+        fw.write(tl.getTaskStore());
         fw.close();
     }
 

@@ -12,11 +12,35 @@ public class TaskList {
         this.tasks = savedTasks;
     }
 
-    private void addTask(Task t) {
+    public void addTask(Task t) {
         this.tasks.add(t);
     }
 
-    private void deleteTask(Task t) {
+    public void deleteTask(Task t) {
         this.tasks.remove(t);
+    }
+    
+    public String getTasksMsg() {
+        StringBuilder s = new StringBuilder();
+        for (Task t: this.tasks) {
+            s.append(t.toString()).append("\n");
+        }
+        return s.toString();
+    }
+
+    public String getTaskStore() {
+        StringBuilder s = new StringBuilder();
+        for (Task t: this.tasks) {
+            s.append(t.writeToFile()).append("\n");
+        }
+        return s.toString();
+    }
+
+    public int getSize() {
+        return this.tasks.size();
+    }
+
+    public Task getTask(int index) {
+        return this.tasks.get(index);
     }
 }

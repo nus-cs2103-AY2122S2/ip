@@ -16,6 +16,9 @@ public class Chi {
      */
     private Storage storage;
     private TaskList taskList;
+    private UI ui;
+    private Parser parser;
+    // delete these
     private List<Task> messages;
     private static final String DATA_FOLDER = "data/";
     private static final String DATA_FILE = "data/tasks.txt";
@@ -23,19 +26,35 @@ public class Chi {
 
     public Chi(String filepath) {
         this.storage = new Storage(filepath);
+        this.parser = new Parser();
+        this.ui = new UI();
         try {
             this.taskList = new TaskList(storage.load());
         } catch (ChiException e) {
             // print error for file not found
+            ui.printErrorMsg(e.getMessage());
             this.taskList = new TaskList();
         } catch (IOException e) {
             // print error for IO problems
+            ui.printErrorMsg("There's something wrong with the IO nyan!");
         }
         // Delete this
         this.messages = new ArrayList<>();
         // Make sure data file exists in directory
     }
 
+    public void run() {
+        ui.printWelcome();
+        ui.requestInput(this.taskList, this.storage, this.parser);
+        ui.printGoodbye();
+    }
+
+    public static void main(String[] args) {
+        Chi myBot = new Chi("data/tasks.txt");
+        myBot.run();
+    }
+
+    // Delete this
     public void load() throws IOException, ChiException {
         try {
             this.dataFile = new File(DATA_FILE);
@@ -57,6 +76,7 @@ public class Chi {
 
     }
 
+    // Delete this
     private Task manageFileData(String task) {
         // We assume the task stored inside is correct
         String[] splitTask = task.split("\\|");
@@ -78,6 +98,7 @@ public class Chi {
             }
     }
 
+    // Delete this
     public void store() throws IOException {
         FileWriter fw = new FileWriter(DATA_FILE);
         for (Task t: messages) {
@@ -86,10 +107,12 @@ public class Chi {
         }
         fw.close();
     }
+    // Delete this
     private void addTask(Task t) {
         this.messages.add(t);
     }
 
+    // Delete this
     private void deleteTask(Task t) {
         this.messages.remove(t);
     }
@@ -99,9 +122,8 @@ public class Chi {
      * @param msg The message inputted by the user.
      * @throws ChiException if messages are invalid.
      */
-    public void respondToMsg(String msg) throws ChiException, IOException {
+    public void respondToMsg(String msg) throws ChiException {
         // Obtain 1st word
-
         String[] command = msg.trim().split(" ");
         if (command.length == 1) {
             if (command[0].equals("list")) {
