@@ -1,0 +1,5 @@
+T |   | king
+T | X | alskdmlaskmdlkamsd
+T | X | hello
+D | X | eat a hamburger | midnight
+E |   | say bye to emily | 6pm
