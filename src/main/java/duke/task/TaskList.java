@@ -29,7 +29,7 @@ public class TaskList {
      * <li>2 : Tasks happening after the specified date</li>
      *
      * @param date The date that is to be compared with
-     * @param type The type of comparison to be performed
+     * @param comparisonType The type of comparison to be performed
      * @return A list of tasks that matches the specified date and comparisonType.
      */
     public ArrayList<Task> getTasksBasedOnDate(LocalDate date, int comparisonType) {
