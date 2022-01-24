@@ -18,6 +18,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Encapsulates a list of Tasks.
+ *
+ * @throws FileException if the save-file on the user's hard-disk cannot be accessed or modified.
+ * @throws TaskDecodingException if the encoded data on the save-file cannot be read.
+ */
 public class TaskList {
     protected List<Task> tasks;
     private final Storage taskFile;
@@ -30,6 +36,13 @@ public class TaskList {
         this.tasks = taskFile.readTasksFile();
     }
 
+    /**
+     * Adds a ToDo.
+     *
+     * @param tokens
+     * @throws EmptyTitleException
+     * @throws FileException
+     */
     public void addToDo(String[] tokens) throws EmptyTitleException, FileException {
         List<String> words = new ArrayList<>(Arrays.asList(tokens).subList(1, tokens.length));
         String title = String.join(" ", words);
@@ -49,6 +62,14 @@ public class TaskList {
         showNumberOfTasks();
     }
 
+    /**
+     * Adds a ToDo with a given deadline.
+     *
+     * @param tokens
+     * @throws EmptyTitleException
+     * @throws EmptyDateException
+     * @throws FileException
+     */
     public void addDeadline(String[] tokens) throws EmptyTitleException, EmptyDateException, FileException {
         List<String> firstHalf = new ArrayList<>();
         List<String> secondHalf = new ArrayList<>();
@@ -89,6 +110,14 @@ public class TaskList {
         showNumberOfTasks();
     }
 
+    /**
+     * Adds an Event with a specified date and time at which it occurs.
+     *
+     * @param tokens
+     * @throws EmptyTitleException
+     * @throws EmptyDateException
+     * @throws FileException
+     */
     public void addEvent(String[] tokens) throws EmptyTitleException, EmptyDateException, FileException {
         List<String> firstHalf = new ArrayList<>();
         List<String> secondHalf = new ArrayList<>();
@@ -129,6 +158,15 @@ public class TaskList {
         showNumberOfTasks();
     }
 
+    /**
+     * Marks an incomplete Task as complete.
+     *
+     * @param tokens
+     * @throws TaskNotFoundException
+     * @throws TaskAlreadyMarked
+     * @throws InvalidTaskIdException
+     * @throws FileException
+     */
     public void markTask(String[] tokens) throws TaskNotFoundException, TaskAlreadyMarked, InvalidTaskIdException, FileException {
         int taskId = getTaskId(tokens[1]);
 
@@ -143,6 +181,15 @@ public class TaskList {
         System.out.format("   %s\n", t);
     }
 
+    /**
+     * Marks a completed Task as incomplete.
+     *
+     * @param tokens
+     * @throws TaskNotFoundException
+     * @throws TaskAlreadyUnMarked
+     * @throws InvalidTaskIdException
+     * @throws FileException
+     */
     public void unMarkTask(String[] tokens) throws TaskNotFoundException, TaskAlreadyUnMarked, InvalidTaskIdException, FileException {
         int taskId = getTaskId(tokens[1]);
 
@@ -157,6 +204,14 @@ public class TaskList {
         System.out.format("   %s\n", t);
     }
 
+    /**
+     * Permanently removes a Task from the user's list by a specified index.
+     *
+     * @param tokens
+     * @throws TaskNotFoundException
+     * @throws InvalidTaskIdException
+     * @throws FileException
+     */
     public void deleteTask(String[] tokens) throws TaskNotFoundException, InvalidTaskIdException, FileException {
         int taskId = getTaskId(tokens[1]);
 
@@ -174,6 +229,9 @@ public class TaskList {
         showNumberOfTasks();
     }
 
+    /**
+     * Displays all Tasks in the user's list.
+     */
     public void showTaskList() {
         // if there are no tasks, inform the user
         if (tasks.size() == 0) {
