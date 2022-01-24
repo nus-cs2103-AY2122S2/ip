@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -13,7 +14,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // greeting message
         String greetings = "    Hi there! 👋 I'm Duke\n"
                             + "    What can I do for you?";
@@ -34,15 +35,14 @@ public class Duke {
         boolean isBye = false;
 
         /**
-         * current number of to do tasks
-         */
-//        int count = 0;
-
-        /**
          * Array container for user's to do tasks
          */
-//        Task[] todoList = new Task[100];
         ArrayList<Task> todoList = new ArrayList<Task>();
+
+        // initializing saver to save todoList tasks to relativePath
+        String fileSeparator = System.getProperty("file.separator");
+        String relativePath = "data" + fileSeparator + "duke.txt";
+        DukeTaskSaver saver = new DukeTaskSaver(relativePath);
 
         String userInput = sc.nextLine();
 
@@ -101,6 +101,9 @@ public class Duke {
                         Todo userToDoTask = new Todo(userInputTask);
                         todoList.add(userToDoTask);
 
+                        // save tasks to duke.txt
+                        saver.save(todoList);
+
                         // display to do task
                         System.out.println("    Got it. I've added this task:");
                         System.out.println("        " + userToDoTask.toString());
@@ -150,6 +153,9 @@ public class Duke {
                         // adding task to todoList
                         Deadline userDeadlineTask = new Deadline(deadlineDescription, by);
                         todoList.add(userDeadlineTask);
+
+                        // save tasks to duke.txt
+                        saver.save(todoList);
 
                         // displaying
                         System.out.println("    Got it. I've added this task:");
@@ -202,6 +208,9 @@ public class Duke {
                         Event userEventTask = new Event(eventDescription, eventDateTime);
                         todoList.add(userEventTask);
 
+                        // save tasks to duke.txt
+                        saver.save(todoList);
+
                         System.out.println("    Got it. I've added this task:");
                         System.out.println("        " + userEventTask.toString());
                         System.out.println("    " + displayTaskAmount);
@@ -213,6 +222,9 @@ public class Duke {
                     case "mark":
                         int taskToMark = Integer.parseInt(userInputArr[1]);
                         todoList.get(taskToMark - 1).markAsDone();
+
+                        // save update tasks to duke.txt
+                        saver.save(todoList);
 
                         System.out.println(lines);
                         System.out.println("    Nice! I've marked this task as done:");
@@ -226,6 +238,9 @@ public class Duke {
                     case "unmark":
                         int taskToUnmark = Integer.parseInt(userInputArr[1]);
                         todoList.get(taskToUnmark - 1).markAsNotDone();
+
+                        // save update tasks to duke.txt
+                        saver.save(todoList);
 
                         System.out.println(lines);
                         System.out.println("    OK, I've marked this task as not done yet:");
@@ -262,6 +277,9 @@ public class Duke {
 
                         // deleting task from the array list
                         todoList.remove(taskToDelete);
+
+                        // save update tasks to duke.txt
+                        saver.save(todoList);
 
                         System.out.println(lines);
                         System.out.println("    Noted. I've removed this task:");
