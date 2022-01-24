@@ -2,6 +2,9 @@ import exception.*;
 import task.*;
 import enums.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,6 +12,7 @@ public class Duke {
     private static final ArrayList<Task> tasks = new ArrayList<>();
     private static int count = 0;
     private static boolean processNext = true;
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
     public static void main(String[] args) {
         welcome();
@@ -46,9 +50,10 @@ public class Duke {
                     addEvent(input);
                     break;
                 default:
-                    echo("I'm afraid I don't understand your request.");
                     break;
                 }
+            } catch (IllegalArgumentException e) {
+                echo("I'm afraid I don't understand your request.");
             } catch (DukeException de) {
                 echo("I'm afraid I wasn't able to fulfill your request.\n" + de.getMessage());
             }
@@ -181,6 +186,7 @@ public class Duke {
 
     private static void addDeadline(String input) throws DukeException {
         String description;
+        LocalDateTime dateTime;
         String[] split = input.split("/by");
 
         try {
@@ -194,8 +200,13 @@ public class Duke {
         if (split[1].trim().equals("")) {
             throw new DukeException("The date of the deadline cannot be empty.");
         }
+        try {
+            dateTime = LocalDateTime.parse(split[1].trim(), formatter);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please specify the date format as follows: 2022-12-25 2359");
+        }
 
-        Deadline deadline = new Deadline(description, split[1].trim());
+        Deadline deadline = new Deadline(description, dateTime);
         tasks.add(deadline);
         count++;
         echo("Got it. I've added this deadline:\n\t"
@@ -205,6 +216,7 @@ public class Duke {
 
     public static void addEvent(String input) throws DukeException {
         String description;
+        LocalDateTime dateTime;
         String[] split = input.split("/at");
 
         try {
@@ -218,8 +230,14 @@ public class Duke {
         if (split[1].trim().equals("")) {
             throw new DukeException("The date of the event cannot be empty.");
         }
+        try {
+            dateTime = LocalDateTime.parse(split[1].trim(), formatter);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please specify the date format as follows: 2022-12-25 2359");
+        }
 
-        Event event = new Event(description, split[1].trim());
+
+        Event event = new Event(description, dateTime);
         tasks.add(event);
         count++;
         echo("Got it. I've added this event:\n\t"
