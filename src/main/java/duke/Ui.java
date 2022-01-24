@@ -21,7 +21,8 @@ public class Ui {
         TODO("todo"),
         DEADLINE("deadline"),
         EVENT("event"),
-        DELETE("delete");
+        DELETE("delete"),
+        FIND("find");
 
         final String command;
 
@@ -88,6 +89,11 @@ public class Ui {
             } else if (cmd.equals(Ui.Commands.DELETE.command)) {
                 int taskNumber = sc.nextInt();
                 parser.deleteTask(taskNumber);
+
+            } else if(cmd.equals(Ui.Commands.FIND.command)) {
+                String keyword = sc.next();
+                parser.findTask(keyword);
+                sc.nextLine();
 
             } else {
                 throw new DukeException("OOPS!!! I'm sorry, " +
