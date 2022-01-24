@@ -12,12 +12,26 @@ public class Task {
         this.isDone = !this.isDone;
     }
 
-    public void markAsDone() {
+    public String markAsDone() {
+        String output;
+        if (this.isDone) {
+            output = "Sorry, the task is actually done!";
+        } else {
+            output = String.format("Nice!, I have marked this task as done: \n      %s", this);
+        }
         this.isDone = true;
+        return output;
     }
 
-    public void markAsNotDone() {
+    public String markAsNotDone() {
+        String output;
+        if (!this.isDone) {
+            output = "Sorry, the task has not been done!";
+        } else {
+            output = String.format("Ok, I have marked this task as not done: \n      %s", this);
+        }
         this.isDone = false;
+        return output;
     }
 
     public String getStatusIcon() {
