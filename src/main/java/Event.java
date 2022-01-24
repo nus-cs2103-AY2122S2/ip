@@ -1,26 +1,47 @@
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
-    String time;
-    public Event(String des, String time) {
-        super(des, TaskType.EVENT);
-        this.time = time;
+    NotableDate date;
+    LocalTime time;
+
+    public Event(String des, NotableDate date, boolean isDone) {
+        super(des, TaskType.EVENT, isDone);
+        this.date = date;
     }
 
-    public Event(String des, String time, boolean isDone) {
+    public Event(String des, NotableDate date, LocalTime time, boolean isDone) {
         super(des, TaskType.EVENT, isDone);
+        this.date = date;
         this.time = time;
     }
 
     @Override
     public String parseTask() {
-        return "E | " + Boolean.toString(isDone) + " | " + description + " | " + time;
+        DateTimeFormatter dFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter tFormat = DateTimeFormatter.ofPattern("HH:mm");
+        if (time == null) {
+            return "E | " + Boolean.toString(isDone) + " | " + description + " | " + date.localDate.format(dFormat);
+        } else {
+            return "E | " + Boolean.toString(isDone) + " | " + description + " | " + date.localDate.format(dFormat)
+                    + " | " + time.format(tFormat);
+        }
     }
 
     @Override
     public String toString() {
+        String str;
         if (isDone) {
-            return  "[E][X] " + description + " (at: " + time + ")";
+            str = "[E][X] " + description + " (at: " + date;
         } else {
-            return "[E][ ] " + description + " (at: " + time + ")";
+            str = "[E][ ] " + description + " (at: " + date;
         }
+
+        if (time != null) {
+            str += " " + time.format(DateTimeFormatter.ofPattern("h:mma"));
+        }
+        str += ")";
+
+        return str;
     }
 }

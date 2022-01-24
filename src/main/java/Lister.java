@@ -1,25 +1,31 @@
-import java.nio.file.*;
-import java.util.ArrayList;
-
 import java.io.File;
 import java.io.FileWriter;
-
-
 import java.io.IOException;
+
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.HashMap;
+
+import java.time.LocalDate;
+
+import java.nio.file.Paths;
+import java.nio.file.Files;
 
 public class Lister {
     ArrayList<Task> tasks;
+    HashMap<LocalDate, NotableDate> dateMap;
     File data;
 
     public Lister(File data) {
         tasks = new ArrayList<>();
         this.data = data;
+        dateMap = new HashMap<>();
     }
 
-    public Lister(ArrayList<Task> tasks, File data) {
+    public Lister(ArrayList<Task> tasks, HashMap<LocalDate, NotableDate> dateMap, File data) {
         this.tasks = tasks;
         this.data = data;
+        this.dateMap = dateMap;
     }
 
     public void add(Task task) throws IOException {
@@ -31,6 +37,13 @@ public class Lister {
             throw e;
         }
         tasks.add(task);
+        if (task instanceof Event) {
+            Event e = (Event) task;
+            e.date.addTask(task);
+        } else if (task instanceof Deadline) {
+            Deadline d = (Deadline) task;
+            d.date.addTask(task);
+        }
         System.out.println("   ________________________________________");
         System.out.println("    Fine I'll add this task in:\n      " + task);
         if (tasks.size() == 1) {
@@ -41,13 +54,13 @@ public class Lister {
         System.out.println("   ________________________________________");
     }
 
-    public void list() {
+    public void list(ArrayList<Task> taskList) {
         System.out.println("   ________________________________________");
-        if (tasks.size() == 0) {
+        if (taskList.size() == 0) {
             System.out.println("    Nothing to look at here... =.=");
         }
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
             if (task.isDone) {
                 System.out.println("    " + Integer.toString(i + 1) + "." + task);
             } else {
@@ -153,7 +166,15 @@ public class Lister {
         if (i < 0 || i > tasks.size()) {
             System.out.println("    Invalid entry number entered! =.=");
         } else {
-            String des = tasks.get(i - 1).toString();
+            Task task = tasks.get(i - 1);
+            if (task instanceof Event) { // remove task from NotableDate tasklist
+                Event e = (Event) task;
+                e.date.tasks.remove(task);
+            } else if (task instanceof Deadline) {
+                Deadline d = (Deadline) task;
+                d.date.tasks.remove(task);
+            }
+            String des = task.toString();
             tasks.remove(i - 1);
             System.out.println("    Fine. I've removed this task:\n      " + des);
             if (tasks.size() == 1) {
@@ -163,5 +184,16 @@ public class Lister {
             }
         }
         System.out.println("   ________________________________________");
+    }
+
+    public NotableDate checkDate(LocalDate lDate) {
+        NotableDate nDate;
+        if (!dateMap.containsKey(lDate)) { // checks if NotableDate has already been initialised
+            nDate = new NotableDate(lDate);
+            dateMap.put(lDate, nDate);
+        } else  {
+            nDate = dateMap.get(lDate);
+        }
+        return nDate;
     }
 }
