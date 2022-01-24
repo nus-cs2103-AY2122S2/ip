@@ -1,3 +1,0 @@
-T| |buy milk
-D| |return book|2022-03-05
-E| |project meeting|2022-04-26|12:00|14:30
