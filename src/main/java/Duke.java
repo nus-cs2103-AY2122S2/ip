@@ -1,10 +1,16 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Duke {
     private static final String INPUT_NAME = "You:";
     private static final String OUTPUT_NAME = "Duke:";
-    private static final TaskManager notebook = new TaskManager();
+    private static TaskManager notebook = new TaskManager();
+    protected static final String DATE_TIME_FORMAT = "dd/MM/yyyy HH:mm";
+    private static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
 
     public static void main(String[] args) {
         start();
@@ -44,12 +50,16 @@ public class Duke {
                     break;
                 case DEADLINE:
                     output += "Got it. I have added this task-\n";
-                    output += notebook.addDeadline(commandLine[1], commandLine[2]) + "\n";
+                    LocalDateTime dateTime = LocalDateTime.parse(commandLine[2], timeFormatter);
+                    output += notebook.addDeadline(commandLine[1],
+                            dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"))) + "\n";
                     output += "Now you have " + notebook.size() + " tasks.\n";
                     break;
                 case EVENT:
                     output += "Got it. I have added this task-\n";
-                    output += notebook.addEvent(commandLine[1], commandLine[2]) + "\n";
+                    LocalDateTime dateTime2 = LocalDateTime.parse(commandLine[2], timeFormatter);
+                    output += notebook.addEvent(commandLine[1],
+                            dateTime2.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")))+ "\n";
                     output += "Now you have " + notebook.size() + " tasks.\n";
                     break;
                 case DELETE:
@@ -133,6 +143,12 @@ public class Duke {
                     throw new DukeException.DukeTimeNotFoundException();
                 }
                 essentialInfo = commandInfo.split("/at");
+            }
+
+            try {
+                LocalDateTime.parse(essentialInfo[1].trim(), timeFormatter);
+            } catch(DateTimeParseException e) {
+                throw new DukeException.DukeDateTimeFormatException();
             }
 
             return new String[]{commandType, essentialInfo[0].trim(), essentialInfo[1].trim()};
