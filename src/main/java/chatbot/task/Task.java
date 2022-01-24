@@ -2,23 +2,23 @@ package chatbot.task;
 
 public class Task {
     private final String desc;
-    private boolean done;
+    private boolean isDone;
 
     public Task(String desc) {
-        done = false;
+        isDone = false;
         this.desc = desc;
     }
 
     public boolean isDone() {
-        return done;
+        return isDone;
     }
 
     public void setDone(boolean done) {
-        this.done = done;
+        this.isDone = done;
     }
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", done ? "X" : " ", desc);
+        return String.format("[%s] %s", isDone ? "X" : " ", desc);
     }
 }
