@@ -1,4 +1,4 @@
-package dukeClasses;
+package dukeclasses;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -22,7 +22,7 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public String getStorageFilePath(){
+    public String getStorageFilePath() {
         return filePath;
     }
 
@@ -45,33 +45,38 @@ public class Storage {
         while (sc.hasNext()) {
             String data = sc.nextLine();
             String[] processedData = data.trim().split("]", 3);
+
             if (processedData[0].contains("T")) {
                 ToDo todo = new ToDo(processedData[2].trim());
                 if (processedData[1].contains("X")) {
-                    todo.setIsDone(true);
+                    todo.setDone(true);
                 }
                 tasks.add(todo);
             } else {
                 String[] processedDataDescription = processedData[2].split("\\(by:", 2);
                 String temp = processedDataDescription[1].replace(")", "");
+
                 LocalDate date = null;
                 try {
                     date = LocalDate.parse(temp.trim(), DateTimeFormatter.ofPattern("MMM dd yyyy"));
                 } catch (DateTimeParseException errorMessage) {
                     throw new DukeException();
                 }
+
                 if (processedData[0].contains("E")) {
                     Event event = new Event(processedDataDescription[0].trim(), date);
                     if (processedData[1].contains("X")) {
-                        event.setIsDone(true);
+                        event.setDone(true);
                     }
                     tasks.add(event);
+
                 } else if (processedData[0].contains("D")) {
                     Deadline deadline = new Deadline(processedDataDescription[0].trim(), date);
                     if (processedData[1].contains("X")) {
-                        deadline.setIsDone(true);
+                        deadline.setDone(true);
                     }
                     tasks.add(deadline);
+
                 } else {
                     throw new DukeException();
                 }
@@ -84,10 +89,12 @@ public class Storage {
     public void updateStorage(ArrayList<Task> dataArrList) throws DukeException {
         File file = new File(filePath);
         String updatedFileContents = "";
+
         for (int i = 0; i < dataArrList.size(); i++) {
             updatedFileContents = updatedFileContents.concat(
                 String.format("    %s\n", dataArrList.get(i).identify()));
         }
+
         try {
             FileWriter fw = new FileWriter(filePath);
             fw.write(updatedFileContents);

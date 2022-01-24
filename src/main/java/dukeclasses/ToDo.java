@@ -1,4 +1,4 @@
-package dukeClasses;
+package dukeclasses;
 
 public class ToDo extends Task{
 
@@ -7,11 +7,12 @@ public class ToDo extends Task{
     }
 
     @Override
-    public String identify(){
+    public String identify() {
         if (super.getIsDone()) {
             return String.format("[T][X] %s", super.getDescription());
         } else {
             return String.format("[T][ ] %s", super.getDescription());
         }
     }
+
 }

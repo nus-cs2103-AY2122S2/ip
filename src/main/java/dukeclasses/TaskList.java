@@ -1,8 +1,9 @@
-package dukeClasses;
+package dukeclasses;
 
 import java.util.ArrayList;
 
 public class TaskList {
+
     private ArrayList<Task> tasks;
 
     public TaskList(ArrayList<Task> tasks) {
@@ -13,16 +14,16 @@ public class TaskList {
         this.tasks = new ArrayList<Task>();
     }
 
-    public Task updateTask(int index, boolean isDone){
+    public Task updateTask(int index, boolean isDone) {
         if (isDone) {
-            tasks.get(index).setIsDone(true);
+            tasks.get(index).setDone(true);
         } else {
-            tasks.get(index).setIsDone(false);
+            tasks.get(index).setDone(false);
         }
         return tasks.get(index);
     }
 
-    public ArrayList<Task> getTaskList(){
+    public ArrayList<Task> getTaskList() {
         return this.tasks;
     }
 

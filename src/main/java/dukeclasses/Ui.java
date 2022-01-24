@@ -1,4 +1,4 @@
-package dukeClasses;
+package dukeclasses;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,31 +6,27 @@ import java.util.Scanner;
 
 public class Ui {
 
-    public Ui(){
-
-    }
-
-    public void showLoadingError(){
+    public void showLoadingError() {
         System.out.println("Storage load failed");
     }
 
-    public void showFileError(){
+    public void showFileError() {
         System.out.println("Invalid File");
     }
 
-    public void showStorageError(){
+    public void showStorageError() {
         System.out.println("Fail to update storage");
     }
 
-    public void showInputError(){
+    public void showInputError() {
         System.out.println("    Invalid input detected. Please check your input");
     }
 
-    public void greet(){
+    public void greet() {
         System.out.println(Commands.HI.toString());
     }
 
-    public void sayBye(){
+    public void sayBye() {
         System.out.println(Commands.BYE.toString());
     }
 
@@ -47,8 +43,7 @@ public class Ui {
     }
 
     public void newTask(Task task, int numOfTask) {
-        System.out.println(String.format(
-            "%s      %s", Commands.ADD.toString(), task.identify()));
+        System.out.println(String.format("%s      %s", Commands.ADD.toString(), task.identify()));
         System.out.println(String.format("    Now you have %d tasks in the list.", numOfTask));
     }
 
@@ -67,7 +62,7 @@ public class Ui {
     }
 
     public void deleteTask(Task task) {
-        System.out.println(String.format(
-                "%s      %s", Commands.DELETE.toString(), task.identify()));
+        System.out.println(String.format("%s      %s", Commands.DELETE.toString(), task.identify()));
     }
+
 }
