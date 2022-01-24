@@ -13,7 +13,7 @@ import duke.error.DukeException;
 import duke.task.*;
 
 /**
- * Handles user input entered into Duke by validating it and making sense out of it. <br>
+ * Handles all user input entered into Duke <br>
  */
 public class Parser {
 
