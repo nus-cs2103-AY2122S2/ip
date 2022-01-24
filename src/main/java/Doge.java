@@ -2,15 +2,13 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-<<<<<<< HEAD
 import java.nio.file.Files;
 import java.nio.file.Path;
-
 import java.nio.file.Paths;
-=======
+
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
->>>>>>> branch-Level-8
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
