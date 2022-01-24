@@ -10,14 +10,17 @@ public class EventException extends BobbyException {
     public String toString() {
         String error_string;
         switch (errtype) {
-        case "event1":
+        case "blank":
             error_string = "    There is no description after the event command :(";
             break;
-        case "event2":
+        case "no_slash":
             error_string = "    I cannot tell the time of the event, put the time after a \"/\"";
             break;
-        case "event3":
+        case "no_date":
             error_string = "    There is nothing after the \"/\"! When is this event happening?";
+            break;
+        case "invalid_date":
+            error_string = "    Wrong date format! I only accept dd-mm-yyyy!";
             break;
         default:
             error_string = "    I cannot understand this..";

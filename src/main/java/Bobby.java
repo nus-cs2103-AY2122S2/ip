@@ -1,10 +1,15 @@
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class Bobby {
-    static final String FILE_LOCATION = "./Bobby.txt";
-    static ArrayList<Task> tasks = new ArrayList<Task>();
+    private static final String FILE_LOCATION = "./Bobby.txt";
+    private static ArrayList<Task> tasks = new ArrayList<Task>();
+    private static SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
 
     enum Commands {
         todo, bye, list, mark, unmark, deadline, event, delete, illegal
@@ -37,7 +42,9 @@ public class Bobby {
     }
 
     public static void ListTask() {
+        Collections.sort(tasks);
         Task currTask;
+        System.out.println("    I've sorted and put the earliest deadlines/events to the top for you :)");
         for (int i = 0; i < tasks.size(); i++) {
             currTask = Bobby.tasks.get(i);
             int index = i + 1;
@@ -86,15 +93,17 @@ public class Bobby {
     }
 
     public static void AddDeadline(String s) throws DeadlineException {
-        if (s.substring(8).isBlank()) {                                 // nothing after command
-            throw new DeadlineException("deadline1");
-        } else if (!s.contains("/")) {                                  // no "/"
-            throw new DeadlineException("deadline2");
-        } else if (s.substring(s.indexOf("/") + 1).isBlank()) {         // nothing after time
-            throw new DeadlineException("deadline3");
+        if (s.substring(8).isBlank()) {                                     // nothing after command
+            throw new DeadlineException("blank");
+        } else if (!s.contains("/")) {                                      // no "/"
+            throw new DeadlineException("no_slash");
+        } else if (s.substring(s.indexOf("/") + 1).isBlank()) {             // nothing after time
+            throw new DeadlineException("no_date");
+        } else if (!isValidDate(s.substring(s.length() - 10))) {            // invalid date
+            throw new DeadlineException("invalid_date");
         }
         Deadline newDeadline = new Deadline(s.substring(s.indexOf(" ") + 1, s.indexOf("/") - 1),
-                s.substring(s.indexOf("/")));
+                s.substring(s.length() - 10));
         System.out.println("    Oh boy, another deadline? Added task:");
         System.out.println("    " + newDeadline);
         AddTask(newDeadline);
@@ -103,7 +112,7 @@ public class Bobby {
     }
 
     public static void AddToDo(String s) throws ToDoException {
-        if (s.substring(4).isBlank()) {                             // nothing after command
+        if (s.substring(4).isBlank()) {                                 // nothing after command
             throw new ToDoException("todo");
         }
         ToDo newToDo = new ToDo(s.substring(5));
@@ -115,14 +124,16 @@ public class Bobby {
     }
 
     public static void AddEvent(String s) throws EventException {
-    if (s.substring(5).isBlank()) {                                     // nothing after command
-            throw new EventException("event1");
+        if (s.substring(5).isBlank()) {                                 // nothing after command
+            throw new EventException("blank");
         } else if (!s.contains("/")) {                                  // no "/"
-            throw new EventException("event2");
+            throw new EventException("no_slash");
         } else if (s.substring(s.indexOf("/") + 1).isBlank()) {         // nothing after time
-            throw new EventException("event3");
+            throw new EventException("no_date");
+        } else if (!isValidDate(s.substring(s.length() - 10))) {        // invalid date
+            throw new EventException("invalid_date");
         }
-        Event newEvent = new Event(s.substring(s.indexOf(" ") + 1, s.indexOf("/") - 1), s.substring(s.indexOf("/")));
+        Event newEvent = new Event(s.substring(s.indexOf(" ") + 1, s.indexOf("/") - 1), s.substring(s.length() - 10));
         System.out.println("    Let's see... A new event! Added task:");
         System.out.println("    " + newEvent);
         AddTask(newEvent);
@@ -137,6 +148,16 @@ public class Bobby {
             oos.close();
         } catch (IOException e) {
             e.getMessage();
+        }
+    }
+    public static boolean isValidDate(String input) {
+        try {
+            SIMPLE_DATE_FORMAT.setLenient(false);
+            SIMPLE_DATE_FORMAT.parse(input);
+            return true;
+        }
+        catch(ParseException e) {
+            return false;
         }
     }
 
