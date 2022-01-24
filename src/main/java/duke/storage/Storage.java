@@ -1,7 +1,11 @@
 package duke.storage;
 
 import duke.exception.DukeException;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.task.Todo;
+import duke.task.Task;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,14 +21,15 @@ public class Storage {
     public static final String MESSAGE_WRITE_FAILURE = "Something went wrong with file write!";
     public static final String MESSAGE_INVALID_FILE = "File Corrupted!";
 
-    private String filePath;
+    private final String filePath;
 
     public Storage(String inputPath) throws IOException {
         this.filePath = System.getProperty("user.dir") + inputPath;
 
         File file = new File(this.filePath);
-        file.getParentFile().mkdirs();
-        file.createNewFile();
+        if (!file.getParentFile().mkdirs() || file.createNewFile()) {
+            throw new IOException();
+        }
     }
 
     public void saveTaskList(TaskList taskList) throws DukeException {
