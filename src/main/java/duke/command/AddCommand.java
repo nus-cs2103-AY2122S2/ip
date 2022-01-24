@@ -15,13 +15,36 @@ import duke.function.Ui;
 import duke.function.TaskList;
 import duke.function.Storage;
 
+/**
+ * Represents a command to add a new task.
+ */
 public class AddCommand extends Command {
+    /**
+     * Type of task. Can be 'todo', 'deadline', or 'event
+     */
     String taskType;
+    /**
+     * The description and name of the task.
+     */
     String taskName;
+    /**
+     * The preposition for the date time. Only applicable for deadlines and events.
+     */
     String taskPreposition;
+    /**
+     * The date time for the event. Only applicable for deadlines and events.
+     */
     LocalDateTime taskDate;
+    /**
+     * To store any exceptions that were thrown during the parsing of the command.
+     */
     DukeException exception;
 
+    /**
+     * Initializes the add command from user input
+     *
+     * @param fullCommand The user input
+     */
     public AddCommand(String fullCommand) {
         super(fullCommand);
 
@@ -88,6 +111,16 @@ public class AddCommand extends Command {
         this.taskDate = dateTime;
     }
 
+    /**
+     * Executes the add command and adds the specified task and its details to Duke.
+     * If any exceptions were thrown during the parsing of user input and the initializiation of the command,
+     * they will be thrown here and the command will be terminated.
+     *
+     * @param tasks   The current tasks for the command to interact with.
+     * @param ui      The ui for the command to print output.
+     * @param storage The storage for the command to save and load tasks to an external file.
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (this.exception != null) throw this.exception;
@@ -115,6 +148,11 @@ public class AddCommand extends Command {
         storage.save(tasks);
     }
 
+    /**
+     * Returns false as this is not an exit command.
+     *
+     * @return
+     */
     @Override
     public boolean isExit() {
         return false;

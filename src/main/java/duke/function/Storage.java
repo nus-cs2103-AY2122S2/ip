@@ -16,13 +16,32 @@ import duke.task.ToDoTask;
 import duke.task.EventTask;
 import duke.task.DeadlineTask;
 
+/**
+ * Manages the loading and saving of tasks into an external .txt file
+ */
+
 public class Storage {
+    /**
+     * The path to the save file
+     */
     String filePath;
 
+    /**
+     * Initializes a new storage instance
+     *
+     * @param filePath The path to the save file
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the file from the file path.
+     * Parses the file to convert the text into a List of Tasks.
+     *
+     * @return A list of tasks loaded from the file path.
+     * @throws DukeException
+     */
     public List<Task> load() throws DukeException {
         List<Task> tasks = new ArrayList<Task>();
         File file = new File(this.filePath);
@@ -57,6 +76,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the given list of tasks to the specified file path.
+     *
+     * @param tasks The list of tasks to be saved.
+     * @throws DukeException
+     */
     public void save(TaskList tasks) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(this.filePath);

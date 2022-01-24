@@ -10,10 +10,29 @@ import duke.function.Parser;
 import duke.command.Command;
 import duke.exception.DukeException;
 
+/**
+ * Duke is a Todo list command line application that allows you to create, delete, mark, and save tasks
+ */
+
 public class Duke {
+    /**
+     * To load and save tasks into the specified file path
+     */
     private Storage storage;
+    /**
+     * To maintain the current list of tasks
+     */
     private TaskList tasks;
+    /**
+     * To handle any input output interaction with users
+     */
     private Ui ui;
+
+    /**
+     * Returns a Duke application that loads previously saved tasks.
+     *
+     * @param filePath File path from where to load the saved tasks.
+     */
 
     public Duke(String filePath) {
         this.ui = new Ui();
@@ -27,7 +46,11 @@ public class Duke {
         }
     }
 
-    public void run() throws FileNotFoundException, IOException {
+    /**
+     * Runs the Duke application
+     */
+
+    public void run() {
         this.ui.printBootUp();
         boolean isExit = false;
 
@@ -47,7 +70,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws FileNotFoundException, IOException {
+    public static void main(String[] args) {
         new Duke("src/main/data/save.txt").run();
     }
 }
