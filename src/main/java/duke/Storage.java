@@ -14,7 +14,7 @@ public class Storage {
     private String filePath;
     private File file;
 
-    public Storage(String filePath) throws DukeFileNotFoundException {
+    Storage(String filePath) throws DukeFileNotFoundException {
         this.filePath = filePath;
         this.file = new File(filePath);
         if (!file.isFile()) {

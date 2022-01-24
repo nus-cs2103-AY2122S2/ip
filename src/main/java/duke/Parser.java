@@ -277,6 +277,24 @@ public class Parser {
     }
 
     /**
+     * Parse a command to find tasks matching a given date
+     * @param commandArguments User input arguments supplied
+     * @param taskManager Handle the marking, unmarking, deleting and adding of tasks
+     * @return String representing the response by the Duke application as a result of the user command
+     * @throws DukeException Handles any errors that occur during the function
+     */
+    public static String parseFindByDateCommand(String[] commandArguments,
+            TaskManager taskManager) throws DukeException {
+        if (commandArguments.length < 2) {
+            throw new DukeInsufficientArgumentsException();
+        }
+        String command = String.join(" ", commandArguments);
+        String queryName = command.substring("date".length() + 1);
+        String response = taskManager.findByDate(queryName);
+        return response;
+    }
+
+    /**
      * Parse user input and invokes other functions depending on the type of user command
      * @param command User input
      * @param taskManager Handle the marking, unmarking, deleting and adding of tasks
@@ -312,6 +330,8 @@ public class Parser {
                 return parseDeadlineCommand(commandArguments, taskManager);
             case "find":
                 return parseFindCommand(commandArguments, taskManager);
+            case "date":
+                return parseFindByDateCommand(commandArguments, taskManager);
             default:
                 throw new DukeInvalidCommandException();
             }

@@ -8,7 +8,7 @@ public class Duke {
     private Ui ui;
     private Storage storage;
 
-    public Duke(String filePath) {
+    Duke(String filePath) {
         ui = new Ui();
         taskManager = new TaskManager();
         try {

@@ -126,6 +126,40 @@ public class TaskManager {
     }
 
     /**
+     * Finding tasks that match a given date
+     * @param date Date supplied by user input
+     * @return String representing tasks with given date
+     */
+    public String findByDate(String date) {
+        ArrayList<Task> tasks = new ArrayList<Task>();
+        for (Task task: this.taskList) {
+            if (task.getType() == "Deadline") {
+                Deadline deadlineTask = (Deadline) task;
+                if (deadlineTask.getTime().equals(date)) {
+                    tasks.add(deadlineTask);
+                }
+            }
+            if (task.getType() == "Event") {
+                Event eventTask = (Event) task;
+                if (eventTask.getTime().equals(date)) {
+                    tasks.add(eventTask);
+                }
+            }
+        }
+        if (tasks.size() == 0) {
+            return "There are no tasks with this date.";
+        }
+        String response = "Here are the tasks with the given date date:\n";
+        for (int i = 1; i <= tasks.size(); i++) {
+            response += (i + ". " + tasks.get(i - 1));
+            if (i != tasks.size()) {
+                response += "\n";
+            }
+        }
+        return response;
+    }
+
+    /**
      * Marking a task as not completed
      * @param index Index of task to be unmarked
      * @return String representing the response when a task is unmarked
