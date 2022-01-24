@@ -1,15 +1,17 @@
 package Taskmaster.Commands;
+
 /*
- * Commands deals with the interactions with the user and making sense of the user command
+ * This class encapsulates commands that executed
+ * according to the user's input
  */
 
 public abstract class Commands {
     protected String command;
 
-     /**
-     * Constructor for Command Objects
+    /**
+     * Constructor for Command Objects.
      *
-     * @param command - The command entered by the user
+     * @param command - The command the user entered
      */
 
     public Commands(String command) {
@@ -17,8 +19,10 @@ public abstract class Commands {
     }
 
 
-    abstract void execute();
+    /**
+     *  Execute Command.
+     */
 
-    
+    public abstract void execute();
 
 }

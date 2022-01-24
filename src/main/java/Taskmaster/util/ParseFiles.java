@@ -5,21 +5,42 @@ import Taskmaster.Task.TodoTask;
 import Taskmaster.Task.DeadlineTask;
 import Taskmaster.Task.EventTask;
 
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ *  This class encapsulates a parser that helps parse
+ *  information read from the text file.
+ *
+ */
 public class ParseFiles {
-    
-    private String[] splitStringIntoParts(String s) {
-        String[] splitBasedOnDelimiter = s.split("\\|");
+
+    /**
+     * Helper function that breaks the string into components.
+     * @param str The string that is going to be broken up into
+     *             components.
+     * @return  An array of strings.
+     */
+
+    private String[] splitStringIntoParts(String str) {
+        String[] splitBasedOnDelimiter = str.split("\\|");
         for (int i = 0; i < splitBasedOnDelimiter.length; i++)
             splitBasedOnDelimiter[i] = splitBasedOnDelimiter[i].trim();
         
         return splitBasedOnDelimiter;
     }
 
+    /**
+     * Helper function that helps handle event tasks.
+     * Creates an eventTask object based on the information
+     * that has been parsed in.
+     *
+     * @param isMark Determines whether task is completed (0: Not completed 1: Completed).
+     * @param description description of the task.
+     * @param eventAt Date and time of event.
+     * @return the newly created event task.
+     */
 
     private Task handlesEventTasks(int isMark, String description, LocalDateTime eventAt) {
         EventTask eventTask = new EventTask(description, eventAt);
@@ -27,6 +48,17 @@ public class ParseFiles {
             eventTask.markTask();
         return eventTask;
      }
+
+    /**
+     * Helper function that helps handle deadline tasks.
+     * Creates an DeadlineTask object based on the information
+     * that has been parsed in.
+     *
+     * @param isMark Determines whether task is completed (0: Not completed 1: Completed).
+     * @param description description of the task.
+     * @param deadlineBy Date and time of deadline.
+     * @return the newly created deadline task.
+     */
 
     
     private Task handlesDeadlineTasks(int isMark, String description, LocalDateTime deadlineBy) {
@@ -36,7 +68,16 @@ public class ParseFiles {
         return deadlineTask;
     }
 
-    
+    /**
+     * Helper function that helps handle To do tasks.
+     * Creates a Todo Task object based on the information
+     * that has been parsed in.
+     *
+     * @param isMark Determines whether task is completed (0: Not completed 1: Completed).
+     * @param description description of the task.
+     * @return the newly created Todo task.
+     */
+
 
     private Task handlesTodoTasks(int isMark, String description) {
         TodoTask todoTask = new TodoTask(description);
@@ -48,18 +89,15 @@ public class ParseFiles {
 
 
     /**
-     *  ParseTask parses each line from the file to be read 
-     *  and determines which task the task is, before it allows
-     *  the program to add it into 
-     * 
-     * 
-     * @param str Line from the file that is to be read
-     * @return Task after reading input
+     *  ParseTask reads each line from the file and categorizes
+     *  the task based on their respective task type.
+     *
+     * @param str Line from the file that is to be read.
+     * @return Newly created Task.
      */
     
     
     public Task parseTask(String str) {
-
         //Container file for returning Task
         Task taskToBeReturned = null;
         char taskType = str.charAt(0);
@@ -101,7 +139,7 @@ public class ParseFiles {
                             }
                     }  
                 } else {
-                //Todo Task
+                    //Todo Task
                     taskToBeReturned = handlesTodoTasks(index, stringIntoParts[2]);
 
                 }
@@ -120,8 +158,6 @@ public class ParseFiles {
 
         return taskToBeReturned;
 
-        
-    
     }
             
             
