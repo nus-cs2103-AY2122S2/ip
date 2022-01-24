@@ -18,15 +18,15 @@ public class AddCommand extends Command {
 		String[] processedInput;
 		switch (type) {
 		case "todo":
-			this.added = new ToDos(input);
+			this.added = new ToDo(input);
 			break;
 		case "event":
 			processedInput = input.split("/at", 2);
-			this.added = new Events(processedInput[0], processedInput[1]);
+			this.added = new Event(processedInput[0], processedInput[1]);
 			break;
 		case "deadline":
 			processedInput = input.split("/by", 2);
-			this.added = new Deadlines(processedInput[0], processedInput[1]);
+			this.added = new Deadline(processedInput[0], processedInput[1]);
 			break;
 		}
 		this.tasklist.add(added);
