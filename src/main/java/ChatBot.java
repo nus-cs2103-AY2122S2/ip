@@ -2,20 +2,29 @@
  * Represents a chatbot used to keep track of various tasks.
  */
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ChatBot {
     private String name;
     private String line = "-------------------------------------------------";
-    private ArrayList<Task> tasks = new ArrayList<Task>();
+    private ArrayList<Task> tasks;
+    private Storage taskStorage;
 
     /**
      * Chatbot to be instantiated with a name.
      *
      * @param name The name of the chatbot.
      */
-    public ChatBot(String name) {
+    public ChatBot(String name, Storage taskStorage) {
         this.name = name;
+        this.taskStorage = taskStorage;
+        try {
+            this.tasks = taskStorage.retrieveTaskList();
+        } catch (FileNotFoundException e) {
+            this.tasks = new ArrayList<Task>();
+        }
     }
 
     /**
@@ -107,6 +116,14 @@ public class ChatBot {
                         line);
                 break;
         }
+
+        try {
+            taskStorage.saveTaskList(this.tasks);
+        } catch (IOException e) {
+            System.out.println("Oh no something went wrong when saving your data!\n" +
+                    "They will be all lost.");
+        }
+
         return false;
     }
 
