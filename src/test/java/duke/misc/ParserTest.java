@@ -419,5 +419,17 @@ public class ParserTest {
             assertEquals("The argument MUST contain a single integer.", e.getMessage());
         }
     }
+
+    @Test
+    public void testParse_exceptionThrown() {
+        try {
+            TaskList listOfTasks = new TaskList(100);
+            Storage.initFileFolder();
+            parse("this is an invalid command", listOfTasks);
+            fail();
+        } catch (Exception e) {
+            assertEquals("I'm sorry, but I don't know what that means :(", e.getMessage());
+        }
+    }
 }
 
