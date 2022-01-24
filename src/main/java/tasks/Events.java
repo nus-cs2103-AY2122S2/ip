@@ -1,19 +1,26 @@
 package tasks;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Events extends Task {
-	private String date;
+	private LocalDateTime date;
 
 	public Events(String detail, String date) {
 		super(detail);
-		this.date = date;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(" d/M/yyyy HHmm");
+		this.date = LocalDateTime.parse(date, formatter);
 	}
 
 	@Override
 	public String toString() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
+		String markedPrint;
 		if (marked) {
-			return "[E][X] " + detail + "(at:" + date + ")";
+			markedPrint = "[E][X] ";
 		} else {
-			return "[E][ ] " + detail + "(at:" + date + ")";
+			markedPrint = "[E][ ] ";
 		}
+		return markedPrint + detail + "(at:" + date.format(formatter) + ")";
 	}
 }
