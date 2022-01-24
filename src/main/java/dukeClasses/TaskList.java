@@ -30,8 +30,8 @@ public class TaskList {
         tasks.add(task);
     }
 
-    public void deleteTask(int index) {
-        tasks.remove(index);
+    public Task deleteTask(int index) {
+        return tasks.remove(index);
     }
 
 }

@@ -65,4 +65,9 @@ public class Ui {
             showFileError();
         }
     }
+
+    public void deleteTask(Task task) {
+        System.out.println(String.format(
+                "%s      %s", Commands.DELETE.toString(), task.identify()));
+    }
 }
