@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
@@ -157,7 +159,7 @@ public class Bernie {
 
     /**
      * Verifies the user input is of which task
-     * @param taskType String
+     * @param taskType Type
      * @param input String
      * @return boolean to affirm if the input is of this task
      */
@@ -188,7 +190,7 @@ public class Bernie {
     /**
      * Splits a user input into an array containing parameters for creating Task accordingly,
      * depending on taskType.
-     * @param taskType String
+     * @param taskType Type
      * @param input String, a user input to be split into an array of parameters
      * @return String[] inputArr.
      * For "todo": an array of 1, containing description.
@@ -209,13 +211,13 @@ public class Bernie {
             case DEADLINE:
                 inputArr = input.split(" /by ");
                 description = getDescription(inputArr, Type.DEADLINE);
-                String by = getTime(inputArr);
+                String by = getTime(inputArr, Type.DEADLINE);
                 inputArr = new String[]{description, by};
                 break;
             case EVENT:
                 inputArr = input.split(" /at ");
                 description = getDescription(inputArr, Type.EVENT);
-                String at = getTime(inputArr);
+                String at = getTime(inputArr, Type.EVENT);
                 inputArr = new String[]{description, at};
                 break;
             case MARK:
@@ -297,7 +299,7 @@ public class Bernie {
     /**
      * Gets the description from the inputArr which contains parameters for creating Task
      * @param inputArr String[], parameters for creating Task, obtained from user input String.
-     * @param taskType String
+     * @param taskType Type
      * @return String description, for creating of Task
      * @throws BernieException for invalid descriptions such as empty or number description
      */
@@ -329,14 +331,21 @@ public class Bernie {
     /**
      * Gets the time from the inputArr which contains parametrs for creating Task
      * @param inputArr String[], parameters for creating Task, obtained from user input String.
-     * @return String time, for craeting of Task
+     * @param taskType type, if it is DEADLINE we check if the input date format is correct.
+     * @return String time, for creating of Task. It is of format: yyyy-mm-dd for converting
+     * to LocalDate object by TaskList's addTask class
      * @throws BernieException if there is no time input given
      */
-    String getTime(String[] inputArr) throws BernieException {
+    String getTime(String[] inputArr, Type taskType) throws BernieException {
         try {
+            if (taskType.equals(Type.DEADLINE)) {
+                LocalDate checkValid = LocalDate.parse(inputArr[1]);
+            }
             return inputArr[1];
         } catch (IndexOutOfBoundsException e) {
             throw new BernieException("Where's your time input?");
+        } catch (DateTimeParseException e) {
+            throw new BernieException("Please enter deadline date in: yyyy-mm-dd");
         }
     }
 

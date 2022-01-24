@@ -49,7 +49,7 @@ ___________________________________________________________
 Where's the description?
 ___________________________________________________________
 Got ya. Added:
-[D][ ] return book (by: Sunday)
+[D][ ] return book (by: Jan 28 2022)
 You got 2 tasks waiting for ya!
 ___________________________________________________________
 Where's the description?
@@ -68,7 +68,7 @@ You got 3 tasks waiting for ya!
 ___________________________________________________________
 Here's what you need to do buddy:
 1. [T][ ] borrow book
-2. [D][ ] return book (by: Sunday)
+2. [D][ ] return book (by: Jan 28 2022)
 3. [E][ ] project meeting (at: Mon 2-4pm)
 ___________________________________________________________
 This is now done:
@@ -76,7 +76,7 @@ This is now done:
 ___________________________________________________________
 Here's what you need to do buddy:
 1. [T][X] borrow book
-2. [D][ ] return book (by: Sunday)
+2. [D][ ] return book (by: Jan 28 2022)
 3. [E][ ] project meeting (at: Mon 2-4pm)
 ___________________________________________________________
 This is now undone:
@@ -84,15 +84,15 @@ This is now undone:
 ___________________________________________________________
 Here's what you need to do buddy:
 1. [T][ ] borrow book
-2. [D][ ] return book (by: Sunday)
+2. [D][ ] return book (by: Jan 28 2022)
 3. [E][ ] project meeting (at: Mon 2-4pm)
 ___________________________________________________________
 This is now done:
-[D][X] return book (by: Sunday)
+[D][X] return book (by: Jan 28 2022)
 ___________________________________________________________
 Here's what you need to do buddy:
 1. [T][ ] borrow book
-2. [D][X] return book (by: Sunday)
+2. [D][X] return book (by: Jan 28 2022)
 3. [E][ ] project meeting (at: Mon 2-4pm)
 ___________________________________________________________
 Got ya. Added:
@@ -101,7 +101,7 @@ You got 3 tasks waiting for ya!
 ___________________________________________________________
 Here's what you need to do buddy:
 1. [T][ ] borrow book
-2. [D][X] return book (by: Sunday)
+2. [D][X] return book (by: Jan 28 2022)
 3. [E][ ] project meeting (at: Mon 2-4pm)
 4. [T][ ] clean dishes
 ___________________________________________________________
@@ -112,7 +112,7 @@ ___________________________________________________________
 Task number does not exist!
 ___________________________________________________________
 Got ya. Removed:
-[D][X] return book (by: Sunday)
+[D][X] return book (by: Jan 28 2022)
 You got 3 tasks waiting for ya!
 ___________________________________________________________
 Here's what you need to do buddy:

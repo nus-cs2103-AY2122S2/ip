@@ -19,7 +19,7 @@ deadline 2
 deadline return book
 deadline return book /by
 deadline /by Sunday
-deadline return book /by Sunday
+deadline return book /by 2022-01-28
 event
 event 2
 event project meeting
