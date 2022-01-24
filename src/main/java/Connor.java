@@ -36,9 +36,11 @@ public class Connor {
 
     private static void interpret(String s) {
         // Split between command and description
-        String[] statement = s.trim().split(" ",2);
+        // trim then concat ensures statement[1] won't be null
+        String[] statement = s.trim().concat(" ").split(" ", 2);
         // Standardise command format
         String x = statement[0].toLowerCase();
+        String desc = statement[1].trim();
         switch (x) {
         case "exit":
         case "bye": {
@@ -53,40 +55,27 @@ public class Connor {
         case "todo":
         case "deadline":
         case "event": {
-            try {
-                String desc = statement[1].trim();
-                if (desc.isBlank()) {
-                    print(ERROR_EMPTY_TASK_DESC);
-                    return;
-                }
-                addTask(x, desc);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                print(ERROR_EMPTY_TASK_DESC);
-            }
+            addTask(x, desc);
             break;
         }
         case "delete": {
             try {
-                int taskNo = Integer.parseInt(statement[1]) - 1;
+                int taskNo = Integer.parseInt(desc) - 1;
                 deleteTask(taskNo);
                 print("");
                 viewTasks();
             } catch (NumberFormatException e) {
                 print(ERROR_INDEX_NOT_INTEGER);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                print(ERROR_EMPTY_INDEX);
             }
             break;
         }
         case "mark":
         case "unmark": {
             try {
-                int taskNo = Integer.parseInt(statement[1]) - 1;
+                int taskNo = Integer.parseInt(desc) - 1;
                 markStatus(x, taskNo);
             } catch (NumberFormatException e) {
                 print(ERROR_INDEX_NOT_INTEGER);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                print(ERROR_EMPTY_INDEX);
             }
             break;
         }
@@ -103,17 +92,21 @@ public class Connor {
         }
         print(SHOW_TASKS);
         for (int i = 1; i <= taskList.size(); i++) {
-            print(INDENT + Integer.toString(i) + ". " + taskList.get(i - 1));
+            print(INDENT + i + ". " + taskList.get(i - 1));
         }
     }
 
     private static void addTask(String taskType, String desc) {
+        if (desc.isEmpty()) {
+            print(ERROR_EMPTY_TASK_DESC);
+            return;
+        }
         switch (taskType) {
         case "todo":
             ToDo todo = new ToDo(desc);
             taskList.add(todo);
             print(ADD_NEW_TASK);
-            print(INDENT + todo.toString());
+            print(INDENT + todo);
             break;
         case "deadline": {
             if (!desc.contains("/by")) {
@@ -130,7 +123,7 @@ public class Connor {
             Deadline deadline = new Deadline(thing, when);
             taskList.add(deadline);
             print(ADD_NEW_TASK);
-            print(INDENT + deadline.toString());
+            print(INDENT + deadline);
             break;
         }
         case "event": {
@@ -148,7 +141,7 @@ public class Connor {
             Event event = new Event(thing, when);
             taskList.add(event);
             print(ADD_NEW_TASK);
-            print(INDENT + event.toString());
+            print(INDENT + event);
             break;
         }
         default:
