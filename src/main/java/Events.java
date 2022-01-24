@@ -5,22 +5,34 @@ package main.java;
  */
 public class Events extends Task {
 
-    String type = "E";
-    String info;
+  String type = "E";
+  String info;
 
-    /**
-     * Constructor of Events
-     * @param name name of the event.
-     * @param info extra info of the event.
-     */
-    Events(String name, String info) {
-        super(name);
-        this.info = info;
-    }
+  /**
+   * Constructor of Events
+   * 
+   * @param name name of the event.
+   * @param info extra info of the event.
+   */
+  Events(String name, String info) {
+    super(name);
+    this.info = info;
+  }
 
-    @Override
-    String display() {
-        return "[" +this.type + "] " + "[" +this.done + "] " + this.name + " (at " + info + ")";
-    }
+  Events(String name, boolean marked, String info) {
+    super(name);
+    this.info = info;
+    this.isMarked = marked;
+  }
+
+  @Override
+  String toStore() {
+    return this.type + " | " + this.markStore() + " | " + this.name + " | " + this.info;
+  }
+
+  @Override
+  String display() {
+    return "[" + this.type + "] " + "[" + markDisplay() + "] " + this.name + " (at " + info + ")";
+  }
 
 }
