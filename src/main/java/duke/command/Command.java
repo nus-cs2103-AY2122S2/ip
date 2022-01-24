@@ -29,7 +29,7 @@ public abstract class Command {
     }
 
     protected Task parseSelectTask(TaskList taskList) throws DukeIllegalArgumentException {
-        int taskIndex = parseTaskNumber();
+        int taskIndex = this.parseTaskNumber();
         Task task = taskList.getTaskByIndex(taskIndex);
         if (task == null) {
             throw new DukeIllegalArgumentException("No matching task with given number");

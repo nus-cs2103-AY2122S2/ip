@@ -19,20 +19,16 @@ public abstract class Task implements ISerializable {
         this.isDone = false;
     }
 
+    void setDone(boolean isDone) {
+        this.isDone = isDone;
+    }
+
     public String getDescription() {
         return this.description;
     }
 
     public boolean isDone() {
         return this.isDone;
-    }
-
-    public void markAsDone() {
-        this.isDone = true;
-    }
-
-    public void unmarkAsDone() {
-        this.isDone = false;
     }
 
     public String getStatusIcon() {

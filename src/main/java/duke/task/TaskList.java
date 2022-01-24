@@ -45,6 +45,14 @@ public class TaskList {
         return deleted;
     }
 
+    public Task markTask(Task task, boolean isDone) {
+        if (task.isDone() != isDone) {
+            task.setDone(isDone);
+            this.notifyListeners();
+        }
+        return task;
+    }
+
     public void registerListener(Consumer<TaskList> listener) {
         changeListeners.add(listener);
     }
@@ -53,7 +61,7 @@ public class TaskList {
         changeListeners.remove(listener);
     }
 
-    public void notifyListeners() {
+    private void notifyListeners() {
         this.changeListeners.forEach(handler -> {
             handler.accept(this);
         });
