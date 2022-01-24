@@ -1,4 +1,5 @@
-import java.time.LocalDate;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /**
@@ -21,11 +22,11 @@ public class EventTask extends Task{
 
     @Override
     public String generateTaskSaveData() {
-        return "E|" + (isDone ? "1" : "0") + "|" + name + "|" + date;
+        return "E|" + (isDone ? "1" : "0") + "|" + name + "|" + formatter.format(date);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.date + ")";
+        return "[E]" + super.toString() + " (at: " + formatter.format(date) + ")";
     }
 }

@@ -1,6 +1,4 @@
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Represents the a list of Tasks. <code>TaskList</code> object stores and handles users'
@@ -18,48 +16,9 @@ public class TaskList {
         this.tasks = tasks;
     }
 
-    /**
-     * Adds a task to the task list.
-     *
-     * @param type the type of task
-     * @param task description associated with the task
-     * @return a response string for the user
-     * @throws TaskListException if task type is unknown
-     */
-    public String add(TaskType type, String taskName) throws TaskListException{
-        Task newTask;
-        switch (type) {
-        case Todo:
-            newTask = new ToDoTask(taskName);
-            tasks.add(newTask);
-            break;
-        default:
-            throw new TaskListException("There is no such task!");
-        }
-        return "Got it! I have added a new " + type + " task:\n" + newTask
-                + "\nYou have " + tasks.size() + " tasks in your list.";
-    }
-
-    public String add(TaskType type, String taskName, Date date) throws TaskListException{
-        Task newTask;
-        switch (type) {
-        case Todo:
-            newTask = new ToDoTask(taskName);
-            tasks.add(newTask);
-            break;
-        case Event:
-            newTask = new EventTask(taskName, date);
-            tasks.add(newTask);
-            break;
-        case Deadline:
-            newTask = new DeadlineTask(taskName, date);
-            tasks.add(newTask);
-            break;
-        default:
-            throw new TaskListException("There is no such task!");
-        }
-        saveData();
-        return "Got it! I have added a new " + type + " task:\n" + newTask
+    public String add(Task task) {
+        tasks.add(task);
+        return "Got it! I have added a new task:\n" + task
                 + "\nYou have " + tasks.size() + " tasks in your list.";
     }
 
@@ -68,16 +27,15 @@ public class TaskList {
      *
      * @param idx index of the task
      * @return the marked task
-     * @throws TaskListException if index is out of bounds of task list size
+     * @throws TaskException if index is out of bounds of task list size
      */
-    public Task markDone(int idx) throws TaskListException {
+    public String markDone(int idx) throws TaskException {
         if (idx < 0 || idx >= tasks.size()) {
-            throw new TaskListException("There is no task with index: " + (idx + 1));
+            throw new TaskException("There is no task with index: " + (idx + 1));
         } else {
             Task ac = tasks.get(idx);
             ac.done();
-            saveData();
-            return ac;
+            return "This activity is marked as done:\n" + ac;
         }
     }
 
@@ -86,16 +44,15 @@ public class TaskList {
      *
      * @param idx index of the task
      * @return the unmarked task
-     * @throws TaskListException if index is out of bounds of task list size
+     * @throws TaskException if index is out of bounds of task list size
      */
-    public Task markUndone(int idx) throws TaskListException {
+    public String markUndone(int idx) throws TaskException {
         if (idx < 0 || idx >= tasks.size()) {
-            throw new TaskListException("There is no task with index: " + (idx + 1));
+            throw new TaskException("There is no task with index: " + (idx + 1));
         } else {
             Task ac = tasks.get(idx);
             ac.undone();
-            saveData();
-            return ac;
+            return "This activity is unmarked as done:\n" + ac;
         }
     }
 
@@ -104,23 +61,18 @@ public class TaskList {
      *
      * @param idx index of the task
      * @return response string to user
-     * @throws TaskListException if index is out of bounds of task list size
+     * @throws TaskException if index is out of bounds of task list size
      */
-    public String delete(int idx) throws TaskListException {
+    public String delete(int idx) throws TaskException {
         if (idx < 0 || idx >= tasks.size()) {
-            throw new TaskListException("There is no task with index: " + (idx + 1));
+            throw new TaskException("There is no task with index: " + (idx + 1));
         } else {
             Task ac = tasks.get(idx);
             tasks.remove(idx);
-            saveData();
             return "I have deleted the following task:\n"
                     + ac.toString()
                     + "\nYou have " + tasks.size() + " tasks left.";
         }
-    }
-
-    private void saveData() {
-        TaskDataHandler.saveTasks(tasks);
     }
 
     /**
@@ -143,5 +95,9 @@ public class TaskList {
             sb.deleteCharAt(sb.length() - 1);
         }
         return sb.toString();
+    }
+
+    public void save(TaskDataHandler storage) {
+        storage.saveTasks(tasks);
     }
 }

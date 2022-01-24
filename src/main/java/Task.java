@@ -1,3 +1,5 @@
+import java.text.SimpleDateFormat;
+
 /**
  * Represents a simple task.
  */
@@ -7,6 +9,9 @@ public abstract class Task {
 
     /** Status of the task */
     protected boolean isDone;
+
+    protected static SimpleDateFormat formatter
+            = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
     public Task(String name) {
         this.name = name;

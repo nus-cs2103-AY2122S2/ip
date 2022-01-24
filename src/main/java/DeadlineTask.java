@@ -1,4 +1,4 @@
-import java.time.LocalDate;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -24,11 +24,11 @@ public class DeadlineTask extends Task {
 
     @Override
     public String generateTaskSaveData() {
-        return "D|" + (isDone ? "1" : "0") + "|" + name + "|" + date;
+        return "D|" + (isDone ? "1" : "0") + "|" + name + "|" + formatter.format(date);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.date + ")";
+        return "[D]" + super.toString() + " (by: " + formatter.format(date) + ")";
     }
 }
