@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.task.TaskList;
 import duke.exception.DukeException;
 import duke.exception.DukeIllegalArgumentException;
 import duke.task.Task;
+import duke.task.TaskList;
 import duke.util.IPrintable;
 
 import java.time.LocalDateTime;
@@ -13,7 +13,7 @@ import java.time.format.DateTimeParseException;
 public abstract class Command {
     protected final String args;
 
-    public Command(String args) {
+    protected Command(String args) {
         this.args = args;
     }
 

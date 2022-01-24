@@ -1,15 +1,14 @@
-package duke.command.action;
+package duke.command;
 
-import duke.command.Command;
-import duke.task.TaskList;
 import duke.exception.DukeIllegalArgumentException;
+import duke.task.TaskList;
 import duke.util.IPrintable;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 public class ScheduleCommand extends Command {
-    public ScheduleCommand(String args) {
+    ScheduleCommand(String args) {
         super(args);
     }
 

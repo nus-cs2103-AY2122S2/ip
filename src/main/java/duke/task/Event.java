@@ -40,7 +40,7 @@ public class Event extends Task {
     }
 
     @Override
-    public Task readSerializedData(DataInputStream dIn) throws IOException {
+    protected Task readSerializedData(DataInputStream dIn) throws IOException {
         super.readSerializedData(dIn);
         this.at = LocalDateTime.parse(dIn.readUTF());
         return this;

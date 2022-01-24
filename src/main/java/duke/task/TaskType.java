@@ -9,6 +9,7 @@ public enum TaskType {
 
     private final String shorthand;
     private final int typeId;
+
     TaskType(String shorthand, int typeId) {
         this.shorthand = shorthand;
         this.typeId = typeId;

@@ -5,8 +5,8 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class TaskList {
-    private ArrayList<Task> tasks;
-    private ArrayList<Consumer<TaskList>> changeListeners;
+    private final ArrayList<Task> tasks;
+    private final ArrayList<Consumer<TaskList>> changeListeners;
 
     public TaskList() {
         this.tasks = new ArrayList<>();
@@ -17,10 +17,6 @@ public class TaskList {
         this.tasks.add(task);
         this.notifyListeners();
         return task;
-    }
-
-    public ArrayList<Task> getTasks() {
-        return this.tasks;
     }
 
     public int getTaskCount() {

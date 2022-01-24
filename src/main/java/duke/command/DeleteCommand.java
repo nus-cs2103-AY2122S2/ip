@@ -1,13 +1,12 @@
-package duke.command.action;
+package duke.command;
 
-import duke.command.Command;
-import duke.task.TaskList;
 import duke.exception.DukeIllegalArgumentException;
 import duke.task.Task;
+import duke.task.TaskList;
 import duke.util.IPrintable;
 
 public class DeleteCommand extends Command {
-    public DeleteCommand(String args) {
+    DeleteCommand(String args) {
         super(args);
     }
 

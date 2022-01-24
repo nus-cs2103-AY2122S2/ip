@@ -1,21 +1,20 @@
-package duke.command.action;
+package duke.command;
 
-import duke.command.Command;
-import duke.task.TaskList;
 import duke.exception.DukeIllegalArgumentException;
+import duke.task.TaskList;
 import duke.util.IPrintable;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 public class UpcomingCommand extends Command {
-    public UpcomingCommand(String args) {
+    UpcomingCommand(String args) {
         super(args);
     }
 
     @Override
     public boolean execute(IPrintable linePrinter, TaskList taskList) throws DukeIllegalArgumentException {
-        int days = -1;
+        int days;
         try {
             days = Integer.parseInt(args);
         } catch (NumberFormatException ex) {
