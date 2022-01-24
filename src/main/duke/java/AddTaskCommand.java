@@ -1,4 +1,4 @@
-package duke.java;
+package main.duke.java;
 
 import java.io.IOException;
 import java.time.format.DateTimeParseException;

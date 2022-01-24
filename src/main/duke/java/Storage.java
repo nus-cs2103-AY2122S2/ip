@@ -1,4 +1,4 @@
-package duke.java;
+package main.duke.java;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

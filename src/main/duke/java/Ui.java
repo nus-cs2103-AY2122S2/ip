@@ -1,4 +1,4 @@
-package duke.java;
+package main.duke.java;
 import java.util.ArrayList;
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package duke.java;
+package main.duke.java;
 import java.io.IOException;
 
 public class UnmarkCommand extends Command {
