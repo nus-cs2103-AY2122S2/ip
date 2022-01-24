@@ -35,6 +35,13 @@ public class Task {
     }
 
     /**
+     * Returns the description of the task.
+     * @return the description of task
+     */
+    public String getDescription() {
+        return this.description;
+    }
+    /**
      * Returns the task properties in the format of the task to be saved onto hard disk (to be Overridden)
      *
      * @return String representing the task toString in hard-disk format

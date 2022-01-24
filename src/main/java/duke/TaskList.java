@@ -61,7 +61,25 @@ public class TaskList {
     }
 
     /**
-     * Returns the number of tasks currently in the list
+     * Finds the tasks that match a given keyword.
+     * Note: implementation is subject to change as it is not very efficient.
+     * @param keyword the string to compare with
+     * @return list of tasks that match the keyword in string form
+     */
+    public String find(String keyword) {
+        StringBuilder foundStrings = new StringBuilder("");
+        for (int i = 0; i < tasks.size(); i++) {
+            String currDescription = tasks.get(i).getDescription().toLowerCase();
+
+            if (currDescription.contains(keyword)) {
+                foundStrings.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
+            }
+        }
+        return foundStrings.toString();
+    }
+
+    /**
+     * Returns the number of tasks currently in the list.
      */
     public int getTasksCount() {
         return tasks.size();
