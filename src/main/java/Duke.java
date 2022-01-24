@@ -5,7 +5,9 @@ import java.io.FileNotFoundException;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
-
+/**
+ * The bot that responses to commands and collects tasks
+ */
 public class Duke {
 
     private final Storage storage;

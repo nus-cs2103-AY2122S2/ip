@@ -19,7 +19,9 @@ import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
-
+/**
+ * Works on loading, changing and maintaining the contents in the hard disk file
+ */
 public class Storage {
     public String path;
 
@@ -27,7 +29,13 @@ public class Storage {
         this.path = path;
     }
 
-    public void executeCommand(String[] command) throws IOException, DukeException {
+    /**
+     * Converts the command into hard disk file for record.
+     *
+     * @param command details of command retrieved from Parser
+     * @throws IOException if writeToFile/changeMarking fails
+     */
+    public void executeCommand(String[] command) throws IOException {
 
         String keyword = command[0];
         switch (keyword) {
@@ -52,6 +60,11 @@ public class Storage {
         }
     }
 
+    /**
+     * deletes the task from local file by creating a temp file and copy every task except the one to be deleted
+     *
+     * @param taskToDelete the index of task to delete
+     */
     public void deleteFromFile(int taskToDelete) {
         String oldFileName = "src/main/data/duke.txt";
         String tempFileName = "src/main/data/tempDuke.txt";
@@ -87,6 +100,11 @@ public class Storage {
         newFile.renameTo(oldFile);
     }
 
+    /**
+     * Appends the string representation task into the local file
+     *
+     * @param taskToAdd string to be added into the local file
+     */
     public void writeToFile(String taskToAdd) throws IOException {
         FileWriter fw = new FileWriter(path, true);
         long line = Files.lines(Path.of(path)).count();
@@ -98,7 +116,13 @@ public class Storage {
         fw.close();
     }
 
-    public ArrayList<Task> load() throws IOException, DukeException {
+    /**
+     * loads task from local file
+     *
+     * @return Arraylist of tasks
+     * @throws IOException if create new file fails
+     */
+    public ArrayList<Task> load() throws IOException {
         try {
             return fileContentProcess();
         } catch (FileNotFoundException e) {
@@ -108,6 +132,12 @@ public class Storage {
         }
     }
 
+    /**
+     * process the string in local file and converts to tasks in arraylist
+     *
+     * @return Arraylist of tasks
+     * @throws FileNotFoundException if file is not found
+     */
     public ArrayList<Task> fileContentProcess() throws FileNotFoundException {
         File f = new File(path);
         Scanner s = new Scanner(f);
@@ -135,12 +165,25 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * creates a new local file for Duke to work
+     *
+     * @throws IOException if fails to make new directory and create new file
+     */
     public void createNewFile() throws IOException {
         File f = new File("src/main/data/duke.txt");
         f.getParentFile().mkdirs();
         f.createNewFile();
     }
 
+    /**
+     * Changes the marking of 1 single task in the local file
+     *
+     * @param init initial string of the marking ("1" for done, "0" for not done).
+     * @param goal final string of the marking ("1" for mark, "0" for unmark).
+     * @param taskToMark the index of task to be marked or unmarked
+     * @throws IOException if fails access local file
+     */
     private void changeMarking(String init, String goal, int taskToMark) throws IOException {
         String oldFileName = path;
         String tempFileName = "src/main/data/tempDuke.txt";
