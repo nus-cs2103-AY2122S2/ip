@@ -50,6 +50,9 @@ public class Duke {
 
                 } else if (instruction[0].equals("mark") || instruction[0].equals("unmark")) {
                     int taskNum = Integer.parseInt(instruction[1]);
+
+                    if(taskNum > tasks.size()) throw new InvalidIndexException();
+
                     String response;
 
                     if(instruction[0].equals("mark")) response = tasks.get(taskNum - 1).markAsDone();
@@ -59,6 +62,9 @@ public class Duke {
 
                 } else if (instruction[0].equals("delete")) {
                     int taskNum = Integer.parseInt(instruction[1]);
+
+                    if (taskNum > tasks.size()) throw new InvalidIndexException();
+
                     System.out.println(String.format(GAP + "Ok, I will remove this task: \n %s", tasks.get(taskNum - 1)));
                     tasks.remove(taskNum - 1);
 
