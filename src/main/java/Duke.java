@@ -1,4 +1,7 @@
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -10,6 +13,7 @@ public class Duke {
     public static final String MAKE_TODO = "todo";
     public static final String MAKE_EVENT = "event";
     public static final String MAKE_DEADLINE = "deadline";
+    public static final String TASKS_ON = "taskon";
 
     private static TaskStore tasks;
     private static Storage storage;
@@ -46,7 +50,11 @@ public class Duke {
         try {
             tasks = storage.importTasks();
         } catch (IOException e) {
-            System.out.println("Unable to load file.");
+//            System.out.println("Unable to load file.");
+            printMessage("Unable to load file.");
+        } catch (DateTimeParseException e) {
+//            System.out.println("☹ ERROR!!! Sorry I don't understand that format. Make sure its in yyyy-mm-dd.");
+            printMessage("☹ ERROR!!! Sorry I don't understand that format. Make sure its in yyyy-mm-dd.");
         }
     }
 
@@ -54,7 +62,6 @@ public class Duke {
         String[] split = inputTxt.split(" ");
         String command = split[0].toLowerCase();
         String commandArgs = inputTxt.substring(command.length()).trim();
-//        int toMark;
         Task task;
         try {
             switch (command) {
@@ -94,12 +101,29 @@ public class Duke {
                             task, tasks.getSize()));
                     break;
 
+                case TASKS_ON:
+                    LocalDate date = LocalDate.parse(commandArgs);
+                    String dateString = date.format(Timeable.getPrintableFormat());
+                    ArrayList<Task> tasksOn = tasks.getTasksOn(date);
+                    if (tasksOn.isEmpty())  {
+                        printMessage(String.format("You don't have any tasks on %s",dateString));
+                    } else {
+                        String header = String.format("Here are your tasks on %s\n",dateString);
+                        StringBuilder sb = new StringBuilder(header);
+                        for (Task t:tasksOn) {
+                            sb.append(t.toString());
+                        }
+
+                        printMessage(sb.toString());
+                    }
+                    break;
+
                 default:
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
 
-//            Write the new changes to file (commands that are not bye and list)
-            if (!(command.equals(BYE) || command.equals(LIST))){
+//            Write the new changes to file (commands that are not bye, list and taskon)
+            if (!(command.equals(BYE) || command.equals(LIST) || command.equals(TASKS_ON))){
                 storage.writeToFile(tasks);
             }
 
@@ -111,6 +135,8 @@ public class Duke {
             printMessage("☹ OOPS!!! I think you may have given me something that's out of range.");
         } catch (IOException e) {
             printMessage("☹ ERROR!!! Unable to write to file");
+        } catch (DateTimeParseException e) {
+            printMessage("☹ ERROR!!! Sorry I don't understand that format. Make sure its in yyyy-mm-dd.");
         }
     }
 
@@ -122,11 +148,12 @@ public class Duke {
         if (commandArgs.isEmpty()) {
             throw new DukeException(String.format("☹ OOPS!!! Please make sure your command follows this format: %s <number>",command));
         }
+
         int toMark = Integer.parseInt(commandArgs) - 1;
         return tasks.getTask(toMark);
     }
 
-    public static Task createTask(String command, String args) throws DukeException {
+    public static Task createTask(String command, String args) throws DukeException, DateTimeParseException {
         if (command.equals(MAKE_TODO)) {
             if (args.equals("")) {
                 throw new DukeException("☹ OOPS!!! Make sure the task is not empty!");
@@ -142,11 +169,13 @@ public class Duke {
                 throw new DukeException(errorMsg);
             }
 
+            LocalDate date = Timeable.of(taskParams[1]);
+
 //            At this point it can only be a deadline or an event
             if (command.equals(MAKE_DEADLINE)) {
-                return new Deadline(taskParams[0], taskParams[1]);
+                return new Deadline(taskParams[0], date);
             } else {
-                return new Event(taskParams[0], taskParams[1]);
+                return new Event(taskParams[0], date);
             }
         }
     }
