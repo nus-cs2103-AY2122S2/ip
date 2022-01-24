@@ -132,6 +132,17 @@ public class Duke {
     }
 
     /**
+     * Delete a task in the specified index.
+     *
+     * @param num The number of the task to be removed.
+     */
+    private void delete(int num) {
+        Task t = this.lst.remove(num);
+        this.printMsg("\t Noted. I've removed this task:\n\t   " + t.toString()
+                + "\n\t Now you have " + this.lst.size() + " tasks in the list.\n");
+    }
+
+    /**
      * Give the bot intructions and let it do the corresponding job.
      */
     private void run() {
@@ -161,23 +172,32 @@ public class Duke {
             } catch (IndexOutOfBoundsException e) {
                 this.printMsg("\t Opps! The item you wanna unmark is out of bounds.\n");
             }
-        } else if (splitted[0].equals("todo")) {
+        } else if (splitted[0].equals("todo")) { // add todo
             try {
                 this.addTask(TaskType.TODO, input);
             } catch (DukeException e) {
                 this.printMsg(e.getMessage());
             }
-        } else if (splitted[0].equals("event")) {
+        } else if (splitted[0].equals("event")) { // add event
             try {
                 this.addTask(TaskType.EVENT, input);
             } catch (DukeException e) {
                 this.printMsg(e.getMessage());
             }
-        } else if (splitted[0].equals("deadline")) {
+        } else if (splitted[0].equals("deadline")) { // add deadline
             try {
                 this.addTask(TaskType.DEADLINE, input);
             } catch (DukeException e) {
                 this.printMsg(e.getMessage());
+            }
+        } else if (splitted.length == 2 && splitted[0].equals("delete")) { //delete
+            try {
+                int num = Integer.parseInt(splitted[1]);
+                this.delete(num-1);
+            } catch (NumberFormatException e) {
+                this.printMsg("\t Opps! Pls check your numbers.\n");
+            } catch (IndexOutOfBoundsException e) {
+                this.printMsg("\t Opps! The item you wanna mark is out of bounds.\n");
             }
         } else { // handle exceptions
             this.printMsg("\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
