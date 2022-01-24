@@ -52,10 +52,16 @@ public class Connor {
             viewTasks();
             break;
         }
-        case "todo":
-        case "deadline":
+        case "todo": {
+            addTask(TaskType.TODO, desc);
+            break;
+        }
+        case "deadline": {
+            addTask(TaskType.DEADLINE, desc);
+            break;
+        }
         case "event": {
-            addTask(x, desc);
+            addTask(TaskType.EVENT, desc);
             break;
         }
         case "delete": {
@@ -96,19 +102,19 @@ public class Connor {
         }
     }
 
-    private static void addTask(String taskType, String desc) {
+    private static void addTask(TaskType taskType, String desc) {
         if (desc.isEmpty()) {
             print(ERROR_EMPTY_TASK_DESC);
             return;
         }
         switch (taskType) {
-        case "todo":
+        case TODO:
             ToDo todo = new ToDo(desc);
             taskList.add(todo);
             print(ADD_NEW_TASK);
             print(INDENT + todo);
             break;
-        case "deadline": {
+        case DEADLINE: {
             if (!desc.contains("/by")) {
                 print(ERROR_INVALID_DL_FORMAT);
                 return;
@@ -126,7 +132,7 @@ public class Connor {
             print(INDENT + deadline);
             break;
         }
-        case "event": {
+        case EVENT: {
             if (!desc.contains("/at")) {
                 print(ERROR_INVALID_EVENT_FORMAT);
                 return;
