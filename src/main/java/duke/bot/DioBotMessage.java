@@ -96,6 +96,11 @@ public class DioBotMessage extends BotMessage {
         return "ZA WARUDO!";
     }
 
+    /**
+     * Returns the message to be printed when a command of type 'find' is executed.
+     *
+     * @return find message.
+     */
     @Override
     public String getFindListMessage(boolean isEmpty) {
         return isEmpty ? "I reject my humanity, Jojo!" : "Oh? You're Approaching Me?";

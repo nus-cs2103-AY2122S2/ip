@@ -96,6 +96,11 @@ public class JJBABotMessage extends BotMessage {
         return "What can I do for you?";
     }
 
+    /**
+     * Returns the message to be printed when a command of type 'find' is executed.
+     *
+     * @return find message.
+     */
     @Override
     public String getFindListMessage(boolean isEmpty) {
         return isEmpty ? "There are no matching tasks." : "Here are the matching task in your list:";

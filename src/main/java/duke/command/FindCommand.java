@@ -26,7 +26,7 @@ public class FindCommand extends Command {
 
     /**
      * Returns a command feedback after the execution of the
-     * FindCommand which returns a new task list containing the
+     * FindCommand which returns a new task list containing tasks with
      * matching input.
      *
      * @param taskList a list of task.

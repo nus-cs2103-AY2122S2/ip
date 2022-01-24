@@ -72,6 +72,11 @@ public abstract class BotMessage {
      */
     public abstract String getBotMessage();
 
+    /**
+     * Returns the message to be printed when a command of type 'find' is executed.
+     *
+     * @return find message.
+     */
     public abstract String getFindListMessage(boolean isEmpty);
 }
 
