@@ -19,7 +19,20 @@ public class TaskList {
         return tasks;
     }
 
-    public ArrayList<Task> getTasksBasedOnDate(LocalDate date, int type) {
+    /**
+     * Returns the list of tasks that matches the specified date <br>
+     * by performing date comparison based on the specified type.<br><br>
+     *
+     * comparisonType is defined as follows:
+     * <li>0 : Tasks happening on the specified date </li>
+     * <li>1 : Tasks happening before the specified date</li>
+     * <li>2 : Tasks happening after the specified date</li>
+     *
+     * @param date The date that is to be compared with
+     * @param type The type of comparison to be performed
+     * @return A list of tasks that matches the specified date and comparisonType.
+     */
+    public ArrayList<Task> getTasksBasedOnDate(LocalDate date, int comparisonType) {
         ArrayList<Predicate<Task>> taskTypePredicateList = new ArrayList<>();
         ArrayList<Predicate<Task>> taskDatePredicateList = new ArrayList<>();
 
@@ -34,7 +47,7 @@ public class TaskList {
         taskDatePredicateList.add(t -> ((EventTask)t).getDate().isAfter(date));
 
         ArrayList<Task> result = new ArrayList<>();
-        int listIndex = type * 2;
+        int listIndex = comparisonType * 2;
         for(Predicate<Task> p : taskTypePredicateList) {
             result.addAll(this.tasks.stream()
                     .filter(p)

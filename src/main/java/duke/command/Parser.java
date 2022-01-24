@@ -25,7 +25,6 @@ public class Parser {
      * <li>-1: Indicates command to terminate </li>
      * <li>0 : Indicates command ran successfully, without changes to the task list</li>
      * <li>1 : Indicates command ran successfully, with changes to the task list</li>
-     * <li>Element</li>
      *
      * @param inputString The input that is entered by the user
      * @param ui The Ui object that used to output the appropriate messages to the user
