@@ -13,7 +13,7 @@ public class Ui {
      */
     public static final String DIVIDER = "\n____________________________________________________________\n";
 
-    private Parser parser;
+    private final Parser parser;
 
     /**
      * Constructor for Ui class. Initializes the Parser object.
@@ -21,6 +21,7 @@ public class Ui {
     public Ui() {
         parser = new Parser();
     }
+
     public void userInput(TaskList tasks, Storage storage) {
         Scanner sc = new Scanner(System.in);
         String input = "";

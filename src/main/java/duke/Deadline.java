@@ -17,7 +17,8 @@ public class Deadline extends Task {
 
     /**
      * Constructor for duke.Deadline class
-     * @param d a string representing a description of the task
+     *
+     * @param d    a string representing a description of the task
      * @param date the date of the task
      */
     public Deadline(String d, LocalDate date) {
@@ -27,7 +28,8 @@ public class Deadline extends Task {
 
     /**
      * Constructor for duke.Deadline class
-     * @param d a string representing a description of the task
+     *
+     * @param d    a string representing a description of the task
      * @param date the date of the task
      * @param time the time of the task
      */
@@ -39,10 +41,11 @@ public class Deadline extends Task {
 
     /**
      * Returns the task properties in the format of the task to be saved onto hard disk
+     *
      * @return String representing the task toString in hard-disk format
      */
     public String toStringInFileFormat() {
-        String temp =  "D|" + this.getStatusIcon() + "|" + this.description + "|" +
+        String temp = "D|" + this.getStatusIcon() + "|" + this.description + "|" +
                 this.date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
         if (time != null) {

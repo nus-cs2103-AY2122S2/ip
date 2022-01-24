@@ -59,7 +59,7 @@ public class Parser {
             index = getIndexFromMessage(message);
             currTask = tasks.removeTask(index);
             storage.modifyStorage(currTask, ConfirmCodes.DELETION, tasks);
-            message ="As you wish. I've removed the task from your list:" + "\n\t" + currTask
+            message = "As you wish. I've removed the task from your list:" + "\n\t" + currTask
                     + "\nI hope it was nothing important..." + "\n" + getTaskCount(tasks);
             break;
         case "todo":
@@ -68,7 +68,7 @@ public class Parser {
             tasks.addTask(currTask);
             storage.modifyStorage(currTask, ConfirmCodes.ADDITION, tasks);
             message = "Alright then! I've added the task to your list:" + "\n\t" + currTask +
-                    "\n" +getTaskCount(tasks);
+                    "\n" + getTaskCount(tasks);
             break;
         case "deadline":
             currTask = parseMessageContents(message, TaskTypes.DEADLINE);
@@ -92,8 +92,9 @@ public class Parser {
 
     /**
      * Parses the message contents and returns the suitable duke.Task object.
+     *
      * @param message the message from the User
-     * @param type The type of the task
+     * @param type    The type of the task
      * @return duke.Task object
      */
     private static Task parseMessageContents(String message, TaskTypes type) throws DukeException {
@@ -143,7 +144,7 @@ public class Parser {
                 date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                 timeBegin = timeBeginString == null ? null : LocalTime.parse(timeBeginString,
                         DateTimeFormatter.ofPattern("HH:mm"));
-            }  catch (DateTimeException e) {
+            } catch (DateTimeException e) {
                 throw wrongDeadlineFormat;
             }
 
@@ -176,7 +177,7 @@ public class Parser {
                 date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                 timeBegin = LocalTime.parse(timeBeginString, DateTimeFormatter.ofPattern("HH:mm"));
                 timeEnd = LocalTime.parse(timeEndString, DateTimeFormatter.ofPattern("HH:mm"));
-            }  catch (DateTimeException e) {
+            } catch (DateTimeException e) {
                 throw wrongEventFormat;
             }
 

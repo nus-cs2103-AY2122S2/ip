@@ -17,8 +17,9 @@ public class Event extends Task {
 
     /**
      * Constructor for duke.Event class
-     * @param d a string representing a description of the task
-     * @param date the date of the task
+     *
+     * @param d     a string representing a description of the task
+     * @param date  the date of the task
      * @param time1 the starting time of the event
      * @param time2 the ending time of the event
      */
@@ -31,6 +32,7 @@ public class Event extends Task {
 
     /**
      * Returns the task properties in the format of the task to be saved onto hard disk
+     *
      * @return String representing the task toString in hard-disk format
      */
     @Override
