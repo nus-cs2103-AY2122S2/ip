@@ -60,6 +60,12 @@ public class UiManager {
         this.showLine();
     }
 
+    public void printSave() {
+        this.showLine();
+        System.out.println("List saved in storage!");
+        this.showLine();
+    }
+
     public void printList(TaskManager tm) {
         System.out.println(tm);
     }
