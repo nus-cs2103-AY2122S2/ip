@@ -160,7 +160,7 @@ public class Parser {
             }
 
             //invalid number
-            Boolean isValidCommand = userMessage.toLowerCase().matches("^delete \\d+|^delete -\\d+");
+            boolean isValidCommand = userMessage.toLowerCase().matches("^delete \\d+|^delete -\\d+");
             if (!isValidCommand) {
                 throw new DukeException(Ui.userUnknownInputMessage(userMessage));
             }
@@ -190,6 +190,23 @@ public class Parser {
             LocalDate date = LocalDate.parse(dateString);
             command[0] = "schedule";
             command[1] = date.toString();
+
+        } else if (userMessage.startsWith("find") && split[0].equals("find")) {
+
+            //only "find"
+            if (userMessage.length() == 4) {
+                throw new DukeException(Ui.findNoKeywordError());
+            }
+
+            String keyword = userMessage.substring(5);
+
+            //no keyword given
+            if (keyword.replaceAll(" ", "").equals("")) {
+                throw new DukeException(Ui.findNoKeywordError());
+            }
+
+            command[0] = "find";
+            command[1] = keyword;
 
         } else {
             command[0] = "unknown";

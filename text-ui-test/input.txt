@@ -35,4 +35,8 @@ delete
 delete0
 delete 3
 delete 5
+find
+find blah
+todo play game
+find play
 bye

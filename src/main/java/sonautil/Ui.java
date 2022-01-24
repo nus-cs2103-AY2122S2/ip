@@ -168,5 +168,17 @@ public class Ui {
         return LINE + "\nWhich task do you want to mark? Add the number in the end to tell me~\n" + LINE;
     }
 
+    public static String findNoKeywordError() {
+        return LINE + "\nEnter your keyword behind 'find' to let me search for you! :)\n" + LINE;
+    }
+
+    public static void findNoMatchError() {
+        System.out.println(LINE + "\nI couldn't find any task that matches your search! :(\n" + LINE);
+    }
+
+    public static void findShowResult() {
+        System.out.println(LINE + "\nHere are the tasks that match your search:");
+    }
+
 
 }
