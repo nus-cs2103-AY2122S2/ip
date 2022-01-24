@@ -25,7 +25,7 @@ public class Duke {
         ui.showStartUpMessage();
         this.tasks = new TaskList();
         try {
-            this.storage = new Storage(tasks);
+            this.storage = new Storage(this.tasks);
         } catch (IOException e) {
             ui.showFeedbackMessage("\n\tError reading from duke.txt\n");
         }
@@ -35,16 +35,16 @@ public class Duke {
      * Executes the instructions given by user until a Command.BYE is issued by the user.
      */
     public void execute() {
-        boolean exit = false;
+        boolean canExit = false;
         String input;
-        while (!exit) {
+        while (!canExit) {
             try {
                 input = ui.readCommand();
                 String[] commands = input.split(" ", 2);
                 Command command = Parser.parseString(commands);
                 switch (command) {
                 case BYE:
-                    exit = true;
+                    canExit = true;
                     ui.showFeedbackMessage("\n\tBye. Hope to see you again soon!\n");
                     try {
                         storage.saveTask();
@@ -78,6 +78,7 @@ public class Duke {
             }
         }
     }
+
     public static void main(String[] args) {
         Duke d = new Duke();
         d.execute();

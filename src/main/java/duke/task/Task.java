@@ -20,8 +20,8 @@ public abstract class Task {
     /**
      * Sets done variable of duke.task.Task.
      */
-    public void setDone(boolean done) {
-        this.isDone = done;
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     /**
