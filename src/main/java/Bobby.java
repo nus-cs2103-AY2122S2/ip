@@ -1,7 +1,9 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Bobby {
+    static final String FILE_LOCATION = "./Bobby.txt";
     static ArrayList<Task> tasks = new ArrayList<Task>();
 
     enum Commands {
@@ -10,6 +12,7 @@ public class Bobby {
 
     public static void AddTask(Task t) {
         tasks.add(t);
+        UpdateFile();
     }
 
     public static void DeleteTask(String input, String[] inputs) throws DeleteException {
@@ -25,6 +28,7 @@ public class Bobby {
         Task t = Bobby.tasks.get(Integer.parseInt(inputs[1]) - 1);
         System.out.println("    Alright I'm deleting this task:\n    " + t);
         tasks.remove(t);
+        UpdateFile();
         System.out.println("    " + DisplayNumTasks());
     }
 
@@ -56,6 +60,7 @@ public class Bobby {
             throw new MarkException("alr_marked");
         }
         t.markDone();
+        UpdateFile();
         System.out.println("    Finally... I've marked this task as done:");
         System.out.println("      " + t);
     }
@@ -75,16 +80,17 @@ public class Bobby {
             throw new MarkException("alr_unmarked");
         }
         t.unmarkDone();
-        System.out.println("    " + "Could you be any more lazy? I've marked this task as not done yet:");
+        UpdateFile();
+        System.out.println("    Could you be any more lazy? I've marked this task as not done yet:");
         System.out.println("      " + t);
     }
 
     public static void AddDeadline(String s) throws DeadlineException {
-        if (s.substring(8).isBlank()) {                             // nothing after command
+        if (s.substring(8).isBlank()) {                                 // nothing after command
             throw new DeadlineException("deadline1");
-        } else if (!s.contains("/")) {                               // no "/"
+        } else if (!s.contains("/")) {                                  // no "/"
             throw new DeadlineException("deadline2");
-        } else if (s.substring(s.indexOf("/") + 1).isBlank()) {       // nothing after time
+        } else if (s.substring(s.indexOf("/") + 1).isBlank()) {         // nothing after time
             throw new DeadlineException("deadline3");
         }
         Deadline newDeadline = new Deadline(s.substring(s.indexOf(" ") + 1, s.indexOf("/") - 1),
@@ -92,6 +98,7 @@ public class Bobby {
         System.out.println("    Oh boy, another deadline? Added task:");
         System.out.println("    " + newDeadline);
         AddTask(newDeadline);
+        UpdateFile();
         System.out.println("    " + DisplayNumTasks());
     }
 
@@ -99,30 +106,52 @@ public class Bobby {
         if (s.substring(4).isBlank()) {                             // nothing after command
             throw new ToDoException("todo");
         }
-        ToDo newToDo = new ToDo(s.substring(4));
+        ToDo newToDo = new ToDo(s.substring(5));
         System.out.println("    OK you better do this today, or else! Added task:");
         System.out.println("    " + newToDo);
         AddTask(newToDo);
+        UpdateFile();
         System.out.println("    " + DisplayNumTasks());
     }
 
     public static void AddEvent(String s) throws EventException {
-        if (s.substring(5).isBlank()) {                             // nothing after command
+    if (s.substring(5).isBlank()) {                                     // nothing after command
             throw new EventException("event1");
-        } else if (!s.contains("/")) {                               // no "/"
+        } else if (!s.contains("/")) {                                  // no "/"
             throw new EventException("event2");
-        } else if (s.substring(s.indexOf("/") + 1).isBlank()) {       // nothing after time
+        } else if (s.substring(s.indexOf("/") + 1).isBlank()) {         // nothing after time
             throw new EventException("event3");
         }
         Event newEvent = new Event(s.substring(s.indexOf(" ") + 1, s.indexOf("/") - 1), s.substring(s.indexOf("/")));
         System.out.println("    Let's see... A new event! Added task:");
         System.out.println("    " + newEvent);
         AddTask(newEvent);
+        UpdateFile();
         System.out.println("    " + DisplayNumTasks());
     }
 
+    public static void UpdateFile() {
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_LOCATION));
+            oos.writeObject(tasks);
+            oos.close();
+        } catch (IOException e) {
+            e.getMessage();
+        }
+    }
 
     public static void main(String[] args) {
+        File bobbyFile = new File(FILE_LOCATION);
+        try {
+            bobbyFile.createNewFile();
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(bobbyFile));
+            ArrayList<Task> t = (ArrayList<Task>) ois.readObject();
+            tasks = t;
+            ois.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.getMessage();
+        }
+
         Scanner sc = new Scanner(System.in);
         String logo = " ____  _____ ____  ____ __  __\n"
                 + "|  _ \\|  _  |  _ \\|  _ \\\\ \\/ /\n"
@@ -146,6 +175,7 @@ public class Bobby {
             switch (cmd) {
             case bye:
                 System.out.println(dash + "    Bye! Hope to see you again soon!\n" + dash2);
+                UpdateFile();
                 return;
             case list:
                 System.out.println(dash);

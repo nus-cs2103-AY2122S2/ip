@@ -1,4 +1,6 @@
-public class Task {
+import java.io.Serializable;
+
+public class Task implements Serializable {
     public String taskName;
     public boolean done;
 
