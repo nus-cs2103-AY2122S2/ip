@@ -7,17 +7,31 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents an event task.
+ */
 public class Event extends Task {
     private final String SCHEDULED_TIME_STRING;
     private final LocalDateTime SCHEDULED_TIME;
 
+    /**
+     * Returns an event Task object and accepts a String as description and a String to indicate the scheduledTime.
+     *
+     * @param description Description of the task.
+     * @param scheduledTime Scheduled time of the task.
+     */
     public Event(String description, String scheduledTime) throws DukeException {
         super(description);
         this.SCHEDULED_TIME = parseScheduledTime(scheduledTime);
         this.SCHEDULED_TIME_STRING = formatScheduledTime();
     }
 
-
+    /**
+     * Converts the scheduled time from a String to a LocalDateTime object and returns it.
+     *
+     * @param scheduledTime Deadline of the task.
+     * @return scheduled time as a LocalDateTime.
+     */
     private LocalDateTime parseScheduledTime(String scheduledTime) throws DukeException {
         String[] temp = scheduledTime.split(" ", 2);
         if (temp.length <= 1 || temp[1].length() < 4) {
@@ -31,11 +45,21 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns a formatted String based on the pattern MMM dd yyyy HH:mm.
+     *
+     * @return Formatted String.
+     */
     private String formatScheduledTime() {
         DateTimeFormatter form = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         return SCHEDULED_TIME.format(form);
     }
 
+    /**
+     * Returns a formatted String to be saved in a file.
+     *
+     * @return Formatted String for saving.
+     */
     @Override
     public String formatSave() {
         DateTimeFormatter form = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
@@ -43,9 +67,10 @@ public class Event extends Task {
         return "E |" + (super.isDone ? "1| " : "0| ") + super.description + " /at " + date;
     }
 
-
-    /*
-     * Customized toString method for duke.task.Event task
+    /**
+     * Returns a String to display the type, the done status of task as well as the task description.
+     *
+     * @return Formatted String.
      */
     @Override
     public String toString() {

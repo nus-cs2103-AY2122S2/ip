@@ -1,30 +1,40 @@
 package duke.task;
 
 /**
- * Class that encapsulates a duke.task.Task
+ * Represents and encapsulates a Task.
  */
 public abstract class Task {
     protected final String description;
     protected boolean isDone;
 
-    /*
-     * Constructor that accepts a String as description
+    /**
+     * Returns a Task object and accepts a String as description.
+     *
+     * @param description Description of the task.
      */
     protected Task(String description) {
         this.description = description;
         setDone(false);
     }
 
-    /*
-     * Setting for done variable of duke.task.Task
+    /**
+     * Sets done variable of duke.task.Task.
      */
     public void setDone(boolean done) {
         this.isDone = done;
     }
+
+    /**
+     * Abstact method to be implemented by subclasses for the purpose of saving to a file.
+     *
+     * @return Formatted String for saving.
+     */
     public abstract String formatSave();
 
-    /*
-     * Customized toString method to display done status of task as well as the task description
+    /**
+     * Returns a String to display done status of task as well as the task description.
+     *
+     * @return Formatted String.
      */
     @Override
     public String toString() {
