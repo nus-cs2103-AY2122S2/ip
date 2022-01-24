@@ -1,11 +1,21 @@
 package tasks;
 
-public class Deadlines extends Task {
+public class Deadline extends Task {
 	private String deadline;
 
-	public Deadlines(String detail, String deadline) {
+	public Deadline(String detail, String deadline) {
 		super(detail);
 		this.deadline = deadline;
+	}
+
+	@Override
+	public String getDate(){
+		return deadline;
+	}
+
+	@Override
+	public String getType(){
+		return "D";
 	}
 
 	@Override
