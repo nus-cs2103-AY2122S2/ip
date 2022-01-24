@@ -2,14 +2,8 @@ package duke.function;
 
 import java.util.StringTokenizer;
 
+import duke.command.*;
 import duke.exception.DukeException;
-import duke.command.Command;
-import duke.command.ListCommand;
-import duke.command.HelpCommand;
-import duke.command.AddCommand;
-import duke.command.MarkCommand;
-import duke.command.DeleteCommand;
-import duke.command.ExitCommand;
 
 public class Parser {
 
@@ -32,6 +26,8 @@ public class Parser {
             return new MarkCommand(fullCommand);
         case "delete":
             return new DeleteCommand(fullCommand);
+        case "find":
+            return new FindCommand(fullCommand);
         case "bye":
             return new ExitCommand(fullCommand);
         }
