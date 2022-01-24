@@ -15,6 +15,22 @@ public class Parser {
         }
     }
 
+    /**
+     * finds and prints task based on whether it contains the given keyword
+     *
+     * @param keyword word to be matched with task description
+     */
+    void findTask(String keyword) {
+        System.out.println("Here are the matching tasks in your list:");
+        int currCount = 1;
+        for (int i = 1; i <= tasks.size(); i++) {
+            if (tasks.get(i - 1).getDescription().contains(keyword)) {
+                System.out.println(currCount++ + ". " + tasks.get(i - 1));
+            }
+
+        }
+    }
+
     void mark(int taskNumber) {
         tasks.get(taskNumber - 1).mark();
         System.out.println("Nice! I've marked this task as done:");
