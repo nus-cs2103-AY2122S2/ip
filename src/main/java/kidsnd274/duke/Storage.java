@@ -3,7 +3,6 @@ package kidsnd274.duke;
 import kidsnd274.duke.taskobjects.*;
 
 import java.io.BufferedWriter;
-import java.nio.Buffer;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.ArrayList;
@@ -11,15 +10,13 @@ import java.util.ArrayList;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.charset.Charset;
 import java.util.Scanner;
-import java.io.FileWriter;
 import java.io.IOException;
 
-class FileHandler {
+class Storage {
     private final Path pathToFile;
 
-    protected FileHandler(String fileName) {
+    protected Storage(String fileName) {
         pathToFile = Paths.get(fileName);
     }
 

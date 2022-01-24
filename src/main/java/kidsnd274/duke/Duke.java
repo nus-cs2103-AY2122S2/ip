@@ -1,6 +1,5 @@
 package kidsnd274.duke;
 
-import kidsnd274.duke.FileHandler;
 import kidsnd274.duke.exceptions.NullDateProvidedException;
 import kidsnd274.duke.taskobjects.Event;
 import kidsnd274.duke.taskobjects.Deadline;
@@ -13,38 +12,37 @@ import java.lang.StringBuilder;
 
 public class Duke {
     // Global Variables
-    private static final String MESSAGE_WELCOME = "Hello! I'm Duke, your personal assistant\nWhat can I do for you?";
-    private static final String MESSAGE_GOODBYE = "Goodbye!";
     private static final String FILENAME = "task.txt";
 
-    private static ArrayList<Task> toDoList;
-    private static FileHandler fh;
+    private ArrayList<Task> toDoList;
+    private Storage fh;
+    private TextUi ui;
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        // Handling files
-        fh = new FileHandler(FILENAME);
-        // Starting input loop
-        Scanner sc = new Scanner(System.in);
+        new Duke().run();
+    }
+
+    public void run() {
+        // Setting up the goods
+        ui = new TextUi();
+        fh = new Storage(FILENAME);
         toDoList = fh.importTasks();
 
-        System.out.println(generateIntro());
+        ui.printIntro();
+
+        // Starting input loop
         while (true) {
-            String input = sc.nextLine();
+            String input = ui.getInput();
             if (!processInput(input)) {
                 break;
             }
         }
+        ui.printGoodbye();
     }
 
-    private static boolean processInput(String input) {
+    private boolean processInput(String input) {
         if (input.contains("`")) {
-            System.out.println(generateResponse("\"`\" character is not allowed"));
+            ui.printResults("\"`\" character is not allowed");
             return true;
         }
 
@@ -52,12 +50,11 @@ public class Duke {
         String command = inputArray[0];
 
         if (command.equals("quit") || command.equals("exit")) {
-            System.out.println(generateGoodbye());
             return false;
 
         } else if (command.equals("list")) {
             String listOutput = generateList();
-            System.out.println(generateResponse(listOutput));
+            ui.printResults(listOutput);
             return true;
 
         } else if (command.equals("mark")) {
@@ -68,7 +65,7 @@ public class Duke {
             Task currentTask = toDoList.get(taskNo);
             currentTask.markAsDone();
             String output = "Marked as done:\n" + currentTask.getCurrentStatus();
-            System.out.println(generateResponse(output));
+            ui.printResults(output);
 
         } else if (command.equals("unmark")) {
             if (checkForInvalidIndex(inputArray)) {
@@ -78,7 +75,8 @@ public class Duke {
             Task currentTask = toDoList.get(taskNo);
             currentTask.markAsUndone();
             String output = "Marked as undone:\n" + currentTask.getCurrentStatus();
-            System.out.println(generateResponse(output));
+            ui.printResults(output);
+
         } else if (command.equals("todo")) {
             String[] inputSplit = input.split(" ", 2);
             if (inputSplit.length < 2) {
@@ -88,7 +86,7 @@ public class Duke {
             String name = inputSplit[1];
             Todo newTask = new Todo(name);
             toDoList.add(newTask);
-            System.out.println(generateAddMessage(newTask));
+            ui.printResults(generateAddMessage(newTask)); // CHANGE THIS
 
         } else if (command.equals("deadline")) {
             // Checking for date
@@ -107,7 +105,7 @@ public class Duke {
             String name = deadlineStringSplit[0].split(" ", 2)[1];
             Deadline newTask = new Deadline(name, deadline);
             toDoList.add(newTask);
-            System.out.println(generateAddMessage(newTask));
+            ui.printResults(generateAddMessage(newTask)); // CHANGE THIS
 
         } else if (command.equals("event")) {
             // Checking for date
@@ -125,7 +123,7 @@ public class Duke {
             String name = eventStringSplit[0].split(" ", 2)[1];
             Event newTask = new Event(name, eventTime);
             toDoList.add(newTask);
-            System.out.println(generateAddMessage(newTask));
+            ui.printResults(generateAddMessage(newTask)); // CHANGE THIS
 
         } else if (command.equals("delete")) {
             if (checkForInvalidIndex(inputArray)) {
@@ -135,41 +133,28 @@ public class Duke {
             Task currentTask = toDoList.get(taskNo);
             String description = currentTask.getCurrentStatus();
             toDoList.remove(taskNo);
-            System.out.println(generateRemoveMessage(description));
+            ui.printResults(generateRemoveMessage(description)); // CHANGE THIS
 
         } else {
-            System.out.println(generateResponse("Unknown command: " + command));
+            ui.printResults("Unknown command: " + command); // CHANGE THIS
         }
         fh.exportTasks(toDoList);
         return true;
     }
 
-    private static String generateResponse(String input) {
-        String temp = "<---------------------------------------------------------->\n";
-        return temp + input + "\n" + temp;
-    }
-
-    private static String generateIntro() {
-        return generateResponse(MESSAGE_WELCOME);
-    }
-
-    private static String generateGoodbye() {
-        return generateResponse(MESSAGE_GOODBYE);
-    }
-
-    private static String generateAddMessage(Task newTask) {
+    private String generateAddMessage(Task newTask) {
         String message = String.format("Added %s, as a %s\n%s\nYou currently have %d tasks",
                 newTask, newTask.getType(), newTask.getCurrentStatus(), toDoList.size());
-        return generateResponse(message);
+        return (message);
     }
 
-    private static String generateRemoveMessage(String des) {
+    private String generateRemoveMessage(String des) {
         String message = String.format("Removed this task:\n%s\nYou currently have %d tasks",
                 des, toDoList.size());
-        return generateResponse(message);
+        return (message);
     }
 
-    private static String generateList() {
+    private String generateList() {
         StringBuilder newString = new StringBuilder("Tasklist:\n");
         for (int i = 0; i < toDoList.size(); i++) {
             if (i != 0) {
@@ -182,11 +167,11 @@ public class Duke {
         return newString.toString();
     }
 
-    private static String generateErrorMessage(String msg) {
-        return generateResponse("ERROR: " + msg);
+    private String generateErrorMessage(String msg) {
+        return ("ERROR: " + msg);
     }
 
-    private static boolean checkForInvalidIndex(String[] strArr) {
+    private boolean checkForInvalidIndex(String[] strArr) {
         try {
             int taskNo = Integer.parseInt(strArr[1]) - 1;
             if (taskNo < 0 || taskNo >= toDoList.size()) { // Check if index is out of bounds
@@ -203,9 +188,3 @@ public class Duke {
     }
 
 }
-
-//    Errors to handle
-//        -typing a negative number in mark/unmark
-//        -typing text instead of numbers
-//        -typing an incorrect /by or /at
-//        -missing parameters of a command
