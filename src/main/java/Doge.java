@@ -190,7 +190,7 @@ public class Doge {
             if (inputDateTime.isAfter(currDateTime)) {
                 return inputDateTime;
             } else {
-              throw new DateTimeException("Invalid date/time!");
+                throw new DateTimeException("Invalid date/time!");
             }
         } catch (DateTimeException e) {
             throw new DogeException("Are you lacking common sense? Invalid date/time!");
