@@ -17,9 +17,9 @@ public class Storage {
     private static final String home = System.getProperty("user.home");
     private static File saveFile;
 
-    public Storage() {
+    public Storage(String dirPath) {
         try {
-            Path dir = Paths.get(home + "/ip/data/");
+            Path dir = Paths.get(home + dirPath);
 
             // check if /ip/data directory exists, if not create
             if (!Files.exists(dir)) {
@@ -27,7 +27,7 @@ public class Storage {
             }
 
             // check if the file in /ip/data exists, if not create
-            Path p = Paths.get(home + "/ip/data/duke.txt");
+            Path p = Paths.get(home + dirPath + "/duke.txt");
             if (!Files.exists(p)) {
                 Files.createFile(p);
             }

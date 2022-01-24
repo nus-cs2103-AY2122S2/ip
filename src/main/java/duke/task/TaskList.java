@@ -45,7 +45,7 @@ public class TaskList {
             s.append("    ");
             s.append(i + 1).append(". ");
             s.append(tasks.get(i));
-            // no new line after last duke.task
+            // no new line after last task
             if (i + 1 < tasks.size()) {
                 s.append("\n");
             }

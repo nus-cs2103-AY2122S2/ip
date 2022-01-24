@@ -16,7 +16,7 @@ public class UnmarkCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task t = tasks.unmarkTask(targetIndex);
         storage.save(tasks);
-        return "No problem, I've marked the duke.task as uncompleted:\n" + ui.tab(t.toString());
+        return "No problem, I've marked the task as uncompleted:\n" + ui.tab(t.toString());
     }
 
     public boolean isExit() {

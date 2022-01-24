@@ -1,12 +1,8 @@
 package duke.parser;
 
 import duke.commands.*;
-import duke.exceptions.DukeException;
-import duke.exceptions.InvalidCommandException;
-import duke.exceptions.InvalidDateTimeException;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.Task;
 import duke.task.Todo;
 
 import java.time.LocalDate;
@@ -60,20 +56,20 @@ public class Parser {
         return true;
     }
 
-    private static Task prepareTodo(String request) throws DukeException {
+    private Command prepareTodo(String request) {
         String[] parsedReq = request.strip().split(" ");
         if (parsedReq.length == 1) {
-            throw new DukeException("The description of a todo cannot be empty.");
+            return new IncorrectCommand("The description of a todo cannot be empty.");
         } else {
-            return new Todo(request.substring(5).strip());
+            return new AddCommand(new Todo(request.substring(5).strip()));
         }
     }
 
-    private static Task prepareDeadline(String request) throws DukeException {
+    private Command prepareDeadline(String request)  {
         if (request.strip().length() == 8) {
-            throw new DukeException("The description of a deadline cannot be empty.");
+            return new IncorrectCommand("The description of a deadline cannot be empty.");
         } else if (!request.contains(" /by ")) {
-            throw new DukeException("You left the date/time of the deadline empty!");
+            return new IncorrectCommand("You left the date/time of the deadline empty!");
         }
 
         String next = request.substring(8);
@@ -82,31 +78,34 @@ public class Parser {
         String by = parsedReq[1].strip();
 
         if (desc.length() == 0) {
-            throw new DukeException("The description of a deadline cannot be empty.");
+            return new IncorrectCommand("The description of a deadline cannot be empty.");
         } else if (by.length() == 0) {
-            throw new DukeException("You left the date/time of the deadline empty!");
+            return new IncorrectCommand("You left the date/time of the deadline empty!");
         } else {
             Parser.Format f = Parser.parseDateTime(by);
             switch (f) {
             case DATETIME:
                 String[] s = by.split(" ");
-                return new Deadline(desc, LocalDate.parse(s[0], dateIn), LocalTime.parse(s[1], timeIn));
+                return new AddCommand(new Deadline(desc, LocalDate.parse(s[0], dateIn), LocalTime.parse(s[1], timeIn)));
             case DATE:
-                return new Deadline(desc, LocalDate.parse(by, dateIn));
+                return new AddCommand(new Deadline(desc, LocalDate.parse(by, dateIn)));
             case TIME:
-                return new Deadline(desc, LocalTime.parse(by, timeIn));
+                return new AddCommand(new Deadline(desc, LocalTime.parse(by, timeIn)));
             case INVALID:
             default:
-                throw new InvalidDateTimeException();
+                return new IncorrectCommand("\"Please enter the date and/or time in the specified format:\\n\" +\n" +
+                        "                \"yyyy-MM-dd HHmm\\n\" +\n" +
+                        "                \"yyyy-MM-dd\\n\" +\n" +
+                        "                \"or HHmm\"");
             }
         }
     }
 
-    private static Task prepareEvent(String request) throws DukeException {
+    private Command prepareEvent(String request) {
         if (request.strip().length() == 5) {
-            throw new DukeException("The description of an event cannot be empty.");
+            return new IncorrectCommand("The description of an event cannot be empty.");
         } else if (!request.contains(" /at ")) {
-            throw new DukeException("You left the date/time of the event empty!");
+            return new IncorrectCommand("You left the date/time of the event empty!");
         }
 
         String next = request.substring(5);
@@ -115,94 +114,98 @@ public class Parser {
         String at = parsedReq[1].strip();
 
         if (desc.length() == 0) {
-            throw new DukeException("The description of an event cannot be empty.");
+            return new IncorrectCommand("The description of an event cannot be empty.");
         } else if (at.length() == 0 ) {
-            throw new DukeException("You left the date/time of the event empty!");
+            return new IncorrectCommand("You left the date/time of the event empty!");
         } else {
             Parser.Format f = Parser.parseDateTime(at);
             switch (f) {
             case DATETIME:
                 String[] s = at.split(" ");
-                return new Event(desc, LocalDate.parse(s[0], dateIn), LocalTime.parse(s[1], timeIn));
+                return new AddCommand(new Event(desc, LocalDate.parse(s[0], dateIn), LocalTime.parse(s[1], timeIn)));
             case DATE:
-                return new Event(desc, LocalDate.parse(at, dateIn));
+                return new AddCommand(new Event(desc, LocalDate.parse(at, dateIn)));
             case TIME:
-                return new Event(desc, LocalTime.parse(at, timeIn));
+                return new AddCommand(new Event(desc, LocalTime.parse(at, timeIn)));
             case INVALID:
             default:
-                throw new InvalidDateTimeException();
+                return new IncorrectCommand("\"Please enter the date and/or time in the specified format:\\n\" +\n" +
+                        "                \"yyyy-MM-dd HHmm\\n\" +\n" +
+                        "                \"yyyy-MM-dd\\n\" +\n" +
+                        "                \"or HHmm\"");
             }
         }
     }
 
-    private static int prepareDelete(String request) throws DukeException {
+    private Command prepareDelete(String request) {
         String[] parsedReq = request.split(" ");
         if (parsedReq.length != 2) {
-            throw new DukeException("Please tell me which duke.task you would like to delete.");
+            return new IncorrectCommand("Please tell me which task you would like to delete.");
         } else {
             try {
-                return Integer.parseInt(parsedReq[1]) - 1;
+                return new DeleteCommand(Integer.parseInt(parsedReq[1]) - 1);
             } catch (NumberFormatException n) {
-                throw new DukeException("Please enter a valid duke.task number to delete!");
+                return new IncorrectCommand("Please enter a valid task number to delete!");
             } catch (IndexOutOfBoundsException e) {
-                throw new DukeException("The duke.task you specified does not exist. :(");
+                return new IncorrectCommand("The task you specified does not exist. :(");
             }
         }
     }
 
-    private static int prepareMark(String request) throws DukeException {
+    private Command prepareMark(String request) {
         String[] parsedReq = request.split(" ");
         if (parsedReq.length != 2) {
-            throw new DukeException("Please tell me which duke.task you would like to be marked as done.");
+            return new IncorrectCommand("Please tell me which task you would like to be marked as done.");
         } else {
             try {
-                return Integer.parseInt(parsedReq[1]) - 1;
+                return new MarkCommand(Integer.parseInt(parsedReq[1]) - 1);
             } catch (NumberFormatException n) {
-                throw new DukeException("Please enter a valid duke.task number to mark as done!");
+                return new IncorrectCommand("Please enter a valid task to mark as done!");
             } catch (IndexOutOfBoundsException e) {
-                throw new DukeException("The duke.task you specified does not exist. :(");
+                return new IncorrectCommand("The task you specified does not exist. :(");
             }
         }
     }
 
-    private static int prepareUnmark(String request) throws DukeException {
+    private Command prepareUnmark(String request) {
         String[] parsedReq = request.split(" ");
         if (parsedReq.length != 2) {
-            throw new DukeException("Please tell me which duke.task you would like to be marked as undone.");
+            return new IncorrectCommand("Please tell me which task you would like to be marked as undone.");
         } else {
             try {
-                return Integer.parseInt(parsedReq[1]) - 1;
+                return new UnmarkCommand(Integer.parseInt(parsedReq[1]) - 1);
             } catch (NumberFormatException n) {
-                throw new DukeException("Please enter a valid duke.task number to mark as undone!");
+                return new IncorrectCommand("Please enter a valid task number to mark as undone!");
             } catch (IndexOutOfBoundsException e) {
-                throw new DukeException("The duke.task you specified does not exist. :(");
+                return new IncorrectCommand("The task you specified does not exist. :(");
             }
         }
     }
 
-    public static Command parseCommand(String input) throws DukeException {
-        if (input.equals("bye")) {
+    public Command parseCommand(String input) {
+        if (input.strip().equals("bye")) {
             return new ExitCommand();
-        } else if (input.equals("list")) {
+        } else if (input.strip().equals("list")) {
             return new ListCommand();
         } else if (input.startsWith("mark")) {
-            return new MarkCommand(prepareMark(input));
+            return prepareMark(input);
         } else if (input.startsWith("unmark")) {
-            return new UnmarkCommand(prepareUnmark(input));
+            return prepareUnmark(input);
         } else if (input.startsWith("todo")) {
-            return new AddCommand(prepareTodo(input));
+            return prepareTodo(input);
         } else if (input.startsWith("deadline")) {
-            return new AddCommand(prepareDeadline(input));
+            return prepareDeadline(input);
         } else if (input.startsWith("event")) {
-            return new AddCommand(prepareEvent(input));
+            return prepareEvent(input);
         } else if (input.startsWith("delete")) {
-            return new DeleteCommand(prepareDelete(input));
+            return prepareDelete(input);
         } else {
-            throw new InvalidCommandException();
+            return new IncorrectCommand("My apologies, but it seems that I do not understand your request.");
         }
     }
 
-    public static Format parseDateTime(String input) {
+
+    private static Format parseDateTime(String input) {
         if (isValidDateTime(input)) {
             return Format.DATETIME;
         } else if (isValidTime(input)) {

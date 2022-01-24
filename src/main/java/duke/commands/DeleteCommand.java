@@ -15,9 +15,9 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task t = tasks.deleteTask(targetIndex);
 
-        return "No problem, I've deleted that duke.task for you:\n\n" +
+        return "No problem, I've deleted that task for you:\n\n" +
                 t.toString() + "\n\n" +
-                "You now have " + tasks.listSize() + " duke.task(s) remaining on your list.";
+                "You now have " + tasks.listSize() + " task(s) remaining on your list.";
     }
 
     public boolean isExit() {

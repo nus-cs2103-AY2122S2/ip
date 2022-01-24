@@ -16,7 +16,7 @@ public class AddCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(task);
         storage.append(task.getAppendData());
-        return "duke.task.Task added:\n" + ui.tab(task.toString());
+        return "Task added:\n" + ui.tab(task.toString());
     }
 
     @Override

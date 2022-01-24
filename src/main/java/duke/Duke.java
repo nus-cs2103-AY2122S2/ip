@@ -1,14 +1,12 @@
 package duke;
 
 import duke.commands.Command;
-import duke.exceptions.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
 public class Duke {
-    private static final String home = System.getProperty("user.home");
     // contain tasks in array
     private TaskList tasks;
     private Ui ui;
@@ -16,7 +14,7 @@ public class Duke {
 
     public Duke() {
         ui = new Ui();
-        storage = new Storage();
+        storage = new Storage("/ip/data");
         tasks = new TaskList(storage.load());
     }
 
@@ -26,18 +24,14 @@ public class Duke {
 
     public void run() {
         ui.greetUser();
-        boolean isExit = false;
+        boolean isExit;
 
         do {
-            try {
             String request = ui.readCommand();
-            Command c = Parser.parseCommand(request);
+            Command c = new Parser().parseCommand(request);
             String result = c.execute(tasks, ui, storage);
             ui.replyUser(result);
             isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.replyUser(e.getMessage());
-            }
         } while (!isExit);
     }
 }
