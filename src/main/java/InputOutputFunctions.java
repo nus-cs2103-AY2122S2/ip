@@ -6,6 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -67,14 +68,14 @@ public class InputOutputFunctions {
                 taskList.add(toDo);
                 break;
             case "D":
-                Deadline deadline = new Deadline(splicedS[2], splicedS[3]);
+                Deadline deadline = new Deadline(splicedS[2], LocalDate.parse(splicedS[3]));
                 if (splicedS[1].equals("1")) {
                     deadline.mark();
                 }
                 taskList.add(deadline);
                 break;
             case "E":
-                Event event = new Event(splicedS[2], splicedS[3]);
+                Event event = new Event(splicedS[2], LocalDate.parse(splicedS[3]));
                 if (splicedS[1].equals("1")) {
                     event.mark();
                 }
