@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Task {
     protected boolean isDone;
     protected String content;
@@ -23,18 +25,20 @@ public class Task {
         this.content = content;
     }
 
-    public void mark() {
+    public void mark(ArrayList<Task> tasks) {
         this.isDone = true;
         Printer.printDivider();
         System.out.println("    Nice! I've marked this task as done: ");
         System.out.println("    " + this.toString());
         Printer.printDivider();
+        Duke.saveAsTextFile(tasks);
     }
-    public void unmark() {
+    public void unmark(ArrayList<Task> tasks) {
         this.isDone = false;
         Printer.printDivider();
         System.out.println("    I've unmarked this task: ");
         System.out.println("    " + this.toString());
         Printer.printDivider();
+        Duke.saveAsTextFile(tasks);
     }
 }
