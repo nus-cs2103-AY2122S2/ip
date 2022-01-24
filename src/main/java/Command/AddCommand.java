@@ -6,6 +6,8 @@ import DukeUtils.TaskList;
 import DukeUtils.Ui;
 import Task.Task;
 
+import java.util.Objects;
+
 public class AddCommand extends Command {
     private final Task task;
 
@@ -26,5 +28,24 @@ public class AddCommand extends Command {
             }
             ui.addedTask(taskList, task);
         }
+    }
+
+    public boolean isExit() {
+        return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj != null && obj.getClass() == getClass()) {
+            AddCommand addCommand = (AddCommand) obj;
+            return addCommand.task.equals(this.task);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(task);
     }
 }

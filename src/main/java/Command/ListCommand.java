@@ -6,6 +6,7 @@ import DukeUtils.Ui;
 import Task.Task;
 
 public class ListCommand extends Command {
+
     public void execute(TaskList taskList, Ui ui, Storage storage)  {
         if (taskList.tasksArrayList.size() == 0) {
             ui.noTaskLeft();
@@ -14,6 +15,19 @@ public class ListCommand extends Command {
                 Task task = taskList.tasksArrayList.get(i);
                 ui.listed(i + 1, task);
             }
+        }
+    }
+
+    public boolean isExit() {
+        return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj != null) {
+            return obj instanceof ListCommand;
+        } else {
+            return false;
         }
     }
 }

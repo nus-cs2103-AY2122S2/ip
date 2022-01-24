@@ -4,20 +4,31 @@ import DukeUtils.Storage;
 import DukeUtils.TaskList;
 import DukeUtils.Ui;
 
-public class ExitCommand extends Command {
-    private static boolean isExit = false;
+import java.util.Objects;
 
-    public ExitCommand(boolean isExit) {
-        ExitCommand.isExit = isExit;
-    }
+public class ExitCommand extends Command {
+
+    public ExitCommand() {}
 
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        if (isExit) {
-            ui.exited();
+        ui.exited();
+    }
+
+    public boolean isExit() {
+        return true;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj != null) {
+            return obj instanceof ExitCommand;
+        } else {
+            return false;
         }
     }
 
-    public static boolean getIsExit() {
-        return isExit;
+    @Override
+    public int hashCode() {
+        return Objects.hash();
     }
 }

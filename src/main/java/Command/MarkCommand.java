@@ -6,6 +6,8 @@ import DukeUtils.TaskList;
 import DukeUtils.Ui;
 import Task.Task;
 
+import java.util.Objects;
+
 public class MarkCommand extends Command {
     private final int index;
 
@@ -22,5 +24,24 @@ public class MarkCommand extends Command {
         } catch (Exception e) {
             throw new CortanaException("No such task!");
         }
+    }
+
+    public boolean isExit() {
+        return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj != null && obj.getClass() == getClass()) {
+            MarkCommand markCommand = (MarkCommand) obj;
+            return markCommand.index == this.index;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(index);
     }
 }

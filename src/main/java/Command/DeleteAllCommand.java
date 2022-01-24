@@ -5,6 +5,8 @@ import DukeUtils.Storage;
 import DukeUtils.TaskList;
 import DukeUtils.Ui;
 
+import java.util.Objects;
+
 public class DeleteAllCommand extends Command {
 
     public void execute(TaskList taskList, Ui ui, Storage storage) throws CortanaException {
@@ -16,5 +18,23 @@ public class DeleteAllCommand extends Command {
         } catch (Exception e) {
             throw new CortanaException("Something went wrong when attempting to delete all tasks.");
         }
+    }
+
+    public boolean isExit() {
+        return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj != null) {
+            return obj instanceof DeleteAllCommand;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash();
     }
 }

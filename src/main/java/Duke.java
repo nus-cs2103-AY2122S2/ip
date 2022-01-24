@@ -24,7 +24,7 @@ public class Duke {
                 ui.showLine();
                 Command c = Parser.parse(command);
                 c.execute(tasks, ui, storage);
-                isExit = ExitCommand.getIsExit();
+                isExit = c.isExit();
             } catch (CortanaException e) {
                 ui.showErrorMessage(e.getMessage());
             } finally {

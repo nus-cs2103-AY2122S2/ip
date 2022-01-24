@@ -3,6 +3,8 @@ package Command;
 import DukeUtils.*;
 import Task.Task;
 
+import java.util.Objects;
+
 public class DeleteCommand extends Command{
     private final int index;
 
@@ -20,5 +22,24 @@ public class DeleteCommand extends Command{
         } catch (Exception e) {
             throw new CortanaException("No such task!");
         }
+    }
+
+    public boolean isExit() {
+        return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj != null && obj.getClass() == getClass()) {
+            DeleteCommand deleteCommand = (DeleteCommand) obj;
+            return deleteCommand.index == this.index;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(index);
     }
 }
