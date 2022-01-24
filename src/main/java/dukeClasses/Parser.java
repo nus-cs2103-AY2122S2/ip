@@ -26,6 +26,7 @@ public class Parser {
                 throw new DukeException();
             }
             return new ParsedCommand(parsedCommand[0], taskIndex);
+        case "find":
         case "todo":
             if (parsedCommand.length <= 1) {
                 throw new DukeException();

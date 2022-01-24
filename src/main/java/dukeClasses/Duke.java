@@ -121,6 +121,18 @@ public class Duke {
                     continue;
                 }
                 ui.deleteTask(deletedTask);
+            case "find":
+                String taskDescription = parsedCommand.getTask();
+                TaskList findTaskList = new TaskList();
+
+                for (int i = 0; i < tasks.getTaskList().size(); i++) {
+                    Task task = tasks.getTaskList().get(i);
+                    if (task.getDescription().contains(taskDescription)) {
+                        findTaskList.getTaskList().add(task);
+                    }
+                }
+
+                ui.listTaskUsingArrayList(findTaskList);
             }
         }
         sc.close();

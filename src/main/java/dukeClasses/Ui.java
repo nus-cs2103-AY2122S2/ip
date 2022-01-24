@@ -34,6 +34,12 @@ public class Ui {
         System.out.println(Commands.BYE.toString());
     }
 
+    /**
+     * Prints a message indicating that task mentioned is not found.
+     */
+    public void sayTaskNotFound() {
+        System.out.println("Task not found.");
+    }
 
     public void identifyTask(Task task) {
         if (task.getIsDone()) {
@@ -63,6 +69,14 @@ public class Ui {
             sc.close();
         } catch (FileNotFoundException errorMessage) {
             showFileError();
+        }
+    }
+
+    public void listTaskUsingArrayList(TaskList tasks) {
+        System.out.println(Commands.LIST.toString());
+        for (int i = 0; i < tasks.getTaskList().size(); i++) {
+            Task task = tasks.getTaskList().get(i);
+            System.out.println(String.format("      %s", task.identify()));
         }
     }
 
