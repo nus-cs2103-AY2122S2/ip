@@ -1,3 +1,11 @@
+package duke;
+
+import duke.exception.DukeException;
+import duke.exception.DukeIOException;
+import duke.exception.DukeIllegalArgumentException;
+import duke.exception.DukeInvalidCommandException;
+import duke.util.IPrintable;
+
 import java.util.Scanner;
 import java.util.function.Function;
 

@@ -1,10 +1,12 @@
+package duke.task;
+
 import java.util.ArrayList;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class TaskList {
-    private ArrayList<Task> tasks;
-    private ArrayList<Consumer<TaskList>> changeListeners;
+    private final ArrayList<Task> tasks;
+    private final ArrayList<Consumer<TaskList>> changeListeners;
 
     public TaskList() {
         this.tasks = new ArrayList<>();
@@ -15,10 +17,6 @@ public class TaskList {
         this.tasks.add(task);
         this.notifyListeners();
         return task;
-    }
-
-    public ArrayList<Task> getTasks() {
-        return this.tasks;
     }
 
     public int getTaskCount() {
@@ -47,6 +45,14 @@ public class TaskList {
         return deleted;
     }
 
+    public Task markTask(Task task, boolean isDone) {
+        if (task.isDone() != isDone) {
+            task.setDone(isDone);
+            this.notifyListeners();
+        }
+        return task;
+    }
+
     public void registerListener(Consumer<TaskList> listener) {
         changeListeners.add(listener);
     }
@@ -55,7 +61,7 @@ public class TaskList {
         changeListeners.remove(listener);
     }
 
-    public void notifyListeners() {
+    private void notifyListeners() {
         this.changeListeners.forEach(handler -> {
             handler.accept(this);
         });

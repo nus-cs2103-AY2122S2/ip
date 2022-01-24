@@ -1,5 +1,10 @@
+package duke.command;
+
+import duke.task.TaskList;
+import duke.util.IPrintable;
+
 public class ListCommand extends Command {
-    public ListCommand(String args) {
+    ListCommand(String args) {
         super(args);
     }
 

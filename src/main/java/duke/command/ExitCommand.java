@@ -1,5 +1,10 @@
+package duke.command;
+
+import duke.task.TaskList;
+import duke.util.IPrintable;
+
 public class ExitCommand extends Command {
-    public ExitCommand(String args) {
+    ExitCommand(String args) {
         super(args);
     }
 

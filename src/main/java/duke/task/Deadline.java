@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -39,7 +41,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public Task readSerializedData(DataInputStream dIn) throws IOException {
+    protected Task readSerializedData(DataInputStream dIn) throws IOException {
         super.readSerializedData(dIn);
         this.by = LocalDateTime.parse(dIn.readUTF());
         return this;

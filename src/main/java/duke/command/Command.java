@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.exception.DukeIllegalArgumentException;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.util.IPrintable;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -5,7 +13,7 @@ import java.time.format.DateTimeParseException;
 public abstract class Command {
     protected final String args;
 
-    public Command(String args) {
+    protected Command(String args) {
         this.args = args;
     }
 
@@ -21,7 +29,7 @@ public abstract class Command {
     }
 
     protected Task parseSelectTask(TaskList taskList) throws DukeIllegalArgumentException {
-        int taskIndex = parseTaskNumber();
+        int taskIndex = this.parseTaskNumber();
         Task task = taskList.getTaskByIndex(taskIndex);
         if (task == null) {
             throw new DukeIllegalArgumentException("No matching task with given number");
