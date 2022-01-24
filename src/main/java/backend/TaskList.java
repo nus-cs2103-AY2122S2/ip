@@ -12,6 +12,9 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    /**
+     * Returns a list of all tasks beginning with index 1
+     */
     public static void list() {
         Ui.list();
         for (int i = 0; i < tasks.size(); i++) {
@@ -21,6 +24,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks the task at the supplied integer as completed, based on their ordering in this.list().
+     * @param indexMarked index of the completed task
+     */
     public static void mark(int indexMarked) {
         try {
             Task currentTask = tasks.get(indexMarked);
@@ -34,6 +41,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Unmarks the task at the supplied integer as completed, based on their ordering in this.list().
+     * @param indexUnmarked index of the task to be unmarked
+     */
     public static void unmark(int indexUnmarked) {
         try {
             Task currentTask = tasks.get(indexUnmarked);
@@ -47,6 +58,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * removes the task at the supplied integer from tasklist, based on their ordering in this.list().
+     * @param indexDelete index of the task to be deleted.
+     */
     public static void delete(int indexDelete) {
         try {
             Task deletedTask = tasks.remove(indexDelete);
@@ -59,6 +74,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * creates a Todo task and adds it to the end of the tasklist
+     * @param description description of the todo task.
+     */
     public static void todo(String description) {
         try {
             if (description.isBlank()) {
@@ -73,6 +92,12 @@ public class TaskList {
             System.out.println(new DukeException("The description of a todo cannot be empty"));
         }
     }
+
+    /**
+     * creates a deadline task and adds it to the end of the tasklist.
+     * @param description description of the deadline task.
+     * @param time time of the deadline task.
+     */
 
     public static void deadline(String description, String time) {
         try {
@@ -89,6 +114,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * creates a event task and adds it to the end of the tasklist.
+     * @param description description of the event task.
+     * @param time time of the event task.
+     */
     public static void event(String description, String time) {
         try {
             if (description.isBlank() || time.isBlank()) {
@@ -107,6 +137,10 @@ public class TaskList {
         return tasks;
     }
 
+    /**
+     * initialises the tasklist with an arraylist of tasks
+     * @param tasks pre saved tasks from data/duke.txt
+     */
     public static void initialise(ArrayList<Task> tasks) {
         TaskList.tasks = tasks;
     }

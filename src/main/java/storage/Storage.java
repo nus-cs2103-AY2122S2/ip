@@ -12,12 +12,11 @@ import backend.FileDecoder;
 import exception.DukeException;
 
 public class Storage {
-    private final Path pathName;
     private final File save;
     private final ArrayList<Task> tasks = new ArrayList<>();
 
     public Storage() {
-        this.pathName = Paths.get("./data/Duke.txt");
+        Path pathName = Paths.get("./data/Duke.txt");
         this.save = new File(pathName.toString());
         try {
             if (save.getParentFile().mkdir()) {
@@ -28,6 +27,10 @@ public class Storage {
         }
     }
 
+    /**
+     * returns an arraylist populated with pre-saved tasks from data/duke.txt
+     * @return list populated with pre-saved tasks
+     */
     public ArrayList<Task> loadList() {
         FileDecoder decoder = new FileDecoder();
         try {
@@ -43,17 +46,10 @@ public class Storage {
         return tasks;
     }
 
-    public void addTask(Task currentTask) {
-        try {
-            FileWriter fileWriter = new FileWriter(save, true);
-            fileWriter.write(currentTask.toString() + "\n");
-            fileWriter.close();
-        }
-        catch (IOException e) {
-            System.out.println(new DukeException("Storage Error!"));
-        }
-    }
-
+    /**
+     * updates the data/duke.txt file after changes are made to the tasklist
+     * @param currentTasks updated tasklist
+     */
     public void updateTasks(ArrayList<Task> currentTasks) {
         try {
             FileWriter fileWriter = new FileWriter(save);
