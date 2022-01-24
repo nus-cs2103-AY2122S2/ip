@@ -24,7 +24,6 @@ public class Duke {
             try {
                 command = sc.next();
                 input = sc.nextLine();
-                input = input.equals("")? input : input.substring(1);
                 actionType = Parser.parseCommand(command);
             } catch (CommandNotFoundException e) {
                 System.out.println("Sorry, i don't understand what you are saying");
@@ -33,25 +32,27 @@ public class Duke {
         while(actionType != Command.BYE) {
             int indexOfList = -1;
             Boolean addSuccess = null;
+            String[] parsedInput = Parser.parseInput(input);
+
             switch (actionType) {
                 case LIST:
                     list.print();
                     break;
                 case MARK:
-                    indexOfList = Integer.parseInt(input);
+                    indexOfList = Integer.parseInt(parsedInput[0]);
                     list.markComplete(indexOfList);
                     System.out.println("Marked as complete");
                     list.print(indexOfList);
                     break;
                 case UNMARK:
-                    indexOfList = Integer.parseInt(input);
+                    indexOfList = Integer.parseInt(parsedInput[0]);
                     list.markIncomplete(indexOfList);
                     System.out.println("Marked as incomplete");
                     list.print(indexOfList);
                     break;
                 case EVENT:
                     try {
-                        addSuccess = list.add(TaskType.EVENT, Parser.parseInput(input));
+                        addSuccess = list.add(TaskType.EVENT, parsedInput);
                     } catch (EmptyDescriptionException e) {
                         System.out.println("Description of task can't be empty");
                         addSuccess = false;
@@ -66,7 +67,7 @@ public class Duke {
                     break;
                 case DEADLINE:
                     try {
-                        addSuccess = list.add(TaskType.DEADLINE, Parser.parseInput(input));
+                        addSuccess = list.add(TaskType.DEADLINE, parsedInput);
                     } catch (EmptyDescriptionException e) {
                         System.out.println("Description of task can't be empty");
                         addSuccess = false;
@@ -81,7 +82,7 @@ public class Duke {
                     break;
                 case TODO:
                     try {
-                        addSuccess = list.add(TaskType.TODO, Parser.parseInput(input));
+                        addSuccess = list.add(TaskType.TODO, parsedInput);
                     } catch (EmptyDescriptionException e) {
                         System.out.println("Description of task can't be empty");
                         addSuccess = false;
@@ -95,7 +96,7 @@ public class Duke {
                     System.out.println(list.getLength());
                     break;
                 case DELETE:
-                    indexOfList = Integer.parseInt(input);
+                    indexOfList = Integer.parseInt(parsedInput[0]);
                     System.out.println("Noted. I've removed this task:");
                     list.print(indexOfList);
                     list.delete(indexOfList);
@@ -109,7 +110,6 @@ public class Duke {
                 try {
                     command = sc.next();
                     input = sc.nextLine();
-                    input = input.equals("")? input : input.substring(1);
                     actionType = Parser.parseCommand(command);
                 } catch (CommandNotFoundException e) {
                     System.out.println("Sorry, i don't understand what you are saying");
@@ -121,5 +121,5 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
 
     }
-    
+
 }

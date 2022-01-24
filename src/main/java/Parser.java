@@ -23,6 +23,7 @@ public class Parser {
     }
 
     public static String[] parseInput(String input) {
+        input = input.equals("")? input : input.substring(1);
         String[] inputs = new String[2];
         if (input.indexOf("/by") != -1) {
             int indexOfTime = input.indexOf("/by");
