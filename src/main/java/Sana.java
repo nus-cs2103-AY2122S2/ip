@@ -1,8 +1,7 @@
 import java.time.format.DateTimeParseException;
-import java.util.LinkedList;
-import java.util.Scanner;
-
 import java.time.LocalDate;
+
+import java.util.LinkedList;
 
 /**
  * Sana is a BIG program!
