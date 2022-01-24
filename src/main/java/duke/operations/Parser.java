@@ -1,6 +1,13 @@
 package duke.operations;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
+import duke.command.Command;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.MarkCommand;
+import duke.command.PrintCommand;
+import duke.command.UnmarkCommand;
 import duke.exceptions.DukeException;
 import duke.exceptions.IncompleteInputException;
 import duke.exceptions.UnknownInputException;
