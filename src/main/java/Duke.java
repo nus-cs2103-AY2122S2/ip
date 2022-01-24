@@ -4,32 +4,13 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
-        System.out.println("Welcome to Duke! \nWhat can i do for you?\n");
+        Ui.printWelcome();
 
         TaskList list = DataStore.loadData();
-        Scanner sc = new Scanner(System.in);
-
-        String command = "";
-        String input = "";
 
         Command actionType = Ui.getCommand();
         String[] parsedInput = Ui.getInputs();
-//        while (actionType == null) {
-//            try {
-//                command = sc.next();
-//                input = sc.nextLine();
-//                actionType = Parser.parseCommand(command);
-//            } catch (CommandNotFoundException e) {
-//                System.out.println("Sorry, i don't understand what you are saying");
-//            }
-//        }
+
         while(actionType != Command.BYE) {
             int indexOfList = -1;
             Boolean addSuccess = null;

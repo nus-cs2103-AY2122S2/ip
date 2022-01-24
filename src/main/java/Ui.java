@@ -22,4 +22,15 @@ public class Ui {
         String input = sc.nextLine();
         return Parser.parseInput(input);
     }
+
+    public static void printWelcome() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
+
+        System.out.println("Welcome to Duke! \nWhat can i do for you?\n");
+    }
 }
