@@ -17,5 +17,6 @@ bin/
 *.jar
 
 /Data/*
+/src/test/Data/*
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT

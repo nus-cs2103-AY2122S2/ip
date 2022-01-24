@@ -1,12 +1,7 @@
-import Duke.*;
-import Tasks.*;
+import duke.*;
+import tasks.*;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,7 +10,7 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
 
-    public Duke(String filePath) throws DukeException {
+    public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -38,7 +33,7 @@ public class Duke {
         List<Task> tasks = taskList.getTasks();
         while (!str.equals("bye")) {
             try {
-                parser.parse(str);
+                str = parser.parse(str);
                 if (str.equals("list")) {
                     for (Task t : tasks) {
                         System.out.println(t);

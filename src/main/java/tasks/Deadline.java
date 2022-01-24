@@ -1,31 +1,30 @@
-package Tasks;
+package tasks;
 
-import Duke.*;
+import duke.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-
-public class Event extends Task{
+public class Deadline extends Task{
     String[] DateAndTime;
     LocalDate date;
     String time;
 
-    public Event(String description) throws DukeException {
+    public Deadline(String description) throws DukeException {
         super(description);
         try {
-            String[] strArr = description.split("/at ");
+            String[] strArr = description.split("/by ");
             this.description = strArr[0];
             DateAndTime = strArr[1].split(" ");
             date = LocalDate.parse(DateAndTime[0]);
             time = DateAndTime[1];
-            super.saveFormat = "E," + this.description + "," + date + "," + time; //+ ","; + super.isDone;
+            super.saveFormat = "D," + this.description + "," + date + "," + time + "," + super.isDone;
         }
         catch (ArrayIndexOutOfBoundsException e){
             throw new DukeException();
         }
     }
-    public Event(String saveFormat, boolean blean) throws DukeException {
+    public Deadline(String saveFormat, boolean blean) throws DukeException {
         super(saveFormat);
         try {
             String[] strArr = description.split(",");
@@ -43,8 +42,7 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return  "E | " + super.toString() + "AT: " + date.format(DateTimeFormatter.ofPattern("MMM d YYYY")) +
-                    " " + time;
+        return  "D | " + super.toString() + "BY: " + date.format(DateTimeFormatter.ofPattern("MMM d YYYY")) +
+                " " + time;
     }
-
 }

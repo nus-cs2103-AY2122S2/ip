@@ -1,13 +1,13 @@
-package Duke;
+package duke;
 
-import Tasks.*;
+import tasks.*;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 
-public class Storage {
+public class Storage implements StorageInterface{
     File f;
 
     public Storage(String filePath) {
@@ -23,7 +23,7 @@ public class Storage {
         return f;
     }
 
-    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+    public void writeToFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath, true);
         fw.write(textToAdd);
         fw.close();

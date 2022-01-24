@@ -1,8 +1,8 @@
-package Duke;
+package duke;
 
 public class Parser {
     public Parser(){};
-    public void parse(String str) throws MissingDescriptionException, DukeException {
+    public String parse(String str) throws MissingDescriptionException, DukeException {
         String[] strArr = str.split(" ");
         String firstWord = strArr[0];
         if (firstWord.equals("deadline") || firstWord.equals("event") || firstWord.equals("todo")
@@ -28,5 +28,6 @@ public class Parser {
         else{
             throw new DukeException();
         }
+        return str;
     }
 }
