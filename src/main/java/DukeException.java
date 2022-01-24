@@ -21,6 +21,13 @@ public class DukeException extends Exception {
         }
     }
 
+    public static class DukeDateTimeFormatException extends DukeException {
+        @Override
+        public String toString() {
+            return super.toString() + ": Please use this format " + Duke.DATE_TIME_FORMAT;
+        }
+    }
+
     public static class DukeTaskNotFoundException extends DukeException {
         @Override
         public String toString() {
