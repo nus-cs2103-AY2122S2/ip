@@ -12,6 +12,7 @@ public class Task {
 
     /**
      * Constructor for duke.Task class
+     *
      * @param d a string representing a description of the task
      */
     public Task(String d) {
@@ -35,6 +36,7 @@ public class Task {
 
     /**
      * Returns the task properties in the format of the task to be saved onto hard disk (to be Overridden)
+     *
      * @return String representing the task toString in hard-disk format
      */
     public String toStringInFileFormat() {
@@ -43,6 +45,7 @@ public class Task {
 
     /**
      * Retrieves the status of the task
+     *
      * @return If marked as "Done", returns "X", otherwise returns " "
      */
     public String getStatusIcon() {
@@ -51,10 +54,11 @@ public class Task {
 
     /**
      * ToString implementation of the duke.Task class
+     *
      * @return String representation of the status of the task along with its description
      */
     @Override
     public String toString() {
-        return "["+ getStatusIcon() + "] " + description;
+        return "[" + getStatusIcon() + "] " + description;
     }
 }
