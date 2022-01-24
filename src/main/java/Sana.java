@@ -1,5 +1,3 @@
-import java.io.FileNotFoundException;
-
 import java.time.format.DateTimeParseException;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -13,18 +11,17 @@ import java.time.LocalDate;
  * @version 1.7
  */
 public class Sana {
-    // The border for Sana's replies
+    /** The border for Sana's replies */
     private static final String border = "_____________________________________________";
 
-    /**
-     * userTasks stores the commands given to Sana from the user
-     */
+    /** userTasks stores the commands given to Sana from the user */
     private LinkedList<Task> userTasks;
 
-    /**
-     * taskMem stores the tasks given to Sana in a txt file
-     */
+    /** taskMem stores the tasks given to Sana in a txt file */
     private Memory taskMem;
+
+    /** ui handles the user interface portion of the program */
+    private Ui ui;
 
     /**
      * Constructor for the Sana class
@@ -32,6 +29,7 @@ public class Sana {
     public Sana() {
         this.taskMem = new Memory();
         this.userTasks = taskMem.memToList();
+        this.ui = new Ui();
     }
 
     /**
