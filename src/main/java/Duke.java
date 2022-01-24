@@ -35,6 +35,7 @@ public class Duke {
             String originalInput = sc.nextLine();
             String[] inputArray = originalInput.split(" ");
             String command = inputArray[0];
+
             if (command.matches(".*\\bbye\\b.*")) {
                 System.out.println(bar);
                 System.out.println("Bye. Hope to see you again soon!");
@@ -70,6 +71,17 @@ public class Duke {
                 printTask(curr);
                 System.out.println(bar);
             } else if (command.matches(".*\\btodo\\b.*")) {
+
+                try {
+                    if (inputArray.length <=1 ) {
+                        throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                    }
+                } catch (DukeException e) {
+                    System.err.println(e.getMessage());
+                    System.out.println("Please try again:");
+                    continue;
+                }
+
                 System.out.println(bar);
                 System.out.println("Got it. I've added this task:");
                 Task curr = new Todo(originalInput.replaceAll(".*\\btodo\\.*", ""));
@@ -99,7 +111,7 @@ public class Duke {
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         Duke kizer = new Duke();
         kizer.Run();
     }
