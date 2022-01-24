@@ -1,9 +1,31 @@
-# Dingus project template
+# Doge project template
 
-This is a project template for a greenfield Java project. Its name is _Dingus_, a person who occasionally pisses you off but at the end of the day, you still love them. Given below are instructions on how to use it.
+This is a project template for a greenfield Java project. Its name is _Doge_, a person who occasionally pisses you off but at the end of the day, you still love them. Given below are instructions on how to use it.
 
-## Features of Dingus
-Some of the features that _Dingus_ has:
+```
+         ▄              ▄    
+        ▌▒█           ▄▀▒▌   
+        ▌▒▒█        ▄▀▒▒▒▐   
+       ▐▄█▒▒▀▀▀▀▄▄▄▀▒▒▒▒▒▐   
+     ▄▄▀▒▒▒▒▒▒▒▒▒▒▒█▒▒▄█▒▐   
+   ▄▀▒▒▒░░░▒▒▒░░░▒▒▒▀██▀▒▌   
+  ▐▒▒▒▄▄▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▀▄▒▌  
+  ▌░░▌█▀▒▒▒▒▒▄▀█▄▒▒▒▒▒▒▒█▒▐  
+ ▐░░░▒▒▒▒▒▒▒▒▌██▀▒▒░░░▒▒▒▀▄▌ 
+ ▌░▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░▒▒▒▒▌ 
+▌▒▒▒▄██▄▒▒▒▒▒▒▒▒░░░░░░░░▒▒▒▐ 
+▐▒▒▐▄█▄█▌▒▒▒▒▒▒▒▒▒▒░▒░▒░▒▒▒▒▌
+▐▒▒▐▀▐▀▒▒▒▒▒▒▒▒▒▒▒▒▒░▒░▒░▒▒▐ 
+ ▌▒▒▀▄▄▄▄▄▄▒▒▒▒▒▒▒▒░▒░▒░▒▒▒▌ 
+ ▐▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░▒░▒▒▄▒▒▐  
+  ▀▄▒▒▒▒▒▒▒▒▒▒▒▒▒░▒░▒▄▒▒▒▒▌  
+    ▀▄▒▒▒▒▒▒▒▒▒▒▄▄▄▀▒▒▒▒▄▀   
+      ▀▄▄▄▄▄▄▀▀▀▒▒▒▒▒▄▄▀     
+         ▀▀▀▀▀▀▀▀▀▀▀▀        
+```
+
+## Features of Doge 
+Some of the features that _Doge_ has:
 1. Task tracker
    1. Able to track different kinds of tasks (Todo, Event, Deadline)
    2. Mark completed tasks
@@ -11,7 +33,7 @@ Some of the features that _Dingus_ has:
    4. Delete unwanted tasks
    5. List the current tasks
    
-## Basic Commands for Dingus 
+## Basic Commands for Doge
 1. Adding a task:
    1. _todo (task)_: adds a Todo task
    2. _event (task)/(details)_: adds an event 

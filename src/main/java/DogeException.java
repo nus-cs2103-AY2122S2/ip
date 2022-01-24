@@ -1,7 +1,7 @@
-public class DingusException extends IllegalArgumentException {
+public class DogeException extends Exception {
 	private String message;
 
-	public DingusException(String s) {
+	public DogeException(String s) {
 		super(s);
 		this.message = s;
 	}
