@@ -66,6 +66,10 @@ public class CommandManager {
                         NumCommand delete = new NumCommand(this.um, this.tm, command[1], Type.DELETE);
                         delete.execute();
                         break;
+                    case "save":
+                        SaveCommand save = new SaveCommand(this.um, this.tm, Type.SAVE);
+                        save.execute();
+                        break;
                     default:
                         throw new DukeException();
                 }
