@@ -47,7 +47,16 @@ public class Storage {
                 tasks.add(t);
             }
         } catch (IOException e) {
-            throw new DukeException("Something went wrong with loading the tasks file");
+            // throw new DukeException("Something went wrong with loading the tasks file");
+            try {
+                File parentDir = new File("./data");
+                parentDir.mkdir();
+                String fileName = "duke.txt";
+                File file = new File(parentDir, fileName);
+                file.createNewFile();
+            } catch (IOException e2) {
+                throw new DukeException("Something went wrong with creating a file to save the tasks");
+            }
         }
         return tasks;
     }
