@@ -1,3 +1,7 @@
+package Main;
+
+import Task.Task;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,6 +12,10 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import Task.ToDo;
+import Task.Deadline;
+import Task.Event;
 
 public class Storage {
 

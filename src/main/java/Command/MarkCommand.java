@@ -1,4 +1,11 @@
-public class MarkCommand extends Command{
+package Command;
+
+import Task.TaskList;
+
+import Main.Ui;
+import Main.Storage;
+
+public class MarkCommand extends Command {
     enum Type {
         MARK,
         UNMARK,

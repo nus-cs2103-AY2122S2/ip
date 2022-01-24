@@ -1,4 +1,10 @@
-public class DeleteCommand extends Command{
+package Command;
+
+import Task.TaskList;
+import Main.Ui;
+import Main.Storage;
+
+public class DeleteCommand extends Command {
     int num;
     public DeleteCommand(int num) {
         this.num = num;

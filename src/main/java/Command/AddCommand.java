@@ -1,4 +1,16 @@
-public class AddCommand extends Command{
+package Command;
+
+import Task.TaskList;
+import Task.ToDo;
+import Task.Event;
+import Task.Deadline;
+
+import Main.Ui;
+import Main.Storage;
+import Main.TsundereException;
+
+
+public class AddCommand extends Command {
     enum Type {
         TODO,
         DEADLINE,
@@ -19,7 +31,7 @@ public class AddCommand extends Command{
         this.body = body;
     }
 
-    public void execute(TaskList t, Ui u, Storage s) throws TsundereException{
+    public void execute(TaskList t, Ui u, Storage s) throws TsundereException {
 
        String[] splitStr;
         switch (this.ty) {
