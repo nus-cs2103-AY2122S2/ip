@@ -3,11 +3,22 @@ package duke;
 import duke.command.*;
 import duke.helpTool.*;
 
+/**
+ * The type Duke.
+ *
+ * @author Dai Tianle <e0389201@u.nus.edu>
+ * @version 1.0
+ */
 public class Duke {
     private TaskList tasks;
     private final Storage storage;
     private final Ui ui;
 
+    /**
+     * Create a chatterbot with record file located at filePath
+     *
+     * @param filePath The file's storage path
+     */
     public Duke(String filePath){
         ui = new Ui();
         storage = new Storage(filePath);
@@ -19,6 +30,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Run the chatterbot
+     */
     public void run() {
         ui.greet();
         boolean isExit = false;
@@ -39,6 +53,11 @@ public class Duke {
         }
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         new Duke("./textRecord.txt").run();
     }

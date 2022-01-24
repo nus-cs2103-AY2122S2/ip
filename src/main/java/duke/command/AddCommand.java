@@ -8,16 +8,32 @@ import duke.task.*;
 
 import java.time.LocalDateTime;
 
+/**
+ * The type Add command.
+ */
 public class AddCommand extends Command {
     private final String description;
     private final String TYPE;
     private LocalDateTime dateTime;
 
+    /**
+     * Instantiates a new Add command.
+     *
+     * @param description the Task description
+     * @param type        the type
+     */
     public AddCommand(String description, String type){
         this.TYPE = type;
         this.description = description;
     }
 
+    /**
+     * Instantiates a new Add command.
+     *
+     * @param description the command description
+     * @param type        the type
+     * @param dateTime    the date time
+     */
     public AddCommand(String description, String type, LocalDateTime dateTime){
         this.TYPE = type;
         this.description = description;

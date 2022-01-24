@@ -11,13 +11,26 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The type Storage.
+ */
 public class Storage {
     private final String filePath;
 
+    /**
+     * Instantiates a new Storage.
+     *
+     * @param filePath the file path
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Create file.
+     *
+     * @throws DukeException the duke exception
+     */
     public void create() throws DukeException {
         try {
             File myObj = new File(this.filePath);
@@ -27,6 +40,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Write to file.
+     *
+     * @param taskList the task list
+     * @throws DukeException the duke exception
+     */
     public void write(TaskList taskList) throws DukeException {
         try {
             FileWriter myWriter = new FileWriter(filePath, false);
@@ -41,6 +60,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Load from file.
+     *
+     * @return the array list
+     * @throws DukeException the duke exception
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
             File myObj = new File(this.filePath);

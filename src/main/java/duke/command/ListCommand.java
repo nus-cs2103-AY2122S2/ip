@@ -4,8 +4,14 @@ import duke.helpTool.Storage;
 import duke.helpTool.TaskList;
 import duke.helpTool.Ui;
 
+/**
+ * The type List command.
+ */
 public class ListCommand extends Command{
 
+    /**
+     * Instantiates a new List command.
+     */
     public ListCommand(){
 
     }
