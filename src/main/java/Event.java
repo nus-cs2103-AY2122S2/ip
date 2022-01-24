@@ -18,6 +18,6 @@ public class Event extends Task {
     }
 
     public String toFileFormat() {
-        return "E," + String.valueOf(isDone) + "," + description + "," + at;
+        return "E," + String.valueOf(isDone) + "," + description + "," + at.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 }

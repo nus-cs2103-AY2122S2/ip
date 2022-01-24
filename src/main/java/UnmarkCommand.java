@@ -1,2 +1,28 @@
-package main.java;public class UnmarkCommand {
+package main.java;
+import java.io.IOException;
+import java.util.ArrayList;
+
+public class UnmarkCommand extends Command {
+
+    private int taskToUnmark;
+
+    public UnmarkCommand(int taskToMark) {
+        this.taskToUnmark = taskToUnmark;
+    }
+
+    @Override
+    public void execute(TaskList tasks,Ui ui, Storage storage) {
+        tasks.unmark(taskToUnmark);
+        ui.showUnmarkTask(tasks.getTask(taskToUnmark));
+        try {
+            storage.writeToFile(tasks.getTaskArr());
+        } catch (IOException e) {
+            ui.showError("IOException");
+        }
+    }
+
+    @Override
+    public boolean isEnd() {
+        return false;
+    }
 }

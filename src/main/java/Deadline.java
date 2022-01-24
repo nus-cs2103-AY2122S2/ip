@@ -18,6 +18,6 @@ public class Deadline extends Task {
     }
 
     public String toFileFormat() {
-        return "D," + String.valueOf(isDone) + "," + description + "," + by;
+        return "D," + String.valueOf(isDone) + "," + description + "," + by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 }
