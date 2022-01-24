@@ -38,7 +38,7 @@ public enum Command {
 
             for (int i = 0; i < taskList.size(); i++) {
                 Task curr = taskList.get(i);
-                sb.append(String.format(strPadding + "%02d." + curr.toString(), i + 1));
+                sb.append(String.format(strPadding + "%d." + curr.toString(), i + 1));
                 if (i != taskList.size() - 1) {
                     sb.append("\n");
                 }

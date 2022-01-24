@@ -10,4 +10,9 @@ public class Deadline extends Task{
     public String toString() {
         return String.format("[D]%s (by: %s)", super.toString(), this.by);
     }
+
+    public String write() {
+        String markStatus = super.isMarked ? "1" : "0";
+        return String.format("%s | %s | %s | %s\n", "D", markStatus, super.taskName, this.by);
+    }
 }

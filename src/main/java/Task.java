@@ -8,10 +8,6 @@ abstract class Task {
         this.isMarked = false;
     }
 
-    public void toggleMarked() {
-        this.isMarked = !this.isMarked;
-    }
-
     public String getTaskName() {
         return this.taskName;
     }
@@ -24,4 +20,6 @@ abstract class Task {
     public String toString() {
         return String.format("[%s] " + this.getTaskName(), this.getMarkedStatus());
     }
+
+    public abstract String write();
 }
