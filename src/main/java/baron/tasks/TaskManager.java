@@ -6,10 +6,15 @@ import baron.messages.Messages;
 import java.util.ArrayList;
 
 public class TaskManager {
-    private final ArrayList<Task> taskList;
+    private ArrayList<Task> taskList;
+    private ArrayList<Task> previousTaskList = null;
 
     public TaskManager() {
         this.taskList = new ArrayList<>();
+    }
+
+    public TaskManager(ArrayList<Task> taskList) {
+        this.taskList = taskList;
     }
 
     public boolean isEmpty() {
@@ -57,11 +62,16 @@ public class TaskManager {
         }
 
         this.taskList.add(newTask);
+        this.previousTaskList = this.getAllTasks();
         return newTask;
     }
 
     public Task getTask(int index) {
         return this.taskList.get(index - 1);
+    }
+
+    public ArrayList<Task> getAllTasks() {
+        return new ArrayList<>(this.taskList);
     }
 
     public boolean markTask(int index) throws BaronException {
@@ -98,6 +108,7 @@ public class TaskManager {
         if (this.isEmpty()) {
             throw new BaronException(Messages.MESSAGE_NO_TASK);
         } else if (index > 0 && index <= this.getTaskCount()) {
+            this.previousTaskList = this.getAllTasks();
             Task deletedTask = this.taskList.get(index - 1);
             this.taskList.remove(index - 1);
             return deletedTask;
@@ -107,17 +118,27 @@ public class TaskManager {
         }
     }
 
+    public void revertChanges() {
+        if (this.previousTaskList != null) {
+            this.taskList = new ArrayList<>(previousTaskList);
+        }
+    }
+
+    public void commitChanges() {
+        this.previousTaskList = null;
+    }
+
     @Override
     public String toString() {
-        String output = "";
+        StringBuilder output = new StringBuilder();
         for (int i = 0; i < this.getTaskCount(); i++) {
-            output += "  " + (i + 1) + "." + this.taskList.get(i);
+            output.append("  ").append(i + 1).append(".").append(this.taskList.get(i));
 
             if (i != this.getTaskCount() - 1) {
-                output += "\n";
+                output.append("\n");
             }
         }
 
-        return output;
+        return output.toString();
     }
 }

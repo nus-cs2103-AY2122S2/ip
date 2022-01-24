@@ -1,6 +1,6 @@
 package baron.tasks;
 
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -31,5 +31,10 @@ public class Task {
 
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + description;
+    }
+
+    public String toSaveString(String delimiter) {
+        String isDoneString = this.isDone ? "1" : "0";
+        return isDoneString + delimiter + this.description;
     }
 }
