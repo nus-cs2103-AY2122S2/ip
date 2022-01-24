@@ -1,7 +1,7 @@
 package duke;
 
 import duke.command.*;
-import duke.helpTool.*;
+import duke.helptool.*;
 
 /**
  * The type Duke.

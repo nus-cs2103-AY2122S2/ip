@@ -1,4 +1,4 @@
-package duke.helpTool;
+package duke.helptool;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

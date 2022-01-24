@@ -1,4 +1,4 @@
-package duke.helpTool;
+package duke.helptool;
 
 import duke.task.*;
 

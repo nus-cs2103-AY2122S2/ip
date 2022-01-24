@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.helpTool.Storage;
-import duke.helpTool.TaskList;
-import duke.helpTool.Ui;
+import duke.helptool.Storage;
+import duke.helptool.TaskList;
+import duke.helptool.Ui;
 
 /**
  * The type Exit command.
