@@ -49,6 +49,13 @@ public class Task {
         System.out.println(this);
     }
 
+    /**
+     * Sets task to done
+     */
+    public void presetDone() {
+        this.isDone = true;
+    }
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
