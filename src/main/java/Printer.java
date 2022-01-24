@@ -27,7 +27,7 @@ public class Printer {
         printDivider();
         System.out.println("    Adding a task: ");
         System.out.println("      " + taskObj.toString());
-        System.out.println("    Now you got " + (listLength + 1) + " tasks in the list!");
+        System.out.println("    Now you got " + (listLength) + " tasks in the list!");
         printDivider();
     }
 
@@ -35,6 +35,6 @@ public class Printer {
         printDivider();
         System.out.println("    Ok, removing a task: ");
         System.out.println("      " + taskObj.toString());
-        System.out.println("    Now you got " + (listLength - 1) + " tasks in the list!");
+        System.out.println("    Now you got " + (listLength) + " tasks in the list!");
         printDivider();
     }}
