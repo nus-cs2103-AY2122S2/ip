@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -124,6 +125,8 @@ public class Luke {
                 printOutput(String.format("Oops, the force is not strong.\n%s\nPlease try again :(", e.getMessage()));
             } catch (IOException e) {
                 printOutput(String.format("Oops, the force is unable to write to the file.\nThe error is:\n%s", e.getMessage()));
+            } catch (DateTimeParseException e) {
+                printOutput("Oops, the force does not comprehend the date.\nPlease try again :(");
             }
         } while (!cmd.isExitCmd());
         farewell();
