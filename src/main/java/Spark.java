@@ -5,66 +5,71 @@ import SparkExceptions.SparkException;
 import Tasks.TaskList.TaskList;
 
 public class Spark {
-    public static void main(String[] args) throws SparkException {
-        TaskList taskList = new TaskList();
+    private final TaskList taskList;
+    private final Ui ui;
 
-        Scanner sc = new Scanner(System.in);
+    public Spark() throws SparkException {
+        this.taskList = new TaskList();
+        this.ui = new Ui();
+    }
 
-        // print welcome message
-        System.out.println("----------------------------------------------------------------------");
-        System.out.println("Hello! I'm Spark");
-        System.out.println("What can I do for you?");
-        System.out.println("----------------------------------------------------------------------");
+    private void quit() {
+        ui.printMessage("Cool, see you around!");
+        System.exit(0);
+    }
 
-        String input;
-        String[] tokens;
-        String commandKeyword;
-        Command c;
-        do {
+    public void run() {
+        while (true) {
             // get input from user
-            input = sc.nextLine();
-            tokens = input.split(" "); // split command into individual keywords by single-space
-            commandKeyword = tokens[0]; // assume that the first keyword is always the command word
-            c = Command.getCommand(commandKeyword);
+            String input = ui.getInput();
+            String[] tokens = input.split(" "); // split command into individual keywords by single-space
+            String commandKeyword = tokens[0]; // assume that the first keyword is always the command word
+            Command c = Command.getCommand(commandKeyword);
 
-            System.out.println("----------------------------------------------------------------------");
-
+//            System.out.println("----------------------------------------------------------------------");
             try {
                 switch (c) {
-                    case BYE:
-                        System.out.println("Cool, see you around!");
-                        break;
-                    case LIST:
-                        taskList.showTaskList();
-                        break;
-                    case MARK:
-                        taskList.markTask(tokens);
-                        break;
-                    case UNMARK:
-                        taskList.unMarkTask(tokens);
-                        break;
-                    case DELETE:
-                        taskList.deleteTask(tokens);
-                        break;
-                    case TODO:
-                        taskList.addToDo(tokens);
-                        break;
-                    case DEADLINE:
-                        taskList.addDeadline(tokens);
-                        break;
-                    case EVENT:
-                        taskList.addEvent(tokens);
-                        break;
-                    case UNRECOGNISED:
-                        throw new UnrecognisedCommandException();
-
+                case BYE:
+                    quit();
+                    break;
+                case LIST:
+                    taskList.showTaskList();
+                    break;
+                case MARK:
+                    taskList.markTask(tokens);
+                    break;
+                case UNMARK:
+                    taskList.unMarkTask(tokens);
+                    break;
+                case DELETE:
+                    taskList.deleteTask(tokens);
+                    break;
+                case TODO:
+                    taskList.addToDo(tokens);
+                    break;
+                case DEADLINE:
+                    taskList.addDeadline(tokens);
+                    break;
+                case EVENT:
+                    taskList.addEvent(tokens);
+                    break;
+                case UNRECOGNISED:
+                    throw new UnrecognisedCommandException();
                 }
             } catch (SparkException e) {
-                System.out.println(e.getMessage());
+                ui.printException(e);
             }
 
-            System.out.println("----------------------------------------------------------------------");
-        } while (c != Command.BYE);
+//            System.out.println("----------------------------------------------------------------------");
+        }
+    }
+
+    public static void main(String[] args) {
+        try {
+            new Spark().run();
+        } catch(SparkException e) {
+            System.out.println("A fatal error occurred. Exiting now...");
+        }
     }
 
 }
