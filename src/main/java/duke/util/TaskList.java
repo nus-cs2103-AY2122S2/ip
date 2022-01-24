@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Contains a list of tasks and has operations to add/delete tasks in the list.
+ * Contains a list of tasks and has operations to manipulate tasks in the list.
  */
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -72,7 +72,7 @@ public class TaskList {
     }
 
     /**
-     * Marks the task at the specified index.
+     * Marks the task at the specified index as done.
      *
      * @param index One-based index of the task to be marked.
      * @throws DukeException if the index is invalid.
@@ -82,7 +82,7 @@ public class TaskList {
     }
 
     /**
-     * Unmarks the task at the specified index.
+     * Unmarks the task at the specified index as not done.
      *
      * @param index One-based index of the task to be unmarked.
      * @throws DukeException if the index is invalid.
@@ -95,6 +95,12 @@ public class TaskList {
         return new ArrayList<>(tasks);
     }
 
+    /**
+     * Returns task(s) that contain(s) the specified keyword.
+     *
+     * @param keyword Keyword to find the tasks with.
+     * @return ArrayList of tasks containing the specified keyword.
+     */
     public ArrayList<Task> getTasksWithKeyword(String keyword) {
         ArrayList<Task> matchedTasks = new ArrayList<>();
         for (Task t: tasks) {

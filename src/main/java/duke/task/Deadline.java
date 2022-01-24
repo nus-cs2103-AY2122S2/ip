@@ -36,6 +36,11 @@ public class Deadline extends Task {
         return by;
     }
 
+    @Override
+    public String formatForFile() {
+        return super.formatForFile() + " | " + this.by.toString();
+    }
+
     /**
      * Returns type, description and deadline of the task.
      */

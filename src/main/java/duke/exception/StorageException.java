@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * StorageException representing Exceptions that arise due to interactions with Storage.
+ * Represents an exception that happens when dealing with file storage.
  */
 public class StorageException extends Exception {
     /**

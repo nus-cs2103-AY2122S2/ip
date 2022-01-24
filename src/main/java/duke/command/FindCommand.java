@@ -5,6 +5,9 @@ import duke.storage.Storage;
 import duke.ui.Ui;
 import duke.util.TaskList;
 
+/**
+ * Represents a command that finds tasks with the user-specified keyword.
+ */
 public class FindCommand extends Command {
     private String keyword;
 
@@ -14,6 +17,6 @@ public class FindCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.printList(tasks.getTasksWithKeyword(keyword));
+        ui.printFoundTasks(tasks.getTasksWithKeyword(keyword), keyword);
     }
 }

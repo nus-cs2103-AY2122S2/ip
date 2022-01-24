@@ -6,16 +6,16 @@ import duke.ui.Ui;
 import duke.util.TaskList;
 
 /**
- * Exits the application.
+ * Represents a command that terminates and exit the application.
  */
 public class ExitCommand extends Command {
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.printGoodbye();
+    public boolean isExit() {
+        return true;
     }
 
     @Override
-    public boolean isExit() {
-        return true;
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        ui.printGoodbye();
     }
 }

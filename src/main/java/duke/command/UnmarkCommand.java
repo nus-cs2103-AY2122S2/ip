@@ -6,7 +6,7 @@ import duke.ui.Ui;
 import duke.util.TaskList;
 
 /**
- * Unmarks the specified task as done.
+ * Represents a command that unmarks the specified task as not done.
  */
 public class UnmarkCommand extends Command {
     private int index;

@@ -10,11 +10,11 @@ import duke.task.Todo;
 import java.time.LocalDate;
 
 /**
- * Parser class that deals with making sense of the user input.
+ * Represents a parser that deals with parsing user input and returning the correct command.
  */
 public class Parser {
     /**
-     * Parses the input string and returns a matching Command object that executes the command.
+     * Parses the input string and returns the matching Command object that executes the command.
      *
      * @param input String representing user input.
      * @return Command object.
@@ -73,15 +73,12 @@ public class Parser {
                 throw new DukeException(ErrorMessage.MESSAGE_UNKNOWN_DESC);
             }
             return new AddCommand(new Todo(args[1]));
-<<<<<<< HEAD
             // Fallthrough
-=======
         case "find":
             if (args.length == 1) {
                 throw new DukeException(ErrorMessage.MESSAGE_UNKNOWN_KEYWORD);
             }
             return new FindCommand(args[1]);
->>>>>>> branch-Level-9
         case "bye":
             return new ExitCommand();
             // Fallthrough

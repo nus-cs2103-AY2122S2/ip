@@ -5,7 +5,7 @@ import duke.ui.Ui;
 import duke.util.TaskList;
 
 /**
- * Duke class represents a Personal Assistant Chatbot that helps a person to keep track of various tasks.
+ * Represents a Personal Assistant Chatbot that helps a person to keep track of various tasks.
  */
 public class Duke {
     private Storage storage;

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Event class represents tasks that starts at a specific time and ends at a specific time.
+ * Event class represents tasks that occur at a specific time.
  */
 public class Event extends Task {
     private LocalDate at;
@@ -34,6 +34,11 @@ public class Event extends Task {
 
     public LocalDate getAt() {
         return at;
+    }
+
+    @Override
+    public String formatForFile() {
+        return super.formatForFile() + " | " + this.at.toString();
     }
 
     /**

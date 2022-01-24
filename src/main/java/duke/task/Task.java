@@ -60,7 +60,7 @@ public class Task {
     }
 
     /**
-     * Unmarks a task as done.
+     * Unmarks a task as not done.
      */
     public void unmarkAsDone() {
         this.isDone = false;
@@ -86,6 +86,15 @@ public class Task {
         default:
             return "T";
         }
+    }
+
+    /**
+     * Format and returns a string of the task for storage.
+     *
+     * @return Formatted string of the task.
+     */
+    public String formatForFile() {
+        return getTypeAsPrefix() + " | " + (isDone ? "1" : "0") + " | " + description;
     }
 
     /**

@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * Container for user visible error messages.
+ * Stores error messages to be shown to the user.
  */
 public class ErrorMessage {
     public static final String MESSAGE_LOADING_ERROR = "Meow! The app cannot be loaded!";

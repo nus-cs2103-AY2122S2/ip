@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Creates a UI that deals with interactions with the user.
+ * Represents a UI that deals with interactions with the user.
  * */
 public class Ui {
     private static final String LINE_BREAK
@@ -22,8 +22,8 @@ public class Ui {
             + "|____/ \\__,_|_|\\_\\___| (@)<_____>__(_____)____/\n";
     private static final String GREETING = "Meow! I'm Duke!\nWhat can I do for you?";
     private static final String GOODBYE = "Bye. Meow!";
-    private static final String MESSAGE_INDEXED_LIST_ITEM = "%1$d. %2$s";
     private static final String MESSAGE_NUM_LIST_ITEMS = "Number of tasks in list: ";
+    private static final String MESSAGE_TASK_WITH_KEYWORD = "Here are the matching tasks with keyword: ";
 
     private final Scanner in;
     private final PrintStream out;
@@ -83,18 +83,33 @@ public class Ui {
         printMessage(ErrorMessage.MESSAGE_LOADING_ERROR);
     }
 
-    public void printList(ArrayList<Task> listItems) {
+    /**
+     * Formats and prints the tasks.
+     *
+     * @param listItems ArrayList of tasks to be printed.
+     */
+    public void printAllTasks(ArrayList<Task> listItems) {
         StringBuilder formatted = new StringBuilder();
-        int displayIndex = 1;
-        for (Task listItem : listItems) {
-            formatted.append(formatListItem(displayIndex, listItem.toString())).append("\n");
-            displayIndex++;
+        for (int i = 0; i < listItems.size(); i++) {
+            formatted.append(i + 1).append(". ").append(listItems.get(i)).append("\n");
         }
         formatted.append(MESSAGE_NUM_LIST_ITEMS).append(listItems.size());
         printMessage(formatted.toString());
     }
 
-    private String formatListItem(int visibleIndex, String listItem) {
-        return String.format(MESSAGE_INDEXED_LIST_ITEM, visibleIndex, listItem);
+    /**
+     * Formats and prints the tasks.
+     *
+     * @param listItems ArrayList of tasks to be printed.
+     * @param keyword Keyword to be searched for.
+     */
+    public void printFoundTasks(ArrayList<Task> listItems, String keyword) {
+        StringBuilder formatted = new StringBuilder();
+        formatted.append(MESSAGE_TASK_WITH_KEYWORD).append(keyword).append(" \n");
+        for (int i = 0; i < listItems.size(); i++) {
+            formatted.append(i + 1).append(". ").append(listItems.get(i)).append("\n");
+        }
+        formatted.append(MESSAGE_NUM_LIST_ITEMS).append(listItems.size());
+        printMessage(formatted.toString());
     }
 }

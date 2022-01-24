@@ -6,15 +6,18 @@ import duke.ui.Ui;
 import duke.util.TaskList;
 
 /**
- * Represents an executable command.
+ * Represents a command that can be executed.
  */
 public abstract class Command {
+    /**
+     * Returns false if the command is not an ExitCommand.
+     */
     public boolean isExit() {
         return false;
     }
 
     /**
-     * Executes the command.
+     * Executes the command based on the subclass.
      *
      * @param tasks TaskList of the current running application.
      * @param ui Ui of the current running application.
