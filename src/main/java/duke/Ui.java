@@ -81,6 +81,11 @@ public class Ui {
         System.out.println("Now you have " + taskList.getLength() + " tasks in the list.\n");
     }
 
+    public void showFindResult(TaskList findResults) {
+        System.out.println("Here are the matching tasks in your task list:");
+        System.out.println(findResults);
+    }
+
     public void showGoodbye() {
         System.out.println("Bye! Hope to see you again!");
     }

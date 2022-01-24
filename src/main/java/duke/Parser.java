@@ -4,13 +4,13 @@ import duke.command.AddTaskCommand;
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.TaskList;
 import duke.task.Todo;
 
 
@@ -27,6 +27,7 @@ public class Parser {
     private static final String MARK = "mark";
     private static final String UNMARK = "unmark";
     private static final String BYE = "bye";
+    private static final String FIND = "find";
 
     public static Command parse(String userInput, int taskListLength) throws DukeException {
         String[] inputArr = userInput.split(" ", 2);
@@ -65,6 +66,8 @@ public class Parser {
                 return new ListCommand();
             case BYE:
                 return new ByeCommand();
+            case FIND:
+                return new FindCommand(details);
             default:
                 throw new DukeException(String.format("Sorry, the command '%s' is not supported.", commandString));
             }
