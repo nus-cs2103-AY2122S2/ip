@@ -87,18 +87,18 @@ public class Parser {
         }
 
         else if (firstWord.equalsIgnoreCase("mark")) {
-            int listIndex = Integer.parseInt(strs[1]); // retrieve the index after mark/unmark
+            int listIndex = Integer.parseInt(strs[1]); // retrieve the index after mark
             return new MarkCommand(listIndex);
         }
 
         else if (firstWord.equalsIgnoreCase("unmark")) {
-            int listIndex = Integer.parseInt(strs[1]); // retrieve the index after mark/unmark
+            int listIndex = Integer.parseInt(strs[1]); // retrieve the index after unmark
             return new UnmarkCommand(listIndex);
         }
 
         else if (firstWord.equalsIgnoreCase("todo")) {
-            String subString = input.substring(4).trim(); // take the remaining of the input String
-            if (subString.length() == 0) {
+            String subString = input.substring(4).trim(); // take the remaining of the input String after "todo"
+            if (subString.length() == 0) { // Check for empty description
                 throw new IncompleteInputException(firstWord);
             } else {
                 Task toDo = new ToDo(subString);
@@ -109,11 +109,12 @@ public class Parser {
         }
 
         else if (firstWord.equalsIgnoreCase("deadline")) {
-            String subString = input.substring(8).trim(); // take the remaining of the input String
-            if (subString.length() == 0) {
+            String subString = input.substring(8).trim(); // take the remaining of the input String after "deadline"
+            if (subString.length() == 0) { // Check for empty description
                 throw new IncompleteInputException(firstWord);
             } else {
-                String[] inputArgs = subString.split(" /"); // breaks the subString into 2 parts
+                // breaks the subString into 2 parts, description, date and time.
+                String[] inputArgs = subString.split(" /");
                 if (!inputArgs[1].substring(0,3).equals("by ")) {
                     throw new UnknownInputException();
                 } else {
@@ -127,18 +128,20 @@ public class Parser {
                         System.out.println("     This task is on a timer!");
                         return new AddCommand(deadline);
                     } catch (DateTimeParseException e) {
-                        throw new DukeException("baka, that's the wrong format. Enter dd-MM-yyyy HHmm");
+                        throw new DukeException("you sussy baka, that's the wrong date format!"
+                                + " Enter dd-MM-yyyy HHmm");
                     }
                 }
             }
         }
 
         else if (firstWord.equalsIgnoreCase("event")) {
-            String subString = input.substring(5).trim(); // take the remaining of the input String
-            if (subString.length() == 0) {
+            String subString = input.substring(5).trim(); // take the remaining of the input String after "event"
+            if (subString.length() == 0) { // Check for empty description
                 throw new IncompleteInputException(firstWord);
             } else {
-                String[] inputArgs = subString.split(" /"); // breaks the subString into 2 parts
+                // breaks the subString into 2 parts, description, date and time.
+                String[] inputArgs = subString.split(" /");
                 if (!inputArgs[1].substring(0,3).equals("at ")) {
                     throw new UnknownInputException();
                 } else {
@@ -155,7 +158,8 @@ public class Parser {
                         System.out.println("     Emergency event on this date!");
                         return new AddCommand(event);
                     } catch (DateTimeParseException e) {
-                        throw new DukeException("baka, that's the wrong format. Enter dd-MM-yyyy HHmm-HHmm");
+                        throw new DukeException("you sussy baka, that's the wrong date format! "
+                                + "Enter dd-MM-yyyy HHmm-HHmm");
                     }
                 }
             }

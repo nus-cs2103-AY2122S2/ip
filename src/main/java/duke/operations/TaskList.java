@@ -103,17 +103,27 @@ public class TaskList {
         Ui.line();
     }
 
+    /**
+     * Checks and prints all tasks in the task arraylist if the keyword is contained in it.
+     *
+     * @param keyword the word to be searched for.
+     */
     public void findTaskInList(String keyword) {
         Ui.line();
         int counter = 1;
+        if (keyword.equals("")) {
+            System.out.println("     You sussy baka! What are you trying to find?");
+        }
+
         for (int i = 0; i < taskArr.size(); i++) {
             if(taskArr.get(i).getDescription().contains(keyword)) {
                 System.out.println("     " + counter + ": " + taskArr.get(i).toString());
                 counter++;
             }
         }
-        if(counter == 1) {
-            System.out.println("     I can't understand this SUSSY language! Please use proper english!");
+
+        if (counter == 1) {
+            System.out.println("     I can't understand this SUSSY language! Use the AMOGUS language!");
         }
         Ui.line();
     }
