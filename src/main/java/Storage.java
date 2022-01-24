@@ -1,54 +1,29 @@
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.file.Paths;
 
 /**
- * Serializes and Deserializes Database Files into TaskStore object.
- * Database Files follow a custom binary format.
+ * Handles persistence operations on the file system.
+ * This includes creation of relevant directories and files.
  */
 
-public class TaskStoreSerializer {
+public class Storage {
     private static final String DATA_FOLDER_PATH = "data/";
     private static final String DB_FILENAME = "store.db";
 
-    public static TaskStore inflate() throws DukeIOException {
+    public static TaskList load() throws DukeIOException {
         FileInputStream dbStream = openDatabaseRead();
 
-        TaskStore store = new TaskStore();
-        if (dbStream == null) {
-            return store;
-        }
-
-        DataInputStream dbDataStream = new DataInputStream(dbStream);
-        try (dbDataStream) {
-            int recordCount = dbDataStream.readInt();
-            for (int i = 0; i < recordCount; i++) {
-                int recordLength = dbDataStream.readInt();
-                byte[] recordData = dbStream.readNBytes(recordLength);
-                try {
-                    store.addTask(TaskSerializer.inflate(recordData));
-                } catch (DukeIOException ex) {
-                    System.out.println("Verbose: Failed to load Task record");
-                }
-            }
-        } catch (IOException ex) {
-            throw new DukeIOException("Failed to inflate database: IO Error");
-        }
-
-        return store;
+        return TaskListSerializer.inflate(dbStream);
     }
 
-    public static void deflate(TaskStore store) throws DukeIOException {
+    public static void save(TaskList taskList) throws DukeIOException {
         FileOutputStream dbStream = openDatabaseWrite();
-        try (DataOutputStream dbDataStream = new DataOutputStream(dbStream)) {
-            dbDataStream.writeInt(store.getTaskCount());
-            for (int i = 0; i < store.getTaskCount(); i++) {
-                byte[] flattenedData = TaskSerializer.deflate(store.getTaskByIndex(i));
-                dbDataStream.writeInt(flattenedData.length);
-                dbDataStream.write(flattenedData);
-            }
-        } catch (IOException e) {
-            throw new DukeIOException("Failed to deflate database: IO Error");
-        }
+
+        TaskListSerializer.deflate(taskList, dbStream);
     }
 
     private static void initDataStore() throws DukeIOException {

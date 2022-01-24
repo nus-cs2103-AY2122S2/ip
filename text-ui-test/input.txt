@@ -1,7 +1,7 @@
 list
 todo This is a todo task
-deadline This is a deadline task /by User Date 1
-event This is an event task /at User Date 2
+deadline This is a deadline task /by 12/11/2022 12:22
+event This is an event task /at 13/12/2022 15:00
 list
 mark 1
 mark 2

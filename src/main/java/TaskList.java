@@ -2,11 +2,11 @@ import java.util.ArrayList;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-public class TaskStore {
+public class TaskList {
     private ArrayList<Task> tasks;
-    private ArrayList<Consumer<TaskStore>> changeListeners;
+    private ArrayList<Consumer<TaskList>> changeListeners;
 
-    public TaskStore() {
+    public TaskList() {
         this.tasks = new ArrayList<>();
         this.changeListeners = new ArrayList<>();
     }
@@ -47,11 +47,11 @@ public class TaskStore {
         return deleted;
     }
 
-    public void registerListener(Consumer<TaskStore> listener) {
+    public void registerListener(Consumer<TaskList> listener) {
         changeListeners.add(listener);
     }
 
-    public void removeListener(Consumer<TaskStore> listener) {
+    public void removeListener(Consumer<TaskList> listener) {
         changeListeners.remove(listener);
     }
 
