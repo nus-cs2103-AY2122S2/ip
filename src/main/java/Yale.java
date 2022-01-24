@@ -15,7 +15,7 @@ public class Yale {
         System.out.println("The name's Yale.\n" );
         Scanner scanner = new Scanner(System.in);
         TaskList list = new TaskList();
-        readSavedData("data/yale.txt", list);
+        readSavedData("data/yale.txt");
         while (true) {
             String command = receiveInput(scanner);
             performAction(command, list);
@@ -163,6 +163,11 @@ public class Yale {
         return input.equals("bye");
     }
 
+    /**
+     * Writes String from list into specified file
+     * @param filePath
+     * @param list
+     */
     public static void writeActionTo(String filePath, TaskList list) {
         String file2 = filePath;
         try {
@@ -178,7 +183,11 @@ public class Yale {
         }
     }
 
-    public static void readSavedData(String filePath, TaskList list) {
+    /**
+     * Reads each line from specified file
+     * @param filePath
+     */
+    public static void readSavedData(String filePath) {
         try {
             FileRead.printFileContents(filePath);
         } catch (IOException e) {

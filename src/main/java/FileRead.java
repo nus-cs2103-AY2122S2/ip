@@ -2,8 +2,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * class FileRead to read data from a file
+ */
 public class FileRead {
-
+    /**
+     * Prints each line from specified file
+     * @param filePath
+     * @throws FileNotFoundException
+     */
     public static void printFileContents(String filePath) throws FileNotFoundException {
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
