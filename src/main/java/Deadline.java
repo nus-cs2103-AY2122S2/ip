@@ -12,7 +12,7 @@ public class Deadline extends Task {
 
     @Override
     public String message() {
-        return "D | " + super.message() + "(by:" + by + ")";
+        return "D | " + "[" +  this.getStatusIcon() + "] " + super.message() + "(by:" + by + ")";
     }
 
     @Override

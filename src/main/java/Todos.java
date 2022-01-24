@@ -10,7 +10,7 @@ public class Todos extends Task {
 
     @Override
     public String message() {
-        return "T | " + super.message() ;
+        return "T | " + "[" +  this.getStatusIcon() + "] " + super.message() ;
     }
 
     @Override

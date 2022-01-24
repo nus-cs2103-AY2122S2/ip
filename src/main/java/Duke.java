@@ -73,7 +73,6 @@ public class Duke {
                 System.out.println("Here are your task(s):");
                 for (int i = 0; i < list_of_inputs.size(); i++) {
                     System.out.println(((i + 1) + ". " + list_of_inputs.get(i).message()));
-
                 }
 
             } else if (temp[0].equals("mark")) {
@@ -124,7 +123,7 @@ public class Duke {
                 writeToFile(list_of_inputs.get(i).message());
             } else {
                 list_of_inputs.get(i).updateData(DUKE_TXTFILE);
-                //System.out.println("CKY " + i + list_of_inputs.get(i).getStatusIcon());
+
             }
         }
 

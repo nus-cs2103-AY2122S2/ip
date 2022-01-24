@@ -18,17 +18,17 @@ public class Task {
 
     public String markedDone() {
         this.isDone = true;
-        return this.message();
+        return  this.message();
 
     }
 
     public String markedUndone() {
         this.isDone = false;
-        return this.message();
+        return  this.message();
     }
 
     public String message() {
-        return "[" +  this.getStatusIcon() + "] " + this.description;
+        return this.description;
     }
 
     public void updateData (String path) throws IOException {

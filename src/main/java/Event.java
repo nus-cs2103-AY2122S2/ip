@@ -12,7 +12,7 @@ public class Event extends Task {
 
     @Override
     public String message() {
-        return "E | " + super.message() + "(at:" + at + ")";
+        return "E | " + "[" +  this.getStatusIcon() + "] " + super.message() + "(at:" + at + ")";
     }
 
     @Override
