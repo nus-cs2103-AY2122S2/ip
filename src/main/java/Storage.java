@@ -10,21 +10,10 @@ import java.util.Scanner;
 
 public class Storage {
     String filePath;
-    boolean hasUpdated;
 
     Storage(String filePath) {
         this.filePath = filePath;
-        this.hasUpdated = false;
     }
-
-    void markUpdated() {
-        this.hasUpdated = true;
-    }
-
-    void unmarkUpdated() {
-        this.hasUpdated = false;
-    }
-
 
     List<Task> load() throws DukeException {
         List<Task> tasks = new ArrayList<Task>();
@@ -62,42 +51,39 @@ public class Storage {
 
     void save(TaskList tasks) throws DukeException {
         try {
-            if (this.hasUpdated) {
-                FileWriter fileWriter = new FileWriter(this.filePath);
-                for (Task task : tasks.getTasks()) {
-                    String taskString = "";
-                    if (task instanceof ToDoTask) {
-                        taskString += "T;";
-                    } else if (task instanceof DeadlineTask) {
-                        taskString += "D;";
-                    } else if (task instanceof EventTask) {
-                        taskString += "E;";
-                    }
-                    if (task.done) {
-                        taskString += "X;";
-                    } else {
-                        taskString += "O;";
-                    }
-                    taskString += task.name;
-                    if (task instanceof DeadlineTask) {
-                        DeadlineTask dTask = (DeadlineTask) task;
-                        taskString += ";";
-                        taskString += dTask.preposition;
-                        taskString += ";";
-                        taskString += dTask.dateTime.format(DateTimeFormatter.ISO_DATE_TIME);
-                    } else if (task instanceof EventTask) {
-                        EventTask dTask = (EventTask) task;
-                        taskString += ";";
-                        taskString += dTask.preposition;
-                        taskString += ";";
-                        taskString += dTask.dateTime.format(DateTimeFormatter.ISO_DATE_TIME);
-                    }
-                    fileWriter.write(taskString);
-                    fileWriter.write(System.lineSeparator());
+            FileWriter fileWriter = new FileWriter(this.filePath);
+            for (Task task : tasks.getTasks()) {
+                String taskString = "";
+                if (task instanceof ToDoTask) {
+                    taskString += "T;";
+                } else if (task instanceof DeadlineTask) {
+                    taskString += "D;";
+                } else if (task instanceof EventTask) {
+                    taskString += "E;";
                 }
-                fileWriter.close();
-                this.unmarkUpdated();
+                if (task.done) {
+                    taskString += "X;";
+                } else {
+                    taskString += "O;";
+                }
+                taskString += task.name;
+                if (task instanceof DeadlineTask) {
+                    DeadlineTask dTask = (DeadlineTask) task;
+                    taskString += ";";
+                    taskString += dTask.preposition;
+                    taskString += ";";
+                    taskString += dTask.dateTime.format(DateTimeFormatter.ISO_DATE_TIME);
+                } else if (task instanceof EventTask) {
+                    EventTask dTask = (EventTask) task;
+                    taskString += ";";
+                    taskString += dTask.preposition;
+                    taskString += ";";
+                    taskString += dTask.dateTime.format(DateTimeFormatter.ISO_DATE_TIME);
+                }
+                fileWriter.write(taskString);
+                fileWriter.write(System.lineSeparator());
             }
+            fileWriter.close();
         } catch (IOException e) {
             throw new DukeException("Unable to save tasks *quack*");
         }
