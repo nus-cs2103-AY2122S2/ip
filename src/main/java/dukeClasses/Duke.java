@@ -113,6 +113,14 @@ public class Duke {
                     continue;
                 }
 
+               Task deletedTask = tasks.deleteTask(parsedCommand.getIndex());
+                try {
+                    storage.updateStorage(tasks.getTaskList());
+                } catch (DukeException errorMessage) {
+                    ui.showStorageError();
+                    continue;
+                }
+                ui.deleteTask(deletedTask);
             }
         }
         sc.close();
