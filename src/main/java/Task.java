@@ -1,7 +1,7 @@
 /**
  * Represent the task user want to do.
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -34,7 +34,7 @@ public class Task {
     }
 
     /**
-     * Set the task that is done to true.
+     * Sets the task that is done to true.
      *
      */
     public void setChecked() {
@@ -42,12 +42,14 @@ public class Task {
     }
 
     /**
-     * Set the task that is not done to false.
+     * Sets the task that is not done to false.
      *
      */
     public void setUnchecked() {
         isDone = false;
     }
+
+    abstract public String saveToFileString();
 
     /**
      * The String representation of the Task.

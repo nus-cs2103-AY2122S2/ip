@@ -1,14 +1,84 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+
 public class Duke {
     private static ArrayList<Task> taskList = new ArrayList<>();
-    private static int taskNum = 0;
     private static Scanner sc;
+    private static String filepath = "./data";
+    private static String savefilepath = "./data/dukesave.txt";
+
     enum TaskType{
         TODO,
         DEADLINE,
         EVENT
+    }
+
+    /**
+     * Reads the existing file. If there is existing file, then add to the ArrayList.
+     *
+     * @throws IOException If files cannot be read or created.
+     */
+    private static void getSaveFile() throws IOException{
+        try {
+            File saveFolder = new File(filepath);
+            File saveFile = new File(savefilepath);
+            saveFolder.mkdir();
+            saveFile.createNewFile();
+            Scanner scanner = new Scanner(saveFile);
+            while (scanner.hasNext()) {
+                String currLine = scanner.nextLine();
+                String[] currTaskLine = currLine.split("\\|");
+                switch (currTaskLine[0]) {
+                case "T":
+                    ToDo todoTask = new ToDo(currTaskLine[2]);
+                    if (currTaskLine[1].equals("1")) {
+                        todoTask.setChecked();
+                    }
+                    taskList.add(todoTask);
+                    break;
+                case "D":
+                    Deadline deadlineTask = new Deadline(currTaskLine[2], currTaskLine[3]);
+                    if (currTaskLine[1].equals("1")) {
+                        deadlineTask.setChecked();
+                    }
+                    taskList.add(deadlineTask);
+                    break;
+                case "E":
+                    Event eventTask = new Event(currTaskLine[2], currTaskLine[3]);
+                    if (currTaskLine[1].equals("1")) {
+                        eventTask.setChecked();
+                    }
+                    taskList.add(eventTask);
+                    break;
+                default:
+                    System.out.println("Opps! Your save files cannot be read. @.@");
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Opps! An error occurred. @.@");
+        }
+
+    }
+
+    /**
+     * Writes the task in ArrayList into the file.
+     *
+     * @throws IOException if cannot write into the file.
+     */
+    public static void writeSaveFile() throws IOException {
+        try {
+            FileWriter writer = new FileWriter(savefilepath);
+            for (int i = 0; i < taskList.size(); i++) {
+                writer.write(taskList.get(i).saveToFileString());
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred. @.@");
+        }
     }
 
     /**
@@ -67,6 +137,8 @@ public class Duke {
         } catch (DukeException error) {
             System.out.println(error.getMessage());
             getUserInput();
+        } catch (IOException e) {
+            System.out.println("Opps! Saving error occurred. @.@");
         }
     }
 
@@ -91,12 +163,12 @@ public class Duke {
      * To display the list of tasks.
      */
     private static void displayList() {
-        if (taskNum == 0) {
+        if (taskList.size() == 0) {
             System.out.println("No task for now");
             getUserInput();
         } else {
             System.out.println("Here are the tasks in your list:");
-            for(int i = 1; i < taskNum + 1; i++){
+            for(int i = 1; i < taskList.size() + 1; i++){
                 Task currTask = taskList.get(i - 1);
                 System.out.println(i + ". " + currTask);
             }
@@ -110,34 +182,34 @@ public class Duke {
      * @param task task to be added.
      * @param type type of task.
      */
-    private static void addTasks(String task, TaskType type) {
+    private static void addTasks(String task, TaskType type) throws IOException {
         System.out.println("Got it. I've added this task:");
 
         switch (type) {
         case TODO:
             ToDo todoTask = new ToDo(task);
             taskList.add(todoTask);
-            taskNum++;
-            System.out.println(todoTask + "\n" + "Now you have " + taskNum
+            System.out.println(todoTask + "\n" + "Now you have " + taskList.size()
                     + " tasks in the list.");
+            writeSaveFile();
             getUserInput();
             break;
         case EVENT:
             String[] eventActions = task.split("/at", 2);
             Event eventTask = new Event(eventActions[0].trim(), eventActions[1].trim());
             taskList.add(eventTask);
-            taskNum++;
-            System.out.println(eventTask + "\n" + "Now you have " + taskNum
+            System.out.println(eventTask + "\n" + "Now you have " + taskList.size()
                     + " tasks in the list.");
+            writeSaveFile();
             getUserInput();
             break;
         case DEADLINE:
             String[] deadlineActions = task.split("/by", 2);
             Deadline deadlineTask = new Deadline(deadlineActions[0].trim(), deadlineActions[1].trim());
             taskList.add(deadlineTask);
-            taskNum++;
-            System.out.println(deadlineTask + "\n" + "Now you have " + taskNum
+            System.out.println(deadlineTask + "\n" + "Now you have " + taskList.size()
                     + " tasks in the list.");
+            writeSaveFile();
             getUserInput();
             break;
         }
@@ -148,12 +220,13 @@ public class Duke {
      *
      * @param task the task that needed to be mark.
      */
-    private static void markTaskList(String task){
+    private static void markTaskList(String task) throws IOException {
         int currTaskNum = Integer.parseInt(task);
         Task currTask = taskList.get(currTaskNum - 1);
         currTask.setChecked();
         System.out.println("Nice! I've marked this task as done:\n"
                 + currTask);
+        writeSaveFile();
         getUserInput();
     }
 
@@ -162,12 +235,13 @@ public class Duke {
      *
      * @param task the task to be unmarked.
      */
-    private static void unmarkTaskList(String task){
+    private static void unmarkTaskList(String task) throws IOException {
         int currTaskNum = Integer.parseInt(task);
         Task currTask = taskList.get(currTaskNum - 1);
         currTask.setUnchecked();
         System.out.println("OK, I've marked this task as not done yet:\n"
                 + currTask);
+        writeSaveFile();
         getUserInput();
     }
 
@@ -176,18 +250,19 @@ public class Duke {
      *
      * @param task task to be deleted.
      */
-    private static void deleteTask(String task) {
+    private static void deleteTask(String task) throws IOException {
         System.out.println("Noted. I've removed this task:");
         int currTaskNum = Integer.parseInt(task);
         Task currTask = taskList.get(currTaskNum - 1);
         taskList.remove(currTaskNum - 1);
-        taskNum--;
-        System.out.println(currTask + "\n" + "Now you have " + taskNum
+        System.out.println(currTask + "\n" + "Now you have " + taskList.size()
                 + " tasks in the list.");
+        writeSaveFile();
         getUserInput();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        getSaveFile();
         String greet = "Hello! I'm Duke\n" + "What can I do for you?";
         System.out.println(greet);
         sc = new Scanner(System.in);
