@@ -10,10 +10,10 @@ public class TaskStoreSerializer {
     private static final String DATA_FOLDER_PATH = "data/";
     private static final String DB_FILENAME = "store.db";
 
-    public static TaskStore inflate() throws DukeIOException {
+    public static TaskList inflate() throws DukeIOException {
         FileInputStream dbStream = openDatabaseRead();
 
-        TaskStore store = new TaskStore();
+        TaskList store = new TaskList();
         if (dbStream == null) {
             return store;
         }
@@ -37,7 +37,7 @@ public class TaskStoreSerializer {
         return store;
     }
 
-    public static void deflate(TaskStore store) throws DukeIOException {
+    public static void deflate(TaskList store) throws DukeIOException {
         FileOutputStream dbStream = openDatabaseWrite();
         try (DataOutputStream dbDataStream = new DataOutputStream(dbStream)) {
             dbDataStream.writeInt(store.getTaskCount());

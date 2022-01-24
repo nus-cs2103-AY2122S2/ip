@@ -23,7 +23,7 @@ public class Duke {
     private static final String COMMAND_BETWEEN = "between";
     private static final String COMMAND_SCHEDULE = "schedule";
 
-    private static TaskStore taskStore;
+    private static TaskList taskList;
 
     public static void main(String[] args) {
         init();
@@ -56,8 +56,8 @@ public class Duke {
 
     private static void init() {
         try {
-            taskStore = TaskStoreSerializer.inflate();
-            taskStore.registerListener(store -> {
+            taskList = TaskStoreSerializer.inflate();
+            taskList.registerListener(store -> {
                 try {
                     TaskStoreSerializer.deflate(store);
                 } catch (DukeIOException ex) {
@@ -94,7 +94,7 @@ public class Duke {
         switch (commandLowerCase) {
         case COMMAND_LIST:
             linePrinter.print("This is your task list:");
-            taskStore.forEach((index, task) -> {
+            taskList.forEach((index, task) -> {
                 // Note that index passed into this consumer is 0-based. Increment by 1 for readability
                 linePrinter.print(String.format("%d. %s", index + 1, task.getReadableString()));
             });
@@ -143,7 +143,7 @@ public class Duke {
 
     private static Task parseSelectTask(String args) throws DukeIllegalArgumentException {
         int taskIndex = parseTaskNumber(args);
-        Task task = taskStore.getTaskByIndex(taskIndex);
+        Task task = taskList.getTaskByIndex(taskIndex);
         if (task == null) {
             throw new DukeIllegalArgumentException("No matching task with given number");
         }
@@ -158,11 +158,11 @@ public class Duke {
             linePrinter.print(String.format("Task is already %s:", newState ? "done" : "not done"));
         } else if (newState) {
             task.markAsDone();
-            taskStore.notifyListeners();
+            taskList.notifyListeners();
             linePrinter.print("Great Job Finishing the task:");
         } else {
             task.unmarkAsDone();
-            taskStore.notifyListeners();
+            taskList.notifyListeners();
             linePrinter.print("Marking the task as not done yet:");
         }
         linePrinter.print(String.format("\t %s", task.getReadableString()));
@@ -171,7 +171,7 @@ public class Duke {
     private static void parseDeleteEvent(IPrintable linePrinter, String args)
             throws DukeIllegalArgumentException {
         int taskIndex = parseTaskNumber(args);
-        Task deleted = taskStore.deleteTask(taskIndex);
+        Task deleted = taskList.deleteTask(taskIndex);
 
         if (deleted == null) {
             throw new DukeIllegalArgumentException("No matching task with given number");
@@ -188,10 +188,10 @@ public class Duke {
             throw new DukeIllegalArgumentException("Task name cannot be empty");
         }
 
-        final Task task = taskStore.addTask(new Todo(args));
+        final Task task = taskList.addTask(new Todo(args));
         linePrinter.print("Added the following Todo Task:");
         linePrinter.print(String.format("\t%s", task.getReadableString()));
-        linePrinter.print(String.format("Now you have %d task(s) in the list", taskStore.getTaskCount()));
+        linePrinter.print(String.format("Now you have %d task(s) in the list", taskList.getTaskCount()));
     }
 
     private static void parseCreateDeadline(IPrintable linePrinter, String args)
@@ -204,10 +204,10 @@ public class Duke {
 
         final String taskDescription = argParts[0];
         final LocalDateTime taskBy = parseDateTime(argParts[1]);
-        final Task task = taskStore.addTask(new Deadline(taskDescription, taskBy));
+        final Task task = taskList.addTask(new Deadline(taskDescription, taskBy));
         linePrinter.print("Added the following Deadline Task:");
         linePrinter.print(String.format("\t%s", task.getReadableString()));
-        linePrinter.print(String.format("Now you have %d task(s) in the list", taskStore.getTaskCount()));
+        linePrinter.print(String.format("Now you have %d task(s) in the list", taskList.getTaskCount()));
     }
 
     private static void parseCreateEvent(IPrintable linePrinter, String args)
@@ -220,10 +220,10 @@ public class Duke {
 
         final String taskDescription = argParts[0];
         final LocalDateTime taskAt = parseDateTime(argParts[1]);
-        final Task task = taskStore.addTask(new Event(taskDescription, taskAt));
+        final Task task = taskList.addTask(new Event(taskDescription, taskAt));
         linePrinter.print("Added the following Event Task:");
         linePrinter.print(String.format("\t%s", task.getReadableString()));
-        linePrinter.print(String.format("Now you have %d task(s) in the list", taskStore.getTaskCount()));
+        linePrinter.print(String.format("Now you have %d task(s) in the list", taskList.getTaskCount()));
     }
 
     private static void parseUpcomingEvents(IPrintable linePrinter, String args)
@@ -240,7 +240,7 @@ public class Duke {
         }
 
         LocalDateTime endTime = LocalDateTime.now().plus(days, ChronoUnit.DAYS);
-        taskStore.forEach((idx, task) -> {
+        taskList.forEach((idx, task) -> {
             task.getDate().ifPresent(date -> {
                 if (date.isBefore(endTime)) {
                     linePrinter.print(task.getReadableString());
@@ -253,7 +253,7 @@ public class Duke {
             throws DukeIllegalArgumentException {
         LocalDateTime dayStart = parseDate(args);
         LocalDateTime dayEnd = dayStart.plus(1, ChronoUnit.DAYS);
-        taskStore.forEach((idx, task) -> {
+        taskList.forEach((idx, task) -> {
             task.getDate().ifPresent(date -> {
                 if (date.isBefore(dayEnd) && date.isAfter(dayStart)) {
                     linePrinter.print(task.getReadableString());
@@ -270,7 +270,7 @@ public class Duke {
         }
         LocalDateTime start = parseDateTime(argParts[0]);
         LocalDateTime end = parseDateTime(argParts[1]);
-        taskStore.forEach((idx, task) -> {
+        taskList.forEach((idx, task) -> {
             task.getDate().ifPresent(date -> {
                 if (date.isBefore(end) && date.isAfter(start)) {
                     linePrinter.print(task.getReadableString());
