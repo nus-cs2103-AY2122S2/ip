@@ -5,13 +5,32 @@ import Alfred.Exceptions.InvalidInputException;
 import Alfred.Storage.AlfredStorage;
 import Alfred.UI.AlfredUserInterface;
 
+/**
+ * This class encapsulates the Delete Command.
+ */
 public class DeleteCommand extends Command {
-    private String[] arguments;
 
+    private final String[] arguments;
+
+    /**
+     * Constructs a DeleteCommand object.
+     *
+     * @param input String input read from the console, assuming the starting keyword
+     *              as "delete".
+     */
     public DeleteCommand(String input) {
         this.arguments = input.split(" ");
     }
 
+    /**
+     * Executes the Delete Command, by removing the designated task from
+     * the internal storage object used by Alfred.
+     *
+     * @param ui      AlfredUserInterface object used as the UI interface for Alfred.
+     * @param storage AlfredStorage object used to handle internal storage for Alfred.
+     * @throws InvalidInputException If too many or too few arguments, or list index is not numeric.
+     * @throws InvalidIndexException If item index is out of bounds.
+     */
     @Override
     public void execute(AlfredUserInterface ui, AlfredStorage storage) throws InvalidInputException,
             InvalidIndexException {

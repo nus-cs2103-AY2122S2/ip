@@ -8,41 +8,82 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
+/**
+ * Encapsulates the logic for managing the internal data states
+ * of Alfred.
+ */
 public class AlfredStorage {
-    private ArrayList<Task> taskList;
-    private String dataPath;
+    private final ArrayList<Task> taskList;
+    private final String dataPath;
 
+    /**
+     * Constructs an AlfredStorage object.
+     *
+     * @param dataPath Data path to where Alfred.txt file should be saved.
+     */
     public AlfredStorage(String dataPath) {
         this.taskList = new ArrayList<Task>();
         this.dataPath = dataPath;
     }
 
+    /**
+     * Returns a string representation of the list of tasks being
+     * tracked by the object.
+     *
+     * @return String object representing the list of tasks.
+     */
     public String listToString() {
         return this.listToString(this.taskList);
     }
 
 
+    /**
+     * Updates internal data state to mark the defined task
+     * as complete.
+     *
+     * @param taskId Integer as 0-indexed key.
+     * @throws InvalidIndexException if index is out of bounds.
+     */
     public void markTask(int taskId) throws InvalidIndexException {
         this.checkValidListIndex(taskId);
         this.taskList.get(taskId).markComplete();
         this.saveToFile();
     }
 
+    /**
+     * Updates internal data state to mark the defined task
+     * as incomplete.
+     *
+     * @param taskId Integer as 0-indexed key.
+     * @throws InvalidIndexException if index is out of bounds.
+     */
     public void unmarkTask(int taskId) throws InvalidIndexException {
         this.checkValidListIndex(taskId);
         this.taskList.get(taskId).markIncomplete();
         this.saveToFile();
     }
 
+    /**
+     * Updates internal data state to delete the defined task.
+     *
+     * @param taskId Integer as 0-indexed key.
+     * @throws InvalidIndexException if index is out of bounds.
+     */
     public void deleteTasK(int taskId) throws InvalidIndexException {
         this.checkValidListIndex(taskId);
         this.taskList.remove(taskId);
         this.saveToFile();
     }
 
+    /**
+     * Updates the internal data state to add a Task object
+     * to the list.
+     *
+     * @param task Task object.
+     * @param ui   AlfredInterface object used by Alfred to handle inputs
+     *             and outputs with the user.
+     */
     public void addTask(Task task, AlfredUserInterface ui) {
         this.taskList.add(task);
         String out = "Yes sir, I've added this task.\n";
@@ -52,6 +93,25 @@ public class AlfredStorage {
         this.saveToFile();
     }
 
+    /**
+     * Gets the string representation of a given task.
+     *
+     * @param taskId 0-indexed id of a task.
+     * @return String representation of the task.
+     * @throws InvalidIndexException If the index is out of bounds.
+     */
+    public String taskToString(int taskId) throws InvalidIndexException {
+        this.checkValidListIndex(taskId);
+        return this.taskList.get(taskId).toString();
+    }
+
+    /**
+     * Returns a formatted string that lists all matching tasks
+     * with a name that matches input text.
+     *
+     * @param text Input text to be matched with regex.
+     * @return Formatted output list of tasks.
+     */
     public String find(String text) {
 
         ArrayList<Task> matches = new ArrayList<Task>();
@@ -67,11 +127,6 @@ public class AlfredStorage {
         } else {
             return this.listToString(matches);
         }
-    }
-
-    public String taskToString(int taskId) throws InvalidIndexException {
-        this.checkValidListIndex(taskId);
-        return this.taskList.get(taskId).toString();
     }
 
     private String listToString(ArrayList<Task> taskList) {
@@ -117,7 +172,8 @@ public class AlfredStorage {
                         "Something went wrong trying to save the file: " + ioe.getMessage());
             }
         } catch (IOException ioe) {
-            System.out.println("Something went wrong trying to save the file: " + ioe.getMessage());
+            System.out.println(
+                    "Something went wrong trying to save the file: " + ioe.getMessage());
         }
     }
 }

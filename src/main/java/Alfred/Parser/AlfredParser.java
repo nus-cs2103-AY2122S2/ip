@@ -12,8 +12,19 @@ import Alfred.Command.ToDoCommand;
 import Alfred.Command.UnmarkCommand;
 import Alfred.Exceptions.InvalidCommandException;
 
+/**
+ * Encapsulates a parser used to identify the command
+ * being passed to the Alfred bot.
+ */
 public class AlfredParser {
 
+    /**
+     * Parses the input from the console.
+     *
+     * @param input String input from the console.
+     * @return Command object that can be executed.
+     * @throws InvalidCommandException if no valid command is identified in the input.
+     */
     public Command parseInput(String input) throws InvalidCommandException {
         // read in arguments
         String[] arguments = input.split(" ");

@@ -6,13 +6,34 @@ import Alfred.Task.Task;
 import Alfred.Task.ToDo;
 import Alfred.UI.AlfredUserInterface;
 
+/**
+ * Encapsulates the T0D0 command.
+ */
 public class ToDoCommand extends Command {
-    private String description;
 
+    private final String description;
+
+    /**
+     * Constructs a ToDoCommand object.
+     *
+     * @param input String input from the console. Assumes correct formatting,
+     *              where first word is "todo".
+     */
     public ToDoCommand(String input) {
         this.description = input.substring(4);
     }
 
+    /**
+     * Executes the T0D0 command, by adding a new task to the internal
+     * data state of Alfred and printing to console.
+     *
+     * @param ui      AlfredUserInterface object used by Alfred for handling
+     *                interactions with the user.
+     * @param storage AlfredStorage object used to handle the internal data
+     *                states of Alfred.
+     * @throws MissingInputException If there is no valid task description after
+     *                               the "todo" keyword.
+     */
     @Override
     public void execute(AlfredUserInterface ui, AlfredStorage storage)
             throws MissingInputException {
