@@ -1,22 +1,42 @@
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * Represents a task object that needs to be completed by
+ * a certain date.
+ */
 public class Deadline extends Task {
 
     private LocalDate date;
 
+    /**
+     * Creates a new Deadline object.
+     *
+     * @param description The title of the deadline task.
+     * @param dLine The date in which the task is due by.
+     */
     public Deadline(String description, LocalDate dLine) {
         super(description);
         this.date = dLine;
     }
 
+    /**
+     * Converts a string description of a deadline object.
+     *
+     * @return A string description of the deadline task.
+     */
     @Override
     public String toString() {
         String date = this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return "[D]" + this.getSymbol() + " " + this.getName() + " (by: " + date + ")";
     }
 
-    //Formats a line of text into a Deadline object
+    /**
+     * Creates a new Deadline object from a text input.
+     *
+     * @param input The string input which contains info on the deadline task.
+     * @return A new Deadline object.
+     */
     public static Deadline createDeadline(String input) throws StringIndexOutOfBoundsException, DukeException {
         String dlTask = input.substring(8); //Grabs all the text after the "deadline" command word
         dlTask = dlTask.trim();
@@ -33,6 +53,16 @@ public class Deadline extends Task {
         return new Deadline(dlDes.trim(), LocalDate.parse(dlDate.trim()));
     }
 
+    /**
+     * Creates a new Deadline object from a text input, a status value,
+     * and a date text.
+     *
+     * @param status Indicates if task is marked as completed or not. 1 being
+     * complete and 0 being incomplete.
+     * @param description The given title of the deadline task.
+     * @param date The due date of the deadline task.
+     * @return A new Deadline object.
+     */
     public static Deadline createDeadline(int status, String description, String date) {
         Deadline dl = new Deadline(description, LocalDate.parse(date));
         if (status == 1) {
@@ -41,6 +71,11 @@ public class Deadline extends Task {
         return dl;
     }
 
+    /**
+     * Formats a Deadline object to text.
+     *
+     * @return A text with information regarding the Deadline object.
+     */
     @Override
     public String formatText() {
         int status = (this.getStatus()) ? 1 : 0;
