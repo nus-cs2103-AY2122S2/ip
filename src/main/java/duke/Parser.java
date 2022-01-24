@@ -1,5 +1,8 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import duke.command.AddTaskCommand;
 import duke.command.ByeCommand;
 import duke.command.Command;
@@ -10,12 +13,7 @@ import duke.command.UnmarkCommand;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.TaskList;
 import duke.task.Todo;
-
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 public class Parser {
 
@@ -43,16 +41,16 @@ public class Parser {
                 String[] deadlineInputs = details.split(" /by ", 2);
                 if (deadlineInputs.length == 1 || deadlineInputs[1].strip().equals("")
                         || deadlineInputs[0].strip().equals("")) {
-                    throw new DukeException("Please specify a deadline task as\n" +
-                            "deadline [description] /by [date in yyyy-mm-dd format].");
+                    throw new DukeException("Please specify a deadline task as\n"
+                            + "deadline [description] /by [date in yyyy-mm-dd format].");
                 }
                 return new AddTaskCommand(new Deadline(deadlineInputs[0], LocalDate.parse(deadlineInputs[1])));
             case EVENT:
                 String[] eventInputs = details.split(" /at ", 2);
                 if (eventInputs.length == 1 || eventInputs[1].strip().equals("")
                         || eventInputs[0].strip().equals("")) {
-                    throw new DukeException("Please specify an event task as\n" +
-                            "event [description] /by [date in yyyy-mm-dd format].");
+                    throw new DukeException("Please specify an event task as\n"
+                            + "event [description] /by [date in yyyy-mm-dd format].");
                 }
                 return new AddTaskCommand(new Event(eventInputs[0], LocalDate.parse(eventInputs[1])));
             case MARK:
