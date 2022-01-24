@@ -105,6 +105,17 @@ public class Duke {
                 System.out.println(bar);
             } else if (command.matches(".*\\bdelete\\b.*")) {
                 int number = Integer.parseInt(inputArray[1]);
+
+                try {
+                    if (((number) <= 0) || ((number) > taskList.size())) {
+                        throw new DukeException("Hey! That item does not exist!");
+                    }
+                } catch (DukeException e) {
+                    System.err.println(e.getMessage());
+                    System.out.println("Please try again:");
+                    continue;
+                }
+
                 Task curr = taskList.get(number - 1);
                 String message = curr.getTaskIcon() + " [" + curr.getStatusIcon() + "]" + curr;
                 taskList.remove(curr);
