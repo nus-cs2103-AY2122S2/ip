@@ -1,7 +1,10 @@
+package main.java;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.io.Serializable;
 
-public class Deadline extends Task {
+public class Deadline extends Task implements Serializable {
 
     protected LocalDate by;
 

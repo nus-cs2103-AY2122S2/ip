@@ -1,8 +1,10 @@
+package main.java;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.io.Serializable;
 
-public class Event extends Task {
-
+public class Event extends Task implements Serializable {
     protected LocalDate at;
 
     public Event(String description, String at) {

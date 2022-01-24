@@ -1,4 +1,8 @@
-public class ToDo extends Task {
+package main.java;
+
+import java.io.Serializable;
+
+public class ToDo extends Task implements Serializable {
 
     public ToDo(String description) {
         super(description);
