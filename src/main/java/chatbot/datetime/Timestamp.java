@@ -1,15 +1,18 @@
+package chatbot.datetime;
+
+import chatbot.exception.ChatBotException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
-public class ChatBotDateTime {
+public class Timestamp {
 
     private final LocalDate date;
     private final LocalTime time;
 
-    public ChatBotDateTime(String input) throws ChatBotException {
+    public Timestamp(String input) throws ChatBotException {
         String[] firstSplit = input.split(" ");
         String dateHalf = firstSplit[0];
         String[] secondSplit = dateHalf.split("/");
@@ -69,8 +72,8 @@ public class ChatBotDateTime {
 
     @Override
     public boolean equals(Object other) {
-        if (other instanceof ChatBotDateTime) {
-            ChatBotDateTime dt = (ChatBotDateTime) other;
+        if (other instanceof Timestamp) {
+            Timestamp dt = (Timestamp) other;
             LocalDate otherDate = dt.getDate();
             if (otherDate != null) {
                 return otherDate.equals(date);

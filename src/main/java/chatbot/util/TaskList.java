@@ -1,3 +1,11 @@
+package chatbot.util;
+
+import chatbot.datetime.Timestamp;
+import chatbot.exception.ChatBotException;
+import chatbot.task.Deadline;
+import chatbot.task.Event;
+import chatbot.task.Task;
+import chatbot.task.ToDo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -29,10 +37,6 @@ public class TaskList {
         this.validTypes.add(EVENT);
     }
 
-    public List<Task> getList() {
-        return list;
-    }
-
     public Task getTask(int index) {
         return list.get(index);
     }
@@ -58,32 +62,24 @@ public class TaskList {
                 String title = data[2];
                 String datetime = data.length == 4 ? data[3] : "";
                 switch (type) {
-                    case "T":
-                        list.add(new ToDo(title, done));
-                        set.add(title);
-                        break;
-                    case "D":
-                        list.add(
-                            new Deadline(
-                                title,
-                                done,
-                                new ChatBotDateTime(datetime)
-                            )
-                        );
-                        set.add(title);
-                        break;
-                    case "E":
-                        list.add(
-                            new Event(
-                                title,
-                                done,
-                                new ChatBotDateTime(datetime)
-                            )
-                        );
-                        set.add(title);
-                        break;
-                    default:
-                        System.out.println("error");
+                case "T":
+                    list.add(new ToDo(title, done));
+                    set.add(title);
+                    break;
+                case "D":
+                    list.add(
+                        new Deadline(title, done, new Timestamp(datetime))
+                    );
+                    set.add(title);
+                    break;
+                case "E":
+                    list.add(
+                        new Event(title, done, new Timestamp(datetime))
+                    );
+                    set.add(title);
+                    break;
+                default:
+                    System.out.println("error");
                 }
             }
         } catch (FileNotFoundException e) {
@@ -98,12 +94,12 @@ public class TaskList {
     }
 
     public void save(File f) throws ChatBotException {
-        try (FileWriter fw = new FileWriter(f);) {
+        try (FileWriter fw = new FileWriter(f)) {
             for (Task t : list) {
                 String type = t.getType();
                 String title = t.getTitle();
                 String done = t.isCompleted();
-                ChatBotDateTime datetime = t.getDateTime();
+                Timestamp datetime = t.getDateTime();
 
                 String data = String.format("%s&%s&%s", type, done, title);
                 if (datetime != null) {
@@ -117,7 +113,7 @@ public class TaskList {
             }
         } catch (IOException e) {
             throw new ChatBotException(
-                "Opps! Something went wrong while writing to your save file traveller!"
+                "Oops! Something went wrong while writing to your save file traveller!"
             );
         }
     }
@@ -166,7 +162,7 @@ public class TaskList {
                             "The correct format for adding a deadline is deadline <name of task> /by <timestamp of task>"
                         );
                     } else {
-                        ChatBotDateTime by = new ChatBotDateTime(other);
+                        Timestamp by = new Timestamp(other);
                         Deadline deadline = new Deadline(title, by);
                         list.add(deadline);
                         return String.format(
@@ -180,7 +176,7 @@ public class TaskList {
                             "The correct format for adding an event is event <name of task> /at <timestamp of task>"
                         );
                     } else {
-                        ChatBotDateTime at = new ChatBotDateTime(other);
+                        Timestamp at = new Timestamp(other);
                         Event event = new Event(title, at);
                         list.add(event);
                         return String.format(
@@ -256,12 +252,11 @@ public class TaskList {
         return listAsString(list);
     }
 
-    public String getTasksOnDate(ChatBotDateTime date) {
+    public String getTasksOnDate(Timestamp date) {
         List<Task> filtered = list
             .stream()
             .filter(t -> date.equals(t.getDateTime()))
             .collect(Collectors.toList());
-
         if (filtered.isEmpty()) {
             return "You have no tasks on this date traveller!";
         } else {
@@ -275,7 +270,7 @@ public class TaskList {
             String taskString = String.format(
                 "             %d. %s%n",
                 i + 1,
-                list.get(i)
+                tasks.get(i)
             );
             res = res.concat(taskString);
         }

@@ -1,3 +1,5 @@
+package chatbot.util;
+
 import java.util.Random;
 
 public class Ui {
@@ -29,13 +31,18 @@ public class Ui {
         this.random = new Random();
     }
 
-    public void greet() {
+    public void greet(boolean isEmpty) {
         System.out.println(BORDER + "\n");
         chat("Greetings, traveller!");
         // chat(getRandomGreetingQuote());
-        chat(
-            "I'm the innkeeper and im here to help you with whatever you need."
-        );
+        if (isEmpty) {
+            chat(
+                "I'm the innkeeper and im here to help you with whatever you need."
+            );
+        } else {
+            chat("I've loaded up the tasks from your save file!");
+        }
+
     }
 
     public void bye() {
