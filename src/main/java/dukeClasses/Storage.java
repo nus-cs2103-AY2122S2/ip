@@ -15,17 +15,37 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Modifies the storage file that is used in permenant storage of data.
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Constructor for Storage.
+     *
+     * @param filePath that indicates the path of the storage file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Returns the path of the storage file
+     *
+     * @return String representing the path of the storage file.
+     */
     public String getStorageFilePath(){
         return filePath;
     }
 
+    /**
+     * Loads data of the storage file into an ArrayList</Task>. Usually called at the start of Duke.
+     *
+     * @return ArrayList</Task> that represents the data of the storage file given in the file path.
+     * @throws DukeException If data in storage file is corrupted and not able to be converted to
+     *                       individual tasks.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<Task>();
         File file = new File(filePath);
@@ -81,6 +101,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Updates the storage file
+     *
+     * @param dataArrList ArrayList</Task> that represents the updated taskList.
+     * @throws DukeException If file is not writeable.
+     */
     public void updateStorage(ArrayList<Task> dataArrList) throws DukeException {
         File file = new File(filePath);
         String updatedFileContents = "";
@@ -97,6 +123,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Adds a new task to the storage file.
+     *
+     * @param task Task that is to be added to the end of the storage file.
+     * @throws DukeException If file is not writeable.
+     */
     public void appendToStorage(Task task) throws DukeException {
         File file = new File(filePath);
         try {

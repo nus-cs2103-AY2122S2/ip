@@ -2,6 +2,10 @@ package dukeClasses;
 
 import java.util.Scanner;
 
+/**
+ * Represent a program that reads commands from user input and logs them into tasks that are
+ * stored for tracking whenever the program is booted up.
+ */
 public class Duke {
 
     private static final String TEXT_DATA_FILE_PATH = "data.txt";
@@ -9,6 +13,11 @@ public class Duke {
     private Ui ui;
     private TaskList tasks;
 
+    /**
+     * Constructor for Duke.
+     *
+     * @param filePath String indicating path of permanent storage file.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -20,6 +29,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the program.
+     */
     public void run(){
         ui.greet();
         Scanner sc = new Scanner(System.in);
@@ -126,6 +138,11 @@ public class Duke {
         sc.close();
     }
 
+    /**
+     * Initiates the program by calling the driving method run().
+     *
+     * @param args String array that represents the supplied command line arguments.
+     */
     public static void main(String[] args) {
         new Duke(TEXT_DATA_FILE_PATH).run();
     }

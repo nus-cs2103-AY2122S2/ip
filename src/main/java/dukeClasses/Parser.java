@@ -3,8 +3,18 @@ package dukeClasses;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a Parser that parses user input to make sense of what the user inputs.
+ */
 public class Parser {
 
+    /**
+     * Parses the user input.
+     *
+     * @param userCommand String that the user inputs.
+     * @return ParsedCommand that denotes the command and other relevant information if the user input is valid.
+     * @throws DukeException If user input is invalid.
+     */
     public static ParsedCommand parse(String userCommand) throws DukeException{
         String[] parsedCommand = userCommand.split(" ", 2);
         parsedCommand[0] = parsedCommand[0].trim();
