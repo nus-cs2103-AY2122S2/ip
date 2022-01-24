@@ -1,14 +1,14 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class TaskStorage {
-    private String description;
+public class Task {
+    private final String description;
     private boolean isComplete;
-    private String type;
+    private final String type;
     private LocalDate time;
-    private String command;
+    private final String command;
 
-    public TaskStorage(String description, String type) {
+    public Task(String description, String type) {
         int slashIndex;
         int command;
         if (! type.equals("T")) {
@@ -44,10 +44,11 @@ public class TaskStorage {
             done = "0";
         }
 
-        if (this.time.equals("")) {
+        if (this.command.equals("")) {
             timeDue = " |";
         } else {
-            timeDue = "| " + command + " " +  this.time + " |";
+            timeDue = "| " + command + " " +
+                    this.time.format(DateTimeFormatter.ofPattern("d/M/yyyy")) + " |";
         }
 
         return "| " + type + " | " + done + " | " + description + timeDue;
