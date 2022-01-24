@@ -8,6 +8,8 @@ import tasks.Task;
 import tasks.ToDo;
 import ui.UiManager;
 
+import java.time.format.DateTimeParseException;
+
 
 public class AddTaskCommand extends Command{
     private String description;
@@ -44,19 +46,23 @@ public class AddTaskCommand extends Command{
     }
 
     public void execute() {
-        switch (type) {
-            case TODO:
-                Task newToDo = new ToDo(this.description);
-                taskManager.addTask(newToDo);
-                break;
-            case DEADLINE:
-                Task newDeadline = new Deadline(this.description, this.date);
-                taskManager.addTask(newDeadline);
-                break;
-            case EVENT:
-                Task newEvent = new Event(this.description, this.date);
-                taskManager.addTask(newEvent);
-                break;
+        try {
+            switch (type) {
+                case TODO:
+                    Task newToDo = new ToDo(this.description);
+                    taskManager.addTask(newToDo);
+                    break;
+                case DEADLINE:
+                    Task newDeadline = new Deadline(this.description, this.date);
+                    taskManager.addTask(newDeadline);
+                    break;
+                case EVENT:
+                    Task newEvent = new Event(this.description, this.date);
+                    taskManager.addTask(newEvent);
+                    break;
+            }
+        } catch (DateTimeParseException e) {
+            uiManager.errorMessage("Invalid date! Please use the format 'YYYY-MM-DD'");
         }
     }
 }

@@ -17,13 +17,31 @@ Now you have 2 item(s) in your list
 -------------------------------------------
 -------------------------------------------
 Got it, I added:
-[D][ ] return book (by: Sunday)
+[D][ ] return book (by: 1 JANUARY 2022)
 Now you have 3 item(s) in your list
 -------------------------------------------
 -------------------------------------------
+Invalid date! Please use the format 'YYYY-MM-DD'
+-------------------------------------------
+-------------------------------------------
+Invalid date! Please use the format 'YYYY-MM-DD'
+-------------------------------------------
+-------------------------------------------
+Invalid date! Please use the format 'YYYY-MM-DD'
+-------------------------------------------
+-------------------------------------------
 Got it, I added:
-[E][ ] project meeting (at: Mon 2-4pm)
+[E][ ] project meeting (at: 1 JANUARY 2022)
 Now you have 4 item(s) in your list
+-------------------------------------------
+-------------------------------------------
+Invalid date! Please use the format 'YYYY-MM-DD'
+-------------------------------------------
+-------------------------------------------
+Invalid date! Please use the format 'YYYY-MM-DD'
+-------------------------------------------
+-------------------------------------------
+Invalid date! Please use the format 'YYYY-MM-DD'
 -------------------------------------------
 -------------------------------------------
 Done? Checked it off for you:
@@ -33,8 +51,8 @@ Done? Checked it off for you:
 Here's your list, Good Sir:
 1. [T][ ] buy bread
 2. [T][X] borrow book
-3. [D][ ] return book (by: Sunday)
-4. [E][ ] project meeting (at: Mon 2-4pm)
+3. [D][ ] return book (by: 1 JANUARY 2022)
+4. [E][ ] project meeting (at: 1 JANUARY 2022)
 -------------------------------------------
 -------------------------------------------
 Not done? Let me put it back for you:
@@ -44,8 +62,8 @@ Not done? Let me put it back for you:
 Here's your list, Good Sir:
 1. [T][ ] buy bread
 2. [T][ ] borrow book
-3. [D][ ] return book (by: Sunday)
-4. [E][ ] project meeting (at: Mon 2-4pm)
+3. [D][ ] return book (by: 1 JANUARY 2022)
+4. [E][ ] project meeting (at: 1 JANUARY 2022)
 -------------------------------------------
 -------------------------------------------
 I don't think we have that task!
@@ -55,8 +73,8 @@ Use 'list' to check
 Here's your list, Good Sir:
 1. [T][ ] buy bread
 2. [T][ ] borrow book
-3. [D][ ] return book (by: Sunday)
-4. [E][ ] project meeting (at: Mon 2-4pm)
+3. [D][ ] return book (by: 1 JANUARY 2022)
+4. [E][ ] project meeting (at: 1 JANUARY 2022)
 -------------------------------------------
 -------------------------------------------
 I don't think we have that task!
@@ -66,8 +84,8 @@ Use 'list' to check
 Here's your list, Good Sir:
 1. [T][ ] buy bread
 2. [T][ ] borrow book
-3. [D][ ] return book (by: Sunday)
-4. [E][ ] project meeting (at: Mon 2-4pm)
+3. [D][ ] return book (by: 1 JANUARY 2022)
+4. [E][ ] project meeting (at: 1 JANUARY 2022)
 -------------------------------------------
 -------------------------------------------
 Give me the task number in numbers please!
@@ -76,19 +94,19 @@ Give me the task number in numbers please!
 Here's your list, Good Sir:
 1. [T][ ] buy bread
 2. [T][ ] borrow book
-3. [D][ ] return book (by: Sunday)
-4. [E][ ] project meeting (at: Mon 2-4pm)
+3. [D][ ] return book (by: 1 JANUARY 2022)
+4. [E][ ] project meeting (at: 1 JANUARY 2022)
 -------------------------------------------
 -------------------------------------------
 I removed this task for you:
-[D][ ] return book (by: Sunday)
+[D][ ] return book (by: 1 JANUARY 2022)
 Now you have 3 items in your list
 -------------------------------------------
 -------------------------------------------
 Here's your list, Good Sir:
 1. [T][ ] buy bread
 2. [T][ ] borrow book
-3. [E][ ] project meeting (at: Mon 2-4pm)
+3. [E][ ] project meeting (at: 1 JANUARY 2022)
 -------------------------------------------
 -------------------------------------------
 I don't think we have that task!

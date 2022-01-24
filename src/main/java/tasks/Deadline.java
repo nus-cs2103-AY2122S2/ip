@@ -1,16 +1,15 @@
 package tasks;
-
-import exceptions.DateException;
+import java.time.LocalDate;
 
 public class Deadline extends Task {
     private String item;
-    private String date;
+    private LocalDate date;
     private boolean done;
-    private String line = "-------------------------------------------";
 
     public Deadline(String details, String date) {
         this.item = details;
-        this.date = date;
+        date = date.stripLeading();
+        this.date = LocalDate.parse(date);
     }
 
     @Override
@@ -32,10 +31,22 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         if (done) {
-            return "[D]"+"[X] " + item + "(by:" + date + ")";
+            return "[D]"+"[X] " + item + "(by: " +
+                    date.getDayOfMonth() +
+                    " " +
+                    date.getMonth() +
+                    " " +
+                    date.getYear() +
+                    ")";
         }
         else {
-            return "[D]"+"[ ] "+ item + "(by:" + date + ")";
+            return "[D]"+"[ ] "+ item + "(by: " +
+                    date.getDayOfMonth() +
+                    " " +
+                    date.getMonth() +
+                    " " +
+                    date.getYear() +
+                    ")";
         }
     }
 }
