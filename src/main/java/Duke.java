@@ -13,7 +13,7 @@ public class Duke {
             String command = ui.readInput();
             isRunning = ui.printCommand((linePrinter) -> {
                 try {
-                    return Parser.parse(command, linePrinter, taskList);
+                    return Parser.parse(command).execute(linePrinter, taskList);
                 } catch (DukeException ex) {
                     ui.printError(linePrinter, ex);
                 }
