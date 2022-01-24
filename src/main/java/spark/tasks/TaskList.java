@@ -49,7 +49,8 @@ public class TaskList {
         showNumberOfTasks();
     }
 
-    public void addDeadline(String[] tokens) throws EmptyTitleException, EmptyDateException, FileException {
+    public void addDeadline(String[] tokens) throws EmptyTitleException,
+            EmptyDateException, FileException {
         List<String> firstHalf = new ArrayList<>();
         List<String> secondHalf = new ArrayList<>();
 
@@ -89,7 +90,8 @@ public class TaskList {
         showNumberOfTasks();
     }
 
-    public void addEvent(String[] tokens) throws EmptyTitleException, EmptyDateException, FileException {
+    public void addEvent(String[] tokens) throws EmptyTitleException,
+            EmptyDateException, FileException {
         List<String> firstHalf = new ArrayList<>();
         List<String> secondHalf = new ArrayList<>();
 
@@ -129,7 +131,8 @@ public class TaskList {
         showNumberOfTasks();
     }
 
-    public void markTask(String[] tokens) throws TaskNotFoundException, TaskAlreadyMarked, InvalidTaskIdException, FileException {
+    public void markTask(String[] tokens) throws TaskNotFoundException,
+            TaskAlreadyMarked, InvalidTaskIdException, FileException {
         int taskId = getTaskId(tokens[1]);
 
         int index = taskId - 1;
@@ -143,7 +146,8 @@ public class TaskList {
         System.out.format("   %s\n", t);
     }
 
-    public void unMarkTask(String[] tokens) throws TaskNotFoundException, TaskAlreadyUnMarked, InvalidTaskIdException, FileException {
+    public void unMarkTask(String[] tokens) throws TaskNotFoundException,
+            TaskAlreadyUnMarked, InvalidTaskIdException, FileException {
         int taskId = getTaskId(tokens[1]);
 
         int index = taskId - 1;
@@ -157,7 +161,8 @@ public class TaskList {
         System.out.format("   %s\n", t);
     }
 
-    public void deleteTask(String[] tokens) throws TaskNotFoundException, InvalidTaskIdException, FileException {
+    public void deleteTask(String[] tokens) throws TaskNotFoundException,
+            InvalidTaskIdException, FileException {
         int taskId = getTaskId(tokens[1]);
 
         int index = taskId - 1;
