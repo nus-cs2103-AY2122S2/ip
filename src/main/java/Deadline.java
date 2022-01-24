@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 /**
@@ -50,7 +49,10 @@ public class Deadline extends Task {
         if (dlDate.trim().equals("") || dlDes.trim().equals("")) {
             throw new DukeException("No valid date/description entered");
         }
-        return new Deadline(dlDes.trim(), LocalDate.parse(dlDate.trim()));
+        Deadline dl = new Deadline(dlDes.trim(), LocalDate.parse(dlDate.trim()));
+        System.out.println("Got it! I've added this task:");
+        System.out.println(dl.toString());
+        return dl;
     }
 
     /**

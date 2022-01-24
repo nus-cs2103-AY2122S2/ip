@@ -26,7 +26,10 @@ public class Event extends Task {
         if (evDate.trim().equals("") || evDate.trim().equals("")) {
             throw new DukeException("No valid date/description entered");
         }
-        return new Event(evDes.trim(), evDate);
+        Event ev = new Event(evDes.trim(), evDate);
+        System.out.println("Got it! I've added this task:");
+        System.out.println(ev.toString());
+        return ev;
     }
 
     public static Event createEvent(int status, String description, String date) {

@@ -15,7 +15,10 @@ public class Todo extends Task {
         if (tdTask.trim().equals("")) {
             throw new DukeException("Empty description for Todo object");
         }
-        return new Todo(tdTask.trim());
+        Todo td = new Todo(tdTask.trim());
+        System.out.println("Got it! I've added this task:");
+        System.out.println(td.toString());
+        return td;
     }
 
     public static Todo createTodo(int status, String description) {
