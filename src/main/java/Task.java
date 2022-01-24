@@ -26,4 +26,7 @@ public class Task {
         return this.getStatusIcon() + " " + this.description;
     }
 
+    public String taskDescriptionForFile() {
+        return null;
+    }
 }
