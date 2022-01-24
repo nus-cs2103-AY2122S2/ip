@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -111,6 +112,32 @@ public class TaskList {
         } else {
             tasks.get(index - 1).setDone(false);
             printList();
+        }
+    }
+
+    /**
+     * find any matching keyword(s) in text to any tasks in the taskList and print them out
+     *
+     * @param text keyword(s) to find
+     * @throws DukeException if there are no matches for the keyword
+     */
+    public void find(String text) throws DukeException {
+        ArrayList<String> toPrint = new ArrayList<>();
+        for (int i  = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            String taskName = task.getTaskName().toLowerCase();
+            if (taskName.contains(text.toLowerCase())) {
+                String result = "Index in taskList: " + (i+1) + " || Task Details: " + task.toString();
+                toPrint.add(result);
+            }
+        }
+        if (toPrint.size() == 0) {
+            throw new DukeException("no matches found for this keyword(s)");
+        } else {
+            System.out.println("Here are the matching tasks in your list: ");
+            for (String s: toPrint) {
+                System.out.println(s);
+            }
         }
     }
 }

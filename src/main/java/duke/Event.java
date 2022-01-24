@@ -50,10 +50,10 @@ public class Event extends Task{
         //print task type
         System.out.print("[E]");
         //print task done symbol
-        if(this.done){
-            System.out.print("[X] " + this.taskName + " ");
+        if(this.getDone()){
+            System.out.print("[X] " + this.getTaskName() + " ");
         } else {
-            System.out.print("[ ] " + this.taskName + " ");
+            System.out.print("[ ] " + this.getTaskName() + " ");
         }
         printDate();
     }
@@ -62,12 +62,12 @@ public class Event extends Task{
     public String toString(){
         String res = "";
         res += "[E]";
-        if(this.done){
+        if(this.getDone()){
             res += "[X]";
         } else {
             res += "[ ]";
         }
-        res += this.taskName + " (at: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        res += " " + this.getTaskName() + " (at: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         if((this.time != null)){
             res += " " + this.time.format(DateTimeFormatter.ofPattern(("HH:mm")));
         }

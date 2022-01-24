@@ -2,8 +2,8 @@ package duke;
 
 public class Task {
     //Attributes of a task
-    String taskName;
-    boolean done;
+    private String taskName;
+    private boolean done;
 
     public Task(String taskName){
         this.taskName = taskName;
@@ -14,11 +14,23 @@ public class Task {
         this.done = done;
     }
 
+    public boolean getDone() {
+        return this.done;
+    }
+
+    public String getTaskName() {
+        return taskName;
+    }
+
+    public void setTaskName(String newName) {
+        this.taskName = newName;
+    }
+
     public void printTask(){
-        if(this.done){
-            System.out.println("[X] " + this.taskName);
+        if(this.getDone()){
+            System.out.println("[X] " + this.getTaskName());
         } else {
-            System.out.println("[ ] " + this.taskName);
+            System.out.println("[ ] " + this.getTaskName());
         }
     }
 }
