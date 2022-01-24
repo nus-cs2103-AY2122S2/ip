@@ -140,6 +140,16 @@ public class Ui {
     }
 
     /**
+     * Displays the tasks found from a FindCommand execution.
+     *
+     * @param findResults the tasks found, in the form of a task list.
+     */
+    public void showFindResult(TaskList findResults) {
+        System.out.println("Here are the matching tasks in your task list:");
+        System.out.println(findResults);
+    }
+
+    /**
      * Displays a goodbye message.
      */
     public void showGoodbye() {
