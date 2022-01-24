@@ -2,6 +2,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -55,15 +58,12 @@ public class Chi {
             }
             return new Todo(splitTask[2], false);
         } else if (splitTask[0].equals("D")) {
-            if (splitTask[1].equals("1")) {
-                return new Deadline(splitTask[2], splitTask[3], true);
-            }
-            return new Deadline(splitTask[2], splitTask[3], false);
+            return new Deadline(splitTask[2], LocalDate.parse(splitTask[3], DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                    LocalTime.parse(splitTask[4], DateTimeFormatter.ofPattern("HH:mm")), splitTask[1].equals("1"));
         } else {
-            if (splitTask[1].equals("1")) {
-                return new Event(splitTask[2], splitTask[3], true);
-            }
-            return new Event(splitTask[2], splitTask[3], false);
+            return new Event(splitTask[2], LocalDate.parse(splitTask[3], DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                    LocalTime.parse(splitTask[4], DateTimeFormatter.ofPattern("HH:mm")),
+                    LocalTime.parse(splitTask[5], DateTimeFormatter.ofPattern("HH:mm")), splitTask[1].equals("1"));
             }
     }
 
@@ -139,7 +139,17 @@ public class Chi {
                         throw new ChiException("deadline");
                     }
                     // Create new Deadline object
-                    Task newTask1 = new Deadline(content[0].trim(), content[1].trim(), false);
+                    LocalDate d = LocalDate.parse(content[1].trim().split(" ")[0].trim(),
+                            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                    LocalTime t;
+                    Task newTask1;
+                    if (content[1].trim().split(" ").length == 2) {
+                        t = LocalTime.parse(content[1].trim().split(" ")[1].trim(),
+                                DateTimeFormatter.ofPattern("HH:mm"));
+                        newTask1 = new Deadline(content[0].trim(), d, t, false);
+                    } else {
+                        newTask1 = new Deadline(content[0].trim(), d, false);
+                    }
                     this.addTask(newTask1);
                     System.out.printf("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n",
                             newTask1, messages.size());
@@ -152,7 +162,20 @@ public class Chi {
                         throw new ChiException("event");
                     }
                     // Create new Event object
-                    Task newTask2 = new Event(content1[0].trim(), content1[1].trim(), false);
+                    LocalDate ds = LocalDate.parse(content1[1].trim().split(" ")[0].trim(),
+                            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                    LocalTime t1;
+                    LocalTime t2;
+                    Task newTask2;
+                    if (content1[1].trim().split(" ").length == 2) {
+                        t1 = LocalTime.parse(content1[1].trim().split(" ")[1].trim().split("-")[0],
+                                DateTimeFormatter.ofPattern("HH:mm"));
+                        t2 = LocalTime.parse(content1[1].trim().split(" ")[1].trim().split("-")[1],
+                                DateTimeFormatter.ofPattern("HH:mm"));
+                        newTask2 = new Event(content1[0].trim(), ds, t1, t2, false);
+                    } else {
+                        newTask2 = new Event(content1[0].trim(), ds, false);
+                    }
                     this.addTask(newTask2);
                     System.out.printf("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n",
                             newTask2, messages.size());

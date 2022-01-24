@@ -1,24 +1,40 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
 
     /** Stores the time span of the event. */
-    private String duration;
+    private LocalDate date;
+    private LocalTime time1;
+    private LocalTime time2;
 
     /**
      * Constructor of Event class.
      * @param description The description of the event.
-     * @param duration The time span of the event.
+     * @param date The time span of the event.
      */
-    public Event(String description, String duration, boolean isDone) {
+
+    public Event(String description, LocalDate date, boolean isDone ) {
         super(description);
-        this.duration = duration;
+        this.date=  date;
         if (isDone) {
             this.markAsDone();
         }
     }
-    @Override
-    public String writeToFile() {
-        return " E " + super.writeToFile() + " | " + this.duration;
+    public Event(String description, LocalDate date, LocalTime t1, LocalTime t2, boolean isDone ) {
+        super(description);
+        this.date=  date;
+        this.time1 = t1;
+        this.time2 = t2;
+        if (isDone) {
+            this.markAsDone();
+        }
     }
+        @Override
+        public String writeToFile() {
+            return " E " + super.writeToFile() + " | " + this.date + " | " + this.time1 + " | " + this.time2;
+        }
 
     /**
      * Returns the task in proper format.
@@ -26,6 +42,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.duration + ")";
+        return "[E]" + super.toString() + " (at: " + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " to " + time1.format(DateTimeFormatter.ofPattern("hh: mm a")) + " " + time2.format(DateTimeFormatter.ofPattern("hh: mm a")) + " " + ")";
     }
 }
