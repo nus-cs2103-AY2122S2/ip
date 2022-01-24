@@ -17,6 +17,11 @@ import duke.task.Todo;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+
+/**
+ * Encapsulates a parser for Duke. It makes sense
+ * of the inputs supplied by the user.
+ */
 public class Parser {
 
     private static final String TODO = "todo";
@@ -28,6 +33,13 @@ public class Parser {
     private static final String UNMARK = "unmark";
     private static final String BYE = "bye";
 
+    /**
+     * Parses user inputs to produce commands understood by Duke.
+     * @param userInput the user input
+     * @param taskListLength the length of Duke's task list.
+     * @return a Command object that executes the user's command.
+     * @throws DukeException for invalid user inputs.
+     */
     public static Command parse(String userInput, int taskListLength) throws DukeException {
         String[] inputArr = userInput.split(" ", 2);
         String commandString = inputArr[0];

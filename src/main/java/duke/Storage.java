@@ -12,15 +12,32 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+/**
+ * Encapsulates a storage for Duke. It deals with
+ * saving data to and loading data from a txt file.
+ */
 public class Storage {
     private String dirPath;
     private String fileName;
 
+    /**
+     * Initialises a Storage object.
+     *
+     * @param dirPath path to the directory where the txt file is stored.
+     * @param fileName name of the txt file.
+     */
     public Storage(String dirPath, String fileName) {
         this.dirPath = dirPath;
         this.fileName = fileName;
     }
 
+    /**
+     * Loads data from the txt file in this Storage object
+     * into a given TaskList object.
+     *
+     * @param taskList the TaskList object to populate with the data.
+     * @param ui the user interface of Duke.
+     */
     public void loadData(TaskList taskList, Ui ui) {
         File taskDataDir = new File(this.dirPath);
         taskDataDir.mkdirs();
@@ -51,7 +68,13 @@ public class Storage {
             ui.showLoadingError(e.getMessage());
         }
     }
-
+    /**
+     * Overwrites the txt file in this <Code>Storage</Code> object
+     * with data from a given <Code>TaskList</Code> object.
+     *
+     * @param taskList the <Code>TaskList</Code> object you want to save.
+     * @param ui the user interface of Duke.
+     */
     public void saveData(TaskList taskList, Ui ui) {
         StringBuilder tasksToSave = new StringBuilder();
         for (int i = 1; i < taskList.getLength()+1; i++) {

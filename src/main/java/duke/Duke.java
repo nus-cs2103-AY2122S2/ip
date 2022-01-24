@@ -4,6 +4,12 @@ import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.command.Command;
 
+/**
+ * Encapsulates the Duke task manager bot.
+ *
+ * @author William Ming
+ * @version 0.1
+ */
 public class Duke {
 
     private TaskList taskList;
@@ -31,6 +37,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the application by initialising and running a Duke bot.
+     *
+     * @param args command-line arguments, if any
+     */
     public static void main(String[] args) {
         new Duke("data", "duke.txt").run();
     }
