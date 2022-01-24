@@ -108,7 +108,7 @@ public class Ui {
     public static String scheduleEmptyMessage() {
         return LINE + "\nThere is nothing happening on this day! Hooray~\n" + LINE;
     }
-    
+
     /**
      * Prints out the list of tasks on a particular date
      *
