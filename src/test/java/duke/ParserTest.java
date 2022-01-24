@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
     @Test
-    public void byeCommand(){
+    public void byeCommand_testReturn_true(){
         TaskList taskList = new TaskList();
         Parser p = new Parser();
         try {
@@ -16,7 +16,7 @@ public class ParserTest {
     }
 
     @Test
-    public void todoNoExit() {
+    public void todoTest_addToTaskList_false() {
         TaskList taskList = new TaskList();
         Parser p = new Parser();
         try {
@@ -27,7 +27,7 @@ public class ParserTest {
     }
 
     @Test
-    public void eventOutputDateTimeException() throws DukeException{
+    public void eventOutput_DateTimeException() throws DukeException{
         TaskList taskList = new TaskList();
         Parser p = new Parser();
         try{

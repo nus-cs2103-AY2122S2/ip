@@ -1,34 +1,48 @@
 package duke;
 
+/**
+ * Class that specifically deals with input from the user and calls the respective class and methods
+ */
 public class Parser {
+    /**
+     * Empty constructor for the Parser class
+     */
     public Parser() {}
 
+    /**
+     * Method to take in the input that is passed by the user and makes sense of what to do from the input
+     *
+     * @param input String input by the user
+     * @param taskList Current taskList
+     * @return a boolean to check when to stop taking inputs from the user
+     * @throws DukeException checks for any invalid instructions that have been inputted by the user
+     */
     public boolean takeInput(String input, TaskList taskList) throws DukeException {
-        if(input.equals("bye")) {
+        if (input.equals("bye")) {
             System.out.println("~BYE!~ Come back to Duke anytime");
             return true;
         }
 
         //Check if input == list
-        else if(input.equals("list")) {
+        else if (input.equals("list")) {
             taskList.printList();
         }
 
-        //new instruction to reset the arraylist
-        else if(input.equals("reset")) {
+        //Instruction to reset the arraylist
+        else if (input.equals("reset")) {
             taskList.reset();
             System.out.println("List of tasks has been resetted");
         }
 
         //Check if input == unmark or delete or mark
         else if(input.contains("unmark") || input.contains("delete") || input.contains("mark")) {
-            String[] splitted = input.split("\\s+");
-            String instr = splitted[0];
-            if (splitted.length < 2) {
+            String[] splitString = input.split("\\s+");
+            String instr = splitString[0];
+            if (splitString.length < 2) {
                 System.out.println("Did you miss out the index in your input?");
             } else {
                 try {
-                    int index = Integer.parseInt(splitted[1]);
+                    int index = Integer.parseInt(splitString[1]);
                     if (instr.equals("unmark")) {
                         taskList.unmarkTask(index);
                     } else if (instr.equals("mark")) {
@@ -44,33 +58,34 @@ public class Parser {
             }
         }
 
-        //input is a new type of task
+        //input is a new type of task - todo/event/deadline
         else if(input.contains("todo") || input.contains("event") || input.contains("deadline")) {
             //identify type of task
-            String[] arr = input.split(" ", 2);
+            String[] stringArray = input.split(" ", 2);
 
-            if(arr.length < 2){
+            //task has no task detail/name
+            if (stringArray.length < 2) {
                 throw new DukeException("Description of task cannot be empty!");
             }
 
-            String taskType = arr[0];
-            String taskDetails = arr[1];
+            String taskType = stringArray[0];
+            String taskDetails = stringArray[1];
 
             Task newTask = new Task("");
 
-            if(taskType.equals("todo")){
+            if (taskType.equals("todo")) {
                 newTask = new Todo(taskDetails);
-            } else if(taskType.equals("deadline")){
-                String[] spl = taskDetails.split("/by");
-                if(spl.length < 2){
+            } else if (taskType.equals("deadline")) {
+                String[] stringSplit = taskDetails.split("/by");
+                if (stringSplit.length < 2) {
                     throw new DukeException("Description of deadline must include a date/time! Did you miss out a /by?");
                 }
-                String details = spl[0].trim();
-                String dateTime = spl[1].trim();
+                String details = stringSplit[0].trim();
+                String dateTime = stringSplit[1].trim();
                 newTask = new Deadline(details,dateTime);
-            } else if(taskType.equals("event")){
+            } else if (taskType.equals("event")) {
                 String[] spl = taskDetails.split("/at");
-                if(spl.length < 2){
+                if (spl.length < 2) {
                     throw new DukeException("Description of event must include a date/time! Did you miss out a /at?");
                 }
                 String details = spl[0].trim();

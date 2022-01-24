@@ -5,14 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskTest {
     @Test
-    public void todoTest(){
+    public void todoTest_printMessage(){
         String expectedResult = "[T][ ]buy groceries";
         Task todo = new Todo("buy groceries");
         assertEquals(expectedResult, todo.toString());
     }
 
     @Test
-    public void eventTestNoTime(){
+    public void eventTestNoTime_printMessage(){
         String expectedResult = "[E][ ]dinner with family (at: Jan 1 2022)";
         Task todo = null;
         try {
@@ -24,7 +24,7 @@ public class TaskTest {
     }
 
     @Test
-    public void deadlineTestNoTime(){
+    public void deadlineTestNoTime_printMessage(){
         String expectedResult = "[D][ ]Complete Tutorial (by: Jan 2 2022)";
         Task todo = null;
         try {
@@ -36,7 +36,7 @@ public class TaskTest {
     }
 
     @Test
-    public void eventTestTime(){
+    public void eventTestTime_printMessage(){
         String expectedResult = "[E][ ]dinner with family (at: Jan 1 2022 16:00)";
         Task todo = null;
         try {
@@ -48,7 +48,7 @@ public class TaskTest {
     }
 
     @Test
-    public void deadlineTestTime(){
+    public void deadlineTestTime_printMessage(){
         String expectedResult = "[D][ ]Complete Tutorial (by: Jan 2 2022 23:00)";
         Task todo = null;
         try {
