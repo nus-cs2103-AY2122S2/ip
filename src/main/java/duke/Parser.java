@@ -5,8 +5,21 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Parses the input given from the user and performs the required actions.
+ *
+ * @author Abdulelah Faisal S Al Ghrairy
+ */
 public class Parser {
 
+    /**
+     * Processes the message given by the user.
+     * @param message the message inputted by user
+     * @param tasks the object representing the list of tasks
+     * @param storage the object representing the stored tasks
+     * @return Confirmation message for the user
+     * @throws DukeException throws if the format of the message was incorrect, or if the message was not understood
+     */
     public String processMessage(String message, TaskList tasks, Storage storage) throws DukeException {
         String currMessage;
         Task currTask;

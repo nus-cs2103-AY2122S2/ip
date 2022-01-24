@@ -15,6 +15,10 @@ public class Duke {
     private final Storage storage;
     private TaskList tasks;
 
+    /**
+     * Constructor for the Chatbot.
+     * @param filepath the file path for the text file containing tasks to be stored
+     */
     public Duke(String filepath) {
         ui = new Ui();
         storage = new Storage(filepath);
@@ -33,6 +37,9 @@ public class Duke {
         new Duke("data/duke.txt").run();
     }
 
+    /**
+     * Runs the ChatBot program
+     */
     public void run() {
         ui.showWelcomeMessage();
         ui.userInput(tasks, storage);
