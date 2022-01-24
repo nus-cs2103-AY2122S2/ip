@@ -1,19 +1,23 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
 
-    private String date;
+    private LocalDate date;
 
-    public Deadline(String description, String dline) {
+    public Deadline(String description, LocalDate dLine) {
         super(description);
-        this.date = dline;
+        this.date = dLine;
     }
 
     @Override
     public String toString() {
-        return "[D]" + this.getSymbol() + " " + this.getName() + " (by: " + this.date.trim() + ")";
+        String date = this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return "[D]" + this.getSymbol() + " " + this.getName() + " (by: " + date + ")";
     }
 
     //Formats a line of text into a Deadline object
-    public static Deadline formatInput(String input) throws StringIndexOutOfBoundsException, DukeException {
+    public static Deadline createDeadline(String input) throws StringIndexOutOfBoundsException, DukeException {
         String dlTask = input.substring(8); //Grabs all the text after the "deadline" command word
         dlTask = dlTask.trim();
         if (dlTask.equals("")) {
@@ -26,7 +30,20 @@ public class Deadline extends Task {
         if (dlDate.trim().equals("") || dlDes.trim().equals("")) {
             throw new DukeException("No valid date/description entered");
         }
-        return new Deadline(dlDes.trim(), dlDate);
+        return new Deadline(dlDes.trim(), LocalDate.parse(dlDate.trim()));
     }
 
+    public static Deadline createDeadline(int status, String description, String date) {
+        Deadline dl = new Deadline(description, LocalDate.parse(date));
+        if (status == 1) {
+            dl.markTask();
+        }
+        return dl;
+    }
+
+    @Override
+    public String formatText() {
+        int status = (this.getStatus()) ? 1 : 0;
+        return "D|" + status + "|" + this.getName() + "/" + this.date.toString();
+    }
 }

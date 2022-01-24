@@ -13,7 +13,7 @@ public class Event extends Task {
     }
 
     //Formats a line of text into an Event object
-    public static Event formatInput(String input) throws StringIndexOutOfBoundsException, DukeException {
+    public static Event createEvent(String input) throws StringIndexOutOfBoundsException, DukeException {
         String evTask = input.substring(5); //Grabs all the text after the "event" command word
         evTask = evTask.trim();
         if (evTask.equals("")) {
@@ -27,6 +27,20 @@ public class Event extends Task {
             throw new DukeException("No valid date/description entered");
         }
         return new Event(evDes.trim(), evDate);
+    }
+
+    public static Event createEvent(int status, String description, String date) {
+        Event ev = new Event(description, date);
+        if (status == 1) {
+            ev.markTask();
+        }
+        return ev;
+    }
+
+    @Override
+    public String formatText() {
+        int status = (this.getStatus()) ? 1 : 0;
+        return "E|" + status + "|" + this.getName() + "/" + this.date.trim();
     }
 
 }
