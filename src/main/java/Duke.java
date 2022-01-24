@@ -13,6 +13,7 @@ public class Duke {
     }
 
     private List<Task> lst = new ArrayList<Task>(); // a list to collect tasks
+    private Scanner sc= new Scanner(System.in);
 
     /**
      * Print the msg between line breaks.
@@ -146,7 +147,6 @@ public class Duke {
      * Give the bot intructions and let it do the corresponding job.
      */
     private void run() {
-        Scanner sc= new Scanner(System.in);
         String input = sc.nextLine();
         String[] splitted = input.split("\\s+");
         if (input.equals("bye")) { // bye

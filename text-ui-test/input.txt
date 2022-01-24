@@ -1,0 +1,14 @@
+todo read books
+deadline week3 ip /by tonight
+event tut /at tmr 9am
+list
+mark 2
+mark 1
+unmark 2
+list
+delete 2
+delete 3
+todo
+deadline test
+bye
+
