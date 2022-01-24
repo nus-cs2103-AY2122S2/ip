@@ -31,8 +31,8 @@ public class CommandParser {
     /**
      * Checks whether a command matches
      *
-     * @param cmd Command to check validity
-     * @return Validity of the command
+     * @param cmd command to check validity
+     * @return validity of the command
      */
     private static Command parseCommand(String cmd) throws DukeException {
         String cmdName = cmd.split(" ")[0];
@@ -77,7 +77,7 @@ public class CommandParser {
      * Parses command if the first token is a valid command (delimiter = " ")
      * Else, treats the whole input line as a command term
      *
-     * @return Parsed command
+     * @return parsed command
      */
     public Command readAndParse() throws DukeException {
         String commandLine = this.input.nextLine();

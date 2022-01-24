@@ -1,0 +1,4 @@
+T||0||eat
+T||1||sleep
+E||0||party||Sunday
+T||0||repeat

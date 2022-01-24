@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 class Color {
@@ -6,6 +7,7 @@ class Color {
     public static final String GREEN = "\033[92m";
     public static final String RED = "\033[31m";
     public static final String PURPLE = "\033[35m";
+    public static final String YELLOW = "\033[33m";
 }
 
 public class Duke {
@@ -23,13 +25,14 @@ public class Duke {
         System.out.println(description);
     }
 
-    private static TaskList tasks = new TaskList();
+    private static TaskList tasks;
     private static final CommandParser cmd = new CommandParser(new Scanner(System.in));
+    private static FileManager fileMan;
 
     /**
      * Method for chatbot to print message in a formatted style.
      *
-     * @param message Message to print
+     * @param message message to print
      */
     private static void say(String message) {
         // Set color theme for Nikki's text
@@ -48,16 +51,25 @@ public class Duke {
     /**
      * Method for chatbot to print error messages.
      *
-     * @param message Error message to print
+     * @param message error message to print
      */
     private static void error(String message) {
         say(Color.RED + message);
     }
 
     /**
+     * Method for chatbot to print warning messages.
+     *
+     * @param message warning message to print
+     */
+    private static void warning(String message) {
+        say(Color.YELLOW + message);
+    }
+
+    /**
      * Log the addition of tasks in the same format
      *
-     * @param task Task added to be logged
+     * @param task task added to be logged
      */
     private static void logNewTask(Task task) {
         say(String.format(
@@ -70,13 +82,18 @@ public class Duke {
     /**
      * Perform certain behaviours according to the command passed.
      *
-     * @param action Command from user
-     * @throws DukeException General exception for invalid user command: invalid command, invalid arguments, etc.
+     * @param action command from user
+     * @throws DukeException general exception for invalid user command: invalid command, arguments, etc.
      */
     private static void handleAction(Command action) throws DukeException {
         switch (action.getName()) {
         case "bye":
             say("Bye! See you later!");
+            try {
+                fileMan.saveTasks(tasks);
+            } catch (IOException e) {
+                error("Can't save tasks to file");
+            }
             System.exit(0);
             break;
 
@@ -147,6 +164,14 @@ public class Duke {
         String introduction = "Hello, I'm Nikki\n" +
                               "What can I do for you?";
         say(introduction);
+
+        try {
+            fileMan = new FileManager("data/tasks.txt");
+            tasks = fileMan.loadTasks();
+        } catch (IOException|DukeException e) {
+            warning("[!] Error reading file - initializing task list as empty list");
+            tasks = new TaskList();
+        }
 
         while (true) {
             try {

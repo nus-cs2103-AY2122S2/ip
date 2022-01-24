@@ -6,15 +6,21 @@ public class Event extends Task {
     }
 
     public Event(String name, String dateRange, Boolean done) {
-        super(name, done);
+        super(name, 'E', done);
         this.dateRange = dateRange;
     }
 
     @Override
     public String nameWithStatus() {
-        return String.format("[E]%s (at: %s)",
+        return String.format("%s (at: %s)",
                 super.nameWithStatus(),
                 this.dateRange);
     }
 
+    @Override
+    public String fileSaveFormat() {
+        return String.format("%s||%s",
+                super.fileSaveFormat(),
+                this.dateRange);
+    }
 }

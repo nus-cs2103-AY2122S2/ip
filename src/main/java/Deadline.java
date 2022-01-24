@@ -6,14 +6,21 @@ public class Deadline extends Task {
     }
 
     public Deadline(String name, String deadline, Boolean done) {
-        super(name, done);
+        super(name, 'D', done);
         this.date = deadline;
     }
 
     @Override
     public String nameWithStatus() {
-        return String.format("[D]%s (by: %s)",
+        return String.format("%s (by: %s)",
                 super.nameWithStatus(),
+                this.date);
+    }
+
+    @Override
+    public String fileSaveFormat() {
+        return String.format("%s||%s",
+                super.fileSaveFormat(),
                 this.date);
     }
 }
