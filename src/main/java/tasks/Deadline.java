@@ -8,23 +8,15 @@ public class Deadline extends Task {
     private boolean done;
     private String line = "-------------------------------------------";
 
-    public Deadline(String details) throws DateException {
-        String[] spliced = details.split("/by", 2);
-        if (spliced.length == 1) {
-            throw new DateException();
-        }
-        this.item = spliced[0];
-        this.date = spliced[1];
+    public Deadline(String details, String date) {
+        this.item = details;
+        this.date = date;
     }
 
     @Override
     public void mark() {
         if (!this.done) {
             this.done = true;
-            System.out.println(line);
-            System.out.println("Done? Checked it off for you:");
-            System.out.println(this);
-            System.out.println(line);
         }
 
     }
@@ -33,10 +25,6 @@ public class Deadline extends Task {
     public void unmark() {
         if (this.done) {
             this.done = false;
-            System.out.println(line);
-            System.out.println("Not done? Let me put it back for you:");
-            System.out.println(this);
-            System.out.println(line);
         }
 
     }
