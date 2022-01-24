@@ -71,5 +71,7 @@ public abstract class BotMessage {
      * @return bot message.
      */
     public abstract String getBotMessage();
+
+    public abstract String getFindListMessage(boolean isEmpty);
 }
 

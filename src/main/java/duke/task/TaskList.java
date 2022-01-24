@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * can be created to store all the different type of task the user has saved.
  */
 public class TaskList {
-    private static ArrayList<Task> taskArr = new ArrayList<>();
+    private ArrayList<Task> taskArr = new ArrayList<>();
 
     /**
      * Creates a default instance of a TaskList object.
@@ -69,5 +69,17 @@ public class TaskList {
      */
     public boolean isEmpty() {
         return taskArr.isEmpty();
+    }
+
+    public TaskList search(String searchInfo) {
+        TaskList newTaskList = new TaskList();
+
+        for(Task task : taskArr) {
+            if (task.description.contains(searchInfo)) {
+                newTaskList.add(task);
+            }
+        }
+
+        return newTaskList;
     }
 }

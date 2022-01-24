@@ -38,9 +38,8 @@ public class Storage {
         this.filePath = System.getProperty("user.dir") + inputPath;
 
         File file = new File(this.filePath);
-        if (!file.getParentFile().mkdirs() || file.createNewFile()) {
-            throw new IOException();
-        }
+        file.getParentFile().mkdirs();
+        file.createNewFile();
     }
 
     /**

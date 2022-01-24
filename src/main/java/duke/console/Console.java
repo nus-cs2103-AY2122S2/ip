@@ -90,10 +90,11 @@ public class Console {
     /**
      * Prints the given task list.
      *
+     * @param botMessage the botMessage being printed.
      * @param taskList a task list.
      */
-    private void printTaskList(TaskList taskList) {
-        System.out.println("      " + bot.getListMessage(taskList.isEmpty()));
+    private void printTaskList(String botMessage, TaskList taskList) {
+        System.out.println("      " + botMessage);
         for (int i = 0; i < taskList.size(); i++) {
             System.out.println(String.format("      %d. %s", i + 1, taskList.get(i).toString()));
         }
@@ -151,7 +152,7 @@ public class Console {
             println(bot.getDeleteMessage(comFeed.taskList, comFeed.task));
             break;
         case LIST:
-            printTaskList(comFeed.taskList);
+            printTaskList(bot.getListMessage(comFeed.taskList.isEmpty()), comFeed.taskList);
             break;
         case MARK:
             println(bot.getMarkMessage(comFeed.task));
@@ -161,6 +162,9 @@ public class Console {
             break;
         case BOT:
             println(bot.getBotMessage());
+            break;
+        case FIND:
+            printTaskList(bot.getFindListMessage(comFeed.taskList.isEmpty()), comFeed.taskList);
             break;
         case EXIT:
             println(bot.getExitMessage());

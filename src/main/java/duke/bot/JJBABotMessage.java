@@ -96,6 +96,11 @@ public class JJBABotMessage extends BotMessage {
         return "What can I do for you?";
     }
 
+    @Override
+    public String getFindListMessage(boolean isEmpty) {
+        return isEmpty ? "There are no matching tasks." : "Here are the matching task in your list:";
+    }
+
     private String getTaskLeft(TaskList taskList) {
         return String.format("You have %s task%s in your list.",
                 (taskList.size() > 0) ? taskList.size() : "no", (taskList.size() <= 1) ? "" : "s");
