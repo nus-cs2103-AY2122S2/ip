@@ -78,99 +78,99 @@ public class Duke {
         String[] arr = input.split(" ");
         String command = arr[0]; // first word of the user input
         switch (command) {
-            case "bye":
-                exit();
-                break;
-            case "list":
-                if (TASKS.size() == 0) {
-                    System.out.println(BORDER + "The list is empty. Why not add some tasks?\n" + BORDER);
-                } else {
-                    StringBuilder listString = new StringBuilder();
-                    for (int i = 0; i < TASKS.size(); i++) {
-                        Task t = TASKS.get(i);
-                        listString.append(i + 1).append(".").append(t.toString()).append("\n");
-                    }
-                    System.out.println(BORDER + listString + BORDER);
+        case "bye":
+            exit();
+            break;
+        case "list":
+            if (TASKS.size() == 0) {
+                System.out.println(BORDER + "The list is empty. Why not add some tasks?\n" + BORDER);
+            } else {
+                StringBuilder listString = new StringBuilder();
+                for (int i = 0; i < TASKS.size(); i++) {
+                    Task t = TASKS.get(i);
+                    listString.append(i + 1).append(".").append(t.toString()).append("\n");
                 }
-                break;
-            case "mark": {
-                int num = Integer.parseInt(arr[1]);
-                if (num > TASKS.size()) {
-                    throw new InvalidInputException(BORDER + "The specified task does not exist.\n" + BORDER);
-                } else if (num < 1) {
-                    throw new InvalidInputException(BORDER + "Selection must be positive.\n" + BORDER);
-                }
-                mark(num);
-                break;
+                System.out.println(BORDER + listString + BORDER);
             }
-            case "unmark": {
-                int num = Integer.parseInt(arr[1]);
-                if (num > TASKS.size()) {
-                    throw new InvalidInputException(BORDER + "The specified task does not exist.\n" + BORDER);
-                } else if (num < 1) {
-                    throw new InvalidInputException(BORDER + "Selection must be positive.\n" + BORDER);
-                }
-                unmark(num);
-                break;
+            break;
+        case "mark": {
+            int num = Integer.parseInt(arr[1]);
+            if (num > TASKS.size()) {
+                throw new InvalidInputException(BORDER + "The specified task does not exist.\n" + BORDER);
+            } else if (num < 1) {
+                throw new InvalidInputException(BORDER + "Selection must be positive.\n" + BORDER);
             }
-            case "todo": {
-                String desc = input.replaceFirst("todo", "").trim();
-                Todo newTodo = new Todo(desc);
-                if (desc.equals("")) {
-                    throw new EmptyDescException(BORDER + "Todo description cannot be empty.\n" + BORDER);
-                }
-                TASKS.add(newTodo);
-                System.out.println(successMessage(newTodo));
-                break;
+            mark(num);
+            break;
+        }
+        case "unmark": {
+            int num = Integer.parseInt(arr[1]);
+            if (num > TASKS.size()) {
+                throw new InvalidInputException(BORDER + "The specified task does not exist.\n" + BORDER);
+            } else if (num < 1) {
+                throw new InvalidInputException(BORDER + "Selection must be positive.\n" + BORDER);
             }
-            case "event": {
-                if (!input.contains("/at")) {
-                    throw new InvalidInputException("Usage: event <description> /at <time>");
-                }
-                String[] descTimePair = input.replaceFirst("event", "").trim().split("/at");
-                if (descTimePair.length < 2) {
-                    throw new InvalidInputException("Usage: event <description> /at <time>");
-                }
-                String desc = descTimePair[0];
-                if (desc.equals("")) {
-                    throw new EmptyDescException(BORDER + "Event description cannot be empty.\n" + BORDER);
-                }
-                String time = descTimePair[1];
-                Event newEvent = new Event(desc, time);
-                TASKS.add(newEvent);
-                System.out.println(successMessage(newEvent));
-                break;
+            unmark(num);
+            break;
+        }
+        case "todo": {
+            String desc = input.replaceFirst("todo", "").trim();
+            Todo newTodo = new Todo(desc);
+            if (desc.equals("")) {
+                throw new EmptyDescException(BORDER + "Todo description cannot be empty.\n" + BORDER);
             }
-            case "deadline": {
-                if (!input.contains("/by")) {
-                    throw new InvalidInputException("Usage: deadline <description> /by <time>");
-                }
-                String[] descTimePair = input.replaceFirst("deadline", "").trim().split("/by");
-                if (descTimePair.length < 2) {
-                    throw new InvalidInputException("Usage: deadline <description> /by <time>");
-                }
-                String desc = descTimePair[0];
-                if (desc.equals("")) {
-                    throw new EmptyDescException(BORDER + "Deadline description cannot be empty.\n" + BORDER);
-                }
-                String time = descTimePair[1];
-                Deadline newDeadline = new Deadline(desc, time);
-                TASKS.add(newDeadline);
-                System.out.println(successMessage(newDeadline));
-                break;
+            TASKS.add(newTodo);
+            System.out.println(successMessage(newTodo));
+            break;
+        }
+        case "event": {
+            if (!input.contains("/at")) {
+                throw new InvalidInputException("Usage: event <description> /at <time>");
             }
-            case "delete": {
-                int num = Integer.parseInt(arr[1]);
-                if (num > TASKS.size()) {
-                    throw new InvalidInputException(BORDER + "The specified task does not exist.\n" + BORDER);
-                } else if (num < 1) {
-                    throw new InvalidInputException(BORDER + "Selection must be positive.\n" + BORDER);
-                }
-                delete(num);
-                break;
+            String[] descTimePair = input.replaceFirst("event", "").trim().split("/at");
+            if (descTimePair.length < 2) {
+                throw new InvalidInputException("Usage: event <description> /at <time>");
             }
-            default:
-                throw new UnknownCommandException(BORDER + "I'm sorry, but I don't know what that means.\n" + BORDER);
+            String desc = descTimePair[0];
+            if (desc.equals("")) {
+                throw new EmptyDescException(BORDER + "Event description cannot be empty.\n" + BORDER);
+            }
+            String time = descTimePair[1];
+            Event newEvent = new Event(desc, time);
+            TASKS.add(newEvent);
+            System.out.println(successMessage(newEvent));
+            break;
+        }
+        case "deadline": {
+            if (!input.contains("/by")) {
+                throw new InvalidInputException("Usage: deadline <description> /by <time>");
+            }
+            String[] descTimePair = input.replaceFirst("deadline", "").trim().split("/by");
+            if (descTimePair.length < 2) {
+                throw new InvalidInputException("Usage: deadline <description> /by <time>");
+            }
+            String desc = descTimePair[0];
+            if (desc.equals("")) {
+                throw new EmptyDescException(BORDER + "Deadline description cannot be empty.\n" + BORDER);
+            }
+            String time = descTimePair[1];
+            Deadline newDeadline = new Deadline(desc, time);
+            TASKS.add(newDeadline);
+            System.out.println(successMessage(newDeadline));
+            break;
+        }
+        case "delete": {
+            int num = Integer.parseInt(arr[1]);
+            if (num > TASKS.size()) {
+                throw new InvalidInputException(BORDER + "The specified task does not exist.\n" + BORDER);
+            } else if (num < 1) {
+                throw new InvalidInputException(BORDER + "Selection must be positive.\n" + BORDER);
+            }
+            delete(num);
+            break;
+        }
+        default:
+            throw new UnknownCommandException(BORDER + "I'm sorry, but I don't know what that means.\n" + BORDER);
         }
     }
 
