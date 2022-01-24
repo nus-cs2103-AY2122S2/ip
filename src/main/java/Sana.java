@@ -120,14 +120,14 @@ public class Sana {
     /**
      * This method removes a task from the userTasks list
      *
-     * @param taskIndex The index of the tast to be removed
+     * @param taskIndex The index of the task to be removed
      */
     private void delete(int taskIndex) throws OutOfBoundsTaskException {
         if (taskIndex < 0 || taskIndex >= userTasks.size()) {
             throw new OutOfBoundsTaskException();
         }
-        System.out.println("Yay! I'll take this out!");
-        System.out.println(userTasks.get(taskIndex));
+        ui.deleteTaskText();
+        ui.printTaskInList(userTasks.get(taskIndex));
         userTasks.remove(taskIndex);
         ui.taskNumberText(userTasks.size());
     }
@@ -145,7 +145,7 @@ public class Sana {
         ui.addTaskText();
         Deadline newDeadline = new Deadline(deadlineName, deadlineDate);
         userTasks.add(newDeadline);
-        System.out.println(newDeadline);
+        ui.printTaskInList(newDeadline);
         ui.taskNumberText(userTasks.size());
     }
 
@@ -162,7 +162,7 @@ public class Sana {
         ui.addTaskText();
         Event newEvent = new Event(eventName, eventTime);
         userTasks.add(newEvent);
-        System.out.println(newEvent);
+        ui.printTaskInList(newEvent);
         ui.taskNumberText(userTasks.size());
     }
 
@@ -178,7 +178,7 @@ public class Sana {
         ui.addTaskText();
         ToDo newTodo = new ToDo(taskName);
         userTasks.add(newTodo);
-        System.out.println(newTodo);
+        ui.printTaskInList(newTodo);
         ui.taskNumberText(userTasks.size());
     }
 
@@ -193,30 +193,19 @@ public class Sana {
             throw new OutOfBoundsTaskException();
         }
         userTasks.get(taskIndex).setDone(completion);
-        if (completion) {
-            System.out.println("You've done it! Well done!");
-        } else {
-            System.out.println("Oopsies! I'll change it back!");
-        }
-        System.out.println(userTasks.get(taskIndex));
+        ui.markText(completion);
+        ui.printTaskInList(userTasks.get(taskIndex));
     }
 
     /**
      * This method lists the history of user inputs to Sana
      */
     private void list() {
-        int index = 1;
-        System.out.println("Here's your tasks!");
-        for (Task task : userTasks) {
-            String header = Integer.valueOf(index).toString() + ".";
-            System.out.println(header + task);
-            index++;
-        }
+        ui.printTaskList(userTasks);
     }
 
     public static void main(String[] args) {
         Sana sana = new Sana();
         sana.run();
-
     }
 }

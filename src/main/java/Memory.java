@@ -13,19 +13,13 @@ import java.util.Scanner;
  * @version 1.0
  */
 public class Memory {
-    /**
-     * This variable is the path where the taskList is saved
-     */
+    /** This variable is the path where the taskList is saved */
     private final static String memPath = "data/sana.txt";
 
-    /**
-     * This variable is the path for directory that stores the memory file
-     */
+    /** This variable is the path for directory that stores the memory file */
     private final static String dirPath = "data";
 
-    /**
-     * This variable represents the File object that stores the taskList
-     */
+    /** This variable represents the File object that stores the taskList */
     private File memFile;
 
     /**

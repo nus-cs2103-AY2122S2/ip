@@ -1,3 +1,4 @@
+import java.util.LinkedList;
 import java.util.Scanner;
 
 /**
@@ -37,11 +38,48 @@ public class Ui {
     }
 
     /**
+     * Prints the string representation of the task
+     *
+     * @param task  task to be printed
+     */
+    public void printTaskInList(Task task) {
+        System.out.println(task);
+    }
+
+    /**
+     * Prints the entire task list
+     *
+     * @param taskList  task list to be printed
+     */
+    public void printTaskList(LinkedList<Task> taskList) {
+        int index = 1;
+        System.out.println("Here's your tasks!");
+        for (Task task : taskList) {
+            String header = Integer.valueOf(index).toString() + ".";
+            System.out.println(header + task);
+            index++;
+        }
+    }
+
+    /**
      * This method prints to system IO how many tasks in user tasks
      */
     public void taskNumberText(int taskNumber) {
         String taskAmt = Integer.valueOf(taskNumber).toString();
         System.out.println("You have " + taskAmt + " things here.");
+    }
+
+    /**
+     * Prints Sana's message when tasks are marked or unmarked
+     *
+     * @param isMarked   if task is marked or unmarked
+     */
+    public void markText(boolean isMarked) {
+        if (isMarked) {
+            System.out.println("You've done it! Well done!");
+        } else {
+            System.out.println("Oopsies! I'll change it back!");
+        }
     }
 
     /**
@@ -61,10 +99,17 @@ public class Ui {
     }
 
     /**
-     * This method prints to system IO Sana's add task text
+     * This method prints to system out Sana's add task text
      */
     public void addTaskText() {
         System.out.println("I've added your task!");
+    }
+
+    /**
+     * This method prints to system out Sana's delete task text
+     */
+    public void deleteTaskText() {
+        System.out.println("Yay! I'll take this out!");
     }
 
     /**
