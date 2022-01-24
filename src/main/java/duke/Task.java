@@ -4,6 +4,7 @@ package duke;
  * Abstract class representing a task object to be saved in TaskList
  */
 abstract class Task {
+
     protected String description;
     protected boolean isDone;
 
