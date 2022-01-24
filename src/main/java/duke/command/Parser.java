@@ -3,13 +3,12 @@ package duke.command;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.Arrays;
 
+import duke.task.Task;
 import duke.ui.Ui;
 import duke.task.TaskList;
 import duke.error.DukeException;
-import duke.task.*;
 
 /**
  * Handles all user input entered into Duke <br>
@@ -36,7 +35,7 @@ public class Parser {
         String action = args[0];
 
         try {
-            validate(inputString, action, args, taskList.getList());
+            validate(inputString, action, args, taskList);
         } catch (DukeException de) {
             System.out.println(de.getMessage());
             return 1;
@@ -48,19 +47,15 @@ public class Parser {
             return -1;
         case "list":
             if(args.length > 1) {
-                ArrayList<Task> result;
                 switch (args[1]) {
                 case "/on":
-                    result = taskList.getTasksBasedOnDate(LocalDate.parse(args[2], DateTimeFormatter.ofPattern("dd/M/yyyy")), 0);
-                    ui.print(result);
+                    ui.print(taskList.getTasksBasedOnDate(LocalDate.parse(args[2], DateTimeFormatter.ofPattern("dd/M/yyyy")), 0));
                     break;
                 case "/before":
-                    result = taskList.getTasksBasedOnDate(LocalDate.parse(args[2], DateTimeFormatter.ofPattern("dd/M/yyyy")), 1);
-                    ui.print(result);
+                    ui.print(taskList.getTasksBasedOnDate(LocalDate.parse(args[2], DateTimeFormatter.ofPattern("dd/M/yyyy")), 1));
                     break;
                 case "/after":
-                    result = taskList.getTasksBasedOnDate(LocalDate.parse(args[2], DateTimeFormatter.ofPattern("dd/M/yyyy")), 2);
-                    ui.print(result);
+                    ui.print(taskList.getTasksBasedOnDate(LocalDate.parse(args[2], DateTimeFormatter.ofPattern("dd/M/yyyy")), 2));
                     break;
                 }
             } else {
@@ -76,19 +71,19 @@ public class Parser {
             ui.print("Task as not done yet: "," " + taskList.getTask(Integer.parseInt(args[1]) - 1).toString());
             return 1;
         case "todo":
-            taskList.addTask(new ToDoTask((inputString).substring(5).trim()));
+            taskList.addTask((inputString).substring(5).trim(), false,null, 0);
             ui.print("Added Task: ", " " + taskList.getLast().toString(),
                     String.format("There are now %d task(s) in the list.", taskList.getSize()));
             return 1;
         case "deadline":
-            taskList.addTask(new DeadlineTask(inputString.substring(9).split("/by")[0].trim(),
-                    LocalDate.parse(inputString.split("/by")[1].substring(1),formatter)));
+            taskList.addTask(inputString.substring(9).split("/by")[0].trim(), false,
+                    LocalDate.parse(inputString.split("/by")[1].substring(1),formatter), 1);
             ui.print("Added Task: ", " " + taskList.getLast().toString(),
                     String.format("There are now %d task(s) in the list.", taskList.getSize()));
             return 1;
         case "event":
-            taskList.addTask(new EventTask(inputString.substring(6).split("/at")[0].trim(),
-                    LocalDate.parse(inputString.split("/at")[1].substring(1),formatter)));
+            taskList.addTask(inputString.substring(6).split("/at")[0].trim(), false,
+                    LocalDate.parse(inputString.split("/at")[1].substring(1),formatter), 2);
             ui.print("Added Task: ", " " + taskList.getLast().toString(),
                     String.format("There are now %d task(s) in the list.", taskList.getSize()));
             return 1;
@@ -115,10 +110,10 @@ public class Parser {
      * @param inputString The string to be checked
      * @param action The type action to be checked with
      * @param args: The argument list to be checked
-     * @param taskArrayList: The list of task to be checked with
+     * @param taskList: The list of task to be checked with
      */
 
-    public void validate(String inputString, String action, String[] args, ArrayList<Task> taskArrayList) throws DukeException {
+    public void validate(String inputString, String action, String[] args, TaskList taskList) throws DukeException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy");
         switch(action) {
         case "list":
@@ -142,9 +137,9 @@ public class Parser {
             } catch(NumberFormatException e) {
                 throw new DukeException("Task ID must be an integer!");
             }
-            if(taskArrayList.size() == 0)
+            if(taskList.getSize() == 0)
                 throw new DukeException("Task List is empty!");
-            if(Integer.parseInt(args[1]) > taskArrayList.size())
+            if(Integer.parseInt(args[1]) > taskList.getSize())
                 throw new DukeException("Task ID out of range!");
             break;
         case "todo":

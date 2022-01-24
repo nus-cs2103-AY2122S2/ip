@@ -70,8 +70,18 @@ public class TaskList {
         return tasks.get(index);
     }
 
-    public void addTask(Task t) {
-        tasks.add(t);
+    public void addTask(String taskName, boolean isMarked, LocalDate date, int taskType) {
+        switch (taskType) {
+        case 0:
+            this.tasks.add(new ToDoTask(taskName, isMarked));
+            break;
+        case 1:
+            this.tasks.add(new DeadlineTask(taskName, isMarked, date));
+            break;
+        case 2:
+            this.tasks.add(new EventTask(taskName, isMarked, date));
+            break;
+        }
     }
 
     public void removeTask(int index) {

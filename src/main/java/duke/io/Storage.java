@@ -85,11 +85,11 @@ public class Storage {
             for(String s : ss.toString().split(";")) {
                 String[] args = s.split(",");
                 if(args[0].equals("T")) {
-                    tl.addTask(new ToDoTask(args[2], args[1].equals("T")));
+                    tl.addTask(args[2], args[1].equals("T"), null, 0);
                 } else if (args[0].equals("D")) {
-                    tl.addTask(new DeadlineTask(args[2], args[1].equals("T"), LocalDate.parse(args[3], formatter)));
+                    tl.addTask(args[2], args[1].equals("T"), LocalDate.parse(args[3], formatter), 1);
                 } else if (args[0].equals("E")) {
-                    tl.addTask(new EventTask(args[2], args[1].equals("T"), LocalDate.parse(args[3], formatter)));
+                    tl.addTask(args[2], args[1].equals("T"), LocalDate.parse(args[3], formatter), 2);
                 }
             }
             return 0;
