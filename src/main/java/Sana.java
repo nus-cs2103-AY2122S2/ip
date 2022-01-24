@@ -12,7 +12,7 @@ import java.util.LinkedList;
 public class Sana {
 
     /** userTasks stores the commands given to Sana from the user */
-    private LinkedList<Task> userTasks;
+    private TaskList userTasks;
 
     /** taskMem stores the tasks given to Sana in a txt file */
     private Memory taskMem;
@@ -25,7 +25,7 @@ public class Sana {
      */
     public Sana() {
         this.taskMem = new Memory();
-        this.userTasks = taskMem.memToList();
+        this.userTasks = new TaskList(taskMem.memToList());
         this.ui = new Ui();
     }
 
@@ -112,7 +112,7 @@ public class Sana {
         } catch (DateTimeParseException e) {
             System.out.println(e);
         }
-        taskMem.updateMemory(userTasks);
+        taskMem.updateMemory(userTasks.toList());
         ui.border();
     }
 
@@ -122,13 +122,13 @@ public class Sana {
      * @param taskIndex The index of the task to be removed
      */
     private void delete(int taskIndex) throws OutOfBoundsTaskException {
-        if (taskIndex < 0 || taskIndex >= userTasks.size()) {
+        if (taskIndex < 0 || taskIndex >= userTasks.taskAmt()) {
             throw new OutOfBoundsTaskException();
         }
         ui.deleteTaskText();
-        ui.printTaskInList(userTasks.get(taskIndex));
-        userTasks.remove(taskIndex);
-        ui.taskNumberText(userTasks.size());
+        ui.printTaskInList(userTasks.getTask(taskIndex));
+        userTasks.removeTask(taskIndex);
+        ui.taskNumberText(userTasks.taskAmt());
     }
 
     /**
@@ -143,9 +143,9 @@ public class Sana {
         }
         ui.addTaskText();
         Deadline newDeadline = new Deadline(deadlineName, deadlineDate);
-        userTasks.add(newDeadline);
+        userTasks.addTask(newDeadline);
         ui.printTaskInList(newDeadline);
-        ui.taskNumberText(userTasks.size());
+        ui.taskNumberText(userTasks.taskAmt());
     }
 
     /**
@@ -160,9 +160,9 @@ public class Sana {
         }
         ui.addTaskText();
         Event newEvent = new Event(eventName, eventTime);
-        userTasks.add(newEvent);
+        userTasks.addTask(newEvent);
         ui.printTaskInList(newEvent);
-        ui.taskNumberText(userTasks.size());
+        ui.taskNumberText(userTasks.taskAmt());
     }
 
     /**
@@ -176,9 +176,9 @@ public class Sana {
         }
         ui.addTaskText();
         ToDo newTodo = new ToDo(taskName);
-        userTasks.add(newTodo);
+        userTasks.addTask(newTodo);
         ui.printTaskInList(newTodo);
-        ui.taskNumberText(userTasks.size());
+        ui.taskNumberText(userTasks.taskAmt());
     }
 
     /**
@@ -188,19 +188,19 @@ public class Sana {
      * @param completion    the completion of the task
      */
     private void mark(int taskIndex, boolean completion) throws OutOfBoundsTaskException {
-        if (taskIndex < 0 || taskIndex >= userTasks.size()) {
+        if (taskIndex < 0 || taskIndex >= userTasks.taskAmt()) {
             throw new OutOfBoundsTaskException();
         }
-        userTasks.get(taskIndex).setDone(completion);
+        userTasks.getTask(taskIndex).setDone(completion);
         ui.markText(completion);
-        ui.printTaskInList(userTasks.get(taskIndex));
+        ui.printTaskInList(userTasks.getTask(taskIndex));
     }
 
     /**
      * This method lists the history of user inputs to Sana
      */
     private void list() {
-        ui.printTaskList(userTasks);
+        ui.printTaskList(userTasks.toList());
     }
 
     public static void main(String[] args) {
