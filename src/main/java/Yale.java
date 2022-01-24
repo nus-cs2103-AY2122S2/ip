@@ -10,11 +10,12 @@ import java.util.Scanner;
 
 public class Yale {
     public static void main(String[] args) {
-        String logo = "----YALE----";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hi, I'm Yale!\n" );
+        String logo = "-----YALE-----";
+        System.out.println("Allow me to introduce myself\n" + logo);
+        System.out.println("The name's Yale.\n" );
         Scanner scanner = new Scanner(System.in);
         TaskList list = new TaskList();
+        readSavedData("data/yale.txt", list);
         while (true) {
             String command = receiveInput(scanner);
             performAction(command, list);
@@ -32,7 +33,7 @@ public class Yale {
      * @return Input
      */
     public static String receiveInput(Scanner scanner) {
-        System.out.println("Enter command below:");
+        System.out.println("\nEnter command below:");
         String input = scanner.nextLine();
         return input;
     }
@@ -174,6 +175,14 @@ public class Yale {
 //        }
         catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
+        }
+    }
+
+    public static void readSavedData(String filePath, TaskList list) {
+        try {
+            FileRead.printFileContents(filePath);
+        } catch (IOException e) {
+            System.out.println("File not found");
         }
     }
 }
