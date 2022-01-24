@@ -1,3 +1,5 @@
+package stevie;
+
 import java.util.Scanner;
 
 public class StevieUi {

@@ -1,3 +1,10 @@
+package stevie;
+
+import stevie.command.*;
+import stevie.exception.StevieException;
+import stevie.task.TaskCreator;
+import stevie.task.TaskType;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;

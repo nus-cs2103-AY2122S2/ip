@@ -1,9 +1,9 @@
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
+package stevie.task;
+
 import java.util.Date;
 
 /**
- * A type of task that can be characterised as an event. An <code>EventTask</code> contains
+ * A type of task that can be characterised as an event. An <code>stevie.task.EventTask</code> contains
  * a name and an event date.
  */
 public class EventTask extends Task{

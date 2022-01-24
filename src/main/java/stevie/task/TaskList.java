@@ -1,7 +1,11 @@
+package stevie.task;
+
+import stevie.exception.TaskException;
+
 import java.util.ArrayList;
 
 /**
- * Represents the a list of Tasks. <code>TaskList</code> object stores and handles users'
+ * Represents the a list of Tasks. <code>stevie.task.TaskList</code> object stores and handles users'
  * tasks.
  */
 public class TaskList {

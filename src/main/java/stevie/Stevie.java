@@ -1,8 +1,15 @@
+package stevie;
+
+import stevie.command.Command;
+import stevie.exception.StevieException;
+import stevie.task.TaskDataHandler;
+import stevie.task.TaskList;
+
 import java.io.File;
 
 /**
- * Stevie is a class that serves as a user interface to allow access to an underlying
- * task manager. Users can use Stevie to add in their upcoming tasks/events/deadlines,
+ * stevie.Stevie is a class that serves as a user interface to allow access to an underlying
+ * task manager. Users can use stevie.Stevie to add in their upcoming tasks/events/deadlines,
  * and to mark them as completed when necessary.
  */
 public class Stevie {

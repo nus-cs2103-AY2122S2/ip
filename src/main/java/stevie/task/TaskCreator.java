@@ -1,3 +1,7 @@
+package stevie.task;
+
+import stevie.exception.TaskException;
+
 import java.util.Date;
 
 public class TaskCreator {

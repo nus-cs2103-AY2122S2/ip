@@ -1,3 +1,10 @@
+package stevie.command;
+
+import stevie.StevieUi;
+import stevie.task.TaskDataHandler;
+import stevie.task.TaskList;
+import stevie.task.Task;
+
 public class AddCommand extends Command {
     private final Task task;
     public AddCommand(Task task) {
