@@ -1,7 +1,4 @@
 clear
-nope
-clear
-yes
 list
 todo Do Laundry
 deadline Study /by 9pm
@@ -21,4 +18,5 @@ list
 delete 4
 delete 99
 delete asdf
+asdfGHJKL
 exit

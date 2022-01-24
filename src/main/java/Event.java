@@ -22,7 +22,7 @@ public class Event extends Task {
         this.hasLocalDate = true;
     }
 
-    private String getDate() {
+    public String getDate() {
         if (hasLocalDate) {
             // Of the form "June 24, 2019"
             return date.format(DateTimeFormatter.ofPattern("MMMM d, yyyy"));
