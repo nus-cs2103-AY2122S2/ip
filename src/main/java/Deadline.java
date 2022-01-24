@@ -1,15 +1,38 @@
-public class Deadline extends Task{
-    String by;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String taskName, String by) {
+public class Deadline extends Task{
+    LocalDate dueDate;
+
+    public Deadline(String taskName, String by) throws Exception {
         super(taskName);
-        this.by = by;
+        boolean isCorrectFormat = formatChecker(by);
+        if (isCorrectFormat) {
+            try {
+                this.dueDate = LocalDate.parse(by);
+            } catch (DateTimeException e) {
+                throw new DukeException("Invalid date");
+            }
+        } else {
+            throw new DukeException("Invalid time format, please use yyyy-mm-dd");
+        }
     }
 
     @Override
     public String toString() {
         String done = getStatus() ? "[X]" : "[ ]";
-        return "[D]" + done + getTaskName() + " (by: " + this.by + ")";
+        return "[D]" + done + getTaskName() + " (by: " + this.dueDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+    }
+
+    public static boolean formatChecker(String by) {
+        if (by.length() != 10) {
+            return false;
+        } else if (by.charAt(4) != '-' || by.charAt(7) != '-') {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 }
