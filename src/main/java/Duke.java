@@ -1,4 +1,3 @@
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,14 +11,11 @@ public class Duke {
         return false;
     }
     public static void main(String[] args){
-
-
-
         String greeting = "Hello! I'm Duke\n" + "What can I do for you?";
         System.out.println(greeting);
 
         TaskList taskList = new TaskList();
-        TaskList.initFile();
+
 
         Scanner scanner = new Scanner(System.in);
         String input = null;
@@ -38,7 +34,7 @@ public class Duke {
                 }
                 if (command.equals(bye)) {
                     System.out.println("Bye. Hope to see you again soon!");
-                    break;
+                    return;
                 }
                 if (command.equals("list")) {
                     System.out.println("Here are the tasks in your list:");
@@ -138,6 +134,5 @@ public class Duke {
                 System.out.println(e.toString());
             }
         }
-        taskList.save();
     }
 }

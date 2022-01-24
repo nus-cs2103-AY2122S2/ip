@@ -1,14 +1,10 @@
 public class Task {
-    protected String description;
+    private String description;
     protected boolean isDone;
 
     public Task(String description){
         this.description = description;
         this.isDone = false;
-    }
-
-    public String getDetail(){
-        return "";
     }
 
     public String getStatusIcon() {
