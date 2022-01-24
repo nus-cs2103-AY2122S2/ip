@@ -14,6 +14,10 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
+    public boolean contains(String word) {
+        return taskName.contains(word);
+    }
+
     public String switchMark(String instr) {
         if ((instr.equals("mark") && !isDone)|| (instr.equals("unmark") && isDone)) {
             this.isDone = !this.isDone;
