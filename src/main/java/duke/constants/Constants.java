@@ -1,3 +1,5 @@
+package duke.constants;
+
 public final class Constants {
     private Constants() {
 

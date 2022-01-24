@@ -1,3 +1,7 @@
+package duke.common;
+
+import duke.ui.Ui;
+
 public class Utils {
     public static boolean isValidType(String type) {
         if (type.equalsIgnoreCase("todo") ||

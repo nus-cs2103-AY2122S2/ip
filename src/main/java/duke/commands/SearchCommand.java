@@ -1,6 +1,17 @@
+package duke.commands;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
+import duke.common.DukeException;
+import duke.constants.Constants;
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 public class SearchCommand extends Command {
     private String args;
