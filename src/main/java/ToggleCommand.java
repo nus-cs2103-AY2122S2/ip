@@ -1,0 +1,71 @@
+import java.io.IOException;
+import java.time.format.DateTimeFormatter;
+
+public class ToggleCommand extends Command {
+    private String args;
+    private boolean isMark;
+
+    public ToggleCommand(String args, boolean isMark) {
+        this.args = args;
+        this.isMark = isMark;
+    }
+
+    @Override
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        try {
+            if (this.args.length() == 0) {
+                throw new IllegalArgumentException();
+            }
+
+            if (!Utils.isNumeric(this.args, ui)) {
+                throw new NumberFormatException();
+            }
+
+            int index = Integer.parseInt(this.args);
+            Task updatedTask = taskList.toggleCompleted(this.isMark, --index);
+            String taskString = updatedTask.toString();
+            String updateString = "";
+
+            if (taskString.charAt(1) == 'D') {
+                String date = ((Deadline) updatedTask)
+                        .getDate()
+                        .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+                updateString = String.format(
+                        "D | %s | %s | %s",
+                        updatedTask.getCompleted() ? "1" : "0",
+                        updatedTask.getDescription(),
+                        date);
+            } else if (taskString.charAt(1) == 'E') {
+                String date = ((Event) updatedTask)
+                        .getDate()
+                        .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+                updateString = String.format(
+                        "E | %s | %s | %s",
+                        updatedTask.getCompleted() ? "1" : "0",
+                        updatedTask.getDescription(),
+                        date);
+            } else {
+                updateString = String.format(
+                        "T | %s | %s",
+                        updatedTask.getCompleted() ? "1" : "0",
+                        updatedTask.getDescription());
+            }
+            
+            storage.writeToFile(updateString, index, false);
+
+            String output = isMark ?
+                    "Nice! I've marked this task as done:\n" :
+                    "OK, I've marked this task as not done yet:\n";
+
+            ui.output(output + taskString);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(Constants.INVALID_INDEX_MSG);
+        } catch (IOException e) {
+            throw new DukeException(Constants.STORAGE_UPDATE_MSG);
+        } catch (IllegalArgumentException e) {
+            throw new DukeException(Constants.INVALID_MARK_MSG);
+        }
+    }
+}
