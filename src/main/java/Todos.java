@@ -13,12 +13,6 @@ public class Todos extends Task {
         return "T | " + "[" +  this.getStatusIcon() + "] " + super.message() ;
     }
 
-    @Override
-    public void updateData(String path) throws IOException {
-        FileWriter fw = new FileWriter(path, true);
-        fw.write("\n" + this.message());
-        fw.close();
-    }
 
 
 }

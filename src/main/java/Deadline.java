@@ -20,16 +20,9 @@ public class Deadline extends Task {
 
     @Override
     public String message() {
-
         return "D | " + "[" +  this.getStatusIcon() + "] " + super.message() + "(by:" + dateTimeFormat(date) + " " + time + ")";
     }
 
-    @Override
-    public void updateData(String path) throws IOException {
-        FileWriter fw = new FileWriter(path, true);
-        fw.write("\n" + this.message());
-        fw.close();
-    }
 
     public String dateTimeFormat(String dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");

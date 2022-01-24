@@ -22,13 +22,13 @@ public class Event extends Task {
         return "E | " + "[" +  this.getStatusIcon() + "] " + super.message() + "(at:" + dateTimeFormat(date) + " " + this.time + ")";
     }
 
-    @Override
-    public void updateData(String path) throws IOException {
-        FileWriter fw = new FileWriter(path, true);
-        fw.write( "\n" + this.message());
-        fw.close();
-
-    }
+//    @Override
+//    public void updateData(String path) throws IOException {
+//        FileWriter fw = new FileWriter(path, true);
+//        fw.write( "\n" + this.message());
+//        fw.close();
+//
+//    }
 
     public String dateTimeFormat(String dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
