@@ -40,9 +40,8 @@ class DukeTest {
             BotMessage bot = new JJBABotMessage();
             Duke duke = new Duke(bot);
             duke.handleCommandFeedback(c, cf);
-            assertEquals(String.join(System.lineSeparator(),
-                    Console.formatMessage(bot.getAddMessage(cf.taskList, cf.task)),
-                    Console.lineFormat, ""), outContent.toString());
+            assertEquals(Console.formatMessage(bot.getAddMessage(cf.taskList, cf.task)) +
+                    Console.lineFormat + System.lineSeparator(), outContent.toString());
 
         } catch (InvalidArgumentException e) {
             fail("Unexpected exception thrown!");

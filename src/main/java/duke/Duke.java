@@ -39,8 +39,9 @@ public class Duke {
             taskList = storage.loadTaskList();
 
         } catch (IOException e) {
-            console.printError("duke.storage.Storage system failure");
-            console = null;
+            console.printError("Storage system failure");
+            storage = null;
+            taskList = new TaskList();
 
         } catch (DukeException e) {
             if (!e.isHidden) {
@@ -68,6 +69,7 @@ public class Duke {
 
                 Command c = Parser.parseCommand(input);
                 CommandFeedback cf = c.execute(taskList);
+
                 if (storage != null) {
                     storage.saveTaskList(taskList);
                 }

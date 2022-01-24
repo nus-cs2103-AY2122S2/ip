@@ -52,7 +52,7 @@ public class Console {
     }
 
     public void print(String msg) {
-        System.out.println(formatMessage(msg));
+        System.out.print(formatMessage(msg));
     }
 
     private void printTaskList(TaskList taskList) {

@@ -19,10 +19,10 @@ public class Storage {
 
     private String filePath;
 
-    public Storage(String filePath) throws IOException {
-        this.filePath = System.getProperty("user.dir") + filePath;
+    public Storage(String inputPath) throws IOException {
+        this.filePath = System.getProperty("user.dir") + inputPath;
 
-        File file = new File(filePath);
+        File file = new File(this.filePath);
         file.getParentFile().mkdirs();
         file.createNewFile();
     }
