@@ -19,14 +19,14 @@ public class Todo extends Task{
 
     @Override
     public String toString(){
-        String res = "";
-        res += "[T]";
+        String result = "";
+        result += "[T]";
         if(this.done){
-            res += "[X]";
+            result += "[X]";
         } else {
-            res += "[ ]";
+            result += "[ ]";
         }
-        res += this.taskName;
-        return res;
+        result += this.taskName;
+        return result;
     }
 }

@@ -25,18 +25,17 @@ public class Duke {
     public void run() {
         ui.startUp();
         String inputData;
-        Scanner scan = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         boolean hasEnded = false;
 
-        while(!hasEnded) {
+        while (!hasEnded) {
             try {
-                inputData = scan.nextLine();
+                inputData = scanner.nextLine();
                 hasEnded = parser.takeInput(inputData, taskList);
             } catch (DukeException e) {
                 System.out.println(e);
                 ui.printSeparator();
             }
-
             storage.storeTasks(taskList.getTasks());
         }
     }

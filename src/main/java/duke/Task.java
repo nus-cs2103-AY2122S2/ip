@@ -14,8 +14,8 @@ public class Task {
         this.done = done;
     }
 
-    public void printTask(){
-        if(this.done){
+    public void printTask() {
+        if (this.done) {
             System.out.println("[X] " + this.taskName);
         } else {
             System.out.println("[ ] " + this.taskName);

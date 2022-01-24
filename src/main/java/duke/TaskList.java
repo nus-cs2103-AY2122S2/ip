@@ -10,7 +10,7 @@ public class TaskList {
     }
 
     public void printList() {
-        for(int i = 1; i <= tasks.size(); i++){
+        for (int i = 1; i <= tasks.size(); i++) {
             Task task = tasks.get(i-1);
             System.out.print(i + ": ");
             task.printTask();
@@ -54,12 +54,12 @@ public class TaskList {
                 String dateTime = spl[1].trim();
                 newTask = new Deadline(details, dateTime);
             } else if (taskType.equals("event")) {
-                String[] spl = taskDetails.split("/at");
-                if (spl.length < 2) {
+                String[] splitString = taskDetails.split("/at");
+                if (splitString.length < 2) {
                     throw new DukeException("Description of event must include a date/time! Did you miss out a /at?");
                 }
-                String details = spl[0].trim();
-                String dateTime = spl[1].trim();
+                String details = splitString[0].trim();
+                String dateTime = splitString[1].trim();
                 newTask = new Event(details, dateTime);
             }
 

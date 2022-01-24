@@ -17,9 +17,9 @@ public class Storage {
         TaskList list = new TaskList();
         File file = new File(path); // create a File for the given file path
         if (file.exists()) {
-            Scanner sc = new Scanner(file); // create a Scanner using the File as the source
-            while (sc.hasNextLine()) {
-                String[] taskLine = sc.nextLine().split("~");
+            Scanner scanner = new Scanner(file); // create a Scanner using the File as the source
+            while (scanner.hasNextLine()) {
+                String[] taskLine = scanner.nextLine().split("~");
                 Task task;
                 String taskType = taskLine[0];
                 try {
@@ -74,7 +74,7 @@ public class Storage {
                 String taskToAppend = "";
 
                 //Identify task type
-                if(t instanceof Todo) {
+                if (t instanceof Todo) {
                     taskToAppend += "T~";
                 } else if(t instanceof Deadline) {
                     taskToAppend += "D~";
@@ -83,7 +83,7 @@ public class Storage {
                 }
 
                 //Identify if task is done
-                if(t.done) {
+                if (t.done) {
                     taskToAppend += "X~";
                 } else {
                     taskToAppend += " ~";

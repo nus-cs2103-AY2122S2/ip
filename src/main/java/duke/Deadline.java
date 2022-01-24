@@ -11,17 +11,17 @@ public class Deadline extends Task{
     public Deadline(String taskName, String dateTime) throws DukeException {
         super(taskName);
         dateTime = dateTime.trim();
-        String[] spl = dateTime.split(" ");
-        if(spl.length == 1) {
+        String[] splitString = dateTime.split(" ");
+        if (splitString.length == 1) {
             try {
-                this.date = LocalDate.parse(spl[0]);
+                this.date = LocalDate.parse(splitString[0]);
             } catch (Exception e) {
                 throw new DukeException("Invalid input into date");
             }
-        } else if(spl.length == 2) {
+        } else if (splitString.length == 2) {
             try {
-                this.date = LocalDate.parse(spl[0]);
-                this.time = LocalTime.parse(spl[1]);
+                this.date = LocalDate.parse(splitString[0]);
+                this.time = LocalTime.parse(splitString[1]);
             } catch (Exception e) {
                 throw new DukeException("Invalid input into date/time");
             }
@@ -38,16 +38,16 @@ public class Deadline extends Task{
     }
 
     public void printTime() {
-        if((this.time != null)){
+        if (this.time != null) {
             System.out.print(" " + this.time.format(DateTimeFormatter.ofPattern(("HH:mm"))));
         }
     }
 
     @Override
-    public void printTask(){
+    public void printTask() {
         System.out.print("[D]");
 
-        if(this.done){
+        if (this.done){
             System.out.print("[X] " + this.taskName + " ");
         } else {
             System.out.print("[ ] " + this.taskName + " ");
@@ -57,18 +57,18 @@ public class Deadline extends Task{
 
     @Override
     public String toString(){
-        String res = "";
-        res += "[D]";
+        String result = "";
+        result += "[D]";
         if(this.done){
-            res += "[X]";
+            result += "[X]";
         } else {
-            res += "[ ]";
+            result += "[ ]";
         }
-        res += this.taskName + " (by: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        result += this.taskName + " (by: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         if((this.time != null)){
-            res += " " + this.time.format(DateTimeFormatter.ofPattern(("HH:mm")));
+            result += " " + this.time.format(DateTimeFormatter.ofPattern(("HH:mm")));
         }
-        res += ")";
-        return res;
+        result += ")";
+        return result;
     }
 }
