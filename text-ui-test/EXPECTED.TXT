@@ -1,132 +1,132 @@
 *__________________________________________________________* 
-Hello! I'm ISTJBot. 
+Hello! I'm IstjBot.
 What can I do for you?
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-As an ISTJBot, I present you the task(s) in your list:
+As an IstjBot, I present you the task(s) in your list:
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-As an ISTJBot, I cannot find any description for your task.
+As an IstjBot, I cannot find any description for your task.
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-As an ISTJBot, I will add this task right now. 
+As an IstjBot, I will add this task right now.
 [T][ ] something 
 Now you have 1 task in the list.
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-As an ISTJBot, I cannot add a special task with no timing attached.
+As an IstjBot, I cannot add a special task with no timing attached.
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-As an ISTJBot, I cannot add a special task with no timing attached.
+As an IstjBot, I cannot add a special task with no timing attached.
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-As an ISTJBot, I will add this task right now. 
+As an IstjBot, I will add this task right now.
 [D][ ] homework (by: 2pm)
 Now you have 2 tasks in the list.
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-As an ISTJBot, I cannot add a special task with no timing attached.
+As an IstjBot, I cannot add a special task with no timing attached.
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-As an ISTJBot, I will add this task right now. 
+As an IstjBot, I will add this task right now.
 [E][ ] party (at: Monday Jenny's)
 Now you have 3 tasks in the list.
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-As an ISTJBot, I present you the task(s) in your list:
+As an IstjBot, I present you the task(s) in your list:
 1. [T][ ] something 
 2. [D][ ] homework (by: 2pm)
 3. [E][ ] party (at: Monday Jenny's)
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-As an ISTJBot, I cannot modify your task with that command.
+As an IstjBot, I cannot modify your task with that command.
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-As an ISTJBot, I cannot find a task with that index.
+As an IstjBot, I cannot find a task with that index.
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-As an ISTJBot, I cannot find a task with that index.
+As an IstjBot, I cannot find a task with that index.
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-As an ISTJBot, I've marked this task as done: 
+As an IstjBot, I've marked this task as done:
 [T][X] something 
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-As an ISTJBot, I've marked this task as done: 
+As an IstjBot, I've marked this task as done:
 [D][X] homework (by: 2pm)
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-As an ISTJBot, I've marked this task as done: 
+As an IstjBot, I've marked this task as done:
 [E][X] party (at: Monday Jenny's)
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-As an ISTJBot, I cannot modify your task with that command.
+As an IstjBot, I cannot modify your task with that command.
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-As an ISTJBot, I've unmarked this task: 
+As an IstjBot, I've unmarked this task:
 [D][ ] homework (by: 2pm)
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-As an ISTJBot, I've unmarked this task: 
+As an IstjBot, I've unmarked this task:
 [E][ ] party (at: Monday Jenny's)
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-As an ISTJBot, I present you the task(s) in your list:
+As an IstjBot, I present you the task(s) in your list:
 1. [T][X] something 
 2. [D][ ] homework (by: 2pm)
 3. [E][ ] party (at: Monday Jenny's)
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-As an ISTJBot, I've unmarked this task: 
+As an IstjBot, I've unmarked this task:
 [T][ ] something 
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-As an ISTJBot, I've removed this task: 
+As an IstjBot, I've removed this task:
 [T][ ] something 
 Now you have 2 tasks in the list.
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-As an ISTJBot, I've removed this task: 
+As an IstjBot, I've removed this task:
 [E][ ] party (at: Monday Jenny's)
 Now you have 1 task in the list.
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-As an ISTJBot, I cannot find a task with that index.
+As an IstjBot, I cannot find a task with that index.
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-As an ISTJBot, I present you the task(s) in your list:
+As an IstjBot, I present you the task(s) in your list:
 1. [D][ ] homework (by: 2pm)
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-As an ISTJBot, I cannot understand more than bye.
+As an IstjBot, I cannot understand more than bye.
 *__________________________________________________________* 
 
 *__________________________________________________________* 
-Bye, I, ISTJBot, will be organizing your tasks until you come back.
+Bye, I, IstjBot, will be organizing your tasks until you come back.
 *__________________________________________________________* 
 

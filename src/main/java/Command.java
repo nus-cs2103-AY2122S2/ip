@@ -14,6 +14,6 @@ public enum Command {
                 return command;
             }
         }
-        throw new BotException("As an ISTJBot, I don't understand what that command means.");
+        throw new BotException("As an IstjBot, I don't understand what that command means.");
     }
 }
