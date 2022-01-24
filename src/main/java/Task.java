@@ -7,8 +7,14 @@ class Task {
     protected int done;
     protected String item;
 
-    Task(String item) {
-        done = 0;
+    /**
+        Constructor for Task class.
+
+        @param item a String to description of the Task.
+        @param done an int to indicate whether the item is done. 0 indicates not completed and 1 indicates completed.
+     */
+    Task(String item, int done) {
+        this.done = done;
         this.item = item;
     }
 
@@ -25,7 +31,7 @@ class Task {
     }
 
     /*
-        Method to mark task done.
+        Method to mark the task as completed.
     */
     public void markDone() {
         done = 1;
@@ -33,7 +39,7 @@ class Task {
     }
 
     /*
-        Method to mark task undone.
+        Method to mark task as uncompleted.
     */
     public void markUndone() {
         done = 0;
@@ -45,6 +51,11 @@ class Task {
     */
     public String getItemAndStatus() {
         String returned = "[" + donenessSymbol(this.done) + "] " + this.item;
+        return returned;
+    }
+
+    public String saveData() {
+        String returned = this.done + " " + this.item;
         return returned;
     }
 }

@@ -29,7 +29,7 @@ class ToDoList {
                         throw new SiriException("There is currently no tasks!!");
                     } else {
                         try {
-                            int index = Integer.parseInt(inputSplit[1]);
+                            int index = Integer.parseInt(inputSplit[1].trim());
                             index--;
 
                             if (index >= lst.size() || index < 0) {
@@ -50,7 +50,7 @@ class ToDoList {
                         throw new SiriException("There is currently no tasks!!");
                     } else {
                         try {
-                            int index = Integer.parseInt(inputSplit[1]);
+                            int index = Integer.parseInt(inputSplit[1].trim());
                             index--;
 
                             if (index >= lst.size() || index < 0) {
@@ -75,7 +75,7 @@ class ToDoList {
                     if (inputSplit.length == 1 || inputSplit[1].trim().length() == 0) {
                         throw new SiriException("todo cannot be EMPTY!! Please ENTER something for todo!!");
                     } else {
-                        ToDos todoTask = new ToDos(inputSplit[1]);
+                        ToDos todoTask = new ToDos(inputSplit[1].trim(), 0);
                         this.addItem(todoTask);
                         break;
                     }
@@ -88,7 +88,7 @@ class ToDoList {
                         if (dlSplit.length == 1 || dlSplit[1].trim().length() == 0) {
                             throw new SiriException("deadline has no date/time!! Please ENTER a date/time for deadline!!");
                         } else {
-                            Deadline dlTask = new Deadline(dlSplit[0], dlSplit[1]);
+                            Deadline dlTask = new Deadline(dlSplit[0].trim(), 0, dlSplit[1].trim());
                             this.addItem(dlTask);
                             break;
                         }
@@ -102,7 +102,7 @@ class ToDoList {
                         if (eventSplit.length == 1 || eventSplit[1].trim().length() == 0) {
                             throw new SiriException("event has no date/time!! Please ENTER a date/time for event!!");
                         } else {
-                            Event eventTask = new Event(eventSplit[0], eventSplit[1]);
+                            Event eventTask = new Event(eventSplit[0].trim(), 0, eventSplit[1].trim());
                             this.addItem(eventTask);
                             break;
                         }
@@ -114,7 +114,7 @@ class ToDoList {
                         throw new SiriException("There is currently no tasks!!");
                     } else {
                         try {
-                            int index = Integer.parseInt(inputSplit[1]);
+                            int index = Integer.parseInt(inputSplit[1].trim());
                             index--;
 
                             if (index >= lst.size() || index < 0) {
@@ -173,5 +173,35 @@ class ToDoList {
     */
     public void unmarkItem(int index) {
         lst.get(index).markUndone();
+    }
+
+    public void startUpAddTask(String input) {
+        String[] inputSplit = input.split(" ", 3);
+
+        switch (inputSplit[0]) {
+            case "T":
+                ToDos todo = new ToDos(inputSplit[2].trim(), Integer.parseInt(inputSplit[1].trim()));
+                lst.add(todo);
+                break;
+            case "D":
+                String[] dlSubSplit = inputSplit[2].split(" /by ", 2);
+                Deadline dl = new Deadline(dlSubSplit[0].trim(), Integer.parseInt(inputSplit[1].trim()), dlSubSplit[1].trim());
+                lst.add(dl);
+                break;
+            case "E":
+                String[] eSubSplit = inputSplit[2].split(" /at ", 2);
+                Event e = new Event(eSubSplit[0].trim(), Integer.parseInt(inputSplit[1].trim()), eSubSplit[1].trim());
+                lst.add(e);
+                break;
+        }
+
+    }
+
+    public String saveData() {
+        StringBuilder returned = new StringBuilder();
+
+        lst.forEach((item) -> returned.append(item.saveData() + "\n"));
+
+        return returned.toString();
     }
 }
