@@ -21,6 +21,10 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public String toFileString() {
+        return String.format("|%d|%s", isDone ? 1 : 0, description);
+    }
+
     @Override
     public String toString() {
         return getStatusIcon() + " " + description;
