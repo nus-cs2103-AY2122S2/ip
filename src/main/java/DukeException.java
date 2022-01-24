@@ -17,7 +17,7 @@ public class DukeException extends Exception {
      * @param tasks               ArrayList of Tasks
      * @throws DukeException
      */
-    public void validateInputs(String command, String[] commandSplitBySpace, ArrayList<Task> tasks) throws DukeException {
+    public void validateInputs(String command, String[] commandSplitBySpace, TaskList tasks) throws DukeException {
         switch (commandSplitBySpace[0]) {
         case "list":
         case "bye":
@@ -26,8 +26,7 @@ public class DukeException extends Exception {
         case "unmark":
         case "delete":
             if (commandSplitBySpace.length > 1) {
-                if (!(tasks.size() != 0 && Integer.parseInt(commandSplitBySpace[1]) - 1 >= 0 &&
-                        Integer.parseInt(commandSplitBySpace[1]) - 1 < tasks.size())) {
+                if (!tasks.hasTask(Integer.parseInt(commandSplitBySpace[1]) - 1)) {
                     throw new DukeException("☹ OOPS!!! The task to be " + commandSplitBySpace[0] + "ed does not exist.");
                 }
             } else {
