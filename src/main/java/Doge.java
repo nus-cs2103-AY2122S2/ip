@@ -101,11 +101,21 @@ public class Doge {
         String[] date = temp[0].split("-");
         int time = Integer.parseInt(temp[1]);
 
+        LocalDateTime currDateTime = LocalDateTime.now();
+        LocalDateTime userDateTime;
+
+
         try {
-            return LocalDateTime.of(Integer.parseInt(date[0]), Integer.parseInt(date[1]),
+            userDateTime = LocalDateTime.of(Integer.parseInt(date[0]), Integer.parseInt(date[1]),
                     Integer.parseInt(date[2]), time / 100, time % 100);
+
+            if (userDateTime.isAfter(currDateTime)) {
+                return userDateTime;
+            } else {
+
+            }
         } catch (DateTimeException e) {
-           throw new DogeException("Are you lacking common sense?" + e.getMessage());
+            throw new DogeException("Are you lacking common sense?" + e.getMessage());
         }
     }
 
@@ -265,44 +275,44 @@ public class Doge {
     }
 
     public static ArrayList<Task> load() throws DogeException {
-       try {
-           File f = new File("./data/doge.txt");
-           ArrayList<Task> temp = new ArrayList<>();
-           if (f.createNewFile()) {
-               System.out.println("Storage file does not exist! Creating one right now...");
-           } else {
-               Scanner s = new Scanner(f);
-               while (s.hasNextLine()) {
-                   String[] curr = s.nextLine().split( "\\|");
-                   Task currTask;
-                   switch(curr[0].trim()) {
-                   case "T":
-                       currTask = new Todo(curr[2].trim());
-                       if (curr[1].equals("✓")) {
-                           currTask.mark();
-                       }
-                       temp.add(currTask);
-                       break;
-                   case "D":
-                       currTask = new Deadline(curr[2].trim(), getDateTime(curr[3].trim()));
-                       if (curr[1].equals("✓")) {
-                           currTask.mark();
-                       }
-                       temp.add(currTask);
-                       break;
-                   case "E":
-                       currTask = new Event(curr[2].trim(), getDateTime(curr[3].trim()));
-                       if (curr[1].equals("✓")) {
-                           currTask.mark();
-                       }
-                       temp.add(currTask);
-                       break;
-                   }
-               }
-           }
-          return temp;
-       } catch (IOException e) {
-          throw new DogeException("Failed to create new storage file!");
-       }
+        try {
+            File f = new File("./data/doge.txt");
+            ArrayList<Task> temp = new ArrayList<>();
+            if (f.createNewFile()) {
+                System.out.println("Storage file does not exist! Creating one right now...");
+            } else {
+                Scanner s = new Scanner(f);
+                while (s.hasNextLine()) {
+                    String[] curr = s.nextLine().split( "\\|");
+                    Task currTask;
+                    switch(curr[0].trim()) {
+                    case "T":
+                        currTask = new Todo(curr[2].trim());
+                        if (curr[1].equals("✓")) {
+                            currTask.mark();
+                        }
+                        temp.add(currTask);
+                        break;
+                    case "D":
+                        currTask = new Deadline(curr[2].trim(), getDateTime(curr[3].trim()));
+                        if (curr[1].equals("✓")) {
+                            currTask.mark();
+                        }
+                        temp.add(currTask);
+                        break;
+                    case "E":
+                        currTask = new Event(curr[2].trim(), getDateTime(curr[3].trim()));
+                        if (curr[1].equals("✓")) {
+                            currTask.mark();
+                        }
+                        temp.add(currTask);
+                        break;
+                    }
+                }
+            }
+            return temp;
+        } catch (IOException e) {
+            throw new DogeException("Failed to create new storage file!");
+        }
     }
 }
