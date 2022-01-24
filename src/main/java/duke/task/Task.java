@@ -1,32 +1,50 @@
 package duke.task;
 
+/**
+ * Represents a task. Meant to be inherited by more specified tasks.
+ */
+
 public class Task {
     public String name;
-    boolean isDone;
+    /**
+     * To indicate whether the task has been completed
+     */
+    boolean isMarked;
+
+    /**
+     * Initializes a new task.
+     *
+     * @param name Description or name of the task.
+     */
 
     public Task(String name) {
         this.name = name;
-        this.isDone = false;
+        this.isMarked = false;
     }
 
-    public boolean isDone() {
-        return this.isDone;
+    public boolean isMarked() {
+        return this.isMarked;
     }
 
     public String getName() {
         return this.name;
     }
 
-    public void mark() {
-        this.isDone = true;
+    /**
+     * Marks the task as done.
+     */
+    public void setMarked(boolean isMarked) {
+        this.isMarked = isMarked;
     }
 
-    public void unmark() {
-        this.isDone = false;
-    }
+    /**
+     * Prints out a formatted version of the task with its done state.
+     *
+     * @return Formatted task.
+     */
 
     public String toString() {
-        String doneState = isDone ? "X" : " ";
+        String doneState = isMarked ? "X" : " ";
         return String.format("[%s] %s", doneState, this.name);
     }
 }

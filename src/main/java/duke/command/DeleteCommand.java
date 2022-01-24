@@ -6,11 +6,25 @@ import duke.function.Ui;
 import duke.function.Storage;
 import duke.task.Task;
 
+/**
+ * Represents a command to delete a task.
+ */
 public class DeleteCommand extends Command {
-
+    /**
+     * The task number to be deleted.
+     */
     int taskNumber;
+    /**
+     * To store any exceptions that were thrown during the parsing of the command.
+     */
     DukeException exception;
 
+    /**
+     * Initializes the delete command with the provided user input.
+     * Parses through the user input to retrieve the task number.
+     *
+     * @param fullCommand The user input.
+     */
     public DeleteCommand(String fullCommand) {
         super(fullCommand);
 
@@ -24,10 +38,18 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * Deletes the task corresponding to the specified number.
+     *
+     * @param tasks   The current tasks for the command to interact with.
+     * @param ui      The ui for the command to print output.
+     * @param storage The storage for the command to save and load tasks to an external file.
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (this.exception != null) throw this.exception;
-        if (this.taskNumber <= 0 || this.taskNumber > tasks.size())
+        if (this.taskNumber <= 0 || this.taskNumber > tasks.getSize())
             throw new DukeException("Please only input integers within the range of your tasks");
 
         Task removedTask = tasks.deleteByNumber(this.taskNumber);
@@ -35,6 +57,11 @@ public class DeleteCommand extends Command {
         ui.print(String.format("  %s", removedTask.toString()));
     }
 
+    /**
+     * Returns false as this is not an exit command.
+     *
+     * @return
+     */
     @Override
     public boolean isExit() {
         return false;

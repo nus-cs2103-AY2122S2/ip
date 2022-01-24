@@ -9,37 +9,37 @@ public class TaskTest {
     @Test
     public void mark_unmarked() {
         Task task = new Task("taskName");
-        task.mark();
-        assertEquals(task.isDone(), true);
+        task.setMarked(true);
+        assertEquals(task.isMarked(), true);
     }
 
     @Test
     public void mark_marked() {
         Task task = new Task("taskName");
-        task.mark();
-        task.mark();
-        assertEquals(task.isDone(), true);
+        task.setMarked(true);
+        task.setMarked(true);
+        assertEquals(task.isMarked(), true);
     }
 
     @Test
     public void unmark_unmarked() {
         Task task = new Task("taskName");
-        task.unmark();
-        assertEquals(task.isDone(), false);
+        task.setMarked(false);
+        assertEquals(task.isMarked(), false);
     }
 
     @Test
     public void unmark_marked() {
         Task task = new Task("taskName");
-        task.mark();
-        task.unmark();
-        assertEquals(task.isDone(), false);
+        task.setMarked(true);
+        task.setMarked(false);
+        assertEquals(task.isMarked(), false);
     }
 
     @Test
     public void toString_marked() {
         Task task = new Task("taskName");
-        task.mark();
+        task.setMarked(true);
         assertEquals(task.toString(), "[X] taskName");
     }
 
