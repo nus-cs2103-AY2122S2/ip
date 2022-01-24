@@ -19,6 +19,6 @@ public class Deadline extends Task {
 
     @Override
     public String toSaveString(String delimiter) {
-        return "D" + delimiter + super.toSaveString(delimiter) + delimiter + this.by;
+        return "D" + delimiter + super.toSaveString(delimiter) + delimiter + DateTimeUtil.getSaveString(this.by);
     }
 }

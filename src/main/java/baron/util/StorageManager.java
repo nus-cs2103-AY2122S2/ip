@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -70,7 +71,7 @@ public class StorageManager {
             TaskType taskType;
             boolean isDone;
             String description = taskStringArray[2];
-            String additionalInfo = null;
+            LocalDateTime additionalInfo = null;
 
             switch (taskStringArray[0]) {
             case "T":
@@ -95,7 +96,7 @@ public class StorageManager {
             }
 
             if (taskStringArray.length == 4) {
-                additionalInfo = taskStringArray[3];
+                additionalInfo = DateTimeUtil.getDateTime(taskStringArray[3]);
             }
 
             Task newTask;

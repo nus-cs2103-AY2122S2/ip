@@ -19,6 +19,6 @@ public class Event extends Task {
 
     @Override
     public String toSaveString(String delimiter) {
-        return "E" + delimiter + super.toSaveString(delimiter) + delimiter + this.at;
+        return "E" + delimiter + super.toSaveString(delimiter) + delimiter + DateTimeUtil.getSaveString(this.at);
     }
 }

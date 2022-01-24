@@ -22,4 +22,8 @@ public class DateTimeUtil {
     public static String getDisplayString(LocalDateTime localDateTime) {
         return localDateTime.format(DateTimeUtil.displayFormatter);
     }
+
+    public static String getSaveString(LocalDateTime localDateTime) {
+        return localDateTime.format(DateTimeUtil.inputFormatter);
+    }
 }
