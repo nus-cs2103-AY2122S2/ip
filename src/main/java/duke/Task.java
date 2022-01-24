@@ -1,3 +1,5 @@
+package duke;
+
 public class Task {
     //Attributes of a task
     String taskName;

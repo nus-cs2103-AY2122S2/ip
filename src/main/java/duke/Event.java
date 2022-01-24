@@ -1,13 +1,17 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task{
+public class Event extends Task{
     LocalDate date;
     LocalTime time = null;
 
-    public Deadline(String taskName, String dateTime) throws DukeException {
+    //date is entered as "__date__ __time__"
+    public Event(String taskName, String dateTime) throws DukeException {
         super(taskName);
+
         dateTime = dateTime.trim();
         String[] spl = dateTime.split(" ");
         if(spl.length == 1) {
@@ -29,7 +33,7 @@ public class Deadline extends Task{
     }
 
     public void printDate() {
-        System.out.print("(by: ");
+        System.out.print("(at: ");
         System.out.print(this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
         printTime();
         System.out.println(")");
@@ -42,8 +46,9 @@ public class Deadline extends Task{
     }
 
     @Override public void printTask(){
-        System.out.print("[D]");
-
+        //print task type
+        System.out.print("[E]");
+        //print task done symbol
         if(this.done){
             System.out.print("[X] " + this.taskName + " ");
         } else {
