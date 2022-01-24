@@ -29,6 +29,10 @@ public abstract class Task {
         return (isDone ? "X" : " ");
     }
 
+    public String toOutputLine(){
+        return this.getType() + " | " + (isDone ? "1 " : "0 ") + "| " + this.title;
+    }
+
     @Override
     public String toString(){
         return this.title;
