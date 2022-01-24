@@ -1,5 +1,10 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Connor {
     private static final String CURRENT_VERSION = "Version 1.61";
@@ -126,10 +131,20 @@ public class Connor {
                 print(ERROR_EMPTY_DL_DESC);
                 return;
             }
-            Deadline deadline = new Deadline(thing, when);
-            taskList.add(deadline);
-            print(ADD_NEW_TASK);
-            print(INDENT + deadline);
+            try {
+                // Check if 'when' is a valid date
+                LocalDate ld = LocalDate.parse(when);
+                Deadline deadline = new Deadline(thing, ld);
+                taskList.add(deadline);
+                print(ADD_NEW_TASK);
+                print(INDENT + deadline);
+            } catch (DateTimeParseException e) {
+                // Otherwise, treat it as a normal String
+                Deadline deadline = new Deadline(thing, when);
+                taskList.add(deadline);
+                print(ADD_NEW_TASK);
+                print(INDENT + deadline);
+            }
             break;
         }
         case EVENT: {
@@ -144,10 +159,20 @@ public class Connor {
                 print(ERROR_EMPTY_EVENT_DESC);
                 return;
             }
-            Event event = new Event(thing, when);
-            taskList.add(event);
-            print(ADD_NEW_TASK);
-            print(INDENT + event);
+            try {
+                // Check if 'when' is a valid date
+                LocalDate ld = LocalDate.parse(when);
+                Event event = new Event(thing, ld);
+                taskList.add(event);
+                print(ADD_NEW_TASK);
+                print(INDENT + event);
+            } catch (DateTimeParseException e) {
+                // Otherwise, treat it as a normal String
+                Event event = new Event(thing, when);
+                taskList.add(event);
+                print(ADD_NEW_TASK);
+                print(INDENT + event);
+            }
             break;
         }
         default:
