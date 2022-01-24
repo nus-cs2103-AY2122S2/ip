@@ -18,13 +18,13 @@ public class Storage {
     public static TaskList load() throws DukeIOException {
         FileInputStream dbStream = openDatabaseRead();
 
-        return TaskStoreSerializer.inflate(dbStream);
+        return TaskListSerializer.inflate(dbStream);
     }
 
     public static void save(TaskList taskList) throws DukeIOException {
         FileOutputStream dbStream = openDatabaseWrite();
 
-        TaskStoreSerializer.deflate(taskList, dbStream);
+        TaskListSerializer.deflate(taskList, dbStream);
     }
 
     private static void initDataStore() throws DukeIOException {

@@ -10,7 +10,7 @@ import java.io.IOException;
  * Does not provide File System operations.
  */
 
-public class TaskStoreSerializer {
+public class TaskListSerializer {
 
     public static TaskList inflate(FileInputStream dbStream) throws DukeIOException {
         TaskList store = new TaskList();
