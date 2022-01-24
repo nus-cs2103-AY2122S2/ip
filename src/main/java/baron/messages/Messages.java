@@ -9,6 +9,7 @@ public class Messages {
     public static final String MESSAGE_ADD_TASK_SUCCESS = "Got it. I've added this task:\n  ";
     public static final String MESSAGE_LIST_TASK = "Here are the tasks in your list:\n";
     public static final String MESSAGE_NO_TASK = "You have no tasks.";
+    public static final String MESSAGE_DATE_TIME_FORMAT_INVALID = "The date/time should be in the following format: d/M/yyyy HH:mm";
 
     public static String generateNoOfTasksMessage(int noOfTasks) {
         return String.format("Now you have %d tasks in the list.", noOfTasks);
