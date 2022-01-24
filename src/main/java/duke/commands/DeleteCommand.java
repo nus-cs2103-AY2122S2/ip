@@ -15,7 +15,6 @@ public class DeleteCommand extends Command {
     public DeleteCommand(String args) {
         this.args = args;
     }
-
     
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
