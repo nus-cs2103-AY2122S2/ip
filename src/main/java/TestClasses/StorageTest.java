@@ -1,10 +1,10 @@
 package TestClasses;
 
-import dukeClasses.DukeException;
-import dukeClasses.Storage;
-import dukeClasses.Task;
-import dukeClasses.ToDo;
-import dukeClasses.Event;
+import dukeclasses.DukeException;
+import dukeclasses.Storage;
+import dukeclasses.Task;
+import dukeclasses.ToDo;
+import dukeclasses.Event;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class StorageTest {
 
     @Test
-    public void loadTest_fileDoesNotExist_createEmptyFile(){
+    public void loadTest_fileDoesNotExist_createEmptyFile() {
         String filePath = "dataTest.txt";
         if (Files.exists(Paths.get(filePath))) {
             try {
@@ -51,7 +51,7 @@ public class StorageTest {
     }
 
     @Test
-    public void updateStorage_newTaskArrayList_containTasks(){
+    public void updateStorage_newTaskArrayList_containTasks() {
         String filePath = "dataTest.txt";
         File file = new File(filePath);
         if (Files.exists(Paths.get(filePath))) {
@@ -68,6 +68,7 @@ public class StorageTest {
         tasks.add(new Event("do homework", LocalDate.parse("2021-12-05")));
 
         Storage storage = new Storage(filePath);
+
         try {
             storage.updateStorage(tasks);
         } catch (DukeException errorMessage) {
@@ -96,7 +97,7 @@ public class StorageTest {
     }
 
     @Test
-    public void appendToStorage_newTask_listOf1Task(){
+    public void appendToStorage_newTask_listOf1Task() {
         String filePath = "dataTest.txt";
         File file = new File(filePath);
         if (Files.exists(Paths.get(filePath))) {
@@ -125,4 +126,5 @@ public class StorageTest {
         assertEquals(sc.nextLine(), expectedOutput);
         sc.close();
     }
+
 }
