@@ -65,4 +65,3 @@ Some of the features that _Doge_ has:
 4. Marking/Unmarking a task:
    1. **mark** `task no.`: mark a task as completed
    2. **unmark** `task no.`: unmark a task as uncompleted
->>>>>>> branch-Level-8

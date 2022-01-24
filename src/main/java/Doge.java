@@ -114,7 +114,7 @@ public class Doge {
             return LocalDateTime.of(Integer.parseInt(date[0]), Integer.parseInt(date[1]),
                     Integer.parseInt(date[2]), time / 100, time % 100);
         } catch (DateTimeException e) {
-           throw new DogeException("Are you lacking common sense?" + e.getMessage());
+           throw new DogeException("Are you lacking common sense? Invalid date/time!");
         }
     }
 
@@ -128,13 +128,12 @@ public class Doge {
         } else if (deadline.length == 1) {
             throw new DogeException("Is it even possible to have a deadline with no END DATE?");
         } else {
-            LocalDateTime dateTime = getDateTime(deadline[1]);
+            LocalDateTime dateTime = getDateTime(deadline[1].trim());
             Task currTask = new Deadline(description, dateTime);
             tasks.add(currTask);
             System.out.println(startLine);
             System.out.println("Stop troubling me, I've already added this task:");
             System.out.println(currTask);
-            System.out.println((tasks.size() > 1) ? "Can you even finish " + tasks.size() + " tasks?" : "Can you even finish " + tasks.size() + " task?");
             System.out.println(endLine);
         }
     }
@@ -151,7 +150,6 @@ public class Doge {
         System.out.println(startLine);
         System.out.println("Stop troubling me, I've already added this task:");
         System.out.println(curr);
-        System.out.println((tasks.size() > 1) ? "Can you even finish " + tasks.size() + " tasks?" : "Can you even finish " + tasks.size() + " task?");
         System.out.println(endLine);
     }
 
@@ -164,13 +162,12 @@ public class Doge {
         } else if (event.length == 1) {
             throw new DogeException("Is it even possible to have an event with no DATE?");
         } else {
-            LocalDateTime dateTime = getDateTime(event[1]);
+            LocalDateTime dateTime = getDateTime(event[1].trim());
             Task currTask = new Event(description, dateTime);
             tasks.add(currTask);
             System.out.println(startLine);
             System.out.println("Stop troubling me, I've already added this task:");
             System.out.println(currTask);
-            System.out.println((tasks.size() > 1) ? "Can you even finish " + tasks.size() + " tasks?" : "Can you even finish " + tasks.size() + " task?");
             System.out.println(endLine);
         }
     }
@@ -226,7 +223,6 @@ public class Doge {
             System.out.println(startLine);
             System.out.println("Wasn't expecting you to finish that task, already marked for you!");
             System.out.println(tasks.get(pos));
-            System.out.println((tasks.size() > 1) ? "You have " + tasks.size() + " tasks left!" : "You have " + tasks.size() + " task left!");
             System.out.println(endLine);
         }
 
@@ -255,7 +251,6 @@ public class Doge {
             System.out.println(startLine);
             System.out.println("Knew that you didnt't finish that task, already unmarked it for you!");
             System.out.println(tasks.get(pos));
-            System.out.println((tasks.size() > 1) ? "You have " + tasks.size() + " tasks left!" : "You have " + tasks.size() + " task left!");
             System.out.println(endLine);
         }
 
