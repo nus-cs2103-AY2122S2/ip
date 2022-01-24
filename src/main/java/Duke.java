@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -60,7 +63,18 @@ public class Duke {
                         throw new DukeException("deadline");
                     }
                     // Create new Deadline object
-                    Task newTask1 = new Deadline(content[0].trim(), content[1].trim());
+                    LocalDate d = LocalDate.parse(content[1].trim().split(" ")[0].trim(),
+                            DateTimeFormatter.ofPattern("MMM dd yyyy"));
+                    LocalTime t;
+                    Task newTask1;
+                    if (content[1].trim().split(" ").length == 2) {
+                        t = LocalTime.parse(content[1].trim().split(" ")[1].trim(),
+                                DateTimeFormatter.ofPattern("HH:mm"));
+                        newTask1 = new Deadline(content[0].trim(), d, t);
+                    } else {
+                        newTask1 = new Deadline(content[0].trim(), d);
+                    }
+
                     messages.add(newTask1);
                     System.out.printf("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n",
                             newTask1,messages.size());
@@ -71,8 +85,21 @@ public class Duke {
                     if (content1[0].trim().equals("")) {
                         throw new DukeException("event");
                     }
+                    LocalDate ds = LocalDate.parse(content1[1].trim().split(" ")[0].trim(),
+                            DateTimeFormatter.ofPattern("MMM dd yyyy"));
+                    LocalTime t1;
+                    LocalTime t2;
+                    Task newTask2;
+                    if (content1[1].trim().split(" ").length == 2) {
+                        t1 = LocalTime.parse(content1[1].trim().split(" ")[1].trim().split("-")[0],
+                                DateTimeFormatter.ofPattern("HH:mm"));
+                        t2 = LocalTime.parse(content1[1].trim().split(" ")[1].trim().split("-")[1],
+                                DateTimeFormatter.ofPattern("HH:mm"));
+                       newTask2 = new Event(content1[0].trim(), ds, t1, t2);
+                    } else {
+                       newTask2 = new Event(content1[0].trim(), ds);
+                    }
                     // Create new Event object
-                    Task newTask2 = new Event(content1[0].trim(), content1[1].trim());
                     messages.add(newTask2);
                     System.out.printf("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n",
                             newTask2,messages.size());
