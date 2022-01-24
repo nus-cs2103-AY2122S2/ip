@@ -1,3 +1,5 @@
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -5,6 +7,8 @@ import java.util.regex.Pattern;
 
 public class CommandParser {
     private final Scanner input;
+
+    public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy");
 
     /**
      * Available command, their syntax (in regex), and usage documentation
@@ -19,8 +23,12 @@ public class CommandParser {
             { "mark", "mark (\\d+)", "mark <task number>" },
             { "unmark", "unmark (\\d+)", "unmark <task number>" },
             { "todo", "todo (.*)", "todo <description>" },
-            { "deadline", "deadline (.*) /(by) (.*)", "deadline <description> /by <date>" },
-            { "event", "event (.*) /(at) (.*)", "event <description> /at <date>" },
+            { "deadline",
+                    "deadline (.*) /(by) ((?:[1-9]|[12][0-9]|3[01])/(?:[1-9]|1[0-2])/[0-9]{4})",
+                    "deadline <description> /by <d/M/yyyy>" },
+            { "event",
+                    "event (.*) /(at) ((?:[1-9]|[12][0-9]|3[01])/(?:[1-9]|1[0-2])/[0-9]{4})",
+                    "event <description> /at <d/M/yyyy>" },
             { "delete", "delete (\\d+)", "delete <task number>" },
     };
 
