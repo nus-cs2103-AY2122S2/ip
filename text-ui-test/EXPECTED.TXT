@@ -80,13 +80,25 @@ ____________________________________________________________
 
 ____________________________________________________________
 Pardon me, but the duke.Event format is incorrect. The format should be:
-	[duke.Task] [Description] /at yyyy-mm-dd/HH:mm/HH:mm
+	[Task] [Description] /at yyyy-mm-dd/HH:mm/HH:mm
 ____________________________________________________________
 
 
 ____________________________________________________________
 Pardon me, but the duke.Deadline format is incorrect. The format should be:
-	[duke.Task] [Description] /by yyyy-mm-dd/HH:mm (leave "/HH:mm" empty if no time in current task)
+	[Task] [Description] /by yyyy-mm-dd/HH:mm (leave "/HH:mm" empty if no time in current task)
+____________________________________________________________
+
+
+____________________________________________________________
+My apologies, but no tasks were found for the given keyword.
+____________________________________________________________
+
+
+____________________________________________________________
+I've searched the archives and found these matching tasks in your list:
+1. [T][ ] buy milk
+
 ____________________________________________________________
 
 
