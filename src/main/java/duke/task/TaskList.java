@@ -1,7 +1,9 @@
 package duke.task;
 
-import java.lang.reflect.Array;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Container class to hold a list of tasks
@@ -15,6 +17,31 @@ public class TaskList {
 
     public ArrayList<Task> getList() {
         return tasks;
+    }
+
+    public ArrayList<Task> getTasksBasedOnDate(LocalDate date, int type) {
+        ArrayList<Predicate<Task>> taskTypePredicateList = new ArrayList<>();
+        ArrayList<Predicate<Task>> taskDatePredicateList = new ArrayList<>();
+
+        taskTypePredicateList.add(t -> t instanceof DeadlineTask);
+        taskTypePredicateList.add(t -> t instanceof EventTask);
+
+        taskDatePredicateList.add(t -> ((DeadlineTask)t).getDueDate().equals(date));
+        taskDatePredicateList.add(t -> ((EventTask)t).getDate().equals(date));
+        taskDatePredicateList.add(t -> ((DeadlineTask)t).getDueDate().isBefore(date));
+        taskDatePredicateList.add(t -> ((EventTask)t).getDate().isBefore(date));
+        taskDatePredicateList.add(t -> ((DeadlineTask)t).getDueDate().isAfter(date));
+        taskDatePredicateList.add(t -> ((EventTask)t).getDate().isAfter(date));
+
+        ArrayList<Task> result = new ArrayList<>();
+        int listIndex = type * 2;
+        for(Predicate<Task> p : taskTypePredicateList) {
+            result.addAll(this.tasks.stream()
+                    .filter(p)
+                    .filter(taskDatePredicateList.get(listIndex++))
+                    .collect(Collectors.toList()));
+        }
+        return result;
     }
 
     /**

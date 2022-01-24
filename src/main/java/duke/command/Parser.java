@@ -53,54 +53,15 @@ public class Parser {
                 ArrayList<Task> result;
                 switch (args[1]) {
                 case "/on":
-                    result = (ArrayList<Task>) taskList.getList()
-                            .stream()
-                            .filter(t -> t instanceof DeadlineTask)
-                            .filter(t -> ((DeadlineTask) t).getDueDate()
-                                    .equals(LocalDate.parse(args[2],
-                                            DateTimeFormatter.ofPattern("dd/M/yyyy"))))
-                            .collect(Collectors.toList());
-                    result.addAll(taskList.getList()
-                            .stream()
-                            .filter(t -> t instanceof EventTask)
-                            .filter(t -> ((EventTask) t).getDate()
-                                    .equals(LocalDate.parse(args[2],
-                                            DateTimeFormatter.ofPattern("dd/M/yyyy"))))
-                            .collect(Collectors.toList()));
+                    result = taskList.getTasksBasedOnDate(LocalDate.parse(args[2], DateTimeFormatter.ofPattern("dd/M/yyyy")), 0);
                     ui.print(result);
                     break;
                 case "/before":
-                    result = (ArrayList<Task>) taskList.getList()
-                            .stream()
-                            .filter(t -> t instanceof DeadlineTask)
-                            .filter(t -> ((DeadlineTask) t).getDueDate()
-                                    .isBefore(LocalDate.parse(args[2],
-                                            DateTimeFormatter.ofPattern("dd/M/yyyy"))))
-                            .collect(Collectors.toList());
-                    result.addAll(taskList.getList()
-                            .stream()
-                            .filter(t -> t instanceof EventTask)
-                            .filter(t -> ((EventTask) t).getDate()
-                                    .isBefore(LocalDate.parse(args[2],
-                                            DateTimeFormatter.ofPattern("dd/M/yyyy"))))
-                            .collect(Collectors.toList()));
+                    result = taskList.getTasksBasedOnDate(LocalDate.parse(args[2], DateTimeFormatter.ofPattern("dd/M/yyyy")), 1);
                     ui.print(result);
                     break;
                 case "/after":
-                    result = (ArrayList<Task>) taskList.getList()
-                            .stream()
-                            .filter(t -> t instanceof DeadlineTask)
-                            .filter(t -> ((DeadlineTask) t).getDueDate()
-                                    .isAfter(LocalDate.parse(args[2],
-                                            DateTimeFormatter.ofPattern("dd/M/yyyy"))))
-                            .collect(Collectors.toList());
-                    result.addAll(taskList.getList()
-                            .stream()
-                            .filter(t -> t instanceof EventTask)
-                            .filter(t -> ((EventTask) t).getDate()
-                                    .isAfter(LocalDate.parse(args[2],
-                                            DateTimeFormatter.ofPattern("dd/M/yyyy"))))
-                            .collect(Collectors.toList()));
+                    result = taskList.getTasksBasedOnDate(LocalDate.parse(args[2], DateTimeFormatter.ofPattern("dd/M/yyyy")), 2);
                     ui.print(result);
                     break;
                 }
