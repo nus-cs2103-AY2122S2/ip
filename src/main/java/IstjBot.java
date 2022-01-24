@@ -1,15 +1,21 @@
-import java.util.Scanner;
-import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
-public class ISTJBot {
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class IstjBot {
     private static boolean doneChatting = false;
     private static ArrayList<Task> tasks = new ArrayList<>();
-    private static String list = "As an ISTJBot, I present you the task(s) in your list:";
+    private static String list = "As an IstjBot, I present you the task(s) in your list:";
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        String welcomeMessage = "Hello! I'm ISTJBot. \n" + "What can I do for you?";
+        // Initialization
+        loadFile();
+        String welcomeMessage = "Hello! I'm IstjBot. \n" + "What can I do for you?";
         printResponse(welcomeMessage);
 
         while (!doneChatting) {
@@ -23,7 +29,7 @@ public class ISTJBot {
                 case DEADLINE:
                 case EVENT:
                     if (requestInfo.length == 1) {
-                        throw new BotException("As an ISTJBot, I cannot find any description for your task.");
+                        throw new BotException("As an IstjBot, I cannot find any description for your task.");
                     }
                     addTask(command, requestInfo);
                     // break required for each case
@@ -33,14 +39,14 @@ public class ISTJBot {
                 case UNMARK:
                 case DELETE:
                     if (requestInfo.length != 2) {
-                        throw new BotException("As an ISTJBot, I cannot modify your task with that command.");
+                        throw new BotException("As an IstjBot, I cannot modify your task with that command.");
                     }
                     modifyTask(command, Integer.parseInt(requestInfo[1]));
                     break;
 
                 case LIST:
                     if (requestInfo.length > 1) {
-                        throw new BotException("As an ISTJBot, I cannot understand more than list.");
+                        throw new BotException("As an IstjBot, I cannot understand more than list.");
                     }
 
                     if (tasks.size() != 0) {
@@ -53,22 +59,22 @@ public class ISTJBot {
                     printResponse(list);
 
                     // Reset list
-                    list = "As an ISTJBot, I present you the task(s) in your list:";
+                    list = "As an IstjBot, I present you the task(s) in your list:";
                     break;
 
                 case BYE:
                     if (requestInfo.length > 1) {
-                        throw new BotException("As an ISTJBot, I cannot understand more than bye.");
+                        throw new BotException("As an IstjBot, I cannot understand more than bye.");
                     }
                     doneChatting = true;
-                    printResponse("Bye, I, ISTJBot, will be organizing your tasks until you come back.");
+                    printResponse("Bye, I, IstjBot, will be organizing your tasks until you come back.");
                     sc.close();
                     break;
 
                 }
 
             } catch(NumberFormatException e) {
-                printResponse("As an ISTJBot, I don't think that is a proper index.");
+                printResponse("As an IstjBot, I don't think that is a proper index.");
 
             } catch (BotException e) {
                 printResponse(e.getMessage());
@@ -97,14 +103,18 @@ public class ISTJBot {
                 modifierFound = true;
                 break;
             }
-            description += requestInfo[i] + " ";
+            if (i == 1) {
+                description += requestInfo[i];
+            } else {
+                description += " " + requestInfo[i];
+            }
         }
 
         // Error handle for modifier and description
         if (description.equals("")) {
-            throw new BotException("As an ISTJBot, I cannot add a task with no description.");
+            throw new BotException("As an IstjBot, I cannot add a task with no description.");
         } else if (!modifierFound && (command == Command.DEADLINE || command == Command.EVENT)) {
-            throw new BotException("As an ISTJBot, I cannot add a special task with no timing attached.");
+            throw new BotException("As an IstjBot, I cannot add a special task with no timing attached.");
         }
 
         if (command == Command.DEADLINE || command == Command.EVENT) {
@@ -115,7 +125,7 @@ public class ISTJBot {
 
         // Error handle for modifier message
         if (modifierMessage.equals("") && (command == Command.DEADLINE || command == Command.EVENT)) {
-            throw new BotException("As an ISTJBot, I cannot add a special task with no timing attached.");
+            throw new BotException("As an IstjBot, I cannot add a special task with no timing attached.");
         }
 
         Task taskAdded;
@@ -127,8 +137,9 @@ public class ISTJBot {
             taskAdded = new Event(description, modifierMessage);
         }
         tasks.add(taskAdded);
+        writeToFile(tasks);
 
-        String messageStart = "As an ISTJBot, I will add this task right now. \n";
+        String messageStart = "As an IstjBot, I will add this task right now. \n";
         String messageLast = "Now you have " + tasks.size() + " ";
         String plural = tasks.size() > 1 ? "tasks" : "task";
         messageLast += plural + " in the list.";
@@ -137,31 +148,101 @@ public class ISTJBot {
 
     public static void modifyTask(Command command, int taskNumber) throws BotException {
         if (taskNumber < 1 || taskNumber > tasks.size()) {
-            throw new BotException("As an ISTJBot, I cannot find a task with that index.");
+            throw new BotException("As an IstjBot, I cannot find a task with that index.");
         }
 
         Task taskModified = tasks.get(taskNumber - 1);
         switch (command) {
         case MARK:
             tasks.get(taskNumber - 1).mark();
-            printResponse("As an ISTJBot, I've marked this task as done: \n" +
+            printResponse("As an IstjBot, I've marked this task as done: \n" +
                     taskModified.toString());
             break;
 
         case UNMARK:
             tasks.get(taskNumber - 1).unmark();
-            printResponse("As an ISTJBot, I've unmarked this task: \n" +
+            printResponse("As an IstjBot, I've unmarked this task: \n" +
                     taskModified.toString());
             break;
 
         case DELETE:
             tasks.remove(taskNumber - 1);
-            String messageStart = "As an ISTJBot, I've removed this task: \n";
+            String messageStart = "As an IstjBot, I've removed this task: \n";
             String messageLast = "Now you have " + tasks.size() + " ";
             String plural = tasks.size() > 1 ? "tasks" : "task";
             messageLast += plural + " in the list.";
             printResponse(messageStart + taskModified.toString() + "\n" + messageLast);
             break;
+        }
+        writeToFile(tasks);
+    }
+
+    public static void loadFile() {
+        try {
+            File folder = new File("data");
+            if (!folder.exists()) {
+                folder.mkdir();
+            }
+            File file = new File("data/IstjBot.txt");
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            Scanner sc = new Scanner(file);
+            while (sc.hasNext()) {
+                String line = sc.nextLine();
+                String[] taskInfo = line.split("-");
+
+                Task taskAdded;
+                // Later use static variable
+                Command command = Command.stringToCommand(taskInfo[0]);
+                boolean isMarked = Integer.parseInt(taskInfo[1]) == 1 ? true : false;
+
+                switch (command) {
+                case TODO:
+                    taskAdded = new Todo(taskInfo[2]);
+                    tasks.add(taskAdded);
+                    if (isMarked) {
+                        taskAdded.mark();
+                    }
+                    break;
+
+                case DEADLINE:
+                    taskAdded = new Deadline(taskInfo[2], taskInfo[3]);
+                    tasks.add(taskAdded);
+                    if (isMarked) {
+                        taskAdded.mark();
+                    }
+                    break;
+
+                case EVENT:
+                    taskAdded = new Event(taskInfo[2], taskInfo[3]);
+                    tasks.add(taskAdded);
+                    if (isMarked) {
+                        taskAdded.mark();
+                    }
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+
+        } catch (BotException e) {
+        printResponse(e.getMessage());
+        }
+    }
+
+    public static void writeToFile(ArrayList<Task> tasks) {
+        try {
+            StringBuilder str = new StringBuilder();
+            for (Task task : tasks) {
+                str.append(task.toTxtString() + "\n");
+            }
+            FileWriter fw = new FileWriter("data/IstjBot.txt");
+            fw.write(str.toString());
+            fw.close();
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
