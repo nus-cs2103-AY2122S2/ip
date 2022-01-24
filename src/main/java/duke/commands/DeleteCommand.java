@@ -1,3 +1,10 @@
+package duke.commands;
+
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 public class DeleteCommand extends Command {
     private final int targetIndex;
 
@@ -8,10 +15,9 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task t = tasks.deleteTask(targetIndex);
 
-        String s = "No problem, I've deleted that task for you:\n\n" +
+        return "No problem, I've deleted that duke.task for you:\n\n" +
                 t.toString() + "\n\n" +
-                "You now have " + tasks.listSize() + " task(s) remaining on your list.";
-        return s;
+                "You now have " + tasks.listSize() + " duke.task(s) remaining on your list.";
     }
 
     public boolean isExit() {

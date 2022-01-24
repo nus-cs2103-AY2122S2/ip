@@ -1,3 +1,14 @@
+package duke.parser;
+
+import duke.commands.*;
+import duke.exceptions.DukeException;
+import duke.exceptions.InvalidCommandException;
+import duke.exceptions.InvalidDateTimeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -127,14 +138,14 @@ public class Parser {
     private static int prepareDelete(String request) throws DukeException {
         String[] parsedReq = request.split(" ");
         if (parsedReq.length != 2) {
-            throw new DukeException("Please tell me which task you would like to delete.");
+            throw new DukeException("Please tell me which duke.task you would like to delete.");
         } else {
             try {
                 return Integer.parseInt(parsedReq[1]) - 1;
             } catch (NumberFormatException n) {
-                throw new DukeException("Please enter a valid task number to delete!");
+                throw new DukeException("Please enter a valid duke.task number to delete!");
             } catch (IndexOutOfBoundsException e) {
-                throw new DukeException("The task you specified does not exist. :(");
+                throw new DukeException("The duke.task you specified does not exist. :(");
             }
         }
     }
@@ -142,14 +153,14 @@ public class Parser {
     private static int prepareMark(String request) throws DukeException {
         String[] parsedReq = request.split(" ");
         if (parsedReq.length != 2) {
-            throw new DukeException("Please tell me which task you would like to be marked as done.");
+            throw new DukeException("Please tell me which duke.task you would like to be marked as done.");
         } else {
             try {
                 return Integer.parseInt(parsedReq[1]) - 1;
             } catch (NumberFormatException n) {
-                throw new DukeException("Please enter a valid task number to mark as done!");
+                throw new DukeException("Please enter a valid duke.task number to mark as done!");
             } catch (IndexOutOfBoundsException e) {
-                throw new DukeException("The task you specified does not exist. :(");
+                throw new DukeException("The duke.task you specified does not exist. :(");
             }
         }
     }
@@ -157,14 +168,14 @@ public class Parser {
     private static int prepareUnmark(String request) throws DukeException {
         String[] parsedReq = request.split(" ");
         if (parsedReq.length != 2) {
-            throw new DukeException("Please tell me which task you would like to be marked as undone.");
+            throw new DukeException("Please tell me which duke.task you would like to be marked as undone.");
         } else {
             try {
                 return Integer.parseInt(parsedReq[1]) - 1;
             } catch (NumberFormatException n) {
-                throw new DukeException("Please enter a valid task number to mark as undone!");
+                throw new DukeException("Please enter a valid duke.task number to mark as undone!");
             } catch (IndexOutOfBoundsException e) {
-                throw new DukeException("The task you specified does not exist. :(");
+                throw new DukeException("The duke.task you specified does not exist. :(");
             }
         }
     }

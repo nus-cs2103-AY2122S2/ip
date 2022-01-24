@@ -1,3 +1,10 @@
+package duke.commands;
+
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 public class AddCommand extends Command {
     private final Task task;
 
@@ -9,7 +16,7 @@ public class AddCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(task);
         storage.append(task.getAppendData());
-        return "Task added:\n" + ui.tab(task.toString());
+        return "duke.task.Task added:\n" + ui.tab(task.toString());
     }
 
     @Override

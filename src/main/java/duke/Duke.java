@@ -1,4 +1,11 @@
-import java.util.Scanner;
+package duke;
+
+import duke.commands.Command;
+import duke.exceptions.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 public class Duke {
     private static final String home = System.getProperty("user.home");
@@ -14,11 +21,10 @@ public class Duke {
     }
 
     public static void main(String... args) {
-        new Duke().run(args);
+        new Duke().run();
     }
 
-    public void run(String[] args) {
-        Scanner userInput = new Scanner(System.in);
+    public void run() {
         ui.greetUser();
         boolean isExit = false;
 

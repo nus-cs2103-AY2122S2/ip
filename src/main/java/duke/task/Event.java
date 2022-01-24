@@ -1,8 +1,10 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task {
+public class Event extends Task {
     private static final DateTimeFormatter dateOut = DateTimeFormatter.ofPattern("MMM dd yyyy");
     private static final DateTimeFormatter timeOut = DateTimeFormatter.ofPattern("hh:mm a");
     protected LocalDate d;
@@ -10,21 +12,21 @@ public class Deadline extends Task {
     private final boolean hasDate;
     private final boolean hasTime;
 
-    public Deadline(String description, LocalDate d) {
+    public Event(String description, LocalDate d) {
         super(description);
         this.d = d;
         hasDate = true;
         hasTime = false;
     }
 
-    public Deadline(String description, LocalTime t) {
+    public Event(String description, LocalTime t) {
         super(description);
         this.t = t;
         hasDate = false;
         hasTime = true;
     }
 
-    public Deadline(String description, LocalDate d, LocalTime t) {
+    public Event(String description, LocalDate d, LocalTime t) {
         super(description);
         this.d = d;
         this.t = t;
@@ -56,14 +58,14 @@ public class Deadline extends Task {
 
     @Override
     public String getAppendData() {
-        return "D | " + (super.isDone ? "1" : "0") + " | " + description + " | " +
+        return "E | " + (super.isDone ? "1" : "0") + " | " + description + " | " +
                 (hasDate ? d.toString() : "0") + " | " +
                 (hasTime ? t.toString() : "0");
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " +
+        return "[E]" + super.toString() + " (at: " +
                 (hasDate && hasTime
                         ? getDateTime()
                         : hasDate
