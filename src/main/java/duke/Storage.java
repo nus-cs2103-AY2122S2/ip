@@ -7,8 +7,15 @@ import java.util.Scanner;
 
 public class Storage {
 
-    static TaskList readFile() throws DukeException, IOException{
-        File f = new File("src/main/data/duke.txt");
+    static TaskList readFile() throws DukeException, IOException {
+
+        File directory = new File("data/");
+        if (! directory.exists()){
+            directory.mkdir();
+        }
+
+        File f = new File("data/duke.txt");
+
         if (!f.exists()) {
             if (!f.createNewFile()) {
                 throw new DukeException("Data file could not be created");
@@ -39,7 +46,7 @@ public class Storage {
     }
 
     static void saveToFile(TaskList tasks) throws IOException {
-        FileWriter fw = new FileWriter("src/main/data/duke.txt", false);
+        FileWriter fw = new FileWriter("data/duke.txt", false);
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             String currTask = String.format("%s ~ %s ~ %s ~ %s\n",
