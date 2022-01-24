@@ -14,6 +14,7 @@ public class Duke {
         String greeting = "Hello! I'm Duke\n" + "What can I do for you?";
         System.out.println(greeting);
 
+        TaskList.initFile();
         TaskList taskList = new TaskList();
 
 
@@ -34,7 +35,7 @@ public class Duke {
                 }
                 if (command.equals(bye)) {
                     System.out.println("Bye. Hope to see you again soon!");
-                    return;
+                    break;
                 }
                 if (command.equals("list")) {
                     System.out.println("Here are the tasks in your list:");
@@ -134,5 +135,6 @@ public class Duke {
                 System.out.println(e.toString());
             }
         }
+        taskList.save();
     }
 }

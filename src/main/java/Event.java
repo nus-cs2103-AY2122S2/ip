@@ -10,4 +10,10 @@ public class Event extends Task{
     public String toString() {
         return "[E]" + super.toString() + " (by: " + time + ")";
     }
+
+    @Override
+    public String getDetail(){
+        int status = isDone ? 1 : 0;
+        return "E" + " | " + status + " | " + this.description + " | " + this.time + "\n";
+    }
 }
