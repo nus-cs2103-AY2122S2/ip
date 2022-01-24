@@ -1,3 +1,7 @@
+import javax.swing.text.DateFormatter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,6 +13,15 @@ public class Duke {
             }
         }
         return false;
+    }
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-dd");
+    public static boolean isDate(String possibleDate) {
+        try{
+            LocalDate date = LocalDate.parse(possibleDate);
+            return true;
+        } catch(DateTimeParseException e) {
+            return false;
+        }
     }
     public static void main(String[] args){
         String greeting = "Hello! I'm Duke\n" + "What can I do for you?";
@@ -87,7 +100,13 @@ public class Duke {
                         }
                         String time = splitArr[1].trim();
                         System.out.println("Got it. I've added this task:");
-                        Task task = new Deadline(title, time);
+                        Task task;
+                        if(isDate(time)) {
+                            LocalDate ld = LocalDate.parse(time);
+                            task = new Deadline(title, ld);
+                        } else {
+                            task = new Deadline(title, time);
+                        }
                         taskList.insert(task);
                         System.out.println("   " + task.toString() + "\n" + "Now you have " + taskList.size() + " tasks in the list.");
                     }
@@ -109,7 +128,13 @@ public class Duke {
                         }
                         String time = splitArr[1].trim();
                         System.out.println("Got it. I've added this task:");
-                        Task task = new Event(title, time);
+                        Task task;
+                        if(isDate(time)) {
+                            LocalDate ld = LocalDate.parse(time);
+                            task = new Event(title, ld);
+                        } else {
+                            task = new Event(title, time);
+                        }
                         taskList.insert(task);
                         System.out.println("   " + task.toString() + "\n" + "Now you have " + taskList.size() + "tasks in the list.");
                     }
