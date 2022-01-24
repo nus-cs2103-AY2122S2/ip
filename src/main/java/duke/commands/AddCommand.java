@@ -3,7 +3,6 @@ package duke.commands;
 import java.io.IOException;
 
 import duke.data.exception.InvalidParameterException;
-import duke.data.task.CommandType;
 import duke.data.task.Task;
 import duke.data.task.DeadlineTask;
 import duke.data.task.EventTask;
@@ -70,5 +69,86 @@ public class AddCommand extends Command {
         // response
         return String.format("Got it. I've added this task:%n%s%n" +
                 "Now you have %d tasks in the list.%n", task, super.taskList.getSize());
+    }
+
+    /**
+     * Valid commands.
+     */
+    public enum CommandType {
+        /**
+         * Bye command.
+         */
+        BYE("bye"),
+
+        /**
+         * List command.
+         */
+        LIST("list"),
+
+        /**
+         * Mark command.
+         */
+        MARK("mark"),
+
+        /**
+         * Unmark command.
+         */
+        UNMARK("unmark"),
+
+        /**
+         * Todo command.
+         */
+        TODO("todo"),
+
+        /**
+         * Deadline command.
+         */
+        DEADLINE("deadline"),
+
+        /**
+         * Event command.
+         */
+        EVENT("event"),
+
+        /**
+         * Delete command.
+         */
+        DELETE("delete");
+
+        /**
+         * Command string.
+         */
+        private final String command;
+
+        /**
+         * Constructor for the Command enum.
+         *
+         * @param command command string
+         */
+        CommandType(String command) {
+            this.command = command;
+        }
+
+        /**
+         * Retrieve type
+         */
+        public String getCommand() {
+            return this.command;
+        }
+
+        /**
+         * Checks that the given command is a valid command.
+         *
+         * @param command command to be validated
+         * @return boolean, whether the command is valid or not
+         */
+        public static boolean isValidCommand(String command) {
+            for (CommandType e : CommandType.values()) {
+                if (e.command.equals(command)) {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
