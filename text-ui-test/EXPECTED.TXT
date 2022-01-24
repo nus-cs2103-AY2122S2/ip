@@ -5,6 +5,7 @@ Welcome home, sir.
  _   | |  |   _   |  |      _|    \  \  /  /        | |      |_____  |
 | |__| |  |  | |  |  |  |\  \      \  \/  /      ___| |___    ____|  |
 |______|  |__| |__|  |__| \__\      \____/      |_________|  |_______|
+
 ___________________________________________________________
 I've added this to your tasks sir: [T][ ] borrow book
 There are 1 tasks on your list.
@@ -14,14 +15,14 @@ I've added this to your tasks sir: [D][ ] code Ethlas (by: Sunday)
 There are 2 tasks on your list.
 ___________________________________________________________
 ___________________________________________________________
-I've added this to your tasks sir: [D][ ] Ethlas interview (by: Zoom, Monday 3pm)
+I've added this to your tasks sir: [E][ ] Ethlas interview (at: Zoom, Monday 3pm)
 There are 3 tasks on your list.
 ___________________________________________________________
 ___________________________________________________________
 Your tasks list, sir:
 1.[T][ ] borrow book
 2.[D][ ] code Ethlas (by: Sunday)
-3.[D][ ] Ethlas interview (by: Zoom, Monday 3pm)
+3.[E][ ] Ethlas interview (at: Zoom, Monday 3pm)
 ___________________________________________________________
 ___________________________________________________________
 Good job sir, this task is marked done:
@@ -39,7 +40,7 @@ ___________________________________________________________
 Your tasks list, sir:
 1.[T][ ] borrow book
 2.[D][X] code Ethlas (by: Sunday)
-3.[D][ ] Ethlas interview (by: Zoom, Monday 3pm)
+3.[E][ ] Ethlas interview (at: Zoom, Monday 3pm)
 ___________________________________________________________
 ___________________________________________________________
 Good bye, sir.
