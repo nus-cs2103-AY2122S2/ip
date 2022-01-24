@@ -1,6 +1,6 @@
 package kidsnd274.duke.taskobjects;
 
-public class Task {
+public abstract class Task {
     private String taskName;
     private boolean isDone;
 
@@ -34,10 +34,7 @@ public class Task {
     public String getCurrentStatus() {
         return "[" + getStatusIcon() + "] " + this;
     }
-
-    public Types getType() {
-        return Types.TASK;
-    }
+    public abstract String getType();
 
     public String getTaskName() {
         return taskName;

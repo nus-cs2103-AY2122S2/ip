@@ -1,11 +1,8 @@
 package kidsnd274.duke.taskobjects;
 
-public class Event extends Task {
-    private String time;
-
+public class Event extends TaskWithDate {
     public Event(String name, String time) {
-        super(name);
-        this.time = time;
+        super(name, time);
     }
 
     public Event(String name, boolean isDone, String time) {
@@ -15,7 +12,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + "(at: " + this.time + ")";
+        return super.toString() + "(at: " + super.getDate() + ")";
     }
 
     @Override
