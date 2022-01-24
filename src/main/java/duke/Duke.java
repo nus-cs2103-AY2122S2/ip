@@ -1,7 +1,9 @@
 package duke;
 
+import duke.command.Parser;
 import duke.exception.DukeException;
 import duke.exception.DukeIOException;
+import duke.task.TaskList;
 
 public class Duke {
     private static TaskList taskList;

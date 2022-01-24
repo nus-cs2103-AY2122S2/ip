@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.TaskList;
+import duke.task.TaskList;
 import duke.exception.DukeException;
 import duke.exception.DukeIllegalArgumentException;
 import duke.task.Task;

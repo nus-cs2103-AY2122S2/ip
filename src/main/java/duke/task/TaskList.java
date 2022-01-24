@@ -1,6 +1,4 @@
-package duke;
-
-import duke.task.Task;
+package duke.task;
 
 import java.util.ArrayList;
 import java.util.function.BiConsumer;

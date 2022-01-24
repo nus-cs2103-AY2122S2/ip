@@ -1,6 +1,7 @@
-package duke.command;
+package duke.command.action;
 
-import duke.TaskList;
+import duke.command.Command;
+import duke.task.TaskList;
 import duke.util.IPrintable;
 
 public class ExitCommand extends Command {

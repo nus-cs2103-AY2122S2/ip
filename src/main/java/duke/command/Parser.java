@@ -1,14 +1,14 @@
-package duke;
+package duke.command;
 
-import duke.command.BetweenCommand;
+import duke.command.action.BetweenCommand;
 import duke.command.Command;
-import duke.command.CreateCommand;
-import duke.command.DeleteCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
-import duke.command.ScheduleCommand;
-import duke.command.UpcomingCommand;
+import duke.command.action.CreateCommand;
+import duke.command.action.DeleteCommand;
+import duke.command.action.ExitCommand;
+import duke.command.action.ListCommand;
+import duke.command.action.MarkCommand;
+import duke.command.action.ScheduleCommand;
+import duke.command.action.UpcomingCommand;
 import duke.exception.DukeInvalidCommandException;
 import duke.task.TaskType;
 

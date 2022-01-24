@@ -1,6 +1,7 @@
-package duke.command;
+package duke.command.action;
 
-import duke.TaskList;
+import duke.command.Command;
+import duke.task.TaskList;
 import duke.exception.DukeIllegalArgumentException;
 import duke.util.IPrintable;
 

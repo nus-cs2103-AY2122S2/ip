@@ -1,6 +1,6 @@
 package duke.task.serializer;
 
-import duke.TaskList;
+import duke.task.TaskList;
 import duke.exception.DukeIOException;
 
 import java.io.DataInputStream;
