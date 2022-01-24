@@ -10,8 +10,8 @@ import java.util.Scanner;
  */
 public class Duke {
     private TaskList taskList;
-    private Ui ui;
-    private Storage storage;
+    private final Ui ui;
+    private final Storage storage;
 
     /**
      * Duke constructor method, takes no parameter,
@@ -43,7 +43,9 @@ public class Duke {
         while (true) {
             try {
                 String output = Parser.parse(sc.nextLine(), taskList);
-                if (output.equals("BYE")) break;
+                if (output.equals("BYE")) {
+                    break;
+                }
                 ui.log(output);
                 storage.update(taskList);
             } catch (Exception e) {

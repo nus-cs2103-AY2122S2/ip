@@ -24,7 +24,8 @@ public class TaskList {
     public String addTask(Task newTask) {
         tasks.add(newTask);
         index++;
-        String output = "Got it. I've added this task:\n  " + newTask + "\nnow you have " + this.index + " tasks in the list";
+        String output = "Got it. I've added this task:\n  " +
+                newTask + "\nnow you have " + this.index + " tasks in the list";
         return output;
     }
 
@@ -64,7 +65,7 @@ public class TaskList {
      * @return  String contains the information of the modified task
      * @throws InvalidTaskNumberException If id > index or id <= 0 (can't modify)
      */
-    public String mark(int id, String instr) throws InvalidTaskNumberException{
+    public String mark(int id, String instr) throws InvalidTaskNumberException {
         if (id > index || id <= 0) {
             throw new InvalidTaskNumberException();
         }
@@ -85,7 +86,8 @@ public class TaskList {
         }
         Task removed = tasks.remove(id - 1);
         index--;
-        String out = "Noted, I have removed this task:\n  " + removed + "\nnow you have " + index + " tasks in the list.";
+        String out = "Noted, I have removed this task:\n  "
+                + removed + "\nnow you have " + index + " tasks in the list.";
         return out;
     }
 }
