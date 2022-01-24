@@ -14,11 +14,11 @@ public class DukeTaskTest {
     public void createTask() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy");
         TaskList tl = new TaskList();
-        tl.addTask(new ToDoTask("New Todo Task"));
+        tl.addTask("New Todo Task", false, null, 0);
         assertEquals(1, tl.getSize());
-        tl.addTask(new DeadlineTask("New Event Task", LocalDate.parse("11/1/1999", formatter)));
+        tl.addTask("New Deadline Task", false, LocalDate.parse("11/1/1999", formatter), 1);
         assertEquals(2, tl.getSize());
-        tl.addTask(new EventTask("New Event Task", LocalDate.parse("11/1/1999", formatter)));
+        tl.addTask("New Event Task", false, LocalDate.parse("11/1/1999", formatter), 2);
         assertEquals(3, tl.getSize());
     }
 
@@ -26,9 +26,9 @@ public class DukeTaskTest {
     public void deleteTask() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy");
         TaskList tl = new TaskList();
-        tl.addTask(new ToDoTask("New Todo Task"));
-        tl.addTask(new DeadlineTask("New Deadline Task", LocalDate.parse("11/1/1999", formatter)));
-        tl.addTask(new EventTask("New Event Task", LocalDate.parse("11/1/1999", formatter)));
+        tl.addTask("New Todo Task", false, null, 0);
+        tl.addTask("New Deadline Task", false, LocalDate.parse("11/1/1999", formatter), 1);
+        tl.addTask("New Event Task", false, LocalDate.parse("11/1/1999", formatter), 2);
         tl.removeTask(0);
         assertEquals(2, tl.getSize());
         tl.removeTask(0);
@@ -41,14 +41,11 @@ public class DukeTaskTest {
     public void getLast() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy");
         TaskList tl = new TaskList();
-        ToDoTask todo_nt = new ToDoTask("New Todo Task");
-        tl.addTask(todo_nt);
-        assertEquals(tl.getLast(), todo_nt);
-        DeadlineTask deadline_nt = new DeadlineTask("New Deadline Task", LocalDate.parse("11/1/1999", formatter));
-        tl.addTask(deadline_nt);
-        assertEquals(tl.getLast(), deadline_nt);
-        EventTask event_nt = new EventTask("New Event Task", LocalDate.parse("11/1/1999", formatter));
-        tl.addTask(event_nt);
-        assertEquals(tl.getLast(), event_nt);
+        tl.addTask("New Todo Task", false, null, 0);
+        assertEquals("New Todo Task", tl.getLast().getTaskName());
+        tl.addTask("New Deadline Task", false, LocalDate.parse("11/1/1999", formatter), 1);
+        assertEquals("New Deadline Task", tl.getLast().getTaskName());
+        tl.addTask("New Event Task", false, LocalDate.parse("11/1/1999", formatter), 2);
+        assertEquals("New Event Task", tl.getLast().getTaskName());
     }
 }

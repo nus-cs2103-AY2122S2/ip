@@ -80,7 +80,7 @@ public class DukeParserTest {
         assertEquals(-1, checkErrorMessage("mark 1", "Task List is empty!", tl));
         assertEquals(-1, checkErrorMessage("unmark 1", "Task List is empty!", tl));
         assertEquals(-1, checkErrorMessage("delete 1", "Task List is empty!", tl));
-        tl.addTask(new ToDoTask("111"));
+        tl.addTask("111", false, null, 0);
         assertEquals(-1, checkErrorMessage("mark 2", "Task ID out of range!", tl));
         assertEquals(-1, checkErrorMessage("unmark 2", "Task ID out of range!", tl));
         assertEquals(-1, checkErrorMessage("delete 2", "Task ID out of range!", tl));
@@ -107,7 +107,7 @@ public class DukeParserTest {
         String[] args = message.split("\\s+");
         String action = args[0];
         try{
-            parser.validate(message,action, args, tl.getList());
+            parser.validate(message,action, args, tl);
         } catch (DukeException de) {
             assertEquals(expectedMessage, de.getMessage());
             return -1;

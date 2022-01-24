@@ -18,9 +18,9 @@ public class DukeStorageTest {
     public void save() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy");
         TaskList tl = new TaskList();
-        tl.addTask(new ToDoTask("New Todo Task"));
-        tl.addTask(new DeadlineTask("New Deadline Task", LocalDate.parse("11/1/1999", formatter)));
-        tl.addTask(new EventTask("New Event Task", LocalDate.parse("11/1/1999", formatter)));
+        tl.addTask("New Todo Task", false, null, 0);
+        tl.addTask("New Deadline Task", false, LocalDate.parse("11/1/1999", formatter), 1);
+        tl.addTask("New Event Task", false, LocalDate.parse("11/1/1999", formatter), 2);
         Storage.saveFile("data", "Duke.txt", tl.getList());
         File f = new File("data/Duke.txt");
         assertEquals(true, f.exists());
@@ -39,9 +39,9 @@ public class DukeStorageTest {
     @Test public void load() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy");
         TaskList tl = new TaskList();
-        tl.addTask(new ToDoTask("New Todo Task"));
-        tl.addTask(new DeadlineTask("New Deadline Task", LocalDate.parse("11/1/1999", formatter)));
-        tl.addTask(new EventTask("New Event Task", LocalDate.parse("11/1/1999", formatter)));
+        tl.addTask("New Todo Task", false, null, 0);
+        tl.addTask("New Deadline Task", false, LocalDate.parse("11/1/1999", formatter), 1);
+        tl.addTask("New Event Task", false, LocalDate.parse("11/1/1999", formatter), 2);
         Storage.saveFile("data", "Duke.txt", tl.getList());
         TaskList tl2 = new TaskList();
         Storage.loadFile("data/Duke.txt", tl2);
