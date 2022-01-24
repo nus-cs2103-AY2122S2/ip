@@ -5,8 +5,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * In charge of reading to file on start up and writing to file on update
+ */
 public class Storage {
 
+    /**
+     * Converts a txt file into a TaskList object
+     *
+     * @return TaskList object that contains all tasks saved in the hard disk
+     * @throws DukeException
+     * @throws IOException
+     */
     static TaskList readFile() throws DukeException, IOException {
 
         File directory = new File("data/");
@@ -31,7 +41,7 @@ public class Storage {
         return listOfSavedTasks;
     }
 
-    static void addLineToTasks(String currLine, TaskList listOfSavedTasks) {
+    private static void addLineToTasks(String currLine, TaskList listOfSavedTasks) {
         String[] currLineContents = currLine.split(" ~ ");
         String taskType = currLineContents[0];
         boolean isDone = currLineContents[1].equals("X") ? true : false ;
@@ -45,6 +55,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Converts the given TaskList object and saves it onto the hard disk as a txt file
+     *
+     * @param tasks TaskList Object to be written to the hard disk
+     * @throws IOException
+     */
     static void saveToFile(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter("data/duke.txt", false);
         for (int i = 0; i < tasks.size(); i++) {

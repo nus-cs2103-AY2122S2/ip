@@ -2,6 +2,9 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * TaskList is a class that manages the storage of tasks inside the application
+ */
 public class TaskList {
     ArrayList<Task> tasks;
 
