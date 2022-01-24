@@ -2,13 +2,19 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class IstjBot {
     private static boolean doneChatting = false;
-    private static ArrayList<Task> tasks = new ArrayList<>();
-    private static String list = "As an IstjBot, I present you the task(s) in your list:";
+    private static final ArrayList<Task> tasks = new ArrayList<>();
+    private static final StringBuilder list =
+            new StringBuilder("As an IstjBot, I present you the task(s) in your list:");
+    private static final StringBuilder searchList =
+            new StringBuilder("As an IstjBot, I present you the task(s) with that date.");
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -35,6 +41,24 @@ public class IstjBot {
                     // break required for each case
                     break;
 
+                case DATE:
+                    if (requestInfo.length != 2) {
+                        throw new BotException("As an IstjBot, I cannot search for a task with that command.");
+                    }
+                    for (Task task : tasks) {
+                        task.getDate().ifPresent(date -> {
+                            if (date.isEqual(LocalDate.parse(requestInfo[1]))) {
+                                searchList.append("\n" + task);
+                            }
+                        });
+                    }
+                    printResponse(searchList.toString());
+
+                    // Reset list
+                    searchList.setLength(0);
+                    searchList.append("As an IstjBot, I present you the task(s) with that date.");
+                    break;
+
                 case MARK:
                 case UNMARK:
                 case DELETE:
@@ -50,16 +74,18 @@ public class IstjBot {
                     }
 
                     if (tasks.size() != 0) {
-                        list += "\n";
+                        list.append("\n");
                     }
                     for (int i = 1; i <= tasks.size(); i++) {
-                        list += i != 1 ? "\n" + i + ". " + tasks.get(i - 1).toString() : i + ". " +
-                                tasks.get(i - 1).toString();
+                        list.append(i != 1
+                                ? "\n" + i + ". " + tasks.get(i - 1).toString()
+                                : i + ". " + tasks.get(i - 1).toString());
                     }
-                    printResponse(list);
+                    printResponse(list.toString());
 
                     // Reset list
-                    list = "As an IstjBot, I present you the task(s) in your list:";
+                    list.setLength(0);
+                    list.append("As an IstjBot, I present you the task(s) in your list:");
                     break;
 
                 case BYE:
@@ -76,6 +102,9 @@ public class IstjBot {
             } catch(NumberFormatException e) {
                 printResponse("As an IstjBot, I don't think that is a proper index.");
 
+            } catch (DateTimeParseException e) {
+                printResponse("As an IstjBot, I don't think that is a proper date you entered.");
+
             } catch (BotException e) {
                 printResponse(e.getMessage());
             }
@@ -83,7 +112,7 @@ public class IstjBot {
     }
 
     public static void printResponse(String request) {
-        String line = "*__________________________________________________________* \n";
+        String line = "*_______________________________________________________________* \n";
         System.out.println(line + request + "\n" + line);
     }
 
@@ -190,12 +219,12 @@ public class IstjBot {
             Scanner sc = new Scanner(file);
             while (sc.hasNext()) {
                 String line = sc.nextLine();
-                String[] taskInfo = line.split("-");
+                String[] taskInfo = line.split(" / ");
 
                 Task taskAdded;
                 // Later use static variable
                 Command command = Command.stringToCommand(taskInfo[0]);
-                boolean isMarked = Integer.parseInt(taskInfo[1]) == 1 ? true : false;
+                boolean isMarked = Integer.parseInt(taskInfo[1]) == 1;
 
                 switch (command) {
                 case TODO:
@@ -227,7 +256,7 @@ public class IstjBot {
             System.out.println(e.getMessage());
 
         } catch (BotException e) {
-        printResponse(e.getMessage());
+            printResponse(e.getMessage());
         }
     }
 
