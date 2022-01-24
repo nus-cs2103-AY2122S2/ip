@@ -17,32 +17,9 @@ import java.util.Scanner;
  * @since 1.0
  */
 public class Duke {
-    private static final String BOT_NAME = "KoroBot";
-    private static final String WELCOME_MESSAGE = "    ____________________________________________________________\n"
-            + "     Hi! I'm " + BOT_NAME + "~\n"
-            + "    ____________________________________________________________";
-    private static final String EXIT_MESSAGE = "    ____________________________________________________________\n"
-            + "     Bye! Hope to see you again soon :D\n"
-            + "    ____________________________________________________________";
     public static final String DATA_FOLDER_PATH = "./data";
     public static final String DATA_PATH = "./data/data.txt";
     private static TaskList taskListOfTasks;
-
-    /**
-     * Greets the user by printing the default welcome message.
-     */
-    private static void greet() {
-        System.out.println(WELCOME_MESSAGE);
-    }
-
-    /**
-     * Exits the program when user inputs "bye".
-     * Default exit message is printed as well.
-     */
-    private static void exit() {
-        System.out.println(EXIT_MESSAGE);
-        System.exit(0);
-    }
 
     /**
      * Tests if the input string represents an integer value.
@@ -454,8 +431,9 @@ public class Duke {
         }
         return convertedTime;
     }
+
     public static void main(String[] args) {
-        greet();
+        Ui.greet();
         try {
             initTaskList();
         } catch (IOException e) {
@@ -467,9 +445,7 @@ public class Duke {
             e.printStackTrace();
         }
 
-        System.out.println("    ____________________________________________________________\n"
-                + "     What can I do for you?\n"
-                + "    ____________________________________________________________\n");
+        Ui.welcome();
         File dataFile = new File(DATA_PATH);
         taskListOfTasks = new TaskList(100); // Assume there will be no more than 100 tasks
 
@@ -489,6 +465,6 @@ public class Duke {
             }
         }
         sc.close();
-        exit();
+        Ui.exit();
     }
 }
