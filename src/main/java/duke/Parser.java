@@ -2,6 +2,15 @@ package duke;
 
 public class Parser {
     public Parser(){};
+
+    /**
+     * Parses the input from user and checks if there are any invalid commands or format.
+     *
+     * @param str Input from User.
+     * @return String of the original user input if no violations are found.
+     * @throws MissingDescriptionException If a command is missing required information.
+     * @throws DukeException If the command or format is invalid.
+     */
     public String parse(String str) throws MissingDescriptionException, DukeException {
         String[] strArr = str.split(" ");
         String firstWord = strArr[0];
