@@ -1,9 +1,9 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.util.Scanner;
 
 /**
  * Encapsulates the user interface of Duke. It deals
@@ -141,7 +141,6 @@ public class Ui {
 
     /**
      * Displays a goodbye message.
-     *
      */
     public void showGoodbye() {
         System.out.println("Bye! Hope to see you again!");

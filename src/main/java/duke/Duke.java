@@ -1,8 +1,8 @@
 package duke;
 
+import duke.command.Command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
-import duke.command.Command;
 
 /**
  * Encapsulates the Duke task manager bot.

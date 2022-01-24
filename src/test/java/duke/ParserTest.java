@@ -2,13 +2,14 @@ package duke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import duke.exception.DukeException;
 import org.junit.jupiter.api.Test;
+
+import duke.exception.DukeException;
 
 public class ParserTest {
 
     @Test
-    public void parse_blankTodoDescription_ExceptionThrown() {
+    public void parse_blankTodoDescription_exceptionThrown() {
         try {
             Parser.parse("todo       ", 3);
         } catch (DukeException e) {
@@ -16,16 +17,16 @@ public class ParserTest {
         }
     }
     @Test
-    public void parse_deadlineDateMissing_ExceptionThrown() {
+    public void parse_deadlineDateMissing_exceptionThrown() {
         try {
             Parser.parse("deadline this           ", 3);
         } catch (DukeException e) {
-            assertEquals("Please specify a deadline task as\n" +
-                    "deadline [description] /by [date in yyyy-mm-dd format].", e.getMessage());
+            assertEquals("Please specify a deadline task as\n"
+                    + "deadline [description] /by [date in yyyy-mm-dd format].", e.getMessage());
         }
     }
     @Test
-    public void parse_invalidDateFormat_ExceptionThrown() {
+    public void parse_invalidDateFormat_exceptionThrown() {
         try {
             Parser.parse("deadline this /by 12 Feb 2022", 3);
         } catch (DukeException e) {
@@ -34,7 +35,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_invalidMarkIndex_ExceptionThrown() {
+    public void parse_invalidMarkIndex_exceptionThrown() {
         try {
             Parser.parse("mark 4", 3);
         } catch (DukeException e) {

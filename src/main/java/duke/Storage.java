@@ -1,16 +1,16 @@
 package duke;
 
-import duke.task.Task;
-import duke.task.Todo;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.TaskList;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 /**
  * Encapsulates a storage for Duke. It deals with
@@ -57,6 +57,8 @@ public class Storage {
                     case "E":
                         taskList.addTask(new Event(currTask[2], LocalDate.parse(currTask[3])));
                         break;
+                    default:
+                        break;
                     }
                     if (currTask[1].equals("1")) {
                         taskList.getTask(taskList.getLength()).markAsDone();
@@ -69,10 +71,10 @@ public class Storage {
         }
     }
     /**
-     * Overwrites the txt file in this <Code>Storage</Code> object
-     * with data from a given <Code>TaskList</Code> object.
+     * Overwrites the txt file in this Storage object
+     * with data from a given TaskList object.
      *
-     * @param taskList the <Code>TaskList</Code> object you want to save.
+     * @param taskList the TaskList object you want to save.
      * @param ui the user interface of Duke.
      */
     public void saveData(TaskList taskList, Ui ui) {
@@ -85,7 +87,7 @@ public class Storage {
             } else if (currTask instanceof Deadline) {
                 tasksToSave.append("D|").append(done).append(currTask.getDescription())
                         .append("|").append(((Deadline) currTask).getDeadline());
-            } else if (currTask instanceof Event){
+            } else if (currTask instanceof Event) {
                 tasksToSave.append("E|").append(done).append(currTask.getDescription())
                         .append("|").append(((Event) currTask).getStartTime());
             }
