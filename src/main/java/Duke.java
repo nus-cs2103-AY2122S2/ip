@@ -57,23 +57,52 @@ public class Duke {
      *
      * @param input The user input of adding a task. 
      */
-    private void addTask(TaskType type, String input) {
+    private void addTask(TaskType type, String input) throws DukeException {
         String description;
         String time;
         int timeIndex;
         Task t;
 
+        // TODO: ☹ OOPS!!! The description of a todo cannot be empty.
         if (type == TaskType.TODO) {
-            t = new Todo(input.substring(5));
+            try {
+                description = input.substring(5);
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new DukeException("\t ☹ OOPS!!! The description of a todo cannot be empty.\n");
+            }
+            if (description.equals("")) {
+                throw new DukeException("\t ☹ OOPS!!! The description of a todo cannot be empty.\n");
+            }
+            t = new Todo(description);
         } else if (type == TaskType.EVENT) {
             timeIndex = input.indexOf(" /at ");
-            description = input.substring(6, timeIndex);
-            time = input.substring(timeIndex + 5);
+            if (timeIndex == -1) { // cannot find '/at'
+                throw new DukeException("\t ☹ OOPS!!! The time of an event cannot be empty.\n");
+            }
+            try {
+                description = input.substring(6, timeIndex);
+                time = input.substring(timeIndex + 5);
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new DukeException("\t ☹ OOPS!!! The description or time of an event cannot be empty.\n");
+            }
+            if (description.equals("") || time.equals("")) {
+                throw new DukeException("\t ☹ OOPS!!! The description or time of an event cannot be empty.\n");
+            }
             t = new Event(description, time);
         } else { // deadline
             timeIndex = input.indexOf(" /by ");
-            description = input.substring(9, timeIndex);
-            time = input.substring(timeIndex + 5);
+            if (timeIndex == -1) { // cannot find '/at'
+                throw new DukeException("\t ☹ OOPS!!! The time of a deadline cannot be empty.\n");
+            }
+            try {
+                description = input.substring(9, timeIndex);
+                time = input.substring(timeIndex + 5);
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new DukeException("\t ☹ OOPS!!! The description or time of a deadline cannot be empty.\n");
+            }
+            if (description.equals("") || time.equals("")) {
+                throw new DukeException("\t ☹ OOPS!!! The description or time of a deadline cannot be empty.\n");
+            }
             t = new Deadline(description, time);
         }
         this.lst.add(t);
@@ -132,13 +161,25 @@ public class Duke {
                 this.printMsg("\t Opps! The item you wanna unmark is out of bounds.\n");
             }
         } else if (splitted[0].equals("todo")) {
-            this.addTask(TaskType.TODO, input);
+            try {
+                this.addTask(TaskType.TODO, input);
+            } catch (DukeException e) {
+                this.printMsg(e.getMessage());
+            }
         } else if (splitted[0].equals("event")) {
-            this.addTask(TaskType.EVENT, input);
+            try {
+                this.addTask(TaskType.EVENT, input);
+            } catch (DukeException e) {
+                this.printMsg(e.getMessage());
+            }
         } else if (splitted[0].equals("deadline")) {
-            this.addTask(TaskType.DEADLINE, input);
-        } else {
-            // TODO: handle exceptions
+            try {
+                this.addTask(TaskType.DEADLINE, input);
+            } catch (DukeException e) {
+                this.printMsg(e.getMessage());
+            }
+        } else { // handle exceptions
+            this.printMsg("\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
         }
         this.run();
     }
