@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -5,6 +8,8 @@ public class ISTJBot {
     private static boolean doneChatting = false;
     private static ArrayList<Task> tasks = new ArrayList<>();
     private static String list = "As an ISTJBot, I present you the task(s) in your list:";
+    private static StringBuilder searchList =
+            new StringBuilder("As an ISTJBot, I present you the task(s) with that date.");
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -27,6 +32,24 @@ public class ISTJBot {
                     }
                     addTask(command, requestInfo);
                     // break required for each case
+                    break;
+
+                case DATE:
+                    if (requestInfo.length != 2) {
+                        throw new BotException("As an ISTJBot, I cannot search for a task with that command.");
+                    }
+                    for (Task task : tasks) {
+                        task.getDate().ifPresent(date -> {
+                            if (date.isEqual(LocalDate.parse(requestInfo[1]))) {
+                                searchList.append("\n" + ". " + task.toString());
+                            }
+                        });
+                    }
+                    printResponse(searchList.toString());
+
+                    // Reset list
+                    searchList.setLength(0);
+                    searchList.append("As an ISTJBot, I present you the task(s) with that date.");
                     break;
 
                 case MARK:
@@ -67,8 +90,11 @@ public class ISTJBot {
 
                 }
 
-            } catch(NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 printResponse("As an ISTJBot, I don't think that is a proper index.");
+
+            } catch (DateTimeParseException e) {
+                printResponse("As an ISTJBot, I don't think that is a proper date you entered.");
 
             } catch (BotException e) {
                 printResponse(e.getMessage());
@@ -77,7 +103,7 @@ public class ISTJBot {
     }
 
     public static void printResponse(String request) {
-        String line = "*__________________________________________________________* \n";
+        String line = "*_______________________________________________________________* \n";
         System.out.println(line + request + "\n" + line);
     }
 
