@@ -46,6 +46,13 @@ public class Ui {
         }
     }
 
+    public void showMatchedTask(TaskList tasks){
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.getSize() ; i++) {
+            System.out.format("%s. %s\n", i + 1, tasks.getTask(i).toString());
+        }
+    }
+
     public void showAddTodo(String todo, int size) {
         String result = String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.",
                 todo, size);
