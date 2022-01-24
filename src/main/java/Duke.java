@@ -56,13 +56,13 @@ public class Duke {
                 System.out.println("Okayy!! I've added this task:\n " + todo.message() + "\n You have " + list_of_inputs.size() + " tasks in the list.");
 
             }  else if (temp[0].equals("deadline")) {
-                String[] deadL = temp[1].split("/by", 2);
+                String[] deadL = temp[1].split("/by ", 2);
                 Deadline deadLineTemp = new Deadline(deadL[0],deadL[1]);
                 list_of_inputs.add(deadLineTemp);
                 System.out.println("Deadline for this task:\n " + deadLineTemp.message() + "\n You have " + list_of_inputs.size() + " tasks in the list.");
 
              } else if (temp[0].equals("event")) {
-                String[] event = temp[1].split("/at", 2);
+                String[] event = temp[1].split("/at ", 2);
                 Event eventTemp = new Event(event[0],event[1]);
                 list_of_inputs.add(eventTemp);
                 System.out.println("I have added this task and the event time is:\n " + eventTemp.message() + "\n You have " + list_of_inputs.size() + " tasks in the list.");
