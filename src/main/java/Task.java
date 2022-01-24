@@ -1,7 +1,10 @@
+import java.time.LocalDate;
+
 public class Task {
 
     public String s;
     public boolean done;
+    public LocalDate date;
 
     public Task(String s){
         this.s = s;
