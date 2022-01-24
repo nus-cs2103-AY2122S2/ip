@@ -104,13 +104,13 @@ public class Storage {
                 }
 
                 //Identify if task is done
-                if (t.done) {
+                if(t.getDone()) {
                     taskToAppend += "X~";
                 } else {
                     taskToAppend += " ~";
                 }
-                taskToAppend += t.taskName + "~";
-                if (t instanceof Deadline) {
+                taskToAppend += t.getTaskName() + "~";
+                if(t instanceof Deadline) {
                     Deadline tempTask = (Deadline) t;
                     String date = tempTask.date.toString();
                     if(tempTask.time != null) {

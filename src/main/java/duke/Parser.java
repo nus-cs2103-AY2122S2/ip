@@ -58,6 +58,21 @@ public class Parser {
             }
         }
 
+        //input is find
+        else if (input.contains("find")) {
+            String[] splitString = input.split(" ", 2);
+            if (splitString.length < 2) {
+                throw new DukeException("Please input the keyword(s) for find");
+            }
+            String command = splitString[0];
+            String text = splitString[1];
+            if (command.equals("find")) {
+                taskList.find(text);
+            } else {
+                throw new DukeException("You have entered an invalid command");
+            }
+        }
+
         //input is a new type of task
         else if (input.contains("todo") || input.contains("event") || input.contains("deadline")) {
             //identify type of task

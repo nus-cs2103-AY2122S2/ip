@@ -67,10 +67,10 @@ public class Deadline extends Task{
     public void printTask() {
         System.out.print("[D]");
 
-        if (this.done){
-            System.out.print("[X] " + this.taskName + " ");
+        if(this.getDone()){
+            System.out.print("[X] " + this.getTaskName() + " ");
         } else {
-            System.out.print("[ ] " + this.taskName + " ");
+            System.out.print("[ ] " + this.getTaskName() + " ");
         }
         printDate();
     }
@@ -83,12 +83,13 @@ public class Deadline extends Task{
     public String toString(){
         String result = "";
         result += "[D]";
-        if (this.done) {
+        if (this.getDone()) {
             result += "[X]";
+
         } else {
             result += "[ ]";
         }
-        result += this.taskName + " (by: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        result += " " + this.getTaskName() + " (by: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         if (this.time != null) {
             result += " " + this.time.format(DateTimeFormatter.ofPattern(("HH:mm")));
         }

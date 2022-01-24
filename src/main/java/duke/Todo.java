@@ -21,10 +21,10 @@ public class Todo extends Task{
     public void printTask(){
         System.out.print("[T]");
 
-        if(this.done){
-            System.out.println("[X] " + this.taskName);
+        if(this.getDone()){
+            System.out.println("[X] " + this.getTaskName());
         } else {
-            System.out.println("[ ] " + this.taskName);
+            System.out.println("[ ] " + this.getTaskName());
         }
     }
 
@@ -36,12 +36,12 @@ public class Todo extends Task{
     public String toString(){
         String result = "";
         result += "[T]";
-        if (this.done) {
+        if(this.getDone()){
             result += "[X]";
         } else {
             result += "[ ]";
         }
-        result += this.taskName;
+        result += " " + this.getTaskName();
         return result;
     }
 }

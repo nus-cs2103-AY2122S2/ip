@@ -5,8 +5,8 @@ package duke;
  */
 public class Task {
     //Attributes of a task
-    String taskName;
-    boolean done;
+    private String taskName;
+    private boolean done;
 
     /**
      * Constructor for task, always initialised to be not done
@@ -30,11 +30,26 @@ public class Task {
     /**
      * Prints out the status of the task and the details
      */
-    public void printTask() {
-        if (this.done) {
-            System.out.println("[X] " + this.taskName);
+    public boolean getDone() {
+        return this.done;
+    }
+
+    public String getTaskName() {
+        return taskName;
+    }
+
+    public void setTaskName(String newName) {
+        this.taskName = newName;
+    }
+
+    /**
+     * Prints out the status of the task and the details
+     */
+    public void printTask(){
+        if(this.getDone()){
+            System.out.println("[X] " + this.getTaskName());
         } else {
-            System.out.println("[ ] " + this.taskName);
+            System.out.println("[ ] " + this.getTaskName());
         }
     }
 }
