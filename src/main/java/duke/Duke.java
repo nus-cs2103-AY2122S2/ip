@@ -53,7 +53,7 @@ public class Duke {
                     }
                     break;
                 case LIST:
-                    ui.showFeedbackMessage(tasks.printTasks());
+                    ui.showFeedbackMessage(tasks.listTasks());
                     break;
                 case MARK:
                     ui.showFeedbackMessage(tasks.markAsDone(commands[1], true));
@@ -68,6 +68,9 @@ public class Duke {
                     ui.showFeedbackMessage("\n\t" + commands[0] + " is not a valid command\n");
                     break;
                 case EMPTY:
+                    break;
+                case FIND:
+                    ui.showFeedbackMessage(tasks.findKeyword(commands[1].trim()));
                     break;
                 default:
                     ui.showFeedbackMessage(tasks.addTask(command, commands[1], true));

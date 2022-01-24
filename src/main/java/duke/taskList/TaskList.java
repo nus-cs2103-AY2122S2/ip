@@ -30,12 +30,51 @@ public class TaskList {
      *
      * @return List of Tasks as a String.
      */
-    public String printTasks() {
+    public String listTasks() {
         StringBuilder output = new StringBuilder("\n\tHere are the tasks in your list:\n");
-        for (int i = 0; i < tasks.size(); i++) {
-            output.append("\t").append(i + 1).append(". ").append(tasks.get(i).toString()).append("\n");
+        return printTasks(output, this.tasks);
+    }
+
+    /**
+     * Creates a formatted String listing out the duke.task.Task that are in the supplied ArrayList.
+     *
+     * @param beg StringBuilder initialized with a starting sentence.
+     * @param list ArrayList containg the tasks that you want to list out.
+     * @return List of Tasks as a String.
+     */
+    private String printTasks(StringBuilder beg, ArrayList<Task> list) {
+        for (int i = 0; i < list.size(); i++) {
+            beg.append("\t").append(i + 1).append(". ").append(list.get(i).toString()).append("\n");
         }
-        return output.toString();
+        return beg.toString();
+    }
+
+    /**
+     * Creates a formatted String listing out the duke.task.Task in the list that contains a given keyword.
+     *
+     * @param keyword keyword that the user wants to find.
+     * @return List of Tasks, that contains the given keyword, as a String.
+     */
+    public String findKeyword(String keyword) {
+        ArrayList<Task> result = findKeywordHelper(keyword);
+        StringBuilder output = new StringBuilder("\n\tHere are the matching tasks in your list:\n");
+        return printTasks(output, result);
+    }
+
+    /**
+     * Returns an ArrayList containing all Tasks in the list with a given keyword.
+     *
+     * @param keyword keyword that the user wants to find.
+     * @return List of Tasks that contains the given keyword.
+     */
+    private ArrayList<Task> findKeywordHelper(String keyword) {
+        ArrayList<Task> result = new ArrayList<>();
+        for (int i = 0; i < this.tasks.size(); i++) {
+            if(tasks.get(i).getDescription().contains(keyword)) {
+                result.add(tasks.get(i));
+            }
+        }
+        return result;
     }
 
     /**

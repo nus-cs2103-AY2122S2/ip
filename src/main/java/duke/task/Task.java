@@ -32,6 +32,14 @@ public abstract class Task {
     public abstract String formatSave();
 
     /**
+     * Returns the task description.
+     * @return description of task.
+     */    
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
      * Returns a String to display done status of task as well as the task description.
      *
      * @return Formatted String.
