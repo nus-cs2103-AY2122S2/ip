@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -193,7 +195,7 @@ public class Duke {
      */
     private static void initFiles() throws IOException {
         File folder = new File(DATA_FOLDER_PATH);
-        if (!folder.isDirectory()) {
+        if (!Files.exists(Path.of(DATA_FOLDER_PATH)) || !folder.isDirectory()) {
             System.out.println("Data folder not found, creating a new folder.");
             boolean isSuccess = folder.mkdirs();
             if (isSuccess) {
@@ -203,7 +205,7 @@ public class Duke {
             }
         }
         File file = new File(TASKLIST_FILE_PATH);
-        if (!file.isFile()) {
+        if (!Files.exists(Path.of(TASKLIST_FILE_PATH)) || !file.isFile()) {
             System.out.println("Tasklist file not found, creating a new file.");
             boolean isSuccess = file.createNewFile();
             if (isSuccess) {
