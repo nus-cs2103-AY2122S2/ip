@@ -70,6 +70,20 @@ public class TaskList {
         return tasks.get(index);
     }
 
+    /**
+     * Creates a Task object as specified and adds it into the list of tasks
+     * by performing date comparison based on the specified type.<br><br>
+     *
+     * taskType is defined as follows:
+     * <li>0 : TodoTask </li>
+     * <li>1 : DeadlineTask</li>
+     * <li>2 : EventTask</li>
+     *
+     * @param taskName The name of the Task to be added
+     * @param isMarked If the Task that is being added is marked
+     * @param date The date of the Task (null for TodoTask)
+     * @param isMarked The type task to be added
+     */
     public void addTask(String taskName, boolean isMarked, LocalDate date, int taskType) {
         switch (taskType) {
         case 0:
