@@ -1,3 +1,14 @@
+import static java.nio.file.StandardOpenOption.CREATE;
+import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
+import static java.nio.file.StandardOpenOption.WRITE;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,6 +28,57 @@ public class Duke {
         System.out.println("What can I do for you?");
     }
 
+    private static void loadFromFile() {
+        String filePath = "./tasks.txt";
+        Path path = Paths.get(filePath);
+        if (!Files.exists(path)) {
+            return;
+        }
+
+        try {
+            BufferedReader bufferReader = new BufferedReader(Files.newBufferedReader(path));
+
+            // Assuming the file is in correct format (not corrupted, changed by hand etc.)
+            numberOfTasks = Integer.parseInt(bufferReader.readLine());
+            for (int i = 0; i < numberOfTasks; i++) {
+                String[] tokens = bufferReader.readLine().split(",");
+                if (tokens[0].equals("T")) {
+                    tasks.add(new ToDo(tokens[1]));
+                } else if (tokens[0].equals("E")) {
+                    tasks.add(new Event(tokens[1], tokens[2]));
+                } else {
+                    tasks.add(new Deadline(tokens[1], tokens[2]));
+                }
+                if (tokens[3].equals("X")) {
+                    tasks.get(i).mark();
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Failed to load tasks from " + filePath);
+        } catch (IOException e) {
+            System.out.println("Error encountered when reading from" + filePath);
+        }
+    }
+
+    private static void saveToFile() {
+        String filePath = "./tasks.txt";
+        Path path = Paths.get(filePath);
+
+        try {
+            BufferedWriter bufferedWriter = Files.newBufferedWriter(
+                    path, CREATE, TRUNCATE_EXISTING, WRITE);
+            bufferedWriter.write(String.valueOf(numberOfTasks));
+            bufferedWriter.newLine();
+            for (int i = 0; i < numberOfTasks; i++) {
+                bufferedWriter.write(tasks.get(i).getSaveToFileFormat());
+                bufferedWriter.newLine();
+            }
+            bufferedWriter.flush();
+        } catch (IOException e) {
+            System.out.println("Failed to write tasks to " + filePath);
+        }
+    }
+    
     private static void exit() {
         System.out.println("Bye. Hope to see you again soon!");
     }
@@ -53,7 +115,7 @@ public class Duke {
         System.out.println("Nice! I've marked this task as done: ");
         System.out.println(tasks.get(taskNumber - 1));
     }
-
+    
     private static void unmarkTask(int taskNumber) {
         tasks.get(taskNumber - 1).unmark();
         System.out.println("OK, I've marked this task as not done yet:");
@@ -138,8 +200,10 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        loadFromFile();
         greet();
         run();
         exit();
+        saveToFile();
     }
 }
