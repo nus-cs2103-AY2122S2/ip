@@ -5,7 +5,7 @@ package duke.task;
  */
 
 public class Task {
-    public String name;
+    String name;
     /**
      * To indicate whether the task has been completed
      */
@@ -16,7 +16,6 @@ public class Task {
      *
      * @param name Description or name of the task.
      */
-
     public Task(String name) {
         this.name = name;
         this.isMarked = false;

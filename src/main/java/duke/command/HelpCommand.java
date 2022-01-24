@@ -1,9 +1,8 @@
 package duke.command;
 
-import duke.task.Task;
-import duke.function.Ui;
 import duke.function.Storage;
 import duke.function.TaskList;
+import duke.function.Ui;
 
 /**
  * Represents a command to print out a help message with a list of valid commands.

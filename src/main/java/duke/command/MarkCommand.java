@@ -1,8 +1,8 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.function.TaskList;
 import duke.function.Storage;
+import duke.function.TaskList;
 import duke.function.Ui;
 import duke.task.Task;
 
@@ -58,9 +58,11 @@ public class MarkCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (this.exception != null) throw this.exception;
-        if (this.taskNumber <= 0 || this.taskNumber > tasks.getSize())
+        if (this.exception != null) {
+            throw this.exception;
+        } else if (this.taskNumber <= 0 || this.taskNumber > tasks.getSize()) {
             throw new DukeException("Please only input integers within the range of your tasks");
+        }
 
         Task task = tasks.getByNumber(this.taskNumber);
         if (this.isMark) {

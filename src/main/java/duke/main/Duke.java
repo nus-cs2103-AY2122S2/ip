@@ -3,12 +3,12 @@ package duke.main;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.function.Parser;
 import duke.function.Storage;
 import duke.function.TaskList;
 import duke.function.Ui;
-import duke.function.Parser;
-import duke.command.Command;
-import duke.exception.DukeException;
 
 /**
  * Duke is a Todo list command line application that allows you to create, delete, mark, and save tasks

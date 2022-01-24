@@ -11,7 +11,7 @@ public class EventTask extends Task {
     /**
      * Preposition describing the date (eg. on, by).
      */
-    public String preposition;
+    String preposition;
     /**
      * Date and time of the event.
      */
@@ -44,6 +44,10 @@ public class EventTask extends Task {
      * @return
      */
     public String toString() {
-        return "[E]" + super.toString() + String.format(" (%s: %s)", this.preposition, this.dateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")));
+        return "[E]"
+                + super.toString()
+                + String.format(" (%s: %s)",
+                this.preposition,
+                this.dateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")));
     }
 }

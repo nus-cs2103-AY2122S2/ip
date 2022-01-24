@@ -4,17 +4,17 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.List;
 
 import duke.exception.DukeException;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.ToDoTask;
-import duke.task.EventTask;
-import duke.task.DeadlineTask;
 
 /**
  * Manages the loading and saving of tasks into an external .txt file
@@ -66,7 +66,9 @@ public class Storage {
                     } else {
                         throw new DukeException("An invalid task type was read");
                     }
-                    if (line[1].equals("X")) task.setMarked(true);
+                    if (line[1].equals("X")) {
+                        task.setMarked(true);
+                    }
                     tasks.add(task);
                 }
             } catch (FileNotFoundException e) {
@@ -94,7 +96,7 @@ public class Storage {
                 } else if (task instanceof EventTask) {
                     taskString += "E;";
                 }
-                if (task.isDone()) {
+                if (task.isMarked()) {
                     taskString += "X;";
                 } else {
                     taskString += "O;";

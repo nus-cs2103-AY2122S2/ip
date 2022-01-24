@@ -1,19 +1,19 @@
 package duke.command;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
 import duke.exception.DukeException;
-import duke.task.Task;
-import duke.task.ToDoTask;
-import duke.task.EventTask;
-import duke.task.DeadlineTask;
+import duke.function.Storage;
 import duke.function.Ui;
 import duke.function.TaskList;
-import duke.function.Storage;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.Task;
+import duke.task.ToDoTask;
 
 /**
  * Represents a command to add a new task.
@@ -76,8 +76,12 @@ public class AddCommand extends Command {
         String date = "";
         String time = "";
         LocalDateTime dateTime = LocalDateTime.now();
-        if (st.hasMoreTokens()) date = st.nextToken();
-        if (st.hasMoreTokens()) time = st.nextToken();
+        if (st.hasMoreTokens()) {
+            date = st.nextToken();
+        }
+        if (st.hasMoreTokens()) {
+            time = st.nextToken();
+        }
         if ((date.equals("") || time.equals(""))) {
             if (command.equals("deadline")) {
                 this.exception = new DukeException("Please add a date and time for your deadline in the following" +
@@ -123,16 +127,21 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (this.exception != null) throw this.exception;
+        if (this.exception != null) {
+            throw this.exception;
+        }
 
         //Creating the new task
         Task newTask = new Task("");
-        if (this.taskType.equals("todo")) newTask = new ToDoTask(this.taskName);
-        else if (this.taskType.equals("deadline"))
+        if (this.taskType.equals("todo")) {
+            newTask = new ToDoTask(this.taskName);
+        } else if (this.taskType.equals("deadline")) {
             newTask = new DeadlineTask(this.taskName, this.taskPreposition, this.taskDate);
-        else if (this.taskType.equals("event"))
+        } else if (this.taskType.equals("event")) {
             newTask = new EventTask(this.taskName, this.taskPreposition, this.taskDate);
-        else throw new DukeException("Invalid command type");
+        } else {
+            throw new DukeException("Invalid command type");
+        }
 
         //Adding the task
         tasks.add(newTask);

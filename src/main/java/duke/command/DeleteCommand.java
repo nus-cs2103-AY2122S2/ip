@@ -48,9 +48,11 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (this.exception != null) throw this.exception;
-        if (this.taskNumber <= 0 || this.taskNumber > tasks.getSize())
+        if (this.exception != null) {
+            throw this.exception;
+        } else if (this.taskNumber <= 0 || this.taskNumber > tasks.getSize()) {
             throw new DukeException("Please only input integers within the range of your tasks");
+        }
 
         Task removedTask = tasks.deleteByNumber(this.taskNumber);
         ui.print(String.format("I've deleted task %d! *quack*", this.taskNumber));
