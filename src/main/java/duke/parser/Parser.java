@@ -2,6 +2,11 @@ package duke.parser;
 
 import duke.bot.BotType;
 import duke.command.*;
+import duke.command.add.DeadlineCommand;
+import duke.command.add.EventCommand;
+import duke.command.add.TodoCommand;
+import duke.command.index.DeleteCommand;
+import duke.command.index.MarkCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidArgumentException;
 import duke.task.Deadline;

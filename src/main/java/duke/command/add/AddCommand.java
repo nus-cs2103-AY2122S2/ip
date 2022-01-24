@@ -1,5 +1,8 @@
-package duke.command;
+package duke.command.add;
 
+import duke.command.Command;
+import duke.command.CommandFeedback;
+import duke.command.CommandType;
 import duke.task.Task;
 import duke.task.TaskList;
 

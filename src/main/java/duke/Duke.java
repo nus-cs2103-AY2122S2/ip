@@ -1,5 +1,7 @@
 package duke;
 
+import duke.bot.BotMessage;
+import duke.bot.JJBABotMessage;
 import duke.command.BotCommand;
 import duke.command.Command;
 import duke.command.CommandFeedback;
@@ -16,11 +18,21 @@ public class Duke {
     private TaskList taskList;
     private Storage storage;
     private Console console;
+    private boolean isExit = false;
 
     private static final String FILE_PATH = "/data/taskInfo.txt";
 
-    public Duke(String filePath){
-        console = new Console();
+    public Duke() {
+        this(FILE_PATH, new JJBABotMessage());
+    }
+
+    public Duke(BotMessage bot) {
+        this(FILE_PATH, bot);
+    }
+
+    public Duke(String filePath, BotMessage bot){
+        console = new Console(bot);
+        isExit = false;
 
         try {
             storage = new Storage(filePath);
@@ -39,12 +51,12 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke(FILE_PATH).run();
+        new Duke(FILE_PATH, new JJBABotMessage()).run();
     }
 
     public void run() {
         console.printWelcomeMessage();
-        boolean isExit = false;
+        isExit = false;
 
         do {
             try {
@@ -60,12 +72,7 @@ public class Duke {
                     storage.saveTaskList(taskList);
                 }
 
-                if (cf.cType == CommandType.BOT) {
-                    console.setBot(((BotCommand) c).getBotType());
-                }
-
-                console.printCommandFeedback(cf);
-                isExit = (cf.cType == CommandType.EXIT);
+                handleCommandFeedback(c, cf);
 
             } catch (DukeException e) {
                 if (!e.isHidden) {
@@ -80,5 +87,16 @@ public class Duke {
         } while (!isExit);
     }
 
+    public void handleCommandFeedback(Command c, CommandFeedback cf) {
+        switch (cf.cType) {
+        case BOT:
+            console.setBot(((BotCommand) c).getBotType());
+            break;
+        case EXIT:
+            isExit = (cf.cType == CommandType.EXIT);
+            break;
+        }
 
+        console.printCommandFeedback(cf);
+    }
 }

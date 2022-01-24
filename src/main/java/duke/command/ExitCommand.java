@@ -10,4 +10,9 @@ public class ExitCommand extends Command {
     public CommandFeedback execute(TaskList taskList) {
         return new CommandFeedback(CommandType.EXIT);
     }
+
+    @Override
+    public String getCommandWord() {
+        return COMMAND_WORD;
+    }
 }

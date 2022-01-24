@@ -1,5 +1,7 @@
-package duke.command;
+package duke.command.index;
 
+import duke.command.CommandFeedback;
+import duke.command.CommandType;
 import duke.exception.InvalidArgumentException;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -39,5 +41,10 @@ public class MarkCommand extends IndexCommand {
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidArgumentException(getFormat(isMark));
         }
+    }
+
+    @Override
+    public String getCommandWord() {
+        return (isMark ? COMMAND_WORD_MARK : COMMAND_WORD_UNMARK);
     }
 }

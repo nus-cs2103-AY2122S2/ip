@@ -1,5 +1,7 @@
-package duke.command;
+package duke.command.index;
 
+import duke.command.CommandFeedback;
+import duke.command.CommandType;
 import duke.exception.InvalidArgumentException;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -23,5 +25,10 @@ public class DeleteCommand extends IndexCommand {
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidArgumentException(COMMAND_FORMAT);
         }
+    }
+
+    @Override
+    public String getCommandWord() {
+        return COMMAND_WORD;
     }
 }

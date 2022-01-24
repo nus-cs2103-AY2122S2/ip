@@ -1,4 +1,4 @@
-package duke.command;
+package duke.command.add;
 
 import duke.task.Todo;
 
@@ -8,6 +8,11 @@ public class TodoCommand extends AddCommand {
 
     public TodoCommand(Todo newTodo) {
         super(newTodo);
+    }
+
+    @Override
+    public String getCommandWord() {
+        return COMMAND_WORD;
     }
 }
 

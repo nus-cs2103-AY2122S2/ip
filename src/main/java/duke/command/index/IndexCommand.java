@@ -1,4 +1,6 @@
-package duke.command;
+package duke.command.index;
+
+import duke.command.Command;
 
 public abstract class IndexCommand extends Command {
     protected static final String COMMAND_ARG = " <valid task no>";

@@ -11,4 +11,9 @@ public class ListCommand extends Command {
     public CommandFeedback execute(TaskList taskList) throws InvalidArgumentException {
         return new CommandFeedback(CommandType.LIST, taskList);
     }
+
+    @Override
+    public String getCommandWord() {
+        return COMMAND_WORD;
+    }
 }

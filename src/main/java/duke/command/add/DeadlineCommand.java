@@ -1,4 +1,4 @@
-package duke.command;
+package duke.command.add;
 
 import duke.task.Deadline;
 
@@ -8,5 +8,10 @@ public class DeadlineCommand extends AddCommand {
 
     public DeadlineCommand(Deadline newDeadline) {
         super(newDeadline);
+    }
+
+    @Override
+    public String getCommandWord() {
+        return COMMAND_WORD;
     }
 }

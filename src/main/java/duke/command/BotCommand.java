@@ -19,6 +19,17 @@ public class BotCommand extends Command {
         return new CommandFeedback(CommandType.BOT);
     }
 
+    @Override
+    public String getCommandWord() {
+        switch (botType) {
+        case JJBA:
+            return COMMAND_WORD_JJBA;
+        case DIO:
+            return COMMAND_WORD_DIO;
+        }
+        return "none";
+    }
+
     public BotType getBotType() {
         return botType;
     }

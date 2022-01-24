@@ -1,4 +1,4 @@
-package duke.command;
+package duke.command.add;
 
 import duke.task.Event;
 
@@ -8,5 +8,10 @@ public class EventCommand extends AddCommand {
 
     public EventCommand(Event newEvent) {
         super(newEvent);
+    }
+
+    @Override
+    public String getCommandWord() {
+        return COMMAND_WORD;
     }
 }

@@ -11,17 +11,17 @@ public class JJBABotMessage extends BotMessage {
 
     @Override
     public String getInvalidCommandMessage() {
-        return "Invalid duke.command.Command!";
+        return "Invalid Command!";
     }
 
     @Override
     public String getAddMessage(TaskList taskList, Task task) {
-        return "duke.task.Task added: \n   " + task + "\n" + getTaskLeft(taskList);
+        return "Task added: \n   " + task + "\n" + getTaskLeft(taskList);
     }
 
     @Override
     public String getDeleteMessage(TaskList taskList, Task task) {
-        return "duke.task.Task removed!\n   " + task;
+        return "Task removed!\n   " + task;
     }
 
     @Override

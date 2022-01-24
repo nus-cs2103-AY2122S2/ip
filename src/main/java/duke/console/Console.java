@@ -13,9 +13,26 @@ public class Console {
     private Scanner sc;
     private BotMessage bot;
 
+    public static final String lineFormat = "    ____________________________________________________________";
+
     public Console(){
+        this(new JJBABotMessage());
+    }
+
+    public Console(BotMessage bot){
         this.sc = new Scanner(System.in);
-        bot = new JJBABotMessage();
+        this.bot = bot;
+    }
+
+    public static String formatMessage(String msg) {
+        String[] msgs = msg.split("\n");
+
+        String finalMsg = "";
+
+        for (String line : msgs) {
+            finalMsg += "      " + line + System.lineSeparator();
+        }
+        return finalMsg;
     }
 
     public String read() {
@@ -35,11 +52,7 @@ public class Console {
     }
 
     public void print(String msg) {
-        String[] msgs = msg.split("\n");
-
-        for (String line : msgs) {
-            System.out.println("      " + line);
-        }
+        System.out.println(formatMessage(msg));
     }
 
     private void printTaskList(TaskList taskList) {
@@ -47,12 +60,12 @@ public class Console {
         for (int i = 0; i < taskList.size(); i++) {
             System.out.println(String.format("      %d. %s", i + 1, taskList.get(i).toString()));
         }
-        System.out.println("    ____________________________________________________________");
+        System.out.println(lineFormat);
     }
 
     private void println(String msg) {
         print(msg);
-        System.out.println("    ____________________________________________________________");
+        System.out.println(lineFormat);
     }
 
     public void printError(String errorMsg) {

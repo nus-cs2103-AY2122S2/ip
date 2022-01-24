@@ -21,6 +21,7 @@ public abstract class Task {
         isMark = false;
     }
 
+    @Override
     public String toString() {
         return String.format("[%s] %s", isMark ? "X" : " ", name);
     }

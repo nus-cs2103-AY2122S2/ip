@@ -5,4 +5,6 @@ import duke.task.TaskList;
 
 public abstract class Command {
     public abstract CommandFeedback execute(TaskList taskList) throws InvalidArgumentException;
+
+    public abstract String getCommandWord();
 }
