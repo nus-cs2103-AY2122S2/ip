@@ -64,7 +64,7 @@ public class Duke {
                     }
                     // Create new Deadline object
                     LocalDate d = LocalDate.parse(content[1].trim().split(" ")[0].trim(),
-                            DateTimeFormatter.ofPattern("MMM dd yyyy"));
+                            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                     LocalTime t;
                     Task newTask1;
                     if (content[1].trim().split(" ").length == 2) {
@@ -86,7 +86,7 @@ public class Duke {
                         throw new DukeException("event");
                     }
                     LocalDate ds = LocalDate.parse(content1[1].trim().split(" ")[0].trim(),
-                            DateTimeFormatter.ofPattern("MMM dd yyyy"));
+                            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                     LocalTime t1;
                     LocalTime t2;
                     Task newTask2;
