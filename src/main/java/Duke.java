@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import java.io.FileNotFoundException;
 import java.io.IOException;
+=======
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+>>>>>>> branch-Level-8
 import java.util.Scanner;
 
 public class Duke {
@@ -63,12 +68,14 @@ public class Duke {
                 case "deadline":
                     String deadline_description = input.split("deadline ", 2)[1].split("/by ")[0];
                     String deadline_date = input.split("deadline ", 2)[1].split("/by ")[1];
-                    DukeFunctions.addToList(new Deadline(deadline_description, deadline_date));
+                    LocalDate deadLineDate = LocalDate.parse(deadline_date, Task.inputDateFormat);
+                    TaskFunctions.addToList(new Deadline(deadline_description, deadLineDate));
                     break;
                 case "event":
                     String event_description = input.split("event ", 2)[1].split("/at ")[0];
                     String event_date = input.split("event ", 2)[1].split("/at ")[1];
-                    DukeFunctions.addToList(new Event(event_description, event_date));
+                    LocalDate eventDate = LocalDate.parse(event_date, Task.inputDateFormat);
+                    TaskFunctions.addToList(new Event(event_description, eventDate));
                     break;
                 case "mark":
                     DukeFunctions.markTask(Integer.parseInt(input_split[1]));
@@ -90,6 +97,8 @@ public class Duke {
                 }
             } catch (DukeException err) {
                 System.err.println(err);
+            } catch (DateTimeParseException err) {
+                System.err.println("So very sorry, please input a valid date in the correct format (DD/MM/YYYY)");
             }
         }
     }

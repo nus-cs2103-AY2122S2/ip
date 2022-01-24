@@ -1,7 +1,11 @@
+import java.time.format.DateTimeFormatter;
+
 public class Task {
     protected String description;
     protected boolean isDone;
     protected String type;
+    protected DateTimeFormatter outputDateFormat = DateTimeFormatter.ofPattern("MMM d yyyy");
+    protected static DateTimeFormatter inputDateFormat = DateTimeFormatter.ofPattern("d/M/uuuu");
 
     public Task(String description) {
         this.description = description;
