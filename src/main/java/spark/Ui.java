@@ -36,7 +36,7 @@ public class Ui {
      * to the user.
      */
     public void printWelcomeMessage() {
-        String welcomeMessage = String.format("Hello I'm Spark.Spark\n" +
+        String welcomeMessage = String.format("Hello I'm Spark!\n" +
                 "What can I do for you?");
 
         printMessage(welcomeMessage);
