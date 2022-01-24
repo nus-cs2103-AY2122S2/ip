@@ -1,9 +1,19 @@
 plugins {
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
     id 'java'
 }
 
+version = "0.1"
+
 test {
     useJUnitPlatform()
+}
+
+shadowJar {
+    manifest {
+        attributes 'Main-Class': 'Duke'
+    }
+    baseName("Duke")
 }
 
 dependencies {
