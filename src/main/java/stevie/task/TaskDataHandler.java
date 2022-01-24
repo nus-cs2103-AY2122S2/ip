@@ -38,8 +38,7 @@ public class TaskDataHandler {
             bw.flush();
             bw.close();
             fw.close();
-        } catch (
-                IOException ex) {
+        } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
     }
@@ -53,7 +52,7 @@ public class TaskDataHandler {
         try {
             FileReader fr = new FileReader(path);
             BufferedReader br = new BufferedReader(fr);
-            String line = null;
+            String line;
             ArrayList<Task> taskList = new ArrayList<>();
             while ((line = br.readLine()) != null) {
                 TaskType type = TaskCreator.charToType(line.charAt(0));
