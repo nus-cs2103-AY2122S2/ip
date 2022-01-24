@@ -24,7 +24,7 @@ Hello from
     ____________________________________
 
     OK you better do this today, or else! Added task:
-    [T][ ]  borrow book
+    [T][ ] borrow book
     Now you have 1 in the list.
     ____________________________________
     ____________________________________
@@ -38,7 +38,7 @@ Hello from
     ____________________________________
 
     Let's see... A new event! Added task:
-    [T][ ] pokemon release (at: 28th jan)
+    [E][ ] pokemon release (at: 28th jan)
     Now you have 2 in the list.
     ____________________________________
     ____________________________________
@@ -60,8 +60,8 @@ Hello from
     ____________________________________
     ____________________________________
 
-    1.[T][ ]  borrow book
-    2.[T][ ] pokemon release (at: 28th jan)
+    1.[T][ ] borrow book
+    2.[E][ ] pokemon release (at: 28th jan)
     3.[D][ ] return book (by: Sunday)
     ____________________________________
     ____________________________________
@@ -71,7 +71,7 @@ Hello from
     ____________________________________
 
     Finally... I've marked this task as done:
-      [T][X] pokemon release (at: 28th jan)
+      [E][X] pokemon release (at: 28th jan)
     ____________________________________
     ____________________________________
 
@@ -83,8 +83,8 @@ Hello from
     ____________________________________
     ____________________________________
 
-    1.[T][ ]  borrow book
-    2.[T][X] pokemon release (at: 28th jan)
+    1.[T][ ] borrow book
+    2.[E][X] pokemon release (at: 28th jan)
     3.[D][ ] return book (by: Sunday)
     ____________________________________
     ____________________________________
@@ -94,7 +94,7 @@ Hello from
     ____________________________________
 
     Could you be any more lazy? I've marked this task as not done yet:
-      [T][ ] pokemon release (at: 28th jan)
+      [E][ ] pokemon release (at: 28th jan)
     ____________________________________
     ____________________________________
 
@@ -111,7 +111,7 @@ Hello from
     ____________________________________
 
     Alright I'm deleting this task:
-    [T][ ]  borrow book
+    [T][ ] borrow book
     Now you have 2 in the list.
     ____________________________________
     ____________________________________
@@ -120,7 +120,7 @@ Hello from
     ____________________________________
     ____________________________________
 
-    1.[T][ ] pokemon release (at: 28th jan)
+    1.[E][ ] pokemon release (at: 28th jan)
     2.[D][ ] return book (by: Sunday)
     ____________________________________
     ____________________________________
