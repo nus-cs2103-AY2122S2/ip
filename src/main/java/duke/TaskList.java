@@ -3,17 +3,35 @@ package duke;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents the list of tasks.
+ *
+ * @author Abdulelah Faisal S Al Ghrairy
+ */
 public class TaskList {
     protected List<Task> tasks;
 
+    /**
+     * Default constructor if program is run for the first time.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Constructor that retrieves the TaskList elements from previous running of program.
+     * @param list the list of tasks to be inputted
+     */
     public TaskList(List<Task> list) {
         this.tasks = list;
     }
 
+    /**
+     * Returns the task at the provided index from the list.
+     * @param index the index of the task
+     * @return The task at the given index
+     * @throws DukeException throws if the index does not exist in the list, or if the index was not an integer
+     */
     public Task getTaskAtIndex(int index) throws DukeException {
         try {
             return tasks.get(index);
@@ -22,24 +40,45 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds the provided task to the list of tasks.
+     * @param t The task to be added
+     */
     public void addTask(Task t) {
         this.tasks.add(t);
     }
 
+    /**
+     * Removes the task at the provided index from the list
+     * @param index the index of the task
+     * @return the task that was removed
+     * @throws DukeException throws if the index does not exist in the list, or if the index is not an integer
+     */
     public Task removeTask(int index) throws DukeException {
         this.getTaskAtIndex(index); //make sure task exists
 
         return this.tasks.remove(index);
     }
 
+    /**
+     * Returns the number of tasks currently in the list
+     */
     public int getTasksCount() {
         return tasks.size();
     }
 
+    /**
+     * Returns the list of tasks
+     * @return the list of tasks
+     */
     public List<Task> getList() {
         return this.tasks;
     }
 
+    /**
+     * toString implementation of the list of tasks ordered numerically.
+     * @return the string implementation of the list of tasks
+     */
     public String toString() {
         StringBuilder listOfTasks = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
