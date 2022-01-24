@@ -2,12 +2,11 @@ package spike;
 
 import spike.command.Command;
 import spike.command.ExitCommand;
+import spike.exception.SpikeException;
 import spike.parser.Parser;
 import spike.storage.Storage;
 import spike.task.*;
 import spike.ui.Ui;
-
-import java.util.Scanner;
 
 public class Spike {
     private Storage storage;
@@ -25,7 +24,8 @@ public class Spike {
         }
     }
 
-    public void run() {
+    private void run() {
+        ui.greet(tasks.getListSize());
         Command command;
         do {
             String input = ui.getCommand();

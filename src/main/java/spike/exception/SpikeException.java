@@ -1,4 +1,4 @@
-package spike;
+package spike.exception;
 
 /**
  * Class for all Spike specific exceptions

@@ -1,6 +1,6 @@
 package spike.parser;
 
-import spike.SpikeException;
+import spike.exception.SpikeException;
 import spike.command.*;
 import spike.task.*;
 
@@ -166,7 +166,7 @@ public class Parser {
     /**
      * Parses date and time input by user and returns valid LocalDateTime object
      */
-    public static LocalDateTime parseDateTime(String s, DateTimeFormatter dtf) {
+    private static LocalDateTime parseDateTime(String s, DateTimeFormatter dtf) {
         try {
             LocalDateTime dateTime = LocalDateTime.parse(s, dtf);
             return dateTime;
@@ -179,7 +179,7 @@ public class Parser {
      * Checks whether the input string is integer.
      * If yes, return it, else return -1.
      */
-    public static int isInt(String str) {
+    private static int isInt(String str) {
         try {
             int x = Integer.parseInt(str);
             return x; // it is an integer
@@ -193,7 +193,7 @@ public class Parser {
      * Checks whether it is a valid command.
      * If valid, return that command enum number, else return null.
      */
-    public CommandName validateCommand(String input) {
+    private CommandName validateCommand(String input) {
         for (CommandName c : CommandName.values()) {
             if (c.getCommand().equals(input)) {
                 return c;

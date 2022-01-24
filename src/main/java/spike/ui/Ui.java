@@ -1,5 +1,6 @@
 package spike.ui;
 
+import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
@@ -13,7 +14,17 @@ public class Ui {
     public Ui() {
         this.in = new Scanner(System.in);
         this.out = System.out;
-        greet();
+    }
+
+    /**
+     * Initializes Ui for unit testing.
+     *
+     * @param inputStream
+     * @param printStream
+     */
+    public Ui(InputStream inputStream, PrintStream printStream) {
+        this.in = new Scanner(inputStream);
+        this.out = printStream;
     }
 
     /**
@@ -36,8 +47,12 @@ public class Ui {
      *
      * @return
      */
-    private void greet() {
-        printMsg("Hello! I am Spike ⊂( ・ ̫・)⊃ Nice to meet you!\nWhat can I do for you?");
+    public void greet(int taskListSize) {
+        if (taskListSize > 0) {
+            printMsg("Welcome back! Enter 'list' command to see your task list.");
+        } else {
+            printMsg("Hello! I am Spike ⊂( ・ ̫・)⊃ Nice to meet you!\nWhat can I do for you?");
+        }
     }
 
     /**
@@ -51,7 +66,7 @@ public class Ui {
      * Shows error in loading task file.
      */
     public void showLoadingError() {
-        out.println("Sorry, I couldn't create the task list file for you.");
+        printMsg("Sorry, I couldn't create the task list file for you.");
     }
 
     /**

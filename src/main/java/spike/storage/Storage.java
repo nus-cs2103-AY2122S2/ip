@@ -1,6 +1,6 @@
 package spike.storage;
 
-import spike.*;
+import spike.exception.SpikeException;
 import spike.task.*;
 
 import java.io.File;
