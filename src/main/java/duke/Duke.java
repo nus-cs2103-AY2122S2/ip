@@ -4,11 +4,20 @@ import duke.util.Parser;
 
 import java.util.Scanner;
 
+/**
+ * Duke driver class, contains the main method to initiate
+ * Duke chat-bot.
+ */
 public class Duke {
     private TaskList taskList;
     private Ui ui;
     private Storage storage;
 
+    /**
+     * Duke constructor method, takes no parameter,
+     * initialize Ui, storage, and tasklist loaded from
+     * saved storage.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage();
@@ -24,6 +33,10 @@ public class Duke {
         new Duke().run();
     }
 
+    /**
+     * Run the Duke chat-bot to accept user input.
+     * Process user's input and stopped when user input "bye"
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         ui.greetings();

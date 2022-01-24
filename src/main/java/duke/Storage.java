@@ -12,9 +12,21 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+/**
+ * Represents Duke chat-bot storage. Handle reading and
+ * writing to file. Will create a new storage if the data
+ * is not present.
+ */
 public class Storage {
     private TaskList taskList = new TaskList();
 
+    /**
+     * Load the data into tasklist if present, else create a new directory
+     * to store the data and return empty tasklist.
+     *
+     * @return TaskList loaded from existing data
+     * @throws IOException if fails to read the data.
+     */
     public TaskList load() throws IOException {
 
             File directory = new File(Constants.DATA_DIRECTORY);
@@ -49,6 +61,13 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Update the data with the updated taskList. Create a temp file
+     * to be written by the new data, replace the old data with temp
+     *
+     * @param taskList update taskList
+     * @throws IOException if fails to write the data
+     */
     public void update(TaskList taskList) throws IOException {
 
             this.taskList = taskList;
