@@ -1,4 +1,4 @@
-package duke;
+package duke.misc;
 
 public class Ui {
     private static final String BOT_NAME = "KoroBot";

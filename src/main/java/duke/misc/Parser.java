@@ -1,4 +1,9 @@
-package duke;
+package duke.misc;
+
+import duke.exception.DukeException;
+import duke.exception.InvalidCommand;
+import duke.exception.InvalidDateTime;
+import duke.exception.InvalidIndex;
 
 import java.time.Clock;
 import java.time.LocalDate;
