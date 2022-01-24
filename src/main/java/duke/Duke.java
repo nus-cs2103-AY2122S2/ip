@@ -1,6 +1,9 @@
 package duke;
 import java.util.Scanner;
 
+/**
+ * Duke class which is the main entry point when starting up the application
+ */
 public class Duke {
 
     private Ui ui;
@@ -8,6 +11,12 @@ public class Duke {
     private Storage storage;
     private Parser parser;
 
+    /**
+     * Constructor for Duke class
+     *
+     * @param path the path to the storage file from root
+     * @param file_dir the path to the storage directory from root
+     */
     public Duke(String path, String file_dir) {
         this.ui = new Ui();
         this.storage = new Storage(path, file_dir);
@@ -22,13 +31,16 @@ public class Duke {
         }
     }
 
+    /**
+     * method to run the application and start taking in puts
+     */
     public void run() {
         ui.startUp();
         String inputData;
         Scanner scan = new Scanner(System.in);
         boolean hasEnded = false;
 
-        while(!hasEnded) {
+        while (!hasEnded) {
             try {
                 inputData = scan.nextLine();
                 hasEnded = parser.takeInput(inputData, taskList);
@@ -41,6 +53,11 @@ public class Duke {
         }
     }
 
+    /**
+     * point of entry for the application
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke("./src/main/data/data.txt", "./src/main/data").run();
     }

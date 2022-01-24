@@ -2,9 +2,15 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * TaskList class that contains an ArrayList of tasks
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 
+    /**
+     * Constructor for TaskList class, initialises a new ArrayList
+     */
     public TaskList() {
         this.tasks = new ArrayList<Task>();
     }
@@ -25,10 +31,18 @@ public class TaskList {
         return tasks.size();
     }
 
+    /**
+     * Clears the list of tasks
+     */
     public void reset() {
         tasks.clear();
     }
 
+    /**
+     * Takes in a String input of a task to be added from the user that is passed by parser
+     *
+     * @param input String that contains task type, task details and task date/time if applicable
+     */
     //Add from String input by user
     public void addTask(String input) {
         //identify type of task
@@ -72,7 +86,11 @@ public class TaskList {
         }
     }
 
-    //add task as input
+    /**
+     * Takes in a task to be added
+     *
+     * @param task a task from user
+     */
     public void addTask(Task task) {
         tasks.add(task);
         System.out.println("Got it. The task has been added:");
@@ -80,12 +98,21 @@ public class TaskList {
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
-    //No print version of adding task for loading in from data.txt
+    /**
+     * Takes in a task to be added and adds it to the ArrayList, without the print statements
+     * Used when loading from data.txt
+     *
+     * @param task a task from data.txt
+     */
     public void addTaskNoPrint(Task task) {
         tasks.add(task);
     }
 
-    //Delete
+    /**
+     * Deletes a task from the ArrayList at a specific index
+     *
+     * @param index index of the task to be deleted (1-based indexing)
+     */
     public void deleteTask(int index) {
         if (index > tasks.size() || index <= 0) {
             System.out.println("Index out of bounds, please try again");
@@ -94,7 +121,12 @@ public class TaskList {
             printList();
         }
     }
-    //Mark
+
+    /**
+     * Marks a task from the ArrayList as done
+     *
+     * @param index index of the task to be marked as done (1-based indexing)
+     */
     public void markTask(int index) {
         if (index > tasks.size() || index <= 0) {
             System.out.println("Index out of bounds, please try again");
@@ -104,7 +136,11 @@ public class TaskList {
         }
     }
 
-    //Unmark
+    /**
+     * Marks a task from the ArrayList as not done
+     *
+     * @param index index of the task to be marked as not done (1-based indexing)
+     */
     public void unmarkTask(int index) {
         if (index > tasks.size() || index <= 0) {
             System.out.println("Index out of bounds, please try again");

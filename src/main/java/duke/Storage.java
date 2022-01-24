@@ -4,22 +4,38 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class that handles loading and storing data, from and to data.txt file
+ * Contains 2 attributes passed in when Duke runs
+ */
 public class Storage {
     private String path;
     private String file_dir;
 
+    /**
+     * Constructor for Storage class
+     *
+     * @param path the path to the storage file from root
+     * @param file_dir the path to the storage directory from root
+     */
     public Storage(String path, String file_dir) {
         this.path = path;
         this.file_dir = file_dir;
     }
 
+    /**
+     * Loads data from data.txt if it exists in local storage
+     *
+     * @return a TaskList filled with tasks recorded in data.txt
+     * @throws FileNotFoundException if file is not found or inaccessible
+     */
     public TaskList load() throws FileNotFoundException {
         TaskList list = new TaskList();
         File file = new File(path); // create a File for the given file path
         if (file.exists()) {
-            Scanner sc = new Scanner(file); // create a Scanner using the File as the source
-            while (sc.hasNextLine()) {
-                String[] taskLine = sc.nextLine().split("~");
+            Scanner fileScanner = new Scanner(file); // create a Scanner using the File as the source
+            while (fileScanner.hasNextLine()) {
+                String[] taskLine = fileScanner.nextLine().split("~");
                 Task task;
                 String taskType = taskLine[0];
                 try {
@@ -54,6 +70,11 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Writes current tasks in TaskList back to data.txt file
+     *
+     * @param tasks an arrayList of current tasks
+     */
     public void storeTasks(ArrayList<Task> tasks) {
         //Saving the changes back to file
         File file = new File(file_dir);
@@ -74,7 +95,7 @@ public class Storage {
                 String taskToAppend = "";
 
                 //Identify task type
-                if(t instanceof Todo) {
+                if (t instanceof Todo) {
                     taskToAppend += "T~";
                 } else if(t instanceof Deadline) {
                     taskToAppend += "D~";
@@ -83,13 +104,13 @@ public class Storage {
                 }
 
                 //Identify if task is done
-                if(t.done) {
+                if (t.done) {
                     taskToAppend += "X~";
                 } else {
                     taskToAppend += " ~";
                 }
                 taskToAppend += t.taskName + "~";
-                if(t instanceof Deadline) {
+                if (t instanceof Deadline) {
                     Deadline tempTask = (Deadline) t;
                     String date = tempTask.date.toString();
                     if(tempTask.time != null) {
@@ -99,7 +120,7 @@ public class Storage {
                 } else if (t instanceof Event) {
                     Event tempTask = (Event) t;
                     String date = tempTask.date.toString();
-                    if(tempTask.time != null) {
+                    if (tempTask.time != null) {
                         date += "~" + tempTask.time.toString();
                     }
                     taskToAppend += date.trim();
