@@ -1,3 +1,6 @@
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Todos extends Task {
 
     public Todos(String description) {
@@ -7,6 +10,15 @@ public class Todos extends Task {
 
     @Override
     public String message() {
-        return "[T]" + super.message() ;
+        return "T | " + "[" +  this.getStatusIcon() + "] " + super.message() ;
     }
+
+    @Override
+    public void updateData(String path) throws IOException {
+        FileWriter fw = new FileWriter(path, true);
+        fw.write("\n" + this.message());
+        fw.close();
+    }
+
+
 }
