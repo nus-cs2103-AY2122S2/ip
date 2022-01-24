@@ -1,6 +1,9 @@
 import java.util.Scanner;
 
 public class Siri {
+    private static Scanner sc;
+    private static ToDoList toDoList;
+
     public static void main(String[] args) {
         String logo = "   -----      O    -----      O\n" +
                       " /   _   \\   __   |       \\   __\n" + 
@@ -12,17 +15,27 @@ public class Siri {
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you?");
 
-        Scanner sc = new Scanner(System.in);
-        ToDoList toDoList = new ToDoList();
+        sc = new Scanner(System.in);
+        toDoList = new ToDoList();
 
-        while (true) {
-            String inputText = sc.nextLine();
+        runApp();
+    }
 
-            if (inputText.equals("bye")) {
-                System.out.println("Bye! Hope to see you again soon!");
-                break;
-            } else {
-                toDoList.handleCommand(inputText);
+    private static void runApp() {
+        boolean toRun = true;
+
+        while (toRun) {
+            try {
+                String inputText = sc.nextLine();
+
+                if (inputText.equals("bye")) {
+                    System.out.println("Bye! Hope to see you again soon!");
+                    toRun = false;
+                } else {
+                    toDoList.handleCommand(inputText);
+                }
+            } catch (SiriException se) {
+                System.out.println(se.getMessage());
             }
         }
     }
