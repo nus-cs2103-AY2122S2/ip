@@ -10,14 +10,14 @@ Now you have 1 task(s) in the your list.
 ----------------------------------------------------------------------------------------------------
 
 /mnt/c/Users/tanna/OneDrive - National University of Singapore/Desktop/CS2103/ip/text-ui-test
+/mnt/c/Users/tanna/OneDrive - National University of Singapore/Desktop/CS2103/ip/text-ui-test
 ----------------------------------------------------------------------------------------------------
 Good job sir. I've marked this as complete.
 [T][X]  read book
 ----------------------------------------------------------------------------------------------------
 
-/mnt/c/Users/tanna/OneDrive - National University of Singapore/Desktop/CS2103/ip/text-ui-test
 ----------------------------------------------------------------------------------------------------
-Invalid date time format, sir. Check that it follows ISO local format, of <YYYY>-<MM>-<DD>T<HH>:<MINMIN>:<SS>
+Invalid date time format, sir. Check that it follows ISO local format, of <YYYY>-<MM>-<DD>T<HH>:<mm>:<ss>
 ----------------------------------------------------------------------------------------------------
 
 ----------------------------------------------------------------------------------------------------
@@ -41,12 +41,12 @@ Now you have 4 task(s) in the your list.
 ----------------------------------------------------------------------------------------------------
 
 /mnt/c/Users/tanna/OneDrive - National University of Singapore/Desktop/CS2103/ip/text-ui-test
+/mnt/c/Users/tanna/OneDrive - National University of Singapore/Desktop/CS2103/ip/text-ui-test
 ----------------------------------------------------------------------------------------------------
 Good job sir. I've marked this as complete.
 [T][X]  join sports club
 ----------------------------------------------------------------------------------------------------
 
-/mnt/c/Users/tanna/OneDrive - National University of Singapore/Desktop/CS2103/ip/text-ui-test
 ----------------------------------------------------------------------------------------------------
 Yes sir, I've added this task.
 [T][ ]  borrow book
@@ -66,7 +66,7 @@ Sorry sir, that's a valid command but invalid input. Likely due to wrong format 
 ----------------------------------------------------------------------------------------------------
 
 ----------------------------------------------------------------------------------------------------
-Invalid date time format, sir. Check that it follows ISO local format, of <YYYY>-<MM>-<DD>T<HH>:<MINMIN>:<SS>
+Invalid date time format, sir. Check that it follows ISO local format, of <YYYY>-<MM>-<DD>T<HH>:<mm>:<ss>
 ----------------------------------------------------------------------------------------------------
 
 ----------------------------------------------------------------------------------------------------
@@ -89,9 +89,9 @@ Sir, here are the things you need to do:
 5. [T][ ]  borrow book
 6. [D][ ]  return book (by: May 28, 2021, 9:01:00 AM)
 7. [E][ ]  project meeting (at: May 3, 2023, 12:43:00 PM)
+
 ----------------------------------------------------------------------------------------------------
 
-/mnt/c/Users/tanna/OneDrive - National University of Singapore/Desktop/CS2103/ip/text-ui-test
 ----------------------------------------------------------------------------------------------------
 Missing input, sir. No valid input found after keyword arguments '(un)mark', 'todo', 'event' or 'deadline'.
 ----------------------------------------------------------------------------------------------------
@@ -143,6 +143,22 @@ Sorry sir, that's a valid command but invalid input. Likely due to wrong format 
 ----------------------------------------------------------------------------------------------------
 
 ----------------------------------------------------------------------------------------------------
-Invalid command, sir. I'm not sure what you want me to do.
+Missing input, sir. No valid input found after keyword arguments '(un)mark', 'todo', 'event' or 'deadline'.
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Here are the matching tasks, sir:
+None found.
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Missing input, sir. No valid input found after keyword arguments '(un)mark', 'todo', 'event' or 'deadline'.
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+Here are the matching tasks, sir:
+1. [E][ ]  project meeting (at: Nov 3, 2022, 10:00:00 PM)
+2. [E][ ]  project meeting (at: May 3, 2023, 12:43:00 PM)
+
 ----------------------------------------------------------------------------------------------------
 

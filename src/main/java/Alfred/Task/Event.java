@@ -1,4 +1,4 @@
-package Alfred.Task;
+package alfred.task;
 
 import java.time.LocalDateTime;
 

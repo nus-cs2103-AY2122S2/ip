@@ -1,4 +1,4 @@
-package Alfred.Task;
+package alfred.task;
 
 import java.time.LocalDateTime;
 
@@ -26,5 +26,6 @@ public class Deadline extends Task {
     public String toString() {
         return "[" + this.type + "]" + super.toString() + " (by: "
                 + super.localDateTimeToString(this.dateTime) + ")";
+
     }
 }

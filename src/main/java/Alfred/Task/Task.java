@@ -1,4 +1,4 @@
-package Alfred.Task;
+package alfred.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -66,10 +66,17 @@ public abstract class Task {
         return dateTime.format(Task.dateTimeFormatter);
     }
 
+    /**
+     * Checks if a given input string matches the description of the task.
+     *
+     * @param text String input to be matched.
+     * @return True if matching.
+     */
     public boolean match(String text) {
         Pattern pattern = Pattern.compile(text, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(this.description);
         return matcher.find();
+
     }
 
     @Override

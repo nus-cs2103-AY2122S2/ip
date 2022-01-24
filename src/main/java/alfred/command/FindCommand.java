@@ -1,19 +1,31 @@
-package Alfred.Command;
+package alfred.command;
 
-import Alfred.Command.Command;
-import Alfred.Exceptions.MissingInputException;
-import Alfred.Storage.AlfredStorage;
-import Alfred.UI.AlfredUserInterface;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import alfred.exceptions.MissingInputException;
+import alfred.storage.AlfredStorage;
+import alfred.ui.AlfredUserInterface;
 
+/**
+ * Encapsulates the find command.
+ */
 public class FindCommand extends Command {
     private String text;
 
+    /**
+     * Constructs a FindCommand object.
+     *
+     * @param input String input to be matched with tasks for searching.
+     */
     public FindCommand(String input) {
         this.text = input.substring(4); // remove "find"
     }
 
+    /**
+     * Executes the find command.
+     *
+     * @param ui      AlfredUserInterface object used for handling interactions with the user.
+     * @param storage AlfredStorage object used to manage internal data state of Alfred.
+     * @throws MissingInputException if no valid string found after "find" in input.
+     */
     @Override
     public void execute(AlfredUserInterface ui, AlfredStorage storage) throws
             MissingInputException {
