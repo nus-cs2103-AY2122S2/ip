@@ -1,5 +1,6 @@
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 
 public class Storage {
@@ -25,14 +26,18 @@ public class Storage {
     }
 
     public void save(TaskList taskList) throws IOException {
-        Files.delete(Path.of("Data/tasks.txt"));
-        for (Task t: taskList.getTasks()) {
-            try {
-                writeToFile("Data/tasks.txt", t.saveFormat + System.lineSeparator());
-            } catch (IOException e) {
-                File f = new File("Data");
-                f.mkdirs();
-                writeToFile("Data/tasks.txt", t.saveFormat + System.lineSeparator());
+        try{
+            Files.delete(Path.of("Data/tasks.txt"));
+        } catch (NoSuchFileException e){}
+        finally{
+            for (Task t: taskList.getTasks()) {
+                try {
+                    writeToFile("Data/tasks.txt", t.saveFormat + "," + t.isDone + System.lineSeparator());
+                } catch (FileNotFoundException e) {
+                    File f = new File("Data");
+                    f.mkdirs();
+                    writeToFile("Data/tasks.txt", t.saveFormat + "," + t.isDone + System.lineSeparator());
+                }
             }
         }
     }

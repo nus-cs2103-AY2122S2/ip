@@ -16,10 +16,9 @@ public class Deadline extends Task{
             DateAndTime = strArr[1].split(" ");
             date = LocalDate.parse(DateAndTime[0]);
             time = DateAndTime[1];
-            super.saveFormat = "E," + this.description + "," + date + "," + time + "," + super.isDone;
+            super.saveFormat = "D," + this.description + "," + date + "," + time + "," + super.isDone;
         }
         catch (ArrayIndexOutOfBoundsException e){
-            System.out.println("yo");
             throw new DukeException();
         }
     }
@@ -33,7 +32,7 @@ public class Deadline extends Task{
             if (Boolean.parseBoolean(strArr[4])){
                 super.setDone();
             }
-            super.saveFormat = saveFormat;
+            super.saveFormat = strArr[0] + "," + strArr[1] + "," + strArr[2] + "," + strArr[3];
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException();
         }
