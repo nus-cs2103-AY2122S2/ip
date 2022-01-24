@@ -2,6 +2,8 @@ package duke;
 
 import duke.command.*;
 
+import java.time.format.DateTimeParseException;
+
 public class Parser {
 
     public static Command parse(String input) throws DukeException {
@@ -33,12 +35,8 @@ public class Parser {
             } else if (desc_by[0].length() == 0) {
                 throw new DukeException("The description of a deadline cannot be empty");
             }
-            try {
-                DukeDateTime datetime = DukeDateTime.parse(desc_by[1]);
-                return new DeadlineCommand(desc_by[0], datetime);
-            } catch (Exception e) {
-                throw new DukeException("Unrecognized time format. Valid formats:\nyyyy-M-d\nyyyy-M-d H:mm");
-            }
+            DukeDateTime datetime = DukeDateTime.parse(desc_by[1]);
+            return new DeadlineCommand(desc_by[0], datetime);
         } else if (firstWord.equals("event")) {
             String[] desc_at = remaining.split(" /at ", 2);
             if (desc_at.length < 2) {
@@ -46,12 +44,8 @@ public class Parser {
             } else if (desc_at[0].length() == 0) {
                 throw new DukeException("The description of an event cannot be empty");
             }
-            try {
-                DukeDateTime datetime = DukeDateTime.parse(desc_at[1]);
-                return new EventCommand(desc_at[0], datetime);
-            } catch (Exception e) {
-                throw new DukeException("Unrecognized time format. Valid formats:\nyyyy-M-d\nyyyy-M-d H:mm");
-            }
+            DukeDateTime datetime = DukeDateTime.parse(desc_at[1]);
+            return new DeadlineCommand(desc_at[0], datetime);
         } else {
             return new UnrecognizedCommand();
         }

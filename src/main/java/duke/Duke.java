@@ -11,20 +11,19 @@ public class Duke {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
     private final String name;
-    private final String frame = "______________________________________________";
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
 
     public Duke(String name, String filePath) {
         this.name = name;
-        ui = new Ui();
-        storage = new Storage(filePath);
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
         try {
-            tasks = storage.load();
-        } catch (IOException e) {
+            this.tasks = storage.load();
+        } catch (Exception e) {
             ui.showMessage(e.getMessage());
-            tasks = new TaskList();
+            this.tasks = new TaskList();
         }
     }
 
