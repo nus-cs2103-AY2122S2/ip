@@ -9,7 +9,7 @@ public class Task {
     /**
      * To indicate whether the task has been completed
      */
-    boolean isDone;
+    boolean isMarked;
 
     /**
      * Initializes a new task.
@@ -19,11 +19,11 @@ public class Task {
 
     public Task(String name) {
         this.name = name;
-        this.isDone = false;
+        this.isMarked = false;
     }
 
-    public boolean isDone() {
-        return this.isDone;
+    public boolean isMarked() {
+        return this.isMarked;
     }
 
     public String getName() {
@@ -33,15 +33,8 @@ public class Task {
     /**
      * Marks the task as done.
      */
-    public void mark() {
-        this.isDone = true;
-    }
-
-    /**
-     * Marks the task as undone.
-     */
-    public void unmark() {
-        this.isDone = false;
+    public void setMarked(boolean isMarked) {
+        this.isMarked = isMarked;
     }
 
     /**
@@ -51,7 +44,7 @@ public class Task {
      */
 
     public String toString() {
-        String doneState = isDone ? "X" : " ";
+        String doneState = isMarked ? "X" : " ";
         return String.format("[%s] %s", doneState, this.name);
     }
 }

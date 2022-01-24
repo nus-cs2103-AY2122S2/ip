@@ -66,7 +66,7 @@ public class Storage {
                     } else {
                         throw new DukeException("An invalid task type was read");
                     }
-                    if (line[1].equals("X")) task.mark();
+                    if (line[1].equals("X")) task.setMarked(true);
                     tasks.add(task);
                 }
             } catch (FileNotFoundException e) {

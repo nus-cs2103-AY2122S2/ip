@@ -39,7 +39,7 @@ public class TaskList {
      *
      * @return The number of tasks.
      */
-    public Integer size() {
+    public Integer getSize() {
         return this.tasks.size();
     }
 

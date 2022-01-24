@@ -142,7 +142,7 @@ public class AddCommand extends Command {
         ui.print(String.format("  %s", newTask.toString()));
         ui.print(String.format(
                 "Now you have %d task%s in the list *quack*.",
-                tasks.size(), tasks.size() == 1 ? "" : "s"));
+                tasks.getSize(), tasks.getSize() == 1 ? "" : "s"));
 
         //Saving the task to the save file
         storage.save(tasks);

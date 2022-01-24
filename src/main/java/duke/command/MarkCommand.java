@@ -59,15 +59,15 @@ public class MarkCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (this.exception != null) throw this.exception;
-        if (this.taskNumber <= 0 || this.taskNumber > tasks.size())
+        if (this.taskNumber <= 0 || this.taskNumber > tasks.getSize())
             throw new DukeException("Please only input integers within the range of your tasks");
 
         Task task = tasks.getByNumber(this.taskNumber);
         if (this.isMark) {
-            task.mark();
+            task.setMarked(true);
             ui.print(String.format("I've marked task %d as done! *quack*", this.taskNumber));
         } else {
-            task.unmark();
+            task.setMarked(false);
             ui.print(String.format("I've marked task %d as undone! *quack*", this.taskNumber));
         }
         ui.print(String.format("  %d. %s", this.taskNumber, task.toString()));
