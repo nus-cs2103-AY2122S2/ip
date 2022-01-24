@@ -89,6 +89,13 @@ public class Duke {
                         } else if (temp[0].equals("deadline")) {
                             Deadline deadline = new Deadline(str.substring(9));
                             taskList.addTask(deadline);
+                        } else if (temp[0].equals("find")){
+                            System.out.println("Here are the matching tasks in your list: ");
+                            for (Task t : taskList.getTasks()){
+                                if (t.toString().contains(str.substring(5))){
+                                    System.out.println(t);
+                                }
+                            }
                         }
                     }
                 }
