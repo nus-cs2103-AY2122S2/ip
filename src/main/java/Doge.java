@@ -2,8 +2,13 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -21,21 +26,25 @@ public class Doge {
         System.out.println(greeting);
         System.out.println(endLine);
 
+        try {
+            tasks = load();
+        } catch (DogeException e) {
+            System.out.println(startLine);
+            System.out.println("<ERROR> " + e);
+            System.out.println(endLine);
+        }
 
         while (sc.hasNext()) {
-            String input = sc.nextLine().toLowerCase();
-
             try {
-                tasks = load();
+                String input = sc.nextLine().toLowerCase();
                 response(input);
-            } catch (DogeException e) {
+                if (input.equals("bye")) {
+                    break;
+                }
+            } catch(DogeException e){
                 System.out.println(startLine);
                 System.out.println("<ERROR> " + e);
                 System.out.println(endLine);
-            }
-
-            if (input.equals("bye")) {
-                break;
             }
         }
         sc.close();
@@ -100,22 +109,19 @@ public class Doge {
         String[] temp = input.split(" ");
         String[] date = temp[0].split("-");
         int time = Integer.parseInt(temp[1]);
-
         LocalDateTime currDateTime = LocalDateTime.now();
-        LocalDateTime userDateTime;
-
+        LocalDateTime inputDateTime;
 
         try {
-            userDateTime = LocalDateTime.of(Integer.parseInt(date[0]), Integer.parseInt(date[1]),
+            inputDateTime = LocalDateTime.of(Integer.parseInt(date[0]), Integer.parseInt(date[1]),
                     Integer.parseInt(date[2]), time / 100, time % 100);
-
-            if (userDateTime.isAfter(currDateTime)) {
-                return userDateTime;
+            if (inputDateTime.isAfter(currDateTime)) {
+                return inputDateTime;
             } else {
-
+              throw new DateTimeException("Invalid date/time!");
             }
         } catch (DateTimeException e) {
-            throw new DogeException("Are you lacking common sense?" + e.getMessage());
+            throw new DogeException("Are you lacking common sense? Invalid date/time!");
         }
     }
 
@@ -129,13 +135,12 @@ public class Doge {
         } else if (deadline.length == 1) {
             throw new DogeException("Is it even possible to have a deadline with no END DATE?");
         } else {
-            LocalDateTime dateTime = getDateTime(deadline[1]);
+            LocalDateTime dateTime = getDateTime(deadline[1].trim());
             Task currTask = new Deadline(description, dateTime);
             tasks.add(currTask);
             System.out.println(startLine);
             System.out.println("Stop troubling me, I've already added this task:");
             System.out.println(currTask);
-            System.out.println((tasks.size() > 1) ? "Can you even finish " + tasks.size() + " tasks?" : "Can you even finish " + tasks.size() + " task?");
             System.out.println(endLine);
         }
     }
@@ -152,7 +157,6 @@ public class Doge {
         System.out.println(startLine);
         System.out.println("Stop troubling me, I've already added this task:");
         System.out.println(curr);
-        System.out.println((tasks.size() > 1) ? "Can you even finish " + tasks.size() + " tasks?" : "Can you even finish " + tasks.size() + " task?");
         System.out.println(endLine);
     }
 
@@ -165,13 +169,12 @@ public class Doge {
         } else if (event.length == 1) {
             throw new DogeException("Is it even possible to have an event with no DATE?");
         } else {
-            LocalDateTime dateTime = getDateTime(event[1]);
+            LocalDateTime dateTime = getDateTime(event[1].trim());
             Task currTask = new Event(description, dateTime);
             tasks.add(currTask);
             System.out.println(startLine);
             System.out.println("Stop troubling me, I've already added this task:");
             System.out.println(currTask);
-            System.out.println((tasks.size() > 1) ? "Can you even finish " + tasks.size() + " tasks?" : "Can you even finish " + tasks.size() + " task?");
             System.out.println(endLine);
         }
     }
@@ -227,7 +230,6 @@ public class Doge {
             System.out.println(startLine);
             System.out.println("Wasn't expecting you to finish that task, already marked for you!");
             System.out.println(tasks.get(pos));
-            System.out.println((tasks.size() > 1) ? "You have " + tasks.size() + " tasks left!" : "You have " + tasks.size() + " task left!");
             System.out.println(endLine);
         }
 
@@ -256,7 +258,6 @@ public class Doge {
             System.out.println(startLine);
             System.out.println("Knew that you didnt't finish that task, already unmarked it for you!");
             System.out.println(tasks.get(pos));
-            System.out.println((tasks.size() > 1) ? "You have " + tasks.size() + " tasks left!" : "You have " + tasks.size() + " task left!");
             System.out.println(endLine);
         }
 
@@ -264,7 +265,7 @@ public class Doge {
 
     public static void save(ArrayList<Task> tasks) throws DogeException {
         try {
-            FileWriter fw = new FileWriter("./data/doge.txt", true);
+            FileWriter fw = new FileWriter("./data/doge.txt");
             for (Task curr : tasks) {
                 fw.write(System.lineSeparator() + curr.toString());
             }
@@ -276,33 +277,42 @@ public class Doge {
 
     public static ArrayList<Task> load() throws DogeException {
         try {
-            File f = new File("./data/doge.txt");
+            Path p = Paths.get("./data");
+            Files.createDirectories(p);
+        } catch (IOException e) {
+            throw new DogeException("Failed to create new directory!");
+        }
+
+        try {
+            File f = new File( "./data/doge.txt");
             ArrayList<Task> temp = new ArrayList<>();
+
             if (f.createNewFile()) {
-                System.out.println("Storage file does not exist! Creating one right now...");
+                System.out.println("<NOTICE> Storage file does not exist! Creating one right now...");
             } else {
                 Scanner s = new Scanner(f);
                 while (s.hasNextLine()) {
                     String[] curr = s.nextLine().split( "\\|");
                     Task currTask;
+                    String taskStatus = curr.length > 1 ? curr[1].trim() : null;
                     switch(curr[0].trim()) {
                     case "T":
                         currTask = new Todo(curr[2].trim());
-                        if (curr[1].equals("✓")) {
+                        if (taskStatus.equals("✓")) {
                             currTask.mark();
                         }
                         temp.add(currTask);
                         break;
                     case "D":
                         currTask = new Deadline(curr[2].trim(), getDateTime(curr[3].trim()));
-                        if (curr[1].equals("✓")) {
+                        if (taskStatus.equals("✓")) {
                             currTask.mark();
                         }
                         temp.add(currTask);
                         break;
                     case "E":
                         currTask = new Event(curr[2].trim(), getDateTime(curr[3].trim()));
-                        if (curr[1].equals("✓")) {
+                        if (taskStatus.equals("✓")) {
                             currTask.mark();
                         }
                         temp.add(currTask);
