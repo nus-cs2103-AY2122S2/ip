@@ -1,4 +1,6 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Duke {
 
@@ -12,42 +14,42 @@ public class Duke {
                 String[] input = sc.nextLine().split(" ", 2);
                 Command inputCmd = Command.getByName(input[0]);     //input[1] = params
                 switch (inputCmd) {
-                    case EXIT:
-                        exitFlag = inputCmd.exitResponse();
+                case EXIT:
+                    exitFlag = inputCmd.exitResponse();
+                    break;
+                case LIST:
+                    inputCmd.listResponse(taskList);
+                    break;
+                case MARK:
+                case UNMARK:
+                    if (input.length == 2) {
+                        inputCmd.toggleMarkResponse(taskList, input[0], input[1]);
                         break;
-                    case LIST:
-                        inputCmd.listResponse(taskList);
+                    } else {
+                        throw new DukeException("Invalid number of inputs!");
+                    }
+                case TODO:
+                case EVENT:
+                case DEADLINE:
+                    if (input.length == 2) {
+                        inputCmd.subtaskResponse(taskList, input[1]);
                         break;
-                    case MARK:
-                    case UNMARK:
-                        if (input.length == 2) {
-                            inputCmd.toggleMarkResponse(taskList, input[0], input[1]);
-                            break;
-                        } else {
-                            throw new DukeException("Invalid number of inputs!");
-                        }
-                    case TODO:
-                    case EVENT:
-                    case DEADLINE:
-                        if (input.length == 2) {
-                            inputCmd.subtaskResponse(taskList, input[1]);
-                            break;
-                        } else {
-                            throw new DukeException("Task description cannot be empty!");
-                        }
-                    case REMOVE:
-                    case DELETE:
-                        if (input.length == 2) {
-                            inputCmd.deleteResponse(taskList, input[1]);
-                            break;
-                        } else {
-                            throw new DukeException("Invalid number of inputs!");
-                        }
-                    case CLEAR:
-                        inputCmd.clearResponse(taskList);
+                    } else {
+                        throw new DukeException("Task description cannot be empty!");
+                    }
+                case REMOVE:
+                case DELETE:
+                    if (input.length == 2) {
+                        inputCmd.deleteResponse(taskList, input[1]);
                         break;
-                    default:
-                        throw new DukeException("Invalid command!");
+                    } else {
+                        throw new DukeException("Invalid number of inputs!");
+                    }
+                case CLEAR:
+                    inputCmd.clearResponse(taskList);
+                    break;
+                default:
+                    throw new DukeException("Invalid command!");
                 }
             } catch (DukeException e) {
                 e.exceptionResponse();
