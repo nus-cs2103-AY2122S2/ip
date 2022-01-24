@@ -86,6 +86,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Show matched task.
+     *
+     * @param tasks the tasks
+     */
     public void showMatchedTask(TaskList tasks){
         System.out.println("Here are the matching tasks in your list:");
         for (int i = 0; i < tasks.getSize() ; i++) {

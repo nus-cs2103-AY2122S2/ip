@@ -4,9 +4,20 @@ import duke.helpTool.Storage;
 import duke.helpTool.TaskList;
 import duke.helpTool.Ui;
 
+/**
+ * The type Find command.
+ */
 public class FindCommand extends Command{
+    /**
+     * The Find detail.
+     */
     String findDetail;
 
+    /**
+     * Instantiates a new Find command.
+     *
+     * @param findDetail the find detail
+     */
     public FindCommand(String findDetail){
         this.findDetail = findDetail;
     }
