@@ -1,3 +1,14 @@
+package command;
+
+import duke.Ui;
+import duke.Storage;
+import duke.DukeException;
+import task.TaskList;
+import task.Task;
+import task.Todo;
+import task.Deadline;
+import task.Event;
+
 public class AddCommand extends Command {
     public AddCommand(String command, String[] tokenizedCommand) {
         super(command, tokenizedCommand);

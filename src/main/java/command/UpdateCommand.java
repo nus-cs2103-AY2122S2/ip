@@ -1,3 +1,11 @@
+package command;
+
+import duke.Ui;
+import duke.Storage;
+import duke.DukeException;
+import task.TaskList;
+import task.Task;
+
 public class UpdateCommand extends Command {
     public UpdateCommand(String command, String[] tokenizedCommand) {
         super(command, tokenizedCommand);

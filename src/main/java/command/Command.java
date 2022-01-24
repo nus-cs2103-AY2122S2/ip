@@ -1,3 +1,10 @@
+package command;
+
+import duke.Ui;
+import duke.Storage;
+import duke.DukeException;
+import task.TaskList;
+
 public abstract class Command {
     protected String command;
     protected String[] tokenizedCommand;

@@ -1,3 +1,13 @@
+package duke;
+
+import command.Command;
+import command.ExitCommand;
+import command.ListCommand;
+import command.UpdateCommand;
+import command.AddCommand;
+import command.DeleteCommand;
+import task.TaskList;
+
 public class Parser {
     public Parser() {
 

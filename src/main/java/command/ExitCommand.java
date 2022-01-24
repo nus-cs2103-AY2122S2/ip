@@ -1,3 +1,10 @@
+package command;
+
+import duke.Ui;
+import duke.Storage;
+import duke.DukeException;
+import task.TaskList;
+
 public class ExitCommand extends Command {
     public ExitCommand(String command, String[] tokenizedCommand) {
         super(command, tokenizedCommand);

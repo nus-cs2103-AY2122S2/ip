@@ -1,3 +1,5 @@
+package task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -15,8 +17,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the save format in String of this Task object
-     * @return A String for the save format of this Task object
+     * Returns the save format in String of this task.Task object
+     * @return A String for the save format of this task.Task object
      */
     @Override
     public String getSaveFormat() {
