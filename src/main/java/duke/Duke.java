@@ -11,10 +11,8 @@ public class Duke {
     }
 
     public void run() throws DukeException, IOException {
-
         Ui ui = new Ui(tasks);
         ui.run();
-
     }
 
     public static void main(String[] args) throws DukeException, IOException {
