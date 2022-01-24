@@ -45,13 +45,3 @@ Some of the features that _Doge_ has:
 4. Marking/Unmarking a task:
    1. _mark (task no.)_: mark a task as completed
    2. _unmark (task no.)_: unmark a task as uncompleted
-
-
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```

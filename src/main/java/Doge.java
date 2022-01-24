@@ -1,7 +1,11 @@
 import java.io.File;
 import java.io.FileWriter;
-
 import java.io.IOException;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -19,21 +23,25 @@ public class Doge {
         System.out.println(greeting);
         System.out.println(endLine);
 
+        try {
+            tasks = load();
+        } catch (DogeException e) {
+            System.out.println(startLine);
+            System.out.println("<ERROR> " + e);
+            System.out.println(endLine);
+        }
 
         while (sc.hasNext()) {
-            String input = sc.nextLine().toLowerCase();
-
             try {
-                tasks = load();
+                String input = sc.nextLine().toLowerCase();
                 response(input);
-            } catch (DogeException e) {
+                if (input.equals("bye")) {
+                    break;
+                }
+            } catch(DogeException e){
                 System.out.println(startLine);
                 System.out.println("<ERROR> " + e);
                 System.out.println(endLine);
-            }
-
-            if (input.equals("bye")) {
-                break;
             }
         }
         sc.close();
@@ -57,14 +65,7 @@ public class Doge {
             System.out.println(endLine);
             break;
         case list:
-            // Output List
-            StringBuilder output = new StringBuilder(startLine + "\nHere are the tasks in your list:");
-            for (int i = 0; i < tasks.size(); i++) {
-                int numbering = i + 1;
-                output.append("\n").append(numbering).append(") ➜ ").append(tasks.get(i));
-            }
-            output.append("\n").append(endLine);
-            System.out.println(output);
+            list(tasks);
             break;
         case todo:
             todo(input.substring(4));
@@ -85,6 +86,20 @@ public class Doge {
             unmark(input);
             break;
         }
+    }
+
+    public static void list(ArrayList<Task> tasks) {
+        // Output List
+        StringBuilder output = new StringBuilder(startLine);
+        output.append("\n").append("Here are the tasks in your list:");
+
+        for (int i = 0; i < tasks.size(); i++) {
+            int numbering = i + 1;
+            output.append("\n").append(numbering).append(") ➜ ").append(tasks.get(i));
+        }
+
+        output.append("\n").append(endLine);
+        System.out.println(output);
     }
 
     public static void deadline(String input) throws DogeException {
@@ -229,7 +244,7 @@ public class Doge {
 
     public static void save(ArrayList<Task> tasks) throws DogeException {
         try {
-            FileWriter fw = new FileWriter("./data/doge.txt", true);
+            FileWriter fw = new FileWriter("./data/doge.txt");
             for (Task curr : tasks) {
                 fw.write(System.lineSeparator() + curr.toString());
             }
@@ -240,44 +255,55 @@ public class Doge {
     }
 
     public static ArrayList<Task> load() throws DogeException {
-       try {
-           File f = new File("./data/doge.txt");
-           ArrayList<Task> temp = new ArrayList<>();
-           if (f.createNewFile()) {
-               System.out.println("Storage file does not exist! Creating one right now...");
-           } else {
-               Scanner s = new Scanner(f);
-               while (s.hasNextLine()) {
-                   String[] curr = s.nextLine().split( "\\|");
-                   Task currTask;
-                   switch(curr[0].trim()) {
-                   case "T":
-                       currTask = new Todo(curr[2].trim());
-                       if (curr[1].equals("✓")) {
-                           currTask.mark();
-                       }
-                       temp.add(currTask);
-                       break;
-                   case "D":
-                       currTask = new Deadline(curr[2].trim(), curr[3].trim());
-                       if (curr[1].equals("✓")) {
-                           currTask.mark();
-                       }
-                       temp.add(currTask);
-                       break;
-                   case "E":
-                       currTask = new Event(curr[2].trim(), curr[3].trim());
-                       if (curr[1].equals("✓")) {
-                           currTask.mark();
-                       }
-                       temp.add(currTask);
-                       break;
-                   }
-               }
-           }
-          return temp;
-       } catch (IOException e) {
-          throw new DogeException("Failed to create new storage file!");
-       }
+        try {
+            Path p = Paths.get("./data");
+            Files.createDirectories(p);
+        } catch (IOException e) {
+            throw new DogeException("Failed to create new directory!");
+        }
+
+        try {
+            File f = new File( "./data/doge.txt");
+            ArrayList<Task> temp = new ArrayList<>();
+
+            if (f.createNewFile()) {
+                System.out.println("<NOTICE> Storage file does not exist! Creating one right now...");
+            } else {
+                Scanner s = new Scanner(f);
+                while (s.hasNextLine()) {
+                    String[] curr = s.nextLine().split( "\\|");
+                    Task currTask;
+                    String taskStatus = curr.length > 1 ? curr[1].trim() : null;
+                    switch(curr[0].trim()) {
+                    case "T":
+                        currTask = new Todo(curr[2].trim());
+                        if (taskStatus.equals("✓")) {
+                            currTask.mark();
+                        }
+                        temp.add(currTask);
+                        break;
+                    case "D":
+                        String deadline = curr[3].trim().substring(5).trim();
+                        currTask = new Deadline(curr[2].trim(), deadline);
+                        if (taskStatus.equals("✓")) {
+                            currTask.mark();
+                        }
+                        temp.add(currTask);
+                        break;
+                    case "E":
+                        String event = curr[3].trim().substring(4).trim();
+                        currTask = new Event(curr[2].trim(), event);
+                        if (taskStatus.equals("✓")) {
+                            currTask.mark();
+                        }
+                        temp.add(currTask);
+                        break;
+                    }
+                }
+            }
+            return temp;
+        } catch (IOException e) {
+            throw new DogeException("Failed to create new storage file!");
+        }
     }
 }
