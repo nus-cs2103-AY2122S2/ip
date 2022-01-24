@@ -28,6 +28,8 @@ public class Parser {
             if (input[0].equals("mark") || input[0].equals("unmark")) {
                 int taskId = Integer.parseInt(input[1]);
                 return taskList.mark(taskId, input[0]);
+            } else if (input[0].equals("find")) {
+                return taskList.findKeyWord(input[1]);
             } else if (input[0].equals("todo")) {
                 String toDo = input[1].strip();
                 return taskList.addTask(new ToDo(toDo));

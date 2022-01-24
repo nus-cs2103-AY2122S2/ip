@@ -90,4 +90,14 @@ public class TaskList {
                 + removed + "\nnow you have " + index + " tasks in the list.";
         return out;
     }
+
+    public String findKeyWord(String word) {
+        String output = "Here are the matching tasks in your list:";
+        for (int i = 0; i < index; i++) {
+            if (tasks.get(i).contains(word)) {
+                output += String.format("\n%d.%s", i + 1, tasks.get(i));
+            }
+        }
+        return output;
+    }
 }

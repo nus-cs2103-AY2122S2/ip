@@ -10,7 +10,8 @@ public class Constants {
 
     public static final String BYE = "Bye, hope to see you again soon!";
 
-    public static final List<String> TASKS = Arrays.asList("list", "bye", "todo", "event", "deadline", "mark", "unmark", "delete");
+    public static final List<String> TASKS = Arrays.asList("list", "bye", "todo", "event",
+            "deadline", "mark", "unmark", "delete", "find");
 
     public static final String DATA_DIRECTORY = "./data";
 

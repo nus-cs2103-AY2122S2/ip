@@ -18,6 +18,17 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
+
+    /**
+     * Check whether a keyword exists in the taskname
+     *
+     * @param word keyword search
+     * @return keyword exists inside the string taskname
+     */
+    public boolean contains(String word) {
+        return taskName.contains(word);
+    }
+
     /**
      * handle the mark and unmark instruction, alter the isDone variable
      *
