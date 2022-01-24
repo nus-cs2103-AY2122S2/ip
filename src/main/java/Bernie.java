@@ -1,4 +1,7 @@
 import java.util.Scanner;
+import java.io.File;
+import java.io.IOException;
+
 /**
  * Bernie the bot that is the driver for the responses to the user.
  * Internally, Bernie has Tasklist, which contain the Tasks that a user inputs
@@ -7,6 +10,9 @@ import java.util.Scanner;
 public class Bernie {
     TaskList tasks;
     String lineBreak = "___________________________________________________________";
+    String root = System.getProperty("user.dir");
+    File tasksFile;
+    File dataDir;
 
     enum Type {
         TODO,
@@ -22,6 +28,8 @@ public class Bernie {
      */
     Bernie() {
         this.tasks = new TaskList();
+        this.tasksFile = new File(root + "/data", "Bernie.txt");
+        this.dataDir = new File(root, "data");
     }
     void greet() {
         System.out.println("Hello! I'm Bernie\nWhat's up?");
@@ -29,6 +37,45 @@ public class Bernie {
     }
     void leave() {
         System.out.println("See ya!");
+    }
+
+    /**
+     * Saves the most updated tasks whenever the tasks changes upon
+     * delete or add by writing the file. The file is saved to ./data/Bernie.txt
+     */
+    void saveTasks() {
+        try {
+            if (dataDir.exists() && tasksFile.exists()) {
+                tasks.save(tasksFile);
+            } else {
+                // create dir and file
+                dataDir.mkdir();
+                tasksFile.createNewFile();
+                tasks.save(tasksFile);
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Loads the data when Bernie starts up if it exists and reads. If doesn't
+     * exist, creates the required files
+     */
+    void readTasks() {
+        try {
+            if (tasksFile.exists() && dataDir.exists()) {
+                System.out.println("On the list:");
+                tasks.read(tasksFile);
+                System.out.println(lineBreak);
+            } else {
+                // create dir and file
+                dataDir.mkdir();
+                tasksFile.createNewFile();
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -82,7 +129,8 @@ public class Bernie {
     /**
      * Bernie will decide what kind of task is to be created. Bernie splits the input accordingly,
      * to get the parameters required to create the type of task. The creation and adding of task will be
-     * handled by the TaskList.
+     * handled by the TaskList. New state of tasks is saved to the data directory
+     * after we add a task.
      * @param input String, given by user. Bernie verifies the Task type and the Task either is todo,
      * deadline or event
      * @throws BernieException, if the task is not a valid type.
@@ -101,6 +149,7 @@ public class Bernie {
         } else {
             throw new BernieException("Not a valid type of task!");
         }
+        saveTasks();
         System.out.printf("Got ya. Added:\n%s\nYou got %d tasks waiting for ya!\n",
                 newTask, tasks.numTasksLeft());
         System.out.println(lineBreak);
@@ -116,10 +165,16 @@ public class Bernie {
         return input.indexOf(taskType.name().toLowerCase()) == 0;
     }
 
+    /**
+     * Delete the task according to the user input. The new state of the
+     * tasks is saved to the data directory after deletion of task
+     * @param input String, which is of the form delete ___
+     */
     void delete(String input) {
         try {
             String taskNum = getParams(Type.DELETE, input)[0];
             Task deletedTask = tasks.deleteTask(taskNum);
+            saveTasks();
             System.out.printf("Got ya. Removed:\n%s\nYou got %d tasks waiting for ya!\n",
                     deletedTask, tasks.numTasksLeft());
             System.out.println(lineBreak);
@@ -289,6 +344,7 @@ public class Bernie {
         Scanner sc = new Scanner(System.in);
         Bernie bernie = new Bernie();
         bernie.greet();
+        bernie.readTasks();
         while (true) {
             String input = sc.nextLine();
             boolean end = bernie.respond(input);

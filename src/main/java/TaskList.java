@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,8 +101,44 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes tasks from the List
+     * @param taskNum String, the task number
+     * @return Task, the task that is deleted
+     */
     Task deleteTask(String taskNum) {
         int taskIndex = Integer.parseInt(taskNum) - 1;
         return tasks.remove(taskIndex);
+    }
+
+    /**
+     * Saves tasks whenever the taskList changes
+     * @param tasksFile File
+     * @throws IOException for any IO errors
+     */
+    void save(File tasksFile) throws IOException {
+        FileWriter fileWriter = new FileWriter(tasksFile);
+        BufferedWriter writer = new BufferedWriter(fileWriter);
+        if (tasks.size() == 0) {
+            writer.write("NOTHING! :D");
+        }
+        for (int i = 0; i < tasks.size(); i++) {
+            Task currentTask = tasks.get(i);
+            writer.write(String.format("%d. %s\n", i + 1, currentTask));
+        }
+        writer.close();
+    }
+
+    void read(File tasksFile) throws IOException {
+        FileReader fileReader = new FileReader(tasksFile);
+        BufferedReader reader = new BufferedReader(fileReader);
+        while (true) {
+            String line = reader.readLine();
+            if (line == null) {
+                break;
+            }
+            System.out.println(line);
+        }
+        reader.close();
     }
 }
