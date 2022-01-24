@@ -4,15 +4,29 @@ import java.util.Arrays;
 import java.util.ArrayList;
 
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        Scanner sc = new Scanner(System.in);
+    private static final String LINE = "_____________________________________________________________";
+    private static final String LOGO =
+            "     ████████▄  ███    █▄     ▄█   ▄█▄    ▄████████ \n" +
+            "     ███   ▀███ ███    ███   ███ ▄███▀   ███    ███ \n" +
+            "     ███    ███ ███    ███   ███▐██▀     ███    █▀  \n" +
+            "     ███    ███ ███    ███  ▄█████▀     ▄███▄▄▄     \n" +
+            "     ███    ███ ███    ███ ▀▀█████▄    ▀▀███▀▀▀     \n" +
+            "     ███    ███ ███    ███   ███▐██▄     ███    █▄  \n" +
+            "     ███   ▄███ ███    ███   ███ ▀███▄   ███    ███ \n" +
+            "     ████████▀  ████████▀    ███   ▀█▀   ██████████";
 
+
+    public static void main(String[] args) {
+
+        System.out.println(LINE);
+        System.out.println("     Hello from\n" + LOGO);
+        System.out.println(LINE);
+        System.out.println(
+                "     I am a chat bot and I'm here to help you be productive :)\n" +
+                "     What can I do for you today?"
+        );
+
+        Scanner sc = new Scanner(System.in);
         List<Task> tasks = new ArrayList<Task>();
 
         while (true) {
