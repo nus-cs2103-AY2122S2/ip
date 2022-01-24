@@ -24,4 +24,7 @@ unmark invalidnum
 delete 1
 delete invalidnum
 delete
-
+find
+find nonexistentthing
+find
+find pro
