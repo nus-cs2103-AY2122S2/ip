@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -39,6 +40,17 @@ public class UserInputTaskValidator {
 
         if (temp.contains("/by")) {
             throw new DukeException("Invalid by day for deadline task: " + description);
+        }
+    }
+
+    // check for when there is invalid date symbols
+    static void deadlineDateFormatValidator(String by) throws DukeException {
+        if (by.contains("/") || by.contains(".")) {
+            throw new DukeException("Deadline date needs to be in the YYYY-MM-DD format");
+        }
+
+        if (!by.contains("-")) {
+            throw new DukeException("Deadline date needs to be in the YYYY-MM-DD format");
         }
     }
 

@@ -1,14 +1,31 @@
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.Month;
+
 public class Event extends Task {
 
-    protected String dateTime;
+    protected LocalDate eventDate;
+    protected DayOfWeek day;
+    protected Month month;
+    protected int year;
+    protected LocalTime time;
 
-    public Event(String description, String dateTime) {
+    public Event(String description, LocalDate eventDate, LocalTime time) {
         super(description);
-        this.dateTime = dateTime;
+        this.eventDate = eventDate;
+        this.day = eventDate.getDayOfWeek();
+        this.month = eventDate.getMonth();
+        this.year = eventDate.getYear();
+        this.time = time;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.dateTime + ")";
+        return "[E]" + super.toString() + " (at: "
+                + this.month + " "
+                + this.day + " "
+                + this.year + " "
+                + this.time + ")";
     }
 }
