@@ -1,9 +1,10 @@
-package dukeClasses;
+package dukeclasses;
 
 /**
  * Represents a Task item which needs to be completed. It can be marked as done or unmarked as not done.
  */
 public class Task {
+
     private String description;
     private boolean isDone;
 
@@ -12,7 +13,7 @@ public class Task {
      *
      * @param description String that describes the Task.
      */
-    public Task(String description){
+    public Task(String description) {
         this.description = description;
         isDone = false;
     }
@@ -20,10 +21,10 @@ public class Task {
     /**
      * Sets the current instance of Task as done (if boolean is true) or not done (if boolean is false).
      *
-     * @param bool Boolean that indicate whether task is done or not.
+     * @param isDone Boolean that indicate whether task is done or not.
      */
-    public void setIsDone(boolean bool) {
-        isDone = bool;
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     /**
@@ -31,7 +32,7 @@ public class Task {
      *
      * @return Boolean that indicate whether task is done or not.
      */
-    public boolean getIsDone(){
+    public boolean getIsDone() {
         return isDone;
     }
 
@@ -40,7 +41,7 @@ public class Task {
      *
      * @return String that describes the task.
      */
-    public String getDescription(){
+    public String getDescription() {
         return description;
     }
 
@@ -50,7 +51,7 @@ public class Task {
      *
      * @return String that identify the task
      */
-    public String identify(){
+    public String identify() {
         if (isDone) {
             return String.format("[X] %s", description);
         } else {

@@ -1,4 +1,4 @@
-package dukeClasses;
+package dukeclasses;
 
 import java.util.ArrayList;
 
@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * Represents the data that is stored in Duke. Usually in the form of tasks.
  */
 public class TaskList {
+
     private ArrayList<Task> tasks;
 
     /**
@@ -32,11 +33,11 @@ public class TaskList {
      * @param isDone Boolean that changes isDone field of Tasks.
      * @return Task that is modified.
      */
-    public Task updateTask(int index, boolean isDone){
+    public Task updateTask(int index, boolean isDone) {
         if (isDone) {
-            tasks.get(index).setIsDone(true);
+            tasks.get(index).setDone(true);
         } else {
-            tasks.get(index).setIsDone(false);
+            tasks.get(index).setDone(false);
         }
         return tasks.get(index);
     }
@@ -46,14 +47,14 @@ public class TaskList {
      *
      * @return Data of task in the form of an ArrayList</Task>
      */
-    public ArrayList<Task> getTaskList(){
+    public ArrayList<Task> getTaskList() {
         return this.tasks;
     }
 
     /**
      * Appends a task to the end of the taskList.
      *
-     * @param Task that is to be added to the end of the taskList.
+     * @param task that is to be added to the end of the taskList.
      */
     public void addTask(Task task) {
         tasks.add(task);

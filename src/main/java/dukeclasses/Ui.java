@@ -1,4 +1,4 @@
-package dukeClasses;
+package dukeclasses;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,45 +18,44 @@ public class Ui {
     /**
      * Prints error if storage fail to load.
      */
-    public void showLoadingError(){
+    public void showLoadingError() {
         System.out.println("Storage load failed");
     }
 
     /**
      * Prints error if file does not exist when trying to read or write.
      */
-    public void showFileError(){
+    public void showFileError() {
         System.out.println("Invalid File");
     }
 
     /**
      * Prints error if storage fail to update when list of tasks are modified.
      */
-    public void showStorageError(){
+    public void showStorageError() {
         System.out.println("Fail to update storage");
     }
 
     /**
      * Prints error if user input does not follow format.
      */
-    public void showInputError(){
+    public void showInputError() {
         System.out.println("    Invalid input detected. Please check your input");
     }
 
     /**
      * Prints greeting during boot up or when hi command is called.
      */
-    public void greet(){
+    public void greet() {
         System.out.println(Commands.HI.toString());
     }
 
     /**
      * Prints message when user initiate exit command.
      */
-    public void sayBye(){
+    public void sayBye() {
         System.out.println(Commands.BYE.toString());
     }
-
 
     /**
      * Prints details of the task.
@@ -81,8 +80,7 @@ public class Ui {
      * @param numOfTask Integer that denotes number of tasks in the list currently.
      */
     public void newTask(Task task, int numOfTask) {
-        System.out.println(String.format(
-            "%s      %s", Commands.ADD.toString(), task.identify()));
+        System.out.println(String.format("%s      %s", Commands.ADD.toString(), task.identify()));
         System.out.println(String.format("    Now you have %d tasks in the list.", numOfTask));
     }
 
@@ -111,7 +109,7 @@ public class Ui {
      * @param task Task which will have its details printed.
      */
     public void deleteTask(Task task) {
-        System.out.println(String.format(
-                "%s      %s", Commands.DELETE.toString(), task.identify()));
+        System.out.println(String.format("%s      %s", Commands.DELETE.toString(), task.identify()));
     }
+
 }

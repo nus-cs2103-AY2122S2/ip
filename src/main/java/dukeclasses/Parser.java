@@ -1,4 +1,4 @@
-package dukeClasses;
+package dukeclasses;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -15,7 +15,7 @@ public class Parser {
      * @return ParsedCommand that denotes the command and other relevant information if the user input is valid.
      * @throws DukeException If user input is invalid.
      */
-    public static ParsedCommand parse(String userCommand) throws DukeException{
+    public static ParsedCommand parse(String userCommand) throws DukeException {
         String[] parsedCommand = userCommand.split(" ", 2);
         parsedCommand[0] = parsedCommand[0].trim();
         switch (parsedCommand[0]) {
@@ -56,6 +56,7 @@ public class Parser {
             } catch (DateTimeParseException e) {
                 throw new DukeException();
             }
+
             return new ParsedCommand(parsedCommand[0].trim(), inputForConstructorWithDate[0].trim(), dueDate);
         default:
             throw new DukeException();

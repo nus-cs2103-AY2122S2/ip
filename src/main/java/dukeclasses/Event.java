@@ -1,4 +1,4 @@
-package dukeClasses;
+package dukeclasses;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents an Event that has a description and the deadline of the event.
  */
-public class Event extends Task{
+public class Event extends Task {
     private LocalDate deadline;
 
     /**
@@ -27,7 +27,7 @@ public class Event extends Task{
      * @return String to identify the Event.
      */
     @Override
-    public String identify(){
+    public String identify() {
         String dateString = deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy" ));
         if (super.getIsDone()) {
             return String.format("[E][X] %s (by: %s)", super.getDescription(), dateString);
@@ -35,4 +35,5 @@ public class Event extends Task{
             return String.format("[E][ ] %s (by: %s)", super.getDescription(), dateString);
         }
     }
+
 }

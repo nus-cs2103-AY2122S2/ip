@@ -1,4 +1,4 @@
-package dukeClasses;
+package dukeclasses;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents a task with a due date.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     private LocalDate deadline;
 
     /**
@@ -26,7 +26,7 @@ public class Deadline extends Task{
      * @return String to identify the Deadline.
      */
     @Override
-    public String identify(){
+    public String identify() {
         String dateString = deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy" ));
         if (super.getIsDone()) {
             return String.format("[D][X] %s (by: %s)", super.getDescription(), dateString);

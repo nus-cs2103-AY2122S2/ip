@@ -1,4 +1,4 @@
-package dukeClasses;
+package dukeclasses;
 
 import java.util.Scanner;
 
@@ -23,7 +23,7 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
+        } catch (DukeException errorMessage) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
@@ -32,12 +32,13 @@ public class Duke {
     /**
      * Runs the program.
      */
-    public void run(){
+    public void run() {
         ui.greet();
         Scanner sc = new Scanner(System.in);
         boolean isExit = false;
         ParsedCommand parsedCommand = null;
         while (!isExit) {
+
            try {
                parsedCommand = Parser.parse(sc.nextLine());
            } catch (DukeException errorMessage) {
@@ -47,6 +48,7 @@ public class Duke {
            if (parsedCommand.equals(null)) {
                continue;
             }
+
             switch (parsedCommand.getCommand()) {
             case "hi":
                 ui.greet();
@@ -72,13 +74,15 @@ public class Duke {
                     continue;
                 }
                 break;
-            case "unmark" :
+            case "unmark":
                 if (parsedCommand.getIndex() > tasks.getTaskList().size()) {
                     new DukeException();
                     continue;
                 }
+
                 Task unmarkedTask = tasks.updateTask(parsedCommand.getIndex(), false);
                 ui.identifyTask(unmarkedTask);
+
                 try {
                     storage.updateStorage(tasks.getTaskList());
                 } catch (DukeException errorMessage) {
@@ -88,50 +92,59 @@ public class Duke {
                 break;
             case "todo":
                 ToDo todo = new ToDo(parsedCommand.getTask());
+
                 try {
                 storage.appendToStorage(todo);
                 } catch (DukeException errorMessage) {
                     ui.showStorageError();
                     continue;
                 }
+
                 tasks.addTask(todo);
                 ui.newTask(todo, tasks.getTaskList().size());
                 break;
             case "event":
                 Event event = new Event(parsedCommand.getTask(), parsedCommand.getDueDate());
+
                 try {
                     storage.appendToStorage(event);
                 } catch (DukeException errorMessage) {
                     ui.showStorageError();
                     continue;
                 }
+
                 tasks.addTask(event);
                 ui.newTask(event, tasks.getTaskList().size());
                 break;
             case "deadline":
                 Deadline deadline = new Deadline(parsedCommand.getTask(), parsedCommand.getDueDate());
+
                 try {
                     storage.appendToStorage(deadline);
                 } catch (DukeException errorMessage) {
                     ui.showStorageError();
                     continue;
                 }
+
                 tasks.addTask(deadline);
                 ui.newTask(deadline, tasks.getTaskList().size());
                 break;
             case "delete":
+
                 if (parsedCommand.getIndex() > tasks.getTaskList().size()) {
                     new DukeException();
                     continue;
                 }
 
                Task deletedTask = tasks.deleteTask(parsedCommand.getIndex());
+
                 try {
                     storage.updateStorage(tasks.getTaskList());
                 } catch (DukeException errorMessage) {
                     ui.showStorageError();
                     continue;
                 }
+
                 ui.deleteTask(deletedTask);
             }
         }
@@ -146,4 +159,5 @@ public class Duke {
     public static void main(String[] args) {
         new Duke(TEXT_DATA_FILE_PATH).run();
     }
+
 }

@@ -1,4 +1,4 @@
-package dukeClasses;
+package dukeclasses;
 
 /**
  * Represents a Task item which needs to be completed. It can be marked as done or unmarked as not done.
@@ -21,11 +21,12 @@ public class ToDo extends Task{
      * @return String that represent the description of the task and its status(i.e. mark or unmarked).
      */
     @Override
-    public String identify(){
+    public String identify() {
         if (super.getIsDone()) {
             return String.format("[T][X] %s", super.getDescription());
         } else {
             return String.format("[T][ ] %s", super.getDescription());
         }
     }
+
 }

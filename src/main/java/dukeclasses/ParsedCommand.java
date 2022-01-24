@@ -1,4 +1,4 @@
-package dukeClasses;
+package dukeclasses;
 
 import java.time.LocalDate;
 
@@ -70,7 +70,7 @@ public class ParsedCommand {
      *
      * @return String that represents the command the user gave.
      */
-    public String getCommand(){
+    public String getCommand() {
         return this.command;
     }
 
@@ -79,7 +79,7 @@ public class ParsedCommand {
      *
      * @return Integer that represents the index the user gave.
      */
-    public Integer getIndex(){
+    public Integer getIndex() {
         return this.index;
     }
 
@@ -89,16 +89,16 @@ public class ParsedCommand {
      * @return LocalDate that represents the due date of the
      *         task which is given by the user.
      */
-    public LocalDate getDueDate(){
+    public LocalDate getDueDate() {
         return this.dueDate;
     }
 
     /**
      * Returns the description of the task.
      *
-     * @return String that represents the decription of the task.
+     * @return String that represents the description of the task.
      */
-    public String getTask(){
+    public String getTask() {
         return this.task;
     }
 

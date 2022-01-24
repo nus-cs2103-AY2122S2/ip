@@ -1,4 +1,4 @@
-package dukeClasses;
+package dukeclasses;
 
 import java.lang.Exception;
 
@@ -11,7 +11,7 @@ public class DukeException extends Exception {
     /**
      * Constructor for DukeException
      */
-    public DukeException(){
+    public DukeException() {
         super("    Invalid input detected. Please check your input");
     }
 
