@@ -8,11 +8,17 @@ public class Deadline extends Task {
      * @param description The description of the deadline.
      * @param by The timing of the deadline.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by, boolean isDone) {
         super(description);
         this.by = by;
+        if (isDone) {
+            this.markAsDone();
+        }
     }
-
+    @Override
+    public String writeToFile() {
+        return " D " + super.writeToFile() + " | " + this.by;
+    }
     /**
      * Returns the task in proper format.
      * @return String of the deadline.
