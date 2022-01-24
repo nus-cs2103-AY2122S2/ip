@@ -1,4 +1,4 @@
-package duke.helpTool;
+package duke.helptool;
 
 public class DukeException extends Exception{
 
