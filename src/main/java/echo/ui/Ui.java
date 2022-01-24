@@ -169,6 +169,7 @@ public class Ui {
                 + addPrefix("mark <task number>                  | Mark task as completed. \n")
                 + addPrefix("unmark <task number>                | Unmark task as uncompleted. \n")
                 + addPrefix("delete <task number>                | Delete task. \n")
+                + addPrefix("find <description>                  | List tasks that contain the description. \n")
                 + addPrefix("bye                                 | exit. "));
     }
 
