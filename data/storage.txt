@@ -1,2 +1,4 @@
-T,0,fuck you
-E,1,cb,date
+T,1,fasdf
+T,1,asdfasd
+E,1,asdf , 23423
+D,1,323423 , 234893

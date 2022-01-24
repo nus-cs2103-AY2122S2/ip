@@ -1,10 +1,8 @@
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Storage {
@@ -73,6 +71,62 @@ public class Storage {
             } catch (FileNotFoundException e) {
                 System.out.println("File not found.");
             }
+        }
+    }
+
+    void save() {
+        File myObj = new File(this.homeDir + "/data/storage.txt");
+        myObj.delete();
+        String filePath = this.homeDir + "/data/storage.txt";
+
+        try {
+            File file = new File(filePath);
+            file.createNewFile();
+            for (Task t : Storage.taskList) {
+                if (t instanceof Event) {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("E,");
+                    if (t.isDone()) {
+                        sb.append("0,");
+                    } else {
+                        sb.append("1,");
+                    }
+                    sb.append(t.getDescription());
+                    sb.append(",");
+                    sb.append(((Event) t).getAt());
+                    BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+                    writer.write(sb.toString());
+                    writer.close();
+                } else if (t instanceof Deadline) {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("D,");
+                    if (t.isDone()) {
+                        sb.append("0,");
+                    } else {
+                        sb.append("1,");
+                    }
+                    sb.append(t.getDescription());
+                    sb.append(",");
+                    sb.append(((Deadline) t).getBy());
+                    BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+                    writer.write(sb.toString());
+                    writer.close();
+                } else {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("T,");
+                    if (t.isDone()) {
+                        sb.append("0,");
+                    } else {
+                        sb.append("1,");
+                    }
+                    sb.append(t.getDescription());
+                    BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+                    writer.write(sb.toString());
+                    writer.close();
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error saving file.");
         }
     }
 }
