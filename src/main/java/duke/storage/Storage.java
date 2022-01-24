@@ -12,6 +12,11 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the storage system of the program. A <code>Storage</code> object can be created to
+ * save and load the task list data into the hard disk. It allows data to be retained to the
+ * next instance of the program.
+ */
 public class Storage {
     public static final String MESSAGE_READ_FAILURE = "Something went wrong with file read!";
     public static final String MESSAGE_WRITE_FAILURE = "Something went wrong with file write!";
@@ -19,6 +24,12 @@ public class Storage {
 
     private String filePath;
 
+    /**
+     * Creates an instance of a Storage object.
+     *
+     * @param inputPath path to the storage file.
+     * @throws IOException if the creation of directory and text file fails.
+     */
     public Storage(String inputPath) throws IOException {
         this.filePath = System.getProperty("user.dir") + inputPath;
 
@@ -27,6 +38,13 @@ public class Storage {
         file.createNewFile();
     }
 
+    /**
+     * Saves the task list by writing the data of the tasks into
+     * the file specified in the Storage object.
+     *
+     * @param taskList the task list to be saved.
+     * @throws DukeException if write to file fails.
+     */
     public void saveTaskList(TaskList taskList) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath);
@@ -44,6 +62,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns a task list by reading the data of the file
+     * specified in the Storage object.
+     *
+     * @return a saved task list.
+     * @throws DukeException if write to file fails.
+     */
     public TaskList loadTaskList() throws DukeException {
         try {
             ArrayList<Task> taskArr = new ArrayList<>();

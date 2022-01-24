@@ -5,7 +5,6 @@ import duke.bot.JJBABotMessage;
 import duke.command.BotCommand;
 import duke.command.Command;
 import duke.command.CommandFeedback;
-import duke.command.CommandType;
 import duke.console.Console;
 import duke.exception.DukeException;
 import duke.parser.Parser;
@@ -14,22 +13,41 @@ import duke.task.TaskList;
 
 import java.io.IOException;
 
+
+/**
+ * Represents a task bot. A <code>Duke</code> object can be created to
+ * accept user input, create tasks and respond to the user.
+ */
 public class Duke {
     private TaskList taskList;
     private Storage storage;
-    private Console console;
-    private boolean isExit = false;
+    private final Console console;
+    private boolean isExit;
 
     private static final String FILE_PATH = "/data/taskInfo.txt";
 
+    /**
+     * Creates a default instance of a Duke object.
+     */
     public Duke() {
         this(FILE_PATH, new JJBABotMessage());
     }
 
+    /**
+     * Creates an instance of a Duke object.
+     *
+     * @param bot type of message bot to output messages.
+     */
     public Duke(BotMessage bot) {
         this(FILE_PATH, bot);
     }
 
+    /**
+     * Creates an instance of a Duke object.
+     *
+     * @param filePath path to the storage file.
+     * @param bot type of message bot to output messages.
+     */
     public Duke(String filePath, BotMessage bot){
         console = new Console(bot);
         isExit = false;
@@ -51,10 +69,18 @@ public class Duke {
         }
     }
 
+    /**
+     * Creates an instance of Duke and run.
+     *
+     * @param args unused.
+     */
     public static void main(String[] args) {
         new Duke(FILE_PATH, new JJBABotMessage()).run();
     }
 
+    /**
+     * Runs the instance of Duke to start the bot.
+     */
     public void run() {
         console.printWelcomeMessage();
         isExit = false;
@@ -89,16 +115,22 @@ public class Duke {
         } while (!isExit);
     }
 
-    public void handleCommandFeedback(Command c, CommandFeedback cf) {
-        switch (cf.cType) {
+    /**
+     * Method to handle the output according to the different command type in the command feedback.
+     *
+     * @param com the type of command being executed.
+     * @param comFeed the feedback of the command after being executed.
+     */
+    public void handleCommandFeedback(Command com, CommandFeedback comFeed) {
+        switch (comFeed.cType) {
         case BOT:
-            console.setBot(((BotCommand) c).getBotType());
+            console.setBot(((BotCommand) com).getBotType());
             break;
         case EXIT:
-            isExit = (cf.cType == CommandType.EXIT);
+            isExit = true;
             break;
         }
 
-        console.printCommandFeedback(cf);
+        console.printCommandFeedback(comFeed);
     }
 }
