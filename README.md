@@ -41,22 +41,16 @@ Some of the features that _Doge_ has:
 1. Adding a task:
    1. **todo** `task`: adds a Todo task
    
-   2. **event** `task`/`yyyy-mm-dd HHmm`: adds an event 
+   2. **event** `task`/`yyyy-MM-dd HH:mm`: adds an event 
     
-   3. **deadline** `task`/`yyyy-mm-dd HHmm`: adds a task with a deadline
+   3. **deadline** `task`/`yyyy-MM-dd HH:mm`: adds a task with a deadline
    
 
 2. Listing all tasks:
-<<<<<<< HEAD
-   1. _list_: generates a list of all tasks
-3. Deleting a task:
-   1. _delete (task no.): delete specified task
-4. Marking/Unmarking a task:
-   1. _mark (task no.)_: mark a task as completed
-   2. _unmark (task no.)_: unmark a task as uncompleted
-=======
-   1. list: generates a list of all tasks
-   
+   1. **list**: generates a list of all tasks
+   2. **list** `limiter` `yyyy-MM-dd HH:mm`: generates a list of tasks based on occurrence stated
+      1. `limiter`: =, >, <, >=, <=
+      
 
 3. Deleting a task:
    1. **delete** `task no.`: delete specified task
