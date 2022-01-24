@@ -1,10 +1,3 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -18,11 +11,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Duke {
-    private static final String SAVE_DIR = "data";
-    private static final String FILE_NAME = SAVE_DIR + "/duke.txt";
-
     private final Ui ui = new Ui();
     private final TaskList tasks = new TaskList();
+    private final Storage storage = new Storage();
     private boolean shouldExit = false;
 
     public static void main(String[] args) {
@@ -32,7 +23,7 @@ public class Duke {
     public void run() {
         Scanner scanner = new Scanner(System.in);
         ui.greet();
-        loadTasks();
+        storage.loadTasks(tasks);
 
         while (!shouldExit) {
             String input = scanner.nextLine();
@@ -56,7 +47,7 @@ public class Duke {
                 }
 
                 processInput(commandType, paramMap);
-                saveTasks();
+                storage.saveTasks(tasks);
             } catch (DukeException e) {
                 ui.showError(e.toString());
             }
@@ -105,10 +96,8 @@ public class Duke {
     }
 
     private LocalDateTime getParamAsDateTime(Map<String, String> map, String param) {
-        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-                .appendPattern("yyyy-M-d[ HHmm]")
-                .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
-                .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
+        DateTimeFormatter formatter = new DateTimeFormatterBuilder().appendPattern("yyyy-M-d[ HHmm]")
+                .parseDefaulting(ChronoField.HOUR_OF_DAY, 0).parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
                 .toFormatter();
         String strVal = map.get(param);
 
@@ -127,56 +116,6 @@ public class Duke {
             return Duration.parse("PT" + strVal);
         } catch (DateTimeParseException e) {
             throw new DukeException(strVal + " is not a valid duration. Example: 1h5m");
-        }
-    }
-
-    private void saveTasks() {
-        try {
-            Path path = Paths.get(SAVE_DIR);
-            Files.createDirectories(path);
-            PrintWriter writer = new PrintWriter(FILE_NAME);
-
-            for (Task task : tasks) {
-                writer.println(task.toSaveData());
-            }
-
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void loadTasks() {
-        try {
-            File file = new File(FILE_NAME);
-            Scanner scanner = new Scanner(file);
-
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] lineSplit = line.split(" \\| ");
-
-                boolean isDone = lineSplit[1].equals("1");
-                LocalDateTime dateTime;
-                String description = lineSplit[2];
-
-                switch (lineSplit[0]) {
-                case "T":
-                    tasks.add(new ToDo(description, isDone));
-                    break;
-                case "E":
-                    dateTime = LocalDateTime.parse(lineSplit[3]);
-                    Duration duration = Duration.parse(lineSplit[4]);
-                    tasks.add(new Event(description, dateTime, duration, isDone));
-                    break;
-                case "D":
-                    dateTime = LocalDateTime.parse(lineSplit[3]);
-                    tasks.add(new Deadline(description, dateTime, isDone));
-                    break;
-                default:
-                    throw new DukeException("Invalid save data");
-                }
-            }
-        } catch (FileNotFoundException ignored) {
         }
     }
 
