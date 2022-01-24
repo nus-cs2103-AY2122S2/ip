@@ -29,6 +29,8 @@ public class Parser {
             return new AddDeadlineCommand(tokens);
         case EVENT:
             return new AddEventCommand(tokens);
+        case FIND:
+            return new FindTaskCommand(tokens);
         default:
             return new UnrecognisedCommand();
         }

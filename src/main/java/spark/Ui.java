@@ -11,7 +11,7 @@ import java.util.Scanner;
  */
 public class Ui {
     private static final String normalLineSeparator = "----------------------------------------------------------------------";
-    private static final String exceptionLineSeparator = "⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠";
+    private static final String exceptionLineSeparator = "-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!";
     private final Scanner userInput;
 
     public Ui() {

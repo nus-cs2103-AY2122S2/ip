@@ -3,6 +3,7 @@ package spark.tasks;
 import spark.exceptions.fileexceptions.FileException;
 import spark.exceptions.fileexceptions.TaskDecodingException;
 import spark.exceptions.formatexceptions.EmptyDateException;
+import spark.exceptions.formatexceptions.EmptyKeywordException;
 import spark.exceptions.formatexceptions.EmptyTitleException;
 import spark.exceptions.taskmodificationexceptions.InvalidTaskIdException;
 import spark.exceptions.taskmodificationexceptions.TaskAlreadyMarked;
@@ -183,6 +184,31 @@ public class TaskList {
                 System.out.format("    %d. %s\n", i + 1, tasks.get(i));
             }
         }
+    }
+
+    /**
+     * Returns a list of Tasks with titles that contain the given keyword(s).
+     *
+     * @param tokens
+     * @throws EmptyKeywordException
+     */
+    public List<Task> findTask(String[] tokens) throws EmptyKeywordException {
+        // need a search term
+        if (tokens.length == 1) {
+            throw new EmptyKeywordException();
+        }
+
+        List<String> keywords = new ArrayList<>(Arrays.asList(tokens).subList(1, tokens.length));
+        String searchTerm = String.join(" ", keywords);
+
+        List<Task> results = new ArrayList<>();
+        for (Task t : tasks) {
+            if (t.getTitle().contains(searchTerm)) {
+                results.add(t);
+            }
+        }
+
+        return results;
     }
 
     private void showNumberOfTasks() {

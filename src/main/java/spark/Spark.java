@@ -16,11 +16,6 @@ public class Spark {
         this.storage = new Storage();
     }
 
-    private void quit() {
-        ui.printMessage("Cool, see you around!");
-        System.exit(0);
-    }
-
     public void run() {
         boolean isExit = false;
 

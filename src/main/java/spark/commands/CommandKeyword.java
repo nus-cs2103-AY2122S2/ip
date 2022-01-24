@@ -9,6 +9,7 @@ public enum CommandKeyword {
     EVENT("event"),
     DEADLINE("deadline"),
     TODO("todo"),
+    FIND("find"),
     UNRECOGNISED("unrecognised");
 
     private String commandKeyword;
