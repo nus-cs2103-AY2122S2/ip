@@ -15,7 +15,7 @@ public class ListResponse implements Response{
      * Constructor for ListResponse.
      * @param iterate list of items.
      */
-    ListResponse(ArrayList iterate) {
+    ListResponse(ArrayList<Task> iterate) {
         this.iterate = iterate;
     }
 

@@ -16,7 +16,7 @@ public class AddTaskResponse implements Response{
      * @param tasklist The List of Task.
      */
 
-    AddTaskResponse(Task currTask, ArrayList tasklist) {
+    AddTaskResponse(Task currTask, ArrayList<Task> tasklist) {
         this.currTask = currTask;
         this.tasklist = tasklist;
     }

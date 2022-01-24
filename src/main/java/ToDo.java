@@ -4,7 +4,7 @@ package main.java;
  * A type of task.
  */
 public class ToDo extends Task {
-    String type = "D";
+    String type = "T";
 
     /**
      * Constructs the ToDo task with the given name.
