@@ -6,11 +6,21 @@ import duke.task.Task;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Represents tasks in a form of list. Handle adding new tasks,
+ * removing tasks, updating tasks
+ */
 public class TaskList {
     private final List<Task> tasks = new ArrayList<>();
     private int index = 0;
 
+    /**
+     * Add a new task into the tasks list. will return the string to be printed
+     * by the Ui
+     *
+     * @param newTask new task to be added into the list
+     * @return String to be printed by the Ui containing information of the task.
+     */
     public String addTask(Task newTask) {
         tasks.add(newTask);
         index++;
@@ -18,10 +28,21 @@ public class TaskList {
         return output;
     }
 
+    /**
+     * return the current number of tasks inside the list
+     *
+     * @return number of tasks inside the list
+     */
     public int numTasks() {
         return this.index;
     }
 
+    /**
+     * Returns the string representation of all the tasks
+     * inside the list.
+     *
+     * @return String representation of the tasks.
+     */
     public String getTasks() {
         String output = "Here are the tasks in your list:";
         for (int i = 0; i < index; i++) {
@@ -34,6 +55,15 @@ public class TaskList {
         return tasks;
     }
 
+    /**
+     * Change the state of specified task, from checked to unchecked and
+     * vice versa.
+     *
+     * @param id specified task to be modified
+     * @param instr the instruction to be done, either mark or unmark
+     * @return  String contains the information of the modified task
+     * @throws InvalidTaskNumberException If id > index or id <= 0 (can't modify)
+     */
     public String mark(int id, String instr) throws InvalidTaskNumberException{
         if (id > index || id <= 0) {
             throw new InvalidTaskNumberException();
@@ -42,6 +72,13 @@ public class TaskList {
         return out;
     }
 
+    /**
+     * Remove the specified task from the list.
+     *
+     * @param id id of the task to be removed
+     * @return String contains the information of the removed task
+     * @throws InvalidTaskNumberException If id > index or id <= 0 (can't remove)
+     */
     public String remove(int id) throws InvalidTaskNumberException {
         if (id > index || id <= 0) {
             throw new InvalidTaskNumberException();

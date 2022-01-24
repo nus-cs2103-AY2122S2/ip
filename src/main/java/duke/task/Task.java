@@ -1,5 +1,9 @@
 package duke.task;
 
+/**
+ * Represent task to be done.
+ * Abstract class and cannot be instantiated
+ */
 public abstract class Task {
     private final String taskName;
     private boolean isDone;
@@ -14,6 +18,12 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * handle the mark and unmark instruction, alter the isDone variable
+     *
+     * @param instr instruction mark/unmark
+     * @return String containing the information of the changed task.
+     */
     public String switchMark(String instr) {
         if ((instr.equals("mark") && !isDone)|| (instr.equals("unmark") && isDone)) {
             this.isDone = !this.isDone;
@@ -24,6 +34,12 @@ public abstract class Task {
         return "OK, I've marked this task as not done yet:\n  " + toString();
     }
 
+    /**
+     * Format the isDone state of a task.
+     * Returns X if it's done, empty otherwise.
+     *
+     * @return String representation of the current state of the task.
+     */
     public String getStatusIcon() {
         return isDone? "X": " ";
     }
@@ -33,6 +49,11 @@ public abstract class Task {
         return String.format("[%s] %s", getStatusIcon(), taskName);
     }
 
+    /**
+     * Format the task to be compatible with storage
+     *
+     * @return String representation of the task in the storage.
+     */
     public String encode() {
         return String.format("%d <> %s", isDone? 1: 0, taskName);
     }
