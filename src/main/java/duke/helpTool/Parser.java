@@ -44,6 +44,13 @@ public class Parser {
         } else if (input.equals("list")) {
             // detect list
             return new ListCommand();
+        } else if (input.startsWith("find")){
+            String findDetail = input.substring(5);
+            if (isEmpty(findDetail)) {
+                throw new DukeException("☹ OOPS!!! The description of a find cannot be empty.");
+            }
+            return new FindCommand(findDetail);
+
         } else {
             if (input.startsWith("mark") || input.startsWith("unmark") || input.startsWith("delete")) {
                 boolean isDigit = !Character.isDigit(input.charAt(input.length() - 1));
