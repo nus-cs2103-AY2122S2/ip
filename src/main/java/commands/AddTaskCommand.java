@@ -9,14 +9,6 @@ import tasks.ToDo;
 import ui.UiManager;
 
 
-enum Type {
-    TODO,
-    DEADLINE,
-    EVENT,
-    MARK,
-    UNMARK,
-    DELETE;
-}
 public class AddTaskCommand extends Command{
     private String description;
     private String date;
