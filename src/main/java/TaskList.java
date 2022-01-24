@@ -181,7 +181,7 @@ public class TaskList {
      * Save the tasks in the hard disk automatically whenever the task list changes.
      */
     private void writeToFile() {
-        String filePath = Duke.DATA_PATH;
+        String filePath = Storage.DATA_PATH;
         FileWriter fw;
         try {
             fw = new FileWriter(filePath);
