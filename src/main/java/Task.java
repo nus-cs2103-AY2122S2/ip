@@ -8,15 +8,18 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String type;
 
     /**
      * Constructor for Task class
      *
      * @param description The description of task submitted by the users
      */
-    public Task(String description) {
+    public Task(String description, String type) {
+
         this.description = description;
         this.isDone = false;
+        this.type = type;
     }
 
     /**
@@ -47,7 +50,7 @@ public class Task {
     }
 
     /**
-     * Used for setting task as done when there are previous data
+     * Sets task to done
      */
     public void presetDone() {
         this.isDone = true;
