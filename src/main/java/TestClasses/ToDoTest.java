@@ -1,6 +1,6 @@
 package TestClasses;
 
-import dukeClasses.ToDo;
+import dukeclasses.ToDo;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ToDoTest {
     
     @Test
-    public void testEventIdentify(){
+    public void testEventIdentify() {
         assertEquals("[T][ ] do homework",
             new ToDo("do homework").identify());
     }
@@ -16,24 +16,24 @@ public class ToDoTest {
     @Test
     public void testSetIsDone() {
         ToDo todo = new ToDo("do homework");
-        todo.setIsDone(true);
+        todo.setDone(true);
         assertEquals("[T][X] do homework", todo.identify());
-        todo.setIsDone(false);
+        todo.setDone(false);
         assertEquals("[T][ ] do homework", todo.identify());
     }
 
     @Test
-    public void testGetDescription(){
+    public void testGetDescription() {
         assertEquals(" ", new ToDo(" ").getDescription());
     }
 
     @Test
-    public void testGetIsDone(){
+    public void testGetIsDone() {
         ToDo todo = new ToDo("do homework");
         assertEquals(false, todo.getIsDone());
-        todo.setIsDone(true);
+        todo.setDone(true);
         assertEquals(true, todo.getIsDone());
-        todo.setIsDone(false);
+        todo.setDone(false);
         assertEquals(false, todo.getIsDone());
     }
 
