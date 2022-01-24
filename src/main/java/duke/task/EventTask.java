@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class EventTask extends Task {
-    public String preposition;
+    String preposition;
     LocalDateTime dateTime;
 
     public EventTask(String name, String preposition, LocalDateTime dateTime) {
@@ -22,6 +22,10 @@ public class EventTask extends Task {
     }
 
     public String toString() {
-        return "[E]" + super.toString() + String.format(" (%s: %s)", this.preposition, this.dateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")));
+        return "[E]"
+                + super.toString()
+                + String.format(" (%s: %s)",
+                this.preposition,
+                this.dateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")));
     }
 }

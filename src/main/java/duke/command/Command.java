@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.function.Storage;
 import duke.function.TaskList;
 import duke.function.Ui;
-import duke.function.Storage;
 
 public abstract class Command {
     String fullCommand;

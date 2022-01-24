@@ -1,7 +1,7 @@
 package duke.task;
 
 public class Task {
-    public String name;
+    String name;
     boolean isDone;
 
     public Task(String name) {

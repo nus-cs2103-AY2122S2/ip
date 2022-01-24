@@ -1,9 +1,8 @@
 package duke.command;
 
-import duke.task.Task;
-import duke.function.Ui;
 import duke.function.Storage;
 import duke.function.TaskList;
+import duke.function.Ui;
 
 public class HelpCommand extends Command {
     public HelpCommand(String fullCommand) {

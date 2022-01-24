@@ -4,17 +4,17 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.List;
 
 import duke.exception.DukeException;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.ToDoTask;
-import duke.task.EventTask;
-import duke.task.DeadlineTask;
 
 public class Storage {
     String filePath;
@@ -47,7 +47,9 @@ public class Storage {
                     } else {
                         throw new DukeException("An invalid task type was read");
                     }
-                    if (line[1].equals("X")) task.mark();
+                    if (line[1].equals("X")) {
+                        task.mark();
+                    }
                     tasks.add(task);
                 }
             } catch (FileNotFoundException e) {
