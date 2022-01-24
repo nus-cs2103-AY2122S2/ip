@@ -38,8 +38,14 @@ Hello from
     ____________________________________
 
     Let's see... A new event! Added task:
-    [T][ ] pokemon release (at: 28th jan)
+    [E][ ] pokemon release (at: 28 Jan 2022)
     Now you have 2 in the list.
+    ____________________________________
+    ____________________________________
+
+    I've sorted and put the earliest deadlines/events to the top for you :)
+    1.[E][ ] pokemon release (at: 28 Jan 2022)
+    2.[T][ ]  borrow book
     ____________________________________
     ____________________________________
     Invalid command
@@ -55,14 +61,15 @@ Hello from
     ____________________________________
 
     Oh boy, another deadline? Added task:
-    [D][ ] return book (by: Sunday)
+    [D][ ] return book (by: 25 Jan 2022)
     Now you have 3 in the list.
     ____________________________________
     ____________________________________
 
-    1.[T][ ]  borrow book
-    2.[T][ ] pokemon release (at: 28th jan)
-    3.[D][ ] return book (by: Sunday)
+    I've sorted and put the earliest deadlines/events to the top for you :)
+    1.[D][ ] return book (by: 25 Jan 2022)
+    2.[E][ ] pokemon release (at: 28 Jan 2022)
+    3.[T][ ]  borrow book
     ____________________________________
     ____________________________________
 
@@ -71,7 +78,7 @@ Hello from
     ____________________________________
 
     Finally... I've marked this task as done:
-      [T][X] pokemon release (at: 28th jan)
+      [E][X] pokemon release (at: 28 Jan 2022)
     ____________________________________
     ____________________________________
 
@@ -83,9 +90,10 @@ Hello from
     ____________________________________
     ____________________________________
 
-    1.[T][ ]  borrow book
-    2.[T][X] pokemon release (at: 28th jan)
-    3.[D][ ] return book (by: Sunday)
+    I've sorted and put the earliest deadlines/events to the top for you :)
+    1.[D][ ] return book (by: 25 Jan 2022)
+    2.[E][X] pokemon release (at: 28 Jan 2022)
+    3.[T][ ]  borrow book
     ____________________________________
     ____________________________________
 
@@ -94,7 +102,7 @@ Hello from
     ____________________________________
 
     Could you be any more lazy? I've marked this task as not done yet:
-      [T][ ] pokemon release (at: 28th jan)
+      [E][ ] pokemon release (at: 28 Jan 2022)
     ____________________________________
     ____________________________________
 
@@ -111,7 +119,7 @@ Hello from
     ____________________________________
 
     Alright I'm deleting this task:
-    [T][ ]  borrow book
+    [D][ ] return book (by: 25 Jan 2022)
     Now you have 2 in the list.
     ____________________________________
     ____________________________________
@@ -120,8 +128,9 @@ Hello from
     ____________________________________
     ____________________________________
 
-    1.[T][ ] pokemon release (at: 28th jan)
-    2.[D][ ] return book (by: Sunday)
+    I've sorted and put the earliest deadlines/events to the top for you :)
+    1.[E][ ] pokemon release (at: 28 Jan 2022)
+    2.[T][ ]  borrow book
     ____________________________________
     ____________________________________
     Bye! Hope to see you again soon!
