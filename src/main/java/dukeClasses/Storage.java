@@ -4,11 +4,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -30,14 +33,14 @@ public class Storage {
             try {
                 file.createNewFile();
             } catch (IOException errorMessage) {
-                new DukeException();
+                throw new DukeException();
             }
         }
         Scanner sc = null;
         try {
             sc = new Scanner(file);
         } catch (FileNotFoundException errorMessage) {
-            new DukeException();
+            throw new DukeException();
         }
         while (sc.hasNext()) {
             String data = sc.nextLine();
@@ -55,8 +58,7 @@ public class Storage {
                 try {
                     date = LocalDate.parse(temp.trim(), DateTimeFormatter.ofPattern("MMM dd yyyy"));
                 } catch (DateTimeParseException errorMessage) {
-                    new DukeException();
-                    break;
+                    throw new DukeException();
                 }
                 if (processedData[0].contains("E")) {
                     Event event = new Event(processedDataDescription[0].trim(), date);
@@ -71,15 +73,15 @@ public class Storage {
                     }
                     tasks.add(deadline);
                 } else {
-                    System.out.println("Error in loading data");
-                    new DukeException();
+                    throw new DukeException();
                 }
             }
         }
+        sc.close();
         return tasks;
     }
 
-    public void updateStorage(ArrayList<Task> dataArrList) throws DukeException{
+    public void updateStorage(ArrayList<Task> dataArrList) throws DukeException {
         File file = new File(filePath);
         String updatedFileContents = "";
         for (int i = 0; i < dataArrList.size(); i++) {
@@ -91,7 +93,7 @@ public class Storage {
             fw.write(updatedFileContents);
             fw.close();
         } catch (IOException errorMessage) {
-            new DukeException();
+            throw new DukeException();
         }
     }
 
@@ -102,7 +104,7 @@ public class Storage {
             fw.write(String.format("    %s\n", task.identify()));
             fw.close();
         } catch (IOException errorMessage) {
-            new DukeException();
+            throw new DukeException();
         }
     }
 

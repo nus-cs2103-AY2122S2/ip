@@ -49,7 +49,7 @@ public class Duke {
             case "mark":
                 if (parsedCommand.getIndex() > tasks.getTaskList().size()) {
                     new DukeException();
-                    continue;
+                    break;
                 }
                 Task markedTask = tasks.updateTask(parsedCommand.getIndex(), true);
                 ui.identifyTask(markedTask);
@@ -115,9 +115,10 @@ public class Duke {
 
             }
         }
+        sc.close();
     }
 
     public static void main(String[] args) {
-        new Duke("data.txt").run();
+        new Duke(TEXT_DATA_FILE_PATH).run();
     }
 }

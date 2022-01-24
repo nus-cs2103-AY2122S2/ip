@@ -60,6 +60,7 @@ public class Ui {
             while (sc.hasNext()) {
                 System.out.println(sc.nextLine());
             }
+            sc.close();
         } catch (FileNotFoundException errorMessage) {
             showFileError();
         }
