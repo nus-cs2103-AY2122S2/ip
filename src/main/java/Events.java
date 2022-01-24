@@ -16,4 +16,10 @@ public class Events extends Task {
             return "[E][ ] " + s + " (at: " + time + ")";
         }
     }
+
+    @Override
+    public String storeFormat(){
+        return "E|" + super.done + "|" + super.s + "|" + this.time + "\n";
+    }
+
 }

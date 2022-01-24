@@ -27,4 +27,8 @@ public class Task {
         }
     }
 
+    public String storeFormat(){
+        return this.s;
+    }
+
 }

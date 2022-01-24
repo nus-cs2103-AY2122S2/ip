@@ -13,4 +13,9 @@ public class ToDos extends Task {
         }
     }
 
+    @Override
+    public String storeFormat(){
+        return "T" + "|" + super.done + "|" + super.s + "\n";
+    }
+
 }
