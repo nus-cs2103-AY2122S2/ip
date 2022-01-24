@@ -29,7 +29,7 @@ public class Storage {
       case "D":
         return new Deadline(commandSplit[2], storageToMark(commandSplit[1]), commandSplit[3]);
       case "E":
-        return new Events(commandSplit[2], storageToMark(commandSplit[1]), commandSplit[3]);
+        return new Event(commandSplit[2], storageToMark(commandSplit[1]), commandSplit[3]);
       default:
         return null;
     }

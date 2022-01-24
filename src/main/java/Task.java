@@ -1,5 +1,7 @@
 package main.java;
 
+import java.time.format.DateTimeFormatter;
+
 /**
  * Task that
  */
@@ -15,6 +17,13 @@ public class Task {
    */
   String name;
 
+
+  /**
+   * DateTimeFormator for the incoming dates
+   */
+  DateTimeFormatter dateTimeFormatIn = DateTimeFormatter.ofPattern("d/M/y kkmm");
+  DateTimeFormatter dateTimeFormatterOut = DateTimeFormatter.ofPattern("MMM d y");
+  
   /**
    * Constructs a Task from the given name.
    * 

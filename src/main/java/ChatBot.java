@@ -94,7 +94,7 @@ public class ChatBot {
 
         } else if (firstCmd == Command.event) {
           String[] ans = Cmd.split(" /at ");
-          Task tempTask = new Events(ans[0].replace("event ", ""), ans[1]);
+          Task tempTask = new Event(ans[0].replace("event ", ""), ans[1]);
           taskList.add(tempTask);
           new AddTaskResponse(tempTask, taskList).callback();
           storage.loadToDisk(storageTaskList, taskList);
