@@ -1,10 +1,10 @@
 package duke.parser;
 
 import duke.bot.BotType;
-import duke.command.BotCommand;
 import duke.command.Command;
 import duke.command.ExitCommand;
 import duke.command.ListCommand;
+import duke.command.BotCommand;
 import duke.command.add.DeadlineCommand;
 import duke.command.add.EventCommand;
 import duke.command.add.TodoCommand;
@@ -21,26 +21,44 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a system to translate user input into respective objects.
+ * <code>Parser</code> class methods are static, cannot be created and
+ * is used to convert String of user input into its intended object.
+ */
 public class Parser {
     public static final String dateInputFormat = "dd-MM-yyyy";
     public static final String timeInputFormat = "HHmm";
 
+    /**
+     * Returns a LocalDate object specified by the user input.
+     * @param input date input.
+     * @return a LocalDate object of the specified date.
+     */
     public static LocalDate convertToDate(String input) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateInputFormat);
 
         return LocalDate.parse(input, formatter);
     }
 
+    /**
+     * Returns a LocalTime object specified by the user input.
+     * @param input time input.
+     * @return a LocalTime object of the specified time.
+     */
     public static LocalTime convertToTime(String input) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(timeInputFormat);
 
         return LocalTime.parse(input, formatter);
     }
 
-    private static boolean checkSingleArgs(String[] inputArgs) {
-        return (inputArgs.length < 2);
-    }
-
+    /**
+     * Returns a Command object based on the user input.
+     *
+     * @param input user command input.
+     * @return a command object.
+     * @throws DukeException if command format is invalid.
+     */
     public static Command parseCommand(String input) throws DukeException {
         String[] inputArgs = input.trim().split(" ", 2);
 
@@ -69,6 +87,11 @@ public class Parser {
             throw new InvalidArgumentException();
         }
     }
+
+    private static boolean checkSingleArgs(String[] inputArgs) {
+        return (inputArgs.length < 2);
+    }
+
 
     private static Command handleTodo(String[] inputArgs) throws InvalidArgumentException {
         if (checkSingleArgs(inputArgs)) {
