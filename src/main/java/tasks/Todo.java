@@ -1,6 +1,6 @@
 package tasks;
 
-import duke.*;
+import duke.DukeException;
 
 public class Todo extends Task {
     public Todo(String description) {
