@@ -4,6 +4,11 @@ public class ToDo extends Task {
     }
 
     @Override
+    public String getSaveToFileFormat() {
+        return "T," + super.getSaveToFileFormat() + ",," + getStatusIcon();    
+    }
+    
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }
