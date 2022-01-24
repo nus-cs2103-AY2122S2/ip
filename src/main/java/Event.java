@@ -3,23 +3,23 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
-    private LocalDate dateRange;
+    private LocalDate date;
 
-    public Event(String name, String dateRange) throws DateTimeParseException {
-        this(name, LocalDate.parse(dateRange, CommandParser.DATE_FORMAT));
+    public Event(String name, String date) throws DateTimeParseException {
+        this(name, LocalDate.parse(date, CommandParser.DATE_FORMAT));
     }
 
-    public Event(String name, String dateRange, Boolean done) throws DateTimeParseException {
-        this(name, LocalDate.parse(dateRange, CommandParser.DATE_FORMAT), done);
+    public Event(String name, String date, Boolean done) throws DateTimeParseException {
+        this(name, LocalDate.parse(date, CommandParser.DATE_FORMAT), done);
     }
 
-    public Event(String name, LocalDate dateRange) {
-        this(name, dateRange, false);
+    public Event(String name, LocalDate date) {
+        this(name, date, false);
     }
 
-    public Event(String name, LocalDate dateRange, Boolean done) {
+    public Event(String name, LocalDate date, Boolean done) {
         super(name, 'E', done);
-        this.dateRange = dateRange;
+        this.date = date;
     }
 
     @Override
@@ -28,13 +28,13 @@ public class Event extends Task {
 
         return String.format("%s (at: %s)",
                 super.nameWithStatus(),
-                this.dateRange.format(fmt));
+                this.date.format(fmt));
     }
 
     @Override
     public String fileSaveFormat() {
         return String.format("%s||%s",
                 super.fileSaveFormat(),
-                this.dateRange.format(CommandParser.DATE_FORMAT));
+                this.date.format(CommandParser.DATE_FORMAT));
     }
 }

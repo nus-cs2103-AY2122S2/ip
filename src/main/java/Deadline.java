@@ -13,13 +13,13 @@ public class Deadline extends Task {
         this(name, LocalDate.parse(deadline, CommandParser.DATE_FORMAT), done);
     }
 
-    public Deadline(String name, LocalDate deadline) {
-        this(name, deadline, false);
+    public Deadline(String name, LocalDate date) {
+        this(name, date, false);
     }
 
-    public Deadline(String name, LocalDate deadline, Boolean done) {
+    public Deadline(String name, LocalDate date, Boolean done) {
         super(name, 'D', done);
-        this.date = deadline;
+        this.date = date;
     }
 
     @Override
