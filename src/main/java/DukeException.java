@@ -11,35 +11,35 @@ public class DukeException extends Exception {
 
     /**
      * Validates the inputs based on the command the user input and throws an error if there is invalid input
-     * @param command String that the user inputs
+     *
+     * @param command             String that the user inputs
      * @param commandSplitBySpace String[] from the command the user inputs separated by space
-     * @param tasks ArrayList of Tasks
+     * @param tasks               ArrayList of Tasks
      * @throws DukeException
      */
     public void validateInputs(String command, String[] commandSplitBySpace, ArrayList<Task> tasks) throws DukeException {
-        if (commandSplitBySpace[0].equals("mark")) {
+        switch (commandSplitBySpace[0]) {
+        case "list":
+        case "bye":
+            break;
+        case "mark":
+        case "unmark":
+        case "delete":
             if (commandSplitBySpace.length > 1) {
                 if (!(tasks.size() != 0 && Integer.parseInt(commandSplitBySpace[1]) - 1 >= 0 &&
                         Integer.parseInt(commandSplitBySpace[1]) - 1 < tasks.size())) {
-                    throw new DukeException("☹ OOPS!!! The task to be marked does not exist.");
+                    throw new DukeException("☹ OOPS!!! The task to be " + commandSplitBySpace[0] + "ed does not exist.");
                 }
             } else {
-                throw new DukeException("☹ OOPS!!! The task to be marked has to be indicated.");
+                throw new DukeException("☹ OOPS!!! The task to be " + commandSplitBySpace[0] + "ed has to be indicated.");
             }
-        } else if (commandSplitBySpace[0].equals("unmark")) {
-            if (commandSplitBySpace.length > 1) {
-                if (!(tasks.size() != 0 && Integer.parseInt(commandSplitBySpace[1]) - 1 >= 0 &&
-                        Integer.parseInt(commandSplitBySpace[1]) - 1 < tasks.size())) {
-                    throw new DukeException("☹ OOPS!!! The task to be unmarked does not exist.");
-                }
-            } else {
-                throw new DukeException("☹ OOPS!!! The task to be unmarked has to be indicated.");
-            }
-        } else if (commandSplitBySpace[0].equals("todo")) {
+            break;
+        case "todo":
             if (commandSplitBySpace.length == 1) {
                 throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
             }
-        } else if (commandSplitBySpace[0].equals("deadline")) {
+            break;
+        case "deadline":
             if (commandSplitBySpace.length > 1) {
                 int indexOfBy = command.indexOf("/by");
                 if (indexOfBy == -1) {
@@ -48,7 +48,8 @@ public class DukeException extends Exception {
             } else {
                 throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
             }
-        } else if (commandSplitBySpace[0].equals("event")) {
+            break;
+        case "event":
             if (commandSplitBySpace.length > 1) {
                 int indexOfAt = command.indexOf("/at");
                 if (indexOfAt == -1) {
@@ -57,16 +58,8 @@ public class DukeException extends Exception {
             } else {
                 throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
             }
-        } else if (commandSplitBySpace[0].equals("delete")) {
-            if (commandSplitBySpace.length > 1) {
-                if (!(tasks.size() != 0 && Integer.parseInt(commandSplitBySpace[1]) - 1 >= 0 &&
-                        Integer.parseInt(commandSplitBySpace[1]) - 1 < tasks.size())) {
-                    throw new DukeException("☹ OOPS!!! The task to be deleted does not exist.");
-                }
-            } else {
-                throw new DukeException("☹ OOPS!!! The task to be deleted has to be indicated.");
-            }
-        } else {
+            break;
+        default:
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
