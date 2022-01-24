@@ -53,22 +53,22 @@
     3.[E][ ] project meeting (at: 25 Jan 2022, 10:30 AM)
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
-    Oops, the task needs a description!
+    Oops, a todo description cannot be left empty!
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
-    Oops, the task needs a description!
+    Oops, a deadline description cannot be left empty!
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
-    Oops, the task needs a description!
+    Oops, an event description cannot be left empty!
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
-    Sorry, I don't know which task you would like to mark :(
+    Please specify a task number!
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
     Oh no! I don't understand what that means...
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
-    Sorry, I don't know which task you would like to delete :(
+    Please specify a task number!
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
     Okay, I've deleted this task:
@@ -76,13 +76,15 @@
     There are 2 tasks in the list now.
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
-    Invalid task number. There are 2 tasks in the list now.
+    Invalid task number. There are 2 in the list.
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
-    Please specify date and time in this format: yyyy-mm-dd HH:mm.
+    Invalid date/time format.
+    Please use the following format: yyyy-mm-dd HH:mm
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
-    Please specify date and time in this format: yyyy-mm-dd HH:mm.
+    Invalid date/time format.
+    Please use the following format: yyyy-mm-dd HH:mm
     ――――――――――――――――――――――――――――――――――
     ――――――――――――――――――――――――――――――――――
     Bye! Hope to see you again soon!
