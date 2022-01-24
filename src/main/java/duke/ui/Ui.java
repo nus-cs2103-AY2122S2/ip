@@ -16,7 +16,7 @@ public class Ui {
             + "|____/ \\__,_|_|\\_\\___|\n";
 
     /**
-     * Outputs the specified strings entered in the following format:
+     * Outputs the specified strings in the following format:
      * ========================================== <br>
      * args[0] <br>
      * args[1] <br>
@@ -38,7 +38,7 @@ public class Ui {
     }
 
     /**
-     * Outputs the specified list of task in the following format:
+     * Outputs the specified ArrayList of task in the following format:
      * ==========================================<br>
      * Task 1 <br>
      * Task 2 <br>
