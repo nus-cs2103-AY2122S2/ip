@@ -3,7 +3,8 @@ package task;
 public class Task {
     protected String description;
     public Boolean isDone;
-    public String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+    public String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
     public Task(String description) {
         this.description = description;
