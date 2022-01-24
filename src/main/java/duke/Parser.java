@@ -4,10 +4,12 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class Parser {
 
     public String processMessage(String message, TaskList tasks, Storage storage) throws DukeException {
+        String returnMessage;
         String currMessage;
         Task currTask;
         int index;
@@ -23,58 +25,90 @@ public class Parser {
         }
 
         switch (currMessage) {
+        case "help":
+            returnMessage = "Here are the list of commands:\n" +
+                    "|list [index]|: Show all the tasks currently in the list\n" +
+                    "|mark [index]|: Mark a task as done\n" +
+                    "|unmark [index]|: Mark a task as undone\n" +
+                    "|delete [index]|: Delete a task\n" +
+                    "|find [keyword]|: Show the list of tasks that match keyword\n" +
+                    "|todo [description]|: Add a ToDo task. Represents a task without a date/time\n" +
+                    "|deadline [Description] /by yyyy-mm-dd|: Add a Deadline Task. Represents a task that must be" +
+                    "\n\tcompleted by certain date\n" +
+                    "|deadline [Description] /by yyyy-mm-dd/HH:mm|: Add a Deadline task with a time condition.\n" +
+                    "|event [Description] /at yyyy-mm-dd/HH:mm/HH:mm|: Add an Event task. Represents a task that" +
+                    "\n\tstarts within a specific time range on a specific day " +
+                    "\n\t(HH:mm/HH:mm represents Begin/End time)\n";
+            break;
         case "list":
             String listOfTasks = tasks.toString();
 
-            message = "Provided are the tasks currently in your list:\n" + listOfTasks;
+            returnMessage = "Provided are the tasks currently in your list:\n" + listOfTasks;
             break;
         case "mark":
             index = getIndexFromMessage(message); //get the index
             currTask = tasks.getTaskAtIndex(index);
             currTask.markDone();
 
-            message = "Alright then! I've marked that task as done:" + "\n\t" + currTask;
+            returnMessage = "Alright then! I've marked that task as done:" + "\n\t" + currTask;
             break;
         case "unmark":
             index = getIndexFromMessage(message); //get the index
             currTask = tasks.getTaskAtIndex(index);
             currTask.markUndone();
 
-            message = "Alright then! I've marked that task as not done:" + "\n\t" + currTask;
+            returnMessage = "Alright then! I've marked that task as not done:" + "\n\t" + currTask;
             break;
         case "delete":
             index = getIndexFromMessage(message);
             currTask = tasks.removeTask(index);
             storage.modifyStorage(currTask, ConfirmCodes.DELETION, tasks);
-            message ="As you wish. I've removed the task from your list:" + "\n\t" + currTask
+            returnMessage ="As you wish. I've removed the task from your list:" + "\n\t" + currTask
                     + "\nI hope it was nothing important..." + "\n" + getTaskCount(tasks);
+            break;
+        case "find":
+            int indexOfSpace = message.indexOf(" ");
+            String keyword = message.substring(message.indexOf(" ") + 1).toLowerCase();
+
+            if (keyword.length() < 1 || indexOfSpace == -1) {
+                throw new DukeException("Pardon me, but the body of the find command should not be empty");
+            }
+
+            String foundTasks = tasks.find(keyword);
+
+            if (foundTasks.equals("")) {
+                returnMessage = "My apologies, but no tasks were found for the given keyword.";
+            } else {
+                returnMessage = "I've searched the archives and found these matching tasks in your list:\n"
+                        + tasks.find(keyword);
+            }
             break;
         case "todo":
             currTask = parseMessageContents(message, TaskTypes.TODO);
 
             tasks.addTask(currTask);
             storage.modifyStorage(currTask, ConfirmCodes.ADDITION, tasks);
-            message = "Alright then! I've added the task to your list:" + "\n\t" + currTask +
+            returnMessage = "Alright then! I've added the task to your list:" + "\n\t" + currTask +
                     "\n" +getTaskCount(tasks);
             break;
         case "deadline":
             currTask = parseMessageContents(message, TaskTypes.DEADLINE);
             tasks.addTask(currTask);
             storage.modifyStorage(currTask, ConfirmCodes.ADDITION, tasks);
-            message = "Alright then! I've added the task to your list:" + "\n\t" + currTask + "\n" +
+            returnMessage = "Alright then! I've added the task to your list:" + "\n\t" + currTask + "\n" +
                     getTaskCount(tasks);
             break;
         case "event":
             currTask = parseMessageContents(message, TaskTypes.EVENT);
             tasks.addTask(currTask);
             storage.modifyStorage(currTask, ConfirmCodes.ADDITION, tasks);
-            message = "Alright then! I've added the task to your list:" + "\n\t" + currTask + "\n" +
+            returnMessage = "Alright then! I've added the task to your list:" + "\n\t" + currTask + "\n" +
                     getTaskCount(tasks);
             break;
         default:
             throw new DukeException("Pardon me, but I did not understand what you said.");
         }
-        return message;
+        return returnMessage;
     }
 
     /**
@@ -85,10 +119,10 @@ public class Parser {
      */
     private static Task parseMessageContents(String message, TaskTypes type) throws DukeException {
         DukeException wrongDeadlineFormat = new DukeException("Pardon me, but the duke.Deadline format is incorrect." +
-                " The format should be:\n\t[duke.Task] [Description] /by yyyy-mm-dd/HH:mm (leave \"/HH:mm\"" +
+                " The format should be:\n\t[Task] [Description] /by yyyy-mm-dd/HH:mm (leave \"/HH:mm\"" +
                 " empty if no time in current task)");
         DukeException wrongEventFormat = new DukeException("Pardon me, but the duke.Event format is incorrect." +
-                " The format should be:\n\t[duke.Task] [Description] /at yyyy-mm-dd/HH:mm/HH:mm");
+                " The format should be:\n\t[Task] [Description] /at yyyy-mm-dd/HH:mm/HH:mm");
 
         LocalDate date;
         LocalTime timeBegin, timeEnd;
