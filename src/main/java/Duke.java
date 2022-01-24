@@ -56,6 +56,8 @@ public class Duke {
      * and 'deadline' have a time specified after the keyword '/at' or '/by'.
      *
      * @param input The user input of adding a task. 
+     *
+     * @throws DukeException when part of the infomation of a todo, event or deadline is missing.
      */
     private void addTask(TaskType type, String input) throws DukeException {
         String description;
@@ -63,7 +65,6 @@ public class Duke {
         int timeIndex;
         Task t;
 
-        // TODO: ☹ OOPS!!! The description of a todo cannot be empty.
         if (type == TaskType.TODO) {
             try {
                 description = input.substring(5);
