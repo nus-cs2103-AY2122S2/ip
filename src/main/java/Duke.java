@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -102,6 +104,11 @@ public class Duke {
             break;
         case "deadline":
             String[] deadlineTokens = commandTokens[1].split(" /by ");
+            try {
+                LocalDate date = LocalDate.parse(deadlineTokens[1]);
+            } catch (DateTimeParseException e) {
+                throw new DukeException(deadlineTokens[1] + " is an invalid date!");
+            }
             addTask("deadline", deadlineTokens[0], deadlineTokens[1]);
             break;
         case "event":
