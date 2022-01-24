@@ -1,3 +1,7 @@
+clear
+nope
+clear
+yes
 list
 todo Do Laundry
 deadline Study /by 9pm
