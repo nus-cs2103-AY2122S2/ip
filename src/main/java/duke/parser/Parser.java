@@ -18,17 +18,15 @@ public class Parser {
     public static final String timeInputFormat = "HHmm";
 
     public static LocalDate convertToDate(String input) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate date = LocalDate.parse(input, formatter);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateInputFormat);
 
-        return date;
+        return LocalDate.parse(input, formatter);
     }
 
     public static LocalTime convertToTime(String input) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
-        LocalTime time = LocalTime.parse(input, formatter);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(timeInputFormat);
 
-        return time;
+        return LocalTime.parse(input, formatter);
     }
 
     private static boolean checkSingleArgs(String[] inputArgs) {
