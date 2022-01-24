@@ -146,5 +146,21 @@ Done! I've removed this task:
 There is no number 5 in your task list!
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Enter your keyword behind 'find' to let me search for you! :)
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+I couldn't find any task that matches your search! :(
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Wokay! I've added this task:
+[T][ ] play game
+Now you have 4 task(s) in the list
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+Here are the tasks that match your search:
+1.[E][ ] play (at: Jan 28 2022 00:00)
+2.[T][ ] play game
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 Bye-bye :')  Hope to see you soon!
 *~*~*~*~*~*~*~*~*~*~*~*~*~*~*

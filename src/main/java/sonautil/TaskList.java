@@ -154,6 +154,28 @@ public class TaskList {
 
             break;
 
+        case "find":
+
+            String findWord = command[1];
+            ArrayList<Task> searchList = new ArrayList<>(100);
+
+            for (int i = 0; i < tasksAdded_index; i++) {
+                String taskDescription = list.get(i).getDescription();
+                if (taskDescription.contains(findWord)) {
+                    searchList.add(list.get(i));
+                }
+            }
+
+            if (searchList.size() == 0) {
+                Ui.findNoMatchError();
+            } else {
+                Ui.findShowResult();
+                for (int i = 0; i < searchList.size(); i++) {
+                    System.out.println((i + 1) + "." + searchList.get(i).toString());
+                }
+                Ui.showLine();
+            }
+
         case "unknown":
 
         }
