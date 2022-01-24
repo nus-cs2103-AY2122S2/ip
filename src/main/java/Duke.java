@@ -4,11 +4,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Duke {
     private final Ui ui = new Ui();
@@ -26,27 +23,10 @@ public class Duke {
         storage.loadTasks(tasks);
 
         while (!shouldExit) {
-            String input = scanner.nextLine();
-            String[] tokens = input.split(" ", 2);
-
             try {
-                CommandType commandType = CommandType.fromString(tokens[0]);
-                Map<String, String> paramMap = new HashMap<>();
-
-                for (String param : commandType.getParams()) {
-                    String regex = "(?<=/" + param + "\\s)([^/].*?)(?=\\s*/|$)";
-                    Pattern pattern = Pattern.compile(regex);
-                    Matcher matcher = pattern.matcher(input);
-
-                    if (matcher.find()) {
-                        String arg = matcher.group();
-                        paramMap.put(param, arg);
-                    } else {
-                        throw new DukeException("Missing parameter: " + param);
-                    }
-                }
-
-                processInput(commandType, paramMap);
+                String input = scanner.nextLine();
+                Command command = Parser.parse(input);
+                processInput(command);
                 storage.saveTasks(tasks);
             } catch (DukeException e) {
                 ui.showError(e.toString());
@@ -54,8 +34,10 @@ public class Duke {
         }
     }
 
-    private void processInput(CommandType commandType, Map<String, String> paramMap) {
-        switch (commandType) {
+    private void processInput(Command command) {
+        Map<String, String> params = command.getParams();
+
+        switch (command.getType()) {
         case EXIT:
             ui.sayGoodbye();
             shouldExit = true;
@@ -64,23 +46,22 @@ public class Duke {
             ui.listTasks(tasks);
             break;
         case MARK_TASK:
-            markTask(getParamAsInt(paramMap, "id") - 1);
+            markTask(getParamAsInt(params, "id") - 1);
             break;
         case UNMARK_TASK:
-            unmarkTask(getParamAsInt(paramMap, "id") - 1);
+            unmarkTask(getParamAsInt(params, "id") - 1);
             break;
         case DELETE_TASK:
-            deleteTask(getParamAsInt(paramMap, "id") - 1);
+            deleteTask(getParamAsInt(params, "id") - 1);
             break;
         case ADD_TODO:
-            addTask(new ToDo(paramMap.get("desc")));
+            addTask(new ToDo(params.get("desc")));
             break;
         case ADD_DEADLINE:
-            addTask(new Deadline(paramMap.get("desc"), getParamAsDateTime(paramMap, "by")));
+            addTask(new Deadline(params.get("desc"), getParamAsDateTime(params, "by")));
             break;
         case ADD_EVENT:
-            addTask(new Event(paramMap.get("desc"), getParamAsDateTime(paramMap, "at"),
-                    getParamAsDuration(paramMap, "dur")));
+            addTask(new Event(params.get("desc"), getParamAsDateTime(params, "at"), getParamAsDuration(params, "dur")));
             break;
         }
     }
