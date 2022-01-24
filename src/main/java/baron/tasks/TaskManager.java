@@ -2,7 +2,9 @@ package baron.tasks;
 
 import baron.exceptions.BaronException;
 import baron.messages.Messages;
+import baron.util.DateTimeUtil;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class TaskManager {
@@ -32,7 +34,8 @@ public class TaskManager {
         } else if (taskType == TaskType.DEADLINE) {
             String[] splitString = commandArg.split(" /by ", 2);
             if (splitString.length == 2) {
-                newTask = new Deadline(splitString[0], splitString[1]);
+                LocalDateTime localDateTime = DateTimeUtil.getDateTime(splitString[1]);
+                newTask = new Deadline(splitString[0], localDateTime);
             } else if (splitString.length == 1) {
                 if (splitString[0].startsWith("/by")) {
                     throw new BaronException(Messages.generateEmptyDescMessage(taskType));
@@ -45,7 +48,8 @@ public class TaskManager {
         } else {
             String[] splitString = commandArg.split(" /at ", 2);
             if (splitString.length == 2) {
-                newTask = new Event(splitString[0], splitString[1]);
+                LocalDateTime localDateTime = DateTimeUtil.getDateTime(splitString[1]);
+                newTask = new Event(splitString[0], localDateTime);
             } else if (splitString.length == 1) {
                 if (splitString[0].startsWith("/at")) {
                     throw new BaronException(Messages.generateEmptyDescMessage(taskType));
