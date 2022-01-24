@@ -12,4 +12,6 @@ deadline hi
 unmark
 unmark abc
 list 123
+delete 1
+list
 bye

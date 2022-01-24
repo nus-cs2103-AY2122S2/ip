@@ -34,4 +34,10 @@ deadline has no date/time!! Please ENTER a date/time for deadline!!
 Please ENTER the item number to unmark!!
 Please ENTER a valid item number to unmark!!
 OPPS!! list does not take in any parameter!!
+Successfully removed the following task:
+[T][ ] borrow book
+You have 2 tasks remaining!!
+Task List:
+1. [D][X] return book (by: 5 Mar)
+2. [E][ ] project meeting (at: 6 Mar 5pm)
 Bye! Hope to see you again soon!
