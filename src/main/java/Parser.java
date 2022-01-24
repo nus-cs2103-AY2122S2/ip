@@ -1,4 +1,5 @@
 public class Parser {
+
     public static Command parseCommand(String command) throws CommandNotFoundException {
         command = command.toLowerCase();
         if (command.equals("list")) {

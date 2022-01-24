@@ -10,9 +10,9 @@ What can i do for you?
 
 added: week 2 topics
 Number of tasks: 1
-added: week 2 project /by this friday
+added: week 2 project
 Number of tasks: 2
-added: lecture /at friday 2-4pm
+added: lecture
 Number of tasks: 3
 1.[T][ ] week 2 topics
 2.[D][ ] week 2 project  (by: this friday)

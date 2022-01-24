@@ -19,20 +19,21 @@ public class Duke {
         String command = "";
         String input = "";
 
-        Command actionType = null;
-        while (actionType == null) {
-            try {
-                command = sc.next();
-                input = sc.nextLine();
-                actionType = Parser.parseCommand(command);
-            } catch (CommandNotFoundException e) {
-                System.out.println("Sorry, i don't understand what you are saying");
-            }
-        }
+        Command actionType = Ui.getCommand();
+        String[] parsedInput = Ui.getInputs();
+//        while (actionType == null) {
+//            try {
+//                command = sc.next();
+//                input = sc.nextLine();
+//                actionType = Parser.parseCommand(command);
+//            } catch (CommandNotFoundException e) {
+//                System.out.println("Sorry, i don't understand what you are saying");
+//            }
+//        }
         while(actionType != Command.BYE) {
             int indexOfList = -1;
             Boolean addSuccess = null;
-            String[] parsedInput = Parser.parseInput(input);
+
 
             switch (actionType) {
                 case LIST:
@@ -58,9 +59,9 @@ public class Duke {
                         addSuccess = false;
                     }
                     if (addSuccess) {
-                        System.out.println("added: " + input);
+                        System.out.println("added: " + parsedInput[0].strip());
                     } else {
-                        System.out.println("Failed to add " + input);
+                        System.out.println("Failed to add " + parsedInput[0].strip());
                     }
                     System.out.print("Number of tasks: ");
                     System.out.println(list.getLength());
@@ -73,9 +74,9 @@ public class Duke {
                         addSuccess = false;
                     }
                     if (addSuccess) {
-                        System.out.println("added: " + input);
+                        System.out.println("added: " + parsedInput[0].strip());
                     } else {
-                        System.out.println("Failed to add " + input);
+                        System.out.println("Failed to add " + parsedInput[0].strip());
                     }
                     System.out.print("Number of tasks: ");
                     System.out.println(list.getLength());
@@ -88,9 +89,9 @@ public class Duke {
                         addSuccess = false;
                     }
                     if (addSuccess) {
-                        System.out.println("added: " + input);
+                        System.out.println("added: " + parsedInput[0].strip());
                     } else {
-                        System.out.println("Failed to add " + input);
+                        System.out.println("Failed to add " + parsedInput[0].strip());
                     }
                     System.out.print("Number of tasks: ");
                     System.out.println(list.getLength());
@@ -105,17 +106,18 @@ public class Duke {
 
             DataStore.saveData(list);
 
-            actionType = null;
-            while (actionType == null) {
-                try {
-                    command = sc.next();
-                    input = sc.nextLine();
-                    actionType = Parser.parseCommand(command);
-                } catch (CommandNotFoundException e) {
-                    System.out.println("Sorry, i don't understand what you are saying");
-                    actionType = null;
-                }
-            }
+            actionType = Ui.getCommand();
+            parsedInput = Ui.getInputs();
+//            while (actionType == null) {
+//                try {
+//                    command = sc.next();
+//                    input = sc.nextLine();
+//                    actionType = Parser.parseCommand(command);
+//                } catch (CommandNotFoundException e) {
+//                    System.out.println("Sorry, i don't understand what you are saying");
+//                    actionType = null;
+//                }
+//            }
         }
 
         System.out.println("Bye. Hope to see you again soon!");
