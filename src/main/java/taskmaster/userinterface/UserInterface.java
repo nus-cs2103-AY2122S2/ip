@@ -1,10 +1,14 @@
-package Taskmaster.UserInterface;
-import Taskmaster.util.TaskList;
-import Taskmaster.util.Storage;
-import Taskmaster.Commands.AddCommands;
-import Taskmaster.Commands.DeleteCommands;
-import Taskmaster.Commands.MarkCommands;
-import Taskmaster.Exception.DukeExceptions;
+package taskmaster.userinterface;
+
+import taskmaster.util.TaskList;
+import taskmaster.util.Storage;
+
+import taskmaster.commands.AddCommands;
+import taskmaster.commands.DeleteCommands;
+import taskmaster.commands.MarkCommands;
+
+import taskmaster.exception.DukeExceptions;
+
 import java.util.Scanner;
 
 /**
@@ -21,7 +25,8 @@ public class UserInterface {
     protected Storage storage;
 
     /** Taskmaster's logo. **/
-    protected final String LOGO = "  _____\n" + " /     \\\n" + "| () () |\n" + " \\  ^  /\n" + "  |||||\n" + "  |||||\n";
+    protected final String LOGO = "  _____\n" + " /     \\\n" + "| () () |\n" + " \\  ^  /\n"
+                                    + "  |||||\n" + "  |||||\n";
 
     /**
      * Constructor for UserInterface.
@@ -36,7 +41,7 @@ public class UserInterface {
      * Prints the opening message when the program runs.
      */
 
-    private void openingMessage() {
+    private void displayOpeningMessage() {
         System.out.println(LOGO);
         System.out.println("Greetings, I'm Taskmaster, I'm super grumpy 24/7");
         System.out.println("Okay, what do you want?\n");
@@ -46,7 +51,7 @@ public class UserInterface {
      * Prints the bye message displayed when the user exits.
      */
 
-    private void byeMessage() {
+    private void displayByeMessage() {
         System.out.println("See you around kiddo, I'm an angsty dude but deep down i'm a lonely man");
     }
 
@@ -55,7 +60,7 @@ public class UserInterface {
      * Adds all the tasks in the text file into the Task List.
      */
 
-    private void loadingExistingFile() {
+    private void loadExistingFile() {
         System.out.println("Loading up saved task files ...\n");
         storage.loadFile(taskList);
     }
@@ -86,7 +91,7 @@ public class UserInterface {
      * @param input The input entered by the user
      */
 
-    public void invalidCommand(String input) {
+    public void displayInvalidCommand(String input) {
         System.out.println("\n" + input + "?");
         System.out.println("What are you on about?");
         System.out.println("Type list if you want to know the commands, kid!\n");
@@ -96,18 +101,22 @@ public class UserInterface {
      * Prints the list of commands that are in this program.
      */
 
-    public void listOfCommand() {
+    public void displayListOfCommand() {
         System.out.println("____________________________________________________________");
         System.out.println("\nCommands: ");
         System.out.println("    List                                    -List out all your current tasks");
-        System.out.println("    todo <task name>                        -Add a todo task without any deadline specified");
-        System.out.println("    deadline <task name> /by <Date><Time>   -Adds a task that has to be done before the specified deadline");
-        System.out.println("    event <task name> /at <Date><Time>      -Adds a task that occurs at the specified time and date");
+        System.out.println("    todo <task name>                        -Add a todo task without any deadline"
+                            + " specified");
+        System.out.println("    deadline <task name> /by <Date><Time>   -Adds a task that has to be done before "
+                            + "the specified deadline");
+        System.out.println("    event <task name> /at <Date><Time>      -Adds a task that occurs at the specified "
+                            + "time and date");
         System.out.println("    mark <task number>                      -Marks task as completed");
         System.out.println("    unmark <task number>                    -Marks a completed task as uncompleted");
         System.out.println("    delete <task number>                    -Deletes the task at the specified index");
         System.out.println("    bye                                     -Exits the program");
-        System.out.println("    find <keyword>                          -Retrieves all tasks that contains the specified keyword");
+        System.out.println("    find <keyword>                          -Retrieves all tasks that contains the "
+                            + "specified keyword");
         System.out.println("____________________________________________________________\n");
     }
 
@@ -120,7 +129,6 @@ public class UserInterface {
      */
 
     public void performCommand(String input) {
-
         String[] stringIntoParts = input.split(" ");
         String firstWord = stringIntoParts[0];
 
@@ -146,10 +154,14 @@ public class UserInterface {
 
             case "find":
                 try {
-                    if (stringIntoParts.length == 1)
-                        throw new DukeExceptions("ERROR: find command requires a parameter to specify what keyword to find");
+                    if (stringIntoParts.length == 1) {
+                        throw new DukeExceptions("ERROR: find command requires a parameter to specify"
+                                                    + " what keyword to find");
+                    }
+
                     String toFind = input.substring(input.indexOf(" ") + 1);
                     taskList.find(toFind);
+
                 } catch (DukeExceptions e) {
                     System.out.println(e.getMessage());
                 }
@@ -159,11 +171,11 @@ public class UserInterface {
                 return;
 
             case "help":
-                listOfCommand();
+                displayListOfCommand();
                 break;
 
             default:
-                invalidCommand(input);
+                displayInvalidCommand(input);
                 break;
         }
 
@@ -173,7 +185,7 @@ public class UserInterface {
      * Serves as the interface between the user and the program.
      */
 
-    private void menu() {
+    private void displayMenu() {
         Scanner sc = new Scanner(System.in);
         boolean isExit = false;
         while (!isExit) {
@@ -189,10 +201,10 @@ public class UserInterface {
      */
 
     public void runChatBot() {
-            openingMessage();
-            loadingExistingFile();
-            menu();
-            byeMessage();
+            displayOpeningMessage();
+            loadExistingFile();
+            displayMenu();
+            displayByeMessage();
             updateList();
     }
 

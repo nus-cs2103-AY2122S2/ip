@@ -1,4 +1,5 @@
-package Taskmaster.Task;
+package taskmaster.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -45,7 +46,7 @@ public class EventTask extends Task{
     @Override
     public String saveToFileFormat() {
         String result = "E";
-        String mark = this.isCompleted? "1":"0";
+        String mark = this.isCompleted? "1" : "0";
         DateTimeFormatter oldFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         return result + " | " + mark + " | " + taskName + " | " + eventDate.format(oldFormat);
     }

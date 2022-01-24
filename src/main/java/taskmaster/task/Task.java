@@ -1,4 +1,4 @@
-package Taskmaster.Task;
+package taskmaster.task;
 
 /**
  * This class encapsulates the information necessary for a user task.
@@ -50,9 +50,8 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        String isCompletedOrNah = this.isCompleted? "X":"";
+        String isCompletedOrNah = this.isCompleted? "X" : "";
          return "[" + isCompletedOrNah + "] " + taskName;
-
     }
 
     /**
@@ -70,7 +69,7 @@ public abstract class Task {
      */
 
     public boolean containsKeyword(String keyword) {
-            return this.taskName.contains(keyword);
+        return this.taskName.contains(keyword);
     }
 
 

@@ -1,5 +1,5 @@
-package Taskmaster.util;
-import Taskmaster.Task.Task;
+package taskmaster.util;
+import taskmaster.task.Task;
 import java.util.ArrayList;
 
 

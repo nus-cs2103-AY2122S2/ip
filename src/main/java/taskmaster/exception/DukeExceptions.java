@@ -1,4 +1,4 @@
-package Taskmaster.Exception;
+package taskmaster.exception;
 
 /*
  * This class encapsulates DukeExceptions which handles

@@ -1,9 +1,13 @@
-package Taskmaster.util;
-import Taskmaster.Task.Task;
+package taskmaster.util;
+
+import taskmaster.task.Task;
+
 import java.io.IOException;
 import java.io.File;
-import java.util.Scanner;
 import java.io.FileWriter;
+
+import java.util.Scanner;
+
 import java.nio.file.Paths;
 
 /**
@@ -23,9 +27,11 @@ public class Storage {
     private void createDirectory() {
             String path = Paths.get("").toAbsolutePath() + "/data/";
             File dir = new File(path);
+
             if (dir.mkdir()) {
                 System.out.println("\nI've created the directory " + dir.getName());
                 System.out.println("\nYou better be grateful, kid");
+
             } else {
                 System.out.println("\nERROR! What? I'm unable to create directory");
             }
@@ -38,11 +44,13 @@ public class Storage {
     private void createFile() {
         String path = Paths.get("").toAbsolutePath() + "/data/Duke.txt";
         File filename = new File(path);
+
         try {
             if (filename.createNewFile()) {
                 System.out.println("\nI've created the file " + filename.getName());
                 System.out.println("You better be grateful, kid");
-            } 
+            }
+
         } catch (IOException e) {
             System.out.println("\nWhat's this? An error occurred when I tried to create the file");
         }
@@ -100,6 +108,7 @@ public class Storage {
             FileWriter writer = new FileWriter(filename);
             writer.write(taskList.listTasksInTextFormat());
             writer.close();
+
         } catch (IOException e) {
             System.out.println("ERROR: Writing task lists to file");
         }

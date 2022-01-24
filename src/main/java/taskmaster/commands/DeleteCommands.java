@@ -1,8 +1,8 @@
-package Taskmaster.Commands;
+package taskmaster.commands;
 
-import Taskmaster.Exception.DukeExceptions;
-import Taskmaster.util.TaskList;
-import Taskmaster.Task.Task;
+import taskmaster.exception.DukeExceptions;
+import taskmaster.util.TaskList;
+import taskmaster.task.Task;
 
 /*
  * This class inherits from the Command class.
@@ -17,12 +17,12 @@ public class DeleteCommands extends Commands {
      * Constructor for DeleteCommands
      *
      * @param command Type of command.
-     * @param tasklist Task list that command is going to be added in.
+     * @param taskList Task list that command is going to be added in.
      */
 
-    public DeleteCommands(String command, TaskList tasklist) {
+    public DeleteCommands(String command, TaskList taskList) {
         super(command);
-        this.TASKLIST = tasklist;
+        this.TASKLIST = taskList;
     }
 
     /**
@@ -44,21 +44,22 @@ public class DeleteCommands extends Commands {
             //Handle error if the second input is not an integer
             //Gets the index of the task in the task list
             int index = Integer.parseInt(stringIntoParts[1]);
+
             //If index is out of range, throw illegal argument exception
             if (index <= 0 || index > TASKLIST.currentSize) {
-                throw new DukeExceptions("BRAT ! Your index is out of range! Number has to in the range of the list\n");
+                throw new DukeExceptions("BRAT ! Your index is out of range! "
+                                            + "Number has to in the range of the list\n");
             }
 
             deleteTask(index);
 
-
         } catch (NumberFormatException nfe) {
             System.out.println("What? Second input has to be an integer! Eg mark 1, unmark 2\n");
-            //Out of task range is thrown if the second input is out of range
+
         } catch (DukeExceptions e) {
+            //Out of task range is thrown if the second input is out of range
             System.out.println(e.getMessage());
         }
-
     }
 
     /**
@@ -67,8 +68,6 @@ public class DeleteCommands extends Commands {
      *
      * @param index Index of the task in the task list.
      */
-
-
 
     private void deleteTask(int index) {
         Task selectedTask = TASKLIST.get(index - 1);
@@ -87,7 +86,6 @@ public class DeleteCommands extends Commands {
 
     private void printTask(Task task) {
         System.out.println("    " + task.toString());
-
     }
 
     /**

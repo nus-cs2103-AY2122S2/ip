@@ -1,4 +1,4 @@
-package Taskmaster.Task;
+package taskmaster.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 
 public class DeadlineTask extends Task{
+
     /** Time and Date of Deadline. **/
     LocalDateTime deadline;
 
@@ -44,7 +45,7 @@ public class DeadlineTask extends Task{
     @Override
     public String saveToFileFormat() {
         String result = "D";
-        String mark = this.isCompleted? "1":"0";
+        String mark = this.isCompleted? "1" : "0";
         DateTimeFormatter oldFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         return result + " | " + mark + " | " + taskName + " | " + deadline.format(oldFormat);
     }

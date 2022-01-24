@@ -1,11 +1,11 @@
-package Taskmaster.Commands;
+package taskmaster.commands;
 
-import Taskmaster.Exception.DukeExceptions;
-import Taskmaster.util.TaskList;
-import Taskmaster.Task.Task;
-import Taskmaster.Task.TodoTask;
-import Taskmaster.Task.DeadlineTask;
-import Taskmaster.Task.EventTask;
+import taskmaster.exception.DukeExceptions;
+import taskmaster.util.TaskList;
+import taskmaster.task.Task;
+import taskmaster.task.TodoTask;
+import taskmaster.task.DeadlineTask;
+import taskmaster.task.EventTask;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -24,12 +24,12 @@ public class AddCommands extends Commands {
      * Constructor for AddCommands.
      *
      * @param command Type of command.
-     * @param tasklist Task list that command is going to be added in.
+     * @param taskList Task list that command is going to be added in.
      */
 
-    public AddCommands(String command, TaskList tasklist) {
+    public AddCommands(String command, TaskList taskList) {
         super(command);
-        this.TASKLIST = tasklist;
+        this.TASKLIST = taskList;
     }
 
     /**
@@ -70,13 +70,14 @@ public class AddCommands extends Commands {
      */
 
     private void parseDeadlineEventTasks() {
-        String stringIntoParts[] = this.command.split(" ");
+        String[] stringIntoParts = this.command.split(" ");
         String firstWord = stringIntoParts[0];
         String taskName = command.substring(command.indexOf(" "));
         try {
             //Handle the case of having no "/" to specify deadline or time of occurrences for deadline and event tasks
             if (!taskName.contains("/")) {
-                throw new DukeExceptions("Deadline and event tasks require /by and /at to specify the deadline or time of occurrence.\n"
+                throw new DukeExceptions("Deadline and event tasks require /by and "
+                        + "/at to specify the deadline or time of occurrence.\n"
                         + " Eg Deadline eat food /by 12pm, event concert /at 8pm");
             }
 
@@ -86,7 +87,6 @@ public class AddCommands extends Commands {
 
             DateTimeFormatter oldFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
             LocalDateTime dateTime = LocalDateTime.parse(oldDateTime, oldFormat);
-
 
             //String that states by ... or at....
             if (firstWord.equals("deadline")) {
@@ -107,8 +107,10 @@ public class AddCommands extends Commands {
 
         } catch (DukeExceptions e) {
             System.out.println(e.getMessage());
+
         } catch (NumberFormatException e) {
             System.out.println("ERROR! Expected Numbers for date and time!\n");
+
         } catch (DateTimeParseException e) {
             System.out.println("ERROR! Time or Date is in wrong format! 2/12/2019 1800\n");
         }
@@ -171,15 +173,8 @@ public class AddCommands extends Commands {
      * Execute Command.
      */
 
-
     public void execute() {
         parseCommand();
     }
-
-
-
-
-
-
 
 }

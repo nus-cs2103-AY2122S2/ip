@@ -1,4 +1,4 @@
-package Taskmaster.Commands;
+package taskmaster.commands;
 
 /*
  * This class encapsulates commands that executed

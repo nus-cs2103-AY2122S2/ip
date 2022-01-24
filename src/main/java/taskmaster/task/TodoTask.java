@@ -1,4 +1,4 @@
-package Taskmaster.Task;
+package taskmaster.task;
 
 /**
  * This class encapsulates the information necessary for a Todo task.
@@ -34,7 +34,7 @@ public class TodoTask extends Task {
     @Override
     public String saveToFileFormat() {
         String result = "T";
-        String mark = this.isCompleted? "1":"0";
+        String mark = this.isCompleted? "1" : "0";
         return result + " | " + mark + " | " + taskName;
     }
     
