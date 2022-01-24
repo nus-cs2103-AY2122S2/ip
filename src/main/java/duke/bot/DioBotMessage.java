@@ -44,6 +44,11 @@ public class DioBotMessage extends BotMessage {
         return "ZA WARUDO!";
     }
 
+    @Override
+    public String getFindListMessage(boolean isEmpty) {
+        return isEmpty ? "I reject my humanity, Jojo!" : "Oh? You're Approaching Me?";
+    }
+
 
     private String getTaskLeft(TaskList taskList) {
         String muda = "";

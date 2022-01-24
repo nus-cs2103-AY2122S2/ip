@@ -56,6 +56,8 @@ public class Parser {
             return handleMark(inputArgs, false);
         case ListCommand.COMMAND_WORD:
             return handleList(inputArgs);
+        case FindCommand.COMMAND_WORD:
+            return handleFind(inputArgs);
         case ExitCommand.COMMAND_WORD:
             return handleExit(inputArgs);
         case BotCommand.COMMAND_WORD_JJBA:
@@ -162,6 +164,15 @@ public class Parser {
 
         return new ListCommand();
     }
+
+    private static Command handleFind(String[] inputArgs) throws InvalidArgumentException {
+        if (checkSingleArgs(inputArgs)) {
+            throw new InvalidArgumentException(FindCommand.COMMAND_FORMAT);
+        }
+
+        return new FindCommand(inputArgs[1]);
+    }
+
 
     private static Command handleBot(String[] inputArgs, BotType botType) throws InvalidArgumentException {
         if (!checkSingleArgs(inputArgs)) {

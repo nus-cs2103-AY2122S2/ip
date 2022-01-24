@@ -55,8 +55,8 @@ public class Console {
         System.out.print(formatMessage(msg));
     }
 
-    private void printTaskList(TaskList taskList) {
-        System.out.println("      " + bot.getListMessage(taskList.isEmpty()));
+    private void printTaskList(String botMessage, TaskList taskList) {
+        System.out.println("      " + botMessage);
         for (int i = 0; i < taskList.size(); i++) {
             System.out.println(String.format("      %d. %s", i + 1, taskList.get(i).toString()));
         }
@@ -89,7 +89,7 @@ public class Console {
             println(bot.getDeleteMessage(cf.taskList, cf.task));
             break;
         case LIST:
-            printTaskList(cf.taskList);
+            printTaskList(bot.getListMessage(cf.taskList.isEmpty()), cf.taskList);
             break;
         case MARK:
             println(bot.getMarkMessage(cf.task));
@@ -99,6 +99,9 @@ public class Console {
             break;
         case BOT:
             println(bot.getBotMessage());
+            break;
+        case FIND:
+            printTaskList(bot.getFindListMessage(cf.taskList.isEmpty()), cf.taskList);
             break;
         case EXIT:
             println(bot.getExitMessage());

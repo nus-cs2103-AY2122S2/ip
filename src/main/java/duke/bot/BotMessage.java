@@ -19,5 +19,7 @@ public abstract class BotMessage {
     public abstract String getExitMessage();
 
     public abstract String getBotMessage();
+
+    public abstract String getFindListMessage(boolean isEmpty);
 }
 

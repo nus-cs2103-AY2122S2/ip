@@ -7,5 +7,6 @@ public enum CommandType {
     MARK,
     UNMARK,
     BOT,
+    FIND,
     EXIT,
 }

@@ -3,7 +3,7 @@ package duke.task;
 import java.util.ArrayList;
 
 public class TaskList {
-    private static ArrayList<Task> taskArr = new ArrayList<>();
+    private ArrayList<Task> taskArr = new ArrayList<>();
 
     public TaskList() {
         taskArr = new ArrayList<>();
@@ -31,5 +31,17 @@ public class TaskList {
 
     public boolean isEmpty() {
         return taskArr.isEmpty();
+    }
+
+    public TaskList search(String searchInfo) {
+        TaskList newTaskList = new TaskList();
+
+        for(Task task : taskArr) {
+            if (task.name.contains(searchInfo)) {
+                newTaskList.add(task);
+            }
+        }
+
+        return newTaskList;
     }
 }
