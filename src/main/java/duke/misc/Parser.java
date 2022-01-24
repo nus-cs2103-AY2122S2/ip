@@ -45,7 +45,7 @@ public class Parser {
                 throw new InvalidCommand("Incorrect number of arguments supplied :(");
             } else if (!wordList.contains("/by")) {
                 throw new InvalidCommand("Please follow this format: deadline <task> " +
-                        "/by <date in yyyy-MM-dd> <time in 24hrs format> ");
+                        "/by <date in yyyy-MM-dd> <time in 24hrs format>");
             } else {
                 int separator = wordList.indexOf("/by");
                 String desc = "";
@@ -92,7 +92,7 @@ public class Parser {
                 throw new InvalidCommand("Incorrect number of arguments supplied :(");
             } else if (!wordList.contains("/at")) {
                 throw new InvalidCommand("Please follow this format: event <task> " +
-                        "/at <date in yyyy-MM-dd> <time in 24hrs format> ");
+                        "/at <date in yyyy-MM-dd> <time in 24hrs format>");
             } else {
                 int separator = wordList.indexOf("/at");
                 String desc = "";
@@ -137,7 +137,7 @@ public class Parser {
                         if (newDate.isEqual(nowDate) & newEndTime.isBefore(nowTime)) {
                             throw new InvalidDateTime("You cannot travel back in time!");
                         } else if (!newEndTime.isAfter(newStartTime)) {
-                            throw new InvalidDateTime("The end time must be after the start time");
+                            throw new InvalidDateTime("The end time must be after the start time!");
                         }
                     }
                 }
@@ -161,7 +161,7 @@ public class Parser {
             break;
         case("unmark"):
             if (wordList.size() != 2) {
-                throw new InvalidCommand("This command should have exactly 1 argument");
+                throw new InvalidCommand("This command should have exactly 1 argument.");
             } else if (!isInteger(wordList.get(1))) {
                 throw new InvalidCommand("The argument MUST contain a single integer.");
             } else {
@@ -176,7 +176,7 @@ public class Parser {
             break;
         case("delete"):
             if (wordList.size() != 2) {
-                throw new InvalidCommand("This command should have exactly 1 argument");
+                throw new InvalidCommand("This command should have exactly 1 argument.");
             } else if (!isInteger(wordList.get(1))) {
                 throw new InvalidCommand("The argument MUST contain a single integer.");
             } else {
