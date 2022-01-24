@@ -13,8 +13,8 @@ What can I do for you?
 <---------------------------------------------------------->
 Tasklist:
 1. [T][x] borrow book
-2. [D][ ] return book (by: Sunday)
-3. [E][x] project meeting at (at: Mon 2-4pm test test)
+2. [D][ ] return book (by: 03 Mar 1999)
+3. [E][x] project meeting at (at: 24 Jan 2022)
 <---------------------------------------------------------->
 
 <---------------------------------------------------------->
@@ -24,45 +24,45 @@ You currently have 4 tasks
 <---------------------------------------------------------->
 
 <---------------------------------------------------------->
-Added return book (by: Sunday), as a Deadline Task
-[D][ ] return book (by: Sunday)
+Added return book (by: 03 Mar 1999), as a Deadline Task
+[D][ ] return book (by: 03 Mar 1999)
 You currently have 5 tasks
 <---------------------------------------------------------->
 
 <---------------------------------------------------------->
-Added project meeting at (at: Mon 2-4pm test test), as a Event Task
-[E][ ] project meeting at (at: Mon 2-4pm test test)
+Added project meeting at (at: 24 Jan 2022), as a Event Task
+[E][ ] project meeting at (at: 24 Jan 2022)
 You currently have 6 tasks
 <---------------------------------------------------------->
 
 <---------------------------------------------------------->
 Tasklist:
 1. [T][x] borrow book
-2. [D][ ] return book (by: Sunday)
-3. [E][x] project meeting at (at: Mon 2-4pm test test)
+2. [D][ ] return book (by: 03 Mar 1999)
+3. [E][x] project meeting at (at: 24 Jan 2022)
 4. [T][ ] borrow book
-5. [D][ ] return book (by: Sunday)
-6. [E][ ] project meeting at (at: Mon 2-4pm test test)
+5. [D][ ] return book (by: 03 Mar 1999)
+6. [E][ ] project meeting at (at: 24 Jan 2022)
 <---------------------------------------------------------->
 
 <---------------------------------------------------------->
 Marked as done:
-[D][x] return book (by: Sunday)
+[D][x] return book (by: 03 Mar 1999)
 <---------------------------------------------------------->
 
 <---------------------------------------------------------->
 Marked as done:
-[E][x] project meeting at (at: Mon 2-4pm test test)
+[E][x] project meeting at (at: 24 Jan 2022)
 <---------------------------------------------------------->
 
 <---------------------------------------------------------->
 Tasklist:
 1. [T][x] borrow book
-2. [D][x] return book (by: Sunday)
-3. [E][x] project meeting at (at: Mon 2-4pm test test)
+2. [D][x] return book (by: 03 Mar 1999)
+3. [E][x] project meeting at (at: 24 Jan 2022)
 4. [T][ ] borrow book
-5. [D][ ] return book (by: Sunday)
-6. [E][ ] project meeting at (at: Mon 2-4pm test test)
+5. [D][ ] return book (by: 03 Mar 1999)
+6. [E][ ] project meeting at (at: 24 Jan 2022)
 <---------------------------------------------------------->
 
 <---------------------------------------------------------->
@@ -72,17 +72,17 @@ Marked as done:
 
 <---------------------------------------------------------->
 Marked as undone:
-[D][ ] return book (by: Sunday)
+[D][ ] return book (by: 03 Mar 1999)
 <---------------------------------------------------------->
 
 <---------------------------------------------------------->
 Tasklist:
 1. [T][x] borrow book
-2. [D][ ] return book (by: Sunday)
-3. [E][x] project meeting at (at: Mon 2-4pm test test)
+2. [D][ ] return book (by: 03 Mar 1999)
+3. [E][x] project meeting at (at: 24 Jan 2022)
 4. [T][ ] borrow book
-5. [D][ ] return book (by: Sunday)
-6. [E][ ] project meeting at (at: Mon 2-4pm test test)
+5. [D][ ] return book (by: 03 Mar 1999)
+6. [E][ ] project meeting at (at: 24 Jan 2022)
 <---------------------------------------------------------->
 
 <---------------------------------------------------------->

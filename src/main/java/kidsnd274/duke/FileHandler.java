@@ -85,11 +85,13 @@ class FileHandler {
                     finalOutput = "T`" + (task.isDone() ? "X`" : "O`")
                             + task.getTaskName() + "\n";
                 } else if (task.getType() == Types.EVENT) {
+                    TaskWithDate taskWithDate = (TaskWithDate) task;
                     finalOutput = "E`" + (task.isDone() ? "X`" : "O`")
-                            + task.getTaskName() + "`" + task.getDetails() + "\n";
+                            + task.getTaskName() + "`" + taskWithDate.getDate() + "\n";
                 } else if (task.getType() == Types.DEADLINE) {
+                    TaskWithDate taskWithDate = (TaskWithDate) task;
                     finalOutput = "D`" + (task.isDone() ? "X`" : "O`")
-                            + task.getTaskName() + "`" + task.getDetails() + "\n";
+                            + task.getTaskName() + "`" + taskWithDate.getDate() + "\n";
                 }
                 writer.write(finalOutput);
             }

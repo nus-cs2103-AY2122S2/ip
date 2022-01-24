@@ -6,13 +6,12 @@ public class Deadline extends TaskWithDate {
     }
 
     public Deadline(String name, boolean isDone, String deadline) {
-        super(name, isDone);
-        this.deadline = deadline;
+        super(name, isDone, deadline);
     }
 
     @Override
     public String toString() {
-        return super.toString() + "(by: " + super.getDate() + ")";
+        return super.toString() + "(by: " + super.getFormattedDate() + ")";
     }
 
     @Override
@@ -23,10 +22,5 @@ public class Deadline extends TaskWithDate {
     @Override
     public Types getType() {
         return Types.DEADLINE;
-    }
-
-    @Override
-    public String getDetails() {
-        return deadline;
     }
 }

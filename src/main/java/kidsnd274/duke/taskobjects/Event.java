@@ -6,13 +6,12 @@ public class Event extends TaskWithDate {
     }
 
     public Event(String name, boolean isDone, String time) {
-        super(name, isDone);
-        this.time = time;
+        super(name, isDone, time);
     }
 
     @Override
     public String toString() {
-        return super.toString() + "(at: " + super.getDate() + ")";
+        return super.toString() + "(at: " + super.getFormattedDate() + ")";
     }
 
     @Override
@@ -23,10 +22,5 @@ public class Event extends TaskWithDate {
     @Override
     public Types getType() {
         return Types.EVENT;
-    }
-
-    @Override
-    public String getDetails() {
-        return time;
     }
 }

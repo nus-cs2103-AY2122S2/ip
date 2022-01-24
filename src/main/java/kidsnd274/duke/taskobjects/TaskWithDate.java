@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 //import java.time.temporal.ChronoUnit;
 
-abstract class TaskWithDate extends Task {
+public abstract class TaskWithDate extends Task {
     private final LocalDate date;
 
     public TaskWithDate(String name, String date) {
@@ -12,8 +12,17 @@ abstract class TaskWithDate extends Task {
         this.date = LocalDate.parse(date);
     }
 
-    public String getDate() {
+    public TaskWithDate(String name, boolean isDone, String date) {
+        super(name, isDone);
+        this.date = LocalDate.parse(date);
+    }
+
+    public String getFormattedDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
         return date.format(formatter);
+    }
+
+    public String getDate() {
+        return date.toString();
     }
 }

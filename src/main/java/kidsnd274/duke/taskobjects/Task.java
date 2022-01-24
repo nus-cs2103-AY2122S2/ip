@@ -34,14 +34,10 @@ public abstract class Task {
     public String getCurrentStatus() {
         return "[" + getStatusIcon() + "] " + this;
     }
-    public abstract String getType();
+    public abstract Types getType();
 
     public String getTaskName() {
         return taskName;
-    }
-
-    public String getDetails() {
-        return "";
     }
 
     public boolean isDone() {
