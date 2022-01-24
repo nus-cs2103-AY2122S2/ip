@@ -43,7 +43,8 @@ public class Deadline extends Task{
         }
     }
 
-    @Override public void printTask(){
+    @Override
+    public void printTask(){
         System.out.print("[D]");
 
         if(this.done){
@@ -52,5 +53,22 @@ public class Deadline extends Task{
             System.out.print("[ ] " + this.taskName + " ");
         }
         printDate();
+    }
+
+    @Override
+    public String toString(){
+        String res = "";
+        res += "[D]";
+        if(this.done){
+            res += "[X]";
+        } else {
+            res += "[ ]";
+        }
+        res += this.taskName + " (by: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        if((this.time != null)){
+            res += " " + this.time.format(DateTimeFormatter.ofPattern(("HH:mm")));
+        }
+        res += ")";
+        return res;
     }
 }

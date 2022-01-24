@@ -45,7 +45,8 @@ public class Event extends Task{
         }
     }
 
-    @Override public void printTask(){
+    @Override
+    public void printTask(){
         //print task type
         System.out.print("[E]");
         //print task done symbol
@@ -55,5 +56,22 @@ public class Event extends Task{
             System.out.print("[ ] " + this.taskName + " ");
         }
         printDate();
+    }
+
+    @Override
+    public String toString(){
+        String res = "";
+        res += "[E]";
+        if(this.done){
+            res += "[X]";
+        } else {
+            res += "[ ]";
+        }
+        res += this.taskName + " (at: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        if((this.time != null)){
+            res += " " + this.time.format(DateTimeFormatter.ofPattern(("HH:mm")));
+        }
+        res += ")";
+        return res;
     }
 }
