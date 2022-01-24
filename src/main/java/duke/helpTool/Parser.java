@@ -6,13 +6,25 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * The type Parser.
+ */
 public class Parser {
     private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
+    /**
+     * Instantiates a new Parser.
+     */
     public Parser() {
 
     }
 
+    /**
+     * Is valid date boolean.
+     *
+     * @param input the input
+     * @return the boolean
+     */
     public static boolean isValidDate(String input) {
         try {
             LocalDateTime.parse(input, dateFormat);
@@ -22,6 +34,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Is empty boolean.
+     *
+     * @param input the input
+     * @return the boolean
+     */
     public static boolean isEmpty(String input) {
         if (input.equals("")) {
             return true;
@@ -37,6 +55,13 @@ public class Parser {
     }
 
 
+    /**
+     * Parse command.
+     *
+     * @param input the input
+     * @return the command
+     * @throws DukeException the duke exception
+     */
     public static Command parse(String input) throws DukeException {
         if (input.equals("bye")) {
             // detect bye

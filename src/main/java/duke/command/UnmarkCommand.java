@@ -5,9 +5,17 @@ import duke.helpTool.Storage;
 import duke.helpTool.TaskList;
 import duke.helpTool.Ui;
 
+/**
+ * The type Unmark command.
+ */
 public class UnmarkCommand extends Command {
     private final int currTask;
 
+    /**
+     * Instantiates a new Unmark command.
+     *
+     * @param currTask the curr task
+     */
     public UnmarkCommand(int currTask){
         this.currTask = currTask;
     }

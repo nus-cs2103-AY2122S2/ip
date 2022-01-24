@@ -5,6 +5,9 @@ import duke.helpTool.Storage;
 import duke.helpTool.TaskList;
 import duke.helpTool.Ui;
 
+/**
+ * The type Delete command.
+ */
 public class DeleteCommand extends Command {
     private final int currTask;
 

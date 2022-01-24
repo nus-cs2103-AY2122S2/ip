@@ -5,9 +5,17 @@ import duke.helpTool.Storage;
 import duke.helpTool.TaskList;
 import duke.helpTool.Ui;
 
+/**
+ * The type Mark command.
+ */
 public class MarkCommand extends Command {
     private final int currTask;
 
+    /**
+     * Instantiates a new Mark command.
+     *
+     * @param currTask the curr task
+     */
     public MarkCommand(int currTask){
         this.currTask = currTask;
     }
