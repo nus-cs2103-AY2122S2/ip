@@ -35,6 +35,6 @@ public class Deadline extends Task {
     public String fileSaveFormat() {
         return String.format("%s||%s",
                 super.fileSaveFormat(),
-                this.date);
+                this.date.format(CommandParser.DATE_FORMAT));
     }
 }

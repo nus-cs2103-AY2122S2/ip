@@ -35,6 +35,6 @@ public class Event extends Task {
     public String fileSaveFormat() {
         return String.format("%s||%s",
                 super.fileSaveFormat(),
-                this.dateRange);
+                this.dateRange.format(CommandParser.DATE_FORMAT));
     }
 }
