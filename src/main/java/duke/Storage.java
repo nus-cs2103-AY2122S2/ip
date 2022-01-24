@@ -1,6 +1,7 @@
 package duke;
 
-import tasks.*;
+import tasks.TaskList;
+import tasks.Task;
 
 import java.io.*;
 import java.nio.file.Files;

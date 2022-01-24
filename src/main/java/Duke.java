@@ -1,7 +1,15 @@
-import duke.*;
-import tasks.*;
+import duke.DukeException;
+import duke.Parser;
+import duke.Storage;
+import duke.Ui;
 
-import java.io.*;
+import tasks.Deadline;
+import tasks.TaskList;
+import tasks.Task;
+import tasks.Event;
+import tasks.Todo;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
