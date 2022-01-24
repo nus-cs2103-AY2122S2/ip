@@ -1,3 +1,8 @@
+package duke;
+
+import duke.exception.DukeException;
+import duke.exception.DukeIOException;
+
 public class Duke {
     private static TaskList taskList;
 

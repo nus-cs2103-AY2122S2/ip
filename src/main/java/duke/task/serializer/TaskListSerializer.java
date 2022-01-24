@@ -1,3 +1,8 @@
+package duke.task.serializer;
+
+import duke.TaskList;
+import duke.exception.DukeIOException;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.FileInputStream;

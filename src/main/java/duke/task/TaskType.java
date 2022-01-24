@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.util.Arrays;
 
 public enum TaskType {
@@ -20,7 +22,7 @@ public enum TaskType {
         return this.typeId;
     }
 
-    static TaskType matchType(int typeId) {
+    public static TaskType matchType(int typeId) {
         return Arrays.stream(TaskType.values()).filter(x -> x.getTypeId() == typeId)
                 .findFirst()
                 .orElse(null);

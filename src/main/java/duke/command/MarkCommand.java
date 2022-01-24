@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.TaskList;
+import duke.exception.DukeIllegalArgumentException;
+import duke.task.Task;
+import duke.util.IPrintable;
+
 public class MarkCommand extends Command {
     private final boolean newState;
     public MarkCommand(String args, boolean newState) {

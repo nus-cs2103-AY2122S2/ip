@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.util.ISerializable;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -23,11 +27,11 @@ public abstract class Task implements ISerializable {
         return this.isDone;
     }
 
-    protected void markAsDone() {
+    public void markAsDone() {
         this.isDone = true;
     }
 
-    protected void unmarkAsDone() {
+    public void unmarkAsDone() {
         this.isDone = false;
     }
 
