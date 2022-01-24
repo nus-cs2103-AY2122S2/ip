@@ -25,6 +25,27 @@ public class Task {
         }
     }
 
+    public String getLetter() {
+        switch (this.taskType) {
+        case TODO:
+            return "T";
+        case DEADLINE:
+            return "D";
+        case EVENT:
+            return "E";
+        default:
+            return null;
+        }
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public Boolean isDone() {
+        return isDone;
+    }
+
     public void mark() {
         isDone = true;
     }

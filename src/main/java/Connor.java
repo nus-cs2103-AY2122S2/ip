@@ -1,16 +1,32 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.lang.StringBuilder;
 
 public class Connor {
-    private static final String CURRENT_VERSION = "Version 1.61";
+    private static final String CURRENT_VERSION = "Version 1.7";
     private static final String LINE = "┄".repeat(66);
     private static final String INDENT = " ".repeat(4);
+    private static final String INPUT_HERE = ">>> ";
+
+    private static final String TASK_FILEPATH = "data/connor.txt";
+    private static final String TASK_DIRECTORY = "./data";
 
     private static final String GOODBYE = "Farewell. See you next time!";
     private static final String EMPTY_TASK_LIST = "Your task list is empty.";
     private static final String SHOW_TASKS = "Here are your current tasks: ";
     private static final String ADD_NEW_TASK = "Alright, I've added a new task: ";
     private static final String DELETE_TASK = "Alright, I've deleted the task: ";
+    private static final String CLEAR_TASKS_CONFIRM = "Are you REALLY sure you want to clear all your tasks?\n"
+            + "Type 'yes' to confirm, type anything else (or nothing) to cancel.";
+    private static final String CLEAR_TASKS_CONFIRMED = "Poof! All your tasks are cleared!";
+    private static final String CLEAR_TASKS_CANCEL = "Cancelled clearing all tasks. Phew!";
     private static final String MARK_TASK = "Good job! I've marked the following task as completed: ";
     private static final String UNMARK_TASK = "Understood. I've unmarked the following task: ";
     private static final String ERROR_EMPTY_INDEX = "Error! Index cannot be empty.";
@@ -30,9 +46,13 @@ public class Connor {
     private static final String ERROR_INVALID_TASK_TYPE = "Oh no! Incorrect Task type!";
     private static final String ERROR_MARK_EMPTY = "Error! I can't mark an empty task list!";
     private static final String ERROR_UNMARK_EMPTY = "Error! I can't unmark an empty task list!";
+    private static final String ERROR_CREATING_TASK_FILE = "Something went wrong trying to create/load the task file!";
+    private static final String ERROR_FILE_NOT_FOUND = "Error! Task file not found!";
+    private static final String ERROR_GENERAL = "An error occurred.";
 
     private static boolean isActive = true;
     private static ArrayList<Task> taskList = new ArrayList<>();
+    private static final Scanner sc = new Scanner(System.in);
 
     private static void interpret(String s) {
         // Split between command and description
@@ -73,6 +93,10 @@ public class Connor {
             } catch (NumberFormatException e) {
                 print(ERROR_INDEX_NOT_INTEGER);
             }
+            break;
+        }
+        case "clear": {
+            clearTasks();
             break;
         }
         case "mark":
@@ -171,6 +195,20 @@ public class Connor {
         }
     }
 
+    private static void clearTasks() {
+        print(CLEAR_TASKS_CONFIRM);
+        System.out.print(INPUT_HERE);
+        String input = sc.nextLine();
+        print(input);
+        print(LINE);
+        if (input.toLowerCase().equals("yes")) {
+            taskList.clear();
+            print(CLEAR_TASKS_CONFIRMED);
+        } else {
+            print(CLEAR_TASKS_CANCEL);
+        }
+    }
+
     private static void markStatus(String status, int index) {
         if (status.equals("mark")) {
             try {
@@ -209,6 +247,88 @@ public class Connor {
         print("You have " + taskList.size() + " task" + plurality + ".");
     }
 
+    private static void updateFile() {
+        try {
+            FileWriter fw = new FileWriter(TASK_FILEPATH);
+            StringBuilder textToUpdate = new StringBuilder();
+            for (Task t : taskList) {
+                textToUpdate.append(taskToString(t));
+            }
+            fw.write(textToUpdate.toString());
+            fw.close();
+        } catch (IOException e) {
+            print(ERROR_GENERAL);
+            e.printStackTrace();
+        }
+    }
+
+    private static void loadTasks() throws FileNotFoundException, IndexOutOfBoundsException, InvalidTaskFileException {
+        File f = new File(TASK_FILEPATH);
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+            Task t = stringToTask(s.nextLine());
+            taskList.add(t);
+        }
+    }
+
+    private static String taskToString(Task t) {
+        String spacing = " | ";
+        String taskType = t.getLetter();
+        String doneness = t.isDone ? "[#] " : "[ ] ";
+        String desc = t.getDesc();
+        StringBuilder sb = new StringBuilder(doneness + taskType + spacing + desc);
+        if (t instanceof Deadline) {
+            sb.append(spacing + "By: ");
+            sb.append(((Deadline) t).getBy());
+        }
+        if (t instanceof Event) {
+            sb.append(spacing + "At: ");
+            sb.append(((Event) t).getAt());
+        }
+        sb.append("\n");
+        return sb.toString();
+    }
+
+    private static Task stringToTask(String s) throws IndexOutOfBoundsException, InvalidTaskFileException {
+        char c = s.charAt(4);
+        char d = s.charAt(1);
+        switch (c) {
+        case 'T': {
+            String[] parts = s.split(" \\| ", 2);
+            String desc = parts[1];
+            ToDo todo = new ToDo(desc);
+            if (d == '#') {
+                todo.mark();
+            }
+            return todo;
+        }
+        case 'D': {
+            String[] parts = s.split(" \\| ", 3);
+            String desc = parts[1];
+            String by = parts[2].replaceAll("By: ", "");
+            Deadline deadline = new Deadline(desc, by);
+            if (d == '#') {
+                deadline.mark();
+            }
+            return deadline;
+        }
+        case 'E': {
+            String[] parts = s.split(" \\| ", 3);
+            String desc = parts[1];
+            String at = parts[2].replaceAll("At: ", "");
+            Event event = new Event(desc, at);
+            if (d == '#') {
+                event.mark();
+            }
+            return event;
+        }
+        default: {
+            throw new InvalidTaskFileException("This task file is invalid!");
+        }
+        }
+    }
+
+
     private static void print(String s) {
         System.out.println(s);
     }
@@ -222,20 +342,39 @@ public class Connor {
                 + "888    888 888  888 888  888 888  888 888  888 888\n"
                 + "Y88b  d88P Y88..88P 888  888 888  888 Y88..88P 88\n"
                 + " \"Y8888P\"   \"Y88P\"  888  888 888  888  \"Y88P\"  888\n";
-        print("\n" + logo + "\n" + CURRENT_VERSION + "\n");
+        print("\n" + logo + "\n" + CURRENT_VERSION );
         print(LINE);
         print("Hi, my name is Connor! I'm your personalised android assistant.\n"
-                + "How may I help?");
+                + "Loading your current tasks...");
         print(LINE);
+        // Load Tasks
+        try {
+            // Make ./data/connor.txt if it does not exist.
+            new File(TASK_DIRECTORY).mkdirs();
+            new File(TASK_FILEPATH).createNewFile();
+            // Get tasks from connor.txt
+            loadTasks();
+            viewTasks();
+            print(LINE);
+        } catch (IOException e) {
+            print(ERROR_CREATING_TASK_FILE);
+            e.printStackTrace();
+            return;
+        } catch (IndexOutOfBoundsException | InvalidTaskFileException e) {
+            print("ERROR: " + e.getMessage());
+            print("Please fix the appropriate typo in the task file or clear it completely.");
+            return;
+        }
+
         // Greeting ends, User can input now
-        Scanner sc = new Scanner(System.in);
         while (isActive) {
-            System.out.print(">>> ");
+            System.out.print(INPUT_HERE);
             String input = sc.nextLine();
             print(input);
             print(LINE);
             interpret(input);
             print(LINE);
+            updateFile();
         }
         sc.close();
     }
