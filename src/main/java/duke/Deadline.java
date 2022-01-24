@@ -55,7 +55,7 @@ public class Deadline extends Task{
      * formats and prints the time into HHmm format
      */
     public void printTime() {
-        if (this.time != null){
+        if (this.time != null) {
             System.out.print(" " + this.time.format(DateTimeFormatter.ofPattern(("HH:mm"))));
         }
     }
@@ -64,7 +64,7 @@ public class Deadline extends Task{
      * Method to print the Deadline task out, overrides the method in the superclass
      */
     @Override
-    public void printTask(){
+    public void printTask() {
         System.out.print("[D]");
 
         if (this.done){

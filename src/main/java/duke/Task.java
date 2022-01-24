@@ -30,8 +30,8 @@ public class Task {
     /**
      * Prints out the status of the task and the details
      */
-    public void printTask(){
-        if(this.done){
+    public void printTask() {
+        if (this.done) {
             System.out.println("[X] " + this.taskName);
         } else {
             System.out.println("[ ] " + this.taskName);
