@@ -194,7 +194,7 @@ public class Duke {
         Duke duke = new Duke();
         duke.print("Hello, My Dear Friend... I'm Duke, your personal motivator!");
         Quote quoteOfTheDay = new Quote();
-//        duke.print(quoteOfTheDay.generateQuote());
+        duke.print(quoteOfTheDay.generateQuote());
         duke.print("What can i do for you today?");
         while (true) {
             String userTaskString = sc.nextLine();
