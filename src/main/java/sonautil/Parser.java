@@ -4,8 +4,24 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+
+/**
+ * Deals with making sense of the user's command
+ */
 public class Parser {
 
+    /**
+     * Returns a String array (arr) of the user's command.
+     * arr[0]: keyword of command, "unknown" if command invalid/does not exist
+     * arr[1]: string representation of task index (if applicable, null otherwise)
+     * arr[2] : string representation of time (if applicable, null otherwise)
+     * arr[3]: "true" if time is entered by user, "false" if not entered; null if not applicable
+     *
+     * @param userMessage the command entered by user
+     * @return details of user's command
+     * @throws DukeException If command is invalid / not understood
+     * @throws DateTimeParseException If date/time entered is invalid
+     */
     public String[] messageProcess(String userMessage) throws DukeException, DateTimeParseException {
         String[] command = new String[4];
         String[] split = userMessage.split(" ");
