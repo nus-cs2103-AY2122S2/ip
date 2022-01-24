@@ -1,4 +1,3 @@
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
@@ -10,9 +9,6 @@ import java.util.Scanner;
  * @since 1.0
  */
 public class Duke {
-    private static TaskList taskListOfTasks;
-    private static File dataFile;
-
     public static void main(String[] args) {
         Ui.greet();
         try {
@@ -27,7 +23,7 @@ public class Duke {
         }
 
         Ui.welcome();
-        taskListOfTasks = Storage.initTaskList(100); // Assume there will be no more than 100 tasks
+        TaskList taskListOfTasks = Storage.initTaskList(100); // Assume there will be no more than 100 tasks
 
         Scanner sc = new Scanner(System.in);
         String userInput = sc.nextLine();
