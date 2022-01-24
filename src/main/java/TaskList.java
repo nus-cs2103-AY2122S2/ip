@@ -1,7 +1,6 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class TaskList {
     private static String filePath = "/data/tasks.txt";
@@ -52,6 +51,38 @@ public class TaskList {
         } catch(IOException e) {
 //            System.out.println("saving failed");
             System.out.println(e.getMessage());
+        }
+    }
+
+    public Task parse(String nextLine) {
+            String[] strArr = nextLine.split(" \\| ");
+            String[] subStrArr;
+            String command = strArr[0];
+            boolean isDone = strArr[1].equals("1") ? true : false;
+            switch (command) {
+                case "T":
+                    return new Todo(strArr[2], isDone);
+                case "D":
+                    return new Deadline(strArr[2], strArr[3], isDone);
+                case "E":
+                    return new Event(strArr[2], strArr[3], isDone);
+                default:
+                    return null;
+            }
+    }
+
+    public void load(){
+        try {
+            File f = new File(System.getProperty("user.dir") + filePath);
+            Scanner sc = new Scanner(f);
+            String nextLine;
+            while (sc.hasNextLine()) {
+                nextLine = sc.nextLine();
+                Task task = parse(nextLine);
+                taskList.add(task);
+            }
+        } catch (FileNotFoundException e){
+                System.out.println(e.getMessage());
         }
     }
 }

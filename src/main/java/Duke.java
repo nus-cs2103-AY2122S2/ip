@@ -16,6 +16,7 @@ public class Duke {
 
         TaskList.initFile();
         TaskList taskList = new TaskList();
+        taskList.load();
 
 
         Scanner scanner = new Scanner(System.in);
