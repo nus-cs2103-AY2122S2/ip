@@ -34,6 +34,16 @@ public abstract class Task {
     }
 
     /**
+     * Checks if task name contains a query string.
+     *
+     * @param query string of keyword to match against task name
+     * @return true if name contains keyword else false
+     */
+    public boolean contains(String query) {
+        return name.contains(query);
+    }
+
+    /**
      * Returns a string representing the task's name.
      *
      * @return the name of the task

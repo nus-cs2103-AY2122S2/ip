@@ -25,6 +25,8 @@ public class StevieParser {
         } else if (Pattern.matches("^delete\\s\\d+", userIn)) {
             return new DeleteCommand(Integer.parseInt(userIn
                     .replaceAll("[^\\d.]", "")) - 1);
+        } else if (Pattern.matches("^find\\s(.*?)", userIn)) {
+            return new FindCommand(userIn.replace("find ", "").trim());
         }
         return parseAddTask(userIn);
     }

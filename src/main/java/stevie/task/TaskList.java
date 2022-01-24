@@ -20,10 +20,39 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    /**
+     * Adds and stores task in the task list.
+     *
+     * @param task a task to be added to task list
+     * @return a response string to indicate that task is successfully added
+     */
     public String add(Task task) {
         tasks.add(task);
         return "Got it! I have added a new task:\n" + task
                 + "\nYou have " + tasks.size() + " tasks in your list.";
+    }
+
+    /**
+     * Searches through task list and retrieve all task that matches a query string.
+     *
+     * @param query a keyword string to find tasks
+     * @return a string representation of all tasks that match query string
+     */
+    public String find(String query) {
+        StringBuilder sb = new StringBuilder();
+        int idx = 1;
+        for (Task task : tasks) {
+            if (task.contains(query)) {
+                sb.append(idx++).append(".").append(task.toString()).append("\n");
+            }
+        }
+        if (idx == 1) {
+            return "There's no task that matched that keyword!";
+        }
+        if (idx > 1) {
+            sb.deleteCharAt(sb.length() - 1);
+        }
+        return sb.toString();
     }
 
     /**
