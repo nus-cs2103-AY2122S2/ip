@@ -2,6 +2,9 @@ package duke;
 
 import java.io.IOException;
 
+/**
+ * The Duke class is a chatbot that controls and manages your todo list application
+ */
 public class Duke {
 
     TaskList tasks;
