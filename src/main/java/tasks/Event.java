@@ -1,16 +1,16 @@
 package tasks;
 
-import exceptions.DateException;
-
+import java.time.LocalDate;
 
 public class Event extends Task {
     private String item;
-    private String date;
+    private LocalDate date;
     private boolean isDone;
 
     public Event(String details, String date) {
         this.item = details;
-        this.date = date;
+        date = date.stripLeading();
+        this.date = LocalDate.parse(date);
     }
 
     @Override
@@ -32,10 +32,22 @@ public class Event extends Task {
     @Override
     public String toString() {
         if (isDone) {
-            return "[E]"+"[X] " + item + "(at:" + date + ")";
+            return "[E]"+"[X] " + item + "(at: " +
+                    date.getDayOfMonth() +
+                    " " +
+                    date.getMonth() +
+                    " " +
+                    date.getYear() +
+                    ")";
         }
         else {
-            return "[E]"+"[ ] "+ item + "(at:" + date + ")";
+            return "[E]"+"[ ] " + item + "(at: " +
+                    date.getDayOfMonth() +
+                    " " +
+                    date.getMonth() +
+                    " " +
+                    date.getYear() +
+                    ")";
         }
     }
 }
