@@ -1,3 +1,2 @@
 T @@@ true @@@ buy milk
-T @@@ false @@@ buy milk
-E @@@ true @@@ basketball class @@@ 12-2-2022 1800
+T @@@ true @@@ go class
