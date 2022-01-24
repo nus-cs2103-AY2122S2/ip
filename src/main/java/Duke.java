@@ -73,7 +73,7 @@ public class Duke {
             } else if (command.matches(".*\\btodo\\b.*")) {
 
                 try {
-                    if (inputArray.length <=1 ) {
+                    if (inputArray.length <= 1) {
                         throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                     }
                 } catch (DukeException e) {
@@ -102,6 +102,17 @@ public class Duke {
                 System.out.println("Got it. I've added this task:");
                 Task curr = new Event(strippedCommand.split("/")[0], metaInfo);
                 processNewTask(curr);
+                System.out.println(bar);
+            } else if (command.matches(".*\\bdelete\\b.*")) {
+                int number = Integer.parseInt(inputArray[1]);
+                Task curr = taskList.get(number - 1);
+                String message = curr.getTaskIcon() + " [" + curr.getStatusIcon() + "]" + curr;
+                taskList.remove(curr);
+
+                System.out.println(bar);
+                System.out.println("Noted. I've removed this task: ");
+                System.out.println(message);
+                printNoOfTasks();
                 System.out.println(bar);
             } else {
                 System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
