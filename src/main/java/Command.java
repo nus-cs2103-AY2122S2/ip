@@ -85,12 +85,12 @@ public class Command {
         return argsMap;
     }
 
-    public static Command parseCommand(String input) throws UnknownCommandException, IllegalArgumentException {
+    public static Command parseCommand(String input) throws IllegalArgumentException {
         String[] inputs = input.split(" ", 2);
         if (commandActionMap.containsKey(inputs[0].toLowerCase())) {
             return new Command(commandActionMap.get(inputs[0].toLowerCase()), inputs);
         } else {
-            throw new UnknownCommandException();
+            return new Command();
         }
     }
 }

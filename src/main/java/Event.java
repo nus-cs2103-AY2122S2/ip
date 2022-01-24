@@ -6,7 +6,7 @@ public class Event extends Task {
 
     public Event(String description, String at) {
         super(description);
-        this.at = at;
+        this.at = at.stripTrailing();
     }
 
     public Event(Map<String, String> args) {
@@ -16,5 +16,10 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
+    }
+
+    @Override
+    public String getCommandString() {
+        return String.format("event %s /at %s", description, at);
     }
 }

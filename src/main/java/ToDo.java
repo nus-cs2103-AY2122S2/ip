@@ -13,4 +13,9 @@ public class ToDo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    @Override
+    public String getCommandString() {
+        return String.format("todo %s", description);
+    }
 }
