@@ -1,4 +1,4 @@
-import java.io.FileInputStream;
+package Tasks;
 
 public class Task {
     protected String description;
@@ -13,6 +13,7 @@ public class Task {
     public String getStatusIcon(){
         return isDone ? "X" : " ";
     }
+    public boolean getStatus(){ return isDone; }
     public void setDone(){
         isDone = true;
     }

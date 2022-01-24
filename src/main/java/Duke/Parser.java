@@ -1,3 +1,5 @@
+package Duke;
+
 public class Parser {
     public Parser(){};
     public void parse(String str) throws MissingDescriptionException, DukeException {

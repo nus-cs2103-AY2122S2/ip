@@ -1,3 +1,7 @@
+package Duke;
+
+import Tasks.*;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
@@ -32,11 +36,11 @@ public class Storage {
         finally{
             for (Task t: taskList.getTasks()) {
                 try {
-                    writeToFile("Data/tasks.txt", t.saveFormat + "," + t.isDone + System.lineSeparator());
+                    writeToFile("Data/tasks.txt", t.saveFormat + "," + t.getStatus() + System.lineSeparator());
                 } catch (FileNotFoundException e) {
                     File f = new File("Data");
                     f.mkdirs();
-                    writeToFile("Data/tasks.txt", t.saveFormat + "," + t.isDone + System.lineSeparator());
+                    writeToFile("Data/tasks.txt", t.saveFormat + "," + t.getStatus() + System.lineSeparator());
                 }
             }
         }

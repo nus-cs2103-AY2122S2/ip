@@ -1,7 +1,10 @@
+package Tasks;
+
+import Duke.*;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import static java.time.temporal.ChronoUnit.DAYS;
 
 public class Event extends Task{
     String[] DateAndTime;
