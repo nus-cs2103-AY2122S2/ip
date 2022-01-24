@@ -1,5 +1,6 @@
 public class Deadline extends Task {
     private String date;
+    private char tag = 'D';
 
     public Deadline(String name, String deadline) {
         this(name, deadline, false);
@@ -12,8 +13,15 @@ public class Deadline extends Task {
 
     @Override
     public String nameWithStatus() {
-        return String.format("[D]%s (by: %s)",
+        return String.format("%s (by: %s)",
                 super.nameWithStatus(),
+                this.date);
+    }
+
+    @Override
+    public String fileSaveFormat() {
+        return String.format("%s||%s)",
+                super.fileSaveFormat(),
                 this.date);
     }
 }
