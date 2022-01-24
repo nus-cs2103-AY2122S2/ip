@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ChatBot duke = new ChatBot("Duke");
+        ChatBot duke = new ChatBot("Duke", new Storage());
         duke.greet();
         String input;
         boolean quit = false;
