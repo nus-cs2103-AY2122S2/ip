@@ -8,7 +8,7 @@ import task.Task;
 public class Ui {
 
     public static final String LINE = "*~*~*~*~*~*~*~*~*~*~*~*~*~*~*";
-    public static final String logo = "  *    ,---.    ,-----.  ,--.  ,--.   ,---.      *\n"
+    public static final String LOGO = "  *    ,---.    ,-----.  ,--.  ,--.   ,---.      *\n"
             + "      '   .-'  '  .-.  ' |  ,'.|  |  /  O  \\    *\n"
             + " *    `.  `-.  |  | |  | |  |' '  | |  .-.  |\n"
             + "    * .-'    | '  '-'  ' |  | `   | |  | |  |      *\n"
@@ -39,7 +39,7 @@ public class Ui {
      * Prints out right after Sona is opened
      */
     public static void welcomeMessage() {
-        System.out.println(logo);
+        System.out.println(LOGO);
         System.out.println("\nHi! You can call me Sona ^^~\nHow can I help you?");
     }
 
@@ -63,7 +63,8 @@ public class Ui {
      */
     public static void invalidFileMessage() {
         System.out.println(LINE
-                + "Oops! I can't load your file due to some errors...\nDon't worry! I will create a new one for you."
+                + "Oops! I can't load your file due to some errors..."
+                + "\nDon't worry! I will create a new one for you."
                 + LINE);
     }
 
@@ -107,7 +108,7 @@ public class Ui {
     public static String scheduleEmptyMessage() {
         return LINE + "\nThere is nothing happening on this day! Hooray~\n" + LINE;
     }
-
+    
     /**
      * Prints out the list of tasks on a particular date
      *
@@ -143,9 +144,7 @@ public class Ui {
      * @return message to user
      */
     public static String taskRemoveEmptyMessage() {
-        return LINE
-                + "\nWhich task do you want to delete? Add the number in the end to tell me~\n"
-                + LINE;
+        return LINE + "\nWhich task do you want to delete? Add the number in the end to tell me~\n" + LINE;
     }
 
     /**
@@ -206,11 +205,11 @@ public class Ui {
      */
     public static void deadlineEnterSuccessMessage(Task task, String timeEntered, int tasksAdded_index) {
         if (timeEntered.equals("true")) {
-            System.out.println((LINE + "\nWokay! I've added this task:\n"
-                    + task.toString()
+            System.out.println((LINE + "\nWokay! I've added this task:\n" + task.toString()
                     + "\nNow you have " + (tasksAdded_index) + " task(s) in the list\n" + LINE));
         } else {
-            System.out.println((LINE + "\nSince you did not enter the due time for this task, I will help you set it at 23:59!\n"
+            System.out.println((LINE + "\nSince you did not enter the due time for this task, "
+                    + "I will help you set it at 23:59!\n"
                     + task.toString()
                     + "\nNow you have " + (tasksAdded_index) + " task(s) in the list\n" + LINE));
         }
@@ -231,8 +230,7 @@ public class Ui {
      * @return message to user
      */
     public static String deadlineNoSlashMessage() {
-        return LINE
-                + "\nWhen is the deadline? Add '/' and the date after your task to make me record ;)\n"
+        return LINE + "\nWhen is the deadline? Add '/' and the date after your task to make me record ;)\n"
                 + LINE;
     }
 
@@ -286,8 +284,7 @@ public class Ui {
      * @param task task to be marked
      */
     public static void markSuccessMessage(Task task) {
-        System.out.println(LINE + "\nYay! I've marked this task as done:\n"
-                + task.toString() + "\n" + LINE);
+        System.out.println(LINE + "\nYay! I've marked this task as done:\n" + task.toString() + "\n" + LINE);
     }
 
     /**

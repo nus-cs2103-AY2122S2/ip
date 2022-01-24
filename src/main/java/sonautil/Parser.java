@@ -1,8 +1,8 @@
 package sonautil;
 
+import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 
 
 /**
@@ -36,7 +36,8 @@ public class Parser {
             }
 
             //invalid number
-            Boolean isMarkCommand = userMessage.toLowerCase().matches("^mark \\d+|^mark -\\d+");
+            boolean isMarkCommand = userMessage.toLowerCase().matches("^mark \\d+|^mark -\\d+");
+
             if (!isMarkCommand) {
                 throw new DukeException(Ui.userUnknownInputMessage(userMessage));
             }
@@ -58,7 +59,7 @@ public class Parser {
             }
 
             //invalid number
-            Boolean isUnmarkCommand = userMessage.toLowerCase().matches("^unmark \\d+|^unmark -\\d+");
+            boolean isUnmarkCommand = userMessage.toLowerCase().matches("^unmark \\d+|^unmark -\\d+");
             if (!isUnmarkCommand) {
                 throw new DukeException(Ui.userUnknownInputMessage(userMessage));
             }
@@ -176,7 +177,7 @@ public class Parser {
             }
 
             //invalid number
-            Boolean isValidCommand = userMessage.toLowerCase().matches("^delete \\d+|^delete -\\d+");
+            boolean isValidCommand = userMessage.toLowerCase().matches("^delete \\d+|^delete -\\d+");
             if (!isValidCommand) {
                 throw new DukeException(Ui.userUnknownInputMessage(userMessage));
             }

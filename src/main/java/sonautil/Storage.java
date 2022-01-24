@@ -39,24 +39,24 @@ public class Storage {
 
         String keyword = command[0];
         switch (keyword) {
-            case "todo":
-                writeToFile("T | 0 | " + command[1]);
-                break;
-            case "event":
-                writeToFile("E | 0 | " + command[1] + " | " + command[2]);
-                break;
-            case "deadline":
-                writeToFile("D | 0 | " + command[1] + " | " + command[2]);
-                break;
-            case "delete":
-                deleteFromFile(Integer.parseInt(command[1]));
-                break;
-            case "mark":
-                changeMarking("0", "1", Integer.parseInt(command[1]));
-                break;
-            case "unmark":
-                changeMarking("1", "0", Integer.parseInt(command[1]));
-                break;
+        case "todo":
+            writeToFile("T | 0 | " + command[1]);
+            break;
+        case "event":
+            writeToFile("E | 0 | " + command[1] + " | " + command[2]);
+            break;
+        case "deadline":
+            writeToFile("D | 0 | " + command[1] + " | " + command[2]);
+            break;
+        case "delete":
+            deleteFromFile(Integer.parseInt(command[1]));
+            break;
+        case "mark":
+            changeMarking("0", "1", Integer.parseInt(command[1]));
+            break;
+        case "unmark":
+            changeMarking("1", "0", Integer.parseInt(command[1]));
+            break;
         }
     }
 
@@ -147,19 +147,19 @@ public class Storage {
             String[] taskDetail = task.split(" \\| ");
 
             switch (taskDetail[0]) {
-                case "T":
-                    tasks.add(new Todo(taskDetail[2], Integer.parseInt(taskDetail[1])));
-                    break;
+            case "T":
+                tasks.add(new Todo(taskDetail[2], Integer.parseInt(taskDetail[1])));
+                break;
 
-                case "D":
-                    tasks.add(new Deadline(taskDetail[2],
-                            Integer.parseInt(taskDetail[1]), LocalDateTime.parse(taskDetail[3])));
-                    break;
+            case "D":
+                tasks.add(new Deadline(taskDetail[2],
+                        Integer.parseInt(taskDetail[1]), LocalDateTime.parse(taskDetail[3])));
+                break;
 
-                case "E":
-                    tasks.add(new Event(taskDetail[2],
-                            Integer.parseInt(taskDetail[1]), LocalDateTime.parse(taskDetail[3])));
-                    break;
+            case "E":
+                tasks.add(new Event(taskDetail[2],
+                        Integer.parseInt(taskDetail[1]), LocalDateTime.parse(taskDetail[3])));
+                break;
             }
         }
         return tasks;
