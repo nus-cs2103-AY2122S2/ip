@@ -11,9 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -24,7 +22,7 @@ public class Duke {
     private static final String FILE_NAME = SAVE_DIR + "/duke.txt";
 
     private final Ui ui = new Ui();
-    private final List<Task> tasks = new ArrayList<>();
+    private final TaskList tasks = new TaskList();
     private boolean shouldExit = false;
 
     public static void main(String[] args) {
@@ -183,12 +181,12 @@ public class Duke {
     }
 
     private void markTask(int index) {
-        tasks.get(index).setDone(true);
+        tasks.mark(index);
         ui.acknowledgeMark(tasks.get(index));
     }
 
     private void unmarkTask(int index) {
-        tasks.get(index).setDone(false);
+        tasks.unmark(index);
         ui.acknowledgeUnmark(tasks.get(index));
     }
 
