@@ -7,7 +7,7 @@ import duke.Storage;
 
 public class AddTaskCommand extends Command {
 
-    Task task;
+    private final Task task;
 
     public AddTaskCommand(Task task) {
         this.task = task;

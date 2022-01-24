@@ -22,7 +22,7 @@ public class Duke {
         while (!isExit) {
             String userInput = this.ui.readCommand();
             try {
-                Command command = Parser.parse(userInput, this.taskList);
+                Command command = Parser.parse(userInput, this.taskList.getLength());
                 command.execute(this.taskList, this.ui, this.storage);
                 isExit = command.isExit();
             } catch (DukeException e) {

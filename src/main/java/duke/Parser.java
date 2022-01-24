@@ -28,7 +28,7 @@ public class Parser {
     private static final String UNMARK = "unmark";
     private static final String BYE = "bye";
 
-    public static Command parse(String userInput, TaskList taskList) throws DukeException {
+    public static Command parse(String userInput, int taskListLength) throws DukeException {
         String[] inputArr = userInput.split(" ", 2);
         String commandString = inputArr[0];
         String details = inputArr.length > 1 ? inputArr[1] : "";
@@ -52,15 +52,15 @@ public class Parser {
                 if (eventInputs.length == 1 || eventInputs[1].strip().equals("")
                         || eventInputs[0].strip().equals("")) {
                     throw new DukeException("Please specify an event task as\n" +
-                            "deadline [description] /by [date in yyyy-mm-dd format].");
+                            "event [description] /by [date in yyyy-mm-dd format].");
                 }
                 return new AddTaskCommand(new Event(eventInputs[0], LocalDate.parse(eventInputs[1])));
             case MARK:
-                return new MarkCommand(convertIndex(details, taskList));
+                return new MarkCommand(convertIndex(details, taskListLength));
             case UNMARK:
-                return new UnmarkCommand(convertIndex(details, taskList));
+                return new UnmarkCommand(convertIndex(details, taskListLength));
             case DELETE:
-                return new DeleteCommand(convertIndex(details, taskList));
+                return new DeleteCommand(convertIndex(details, taskListLength));
             case LIST:
                 return new ListCommand();
             case BYE:
@@ -74,7 +74,7 @@ public class Parser {
     }
 
 
-    private static int convertIndex(String indexString, TaskList taskList) throws DukeException {
+    private static int convertIndex(String indexString, int taskListLength) throws DukeException {
         if (indexString.strip().equals("")) {
             throw new DukeException("Please specify a task.");
         }
@@ -84,7 +84,7 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new DukeException("Please specify a task using its index in the task list.");
         }
-        if (index < 1 || index > taskList.getLength()) {
+        if (index < 1 || index > taskListLength) {
             throw new DukeException("Please specify a valid task index.");
         }
         return index;
