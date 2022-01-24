@@ -11,10 +11,6 @@ public class DukeCommands {
         todo, deadline, event, mark, unmark, delete
     }
 
-    public enum DUKE_COMMANDS_W_DESCRIPTION {
-        todo, deadline, event, mark, unmark, delete
-    };
-
    static HashMap<String, String> hashMap = new HashMap<String, String>();
 
     public static boolean isDukeCommand(String string) {

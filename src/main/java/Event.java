@@ -10,7 +10,13 @@ public class Event extends Task {
     }
 
     @Override
+    public String taskDescriptionForFile() {
+        int i = super.isDone ? 1 : 0;
+        return "E , " + i + " , " + this.description.trim() + " , " + this.at;
+    }
+
+    @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + "(at: " + at + ")";
     }
 }

@@ -1,10 +1,18 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class TaskFunctions {
+public class DukeFunctions {
 
-    private static ArrayList<Task> taskList = new ArrayList<>();
+    private static List<Task> taskList = new ArrayList<>();
+
+    public static String setTaskList(List<Task> taskListFromFile) {
+        DukeFunctions.taskList = taskListFromFile;
+        String message = "You currently have " + DukeFunctions.taskList.size() + " task(s)";
+        return message;
+    }
 
     public static void getCommands() {
         HashMap<String, String> hashMap = DukeCommands.getDukeCommandsDescription();
@@ -51,43 +59,49 @@ public class TaskFunctions {
         }
     }
 
-    public static void addToList(Task task) {
+    public static void addToList(Task task) throws IOException {
         taskList.add(task);
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(task.taskDescriptionForFile() + System.lineSeparator());
+        InputOutputFunctions.appendToFile(stringBuilder.toString());
         System.out.println("Got it. I've added this task: \n" + task.toString()
                 + "\nNow you have " + taskList.size() + " tasks in the list.");
     }
 
-    public static void markTask(int position) throws DukeException {
+    public static void markTask(int position) throws DukeException, IOException {
         if (position < 1 || position > taskList.size()) {
             throw new DukeException("Task do not exist!");
         } else if (taskList.get(position - 1).isDone == true) {
             throw new DukeException("Task is already marked as done!");
         } else {
             taskList.get(position - 1).mark();
+            InputOutputFunctions.setInFile(position, taskList.get(position - 1).taskDescriptionForFile());
             System.out.println("Nice! I've marked this task as done: \n" +
                     taskList.get(position - 1).toString());
         }
     }
 
-    public static void unmarkTask(int position) throws DukeException {
+    public static void unmarkTask(int position) throws DukeException, IOException {
         if (position < 1 || position > taskList.size()) {
             throw new DukeException("Task do not exist!");
         } else if (taskList.get(position - 1).isDone == false) {
             throw new DukeException("Task is already marked as not done!");
         } else {
             taskList.get(position - 1).unmark();
+            InputOutputFunctions.setInFile(position, taskList.get(position - 1).taskDescriptionForFile());
             System.out.println("OK, I've marked this task as not done yet: \n" +
                     taskList.get(position - 1).toString());
         }
     }
 
 
-    public static void deleteTask(int position) throws DukeException {
+    public static void deleteTask(int position) throws DukeException, IOException {
         if (position < 0 || position > taskList.size()) {
             throw new DukeException("Task do not exist!");
         } else {
             Task task = taskList.get(position - 1);
             taskList.remove(position - 1);
+            InputOutputFunctions.writeToFile(taskList);
             System.out.println("Noted. I've removed this task:\n" +
                     task.toString() +
                     "\nNow you have " + taskList.size() + " tasks in the list.");
