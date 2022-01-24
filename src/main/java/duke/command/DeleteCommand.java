@@ -1,6 +1,15 @@
+package duke.command;
+
+import duke.datetime.DateTable;
+import duke.exception.BotException;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.util.Storage;
+import duke.util.Ui;
+
 import java.io.IOException;
 
-public class DeleteCommand extends Command{
+public class DeleteCommand extends duke.command.Command {
     private String description;
     private final BotException exception = new BotException();
 

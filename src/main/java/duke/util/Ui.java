@@ -1,3 +1,7 @@
+package duke.util;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,12 +16,12 @@ public class Ui {
         },
         ADDED_TASK {
             public String toString() {
-                return " Got it. I've added this task:";
+                return " Got it. I've added this duke.task:";
             }
         },
         HELLO {
             public String toString() {
-                return " Hello! I'm Duke";
+                return " Hello! I'm duke.Duke";
             }
         },
         GOODBYE {
@@ -63,11 +67,11 @@ public class Ui {
         if (isDone) {
             task.taskDone();
             System.out.println(TypicalString.LONG_LINE);
-            System.out.println(" Nice! I've marked this task as done: ");
+            System.out.println(" Nice! I've marked this duke.task as done: ");
         } else {
             task.taskUndone();
             System.out.println(TypicalString.LONG_LINE);
-            System.out.println(" OK, I've marked this task as not done yet: ");
+            System.out.println(" OK, I've marked this duke.task as not done yet: ");
         }
         System.out.println("  " + task);
         System.out.println(TypicalString.LONG_LINE);
@@ -83,7 +87,7 @@ public class Ui {
 
     public void showDeleteTask(Task task, int numTask) {
         System.out.println(TypicalString.LONG_LINE);
-        System.out.println(" Noted. I've removed this task: ");
+        System.out.println(" Noted. I've removed this duke.task: ");
         System.out.println("  " + task);
         System.out.println(" Now you have " + numTask + " tasks in the list.");
         System.out.println(TypicalString.LONG_LINE);

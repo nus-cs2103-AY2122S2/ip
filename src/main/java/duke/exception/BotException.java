@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class BotException {
     public void emptyDescription(String description) {
         System.out.println("____________________________________________________________");

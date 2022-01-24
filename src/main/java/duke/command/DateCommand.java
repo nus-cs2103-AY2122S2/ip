@@ -1,6 +1,11 @@
-import java.io.IOException;
+package duke.command;
 
-public class DateCommand extends Command{
+import duke.datetime.DateTable;
+import duke.task.TaskList;
+import duke.util.Storage;
+import duke.util.Ui;
+
+public class DateCommand extends duke.command.Command {
     private DateTable dateTable;
     private String description;
 

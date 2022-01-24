@@ -1,6 +1,15 @@
+package duke.command;
+
+import duke.datetime.DateTable;
+import duke.exception.BotException;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.util.Storage;
+import duke.util.Ui;
+
 import java.io.IOException;
 
-public class AddCommand extends Command{
+public class AddCommand extends Command {
     private String description;
     private String fullInput;
     private String type;

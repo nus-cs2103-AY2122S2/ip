@@ -1,11 +1,19 @@
+package duke;
+
+import duke.command.Command;
+import duke.datetime.DateTable;
+import duke.task.TaskList;
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.Ui;
+
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
     private final static String DIRECTORY = "data";
-    private final static String FILE_NAME = "Duke.txt";
+    private final static String FILE_NAME = "duke.Duke.txt";
     private final static String PATH = DIRECTORY + "/" + FILE_NAME;
 
     private final Storage storage;
