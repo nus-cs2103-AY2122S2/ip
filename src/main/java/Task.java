@@ -4,16 +4,24 @@ public class Task {
 
     private String name;
     private Boolean done;
-    private char tag;
+    private char tag = ' ';
 
     public Task(String name) {
-        this(name, false);
+        this(name, ' ', false);
     }
 
     public Task(String name, Boolean done) {
+        this(name, ' ', done);
+    }
+
+    public Task(String name, char tag) {
+        this(name, tag, false);
+    }
+
+    public Task(String name, char tag, Boolean done) {
         this.name = name;
+        this.tag = tag;
         this.done = done;
-        this.tag = ' ';
     }
 
     /**
@@ -93,6 +101,56 @@ public class Task {
                 this.getTag(),
                 this.isDone() ? '1' : '0',
                 this.name);
+    }
+
+    /**
+     * Parses a formatted string from file storage, then returns the Task object
+     *
+     * @return Task object represented by the string
+     */
+    public static Task parseFileSaveFormat(String fmt) throws DukeException {
+        // Split at "||"
+        String[] taskInfo = fmt.split("\\|\\|");
+
+        if (taskInfo.length < 3) {
+            throw new DukeException("Wrong format");
+        }
+
+        // Extract relevant task information
+        String taskTag = taskInfo[0];
+        Boolean taskStatus = taskInfo[1].equals("1");
+        String taskName = taskInfo[2];
+
+        Task task;
+        switch (taskTag) {
+        case "T":
+            task = new Todo(taskName, taskStatus);
+            break;
+
+        case "D":
+            try {
+                String deadline = taskInfo[3];
+                task = new Deadline(taskName, deadline, taskStatus);
+            } catch(IndexOutOfBoundsException e) {
+                throw new DukeException("Wrong format");
+            }
+            break;
+
+        case "E":
+            try {
+                String eventDate = taskInfo[3];
+                task = new Event(taskName, eventDate, taskStatus);
+            } catch(IndexOutOfBoundsException e) {
+                throw new DukeException("Wrong format");
+            }
+            break;
+
+        default:
+            task = new Task(taskName, taskStatus);
+            break;
+        }
+
+        return task;
     }
 
     @Override

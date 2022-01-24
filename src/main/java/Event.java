@@ -1,13 +1,12 @@
 public class Event extends Task {
     private String dateRange;
-    private char tag = 'E';
 
     public Event(String name, String dateRange) {
         this(name, dateRange, false);
     }
 
     public Event(String name, String dateRange, Boolean done) {
-        super(name, done);
+        super(name, 'E', done);
         this.dateRange = dateRange;
     }
 
@@ -20,7 +19,7 @@ public class Event extends Task {
 
     @Override
     public String fileSaveFormat() {
-        return String.format("%s||%s)",
+        return String.format("%s||%s",
                 super.fileSaveFormat(),
                 this.dateRange);
     }
