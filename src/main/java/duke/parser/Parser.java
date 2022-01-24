@@ -1,7 +1,10 @@
 package duke.parser;
 
 import duke.bot.BotType;
-import duke.command.*;
+import duke.command.BotCommand;
+import duke.command.Command;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
 import duke.command.add.DeadlineCommand;
 import duke.command.add.EventCommand;
 import duke.command.add.TodoCommand;
