@@ -2,6 +2,7 @@ public class Event extends Task {
     private String dateTime;
     public Event(String name, String dateTime) {
         super(name);
+        super.type = "E";
         this.dateTime = dateTime;
     }
 

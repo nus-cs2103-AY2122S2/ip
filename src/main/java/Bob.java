@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -6,6 +10,10 @@ import java.util.StringTokenizer;
 public class Bob {
     private static final String lineSplit = "====================================================================\n";
     private static final String lineSplit2 = "====================================================================";
+    public static final String fileName = "Bob.txt";
+    public static File file;
+    public static FileWriter fw;
+    public static Scanner sc;
     private static List<Task> tasks;
 
     public static void main(String[] args) {
@@ -14,9 +22,48 @@ public class Bob {
 
     public static void initializeBob() {
         tasks = new ArrayList<>();
+        file = getFile();
+        sc = initiateFileScanner();
+        initiateFileWriter();
         greet();
         activeListener();
-        sayBye();
+    }
+
+    public static Scanner initiateFileScanner() {
+        try {
+            sc = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            System.out.println("dasfowfwf");
+        }
+        return sc;
+    }
+    public static void initiateFileWriter() {
+        try {
+            fw = new FileWriter(fileName, true);
+        } catch (IOException e) {
+            System.out.println("Bob: I cant write to the file... Imma go..." + lineSplit);
+        }
+    }
+
+    public static void closeFileWriter() {
+        try {
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Bob: I dont think ur tasks are saved... Imma go..." + lineSplit);
+        }
+    }
+
+    public static File getFile() {
+        file = new File(fileName);
+        try {
+            if (!file.exists()) {
+                System.out.println("doesnt exist");
+                file.createNewFile();
+            }
+        } catch (IOException e) {
+            System.out.println("Bob: I cant create new file... Imma go..." + lineSplit);
+        }
+        return file;
     }
 
     public static void greet() {
@@ -28,7 +75,27 @@ public class Bob {
                     + "╚═╝░░╚═╝╚═╝  ╚═╝░░░╚═╝░░░░░╚═╝  ╚═════╝░░╚════╝░╚═════╝░\n"
                     + lineSplit;
         System.out.print(logo);
-        System.out.print("Bob: How can I help? \t¯\\(°_o)/¯\n" + lineSplit + "You: ");
+        System.out.print("Bob: What tasks are you adding to the list today? \t¯\\(°_o)/¯\n");
+        listTasks();
+        System.out.print(lineSplit + "You: ");
+    }
+
+    public static void listTasks() {
+        int lineCounter = 1;
+        while (sc.hasNextLine()) {
+            String[] current = sc.nextLine().split("\\|");
+            System.out.println("\t" + lineCounter + ". [" + current[0] + "] [" + current[1] + "] " + current[2]);
+            lineCounter++;
+        }
+    }
+
+    public static int listSize() {
+        int counter = 0;
+        while (sc.hasNextLine()) {
+            sc.nextLine();
+            counter++;
+        }
+        return counter;
     }
 
     public static void activeListener() {
@@ -64,6 +131,7 @@ public class Bob {
             input = sc.nextLine();
             System.out.print(lineSplit);
         }
+        sayBye();
     }
 
     public static void deleteTask(String taskNumber) throws BobException {
@@ -107,9 +175,7 @@ public class Bob {
             System.out.print(lineSplit + "You: ");
         } else {
             System.out.println("Bob: Okay, these are your tasks");
-            for (int i = 1; i <= tasks.size(); i++) {
-                System.out.println("\t" + i + ". " + tasks.get(i - 1).printStatus());
-            }
+            listTasks();
             System.out.println("      (づ｡◕‿‿◕｡)づ");
             System.out.print(lineSplit + "You: ");
         }
@@ -146,11 +212,19 @@ public class Bob {
             throw new BobException("invalid input");
         }
         tasks.add(newTask);
+        try {
+            fw.write(newTask.getType() + "|" + newTask.getStatus() + "|" + newTask + "\n");
+            fw.flush();
+        } catch (IOException e) {
+            // make this exception
+            System.out.println("Bob: Something went wrong....");
+        }
         System.out.print("Bob: I have added " + newTask + " to your tasks! You have " + tasks.size() + " tasks now " +
-                "._.)/\\(._.\n" + lineSplit + "You: ");
+            "._.)/\\(._.\n" + lineSplit + "You: ");
     }
 
     public static void sayBye() {
+        closeFileWriter();
         System.out.println("Bob: "+ "bye bye c u next time (ʘ‿ʘ)╯\n" + lineSplit2);
     }
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public abstract class Task {
     private String name;
     private int status;
+    public String type;
     protected static String[] statusSymbols = new String[]{"[ ]", "[✓]"};
 
     public Task(String name) {
@@ -14,6 +15,10 @@ public abstract class Task {
     public static Task addNewToDo(String input) {
         return new Todo(input);
     };
+
+    public String getType() {
+        return this.type;
+    }
 
     public static Task addNewDeadline(String input, String date) {
         return new Deadline(input, date);
@@ -26,7 +31,6 @@ public abstract class Task {
     public String getName() { return this.name; }
 
     public int getStatus() { return this.status; }
-
     public abstract String printStatus();
 
     public void setStatus(int status) {
