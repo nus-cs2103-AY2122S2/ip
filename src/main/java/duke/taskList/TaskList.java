@@ -18,13 +18,18 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
-    public String printTasks() {
+    public String listTasks() {
         StringBuilder output = new StringBuilder("\n\tHere are the tasks in your list:\n");
-        for (int i = 0; i < tasks.size(); i++) {
-            output.append("\t").append(i + 1).append(". ").append(tasks.get(i).toString()).append("\n");
-        }
-        return output.toString();
+        return printTasks(output, this.tasks);
     }
+
+    private String printTasks(StringBuilder beg, ArrayList<Task> list) {
+        for (int i = 0; i < list.size(); i++) {
+            beg.append("\t").append(i + 1).append(". ").append(list.get(i).toString()).append("\n");
+        }
+        return beg.toString();
+    }
+
     public int size() {
         return this.tasks.size();
     }
@@ -113,6 +118,22 @@ public class TaskList {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeWrongInputFormatException("Please input a valid delete command: delete <taskNum>");
         }
+    }
+
+    public String findKeyword(String keyword) {
+        ArrayList<Task> result = findKeywordHelper(keyword);
+        StringBuilder output = new StringBuilder("\n\tHere are the matching tasks in your list:\n");
+        return printTasks(output, result);
+    }
+
+    private ArrayList<Task> findKeywordHelper(String keyword) {
+        ArrayList<Task> result = new ArrayList<>();
+        for (int i = 0; i < this.tasks.size(); i++) {
+            if(tasks.get(i).getDescription().contains(keyword)) {
+                result.add(tasks.get(i));
+            }
+        }
+        return result;
     }
 
     public Iterable<? extends CharSequence> saveToFile() {

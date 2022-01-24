@@ -41,6 +41,11 @@ public class Parser {
             if (command.length <= 1 || command[1].equals(""))
                 throw new DukeWrongInputFormatException("The description of an event cannot be empty.");
             return Command.EVENT;
+        case "find":
+            if (command.length <= 1 || command[1].equals("")) {
+                throw new DukeWrongInputFormatException("Missing keyword to find");
+            }
+            return Command.FIND;
         default:
             return Command.INVALID;
         }

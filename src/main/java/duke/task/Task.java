@@ -21,7 +21,12 @@ public abstract class Task {
     public void setDone(boolean done) {
         this.isDone = done;
     }
+
     public abstract String formatSave();
+
+    public String getDescription() {
+        return this.description;
+    }
 
     /*
      * Customized toString method to display done status of task as well as the task description
