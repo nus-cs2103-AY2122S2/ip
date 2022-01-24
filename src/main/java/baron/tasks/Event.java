@@ -1,16 +1,20 @@
 package baron.tasks;
 
-public class Event extends Task {
-    private final String at;
+import baron.util.DateTimeUtil;
 
-    public Event(String description, String at) {
+import java.time.LocalDateTime;
+
+public class Event extends Task {
+    private final LocalDateTime at;
+
+    public Event(String description, LocalDateTime at) {
         super(description);
-        this.at = at.strip();
+        this.at = at;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.at + ")";
+        return "[E]" + super.toString() + " (at: " + DateTimeUtil.getDisplayString(this.at) + ")";
     }
 
     @Override

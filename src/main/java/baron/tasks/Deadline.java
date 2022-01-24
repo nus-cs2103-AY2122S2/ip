@@ -1,16 +1,20 @@
 package baron.tasks;
 
-public class Deadline extends Task {
-    private final String by;
+import baron.util.DateTimeUtil;
 
-    public Deadline(String description, String by) {
+import java.time.LocalDateTime;
+
+public class Deadline extends Task {
+    private final LocalDateTime by;
+
+    public Deadline(String description, LocalDateTime by) {
         super(description);
-        this.by = by.strip();
+        this.by = by;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by + ")";
+        return "[D]" + super.toString() + " (by: " + DateTimeUtil.getDisplayString(this.by) + ")";
     }
 
     @Override
