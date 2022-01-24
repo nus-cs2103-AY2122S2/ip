@@ -73,10 +73,10 @@ public class Ui {
     }
 
     public void listTaskUsingArrayList(TaskList tasks) {
-        System.out.println(Commands.LIST.toString());
+        System.out.println(Commands.MATCH.toString());
         for (int i = 0; i < tasks.getTaskList().size(); i++) {
             Task task = tasks.getTaskList().get(i);
-            System.out.println(String.format("      %s", task.identify()));
+            System.out.println(String.format("    %s", task.identify()));
         }
     }
 

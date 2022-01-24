@@ -43,4 +43,10 @@ public enum Commands {
             return "    Noted. I've removed this task:\n";
         }
     },
+    MATCH{
+        @Override
+        public String toString(){
+            return "    Here are the matching tasks in your list:";
+        }
+    }
 }
