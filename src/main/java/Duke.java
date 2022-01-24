@@ -104,7 +104,9 @@ public class Duke {
                 processNewTask(curr);
                 System.out.println(bar);
             } else {
-                System.out.println("no command given");
+                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                System.out.println("Please try again:");
+                continue;
             }
 
         }
