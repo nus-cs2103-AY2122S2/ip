@@ -9,14 +9,28 @@ import java.time.LocalTime;
 import java.util.Locale;
 import java.util.Objects;
 
+/**
+ * The task type Event.
+ */
 public class Event extends Task {
     private final LocalDateTime at;
 
+    /**
+     * Instantiates a new Event.
+     *
+     * @param description the description of the event
+     * @param at          the time of the event
+     */
     public Event(String description, LocalDateTime at) {
         super(description);
         this.at = at;
     }
 
+    /**
+     * Gets the time of the event.
+     *
+     * @return the time of the event
+     */
     public LocalDateTime getAt() {
         return this.at;
     }

@@ -11,9 +11,22 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
 
+/**
+ * The type Parser.
+ */
 public class Parser {
+    /**
+     * Instantiates a new Parser.
+     */
     public Parser() {}
 
+    /**
+     * Parse input to Command.
+     *
+     * @param input the user input
+     * @return the specific Cortana command
+     * @throws CortanaException the cortana exception
+     */
     public static Command parse(String input) throws CortanaException {
         boolean isExit = input.toLowerCase().replaceAll("[ |\\t]", "").equals("bye");
         boolean isListCommand = input.toLowerCase().replaceAll("[ |\\t]", "").equals("list");

@@ -8,9 +8,17 @@ import Task.Task;
 
 import java.util.Objects;
 
+/**
+ * The type Add command.
+ */
 public class AddCommand extends Command {
     private final Task task;
 
+    /**
+     * Instantiates a new Add command.
+     *
+     * @param task the task to be added
+     */
     public AddCommand(Task task) {
         this.task = task;
     }
@@ -30,6 +38,9 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * The program is not yet exited.
+     */
     public boolean isExit() {
         return false;
     }

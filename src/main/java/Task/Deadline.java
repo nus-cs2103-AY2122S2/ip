@@ -9,14 +9,28 @@ import java.time.LocalTime;
 import java.util.Locale;
 import java.util.Objects;
 
+/**
+ * The task type Deadline.
+ */
 public class Deadline extends Task {
     private final LocalDateTime by;
 
+    /**
+     * Instantiates a new Deadline.
+     *
+     * @param description the description of the deadline
+     * @param by          the time of the deadline
+     */
     public Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;
     }
 
+    /**
+     * Gets time of the deadline.
+     *
+     * @return the time of the deadline
+     */
     public LocalDateTime getBy() {
         return this.by;
     }

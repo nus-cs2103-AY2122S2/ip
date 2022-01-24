@@ -8,9 +8,17 @@ import Task.Task;
 
 import java.util.Objects;
 
+/**
+ * The type Unmark command.
+ */
 public class UnmarkCommand extends Command {
     private final int index;
 
+    /**
+     * Instantiates a new Unmark command.
+     *
+     * @param index the index of task to be unmarked
+     */
     public UnmarkCommand(int index) {
         this.index = index;
     }
@@ -26,6 +34,9 @@ public class UnmarkCommand extends Command {
         }
     }
 
+    /**
+     * The program is not yet exited.
+     */
     public boolean isExit() {
         return false;
     }

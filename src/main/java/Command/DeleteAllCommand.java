@@ -7,6 +7,9 @@ import DukeUtils.Ui;
 
 import java.util.Objects;
 
+/**
+ * The type Delete all command.
+ */
 public class DeleteAllCommand extends Command {
 
     public void execute(TaskList taskList, Ui ui, Storage storage) throws CortanaException {
@@ -20,6 +23,9 @@ public class DeleteAllCommand extends Command {
         }
     }
 
+    /**
+     * The program is not yet exited.
+     */
     public boolean isExit() {
         return false;
     }

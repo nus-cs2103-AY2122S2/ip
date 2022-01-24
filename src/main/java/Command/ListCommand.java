@@ -5,6 +5,9 @@ import DukeUtils.TaskList;
 import DukeUtils.Ui;
 import Task.Task;
 
+/**
+ * The type List command.
+ */
 public class ListCommand extends Command {
 
     public void execute(TaskList taskList, Ui ui, Storage storage)  {
@@ -18,6 +21,9 @@ public class ListCommand extends Command {
         }
     }
 
+    /**
+     * The program is not yet exited.
+     */
     public boolean isExit() {
         return false;
     }
