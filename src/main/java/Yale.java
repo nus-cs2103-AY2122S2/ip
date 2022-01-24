@@ -4,6 +4,8 @@ import yale.task.Event;
 import yale.task.ToDo;
 
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.NoSuchFileException;
 import java.util.Scanner;
 
 public class Yale {
@@ -16,6 +18,7 @@ public class Yale {
         while (true) {
             String command = receiveInput(scanner);
             performAction(command, list);
+            writeActionTo("data/yale.txt", list);
             if (checkExit(command)) {
                 break;
             }
@@ -53,12 +56,6 @@ public class Yale {
             } else {
                 System.out.println("Here are the tasks in your list\n"
                         + list.listOut());
-                String file2 = "data/yale.txt";
-                try {
-                    FileWrite.writeToFile(file2, list.listOut() + System.lineSeparator() + "second line");
-                } catch (IOException e) {
-                    System.out.println("Something went wrong: " + e.getMessage());
-                }
             }
         }
         // Delete Feature
@@ -164,4 +161,20 @@ public class Yale {
     public static boolean checkExit(String input) {
         return input.equals("bye");
     }
+
+    public static void writeActionTo(String filePath, TaskList list) {
+        String file2 = filePath;
+        try {
+            FileWrite.writeToFile(file2, list.listOut());
+        }
+//        catch (FileAlreadyExistsException e) {
+//            System.out.println("Something went wrong: " + e.getMessage());
+//        } catch (NoSuchFileException e) {
+//            System.out.println("Something went wrong: " + e.getMessage());
+//        }
+        catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+    }
 }
+
