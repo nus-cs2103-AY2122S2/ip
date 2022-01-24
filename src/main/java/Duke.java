@@ -56,10 +56,10 @@ public class Duke {
 
     private static void init() {
         try {
-            taskList = TaskStoreSerializer.inflate();
+            taskList = Storage.load();
             taskList.registerListener(store -> {
                 try {
-                    TaskStoreSerializer.deflate(store);
+                    Storage.save(store);
                 } catch (DukeIOException ex) {
                     System.out.println("Warning: An error occurred while saving Task list");
                 }
