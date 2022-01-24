@@ -1,19 +1,16 @@
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+/*
 
+ To be removed
 public class Duke {
-    /** Stores the messages sent by the user. */
+
+    /** Stores the messages sent by the user.
     private static List<Task> messages = new ArrayList<>();
 
     /**
      * Displays a message based on the user input.
      * @param msg The message inputted by the user.
      * @throws DukeException if messages are invalid.
-     */
+
     public static void respondToMsg(String msg) throws DukeException {
         // Obtain 1st word
         String[] command = msg.trim().split(" ");
@@ -143,3 +140,4 @@ public class Duke {
         userInput.close();
     }
 }
+ */

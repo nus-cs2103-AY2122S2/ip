@@ -14,13 +14,24 @@ public class Chi {
     /**
      * Stores the messages sent by the user.
      */
+    private Storage storage;
+    private TaskList taskList;
     private List<Task> messages;
     private static final String DATA_FOLDER = "data/";
     private static final String DATA_FILE = "data/tasks.txt";
-    private static final String DATA_TEMP = "data/tasks1.txt";
     private File dataFile;
 
-    public Chi() {
+    public Chi(String filepath) {
+        this.storage = new Storage(filepath);
+        try {
+            this.taskList = new TaskList(storage.load());
+        } catch (ChiException e) {
+            // print error for file not found
+            this.taskList = new TaskList();
+        } catch (IOException e) {
+            // print error for IO problems
+        }
+        // Delete this
         this.messages = new ArrayList<>();
         // Make sure data file exists in directory
     }
