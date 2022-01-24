@@ -20,34 +20,34 @@ public class Duke {
             try {
                 String[] tokens = input.split(" ");
                 switch (Command.valueOf(tokens[0].trim().toUpperCase())) {
-                    case BYE:
-                        processNext = false;
-                        echo("Goodbye. J.A.R.V.I.S. systems powering off...");
-                        return;
-                    case LIST:
-                        printTasks();
-                        break;
-                    case MARK:
-                        markAsDone(tokens);
-                        break;
-                    case UNMARK:
-                        markAsUndone(tokens);
-                        break;
-                    case DELETE:
-                        delete(tokens);
-                        break;
-                    case TODO:
-                        addTodo(input);
-                        break;
-                    case DEADLINE:
-                        addDeadline(input);
-                        break;
-                    case EVENT:
-                        addEvent(input);
-                        break;
-                    default:
-                        echo("I'm afraid I don't understand your request.");
-                        break;
+                case BYE:
+                    processNext = false;
+                    echo("Goodbye. J.A.R.V.I.S. systems powering off...");
+                    return;
+                case LIST:
+                    printTasks();
+                    break;
+                case MARK:
+                    markAsDone(tokens);
+                    break;
+                case UNMARK:
+                    markAsUndone(tokens);
+                    break;
+                case DELETE:
+                    delete(tokens);
+                    break;
+                case TODO:
+                    addTodo(input);
+                    break;
+                case DEADLINE:
+                    addDeadline(input);
+                    break;
+                case EVENT:
+                    addEvent(input);
+                    break;
+                default:
+                    echo("I'm afraid I don't understand your request.");
+                    break;
                 }
             } catch (DukeException de) {
                 echo("I'm afraid I wasn't able to fulfill your request.\n" + de.getMessage());
