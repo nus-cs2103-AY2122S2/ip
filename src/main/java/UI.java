@@ -15,18 +15,15 @@ public class UI {
         String msg = sn.nextLine();
         while (!msg.equals("bye")) {
             try {
-                System.out.println(prs.processMessage(msg,tl));
+                System.out.println(prs.processMessage(msg,tl,sge));
             } catch (ChiException e) {
                 this.printErrorMsg(e.getMessage());
+            } catch (IOException e) {
+                this.printErrorMsg("Something went wrong while storing task to file nyaan!");
             }
             msg = sn.nextLine();
         }
         sn.close();
-        try {
-            sge.store(tl);
-        } catch (IOException e) {
-            this.printErrorMsg("Something went wrong while storing tasks to file nyaan!");
-        }
     }
 
     public void printGoodbye() {

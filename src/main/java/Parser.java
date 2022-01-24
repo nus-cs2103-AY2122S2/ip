@@ -1,26 +1,62 @@
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Parser {
     public Parser() {
         // Maybe something in the future
     }
 
-    public String processMessage(String msg, TaskList tl) throws ChiException {
+    private int processNumberMsg(String msg, int size) throws ChiException {
+        String refine = msg.trim();
+        if (refine.split(" ").length > 1) {
+            throw new ChiException("Too many words nyan!");
+        } else {
+            try {
+             int index = Integer.parseInt(refine);
+             if (index > size) {
+                 throw new ChiException("Too big index nyan1")
+             } else if (index < 0) {
+                 throw new ChiException("No negative indexes nyan!");
+             }
+             return index - 1;
+            } catch (NumberFormatException e) {
+                throw new ChiException("This is not a number nyan!");
+            }
+        }
+    }
+
+    private boolean processDeadlineMsg(String msg) throws ChiException {
+        String refine = msg.trim();
+        String[] refineMore = refine.split("by");
+        if (refineMore.length > 2) {
+            throw new ChiException("Too many /by-s nyannn!!!");
+        } else {
+            try {
+                LocalDate d = LocalDate.parse(refineMore[1].trim().split(" ")[0].trim(),
+                        DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                if (refineMore[1].trim().split(" ").length == 2) {
+                    LocalTime t = LocalTime.parse(refineMore[1].trim().split(" ")[1].trim(),
+                            DateTimeFormatter.ofPattern("HH:mm"));
+
+                }
+            } catch (DateTimeParseException e) {
+                return false;
+            }
+            return true;
+        }
+    }
+
+    private String processEventMsg(String msg) {
+
+    }
+    public String processMessage(String msg, TaskList tl, Storage sge) throws ChiException, IOException {
         // Obtain 1st word
         String[] command = msg.trim().split(" ");
         if (command.length == 1) {
             if (command[0].equals("list")) {
-                /*
-                System.out.println("Here are your list items nyan~:");
-                int i = 1;
-                for (Task t : tl.getTasks()) {
-                    // Print task and its status
-                    System.out.printf("%d. %s\n", i, t);
-                    ++i;
-                }
-                 */
                 return tl.getTasksMsg();
             }
             // Unknown message, or command lacks task
@@ -30,27 +66,26 @@ public class Parser {
             switch (command[0].toLowerCase()) {
                 case "mark":
                     // Retrieve the task from the list
-                    Task doneTask = tl.getTask(Integer.parseInt(command[1]) - 1);
+                    int processed = processNumberMsg(msg.substring(4), tl.getSize());
+                    Task doneTask = tl.getTask(processed);
                     // Mark as done
                     doneTask.markAsDone();
-                    // Print completion message
-                    System.out.printf("Great job nyan~!\n%s\n", doneTask);
-                    break;
+                    sge.updateFile(doneTask, tl, "mark");
+                    return String.format("Great job nyan~!\n%s\n", doneTask);
                 case "unmark":
-                    Task doneTask1 = tl.getTask(Integer.parseInt(command[1]) - 1);
+                    int processed = processNumberMsg(msg.substring(6), tl.getSize());
+                    Task doneTask1 = tl.getTask(processed);
                     doneTask1.markAsUndone();
-                    // Print undo message
-                    System.out.printf("Let's get it done next time nyan~!\n%s\n", doneTask1);
-                    break;
+                    sge.updateFile(doneTask1, tl, "unmark");
+                    return String.format("Let's get it done next time nyan~!\n%s\n", doneTask1);
                 case "todo":
                     // Obtain the ToDo
                     Task newTask = new Todo(msg.substring(4).trim(), false);
                     // Add task to list
                     tl.addTask(newTask);
-                    System.out.printf("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n",
+                    sge.updateFile(newTask, tl, "todo");
+                    return String.format("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n",
                             newTask, tl.getSize());
-
-                    break;
                 case "deadline":
                     // Separate task and deadline
                     String[] content = msg.substring(8).split("/by");
@@ -71,10 +106,9 @@ public class Parser {
                         newTask1 = new Deadline(content[0].trim(), d, false);
                     }
                     tl.addTask(newTask1);
-                    System.out.printf("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n",
+                    sge.updateFile(newTask1, tl, "deadline");
+                    return String.format("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n",
                             newTask1, tl.getSize());
-
-                    break;
                 case "event":
                     // Separate task and timing
                     String[] content1 = msg.substring(5).split("/at");
@@ -97,20 +131,20 @@ public class Parser {
                         newTask2 = new Event(content1[0].trim(), ds, false);
                     }
                     tl.addTask(newTask2);
-                    System.out.printf("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n",
+                    sge.updateFile(newTask2, tl, "event");
+                    return String.format("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n",
                             newTask2, tl.getSize());
-                    break;
                 case "delete":
-                    Task toDelete = tl.getTask(Integer.parseInt(command[1]) - 1);
+                    int processed = processNumberMsg(msg.substring(6), tl.getSize());
+                    Task toDelete = tl.getTask(processed);
                     tl.deleteTask(toDelete);
-                    System.out.printf("Chi-san has removed task:\n %s\nYou now have %d tasks nyan~!\n",
+                    sge.updateFile(toDelete, tl, "delete");
+                    return String.format("Chi-san has removed task:\n %s\nYou now have %d tasks nyan~!\n",
                             toDelete, tl.getSize());
-                    break;
                 default:
                     // Some message which does not start with a keyword
                     throw new ChiException(msg);
             }
         }
-        return "";
     }
 }

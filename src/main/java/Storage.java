@@ -68,10 +68,24 @@ public class Storage {
 
     }
 
-    public void store(TaskList tl) throws IOException {
-        FileWriter fw = new FileWriter(dataFilePath);
-        fw.write(tl.getTaskStore());
-        fw.close();
+    public void updateFile(Task task, TaskList tl, String type) throws IOException {
+        FileWriter fw;
+        switch(type) {
+            case "mark":
+            case "unmark":
+            case "delete":
+                fw = new FileWriter(dataFilePath);
+                fw.write(tl.getTaskStore());
+                fw.close();
+                break;
+            case "event":
+            case "deadline":
+            case "todo":
+                fw = new FileWriter(dataFilePath, true);
+                fw.write(task.writeToFile());
+                fw.close();
+                break;
+        }
     }
 
 }

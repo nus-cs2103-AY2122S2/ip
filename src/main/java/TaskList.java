@@ -19,7 +19,7 @@ public class TaskList {
     public void deleteTask(Task t) {
         this.tasks.remove(t);
     }
-    
+
     public String getTasksMsg() {
         StringBuilder s = new StringBuilder();
         for (Task t: this.tasks) {
