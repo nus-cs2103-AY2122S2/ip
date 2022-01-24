@@ -1,6 +1,6 @@
 package tasks;
 
-import duke.*;
+import duke.DukeException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -45,9 +45,21 @@ public class TaskList {
     public TaskList(){
         tasks = new ArrayList<>();
     }
+
+    /**
+     * Returns the user's current list of tasks.
+     *
+     * @return List of Tasks.
+     */
     public List<Task> getTasks(){
         return this.tasks;
     }
+
+    /**
+     * Adds a task to the current list of tasks.
+     *
+     * @param t The task to be added.
+     */
     public void addTask(Task t){
         tasks.add(t);
         System.out.println("Woofkay, I have added this task: \n " + t);

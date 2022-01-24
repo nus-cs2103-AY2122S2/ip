@@ -24,6 +24,11 @@ public class Task {
         return this.description;
     }
 
+    /**
+     * Returns the string representation of the task.
+     *
+     * @return A description of the task including its type, status, date and time.
+     */
     @Override
     public String toString(){
         return "[" + getStatusIcon() +"] " + description;

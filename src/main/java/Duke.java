@@ -1,7 +1,15 @@
-import duke.*;
-import tasks.*;
+import duke.DukeException;
+import duke.Parser;
+import duke.Storage;
+import duke.Ui;
 
-import java.io.*;
+import tasks.Deadline;
+import tasks.TaskList;
+import tasks.Task;
+import tasks.Event;
+import tasks.Todo;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,6 +18,11 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Initialises Duke the chat-bot along with its necessary classes and files.
+     *
+     * @param filePath Path directory of the saved file containing the list of tasks.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -25,6 +38,12 @@ public class Duke {
         new Duke("Data/tasks.txt").run();
     }
 
+    /**
+     * Runs Duke the chatbot and interacts with the user based on user input.
+     *
+     * @throws DukeException
+     * @throws IOException
+     */
     public void run() throws DukeException, IOException {
         ui.printWelcomeMessage();
         Scanner sc = new Scanner(System.in);

@@ -1,6 +1,7 @@
 package duke;
 
-import tasks.*;
+import tasks.TaskList;
+import tasks.Task;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -19,16 +20,34 @@ public class Storage implements StorageInterface{
         }
     }
 
+    /**
+     * Loads the saved file of tasks list from directory.
+     *
+     * @return File of saved tasks list.
+     */
     public File load(){
         return f;
     }
 
+    /**
+     * Writes data to file.
+     *
+     * @param filePath The directory path containing the file.
+     * @param textToAdd Text to be added to the file.
+     * @throws IOException If the file could not be written.
+     */
     public void writeToFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath, true);
         fw.write(textToAdd);
         fw.close();
     }
 
+    /**
+     * Saves the current list of tasks to the hard disk before chat-bot exits.
+     *
+     * @param taskList The current list of tasks.
+     * @throws IOException If the file could not be written.
+     */
     public void save(TaskList taskList) throws IOException {
         try{
             Files.delete(Path.of("Data/tasks.txt"));

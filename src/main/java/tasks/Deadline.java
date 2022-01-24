@@ -1,6 +1,6 @@
 package tasks;
 
-import duke.*;
+import duke.DukeException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -10,6 +10,12 @@ public class Deadline extends Task{
     LocalDate date;
     String time;
 
+    /**
+     * Creates a Deadline task and sets its date and time accordingly from user input.
+     *
+     * @param description Description of the deadline task generated from user input.
+     * @throws DukeException, If the input format is not followed or there are missing information.
+     */
     public Deadline(String description) throws DukeException {
         super(description);
         try {
@@ -24,6 +30,14 @@ public class Deadline extends Task{
             throw new DukeException();
         }
     }
+
+    /**
+     * Creates a Deadline task from previously saved list of tasks during initialisation of chat-bot.
+     *
+     * @param saveFormat Data saved in tasks list file.
+     * @param blean A Boolean value set to True to differentiate the creation of the task from saved list and user input.
+     * @throws DukeException If the format is not followed or there are missing information.
+     */
     public Deadline(String saveFormat, boolean blean) throws DukeException {
         super(saveFormat);
         try {
@@ -40,6 +54,11 @@ public class Deadline extends Task{
         }
     }
 
+    /**
+     * Returns the string representation of the Deadline task.
+     *
+     * @return A description of the task including its type, status, date and time.
+     */
     @Override
     public String toString() {
         return  "D | " + super.toString() + "BY: " + date.format(DateTimeFormatter.ofPattern("MMM d YYYY")) +
