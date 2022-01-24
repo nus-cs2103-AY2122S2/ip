@@ -11,8 +11,6 @@ import java.time.LocalDate;
  * @version 1.7
  */
 public class Sana {
-    /** The border for Sana's replies */
-    private static final String border = "_____________________________________________";
 
     /** userTasks stores the commands given to Sana from the user */
     private LinkedList<Task> userTasks;
@@ -33,12 +31,18 @@ public class Sana {
     }
 
     /**
-     * This method prints to system IO Sana's greeting
+     * This method runs Sana
      */
-    public void greet() {
-        border();
-        System.out.println("Hi! I'm BEEEEEEEG\nWhats up?");
-        border();
+    public void run() {
+        ui.greet();
+
+        while (true) {
+            String input = ui.nextLine();
+            commandParser(input);
+            if (input.equals("bye")) {
+                break;
+            }
+        }
     }
 
     /**
@@ -47,10 +51,11 @@ public class Sana {
      * @param userCommand   the user command
      */
     public void commandParser(String userCommand) {
-        border();
+        ui.border();
         try {
             if (userCommand.equals("bye")) {
-                bye();
+                ui.closeScanner();
+                ui.bye();
 
             } else if (userCommand.equals("list")) {
                 list();
@@ -109,7 +114,7 @@ public class Sana {
             System.out.println(e);
         }
         taskMem.updateMemory(userTasks);
-        border();
+        ui.border();
     }
 
     /**
@@ -124,7 +129,7 @@ public class Sana {
         System.out.println("Yay! I'll take this out!");
         System.out.println(userTasks.get(taskIndex));
         userTasks.remove(taskIndex);
-        taskNumberText();
+        ui.taskNumberText(userTasks.size());
     }
 
     /**
@@ -137,11 +142,11 @@ public class Sana {
         if (deadlineName.isBlank()) {
             throw new IncompleteCommandException();
         }
-        addTaskText();
+        ui.addTaskText();
         Deadline newDeadline = new Deadline(deadlineName, deadlineDate);
         userTasks.add(newDeadline);
         System.out.println(newDeadline);
-        taskNumberText();
+        ui.taskNumberText(userTasks.size());
     }
 
     /**
@@ -154,11 +159,11 @@ public class Sana {
         if (eventName.isBlank()) {
             throw new IncompleteCommandException();
         }
-        addTaskText();
+        ui.addTaskText();
         Event newEvent = new Event(eventName, eventTime);
         userTasks.add(newEvent);
         System.out.println(newEvent);
-        taskNumberText();
+        ui.taskNumberText(userTasks.size());
     }
 
     /**
@@ -170,11 +175,11 @@ public class Sana {
         if (taskName.isBlank()) {
             throw new IncompleteCommandException();
         }
-        addTaskText();
+        ui.addTaskText();
         ToDo newTodo = new ToDo(taskName);
         userTasks.add(newTodo);
         System.out.println(newTodo);
-        taskNumberText();
+        ui.taskNumberText(userTasks.size());
     }
 
     /**
@@ -209,46 +214,9 @@ public class Sana {
         }
     }
 
-    /**
-     * This method prints to system IO how many tasks in user tasks
-     */
-    private void taskNumberText() {
-        String taskAmt = Integer.valueOf(userTasks.size()).toString();
-        System.out.println("You have " + taskAmt + " things here. Time to get working!");
-    }
-
-    /**
-     * This method prints to system IO Sana's add task text
-     */
-    private void addTaskText() {
-        System.out.println("I've added your task!");
-    }
-
-    /**
-     * This method prints to system IO Sana's bye
-     */
-    private void bye() {
-        System.out.println("See you next time!");
-    }
-
-    /**
-     * This method prints the border
-     */
-    private void border() {
-        System.out.println(border);
-    }
-
     public static void main(String[] args) {
         Sana sana = new Sana();
-        sana.greet();
+        sana.run();
 
-        Scanner userInput = new Scanner(System.in);
-        while (true) {
-            String input = userInput.nextLine();
-            sana.commandParser(input);
-            if (input.equals("bye")) {
-                break;
-            }
-        }
     }
 }
