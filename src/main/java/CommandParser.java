@@ -13,7 +13,7 @@ public class CommandParser {
      * Semantics: command-name arg [[/key kwargs] ... ]
      * Regex: command-name (.*) (/([.+]) (.*))*
      */
-    private static final String[][] commands = {
+    private static final String[][] COMMANDS = {
             { "bye", "bye", "bye" },
             { "list", "list", "list" },
             { "mark", "mark (\\d+)", "mark <task number>" },
@@ -36,7 +36,7 @@ public class CommandParser {
      */
     private static Command parseCommand(String cmd) throws DukeException {
         String cmdName = cmd.split(" ")[0];
-        for (String[] command : CommandParser.commands) {
+        for (String[] command : CommandParser.COMMANDS) {
             // Not the target command
             if (!cmdName.equals(command[0])) continue;
 

@@ -3,20 +3,27 @@ import java.util.List;
 
 public class TaskList {
     // Main data structure to store Task objects
-    private List<Task> list = new ArrayList<>();
+    private List<Task> tasks = new ArrayList<>();
 
     /**
-     * Add a Task to existing TaskList.
+     * Adds a Task to existing TaskList.
      *
      * @param task Task to add
      */
     public void addTask(Task task) {
-        this.list.add(task);
+        this.tasks.add(task);
     }
 
+    /**
+     * Removes a Task from the existing list.
+     *
+     * @param index Index of Task to remove
+     * @return The removed Task
+     * @throws DukeException Index out of range
+     */
     public Task removeTask(int index) throws DukeException {
         checkIndex(index);
-        return this.list.remove(index);
+        return this.tasks.remove(index);
     }
 
     /**
@@ -44,7 +51,7 @@ public class TaskList {
      */
     public Boolean mark(int index) throws DukeException {
         checkIndex(index);
-        Task target = this.list.get(index);
+        Task target = this.tasks.get(index);
         return target.mark();
     }
 
@@ -57,7 +64,7 @@ public class TaskList {
      */
     public Boolean unmark(int index) throws DukeException {
         checkIndex(index);
-        Task target = this.list.get(index);
+        Task target = this.tasks.get(index);
         return target.unmark();
     }
 
@@ -70,7 +77,7 @@ public class TaskList {
      */
     public Task getTask(int index) throws DukeException {
         checkIndex(index);
-        return this.list.get(index);
+        return this.tasks.get(index);
     }
 
     /**
@@ -78,7 +85,7 @@ public class TaskList {
      * @return Size of TaskList
      */
     public int size() {
-        return this.list.size();
+        return this.tasks.size();
     }
 
     @Override
@@ -97,7 +104,8 @@ public class TaskList {
                         task_idx + 1,
                         current.nameWithStatus());
             } catch (DukeException e) {
-                // This won't happen
+                // This won't happen, given the bounds of the for-loop
+                assert false;
             }
 
             if (task_idx != this.size() - 1) result += "\n";

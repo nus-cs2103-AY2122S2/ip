@@ -1,30 +1,25 @@
 import java.util.Scanner;
 
 class Color {
-    public static final String none = "\033[m";
+    public static final String NONE = "\033[m";
 
-    // Foreground colors
-    public static final String green  = "\033[92m";
-    public static final String red  = "\033[31m";
-    public static final String purple = "\033[35m";
-
-    // Background colors
-    public static final String bgBlack = "\033[40m";
-    public static final String bgWhite = "\033[107m";
+    public static final String GREEN = "\033[92m";
+    public static final String RED = "\033[31m";
+    public static final String PURPLE = "\033[35m";
 }
 
 public class Duke {
     private static void printBanner() {
-        String logo = "███╗░░██╗██╗██╗░░██╗██╗░░██╗██╗\n" +
-                      "████╗░██║██║██║░██╔╝██║░██╔╝██║\n" +
-                      "██╔██╗██║██║█████═╝░█████═╝░██║\n" +
-                      "██║╚████║██║██╔═██╗░██╔═██╗░██║\n" +
-                      "██║░╚███║██║██║░╚██╗██║░╚██╗██║\n" +
-                      "╚═╝░░╚══╝╚═╝╚═╝░░╚═╝╚═╝░░╚═╝╚═╝";
+        String logo = "███╗░░██╗██╗██╗░░██╗██╗░░██╗██╗　　　　 　∧_∧\n"
+                    + "████╗░██║██║██║░██╔╝██║░██╔╝██║　　　　 ( ﾟωﾟ)\n"
+                    + "██╔██╗██║██║█████═╝░█████═╝░██║　　　　 /ｕ ｕ\n"
+                    + "██║╚████║██║██╔═██╗░██╔═██╗░██║　　　　/ / /\n"
+                    + "██║░╚███║██║██║░╚██╗██║░╚██╗██║　　　 (ノノ\n"
+                    + "╚═╝░░╚══╝╚═╝╚═╝░░╚═╝╚═╝░░╚═╝╚═╝　　　彡\n";
 
         String description = "Your Personal Assistant Chatbot that helps you keep track of the important things in life";
 
-        System.out.println(Color.purple + logo + Color.none);
+        System.out.println(Color.PURPLE + logo + Color.NONE);
         System.out.println(description);
     }
 
@@ -38,15 +33,16 @@ public class Duke {
      */
     private static void say(String message) {
         // Set color theme for Nikki's text
-        System.out.println(Color.green);
+        String defaultColor = Color.GREEN;
+        System.out.println(defaultColor);
 
         System.out.println("<<<<<<<<");
         System.out.println(message);
         // Default back to green to allow different colored messages
-        System.out.println(Color.green + ">>>>>>>>");
+        System.out.println(defaultColor + ">>>>>>>>");
 
         // Reset to default
-        System.out.println(Color.none);
+        System.out.println(Color.NONE);
     }
 
     /**
@@ -55,7 +51,7 @@ public class Duke {
      * @param message Error message to print
      */
     private static void error(String message) {
-        say(Color.red + message);
+        say(Color.RED + message);
     }
 
     /**
@@ -71,69 +67,76 @@ public class Duke {
                 task.nameWithStatus(), tasks.size()));
     }
 
+    /**
+     * Perform certain behaviours according to the command passed.
+     *
+     * @param action Command from user
+     * @throws DukeException General exception for invalid user command: invalid command, invalid arguments, etc.
+     */
     private static void handleAction(Command action) throws DukeException {
         switch (action.getName()) {
-            case "bye":
-                say("Bye! See you later!");
-                System.exit(0);
+        case "bye":
+            say("Bye! See you later!");
+            System.exit(0);
+            break;
 
-            case "list":
-                say("[*] Here are the tasks in your list:\n" +
-                    tasks.toString());
-                break;
+        case "list":
+            say("[*] Here are the tasks in your list:\n" +
+                tasks.toString());
+            break;
 
-            case "mark":
-                // User input is 1-indexed, list uses 0-index
-                int markIdx = Integer.parseInt(action.getArgs()) - 1;
-                tasks.mark(markIdx);
-                say("[*] Marked the following task as done:\n" +
-                    "\t" + tasks.getTask(markIdx).nameWithStatus());
-                break;
+        case "mark":
+            // User input is 1-indexed, list uses 0-index
+            int markIdx = Integer.parseInt(action.getArgs()) - 1;
+            tasks.mark(markIdx);
+            say("[*] Marked the following task as done:\n" +
+                "\t" + tasks.getTask(markIdx).nameWithStatus());
+            break;
 
-            case "unmark":
-                // User input is 1-indexed, list uses 0-index
-                int unmarkIdx = Integer.parseInt(action.getArgs()) - 1;
-                tasks.unmark(unmarkIdx);
-                say("[*] Marked the following task as not done:\n" +
-                    "\t" + tasks.getTask(unmarkIdx).nameWithStatus());
-                break;
+        case "unmark":
+            // User input is 1-indexed, list uses 0-index
+            int unmarkIdx = Integer.parseInt(action.getArgs()) - 1;
+            tasks.unmark(unmarkIdx);
+            say("[*] Marked the following task as not done:\n" +
+                "\t" + tasks.getTask(unmarkIdx).nameWithStatus());
+            break;
 
-            case "delete":
-                // User input is 1-indexed, list uses 0-index
-                int dltIdx = Integer.parseInt(action.getArgs()) - 1;
-                Task deletedTask = tasks.removeTask(dltIdx);
-                say(String.format(
-                        "[-] Removed this task:\n" +
-                                "\t%s\n" +
-                                "Now you have %d tasks in the list.",
-                        deletedTask.nameWithStatus(), tasks.size()));
-                break;
+        case "delete":
+            // User input is 1-indexed, list uses 0-index
+            int dltIdx = Integer.parseInt(action.getArgs()) - 1;
+            Task deletedTask = tasks.removeTask(dltIdx);
+            say(String.format(
+                    "[-] Removed this task:\n" +
+                            "\t%s\n" +
+                            "Now you have %d tasks in the list.",
+                    deletedTask.nameWithStatus(), tasks.size()));
+            break;
 
-            case "todo":
-                String todoName = action.getArgs();
-                Todo todo = new Todo(todoName);
-                tasks.addTask(todo);
-                logNewTask(todo);
-                break;
+        case "todo":
+            String todoName = action.getArgs();
+            Todo todo = new Todo(todoName);
+            tasks.addTask(todo);
+            logNewTask(todo);
+            break;
 
-            case "deadline":
-                String deadlineName = action.getArgs();
-                String deadlineDate = action.getKwargs().get("by");
-                Deadline deadline = new Deadline(deadlineName, deadlineDate);
-                tasks.addTask(deadline);
-                logNewTask(deadline);
-                break;
+        case "deadline":
+            String deadlineName = action.getArgs();
+            String deadlineDate = action.getKwargs().get("by");
+            Deadline deadline = new Deadline(deadlineName, deadlineDate);
+            tasks.addTask(deadline);
+            logNewTask(deadline);
+            break;
 
-            case "event":
-                String eventName = action.getArgs();
-                String eventDate = action.getKwargs().get("at");
-                Event event = new Event(eventName, eventDate);
-                tasks.addTask(event);
-                logNewTask(event);
-                break;
+        case "event":
+            String eventName = action.getArgs();
+            String eventDate = action.getKwargs().get("at");
+            Event event = new Event(eventName, eventDate);
+            tasks.addTask(event);
+            logNewTask(event);
+            break;
 
-            default:
-                throw new DukeException("I don't know what to do");
+        default:
+            throw new DukeException("I don't know what to do");
 
         }
     }
