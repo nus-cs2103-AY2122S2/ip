@@ -5,14 +5,14 @@
 /**
  * The ToDo class which inherits from Task.
  */
-public class ToDo extends Task {
+public class ToDo extends Task{
 
     /**
      * The constructor for ToDo class
      * @param description The task sent by the users
      */
-    public ToDo(String description, String type) {
-        super(description, type);
+    public ToDo(String description) {
+        super(description);
     }
 
     @Override
