@@ -1,4 +1,4 @@
-package main.java;
+package duke.java;
 
 // Credits: partial solution from
 // https://nus-cs2103-ay2122s2.github.io/website/schedule/week2/project.html

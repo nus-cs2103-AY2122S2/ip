@@ -1,4 +1,4 @@
-package main.java;
+package duke.java;
 import java.util.ArrayList;
 
 public class ListCommand extends Command {

@@ -1,18 +1,18 @@
-package main.java;
-
+package duke.java;
 import java.io.IOException;
-import java.util.ArrayList;
 
-public class DeleteCommand extends Command {
+public class UnmarkCommand extends Command {
 
-    int taskToDelete;
+    private int taskToUnmark;
 
-    public DeleteCommand(int taskToDelete) {
-        this.taskToDelete = taskToDelete;
+    public UnmarkCommand(int taskToMark) {
+        this.taskToUnmark = taskToUnmark;
     }
+
+    @Override
     public void execute(TaskList tasks,Ui ui, Storage storage) {
-        ui.showRemoveTask(tasks.getTask(taskToDelete), tasks.size() - 1);
-        tasks.delete(taskToDelete);
+        tasks.unmark(taskToUnmark);
+        ui.showUnmarkTask(tasks.getTask(taskToUnmark));
         try {
             storage.writeToFile(tasks.getTaskArr());
         } catch (IOException e) {

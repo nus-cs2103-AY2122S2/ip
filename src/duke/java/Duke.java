@@ -1,8 +1,4 @@
-import main.java.TaskList;
-import main.java.Storage;
-import main.java.Ui;
-import main.java.Parser;
-import main.java.Command;
+package duke.java;
 
 import java.io.IOException;
 

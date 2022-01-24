@@ -1,6 +1,4 @@
-package main.java;
-
-import java.util.ArrayList;
+package duke.java;
 
 public class ExitCommand extends Command{
 
