@@ -46,6 +46,13 @@ public class Task {
         System.out.println(this);
     }
 
+    /**
+     * Used for setting task as done when there are previous data
+     */
+    public void presetDone() {
+        this.isDone = true;
+    }
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
