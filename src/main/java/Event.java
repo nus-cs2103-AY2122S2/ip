@@ -1,13 +1,17 @@
-public class Event extends Task {
-	protected String details;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-	public Event(String description, String details) {
+public class Event extends Task {
+	protected LocalDateTime dateTime;
+
+	public Event(String description, LocalDateTime dateTime) {
 		super(description);
-		this.details = details;
+		this.dateTime = dateTime;
 	}
 
 	@Override
 	public String toString() {
-		return "E " + super.toString() + " | ON: " + this.details;
+		return "E " + super.toString() + " | AT: " + this.dateTime.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy " +
+				"HH:mm"));
 	}
 }

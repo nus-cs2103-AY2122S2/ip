@@ -2,10 +2,15 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+<<<<<<< HEAD
 import java.nio.file.Files;
 import java.nio.file.Path;
 
 import java.nio.file.Paths;
+=======
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+>>>>>>> branch-Level-8
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -102,16 +107,31 @@ public class Doge {
         System.out.println(output);
     }
 
+    public static LocalDateTime getDateTime(String input) throws DogeException {
+        String[] temp = input.split(" ");
+        String[] date = temp[0].split("-");
+        int time = Integer.parseInt(temp[1]);
+
+        try {
+            return LocalDateTime.of(Integer.parseInt(date[0]), Integer.parseInt(date[1]),
+                    Integer.parseInt(date[2]), time / 100, time % 100);
+        } catch (DateTimeException e) {
+           throw new DogeException("Are you lacking common sense?" + e.getMessage());
+        }
+    }
+
     public static void deadline(String input) throws DogeException {
         // Adding Deadline
         String[] deadline = input.split("/");
         String description = deadline[0].trim();
+
         if (description.isEmpty()) {
             throw new DogeException("Is it even possible to have a deadline for NOTHING?");
         } else if (deadline.length == 1) {
             throw new DogeException("Is it even possible to have a deadline with no END DATE?");
         } else {
-            Task currTask = new Deadline(description, deadline[1]);
+            LocalDateTime dateTime = getDateTime(deadline[1]);
+            Task currTask = new Deadline(description, dateTime);
             tasks.add(currTask);
             System.out.println(startLine);
             System.out.println("Stop troubling me, I've already added this task:");
@@ -146,7 +166,8 @@ public class Doge {
         } else if (event.length == 1) {
             throw new DogeException("Is it even possible to have an event with no DATE?");
         } else {
-            Task currTask = new Event(description, event[1]);
+            LocalDateTime dateTime = getDateTime(event[1]);
+            Task currTask = new Event(description, dateTime);
             tasks.add(currTask);
             System.out.println(startLine);
             System.out.println("Stop troubling me, I've already added this task:");
@@ -283,16 +304,14 @@ public class Doge {
                         temp.add(currTask);
                         break;
                     case "D":
-                        String deadline = curr[3].trim().substring(5).trim();
-                        currTask = new Deadline(curr[2].trim(), deadline);
+                        currTask = new Deadline(curr[2].trim(), getDateTime(curr[3].trim()));
                         if (taskStatus.equals("✓")) {
                             currTask.mark();
                         }
                         temp.add(currTask);
                         break;
                     case "E":
-                        String event = curr[3].trim().substring(4).trim();
-                        currTask = new Event(curr[2].trim(), event);
+                        currTask = new Event(curr[2].trim(), getDateTime(curr[3].trim()));
                         if (taskStatus.equals("✓")) {
                             currTask.mark();
                         }
