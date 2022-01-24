@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class TaskList {
     Task addTask(String[] inputArr, String taskType) throws IllegalArgumentException {
         Task newTask = null;
         String description;
-        String by;
+        LocalDate by;
         String at;
         switch (taskType) {
             case "todo":
@@ -45,7 +46,7 @@ public class TaskList {
                 break;
             case "deadline":
                 description = inputArr[0];
-                by = inputArr[1];
+                by = LocalDate.parse(inputArr[1]);
                 newTask = new Deadline(description, by);
                 break;
             case "event":
