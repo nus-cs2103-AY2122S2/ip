@@ -1,31 +1,50 @@
-package Taskmaster.Commands;
+package taskmaster.commands;
 
-import Taskmaster.Exception.DukeExceptions;
-import Taskmaster.util.TaskList;
-import Taskmaster.Task.Task;
-import Taskmaster.Task.TodoTask;
-import Taskmaster.Task.DeadlineTask;
-import Taskmaster.Task.EventTask;
+import taskmaster.exception.DukeExceptions;
+import taskmaster.util.TaskList;
+import taskmaster.task.Task;
+import taskmaster.task.TodoTask;
+import taskmaster.task.DeadlineTask;
+import taskmaster.task.EventTask;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class AddCommands extends Commands {
-    private TaskList tasklist;
+/*
+ * This class inherits from the Command class.
+ * It encapsulates Commands that adds a new Task.
+ */
 
-    public AddCommands(String command, TaskList tasklist) {
+public class AddCommands extends Commands {
+    /** TaskList contains all the task. **/
+    private final TaskList TASKLIST;
+
+    /**
+     * Constructor for AddCommands.
+     *
+     * @param command Type of command.
+     * @param taskList Task list that command is going to be added in.
+     */
+
+    public AddCommands(String command, TaskList taskList) {
         super(command);
-        this.tasklist = tasklist;
+        this.TASKLIST = taskList;
     }
 
+    /**
+     * Helper function to help parse the command.
+     * Extract the components of the command.
+     * Categorise it into either Todo Command or Deadline/Event task.
+     */
+
     private void parseCommand() {
-        String splitString[] = this.command.split(" ");
-        String firstWord = splitString[0];
+        String[] stringIntoParts = this.command.split(" ");
+        String firstWord = stringIntoParts[0];
 
         try {
             //Handle the case of having no second input
-            if (splitString.length == 1) {
+            if (stringIntoParts.length == 1) {
                 throw new DukeExceptions("What?! Task description cannot be empty."
                         + "Eg todo eat, deadline eat food /by 12pm,"
                         + "event concert /at 8pm\n");
@@ -44,14 +63,21 @@ public class AddCommands extends Commands {
 
     }
 
+    /**
+     * Helper function to help parse Deadline and Event task.
+     * Extract the components of the command.
+     * Categorise it into either Deadline Command or Event Command.
+     */
+
     private void parseDeadlineEventTasks() {
-        String splitString[] = this.command.split(" ");
-        String firstWord = splitString[0];
+        String[] stringIntoParts = this.command.split(" ");
+        String firstWord = stringIntoParts[0];
         String taskName = command.substring(command.indexOf(" "));
         try {
             //Handle the case of having no "/" to specify deadline or time of occurrences for deadline and event tasks
             if (!taskName.contains("/")) {
-                throw new DukeExceptions("Deadline and event tasks require /by and /at to specify the deadline or time of occurrence.\n"
+                throw new DukeExceptions("Deadline and event tasks require /by and "
+                        + "/at to specify the deadline or time of occurrence.\n"
                         + " Eg Deadline eat food /by 12pm, event concert /at 8pm");
             }
 
@@ -61,7 +87,6 @@ public class AddCommands extends Commands {
 
             DateTimeFormatter oldFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
             LocalDateTime dateTime = LocalDateTime.parse(oldDateTime, oldFormat);
-
 
             //String that states by ... or at....
             if (firstWord.equals("deadline")) {
@@ -82,48 +107,74 @@ public class AddCommands extends Commands {
 
         } catch (DukeExceptions e) {
             System.out.println(e.getMessage());
+
         } catch (NumberFormatException e) {
             System.out.println("ERROR! Expected Numbers for date and time!\n");
+
         } catch (DateTimeParseException e) {
             System.out.println("ERROR! Time or Date is in wrong format! 2/12/2019 1800\n");
         }
     }
 
+    /**
+     * Helper function to add a new TodoTask to the Task list.
+     *
+     * @param taskName Name of the To do Task.
+     */
+
     private void addTodoTask(String taskName) {
         TodoTask newTask = new TodoTask(taskName);
-        tasklist.add(newTask);
+        TASKLIST.add(newTask);
         printTask(newTask);
     }
+
+    /**
+     * Helper function to add a new Deadline Task to the Task list.
+     *
+     * @param taskName Name of the Deadline Task.
+     * @param dateTime Deadline the task is due by.
+     */
 
     private void addDeadlineTask(String taskName, LocalDateTime dateTime){
         DeadlineTask newTask = new DeadlineTask(taskName, dateTime);
-        tasklist.add(newTask);
+        TASKLIST.add(newTask);
         printTask(newTask);
     }
 
+    /**
+     * Helper function to add a new Event Task to the Task list.
+     *
+     * @param taskName Name of the Event Task.
+     * @param dateTime The date and time the task is occurring at.
+     */
+
     private void addEventTask(String taskName, LocalDateTime dateTime){
         EventTask newTask = new EventTask(taskName, dateTime);
-        tasklist.add(newTask);
+        TASKLIST.add(newTask);
         printTask(newTask);
     }
+
+    /**
+     * Helper function to print out the display message when
+     * the task has been successfully added.
+     *
+     * @param newTask Task that has been successfully added.
+     */
 
 
     private void printTask(Task newTask) {
         System.out.println("Quit ordering me around!");
         System.out.println("I've added this task to our list:");
         System.out.println("    " + newTask.toString());
-        System.out.println("Now you have " + tasklist.currentSize + " tasks in the list.\n");
+        System.out.println("Now you have " + TASKLIST.currentSize + " tasks in the list.\n");
     }
 
+    /**
+     * Execute Command.
+     */
 
     public void execute() {
         parseCommand();
     }
-
-
-
-
-
-
 
 }

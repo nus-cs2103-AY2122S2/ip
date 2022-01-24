@@ -1,64 +1,96 @@
-package Taskmaster.Commands;
+package taskmaster.commands;
 
-import Taskmaster.Exception.DukeExceptions;
-import Taskmaster.util.TaskList;
-import Taskmaster.Task.Task;
+import taskmaster.exception.DukeExceptions;
+import taskmaster.util.TaskList;
+import taskmaster.task.Task;
 
-
+/*
+ * This class inherits from the Command class.
+ * It encapsulates Commands that deletes a Task
+ * in the task list.
+ */
 
 public class DeleteCommands extends Commands {
-    private TaskList tasklist;
+    private final TaskList TASKLIST;
 
-    public DeleteCommands(String command, TaskList tasklist) {
+    /**
+     * Constructor for DeleteCommands
+     *
+     * @param command Type of command.
+     * @param taskList Task list that command is going to be added in.
+     */
+
+    public DeleteCommands(String command, TaskList taskList) {
         super(command);
-        this.tasklist = tasklist;
+        this.TASKLIST = taskList;
     }
 
+    /**
+     * Helper function to help parse the command.
+     * Extract the components of the command.
+     */
+
     private void parseCommand() {
-        String splitString[] = this.command.split(" ");
-        String firstWord = splitString[0];
+        String[] stringIntoParts = this.command.split(" ");
 
         try {
-            if (splitString.length == 1) {
+            if (stringIntoParts.length == 1) {
                 throw new DukeExceptions("What?! You are to enter only 2 inputs. Eg delete 1\n");
-            } else if (splitString.length > 2) {
+            } else if (stringIntoParts.length > 2) {
                 //Handle the case of having more than 2 inputs
                 throw new DukeExceptions("What?! You are to enter only 2 inputs. Eg delete 3\n");
             }
 
             //Handle error if the second input is not an integer
             //Gets the index of the task in the task list
-            int index = Integer.parseInt(splitString[1]);
+            int index = Integer.parseInt(stringIntoParts[1]);
+
             //If index is out of range, throw illegal argument exception
-            if (index <= 0 || index > tasklist.currentSize) {
-                throw new DukeExceptions("BRAT ! Your index is out of range! Number has to in the range of the list\n");
+            if (index <= 0 || index > TASKLIST.currentSize) {
+                throw new DukeExceptions("BRAT ! Your index is out of range! "
+                                            + "Number has to in the range of the list\n");
             }
 
             deleteTask(index);
 
-
         } catch (NumberFormatException nfe) {
             System.out.println("What? Second input has to be an integer! Eg mark 1, unmark 2\n");
-            //Out of task range is thrown if the second input is out of range
+
         } catch (DukeExceptions e) {
+            //Out of task range is thrown if the second input is out of range
             System.out.println(e.getMessage());
         }
-
     }
+
+    /**
+     * Helper function to delete task at the specified index
+     * in the task list.
+     *
+     * @param index Index of the task in the task list.
+     */
 
     private void deleteTask(int index) {
-        Task selectedTask = tasklist.get(index - 1);
+        Task selectedTask = TASKLIST.get(index - 1);
         System.out.println("YES! I've removed this task and soon I'll remove you as well!:\n");
         printTask(selectedTask);
-        tasklist.delete(index - 1);
-        System.out.println("Now you have " + tasklist.currentSize + " tasks in the list\n");
+        TASKLIST.delete(index - 1);
+        System.out.println("Now you have " + TASKLIST.currentSize + " tasks in the list\n");
     }
 
+    /**
+     * Helper function to print out the display message when
+     * the task has been successfully added.
+     *
+     * @param task Task that has been successfully added.
+     */
 
     private void printTask(Task task) {
         System.out.println("    " + task.toString());
-
     }
+
+    /**
+     * Execute Command.
+     */
 
     public void execute() {
         parseCommand();

@@ -1,13 +1,15 @@
-package Taskmaster.Exception;
+package taskmaster.exception;
 
 /*
- * DukeExceptions encapsulates exceptions in the Duke Program
+ * This class encapsulates DukeExceptions which handles
+ * exceptions in the Duke Program.
  */
 
 public class DukeExceptions extends Exception {
 
     /**
-     *  Constructor for a DukeExceptions exception object
+     * Constructor for the DukeExceptions class.
+     *
      * @param e - Error Message
      */
 

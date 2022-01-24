@@ -1,102 +1,107 @@
-package Taskmaster.util;
-import Taskmaster.Task.Task;
+package taskmaster.util;
+import taskmaster.task.Task;
 import java.util.ArrayList;
 
-//Author: Tan Ting Yu
-//Student Number: A218235J
 
 /*
- * Tasklist encapsulates the list of tasks the user adds
+ * This class encapsulates task list which contains the list of tasks
+ * that was added by the user.
  */
 
-
 public class TaskList {
-    private ArrayList<Task> tasklist;
+    /** Task list that contains all the tasks. **/
+    private final ArrayList<Task> taskList;
+
+    /** Size of the current task list. **/
     public int currentSize;
     
     /**
-     * Constructor for tasklist
+     * Constructor for taskList.
      */
 
     public TaskList() {
-        this.tasklist = new ArrayList<>();
+        this.taskList = new ArrayList<>();
         this.currentSize = 0;
     }
-    
+
     /**
-     * Returns the task object at the index specified
-     * @param index
-     * @return Task object at the index specified
+     * Returns the task at the specified index.
+     *
+     * @param index the index of the task in the task list
+     *              to be returned.
+     * @return task at the specified index in the task list.
      */
 
     public Task get(int index) {
-        return this.tasklist.get(index);
+        return this.taskList.get(index);
     }
 
     /**
-     * Adds the task into the existing tasklist
-     * @param Task object
+     * Adds the task into the existing taskList.
+     * @param task task to be added.
      */
 
     public void add(Task task) {
-        tasklist.add(task);
+        taskList.add(task);
         currentSize+=1;
-
     }
 
     /**
-     * Mark the task in the tasklist at the specified index
+     * Marks the task in the task list at the specified index.
      * 
-     * @param index index at which the task is to be marked
+     * @param index task at the index to be marked.
      */
 
     public void mark(int index) {
-        this.tasklist.get(index).markTask();
+        this.taskList.get(index).markTask();
     }
 
     /**
-     * Unmark the task in the tasklist at the specified index
-     * 
-     * @param index index at which the task is to be unmarked
+     * unmarks the task in the task list at the specified index.
+     *
+     * @param index task at the index to be unmarked.
      */
 
     public void unmark(int index) {
-        this.tasklist.get(index).unmarkTask();
+        this.taskList.get(index).unmarkTask();
     }
 
-     /**
-     * Delete the task in the tasklist at the specified index
-     * 
-     * @param index index at which the task is to be deleted
+    /**
+     * Deletes the task in the task list at the specified index.
+     *
+     * @param index task at the index to be deleted.
      */
 
     public void delete(int index) {
-        this.tasklist.remove(index);
+        this.taskList.remove(index);
         currentSize -= 1;
     }
 
-     /**
-     * Display the list
-     * 
+    /**
+     * Display all the tasks in the list.
      */
 
     public void list() {
-        //Handle the case of list being empty
         if (currentSize == 0) {
             System.out.println("    \nYou haven't added any task, brat!\n");
         } else {
-             //Display the task list
              System.out.println("    \nHere are the tasks in your list:");
              for (int i = 0; i < currentSize; i++)
-                 System.out.println("    " + (i + 1) + ". " + this.tasklist.get(i));
+                 System.out.println("    " + (i + 1) + ". " + this.taskList.get(i));
             System.out.println("\n");
          
         }
     }
 
+    /**
+     * Returns the string format of all the tasks in save format.
+     *
+     * @return the string format of all the tasks in save format.
+     */
+
     public String listTasksInTextFormat() {
         String result = "";
-        for (Task task:tasklist) {
+        for (Task task:taskList) {
             result = result.concat(task.saveToFileFormat());
             result = result.concat("\n");
         }
@@ -104,9 +109,16 @@ public class TaskList {
         return result.trim();
     }
 
+    /**
+     * Display all the Tasks that has the specified keyword
+     * in the Task Description/name.
+     *
+     * @param strToFind keyword to be present in the task description.
+     */
+
     public void find(String strToFind) {
         int count = 1;
-        for (Task task:tasklist) {
+        for (Task task:taskList) {
             if (task.containsKeyword(strToFind)) {
                 System.out.println(count + ". " + task);
                 count++;

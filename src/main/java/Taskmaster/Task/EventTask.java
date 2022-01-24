@@ -1,32 +1,35 @@
-package Taskmaster.Task;
+package taskmaster.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
-/*
- * Task encapsulates the information necessary for a user task
+/**
+ * This class encapsulates the information necessary for an Event task.
  */
 
-
 public class EventTask extends Task{
+    /** Time and Date of Event. **/
     LocalDateTime eventDate;
 
     /**
-     *  Constructor for a EventTask
+     * Constructor for an EventTask.
      *
-     * @param taskname - Name/Description of a EventTask Object
+     * @param taskName Name/Description of Task.
+     *
+     * @param eventDate Time and Date of Event.
      */
 
-    public EventTask(String taskname, LocalDateTime eventDate) {
-        super(taskname);
+    public EventTask(String taskName, LocalDateTime eventDate) {
+        super(taskName);
         this.eventDate = eventDate;
 
     }
 
     /**
-     *  Format the string representation of EventTask objects
+     * Format the string representation of EventTask objects.
      *
-     * @return String representation of EventTask objects
+     * @return String representation of EventTask objects.
      */
 
     @Override
@@ -35,10 +38,15 @@ public class EventTask extends Task{
         return "[E]" + super.toString() + " (at: " + this.eventDate.format(newFormat) + ")";
     }
 
+    /**
+     * Format the string representation of task objects for
+     * saving and writing to the text file.
+     */
+
     @Override
     public String saveToFileFormat() {
         String result = "E";
-        String mark = this.completed? "1":"0";
+        String mark = this.isCompleted? "1" : "0";
         DateTimeFormatter oldFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         return result + " | " + mark + " | " + taskName + " | " + eventDate.format(oldFormat);
     }
