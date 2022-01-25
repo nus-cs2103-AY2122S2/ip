@@ -6,12 +6,20 @@ public class Duke {
     public static String LINE = "____________________________________________________________";
     public static ArrayList<Task> LIST = new ArrayList<>();
 
+    /**
+     * Prints out the greeting message
+     */
     public static void greet() {
         System.out.println(LINE + "\n Hello! I'm Duke\n What can I do for you?\n" + LINE);
     }
 
-    public static void addTodo(String s) {
-        LIST.add(new Todo(s));
+    /**
+     * Adds a Todo task to the tasklist
+     *
+     * @param task  the task to be added to the list
+     */
+    public static void addTodo(String task) {
+        LIST.add(new Todo(task));
         System.out.println(LINE);
         System.out.println(" Got it. I've added this task:");
         System.out.println("   " + LIST.get(LIST.size() - 1).toString());
@@ -19,22 +27,37 @@ public class Duke {
         System.out.println(LINE);
     }
 
-    public static void addDeadline(String s, String time) {
-        LIST.add(new Deadline(s, time));
+    /**
+     * Adds a Deadline task to the tasklist
+     *
+     * @param task  the task to be added to the list
+     * @param deadline  the deadline of the task
+     */
+    public static void addDeadline(String task, String deadline) {
+        LIST.add(new Deadline(task, deadline));
         System.out.println(LINE + "\n Got it. I've added this task:");
         System.out.println("   " + LIST.get(LIST.size() - 1).toString());
         System.out.printf(" Now you have %d tasks in the list.\n", LIST.size());
         System.out.println(LINE);
     }
 
-    public static void addEvent(String s, String time) {
-        LIST.add(new Event(s, time));
+    /**
+     * Adds an Event task to the tasklist
+     *
+     * @param task  the task to be added to the list
+     * @param deadline  the deadline of the task
+     */
+    public static void addEvent(String task, String deadline) {
+        LIST.add(new Event(task, deadline));
         System.out.println(LINE + "\n Got it. I've added this task:");
         System.out.println("   " + LIST.get(LIST.size() - 1).toString());
         System.out.printf(" Now you have %d tasks in the list.\n", LIST.size());
         System.out.println(LINE);
     }
 
+    /**
+     * Prints out a list of all tasks in the tasklist
+     */
     public static void list() {
         System.out.println(LINE + "\n Here are the tasks in your list:");
         for (int i = 1; i <= LIST.size(); i++) {
@@ -43,29 +66,49 @@ public class Duke {
         System.out.println(LINE);
     }
 
-    public static void mark(int i) {
+    /**
+     * Marks the indicated task as done
+     *
+     * @param taskNum   the task number which is to be marked as done
+     */
+    public static void mark(int taskNum) {
         System.out.println(LINE + "\n Nice! I've marked this task as done:");
-        LIST.get(i - 1).setDone();
-        System.out.println("   " + LIST.get(i - 1).toString());
+        LIST.get(taskNum - 1).setDone();
+        System.out.println("   " + LIST.get(taskNum - 1).toString());
         System.out.println(LINE);
     }
 
-    public static void unmark(int i) {
+    /**
+     * Marks the indicated task as not done
+     *
+     * @param taskNum   the task number which is to be marked as not done
+     */
+    public static void unmark(int taskNum) {
         System.out.println(LINE + "\n OK, I've marked this task as not done yet:");
-        LIST.get(i - 1).setNotDone();
-        System.out.println("   " + LIST.get(i - 1).toString());
+        LIST.get(taskNum - 1).setNotDone();
+        System.out.println("   " + LIST.get(taskNum - 1).toString());
         System.out.println(LINE);
     }
 
-    public static void delete(int i) {
+    /**
+     * Delete the indicated task from the tasklist
+     *
+     * @param taskNum   the task number which is to be deleted
+     */
+    public static void delete(int taskNum) {
         System.out.println(LINE + "\n Noted. I've removed this task:");
-        Task removed = LIST.get(i - 1);
-        LIST.remove(i - 1);
+        Task removed = LIST.get(taskNum - 1);
+        LIST.remove(taskNum - 1);
         System.out.println("   " + removed.toString());
         System.out.printf(" Now you have %d tasks in the list.\n", LIST.size());
         System.out.println(LINE);
     }
 
+    /**
+     * Throw error depending on what kind of error it is
+     *
+     * @param type  The type of error to be thrown
+     */
     public static void throwError(String type) {
         System.out.println(LINE);
         DukeException error;
@@ -78,6 +121,9 @@ public class Duke {
         System.out.println(LINE);
     }
 
+    /**
+     * Print out a goodbye line
+     */
     public static void exit() {
         System.out.println(LINE + "\n Bye. Hope to see you again soon!\n" + LINE);
     }
