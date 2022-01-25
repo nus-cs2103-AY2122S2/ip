@@ -1,4 +1,4 @@
-package spark.tasks;
+package spark.storage;
 
 import spark.exceptions.fileexceptions.TaskDecodingException;
 import spark.tasks.tasktypes.Deadline;
@@ -7,7 +7,7 @@ import spark.tasks.tasktypes.Task;
 import spark.tasks.tasktypes.ToDo;
 
 /**
- * Contains methods to decode Tasks saved in a TaskFile
+ * Contains methods to decode Tasks saved in Storage.
  */
 public class TaskDecoder {
     public static Task decodeTask(String encodedTask) throws TaskDecodingException {

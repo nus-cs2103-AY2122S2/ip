@@ -16,6 +16,7 @@ public class AddDeadlineCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             tasks.addDeadline(tokens);
+            storage.writeTasksFile(tasks.encodeTasks());
         } catch (SparkException e) {
             ui.printException(e);
         }

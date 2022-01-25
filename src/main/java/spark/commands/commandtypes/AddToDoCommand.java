@@ -16,6 +16,7 @@ public class AddToDoCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             tasks.addToDo(tokens);
+            storage.writeTasksFile(tasks.encodeTasks());
         } catch (SparkException e) {
             ui.printException(e);
         }

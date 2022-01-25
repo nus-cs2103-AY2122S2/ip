@@ -27,14 +27,13 @@ import java.util.ArrayList;
  */
 public class TaskList {
     protected List<Task> tasks;
-    private final Storage taskFile;
 
-    public TaskList() throws FileException, TaskDecodingException {
-        // read the save-file from the user's hard-disk
-        this.taskFile = new Storage();
+    public TaskList() {
+        this.tasks = new ArrayList<>();
+    }
 
-        // read the Tasks from the save-file
-        this.tasks = taskFile.readTasksFile();
+    public TaskList(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
@@ -53,9 +52,6 @@ public class TaskList {
 
         ToDo toDo = new ToDo(title);
         tasks.add(toDo);
-
-        // save changes to save-file in user's hard disk
-        taskFile.writeTasksFile(this.tasks);
 
         System.out.println("Got it, I've added this todo:");
         System.out.format("   %s\n", toDo);
@@ -103,9 +99,6 @@ public class TaskList {
         Deadline deadline = new Deadline(title, by);
         tasks.add(deadline);
 
-        // save changes to save-file in user's hard disk
-        taskFile.writeTasksFile(this.tasks);
-
         System.out.println("Got it, I've added this deadline:");
         System.out.format("   %s\n", deadline);
 
@@ -152,9 +145,6 @@ public class TaskList {
         Event event = new Event(title, at);
         tasks.add(event);
 
-        // save changes to save-file in user's hard disk
-        taskFile.writeTasksFile(this.tasks);
-
         System.out.println("Got it, I've added this event:");
         System.out.format("   %s\n", event);
 
@@ -178,9 +168,6 @@ public class TaskList {
         Task t = getTaskByIndex(index);
         t.mark();
 
-        // save changes to save-file in user's hard disk
-        taskFile.writeTasksFile(this.tasks);
-
         System.out.println("Awesome! I've marked this task as done:");
         System.out.format("   %s\n", t);
     }
@@ -201,9 +188,6 @@ public class TaskList {
         int index = taskId - 1;
         Task t = getTaskByIndex(index);
         t.unMark();
-
-        // save changes to save-file in user's hard disk
-        taskFile.writeTasksFile(this.tasks);
 
         System.out.println("Okay, I've marked this task as not done yet:");
         System.out.format("   %s\n", t);
@@ -228,9 +212,6 @@ public class TaskList {
         System.out.format("   %s\n", t);
 
         tasks.remove(t);
-
-        // save changes to save-file in user's hard disk
-        taskFile.writeTasksFile(this.tasks);
 
         showNumberOfTasks();
     }
@@ -272,6 +253,21 @@ public class TaskList {
         }
 
         return results;
+    }
+
+    /**
+     * Returns an encoded list of Tasks.
+     *
+     * @return a String containing the encoded version of a list of Tasks.
+     */
+    public String encodeTasks() {
+        StringBuilder encodedTasks = new StringBuilder();
+
+        for (Task t : tasks) {
+            encodedTasks.append(t.encodeTask() + System.lineSeparator());
+        }
+
+        return encodedTasks.toString();
     }
 
     private void showNumberOfTasks() {

@@ -1,3 +1,2 @@
 T @@@ true @@@ buy milk
-T @@@ true @@@ go class
-T @@@ false @@@ sell milk
+T @@@ false @@@ go class

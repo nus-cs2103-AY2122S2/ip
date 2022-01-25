@@ -16,6 +16,7 @@ public class MarkCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             tasks.markTask(tokens);
+            storage.writeTasksFile(tasks.encodeTasks());
         } catch (SparkException e) {
             ui.printException(e);
         }

@@ -12,11 +12,15 @@ import java.util.Scanner;
 public class Ui {
     private static final String normalLineSeparator = "----------------------------------------------------------------------";
     private static final String exceptionLineSeparator = "-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!";
+    private static final String defaultWelcomeMessage = String.format("%s\n%s",
+            "Hello I'm Spark!",
+            "What can I do for you?"
+            );
+
     private final Scanner userInput;
 
     public Ui() {
         this.userInput = new Scanner(System.in);
-        printWelcomeMessage();
     }
 
     /**
@@ -36,10 +40,7 @@ public class Ui {
      * to the user.
      */
     public void printWelcomeMessage() {
-        String welcomeMessage = String.format("Hello I'm Spark!\n" +
-                "What can I do for you?");
-
-        printMessage(welcomeMessage);
+        printMessage(defaultWelcomeMessage);
     }
 
     /**

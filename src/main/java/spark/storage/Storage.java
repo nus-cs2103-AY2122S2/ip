@@ -1,10 +1,6 @@
 package spark.storage;
 
-import spark.exceptions.fileexceptions.FileException;
-import spark.exceptions.fileexceptions.ReadFileException;
-import spark.exceptions.fileexceptions.TaskDecodingException;
-import spark.exceptions.fileexceptions.WriteFileException;
-import spark.tasks.TaskDecoder;
+import spark.exceptions.fileexceptions.*;
 import spark.tasks.tasktypes.Task;
 
 import java.io.File;
@@ -22,19 +18,21 @@ import java.nio.file.Paths;
  * a File in the user's hard disk.
  */
 public class Storage {
-    static final Path defaultFilePath = Paths.get("spark_save_file.txt");
+    private final Path filePath;
     private final File tasksFile;
 
     /**
-     * Loads data from the file at the default filepath.
-     * If no file can be found, creates a new file at the default
-     * filepath.
+     * Opens the file at the specified relative file-path.
+     * If no file can be found, creates a new file at the specified
+     * file-path.
      */
-    public Storage() throws FileException {
-        tasksFile = new File(defaultFilePath.toString());
+    public Storage(String filePathString) throws ReadFileException {
+        this.filePath = Paths.get(filePathString);
+        this.tasksFile = new File(filePath.toString());
+
         if (!tasksFile.exists()) {
             try {
-                tasksFile.createNewFile();
+                this.tasksFile.createNewFile();
             } catch (IOException e) {
                 throw new ReadFileException();
             }
@@ -42,12 +40,12 @@ public class Storage {
     }
 
     /**
-     * Reads the encoded list of Tasks from the save-file.
+     * Reads and decodes saved Tasks from the file into a List of Task objects.
      *
      * @return
      * @throws TaskDecodingException
      */
-    public List<Task> readTasksFile() throws TaskDecodingException {
+    public List<Task> readTasksFile() throws TaskDecodingException, NotFoundException {
         List<Task> tasks = new ArrayList<>();
 
         try {
@@ -60,7 +58,7 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException e) {
-            // do nothing
+            throw new NotFoundException();
         }
 
         return tasks;
@@ -69,28 +67,17 @@ public class Storage {
     /**
      * Writes the encoded list of Tasks into the save-file in the user's hard disk.
      *
-     * @param tasks
+     * @param
      * @throws FileException
      */
-    public void writeTasksFile(List<Task> tasks) throws FileException {
-        String encodedTasks =  encodeTaskList(tasks);
-
+    public void writeTasksFile(String encodedTasks) throws FileException {
         try {
-            FileWriter fw = new FileWriter(defaultFilePath.toString());
+            FileWriter fw = new FileWriter(filePath.toString());
             fw.write(encodedTasks);
             fw.close();
         } catch (IOException e) {
             throw new WriteFileException();
         }
-    }
-
-    private String encodeTaskList(List<Task> tasks) {
-        StringBuilder encodedTasks = new StringBuilder();
-        for (Task t : tasks) {
-            encodedTasks.append(encodeTask(t) + System.lineSeparator());
-        }
-
-        return encodedTasks.toString();
     }
 
     private String encodeTask(Task t) {
