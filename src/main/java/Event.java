@@ -14,7 +14,7 @@ public class Event extends Task {
         String eventat;
 
         try {
-            String[] split = input.split("/at");
+            String[] split = input.split(" /at ");
             eventname = split[0];
             eventat = split[1];
             Event e = new Event(eventname, eventat);
@@ -22,7 +22,9 @@ public class Event extends Task {
             System.out.println(e.toString());
             return e;
         } catch (Exception e) {
-            DukeEventException error = new DukeEventException("OOPS!!! Please enter in format: event <event>/at<event date>");
+            DukeEventException error = new DukeEventException(
+                    "OOPS!!! Please enter in format: event <event> /at <event venue> \n " +
+                    "e.g. event Lesson /at Com1");
             System.out.println(error.getMessage());
         }
         return null;

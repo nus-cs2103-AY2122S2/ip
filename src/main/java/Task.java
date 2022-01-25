@@ -17,6 +17,10 @@ public class Task {
         System.out.println("OK, I've marked this task as not done yet: \n" + this.toString());
     }
 
+    public static boolean isDeadline(Task t) {
+        return t instanceof Deadline;
+    }
+
     public String toString() {
         if (this.done) {
             return "[X] " + this.name;

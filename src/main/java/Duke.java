@@ -3,9 +3,26 @@ import exceptions.DukeEventException;
 import exceptions.DukeException;
 import exceptions.DukeTodoException;
 
+import java.time.LocalDate;
 import java.util.*;
 
 public class Duke {
+
+    public static void output_matching_deadline(List<Task> all, LocalDate input_date) {
+        List<Task> match_date = new ArrayList<Task>();
+        for (Task t : all) {
+            if (Task.isDeadline(t)) {
+                Deadline d = (Deadline) t;
+                if (d.getDate().equals(input_date.toString())) {
+                    match_date.add(t);
+                }
+            }
+        }
+        System.out.println("Here you go! Hope it includes the event you were looking for:)");
+        for (Task t : match_date) {
+            System.out.println(t);
+        }
+    }
     public static void main(String[] args) throws DukeException, DukeDeadlineException {
         System.out.println("Oh hello dear, I'm Dukie, Zi Xin's favourite chattie box\n" +
                             "Nice to meet you dear:>\n" +
@@ -39,6 +56,18 @@ public class Duke {
                     int n = Integer.parseInt(words[1]);
                     all.remove(n - 1);
                     System.out.println("Now you have " + all.size() + " tasks in the list.");
+
+                } else if (words[0].equals("find")) {
+                    // get all deadline tasks that matches input date
+                    String input_date = words[1];
+
+                    try {
+                        LocalDate localdate = LocalDate.parse(input_date);
+                        Duke.output_matching_deadline(all, localdate);
+                    } catch (Exception e) {
+                        DukeException ex = new DukeException("Please input date in the format YYYY-MM-DD to be found");
+                        System.out.println(ex.getMessage());
+                    }
                 }
 
                 else { //adding of Tasks
