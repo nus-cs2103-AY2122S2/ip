@@ -132,5 +132,6 @@ public class Parser {
 
     String getSearchWords() {
         return removeCommandFromString();
+        //Todo:fix bug where if user inputs "find", it searches for occurrences of "find".
     }
 }

@@ -191,18 +191,17 @@ public class Mike {
             case "deadline":
                 String deadlineName = parser.getDeadlineName();
                 String deadlineDate = parser.getDeadlineDate();
-
                 addDeadline(deadlineName, deadlineDate);
                 break;
             case "event":
                 String eventName = parser.getEventName();
                 String eventDate = parser.getEventDate();
-
                 addEvent(eventName, eventDate);
                 break;
             case "find":
                 String searchWords = parser.getSearchWords();
                 findInList(searchWords);
+                break;
             default:
                 String invalidCommandMessage =
                         String.format("\n**Mike: I don't understand the command \"%s\"**",
