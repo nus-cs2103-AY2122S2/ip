@@ -30,6 +30,8 @@ public class Parser {
             return Command.BYE;
         } else if (command.equals("delete")) {
             return Command.DELETE;
+        } else if (command.equals("find")) {
+            return Command.FIND;
         } else {
             throw new CommandNotFoundException("Unrecognised Command");
         }

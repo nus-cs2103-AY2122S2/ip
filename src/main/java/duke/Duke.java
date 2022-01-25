@@ -86,6 +86,9 @@ public class Duke {
                 list.print(indexOfList);
                 list.delete(indexOfList);
                 System.out.println("Now you have " + Integer.toString(list.getLength()) + " tasks in the list.");
+            case FIND:
+                list.findTask(parsedInput[0]);
+
             }
 
             DataStore.saveData(list);

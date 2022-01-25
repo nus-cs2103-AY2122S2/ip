@@ -43,5 +43,10 @@ public enum Command {
      * Delete task
      * User wants to delete a task
      */
-    DELETE
+    DELETE,
+    /** Find task
+     * User wants to find a task
+     */
+    FIND
+
 }
