@@ -7,9 +7,7 @@ package sana.exception;
  * @version 1.0
  */
 public class OutOfBoundsTaskException extends Exception {
-    /**
-     * The message Sana says when encountering this sana.exception
-     */
+    /** The message Sana says when encountering this sana.exception */
     private static String message = "Heyyy, I can't find this sana.task..";
 
     public OutOfBoundsTaskException() {

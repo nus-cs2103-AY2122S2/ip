@@ -26,16 +26,12 @@ public class Memory {
     /** This variable represents the File object that stores the taskList */
     private File memFile;
 
-    /**
-     * The constructor for a Memory object
-     */
+    /** The constructor for a Memory object */
     public Memory() {
         initialiseMem();
     }
 
-    /**
-     * Create new sana.txt file and data dir in case of corruption
-     */
+    /** Create new sana.txt file and data dir in case of corruption */
     private void initialiseMem() {
         File dir = new File(dirPath);
         if (!dir.exists()) {
@@ -72,13 +68,6 @@ public class Memory {
             String task = s.nextLine();
             if (task.charAt(0) == 'T') { // a todo sana.task
                 taskList.add(ToDo.memToTask(task));
-                /**
-                try {
-
-                } catch (MemoryCorruptedException e) {
-
-                }
-                 */
             } else if (task.charAt(0) == 'D') { // a Deadline sana.task
                 taskList.add(Deadline.memToTask(task));
             } else if (task.charAt(0) == 'E') { // an Event sana.task

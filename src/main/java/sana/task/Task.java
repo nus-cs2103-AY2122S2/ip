@@ -1,4 +1,5 @@
 package sana.task;
+
 /**
  * This class represents the tasks Sana will remember
  *
@@ -6,14 +7,10 @@ package sana.task;
  * @version 1.0
  */
 public abstract class Task {
-    /**
-     * true when sana.task is done, false otherwise
-     */
+    /** true when sana.task is done, false otherwise */
     private boolean isDone;
 
-    /**
-     * name of the sana.task
-     */
+    /** name of the sana.task */
     private String taskName;
 
     /**
@@ -48,7 +45,8 @@ public abstract class Task {
 
     /**
      * Returns whether the sana.task is done
-     * @return  done
+     *
+     * @return if task is done
      */
     public boolean isDone() {
         return isDone;

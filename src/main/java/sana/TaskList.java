@@ -23,9 +23,7 @@ public class TaskList {
         this.taskList = taskList;
     }
 
-    /**
-     * Constructor for the taskList object
-     */
+    /** Constructor for the taskList object */
     public TaskList() {
         this.taskList = new LinkedList<>();
     }

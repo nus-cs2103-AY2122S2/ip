@@ -8,9 +8,7 @@ package sana.exception;
  * @version 1.0
  */
 public class UnknownCommandException extends Exception{
-    /**
-     * The message Sana says when she receives an unknown command
-     */
+    /** The message Sana says when she receives an unknown command */
     private static String message = "Oy! I don't know what you're saying!";
 
     public UnknownCommandException() {
