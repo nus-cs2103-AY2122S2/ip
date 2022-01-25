@@ -5,8 +5,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import task.*;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
 
+/**
+ * The Storage class deals with the loading and saving of tasks in the data file.
+ */
 public class Storage {
     private String filePath;
     private ArrayList<String> content;
@@ -16,6 +22,11 @@ public class Storage {
         this.content = new ArrayList<>();
     }
 
+    /**
+     * Loads the tasks saved in the data file.
+     * @return An ArrayList of Task containing the saved tasks or an empty list if there are no tasks saved.
+     * @throws DukeException If there are issues accessing the data file.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -47,7 +58,6 @@ public class Storage {
                 tasks.add(t);
             }
         } catch (IOException e) {
-            // throw new DukeException("Something went wrong with loading the tasks file");
             try {
                 File parentDir = new File("./data");
                 parentDir.mkdir();
@@ -61,6 +71,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Updates the list of tasks saved in the data file.
+     * @param oldDetails The current save format of the task to be updated.
+     * @param updatedDetails The new save format of the task to be updated.
+     * @throws DukeException If there are issues accessing or writing to the data file .
+     */
     public void updateSavedTasks(String oldDetails, String updatedDetails) throws DukeException {
         try {
             FileWriter fw;

@@ -5,6 +5,9 @@ import duke.Storage;
 import duke.DukeException;
 import task.TaskList;
 
+/**
+ * The Command class is an abstract class to represent an actual command by the user.
+ */
 public abstract class Command {
     protected String command;
     protected String[] tokenizedCommand;
@@ -16,6 +19,13 @@ public abstract class Command {
         this.isRun = true;
     }
 
+    /**
+     * Executes the current command.
+     * @param tasks TaskList that stores the current list of tasks.
+     * @param ui Ui of the bot application.
+     * @param storage Storage to store the list of tasks.
+     * @throws DukeException
+     */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     public boolean isRunProgram() {

@@ -2,6 +2,9 @@ package duke;
 
 import task.TaskList;
 
+/**
+ * The DukeException class deals with identifying and throwing Exceptions unique to Duke.
+ */
 public class DukeException extends Exception {
     public DukeException() {
 
@@ -14,10 +17,10 @@ public class DukeException extends Exception {
     /**
      * Validates the inputs based on the command the user input and throws an error if there is invalid input
      *
-     * @param command             String that the user inputs
-     * @param commandSplitBySpace String[] from the command the user inputs separated by space
-     * @param tasks               ArrayList of Tasks
-     * @throws DukeException
+     * @param command             The command that the user inputs.
+     * @param commandSplitBySpace The user command separated by space.
+     * @param tasks               ArrayList of Tasks.
+     * @throws DukeException If the inputs are not valid.
      */
     public void validateInputs(String command, String[] commandSplitBySpace, TaskList tasks) throws DukeException {
         switch (commandSplitBySpace[0]) {
