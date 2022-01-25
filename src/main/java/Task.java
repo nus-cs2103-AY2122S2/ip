@@ -1,7 +1,6 @@
-import java.util.List;
-import java.util.ArrayList;
+import java.io.Serializable;
 
-public abstract class Task {
+public abstract class Task implements Serializable {
     private String name;
     private int status;
     public String type;
