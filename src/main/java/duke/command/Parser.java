@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.task.TaskType;
+
 public class Parser {
     private static final String COMMAND_BYE = "bye";
 

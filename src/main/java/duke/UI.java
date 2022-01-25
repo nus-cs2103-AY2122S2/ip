@@ -1,4 +1,7 @@
+package duke;
+
 import java.util.List;
+import duke.task.Task;
 
 public class UI {
     private static final String MESSAGE_INTRO = "Hello! I'm Duke\n     What can I do for you?";

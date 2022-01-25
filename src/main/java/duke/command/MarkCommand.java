@@ -1,4 +1,11 @@
+package duke.command;
+
 import java.util.List;
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.UI;
+
+import duke.Storage;
 
 public class MarkCommand extends Command{
     private static final String MESSAGE_MARK = "Nice! I've marked this task as done:";
