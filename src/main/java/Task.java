@@ -1,7 +1,7 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Task implements Comparable<Task>{
+public class Task implements Comparable<Task> {
     protected boolean isDone;
     protected String content;
     protected LocalDateTime date;
@@ -42,6 +42,7 @@ public class Task implements Comparable<Task>{
         Printer.printDivider();
         Duke.saveAsTextFile(tasks);
     }
+
     public void unmark(ArrayList<Task> tasks) {
         this.isDone = false;
         Printer.printDivider();
@@ -53,8 +54,12 @@ public class Task implements Comparable<Task>{
 
     @Override
     public int compareTo(Task task) {
-        if (this.date != null) {
+        if (this.date != null && task.date != null) {
             return this.date.compareTo(task.date);
+        } else if (this.date != null) {
+            return -1;
+        } else if (task.date != null) {
+            return 1;
         } else {
             return this.content.compareTo(task.content);
         }

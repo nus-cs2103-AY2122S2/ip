@@ -132,8 +132,8 @@ public class Duke {
                 try {
                     int position = Integer.parseInt(inputArray[1]);
                     if (position > 0 && position <= taskList.size()) {
-                        taskList.remove(position - 1);
                         Printer.echoForDelete(taskList.get(position - 1), taskList.size());
+                        taskList.remove(position - 1);
                     } else {
                         try {
                             throw new DukeInvalidArgumentException("Invalid task number");
@@ -142,7 +142,7 @@ public class Duke {
                         }
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("Second argument of delete must be a number!");
+                    System.out.println("Index of delete must be a number!");
                 }
             }
         }
