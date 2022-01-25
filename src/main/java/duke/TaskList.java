@@ -82,4 +82,16 @@ public class TaskList {
     public Task getTask(int i) {
         return actions.get(i - 1);
     }
+
+    public void findTask(String search) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < actions.size(); i++) {
+            Task task = actions.get(i);
+            if (task.getDetails()[2].indexOf(search) != -1) {
+                System.out.print(i + 1);
+                System.out.print(".");
+                task.print();
+            }
+        }
+    }
 }
