@@ -1,11 +1,16 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 
 public class PikaBot {
 
-    static String line = "_________________________________";
-    static String indentation = "     ";
+    static String LINE = "_________________________________";
+    static String INDENTATION = "     ";
+    static String FILEPATH = "data/tasks.txt";
 
     public static Todo addTodo(String[] todoArray) throws TodoException {
         if (todoArray.length == 1) {
@@ -43,12 +48,12 @@ public class PikaBot {
     }
 
     public static void addedTask(Task task, ArrayList<Task> listOfTasks) {
-        System.out.println(indentation + line + "\n" +
-                indentation + "Got it. I've added this task:" + "\n" +
-                indentation + "  " + task + "\n" +
-                indentation + "Now you have " + listOfTasks.size() + " tasks in the list." +
+        System.out.println(INDENTATION + LINE + "\n" +
+                INDENTATION + "Got it. I've added this task:" + "\n" +
+                INDENTATION + "  " + task + "\n" +
+                INDENTATION + "Now you have " + listOfTasks.size() + " tasks in the list." +
                 "\n" +
-                indentation + line);
+                INDENTATION + LINE);
     }
 
     public static void invalidTask() throws InvalidTaskCommandException {
@@ -58,10 +63,21 @@ public class PikaBot {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+
+        System.out.println(INDENTATION + LINE + "\n" + INDENTATION + "Hello! I'm PikaBot" + "\n" + INDENTATION +
+                "What can I do for you? シ\n" + INDENTATION + LINE);
+
         ArrayList<Task> inputArr = new ArrayList<>();
 
-        System.out.println(indentation + line + "\n" + indentation + "Hello! I'm PikaBot" + "\n" + indentation +
-                "What can I do for you? シ\n" + indentation + line);
+        if (Storage.doesFileExist(FILEPATH)) {
+            try {
+                inputArr = Storage.fileToArrayList(new File(FILEPATH));
+            } catch (FileNotFoundException e) {
+                System.out.println(INDENTATION + LINE);
+                System.out.println(e + " File Not Found!");
+                System.out.println(INDENTATION + LINE);
+            }
+        }
 
         String input = sc.nextLine();
         String[] strInputArr = input.split(" ", 2);
@@ -71,19 +87,19 @@ public class PikaBot {
 
             switch (strInputArr[0]) {
                 case "list": {
-                    System.out.println(indentation + line);
-                    System.out.println(indentation + "Here are the tasks in your list:");
+                    System.out.println(INDENTATION + LINE);
+                    System.out.println(INDENTATION + "Here are the tasks in your list:");
 
                     int taskNumber = 1;
                     int length = inputArr.size();
 
                     while (taskNumber <= length) {
-                        System.out.println(indentation + taskNumber + "." +
+                        System.out.println(INDENTATION + taskNumber + "." +
                                 inputArr.get(taskNumber - 1));
                         taskNumber++;
                     }
 
-                    System.out.println(indentation + line);
+                    System.out.println(INDENTATION + LINE);
 
                     input = sc.nextLine();
                     strInputArr = input.split(" ", 2);
@@ -96,10 +112,16 @@ public class PikaBot {
                     Task currTask = inputArr.get(taskToMark - 1);
                     currTask.markAsDone();
 
-                    System.out.println(indentation + line);
-                    System.out.println(indentation + "Nice! I've marked this task as done:");
-                    System.out.println(indentation + currTask);
-                    System.out.println(indentation + line);
+                    try {
+                        Storage.ArrayListToFile(inputArr, FILEPATH);
+                    } catch (IOException e) {
+                        System.out.println(e.getMessage() + " IO exception");
+                    }
+
+                    System.out.println(INDENTATION + LINE);
+                    System.out.println(INDENTATION + "Nice! I've marked this task as done:");
+                    System.out.println(INDENTATION + currTask);
+                    System.out.println(INDENTATION + LINE);
 
                     input = sc.nextLine();
                     strInputArr = input.split(" ", 2);
@@ -111,10 +133,19 @@ public class PikaBot {
                     Task currTask = inputArr.get(taskToUnmark - 1);
                     currTask.markAsUndone();
 
-                    System.out.println(indentation + line);
-                    System.out.println(indentation + "OK, I've marked this task as not done yet:");
-                    System.out.println(indentation + currTask);
-                    System.out.println(indentation + line);
+                    try {
+                        Storage.ArrayListToFile(inputArr, FILEPATH);
+                    } catch (IOException e) {
+                        System.out.println(INDENTATION + LINE);
+                        System.out.println(INDENTATION + e.getMessage() + " IO exception");
+                        System.out.println(INDENTATION + LINE);
+
+                    }
+
+                    System.out.println(INDENTATION + LINE);
+                    System.out.println(INDENTATION + "OK, I've marked this task as not done yet:");
+                    System.out.println(INDENTATION + currTask);
+                    System.out.println(INDENTATION + LINE);
 
                     input = sc.nextLine();
                     strInputArr = input.split(" ", 2);
@@ -125,10 +156,18 @@ public class PikaBot {
                         Todo currTodo = addTodo(strInputArr);
                         inputArr.add(currTodo);
                         addedTask(currTodo, inputArr);
+                        Storage.appendToFile(currTodo, FILEPATH);
+
                     } catch (TodoException e) {
-                        System.out.println(indentation + line);
-                        System.out.println(indentation + e.getMessage());
-                        System.out.println(indentation + line);
+                        System.out.println(INDENTATION + LINE);
+                        System.out.println(INDENTATION + e.getMessage());
+                        System.out.println(INDENTATION + LINE);
+
+                    } catch (IOException e) {
+                        System.out.println(INDENTATION + LINE);
+                        System.out.println(INDENTATION + e.getMessage() + " IOException");
+                        System.out.println(INDENTATION + LINE);
+
                     } finally {
                         input = sc.nextLine();
                         strInputArr = input.split(" ", 2);
@@ -141,10 +180,18 @@ public class PikaBot {
                         Deadline currDeadline = addDeadline(strInputArr);
                         inputArr.add(currDeadline);
                         addedTask(currDeadline, inputArr);
+                        Storage.appendToFile(currDeadline, FILEPATH);
+
                     } catch (DeadlineException e) {
-                        System.out.println(indentation + line);
-                        System.out.println(indentation + e.getMessage());
-                        System.out.println(indentation + line);
+                        System.out.println(INDENTATION + LINE);
+                        System.out.println(INDENTATION + e.getMessage());
+                        System.out.println(INDENTATION + LINE);
+
+                    } catch (IOException e) {
+                        System.out.println(INDENTATION + LINE);
+                        System.out.println(INDENTATION + e.getMessage() + " IOException");
+                        System.out.println(INDENTATION + LINE);
+
                     } finally {
                         input = sc.nextLine();
                         strInputArr = input.split(" ", 2);
@@ -157,10 +204,17 @@ public class PikaBot {
                         Event currEvent = addEvent(strInputArr);
                         inputArr.add(currEvent);
                         addedTask(currEvent, inputArr);
+                        Storage.appendToFile(currEvent, FILEPATH);
+
                     } catch (EventException e) {
-                        System.out.println(indentation + line);
-                        System.out.println(indentation + e.getMessage());
-                        System.out.println(indentation + line);
+                        System.out.println(INDENTATION + LINE);
+                        System.out.println(INDENTATION + e.getMessage());
+                        System.out.println(INDENTATION + LINE);
+
+                    } catch (IOException e) {
+                        System.out.println(INDENTATION + LINE);
+                        System.out.println(INDENTATION + e.getMessage() + " IOException");
+                        System.out.println(INDENTATION + LINE);
                     } finally {
                         input = sc.nextLine();
                         strInputArr = input.split(" ", 2);
@@ -172,12 +226,20 @@ public class PikaBot {
                     int taskNumberToDelete = Integer.parseInt(strInputArr[1]);
                     Task taskToDelete = inputArr.get(taskNumberToDelete - 1);
                     inputArr.remove(taskNumberToDelete - 1);
-                    System.out.println(indentation + line);
-                    System.out.println(indentation + "Noted. I've removed this task:");
-                    System.out.println(indentation + "  " + taskToDelete);
-                    System.out.println(indentation + "Now you have " + inputArr.size() + " tasks in the list");
-                    System.out.println(indentation + line);
 
+                    try {
+                        Storage.ArrayListToFile(inputArr, FILEPATH);
+                    } catch (IOException e) {
+                        System.out.println(INDENTATION + LINE);
+                        System.out.println(INDENTATION + e.getMessage());
+                        System.out.println(INDENTATION + LINE);
+                    }
+
+                    System.out.println(INDENTATION + LINE);
+                    System.out.println(INDENTATION + "Noted. I've removed this task:");
+                    System.out.println(INDENTATION + "  " + taskToDelete);
+                    System.out.println(INDENTATION + "Now you have " + inputArr.size() + " tasks in the list");
+                    System.out.println(INDENTATION + LINE);
 
                     input = sc.nextLine();
                     strInputArr = input.split(" ", 2);
@@ -188,9 +250,9 @@ public class PikaBot {
                     try {
                         invalidTask();
                     } catch (InvalidTaskCommandException e) {
-                        System.out.println(indentation + line);
-                        System.out.println(indentation + e.getMessage());
-                        System.out.println(indentation + line);
+                        System.out.println(INDENTATION + LINE);
+                        System.out.println(INDENTATION + e.getMessage());
+                        System.out.println(INDENTATION + LINE);
                     } finally {
                         input = sc.nextLine();
                         strInputArr = input.split(" ", 2);
@@ -200,8 +262,8 @@ public class PikaBot {
             }
         }
 
-        System.out.println(indentation + line + "\n" + indentation + "Bye. Hope to see you again!" + "\n" + indentation
-                + line);
+        System.out.println(INDENTATION + LINE + "\n" + INDENTATION + "Bye. Hope to see you again!" + "\n" + INDENTATION
+                + LINE);
 
         sc.close();
     }
