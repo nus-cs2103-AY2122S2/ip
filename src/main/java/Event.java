@@ -13,8 +13,8 @@ public class Event extends Task {
    * @param desc the task description
    * @param date of the event
    */
-  public Event(String desc, String date) {
-    super(desc);
+  public Event(String desc, String date, boolean done) {
+    super(desc, done);
     this.date = date;
   }
 
@@ -28,4 +28,14 @@ public class Event extends Task {
     }
     return str;
   }
+
+  @Override
+  public String changeFormat() {
+    if (super.done) {
+      return "E,1," + super.desc + "," + this.date;
+    } else {
+      return "E,0," + super.desc + "," + this.date;
+    }
+  }
+
 }

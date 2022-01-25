@@ -5,7 +5,7 @@
  */
 public abstract class Task {
   // Class variables
-  protected boolean done = false;
+  protected boolean done;
   protected String desc;
 
   /**
@@ -13,8 +13,9 @@ public abstract class Task {
    *
    * @param desc the task description
    */
-  public Task(String desc) {
+  public Task(String desc, boolean done) {
     this.desc = desc;
+    this.done = done;
   }
 
   /**
@@ -31,4 +32,5 @@ public abstract class Task {
     this.done = false;
   }
 
+  public abstract String changeFormat();
 }
