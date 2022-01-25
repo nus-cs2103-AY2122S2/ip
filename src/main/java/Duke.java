@@ -33,7 +33,7 @@ public class Duke {
                         System.out.println(lines);
                         System.out.println("Nice! I've marked this task as done:");
                         System.out.println(arr.get(number - 1) + "\n" + lines);
-                        echo = sc.nextLine();
+                        //echo = sc.nextLine();
 
                     } else if (echo.startsWith("unmark")) {
                         int number = Integer.parseInt(echo.substring(7));
@@ -41,7 +41,7 @@ public class Duke {
                         System.out.println(lines);
                         System.out.println("OK, I've marked this task as not done yet:");
                         System.out.println(arr.get(number - 1) + "\n" + lines);
-                        echo = sc.nextLine();
+                        //echo = sc.nextLine();
 
                     } else if (echo.startsWith("deadline")) {
                         String str = echo.substring(9);
@@ -52,7 +52,7 @@ public class Duke {
                         arr.add(added);
                         System.out.println(lines + "\n" + "Ok I've added: " + added +
                                 "\nThere are " + arr.size() + " task(s) in the list now." + "\n" + lines);
-                        echo = sc.nextLine();
+                        //echo = sc.nextLine();
 
                     } else if (echo.startsWith("event")) {
                         String str = echo.substring(6);
@@ -63,22 +63,34 @@ public class Duke {
                         arr.add(event);
                         System.out.println(lines + "\n" + "Ok I've added: " + event +
                                 "\nThere are " + arr.size() + " task(s) in the list now." + "\n" + lines);
-                        echo = sc.nextLine();
+                        //echo = sc.nextLine();
 
                     } else if (echo.startsWith("todo")) {
-                        String str = echo.substring(5);
-                        Task todo = new Todo(str);
-                        arr.add(todo);
-                        System.out.println(lines + "\n" + "Ok I've added: " + todo +
-                                "\nThere are " + arr.size() + " task(s) in the list now." + "\n" + lines);
-                        echo = sc.nextLine();
+                        try {
+                            String str = echo.substring(5);
+                            Task todo = new Todo(str);
+                            arr.add(todo);
+                            System.out.println(lines + "\n" + "Ok I've added: " + todo +
+                                    "\nThere are " + arr.size() + " task(s) in the list now." + "\n" + lines);
+                            //echo = sc.nextLine();
+                        } catch (StringIndexOutOfBoundsException e) {
+                            System.out.println(lines + "\n" + "☹ OOPS!!! The description of a todo cannot be empty."
+                                + "\n" + lines);
+                            //echo = sc.nextLine();
+                        }
 
                     } else {
-                        arr.add(new Todo(echo));
-                        System.out.println(lines + "\n" + "Got it. I've added this task:" + "\n" +  echo + "\n" + lines);
-                        echo = sc.nextLine();
+                        try {
+                            throw new IllegalArgumentException();
+                        } catch (IllegalArgumentException e){
+                            System.out.println(lines + "\n" + "☹ OOPS!!! I'm sorry " +
+                                    "but I don't know what that means." + "\n" + lines);
+                        }
+                      }
                     }
-            }
+                        echo = sc.nextLine();
+
+
 
         }
 
