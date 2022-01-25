@@ -1,9 +1,11 @@
+package duke.task;
+
+import duke.exception.DukeException;
+import duke.Storage;
+import duke.Ui;
+
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -90,9 +92,9 @@ public class TaskList {
 
     public void markTask(Storage storage, Ui ui, int position) throws DukeException, IOException {
         if (position < 1 || position > taskList.size()) {
-            throw new DukeException("Task do not exist!");
+            throw new DukeException("duke.task.Task do not exist!");
         } else if (taskList.get(position - 1).isDone == true) {
-            throw new DukeException("Task is already marked as done!");
+            throw new DukeException("duke.task.Task is already marked as done!");
         } else {
             taskList.get(position - 1).mark();
             storage.setInFile(position, taskList.get(position - 1).taskDescriptionForFile());
@@ -102,9 +104,9 @@ public class TaskList {
 
     public void unmarkTask(Storage storage, Ui ui, int position) throws DukeException, IOException {
         if (position < 1 || position > taskList.size()) {
-            throw new DukeException("Task do not exist!");
+            throw new DukeException("duke.task.Task do not exist!");
         } else if (taskList.get(position - 1).isDone == false) {
-            throw new DukeException("Task is already marked as not done!");
+            throw new DukeException("duke.task.Task is already marked as not done!");
         } else {
             taskList.get(position - 1).unmark();
             storage.setInFile(position, taskList.get(position - 1).taskDescriptionForFile());
@@ -114,7 +116,7 @@ public class TaskList {
 
     public void deleteTask(Storage storage, Ui ui, int position) throws DukeException, IOException {
         if (position < 0 || position > taskList.size()) {
-            throw new DukeException("Task do not exist!");
+            throw new DukeException("duke.task.Task do not exist!");
         } else {
             Task task = taskList.get(position - 1);
             taskList.remove(position - 1);

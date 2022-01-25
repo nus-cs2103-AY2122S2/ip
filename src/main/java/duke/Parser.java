@@ -1,3 +1,9 @@
+package duke;
+
+import duke.command.*;
+import duke.exception.DukeException;
+import duke.task.Task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
@@ -25,7 +31,7 @@ public class Parser {
                 }
                 try {
                     String event_date = input.split("event ", 2)[1].split("/at ")[1];
-                    LocalDate eventDate = LocalDate.parse(event_date, Task.inputDateFormat);
+                    LocalDate eventDate = LocalDate.parse(event_date, Task.getInputDateFormat());
                 } catch (DateTimeParseException err) {
                     throw new DukeException("Please enter a valid date! [dd/mm/yyyy]");
                 }
@@ -38,7 +44,7 @@ public class Parser {
                 }
                 try {
                     String deadline_date = input.split("deadline ", 2)[1].split("/by ")[1];
-                    LocalDate deadLineDate = LocalDate.parse(deadline_date, Task.inputDateFormat);
+                    LocalDate deadLineDate = LocalDate.parse(deadline_date, Task.getInputDateFormat());
                 } catch (DateTimeParseException err) {
                     throw new DukeException("Please enter a valid date! [dd/mm/yyyy]");
                 }

@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.Storage;
+import duke.task.TaskList;
+import duke.Ui;
+
 import java.util.Scanner;
 
 public class ClearCommand implements Command {

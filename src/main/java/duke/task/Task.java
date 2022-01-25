@@ -1,10 +1,23 @@
+package duke.task;
+
 import java.time.format.DateTimeFormatter;
 
 public class Task {
+
     protected String description;
-    protected boolean isDone;
+    public boolean isDone;
     protected String type;
+
+    public DateTimeFormatter getOutputDateFormat() {
+        return outputDateFormat;
+    }
+
     protected DateTimeFormatter outputDateFormat = DateTimeFormatter.ofPattern("MMM d yyyy");
+
+    public static DateTimeFormatter getInputDateFormat() {
+        return inputDateFormat;
+    }
+
     protected static DateTimeFormatter inputDateFormat = DateTimeFormatter.ofPattern("d/M/uuuu");
 
     public Task(String description) {

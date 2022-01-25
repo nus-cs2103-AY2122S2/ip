@@ -1,3 +1,9 @@
+package duke;
+
+import duke.command.DukeCommands;
+import duke.task.Task;
+import duke.task.TaskList;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -42,7 +48,7 @@ public class Ui {
     }
 
     public void showLoadFileMessage(TaskList tasks) {
-        System.out.println("Task list successfully loaded\n" +
+        System.out.println("duke.task.Task list successfully loaded\n" +
                 "You currently have " + tasks.getTaskSize() +
                 " task(s) in your list.");
     }

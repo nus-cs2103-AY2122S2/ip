@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.*;
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.task.TaskList;
+
 import java.io.IOException;
 
 public class UnMarkCommand implements Command {
@@ -15,11 +22,11 @@ public class UnMarkCommand implements Command {
     @Override
     public void execute(TaskList tasks, Storage storage, Ui ui) throws DukeException, IOException {
         if (position < 1 || position > tasks.getTaskSize()) {
-            throw new DukeException("Task do not exist!");
+            throw new DukeException("duke.task.Task do not exist!");
         } else {
             Task task = tasks.getTask(position);
             if (task.isDone == false) {
-                throw new DukeException("Task is already marked as not done!");
+                throw new DukeException("duke.task.Task is already marked as not done!");
             } else {
                 task.unmark();
                 storage.setInFile(position, task.taskDescriptionForFile());

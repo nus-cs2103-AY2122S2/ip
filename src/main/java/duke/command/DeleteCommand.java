@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.*;
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.task.TaskList;
+
 import java.io.IOException;
 
 public class DeleteCommand implements Command {
@@ -15,7 +22,7 @@ public class DeleteCommand implements Command {
     @Override
     public void execute(TaskList tasks, Storage storage, Ui ui) throws DukeException, IOException {
         if (position < 0 || position > tasks.getTaskSize()) {
-            throw new DukeException("Task do not exist!");
+            throw new DukeException("duke.task.Task do not exist!");
         } else {
             Task task = tasks.getTask(position);
             tasks.removeTask(position);

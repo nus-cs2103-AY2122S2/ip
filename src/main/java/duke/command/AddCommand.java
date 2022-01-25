@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.*;
+import duke.task.*;
+
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -24,14 +29,14 @@ public class AddCommand implements Command {
         case "deadline":
             String deadlineDescription = fullCommand.split("deadline ", 2)[1].split("/by ")[0];
             String deadlineDate = fullCommand.split("deadline ", 2)[1].split("/by ")[1];
-            LocalDate deadlineTaskDate = LocalDate.parse(deadlineDate, Task.inputDateFormat);
+            LocalDate deadlineTaskDate = LocalDate.parse(deadlineDate, Task.getInputDateFormat());
             Deadline deadlineTask = new Deadline(deadlineDescription, deadlineTaskDate);
             tasks.addToList(deadlineTask, ui, storage);
             break;
         case "event":
             String eventDescription = fullCommand.split("event ", 2)[1].split("/at ")[0];
             String eventDate = fullCommand.split("event ", 2)[1].split("/at ")[1];
-            LocalDate eventTaskDate = LocalDate.parse(eventDate, Task.inputDateFormat);
+            LocalDate eventTaskDate = LocalDate.parse(eventDate, Task.getInputDateFormat());
             Event eventTask = new Event(eventDescription, eventTaskDate);
             tasks.addToList(eventTask, ui, storage);
             break;
