@@ -14,14 +14,15 @@ public class Event extends Task {
         this.eventTime = eventTime;
     }
 
-    @Override
-    public String saveFileFormat() {
-        return EVENT_SYMBOL + "|" + isDone + "|" + taskDescription + "\n";
+    public Event(boolean isDone, String taskDescription, String eventTime) {
+        super(isDone, taskDescription);
+
+        this.eventTime = eventTime;
     }
 
     @Override
-    public void readFile() {
-
+    public String saveFileFormat() {
+        return EVENT_SYMBOL + "|" + this.isDone + "|" + taskDescription + "|" + this.eventTime + "\n";
     }
 
     @Override

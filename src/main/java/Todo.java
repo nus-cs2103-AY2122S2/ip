@@ -9,14 +9,13 @@ public class Todo extends Task {
         super(taskDescription);
     }
 
-    @Override
-    public String saveFileFormat() {
-        return TODO_SYMBOL + "|" + isDone + "|" + taskDescription + "\n";
+    public Todo(boolean isDone, String taskDescription) {
+        super(isDone, taskDescription);
     }
 
     @Override
-    public void readFile() {
-
+    public String saveFileFormat() {
+        return TODO_SYMBOL + "|" + isDone + "|" + taskDescription + "\n";
     }
 
     @Override

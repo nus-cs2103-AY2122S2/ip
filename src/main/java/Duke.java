@@ -20,6 +20,8 @@ public class Duke {
     public Duke() {
         this.userTexts = new ArrayList<Task>();
         this.isRunning = true;
+
+        loadFromSave(userTexts);
     }
 
     /* Initial greeting for Duke */
@@ -162,7 +164,38 @@ public class Duke {
 
     /* Load task list from file saved */
     public void loadFromSave(ArrayList<Task> taskList) {
+        String filePath = "src/main/data/duke.txt";
 
+        try {
+            File file = new File(filePath);
+            if (!file.exists()) {
+                return;
+            }
+
+            // read file
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                StringTokenizer st = new StringTokenizer(scanner.nextLine(), "|");
+
+                String type = st.nextToken();
+                Task newTask = null;
+                if (type.equals("T")) {
+                    newTask = new Todo(Boolean.parseBoolean(st.nextToken()), st.nextToken());
+                } else if (type.equals("E")) {
+                    newTask = new Event(Boolean.parseBoolean(st.nextToken()), st.nextToken(), st.nextToken());
+                } else if (type.equals("D")) {
+                    newTask = new Deadline(Boolean.parseBoolean(st.nextToken()), st.nextToken(), st.nextToken());
+                }
+
+                taskList.add(newTask);
+            }
+
+            scanner.close();
+
+        } catch (IOException exception) {
+            System.out.println("File reading issue");
+            return;
+        }
     }
 
     /* save task list to a file */
@@ -170,8 +203,9 @@ public class Duke {
         String filePath = "src/main/data";
         String fileName = "duke.txt";
 
-        File directory = new File(filePath);
         try {
+            File directory = new File(filePath);
+
             // create directory if dont exist
             if (!directory.exists()) {
                 directory.mkdir();

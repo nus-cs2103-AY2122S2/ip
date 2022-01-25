@@ -12,6 +12,11 @@ public abstract class Task implements Saving {
         this.taskDescription = taskDescription;
     }
 
+    public Task(boolean isDone, String taskDescription) {
+        this.taskDescription = taskDescription;
+        this.isDone = isDone;
+    }
+
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
     }
