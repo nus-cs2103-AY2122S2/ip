@@ -76,4 +76,16 @@ public class Parser {
 
     }
 
+    public static Command parse(String input){
+        if (input.startsWith("todo") || input.startsWith("deadline") || input.startsWith("event")){
+            return new AddCommand(input);
+        } else if (input.startsWith("list")){
+            return new ListCommand();
+        } else if (input.startsWith("mark") || input.startsWith("unmark")){
+            return new MarkCommand(input);
+        }
+             return null;
+
+    }
+
 }

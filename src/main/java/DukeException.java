@@ -1,7 +1,7 @@
 public class DukeException extends Exception{
     private String desc;
     public DukeException(String s){
-        this.desc=s;
+        super(s);
     }
     public String toString(){
         String s = "Duke Exception Occured:\n";

@@ -12,6 +12,7 @@ public class Storage {
     private final String FILE_SEPERATOR = "/";
     File file;
 
+    public Storage(){}
     public Storage(String path) {
         FILE_PATH = System.getProperty("user.home") + FILE_SEPERATOR + path;
         String dir = path.substring(0,path.lastIndexOf("/"));

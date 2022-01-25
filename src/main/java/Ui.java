@@ -1,9 +1,11 @@
 import java.io.PrintStream;
+import java.util.Scanner;
 
 public class Ui {
 
     private static final String line =          "-------------------------------------------------------------------------------------";
     private static final String doubleLine =    "=====================================================================================";
+    private Scanner scanner = new Scanner(System.in);
 
     public static PrintStream writer = System.out;
 
@@ -160,7 +162,13 @@ public class Ui {
         writer.println("Task not loaded. Details: " + input);
     }
 
+    public String getUserInputLine(){
+        return scanner.nextLine();
+    }
 
+    public String getUserInput(){
+        return scanner.next();
+    }
 
     // Tests
     public static void main(String[] args) {
