@@ -56,40 +56,40 @@ public class Duke {
             printLineBreak();
             System.out.println();
             inputCommand = br.readLine();
-            inputCommandArr = inputCommand.split(" ");
+            inputCommandArr = inputCommand.split(" ", 2);
             printLineBreak();
             switch (inputCommandArr[0]) {
-                case "bye":
-                    ifBye = true;
-                    System.out.println("Bye. Hope to see you again soon!");
-                    break;
+            case "bye":
+                ifBye = true;
+                System.out.println("Bye. Hope to see you again soon!");
+                break;
 
-                case "list":
-                    bw.write("Here are the tasks in your list:\n");
-                    printList(bw);
-                    break;
+            case "list":
+                bw.write("Here are the tasks in your list:\n");
+                printList(bw);
+                break;
 
-                case "mark":
-                    bw.write("Nice! I've marked this task as done:\n");
-                    int index = Integer.parseInt(inputCommandArr[1]) - 1;
-                    Task curr = masterList.get(index); // task to be marked
-                    masterList.set(index, curr.markAsDone());
-                    bw.write(masterList.get(index).toString());
-                    bw.flush();
-                    break;
+            case "mark":
+                bw.write("Nice! I've marked this task as done:\n");
+                int index = Integer.parseInt(inputCommandArr[1]) - 1;
+                Task curr = masterList.get(index); // task to be marked
+                masterList.set(index, curr.markAsDone());
+                bw.write(masterList.get(index).toString());
+                bw.flush();
+                break;
 
-                case "unmark":
-                    bw.write("OK, I've marked this task as not done yet:\n");
-                    int indexUnmark = Integer.parseInt(inputCommandArr[1]) - 1;
-                    Task currUnmark = masterList.get(indexUnmark); // task to be unmarked
-                    masterList.set(indexUnmark, currUnmark.unmarkItem());
-                    bw.write(masterList.get(indexUnmark).toString());
-                    bw.flush();
-                    break;
+            case "unmark":
+                bw.write("OK, I've marked this task as not done yet:\n");
+                int indexUnmark = Integer.parseInt(inputCommandArr[1]) - 1;
+                Task currUnmark = masterList.get(indexUnmark); // task to be unmarked
+                masterList.set(indexUnmark, currUnmark.unmarkItem());
+                bw.write(masterList.get(indexUnmark).toString());
+                bw.flush();
+                break;
 
-                default:
-                    masterList.add(new Task(inputCommand));
-                    System.out.println("added: " + inputCommand);
+            default:
+                masterList.add(new Task(inputCommand));
+                System.out.println("added: " + inputCommand);
             }
         } while (!ifBye);
         printLineBreak();
