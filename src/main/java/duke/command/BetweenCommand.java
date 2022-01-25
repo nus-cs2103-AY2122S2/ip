@@ -19,6 +19,9 @@ public class BetweenCommand extends Command {
         }
         LocalDateTime start = parseDateTime(argParts[0]);
         LocalDateTime end = parseDateTime(argParts[1]);
+
+        linePrinter.print(String.format("Here are your tasks in between %s and %s:",
+                argParts[0], argParts[1]));
         taskList.forEach((idx, task) -> {
             task.getDate().ifPresent(date -> {
                 if (date.isBefore(end) && date.isAfter(start)) {

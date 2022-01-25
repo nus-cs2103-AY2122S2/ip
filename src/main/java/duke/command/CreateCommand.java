@@ -52,6 +52,9 @@ public class CreateCommand extends Command {
         }
 
         final String taskDescription = argParts[0];
+        if (taskDescription.equals("")) {
+            throw new DukeIllegalArgumentException("Task name cannot be empty");
+        }
         final LocalDateTime taskBy = parseDateTime(argParts[1]);
         final Task task = taskList.addTask(new Deadline(taskDescription, taskBy));
         this.printResponse(linePrinter, task, taskList, "Deadline");
@@ -66,6 +69,9 @@ public class CreateCommand extends Command {
         }
 
         final String taskDescription = argParts[0];
+        if (taskDescription.equals("")) {
+            throw new DukeIllegalArgumentException("Task name cannot be empty");
+        }
         final LocalDateTime taskAt = parseDateTime(argParts[1]);
         final Task task = taskList.addTask(new Event(taskDescription, taskAt));
         this.printResponse(linePrinter, task, taskList, "Event");
