@@ -1,6 +1,6 @@
 package duke.ui;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 
 public class Ui {
 
