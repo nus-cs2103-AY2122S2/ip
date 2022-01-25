@@ -64,16 +64,16 @@ public class Parser {
             throw new WrongInputException("D: D: D: The " + command +
                     " should be followed by a single number D: D: D:");
         }
-        int tasknumber;
+
         try {
-            tasknumber = Integer.parseInt(inputs[1]);
+            int tasknumber = Integer.parseInt(inputs[1]);
+            if (tasknumber > length || tasknumber < 1) {
+                throw new WrongInputException("D: D: D: The task number isn't in the list D: D: D:");
+            }
+            return tasknumber - 1;
         } catch (NumberFormatException e) {
             throw new WrongInputException("D: D: D: The input doesn't seem to contain a number D: D: D:");
         }
-        if (tasknumber > length || tasknumber < 1) {
-            throw new WrongInputException("D: D: D: The task number isn't in the list D: D: D:");
-        }
-        return tasknumber - 1;
     }
 
     /**
@@ -185,18 +185,22 @@ public class Parser {
         } else if (entrySplit[0].equals("D")) {
             if (entrySplit[1].equals("1")) {
                 return new Deadline(entrySplit[2],
-                        LocalDate.parse(entrySplit[3], DateTimeFormatter.ofPattern("MMM dd yyyy")), true);
+                        LocalDate.parse(entrySplit[3], DateTimeFormatter.ofPattern("MMM dd yyyy")),
+                        true);
             } else {
                 return new Deadline(entrySplit[2],
-                        LocalDate.parse(entrySplit[3], DateTimeFormatter.ofPattern("MMM dd yyyy")), false);
+                        LocalDate.parse(entrySplit[3], DateTimeFormatter.ofPattern("MMM dd yyyy")),
+                        false);
             }
         } else {
             if (entrySplit[1].equals("1")) {
                 return new Event(entrySplit[2],
-                        LocalDate.parse(entrySplit[3], DateTimeFormatter.ofPattern("MMM dd yyyy")), true);
+                        LocalDate.parse(entrySplit[3], DateTimeFormatter.ofPattern("MMM dd yyyy")),
+                        true);
             } else {
                 return new Event(entrySplit[2],
-                        LocalDate.parse(entrySplit[3], DateTimeFormatter.ofPattern("MMM dd yyyy")), false);
+                        LocalDate.parse(entrySplit[3], DateTimeFormatter.ofPattern("MMM dd yyyy")),
+                        false);
             }
         }
     }
