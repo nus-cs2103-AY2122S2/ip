@@ -1,34 +1,35 @@
+package mike;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task {
-    private final String endDate;
+public class Event extends Task {
+    private final String eventTime;
     private final LocalDate date;
-
-    private static final String taskType = "D";
+    private static final String taskType = "E";
 
     private static LocalDate convertToDate(String endDate) {
         return LocalDate.parse(endDate);
     }
 
-    public Deadline(String name, String endDate) {
+    public Event(String name, String eventTime) {
         super(name);
-        this.endDate = endDate;
-        this.date = convertToDate(endDate);
+        this.eventTime = eventTime;
+        this.date = convertToDate(eventTime);
     }
 
-    public Deadline(String name, String endDate, boolean isDone) {
+    public Event(String name, String eventTime, boolean isDone) {
         super(name, isDone);
-        this.endDate = endDate;
-        this.date = convertToDate(endDate);
+        this.eventTime = eventTime;
+        this.date = convertToDate(eventTime);
     }
 
-    public Deadline markAsDone() {
-        return new Deadline(this.name, this.endDate, true);
+    public Event markAsDone() {
+        return new Event(this.name, this.eventTime, true);
     }
 
-    public Deadline markAsUndone() {
-        return new Deadline(this.name, this.endDate, false);
+    public Event markAsUndone() {
+        return new Event(this.name, this.eventTime, false);
     }
 
     public String convertToStoredTaskFormat() {
@@ -49,7 +50,7 @@ public class Deadline extends Task {
             doneMark = " ";
         }
         String dateOutput = this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return String.format("[%s][%s] %s (by: %s)",
+        return String.format("[%s][%s] %s (at: %s)",
                 taskType, doneMark, super.name, dateOutput);
     }
 }

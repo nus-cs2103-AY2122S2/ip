@@ -1,3 +1,5 @@
+package mike;
+
 abstract class Task {
     protected final String name;
     protected final boolean isDone;

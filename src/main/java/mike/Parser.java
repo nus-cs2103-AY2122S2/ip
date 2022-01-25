@@ -1,3 +1,5 @@
+package mike;
+
 public class Parser {
     private final String userInput;
     private final String[] splitString;

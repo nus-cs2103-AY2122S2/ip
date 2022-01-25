@@ -1,3 +1,5 @@
+package mike;
+
 public class Ui {
 
     public Ui () {
