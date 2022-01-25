@@ -3,7 +3,11 @@ import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
 import java.util.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     public static void main(String[] args) {
@@ -60,24 +64,34 @@ public class Duke {
                     dukeException.noDescriptionException();
                 }
             } else if(command.startsWith("deadline")) {
+                command = command.replace("deadline", "");
+                String[] taskText = command.split(" /by");
                 try {
-                    command = command.replace("deadline", "");
-                    String[] taskText = command.split(" /by");
-                    Deadline deadlineTask = new Deadline(taskText[0], taskText[1]);
-                    System.out.println(Arrays.toString(taskText));
-                    taskList.add(deadlineTask);
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println(deadlineTask);
-                    System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                    DateTimeFormatter format1 = DateTimeFormatter.ofPattern("d/MM/yyyy");
+                    DateTimeFormatter format2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    DateTimeFormatter format3 = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"); // Not working
+
+                    // Create a formatter with the formats
+                    DateTimeFormatter parser = new DateTimeFormatterBuilder()
+                            .appendOptional(format1)
+                            .appendOptional(format2)
+                            .appendOptional(format3)
+                            .toFormatter();
+                    LocalDate parsedDate = LocalDate.parse(taskText[1].strip(),parser);
+                    Deadline deadlineTask = new Deadline(taskText[0].strip(), parsedDate);
+                    createDeadlineTask(deadlineTask, taskList);
                 } catch(ArrayIndexOutOfBoundsException invalidDeadlineSyntax) {
                     dukeException.invalidDeadlineSyntax();
+                } catch(DateTimeParseException wrongDate) {
+                    // This means that there is no date to be parsed, or incorrect format, so treat it as normal string
+                    Deadline deadlineTask = new Deadline(taskText[0].strip(), taskText[1].strip());
+                    createDeadlineTask(deadlineTask, taskList);
                 }
             } else if(command.startsWith("event")) {
                 try {
                     command = command.replace("event", "");
                     String[] taskText = command.split(" /at");
-                    System.out.println(Arrays.toString(taskText));
-                    Event eventTask = new Event(taskText[0], taskText[1]);
+                    Event eventTask = new Event(taskText[0].strip(), taskText[1].strip());
                     taskList.add(eventTask);
                     System.out.println("Got it. I've added this task:");
                     System.out.println(eventTask);
@@ -114,8 +128,9 @@ public class Duke {
                 if(data.contains("(by:")) {
                     data = data.substring(9);
                     String[] taskText = data.split("\\(by:");
-                    System.out.println("Deadline: " + Arrays.toString(taskText));
-                    Deadline deadlineTask = new Deadline(taskText[0].strip(), taskText[1].strip());
+                    StringBuilder sb = new StringBuilder(taskText[1].strip());
+                    sb.deleteCharAt(sb.length()-1);
+                    Deadline deadlineTask = new Deadline(taskText[0].strip(), sb.toString());
                       if(data.contains("[X]")) {
                           deadlineTask.setDone();
                       }
@@ -123,8 +138,9 @@ public class Duke {
                 } else if(data.contains("(at: ")) {
                     data = data.substring(9);
                     String[] taskText = data.split("\\(at:");
-                    System.out.println("Event: " + Arrays.toString(taskText));
-                   Event eventTask = new Event(taskText[0].strip(),taskText[1].strip());
+                    StringBuilder sb = new StringBuilder(taskText[1].strip());
+                    sb.deleteCharAt(sb.length()-1);
+                    Event eventTask = new Event(taskText[0].strip(),sb.toString());
                     if(data.contains("[X]")) {
                         eventTask.setDone();
                     }
@@ -164,5 +180,12 @@ public class Duke {
         } catch(NullPointerException | IOException fileInvalid) {
             System.out.println("File is Invalid!");
         }
+    }
+
+    public static void createDeadlineTask(Deadline task, ArrayList<Task> taskList) {
+        taskList.add(task);
+        System.out.println("Got it. I've added this task:");
+        System.out.println(task);
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 }
