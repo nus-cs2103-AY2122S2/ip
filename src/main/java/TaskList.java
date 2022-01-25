@@ -24,6 +24,10 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
+    boolean isEmpty() {
+        return tasks.size() == 0;
+    }
+
     int numTasksLeft() {
         int count = 0;
         for (Task task : tasks) {
@@ -71,9 +75,6 @@ public class TaskList {
      * Prints out every item contained in the tasks array
      */
     void listTasks() {
-        if (tasks.size() == 0) {
-            System.out.println("NOTHING! :D");
-        }
         for (int i = 0; i < tasks.size(); i++) {
             Task currentTask = tasks.get(i);
             System.out.printf("%d. %s\n", i + 1, currentTask);

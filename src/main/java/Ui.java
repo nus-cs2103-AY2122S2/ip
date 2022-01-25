@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.IOException;
+
 /**
  * Class to deal with any interactions with the user. It is contained
  * in the Bernie class and is responsible for printing out relevant messages
@@ -17,7 +20,7 @@ public class Ui {
     /**
      * Prints out message when user exits out of the program
      */
-    void leave() {
+    void showLeaveMsg() {
         System.out.println("See ya!");
     }
 
@@ -56,8 +59,11 @@ public class Ui {
      * Prints out the current taskList when the user inputs list into the program
      * @param tasks
      */
-    void listTasksMsg(TaskList tasks) {
+    void showListTasksMsg(TaskList tasks) {
         System.out.println("Here's what you need to do buddy:");
+        if (tasks.isEmpty()) {
+            System.out.println("NOTHING! :D");
+        }
         tasks.listTasks();
         System.out.println(lineBreak);
     }
@@ -77,6 +83,19 @@ public class Ui {
      */
     void showUndoneMsg(Task unmarkedTask) {
         System.out.printf("This is now undone:\n%s\n", unmarkedTask);
+        System.out.println(lineBreak);
+    }
+
+    /**
+     * Prints out the message when the program loads up the task file upon
+     * starting up
+     * @param tasks TaskList
+     * @param tasksFile File
+     * @throws IOException
+     */
+    void showTasksFileMsg(TaskList tasks, File tasksFile) throws IOException {
+        System.out.println("On the list:");
+        tasks.read(tasksFile);
         System.out.println(lineBreak);
     }
 }

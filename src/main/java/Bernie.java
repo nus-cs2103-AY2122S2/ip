@@ -11,10 +11,10 @@ import java.io.IOException;
 
 public class Bernie {
     TaskList tasks;
-    String lineBreak = "___________________________________________________________";
     String root = System.getProperty("user.dir");
     File tasksFile;
     File dataDir;
+    Ui ui;
 
     enum Type {
         TODO,
@@ -26,19 +26,14 @@ public class Bernie {
     }
 
     /**
-     * Constructs a new Bot containing TaskList
+     * Constructs a new Bot containing TaskList and greets the user
      */
     Bernie() {
         this.tasks = new TaskList();
         this.tasksFile = new File(root + "/data", "Bernie.txt");
         this.dataDir = new File(root, "data");
-    }
-    void greet() {
-        System.out.println("Hello! I'm Bernie\nWhat's up?");
-        System.out.println(lineBreak);
-    }
-    void leave() {
-        System.out.println("See ya!");
+        this.ui = new Ui();
+        ui.greet();
     }
 
     /**
@@ -56,7 +51,7 @@ public class Bernie {
                 tasks.save(tasksFile);
             }
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            ui.showErrorMsg(e.getMessage());
         }
     }
 
@@ -67,16 +62,14 @@ public class Bernie {
     void readTasks() {
         try {
             if (tasksFile.exists() && dataDir.exists()) {
-                System.out.println("On the list:");
-                tasks.read(tasksFile);
-                System.out.println(lineBreak);
+                ui.showTasksFileMsg(tasks, tasksFile);
             } else {
                 // create dir and file
                 dataDir.mkdir();
                 tasksFile.createNewFile();
             }
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            ui.showErrorMsg(e.getMessage());
         }
     }
 
@@ -89,9 +82,9 @@ public class Bernie {
     boolean respond(String input) {
         try {
             if (input.equals("list")) {
-                list();
+                ui.showListTasksMsg(tasks);
             } else if (input.equals("bye")) {
-                leave();
+                ui.showLeaveMsg();
             } else if (isMarkInput(input)) {
                 mark(input);
             } else if (input.equals("")) {
@@ -102,10 +95,9 @@ public class Bernie {
                 add(input);
             }
         } catch (BernieException e) {
-            System.out.println(e.getMessage());
-            System.out.println(lineBreak);
+            ui.showErrorMsg(e.getMessage());
         } catch (Exception e) {
-            e.printStackTrace();
+            ui.showErrorMsg(e.getMessage());
         } finally {
             return input.equals("bye");
         }
@@ -152,9 +144,7 @@ public class Bernie {
             throw new BernieException("Not a valid type of task!");
         }
         saveTasks();
-        System.out.printf("Got ya. Added:\n%s\nYou got %d tasks waiting for ya!\n",
-                newTask, tasks.numTasksLeft());
-        System.out.println(lineBreak);
+        ui.showAddedMsg(newTask, tasks.numTasksLeft());
     }
 
     /**
@@ -177,14 +167,11 @@ public class Bernie {
             String taskNum = getParams(Type.DELETE, input)[0];
             Task deletedTask = tasks.deleteTask(taskNum);
             saveTasks();
-            System.out.printf("Got ya. Removed:\n%s\nYou got %d tasks waiting for ya!\n",
-                    deletedTask, tasks.numTasksLeft());
-            System.out.println(lineBreak);
+            ui.showDeleteMsg(deletedTask, tasks.numTasksLeft());
         } catch (BernieException e){
-            System.out.println(e.getMessage());
-            System.out.println(lineBreak);
+            ui.showErrorMsg(e.getMessage());
         } catch (Exception e) {
-            e.printStackTrace();
+            ui.showErrorMsg(e.getMessage());
         }
     }
     /**
@@ -240,9 +227,7 @@ public class Bernie {
      * Bernie gets the TaskList to print out every Task contained inside
      */
     void list() {
-        System.out.println("Here's what you need to do buddy:");
-        tasks.listTasks();
-        System.out.println(lineBreak);
+        ui.showListTasksMsg(tasks);
     }
 
     /**
@@ -257,18 +242,15 @@ public class Bernie {
             String taskNum = inputArr[1];
             if (action.equals("mark")) {
                 Task markedTask = tasks.markTask(Type.MARK, taskNum);
-                System.out.printf("This is now done:\n%s\n", markedTask);
-                System.out.println(lineBreak);
+                ui.showDoneMsg(markedTask);
             } else if (action.equals("unmark")) {
                 Task unmarkedTask = tasks.markTask(Type.UNMARK, taskNum);
-                System.out.printf("This is now undone:\n%s\n", unmarkedTask);
-                System.out.println(lineBreak);
+                ui.showUndoneMsg(unmarkedTask);
             }
         } catch (BernieException e) {
-            System.out.println(e.getMessage());
-            System.out.println(lineBreak);
+            ui.showErrorMsg(e.getMessage());
         } catch (Exception e) {
-            e.printStackTrace();
+            ui.showErrorMsg(e.getMessage());
         }
     }
 
@@ -352,7 +334,6 @@ public class Bernie {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Bernie bernie = new Bernie();
-        bernie.greet();
         bernie.readTasks();
         while (true) {
             String input = sc.nextLine();
