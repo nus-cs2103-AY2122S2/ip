@@ -1,3 +1,9 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -24,6 +30,9 @@ public class Duke {
         public String toString() {
             return "[T]" + (this.done? "[X] " : "[ ] ") + this.content;
         }
+        public String fileString() {
+            return "T | " + (this.done ? "1 | " : "0 | ") + this.content;
+        }
     }
     private class Deadline extends Item{
         private String deadline;
@@ -43,6 +52,11 @@ public class Duke {
         public String toString() {
             return "[D]" + (super.done? "[X] " : "[ ] ") + super.content + " (by " + this.deadline + ")";
         }
+        
+        @Override
+        public String fileString() {
+            return "D | " + (super.done ? "1 | " : "0 | ") + super.content + " | " + this.deadline;
+        }
     }
     private class Event extends Item {
         private String time;
@@ -61,6 +75,11 @@ public class Duke {
         @Override
         public String toString() {
             return "[E]" + (super.done? "[X] " : "[ ] ") + super.content + " (at " + this.time + ")";
+        }
+        
+        @Override
+        public String fileString() {
+            return "E | " + (super.done ? "1 | " : "0 | ") + super.content + " | " + this.time;
         }
     }
     private Duke() {
@@ -98,6 +117,7 @@ public class Duke {
             System.out.println(item.toString());
             System.out.println(numItems == 1 ? "Now there is 1 task in your list."
                     :"Now there are " + numItems + " tasks in your list.");
+            this.writeToFile();
         }
     }
 
@@ -122,6 +142,7 @@ public class Duke {
                 System.out.println(item.toString());
                 System.out.println(numItems == 1 ? "Now there is 1 task in your list."
                         :"Now there are " + numItems + " tasks in your list.");
+                this.writeToFile();
             }
         }
     }
@@ -147,6 +168,7 @@ public class Duke {
                 System.out.println(item.toString());
                 System.out.println(numItems == 1 ? "Now there is 1 task in your list."
                         : "Now there are " + numItems + " tasks in your list.");
+                this.writeToFile();
             }
         }
     }
@@ -180,6 +202,7 @@ public class Duke {
                     item.mark();
                     System.out.println("Alright! I've marked this task as done:");
                     System.out.println(item.toString());
+                    this.writeToFile();
                 }
             } catch (NumberFormatException nfe) {
                 System.out.println("Oops! Please use the following format:");
@@ -204,6 +227,7 @@ public class Duke {
                     item.unmark();
                     System.out.println("Alright! I've marked this task as not done yet:");
                     System.out.println(item.toString());
+                    this.writeToFile();
                 }
             } catch (NumberFormatException nfe) {
                 System.out.println("Oops! Please use the following format:");
@@ -230,6 +254,7 @@ public class Duke {
                     System.out.println("Alright! I've removed this task:");
                     System.out.println(item.toString());
                     System.out.println("Now you have " + this.numItems + " tasks in your list.");
+                    this.writeToFile();
                 }
             } catch (NumberFormatException nfe) {
                 System.out.println("Oops! Please use the following format:");
@@ -259,11 +284,54 @@ public class Duke {
         }
     }
 
+    public void openFolder(String folderPath) {
+        Path path = Paths.get(folderPath);
+        if(!Files.exists(path)) {
+            File f1 = new File("data/");
+            if(f1.mkdirs()) {
+                System.out.println("Folder successfully created.");
+            } else {
+                System.out.println("Failed to create folder.");
+            }
+        }
+    }
+
+    public void openFile(String folderPath, String fileName) {
+        Path filePath = Paths.get(folderPath + fileName);
+        if(!Files.exists(filePath)) {
+            File file = new File(folderPath, fileName);
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void writeToFile() {
+        try {
+            String content = "";
+            FileWriter fw = new FileWriter("data/ann.txt");
+            for (int i = 0; i < this.numItems; i++) {
+                content += this.list.get(i).fileString();
+                if(i != this.numItems - 1) {
+                    content += "\n";
+                }
+            }
+            fw.write(content);
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Unable to write to file: " + e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
         Duke duke = new Duke();
+        duke.openFolder("data/");
+        duke.openFile("data/", "ann.txt");
+
         String greetings = "Greetings from Ann\n" + "What can I do for you?";
         System.out.println(greetings);
-
         Scanner sc = new Scanner(System.in);
 
         while(true) {
