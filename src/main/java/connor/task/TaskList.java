@@ -187,9 +187,10 @@ public class TaskList {
         }
     }
 
-    private static void getNoOfTasks() {
+    public static int getNoOfTasks() {
         String plurality = tasks.size() == 1 ? "" : "s";
         print("You have " + tasks.size() + " task" + plurality + ".");
+        return tasks.size();
     }
 
     private static void print(String s) {
