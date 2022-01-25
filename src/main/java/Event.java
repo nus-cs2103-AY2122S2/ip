@@ -1,4 +1,7 @@
 import exceptions.DukeEventException;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Event extends Task {
 
@@ -9,17 +12,18 @@ public class Event extends Task {
         this.at = at;
     }
 
-    public static Event setEvent(String input) {
+    public static Event setEvent(String input) throws IOException {
         String eventname;
         String eventat;
+
 
         try {
             String[] split = input.split("/at");
             eventname = split[0];
             eventat = split[1];
             Event e = new Event(eventname, eventat);
-            System.out.println("Got it. I've added this task: ");
-            System.out.println(e.toString());
+//            System.out.println("Got it. I've added this task: ");
+//            System.out.println(e.toString());
             return e;
         } catch (Exception e) {
             DukeEventException error = new DukeEventException("OOPS!!! Please enter in format: event <event>/at<event date>");
