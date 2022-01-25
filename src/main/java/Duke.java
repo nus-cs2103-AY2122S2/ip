@@ -8,7 +8,7 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.print("Hello from\n" + logo + "\n");
+        // System.out.print("Hello from\n" + logo + "\n");
 
         String space = "     ";
         String longSpace = "        ";
