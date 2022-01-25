@@ -18,7 +18,7 @@ public class Command {
             this.argument = inputArgs[1];
         }
         if (extraArgs.length > 1) {
-            this.argument = inputArgs[1].substring(0, inputArgs[1].indexOf("/") );
+            this.argument = inputArgs[1].substring(0, inputArgs[1].indexOf("/"));
             if (extraArgs[1].trim().split(" ", 2).length > 1) {
                 this.extraInfo = extraArgs[1].trim().split(" ", 2)[1];
             }
@@ -26,7 +26,7 @@ public class Command {
     }
 
     public void run(Scanner sc) {
-        if(command.equals("")) {
+        if (command.equals("")) {
             return;
         }
 
