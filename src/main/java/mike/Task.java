@@ -1,5 +1,7 @@
 package mike;
 
+import java.util.Locale;
+
 abstract class Task {
     protected final String name;
     protected final boolean isDone;
@@ -27,6 +29,18 @@ abstract class Task {
     abstract Task markAsUndone();
 
     abstract String convertToStoredTaskFormat();
+
+    /**
+     * Returns true if the task name contains the specified search words.
+     *
+     * @param searchWords Words to be searched for as specified by the user.
+     * @return true if the task name contains the search words; else returns false.
+     */
+    public boolean containsSearchWords(String searchWords) {
+        String taskName = this.name.toLowerCase();
+        String search = searchWords.toLowerCase();
+        return taskName.indexOf(search) != -1;
+    }
 
     @Override
     public String toString() {

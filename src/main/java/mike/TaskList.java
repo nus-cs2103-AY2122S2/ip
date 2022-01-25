@@ -108,10 +108,22 @@ public class TaskList {
     }
 
     /**
-     * Returns a String to be added to storedList.txt for storage in the hard drive.
-     *
-     * @return String representing the entire list of tasks.
+     * Returns a String representing the tasks that the user is searching for.
+     * @return String with the tasks the user is looking for.
      */
+    String findTasksInListForPrint(String searchWords) {
+        int counter = 1;
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("Behold, the items containing \"%s\"!\n", searchWords));
+        for (Task task : listOfTasks) {
+            if (task.containsSearchWords(searchWords)) {
+                sb.append(String.format("%d. %s\n", counter, task));
+            }
+            counter++;
+        }
+        return sb.toString();
+    }
+
     String convertToStoredListFormat() {
         StringBuilder sb = new StringBuilder();
         for (Task task : listOfTasks) {

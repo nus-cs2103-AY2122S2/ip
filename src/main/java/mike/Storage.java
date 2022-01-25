@@ -25,7 +25,7 @@ public class Storage {
         File file = new File(filePath);
         return file;
     }
-    
+
     /**
      * Stores the list according to the specified filePath.
      *

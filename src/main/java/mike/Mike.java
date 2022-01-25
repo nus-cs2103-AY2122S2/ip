@@ -149,6 +149,11 @@ public class Mike {
         ui.printReply(taskList.unmarkInListWithMessage(indexFromUser));
     }
 
+    private void findInList(String searchWords) {
+        String listForPrint = taskList.findTasksInListForPrint(searchWords);
+        ui.printReply(listForPrint);
+    }
+
     /**
      * Processes the user's input then and responds accordingly.
      *
@@ -195,6 +200,9 @@ public class Mike {
 
                 addEvent(eventName, eventDate);
                 break;
+            case "find":
+                String searchWords = parser.getSearchWords();
+                findInList(searchWords);
             default:
                 String invalidCommandMessage =
                         String.format("\n**Mike: I don't understand the command \"%s\"**",
