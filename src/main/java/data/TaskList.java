@@ -5,6 +5,8 @@ import task.Task;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -36,8 +38,35 @@ public class TaskList {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
+    /**
+     * Returns the length of taskList array.
+     *
+     * @return Size of taskList.
+     */
     public int getTaskListSize() {
         return this.taskList.size();
+    }
+
+    /**
+     * Returns the filtered ArrayList of Task by applying
+     * filter function on each Task in list.
+     *
+     * @param filter Filter function to applied on each task returning
+     *               a boolean on whether the task passes the filter.
+     * @return Filtered list of tasks.
+     */
+    public ArrayList<Task> filterTasks(Function<Task, Boolean> filter) {
+        Predicate<Task> taskFilter = new Predicate<Task>() {
+            @Override
+            public boolean test(Task task) {
+                return filter.apply(task);
+            }
+        };
+
+        return this.taskList
+                .stream()
+                .filter(taskFilter)
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     /**

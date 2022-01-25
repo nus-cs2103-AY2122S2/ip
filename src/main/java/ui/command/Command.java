@@ -77,6 +77,9 @@ public abstract class Command {
         case "unmark":
             command = new UnmarkTaskCommand(name, args, taskList);
             break;
+        case "find":
+            command = new FindCommand(name, args, taskList);
+            break;
         case "bye":
             command = new ExitCommand(name, args);
             break;
