@@ -1,4 +1,4 @@
-package li.zhongfu.cs2103.chatbot;
+package li.zhongfu.cs2103.chatbot.types;
 
 /**
  * Object that represents a to-do list task. Contains a name and a state.

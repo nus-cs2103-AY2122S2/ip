@@ -8,6 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import li.zhongfu.cs2103.chatbot.types.Deadline;
+import li.zhongfu.cs2103.chatbot.types.Event;
+import li.zhongfu.cs2103.chatbot.types.Task;
+import li.zhongfu.cs2103.chatbot.types.ToDo;
+
 public class Duke {
     private static final String HLINE = "____________________________________________________________";
     private static final String BOT_NAME = "Duke";
