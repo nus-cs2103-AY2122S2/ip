@@ -1,11 +1,11 @@
-public class Task {
+public abstract class Task {
     
     protected String description; 
     protected boolean done;
 
-    public Task(String description) {
+    public Task(String description, boolean done) {
         this.description = description;
-        this.done = false;
+        this.done = done;
     }
 
     public String getStatusIcon() {
@@ -32,5 +32,7 @@ public class Task {
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);
     }
+
+    public abstract String toStringSaveData();
 
 }
