@@ -22,6 +22,10 @@ public class Deadline extends Task {
         super(name, isMarked);
         this.by = by;
     }
+    @Override
+    public String export() {
+        return "D " + "| " + (isMarked? 1 : 0) + " | " + this.name + " | " + this.by;
+    }
     /**
      * Returns a customised String
      * @return Customised String format
