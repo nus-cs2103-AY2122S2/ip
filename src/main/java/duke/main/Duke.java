@@ -1,7 +1,7 @@
 package duke.main;
 
 import duke.parser.Parser;
-import duke.Storage.Storage;
+import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 

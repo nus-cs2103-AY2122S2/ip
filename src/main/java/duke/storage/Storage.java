@@ -1,4 +1,4 @@
-package duke.Storage;
+package duke.storage;
 
 import duke.task.Deadline;
 import duke.task.Event;
