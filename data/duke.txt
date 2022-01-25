@@ -1,5 +1,7 @@
 T | X | read book
 E |   | project meeting  |  2pm
-D | X | return book  |  Sunday
+T | X | return book 
 T | X | join the club
-D |   | assignment 1  |  18th Feb
+T |   | assignment 1 
+T |   | test 
+D |   | test 2  | 2022-01-18

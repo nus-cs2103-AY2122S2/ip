@@ -1,3 +1,5 @@
+import java.time.DateTimeException;
+
 public class Parser {
 
     public Parser() {
@@ -34,7 +36,12 @@ public class Parser {
 
         if (prefix.equals(TaskConstant.PREFIX_DEADLINE)) {
             String by = tokens[3];
-            task =  new Deadline(description, by);
+            try {
+                task = new Deadline(description, by);
+            } catch (DateTimeException e) {
+                ExceptionHandler.printDateTimeException();
+                task = new Todo(description);
+            }
         } else if (prefix.equals(TaskConstant.PREFIX_EVENT)) {
             String at = tokens[3];
             task = new Event(description, at);

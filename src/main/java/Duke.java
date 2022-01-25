@@ -1,10 +1,10 @@
 import java.io.IOException;
+import java.rmi.server.ExportException;
 import java.time.DateTimeException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    private static final String HORIZONTAL_LINE = "\t" + "____________________________________________________________";
 
     private static ArrayList<Task> savedTasks = new ArrayList<>();
 
@@ -34,22 +34,11 @@ public class Duke {
             try {
                 executeCommand(userInput);
             } catch (UnknownCommandException e) {
-                printUnknownCommandException();
+                ExceptionHandler.printUnknownCommandException();
             } catch (EmptyTaskException e) {
-                printEmptyTaskException();
+                ExceptionHandler.printEmptyTaskException();
             }
         }
-    }
-
-    private static void printEmptyTaskException() {
-        System.out.println(HORIZONTAL_LINE);
-        System.out.println("\t" + "☹ OOPS!!! Missing arguments.");
-        System.out.println(HORIZONTAL_LINE);
-    }
-    private static void printUnknownCommandException() {
-        System.out.println(HORIZONTAL_LINE);
-        System.out.println("\t" + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-        System.out.println(HORIZONTAL_LINE);
     }
 
     private static void executeCommand(String userInput) throws UnknownCommandException, EmptyTaskException {
@@ -76,21 +65,21 @@ public class Duke {
             try {
                 executeMark(commandArgument);
             } catch (InvalidIndexException e) {
-                printInvalidIndexException();
+                ExceptionHandler.printInvalidIndexException();
             }
             break;
         case COMMAND_UNMARK:
             try {
                 executeUnmark(commandArgument);
             } catch (InvalidIndexException e) {
-                printInvalidIndexException();
+                ExceptionHandler.printInvalidIndexException();
             }
             break;
         case COMMAND_DELETE:
             try {
                 executeDelete(commandArgument);
             } catch (InvalidIndexException e) {
-                printInvalidIndexException();
+                ExceptionHandler.printInvalidIndexException();
             }
             break;
         case COMMAND_TODO:
@@ -100,14 +89,14 @@ public class Duke {
             try {
                 executeAddDeadline(commandArgument);
             } catch (MissingDateTimeException e) {
-                printMissingDateTimeException();
+                ExceptionHandler.printMissingDateTimeException();
             }
             break;
         case COMMAND_EVENT:
             try {
                 executeAddEvent(commandArgument);
             } catch (MissingDateTimeException e) {
-                printMissingDateTimeException();
+                ExceptionHandler.printMissingDateTimeException();
             }
             break;
         default:
@@ -115,17 +104,6 @@ public class Duke {
         }
     }
 
-    private static void printInvalidIndexException() {
-        System.out.println(HORIZONTAL_LINE);
-        System.out.println("\t" + "☹ OOPS!!! Invalid index.");
-        System.out.println(HORIZONTAL_LINE);
-    }
-
-    private static void printMissingDateTimeException() {
-        System.out.println(HORIZONTAL_LINE);
-        System.out.println("\t" + "☹ OOPS!!! Missing date/time. Please specify it.");
-        System.out.println(HORIZONTAL_LINE);
-    }
     private static void executeAddTodo(String commandArgument) {
         savedTasks.add(new Todo(commandArgument));
         printConfirmAdd();
@@ -140,14 +118,8 @@ public class Duke {
             savedTasks.add(new Deadline(deadlineDetail[0], deadlineDetail[1]));
             printConfirmAdd();
         } catch (DateTimeException e) {
-            printDateTimeException();
+            ExceptionHandler.printDateTimeException();
         }
-    }
-
-    private static void printDateTimeException() {
-        System.out.println(HORIZONTAL_LINE);
-        System.out.println("\t" + "☹ OOPS!!! Wrong format date.");
-        System.out.println(HORIZONTAL_LINE);
     }
 
     private static void executeAddEvent(String commandArgument) throws MissingDateTimeException{
@@ -160,11 +132,11 @@ public class Duke {
     }
 
     private static void printConfirmAdd() {
-        System.out.println(HORIZONTAL_LINE);
+        System.out.println(Constant.HORIZONTAL_LINE);
         System.out.println("\t" + "Got it. I've added this task:");
         System.out.println("\t" + savedTasks.get(savedTasks.size() - 1).toString());
         System.out.println("\t" + "Now you have " + savedTasks.size() + " tasks in the list.");
-        System.out.println(HORIZONTAL_LINE);
+        System.out.println(Constant.HORIZONTAL_LINE);
     }
 
     private static String[] parseUserInput(String userInput) {
@@ -182,10 +154,10 @@ public class Duke {
             throw new InvalidIndexException();
         }
         savedTasks.get(index).markAsDone();
-        System.out.println(HORIZONTAL_LINE);
+        System.out.println(Constant.HORIZONTAL_LINE);
         System.out.println("\t" + "Nice! I've marked this task as done:");
         System.out.println("\t" + savedTasks.get(index).toString());
-        System.out.println(HORIZONTAL_LINE);
+        System.out.println(Constant.HORIZONTAL_LINE);
     }
 
     private static void executeUnmark(String commandArgument) throws InvalidIndexException {
@@ -194,10 +166,10 @@ public class Duke {
             throw new InvalidIndexException();
         }
         savedTasks.get(index).markAsNotDone();
-        System.out.println(HORIZONTAL_LINE);
+        System.out.println(Constant.HORIZONTAL_LINE);
         System.out.println("\t" + "OK, I've marked this task as not done yet:");
         System.out.println("\t" + savedTasks.get(index).toString());
-        System.out.println(HORIZONTAL_LINE);
+        System.out.println(Constant.HORIZONTAL_LINE);
     }
 
     private static void executeDelete(String commandArgument) throws InvalidIndexException {
@@ -205,36 +177,36 @@ public class Duke {
         if (index < 0 || index > savedTasks.size() - 1) {
             throw new InvalidIndexException();
         }
-        System.out.println(HORIZONTAL_LINE);
+        System.out.println(Constant.HORIZONTAL_LINE);
         System.out.println("\t" + "Noted. I've removed this task:");
         System.out.println("\t" + savedTasks.get(index).toString());
         savedTasks.remove(index);
         System.out.println("\t" + "Now you have " + savedTasks.size() + " tasks in the list.");
-        System.out.println(HORIZONTAL_LINE);
+        System.out.println(Constant.HORIZONTAL_LINE);
     }
 
     private static void executeList() {
-        System.out.println(HORIZONTAL_LINE);
+        System.out.println(Constant.HORIZONTAL_LINE);
         System.out.println("\t" + "Here are the tasks in your list:");
         for (int i = 0; i < savedTasks.size(); i++) {
             int index = i + 1;
             System.out.println("\t" + index + "." + savedTasks.get(i).toString());
         }
-        System.out.println(HORIZONTAL_LINE);
+        System.out.println(Constant.HORIZONTAL_LINE);
     }
 
     private static void executeExit() throws IOException {
         Storage.writeTaskToFile(savedTasks);
-        System.out.println(HORIZONTAL_LINE);
+        System.out.println(Constant.HORIZONTAL_LINE);
         System.out.println("\t" + "Bye. Hope to see you again soon!");
-        System.out.println(HORIZONTAL_LINE);
+        System.out.println(Constant.HORIZONTAL_LINE);
         System.exit(0);
     }
 
     private static void printGreeting() {
-        System.out.println(HORIZONTAL_LINE);
+        System.out.println(Constant.HORIZONTAL_LINE);
         System.out.println("\t" + "Hello! I'm Duke");
         System.out.println("\t" + "What can I do for you?");
-        System.out.println(HORIZONTAL_LINE);
+        System.out.println(Constant.HORIZONTAL_LINE);
     }
 }

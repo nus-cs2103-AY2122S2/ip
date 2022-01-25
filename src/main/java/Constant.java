@@ -14,6 +14,7 @@ public class Constant {
     public static final String VERTICAL_BAR_WITH_SPACE = " | ";
     public static final String VERTICAL_BAR_REGEX = " \\| ";
     public static final String LINE_SEPARATOR = System.lineSeparator();
+    public static final String HORIZONTAL_LINE = "\t" + "____________________________________________________________";
 
 
 }
