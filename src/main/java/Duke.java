@@ -69,9 +69,9 @@ public class Duke {
             }
             
         } catch (IOException e) {
-            System.out.println(indentationText + e.getMessage());
+            System.err.println(indentationText + e.getMessage());
         } catch (DukeException e) {
-            System.out.println(indentationText + e.getMessage());
+            System.err.println(indentationText + e.getMessage());
         }
     }
 
@@ -85,7 +85,7 @@ public class Duke {
             }
             fw.close();
         } catch (IOException e) {
-            System.out.print(e.getMessage());
+            System.err.print(indentationText + e.getMessage());
         }
     }
 
@@ -179,7 +179,7 @@ public class Duke {
             }
             
             catch(DukeException e) {
-                System.out.println(String.format("%s%s", indentationText, e.getMessage()));
+                System.err.println(String.format("%s%s", indentationText, e.getMessage()));
             }
         }
 
@@ -227,7 +227,7 @@ public class Duke {
             System.out.println(String.format("%sNoted. I've added this task:", indentationText));
             System.out.println(String.format("%s%s", indentationTaskStatus, task));
         } catch (DukeException e) {
-            System.out.println(indentationText + e.getMessage());
+            System.err.println(indentationText + e.getMessage());
         }
     }
 
@@ -248,7 +248,7 @@ public class Duke {
                 System.out.println(String.format("%s%s", indentationTaskStatus, task));
                 
             } catch (DukeException e) {
-                System.out.println(String.format("%s%s", indentationText, e.getMessage())); 
+                System.err.println(String.format("%s%s", indentationText, e.getMessage())); 
             }
         } else {
             throw new DukeException("I'm sorry, you missed out the task index");
@@ -273,7 +273,7 @@ public class Duke {
                 System.out.println(String.format("%s%s", indentationTaskStatus, task));
                 
             } catch (DukeException e) {
-                System.out.println(String.format("%s%s", indentationText, e.getMessage())); 
+                System.err.println(String.format("%s%s", indentationText, e.getMessage())); 
             }
         } else {
             throw new DukeException("I'm sorry, you missed out the task index");
