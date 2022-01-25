@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, DukeException {
         // greeting message
         String greetings = "    Hi there! 👋 I'm Duke\n"
                             + "    What can I do for you?";
@@ -66,7 +66,7 @@ public class Duke {
                 String userInputTask = String.join(" ", Arrays.copyOfRange(userInputArr, 1, userInputArr.length));
 
                 try {
-                    UserInputTaskValidator.userCommandValidator(userCommand);
+                    Parser.userCommandValidator(userCommand);
                 } catch (DukeException e) {
                     System.out.println(lines);
                     System.out.println("    OOPS!!! I'm sorry, but I don't know what that means.");
@@ -75,20 +75,12 @@ public class Duke {
 
                 switch (userCommand) {
                     case "list":
-                        System.out.println(lines);
-                        System.out.println("    Here are the tasks in your list:");
-                        for (int i = 0; i < todoList.size(); i++) {
-                            String display = String.format("    %d.%s", i + 1, todoList.get(i).toString());
-                            System.out.println(display);
-                        }
-                        System.out.println(lines);
+                        Parser.parserList(todoList);
                         break;
-
                     case "todo":
-
                         // handle error from empty task description
                         try {
-                            UserInputTaskValidator.taskDescriptionValidator(userCommand ,userInputTask);
+                            Parser.parserTodo(todoList, userInputTask);
                         } catch (DukeException e) {
                             System.out.println(lines);
                             System.out.println("    OOPS!!! The description of a todo cannot be empty.");
@@ -96,57 +88,19 @@ public class Duke {
                             break;
                         }
 
-                        System.out.println(lines);
-
-                        // adding task to todoList
-                        Todo userToDoTask = new Todo(userInputTask);
-                        todoList.add(userToDoTask);
-
                         // save tasks to duke.txt
                         storage.save(todoList);
-
-                        // display to do task
-                        System.out.println("    Got it. I've added this task:");
-                        System.out.println("        " + userToDoTask.toString());
-                        System.out.println("    " + displayTaskAmount);
-                        System.out.println(lines);
-
                         break;
-
                     case "deadline":
                         // handle error from empty task description
                         try {
-                            UserInputTaskValidator.taskDescriptionValidator(userCommand, userInputTask);
+                            Parser.parserDeadlineValidator(userInputTask);
                         } catch (DukeException e) {
-                            System.out.println(lines);
-                            System.out.println("    OOPS!!! The description of a deadline cannot be empty.");
-                            System.out.println(lines);
-                            break;
-                        }
-
-                        // handle error from empty by
-                        try {
-                            UserInputTaskValidator.deadlineTaskValidator(userInputTask);
-                        } catch (DukeException e) {
-                            System.out.println(lines);
-                            System.out.println("    OOPS!!! Deadline tasks require a by day.");
-                            System.out.println(lines);
-                            break;
-                        }
-
-                        // handle error when there is more than one by deadline day
-                        try {
-                            UserInputTaskValidator.deadlineByDayValidator(userInputTask);
-                        } catch (DukeException e) {
-                            System.out.println(lines);
-                            System.out.println("    OOPS!!! Deadline tasks can only have one by day.");
-                            System.out.println(lines);
                             break;
                         }
 
                         // splitting deadline into description and by
                         String[] deadlineTaskArr = userInputTask.split(" /by ");
-                        String deadlineDescription = deadlineTaskArr[0];
                         String[] byAndTime = deadlineTaskArr[1].split(" ");
                         String by = byAndTime[0];
 
@@ -169,16 +123,14 @@ public class Duke {
                             LocalTime.parse(deadlineTime);
                         } catch (DateTimeParseException e) {
                             System.out.println(lines);
-                            System.out.println("Time must be in the hh:mm 24hr format");
+                            System.out.println("    Time must be in the hh:mm 24hr format");
                             System.out.println(lines);
                             break;
                         }
 
-                        LocalTime time = LocalTime.parse(deadlineTime);
-
                         // handle error when there is invalid deadline date format
                         try {
-                            UserInputTaskValidator.deadlineDateFormatValidator(by);
+                            Parser.deadlineDateFormatValidator(by);
                         } catch (DukeException e) {
                             System.out.println(lines);
                             System.out.println("    OOPS!!! Deadline tasks can only be in the YYYY-MM-DD format.");
@@ -186,57 +138,19 @@ public class Duke {
                             break;
                         }
 
-                        LocalDate deadlineDate = LocalDate.parse(by);
-
-                        System.out.println(lines);
-                        // adding task to todoList
-                        Deadline userDeadlineTask = new Deadline(deadlineDescription, deadlineDate, time);
-                        todoList.add(userDeadlineTask);
+                        Parser.parserDeadline(todoList, userInputTask);
 
                         // save tasks to duke.txt
                         storage.save(todoList);
-
-                        // displaying
-                        System.out.println("    Got it. I've added this task:");
-                        System.out.println("        " + userDeadlineTask.toString());
-                        System.out.println("    " + displayTaskAmount);
-                        System.out.println(lines);
-
-
                         break;
 
                     case "event":
-                        // handle error from empty task description
+
                         try {
-                            UserInputTaskValidator.taskDescriptionValidator(userCommand, userInputTask);
+                            Parser.parserEventValidator(userInputTask);
                         } catch (DukeException e) {
-                            System.out.println(lines);
-                            System.out.println("    OOPS!!! The description of an event cannot be empty.");
-                            System.out.println(lines);
                             break;
                         }
-
-                        // handle error when there is no datTime
-                        try {
-                            UserInputTaskValidator.eventTaskValidator(userInputTask);
-                        } catch (DukeException e) {
-                            System.out.println(lines);
-                            System.out.println("    OOPS!!! Event tasks require an at date and time.");
-                            System.out.println(lines);
-                            break;
-                        }
-
-                        // handle error when there is more than one dateTime
-                        try {
-                            UserInputTaskValidator.eventAtDateTimeValidator(userInputTask);
-                        } catch (DukeException e) {
-                            System.out.println(lines);
-                            System.out.println("    OOPS!!! Event tasks can only have one at date and time.");
-                            System.out.println(lines);
-                            break;
-                        }
-
-                        System.out.println(lines);
 
                         // splitting event into description and dateTime
                         String[] eventTaskArr = userInputTask.split(" /at ");
@@ -263,7 +177,7 @@ public class Duke {
                             LocalTime.parse(eventTime);
                         } catch (DateTimeParseException e) {
                             System.out.println(lines);
-                            System.out.println("Time must be in the hh:mm 24hr format");
+                            System.out.println("    Time must be in the hh:mm 24hr format");
                             System.out.println(lines);
                             break;
                         }
@@ -271,7 +185,7 @@ public class Duke {
                         LocalTime atTime = LocalTime.parse(eventTime);
                         // handle error when there is invalid deadline date format
                         try {
-                            UserInputTaskValidator.eventAtDateTimeValidator(eventDate);
+                            Parser.eventDateFormatValidator(eventDate);
                         } catch (DukeException e) {
                             System.out.println(lines);
                             System.out.println("    OOPS!!! Deadline tasks can only be in the YYYY-MM-DD format.");
@@ -279,91 +193,37 @@ public class Duke {
                             break;
                         }
 
-                        LocalDate eventAtDate = LocalDate.parse(eventDate);
-
-                        // adding task to todoList
-                        Event userEventTask = new Event(eventDescription, eventAtDate, atTime);
-                        todoList.add(userEventTask);
+                        Parser.parserEvent(todoList, userInputTask);
 
                         // save tasks to duke.txt
                         storage.save(todoList);
-
-                        System.out.println("    Got it. I've added this task:");
-                        System.out.println("        " + userEventTask.toString());
-                        System.out.println("    " + displayTaskAmount);
-                        System.out.println(lines);
-
                         break;
 
                     case "mark":
-                        int taskToMark = Integer.parseInt(userInputArr[1]);
-                        todoList.get(taskToMark - 1).markAsDone();
+                        Parser.parserMark(todoList, userInputArr);
 
                         // save update tasks to duke.txt
                         storage.save(todoList);
-
-                        System.out.println(lines);
-                        System.out.println("    Nice! I've marked this task as done:");
-
-                        String taskMarkString = String.format("%s", todoList.get(taskToMark - 1).toString());
-                        System.out.println("    " + taskMarkString);
-                        System.out.println(lines);
-
                         break;
 
                     case "unmark":
-                        int taskToUnmark = Integer.parseInt(userInputArr[1]);
-                        todoList.get(taskToUnmark - 1).markAsNotDone();
+                        Parser.parserUnmark(todoList, userInputArr);
 
                         // save update tasks to duke.txt
                         storage.save(todoList);
-
-                        System.out.println(lines);
-                        System.out.println("    OK, I've marked this task as not done yet:");
-
-                        String taskString = String.format("%s", todoList.get(taskToUnmark - 1).toString());
-                        System.out.println("    " + taskString);
-                        System.out.println(lines);
                         break;
 
                     case "delete":
-                        // handle error when there is no specified task number to be deleted
                         try {
-                            UserInputTaskValidator.deleteValidator(userInputTask);
+                            Parser.parserDeleteValidator(todoList, userInputTask);
                         } catch (DukeException e) {
-                            System.out.println(lines);
-                            System.out.println("    Delete command must have a specified task number to be deleted.");
-                            System.out.println(lines);
                             break;
                         }
 
-                        // handle error when the task number specified is invalid
-                        try {
-                            UserInputTaskValidator.deleteTaskNumberValidator(todoList, userInputTask);
-                        } catch (DukeException e) {
-                            System.out.println(lines);
-                            System.out.println("    Invalid task number to be deleted.");
-                            System.out.println(lines);
-                            break;
-                        }
-
-                        int taskToDelete = Integer.parseInt(userInputArr[1]) - 1;
-                        // to be removed task
-                        Task tobeRemoved = todoList.get(taskToDelete);
-
-                        // deleting task from the array list
-                        todoList.remove(taskToDelete);
+                        Parser.parserDelete(todoList, userInputArr);
 
                         // save update tasks to duke.txt
                         storage.save(todoList);
-
-                        System.out.println(lines);
-                        System.out.println("    Noted. I've removed this task:");
-                        System.out.println("        " + tobeRemoved.toString());
-
-                        String taskRemainingString = String.format("    Now you have %d tasks in the list.", todoList.size());
-                        System.out.println(taskRemainingString);
-                        System.out.println(lines);
                         break;
                 }
                 userInput = sc.nextLine();
