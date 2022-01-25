@@ -1,4 +1,9 @@
-package main.java;
+package Duke.main;
+
+import Duke.task.Deadline;
+import Duke.task.Event;
+import Duke.task.TaskList;
+import Duke.task.ToDo;
 
 import java.io.IOException;
 import java.time.format.DateTimeParseException;

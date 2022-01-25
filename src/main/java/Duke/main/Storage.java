@@ -1,4 +1,7 @@
-package main.java;
+package Duke.main;
+
+import Duke.task.Task;
+import Duke.task.TaskList;
 
 import java.io.*;
 import java.util.ArrayList;

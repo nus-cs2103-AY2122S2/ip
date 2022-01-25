@@ -1,4 +1,6 @@
-package main.java;
+package Duke.main;
+
+import Duke.task.TaskList;
 
 import java.io.*;
 import java.util.Scanner;
@@ -35,7 +37,7 @@ public class Duke {
     }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        new Duke("dukeDataSaved.txt").run();
+        new Duke("duke_Data_Saved.txt").run();
     }
 
 }

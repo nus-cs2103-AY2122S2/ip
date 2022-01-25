@@ -1,4 +1,4 @@
-package main.java;
+package Duke.main;
 
 public class DukeException extends Exception {
     String job;
