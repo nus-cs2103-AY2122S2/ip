@@ -1,5 +1,14 @@
-T |   | king
-T | X | alskdmlaskmdlkamsd
-T | X | hello
-D | X | eat a hamburger | midnight
-E |   | say bye to emily | 6pm
+D |   | finish eating a burger | 2015-01-23
+D |   | finish eating a burger | 2015-01-22
+D |   | finish eating a hamburger | 2015-01-25
+D |   | finish eating a zenburger | 2015-01-25
+D |   | finish eating a hamburger | 2015-01-25
+D |   | finish eating a burger | 2015-01-22
+D |   | finish eating a zenburger | 2015-01-25
+D |   | finish eating a zenburger | 2015-01-25
+T |   | hello bird
+T |   | hello bird
+T |   | hello bird
+T |   | hello bird
+T |   | hello bird
+E |   | hibyefriend | 5pm

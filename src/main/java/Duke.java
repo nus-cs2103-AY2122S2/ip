@@ -4,6 +4,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.util.NoSuchElementException;
+import java.lang.IndexOutOfBoundsException;
+import java.time.format.DateTimeParseException;
 
 import task.Tasks;
 import task.Deadlines;
@@ -70,7 +74,8 @@ public class Duke {
 
                 case "D":
                     taskList.add(new Deadlines(taskDataStringSplit[2],
-                            taskDataStringSplit[1].equals("X") ? true : false, taskDataStringSplit[3]));
+                            taskDataStringSplit[1].equals("X") ? true : false,
+                            taskDataStringSplit[3]));
                     break;
             }
         } catch (FileNotFoundException err) {
@@ -104,7 +109,8 @@ public class Duke {
                     break;
 
                 case "D":
-                    taskDeletedList.add(new Deadlines(taskDataStringSplit[2], taskCompletion, taskDataStringSplit[3]));
+                    taskDeletedList.add(new Deadlines(taskDataStringSplit[2], taskCompletion,
+                            taskDataStringSplit[3]));
                     break;
             }
 
@@ -188,7 +194,7 @@ public class Duke {
 
     // Print file content method
     public static int fileContentCounter(String filePath) throws FileNotFoundException {
-        ArrayList<Tasks> taskCounterList = new ArrayList<Tasks>();
+        ArrayList<String> taskCounterList = new ArrayList<String>();
         try {
             File f = new File(filePath);
             Scanner sc = new Scanner(f);
@@ -197,16 +203,13 @@ public class Duke {
                 String[] taskDataSplit = taskData.split(" \\| ");
                 switch (taskDataSplit[0]) {
                     case "T":
-                        taskCounterList.add(new Todos(taskDataSplit[2],
-                                taskDataSplit[1].equals("X") ? true : false));
+                        taskCounterList.add(taskData);
                         break;
                     case "E":
-                        taskCounterList.add(new Events(taskDataSplit[2],
-                                taskDataSplit[1].equals("X") ? true : false, taskDataSplit[3]));
+                        taskCounterList.add(taskData);
                         break;
                     case "D":
-                        taskCounterList.add(new Deadlines(taskDataSplit[2],
-                                taskDataSplit[1].equals("X") ? true : false, taskDataSplit[3]));
+                        taskCounterList.add(taskData);
                         break;
                 }
             }
@@ -254,16 +257,35 @@ public class Duke {
         }
     }
 
+    // Print file content method
+    public static ArrayList<String> filterTasks(String filePath, String taskType) throws FileNotFoundException {
+        ArrayList<String> filteredList = new ArrayList<String>();
+        try {
+            File f = new File(filePath);
+            Scanner sc = new Scanner(f);
+            while (sc.hasNext()) {
+                String taskData = sc.nextLine();
+                String[] taskDataSplit = taskData.split(" \\| ");
+                if (taskDataSplit[0].equals(taskType)) {
+                    filteredList.add(taskData);
+                }
+            }
+            sc.close();
+        } catch (FileNotFoundException err) {
+            System.out.println("Ensure that you created a database at the correct directory");
+        }
+        return filteredList;
+    }
+
     public static void main(String[] args) {
-        // Database path
-        String hello = "hel;";
-        System.out.println("\n    Hello! I'm DockerHawker\n    I am your personal assistant! what can I do for you?\n");
+        System.out.println(
+                hyphenate + "\n    Hello! I'm DockerHawker\n    I am your personal assistant! what can I do for you?\n"
+                        + hyphenate);
 
         Scanner sc = new Scanner(System.in);
         System.out.println("");
         String command = sc.nextLine();
         String[] commandSplit = command.split(" ", 2);
-        ArrayList<Tasks> taskList = new ArrayList<Tasks>();
 
         while (!command.equals("bye")) {
             if (command.equals("list")) {
@@ -328,29 +350,79 @@ public class Duke {
                         break;
 
                     case "deadline":
-                        try {
-                            Deadlines newTask = new Deadlines(commandSplit[1].split(" /by ", 2)[0],
-                                    commandSplit[1].split(" /by ", 2)[1]);
-                            if (appendToFile(databasePath, newTask.toDatabaseString())) {
-                                sb1.append(hyphenate + "\n" +
-                                        "    Wow, sounds fun! I have successfully added this task:" + "\n" +
-                                        "       " + newTask.toString() + "\n" +
-                                        "    Now you have " + (fileContentCounter(databasePath)) + " tasks in the list!"
-                                        + "\n" +
-                                        hyphenate);
-                                System.out.println(sb1.toString());
-                            }
-                        } catch (IndexOutOfBoundsException err) {
-                            System.out.println(hyphenate);
-                            System.out.println("");
-                            System.out.println(
-                                    "       YIKES!!! We faced an issue creating an deadline, make sure to have both a \"/by\" and a description.");
-                            System.out.println(hyphenate);
-                        } catch (IOException e) {
-                            System.out.println("File does not exist.");
+                        switch (commandSplit[1].split(" ", 2)[0]) {
+                            case "/by":
+                                try {
+                                    ArrayList<String> deadlineTasks = filterTasks(databasePath, "D");
+                                    StringBuilder filteredList = new StringBuilder("");
+                                    filteredList.append(hyphenate + "\n" + "    You have " + deadlineTasks.size() +
+                                            " deadline tasks due " + commandSplit[1].split("/by ", 2)[1] + "\n");
+                                    LocalDate filterToDate = LocalDate.parse(commandSplit[1].split("/by ", 2)[1]);
+                                    if (deadlineTasks.size() > 0) {
+                                        for (int i = 0; i < deadlineTasks.size(); i++) {
+                                            String currentTask = deadlineTasks.get(i);
+                                            String[] currentTaskSplit = currentTask.split(" \\| ");
+                                            System.out.println(currentTaskSplit[3]);
+                                            if (LocalDate.parse(currentTaskSplit[3]).equals(filterToDate)) {
+                                                filteredList
+                                                        .append("    " + (i + 1) + ". " + deadlineTasks.get(i) + "\n");
+                                            }
+                                        }
+                                    }
+                                    filteredList.append(hyphenate);
+                                    System.out.println(filteredList.toString());
+                                    // Filtering process -> by task type "D" & Date
+                                    /*
+                                     * System.out.println(commandSplit[1].split("/by ", 2)[1]);
+                                     * StringBuilder sb1 = new StringBuilder("");
+                                     * LocalDate datelineDate = LocalDate.parse(commandSplit[1].split("/by ",
+                                     * 2)[1]);
+                                     * sb1.append(hyphenate + "\n" + "    Here are the tasks in your list:\n");
+                                     * for (int i = 0; i < taskList.size(); i++) {
+                                     * if (taskList.get(i).getDeadline().equals(datelineDate)) {
+                                     * sb1.append("    " + taskList.get(i).toString() + "\n");
+                                     * }
+                                     * }
+                                     * sb1.append(hyphenate);
+                                     * 
+                                     */
+                                } catch (NoSuchElementException err) {
+                                    System.out.println("No such tasks exist");
+                                } catch (DateTimeParseException err) {
+                                    System.out.println("Enter a valid date");
+                                } catch (FileNotFoundException err) {
+                                    System.out.println("Ensure that a database is present at the correct folder");
+                                }
+                                break;
+                            default:
+                                try {
+                                    System.out.println(commandSplit[1].split(" /by ", 2)[0]);
+                                    System.out.println(
+                                            "dateline: " + LocalDate.parse(commandSplit[1].split(" /by ", 2)[1]));
+                                    Deadlines newTask = new Deadlines(commandSplit[1].split(" /by ", 2)[0],
+                                            commandSplit[1].split(" /by ", 2)[1]);
+                                    if (appendToFile(databasePath, newTask.toDatabaseString())) {
+                                        sb1.append(hyphenate + "\n" +
+                                                "    Wow, sounds fun! I have successfully added this task:" + "\n" +
+                                                "       " + newTask.toString() + "\n" +
+                                                "    Now you have " + fileContentCounter(databasePath)
+                                                + " tasks in the list!"
+                                                + "\n" +
+                                                hyphenate);
+                                        System.out.println(sb1.toString());
+                                    }
+                                } catch (IndexOutOfBoundsException err) {
+                                    System.out.println(hyphenate);
+                                    System.out.println("");
+                                    System.out.println(
+                                            "       YIKES!!! We faced an issue creating an deadline, make sure to have both a \"/by\" and a description.");
+                                    System.out.println(hyphenate);
+                                } catch (IOException e) {
+                                    System.out.println("File does not exist.");
+                                }
+                                break;
                         }
                         break;
-
                     case "event":
                         try {
                             Events newTask = new Events(commandSplit[1].split(" /at ", 2)[0],
