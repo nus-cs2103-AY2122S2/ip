@@ -1,6 +1,11 @@
 package chatbot;
 import java.util.Scanner;
 
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
+
 import java.io.File;
 import java.io.FileWriter;
 // import java.io.BufferedWriter;

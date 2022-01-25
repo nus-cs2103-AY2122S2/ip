@@ -5,6 +5,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
+
 public class Parser {
     private static final String UNRECOGNIZED_COMMAND = "Sorry Sir, I do not understand that command.";
     private static final String NOT_VALID_NUMBER = "Please enter a valid number Sir.";

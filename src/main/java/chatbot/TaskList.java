@@ -1,5 +1,7 @@
 package chatbot;
 import java.util.ArrayList;
+
+import tasks.Task;
 public class TaskList {
     private ArrayList<Task> taskList;
 
