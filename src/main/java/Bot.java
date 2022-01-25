@@ -1,10 +1,15 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class Bot {
     ArrayList<Task> listOfTasks;
+    DateTimeFormatter formatter;
 
     public Bot() {
         this.listOfTasks = new ArrayList<>();
+        this.formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
     }
 
     public String encloseWithin(String str) {
@@ -31,38 +36,42 @@ public class Bot {
             msg = new String[] {"list"};
         } else {
             // Mark and unmark have the same syntax, so only process it once
-            if (inputMessage.contains("todo")) {
-                msg = inputMessage.split("todo");
-                if (msg.length < 1) {
+            if (inputMessage.length() < 4) {
+                // Do nothing (For Future methods to be added if their lengths are lesser than 4
+            } else if (inputMessage.substring(0,4).contains("todo")) {
+                if (inputMessage.length() <= 4) {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but you need to provide a description for the Todo task\n");
                 }
+                msg = inputMessage.split("todo ");
                 msg[0] = "todo";
-            } else if (inputMessage.contains("event")) {
-                if (inputMessage.contains("/at")) {
-                    msg = inputMessage.split(" /at");
-                    if (msg.length != 3) {
+            } else if (inputMessage.substring(0,6).contains("event ")) {
+                if (inputMessage.contains(" /at")) {
+                    String temp = inputMessage.substring(6);
+                    msg = temp.split(" /at");
+                    if (msg.length != 2) {
                         throw new DukeException("☹ OOPS!!! I'm sorry, the Event description cannot be empty\n");
                     }
-                    msg = new String[]{msg[0].substring(0, 5), msg[0].substring(6), msg[1]};
+                    msg = new String[]{"event", msg[0], msg[1]};
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but you need to use the following format:\n" +
-                            "event {description} /at {date}\n");
-                }
-            } else if (inputMessage.contains("deadline")) {
-                if (inputMessage.contains("/by")) {
-                    msg = inputMessage.split(" /by");
-                    if (msg.length != 3) {
-                        throw new DukeException("☹ OOPS!!! I'm sorry, the Deadline description cannot be empty\n");
-                    }
-                    msg = new String[]{msg[0].substring(0, 8), msg[0].substring(9), msg[1]};
-                } else {
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but you need to use the following format:\n" +
-                            "deadline {description} /by {date}\n");
+                            "event {description} /at {yyyy/MM/dd HHmm}\n");
                 }
             } else if (inputMessage.contains("delete") || inputMessage.contains("mark")) {
                 msg = inputMessage.split(" ");
                 if (msg.length != 2) {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but you need to enter a number as well!\n");
+                }
+            } else if (inputMessage.substring(0, 9).contains("deadline ")) {
+                if (inputMessage.contains("/by")) {
+                    String temp = inputMessage.substring(9);
+                    msg = temp.split(" /by");
+                    if (msg.length != 2) {
+                        throw new DukeException("☹ OOPS!!! I'm sorry, the Deadline description cannot be empty\n");
+                    }
+                    msg = new String[]{"deadline", msg[0], msg[1]};
+                } else {
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but you need to use the following format:\n" +
+                            "deadline {description} /by {yyyy/MM/dd HHmm}\n");
                 }
             }
         }
@@ -93,13 +102,13 @@ public class Bot {
         taskAddedMessage(newTask);
     }
 
-    private void addDeadline(String task, String deadline) throws DukeException {
+    private void addDeadline(String task, LocalDateTime deadline) throws DukeException {
         Task newTask = new DeadLines(task, deadline);
         this.listOfTasks.add(newTask);
         taskAddedMessage(newTask);
     }
 
-    private void addEvent(String task, String timing) throws DukeException {
+    private void addEvent(String task, LocalDateTime timing) throws DukeException {
         Task newTask = new Event(task, timing);
         this.listOfTasks.add(newTask);
         taskAddedMessage(newTask);
@@ -178,10 +187,10 @@ public class Bot {
                 deleteTask(processedInput[1]);
                 break;
             case "deadline":
-                addDeadline(processedInput[1], processedInput[2]);
+                addDeadline(processedInput[1], processDateTime(processedInput[2]));
                 break;
             case "event":
-                addEvent(processedInput[1], processedInput[2]);
+                addEvent(processedInput[1], processDateTime(processedInput[2]));
                 break;
             case "todo":
                 addTodo(processedInput[1]);
@@ -189,6 +198,16 @@ public class Bot {
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
         }
+    }
+
+    private LocalDateTime processDateTime(String date) {
+        date = date.trim();
+        try {
+            return LocalDateTime.parse(date, formatter);
+        } catch (DateTimeParseException e) {
+            System.out.println("Please follow the required format for dates:\n yyyy/MM/dd HHmm");
+        }
+        return null;
     }
 }
 
