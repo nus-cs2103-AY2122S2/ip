@@ -38,7 +38,7 @@ public class EventTask extends Task{
     }
 
     public String toOutputLine(){
-        return this.getType() + " | " + (isDone ? "1 " : "0 ") + "| " + this.title + "| " + eventDate.toString() + (eventTime != null ? " | " + eventTime.toString() : "");
+        return this.getType() + " | " + (isDone ? "1 " : "0 ") + "| " + this.title + " | " + eventDate.toString() + (eventTime != null ? " | " + eventTime.toString() : "");
     }
 
     @Override
