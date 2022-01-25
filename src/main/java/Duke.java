@@ -13,21 +13,22 @@ public class Duke {
 
     // Main method of this program
     public static void main(String[] args) {
-        // Greet Message
-        System.out.println("If you are new to program, enter ? to see a list of commands available.");
-        System.out.println("-----------------------------------------------------------------------");
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+        // Start Message
+        System.out.println("IF YOU ARE NEW TO THIS PROGRAM, ENTER ? TO SEE A LIST OF AVAILABLE COMMANDS.");
+        System.out.println("---------------------------------------------------------------------------");
+        System.out.println("HELLO! I'M DUKE");
+        System.out.println("WHAT CAN I DO FOR YOU?");
 
         // Scanner Object
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
 
         try {
-            // Add different types of Task, List, Mark
             while (!input.equals("bye")) {
                 String[] temp = input.split(" ");
-                if (temp[0].equals("mark")) {
+                if (temp[0].equals("?")) {
+                    helpCmd();
+                } else if (temp[0].equals("mark")) {
                     int index = Integer.parseInt(temp[1]) - 1;
                     Duke.markTask(index);
                 } else if (temp[0].equals("unmark")) {
@@ -55,6 +56,18 @@ public class Duke {
             System.out.println(ex.getMessage());
         }
     }
+
+    public static void helpCmd() {
+        System.out.println("LIST OF AVAILABLE COMMANDS IN THIS PROGRAM      DESCRIPTION");
+        System.out.println("list                                            List out all added tasks");
+        System.out.println("todo {task description}                         Add ToDo into list");
+        System.out.println("deadline {task description} /by {DATE}          Add Deadline into list");
+        System.out.println("event {task description} /at {DATE}             Add Event into list");
+        System.out.println("mark {Task ID}                                  Mark specific task as done");
+        System.out.println("unmark {Task ID}                                Mark specific task as not done");
+        System.out.println("delete {Task ID}                                Delete specific task from list");
+    }
+
 
     /**
      * This method changes the status of a particular task to Done
