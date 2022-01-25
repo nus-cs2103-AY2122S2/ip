@@ -12,9 +12,10 @@ public class Deadline extends Task {
    *
    * @param desc the task description
    * @param date deadline of the task
+   * @param done the status of the task
    */
-  public Deadline(String desc, String date) {
-    super(desc);
+  public Deadline(String desc, String date, boolean done) {
+    super(desc, done);
     this.date = date;
   }
 
@@ -27,5 +28,14 @@ public class Deadline extends Task {
       str += "[ ] " + super.desc + " (by: " + this.date + ")";
     }
     return str;
+  }
+
+  @Override
+  public String changeFormat() {
+    if (super.done) {
+      return "D,1," + super.desc + "," + this.date;
+    } else {
+      return "D,0," + super.desc + "," + this.date;
+    }
   }
 }

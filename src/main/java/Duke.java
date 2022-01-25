@@ -1,7 +1,6 @@
 import java.io.*;
 import java.util.*;
 
-
 /**
  * This program is used to add, list & mark the status of your current tasks.
  * @author Sim Jun Heng
@@ -12,12 +11,19 @@ public class Duke {
     private static ArrayList<Task> list = new ArrayList<>();
 
     // Main method of this program
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // Start Message
         System.out.println("IF YOU ARE NEW TO THIS PROGRAM, ENTER ? TO SEE A LIST OF AVAILABLE COMMANDS.");
         System.out.println("---------------------------------------------------------------------------");
         System.out.println("HELLO! I'M DUKE");
         System.out.println("WHAT CAN I DO FOR YOU?");
+
+        // Load file data into task list
+        try {
+            loadFile();
+        } catch (DukeException ex) {
+            System.out.println(ex.getMessage());
+        }
 
         // Scanner Object
         Scanner scanner = new Scanner(System.in);
@@ -30,27 +36,28 @@ public class Duke {
                     helpCmd();
                 } else if (temp[0].equals("mark")) {
                     int index = Integer.parseInt(temp[1]) - 1;
-                    Duke.markTask(index);
+                    markTask(index);
                 } else if (temp[0].equals("unmark")) {
                     int index = Integer.parseInt(temp[1]) - 1;
-                    Duke.unMarkTask(index);
+                    unMarkTask(index);
                 } else if (temp[0].equals("list")) {
-                    Duke.list();
+                    list();
                 } else if (temp[0].equals("todo")) {
-                    Duke.addToDo(input);
+                    addToDo(input);
                 } else if (temp[0].equals("deadline")) {
-                    Duke.addDeadline(input);
+                    addDeadline(input);
                 } else if (temp[0].equals("event")) {
-                    Duke.addEvent(input);
+                    addEvent(input);
                 } else if (temp[0].equals("delete")) {
                     int index = Integer.parseInt(temp[1]) - 1;
-                    Duke.deleteTask(index);
+                    deleteTask(index);
                 } else {
-                    Duke.notSpecified();
+                    notSpecified();
                 }
                 input = scanner.nextLine();
             }
             //Exit
+            writeFile();
             System.out.println("Bye. Hope to see you again soon!");
         } catch (DukeException ex) {
             System.out.println(ex.getMessage());
@@ -69,6 +76,66 @@ public class Duke {
         System.out.println("mark {Task ID}                                  Mark specific task as done");
         System.out.println("unmark {Task ID}                                Mark specific task as not done");
         System.out.println("delete {Task ID}                                Delete specific task from list");
+        System.out.println("bye                                             End the Duke program");
+    }
+
+    public static void loadFile() throws IOException, DukeException {
+        // Check if data directory exist in the project root
+        File directory = new File("./data");
+        if (!directory.exists()) {
+            directory.mkdir(); // Create if directory does not exist
+        }
+        // Check if duke.txt exist in the data directory
+        File file = new File("./data/duke.txt");
+        if (!file.exists()) {
+            file.createNewFile(); // Create if file does not exist
+        }
+        // Read from duke.txt and store information back into task list
+        Scanner fc = new Scanner(file);
+        int index = 0;
+        while (fc.hasNext()) {
+            String[] str = fc.nextLine().split(",");
+            if (str[0].equals("T")) {
+                if (str[1].equals("1")) {
+                    Task newTask = new ToDo(str[2], true);
+                    list.add(newTask);
+                } else {
+                    Task newTask = new ToDo(str[2], false);
+                    list.add(newTask);
+                }
+                index++;
+            } else if (str[0].equals("D")) {
+                if (str[1].equals("1")) {
+                    Task newTask = new Deadline(str[2], str[3], true);
+                    list.add(newTask);
+                } else {
+                    Task newTask = new Deadline(str[2], str[3], false);
+                    list.add(newTask);
+                }
+                index++;
+            } else if (str[0].equals("E")) {
+                if (str[1].equals("1")) {
+                    Task newTask = new Event(str[2], str[3], true);
+                    list.add(newTask);
+                } else {
+                    Task newTask = new Event(str[2], str[3], false);
+                    list.add(newTask);
+                }
+                index++;
+            } else {
+                throw new DukeException("Invalid Task found in duke.txt file");
+            }
+        }
+    }
+
+    public static void writeFile() throws IOException {
+        FileWriter fw = new FileWriter("./data/duke.txt");
+        String str = list.get(0).changeFormat();
+        for (int i = 1; i < list.size(); i++) {
+            str = str + System.lineSeparator() + list.get(i).changeFormat();
+        }
+        fw.write(str);
+        fw.close();
     }
 
     /**
@@ -98,7 +165,7 @@ public class Duke {
         for (int i = 2; i < str.length; i++) {
             desc = desc + " " + str[i];
         }
-        Task newTask = new ToDo(desc);
+        Task newTask = new ToDo(desc, false);
         list.add(newTask);
         System.out.println("GOT IT. I'VE ADDED THIS TASK:");
         System.out.println(newTask);
@@ -124,7 +191,7 @@ public class Duke {
         for (int i = 2; i < str2.length; i++) {
             desc = desc + " " + str2[i];
         }
-        Task newTask = new Deadline(desc, str[1]);
+        Task newTask = new Deadline(desc, str[1], false);
         list.add(newTask);
         System.out.println("GOT IT. I'VE ADDED THIS TASK:");
         System.out.println(newTask);
@@ -150,7 +217,7 @@ public class Duke {
         for (int i = 2; i < str2.length; i++) {
             desc = desc + " " + str2[i];
         }
-        Task newTask = new Event(desc, str[1]);
+        Task newTask = new Event(desc, str[1], false);
         list.add(newTask);
         System.out.println("GOT IT. I'VE ADDED THIS TASK:");
         System.out.println(newTask);
@@ -188,7 +255,7 @@ public class Duke {
         } else {
             Task task = list.get(index);
             task.setAsNotDone();
-            System.out.println("NICE! I'VE MARKED THIS TASK AS DONE:");
+            System.out.println("NICE! I'VE MARKED THIS TASK AS NOT DONE:");
             System.out.println(task);
         }
     }
@@ -207,7 +274,7 @@ public class Duke {
             Task task = list.remove(index);
             System.out.println("NOTED. I'VE REMOVED THIS TASK:");
             System.out.println(task);
-            System.out.println("NOW YOU HAVE \"+ list.size() + \" TASKS IN THE LIST.");
+            System.out.println("NOW YOU HAVE "+ list.size() + " TASKS IN THE LIST.");
         }
     }
 
