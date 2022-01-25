@@ -10,15 +10,19 @@ import tasks.*;
 
 public class Duke {
 	private static ArrayList<Task> TASKLIST = new ArrayList<>();
-	public static void main(String[] args) {
-
+	private static Storage storage;
+	public Duke(String filePath) {
+		storage = new Storage(filePath);
 		try {
-			loadFile();
+			TASKLIST = storage.load();
 		} catch (IOException e) {
 			System.out.println("An error occurred");
 			e.printStackTrace();
 		}
+	}
 
+	public static void main(String[] args) {
+		new Duke("data/tasks.txt");
 		//intro messages
 		Scanner sc = new Scanner(System.in);
 		String logo = " ____        _        \n"
@@ -45,7 +49,7 @@ public class Duke {
 		}
 
 		try{
-			saveFile();
+			storage.saveFile(TASKLIST);
 		} catch (IOException e) {
 			System.out.println("An error occurred");
 			e.printStackTrace();
@@ -102,75 +106,26 @@ public class Duke {
 		return cmd;
 	}
 
-	private static void loadFile() throws IOException {
-		//load files
-		File directory = new File("data");
-		if(!directory.exists()){
-			directory.mkdir();
-		}
-
-		File file = new File("data/duke.txt");
-		if (!file.exists()) {
-			file.createNewFile();
-		} else {
-			Scanner s = new Scanner(file);
-			String type;
-			String mark;
-			String detail;
-			String date;
-			Task toAdd = null;
-			while(s.hasNext()) {
-				String input = s.nextLine();
-				String[] inputSplit = input.split(" \\| ", 3);
-				type = inputSplit[0];
-				mark = inputSplit[1];
-				switch (type){
-				case "T":
-					detail = inputSplit[2];
-					toAdd = new ToDo(detail);
-					break;
-				case "E":
-					inputSplit = inputSplit[2].split(" \\| ");
-					detail = inputSplit[0];
-					date = inputSplit[1];
-					toAdd = new Event(detail, date);
-					break;
-				case "D":
-					inputSplit = inputSplit[2].split(" \\| ");
-					detail = inputSplit[0];
-					date = inputSplit[1];
-					toAdd = new Deadline(detail, date);
-					break;
-				}
-				System.out.println(mark);
-				if(mark.equals("1")){
-					toAdd.mark();
-				}
-				TASKLIST.add(toAdd);
-			}
-		}
-	}
-
-	private static void saveFile() throws IOException {
-		FileWriter fw = new FileWriter("data/duke.txt");
-		for (int i =0; i < TASKLIST.size(); i++){
-			Task t = TASKLIST.get(i);
-			String type = t.getType();
-			String mark = t.getMark();
-			String detail = t.getDetail();
-			switch (type){
-			case"T":
-				fw.write(type + " | " +  mark + " | " + detail + "\n");
-				break;
-			case"E":
-			case"D":
-				String date = t.getDate();
-				fw.write(type + " | "  + mark + " | " + detail + " | " + date + "\n");
-				break;
-			}
-		}
-		fw.close();
-	}
+//	private static void saveFile() throws IOException {
+//		FileWriter fw = new FileWriter("data/tasks.txt");
+//		for (int i =0; i < TASKLIST.size(); i++){
+//			Task t = TASKLIST.get(i);
+//			String type = t.getType();
+//			String mark = t.getMark();
+//			String detail = t.getDetail();
+//			switch (type){
+//			case"T":
+//				fw.write(type + " | " +  mark + " | " + detail + "\n");
+//				break;
+//			case"E":
+//			case"D":
+//				String date = t.getDate();
+//				fw.write(type + " | "  + mark + " | " + detail + " | " + date + "\n");
+//				break;
+//			}
+//		}
+//		fw.close();
+//	}
 
 	private static boolean isInteger(String input) {
 		for (int i = 0; i < input.length(); i++) {
