@@ -27,9 +27,9 @@ public class ListCommand extends Command{
     @Override
     public String execute(TaskList tasks) {
         if (action == 1) {
-            return listTask(tasks);
+            return getTaskListText(tasks);
         } else {
-            return listTaskByDate(tasks);
+            return getTaskListTextByDate(tasks);
         }
     }
 
@@ -39,31 +39,25 @@ public class ListCommand extends Command{
      * @param tasks
      * @return
      */
-    private String listTask(TaskList tasks) {
+    private String getTaskListText(TaskList tasks) {
         int i = 1;
         String result = "Here are the task(s) in your list:\n";
         for (Task task : tasks.getTasks()) {
-            result += i + "." + task;
-            if (i != tasks.getTasks().size()) {
-                result += "\n";
-            }
+            result += i + "." + task + "\n";
             i++;
         }
-        return result;
+        return result.trim();
     }
 
-    private String listTaskByDate(TaskList tasks) {
+    private String getTaskListTextByDate(TaskList tasks) {
         int i = 1;
         String result = "Here are the task(s) in your list filtered by date:\n";
         for (Task task : tasks.getTasks()) {
             if (task.getDateTime().toLocalDate().equals(ldt.toLocalDate())) {
-                result = result + i + "." + task;
-                if (i != tasks.getTasks().size()) {
-                    result += "\n";
-                }
+                result = result + i + "." + task + "\n";
             }
             i++;
         }
-        return result;
+        return result.trim();
     }
 }
