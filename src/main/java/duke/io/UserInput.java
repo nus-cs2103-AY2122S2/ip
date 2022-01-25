@@ -1,11 +1,5 @@
 package duke.io;
 
-import java.nio.file.spi.FileSystemProvider;
-import java.time.DateTimeException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-
 public class UserInput {
     private String type = "";
     private String command = "";
@@ -44,7 +38,7 @@ public class UserInput {
         return this.time;
     }
 
-    public boolean isDone() {
+    public boolean getIsDone() {
         return this.isDone;
     }
 
