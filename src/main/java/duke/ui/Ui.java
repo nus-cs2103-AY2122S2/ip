@@ -2,18 +2,44 @@ package duke.ui;
 
 import java.util.Scanner;
 
+/**
+ * Text UI of the chatbot.
+ */
 public class Ui {
-    String divider = "    ============================================================\n";
+    private final Scanner userInput;
+    private static final String divider = "    ============================================================\n";
 
+    /**
+     * Creates a new UI object.
+     */
+    public Ui() {
+        userInput = new Scanner(System.in);
+    }
+
+    /**
+     * Adds four empty white spaces to an input.
+     *
+     * @param s the target input
+     * @return input with prefix of four empty white spaces
+     */
     public String tab(String s) {
         return "    " + s;
     }
 
+    /**
+     * Replies the user.
+     *
+     * @param reply the message to be replied
+     */
     public void replyUser(String reply) {
         String s = reply.replace("\n", "\n    ");
-        System.out.println(divider + tab(s) + "\n" + divider);
+
+        showLine();
+        System.out.println(tab(s));
+        showLine();
     }
 
+    /** Greets the user */
     public void greetUser() {
         String poogie = "    ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠛⠉⠉⠉⠉⠉⠉⠉⠛⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n" +
                 "    ⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠄⢀⣠⣶⣶⣶⣶⣤⡀⠄⠄⠹⣿⣿⣿⣿⣿⣿⣿⣿\n" +
@@ -31,12 +57,13 @@ public class Ui {
         replyUser("Hello! My name is Poogie.\n" + "How may I be of service to you?");
     }
 
+    /** Prints a divider line */
     public void showLine() {
         System.out.println(divider);
     }
 
+    /** Reads input from the user */
     public String readCommand() {
-        Scanner userInput = new Scanner(System.in);
         return userInput.nextLine();
     }
 }

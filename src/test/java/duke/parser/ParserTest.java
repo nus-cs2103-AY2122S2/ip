@@ -1,5 +1,6 @@
 package duke.parser;
 
+import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -19,9 +20,14 @@ public class ParserTest {
 
     @BeforeEach
     public void setUp() {
-        parser = new Parser();
-        tasks = new TaskList(new ArrayList<>());
-        storage = new Storage("/ip/src/test/data");
+        try {
+            parser = new Parser();
+            tasks = new TaskList(new ArrayList<>());
+            storage = new Storage("/ip/src/test/data");
+            ui = new Ui();
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Test
@@ -29,7 +35,11 @@ public class ParserTest {
         String[] emptyInputs = {"", " ", "\n \n"};
         String errorMessage = "My apologies, but it seems that I do not understand your request.";
         for (String s : emptyInputs) {
-            assertEquals(parser.parseCommand(s).execute(tasks, ui, storage), errorMessage);
+            try {
+                assertEquals(parser.parseCommand(s).execute(tasks, ui, storage), errorMessage);
+            } catch (DukeException e) {
+                ui.replyUser(e.getMessage());
+            }
         }
     }
 
@@ -37,8 +47,13 @@ public class ParserTest {
     public void parse_byeInput_returnsExitCommand() {
         String[] byeInputs = {"bye", "  bye", "bye   ", "  bye  "};
         String byeMessage = "Goodbye! Till the next time we meet!";
-        for (String s : byeInputs) {
-            assertEquals(parser.parseCommand(s).execute(tasks, ui, storage), byeMessage);
+        try {
+            for (String s : byeInputs) {
+                assertEquals(parser.parseCommand(s).execute(tasks, ui, storage), byeMessage);
+            }
+        } catch (DukeException e) {
+            ui.replyUser(e.getMessage());
         }
+
     }
 }
