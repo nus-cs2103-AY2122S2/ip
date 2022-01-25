@@ -1,4 +1,8 @@
+import java.nio.file.spi.FileSystemProvider;
 import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class UserInput {
     private String command = "";
@@ -35,6 +39,16 @@ public class UserInput {
                 this.description = this.description.replaceFirst(" ", "");
                 this.time = input.substring(timeStart);
                 this.time = this.time.replaceFirst("/", "");
+
+                if (this.command.equals("deadline")) {
+                    try {
+                        LocalDate date = LocalDate.parse(this.time.replaceFirst("by ", ""));
+                        this.time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+                        this.time = "by " + this.time;
+                    } catch (DateTimeException e) {
+                        throw new DateTimeException("OOPS!!! Invalid deadline format! (yyyy-mm-dd)");
+                    }
+                }
             } else {
                 // no time input
                 this.description = input.substring(descriptionStart);

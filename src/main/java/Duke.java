@@ -122,6 +122,8 @@ public class Duke {
                     } else if (time.equals("")) {
                         // throw no time specified exception
                         throw new DukeNoTimeSpecifiedException("OOPS!!! Remember to set a time.");
+                    } else if (time.equals("Invalid deadline format")) {
+                        throw new DateTimeException("OOPS!!! Key in your deadline in yyyy-mm-dd format!");
                     }
                     addTask(new EventTask(description, time), list);
                     writeToFile();
@@ -133,7 +135,7 @@ public class Duke {
 
             } catch (DukeException e) {
                 errorMessage(e);
-            } catch (IOException e) {
+            } catch (IOException | DateTimeException e) {
                 System.out.println(e.getMessage());
             }
 
