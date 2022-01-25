@@ -5,11 +5,20 @@ import duke.util.*;
 
 import java.io.IOException;
 
+/**
+ * Duke is a Personal Assistant Chatbot that helps a user to keep track of various things.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor class.
+     *
+     * @param filePath The filepath to the text file to save tasks.
+     * @param fileName The name of the text file.
+     */
     public Duke(String filePath, String fileName) {
         ui = new Ui();
         storage = new Storage(filePath, fileName);
@@ -21,6 +30,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the program.
+     */
     public void run() {
         ui.showGreeting();
         boolean isExit = false;
