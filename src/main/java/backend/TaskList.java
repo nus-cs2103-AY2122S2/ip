@@ -1,19 +1,25 @@
 package backend;
 
-import java.util.ArrayList;
-import tasks.*;
 import exception.DukeException;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
+
+import java.util.ArrayList;
 
 public class TaskList {
     protected static ArrayList<Task> tasks;
-
 
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
     public static void list() {
+        // print the ui user message
         Ui.list();
+
+        // print out all objects in the list
         for (int i = 0; i < tasks.size(); i++) {
             Task currentTask = tasks.get(i);
             int index = i + 1;
@@ -24,7 +30,7 @@ public class TaskList {
     public static void mark(int indexMarked) {
         try {
             Task currentTask = tasks.get(indexMarked);
-            currentTask.setIsDone(true);
+            currentTask.setDone(true);
             Ui.mark();
             System.out.println(currentTask.toString());
         } catch (IndexOutOfBoundsException e) {
@@ -37,7 +43,7 @@ public class TaskList {
     public static void unmark(int indexUnmarked) {
         try {
             Task currentTask = tasks.get(indexUnmarked);
-            currentTask.setIsDone(false);
+            currentTask.setDone(false);
             Ui.unmark();
             System.out.println(currentTask.toString());
         } catch (IndexOutOfBoundsException e) {
@@ -59,7 +65,7 @@ public class TaskList {
         }
     }
 
-    public static void todo(String description) {
+    public static void addTodo(String description) {
         try {
             if (description.isBlank()) {
                 throw new ArrayIndexOutOfBoundsException();
@@ -68,13 +74,12 @@ public class TaskList {
             tasks.add(currentTodo);
             Ui.todo();
             System.out.println(currentTodo.toString());
-
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println(new DukeException("The description of a todo cannot be empty"));
         }
     }
 
-    public static void deadline(String description, String time) {
+    public static void addDeadline(String description, String time) {
         try {
             if (description.isBlank() || time.isBlank()) {
                 throw new ArrayIndexOutOfBoundsException();
@@ -83,13 +88,12 @@ public class TaskList {
             tasks.add(currentDeadline);
             Ui.deadline();
             System.out.println("added: " + currentDeadline.toString());
-
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println(new DukeException("The description of a deadline cannot be empty"));
         }
     }
 
-    public static void event(String description, String time) {
+    public static void addEvent(String description, String time) {
         try {
             if (description.isBlank() || time.isBlank()) {
                 throw new ArrayIndexOutOfBoundsException();

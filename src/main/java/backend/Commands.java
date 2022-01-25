@@ -1,5 +1,5 @@
 package backend;
 
 public enum Commands {
-    list, mark, unmark, delete, todo, deadline, event
+    LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT
 }
