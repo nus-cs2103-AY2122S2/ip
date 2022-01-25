@@ -1,6 +1,6 @@
 package commands;
 
-enum Type {
+public enum Type {
     TODO,
     DEADLINE,
     EVENT,

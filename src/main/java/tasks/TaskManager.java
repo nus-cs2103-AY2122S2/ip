@@ -1,6 +1,6 @@
 package tasks;
 
-import tasks.Task;
+import exceptions.InvalidOperationException;
 import ui.UiManager;
 import java.util.ArrayList;
 
@@ -19,21 +19,41 @@ public class TaskManager {
         um.printAdd(t, this.size());
     }
 
-    public void mark(Integer num) {
+    public void insertTask(Task t) {
+        tasks.add(t);
+    }
+
+    public void mark(Integer num) throws InvalidOperationException {
         Task t = tasks.get(num);
         t.mark();
         um.printMark(t);
     }
-    public void unmark(Integer num) {
+
+    public void labelDone(Integer num) throws InvalidOperationException {
+        Task t = tasks.get(num);
+        t.mark();
+    }
+
+    public void unmark(Integer num) throws InvalidOperationException {
         Task t = tasks.get(num);
         t.unmark();
         um.printUnmark(t);
+    }
+
+    public void labelUndone(Integer num) throws InvalidOperationException {
+        Task t = tasks.get(num);
+        t.unmark();
     }
 
     public void delete(int num) {
         String taskDetails = tasks.get(num).toString();
         tasks.remove(num);
         um.printDelete(taskDetails, tasks.size());
+    }
+
+    public void remove(int num) {
+        String taskDetails = tasks.get(num).toString();
+        tasks.remove(num);
     }
 
     public int size() {

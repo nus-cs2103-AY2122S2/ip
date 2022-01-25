@@ -45,24 +45,42 @@ public class AddTaskCommand extends Command{
         }
     }
 
-    public void execute() {
+    public void insert() {
         try {
             switch (type) {
                 case TODO:
                     Task newToDo = new ToDo(this.description);
-                    taskManager.addTask(newToDo);
+                    taskManager.insertTask(newToDo);
                     break;
                 case DEADLINE:
                     Task newDeadline = new Deadline(this.description, this.date);
-                    taskManager.addTask(newDeadline);
+                    taskManager.insertTask(newDeadline);
                     break;
                 case EVENT:
                     Task newEvent = new Event(this.description, this.date);
-                    taskManager.addTask(newEvent);
+                    taskManager.insertTask(newEvent);
                     break;
             }
         } catch (DateTimeParseException e) {
-            uiManager.errorMessage("Invalid date! Please use the format 'YYYY-MM-DD'");
+            uiManager.errorMessage("Invalid date in your saved entry!");
         }
+    }
+
+    public void execute() throws DateTimeParseException{
+        switch (type) {
+            case TODO:
+                Task newToDo = new ToDo(this.description);
+                taskManager.addTask(newToDo);
+                break;
+            case DEADLINE:
+                Task newDeadline = new Deadline(this.description, this.date);
+                taskManager.addTask(newDeadline);
+                break;
+            case EVENT:
+                Task newEvent = new Event(this.description, this.date);
+                taskManager.addTask(newEvent);
+                break;
+            }
+
     }
 }

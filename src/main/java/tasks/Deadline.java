@@ -1,4 +1,6 @@
 package tasks;
+import exceptions.InvalidOperationException;
+
 import java.time.LocalDate;
 
 public class Deadline extends Task {
@@ -13,18 +15,20 @@ public class Deadline extends Task {
     }
 
     @Override
-    public void mark() {
-        if (!this.done) {
-            this.done = true;
+    public void mark() throws InvalidOperationException {
+        if (this.done) {
+            throw new InvalidOperationException("marked");
         }
+        this.done = true;
 
     }
 
     @Override
-    public void unmark() {
-        if (this.done) {
-            this.done = false;
+    public void unmark() throws InvalidOperationException {
+        if (!this.done) {
+            throw new InvalidOperationException("unmarked");
         }
+        this.done = false;
 
     }
 

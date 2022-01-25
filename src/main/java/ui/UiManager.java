@@ -8,7 +8,6 @@ public class UiManager {
     private final String LINE = "-------------------------------------------";
 
     public UiManager() {
-
     }
 
     public void showLine() {
@@ -68,6 +67,15 @@ public class UiManager {
 
     public void printList(TaskManager tm) {
         System.out.println(tm);
+    }
+
+    public void printLoad(TaskManager tm) {
+        System.out.println("Loaded your previous list:");
+        this.printList(tm);
+    }
+
+    public void printLoadFail() {
+        System.out.println("No list saved previously!");
     }
 
     public void errorMessage(String s) {
