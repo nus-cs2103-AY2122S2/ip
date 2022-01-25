@@ -2,6 +2,10 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Duke {
     private boolean isRunning;
     private ArrayList<Task> userTexts;
@@ -16,6 +20,8 @@ public class Duke {
     public Duke() {
         this.userTexts = new ArrayList<Task>();
         this.isRunning = true;
+
+        loadFromSave(userTexts);
     }
 
     /* Initial greeting for Duke */
@@ -83,6 +89,7 @@ public class Duke {
 
             Task task = userTexts.get(taskIndex);
             task.setIsDone(markTask);
+            saveTaskList(userTexts);
             String cmdDescription = markTask ? "Nice I've marked this task as done: \n"
                     : "Alright, I've unmarked the task: \n ";
 
@@ -123,6 +130,7 @@ public class Duke {
             }
 
             this.userTexts.add(newTask);
+            saveTaskList(userTexts);
             String printStr = "Gotcha. Added the task: \n   " + newTask.toString()
                     + "\nNow you have " + String.valueOf(this.userTexts.size()) + " tasks in your list.";
 
@@ -144,6 +152,7 @@ public class Duke {
 
             Task task = userTexts.get(taskIndex);
             userTexts.remove(taskIndex);
+            saveTaskList(userTexts);
             printDukeResponse("Got it, task has been removed: \n" + task.toString() + "\nNow you have "
                     + String.valueOf(this.userTexts.size()) + " tasks in your list.");
 
@@ -151,6 +160,74 @@ public class Duke {
         }
 
         throw new DukeException("HEY! I don't know what this mean, command doesn't exist.");
+    }
+
+    /* Load task list from file saved */
+    public void loadFromSave(ArrayList<Task> taskList) {
+        String filePath = "data/duke.txt";
+
+        try {
+            File file = new File(filePath);
+            if (!file.exists()) {
+                return;
+            }
+
+            // read file
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                StringTokenizer st = new StringTokenizer(scanner.nextLine(), "|");
+
+                String type = st.nextToken();
+                Task newTask = null;
+                if (type.equals("T")) {
+                    newTask = new Todo(Boolean.parseBoolean(st.nextToken()), st.nextToken());
+                } else if (type.equals("E")) {
+                    newTask = new Event(Boolean.parseBoolean(st.nextToken()), st.nextToken(), st.nextToken());
+                } else if (type.equals("D")) {
+                    newTask = new Deadline(Boolean.parseBoolean(st.nextToken()), st.nextToken(), st.nextToken());
+                }
+
+                taskList.add(newTask);
+            }
+
+            scanner.close();
+
+        } catch (IOException exception) {
+            System.out.println("File reading issue");
+            return;
+        }
+    }
+
+    /* save task list to a file */
+    public void saveTaskList(ArrayList<Task> taskList) {
+        String filePath = "data/";
+        String fileName = "duke.txt";
+
+        try {
+            File directory = new File(filePath);
+
+            // create directory if dont exist
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+
+            // create the file if it dont exist
+            File file = new File(filePath + "/" + fileName);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+
+            // write data to file
+            FileWriter fileWriter = new FileWriter(file);
+            for (Task task : taskList) {
+                fileWriter.write(task.saveFileFormat());
+            }
+            fileWriter.close();
+
+        } catch (IOException exception) {
+            System.out.println("Something wrong here");
+            return;
+        }
     }
 
     /* Print in the Duke response format */
