@@ -1,7 +1,0 @@
-T | X | read book
-E |   | project meeting  |  2pm
-T | X | return book 
-T | X | join the club
-T |   | assignment 1 
-T |   | test 
-D |   | test 2  | 2022-01-18

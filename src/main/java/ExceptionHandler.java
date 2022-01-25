@@ -1,30 +1,28 @@
+import java.io.IOException;
+import java.time.DateTimeException;
+
 public class ExceptionHandler {
-    public static void printDateTimeException() {
-        System.out.println(Constant.HORIZONTAL_LINE);
-        System.out.println("\t" + "☹ OOPS!!! Wrong format date.");
-        System.out.println(Constant.HORIZONTAL_LINE);
+    private static Ui ui = new Ui();
+
+    public static void handleDukeException(DukeException e) {
+        if (e instanceof EmptyTaskException) {
+            ui.printMessage(Message.EMPTY_TASK_EXCEPTION);
+        } else if (e instanceof MissingDateTimeException) {
+            ui.printMessage(Message.MISSING_DATE_TIME_EXCEPTION);
+        } else if (e instanceof InvalidIndexException) {
+            ui.printMessage(Message.INVALID_INDEX_EXCEPTION);
+        } else if (e instanceof UnknownCommandException) {
+            ui.printMessage(Message.UNKNOWN_COMMAND_EXCEPTION);
+        } else {
+            ui.printMessage(Message.DUKE_EXCEPTION);
+        }
     }
 
-    public static void printEmptyTaskException() {
-        System.out.println(Constant.HORIZONTAL_LINE);
-        System.out.println("\t" + "☹ OOPS!!! Missing arguments.");
-        System.out.println(Constant.HORIZONTAL_LINE);
-    }
-
-    public static void printUnknownCommandException() {
-        System.out.println(Constant.HORIZONTAL_LINE);
-        System.out.println("\t" + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-        System.out.println(Constant.HORIZONTAL_LINE);
-    }
-    public static void printInvalidIndexException() {
-        System.out.println(Constant.HORIZONTAL_LINE);
-        System.out.println("\t" + "☹ OOPS!!! Invalid index.");
-        System.out.println(Constant.HORIZONTAL_LINE);
-    }
-
-    public static void printMissingDateTimeException() {
-        System.out.println(Constant.HORIZONTAL_LINE);
-        System.out.println("\t" + "☹ OOPS!!! Missing date/time. Please specify it.");
-        System.out.println(Constant.HORIZONTAL_LINE);
+    public static void handleOtherException(Exception e) {
+        if (e instanceof IOException) {
+            ui.printMessage(Message.FILE_NOT_FOUND);
+        } else if (e instanceof DateTimeException) {
+            ui.printMessage(Message.DATE_TIME_FORMAT_EXCEPTION);
+        }
     }
 }

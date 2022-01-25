@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.time.DateTimeException;
 
 public class Parser {
@@ -10,24 +11,24 @@ public class Parser {
         String data;
         if (task instanceof Deadline) {
             prefix = TaskConstant.PREFIX_DEADLINE;
-            data = prefix + Constant.VERTICAL_BAR_WITH_SPACE + task.getStatusIcon() + Constant.VERTICAL_BAR_WITH_SPACE +
-                    task.getDescription() + Constant.VERTICAL_BAR_WITH_SPACE + ((Deadline) task).getBy() +
-                    Constant.LINE_SEPARATOR;
+            data = prefix + Message.VERTICAL_BAR_WITH_SPACE + task.getStatusIcon() + Message.VERTICAL_BAR_WITH_SPACE +
+                    task.getDescription() + Message.VERTICAL_BAR_WITH_SPACE + ((Deadline) task).getBy() +
+                    Message.LINE_SEPARATOR;
         } else if (task instanceof Event) {
             prefix = TaskConstant.PREFIX_EVENT;
-            data = prefix + Constant.VERTICAL_BAR_WITH_SPACE + task.getStatusIcon() + Constant.VERTICAL_BAR_WITH_SPACE +
-                    task.getDescription() + Constant.VERTICAL_BAR_WITH_SPACE + ((Event) task).getAt() +
-                    Constant.LINE_SEPARATOR;
+            data = prefix + Message.VERTICAL_BAR_WITH_SPACE + task.getStatusIcon() + Message.VERTICAL_BAR_WITH_SPACE +
+                    task.getDescription() + Message.VERTICAL_BAR_WITH_SPACE + ((Event) task).getAt() +
+                    Message.LINE_SEPARATOR;
         } else {
             prefix = TaskConstant.PREFIX_TODO;
-            data = prefix + Constant.VERTICAL_BAR_WITH_SPACE + task.getStatusIcon() + Constant.VERTICAL_BAR_WITH_SPACE +
-                    task.getDescription() + Constant.LINE_SEPARATOR;
+            data = prefix + Message.VERTICAL_BAR_WITH_SPACE + task.getStatusIcon() + Message.VERTICAL_BAR_WITH_SPACE +
+                    task.getDescription() + Message.LINE_SEPARATOR;
         }
         return data;
     }
 
     public static Task retrieveTaskFromStoredData(String data) {
-        String[] tokens = data.split(Constant.VERTICAL_BAR_REGEX);
+        String[] tokens = data.split(Message.VERTICAL_BAR_REGEX);
         String prefix = tokens[0];
         boolean isDone = tokens[1].equals(TaskConstant.STATUS_ICON_DONE);
         String description = tokens[2];
@@ -39,7 +40,7 @@ public class Parser {
             try {
                 task = new Deadline(description, by);
             } catch (DateTimeException e) {
-                ExceptionHandler.printDateTimeException();
+                ExceptionHandler.handleOtherException(e);
                 task = new Todo(description);
             }
         } else if (prefix.equals(TaskConstant.PREFIX_EVENT)) {
@@ -55,6 +56,33 @@ public class Parser {
 
         return task;
 
+    }
+
+    public Command parse(String userInput) throws DukeException {
+        String[] command = parseUserInput(userInput);
+        String commandType = command[0];
+        String commandArgument = command[1];
+
+        switch (commandType) {
+        case Constant.COMMAND_BYE:
+            return new ExitCommand();
+        case Constant.COMMAND_LIST:
+            return new ListCommand();
+        case Constant.COMMAND_MARK:
+            return new MarkCommand(commandArgument);
+        case Constant.COMMAND_UNMARK:
+            return new UnmarkCommand(commandArgument);
+        case Constant.COMMAND_DELETE:
+            return new DeleteCommand(commandArgument);
+        case Constant.COMMAND_TODO:
+            return new AddTodoCommand(commandArgument);
+        case Constant.COMMAND_DEADLINE:
+            return new AddDeadlineCommand(commandArgument);
+        case Constant.COMMAND_EVENT:
+            return new AddEventCommand(commandArgument);
+        default:
+            throw new UnknownCommandException();
+        }
     }
 
     public static String[] parseUserInput(String userInput) throws EmptyTaskException {

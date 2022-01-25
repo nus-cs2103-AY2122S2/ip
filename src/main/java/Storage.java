@@ -35,9 +35,9 @@ public class Storage {
         return tasks;
     }
 
-    public static void writeTaskToFile(ArrayList<Task> tasks) throws IOException{
+    public static void writeTaskToFile(TaskList taskList) throws IOException{
         FileWriter fw = new FileWriter(PATH_TO_STORAGE_FILE.toString());
-        for (Task task: tasks) {
+        for (Task task: taskList.getTasks()) {
             fw.write(Parser.formatTaskToStore(task));
         }
         fw.close();
