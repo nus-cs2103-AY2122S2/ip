@@ -1,10 +1,15 @@
 public abstract class Task {
-    private boolean isDone;
+    protected boolean isDone;
     protected String task;
 
     public Task(String task) {
         this.task = task;
         this.isDone = false;
+    }
+
+    public Task(String task, boolean isDone) {
+        this.task = task;
+        this.isDone = isDone;
     }
 
     public void markAsDone() {
@@ -18,6 +23,8 @@ public abstract class Task {
     public String statusString() {
         return isDone ? "[X]" : "[ ]";
     }
+
+    public abstract String toFileFormat();
 
     public abstract String toString();
 }

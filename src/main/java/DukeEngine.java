@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class DukeEngine {
@@ -6,7 +7,7 @@ public class DukeEngine {
     public boolean isPolling;
 
     public DukeEngine() {
-        itemList = new ArrayList<>();
+        itemList = Storage.readSaveFile();
         isPolling = true;
         System.out.println(chatBox(greetingMessage()));
     }
@@ -19,42 +20,50 @@ public class DukeEngine {
         String replyMessage = "";
         try {
             switch (command) {
-                case "bye":
-                    replyMessage = byeMessage();
-                    break;
+            case "bye":
+                replyMessage = byeMessage();
+                break;
 
-                case "list":
-                    replyMessage = listItems();
-                    break;
+            case "list":
+                replyMessage = listItems();
+                break;
 
-                case "mark":
-                    assertValidItemNumber(commandDetails);
-                    replyMessage = markItem(Integer.parseInt(commandDetails));
-                    break;
+            case "mark":
+                assertValidItemNumber(commandDetails);
+                replyMessage = markItem(Integer.parseInt(commandDetails));
+                Storage.updateTaskFile(itemList);
+                break;
 
-                case "unmark":
-                    assertValidItemNumber(commandDetails);
-                    replyMessage = unmarkItem(Integer.parseInt(commandDetails));
-                    break;
+            case "unmark":
+                assertValidItemNumber(commandDetails);
+                replyMessage = unmarkItem(Integer.parseInt(commandDetails));
+                Storage.updateTaskFile(itemList);
+                break;
 
-                case "todo": //cascade down if 'Task' type command 
-                case "deadline": 
-                case "event":
-                    assertNonEmptyDetails(commandDetails);
-                    Task task = createTask(command, commandDetails);
-                    replyMessage = addTask(task);
-                    break;
+            case "todo":
+                //Fall Through
+            case "deadline": 
+                //Fall Through
+            case "event":
+                assertNonEmptyDetails(commandDetails);
+                Task task = createTask(command, commandDetails);
+                replyMessage = addTask(task);
+                Storage.updateTaskFile(itemList);
+                break;
 
-                case "delete":
-                    assertValidItemNumber(commandDetails);
-                    replyMessage = deleteItem(Integer.parseInt(commandDetails));
-                    break;
+            case "delete":
+                assertValidItemNumber(commandDetails);
+                replyMessage = deleteItem(Integer.parseInt(commandDetails));
+                Storage.updateTaskFile(itemList);
+                break;
 
-                default:
-                    replyMessage = "OoPs! I don't know what that means :P";
+            default:
+                replyMessage = "OoPs! I don't know what that means :P";
             }
         } catch (DukeException e) {
             replyMessage = e.getMessage();
+        } catch (IOException ioException) {
+            replyMessage = "Something went wrong with the hard disk!";
         }
 
         System.out.println(chatBox(replyMessage));
