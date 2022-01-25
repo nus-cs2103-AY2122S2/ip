@@ -11,6 +11,7 @@ public class Parser {
     /**
      * Processes the input.
      *
+     * @param input input of the user
      * @throws DukeException duke.InvalidInputException, EmptyDescDescription, duke.UnknownCommandException
      */
     public static void process(String input) throws DukeException, IOException {

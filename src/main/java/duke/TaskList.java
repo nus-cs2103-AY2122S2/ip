@@ -3,7 +3,7 @@ package duke;
 import java.util.ArrayList;
 
 /**
- * The duke.TaskList class, containing the duke.TaskList and methods that interact with Tasks.
+ * The TaskList class, containing the TaskList and methods that interact with Tasks.
  *
  * @author Jet Tan
  */
@@ -11,9 +11,9 @@ public class TaskList {
     public static ArrayList<Task> taskList = new ArrayList<>();
 
     /**
-     * Getter for the duke.TaskList.
+     * Getter for the TaskList.
      *
-     * @return the duke.TaskList
+     * @return the taskList
      */
     public static ArrayList<Task> getTasks() {
         return taskList;
@@ -21,6 +21,8 @@ public class TaskList {
     
     /**
      * Marks the specified task as done.
+     *
+     * @param tasknum the specified task to mark
      */
     public static void mark(int tasknum) {
         Task t = taskList.get(tasknum - 1);
@@ -31,6 +33,8 @@ public class TaskList {
 
     /**
      * Unmarks the specified task.
+     *
+     * @param tasknum the specified task to unmark
      */
     public static void unmark(int tasknum) {
         Task t = taskList.get(tasknum - 1);
@@ -41,6 +45,8 @@ public class TaskList {
     
     /**
      * Deletes the specified task.
+     *
+     * @param tasknum the specified task to delete
      */
     public static void delete(int tasknum) {
         Task t = taskList.get(tasknum - 1);
