@@ -1,0 +1,28 @@
+package command;
+import duke.Storage;
+import duke.Ui;
+import duke.command.DukeCommands;
+import duke.exception.DukeException;
+import duke.main.Duke;
+import duke.task.TaskList;
+import org.junit.jupiter.api.Test;
+
+import java.util.HashMap;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class CommandsTest {
+
+    @Test
+    public void testCommandTypeMapping() {
+        HashMap<String, String> h = DukeCommands.getTypeMap();
+        assertEquals("ADD_COMMAND", h.get("todo"));
+        assertEquals("ADD_COMMAND", h.get("event"));
+        assertEquals("ADD_COMMAND", h.get("deadline"));
+        assertEquals("DELETE_COMMAND",h.get("delete"));
+        assertEquals("MARK_COMMAND",h.get("mark"));
+        assertEquals("UNMARK_COMMAND",h.get("unmark"));
+        assertEquals("OUTPUT_COMMAND",h.get("list"));
+
+    }
+}

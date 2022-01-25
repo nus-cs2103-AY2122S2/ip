@@ -30,7 +30,6 @@ public class TaskList {
     // Constructor for loading existing file
     public TaskList(List<String> data) throws DukeException {
         if (data == null) {
-            throw new DukeException("OH NO!");
         } else {
             taskList = new ArrayList<>();
             for (String d : data) {
