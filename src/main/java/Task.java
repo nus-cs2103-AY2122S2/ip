@@ -1,10 +1,12 @@
-public class Task {
+public abstract class Task {
     private boolean isDone;
     private String taskDescription;
+    private String tag;
 
-    public Task (String taskDescription){
+    public Task (String taskDescription, String tag){
         this.taskDescription = taskDescription;
         this.isDone = false;
+        this.tag = tag;
     }
 
     public boolean checkIsDone(){
@@ -17,12 +19,17 @@ public class Task {
 
     public void markAsDone(){
         this.isDone = true;
-
     }
 
     public void markAsNotDone(){
         this.isDone = false;
     }
+
+    public String getTag(){
+        return this.tag;
+    }
+
+    public abstract String toSaveDataFormat();
 
     public String toString(){
         String isDoneRepresentation;
@@ -31,7 +38,8 @@ public class Task {
         } else {
             isDoneRepresentation = "[] ";
         }
-        return isDoneRepresentation + this.getTaskDescription();
+        return "[" + this.getTag() + "]" + isDoneRepresentation + this.getTaskDescription();
+
     }
 
 }
