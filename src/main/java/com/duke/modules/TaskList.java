@@ -9,6 +9,8 @@ public class TaskList {
   private Storage storage;
   private ArrayList<Task> taskList;
 
+  public TaskList() {};
+
   public TaskList(Storage storage) {
     this.taskList = new ArrayList<>();
     this.storage = storage;
@@ -18,6 +20,10 @@ public class TaskList {
   public void addTask(Task task) throws IOException {
     taskList.add(task);
     storage.saveList(taskList);
+  }
+
+  public void addTaskWithoutSaving(Task task) {
+    taskList.add(task);
   }
 
   public int getTaskListSize() {
@@ -33,6 +39,10 @@ public class TaskList {
     storage.saveList(taskList);
   }
 
+  public void removeTaskWithoutSaving(Task task) {
+    taskList.add(task);
+  }
+
   public void markTask(int i) throws IOException {
     taskList.get(i).setStatus(true);
     storage.saveList(taskList);
@@ -46,6 +56,10 @@ public class TaskList {
   public void clearList() throws IOException {
     taskList = new ArrayList<>();
     storage.saveList(taskList);
+  }
+
+  public void setListWithoutSaving(ArrayList<Task> taskList) {
+    this.taskList = taskList;
   }
 
   public String displayList() {

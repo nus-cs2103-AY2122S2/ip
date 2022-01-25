@@ -1,5 +1,7 @@
 package com.duke.command;
 
+import java.util.Objects;
+
 public class CommandResult{
   private boolean isShutdown = false;
   private String resultMessage;
@@ -25,5 +27,14 @@ public class CommandResult{
   public static CommandResult unknownResult() {
     CommandResult result = new CommandResult("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj instanceof CommandResult) {
+      CommandResult cmdresult = (CommandResult) obj;
+      return (cmdresult.isShutdown == this.isShutdown && cmdresult.resultMessage.equals(this.resultMessage));
+    }
+    return false;
   }
 }
