@@ -8,7 +8,7 @@ import saitama.exceptions.InvalidTaskNumberException;
 /**
  * A Command object that marks a given task.
  */
-public class MarkCommand extends Command{
+public class MarkCommand extends Command {
     private int taskNumber;
 
     public MarkCommand(int taskNumber) {
@@ -16,7 +16,7 @@ public class MarkCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws InvalidTaskNumberException{
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws InvalidTaskNumberException {
         if (taskNumber > taskList.numOfTasks()) {
             throw new InvalidTaskNumberException();
         }
