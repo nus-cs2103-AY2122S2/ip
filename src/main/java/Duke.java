@@ -110,12 +110,11 @@ public class Duke {
      * @param task task to be added.
      * @param type type of task.
      */
-    private static void addTasks(String task, TaskType type) {
-        System.out.println("Got it. I've added this task:");
-
+    private static void addTasks(String task, TaskType type) throws DukeException {
         switch (type) {
         case TODO:
             ToDo todoTask = new ToDo(task);
+            System.out.println("Got it. I've added this task:");
             taskList.add(todoTask);
             taskNum++;
             System.out.println(todoTask + "\n" + "Now you have " + taskNum
@@ -125,6 +124,7 @@ public class Duke {
         case EVENT:
             String[] eventActions = task.split("/at", 2);
             Event eventTask = new Event(eventActions[0].trim(), eventActions[1].trim());
+            System.out.println("Got it. I've added this task:");
             taskList.add(eventTask);
             taskNum++;
             System.out.println(eventTask + "\n" + "Now you have " + taskNum
@@ -134,6 +134,7 @@ public class Duke {
         case DEADLINE:
             String[] deadlineActions = task.split("/by", 2);
             Deadline deadlineTask = new Deadline(deadlineActions[0].trim(), deadlineActions[1].trim());
+            System.out.println("Got it. I've added this task:");
             taskList.add(deadlineTask);
             taskNum++;
             System.out.println(deadlineTask + "\n" + "Now you have " + taskNum

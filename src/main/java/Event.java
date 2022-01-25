@@ -1,8 +1,13 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represent the event of task.
  */
 public class Event extends Task {
-    protected String at;
+    protected LocalDate date;
+    protected LocalTime time;
 
     /**
      * Constructor for Event.
@@ -10,9 +15,10 @@ public class Event extends Task {
      * @param description description of the task.
      * @param at by when the event at.
      */
-    public Event(String description, String at) {
+    public Event(String description, String at) throws DukeException {
         super(description);
-        this.at = at;
+        this.date = super.getTaskDate(at);
+        this.time = super.getTaskTime(at);
     }
 
     /**
@@ -23,7 +29,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
+                +  " " + time + ")";
     }
 }
 
