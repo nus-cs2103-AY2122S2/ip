@@ -28,7 +28,7 @@ public class AddCommand extends Command {
     /**
      * Returns the message needed for printing when adding task.
      */
-    public String getAddedTaskText(Task task, TaskList tasks) {
+    private String getAddedTaskText(Task task, TaskList tasks) {
         String result = "Got it. I've added this task:\n"
                 + String.format("    %s\n", task.toString())
                 + String.format("Now you have %s task(s) in the list.", tasks.getTasks().size());

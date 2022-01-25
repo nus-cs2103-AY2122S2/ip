@@ -34,7 +34,7 @@ public class DeleteCommand extends Command {
     /**
      * Returns the message needed for printing when deleting task.
      */
-    public String getDeletedTaskText(Task task, TaskList tasks) {
+    private String getDeletedTaskText(Task task, TaskList tasks) {
         String result = " Noted. I've removed this task: \n"
                 + String.format("    %s\n", task)
                 + String.format("Now you have %s task(s) in the list.", tasks.getTasks().size());
