@@ -21,8 +21,8 @@ public class Ui {
         "mark <index of task>                                            Mark a task as completed in your task list",
         "unmark <index of task>                                          Unmark a task in your task list",
         "bye                                                             Exit the program",
-        "* date format is dd/MM/YYYY                                        eg; 24/04/2022",
-        "* timestamp format is dd/MM/YYYY HHmm                              eg; 23/03/2022 1800",
+        "* date format is d/M/YYYY                                          eg; 24/4/2022",
+        "* timestamp format is d/M/YYYY HHmm                                eg; 23/3/2022 1800",
     };
 
     private final Random random;
@@ -53,6 +53,20 @@ public class Ui {
     public void chat(String message) {
         System.out.print("Innkeeper: ");
         System.out.println(message + "\n");
+    }
+
+    /**
+     * Print a formatted message.
+     *
+     * @param message The message.
+     */
+    public void print(String message) {
+        if (message.startsWith(" ")) {
+            chat("Here you go!");
+            System.out.println(message);
+        } else {
+            chat(message);
+        }
     }
 
     public void prompt() {
