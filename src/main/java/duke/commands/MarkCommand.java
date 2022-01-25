@@ -3,7 +3,6 @@ package duke.commands;
 import duke.managers.TaskList;
 import duke.managers.Ui;
 import duke.managers.Storage;
-import duke.tasks.Task;
 import duke.exceptions.DukeException;
 
 public class MarkCommand extends Command {
@@ -17,13 +16,9 @@ public class MarkCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui io, Storage storage) throws DukeException {
-        if(index >= taskList.getSize() || index < 0)
-            throw new DukeException("Invalid input! This task number does not exist.");
         String variance = isMark ? "done" : "undone";
         String output = "Done! I've marked this task as " + variance + "\n       ";
-        Task task = taskList.get(index);
-        task.setCompleted(isMark);
-        io.showMessage(output + task.toString());
+        io.showMessage(output + taskList.markTask(index, isMark).toString());
         storage.save(taskList);
     }
 }

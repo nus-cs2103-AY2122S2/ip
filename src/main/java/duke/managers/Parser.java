@@ -1,7 +1,6 @@
 package duke.managers;
 
 import duke.commands.*;
-import duke.tasks.*;
 import duke.exceptions.DukeException;
 
 public class Parser {
@@ -19,11 +18,11 @@ public class Parser {
             case "bye":
                 return exit();
             case "todo":
-                return store(ToDo.createTask(tokens));
+                return new StoreTodoCommand(tokens);
             case "deadline":
-                return store(Deadline.createTask(tokens));
+                return new StoreDeadlineCommand(tokens);
             case "event":
-                return store(Event.createTask(tokens));
+                return new StoreEventCommand(tokens);
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
@@ -42,10 +41,6 @@ public class Parser {
         }
 
         return new DeleteCommand(index);
-    }
-
-    protected StoreCommand store(Task task) {
-        return new StoreCommand(task);
     }
 
     protected MarkCommand mark(String[] tokens, boolean isMark) throws DukeException {
