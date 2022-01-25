@@ -20,7 +20,9 @@ public class TaskList {
     }
 
     /**
-     * Prints the current lists of tasks created by the user.
+     * Returns a string representation of the tasks to be printed for the user.
+     *
+     * @return String representing the full list of tasks.
      */
     String getListForPrint() {
         int counter = 1;
@@ -43,9 +45,10 @@ public class TaskList {
     }
 
     /**
-     * Adds the specified task to the list, then prints a message to inform the user of this.
+     * Returns a String to be printed acknowledging that the user has added a task to the list.
      *
-     * @param task The task to be added to the list.
+     * @param task Task that has been added to the list
+     * @return String to be printed that acknowledges the new list item.
      */
     String addToListReply(Task task) {
         String taskName = task.getTaskName();
@@ -56,9 +59,10 @@ public class TaskList {
     }
 
     /**
-     * Removes the task (specified by its index in the list) from the list.
+     * Removes the task (specified by its index) from the list and returns a String message.
      *
      * @param removeIndex The index of the task to be removed from the list.
+     * @return String to be printed that acknowledges the removal of the list item.
      */
     String removeFromListWithMessage(int removeIndex) {
         Task removedTask = this.listOfTasks.remove(removeIndex - 1);
@@ -69,6 +73,12 @@ public class TaskList {
         return String.format("%s\n%s", removeTaskOutput, noOfTasksOutput);
     }
 
+    /**
+     * Marks the task (specified by its index) as done and returns a String message.
+     *
+     * @param indexFromUser The index of the task to be marked in the list.
+     * @return String to be printed that acknowledges the marking of the list item.
+     */
     String markInListWithMessage(int indexFromUser) {
         int indexInList = indexFromUser - 1;
         Task oldTask = this.listOfTasks.get(indexInList);
@@ -80,6 +90,12 @@ public class TaskList {
         return outputMessage;
     }
 
+    /**
+     * Marks the task (specified by its index) as undone and returns a String message.
+     *
+     * @param indexFromUser The index of the task to be marked in the list.
+     * @return String to be printed that acknowledges the unmarking of the list item.
+     */
     String unmarkInListWithMessage(int indexFromUser) {
         int indexInList = indexFromUser - 1;
         Task oldTask = this.listOfTasks.get(indexInList);
@@ -91,6 +107,11 @@ public class TaskList {
         return outputMessage;
     }
 
+    /**
+     * Returns a String to be added to storedList.txt for storage in the hard drive.
+     *
+     * @return String representing the entire list of tasks.
+     */
     String convertToStoredListFormat() {
         StringBuilder sb = new StringBuilder();
         for (Task task : listOfTasks) {
@@ -101,6 +122,12 @@ public class TaskList {
     }
 
 
+    /**
+     * Returns a new TaskList from the information in storedList.txt stored in the hard drive.
+     *
+     * @param file The file in which data about the list of tasks is stored.
+     * @return A new TaskList based on the information in the storedList.txt file.
+     */
     TaskList convertFromStoredList(File file) {
         List<Task> storedListOfTasks = new ArrayList<>();
 
@@ -134,7 +161,7 @@ public class TaskList {
     /**
      * Returns a task object after processing a string from storedList.txt.
      *
-     * @param input String containing details of the task.
+     * @param input String (from storedList.txt) containing details of the task.
      * @return A task object instantiated with parameters provided by the input string.
      */
     Task convertStringToTask(String input) {

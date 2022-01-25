@@ -13,6 +13,11 @@ abstract class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Returns the name of the task as in the name field.
+     *
+     * @return Name of task.
+     */
     public String getTaskName() {
         return this.name;
     }
