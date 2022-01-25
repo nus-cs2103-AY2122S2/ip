@@ -5,9 +5,11 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task{
     protected LocalDate dueDate;
     protected LocalTime time;
+    protected String date;
 
     public Event(String description, String dueDate) throws DukeException {
         super(description);
+        this.date = dueDate;
         try {
             this.setDueDateTime(dueDate);
         } catch (Exception e) {
@@ -30,6 +32,12 @@ public class Event extends Task{
 
     public String getDate() {
         return this.dateToString();
+    }
+
+    @Override
+    public String getTaskData() {
+        return "[D]" + super.toString() +
+                " (by: " + this.date + ")";
     }
 
     @Override

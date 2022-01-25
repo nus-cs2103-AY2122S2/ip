@@ -221,6 +221,7 @@ public class Duke {
         try {
             File f = new File(filePath);
             Scanner s = new Scanner(f); // create a Scanner using the File as the source
+            System.out.println("exists ");
             while (s.hasNext()) {
                 String currTask = s.nextLine();
                 String typeOfTask = Character.toString(currTask.charAt(1));
@@ -237,7 +238,7 @@ public class Duke {
                 } else if (typeOfTask.equals("D")) {
                     String[] info = currTask.split(" \\(by: ");
                     String description = info[0].substring(7);
-                    String date = info[1].substring(0, info[1].length() - 1);
+                    String date = info[1].substring(0, info[1].length() - 1); //Oct 12 2020 1 pm
                     Deadline curr = new Deadline(description, date);
                     if (isMarked) curr.mark();
                     list.add(curr);
@@ -269,7 +270,7 @@ public class Duke {
     private static void writeToFile(String filePath, ArrayList<Task> list) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (int i = 0; i < list.size(); i++) {
-            String textToAdd = list.get(i).toString();
+            String textToAdd = list.get(i).getTaskData();
             fw.write(textToAdd + System.lineSeparator());
         }
         fw.close();

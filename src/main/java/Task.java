@@ -23,6 +23,10 @@ public class Task {
         return this.description;
     }
 
+    public String getTaskData() {
+        return "[" + getStatus() +"] " + description;
+    }
+
     public String toString() {
         return "[" + getStatus() +"] " + description;
     }
