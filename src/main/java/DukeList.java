@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 /**
  * This is a DukeList class that handles the operations to the
@@ -9,12 +10,16 @@ import java.util.ArrayList;
  */
 
 public class DukeList {
-    protected ArrayList<Task> tasks = new ArrayList<>();
+    protected ArrayList<Task> tasks;
+
+    public DukeList() {
+        tasks = new ArrayList<>();
+    }
 
     /**
      * Adds Tasks into the list
      */
-    public String add(Task t) {
+    public String add(Task t, FileAction f) {
         StringBuilder res = new StringBuilder();
         String line = "____________________________________________________________ \n";
         tasks.add(t);
@@ -22,13 +27,14 @@ public class DukeList {
         res.append(t.toString()).append("\n");
         res.append("Now you have ").append(tasks.size());
         res.append(" tasks in the list.\n").append(line);
+        f.save(t.toString());
         return res.toString();
     }
 
     /**
      * Deletes Tasks from the list
      */
-    public String delete(int i) throws DukeException {
+    public String delete(int i, FileAction f) throws DukeException {
         Task t;
         StringBuilder res = new StringBuilder();
         String line = "____________________________________________________________ \n";
@@ -68,13 +74,14 @@ public class DukeList {
      * Marks the Task as done by given index input.
      * Index is based on the position the Task is in, in the list
      */
-    public String markTask(int i) {
+    public String markTask(int i, FileAction f) {
         StringBuilder res = new StringBuilder();
         String line = "____________________________________________________________ \n";
         res.append(line).append("Nice! I've marked this task as done: \n");
         Task t = tasks.get(i - 1);
         t.setDone(true);
         res.append(t.toString()).append(line);
+        //fAction.save(t.toString());
         return res.toString();
     }
 
@@ -82,13 +89,14 @@ public class DukeList {
      * Unmarks the Task as done by given index input.
      * Index is based on the position the Task is in, in the list
      */
-    public String unmarkTask(int i) {
+    public String unmarkTask(int i, FileAction f) {
         StringBuilder res = new StringBuilder();
         String line = "____________________________________________________________ \n";
         res.append(line).append("OK, I've marked this task as not done yet: \n");
         Task t = tasks.get(i - 1);
         t.setDone(false);
         res.append(t.toString()).append(line);
+        //fAction.save(t.toString());
         return res.toString();
     }
 }

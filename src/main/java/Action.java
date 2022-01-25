@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 /**
  * This is an Action class that obtains a sentence as input that
@@ -11,14 +12,16 @@ import java.util.Arrays;
 public class Action {
     protected String[] inp;
     protected DukeList dL;
+    protected FileAction fA;
 
     enum Commands {
         todo, deadline, event, list, mark, unmark, delete, bye;
     }
 
-    public Action(String[] i, DukeList l) {
+    public Action(String[] i, DukeList l, FileAction f) {
         inp = i;
         dL = l;
+        fA = f;
     }
 
     /**
@@ -70,14 +73,14 @@ public class Action {
      * Makes a call on DukeList's mark()
      */
     public String mark() {
-        return dL.markTask(Integer.valueOf(inp[1]));
+        return dL.markTask(Integer.valueOf(inp[1]), fA);
     }
 
     /**
      * Makes a call on DukeList's unmark()
      */
     public String unmark() {
-        return dL.unmarkTask(Integer.valueOf(inp[1]));
+        return dL.unmarkTask(Integer.valueOf(inp[1]), fA);
     }
 
     /**
@@ -91,7 +94,7 @@ public class Action {
      * Makes a call on DukeList's delete()
      */
     public String delete() throws DukeException {
-        return dL.delete(Integer.valueOf(inp[1]));
+        return dL.delete(Integer.valueOf(inp[1]), fA);
     }
 
     /**
@@ -116,7 +119,7 @@ public class Action {
             sb.append(s).append(" ");
         }
         Task t = new ToDo(sb.toString(), false);
-        return dL.add(t);
+        return dL.add(t, fA);
     }
 
     /**
@@ -153,7 +156,7 @@ public class Action {
         }
         by.append(")");
         t = new Deadline(sb.toString(), false, by.toString());
-        return dL.add(t);
+        return dL.add(t, fA);
     }
 
     /**
@@ -189,7 +192,7 @@ public class Action {
         }
         at.append(")");
         t = new Event(sb.toString(), false, at.toString());
-        return dL.add(t);
+        return dL.add(t, fA);
     }
 
     /**

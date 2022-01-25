@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 /**
@@ -10,20 +12,31 @@ import java.util.Scanner;
  */
 
 public class Duke {
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws DukeException, FileNotFoundException {
         String welcomeMsg = "____________________________________________________________\n" +
                 "Hello! I'm Duke\nWhat can I do for you?\n" +
                 "____________________________________________________________";
-        DukeList dL = new DukeList();
-
         boolean echo = true;
         Scanner sc = new Scanner(System.in);
+        DukeList dL = new DukeList();
+        FileAction fA = null;
 
         System.out.println(welcomeMsg);
         while (echo) {
+            boolean isFileWrong = false;
+
+            try {
+                fA = new FileAction();
+            } catch (IOException e) {
+                isFileWrong = true;
+                System.out.println("\nPlease insert a correct file path to your file!\n");
+                String fileName = sc.nextLine();
+                fA.changeFilePath(fileName);
+                continue;
+            }
             String input = sc.nextLine();
             String[] splitter = input.split(" ");
-            Action a = new Action(splitter, dL);
+            Action a = new Action(splitter, dL, fA);
             try {
                 a.makeAction();
             } catch (DukeException e) {
