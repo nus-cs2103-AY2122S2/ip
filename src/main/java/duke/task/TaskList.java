@@ -5,10 +5,6 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
 
 public class TaskList {
     private final ArrayList<Task> tasks;
@@ -38,7 +34,7 @@ public class TaskList {
                 }
             }
         } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException | DateTimeParseException e) {
-            throw new DukeException("File format when populating tasks from");
+            throw new DukeException("Encounter incorrect file format when loading tasks from storage");
         }
     }
     
