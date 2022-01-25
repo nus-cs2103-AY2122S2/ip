@@ -1,6 +1,11 @@
 package duke.parser;
 
-import duke.command.*;
+import duke.command.ListCommand;
+import duke.command.AddCommand;
+import duke.command.ExitCommand;
+import duke.command.InvalidCommand;
+import duke.command.NumberedCommand;
+import duke.command.Command;
 
 /**
  * Represents a parser object that formats and retrieves
