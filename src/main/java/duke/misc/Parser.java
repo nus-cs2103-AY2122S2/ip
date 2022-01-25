@@ -189,6 +189,13 @@ public class Parser {
                 }
             }
             break;
+        case ("find"):
+            if (wordList.size() > 1) {
+                taskListOfTasks.find(userInput.substring(5));
+            } else {
+                throw new InvalidCommand("The search field cannot be empty :(");
+            }
+            break;
         default:
             throw new InvalidCommand("I'm sorry, but I don't know what that means :(");
         }

@@ -431,5 +431,34 @@ public class ParserTest {
             assertEquals("I'm sorry, but I don't know what that means :(", e.getMessage());
         }
     }
+
+    @Test
+    public void testParse_findSuccess() {
+        try {
+            TaskList listOfTasks = new TaskList(100);
+            Storage.initFileFolder();
+            parse("todo borrow book", listOfTasks);
+            parse("todo read book", listOfTasks);
+            parse("find book", listOfTasks);
+            assertEquals("[[T][ ] borrow book, [T][ ] read book]",
+                    listOfTasks.getListOfTasks().toString());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testParse_findExceptionThrown() {
+        try {
+            TaskList listOfTasks = new TaskList(100);
+            Storage.initFileFolder();
+            parse("todo borrow book", listOfTasks);
+            parse("todo read book", listOfTasks);
+            parse("find", listOfTasks);
+            fail();
+        } catch (Exception e) {
+            assertEquals("The search field cannot be empty :(", e.getMessage());
+        }
+    }
 }
 
