@@ -1,9 +1,11 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
-
 
 public class Duke {
     public static boolean parseIntAble(String input) {
@@ -156,11 +158,50 @@ public class Duke {
                         // splitting deadline into description and by
                         String[] deadlineTaskArr = userInputTask.split(" /by ");
                         String deadlineDescription = deadlineTaskArr[0];
-                        String by = deadlineTaskArr[1];
+                        String[] byAndTime = deadlineTaskArr[1].split(" ");
+                        String by = byAndTime[0];
+
+                        // splitting deadline into time and the rest
+                        String[] deadlineTimeAndTheRest = userInputTask.split(" ");
+
+                        try {
+                            String deadlineTime = deadlineTimeAndTheRest[3];
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            System.out.println(lines);
+                            System.out.println("    Deadline time is required");
+                            System.out.println(lines);
+                            break;
+                        }
+
+                        String deadlineTime = deadlineTimeAndTheRest[3];
+
+                        // handle error when time is not in the hh:mm 24hr clock format
+                        try {
+                            LocalTime.parse(deadlineTime);
+                        } catch (DateTimeParseException e) {
+                            System.out.println(lines);
+                            System.out.println("Time must be in the hh:mm 24hr format");
+                            System.out.println(lines);
+                            break;
+                        }
+
+                        LocalTime time = LocalTime.parse(deadlineTime);
+
+                        // handle error when there is invalid deadline date format
+                        try {
+                            UserInputTaskValidator.deadlineDateFormatValidator(by);
+                        } catch (DukeException e) {
+                            System.out.println(lines);
+                            System.out.println("    OOPS!!! Deadline tasks can only be in the YYYY-MM-DD format.");
+                            System.out.println(lines);
+                            break;
+                        }
+
+                        LocalDate deadlineDate = LocalDate.parse(by);
 
                         System.out.println(lines);
                         // adding task to todoList
-                        Deadline userDeadlineTask = new Deadline(deadlineDescription, by);
+                        Deadline userDeadlineTask = new Deadline(deadlineDescription, deadlineDate, time);
                         todoList.add(userDeadlineTask);
 
                         // save tasks to duke.txt
@@ -172,7 +213,7 @@ public class Duke {
                         System.out.println("    " + displayTaskAmount);
                         System.out.println(lines);
 
-//                        count++;
+
                         break;
 
                     case "event":
@@ -211,10 +252,48 @@ public class Duke {
                         // splitting event into description and dateTime
                         String[] eventTaskArr = userInputTask.split(" /at ");
                         String eventDescription = eventTaskArr[0];
-                        String eventDateTime = eventTaskArr[1];
+                        String[] eventDateAndTime = eventTaskArr[1].split(" ");
+                        String eventDate = eventDateAndTime[0];
+
+                        // splitting event into time and the rest
+                        String[] eventTimeAndTheRest = userInputTask.split(" ");
+
+                        try {
+                            String eventTime = eventTimeAndTheRest[3];
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            System.out.println(lines);
+                            System.out.println("    Event time is required");
+                            System.out.println(lines);
+                            break;
+                        }
+
+                        String eventTime = eventTimeAndTheRest[3];
+
+                        // handle error when time is not in the hh:mm 24hr clock format
+                        try {
+                            LocalTime.parse(eventTime);
+                        } catch (DateTimeParseException e) {
+                            System.out.println(lines);
+                            System.out.println("Time must be in the hh:mm 24hr format");
+                            System.out.println(lines);
+                            break;
+                        }
+
+                        LocalTime atTime = LocalTime.parse(eventTime);
+                        // handle error when there is invalid deadline date format
+                        try {
+                            UserInputTaskValidator.eventAtDateTimeValidator(eventDate);
+                        } catch (DukeException e) {
+                            System.out.println(lines);
+                            System.out.println("    OOPS!!! Deadline tasks can only be in the YYYY-MM-DD format.");
+                            System.out.println(lines);
+                            break;
+                        }
+
+                        LocalDate eventAtDate = LocalDate.parse(eventDate);
 
                         // adding task to todoList
-                        Event userEventTask = new Event(eventDescription, eventDateTime);
+                        Event userEventTask = new Event(eventDescription, eventAtDate, atTime);
                         todoList.add(userEventTask);
 
                         // save tasks to duke.txt

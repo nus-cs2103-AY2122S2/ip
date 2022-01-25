@@ -1,10 +1,23 @@
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.Month;
+
 public class Deadline extends Task {
 
-    protected String by;
+    protected LocalDate deadlineDate;
+    protected DayOfWeek day;
+    protected Month month;
+    protected int year;
+    protected LocalTime time;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, LocalDate deadlineDate, LocalTime time) {
         super(description);
-        this.by = by;
+        this.deadlineDate = deadlineDate;
+        this.day = deadlineDate.getDayOfWeek();
+        this.month = deadlineDate.getMonth();
+        this.year = deadlineDate.getYear();
+        this.time = time;
     }
 
     @Override
@@ -14,7 +27,11 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by + ")";
+        return "[D]" + super.toString() + " (by: "
+                + this.month + " "
+                + this.day + " "
+                + this.year + " "
+                + this.time + ")";
     }
 
 }
