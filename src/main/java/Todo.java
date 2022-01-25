@@ -18,7 +18,7 @@ public class Todo extends Task{
         return new Todo(this.name, false);
     }
 
-    public String convertToStoredListFormat() {
+    public String convertToStoredTaskFormat() {
         String doneIndicator = "false";
         if (super.isDone) {
             doneIndicator = "true";

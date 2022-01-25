@@ -31,7 +31,7 @@ public class Deadline extends Task {
         return new Deadline(this.name, this.endDate, false);
     }
 
-    public String convertToStoredListFormat() {
+    public String convertToStoredTaskFormat() {
         String doneIndicator = "false";
         if (super.isDone) {
             doneIndicator = "true";

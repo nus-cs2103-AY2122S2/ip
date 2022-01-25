@@ -19,7 +19,7 @@ abstract class Task {
 
     abstract Task markAsUndone();
 
-    abstract String convertToStoredListFormat();
+    abstract String convertToStoredTaskFormat();
 
     @Override
     public String toString() {

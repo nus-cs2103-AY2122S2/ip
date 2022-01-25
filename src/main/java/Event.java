@@ -30,7 +30,7 @@ public class Event extends Task {
         return new Event(this.name, this.eventTime, false);
     }
 
-    public String convertToStoredListFormat() {
+    public String convertToStoredTaskFormat() {
         String doneIndicator = "false";
         if (super.isDone) {
             doneIndicator = "true";
