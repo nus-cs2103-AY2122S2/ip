@@ -11,7 +11,6 @@ public class ParsedAnswerHandler {
     }
 
     void execute() {
-        // do a thing depending on what the answer is
         String filePath = System.getProperty("user.dir")  + "/data/storage.txt";
         switch (pa.getCommand()) {
             case "bye":
@@ -21,7 +20,10 @@ public class ParsedAnswerHandler {
 
             case "list":
                 ArrayList<Task> taskArrayList = Storage.taskList;
-                taskArrayList.forEach(System.out::println);
+                System.out.println("Here are the tasks in your list: " + "\n");
+                for (int i = 0; i < taskArrayList.size(); i++) {
+                    System.out.println( (i + 1) + ". "  + taskArrayList.get(i) + "\n");
+                }
                 break;
 
             case "todo":
@@ -72,6 +74,33 @@ public class ParsedAnswerHandler {
                     System.out.println("Error saving task to file.");
                 }
                 break;
+
+            case "mark":
+                try {
+                    Task t = Storage.taskList.get(pa.getIndex() - 1);
+                    t.markAsDone();
+                    Storage s = new Storage();
+                    s.save();
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Item not found. Please try again.");
+                }
+                break;
+
+            case "unmark":
+               try {
+                   Task t = Storage.taskList.get(pa.getIndex() - 1);
+                   t.markAsUndone();
+                   Storage s = new Storage();
+                   s.save();
+               } catch (IndexOutOfBoundsException e) {
+                   System.out.println("Item not found. Please try again.");
+               }
+               break;
+
+            case "error":
+                System.out.println(pa.getDesc());
+                break;
+
         }
     }
 }

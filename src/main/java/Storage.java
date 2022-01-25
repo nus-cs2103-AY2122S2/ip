@@ -2,7 +2,6 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Storage {
@@ -11,7 +10,9 @@ public class Storage {
 
     Storage() {
         this.homeDir = System.getProperty("user.dir");
-        taskList = new ArrayList<>();
+        if (taskList == null) {
+            taskList = new ArrayList<>();
+        }
     }
 
     void load() {
@@ -94,7 +95,8 @@ public class Storage {
                     sb.append(t.getDescription());
                     sb.append(",");
                     sb.append(((Event) t).getAt());
-                    BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+                    sb.append("\n");
+                    BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true));
                     writer.write(sb.toString());
                     writer.close();
                 } else if (t instanceof Deadline) {
@@ -108,7 +110,8 @@ public class Storage {
                     sb.append(t.getDescription());
                     sb.append(",");
                     sb.append(((Deadline) t).getBy());
-                    BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+                    sb.append("\n");
+                    BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true));
                     writer.write(sb.toString());
                     writer.close();
                 } else {
@@ -120,7 +123,8 @@ public class Storage {
                         sb.append("1,");
                     }
                     sb.append(t.getDescription());
-                    BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+                    sb.append("\n");
+                    BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true));
                     writer.write(sb.toString());
                     writer.close();
                 }
