@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TodoTaskTest {
     @Test
-    public void testTodo() {
+    public void todoTask_constructor() {
         String todoDesc = "Eat chicken";
         String todoDone = "[T][X] Eat chicken";
         String todoUndone = "[T][ ] Eat chicken";
