@@ -57,11 +57,11 @@ public class Ui {
             } else if (temp[0].equals("todo")) {
 //                AddCommand c = new AddCommand(DUKE_DIRECTORY,DUKE_TXTFILE);
 //                c.addCommand(temp[0],temp[1]);
-                taskList.toDo(temp[1]);
+                System.out.println(taskList.toDo(temp[1]));
             } else if (temp[0].equals("deadline")) {
-                taskList.deadLine(temp[1]);
+                System.out.println(taskList.deadLine(temp[1]));
             } else if (temp[0].equals("event")) {
-                taskList.event(temp[1]);
+                System.out.println(taskList.event(temp[1]));
             } else if (temp[0].equals("delete")) {
               // DeleteCommand d = new DeleteCommand(DUKE_DIRECTORY,DUKE_TXTFILE);
                taskList.delete(temp[1]);

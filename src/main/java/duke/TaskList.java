@@ -36,29 +36,29 @@ public class TaskList {
         storage.updateData(task_undone.message(),filePath);
     }
 
-    public void toDo(String str) throws IOException {
+    public String toDo(String str) throws IOException {
         Todos todo = new Todos(str);
         list_of_inputs.add(todo);
         storage.updateData(todo.message() , filePath);
-        System.out.println("Okayy!! I've added this task:\n " + todo.message() + "\n You have " + list_of_inputs.size() + " tasks in the list.");
+        return "Okayy!! I've added this task:\n " + todo.message() + "\n You have " + list_of_inputs.size() + " tasks in the list.";
 
     }
 
-    public void deadLine(String str) throws IOException {
+    public String deadLine(String str) throws IOException {
         String[] deadL = str.split("/by ", 2);
         Deadline deadLineTemp = new Deadline(deadL[0], deadL[1]);
         list_of_inputs.add(deadLineTemp);
         storage.updateData(deadLineTemp.message(),filePath);
-        System.out.println("Deadline for this task:\n " + deadLineTemp.message() + "\n You have " + list_of_inputs.size() + " tasks in the list.");
+        return "Deadline for this task:\n " + deadLineTemp.message() + "\n You have " + list_of_inputs.size() + " tasks in the list.";
 
     }
 
-    public void event(String str) throws IOException {
+    public String event(String str) throws IOException {
         String[] event = str.split("/at ", 2);
         Event eventTemp = new Event(event[0], event[1]);
         list_of_inputs.add(eventTemp);
         storage.updateData(eventTemp.message(),filePath);
-        System.out.println("I have added this task and the event time is:\n " + eventTemp.message() + "\n You have " + list_of_inputs.size() + " tasks in the list.");
+        return "I have added this task and the event time is:\n " + eventTemp.message() + "\n You have " + list_of_inputs.size() + " tasks in the list.";
 
     }
 

@@ -7,7 +7,7 @@ public class Parser {
     String directory;
     String filePath;
 
-    Parser (String directory, String filePath) {
+    public Parser(String directory, String filePath) {
         this.directory = directory;
         this.filePath = filePath;
     }
