@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -25,7 +27,7 @@ public class TaskManager {
             try {
                 this.handleCommand(curr, userInput, st);
             } catch (DukeException e){
-                System.out.println(e.toString());
+                System.out.println(e);
             }
 
             System.out.println("-------------------");
@@ -57,21 +59,26 @@ public class TaskManager {
     }
 
     private void addDeadline(String desc, String date) throws DukeException.DukeNoTimeProvided {
-        if(date.replace(" ", "").equals("")) {
+
+        try {
+            Deadline curr = new Deadline(desc, false, LocalDate.parse(date));
+            this.tasks.add(curr);
+            this.printTaskAddition(curr);
+        } catch (DateTimeParseException e) {
+
             throw new DukeException.DukeNoTimeProvided();
         }
-        Deadline curr = new Deadline(desc, false, date);
-        this.tasks.add(curr);
-        this.printTaskAddition(curr);
     }
 
     private void addEvent(String desc, String date) throws DukeException.DukeNoTimeProvided {
-        if(date.replace(" ", "").equals("")) {
+
+        try {
+            Event curr = new Event(desc, false, LocalDate.parse(date));
+            this.tasks.add(curr);
+            this.printTaskAddition(curr);
+        } catch (DateTimeParseException e) {
             throw new DukeException.DukeNoTimeProvided();
         }
-        Event curr = new Event(desc, false, date);
-        this.tasks.add(curr);
-        this.printTaskAddition(curr);
     }
 
     private void printTaskAddition(Task curr){
