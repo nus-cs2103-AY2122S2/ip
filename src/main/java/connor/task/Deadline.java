@@ -13,15 +13,15 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    public String getBy() {
-        return by;
-    }
-
     public Deadline(String desc, LocalDate date) {
         super(desc, TaskType.DEADLINE);
         this.date = date;
         this.by = date.toString();
         this.hasLocalDate = true;
+    }
+
+    public String getBy() {
+        return by;
     }
 
     public boolean hasLocalDate() {
@@ -40,5 +40,19 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return getType() + super.toString() + " (By: " + getDate() + ")";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        } else if (!(o instanceof Deadline)) {
+            return false;
+        } else {
+            Deadline d = (Deadline) o;
+            return this.getDesc().equals(d.getDesc())
+                    && this.isDone().equals(d.isDone())
+                    && this.getDate().equals(d.getDate());
+        }
     }
 }

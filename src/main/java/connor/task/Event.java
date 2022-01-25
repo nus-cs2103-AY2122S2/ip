@@ -13,15 +13,19 @@ public class Event extends Task {
         this.at = at;
     }
 
-    public String getAt() {
-        return at;
-    }
-
     public Event(String desc, LocalDate date) {
         super(desc, TaskType.EVENT);
         this.date = date;
         this.at = date.toString();
         this.hasLocalDate = true;
+    }
+
+    public String getAt() {
+        return at;
+    }
+
+    public boolean hasLocalDate() {
+        return hasLocalDate;
     }
 
     public String getDate() {
@@ -36,5 +40,19 @@ public class Event extends Task {
     @Override
     public String toString() {
         return getType() + super.toString() + " (At: " + getDate() + ")";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        } else if (!(o instanceof Event)) {
+            return false;
+        } else {
+            Event e = (Event) o;
+            return this.getDesc().equals(e.getDesc())
+                    && this.isDone().equals(e.isDone())
+                    && this.getDate().equals(e.getDate());
+        }
     }
 }
