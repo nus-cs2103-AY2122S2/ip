@@ -10,6 +10,12 @@ public class Duke {
     public TaskList tasks;
     public Ui ui;
 
+    /**
+     * constructor of the Duck program
+     * @param filePath path used to load the file
+     * @throws IOException handles input output exceptions
+     * @throws ClassNotFoundException handle class not found errors
+     */
     public Duke(String filePath) throws ClassNotFoundException, IOException {
 
         storage = new Storage(filePath);
@@ -25,6 +31,9 @@ public class Duke {
 
     }
 
+    /**
+     * this method is used to run the Duke program
+     */
     public void run() throws IOException, ClassNotFoundException {
         Ui.greeting();
         Scanner sc = new Scanner(System.in);
@@ -36,6 +45,10 @@ public class Duke {
 
     }
 
+    /**
+     * main method to drive the program
+     * @param args command line arguments
+     */
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         new Duke("duke_Data_Saved.txt").run();
     }
