@@ -23,6 +23,7 @@ public class Parser {
      */
     public static int getIndex(String input) {
         try {
+            input = input.trim();
             String seperator = " ";
             int pos = input.indexOf(seperator);
             int res = Integer.parseInt(input.substring(pos + 1).trim());

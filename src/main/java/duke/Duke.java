@@ -6,12 +6,7 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.command.Command;
 
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.io.File;
 
 public class Duke {
