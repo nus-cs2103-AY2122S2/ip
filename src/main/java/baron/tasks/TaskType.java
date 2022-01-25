@@ -7,7 +7,7 @@ public enum TaskType {
 
     private final String command;
 
-    private TaskType(String command) {
+    TaskType(String command) {
         this.command = command;
     }
 

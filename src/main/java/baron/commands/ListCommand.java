@@ -1,6 +1,6 @@
 package baron.commands;
 
-import baron.messages.Messages;
+import baron.message.Message;
 import baron.tasks.TaskManager;
 
 public class ListCommand extends Command {
@@ -12,6 +12,6 @@ public class ListCommand extends Command {
 
     @Override
     public String execute() {
-        return Messages.MESSAGE_LIST_TASK + this.taskManager.toString();
+        return Message.MESSAGE_LIST_TASK + this.taskManager.toString();
     }
 }

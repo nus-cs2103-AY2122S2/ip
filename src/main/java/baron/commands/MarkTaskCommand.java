@@ -1,7 +1,7 @@
 package baron.commands;
 
 import baron.exceptions.BaronException;
-import baron.messages.Messages;
+import baron.message.Message;
 import baron.tasks.TaskManager;
 import baron.util.Storage;
 
@@ -29,7 +29,7 @@ public class MarkTaskCommand extends Command {
                     throw e;
                 }
             }
-            return Messages.MESSAGE_MARK_SUCCESS + this.taskManager.getTask(index).toString();
+            return Message.MESSAGE_MARK_SUCCESS + this.taskManager.getTask(index).toString();
         } catch (BaronException e) {
             return e.toString();
         }

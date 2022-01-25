@@ -41,6 +41,7 @@ public class Baron {
             TextUi.printCommandOutput(command.execute());
         }
         while (!command.isByeCommand());
+
         try {
             this.storage.save(this.taskManager.getAllTasks());
         } catch (BaronException e) {

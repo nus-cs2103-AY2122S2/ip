@@ -1,8 +1,8 @@
-package baron.messages;
+package baron.message;
 
 import baron.tasks.TaskType;
 
-public class Messages {
+public class Message {
     public static final String MESSAGE_MARK_SUCCESS = "Nice! I've marked this task as done:\n  ";
     public static final String MESSAGE_UNMARK_SUCCESS = "OK, I've marked this task as not done yet:\n  ";
     public static final String MESSAGE_DELETE_SUCCESS = "Noted. I've removed this task:\n ";
@@ -17,7 +17,7 @@ public class Messages {
 
     public static String generateNoOfTasksMessage(int noOfTasks) {
         if (noOfTasks == 0) {
-            return Messages.MESSAGE_NO_TASK;
+            return Message.MESSAGE_NO_TASK;
         } else if (noOfTasks == 1) {
             return "Now you have 1 task in your list.";
         }

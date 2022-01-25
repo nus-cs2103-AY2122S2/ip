@@ -1,7 +1,7 @@
 package baron.commands;
 
 import baron.exceptions.BaronException;
-import baron.messages.Messages;
+import baron.message.Message;
 import baron.tasks.Task;
 import baron.tasks.TaskManager;
 import baron.util.Storage;
@@ -29,8 +29,8 @@ public class DeleteTaskCommand extends Command {
                 throw e;
             }
             this.taskManager.commitChanges();
-            return Messages.MESSAGE_DELETE_SUCCESS + deletedTask.toString() + "\n"
-                    + Messages.generateNoOfTasksMessage(this.taskManager.getTaskCount());
+            return Message.MESSAGE_DELETE_SUCCESS + deletedTask.toString() + "\n"
+                    + Message.generateNoOfTasksMessage(this.taskManager.getTaskCount());
         } catch (BaronException e) {
             return e.toString();
         }

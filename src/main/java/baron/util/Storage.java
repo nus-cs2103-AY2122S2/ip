@@ -1,7 +1,7 @@
 package baron.util;
 
 import baron.exceptions.BaronException;
-import baron.messages.Messages;
+import baron.message.Message;
 import baron.tasks.Task;
 import baron.tasks.TaskType;
 import baron.tasks.ToDo;
@@ -31,7 +31,7 @@ public class Storage {
             try {
                 fileReader = new Scanner(this.file);
             } catch (FileNotFoundException e) {
-                throw new BaronException(Messages.MESSAGE_FILE_NOT_FOUND);
+                throw new BaronException(Message.MESSAGE_FILE_NOT_FOUND);
             }
 
             ArrayList<Task> newTaskList = new ArrayList<>();
@@ -42,7 +42,7 @@ public class Storage {
             }
             return newTaskList;
         } else {
-            throw new BaronException(Messages.MESSAGE_FILE_NOT_FOUND);
+            throw new BaronException(Message.MESSAGE_FILE_NOT_FOUND);
         }
     }
 
@@ -56,17 +56,17 @@ public class Storage {
                 }
                 fileWriter.close();
             } catch (IOException e) {
-                throw new BaronException(Messages.MESSAGE_FILE_WRITE_FAIL);
+                throw new BaronException(Message.MESSAGE_FILE_WRITE_FAIL);
             }
         } else {
-            throw new BaronException(Messages.MESSAGE_FILE_NOT_FOUND);
+            throw new BaronException(Message.MESSAGE_FILE_NOT_FOUND);
         }
     }
 
     private Task parseTaskString(String taskString) throws BaronException {
         String[] taskStringArray = taskString.split(Storage.FILE_DELIMITER, 4);
         if (taskStringArray.length < 3 || taskStringArray.length > 4) {
-            throw new BaronException(Messages.MESSAGE_INVALID_FILE_FORMAT);
+            throw new BaronException(Message.MESSAGE_INVALID_FILE_FORMAT);
         } else {
             TaskType taskType;
             boolean isDone;
@@ -84,7 +84,7 @@ public class Storage {
                 taskType = TaskType.EVENT;
                 break;
             default:
-                throw new BaronException(Messages.MESSAGE_INVALID_FILE_FORMAT);
+                throw new BaronException(Message.MESSAGE_INVALID_FILE_FORMAT);
             }
 
             if (taskStringArray[1].equals("1")) {
@@ -92,7 +92,7 @@ public class Storage {
             } else if (taskStringArray[1].equals("0")) {
                 isDone = false;
             } else {
-                throw new BaronException(Messages.MESSAGE_INVALID_FILE_FORMAT);
+                throw new BaronException(Message.MESSAGE_INVALID_FILE_FORMAT);
             }
 
             if (taskStringArray.length == 4) {
@@ -103,13 +103,13 @@ public class Storage {
 
             if (taskType == TaskType.TODO) {
                 if (additionalInfo != null) {
-                    throw new BaronException(Messages.MESSAGE_INVALID_FILE_FORMAT);
+                    throw new BaronException(Message.MESSAGE_INVALID_FILE_FORMAT);
                 } else {
                     newTask = new ToDo(description);
                 }
             } else {
                 if (additionalInfo == null) {
-                    throw new BaronException(Messages.MESSAGE_INVALID_FILE_FORMAT);
+                    throw new BaronException(Message.MESSAGE_INVALID_FILE_FORMAT);
                 } else {
                     if (taskType == TaskType.DEADLINE) {
                         newTask = new Deadline(description, additionalInfo);
@@ -131,7 +131,7 @@ public class Storage {
         if (!(this.file.exists() && this.file.isFile())) {
             if (this.file.isDirectory()) {
                 if (!this.file.delete()) {
-                    throw new BaronException(Messages.MESSAGE_FILE_CREATION_FAIL);
+                    throw new BaronException(Message.MESSAGE_FILE_CREATION_FAIL);
                 }
             }
             if (this.file.getParentFile() != null) {
@@ -141,7 +141,7 @@ public class Storage {
             try {
                 this.file.createNewFile();
             } catch (IOException e) {
-                throw new BaronException(Messages.MESSAGE_FILE_CREATION_FAIL);
+                throw new BaronException(Message.MESSAGE_FILE_CREATION_FAIL);
             }
         }
     }

@@ -1,7 +1,7 @@
 package baron.tasks;
 
 import baron.exceptions.BaronException;
-import baron.messages.Messages;
+import baron.message.Message;
 import baron.util.DateTimeUtil;
 
 import java.time.LocalDateTime;
@@ -43,7 +43,7 @@ public class TaskManager {
                 newTask = new Deadline(splitString[0], localDateTime);
             } else if (splitString.length == 1) {
                 if (splitString[0].startsWith("/by")) {
-                    throw new BaronException(Messages.generateEmptyDescMessage(taskType));
+                    throw new BaronException(Message.generateEmptyDescMessage(taskType));
                 } else {
                     throw new BaronException("Please specify a deadline by the /by keyword.");
                 }
@@ -57,7 +57,7 @@ public class TaskManager {
                 newTask = new Event(splitString[0], localDateTime);
             } else if (splitString.length == 1) {
                 if (splitString[0].startsWith("/at")) {
-                    throw new BaronException(Messages.generateEmptyDescMessage(taskType));
+                    throw new BaronException(Message.generateEmptyDescMessage(taskType));
                 }
                 throw new BaronException("Please specify a date by the /at keyword.");
             } else  {
@@ -80,7 +80,7 @@ public class TaskManager {
 
     public boolean markTask(int index) throws BaronException {
         if (this.isEmpty()) {
-            throw new BaronException(Messages.MESSAGE_NO_TASK);
+            throw new BaronException(Message.MESSAGE_NO_TASK);
         } else if (index > 0 && index <= this.getTaskCount()) {
             if (this.taskList.get(index - 1).mark()) {
                 return true;
@@ -95,7 +95,7 @@ public class TaskManager {
 
     public boolean unmarkTask(int index) throws BaronException {
         if (this.isEmpty()) {
-            throw new BaronException(Messages.MESSAGE_NO_TASK);
+            throw new BaronException(Message.MESSAGE_NO_TASK);
         } else if (index > 0 && index <= this.getTaskCount()) {
             if (this.taskList.get(index - 1).unmark()) {
                 return true;
@@ -110,7 +110,7 @@ public class TaskManager {
 
     public Task deleteTask(int index) throws BaronException {
         if (this.isEmpty()) {
-            throw new BaronException(Messages.MESSAGE_NO_TASK);
+            throw new BaronException(Message.MESSAGE_NO_TASK);
         } else if (index > 0 && index <= this.getTaskCount()) {
             this.previousTaskList = this.getAllTasks();
             Task deletedTask = this.taskList.get(index - 1);

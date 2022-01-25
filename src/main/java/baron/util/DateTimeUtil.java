@@ -1,7 +1,7 @@
 package baron.util;
 
 import baron.exceptions.BaronException;
-import baron.messages.Messages;
+import baron.message.Message;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -15,7 +15,7 @@ public class DateTimeUtil {
         try {
             return LocalDateTime.parse(dateTimeString, DateTimeUtil.inputFormatter);
         } catch (DateTimeParseException e) {
-            throw new BaronException(Messages.MESSAGE_DATE_TIME_FORMAT_INVALID);
+            throw new BaronException(Message.MESSAGE_DATE_TIME_FORMAT_INVALID);
         }
     }
 

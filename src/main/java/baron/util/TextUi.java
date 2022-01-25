@@ -1,6 +1,6 @@
 package baron.util;
 
-import baron.messages.Messages;
+import baron.message.Message;
 import baron.tasks.TaskManager;
 
 public class TextUi {
@@ -19,7 +19,7 @@ public class TextUi {
                 "| |_/ / (_| | | | (_) | | | |\n" +
                 "\\____/ \\__,_|_|  \\___/|_| |_|\n";
         String message = "What can I do for you?";
-        System.out.println("Hello from\n" + logo + Messages.generateNoOfTasksMessage(this.taskManager.getTaskCount())
+        System.out.println("Hello from\n" + logo + Message.generateNoOfTasksMessage(this.taskManager.getTaskCount())
                 + "\n" + message);
     }
 
