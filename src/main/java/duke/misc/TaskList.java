@@ -11,6 +11,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+/**
+ * Acts as a storage for all the tasks that the user has entered.
+ *
+ * @auther Terng Yan Long
+ */
 public class TaskList {
     private final ArrayList<Task> listOfTasks;
     private int numberOfTasks;
@@ -43,9 +48,14 @@ public class TaskList {
         return this.listOfTasks;
     }
 
+    /**
+     * Adds 1 to the numberOfTasks.
+     * Mostly used when a Task is being added to the TaskList.
+     */
     public void incrementTasks(){
         this.numberOfTasks++;
     }
+
     /**
      * Iterates through the list and prints out each task that is on the list.
      */
@@ -61,7 +71,7 @@ public class TaskList {
     }
 
     /**
-     * Marks task by changing its status to "done"
+     * Marks task by changing its status to "done".
      *
      * @param taskId The taskID that corresponds to the task that is to be marked.
      */
@@ -91,7 +101,7 @@ public class TaskList {
     }
 
     /**
-     * Adds the to-do task into the list
+     * Adds the to-do task into the list.
      *
      * @param userInput Command entered by the user that describes the task.
      */
@@ -111,7 +121,7 @@ public class TaskList {
     }
 
     /**
-     * Adds the task (which has a deadline) into the list
+     * Adds the task (which has a deadline) into the list.
      *
      * @param userInput Command entered by the user that describes the task.
      * @param dueDate Specifies the date that this task has to be done by.
@@ -133,7 +143,7 @@ public class TaskList {
     }
 
     /**
-     * Adds the event task into the list
+     * Adds the event task into the list.
      *
      * @param userInput Command entered by the user that describes the task.
      */

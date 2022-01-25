@@ -1,8 +1,13 @@
 package duke.exception;
 
+/**
+ * Represents an exception that will be thrown when the user enters an invalid command.
+ *
+ * @author Terng Yan Long
+ */
 public class InvalidCommand extends DukeException {
-
     private final String errorMessage;
+
     /**
      * Initialises a new instance of duke.exception.InvalidCommand.
      *

@@ -4,10 +4,17 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a task that has a start date, as well as an optional start time and end time.
+ *
+ * @author Terng Yan Long
+ */
+
 public class Event extends Task {
     private LocalDate eventDate;
     private LocalTime eventStartTime;
     private LocalTime eventEndTime;
+
     /**
      * Initializes a new event task.
      * By default, the new task is set to "not done".

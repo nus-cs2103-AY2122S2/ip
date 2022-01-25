@@ -4,12 +4,18 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a task with a deadline.
+ * It has a date field, and an optional time field.
+ *
+ * @author Terng Yan Long
+ */
 public class Deadline extends Task {
     private LocalDate dueDate;
     private LocalTime dueTime;
 
     /**
-     * Initializes a new instance of task that has a deadline
+     * Initializes a new instance of task that has a deadline.
      * By default, the new task is set to "not done".
      *
      * @param description Describes what needs to be done in this task.

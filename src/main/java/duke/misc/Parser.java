@@ -13,6 +13,13 @@ import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Extracts and deciphers the user's input, and subsequently calls the relevant function.
+ * Type of inputs that are currently supported:
+ * list/todo/deadline/event/mark/unmark/delete/bye
+ *
+ * @author Terng Yan Long
+ */
 public class Parser {
     /**
      * Calls different functions according to the user's input command.
@@ -212,10 +219,10 @@ public class Parser {
     }
 
     /**
-     * Removes the last character of a string
+     * Removes the last character of a string.
      *
-     * @param str Target String
-     * @return New string after removing the last character of the original string
+     * @param str Target String.
+     * @return New string after removing the last character of the original string.
      */
     private static String removeLastChar(String str) {
         if (str == null || str.length() == 0) {

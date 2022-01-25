@@ -1,8 +1,14 @@
 package duke.exception;
 
+/**
+ * Represents an exception that will be thrown when the user tries to mark/unmark/delete an entry
+ * that is not in the list.
+ *
+ * @author Terng Yan Long
+ */
 public class InvalidIndex extends DukeException {
-
     private final String errorMessage;
+
     /**
      * Initialises a new instance of InvalidIndex.
      *

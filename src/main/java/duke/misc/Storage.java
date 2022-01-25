@@ -16,13 +16,20 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+/**
+ * Deals with the loading/storing of data from/to the hard disk folder.
+ * It also provides a function to check if the target data file/folder exist.
+ *
+ * @author Terng Yan Long
+ */
 public class Storage {
     public static final String DATA_FOLDER_PATH = "./data";
     public static final String DATA_PATH = "./data/data.txt";
+
     /**
      * Creates new data file/folder if it does not exists.
      *
-     * @throws IOException Failed to create data file/folder in the correct location
+     * @throws IOException Failed to create data file/folder in the correct location.
      */
     public static void initFileFolder() throws IOException {
         // Check if folder exist

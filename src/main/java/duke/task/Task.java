@@ -1,5 +1,10 @@
 package duke.task;
 
+/**
+ * Represents the task that the user has created in Duke.
+ *
+ * @author Terng Yan Long
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -8,7 +13,7 @@ public class Task {
      * Initializes a new instance of task, according to the task description.
      * By default, the new task is set to "not done".
      *
-     * @param description Describes what needs to be done in this task
+     * @param description Describes what needs to be done in this task.
      */
     public Task(String description) {
         this.description = description;

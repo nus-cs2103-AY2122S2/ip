@@ -1,7 +1,13 @@
 package duke.exception;
 
+/**
+ * Represents an exception that will be thrown when the user enters an invalid date or time.
+ *
+ * @author Terng Yan Long
+ */
 public class InvalidDateTime extends DukeException {
     private final String errorMessage;
+
     /**
      * Initialises a new instance of InvalidDateTime.
      *
