@@ -4,16 +4,8 @@ public class Task {
     private String dead;
     private String type;
 
-    public Task(String type, String name) {
-        this.type = type;
+    public Task(String name) {
         this.name = name;
-        this.done = false;
-    }
-
-    public Task(String type, String name, String dead) {
-        this.type = type;
-        this.name = name;
-        this.dead = dead;
         this.done = false;
     }
 
@@ -23,26 +15,6 @@ public class Task {
 
     public void unmark() {
         this.done = false;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public String getDone() {
-        if (done) {
-            return "1";
-        } else {
-            return "0";
-        }
-    }
-
-    public String getName(){
-        return name;
-    }
-
-    public String getDead() {
-        return dead;
     }
 
     @Override

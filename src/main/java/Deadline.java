@@ -2,7 +2,7 @@ public class Deadline extends Task{
     protected String dead;
 
     public Deadline(String name, String dead) {
-        super("D", name, dead);
+        super(name);
         this.dead = dead;
     }
 
