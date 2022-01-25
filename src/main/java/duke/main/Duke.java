@@ -10,11 +10,18 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Acts as a task manager that keeps tracks of all your tasks.
+ */
 public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
     
+    /**
+     * Creates a Duke object that initializes all the necessary components for the task manager program.
+     * @param filePath filePath is the relative path to the text file that stores user's tasks.
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -27,6 +34,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs, handles and processes the commands input by the user.
+     */
     public void run() {
         ui.hello();
 
@@ -46,6 +56,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Boots up the entire task manager application.
+     * @param args Args is the command line arguments received from user.
+     */
     public static void main(String[] args) {
         new Duke(Constants.FILE_PATH + Constants.FILE_NAME).run();
     }

@@ -17,13 +17,26 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/**
+ * Handles storage reads and writes.
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Creates a Storage object that allows program to perform storage
+     * reads and writes throughout lifetime of program.
+     * @param filePath filePath is the relative path to the text file that stores user's tasks.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads tasks from local disk file into program tasks list.
+     * @return List of tasks.
+     * @throws IOException If error reading from local disk text file.
+     */
     public ArrayList<Task> loadFromFile() throws IOException {
         Scanner sc;
         File directory = new File(Constants.FILE_PATH);
@@ -71,6 +84,11 @@ public class Storage {
         return allTasks;
     }
 
+    /**
+     * Writes to local disk text file.
+     * @param taskString taskString is the task to be written.
+     * @throws IOException If error writing to local disk text file.
+     */
     public void writeToFile(String taskString) throws IOException {
         FileWriter fw = new FileWriter(this.filePath, true);
 
@@ -79,6 +97,13 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Writes to local disk text file. Used for updating and deleting task.
+     * @param taskString taskString is the task to be written.
+     * @param index index is the task number of this transaction.
+     * @param isDelete isDelete is an indicator of updating or deleting of task.
+     * @throws IOException If error writing to local disk text file.
+     */
     public void writeToFile(String taskString, int index, boolean isDelete) throws IOException {
         Path filePath = Paths.get(Constants.FILE_PATH, Constants.FILE_NAME);
         ArrayList<String> fileContent = new ArrayList<>(

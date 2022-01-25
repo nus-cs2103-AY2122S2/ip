@@ -7,7 +7,13 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Lists all tasks in the task list.
+ */
 public class ListCommand extends Command {
+    /**
+     * Executes the list command.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         int length = taskList.size();
