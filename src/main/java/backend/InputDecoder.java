@@ -5,12 +5,18 @@ public class InputDecoder {
 
     public InputDecoder() {}
 
-    private String[] parseInput(String input) throws IllegalArgumentException {
+    private String[] parseInput(String input) throws IllegalArgumentException{
         String[] commandSections = input.split(" ", 2);
         currentCommand = Commands.valueOf(commandSections[0].toUpperCase());
         return commandSections;
     }
 
+    /**
+     * Returns the task equivalent from a task generating string input supplied by user
+     * @param input task generating string that follows standard format
+     * @return Task object containing information from input string
+     * @throws ArrayIndexOutOfBoundsException if only command and no input behind is given
+     */
     public void decode(String input) {
         String[] commandSections = null;
 

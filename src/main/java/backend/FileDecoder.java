@@ -14,6 +14,12 @@ public class FileDecoder {
 
     public FileDecoder() {}
 
+    /**
+     * Returns the task equivalent from a task generating string input in pre-saved file
+     *
+     * @param tasks A task generating string that follows standard format
+     * @return Task object containing information from input string
+     */
     public Task decode(String tasks) {
 
         String[] args = tasks.split(" \\| ");
