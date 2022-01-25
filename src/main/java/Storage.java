@@ -9,13 +9,17 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class DukeTaskSaver {
-    String filePath;
+public class Storage {
 
-    public DukeTaskSaver(String filePath) throws IOException {
-        this.filePath = filePath;
 
-        File f = new File(filePath);
+    // initializing saver to save todoList tasks to relativePath
+    String fileSeparator = System.getProperty("file.separator");
+    String relativePath = "data" + fileSeparator + "duke.txt";
+
+
+    public Storage() throws IOException {
+
+        File f = new File(this.relativePath);
         // if file does not exist, create file based on filepath
         if (!f.exists()) {
             // create data directory
@@ -23,15 +27,15 @@ public class DukeTaskSaver {
 
             // create new file
             if (f.createNewFile()) {
-                System.out.println(filePath + " file created in the project root directory");
+                System.out.println(this.relativePath + " file created in the project root directory");
             }
         } else {
-            System.out.println(filePath + " already exists in the project root directory");
+            System.out.println(this.relativePath + " already exists in the project root directory");
         }
     }
 
     public void save(ArrayList<Task> todoList) throws IOException {
-        FileWriter fw = new FileWriter(this.filePath);
+        FileWriter fw = new FileWriter(this.relativePath);
         for (int i = 0; i < todoList.size(); i++) {
             fw.write(todoList.get(i).toStringForSave() + "\n");
         }
@@ -39,7 +43,7 @@ public class DukeTaskSaver {
     }
 
     public ArrayList<Task> load() throws FileNotFoundException {
-        File f = new File(filePath);
+        File f = new File(this.relativePath);
         Scanner s = new Scanner(f);
         ArrayList<Task> todoListTasks = new ArrayList<>();
 

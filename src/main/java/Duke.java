@@ -8,14 +8,6 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
-    public static boolean parseIntAble(String input) {
-        try {
-            Integer.parseInt(input);
-            return true;
-        } catch (Exception e){
-            return false;
-        }
-    }
 
     public static void main(String[] args) throws IOException {
         // greeting message
@@ -42,14 +34,12 @@ public class Duke {
          */
         ArrayList<Task> todoList = new ArrayList<Task>();
 
-        // initializing saver to save todoList tasks to relativePath
-        String fileSeparator = System.getProperty("file.separator");
-        String relativePath = "data" + fileSeparator + "duke.txt";
-        DukeTaskSaver saver = new DukeTaskSaver(relativePath);
+        // initializing storage
+        Storage storage = new Storage();
 
         // load data when duke starts up
         try {
-            todoList = saver.load();
+            todoList = storage.load();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -113,7 +103,7 @@ public class Duke {
                         todoList.add(userToDoTask);
 
                         // save tasks to duke.txt
-                        saver.save(todoList);
+                        storage.save(todoList);
 
                         // display to do task
                         System.out.println("    Got it. I've added this task:");
@@ -121,7 +111,6 @@ public class Duke {
                         System.out.println("    " + displayTaskAmount);
                         System.out.println(lines);
 
-//                        count++;
                         break;
 
                     case "deadline":
@@ -205,7 +194,7 @@ public class Duke {
                         todoList.add(userDeadlineTask);
 
                         // save tasks to duke.txt
-                        saver.save(todoList);
+                        storage.save(todoList);
 
                         // displaying
                         System.out.println("    Got it. I've added this task:");
@@ -297,14 +286,13 @@ public class Duke {
                         todoList.add(userEventTask);
 
                         // save tasks to duke.txt
-                        saver.save(todoList);
+                        storage.save(todoList);
 
                         System.out.println("    Got it. I've added this task:");
                         System.out.println("        " + userEventTask.toString());
                         System.out.println("    " + displayTaskAmount);
                         System.out.println(lines);
 
-//                        count++;
                         break;
 
                     case "mark":
@@ -312,7 +300,7 @@ public class Duke {
                         todoList.get(taskToMark - 1).markAsDone();
 
                         // save update tasks to duke.txt
-                        saver.save(todoList);
+                        storage.save(todoList);
 
                         System.out.println(lines);
                         System.out.println("    Nice! I've marked this task as done:");
@@ -328,7 +316,7 @@ public class Duke {
                         todoList.get(taskToUnmark - 1).markAsNotDone();
 
                         // save update tasks to duke.txt
-                        saver.save(todoList);
+                        storage.save(todoList);
 
                         System.out.println(lines);
                         System.out.println("    OK, I've marked this task as not done yet:");
@@ -367,7 +355,7 @@ public class Duke {
                         todoList.remove(taskToDelete);
 
                         // save update tasks to duke.txt
-                        saver.save(todoList);
+                        storage.save(todoList);
 
                         System.out.println(lines);
                         System.out.println("    Noted. I've removed this task:");
