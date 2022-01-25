@@ -3,7 +3,6 @@
  * This file contains the implementation of Conan class.
  */
 
-import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Conan {
@@ -80,7 +79,7 @@ public class Conan {
     private static final String NUM_TASKS= "Number of tasks up to now: ";
 
     // username is an instance variable that stores the name of the user.
-    private final String username;
+    private String username;
 
     // tasks store the list of all tasks given by the user.
     private final ArrayList<Task> tasks;
@@ -95,15 +94,20 @@ public class Conan {
         System.out.println(GREETING);
 
         System.out.println(SEPARATOR);
-        Scanner sc = new Scanner(System.in);
-        this.username = sc.nextLine();
+        this.username = "";
+        this.tasks = new ArrayList<>();
 
+    }
+
+    /**
+     * tellName updates the username.
+     * @param username the name of the user.
+     */
+    void tellName(String username) {
+        this.username = username;
         System.out.println(SEPARATOR);
         System.out.println(HELLO + this.username + NTMY);
         System.out.println(INITIAL_ASK + this.username);
-
-        this.tasks = new ArrayList<>();
-
         System.out.println(SEPARATOR);
     }
 

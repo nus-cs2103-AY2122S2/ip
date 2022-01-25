@@ -1,0 +1,25 @@
+harish
+todo buy lunch
+deadline return book /by 3rd Feb
+event project team meeting /at 22nd Jan 12-2pm
+todo buy shoes
+todo edit pics
+list
+mark 2
+mark 5
+todo fill out application form
+unmark 2
+deadline paint walls /by 5th Feb
+mark 7
+mark 3
+list
+event dance practice /at Monday 8-9pm
+unmark 5
+unmark 7
+list
+unmark 3
+list
+mark 1
+mark 4
+list
+bye

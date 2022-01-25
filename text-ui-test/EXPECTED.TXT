@@ -1,7 +1,167 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+------------------------------------------------
+Hello There, My name is Conan! 
+Hope you're doing fine today! (^_^) 
+I'm a task manager, and I can help you keep up with your tasks.
+Now before we start, lets get acquainted! Lets start with our names!
+------------------------------------------------
+------------------------------------------------
+Hello, harish!, Nice to meet you! (*^_^*)
+So, tell me what would you like to do harish
+------------------------------------------------
+------------------------------------------------
+harish, I have added buy lunch
+Number of tasks up to now: 1
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+harish, I have added return book 
+Number of tasks up to now: 2
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+harish, I have added project team meeting 
+Number of tasks up to now: 3
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+harish, I have added buy shoes
+Number of tasks up to now: 4
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+harish, I have added edit pics
+Number of tasks up to now: 5
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+These are your Tasks, harish
+1. [T][ ] buy lunch
+2. [D][ ] return book (by:3rd Feb)
+3. [E][ ] project team meeting (at:22nd Jan 12-2pm)
+4. [T][ ] buy shoes
+5. [T][ ] edit pics
+Number of tasks up to now: 5
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+Great job, on completing this task! \(^_^)/
+[D][X] return book (by:3rd Feb)
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+Great job, on completing this task! \(^_^)/
+[T][X] edit pics
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+harish, I have added fill out application form
+Number of tasks up to now: 6
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+Sure, I have unmarked this task :
+[D][ ] return book (by:3rd Feb)
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+harish, I have added paint walls 
+Number of tasks up to now: 7
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+Great job, on completing this task! \(^_^)/
+[D][X] paint walls (by:5th Feb)
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+Great job, on completing this task! \(^_^)/
+[E][X] project team meeting (at:22nd Jan 12-2pm)
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+These are your Tasks, harish
+1. [T][ ] buy lunch
+2. [D][ ] return book (by:3rd Feb)
+3. [E][X] project team meeting (at:22nd Jan 12-2pm)
+4. [T][ ] buy shoes
+5. [T][X] edit pics
+6. [T][ ] fill out application form
+7. [D][X] paint walls (by:5th Feb)
+Number of tasks up to now: 7
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+harish, I have added dance practice 
+Number of tasks up to now: 8
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+Sure, I have unmarked this task :
+[T][ ] edit pics
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+Sure, I have unmarked this task :
+[D][ ] paint walls (by:5th Feb)
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+These are your Tasks, harish
+1. [T][ ] buy lunch
+2. [D][ ] return book (by:3rd Feb)
+3. [E][X] project team meeting (at:22nd Jan 12-2pm)
+4. [T][ ] buy shoes
+5. [T][ ] edit pics
+6. [T][ ] fill out application form
+7. [D][ ] paint walls (by:5th Feb)
+8. [E][ ] dance practice (at:Monday 8-9pm)
+Number of tasks up to now: 8
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+Sure, I have unmarked this task :
+[E][ ] project team meeting (at:22nd Jan 12-2pm)
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+These are your Tasks, harish
+1. [T][ ] buy lunch
+2. [D][ ] return book (by:3rd Feb)
+3. [E][ ] project team meeting (at:22nd Jan 12-2pm)
+4. [T][ ] buy shoes
+5. [T][ ] edit pics
+6. [T][ ] fill out application form
+7. [D][ ] paint walls (by:5th Feb)
+8. [E][ ] dance practice (at:Monday 8-9pm)
+Number of tasks up to now: 8
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+Great job, on completing this task! \(^_^)/
+[T][X] buy lunch
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+Great job, on completing this task! \(^_^)/
+[T][X] buy shoes
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+These are your Tasks, harish
+1. [T][X] buy lunch
+2. [D][ ] return book (by:3rd Feb)
+3. [E][ ] project team meeting (at:22nd Jan 12-2pm)
+4. [T][X] buy shoes
+5. [T][ ] edit pics
+6. [T][ ] fill out application form
+7. [D][ ] paint walls (by:5th Feb)
+8. [E][ ] dance practice (at:Monday 8-9pm)
+Number of tasks up to now: 8
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+Goodbye, harish
+Hope I helped you complete your tasks!
+Have a great day ahead, enjoy ! (^-^)/
+Hope to see you next time! 
+------------------------------------------------

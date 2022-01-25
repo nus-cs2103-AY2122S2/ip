@@ -8,10 +8,14 @@ public class Main {
 
     public static void main(String[] args) {
 
+        Scanner sc = new Scanner(System.in);
+
         // creates a new instance of conan.
+
         Conan conan = new Conan();
         CarryOn carryOn = CarryOn.NEXT;
-        Scanner sc = new Scanner(System.in);
+        String userInput = sc.nextLine();
+        conan.tellName(userInput);
 
         // while the user still wants to type in.
         while (carryOn == CarryOn.NEXT) {
