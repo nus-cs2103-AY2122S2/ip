@@ -27,11 +27,9 @@ public class ListCommand extends Command {
 	}
 
 	public static void printFormatted(ArrayList<Task> tasklist) {
-		System.out.print(LINE);
 		System.out.println(INDENT + "Here are the tasks in your list:");
 		for (int i = 0; i < tasklist.size(); i++) {
 			System.out.println(INDENT + (i + 1) + "." + tasklist.get(i));
 		}
-		System.out.println(LINE);
 	}
 }

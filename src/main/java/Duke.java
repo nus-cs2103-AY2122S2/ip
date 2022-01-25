@@ -34,7 +34,9 @@ public class Duke {
 			try {
 				String input = sc.nextLine();
 				cmd = processInput(input);
+				ui.printLine();
 				cmd.execute();
+				ui.printLine();
 				if (cmd.ends()) {
 					break;
 				}
