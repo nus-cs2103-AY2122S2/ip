@@ -4,9 +4,17 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Finds matching tasks according to a given keyword
+ */
 public class FindCommand extends Command {
     private String keyword;
 
+    /**
+     * Creates a new find command.
+     *
+     * @param keyword the keyword to be used
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
