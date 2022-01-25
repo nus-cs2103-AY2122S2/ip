@@ -15,6 +15,7 @@ public class Parser {
     private static final String COMMAND_UPCOMING = "upcoming";
     private static final String COMMAND_BETWEEN = "between";
     private static final String COMMAND_SCHEDULE = "schedule";
+    private static final String COMMAND_FIND = "find";
 
     public static Command parse(String command)
             throws DukeInvalidCommandException {
@@ -45,6 +46,8 @@ public class Parser {
             return new ScheduleCommand(args);
         case COMMAND_BETWEEN:
             return new BetweenCommand(args);
+        case COMMAND_FIND:
+            return new FindCommand(args);
         default:
             throw new DukeInvalidCommandException(String.format("No such command: %s", commandLowerCase));
         }
