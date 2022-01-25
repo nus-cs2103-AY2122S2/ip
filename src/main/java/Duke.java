@@ -1,5 +1,6 @@
 import java.io.IOException;
 
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.regex.PatternSyntaxException;
 
@@ -61,6 +62,8 @@ public class Duke {
                             System.out.println(latestTask);
                             System.out.println("Now there are " + tl.size() + " tasks on the list x)");
                         }
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Error parsing date, please enter dates in YYYY-MM-DD format!");
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                     }

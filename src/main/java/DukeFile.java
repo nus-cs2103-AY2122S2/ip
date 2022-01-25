@@ -1,12 +1,12 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +56,9 @@ public class DukeFile {
             return tl;
         } catch (IOException e) {
             System.out.println("Error reading file, starting over!");
+            return new TaskList();
+        } catch (DateTimeParseException e) {
+            System.out.println("Date(s) in unexpected format, unable to parse, starting over!");
             return new TaskList();
         }
     }
