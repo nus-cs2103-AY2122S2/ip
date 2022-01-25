@@ -3,7 +3,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Tests the todo task.
+ */
 public class TodoTaskTest {
+    /**
+     * Test that the todo task can be constructed correctly,
+     * and its methods work correctly.
+     */
     @Test
     public void testTodo() {
         String todoDesc = "Eat chicken";

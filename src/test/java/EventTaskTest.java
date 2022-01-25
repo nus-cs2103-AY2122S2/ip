@@ -6,7 +6,14 @@ import java.time.format.DateTimeParseException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+/**
+ * Tests the event task.
+ */
 public class EventTaskTest {
+    /**
+     * Test that the event task can be constructed correctly,
+     * and its methods work correctly.
+     */
     @Test
     public void testEvent() {
         String eventString = "[E][ ] Chicken party (by: Oct 15 2019)";
