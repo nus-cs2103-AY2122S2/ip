@@ -8,7 +8,7 @@ public class Deadline extends Task {
     String time;
     LocalDate date;
 
-    Deadline(String description, String time) {
+    public Deadline(String description, String time) {
         super(description);
         this.time = time;
         try {
