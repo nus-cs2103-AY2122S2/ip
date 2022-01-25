@@ -2,13 +2,6 @@ package exceptions;
 
 public class InvalidCommandException extends DukeException {
     /**
-     * Constructor for InvalidCommandException.
-     */
-    public InvalidCommandException() {
-        super();
-    }
-
-    /**
      * Constructor for BaseException.
      *
      * @param errMsg error message.

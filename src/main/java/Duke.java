@@ -20,25 +20,22 @@ public class Duke {
     private static final String MARK_COMMAND = "mark";
     private static final String UNMARK_COMMAND = "unmark";
     private static final String DELETE_COMMAND = "delete";
-    private static final String TODO_COMMAND = "todo";
-    private static final String DEADLINE_COMMAND = "deadline";
-    private static final String EVENT_COMMAND = "event";
 
     private String status;
-    private DukeList list;
+    private final DukeList dukeList;
 
     /**
      * Constructor for the Duke bot
      */
     public Duke() {
         this.status = STATUS_RUNNING;
-        this.list = new DukeList();
+        this.dukeList = new DukeList();
     }
 
     /**
      * Formats and prints the given message.
      *
-     * @param msg
+     * @param msg formatted message
      */
     private static void printMsg(String msg) {
         System.out.println(SEPARATOR);
@@ -57,7 +54,7 @@ public class Duke {
     /**
      * Parse the user command.
      *
-     * @param cmd
+     * @param cmd string command
      * @return result after executing the command
      */
     private String parseCommand(String cmd) {
@@ -73,13 +70,13 @@ public class Duke {
                 break;
 
             case LIST_COMMAND:
-                result = this.list.toString();
+                result = this.dukeList.toString();
                 break;
 
             case MARK_COMMAND:
                 try {
                     idx = Integer.parseInt(argv[1]);
-                    result = this.list.markTask(idx);
+                    result = this.dukeList.markTask(idx);
                 } catch (IndexOutOfBoundsException e) {
                     result = e.getMessage();
                 }
@@ -88,7 +85,7 @@ public class Duke {
             case UNMARK_COMMAND:
                 try {
                     idx = Integer.parseInt(argv[1]);
-                    result = this.list.unmarkTask(idx);
+                    result = this.dukeList.unmarkTask(idx);
                 } catch (IndexOutOfBoundsException e) {
                     result = e.getMessage();
                 }
@@ -97,24 +94,18 @@ public class Duke {
             case DELETE_COMMAND:
                 try {
                     idx = Integer.parseInt(argv[1]);
-                    result = this.list.delete(idx);
+                    result = this.dukeList.delete(idx);
                 } catch (IndexOutOfBoundsException e) {
                     result = e.getMessage();
                 }
                 break;
 
-            case TODO_COMMAND:
-            case DEADLINE_COMMAND:
-            case EVENT_COMMAND:
+            default:
                 try {
-                    result = this.list.add(cmd);
+                    result = this.dukeList.add(cmd);
                 } catch (DukeException e) {
                     result = e.getMessage();
                 }
-                break;
-
-            default:
-                result = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
                 break;
         }
         return result;
@@ -123,7 +114,7 @@ public class Duke {
     /**
      * Handler for the duke bot.
      *
-     * @param sc
+     * @param sc scanner object
      */
     private void handler(Scanner sc) {
         String cmd;
