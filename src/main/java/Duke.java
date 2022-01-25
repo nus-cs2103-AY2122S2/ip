@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -250,13 +252,24 @@ public class Duke {
             if (taskType == 'E') { // task is an event
                 int indexOfDate = descWithDate.indexOf("(at: ");
                 String desc = descWithDate.substring(0, indexOfDate);
-                taskToAdd = new Event(desc, descWithDate.substring(indexOfDate + 4, descWithDate.length() - 1));
+                String date = descWithDate.substring(indexOfDate + 4, descWithDate.length() - 1).trim(); // Dec-31-2022 2359
+                DateTimeFormatter displayFormat = DateTimeFormatter.ofPattern("MMM-dd-yyyy HHmm");
+                DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                LocalDateTime at = LocalDateTime.parse(date, displayFormat);
+                taskToAdd = new Event(desc, at.format(inputFormat));
             } else if (taskType == 'D') { // task is a deadline
                 int indexOfDate = descWithDate.indexOf("(by: ");
                 String desc = descWithDate.substring(0, indexOfDate);
-                taskToAdd = new Deadline(desc, descWithDate.substring(indexOfDate + 4, descWithDate.length() - 1));
+                String date = descWithDate.substring(indexOfDate + 4, descWithDate.length() - 1).trim(); // Dec-31-2022 2359
+                DateTimeFormatter displayFormat = DateTimeFormatter.ofPattern("MMM-dd-yyyy HHmm");
+                DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                LocalDateTime by = LocalDateTime.parse(date, displayFormat);
+                taskToAdd = new Deadline(desc, by.format(inputFormat));
             } else { // task is a todo
                 taskToAdd = new Todo(descWithDate);
+            }
+            if (isDone) {
+                taskToAdd.markAsDone();
             }
             TASKS.add(taskToAdd);
         }
