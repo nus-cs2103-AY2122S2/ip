@@ -3,51 +3,84 @@ import java.util.Scanner;
 
 public class Kenobi {
   static ArrayList<Task> taskList = new ArrayList<>();
+  static String logo = " __   ___\n"
+      + "/  | /  / _____  _    _  _____  _____    __\n"
+      + "|  |/  / / ____// \\  / \\/  _  \\/  _  \\  \\__\\\n"
+      + "|     /  | |___ |  \\ | || | | || |_| /_ |  |\n"
+      + "|     \\  | ____|| | \\| || | | ||  ___  ||  |\n"
+      + "|  |\\  \\ | |___ | |\\ | || |_| || |___| ||  |\n"
+      + "\\__/ \\__\\\\_____\\\\_/ \\__/\\_____/\\_______/|__|\n";
+
+  static void say(String line) {
+    System.out.println("    " + line);
+  }
 
   public static void main(String[] args) {
-    String logo = " __   ___\n"
-        + "/  | /  / _____  _    _  _____  _____    __\n"
-        + "|  |/  / / ____// \\  / \\/  _  \\/  _  \\  \\__\\\n"
-        + "|     /  | |___ |  \\ | || | | || |_| /_ |  |\n"
-        + "|     \\  | ____|| | \\| || | | ||  ___  ||  |\n"
-        + "|  |\\  \\ | |___ | |\\ | || |_| || |___| ||  |\n"
-        + "\\__/ \\__\\\\_____\\\\_/ \\__/\\_____/\\_______/|__|";
     System.out.println(logo);
-    System.out.println("\n    Hello there, how may I help you?");
+    say("Hello there, how may I help you?");
 
     Scanner sc = new Scanner(System.in);
 
-    String inString;
-    while (true) {
-      inString = sc.next();
+    MainLoop: while (true) {
+      String cmd = sc.next();
+      String[] fields;
+      Task t;
 
-      if (inString.equals("bye")) {
-        System.out.println("    Goodbye, old friend");
-        break;
-      } else if (inString.equals("list")) {
-        sc.nextLine();
-        System.out.println("    Here are the tasks in your list:");
-        for (int i = 0; i < taskList.size(); i++) {
-          String str = String.format("    %d. %s",
-              i + 1, taskList.get(i).toString());
-          System.out.println(str);
-        }
-      } else if (inString.equals("mark")) {
-        Task t = taskList.get(sc.nextInt() - 1);
-        t.done();
-        sc.nextLine();
-        System.out.println("    I've marked this task as done:");
-        System.out.println("    " + t.toString());
-      } else if (inString.equals("unmark")) {
-        Task t = taskList.get(sc.nextInt() - 1);
-        t.undone();
-        sc.nextLine();
-        System.out.println("    I've marked this task as undone:");
-        System.out.println("    " + t.toString());
-      } else {
-        inString += sc.nextLine();
-        taskList.add(new Task(inString));
-        System.out.println("    added: " + inString);
+      switch (cmd) {
+        case "bye":
+          say("Goodbye, old friend");
+          break MainLoop;
+
+        case "list":
+          sc.nextLine();
+          say("Here are the tasks in your list:");
+          for (int i = 0; i < taskList.size(); i++) {
+            String str = String.format("    %d. %s",
+                i + 1, taskList.get(i).toString());
+            System.out.println(str);
+          }
+          break;
+
+        case "mark":
+          t = taskList.get(sc.nextInt() - 1);
+          t.done();
+          sc.nextLine();
+          say("I've marked this task as done:");
+          say(t.toString());
+          break;
+
+        case "unmark":
+          t = taskList.get(sc.nextInt() - 1);
+          t.undone();
+          sc.nextLine();
+          say("I've marked this task as undone:");
+          say(t.toString());
+          break;
+
+        case "todo":
+          t = new ToDo(sc.nextLine());
+          taskList.add(t);
+          say("added: " + t.toString());
+          break;
+
+        case "deadline":
+          fields = sc.nextLine().split(" /by ");
+          t = new Deadline(fields[0], fields[1]);
+          taskList.add(t);
+          say("added: " + t.toString());
+          break;
+
+        case "event":
+          fields = sc.nextLine().split(" /at ");
+          t = new Event(fields[0], fields[1]);
+          taskList.add(t);
+          say("added: " + t.toString());
+          break;
+
+        default:
+          say("The command you are using is not in the archives.");
+          sc.nextLine();
+          break;
       }
     }
 
