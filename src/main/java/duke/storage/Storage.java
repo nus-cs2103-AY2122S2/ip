@@ -1,5 +1,6 @@
 package duke.storage;
 
+import duke.exceptions.DukeException;
 import duke.task.*;
 
 import java.io.File;
@@ -13,11 +14,21 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the storage of the application.
+ * Supports the loading of and saving of data to storage file.
+ */
 public class Storage {
     private static final String home = System.getProperty("user.home");
     private static File saveFile;
 
-    public Storage(String dirPath) {
+    /**
+     * Checks if a data folder and save file exists in the specified directory.
+     * If not, create the folder and save file.
+     *
+     * @param dirPath the path of the data folder, relative to user's home directory
+     */
+    public Storage(String dirPath) throws DukeException {
         try {
             Path dir = Paths.get(home + dirPath);
 
@@ -34,11 +45,16 @@ public class Storage {
 
             saveFile = new File(p.toString());
         } catch (IOException e) {
-            System.out.println("IOException: " + e);
+            throw new DukeException("There was a problem accessing and/or creating your save file!");
         }
     }
 
-    public ArrayList<Task> load() {
+    /**
+     * Loads up the data from the save file on the system to an ArrayList of tasks.
+     *
+     * @return an ArrayList of tasks
+     */
+    public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             Scanner s = new Scanner(saveFile);
@@ -111,12 +127,17 @@ public class Storage {
                 }
             }
         } catch (IOException e) {
-            System.out.println("IOException: " + e.getMessage());
+            throw new DukeException("There was a problem loading data from your save file!");
         }
         return tasks;
     }
 
-    public void save(TaskList tasks) {
+    /**
+     * Saves tasks into the save file.
+     *
+     * @param tasks a TaskList containing tasks
+     */
+    public void save(TaskList tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(home + "/ip/data/duke.txt");
             for (int i = 0; i < tasks.listSize(); i++) {
@@ -124,17 +145,22 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            System.out.println("IOException: " + e.getMessage());
+            throw new DukeException("There was a problem saving data to your save file!");
         }
     }
 
-    public void append(String textToAppend) {
+    /**
+     * Appends specified tasks to the end of the save file.
+     *
+     * @param textToAppend the task to be appended
+     */
+    public void append(String textToAppend) throws DukeException {
         try {
             FileWriter fw = new FileWriter(home + "/ip/data/duke.txt", true);
             fw.write(textToAppend + "\n");
             fw.close();
         } catch (IOException e) {
-            System.out.println("IOException: " + e.getMessage());
+            throw new DukeException("There was a problem writing to your save file!");
         }
     }
 }

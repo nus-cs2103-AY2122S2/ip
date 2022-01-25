@@ -11,6 +11,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parses user input.
+ */
 public class Parser {
     // Input formats of date and times
     private static final DateTimeFormatter dateTimeIn = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
@@ -29,6 +32,12 @@ public class Parser {
         INVALID
     }
 
+    /**
+     * Checks if a given date and time is in valid format.
+     *
+     * @param dt a string containing a date and time
+     * @return true if the string provided is a valid date and time, false otherwise
+     */
     private static boolean isValidDateTime(String dt) {
         try {
             LocalDateTime.parse(dt, dateTimeIn);
@@ -38,6 +47,12 @@ public class Parser {
         return true;
     }
 
+    /**
+     * Checks if a given date is in valid format.
+     *
+     * @param d a string containing a date
+     * @return true if the string provided is a valid date, false otherwise
+     */
     private static boolean isValidDate(String d) {
         try {
             LocalDate.parse(d, dateIn);
@@ -47,6 +62,12 @@ public class Parser {
         return true;
     }
 
+    /**
+     * Checks if a given time is in valid format.
+     *
+     * @param t a string containing a time
+     * @return true if the stirng provided is a valid time, false otherwise
+     */
     private static boolean isValidTime(String t) {
         try {
             LocalTime.parse(t, timeIn);
@@ -56,6 +77,12 @@ public class Parser {
         return true;
     }
 
+    /**
+     * Parses input in the context of adding a todo.
+     *
+     * @param request full user input
+     * @return the prepared command
+     */
     private Command prepareTodo(String request) {
         String[] parsedReq = request.strip().split(" ");
         if (parsedReq.length == 1) {
@@ -65,6 +92,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses input in the context of adding a deadline.
+     *
+     * @param request full user input
+     * @return the prepared command
+     */
     private Command prepareDeadline(String request)  {
         if (request.strip().length() == 8) {
             return new IncorrectCommand("The description of a deadline cannot be empty.");
@@ -101,6 +134,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses input in the context of adding an event.
+     *
+     * @param request full user input
+     * @return the prepared command
+     */
     private Command prepareEvent(String request) {
         if (request.strip().length() == 5) {
             return new IncorrectCommand("The description of an event cannot be empty.");
@@ -137,6 +176,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses input in the context of a delete command.
+     *
+     * @param request full user input
+     * @return the prepared command
+     */
     private Command prepareDelete(String request) {
         String[] parsedReq = request.split(" ");
         if (parsedReq.length != 2) {
@@ -152,6 +197,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses input in the context of a mark command.
+     *
+     * @param request full user input
+     * @return the prepared command
+     */
     private Command prepareMark(String request) {
         String[] parsedReq = request.split(" ");
         if (parsedReq.length != 2) {
@@ -167,6 +218,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses input in the context of an unmark command.
+     *
+     * @param request full user input
+     * @return the prepared command
+     */
     private Command prepareUnmark(String request) {
         String[] parsedReq = request.split(" ");
         if (parsedReq.length != 2) {
@@ -182,6 +239,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses input into a command for execution.
+     *
+     * @param input the user's initial input
+     * @return the command based on the user's input
+     */
     public Command parseCommand(String input) {
         if (input.strip().equals("bye")) {
             return new ExitCommand();
@@ -204,7 +267,12 @@ public class Parser {
         }
     }
 
-
+    /**
+     * Checks if a string is in a valid date/time format and returns its format.
+     *
+     * @param input the date/time string to be checked
+     * @return the format of the date/time specified
+     */
     private static Format parseDateTime(String input) {
         if (isValidDateTime(input)) {
             return Format.DATETIME;

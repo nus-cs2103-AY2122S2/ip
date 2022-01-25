@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a user's deadline.
+ */
 public class Deadline extends Task {
     private static final DateTimeFormatter dateOut = DateTimeFormatter.ofPattern("MMM dd yyyy");
     private static final DateTimeFormatter timeOut = DateTimeFormatter.ofPattern("hh:mm a");
@@ -12,6 +15,12 @@ public class Deadline extends Task {
     private final boolean hasDate;
     private final boolean hasTime;
 
+    /**
+     * Creates a new deadline with a date.
+     *
+     * @param description the description of the deadline
+     * @param d the date of the deadline
+     */
     public Deadline(String description, LocalDate d) {
         super(description);
         this.d = d;
@@ -19,6 +28,12 @@ public class Deadline extends Task {
         hasTime = false;
     }
 
+    /**
+     * Creates a new deadline with a time.
+     *
+     * @param description the description of the deadline
+     * @param t the time of the deadline
+     */
     public Deadline(String description, LocalTime t) {
         super(description);
         this.t = t;
@@ -26,6 +41,13 @@ public class Deadline extends Task {
         hasTime = true;
     }
 
+    /**
+     * Creates a new deadline with a date and time.
+     *
+     * @param description the description of the deadline
+     * @param d the date of the deadline
+     * @param t the time of the deadline
+     */
     public Deadline(String description, LocalDate d, LocalTime t) {
         super(description);
         this.d = d;
@@ -34,14 +56,29 @@ public class Deadline extends Task {
         hasTime = true;
     }
 
+    /**
+     * Retrieves the date of the deadline.
+     *
+     * @return the date of the deadline formatted in "MMM dd YYYY"
+     */
     private String getDate() {
         return d.format(dateOut);
     }
 
+    /**
+     * Retrieves the time of the deadline.
+     *
+     * @return the time of the deadline formatted in "hh:mm am/pm"
+     */
     private String getTime() {
         return t.format(timeOut);
     }
 
+    /**
+     * Retrieves the date and time of the deadline.
+     *
+     * @return the date and time of the deadline formatted in "MMM dd YYYY hh:mm am/pm"
+     */
     private String getDateTime() {
         return d.format(dateOut) + " " + t.format(timeOut);
     }
