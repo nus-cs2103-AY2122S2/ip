@@ -1,6 +1,7 @@
+package duke.tasks;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 /**
  * Represents a task with deadline, is a subclass of task.

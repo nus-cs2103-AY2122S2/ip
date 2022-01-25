@@ -1,3 +1,8 @@
+package duke;
+
+import duke.tasks.*;
+import duke.storage.Storage;
+
 /**
  * Represents a chatbot used to keep track of various tasks.
  */

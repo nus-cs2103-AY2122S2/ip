@@ -1,3 +1,4 @@
+package duke.tasks;
 /**
  * Represents a generic task.
  */
