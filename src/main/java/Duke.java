@@ -3,6 +3,7 @@ import exceptions.DukeEventException;
 import exceptions.DukeException;
 import exceptions.DukeTodoException;
 
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -10,11 +11,28 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 //import java.io.*;
 //import java.util.*;
 
 public class Duke {
+
+    public static void output_matching_deadline(List<Task> all, LocalDate input_date) {
+        List<Task> match_date = new ArrayList<Task>();
+        for (Task t : all) {
+            if (Task.isDeadline(t)) {
+                Deadline d = (Deadline) t;
+                if (d.getDate().equals(input_date.toString())) {
+                    match_date.add(t);
+                }
+            }
+        }
+        System.out.println("Here you go! Hope it includes the event you were looking for:)");
+        for (Task t : match_date) {
+            System.out.println(t);
+        }
+    }
 
     private static void getFileContent(String filePath) throws FileNotFoundException {
         // print all contents in file
@@ -114,7 +132,19 @@ public class Duke {
                     } catch (IOException e) {
                         System.out.println("Something went wrong when adding to file duke.txt:(");
                     }
-                } else {
+                } else if (words[0].equals("find")) {
+                    // get all deadline tasks that matches input date
+                    String input_date = words[1];
+
+                    try {
+                        LocalDate localdate = LocalDate.parse(input_date);
+                        Duke.output_matching_deadline(all, localdate);
+                    } catch (Exception e) {
+                        DukeException ex = new DukeException("Please input date in the format YYYY-MM-DD to be found");
+                        System.out.println(ex.getMessage());
+                    }
+                }
+                else {
                     // handle adding of Tasks or ending statement
                     if (words[0].equals("todo")) {
                         try {
@@ -138,8 +168,8 @@ public class Duke {
                             Deadline item = Deadline.setDeadline(words[1]);
                             if (item != null) {
                                 all.add(item);
-                                System.out.println("Got it. I've added this task: ");
-                                System.out.println(item);
+//                                System.out.println("Got it. I've added this task: ");
+//                                System.out.println(item);
 
                                 // update storage file
                                 writeToFile(all, filepath);

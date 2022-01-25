@@ -19,6 +19,10 @@ public class Task {
         System.out.println(this);
     }
 
+    public static boolean isDeadline(Task t) {
+        return t instanceof Deadline;
+    }
+
     public String toString() {
         if (this.done) {
             return "[X] " + this.name;
