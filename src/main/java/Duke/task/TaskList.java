@@ -23,28 +23,28 @@ public class TaskList extends ArrayList<Task> {
         taskList.add(t);
         Ui.addTaskMessage();
         System.out.println(t);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list." + Ui.line);
+        System.out.println("Now you have " + taskList.size() + " tasks in the list." + Ui.LINE);
     }
 
     public void addDeadlineTask(Task d) {
         taskList.add(d);
         Ui.addTaskMessage();
         System.out.println(d);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list." + Ui.line);
+        System.out.println("Now you have " + taskList.size() + " tasks in the list." + Ui.LINE);
     }
 
     public void addEventTask(Task e) {
         taskList.add(e);
         Ui.addTaskMessage();
         System.out.println(e);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list." + Ui.line);
+        System.out.println("Now you have " + taskList.size() + " tasks in the list." + Ui.LINE);
     }
 
     public void deleteTask(int taskNum) {
         Ui.deleteTaskMessage();
         System.out.println(taskList.get(taskNum));
         taskList.remove(taskNum);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list." + Ui.line);
+        System.out.println("Now you have " + taskList.size() + " tasks in the list." + Ui.LINE);
     }
 
 }
