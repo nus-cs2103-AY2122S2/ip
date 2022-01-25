@@ -1,5 +1,6 @@
 /**
  * The Todo class.
+ *
  * @author Jet Tan
  */
 public class Todo extends Task {
