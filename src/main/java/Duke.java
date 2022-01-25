@@ -1,5 +1,3 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -82,10 +80,10 @@ public class Duke {
 
             switch (type) {
                 case DEADLINE:
-                    task = new Deadline(strings[0], LocalDate.parse(strings[1].substring(3)));
+                    task = new Deadline(strings[0], strings[1]);
                     break;
                 case EVENT:
-                    task = new Event(strings[0], LocalDate.parse(strings[1].substring(3)));
+                    task = new Event(strings[0], strings[1]);
                     break;
                 case TODO:
                     task = new Todo(userInput[1]);
@@ -108,9 +106,6 @@ public class Duke {
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("☹ OOPS!!! Description is empty or invalid timeframe!");
-        } catch (DateTimeParseException e) {
-            System.out.println("☹ OOPS!!! Duke could not understand the date."
-                    + " Please input date in yyyy-mm-dd format!");
         }
     }
 

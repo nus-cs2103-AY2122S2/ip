@@ -1,14 +1,12 @@
-import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Task {
     protected boolean marked;
     protected String description;
-    private LocalDate date;
 
-    Task(String description, LocalDate date) {
+    Task(String description) {
         this.marked = false;
         this.description = description;
-        this.date = date;
     }
 
     public void markTask(boolean mark) {
