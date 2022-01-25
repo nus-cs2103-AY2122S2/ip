@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -35,12 +36,13 @@ public class Duke {
     private static final String ERROR_INVALID_COMMAND = "OOPS!!! You have entered an invalid command :(";
     private static final String ERROR_INVALID_TODO_TITLE = "OOPS!!! The title of a todo cannot be empty :(";
     private static final String ERROR_INVALID_DEADLINETASK_TITLE = "OOPS!!! The title of a deadline task cannot be empty :(";
-    private static final String ERROR_INVALID_DEADLINETASK_DEADLINE = "OOPS!!! The deadline of a deadline task cannot be empty :(";
+    private static final String ERROR_EMPTY_DEADLINETASK_DEADLINE = "OOPS!!! The deadline cannot be empty :( Enter date in the format of yyyy-mm-dd hh:mm or yyyy-mm-dd";
     private static final String ERROR_INVALID_EVENT_TITLE = "OOPS!!! The title of an event cannot be empty :(";
-    private static final String ERROR_INVALID_EVENT_TIME = "OOPS!!! The time of an event cannot be empty :(";
+    private static final String ERROR_EMPTY_EVENT_TIME = "OOPS!!! The time of an event cannot be empty :( Enter date in the format of yyyy-mm-dd hh:mm or yyyy-mm-dd";
     private static final String ERROR_EMPTY_DELETE = "OOPS!!! Task to delete cannot be empty:(";
     private static final String ERROR_INVALID_DELETE = "OOPS!!! Invalid task number, please select a valid task to delete using the task's number";;
 
+    private static final String ERROR_INVALID_TIME = "OOPS!!! The time is in the wrong format :( Enter date in the format of yyyy-mm-dd hh:mm or yyyy-mm-dd";
 
     public static void main(String[] args) {
         printContent(INTRO_MESSAGE);
@@ -86,9 +88,19 @@ public class Duke {
                         if (splitted.length == 1)
                             throw new DukeException(ERROR_INVALID_DEADLINETASK_TITLE);
                         if (!line.contains("/by"))
-                            throw new DukeException(ERROR_INVALID_DEADLINETASK_DEADLINE);
+                            throw new DukeException(ERROR_EMPTY_DEADLINETASK_DEADLINE);
                         String[] subSplit = line.split("/by");
-                        Task thisTask = new DeadlineTask(subSplit[0].substring(9), subSplit[1]);
+                        if (subSplit.length == 1)
+                            throw new DukeException(ERROR_EMPTY_DEADLINETASK_DEADLINE);
+                        String[] dateTimeSplit = subSplit[1].substring(1).split(" ");
+                        Task thisTask = null;
+                        if (dateTimeSplit.length == 1){
+                            thisTask = new DeadlineTask(subSplit[0].substring(9), dateTimeSplit[0]);
+                        } else if (dateTimeSplit.length == 2){
+                            thisTask = new DeadlineTask(subSplit[0].substring(9), dateTimeSplit[0], dateTimeSplit[1]);
+                        } else {
+                            throw new DukeException(ERROR_INVALID_TIME);
+                        }
                         tasks.add(thisTask);
                         SaveTasklist.saveToFile(FILE_PATH, tasks);
                         printAddDeleteTaskSuccess(tasks, thisTask, MESSAGE_TASKADD);
@@ -96,9 +108,19 @@ public class Duke {
                         if (splitted.length == 1)
                             throw new DukeException(ERROR_INVALID_EVENT_TITLE);
                         if (!line.contains("/at"))
-                            throw new DukeException(ERROR_INVALID_EVENT_TIME);
+                            throw new DukeException(ERROR_EMPTY_EVENT_TIME);
                         String[] subSplit = line.split("/at");
-                        Task thisTask = new EventTask(subSplit[0].substring(6), subSplit[1]);
+                        if (subSplit.length == 1)
+                            throw new DukeException(ERROR_EMPTY_EVENT_TIME);
+                        String[] dateTimeSplit = subSplit[1].substring(1).split(" ");
+                        Task thisTask = null;
+                        if (dateTimeSplit.length == 1){
+                            thisTask = new EventTask(subSplit[0].substring(6), dateTimeSplit[0]);
+                        } else if (dateTimeSplit.length == 2) {
+                            thisTask = new EventTask(subSplit[0].substring(6), dateTimeSplit[0], dateTimeSplit[1]);
+                        } else {
+                            throw new DukeException(ERROR_INVALID_TIME);
+                        }
                         tasks.add(thisTask);
                         SaveTasklist.saveToFile(FILE_PATH, tasks);
                         printAddDeleteTaskSuccess(tasks, thisTask, MESSAGE_TASKADD);
@@ -117,6 +139,8 @@ public class Duke {
                     }
                 } catch (DukeException e){
                     printContent(e.getMessage());
+                } catch (DateTimeParseException e){
+                    printContent(ERROR_INVALID_TIME);
                 } catch (IOException e){
                     printContent(ERROR_FILEIO);
                 }
