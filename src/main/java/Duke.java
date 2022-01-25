@@ -1,10 +1,10 @@
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Duke {
-    public static Task[] taskArray = new Task[100];
-    public static String[][] itemArray = new String[100][];
-    public static int numberOfItems = 0;
+    public static List<Task> taskArray = new ArrayList<>();
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -38,6 +38,9 @@ public class Duke {
                         break;
                     case "unmark":
                         unmarkItem(command);
+                        break;
+                    case "delete":
+                        deleteItem(command);
                         break;
                     default:
                         addItem(command);
@@ -101,25 +104,20 @@ public class Duke {
                 throw new DukeException("Sorry I don't understand what that is :(");
         }
 
-        taskArray[numberOfItems] = task;
-        numberOfItems++;
+        taskArray.add(task);
         System.out.println("__________________________________");
         System.out.println("added: " + task);
-        System.out.printf("You have %d tasks in your list\n", numberOfItems);
+        System.out.printf("You have %d tasks in your list\n", taskArray.size());
         System.out.println("__________________________________");
     }
 
     public static void listItem() {
         System.out.println("__________________________________");
-        if (taskArray[0] == null) {
+        if (taskArray.size() == 0) {
             System.out.println("No items in the list");
         } else {
-            for (int i = 0; i < 100; i++) {
-                if (taskArray[i] == null) {
-                    break;
-                } else {
-                    System.out.printf("%d. " + taskArray[i] + "\n", i+1);
-                }
+            for (int i = 0; i < taskArray.size(); i++) {
+                System.out.printf("%d. " + taskArray.get(i)+ "\n", i+1);
             }
         }
         System.out.println("__________________________________");
@@ -127,19 +125,28 @@ public class Duke {
 
     public static void markItem(String[] command) {
         int index = Integer.parseInt(command[1]);
-        taskArray[(index-1)].setChecked();
+        taskArray.get(index-1).setChecked();
         System.out.println("__________________________________");
         System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(taskArray[index-1]);
+        System.out.println(taskArray.get(index-1));
         System.out.println("__________________________________");
     }
 
     public static void unmarkItem(String[] command) {
         int index = Integer.parseInt(command[1]);
-        taskArray[(index-1)].setUnChecked();
+        taskArray.get(index-1).setUnChecked();
         System.out.println("__________________________________");
         System.out.println("OK, I've marked this task as not done yet: ");
-        System.out.println(taskArray[index-1]);
+        System.out.println(taskArray.get(index-1));
+        System.out.println("__________________________________");
+    }
+
+    public static void deleteItem(String[] command) {
+        int index = Integer.parseInt(command[1]);
+        System.out.println("__________________________________");
+        System.out.println("Noted, I've removed this task from the list: ");
+        System.out.println(taskArray.remove(index-1));
+        System.out.printf("You have %d tasks left\n", taskArray.size());
         System.out.println("__________________________________");
     }
 }

@@ -9,7 +9,7 @@ fi
 # delete output from previous run
 if [ -e "./ACTUAL.TXT" ]
 then
-    rm ACTUAL
+    rm ACTUAL.TXT
 fi
 
 # compile the code into the bin folder, terminates if error occurred
