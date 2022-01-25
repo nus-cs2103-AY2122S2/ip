@@ -6,15 +6,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DukeFile {
+public class Storage {
     BufferedReader reader;
     Path dukePath;
 
-    public DukeFile() throws IOException {
+    public Storage() throws IOException {
         dukePath = Paths.get("data/duke.txt");
         if (!Files.exists(dukePath)) {
             Files.createDirectory(Paths.get("data/"));
@@ -23,44 +22,17 @@ public class DukeFile {
         reader = Files.newBufferedReader(dukePath);
     }
 
-    protected TaskList initialize() {
+    protected TaskList initialize() throws IOException {
+        // assumes reader is non-empty
         TaskList tl = new TaskList();
-        try {
-            while (true) {
-                String entry = reader.readLine();
-                if (entry == null) {
-                    break;
-                }
-                String[] entrySplit = entry.split(" \\| ");
-                if (entrySplit[0].equals("T")) {
-                    if (entrySplit[1].equals("1")) {
-                        tl.addTodo(new Todo(entrySplit[2], true));
-                    } else {
-                        tl.addTodo(new Todo(entrySplit[2], false));
-                    }
-                } else if (entrySplit[0].equals("D")) {
-                    if (entrySplit[1].equals("1")) {
-                        tl.addDeadline(new Deadline(entrySplit[2], entrySplit[3], true));
-                    } else {
-                        tl.addDeadline(new Deadline(entrySplit[2], entrySplit[3], false));
-                    }
-                } else {
-                    // Event
-                    if (entrySplit[1].equals("1")) {
-                        tl.addEvent(new Event(entrySplit[2], entrySplit[3], true));
-                    } else {
-                        tl.addEvent(new Event(entrySplit[2], entrySplit[3], false));
-                    }
-                }
+        while (true) {
+            String entry = reader.readLine();
+            if (entry == null) {
+                break;
             }
-            return tl;
-        } catch (IOException e) {
-            System.out.println("Error reading file, starting over!");
-            return new TaskList();
-        } catch (DateTimeParseException e) {
-            System.out.println("Date(s) in unexpected format, unable to parse, starting over!");
-            return new TaskList();
+            tl.addTask(Parser.parseFileFormat(entry));
         }
+        return tl;
     }
 
     protected void addTask(Task t) throws IOException {
