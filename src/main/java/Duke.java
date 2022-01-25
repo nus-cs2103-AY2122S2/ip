@@ -132,11 +132,8 @@ public class Duke {
         Type type;
 
         switch (temp) {
-            case "todo":
-                type = Type.TODO;
-                break;
-            case "event":
-                type = Type.EVENT;
+            case "bye":
+                type = Type.BYE;
                 break;
             case "deadline":
                 type = Type.DEADLINE;
@@ -144,8 +141,20 @@ public class Duke {
             case "delete":
                 type = Type.DELETE;
                 break;
-            case "bye":
-                type = Type.BYE;
+            case "event":
+                type = Type.EVENT;
+                break;
+            case "list":
+                type = Type.LIST;
+                break;
+            case "mark":
+                type = Type.MARK;
+                break;
+            case "unmark":
+                type = Type.UNMARK;
+                break;
+            case "todo":
+                type = Type.TODO;
                 break;
             default:
                 type = Type.NULL;
@@ -156,13 +165,13 @@ public class Duke {
 
     public enum Type {
         BYE,
-        TODO,
-        EVENT,
         DEADLINE,
         DELETE,
+        EVENT,
+        LIST,
         MARK,
         UNMARK,
-        LIST,
+        TODO,
         NULL
     }
 }
