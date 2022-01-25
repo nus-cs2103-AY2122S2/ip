@@ -18,10 +18,6 @@ public class BH {
                 + "|____/  |_|  |_| |_|\n";
         System.out.println("Hello, I am B.H. How can I help you?\n" + logo + line);
     }
-    
-    void addToList(Task task) {
-        this.list.add(task);
-    }
 
     void run() {
         try {
@@ -34,14 +30,14 @@ public class BH {
                     break;
                 } else if (s1.equals("list")) {
                     System.out.println(line + this.getList() + line);
-                } else if (s1.equals("mark") && inputArray.length > 1) {
+                } else if (s1.equals("mark")) {
                     int index = Integer.parseInt(inputArray[1]) - 1;
                     if (index < this.getListSize()) {
                         System.out.println(line + "Well done! \n" + this.mark(index) + line);
                     } else {
                         System.out.println("Index out of range");
                     }
-                } else if (s1.equals("unmark") && inputArray.length > 1) {
+                } else if (s1.equals("unmark")) {
                     int index = Integer.parseInt(inputArray[1]) - 1;
                     System.out.println("Oh no! \n" + this.unmark(index));
                 } else if (s1.equals("todo")) {
@@ -79,9 +75,15 @@ public class BH {
             }
         } catch (DukeException e) {
             System.out.println(line + "Please check your input" + line);
+        } catch (ArrayIndexOutOfBoundsException exception) {
+            System.out.println("Wrong index");
         }
     }
-    
+
+    void addToList(Task task) {
+        this.list.add(task);
+    }
+
     Task deleteTask(int index) {
         Task task =  this.list.get(index);
         this.list.remove(index);

@@ -1,7 +1,6 @@
 import java.util.Scanner;
 public class Duke {
 
-
     enum functions {
         todo,
         event,
@@ -12,7 +11,6 @@ public class Duke {
         delete,
         bye
     }
-
 
     public static void main(String[] args) throws DukeException {
 
