@@ -1,7 +1,8 @@
 package duke;
 
-import java.util.Scanner;
-
+/**
+ * Main class
+ */
 public class Duke {
 
 
@@ -91,16 +92,6 @@ public class Duke {
 
             actionType = Ui.getCommand();
             parsedInput = Ui.getInputs();
-//            while (actionType == null) {
-//                try {
-//                    command = sc.next();
-//                    input = sc.nextLine();
-//                    actionType = Parser.parseCommand(command);
-//                } catch (CommandNotFoundException e) {
-//                    System.out.println("Sorry, i don't understand what you are saying");
-//                    actionType = null;
-//                }
-//            }
         }
 
         System.out.println("Bye. Hope to see you again soon!");

@@ -1,33 +1,62 @@
 package duke;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents task of type deadline
+ */
 public class Deadline extends Task {
+    /**
+     * String of time indicating when task is due
+     */
     String time;
-    LocalDate date;
+    /**
+     * Datetime indicating when task is due
+     * Null if time cannot be converted to datetime
+     */
+    LocalDateTime datetime;
 
+    /**
+     * Creation of Deadline Task
+     *
+     * @param description String of task description
+     * @param time String representing when task is due
+     */
     public Deadline(String description, String time) {
         super(description);
         this.time = time;
         try {
-            date = LocalDate.parse(time);
+            datetime = LocalDateTime.parse(time);
         } catch (DateTimeParseException e) {
-            date = null;
+            datetime = null;
         }
     }
 
+    /**
+     * Prints details of Deadline
+     */
     public void print() {
         System.out.print("[D]");
         System.out.print("[" + (this.completed ? "x" : " ") +  "] " + this.description);
-        if (date == null) {
+        if (datetime == null) {
             System.out.println(" (by: " + this.time + ")");
         } else {
-            System.out.println(" (by: " + this.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + ")");
+            System.out.println(" (by: " + this.datetime.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a")) + ")");
         }
     }
 
+    /**
+     * Returns details of Deadline as a String array
+     *      * Index 0: TaskType
+     *      * Index 1: Completed
+     *      * Index 2: Description
+     *      * Index 3: Time
+     *
+     * @return String array of Deadline details
+     */
     @Override
     public String[] getDetails() {
         String[] details = super.getDetails();

@@ -7,9 +7,20 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 
+/**
+ * Represents Storage of the tasks
+ */
 public class DataStore {
+    /**
+     * Path to store data
+     */
     final public static String PATH = "data/tasks.csv";
 
+    /**
+     * Saves tasks given
+     *
+     * @param tasks TaskList containing all tasks to be saved
+     */
     public static void saveData(TaskList tasks){
         File csvFile = new File(PATH);
         try {
@@ -37,6 +48,11 @@ public class DataStore {
         }
     }
 
+    /**
+     * Loads previously saved data from PATH
+     *
+     * @return TaskList with the previously saved tasks
+     */
     public static TaskList loadData() {
         TaskList tasks = new TaskList();
         File csvFile = new File(PATH);
@@ -58,7 +74,13 @@ public class DataStore {
         return tasks;
     }
 
-    public static TaskType parseTaskType(String taskType) {
+    /**
+     * Parses string into TaskType enum
+     *
+     * @param taskType String indicating type of task
+     * @return TaskType enum indicating type of task
+     */
+    private static TaskType parseTaskType(String taskType) {
         taskType = taskType.toLowerCase();
         if (taskType.equals("todo")) {
             return TaskType.TODO;
