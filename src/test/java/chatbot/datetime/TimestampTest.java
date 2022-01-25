@@ -24,9 +24,9 @@ public class TimestampTest {
         assertEquals("23 March 2023", date.toString());
         assertEquals(DATE, date.saveString());
 
-        ChatBotException thrown = assertThrows(ChatBotException.class, () -> {
-            new Timestamp("100/100/100");
-        });
+        ChatBotException thrown = assertThrows(ChatBotException.class, () ->
+            new Timestamp("100/100/100")
+        );
         assertEquals("That's an invalid date format traveller!", thrown.getMessage());
     }
 
@@ -41,14 +41,14 @@ public class TimestampTest {
         assertEquals(datetimeString, datetime.saveString());
 
         ChatBotException thrown;
-        thrown = assertThrows(ChatBotException.class, () -> {
-            new Timestamp(DATE.concat(" ").concat("2500"));
-        });
+        thrown = assertThrows(ChatBotException.class, () ->
+            new Timestamp(DATE.concat(" ").concat("2500"))
+        );
         assertEquals("That's an invalid time format traveller!", thrown.getMessage());
 
-        thrown = assertThrows(ChatBotException.class, () -> {
-            new Timestamp("timestamp");
-        });
+        thrown = assertThrows(ChatBotException.class, () ->
+            new Timestamp("timestamp")
+        );
         assertEquals("That's an invalid timestamp format traveller!", thrown.getMessage());
     }
 }

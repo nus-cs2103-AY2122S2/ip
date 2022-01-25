@@ -7,12 +7,20 @@ import chatbot.util.TaskList;
 import chatbot.util.Ui;
 import java.util.Scanner;
 
+/**
+ * Represents a ChatBot AI (taking on the persona of a cheerful innkeeper) that users (who are personified as passing travellers) can interact with to manage their schedule.
+ */
 public class ChatBot {
 
     private static final String SAVE_FILE_DIRECTORY = "data";
     private static final String SAVE_FILE_NAME = "data.txt";
 
-    public static void main(String[] args) throws ChatBotException {
+    /**
+     * The entry point of application.
+     *
+     * @param args The input arguments from the user.
+     */
+    public static void main(String[] args) {
         Ui innkeeper = new Ui();
         TaskList taskList = new TaskList();
         Storage storage = new Storage(SAVE_FILE_DIRECTORY, SAVE_FILE_NAME);

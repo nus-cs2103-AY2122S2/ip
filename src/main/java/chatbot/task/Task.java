@@ -2,47 +2,91 @@ package chatbot.task;
 
 import chatbot.datetime.Timestamp;
 
+/**
+ * Represents the type Task.
+ */
 public class Task {
 
     private final String title;
     private final String type;
-    private final Timestamp datetime;
+    private final Timestamp timestamp;
     private String done;
 
-    public Task(String title, String type, Timestamp datetime) {
+    /**
+     * Instantiates a new Task.
+     *
+     * @param title    The title of the task.
+     * @param type     The type of the task.
+     * @param timestamp The timestamp of the task.
+     */
+    public Task(String title, String type, Timestamp timestamp) {
         this.title = title;
         this.type = type;
-        this.datetime = datetime;
+        this.timestamp = timestamp;
         this.done = " ";
     }
 
-    public Task(String title, String type, String done, Timestamp datetime) {
+    /**
+     * Instantiates a new Task.
+     *
+     * @param title    The title of the task.
+     * @param type     The type of the task.
+     * @param done     The completion status of the task.
+     * @param timestamp The timestamp of the task.
+     */
+    public Task(String title, String type, String done, Timestamp timestamp) {
         this.title = title;
         this.type = type;
         this.done = done;
-        this.datetime = datetime;
+        this.timestamp = timestamp;
     }
 
-    public String isCompleted() {
+    /**
+     * Gets done.
+     *
+     * @return The completion status of this task.
+     */
+    public String getDone() {
         return done;
     }
 
+    /**
+     * Gets type.
+     *
+     * @return The type of this task.
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     * Gets title.
+     *
+     * @return the title
+     */
     public String getTitle() {
         return title;
     }
 
-    public Timestamp getDateTime() {
-        return datetime;
+    /**
+     * Gets timestamp.
+     *
+     * @return The Timestamp of this task.
+     */
+    public Timestamp getTimestamp() {
+        return timestamp;
     }
 
+    /**
+     * Marks this task as completed.
+     */
     public void mark() {
         done = "X";
     }
 
+    /**
+     * Unmarks this task, indicating that it is incomplete.
+     */
     public void unmark() {
         done = " ";
     }
@@ -57,10 +101,10 @@ public class Task {
         if (other instanceof Task) {
             Task t = (Task) other;
             return (
-                t.getTitle() == title &&
-                t.getType() == type &&
-                t.getDateTime() == datetime &&
-                t.isCompleted() == done
+                t.getTitle().equals(title) &&
+                t.getType().equals(type) &&
+                t.getTimestamp().equals(timestamp) &&
+                t.getDone().equals(done)
             );
         } else {
             return false;

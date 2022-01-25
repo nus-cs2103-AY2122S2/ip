@@ -21,11 +21,11 @@ public class TaskListTest {
         assertEquals(1, taskList.getNumTasks());
         assertEquals("sometodo", taskList.getTask(0).getTitle());
         assertEquals("T", taskList.getTask(0).getType());
-        assertNull(taskList.getTask(0).getDateTime());
+        assertNull(taskList.getTask(0).getTimestamp());
 
-        ChatBotException thrown = assertThrows(ChatBotException.class, () -> {
-            taskList.addToDo(new String[]{"todo"});
-        });
+        ChatBotException thrown = assertThrows(ChatBotException.class, () ->
+            taskList.addToDo(new String[]{"todo"})
+        );
         assertEquals("You need to key in the title of your todo traveller!", thrown.getMessage());
     }
 
@@ -36,22 +36,22 @@ public class TaskListTest {
         assertEquals(1, taskList.getNumTasks());
         assertEquals("somedeadline", taskList.getTask(0).getTitle());
         assertEquals("D", taskList.getTask(0).getType());
-        assertEquals(new Timestamp("24/04/2024"), taskList.getTask(0).getDateTime());
+        assertEquals(new Timestamp("24/04/2024"), taskList.getTask(0).getTimestamp());
 
         ChatBotException thrown;
-        thrown = assertThrows(ChatBotException.class, () -> {
-            taskList.add(new String[]{"deadline"}, new String[]{"by", "24/04/2024"});
-        });
+        thrown = assertThrows(ChatBotException.class, () ->
+            taskList.add(new String[]{"deadline"}, new String[]{"by", "24/04/2024"})
+        );
         assertEquals("You need to key in the title of your deadline traveller!", thrown.getMessage());
 
-        thrown = assertThrows(ChatBotException.class, () -> {
-            taskList.add(new String[]{"deadline", "somedeadline2"}, new String[]{"by"});
-        });
+        thrown = assertThrows(ChatBotException.class, () ->
+            taskList.add(new String[]{"deadline", "somedeadline2"}, new String[]{"by"})
+        );
         assertEquals("You need to key in the due date and time of your deadline traveller!", thrown.getMessage());
 
-        thrown = assertThrows(ChatBotException.class, () -> {
-            taskList.add(new String[]{"deadline", "somedeadline2"}, new String[]{"at", "24/04/2024"});
-        });
+        thrown = assertThrows(ChatBotException.class, () ->
+            taskList.add(new String[]{"deadline", "somedeadline2"}, new String[]{"at", "24/04/2024"})
+        );
         assertEquals("The correct format for adding a deadline is deadline <name of task> /by <timestamp of task>", thrown.getMessage());
     }
 
@@ -62,22 +62,22 @@ public class TaskListTest {
         assertEquals(1, taskList.getNumTasks());
         assertEquals("someevent", taskList.getTask(0).getTitle());
         assertEquals("E", taskList.getTask(0).getType());
-        assertEquals(new Timestamp("23/03/2023 1800"), taskList.getTask(0).getDateTime());
+        assertEquals(new Timestamp("23/03/2023 1800"), taskList.getTask(0).getTimestamp());
 
         ChatBotException thrown;
-        thrown = assertThrows(ChatBotException.class, () -> {
-            taskList.add(new String[]{"event"}, new String[]{"by", "24/04/2024"});
-        });
+        thrown = assertThrows(ChatBotException.class, () ->
+            taskList.add(new String[]{"event"}, new String[]{"by", "24/04/2024"})
+        );
         assertEquals("You need to key in the title of your event traveller!", thrown.getMessage());
 
-        thrown = assertThrows(ChatBotException.class, () -> {
-            taskList.add(new String[]{"event", "someevent2"}, new String[]{"at"});
-        });
+        thrown = assertThrows(ChatBotException.class, () ->
+            taskList.add(new String[]{"event", "someevent2"}, new String[]{"at"})
+        );
         assertEquals("You need to key in the timestamp of your event traveller!", thrown.getMessage());
 
-        thrown = assertThrows(ChatBotException.class, () -> {
-            taskList.add(new String[]{"event", "someevent2"}, new String[]{"by", "23/03/2023 1800"});
-        });
+        thrown = assertThrows(ChatBotException.class, () ->
+            taskList.add(new String[]{"event", "someevent2"}, new String[]{"by", "23/03/2023 1800"})
+        );
         assertEquals("The correct format for adding an event is event <name of task> /at <timestamp of task>", thrown.getMessage());
     }
 
@@ -111,9 +111,9 @@ public class TaskListTest {
     public void testMarkAndUnmark() throws ChatBotException {
         TaskList taskList = taskListWithJustOneTodo();
         taskList.mark(0);
-        assertEquals("X", taskList.getTask(0).isCompleted());
+        assertEquals("X", taskList.getTask(0).getDone());
         taskList.unmark(0);
-        assertEquals(" ", taskList.getTask(0).isCompleted());
+        assertEquals(" ", taskList.getTask(0).getDone());
     }
 
     @Test
@@ -129,7 +129,7 @@ public class TaskListTest {
         assertEquals(1, taskList.getNumTasks());
         assertEquals("sometodo", taskList.getTask(0).getTitle());
         assertEquals("T", taskList.getTask(0).getType());
-        assertNull(taskList.getTask(0).getDateTime());
+        assertNull(taskList.getTask(0).getTimestamp());
     }
 
 

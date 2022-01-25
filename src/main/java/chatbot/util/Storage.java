@@ -3,10 +3,19 @@ package chatbot.util;
 import chatbot.exception.ChatBotException;
 import java.io.File;
 
+/**
+ * Represents a save file handler.
+ */
 public class Storage {
 
     private final File file;
 
+    /**
+     * Instantiates a new Storage.
+     *
+     * @param directoryPath The path of the directory containing the save file.
+     * @param fileName      The name of the save file.
+     */
     public Storage(String directoryPath, String fileName) {
         File dir = new File(directoryPath);
         if (!dir.exists()) {
@@ -22,10 +31,22 @@ public class Storage {
         }
     }
 
+    /**
+     * Save changes.
+     *
+     * @param taskList The task list to save in the save file.
+     * @throws ChatBotException If I/O issues occur when writing to save file.
+     */
     public void saveChanges(TaskList taskList) throws ChatBotException {
         taskList.save(file);
     }
 
+    /**
+     * Load data.
+     *
+     * @param taskList The task list to load the save file data into.
+     * @throws ChatBotException If I/O issues occur when reading the save file or the data in the save file is corrupted.
+     */
     public void loadData(TaskList taskList) throws ChatBotException {
         taskList.load(file);
     }

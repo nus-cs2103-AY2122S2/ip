@@ -3,18 +3,34 @@ package chatbot.util;
 import chatbot.datetime.Timestamp;
 import chatbot.exception.ChatBotException;
 
+/**
+ * Represents an interpreter for user inputs.
+ */
 public class Parser {
 
     private final Ui innkeeper;
     private final Storage storage;
     private final TaskList taskList;
 
+    /**
+     * Instantiates a new Parser.
+     *
+     * @param innkeeper The UI.
+     * @param storage   The storage.
+     * @param taskList  The task list.
+     */
     public Parser(Ui innkeeper, Storage storage, TaskList taskList) {
         this.innkeeper = innkeeper;
         this.storage = storage;
         this.taskList = taskList;
     }
 
+    /**
+     * Parses the input given by the user and attempts to carry out the appropriate commands.
+     *
+     * @param rawInput The input given by the user.
+     * @return The boolean indicating whether the ChatBot should continue prompting the user for inputs or not.
+     */
     public boolean parse(String rawInput) {
         String[] input = rawInput.split(" ");
         System.out.println();
@@ -169,6 +185,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Either marks or unmarks a task in the task list. Both commands involve similar code, which is why they have been combined into this function.
+     *
+     * @param index The index of the task in the task list.
+     * @param mark  If true, mark the task. Else, unmark the task.
+     * @return The response to be outputted via the UI.
+     * @throws ChatBotException If the task index is invalid.
+     */
     public String markOrUnmark(int index, boolean mark)
         throws ChatBotException {
         if (taskList.isValidIndex(index).equals(true)) {
