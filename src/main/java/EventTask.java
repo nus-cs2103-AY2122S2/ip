@@ -37,6 +37,10 @@ public class EventTask extends Task{
         return "(at: " + eventDate + (eventTime != null ? " " + eventTime.toString() : "") + ")";
     }
 
+    public String toOutputLine(){
+        return this.getType() + " | " + (isDone ? "1 " : "0 ") + "| " + this.title + "| " + eventDate.toString() + (eventTime != null ? " " + eventTime.toString() : "");
+    }
+
     @Override
     public String toString(){
         return this.title + " " + getEventTime();

@@ -1,8 +1,12 @@
 import java.time.format.DateTimeParseException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    private static final String FILE_PATH = "./data/test.txt";
+    private static final String ERROR_FILEIO = "OOPS!!! Error writing to file.";
+
     private static final String INTRO_MESSAGE = "Hello! I'm Duke\n     What can I do for you?";
 
     private static final String COMMAND_BYE = "bye";
@@ -54,6 +58,7 @@ public class Duke {
                         break;
                     } else if (query.compareTo(COMMAND_LIST) == 0){
                         processList(tasks);
+                        SaveTasklist.saveToFile(FILE_PATH, tasks);
                     } else if (query.compareTo(COMMAND_MARK) == 0){
                         if (splitted.length == 1)
                             throw new DukeException(ERROR_EMPTY_MARK);
@@ -61,6 +66,7 @@ public class Duke {
                             throw new DukeException(ERROR_INVALID_MARK);
                         Task thisTask = tasks.get(Integer.parseInt(splitted[1])-1);
                         thisTask.markAsDone();
+                        SaveTasklist.saveToFile(FILE_PATH, tasks);
                         printContent(taskLine(thisTask, MESSAGE_MARK));
                     } else if (query.compareTo(COMMAND_UNMARK) == 0){
                         if (splitted.length == 1)
@@ -69,12 +75,14 @@ public class Duke {
                             throw new DukeException(ERROR_INVALID_UNMARK);
                         Task thisTask = tasks.get(Integer.parseInt(splitted[1])-1);
                         thisTask.markAsUndone();
+                        SaveTasklist.saveToFile(FILE_PATH, tasks);
                         printContent(taskLine(thisTask, MESSAGE_UNMARK));
                     } else if (query.compareTo(COMMAND_TODO) == 0){
                         if (splitted.length == 1)
                             throw new DukeException(ERROR_INVALID_TODO_TITLE);
                         Task thisTask = new TodoTask(line.substring(5));
                         tasks.add(thisTask);
+                        SaveTasklist.saveToFile(FILE_PATH, tasks);
                         printAddDeleteTaskSuccess(tasks, thisTask, MESSAGE_TASKADD);
                     } else if (query.compareTo(COMMAND_DEADLINE) == 0){
                         if (splitted.length == 1)
@@ -94,6 +102,7 @@ public class Duke {
                             throw new DukeException(ERROR_INVALID_TIME);
                         }
                         tasks.add(thisTask);
+                        SaveTasklist.saveToFile(FILE_PATH, tasks);
                         printAddDeleteTaskSuccess(tasks, thisTask, MESSAGE_TASKADD);
                     } else if (query.compareTo(COMMAND_EVENT) == 0){
                         if (splitted.length == 1)
@@ -113,6 +122,7 @@ public class Duke {
                             throw new DukeException(ERROR_INVALID_TIME);
                         }
                         tasks.add(thisTask);
+                        SaveTasklist.saveToFile(FILE_PATH, tasks);
                         printAddDeleteTaskSuccess(tasks, thisTask, MESSAGE_TASKADD);
                     } else if (query.compareTo(COMMAND_TASKDELETE) == 0){
                         if (splitted.length == 1)
@@ -122,6 +132,7 @@ public class Duke {
                         int index = Integer.parseInt(splitted[1])-1;
                         Task thisTask = tasks.get(index);
                         tasks.remove(index);
+                        SaveTasklist.saveToFile(FILE_PATH, tasks);
                         printAddDeleteTaskSuccess(tasks, thisTask, MESSAGE_TASKDELETE);
                     } else{
                         throw new DukeException(ERROR_INVALID_COMMAND);
@@ -130,6 +141,8 @@ public class Duke {
                     printContent(e.getMessage());
                 } catch (DateTimeParseException e){
                     printContent(ERROR_INVALID_TIME);
+                } catch (IOException e){
+                    printContent(ERROR_FILEIO);
                 }
             }
             sc.close();
