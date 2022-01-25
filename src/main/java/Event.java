@@ -2,7 +2,7 @@ public class Event extends Task {
     protected String at;
 
     /**
-     * Constructs an Event class for tasks that starts and ends at specific time
+     * Constructs an Event class for bernie.tasks that starts and ends at specific time
      * @param description String
      * @param at String, the timeframe of the Event
      */

@@ -12,23 +12,6 @@ public class Bernie {
     Parser parser;
 
     /**
-     * Different Type of tasks: notable types are EMPTY, when the user inputs nothing: ""
-     * ADD: refers to when Type is to be added: TODO, DEADLINE, EVENT
-     */
-    enum Type {
-        LIST,
-        BYE,
-        EMPTY,
-        ADD,
-        TODO,
-        DEADLINE,
-        EVENT,
-        MARK,
-        UNMARK,
-        DELETE
-    }
-
-    /**
      * Constructs a new Bot containing TaskList and greets the user
      */
     Bernie() {
@@ -50,7 +33,7 @@ public class Bernie {
      * @return boolean value, indicating if the program will end or not.
      */
     boolean respond(String input) {
-        Bernie.Type type = Parser.parseType(input);
+        Type type = Parser.parseType(input);
         try {
             switch (type) {
             case LIST:
@@ -85,7 +68,7 @@ public class Bernie {
     /**
      * Bernie will decide what kind of task is to be created. Bernie splits the input accordingly,
      * to get the parameters required to create the type of task. The creation and adding of task will be
-     * handled by the TaskList. New state of tasks is saved to the data directory
+     * handled by the TaskList. New state of bernie.tasks is saved to the data directory
      * after we add a task.
      * @param input String, given by user. Bernie verifies the Task type and the Task either is todo,
      * deadline or event
@@ -111,7 +94,7 @@ public class Bernie {
 
     /**
      * Delete the task according to the user input. The new state of the
-     * tasks is saved to the data directory after deletion of task
+     * bernie.tasks is saved to the data directory after deletion of task
      * @param input String, which is of the form delete ___
      */
     void delete(String input) {

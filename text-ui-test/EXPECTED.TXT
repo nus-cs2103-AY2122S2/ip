@@ -13,7 +13,7 @@ Description can't be numbers? We need String!
 ___________________________________________________________
 Got ya. Added:
 [T][ ] borrow book
-You got 1 tasks waiting for ya!
+You got 1 bernie.tasks waiting for ya!
 ___________________________________________________________
 This is now done:
 [T][X] borrow book
@@ -50,7 +50,7 @@ Where's the description?
 ___________________________________________________________
 Got ya. Added:
 [D][ ] return book (by: Jan 28 2022)
-You got 2 tasks waiting for ya!
+You got 2 bernie.tasks waiting for ya!
 ___________________________________________________________
 Where's the description?
 ___________________________________________________________
@@ -64,7 +64,7 @@ Where's the description?
 ___________________________________________________________
 Got ya. Added:
 [E][ ] project meeting (at: Mon 2-4pm)
-You got 3 tasks waiting for ya!
+You got 3 bernie.tasks waiting for ya!
 ___________________________________________________________
 Here's what you need to do buddy:
 1. [T][ ] borrow book
@@ -97,7 +97,7 @@ Here's what you need to do buddy:
 ___________________________________________________________
 Got ya. Added:
 [T][ ] clean dishes
-You got 3 tasks waiting for ya!
+You got 3 bernie.tasks waiting for ya!
 ___________________________________________________________
 Here's what you need to do buddy:
 1. [T][ ] borrow book
@@ -113,7 +113,7 @@ Task number does not exist!
 ___________________________________________________________
 Got ya. Removed:
 [D][X] return book (by: Jan 28 2022)
-You got 3 tasks waiting for ya!
+You got 3 bernie.tasks waiting for ya!
 ___________________________________________________________
 Here's what you need to do buddy:
 1. [T][ ] borrow book
@@ -122,7 +122,7 @@ Here's what you need to do buddy:
 ___________________________________________________________
 Got ya. Removed:
 [T][ ] clean dishes
-You got 2 tasks waiting for ya!
+You got 2 bernie.tasks waiting for ya!
 ___________________________________________________________
 Here's what you need to do buddy:
 1. [T][ ] borrow book
@@ -130,14 +130,14 @@ Here's what you need to do buddy:
 ___________________________________________________________
 Got ya. Removed:
 [E][ ] project meeting (at: Mon 2-4pm)
-You got 1 tasks waiting for ya!
+You got 1 bernie.tasks waiting for ya!
 ___________________________________________________________
 Here's what you need to do buddy:
 1. [T][ ] borrow book
 ___________________________________________________________
 Got ya. Removed:
 [T][ ] borrow book
-You got 0 tasks waiting for ya!
+You got 0 bernie.tasks waiting for ya!
 ___________________________________________________________
 Here's what you need to do buddy:
 NOTHING! :D

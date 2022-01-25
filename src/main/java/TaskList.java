@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TaskList helps to store tasks given by the user. TaskList is contained in
+ * TaskList helps to store bernie.tasks given by the user. TaskList is contained in
  * the Bot class and handles the Task for the Bot.
  * 1st method: add, which adds inputs by the user into the storage.
  * 2nd method: list, which shows what's in the TaskList currently.
@@ -18,7 +18,7 @@ import java.util.List;
 public class TaskList {
     List<Task> tasks;
     /**
-     * Constructs a TaskList containing an array to contain tasks
+     * Constructs a TaskList containing an array to contain bernie.tasks
      */
     TaskList() {
         this.tasks = new ArrayList<>();
@@ -85,7 +85,7 @@ public class TaskList {
     }
 
     /**
-     * Prints out every item contained in the tasks array
+     * Prints out every item contained in the bernie.tasks array
      */
     void listTasks() {
         for (int i = 0; i < tasks.size(); i++) {
@@ -101,11 +101,11 @@ public class TaskList {
      * @return the resulting Task after mark or unmark
      * @throws BernieException if we attempt to mark a marked Task or unmark an unnmarked Task
      */
-    Task markTask(Bernie.Type action, String taskNumber) throws BernieException {
+    Task markTask(Type action, String taskNumber) throws BernieException {
         int taskIndex = Integer.parseInt(taskNumber) - 1;
-        if (action.equals(Bernie.Type.MARK)) {
+        if (action.equals(Type.MARK)) {
             tasks.get(taskIndex).markDone();
-        } else if (action.equals(Bernie.Type.UNMARK)) {
+        } else if (action.equals(Type.UNMARK)) {
             tasks.get(taskIndex).markNotDone();
         }
         return tasks.get(taskIndex);
@@ -122,7 +122,7 @@ public class TaskList {
     }
 
     /**
-     * Deletes tasks from the List
+     * Deletes bernie.tasks from the List
      * @param taskNum String, the task number
      * @return Task, the task that is deleted
      */

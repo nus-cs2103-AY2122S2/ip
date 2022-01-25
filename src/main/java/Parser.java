@@ -25,19 +25,19 @@ public class Parser {
      * which is determined in the program by inputs: todo, deadline, event
      * @params input String
      */
-    static Bernie.Type parseType(String input) {
-        if (isType(Bernie.Type.LIST, input)) {
-            return Bernie.Type.LIST;
-        } else if (isType(Bernie.Type.BYE, input)) {
-            return Bernie.Type.BYE;
-        } else if (isType(Bernie.Type.MARK, input)) {
-            return Bernie.Type.MARK;
-        } else if (isType(Bernie.Type.EMPTY, input)) {
-            return Bernie.Type.EMPTY;
-        } else if (isType(Bernie.Type.DELETE, input)) {
-            return Bernie.Type.DELETE;
+    static Type parseType(String input) {
+        if (isType(Type.LIST, input)) {
+            return Type.LIST;
+        } else if (isType(Type.BYE, input)) {
+            return Type.BYE;
+        } else if (isType(Type.MARK, input)) {
+            return Type.MARK;
+        } else if (isType(Type.EMPTY, input)) {
+            return Type.EMPTY;
+        } else if (isType(Type.DELETE, input)) {
+            return Type.DELETE;
         } else {
-            return Bernie.Type.ADD;
+            return Type.ADD;
         }
     }
 
@@ -47,10 +47,10 @@ public class Parser {
      * @param input String
      * @return boolean to affirm if the input is of this task
      */
-    static boolean isType(Bernie.Type taskType, String input) {
-        if (taskType.equals(Bernie.Type.MARK)) {
+    static boolean isType(Type taskType, String input) {
+        if (taskType.equals(Type.MARK)) {
             return input.indexOf("mark") == 0 || input.indexOf("unmark") == 0;
-        } else if (taskType.equals(Bernie.Type.EMPTY)) {
+        } else if (taskType.equals(Type.EMPTY)) {
             return input.equals("");
         }
         return input.indexOf(taskType.name().toLowerCase()) == 0;
@@ -68,35 +68,35 @@ public class Parser {
      * For "mark": an array of 2: [action, taskNum]
      * For "delete": an array of 1: [taskNum]
      */
-    static String[] getParams(Bernie.Type taskType, String input) throws BernieException {
+    static String[] getParams(Type taskType, String input) throws BernieException {
         String description;
         String[] inputArr = null;
         switch (taskType) {
         case TODO:
             inputArr = input.split("todo ");
-            description = getDescription(inputArr, Bernie.Type.TODO);
+            description = getDescription(inputArr, Type.TODO);
             inputArr = new String[]{description};
             break;
         case DEADLINE:
             inputArr = input.split(" /by ");
-            description = getDescription(inputArr, Bernie.Type.DEADLINE);
-            String by = getTime(inputArr, Bernie.Type.DEADLINE);
+            description = getDescription(inputArr, Type.DEADLINE);
+            String by = getTime(inputArr, Type.DEADLINE);
             inputArr = new String[]{description, by};
             break;
         case EVENT:
             inputArr = input.split(" /at ");
-            description = getDescription(inputArr, Bernie.Type.EVENT);
-            String at = getTime(inputArr, Bernie.Type.EVENT);
+            description = getDescription(inputArr, Type.EVENT);
+            String at = getTime(inputArr, Type.EVENT);
             inputArr = new String[]{description, at};
             break;
         case MARK:
             inputArr = input.split(" ");
             // check valid
-            checkMarkOrDeleteInput(inputArr, Bernie.Type.MARK);
+            checkMarkOrDeleteInput(inputArr, Type.MARK);
             break;
         case DELETE:
             inputArr = input.split(" ");
-            checkMarkOrDeleteInput(inputArr, Bernie.Type.DELETE);
+            checkMarkOrDeleteInput(inputArr, Type.DELETE);
             inputArr = new String[]{inputArr[1]};
             break;
         default:
@@ -111,7 +111,7 @@ public class Parser {
      *                 parameters for the action
      * @throws BernieException for invalid inputs
      */
-    static void checkMarkOrDeleteInput(String[] inputArr, Bernie.Type action) throws BernieException {
+    static void checkMarkOrDeleteInput(String[] inputArr, Type action) throws BernieException {
         if (inputArr.length == 2) {
             try {
                 String taskNum = inputArr[1];
@@ -121,7 +121,7 @@ public class Parser {
                 throw new BernieException("That's not a task number! Put a number.");
             }
         } else {
-            if (action.equals(Bernie.Type.MARK)) {
+            if (action.equals(Type.MARK)) {
                 throw new BernieException("Wrong input. Type this: mark/unmark taskNumber");
             } else {
                 throw new BernieException("Wrong input. Type this: delete taskNumber");
@@ -136,10 +136,10 @@ public class Parser {
      * @return String description, for creating of Task
      * @throws BernieException for invalid descriptions such as empty or number description
      */
-    static String getDescription(String[] inputArr, Bernie.Type taskType) throws BernieException {
+    static String getDescription(String[] inputArr, Type taskType) throws BernieException {
         String description;
         try {
-            if (taskType.equals(Bernie.Type.TODO)) {
+            if (taskType.equals(Type.TODO)) {
                 description = inputArr[1];
             } else {
                 // can take note of lowercase/uppercase
@@ -169,9 +169,9 @@ public class Parser {
      * to LocalDate object by TaskList's addTask class
      * @throws BernieException if there is no time input given
      */
-    static String getTime(String[] inputArr, Bernie.Type taskType) throws BernieException {
+    static String getTime(String[] inputArr, Type taskType) throws BernieException {
         try {
-            if (taskType.equals(Bernie.Type.DEADLINE)) {
+            if (taskType.equals(Type.DEADLINE)) {
                 LocalDate checkValid = LocalDate.parse(inputArr[1]);
             }
             return inputArr[1];

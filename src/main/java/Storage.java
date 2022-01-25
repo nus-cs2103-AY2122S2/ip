@@ -6,7 +6,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 /**
- * Storage class handles the loading and saving of tasks in the file
+ * Storage class handles the loading and saving of bernie.tasks in the file
  */
 public class Storage {
     String root = System.getProperty("user.dir");
@@ -54,9 +54,9 @@ public class Storage {
 
     /**
      * Handles the conditions for checking if the File exist before
-     * saving the tasks with the save function. If File doesn't exist,
+     * saving the bernie.tasks with the save function. If File doesn't exist,
      * the required files will be created before save
-     * @param tasks TaskList, takes in the current tasks
+     * @param tasks TaskList, takes in the current bernie.tasks
      */
     void saveTasks(TaskList tasks) {
         try {
@@ -75,9 +75,9 @@ public class Storage {
     }
 
     /**
-     * Saves the most updated tasks whenever the tasks changes upon
+     * Saves the most updated bernie.tasks whenever the bernie.tasks changes upon
      * delete or add by writing the file. The file is saved to ./data/Bernie.txt
-     * @params tasks TaskList, takes in the current tasks
+     * @params bernie.tasks TaskList, takes in the current bernie.tasks
      * @throws IOException
      */
     void save(TaskList tasks) throws IOException {

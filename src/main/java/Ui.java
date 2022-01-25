@@ -1,6 +1,3 @@
-import java.io.File;
-import java.io.IOException;
-
 /**
  * Class to deal with any interactions with the user. It is contained
  * in the Bernie class and is responsible for printing out relevant messages
@@ -36,10 +33,10 @@ public class Ui {
     /**
      * Prints out the message whenever the user adds a new task
      * @param newTask Task, newTask added by the user
-     * @param numTasksLeft int, the number of tasks left
+     * @param numTasksLeft int, the number of bernie.tasks left
      */
     void showAddedMsg(Task newTask, int numTasksLeft) {
-        System.out.printf("Got ya. Added:\n%s\nYou got %d tasks waiting for ya!\n",
+        System.out.printf("Got ya. Added:\n%s\nYou got %d bernie.tasks waiting for ya!\n",
                 newTask, numTasksLeft);
         System.out.println(lineBreak);
     }
@@ -47,10 +44,10 @@ public class Ui {
     /**
      * Prints out the message whenever the user deletes a task
      * @param deletedTask Task, task deleted by the user
-     * @param numTasksLeft int, the number of tasks left
+     * @param numTasksLeft int, the number of bernie.tasks left
      */
     void showDeleteMsg(Task deletedTask, int numTasksLeft) {
-        System.out.printf("Got ya. Removed:\n%s\nYou got %d tasks waiting for ya!\n",
+        System.out.printf("Got ya. Removed:\n%s\nYou got %d bernie.tasks waiting for ya!\n",
                 deletedTask, numTasksLeft);
         System.out.println(lineBreak);
     }
