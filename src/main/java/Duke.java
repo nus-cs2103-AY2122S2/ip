@@ -23,24 +23,30 @@ public class Duke {
         Scanner dukeScan = new Scanner(System.in);
         boolean running = true;
         while (running) {
-            String userInput = dukeScan.nextLine();
-            String[] command = parseInput(userInput);
-            switch (command[0]) {
-                case "bye":
-                    running = false;
-                    break;
-                case "list":
-                    listItem();
-                    break;
-                case "mark":
-                    markItem(command);
-                    break;
-                case "unmark":
-                    unmarkItem(command);
-                    break;
-                default:
-                    addItem(command);
+            try  {
+                String userInput = dukeScan.nextLine();
+                String[] command = parseInput(userInput);
+                switch (command[0]) {
+                    case "bye":
+                        running = false;
+                        break;
+                    case "list":
+                        listItem();
+                        break;
+                    case "mark":
+                        markItem(command);
+                        break;
+                    case "unmark":
+                        unmarkItem(command);
+                        break;
+                    default:
+                        addItem(command);
+                }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+                System.out.println("__________________________________");
             }
+
         }
 
         System.out.println("__________________________________");
@@ -55,25 +61,44 @@ public class Duke {
     }
 
 
-    public static void addItem(String[] command) {
+    public static void addItem(String[] command) throws DukeException{
         String input = command[0];
         Task task = null;
         String title = "";
         String time = "";
         switch (input) {
             case "todo":
+                if (command[1].isEmpty()) {
+                    throw new DukeException("Please tell me what you need to do");
+                }
                 task = new Todo(command[1]);
                 break;
             case "deadline":
-                title = command[1].split("/by ")[0];
-                time = command[1].split("/by ")[1];
-                task = new Deadline(title, time);
+                if (command[1].isEmpty()) {
+                    throw new DukeException("Please tell me what you need to do");
+                }
+                try {
+                    title = command[1].split("/by ")[0];
+                    time = command[1].split("/by ")[1];
+                    task = new Deadline(title, time);
+                } catch (IndexOutOfBoundsException e) {
+                    throw new DukeException("Please tell me the deadline in this format: <Activity> /by <Time>");
+                }
                 break;
             case "event":
-                title = command[1].split("/at ")[0];
-                time = command[1].split("/at ")[1];
-                task = new Event(title, time);
+                if (command[1].isEmpty()) {
+                    throw new DukeException("Please tell me what you need to do");
+                }
+                try {
+                    title = command[1].split("/at ")[0];
+                    time = command[1].split("/at ")[1];
+                    task = new Event(title, time);
+                } catch (IndexOutOfBoundsException e){
+                    throw new DukeException("Please tell me when your event is in this format: <Activity> /at <Time>");
+                }
                 break;
+            default:
+                throw new DukeException("Sorry I don't understand what that is :(");
         }
 
         taskArray[numberOfItems] = task;
@@ -86,11 +111,15 @@ public class Duke {
 
     public static void listItem() {
         System.out.println("__________________________________");
-        for (int i = 0; i < 100; i++) {
-            if (taskArray[i] == null) {
-                break;
-            } else {
-                System.out.printf("%d. " + taskArray[i] + "\n", i+1);
+        if (taskArray[0] == null) {
+            System.out.println("No items in the list");
+        } else {
+            for (int i = 0; i < 100; i++) {
+                if (taskArray[i] == null) {
+                    break;
+                } else {
+                    System.out.printf("%d. " + taskArray[i] + "\n", i+1);
+                }
             }
         }
         System.out.println("__________________________________");
