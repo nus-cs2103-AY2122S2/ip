@@ -44,13 +44,13 @@ public class Storage {
                         }
                         break;
                     case "D":
-                        task = new DeadLines(compactTask[2], compactTask[3]);
+                        task = new DeadLines(compactTask[2], Bot.processDateTime(compactTask[3]));
                         if (compactTask[1].equals("1")) {
                             task.mark();
                         }
                         break;
                     case "E":
-                        task = new Event(compactTask[2], compactTask[3]);
+                        task = new Event(compactTask[2], Bot.processDateTime(compactTask[3]));
                         if (compactTask[1].equals("1")) {
                             task.mark();
                         }

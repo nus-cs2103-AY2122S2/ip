@@ -1,8 +1,12 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class Bot {
     ArrayList<Task> listOfTasks;
     Storage storage;
+    ;
 
     public Bot() {
         this.storage = new Storage();
@@ -51,8 +55,7 @@ public class Bot {
                     }
                     msg = new String[]{"event", msg[0], msg[1]};
                 } else {
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but you need to use the following format:\n" +
-                            "event {description} /at {date}\n");
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but you need to use the following format:\n" + "event {description} /at {yyyy/MM/dd HHmm}\n");
                 }
             } else if (inputMessage.contains("delete") || inputMessage.contains("mark")) {
                 msg = inputMessage.split(" ");
@@ -69,7 +72,7 @@ public class Bot {
                     msg = new String[]{"deadline", msg[0], msg[1]};
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but you need to use the following format:\n" +
-                            "deadline {description} /by {date}\n");
+                            "deadline {description} /by {yyyy/MM/dd HHmm}\n");
                 }
             }
         }
@@ -100,13 +103,13 @@ public class Bot {
         taskAddedMessage(newTask);
     }
 
-    private void addDeadline(String task, String deadline) throws DukeException {
+    private void addDeadline(String task, LocalDateTime deadline) throws DukeException {
         Task newTask = new DeadLines(task, deadline);
         this.listOfTasks.add(newTask);
         taskAddedMessage(newTask);
     }
 
-    private void addEvent(String task, String timing) throws DukeException {
+    private void addEvent(String task, LocalDateTime timing) throws DukeException {
         Task newTask = new Event(task, timing);
         this.listOfTasks.add(newTask);
         taskAddedMessage(newTask);
@@ -185,10 +188,10 @@ public class Bot {
                 deleteTask(processedInput[1]);
                 break;
             case "deadline":
-                addDeadline(processedInput[1], processedInput[2]);
+                addDeadline(processedInput[1], processDateTime(processedInput[2]));
                 break;
             case "event":
-                addEvent(processedInput[1], processedInput[2]);
+                addEvent(processedInput[1], processDateTime(processedInput[2]));
                 break;
             case "todo":
                 addTodo(processedInput[1]);
@@ -196,6 +199,17 @@ public class Bot {
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
         }
+    }
+
+    public static LocalDateTime processDateTime(String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
+        date = date.trim();
+        try {
+            return LocalDateTime.parse(date, formatter);
+        } catch (DateTimeParseException e) {
+            System.out.println("Please follow the required format for dates:\n yyyy/MM/dd HHmm");
+        }
+        return null;
     }
 }
 

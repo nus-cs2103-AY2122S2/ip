@@ -4,7 +4,7 @@ public class ToDos extends Task {
         super(task);
         this.initials = "T";
         if (task.length() < 1) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.\n");
         }
     }
 
@@ -13,3 +13,4 @@ public class ToDos extends Task {
         return "[T]" + super.toString();
     }
 }
+
