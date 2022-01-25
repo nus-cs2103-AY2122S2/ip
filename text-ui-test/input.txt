@@ -21,6 +21,11 @@ unmark 5
 unmark 7
 list
 unmark 3
+mark 19
+delete 2
+delete
+delete 12
+unmark 14
 list
 mark
 mark 1

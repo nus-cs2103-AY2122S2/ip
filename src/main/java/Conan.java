@@ -36,6 +36,9 @@ public class Conan {
     // BYE variable stores bye, which recognises user exit command.
     private static final String BYE = "BYE";
 
+    //DELETE variable stores delete command.
+    private static final String DELETE = "delete";
+
     // LIST variable store the list command
     private static final String LIST = "LIST";
 
@@ -159,8 +162,6 @@ public class Conan {
 
 
             // Primary error handling for commands.
-            // line 162 Inspired from https://www.baeldung.com/java-string-to-stream.
-            long c = message.codePoints().mapToObj(x -> (char) x).filter(y -> y == SPACE.charAt(0)).count();
             if (!message.contains(SPACE)) {
                 // check if the commands are empty
                 // or else its invalid command
@@ -174,12 +175,14 @@ public class Conan {
                     throw new MissingTaskArgumentException(MARK);
                 } else if (message.equalsIgnoreCase(UNMARK)) {
                     throw new MissingTaskArgumentException(UNMARK);
+                } else if (message.equalsIgnoreCase(DELETE)) {
+                    throw new MissingTaskArgumentException(DELETE);
                 } else {
                     throw new IllegalCommandException(message);
                 }
             }
 
-            String command = message.split(SPACE, 2)[START_INDEX];
+            String command = message.split(SPACE, 2)[START_INDEX].toLowerCase();
 
             // check if the command says mark or unmarked.
             switch (command) {
@@ -187,6 +190,8 @@ public class Conan {
                     return mark(message);
                 case UNMARK:
                     return unmark(message);
+                case DELETE:
+                    return delete(message);
             }
 
             return add(message);
@@ -270,9 +275,30 @@ public class Conan {
         String[] arr = message.split(" ");
         int num = Integer.valueOf(arr[1]);
         if(num > 0 && num <= this.tasks.size()) {
-            tasks.get(num - 1).unMarkDone();
+            this.tasks.get(num - 1).unMarkDone();
             System.out.println(UNDONE);
             System.out.println(tasks.get(num - 1));
+        } else {
+            throw new FaultyTaskNumberException(num);
+        }
+        System.out.println(ASK + this.username);
+        System.out.println(SEPARATOR);
+        return CarryOn.NEXT;
+    }
+
+    /**
+     * delete function removes a task from the list.
+     * @param message the user command.
+     * @return CarryOn.NEXT to ask what else the user wants to do.
+     * @throws FaultyTaskNumberException if the user inputs an invalid task number.
+     */
+    private CarryOn delete(String message) {
+        String[] arr = message.split(" ");
+        int num = Integer.valueOf(arr[1]);
+        if (num > 0 && num <= this.tasks.size()) {
+            Task task = this.tasks.remove(num - 1);
+            System.out.println("The following task has been removed from the list :");
+            System.out.println(task);
         } else {
             throw new FaultyTaskNumberException(num);
         }
