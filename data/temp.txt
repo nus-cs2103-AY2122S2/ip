@@ -1,2 +1,5 @@
- 
-D|1|abc/2019-12-12
+T|1|read book
+D|0|finish book/2019-12-12
+E|0|attend meeting/Mon
+T|0|return book
+T|1|book fair

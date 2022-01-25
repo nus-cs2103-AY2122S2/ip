@@ -2,6 +2,7 @@ package duke.ui;
 
 import duke.tasklist.TaskList;
 import duke.task.Task;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -40,10 +41,9 @@ public class Ui {
      * Prints out all elemnets in an ArrayList.
      *
      * @param lenOfArray The length of the input ArrayList.
-     * @param tasks The input ArrayList.
+     * @param tasks      The input ArrayList.
      */
     public void displayList(int lenOfArray, TaskList tasks) {
-        System.out.println("Here are the tasks in your list:");
         if (lenOfArray == 0) {
             System.out.println("      " + "Nothing added yet!");
         }

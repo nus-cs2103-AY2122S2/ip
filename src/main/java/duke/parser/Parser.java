@@ -46,6 +46,8 @@ public class Parser {
         } else if (command.equals("todo") || command.equals("deadline")
                 || command.equals("event")) {
             return new AddCommand(command, input);
+        } else if (command.equals("find")) {
+            return new FindCommand(input);
         } else {
             return new InvalidCommand();
         }
