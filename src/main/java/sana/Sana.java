@@ -41,9 +41,7 @@ public class Sana {
         this.parser = new Parser();
     }
 
-    /**
-     * This method runs Sana
-     */
+    /** This method runs Sana */
     public void run() {
         ui.greet();
 
@@ -212,9 +210,7 @@ public class Sana {
         ui.printTaskInList(userTasks.getTask(taskIndex));
     }
 
-    /**
-     * Lists the history of user inputs to Sana
-     */
+    /** Lists the history of user inputs to Sana */
     private void list() {
         ui.printTaskList(userTasks.toList(), false);
     }
