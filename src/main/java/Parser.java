@@ -10,32 +10,17 @@ public class Parser {
     static String LINES = "    ---------------------------------";
 
     // deal with the list command
-    static void parserList(ArrayList<Task> todoList) {
-        System.out.println(LINES);
-        System.out.println("    Here are the tasks in your list:");
-        for (int i = 0; i < todoList.size(); i++) {
-            String display = String.format("    %d.%s", i + 1, todoList.get(i).toString());
-            System.out.println(display);
-        }
-        System.out.println(LINES);
+    static void parserList(TaskList taskList) {
+        taskList.list();
     }
 
     // deal with the todo command
-    static void parserTodo(ArrayList<Task> todoList, String userInputTask) throws DukeException {
+    static void parserTodo(TaskList taskList, String userInputTask) throws DukeException {
         Parser.taskDescriptionValidator("todo" ,userInputTask);
+
         // adding task to todoList
         Todo userToDoTask = new Todo(userInputTask);
-        todoList.add(userToDoTask);
-
-        String displayTaskAmount = String.format("Now you have %d tasks in the list.", todoList.size());
-
-        System.out.println(LINES);
-        // display to do task
-        System.out.println("    Got it. I've added this task:");
-        System.out.println("        " + userToDoTask.toString());
-        System.out.println("    " + displayTaskAmount);
-        System.out.println(LINES);
-
+        taskList.addTask(userToDoTask);
     }
 
     static void parserDeadlineValidator(String userInputTask) throws DukeException {
@@ -70,7 +55,7 @@ public class Parser {
         }
     }
 
-    static void parserDeadline(ArrayList<Task> todoList, String userInputTask) {
+    static void parserDeadline(TaskList taskList, String userInputTask) {
         // splitting deadline into description and by
         String[] deadlineTaskArr = userInputTask.split(" /by ");
         String deadlineDescription = deadlineTaskArr[0];
@@ -83,19 +68,10 @@ public class Parser {
         String deadlineTime = deadlineTimeAndTheRest[3];
         LocalTime time = LocalTime.parse(deadlineTime);
         LocalDate deadlineDate = LocalDate.parse(by);
-        System.out.println(LINES);
 
         // adding task to todoList
         Deadline userDeadlineTask = new Deadline(deadlineDescription, deadlineDate, time);
-        todoList.add(userDeadlineTask);
-
-        String displayTaskAmount = String.format("Now you have %d tasks in the list.", todoList.size());
-
-        // displaying
-        System.out.println("    Got it. I've added this task:");
-        System.out.println("        " + userDeadlineTask.toString());
-        System.out.println("    " + displayTaskAmount);
-        System.out.println(LINES);
+        taskList.addTask(userDeadlineTask);
     }
 
     static void parserEventValidator(String userInputTask) throws DukeException {
@@ -130,7 +106,7 @@ public class Parser {
         }
     }
 
-    static void parserEvent(ArrayList<Task> todoList, String userInputTask) {
+    static void parserEvent(TaskList taskList, String userInputTask) {
 
         // splitting event into description and dateTime
         String[] eventTaskArr = userInputTask.split(" /at ");
@@ -146,42 +122,20 @@ public class Parser {
 
         // adding task to todoList
         Event userEventTask = new Event(eventDescription, eventAtDate, atTime);
-        todoList.add(userEventTask);
-
-        String displayTaskAmount = String.format("Now you have %d tasks in the list.", todoList.size());
-
-        System.out.println(LINES);
-        System.out.println("    Got it. I've added this task:");
-        System.out.println("        " + userEventTask.toString());
-        System.out.println("    " + displayTaskAmount);
-        System.out.println(LINES);
+        taskList.addTask(userEventTask);
     }
 
-    static void parserMark(ArrayList<Task> todoList, String[] userInputArr) {
+    static void parserMark(TaskList taskList, String[] userInputArr) {
         int taskToMark = Integer.parseInt(userInputArr[1]);
-        todoList.get(taskToMark - 1).markAsDone();
-
-        System.out.println(LINES);
-        System.out.println("    Nice! I've marked this task as done:");
-
-        String taskMarkString = String.format("%s", todoList.get(taskToMark - 1).toString());
-        System.out.println("    " + taskMarkString);
-        System.out.println(LINES);
+        taskList.setTaskAsDone(taskToMark);
     }
 
-    static void parserUnmark(ArrayList<Task> todoList, String[] userInputArr) {
+    static void parserUnmark(TaskList taskList, String[] userInputArr) {
         int taskToUnmark = Integer.parseInt(userInputArr[1]);
-        todoList.get(taskToUnmark - 1).markAsNotDone();
-
-        System.out.println(LINES);
-        System.out.println("    OK, I've marked this task as not done yet:");
-
-        String taskString = String.format("%s", todoList.get(taskToUnmark - 1).toString());
-        System.out.println("    " + taskString);
-        System.out.println(LINES);
+        taskList.setTaskAsUnDone(taskToUnmark);
     }
 
-    static void parserDeleteValidator(ArrayList<Task> todoList, String userInputTask) throws DukeException {
+    static void parserDeleteValidator(TaskList taskList, String userInputTask) throws DukeException {
         // handle error when there is no specified task number to be deleted
         try {
             Parser.deleteValidator(userInputTask);
@@ -194,7 +148,7 @@ public class Parser {
 
         // handle error when the task number specified is invalid
         try {
-            Parser.deleteTaskNumberValidator(todoList, userInputTask);
+            Parser.deleteTaskNumberValidator(taskList, userInputTask);
         } catch (DukeException e) {
             System.out.println(LINES);
             System.out.println("    Invalid task number to be deleted.");
@@ -203,21 +157,11 @@ public class Parser {
         }
     }
 
-    static void parserDelete(ArrayList<Task> todoList, String[] userInputArr) {
-        int taskToDelete = Integer.parseInt(userInputArr[1]) - 1;
-        // to be removed task
-        Task tobeRemoved = todoList.get(taskToDelete);
+    static void parserDelete(TaskList taskList, String[] userInputArr) {
+        int taskToDelete = Integer.parseInt(userInputArr[1]);
 
         // deleting task from the array list
-        todoList.remove(taskToDelete);
-
-        System.out.println(LINES);
-        System.out.println("    Noted. I've removed this task:");
-        System.out.println("        " + tobeRemoved.toString());
-
-        String taskRemainingString = String.format("    Now you have %d tasks in the list.", todoList.size());
-        System.out.println(taskRemainingString);
-        System.out.println(LINES);
+        taskList.removeTask(taskToDelete);
     }
 
 
@@ -298,8 +242,8 @@ public class Parser {
     }
 
     // check for when the task number specified is invalid for delete task
-    static void deleteTaskNumberValidator(ArrayList<Task> todoList, String taskNumber) throws DukeException {
-        if (Integer.parseInt(taskNumber) > todoList.size()) {
+    static void deleteTaskNumberValidator(TaskList taskList, String taskNumber) throws DukeException {
+        if (Integer.parseInt(taskNumber) > taskList.size()) {
             throw new DukeException("Invalid task number for delete task");
         }
     }

@@ -10,16 +10,12 @@ import java.util.Scanner;
 public class Duke {
 
     public static void main(String[] args) throws IOException, DukeException {
-        // greeting message
-        String greetings = "    Hi there! 👋 I'm Duke\n"
-                            + "    What can I do for you?";
-
         // divider
-        String lines = "    ---------------------------------";
+        String LINES = "    ---------------------------------";
 
-        System.out.println(lines);
-        System.out.println(greetings);
-        System.out.println(lines);
+        Ui ui = new Ui();
+        ui.greet();
+
         // reading user input
         Scanner sc = new Scanner(System.in);
 
@@ -33,6 +29,7 @@ public class Duke {
          * Array container for user's to do tasks
          */
         ArrayList<Task> todoList = new ArrayList<Task>();
+        TaskList taskList = new TaskList(todoList);
 
         // initializing storage
         Storage storage = new Storage();
@@ -40,6 +37,7 @@ public class Duke {
         // load data when duke starts up
         try {
             todoList = storage.load();
+            taskList = new TaskList(todoList);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -56,9 +54,9 @@ public class Duke {
             if (userInput.equals("bye")) {
                 isBye = true;
 
-                System.out.println(lines);
+                System.out.println(LINES);
                 System.out.println("    Bye. See you again next time! Have a nice day 😊!");
-                System.out.println(lines);
+                System.out.println(LINES);
             } else {
                 // storing input task in todoList
                 String[] userInputArr = userInput.split(" ");
@@ -68,28 +66,28 @@ public class Duke {
                 try {
                     Parser.userCommandValidator(userCommand);
                 } catch (DukeException e) {
-                    System.out.println(lines);
+                    System.out.println(LINES);
                     System.out.println("    OOPS!!! I'm sorry, but I don't know what that means.");
-                    System.out.println(lines);
+                    System.out.println(LINES);
                 }
 
                 switch (userCommand) {
                     case "list":
-                        Parser.parserList(todoList);
+                        Parser.parserList(taskList);
                         break;
                     case "todo":
                         // handle error from empty task description
                         try {
-                            Parser.parserTodo(todoList, userInputTask);
+                            Parser.parserTodo(taskList, userInputTask);
                         } catch (DukeException e) {
-                            System.out.println(lines);
+                            System.out.println(LINES);
                             System.out.println("    OOPS!!! The description of a todo cannot be empty.");
-                            System.out.println(lines);
+                            System.out.println(LINES);
                             break;
                         }
 
                         // save tasks to duke.txt
-                        storage.save(todoList);
+                        storage.save(taskList);
                         break;
                     case "deadline":
                         // handle error from empty task description
@@ -110,9 +108,9 @@ public class Duke {
                         try {
                             String deadlineTime = deadlineTimeAndTheRest[3];
                         } catch (ArrayIndexOutOfBoundsException e) {
-                            System.out.println(lines);
+                            System.out.println(LINES);
                             System.out.println("    Deadline time is required");
-                            System.out.println(lines);
+                            System.out.println(LINES);
                             break;
                         }
 
@@ -122,9 +120,9 @@ public class Duke {
                         try {
                             LocalTime.parse(deadlineTime);
                         } catch (DateTimeParseException e) {
-                            System.out.println(lines);
+                            System.out.println(LINES);
                             System.out.println("    Time must be in the hh:mm 24hr format");
-                            System.out.println(lines);
+                            System.out.println(LINES);
                             break;
                         }
 
@@ -132,16 +130,16 @@ public class Duke {
                         try {
                             Parser.deadlineDateFormatValidator(by);
                         } catch (DukeException e) {
-                            System.out.println(lines);
+                            System.out.println(LINES);
                             System.out.println("    OOPS!!! Deadline tasks can only be in the YYYY-MM-DD format.");
-                            System.out.println(lines);
+                            System.out.println(LINES);
                             break;
                         }
 
-                        Parser.parserDeadline(todoList, userInputTask);
+                        Parser.parserDeadline(taskList, userInputTask);
 
                         // save tasks to duke.txt
-                        storage.save(todoList);
+                        storage.save(taskList);
                         break;
 
                     case "event":
@@ -164,9 +162,9 @@ public class Duke {
                         try {
                             String eventTime = eventTimeAndTheRest[3];
                         } catch (ArrayIndexOutOfBoundsException e) {
-                            System.out.println(lines);
+                            System.out.println(LINES);
                             System.out.println("    Event time is required");
-                            System.out.println(lines);
+                            System.out.println(LINES);
                             break;
                         }
 
@@ -176,9 +174,9 @@ public class Duke {
                         try {
                             LocalTime.parse(eventTime);
                         } catch (DateTimeParseException e) {
-                            System.out.println(lines);
+                            System.out.println(LINES);
                             System.out.println("    Time must be in the hh:mm 24hr format");
-                            System.out.println(lines);
+                            System.out.println(LINES);
                             break;
                         }
 
@@ -187,43 +185,43 @@ public class Duke {
                         try {
                             Parser.eventDateFormatValidator(eventDate);
                         } catch (DukeException e) {
-                            System.out.println(lines);
+                            System.out.println(LINES);
                             System.out.println("    OOPS!!! Deadline tasks can only be in the YYYY-MM-DD format.");
-                            System.out.println(lines);
+                            System.out.println(LINES);
                             break;
                         }
 
-                        Parser.parserEvent(todoList, userInputTask);
+                        Parser.parserEvent(taskList, userInputTask);
 
                         // save tasks to duke.txt
-                        storage.save(todoList);
+                        storage.save(taskList);
                         break;
 
                     case "mark":
-                        Parser.parserMark(todoList, userInputArr);
+                        Parser.parserMark(taskList, userInputArr);
 
                         // save update tasks to duke.txt
-                        storage.save(todoList);
+                        storage.save(taskList);
                         break;
 
                     case "unmark":
-                        Parser.parserUnmark(todoList, userInputArr);
+                        Parser.parserUnmark(taskList, userInputArr);
 
                         // save update tasks to duke.txt
-                        storage.save(todoList);
+                        storage.save(taskList);
                         break;
 
                     case "delete":
                         try {
-                            Parser.parserDeleteValidator(todoList, userInputTask);
+                            Parser.parserDeleteValidator(taskList, userInputTask);
                         } catch (DukeException e) {
                             break;
                         }
 
-                        Parser.parserDelete(todoList, userInputArr);
+                        Parser.parserDelete(taskList, userInputArr);
 
                         // save update tasks to duke.txt
-                        storage.save(todoList);
+                        storage.save(taskList);
                         break;
                 }
                 userInput = sc.nextLine();

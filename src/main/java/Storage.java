@@ -34,7 +34,7 @@ public class Storage {
         }
     }
 
-    public void save(ArrayList<Task> todoList) throws IOException {
+    public void save(TaskList todoList) throws IOException {
         FileWriter fw = new FileWriter(this.relativePath);
         for (int i = 0; i < todoList.size(); i++) {
             fw.write(todoList.get(i).toStringForSave() + "\n");
@@ -45,7 +45,7 @@ public class Storage {
     public ArrayList<Task> load() throws FileNotFoundException {
         File f = new File(this.relativePath);
         Scanner s = new Scanner(f);
-        ArrayList<Task> todoListTasks = new ArrayList<>();
+        ArrayList<Task> todoList = new ArrayList<>();
 
         // load task from duke.txt to todoList
         while (s.hasNext()) {
@@ -68,7 +68,7 @@ public class Storage {
                 }
 
                 // add todoTask to todoList
-                todoListTasks.add(todoTask);
+                todoList.add(todoTask);
                 break;
             case "D":
                 LocalTime deadlineTime = LocalTime.parse(taskContent[7]);
@@ -84,7 +84,7 @@ public class Storage {
                 }
 
                 // add deadlineTask to todoList
-                todoListTasks.add(deadlineTask);
+                todoList.add(deadlineTask);
                 break;
             case "E":
                 LocalTime eventTime = LocalTime.parse(taskContent[7]);
@@ -100,10 +100,10 @@ public class Storage {
                 }
 
                 // add eventTask to todoList
-                todoListTasks.add(eventTask);
+                todoList.add(eventTask);
                 break;
             }
         }
-        return todoListTasks;
+        return todoList;
     }
 }

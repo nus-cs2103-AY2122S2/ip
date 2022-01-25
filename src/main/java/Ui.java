@@ -4,6 +4,11 @@ public class Ui {
             + "    What can I do for you?";
 
     // divider
-    String lines = "    ---------------------------------";
+    String LINES = "    ---------------------------------";
+    public void greet() {
+        System.out.println(LINES);
+        System.out.println(greetings);
+        System.out.println(LINES);
+    }
 
 }
