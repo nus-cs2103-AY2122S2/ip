@@ -14,9 +14,19 @@ import duke.command.MarkTaskCommand;
 import duke.command.UnmarkTaskCommand;
 import duke.exception.DukeException;
 
+/**
+ * This class acts as a parser that parses user inputs into specific commands.
+ */
 public class Parser {
     private static final int OFFSET = 1;
-    
+
+    /**
+     * Parses the input string entered by user into a command known to the application.
+     * 
+     * @param command the command entered by user.
+     * @return a command to be executed by the application.
+     * @throws DukeException when <code>command</code> is invalid or its format is incorrect.
+     */
     public static Command parse(String command) throws DukeException {
         String[] commandTokens = command.split(" ", 2);
         
