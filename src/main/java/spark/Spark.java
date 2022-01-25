@@ -59,10 +59,6 @@ public class Spark {
         }
     }
 
-    public void exit() {
-        System.exit(0);
-    }
-
     public static void main(String[] args) {
         new Spark().run();
     }
