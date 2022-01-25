@@ -1,36 +1,36 @@
 public abstract class Task {
-    protected final String taskName;
-    protected boolean taskComplete;
+    protected final String title;
+    protected boolean status;
 
-    public Task(String taskName) {
-        this.taskName = taskName;
-        this.taskComplete = false;
+    public Task(String title, boolean status) {
+        this.title = title;
+        this.status = status;
     }
 
     /**
-     * Returns the icon that identifies whether the task has been completed or not.
-     * @return '[X]' if completed ant '[ ]' if not.
+     * Returns icon that represents whether the given task has been completed or not.
+     * @return '[X]' if task completed and '[ ]' if not
      */
     protected String getStatusIcon() {
-        return (taskComplete ? "[X]" : "[ ]");
+        return (this.status ? "[X]" : "[ ]");
     }
 
     /**
-     * Marks the task as complete.
+     * Marks the given task as complete.
      */
     public void markAsComplete() {
-        this.taskComplete = true;
+        this.status = true;
     }
 
     /**
-     * Marks the task as incomplete.
+     * Marks the given task as incomplete.
      */
     public void markAsIncomplete() {
-        this.taskComplete = false;
+        this.status = false;
     }
 
     @Override
     public String toString() {
-        return getStatusIcon() + " " + this.taskName;
+        return getStatusIcon() + " " + this.title;
     }
 }
