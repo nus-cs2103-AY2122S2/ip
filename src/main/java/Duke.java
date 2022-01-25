@@ -1,10 +1,11 @@
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
     private static final String HORIZONTAL_LINE = "\t" + "____________________________________________________________";
 
-    private static ArrayList<Task> savedTasks = new ArrayList<Task>();
+    private static ArrayList<Task> savedTasks = new ArrayList<>();
 
     private static final String COMMAND_BYE = "bye";
     private static final String COMMAND_LIST = "list";
@@ -20,7 +21,11 @@ public class Duke {
 
     public static void main(String[] args) {
         printGreeting();
-
+        try {
+            savedTasks = Storage.readDataFromFile();
+        } catch (IOException e) {
+            System.out.println("File not found.");
+        }
         Scanner sc = new Scanner(System.in);
 
         while (true) {
@@ -57,7 +62,11 @@ public class Duke {
 
         switch (commandType) {
         case COMMAND_BYE:
-            executeExit();
+            try {
+                executeExit();
+            } catch (IOException e) {
+                System.out.println("File not found");
+            }
             break;
         case COMMAND_LIST:
             executeList();
@@ -202,7 +211,8 @@ public class Duke {
         System.out.println(HORIZONTAL_LINE);
     }
 
-    private static void executeExit() {
+    private static void executeExit() throws IOException {
+        Storage.writeTaskToFile(savedTasks);
         System.out.println(HORIZONTAL_LINE);
         System.out.println("\t" + "Bye. Hope to see you again soon!");
         System.out.println(HORIZONTAL_LINE);
