@@ -94,10 +94,16 @@ public class Ui {
                 "yyyy-mm-dd" + LINE);
     }
 
+    /**
+     * find message
+     */
     public static void findMessage() {
         System.out.println(LINE + "Here are the matching tasks in your list:\n");
     }
 
+    /**
+     * task not found message
+     */
     public static void NotFoundMessage() {
         System.out.println(LINE + "☹ OOPS!!! There are no task matching to this description\n" + LINE);
     }

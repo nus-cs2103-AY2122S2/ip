@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
-
 /**
  * Parser class is to parse user commands into strings and how to read the strings
  */
