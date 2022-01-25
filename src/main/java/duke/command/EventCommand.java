@@ -10,17 +10,28 @@ import duke.task.Event;
 public class EventCommand extends Command {
 
     private final String description;
-    private final DukeDateTime by;
+    private final DukeDateTime at;
 
-    public EventCommand(String description, DukeDateTime by) {
+    /**
+     * Constructs a {@code EventCommand} object with keyword EVENT.
+     * @param description the description of the event
+     * @param at a {@code DukeDateTime object specifying the time of the event}
+     */
+    public EventCommand(String description, DukeDateTime at) {
         super(Keyword.EVENT);
         this.description = description;
-        this.by = by;
+        this.at = at;
     }
 
+    /**
+     * Adds an event into the list of tasks.
+     * @param tasks current list of tasks
+     * @param ui the UI used
+     * @param storage the storage used
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Task t = new Event(description, by);
+        Task t = new Event(description, at);
         tasks.add(t);
         ui.showMessage("Got it. I've added this task:\n" + t
                 + "\nNow you have " + tasks.size() + " tasks in your list.");

@@ -4,14 +4,25 @@ import duke.DukeDateTime;
 
 public class Event extends Task {
 
-    protected String icon = "E";
+    protected Icon icon = Icon.E;
     protected DukeDateTime at;
 
+    /**
+     * Constructs an {@code Event} object with the specified description and time
+     * @param description the description of the event
+     * @param at a {@code DukeDateTime} object specifying the time of the event
+     */
     public Event(String description, DukeDateTime at) {
         super(description);
         this.at = at;
     }
 
+    /**
+     * Constructs a {@code Deadline} object with the specified description, status and time
+     * @param description the description of the event
+     * @param isDone a boolean indicating whether the task is done
+     * @param at a {@code DukeDateTime} object specifying the time of the event
+     */
     public Event(String description, Boolean isDone, DukeDateTime at) {
         super(description, isDone);
         this.at = at;
@@ -23,7 +34,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String getIcon() {
+    public Icon getIcon() {
         return icon;
     }
 

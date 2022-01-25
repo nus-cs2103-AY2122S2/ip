@@ -8,11 +8,21 @@ public class UnmarkCommand extends Command {
 
     private final int index;
 
+    /**
+     * Constructs a {@code UnmarkCommand} object with keyword UNMARK.
+     * @param index the index of the task to unmark
+     */
     public UnmarkCommand(int index) {
         super(Command.Keyword.UNMARK);
         this.index = index;
     }
 
+    /**
+     * Unmarks the task at the specified index in the list of tasks.
+     * @param tasks current list of tasks
+     * @param ui the UI used
+     * @param storage the storage used
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         if (index <= tasks.size()) {

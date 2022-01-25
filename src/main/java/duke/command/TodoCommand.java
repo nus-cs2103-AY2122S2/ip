@@ -10,11 +10,21 @@ public class TodoCommand extends Command {
 
     private final String description;
 
+    /**
+     * Constructs a {@code TodoCommand} object with keyword TODO.
+     * @param description the description of the todo task
+     */
     public TodoCommand(String description) {
         super(Keyword.TODO);
         this.description = description;
     }
 
+    /**
+     * Adds a todo task into the list of tasks.
+     * @param tasks current list of tasks
+     * @param ui the UI used
+     * @param storage the storage used
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task t = new Todo(description);

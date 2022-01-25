@@ -15,6 +15,11 @@ public class Duke {
     private TaskList tasks;
     private final Ui ui;
 
+    /**
+     * Constructs a {@code Duke} object with its name and path for storage.
+     * @param name Duke's name
+     * @param filePath path for storage
+     */
     public Duke(String name, String filePath) {
         this.name = name;
         this.ui = new Ui();
@@ -27,6 +32,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs a Duke.
+     * @throws IOException if an I/O error occurred
+     */
     public void run() throws IOException {
         ui.showLine();
         ui.showMessage(greet());
@@ -49,14 +58,27 @@ public class Duke {
         }
     }
 
+    /**
+     * Returns the greetings from Duke.
+     * @return greetings from Duke.
+     */
     public String greet() {
         return "Hello! I'm " + name + "\nWhat can I do for you?";
     }
 
+    /**
+     * Asks the storage to update the records with the current list of tasks.
+     * @throws IOException if an I/O error occurred
+     */
     public void updateRecords() throws IOException {
         storage.update(tasks);
     }
 
+    /**
+     * The main method.
+     * @param args not used
+     * @throws IOException if an I/O error occurred
+     */
     public static void main(String[] args) throws IOException {
         new Duke("Enkel", System.getProperty("user.dir")).run();
     }

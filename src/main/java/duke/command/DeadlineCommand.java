@@ -12,12 +12,23 @@ public class DeadlineCommand extends Command {
     private final String description;
     private final DukeDateTime by;
 
+    /**
+     * Constructs a {@code DeadlineCommand} object with keyword DEADLINE.
+     * @param description the description of the deadline task
+     * @param by a {@code DukeDateTime} object specifying the deadline of the task
+     */
     public DeadlineCommand(String description, DukeDateTime by) {
         super(Keyword.DEADLINE);
         this.description = description;
         this.by = by;
     }
 
+    /**
+     * Adds a deadline task into the list of tasks.
+     * @param tasks current list of tasks
+     * @param ui the UI used
+     * @param storage the storage used
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task t = new Deadline(description, by);

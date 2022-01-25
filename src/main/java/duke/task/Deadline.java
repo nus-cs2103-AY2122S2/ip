@@ -4,18 +4,30 @@ import duke.DukeDateTime;
 
 public class Deadline extends Task {
 
-    protected String icon = "D";
+    protected Icon icon = Icon.D;
     protected DukeDateTime by;
 
+    /**
+     * Constructs a {@code Deadline} object with the specified description and deadline
+     * @param description the description of the deadline task
+     * @param by a {@code DukeDateTime} object specifying the deadline
+     */
     public Deadline(String description, DukeDateTime by) {
         super(description);
         this.by = by;
     }
 
+    /**
+     * Constructs a {@code Deadline} object with the specified description, status and deadline
+     * @param description the description of the deadline task
+     * @param isDone a boolean indicating whether the task is done
+     * @param by a {@code DukeDateTime} object specifying the deadline
+     */
     public Deadline(String description, Boolean isDone, DukeDateTime by) {
         super(description, isDone);
         this.by = by;
     }
+
 
     @Override
     public String toString() {
@@ -23,7 +35,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String getIcon() {
+    public Icon getIcon() {
         return icon;
     }
 

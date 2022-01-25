@@ -12,10 +12,21 @@ public class Storage {
 
     private final String filePath;
 
+    /**
+     * Constructs a storage area in the specified folder.
+     * @param filePath a path of a folder, not null
+     */
     Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads previous records from the storage folder.
+     *   If such file does not exist, creates a file for recording.
+     * @return a list of tasks kept in the records
+     * @throws IOException if an I/O error occurred
+     * @throws DukeException if the records do not have the correct formats
+     */
     public TaskList load() throws IOException, DukeException {
         TaskList tasks = new TaskList();
         File directory = new File(filePath + "/data");
@@ -50,6 +61,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Updates the records according to the new list of tasks.
+     * @param tasks the new list of tasks
+     * @throws IOException if an I/O error occurred
+     */
     public void update(TaskList tasks) throws IOException {
         File records = new File(filePath + "/data/records.txt");
         records.delete();

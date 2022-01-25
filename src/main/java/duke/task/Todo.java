@@ -2,11 +2,21 @@ package duke.task;
 
 public class Todo extends Task {
 
-    protected String icon = "T";
+    protected Icon icon = Icon.T;
 
+    /**
+     * Constructs a {@code Todo} object with the specified description
+     * @param description the description of the todo task
+     */
     public Todo(String description) {
         super(description);
     }
+
+    /**
+     * Constructs a {@code Todo} object with the specified description and status
+     * @param description the description of the todo task
+     * @param isDone a boolean indicating whether the task is done
+     */
     public Todo(String description, Boolean isDone) {
         super(description, isDone);
     }
@@ -17,7 +27,7 @@ public class Todo extends Task {
     }
 
     @Override
-    public String getIcon() {
+    public Icon getIcon() {
         return icon;
     }
 

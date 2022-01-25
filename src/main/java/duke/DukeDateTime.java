@@ -10,8 +10,14 @@ public class DukeDateTime {
     private final LocalDate date;
     private final LocalTime time;
 
-    public static DukeDateTime parse(String s) throws DukeException {
-        String[] splited = s.split(" ");
+    /**
+     * Obtains an instance of {@code DukeDateTime} from a text string.
+     * @param text the text to parse, not null
+     * @return the parsed {@code DukeDateTime}, not null
+     * @throws DukeException if the text cannot be parsed
+     */
+    public static DukeDateTime parse(String text) throws DukeException {
+        String[] splited = text.split(" ");
         DukeDateTime datetime;
         try {
             if (splited.length == 2) {
@@ -29,31 +35,53 @@ public class DukeDateTime {
         return datetime;
     }
 
+    /**
+     * Constructs a {@code DukeDateTime} object with date but not time component.
+     * @param date A LocalDate object
+     */
     public DukeDateTime(LocalDate date) {
         this.date = date;
         this.time = null;
     }
 
+    /**
+     * Constructs a {@code DukeDateTime} object with both date and time components.
+     * @param date A LocalDate object
+     * @param time A LocalTime object
+     */
     public DukeDateTime(LocalDate date, LocalTime time) {
         this.date = date;
         this.time = time;
     }
 
+    /**
+     * Checks if this {@code DukeDateTime} is equal to another DukeDateTime.
+     * @Override {@code equals} in class {@code Object}
+     * @param obj the object to check, null returns false
+     * @return true if both objects are DukeDateTime and either<p>
+     *   1. Both do not have the time component and refer to the same date, or<p>
+     *   2. Both have the time component and refer to the same time
+     */
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
-        if (!(o instanceof DukeDateTime)) {
+        if (!(obj instanceof DukeDateTime)) {
             return false;
         }
-        DukeDateTime other = (DukeDateTime) o;
-        if (this.hasTime()) {
+        DukeDateTime other = (DukeDateTime) obj;
+        if (this.hasTime() || other.hasTime()) {
             return this.date.isEqual(other.date) && this.time.equals(other.time);
         }
         return this.date.isEqual(other.date);
     }
 
+    /**
+     * Formats this {@code DukeDateTime} using the specified pattern for date and "H:mm" for time.
+     * @param pattern_date the pattern to use for date, not null
+     * @return the formatted DukeDateTime string, not null
+     */
     public String format(String pattern_date) {
         String res = date.format(DateTimeFormatter.ofPattern(pattern_date));
         if (hasTime()) {
@@ -62,14 +90,28 @@ public class DukeDateTime {
         return res;
     }
 
+    /**
+     * Checks if this {@code DukeDateTime} has the time component.
+     * @return true if this {@code DukeDateTime} has the time component
+     */
     public boolean hasTime() {
         return time != null;
     }
 
+    /**
+     * Gets the date component of this {@code DukeDateTime} as a {@code LocalDate} object.
+     * @return a {@code LocalDate} object, not null
+     */
     public LocalDate getDate() {
         return date;
     }
 
+    /**
+     * Gets the time component of this {@code DukeDateTime} as a {@code LocalTime} object,
+     *   returns null if this {@code DukeDateTime} does not have the time component.
+     * @return a {@code LocalTime} object, or {@code null} if this {@code DukeDateTime}
+     *   does not have the time component
+     */
     public LocalTime getTime() {
         return time;
     }

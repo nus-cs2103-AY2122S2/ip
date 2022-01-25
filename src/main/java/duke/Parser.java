@@ -2,10 +2,14 @@ package duke;
 
 import duke.command.*;
 
-import java.time.format.DateTimeParseException;
-
 public class Parser {
 
+    /**
+     * Parses an input string to a {@code Command} object.
+     * @param input the input string to parse, not null
+     * @return a command, not null
+     * @throws DukeException if the input does not have a correct format
+     */
     public static Command parse(String input) throws DukeException {
         String[] splited = input.split(" ", 2);
         String firstWord = splited[0];
