@@ -24,6 +24,11 @@ public class DukeException extends Exception {
         case "list":
         case "bye":
             break;
+        case "find":
+            if (commandSplitBySpace.length == 1) {
+                throw new DukeException("☹ OOPS!!! The keyword to be searched cannot be empty.");
+            }
+            break;
         case "mark":
         case "unmark":
         case "delete":

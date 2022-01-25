@@ -36,16 +36,38 @@ public class TaskList {
         return this.tasks.size();
     }
 
+    public ArrayList<Task> findTasks(String search) {
+        ArrayList<Task> found = new ArrayList<>();
+        for (int i = 0; i < this.tasks.size(); i++) {
+            if (this.getTask(i).description.contains(search)) {
+                found.add(this.getTask(i));
+            }
+        }
+        return found;
+    }
+
+    public String displayTasks(String startMsg, ArrayList<Task> tasks, boolean isFind) {
+        if (tasks.size() > 0) {
+            StringBuilder sb = new StringBuilder(startMsg + "\n");
+            for (int i = 0; i < tasks.size(); i++) {
+                if (i > 0) {
+                    sb.append("\n");
+                }
+                sb.append((i + 1) + "." + tasks.get(i));
+            }
+            return sb.toString();
+        } else {
+            if (isFind) {
+                return "There are no matching tasks.";
+            } else {
+                return "Your task list is empty.";
+            }
+        }
+    }
+
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("Here are the tasks in your list: \n");
-        for (int i = 0; i < tasks.size(); i++) {
-            if (i > 0) {
-                sb.append("\n");
-            }
-            sb.append((i + 1) + "." + tasks.get(i));
-        }
-        return sb.toString();
+        return displayTasks("Here are the tasks in your list: ", this.tasks, false);
     }
 }
 
