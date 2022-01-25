@@ -11,10 +11,12 @@ import java.util.Arrays;
  * Represents Storage of the tasks
  */
 public class DataStore {
+
     /**
      * Path to store data
      */
-    final public static String PATH = "data/tasks.csv";
+    final private static String PATH = "data/tasks.csv";
+
 
     /**
      * Saves tasks given

@@ -9,7 +9,7 @@ public class TaskList {
     /**
      * Arraylist of Tasks
      */
-    ArrayList<Task> actions = new ArrayList<Task>();
+    private ArrayList<Task> actions = new ArrayList<Task>();
 
     /**
      * Adds Task to the tasklist

@@ -7,11 +7,11 @@ public class Task {
     /**
      * String description of task to be completed
      */
-    String description;
+    protected String description;
     /**
      * Boolean to indicate if class is completed
      */
-    Boolean completed = false;
+    protected Boolean completed = false;
 
     /**
      * Creation of new task
@@ -26,21 +26,21 @@ public class Task {
      * Marks task as completed
      */
     public void markCompleted(){
-        this.completed = true;
+        this.isCompleted = true;
     }
 
     /**
      * Marks task as incompleted
      */
     public void markIncompleted(){
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     /**
      * Prints details of task
      */
     public void print() {
-        System.out.println("[" + (this.completed ? "x" : " ") +  "] " + this.description);
+        System.out.println("[" + (this.isCompleted ? "x" : " ") +  "] " + this.description);
     }
 
     /**
@@ -52,7 +52,7 @@ public class Task {
      */
     public String[] getDetails() {
         String[] details = new String[4];
-        details[1] = completed ? "1" : "0";
+        details[1] = isCompleted ? "1" : "0";
         details[2] = description;
         return details;
 

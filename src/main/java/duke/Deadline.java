@@ -9,15 +9,16 @@ import java.time.format.DateTimeParseException;
  * Represents task of type deadline
  */
 public class Deadline extends Task {
+
     /**
      * String of time indicating when task is due
      */
-    String time;
+    private String time;
     /**
      * Datetime indicating when task is due
      * Null if time cannot be converted to datetime
      */
-    LocalDateTime datetime;
+    private LocalDateTime datetime;
 
     /**
      * Creation of Deadline Task

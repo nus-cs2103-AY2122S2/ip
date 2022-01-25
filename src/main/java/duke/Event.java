@@ -8,15 +8,16 @@ import java.time.format.DateTimeParseException;
  * Represents task of type event
  */
 public class Event extends Task {
+
     /**
      * String of time indicating when task is occurring
      */
-    String time;
+    private String time;
     /**
      * Datetime indicating when task is occurring
      * Null if time cannot be converted to datetime
      */
-    LocalDateTime datetime;
+    private LocalDateTime datetime;
 
     /**
      * Creation of Event Task
@@ -39,7 +40,7 @@ public class Event extends Task {
      */
     public void print() {
         System.out.print("[E]");
-        System.out.print("[" + (this.completed ? "x" : " ") +  "] " + this.description);
+        System.out.print("[" + (this.isCompleted ? "x" : " ") +  "] " + this.description);
         if (datetime == null) {
             System.out.println(" (at: " + this.time + ")");
         } else {

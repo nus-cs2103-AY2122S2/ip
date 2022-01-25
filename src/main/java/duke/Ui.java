@@ -9,7 +9,8 @@ public class Ui {
     /**
      * Scanner to read input of user
      */
-    static Scanner sc = new Scanner(System.in);
+    private static Scanner sc = new Scanner(System.in);
+
 
     /**
      * Gets Command from user and parses it
