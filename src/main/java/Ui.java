@@ -2,12 +2,16 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class Printer {
+public class Ui {
     public static String divider = "    ____________________________________________________________";
     public static DateTimeFormatter formatter = DateTimeFormatter
             .ofPattern("HH:mm EEEE, MM-dd-yyyy").localizedBy(Locale.ENGLISH);
 
-    public static void printEndMessage() {
+    public Ui() {
+
+    }
+
+    public void printEndMessage() {
         printDivider();
         System.out.println("    Bye. Hope to see you again soon!");
         printDivider();
@@ -17,18 +21,21 @@ public class Printer {
         System.out.println(divider);
     }
 
-    public static void printTodo(ArrayList<Task> inputList) {
+    public void showUiForTaskList(TaskList taskList) {
         printDivider();
-        for (int index = 0; index < inputList.size(); index++) {
+        ArrayList<Task> tasks = taskList.getTasks();
+        for (int index = 0; index < tasks.size(); index++) {
             int order = (index + 1);
-            Task task = inputList.get(index);
+            Task task = tasks.get(index);
             String result = "    " + order + ": " + task.toString();
             System.out.println(result);
         }
         printDivider();
     }
 
-    public static void echoForAdd(Task taskObj, int listLength) {
+
+
+    public void showUiForAdd(Task taskObj, int listLength) {
         printDivider();
         System.out.println("    Adding a task: ");
         System.out.println("      " + taskObj.toString());
@@ -36,7 +43,7 @@ public class Printer {
         printDivider();
     }
 
-    public static void echoForDelete(Task taskObj, int listLength) {
+    public void showUiForDelete(Task taskObj, int listLength) {
         printDivider();
         System.out.println("    Ok, removing a task: ");
         System.out.println("      " + taskObj.toString());
@@ -44,7 +51,7 @@ public class Printer {
         printDivider();
     }
 
-    public static void echoForSort(ArrayList<Task> tasks, Duke.SortType sortType) {
+    public void showUiForSort(ArrayList<Task> tasks, TaskList.SortType sortType) {
         printDivider();
         System.out.println("    Sorting your tasks by " + sortType.toString() + ":");
         for (Task task : tasks) {

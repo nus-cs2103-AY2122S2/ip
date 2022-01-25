@@ -5,9 +5,9 @@ public class DukeInvalidArgumentException extends DukeException {
 
     @Override
     public String toString() {
-        String result = Printer.divider + "\n";
+        String result = Ui.divider + "\n";
         result += "    Invalid argument(s): " + this.getMessage() + "\n";
-        result += Printer.divider;
+        result += Ui.divider;
         return result;
     }
 }

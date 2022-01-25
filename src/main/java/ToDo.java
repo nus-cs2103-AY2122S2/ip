@@ -4,6 +4,10 @@ public class ToDo extends Task {
         super(content);
     }
 
+    public ToDo(String content, boolean isDone) {
+        super(content, isDone);
+    }
+
     @Override
     public String toString() {
         if (getIsDone()) {

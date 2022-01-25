@@ -5,9 +5,9 @@ public class DukeMissingArgumentException extends DukeException {
 
     @Override
     public String toString() {
-        String result = Printer.divider + "\n";
+        String result = Ui.divider + "\n";
         result += "    We are missing the following argument: " + this.getMessage() + "\n";
-        result += Printer.divider;
+        result += Ui.divider;
         return result;
     }
 }

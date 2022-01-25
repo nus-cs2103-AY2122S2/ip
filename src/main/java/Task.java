@@ -1,5 +1,4 @@
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 public class Task implements Comparable<Task> {
     protected boolean isDone;
@@ -12,8 +11,19 @@ public class Task implements Comparable<Task> {
         this.date = null;
     }
 
+    public Task(String content, boolean isDone) {
+        this.isDone = isDone;
+        this.content = content;
+    }
+
     public Task(String content, LocalDateTime date) {
         this.isDone = false;
+        this.content = content;
+        this.date = date;
+    }
+
+    public Task(String content, LocalDateTime date, boolean isDone) {
+        this.isDone = isDone;
         this.content = content;
         this.date = date;
     }
@@ -34,22 +44,20 @@ public class Task implements Comparable<Task> {
         this.content = content;
     }
 
-    public void mark(ArrayList<Task> tasks) {
+    public void mark() {
         this.isDone = true;
-        Printer.printDivider();
+        Ui.printDivider();
         System.out.println("    Nice! I've marked this task as done: ");
         System.out.println("    " + this.toString());
-        Printer.printDivider();
-        Duke.saveAsTextFile(tasks);
+        Ui.printDivider();
     }
 
-    public void unmark(ArrayList<Task> tasks) {
+    public void unmark() {
         this.isDone = false;
-        Printer.printDivider();
+        Ui.printDivider();
         System.out.println("    I've unmarked this task: ");
         System.out.println("    " + this.toString());
-        Printer.printDivider();
-        Duke.saveAsTextFile(tasks);
+        Ui.printDivider();
     }
 
     @Override
