@@ -1,16 +1,14 @@
 package ui.command;
 
 import data.TaskList;
-import task.Task;
 
-import java.io.File;
 import java.util.ArrayList;
 
 /**
  * Command which prints out a list of item
  * stored by user.
  */
-public class ShowTaskListCommand extends TaskListCommand {
+class ShowTaskListCommand extends TaskListCommand {
 
     public ShowTaskListCommand(String name, String args, TaskList taskList) {
         super(name, args, taskList);

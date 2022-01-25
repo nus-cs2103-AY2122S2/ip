@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Command which marks a previously
  * added task as done.
  */
-public class MarkTaskCommand extends TaskListCommand {
+class MarkTaskCommand extends TaskListCommand {
 
     public MarkTaskCommand(String name, String args, TaskList taskList) {
         super(name, args, taskList);

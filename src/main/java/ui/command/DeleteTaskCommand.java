@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Command which deletes a previously
  * added task.
  */
-public class DeleteTaskCommand extends TaskListCommand {
+class DeleteTaskCommand extends TaskListCommand {
 
     public DeleteTaskCommand(String name, String args, TaskList taskList) {
         super(name, args, taskList);

@@ -12,10 +12,10 @@ import java.util.ArrayList;
  */
 public abstract class Command {
     /** Constants for styling of printing command feedback */
-    private final static int DELIMITER_LENGTH = 25;
-    private final static int INDENT_SIZE = 4;
-    private final static String DELIMITER = "_".repeat(DELIMITER_LENGTH);
-    private final static String INDENT = " ".repeat(INDENT_SIZE);
+    private final static int FEEDBACK_DELIMITER_LENGTH = 25;
+    private final static int FEEDBACK_INDENT_SIZE = 4;
+    private final static String FEEDBACK_DELIMITER = "_".repeat(FEEDBACK_DELIMITER_LENGTH);
+    private final static String FEEDBACK_INDENT = " ".repeat(FEEDBACK_INDENT_SIZE);
 
     /**
      * Execute current command in ChatBot context.
@@ -94,11 +94,11 @@ public abstract class Command {
      * @param response List of response to print.
      */
     public static void styledPrint(ArrayList<String> response) {
-        response.add(0, DELIMITER);
-        response.add(DELIMITER);
+        response.add(0, FEEDBACK_DELIMITER);
+        response.add(FEEDBACK_DELIMITER);
         // Prepend each response item with an indent and a line break
         String styledResponse = response.stream()
-                .map(item -> INDENT + item + '\n')
+                .map(item -> FEEDBACK_INDENT + item + '\n')
                 .reduce("", (prevLine, nextLine) -> prevLine + nextLine);
         System.out.println(styledResponse);
     }

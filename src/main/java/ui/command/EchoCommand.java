@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Command which echoes the name of the
  * command written by user.
  */
-public class EchoCommand extends Command {
+class EchoCommand extends Command {
     public EchoCommand(String name, String args) {
         super(name, args);
     }
