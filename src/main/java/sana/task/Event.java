@@ -1,8 +1,10 @@
+package sana.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * This class represents the Event task
+ * This class represents the Event sana.task
  *
  * @author Jan
  * @version 1.0

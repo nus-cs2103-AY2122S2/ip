@@ -1,5 +1,7 @@
+package sana.exception;
+
 /**
- * This class represents the exception thrown when the command give to Sana is incomplete
+ * This class represents the sana.exception thrown when the command give to Sana is incomplete
  *
  * @author Jan
  * @version 1.0

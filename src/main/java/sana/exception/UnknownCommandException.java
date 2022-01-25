@@ -1,5 +1,7 @@
+package sana.exception;
+
 /**
- * This class represents the exception thrown by Sana when she receives
+ * This class represents the sana.exception thrown by Sana when she receives
  * an unknown command
  *
  * @author Jan

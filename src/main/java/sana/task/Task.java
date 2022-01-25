@@ -1,4 +1,4 @@
-
+package sana.task;
 /**
  * This class represents the tasks Sana will remember
  *
@@ -7,19 +7,19 @@
  */
 public abstract class Task {
     /**
-     * true when task is done, false otherwise
+     * true when sana.task is done, false otherwise
      */
     private boolean isDone;
 
     /**
-     * name of the task
+     * name of the sana.task
      */
     private String taskName;
 
     /**
-     * Constructor for the task object
+     * Constructor for the sana.task object
      *
-     * @param taskName  name of the task
+     * @param taskName  name of the sana.task
      */
     public Task(String taskName) {
         this.taskName = taskName;
@@ -27,17 +27,17 @@ public abstract class Task {
     }
 
     /**
-     * Constructor for the task object
+     * Constructor for the sana.task object
      *
-     * @param taskName  the task name
-     * @param isDone      whether the task is done
+     * @param taskName  the sana.task name
+     * @param isDone      whether the sana.task is done
      */
     public Task(String taskName, boolean isDone) {
         this.taskName = taskName;
         this.isDone = isDone;
     }
     /**
-     * Returns the task name
+     * Returns the sana.task name
      *
      * @return taskName
      */
@@ -47,7 +47,7 @@ public abstract class Task {
     }
 
     /**
-     * Returns whether the task is done
+     * Returns whether the sana.task is done
      * @return  done
      */
     public boolean isDone() {
@@ -55,18 +55,18 @@ public abstract class Task {
     }
 
     /**
-     * Sets the task to done or not
+     * Sets the sana.task to done or not
      *
-     * @param done  sets the task's completion
+     * @param done  sets the sana.task's completion
      */
     public void setDone(boolean done) {
         this.isDone = done;
     }
 
     /**
-     * Converts task into a string to be stored in mem
+     * Converts sana.task into a string to be stored in mem
      *
-     * @return  String representation of the task in mem
+     * @return  String representation of the sana.task in mem
      */
     public abstract String taskToMemStr();
 

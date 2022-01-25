@@ -1,3 +1,5 @@
+package sana;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -5,6 +7,8 @@ import java.io.FileWriter;
 
 import java.util.LinkedList;
 import java.util.Scanner;
+
+import sana.task.*;
 
 /**
  * The Memory class abstracts the leading and saving of tasks given to Sana
@@ -66,7 +70,7 @@ public class Memory {
         LinkedList<Task> taskList = new LinkedList<>();
         while (s.hasNext()) {
             String task = s.nextLine();
-            if (task.charAt(0) == 'T') { // a todo task
+            if (task.charAt(0) == 'T') { // a todo sana.task
                 taskList.add(ToDo.memToTask(task));
                 /**
                 try {
@@ -75,9 +79,9 @@ public class Memory {
 
                 }
                  */
-            } else if (task.charAt(0) == 'D') { // a Deadline task
+            } else if (task.charAt(0) == 'D') { // a Deadline sana.task
                 taskList.add(Deadline.memToTask(task));
-            } else if (task.charAt(0) == 'E') { // an Event task
+            } else if (task.charAt(0) == 'E') { // an Event sana.task
                 taskList.add(Event.memToTask(task));
             }
         }

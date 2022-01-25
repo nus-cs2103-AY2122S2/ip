@@ -1,4 +1,8 @@
+package sana;
+
 import java.util.LinkedList;
+
+import sana.task.*;
 
 /**
  * This object represents a list of tasks
@@ -45,27 +49,27 @@ public class TaskList {
     }
 
     /**
-     * Returns the task at the index given
+     * Returns the sana.task at the index given
      *
-     * @param index     index of the task to be returned
+     * @param index     index of the sana.task to be returned
      */
     public Task getTask(int index) {
         return taskList.get(index);
     }
 
     /**
-     * Adds a task to the tasklist
+     * Adds a sana.task to the tasklist
      *
-     * @param task      task to be added
+     * @param task      sana.task to be added
      */
     public void addTask(Task task) {
         taskList.add(task);
     }
 
     /**
-     * Removes the task at the index given
+     * Removes the sana.task at the index given
      *
-     * @param index     index of the task to be removed
+     * @param index     index of the sana.task to be removed
      */
     public void removeTask(int index) {
         taskList.remove(index);

@@ -1,8 +1,11 @@
+package sana;
+
 import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
 
-import java.util.Date;
-import java.util.LinkedList;
+import sana.exception.*;
+import sana.task.*;
+
 
 /**
  * Sana is a BIG program!
@@ -100,15 +103,15 @@ public class Sana {
         } catch (DateTimeParseException e) {
             System.out.println("Give your date in YYYY-MM-DD format!");
         } catch (NumberFormatException e) {
-            System.out.println("I don't know what task you're referring to!");
+            System.out.println("I don't know what sana.task you're referring to!");
         }
         ui.border();
     }
 
     /**
-     * This method removes a task from the userTasks list
+     * This method removes a sana.task from the userTasks list
      *
-     * @param taskIndex The index of the task to be removed
+     * @param taskIndex The index of the sana.task to be removed
      */
     private void delete(int taskIndex) throws OutOfBoundsTaskException {
         if (taskIndex < 0 || taskIndex >= userTasks.taskAmt()) {
@@ -171,10 +174,10 @@ public class Sana {
     }
 
     /**
-     * This method marks the task located at the index as done or not done
+     * This method marks the sana.task located at the index as done or not done
      *
-     * @param taskIndex     the index of the task to be marked done
-     * @param completion    the completion of the task
+     * @param taskIndex     the index of the sana.task to be marked done
+     * @param completion    the completion of the sana.task
      */
     private void mark(int taskIndex, boolean completion) throws OutOfBoundsTaskException {
         if (taskIndex < 0 || taskIndex >= userTasks.taskAmt()) {

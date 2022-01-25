@@ -1,3 +1,5 @@
+package sana.task;
+
 /**
  * This class represents the ToDo tasks
  *
@@ -8,7 +10,7 @@ public class ToDo extends Task {
     /**
      * Constructor for ToDo objects
      *
-     * @param taskName  the task name
+     * @param taskName  the sana.task name
      */
     public ToDo(String taskName) {
         super(taskName);
@@ -17,8 +19,8 @@ public class ToDo extends Task {
     /**
      * Constructor for ToDo objects
      *
-     * @param taskName  the task name
-     * @param isDone      whether the task is done
+     * @param taskName  the sana.task name
+     * @param isDone      whether the sana.task is done
      */
     public ToDo(String taskName, boolean isDone) {
         super(taskName, isDone);

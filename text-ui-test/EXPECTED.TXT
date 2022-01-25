@@ -6,17 +6,17 @@ _____________________________________________
 Here's your tasks!
 _____________________________________________
 _____________________________________________
-I've added your task!
+I've added your sana.task!
 [T][ ] borrow book
 You have 1 things here. Time to get working!
 _____________________________________________
 _____________________________________________
-I've added your task!
+I've added your sana.task!
 [D][ ] return book (by: 1st Feb)
 You have 2 things here. Time to get working!
 _____________________________________________
 _____________________________________________
-I've added your task!
+I've added your sana.task!
 [E][ ] meeting (at: 20th Jan 2-4pm)
 You have 3 things here. Time to get working!
 _____________________________________________
