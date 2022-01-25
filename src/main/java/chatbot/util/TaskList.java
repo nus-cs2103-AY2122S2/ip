@@ -17,6 +17,9 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Represents a list of Tasks managed by ChatBot for the user.
+ */
 public class TaskList {
 
     private static final String TODO = "todo";
@@ -27,6 +30,9 @@ public class TaskList {
     private final Set<String> set;
     private final Set<String> validTypes;
 
+    /**
+     * Instantiates a new Task list.
+     */
     public TaskList() {
         this.list = new ArrayList<>();
         this.set = new HashSet<>();
@@ -37,24 +43,52 @@ public class TaskList {
         this.validTypes.add(EVENT);
     }
 
+    /**
+     * Gets the task at the specified index.
+     *
+     * @param index The index of the task
+     * @return The task
+     */
     public Task getTask(int index) {
         return list.get(index);
     }
 
+    /**
+     * Gets the number of tasks currently in this TaskList.
+     *
+     * @return The size of the TaskList.
+     */
     public int getNumTasks() {
         return list.size();
     }
 
+    /**
+     * Determines whether this TaskList is empty or not.
+     *
+     * @return True if this TaskList is empty. Else, return false.
+     */
     public boolean isEmpty() {
         return list.isEmpty();
     }
 
+    /**
+     * Determines whether the given index is valid or not.
+     *
+     * @param index The index input by the user.
+     * @return True if 0 < index < size of TaskList. Else, return false.
+     */
     public Boolean isValidIndex(int index) {
         return index >= 0 && index < list.size();
     }
 
-    public void load(File f) throws ChatBotException {
-        try (Scanner sc = new Scanner(f)) {
+    /**
+     * Loads the tasks saved in the save file into this TaskList.
+     *
+     * @param saveFile The save file.
+     * @throws ChatBotException If the save file cannot be found, or it has corrupted data.
+     */
+    public void load(File saveFile) throws ChatBotException {
+        try (Scanner sc = new Scanner(saveFile)) {
             while (sc.hasNext()) {
                 String[] data = sc.nextLine().split("&");
                 String type = data[0];
@@ -93,13 +127,19 @@ public class TaskList {
         }
     }
 
-    public void save(File f) throws ChatBotException {
-        try (FileWriter fw = new FileWriter(f)) {
+    /**
+     * Saves tasks in this TaskList in the save file.
+     *
+     * @param saveFile The save file.
+     * @throws ChatBotException If I/O error occurs while writing to the save file.
+     */
+    public void save(File saveFile) throws ChatBotException {
+        try (FileWriter fw = new FileWriter(saveFile)) {
             for (Task t : list) {
                 String type = t.getType();
                 String title = t.getTitle();
-                String done = t.isCompleted();
-                Timestamp datetime = t.getDateTime();
+                String done = t.getDone();
+                Timestamp datetime = t.getTimestamp();
 
                 String data = String.format("%s&%s&%s", type, done, title);
                 if (datetime != null) {
@@ -118,7 +158,15 @@ public class TaskList {
         }
     }
 
-    public String add(String[] titleArgs, String[] otherArgs)
+    /**
+     * Adds a Deadline or an Event to this TaskList.
+     *
+     * @param titleArgs The title arguments parsed by the Parser.
+     * @param timestampArgs The timestamp arguments parsed by the Parser.
+     * @return The response to be outputted by the UI.
+     * @throws ChatBotException If one or both of the arguments are formatted incorrectly.
+     */
+    public String add(String[] titleArgs, String[] timestampArgs)
         throws ChatBotException {
         String type = titleArgs[0];
         if (!validTypes.contains(type)) {
@@ -132,7 +180,7 @@ public class TaskList {
                 )
             );
         }
-        if (otherArgs.length <= 1) {
+        if (timestampArgs.length <= 1) {
             throw new ChatBotException(
                 String.format(
                     "You need to key in %s traveller!",
@@ -144,7 +192,7 @@ public class TaskList {
         }
 
         String title = combineArgs(titleArgs);
-        String other = combineArgs(otherArgs);
+        String other = combineArgs(timestampArgs);
 
         if (set.contains(title)) {
             throw new ChatBotException(
@@ -157,7 +205,7 @@ public class TaskList {
             set.add(title);
             switch (type) {
                 case DEADLINE:
-                    if (!otherArgs[0].equals("by")) {
+                    if (!timestampArgs[0].equals("by")) {
                         throw new ChatBotException(
                             "The correct format for adding a deadline is deadline <name of task> /by <timestamp of task>"
                         );
@@ -171,7 +219,7 @@ public class TaskList {
                         );
                     }
                 case EVENT:
-                    if (!otherArgs[0].equals("at")) {
+                    if (!timestampArgs[0].equals("at")) {
                         throw new ChatBotException(
                             "The correct format for adding an event is event <name of task> /at <timestamp of task>"
                         );
@@ -190,6 +238,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adda a ToDo to this TaskList.
+     *
+     * @param args the arguments parsed by the Parser.
+     * @return The response to be outputted by the UI.
+     * @throws ChatBotException If the arguments are formatted incorrectly.
+     */
     public String addToDo(String[] args) throws ChatBotException {
         if (!validTypes.contains(args[0])) {
             throw new ChatBotException();
@@ -216,6 +271,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Delete a task from this TaskList.
+     *
+     * @param index The index of the task to be deleted.
+     * @return The response to be outputted by the UI.
+     * @throws ChatBotException If the task index is invalid.
+     */
     public String delete(int index) throws ChatBotException {
         if (!isValidIndex(index).equals(true)) {
             throw new ChatBotException(
@@ -242,6 +304,12 @@ public class TaskList {
         return title;
     }
 
+    /**
+     * Prints all Tasks in the TaskList.
+     *
+     * @return The string format of the TaskList to be outputted by the UI.
+     * @throws ChatBotException If the TaskList is empty.
+     */
     public String summary() throws ChatBotException {
         if (isEmpty()) {
             throw new ChatBotException(
@@ -252,10 +320,16 @@ public class TaskList {
         return listAsString(list);
     }
 
+    /**
+     * Prints all Tasks in the TaskList which occur or are due on the specified date.
+     *
+     * @param date The date.
+     * @return The string format of the filtered TaskList to be outputted by the UI.
+     */
     public String getTasksOnDate(Timestamp date) {
         List<Task> filtered = list
             .stream()
-            .filter(t -> date.equals(t.getDateTime()))
+            .filter(t -> date.equals(t.getTimestamp()))
             .collect(Collectors.toList());
         if (filtered.isEmpty()) {
             return "You have no tasks on this date traveller!";
@@ -277,9 +351,15 @@ public class TaskList {
         return res;
     }
 
+    /**
+     * Marks the specified Task in the TaskList as complete.
+     *
+     * @param index The index of the task to be marked.
+     * @return The response to be outputted by the UI.
+     */
     public String mark(int index) {
         Task task = list.get(index);
-        if (task.isCompleted().equals("X")) {
+        if (task.getDone().equals("X")) {
             return "This task was already completed! No need to mark it again.";
         } else {
             task.mark();
@@ -290,9 +370,15 @@ public class TaskList {
         }
     }
 
+    /**
+     * Unmarks the specified Task in the TaskList, indicating that it is incomplete.
+     *
+     * @param index The index of the task to be unmarked.
+     * @return The response to be outputted by the UI.
+     */
     public String unmark(int index) {
         Task task = list.get(index);
-        if (!task.isCompleted().equals("X")) {
+        if (!task.getDone().equals("X")) {
             return "This task has not been completed yet! No need to unmark it.";
         } else {
             task.unmark();

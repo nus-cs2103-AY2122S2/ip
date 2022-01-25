@@ -7,11 +7,20 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+/**
+ * Represents a date or a combination of date and time.
+ */
 public class Timestamp {
 
     private final LocalDate date;
     private final LocalTime time;
 
+    /**
+     * Instantiates a new Timestamp.
+     *
+     * @param input The input given by the user.
+     * @throws ChatBotException If user input is of an invalid format.
+     */
     public Timestamp(String input) throws ChatBotException {
         String[] firstSplit = input.split(" ");
         String dateHalf = firstSplit[0];
@@ -49,10 +58,20 @@ public class Timestamp {
         }
     }
 
+    /**
+     * Gets date.
+     *
+     * @return The date of this Timestamp.
+     */
     public LocalDate getDate() {
         return date;
     }
 
+    /**
+     * Gets time.
+     *
+     * @return The time of this Timestamp.
+     */
     public LocalTime getTime() {
         return time;
     }
@@ -82,6 +101,11 @@ public class Timestamp {
         return false;
     }
 
+    /**
+     * Convert Timestamp into a String format appropriate for being saved in the save file.
+     *
+     * @return The formatted save string.
+     */
     public String saveString() {
         if (date != null) {
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(

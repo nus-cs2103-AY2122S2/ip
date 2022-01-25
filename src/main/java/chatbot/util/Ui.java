@@ -2,6 +2,9 @@ package chatbot.util;
 
 import java.util.Random;
 
+/**
+ * Represents a user interaction handler.
+ */
 public class Ui {
 
     private static final String BORDER =
@@ -27,10 +30,18 @@ public class Ui {
 
     private final Random random;
 
+    /**
+     * Instantiates a new Ui.
+     */
     public Ui() {
         this.random = new Random();
     }
 
+    /**
+     * Greets the user when the ChatBot is started up.
+     *
+     * @param isEmpty Boolean indicating whether the user's task list is empty or not.
+     */
     public void greet(boolean isEmpty) {
         System.out.println(BORDER + "\n");
         chat("Greetings, traveller!");
@@ -45,16 +56,27 @@ public class Ui {
 
     }
 
+    /**
+     * Bids farewell to the user when the ChatBot is closed.
+     */
     public void bye() {
         chat("Goodbye traveller! Hope to see you again soon!");
         System.out.println(BORDER);
     }
 
+    /**
+     * Outputs a message from the ChatBot to the user.
+     *
+     * @param message The message.
+     */
     public void chat(String message) {
         System.out.print("Innkeeper: ");
         System.out.println(message + "\n");
     }
 
+    /**
+     * Prompts the user for a command input.
+     */
     public void prompt() {
         System.out.println(BORDER + "\n");
         chat("What can I do for you today?");
@@ -62,16 +84,26 @@ public class Ui {
         System.out.print("\nYou: ");
     }
 
+    /**
+     * Indicates to the user that some error has occurred.
+     *
+     * @param errorMessage The error message.
+     */
     public void error(String errorMessage) {
         chat(errorMessage);
         chat("You can type guide for a list of valid commands to use!");
     }
 
-    public String getRandomGreetingQuote() {
+    private String getRandomGreetingQuote() {
         int randomIndex = random.nextInt(GREETING_QUOTES.length);
         return GREETING_QUOTES[randomIndex];
     }
 
+    /**
+     * Prints the number of tasks in the user's task list.
+     *
+     * @param numTasks The number tasks in the user's task list.
+     */
     public void printNumTasks(int numTasks) {
         chat(
             String.format(
@@ -82,6 +114,9 @@ public class Ui {
         );
     }
 
+    /**
+     * Prints a guide for the user containing all valid commands and their formats.
+     */
     public void printGuide() {
         chat("Here is a list of commands that you can use traveller!");
         for (int i = 0; i < GUIDE.length - 2; i++) {
