@@ -3,7 +3,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
 public class TaskTest {
+
+    /**
+     * Testing method
+     */
     @Test
     public void getDescription_and_getStatusIcon_Test1() {
         Task t = new Task("testing");
@@ -11,6 +16,9 @@ public class TaskTest {
         assertEquals(" ", t.getStatusIcon());
     }
 
+    /**
+     * Testing method
+     */
     @Test
     public void getDescription_and_getStatusIcon_Test2() {
         Task t = new Task("testing123");

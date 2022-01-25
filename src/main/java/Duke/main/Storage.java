@@ -6,6 +6,9 @@ import Duke.task.TaskList;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * This class use to load and write data
+ */
 public class Storage {
     public String filePath;
 
@@ -13,6 +16,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * save taskList to a file
+     * @param taskList contain data to be saved
+     * @throws IOException handle IO errors
+     */
     public void writeToFile(TaskList taskList) throws IOException {
         FileOutputStream fos = new FileOutputStream(filePath);
         ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -20,6 +28,12 @@ public class Storage {
         oos.close();
     }
 
+    /**
+     * load the saved taskList from file
+     * @return the data read from a file
+     * @throws IOException handle IO errors
+     * @throws ClassNotFoundException handle other errors
+     */
     public ArrayList<Task> readFromFile() throws IOException, ClassNotFoundException {
         FileInputStream file = new FileInputStream(filePath);
         ObjectInputStream ois = new ObjectInputStream(file);

@@ -8,12 +8,22 @@ import Duke.task.ToDo;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parser class is to parse user commands into strings and how to read the strings
+ */
 public class Parser {
     public Storage storage;
     public TaskList taskList;
     public Ui ui;
     public String input;
 
+    /**
+     * Constructor of Parser class
+     * @param storage where to load/read input data
+     * @param taskList data to load/store
+     * @param ui user interface
+     * @param input user input
+     */
     public Parser(Storage storage, TaskList taskList, Ui ui, String input) {
         this.storage = storage;
         this.taskList = taskList;
@@ -21,6 +31,11 @@ public class Parser {
         this.input = input;
     }
 
+    /**
+     * to check whether an input contains integer
+     * @param str a string of inputs
+     * @return true if contains an integer, else false
+     */
     public static boolean isInteger(String str) {
         if (str == null) {
             return false;
@@ -33,7 +48,10 @@ public class Parser {
         return true;
     }
 
-    public void userCommand() throws IOException, ClassNotFoundException {
+    /**
+     * Parse the user command and action taken
+     */
+    public void userCommand() throws IOException {
         String inputArr[] = input.split(" ", 2);
         if (inputArr[0].equals("bye")) {
             Ui.byeMessage();
