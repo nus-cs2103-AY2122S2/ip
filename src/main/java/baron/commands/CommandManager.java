@@ -2,15 +2,15 @@ package baron.commands;
 
 import baron.tasks.TaskManager;
 import baron.tasks.TaskType;
-import baron.util.StorageManager;
+import baron.util.Storage;
 
 public class CommandManager {
     private final TaskManager taskManager;
-    private final StorageManager storageManager;
+    private final Storage storage;
 
-    public CommandManager(TaskManager taskManager, StorageManager storageManager) {
+    public CommandManager(TaskManager taskManager, Storage storage) {
         this.taskManager = taskManager;
-        this.storageManager = storageManager;
+        this.storage = storage;
     }
 
     public Command parseCommand(String fullCommand) {
@@ -34,17 +34,17 @@ public class CommandManager {
 
             switch (splitString[0]) {
                 case "mark":
-                    return new MarkTaskCommand(this.taskManager, this.storageManager, commandArg);
+                    return new MarkTaskCommand(this.taskManager, this.storage, commandArg);
                 case "unmark":
-                    return new UnmarkTaskCommand(this.taskManager, this.storageManager, commandArg);
+                    return new UnmarkTaskCommand(this.taskManager, this.storage, commandArg);
                 case "todo":
-                    return new AddTaskCommand(this.taskManager, this.storageManager, TaskType.TODO, commandArg);
+                    return new AddTaskCommand(this.taskManager, this.storage, TaskType.TODO, commandArg);
                 case "deadline":
-                    return new AddTaskCommand(this.taskManager, this.storageManager, TaskType.DEADLINE, commandArg);
+                    return new AddTaskCommand(this.taskManager, this.storage, TaskType.DEADLINE, commandArg);
                 case "event":
-                    return new AddTaskCommand(this.taskManager, this.storageManager, TaskType.EVENT, commandArg);
+                    return new AddTaskCommand(this.taskManager, this.storage, TaskType.EVENT, commandArg);
                 case "delete":
-                    return new DeleteTaskCommand(this.taskManager, this.storageManager, commandArg);
+                    return new DeleteTaskCommand(this.taskManager, this.storage, commandArg);
                 default:
                     return new InvalidCommand();
             }

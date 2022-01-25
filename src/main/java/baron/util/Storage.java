@@ -16,11 +16,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class StorageManager {
+public class Storage {
     private static final String FILE_DELIMITER = "rwN>fox8@j`XNc;CA#FYzLogY.5Ze";
     private final File file;
 
-    public StorageManager(String relativeFilePath) {
+    public Storage(String relativeFilePath) {
         this.file = new File(relativeFilePath);
     }
 
@@ -52,7 +52,7 @@ public class StorageManager {
             try {
                 FileWriter fileWriter = new FileWriter(this.file);
                 for (Task task: taskList) {
-                    fileWriter.write(task.toSaveString(StorageManager.FILE_DELIMITER) + "\n");
+                    fileWriter.write(task.toSaveString(Storage.FILE_DELIMITER) + "\n");
                 }
                 fileWriter.close();
             } catch (IOException e) {
@@ -64,7 +64,7 @@ public class StorageManager {
     }
 
     private Task parseTaskString(String taskString) throws BaronException {
-        String[] taskStringArray = taskString.split(StorageManager.FILE_DELIMITER, 4);
+        String[] taskStringArray = taskString.split(Storage.FILE_DELIMITER, 4);
         if (taskStringArray.length < 3 || taskStringArray.length > 4) {
             throw new BaronException(Messages.MESSAGE_INVALID_FILE_FORMAT);
         } else {

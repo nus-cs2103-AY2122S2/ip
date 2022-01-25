@@ -4,16 +4,16 @@ import baron.exceptions.BaronException;
 import baron.messages.Messages;
 import baron.tasks.Task;
 import baron.tasks.TaskManager;
-import baron.util.StorageManager;
+import baron.util.Storage;
 
 public class DeleteTaskCommand extends Command {
     private final TaskManager taskManager;
     private final String commandArgs;
-    private final StorageManager storageManager;
+    private final Storage storage;
 
-    public DeleteTaskCommand(TaskManager taskManager, StorageManager storageManager, String commandArgs) {
+    public DeleteTaskCommand(TaskManager taskManager, Storage storage, String commandArgs) {
         this.taskManager = taskManager;
-        this.storageManager = storageManager;
+        this.storage = storage;
         this.commandArgs = commandArgs;
     }
 
@@ -23,7 +23,7 @@ public class DeleteTaskCommand extends Command {
             int index = CommandParser.parseTaskIntArg(this.commandArgs);
             Task deletedTask = this.taskManager.deleteTask(index);
             try {
-                this.storageManager.save(this.taskManager.getAllTasks());
+                this.storage.save(this.taskManager.getAllTasks());
             } catch (BaronException e) {
                 this.taskManager.revertChanges();
                 throw e;

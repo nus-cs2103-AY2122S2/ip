@@ -5,26 +5,28 @@ import baron.commands.CommandManager;
 import baron.exceptions.BaronException;
 import baron.printer.Printer;
 import baron.tasks.TaskManager;
-import baron.util.StorageManager;
+import baron.util.Storage;
 
 import java.util.Scanner;
 
 public class Baron {
-    Scanner inputScanner;
-    TaskManager taskManager;
-    CommandManager commandManager;
-    StorageManager storageManager;
+    private final Scanner inputScanner;
+    private final TaskManager taskManager;
+    private final CommandManager commandManager;
+    private final Storage storage;
 
     public Baron(String relativeFilePath) {
+        TaskManager taskManagerTemp;
         this.inputScanner = new Scanner(System.in);
-        this.storageManager = new StorageManager(relativeFilePath);
+        this.storage = new Storage(relativeFilePath);
         try {
-            this.taskManager = new TaskManager(this.storageManager.load());
+            taskManagerTemp = new TaskManager(this.storage.load());
         } catch (BaronException e) {
             Printer.printCommandOutput(e.toString());
-            this.taskManager = new TaskManager();
+            taskManagerTemp = new TaskManager();
         }
-        this.commandManager = new CommandManager(this.taskManager, this.storageManager);
+        this.taskManager = taskManagerTemp;
+        this.commandManager = new CommandManager(this.taskManager, this.storage);
     }
 
     private void start() {
@@ -40,7 +42,7 @@ public class Baron {
         }
         while (!command.isByeCommand());
         try {
-            this.storageManager.save(this.taskManager.getAllTasks());
+            this.storage.save(this.taskManager.getAllTasks());
         } catch (BaronException e) {
             Printer.printCommandOutput(e.toString());
         }

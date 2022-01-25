@@ -5,17 +5,17 @@ import baron.messages.Messages;
 import baron.tasks.Task;
 import baron.tasks.TaskManager;
 import baron.tasks.TaskType;
-import baron.util.StorageManager;
+import baron.util.Storage;
 
 public class AddTaskCommand extends Command {
     private final TaskManager taskManager;
-    private final StorageManager storageManager;
+    private final Storage storage;
     private final String commandArg;
     private final TaskType taskType;
 
-    public AddTaskCommand(TaskManager taskManager, StorageManager storageManager, TaskType taskType, String commandArg) {
+    public AddTaskCommand(TaskManager taskManager, Storage storage, TaskType taskType, String commandArg) {
         this.taskManager = taskManager;
-        this.storageManager = storageManager;
+        this.storage = storage;
         this.commandArg = commandArg;
         this.taskType = taskType;
     }
@@ -28,7 +28,7 @@ public class AddTaskCommand extends Command {
         try {
             Task addedTask = this.taskManager.addTask(this.taskType, this.commandArg);
             try {
-                this.storageManager.save(this.taskManager.getAllTasks());
+                this.storage.save(this.taskManager.getAllTasks());
             } catch (BaronException e) {
                 this.taskManager.revertChanges();
                 throw e;

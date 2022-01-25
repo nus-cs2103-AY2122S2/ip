@@ -3,16 +3,16 @@ package baron.commands;
 import baron.exceptions.BaronException;
 import baron.messages.Messages;
 import baron.tasks.TaskManager;
-import baron.util.StorageManager;
+import baron.util.Storage;
 
 public class MarkTaskCommand extends Command {
     private final TaskManager taskManager;
     private final String commandArgs;
-    private final StorageManager storageManager;
+    private final Storage storage;
 
-    public MarkTaskCommand(TaskManager taskManager, StorageManager storageManager, String commandArgs) {
+    public MarkTaskCommand(TaskManager taskManager, Storage storage, String commandArgs) {
         this.taskManager = taskManager;
-        this.storageManager = storageManager;
+        this.storage = storage;
         this.commandArgs = commandArgs;
     }
 
@@ -23,7 +23,7 @@ public class MarkTaskCommand extends Command {
             index = CommandParser.parseTaskIntArg(this.commandArgs);
             if (this.taskManager.markTask(index)) {
                 try {
-                    this.storageManager.save(this.taskManager.getAllTasks());
+                    this.storage.save(this.taskManager.getAllTasks());
                 } catch (BaronException e) {
                     this.taskManager.unmarkTask(index);
                     throw e;
