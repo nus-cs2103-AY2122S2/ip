@@ -16,25 +16,25 @@
 	You have no task in your list.
 	____________________________________________________________
 	____________________________________________________________
-	OOPS!!! You did not provide me with any command.
+	OOPS!!! I'm sorry, but I don't know what that means :-(
 	____________________________________________________________
 	____________________________________________________________
 	OOPS!!! The description of "mark" cannot be empty.
 	____________________________________________________________
 	____________________________________________________________
-	OOPS!!! Your list is empty!
+	OOPS!!! The index you have provided is invalid!
 	____________________________________________________________
 	____________________________________________________________
 	OOPS!!! The description of "unmark" cannot be empty.
 	____________________________________________________________
 	____________________________________________________________
-	OOPS!!! Your list is empty!
+	OOPS!!! The index you have provided is invalid!
 	____________________________________________________________
 	____________________________________________________________
 	OOPS!!! The description of "delete" cannot be empty.
 	____________________________________________________________
 	____________________________________________________________
-	OOPS!!! Your list is empty!
+	OOPS!!! The index you have provided is invalid!
 	____________________________________________________________
 	____________________________________________________________
 	OOPS!!! The description of "todo" cannot be empty.
@@ -64,22 +64,10 @@
 	Now you have 3 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
-	Got it. I've added this task:
-	  [T][ ] join sports club
-	Now you have 4 tasks in the list.
-	____________________________________________________________
-	____________________________________________________________
-	Got it. I've added this task:
-	  [T][ ] borrow book
-	Now you have 5 tasks in the list.
-	____________________________________________________________
-	____________________________________________________________
 	Here are the tasks in your list:
 	1. [T][ ] read book
 	2. [D][ ] return book (by: June 6th)
 	3. [E][ ] project meeting (at: Aug 6th 2-4pm)
-	4. [T][ ] join sports club
-	5. [T][ ] borrow book
 	____________________________________________________________
 	____________________________________________________________
 	Nice! I've marked this task as done:
@@ -100,54 +88,23 @@
 	  [D][ ] return book (by: June 6th)
 	____________________________________________________________
 	____________________________________________________________
-	Nice! I've marked this task as done:
-	  [D][X] return book (by: June 6th)
-	____________________________________________________________
-	____________________________________________________________
-	Nice! I've marked this task as done:
-	  [T][X] join sports club
-	____________________________________________________________
-	____________________________________________________________
 	Here are the tasks in your list:
 	1. [T][X] read book
-	2. [D][X] return book (by: June 6th)
+	2. [D][ ] return book (by: June 6th)
 	3. [E][ ] project meeting (at: Aug 6th 2-4pm)
-	4. [T][X] join sports club
-	5. [T][ ] borrow book
-	____________________________________________________________
-	____________________________________________________________
-	Got it. I've added this task:
-	  [D][ ] return book (by: sunday)
-	Now you have 6 tasks in the list.
-	____________________________________________________________
-	____________________________________________________________
-	Got it. I've added this task:
-	  [E][ ] project meeting (at: Mon 2-4pm)
-	Now you have 7 tasks in the list.
-	____________________________________________________________
-	____________________________________________________________
-	Here are the tasks in your list:
-	1. [T][X] read book
-	2. [D][X] return book (by: June 6th)
-	3. [E][ ] project meeting (at: Aug 6th 2-4pm)
-	4. [T][X] join sports club
-	5. [T][ ] borrow book
-	6. [D][ ] return book (by: sunday)
-	7. [E][ ] project meeting (at: Mon 2-4pm)
 	____________________________________________________________
 	____________________________________________________________
 	Noted. I've removed this task:
 	  [E][ ] project meeting (at: Aug 6th 2-4pm)
-	Now you have 6 tasks in the list.
+	Now you have 2 tasks in the list.
+	____________________________________________________________
+	____________________________________________________________
+	OOPS!!! The index you have provided is invalid!
 	____________________________________________________________
 	____________________________________________________________
 	Here are the tasks in your list:
 	1. [T][X] read book
-	2. [D][X] return book (by: June 6th)
-	3. [T][X] join sports club
-	4. [T][ ] borrow book
-	5. [D][ ] return book (by: sunday)
-	6. [E][ ] project meeting (at: Mon 2-4pm)
+	2. [D][ ] return book (by: June 6th)
 	____________________________________________________________
 	____________________________________________________________
 	Bye. Hope to see you again soon!
