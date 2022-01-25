@@ -1,11 +1,13 @@
 package duke;
 
+import command.AddCommand;
 import command.Command;
+import command.DeleteCommand;
 import command.ExitCommand;
+import command.FindCommand;
 import command.ListCommand;
 import command.UpdateCommand;
-import command.AddCommand;
-import command.DeleteCommand;
+
 import task.TaskList;
 
 /**
@@ -33,6 +35,9 @@ public class Parser {
             break;
         case "list":
             c = new ListCommand(command, tokenizedCommand);
+            break;
+        case "find":
+            c = new FindCommand(command, tokenizedCommand);
             break;
         case "mark":
         case "unmark":
