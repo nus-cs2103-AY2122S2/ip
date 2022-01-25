@@ -7,6 +7,7 @@ public class Deadline extends Task {
     public Deadline(String name, LocalDateTime date) {
         super(name);
         super.type = "D";
+        super.setStatus(0);
         this.date = date;
     }
 

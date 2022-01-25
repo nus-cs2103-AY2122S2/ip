@@ -1,14 +1,14 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 public class Event extends Task {
-    private LocalDate date;
-    private LocalTime startTime;
-    private LocalTime endTime;
+    private final LocalDate date;
+    private final LocalTime startTime;
+    private final LocalTime endTime;
     public Event(String name, LocalDate date, LocalTime startTime, LocalTime endTime) {
         super(name);
+        super.setStatus(0);
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -17,7 +17,7 @@ public class Event extends Task {
 
     @Override
     public String printStatus() {
-        return "[E] " + Task.statusSymbols[super.getStatus()] + " " + this.toString() + " (at: "
+        return "[E] " + Task.statusSymbols[super.getStatus()] + " " + this + " (at: "
                 + this.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"))
                 + " from " + this.startTime.format(DateTimeFormatter.ofPattern("HH:mm")) + " to "
                 + this.endTime.format(DateTimeFormatter.ofPattern("HH:mm")) + ")";

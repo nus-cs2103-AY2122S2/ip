@@ -11,7 +11,6 @@ public abstract class Task implements Serializable {
 
     public Task(String name) {
         this.name = name;
-        this.status = 0;
     }
 
     public static Task addNewToDo(String input) {
