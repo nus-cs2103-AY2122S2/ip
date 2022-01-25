@@ -267,6 +267,15 @@ public class Parser {
         }
     }
 
+    private Command prepareFind(String request) {
+        if (request.strip().equals("find")) {
+            return new IncorrectCommand("Please provide me with keywords for the task(s) you would like to find.");
+        }
+
+        String parsedReq = request.substring(6);
+        return new FindCommand(parsedReq);
+    }
+
     /**
      * Parses input into a command for execution.
      *
@@ -290,6 +299,8 @@ public class Parser {
             return prepareEvent(input);
         } else if (input.startsWith("delete")) {
             return prepareDelete(input);
+        } else if (input.startsWith("find")) {
+            return prepareFind(input);
         } else {
             return new IncorrectCommand("My apologies, but it seems that I do not understand your request.");
         }

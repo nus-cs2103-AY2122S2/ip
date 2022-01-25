@@ -82,6 +82,22 @@ public class TaskList {
         return tasks.size();
     }
 
+    public boolean isEmpty() {
+        return listSize() == 0;
+    }
+
+    public TaskList filter(String keyword) {
+        TaskList filteredList = new TaskList(new ArrayList<>());
+
+        for (Task t : tasks) {
+            if (t.hasKeyword(keyword)) {
+                filteredList.addTask(t);
+            }
+        }
+
+        return filteredList;
+    }
+
     /**
      * Produces a string representation of the TaskList.
      *

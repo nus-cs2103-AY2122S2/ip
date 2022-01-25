@@ -62,6 +62,10 @@ public abstract class Task {
      */
     public abstract boolean isHasTime();
 
+    public boolean hasKeyword(String keyword) {
+        return description.contains(keyword);
+    }
+
     /**
      * Produces a string representation of the Task.
      *
