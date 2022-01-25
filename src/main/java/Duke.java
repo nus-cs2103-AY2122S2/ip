@@ -14,8 +14,8 @@ public class Duke {
         while (!input.equals("bye")) {
             try {
                 Parser.parse(input, taskList);
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (DukeException e) {
+                System.out.println(e);
             } finally {
                 input = scanner.nextLine();
             }

@@ -74,7 +74,6 @@ public class Parser {
                             + "    event <description> /by <time>\n" + Printer.BLANK_LINE);
                 }
                 String eventName = eventString[0];
-                System.out.println(eventName);
                 if (eventName.equals(" ")) {
                     throw new EmptyDescriptionException("\n" + Printer.BLANK_LINE
                             + "    Event name description cannot be empty!\n" + Printer.BLANK_LINE);
