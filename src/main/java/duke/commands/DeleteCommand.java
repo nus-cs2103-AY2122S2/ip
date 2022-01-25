@@ -18,7 +18,7 @@ public class DeleteCommand extends Command {
      * @param i the index of the task to be deleted
      */
     public DeleteCommand(int i) {
-        targetIndex = i;
+        targetIndex = i - 1;
     }
 
     @Override

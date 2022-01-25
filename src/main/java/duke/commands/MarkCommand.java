@@ -18,13 +18,14 @@ public class MarkCommand extends Command {
      * @param i the index of the task to be marked as done
      */
     public MarkCommand(int i) {
-        targetIndex = i;
+        targetIndex = i - 1;
     }
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task t = tasks.markTask(targetIndex);
         storage.save(tasks);
+
         return "Great job! I've marked the task as completed:\n" + ui.tab(t.toString());
     }
 

@@ -18,13 +18,14 @@ public class UnmarkCommand extends Command {
      * @param i the index of the task to be marked as undone
      */
     public UnmarkCommand(int i) {
-        targetIndex = i;
+        targetIndex = i - 1;
     }
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task t = tasks.unmarkTask(targetIndex);
         storage.save(tasks);
+
         return "No problem, I've marked the task as uncompleted:\n" + ui.tab(t.toString());
     }
 

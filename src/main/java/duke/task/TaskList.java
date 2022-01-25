@@ -25,7 +25,8 @@ public class TaskList {
      * @return the marked task
      */
     public Task markTask(int i) {
-        tasks.get(i).markAsDone();
+        tasks.get(i)
+                .markAsDone();
         return tasks.get(i);
     }
 
@@ -36,7 +37,8 @@ public class TaskList {
      * @return the marked task
      */
     public Task unmarkTask(int i) {
-        tasks.get(i).markAsUndone();
+        tasks.get(i)
+                .markAsUndone();
         return tasks.get(i);
     }
 
@@ -88,15 +90,19 @@ public class TaskList {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
+
         for (int i = 0; i < tasks.size(); i++) {
             s.append("    ");
-            s.append(i + 1).append(". ");
-            s.append(tasks.get(i));
+            s.append(i + 1)
+                    .append(". ");
+            s.append(tasks
+                    .get(i));
             // no new line after last task
             if (i + 1 < tasks.size()) {
                 s.append("\n");
             }
         }
+
         return s.toString();
     }
 }
