@@ -1,5 +1,11 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Duke {
     // Attributes
@@ -10,7 +16,8 @@ public class Duke {
      * Prints out the greeting message
      */
     public static void greet() {
-        System.out.println(LINE + "\n Hello! I'm Duke\n What can I do for you?\n" + LINE);
+        String output = LINE + "\n Hello! I'm Duke\n What can I do for you?\n" + LINE;
+        System.out.println(output);
     }
 
     /**
@@ -20,11 +27,9 @@ public class Duke {
      */
     public static void addTodo(String task) {
         LIST.add(new Todo(task));
-        System.out.println(LINE);
-        System.out.println(" Got it. I've added this task:");
-        System.out.println("   " + LIST.get(LIST.size() - 1).toString());
-        System.out.printf(" Now you have %d tasks in the list.\n", LIST.size());
-        System.out.println(LINE);
+        String output = LINE + "\n Got it. I've added this task:\n" + "   " + LIST.get(LIST.size() - 1).toString()
+                + String.format("\n Now you have %d tasks in the list.\n", LIST.size()) + LINE;
+        System.out.println(output);
     }
 
     /**
@@ -128,9 +133,76 @@ public class Duke {
         System.out.println(LINE + "\n Bye. Hope to see you again soon!\n" + LINE);
     }
 
-    public static void main(String[] args) {
-        greet();
+    public static void createDirectory() {
+        String home = System.getProperty("user.home");
+        java.nio.file.Path folderPath = java.nio.file.Paths.get(home, "data");
+        File folder = new File(String.valueOf(folderPath));
+        boolean folderCreated = folder.mkdir();
+        java.nio.file.Path filePath = java.nio.file.Paths.get(home, "data", "duke.txt");
+        try {
+            File file = new File(String.valueOf(filePath));
+            boolean fileCreated = file.createNewFile();
+        } catch (IOException e) {
+            System.out.println("An error occured while creating the file data.txt");
+        }
+    }
+
+    public static void updateFile(String filePath) throws IOException {
+        FileWriter fWriter = new FileWriter(String.valueOf(filePath));
+        BufferedWriter writer = new BufferedWriter(fWriter);
+        StringBuilder output = new StringBuilder();
+        for (Task task : LIST) {
+            output.append(task.getType()).append(" | ").append(task.getStatusIcon())
+                    .append(" | ").append(task.getDescription());
+            if (!task.getType().equals("T")) {
+                output.append(" | ").append(task.getBy());
+            }
+            output.append("\n");
+        }
+        writer.write(output.toString());
+        writer.close();
+    }
+
+    public static void readFile(BufferedReader reader) throws IOException {
+        String line;
+        while ((line = reader.readLine()) != null) {
+            String[] strArr;
+            Task task = new Task("");
+            strArr = line.split(" \\| ");
+            switch (strArr[0]) {
+                case "T":
+                    task = new Todo(strArr[2]);
+                    if (strArr[1].equals("1")) {
+                        task.setDone();
+                    }
+                    break;
+                case "D":
+                    task = new Deadline(strArr[2], strArr[3]);
+                    if (strArr[1].equals("X")) {
+                        task.setDone();
+                    }
+                    break;
+                case "E":
+                    task = new Event(strArr[2], strArr[3]);
+                    if (strArr[1].equals("X")) {
+                        task.setDone();
+                    }
+                    break;
+            }
+            LIST.add(task);
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
+        createDirectory();
+        String home = System.getProperty("user.home");
+        java.nio.file.Path filePath = java.nio.file.Paths.get(home, "data", "duke.txt");
+        FileReader fReader = new FileReader(String.valueOf(filePath));
+        BufferedReader reader = new BufferedReader(fReader);
+        readFile(reader);
+        reader.close();
+        greet();
         whileLoop:
         while (sc.hasNextLine()) {
             String usrInput = sc.next();
@@ -146,16 +218,19 @@ public class Duke {
                 case "mark": {
                     int taskNum = Integer.parseInt(sc.next());
                     mark(taskNum);
+                    updateFile(String.valueOf(filePath));
                     break;
                 }
                 case "unmark": {
                     int taskNum = Integer.parseInt(sc.next());
                     unmark(taskNum);
+                    updateFile(String.valueOf(filePath));
                     break;
                 }
                 case "delete": {
                     int taskNum = Integer.parseInt(sc.next());
                     delete(taskNum);
+                    updateFile(String.valueOf(filePath));
                     break;
                 }
                 case "todo": {
@@ -165,6 +240,7 @@ public class Duke {
                         break;
                     }
                     addTodo(usrInput.substring(1));
+                    updateFile(String.valueOf(filePath));
                     break;
                 }
                 case "deadline": {
@@ -174,6 +250,7 @@ public class Duke {
                         if (currStr.equals("/by")) {
                             String time = sc.nextLine();
                             addDeadline(task, time);
+                            updateFile(String.valueOf(filePath));
                             break;
                         } else {
                             task += " " + currStr;
@@ -188,6 +265,7 @@ public class Duke {
                         if (currStr.equals("/at")) {
                             String time = sc.nextLine();
                             addEvent(task, time);
+                            updateFile(String.valueOf(filePath));
                             break;
                         } else {
                             task += " " + currStr;
@@ -200,5 +278,6 @@ public class Duke {
                     break;
             }
         }
+        updateFile(String.valueOf(filePath));
     }
 }

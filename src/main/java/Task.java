@@ -2,10 +2,19 @@ public class Task {
     // attributes
     protected String description;
     protected boolean isDone;
+    protected String type;
+    protected String by;
 
     // constructor
     public Task(String description) {
         this.description = description;
+        this.isDone = false;
+        this.by = "";
+    }
+
+    public Task(String description, String by) {
+        this.description = description;
+        this.by = by;
         this.isDone = false;
     }
 
@@ -39,6 +48,14 @@ public class Task {
      */
     public void setNotDone() {
         this.isDone = false;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+    public String getBy() {
+        return this.by;
     }
 
     public String toString() {
