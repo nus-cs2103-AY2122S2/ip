@@ -79,7 +79,15 @@ public class Duke {
                             //echo = sc.nextLine();
                         }
 
-                    } else {
+                    } else if (echo.startsWith("delete")) {
+                        int number = Integer.parseInt(echo.substring(7));
+                        System.out.println("im here");
+                        Task task = arr.get(number - 1);
+                        arr.remove(number - 1);
+                        System.out.println(lines + "\n" + "Ok I've deleted this task: " + task +
+                                "\nThere are " + arr.size() + " task(s) in the list now." + "\n" + lines);
+                    }
+                    else {
                         try {
                             throw new IllegalArgumentException();
                         } catch (IllegalArgumentException e){
