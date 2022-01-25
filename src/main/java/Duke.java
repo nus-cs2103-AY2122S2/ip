@@ -1,5 +1,7 @@
-import java.io.*;
 import java.util.*;
+import java.io.*;
+import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
 
 /**
  * This program is used to add, list & mark the status of your current tasks.
@@ -105,25 +107,37 @@ public class Duke {
                 }
                 index++;
             } else if (str[0].equals("D")) {
-                if (str[1].equals("1")) {
-                    Task newTask = new Deadline(str[2], str[3], true);
-                    list.add(newTask);
-                } else {
-                    Task newTask = new Deadline(str[2], str[3], false);
-                    list.add(newTask);
+                try {
+                    if (str[1].equals("1")) {
+                        LocalDate date = LocalDate.parse(str[3]);
+                        Task newTask = new Deadline(str[2], date, true);
+                        list.add(newTask);
+                    } else {
+                        LocalDate date = LocalDate.parse(str[3]);
+                        Task newTask = new Deadline(str[2], date, false);
+                        list.add(newTask);
+                    }
+                    index++;
+                } catch (DateTimeParseException ex) {
+                    throw new DukeException("INVALID DATE FORMAT FOUND IN DUKE.TXT FILE. EXITING PROGRAM.");
                 }
-                index++;
             } else if (str[0].equals("E")) {
-                if (str[1].equals("1")) {
-                    Task newTask = new Event(str[2], str[3], true);
-                    list.add(newTask);
-                } else {
-                    Task newTask = new Event(str[2], str[3], false);
-                    list.add(newTask);
+                try {
+                    if (str[1].equals("1")) {
+                        LocalDate date = LocalDate.parse(str[3]);
+                        Task newTask = new Event(str[2], date, true);
+                        list.add(newTask);
+                    } else {
+                        LocalDate date = LocalDate.parse(str[3]);
+                        Task newTask = new Event(str[2], date, false);
+                        list.add(newTask);
+                    }
+                    index++;
+                } catch (DateTimeParseException ex) {
+                    throw new DukeException("INVALID DATE FORMAT FOUND IN DUKE.TXT FILE. EXITING PROGRAM.");
                 }
-                index++;
             } else {
-                throw new DukeException("Invalid Task found in duke.txt file");
+                throw new DukeException("INVALID TASK FOUND IN DUKE.TXT FILE. EXITING PROGRAM.");
             }
         }
     }
@@ -191,11 +205,16 @@ public class Duke {
         for (int i = 2; i < str2.length; i++) {
             desc = desc + " " + str2[i];
         }
-        Task newTask = new Deadline(desc, str[1], false);
-        list.add(newTask);
-        System.out.println("GOT IT. I'VE ADDED THIS TASK:");
-        System.out.println(newTask);
-        System.out.println("NOW YOU HAVE "+ list.size() + " TASKS IN THE LIST.");
+        try {
+            LocalDate date = LocalDate.parse(str[1]);
+            Task newTask = new Deadline(desc, date, false);
+            list.add(newTask);
+            System.out.println("GOT IT. I'VE ADDED THIS TASK:");
+            System.out.println(newTask);
+            System.out.println("NOW YOU HAVE "+ list.size() + " TASKS IN THE LIST.");
+        } catch (DateTimeParseException ex) {
+            throw new DukeException("INVALID DATE FORMAT.");
+        }
     }
 
     /**
@@ -217,11 +236,16 @@ public class Duke {
         for (int i = 2; i < str2.length; i++) {
             desc = desc + " " + str2[i];
         }
-        Task newTask = new Event(desc, str[1], false);
-        list.add(newTask);
-        System.out.println("GOT IT. I'VE ADDED THIS TASK:");
-        System.out.println(newTask);
-        System.out.println("NOW YOU HAVE "+ list.size() + " TASKS IN THE LIST.");
+        try {
+            LocalDate date = LocalDate.parse(str[1]);
+            Task newTask = new Event(desc, date, false);
+            list.add(newTask);
+            System.out.println("GOT IT. I'VE ADDED THIS TASK:");
+            System.out.println(newTask);
+            System.out.println("NOW YOU HAVE "+ list.size() + " TASKS IN THE LIST.");
+        } catch (DateTimeParseException ex) {
+            throw new DukeException("INVALID DATE FORMAT.");
+        }
     }
 
     /**

@@ -1,3 +1,6 @@
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
+
 /**
  * This class is a subclass of Task.
  * @author Sim Jun Heng
@@ -5,7 +8,7 @@
  */
 public class Event extends Task {
 
-  private String date;
+  private LocalDate date;
 
   /**
    * Method Constructor
@@ -13,7 +16,7 @@ public class Event extends Task {
    * @param desc the task description
    * @param date of the event
    */
-  public Event(String desc, String date, boolean done) {
+  public Event(String desc, LocalDate date, boolean done) {
     super(desc, done);
     this.date = date;
   }
@@ -21,10 +24,14 @@ public class Event extends Task {
   @Override
   public String toString() {
     String str = "[E]";
+    // Convert Current Date Format to MMM dd yyyy
+    String customPattern = "MMM dd yyyy";
+    DateTimeFormatter customFormat = DateTimeFormatter.ofPattern(customPattern);
+    String tempDate = customFormat.format(this.date);
     if (super.done) {
-      str += "[X] " + super.desc + " (at: " + this.date + ")";
+      str += "[X] " + super.desc + " (by: " + tempDate + ")";
     } else {
-      str += "[ ] " + super.desc + " (at: " + this.date + ")";
+      str += "[ ] " + super.desc + " (by: " + tempDate + ")";
     }
     return str;
   }
