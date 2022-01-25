@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Storage {
@@ -14,7 +17,7 @@ public class Storage {
         this.filepath = Paths.get(path);
     }
 
-    public ArrayList<Task> load() throws NoExistingDataException {
+    public ArrayList<Task> load() throws DukeException {
         try {
             File file = new File(filepath.toString());
             Scanner scanner = new Scanner(file);
@@ -30,12 +33,25 @@ public class Storage {
 
                 } else if (strTask.startsWith("[D")) {
                     String[] taskInfo = strTask.substring(7).split(" \\(by: ");
-                    tasks.add(new Deadline(taskInfo[0], taskInfo[1].substring(0, taskInfo[1].length() - 1), status));
+                    String time = taskInfo[1].substring(0, taskInfo[1].length() - 1);
+                    SimpleDateFormat parser = new SimpleDateFormat("d/M/yy HH:mm");
+                    try {
+                        Date dateTime = parser.parse(time);
+                        tasks.add(new Deadline(taskInfo[0], dateTime, status));
+                    } catch (ParseException e) {
+                        throw new InvalidDateTimeException("Invalid time format");
+                    }
 
                 } else if (strTask.startsWith("[E")) {
                     String[] taskInfo = strTask.substring(7).split(" \\(at: ");
-                    tasks.add(new Deadline(taskInfo[0], taskInfo[1].substring(0, taskInfo[1].length() - 1), status));
-
+                    String time = taskInfo[1].substring(0, taskInfo[1].length() - 1);
+                    SimpleDateFormat parser = new SimpleDateFormat("d/M/yy HH:mm");
+                    try {
+                        Date dateTime = parser.parse(time);
+                        tasks.add(new Event(taskInfo[0], dateTime, status));
+                    } catch (ParseException e) {
+                        throw new InvalidDateTimeException("Invalid time format");
+                    }
                 }
             }
             return tasks;
