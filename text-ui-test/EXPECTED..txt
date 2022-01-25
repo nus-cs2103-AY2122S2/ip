@@ -6,11 +6,10 @@ Hello from
 |____/ \__,_|_|\_\___|
 
 ********************************************************************************
-Roarrr.... I'm Burning Charizard, tasked to burnnn down your tasks.
-Which task shall we burn today?
+    Roarrr.... I'm Burning Charizard, tasked to burnnn down your tasks.
+    Which task shall we burn today?
 ********************************************************************************
 
-What should Charizard do next?
 ********************************************************************************
     Charizard is ready to burn task:
       [T][ ] read book
@@ -38,14 +37,14 @@ What should Charizard do next?
 What should Charizard do next?
 ********************************************************************************
     Charizard is ready to burn task:
-      [D][ ] return book (by: Sunday)
+      [D][ ] return book (by: Jan 26 2022 0200hrs)
     There are 2 tasks in the burning list.
 ********************************************************************************
 
 What should Charizard do next?
 ********************************************************************************
     Charizard is ready to burn task:
-      [E][ ] project meeting (at: Mon 2-4pm)
+      [E][ ] project meeting (at: Jan 26 2022 0200hrs)
     There are 3 tasks in the burning list.
 ********************************************************************************
 
@@ -53,19 +52,20 @@ What should Charizard do next?
 ********************************************************************************
     Charizard's burning wish list:
     1. [T][X] read book
-    2. [D][ ] return book (by: Sunday)
-    3. [E][ ] project meeting (at: Mon 2-4pm)
+    2. [D][ ] return book (by: Jan 26 2022 0200hrs)
+    3. [E][ ] project meeting (at: Jan 26 2022 0200hrs)
 ********************************************************************************
 
 What should Charizard do next?
 ********************************************************************************
-    OOPS! Charizard's can only remember numbers. Try specifying a task number.
+    Charizard's can only remember numbers. Try specifying a task number.
     (Use "list" command to see the tasks and their corresponding task number).
 ********************************************************************************
 
 What should Charizard do next?
 ********************************************************************************
-    OOPS! Task number does not exist. Charizard is confused..
+    Task number does not exist. Charizard is confused..
+    
 ********************************************************************************
 
 What should Charizard do next?
@@ -78,46 +78,48 @@ What should Charizard do next?
 ********************************************************************************
     Charizard's burning wish list:
     1. [T][ ] read book
-    2. [D][ ] return book (by: Sunday)
-    3. [E][ ] project meeting (at: Mon 2-4pm)
+    2. [D][ ] return book (by: Jan 26 2022 0200hrs)
+    3. [E][ ] project meeting (at: Jan 26 2022 0200hrs)
 ********************************************************************************
 
 What should Charizard do next?
 ********************************************************************************
-    OOPS! Please specify the name of new task to be burnt
+    Please specify the name of new task to be burnt
 ********************************************************************************
 
 What should Charizard do next?
 ********************************************************************************
-    OOPS! Charizard's can only remember numbers. Try specifying a task number.
+    Charizard's can only remember numbers. Try specifying a task number.
     (Use "list" command to see the tasks and their corresponding task number).
 ********************************************************************************
 
 What should Charizard do next?
 ********************************************************************************
-    OOPS! Task number does not exist. Charizard is confused..
+    Task number does not exist. Charizard is confused..
+    
 ********************************************************************************
 
 What should Charizard do next?
 ********************************************************************************
-    OOPS! Charizard insists of knowing both name and time of the new task.
+    Charizard remembers this move but cannot recognize the format.
     Try using "deadline <task_name> /by <deadline>".
 ********************************************************************************
 
 What should Charizard do next?
 ********************************************************************************
-    OOPS! Charizard can only remember one deadline per task.
-********************************************************************************
-
-What should Charizard do next?
-********************************************************************************
-    OOPS! Charizard insists of knowing both name and time of the new task.
+    Charizard remembers this move but cannot recognize the format.
     Try using "deadline <task_name> /by <deadline>".
 ********************************************************************************
 
 What should Charizard do next?
 ********************************************************************************
-    OOPS! Charizard insists of knowing both name and time of the new task.
+    Charizard remembers this move but cannot recognize the format.
+    Try using "deadline <task_name> /by <deadline>".
+********************************************************************************
+
+What should Charizard do next?
+********************************************************************************
+    Charizard remembers this move but cannot recognize the format.
     Try using "event <task_name> /by <event_time>".
 ********************************************************************************
 
@@ -125,24 +127,25 @@ What should Charizard do next?
 ********************************************************************************
     Charizard's burning wish list:
     1. [T][ ] read book
-    2. [D][ ] return book (by: Sunday)
-    3. [E][ ] project meeting (at: Mon 2-4pm)
+    2. [D][ ] return book (by: Jan 26 2022 0200hrs)
+    3. [E][ ] project meeting (at: Jan 26 2022 0200hrs)
 ********************************************************************************
 
 What should Charizard do next?
 ********************************************************************************
-    OOPS! Task number does not exist. Charizard is confused..
+    Task number does not exist. Charizard is confused..
+    
 ********************************************************************************
 
 What should Charizard do next?
 ********************************************************************************
-    OOPS! Charizard's can only remember numbers. Try specifying a task number.
+    Charizard's can only remember numbers. Try specifying a task number.
     (Use "list" command to see the tasks and their corresponding task number).
 ********************************************************************************
 
 What should Charizard do next?
 ********************************************************************************
-    OOPS! Charizard's can only remember numbers. Try specifying a task number.
+    Charizard's can only remember numbers. Try specifying a task number.
     (Use "list" command to see the tasks and their corresponding task number).
 ********************************************************************************
 
@@ -156,11 +159,12 @@ What should Charizard do next?
 What should Charizard do next?
 ********************************************************************************
     Charizard's burning wish list:
-    1. [D][ ] return book (by: Sunday)
-    2. [E][ ] project meeting (at: Mon 2-4pm)
+    1. [D][ ] return book (by: Jan 26 2022 0200hrs)
+    2. [E][ ] project meeting (at: Jan 26 2022 0200hrs)
 ********************************************************************************
 
 What should Charizard do next?
 ********************************************************************************
-Roarrr....Let's burn more tasks next time!
+    Roarrr....Let's burn more tasks next time!
 ********************************************************************************
+
