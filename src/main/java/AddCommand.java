@@ -7,7 +7,7 @@ public class AddCommand extends Command{
         try {
             Task task = Parser.parseToTask(this.userInput);
             taskManager.addTask(task);
-            Ui.showAddedTask(task, taskManager.size());
+            ui.showAddedTask(task, taskManager.size());
             storage.saveTaskManager(taskManager);
             return true;
         } catch (FailedTaskParseException exception){

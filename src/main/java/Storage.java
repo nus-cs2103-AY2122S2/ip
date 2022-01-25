@@ -30,7 +30,7 @@ public class Storage {
                     try {
                         Task t = Parser.parseToTaskFromFile(fileInput);
                         tasks.add(t);
-                    } catch (FailedTaskParseException exception) {
+                    } catch (DukeException exception) {
                         // UI.showError??
                         continue;
                     }

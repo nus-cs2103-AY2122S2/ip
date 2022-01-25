@@ -4,7 +4,7 @@ public class ListCommand extends Command{
     }
 
     public boolean execute(Storage storage, Ui ui, TaskManager taskManager){
-        Ui.showList(taskManager);
+        ui.showList(taskManager);
         return true;
     }
 }

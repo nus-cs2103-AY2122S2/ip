@@ -9,7 +9,7 @@ public class ExitCommand extends Command{
     }
 
     public boolean execute(Storage storage, Ui ui, TaskManager taskManager){
-        Ui.showBye();
+        ui.showBye();
         return true;
     }
 }

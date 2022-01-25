@@ -8,22 +8,16 @@ public class TaskManager {
         this.tasks = tasks;
     }
 
-    public boolean addTask(String s){
+    public boolean addTask(String s) throws DukeException{
         try {
-            Task t = Task.newTask(s);
+            Task t = Parser.parseToTask(s);
             tasks.add(t);
-            Ui.showAddedTask(t, tasks.size());
+            //Ui.showAddedTask(t, tasks.size());
 
             return true;
-        } catch (InvalidTaskDescriptionException i){
-            Ui.showInvalidTaskNameError();
-            return false;
-        } catch (InvalidTaskDataTimeException u){
-            Ui.showInvalidDateTimeError();
-            return false;
-        } catch (InvalidTaskTypeException t){
-            System.out.println(t.toString());
-            return false;
+        } catch (DukeException e){
+            String message = e.getMessage();
+            throw new DukeException(message + "/nUnable to add Task!");
         }
     }
     public void addTask(Task t){
@@ -32,16 +26,16 @@ public class TaskManager {
 
     public boolean deleteTask(int index){
         if (tasks.size() == 0){
-            Ui.showDeleteEmptyList();
+            //Ui.showDeleteEmptyList();
             return false;
         } else {
             if (index <= 0 || index > tasks.size()){
-                Ui.showDeleteOutOfBounds(tasks.size());
+                //Ui.showDeleteOutOfBounds(tasks.size());
                 return false;
             } else {
                 Task t = tasks.get(index-1);
                 tasks.remove(index-1);
-                Ui.showDeletedTask(t, tasks.size());
+                //Ui.showDeletedTask(t, tasks.size());
                 return true;
             }
         }
@@ -49,20 +43,20 @@ public class TaskManager {
 
     public boolean markTaskDone(int index){
         if (tasks.size() <= 0){
-            Ui.showMarkEmptyList();
+            //Ui.showMarkEmptyList();
             return false;
         } else {
             if (index <= 0 || index > tasks.size()){
-                Ui.showMarkOutOfBounds();
+                //Ui.showMarkOutOfBounds();
                 return false;
             } else {
                 Task t = tasks.get(index - 1);
                 if (t.done == ' ') {
                     t.markDone();
-                    Ui.showMarked(t);
+                    //Ui.showMarked(t);
                     return true;
                 } else {
-                    Ui.showMarkNotNeeded(t);
+                    //Ui.showMarkNotNeeded(t);
                     return false;
                 }
             }
@@ -71,20 +65,20 @@ public class TaskManager {
 
     public boolean markTaskUndone(int index){
         if (tasks.size() <= 0){
-            Ui.showUnmarkEmptyList();
+            //Ui.showUnmarkEmptyList();
             return false;
         } else {
             if (index <= 0 || index > tasks.size()) {
-                Ui.showUnmarkOutOfBounds();
+                //Ui.showUnmarkOutOfBounds();
                 return false;
             } else {
                 Task t = tasks.get(index - 1);
                 if (t.done == 'X') {
-                    t.markunDone();
-                    Ui.showUnmarked(t);
+                    t.markUndone();
+                    //Ui.showUnmarked(t);
                     return true;
                 } else {
-                    Ui.showUnmarkNotNeeded(t);
+                    //Ui.showUnmarkNotNeeded(t);
                     return false;
                 }
             }
