@@ -1,11 +1,15 @@
 package tasks;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
-	private String deadline;
+	private LocalDateTime deadline;
 
 	public Deadline(String detail, String deadline) {
 		super(detail);
-		this.deadline = deadline;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(" d/M/yyyy HHmm");
+		this.deadline = LocalDateTime.parse(deadline, formatter);
 	}
 
 	@Override
@@ -20,10 +24,13 @@ public class Deadline extends Task {
 
 	@Override
 	public String toString() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
+		String markedPrint;
 		if (marked) {
-			return "[D][X] " + detail + "(by:" + deadline + ")";
+			markedPrint = "[E][X] ";
 		} else {
-			return "[D][ ] " + detail + "(by:" + deadline + ")";
+			markedPrint = "[E][ ] ";
 		}
+		return markedPrint + detail + "(by:" + deadline.format(formatter) + ")";
 	}
 }
