@@ -68,7 +68,7 @@ public class DukeList {
      * Marks the Task as done by given index input.
      * Index is based on the position the Task is in, in the list
      */
-    public String mark(int i) {
+    public String markTask(int i) {
         StringBuilder res = new StringBuilder();
         String line = "____________________________________________________________ \n";
         res.append(line).append("Nice! I've marked this task as done: \n");
@@ -82,7 +82,7 @@ public class DukeList {
      * Unmarks the Task as done by given index input.
      * Index is based on the position the Task is in, in the list
      */
-    public String unmark(int i) {
+    public String unmarkTask(int i) {
         StringBuilder res = new StringBuilder();
         String line = "____________________________________________________________ \n";
         res.append(line).append("OK, I've marked this task as not done yet: \n");

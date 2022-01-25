@@ -70,14 +70,14 @@ public class Action {
      * Makes a call on DukeList's mark()
      */
     public String mark() {
-        return dL.mark(Integer.valueOf(inp[1]));
+        return dL.markTask(Integer.valueOf(inp[1]));
     }
 
     /**
      * Makes a call on DukeList's unmark()
      */
     public String unmark() {
-        return dL.unmark(Integer.valueOf(inp[1]));
+        return dL.unmarkTask(Integer.valueOf(inp[1]));
     }
 
     /**
