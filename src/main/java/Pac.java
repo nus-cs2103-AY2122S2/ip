@@ -20,18 +20,35 @@ public class Pac {
 
         while (true) {
             String input = sc.nextLine();
-            String[] inputArray = input.split(" ");
+            String[] inputArray = input.split(" ", 2);
             String firstword = inputArray[0].toLowerCase();
-            Keyword keyword = Keyword.ADD;
+            Keyword keyword;
 
-            if (firstword.equals("bye")) {
-                keyword = Keyword.BYE;
-            } else if (firstword.equals("list")) {
-                keyword = Keyword.LIST;
-            } else if (firstword.equals("mark")) {
-                keyword = Keyword.MARK;
-            } else if (firstword.equals("unmark")) {
-                keyword = Keyword.UNMARK;
+            switch (firstword) {
+                case "bye":
+                    keyword = Keyword.BYE;
+                    break;
+                case "list":
+                    keyword = Keyword.LIST;
+                    break;
+                case "mark":
+                    keyword = Keyword.MARK;
+                    break;
+                case "unmark":
+                    keyword = Keyword.UNMARK;
+                    break;
+                case "todo":
+                    keyword = Keyword.TODO;
+                    break;
+                case "deadline":
+                    keyword = Keyword.DEADLINE;
+                    break;
+                case "event":
+                    keyword = Keyword.EVENT;
+                    break;
+                default:
+                    keyword = Keyword.ERROR;
+                    break;
             }
 
             switch (keyword) {
@@ -47,17 +64,51 @@ public class Pac {
                 case UNMARK:
                     unmarkTask(Integer.parseInt(inputArray[1]) - 1);
                     break;
-                default:
-                    addTask(input);
+                case TODO:
+                    addToDo(inputArray[1]);
+                    break;
+                case DEADLINE:
+                    addDeadline(inputArray[1]);
+                    break;
+                case EVENT:
+                    addEvent(inputArray[1]);
+                    break;
+                case ERROR:
+                    System.exit(0);
                     break;
             }
         }
     }
 
-    public static void addTask(String description) {
-        Task task = new Task(description);
+    public static void addToDo(String description) {
+        Task task = new ToDo(description);
         tasks.add(task);
-        System.out.println(newline + "\n" + "added: "+ task.getDescription() + "\n" + newline + "\n");
+        System.out.println(newline + "\nadded: " + task.toString());
+        System.out.println("You have " + tasks.size() + " tasks in your list" + "\n" + newline + "\n");
+    }
+
+    public static void addDeadline(String input) {
+        String[] inputArray = input.split("/");
+        inputArray[1] = inputArray[1].replaceFirst("BY ", "by ");
+        inputArray[1] = inputArray[1].replaceFirst("By ", "by ");
+        inputArray[1] = inputArray[1].replaceFirst("bY ", "by ");
+        inputArray[1] = inputArray[1].split("by ", 2)[1];
+        Task task = new Deadline(inputArray[0], inputArray[1]);
+        tasks.add(task);
+        System.out.println(newline + "\nadded: " + task.toString());
+        System.out.println("You have " + tasks.size() + " tasks in your list" + "\n" + newline + "\n");
+    }
+
+    public static void addEvent(String input) {
+        String[] inputArray = input.split("/");
+        inputArray[1] = inputArray[1].replaceFirst("AT ", "by ");
+        inputArray[1] = inputArray[1].replaceFirst("At ", "by ");
+        inputArray[1] = inputArray[1].replaceFirst("aT ", "by ");
+        inputArray[1] = inputArray[1].split("at ", 2)[1];
+        Task task = new Event(inputArray[0], inputArray[1]);
+        tasks.add(task);
+        System.out.println(newline + "\nadded: " + task.toString());
+        System.out.println("You have " + tasks.size() + " tasks in your list" + "\n" + newline + "\n");
     }
 
     public static void markTask(int index) {
