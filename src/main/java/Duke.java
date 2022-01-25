@@ -1,5 +1,7 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
+
+
 /**
  * This program is used to add, list & mark the status of your current tasks.
  * @author Sim Jun Heng
@@ -9,17 +11,18 @@ public class Duke {
     // ArrayList to store all your tasks
     private static ArrayList<Task> list = new ArrayList<>();
 
-    /**
-     * The main method of this program
-     */
+    // Main method of this program
     public static void main(String[] args) {
-        // Greet
+        // Greet Message
+        System.out.println("If you are new to program, enter ? to see a list of commands available.");
+        System.out.println("-----------------------------------------------------------------------");
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
 
         // Scanner Object
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
+
         try {
             // Add different types of Task, List, Mark
             while (!input.equals("bye")) {
