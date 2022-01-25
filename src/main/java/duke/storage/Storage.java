@@ -62,7 +62,9 @@ public class Storage {
                     String date = parsedTask[3];
                     String time = parsedTask[4];
                     if (!date.equals("0") && !time.equals("0")) {
-                        Deadline d = new Deadline(desc, LocalDate.parse(date), LocalTime.parse(time));
+                        Deadline d = new Deadline(desc,
+                                LocalDate.parse(date),
+                                LocalTime.parse(time));
                         if (done.equals("1")) {
                             d.markAsDone();
                         }
@@ -88,7 +90,9 @@ public class Storage {
                     String date = parsedTask[3];
                     String time = parsedTask[4];
                     if (!date.equals("0") && !time.equals("0")) {
-                        Event e = new Event(desc, LocalDate.parse(date), LocalTime.parse(time));
+                        Event e = new Event(desc,
+                                LocalDate.parse(date),
+                                LocalTime.parse(time));
                         if (done.equals("1")) {
                             e.markAsDone();
                         }
@@ -120,7 +124,9 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(home + "/ip/data/duke.txt");
             for (int i = 0; i < tasks.listSize(); i++) {
-                fw.write(tasks.getTask(i).getAppendData() + "\n");
+                fw.write(tasks
+                        .getTask(i)
+                        .getAppendData() + "\n");
             }
             fw.close();
         } catch (IOException e) {
@@ -130,7 +136,8 @@ public class Storage {
 
     public void append(String textToAppend) {
         try {
-            FileWriter fw = new FileWriter(home + "/ip/data/duke.txt", true);
+            FileWriter fw = new FileWriter(home + "/ip/data/duke.txt",
+                    true);
             fw.write(textToAppend + "\n");
             fw.close();
         } catch (IOException e) {

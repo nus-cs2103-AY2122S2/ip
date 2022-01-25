@@ -9,7 +9,7 @@ public class DeleteCommand extends Command {
     private final int targetIndex;
 
     public DeleteCommand(int i) {
-        targetIndex = i;
+        targetIndex = i - 1;
     }
 
     public String execute(TaskList tasks, Ui ui, Storage storage) {
