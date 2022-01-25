@@ -10,9 +10,7 @@ import java.time.format.DateTimeFormatter;
  * @version 1.0
  */
 public class Event extends Task {
-    /**
-     * The time of this event
-     */
+    /** The time of this event */
     private LocalDate eventTime;
 
     /**
@@ -67,19 +65,12 @@ public class Event extends Task {
         String[] args = taskStr.split(":");
         boolean isDone = args[1].equals("1");
         return new Event(args[2], isDone, args[3]);
-        /**
-         try {
-
-         } catch (IndexOutOfBoundsException e) {
-         throw new MemoryCorruptedException();
-         }
-         */
     }
 
     /**
      * Converts Event into a string to be stored in mem
      *
-     * @return string   string of event to be stored in mem
+     * @return string of event to be stored in mem
      */
     @Override
     public String taskToMemStr() {

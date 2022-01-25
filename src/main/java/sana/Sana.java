@@ -1,20 +1,21 @@
 package sana;
 
-import java.time.format.DateTimeParseException;
-import java.time.LocalDate;
-import java.util.LinkedList;
-
 import sana.exception.IncompleteCommandException;
 import sana.exception.OutOfBoundsTaskException;
-
 import sana.task.Deadline;
 import sana.task.Event;
+import sana.task.Task;
 import sana.task.ToDo;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.LinkedList;
+
 /**
  * Sana is a BIG program!
  *
  * @author  Jan Alfenson Tan
- * @version 1.7
+ * @version 8.0
  */
 public class Sana {
 
@@ -129,7 +130,8 @@ public class Sana {
     /**
      * Removes a sana.task from the userTasks list
      *
-     * @param taskIndex The index of the sana.task to be removed
+     * @param taskIndex                     The index of the sana.task to be removed
+     * @throws OutOfBoundsTaskException     When task index is not in current task list
      */
     private void delete(int taskIndex) throws OutOfBoundsTaskException {
         if (taskIndex < 0 || taskIndex >= userTasks.taskAmt()) {
@@ -144,8 +146,9 @@ public class Sana {
     /**
      * Adds a Deadline to userTasks
      *
-     * @param deadlineName  name of the deadline
-     * @param deadlineDate  time of the deadline
+     * @param deadlineName                  name of the deadline
+     * @param deadlineDate                  time of the deadline
+     * @throws IncompleteCommandException   when command given is incomplete
      */
     private void addDeadline(String deadlineName, LocalDate deadlineDate) throws IncompleteCommandException {
         if (deadlineName.isBlank()) {
@@ -161,8 +164,9 @@ public class Sana {
     /**
      * Adds an Event to userTasks
      *
-     * @param eventName name of the event
-     * @param eventTime time of the event
+     * @param eventName                     name of the event
+     * @param eventTime                     time of the event
+     * @throws IncompleteCommandException   when command given is incomplete
      */
     private void addEvent(String eventName, LocalDate eventTime) throws IncompleteCommandException {
         if (eventName.isBlank()) {
@@ -178,7 +182,8 @@ public class Sana {
     /**
      * Adds a ToDo to userTasks
      *
-     * @param taskName  the name of the todo
+     * @param taskName                      the name of the todoTask
+     * @throws IncompleteCommandException   when command given is incomplete
      */
     private void addToDo(String taskName) throws IncompleteCommandException {
         if (taskName.isBlank()) {
@@ -194,8 +199,9 @@ public class Sana {
     /**
      * Marks the sana.task located at the index as done or not done
      *
-     * @param taskIndex     the index of the sana.task to be marked done
-     * @param isComplete    the completion of the sana.task
+     * @param taskIndex                 the index of the sana.task to be marked done
+     * @param isComplete                the completion of the sana.task
+     * @throws OutOfBoundsTaskException when task index is not in current task list
      */
     private void mark(int taskIndex, boolean isComplete) throws OutOfBoundsTaskException {
         if (taskIndex < 0 || taskIndex >= userTasks.taskAmt()) {

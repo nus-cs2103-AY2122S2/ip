@@ -18,9 +18,7 @@ public class Ui {
     /** The border for Sana's replies */
     private static final String border = "_____________________________________________";
 
-    /**
-     * Constructor for the Ui object
-     */
+    /** Constructor for the Ui object */
     public Ui() {
         this.in = new Scanner(System.in);
     }
@@ -34,9 +32,7 @@ public class Ui {
         return in.nextLine();
     }
 
-    /**
-     * Closes the scanner used to read inputs
-     */
+    /** Closes the scanner used to read input */
     public void closeScanner() {
         in.close();
     }
@@ -70,9 +66,7 @@ public class Ui {
         }
     }
 
-    /**
-     * This method prints to system IO how many tasks in user tasks
-     */
+    /** Prints to system IO how many tasks in user task */
     public void taskNumberText(int taskNumber) {
         String taskAmt = Integer.valueOf(taskNumber).toString();
         System.out.println("You have " + taskAmt + " things here.");
@@ -91,39 +85,29 @@ public class Ui {
         }
     }
 
-    /**
-     * This method prints to system IO Sana's greeting
-     */
+    /** Prints to system IO Sana's greeting */
     public void greet() {
         border();
         System.out.println("Hi! I'm BEEEEEEEG\nWhats up?");
         border();
     }
 
-    /**
-     * This method prints the border
-     */
+    /** Prints the border */
     public void border() {
         System.out.println(border);
     }
 
-    /**
-     * This method prints to system out Sana's add sana.task text
-     */
+    /** Prints to system out Sana's add sana.task text */
     public void addTaskText() {
         System.out.println("I've added your sana.task!");
     }
 
-    /**
-     * This method prints to system out Sana's delete sana.task text
-     */
+    /** This method prints to system out Sana's delete sana.task text */
     public void deleteTaskText() {
         System.out.println("Yay! I'll take this out!");
     }
 
-    /**
-     * This method prints to system IO Sana's bye
-     */
+    /** This method prints to system IO Sana's bye */
     public void bye() {
         System.out.println("See you next time!");
     }

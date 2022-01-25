@@ -10,9 +10,7 @@ import java.time.format.DateTimeFormatter;
  * @version 1.0
  */
 public class Deadline extends Task {
-    /**
-     * The deadline
-     */
+    /** The deadline */
     private LocalDate deadlineTime;
 
     /**
@@ -68,19 +66,12 @@ public class Deadline extends Task {
         String[] args = taskStr.split(":");
         boolean isDone = args[1].equals("1");
         return new Deadline(args[2], isDone, args[3]);
-        /**
-         try {
-
-         } catch (IndexOutOfBoundsException e) {
-         throw new MemoryCorruptedException();
-         }
-         */
     }
 
     /**
      * Converts Deadline into a string to be stored in mem
      *
-     * @return string   string of deadline to be stored in mem
+     * @return string of deadline to be stored in mem
      */
     @Override
     public String taskToMemStr() {

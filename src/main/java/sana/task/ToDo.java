@@ -54,13 +54,6 @@ public class ToDo extends Task {
         String[] args = taskStr.split(":");
         boolean isDone = args[1].equals("1");
         return new ToDo(args[2], isDone);
-        /**
-        try {
-
-        } catch (IndexOutOfBoundsException e) {
-            throw new MemoryCorruptedException();
-        }
-         */
     }
 
     /**
