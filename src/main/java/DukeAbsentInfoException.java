@@ -2,7 +2,7 @@ public class DukeAbsentInfoException extends DukeException {
     String message;
 
     DukeAbsentInfoException(String message) {
-        this.message = message;
+        super(message);
     }
 
     @Override

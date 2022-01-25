@@ -2,9 +2,14 @@ public abstract class Task {
     protected boolean isDone;
     protected String description;
 
-    Task(String d) {
-        this.description = d;
+    Task(String description) {
+        this.description = description;
         this.isDone = false;
+    }
+
+    Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
     }
 
     public void mark() {
