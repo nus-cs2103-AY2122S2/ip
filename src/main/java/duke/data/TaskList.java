@@ -114,6 +114,23 @@ public class TaskList {
     }
 
     /**
+     * Find all tasks matching keyword in the task list.
+     *
+     * @return the list of all matched tasks as a string.
+     */
+    public String findTasks(String keyword) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the matching tasks in your list:\n");
+        for (int i = 1; i < taskList.size() + 1; i++) {
+            if (taskList.get(i - 1).getDescription().contains(keyword)) {
+                String str = String.format("%d. %s%n", i, taskList.get(i - 1));
+                sb.append(str);
+            }
+        }
+        return String.valueOf(sb);
+    }
+
+    /**
      * Deletes a task from the task list with the given index.
      *
      * @param index index of the task to be deleted.

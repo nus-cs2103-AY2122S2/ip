@@ -1,11 +1,6 @@
 package duke.parser;
 
-import duke.commands.Command;
-import duke.commands.ExitCommand;
-import duke.commands.InfoCommand;
-import duke.commands.AddCommand;
-import duke.commands.UpdateCommand;
-import duke.commands.DeleteCommand;
+import duke.commands.*;
 import duke.data.TaskList;
 import duke.data.exception.InvalidCommandException;
 
@@ -48,6 +43,8 @@ public class Parser {
         } else if (command.equals("event")) {
             String[] argsArray = arguments.split(" /at ");
             return new AddCommand(argsArray[0], argsArray[1], "EVENT");
+        } else if (command.equals("find")) {
+            return new FindCommand(arguments);
         } else if (command.equals("delete")) {
             return new DeleteCommand(Integer.parseInt(arguments));
         }
