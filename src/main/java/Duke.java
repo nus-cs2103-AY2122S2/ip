@@ -200,7 +200,7 @@ public class Duke {
     private void addEventOrDeadline(String taskDescription, Command commandType, String regex) throws DukeException {
         // check if the user's input is correctly formatted
         if (!taskDescription.contains(regex)) {
-            throw new DukeException("Your " + commandType + " command is incorrectly formatted. Please try again.");
+            throw new DukeException("Your " + commandType + " command is incorrectly formatted. Please use " + regex);
         }
 
         String[] taskDescriptionStrings = taskDescription.split(regex);
@@ -214,17 +214,21 @@ public class Duke {
             throw new DukeException("I'm sorry, your " + commandType + " command is missing a time. Please try again.");
         }
 
-        Task task;
+        try {
+            Task task;
 
-        if (commandType.equals(Command.EVENT)) {
-            task = new Event(taskDescriptionText, taskDescriptionTime, false);
-        } else {
-            task = new Deadline(taskDescriptionText, taskDescriptionTime, false);
+            if (commandType.equals(Command.EVENT)) {
+                task = new Event(taskDescriptionText, taskDescriptionTime, false);
+            } else {
+                task = new Deadline(taskDescriptionText, taskDescriptionTime, false);
+            }
+            
+            taskList.add(task);
+            System.out.println(String.format("%sNoted. I've added this task:", indentationText));
+            System.out.println(String.format("%s%s", indentationTaskStatus, task));
+        } catch (DukeException e) {
+            System.out.println(indentationText + e.getMessage());
         }
-        
-        taskList.add(task);
-        System.out.println(String.format("%sNoted. I've added this task:", indentationText));
-        System.out.println(String.format("%s%s", indentationTaskStatus, task));
     }
 
     private void markTask(String id, String regex) throws DukeException { 
