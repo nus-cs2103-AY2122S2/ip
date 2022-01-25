@@ -19,6 +19,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         boolean exitFlag = false;
 
+        // TODO: error handling
         while(!exitFlag) {
             try {
                 String[] input = sc.nextLine().split(" ", 2);
@@ -80,12 +81,13 @@ public class Duke {
     }
 
     private static void init() throws DukeException, IOException {
+        // TODO: file handling using website
         String currDir = System.getProperty("user.dir");
-        String dataName = "test.dat";
+        String dataName = "todo.dat";
         Path dataDir = Paths.get(currDir, "data", dataName);
         File dataFile = new File(String.valueOf(dataDir));
 
-        // Check if directory and folder exists
+        // Check if directory and file exists
         dataFile.getParentFile().mkdirs();
         if (!dataFile.exists()) { dataFile.createNewFile(); }
 
@@ -97,15 +99,25 @@ public class Duke {
             testList.forEach(line -> {
                 String[] input = line.split(" \\| ");
                 Task newEntry = null;
+
+                // TODO: error handling
                 switch (input[0]) {
                 case "T":
                     newEntry = new ToDo(input[2]);
                     break;
                 case "D":
-                    newEntry = new Deadline(input[2], input[3]);
+                    try {
+                        newEntry = new Deadline(input[2], input[3]);
+                    } catch (DukeException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case "E":
-                    newEntry = new Event(input[2], input[3]);
+                    try {
+                        newEntry = new Event(input[2], input[3]);
+                    } catch (DukeException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 default:
                     break;
@@ -122,7 +134,7 @@ public class Duke {
 
     public static void save() throws IOException {
         String currDir = System.getProperty("user.dir");
-        String dataName = "test.dat";
+        String dataName = "todo.dat";
         Path dataDir = Paths.get(currDir, "data", dataName);
         File dataFile = new File(String.valueOf(dataDir));
         BufferedWriter bw = new BufferedWriter(new FileWriter(dataFile, false));

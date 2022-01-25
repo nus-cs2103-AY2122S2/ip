@@ -15,12 +15,13 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy HH:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy @ hh:mm a");
         return String.format("[E]%s (at: %s)", super.toString(), sdf.format(this.at));
     }
 
     public String write() {
         String markStatus = super.isMarked ? "1" : "0";
-        return String.format("%s | %s | %s | %s\n", "E", markStatus, super.taskName, this.at);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        return String.format("%s | %s | %s | %s\n", "E", markStatus, super.taskName, sdf.format(this.at));
     }
 }

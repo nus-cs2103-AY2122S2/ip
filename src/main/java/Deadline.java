@@ -15,12 +15,13 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy HH:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy @ hh:mm a");
         return String.format("[D]%s (by: %s)", super.toString(), sdf.format(this.by));
     }
 
     public String write() {
         String markStatus = super.isMarked ? "1" : "0";
-        return String.format("%s | %s | %s | %s\n", "D", markStatus, super.taskName, this.by);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        return String.format("%s | %s | %s | %s\n", "D", markStatus, super.taskName, sdf.format(this.by));
     }
 }
