@@ -6,6 +6,15 @@ public class EventTask extends Task {
         this.time = time;
     }
 
+    public EventTask(String taskName, String time, boolean isDone) {
+        super(taskName, isDone);
+        this.time = time;
+    }
+
+    public String getTime() {
+        return this.time;
+    }
+
     @Override
     public String toString() {
         return String.format("[E]" + super.toString() + "(%s)", this.time.replaceFirst(" ", ": "));
