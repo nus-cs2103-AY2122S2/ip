@@ -77,7 +77,8 @@ public class Storage {
             if (taskType == 'E') { // task is an event
                 int indexOfDate = descWithDate.indexOf("(at: ");
                 String desc = descWithDate.substring(0, indexOfDate);
-                String date = descWithDate.substring(indexOfDate + 4, descWithDate.length() - 1).trim(); // Dec-31-2022 2359
+                String date = descWithDate.substring(
+                        indexOfDate + 4, descWithDate.length() - 1).trim(); // Dec-31-2022 2359
                 DateTimeFormatter displayFormat = DateTimeFormatter.ofPattern("MMM-dd-yyyy HHmm");
                 DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
                 LocalDateTime at = LocalDateTime.parse(date, displayFormat);
@@ -85,7 +86,8 @@ public class Storage {
             } else if (taskType == 'D') { // task is a deadline
                 int indexOfDate = descWithDate.indexOf("(by: ");
                 String desc = descWithDate.substring(0, indexOfDate);
-                String date = descWithDate.substring(indexOfDate + 4, descWithDate.length() - 1).trim(); // Dec-31-2022 2359
+                String date = descWithDate.substring(
+                        indexOfDate + 4, descWithDate.length() - 1).trim(); // Dec-31-2022 2359
                 DateTimeFormatter displayFormat = DateTimeFormatter.ofPattern("MMM-dd-yyyy HHmm");
                 DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
                 LocalDateTime by = LocalDateTime.parse(date, displayFormat);
