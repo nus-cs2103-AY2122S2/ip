@@ -3,8 +3,6 @@ package ui.command;
 import java.util.ArrayList;
 
 /**
- * @author Jiaaa-yang
- *
  * Command which echoes the name of the
  * command written by user.
  */

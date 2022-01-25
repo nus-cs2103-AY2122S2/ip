@@ -6,8 +6,6 @@ import task.Task;
 import java.util.ArrayList;
 
 /**
- * @author Jiaaa-yang
- *
  * Command which marks a previously
  * added task as done.
  */

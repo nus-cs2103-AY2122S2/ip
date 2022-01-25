@@ -26,9 +26,9 @@ public class TaskList {
 
     /**
      * Return ArrayList of string description of each
-     * task in taskList
+     * task in taskList.
      *
-     * @return ArrayList of tasks description
+     * @return ArrayList of tasks description.
      */
     public ArrayList<String> getTaskDescriptions() {
         return this.taskList.stream()
@@ -45,9 +45,9 @@ public class TaskList {
      * a backing storage. Also loads the content of the store
      * into its task list.
      *
-     * @param store Storage instance this task list was saved on
+     * @param store Storage instance this task list was saved on.
      * @return TaskList initialised with contents in store, and
-     * backed by store
+     * backed by store.
      */
     public static TaskList initTaskList(Storage store) throws IOException {
         ArrayList<Task> tasks = TaskList.generateSavedTasks(store.readAll());
@@ -57,7 +57,7 @@ public class TaskList {
     /**
      * Adds task to task list, and saving to storage.
      *
-     * @param task Task to add to task list
+     * @param task Task to add to task list.
      */
     public void addTask(Task task) {
         this.taskList.add(task);
@@ -67,9 +67,9 @@ public class TaskList {
     /**
      * Deletes task from task list, and saving to storage.
      *
-     * @param index Index of task to delete
-     * @return The deleted Task
-     * @throws IllegalArgumentException if index is out of list range
+     * @param index Index of task to delete.
+     * @return The deleted Task.
+     * @throws IllegalArgumentException If index is out of list range.
      */
     public Task deleteTask(int index) throws IllegalArgumentException {
         if (!isValidIndex(index)) {
@@ -83,9 +83,9 @@ public class TaskList {
     /**
      * Check task, marking it as done in task list.
      *
-     * @param index Index of task to mark as done
-     * @return The checked Task
-     * @throws IllegalArgumentException if index is out of list range
+     * @param index Index of task to mark as done.
+     * @return The checked Task.
+     * @throws IllegalArgumentException If index is out of list range.
      */
     public Task checkTask(int index) {
         if (!isValidIndex(index)) {
@@ -100,9 +100,9 @@ public class TaskList {
     /**
      * Uncheck task, marking it as undone in task list.
      *
-     * @param index Index of task to mark undone
-     * @return The unchecked Task
-     * @throws IllegalArgumentException if index is out of list range
+     * @param index Index of task to mark undone.
+     * @return The unchecked Task.
+     * @throws IllegalArgumentException If index is out of list range.
      */
     public Task uncheckTask(int index) {
         if (!isValidIndex(index)) {
@@ -115,7 +115,7 @@ public class TaskList {
     }
 
     /**
-     * Saves current tasks into backing store
+     * Saves current state of TaskList into backing store.
      */
     private void saveState() {
         List<String> taskData = this.taskList.stream()
@@ -130,10 +130,10 @@ public class TaskList {
 
     /**
      * Checks if given index is a valid index to operate
-     * on the list (0 <= index < tasks.size())
+     * on the list (0 <= index < tasks.size()).
      *
-     * @param index Index to check
-     * @return boolean of whether index is valid
+     * @param index Index to check.
+     * @return Boolean of whether index is valid.
      */
     private boolean isValidIndex(int index) {
         return (0 <= index) && (index < this.taskList.size());

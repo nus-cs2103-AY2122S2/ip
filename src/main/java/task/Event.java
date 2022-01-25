@@ -1,10 +1,12 @@
 package task;
 
+/**
+ * A concrete Task which contains
+ * a name, and a time string where
+ * the event happens.
+ */
 public class Event extends Task {
-
-    /**
-     * Time at which this event occurs
-     */
+    /** Time at which this event occurs */
     private final String time;
 
     public Event(String name, String time) {

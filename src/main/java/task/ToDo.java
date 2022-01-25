@@ -1,5 +1,9 @@
 package task;
 
+/**
+ * A concrete Task which contains
+ * just a name description.
+ */
 public class ToDo extends Task {
 
     public ToDo(String name) {

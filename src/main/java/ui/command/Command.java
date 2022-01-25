@@ -11,31 +11,25 @@ import java.util.ArrayList;
  * that can be issued to a ChatBot.
  */
 public abstract class Command {
-    /**
-     * Constants for styling of printing command feedback
-     */
+    /** Constants for styling of printing command feedback */
     private final static int DELIMITER_LENGTH = 25;
     private final static int INDENT_SIZE = 4;
     private final static String DELIMITER = "_".repeat(DELIMITER_LENGTH);
     private final static String INDENT = " ".repeat(INDENT_SIZE);
 
     /**
-     * Execute current command in ChatBot context
+     * Execute current command in ChatBot context.
      *
-     * @return whether the command is a terminating command
-     * @throws IllegalArgumentException if the command is executed
-     * with invalid args
+     * @return Whether the command is a terminating command.
+     * @throws IllegalArgumentException If the command is executed
+     * with invalid args.
      */
     public abstract boolean execute() throws IllegalArgumentException;
 
-    /**
-     * Name of current command
-     */
+    /** Name of current command */
     private final String name;
 
-    /**
-     * String representation of arguments for command
-     */
+    /** String representation of arguments for command */
     private final String args;
 
     protected Command(String name, String args) {
@@ -44,14 +38,14 @@ public abstract class Command {
     }
 
     /**
-     * Parse user inputted command to extract
+     * Parses user inputted command to extract
      * the name and args of the command, returning
-     * the concrete Command subclass for the input
+     * the concrete Command subclass for the input.
      *
-     * @param input Command inputted by user
-     * @param taskList TaskList maintained by ChatBot
-     * @return Command object corresponding to input
-     * @throws IllegalArgumentException if the command is not valid
+     * @param input Command inputted by user.
+     * @param taskList TaskList maintained by ChatBot.
+     * @return Command object corresponding to input.
+     * @throws IllegalArgumentException If the command is not valid.
      */
     public static Command parseCommand(String input, TaskList taskList) throws IllegalArgumentException {
         String name = input;
@@ -95,9 +89,9 @@ public abstract class Command {
     /**
      * Print response of executed command styled between 2 lines
      * with indentation. Each item in response array is printed
-     * in a new line
+     * in a new line.
      *
-     * @param response list of response to print
+     * @param response List of response to print.
      */
     public static void styledPrint(ArrayList<String> response) {
         response.add(0, DELIMITER);
@@ -110,9 +104,9 @@ public abstract class Command {
     }
 
     /**
-     * Reconstruct original command by user
+     * Reconstruct original command by user.
      *
-     * @return String representing original command
+     * @return String representing original command.
      */
     protected String getOriginalCommand() {
         if (this.args != null) {

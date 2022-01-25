@@ -7,8 +7,6 @@ import java.io.File;
 import java.util.ArrayList;
 
 /**
- * @author Jiaaa-yang
- *
  * Command which prints out a list of item
  * stored by user.
  */
