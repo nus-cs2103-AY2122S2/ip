@@ -15,12 +15,12 @@ Now you have 1 task(s) in your list.
 ------------------------------------------------------------
 ------------------------------------------------------------
 Got it. I've added this deadline:
-	[D][ ] return book (by: June 6th)
+	[D][ ] return book (by: 06 Mar 2022 11:59 pm)
 Now you have 2 task(s) in your list.
 ------------------------------------------------------------
 ------------------------------------------------------------
 Got it. I've added this event:
-	[E][ ] project meeting (at: Aug 6th 2-4pm)
+	[E][ ] project meeting (at: 27 Jan 2022 12:30 pm)
 Now you have 3 task(s) in your list.
 ------------------------------------------------------------
 ------------------------------------------------------------
@@ -29,7 +29,7 @@ I've marked the following task as completed:
 ------------------------------------------------------------
 ------------------------------------------------------------
 I've marked the following task as completed:
-	[D][X] return book (by: June 6th)
+	[D][X] return book (by: 06 Mar 2022 11:59 pm)
 ------------------------------------------------------------
 ------------------------------------------------------------
 Got it. I've added this todo:
@@ -42,7 +42,7 @@ I've marked the following task as completed:
 ------------------------------------------------------------
 ------------------------------------------------------------
 I've marked the following task as incomplete:
-	[D][ ] return book (by: June 6th)
+	[D][ ] return book (by: 06 Mar 2022 11:59 pm)
 ------------------------------------------------------------
 ------------------------------------------------------------
 Got it. I've added this todo:
@@ -51,29 +51,29 @@ Now you have 5 task(s) in your list.
 ------------------------------------------------------------
 ------------------------------------------------------------
 1.	[T][X] read book
-2.	[D][ ] return book (by: June 6th)
-3.	[E][ ] project meeting (at: Aug 6th 2-4pm)
+2.	[D][ ] return book (by: 06 Mar 2022 11:59 pm)
+3.	[E][ ] project meeting (at: 27 Jan 2022 12:30 pm)
 4.	[T][X] join sports club
 5.	[T][ ] borrow book
 ------------------------------------------------------------
 ------------------------------------------------------------
 Got it. I've added this deadline:
-	[D][ ] return book (by: Sunday)
+	[D][ ] return book (by: 25 Feb 2022 10:00 am)
 Now you have 6 task(s) in your list.
 ------------------------------------------------------------
 ------------------------------------------------------------
 Got it. I've added this event:
-	[E][ ] project meeting (at: Mon 2-4pm)
+	[E][ ] project meeting (at: 01 Feb 2022 2:00 pm)
 Now you have 7 task(s) in your list.
 ------------------------------------------------------------
 ------------------------------------------------------------
 1.	[T][X] read book
-2.	[D][ ] return book (by: June 6th)
-3.	[E][ ] project meeting (at: Aug 6th 2-4pm)
+2.	[D][ ] return book (by: 06 Mar 2022 11:59 pm)
+3.	[E][ ] project meeting (at: 27 Jan 2022 12:30 pm)
 4.	[T][X] join sports club
 5.	[T][ ] borrow book
-6.	[D][ ] return book (by: Sunday)
-7.	[E][ ] project meeting (at: Mon 2-4pm)
+6.	[D][ ] return book (by: 25 Feb 2022 10:00 am)
+7.	[E][ ] project meeting (at: 01 Feb 2022 2:00 pm)
 ------------------------------------------------------------
 ------------------------------------------------------------
 Goodbye. J.A.R.V.I.S. systems powering off...

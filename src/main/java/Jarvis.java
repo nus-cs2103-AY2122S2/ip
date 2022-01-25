@@ -4,22 +4,20 @@ import enums.*;
 import ui.Ui;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Jarvis {
     private static Ui ui;
+    private static TaskList tasks;
 
     private static final String dataFilePath = "data/data.txt";
 
-    private static final ArrayList<Task> tasks = new ArrayList<>();
     private static boolean processNext = true;
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
     public static void main(String[] args) throws JarvisException {
         ui = new Ui();
@@ -33,28 +31,29 @@ public class Jarvis {
                 switch (Command.valueOf(tokens[0].trim().toUpperCase())) {
                 case BYE:
                     processNext = false;
+                    saveChanges();
                     ui.shutdown();
                     return;
                 case LIST:
-                    printTasks();
+                    tasks.printTasks();
                     break;
                 case MARK:
-                    markAsDone(tokens);
+                    tasks.markAsDone(tokens);
                     break;
                 case UNMARK:
-                    markAsUndone(tokens);
+                    tasks.markAsUndone(tokens);
                     break;
                 case DELETE:
-                    delete(tokens);
+                    tasks.delete(tokens);
                     break;
                 case TODO:
-                    addTodo(input);
+                    tasks.addTodo(input);
                     break;
                 case DEADLINE:
-                    addDeadline(input);
+                    tasks.addDeadline(input);
                     break;
                 case EVENT:
-                    addEvent(input);
+                    tasks.addEvent(input);
                     break;
                 default:
                     break;
@@ -69,6 +68,7 @@ public class Jarvis {
 
     private static void loadData() throws JarvisException {
         try {
+            List<Task> lst = new ArrayList<>();
             File dataFile = new File(dataFilePath);
             if (dataFile.exists()) {
                 Scanner s = new Scanner(dataFile);
@@ -93,12 +93,13 @@ public class Jarvis {
                         task.markAsDone();
                     }
 
-                    tasks.add(task);
+                    lst.add(task);
                 }
             } else {
                 dataFile.getParentFile().mkdirs();
                 dataFile.createNewFile();
             }
+            tasks = new TaskList(lst, ui);
         } catch (IOException e) {
             throw new JarvisException("An error has occurred whilst retrieving your tasks.");
         }
@@ -107,7 +108,7 @@ public class Jarvis {
     private static void saveChanges() throws JarvisException {
         try {
             StringBuilder sb = new StringBuilder();
-            for (Task t : tasks) {
+            for (Task t : tasks.getTasks()) {
                 sb.append(t.toFileString()).append("\n");
             }
             FileWriter fw = new FileWriter(dataFilePath);
@@ -117,171 +118,5 @@ public class Jarvis {
             e.printStackTrace();
             throw new JarvisException("An error has occurred whilst saving your tasks.");
         }
-    }
-
-    private static void printTasks() {
-        int count = tasks.size();
-        if (count == 0) {
-            ui.echo("You have no tasks in your list. :-)");
-            return;
-        }
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < tasks.size(); i++) {
-            sb.append(i + 1).append(".\t").append(tasks.get(i));
-            if (i + 1 != count) {
-                sb.append("\n");
-            }
-        }
-        ui.echo(sb.toString());
-    }
-
-    private static void markAsDone(String[] tokens) throws JarvisException {
-        if (tasks.size() == 0) {
-            throw new JarvisException("You have no tasks in your list.");
-        }
-
-        int num;
-
-        try {
-            num = Integer.parseInt(tokens[1]) - 1;
-        } catch (IndexOutOfBoundsException e) {
-            throw new JarvisException("Please specify a task number to mark as completed.");
-        } catch (NumberFormatException e) {
-            throw new JarvisException("Please specify the task number numerically.");
-        }
-        try {
-            Task task = tasks.get(num);
-            task.markAsDone();
-            ui.echo("I've marked the following task as completed:\n\t" + task);
-        } catch (IndexOutOfBoundsException e) {
-            throw new JarvisException("Please specify a valid task number (between 1 to " + tasks.size() + " inclusive).");
-        }
-        saveChanges();
-    }
-
-    private static void markAsUndone(String[] tokens) throws JarvisException {
-        if (tasks.size() == 0) {
-            throw new JarvisException("You have no tasks in your list.");
-        }
-
-        int num;
-
-        try {
-            num = Integer.parseInt(tokens[1]) - 1;
-        } catch (IndexOutOfBoundsException e) {
-            throw new JarvisException("Please specify a task number to mark as incomplete.");
-        } catch (NumberFormatException e) {
-            throw new JarvisException("Please specify the task number numerically.");
-        }
-        try {
-            Task task = tasks.get(num);
-            task.markAsUndone();
-            ui.echo("I've marked the following task as incomplete:\n\t" + task);
-        } catch (IndexOutOfBoundsException e) {
-            throw new JarvisException("Please specify a valid task number (between 1 to " + tasks.size() + " inclusive).");
-        }
-        saveChanges();
-    }
-
-    private static void delete(String[] tokens) throws JarvisException {
-        if (tasks.size() == 0) {
-            throw new JarvisException("You have no tasks in your list.");
-        }
-
-        int num;
-
-        try {
-            num = Integer.parseInt(tokens[1]) - 1;
-        } catch (IndexOutOfBoundsException e) {
-            throw new JarvisException("Please specify a task number to delete.");
-        } catch (NumberFormatException e) {
-            throw new JarvisException("Please specify the task number numerically.");
-        }
-        try {
-            Task task = tasks.remove(num);
-            ui.echo("Understood. I've removed the following task:\n\t"
-                    + task + "\n"
-                    + "Now you have " + tasks.size() + " task(s) in your list.");
-        } catch (IndexOutOfBoundsException e) {
-            throw new JarvisException("Please specify a valid task number (between 1 to " + tasks.size() + " inclusive).");
-        }
-        saveChanges();
-    }
-
-    private static void addTodo(String input) throws JarvisException {
-        String description;
-        try {
-            description = input.trim().substring(Command.TODO.toString().length() + 1);
-        } catch (IndexOutOfBoundsException e) {
-            throw new JarvisException("The description of the todo cannot be empty.");
-        }
-
-        Todo todo = new Todo(description);
-        tasks.add(todo);
-        ui.echo("Got it. I've added this todo:\n\t"
-                + todo + "\n"
-                + "Now you have " + tasks.size() + " task(s) in your list.");
-        saveChanges();
-    }
-
-    private static void addDeadline(String input) throws JarvisException {
-        String description;
-        LocalDateTime dateTime;
-        String[] split = input.split("/by");
-
-        try {
-            description = split[0].trim().substring(Command.DEADLINE.toString().length() + 1);
-        } catch (IndexOutOfBoundsException e) {
-            throw new JarvisException("The description of the deadline cannot be empty.");
-        }
-        if (split.length == 1) {
-            throw new JarvisException("Please specify the date of the deadline (usage: `deadline <description> /by <date>`).");
-        }
-        if (split[1].trim().equals("")) {
-            throw new JarvisException("The date of the deadline cannot be empty.");
-        }
-        try {
-            dateTime = LocalDateTime.parse(split[1].trim(), formatter);
-        } catch (DateTimeParseException e) {
-            throw new JarvisException("Please specify the date format as follows: 2022-12-25 2359");
-        }
-
-        Deadline deadline = new Deadline(description, dateTime);
-        tasks.add(deadline);
-        ui.echo("Got it. I've added this deadline:\n\t"
-                + deadline + "\n"
-                + "Now you have " + tasks.size() + " task(s) in your list.");
-        saveChanges();
-    }
-
-    public static void addEvent(String input) throws JarvisException {
-        String description;
-        LocalDateTime dateTime;
-        String[] split = input.split("/at");
-
-        try {
-            description = split[0].trim().substring(Command.EVENT.toString().length() + 1);
-        } catch (IndexOutOfBoundsException e) {
-            throw new JarvisException("The description of the event cannot be empty.");
-        }
-        if (split.length == 1) {
-            throw new JarvisException("Please specify the date of the event (usage: `event <description> /at <date>`).");
-        }
-        if (split[1].trim().equals("")) {
-            throw new JarvisException("The date of the event cannot be empty.");
-        }
-        try {
-            dateTime = LocalDateTime.parse(split[1].trim(), formatter);
-        } catch (DateTimeParseException e) {
-            throw new JarvisException("Please specify the date format as follows: 2022-12-25 2359");
-        }
-
-
-        Event event = new Event(description, dateTime);
-        tasks.add(event);
-        ui.echo("Got it. I've added this event:\n\t"
-                + event + "\n"
-                + "Now you have " + tasks.size() + " task(s) in your list.");
-        saveChanges();
     }
 }
