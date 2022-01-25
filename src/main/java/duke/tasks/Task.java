@@ -8,13 +8,6 @@ public abstract class Task {
     private boolean isDone;
 
     /**
-     * Abstract method that gets the Command used to add a Task
-     *
-     * @return a Command in String format
-     */
-    public abstract String getStringCmd();
-
-    /**
      * Constructor for a Task.
      * Creates a new Task.
      *
@@ -25,6 +18,13 @@ public abstract class Task {
         this.task = task;
         this.isDone = isDone;
     }
+
+    /**
+     * Abstract method that gets the Command used to add a Task
+     *
+     * @return a Command in String format
+     */
+    public abstract String getStringCmd();
 
     /**
      * Gets the status of this Task.

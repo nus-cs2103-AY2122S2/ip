@@ -1,15 +1,17 @@
 package duke.main;
 
-import duke.commands.Command;
-import duke.commands.AddEventCommand;
+
 import duke.commands.AddDeadlineCommand;
+import duke.commands.AddEventCommand;
 import duke.commands.AddToDoCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.MarkCommand;
 import duke.commands.UnmarkCommand;
-import duke.commands.DeleteCommand;
 import duke.commands.WrongCommand;
-import duke.commands.FindCommand;
+
 
 /**
  * Parser class.
@@ -27,7 +29,8 @@ public class Parser {
      * @return Returns a Command to indicate what the last Command run was
      * @throws DukeException when a WrongCommand is given
      */
-    public static Command parseCommands(Ui.Reply type, TaskList toDoList, String cmd, Storage storage) throws DukeException {
+    public static Command parseCommands(Ui.Reply type, TaskList toDoList,
+                                        String cmd, Storage storage) throws DukeException {
         String[] cmdSplit = cmd.split(" ");
         switch (type) {
         case LIST:

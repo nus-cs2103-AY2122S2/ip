@@ -1,8 +1,8 @@
 package duke.commands;
 
 import duke.main.DukeException;
-import duke.main.TaskList;
 import duke.main.Parser;
+import duke.main.TaskList;
 
 /**
  * WrongCommand is a Command.

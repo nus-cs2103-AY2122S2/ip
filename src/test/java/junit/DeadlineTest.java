@@ -1,8 +1,8 @@
 package junit;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 import duke.tasks.Deadline;
 
@@ -12,18 +12,21 @@ public class DeadlineTest {
     @Test
     public void testStringCmd() {
         Deadline testItem = new Deadline("deadlineTest", false, "deadlineTestDate");
-        assertEquals("[ ]&D&deadlineTest&deadlineTestDate", testItem.getStringCmd(), "getStringCmd() works as intended");
+        assertEquals("[ ]&D&deadlineTest&deadlineTestDate", testItem.getStringCmd(),
+                "getStringCmd() works as intended");
     }
 
     @Test
     public void testGetDeadline() {
         Deadline testItem = new Deadline("deadlineTest", false, "deadlineTestDate");
-        assertEquals("(by:deadlineTestDate)", testItem.getDeadline(), "getDeadline() works as intended");
+        assertEquals("(by:deadlineTestDate)", testItem.getDeadline(),
+                "getDeadline() works as intended");
     }
 
     @Test
     public void testToString() {
         Deadline testItem = new Deadline("deadlineTest", false, "deadlineTestDate");
-        assertEquals("[D][ ]deadlineTest(by:deadlineTestDate)", testItem.toString(), "toString() works as intended");
+        assertEquals("[D][ ]deadlineTest(by:deadlineTestDate)", testItem.toString(),
+                "toString() works as intended");
     }
 }

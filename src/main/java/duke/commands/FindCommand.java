@@ -1,8 +1,7 @@
 package duke.commands;
 
-import duke.main.TaskList;
 import duke.main.Parser;
-
+import duke.main.TaskList;
 import duke.tasks.Task;
 
 public class FindCommand extends Command<String> {
