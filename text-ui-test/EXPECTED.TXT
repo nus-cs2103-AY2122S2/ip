@@ -6,6 +6,7 @@ Hello from
 |____/ \__,_|_|\_\___|
 
 enter a command
+use command 'help' to see list of commands
 task added:
 [T][ ] buy groceries
 you now have 1 tasks
