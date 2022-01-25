@@ -8,7 +8,7 @@ import saitama.tasks.Task;
 /**
  * A Command object that adds a task to the task list.
  */
-public class AddCommand extends Command{
+public class AddCommand extends Command {
     private Task task;
 
     public AddCommand(Task task) {

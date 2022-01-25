@@ -8,7 +8,7 @@ import saitama.exceptions.InvalidTaskNumberException;
 /**
  * A Command object that unmarks a given task.
  */
-public class UnmarkCommand extends Command{
+public class UnmarkCommand extends Command {
     private int taskNumber;
 
     public UnmarkCommand(int taskNumber) {

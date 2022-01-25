@@ -8,7 +8,7 @@ import saitama.exceptions.InvalidTaskNumberException;
 /**
  * A Command object that deletes a given task.
  */
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     private int taskNumber;
 
     public DeleteCommand(int taskNumber) {
