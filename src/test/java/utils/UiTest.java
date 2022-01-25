@@ -167,6 +167,14 @@ public class UiTest {
     }
 
     @Test
+    @DisplayName("Tasks with search keyword should be shown")
+    public void showFoundTaskMessage() {
+        ui.foundTasksMatchKeyword(1, "book");
+        String tasksOnSameDate = "Found 1 task containing keyword \"book\".";
+        assertEquals(tasksOnSameDate, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
     @DisplayName("Error message should be shown")
     public void showErrorMessage_invalidDateTime() {
         try {

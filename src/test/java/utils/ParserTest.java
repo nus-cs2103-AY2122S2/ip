@@ -9,6 +9,7 @@ import duke.command.DeleteCommand;
 import duke.command.DeleteAllCommand;
 import duke.command.AddCommand;
 import duke.command.ShowAllTasksOnSameDateCommand;
+import duke.command.FindCommand;
 
 import duke.task.Todo;
 
@@ -110,6 +111,20 @@ public class ParserTest {
             ShowAllTasksOnSameDateCommand showAllTasksOnSameDateCommand = new ShowAllTasksOnSameDateCommand(localDateTime, "2022-01-24 1800");
             Command parsedCommand = Parser.parse("show all 2022-01-24 1800");
             assertEquals(showAllTasksOnSameDateCommand, parsedCommand);
+        } catch (CortanaException e) {
+            System.out.println(e.getMessage());
+            fail();
+        }
+    }
+
+    @Test
+    @DisplayName("Should parse to FindCommand")
+    public void parsedToFindCommand() {
+        try {
+            String keyword = "book";
+            FindCommand findCommand = new FindCommand(keyword);
+            Command parsedCommand = Parser.parse("find book");
+            assertEquals(findCommand, parsedCommand);
         } catch (CortanaException e) {
             System.out.println(e.getMessage());
             fail();
