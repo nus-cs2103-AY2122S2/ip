@@ -6,7 +6,9 @@ import java.io.InputStreamReader;
 
 public class Ui {
     private BufferedReader br;
-    private static final String line = "    ――――――――――――――――――――――――――――――――――\n";;
+    private static final String dashLine = "    -------------------------------------------------------------\n";
+    private static final String curlyLine = "    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+
     private static final String indent = "    ";
 
     private static final String logo = "     ____        _\n"
@@ -26,7 +28,7 @@ public class Ui {
     }
 
     public String showLine() {
-        return line;
+        return curlyLine;
     }
 
     public String showIndent() {
@@ -34,14 +36,14 @@ public class Ui {
     }
 
     public void showGreeting() {
-        System.out.print(logo + "\n" + intro + "\n" + line);
+        System.out.print(logo + "\n" + intro + "\n" + dashLine);
     }
 
     public void showError(String message) {
-        System.out.print(line + indent + message + "\n" + line);
+        System.out.print(curlyLine + indent + message + "\n" + curlyLine);
     }
 
     public void printOutput(String message) {
-        System.out.print(line + indent + message + "\n" + line);
+        System.out.print(curlyLine + indent + message + "\n" + curlyLine);
     }
 }
