@@ -58,7 +58,7 @@ public class Parser {
             this.ct = CommandType.CHANGE_STATUS;
             try {
                 int taskNo = Integer.parseInt(desc) - 1;
-                this.command = new ChangeStatusCommand(MarkStatus.MARK, taskNo);
+                this.command = new ChangeStatusCommand(TaskStatus.MARK, taskNo);
             } catch (NumberFormatException e) {
                 System.out.println(ERROR_INDEX_NOT_INTEGER);
                 canActivate = false;
@@ -69,7 +69,7 @@ public class Parser {
             this.ct = CommandType.CHANGE_STATUS;
             try {
                 int taskNo = Integer.parseInt(desc) - 1;
-                this.command = new ChangeStatusCommand(MarkStatus.UNMARK, taskNo);
+                this.command = new ChangeStatusCommand(TaskStatus.UNMARK, taskNo);
             } catch (NumberFormatException e) {
                 System.out.println(ERROR_INDEX_NOT_INTEGER);
                 canActivate = false;

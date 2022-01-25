@@ -146,8 +146,8 @@ public class TaskList {
         print(CLEAR_TASKS_CONFIRMED);
     }
 
-    public static void markStatus(MarkStatus ms, int index) {
-        switch (ms) {
+    public static void markStatus(TaskStatus ts, int index) {
+        switch (ts) {
         case MARK: {
             try {
                 Task t = tasks.get(index);

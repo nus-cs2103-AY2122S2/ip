@@ -1,14 +1,14 @@
 public class ChangeStatusCommand extends Command {
-    MarkStatus ms;
+    TaskStatus ts;
     int index;
 
-    public ChangeStatusCommand(MarkStatus ms, int index) {
-        this.ms = ms;
+    public ChangeStatusCommand(TaskStatus ts, int index) {
+        this.ts = ts;
         this.index = index;
     }
 
     @Override
     public void activate() {
-        TaskList.markStatus(ms, index);
+        TaskList.markStatus(ts, index);
     }
 }
