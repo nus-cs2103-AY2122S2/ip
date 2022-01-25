@@ -69,9 +69,9 @@ public class Duke {
                 String command = t.getType();
                 String mark = t.getStatusIcon();
                 String desc = t.getDescription();
-                String time = t.getTime();
+                String dateTime = (t.getDate().replace(" ", "-") + " " + t.getTime()).trim();
                 if (command.equals("D") | command.equals("E")) {
-                    toSave = String.join(separator, command, mark, desc, time);
+                    toSave = String.join(separator, command, mark, desc, dateTime);
                 } else {
                     toSave = String.join(separator, command, mark, desc);
                 }
@@ -154,9 +154,9 @@ public class Duke {
         int index = Integer.valueOf(strArr[1]) - 1;
         if (index >= 0 && index < arr.size()) {
             Task t = arr.get(index);
-                deleteTask(t);
-                ans += "Noted. I've removed this task:\n\t\t" + t.toString() +
-                        "\n\tNow you have " + numOfTasks() + " in the list.";;
+            deleteTask(t);
+            ans += "Noted. I've removed this task:\n\t\t" + t.toString() +
+                    "\n\tNow you have " + numOfTasks() + " in the list.";;
         } else {
             throw new InvalidIndexException();
         }
@@ -193,10 +193,14 @@ public class Duke {
         System.out.println(ans);
     }
 
-    private void onDeadline(String ans, String input) throws java.io.IOException {
+
+    private void onDeadline(String ans, String input) throws java.io.IOException, InvalidDateException {
         String desc = input.substring(9, input.indexOf("/by") - 1);
         String by = input.substring(input.indexOf("/by") + 4);
         Deadline t = new Deadline(desc, by);
+        if (!t.isValidDate() && !t.isValidTime()) {
+            throw new InvalidDateException();
+        }
         addTask(t);
         saveToFile();
         ans += "Got it. I've added this task:\n\t\t" + t.toString() +
@@ -204,10 +208,14 @@ public class Duke {
         System.out.println(ans);
     }
 
-    private void onEvent(String ans, String input) throws java.io.IOException {
+
+    private void onEvent(String ans, String input) throws java.io.IOException, InvalidDateException {
         String desc = input.substring(6, input.indexOf("/at") - 1);
         String time = input.substring(input.indexOf("/at") + 4);
         Event t = new Event(desc, time);
+        if (!t.isValidDate() && !t.isValidTime()) {
+            throw new InvalidDateException();
+        }
         addTask(t);
         saveToFile();
         ans += "Got it. I've added this task:\n\t\t" + t.toString() +
@@ -257,4 +265,3 @@ public class Duke {
 
     }
 }
-

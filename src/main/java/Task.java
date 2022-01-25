@@ -22,6 +22,8 @@ public class Task  {
 
     public String getTime() { return ""; };
 
+    public String getDate() { return ""; };
+
     public void markDone() {
         this.isDone = true;
     }
