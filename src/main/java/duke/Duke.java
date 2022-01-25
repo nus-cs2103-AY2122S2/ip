@@ -3,6 +3,9 @@ package duke;
 import command.Command;
 import task.TaskList;
 
+/**
+ * The Duke class deals with running the bot application.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -23,6 +26,9 @@ public class Duke {
         new Duke("./data/duke.txt").run();
     }
 
+    /**
+     * Runs the bot application until the user inputs the exit command.
+     */
     public void run() {
         this.ui.showWelcome();
         boolean isRun = true;

@@ -9,11 +9,21 @@ import task.Todo;
 import task.Deadline;
 import task.Event;
 
+/**
+ * The AddCommand class is a type of Command that is used to add new task.
+ */
 public class AddCommand extends Command {
     public AddCommand(String command, String[] tokenizedCommand) {
         super(command, tokenizedCommand);
     }
 
+    /**
+     * Executes the add command and adds the new task to the TaskList and stores it in the Storage as well.
+     * @param tasks TaskList that stores the current list of tasks.
+     * @param ui Ui of the bot application.
+     * @param storage Storage to store the list of tasks.
+     * @throws DukeException If Storage is unable to save the new task successfully.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task t = null;

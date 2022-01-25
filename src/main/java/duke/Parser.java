@@ -8,11 +8,21 @@ import command.AddCommand;
 import command.DeleteCommand;
 import task.TaskList;
 
+/**
+ * The Parser class deals with making sense of the user command.
+ */
 public class Parser {
     public Parser() {
 
     }
 
+    /**
+     * Returns the user command categorized by the type of command.
+     * @param command The user command that was input.
+     * @param tasks The TaskList containing the list of tasks saved.
+     * @return A type of Command based on the user input command.
+     * @throws DukeException If there are invalid inputs.
+     */
     public static Command parse(String command, TaskList tasks) throws DukeException {
         String[] tokenizedCommand = command.split(" ");
         new DukeException().validateInputs(command, tokenizedCommand, tasks);

@@ -3,6 +3,9 @@ package task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The Deadline class is a type of Task which is used to represent a task that has a deadline.
+ */
 public class Deadline extends Task {
     protected LocalDate by;
 
@@ -11,14 +14,20 @@ public class Deadline extends Task {
         this.by = LocalDate.parse(by);
     }
 
+    /**
+     * Returns the string representation of this deadline.
+     *
+     * @return the string representation of this deadline.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 
     /**
-     * Returns the save format in String of this task.Task object
-     * @return A String for the save format of this task.Task object
+     * Returns the save format of this task.
+     *
+     * @return A String representing the save format of this task.
      */
     @Override
     public String getSaveFormat() {

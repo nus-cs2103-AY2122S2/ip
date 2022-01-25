@@ -2,6 +2,9 @@ package task;
 
 import java.util.ArrayList;
 
+/**
+ * The TaskList class is used to contain a list of tasks and methods to manipulate the tasks.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 
