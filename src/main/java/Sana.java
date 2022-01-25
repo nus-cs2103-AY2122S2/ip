@@ -1,6 +1,7 @@
 import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
 
+import java.util.Date;
 import java.util.LinkedList;
 
 /**
@@ -20,6 +21,9 @@ public class Sana {
     /** ui handles the user interface portion of the program */
     private Ui ui;
 
+    /** parser parses the user command */
+    private Parser parser;
+
     /**
      * Constructor for the Sana class
      */
@@ -27,6 +31,7 @@ public class Sana {
         this.taskMem = new Memory();
         this.userTasks = new TaskList(taskMem.memToList());
         this.ui = new Ui();
+        this.parser = new Parser();
     }
 
     /**
@@ -37,7 +42,7 @@ public class Sana {
 
         while (true) {
             String input = ui.nextLine();
-            commandParser(input);
+            doCommand(input);
             if (input.equals("bye")) {
                 break;
             }
@@ -45,74 +50,58 @@ public class Sana {
     }
 
     /**
-     * This method takes in the user's command and calls the respective Sana commands
+     * This method controls the flow of logic of Sana depending on the user command
      *
      * @param userCommand   the user command
      */
-    public void commandParser(String userCommand) {
+    public void doCommand(String userCommand) {
         ui.border();
+        String[] parsedCmd = parser.parseCommand(userCommand);
+        if (parsedCmd.length == 0) {
+            return;
+        }
+        String command = parsedCmd[0];
         try {
-            if (userCommand.equals("bye")) {
-                ui.closeScanner();
-                ui.bye();
-
-            } else if (userCommand.equals("list")) {
-                list();
-
-            } else if (userCommand.startsWith("mark") || userCommand.startsWith("unmark")) {
-                String[] substringArr = userCommand.split(" ", 2);
-                if (substringArr.length == 1) {
-                    throw new IncompleteCommandException();
-                }
-                int taskIndex = Integer.parseInt(substringArr[1]) - 1;
-                mark(taskIndex, userCommand.startsWith("mark"));
-
-            } else if (userCommand.startsWith("todo ")) {
-                String taskName = userCommand.replaceFirst("todo ", "");
-                addToDo(taskName);
-
-            } else if (userCommand.startsWith("event ")) {
-                String temp = userCommand.replaceFirst("event ", "");
-                if (!temp.contains(" /at ")) {
-                    throw new IncompleteCommandException();
-                }
-                String[] subStrings = temp.split(" /at ", 2);
-                LocalDate eventDate = LocalDate.parse(subStrings[1]);
-                addEvent(subStrings[0], eventDate);
-
-            } else if (userCommand.startsWith("deadline ")) {
-                String temp = userCommand.replaceFirst("deadline ", "");
-                if (!temp.contains(" /by ")) {
-                    throw new IncompleteCommandException();
-                }
-                String[] subStrings = temp.split(" /by ", 2);
-                LocalDate deadlineDate = LocalDate.parse(subStrings[1]);
-                addDeadline(subStrings[0], deadlineDate);
-
-            } else if (userCommand.startsWith("delete ")) {
-                String[] substringArr = userCommand.split(" ", 2);
-                if (substringArr.length == 1) {
-                    throw new IncompleteCommandException();
-                }
-                int taskIndex = Integer.parseInt(substringArr[1]) - 1;
-                delete(taskIndex);
-
-            } else {
-                throw new UnknownCommandException();
-
+            switch (command) {
+                case "bye":
+                    ui.closeScanner();
+                    ui.bye();
+                    break;
+                case "list":
+                    list();
+                    break;
+                case "mark":
+                    int markIndex = Integer.parseInt(parsedCmd[1]) - 1;
+                    mark(markIndex, true);
+                    break;
+                case "unmark":
+                    int unmarkIndex = Integer.parseInt(parsedCmd[1]) - 1;
+                    mark(unmarkIndex, false);
+                    break;
+                case "todo":
+                    addToDo(parsedCmd[1]);
+                    break;
+                case "event":
+                    LocalDate eventDate = LocalDate.parse(parsedCmd[2]);
+                    addEvent(parsedCmd[1], eventDate);
+                    break;
+                case "deadline":
+                    LocalDate deadlineDate = LocalDate.parse(parsedCmd[2]);
+                    addDeadline(parsedCmd[1], deadlineDate);
+                    break;
+                case "delete":
+                    int deleteIndex = Integer.parseInt(parsedCmd[1]) - 1;
+                    delete(deleteIndex);
             }
-        } catch (UnknownCommandException e) {
+        } catch (OutOfBoundsTaskException e) {
             System.out.println(e.getMessage());
         } catch (IncompleteCommandException e) {
             System.out.println(e.getMessage());
-        } catch (OutOfBoundsTaskException e) {
-            System.out.println(e.getMessage());
-        } catch (NumberFormatException e) {
-            System.out.println("Where's my number!");
         } catch (DateTimeParseException e) {
-            System.out.println(e);
+            System.out.println("Give your date in YYYY-MM-DD format!");
+        } catch (NumberFormatException e) {
+            System.out.println("I don't know what task you're referring to!");
         }
-        taskMem.updateMemory(userTasks.toList());
         ui.border();
     }
 

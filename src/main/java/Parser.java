@@ -25,13 +25,13 @@ public class Parser {
 
             } else if (userCommand.startsWith("mark ")) {
                 String[] substringArr = userCommand.split(" ", 2);
-                if (substringArr.length == 1) {
+                if (substringArr[1].equals("")) {
                     throw new IncompleteCommandException();
                 }
                 return new String[]{"mark", substringArr[1]};
             } else if (userCommand.startsWith("unmark ")) {
                 String[] substringArr = userCommand.split(" ", 2);
-                if (substringArr.length == 1) {
+                if (substringArr[1].equals("")) {
                     throw new IncompleteCommandException();
                 }
                 return new String[]{"unmark", substringArr[1]};
@@ -64,7 +64,7 @@ public class Parser {
 
             } else if (userCommand.startsWith("delete ")) {
                 String[] substringArr = userCommand.split(" ", 2);
-                if (substringArr.length == 1) {
+                if (substringArr[1].equals("")) {
                     throw new IncompleteCommandException();
                 }
                 return new String[]{"delete", substringArr[1]};
@@ -78,8 +78,6 @@ public class Parser {
             System.out.println(e.getMessage());
         } catch (NumberFormatException e) {
             System.out.println("Where's my number!");
-        } catch (DateTimeParseException e) {
-            System.out.println("Give your date in YYYY-MM-DD format!");
         }
         return new String[] {};
     }
