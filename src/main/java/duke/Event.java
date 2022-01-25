@@ -4,11 +4,27 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents task of type event
+ */
 public class Event extends Task {
+
+    /**
+     * String of time indicating when task is occurring
+     */
     private String time;
-    LocalDateTime datetime;
+    /**
+     * Datetime indicating when task is occurring
+     * Null if time cannot be converted to datetime
+     */
+    private LocalDateTime datetime;
 
-
+    /**
+     * Creation of Event Task
+     *
+     * @param description String of task description
+     * @param time String representing when task is occurring
+     */
     Event(String description, String time) {
         super(description);
         this.time = time;
@@ -19,9 +35,12 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Prints details of Event
+     */
     public void print() {
         System.out.print("[E]");
-        System.out.print("[" + (this.completed ? "x" : " ") +  "] " + this.description);
+        System.out.print("[" + (this.isCompleted ? "x" : " ") +  "] " + this.description);
         if (datetime == null) {
             System.out.println(" (at: " + this.time + ")");
         } else {
@@ -30,6 +49,15 @@ public class Event extends Task {
 
     }
 
+    /**
+     * Returns details of Event as a String array
+     * Index 0: TaskType
+     * Index 1: Completed
+     * Index 2: Description
+     * Index 3: Time
+     *
+     * @return String array of Event details
+     */
     @Override
     public String[] getDetails() {
         String[] details = super.getDetails();

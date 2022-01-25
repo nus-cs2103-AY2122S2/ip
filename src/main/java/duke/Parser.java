@@ -1,7 +1,17 @@
 package duke;
 
+/**
+ * Represents a parser to format user input
+ */
 public class Parser {
 
+    /**
+     * Returns Command enum of string that user entered
+     *
+     * @param command String that needs to be converted to Command enum
+     * @return Command enum of command to execute
+     * @throws CommandNotFoundException when command is not found
+     */
     public static Command parseCommand(String command) throws CommandNotFoundException {
         command = command.toLowerCase();
         if (command.equals("list")) {
@@ -27,6 +37,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns String array of formatted input
+     * Index 0: Description of task
+     * Index 1: Time
+     * Time will be an empty string if not provided
+     *
+     * @param input String to be formatted
+     * @return String array of formatted input
+     */
     public static String[] parseInput(String input) {
         input = input.equals("")? input : input.substring(1);
         String[] inputs = new String[2];
