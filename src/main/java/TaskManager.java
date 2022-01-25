@@ -11,7 +11,7 @@ public class TaskManager {
         this.tasks = new ArrayList<Task>();
     }
 
-    public void mainLogic() {
+    public void handleLogic() {
 
         String userInput = "";
         Scanner sc = new Scanner(System.in);
@@ -98,7 +98,7 @@ public class TaskManager {
                         throw new DukeException.DukeInvalidNumberException();
                     }
                     tasks.get(toMark - 1).markCompleted();
-                } catch (Exception e){
+                } catch (DukeException | NumberFormatException e){
                     throw new DukeException.DukeInvalidNumberException();
                 }
                 break;
@@ -111,7 +111,7 @@ public class TaskManager {
                         throw new DukeException.DukeInvalidNumberException();
                     }
                     tasks.get(toUnmark - 1).markNotCompleted();
-                } catch (Exception e){
+                } catch (DukeException | NumberFormatException e){
                     throw new DukeException.DukeInvalidNumberException();
                 }
                 break;
@@ -120,7 +120,7 @@ public class TaskManager {
 
                 try {
                     this.addToDo(st.nextToken(""));
-                } catch (Exception e){
+                } catch (NoSuchElementException e){
                     throw new DukeException.DukeNoTaskGivenException();
                 }
 
@@ -162,7 +162,7 @@ public class TaskManager {
                         throw new DukeException.DukeInvalidNumberException();
                     }
                     this.deleteTask(toDelete);
-                } catch (DukeException e){
+                } catch (NumberFormatException | DukeException e){
                     throw new DukeException.DukeInvalidNumberException();
                 }
                 break;
