@@ -109,6 +109,12 @@ public class Duke {
                     continue;
                 }
 
+                // find from list
+                if (command.equals("find")) {
+                    taskList.findTask(userInput);
+                    continue;
+                }
+
                 // Invalid command inputs result
                 throw new DukeCommandDoesNotExistException("OOPS!!! This command does not exist.");
 
