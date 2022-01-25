@@ -11,4 +11,9 @@ public class Events extends Task {
         super(description);
         this.duration = duration;
     }
+
+    @Override
+    public String toString() {
+        return "[E]" + super.toString() + " (at: " + this.duration + ")";
+    }
 }

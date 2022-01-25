@@ -38,6 +38,14 @@ public class Duke {
         bw.flush();
     }
 
+    private static final String getDateTime(String[] inputArr) {
+        return inputArr[1].split("/")[1].split(" ", 2)[1]; // split input from slash
+    }
+
+    private static final String getDescription(String[] inputArr) {
+        return inputArr[1].split("/")[0]; // split input from slash
+    }
+
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -49,16 +57,16 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         printLineBreak();
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-        String inputCommand = "";
-        String[] inputCommandArr = new String[100];
+        String input; // to store raw input command
+        String[] inputArr; // to store split input command
         boolean ifBye = false;
         do {
             printLineBreak();
             System.out.println();
-            inputCommand = br.readLine();
-            inputCommandArr = inputCommand.split(" ", 2);
+            input = br.readLine();
+            inputArr = input.split(" ", 2); // split first word from body
             printLineBreak();
-            switch (inputCommandArr[0]) {
+            switch (inputArr[0]) {
             case "bye":
                 ifBye = true;
                 System.out.println("Bye. Hope to see you again soon!");
@@ -71,7 +79,7 @@ public class Duke {
 
             case "mark":
                 bw.write("Nice! I've marked this task as done:\n");
-                int index = Integer.parseInt(inputCommandArr[1]) - 1;
+                int index = Integer.parseInt(inputArr[1]) - 1;
                 Task curr = masterList.get(index); // task to be marked
                 masterList.set(index, curr.markAsDone());
                 bw.write(masterList.get(index).toString());
@@ -80,16 +88,33 @@ public class Duke {
 
             case "unmark":
                 bw.write("OK, I've marked this task as not done yet:\n");
-                int indexUnmark = Integer.parseInt(inputCommandArr[1]) - 1;
+                int indexUnmark = Integer.parseInt(inputArr[1]) - 1;
                 Task currUnmark = masterList.get(indexUnmark); // task to be unmarked
                 masterList.set(indexUnmark, currUnmark.unmarkItem());
                 bw.write(masterList.get(indexUnmark).toString());
                 bw.flush();
                 break;
 
+            case "deadline":
+                masterList.add(new Deadlines(getDescription(inputArr), getDateTime(inputArr)));
+                System.out.println("Got it. I've added this task:\n\t " + input
+                        + "\nNow you have " + masterList.size() + " tasks in the list.");
+                break;
+
+            case "todo":
+                masterList.add(new ToDos(getDescription(inputArr)));
+                System.out.println("Got it. I've added this task:\n\t " + input
+                        + "\nNow you have " + masterList.size() + " tasks in the list.");
+                break;
+
+            case "event":
+                masterList.add(new Events(getDescription(inputArr), getDateTime(inputArr)));
+                System.out.println("Got it. I've added this task:\n\t " + input
+                        + "\nNow you have " + masterList.size() + " tasks in the list.");
+                break;
+
             default:
-                masterList.add(new Task(inputCommand));
-                System.out.println("added: " + inputCommand);
+                System.out.println("Invalid input: " + input);
             }
         } while (!ifBye);
         printLineBreak();
