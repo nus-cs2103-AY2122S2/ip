@@ -81,8 +81,8 @@ public class Parser {
                 throw new DukeException("Oh no! I don't understand what that means...");
             }
         } catch (DateTimeParseException e) {
-            throw new DukeException("Invalid date/time format.\n    " +
-                    "Please use the following format: yyyy-mm-dd HH:mm");
+            throw new DukeException("Invalid date/time format.\n    "
+                    + "Please use the following format: yyyy-mm-dd HH:mm");
         }
 
         return new InvalidCommand();
@@ -115,7 +115,8 @@ public class Parser {
      */
     public static boolean keywordExists(String[] descrArr, String keyword, String taskType) throws DukeException {
         if (descrArr.length == 1) {
-            throw new DukeException("Oops, please use " + keyword + " to set a date and time for this " + taskType + "!");
+            throw new DukeException("Oops, please use " + keyword
+                    + " to set a date and time for this " + taskType + "!");
         } else {
             return true;
         }
