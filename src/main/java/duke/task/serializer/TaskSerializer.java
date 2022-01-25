@@ -15,7 +15,7 @@ import java.io.IOException;
  */
 
 public class TaskSerializer {
-    public static Task inflate(byte[] data) throws DukeIOException {
+    static Task inflate(byte[] data) throws DukeIOException {
         ByteArrayInputStream memStream = new ByteArrayInputStream(data);
         DataInputStream dataStream = new DataInputStream(memStream);
 
@@ -31,7 +31,7 @@ public class TaskSerializer {
         }
     }
 
-    public static byte[] deflate(Task task) throws DukeIOException {
+    static byte[] deflate(Task task) throws DukeIOException {
         ByteArrayOutputStream memStream = new ByteArrayOutputStream();
         DataOutputStream dataStream = new DataOutputStream(memStream);
 

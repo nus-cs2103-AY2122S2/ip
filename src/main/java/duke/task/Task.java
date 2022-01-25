@@ -13,7 +13,7 @@ public abstract class Task implements ISerializable {
     private String description;
     private boolean isDone;
 
-    public Task(TaskType type, String description) {
+    protected Task(TaskType type, String description) {
         this.type = type;
         this.description = description;
         this.isDone = false;
