@@ -24,9 +24,9 @@ public class Storage {
      * file provided by filePath. Creates the file
      * if it does not exist.
      *
-     * @param filePath Path of file to link
+     * @param filePath Path of file to link.
      * @return Storage instance linked to Path
-     * given by filePath
+     * given by filePath.
      */
     public static Storage initStorage(Path filePath) throws IOException {
         if (Files.notExists(filePath)) {
@@ -40,8 +40,8 @@ public class Storage {
      * Writes each item in data as a new line to
      * linked filePath.
      *
-     * @param data ArrayList of data to write
-     * @throws IOException if the write fails
+     * @param data ArrayList of data to write.
+     * @throws IOException If the write fails.
      */
     public void writeAll(ArrayList<String> data) throws IOException {
         Files.write(this.filePath, data, Charset.defaultCharset());
@@ -51,8 +51,8 @@ public class Storage {
      * Read all lines of linked filePath to
      * an ArrayList.
      *
-     * @return ArrayList containing each line as an element
-     * @throws IOException if the read fails
+     * @return ArrayList containing each line as an element.
+     * @throws IOException If the read fails.
      */
     public ArrayList<String> readAll() throws IOException {
         List<String> lines = Files.readAllLines(this.filePath, Charset.defaultCharset());

@@ -4,13 +4,17 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * A concrete task which contains a name
+ * and a deadline by which the task should
+ * be completed.
+ */
 public class Deadline extends Task {
-
     final static SimpleDateFormat inputDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
     final static SimpleDateFormat outputDateFormat = new SimpleDateFormat("dd MMM");
-    /**
-     * Deadline for current task
-     */
+
+    /** Deadline for current task */
     private final Date deadline;
 
     public Deadline(String name, String deadline) {
@@ -20,11 +24,11 @@ public class Deadline extends Task {
 
     /**
      * Parse given date string to Date object, where
-     * string must be in the format of DD/MM/YYYY
+     * string must be in the format of DD/MM/YYYY.
      *
-     * @param dateString date string to parse
+     * @param dateString Date string to parse.
      * @return Date object corresponding to dateString
-     * @throws IllegalArgumentException if the date string is not of DD/MM/YYYY format
+     * @throws IllegalArgumentException If the date string is not of DD/MM/YYYY format.
      */
     private static Date parseDeadline(String dateString) throws IllegalArgumentException {
         try {

@@ -6,8 +6,6 @@ import ui.command.Command;
 import java.util.ArrayList;
 
 /**
- * @author Jiaaa-yang
- *
  * ChatBot class that allows for running of user command
  * and keeping track of its termination status.
  */
@@ -15,14 +13,10 @@ public class ChatBot {
     private final static String WELCOME_STRING = "Hello I'm Duke!\n"
                                                 + "What can I do for you?";
 
-    /**
-     * Task list maintaining list of tasks for user
-     */
+    /** Task list maintaining list of tasks for user */
     private final TaskList taskList;
 
-    /**
-     * Boolean to track if bot has received a termination command
-     */
+    /** Boolean to track if bot has received a termination command */
     private boolean hasTerminated;
 
     public ChatBot(TaskList taskList) {
@@ -32,16 +26,16 @@ public class ChatBot {
 
     /**
      * Performs initialisation of the ChatBot. Should be called
-     * before receiving commands
+     * before receiving commands.
      */
     public void initialise() {
         System.out.println(WELCOME_STRING);
     }
 
     /**
-     * Runs the command given by user input string
+     * Runs the command given by user input string.
      *
-     * @param input String command by user to run
+     * @param input String command by user to run.
      */
     public void runCommand(String input) {
         try {

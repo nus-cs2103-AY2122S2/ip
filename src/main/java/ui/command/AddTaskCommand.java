@@ -10,10 +10,8 @@ import java.io.File;
 import java.util.ArrayList;
 
 /**
- * @author Jiaaa-yang
- *
  * Command which adds a given task
- * to a given list.
+ * to a given TaskList.
  */
 public class AddTaskCommand extends TaskListCommand {
 
@@ -37,12 +35,12 @@ public class AddTaskCommand extends TaskListCommand {
 
     /**
      * Creates a new task based on the name and args
-     * of the command
+     * of the command.
      *
-     * @param name Name of task to create
-     * @param args Args to create task with
-     * @return New Task created based on name and args
-     * @throws IllegalArgumentException if args are invalid for task
+     * @param name Name of task to create.
+     * @param args Args to create task with.
+     * @return New Task created based on name and args.
+     * @throws IllegalArgumentException If args are invalid for task.
      */
     private static Task createTask(String name, String args) throws IllegalArgumentException {
         Task task = null;

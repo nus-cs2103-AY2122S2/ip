@@ -8,8 +8,6 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 
 /**
- * @author Jiaaa-yang
- *
  * Main entry class to run ChatBot instance.
  */
 public class Duke {

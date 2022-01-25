@@ -1,34 +1,32 @@
 package task;
 
 /**
- * @author Jiaaa-yang
- *
  * A class to represent a Task
- * inputted by the ChatBot user
+ * created by user of the ChatBot.
  */
 public abstract class Task {
     /**
-     * Get the string representation of current
-     * task with its name and any additional info
+     * Gets the string representation of current
+     * task with its name and any additional info.
      *
-     * @return String representing current task
+     * @return String representing current task.
      */
     public abstract String getDescription();
 
     /**
-     * Get the serialised data of current task,
+     * Gets the serialised data of current task,
      * separated by commas, for storage in disk file.
      *
-     * @return String representing data of current task
+     * @return String representing data of current task.
      */
     public abstract String encodeTaskData();
 
     /**
      * Decodes task data previously saved to file to
-     * a task with its saved info
+     * a task with its saved info.
      *
-     * @param taskData String containing data of the task
-     * @return Task corresponding to saved data
+     * @param taskData String containing data of the task.
+     * @return Task corresponding to saved data.
      */
     public static Task decodeTaskData(String taskData) {
         String[] data = taskData.split(",");
@@ -54,14 +52,10 @@ public abstract class Task {
         return task;
     }
 
-    /**
-     * String description of current task
-     */
+    /** String description of current task */
     private final String name;
 
-    /**
-     * Whether the task is marked as done
-     */
+    /** Whether the task is marked as done */
     private boolean isDone;
 
     protected Task(String name) {
@@ -71,9 +65,9 @@ public abstract class Task {
 
     /**
      * Get a checkbox describing whether the
-     * task is done or not
+     * task is done or not.
      *
-     * @return String representing done status of task
+     * @return String representing done status of task.
      */
     protected String getDoneStatusCheckbox() {
         return this.isDone ? "[X]" : "[ ]";

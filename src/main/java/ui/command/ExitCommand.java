@@ -3,8 +3,6 @@ package ui.command;
 import java.util.ArrayList;
 
 /**
- * @author Jiaaa-yang
- *
  * Command which causes the termination
  * of the ChatBot.
  */
