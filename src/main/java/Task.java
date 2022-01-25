@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task implements Saving {
     protected boolean isDone;
     protected String taskDescription;
 

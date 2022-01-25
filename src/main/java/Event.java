@@ -1,5 +1,6 @@
 public class Event extends Task {
     private String eventTime;
+    private static final char EVENT_SYMBOL = 'E';
 
     public Event() {
         super();
@@ -14,7 +15,17 @@ public class Event extends Task {
     }
 
     @Override
+    public String saveFileFormat() {
+        return EVENT_SYMBOL + "|" + isDone + "|" + taskDescription + "\n";
+    }
+
+    @Override
+    public void readFile() {
+
+    }
+
+    @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.eventTime + ")";
+        return "[" + EVENT_SYMBOL + "]" + super.toString() + " (at: " + this.eventTime + ")";
     }
 }
