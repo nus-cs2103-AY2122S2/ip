@@ -34,4 +34,14 @@ public class Task {
     public String getType() {
         return this.type;
     }
+
+    /**
+     * Returns whether task description contains given keyword.
+     *
+     * @param keyword The keyword used to search for tasks.
+     * @return True if the task description contains keyword, false otherwise.
+     */
+    public boolean hasKeyword(String keyword) {
+        return description.contains(keyword);
+    }
 }

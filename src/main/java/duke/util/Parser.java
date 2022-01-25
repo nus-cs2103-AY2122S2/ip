@@ -17,34 +17,35 @@ public class Parser {
         String description = fullInput.replace(command + " ", "");
 
         try {
-            if (command.equals("list")) {
+            switch(command) {
+            case "list":
                 return new ListCommand();
 
-            } else if (command.equals("delete")) {
+            case "delete":
                 if (descriptionExists(inputArr, "Please specify a task number!")) {
                     int taskNum = Integer.parseInt(description);
                     return new DeleteCommand(taskNum);
                 }
 
-            } else if (command.equals("mark")) {
+            case "mark":
                 if (descriptionExists(inputArr, "Please specify a task number!")) {
                     int taskNum = Integer.parseInt(description);
                     return new MarkCommand(taskNum);
                 }
 
-            } else if (command.equals("unmark")) {
+            case "unmark":
                 if (descriptionExists(inputArr, "Please specify a task number!")) {
                     int taskNum = Integer.parseInt(description);
                     return new UnmarkCommand(taskNum);
                 }
 
-            } else if (command.equals("todo")) {
+            case "todo":
                 if (descriptionExists(inputArr, "Oops, a todo description cannot be left empty!")) {
                     Task task = new Todo(description);
                     return new AddCommand(task);
                 }
 
-            } else if (command.equals("deadline")) {
+            case "deadline":
                 if (descriptionExists(inputArr, "Oops, a deadline description cannot be left empty!")) {
                     String[] descrArr = description.split(" /by ");
                     if (keywordExists(descrArr, "/by", "deadline")) {
@@ -54,7 +55,7 @@ public class Parser {
                     }
                 }
 
-            } else if (command.equals("event")) {
+            case "event":
                 if (descriptionExists(inputArr, "Oops, an event description cannot be left empty!")) {
                     String[] descrArr = description.split(" /at ");
                     if (keywordExists(descrArr, "/at", "event")) {
@@ -64,18 +65,25 @@ public class Parser {
                     }
                 }
 
-            } else if (command.equals("bye")) {
+            case "find":
+                if (descriptionExists(inputArr, "Please specify a keyword!")) {
+                    if (inputArr.length > 2) {
+                        throw new DukeException("Please specify only one keyword!");
+                    } else {
+                        return new FindCommand(description);
+                    }
+                }
+
+            case "bye":
                 return new ExitCommand();
 
-            } else {
+            default:
                 throw new DukeException("Oh no! I don't understand what that means...");
             }
         } catch (DateTimeParseException e) {
             throw new DukeException("Invalid date/time format.\n    " +
                     "Please use the following format: yyyy-mm-dd HH:mm");
         }
-
-        return new InvalidCommand();
     }
 
     public static boolean descriptionExists(String[] inputArr, String errorMessage) throws DukeException {
