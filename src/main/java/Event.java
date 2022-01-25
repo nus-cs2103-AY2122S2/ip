@@ -16,7 +16,8 @@ public class Event extends Task {
 
     @Override
     public String printStatus() {
-        return "[E] " + Task.statusSymbols[super.getStatus()] + " " + this.toString() + " (at: " + this.date
+        return "[E] " + Task.statusSymbols[super.getStatus()] + " " + this.toString() + " (at: "
+                + this.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"))
                 + " from " + this.startTime.format(DateTimeFormatter.ofPattern("HH:mm")) + " to "
                 + this.endTime.format(DateTimeFormatter.ofPattern("HH:mm")) + ")";
     }
