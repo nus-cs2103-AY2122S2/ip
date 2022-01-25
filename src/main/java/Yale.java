@@ -15,7 +15,8 @@ public class Yale {
         System.out.println("The name's Yale.\n" );
         Scanner scanner = new Scanner(System.in);
         TaskList list = new TaskList();
-        readSavedData("data/yale.txt");
+        String fileData = FileRead.loadFileContents("data/yale.txt");
+        list.importIn(fileData);
         while (true) {
             String command = receiveInput(scanner);
             performAction(command, list);
@@ -150,7 +151,6 @@ public class Yale {
             System.out.println("Error: " + command
                     + " is not a valid command. Please try again.");
             }
-
     }
 
     /**
@@ -171,27 +171,10 @@ public class Yale {
     public static void writeActionTo(String filePath, TaskList list) {
         String file2 = filePath;
         try {
-            FileWrite.writeToFile(file2, list.listOut());
+            FileWrite.writeToFile(file2, list.exportOut());
         }
-//        catch (FileAlreadyExistsException e) {
-//            System.out.println("Something went wrong: " + e.getMessage());
-//        } catch (NoSuchFileException e) {
-//            System.out.println("Something went wrong: " + e.getMessage());
-//        }
         catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
-        }
-    }
-
-    /**
-     * Reads each line from specified file
-     * @param filePath
-     */
-    public static void readSavedData(String filePath) {
-        try {
-            FileRead.printFileContents(filePath);
-        } catch (IOException e) {
-            System.out.println("File not found");
         }
     }
 }
