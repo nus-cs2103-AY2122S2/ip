@@ -24,7 +24,7 @@ class Storage {
         return Files.exists(pathToFile);
     }
 
-    protected ArrayList<Task> importTasks() {
+    protected ArrayList<Task> importTasks() { // CHANGE THIS IN THE FUTURE, TEXT HANDLING SHLD BE DONE BY PARSE
         if (!doesFileExist()) {
             System.out.println("Existing file not found, starting fresh...");
             return new ArrayList<>();
@@ -63,7 +63,7 @@ class Storage {
         return taskList;
     }
 
-    protected boolean exportTasks(List<Task> taskList) {
+    protected boolean exportTasks(List<Task> taskList) { // CHANGE THIS IN THE FUTURE, TEXT HANDLING SHLD BE DONE BY PARSE
         // Opening file for writing
         BufferedWriter writer;
         try {

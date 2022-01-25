@@ -1,7 +1,8 @@
 package kidsnd274.duke;
 
+import kidsnd274.duke.command.CommandResult;
+
 import java.io.PrintStream;
-import java.nio.charset.Charset;
 import java.util.Scanner;
 
 // Handles Terminal Input and Output of the program
@@ -39,8 +40,8 @@ public class TextUi {
         printMessage(generateGoodbye());
     }
 
-    public void printResults(String result) { // CHange this to CommandResult in the future
-        printMessage(generateResponse(result));
+    public void printResults(CommandResult result) { // CHange this to CommandResult in the future
+        printMessage(generateResponse(result.toString()));
     }
 
     private void printMessage(String input) {
