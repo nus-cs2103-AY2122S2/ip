@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 
 
@@ -29,16 +27,35 @@ public class Duke {
     }
 
     public static void main(String[] args) throws IOException {
+        String s = "data/duke.txt";
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String bot = "Hello! I'm Duke\nHere is a list of commands for your reference!\n";
         String response = "";
 
         ArrayList<Task> tasks = new ArrayList<Task>();
 
+
         printLines();
         System.out.println(bot);
         printHelp();
         printLines();
+
+
+        try {
+            FileInputStream fis = new FileInputStream(s);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            tasks = (ArrayList<Task>) ois.readObject();
+            ois.close();
+        } catch (FileNotFoundException | ClassNotFoundException e) {
+            File f = new File(s);
+            f.getParentFile().mkdirs();
+            f.createNewFile();
+        } catch (EOFException e) {
+            System.out.println(e);
+        }
+
+        FileOutputStream fos = new FileOutputStream(s);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
 
         do {
             response = reader.readLine().trim();
@@ -119,6 +136,9 @@ public class Duke {
                 }
                 if (valid == false) {
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                } else {
+                    oos.writeObject(tasks);
+                    oos.close();
                 }
                 printLines();
             }
