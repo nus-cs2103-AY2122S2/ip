@@ -46,7 +46,6 @@ public class Deadline extends Task {
     }
 
     public boolean isValidDate() {
-//        System.out.println(this.by.split(" ")[0] + " this goes into validDate");
         String d = this.by.split(" ")[0].replace("-", " ");
         for (String format : dateFormats) {
             try {

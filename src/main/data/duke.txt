@@ -1,3 +1,0 @@
-T# #borrow book
-D# #return book#Dec-21-2020
-E# #proj#Dec-21-2020 12:22 pm
