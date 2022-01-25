@@ -13,7 +13,7 @@ public class Deadline extends Task {
     }
 
     public String getBy() {
-        return this.by.toString();
+        return this.by.format(Const.OUT_TIME_FORMATTER);
     }
 
     @Override

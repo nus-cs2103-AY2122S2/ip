@@ -1,5 +1,6 @@
 package duke;
 
+import duke.common.Const;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -65,13 +66,13 @@ public class Storage {
                 }
             } else if (taskString[0].equals("D")) {
                 taskList.addTask(taskString[2],
-                        LocalDateTime.parse(taskString[3]), Task.Type.DEADLINE);
+                        LocalDateTime.parse(taskString[3], Const.OUT_TIME_FORMATTER), Task.Type.DEADLINE);
                 if (taskString[1].equals("1")) {
                     taskList.markTask(idx);
                 }
             } else if (taskString[0].equals("E")) {
                 taskList.addTask(taskString[2],
-                        LocalDateTime.parse(taskString[3]), Task.Type.EVENT);
+                        LocalDateTime.parse(taskString[3], Const.OUT_TIME_FORMATTER), Task.Type.EVENT);
                 if (taskString[1].equals("1")) {
                     taskList.markTask(idx);
                 }

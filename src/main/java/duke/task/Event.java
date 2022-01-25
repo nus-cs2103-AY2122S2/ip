@@ -13,7 +13,7 @@ public class Event extends Task {
     }
 
     public String getAt() {
-        return this.at.toString();
+        return this.at.format(Const.OUT_TIME_FORMATTER);
     }
 
     @Override
