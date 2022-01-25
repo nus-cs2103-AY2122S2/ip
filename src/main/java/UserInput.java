@@ -1,3 +1,5 @@
+import java.time.DateTimeException;
+
 public class UserInput {
     private String command = "";
     private String description = "";
@@ -19,15 +21,15 @@ public class UserInput {
         return this.time;
     }
 
-    private void processInput(String input) {
+    private void processInput(String input) throws DateTimeException {
         int descriptionStart = input.indexOf(' ');
         int timeStart = input.indexOf('/');
 
         // process the user input into different segments
-        if(descriptionStart != -1) {
+        if (descriptionStart != -1) {
             // sentence input
             this.command = input.substring(0, descriptionStart);
-            if(timeStart != -1) {
+            if (timeStart != -1) {
                 // has time input
                 this.description = input.substring(descriptionStart, timeStart);
                 this.description = this.description.replaceFirst(" ", "");
