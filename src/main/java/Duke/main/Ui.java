@@ -1,7 +1,6 @@
 package Duke.main;
 
 public class Ui {
-
     public static final String line = "\n_______________________^_^__________________________________\n";
     public static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"

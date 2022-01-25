@@ -11,7 +11,6 @@ public class Duke {
     public Ui ui;
 
     public Duke(String filePath) throws ClassNotFoundException, IOException {
-
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.readFromFile());
@@ -22,7 +21,6 @@ public class Duke {
         } catch (IOException e) {
             throw e;
         }
-
     }
 
     public void run() throws IOException, ClassNotFoundException {
@@ -32,12 +30,9 @@ public class Duke {
             Parser p = new Parser(storage, tasks, ui, sc.nextLine());
             p.userCommand();
         }
-
-
     }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         new Duke("duke_Data_Saved.txt").run();
     }
-
 }

@@ -38,12 +38,14 @@ public class Parser {
         if (inputArr[0].equals("bye")) {
             Ui.byeMessage();
             System.exit(0);
+
         } else if (inputArr[0].equals("list")) {
             Ui.listMessage();
             for (int i = 1; i <= taskList.getTaskList().size(); i++) {
                 System.out.println(i + "." + taskList.getTaskList().get(i - 1));
             }
             System.out.println(Ui.line);
+
         } else if (inputArr[0].equals("mark") && isInteger(inputArr[1])) {
             try {
                 int taskNum = Integer.parseInt(inputArr[1]) - 1;
@@ -65,6 +67,7 @@ public class Parser {
             } catch (IndexOutOfBoundsException exp) {
                 Ui.markErrorMessage();
             }
+
         } else if (inputArr[0].equals("todo")) {
             ToDo t = new ToDo(inputArr[1]);
             taskList.addTodoTask(t);

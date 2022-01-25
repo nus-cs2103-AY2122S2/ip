@@ -27,5 +27,4 @@ public class Task implements Serializable {
         this.isDone = false;
     }
 
-    //...
 }
