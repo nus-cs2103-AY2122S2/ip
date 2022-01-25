@@ -20,6 +20,7 @@ public class Parser {
         TODO("todo"),
         DEADLINE("deadline"),
         EVENT("event"),
+        FIND("find"),
         BYE("bye");
 
         private String command;
@@ -76,12 +77,26 @@ public class Parser {
             } catch (SpikeException e) {
                 return new IncorrectCommand(e.getMessage());
             }
+        case FIND:
+            try {
+                return parseFind(inputLine);
+            } catch (SpikeException e) {
+                return new IncorrectCommand(e.getMessage());
+            }
         case BYE:
             return parseExit();
         default:
             return new IncorrectCommand("Should not reach this line");
         }
-     }
+    }
+
+    private Command parseFind(String inputLine) throws SpikeException {
+        if (inputLine.length() <= 5) {
+            throw new SpikeException("Kindly enter the keyword for finding task");
+        }
+        return new FindCommand(inputLine.substring(5));
+    }
+
 
     private Command parseList(String inputLine) throws SpikeException {
          if (inputLine.length() >= 5) {

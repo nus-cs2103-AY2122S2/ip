@@ -27,14 +27,14 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks) {
-        tasks.deleteTask(task);
-        return printDeletedTask(task, tasks);
+        tasks.getTasks().remove(task);
+        return getDeletedTaskText(task, tasks);
     }
 
     /**
      * Returns the message needed for printing when deleting task.
      */
-    private String printDeletedTask(Task task, TaskList tasks) {
+    public String getDeletedTaskText(Task task, TaskList tasks) {
         String result = " Noted. I've removed this task: \n"
                 + String.format("    %s\n", task)
                 + String.format("Now you have %s task(s) in the list.", tasks.getTasks().size());
