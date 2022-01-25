@@ -17,7 +17,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor for Deadline objects
-     *
+     * 
      * @param deadlineName  the deadline name
      * @param deadlineTime  the deadline
      */
