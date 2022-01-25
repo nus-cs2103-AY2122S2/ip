@@ -1,5 +1,8 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import duke.DukeException;
 /**
  * Represents a task object that needs to be completed by
  * a certain date.

@@ -1,3 +1,7 @@
+package duke.storage;
+
+import duke.FileHandler;
+import duke.task.Task;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;

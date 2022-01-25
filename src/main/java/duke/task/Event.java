@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.task.Task;
+import duke.DukeException;
+
 public class Event extends Task {
 
     private String date;

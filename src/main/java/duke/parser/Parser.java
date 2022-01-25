@@ -1,3 +1,6 @@
+package duke.parser;
+
+import duke.command.*;
 
 public class Parser {
 
@@ -17,8 +20,6 @@ public class Parser {
      *
      * @param input The input string containing the number and a word.
      * @return The integer value after the word.
-     * @throws DukeException If there are no numerical value and
-     * if there are more than one numerical values.
      */
     public static int getIndex(String input) {
         try {
