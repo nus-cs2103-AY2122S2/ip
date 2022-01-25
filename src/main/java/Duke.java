@@ -1,13 +1,23 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Duke {
+
+    public static List<Task> taskList;
 
     private static void run() {
         Scanner sc = new Scanner(System.in);
         boolean exitFlag = false;
-        List<Task> taskList = new ArrayList<>();
 
         while(!exitFlag) {
             try {
@@ -69,9 +79,69 @@ public class Duke {
         Command.GREET.genericResponse(greeting);
     }
 
-    public static void main(String[] args) {
+    private static void init() throws DukeException, IOException {
+        String currDir = System.getProperty("user.dir");
+        String dataName = "test.dat";
+        Path dataDir = Paths.get(currDir, "data", dataName);
+        File dataFile = new File(String.valueOf(dataDir));
+
+        // Check if directory and folder exists
+        dataFile.getParentFile().mkdirs();
+        if (!dataFile.exists()) { dataFile.createNewFile(); }
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(dataFile));
+
+            taskList = new ArrayList<>();
+            List<String> testList = br.lines().collect(Collectors.toList());
+            testList.forEach(line -> {
+                String[] input = line.split(" \\| ");
+                Task newEntry = null;
+                switch (input[0]) {
+                case "T":
+                    newEntry = new ToDo(input[2]);
+                    break;
+                case "D":
+                    newEntry = new Deadline(input[2], input[3]);
+                    break;
+                case "E":
+                    newEntry = new Event(input[2], input[3]);
+                    break;
+                default:
+                    break;
+                }
+                assert newEntry != null;
+                newEntry.isMarked = input[1].equals("1");
+                taskList.add(newEntry);
+            });
+            br.close();
+        } catch (Exception e) {
+            throw new DukeException(e.toString());
+        }
+    }
+
+    public static void save() throws IOException {
+        String currDir = System.getProperty("user.dir");
+        String dataName = "test.dat";
+        Path dataDir = Paths.get(currDir, "data", dataName);
+        File dataFile = new File(String.valueOf(dataDir));
+        BufferedWriter bw = new BufferedWriter(new FileWriter(dataFile, false));
+
+        taskList.forEach(entry -> {
+            try {
+                bw.write(entry.write());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        bw.close();
+    }
+
+    public static void main(String[] args) throws IOException, DukeException {
+        init();
         greet();
         run();
+        save();
     }
 
 }
