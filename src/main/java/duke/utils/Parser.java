@@ -95,7 +95,7 @@ public class Parser {
                             return new ShowAllTasksOnSameDateCommand(localDateTime, dateTimeString);
                         } else {
                             /* user input format is invalid */
-                            throw new CortanaException("Invalid date time format!" +
+                            throw new CortanaException("Invalid date time format! " +
                                     "Please follow the format yyyy-M-d HHmm!");
                         }
                     }
