@@ -17,14 +17,21 @@ public class DukeException extends Exception {
     public static class DukeTimeNotFoundException extends DukeException {
         @Override
         public String toString() {
-            return super.toString() + ": When?????????, I can't control the time.";
+            return super.toString() + ": When?????????, I can't read your mind";
         }
     }
 
     public static class DukeDateTimeFormatException extends DukeException {
         @Override
         public String toString() {
-            return super.toString() + ": Please use this format " + Duke.DATE_TIME_FORMAT;
+            return super.toString() + ": Please use this format " + Const.INPUT_DATE_TIME_FORMAT;
+        }
+    }
+
+    public static class DukePastTimeException extends DukeException {
+        @Override
+        public String toString() {
+            return super.toString() + ": Please enter a time in the future! We ain't time travellers.";
         }
     }
 
@@ -46,6 +53,13 @@ public class DukeException extends Exception {
         @Override
         public String toString() {
             return super.toString() + ": You do not have any task, please add one!";
+        }
+    }
+
+    public static class DukeIOException extends DukeException {
+        @Override
+        public String toString() {
+            return super.toString() + ": There is an error processing the data :(";
         }
     }
 }
