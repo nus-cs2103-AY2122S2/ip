@@ -1,5 +1,18 @@
+package duke;
+
 import java.io.IOException;
+
 import java.util.Scanner;
+
+import duke.command.Command;
+
+import duke.component.ExceptionHandler;
+import duke.component.Parser;
+import duke.component.Storage;
+import duke.component.TaskList;
+import duke.component.Ui;
+
+import duke.exception.DukeException;
 
 public class Duke {
     private static Ui ui = new Ui();
@@ -34,11 +47,5 @@ public class Duke {
     public static void main(String[] args) {
         new Duke().run();
     }
-
-
-
-
-
-
 
 }

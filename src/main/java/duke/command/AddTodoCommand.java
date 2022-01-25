@@ -1,3 +1,12 @@
+package duke.command;
+
+import duke.component.Storage;
+import duke.component.TaskList;
+import duke.component.Ui;
+
+import duke.task.Task;
+import duke.task.Todo;
+
 public class AddTodoCommand extends Command {
     String commandArgument;
     public AddTodoCommand(String commandArgument) {

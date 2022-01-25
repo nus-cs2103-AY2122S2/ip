@@ -1,3 +1,13 @@
+package duke.command;
+
+import duke.component.Storage;
+import duke.component.TaskList;
+import duke.component.Ui;
+
+import duke.exception.InvalidIndexException;
+
+import duke.task.Task;
+
 public class MarkCommand extends Command {
     String commandArgument;
 

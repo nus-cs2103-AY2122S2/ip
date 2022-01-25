@@ -1,6 +1,18 @@
+package duke.command;
+
 import java.io.IOException;
-import java.time.DateTimeException;
 import java.time.format.DateTimeParseException;
+
+import static duke.constant.TaskConstant.PREFIX_BY_DEADLINE;
+
+import duke.component.Storage;
+import duke.component.Ui;
+import duke.component.TaskList;
+
+import duke.exception.DukeException;
+import duke.exception.MissingDateTimeException;
+import duke.task.Deadline;
+import duke.task.Task;
 
 public class AddDeadlineCommand extends Command {
     String commandArgument;
@@ -10,7 +22,7 @@ public class AddDeadlineCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException, DateTimeParseException {
-        String[] deadlineDetail = commandArgument.split(Constant.PREFIX_DEADLINE, 2);
+        String[] deadlineDetail = commandArgument.split(PREFIX_BY_DEADLINE, 2);
         if (deadlineDetail.length != 2) {
             throw new MissingDateTimeException();
         }

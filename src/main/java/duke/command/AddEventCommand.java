@@ -1,4 +1,18 @@
+package duke.command;
+
 import java.io.IOException;
+
+import duke.component.Storage;
+import duke.component.TaskList;
+import duke.component.Ui;
+
+import duke.exception.DukeException;
+import duke.exception.MissingDateTimeException;
+
+import duke.task.Event;
+import duke.task.Task;
+
+import static duke.constant.TaskConstant.PREFIX_AT_EVENT;
 
 public class AddEventCommand extends Command {
     String commandArgument;
@@ -8,7 +22,7 @@ public class AddEventCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
-        String[] eventDetail = commandArgument.split(Constant.PREFIX_EVENT, 2);
+        String[] eventDetail = commandArgument.split(PREFIX_AT_EVENT, 2);
         if (eventDetail.length != 2) {
             throw new MissingDateTimeException();
         }

@@ -1,3 +1,13 @@
+package duke.command;
+
+import duke.component.Storage;
+import duke.component.TaskList;
+import duke.component.Ui;
+
+import duke.exception.InvalidIndexException;
+
+import duke.task.Task;
+
 public class DeleteCommand extends Command {
     String commandArgument;
     public DeleteCommand(String commandArgument) {

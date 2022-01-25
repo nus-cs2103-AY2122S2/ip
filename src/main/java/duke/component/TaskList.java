@@ -1,4 +1,8 @@
+package duke.component;
+
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 public class TaskList {
     protected ArrayList<Task> tasks;

@@ -1,5 +1,38 @@
-import java.io.IOException;
+package duke.component;
+
 import java.time.DateTimeException;
+
+import duke.exception.DukeException;
+
+import duke.command.Command;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
+import duke.command.AddTodoCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
+import duke.command.DeleteCommand;
+
+import duke.constant.Message;
+import duke.constant.TaskConstant;
+
+import duke.task.Task;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
+
+import static duke.constant.CommandConstant.COMMAND_BYE;
+import static duke.constant.CommandConstant.COMMAND_DEADLINE;
+import static duke.constant.CommandConstant.COMMAND_DELETE;
+import static duke.constant.CommandConstant.COMMAND_EVENT;
+import static duke.constant.CommandConstant.COMMAND_LIST;
+import static duke.constant.CommandConstant.COMMAND_MARK;
+import static duke.constant.CommandConstant.COMMAND_TODO;
+import static duke.constant.CommandConstant.COMMAND_UNMARK;
+
+import duke.exception.UnknownCommandException;
+import duke.exception.EmptyTaskException;
 
 public class Parser {
 
@@ -64,21 +97,21 @@ public class Parser {
         String commandArgument = command[1];
 
         switch (commandType) {
-        case Constant.COMMAND_BYE:
+        case COMMAND_BYE:
             return new ExitCommand();
-        case Constant.COMMAND_LIST:
+        case COMMAND_LIST:
             return new ListCommand();
-        case Constant.COMMAND_MARK:
+        case COMMAND_MARK:
             return new MarkCommand(commandArgument);
-        case Constant.COMMAND_UNMARK:
+        case COMMAND_UNMARK:
             return new UnmarkCommand(commandArgument);
-        case Constant.COMMAND_DELETE:
+        case COMMAND_DELETE:
             return new DeleteCommand(commandArgument);
-        case Constant.COMMAND_TODO:
+        case COMMAND_TODO:
             return new AddTodoCommand(commandArgument);
-        case Constant.COMMAND_DEADLINE:
+        case COMMAND_DEADLINE:
             return new AddDeadlineCommand(commandArgument);
-        case Constant.COMMAND_EVENT:
+        case COMMAND_EVENT:
             return new AddEventCommand(commandArgument);
         default:
             throw new UnknownCommandException();
@@ -88,7 +121,7 @@ public class Parser {
     public static String[] parseUserInput(String userInput) throws EmptyTaskException {
         final String[] args = userInput.strip().split(" ", 2);
         String command = args[0];
-        boolean isCommandListOrBye = command.equals(Constant.COMMAND_BYE) || command.equals(Constant.COMMAND_LIST);
+        boolean isCommandListOrBye = command.equals(COMMAND_BYE) || command.equals(COMMAND_LIST);
 
         if (args.length == 2) {
             return args;
