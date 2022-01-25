@@ -1,27 +1,31 @@
-import java.util.*;
+import java.util.ArrayList;
 
 public class TaskList {
     protected ArrayList<Task> list;
 
-    public TaskList() {
-        this.list = new ArrayList<>();
+    protected TaskList() {
+        list = new ArrayList<>();
     }
 
-    public void addTodo(String s) {
-        list.add(new Todo(s));
+    public void addTodo(Todo t) {
+        list.add(t);
     }
 
-    public void addEvent(String s, String time) {
-        list.add(new Event(s,time));
+    public void addEvent(Event e) {
+        list.add(e);
     }
 
-    public void addDeadline(String s, String time) {
-        list.add(new Deadline(s,time));
+    public void addDeadline(Deadline d) {
+        list.add(d);
     }
 
-    public String getLast() { return list.get(list.size() - 1).toString(); }
+    protected Task getLast() {
+        return list.get(list.size() - 1);
+    }
 
-    public int size() { return list.size(); }
+    protected int size() {
+        return list.size();
+    }
 
     public String markItemDone(int index) throws InvalidActionException {
         Task t = list.get(index);

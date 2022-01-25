@@ -1,71 +1,87 @@
-import java.util.*;
+import java.io.IOException;
+
+import java.util.Scanner;
 import java.util.regex.PatternSyntaxException;
 
 public class Duke {
+
     public static void main(String[] args) {
+        try {
+            DukeFile df = new DukeFile();
+            TaskList tl = df.initialize();
 
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+            String logo = " ____        _        \n"
+                    + "|  _ \\ _   _| | _____ \n"
+                    + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n"
+                    + "|____/ \\__,_|_|\\_\\___|\n";
 
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Hello! I'm\n" + logo);
-        System.out.println("What can I do for you? =)");
-        TaskList tl = new TaskList();
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Hello! I'm\n" + logo);
+            System.out.println("What can I do for you? =)");
 
-        while (true) {
-            String s = sc.nextLine();
-            if (s.equals("bye")) { break; }
-            if (s.equals("list")) { tl.printItems(); }
+            while (true) {
+                String s = sc.nextLine();
+                if (s.equals("bye")) { break; }
+                if (s.equals("list")) { tl.printItems(); }
 
-            // mark, unmark, todo, deadline, event
-            else {
-                try {
-                    String command = processCommand(s);
+                // mark, unmark, todo, deadline, event
+                else {
+                    try {
+                        String command = processCommand(s);
 
-                    if (command.equals("mark")) {
-                        int index = processNumericalDescription(s, "mark", tl.size());
-                        System.out.println(tl.markItemDone(index));
-                    } else if (command.equals("unmark")) {
-                        int index = processNumericalDescription(s, "unmark", tl.size());
-                        System.out.println(tl.markItemUndone(index));
-                    } else if (command.equals("delete")) {
-                        int index = processNumericalDescription(s, "delete", tl.size());
-                        System.out.println(tl.deleteItem(index));
-                    } else {
-                        if (command.equals("todo")) {
-                            String description = processStringDescription(s, "todo");
-                            tl.addTodo(description);
-                        } else if (command.equals("deadline")) {
-                            String[] params = processFormatDescription(s, "deadline", "/by");
-                            tl.addDeadline(params[0], params[1]);
-                        } else if (command.equals("event")) {
-                            String[] params = processFormatDescription(s, "event", "/at");
-                            tl.addEvent(params[0], params[1]);
+                        if (command.equals("mark")) {
+                            int index = processNumericalDescription(s, "mark", tl.size());
+                            System.out.println(tl.markItemDone(index));
+                            df.modifyTask(index);
+                        } else if (command.equals("unmark")) {
+                            int index = processNumericalDescription(s, "unmark", tl.size());
+                            System.out.println(tl.markItemUndone(index));
+                            df.modifyTask(index);
+                        } else if (command.equals("delete")) {
+                            int index = processNumericalDescription(s, "delete", tl.size());
+                            System.out.println(tl.deleteItem(index));
+                            df.deleteTask(index);
+                        } else {
+                            // adding new tasks
+                            if (command.equals("todo")) {
+                                String description = processStringDescription(s, "todo");
+                                tl.addTodo(new Todo(description));
+                            } else if (command.equals("deadline")) {
+                                String[] params = processFormatDescription(s, "deadline", "/by");
+                                tl.addDeadline(new Deadline(params[0], params[1]));
+                            } else if (command.equals("event")) {
+                                String[] params = processFormatDescription(s, "event", "/at");
+                                tl.addEvent(new Event(params[0], params[1]));
+                            }
+
+                            Task latestTask = tl.getLast();
+                            df.addTask(latestTask);
+                            System.out.print("added o.O:\n  ");
+                            System.out.println(latestTask);
+                            System.out.println("Now there are " + tl.size() + " tasks on the list x)");
                         }
-
-                        System.out.print("added o.O:\n  ");
-                        System.out.println(tl.getLast());
-                        System.out.println("Now there are " + tl.size() + " tasks on the list x)");
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
                     }
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
                 }
             }
-        }
 
-        // bye
-        System.out.println("Bye t_t");
+            // bye
+            System.out.println("Bye t_t");
+            System.exit(0);
+        } catch (IOException e) {
+            System.out.println("An I/O error occurred x.x");
+            System.exit(1);
+        }
     }
 
     private static String processCommand(String s) throws WrongInputException {
         String[] inputs = s.split(" ");
         String[] acceptableInputs = new String[]{"mark","unmark","todo","deadline","event","delete"};
         boolean isAcceptable = false;
-        for (int i = 0; i < acceptableInputs.length; i++) {
-            if (acceptableInputs[i].equals(inputs[0])) {
+        for (String acceptableInput : acceptableInputs) {
+            if (acceptableInput.equals(inputs[0])) {
                 isAcceptable = true;
                 break;
             }
