@@ -9,6 +9,7 @@ import duke.command.DeleteCommand;
 import duke.command.DeleteAllCommand;
 import duke.command.AddCommand;
 import duke.command.ShowAllTasksOnSameDateCommand;
+import duke.command.FindCommand;
 
 import duke.task.Deadline;
 import duke.task.Event;
@@ -47,12 +48,14 @@ public class Parser {
         boolean isDeleteAllCommand = input.toLowerCase().matches("^delete all");
         boolean isShowAllOnSameDate = input.toLowerCase()
                 .matches("^show all( )?(\\d{4} ?.?/?-?\\d{1,2} ?.?/?-?\\d{1,2})?( )?(\\d{4})?");
+        boolean isFindCommand = input.toLowerCase().matches("^find( )? .*");
         boolean isEmptyDeadline = input.toLowerCase().replaceAll("[ |\\t]", "").equals("deadline");
         boolean isEmptyEvent = input.toLowerCase().replaceAll("[ |\\t]", "").equals("event");
         boolean isEmptyTodo = input.toLowerCase().replaceAll("[ |\\t]", "").equals("todo");
         boolean isDeadlineWithDescription = input.toLowerCase().matches("^deadline .*");
         boolean isEventWithDescription = input.toLowerCase().matches("^event .*");
         boolean isTodoWithDescription = input.toLowerCase().matches("^todo .*");
+
         if (isExit) {
             return new ExitCommand();
         } else {
@@ -102,6 +105,13 @@ public class Parser {
                 } catch (DateTimeParseException e) {
                     /* unable to parse user input date/time */
                     throw new CortanaException("Invalid date/time!");
+                }
+            } else if (isFindCommand) {
+                String keyWord = input.replaceAll("find ", "");
+                if (keyWord.isEmpty()) {
+                    throw new CortanaException("Please specify the keyword you are looking for!");
+                } else {
+                    return new FindCommand(keyWord);
                 }
             } else {
                try {
