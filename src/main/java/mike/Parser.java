@@ -41,18 +41,18 @@ public class Parser {
         return this.userInput.substring(indexOfTaskParameters);
     }
 
-    String getTodoName() {
+    public String getTodoName() {
         return removeCommandFromString();
     }
 
-    String getDeadlineName() {
+    public String getDeadlineName() {
         String userInputCommandRemoved = removeCommandFromString();
         int indexOfBy = userInputCommandRemoved.indexOf("/by");
         String name = userInputCommandRemoved.substring(0, indexOfBy - 1);
         return name;
     }
 
-    String getDeadlineDate() {
+    public String getDeadlineDate() {
         String userInputCommandRemoved = removeCommandFromString();
         int indexOfBy = userInputCommandRemoved.indexOf("/by");
         int indexOfEndDate = indexOfBy + 4;
@@ -60,14 +60,14 @@ public class Parser {
         return endDate;
     }
 
-    String getEventName() {
+    public String getEventName() {
         String userInputCommandRemoved = removeCommandFromString();
         int indexOfBy = userInputCommandRemoved.indexOf("/at");
         String name = userInputCommandRemoved.substring(0, indexOfBy - 1);
         return name;
     }
 
-    String getEventDate() {
+    public String getEventDate() {
         String userInputCommandRemoved = removeCommandFromString();
         int indexOfBy = userInputCommandRemoved.indexOf("/at");
         int indexOfEndDate = indexOfBy + 4;

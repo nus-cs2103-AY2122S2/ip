@@ -16,7 +16,7 @@ public class Storage {
         return file;
     }
 
-    void storeList(String listInStorageFormat) {
+    public void storeList(String listInStorageFormat) {
         try {
             File file = new File(filePath);
             FileWriter fw = new FileWriter(file);

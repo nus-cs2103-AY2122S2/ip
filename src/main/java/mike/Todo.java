@@ -24,7 +24,8 @@ public class Todo extends Task{
         if (super.isDone) {
             doneIndicator = "true";
         }
-        String storedListFormat = String.format("%s|%s|%s|", taskType, doneIndicator, super.name);
+        String storedListFormat = String.format("%s|%s|%s|", taskType,
+                doneIndicator, super.name);
         return storedListFormat;
     }
 
