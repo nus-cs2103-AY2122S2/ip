@@ -1,4 +1,8 @@
-import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Van {
     public static void main(String[] args) {
@@ -6,6 +10,44 @@ public class Van {
         String[] parse, para;
         String command = "null";
         ArrayList<Task> tasks = new ArrayList<Task>();
+        String home = System.getProperty("user.home");
+        File file = new File("storage.txt");
+        try {
+            if (file.isFile()) {
+                Scanner fileInput = new Scanner(file);
+                while (fileInput.hasNextLine()) {
+                    String fileLine = fileInput.nextLine();
+                    String[] taskDetail = fileLine.split("\\|");
+                    switch(taskDetail[0]) {
+                        case "E":
+                            tasks.add(new Event(taskDetail[2], taskDetail[3]));
+                            if (taskDetail[1].equals("1")) {
+                                tasks.get(counter).setDone();
+                            }
+                            counter++;
+                            break;
+                        case "D":
+                            tasks.add(new Deadline(taskDetail[2], taskDetail[3]));
+                            if (taskDetail[1].equals("1")) {
+                                tasks.get(counter).setDone();
+                            }
+                            counter++;
+                            break;
+                        case "T":
+                            tasks.add(new Todo(taskDetail[2]));
+                            if (taskDetail[1].equals("1")) {
+                                tasks.get(counter).setDone();
+                            }
+                            counter++;
+                            break;
+                    }
+                }
+            } else {
+                file.createNewFile();
+            }
+        } catch(Exception e) {
+            System.out.println(e);
+        }
         Scanner input = new Scanner(System.in);
         String divide = "-------------------------------------------";
         System.out.println("Hello I am Van");
@@ -30,7 +72,7 @@ public class Van {
                         if (parse.length != 2) {
                             throw new VanException("Invalid format. Please use: deadline <task> /by <date>");
                         }
-                        para = parse[1].split("/by");
+                        para = parse[1].split(" /by ");
                         if (para.length != 2) {
                             throw new VanException("Invalid format. Please use: deadline <task> /by <date>");
                         }
@@ -44,7 +86,7 @@ public class Van {
                         if (parse.length != 2) {
                             throw new VanException("Invalid format. Please use: event <task> /at <date>");
                         }
-                        para = parse[1].split("/at");
+                        para = parse[1].split(" /at ");
                         if (para.length != 2) {
                             throw new VanException("Invalid format. Please use: event <task> /at <date>");
                         }
@@ -114,6 +156,15 @@ public class Van {
             catch (VanException ex) {
                 System.out.println(ex);
             }
+        }
+        try {
+            PrintWriter writer = new PrintWriter(file);
+            for (int i = 0; i < counter; i++) {
+                writer.print(tasks.get(i).saveStatus() + "\n");
+            }
+            writer.close();
+        } catch (Exception e) {
+            System.out.println(e);
         }
         System.out.println("Bye");
     }

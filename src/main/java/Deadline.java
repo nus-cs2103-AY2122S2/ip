@@ -5,6 +5,10 @@ public class Deadline extends Task {
     super(description);
     this.date = date;
   }
+  @Override
+  public String saveStatus() {
+    return "D|" + super.getCompletion() + "|" + description + "|" + date;
+  }
 
   @Override
   public String getStatus() {

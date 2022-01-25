@@ -11,6 +11,14 @@ public class Task {
         return done ? "[X] " + description  : "[ ] " + description;
     }
 
+    public String getCompletion() {
+        return done ? "1" : "0";
+    }
+
+    public String saveStatus() {
+        return description;
+    }
+
     public void setDone() {
         this.done = true;
     }
