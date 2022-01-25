@@ -22,54 +22,57 @@ public class Duke {
         while (sc.hasNext()) {
             String command = sc.next();
             switch (command) {
-                case "bye":
-                    System.out.println("Cya later~ ≧◉◡◉≦");
-                    break label;
-                case "list":
-                    displayList();
-                    sc.nextLine();
-                    break;
-                case "mark": case "unmark":
-                    mark(sc.nextInt());
-                    sc.nextLine();
-                    break;
-                case "todo": case "deadline": case "event":
-                    Task newTask;
-                    if (command.equals("todo")) {
-                        command = sc.nextLine();
-                        try {
-                            newTask = makeToDo(command);
-                        } catch (ToDoIllegalArgumentException ex) {
-                            System.out.println(ex);
-                            break;
-                        }
-                    } else if (command.equals("deadline")) {
-                        String[] s = sc.nextLine().split("/by");
-                        try {
-                            newTask = makeDeadline(s[0], s[1]);
-                        } catch (IndexOutOfBoundsException ex) {
-                            System.out.println(new DeadlineIllegalArgumentException("Invalid Argument"));
-                            break;
-                        }
-                    } else{
-                        String[] s = sc.nextLine().split("/at");
-                        try {
-                            newTask = makeEvent(s[0], s[1]);
-                        } catch (IndexOutOfBoundsException ex) {
-                            System.out.println(new EventIllegalArgumentException("Invalid Argument"));
-                            break;
-                        }
+            case "bye":
+                System.out.println("Cya later~ ≧◉◡◉≦");
+                break label;
+            case "list":
+                displayList();
+                sc.nextLine();
+                break;
+            case "mark":
+            case "unmark":
+                mark(sc.nextInt());
+                sc.nextLine();
+                break;
+            case "todo":
+            case "deadline":
+            case "event":
+                Task newTask;
+                if (command.equals("todo")) {
+                    command = sc.nextLine();
+                    try {
+                        newTask = makeToDo(command);
+                    } catch (ToDoIllegalArgumentException ex) {
+                        System.out.println(ex);
+                        break;
                     }
-                    toDoList.add(newTask);
-                    System.out.println("okie!! (✿◠‿◠)  i have added: \n" +
-                            newTask + "\n" +
-                            "now there are " + toDoList.size() + " tasks in the list! get to work (ง︡'-'︠)ง");
-                    break;
-                case "delete":
-                    remove(sc.nextInt());
-                    break;
-                default:
-                    System.out.println("sowwy i don't understand what that means ಠ_ಥ try something else pwease??");
+                } else if (command.equals("deadline")) {
+                    String[] s = sc.nextLine().split("/by");
+                    try {
+                        newTask = makeDeadline(s[0], s[1]);
+                    } catch (IndexOutOfBoundsException ex) {
+                        System.out.println(new DeadlineIllegalArgumentException("Invalid Argument"));
+                        break;
+                    }
+                } else {
+                    String[] s = sc.nextLine().split("/at");
+                    try {
+                        newTask = makeEvent(s[0], s[1]);
+                    } catch (IndexOutOfBoundsException ex) {
+                        System.out.println(new EventIllegalArgumentException("Invalid Argument"));
+                        break;
+                    }
+                }
+                toDoList.add(newTask);
+                System.out.println("okie!! (✿◠‿◠)  i have added: \n" +
+                        newTask + "\n" +
+                        "now there are " + toDoList.size() + " tasks in the list! get to work (ง︡'-'︠)ง");
+                break;
+            case "delete":
+                remove(sc.nextInt());
+                break;
+            default:
+                System.out.println("sowwy i don't understand what that means ಠ_ಥ try something else pwease??");
             }
         }
     }
