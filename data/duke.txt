@@ -1,4 +1,0 @@
-[T][ ] go home
-[E][X] halloween (at: Sunday)
-[D][ ] buy bread (by: Jan 5 2022)
-[D][X] buy bread (by: Apr 11 2021)
