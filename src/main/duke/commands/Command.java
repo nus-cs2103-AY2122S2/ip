@@ -5,6 +5,6 @@ import duke.ui.Ui;
 import duke.storage.Storage;
 
 public abstract class Command {
-    abstract void execute(TaskList tasks, Ui ui, Storage storage);
-    abstract boolean isExit();
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract boolean isExit();
 }

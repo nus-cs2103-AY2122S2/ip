@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents a todo task, is a subclass of task.
  */
@@ -15,5 +17,11 @@ public class ToDo extends Task{
     @Override
     public String toString() {
         return "[T]" + super.toString();
+    }
+
+    @Override
+    public String simpleString() {
+        String flag = isDone ? "1" : "0";
+        return "T" + flag + description;
     }
 }

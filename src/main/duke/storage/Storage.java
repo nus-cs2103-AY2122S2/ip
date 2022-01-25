@@ -1,5 +1,6 @@
 package duke.storage;
 
+import duke.DukeException;
 import duke.tasks.*;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,10 +10,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    protected File directory = new File("data");
-    protected File file = new File("data/tasks.txt");
+    private File directory = new File("data");
+    private File file = new File("data/tasks.txt");
 
-    public Storage() {
+    public Storage() throws DukeException {
         if (!directory.exists()) {
             directory.mkdir();
         }
@@ -20,25 +21,31 @@ public class Storage {
         try {
             file.createNewFile();
         } catch (IOException e) {
-            System.out.println("Error creating storage file! You data will not be stored.");
+            throw new DukeException("Error creating storage file! You data will not be stored.", e);
         }
     }
 
-    public ArrayList<Task> retrieveTaskList() throws FileNotFoundException {
+    public ArrayList<Task> retrieveTaskList() {
         ArrayList<Task> tasks = new ArrayList<Task>();
-        Scanner sc = new Scanner(file);
-        while (sc.hasNextLine()) {
-            tasks.add(stringToTask(sc.nextLine()));
+        try {
+            Scanner sc = new Scanner(file);
+            while (sc.hasNextLine()) {
+                tasks.add(stringToTask(sc.nextLine()));
+            }
+        } catch (FileNotFoundException e) {
+            return tasks;
         }
         return tasks;
     }
 
-    public void saveTaskList(ArrayList<Task> tasks) throws IOException {
-        FileWriter fw = new FileWriter(file);
-        for (Task t: tasks) {
-            fw.write(taskToString(t) + System.lineSeparator());
+    public void saveTaskList(TaskList tasks) throws DukeException {
+        try {
+            FileWriter fw = new FileWriter(file);
+            fw.write(tasks.taskListFileString());
+            fw.close();
+        } catch (IOException e) {
+            throw new DukeException("Something went wrong when saving your data!", e);
         }
-        fw.close();
     }
 
     private Task stringToTask(String task) {
@@ -54,19 +61,6 @@ public class Storage {
                 return new Deadline(detail[0], detail[1], isDone);
             default:
                 return new Task("!!Looks like something went wrong with this task.");
-        }
-    }
-
-    private String taskToString(Task task) {
-        String isDone = task.isDone ? "1" : "0";
-        if (task instanceof ToDo) {
-            return "T" + isDone + task.description;
-        } else if (task instanceof Deadline) {
-            return "D" + isDone + task.description + " | " + ((Deadline) task).by;
-        } else if (task instanceof Event) {
-            return "E" + isDone + task.description + " | " + ((Event) task).at;
-        } else {
-            return "";
         }
     }
 }

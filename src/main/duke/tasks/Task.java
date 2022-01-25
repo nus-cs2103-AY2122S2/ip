@@ -25,4 +25,8 @@ public class Task {
         String flag = isDone ? "[X] " : "[ ] ";
         return flag + this.description;
     }
+
+    public String simpleString() {
+        return this.description;
+    }
 }

@@ -1,8 +1,12 @@
 package duke;
 
+import duke.commands.Command;
+import duke.parser.Parser;
 import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -13,6 +17,7 @@ public class Duke {
     public Duke() {
         ui = new Ui();
         storage = new Storage();
+        tasks = new TaskList(storage.retrieveTaskList());
     }
 
     public void run() {
@@ -20,26 +25,17 @@ public class Duke {
         boolean isExit = false;
         while (!isExit) {
             try {
-
-            } catch () {
-
+                String input = ui.getUserInput();
+                Command c = Parser.parse(input);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showMessage(e.getMessage());
             }
         }
     }
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        ChatBot duke = new ChatBot("Duke", new Storage());
-        duke.greet();
-        String input;
-        boolean quit = false;
-        while(!quit) {
-            try {
-                quit = duke.runCommand(sc.nextLine());
-            } catch (DukeException e) {
-                duke.echo(e.getMessage());
-            }
-        }
-        sc.close();
+        new Duke().run();
     }
 }
