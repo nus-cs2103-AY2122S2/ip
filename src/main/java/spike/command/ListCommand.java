@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
  */
 // TODO need to put this with other as a package then I can assess the list in Spike class
 public class ListCommand extends Command{
-    private String command;
     private int action;
     private LocalDateTime ldt;
 

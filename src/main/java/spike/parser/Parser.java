@@ -24,7 +24,7 @@ public class Parser {
 
         private String command;
 
-        private CommandName (String command) {
+        CommandName (String command) {
             this.command = command;
         }
 
@@ -56,7 +56,7 @@ public class Parser {
             }
         case DELETE:
             try {
-                return parseDelete(inputLine, commandWords, tasks);
+                return parseDelete(commandWords, tasks);
             } catch (SpikeException e) {
                 return new IncorrectCommand(e.getMessage());
             }
@@ -131,7 +131,7 @@ public class Parser {
         }
     }
 
-    private Command parseDelete(String inputLine, String[] commandWords, TaskList tasks) throws SpikeException {
+    private Command parseDelete(String[] commandWords, TaskList tasks) throws SpikeException {
         if (commandWords.length != 2 || isInt(commandWords[1]) == -1
                 || isInt(commandWords[1]) > tasks.getListSize()) {
             throw new SpikeException("Invalid arguments for deletion. Please check again!");

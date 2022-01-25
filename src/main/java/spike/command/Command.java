@@ -1,6 +1,5 @@
 package spike.command;
 
-import spike.task.Task;
 import spike.task.TaskList;
 
 /**
@@ -10,7 +9,7 @@ public class Command {
     // TODO one execute function, then use polymorphism, allow different command to execute themselves
 
 
-    public String execute(TaskList task) {
+    public String execute(TaskList tasks) {
         return "";
     }
 
