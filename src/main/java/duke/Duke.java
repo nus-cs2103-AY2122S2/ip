@@ -1,6 +1,12 @@
+package duke;
 
 import java.util.List;
 import java.util.Scanner;
+
+import duke.command.Command;
+import duke.command.Parser;
+import duke.exception.DukeException;
+import duke.task.Task;
 
 public class Duke {
     private static final String FILE_PATH = "./data/test.txt";
