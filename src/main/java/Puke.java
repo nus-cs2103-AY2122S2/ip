@@ -1,10 +1,13 @@
-import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
+import java.io.IOException;
+import java.io.FileWriter;
 
 public class Puke {
     public static final String LINE = "____________________________________________________________\n";
+    public static final String DATA_DIR_PATH = "./../../../data";
+    public static final String DATA_FILE_PATH = "./../../../data/puke.txt";
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -19,6 +22,18 @@ public class Puke {
                 + "What do you want to do?\n" + LINE);
 
         ArrayList<Task> tasks = new ArrayList<>();
+        File dir = new File(DATA_DIR_PATH);
+        File f = new File(DATA_FILE_PATH);
+
+        try {
+            dir.mkdir();
+            f.createNewFile();
+            Scanner fileSc = new Scanner(f);
+            populateTasks(tasks, fileSc);
+        } catch (IOException e) {
+            System.out.println("Data file cannot be created!");
+            return;
+        }
 
         while (true) {
             System.out.print("> ");
@@ -70,6 +85,15 @@ public class Puke {
 
             System.out.print(LINE);
         }
+
+        try {
+            FileWriter fw = new FileWriter(DATA_FILE_PATH);
+            saveTasks(tasks, fw);
+        } catch (IOException e) {
+            System.out.println("Tasks cannot be saved to file!");
+            return;
+        }
+
         System.out.print("Alright bye. Come back to Puke anytime!\n" + LINE);
     }
 
@@ -118,7 +142,7 @@ public class Puke {
 
         Task t;
         if (type.equals("todo")) {
-            t = new Todo(args);
+            t = new Todo(args.trim());
         } else {
             String[] taskDetail = args.split("/");
 
@@ -127,9 +151,9 @@ public class Puke {
             }
 
             if (type.equals("deadline")) {
-                t = new Deadline(taskDetail[0], taskDetail[1].split(" ", 2)[1]);
+                t = new Deadline(taskDetail[0].trim(), taskDetail[1].split(" ", 2)[1].trim());
             } else {
-                t = new Event(taskDetail[0], taskDetail[1].split(" ", 2)[1]);
+                t = new Event(taskDetail[0].trim(), taskDetail[1].split(" ", 2)[1].trim());
             }
         }
 
@@ -150,5 +174,42 @@ public class Puke {
         System.out.println("There's no going back now. I've removed this task:\n  " + taskInfo
                 + "\nNow you have " + Task.getNoOfTasks()
                 + (Task.getNoOfTasks() <= 1 ? " task" : " tasks") + " in the list.");
+    }
+
+    public static void populateTasks(ArrayList<Task> tasks, Scanner s) {
+        while (s.hasNext()) {
+            String[] taskInfo = s.nextLine().split("@@");
+            Task t = null;
+
+            switch (taskInfo[0]) {
+            case "T":
+                t = new Todo(taskInfo[2]);
+                break;
+            case "D":
+                t = new Deadline(taskInfo[2], taskInfo[3]);
+                break;
+            case "E":
+                t = new Event(taskInfo[2], taskInfo[3]);
+                break;
+            }
+
+            if (taskInfo[1].equals("1")) {
+                t.mark();
+            }
+
+            tasks.add(t);
+        }
+    }
+
+    public static void saveTasks(ArrayList<Task> tasks, FileWriter fw) throws IOException {
+        String toWrite = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            toWrite += tasks.get(i).toSaveString();
+            if (i != tasks.size() - 1) {
+                toWrite += "\n";
+            }
+        }
+        fw.write(toWrite);
+        fw.close();
     }
 }
