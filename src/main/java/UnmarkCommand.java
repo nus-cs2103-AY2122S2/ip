@@ -10,5 +10,6 @@ public class UnmarkCommand extends Command {
         Task selectedTask = taskList.getTask(index);
         selectedTask.markAsIncomplete();
         ui.displayUnmarkedTask(selectedTask);
+        storage.write(taskList.getTasks());
     }
 }

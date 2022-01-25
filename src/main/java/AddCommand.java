@@ -10,5 +10,6 @@ public class AddCommand extends Command {
         taskList.addTask(task);
         ui.displayAddedTask(task);
         ui.displayNumberOfTasks(taskList.getTasks());
+        storage.write(taskList.getTasks());
     }
 }

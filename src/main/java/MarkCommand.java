@@ -10,5 +10,6 @@ public class MarkCommand extends Command {
         Task selectedTask = taskList.getTask(index);
         selectedTask.markAsComplete();
         ui.displayMarkedTask(selectedTask);
+        storage.write(taskList.getTasks());
     }
 }
