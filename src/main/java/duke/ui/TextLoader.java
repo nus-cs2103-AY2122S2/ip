@@ -1,11 +1,11 @@
-package ui;
+package duke.ui;
 
-import commands.AddTaskCommand;
-import commands.NumCommand;
-import commands.Type;
-import exceptions.DateException;
-import exceptions.TaskIndexException;
-import tasks.TaskManager;
+import duke.commands.AddTaskCommand;
+import duke.commands.NumCommand;
+import duke.commands.Type;
+import duke.exceptions.DateException;
+import duke.exceptions.TaskIndexException;
+import duke.tasks.TaskManager;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;

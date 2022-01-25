@@ -1,13 +1,13 @@
-package commands;
+package duke.commands;
 
-import exceptions.InvalidOperationException;
-import tasks.TaskManager;
-import exceptions.DateException;
-import exceptions.DukeException;
-import exceptions.TaskIndexException;
-import ui.TextLoader;
-import ui.TextStorage;
-import ui.UiManager;
+import duke.exceptions.InvalidOperationException;
+import duke.tasks.TaskManager;
+import duke.exceptions.DateException;
+import duke.exceptions.DukeException;
+import duke.exceptions.TaskIndexException;
+import duke.ui.TextLoader;
+import duke.ui.TextStorage;
+import duke.ui.UiManager;
 
 import java.io.FileNotFoundException;
 import java.time.format.DateTimeParseException;

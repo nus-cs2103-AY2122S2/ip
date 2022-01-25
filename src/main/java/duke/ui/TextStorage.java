@@ -1,6 +1,6 @@
-package ui;
+package duke.ui;
 
-import commands.Type;
+import duke.commands.Type;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

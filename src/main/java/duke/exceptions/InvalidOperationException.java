@@ -1,4 +1,4 @@
-package exceptions;
+package duke.exceptions;
 
 public class InvalidOperationException extends Exception{
     private String error;

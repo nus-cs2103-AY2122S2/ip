@@ -1,12 +1,12 @@
-package commands;
+package duke.commands;
 
-import tasks.TaskManager;
-import exceptions.DateException;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.ToDo;
-import ui.UiManager;
+import duke.tasks.TaskManager;
+import duke.exceptions.DateException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
+import duke.ui.UiManager;
 
 import java.time.format.DateTimeParseException;
 

@@ -1,4 +1,4 @@
-package exceptions;
+package duke.exceptions;
 
 public class DateException extends Exception{
     private String s;

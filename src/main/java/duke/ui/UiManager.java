@@ -1,8 +1,8 @@
-package ui;
+package duke.ui;
 
-import tasks.TaskManager;
-import exceptions.TaskIndexException;
-import tasks.Task;
+import duke.tasks.TaskManager;
+import duke.exceptions.TaskIndexException;
+import duke.tasks.Task;
 
 public class UiManager {
     private final String LINE = "-------------------------------------------";

@@ -1,6 +1,6 @@
-package tasks;
+package duke.tasks;
 
-import exceptions.InvalidOperationException;
+import duke.exceptions.InvalidOperationException;
 
 public class ToDo extends Task {
     private String description;

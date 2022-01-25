@@ -1,7 +1,7 @@
-package commands;
+package duke.commands;
 
-import tasks.TaskManager;
-import ui.UiManager;
+import duke.tasks.TaskManager;
+import duke.ui.UiManager;
 
 import java.io.File;
 import java.io.FileWriter;

@@ -1,6 +1,6 @@
-package tasks;
+package duke.tasks;
 
-import exceptions.InvalidOperationException;
+import duke.exceptions.InvalidOperationException;
 
 public abstract class Task {
     public abstract void mark() throws InvalidOperationException;

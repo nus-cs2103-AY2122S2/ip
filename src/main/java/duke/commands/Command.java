@@ -1,7 +1,7 @@
-package commands;
+package duke.commands;
 
 
-import exceptions.InvalidOperationException;
+import duke.exceptions.InvalidOperationException;
 
 public abstract class Command {
 

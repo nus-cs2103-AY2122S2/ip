@@ -1,7 +1,7 @@
-package tasks;
+package duke.tasks;
 
-import exceptions.InvalidOperationException;
-import ui.UiManager;
+import duke.exceptions.InvalidOperationException;
+import duke.ui.UiManager;
 import java.util.ArrayList;
 
 public class TaskManager {

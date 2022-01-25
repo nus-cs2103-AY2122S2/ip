@@ -1,6 +1,6 @@
 package duke;
 
-import commands.CommandManager;
+import duke.commands.CommandManager;
 
 public class Duke {
     public static void main(String[] args) {

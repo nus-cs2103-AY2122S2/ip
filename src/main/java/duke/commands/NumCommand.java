@@ -1,8 +1,8 @@
-package commands;
+package duke.commands;
 
-import exceptions.InvalidOperationException;
-import tasks.TaskManager;
-import ui.UiManager;
+import duke.exceptions.InvalidOperationException;
+import duke.tasks.TaskManager;
+import duke.ui.UiManager;
 
 public class NumCommand extends Command {
     private Integer num;
