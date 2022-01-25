@@ -1,3 +1,7 @@
+package duke.ui;
+
+import duke.exception.DukeException;
+
 public class Ui {
 
     public void welcomeMessage() {

@@ -1,3 +1,9 @@
+package duke.task;
+
+import duke.exception.*;
+import duke.io.UserInput;
+import duke.ui.Ui;
+
 import java.io.IOException;
 import java.time.DateTimeException;
 import java.util.ArrayList;
