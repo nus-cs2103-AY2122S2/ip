@@ -3,10 +3,12 @@ package sana;
 import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
 
-import sana.exception.*;
-import sana.task.*;
+import sana.exception.IncompleteCommandException;
+import sana.exception.OutOfBoundsTaskException;
 
-
+import sana.task.Deadline;
+import sana.task.Event;
+import sana.task.ToDo;
 /**
  * Sana is a BIG program!
  *
@@ -105,6 +107,7 @@ public class Sana {
         } catch (NumberFormatException e) {
             System.out.println("I don't know what sana.task you're referring to!");
         }
+        taskMem.updateMemory(userTasks.toList());
         ui.border();
     }
 
@@ -177,14 +180,14 @@ public class Sana {
      * This method marks the sana.task located at the index as done or not done
      *
      * @param taskIndex     the index of the sana.task to be marked done
-     * @param completion    the completion of the sana.task
+     * @param isComplete    the completion of the sana.task
      */
-    private void mark(int taskIndex, boolean completion) throws OutOfBoundsTaskException {
+    private void mark(int taskIndex, boolean isComplete) throws OutOfBoundsTaskException {
         if (taskIndex < 0 || taskIndex >= userTasks.taskAmt()) {
             throw new OutOfBoundsTaskException();
         }
-        userTasks.getTask(taskIndex).setDone(completion);
-        ui.markText(completion);
+        userTasks.getTask(taskIndex).setDone(isComplete);
+        ui.markText(isComplete);
         ui.printTaskInList(userTasks.getTask(taskIndex));
     }
 

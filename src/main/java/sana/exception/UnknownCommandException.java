@@ -11,10 +11,10 @@ public class UnknownCommandException extends Exception{
     /**
      * The message Sana says when she receives an unknown command
      */
-    private static String message = "Oy! I don't know what you're saying!";
+    private static final String MESSAGE = "Oy! I don't know what you're saying!";
 
     public UnknownCommandException() {
-        super(UnknownCommandException.message);
+        super(UnknownCommandException.MESSAGE);
     }
 
     /**
@@ -23,6 +23,6 @@ public class UnknownCommandException extends Exception{
      * @return  message
      */
     public String getMessage() {
-        return UnknownCommandException.message;
+        return UnknownCommandException.MESSAGE;
     }
 }

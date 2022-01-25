@@ -3,7 +3,7 @@ package sana;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-import sana.task.*;
+import sana.task.Task;
 
 /**
  * Ui represents the user interface object that deals with user interaction
