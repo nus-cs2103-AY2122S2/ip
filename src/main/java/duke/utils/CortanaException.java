@@ -1,8 +1,8 @@
-package DukeUtils;
-
 /**
  * The type Cortana exception.
  */
+package duke.utils;
+
 public class CortanaException extends Exception {
     /**
      * Instantiates a new Cortana exception.

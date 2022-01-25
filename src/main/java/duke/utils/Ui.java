@@ -1,6 +1,6 @@
-package DukeUtils;
+package duke.utils;
 
-import Task.Task;
+import duke.task.Task;
 
 import java.util.Scanner;
 
@@ -73,7 +73,7 @@ public class Ui {
      * @param task  the task
      */
     public void addedTask(TaskList tasks, Task task) {
-        String taskOrTasks = tasks.tasksArrayList.size() <= 1 ? "task" : "tasks";
+        String taskOrTasks = tasks.tasksArrayList.size() <= 1 ? "duke/task" : "tasks";
         System.out.println("Got it. I've added this task: \n" + " " + task +
                 "\nNow you have " + tasks.tasksArrayList.size() + " " + taskOrTasks + " in the list.");
     }
@@ -85,7 +85,7 @@ public class Ui {
      * @param taskDeleted the task deleted
      */
     public void deletedTask(TaskList tasks, Task taskDeleted) {
-        String taskOrTasks = tasks.tasksArrayList.size() <= 1 ? "task" : "tasks";
+        String taskOrTasks = tasks.tasksArrayList.size() <= 1 ? "duke/task" : "tasks";
         System.out.println("Noted. I've removed this task: \n" + " " + taskDeleted + "\n" +
                 "Now you have " + tasks.tasksArrayList.size() + " " + taskOrTasks + " in the list.");
     }
@@ -136,10 +136,10 @@ public class Ui {
      * Show founded task on the same date and Ui.
      *
      * @param numberOfTasksOnSameDate the number of tasks on the same date
-     * @param dateTime                    the date/time
+     * @param time                    the date/time
      */
-    public void foundTaskOnSameDate(int numberOfTasksOnSameDate, String dateTime) {
-        String taskOrTasks = numberOfTasksOnSameDate <= 1 ? "task" : "tasks";
-        System.out.printf("Found %d %s with date/time %s.\n", numberOfTasksOnSameDate, taskOrTasks, dateTime);
+    public void foundTaskOnSameDate(int numberOfTasksOnSameDate, String time) {
+        String taskOrTasks = numberOfTasksOnSameDate <= 1 ? "duke/task" : "tasks";
+        System.out.printf("Found %d %s with date/time %s.\n", numberOfTasksOnSameDate, taskOrTasks, time);
     }
 }

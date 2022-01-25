@@ -1,6 +1,9 @@
-package Command;
+package duke.command;
 
-import DukeUtils.*;
+import duke.utils.CortanaException;
+import duke.utils.Storage;
+import duke.utils.TaskList;
+import duke.utils.Ui;
 
 /**
  * The type Command.

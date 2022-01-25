@@ -1,19 +1,26 @@
-package DukeUtils;
+package utils;
 
-import Task.*;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import duke.task.Deadline;
+import duke.task.Todo;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import duke.utils.CortanaException;
+import duke.utils.Parser;
+import duke.utils.TaskList;
+import duke.utils.Ui;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -29,8 +36,8 @@ public class UiTest {
     }
 
     @Test
-    @DisplayName("Welcome message Ui should be shown")
-    public void testWelcomeUi() {
+    @DisplayName("Welcome message should be shown")
+    public void showWelcomeMessage() {
         ui.showWelcome();
         String logo = "\n" +
                 "   ____                  _                           \n" +
@@ -45,7 +52,7 @@ public class UiTest {
 
     @Test
     @DisplayName("Separator line Ui should shown")
-    public void testLineUi() {
+    public void showSeparatorLine() {
         ui.showLine();
         String line = "-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-";
         assertEquals(line, outputStreamCaptor.toString().trim());
@@ -53,7 +60,7 @@ public class UiTest {
 
     @Test
     @DisplayName("Input command should be read")
-    public void testReadCommandUi() {
+    public void readCommand() {
         ByteArrayInputStream inputStreamCaptor = new ByteArrayInputStream("todo read book\n".getBytes());
         System.setIn(inputStreamCaptor);
         String commandRead = ui.readCommand();
@@ -61,16 +68,16 @@ public class UiTest {
     }
 
     @Test
-    @DisplayName("No task left Ui should be shown")
-    public void testNoTaskLeftUi() {
+    @DisplayName("No task left message should be shown")
+    public void showNoTaskLeftMessage() {
         ui.noTaskLeft();
         String noTaskLeft = "You are done for the day, or are you?";
         assertEquals(noTaskLeft, outputStreamCaptor.toString().trim());
     }
 
     @Test
-    @DisplayName("Task Ui should be shown")
-    public void testPrintTaskUi() {
+    @DisplayName("Task message should be shown")
+    public void printTask() {
         Todo dummyTodo = new Todo("read book");
         Deadline dummyDeadline = new Deadline("return book", LocalDateTime.of(LocalDate.of(2022,1,25), LocalTime.MAX));
         ui.printTask(dummyTodo);
@@ -83,48 +90,48 @@ public class UiTest {
     }
 
     @Test
-    @DisplayName("Added task Ui should be shown")
-    public void testAddedTaskUi() {
+    @DisplayName("Added task message should be shown")
+    public void showAddedTaskMessage() {
         TaskList tasks = new TaskList(new ArrayList<>());
         Todo dummyTodo = new Todo("read book");
         ui.addedTask(tasks, dummyTodo);
-        String taskOrTasks = tasks.tasksArrayList.size() <= 1 ? "task" : "tasks";
+        String taskOrTasks = tasks.tasksArrayList.size() <= 1 ? "duke/task" : "tasks";
         String addedTask = "Got it. I've added this task: \n" + " " + dummyTodo +
                 "\nNow you have " + tasks.tasksArrayList.size() + " " + taskOrTasks + " in the list.";
         assertEquals(addedTask, outputStreamCaptor.toString().trim());
     }
 
     @Test
-    @DisplayName("Deleted task Ui should be shown")
-    public void testDeletedTaskUi() {
+    @DisplayName("Deleted task message should be shown")
+    public void showDeletedTaskMessage() {
         TaskList tasks = new TaskList(new ArrayList<>());
         Todo dummyTodo = new Todo("read book");
         ui.deletedTask(tasks, dummyTodo);
-        String taskOrTasks = tasks.tasksArrayList.size() <= 1 ? "task" : "tasks";
+        String taskOrTasks = tasks.tasksArrayList.size() <= 1 ? "duke/task" : "tasks";
         String deletedTask = "Noted. I've removed this task: \n" + " " + dummyTodo + "\n" +
                 "Now you have " + tasks.tasksArrayList.size() + " " + taskOrTasks + " in the list.";
         assertEquals(deletedTask, outputStreamCaptor.toString().trim());
     }
 
     @Test
-    @DisplayName("Deleted all Ui should be shown")
-    public void testDeletedAllUi() {
+    @DisplayName("Deleted all message should be shown")
+    public void showDeletedAllMessage() {
         ui.deletedAll();
         String deletedAll = "All tasks have been removed!";
         assertEquals(deletedAll, outputStreamCaptor.toString().trim());
     }
 
     @Test
-    @DisplayName("Exit Ui should be shown with")
-    public void testExitedUi() {
+    @DisplayName("Exit message should be shown with")
+    public void showExitedMessage() {
         ui.exited();
         String exited = "Bye. Hope to see you again soon!";
         assertEquals(exited, outputStreamCaptor.toString().trim());
     }
 
     @Test
-    @DisplayName("Listed tasks Ui should be shown")
-    public void testListUi() {
+    @DisplayName("Listed tasks message should be shown")
+    public void showList() {
         Todo dummyTodo = new Todo("read book");
         ui.listed(1, dummyTodo);
         String listed = 1 + "." + dummyTodo;
@@ -132,36 +139,36 @@ public class UiTest {
     }
 
     @Test
-    @DisplayName("Marked task Ui should be shown")
-    public void testMarkedUi() {
+    @DisplayName("Marked task message should be shown")
+    public void showMarkedMessage() {
         Todo dummyTodo = new Todo("read book");
-        dummyTodo.isDone = true;
+        dummyTodo.setDone(true);
         ui.marked(dummyTodo);
         String marked = "Nice! I've marked this task as done: \n " + dummyTodo;
         assertEquals(marked, outputStreamCaptor.toString().trim());
     }
 
     @Test
-    @DisplayName("Unmarked task Ui should be shown")
-    public void testUnmarkedUi() {
+    @DisplayName("Unmarked task message should be shown")
+    public void showUnmarkedMessage() {
         Todo dummyTodo = new Todo("read book");
-        dummyTodo.isDone = false;
+        dummyTodo.setDone(false);
         ui.unmarked(dummyTodo);
         String unmarked = "OK, I've marked this task as not done yet: \n " + dummyTodo;
         assertEquals(unmarked, outputStreamCaptor.toString().trim());
     }
 
     @Test
-    @DisplayName("Tasks on same date Ui should be shown")
-    public void testTasksOnSameDateUi() {
+    @DisplayName("Tasks on same date message should be shown")
+    public void showTasksOnSameDateMessage() {
         ui.foundTaskOnSameDate(2, "2022-01-24");
         String tasksOnSameDate = String.format("Found 2 tasks with date/time %s.", "2022-01-24");
         assertEquals(tasksOnSameDate, outputStreamCaptor.toString().trim());
     }
 
     @Test
-    @DisplayName("Error message Ui should be shown")
-    public void testErrorMessageUiInvalidDateTime() {
+    @DisplayName("Error message should be shown")
+    public void showErrorMessage_invalidDateTime() {
         try {
             Parser.parse("show all 2022-13-13");
             fail();
@@ -172,8 +179,8 @@ public class UiTest {
     }
 
     @Test
-    @DisplayName("Error message Ui should be shown")
-    public void testErrorMessageUiInvalidDateTimeFormat() {
+    @DisplayName("Error message should be shown")
+    public void showErrorMessage_invalidDateTimeFormat() {
         try {
             Parser.parse("show all 2022/12/13");
             fail();
@@ -184,8 +191,8 @@ public class UiTest {
     }
 
     @Test
-    @DisplayName("Error message Ui should be shown")
-    public void testErrorMessageUiMissingDateTime() {
+    @DisplayName("Error message should be shown")
+    public void showErrorMessage_missingDateTime() {
         try {
             Parser.parse("show all");
             fail();
@@ -196,8 +203,8 @@ public class UiTest {
     }
 
     @Test
-    @DisplayName("Error message Ui should be shown")
-    public void testErrorMessageUiInvalidCommand() {
+    @DisplayName("Error message should be shown")
+    public void showErrorMessage_invalidCommand() {
         try {
             Parser.parse("something invalid");
             fail();
@@ -208,32 +215,8 @@ public class UiTest {
     }
 
     @Test
-    @DisplayName("Error message Ui should be shown")
-    public void testErrorMessageUiUsedAtForDeadline() {
-        try {
-            Parser.parse("deadline book ticket /at 2022-01-25");
-            fail();
-        } catch (CortanaException e) {
-            ui.showErrorMessage(e.getMessage());
-            assertEquals("Please use the /by keyword for deadline!", outputStreamCaptor.toString().trim());
-        }
-    }
-
-    @Test
-    @DisplayName("Error message Ui should be shown")
-    public void testErrorMessageUiUsedByForEvent() {
-        try {
-            Parser.parse("event conference /by 2022-01-25");
-            fail();
-        } catch (CortanaException e) {
-            ui.showErrorMessage(e.getMessage());
-            assertEquals("Please use the /at keyword for event!", outputStreamCaptor.toString().trim());
-        }
-    }
-
-    @Test
-    @DisplayName("Error message Ui should be shown")
-    public void testErrorMessageUiMissingByForDeadline() {
+    @DisplayName("Error message should be shown")
+    public void showErrorMessage_missingByKeyword() {
         try {
             Parser.parse("deadline book ticket by 2022-01-25");
             fail();
@@ -244,8 +227,8 @@ public class UiTest {
     }
 
     @Test
-    @DisplayName("Error message Ui should be shown")
-    public void testErrorMessageUiMissingAtForEvent() {
+    @DisplayName("Error message should be shown")
+    public void showErrorMessage_missingAtKeyword() {
         try {
             Parser.parse("event conference at 2022-01-25");
             fail();

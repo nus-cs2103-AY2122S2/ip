@@ -1,4 +1,5 @@
-package Task;
+package duke.task;
+
 import java.util.Objects;
 
 /**
@@ -20,10 +21,10 @@ public class Todo extends Task {
     }
 
     @Override
-    public boolean equals(Object obj){
+    public boolean equals(Object obj) {
         if (obj != null && obj.getClass() == getClass()) {
             Todo todo = (Todo) obj;
-            return todo.description.equals(this.description);
+            return todo.getDescription().equals(this.getDescription());
         } else {
             return false;
         }
@@ -31,6 +32,6 @@ public class Todo extends Task {
 
     @Override
     public int hashCode() {
-        return Objects.hash(description);
+        return Objects.hash(super.getDescription());
     }
 }

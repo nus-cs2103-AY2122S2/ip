@@ -1,13 +1,24 @@
-package DukeUtils;
+package duke.utils;
+
 import java.io.*;
+
 import java.nio.charset.StandardCharsets;
-import Task.*;
+
+import duke.task.Task;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
+
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.*;
+
+
+import java.util.ArrayList;
+import java.util.Locale;
+import java.util.Scanner;
 import java.util.regex.Pattern;
 
 /**
@@ -76,7 +87,7 @@ public class Storage {
      */
     public void writeFile(TaskList tasks) throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream(taskFile, false);
-        for (Task task : tasks.tasksArrayList) {
+        for (Task task: tasks.tasksArrayList) {
             String taskToWrite = task.toString() + '\n';
             fileOutputStream.write(taskToWrite.getBytes(StandardCharsets.UTF_8));
         }
@@ -95,7 +106,8 @@ public class Storage {
         LocalDateTime localDateTime;
         LocalDate localDate;
         try {
-            if (type == 'D') { //deadline
+            if (type == 'D') {
+                /* deadline */
                 String[] actualTask = taskInString.substring(7).split("\\(by: ");
                 String description = actualTask[0];
                 String by = actualTask[1].replaceAll("\\)", "");
@@ -109,9 +121,10 @@ public class Storage {
                     localDateTime = LocalDateTime.of(localDate, LocalTime.MAX);
                 }
                 Deadline deadline = new Deadline(description, localDateTime);
-                deadline.isDone = isDone;
+                deadline.setDone(isDone);
                 return deadline;
-            } else if (type == 'E') { //event
+            } else if (type == 'E') {
+                /* event */
                 String[] actualTask = taskInString.substring(7).split("\\(at: ");
                 String description = actualTask[0];
                 String at = actualTask[1].replaceAll("\\)", "");
@@ -125,16 +138,17 @@ public class Storage {
                     localDateTime = LocalDateTime.of(localDate, LocalTime.MAX);
                 }
                 Event event = new Event(description, localDateTime);
-                event.isDone = isDone;
+                event.setDone(isDone);
                 return event;
-            } else { //todo
+            } else {
+                /* todo */
                 String description = taskInString.substring(7);
                 Todo todo = new Todo(description);
-                todo.isDone = isDone;
+                todo.setDone(isDone);;
                 return todo;
             }
         } catch (DateTimeParseException e) {
-            e.printStackTrace();
+            new Ui().showErrorMessage(e.getMessage());
             return null;
         }
     }

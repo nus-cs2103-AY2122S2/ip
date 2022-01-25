@@ -1,4 +1,4 @@
-package Task;
+package duke.task;
 
 /**
  * The type Task.
@@ -7,11 +7,11 @@ public class Task {
     /**
      * The Description of the task.
      */
-    public String description;
+    private final String description;
     /**
      * The completion status of the task.
      */
-    public boolean isDone;
+    private boolean isDone;
 
     /**
      * Instantiates a new Task.
@@ -29,7 +29,8 @@ public class Task {
      * @return the completion status icon
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        /* mark done task with X */
+        return (isDone ? "X" : " ");
     }
 
     /**
@@ -44,6 +45,14 @@ public class Task {
      */
     public void markAsUndone() {
         this.isDone = false;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     @Override
