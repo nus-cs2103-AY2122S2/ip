@@ -1,4 +1,7 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     private static void format(String output) {
@@ -46,6 +49,9 @@ public class Duke {
                         format(str.toString());
                     }
                 } else {
+                    //DateTimeFormatter pattern for reading date
+                    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+
                     //Split cmd into 2 parts, the type of task, and remaining text
                     String[] temp = toEcho.split(" ", 2);
                     String cmd = temp[0];
@@ -104,9 +110,10 @@ public class Duke {
                         if (incomplete) {
                             throw new DukeException("WHAT YOU WANT DO? NOTHING AH HELLOOOOOO?");
                         } else {
-                            String task = rem.split("/by")[0];
-                            String dead = rem.split("/by")[1];
-                            Task tempTask = new Deadline(task, dead);
+                            String task = rem.split(" /by ")[0];
+                            String dead = rem.split(" /by ")[1];
+                            LocalDateTime d1 = LocalDateTime.parse(dead, inputFormatter);
+                            Task tempTask = new Deadline(task, d1);
                             tasks.add(tempTask);
                             String confirm =
                                     "YOU BETTER FINISH THIS AH:" + TASKSPACE + tempTask + SPACE +
@@ -119,9 +126,10 @@ public class Duke {
                         if (incomplete) {
                             throw new DukeException("WHAT YOU WANT DO? NOTHING AH HELLOOOOOO?");
                         } else {
-                            String task = rem.split("/at")[0];
-                            String dead = rem.split("/at")[1];
-                            Task tempTask = new Event(task, dead);
+                            String task = rem.split(" /at ")[0];
+                            String dead = rem.split(" /at ")[1];
+                            LocalDateTime d1 = LocalDateTime.parse(dead, inputFormatter);
+                            Task tempTask = new Event(task, d1);
                             tasks.add(tempTask);
                             String confirm =
                                     "YOU BETTER REMEMBER THIS AH:" + TASKSPACE + tempTask + SPACE +
