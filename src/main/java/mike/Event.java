@@ -3,6 +3,9 @@ package mike;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an event (subclass of task).
+ */
 public class Event extends Task {
     private final String eventTime;
     private final LocalDate date;
@@ -24,10 +27,20 @@ public class Event extends Task {
         this.date = convertToDate(eventTime);
     }
 
+    /**
+     * Returns a new event object with the isDone field set to true.
+     *
+     * @return Event object with isDone set to true.
+     */
     public Event markAsDone() {
         return new Event(this.name, this.eventTime, true);
     }
 
+    /**
+     * Returns a new event object with the isDone field set to false.
+     *
+     * @return Event object with isDone set to false.
+     */
     public Event markAsUndone() {
         return new Event(this.name, this.eventTime, false);
     }

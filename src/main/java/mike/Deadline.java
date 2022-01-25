@@ -3,6 +3,9 @@ package mike;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a deadline (subclass of task).
+ */
 public class Deadline extends Task {
     private final String endDate;
     private final LocalDate date;
@@ -25,14 +28,29 @@ public class Deadline extends Task {
         this.date = convertToDate(endDate);
     }
 
+    /**
+     * Returns a new deadline object with the isDone field set to true.
+     *
+     * @return Deadline object with isDone set to true.
+     */
     public Deadline markAsDone() {
         return new Deadline(this.name, this.endDate, true);
     }
 
+    /**
+     * Returns a new deadline object with the isDone field set to false.
+     *
+     * @return Deadline object with isDone set to false.
+     */
     public Deadline markAsUndone() {
         return new Deadline(this.name, this.endDate, false);
     }
 
+    /**
+     * Returns a string representing the deadline that can be stored in the hard drive.
+     *
+     * @return String representation of deadline for storage.
+     */
     public String convertToStoredTaskFormat() {
         String doneIndicator = "false";
         if (super.isDone) {

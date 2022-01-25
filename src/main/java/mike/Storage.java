@@ -7,15 +7,30 @@ import java.io.IOException;
 public class Storage {
     private final String filePath;
 
+    /**
+     * Constructor for Storage class.
+     *
+     * @param filePath FilePath of the file that should be stored or retrieved.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the file for use by other methods.
+     *
+     * @return File object (namely storedList.txt).
+     */
     public File loadFile() {
         File file = new File(filePath);
         return file;
     }
 
+    /**
+     * Stores the list according to the specified filePath.
+     *
+     * @param listInStorageFormat A String representation of the entire list of tasks.
+     */
     void storeList(String listInStorageFormat) {
         try {
             File file = new File(filePath);

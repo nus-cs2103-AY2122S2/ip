@@ -2,9 +2,6 @@ package mike;
 
 public class Ui {
 
-    public Ui () {
-    }
-
     /**
      * Prints a greeting from "Mike" with an accompanying text banner.
      */

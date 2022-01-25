@@ -66,9 +66,10 @@ public class Mike {
     }
 
     /**
+     * Returns true if user has input the exit command ("bye").
      *
      * @param userInput
-     * @return
+     * @return true if userInput is "bye"; else returns false
      */
     public boolean isExitCommand(String userInput) {
         Parser parser = new Parser(userInput);
@@ -102,6 +103,7 @@ public class Mike {
      * Adds a task of type "Deadline" to the list.
      *
      * @param name The name of the task and its deadline in the format "taskName /by deadline".
+     * @param date The date of the deadline represented as a String.
      */
     void addDeadline(String name, String date) {
         try {
@@ -117,6 +119,7 @@ public class Mike {
      * Adds a task of type "Event" to the list.
      *
      * @param name The name of the task and the time of the event in the format "taskName /at eventTime".
+     * @param scheduledDate The date of the event represented as a String.
      */
     void addEvent(String name, String scheduledDate) {
         try {
@@ -147,9 +150,9 @@ public class Mike {
     }
 
     /**
-     * Processes the user's input and responds accordingly.
+     * Processes the user's input then and responds accordingly.
      *
-     * @param userInput String input from user passed here from Main class.
+     * @param userInput String input from user as scanned in by Scanner.
      */
     void processInput(String userInput) {
         Parser parser = new Parser(userInput);
@@ -216,7 +219,7 @@ public class Mike {
     }
 
     /**
-     * Stores the current list in the hard drive to be accessed on reboot.
+     * Stores the current list in the hard drive to be accessed on reboot of Mike.
      */
     void saveToStoredList() {
         String listInStorageFormat = taskList.convertToStoredListFormat();
