@@ -109,4 +109,27 @@ public class Ui {
         }
         return s.toString();
     }
+
+    /**
+     * Prints the items in the task list found.
+     *
+     * @param list The list of tasks in the task list.
+     * @return A string containing all the tasks in the task list.
+     */
+    public String printFoundItems(ArrayList<Task> list) {
+        if (list.size() == 0) {
+            return("No items found :O");
+        }
+        StringBuilder s = new StringBuilder();
+        s.append("Here are the matching tasks on your list :O\n");
+        for (int i = 1; i <= list.size(); i++) {
+            s.append(i);
+            s.append(". ");
+            s.append(list.get(i-1));
+            if (i < list.size()) {
+                s.append("\n");
+            }
+        }
+        return s.toString();
+    }
 }

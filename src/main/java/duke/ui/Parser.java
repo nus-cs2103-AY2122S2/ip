@@ -31,7 +31,8 @@ public class Parser {
      */
     public String parseCommand(String s) throws WrongInputException {
         String[] inputs = s.split(" ");
-        String[] acceptableInputs = new String[]{"mark","unmark","todo","deadline","event","delete"};
+        String[] acceptableInputs = new String[]{
+                "mark","unmark","todo","deadline","event","delete","find"};
         boolean isAcceptable = false;
         for (String acceptableInput : acceptableInputs) {
             if (acceptableInput.equals(inputs[0])) {

@@ -66,6 +66,10 @@ public class Duke {
                         System.out.println(taskList.deleteItem(index));
                         storage.deleteTask(index);
 
+                    } else if (command.equals("find")) {
+                        String description = parser.parseStringDescription(line, "find");
+                        System.out.println(ui.printFoundItems(taskList.findItems(description)));
+
                     } else {
                         // adding new tasks
                         if (command.equals("todo")) {
