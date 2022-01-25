@@ -1,4 +1,4 @@
-package kidsnd274.duke;
+package kidsnd274.duke.ui;
 
 import kidsnd274.duke.command.CommandResult;
 

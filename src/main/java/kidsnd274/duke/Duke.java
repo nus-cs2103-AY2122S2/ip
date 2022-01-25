@@ -3,6 +3,7 @@ package kidsnd274.duke;
 import kidsnd274.duke.command.Command;
 import kidsnd274.duke.command.CommandResult;
 import kidsnd274.duke.command.ExitCommand;
+import kidsnd274.duke.ui.TextUi;
 
 public class Duke {
     // Global Variables
