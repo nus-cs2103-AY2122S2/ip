@@ -1,14 +1,17 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
 
-    private String deadlineDate;
+    private LocalDate deadlineDate;
 
     public Deadline(String description, String deadlineDate){
         super(description, "D");
-        this.deadlineDate = deadlineDate;
+        this.deadlineDate = LocalDate.parse(deadlineDate);
     }
 
     public String getDeadlineDate(){
-        return this.deadlineDate;
+        return this.deadlineDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 
     public String toSaveDataFormat() {
