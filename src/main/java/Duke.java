@@ -55,8 +55,8 @@ public class Duke {
 							tasks.get(taskNumMark).mark();
 							System.out.println("\t____________________________________________________________");
 							System.out.println("\t Nice! I've marked this task as done:");
-							System.out.println("\t\t" + tasks.get(taskNumMark).track() + tasks.get(taskNumMark).getStatus()
-									+ " " + tasks.get(taskNumMark));
+							System.out.println("\t\t" + tasks.get(taskNumMark).track()
+									+ tasks.get(taskNumMark).getStatus() + " " + tasks.get(taskNumMark));
 							System.out.println("\t____________________________________________________________");
 						} catch (IndexOutOfBoundsException e) {
 							System.out.println("\t____________________________________________________________");
@@ -72,8 +72,8 @@ public class Duke {
 							tasks.get(taskNumUnmark).unmark();
 							System.out.println("\t____________________________________________________________");
 							System.out.println("\t OK, I've marked this task as not done yet:");
-							System.out.println("\t\t" + tasks.get(taskNumUnmark).track() + tasks.get(taskNumUnmark).getStatus()
-									+ " " + tasks.get(taskNumUnmark));
+							System.out.println("\t\t" + tasks.get(taskNumUnmark).track()
+									+ tasks.get(taskNumUnmark).getStatus() + " " + tasks.get(taskNumUnmark));
 							System.out.println("\t____________________________________________________________");
 						} catch (IndexOutOfBoundsException e) {
 							System.out.println("\t____________________________________________________________");
@@ -153,7 +153,8 @@ public class Duke {
 
 							System.out.println("\t____________________________________________________________");
 							System.out.println("\t Noted. I've removed this task:");
-							System.out.println("\t\t " + deleteTask.track() + deleteTask.getStatus() + " " + deleteTask);
+							System.out.println("\t\t " + deleteTask.track() + deleteTask.getStatus() + " "
+									+ deleteTask);
 							System.out.println("\t Now you have " + count + " tasks in the list.");
 							System.out.println("\t____________________________________________________________");
 
