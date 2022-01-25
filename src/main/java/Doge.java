@@ -8,11 +8,12 @@ import java.nio.file.Paths;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
 import java.time.LocalTime;
+
 import java.util.Date;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -125,6 +126,8 @@ public class Doge {
             throw new DogeException("Can you please state an appropriate duration for the occurrence?");
         }
 
+        int numbering = 1;
+
         for (int i = 0; i < tasks.size(); i++) {
             Task currTask = tasks.get(i);
             LocalDateTime currDateTime;
@@ -170,8 +173,8 @@ public class Doge {
                     throw new DogeException("Invalid limiter specified!");
                 }
             }
-            int numbering = i + 1;
             output.append("\n").append(numbering).append(") ➜ ").append(currTask);
+            numbering++;
         }
         output.append("\n").append(endLine);
         System.out.println(output);
