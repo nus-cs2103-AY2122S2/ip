@@ -1,16 +1,11 @@
-import exception.*;
+import enums.Command;
+import exception.JarvisException;
+import parser.Parser;
 import storage.Storage;
-import task.*;
-import enums.*;
+import task.TaskList;
 import ui.Ui;
 
-import java.time.LocalDateTime;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.HashMap;
 
 public class Jarvis {
     private static Ui ui;
@@ -20,42 +15,36 @@ public class Jarvis {
     private static boolean processNext = true;
 
     public static void main(String[] args) throws JarvisException {
-        storage = new Storage("data/data.txt");
-        ui = new Ui();
-        tasks = new TaskList(storage.loadData(), ui);
-
-        ui.welcome();
+        startup();
 
         while (processNext) {
             try {
                 String input = ui.readCommand();
-                String[] tokens = input.split(" ");
-                switch (Command.valueOf(tokens[0].trim().toUpperCase())) {
+                HashMap<String, Object> parsedCommand = Parser.parseInput(input);
+                switch (Command.valueOf((String) parsedCommand.get("command"))) {
                 case BYE:
-                    processNext = false;
-                    storage.saveChanges(tasks);
-                    ui.shutdown();
+                    shutdown();
                     return;
                 case LIST:
                     tasks.printTasks();
                     break;
                 case MARK:
-                    tasks.markAsDone(tokens);
+                    tasks.markAsDone(parsedCommand);
                     break;
                 case UNMARK:
-                    tasks.markAsUndone(tokens);
+                    tasks.markAsUndone(parsedCommand);
                     break;
                 case DELETE:
-                    tasks.delete(tokens);
+                    tasks.delete(parsedCommand);
                     break;
                 case TODO:
-                    tasks.addTodo(input);
+                    tasks.addTodo(parsedCommand);
                     break;
                 case DEADLINE:
-                    tasks.addDeadline(input);
+                    tasks.addDeadline(parsedCommand);
                     break;
                 case EVENT:
-                    tasks.addEvent(input);
+                    tasks.addEvent(parsedCommand);
                     break;
                 default:
                     break;
@@ -66,5 +55,18 @@ public class Jarvis {
                 ui.echo("I'm afraid I wasn't able to fulfill your request.\n" + de.getMessage());
             }
         }
+    }
+
+    public static void startup() throws JarvisException {
+        storage = new Storage("data/data.txt");
+        ui = new Ui();
+        tasks = new TaskList(storage.loadData(), ui);
+        ui.welcome();
+    }
+
+    public static void shutdown() throws JarvisException {
+        processNext = false;
+        storage.saveChanges(tasks);
+        ui.shutdown();
     }
 }
