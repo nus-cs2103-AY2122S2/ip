@@ -78,7 +78,7 @@ public class Duke {
         int num = 1;
         System.out.println("HERE ARE THE TASKS IN YOUR LIST:");
         for (Task task : list) {
-            System.out.println(num + "." + task.getTask());
+            System.out.println(num + "." + task);
             num++;
         }
     }
@@ -94,10 +94,14 @@ public class Duke {
         if (str.length == 1) {
             throw new DukeException("PLEASE INCLUDE TASK DESCRIPTION IN YOUR COMMAND.");
         }
-        Task newTask = new ToDo(str[1]);
+        String desc = str[1];
+        for (int i = 2; i < str.length; i++) {
+            desc = desc + " " + str[i];
+        }
+        Task newTask = new ToDo(desc);
         list.add(newTask);
         System.out.println("GOT IT. I'VE ADDED THIS TASK:");
-        System.out.println(newTask.getTask());
+        System.out.println(newTask);
         System.out.println("NOW YOU HAVE "+ list.size() + " TASKS IN THE LIST.");
     }
 
@@ -108,17 +112,22 @@ public class Duke {
      * @throws DukeException if task description or date is empty.
      */
     public static void addDeadline(String input) throws DukeException {
-        String[] str = input.split(" ");
+        String[] str = input.split(" /by ");
+        String[] str2 = str[0].split(" ");
+        if (str2.length == 1) {
+            throw new DukeException("PLEASE INCLUDE TASK DESCRIPTION IN YOUR COMMAND.");
+        }
         if (str.length == 1) {
-            throw new DukeException("PLEASE INCLUDE TASK DESCRIPTION AND DATE IN YOUR COMMAND.");
+            throw new DukeException("PLEASE INCLUDE THE DATE IN YOUR COMMAND.");
         }
-        if (str.length == 2 || str.length == 3) {
-            throw new DukeException("PLEASE INCLUDE DATE IN YOUR COMMAND.");
+        String desc = str2[1];
+        for (int i = 2; i < str2.length; i++) {
+            desc = desc + " " + str2[i];
         }
-        Task newTask = new Deadline(str[1], str[3]);
+        Task newTask = new Deadline(desc, str[1]);
         list.add(newTask);
         System.out.println("GOT IT. I'VE ADDED THIS TASK:");
-        System.out.println(newTask.getTask());
+        System.out.println(newTask);
         System.out.println("NOW YOU HAVE "+ list.size() + " TASKS IN THE LIST.");
     }
 
@@ -129,17 +138,22 @@ public class Duke {
      * @throws DukeException if task description or date is empty.
      */
     public static void addEvent(String input) throws DukeException {
-        String[] str = input.split(" ");
+        String[] str = input.split(" /at ");
+        String[] str2 = str[0].split(" ");
+        if (str2.length == 1) {
+            throw new DukeException("PLEASE INCLUDE TASK DESCRIPTION IN YOUR COMMAND.");
+        }
         if (str.length == 1) {
-            throw new DukeException("PLEASE INCLUDE TASK DESCRIPTION AND DATE IN YOUR COMMAND.");
+            throw new DukeException("PLEASE INCLUDE THE DATE IN YOUR COMMAND.");
         }
-        if (str.length == 2 || str.length == 3) {
-            throw new DukeException("PLEASE INCLUDE DATE IN YOUR COMMAND.");
+        String desc = str2[1];
+        for (int i = 2; i < str2.length; i++) {
+            desc = desc + " " + str2[i];
         }
-        Task newTask = new Event(str[1], str[3]);
+        Task newTask = new Event(desc, str[1]);
         list.add(newTask);
         System.out.println("GOT IT. I'VE ADDED THIS TASK:");
-        System.out.println(newTask.getTask());
+        System.out.println(newTask);
         System.out.println("NOW YOU HAVE "+ list.size() + " TASKS IN THE LIST.");
     }
 
@@ -152,12 +166,12 @@ public class Duke {
      */
     public static void markTask(int index) throws DukeException {
         if (index >= list.size()) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, can't find task :-(");
+            throw new DukeException("☹ OOPS!!! I'M SORRY, CAN'T FIND TASK");
         } else {
             Task task = list.get(index);
             task.setAsDone();
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(task.getTask());
+            System.out.println("NICE! I'VE MARKED THIS TASK AS DONE:");
+            System.out.println(task);
         }
     }
 
@@ -170,12 +184,12 @@ public class Duke {
      */
     public static void unMarkTask(int index) throws DukeException {
         if (index >= list.size()) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, can't find task :-(");
+            throw new DukeException("☹ OOPS!!! I'M SORRY, CAN'T FIND TASK");
         } else {
             Task task = list.get(index);
             task.setAsNotDone();
-            System.out.println("OK, I've marked this task as not done yet:");
-            System.out.println(task.getTask());
+            System.out.println("NICE! I'VE MARKED THIS TASK AS DONE:");
+            System.out.println(task);
         }
     }
 
@@ -188,12 +202,12 @@ public class Duke {
      */
     public static void deleteTask(int index) throws DukeException {
         if (index >= list.size()) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, can't find task :-(");
+            throw new DukeException("☹ OOPS!!! I'M SORRY, CAN'T FIND TASK");
         } else {
             Task task = list.remove(index);
-            System.out.println("Noted. I've removed this task:");
-            System.out.println(task.getTask());
-            System.out.println("Now you have "+ list.size() +" tasks in the list.");
+            System.out.println("NOTED. I'VE REMOVED THIS TASK:");
+            System.out.println(task);
+            System.out.println("NOW YOU HAVE \"+ list.size() + \" TASKS IN THE LIST.");
         }
     }
 
