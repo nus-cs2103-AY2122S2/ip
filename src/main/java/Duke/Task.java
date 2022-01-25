@@ -1,3 +1,5 @@
+package Duke;
+
 /**
  * This class specifies all the methods and variables of a task.
  * @author Sim Jun Heng

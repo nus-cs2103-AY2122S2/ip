@@ -1,3 +1,5 @@
+package Duke;
+
 /**
  * This class supports exception belonging to the Duke program.
  * @author Sim Jun Heng
