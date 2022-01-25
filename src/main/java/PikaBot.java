@@ -5,6 +5,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.time.format.DateTimeFormatter;
+
+
 
 public class PikaBot {
 
@@ -27,9 +32,16 @@ public class PikaBot {
         } else {
             String[] deadlineDetails = deadlineArray[1].split("/by ", 2);
             if (deadlineDetails.length == 1) {
-                throw new DeadlineException("The description of a deadline must contain a deadline");
+                throw new DeadlineException("The description of a deadline must contain a deadline " +
+                        "in the numerical format YYYY-MM-DD");
             } else {
-                return new Deadline(deadlineDetails[0], deadlineDetails[1]);
+                try {
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy MM dd");
+                    return new Deadline(deadlineDetails[0], LocalDate.parse(deadlineDetails[1]));
+                } catch (DateTimeParseException e) {
+                    throw new DeadlineException("Invalid deadline! Deadline has to be a valid date in " +
+                            "numerical format YYYY-MM-DD");
+                }
             }
         }
     }
@@ -40,9 +52,16 @@ public class PikaBot {
         } else {
             String[] eventDetails = eventArray[1].split("/at ", 2);
             if (eventDetails.length == 1) {
-                throw new EventException("The description of an event must contain a specific time");
+                throw new EventException("The description of an event must contain a date in " +
+                        "the numerical format YYYY-MM-DD");
             } else {
-                return new Event(eventDetails[0], eventDetails[1]);
+                try {
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy MM dd");
+                    return new Event(eventDetails[0], LocalDate.parse(eventDetails[1]));
+                } catch (DateTimeParseException e) {
+                    throw new EventException("Invalid exception! Event has to have a valid date in " +
+                            "numerical format YYYY-MM-DD");
+                }
             }
         }
     }
@@ -183,6 +202,7 @@ public class PikaBot {
                         Storage.appendToFile(currDeadline, FILEPATH);
 
                     } catch (DeadlineException e) {
+
                         System.out.println(INDENTATION + LINE);
                         System.out.println(INDENTATION + e.getMessage());
                         System.out.println(INDENTATION + LINE);
@@ -190,6 +210,12 @@ public class PikaBot {
                     } catch (IOException e) {
                         System.out.println(INDENTATION + LINE);
                         System.out.println(INDENTATION + e.getMessage() + " IOException");
+                        System.out.println(INDENTATION + LINE);
+
+                    } catch (DateTimeParseException e) {
+                        System.out.println(INDENTATION + LINE);
+                        System.out.println(INDENTATION + "Invalid deadline! Deadline has to be a valid date in" +
+                                "numerical format YYYY-MM-DD.");
                         System.out.println(INDENTATION + LINE);
 
                     } finally {
