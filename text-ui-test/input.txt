@@ -3,9 +3,9 @@ todo
 todo something
 deadline description
 deadline description /by
-deadline homework /by 2pm
+deadline homework /by 2021-01-25
 event description
-event party /at Monday Jenny's
+event party /at 2021-01-26
 list
 mark
 mark 0

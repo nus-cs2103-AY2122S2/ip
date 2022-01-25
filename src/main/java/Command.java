@@ -1,20 +1,20 @@
-public enum Command {
-    TODO,
-    DEADLINE,
-    EVENT,
-    DATE,
-    MARK,
-    UNMARK,
-    LIST,
-    BYE,
-    DELETE;
+public abstract class Command {
+    private final CommandEnum commandEnum;
+    private final String fullCommand;
 
-    public static Command stringToCommand(String info) throws BotException {
-        for (Command command : values()) {
-            if (info.equalsIgnoreCase(command.toString())) {
-                return command;
-            }
-        }
-        throw new BotException("As an IstjBot, I don't understand what that command means.");
+    Command(CommandEnum commandEnum, String fullCommand) {
+        this.commandEnum = commandEnum;
+        this.fullCommand = fullCommand;
+    }
+
+    public abstract boolean isExit();
+    public abstract void execute(TaskList task, Ui ui, Storage storage) throws BotException;
+
+    public CommandEnum getCommandEnum() {
+        return this.commandEnum;
+    }
+
+    public String getFullCommand() {
+        return this.fullCommand;
     }
 }

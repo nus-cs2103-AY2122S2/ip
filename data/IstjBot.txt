@@ -1,3 +1,0 @@
-todo / 0 / something
-event / 0 / something / 2021-01-24
-deadline / 1 / something / 2021-01-24

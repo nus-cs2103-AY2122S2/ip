@@ -12,6 +12,8 @@ public abstract class Task {
         this.date = Optional.ofNullable(date);
     }
 
+    public abstract String toTxtString();
+
     public void mark() {
         this.isDone = true;
     }
@@ -20,14 +22,12 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    public abstract String toTxtString();
-
     public Optional<LocalDate> getDate() {
         return this.date;
     }
 
     public String getStatusIcon() {
-        return (isDone ? "[X]" : "[ ]"); // mark done task with X
+        return (isDone ? "[X]" : "[ ]");
     }
 
     @Override
