@@ -6,15 +6,12 @@ import chatbot.task.Deadline;
 import chatbot.task.Event;
 import chatbot.task.Task;
 import chatbot.task.ToDo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class TaskList {
@@ -68,13 +65,13 @@ public class TaskList {
                     break;
                 case "D":
                     list.add(
-                        new Deadline(title, done, new Timestamp(datetime))
+                            new Deadline(title, done, new Timestamp(datetime))
                     );
                     set.add(title);
                     break;
                 case "E":
                     list.add(
-                        new Event(title, done, new Timestamp(datetime))
+                            new Event(title, done, new Timestamp(datetime))
                     );
                     set.add(title);
                     break;
@@ -84,11 +81,12 @@ public class TaskList {
             }
         } catch (FileNotFoundException e) {
             throw new ChatBotException(
-                "I couldn't find your save file traveller! You can create it in the data directory and name it data.txt."
+                    "I couldn't find your save file traveller! "
+                            + "You can create it in the data directory and name it data.txt."
             );
         } catch (ChatBotException e) {
             throw new ChatBotException(
-                "One of your saved tasks was formatted incorrectly traveller! I've removed it from your list."
+                    "One of your saved tasks was formatted incorrectly traveller! I've removed it from your list."
             );
         }
     }
@@ -104,42 +102,42 @@ public class TaskList {
                 String data = String.format("%s&%s&%s", type, done, title);
                 if (datetime != null) {
                     data =
-                        data.concat(
-                            String.format("&%s", datetime.saveString())
-                        );
+                            data.concat(
+                                    String.format("&%s", datetime.saveString())
+                            );
                 }
                 fw.write(data);
                 fw.write(System.lineSeparator());
             }
         } catch (IOException e) {
             throw new ChatBotException(
-                "Oops! Something went wrong while writing to your save file traveller!"
+                    "Oops! Something went wrong while writing to your save file traveller!"
             );
         }
     }
 
     public String add(String[] titleArgs, String[] otherArgs)
-        throws ChatBotException {
+            throws ChatBotException {
         String type = titleArgs[0];
         if (!validTypes.contains(type)) {
             throw new ChatBotException();
         }
         if (titleArgs.length <= 1) {
             throw new ChatBotException(
-                String.format(
-                    "You need to key in the title of your %s traveller!",
-                    type
-                )
+                    String.format(
+                            "You need to key in the title of your %s traveller!",
+                            type
+                    )
             );
         }
         if (otherArgs.length <= 1) {
             throw new ChatBotException(
-                String.format(
-                    "You need to key in %s traveller!",
-                    type.equals(DEADLINE)
-                        ? "the due date and time of your deadline"
-                        : "the timestamp of your event"
-                )
+                    String.format(
+                            "You need to key in %s traveller!",
+                            type.equals(DEADLINE)
+                                    ? "the due date and time of your deadline"
+                                    : "the timestamp of your event"
+                    )
             );
         }
 
@@ -148,44 +146,46 @@ public class TaskList {
 
         if (set.contains(title)) {
             throw new ChatBotException(
-                String.format(
-                    "This %s is already in your task list traveller!",
-                    type
-                )
+                    String.format(
+                            "This %s is already in your task list traveller!",
+                            type
+                    )
             );
         } else {
             set.add(title);
             switch (type) {
-                case DEADLINE:
-                    if (!otherArgs[0].equals("by")) {
-                        throw new ChatBotException(
-                            "The correct format for adding a deadline is deadline <name of task> /by <timestamp of task>"
-                        );
-                    } else {
-                        Timestamp by = new Timestamp(other);
-                        Deadline deadline = new Deadline(title, by);
-                        list.add(deadline);
-                        return String.format(
+            case DEADLINE:
+                if (!otherArgs[0].equals("by")) {
+                    throw new ChatBotException(
+                            "The correct format for adding a deadline is "
+                                    + "deadline <name of task> /by <timestamp of task>"
+                    );
+                } else {
+                    Timestamp by = new Timestamp(other);
+                    Deadline deadline = new Deadline(title, by);
+                    list.add(deadline);
+                    return String.format(
                             "This deadline has been added to your task list!%n%n             %s",
                             deadline
-                        );
-                    }
-                case EVENT:
-                    if (!otherArgs[0].equals("at")) {
-                        throw new ChatBotException(
-                            "The correct format for adding an event is event <name of task> /at <timestamp of task>"
-                        );
-                    } else {
-                        Timestamp at = new Timestamp(other);
-                        Event event = new Event(title, at);
-                        list.add(event);
-                        return String.format(
+                    );
+                }
+            case EVENT:
+                if (!otherArgs[0].equals("at")) {
+                    throw new ChatBotException(
+                            "The correct format for adding an event is "
+                                    + "event <name of task> /at <timestamp of task>"
+                    );
+                } else {
+                    Timestamp at = new Timestamp(other);
+                    Event event = new Event(title, at);
+                    list.add(event);
+                    return String.format(
                             "This event has been added to your task list!%n%n             %s",
                             event
-                        );
-                    }
-                default:
-                    throw new ChatBotException();
+                    );
+                }
+            default:
+                throw new ChatBotException();
             }
         }
     }
@@ -196,22 +196,22 @@ public class TaskList {
         }
         if (args.length <= 1) {
             throw new ChatBotException(
-                "You need to key in the title of your todo traveller!"
+                    "You need to key in the title of your todo traveller!"
             );
         }
 
         String title = combineArgs(args);
         if (set.contains(title)) {
             throw new ChatBotException(
-                "This todo is already in your task list traveller!"
+                    "This todo is already in your task list traveller!"
             );
         } else {
             set.add(title);
             ToDo todo = new ToDo(title);
             list.add(todo);
             return String.format(
-                "This todo has been added to your task list!%n%n             %s",
-                todo
+                    "This todo has been added to your task list!%n%n             %s",
+                    todo
             );
         }
     }
@@ -219,14 +219,14 @@ public class TaskList {
     public String delete(int index) throws ChatBotException {
         if (!isValidIndex(index).equals(true)) {
             throw new ChatBotException(
-                "This is an invalid task index traveller! You can type list to check all task indexes!"
+                    "This is an invalid task index traveller! You can type list to check all task indexes!"
             );
         }
 
         Task removedTask = list.remove(index);
         return String.format(
-            "This task has successfully been removed from your task list!%n%n             %s",
-            removedTask
+                "This task has successfully been removed from your task list!%n%n             %s",
+                removedTask
         );
     }
 
@@ -245,7 +245,7 @@ public class TaskList {
     public String summary() throws ChatBotException {
         if (isEmpty()) {
             throw new ChatBotException(
-                "Your task list is empty traveller! Add some tasks first!"
+                    "Your task list is empty traveller! Add some tasks first!"
             );
         }
 
@@ -254,9 +254,9 @@ public class TaskList {
 
     public String getTasksOnDate(Timestamp date) {
         List<Task> filtered = list
-            .stream()
-            .filter(t -> date.equals(t.getDateTime()))
-            .collect(Collectors.toList());
+                .stream()
+                .filter(t -> date.equals(t.getDateTime()))
+                .collect(Collectors.toList());
         if (filtered.isEmpty()) {
             return "You have no tasks on this date traveller!";
         } else {
@@ -268,9 +268,9 @@ public class TaskList {
         String res = "";
         for (int i = 0; i < tasks.size(); i++) {
             String taskString = String.format(
-                "             %d. %s%n",
-                i + 1,
-                tasks.get(i)
+                    "             %d. %s%n",
+                    i + 1,
+                    tasks.get(i)
             );
             res = res.concat(taskString);
         }
@@ -284,8 +284,8 @@ public class TaskList {
         } else {
             task.mark();
             return String.format(
-                "This task has been marked as completed in your task list!%n%n             %s",
-                task
+                    "This task has been marked as completed in your task list!%n%n             %s",
+                    task
             );
         }
     }
@@ -297,8 +297,8 @@ public class TaskList {
         } else {
             task.unmark();
             return String.format(
-                "This task has been unmarked in your task list!%n%n             %s",
-                task
+                    "This task has been unmarked in your task list!%n%n             %s",
+                    task
             );
         }
     }

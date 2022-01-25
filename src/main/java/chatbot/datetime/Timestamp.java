@@ -1,6 +1,7 @@
 package chatbot.datetime;
 
 import chatbot.exception.ChatBotException;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -21,7 +22,7 @@ public class Timestamp {
                 this.date = generateDate(secondSplit);
             } catch (DateTimeException | NumberFormatException e) {
                 throw new ChatBotException(
-                    "That's an invalid date format traveller!"
+                        "That's an invalid date format traveller!"
                 );
             }
             if (firstSplit.length == 2) {
@@ -31,12 +32,12 @@ public class Timestamp {
                         this.time = generateTime(timeString);
                     } catch (DateTimeException | NumberFormatException e) {
                         throw new ChatBotException(
-                            "That's an invalid time format traveller!"
+                                "That's an invalid time format traveller!"
                         );
                     }
                 } else {
                     throw new ChatBotException(
-                        "That's an invalid time format traveller!"
+                            "That's an invalid time format traveller!"
                     );
                 }
             } else {
@@ -44,17 +45,9 @@ public class Timestamp {
             }
         } else {
             throw new ChatBotException(
-                "That's an invalid timestamp format traveller!"
+                    "That's an invalid timestamp format traveller!"
             );
         }
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public LocalTime getTime() {
-        return time;
     }
 
     private static LocalDate generateDate(String[] dateString) {
@@ -68,6 +61,14 @@ public class Timestamp {
         int hour = Integer.parseInt(timeString.substring(0, 2));
         int minute = Integer.parseInt(timeString.substring(2));
         return LocalTime.of(hour, minute);
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public LocalTime getTime() {
+        return time;
     }
 
     @Override
@@ -85,12 +86,12 @@ public class Timestamp {
     public String saveString() {
         if (date != null) {
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(
-                "dd/MM/yyyy"
+                    "dd/MM/yyyy"
             );
             String dateString = date.format(dateFormatter);
             if (time != null) {
                 DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern(
-                    "HHmm"
+                        "HHmm"
                 );
                 String timeString = time.format(timeFormatter);
                 return String.format("%s %s", dateString, timeString);
@@ -106,12 +107,12 @@ public class Timestamp {
     public String toString() {
         if (date != null) {
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(
-                "dd MMMM yyyy"
+                    "dd MMMM yyyy"
             );
             String dateString = date.format(dateFormatter);
             if (time != null) {
                 DateTimeFormatter timeFormatter = DateTimeFormatter.ofLocalizedTime(
-                    FormatStyle.SHORT
+                        FormatStyle.SHORT
                 );
                 String timeString = time.format(timeFormatter);
                 return String.format("%s, %s", dateString, timeString);

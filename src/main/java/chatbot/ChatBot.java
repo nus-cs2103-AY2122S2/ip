@@ -5,6 +5,7 @@ import chatbot.util.Parser;
 import chatbot.util.Storage;
 import chatbot.util.TaskList;
 import chatbot.util.Ui;
+
 import java.util.Scanner;
 
 public class ChatBot {
@@ -12,7 +13,7 @@ public class ChatBot {
     private static final String SAVE_FILE_DIRECTORY = "data";
     private static final String SAVE_FILE_NAME = "data.txt";
 
-    public static void main(String[] args) throws ChatBotException {
+    public static void main(String[] args) {
         Ui innkeeper = new Ui();
         TaskList taskList = new TaskList();
         Storage storage = new Storage(SAVE_FILE_DIRECTORY, SAVE_FILE_NAME);

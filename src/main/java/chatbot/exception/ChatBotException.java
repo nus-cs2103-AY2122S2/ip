@@ -8,7 +8,7 @@ public class ChatBotException extends Exception {
 
     public ChatBotException() {
         super(
-            "Sorry traveller! I can't quite understand what you mean by that!"
+                "Sorry traveller! I can't quite understand what you mean by that!"
         );
     }
 }

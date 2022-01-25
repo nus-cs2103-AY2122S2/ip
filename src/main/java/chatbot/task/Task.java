@@ -57,10 +57,10 @@ public class Task {
         if (other instanceof Task) {
             Task t = (Task) other;
             return (
-                t.getTitle() == title &&
-                t.getType() == type &&
-                t.getDateTime() == datetime &&
-                t.isCompleted() == done
+                    t.getTitle() == title
+                            && t.getType() == type
+                            && t.getDateTime() == datetime
+                            && t.isCompleted() == done
             );
         } else {
             return false;
