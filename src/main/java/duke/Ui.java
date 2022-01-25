@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Ui {
     private static final String INPUT_NAME = "You:";
-    private static final String OUTPUT_NAME = "duke.Duke:";
+    private static final String OUTPUT_NAME = "Duke:";
     private Scanner scanner;
     private TaskList taskList;
 
