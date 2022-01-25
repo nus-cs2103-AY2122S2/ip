@@ -15,6 +15,11 @@ public class DeadlineTask extends Task{
     public String getByTime(){
         return "(by:" + byTime + ")";
     }
+
+    public String toOutputLine(){
+        return this.getType() + " | " + (isDone ? "1 " : "0 ") + "| " + this.title + "|" + byTime;
+    }
+
     @Override
     public String toString(){
         return this.title + " " + getByTime();

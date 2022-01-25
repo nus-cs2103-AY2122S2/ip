@@ -13,7 +13,11 @@ public class EventTask extends Task{
     }
 
     public String getEventTime(){
-        return "(by:" + eventTime + ")";
+        return "(at:" + eventTime + ")";
+    }
+
+    public String toOutputLine(){
+        return this.getType() + " | " + (isDone ? "1 " : "0 ") + "| " + this.title + "|" + eventTime;
     }
 
     @Override
