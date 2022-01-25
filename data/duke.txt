@@ -1,0 +1,4 @@
+[T][ ] make friends
+[D][ ] do homework (by: tuesday)
+[T][ ] sell eggs
+[E][ ] make make (at: fri)
