@@ -1,3 +1,7 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Parser {
     public static Command parse(String strCommand) throws DukeException {
         String[] splitCommand = strCommand.split(" ", 2);
@@ -61,7 +65,7 @@ public class Parser {
                 if (splitCommand.length == 1 || splitCommand[1].isBlank()) {
                     throw new MissingArgumentException("Missing name and time");
                 } else {
-                    String[] taskArguments = splitCommand[1].split(" /at ", 2);
+                    String[] taskArguments = splitCommand[1].split("/at ", 2);
                     if (taskArguments[0].isBlank()) {
                         throw new MissingArgumentException("Missing name");
                     } else if (taskArguments.length == 1 || taskArguments[1].isBlank()) {
@@ -69,7 +73,13 @@ public class Parser {
                     } else {
                         String title = taskArguments[0];
                         String time = taskArguments[1];
-                        command = new AddCommand(new Event(title, time));
+                        try {
+                            SimpleDateFormat parser = new SimpleDateFormat("d/M/yy HH:mm");
+                            Date dateTime = parser.parse(time);
+                            command = new AddCommand(new Event(title, dateTime));
+                        } catch (ParseException e) {
+                            throw new InvalidDateTimeException("Incorrect time format");
+                        }
                     }
                 }
                 break;
@@ -77,7 +87,7 @@ public class Parser {
                 if (splitCommand.length == 1 || splitCommand[1].isBlank()) {
                     throw new MissingArgumentException("Missing name and time");
                 } else {
-                    String[] taskArguments = splitCommand[1].split(" /by ", 2);
+                    String[] taskArguments = splitCommand[1].split("/by ", 2);
                     if (taskArguments[0].isBlank()) {
                         throw new MissingArgumentException("Missing name");
                     } else if (taskArguments.length == 1 || taskArguments[1].isBlank()) {
@@ -85,7 +95,13 @@ public class Parser {
                     } else {
                         String title = taskArguments[0];
                         String time = taskArguments[1];
-                        command = new AddCommand(new Deadline(title, time));
+                        try {
+                            SimpleDateFormat parser = new SimpleDateFormat("d/M/yy HH:mm");
+                            Date dateTime = parser.parse(time);
+                            command = new AddCommand(new Deadline(title, dateTime));
+                        } catch (ParseException e) {
+                            throw new InvalidDateTimeException("Incorrect time format");
+                        }
                     }
                 }
                 break;

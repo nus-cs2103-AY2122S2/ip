@@ -1,20 +1,22 @@
-
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Event extends Task {
-    private final String time;
+    private final Date time;
 
-    public Event(String title, String time, boolean status) {
+    public Event(String title, Date time, boolean status) {
         super(title, status);
         this.time = time;
     }
 
-    public Event(String title, String time) {
+    public Event(String title, Date time) {
         super(title, false);
         this.time = time;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.time + ")";
+        SimpleDateFormat formatter = new SimpleDateFormat("d/M/yy HH:mm");
+        return "[E]" + super.toString() + "(at: " + formatter.format(time) + ")";
     }
 }

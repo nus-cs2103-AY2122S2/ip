@@ -14,7 +14,7 @@ public class Duke {
         this.storage = new Storage(filepath);
         try {
             this.taskList = new TaskList(storage.load());
-        } catch (NoExistingDataException e) {
+        } catch (DukeException e) {
             this.taskList = new TaskList();
         }
     }
