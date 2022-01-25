@@ -44,9 +44,13 @@ public class Event extends Task {
     }
 
     @Override
-    public Event mark() { return new Event(description, true, at); }
+    public Event mark() {
+        return new Event(description, true, at);
+    }
 
     @Override
-    public Event unmark() { return new Event(description, false, at); }
+    public Event unmark() {
+        return new Event(description, false, at);
+    }
 
 }

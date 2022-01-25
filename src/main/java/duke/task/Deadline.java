@@ -45,9 +45,13 @@ public class Deadline extends Task {
     }
 
     @Override
-    public Deadline mark() { return new Deadline(description, true, by); }
+    public Deadline mark() {
+        return new Deadline(description, true, by);
+    }
 
     @Override
-    public Deadline unmark() { return new Deadline(description, false, by); }
+    public Deadline unmark() {
+        return new Deadline(description, false, by);
+    }
 
 }

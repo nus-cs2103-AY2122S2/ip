@@ -37,9 +37,13 @@ public class Todo extends Task {
     }
 
     @Override
-    public Todo mark() { return new Todo(description, true); }
+    public Todo mark() {
+        return new Todo(description, true);
+    }
 
     @Override
-    public Todo unmark() { return new Todo(description, false); }
+    public Todo unmark() {
+        return new Todo(description, false);
+    }
 
 }

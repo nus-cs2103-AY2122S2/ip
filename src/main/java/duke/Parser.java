@@ -1,6 +1,15 @@
 package duke;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.ByeCommand;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.EventCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.TodoCommand;
+import duke.command.UnmarkCommand;
+import duke.command.UnrecognizedCommand;
 
 public class Parser {
 
@@ -49,7 +58,7 @@ public class Parser {
                 throw new DukeException("The description of an event cannot be empty");
             }
             DukeDateTime datetime = DukeDateTime.parse(desc_at[1]);
-            return new DeadlineCommand(desc_at[0], datetime);
+            return new EventCommand(desc_at[0], datetime);
         } else {
             return new UnrecognizedCommand();
         }
