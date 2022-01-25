@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class ExitCommandTest {
@@ -20,7 +21,7 @@ public class ExitCommandTest {
         TaskList list = new TaskList();
         PrinterStub linePrinter = new PrinterStub();
 
-        new ExitCommand("").execute(linePrinter, list);
+        assertFalse(new ExitCommand("").execute(linePrinter, list));
         assertEquals(1, linePrinter.lineCount());
         assertEquals("Goodbye! Have a Nice Day.", linePrinter.getLines().get(0));
     }
