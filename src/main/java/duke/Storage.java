@@ -1,5 +1,7 @@
-import exceptions.InvalidTaskException;
-import tasks.Task;
+package duke;
+
+import duke.exceptions.InvalidTaskException;
+import duke.tasks.Task;
 
 import java.io.*;
 import java.nio.file.Path;
@@ -40,7 +42,7 @@ public class Storage {
     /**
      * Read the data from the file.
      *
-     * @return a list of tasks
+     * @return a list of Duke.tasks
      */
     public ArrayList<Task> readData() {
         ArrayList<Task> taskList = new ArrayList<>();
@@ -65,7 +67,7 @@ public class Storage {
     /**
      * Writes data to the file.
      *
-     * @param taskList a list of tasks
+     * @param taskList a list of Duke.tasks
      */
     public void writeData(ArrayList<Task> taskList) {
         if (!fileExist()) {

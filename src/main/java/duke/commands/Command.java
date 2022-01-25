@@ -1,15 +1,18 @@
-package commands;
+package duke.commands;
 
-import main.java.UI;
+import duke.DukeList;
+import duke.UI;
+import duke.exceptions.InvalidTaskException;
 
 public abstract class Command {
-    public Command() {
+    public boolean isExit() { return false; }
 
-    }
-
-    public Command of(String cmdString) {
-
-    }
-
-    public abstract void execute(UI ui);
+    /**
+     * Function to execute the command.
+     *
+     * @param dukeList dukelist object
+     * @param ui ui object
+     * @throws InvalidTaskException invalid task
+     */
+    public abstract void execute(DukeList dukeList, UI ui) throws InvalidTaskException;
 }

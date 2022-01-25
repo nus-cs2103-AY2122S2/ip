@@ -1,5 +1,7 @@
-import exceptions.InvalidTaskException;
-import tasks.Task;
+package duke;
+
+import duke.exceptions.InvalidTaskException;
+import duke.tasks.Task;
 
 import java.util.ArrayList;
 
@@ -10,7 +12,7 @@ public class DukeList {
     private final ArrayList<Task> taskList;
 
     /**
-     * Constructor for DukeList
+     * Constructor for Duke.DukeList
      */
     public DukeList() {
         this.storage = new Storage();
@@ -83,7 +85,7 @@ public class DukeList {
 
         return "Noted. I've removed this task:\n"
                 + String.format("\t%s\n", task)
-                + String.format("Now you have %d tasks in the list.", this.taskList.size());
+                + String.format("Now you have %d Duke.tasks in the list.", this.taskList.size());
     }
 
     @Override

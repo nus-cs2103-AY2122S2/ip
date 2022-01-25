@@ -1,4 +1,4 @@
-package Duke.tasks;
+package duke.tasks;
 
 public class Todo extends Task {
     public static final String TASK_CODE = "T";

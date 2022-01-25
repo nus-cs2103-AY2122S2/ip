@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 
 public class UI {
@@ -26,7 +28,7 @@ public class UI {
     }
 
     /**
-     * Checks if there are still any commands.
+     * Checks if there are still any Duke.commands.
      *
      * @return whether there is a next line
      */
