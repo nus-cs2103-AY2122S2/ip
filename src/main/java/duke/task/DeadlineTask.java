@@ -1,5 +1,10 @@
 package duke.task;
 
+/**
+ * Inherit from Task.
+ * This is a DeadlineTask.
+ * Has extra time field for the deadline of this task.
+ */
 public class DeadlineTask extends Task {
     private String time;
 

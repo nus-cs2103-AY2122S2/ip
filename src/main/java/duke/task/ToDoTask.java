@@ -1,5 +1,9 @@
 package duke.task;
 
+/**
+ * Inherit from Task.
+ * This is a ToDoTask.
+ */
 public class ToDoTask extends Task {
     public ToDoTask(String taskName) {
         super(taskName);

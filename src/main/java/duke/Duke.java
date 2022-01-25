@@ -11,6 +11,12 @@ import duke.ui.Ui;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Duke is a task tracker interactive chatbot.
+ *
+ * @author Chen Yu An
+ * @version v0.1
+ */
 public class Duke {
     private final Scanner scanner = new Scanner(System.in);
     private boolean endProgram = false; // state to terminate the program

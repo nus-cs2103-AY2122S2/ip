@@ -11,9 +11,18 @@ import duke.ui.Ui;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * This is a TaskList class that used to store the tasks in an ArrayList.
+ */
 public class TaskList {
     private final ArrayList<Task> list = new ArrayList<>(); // arraylist to keep track of task
 
+    /**
+     * List out all the tasks currently in the task list.
+     *
+     * @param userInput A UserInput object, capturing the user's input.
+     * @throws DukeException If user's input is invalid.
+     */
     public void listTask(UserInput userInput) throws DukeException {
         if (!userInput.getDescription().equals("") || !userInput.getTime().equals("")) {
             // throw wrong command exception
@@ -32,7 +41,14 @@ public class TaskList {
         Ui.drawDivider();
     }
 
-    public void addTask(UserInput userInput) throws DukeException, IOException {
+    /**
+     * Add task to the task list based on the user's input.
+     * Print a message if the task is successfully added to the task list.
+     *
+     * @param userInput A UserInput object, capturing the user's input.
+     * @throws DukeException If user's input is invalid.
+     */
+    public void addTask(UserInput userInput) throws DukeException {
         // add ToDoTask
         if (userInput.getCommand().equals("todo")) {
             if (userInput.getDescription().equals("")) {
@@ -82,6 +98,13 @@ public class TaskList {
         Ui.drawDivider();
     }
 
+    /**
+     * Add task to the task list based on the user's input.
+     * Does not print any message. This is used for loading up saved data when initialising Duke.
+     *
+     * @param userInput A UserInput object, capturing the user's input.
+     * @throws DukeException If user's input is invalid.
+     */
     public void addTaskWithoutMessage(UserInput userInput) throws DukeException {
         // add ToDoTask
         if (userInput.getCommand().equals("todo")) {
@@ -105,6 +128,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Mark a task as done.
+     * Print a message after the operation is completed.
+     *
+     * @param userInput A UserInput object, capturing the user's input.
+     * @throws DukeException If user's input is invalid.
+     */
     public void markDone(UserInput userInput) throws DukeException {
         if (userInput.getDescription().equals("")) {
             // throw no description exception
@@ -122,6 +152,13 @@ public class TaskList {
         Ui.drawDivider();
     }
 
+    /**
+     * Mark a task as undone.
+     * Print a message after the operation is completed.
+     *
+     * @param userInput A UserInput object, capturing the user's input.
+     * @throws DukeException If user's input is invalid.
+     */
     public void markUndone(UserInput userInput) throws DukeException {
         if (userInput.getDescription().equals("")) {
             // throw no description exception
@@ -139,6 +176,13 @@ public class TaskList {
         Ui.drawDivider();
     }
 
+    /**
+     * Delete a task from task list.
+     * Print a message after the operation is completed.
+     *
+     * @param userInput A UserInput object, capturing the user's input.
+     * @throws DukeException If user's input is invalid.
+     */
     public void deleteTask(UserInput userInput) throws DukeException {
         if (userInput.getDescription().equals("")) {
             // throw no description exception
@@ -157,10 +201,21 @@ public class TaskList {
         Ui.drawDivider();
     }
 
+    /**
+     * Getter method to retrieve the task list.
+     *
+     * @return task list
+     */
     public ArrayList<Task> getList() {
         return this.list;
     }
 
+    /**
+     * A method to check if there is any index out of bound.
+     *
+     * @param i A int value.
+     * @throws DukeOutOfBoundException If index is out of bound.
+     */
     private void checkOutOfBound(int i) throws DukeOutOfBoundException {
         // check if the user's input value is within the range of the list
         if (i < 0) {

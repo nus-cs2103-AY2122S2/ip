@@ -1,5 +1,9 @@
 package duke.task;
 
+/**
+ * Task object class.
+ * Consists of the task's name and if it is done.
+ */
 public class Task {
     private final String name;
     private boolean isDone;
@@ -22,10 +26,16 @@ public class Task {
         return this.isDone;
     }
 
+    /**
+     * Mark the task as done
+     */
     public void markDone() {
         this.isDone = true;
     }
 
+    /**
+     * Mark the task as undone
+     */
     public void markUndone() {
         this.isDone = false;
     }

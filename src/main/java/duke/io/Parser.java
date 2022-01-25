@@ -5,8 +5,17 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * This is a Parser class that handles user's string input and re-format it for Duke to understand.
+ */
 public class Parser {
 
+    /**
+     * This method is used when loading file from "duke.txt" to parse in all the local saved tasks.
+     *
+     * @param input String input read from the txt file.
+     * @return Return a UserInput for Duke to process subsequent actions.
+     */
     public static UserInput parseTask(String input) {
         char typeOfTask = input.charAt(1);
         boolean isTaskDone = input.charAt(4) == 'X';
@@ -41,6 +50,13 @@ public class Parser {
         }
     }
 
+    /**
+     * This method is used to parse the user's input into Duke.
+     *
+     * @param input String input from the user.
+     * @return Return a UserInput for Duke to process subsequent actions.
+     * @throws DukeWrongTimeFormatException If the user's input has invalid time format for certain type of task.
+     */
     public UserInput parseInput(String input) throws DukeWrongTimeFormatException {
         UserInput userInput = new UserInput();
         int descriptionStart = input.indexOf(' ');

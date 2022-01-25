@@ -1,5 +1,10 @@
 package duke.task;
 
+/**
+ * Inherit from Task.
+ * This is an EventTask.
+ * Has extra time field to capture the date of event of this task.
+ */
 public class EventTask extends Task {
     private String time;
 
