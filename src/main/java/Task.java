@@ -1,37 +1,31 @@
-public class Task
-{
-    private int status; // 1 indicates done and 0 indicates not done
-    private String name;
+class Task {
 
-    public Task(String name)
-    {
+    private int status; // 1 indicates done and 0 indicates not done
+    private final String name;
+
+    public Task(String name) {
         this.status = 0;
         this.name = name;
     }
 
-    public int getStatus()
-    {
+    public int getStatus() {
         return status;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void mark()
-    {
+    public void mark() {
         this.status = 1;
     }
 
-    public void unmark()
-    {
+    public void unmark() {
         this.status = 0;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         if (status == 1) {
             return "[X] " + name + "\n";
         } else {

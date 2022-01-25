@@ -1,16 +1,14 @@
-public class Event extends Task
-{
-    private String time;
+class Event extends Task {
 
-    public Event(String name, String time)
-    {
+    private final String time;
+
+    public Event(String name, String time) {
         super(name);
         this.time = time;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         if (super.getStatus() == 1) {
             return "[E][X] " + super.getName() + " (at: " + time + ")\n";
         } else {

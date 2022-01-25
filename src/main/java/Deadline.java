@@ -1,16 +1,14 @@
-public class Deadline extends Task
-{
-    private String dueDate;
+class Deadline extends Task {
 
-    public Deadline(String name, String dueDate)
-    {
+    private final String dueDate;
+
+    public Deadline(String name, String dueDate) {
         super(name);
         this.dueDate = dueDate;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         if (super.getStatus() == 1) {
             return "[D][X] " + super.getName() + " (by: " + dueDate + ")\n";
         } else {
