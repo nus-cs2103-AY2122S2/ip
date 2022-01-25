@@ -75,4 +75,9 @@ public class Ui {
         String taskOrTasks = numberOfTasksOnSameDate <= 1 ? "task" : "tasks";
         System.out.printf("Found %d %s with date/time %s.\n", numberOfTasksOnSameDate, taskOrTasks, time);
     }
+
+    public void foundTasksMatchKeyword(int numberOfTasksMatchKeyword, String keyword) {
+        String taskOrTasks = numberOfTasksMatchKeyword <= 1 ? "task" : "tasks";
+        System.out.printf("Found %d %s containing keyword \"%s\".\n", numberOfTasksMatchKeyword, taskOrTasks, keyword);
+    }
 }

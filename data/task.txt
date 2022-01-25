@@ -1,0 +1,4 @@
+[T][ ] read book
+[D][ ] return book (by: Saturday, February 12, 2022 0700PM)
+[E][ ] book reading discussion (at: Wednesday, February 16, 2022)
+[T][ ] hey\
