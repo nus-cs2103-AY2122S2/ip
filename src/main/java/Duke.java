@@ -1,3 +1,9 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,6 +22,8 @@ public class Duke {
                     "\\____/ \\___|\\__\\____/ \\___/ \\__|\n";
     private static final String BORDER = "________________________________\n";
     private static final ArrayList<Task> TASKS = new ArrayList<>();
+    public static final String DATA_FOLDER_PATH = "./data";
+    public static final String TASKLIST_FILE_PATH = "./data/duke.txt";
 
     /**
      * Greets the user.
@@ -73,8 +81,10 @@ public class Duke {
 
     /**
      * Processes the input.
+     *
+     * @throws DukeException InvalidInputException, EmptyDescDescription, UnknownCommandException
      */
-    private static void process(String input) throws DukeException {
+    private static void process(String input) throws DukeException, IOException {
         String[] arr = input.split(" ");
         String command = arr[0]; // first word of the user input
         switch (command) {
@@ -101,6 +111,7 @@ public class Duke {
                 throw new InvalidInputException(BORDER + "Selection must be positive.\n" + BORDER);
             }
             mark(num);
+            saveToFile();
             break;
         }
         case "unmark": {
@@ -111,6 +122,7 @@ public class Duke {
                 throw new InvalidInputException(BORDER + "Selection must be positive.\n" + BORDER);
             }
             unmark(num);
+            saveToFile();
             break;
         }
         case "todo": {
@@ -121,6 +133,7 @@ public class Duke {
             }
             TASKS.add(newTodo);
             System.out.println(successMessage(newTodo));
+            saveToFile();
             break;
         }
         case "event": {
@@ -139,6 +152,7 @@ public class Duke {
             Event newEvent = new Event(desc, time);
             TASKS.add(newEvent);
             System.out.println(successMessage(newEvent));
+            saveToFile();
             break;
         }
         case "deadline": {
@@ -157,6 +171,7 @@ public class Duke {
             Deadline newDeadline = new Deadline(desc, time);
             TASKS.add(newDeadline);
             System.out.println(successMessage(newDeadline));
+            saveToFile();
             break;
         }
         case "delete": {
@@ -167,6 +182,7 @@ public class Duke {
                 throw new InvalidInputException(BORDER + "Selection must be positive.\n" + BORDER);
             }
             delete(num);
+            saveToFile();
             break;
         }
         default:
@@ -175,16 +191,96 @@ public class Duke {
     }
 
     /**
+     * Initializes the folder and file if they do not exist.
+     */
+    private static void initFiles() throws IOException {
+        File folder = new File(DATA_FOLDER_PATH);
+        if (!Files.exists(Path.of(DATA_FOLDER_PATH)) || !folder.isDirectory()) {
+            System.out.println("Data folder not found, creating a new folder.");
+            boolean isSuccess = folder.mkdirs();
+            if (isSuccess) {
+                System.out.println("Data folder has been created.");
+            } else {
+                throw new IOException("Failed to create folder, please try again");
+            }
+        }
+        File file = new File(TASKLIST_FILE_PATH);
+        if (!Files.exists(Path.of(TASKLIST_FILE_PATH)) || !file.isFile()) {
+            System.out.println("Tasklist file not found, creating a new file.");
+            boolean isSuccess = file.createNewFile();
+            if (isSuccess) {
+                System.out.println("Tasklist file has been created successfully.");
+            } else {
+                throw new IOException("Failed to create tasklist file, please try again.");
+            }
+        }
+    }
+
+    /**
+     * Saves the tasks to the file.
+     */
+    private static void saveToFile() throws IOException {
+        StringBuilder listString = new StringBuilder();
+        for (int i = 0; i < TASKS.size(); i++) {
+            Task t = TASKS.get(i);
+            listString.append(i + 1).append(".").append(t.toString()).append("\n");
+        }
+        PrintWriter out = new PrintWriter(TASKLIST_FILE_PATH);
+        out.println(listString);
+        out.close();
+    }
+
+    /**
+     * Reads the tasks in the save file and loads them into memory.
+     */
+    private static void loadFile() throws FileNotFoundException {
+        File file = new File(TASKLIST_FILE_PATH);
+        Scanner s = new Scanner(file);
+        while (s.hasNextLine()) {
+            String taskString = s.nextLine();
+            if (taskString.equals("")) { // reached EoF
+                break;
+            }
+            String descWithDate = taskString.substring(9);
+            Task taskToAdd;
+            char taskType = taskString.charAt(3);
+            boolean isDone = (taskString.charAt(6) == 'X');
+            if (taskType == 'E') { // task is an event
+                int indexOfDate = descWithDate.indexOf("(at: ");
+                String desc = descWithDate.substring(0, indexOfDate);
+                taskToAdd = new Event(desc, descWithDate.substring(indexOfDate + 4, descWithDate.length() - 1));
+            } else if (taskType == 'D') { // task is a deadline
+                int indexOfDate = descWithDate.indexOf("(by: ");
+                String desc = descWithDate.substring(0, indexOfDate);
+                taskToAdd = new Deadline(desc, descWithDate.substring(indexOfDate + 4, descWithDate.length() - 1));
+            } else { // task is a todo
+                taskToAdd = new Todo(descWithDate);
+            }
+            TASKS.add(taskToAdd);
+        }
+    }
+
+    /**
      * Driver method of the chatbot.
      */
     public static void main(String[] args) {
+        try {
+            initFiles();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            loadFile();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         greet();
         Scanner s = new Scanner(System.in);
         while (s.hasNextLine()) {
             String input = s.nextLine().toLowerCase().trim();
             try {
                 process(input);
-            } catch (DukeException e) {
+            } catch (DukeException | IOException e) {
                 System.out.println(e);
             }
         }
