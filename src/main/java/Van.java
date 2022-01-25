@@ -3,6 +3,9 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Van {
     public static void main(String[] args) {
@@ -49,6 +52,7 @@ public class Van {
             System.out.println(e);
         }
         Scanner input = new Scanner(System.in);
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         String divide = "-------------------------------------------";
         System.out.println("Hello I am Van");
         System.out.println("How may i assist you");
@@ -61,6 +65,7 @@ public class Van {
                 if (command.equalsIgnoreCase("bye")) {
                     break;
                 }
+                LocalDateTime date;
                 switch(parse[0].toLowerCase()) {
                     case "list":
                         System.out.println("Pending tasks:");
@@ -76,7 +81,12 @@ public class Van {
                         if (para.length != 2) {
                             throw new VanException("Invalid format. Please use: deadline <task> /by <date>");
                         }
-                        tasks.add(new Deadline(para[0], para[1]));
+                        try {
+                            date = LocalDateTime.parse(para[1], dateFormat);
+                        } catch (DateTimeParseException e) {
+                            throw new VanException("Invalid date format. " + "Please use dd-MM-YYYY HH:mm e.g. 20-10-2022 1800");
+                        }
+                        tasks.add(new Deadline(para[0], date));
                         System.out.println("Task added");
                         System.out.println("  " + tasks.get(counter).getStatus());
                         counter++;
@@ -90,7 +100,12 @@ public class Van {
                         if (para.length != 2) {
                             throw new VanException("Invalid format. Please use: event <task> /at <date>");
                         }
-                        tasks.add(new Event(para[0], para[1]));
+                        try {
+                            date = LocalDateTime.parse(para[1], dateFormat);
+                        } catch (DateTimeParseException e) {
+                            throw new VanException("Invalid date format. " + "Please use dd-MM-YYYY HH:mm e.g. 20-10-2022 1800");
+                        }
+                        tasks.add(new Event(para[0], date));
                         System.out.println("Task added");
                         System.out.println("  " + tasks.get(counter).getStatus());
                         counter++;
