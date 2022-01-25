@@ -1,4 +1,7 @@
 package yalebot;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 
 /**
  * Subclass of Task
@@ -10,7 +13,7 @@ public class Event extends Task {
      * String to represent the date
      * and time of event
      */
-    protected String at;
+    protected LocalDate at;
 
     /**
      * Constructor method
@@ -20,7 +23,7 @@ public class Event extends Task {
      */
     public Event(String name, boolean isMarked, String at) {
         super(name, isMarked);
-        this.at = at;
+        this.at = LocalDate.parse(at);
     }
 
     /**
@@ -29,6 +32,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.at + ")"   ;
+        return "[E]" + super.toString()
+                + " (at: " + this.at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
