@@ -99,26 +99,19 @@ public class Duke {
                 throw new DukeException("You have not keyed in any task! Maybe you missed something? Don't worry, just try again!");
             } else if (userTaskString.equalsIgnoreCase("list")){
                 this.printUserTasks();
-            } else if (userTaskString.matches("^[deltDELT]{6}.*")){
-                Pattern pattern = Pattern.compile("^[deltDELT]{6}");
-                Matcher matcher = pattern.matcher(userTaskString);
-                if (matcher.find()) { // Finds first match (finds a match for each time .find() is run)
+            } else if (userTaskString.matches("^(delete|Delete|DELETE).*")){
                     try {
-                        this.deleteTask(Integer.parseInt(userTaskString.substring(matcher.end()+1))-1);
+                        this.deleteTask(Integer.parseInt(userTaskString.substring(6+1))-1);
                         //+1 is to take into account the " "after delete, -1 is to convert it into 0-based indexing
                     } catch (StringIndexOutOfBoundsException err) { // For cases like "delete" without a number
                         throw new DukeException("Please enter a task number to delete!");
-                    }catch (NumberFormatException err) { // For cases like "delete1" without a space in between or "delete 3b" where the term is not a number
+                    } catch (NumberFormatException err) { // For cases like "delete1" without a space in between or "delete 3b" where the term is not a number
                         throw new DukeException("Please delete a task in the following format:\n" +
                                 "delete [number]");
                     }
-                }
-            } else if (userTaskString.matches("^[markMARK]{4}.*")){
-                Pattern pattern = Pattern.compile("^[markMARK]{4}");
-                Matcher matcher = pattern.matcher(userTaskString);
-                if (matcher.find()) { // Finds first match (finds a match for each time .find() is run)
+            } else if (userTaskString.matches("^(mark|Mark|MARK).*")){
                     try {
-                        this.markTaskDone(Integer.parseInt(userTaskString.substring(matcher.end()+1))-1);
+                        this.markTaskDone(Integer.parseInt(userTaskString.substring(4+1))-1);
                         //+1 is to take into account the " "after mark, -1 is to convert it into 0-based indexing
                     } catch (StringIndexOutOfBoundsException err) { // For cases like "mark" without a number
                         throw new DukeException("Please enter a task number to mark!");
@@ -126,13 +119,9 @@ public class Duke {
                         throw new DukeException("Please mark a task in the following format:\n" +
                                 "mark [number]");
                     }
-                }
-            } else if (userTaskString.matches("^[unmarkUNMARK]{6}.*")){
-                Pattern pattern = Pattern.compile("^[unmarkUNMARK]{6}");
-                Matcher matcher = pattern.matcher(userTaskString);
-                if (matcher.find()) { // Finds first match (finds a match for each time .find() is run)
+            } else if (userTaskString.matches("^(unmark|Unmark|UNMARK).*")){
                     try {
-                        this.markTaskNotDone(Integer.parseInt(userTaskString.substring(matcher.end()+1))-1);
+                        this.markTaskNotDone(Integer.parseInt(userTaskString.substring(6+1))-1);
                         //+1 is to take into account the " "after unmark, -1 is to convert it into 0-based indexing
                     } catch (StringIndexOutOfBoundsException err) { // For cases like "unmark" without a number
                         throw new DukeException("Please enter a task number to unmark!");
@@ -140,23 +129,15 @@ public class Duke {
                         throw new DukeException("Please unmark a task in the following format:\n" +
                                 "unmark [number]");
                     }
-                }
-            } else if (userTaskString.matches("^[todTOD]{4}.*")){
-                Pattern pattern = Pattern.compile("^[todTOD]{4}");
-                Matcher matcher = pattern.matcher(userTaskString);
-                if (matcher.find()) { // Finds first match (finds a match for each time .find() is run)
+            } else if (userTaskString.matches("^(todo|Todo|TODO).*")){
                     try {
-                        this.addTodo(userTaskString.substring(matcher.end()+1));
+                        this.addTodo(userTaskString.substring(4+1));
                     } catch (StringIndexOutOfBoundsException err) { //For cases like "todo" without any further description
                         throw new DukeException("Please enter a description!");
                     }
-                }
-            } else if (userTaskString.matches("^[dealinDEALIN]{8}.*")){
-                Pattern pattern = Pattern.compile("^[dealinDEALIN]{8}");
-                Matcher matcher = pattern.matcher(userTaskString);
-                if (matcher.find()) { // Finds first match (finds a match for each time .find() is run)
+            } else if (userTaskString.matches("^(deadline|Deadline|DEADLINE).*")){
                     try {
-                        String userTaskStringSliced = userTaskString.substring(matcher.end()+1);
+                        String userTaskStringSliced = userTaskString.substring(8+1);
                         String[] descriptionDeadlineSplit = userTaskStringSliced.split(" /by ", 2);
                         this.addDeadline(descriptionDeadlineSplit[0], descriptionDeadlineSplit[1]);
                     } catch (StringIndexOutOfBoundsException err) { // For cases like "deadline" without any other information
@@ -166,14 +147,9 @@ public class Duke {
                         throw new DukeException("Please enter a Deadline in the following format:\n" +
                                 "deadline [description] /by [datetime]");
                     }
-
-                }
-            } else if (userTaskString.matches("^[evntEVNT]{5}.*")){
-                Pattern pattern = Pattern.compile("^[evntEVNT]{5}");
-                Matcher matcher = pattern.matcher(userTaskString);
-                if (matcher.find()) { // Finds first match (finds a match for each time .find() is run)
+            } else if (userTaskString.matches("^(event|Event|EVENT).*")){
                     try {
-                        String userTaskStringSliced = userTaskString.substring(matcher.end()+1);
+                        String userTaskStringSliced = userTaskString.substring(5+1);
                         String[] descriptionTimingSplit = userTaskStringSliced.split(" /at ", 2);
                         this.addEvent(descriptionTimingSplit[0], descriptionTimingSplit[1]);
                     } catch (StringIndexOutOfBoundsException err) { // For cases like "event" without any other information
@@ -183,7 +159,6 @@ public class Duke {
                         throw new DukeException("Please enter an Event in the following format:\n" +
                                 "event [description] /at [datetime]");
                     }
-                }
             } else { // If a user does not specify a todo, deadline or event
                 throw new DukeException("Invalid Input! Please either add in a Todo, Deadline or Event!");
             }
@@ -194,7 +169,7 @@ public class Duke {
         Duke duke = new Duke();
         duke.print("Hello, My Dear Friend... I'm Duke, your personal motivator!");
         Quote quoteOfTheDay = new Quote();
-        duke.print(quoteOfTheDay.generateQuote());
+//        duke.print(quoteOfTheDay.generateQuote());
         duke.print("What can i do for you today?");
         while (true) {
             String userTaskString = sc.nextLine();
