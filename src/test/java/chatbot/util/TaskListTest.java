@@ -47,12 +47,15 @@ public class TaskListTest {
         thrown = assertThrows(ChatBotException.class, () ->
             taskList.add(new String[]{"deadline", "somedeadline2"}, new String[]{"by"})
         );
-        assertEquals("You need to key in the due date and time of your deadline traveller!", thrown.getMessage());
+        assertEquals("You need to key in the due date and time of your deadline traveller!",
+                thrown.getMessage());
 
         thrown = assertThrows(ChatBotException.class, () ->
             taskList.add(new String[]{"deadline", "somedeadline2"}, new String[]{"at", "24/04/2024"})
         );
-        assertEquals("The correct format for adding a deadline is deadline <name of task> /by <timestamp of task>", thrown.getMessage());
+        assertEquals("The correct format for adding a deadline is "
+                        + "deadline <name of task> /by <timestamp of task>",
+                thrown.getMessage());
     }
 
     @Test
@@ -78,7 +81,8 @@ public class TaskListTest {
         thrown = assertThrows(ChatBotException.class, () ->
             taskList.add(new String[]{"event", "someevent2"}, new String[]{"by", "23/03/2023 1800"})
         );
-        assertEquals("The correct format for adding an event is event <name of task> /at <timestamp of task>", thrown.getMessage());
+        assertEquals("The correct format for adding an event is event <name of task> /at <timestamp of task>",
+                thrown.getMessage());
     }
 
     @Test
@@ -94,10 +98,12 @@ public class TaskListTest {
         TaskList taskList = fullTaskList();
 
         String deadlineActual = taskList.getTasksOnDate(new Timestamp("24/04/2024"));
-        String deadlineExpected = "             1. [D][ ] somedeadline (by: 24 April 2024)".concat(System.lineSeparator());
+        String deadlineExpected =
+                "             1. [D][ ] somedeadline (by: 24 April 2024)".concat(System.lineSeparator());
 
         String eventActual = taskList.getTasksOnDate(new Timestamp("23/03/2023"));
-        String eventExpected = "             1. [E][ ] someevent (at: 23 March 2023, 6:00 PM)".concat(System.lineSeparator());
+        String eventExpected =
+                "             1. [E][ ] someevent (at: 23 March 2023, 6:00 PM)".concat(System.lineSeparator());
 
         String falseActual = taskList.getTasksOnDate(new Timestamp("01/01/2021"));
         String falseExpected = "You have no tasks on this date traveller!";

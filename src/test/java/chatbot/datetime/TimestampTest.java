@@ -12,7 +12,7 @@ public class TimestampTest {
 
     private static final String DATE = "23/03/2023";
     private static final String TIME = "1800";
-    private static final LocalDate LOCAL_DATE = LocalDate.of(2023,3,23);
+    private static final LocalDate LOCAL_DATE = LocalDate.of(2023, 3, 23);
     private static final LocalTime LOCAL_TIME = LocalTime.of(18, 0);
 
     @Test

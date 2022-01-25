@@ -51,7 +51,8 @@ public class Parser {
             try {
                 if (input.length > 2) {
                     throw new ChatBotException(
-                        "Thats too many inputs traveller! You only need to key in the date or timestamp for which you want to view your tasks!"
+                            "That's too many inputs traveller! You only need to key in the "
+                                    + "date or timestamp for which you want to view your tasks!"
                     );
                 } else {
                     Timestamp date = new Timestamp(input[1]);
@@ -68,16 +69,18 @@ public class Parser {
             try {
                 if (taskList.isEmpty()) {
                     throw new ChatBotException(
-                        "Your task list is empty traveller! Add some tasks first before attempting to mark or unmark!"
+                            "Your task list is empty traveller! "
+                                    + "Add some tasks first before attempting to mark or unmark!"
                     );
                 } else if (input.length > 2) {
                     throw new ChatBotException(
-                        "Thats too many inputs traveller! You only need to key in the index of the task you wish to mark or unmark!"
+                            "That's too many inputs traveller! "
+                                    + "You only need to key in the index of the task you wish to mark or unmark!"
                     );
                 } else {
                     String response = markOrUnmark(
-                        Integer.parseInt(input[1]) - 1,
-                        input[0].equals("mark")
+                            Integer.parseInt(input[1]) - 1,
+                            input[0].equals("mark")
                     );
                     innkeeper.chat(response);
                 }
@@ -85,11 +88,11 @@ public class Parser {
                 innkeeper.error(e.getMessage());
             } catch (NumberFormatException e) {
                 innkeeper.error(
-                    "You should mark and unmark tasks using their index rather than title traveller!"
+                        "You should mark and unmark tasks using their index rather than title traveller!"
                 );
             } catch (ArrayIndexOutOfBoundsException e) {
                 innkeeper.error(
-                    "You need to key in the index of the task you wish to mark or unmark traveller!"
+                        "You need to key in the index of the task you wish to mark or unmark traveller!"
                 );
             }
 
@@ -108,15 +111,17 @@ public class Parser {
             try {
                 if (taskList.isEmpty()) {
                     throw new ChatBotException(
-                        "Your task list is empty traveller! Add some tasks first before attempting to delete!"
+                            "Your task list is empty traveller! "
+                                    + "Add some tasks first before attempting to delete!"
                     );
                 } else if (input.length > 2) {
                     throw new ChatBotException(
-                        "Thats too many inputs traveller! You only need to key in the index of the task you wish to delete!"
+                            "That's too many inputs traveller! "
+                                    + "You only need to key in the index of the task you wish to delete!"
                     );
                 } else {
                     String response = taskList.delete(
-                        Integer.parseInt(input[1]) - 1
+                            Integer.parseInt(input[1]) - 1
                     );
                     innkeeper.chat(response);
                     innkeeper.printNumTasks(taskList.getNumTasks());
@@ -126,11 +131,11 @@ public class Parser {
                 innkeeper.error(e.getMessage());
             } catch (NumberFormatException e) {
                 innkeeper.error(
-                    "You should delete tasks using their index rather than title traveller!"
+                        "You should delete tasks using their index rather than title traveller!"
                 );
             } catch (ArrayIndexOutOfBoundsException e) {
                 innkeeper.error(
-                    "You need to key in the index of the task you wish to delete traveller!"
+                        "You need to key in the index of the task you wish to delete traveller!"
                 );
             }
             return true;
@@ -145,34 +150,35 @@ public class Parser {
                     String type = splitInput[0];
                     if (temp[0].isBlank()) {
                         throw new ChatBotException(
-                            "Don't be shy traveller! Type in a command and I will assist you!"
+                                "Don't be shy traveller! Type in a command and I will assist you!"
                         );
                     } else if (type.equals("deadline")) {
                         if (splitInput.length == 1) {
                             throw new ChatBotException(
-                                "You need to key in the title as well as due date and time of your deadline traveller!"
+                                    "You need to key in the title "
+                                            + "as well as due date and time of your deadline traveller!"
                             );
                         } else {
                             throw new ChatBotException(
-                                "You need to include /by in your command to add a deadline traveller!"
+                                    "You need to include /by in your command to add a deadline traveller!"
                             );
                         }
                     } else if (type.equals("event")) {
                         if (splitInput.length == 1) {
                             throw new ChatBotException(
-                                "You need to key in the title and timestamp of your event traveller!"
+                                    "You need to key in the title and timestamp of your event traveller!"
                             );
                         } else {
                             throw new ChatBotException(
-                                "You need to include /at in your command to add an event traveller!"
+                                    "You need to include /at in your command to add an event traveller!"
                             );
                         }
                     }
                     throw new ChatBotException();
                 } else {
                     String response = taskList.add(
-                        temp[0].split(" "),
-                        temp[1].split(" ")
+                            temp[0].split(" "),
+                            temp[1].split(" ")
                     );
                     innkeeper.chat(response);
                     innkeeper.printNumTasks(taskList.getNumTasks());
@@ -194,7 +200,7 @@ public class Parser {
      * @throws ChatBotException If the task index is invalid.
      */
     public String markOrUnmark(int index, boolean mark)
-        throws ChatBotException {
+            throws ChatBotException {
         if (taskList.isValidIndex(index).equals(true)) {
             String response;
             if (mark) {
@@ -206,7 +212,7 @@ public class Parser {
             return response;
         } else {
             throw new ChatBotException(
-                "This is an invalid task index traveller! You can type list to check all task indexes!"
+                    "This is an invalid task index traveller! You can type list to check all task indexes!"
             );
         }
     }

@@ -101,10 +101,10 @@ public class Task {
         if (other instanceof Task) {
             Task t = (Task) other;
             return (
-                t.getTitle().equals(title) &&
-                t.getType().equals(type) &&
-                t.getTimestamp().equals(timestamp) &&
-                t.getDone().equals(done)
+                t.getTitle().equals(title)
+                        && t.getType().equals(type)
+                        && t.getTimestamp().equals(timestamp)
+                        && t.getDone().equals(done)
             );
         } else {
             return false;
