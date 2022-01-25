@@ -8,6 +8,12 @@ import java.io.PrintWriter;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
+import java.time.LocalDate;
+// import java.time.format.DateTimeFormatter;
+// import java.time.temporal.ChronoUnit;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+
 import chatbot.DukeException;
 import chatbot.Todo;
 import chatbot.Deadline;
@@ -20,8 +26,6 @@ public class Duke {
 
     // strings to use
     public static String straightLine = "____________________________________________________________";
-    public static String introductionMessage = "Good day Sir. My name is Dook. \n How may I be of assistance?";
-    public static String byeMessage = "Farewell Sir. May you have a wonderful day.";
     public static String noSuchTask = "I'm very sorry Sir, there is no such task you mentioned.";
     public static String notValidNumber = "Please enter a valid number Sir.";
     public static String commandRequiresNumber = "Sorry Sir, this command requires a number.";
@@ -34,11 +38,13 @@ public class Duke {
 
     // introduction message
     public static void displayGreeting() {
+        String introductionMessage = "Good day Sir. My name is Dook. \n How may I be of assistance?";
         System.out.println(createReply(introductionMessage));
     }
 
     // farewell message
     public static void displayFarewell() {
+        String byeMessage = "Farewell Sir. May you have a wonderful day.";
         System.out.println(createReply(byeMessage));
     }
 
@@ -50,8 +56,9 @@ public class Duke {
         String taskDateTime = "";
         String missingDateTime = "Sorry Sir, the description of <" + type + "> is missing a date/time.";
         String missingTaskInfo = "Sorry Sir, the <" + type + "> command cannot be empty.";
+        String wrongDateTimeFormat = "Sorry Sir, the date/time needs to be in the format: YYYY-MM-DD HH:MM";
 
-        if (type.equals("deadline")) {
+        if (type.equals("deadline")) { // is a deadline task
             String[] inputStringArray = inputText.split(" /by ");
             try { 
                 taskName = inputStringArray[0].substring(9);
@@ -63,9 +70,19 @@ public class Duke {
             } catch (Exception ArrayIndexOutOfBoundsException) {
                 throw new DukeException(missingDateTime);
             }
-            newTask = new Deadline(taskName, taskDateTime);
+            try {
+                String[] taskDateTimeArray = taskDateTime.split(" ");
+                LocalDate taskDate = LocalDate.parse(taskDateTimeArray[0]);
+                LocalTime taskTime = null;
+                if (taskDateTimeArray.length > 1) {
+                    taskTime = LocalTime.parse(taskDateTimeArray[1]);
+                }
+                newTask = new Deadline(taskName, taskDate, taskTime);
+            } catch (DateTimeParseException exception) {
+                throw new DukeException(wrongDateTimeFormat);
+            }
 
-        } else if (type.equals("event")) {
+        } else if (type.equals("event")) { // is an event task
             String[] inputStringArray = inputText.split(" /at ");
             try { 
                 taskName = inputStringArray[0].substring(6);
@@ -77,9 +94,19 @@ public class Duke {
             } catch (Exception ArrayIndexOutOfBoundsException) {
                 throw new DukeException(missingDateTime);
             }
-            newTask = new Event(taskName, taskDateTime);
+            try {
+                String[] taskDateTimeArray = taskDateTime.split(" ");
+                LocalDate taskDate = LocalDate.parse(taskDateTimeArray[0]);
+                LocalTime taskTime = null;
+                if (taskDateTimeArray.length > 1) {
+                    taskTime = LocalTime.parse(taskDateTimeArray[1]);
+                }
+                newTask = new Event(taskName, taskDate, taskTime);
+            } catch (DateTimeParseException exception) {
+                throw new DukeException(wrongDateTimeFormat);
+            }
 
-        } else { // this is a to-do task
+        } else { // is a to-do task
             try { 
                 taskName = inputText.substring(5);
             } catch (StringIndexOutOfBoundsException exception) {
@@ -212,19 +239,31 @@ public class Duke {
                     dataEntry += task.getIsDone() ? "/;DONE" : "/;NOT_DONE";
                     dataEntry += "/;" + task.getTaskName();
                     dataEntry += "\n";
+
                 } else if (task instanceof Deadline) {
                     Deadline deadline = (Deadline) task;
                     dataEntry += "Deadline";
                     dataEntry += deadline.getIsDone() ? "/;DONE" : "/;NOT_DONE";
                     dataEntry += "/;" + deadline.getTaskName();
-                    dataEntry += "/;" + deadline.getDateTime();
+                    dataEntry += "/;" + deadline.getDate();
+                    if (deadline.getTime() == null) {
+                        dataEntry += "/;" + "null";
+                    } else {
+                        dataEntry += "/;" + deadline.getTime();
+                    }
                     dataEntry += "\n";
+
                 } else if (task instanceof Event) {
                     Event event = (Event) task;
                     dataEntry += "Event";
                     dataEntry += event.getIsDone() ? "/;DONE" : "/;NOT_DONE";
                     dataEntry += "/;" + event.getTaskName();
-                    dataEntry += "/;" + event.getDateTime();
+                    dataEntry += "/;" + event.getDate();
+                    if (event.getTime() == null) {
+                        dataEntry += "/;" + "null";
+                    } else {
+                        dataEntry += "/;" + event.getTime();
+                    }
                     dataEntry += "\n";
                 }
                 printWriter.printf(dataEntry);
@@ -261,15 +300,32 @@ public class Duke {
                     }
                 
                 Task newTask;
+                LocalTime taskTime = null;
                 switch (dataEntryArray[0]) {
                     case "Todo": // to-do task
                         newTask = new Todo(dataEntryArray[2], isDone);
                         break;
                     case "Deadline": // deadline task
-                        newTask = new Deadline(dataEntryArray[2], dataEntryArray[3], isDone);
+                        taskTime = null;
+                        if (!dataEntryArray[4].equals("null")) {
+                            taskTime = LocalTime.parse(dataEntryArray[4]);
+                        }
+                        newTask = new Deadline(
+                            dataEntryArray[2], 
+                            LocalDate.parse(dataEntryArray[3]), 
+                            taskTime,
+                            isDone);
                         break;
                     case "Event": // event task
-                        newTask = new Event(dataEntryArray[2], dataEntryArray[3], isDone);
+                        taskTime = null;
+                        if (!dataEntryArray[4].equals("null")) {
+                            taskTime = LocalTime.parse(dataEntryArray[4]);
+                        }
+                        newTask = new Event(
+                            dataEntryArray[2], 
+                            LocalDate.parse(dataEntryArray[3]), 
+                            taskTime,
+                            isDone);
                         break;
                     default: // unknown task - should not reach here
                         newTask = new Todo(dataEntryArray[2], isDone);
