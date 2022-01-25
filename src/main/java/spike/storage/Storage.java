@@ -19,11 +19,24 @@ public class Storage {
     private String directory;
     private String filePath;
 
+    /**
+     * Constructor using relative path of data folder and file.
+     *
+     * @param directory relative path of folder where the data file sits
+     * @param filePath relative path of the data file
+     */
     public Storage(String directory, String filePath) {
         this.directory = directory;
         this.filePath = filePath;
     }
 
+    /**
+     * Gets the task list from hard disk.
+     * If the file and folder does not exist, create them.
+     *
+     * @return a list of tasks retrieved from data file
+     * @throws SpikeException if the path given is invalid
+     */
     public ArrayList<Task> load() throws SpikeException {
         // Check first whether the data folder exists, if not, create it
         File dataDir = new File("data/");
@@ -79,7 +92,9 @@ public class Storage {
     }
 
     /**
-     * Saves the latest task list into hard disk when user exits.
+     * Saves the latest task list into hard disk.
+     *
+     * @param tasks current task list
      */
     public void saveChanges(TaskList tasks) {
         try {

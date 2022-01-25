@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Encapsulates function to parse user command.
+ * Encapsulates functionalities to parse user command.
  */
 public class Parser {
      protected enum CommandName {
@@ -33,6 +33,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses user input and returns a command.
+     *
+     * @param inputLine raw user input
+     * @param tasks current task list
+     * @return a proper command to be executed
+     */
     public Command parseCommand(String inputLine, TaskList tasks) {
         String[] commandWords =  inputLine.split(" ");
         CommandName type = validateCommand(commandWords[0]);

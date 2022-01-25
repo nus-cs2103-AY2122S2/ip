@@ -5,7 +5,7 @@ package spike.task;
  */
 public class ToDo extends Task{
     /**
-     * Normal constructor.
+     * Default constructor.
      */
     public ToDo(String description) {
         super(description);
@@ -20,6 +20,9 @@ public class ToDo extends Task{
         return "T" + " | " + status + " | " + super.description;
     }
 
+    /**
+     * Returns proper string representation of the task object
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();

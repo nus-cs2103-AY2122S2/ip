@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
 
     /**
-     * Normal constructor.
+     * Default constructor.
      */
     public Event(String description, LocalDateTime at) {
         super(description, at);
@@ -25,6 +25,9 @@ public class Event extends Task {
         return "E" + " | " + status + " | " + super.description + " | " + dtf.format(super.dateTime);
     }
 
+    /**
+     * Returns proper string representation of the task object
+     */
     @Override
     public String toString() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

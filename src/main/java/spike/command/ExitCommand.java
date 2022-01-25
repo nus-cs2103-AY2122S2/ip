@@ -6,8 +6,16 @@ import spike.task.TaskList;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Handles data before exiting.
+ */
 public class ExitCommand extends Command {
-
+    /**
+     * Save changes to list to the hard disk.
+     *
+     * @param tasks current task list
+     * @return result of attempt to save changes
+     */
     @Override
     public String execute(TaskList tasks) {
         try {

@@ -8,11 +8,22 @@ import spike.storage.Storage;
 import spike.task.*;
 import spike.ui.Ui;
 
+/**
+ * Starting point of the Spike chatbot program.
+ * Initializes all necessary components of the application and starts to accept commands.
+ */
 public class Spike {
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
 
+    /**
+     * Default constructor for a Spike instance.
+     *
+     * @param directory relative path of folder where the data file sits
+     * @param filePath relative path of the data file
+     * @return A Spike instance with all components initialized
+     */
     public Spike(String directory, String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(directory, filePath);
@@ -34,6 +45,7 @@ public class Spike {
             ui.printMsg(executionResult);
         } while (!(command instanceof ExitCommand));
         storage.saveChanges(tasks);
+        System.exit(0);
     }
 
 
