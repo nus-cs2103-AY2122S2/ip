@@ -15,6 +15,7 @@ public class Event extends Task {
 
     /**
      * Returns the save format in String of this task.Task object
+     *
      * @return A String for the save format of this task.Task object
      */
     @Override
