@@ -33,9 +33,10 @@ public class DukeManager {
                 Command command = parser.parse(input);
                 command.execute(taskList, ui, storage);
                 exited = command.isExit();
-                ui.printLine();
             } catch (DukeException exception) {
                 ui.showMessage(exception.getMessage());
+            } finally {
+                ui.printLine();
             }
         }
         ui.close();
