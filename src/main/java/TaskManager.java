@@ -7,8 +7,8 @@ public class TaskManager {
 
     protected ArrayList<Task> tasks;
 
-    public TaskManager(){
-        this.tasks = new ArrayList<Task>();
+    public TaskManager(ArrayList<Task> saved){
+        this.tasks = saved;
     }
 
     public void handleLogic() {
@@ -22,7 +22,7 @@ public class TaskManager {
             StringTokenizer st = new StringTokenizer(userInput, " ");
             String curr = st.nextToken();
 
-            try{
+            try {
                 this.handleCommand(curr, userInput, st);
             } catch (DukeException e){
                 System.out.println(e.toString());
@@ -30,16 +30,25 @@ public class TaskManager {
 
             System.out.println("-------------------");
         }
+
+        Storage.saveListToDisk(tasks);
+        System.out.println("Bye! Hope to see you again soon");
+
     }
 
     private void printList(){
-        for (int x = 0; x < tasks.size(); x++) {
-            System.out.println((x + 1) + ". " + tasks.get(x).toString());
+        if(tasks.size() == 0) {
+            System.out.println("No Tasks Right Now");
+        } else {
+            for (int x = 0; x < tasks.size(); x++) {
+                System.out.println((x + 1) + ". " + tasks.get(x).toString());
+            }
         }
     }
 
     private void addToDo(String desc) throws DukeException.DukeNoTaskGivenException {
-        if(desc.replace(" ", "").equals("")){
+
+        if (desc.replace(" ", "").equals("")) {
             throw new DukeException.DukeNoTaskGivenException();
         }
         ToDo curr = new ToDo(desc, false);
@@ -48,7 +57,7 @@ public class TaskManager {
     }
 
     private void addDeadline(String desc, String date) throws DukeException.DukeNoTimeProvided {
-        if(date.replace(" ", "").equals("")){
+        if(date.replace(" ", "").equals("")) {
             throw new DukeException.DukeNoTimeProvided();
         }
         Deadline curr = new Deadline(desc, false, date);
@@ -57,7 +66,7 @@ public class TaskManager {
     }
 
     private void addEvent(String desc, String date) throws DukeException.DukeNoTimeProvided {
-        if(date.replace(" ", "").equals("")){
+        if(date.replace(" ", "").equals("")) {
             throw new DukeException.DukeNoTimeProvided();
         }
         Event curr = new Event(desc, false, date);
@@ -77,6 +86,7 @@ public class TaskManager {
         System.out.println("Now you have " + this.tasks.size() + " tasks in the list");
     }
 
+
     private void deleteTask(int index){
         Task toBeRemoved = tasks.get(index - 1);
         this.tasks.remove(index - 1);
@@ -94,7 +104,7 @@ public class TaskManager {
 
                 try {
                     int toMark = Integer.parseInt(st.nextToken());
-                    if(toMark < 0 || toMark > tasks.size()){
+                    if(toMark < 0 || toMark > tasks.size()) {
                         throw new DukeException.DukeInvalidNumberException();
                     }
                     tasks.get(toMark - 1).markCompleted();
@@ -107,11 +117,11 @@ public class TaskManager {
 
                 try {
                     int toUnmark = Integer.parseInt(st.nextToken());
-                    if(toUnmark < 0 || toUnmark > tasks.size()){
+                    if(toUnmark < 0 || toUnmark > tasks.size()) {
                         throw new DukeException.DukeInvalidNumberException();
                     }
                     tasks.get(toUnmark - 1).markNotCompleted();
-                } catch (DukeException | NumberFormatException e){
+                } catch (DukeException | NumberFormatException e) {
                     throw new DukeException.DukeInvalidNumberException();
                 }
                 break;
@@ -165,6 +175,10 @@ public class TaskManager {
                 } catch (NumberFormatException | DukeException e){
                     throw new DukeException.DukeInvalidNumberException();
                 }
+                break;
+
+            case "bye":
+
                 break;
 
             default:

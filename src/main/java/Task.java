@@ -1,4 +1,6 @@
-public abstract class Task {
+import java.io.Serializable;
+
+public abstract class Task implements Serializable {
 
     /** Stores a string description of the task **/
     protected String description;
