@@ -6,12 +6,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class DukeFile {
+public class Storage {
 
     private File file;
 
-    public DukeFile() {
-        file = new File("data.txt");
+    public Storage(String filePath) {
+        file = new File(filePath);
 
         try {
             file.createNewFile();

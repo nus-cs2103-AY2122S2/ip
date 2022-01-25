@@ -1,0 +1,3 @@
+T| |123|null
+E|X|asdok |1010-10-10
+T|X|pla|null

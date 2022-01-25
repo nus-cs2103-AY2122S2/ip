@@ -23,7 +23,7 @@ public class Task {
             } else {
                 output = "OK, I've marked this task as not done yet:\n";
             }
-            System.out.println(output + toString());
+            new Ui().echo(output + toString());
         }
     }
 
