@@ -10,7 +10,7 @@ import java.util.Scanner;
  * File format:
  * tag||<0 or 1>||name[||additional arguments...]
  */
-public class FileManager {
+public class Storage {
     private String filename;
     private File file;
 
@@ -18,7 +18,7 @@ public class FileManager {
      * Instantiates a FileManager
      * @param filename path to file of interaction
      */
-    public FileManager(String filename) {
+    public Storage(String filename) {
         this.filename = filename;
         this.file = new File(filename);
     }

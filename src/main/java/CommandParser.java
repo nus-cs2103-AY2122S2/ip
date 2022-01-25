@@ -1,13 +1,13 @@
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CommandParser {
-    private final Scanner input;
-
+    /**
+     * Date format for parsing from user input, file i/o
+     */
     public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy");
 
     /**
@@ -32,6 +32,13 @@ public class CommandParser {
             { "delete", "delete (\\d+)", "delete <task number>" },
     };
 
+    private final Scanner input;
+
+    /**
+     * Instantiate parser for parsing commands for Duke
+     *
+     * @param input Scanner that takes in input
+     */
     public CommandParser(Scanner input) {
        this.input = input;
     }
@@ -41,6 +48,7 @@ public class CommandParser {
      *
      * @param cmd command to check validity
      * @return validity of the command
+     * @throws DukeException invalid command or syntax
      */
     private static Command parseCommand(String cmd) throws DukeException {
         String cmdName = cmd.split(" ")[0];
@@ -83,9 +91,9 @@ public class CommandParser {
     /**
      * Reads user input from previously specified input Scanner
      * Parses command if the first token is a valid command (delimiter = " ")
-     * Else, treats the whole input line as a command term
      *
      * @return parsed command
+     * @throws DukeException invalid command or syntax
      */
     public Command readAndParse() throws DukeException {
         String commandLine = this.input.nextLine();
