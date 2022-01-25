@@ -22,7 +22,7 @@ public class Event extends Task {
 
     @Override
     public String toStringForSave() {
-        return "E "+ super.toStringForSave() + " | " + this.dateTime;
+        return "E "+ super.toStringForSave() + " | " + this.eventDate + " " + this.time;
     }
 
     @Override

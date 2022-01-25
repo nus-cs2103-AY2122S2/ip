@@ -4,6 +4,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -65,9 +67,10 @@ public class DukeTaskSaver {
                 todoListTasks.add(todoTask);
                 break;
             case "D":
-                String by = taskContent[6];
+                LocalTime deadlineTime = LocalTime.parse(taskContent[7]);
+                LocalDate deadlineDate = LocalDate.parse(taskContent[6]);
 
-                Deadline deadlineTask = new Deadline(taskDescription, by);
+                Deadline deadlineTask = new Deadline(taskDescription, deadlineDate, deadlineTime);
 
                 // check if task is completed
                 if (taskStatus.equals("0")) {
@@ -80,9 +83,10 @@ public class DukeTaskSaver {
                 todoListTasks.add(deadlineTask);
                 break;
             case "E":
-                String dateTime = taskContent[6];
+                LocalTime eventTime = LocalTime.parse(taskContent[7]);
+                LocalDate eventDate = LocalDate.parse(taskContent[6]);
 
-                Event eventTask = new Event(taskDescription, dateTime);
+                Event eventTask = new Event(taskDescription, eventDate, eventTime);
 
                 // check if task is completed
                 if (taskStatus.equals("0")) {
