@@ -1,16 +1,16 @@
-import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class Task {
     private boolean marked;
     private String description;
     private String charId;
-    private String time;
+    private LocalDate date;
 
-    Task(String description, String charId, String time) {
+    Task(String description, String charId, LocalDate date) {
         this.marked = false;
         this.description = description;
         this.charId = charId;
-        this.time = time;
+        this.date = date;
     }
 
     public void markTask(boolean mark, boolean show) {
@@ -39,8 +39,8 @@ public class Task {
         return this.charId;
     }
 
-    public String getTime() {
-        return this.time;
+    public LocalDate getDate() {
+        return this.date;
     }
 
     @Override
