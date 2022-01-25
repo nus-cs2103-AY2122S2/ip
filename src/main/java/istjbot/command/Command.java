@@ -1,3 +1,10 @@
+package istjbot.command;
+
+import istjbot.exception.BotException;
+import istjbot.storage.Storage;
+import istjbot.task.TaskList;
+import istjbot.ui.Ui;
+
 public abstract class Command {
     private final CommandEnum commandEnum;
     private final String fullCommand;

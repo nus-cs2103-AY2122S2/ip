@@ -1,3 +1,14 @@
+package istjbot.parser;
+
+import istjbot.command.AddCommand;
+import istjbot.exception.BotException;
+import istjbot.command.ByeCommand;
+import istjbot.command.Command;
+import istjbot.command.CommandEnum;
+import istjbot.command.DateCommand;
+import istjbot.command.ListCommand;
+import istjbot.command.ModifyCommand;
+
 public class Parser {
 
     public static Command parse(String fullCommand) throws BotException {

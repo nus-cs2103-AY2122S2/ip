@@ -1,6 +1,13 @@
+package istjbot.command;
+
+import istjbot.exception.BotException;
+import istjbot.storage.Storage;
+import istjbot.task.TaskList;
+import istjbot.ui.Ui;
+
 public class ByeCommand extends Command {
 
-    ByeCommand(CommandEnum commandEnum, String fullCommand) {
+    public ByeCommand(CommandEnum commandEnum, String fullCommand) {
         super(commandEnum, fullCommand);
     }
 

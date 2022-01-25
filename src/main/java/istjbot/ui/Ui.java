@@ -1,3 +1,5 @@
+package istjbot.ui;
+
 import java.util.Scanner;
 
 public class Ui {

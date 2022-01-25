@@ -1,3 +1,8 @@
+package istjbot.task;
+
+import istjbot.exception.BotException;
+import istjbot.command.CommandEnum;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 
@@ -10,11 +15,11 @@ import java.util.Scanner;
 public class TaskList {
     private final ArrayList<Task> tasks = new ArrayList<>();
 
-    TaskList() {}
+    public TaskList() {}
 
     // Assumption: IstjBox.txt is new or not tampered with by a user
     // FileNotFoundException will not be thrown as we only pass an existing file to the TaskList
-    TaskList(File file) throws BotException, FileNotFoundException {
+    public TaskList(File file) throws BotException, FileNotFoundException {
         Scanner sc = new Scanner(file);
         while (sc.hasNext()) {
             String line = sc.nextLine();

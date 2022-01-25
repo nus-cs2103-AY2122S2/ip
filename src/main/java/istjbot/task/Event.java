@@ -1,11 +1,13 @@
+package istjbot.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Deadline extends Task {
+public class Event extends Task {
 
-    Deadline(String description, String by) throws DateTimeParseException {
-        super(description, LocalDate.parse(by));
+    Event(String description, String at) throws DateTimeParseException {
+        super(description, LocalDate.parse(at));
     }
 
     public String dateToString() {
@@ -16,13 +18,13 @@ public class Deadline extends Task {
     @Override
     public String toTxtString() {
         String marked = this.isDone? "1" : "0";
-        String txtString = "deadline / " + marked + " / " + this.description + " / "
+        String txtString = "event / " + marked + " / " + this.description + " / "
                 + this.date.orElseThrow().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         return txtString;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.dateToString() + ")";
+        return "[E]" + super.toString() + " (at: " + this.dateToString() + ")";
     }
 }

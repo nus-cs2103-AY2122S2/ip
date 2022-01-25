@@ -1,3 +1,8 @@
+package istjbot.storage;
+
+import istjbot.exception.BotException;
+import istjbot.task.TaskList;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -5,7 +10,7 @@ import java.io.IOException;
 public class Storage {
     private final File file;
 
-    Storage(String filePath) throws BotException {
+    public Storage(String filePath) throws BotException {
         this.file = new File(filePath);
         File directory = new File(this.file.getParentFile().getAbsolutePath());
         directory.mkdirs();
@@ -23,7 +28,6 @@ public class Storage {
     }
 
     // Assumption: IstjBox.txt is not tampered with by a user
-    // Let's see about catch part
     public void save(TaskList tasks) throws BotException {
         try {
             FileWriter fw = new FileWriter(this.file);

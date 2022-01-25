@@ -1,3 +1,7 @@
+package istjbot.command;
+
+import istjbot.exception.BotException;
+
 public enum CommandEnum {
     TODO,
     DEADLINE,

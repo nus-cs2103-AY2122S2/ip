@@ -1,3 +1,12 @@
+package istjbot;
+
+import istjbot.command.Command;
+import istjbot.exception.BotException;
+import istjbot.parser.Parser;
+import istjbot.storage.Storage;
+import istjbot.task.TaskList;
+import istjbot.ui.Ui;
+
 import java.io.IOException;
 
 public class IstjBot {

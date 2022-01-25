@@ -1,8 +1,15 @@
+package istjbot.command;
+
+import istjbot.exception.BotException;
+import istjbot.storage.Storage;
+import istjbot.task.TaskList;
+import istjbot.ui.Ui;
+
 import java.time.format.DateTimeParseException;
 
 public class AddCommand extends Command {
 
-    AddCommand(CommandEnum commandEnum, String fullCommand) {
+    public AddCommand(CommandEnum commandEnum, String fullCommand) {
         super(commandEnum, fullCommand);
     }
 

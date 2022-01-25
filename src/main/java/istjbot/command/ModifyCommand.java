@@ -1,6 +1,13 @@
+package istjbot.command;
+
+import istjbot.exception.BotException;
+import istjbot.storage.Storage;
+import istjbot.task.TaskList;
+import istjbot.ui.Ui;
+
 public class ModifyCommand extends Command {
 
-    ModifyCommand(CommandEnum commandEnum, String fullCommand) {
+    public ModifyCommand(CommandEnum commandEnum, String fullCommand) {
         super(commandEnum, fullCommand);
     }
 

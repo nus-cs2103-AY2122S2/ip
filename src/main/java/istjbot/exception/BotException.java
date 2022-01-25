@@ -1,5 +1,7 @@
+package istjbot.exception;
+
 public class BotException extends Exception {
-    BotException(String errorMessage) {
+    public BotException(String errorMessage) {
         super(errorMessage);
     }
 }

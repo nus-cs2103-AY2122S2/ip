@@ -1,3 +1,5 @@
+package istjbot.task;
+
 public class Todo extends Task {
 
     Todo(String description) {
