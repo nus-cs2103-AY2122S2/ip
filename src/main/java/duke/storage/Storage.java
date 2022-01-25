@@ -2,11 +2,13 @@ package duke.storage;
 
 import duke.exception.ErrorMessage;
 import duke.exception.StorageException;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 import duke.util.TaskList;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
