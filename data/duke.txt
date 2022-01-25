@@ -1,4 +1,0 @@
-b9e4a48d-7587-4ef8-aa19-f084a41cbee6|E|1|concert|2021-11-01
-46a966f4-2f27-408b-ab70-c295408e7072|T|1|new task
-b066503d-c48f-44a7-a766-2d7ffaedf1e3|D|0|create new concert|2022-10-11
-1e61c956-7363-47ca-9202-72db8598d174|T|0|chicken time

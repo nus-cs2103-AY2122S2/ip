@@ -28,9 +28,16 @@ public class Storage {
      *
      * @throws ResourceNotFoundException if a file or folder cannot be found.
      */
-    public Storage() throws ResourceNotFoundException{
+    public Storage() throws ResourceNotFoundException, IOException {
         File data = new File("data");
+        if (!data.exists()) {
+            data.mkdir();
+        }
+
         File duke = new File("data/duke.txt");
+        if (!duke.exists()) {
+            duke.createNewFile();
+        }
 
         if (!data.exists()) {
             throw new ResourceNotFoundException("Folder ./data/ cannot be found");

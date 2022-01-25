@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import duke.commands.Command;
 import duke.data.TaskList;
@@ -27,7 +28,7 @@ public class Duke {
         try {
             this.storage = new Storage();
             this.taskList = new TaskList(storage.load());
-        } catch (ResourceNotFoundException | FileNotFoundException e) {
+        } catch (ResourceNotFoundException | IOException e) {
             ui.send(e.getMessage());
             this.taskList = new TaskList();
         }
