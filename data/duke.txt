@@ -1,0 +1,3 @@
+T#true#borrow book
+D#false#return book #by: Sunday
+E#false#party at evans #at: Jan 22nd
