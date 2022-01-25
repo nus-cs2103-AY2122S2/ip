@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static final String FILE_PATH = "..\\..\\..\\data/test.txt";
+    private static final String FILE_PATH = "./data/test.txt";
     private static final String ERROR_FILEIO = "OOPS!!! Error writing to file.";
 
     private static final String INTRO_MESSAGE = "Hello! I'm Duke\n     What can I do for you?";
