@@ -58,6 +58,11 @@ public class Kenobi {
           break;
 
         case "todo":
+          String name = sc.nextLine();
+          if (name.equals(" ")) {
+            say("The description of a todo cannot be empty");
+            break;
+          }
           t = new ToDo(sc.nextLine());
           taskList.add(t);
           say("added: " + t.toString());
@@ -75,6 +80,13 @@ public class Kenobi {
           t = new Event(fields[0], fields[1]);
           taskList.add(t);
           say("added: " + t.toString());
+          break;
+
+        case "delete":
+          t = taskList.remove(sc.nextInt() - 1);
+          sc.nextLine();
+          say("I have remove this task: ");
+          say(t.toString());
           break;
 
         default:
