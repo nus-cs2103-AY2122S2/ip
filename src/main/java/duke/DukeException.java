@@ -1,3 +1,7 @@
+package duke;
+
+import duke.common.Const;
+
 public class DukeException extends Exception {
 
     public static class DukeInvalidCommandException extends DukeException {

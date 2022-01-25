@@ -1,8 +1,12 @@
+package duke;
+
+import duke.TaskList;
+
 import java.util.Scanner;
 
 public class Ui {
     private static final String INPUT_NAME = "You:";
-    private static final String OUTPUT_NAME = "Duke:";
+    private static final String OUTPUT_NAME = "duke.Duke:";
     private Scanner scanner;
     private TaskList taskList;
 
@@ -18,11 +22,10 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
-        String msg = "Hello! I am Duke.\n"
+        String msg = "Hello! I am duke.Duke.\n"
                 + "Your wish is my command.\n\n";
         System.out.print(OUTPUT_NAME + "\n" + logo + msg);
     }
-
 
     public void listMessage() {
         String msg = "Here are the tasks in your list-\n" + taskList;
@@ -35,7 +38,7 @@ public class Ui {
     }
 
     public void addTaskMessage() {
-        String msg = "Got it. I have added this task-\n" + taskList. getTaskDescription(taskList.size()) + "\n";
+        String msg = "Got it. I have added this task-\n" + taskList.getTaskDescription(taskList.size()) + "\n";
         msg += "Now you have " + taskList.size() + " tasks.";
         System.out.println(OUTPUT_NAME + "\n" + msg);
     }
