@@ -1,11 +1,12 @@
+package Commands;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Deadline extends Task {
-
-    private String by;
+public class Event extends Task {
+    private String at;
     private LocalDate date;
     private LocalTime time;
     private String dateFormat;
@@ -23,17 +24,17 @@ public class Deadline extends Task {
             "HH:mm",
     };
 
-    public Deadline(String description, String by) {
-        super(description, "D");
-        this.by = by;
+    public Event(String description, String at) {
+        super(description, "E");
+        this.at = at;
     }
 
     public boolean isValidTime() {
         for (String format : timeFormats) {
             try {
-                if (this.by.split(" ").length != 1) {
+                if (this.at.split(" ").length != 1) {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
-                    LocalTime.parse(this.by.split(" ")[1], formatter);
+                    LocalTime.parse(this.at.split(" ")[1], formatter);
                     this.timeFormat = format;
                     return true;
                 } else {
@@ -46,7 +47,7 @@ public class Deadline extends Task {
     }
 
     public boolean isValidDate() {
-        String d = this.by.split(" ")[0].replace("-", " ");
+        String d = this.at.split(" ")[0].replace("-", " ");
         for (String format : dateFormats) {
             try {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
@@ -60,7 +61,7 @@ public class Deadline extends Task {
     }
     @Override
     public String getDate() {
-        String d = this.by.split(" ")[0].replace("-", " ");
+        String d = this.at.split(" ")[0].replace("-", " ");
         if (this.isValidDate()) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(this.dateFormat);
             this.date = LocalDate.parse(d, formatter);
@@ -73,16 +74,15 @@ public class Deadline extends Task {
     public String getTime() {
         if (this.isValidTime()) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(this.timeFormat);
-            this.time = LocalTime.parse(this.by.split(" ")[1], formatter);
+            this.time = LocalTime.parse(this.at.split(" ")[1], formatter);
             return this.time.format(DateTimeFormatter.ofPattern("HH:mm a"));
         } else {
             return "";
         }
     }
 
-
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + (this.getDate() + " " + this.getTime()).trim() + ")";
+        return "[E]" + super.toString() + " (at: " + (this.getDate() + " " + this.getTime()).trim() + ")";
     }
 }

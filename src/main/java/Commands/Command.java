@@ -1,3 +1,5 @@
+package Commands;
+
 public enum Command {
     BYE("bye"), LIST("list"), DELETE("delete"),
     TOGGLEMARK("toggleMark"), TODO("todo"),
