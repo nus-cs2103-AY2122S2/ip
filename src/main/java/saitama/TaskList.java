@@ -3,13 +3,13 @@ package saitama;
 import saitama.tasks.Task;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A task list to keep track of tasks.
  */
 public class TaskList {
 
-    private String filePath;
     private ArrayList<Task> taskList = new ArrayList<>();
 
     public TaskList(ArrayList<Task> taskList) {
@@ -85,10 +85,31 @@ public class TaskList {
      * Prints the list of tasks currently in the task list.
      */
     public void list() {
+        System.out.println("OK...");
         if (numOfTasks() == 0) {
             System.out.println("There are no tasks in your list!");
         } else {
             System.out.println(this);
+        }
+    }
+
+    public void search(String query) {
+        System.out.println("OK...");
+        List<Task> matchingTasks = new ArrayList<>();
+        int counter = 1;
+        for (Task task : taskList) {
+            if (task.toString().contains(query)) {
+                matchingTasks.add(task);
+            }
+        }
+        if (matchingTasks.size() == 0) {
+            System.out.println("There are no matching tasks in your list!");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (Task task : matchingTasks) {
+                System.out.println(counter + "." + task);
+                counter += 1;
+            }
         }
     }
 
@@ -100,12 +121,12 @@ public class TaskList {
     @Override
     public String toString() {
         int counter = 1;
-        String output = "Here are the tasks in your list:\n";
+        String output = "Here are the tasks in your list:";
         for (Task task : taskList) {
-            output += counter + "." + task + "\n";
+            output += "\n" + counter + "." + task;
             counter += 1;
         }
-        return output.substring(0,output.length() - 1);
+        return output;
     }
 
     /**

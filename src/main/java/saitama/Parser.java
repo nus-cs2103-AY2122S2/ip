@@ -21,8 +21,8 @@ public class Parser {
      * @throws InvalidCommandException if command does not exist.
      * @throws InvalidTaskNumberException if given command takes in a task number but the number does not exist.
      */
-    public static Command parse(String fullCommand) throws InvalidFormatException,
-            EmptyDescriptionException, InvalidCommandException, InvalidTaskNumberException {
+    public static Command parse(String fullCommand) throws InvalidFormatException, EmptyDescriptionException,
+            InvalidCommandException, InvalidTaskNumberException, MissingQueryException {
         String[] splitCommand = fullCommand.split(" ", 2);
         String command = splitCommand[0].toUpperCase();
         splitCommand[0] = command;
@@ -38,6 +38,8 @@ public class Parser {
             return prepareUnmark(splitCommand);
         case "DELETE":
             return prepareDelete(splitCommand);
+        case "FIND":
+            return prepareFind(splitCommand);
         case "TODO":
         case "DEADLINE":
         case "EVENT":
@@ -90,6 +92,19 @@ public class Parser {
         }
         int taskNumber = Integer.parseInt(splitCommand[1]);
         return new DeleteCommand(taskNumber);
+    }
+
+    /**
+     * Creates a FindCommand object that searches for the corresponding query in the task list.
+     * @param splitCommand The split command array.
+     * @return A FindCommand object.
+     */
+    private static Command prepareFind(String[] splitCommand) throws MissingQueryException {
+        if (splitCommand.length < 2) {
+            throw new MissingQueryException();
+        }
+        String query = splitCommand[1];
+        return new FindCommand(query);
     }
 
     /**
