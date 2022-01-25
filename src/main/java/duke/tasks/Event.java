@@ -1,10 +1,10 @@
-package Duke.Tasks;
+package duke.tasks;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import Duke.Exception.DukeException;
+import duke.exceptions.DukeException;
 
 public class Event extends Task {
 
@@ -26,7 +26,7 @@ public class Event extends Task {
                 + endTime.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)) +")";
     }
 
-    public static Event createTask(String[] tokens) throws DukeException {
+    protected static Event createTask(String[] tokens) throws DukeException {
         boolean found = false;
         String item = "";
         String dateString = "";

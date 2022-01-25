@@ -1,7 +1,8 @@
-package Duke.Managers;
+package duke.managers;
 
-import Duke.Exception.DukeException;
-import Duke.Commands.*;
+import duke.exceptions.DukeException;
+import duke.commands.Command;
+import duke.tasks.TaskList;
 
 public class DukeManager {
 

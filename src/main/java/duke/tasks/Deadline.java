@@ -1,10 +1,10 @@
-package Duke.Tasks;
+package duke.tasks;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import Duke.Exception.DukeException;
+import duke.exceptions.DukeException;
 
 public class Deadline extends Task {
 
@@ -34,7 +34,7 @@ public class Deadline extends Task {
         }
     }
 
-    public static Deadline createTask(String[] tokens) throws DukeException {
+    protected static Deadline createTask(String[] tokens) throws DukeException {
         String item = "";
         int idx = 0;
         for (;idx < tokens.length; idx++) {

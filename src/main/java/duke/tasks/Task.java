@@ -1,4 +1,5 @@
-package Duke.Tasks;
+package duke.tasks;
+
 import java.io.Serializable;
 
 public abstract class Task implements Serializable {
@@ -11,7 +12,7 @@ public abstract class Task implements Serializable {
         completed = false;
     }
 
-    public void setCompleted(boolean value) {
+    protected void setCompleted(boolean value) {
         completed = value;
     }
 

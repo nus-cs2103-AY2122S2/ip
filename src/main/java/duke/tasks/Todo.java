@@ -1,9 +1,9 @@
-package Duke.Tasks;
+package duke.tasks;
 
-import Duke.Exception.DukeException;
+import duke.exceptions.DukeException;
 
-public class ToDo extends Task {
-    public ToDo(String item) {
+public class Todo extends Task {
+    public Todo(String item) {
         super(item);
     }
 
@@ -12,7 +12,7 @@ public class ToDo extends Task {
         return "[T]" + super.toString();
     }
 
-    public static ToDo createTask(String[] tokens) throws DukeException {
+    protected static Todo createTask(String[] tokens) throws DukeException {
         String item = "";
         if (tokens.length == 1)
             throw new DukeException("The description of a todo task cannot be empty!");
@@ -24,6 +24,6 @@ public class ToDo extends Task {
                 item += token + " ";
             }
         }
-        return new ToDo(item.trim());
+        return new Todo(item.trim());
     }
 }
