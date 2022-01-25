@@ -1,12 +1,18 @@
 package chatbot;
 public class Task {
-    protected boolean markedAsDone = false;
+    protected boolean isDone = false;
     protected String taskName = "";
 
     ////////////////////////////////////////////////////////////////
     // Constructors
+    public Task(String taskName, boolean isDone) {
+        this.taskName = taskName;
+        this.isDone = isDone;
+    }
+
     public Task(String taskName) {
         this.taskName = taskName;
+        this.isDone = false;
     }
 
     ////////////////////////////////////////////////////////////////
@@ -15,18 +21,18 @@ public class Task {
         return this.taskName;
     }
     
-    public boolean getMarkedAsDone() {
-        return this.markedAsDone;
+    public boolean getIsDone() {
+        return this.isDone;
     }
 
     public String getStatusIcon() {
-        return (markedAsDone ? "X" : " "); // mark done task with X
+        return (isDone ? "X" : " "); // mark done task with X
     }
     
     ////////////////////////////////////////////////////////////////
     // Methods
     public void markTask(boolean bool) {
-        this.markedAsDone = bool;
+        this.isDone = bool;
     }
 
     public String toString() {

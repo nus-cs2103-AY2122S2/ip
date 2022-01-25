@@ -1,39 +1,64 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-import chatbot.*;
+
+import java.io.File;
+import java.io.FileWriter;
+// import java.io.BufferedWriter;
+import java.io.PrintWriter;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+
+import java.time.LocalDate;
+// import java.time.format.DateTimeFormatter;
+// import java.time.temporal.ChronoUnit;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+
+import chatbot.DukeException;
+import chatbot.Todo;
+import chatbot.Deadline;
+import chatbot.Event;
+import chatbot.Task;
 public class Duke {
+    protected static ArrayList<Task> taskList = new ArrayList<Task>();
+    protected static String FILE_PATH = "./data/duke.txt";
+    protected static String FILE_DIR = "./data";
+
     // strings to use
     public static String straightLine = "____________________________________________________________";
-    public static String introductionMessage = "Good day Sir. My name is Dook. \n How may I be of assistance?";
-    public static String byeMessage = "Farewell Sir. May you have a wonderful day.";
     public static String noSuchTask = "I'm very sorry Sir, there is no such task you mentioned.";
     public static String notValidNumber = "Please enter a valid number Sir.";
     public static String commandRequiresNumber = "Sorry Sir, this command requires a number.";
     public static String unrecognizedCommand = "Sorry Sir, I do not understand that command.";
+    public static String loadSuccess = "I have successfully loaded your saved agenda, Sir.";
+    public static String unreadableFile = "Sorry Sir, I was unable to access the data file.";
 
     ////////////////////////////////////////////////////////////////
     // Main Methods
 
     // introduction message
     public static void displayGreeting() {
+        String introductionMessage = "Good day Sir. My name is Dook. \n How may I be of assistance?";
         System.out.println(createReply(introductionMessage));
     }
 
     // farewell message
     public static void displayFarewell() {
+        String byeMessage = "Farewell Sir. May you have a wonderful day.";
         System.out.println(createReply(byeMessage));
     }
 
     // insert new Task
-    public static void insertNewTask(String type, String inputText, ArrayList<Task> taskList) throws DukeException {
+    public static void insertNewTask(String type, String inputText) throws DukeException {
         String reply = "";
         Task newTask;
         String taskName = "";
         String taskDateTime = "";
         String missingDateTime = "Sorry Sir, the description of <" + type + "> is missing a date/time.";
         String missingTaskInfo = "Sorry Sir, the <" + type + "> command cannot be empty.";
+        String wrongDateTimeFormat = "Sorry Sir, the date/time needs to be in the format: YYYY-MM-DD HH:MM";
 
-        if (type.equals("deadline")) {
+        if (type.equals("deadline")) { // is a deadline task
             String[] inputStringArray = inputText.split(" /by ");
             try { 
                 taskName = inputStringArray[0].substring(9);
@@ -45,9 +70,19 @@ public class Duke {
             } catch (Exception ArrayIndexOutOfBoundsException) {
                 throw new DukeException(missingDateTime);
             }
-            newTask = new Deadline(taskName, taskDateTime);
+            try {
+                String[] taskDateTimeArray = taskDateTime.split(" ");
+                LocalDate taskDate = LocalDate.parse(taskDateTimeArray[0]);
+                LocalTime taskTime = null;
+                if (taskDateTimeArray.length > 1) {
+                    taskTime = LocalTime.parse(taskDateTimeArray[1]);
+                }
+                newTask = new Deadline(taskName, taskDate, taskTime);
+            } catch (DateTimeParseException exception) {
+                throw new DukeException(wrongDateTimeFormat);
+            }
 
-        } else if (type.equals("event")) {
+        } else if (type.equals("event")) { // is an event task
             String[] inputStringArray = inputText.split(" /at ");
             try { 
                 taskName = inputStringArray[0].substring(6);
@@ -59,9 +94,19 @@ public class Duke {
             } catch (Exception ArrayIndexOutOfBoundsException) {
                 throw new DukeException(missingDateTime);
             }
-            newTask = new Event(taskName, taskDateTime);
+            try {
+                String[] taskDateTimeArray = taskDateTime.split(" ");
+                LocalDate taskDate = LocalDate.parse(taskDateTimeArray[0]);
+                LocalTime taskTime = null;
+                if (taskDateTimeArray.length > 1) {
+                    taskTime = LocalTime.parse(taskDateTimeArray[1]);
+                }
+                newTask = new Event(taskName, taskDate, taskTime);
+            } catch (DateTimeParseException exception) {
+                throw new DukeException(wrongDateTimeFormat);
+            }
 
-        } else { // this is a to-do task
+        } else { // is a to-do task
             try { 
                 taskName = inputText.substring(5);
             } catch (StringIndexOutOfBoundsException exception) {
@@ -71,6 +116,7 @@ public class Duke {
         }
 
         taskList.add(newTask);
+        saveData();
         String taskListLength = Integer.toString(taskList.size());
         reply += "Very well Sir. I have added this task:";
         reply += "\n   " + newTask.toString();
@@ -79,7 +125,7 @@ public class Duke {
     }
 
     // display task list
-    public static void displayTaskList(ArrayList<Task> taskList) {
+    public static void displayTaskList() {
         Integer counter = 1;
         String reply = "";
         for (Task task : taskList) {
@@ -92,7 +138,7 @@ public class Duke {
     }
 
     // mark / unmark command
-    public static void markCommand(String[] inputStringArray, ArrayList<Task> taskList, String type) throws DukeException {
+    public static void markCommand(String[] inputStringArray, String type) throws DukeException {
         // check command
         boolean markAsDone = false;
         if (type.equals("mark")) {
@@ -116,7 +162,8 @@ public class Duke {
 
             Task task = taskList.get(taskIndex);
             task.markTask(markAsDone);
-            
+            saveData();
+
             if (markAsDone) {
                 reply += "Very well Sir, I have marked this task as complete: ";
             } else {
@@ -134,7 +181,7 @@ public class Duke {
     }
 
     // delete command
-    public static void deleteTask(String[] inputStringArray, ArrayList<Task> taskList) throws DukeException {
+    public static void deleteTask(String[] inputStringArray) throws DukeException {
         
         // check if there is an integer after the text command input
         try {
@@ -149,6 +196,7 @@ public class Duke {
             
             Task taskToRemove = taskList.get(taskIndex);
             taskList.remove(taskToRemove);
+            saveData();
             String taskListLength = Integer.toString(taskList.size());
 
             reply += "Very well Sir. I have removed this task:";
@@ -172,6 +220,126 @@ public class Duke {
         return straightLine + "\n " + reply + "\n" + straightLine;
     }
 
+    // saves task list into duke.txt
+    public static void saveData() throws DukeException {
+        // create a directory if it doesn't exist
+        File dataFile = new File(FILE_DIR);
+        if (!dataFile.exists()){
+            dataFile.mkdirs();
+        }
+
+        try {
+            FileWriter fileWriter = new FileWriter(FILE_PATH, false);
+            PrintWriter printWriter = new PrintWriter(fileWriter);
+            
+            for (Task task : taskList) {
+                String dataEntry = "";
+                if (task instanceof Todo) {
+                    dataEntry += "Todo";
+                    dataEntry += task.getIsDone() ? "/;DONE" : "/;NOT_DONE";
+                    dataEntry += "/;" + task.getTaskName();
+                    dataEntry += "\n";
+
+                } else if (task instanceof Deadline) {
+                    Deadline deadline = (Deadline) task;
+                    dataEntry += "Deadline";
+                    dataEntry += deadline.getIsDone() ? "/;DONE" : "/;NOT_DONE";
+                    dataEntry += "/;" + deadline.getTaskName();
+                    dataEntry += "/;" + deadline.getDate();
+                    if (deadline.getTime() == null) {
+                        dataEntry += "/;" + "null";
+                    } else {
+                        dataEntry += "/;" + deadline.getTime();
+                    }
+                    dataEntry += "\n";
+
+                } else if (task instanceof Event) {
+                    Event event = (Event) task;
+                    dataEntry += "Event";
+                    dataEntry += event.getIsDone() ? "/;DONE" : "/;NOT_DONE";
+                    dataEntry += "/;" + event.getTaskName();
+                    dataEntry += "/;" + event.getDate();
+                    if (event.getTime() == null) {
+                        dataEntry += "/;" + "null";
+                    } else {
+                        dataEntry += "/;" + event.getTime();
+                    }
+                    dataEntry += "\n";
+                }
+                printWriter.printf(dataEntry);
+            }
+            printWriter.close();
+
+        } catch (IOException exception) {
+            throw new DukeException(unreadableFile);
+        }
+    }
+
+    // load the duke.txt into the array
+    public static void loadData() throws DukeException {
+        try {
+            // File directory = new File("./");
+            // System.out.println(directory.getAbsolutePath()); // used to check directory java starts at
+
+            // check if there is a file at all
+            File dataFile = new File(FILE_PATH);
+            if (!dataFile.exists()){
+                return;
+            }
+
+            Scanner scanner = new Scanner(dataFile);
+            String dataEntry;
+            while (scanner.hasNext()) {
+                dataEntry = scanner.nextLine();
+                String[] dataEntryArray = dataEntry.split("/;"); // assumes data file is formatted correctly
+                
+                // check whether task is done
+                boolean isDone = false;
+                    if (dataEntryArray[1].equals("DONE")) {
+                        isDone = true;
+                    }
+                
+                Task newTask;
+                LocalTime taskTime = null;
+                switch (dataEntryArray[0]) {
+                    case "Todo": // to-do task
+                        newTask = new Todo(dataEntryArray[2], isDone);
+                        break;
+                    case "Deadline": // deadline task
+                        taskTime = null;
+                        if (!dataEntryArray[4].equals("null")) {
+                            taskTime = LocalTime.parse(dataEntryArray[4]);
+                        }
+                        newTask = new Deadline(
+                            dataEntryArray[2], 
+                            LocalDate.parse(dataEntryArray[3]), 
+                            taskTime,
+                            isDone);
+                        break;
+                    case "Event": // event task
+                        taskTime = null;
+                        if (!dataEntryArray[4].equals("null")) {
+                            taskTime = LocalTime.parse(dataEntryArray[4]);
+                        }
+                        newTask = new Event(
+                            dataEntryArray[2], 
+                            LocalDate.parse(dataEntryArray[3]), 
+                            taskTime,
+                            isDone);
+                        break;
+                    default: // unknown task - should not reach here
+                        newTask = new Todo(dataEntryArray[2], isDone);
+                        break;
+                }
+                taskList.add(newTask);
+            }
+            scanner.close();
+            System.out.println(createReply(loadSuccess));
+        } catch (FileNotFoundException e) {
+            throw new DukeException(unreadableFile);
+        }
+    }
+
     public static void main(String[] args) {
         // String logo = " ____        _        \n"
         //         + "|  _ \\ _   _| | _____ \n"
@@ -180,11 +348,16 @@ public class Duke {
         //         + "|____/ \\__,_|_|\\_\\___|\n";
         // System.out.println("Hello from\n" + logo);
 
+        try { // attempt to load saved data
+            loadData();
+        } catch (DukeException dukeException) {
+            System.out.println(createReply(dukeException.toString()));
+        }
+        
         // print introduction message
         displayGreeting();
-        
+
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Task> taskList = new ArrayList<Task>();
 
         while (true) {
             String inputText = scanner.nextLine().trim();
@@ -196,18 +369,18 @@ public class Duke {
                     break;
                 
                 } else if (inputText.equals("list")) { // list command
-                    displayTaskList(taskList);
+                    displayTaskList();
 
                 } else if (inputStringArray[0].equals("mark") || inputStringArray[0].equals("unmark")) { // mark / unmark command
-                    markCommand(inputStringArray, taskList, inputStringArray[0]);
+                    markCommand(inputStringArray, inputStringArray[0]);
 
                 } else if (inputStringArray[0].equals("todo") 
                 || inputStringArray[0].equals("deadline") 
                 || inputStringArray[0].equals("event")){
-                    insertNewTask(inputStringArray[0], inputText, taskList);
+                    insertNewTask(inputStringArray[0], inputText);
 
                 } else if (inputStringArray[0].equals("delete")) {
-                    deleteTask(inputStringArray, taskList);
+                    deleteTask(inputStringArray);
 
                 } else { // other text input
                     throw new DukeException(unrecognizedCommand);
