@@ -32,6 +32,5 @@ public class ParserTest {
         assertTrue(Parser.parseCommands(Ui.Reply.MARK, toDoList, "mark 1", storage) instanceof MarkCommand);
         assertTrue(Parser.parseCommands(Ui.Reply.UNMARK, toDoList, "unmark 1", storage) instanceof UnmarkCommand);
         assertTrue(Parser.parseCommands(Ui.Reply.DELETE, toDoList, "delete 1", storage) instanceof DeleteCommand);
-        assertTrue(Parser.parseCommands(Ui.Reply.DEFAULT, toDoList, "dsadadsa", storage) instanceof WrongCommand);
     }
 }
