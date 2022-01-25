@@ -1,3 +1,7 @@
+package duke.main;
+
+import duke.exception.DukeException;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -30,7 +34,7 @@ public class Ui {
         this.message.append(message);
     }
 
-    public String readFullCommand() throws DukeException{
+    String readFullCommand() throws DukeException {
         try {
             return reader.readLine();
         } catch (IOException e) {
@@ -38,7 +42,7 @@ public class Ui {
         }
     }
 
-    public void showResponse() {
+    void showResponse() {
         if (message.length() < 1) {
             return;
         }
@@ -51,15 +55,15 @@ public class Ui {
         showMessageInBorder(errorMessage);
     }
 
-    public void showQuestionPrompt() {
+    void showQuestionPrompt() {
         showMessageOutsideBorder(QUESTION_MESSAGE);
     }
 
-    public void showLoadingError() {
+    void showLoadingError() {
         showMessageOutsideBorder("Unable to read saved task from file.\nStarting with a new task list..");
     }
 
-    public void showWelcome() {
+    void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -71,7 +75,7 @@ public class Ui {
         showBorder(true);
     }
 
-    public void showBorder(boolean haveEmptyLineAfter) {
+    void showBorder(boolean haveEmptyLineAfter) {
         drawBorder(BORDER_LENGTH);
         if (haveEmptyLineAfter) {
             showMessageOutsideBorder("");

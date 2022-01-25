@@ -1,4 +1,6 @@
-abstract class Task {
+package duke.task;
+
+public abstract class Task {
     private final String description;
     private boolean isDone;
     private TaskType type;
@@ -11,6 +13,20 @@ abstract class Task {
 
     public void mark(boolean done) {
         this.isDone = done;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public String getFileSaveFormat() {
+        String doneString = isDone ? "1" : "0";
+        return String.format("%s | %s | %s", getSymbol(), doneString, description);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("[%s][%s] %s", getSymbol(), getStatusSymbol(), this.description);
     }
 
     private String getStatusSymbol() {
@@ -29,18 +45,4 @@ abstract class Task {
             return " ";
         }
     };
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    public String getFileSaveFormat() {
-        String doneString = isDone ? "1" : "0";
-        return String.format("%s | %s | %s", getSymbol(), doneString, description);
-    }
-
-    @Override
-    public String toString() {
-        return String.format("[%s][%s] %s", getSymbol(), getStatusSymbol(), this.description);
-    }
 }

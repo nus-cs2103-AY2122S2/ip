@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.main.Storage;
+import duke.main.TaskList;
+import duke.main.Ui;
+import duke.task.ToDo;
+
 public class AddTodoCommand extends Command {
     private static final boolean IS_EXIT = false;
     private String description;

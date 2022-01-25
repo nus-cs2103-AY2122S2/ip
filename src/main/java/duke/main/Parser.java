@@ -1,9 +1,21 @@
+package duke.main;
+
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
+import duke.command.AddTodoCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.exception.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
-    public static Command parseCommand(String fullCommand) throws DukeException {
+    static Command parseCommand(String fullCommand) throws DukeException {
         if (fullCommand.trim().compareToIgnoreCase("bye") == 0) {
             return new ExitCommand();
         } else if (fullCommand.equalsIgnoreCase("list")) {
@@ -31,7 +43,7 @@ public class Parser {
         }
     }
 
-    public static MarkCommand parseMarkCommand(String input, boolean isDone) throws DukeException {
+    private static MarkCommand parseMarkCommand(String input, boolean isDone) throws DukeException {
         try {
             int taskId = Integer.parseInt(input) - 1;
             return new MarkCommand(taskId, isDone);
@@ -40,14 +52,14 @@ public class Parser {
         }
     }
 
-    public static AddTodoCommand parseTodoCommand(String input) throws DukeException {
+    private static AddTodoCommand parseTodoCommand(String input) throws DukeException {
         if (input.matches("\\s*")) {
             throw new DukeException(DukeException.ERROR_TODO_NO_NAME);
         }
         return new AddTodoCommand(input);
     }
 
-    public static AddDeadlineCommand parseDeadlineCommand(String input) throws DukeException {
+    private static AddDeadlineCommand parseDeadlineCommand(String input) throws DukeException {
         String[] splitInput = input.split("/by");
         if (!validateDeadlineEventSplit(splitInput)) {
             throw new DukeException(DukeException.ERROR_WRONG_FORMAT + "\n" + DukeException.FORMAT_DEADLINE);
@@ -58,7 +70,7 @@ public class Parser {
         return new AddDeadlineCommand(description, deadline);
     }
 
-    public static AddEventCommand parseEventCommand(String input) throws DukeException {
+    private static AddEventCommand parseEventCommand(String input) throws DukeException {
         String[] splitInput = input.split("/at");
         if (!validateDeadlineEventSplit(splitInput)) {
             throw new DukeException(DukeException.ERROR_WRONG_FORMAT + "\n" + DukeException.FORMAT_EVENT);
@@ -69,7 +81,7 @@ public class Parser {
         return new AddEventCommand(description, time);
     }
 
-    public static DeleteCommand parseDeleteCommand(String input) throws DukeException {
+    private static DeleteCommand parseDeleteCommand(String input) throws DukeException {
         try {
             int taskId = Integer.parseInt(input) - 1;
             return new DeleteCommand(taskId);
@@ -78,7 +90,7 @@ public class Parser {
         }
     }
 
-    public static LocalDateTime parseDateTime(String input) throws DukeException {
+    static LocalDateTime parseDateTime(String input) throws DukeException {
         try {
             DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
             LocalDateTime dateTime = LocalDateTime.parse(input, format);

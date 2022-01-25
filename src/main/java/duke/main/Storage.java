@@ -1,3 +1,11 @@
+package duke.main;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -37,7 +45,7 @@ public class Storage {
                     LocalDateTime dateTime = Parser.parseDateTime(splitTaskInput[3]);
                     newTask = new Event(splitTaskInput[2], dateTime);
                 } else {
-                    throw new DukeException("Error: Task type is not T,D or E in file\n");
+                    throw new DukeException("Error: duke.task.Task type is not T,D or E in file\n");
                 }
                 int i = Integer.parseInt(splitTaskInput[1]);
                 if (i == 1) {
@@ -53,7 +61,7 @@ public class Storage {
         }
     }
 
-    public void saveFileData(ArrayList<Task> tasks) throws DukeException{
+    public void saveFileData(ArrayList<Task> tasks) throws DukeException {
         try {
             if (Files.notExists(Paths.get(filePath))) {
                 Files.createDirectories(Paths.get("data/"));

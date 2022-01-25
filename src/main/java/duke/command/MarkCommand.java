@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.main.Storage;
+import duke.main.TaskList;
+import duke.main.Ui;
+
 public class MarkCommand extends Command{
     private static final boolean IS_EXIT = false;
     private int taskIndex;
