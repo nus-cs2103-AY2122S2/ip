@@ -1,4 +1,4 @@
-package main.java;
+package main.java.task;
 
 import java.time.LocalDateTime;
 
@@ -17,13 +17,13 @@ public class Event extends Task {
    * @param name name of the event.
    * @param dateInfo extra dateInfo of the event.
    */
-  Event(String name, String dateInfo) {
+  public Event(String name, String dateInfo) {
     super(name);
     this.info = dateInfo;
     this.dateInfo = LocalDateTime.parse(dateInfo, this.dateTimeFormatIn);
   }
 
-  Event(String name, boolean marked, String dateInfo) {
+  public Event(String name, boolean marked, String dateInfo) {
     super(name);
     this.dateInfo = this.dateInfo = LocalDateTime.parse(dateInfo, this.dateTimeFormatIn);;
     this.isMarked = marked;

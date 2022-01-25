@@ -1,4 +1,6 @@
-package main.java;
+package main.java.responses;
+
+import main.java.task.Task;
 
 import java.util.ArrayList;
 
@@ -6,7 +8,7 @@ import java.util.ArrayList;
  * Response when added a Task
  */
 
-public class AddTaskResponse implements Response{
+public class AddTaskResponse implements Response {
     Task currTask;
     ArrayList<Task> tasklist;
 
@@ -16,10 +18,11 @@ public class AddTaskResponse implements Response{
      * @param tasklist The List of Task.
      */
 
-    AddTaskResponse(Task currTask, ArrayList<Task> tasklist) {
+    public AddTaskResponse(Task currTask, ArrayList<Task> tasklist) {
         this.currTask = currTask;
         this.tasklist = tasklist;
     }
+
 
     /**
      * Callback function that displays the intended results.

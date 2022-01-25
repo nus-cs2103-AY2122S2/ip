@@ -1,17 +1,19 @@
-package main.java;
+package main.java.responses;
 
+/**
+ * Response created at the termination of the Chatbot.
+ */
+public class StopResponse implements Response{
 
-public class ForeignException extends DukeException {
-    ForeignException(String msg) {
-        super(msg);
-    }
-
+    /**
+     * Callback function that displays the intended results
+     */
     @Override
     public void callback() {
         System.out.println(
                 "____________________________________________________________"
         );
-        System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        System.out.println("Bye. Hope to see you again soon!");
         System.out.println(
                 "____________________________________________________________"
         );

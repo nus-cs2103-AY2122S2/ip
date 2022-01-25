@@ -1,11 +1,11 @@
-package main.java;
+package main.java.dukeexceptions;
 
 public class DukeException extends  Exception{
     DukeException(String msg) {
         super(msg);
     }
 
-    void callback() {
+    public void callback() {
 
     }
 }

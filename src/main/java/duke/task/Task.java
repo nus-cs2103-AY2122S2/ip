@@ -1,4 +1,4 @@
-package main.java;
+package main.java.task;
 
 import java.time.format.DateTimeFormatter;
 
@@ -41,7 +41,6 @@ public class Task {
 
   public void setMark(boolean bool) {
     this.isMarked = bool;
-    MarkResponse(this.isMarked);
   }
 
   /**

@@ -1,4 +1,4 @@
-package main.java;
+package main.java.task;
 
 /**
  * A type of task.
@@ -12,11 +12,11 @@ public class ToDo extends Task {
    * 
    * @param name given name of the task.
    */
-  ToDo(String name) {
+  public ToDo(String name) {
     super(name);
   }
 
-  ToDo(String name, boolean mark) {
+  public ToDo(String name, boolean mark) {
     super(name);
     this.isMarked = mark;
   }

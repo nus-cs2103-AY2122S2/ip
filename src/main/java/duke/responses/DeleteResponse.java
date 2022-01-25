@@ -1,7 +1,6 @@
-package main.java;
+package main.java.responses;
 
-
-import java.util.ArrayList;
+import main.java.task.Task;
 
 /**
  * Type of response that is created when a task is deleted.
@@ -16,7 +15,7 @@ public class DeleteResponse implements Response {
      * @param del This is the task deleted
      * @param size This is the size of the remaining interger
      */
-    DeleteResponse(Task del,  int size) {
+    public DeleteResponse(Task del, int size) {
         this.del = del;
         this.size = size;
     }

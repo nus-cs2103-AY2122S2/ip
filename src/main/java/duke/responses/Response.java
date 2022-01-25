@@ -1,5 +1,4 @@
-package main.java;
-
+package main.java.responses;
 /**
  * This is an interface of a Response object
  */

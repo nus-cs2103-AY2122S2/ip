@@ -1,19 +1,15 @@
-package main.java;
+package main.java.dukeexceptions;
 
-/***
- * The response created at the start of the chatbot
- */
-public class StartResponse implements Response{
-
-    /**
-     * Callback function that displays the intended results
-     */
+public class ToDoException extends DukeException {
+    public ToDoException(String msg) {
+        super(msg);
+    }
     @Override
     public void callback() {
         System.out.println(
                 "____________________________________________________________"
         );
-        System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
+        System.out.println("OOPS!!! The description of a todo cannot be empty.");
         System.out.println(
                 "____________________________________________________________"
         );

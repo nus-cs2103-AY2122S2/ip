@@ -1,9 +1,9 @@
-package main.java;
+package main.java.responses;
 
 /**
  * Type of response that is created to echo a response.
  */
-public class EchoResponse implements Response{
+public class EchoResponse implements Response {
     String msg;
 
     /**

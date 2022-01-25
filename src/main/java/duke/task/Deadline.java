@@ -1,4 +1,4 @@
-package main.java;
+package main.java.task;
 
 import java.time.LocalDateTime;
 
@@ -19,13 +19,13 @@ public class Deadline extends Task {
    * @param dateInfo additional dateInfo of the task.
    */
 
-  Deadline(String name, String dateInfo) {
+  public Deadline(String name, String dateInfo) {
     super(name);
     info = dateInfo;
     this.dateInfo = LocalDateTime.parse(dateInfo, this.dateTimeFormatIn);
   }
 
-  Deadline(String name, boolean marked, String dateInfo) {
+  public Deadline(String name, boolean marked, String dateInfo) {
     super(name);
     this.dateInfo = LocalDateTime.parse(dateInfo, this.dateTimeFormatIn);
     this.isMarked = marked;
