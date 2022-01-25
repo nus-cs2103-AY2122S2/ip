@@ -18,3 +18,5 @@ text-ui-test/EXPECTED-UNIX.TXT
 
 # Data file to be stored in disk
 tasks.txt
+
+src/main/java/META-INF/
