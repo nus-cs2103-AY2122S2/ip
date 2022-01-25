@@ -5,10 +5,14 @@ import duke.task.Task;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/** Contains functionality relating to the Duke user interface */
 public class Ui {
     private Scanner sc;
     String logo;
 
+    /**
+     * Creates a new Ui instance.
+     */
     public Ui() {
         sc = new Scanner(System.in);
         logo = " ____        _        \n"
@@ -18,6 +22,11 @@ public class Ui {
                 + "|____/ \\__,_|_|\\_\\___|\n";
     }
 
+    /**
+     * Returns a setup message.
+     *
+     * @return A setup message.
+     */
     public String getSetupMessage() {
         StringBuilder s = new StringBuilder();
         s.append("Hello! I'm\n");
@@ -26,18 +35,40 @@ public class Ui {
         return s.toString();
     }
 
+    /**
+     * Returns a farewell message.
+     *
+     * @return A farewell message.
+     */
     public String getByeMessage() {
         return "Bye t_t";
     }
 
+    /**
+     * Returns an error message for file loading and parsing errors.
+     *
+     * @return An error message for file loading and parsing errors.
+     */
     public String getFileErrorMessage() {
         return "Error loading/parsing file ?.? Creating empty list!";
     }
 
+    /**
+     * Returns an error message for I/O errors.
+     *
+     * @return An error message for I/O errors.
+     */
     public String getIoErrorMessage() {
         return "I/O error x.x";
     }
 
+    /**
+     * Returns the message to be printed when a task is added to the task list.
+     *
+     * @param latestTask The task that was just added to the task list.
+     * @param size The new size of the task list.
+     * @return The message to be printed when a task is added.
+     */
     public String getAddTaskMessage(Task latestTask, int size) {
         StringBuilder s = new StringBuilder();
         s.append("added o.O:\n  ");
@@ -46,11 +77,22 @@ public class Ui {
         return s.toString();
     }
 
+    /**
+     * Reads input from the user.
+     *
+     * @return The line read from the user input.
+     */
     public String readLine() {
         String command = sc.nextLine();
         return command;
     }
 
+    /**
+     * Prints the items in the task list.
+     *
+     * @param list The list of tasks in the task list.
+     * @return A string containing all the tasks in the task list.
+     */
     public String printItems(ArrayList<Task> list) {
         if (list.size() == 0) {
             return("There are no tasks on your list :O");

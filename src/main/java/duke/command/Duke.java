@@ -14,12 +14,16 @@ import duke.ui.Ui;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
+/** An application to manage tasks */
 public class Duke {
     private Parser parser;
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Creates a new Duke instance.
+     */
     public Duke() {
         ui = new Ui();
         parser = new Parser();
@@ -32,6 +36,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the application.
+     */
     public void run() {
         System.out.println(ui.getSetupMessage());
         while (true) {
@@ -90,6 +97,11 @@ public class Duke {
         System.exit(0);
     }
 
+    /**
+     * Starts the application.
+     *
+     * @param args Not applicable for this application.
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();

@@ -14,10 +14,16 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Manages the storage of data from Duke into a file */
 public class Storage {
     BufferedReader reader;
     Path dukePath;
 
+    /**
+     * Creates a new Storage instance.
+     *
+     * @throws IOException If I/O errors are faced when creating or reading files.
+     */
     public Storage() throws IOException {
         dukePath = Paths.get("data/duke.txt");
         if (!Files.exists(dukePath)) {
@@ -27,6 +33,12 @@ public class Storage {
         reader = Files.newBufferedReader(dukePath);
     }
 
+    /**
+     * Returns a TaskList based on any existing Duke data saved locally.
+     *
+     * @return A TaskList based on any existing Duke data saved locally.
+     * @throws IOException If I/O errors are faced when reading files.
+     */
     public TaskList initialize() throws IOException {
         // assumes reader is non-empty
         TaskList tl = new TaskList();
@@ -40,11 +52,23 @@ public class Storage {
         return tl;
     }
 
+    /**
+     * Adds a task to the file.
+     *
+     * @param t The task to be added to the file.
+     * @throws IOException If there are issues faced when writing the task into the file.
+     */
     public void addTask(Task t) throws IOException {
         String newTask = t.convertToFileFormat() + "\n";
         Files.write(dukePath, newTask.getBytes(), StandardOpenOption.APPEND);
     }
 
+    /**
+     * Deletes a task from the file.
+     *
+     * @param taskIndex The index of the task to be deleted.
+     * @throws IOException If there are issues faced when reading tasks from and writing tasks into the file.
+     */
     public void deleteTask(int taskIndex) throws IOException {
         List<String> currList = Files.readAllLines(dukePath);
         List<String> newList = new ArrayList<>();
@@ -57,6 +81,13 @@ public class Storage {
         Files.write(dukePath, newList);
     }
 
+    /**
+     * Modifies an existing entry in the file.
+     * Converts the entry from done to undone or vice versa.
+     *
+     * @param taskIndex The task to be modified.
+     * @throws IOException If there are issues faced when reading tasks from and writing tasks into the file.
+     */
     public void modifyTask(int taskIndex) throws IOException {
         List<String> currList = Files.readAllLines(dukePath);
         List<String> newList = new ArrayList<>();

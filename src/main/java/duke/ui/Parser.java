@@ -8,14 +8,27 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.regex.PatternSyntaxException;
 
+/** Helps to make sense of user input */
 public class Parser {
 
+    /**
+     * Creates a new Parser instance.
+     */
     public Parser() {
     }
 
+    /**
+     * Returns the command part of the user input.
+     *
+     * @param s The user input.
+     * @return The command part of the user input.
+     * @throws WrongInputException If the input does not contain a valid command.
+     */
     public String parseCommand(String s) throws WrongInputException {
         String[] inputs = s.split(" ");
         String[] acceptableInputs = new String[]{"mark","unmark","todo","deadline","event","delete"};
@@ -32,6 +45,16 @@ public class Parser {
         return inputs[0];
     }
 
+    /**
+     * Returns the numerical part of the user input.
+     * Assumes the user input contains a command that requires a numerical input.
+     *
+     * @param s The user input.
+     * @param command The command contained in the user input.
+     * @param length The length of the task list.
+     * @return The numerical part of the user input.
+     * @throws WrongInputException If the input is not in the expected form.
+     */
     public int parseNumericalDescription(String s, String command, int length) throws WrongInputException {
         String[] inputs = s.split(command + " ");
         if (length == 0) {
@@ -53,6 +76,16 @@ public class Parser {
         return tasknumber - 1;
     }
 
+    /**
+     * Returns an array containing the task description and its associated time.
+     *
+     * @param s The user input.
+     * @param command The command contained in the user input.
+     * @param format The regular expression that indicates the timing part of the task.
+     * @return An array containing the task description and its associated time.
+     * @throws WrongInputException If the regular expression cannot be found in the user input.
+     * @throws IncompleteInputException If the input is incomplete.
+     */
     public String[] parseFormatDescription(String s, String command, String format)
             throws WrongInputException, IncompleteInputException {
         try {
@@ -78,27 +111,28 @@ public class Parser {
                 }
                 params[1] = inputs[1];
             } else {
+                // inputs.length > 2
+                // more than one occurrence of "format"; beyond the last one is taken to be the time
                 String[] desc = inputs[0].split(command + " ");
+                StringBuilder firstPart = new StringBuilder();
                 if (desc.length == 2) {
-                    params[0] = desc[1];
+                    firstPart.append(desc[1]);
                 } else {
-                    StringBuilder firstPart = new StringBuilder();
                     for (int i = 1; i < desc.length; i++) {
                         firstPart.append(desc[i]);
                         if (i < desc.length - 1) {
                             firstPart.append(command + " ");
                         }
                     }
-                    params[0] = firstPart.toString();
                 }
-                StringBuilder secondPart = new StringBuilder();
-                for (int i = 1; i < inputs.length; i++) {
-                    secondPart.append(inputs[i]);
+                for (int i = 1; i < inputs.length - 1; i++) {
                     if (i < inputs.length - 1) {
-                        secondPart.append(format + " ");
+                        firstPart.append(" " + format + " ");
                     }
+                    firstPart.append(inputs[i]);
                 }
-                params[1] = secondPart.toString();
+                params[0] = firstPart.toString();
+                params[1] = inputs[inputs.length - 1];
             }
             return params;
         } catch (PatternSyntaxException e) {
@@ -106,6 +140,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the task description contained in the user input.
+     *
+     * @param s The user input.
+     * @param command The command contained in the user input.
+     * @return The task description.
+     * @throws IncompleteInputException If the input is incomplete.
+     */
     public String parseStringDescription(String s, String command) throws IncompleteInputException {
         String[] inputs = s.split(command + " ");
         if (inputs.length == 1) {
@@ -125,6 +167,13 @@ public class Parser {
         return output.toString();
     }
 
+    /**
+     * Returns a Task object from parsing a saved line in a storage file.
+     *
+     * @param entry A line from a storage file containing the description of a Task.
+     * @return A Task object formed from parsing a line in a storage file.
+     * @throws DateTimeParseException If any time in the file is not in the correct format.
+     */
     public static Task parseFileFormat(String entry) throws DateTimeParseException {
         String[] entrySplit = entry.split(" \\| ");
         if (entrySplit[0].equals("T")) {
@@ -135,15 +184,19 @@ public class Parser {
             }
         } else if (entrySplit[0].equals("D")) {
             if (entrySplit[1].equals("1")) {
-                return new Deadline(entrySplit[2],  entrySplit[3], true);
+                return new Deadline(entrySplit[2],
+                        LocalDate.parse(entrySplit[3], DateTimeFormatter.ofPattern("MMM dd yyyy")), true);
             } else {
-                return new Deadline(entrySplit[2], entrySplit[3], false);
+                return new Deadline(entrySplit[2],
+                        LocalDate.parse(entrySplit[3], DateTimeFormatter.ofPattern("MMM dd yyyy")), false);
             }
         } else {
             if (entrySplit[1].equals("1")) {
-                return new Event(entrySplit[2], entrySplit[3], true);
+                return new Event(entrySplit[2],
+                        LocalDate.parse(entrySplit[3], DateTimeFormatter.ofPattern("MMM dd yyyy")), true);
             } else {
-                return new Event(entrySplit[2], entrySplit[3], false);
+                return new Event(entrySplit[2],
+                        LocalDate.parse(entrySplit[3], DateTimeFormatter.ofPattern("MMM dd yyyy")), false);
             }
         }
     }
