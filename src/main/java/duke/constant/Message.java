@@ -2,6 +2,9 @@ package duke.constant;
 
 public final class Message {
     public static final String LINE_PREFIX = "\t";
+    public static final String OPEN_BRACKET = "[";
+    public static final String CLOSE_BRACKET = "]";
+    public static final String SPACE = " ";
     public static final String LINE_SEPARATOR = System.lineSeparator();
     public static final String VERTICAL_BAR_WITH_SPACE = " | ";
     public static final String VERTICAL_BAR_REGEX = " \\| ";

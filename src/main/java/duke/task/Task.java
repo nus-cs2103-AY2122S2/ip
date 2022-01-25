@@ -1,5 +1,9 @@
 package duke.task;
 
+import static duke.constant.Message.CLOSE_BRACKET;
+import static duke.constant.Message.OPEN_BRACKET;
+import static duke.constant.Message.SPACE;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -27,6 +31,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.getDescription();
+        return OPEN_BRACKET + this.getStatusIcon() + CLOSE_BRACKET + SPACE + this.getDescription();
     }
 }
