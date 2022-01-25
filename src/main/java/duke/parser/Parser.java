@@ -4,6 +4,7 @@ import duke.commands.AddCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.SearchCommand;
 import duke.commands.ToggleCommand;
@@ -48,6 +49,8 @@ public class Parser {
             return new SearchCommand(args);
         } else if (isAdd(command)) {
             return new AddCommand(fullCommand);
+        } else if (command.equalsIgnoreCase("find")) {
+            return new FindCommand(args);
         } else {
             throw new DukeException(Constants.UNKNOWN_MSG);
         }

@@ -14,14 +14,14 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * Searches for deadline or event tasks based on given date by user.
+ * Search task list based on keyword.
  */
 public class SearchCommand extends Command {
     private String args;
 
     /**
-     * Creates new SearchCommand object that receives user input.
-     * @param args args holds the date specified by user.
+     * Creates SearchCommand object with user input keyword.
+     * @param args args is the keyword that user specified.
      */
     public SearchCommand(String args) {
         this.args = args;
