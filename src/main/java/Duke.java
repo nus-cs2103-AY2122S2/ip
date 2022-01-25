@@ -1,6 +1,6 @@
-import java.io.*;
 import java.util.*;
-
+import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
 
 /**
  * This program is used to add, list & mark the status of your current tasks.
@@ -124,11 +124,17 @@ public class Duke {
         for (int i = 2; i < str2.length; i++) {
             desc = desc + " " + str2[i];
         }
-        Task newTask = new Deadline(desc, str[1]);
-        list.add(newTask);
-        System.out.println("GOT IT. I'VE ADDED THIS TASK:");
-        System.out.println(newTask);
-        System.out.println("NOW YOU HAVE "+ list.size() + " TASKS IN THE LIST.");
+
+        try {
+            LocalDate date = LocalDate.parse(str[1]);
+            Task newTask = new Deadline(desc, date);
+            list.add(newTask);
+            System.out.println("GOT IT. I'VE ADDED THIS TASK:");
+            System.out.println(newTask);
+            System.out.println("NOW YOU HAVE "+ list.size() + " TASKS IN THE LIST.");
+        } catch (DateTimeParseException ex) {
+            throw new DukeException("INVALID DATE FORMAT.");
+        }
     }
 
     /**
@@ -150,11 +156,16 @@ public class Duke {
         for (int i = 2; i < str2.length; i++) {
             desc = desc + " " + str2[i];
         }
-        Task newTask = new Event(desc, str[1]);
-        list.add(newTask);
-        System.out.println("GOT IT. I'VE ADDED THIS TASK:");
-        System.out.println(newTask);
-        System.out.println("NOW YOU HAVE "+ list.size() + " TASKS IN THE LIST.");
+        try {
+            LocalDate date = LocalDate.parse(str[1]);
+            Task newTask = new Event(desc, date);
+            list.add(newTask);
+            System.out.println("GOT IT. I'VE ADDED THIS TASK:");
+            System.out.println(newTask);
+            System.out.println("NOW YOU HAVE "+ list.size() + " TASKS IN THE LIST.");
+        } catch (DateTimeParseException ex) {
+            throw new DukeException("INVALID DATE FORMAT.");
+        }
     }
 
     /**
@@ -188,7 +199,7 @@ public class Duke {
         } else {
             Task task = list.get(index);
             task.setAsNotDone();
-            System.out.println("NICE! I'VE MARKED THIS TASK AS DONE:");
+            System.out.println("NICE! I'VE MARKED THIS TASK AS NOT DONE:");
             System.out.println(task);
         }
     }
