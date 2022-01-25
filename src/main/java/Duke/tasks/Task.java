@@ -1,6 +1,6 @@
-package tasks;
+package Duke.tasks;
 
-import exceptions.InvalidTaskException;
+import Duke.exceptions.InvalidTaskException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -35,7 +35,7 @@ public abstract class Task {
                 if (taskArr.length <= 1) {
                     throw new InvalidTaskException("☹ OOPS!!! The description of a todo cannot be empty.");
                 }
-                task = new Todo(taskArr[1]);
+                task = new Duke.tasks.Todo(taskArr[1]);
                 break;
 
             case DEADLINE:
@@ -65,7 +65,7 @@ public abstract class Task {
                 }
                 try {
                     LocalDate date = LocalDate.parse(params[1]);
-                    task = new Event(params[0], date);
+                    task = new Duke.tasks.Event(params[0], date);
                 } catch (DateTimeParseException e) {
                     throw new InvalidTaskException("Invalid date format! [yyyy-mm-dd] Eg. [2019-12-01]");
                 }
@@ -88,18 +88,18 @@ public abstract class Task {
         String taskDescription = taskArr[2];
 
         switch (taskCode) {
-            case Todo.TASK_CODE:
-                task = new Todo(taskDescription);
+            case Duke.tasks.Todo.TASK_CODE:
+                task = new Duke.tasks.Todo(taskDescription);
                 break;
             case Deadline.TASK_CODE:
                 if (taskArr.length < 4) throw new InvalidTaskException("Insufficient values");
                 LocalDate by = LocalDate.parse(taskArr[3]);
                 task = new Deadline(taskDescription, by);
                 break;
-            case Event.TASK_CODE:
+            case Duke.tasks.Event.TASK_CODE:
                 if (taskArr.length < 4) throw new InvalidTaskException("Insufficient values");
                 LocalDate at = LocalDate.parse(taskArr[3]);
-                task = new Event(taskDescription, at);
+                task = new Duke.tasks.Event(taskDescription, at);
                 break;
             default:
                 throw new InvalidTaskException("Task format is invalid");

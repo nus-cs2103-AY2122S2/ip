@@ -1,4 +1,6 @@
-package tasks;
+package Duke.tasks;
+
+import Duke.Task;
 
 import java.time.LocalDate;
 

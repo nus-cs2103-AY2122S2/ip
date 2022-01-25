@@ -1,9 +1,9 @@
-package tasks;
+package Duke.tasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task {
+public class Deadline extends Duke.tasks.Task {
     public static final String TASK_CODE = "D";
 
     protected LocalDate by;

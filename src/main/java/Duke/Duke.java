@@ -1,17 +1,6 @@
 import exceptions.DukeException;
 
-import java.util.Scanner;
-
 public class Duke {
-    private static final String LOGO = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String SEPARATOR = "____________________________________________________________";
-    private static final String EXIT_MSG = "Bye. Hope to see you again soon!";
-    private static final String GREET_MSG = "Hello! I'm Jarvis\nWhat can I do for you?";
-
     private static final String STATUS_RUNNING = "running";
     private static final String STATUS_STOPPED = "stopped";
 
@@ -22,6 +11,7 @@ public class Duke {
     private static final String DELETE_COMMAND = "delete";
 
     private String status;
+    private final UI ui;
     private final DukeList dukeList;
 
     /**
@@ -29,26 +19,8 @@ public class Duke {
      */
     public Duke() {
         this.status = STATUS_RUNNING;
+        this.ui = new UI();
         this.dukeList = new DukeList();
-    }
-
-    /**
-     * Formats and prints the given message.
-     *
-     * @param msg formatted message
-     */
-    private static void printMsg(String msg) {
-        System.out.println(SEPARATOR);
-        System.out.println(msg);
-        System.out.println(SEPARATOR);
-        System.out.println();
-    }
-
-    /**
-     * Prints the greeting message.
-     */
-    public static void greet() {
-        printMsg(GREET_MSG);
     }
 
     /**
@@ -65,7 +37,7 @@ public class Duke {
         int idx;
         switch (action) {
             case QUIT_COMMAND:
-                result = EXIT_MSG;
+                result = ui.getGoodbyeMsg();
                 this.status = STATUS_STOPPED;
                 break;
 
@@ -113,24 +85,19 @@ public class Duke {
 
     /**
      * Handler for the duke bot.
-     *
-     * @param sc scanner object
      */
-    private void handler(Scanner sc) {
-        String cmd;
+    private void handler() {
+        ui.greet();
 
-        while (this.status.equals(STATUS_RUNNING) && sc.hasNextLine()) {
-            cmd = sc.nextLine();
+        while (this.status.equals(STATUS_RUNNING) && ui.hasNextCmd()) {
+            String cmd = ui.nextCmd();
             String result = parseCommand(cmd);
-            printMsg(result);
+            ui.printMsg(result);
         }
     }
 
     public static void main(String[] args) {
         Duke duke = new Duke();
-        Duke.greet();
-        Scanner sc = new Scanner(System.in);
-        duke.handler(sc);
-        sc.close();
+        duke.handler();
     }
 }
