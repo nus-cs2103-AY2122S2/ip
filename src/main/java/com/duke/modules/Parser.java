@@ -1,4 +1,6 @@
-import java.util.Scanner;
+package com.duke.modules;
+
+import com.duke.command.*;
 
 public class Parser {
   private TaskList taskList;

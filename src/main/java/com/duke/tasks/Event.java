@@ -1,3 +1,5 @@
+package com.duke.tasks;
+
 public class Event extends Task {
   protected String timeDate;
 

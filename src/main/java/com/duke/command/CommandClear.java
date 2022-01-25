@@ -1,3 +1,8 @@
+package com.duke.command;
+
+import com.duke.modules.Storage;
+import com.duke.modules.TaskList;
+
 import java.io.IOException;
 
 public class CommandClear extends Command {

@@ -1,3 +1,10 @@
+package com.duke.modules;
+
+import com.duke.tasks.Deadline;
+import com.duke.tasks.Event;
+import com.duke.tasks.Task;
+import com.duke.tasks.Todo;
+
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -52,19 +59,19 @@ public class Storage {
       while ((line = bufferedReader.readLine()) != null) {
         String[] task = line.split(" \\| ");
         switch (task[0]) {
-          case "Todo":
+          case "com.duke.tasks.Todo":
             Todo todoTask = new Todo(task[2]);
             todoTask.setStatus((task[1].equals("1") ? true : false));
             taskList.add(todoTask);
             break;
-          case "Deadline":
+          case "com.duke.tasks.Deadline":
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_DATE_TIME;
             LocalDateTime dateTime = LocalDateTime.parse(task[3], dateTimeFormatter);
             Deadline deadlineTask = new Deadline(task[2], dateTime);
             deadlineTask.setStatus((task[1].equals("1") ? true : false));
             taskList.add(deadlineTask);
             break;
-          case "Event":
+          case "com.duke.tasks.Event":
             Event eventTask = new Event(task[2], task[3]);
             eventTask.setStatus((task[1].equals("1") ? true : false));
             taskList.add(eventTask);

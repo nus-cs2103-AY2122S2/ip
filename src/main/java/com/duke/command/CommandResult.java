@@ -1,3 +1,5 @@
+package com.duke.command;
+
 public class CommandResult{
   private boolean isShutdown = false;
   private String resultMessage;

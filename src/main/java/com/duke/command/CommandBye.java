@@ -1,3 +1,7 @@
+package com.duke.command;
+
+import com.duke.modules.TaskList;
+
 public class CommandBye extends Command {
   private String input;
 

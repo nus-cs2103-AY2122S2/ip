@@ -1,10 +1,18 @@
+package com.duke.command;
+
+import com.duke.exception.DukeEmptyListException;
+import com.duke.exception.DukeInvalidArgumentException;
+import com.duke.modules.Storage;
+import com.duke.modules.TaskList;
+import com.duke.tasks.Task;
+
 import java.io.IOException;
 
-public class CommandMark extends Command {
+public class CommandDelete extends Command {
   private String input;
   private TaskList taskList;
 
-  public CommandMark(String input, TaskList taskList) {
+  public CommandDelete(String input, TaskList taskList) {
     super();
     this.input = input;
     this.taskList = taskList;
@@ -13,12 +21,12 @@ public class CommandMark extends Command {
   @Override
   public CommandResult execute() {
     try {
-      return new CommandResult(taskMarker(input));
+      return new CommandResult(taskDeleter(input));
     } catch (DukeInvalidArgumentException | DukeEmptyListException e) {
       return new CommandResult(e.getMessage());
     } catch (NumberFormatException e) {
       return new CommandResult(
-          "Valid numerical number must be given:" + "\nEg: mark 12");
+          "Valid numerical number must be given:" + "\nEg: delete 12");
     } catch (IndexOutOfBoundsException e) {
       return new CommandResult("Invalid task chosen, please ensure that the number given is correct");
     } catch (IOException e) {
@@ -28,16 +36,16 @@ public class CommandMark extends Command {
     }
   }
 
-  public String taskMarker(String args) throws DukeInvalidArgumentException, DukeEmptyListException, IOException {
+  public String taskDeleter(String args) throws DukeInvalidArgumentException, DukeEmptyListException, IOException {
     if (args.length() < 1) {
-      throw new DukeInvalidArgumentException("Please choose which task you would like to ");
+      throw new DukeInvalidArgumentException("Please choose which task you would like to delete");
     } else if (taskList.getTaskListSize() < 1) {
       throw new DukeEmptyListException("Your list is empty.");
     } else {
       int num = Integer.parseInt(args);
       Task currTask = taskList.getTask(num - 1);
-      taskList.markTask(num - 1);
-      return String.format("Noted. I've marked this task as done:\n\t%s", currTask.toString());
-    }
+      taskList.removeTask(num - 1);
+      return String.format("Noted. I've removed this task:\n\t%s", currTask.toString());
+      }
   }
 }

@@ -1,3 +1,7 @@
+package com.duke.modules;
+
+import com.duke.command.CommandResult;
+
 import java.util.Scanner;
 
 public class Ui {

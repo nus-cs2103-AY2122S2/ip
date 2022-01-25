@@ -1,3 +1,5 @@
+package com.duke.tasks;
+
 public class Task {
   protected boolean status;
   protected String description;
