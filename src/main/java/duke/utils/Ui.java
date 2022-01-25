@@ -1,6 +1,6 @@
-package DukeUtils;
+package duke.utils;
 
-import Task.Task;
+import duke.task.Task;
 
 import java.util.Scanner;
 
@@ -40,13 +40,13 @@ public class Ui {
     }
 
     public void addedTask(TaskList tasks, Task task) {
-        String taskOrTasks = tasks.tasksArrayList.size() <= 1 ? "task" : "tasks";
+        String taskOrTasks = tasks.tasksArrayList.size() <= 1 ? "duke/task" : "tasks";
         System.out.println("Got it. I've added this task: \n" + " " + task +
                 "\nNow you have " + tasks.tasksArrayList.size() + " " + taskOrTasks + " in the list.");
     }
 
     public void deletedTask(TaskList tasks, Task taskDeleted) {
-        String taskOrTasks = tasks.tasksArrayList.size() <= 1 ? "task" : "tasks";
+        String taskOrTasks = tasks.tasksArrayList.size() <= 1 ? "duke/task" : "tasks";
         System.out.println("Noted. I've removed this task: \n" + " " + taskDeleted + "\n" +
                 "Now you have " + tasks.tasksArrayList.size() + " " + taskOrTasks + " in the list.");
     }
@@ -72,7 +72,7 @@ public class Ui {
     }
 
     public void foundTaskOnSameDate(int numberOfTasksOnSameDate, String time) {
-        String taskOrTasks = numberOfTasksOnSameDate <= 1 ? "task" : "tasks";
+        String taskOrTasks = numberOfTasksOnSameDate <= 1 ? "duke/task" : "tasks";
         System.out.printf("Found %d %s with date/time %s.\n", numberOfTasksOnSameDate, taskOrTasks, time);
     }
 }

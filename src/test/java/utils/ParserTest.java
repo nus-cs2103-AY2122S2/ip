@@ -1,20 +1,32 @@
-package DukeUtils;
+package utils;
 
-import Command.*;
-import Task.*;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import duke.command.Command;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
+import duke.command.DeleteCommand;
+import duke.command.DeleteAllCommand;
+import duke.command.AddCommand;
+import duke.command.ShowAllTasksOnSameDateCommand;
+
+import duke.task.Todo;
+
+import duke.utils.CortanaException;
+import duke.utils.Parser;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class ParserTest {
     @Test
     @DisplayName("Should parse to ExitCommand")
-    public void testParsedToExitCommand() {
+    public void parsedToExitCommand() {
         try {
             ExitCommand exitCommand = new ExitCommand();
             Command parsedCommand = Parser.parse("bye");
@@ -27,7 +39,7 @@ public class ParserTest {
 
     @Test
     @DisplayName("Should parse to ListCommand")
-    public void testParsedToListCommand() {
+    public void parsedToListCommand() {
         try {
             ListCommand listCommand = new ListCommand();
             Command parsedCommand = Parser.parse("list");
@@ -40,7 +52,7 @@ public class ParserTest {
 
     @Test
     @DisplayName("Should parse to MarkCommand")
-    public void testParsedToMarkCommand() {
+    public void parsedToMarkCommand() {
         try {
             MarkCommand markCommand = new MarkCommand(0);
             Command parsedCommand = Parser.parse("mark 1");
@@ -53,7 +65,7 @@ public class ParserTest {
 
     @Test
     @DisplayName("Should parse to UnmarkCommand")
-    public void testParsedToUnmarkCommand() {
+    public void parsedToUnmarkCommand() {
         try {
             UnmarkCommand unmarkCommand = new UnmarkCommand(0);
             Command parsedCommand = Parser.parse("unmark 1");
@@ -66,7 +78,7 @@ public class ParserTest {
 
     @Test
     @DisplayName("Should parse to DeleteCommand")
-    public void testParsedToDeleteCommand() {
+    public void parsedToDeleteCommand() {
         try {
             DeleteCommand deleteCommand = new DeleteCommand(0);
             Command parsedCommand = Parser.parse("delete 1");
@@ -79,7 +91,7 @@ public class ParserTest {
 
     @Test
     @DisplayName("Should parse to DeleteAllCommand")
-    public void testParsedToDeleteAllCommand() {
+    public void parsedToDeleteAllCommand() {
         try {
             DeleteAllCommand deleteAllCommand = new DeleteAllCommand();
             Command parsedCommand = Parser.parse("delete all");
@@ -92,7 +104,7 @@ public class ParserTest {
 
     @Test
     @DisplayName("Should parse to ShowAllTasksOnSameDateCommand")
-    public void testParsedToShowAllTasksOnSameDateCommand() {
+    public void parsedToShowAllTasksOnSameDateCommand() {
         try {
             LocalDateTime localDateTime = LocalDateTime.parse("2022-01-24 1800",  DateTimeFormatter.ofPattern("yyyy-M-d HHmm"));
             ShowAllTasksOnSameDateCommand showAllTasksOnSameDateCommand = new ShowAllTasksOnSameDateCommand(localDateTime, "2022-01-24 1800");
@@ -106,7 +118,7 @@ public class ParserTest {
 
     @Test
     @DisplayName("Should ignore and throw exception")
-    public void InvalidCommand() {
+    public void invalidInput() {
         try {
             Parser.parse("something invalid");
             fail();
@@ -117,7 +129,7 @@ public class ParserTest {
 
     @Test
     @DisplayName("Should parse to AddCommand")
-    public void testParsedToAddCommand() {
+    public void parsedToAddCommand() {
         try {
             Todo dummyTodo = new Todo("watch lecture");
             AddCommand markCommand = new AddCommand(dummyTodo);

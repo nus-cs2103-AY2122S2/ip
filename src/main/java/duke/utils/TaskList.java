@@ -1,5 +1,6 @@
-package DukeUtils;
-import Task.*;
+package duke.utils;
+
+import duke.task.Task;
 
 import java.util.ArrayList;
 import java.util.HashSet;

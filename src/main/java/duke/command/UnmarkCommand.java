@@ -1,26 +1,27 @@
-package Command;
+package duke.command;
 
-import DukeUtils.CortanaException;
-import DukeUtils.Storage;
-import DukeUtils.TaskList;
-import DukeUtils.Ui;
-import Task.Task;
+import duke.task.Task;
+
+import duke.utils.CortanaException;
+import duke.utils.Storage;
+import duke.utils.TaskList;
+import duke.utils.Ui;
 
 import java.util.Objects;
 
-public class MarkCommand extends Command {
+public class UnmarkCommand extends Command {
     private final int index;
 
-    public MarkCommand(int index) {
+    public UnmarkCommand(int index) {
         this.index = index;
     }
 
     public void execute(TaskList taskList, Ui ui, Storage storage) throws CortanaException {
         try {
             Task task = taskList.tasksArrayList.get(index);
-            task.markAsDone();
+            task.markAsUndone();
             storage.writeFile(taskList);
-            ui.marked(task);
+            ui.unmarked(task);
         } catch (Exception e) {
             throw new CortanaException("No such task!");
         }
@@ -33,8 +34,8 @@ public class MarkCommand extends Command {
     @Override
     public boolean equals(Object obj) {
         if (obj != null && obj.getClass() == getClass()) {
-            MarkCommand markCommand = (MarkCommand) obj;
-            return markCommand.index == this.index;
+            UnmarkCommand unmarkCommand = (UnmarkCommand) obj;
+            return unmarkCommand.index == this.index;
         } else {
             return false;
         }

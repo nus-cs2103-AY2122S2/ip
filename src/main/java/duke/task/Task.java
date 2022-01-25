@@ -1,10 +1,8 @@
-package Task;
-
-import java.util.Objects;
+package duke.task;
 
 public class Task {
-    public String description;
-    public boolean isDone;
+    private final String description;
+    private boolean isDone;
 
     public Task(String description) {
         this.description = description;
@@ -12,7 +10,8 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        /* mark done task with X */
+        return (isDone ? "X" : " ");
     }
 
     public void markAsDone() {
@@ -21,6 +20,14 @@ public class Task {
 
     public void markAsUndone() {
         this.isDone = false;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     @Override

@@ -1,5 +1,11 @@
-import Command.*;
-import DukeUtils.*;
+package duke;
+
+import duke.command.Command;
+import duke.utils.Storage;
+import duke.utils.TaskList;
+import duke.utils.Ui;
+import duke.utils.Parser;
+import duke.utils.CortanaException;
 
 import java.nio.file.Paths;
 
@@ -34,7 +40,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String path = Paths.get("").toAbsolutePath() + "/data/";
-        new Duke(path).run();
+        String PATH = Paths.get("").toAbsolutePath() + "/data/";
+        new Duke(PATH).run();
     }
 }

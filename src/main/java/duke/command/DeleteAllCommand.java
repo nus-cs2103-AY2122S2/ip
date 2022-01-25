@@ -1,9 +1,9 @@
-package Command;
+package duke.command;
 
-import DukeUtils.CortanaException;
-import DukeUtils.Storage;
-import DukeUtils.TaskList;
-import DukeUtils.Ui;
+import duke.utils.CortanaException;
+import duke.utils.Storage;
+import duke.utils.TaskList;
+import duke.utils.Ui;
 
 import java.util.Objects;
 
