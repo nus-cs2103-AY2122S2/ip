@@ -1,13 +1,16 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
-    private String deadline;
+    private LocalDate deadline;
 
     public Deadline() {
         super();
 
-        this.deadline = "";
+        this.deadline = LocalDate.now(); // just get default date
     }
 
-    public Deadline(String taskDescription, String eventTime) {
+    public Deadline(String taskDescription, LocalDate eventTime) {
         super(taskDescription);
 
         this.deadline = eventTime;
@@ -15,6 +18,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.deadline + ")";
+        return "[D]" + super.toString() + " (by: "
+                + this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + ")";
     }
 }

@@ -1,13 +1,16 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
-    private String eventTime;
+    private LocalDate eventTime;
 
     public Event() {
         super();
 
-        this.eventTime = "";
+        this.eventTime = LocalDate.now();
     }
 
-    public Event(String taskDescription, String eventTime) {
+    public Event(String taskDescription, LocalDate eventTime) {
         super(taskDescription);
 
         this.eventTime = eventTime;
@@ -15,6 +18,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.eventTime + ")";
+        return "[E]" + super.toString() + " (at: " + this.eventTime.format(
+                DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

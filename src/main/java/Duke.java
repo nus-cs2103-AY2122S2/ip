@@ -2,6 +2,9 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 public class Duke {
     private boolean isRunning;
     private ArrayList<Task> userTexts;
@@ -105,19 +108,28 @@ public class Duke {
                 // init the correct task type
                 if (firstCommand.equals("deadline")) {
                     exceptionErrPrint = "Did you remember to put in the deadline after /by? Or did u remember to add /by?";
-                    newTask = new Deadline(taskDescription.substring(0, taskDescription.indexOf(" /by")),
-                            taskDescription.substring(taskDescription.indexOf("/by") + 4));
+                    String statement = taskDescription.substring(0, taskDescription.indexOf(" /by"));
+                    String dateStr = taskDescription.substring(taskDescription.indexOf("/by") + 4);
+
+                    exceptionErrPrint = "Date format maybe wrong. yy-mm-dd";
+                    newTask = new Deadline(statement, LocalDate.parse(dateStr));
 
                 } else if (firstCommand.equals("event")) {
                     exceptionErrPrint = "Did you remember to put in the timing after /at? Or did u remember to add /at?";
-                    newTask = new Event(taskDescription.substring(0, taskDescription.indexOf(" /at")),
-                            taskDescription.substring(taskDescription.indexOf("/at") + 4));
+                    String statement = taskDescription.substring(0, taskDescription.indexOf(" /at"));
+                    String dateStr = taskDescription.substring(taskDescription.indexOf("/at") + 4);
+
+                    exceptionErrPrint = "Date format maybe wrong. yy-mm-dd";
+                    newTask = new Event(statement, LocalDate.parse(dateStr));
 
                 } else {
                     newTask = new Todo(taskDescription);
                 }
 
             } catch (StringIndexOutOfBoundsException error) {
+                throw new DukeException(
+                        "Something is wrong. " + exceptionErrPrint);
+            } catch (DateTimeParseException error) {
                 throw new DukeException(
                         "Something is wrong. " + exceptionErrPrint);
             }
