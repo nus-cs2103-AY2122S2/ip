@@ -1,4 +1,4 @@
-package mike;
+package main.java.mike;
 public class Todo extends Task{
 
     private static final String taskType = "T";

@@ -1,4 +1,4 @@
-package mike;
+package main.java.mike;
 
 import java.io.File;
 import java.io.FileNotFoundException;

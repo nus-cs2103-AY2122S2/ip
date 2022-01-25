@@ -1,4 +1,4 @@
-package mike;
+package main.java.mike;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

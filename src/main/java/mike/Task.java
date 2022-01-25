@@ -1,4 +1,4 @@
-package mike;
+package main.java.mike;
 
 abstract class Task {
     protected final String name;

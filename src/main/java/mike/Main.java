@@ -1,4 +1,4 @@
-package mike;
+package main.java.mike;
 
 public class Main {
 

@@ -1,9 +1,8 @@
-package mike;
+package main.java.mike;
 
 public class Ui {
 
     public Ui () {
-
     }
 
     /**

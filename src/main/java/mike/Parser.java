@@ -1,4 +1,4 @@
-package mike;
+package main.java.mike;
 
 public class Parser {
     private final String userInput;
