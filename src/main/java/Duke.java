@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.regex.*;
@@ -140,13 +141,13 @@ public class Duke {
                         String userTaskStringSliced = userTaskString.substring(8+1);
                         String[] descriptionDeadlineSplit = userTaskStringSliced.split(" /by ", 2);
                         this.addDeadline(descriptionDeadlineSplit[0], descriptionDeadlineSplit[1]);
-                    } catch (StringIndexOutOfBoundsException err) { // For cases like "deadline" without any other information
+                    } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException | DateTimeParseException err) {
                         throw new DukeException("Please enter a Deadline in the following format:\n" +
-                                "deadline [description] /by [datetime]");
-                    } catch (ArrayIndexOutOfBoundsException err) { //For cases like "deadline homework" without a "/by"
-                        throw new DukeException("Please enter a Deadline in the following format:\n" +
-                                "deadline [description] /by [datetime]");
+                                "deadline [description] /by [yyyy-mm-dd]");
                     }
+                    //StringIndexOutOfBoundsException For cases like "deadline" without any other information
+                    //ArrayIndexOutOfBoundsException For cases like "deadline homework" without a "/by"
+                    //DateTimeParseException For cases where date cannot be recognised
             } else if (userTaskString.matches("^(event|Event|EVENT).*")){
                     try {
                         String userTaskStringSliced = userTaskString.substring(5+1);
