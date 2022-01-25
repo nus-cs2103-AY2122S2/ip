@@ -3,13 +3,6 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) throws EmptyDescriptionException {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        // System.out.print("Hello from\n" + logo + "\n");
-
         String space = "     ";
         String longSpace = "        ";
         String line = "____________________________________________________________";
@@ -20,8 +13,8 @@ public class Duke {
                 + space + line;
 
         System.out.println(greeting);
-        Scanner sc = new Scanner(System.in);
 
+        Scanner sc = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList<>();
 
         while (sc.hasNext()) {
@@ -34,17 +27,13 @@ public class Duke {
                             + space + output + "\n"
                             + space + line);
                 break;
-            }
-
-            else if (input.equals("list")) {
+            } else if (input.equals("list")) {
                 output += space + " Here are the tasks in your list:\n";
                 for (int i = 0; i < list.size(); i++) {
                     String bullet = space + (i + 1) + ".";
                     output += bullet + list.get(i).toString() + "\n";
                 }
-            }
-
-            else if (input.startsWith("mark")) {
+            } else if (input.startsWith("mark")) {
                 Character i1 = input.charAt(5);
                 String i2 = i1.toString();
                 int index = Integer.parseInt(i2) - 1;
@@ -52,9 +41,7 @@ public class Duke {
 
                 output = space + " Nice! I've marked this task as done:\n"
                         + longSpace + list.get(index).toString() + "\n";
-            }
-
-            else if (input.startsWith("unmark")) {
+            } else if (input.startsWith("unmark")) {
                 Character i1 = input.charAt(7);
                 String i2 = i1.toString();
                 int index = Integer.parseInt(i2) - 1;
@@ -62,9 +49,7 @@ public class Duke {
 
                 output += space + " Nice! I've marked this task as not done:\n"
                         + longSpace + list.get(index).toString() + "\n";
-            }
-
-            else if (input.startsWith("delete")) {
+            } else if (input.startsWith("delete")) {
                 Character i1 = input.charAt(7);
                 String i2 = i1.toString();
                 int index = Integer.parseInt(i2) - 1;
@@ -74,9 +59,7 @@ public class Duke {
                         + space + "Now you have " + list.size() + " tasks in the list.\n";
 
                 list.remove(index);
-            }
-
-            else if (input.startsWith("todo")) {
+            } else if (input.startsWith("todo")) {
                 try {
                     String name = input.substring(5);
                     Task current = new ToDo(name);
@@ -90,9 +73,7 @@ public class Duke {
                 } catch (EmptyDescriptionException e) {
                     output += "     ☹ OOPS!!! The description of a todo cannot be empty.\n";
                 }
-            }
-
-            else if (input.startsWith("event")) {
+            } else if (input.startsWith("event")) {
                 try {
                     String name = input.substring(6);
                     String[] inputArray = name.split("/");
@@ -107,9 +88,7 @@ public class Duke {
                 } catch (EmptyDescriptionException e) {
                     output += "     ☹ OOPS!!! The description of a todo cannot be empty.\n";
                 }
-            }
-
-            else if (input.startsWith("deadline")) {
+            } else if (input.startsWith("deadline")) {
                 try {
                     String name = input.substring(6);
                     String[] inputArray = input.split("/");
@@ -124,15 +103,13 @@ public class Duke {
                 } catch (EmptyDescriptionException e) {
                     output += "     ☹ OOPS!!! The description of a todo cannot be empty.\n";
                 }
-            }
-
-            else {
+            } else {
                 output = "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n";
             }
 
             System.out.print(space + line + "\n"
-                        + output
-                        + space + line + "\n");
+                    + output
+                    + space + line + "\n");
         }
         sc.close();
     }
