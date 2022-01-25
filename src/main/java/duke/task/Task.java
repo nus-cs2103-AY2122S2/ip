@@ -20,7 +20,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return this.completed ? "X" : " ";
+        return (this.completed) ? "X" : " ";
     }
 
     public char getType() {

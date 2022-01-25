@@ -45,7 +45,7 @@ public class ToggleCommand extends Command {
 
                 updateString = String.format(
                         "D | %s | %s | %s",
-                        updatedTask.getCompleted() ? "1" : "0",
+                        (updatedTask.getCompleted()) ? "1" : "0",
                         updatedTask.getDescription(),
                         date);
             } else if (taskString.charAt(1) == 'E') {
@@ -55,21 +55,21 @@ public class ToggleCommand extends Command {
 
                 updateString = String.format(
                         "E | %s | %s | %s",
-                        updatedTask.getCompleted() ? "1" : "0",
+                        (updatedTask.getCompleted()) ? "1" : "0",
                         updatedTask.getDescription(),
                         date);
             } else {
                 updateString = String.format(
                         "T | %s | %s",
-                        updatedTask.getCompleted() ? "1" : "0",
+                        (updatedTask.getCompleted()) ? "1" : "0",
                         updatedTask.getDescription());
             }
             
             storage.writeToFile(updateString, index, false);
 
-            String output = isMark ?
-                    "Nice! I've marked this task as done:\n" :
-                    "OK, I've marked this task as not done yet:\n";
+            String output = (isMark)
+                    ? "Nice! I've marked this task as done:\n"
+                    : "OK, I've marked this task as not done yet:\n";
 
             ui.output(output + taskString);
         } catch (IndexOutOfBoundsException e) {

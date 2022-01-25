@@ -36,13 +36,11 @@ public class DeleteCommand extends Command {
             noOfTasks = taskList.size();
 
             String result = "Noted. I've removed this task:\n";
-            String pluralTask = noOfTasks > 1 ? "tasks" : "task";
+            String pluralTask = (noOfTasks > 1) ? "tasks" : "task";
 
-            result += noOfTasks > 0 ?
-                    "  " + task +
-                    "\nNow you have " + noOfTasks + " " + pluralTask + " in the list." :
-                    "  " + task +
-                    "\nNow you have no task left.";
+            result += (noOfTasks > 0)
+                    ? "  " + task + "\nNow you have " + noOfTasks + " " + pluralTask + " in the list."
+                    : "  " + task + "\nNow you have no task left.";
 
             ui.output(result);
         } catch (IndexOutOfBoundsException e) {

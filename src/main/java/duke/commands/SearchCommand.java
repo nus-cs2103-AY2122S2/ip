@@ -67,7 +67,7 @@ public class SearchCommand extends Command {
                 }
             }
 
-            ui.output(index > 0 ? sb.toString() : Constants.NO_TASK_SEARCH_MSG);
+            ui.output((index > 0) ? sb.toString() : Constants.NO_TASK_SEARCH_MSG);
         } catch (Exception e) {
             throw new DukeException(Constants.INVALID_DATE_MSG);
         }
