@@ -29,7 +29,7 @@ public class DukeException extends Exception{
 
         @Override
         public String toString(){
-            return super.toString() + "PLEASE ENTER A DATE FOR THE TASK";
+            return super.toString() + "PLEASE ENTER A VALID DATE FOR THE EVENT/DEADLINE";
         }
     }
 
