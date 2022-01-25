@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -43,23 +45,23 @@ public class Duke {
 
         try {
             switch (type) {
-                case BYE:
-                    System.out.println("Bye. Hope to see you again soon!");
-                    break;
-                case LIST:
-                    readList();
-                    break;
-                case MARK:
-                    list.get(Integer.parseInt(userInput[1]) - 1).markTask(true, true);
-                    break;
-                case UNMARK:
-                    list.get(Integer.parseInt(userInput[1]) - 1).markTask(false, true);
-                    break;
-                case DELETE:
-                    delete(Integer.parseInt(userInput[1]) - 1);
-                    break;
-                default:
-                    addList(userInput, type);
+            case BYE:
+                System.out.println("Bye. Hope to see you again soon!");
+                break;
+            case LIST:
+                readList();
+                break;
+            case MARK:
+                list.get(Integer.parseInt(userInput[1]) - 1).markTask(true, true);
+                break;
+            case UNMARK:
+                list.get(Integer.parseInt(userInput[1]) - 1).markTask(false, true);
+                break;
+            case DELETE:
+                delete(Integer.parseInt(userInput[1]) - 1);
+                break;
+            default:
+                addList(userInput, type);
             }
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Duke has noticed that the number you provided does not \nmatch the number of task you have." +
@@ -85,15 +87,15 @@ public class Duke {
             }
 
             switch (type) {
-                case DEADLINE:
-                    task = new Deadline(strings[0], LocalDate.parse(strings[1].substring(3)));
-                    break;
-                case EVENT:
-                    task = new Event(strings[0], LocalDate.parse(strings[1].substring(3)));
-                    break;
-                case TODO:
-                    task = new Todo(userInput[1]);
-                    break;
+            case DEADLINE:
+                task = new Deadline(strings[0], LocalDate.parse(strings[1].substring(3)));
+                break;
+            case EVENT:
+                task = new Event(strings[0], LocalDate.parse(strings[1].substring(3)));
+                break;
+            case TODO:
+                task = new Todo(userInput[1]);
+                break;
             }
 
             if (task == null || userInput[1].strip().isEmpty()) {
@@ -141,32 +143,32 @@ public class Duke {
         Type type;
 
         switch (temp) {
-            case "bye":
-                type = Type.BYE;
-                break;
-            case "deadline":
-                type = Type.DEADLINE;
-                break;
-            case "delete":
-                type = Type.DELETE;
-                break;
-            case "event":
-                type = Type.EVENT;
-                break;
-            case "list":
-                type = Type.LIST;
-                break;
-            case "mark":
-                type = Type.MARK;
-                break;
-            case "unmark":
-                type = Type.UNMARK;
-                break;
-            case "todo":
-                type = Type.TODO;
-                break;
-            default:
-                type = Type.NULL;
+        case "bye":
+            type = Type.BYE;
+            break;
+        case "deadline":
+            type = Type.DEADLINE;
+            break;
+        case "delete":
+            type = Type.DELETE;
+            break;
+        case "event":
+            type = Type.EVENT;
+            break;
+        case "list":
+            type = Type.LIST;
+            break;
+        case "mark":
+            type = Type.MARK;
+            break;
+        case "unmark":
+            type = Type.UNMARK;
+            break;
+        case "todo":
+            type = Type.TODO;
+            break;
+        default:
+            type = Type.NULL;
         }
 
         return type;
