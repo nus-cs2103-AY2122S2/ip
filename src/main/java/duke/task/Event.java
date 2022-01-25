@@ -8,6 +8,7 @@ public class Event extends Task {
     private LocalDate eventDate;
     private LocalTime eventStartTime;
     private LocalTime eventEndTime;
+
     /**
      * Initializes a new event task.
      * By default, the new task is set to "not done".

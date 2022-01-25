@@ -46,6 +46,7 @@ public class TaskList {
     public void incrementTasks(){
         this.numberOfTasks++;
     }
+
     /**
      * Iterates through the list and prints out each task that is on the list.
      */

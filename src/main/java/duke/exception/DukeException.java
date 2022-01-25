@@ -1,7 +1,6 @@
 package duke.exception;
 
 public class DukeException extends RuntimeException {
-
     /**
      * Initialises a new instance of DukeException.
      *

@@ -1,8 +1,8 @@
 package duke.exception;
 
 public class InvalidCommand extends DukeException {
-
     private final String errorMessage;
+
     /**
      * Initialises a new instance of duke.exception.InvalidCommand.
      *

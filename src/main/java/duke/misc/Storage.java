@@ -19,6 +19,7 @@ import java.util.Scanner;
 public class Storage {
     public static final String DATA_FOLDER_PATH = "./data";
     public static final String DATA_PATH = "./data/data.txt";
+
     /**
      * Creates new data file/folder if it does not exists.
      *
