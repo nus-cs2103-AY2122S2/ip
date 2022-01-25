@@ -12,8 +12,8 @@ public class NotableDate {
         tasks = new ArrayList<>();
     }
 
-    public void addTask(Task t) {
-        tasks.add(t);
+    public void addTask(Task task) {
+        tasks.add(task);
     }
 
     @Override
