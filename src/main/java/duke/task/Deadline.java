@@ -3,6 +3,7 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import duke.DukeException;
+
 /**
  * Represents a task object that needs to be completed by
  * a certain date.
@@ -23,7 +24,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Converts a string description of a deadline object.
+     * Returns a string description of a deadline object.
      *
      * @return A string description of the deadline task.
      */
@@ -38,6 +39,8 @@ public class Deadline extends Task {
      *
      * @param input The string input which contains info on the deadline task.
      * @return A new Deadline object.
+     * @throws StringIndexOutOfBoundsException If keyword /by is not used.
+     * @throws DukeException If no title or date is input.
      */
     public static Deadline createDeadline(String input) throws StringIndexOutOfBoundsException, DukeException {
         String dlTask = input.substring(8); //Grabs all the text after the "deadline" command word

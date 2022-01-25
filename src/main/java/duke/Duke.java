@@ -9,6 +9,9 @@ import duke.command.Command;
 import java.io.IOException;
 import java.io.File;
 
+/**
+ * Represents a Duke task tracker app.
+ */
 public class Duke {
 
     private Ui ui;
@@ -16,12 +19,21 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
 
+    /**
+     * Creates a new Duke object.
+     */
     public Duke() {
         ui = new Ui();
         parser = new Parser();
         storage = new Storage("./data/duke.txt");
     }
 
+    /**
+     * Runs the Duke app.
+     *
+     * @throws IOException If an I/O error occurs.
+     * @throws DukeException If an error related to Duke app occurs.
+     */
     public void run() throws IOException, DukeException {
 
         File dir = new File("./data"); //ensures directory is added
@@ -33,7 +45,6 @@ public class Duke {
         if (!file.exists()) {
             file.createNewFile();
         }
-        Duke duke = new Duke();
 
         ui.showWelcome();
         tasks = new TaskList(storage.retrieveData());
@@ -49,7 +60,7 @@ public class Duke {
     }
 
     /**
-     * Runs the Duke software.
+     * The main method that will run the Duke app.
      */
     public static void main(String[] args) throws IOException, DukeException {
         new Duke().run();

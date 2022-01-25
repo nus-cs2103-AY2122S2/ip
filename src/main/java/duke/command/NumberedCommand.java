@@ -6,23 +6,48 @@ import duke.tasklist.TaskList;
 import duke.task.Task;
 import java.io.IOException;
 
+/**
+ * Represents a Command object that is carry out an action
+ * on a specified task in the tasklist.
+ */
 public class NumberedCommand extends Command {
 
     private int number;
     private String taskType;
     private String textInput;
 
+    /**
+     * Constructor for the NumberedCommand object.
+     *
+     * @param val The index of the task to operate on.
+     * @param type The type of tasks to be added,
+     * (Todo, Deadline, Event).
+     * @param input The user's input containing the information
+     * of the task to be added.
+     */
     public NumberedCommand(int val, String type, String input) {
         this.number = val;
         this.taskType = type;
         this.textInput = input;
     }
 
+    /**
+     * Signifies to the app to not terminate its current run.
+     */
     @Override
     public boolean isExit() {
         return false;
     }
 
+    /**
+     * Will carry out an operation on a specified task in the
+     * tasklist.
+     *
+     * @param stg The storage object to use file writing methods.
+     * @param ui The ui object to handle I/O requests.
+     * @param tasks The task list which holds all tasks available.
+     * @throws IOException If an I/O error occurs.
+     */
     @Override
     public void execute(Storage stg, Ui ui, TaskList tasks) throws IOException {
         try {

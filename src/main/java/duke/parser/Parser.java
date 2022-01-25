@@ -2,6 +2,10 @@ package duke.parser;
 
 import duke.command.*;
 
+/**
+ * Represents a parser object that formats and retrieves
+ * information from users' text inputs.
+ */
 public class Parser {
 
     /**
@@ -33,6 +37,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a text input and returns the appropriate action to
+     * take.
+     *
+     * @param text The user's input text.
+     * @return A Command object that will carry out the appropriate
+     * action.
+     */
     public Command parse(String text) {
         String input = text.trim();
         String command = getCommand(input);

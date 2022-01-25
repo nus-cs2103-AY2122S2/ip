@@ -9,23 +9,45 @@ import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import duke.DukeException;
 
+/**
+ * Represents a Command object that will add new tasks.
+ */
 public class AddCommand extends Command {
 
     private String taskType;
     private String textInput;
 
+    /**
+     * Constructor for the AddCommand object.
+     *
+     * @param type The type of tasks to be added,
+     * (Todo, Deadline, Event).
+     * @param input The user's input containing the information
+     * of the task to be added.
+     */
     public AddCommand(String type, String input) {
         this.textInput = input;
         this.taskType = type;
     }
 
+    /**
+     * Signifies to the app to not terminate its current run.
+     */
     @Override
     public boolean isExit() {
         return false;
     }
 
+    /**
+     * Will add the provided task to the tasklist.
+     *
+     * @param stg The storage object to use file writing methods.
+     * @param ui The ui object to handle I/O requests.
+     * @param tasks The task list which holds all tasks available.
+     * @throws IOException If an I/O error occurs.
+     */
     @Override
-    public void execute(Storage stg, Ui ui, TaskList tasks) throws DukeException, IOException {
+    public void execute(Storage stg, Ui ui, TaskList tasks) throws IOException {
         if (this.taskType.equals("todo")) {
             try {
                 Todo td = Todo.createTodo(this.textInput);
