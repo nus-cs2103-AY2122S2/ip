@@ -1,8 +1,10 @@
+package duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * The Event class.
+ * The duke.Event class.
  *
  * @author Jet Tan
  */
@@ -10,7 +12,7 @@ public class Event extends Task {
     private final LocalDateTime at;
 
     /**
-     * Constructor for a new instance of Event, containing the description and date of the event.
+     * Constructor for a new instance of duke.Event, containing the description and date of the event.
      *
      * @param description The description of the event
      * @param at The date of the event

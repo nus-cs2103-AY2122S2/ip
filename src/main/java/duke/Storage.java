@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 /**
- * The Storage class, containing methods to create and load the folder and tasklist save file.
+ * The duke.Storage class, containing methods to create and load the folder and tasklist save file.
  *
  * @author Jet Tan
  */

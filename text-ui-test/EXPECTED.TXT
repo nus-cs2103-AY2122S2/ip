@@ -53,7 +53,7 @@ Usage: deadline <description> /by <time>
 Usage: deadline <description> /by <time>
 Usage: deadline <description> /by <time>
 ________________________________
-Deadline description cannot be empty.
+duke.Deadline description cannot be empty.
 ________________________________
 
 ________________________________

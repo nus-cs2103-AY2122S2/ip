@@ -1,8 +1,10 @@
+package duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * The Deadline class.
+ * The duke.Deadline class.
  *
  * @author Jet Tan
  */
@@ -10,9 +12,9 @@ public class Deadline extends Task {
     private final LocalDateTime by;
 
     /**
-     * Constructor for a new instance of Deadline, containing the description and deadline of the task.
+     * Constructor for a new instance of duke.Deadline, containing the description and deadline of the task.
      *
-     * @param description The description of the Task.
+     * @param description The description of the duke.Task.
      * @param by The desired deadline
      */
     public Deadline(String description, String by) {

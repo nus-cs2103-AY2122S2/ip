@@ -1,7 +1,9 @@
+package duke;
+
 import java.io.IOException;
 
 /**
- * The Parser class, containing the parsing logic for the bot.
+ * The duke.Parser class, containing the parsing logic for the bot.
  *
  * @author Jet Tan
  */
@@ -9,7 +11,7 @@ public class Parser {
     /**
      * Processes the input.
      *
-     * @throws DukeException InvalidInputException, EmptyDescDescription, UnknownCommandException
+     * @throws DukeException duke.InvalidInputException, EmptyDescDescription, duke.UnknownCommandException
      */
     public static void process(String input) throws DukeException, IOException {
         String[] arr = input.split(" ");
@@ -58,7 +60,7 @@ public class Parser {
             String desc = input.replaceFirst("todo", "").trim();
             Todo newTodo = new Todo(desc);
             if (desc.equals("")) {
-                throw new EmptyDescException(Ui.getBorder() + "Todo description cannot be empty.\n" + Ui.getBorder());
+                throw new EmptyDescException(Ui.getBorder() + "duke.Todo description cannot be empty.\n" + Ui.getBorder());
             }
             TaskList.getTasks().add(newTodo);
             System.out.println(Ui.successMessage(newTodo));
@@ -75,7 +77,7 @@ public class Parser {
             }
             String desc = descDateTime[0];
             if (desc.equals("")) {
-                throw new EmptyDescException(Ui.getBorder() + "Event description cannot be empty.\n" + Ui.getBorder());
+                throw new EmptyDescException(Ui.getBorder() + "duke.Event description cannot be empty.\n" + Ui.getBorder());
             }
             String dateTime = descDateTime[1].trim();
             Event newEvent = new Event(desc, dateTime);
@@ -97,7 +99,7 @@ public class Parser {
             String desc = descTimePair[0];
             if (desc.equals("")) {
                 throw new EmptyDescException(
-                        Ui.getBorder() + "Deadline description cannot be empty.\n" + Ui.getBorder());
+                        Ui.getBorder() + "duke.Deadline description cannot be empty.\n" + Ui.getBorder());
             }
             String dateTime = descTimePair[1].trim();
             Deadline newDeadline = new Deadline(desc, dateTime);

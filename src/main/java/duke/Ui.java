@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * The UI class, containing various methods relating to the UI.
  *
