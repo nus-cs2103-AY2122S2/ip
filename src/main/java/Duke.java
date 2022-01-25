@@ -138,18 +138,18 @@ public class Duke {
         }
         case "event": {
             if (!input.contains("/at")) {
-                throw new InvalidInputException("Usage: event <description> /at <time>");
+                throw new InvalidInputException("Usage: event <description> /at <YYYY-MM-DD> <24-hr time, e.g. 2359>");
             }
-            String[] descTimePair = input.replaceFirst("event", "").trim().split("/at");
-            if (descTimePair.length < 2) {
-                throw new InvalidInputException("Usage: event <description> /at <time>");
+            String[] descDateTime = input.replaceFirst("event", "").trim().split("/at");
+            if (descDateTime.length < 2) {
+                throw new InvalidInputException("Usage: event <description> /at <YYYY-MM-DD> <24-hr time, e.g. 2359>");
             }
-            String desc = descTimePair[0];
+            String desc = descDateTime[0];
             if (desc.equals("")) {
                 throw new EmptyDescException(BORDER + "Event description cannot be empty.\n" + BORDER);
             }
-            String time = descTimePair[1];
-            Event newEvent = new Event(desc, time);
+            String dateTime = descDateTime[1].trim();
+            Event newEvent = new Event(desc, dateTime);
             TASKS.add(newEvent);
             System.out.println(successMessage(newEvent));
             saveToFile();
@@ -157,18 +157,20 @@ public class Duke {
         }
         case "deadline": {
             if (!input.contains("/by")) {
-                throw new InvalidInputException("Usage: deadline <description> /by <time>");
+                throw new InvalidInputException(
+                        "Usage: deadline <description> /by <YYYY-MM-DD> <24-hr time, e.g. 2359>");
             }
             String[] descTimePair = input.replaceFirst("deadline", "").trim().split("/by");
             if (descTimePair.length < 2) {
-                throw new InvalidInputException("Usage: deadline <description> /by <time>");
+                throw new InvalidInputException(
+                        "Usage: deadline <description> /by <YYYY-MM-DD> <24-hr time, e.g. 2359>");
             }
             String desc = descTimePair[0];
             if (desc.equals("")) {
                 throw new EmptyDescException(BORDER + "Deadline description cannot be empty.\n" + BORDER);
             }
-            String time = descTimePair[1];
-            Deadline newDeadline = new Deadline(desc, time);
+            String dateTime = descTimePair[1].trim();
+            Deadline newDeadline = new Deadline(desc, dateTime);
             TASKS.add(newDeadline);
             System.out.println(successMessage(newDeadline));
             saveToFile();
