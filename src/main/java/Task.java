@@ -5,4 +5,12 @@ public abstract class Task {
     public Task(String title) {
         this.title = title;
     }
+
+    public void setChecked() {
+        this.checked = true;
+    }
+
+    public void setUnChecked(){
+        this.checked = false;
+    }
 }

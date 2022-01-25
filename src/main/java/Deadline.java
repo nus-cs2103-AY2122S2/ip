@@ -5,4 +5,12 @@ public class Deadline extends Task{
         super(title);
         this.deadline = deadline;
     }
+
+    public String toString(){
+        if (this.checked) {
+            return "[D][X] " + this.title + "(by: " + this.deadline + ")";
+        } else {
+            return "[D][ ] " + this.title + "(by: " + this.deadline + ")";
+        }
+    }
 }
