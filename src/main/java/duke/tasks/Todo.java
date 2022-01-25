@@ -12,7 +12,7 @@ public class Todo extends Task {
         return "[T]" + super.toString();
     }
 
-    public static Todo createTask(String[] tokens) throws DukeException {
+    protected static Todo createTask(String[] tokens) throws DukeException {
         String item = "";
         if (tokens.length == 1)
             throw new DukeException("The description of a todo task cannot be empty!");

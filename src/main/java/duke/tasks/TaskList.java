@@ -1,4 +1,4 @@
-package duke.managers;
+package duke.tasks;
 
 import java.io.Serializable;
 import java.util.ArrayList;

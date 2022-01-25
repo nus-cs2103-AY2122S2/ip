@@ -34,7 +34,7 @@ public class Deadline extends Task {
         }
     }
 
-    public static Deadline createTask(String[] tokens) throws DukeException {
+    protected static Deadline createTask(String[] tokens) throws DukeException {
         String item = "";
         int idx = 0;
         for (;idx < tokens.length; idx++) {

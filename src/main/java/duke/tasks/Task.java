@@ -12,7 +12,7 @@ public abstract class Task implements Serializable {
         completed = false;
     }
 
-    public void setCompleted(boolean value) {
+    protected void setCompleted(boolean value) {
         completed = value;
     }
 
