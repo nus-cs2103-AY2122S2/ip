@@ -169,4 +169,33 @@ public class TaskList {
             throw new DukeOutOfBoundException("OOPS!!! Please double check the task number");
         }
     }
+
+    public void findTask(UserInput userInput) throws DukeException {
+        if (!userInput.getTime().equals("")) {
+            // throw wrong command exception
+            throw new DukeCommandDoesNotExistException("OOPS!!! This command does not exist.");
+        }
+
+        ArrayList<Task> arrayList = new ArrayList<>();
+
+        Ui.drawDivider();
+        if (list.size() == 0) {
+            System.out.println("Nothing on your list!");
+        } else {
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).getTaskName().contains(userInput.getDescription())) {
+                    arrayList.add(list.get(i));
+                }
+            }
+            if (arrayList.size() > 0) {
+                System.out.println("Here are the matching tasks in your list:");
+                for (int j = 0; j < arrayList.size(); j++) {
+                    System.out.println((j + 1) + "." + arrayList.get(j).toString());
+                }
+            } else {
+                System.out.println("OOPS!!! There are no matching tasks in your list!");
+            }
+        }
+        Ui.drawDivider();
+    }
 }
