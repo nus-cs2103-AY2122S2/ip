@@ -23,7 +23,7 @@ public class Deadline extends Task {
 
     @Override
     public String saveString() {
-        return "T" + "|" + (this.isDone ? "1" : "0") + "|" + this.description + "|" + by;
+        return "D" + "|" + (this.isDone ? "1" : "0") + "|" + this.description + "|" + by;
     }
 
     @Override
