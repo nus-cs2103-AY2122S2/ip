@@ -1,4 +1,4 @@
-package main.java.responses;
+package main.java.duke.responses;
 /**
  * This is an interface of a Response object
  */

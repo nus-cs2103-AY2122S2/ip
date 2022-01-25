@@ -1,6 +1,6 @@
-package main.java.dukeexceptions;
+package main.java.duke.dukeexceptions;
 
-public class ToDoException extends DukeException {
+public class ToDoException extends main.java.duke.dukeexceptions.DukeException {
     public ToDoException(String msg) {
         super(msg);
     }

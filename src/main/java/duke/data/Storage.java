@@ -1,10 +1,9 @@
 package main.java.duke.data;
 
-import main.java.data.chatbot.TaskList;
-import main.java.task.Deadline;
-import main.java.task.Event;
-import main.java.task.Task;
-import main.java.task.ToDo;
+import main.java.duke.task.Deadline;
+import main.java.duke.task.Event;
+import main.java.duke.task.Task;
+import main.java.duke.task.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;

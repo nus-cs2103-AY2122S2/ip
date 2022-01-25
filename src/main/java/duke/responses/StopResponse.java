@@ -1,4 +1,4 @@
-package main.java.responses;
+package main.java.duke.responses;
 
 /**
  * Response created at the termination of the Chatbot.

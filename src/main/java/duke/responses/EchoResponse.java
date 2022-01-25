@@ -1,4 +1,4 @@
-package main.java.responses;
+package main.java.duke.responses;
 
 /**
  * Type of response that is created to echo a response.

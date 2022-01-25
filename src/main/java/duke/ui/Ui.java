@@ -1,8 +1,8 @@
-package main.java.ui;
+package main.java.duke.ui;
 
-import main.java.Command;
-import main.java.dukeexceptions.ForeignException;
-import main.java.responses.Response;
+import main.java.duke.Command;
+import main.java.duke.dukeexceptions.ForeignException;
+import main.java.duke.responses.Response;
 
 import java.util.ArrayList;
 import java.util.Arrays;

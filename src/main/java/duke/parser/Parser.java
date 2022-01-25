@@ -1,15 +1,15 @@
-package main.java.parser;
+package main.java.duke.parser;
 
-import main.java.Command;
-import main.java.data.Storage;
-import main.java.data.TaskList;
-import main.java.dukeexceptions.DukeException;
-import main.java.dukeexceptions.ToDoException;
-import main.java.responses.*;
-import main.java.task.Deadline;
-import main.java.task.Event;
-import main.java.task.Task;
-import main.java.task.ToDo;
+import main.java.duke.data.TaskList;
+import main.java.duke.Command;
+import main.java.duke.data.Storage;
+import main.java.duke.responses.*;
+import main.java.duke.task.Deadline;
+import main.java.duke.task.Event;
+import main.java.duke.task.Task;
+import main.java.duke.task.ToDo;
+import main.java.duke.dukeexceptions.DukeException;
+import main.java.duke.dukeexceptions.ToDoException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public class Parser {
     
     public Response getResponse(Command cmd , String Stringcmd, Storage store, TaskList runningTaskList) {
 
-        String[] stringCmdArr = Stringcmd.split("");
+        String[] stringCmdArr = Stringcmd.split(" ");
         System.out.println("hi");
         System.out.println(cmd);
         try {
@@ -33,7 +33,6 @@ public class Parser {
             String[] ans;
             Task tempTask;
             switch (cmd) {
-
                 case delete:
                     index = Integer.parseInt(stringCmdArr[1]);
                     return new DeleteResponse(runningTaskList.removeTask(index), runningTaskList.taskLength());
@@ -43,13 +42,13 @@ public class Parser {
 
                 case mark:
                     index = Integer.parseInt(stringCmdArr[1]);
-                    runningTaskList.markTask(index);
-                    return new MarkResponse(runningTaskList.getTask(index));
+                    runningTaskList.markTask(index - 1);
+                    return new MarkResponse(runningTaskList.getTask(index - 1));
 
                 case unmark:
                     index = Integer.parseInt(stringCmdArr[1]);
-                    runningTaskList.unMarkTask(index);
-                    return new UnMarkResponse(runningTaskList.getTask(index));
+                    runningTaskList.unMarkTask(index - 1);
+                    return new UnMarkResponse(runningTaskList.getTask(index - 1));
 
                 case todo:
                     ans = Stringcmd.split("todo ");

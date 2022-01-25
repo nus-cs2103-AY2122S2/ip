@@ -1,4 +1,4 @@
-package main.java.task;
+package main.java.duke.task;
 
 /**
  * A type of task.
