@@ -32,7 +32,7 @@ public class Storage {
                     tasks.add(new Todo(taskTitle, status));
 
                 } else if (strTask.startsWith("[D")) {
-                    String[] taskInfo = strTask.substring(7).split(" \\(by: ");
+                    String[] taskInfo = strTask.substring(7).split("\\(by:");
                     String time = taskInfo[1].substring(0, taskInfo[1].length() - 1);
                     SimpleDateFormat parser = new SimpleDateFormat("d/M/yy HH:mm");
                     try {
@@ -43,7 +43,7 @@ public class Storage {
                     }
 
                 } else if (strTask.startsWith("[E")) {
-                    String[] taskInfo = strTask.substring(7).split(" \\(at: ");
+                    String[] taskInfo = strTask.substring(7).split("\\(at:");
                     String time = taskInfo[1].substring(0, taskInfo[1].length() - 1);
                     SimpleDateFormat parser = new SimpleDateFormat("d/M/yy HH:mm");
                     try {
@@ -72,7 +72,7 @@ public class Storage {
         try {
             StringBuilder strBuilder = new StringBuilder();
             for (Task task : tasks) {
-                strBuilder.append(task).append("\n");
+                strBuilder.append(task.toString()).append("\n");
             }
             Files.writeString(filepath, strBuilder.toString());
         } catch (IOException e) {

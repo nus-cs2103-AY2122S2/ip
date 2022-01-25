@@ -65,7 +65,7 @@ public class Parser {
                 if (splitCommand.length == 1 || splitCommand[1].isBlank()) {
                     throw new MissingArgumentException("Missing name and time");
                 } else {
-                    String[] taskArguments = splitCommand[1].split("/at ", 2);
+                    String[] taskArguments = splitCommand[1].split("/at", 2);
                     if (taskArguments[0].isBlank()) {
                         throw new MissingArgumentException("Missing name");
                     } else if (taskArguments.length == 1 || taskArguments[1].isBlank()) {
@@ -87,7 +87,7 @@ public class Parser {
                 if (splitCommand.length == 1 || splitCommand[1].isBlank()) {
                     throw new MissingArgumentException("Missing name and time");
                 } else {
-                    String[] taskArguments = splitCommand[1].split("/by ", 2);
+                    String[] taskArguments = splitCommand[1].split("/by", 2);
                     if (taskArguments[0].isBlank()) {
                         throw new MissingArgumentException("Missing name");
                     } else if (taskArguments.length == 1 || taskArguments[1].isBlank()) {
