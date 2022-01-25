@@ -1,8 +1,10 @@
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
 
 public class Puke {
-    public static String line = "____________________________________________________________\n";
+    public static final String LINE = "____________________________________________________________\n";
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -13,8 +15,8 @@ public class Puke {
                 + "  | |__/| |_| |   <  __/\n"
                 + "  |_|    \\__,_|_|\\_\\___|\n";
 
-        System.out.print(line + logo + "Hello! I'm Puke, your friendly neighbourhood chatbot!\n"
-                + "What do you want to do?\n" + line);
+        System.out.print(LINE + logo + "Hello! I'm Puke, your friendly neighbourhood chatbot!\n"
+                + "What do you want to do?\n" + LINE);
 
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -37,24 +39,24 @@ public class Puke {
                 switch (command) {
                 case "list":
                     if (argument == null) {
-                        list_tasks(tasks);
+                        listTasks(tasks);
                     } else {
                         System.out.println("I don't need any argument for list..");
                     }
                     break;
                 case "mark":
-                    mark_task(tasks, Integer.parseInt(argument));
+                    markTask(tasks, Integer.parseInt(argument));
                     break;
                 case "unmark":
-                    unmark_task(tasks, Integer.parseInt(argument));
+                    unmarkTask(tasks, Integer.parseInt(argument));
                     break;
                 case "todo":
                 case "deadline":
                 case "event":
-                    add_task(tasks, command, argument);
+                    addTask(tasks, command, argument);
                     break;
                 case "delete":
-                    delete_task(tasks, Integer.parseInt(argument));
+                    deleteTask(tasks, Integer.parseInt(argument));
                     break;
                 default:
                     System.out.println("Are you sure you're making sense?");
@@ -66,12 +68,12 @@ public class Puke {
                 System.out.println("I'll need a valid task number for it..");
             }
 
-            System.out.print(line);
+            System.out.print(LINE);
         }
-        System.out.print("Alright bye. Come back to Puke anytime!\n" + line);
+        System.out.print("Alright bye. Come back to Puke anytime!\n" + LINE);
     }
 
-    public static void list_tasks(ArrayList<Task> tasks) {
+    public static void listTasks(ArrayList<Task> tasks) {
         if (tasks.size() == 0) {
             System.out.println("You have no task right now!");
             return;
@@ -85,7 +87,7 @@ public class Puke {
         }
     }
 
-    public static void mark_task(ArrayList<Task> tasks, int taskNo) throws DukeException {
+    public static void markTask(ArrayList<Task> tasks, int taskNo) throws DukeException {
         if (taskNo < 1 || taskNo > tasks.size()) {
             throw new DukeException(String.format("%d is not a valid task number!", taskNo));
         }
@@ -97,7 +99,7 @@ public class Puke {
         System.out.println("Kudos! I've marked this task as done:\n  " + t);
     }
 
-    public static void unmark_task(ArrayList<Task> tasks, int taskNo) throws DukeException {
+    public static void unmarkTask(ArrayList<Task> tasks, int taskNo) throws DukeException {
         if (taskNo < 1 || taskNo > tasks.size()) {
             throw new DukeException(String.format("%d is not a valid task number!", taskNo));
         }
@@ -109,7 +111,7 @@ public class Puke {
         System.out.println("Alright, I've marked this task as not done yet:\n  " + t);
     }
 
-    public static void add_task(ArrayList<Task> tasks, String type, String args) throws DukeException {
+    public static void addTask(ArrayList<Task> tasks, String type, String args) throws DukeException {
         if (args == null) {
             throw new DukeException("I'll need a description for the task..");
         }
@@ -137,7 +139,7 @@ public class Puke {
                 + (Task.getNoOfTasks() <= 1 ? " task" : " tasks") + " in the list.");
     }
 
-    public static void delete_task(ArrayList<Task> tasks, int taskNo) throws DukeException {
+    public static void deleteTask(ArrayList<Task> tasks, int taskNo) throws DukeException {
         if (taskNo < 1 || taskNo > tasks.size()) {
             throw new DukeException(String.format("%d is not a valid task number!", taskNo));
         }
