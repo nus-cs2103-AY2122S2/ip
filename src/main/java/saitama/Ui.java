@@ -3,6 +3,9 @@ package saitama;
 import java.util.Scanner;
 
 public class Ui {
+    /**
+     * Shows the welcome logo and message.
+     */
     public void showWelcome() {
         String logo = "   _____       _ _                        \n" +
                 "  / ____|     (_) |                       \n" +
@@ -18,19 +21,36 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Prints a line.
+     */
     public void showLine() {
         System.out.println("____________________________________________________________");
     }
 
+    /**
+     * Reads the user input.
+     * 
+     * @return The trimmed user input.
+     */
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
+        sc.close();
         return sc.nextLine().trim();
     }
 
+    /**
+     * Prints the error message.
+     * 
+     * @param errorMessage The error message to be printed.
+     */
     public void showError(String errorMessage) {
         System.out.println(errorMessage);
     }
 
+    /**
+     * Prints the saving message.
+     */
     public void showSave() {
         System.out.println("OK...");
         showLine();
