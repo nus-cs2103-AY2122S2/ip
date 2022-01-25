@@ -1,9 +1,34 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
+import java.util.*;
 
 public class Duke {
     public static final String botName = "duke";
+    public static final DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+            .parseCaseInsensitive()
+            .appendPattern("yyyy-MM-dd HHmm")
+            .toFormatter(Locale.ENGLISH);
+
+    public enum SortType {
+        DATE,
+        CONTENT;
+
+        @Override
+        public String toString() {
+            return this.name().toLowerCase();
+        }
+
+        public boolean equals(String input) {
+            if (input.equalsIgnoreCase(this.name())) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
 
     public enum Command {
         BYE,
@@ -13,6 +38,7 @@ public class Duke {
         DELETE,
         DEADLINE,
         EVENT,
+        SORT,
         TODO;
 
         public boolean equals(String input) {
@@ -24,12 +50,30 @@ public class Duke {
         }
     }
 
+    public static void sortTaskList(ArrayList<Task> tasks, SortType sortType) {
+        Comparator<Task> comparator = new Comparator<Task>() {
+            @Override
+            public int compare(Task task1, Task task2) {
+                if (sortType.equals(SortType.DATE)) {
+                    return task1.compareTo(task2);
+                } else if (sortType.equals(SortType.CONTENT)) {
+                    return task1.content.compareTo(task2.content);
+                } else {
+                    return -1;
+                }
+            }
+
+        };
+        tasks.sort(comparator);
+        saveAsTextFile(tasks);
+        Printer.echoForSort(tasks, sortType);
+    }
+
     public static void saveAsTextFile(ArrayList<Task> tasks) {
         System.out.println();
         String filename = botName + ".txt";
         String path = "./data";
         File file = new File(path, filename);
-        System.out.println(file.toString());
         BufferedWriter bufferedWriter = null;
         try {
             if (!file.exists()) {
@@ -158,6 +202,12 @@ public class Duke {
                     } catch (DukeMissingArgumentException e) {
                         System.out.println(e);
                     }
+                } else if (Command.SORT.equals(firstArg)) {
+                    try {
+                        throw new DukeMissingArgumentException("sort type");
+                    } catch (DukeMissingArgumentException e){
+                        System.out.println(e);
+                    }
                 } else {
                     try {
                         throw new DukeCommandException(firstArg);
@@ -183,8 +233,15 @@ public class Duke {
                     } else {
                         String content = input.substring(firstArg.length() + 1, indexOfBy - 1);
                         String by = input.substring(indexOfBy + 4);
-                        Task taskObj = new Deadline(content, by);
-                        addTask(taskList, taskObj, Command.DEADLINE, inputArray);
+                        LocalDateTime date = null;
+                        try {
+                            date = LocalDateTime.parse(by, formatter);
+                            Task taskObj = new Deadline(content, date);
+                            addTask(taskList, taskObj, Command.DEADLINE, inputArray);
+                        } catch (DateTimeParseException e) {
+                            System.out.println("Wrong date format!");
+                            e.printStackTrace();
+                        }
                     }
                 } else if (Command.EVENT.equals(firstArg)) {
                     int indexOfAt = input.indexOf("\\at ");
@@ -197,13 +254,31 @@ public class Duke {
                     } else {
                         String content = input.substring(firstArg.length() + 1, indexOfAt - 1);
                         String at = input.substring(indexOfAt + 4);
-                        Task taskObj = new Event(content, at);
-                        addTask(taskList, taskObj, Command.DEADLINE, inputArray);
+                        LocalDateTime date = null;
+                        try {
+                            date = LocalDateTime.parse(at, formatter);
+                        } catch (DateTimeParseException e) {
+                            System.out.println("Wrong date format!");
+                        }
+                        Task taskObj = new Event(content, date);
+                        addTask(taskList, taskObj, Command.EVENT, inputArray);
                     }
                 } else if (Command.TODO.equals(firstArg)) {
                     String content = input.substring(firstArg.length() + 1);
                     Task taskObj = new ToDo(content);
                     addTask(taskList, taskObj, Command.DEADLINE, inputArray);
+                } else if (Command.SORT.equals(firstArg)) {
+                    if (SortType.DATE.equals(inputArray[1])) {
+                        sortTaskList(taskList, SortType.DATE);
+                    } else if (SortType.CONTENT.equals(inputArray[1])) {
+                        sortTaskList(taskList, SortType.CONTENT);
+                    } else {
+                        try {
+                            throw new DukeInvalidArgumentException(inputArray[1]);
+                        } catch (DukeInvalidArgumentException e) {
+                            System.out.println(e.toString());
+                        }
+                    }
                 } else {
                     try {
                         throw new DukeCommandException(firstArg);

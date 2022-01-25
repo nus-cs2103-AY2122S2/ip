@@ -1,2 +1,3 @@
-[D][ ] hello (by: 2pm)
-[E][ ] hello (at: 222)
+[D][ ] alo (by: 22:00 Monday, 12-05-2022)
+[D][ ] bruh (by: 21:00 Monday, 12-05-2022)
+[D][ ] bruh (by: 22:00 Monday, 12-05-2022)

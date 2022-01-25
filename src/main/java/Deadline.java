@@ -1,16 +1,20 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
 public class Deadline extends Task {
-    private String by;
-    public Deadline(String content, String by) {
-        super(content);
-        this.by = by;
+    public Deadline(String content, LocalDateTime date) {
+        super(content, date);
     }
 
     @Override
     public String toString() {
         if (getIsDone()) {
-            return "[D][X] " + getContent() + " (by: " + by + ")";
+            return "[D][X] " + getContent() + " (by: " + date
+                    .format(Printer.formatter) + ")";
         } else {
-            return "[D][ ] " + getContent() + " (by: " + by + ")";
+            return "[D][ ] " + getContent() + " (by: " + date
+                    .format(Printer.formatter) + ")";
         }
     }
 }

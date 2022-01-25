@@ -1,12 +1,21 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Task {
+public class Task implements Comparable<Task>{
     protected boolean isDone;
     protected String content;
+    protected LocalDateTime date;
 
     public Task(String content) {
         this.isDone = false;
         this.content = content;
+        this.date = null;
+    }
+
+    public Task(String content, LocalDateTime date) {
+        this.isDone = false;
+        this.content = content;
+        this.date = date;
     }
 
     public boolean getIsDone() {
@@ -40,5 +49,14 @@ public class Task {
         System.out.println("    " + this.toString());
         Printer.printDivider();
         Duke.saveAsTextFile(tasks);
+    }
+
+    @Override
+    public int compareTo(Task task) {
+        if (this.date != null) {
+            return this.date.compareTo(task.date);
+        } else {
+            return this.content.compareTo(task.content);
+        }
     }
 }

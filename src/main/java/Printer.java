@@ -1,7 +1,12 @@
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Printer {
     public static String divider = "    ____________________________________________________________";
+    public static DateTimeFormatter formatter = DateTimeFormatter
+            .ofPattern("HH:mm EEEE, MM-dd-yyyy").localizedBy(Locale.ENGLISH);
+
     public static void printEndMessage() {
         printDivider();
         System.out.println("    Bye. Hope to see you again soon!");
@@ -37,4 +42,14 @@ public class Printer {
         System.out.println("      " + taskObj.toString());
         System.out.println("    Now you got " + (listLength) + " tasks in the list!");
         printDivider();
-    }}
+    }
+
+    public static void echoForSort(ArrayList<Task> tasks, Duke.SortType sortType) {
+        printDivider();
+        System.out.println("    Sorting your tasks by " + sortType.toString() + ":");
+        for (Task task : tasks) {
+            System.out.println("    " + task.toString());
+        }
+        printDivider();
+    }
+}
