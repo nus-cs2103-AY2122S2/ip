@@ -22,9 +22,11 @@ public class Mike {
     }
 
     /**
-     * Calls methods relevant to initialising "Mike".
+     * Calls various methods relevant to initiating Mike.
+     * These include printing a greeting, loading a previously used list from the hard drive
+     * and initialising the Scanner to read in user inputs.
      */
-    void run() {
+    public void run() {
         ui.printGreeting();
         ui.printStartingInstruction();
         loadStoredList();
@@ -46,23 +48,28 @@ public class Mike {
         this.close();
     }
 
-    void close() {
+    private void close() {
         ui.printGoodbyeMessage();
     }
 
-    void noCharactersEnteredResponse() {
+    private void noCharactersEnteredResponse() {
         ui.printNoCharactersMessage();
     }
 
-    void requestNextInput() {
+    private void requestNextInput() {
         ui.printNextCommandInstruction();
     }
 
-    void printList() {
+    private void printList() {
         String listForPrint = taskList.getListForPrint();
         ui.printReply(listForPrint);
     }
 
+    /**
+     *
+     * @param userInput
+     * @return
+     */
     public boolean isExitCommand(String userInput) {
         Parser parser = new Parser(userInput);
         return parser.isBye();
