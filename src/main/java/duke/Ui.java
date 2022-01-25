@@ -1,3 +1,5 @@
+package duke;
+
 public class Ui {
     // greeting message
     String greetings = "    Hi there! 👋 I'm Duke\n"
