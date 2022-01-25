@@ -8,7 +8,11 @@ import java.io.FileWriter;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-import sana.task.*;
+import sana.task.Deadline;
+import sana.task.Event;
+import sana.task.Task;
+import sana.task.ToDo;
+
 
 /**
  * The Memory class abstracts the leading and saving of tasks given to Sana
@@ -18,10 +22,10 @@ import sana.task.*;
  */
 public class Memory {
     /** This variable is the path where the taskList is saved */
-    private final static String memPath = "data/sana.txt";
+    private static final String MEM_PATH = "data/sana.txt";
 
     /** This variable is the path for directory that stores the memory file */
-    private final static String dirPath = "data";
+    private static final String DIR_PATH = "data";
 
     /** This variable represents the File object that stores the taskList */
     private File memFile;
@@ -37,11 +41,11 @@ public class Memory {
      * Create new sana.txt file and data dir in case of corruption
      */
     private void initialiseMem() {
-        File dir = new File(dirPath);
+        File dir = new File(DIR_PATH);
         if (!dir.exists()) {
             dir.mkdir();
         }
-        memFile = new File(memPath);
+        memFile = new File(MEM_PATH);
         if (!memFile.exists()) {
             try {
                 memFile.createNewFile();
@@ -49,7 +53,7 @@ public class Memory {
                 e.printStackTrace();
             }
         }
-        this.memFile = new File(memPath);
+        this.memFile = new File(MEM_PATH);
     }
 
     /**

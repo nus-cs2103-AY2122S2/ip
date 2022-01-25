@@ -10,13 +10,13 @@ public class IncompleteCommandException extends Exception {
     /**
      * The message Sana says when the message is incomplete
      */
-    private static String message = "MATE, finish your sentence!";
+    private static final String MESSAGE = "MATE, finish your sentence!";
 
     public IncompleteCommandException() {
-        super(IncompleteCommandException.message);
+        super(IncompleteCommandException.MESSAGE);
     }
 
     public String getMessage() {
-        return IncompleteCommandException.message;
+        return IncompleteCommandException.MESSAGE;
     }
 }

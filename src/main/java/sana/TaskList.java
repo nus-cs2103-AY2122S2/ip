@@ -2,7 +2,7 @@ package sana;
 
 import java.util.LinkedList;
 
-import sana.task.*;
+import sana.task.Task;
 
 /**
  * This object represents a list of tasks

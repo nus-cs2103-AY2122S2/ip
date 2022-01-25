@@ -10,13 +10,13 @@ public class OutOfBoundsTaskException extends Exception {
     /**
      * The message Sana says when encountering this sana.exception
      */
-    private static String message = "Heyyy, I can't find this sana.task..";
+    private static final String MESSAGE = "Heyyy, I can't find this sana.task..";
 
     public OutOfBoundsTaskException() {
-        super(OutOfBoundsTaskException.message);
+        super(OutOfBoundsTaskException.MESSAGE);
     }
 
     public String getMessage() {
-        return OutOfBoundsTaskException.message;
+        return OutOfBoundsTaskException.MESSAGE;
     }
 }

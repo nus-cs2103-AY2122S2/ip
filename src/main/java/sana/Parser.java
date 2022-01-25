@@ -1,6 +1,7 @@
 package sana;
 
-import sana.exception.*;
+import sana.exception.IncompleteCommandException;
+import sana.exception.UnknownCommandException;
 
 /**
  * Parser represents a command parser that parses the user commands to Sana
