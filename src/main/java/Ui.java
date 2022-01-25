@@ -46,6 +46,10 @@ public class Ui {
         System.out.println("Now you have " + taskList.getSize() + " tasks in the list");
     }
 
+    public void emptyList() {
+        System.out.println("You have no tasks at the moment!");
+    }
+
     public void printDeletedTask(Task task) {
         System.out.println(task);
     }

@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.util.Arrays;
 
 public class Parser {
 
@@ -27,6 +26,8 @@ public class Parser {
             return new MarkCommand(Integer.parseInt(description));
         case "unmark":
             return new UnmarkCommand(Integer.parseInt(description));
+        case "filter":
+            return new FilterCommand(description);
         default:
             throw new FunBoxExceptions("ERROR! I do not know what the commands means :<");
         }

@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class TaskList {
     private ArrayList<Task> taskList;
@@ -32,10 +34,16 @@ public class TaskList {
     }
 
     public void printTasks(Ui ui) {
-        ui.printListHeader();
-        for (int i = 0; i < this.taskList.size(); i++) {
-            ui.printTask(i + 1, this.taskList.get(i));
+
+        if (this.getSize() >= 1) {
+            ui.printListHeader();
+            for (int i = 0; i < this.taskList.size(); i++) {
+                ui.printTask(i + 1, this.taskList.get(i));
+            }
+        } else {
+            ui.emptyList();
         }
+
     }
 
     public void setTaskUndone(int index) {
@@ -44,5 +52,55 @@ public class TaskList {
 
     public int getSize() {
         return this.taskList.size();
+    }
+
+    public ArrayList<Task> getTaskList() {
+        return this.taskList;
+    }
+
+    /**
+     * Gets the tasks found on the date requested by user and prints it out.
+     *
+     * @param taskArr The commands provided by the users
+     */
+    public void filterTasks(String filterDate, TaskList taskList) throws FunBoxExceptions {
+        LocalDate date;
+        try {
+            date = LocalDate.parse(filterDate);
+            ArrayList<Task> eventList = new ArrayList<>(taskList.getTaskList());
+            ArrayList<Task> deadlineList = new ArrayList<>(taskList.getTaskList());
+            eventList.removeIf(task -> (task.type.contains("todo") || task.type.contains("deadline")));
+            deadlineList.removeIf(task -> (task.type.contains("todo") || task.type.contains("event")));
+
+            int counter = 0;
+            int eventSize = eventList.size();
+            int deadlineSize = deadlineList.size();
+
+
+            for (int i = 0; i < eventSize; i++) {
+                Event temp = (Event) eventList.get(i);
+                if (temp.date.equals(date)) {
+                    counter++;
+                    System.out.println(counter + "." + temp);
+                }
+            }
+
+            for (int i = 0; i < deadlineSize; i++) {
+                Deadline temp = (Deadline) deadlineList.get(i);
+                if (temp.date.equals(date)) {
+                    counter++;
+                    System.out.println(counter + "." + temp);
+                }
+            }
+
+            if (counter == 0) {
+                System.out.println("No tasks found on this date! You are free!");
+            }
+
+        } catch (DateTimeParseException e) {
+            throw new FunBoxExceptions("ERROR! Please ensure date is in the correct format: yyyy-mm-dd");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new FunBoxExceptions("ERROR! Date not found in command `filter`!");
+        }
     }
 }
