@@ -1,11 +1,7 @@
-todo borrow book
-todo go run
-deadline assignment /by 6th June
-event wedding /at 20th June
+todo join sports club
+event wedding /at 12/12/2022
+deadline assignment2 /by 1/3/1997
 mark 1
-delete 1
 mark 2
-unmark 1
-hello
-delete 3
-bye
+unmark 3
+delete 1

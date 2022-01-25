@@ -11,6 +11,30 @@ public class DukeCommands {
         todo, deadline, event, mark, unmark, delete
     }
 
+    public enum ADD_COMMANDS {
+        todo, deadline, event
+    }
+
+    public enum OUTPUT_COMMANDS {
+        list
+    }
+
+    public enum EXIT_COMMANDS {
+        bye
+    }
+
+    public enum MARK_COMMANDS {
+        mark
+    }
+
+    public enum UNMARK_COMMANDS {
+        unmark
+    }
+
+    public enum DELETE_COMMANDS {
+        delete
+    }
+
    static HashMap<String, String> hashMap = new HashMap<String, String>();
 
     public static boolean isDukeCommand(String string) {
@@ -20,6 +44,21 @@ public class DukeCommands {
     public static boolean isDukeDescriptionCommand(String string) {
         return Arrays.stream(DUKE_DESCRIPTION_COMMANDS.values()).anyMatch((command) -> command.name().equals(string));
     }
+
+    public static HashMap<String, String> getTypeMap() {
+        HashMap<String, String> h = new HashMap<>();
+        h.put("list", "OUTPUT_COMMAND");
+        h.put("todo", "ADD_COMMAND");
+        h.put("event", "ADD_COMMAND");
+        h.put("deadline", "ADD_COMMAND");
+        h.put("mark", "MARK_COMMAND");
+        h.put("unmark", "UNMARK_COMMAND");
+        h.put("delete", "DELETE_COMMAND");
+        h.put("bye", "EXIT_COMMAND");
+        return h;
+    }
+
+
 
 
     public static HashMap<String, String> getDukeCommandsDescription() {
