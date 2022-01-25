@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -138,7 +140,8 @@ public class Duke {
                 }
                 break;
             case "D":
-                Deadline deadline = new Deadline(loadedTaskSplit[2], loadedTaskSplit[3]);
+                Deadline deadline = new Deadline(loadedTaskSplit[2], LocalDate.parse(loadedTaskSplit[3], DateTimeFormatter.ofPattern("MMM dd yyyy")).toString());
+                // Parse the saved format "MMM dd yyyy" into yyyy-mm-dd which is what Deadline() class requires
                 this.addTask(deadline);
                 if (loadedTaskSplit[1].equals("1")) {
                     this.markTaskDone(this.userTasks.size()-1);
