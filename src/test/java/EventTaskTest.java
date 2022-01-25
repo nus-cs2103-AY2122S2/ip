@@ -15,7 +15,7 @@ public class EventTaskTest {
      * and its methods work correctly.
      */
     @Test
-    public void testEvent() {
+    public void eventTask_constructor() {
         String eventString = "[E][ ] Chicken party (by: Oct 15 2019)";
         EventTask task = new EventTask("Chicken party", "2019-10-15");
 
