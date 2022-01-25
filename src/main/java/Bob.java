@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -135,13 +139,19 @@ public class Bob {
             if (strArr.length <= 1) {
                 throw new BobException("deadline");
             }
-            newTask = new Deadline(strArr[0].trim(), strArr[1].trim());
+            newTask = new Deadline(strArr[0].trim(), LocalDateTime.parse(strArr[1].trim()));
         } else if (Command.isEvent(taskType)) {
             String[] strArr = input.substring(5).split("/at");
             if (strArr.length <= 1) {
                 throw new BobException("event");
             }
-            newTask = new Event(strArr[0].trim(), strArr[1].trim());
+            String eventName = strArr[0].trim();
+            String[] dateTime = strArr[1].trim().split("T");
+            LocalDate date = LocalDate.parse(dateTime[0]);
+            String[] times = dateTime[1].split("-");
+            LocalTime startTime = LocalTime.parse(times[0]);
+            LocalTime endTime = LocalTime.parse(times[1]);
+            newTask = new Event(eventName, date, startTime, endTime);
         } else {
             throw new BobException("invalid input");
         }

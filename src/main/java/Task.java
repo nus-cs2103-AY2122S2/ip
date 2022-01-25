@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -15,12 +18,12 @@ public abstract class Task {
         return new Todo(input);
     };
 
-    public static Task addNewDeadline(String input, String date) {
+    public static Task addNewDeadline(String input, LocalDateTime date) {
         return new Deadline(input, date);
     }
 
-    public static Task addNewEvent(String input, String dateTime) {
-        return new Event(input, dateTime);
+    public static Task addNewEvent(String input, LocalDate date, LocalTime startTime, LocalTime endTime) {
+        return new Event(input, date, startTime, endTime);
     }
 
     public String getName() { return this.name; }
