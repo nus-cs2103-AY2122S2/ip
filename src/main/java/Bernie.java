@@ -2,7 +2,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.io.File;
-import java.io.IOException;
 
 /**
  * Bernie the bot that is the driver for the responses to the user.
@@ -11,10 +10,8 @@ import java.io.IOException;
 
 public class Bernie {
     TaskList tasks;
-    String root = System.getProperty("user.dir");
-    File tasksFile;
-    File dataDir;
     Ui ui;
+    Storage storage;
 
     enum Type {
         TODO,
@@ -30,47 +27,13 @@ public class Bernie {
      */
     Bernie() {
         this.tasks = new TaskList();
-        this.tasksFile = new File(root + "/data", "Bernie.txt");
-        this.dataDir = new File(root, "data");
         this.ui = new Ui();
+        this.storage = new Storage();
         ui.greet();
     }
 
-    /**
-     * Saves the most updated tasks whenever the tasks changes upon
-     * delete or add by writing the file. The file is saved to ./data/Bernie.txt
-     */
-    void saveTasks() {
-        try {
-            if (dataDir.exists() && tasksFile.exists()) {
-                tasks.save(tasksFile);
-            } else {
-                // create dir and file
-                dataDir.mkdir();
-                tasksFile.createNewFile();
-                tasks.save(tasksFile);
-            }
-        } catch (IOException e) {
-            ui.showErrorMsg(e.getMessage());
-        }
-    }
-
-    /**
-     * Loads the data when Bernie starts up if it exists and reads. If doesn't
-     * exist, creates the required files
-     */
-    void readTasks() {
-        try {
-            if (tasksFile.exists() && dataDir.exists()) {
-                ui.showTasksFileMsg(tasks, tasksFile);
-            } else {
-                // create dir and file
-                dataDir.mkdir();
-                tasksFile.createNewFile();
-            }
-        } catch (IOException e) {
-            ui.showErrorMsg(e.getMessage());
-        }
+    Storage getStorage() {
+        return storage;
     }
 
     /**
@@ -143,7 +106,7 @@ public class Bernie {
         } else {
             throw new BernieException("Not a valid type of task!");
         }
-        saveTasks();
+        storage.saveTasks(tasks);
         ui.showAddedMsg(newTask, tasks.numTasksLeft());
     }
 
@@ -166,7 +129,7 @@ public class Bernie {
         try {
             String taskNum = getParams(Type.DELETE, input)[0];
             Task deletedTask = tasks.deleteTask(taskNum);
-            saveTasks();
+            storage.saveTasks(tasks);
             ui.showDeleteMsg(deletedTask, tasks.numTasksLeft());
         } catch (BernieException e){
             ui.showErrorMsg(e.getMessage());
@@ -334,7 +297,8 @@ public class Bernie {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Bernie bernie = new Bernie();
-        bernie.readTasks();
+        Storage storage = bernie.getStorage();
+        storage.loadTasks();
         while (true) {
             String input = sc.nextLine();
             boolean end = bernie.respond(input);

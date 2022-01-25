@@ -85,17 +85,4 @@ public class Ui {
         System.out.printf("This is now undone:\n%s\n", unmarkedTask);
         System.out.println(lineBreak);
     }
-
-    /**
-     * Prints out the message when the program loads up the task file upon
-     * starting up
-     * @param tasks TaskList
-     * @param tasksFile File
-     * @throws IOException
-     */
-    void showTasksFileMsg(TaskList tasks, File tasksFile) throws IOException {
-        System.out.println("On the list:");
-        tasks.read(tasksFile);
-        System.out.println(lineBreak);
-    }
 }

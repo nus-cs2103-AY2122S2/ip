@@ -24,8 +24,21 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
+    int getSize() {
+        return tasks.size();
+    }
+
     boolean isEmpty() {
         return tasks.size() == 0;
+    }
+
+    /**
+     * Returns a Task that is indexed i
+     * @param i int, the index of the Task
+     * @return Task object
+     */
+    Task getTask(int i) {
+        return tasks.get(i);
     }
 
     int numTasksLeft() {
@@ -116,36 +129,5 @@ public class TaskList {
     Task deleteTask(String taskNum) {
         int taskIndex = Integer.parseInt(taskNum) - 1;
         return tasks.remove(taskIndex);
-    }
-
-    /**
-     * Saves tasks whenever the taskList changes
-     * @param tasksFile File
-     * @throws IOException for any IO errors
-     */
-    void save(File tasksFile) throws IOException {
-        FileWriter fileWriter = new FileWriter(tasksFile);
-        BufferedWriter writer = new BufferedWriter(fileWriter);
-        if (tasks.size() == 0) {
-            writer.write("NOTHING! :D");
-        }
-        for (int i = 0; i < tasks.size(); i++) {
-            Task currentTask = tasks.get(i);
-            writer.write(String.format("%d. %s\n", i + 1, currentTask));
-        }
-        writer.close();
-    }
-
-    void read(File tasksFile) throws IOException {
-        FileReader fileReader = new FileReader(tasksFile);
-        BufferedReader reader = new BufferedReader(fileReader);
-        while (true) {
-            String line = reader.readLine();
-            if (line == null) {
-                break;
-            }
-            System.out.println(line);
-        }
-        reader.close();
     }
 }
