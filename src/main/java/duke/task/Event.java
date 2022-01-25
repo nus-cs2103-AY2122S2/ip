@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -21,7 +23,7 @@ public class Event extends Task {
     }
 
     @Override
-    protected String convertToFileFormat() {
+    public String convertToFileFormat() {
         if (isDone) {
             return "E | 1 | " + name + " | " + time.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         }

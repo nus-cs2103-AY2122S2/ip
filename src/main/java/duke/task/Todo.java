@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Todo extends Task {
 
     public Todo(String name) {
@@ -14,7 +16,7 @@ public class Todo extends Task {
     }
 
     @Override
-    protected String convertToFileFormat() {
+    public String convertToFileFormat() {
         if (isDone) {
             return "T | 1 | " + name;
         }

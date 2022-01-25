@@ -1,3 +1,13 @@
+package duke.ui;
+
+import duke.exception.IncompleteInputException;
+import duke.exception.WrongInputException;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.time.format.DateTimeParseException;
 import java.util.regex.PatternSyntaxException;
 
@@ -6,7 +16,7 @@ public class Parser {
     public Parser() {
     }
 
-    protected String parseCommand(String s) throws WrongInputException {
+    public String parseCommand(String s) throws WrongInputException {
         String[] inputs = s.split(" ");
         String[] acceptableInputs = new String[]{"mark","unmark","todo","deadline","event","delete"};
         boolean isAcceptable = false;
@@ -22,7 +32,7 @@ public class Parser {
         return inputs[0];
     }
 
-    protected int parseNumericalDescription(String s, String command, int length) throws WrongInputException {
+    public int parseNumericalDescription(String s, String command, int length) throws WrongInputException {
         String[] inputs = s.split(command + " ");
         if (length == 0) {
             throw new WrongInputException("D: D: D: There are no items in the list D: D: D:");
@@ -43,7 +53,7 @@ public class Parser {
         return tasknumber - 1;
     }
 
-    protected String[] parseFormatDescription(String s, String command, String format)
+    public String[] parseFormatDescription(String s, String command, String format)
             throws WrongInputException, IncompleteInputException {
         try {
             String[] inputs = s.split(" " + format + " ");
@@ -96,7 +106,7 @@ public class Parser {
         }
     }
 
-    protected String parseStringDescription(String s, String command) throws IncompleteInputException {
+    public String parseStringDescription(String s, String command) throws IncompleteInputException {
         String[] inputs = s.split(command + " ");
         if (inputs.length == 1) {
             throw new IncompleteInputException("D: D: D: The description of a " + command +
@@ -115,7 +125,7 @@ public class Parser {
         return output.toString();
     }
 
-    protected static Task parseFileFormat(String entry) throws DateTimeParseException {
+    public static Task parseFileFormat(String entry) throws DateTimeParseException {
         String[] entrySplit = entry.split(" \\| ");
         if (entrySplit[0].equals("T")) {
             if (entrySplit[1].equals("1")) {

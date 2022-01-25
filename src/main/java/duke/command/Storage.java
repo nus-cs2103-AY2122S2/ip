@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.task.Task;
+import duke.ui.Parser;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 
@@ -22,7 +27,7 @@ public class Storage {
         reader = Files.newBufferedReader(dukePath);
     }
 
-    protected TaskList initialize() throws IOException {
+    public TaskList initialize() throws IOException {
         // assumes reader is non-empty
         TaskList tl = new TaskList();
         while (true) {
@@ -35,12 +40,12 @@ public class Storage {
         return tl;
     }
 
-    protected void addTask(Task t) throws IOException {
+    public void addTask(Task t) throws IOException {
         String newTask = t.convertToFileFormat() + "\n";
         Files.write(dukePath, newTask.getBytes(), StandardOpenOption.APPEND);
     }
 
-    protected void deleteTask(int taskIndex) throws IOException {
+    public void deleteTask(int taskIndex) throws IOException {
         List<String> currList = Files.readAllLines(dukePath);
         List<String> newList = new ArrayList<>();
         for (int i = 0; i < currList.size(); i++) {
@@ -52,7 +57,7 @@ public class Storage {
         Files.write(dukePath, newList);
     }
 
-    protected void modifyTask(int taskIndex) throws IOException {
+    public void modifyTask(int taskIndex) throws IOException {
         List<String> currList = Files.readAllLines(dukePath);
         List<String> newList = new ArrayList<>();
         for (int i = 0; i < currList.size(); i++) {

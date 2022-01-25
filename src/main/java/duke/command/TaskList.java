@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.exception.InvalidActionException;
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -11,11 +16,11 @@ public class TaskList {
         list.add(t);
     }
 
-    protected Task getLast() {
+    public Task getLast() {
         return list.get(list.size() - 1);
     }
 
-    protected int size() {
+    public int size() {
         return list.size();
     }
 
@@ -36,7 +41,7 @@ public class TaskList {
         return "deleted this item O_O:\n  " + t + "\nNow there are " + list.size() + " tasks on the list x)";
     }
 
-    protected ArrayList<Task> getItems() {
+    public ArrayList<Task> getItems() {
         return list;
     }
 }

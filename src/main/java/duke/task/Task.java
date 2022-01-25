@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.exception.InvalidActionException;
+
 public abstract class Task {
     protected String name;
     protected boolean isDone;
@@ -27,5 +31,5 @@ public abstract class Task {
         isDone = false;
     }
 
-    protected abstract String convertToFileFormat();
+    public abstract String convertToFileFormat();
 }

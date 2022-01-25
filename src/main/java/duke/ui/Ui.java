@@ -1,6 +1,9 @@
+package duke.ui;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.regex.PatternSyntaxException;
 
 public class Ui {
     private Scanner sc;
@@ -15,7 +18,7 @@ public class Ui {
                 + "|____/ \\__,_|_|\\_\\___|\n";
     }
 
-    protected String getSetupMessage() {
+    public String getSetupMessage() {
         StringBuilder s = new StringBuilder();
         s.append("Hello! I'm\n");
         s.append(logo);
@@ -23,19 +26,19 @@ public class Ui {
         return s.toString();
     }
 
-    protected String getByeMessage() {
+    public String getByeMessage() {
         return "Bye t_t";
     }
 
-    protected String getFileErrorMessage() {
+    public String getFileErrorMessage() {
         return "Error loading/parsing file ?.? Creating empty list!";
     }
 
-    protected String getIoErrorMessage() {
+    public String getIoErrorMessage() {
         return "I/O error x.x";
     }
 
-    protected String getAddTaskMessage(Task latestTask, int size) {
+    public String getAddTaskMessage(Task latestTask, int size) {
         StringBuilder s = new StringBuilder();
         s.append("added o.O:\n  ");
         s.append(latestTask.toString());
@@ -43,12 +46,12 @@ public class Ui {
         return s.toString();
     }
 
-    protected String readLine() {
+    public String readLine() {
         String command = sc.nextLine();
         return command;
     }
 
-    protected String printItems(ArrayList<Task> list) {
+    public String printItems(ArrayList<Task> list) {
         if (list.size() == 0) {
             return("There are no tasks on your list :O");
         }
