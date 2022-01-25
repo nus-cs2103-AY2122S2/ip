@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.io.IOException;
 
 public class Connor {
-    public static final String CURRENT_VERSION = "Version 1.8";
+    public static final String CURRENT_VERSION = "Version 1.0.0";
     public static final String LINE = "_".repeat(66);
     public static final String INDENT = " ".repeat(4);
     public static final String INPUT_HERE = ">>> ";
