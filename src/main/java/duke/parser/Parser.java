@@ -10,13 +10,25 @@ import duke.commands.ToggleCommand;
 import duke.common.DukeException;
 import duke.constants.Constants;
 
+/**
+ * Parses or processes commands given by user input.
+ */
 public class Parser {
     private String fullCommand;
 
+    /**
+     * Creates a new Parser object to be used throughout the lifetime of the program.
+     * @param fullCommand fullCommand is the entire string of the user input.
+     */
     public Parser(String fullCommand) {
         this.fullCommand = fullCommand;
     }
 
+    /**
+     * Parses or processes commands given by user input. Also, processing the arguments if given.
+     * @return The individual command that the user has input.
+     * @throws DukeException If the command is not known to Abby.
+     */
     public Command parse() throws DukeException {
         String[] inputArr = this.fullCommand.split(" ", 2);
         String command = inputArr[0];

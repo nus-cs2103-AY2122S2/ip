@@ -9,13 +9,23 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Deletes task from list based on specified index by user.
+ */
 public class DeleteCommand extends Command {
     private String args;
 
+    /**
+     * Creates new DeleteCommand object that receives the index by user.
+     * @param args args holds the task number to be deleted.
+     */
     public DeleteCommand(String args) {
         this.args = args;
     }
     
+    /**
+     * Executes the delete command.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {

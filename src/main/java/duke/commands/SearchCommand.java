@@ -13,13 +13,23 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Searches for deadline or event tasks based on given date by user.
+ */
 public class SearchCommand extends Command {
     private String args;
 
+    /**
+     * Creates new SearchCommand object that receives user input.
+     * @param args args holds the date specified by user.
+     */
     public SearchCommand(String args) {
         this.args = args;
     }
 
+    /**
+     * Executes the search command.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {

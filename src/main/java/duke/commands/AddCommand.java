@@ -15,13 +15,23 @@ import duke.task.TaskList;
 import duke.task.Todo;
 import duke.ui.Ui;
 
+/**
+ * Adds task to list based on user input.
+ */
 public class AddCommand extends Command {
     private String fullCommand;
 
+    /**
+     * Creates new AddCommand object that receives user input.
+     * @param fullCommand fullCommand holds contents of the task to be added.
+     */
     public AddCommand(String fullCommand) {
         this.fullCommand = fullCommand;
     }
 
+    /**
+     * Executes the add command.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String[] taskArr = null;

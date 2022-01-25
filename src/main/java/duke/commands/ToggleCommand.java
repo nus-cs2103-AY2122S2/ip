@@ -13,15 +13,26 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Marks whether a task is done.
+ */
 public class ToggleCommand extends Command {
     private String args;
     private boolean isMark;
 
+    /**
+     * Creates new ToggleCommand object that receives user input.
+     * @param args args is used to check for user input.
+     * @param isMark isMark indicates if a user has done the task.
+     */
     public ToggleCommand(String args, boolean isMark) {
         this.args = args;
         this.isMark = isMark;
     }
 
+    /**
+     * Executes the toggle command.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {
