@@ -41,7 +41,7 @@ public class Task {
      * @return X marks task is completed.
      */
     public String getStatusIcon() {
-        return this.completed ? "X" : " ";
+        return (this.completed) ? "X" : " ";
     }
 
     /**

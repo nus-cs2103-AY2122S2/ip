@@ -51,7 +51,7 @@ public class AddCommand extends Command {
                 task = new Deadline(taskData[0], by);
                 textToAdd = String.format(
                         "D | %s | %s | %s",
-                        task.getCompleted() ? "1" : "0",
+                        (task.getCompleted()) ? "1" : "0",
                         task.getDescription(),
                         taskData[1]);
             } else if (type.equalsIgnoreCase("event")) {
@@ -61,7 +61,7 @@ public class AddCommand extends Command {
                 task = new Event(taskData[0], at);
                 textToAdd = String.format(
                         "E | %s | %s | %s",
-                        task.getCompleted() ? "1" : "0",
+                        (task.getCompleted()) ? "1" : "0",
                         task.getDescription(),
                         taskData[1]);
             } else if (type.equalsIgnoreCase("todo")) {
@@ -72,7 +72,7 @@ public class AddCommand extends Command {
                 task = new Todo(taskArr[1]);
                 textToAdd = String.format(
                         "T | %s | %s",
-                        task.getCompleted() ? "1" : "0",
+                        (task.getCompleted()) ? "1" : "0",
                         task.getDescription());
             } else {
                 throw new IndexOutOfBoundsException();
@@ -82,7 +82,7 @@ public class AddCommand extends Command {
             storage.writeToFile(textToAdd);
 
             int noOfTasks = taskList.size();
-            String pluralTask = noOfTasks > 1 ? "tasks" : "task";
+            String pluralTask = (noOfTasks > 1) ? "tasks" : "task";
 
             result += "  " + task.toString() + "\n";
             result += "Now you have " + noOfTasks + " " + pluralTask + " in the list.";

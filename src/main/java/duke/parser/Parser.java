@@ -32,7 +32,7 @@ public class Parser {
     public Command parse() throws DukeException {
         String[] inputArr = this.fullCommand.split(" ", 2);
         String command = inputArr[0];
-        String args = inputArr.length > 1 ? inputArr[1] : "";
+        String args = (inputArr.length > 1) ? inputArr[1] : "";
 
         if (command.equalsIgnoreCase("bye")) {
             return new ExitCommand();
