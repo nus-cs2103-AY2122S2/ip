@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.io.IOException;
 
 public class Duke {
     private static void format(String output) {
@@ -27,8 +28,12 @@ public class Duke {
                 "WHAT YOU WANT?";
         format(welcome);
 
-        //Create ArrayList to store tasks
-        ArrayList<Task> tasks = new ArrayList<>();
+        //Checks if prev. tasks exist
+        String logPath = "data/log.txt";
+        DukeFile log = new DukeFile(logPath);
+
+        //Create ArrayList to store prev tasks
+        ArrayList<Task> tasks = log.readTasks();
 
         Scanner input = new Scanner(System.in);
         String toEcho = input.nextLine();
@@ -152,6 +157,13 @@ public class Duke {
                         }
                     } else {
                         throw new DukeException("WHAT TALKING YOU? CHAO RECRUIT YOU BETTER WAKE UP YOUR IDEA!");
+                    }
+
+                    // Updates log file
+                    try {
+                        log.updateTasks(tasks);
+                    } catch (IOException e) {
+                        System.out.printf(e.getMessage());
                     }
                 }
             } catch (DukeException e) {

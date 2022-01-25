@@ -6,7 +6,7 @@ public class Event extends Task{
     private DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy, HHmm");
 
     public Event(String name, LocalDateTime dead) {
-        super(name);
+        super("E", name, dead);
         this.dead = dead;
     }
 

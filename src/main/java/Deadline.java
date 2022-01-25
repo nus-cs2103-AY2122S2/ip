@@ -6,7 +6,7 @@ public class Deadline extends Task{
     private DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy, HHmm");
 
     public Deadline(String name, LocalDateTime dead) {
-        super(name);
+        super("D", name, dead);
         this.dead = dead;
     }
 
