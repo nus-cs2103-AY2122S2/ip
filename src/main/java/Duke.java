@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Duke {
@@ -109,18 +111,36 @@ public class Duke {
                 if (firstCommand.equals("deadline")) {
                     exceptionErrPrint = "Did you remember to put in the deadline after /by? Or did u remember to add /by?";
                     String statement = taskDescription.substring(0, taskDescription.indexOf(" /by"));
-                    String dateStr = taskDescription.substring(taskDescription.indexOf("/by") + 4);
+                    String[] dateTime = taskDescription.substring(taskDescription.indexOf("/by") + 4).split(" ");
 
                     exceptionErrPrint = "Date format maybe wrong. yy-mm-dd";
-                    newTask = new Deadline(statement, LocalDate.parse(dateStr));
+                    LocalDate localDate = LocalDate.parse(dateTime[0]);
 
+                    exceptionErrPrint = "Time format wrong. HHmm";
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
+                    LocalTime localTime = LocalTime.parse("2359", formatter);
+                    if (dateTime.length > 1) {
+                        localTime = LocalTime.parse(dateTime[1], formatter);
+                    }
+
+                    newTask = new Deadline(statement, localDate, localTime);
                 } else if (firstCommand.equals("event")) {
                     exceptionErrPrint = "Did you remember to put in the timing after /at? Or did u remember to add /at?";
                     String statement = taskDescription.substring(0, taskDescription.indexOf(" /at"));
-                    String dateStr = taskDescription.substring(taskDescription.indexOf("/at") + 4);
+                    String[] dateTime = taskDescription.substring(taskDescription.indexOf("/at") + 4).split(" ");
 
                     exceptionErrPrint = "Date format maybe wrong. yy-mm-dd";
-                    newTask = new Event(statement, LocalDate.parse(dateStr));
+                    LocalDate localDate = LocalDate.parse(dateTime[0]);
+
+                    exceptionErrPrint = "Time format wrong. HHmm";
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
+                    LocalTime localTime = LocalTime.parse("2359", formatter);
+                    if (dateTime.length > 1) {
+                        localTime = LocalTime.parse(dateTime[1], formatter);
+                    }
+
+                    exceptionErrPrint = "Date format maybe wrong. yy-mm-dd";
+                    newTask = new Event(statement, localDate, localTime);
 
                 } else {
                     newTask = new Todo(taskDescription);
