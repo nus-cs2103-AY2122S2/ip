@@ -74,4 +74,8 @@ public class Parser {
         String date = userInputCommandRemoved.substring(indexOfEndDate);
         return date;
     }
+
+    String getSearchWords() {
+        return removeCommandFromString();
+    }
 }
