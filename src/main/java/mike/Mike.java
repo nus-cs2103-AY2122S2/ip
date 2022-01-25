@@ -1,4 +1,4 @@
-package main.java.mike;
+package mike;
 
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
@@ -63,7 +63,7 @@ public class Mike {
         ui.printReply(listForPrint);
     }
 
-    boolean isExitCommand(String userInput) {
+    public boolean isExitCommand(String userInput) {
         Parser parser = new Parser(userInput);
         return parser.isBye();
     }

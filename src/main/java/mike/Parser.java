@@ -1,4 +1,4 @@
-package main.java.mike;
+package mike;
 
 public class Parser {
     private final String userInput;
@@ -35,7 +35,7 @@ public class Parser {
      *
      * @return The input string from the user with the "command" portion removed.
      */
-    String removeCommandFromString() {
+    public String removeCommandFromString() {
         int indexOfFirstSpace = this.userInput.indexOf(" ");
         int indexOfTaskParameters = indexOfFirstSpace + 1;
         return this.userInput.substring(indexOfTaskParameters);
