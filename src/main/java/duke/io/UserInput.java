@@ -1,11 +1,5 @@
 package duke.io;
 
-import java.nio.file.spi.FileSystemProvider;
-import java.time.DateTimeException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-
 /**
  * This is a UserInput class that store the user's input to Duke.
  * This class helps Duke to make sense of the user's input.
@@ -66,7 +60,7 @@ public class UserInput {
      * A method to check if a task is done.
      * @return Boolean value of the task being done or undone.
      */
-    public boolean isDone() {
+    public boolean getIsDone() {
         return this.isDone;
     }
 

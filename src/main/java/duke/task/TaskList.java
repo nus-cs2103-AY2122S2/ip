@@ -108,21 +108,21 @@ public class TaskList {
     public void addTaskWithoutMessage(UserInput userInput) throws DukeException {
         // add ToDoTask
         if (userInput.getCommand().equals("todo")) {
-            Task newTask = new ToDoTask(userInput.getDescription(), userInput.isDone());
+            Task newTask = new ToDoTask(userInput.getDescription(), userInput.getIsDone());
             list.add(newTask);
             System.out.println(newTask);
         }
 
         // add DeadlineTask
         if (userInput.getCommand().equals("deadline")) {
-            Task newTask = new DeadlineTask(userInput.getDescription(), userInput.getTime(), userInput.isDone());
+            Task newTask = new DeadlineTask(userInput.getDescription(), userInput.getTime(), userInput.getIsDone());
             list.add(newTask);
             System.out.println(newTask);
         }
 
         // add EventTask
         if (userInput.getCommand().equals("event")) {
-            Task newTask = new EventTask(userInput.getDescription(), userInput.getTime(), userInput.isDone());
+            Task newTask = new EventTask(userInput.getDescription(), userInput.getTime(), userInput.getIsDone());
             list.add(newTask);
             System.out.println(newTask);
         }
