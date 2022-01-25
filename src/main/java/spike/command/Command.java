@@ -1,6 +1,5 @@
 package spike.command;
 
-import spike.task.Task;
 import spike.task.TaskList;
 
 /**

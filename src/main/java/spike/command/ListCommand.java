@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
  * Lists tasks according to user requirement.
  */
 public class ListCommand extends Command{
-    private String command;
     private int action;
     private LocalDateTime ldt;
 

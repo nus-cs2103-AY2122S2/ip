@@ -53,5 +53,4 @@ public class Spike {
         new Spike("data/", "data/Spike.txt").run();
         return;
     }
-
 }

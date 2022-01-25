@@ -39,13 +39,13 @@ public class Storage {
      */
     public ArrayList<Task> load() throws SpikeException {
         // Check first whether the data folder exists, if not, create it
-        File dataDir = new File("data/");
+        File dataDir = new File(directory);
         if (!dataDir.exists()) {
             dataDir.mkdirs();
         }
 
         // Check whether the data file exists, if not, create it
-        File dataFile = new File("data/Spike.txt");
+        File dataFile = new File(filePath);
         if (!dataFile.exists()) {
             try {
                 dataFile.createNewFile();
@@ -98,7 +98,7 @@ public class Storage {
      */
     public void saveChanges(TaskList tasks) {
         try {
-            FileWriter fw = new FileWriter("data/Spike.txt");
+            FileWriter fw = new FileWriter(filePath);
             String latestList = "";
             for (Task task : tasks.getTasks()) {
                 latestList = latestList + task.toFileFormat() + "\n";
