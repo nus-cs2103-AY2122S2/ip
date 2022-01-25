@@ -10,15 +10,26 @@ import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.util.regex.Pattern;
 
+/**
+ * The type Storage.
+ */
 public class Storage {
     private final String filePath;
     private static File taskFile;
 
+    /**
+     * Instantiates a new Storage.
+     *
+     * @param filePath the file path for storing/retrieving the todolist
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         createDirectoryAndFileIfNotExist();
     }
 
+    /**
+     * Create data directory and task.txt if not already exist.
+     */
     public void createDirectoryAndFileIfNotExist() {
         try {
             File directory = new File(filePath);
@@ -36,6 +47,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Load tasks from task.txt into an arraylist.
+     *
+     * @return the arraylist containing all tasks inside task.txt
+     */
     public ArrayList<Task> loadFile() {
         createDirectoryAndFileIfNotExist();
         ArrayList<Task> tasksArrayList = new ArrayList<>();
@@ -52,6 +68,12 @@ public class Storage {
         return tasksArrayList;
     }
 
+    /**
+     * Write tasks from TaskList into task.txt.
+     *
+     * @param tasks the TaskList tasks
+     * @throws IOException the io exception
+     */
     public void writeFile(TaskList tasks) throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream(taskFile, false);
         for (Task task : tasks.tasksArrayList) {
@@ -60,6 +82,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Parse the task in string from task.txt into actual task.
+     *
+     * @param taskInString the task in string stored inside task.txt
+     * @return the actual task
+     */
     public static Task fileToTask(String taskInString) {
         char type = taskInString.charAt(1);
         boolean isDone = taskInString.charAt(4) == 'X';

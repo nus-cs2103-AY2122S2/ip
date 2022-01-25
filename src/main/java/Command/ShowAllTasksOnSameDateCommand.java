@@ -9,15 +9,22 @@ import Task.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Objects;
-import java.util.regex.Pattern;
 
+/**
+ * The type Show all tasks on same date command.
+ */
 public class ShowAllTasksOnSameDateCommand extends Command {
     private final LocalDateTime dateTime;
     private final String dateTimeString;
 
+    /**
+     * Instantiates a new Show all tasks on same date command.
+     *
+     * @param dateTime       the specified date time
+     * @param dateTimeString the specified date time in string
+     */
     public ShowAllTasksOnSameDateCommand(LocalDateTime dateTime, String dateTimeString) {
         this.dateTime = dateTime;
         this.dateTimeString = dateTimeString;
@@ -56,12 +63,6 @@ public class ShowAllTasksOnSameDateCommand extends Command {
                 }
             }
             if (numberOfTasksOnSameDate == 0) { //no tasks found
-                String time;
-                if (localTime == LocalTime.MAX) {
-                    time = "";
-                } else {
-                    time = dateTime.toLocalTime().toString();
-                }
                 throw new CortanaException("No task found on " + dateTimeString + "!");
             } else {
                 ui.foundTaskOnSameDate(numberOfTasksOnSameDate, dateTimeString);
@@ -71,6 +72,9 @@ public class ShowAllTasksOnSameDateCommand extends Command {
         }
     }
 
+    /**
+     * The program is not yet exited.
+     */
     public boolean isExit() {
         return false;
     }

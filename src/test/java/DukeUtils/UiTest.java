@@ -12,6 +12,7 @@ import java.io.PrintStream;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -84,7 +85,7 @@ public class UiTest {
     @Test
     @DisplayName("Added task Ui should be shown")
     public void testAddedTaskUi() {
-        TaskList tasks = new TaskList();
+        TaskList tasks = new TaskList(new ArrayList<>());
         Todo dummyTodo = new Todo("read book");
         ui.addedTask(tasks, dummyTodo);
         String taskOrTasks = tasks.tasksArrayList.size() <= 1 ? "task" : "tasks";
@@ -96,7 +97,7 @@ public class UiTest {
     @Test
     @DisplayName("Deleted task Ui should be shown")
     public void testDeletedTaskUi() {
-        TaskList tasks = new TaskList();
+        TaskList tasks = new TaskList(new ArrayList<>());
         Todo dummyTodo = new Todo("read book");
         ui.deletedTask(tasks, dummyTodo);
         String taskOrTasks = tasks.tasksArrayList.size() <= 1 ? "task" : "tasks";

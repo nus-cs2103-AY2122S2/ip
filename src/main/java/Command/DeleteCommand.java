@@ -5,9 +5,17 @@ import Task.Task;
 
 import java.util.Objects;
 
+/**
+ * The type Delete command.
+ */
 public class DeleteCommand extends Command{
     private final int index;
 
+    /**
+     * Instantiates a new Delete command.
+     *
+     * @param index the index of task to be deleted
+     */
     public DeleteCommand(int index) {
         this.index = index;
     }
@@ -24,6 +32,9 @@ public class DeleteCommand extends Command{
         }
     }
 
+    /**
+     * The program is not yet exited.
+     */
     public boolean isExit() {
         return false;
     }

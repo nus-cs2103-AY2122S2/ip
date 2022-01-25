@@ -3,17 +3,28 @@ import DukeUtils.*;
 
 import java.nio.file.Paths;
 
+/**
+ * Duke the todolist helper, it's actual name is Cortana in this particular implementation.
+ */
 public class Duke {
     private final Storage storage;
     private final TaskList tasks;
     private final Ui ui;
 
+    /**
+     * Instantiates a new Duke.
+     *
+     * @param filePath the file path for storing/retrieving the todolist
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.loadFile());
     }
 
+    /**
+     * Run Duke.
+     */
     public void run() {
         boolean isExit = false;
         ui.showWelcome();
@@ -33,6 +44,11 @@ public class Duke {
         }
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         String path = Paths.get("").toAbsolutePath() + "/data/";
         new Duke(path).run();

@@ -1,7 +1,15 @@
 package Task;
 import java.util.Objects;
 
+/**
+ * The task type Todo.
+ */
 public class Todo extends Task {
+    /**
+     * Instantiates a new Todo.
+     *
+     * @param description the description of the todo
+     */
     public Todo(String description) {
         super(description);
     }

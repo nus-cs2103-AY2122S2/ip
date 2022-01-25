@@ -8,9 +8,17 @@ import Task.Task;
 
 import java.util.Objects;
 
+/**
+ * The type Mark command.
+ */
 public class MarkCommand extends Command {
     private final int index;
 
+    /**
+     * Instantiates a new Mark command.
+     *
+     * @param index the index of task to be marked
+     */
     public MarkCommand(int index) {
         this.index = index;
     }
@@ -26,6 +34,9 @@ public class MarkCommand extends Command {
         }
     }
 
+    /**
+     * The program is not yet exited.
+     */
     public boolean isExit() {
         return false;
     }
