@@ -1,9 +1,11 @@
 package tasks;
 
+import java.time.LocalDate;
+
 public class Event extends Task {
     public static final String TASK_CODE = "E";
 
-    protected String at;
+    protected LocalDate at;
 
     /**
      * Constructor for the deadline object.
@@ -11,7 +13,7 @@ public class Event extends Task {
      * @param description description of the task
      * @param at the deadline for the task
      */
-    public Event(String description, String at) {
+    public Event(String description, LocalDate at) {
         super(description);
         this.at = at;
     }

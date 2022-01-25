@@ -2,6 +2,8 @@ package tasks;
 
 import exceptions.InvalidTaskException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Objects;
 
 public abstract class Task {
@@ -44,7 +46,13 @@ public abstract class Task {
                 if (params.length <= 1) {
                     throw new InvalidTaskException("☹ OOPS!!! The deadline of a task cannot be empty.");
                 }
-                task = new Deadline(params[0], params[1]);
+                try {
+                    LocalDate date = LocalDate.parse(params[1]);
+                    task = new Deadline(params[0], date);
+                } catch (DateTimeParseException e) {
+                    throw new InvalidTaskException("Invalid date format! [yyyy-mm-dd] Eg. [2019-12-01]");
+                }
+
                 break;
 
             case EVENT:
@@ -55,7 +63,12 @@ public abstract class Task {
                 if (params.length <= 1) {
                     throw new InvalidTaskException("☹ OOPS!!! The time of an event cannot be empty.");
                 }
-                task = new Event(params[0], params[1]);
+                try {
+                    LocalDate date = LocalDate.parse(params[1]);
+                    task = new Event(params[0], date);
+                } catch (DateTimeParseException e) {
+                    throw new InvalidTaskException("Invalid date format! [yyyy-mm-dd] Eg. [2019-12-01]");
+                }
                 break;
 
             default:
@@ -80,12 +93,12 @@ public abstract class Task {
                 break;
             case Deadline.TASK_CODE:
                 if (taskArr.length < 4) throw new InvalidTaskException("Insufficient values");
-                String by = taskArr[3];
+                LocalDate by = LocalDate.parse(taskArr[3]);
                 task = new Deadline(taskDescription, by);
                 break;
             case Event.TASK_CODE:
                 if (taskArr.length < 4) throw new InvalidTaskException("Insufficient values");
-                String at = taskArr[3];
+                LocalDate at = LocalDate.parse(taskArr[3]);
                 task = new Event(taskDescription, at);
                 break;
             default:

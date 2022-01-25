@@ -1,3 +1,2 @@
-T,x,borrow book
-D, ,return book,Sunday
-E,x,project meeting,Mon 2-4pm
+D, ,return book,2019-12-01
+D, ,test,2019-12-01
