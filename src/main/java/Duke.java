@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -26,41 +29,54 @@ public class Duke {
         }
     }
     private class Deadline extends Item{
-        private String deadline;
+        private String date;
+        private String time;
 
         private Deadline(String content) {
             super(content);
         }
         private Deadline(String content, String deadline) {
             super(content);
-            this.deadline = deadline;
+            setDateAndTime(deadline);
         }
-        private void addDeadline(String deadline) {
-            this.deadline = deadline;
+
+        private void setDateAndTime(String deadline) {
+            String[] dt = deadline.split(" ");
+            LocalDate date = LocalDate.parse(dt[0]);
+            LocalTime time = LocalTime.parse(dt[1]);
+            this.date = date.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
+            this.time = time.format(DateTimeFormatter.ofPattern("hh:mm a"));
         }
 
         @Override
         public String toString() {
-            return "[D]" + (super.done? "[X] " : "[ ] ") + super.content + " (by " + this.deadline + ")";
+            return "[D]" + (super.done? "[X] " : "[ ] ") + super.content + " (by " + this.date + " " + this.time + ")";
         }
     }
     private class Event extends Item {
+        private String date;
         private String time;
+
 
         private Event(String content) {
             super(content);
         }
-        private Event(String content, String time) {
+        private Event(String content, String when) {
             super(content);
-            this.time = time;
+            setDateAndTime(when);
         }
-        private void addTime(String time) {
-            this.time = time;
+
+        private void setDateAndTime(String when) {
+            String[] dt = when.split(" ");
+            LocalDate date = LocalDate.parse(dt[0]);
+            LocalTime time = LocalTime.parse(dt[1]);
+            this.date = date.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
+            this.time = time.format(DateTimeFormatter.ofPattern("hh:mm a"));
         }
 
         @Override
         public String toString() {
-            return "[E]" + (super.done? "[X] " : "[ ] ") + super.content + " (at " + this.time + ")";
+            return "[E]" + (super.done? "[X] " : "[ ] ") + super.content + " (at " + this.date + " " + this.time + ")";
         }
     }
     private Duke() {
