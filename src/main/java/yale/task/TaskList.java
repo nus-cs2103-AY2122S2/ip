@@ -49,6 +49,9 @@ public class TaskList {
     }
 
     public void importIn(String fileData) {
+        if (fileData.equals("")) {
+            return;
+        }
         String[] lines = fileData.split("\n");
         for (int i = 0; i < lines.length; i++) {
             String[] tokens = lines[i].split(" \\| ");
