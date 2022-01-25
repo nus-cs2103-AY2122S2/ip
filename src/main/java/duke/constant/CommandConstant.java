@@ -1,5 +1,8 @@
 package duke.constant;
 
+/**
+ * A class that contains constants related to Command.
+ */
 public final class CommandConstant {
     public static final String COMMAND_BYE = "bye";
     public static final String COMMAND_LIST = "list";

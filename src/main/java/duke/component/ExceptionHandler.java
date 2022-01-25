@@ -17,9 +17,16 @@ import static duke.constant.Message.MESSAGE_INVALID_INDEX_EXCEPTION;
 import static duke.constant.Message.MESSAGE_MISSING_DATE_TIME_EXCEPTION;
 import static duke.constant.Message.MESSAGE_UNKNOWN_COMMAND_EXCEPTION;
 
+/**
+ * A class to handle exceptions thrown by Duke.
+ */
 public class ExceptionHandler {
     private static Ui ui = new Ui();
 
+    /**
+     * Handles Duke exception by printing the error message.
+     * @param e Specified-Duke exception
+     */
     public static void handleDukeException(DukeException e) {
         if (e instanceof EmptyTaskException) {
             ui.printMessage(MESSAGE_EMPTY_TASK_EXCEPTION);
@@ -34,11 +41,17 @@ public class ExceptionHandler {
         }
     }
 
+    /**
+     * Handles other common exception by printing the error message.
+     * @param e Default Exception class.
+     */
     public static void handleOtherException(Exception e) {
         if (e instanceof IOException) {
             ui.printMessage(MESSAGE_FILE_NOT_FOUND);
         } else if (e instanceof DateTimeException) {
             ui.printMessage(MESSAGE_DATE_TIME_FORMAT_EXCEPTION);
+        } else {
+            ui.printMessage(MESSAGE_DUKE_EXCEPTION);
         }
     }
 }

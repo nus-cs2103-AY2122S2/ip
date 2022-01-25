@@ -34,11 +34,20 @@ import static duke.constant.CommandConstant.COMMAND_UNMARK;
 import duke.exception.UnknownCommandException;
 import duke.exception.EmptyTaskException;
 
+/**
+ * A class to parsing user input and format task to store and retrieve task from stored data.
+ */
 public class Parser {
 
     public Parser() {
     }
 
+    /**
+     * Formats Task class to String that can be stored in a text file.
+     *
+     * @param task the task to be formatted
+     * @return String that can be written into a text file.
+     */
     public static String formatTaskToStore(Task task) {
         String prefix;
         String data;
@@ -60,6 +69,12 @@ public class Parser {
         return data;
     }
 
+    /**
+     * Retrieves the task from stored data.
+     *
+     * @param data String in one line that is stored in the text file.
+     * @return Task class
+     */
     public static Task retrieveTaskFromStoredData(String data) {
         String[] tokens = data.split(Message.VERTICAL_BAR_REGEX);
         String prefix = tokens[0];
@@ -91,6 +106,12 @@ public class Parser {
 
     }
 
+    /**
+     * Excutes the command from user input.
+     * @param userInput user input read by Scanner
+     * @return Specific command class
+     * @throws DukeException if there is unknown command
+     */
     public Command parse(String userInput) throws DukeException {
         String[] command = parseUserInput(userInput);
         String commandType = command[0];
@@ -118,6 +139,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses user input to find command type and other arguments.
+     *
+     * @param userInput user input in String
+     * @return String array specifies command type and other arguments
+     * @throws EmptyTaskException if there is no other arguments but the type is not bye or list.
+     */
     public static String[] parseUserInput(String userInput) throws EmptyTaskException {
         final String[] args = userInput.strip().split(" ", 2);
         String command = args[0];

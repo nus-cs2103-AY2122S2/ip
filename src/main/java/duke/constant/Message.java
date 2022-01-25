@@ -1,5 +1,8 @@
 package duke.constant;
 
+/**
+ * A class that contains constants related to message printing.
+ */
 public final class Message {
     public static final String LINE_PREFIX = "\t";
     public static final String LINE_SEPARATOR = System.lineSeparator();
