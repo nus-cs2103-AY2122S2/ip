@@ -6,13 +6,29 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
+/**
+ * Represents the mark command to mark a task as done.
+ */
 public class MarkCommand extends Command {
     private final int taskNum;
 
+    /**
+     * Class constructor.
+     *
+     * @param taskNum The index of the task to be marked.
+     */
     public MarkCommand(int taskNum) {
         this.taskNum = taskNum;
     }
 
+    /**
+     * Executes the mark command, prints confirmation message and save updated list to file.
+     *
+     * @param taskList The current list of tasks.
+     * @param ui The ui of the program.
+     * @param storage The storage of the program.
+     * @throws DukeException If updated task list cannot be saved to file, or if the task number given is invalid.
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         int currentTotalTasks = taskList.getTotalTasks();
         if (taskNum <= currentTotalTasks && taskNum > 0) {
@@ -25,6 +41,11 @@ public class MarkCommand extends Command {
 
     }
 
+    /**
+     * Returns whether this is an exit command.
+     *
+     * @return True.
+     */
     public boolean isExit() {
         return false;
     }

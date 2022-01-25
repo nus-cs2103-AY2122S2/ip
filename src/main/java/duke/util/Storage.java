@@ -8,16 +8,29 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the storage function of the program. Deals with loading and saving tasks to a file.
+ */
 public class Storage {
     private final String filePath;
     private final String fileName;
 
+    /**
+     * Class constructor.
+     * Creates a new file if it does not already exist.
+     *
+     * @param filePath The filepath to the text file.
+     * @param fileName The name of the text file.
+     */
     public Storage(String filePath, String fileName) {
         this.filePath = filePath;
         this.fileName = fileName;
         createFileAndFolderIfDoesNotExist();
     }
 
+    /**
+     * Creates the text file and folder if they do not already exist.
+     */
     public void createFileAndFolderIfDoesNotExist() {
         File folder = new File(filePath);
         try {
@@ -32,6 +45,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns the TaskList stored in the text file.
+     *
+     * @return ArrayList of tasks
+     * @throws DukeException If the tasks cannot be loaded.
+     */
     public ArrayList<Task> load() throws DukeException {
         File file = new File(filePath + fileName); // create a File for the given file path
         ArrayList<Task> currentTasks = new ArrayList<>();
@@ -45,9 +64,6 @@ public class Storage {
                     Task t;
 
                     switch (taskComponents[0]) {
-                    case "T":
-                        t = new Todo(taskComponents[2]);
-                        break;
                     case "D":
                         t = new Deadline(taskComponents[2], Parser.parseDateTime(taskComponents[3]));
                         break;
@@ -55,7 +71,8 @@ public class Storage {
                         t = new Event(taskComponents[2], Parser.parseDateTime(taskComponents[3]));
                         break;
                     default:
-                        t = new Task(taskComponents[2]);
+                        t = new Todo(taskComponents[2]);
+                        break;
                     }
                     currentTasks.add(t);
 
@@ -71,6 +88,12 @@ public class Storage {
         return currentTasks;
     }
 
+    /**
+     * Saves the changes to TaskList to the text file.
+     *
+     * @param taskList The new TaskList to be stored.
+     * @throws DukeException If changes cannot be saved to file.
+     */
     public void saveToHardDisk(TaskList taskList) throws DukeException {
         try {
             String formattedTaskList = taskList.formatListForSaving();

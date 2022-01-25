@@ -6,13 +6,29 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
+/**
+ * Represents a delete command to delete a task from the list.
+ */
 public class DeleteCommand extends Command {
     private final int taskNum;
 
+    /**
+     * Class constructor.
+     *
+     * @param taskNum The index of the task to be deleted.
+     */
     public DeleteCommand(int taskNum) {
         this.taskNum = taskNum;
     }
 
+    /**
+     * Execute the delete command, print confirmation message and saves the updated task list to file.
+     *
+     * @param taskList The current list of tasks.
+     * @param ui The ui of the program.
+     * @param storage The storage of the program.
+     * @throws DukeException If updated task list cannot be saved to file, or if the task number given is invalid.
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         int currentTotalTasks = taskList.getTotalTasks();
         if (taskNum <= currentTotalTasks && taskNum > 0) {
@@ -25,6 +41,11 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * Returns whether this is an exit command.
+     *
+     * @return False.
+     */
     public boolean isExit() {
         return false;
     }
