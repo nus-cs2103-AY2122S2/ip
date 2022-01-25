@@ -1,11 +1,17 @@
 public class Task  {
+
     private String description;
+    private String type;
     private boolean isDone;
 
-    public Task(String description) {
+    public Task(String description, String type) {
         this.description = description;
+        this.type = type;
         this.isDone = false;
     }
+
+    public String getType() { return this.type; }
+
     public String getDescription() {
         return this.description;
     }
@@ -13,6 +19,8 @@ public class Task  {
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
+
+    public String getDateTime() { return ""; };
 
     public void markDone() {
         this.isDone = true;

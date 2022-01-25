@@ -1,5 +1,9 @@
 import Exceptions.*;
 
+import java.io.*;
+import java.nio.file.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -8,7 +12,7 @@ public class Duke {
 
     private ArrayList<Task> arr;
 
-    public Duke(){
+    public Duke() {
         this.arr = new ArrayList<Task>();
     }
 
@@ -78,21 +82,21 @@ public class Duke {
         System.out.println(ans);
     }
 
-    private void onDelete(String ans, String input) throws DukeException {
+    private void onDelete(String ans, String input) throws DukeException, IOException {
         String[] strArr = input.split(" ");
         int index = Integer.valueOf(strArr[1]) - 1;
         if (index >= 0 && index < arr.size()) {
             Task t = arr.get(index);
-                deleteTask(t);
-                ans += "Noted. I've removed this task:\n\t\t" + t.toString() +
-                        "\n\tNow you have " + numOfTasks() + " in the list.";;
+            deleteTask(t);
+            ans += "Noted. I've removed this task:\n\t\t" + t.toString() +
+                    "\n\tNow you have " + numOfTasks() + " in the list.";;
         } else {
             throw new InvalidIndexException();
         }
         System.out.println(ans);
     }
 
-    private void onToggleMark(String ans, String input) throws DukeException {
+    private void onToggleMark(String ans, String input) throws DukeException, IOException {
         String[] strArr = input.split(" ");
         int index = Integer.valueOf(strArr[1]) - 1;
         if (index >= 0 && index < arr.size()) {
@@ -110,29 +114,35 @@ public class Duke {
         System.out.println(ans);
     }
 
-    private void onTodo(String ans, String input) {
+    private void onTodo(String ans, String input) throws java.io.IOException {
         String desc = input.substring(5);
-        Task t = new ToDo(desc);
+        ToDo t = new ToDo(desc);
         addTask(t);
         ans += "Got it. I've added this task:\n\t\t" + t.toString() +
                 "\n\tNow you have " + numOfTasks() + " in the list.";
         System.out.println(ans);
     }
 
-    private void onDeadline(String ans, String input) {
+    private void onDeadline(String ans, String input) throws java.io.IOException, InvalidDateException {
         String desc = input.substring(9, input.indexOf("/by") - 1);
         String by = input.substring(input.indexOf("/by") + 4);
-        Task t = new Deadline(desc, by);
+        Deadline t = new Deadline(desc, by);
+        if (!t.isValidDate() && !t.isValidTime()) {
+            throw new InvalidDateException();
+        }
         addTask(t);
         ans += "Got it. I've added this task:\n\t\t" + t.toString() +
                 "\n\tNow you have " + numOfTasks() + " in the list.";
         System.out.println(ans);
     }
 
-    private void onEvent(String ans, String input) {
+    private void onEvent(String ans, String input) throws java.io.IOException, InvalidDateException {
         String desc = input.substring(6, input.indexOf("/at") - 1);
         String time = input.substring(input.indexOf("/at") + 4);
-        Task t = new Event(desc, time);
+        Event t = new Event(desc, time);
+        if (!t.isValidDate() && !t.isValidTime()) {
+            throw new InvalidDateException();
+        }
         addTask(t);
         ans += "Got it. I've added this task:\n\t\t" + t.toString() +
                 "\n\tNow you have " + numOfTasks() + " in the list.";
@@ -159,12 +169,12 @@ public class Duke {
             } else {
                 throw new InvalidCommandException();
             }
-        } catch (DukeException e) {
+        } catch (DukeException | java.io.IOException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Duke duke = new Duke();
         Scanner sc = new Scanner(System.in);
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
@@ -178,4 +188,3 @@ public class Duke {
 
     }
 }
-
