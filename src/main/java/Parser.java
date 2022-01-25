@@ -88,12 +88,11 @@ public class Parser {
     public static String[] parseUserInput(String userInput) throws EmptyTaskException {
         final String[] args = userInput.strip().split(" ", 2);
         String command = args[0];
-        boolean isCommandAdd = command.equals(Constant.COMMAND_TODO) || command.equals(Constant.COMMAND_DEADLINE) ||
-                command.equals(Constant.COMMAND_EVENT);
+        boolean isCommandListOrBye = command.equals(Constant.COMMAND_BYE) || command.equals(Constant.COMMAND_LIST);
 
         if (args.length == 2) {
             return args;
-        } else if (isCommandAdd) {
+        } else if (!isCommandListOrBye) {
             throw new EmptyTaskException();
         } else {
             return new String[] {args[0], ""};

@@ -24,18 +24,19 @@ public class Ui {
     }
 
     public void printConfirmMark(Task currentTask) {
-        printMessage(Message.CONFIRM_MARK + Message.LINE_PREFIX + Message.LINE_SEPARATOR + currentTask.toString());
+        printMessage(Message.CONFIRM_MARK + Message.LINE_PREFIX + Message.LINE_SEPARATOR + Message.LINE_PREFIX
+                + currentTask.toString());
     }
 
     public void printConfirmUnmark(Task currentTask) {
-        printMessage(Message.CONFIRM_UNMARK + Message.LINE_PREFIX + Message.LINE_SEPARATOR + currentTask.toString());
+        printMessage(Message.CONFIRM_UNMARK + Message.LINE_PREFIX + Message.LINE_SEPARATOR + Message.LINE_PREFIX
+                + currentTask.toString());
     }
 
     public void printConfirmDelete(Task deletedTask, TaskList tasks) {
         String message = Message.LINE_PREFIX + "Noted. I've removed this task:" + Message.LINE_SEPARATOR;
         message += Message.LINE_PREFIX + deletedTask.toString() + Message.LINE_SEPARATOR;
-        message += Message.LINE_PREFIX + "Now you have " + tasks.getNumberOfTasks() + " tasks in the list."
-                + Message.LINE_SEPARATOR;
+        message += Message.LINE_PREFIX + "Now you have " + tasks.getNumberOfTasks() + " tasks in the list.";
         printMessage(message);
     }
 
