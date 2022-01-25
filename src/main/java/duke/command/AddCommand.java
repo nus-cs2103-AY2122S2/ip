@@ -4,7 +4,7 @@ import duke.datetime.DateTable;
 import duke.exception.BotException;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.util.Storage;
+import duke.util.BotStorage;
 import duke.util.Ui;
 
 import java.io.IOException;
@@ -21,15 +21,15 @@ public class AddCommand extends Command {
         this.type = type;
     }
 
-    private void printTask(DateTable dateTable, Storage storage, Task task) throws IOException {
+    private void printTask(DateTable dateTable, BotStorage botStorage, Task task) throws IOException {
         if (!task.getType().equals("T")) {
             dateTable.addDate(task);
         }
-        storage.addTaskToText(task);
+        botStorage.addTaskToText(task);
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage, DateTable dateTable)
+    public void execute(TaskList taskList, Ui ui, BotStorage botStorage, DateTable dateTable)
             throws IOException {
         if (type.equals("T") && fullInput.length() == 4) {
             exception.emptyDescription("todo");
@@ -41,7 +41,7 @@ public class AddCommand extends Command {
             Task task = new Task(description, type);
             taskList.addTask(task);
             ui.showTask(task, taskList.getTotalTask());
-            printTask(dateTable, storage, task);
+            printTask(dateTable, botStorage, task);
         }
     }
 

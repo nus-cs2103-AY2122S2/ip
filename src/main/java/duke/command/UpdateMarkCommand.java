@@ -4,7 +4,8 @@ import duke.datetime.DateTable;
 import duke.exception.BotException;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.util.Storage;
+import duke.util.NumericCheck;
+import duke.util.BotStorage;
 import duke.util.Ui;
 
 import java.io.IOException;
@@ -19,12 +20,8 @@ public class UpdateMarkCommand extends duke.command.Command {
         this.isDone = isDone;
     }
 
-    private static boolean checkNumeric(String string) {
-        return string.matches("-?\\d+(\\.\\d+)?");
-    }
-
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage, DateTable dateTable)
+    public void execute(TaskList taskList, Ui ui, BotStorage botStorage, DateTable dateTable)
             throws IOException {
         String stateDescription;
         if (isDone) {
@@ -33,13 +30,13 @@ public class UpdateMarkCommand extends duke.command.Command {
             stateDescription = "unmark";
         }
 
-        if (! checkNumeric(description)) {
+        if (! NumericCheck.checkNumeric(description)) {
             exception.notNumeric(stateDescription);
         } else {
             int taskNumber = Integer.parseInt(description);
             Task task = taskList.getTask(taskNumber);
             ui.showTaskMark(task, isDone);
-            storage.changeStatusTask(taskNumber, task);
+            botStorage.changeStatusTask(taskNumber, task);
         }
     }
 

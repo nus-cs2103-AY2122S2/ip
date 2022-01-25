@@ -4,7 +4,7 @@ import duke.command.Command;
 import duke.datetime.DateTable;
 import duke.task.TaskList;
 import duke.util.Parser;
-import duke.util.Storage;
+import duke.util.BotStorage;
 import duke.util.Ui;
 
 import java.io.*;
@@ -16,19 +16,19 @@ public class Duke {
     private final static String FILE_NAME = "duke.Duke.txt";
     private final static String PATH = DIRECTORY + "/" + FILE_NAME;
 
-    private final Storage storage;
+    private final BotStorage botStorage;
     private final TaskList taskList;
     private final Ui ui;
     private final DateTable dateTable;
 
-    public Duke() throws IOException {
+    public Duke(String path, String directory) throws IOException {
         TaskList taskList1;
-        storage = new Storage(PATH, DIRECTORY);
+        botStorage = new BotStorage(path, directory);
         Scanner sc = new Scanner(System.in);
         ui = new Ui(sc);
         dateTable = new DateTable(ui);
         try {
-            taskList1 = new TaskList(storage, ui, dateTable);
+            taskList1 = new TaskList(botStorage, ui, dateTable);
         } catch (IOException e) {
             ui.showLoadingError();
             taskList1 = new TaskList();
@@ -37,14 +37,14 @@ public class Duke {
     }
 
 
-    public void run() throws IOException {
+    public void run() {
         boolean isExit = false;
 
         while (! isExit) {
             try {
                 String command = ui.readCommand();
                 Command c = Parser.parse(dateTable, command);
-                c.execute(taskList, ui, storage, dateTable);
+                c.execute(taskList, ui, botStorage, dateTable);
                 isExit = c.isExit();
             } catch (IOException e) {
                 System.out.println(e.getMessage());
@@ -52,6 +52,6 @@ public class Duke {
         }
     }
     public static void main(String[] args) throws IOException {
-        new Duke().run();
+        new Duke(PATH, DIRECTORY).run();
     }
 }
