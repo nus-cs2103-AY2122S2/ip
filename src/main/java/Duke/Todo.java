@@ -5,7 +5,8 @@ package Duke;
  * This task can be done or fulfilled anytime, and is by default not done.
  */
 public class Todo extends Task {
-	private final String TYPE = "[T]";
+	private final String TYPE = "T";
+	private final String NAME;
 
 	/**
 	 * Creates a task to be done, that is initially undone.
@@ -14,6 +15,7 @@ public class Todo extends Task {
 	 */
 	public Todo(String name) {
 		super(name);
+		this.NAME = name;
 	}
 
 	/**
@@ -33,6 +35,15 @@ public class Todo extends Task {
 	 */
 	@Override
 	public String track() {
-		return this.TYPE;
+		return "[" + this.TYPE + "]";
+	}
+
+	/**
+	 * Returns the name of the Task.
+	 *
+	 * @return Name of Task.
+	 */
+	public String getName() {
+		return this.NAME;
 	}
 }

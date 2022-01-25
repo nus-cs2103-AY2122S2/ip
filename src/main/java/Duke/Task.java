@@ -57,8 +57,7 @@ public abstract class Task {
 	 * @return Type of Task.
 	 */
 	public abstract String track();
-
-
+	
 	/**
 	 * Returns the String representation of a Task
 	 *
@@ -68,4 +67,11 @@ public abstract class Task {
 	public String toString() {
 		return this.DESCRIPTION;
 	}
+
+	/**
+	 * Returns the name of the Task.
+	 *
+	 * @return Name of Task.
+	 */
+	public abstract String getName();
 }

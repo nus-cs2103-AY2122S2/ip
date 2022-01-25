@@ -5,8 +5,8 @@ package Duke;
  * not done.
  */
 public class Deadline extends Task {
-	private final String TYPE = "[D]";
-	private final String date;
+	private final String TYPE = "D";
+	private final String DATE;
 	private final String NAME;
 
 	/**
@@ -18,7 +18,7 @@ public class Deadline extends Task {
 	public Deadline(String name, String date) {
 		super(name);
 		this.NAME = name;
-		this.date = date;
+		this.DATE = date;
 	}
 
 	/**
@@ -28,7 +28,7 @@ public class Deadline extends Task {
 	 */
 	@Override
 	public String toString() {
-		return this.NAME + "(" + date + ")";
+		return this.NAME + "(" + DATE + ")";
 	}
 
 	/**
@@ -38,6 +38,24 @@ public class Deadline extends Task {
 	 */
 	@Override
 	public String track() {
-		return this.TYPE;
+		return "[" + this.TYPE + "]";
+	}
+
+	/**
+	 * Returns the name of the Task.
+	 *
+	 * @return Name of Task.
+	 */
+	public String getName() {
+		return this.NAME;
+	}
+
+	/**
+	 * Returns the deadline.
+	 *
+	 * @return Deadline of Task.
+	 */
+	public String getDate() {
+		return this.DATE;
 	}
 }

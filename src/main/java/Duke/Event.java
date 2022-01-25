@@ -5,7 +5,7 @@ package Duke;
  * state/status that is by default not done.
  */
 public class Event extends Task {
-	private final String TYPE = "[E]";
+	private final String TYPE = "E";
 	private final String TIME;
 	private final String NAME;
 
@@ -38,6 +38,19 @@ public class Event extends Task {
 	 */
 	@Override
 	public String track() {
-		return this.TYPE;
+		return "[" + this.TYPE + "]";
+	}
+
+	/**
+	 * Returns the name of the Task.
+	 *
+	 * @return Name of Task.
+	 */
+	public String getName() {
+		return this.NAME;
+	}
+
+	public String getTime() {
+		return this.TIME;
 	}
 }
