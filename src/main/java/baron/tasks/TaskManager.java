@@ -124,7 +124,8 @@ public class TaskManager {
 
     public void revertChanges() {
         if (this.previousTaskList != null) {
-            this.taskList = new ArrayList<>(previousTaskList);
+            this.taskList = new ArrayList<>(this.previousTaskList);
+            this.previousTaskList = null;
         }
     }
 
