@@ -1,4 +1,4 @@
-package chatbot;
+package tasks;
 
 public class Todo extends Task {
 

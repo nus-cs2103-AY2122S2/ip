@@ -1,4 +1,4 @@
-package chatbot;
+package tasks;
 public class Task {
     protected boolean isDone = false;
     protected String taskName = "";
