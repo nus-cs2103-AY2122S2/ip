@@ -3,7 +3,7 @@ public class Event extends Task {
     private String eventTiming;
 
     public Event(String description, String eventTiming){
-        super(description);
+        super(description, "E");
         this.eventTiming = eventTiming;
     }
 
@@ -11,8 +11,15 @@ public class Event extends Task {
         return this.eventTiming;
     }
 
+    @Override
+    public String toSaveDataFormat() {
+        String isDone = (super.checkIsDone() == true) ? "1" : "0";
+        return String.format("%s|%s|%s|%s\n", super.getTag(), isDone, super.getTaskDescription(), this.getEventTiming());
+    }
+
+    @Override
     public String toString() {
-        return "[E]" + super.toString() + " (At: " + this.getEventTiming() + ")";
+        return super.toString() + " (At: " + this.getEventTiming() + ")";
     }
 
 }
