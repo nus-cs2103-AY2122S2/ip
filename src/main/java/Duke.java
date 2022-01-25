@@ -23,8 +23,6 @@ public class Duke {
                 isExit = c.isExit();
             } catch(DukeException e){
                 ui.printContent(e.getMessage());
-            } catch (DukeInvalidCommandException e){
-                ui.printContent(e.getMessage());
             }
         }
         ui.showExitMessage();

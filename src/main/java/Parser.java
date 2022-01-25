@@ -12,7 +12,9 @@ public class Parser {
 
     private static final String COMMAND_DELETE = "delete";
 
-    public static Command parse(String fullCommand) throws DukeException, DukeInvalidCommandException{
+    private static final String ERROR_INVALID_COMMAND = "OOPS!!! You have entered an invalid command :(";
+
+    public static Command parse(String fullCommand) throws DukeException{
         String splittedCommand[] = fullCommand.split("\\s+");
         String command = splittedCommand[0];
         String args = fullCommand.substring(splittedCommand[0].length()).trim();
@@ -35,7 +37,7 @@ public class Parser {
         case COMMAND_DELETE:
             return new DeleteCommand(args);
         default:
-            throw new DukeInvalidCommandException();
+            throw new DukeException(ERROR_INVALID_COMMAND);
         }
     }
 }
