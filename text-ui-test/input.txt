@@ -1,10 +1,18 @@
 todo bake bread
 event project meeting /at Mon 2-4pm
-deadline return book /by Sunday
+deadline return book /by 2022/12/11
 list
+mark -1
+mark 4
 mark 1
 mark 2
+list
+unmark 2
+unmark -1
+unmark 4
 list 
-unmark 1
+delete 3
+delete 2
+delete 1
 list
 bye

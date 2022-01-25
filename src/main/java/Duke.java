@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -103,6 +104,9 @@ public class Duke {
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Not enough fields, please check your inputs and try again.");
+        } catch (DateTimeParseException e) {
+            System.out.println("Sorry, invalid date. Please format as yyyy-mm-dd");
+            task = null;
         }
 
         if(task != null){
