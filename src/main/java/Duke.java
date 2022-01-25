@@ -9,15 +9,26 @@ public class Duke {
         String input = readInput(reader);
         //Task tasks[] = new Task[100]; //100 is an arbitrary constant
         List<Task> tasks = new LinkedList<Task>();
+        String command;
 
         while (!input.equals("bye")){
-            System.out.println(input);
+            command = input.replaceAll(" .*", "");
 
-            if (input.equals("list")) {
-                printList(tasks);
-            }
-            else {
-                tasks.add(new Task(input));
+            switch (command) {
+                case "list":
+                    printList(tasks);
+                    break;
+                case "do":
+                    int i = Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;
+                    tasks.get(i).markComplete();
+                    break;
+                case "undo":
+                    int j = Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;
+                    tasks.get(j).markIncomplete();
+                    break;
+                default:
+                    tasks.add(new Task(input));
+                    System.out.println(input);
             }
 
             input = readInput(reader);
