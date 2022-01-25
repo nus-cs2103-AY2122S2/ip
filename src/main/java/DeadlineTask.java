@@ -1,3 +1,4 @@
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -5,7 +6,7 @@ public class DeadlineTask extends Task{
     protected LocalDate taskDate;
     protected LocalTime taskTime;
 
-    public DeadlineTask(String title, String taskDate){
+    public DeadlineTask(String title, String taskDate) throws DateTimeException{
         super(title);
         this.type = TaskType.DEADLINE;
         this.taskDate = LocalDate.parse(taskDate);

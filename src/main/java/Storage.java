@@ -8,13 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
-    public static int saveToFile(String path, List<Task> taskList) throws IOException{
+    private static final String FILE_PATH = "./data/test.txt";
+
+    public static int saveToFile(List<Task> taskList){
         FileWriter out = null;
         //Check if folder/file is present, otherwise create file
-        File file = new File(path);
+        File file = new File(FILE_PATH);
         try{
-            String split[] = path.split("/");
-            String directoryPath = path.substring(0, path.length() - split[split.length-1].length());
+            String split[] = FILE_PATH.split("/");
+            String directoryPath = FILE_PATH.substring(0, FILE_PATH.length() - split[split.length-1].length());
             File directory = new File(directoryPath);
             if (!directory.exists())
                 directory.mkdirs();
@@ -26,11 +28,9 @@ public class Storage {
                 String outputLine = currentTask.toOutputLine() + "\n";
                 out.write(outputLine);
             }
+            out.close();
         } catch(IOException exception){
             return -1;
-        } finally {
-            if (out != null)
-                out.close();
         }
         return 1;
     }
@@ -68,8 +68,9 @@ public class Storage {
             return taskList;
         } catch (IOException e){
             return taskList;
-        } finally{
-
+        } catch (IndexOutOfBoundsException e){
+            //in case somehow the .txt file format is broken
+            return taskList;
         }
         return taskList;
     }
