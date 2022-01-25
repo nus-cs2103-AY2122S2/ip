@@ -44,7 +44,7 @@ public class Event extends Task {
      * @return  Event in String
      */
     @Override
-    public String toString() {
+    public String toStringFromList() {
         String box1 = "[E]";
         String doneness;
         if (super.isDone()) {

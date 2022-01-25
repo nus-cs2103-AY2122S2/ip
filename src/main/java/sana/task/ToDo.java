@@ -32,7 +32,7 @@ public class ToDo extends Task {
      * @return  ToDo in String
      */
     @Override
-    public String toString() {
+    public String toStringFromList() {
         String box1 = "[T]";
         String doneness;
         if (super.isDone()) {

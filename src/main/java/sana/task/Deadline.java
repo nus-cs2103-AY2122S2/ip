@@ -45,7 +45,7 @@ public class Deadline extends Task {
      * @return  Deadline in String
      */
     @Override
-    public String toString() {
+    public String toStringFromList() {
         String box1 = "[D]";
         String doneness;
         if (super.isDone()) {

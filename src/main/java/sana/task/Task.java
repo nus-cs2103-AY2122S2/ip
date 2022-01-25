@@ -70,4 +70,11 @@ public abstract class Task {
      */
     public abstract String taskToMemStr();
 
+    /**
+     * Returns the string representation of the sana.task in a tasklist
+     *
+     * @return  String representation of the sana.task in taskList
+     */
+    public abstract String toStringFromList();
+
 }

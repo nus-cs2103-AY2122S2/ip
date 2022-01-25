@@ -47,20 +47,25 @@ public class Ui {
      * @param task  sana.task to be printed
      */
     public void printTaskInList(Task task) {
-        System.out.println(task);
+        System.out.println(task.toStringFromList());
     }
 
     /**
      * Prints the entire sana.task list
      *
-     * @param taskList  sana.task list to be printed
+     * @param taskList      sana.task list to be printed
+     * @param isMatching    if method is called from a find command
      */
-    public void printTaskList(LinkedList<Task> taskList) {
+    public void printTaskList(LinkedList<Task> taskList, boolean isMatching) {
         int index = 1;
-        System.out.println("Here's your tasks!");
+        if (isMatching) {
+            System.out.println("Here's your matching tasks!");
+        } else {
+            System.out.println("Here's your tasks!");
+        }
         for (Task task : taskList) {
             String header = Integer.valueOf(index).toString() + ".";
-            System.out.println(header + task);
+            System.out.println(header + task.toStringFromList());
             index++;
         }
     }

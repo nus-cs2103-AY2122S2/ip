@@ -2,6 +2,7 @@ package sana;
 
 import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
+import java.util.LinkedList;
 
 import sana.exception.*;
 import sana.task.*;
@@ -66,35 +67,39 @@ public class Sana {
         String command = parsedCmd[0];
         try {
             switch (command) {
-                case "bye":
-                    ui.closeScanner();
-                    ui.bye();
-                    break;
-                case "list":
-                    list();
-                    break;
-                case "mark":
-                    int markIndex = Integer.parseInt(parsedCmd[1]) - 1;
-                    mark(markIndex, true);
-                    break;
-                case "unmark":
-                    int unmarkIndex = Integer.parseInt(parsedCmd[1]) - 1;
-                    mark(unmarkIndex, false);
-                    break;
-                case "todo":
-                    addToDo(parsedCmd[1]);
-                    break;
-                case "event":
-                    LocalDate eventDate = LocalDate.parse(parsedCmd[2]);
-                    addEvent(parsedCmd[1], eventDate);
-                    break;
-                case "deadline":
-                    LocalDate deadlineDate = LocalDate.parse(parsedCmd[2]);
-                    addDeadline(parsedCmd[1], deadlineDate);
-                    break;
-                case "delete":
-                    int deleteIndex = Integer.parseInt(parsedCmd[1]) - 1;
-                    delete(deleteIndex);
+            case "bye":
+                ui.closeScanner();
+                ui.bye();
+                break;
+            case "list":
+                list();
+                break;
+            case "mark":
+                int markIndex = Integer.parseInt(parsedCmd[1]) - 1;
+                mark(markIndex, true);
+                break;
+            case "unmark":
+                int unmarkIndex = Integer.parseInt(parsedCmd[1]) - 1;
+                mark(unmarkIndex, false);
+                break;
+            case "todo":
+                addToDo(parsedCmd[1]);
+                break;
+            case "event":
+                LocalDate eventDate = LocalDate.parse(parsedCmd[2]);
+                addEvent(parsedCmd[1], eventDate);
+                break;
+            case "deadline":
+                LocalDate deadlineDate = LocalDate.parse(parsedCmd[2]);
+                addDeadline(parsedCmd[1], deadlineDate);
+                break;
+            case "delete":
+                int deleteIndex = Integer.parseInt(parsedCmd[1]) - 1;
+                delete(deleteIndex);
+                break;
+            case "find":
+                findTasks(parsedCmd[1]);
+                break;
             }
         } catch (OutOfBoundsTaskException e) {
             System.out.println(e.getMessage());
@@ -109,7 +114,17 @@ public class Sana {
     }
 
     /**
-     * This method removes a sana.task from the userTasks list
+     * Finds task names that contain the keyword, then print it out
+     *
+     * @param keyword   keyword to find in task names
+     */
+    private void findTasks(String keyword) {
+        LinkedList<Task> matchingTasks = userTasks.findMatchingTasks(keyword);
+        ui.printTaskList(matchingTasks, true);
+    }
+
+    /**
+     * Removes a sana.task from the userTasks list
      *
      * @param taskIndex The index of the sana.task to be removed
      */
@@ -124,7 +139,7 @@ public class Sana {
     }
 
     /**
-     * This method adds a Deadline to userTasks
+     * Adds a Deadline to userTasks
      *
      * @param deadlineName  name of the deadline
      * @param deadlineDate  time of the deadline
@@ -141,7 +156,7 @@ public class Sana {
     }
 
     /**
-     * This method adds an Event to userTasks
+     * Adds an Event to userTasks
      *
      * @param eventName name of the event
      * @param eventTime time of the event
@@ -158,7 +173,7 @@ public class Sana {
     }
 
     /**
-     * This method adds a ToDo to userTasks
+     * Adds a ToDo to userTasks
      *
      * @param taskName  the name of the todo
      */
@@ -174,7 +189,7 @@ public class Sana {
     }
 
     /**
-     * This method marks the sana.task located at the index as done or not done
+     * Marks the sana.task located at the index as done or not done
      *
      * @param taskIndex     the index of the sana.task to be marked done
      * @param completion    the completion of the sana.task
@@ -189,10 +204,10 @@ public class Sana {
     }
 
     /**
-     * This method lists the history of user inputs to Sana
+     * Lists the history of user inputs to Sana
      */
     private void list() {
-        ui.printTaskList(userTasks.toList());
+        ui.printTaskList(userTasks.toList(), false);
     }
 
     public static void main(String[] args) {

@@ -14,14 +14,14 @@ public class SanaTest {
     public void deadlineTest() {
         Deadline testDeadline = new Deadline("testDeadline", true, "2022-01-01");
         String deadlineToString = "[D][X] testDeadline (by: Jan 1 2022)";
-        assertEquals(deadlineToString, testDeadline.toString());
+        assertEquals(deadlineToString, testDeadline.toStringFromList());
     }
 
     @Test
     public void eventTest() {
         Event testEvent = new Event("testEvent", false, "2022-02-02");
         String eventToString = "[E][ ] testEvent (at: Feb 2 2022)";
-        assertEquals(eventToString, testEvent.toString());
+        assertEquals(eventToString, testEvent.toStringFromList());
     }
 
     @Test

@@ -74,4 +74,21 @@ public class TaskList {
     public void removeTask(int index) {
         taskList.remove(index);
     }
+
+    /**
+     * Returns a list of strings that represents tasks that contain the keyword
+     *
+     * @param keyword   keyword to search in task names
+     * @return  list of strings of tasks that contain the keyword
+     */
+    public LinkedList<Task> findMatchingTasks(String keyword) {
+        LinkedList<Task> resList = new LinkedList<>();
+        for (int i = 0; i < taskList.size(); i++) {
+            String taskName = taskList.get(i).toString();
+            if (taskName.contains(keyword)) {
+                resList.add(getTask(i));
+            }
+        }
+        return resList;
+    }
 }
