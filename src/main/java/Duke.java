@@ -18,12 +18,16 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
 
+        duke.list = new DukeFile().readData();
+
         while (scanner.hasNext()) {
             String[] input = scanner.nextLine().split(" ", 2);
 
             duke.echo(input);
 
             if (input[0].equals("bye")) {
+                DukeFile dukeFile = new DukeFile();
+                dukeFile.saveData(duke.list);
                 break;
             }
         }
@@ -46,10 +50,10 @@ public class Duke {
                     readList();
                     break;
                 case MARK:
-                    list.get(Integer.parseInt(userInput[1]) - 1).markTask(true);
+                    list.get(Integer.parseInt(userInput[1]) - 1).markTask(true, true);
                     break;
                 case UNMARK:
-                    list.get(Integer.parseInt(userInput[1]) - 1).markTask(false);
+                    list.get(Integer.parseInt(userInput[1]) - 1).markTask(false, true);
                     break;
                 case DELETE:
                     delete(Integer.parseInt(userInput[1]) - 1);
@@ -60,6 +64,8 @@ public class Duke {
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Duke has noticed that the number you provided does not \nmatch the number of task you have." +
                     "\nPlease enter a valid task number!");
+        } catch (NumberFormatException e) {
+            System.out.println("OOPS!!! Please enter a valid task number!");
         }
         System.out.println(hLine + "\n");
     }
@@ -80,10 +86,10 @@ public class Duke {
 
             switch (type) {
                 case DEADLINE:
-                    task = new Deadline(strings[0], strings[1]);
+                    task = new Deadline(strings[0], strings[1].substring(3));
                     break;
                 case EVENT:
-                    task = new Event(strings[0], strings[1]);
+                    task = new Event(strings[0], strings[1].substring(3));
                     break;
                 case TODO:
                     task = new Todo(userInput[1]);
