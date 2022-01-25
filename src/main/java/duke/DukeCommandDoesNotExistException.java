@@ -1,4 +1,4 @@
-package duke.exception;
+package duke;
 
 public class DukeCommandDoesNotExistException extends DukeException {
     public DukeCommandDoesNotExistException(String errorMessage) {

@@ -1,7 +1,5 @@
 package duke;
 
-import duke.exception.DukeCommandDoesNotExistException;
-import duke.exception.DukeException;
 import duke.io.Parser;
 import duke.io.UserInput;
 import duke.storage.Storage;

@@ -1,6 +1,6 @@
 package duke.storage;
 
-import duke.exception.DukeException;
+import duke.DukeException;
 import duke.io.Parser;
 import duke.io.UserInput;
 import duke.task.Task;

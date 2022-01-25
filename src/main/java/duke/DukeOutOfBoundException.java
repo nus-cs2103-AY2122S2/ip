@@ -1,4 +1,4 @@
-package duke.exception;
+package duke;
 
 public class DukeOutOfBoundException extends DukeException {
     public DukeOutOfBoundException(String errorMessage) {

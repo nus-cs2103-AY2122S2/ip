@@ -1,6 +1,6 @@
 package duke.io;
 
-import duke.exception.DukeWrongTimeFormatException;
+import duke.DukeWrongTimeFormatException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
