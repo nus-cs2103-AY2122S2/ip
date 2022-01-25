@@ -1,24 +1,30 @@
 import java.util.ArrayList;
 
 public class Task {
-    protected boolean marked;
-    protected String description;
+    private boolean marked;
+    private String description;
+    private String charId;
+    private String time;
 
-    Task(String description) {
+    Task(String description, String charId, String time) {
         this.marked = false;
         this.description = description;
+        this.charId = charId;
+        this.time = time;
     }
 
-    public void markTask(boolean mark) {
+    public void markTask(boolean mark, boolean show) {
         this.marked = mark;
         String output;
 
-        if (mark) {
-            output = "Nice! I've marked this task as done:\n";
-        } else {
-            output = "OK, I've marked this task as not done yet:\n";
+        if (show) {
+            if (mark) {
+                output = "Nice! I've marked this task as done:\n";
+            } else {
+                output = "OK, I've marked this task as not done yet:\n";
+            }
+            System.out.println(output + toString());
         }
-        System.out.println(output + toString());
     }
 
     public char getMark() {
@@ -27,6 +33,14 @@ public class Task {
 
     public String getUserInput() {
         return this.description;
+    }
+
+    public String getCharId() {
+        return this.charId;
+    }
+
+    public String getTime() {
+        return this.time;
     }
 
     @Override

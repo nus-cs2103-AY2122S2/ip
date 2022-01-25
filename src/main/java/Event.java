@@ -3,8 +3,8 @@ public class Event extends Task {
     protected String at;
 
     Event(String description, String at) {
-        super(description);
-        this.at = at.substring(3);
+        super(description, "E", at);
+        this.at = at;
     }
 
     @Override
