@@ -1,7 +1,12 @@
 package duke;
 
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+
 import java.io.*;
-import duke.task.*;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,7 +18,7 @@ public class FileHandler {
     /**
      * Writes some input text to a file.
      *
-     * @param filePath A string with the path to the written file.
+     * @param filePath    A string with the path to the written file.
      * @param textToWrite A string with the text to be written.
      * @throws IOException If I/O error occurs.
      */
@@ -65,8 +70,8 @@ public class FileHandler {
      * Edits lines from a file.
      *
      * @param filePath A string with the path to the written file.
-     * @param oldLine The line to be replaced in the file.
-     * @param newLine The line that will replace the old line in the file.
+     * @param oldLine  The line to be replaced in the file.
+     * @param newLine  The line that will replace the old line in the file.
      * @throws IOException If I/O error occurs.
      */
     public static void editFile(String filePath, String oldLine, String newLine) throws IOException {
@@ -98,7 +103,7 @@ public class FileHandler {
     /**
      * Copies an entire file to another file.
      *
-     * @param src The source file whose contents will be copied.
+     * @param src    The source file whose contents will be copied.
      * @param target The target file whih will be copied over to.
      * @throws IOException If I/O error occurs.
      */

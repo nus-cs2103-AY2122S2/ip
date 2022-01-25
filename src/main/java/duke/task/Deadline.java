@@ -2,7 +2,9 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
 import duke.DukeException;
+
 /**
  * Represents a task object that needs to be completed by
  * a certain date.
@@ -15,7 +17,7 @@ public class Deadline extends Task {
      * Creates a new Deadline object.
      *
      * @param description The title of the deadline task.
-     * @param dLine The date in which the task is due by.
+     * @param dLine       The date in which the task is due by.
      */
     public Deadline(String description, LocalDate dLine) {
         super(description);
@@ -62,10 +64,10 @@ public class Deadline extends Task {
      * Creates a new Deadline object from a text input, a status value,
      * and a date text.
      *
-     * @param status Indicates if task is marked as completed or not. 1 being
-     * complete and 0 being incomplete.
+     * @param status      Indicates if task is marked as completed or not. 1 being
+     *                    complete and 0 being incomplete.
      * @param description The given title of the deadline task.
-     * @param date The due date of the deadline task.
+     * @param date        The due date of the deadline task.
      * @return A new Deadline object.
      */
     public static Deadline createDeadline(int status, String description, String date) {

@@ -24,12 +24,12 @@ public class Duke {
 
     public void run() throws IOException, DukeException {
 
-        File dir = new File("./data"); //ensures directory is added
+        File dir = new File("./data"); 
         if (!dir.exists()) {
             dir.mkdir();
         }
 
-        File file = new File("./data/duke.txt"); //ensures data file is added
+        File file = new File("./data/duke.txt");
         if (!file.exists()) {
             file.createNewFile();
         }
