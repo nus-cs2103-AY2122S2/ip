@@ -5,8 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
-    String time;
-    LocalDate date;
+    private String time;
+    private LocalDate date;
 
     public Deadline(String description, String time) {
         super(description);
@@ -20,7 +20,7 @@ public class Deadline extends Task {
 
     public void print() {
         System.out.print("[D]");
-        System.out.print("[" + (this.completed ? "x" : " ") +  "] " + this.description);
+        System.out.print("[" + (this.isCompleted ? "x" : " ") +  "] " + this.description);
         if (date == null) {
             System.out.println(" (by: " + this.time + ")");
         } else {

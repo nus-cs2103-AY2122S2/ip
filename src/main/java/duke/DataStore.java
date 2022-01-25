@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class DataStore {
-    final public static String PATH = "data/tasks.csv";
+    final private static String PATH = "data/tasks.csv";
 
     public static void saveData(TaskList tasks){
         File csvFile = new File(PATH);

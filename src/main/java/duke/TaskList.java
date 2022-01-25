@@ -3,7 +3,7 @@ package duke;
 import java.util.ArrayList;
 
 public class TaskList {
-    ArrayList<Task> actions = new ArrayList<Task>();
+    private ArrayList<Task> actions = new ArrayList<Task>();
 
     public boolean add(TaskType type, String[] inputs) throws EmptyDescriptionException {
         if (inputs[0].equals("")) {

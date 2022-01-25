@@ -8,7 +8,7 @@ public class ToDo extends Task {
 
     public void print() {
         System.out.print("[T]");
-        System.out.println("[" + (this.completed ? "x" : " ") +  "] " + this.description);
+        System.out.println("[" + (this.isCompleted ? "x" : " ") +  "] " + this.description);
     }
 
     @Override

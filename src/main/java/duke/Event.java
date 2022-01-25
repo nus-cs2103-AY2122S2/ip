@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
     private String time;
-    LocalDateTime datetime;
+    private LocalDateTime datetime;
 
 
     Event(String description, String time) {
@@ -21,7 +21,7 @@ public class Event extends Task {
 
     public void print() {
         System.out.print("[E]");
-        System.out.print("[" + (this.completed ? "x" : " ") +  "] " + this.description);
+        System.out.print("[" + (this.isCompleted ? "x" : " ") +  "] " + this.description);
         if (datetime == null) {
             System.out.println(" (at: " + this.time + ")");
         } else {
