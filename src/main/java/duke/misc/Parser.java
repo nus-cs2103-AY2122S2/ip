@@ -28,46 +28,46 @@ public class Parser {
      * @param userInput Command entered by the user.
      */
     public static void parse(String userInput, TaskList taskListOfTasks) throws DukeException {
-        String[] wordArray = userInput.trim().split(" ");
-        List<String> wordList = Arrays.asList(wordArray);
-        String firstWord = wordList.get(0);
+        String[] wordsArray = userInput.trim().split(" ");
+        List<String> wordsList = Arrays.asList(wordsArray);
+        String firstWord = wordsList.get(0);
 
         switch (firstWord) {
         case ("list"):
-            if (wordList.size() == 1) {
+            if (wordsList.size() == 1) {
                 taskListOfTasks.display();
             } else {
                 throw new InvalidCommand("This command should not have any arguments :(");
             }
             break;
         case ("todo"):
-            if (wordList.size() > 1) {
+            if (wordsList.size() > 1) {
                 taskListOfTasks.todo(userInput.substring(5));
             } else {
                 throw new InvalidCommand("The description of a todo cannot be empty :(");
             }
             break;
         case ("deadline"):
-            if (wordList.size() < 4) {
+            if (wordsList.size() < 4) {
                 throw new InvalidCommand("Incorrect number of arguments supplied :(");
-            } else if (!wordList.contains("/by")) {
+            } else if (!wordsList.contains("/by")) {
                 throw new InvalidCommand("Please follow this format: deadline <task> " +
                         "/by <date in yyyy-MM-dd> <time in 24hrs format>");
             } else {
-                int separator = wordList.indexOf("/by");
+                int separator = wordsList.indexOf("/by");
                 String desc = "";
                 String dateTime = "";
                 for (int i = 1; i < separator; i++) {
-                    desc += wordList.get(i);
+                    desc += wordsList.get(i);
                     desc += " ";
                 }
-                for (int i = separator + 1; i < wordList.size(); i++) {
-                    dateTime += wordList.get(i);
+                for (int i = separator + 1; i < wordsList.size(); i++) {
+                    dateTime += wordsList.get(i);
                     dateTime += " ";
                 }
+
                 dateTime = removeLastChar(dateTime);
                 String[] dateTimeArray = dateTime.split(" ");
-
                 if (dateTimeArray.length > 2 || dateTimeArray.length < 1) {
                     throw new InvalidCommand("Incorrect number of arguments supplied :(");
                 }
@@ -95,26 +95,26 @@ public class Parser {
             }
             break;
         case ("event"):
-            if (wordList.size() < 4) {
+            if (wordsList.size() < 4) {
                 throw new InvalidCommand("Incorrect number of arguments supplied :(");
-            } else if (!wordList.contains("/at")) {
+            } else if (!wordsList.contains("/at")) {
                 throw new InvalidCommand("Please follow this format: event <task> " +
                         "/at <date in yyyy-MM-dd> <time in 24hrs format>");
             } else {
-                int separator = wordList.indexOf("/at");
+                int separator = wordsList.indexOf("/at");
                 String desc = "";
                 String dateTime = "";
                 for (int i = 1; i < separator; i++) {
-                    desc += wordList.get(i);
+                    desc += wordsList.get(i);
                     desc += " ";
                 }
-                for (int i = separator + 1; i < wordList.size(); i++) {
-                    dateTime += wordList.get(i);
+                for (int i = separator + 1; i < wordsList.size(); i++) {
+                    dateTime += wordsList.get(i);
                     dateTime += " ";
                 }
+
                 dateTime = removeLastChar(dateTime);
                 String[] dateTimeArray = dateTime.split(" ");
-
                 if (dateTimeArray.length > 3 || dateTimeArray.length < 1) {
                     throw new InvalidCommand("Incorrect number of arguments supplied :(");
                 }
@@ -152,12 +152,12 @@ public class Parser {
             }
             break;
         case("mark"):
-            if (wordList.size() != 2) {
+            if (wordsList.size() != 2) {
                 throw new InvalidCommand("This command should have exactly 1 argument.");
-            } else if (!isInteger(wordList.get(1))) {
+            } else if (!isInteger(wordsList.get(1))) {
                 throw new InvalidCommand("The argument MUST contain a single integer.");
             } else {
-                int currTaskId = Integer.parseInt(wordList.get(1));
+                int currTaskId = Integer.parseInt(wordsList.get(1));
                 if (currTaskId > 0 & currTaskId <= taskListOfTasks.getNumberOfTasks()) {
                     taskListOfTasks.mark(currTaskId); // Valid taskID, proceed to mark task
                 } else {
@@ -167,12 +167,12 @@ public class Parser {
             }
             break;
         case("unmark"):
-            if (wordList.size() != 2) {
+            if (wordsList.size() != 2) {
                 throw new InvalidCommand("This command should have exactly 1 argument.");
-            } else if (!isInteger(wordList.get(1))) {
+            } else if (!isInteger(wordsList.get(1))) {
                 throw new InvalidCommand("The argument MUST contain a single integer.");
             } else {
-                int currTaskId = Integer.parseInt(wordList.get(1));
+                int currTaskId = Integer.parseInt(wordsList.get(1));
                 if (currTaskId > 0 & currTaskId <= taskListOfTasks.getNumberOfTasks()) {
                     taskListOfTasks.unmark(currTaskId); // Valid taskID, proceed to unmark task
                 } else {
@@ -182,12 +182,12 @@ public class Parser {
             }
             break;
         case("delete"):
-            if (wordList.size() != 2) {
+            if (wordsList.size() != 2) {
                 throw new InvalidCommand("This command should have exactly 1 argument.");
-            } else if (!isInteger(wordList.get(1))) {
+            } else if (!isInteger(wordsList.get(1))) {
                 throw new InvalidCommand("The argument MUST contain a single integer.");
             } else {
-                int currTaskId = Integer.parseInt(wordList.get(1));
+                int currTaskId = Integer.parseInt(wordsList.get(1));
                 if (currTaskId > 0 & currTaskId <= taskListOfTasks.getNumberOfTasks()) {
                     taskListOfTasks.delete(currTaskId); // Valid taskID, proceed to unmark task
                 } else {

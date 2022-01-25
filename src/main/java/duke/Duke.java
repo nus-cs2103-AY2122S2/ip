@@ -19,6 +19,7 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         Ui.greet();
+
         try {
             Storage.initFileFolder();
         } catch (IOException e) {
