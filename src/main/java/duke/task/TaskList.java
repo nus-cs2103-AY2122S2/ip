@@ -1,24 +1,28 @@
+package duke.task;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.DukeException;
+
 public class TaskList {
-    // Main data structure to store Task objects
+    // Main data structure to store duke.task.Task objects
     private List<Task> tasks = new ArrayList<>();
 
     /**
-     * Adds a Task to existing TaskList.
+     * Adds a duke.task.Task to existing duke.task.TaskList.
      *
-     * @param task task to add
+     * @param task duke.task to add
      */
     public void addTask(Task task) {
         this.tasks.add(task);
     }
 
     /**
-     * Removes a Task from the existing list.
+     * Removes a duke.task.Task from the existing list.
      *
-     * @param index index of Task to remove
-     * @return the removed Task
+     * @param index index of duke.task.Task to remove
+     * @return the removed duke.task.Task
      * @throws DukeException index out of range
      */
     public Task removeTask(int index) throws DukeException {
@@ -43,10 +47,10 @@ public class TaskList {
     }
 
     /**
-     * Marks the Task at specified index (marked as done)
+     * Marks the duke.task.Task at specified index (marked as done)
      *
-     * @param index index of Task to mark
-     * @return true if the state of Task was changed by marking (not done -> done)
+     * @param index index of duke.task.Task to mark
+     * @return true if the state of duke.task.Task was changed by marking (not done -> done)
      * @throws DukeException index out of range
      */
     public Boolean mark(int index) throws DukeException {
@@ -56,10 +60,10 @@ public class TaskList {
     }
 
     /**
-     * Unmarks the Task (marked as not done)
+     * Unmarks the duke.task.Task (marked as not done)
      *
-     * @param index index of Task to unmark
-     * @return true if the state of Task was changed by unmarking (done -> not done)
+     * @param index index of duke.task.Task to unmark
+     * @return true if the state of duke.task.Task was changed by unmarking (done -> not done)
      * @throws DukeException index out of range
      */
     public Boolean unmark(int index) throws DukeException {
@@ -69,10 +73,10 @@ public class TaskList {
     }
 
     /**
-     * Retrieves Task at index
+     * Retrieves duke.task.Task at index
      *
-     * @param index index of Task to get
-     * @return resulting Task
+     * @param index index of duke.task.Task to get
+     * @return resulting duke.task.Task
      * @throws DukeException index out of range
      */
     public Task getTask(int index) throws DukeException {
@@ -82,14 +86,14 @@ public class TaskList {
 
     /**
      *
-     * @return size of TaskList
+     * @return size of duke.task.TaskList
      */
     public int size() {
         return this.tasks.size();
     }
 
     /**
-     * Returns a string, where each line is a Task formatted for saving to file
+     * Returns a string, where each line is a duke.task.Task formatted for saving to file
      *
      * @return formatted string of Tasks for saving to file
      */

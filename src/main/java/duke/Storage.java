@@ -1,3 +1,8 @@
+package duke;
+
+import duke.task.Task;
+import duke.task.TaskList;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -5,7 +10,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
- * Class to abstract and encapsulate file interactions for Duke.
+ * Class to abstract and encapsulate file interactions for duke.Duke.
  *
  * File format:
  * tag||<0 or 1>||name[||additional arguments...]
@@ -38,7 +43,7 @@ public class Storage {
     /**
      * Loads Tasks from file
      *
-     * @return TaskList populated with data from file
+     * @return duke.task.TaskList populated with data from file
      * @throws IOException file access error
      * @throws DukeException when format error is present in file
      */

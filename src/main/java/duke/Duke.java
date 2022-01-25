@@ -1,5 +1,16 @@
+package duke;
+
 import java.io.IOException;
 import java.util.Scanner;
+
+import duke.task.TaskList;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Event;
+import duke.task.Deadline;
+
+import duke.command.Command;
+import duke.command.CommandParser;
 
 public class Duke {
     private TaskList tasks;
@@ -34,7 +45,7 @@ public class Duke {
             // User input is 1-indexed, list uses 0-index
             int markIdx = Integer.parseInt(action.getArgs()) - 1;
             tasks.mark(markIdx);
-            ui.say("[*] Marked the following task as done:\n" +
+            ui.say("[*] Marked the following duke.task as done:\n" +
                     "\t" + tasks.getTask(markIdx).nameWithStatus());
             break;
 
@@ -42,7 +53,7 @@ public class Duke {
             // User input is 1-indexed, list uses 0-index
             int unmarkIdx = Integer.parseInt(action.getArgs()) - 1;
             tasks.unmark(unmarkIdx);
-            ui.say("[*] Marked the following task as not done:\n" +
+            ui.say("[*] Marked the following duke.task as not done:\n" +
                     "\t" + tasks.getTask(unmarkIdx).nameWithStatus());
             break;
 
@@ -51,7 +62,7 @@ public class Duke {
             int dltIdx = Integer.parseInt(action.getArgs()) - 1;
             Task deletedTask = tasks.removeTask(dltIdx);
             ui.say(String.format(
-                    "[-] Removed this task:\n" +
+                    "[-] Removed this duke.task:\n" +
                             "\t%s\n" +
                             "Now you have %d tasks in the list.",
                     deletedTask.nameWithStatus(), tasks.size()));
@@ -87,7 +98,7 @@ public class Duke {
     }
 
     /**
-     * Construct a Duke instance
+     * Construct a duke.Duke instance
      *
      * @param filename File to load and save Tasks
      */
@@ -101,15 +112,15 @@ public class Duke {
         try {
             storage = new Storage(filename);
             tasks = storage.loadTasks();
-        } catch (IOException|DukeException e) {
-            ui.warning("[!] Error reading file - initializing task list as empty list");
+        } catch (IOException| DukeException e) {
+            ui.warning("[!] Error reading file - initializing duke.task list as empty list");
             tasks = new TaskList();
         }
 
     }
 
     /**
-     * Main driver method to run Duke
+     * Main driver method to run duke.Duke
      */
     public void run() {
         while (true) {

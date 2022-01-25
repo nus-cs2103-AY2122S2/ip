@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 public class Ui {
     private class Color {
         public static final String NONE = "\033[m";
@@ -23,7 +27,7 @@ public class Ui {
     }
 
     /**
-     * Method for Duke to print message in a formatted style.
+     * Method for duke.Duke to print message in a formatted style.
      *
      * @param message message to print
      */
@@ -42,7 +46,7 @@ public class Ui {
     }
 
     /**
-     * Method for Duke to print error messages.
+     * Method for duke.Duke to print error messages.
      *
      * @param message error message to print
      */
@@ -51,7 +55,7 @@ public class Ui {
     }
 
     /**
-     * Method for Duke to print warning messages.
+     * Method for duke.Duke to print warning messages.
      *
      * @param message warning message to print
      */
@@ -62,11 +66,11 @@ public class Ui {
     /**
      * Log the addition of tasks in the same format
      *
-     * @param task task added to be logged
+     * @param task duke.task added to be logged
      */
     public void logNewTask(Task task, int taskCount) {
         say(String.format(
-                "[+] Added following task:\n" +
+                "[+] Added following duke.task:\n" +
                         "\t%s\n" +
                         "Now you have %d tasks in the list.",
                 task.nameWithStatus(), taskCount));

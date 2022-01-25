@@ -1,8 +1,12 @@
-import java.time.format.DateTimeFormatter;
+package duke.command;
+
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.time.format.DateTimeFormatter;
+
+import duke.DukeException;
 
 public class CommandParser {
     /**
@@ -20,8 +24,8 @@ public class CommandParser {
     private static final String[][] COMMANDS = {
             { "bye", "bye", "bye" },
             { "list", "list", "list" },
-            { "mark", "mark (\\d+)", "mark <task number>" },
-            { "unmark", "unmark (\\d+)", "unmark <task number>" },
+            { "mark", "mark (\\d+)", "mark <duke.task number>" },
+            { "unmark", "unmark (\\d+)", "unmark <duke.task number>" },
             { "todo", "todo (.*)", "todo <description>" },
             { "deadline",
                     "deadline (.*) /(by) ((?:[1-9]|[12][0-9]|3[01])/(?:[1-9]|1[0-2])/[0-9]{4})",
@@ -29,13 +33,13 @@ public class CommandParser {
             { "event",
                     "event (.*) /(at) ((?:[1-9]|[12][0-9]|3[01])/(?:[1-9]|1[0-2])/[0-9]{4})",
                     "event <description> /at <d/M/yyyy>" },
-            { "delete", "delete (\\d+)", "delete <task number>" },
+            { "delete", "delete (\\d+)", "delete <duke.task number>" },
     };
 
     private final Scanner input;
 
     /**
-     * Instantiate parser for parsing commands for Duke
+     * Instantiate parser for parsing commands for duke.Duke
      *
      * @param input Scanner that takes in input
      */
