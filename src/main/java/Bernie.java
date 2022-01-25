@@ -1,19 +1,27 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
-import java.io.File;
 
 /**
  * Bernie the bot that is the driver for the responses to the user.
- * Internally, Bernie has Tasklist, which contain the Tasks that a user inputs
+ * Internally, Bernie has TaskList, which contain the Tasks that a user inputs
  */
 
 public class Bernie {
     TaskList tasks;
     Ui ui;
     Storage storage;
+    Parser parser;
 
+    /**
+     * Different Type of tasks: notable types are EMPTY, when the user inputs nothing: ""
+     * ADD: refers to when Type is to be added: TODO, DEADLINE, EVENT
+     */
     enum Type {
+        LIST,
+        BYE,
+        EMPTY,
+        ADD,
         TODO,
         DEADLINE,
         EVENT,
@@ -29,6 +37,7 @@ public class Bernie {
         this.tasks = new TaskList();
         this.ui = new Ui();
         this.storage = new Storage();
+        this.parser = new Parser();
         ui.greet();
     }
 
@@ -43,19 +52,28 @@ public class Bernie {
      * @return boolean value, indicating if the program will end or not.
      */
     boolean respond(String input) {
+        Bernie.Type type = Parser.parseType(input);
         try {
-            if (input.equals("list")) {
+            switch (type) {
+            case LIST:
                 ui.showListTasksMsg(tasks);
-            } else if (input.equals("bye")) {
+                break;
+            case BYE:
                 ui.showLeaveMsg();
-            } else if (isMarkInput(input)) {
+                break;
+            case MARK:
                 mark(input);
-            } else if (input.equals("")) {
+                break;
+            case EMPTY:
                 throw new BernieException("Say something???");
-            } else if (isDeleteInput(input)) {
+            case DELETE:
                 delete(input);
-            } else {
+                break;
+            case ADD:
                 add(input);
+                break;
+            default:
+                break;
             }
         } catch (BernieException e) {
             ui.showErrorMsg(e.getMessage());
@@ -64,23 +82,6 @@ public class Bernie {
         } finally {
             return input.equals("bye");
         }
-    }
-
-    /**
-     * Verifies if an input is of "mark" type: meaning either "mark" or "unmark"
-     * @param input String, user input
-     * @return boolean
-     */
-    boolean isMarkInput(String input) {
-        return input.indexOf("mark") == 0 || input.indexOf("unmark") == 0;
-    }
-    /**
-     * Verifies if an input is of "delete" type
-     * @param input String, user input
-     * @return boolean
-     */
-    boolean isDeleteInput(String input) {
-        return input.indexOf("delete") == 0;
     }
 
     /**
@@ -94,13 +95,13 @@ public class Bernie {
      */
     void add(String input) throws BernieException {
         Task newTask;
-        if (isType(Type.TODO, input)) {
+        if (Parser.isType(Type.TODO, input)) {
             String[] inputArr = getParams(Type.TODO, input);
             newTask = tasks.addTask(inputArr, "todo");
-        } else if (isType(Type.DEADLINE, input)) {
+        } else if (Parser.isType(Type.DEADLINE, input)) {
             String[] inputArr = getParams(Type.DEADLINE, input);
             newTask = tasks.addTask(inputArr, "deadline");
-        } else if (isType(Type.EVENT, input)) {
+        } else if (Parser.isType(Type.EVENT, input)) {
             String[] inputArr = getParams(Type.EVENT, input);
             newTask = tasks.addTask(inputArr, "event");
         } else {
@@ -108,16 +109,6 @@ public class Bernie {
         }
         storage.saveTasks(tasks);
         ui.showAddedMsg(newTask, tasks.numTasksLeft());
-    }
-
-    /**
-     * Verifies the user input is of which task
-     * @param taskType Type
-     * @param input String
-     * @return boolean to affirm if the input is of this task
-     */
-    boolean isType(Type taskType, String input) {
-        return input.indexOf(taskType.name().toLowerCase()) == 0;
     }
 
     /**
@@ -184,13 +175,6 @@ public class Bernie {
                 break;
         }
         return inputArr;
-    }
-
-    /**
-     * Bernie gets the TaskList to print out every Task contained inside
-     */
-    void list() {
-        ui.showListTasksMsg(tasks);
     }
 
     /**
