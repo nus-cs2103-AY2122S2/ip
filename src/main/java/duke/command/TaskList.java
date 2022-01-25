@@ -88,4 +88,21 @@ public class TaskList {
     public ArrayList<Task> getItems() {
         return list;
     }
+
+    /**
+     * Gets a sub-list of tasks that contain a specific keyword/phrase.
+     *
+     * @param description The specific keyword/phrase to search for
+     * @return A sub-list of tasks that contain a specific keyword/phrase.
+     */
+    public ArrayList<Task> findItems(String description) {
+        ArrayList<Task> newList = new ArrayList<>();
+        for (Task item : list) {
+            String s = item.toString();
+            if (s.contains(description)) {
+                newList.add(item);
+            }
+        }
+        return newList;
+    }
 }

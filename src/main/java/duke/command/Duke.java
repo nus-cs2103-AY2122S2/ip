@@ -55,22 +55,31 @@ public class Duke {
                         int index = parser.parseNumericalDescription(line, "mark", taskList.size());
                         System.out.println(taskList.markItemDone(index));
                         storage.modifyTask(index);
+
                     } else if (command.equals("unmark")) {
                         int index = parser.parseNumericalDescription(line, "unmark", taskList.size());
                         System.out.println(taskList.markItemUndone(index));
                         storage.modifyTask(index);
+
                     } else if (command.equals("delete")) {
                         int index = parser.parseNumericalDescription(line, "delete", taskList.size());
                         System.out.println(taskList.deleteItem(index));
                         storage.deleteTask(index);
+
+                    } else if (command.equals("find")) {
+                        String description = parser.parseStringDescription(line, "find");
+                        System.out.println(ui.printFoundItems(taskList.findItems(description)));
+
                     } else {
                         // adding new tasks
                         if (command.equals("todo")) {
                             String description = parser.parseStringDescription(line, "todo");
                             taskList.addTask(new Todo(description));
+
                         } else if (command.equals("deadline")) {
                             String[] params = parser.parseFormatDescription(line, "deadline", "/by");
                             taskList.addTask(new Deadline(params[0], params[1]));
+
                         } else if (command.equals("event")) {
                             String[] params = parser.parseFormatDescription(line, "event", "/at");
                             taskList.addTask(new Event(params[0], params[1]));
