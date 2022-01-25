@@ -14,15 +14,8 @@ public class ToDo extends Task {
     super(desc);
   }
 
-  /**
-   * This method is used to get the current status of the Task
-   * Status can be defined as Done/Not Done
-   * Task Type is denoted as [T]
-   *
-   * @return a string denoting the task status and type.
-   */
   @Override
-  public String getTask() {
+  public String toString() {
     String str = "[T]";
     if (super.done) {
       str += "[X] " + super.desc;
@@ -31,4 +24,5 @@ public class ToDo extends Task {
     }
     return str;
   }
+
 }

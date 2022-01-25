@@ -11,38 +11,20 @@ public class Event extends Task {
    * Method Constructor
    *
    * @param desc the task description
-   * @param the date of the event
+   * @param date of the event
    */
   public Event(String desc, String date) {
     super(desc);
     this.date = date;
   }
 
-  /**
-   * This method is used to get the current status + date of the Task
-   * Status can be defined as Done/Not Done
-   * Task Type is denoted as [E]
-   *
-   * @return a string denoting the task status, type and date.
-   */
   @Override
-  public String getTask() {
+  public String toString() {
     String str = "[E]";
-
     if (super.done) {
-      str += "[X] " + super.desc;
+      str += "[X] " + super.desc + " (at: " + this.date + ")";
     } else {
-      str += "[ ] " + super.desc;
-    }
-    if (date != null) {
-      String[] adjDate = date.split(" ");
-      str = str + " (" + adjDate[0] + ": ";
-      String[] newAdjDate = new String[adjDate.length - 1];
-      for (int i = 1; i < adjDate.length; i++) {
-        newAdjDate[i - 1] = adjDate[i];
-      }
-      String adjStr = String.join(" ", newAdjDate);
-      str = str + adjStr + ")";
+      str += "[ ] " + super.desc + " (at: " + this.date + ")";
     }
     return str;
   }

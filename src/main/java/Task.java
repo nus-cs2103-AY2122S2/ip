@@ -18,14 +18,6 @@ public abstract class Task {
   }
 
   /**
-   * This abstract method is used to get the current status of the Task
-   * Status can be defined as Done/Not Done
-   *
-   * @return a string denoting the task status.
-   */
-  public abstract String getTask();
-
-  /**
    * This method is used to change the status of the Task to done.
    */
   public void setAsDone() {
