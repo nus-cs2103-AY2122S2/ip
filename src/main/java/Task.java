@@ -22,6 +22,7 @@ public class Task {
     private boolean hasAlreadyUnmark() {
         return !this.isDone;
     }
+
     public void setDone() {
         if (hasAlreadyMark()) {
             System.out.println("\tThis task is already marked!");
