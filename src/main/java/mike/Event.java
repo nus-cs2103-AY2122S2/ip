@@ -50,7 +50,8 @@ public class Event extends Task {
         if (super.isDone) {
             doneIndicator = "true";
         }
-        String storedListFormat = String.format("%s|%s|%s|%s", taskType, doneIndicator, super.name, this.date);
+        String storedListFormat = String.format("%s|%s|%s|%s", taskType,
+                doneIndicator, super.name, this.date);
         return storedListFormat;
     }
 

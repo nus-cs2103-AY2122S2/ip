@@ -76,16 +76,16 @@ public class Mike {
         return parser.isBye();
     }
 
-    void addToListWithoutReply(Task task) {
+    private void addToListWithoutReply(Task task) {
         taskList.addToList(task);
     }
 
-    void addToListWithReply(Task task) {
+    private void addToListWithReply(Task task) {
         taskList.addToList(task);
         ui.printReply(taskList.addToListReply(task));
     }
 
-    void removeTask(int removeIndex) {
+    private void removeTask(int removeIndex) {
         ui.printReply(taskList.removeFromListWithMessage(removeIndex));
     }
 
@@ -94,7 +94,7 @@ public class Mike {
      *
      * @param str The name of the task to be added to the list.
      */
-    void addTodo(String str) {
+    private void addTodo(String str) {
         Todo todo = new Todo(str);
         addToListWithReply(todo);
     }
@@ -105,7 +105,7 @@ public class Mike {
      * @param name The name of the task and its deadline in the format "taskName /by deadline".
      * @param date The date of the deadline represented as a String.
      */
-    void addDeadline(String name, String date) {
+    private void addDeadline(String name, String date) {
         try {
             Deadline deadline = new Deadline(name, date);
             addToListWithReply(deadline);
@@ -121,7 +121,7 @@ public class Mike {
      * @param name The name of the task and the time of the event in the format "taskName /at eventTime".
      * @param scheduledDate The date of the event represented as a String.
      */
-    void addEvent(String name, String scheduledDate) {
+    private void addEvent(String name, String scheduledDate) {
         try {
             Event event = new Event(name, scheduledDate);
             addToListWithReply(event);
@@ -136,7 +136,7 @@ public class Mike {
      *
      * @param indexFromUser The index of the task (as seen by the user) to be marked in the list.
      */
-    void mark(int indexFromUser) {
+    private void mark(int indexFromUser) {
         ui.printReply(taskList.markInListWithMessage(indexFromUser));
     }
 
@@ -145,7 +145,7 @@ public class Mike {
      *
      * @param indexFromUser The index of the task (as seen by the user) to be unmarked in the list.
      */
-    void unmark(int indexFromUser) {
+    private void unmark(int indexFromUser) {
         ui.printReply(taskList.unmarkInListWithMessage(indexFromUser));
     }
 
@@ -154,7 +154,7 @@ public class Mike {
      *
      * @param userInput String input from user as scanned in by Scanner.
      */
-    void processInput(String userInput) {
+    private void processInput(String userInput) {
         Parser parser = new Parser(userInput);
 
         if (parser.isBlank()) {
@@ -180,23 +180,18 @@ public class Mike {
                 removeTask(removeIndex);
                 break;
             case "todo":
-                String todoName =
-                        parser.getTodoName();
+                String todoName = parser.getTodoName();
                 addTodo(todoName);
                 break;
             case "deadline":
-                String deadlineName =
-                        parser.getDeadlineName();
-                String deadlineDate =
-                        parser.getDeadlineDate();
+                String deadlineName = parser.getDeadlineName();
+                String deadlineDate = parser.getDeadlineDate();
 
                 addDeadline(deadlineName, deadlineDate);
                 break;
             case "event":
-                String eventName =
-                        parser.getEventName();
-                String eventDate =
-                        parser.getEventDate();
+                String eventName = parser.getEventName();
+                String eventDate = parser.getEventDate();
 
                 addEvent(eventName, eventDate);
                 break;
@@ -221,7 +216,7 @@ public class Mike {
     /**
      * Stores the current list in the hard drive to be accessed on reboot of Mike.
      */
-    void saveToStoredList() {
+    private void saveToStoredList() {
         String listInStorageFormat = taskList.convertToStoredListFormat();
         storage.storeList(listInStorageFormat);
 
@@ -230,7 +225,7 @@ public class Mike {
     /**
      * Loads the list from a previous session that is stored in the hard drive.
      */
-    void loadStoredList() {
+    private void loadStoredList() {
         this.taskList = this.taskList.convertFromStoredList(storage.loadFile());
     }
 }
