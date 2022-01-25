@@ -7,8 +7,8 @@ public class Event extends Task {
     }
 
     @Override
-    public String getSaveToFileFormat() {
-        return "E," + super.getSaveToFileFormat() + "," + at + "," + getStatusIcon();
+    public String toFileFormat() {
+        return "E," + super.toFileFormat() + "," + at + "," + getStatusIcon();
     }
     
     @Override

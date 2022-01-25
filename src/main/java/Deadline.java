@@ -4,14 +4,14 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private LocalDate by;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, LocalDate date) {
         super(description);
-        this.by = LocalDate.parse(by);
+        by = date;
     }
 
     @Override
-    public String getSaveToFileFormat() {
-        return "D," + super.getSaveToFileFormat() + "," + by + "," + getStatusIcon();
+    public String toFileFormat() {
+        return "D," + super.toFileFormat() + "," + by + "," + getStatusIcon();
     }
     
     @Override

@@ -19,7 +19,7 @@ public class Task {
         isDone = false;
     }
 
-    public String getSaveToFileFormat() {
+    public String toFileFormat() {
         return description;
     }
     
