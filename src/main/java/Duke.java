@@ -12,7 +12,7 @@ import java.util.Scanner;
  *
  * Main entry class to run ChatBot instance.
  */
-public class Duke {
+class Duke {
     private static final Path DEFAULT_FILE_PATH = Paths.get("data", "duke.txt");
     public static void main(String[] args) throws IOException {
         Storage store = Storage.initStorage(DEFAULT_FILE_PATH);

@@ -8,7 +8,7 @@ import data.TaskList;
  * Command which operates on the TaskList
  * maintained by ChatBot
  */
-public abstract class TaskListCommand extends Command {
+abstract class TaskListCommand extends Command {
     /**
      * Task list maintained by ChatBot.
      */

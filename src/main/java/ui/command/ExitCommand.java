@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Command which causes the termination
  * of the ChatBot.
  */
-public class ExitCommand extends Command {
+class ExitCommand extends Command {
     private static final String GOODBYE_STRING = "Goodbye!";
 
     public ExitCommand(String name, String args) {

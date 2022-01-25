@@ -6,7 +6,6 @@ import task.Event;
 import task.Task;
 import task.ToDo;
 
-import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -15,7 +14,7 @@ import java.util.ArrayList;
  * Command which adds a given task
  * to a given list.
  */
-public class AddTaskCommand extends TaskListCommand {
+class AddTaskCommand extends TaskListCommand {
 
     public AddTaskCommand(String name, String args, TaskList taskList) {
         super(name, args, taskList);

@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Command which unmarks a previously
  * added task.
  */
-public class UnmarkTaskCommand extends TaskListCommand {
+class UnmarkTaskCommand extends TaskListCommand {
 
     public UnmarkTaskCommand(String name, String args, TaskList taskList) {
         super(name, args, taskList);
