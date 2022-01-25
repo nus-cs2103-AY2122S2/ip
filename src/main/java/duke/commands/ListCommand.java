@@ -34,6 +34,4 @@ public class ListCommand extends Command<String> {
         }
         System.out.println(tabbedLine);
     }
-
-    ;
 }

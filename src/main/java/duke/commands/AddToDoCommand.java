@@ -3,10 +3,9 @@ package duke.commands;
 import java.io.IOException;
 
 import duke.main.DukeException;
-import duke.main.TaskList;
 import duke.main.Parser;
 import duke.main.Storage;
-
+import duke.main.TaskList;
 import duke.tasks.ToDo;
 
 
@@ -56,6 +55,4 @@ public class AddToDoCommand extends Command<String> {
             throw new DukeException(Parser.formatMsg("IOException caught") + e);
         }
     }
-
-    ;
 }
