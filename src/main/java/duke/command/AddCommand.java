@@ -2,9 +2,13 @@ package duke.command;
 
 import duke.*;
 import duke.task.*;
-
 import java.io.IOException;
 import java.time.LocalDate;
+
+/**
+ * Represents commands which add task to the task list. An AddCommand
+ * object corresponds a valid Ekud command, which can then be executed.
+ */
 
 public class AddCommand implements Command {
 
@@ -18,6 +22,14 @@ public class AddCommand implements Command {
         this.taskType = splicedFullCommand[0];
     }
 
+    /**
+     * Executes a valid Ekud command that add a task to the task list.
+     * Supports the addition of 'todo', 'event and 'deadline' task.
+     * @param tasks TaskList object.
+     * @param storage Storage object.
+     * @param ui Ui object.
+     * @throws IOException If directory or file cannot be found.
+     */
     @Override
     public void execute(TaskList tasks, Storage storage, Ui ui) throws IOException {
         switch (taskType) {
@@ -43,6 +55,10 @@ public class AddCommand implements Command {
         }
     }
 
+    /**
+     * Returns a boolean value that tells the programme to exit.
+     * @return Boolean value false.
+     */
     @Override
     public boolean isExit() {
         return false;

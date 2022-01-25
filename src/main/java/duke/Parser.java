@@ -3,13 +3,21 @@ package duke;
 import duke.command.*;
 import duke.exception.DukeException;
 import duke.task.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 
+/**
+ * Contains method to check validity of user input.
+ */
 public class Parser {
-
+    /**
+     * Checks the validity of the user input. If the user input is valid,
+     * returns a Command which is then executed to perform its respective function.
+     * @param input User input.
+     * @return Command which is then executed.
+     * @throws DukeException If input is not valid.
+     */
     public static Command parse(String input) throws DukeException {
         if (input.isEmpty()) {
             throw new DukeException("☹ OOPS!!! Please input a command");

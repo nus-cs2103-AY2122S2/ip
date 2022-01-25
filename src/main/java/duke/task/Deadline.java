@@ -2,18 +2,23 @@ package duke.task;
 
 import java.time.LocalDate;
 
+/**
+ * Represents a task which is of type deadline.
+ */
 public class Deadline extends Task {
 
     protected LocalDate by;
-    protected String type;
 
 
     public Deadline(String description, LocalDate by) {
         super(description);
         this.by = by;
-        this.type = "deadline";
     }
 
+    /**
+     * Task description that is formatted to be written into the file.
+     * @return Task description format for file input.
+     */
     @Override
     public String taskDescriptionForFile() {
         return "D , 0 , " + this.description.trim() + " , " + this.by;

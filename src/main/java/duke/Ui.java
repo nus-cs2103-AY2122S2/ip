@@ -3,9 +3,6 @@ package duke;
 import duke.command.DukeCommands;
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Ui {
@@ -29,13 +26,6 @@ public class Ui {
     public void showLoadingErrorMessage() {
         System.out.println("Oh no, looks like I have some trouble finding your task list.\n" +
                 "Fred not, Ekud has created the file for you!");
-    }
-
-    public void showCommands() {
-        HashMap<String, String> hashMap = DukeCommands.getDukeCommandsDescription();
-        for (Map.Entry<String, String> entry : hashMap.entrySet()) {
-            System.out.println(entry.getKey() + ": " + entry.getValue());
-        }
     }
 
     public String readCommand() {

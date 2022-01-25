@@ -1,14 +1,13 @@
-package duke.main;
+package duke;
 
-import duke.Parser;
-import duke.Storage;
-import duke.Ui;
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
-
 import java.io.IOException;
 
+/**
+ * Represents the main class that Ekud will run on.
+ */
 public class Duke {
 
     private Ui ui;
@@ -27,6 +26,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Run the Ekud programme.
+     */
     public void run() {
         ui.showWelcomeMessage();
         boolean isExit = false;
@@ -39,7 +41,7 @@ public class Duke {
             } catch (DukeException err) {
                 System.err.println(err);
             } catch (Exception e) {
-                e.printStackTrace();
+                System.err.println(e.toString());
             }
         }
         ui.closeScanner();
