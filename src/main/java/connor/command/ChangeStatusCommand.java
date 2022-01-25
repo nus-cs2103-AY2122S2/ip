@@ -1,3 +1,8 @@
+package connor.command;
+
+import connor.task.TaskStatus;
+import connor.task.TaskList;
+
 public class ChangeStatusCommand extends Command {
     TaskStatus ts;
     int index;

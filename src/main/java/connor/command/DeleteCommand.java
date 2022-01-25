@@ -1,3 +1,7 @@
+package connor.command;
+
+import connor.task.TaskList;
+
 public class DeleteCommand extends Command {
     int index;
 

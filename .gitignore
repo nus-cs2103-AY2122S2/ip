@@ -13,7 +13,7 @@ src/main/resources/docs/
 *.iml
 bin/
 
-# Task file data
+# task file data
 data/
 
 /text-ui-test/ACTUAL.txt

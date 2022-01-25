@@ -1,3 +1,7 @@
+package connor.task;
+
+import connor.Connor;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;

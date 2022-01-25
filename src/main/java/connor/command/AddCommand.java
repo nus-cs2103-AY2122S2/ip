@@ -1,3 +1,8 @@
+package connor.command;
+
+import connor.task.TaskType;
+import connor.task.TaskList;
+
 public class AddCommand extends Command {
     TaskType tt;
     String desc;

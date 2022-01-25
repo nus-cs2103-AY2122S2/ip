@@ -1,3 +1,9 @@
+package connor;
+
+import connor.exception.InvalidTaskFileException;
+import connor.task.Task;
+import connor.task.TaskList;
+
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -66,8 +72,7 @@ public class Connor {
         try {
             new Connor(TASK_FILEPATH, TASK_DIRECTORY).run();
         } catch (IOException e) {
-            e.getMessage();
-            return;
+            print(e.getMessage());
         }
     }
 

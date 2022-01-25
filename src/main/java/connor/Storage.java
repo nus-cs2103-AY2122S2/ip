@@ -1,3 +1,8 @@
+package connor;
+
+import connor.exception.InvalidTaskFileException;
+import connor.task.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -33,7 +38,7 @@ public class Storage {
     public static String taskToString(Task t) {
         String spacing = " | ";
         String taskType = t.getLetter();
-        String doneness = t.isDone ? "[#] " : "[ ] ";
+        String doneness = t.isDone() ? "[#] " : "[ ] ";
         String desc = t.getDesc();
         StringBuilder sb = new StringBuilder(doneness + taskType + spacing + desc);
         if (t instanceof Deadline) {

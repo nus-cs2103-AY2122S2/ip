@@ -1,3 +1,5 @@
+package connor;
+
 public class Ui {
 
     public Ui() {}
