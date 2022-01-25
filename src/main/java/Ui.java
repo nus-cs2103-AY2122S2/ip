@@ -19,13 +19,12 @@ public class Ui {
         System.out.println(line);
     }
 
-    public String showLine() {
-        return line;
+    public void showLine() {
+        System.out.println(line);
     }
 
     public String readCommand() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
-
 }

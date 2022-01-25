@@ -18,17 +18,26 @@ public class Storage {
         return arr;
     }
 
-    public ArrayList<Task> save() throws IOException {
-        ArrayList<Task> arr = new ArrayList<>();
+    public void save(ArrayList<Task> arr) {
         File directory = new File("data");
         if (!directory.exists()) {
             directory.mkdirs();
         }
-        FileOutputStream writeData = new FileOutputStream("data/duke.ser");
-        ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
+        try {
+            FileOutputStream writeData = new FileOutputStream("data/duke.ser");
+            ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
 
-        writeStream.writeObject(arr);
-        writeStream.flush();
-        writeStream.close();
+            writeStream.writeObject(arr);
+            writeStream.flush();
+            writeStream.close();
+        }
+        catch (IOException e) {
+            System.out.println("Something went wrong. I think I may be corrupted.");
+        }
+    }
+
+    public void exit(ArrayList<Task> arr) {
+        save(arr);
+        System.out.println("Goodbye! I'll be here if you need anything else.");
     }
 }
