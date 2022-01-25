@@ -181,6 +181,29 @@ public class TaskList {
     }
 
     /**
+     * Search for and print all tasks that contains the keyword specified by the user.
+     *
+     * @param searchTarget Keyword specified by the user.
+     */
+    public void find(String searchTarget) {
+        StringBuilder res = new StringBuilder();
+        int count = 1;
+        for (int i = 0; i < listOfTasks.size(); i++) {
+            Task currTask = listOfTasks.get(i);
+            String currTaskDesc = currTask.getDescription().toString();
+            if (currTaskDesc.contains(searchTarget)) {
+                String currString = "     " + count + "." + currTask;
+                res.append(currString).append("\n");
+                count++;
+            }
+        }
+        System.out.println("    ____________________________________________________________\n"
+                + "     Here are the matching tasks in your list:\n"
+                + res
+                + "    ____________________________________________________________\n");
+    }
+
+    /**
      * Converts the TaskList into a single string file, to be stored in data.txt on the hard disk.
      *
      * @return All tasks in the form of a String.
