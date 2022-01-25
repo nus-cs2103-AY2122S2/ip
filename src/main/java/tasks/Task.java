@@ -16,13 +16,8 @@ public class Task {
         return this.description;
     }
 
-    public boolean getIsDone() {
-        return this.isDone;
-    }
 
-    public boolean setIsDone(boolean isDone) {
-        return this.isDone = isDone;
-    }
+    public void setDone(boolean isDone) { this.isDone = isDone;}
 
     @Override
     public String toString() {

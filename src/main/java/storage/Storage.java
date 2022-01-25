@@ -1,15 +1,16 @@
 package storage;
 
+import backend.FileDecoder;
+import exception.DukeException;
+import tasks.Task;
+
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.IOException;
-import java.io.FileWriter;
-import tasks.*;
-import backend.FileDecoder;
-import exception.DukeException;
 
 public class Storage {
     private final Path pathName;
@@ -36,8 +37,7 @@ public class Storage {
                 tasks.add(decoder.decode(s.nextLine()));
             }
             s.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
         }
         return tasks;
@@ -48,8 +48,7 @@ public class Storage {
             FileWriter fileWriter = new FileWriter(save, true);
             fileWriter.write(currentTask.toString() + "\n");
             fileWriter.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             System.out.println(new DukeException("Storage Error!"));
         }
     }
@@ -63,8 +62,7 @@ public class Storage {
             }
             fileWriter.write(allItems);
             fileWriter.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             System.out.println(new DukeException("Storage Error!"));
         }
     }
