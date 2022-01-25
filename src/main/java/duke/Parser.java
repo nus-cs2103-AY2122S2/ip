@@ -60,7 +60,7 @@ public class Parser {
             String desc = input.replaceFirst("todo", "").trim();
             Todo newTodo = new Todo(desc);
             if (desc.equals("")) {
-                throw new EmptyDescException(Ui.getBorder() + "duke.Todo description cannot be empty.\n" + Ui.getBorder());
+                throw new EmptyDescException(Ui.getBorder() + "Todo description cannot be empty.\n" + Ui.getBorder());
             }
             TaskList.getTasks().add(newTodo);
             System.out.println(Ui.successMessage(newTodo));
@@ -75,9 +75,9 @@ public class Parser {
             if (descDateTime.length < 2) {
                 throw new InvalidInputException("Usage: event <description> /at <YYYY-MM-DD> <24-hr time, e.g. 2359>");
             }
-            String desc = descDateTime[0];
+            String desc = descDateTime[0].trim();
             if (desc.equals("")) {
-                throw new EmptyDescException(Ui.getBorder() + "duke.Event description cannot be empty.\n" + Ui.getBorder());
+                throw new EmptyDescException(Ui.getBorder() + "Event description cannot be empty.\n" + Ui.getBorder());
             }
             String dateTime = descDateTime[1].trim();
             Event newEvent = new Event(desc, dateTime);
@@ -96,10 +96,10 @@ public class Parser {
                 throw new InvalidInputException(
                         "Usage: deadline <description> /by <YYYY-MM-DD> <24-hr time, e.g. 2359>");
             }
-            String desc = descTimePair[0];
+            String desc = descTimePair[0].trim();
             if (desc.equals("")) {
                 throw new EmptyDescException(
-                        Ui.getBorder() + "duke.Deadline description cannot be empty.\n" + Ui.getBorder());
+                        Ui.getBorder() + "Deadline description cannot be empty.\n" + Ui.getBorder());
             }
             String dateTime = descTimePair[1].trim();
             Deadline newDeadline = new Deadline(desc, dateTime);
