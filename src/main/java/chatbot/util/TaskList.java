@@ -11,7 +11,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -141,10 +147,9 @@ public class TaskList {
 
                 String data = String.format("%s&%s&%s", type, done, title);
                 if (datetime != null) {
-                    data =
-                            data.concat(
-                                    String.format("&%s", datetime.saveString())
-                            );
+                    data = data.concat(
+                            String.format("&%s", datetime.toSaveString())
+                        );
                 }
                 fw.write(data);
                 fw.write(System.lineSeparator());
@@ -200,7 +205,6 @@ public class TaskList {
                     )
             );
         } else {
-            set.add(title);
             switch (type) {
                 case DEADLINE:
                     if (!timestampArgs[0].equals("by")) {
@@ -212,6 +216,7 @@ public class TaskList {
                         Timestamp by = new Timestamp(other);
                         Deadline deadline = new Deadline(title, by);
                         list.add(deadline);
+                        set.add(title);
                         return String.format(
                             "This deadline has been added to your task list!%n%n             %s",
                             deadline
@@ -227,6 +232,7 @@ public class TaskList {
                         Timestamp at = new Timestamp(other);
                         Event event = new Event(title, at);
                         list.add(event);
+                        set.add(title);
                         return String.format(
                             "This event has been added to your task list!%n%n             %s",
                             event
@@ -261,9 +267,9 @@ public class TaskList {
                     "This todo is already in your task list traveller!"
             );
         } else {
-            set.add(title);
             ToDo todo = new ToDo(title);
             list.add(todo);
+            set.add(title);
             return String.format(
                     "This todo has been added to your task list!%n%n             %s",
                     todo
@@ -308,16 +314,13 @@ public class TaskList {
      * Prints all Tasks in the TaskList.
      *
      * @return The string format of the TaskList to be outputted by the UI.
-     * @throws ChatBotException If the TaskList is empty.
      */
-    public String summary() throws ChatBotException {
+    public String summary() {
         if (isEmpty()) {
-            throw new ChatBotException(
-                    "Your task list is empty traveller! Add some tasks first!"
-            );
+            return "Your task list is empty traveller! Add some tasks first!";
+        } else {
+            return listAsString(list);
         }
-
-        return listAsString(list);
     }
 
     /**
@@ -327,15 +330,37 @@ public class TaskList {
      * @return The string format of the filtered TaskList to be outputted by the UI.
      */
     public String getTasksOnDate(Timestamp date) {
-        List<Task> filtered = list
-            .stream()
-            .filter(t -> date.equals(t.getTimestamp()))
-            .collect(Collectors.toList());
+        List<Task> filtered = filter(t -> date.equals(t.getTimestamp()));
         if (filtered.isEmpty()) {
             return "You have no tasks on this date traveller!";
         } else {
             return listAsString(filtered);
         }
+    }
+
+    /**
+     * Gets all Tasks which match the given keyword.
+     *
+     * @param input The input given by the user.
+     * @return The filtered task list.
+     */
+    public String getTasksByKeyword(String[] input) {
+        String keyword = combineArgs(input);
+        List<Task> filtered = filter(t -> keyword.equals(t.getTitle())
+                || keyword.contains(t.getTitle())
+                || t.getTitle().contains(keyword));
+        if (filtered.isEmpty()) {
+            return "I couldn't find any tasks matching your keyword traveller!";
+        } else {
+            return listAsString(filtered);
+        }
+    }
+
+    private List<Task> filter(Predicate<Task> condition) {
+        return list
+                .stream()
+                .filter(condition)
+                .collect(Collectors.toList());
     }
 
     private String listAsString(List<Task> tasks) {
@@ -387,5 +412,9 @@ public class TaskList {
                     task
             );
         }
+    }
+
+    public Set<String> getSet() {
+        return set;
     }
 }

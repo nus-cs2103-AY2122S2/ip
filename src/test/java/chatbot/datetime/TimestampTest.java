@@ -22,7 +22,7 @@ public class TimestampTest {
         assertEquals(LOCAL_DATE, date.getDate());
         assertNull(date.getTime());
         assertEquals("23 March 2023", date.toString());
-        assertEquals(DATE, date.saveString());
+        assertEquals(DATE, date.toString());
 
         ChatBotException thrown = assertThrows(ChatBotException.class, () ->
             new Timestamp("100/100/100")
@@ -38,7 +38,7 @@ public class TimestampTest {
         assertEquals(LOCAL_DATE, datetime.getDate());
         assertEquals(LOCAL_TIME, datetime.getTime());
         assertEquals("23 March 2023, 6:00 PM", datetime.toString());
-        assertEquals(datetimeString, datetime.saveString());
+        assertEquals(datetimeString, datetime.toString());
 
         ChatBotException thrown;
         thrown = assertThrows(ChatBotException.class, () ->

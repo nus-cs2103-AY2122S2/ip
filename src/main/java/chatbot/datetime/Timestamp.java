@@ -7,11 +7,16 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.time.format.ResolverStyle;
 
 /**
  * Represents a date or a combination of date and time.
  */
 public class Timestamp {
+
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d/M/uuuu"
+            ).withResolverStyle(ResolverStyle.STRICT);
+    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
 
     private final LocalDate date;
     private final LocalTime time;
@@ -23,39 +28,27 @@ public class Timestamp {
      * @throws ChatBotException If user input is of an invalid format.
      */
     public Timestamp(String input) throws ChatBotException {
-        String[] firstSplit = input.split(" ");
-        String dateHalf = firstSplit[0];
-        String[] secondSplit = dateHalf.split("/");
-        if (secondSplit.length == 3) {
+        String[] splitInput = input.split(" ");
+        String dateString = splitInput[0];
+
+        if (splitInput.length > 2) {
+            throw new ChatBotException("That's an invalid timestamp format traveller!");
+        }
+
+        try {
+            this.date = generateDate(dateString);
+        } catch (DateTimeException e) {
+            throw new ChatBotException("That's an invalid date format traveller!");
+        }
+        if (splitInput.length == 2) {
+            String timeString = splitInput[1];
             try {
-                this.date = generateDate(secondSplit);
-            } catch (DateTimeException | NumberFormatException e) {
-                throw new ChatBotException(
-                        "That's an invalid date format traveller!"
-                );
-            }
-            if (firstSplit.length == 2) {
-                String timeString = firstSplit[1];
-                if (timeString.length() == 4) {
-                    try {
-                        this.time = generateTime(timeString);
-                    } catch (DateTimeException | NumberFormatException e) {
-                        throw new ChatBotException(
-                                "That's an invalid time format traveller!"
-                        );
-                    }
-                } else {
-                    throw new ChatBotException(
-                            "That's an invalid time format traveller!"
-                    );
-                }
-            } else {
-                this.time = null;
+                this.time = generateTime(timeString);
+            } catch (DateTimeException e) {
+                throw new ChatBotException("That's an invalid time format traveller!");
             }
         } else {
-            throw new ChatBotException(
-                    "That's an invalid timestamp format traveller!"
-            );
+            this.time = null;
         }
     }
 
@@ -77,29 +70,12 @@ public class Timestamp {
         return time;
     }
 
-    private static LocalDate generateDate(String[] dateString) {
-        int day = Integer.parseInt(dateString[0]);
-        int month = Integer.parseInt(dateString[1]);
-        int year = Integer.parseInt(dateString[2]);
-        return LocalDate.of(year, month, day);
+    private static LocalDate generateDate(String dateString) {
+        return LocalDate.parse(dateString, DATE_FORMATTER);
     }
 
     private static LocalTime generateTime(String timeString) {
-        int hour = Integer.parseInt(timeString.substring(0, 2));
-        int minute = Integer.parseInt(timeString.substring(2));
-        return LocalTime.of(hour, minute);
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other instanceof Timestamp) {
-            Timestamp dt = (Timestamp) other;
-            LocalDate otherDate = dt.getDate();
-            if (otherDate != null) {
-                return otherDate.equals(date);
-            }
-        }
-        return false;
+        return LocalTime.parse(timeString, TIME_FORMATTER);
     }
 
     /**
@@ -107,18 +83,11 @@ public class Timestamp {
      *
      * @return The formatted save string.
      */
-    public String saveString() {
+    public String toSaveString() {
         if (date != null) {
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(
-                    "dd/MM/yyyy"
-            );
-            String dateString = date.format(dateFormatter);
+            String dateString = date.format(DATE_FORMATTER);
             if (time != null) {
-                DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern(
-                        "HHmm"
-                );
-                String timeString = time.format(timeFormatter);
-                return String.format("%s %s", dateString, timeString);
+                return String.format("%s %s", dateString, time.format(TIME_FORMATTER));
             } else {
                 return dateString;
             }
@@ -131,7 +100,7 @@ public class Timestamp {
     public String toString() {
         if (date != null) {
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(
-                    "dd MMMM yyyy"
+                    "dd MMMM uuuu"
             );
             String dateString = date.format(dateFormatter);
             if (time != null) {
@@ -146,5 +115,17 @@ public class Timestamp {
         } else {
             return "";
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Timestamp) {
+            Timestamp dt = (Timestamp) other;
+            LocalDate otherDate = dt.getDate();
+            if (otherDate != null) {
+                return otherDate.equals(date);
+            }
+        }
+        return false;
     }
 }

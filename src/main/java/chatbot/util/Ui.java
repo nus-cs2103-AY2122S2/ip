@@ -16,16 +16,16 @@ public class Ui {
             "Don't be scared. Come in, have a seat!",
     };
     private static final String[] GUIDE = {
-            "list                                                            View your task list",
-            "get <date*>                                                     View the tasks that you have on the specified date",
-            "todo <name of task>                                             Add a todo to your task list",
-            "deadline <name of task> /by <date* or timestamp* of task>       Add a deadline to your task list",
-            "event <name of task> /at <date* or timestamp* of task>          Add an event to your task list",
-            "mark <index of task>                                            Mark a task as completed in your task list",
-            "unmark <index of task>                                          Unmark a task in your task list",
-            "bye                                                             Exit the program",
-            "* date format is dd/MM/YYYY                                        eg; 24/04/2022",
-            "* timestamp format is dd/MM/YYYY HHmm                              eg; 23/03/2022 1800",
+        "list                                                            View your task list",
+        "get <date*>                                                     View the tasks that you have on the specified date",
+        "todo <name of task>                                             Add a todo to your task list",
+        "deadline <name of task> /by <date* or timestamp* of task>       Add a deadline to your task list",
+        "event <name of task> /at <date* or timestamp* of task>          Add an event to your task list",
+        "mark <index of task>                                            Mark a task as completed in your task list",
+        "unmark <index of task>                                          Unmark a task in your task list",
+        "bye                                                             Exit the program",
+        "* date format is d/M/YYYY                                          eg; 24/4/2022",
+        "* timestamp format is d/M/YYYY HHmm                                eg; 23/3/2022 1800",
     };
 
     private final Random random;
@@ -72,6 +72,20 @@ public class Ui {
     public void chat(String message) {
         System.out.print("Innkeeper: ");
         System.out.println(message + "\n");
+    }
+
+    /**
+     * Print a formatted message.
+     *
+     * @param message The message.
+     */
+    public void print(String message) {
+        if (message.startsWith(" ")) {
+            chat("Here you go!");
+            System.out.println(message);
+        } else {
+            chat(message);
+        }
     }
 
     /**

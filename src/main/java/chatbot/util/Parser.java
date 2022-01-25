@@ -33,19 +33,15 @@ public class Parser {
      */
     public boolean parse(String rawInput) {
         String[] input = rawInput.split(" ");
+        String response;
         System.out.println();
         switch (input[0]) {
         case "bye":
             innkeeper.bye();
             return false;
         case "list":
-            try {
-                String response = taskList.summary();
-                innkeeper.chat("Here you go!");
-                System.out.println(response);
-            } catch (Exception e) {
-                innkeeper.error(e.getMessage());
-            }
+            response = taskList.summary();
+            innkeeper.print(response);
             return true;
         case "get":
             try {
@@ -56,13 +52,16 @@ public class Parser {
                     );
                 } else {
                     Timestamp date = new Timestamp(input[1]);
-                    String response = taskList.getTasksOnDate(date);
-                    innkeeper.chat("Here you go!");
-                    System.out.println(response);
+                    response = taskList.getTasksOnDate(date);
+                    innkeeper.print(response);
                 }
             } catch (ChatBotException e) {
                 innkeeper.error(e.getMessage());
             }
+            return true;
+        case "find":
+            response = taskList.getTasksByKeyword(input);
+            innkeeper.print(response);
             return true;
         case "mark":
         case "unmark":
@@ -78,7 +77,7 @@ public class Parser {
                                     + "You only need to key in the index of the task you wish to mark or unmark!"
                     );
                 } else {
-                    String response = markOrUnmark(
+                    response = markOrUnmark(
                             Integer.parseInt(input[1]) - 1,
                             input[0].equals("mark")
                     );
@@ -99,7 +98,7 @@ public class Parser {
             return true;
         case "todo":
             try {
-                String response = taskList.addToDo(input);
+                response = taskList.addToDo(input);
                 innkeeper.chat(response);
                 innkeeper.printNumTasks(taskList.getNumTasks());
                 storage.saveChanges(taskList);
@@ -120,7 +119,7 @@ public class Parser {
                                     + "You only need to key in the index of the task you wish to delete!"
                     );
                 } else {
-                    String response = taskList.delete(
+                    response = taskList.delete(
                             Integer.parseInt(input[1]) - 1
                     );
                     innkeeper.chat(response);
@@ -155,8 +154,8 @@ public class Parser {
                     } else if (type.equals("deadline")) {
                         if (splitInput.length == 1) {
                             throw new ChatBotException(
-                                    "You need to key in the title "
-                                            + "as well as due date and time of your deadline traveller!"
+                                "You need to key in the title as well as "
+                                        + "due date and time of your deadline traveller!"
                             );
                         } else {
                             throw new ChatBotException(
@@ -176,9 +175,9 @@ public class Parser {
                     }
                     throw new ChatBotException();
                 } else {
-                    String response = taskList.add(
-                            temp[0].split(" "),
-                            temp[1].split(" ")
+                    response = taskList.add(
+                        temp[0].split(" "),
+                        temp[1].split(" ")
                     );
                     innkeeper.chat(response);
                     innkeeper.printNumTasks(taskList.getNumTasks());
@@ -187,6 +186,7 @@ public class Parser {
             } catch (ChatBotException e) {
                 innkeeper.error(e.getMessage());
             }
+            System.out.println(taskList.getSet());
             return true;
         }
     }
