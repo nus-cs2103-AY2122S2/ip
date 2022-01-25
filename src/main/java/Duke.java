@@ -6,38 +6,28 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static boolean findKeyword(String[] nextLineArr, String keyword){
-        for(int i = 0; i < nextLineArr.length; i++) {
-            if(nextLineArr[i].equals(keyword)) {
-                return true;
-            }
-        }
-        return false;
+
+    //constructor
+    private TaskList taskList;
+    private Storage storage;
+    //private Ui ui;
+    public Duke(String filePath) {
+        storage = new Storage(filePath);
+//        try {
+            taskList = new TaskList(storage.load());
+            System.out.println("loading?");
+//        } catch(DukeException e) {
+//            System.out.println(e.toString());
+//        }
     }
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-dd");
-    public static boolean isDate(String possibleDate) {
-        try{
-            LocalDate date = LocalDate.parse(possibleDate);
-            return true;
-        } catch(DateTimeParseException e) {
-            return false;
-        }
-    }
-    public static void main(String[] args){
+
+    public void run(){
+
         String greeting = "Hello! I'm Duke\n" + "What can I do for you?";
         System.out.println(greeting);
 
-        TaskList.initFile();
-        TaskList taskList = new TaskList();
-        taskList.load();
-
-
         Scanner scanner = new Scanner(System.in);
         String input = null;
-        String bye = "bye";
-
-
-
         while(scanner.hasNextLine()) {
             try {
                 input = scanner.nextLine().trim();
@@ -47,7 +37,7 @@ public class Duke {
                         || command.equals("deadline") || command.equals("event") || command.equals("delete"))) {
                     throw new DukeInvalidCommandException();
                 }
-                if (command.equals(bye)) {
+                if (command.equals("bye")) {
                     System.out.println("Bye. Hope to see you again soon!");
                     break;
                 }
@@ -161,6 +151,27 @@ public class Duke {
                 System.out.println(e.toString());
             }
         }
-        taskList.save();
+        storage.save(taskList.getTaskList());
+
+    }
+    public static boolean findKeyword(String[] nextLineArr, String keyword){
+        for(int i = 0; i < nextLineArr.length; i++) {
+            if(nextLineArr[i].equals(keyword)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-dd");
+    public static boolean isDate(String possibleDate) {
+        try{
+            LocalDate date = LocalDate.parse(possibleDate);
+            return true;
+        } catch(DateTimeParseException e) {
+            return false;
+        }
+    }
+    public static void main(String[] args){
+        new Duke("data/tasks.txt").run();
     }
 }
