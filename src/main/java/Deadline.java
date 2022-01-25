@@ -22,7 +22,7 @@ public class Deadline extends Task {
 
     @Override
     public String toStringSaveData() {
-        return String.join(" | ", "D", String.valueOf(done ? 1 : 0), description, this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        return String.join(" | ", "D", String.valueOf(done ? 1 : 0), description, this.by.toString());
     }
 
 }

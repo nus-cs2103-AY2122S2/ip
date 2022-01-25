@@ -69,9 +69,9 @@ public class Duke {
             }
             
         } catch (IOException e) {
-            System.out.println("IOException: " + e.getMessage());
+            System.out.println(indentationText + e.getMessage());
         } catch (DukeException e) {
-            System.out.println("DukeException: " + e.getMessage());
+            System.out.println(indentationText + e.getMessage());
         }
     }
 

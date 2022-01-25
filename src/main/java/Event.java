@@ -22,7 +22,7 @@ public class Event extends Task {
 
     @Override
     public String toStringSaveData() {
-        return String.join(" | ", "E", String.valueOf(done ? 1 : 0), description, this.at.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        return String.join(" | ", "E", String.valueOf(done ? 1 : 0), description, this.at.toString());
     }
 
 }
