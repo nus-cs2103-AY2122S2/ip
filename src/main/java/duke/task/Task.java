@@ -28,6 +28,10 @@ public abstract class Task {
 
     public abstract boolean isHasTime();
 
+    public boolean hasKeyword(String keyword) {
+        return description.contains(keyword);
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
