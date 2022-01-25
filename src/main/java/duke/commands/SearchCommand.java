@@ -13,13 +13,23 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Search task list based on keyword.
+ */
 public class SearchCommand extends Command {
     private String args;
 
+    /**
+     * Creates SearchCommand object with user input keyword.
+     * @param args
+     */
     public SearchCommand(String args) {
         this.args = args;
     }
 
+    /**
+     * Executes the search command.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {
