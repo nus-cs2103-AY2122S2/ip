@@ -26,7 +26,6 @@ public class Duke {
                     echo = sc.nextLine();
                     break;
 
-
                 default:
                     if(echo.startsWith("mark")) {
                         int number = Integer.parseInt(echo.substring(5));
@@ -44,26 +43,43 @@ public class Duke {
                         System.out.println(arr.get(number - 1) + "\n" + lines);
                         echo = sc.nextLine();
 
+                    } else if (echo.startsWith("deadline")) {
+                        String str = echo.substring(9);
+                        String[] arrOfStr = str.split("/by");
+                        String task = arrOfStr[0];
+                        String deadline = arrOfStr[1];
+                        Task added = new Deadline(task,deadline);
+                        arr.add(added);
+                        System.out.println(lines + "\n" + "Ok I've added: " + added +
+                                "\nThere are " + arr.size() + " task(s) in the list now." + "\n" + lines);
+                        echo = sc.nextLine();
+
+                    } else if (echo.startsWith("event")) {
+                        String str = echo.substring(6);
+                        String[] arrOfStr = str.split("/at");
+                        String task = arrOfStr[0];
+                        String deadline = arrOfStr[1];
+                        Task event = new Event(task,deadline);
+                        arr.add(event);
+                        System.out.println(lines + "\n" + "Ok I've added: " + event +
+                                "\nThere are " + arr.size() + " task(s) in the list now." + "\n" + lines);
+                        echo = sc.nextLine();
+
+                    } else if (echo.startsWith("todo")) {
+                        String str = echo.substring(5);
+                        Task todo = new Todo(str);
+                        arr.add(todo);
+                        System.out.println(lines + "\n" + "Ok I've added: " + todo +
+                                "\nThere are " + arr.size() + " task(s) in the list now." + "\n" + lines);
+                        echo = sc.nextLine();
+
                     } else {
-                        arr.add(new Task(echo));
-                        System.out.println(lines + "\n" + "added: " + echo + "\n" + lines);
+                        arr.add(new Todo(echo));
+                        System.out.println(lines + "\n" + "Got it. I've added this task:" + "\n" +  echo + "\n" + lines);
                         echo = sc.nextLine();
                     }
             }
-            /*if (!echo.equals("list")) {
-                arr.add(echo);
-                System.out.println(lines + "\n" + "added: " + echo + "\n" + lines);
-                echo = sc.nextLine();
-            } else {
-                int index = 1;
-                System.out.println(lines);
-                System.out.println("Here are the tasks in your list:");
-                for(String str : arr){
-                    System.out.println(index +". " + str);
-                    index++;
-                }
-                echo = sc.nextLine();
-            }*/
+
         }
 
         System.out.println(lines + "\n" + "Bye. Hope to see you again soon!" + "\n" + lines);
