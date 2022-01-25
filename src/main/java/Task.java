@@ -1,6 +1,4 @@
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class Task{
     protected String taskName;
@@ -9,7 +7,9 @@ public class Task{
 
     public Task(){}
 
-    public static Task newTask(String s) throws InvalidTaskDataTimeException,InvalidTaskDescriptionException,InvalidTaskTypeException{
+    /*
+    public static Task newTask(String s)
+            throws DukeException{
         if (s.startsWith("todo")){
             return newToDo(s);
         }
@@ -23,18 +23,19 @@ public class Task{
         }
     }
 
-    public static ToDo newToDo(String s) throws InvalidTaskDescriptionException{
+    public static Todo newToDo(String s) throws DukeException{
         String taskName =  s.replaceFirst("todo","").strip();
-        return new ToDo(taskName);
+        return new Todo(taskName);
     }
-    public static Event newEvent(String s) throws InvalidTaskDataTimeException,InvalidTaskDescriptionException{
+    public static Event newEvent(String s) throws DukeException{
         String taskName =  s.replaceFirst("event","").strip();
         return new Event(taskName);
     }
-    public static Deadline newDeadline(String s) throws InvalidTaskDataTimeException,InvalidTaskDescriptionException{
+    public static Deadline newDeadline(String s) throws DukeException{
         String taskName =  s.replaceFirst("deadline","").strip();
         return new Deadline(taskName);
     }
+
 
     public static Task parse(String s){
         // <type>\t<done>\t<name>\t<date>
@@ -71,19 +72,16 @@ public class Task{
                 t.markDone();
             }
             return t;
-        } catch (InvalidTaskDescriptionException i){
-            System.out.println(i.toString());
-            return null;
-        } catch (InvalidTaskDataTimeException d){
-            System.out.println(d.toString());
+        } catch (DukeException exception){
+            System.out.println(exception.getMessage());
             return null;
         }
     }
-
+*/
     public void markDone(){
         this.done = 'X';
     }
-    public void markunDone(){
+    public void markUndone(){
         this.done = ' ';
     }
 
@@ -104,19 +102,5 @@ public class Task{
 
     public char getType() {
         return ' ';
-    }
-
-    public static LocalDateTime parseDateTime(String input){
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-        DateTimeFormatter formatted = DateTimeFormatter.ofPattern("d MMM yyyy, K:mma");
-
-        try {
-            LocalDateTime dateTime = LocalDateTime.parse(input, format);
-            return dateTime;
-        } catch (DateTimeParseException e) {
-            System.out.println("Error parsing Date/Time!");
-            System.out.println("Please enter Date/Time in the form DD/MM/YYYY HHMM");
-            return null;
-        }
     }
 }

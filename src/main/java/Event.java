@@ -3,7 +3,8 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task{
     //private LocalDateTime date;
-    public Event(String taskName) throws InvalidTaskDataTimeException,InvalidTaskDescriptionException{
+    /*
+    public Event(String taskName) throws DukeException{
         super();
         String[] str =  taskName.split("/at");
 
@@ -14,7 +15,7 @@ public class Event extends Task{
             this.taskName=null;
         }
         try {
-            this.date = Task.parseDateTime(str[1].strip());
+            this.date = Parser.parseDateTime(str[1].strip());
         } catch (IndexOutOfBoundsException i){
             this.date=null;
         }
@@ -25,6 +26,13 @@ public class Event extends Task{
         if (this.date == null){
             throw new InvalidTaskDataTimeException("Event");
         }
+    }
+
+     */
+
+    public Event(String taskName, LocalDateTime date){
+        this.taskName = taskName;
+        this.date = date;
     }
 
     public char getType(){

@@ -16,7 +16,7 @@ public class Deadline extends Task{
             this.taskName=null;
         }
         try {
-            this.date = Task.parseDateTime(str[1].strip());
+            this.date = Parser.parseDateTime(str[1].strip());
         } catch (IndexOutOfBoundsException i){
             this.date=null;
         }
@@ -27,6 +27,11 @@ public class Deadline extends Task{
         if (this.date == null){
             throw new InvalidTaskDataTimeException("Deadline");
         }
+    }
+
+    public Deadline(String taskName, LocalDateTime date){
+        this.taskName = taskName;
+        this.date = date;
     }
 
     public char getType(){
