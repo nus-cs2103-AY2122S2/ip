@@ -1,3 +1,5 @@
+package Duke;
+
 /**
  * Represents an upcoming event associated with its time of occurrence. This event is a task that possesses a
  * state/status that is by default not done.

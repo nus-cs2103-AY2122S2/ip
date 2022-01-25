@@ -1,3 +1,5 @@
+package Duke;
+
 /**
  * Represents a task to be done. This task possesses a state/status that is by default not done. Task also has a
  * tracker that keeps track of the type of task.
@@ -25,6 +27,7 @@ public abstract class Task {
 	 */
 	public void mark() {
 		if (!isDone) {
+			isDone = true;
 			this.status = "[X]";
 		}
 	}
@@ -34,6 +37,7 @@ public abstract class Task {
 	 */
 	public void unmark() {
 		if (isDone) {
+			isDone = false;
 			this.status = "[ ]";
 		}
 	}

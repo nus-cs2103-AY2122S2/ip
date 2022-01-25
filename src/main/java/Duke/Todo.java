@@ -1,3 +1,5 @@
+package Duke;
+
 /**
  * Represents a type of task that has no deadline.
  * This task can be done or fulfilled anytime, and is by default not done.

@@ -1,5 +1,11 @@
+package Duke;
+
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import enums.Command;
+import exceptions.DukeException;
+import exceptions.InvalidCommandException;
 
 public class Duke {
 	public static void main(String[] args) throws DukeException, IndexOutOfBoundsException, IllegalArgumentException {

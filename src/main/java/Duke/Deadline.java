@@ -1,3 +1,5 @@
+package Duke;
+
 /**
  * Represents a deadline to be fulfilled. This deadline is a task that possesses a state/status that is by default
  * not done.
