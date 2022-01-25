@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -30,9 +31,9 @@ public class DukeFile {
                 Task task;
 
                 if (temp[0].equals("D")) {
-                    task = new Deadline(temp[2], temp[3]);
+                    task = new Deadline(temp[2], LocalDate.parse(temp[3]));
                 } else if (temp[0].equals("E")) {
-                    task = new Event(temp[2], temp[3]);
+                    task = new Event(temp[2], LocalDate.parse(temp[3]));
                 } else {
                     task = new Todo(temp[2]);
                 }
@@ -59,7 +60,7 @@ public class DukeFile {
                         + "|"
                         + task.getUserInput()
                         + "|"
-                        + task.getTime()
+                        + task.getDate()
                         + "\n");
             }
             fileWriter.close();
