@@ -1,25 +1,55 @@
 package duke;
 
+/**
+ * Represents tasks that user enters into the app
+ */
 public class Task {
+    /**
+     * String description of task to be completed
+     */
     protected String description;
-    protected Boolean isCompleted = false;
+    /**
+     * Boolean to indicate if class is completed
+     */
+    protected Boolean completed = false;
 
+    /**
+     * Creation of new task
+     *
+     * @param description description of task to be completed
+     */
     Task(String description){
         this.description = description;
     }
 
+    /**
+     * Marks task as completed
+     */
     public void markCompleted(){
         this.isCompleted = true;
     }
 
+    /**
+     * Marks task as incompleted
+     */
     public void markIncompleted(){
         this.isCompleted = false;
     }
 
+    /**
+     * Prints details of task
+     */
     public void print() {
         System.out.println("[" + (this.isCompleted ? "x" : " ") +  "] " + this.description);
     }
 
+    /**
+     * Returns String array of details of task
+     * Index 1: Completed
+     * Index 2: Description
+     *
+     * @return String array of details
+     */
     public String[] getDetails() {
         String[] details = new String[4];
         details[1] = isCompleted ? "1" : "0";

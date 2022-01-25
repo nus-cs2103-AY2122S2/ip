@@ -2,9 +2,21 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Handles interaction with user
+ */
 public class Ui {
+    /**
+     * Scanner to read input of user
+     */
     private static Scanner sc = new Scanner(System.in);
 
+
+    /**
+     * Gets Command from user and parses it
+     *
+     * @return Command enum representing command by user
+     */
     public static Command getCommand() {
         Command actionType = null;
         while (actionType == null) {
@@ -20,11 +32,21 @@ public class Ui {
         return actionType;
     }
 
+    /**
+     * Returns parsed inputs from user
+     * Index 0: Description of task
+     * Index 1: Time
+     *
+     * @return String array with parsed inputs from user
+     */
     public static String[] getInputs() {
         String input = sc.nextLine();
         return Parser.parseInput(input);
     }
 
+    /**
+     * Prints Welcome message to user upon startup
+     */
     public static void printWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

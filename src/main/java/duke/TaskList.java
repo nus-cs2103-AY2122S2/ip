@@ -2,16 +2,28 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * Represent list of tasks entered by user
+ */
 public class TaskList {
+    /**
+     * Arraylist of Tasks
+     */
     private ArrayList<Task> actions = new ArrayList<Task>();
 
+    /**
+     * Adds Task to the tasklist
+     *
+     * @param type Type of task to be added
+     * @param inputs Array of parsed input from user
+     * @return Boolean representing success of add operation
+     * @throws EmptyDescriptionException if description is empty
+     */
     public boolean add(TaskType type, String[] inputs) throws EmptyDescriptionException {
-        if (inputs[0].equals("")) {
+        if (inputs[0].trim().equals("")) {
             throw new EmptyDescriptionException("ToDo cannot be empty");
         }
-//        System.out.println(inputs[0]);
-//        System.out.println(inputs[1]);
-//        System.out.println(inputs[2]);
+
         boolean isAddSuccess = false;
         switch (type) {
         case TODO :
@@ -28,6 +40,12 @@ public class TaskList {
         return isAddSuccess;
     }
 
+    /**
+     * Adds Task to the list
+     *
+     * @param type TaskType of task to be added
+     * @param inputs Parsed input array
+     */
     public void load(TaskType type, String[] inputs) {
         Task task = null;
         switch (type) {
@@ -51,6 +69,9 @@ public class TaskList {
         return;
     }
 
+    /**
+     * Prints out Tasks in the TaskList
+     */
     public void print(){
         for (int i = 0; i < actions.size(); i++) {
             System.out.print(i + 1);
@@ -59,26 +80,57 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints out a specific task
+     *
+     * @param i Task index that is to be printed out
+     */
     public void print(int i){
         actions.get(i - 1).print();
     }
 
+    /**
+     * Marks a specific task as complete
+     *
+     * @param index Task index to be marked as complete
+     */
     public void markComplete(int index){
         this.actions.get(index - 1).markCompleted();
     }
 
+    /**
+     * Marks a specific task as incomplete
+     *
+     * @param index Task index to be marked as incomplete
+     */
     public void markIncomplete(int index){
         this.actions.get(index - 1).markIncompleted();
     }
 
+    /**
+     * Returns number of tasks stored
+     *
+     * @return int representing number of task stored
+     */
     public int getLength() {
         return this.actions.size();
     }
 
+    /**
+     * Deletes specific task
+     *
+     * @param i index of task to be deleted
+     */
     public void delete(int i) {
         actions.remove(i-1);
     }
 
+    /**
+     * Returns Task at specific index
+     *
+     * @param i index of task
+     * @return task at index i
+     */
     public Task getTask(int i) {
         return actions.get(i - 1);
     }
