@@ -9,15 +9,25 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Storage {
 
-    public static boolean doesFileExist(String filePath) {
+    String filePath;
+
+    public Storage(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public boolean doesFileExist() {
         return Files.exists(Paths.get(filePath));
     }
 
-    public static ArrayList<Task> fileToArrayList(File f) throws FileNotFoundException {
+    public static TaskList fileToTaskList(File f) throws FileNotFoundException {
         Scanner sc = new Scanner(f);
         ArrayList<Task> arrList = new ArrayList<>();
+        TaskList taskList = new TaskList(arrList);
 
         while (sc.hasNextLine()) {
             String taskStr = sc.nextLine();
@@ -29,41 +39,43 @@ public class Storage {
                 String[] taskDetails = taskStr.split("\\(by: ", 2);
                 String description = taskDetails[0];
                 String date = taskDetails[1].substring(0, taskDetails[1].length()-1);
-                Deadline deadline = new Deadline(description, date);
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d-MMM-yyyy");
+                Deadline deadline = new Deadline(description, LocalDate.parse(date, dtf));
                 if (isTaskDone) {
                     deadline.markAsDone();
                 }
-                arrList.add(deadline);
+                taskList.add(deadline);
             } else if (taskType == 'E') {
                 String[] taskDetails = taskStr.split("\\(at: ", 2);
                 String description = taskDetails[0];
-                String date = taskDetails[1];
-                Event event = new Event(description, date);
+                String date = taskDetails[1].substring(0, taskDetails[1].length()-1);
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d-MMM-yyyy");
+                Event event = new Event(description, LocalDate.parse(date, dtf));
                 if (isTaskDone) {
                     event.markAsDone();
                 }
-                arrList.add(event);
+                taskList.add(event);
             } else {
                 Todo todo = new Todo(taskStr);
                 if (isTaskDone) {
                     todo.markAsDone();
                 }
-                arrList.add(todo);
+                taskList.add(todo);
             }
         }
-        return arrList;
+        return taskList;
     }
 
-    public static void ArrayListToFile(ArrayList<Task> arrList, String filePath) throws IOException {
+    public void TaskListToFile(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(filePath);
-        for (Task task : arrList) {
+        for (Task task : taskList.getTaskList()) {
             fw.write(task.toString() + "\n");
         }
         fw.close();
     }
 
-    public static void appendToFile(Task taskToAdd, String filePath) throws IOException{
-        if (! doesFileExist("data/tasks.txt")) {
+    public void appendToFile(Task taskToAdd) throws IOException{
+        if (! doesFileExist()) {
             String[] pathDetails = filePath.split("/", 2);
             String folderStr = pathDetails[0];
             File folder = new File(folderStr);
