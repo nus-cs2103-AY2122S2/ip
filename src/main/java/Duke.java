@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,6 +44,14 @@ public class Duke {
         String fileSeparator = System.getProperty("file.separator");
         String relativePath = "data" + fileSeparator + "duke.txt";
         DukeTaskSaver saver = new DukeTaskSaver(relativePath);
+
+        // load data when duke starts up
+        try {
+            todoList = saver.load();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
 
         String userInput = sc.nextLine();
 

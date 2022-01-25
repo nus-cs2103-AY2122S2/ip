@@ -1,9 +1,11 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class DukeTaskSaver {
     String filePath;
@@ -32,5 +34,68 @@ public class DukeTaskSaver {
             fw.write(todoList.get(i).toStringForSave() + "\n");
         }
         fw.close();
+    }
+
+    public ArrayList<Task> load() throws FileNotFoundException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        ArrayList<Task> todoListTasks = new ArrayList<>();
+
+        // load task from duke.txt to todoList
+        while (s.hasNext()) {
+            String task = s.nextLine();
+            String[] taskContent = task.split("\\\\| ");
+            String taskType = taskContent[0];
+            String taskStatus = taskContent[2];
+            String taskDescription = taskContent[4];
+
+
+            switch (taskType) {
+            case "T":
+                Todo todoTask = new Todo(taskDescription);
+
+                // check if task is completed
+                if (taskStatus.equals("0")) {
+                    todoTask.markAsNotDone();
+                } else {
+                    todoTask.markAsDone();
+                }
+
+                // add todoTask to todoList
+                todoListTasks.add(todoTask);
+                break;
+            case "D":
+                String by = taskContent[6];
+
+                Deadline deadlineTask = new Deadline(taskDescription, by);
+
+                // check if task is completed
+                if (taskStatus.equals("0")) {
+                    deadlineTask.markAsNotDone();
+                } else {
+                    deadlineTask.markAsDone();
+                }
+
+                // add deadlineTask to todoList
+                todoListTasks.add(deadlineTask);
+                break;
+            case "E":
+                String dateTime = taskContent[6];
+
+                Event eventTask = new Event(taskDescription, dateTime);
+
+                // check if task is completed
+                if (taskStatus.equals("0")) {
+                    eventTask.markAsNotDone();
+                } else {
+                    eventTask.markAsDone();
+                }
+
+                // add eventTask to todoList
+                todoListTasks.add(eventTask);
+                break;
+            }
+        }
+        return todoListTasks;
     }
 }
