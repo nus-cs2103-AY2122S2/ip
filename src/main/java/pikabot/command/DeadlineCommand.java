@@ -1,3 +1,13 @@
+package pikabot.command;
+
+import pikabot.Parser;
+import pikabot.Storage;
+import pikabot.TaskList;
+import pikabot.Ui;
+
+import pikabot.task.Deadline;
+import pikabot.exception.DeadlineException;
+
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 

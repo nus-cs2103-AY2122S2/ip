@@ -1,3 +1,10 @@
+package pikabot;
+
+import pikabot.task.Task;
+import pikabot.task.Deadline;
+import pikabot.task.Event;
+import pikabot.task.Todo;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
 

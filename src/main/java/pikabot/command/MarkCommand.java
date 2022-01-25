@@ -1,5 +1,10 @@
-import java.io.IOException;
+package pikabot.command;
 
+import pikabot.TaskList;
+import pikabot.Storage;
+import pikabot.Ui;
+
+import java.io.IOException;
 public class MarkCommand extends Command {
 
     String[] markCommand;

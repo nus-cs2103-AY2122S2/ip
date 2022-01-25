@@ -1,3 +1,11 @@
+package pikabot.command;
+
+import pikabot.TaskList;
+import pikabot.Storage;
+import pikabot.Ui;
+
+import pikabot.task.Task;
+
 import java.io.IOException;
 
 public class DeleteCommand extends Command {
