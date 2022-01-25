@@ -23,6 +23,8 @@ public class Event extends Task{
     // Limits the splitting of user message into substrings.
     private static final int LIMIT = 2;
 
+    private static final String TIME_ARGUMENT = "/at";
+
     // instance variable to store event time.
     private final String time;
 
@@ -35,6 +37,21 @@ public class Event extends Task{
         super(message.split(SEPARATOR, LIMIT)[TSK_INDEX]);
         String str = message.split(SEPARATOR, LIMIT)[ET_IDX];
         this.time = str.split(SPACE, LIMIT)[ET_IDX];
+    }
+
+    /**
+     * correctArgument checks if the function is valid.
+     * @param text the task input given by user.
+     * @return true if correct.
+     * @throws MissingTimeArgumentException if the user missed time argument out.
+     */
+    static boolean correctArgument(String text) {
+
+        if (!text.contains(SEPARATOR) || !text.contains(TIME_ARGUMENT) || text.trim().split(TIME_ARGUMENT).length == 1) {
+            throw new MissingTimeArgumentException("Deadline " + text);
+        }
+
+        return true;
     }
 
     /**

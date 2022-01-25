@@ -1,4 +1,7 @@
+
+
 harish
+list
 todo buy lunch
 deadline return book /by 3rd Feb
 event project team meeting /at 22nd Jan 12-2pm
@@ -19,7 +22,23 @@ unmark 7
 list
 unmark 3
 list
+mark
 mark 1
 mark 4
+list
+unmark
+
+deadline
+deadline mark
+deadline mark /by
+event
+event meet
+event meet /at
+
+haha
+lol
+random
+return books to library
+
 list
 bye

@@ -4,6 +4,8 @@
  */
 
 import java.util.ArrayList;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Conan {
 
@@ -141,35 +143,67 @@ public class Conan {
      */
     CarryOn tell(String message) {
 
+        message = message.trim();
         System.out.println(SEPARATOR);
 
-        // Checks if the user wants to exit.
-        if (message.equalsIgnoreCase(BYE)) {
-            return bye();
+        try {
+            // Checks if the user wants to exit.
+            if (message.equalsIgnoreCase(BYE)) {
+                return bye();
+            }
+
+            // Checks if the user wants to display the tasks
+            if (message.equalsIgnoreCase(LIST)) {
+                return displayTasks();
+            }
+
+
+            // Primary error handling for commands.
+            // line 162 Inspired from https://www.baeldung.com/java-string-to-stream.
+            long c = message.codePoints().mapToObj(x -> (char) x).filter(y -> y == SPACE.charAt(0)).count();
+            if (!message.contains(SPACE)) {
+                // check if the commands are empty
+                // or else its invalid command
+                if (message.equalsIgnoreCase(TODO)) {
+                    throw new MissingTaskArgumentException(TODO);
+                } else if (message.equalsIgnoreCase(DEADLINE)) {
+                    throw new MissingTaskArgumentException(DEADLINE);
+                } else if (message.equalsIgnoreCase(EVENT)) {
+                    throw new MissingTaskArgumentException(EVENT);
+                } else if (message.equalsIgnoreCase(MARK)) {
+                    throw new MissingTaskArgumentException(MARK);
+                } else if (message.equalsIgnoreCase(UNMARK)) {
+                    throw new MissingTaskArgumentException(UNMARK);
+                } else {
+                    throw new IllegalCommandException(message);
+                }
+            }
+
+            String command = message.split(SPACE, 2)[START_INDEX];
+
+            // check if the command says mark or unmarked.
+            switch (command) {
+                case MARK:
+                    return mark(message);
+                case UNMARK:
+                    return unmark(message);
+            }
+
+            return add(message);
+        } catch (IllegalCommandException e) {
+            System.out.println(e.toString());
+            System.out.println("Please try again");
+            System.out.println(SEPARATOR);
+            return CarryOn.NEXT;
         }
-
-        // Checks if the user wants to display the tasks
-        if (message.equalsIgnoreCase(LIST)) {
-            return displayTasks();
-        }
-
-        String command = message.split(SPACE, 2)[START_INDEX];
-
-        // check if the command says mark or unmarked.
-        switch (command) {
-            case MARK:
-                return mark(message);
-            case UNMARK:
-                return unmark(message);
-        }
-
-        return add(message);
     }
+
 
     /**
      * add function adds a task to the list of tasks to be performed.
      * @param text the task to be added.
      * @return CarryOn.NEXT to ask what else the user wants to do.
+     * @throws MissingTimeArgumentException if the user missed time argument out.
      */
     private CarryOn add(String text) {
 
@@ -184,9 +218,11 @@ public class Conan {
                 task = new Todo(message);
                 break;
             case DEADLINE:
+                Deadline.correctArgument(message);
                 task = new Deadline(message);
                 break;
             case EVENT:
+                Event.correctArgument(message);
                 task = new Event(message);
                 break;
             default:
@@ -207,13 +243,18 @@ public class Conan {
      * mark function marks a task as done.
      * @param message the user command.
      * @return CarryOn.NEXT to ask what else the user wants to do.
+     * @throws FaultyTaskNumberException if the user inputs an invalid task number.
      */
     private CarryOn mark(String message) {
         String[] arr = message.split(" ");
         int num = Integer.valueOf(arr[1]);
-        tasks.get(num - 1).markDone();
-        System.out.println(DONE);
-        System.out.println(tasks.get(num - 1));
+        if (num <= this.tasks.size() && num > 0) {
+            this.tasks.get(num - 1).markDone();
+            System.out.println(DONE);
+            System.out.println(tasks.get(num - 1));
+        } else {
+            throw new FaultyTaskNumberException(num);
+        }
         System.out.println(ASK + this.username);
         System.out.println(SEPARATOR);
         return CarryOn.NEXT;
@@ -223,13 +264,18 @@ public class Conan {
      * unmark function marks a task as not done.
      * @param message the user command.
      * @return CarryOn.NEXT to ask what else the user wants to do.
+     * @throws FaultyTaskNumberException if the user inputs an invalid task number.
      */
     private CarryOn unmark(String message) {
         String[] arr = message.split(" ");
         int num = Integer.valueOf(arr[1]);
-        tasks.get(num - 1).unMarkDone();
-        System.out.println(UNDONE);
-        System.out.println(tasks.get(num - 1));
+        if(num > 0 && num <= this.tasks.size()) {
+            tasks.get(num - 1).unMarkDone();
+            System.out.println(UNDONE);
+            System.out.println(tasks.get(num - 1));
+        } else {
+            throw new FaultyTaskNumberException(num);
+        }
         System.out.println(ASK + this.username);
         System.out.println(SEPARATOR);
         return CarryOn.NEXT;

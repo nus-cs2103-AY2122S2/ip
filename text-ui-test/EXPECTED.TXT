@@ -5,8 +5,17 @@ I'm a task manager, and I can help you keep up with your tasks.
 Now before we start, lets get acquainted! Lets start with our names!
 ------------------------------------------------
 ------------------------------------------------
+Please enter valid name
+------------------------------------------------
+Please enter valid name
+------------------------------------------------
 Hello, harish!, Nice to meet you! (*^_^*)
 So, tell me what would you like to do harish
+------------------------------------------------
+------------------------------------------------
+These are your Tasks, harish
+Number of tasks up to now: 0
+Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
 harish, I have added buy lunch
@@ -137,6 +146,10 @@ Number of tasks up to now: 8
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
+Task missing for :mark
+Please try again
+------------------------------------------------
+------------------------------------------------
 Great job, on completing this task! \(^_^)/
 [T][X] buy lunch
 Please let me know if there's anything else you would like to add, harish
@@ -157,6 +170,71 @@ These are your Tasks, harish
 7. [D][ ] paint walls (by:5th Feb)
 8. [E][ ] dance practice (at:Monday 8-9pm)
 Number of tasks up to now: 8
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+Task missing for :unmark
+Please try again
+------------------------------------------------
+You have not input any command, please add some and try again.
+------------------------------------------------
+------------------------------------------------
+Task missing for :DEADLINE
+Please try again
+------------------------------------------------
+------------------------------------------------
+Time argument missing for Deadline mark
+Please try again
+------------------------------------------------
+------------------------------------------------
+Time argument missing for Deadline mark /by
+Please try again
+------------------------------------------------
+------------------------------------------------
+Task missing for :EVENT
+Please try again
+------------------------------------------------
+------------------------------------------------
+Time argument missing for Deadline meet
+Please try again
+------------------------------------------------
+------------------------------------------------
+Time argument missing for Deadline meet /at
+Please try again
+------------------------------------------------
+You have not input any command, please add some and try again.
+------------------------------------------------
+------------------------------------------------
+IllegalCommandException: haha. Please enter a valid command!
+Please try again
+------------------------------------------------
+------------------------------------------------
+IllegalCommandException: lol. Please enter a valid command!
+Please try again
+------------------------------------------------
+------------------------------------------------
+IllegalCommandException: random. Please enter a valid command!
+Please try again
+------------------------------------------------
+------------------------------------------------
+harish, I have added return books to library
+Number of tasks up to now: 9
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+You have not input any command, please add some and try again.
+------------------------------------------------
+------------------------------------------------
+These are your Tasks, harish
+1. [T][X] buy lunch
+2. [D][ ] return book (by:3rd Feb)
+3. [E][ ] project team meeting (at:22nd Jan 12-2pm)
+4. [T][X] buy shoes
+5. [T][ ] edit pics
+6. [T][ ] fill out application form
+7. [D][ ] paint walls (by:5th Feb)
+8. [E][ ] dance practice (at:Monday 8-9pm)
+9. [ ] return books to library
+Number of tasks up to now: 9
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
