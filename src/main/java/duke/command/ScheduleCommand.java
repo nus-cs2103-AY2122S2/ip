@@ -16,6 +16,7 @@ public class ScheduleCommand extends Command {
     public boolean execute(IPrintable linePrinter, TaskList taskList) throws DukeIllegalArgumentException {
         LocalDateTime dayStart = parseDate(this.args);
         LocalDateTime dayEnd = dayStart.plus(1, ChronoUnit.DAYS);
+        linePrinter.print(String.format("Here are your tasks on %s:", this.args));
         taskList.forEach((idx, task) -> {
             task.getDate().ifPresent(date -> {
                 if (date.isBefore(dayEnd) && date.isAfter(dayStart)) {

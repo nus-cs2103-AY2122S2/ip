@@ -26,6 +26,7 @@ public class UpcomingCommand extends Command {
         }
 
         LocalDateTime endTime = LocalDateTime.now().plus(days, ChronoUnit.DAYS);
+        linePrinter.print(String.format("Here are your tasks in %d days:", days));
         taskList.forEach((idx, task) -> {
             task.getDate().ifPresent(date -> {
                 if (date.isBefore(endTime)) {

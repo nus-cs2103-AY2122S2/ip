@@ -1,13 +1,13 @@
 package duke.task.serializer;
 
-import duke.task.TaskList;
 import duke.exception.DukeIOException;
+import duke.task.TaskList;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * Serializes and Deserializes Database Files into TaskStore object.
@@ -17,7 +17,7 @@ import java.io.IOException;
 
 public class TaskListSerializer {
 
-    public static TaskList inflate(FileInputStream dbStream) throws DukeIOException {
+    public static TaskList inflate(InputStream dbStream) throws DukeIOException {
         TaskList store = new TaskList();
         if (dbStream == null) {
             return store;
@@ -42,7 +42,7 @@ public class TaskListSerializer {
         return store;
     }
 
-    public static void deflate(TaskList store, FileOutputStream dbStream) throws DukeIOException {
+    public static void deflate(TaskList store, OutputStream dbStream) throws DukeIOException {
         try (DataOutputStream dbDataStream = new DataOutputStream(dbStream)) {
             dbDataStream.writeInt(store.getTaskCount());
             for (int i = 0; i < store.getTaskCount(); i++) {
