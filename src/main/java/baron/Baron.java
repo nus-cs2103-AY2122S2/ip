@@ -3,7 +3,7 @@ package baron;
 import baron.commands.Command;
 import baron.commands.CommandManager;
 import baron.exceptions.BaronException;
-import baron.printer.Printer;
+import baron.util.TextUi;
 import baron.tasks.TaskManager;
 import baron.util.Storage;
 
@@ -14,6 +14,7 @@ public class Baron {
     private final TaskManager taskManager;
     private final CommandManager commandManager;
     private final Storage storage;
+    private final TextUi textUi;
 
     public Baron(String relativeFilePath) {
         TaskManager taskManagerTemp;
@@ -22,29 +23,28 @@ public class Baron {
         try {
             taskManagerTemp = new TaskManager(this.storage.load());
         } catch (BaronException e) {
-            Printer.printCommandOutput(e.toString());
+            TextUi.printCommandOutput(e.toString());
             taskManagerTemp = new TaskManager();
         }
         this.taskManager = taskManagerTemp;
         this.commandManager = new CommandManager(this.taskManager, this.storage);
+        this.textUi = new TextUi(this.taskManager);
     }
 
     private void start() {
-        Printer.printWelcomeMessage();
-
+        this.textUi.showWelcomeMessage();
         Command command;
 
         do {
             String fullCommand = inputScanner.nextLine();
-
             command = commandManager.parseCommand(fullCommand);
-            Printer.printCommandOutput(command.execute());
+            TextUi.printCommandOutput(command.execute());
         }
         while (!command.isByeCommand());
         try {
             this.storage.save(this.taskManager.getAllTasks());
         } catch (BaronException e) {
-            Printer.printCommandOutput(e.toString());
+            TextUi.printCommandOutput(e.toString());
         }
     }
 
