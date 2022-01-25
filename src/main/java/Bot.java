@@ -2,9 +2,11 @@ import java.util.ArrayList;
 
 public class Bot {
     ArrayList<Task> listOfTasks;
+    Storage storage;
 
     public Bot() {
-        this.listOfTasks = new ArrayList<>();
+        this.storage = new Storage();
+        this.listOfTasks = this.storage.readFromStorage();
     }
 
     public String encloseWithin(String str) {
@@ -22,6 +24,7 @@ public class Bot {
     public void sayGoodbye () {
         String goodbye = encloseWithin("Bye. Hope to see you again soon!\n");
         System.out.println(goodbye);
+        this.storage.writeToStorage(this.listOfTasks);
     }
 
     private String[] processInput(String inputMessage) throws DukeException {
@@ -31,38 +34,42 @@ public class Bot {
             msg = new String[] {"list"};
         } else {
             // Mark and unmark have the same syntax, so only process it once
-            if (inputMessage.contains("todo")) {
-                msg = inputMessage.split("todo");
-                if (msg.length < 1) {
+            if (inputMessage.length() < 4) {
+                // Do nothing (For Future methods to be added if their lengths are lesser than 4
+            } else if (inputMessage.substring(0,4).contains("todo")) {
+                if (inputMessage.length() <= 4) {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but you need to provide a description for the Todo task\n");
                 }
+                msg = inputMessage.split("todo ");
                 msg[0] = "todo";
-            } else if (inputMessage.contains("event")) {
-                if (inputMessage.contains("/at")) {
-                    msg = inputMessage.split(" /at");
-                    if (msg.length != 3) {
+            } else if (inputMessage.substring(0,6).contains("event ")) {
+                if (inputMessage.contains(" /at")) {
+                    String temp = inputMessage.substring(6);
+                    msg = temp.split(" /at");
+                    if (msg.length != 2) {
                         throw new DukeException("☹ OOPS!!! I'm sorry, the Event description cannot be empty\n");
                     }
-                    msg = new String[]{msg[0].substring(0, 5), msg[0].substring(6), msg[1]};
+                    msg = new String[]{"event", msg[0], msg[1]};
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but you need to use the following format:\n" +
                             "event {description} /at {date}\n");
-                }
-            } else if (inputMessage.contains("deadline")) {
-                if (inputMessage.contains("/by")) {
-                    msg = inputMessage.split(" /by");
-                    if (msg.length != 3) {
-                        throw new DukeException("☹ OOPS!!! I'm sorry, the Deadline description cannot be empty\n");
-                    }
-                    msg = new String[]{msg[0].substring(0, 8), msg[0].substring(9), msg[1]};
-                } else {
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but you need to use the following format:\n" +
-                            "deadline {description} /by {date}\n");
                 }
             } else if (inputMessage.contains("delete") || inputMessage.contains("mark")) {
                 msg = inputMessage.split(" ");
                 if (msg.length != 2) {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but you need to enter a number as well!\n");
+                }
+            } else if (inputMessage.substring(0, 9).contains("deadline ")) {
+                if (inputMessage.contains("/by")) {
+                    String temp = inputMessage.substring(9);
+                    msg = temp.split(" /by");
+                    if (msg.length != 2) {
+                        throw new DukeException("☹ OOPS!!! I'm sorry, the Deadline description cannot be empty\n");
+                    }
+                    msg = new String[]{"deadline", msg[0], msg[1]};
+                } else {
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but you need to use the following format:\n" +
+                            "deadline {description} /by {date}\n");
                 }
             }
         }
