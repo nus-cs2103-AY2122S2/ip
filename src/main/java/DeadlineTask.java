@@ -38,7 +38,7 @@ public class DeadlineTask extends Task{
     }
 
     public String toOutputLine(){
-        return this.getType() + " | " + (isDone ? "1 " : "0 ") + "| " + this.title + "| " + taskDate.toString() + (taskTime != null ? " | " + taskTime.toString() : "");
+        return this.getType() + " | " + (isDone ? "1 " : "0 ") + "| " + this.title + " | " + taskDate.toString() + (taskTime != null ? " | " + taskTime.toString() : "");
     }
 
     @Override

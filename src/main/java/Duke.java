@@ -1,6 +1,7 @@
 import java.time.format.DateTimeParseException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -46,7 +47,7 @@ public class Duke {
 
     public static void main(String[] args) {
         printContent(INTRO_MESSAGE);
-        ArrayList<Task> tasks = new ArrayList<Task>();
+        List<Task> tasks = Storage.loadFromFile(FILE_PATH);
         Scanner sc = new Scanner(System.in);
             while (true){
                 try{
@@ -58,7 +59,7 @@ public class Duke {
                         break;
                     } else if (query.compareTo(COMMAND_LIST) == 0){
                         processList(tasks);
-                        SaveTasklist.saveToFile(FILE_PATH, tasks);
+                        Storage.saveToFile(FILE_PATH, tasks);
                     } else if (query.compareTo(COMMAND_MARK) == 0){
                         if (splitted.length == 1)
                             throw new DukeException(ERROR_EMPTY_MARK);
@@ -66,7 +67,7 @@ public class Duke {
                             throw new DukeException(ERROR_INVALID_MARK);
                         Task thisTask = tasks.get(Integer.parseInt(splitted[1])-1);
                         thisTask.markAsDone();
-                        SaveTasklist.saveToFile(FILE_PATH, tasks);
+                        Storage.saveToFile(FILE_PATH, tasks);
                         printContent(taskLine(thisTask, MESSAGE_MARK));
                     } else if (query.compareTo(COMMAND_UNMARK) == 0){
                         if (splitted.length == 1)
@@ -75,14 +76,14 @@ public class Duke {
                             throw new DukeException(ERROR_INVALID_UNMARK);
                         Task thisTask = tasks.get(Integer.parseInt(splitted[1])-1);
                         thisTask.markAsUndone();
-                        SaveTasklist.saveToFile(FILE_PATH, tasks);
+                        Storage.saveToFile(FILE_PATH, tasks);
                         printContent(taskLine(thisTask, MESSAGE_UNMARK));
                     } else if (query.compareTo(COMMAND_TODO) == 0){
                         if (splitted.length == 1)
                             throw new DukeException(ERROR_INVALID_TODO_TITLE);
-                        Task thisTask = new TodoTask(line.substring(5));
+                        Task thisTask = new TodoTask(line.substring(5).trim());
                         tasks.add(thisTask);
-                        SaveTasklist.saveToFile(FILE_PATH, tasks);
+                        Storage.saveToFile(FILE_PATH, tasks);
                         printAddDeleteTaskSuccess(tasks, thisTask, MESSAGE_TASKADD);
                     } else if (query.compareTo(COMMAND_DEADLINE) == 0){
                         if (splitted.length == 1)
@@ -95,14 +96,14 @@ public class Duke {
                         String[] dateTimeSplit = subSplit[1].substring(1).split(" ");
                         Task thisTask = null;
                         if (dateTimeSplit.length == 1){
-                            thisTask = new DeadlineTask(subSplit[0].substring(9), dateTimeSplit[0]);
+                            thisTask = new DeadlineTask(subSplit[0].substring(9).trim(), dateTimeSplit[0]);
                         } else if (dateTimeSplit.length == 2){
-                            thisTask = new DeadlineTask(subSplit[0].substring(9), dateTimeSplit[0], dateTimeSplit[1]);
+                            thisTask = new DeadlineTask(subSplit[0].substring(9).trim(), dateTimeSplit[0], dateTimeSplit[1]);
                         } else {
                             throw new DukeException(ERROR_INVALID_TIME);
                         }
                         tasks.add(thisTask);
-                        SaveTasklist.saveToFile(FILE_PATH, tasks);
+                        Storage.saveToFile(FILE_PATH, tasks);
                         printAddDeleteTaskSuccess(tasks, thisTask, MESSAGE_TASKADD);
                     } else if (query.compareTo(COMMAND_EVENT) == 0){
                         if (splitted.length == 1)
@@ -115,14 +116,14 @@ public class Duke {
                         String[] dateTimeSplit = subSplit[1].substring(1).split(" ");
                         Task thisTask = null;
                         if (dateTimeSplit.length == 1){
-                            thisTask = new EventTask(subSplit[0].substring(6), dateTimeSplit[0]);
+                            thisTask = new EventTask(subSplit[0].substring(6).trim(), dateTimeSplit[0]);
                         } else if (dateTimeSplit.length == 2) {
-                            thisTask = new EventTask(subSplit[0].substring(6), dateTimeSplit[0], dateTimeSplit[1]);
+                            thisTask = new EventTask(subSplit[0].substring(6).trim(), dateTimeSplit[0], dateTimeSplit[1]);
                         } else {
                             throw new DukeException(ERROR_INVALID_TIME);
                         }
                         tasks.add(thisTask);
-                        SaveTasklist.saveToFile(FILE_PATH, tasks);
+                        Storage.saveToFile(FILE_PATH, tasks);
                         printAddDeleteTaskSuccess(tasks, thisTask, MESSAGE_TASKADD);
                     } else if (query.compareTo(COMMAND_TASKDELETE) == 0){
                         if (splitted.length == 1)
@@ -132,7 +133,7 @@ public class Duke {
                         int index = Integer.parseInt(splitted[1])-1;
                         Task thisTask = tasks.get(index);
                         tasks.remove(index);
-                        SaveTasklist.saveToFile(FILE_PATH, tasks);
+                        Storage.saveToFile(FILE_PATH, tasks);
                         printAddDeleteTaskSuccess(tasks, thisTask, MESSAGE_TASKDELETE);
                     } else{
                         throw new DukeException(ERROR_INVALID_COMMAND);
@@ -152,7 +153,7 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
     }
 
-    public static void printAddDeleteTaskSuccess(ArrayList<Task> tasks, Task task, String message){
+    public static void printAddDeleteTaskSuccess(List<Task> tasks, Task task, String message){
         String content = taskLine(task, message) + "\n";
         content += listSizeLine(tasks);
         printContent(content);
@@ -162,7 +163,7 @@ public class Duke {
         return message + "\n       [" + task.getType() + "][" + task.getStatusIcon() + "] " + task.toString();
     }
 
-    public static String listSizeLine(ArrayList<Task> tasks){
+    public static String listSizeLine(List<Task> tasks){
         return "     Now you have " + tasks.size() + " task" + (tasks.size() != 1 ? "s" : "") + " in the list.";
     }
 
@@ -174,7 +175,7 @@ public class Duke {
         System.out.println();
     }
 
-    public static void processList(ArrayList<Task> tasks){
+    public static void processList(List<Task> tasks){
         String list = MESSAGE_LIST + "\n     ";
         if(tasks.size() == 0){
             list += "~~List is currently empty~~";
