@@ -139,12 +139,17 @@ public class DukeList {
     public void todayTask(){
         LocalDate cur = LocalDate.now();
         String day = "\nDuke: Here are the tasks due today\n";
+        boolean b = true;
         for(Task t: a){
             if (t instanceof Events || t instanceof Deadlines ){
                 if(t.date.isEqual(cur)) {
+                    b = false;
                     day = day + "     " + t.show() + "\n";
                 }
             }
+        }
+        if(b){
+            day += "      NO TASK DUE TODAY";
         }
         System.out.println(day);
     }
