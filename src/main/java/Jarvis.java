@@ -1,6 +1,7 @@
 import exception.*;
 import task.*;
 import enums.*;
+import ui.Ui;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -12,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Jarvis {
+    private static Ui ui;
+
     private static final String dataFilePath = "data/data.txt";
 
     private static final ArrayList<Task> tasks = new ArrayList<>();
@@ -19,19 +22,18 @@ public class Jarvis {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
     public static void main(String[] args) throws JarvisException {
-        welcome();
+        ui = new Ui();
+        ui.welcome();
         loadData();
-
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
 
         while (processNext) {
             try {
+                String input = ui.readCommand();
                 String[] tokens = input.split(" ");
                 switch (Command.valueOf(tokens[0].trim().toUpperCase())) {
                 case BYE:
                     processNext = false;
-                    echo("Goodbye. J.A.R.V.I.S. systems powering off...");
+                    ui.shutdown();
                     return;
                 case LIST:
                     printTasks();
@@ -58,33 +60,11 @@ public class Jarvis {
                     break;
                 }
             } catch (IllegalArgumentException e) {
-                echo("I'm afraid I don't understand your request.");
+                ui.echo("I'm afraid I don't understand your request.");
             } catch (JarvisException de) {
-                echo("I'm afraid I wasn't able to fulfill your request.\n" + de.getMessage());
+                ui.echo("I'm afraid I wasn't able to fulfill your request.\n" + de.getMessage());
             }
-            input = scanner.nextLine();
         }
-        scanner.close();
-    }
-
-    private static void welcome() {
-        String logo =
-                "      _          _          ____       __     __      ___       ____\n"
-                        + "     | |        / \\        |  _ \\      \\ \\   / /     |_ _|     / ___|\n"
-                        + "  _  | |       / _ \\       | |_) |      \\ \\ / /       | |      \\___ \\\n"
-                        + " | |_| |  _   / ___ \\   _  |  _ <   _    \\ V /    _   | |   _   ___) |  _\n"
-                        + "  \\___/  (_) /_/   \\_\\ (_) |_| \\_\\ (_)    \\_/    (_) |___| (_) |____/  (_)\n\n";
-
-        System.out.println("Starting up...\n"
-                + "Online and ready.\n"
-                + logo
-                + "At your service.\n");
-    }
-
-    private static void echo(String str) {
-        System.out.println("------------------------------------------------------------");
-        System.out.println(str);
-        System.out.println("------------------------------------------------------------");
     }
 
     private static void loadData() throws JarvisException {
@@ -142,7 +122,7 @@ public class Jarvis {
     private static void printTasks() {
         int count = tasks.size();
         if (count == 0) {
-            echo("You have no tasks in your list. :-)");
+            ui.echo("You have no tasks in your list. :-)");
             return;
         }
         StringBuilder sb = new StringBuilder();
@@ -152,7 +132,7 @@ public class Jarvis {
                 sb.append("\n");
             }
         }
-        echo(sb.toString());
+        ui.echo(sb.toString());
     }
 
     private static void markAsDone(String[] tokens) throws JarvisException {
@@ -172,7 +152,7 @@ public class Jarvis {
         try {
             Task task = tasks.get(num);
             task.markAsDone();
-            echo("I've marked the following task as completed:\n\t" + task);
+            ui.echo("I've marked the following task as completed:\n\t" + task);
         } catch (IndexOutOfBoundsException e) {
             throw new JarvisException("Please specify a valid task number (between 1 to " + tasks.size() + " inclusive).");
         }
@@ -196,7 +176,7 @@ public class Jarvis {
         try {
             Task task = tasks.get(num);
             task.markAsUndone();
-            echo("I've marked the following task as incomplete:\n\t" + task);
+            ui.echo("I've marked the following task as incomplete:\n\t" + task);
         } catch (IndexOutOfBoundsException e) {
             throw new JarvisException("Please specify a valid task number (between 1 to " + tasks.size() + " inclusive).");
         }
@@ -219,7 +199,7 @@ public class Jarvis {
         }
         try {
             Task task = tasks.remove(num);
-            echo("Understood. I've removed the following task:\n\t"
+            ui.echo("Understood. I've removed the following task:\n\t"
                     + task + "\n"
                     + "Now you have " + tasks.size() + " task(s) in your list.");
         } catch (IndexOutOfBoundsException e) {
@@ -238,7 +218,7 @@ public class Jarvis {
 
         Todo todo = new Todo(description);
         tasks.add(todo);
-        echo("Got it. I've added this todo:\n\t"
+        ui.echo("Got it. I've added this todo:\n\t"
                 + todo + "\n"
                 + "Now you have " + tasks.size() + " task(s) in your list.");
         saveChanges();
@@ -268,7 +248,7 @@ public class Jarvis {
 
         Deadline deadline = new Deadline(description, dateTime);
         tasks.add(deadline);
-        echo("Got it. I've added this deadline:\n\t"
+        ui.echo("Got it. I've added this deadline:\n\t"
                 + deadline + "\n"
                 + "Now you have " + tasks.size() + " task(s) in your list.");
         saveChanges();
@@ -299,7 +279,7 @@ public class Jarvis {
 
         Event event = new Event(description, dateTime);
         tasks.add(event);
-        echo("Got it. I've added this event:\n\t"
+        ui.echo("Got it. I've added this event:\n\t"
                 + event + "\n"
                 + "Now you have " + tasks.size() + " task(s) in your list.");
         saveChanges();
