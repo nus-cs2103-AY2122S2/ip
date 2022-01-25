@@ -164,7 +164,7 @@ public class Duke {
 
     /* Load task list from file saved */
     public void loadFromSave(ArrayList<Task> taskList) {
-        String filePath = "src/main/data/duke.txt";
+        String filePath = "data/duke.txt";
 
         try {
             File file = new File(filePath);
@@ -200,7 +200,7 @@ public class Duke {
 
     /* save task list to a file */
     public void saveTaskList(ArrayList<Task> taskList) {
-        String filePath = "src/main/data";
+        String filePath = "data/";
         String fileName = "duke.txt";
 
         try {
