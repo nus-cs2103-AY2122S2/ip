@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.time.DateTimeException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -119,6 +120,7 @@ public class Duke {
         System.out.println("\t" + "☹ OOPS!!! Invalid index.");
         System.out.println(HORIZONTAL_LINE);
     }
+
     private static void printMissingDateTimeException() {
         System.out.println(HORIZONTAL_LINE);
         System.out.println("\t" + "☹ OOPS!!! Missing date/time. Please specify it.");
@@ -134,8 +136,18 @@ public class Duke {
         if (deadlineDetail.length != 2) {
             throw new MissingDateTimeException();
         }
-        savedTasks.add(new Deadline(deadlineDetail[0], deadlineDetail[1]));
-        printConfirmAdd();
+        try {
+            savedTasks.add(new Deadline(deadlineDetail[0], deadlineDetail[1]));
+            printConfirmAdd();
+        } catch (DateTimeException e) {
+            printDateTimeException();
+        }
+    }
+
+    private static void printDateTimeException() {
+        System.out.println(HORIZONTAL_LINE);
+        System.out.println("\t" + "☹ OOPS!!! Wrong format date.");
+        System.out.println(HORIZONTAL_LINE);
     }
 
     private static void executeAddEvent(String commandArgument) throws MissingDateTimeException{
