@@ -5,6 +5,20 @@ import java.util.stream.Collectors;
 public class Printer {
     private static final String border = "    ____________________________________________________________\n";
     private static final String spacing = "    ";
+    public static final String logo = " ____        _        \n"
+                                    + "|  _ \\ _   _| | _____ \n"
+                                    + "| | | | | | | |/ / _ \\\n"
+                                    + "| |_| | |_| |   <  __/\n"
+                                    + "|____/ \\__,_|_|\\_\\___|\n";
+
+    public void printGreeting() {
+        System.out.println("Hello from\n" + logo);
+
+        System.out.println(border + spacing +
+                "Hello! I'm Duke\n" + spacing +
+                "What can I do for you?\n" +
+                border);
+    }
 
     public void printBye() {
         System.out.println(border + spacing + "Bye. Hope to see you again soon!\n" + border);

@@ -7,10 +7,10 @@ public class Parser {
     }
 
     public static String[] splitDeadlineAndTime(String cmd) {
-        return cmd.split("/by", 2);
+        return cmd.split(" /by ", 2);
     }
 
     public static String[] splitEventAndTime(String cmd) {
-        return cmd.split("/at", 2);
+        return cmd.split(" /at ", 2);
     }
 }

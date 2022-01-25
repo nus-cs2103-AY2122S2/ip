@@ -1,6 +1,7 @@
 import Exceptions.EmptyMessageException;
 import Exceptions.WrongCommandException;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -8,20 +9,40 @@ public class Duke {
     static String spacing = "    ";
     static ListStorage myListStorage = new ListStorage();
     static Printer myPrinter = new Printer();
+    static Disk myDisk;
+
+    /*
+     * Empty constructor for Duke
+     */
+    public Duke() {
+        myDisk = new Disk("src/main/java/data/savedTasks.txt", myListStorage);
+        try {
+            myDisk.loadFromDisk();
+        } catch (IOException e) {
+            myPrinter.printExceptions(e);
+        }
+    }
+
+    /**
+     * Constructor for Duke
+     * Loads existing ListStorage in Disk.
+     * @param filePath filePath
+     */
+    public Duke(String filePath) {
+        myDisk = new Disk(filePath, myListStorage);
+        try {
+            myDisk.loadFromDisk();
+        } catch (IOException e) {
+            myPrinter.printExceptions(e);
+        }
+    }
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        new Duke("src/main/java/data/savedTasks.txt").dukeRunner();
+    }
 
-        System.out.println("Hello from\n" + logo);
-
-        System.out.println(border + spacing +
-                "Hello! I'm Duke\n" + spacing +
-                "What can I do for you?\n" +
-                border);
+    public void dukeRunner() {
+        myPrinter.printGreeting();
         while(true){
             try{
                 parseCommand();
@@ -30,7 +51,6 @@ public class Duke {
                 myPrinter.printExceptions(e);
             }
         }
-
     }
 
     public static void parseCommand() throws WrongCommandException {
@@ -43,13 +63,17 @@ public class Duke {
             try{
                 if (cmd.equals("bye")) {
                     commands.cmdBye();
+                    myDisk.saveToDisk();
                     break;
                 } else if (cmd.contains("todo")) {
                     commands.cmdTodo(cmd);
+                    myDisk.saveToDisk();
                 } else if (cmd.contains("event")) {
                     commands.cmdEvent(cmd);
+                    myDisk.saveToDisk();
                 } else if (cmd.contains("deadline")) {
                     commands.cmdDeadline(cmd);
+                    myDisk.saveToDisk();
                 } else if (cmd.contains("list")) {
                     commands.cmdList();
                 } else {
@@ -57,11 +81,14 @@ public class Duke {
                     if (cmd.contains("mark")) {
                         if (cmd.contains("unmark")) {
                             commands.cmdUnmark(taskNumber);
+                            myDisk.saveToDisk();
                         } else {
                             commands.cmdMark(taskNumber);
+                            myDisk.saveToDisk();
                         }
                     } else if (cmd.contains("delete")) {
                         commands.cmdDelete(taskNumber);
+                        myDisk.saveToDisk();
                     } else {
                         throw new WrongCommandException("Invalid Command");
                     }
