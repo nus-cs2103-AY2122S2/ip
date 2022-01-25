@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.ui.Ui;
+
 import java.time.LocalDate;
 
 public class Task {
@@ -6,7 +10,7 @@ public class Task {
     private String charId;
     private LocalDate date;
 
-    Task(String description, String charId, LocalDate date) {
+    public Task(String description, String charId, LocalDate date) {
         this.marked = false;
         this.description = description;
         this.charId = charId;

@@ -1,3 +1,13 @@
+package duke.parser;
+
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -37,7 +47,7 @@ public class Parser {
                 }
             }
         } catch (IndexOutOfBoundsException e) {
-            ui.echo("Duke has noticed that the number you provided does not \nmatch the number of task you have." +
+            ui.echo("Duke.Main.Duke has noticed that the number you provided does not \nmatch the number of task you have." +
                     "\nPlease enter a valid task number!");
         } catch (NumberFormatException e) {
             ui.echo("OOPS!!! Please enter a valid task number!");
@@ -84,7 +94,7 @@ public class Parser {
         } catch (ArrayIndexOutOfBoundsException e) {
             ui.echo("☹ OOPS!!! Description is empty or invalid timeframe!");
         } catch (DateTimeParseException e) {
-            ui.echo("☹ OOPS!!! Duke could not understand given date!"
+            ui.echo("☹ OOPS!!! Duke.Main.Duke could not understand given date!"
                     + " Please enter in yyyy-mm-dd format!");
         }
         return task;

@@ -1,10 +1,8 @@
+package duke.ui;
+
 public class Ui {
 
     private String hLine = "____________________________________________________________";
-
-    public Ui() {
-
-    }
 
     public void showWelcome() {
         String logo = " ____        _        \n"
@@ -14,7 +12,7 @@ public class Ui {
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
         System.out.println(hLine + "\n");
-        System.out.println(logo + "\nHello! I'm Duke\nWhat can I do for you?");
+        System.out.println(logo + "\nHello! I'm Duke.Main.Duke\nWhat can I do for you?");
         System.out.println(hLine + "\n");
     }
 

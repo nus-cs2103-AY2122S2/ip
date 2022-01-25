@@ -1,3 +1,10 @@
+package duke.Storage;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -44,7 +51,7 @@ public class Storage {
                 list.add(task);
             }
         } catch (FileNotFoundException e) {
-            System.out.println("OOPS!!! Duke is unable to locate your file!");
+            System.out.println("OOPS!!! Duke.Main.Duke is unable to locate your file!");
         }
         return list;
     }
@@ -65,7 +72,7 @@ public class Storage {
             }
             fileWriter.close();
         } catch (IOException e) {
-            System.out.println("OOPS!!! Duke is unable to write to your file!");
+            System.out.println("OOPS!!! Duke.Main.Duke is unable to write to your file!");
         }
     }
 }
