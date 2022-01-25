@@ -6,6 +6,8 @@ import java.util.StringTokenizer;
 public class Bob {
     private static final String lineSplit = "====================================================================\n";
     private static final String lineSplit2 = "====================================================================";
+    public static final String fileName = "./Bob.txt";
+    public static Storage store;
     private static List<Task> tasks;
 
     public static void main(String[] args) {
@@ -13,10 +15,10 @@ public class Bob {
     }
 
     public static void initializeBob() {
-        tasks = new ArrayList<>();
+        store = new Storage(fileName);
+        tasks = store.getSavedStore();
         greet();
         activeListener();
-        sayBye();
     }
 
     public static void greet() {
@@ -28,7 +30,9 @@ public class Bob {
                     + "╚═╝░░╚═╝╚═╝  ╚═╝░░░╚═╝░░░░░╚═╝  ╚═════╝░░╚════╝░╚═════╝░\n"
                     + lineSplit;
         System.out.print(logo);
-        System.out.print("Bob: How can I help? \t¯\\(°_o)/¯\n" + lineSplit + "You: ");
+        System.out.print("Bob: What tasks are you adding to the list today? \t¯\\(°_o)/¯\n");
+        store.readStore();
+        System.out.print(lineSplit + "You: ");
     }
 
     public static void activeListener() {
@@ -64,6 +68,7 @@ public class Bob {
             input = sc.nextLine();
             System.out.print(lineSplit);
         }
+        sayBye();
     }
 
     public static void deleteTask(String taskNumber) throws BobException {
@@ -76,6 +81,7 @@ public class Bob {
             throw new BobException("delete");
         }
         tasks.remove(currTask);
+        store.updateStore(tasks);
         System.out.println("Bob: I have removed the following task from your list. ᕙ(⇀‸↼‶)ᕗ");
         System.out.println("\t" + currTask.printStatus());
         System.out.print(lineSplit + "You: ");
@@ -99,6 +105,7 @@ public class Bob {
             System.out.println("\t" + current.printStatus());
             System.out.print(lineSplit + "You: ");
         }
+        store.updateStore(tasks);
     }
 
     public static void showList() {
@@ -146,8 +153,9 @@ public class Bob {
             throw new BobException("invalid input");
         }
         tasks.add(newTask);
+        store.updateStore(tasks);
         System.out.print("Bob: I have added " + newTask + " to your tasks! You have " + tasks.size() + " tasks now " +
-                "._.)/\\(._.\n" + lineSplit + "You: ");
+            "._.)/\\(._.\n" + lineSplit + "You: ");
     }
 
     public static void sayBye() {

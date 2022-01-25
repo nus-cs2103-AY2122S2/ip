@@ -3,6 +3,7 @@ public class Deadline extends Task {
 
     public Deadline(String name, String date) {
         super(name);
+        super.type = "D";
         this.date = date;
     }
 
