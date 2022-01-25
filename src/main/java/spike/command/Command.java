@@ -7,12 +7,13 @@ import spike.task.TaskList;
  * Specifies behaviours of various types of commands.
  */
 public class Command {
-    // TODO one execute function, then use polymorphism, allow different command to execute themselves
-
-
-    public String execute(TaskList task) {
+    /**
+     * Executes and prints result in string form.
+     *
+     * @param tasks current task list
+     * @return resultant String after execution
+     */
+    public String execute(TaskList tasks) {
         return "";
     }
-
-
 }

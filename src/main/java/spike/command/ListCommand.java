@@ -6,24 +6,38 @@ import spike.task.TaskList;
 import java.time.LocalDateTime;
 
 /**
- *
+ * Lists tasks according to user requirement.
  */
-// TODO need to put this with other as a package then I can assess the list in Spike class
 public class ListCommand extends Command{
     private String command;
     private int action;
     private LocalDateTime ldt;
 
+    /**
+     * Default constructor for convenience
+     */
     public ListCommand() {
         this.action = 1;
         this.ldt = null;
     }
 
+    /**
+     * Constructor for listing task by date
+     *
+     * @param action type of filtering for listing task
+     * @param ldt date and time for filtering
+     */
     public ListCommand(int action, LocalDateTime ldt) {
         this.action = action;
         this.ldt = ldt;
     }
 
+    /**
+     * Returns tasks satisfying filtering condition in string.
+     *
+     * @param tasks current task list
+     * @return tasks satisfying filtering condition in string
+     */
     @Override
     public String execute(TaskList tasks) {
         if (action == 1) {
@@ -33,12 +47,6 @@ public class ListCommand extends Command{
         }
     }
 
-    /**
-     * Lists all tasks.
-     *
-     * @param tasks
-     * @return
-     */
     private String listTask(TaskList tasks) {
         int i = 1;
         String result = "Here are the task(s) in your list:\n";

@@ -11,7 +11,7 @@ public class Task {
     protected LocalDateTime dateTime;
 
     /**
-     * Constructor for spike.task.Task objects.
+     * Constructor for Task objects.
      */
     public Task(String description) {
         this.description = description;
@@ -19,6 +19,12 @@ public class Task {
         this.dateTime = LocalDateTime.parse("1700-01-01T00:00:00");
     }
 
+    /**
+     * Alternative constructor for task associated with date and time.
+     *
+     * @param description task description
+     * @param dateTime associated date and time
+     */
     public Task(String description, LocalDateTime dateTime) {
         this.description = description;
         this.isDone = false;
@@ -28,7 +34,7 @@ public class Task {
     /**
      * Retrieve the task status icon.
      */
-    public String getStatusIcon() {
+    private String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 

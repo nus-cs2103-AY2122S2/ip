@@ -5,7 +5,7 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 /**
- * Encapsulates the spike.ui.Ui of the bot.
+ * Encapsulates the Ui of the bot.
  */
 public class Ui {
     private final Scanner in;
@@ -30,7 +30,7 @@ public class Ui {
     /**
      * Gets command from the user.
      *
-     * @return
+     * @return string representation of the input
      */
     public String getCommand() {
         // Get the command as one line
@@ -44,8 +44,6 @@ public class Ui {
 
     /**
      * Prints start up message
-     *
-     * @return
      */
     public void greet(int taskListSize) {
         if (taskListSize > 0) {

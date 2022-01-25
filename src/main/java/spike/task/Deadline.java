@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task{
 
     /**
-     * Normal constructor.
+     * Default constructor.
      */
     public Deadline(String description, LocalDateTime by) {
         super(description, by);
@@ -25,6 +25,9 @@ public class Deadline extends Task{
         return "D" + " | " + status + " | " + super.description + " | " + dtf.format(super.dateTime);
     }
 
+    /**
+     * Returns proper string representation of the task object
+     */
     @Override
     public String toString() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
