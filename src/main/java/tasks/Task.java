@@ -12,9 +12,17 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    public boolean getIsDone() {return this.isDone;}
+    public String getDescription() {
+        return this.description;
+    }
 
-    public boolean setIsDone(boolean isDone) {return this.isDone = isDone;}
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+
+    public boolean setIsDone(boolean isDone) {
+        return this.isDone = isDone;
+    }
 
     @Override
     public String toString() {

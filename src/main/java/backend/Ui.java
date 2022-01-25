@@ -30,4 +30,8 @@ public class Ui {
     public static void event(){
         System.out.println("OK! Added this event:");
     }
+
+    public static void find(){
+        System.out.println("Here are the matching tasks in your list:");
+    }
 }

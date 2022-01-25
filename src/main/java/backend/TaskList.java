@@ -7,11 +7,6 @@ import exception.DukeException;
 public class TaskList {
     protected static ArrayList<Task> tasks;
 
-
-    public TaskList(ArrayList<Task> tasks) {
-        this.tasks = tasks;
-    }
-
     public static void list() {
         Ui.list();
         for (int i = 0; i < tasks.size(); i++) {
@@ -100,6 +95,16 @@ public class TaskList {
             System.out.println("added: " + currentEvent.toString());
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println(new DukeException("The description of a event cannot be empty"));
+        }
+    }
+
+    public static void find(String keyword) {
+        int counter = 1;
+        Ui.find();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getDescription().contains(keyword)) {
+                System.out.println(counter + ". " + tasks.get(i).toString());
+            }
         }
     }
 

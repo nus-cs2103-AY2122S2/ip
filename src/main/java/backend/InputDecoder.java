@@ -69,7 +69,14 @@ public class InputDecoder {
                 String description = segments[0];
                 String time = segments[1];
                 TaskList.event(description,time);
+                break;
             }
+
+        case find:
+            String keyword = commandSections[1];
+            TaskList.find(keyword);
+            break;
+
             default: {
                 System.out.println("Sorry I didnt understand you!");
             }
