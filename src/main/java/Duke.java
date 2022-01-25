@@ -57,6 +57,9 @@ public class Duke {
         }
     }
 
+    /**
+     *  Prints out a list of available commands in this program.
+     */
     public static void helpCmd() {
         System.out.println("LIST OF AVAILABLE COMMANDS IN THIS PROGRAM      DESCRIPTION");
         System.out.println("list                                            List out all added tasks");
@@ -68,6 +71,77 @@ public class Duke {
         System.out.println("delete {Task ID}                                Delete specific task from list");
     }
 
+    /**
+     * Prints out all the tasks in the list.
+     */
+    public static void list() {
+        int num = 1;
+        System.out.println("HERE ARE THE TASKS IN YOUR LIST:");
+        for (Task task : list) {
+            System.out.println(num + "." + task.getTask());
+            num++;
+        }
+    }
+
+    /**
+     * Adds to do task into our current list.
+     *
+     * @param input string entered by the user.
+     * @throws DukeException if task description is empty.
+     */
+    public static void addToDo(String input) throws DukeException {
+        String[] str = input.split(" ");
+        if (str.length == 1) {
+            throw new DukeException("PLEASE INCLUDE TASK DESCRIPTION IN YOUR COMMAND.");
+        }
+        Task newTask = new ToDo(str[1]);
+        list.add(newTask);
+        System.out.println("GOT IT. I'VE ADDED THIS TASK:");
+        System.out.println(newTask.getTask());
+        System.out.println("NOW YOU HAVE "+ list.size() + " TASKS IN THE LIST.");
+    }
+
+    /**
+     * Adds deadline task into our current list.
+     *
+     * @param input string entered by the user.
+     * @throws DukeException if task description or date is empty.
+     */
+    public static void addDeadline(String input) throws DukeException {
+        String[] str = input.split(" ");
+        if (str.length == 1) {
+            throw new DukeException("PLEASE INCLUDE TASK DESCRIPTION AND DATE IN YOUR COMMAND.");
+        }
+        if (str.length == 2 || str.length == 3) {
+            throw new DukeException("PLEASE INCLUDE DATE IN YOUR COMMAND.");
+        }
+        Task newTask = new Deadline(str[1], str[3]);
+        list.add(newTask);
+        System.out.println("GOT IT. I'VE ADDED THIS TASK:");
+        System.out.println(newTask.getTask());
+        System.out.println("NOW YOU HAVE "+ list.size() + " TASKS IN THE LIST.");
+    }
+
+    /**
+     * Adds event task into our current list.
+     *
+     * @param input string entered by the user.
+     * @throws DukeException if task description or date is empty.
+     */
+    public static void addEvent(String input) throws DukeException {
+        String[] str = input.split(" ");
+        if (str.length == 1) {
+            throw new DukeException("PLEASE INCLUDE TASK DESCRIPTION AND DATE IN YOUR COMMAND.");
+        }
+        if (str.length == 2 || str.length == 3) {
+            throw new DukeException("PLEASE INCLUDE DATE IN YOUR COMMAND.");
+        }
+        Task newTask = new Event(str[1], str[3]);
+        list.add(newTask);
+        System.out.println("GOT IT. I'VE ADDED THIS TASK:");
+        System.out.println(newTask.getTask());
+        System.out.println("NOW YOU HAVE "+ list.size() + " TASKS IN THE LIST.");
+    }
 
     /**
      * This method changes the status of a particular task to Done
@@ -105,65 +179,7 @@ public class Duke {
         }
     }
 
-    /**
-     * This method lists down all the classes.
-     */
-    public static void list() {
-        int num = 1;
-        System.out.println("Here are the tasks in your list:");
-        for (Task task : list) {
-            System.out.println(num + "." + task.getTask());
-            num++;
-        }
-    }
 
-    /**
-     * This method creates to do (subclass of Task) and adds it into our list
-     *
-     * @param input string given by the user
-     * @throws DukeException originating from rmType method back to main method
-     */
-    public static void addToDo(String input) throws DukeException {
-        Task newTask = new ToDo(Duke.rmType(input));
-        list.add(newTask);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(newTask.getTask());
-        System.out.println("Now you have "+ list.size() +" tasks in the list.");
-    }
-
-    /**
-     * This method creates Deadline (subclass of Task) and adds it into our list
-     *
-     * @param input string given by the user
-     * @throws DukeException originating from rmType and extractDateORTask method
-     * back to main method
-     */
-    public static void addDeadline(String input) throws DukeException {
-        String adjInput = Duke.rmType(input);
-        Task newTask = new Deadline(Duke.extractDateORTask(adjInput, 2),
-                Duke.extractDateORTask(adjInput, 1));
-        list.add(newTask);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(newTask.getTask());
-        System.out.println("Now you have "+ list.size() +" tasks in the list.");
-    }
-
-    /**
-     * This method creates Event (subclass of Task) and adds it into our list
-     *
-     * @param input string given by the user
-     * @throws DukeException originating from rmType and extractDateORTask method
-     * back to main method
-     */
-    public static void addEvent(String input) throws DukeException {
-        String adjInput = Duke.rmType(input);
-        Task newTask = new Event(Duke.extractDateORTask(adjInput, 2),
-                Duke.extractDateORTask(adjInput, 1));
-        list.add(newTask);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(newTask.getTask());
-        System.out.println("Now you have "+ list.size() +" tasks in the list.");
-    }
     /**
      * This method deletes Task from our list
      *
@@ -190,45 +206,4 @@ public class Duke {
         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
-    /**
-     * This method is used to remove the task type from input
-     *
-     * @param input string given by the user
-     * @return remaining string after task type is removed.
-     * @throws DukeException if add type description is empty
-     */
-    public static String rmType(String input) throws DukeException {
-        String[] temp = input.split(" ");
-        if (temp.length == 1) {
-            throw new DukeException("☹ OOPS!!! The description of a " +  temp[0] +  " cannot be empty.");
-        }
-        String[] newTemp = new String[temp.length - 1];
-        for (int i = 1; i < temp.length; i++) {
-            newTemp[i - 1] = temp[i];
-        }
-        String adjInput = String.join(" ", newTemp);
-        return adjInput;
-    }
-
-    /**
-     * This method is used to extract date or task depending on the integer
-     * passed into the method. Do note that the input string passed in should
-     * be the result from rmType method.
-     * 1 denotes date, 2 denotes task name
-     *
-     * @param input string given by the user
-     * @return remaining string after task type is removed.
-     * @throws DukeException if no date is included
-     */
-    public static String extractDateORTask(String input, int integer) throws DukeException {
-        String[] temp = input.split(" /");
-        if (temp.length == 1) {
-            throw new DukeException("☹ OOPS!!! Remember to specify your date");
-        }
-        if (integer == 1) {
-            return temp[1];
-        } else {
-            return temp[0];
-        }
-    }
 }
