@@ -58,7 +58,7 @@ public class Duke {
                     System.out.println("Opps! Your save files cannot be read. @.@");
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException | DukeException e) {
             System.out.println("Opps! An error occurred. @.@");
         }
 
@@ -182,7 +182,7 @@ public class Duke {
      * @param task task to be added.
      * @param type type of task.
      */
-    private static void addTasks(String task, TaskType type) throws IOException {
+    private static void addTasks(String task, TaskType type) throws IOException, DukeException {
         System.out.println("Got it. I've added this task:");
 
         switch (type) {
