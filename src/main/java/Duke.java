@@ -11,8 +11,11 @@ import tasks.*;
 public class Duke {
 	private static ArrayList<Task> TASKLIST = new ArrayList<>();
 	private static Storage storage;
+	private static Ui ui;
 	public Duke(String filePath) {
 		storage = new Storage(filePath);
+		ui = new Ui();
+
 		try {
 			TASKLIST = storage.load();
 		} catch (IOException e) {
@@ -21,19 +24,11 @@ public class Duke {
 		}
 	}
 
-	public static void main(String[] args) {
-		new Duke("data/tasks.txt");
+	public void run(){
 		//intro messages
+		ui.welcomeMessage();
 		Scanner sc = new Scanner(System.in);
-		String logo = " ____        _        \n"
-				+ "|  _ \\ _   _| | _____ \n"
-				+ "| | | | | | | |/ / _ \\\n"
-				+ "| |_| | |_| |   <  __/\n"
-				+ "|____/ \\__,_|_|\\_\\___|\n";
-		System.out.println("Hello from\n" + logo);
-		Command cmd = new WelcomeCommand();
-		cmd.execute();
-
+		Command cmd;
 		//main program loop
 		while (true) {
 			try {
@@ -54,6 +49,10 @@ public class Duke {
 			System.out.println("An error occurred");
 			e.printStackTrace();
 		}
+	}
+
+	public static void main(String[] args) {
+		new Duke("data/tasks.txt").run();
 	}
 
 	private static Command processInput(String input) throws DukeException {
@@ -105,27 +104,6 @@ public class Duke {
 		}
 		return cmd;
 	}
-
-//	private static void saveFile() throws IOException {
-//		FileWriter fw = new FileWriter("data/tasks.txt");
-//		for (int i =0; i < TASKLIST.size(); i++){
-//			Task t = TASKLIST.get(i);
-//			String type = t.getType();
-//			String mark = t.getMark();
-//			String detail = t.getDetail();
-//			switch (type){
-//			case"T":
-//				fw.write(type + " | " +  mark + " | " + detail + "\n");
-//				break;
-//			case"E":
-//			case"D":
-//				String date = t.getDate();
-//				fw.write(type + " | "  + mark + " | " + detail + " | " + date + "\n");
-//				break;
-//			}
-//		}
-//		fw.close();
-//	}
 
 	private static boolean isInteger(String input) {
 		for (int i = 0; i < input.length(); i++) {
