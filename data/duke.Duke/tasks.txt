@@ -16,3 +16,5 @@ T---false--- sleep---null
 E---false--- aaaaaaaaaaa ---2020-1-1 1100   
 E---false--- fly to Singapore---Jan 01 2020 11:00 AM   
 E---false--- study ---Aug 08 2020 01:01 AM 
+T---false--- die---null 
+E---false--- ddddddddd ---Jan 01 2020 12:00 AM 

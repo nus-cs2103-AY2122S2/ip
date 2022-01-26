@@ -40,21 +40,23 @@ public class Parser {
         }
     }
 
-    public static void parseFileData(String input){
+    public static Task parseFileData(String input){
         if (input == null || input == ""){
-            return;
+            return null;
         }
         String[] stringArr = input.split("---");
         int taskNum = Task.totalTask;
+        Task task;
         if (stringArr[0].equals("T")){
-            TaskList.addTask(stringArr[2], null, "T", true);
+            task = TaskList.addTask(stringArr[2], null, "T", true);
             TaskList.markTaskNum(taskNum, stringArr[1]);
         } else if (stringArr[0].equals("D")){
-            TaskList.addTask(stringArr[2], stringArr[3], "D", true);
+            task = TaskList.addTask(stringArr[2], stringArr[3], "D", true);
             TaskList.markTaskNum(taskNum, stringArr[1]);
         } else {
-            TaskList.addTask(stringArr[2], stringArr[3], "E", true);
+            task = TaskList.addTask(stringArr[2], stringArr[3], "E", true);
             TaskList.markTaskNum(taskNum, stringArr[1]);
         }
+        return task;
     }
 }

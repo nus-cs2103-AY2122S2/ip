@@ -62,13 +62,16 @@ public class TaskList {
     }
 
 
-    public static void addTask(String name, String time, String type, boolean isReading){
+    public static Task addTask(String name, String time, String type, boolean isReading){
+        Task task;
         if (type.equals("D")){
-            tasklist.add(new Deadline(name, Task.totalTask, time, isReading));
+            task = new Deadline(name, Task.totalTask, time, isReading);
         } else if (type.equals("E")){
-            tasklist.add(new Event(name, Task.totalTask, time, isReading));
+            task = new Event(name, Task.totalTask, time, isReading);
         } else {
-            tasklist.add(new ToDo(name, Task.totalTask, isReading));
+            task = new ToDo(name, Task.totalTask, isReading);
         }
+        tasklist.add(task);
+        return task;
     }
 }
