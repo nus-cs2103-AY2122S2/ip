@@ -9,7 +9,7 @@ public class Storage {
 
     private final String filePath;
 
-    Storage(String filePath) throws DukeException {
+    public Storage(String filePath) throws DukeException {
         try {
             this.filePath = filePath;
             File file = new File(filePath);

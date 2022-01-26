@@ -9,7 +9,7 @@ public class TaskList {
 
     private Storage storage;
 
-    TaskList(Storage storage) throws DukeException {
+    public TaskList(Storage storage) throws DukeException {
         items = new ArrayList<>();
         this.storage = storage;
         readFromFile();
