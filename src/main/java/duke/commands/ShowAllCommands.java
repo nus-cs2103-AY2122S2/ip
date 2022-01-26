@@ -10,7 +10,7 @@ public class ShowAllCommands extends Command<String> {
     /**
      * Enumeration of all valid commands.
      */
-    enum Commands {LIST, TODO, EVENT, DEADLINE, BYE, MARK, UNMARK, DELETE}
+    enum Commands {LIST, TODO, EVENT, DEADLINE, BYE, MARK, UNMARK, DELETE, FIND}
 
     /**
      * Constructor of this class to display out the valid commands for use.
@@ -41,6 +41,8 @@ public class ShowAllCommands extends Command<String> {
                 System.out.println("mark    | Mark the task as done. eg: mark_<task number>");
             case DELETE:
                 System.out.println("delete  | Delete the task from list. eg: delete_<task number>");
+            case FIND:
+                System.out.println("find    | Find the tasks with a keyword from list. eg: find_<keyword>");
         }
         System.out.println(Ui.lineDivider);
     }
