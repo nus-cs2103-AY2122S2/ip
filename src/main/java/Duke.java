@@ -2,6 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
+import java.time.LocalDate;
 
 public class Duke {
     public static void main(String[] args) {
@@ -61,7 +62,7 @@ public class Duke {
                 myPrint(e.toString());
             }
             
-            input = sc.nextLine();
+            input = sc.nextLine(); 
             
         }
         
@@ -177,11 +178,16 @@ public class Duke {
         
         if (descriptionTime.length < 2) {
             throw new DukeAbsentInfoException(
-            "☹ OOPS!!! The date/time of the deadline has to be specified and seperated from the description using a \"/\".");
+                    "☹ OOPS!!! The task needs to be specified in the format of [task] [description] /yyyy-mm-dd");
+        }
+
+        try {
+            LocalDate.parse(descriptionTime[1]);
+        } catch(Exception e) {
+            throw new DukeException("☹ OOPS!!! The date has to be formatted in yyyy-mm-dd");
         }
         
-        String[] prepoTime = descriptionTime[1].split(" ", 2);
-        Task tempTask = new Deadline(descriptionTime[0], prepoTime[0] + ": " + prepoTime[1]);
+        Task tempTask = new Deadline(descriptionTime[0], descriptionTime[1]);
         
         tasks.add(tempTask);
         myPrint("Got it. I've added this task:\n      " + tempTask + countList(tasks));
@@ -196,14 +202,20 @@ public class Duke {
         
         if (descriptionTime.length < 2) {
             throw new DukeAbsentInfoException(
-            "☹ OOPS!!! The date/time of the event has to be specified and seperated from the description using a \"/\".");
+                    "☹ OOPS!!! The task needs to be specified in the format of [task] [description] /yyyy-mm-dd");
         }
         
-        String[] prepoTime = descriptionTime[1].split(" ", 2);
-        Task tempTask = new Event(descriptionTime[0], prepoTime[0] + ": " + prepoTime[1]);
+        try {
+            LocalDate.parse(descriptionTime[1]);
+        } catch(Exception e) {
+            throw new DukeException("☹ OOPS!!! The date has to be formatted in yyyy-mm-dd");
+        }
+
+        Task tempTask = new Event(descriptionTime[0], descriptionTime[1]);
         
         tasks.add(tempTask);
         myPrint("Got it. I've added this task:\n      " + tempTask + countList(tasks));
+
     }
 
 }

@@ -1,5 +1,4 @@
 public class DukeAbsentInfoException extends DukeException {
-    String message;
 
     DukeAbsentInfoException(String message) {
         super(message);
@@ -7,6 +6,6 @@ public class DukeAbsentInfoException extends DukeException {
 
     @Override
     public String toString() {
-        return message;
+        return this.message;
     }
 }
