@@ -16,6 +16,7 @@ public class Parser {
     private static final String UNRECOGNIZED_COMMAND = "Sorry Sir, I do not understand that command.";
     private static final String NOT_VALID_NUMBER = "Please enter a valid number Sir.";
     private static final String COMMAND_REQUIRES_NUMBER = "Sorry Sir, this command requires a number.";
+    private static final String MISSING_TASK_INFO = "Sorry Sir, the <%s> command cannot be empty.";
 
     /**
     * Displays the farewell message to the user.
@@ -37,6 +38,7 @@ public class Parser {
     * @see      Storage
     */
     public static boolean parseText(String inputText, TaskList taskList, Storage storage) { // returns true if bot should continue parsing text
+        inputText = inputText.trim();
         String[] inputStringArray = inputText.split(" ");
         try {
             if (inputText.equals("bye")) { // bye command
@@ -80,6 +82,14 @@ public class Parser {
                 } catch (ArrayIndexOutOfBoundsException exception) { // no input together with command
                     throw new DukeException(COMMAND_REQUIRES_NUMBER);
                 } 
+            } else if (inputStringArray[0].equals("find")) {
+                try {
+                    String message = taskList.findTaskName(inputStringArray[1]);
+                    Ui.displayMessage(message);
+                    return true;
+                } catch (ArrayIndexOutOfBoundsException exception) {
+                    throw new DukeException(String.format(MISSING_TASK_INFO, "find"));
+                }
             } else { // other text input
                 throw new DukeException(UNRECOGNIZED_COMMAND);
             }
