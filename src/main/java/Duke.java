@@ -1,6 +1,16 @@
 import java.util.Scanner;
 
+/**
+ * Duke is a simple virtual assistant typically used
+ * to teach students about programming.
+ */
 public class Duke {
+
+    /**
+     * Runs Duke.
+     *
+     * @param args Unused.
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -39,133 +49,132 @@ public class Duke {
             String[] tempStrArray = tempString.split(" ", 2);
 
             switch (tempStrArray[0]) {
+            case "":
+                echo.echoString(nothing);
+                break;
 
-                case "":
-                    echo.echoString(nothing);
-                    break;
+            case "bye":
+                looping = false;
+                break;
 
-                case "bye":
-                    looping = false;
-                    break;
+            case "list":
+                memory.listAll();
+                break;
 
-                case "list":
-                    memory.listAll();
-                    break;
-
-                case "todo":
-                    if (tempStrArray.length == 1) {
+            case "todo":
+                if (tempStrArray.length == 1) {
+                    echo.echoString(specific + tryTodo);
+                } else {
+                    //Empty to-do
+                    if (tempStrArray[1] == "") {
                         echo.echoString(specific + tryTodo);
                     } else {
-                        //Empty to-do
-                        if (tempStrArray[1] == "") {
-                            echo.echoString(specific + tryTodo);
-                        } else {
-                                memory.addTask(tempStrArray[1]);
-                        }
+                            memory.addTask(tempStrArray[1]);
                     }
-                    break;
+                }
+                break;
 
-                case "deadline":
-                    if (tempStrArray.length == 1) {
+            case "deadline":
+                if (tempStrArray.length == 1) {
+                    echo.echoString(specific + tryDeadline);
+                } else {
+                    String[] tempDeadArray = tempStrArray[1].split(" /by ", 2);
+
+                    if (tempDeadArray.length == 1) {
                         echo.echoString(specific + tryDeadline);
                     } else {
-                        String[] tempDeadArray = tempStrArray[1].split(" /by ", 2);
-
-                        if (tempDeadArray.length == 1) {
-                            echo.echoString(specific + tryDeadline);
+                        if (tempDeadArray[0].equals("")) {
+                            echo.echoString(specific + "Don't forget the task's name");
+                        } else if (tempDeadArray[1].equals("")) {
+                            echo.echoString(specific + "Don't forget the task's deadline");
                         } else {
-                            if (tempDeadArray[0].equals("")) {
-                                echo.echoString(specific + "Don't forget the task's name");
-                            } else if (tempDeadArray[1].equals("")) {
-                                echo.echoString(specific + "Don't forget the task's deadline");
-                            } else {
-                                memory.addDeadline(tempDeadArray[0], tempDeadArray[1]);
-                            }
+                            memory.addDeadline(tempDeadArray[0], tempDeadArray[1]);
                         }
                     }
-                    break;
+                }
+                break;
 
-                case "event":
-                    if (tempStrArray.length == 1) {
+            case "event":
+                if (tempStrArray.length == 1) {
+                    echo.echoString(specific + tryEvent);
+                } else {
+                    String[] tempEventArray = tempStrArray[1].split(" /at ", 2);
+
+                    if (tempEventArray.length == 1) {
                         echo.echoString(specific + tryEvent);
                     } else {
-                        String[] tempEventArray = tempStrArray[1].split(" /at ", 2);
-
-                        if (tempEventArray.length == 1) {
-                            echo.echoString(specific + tryEvent);
+                        if (tempEventArray[0].equals("")) {
+                            echo.echoString(specific + "Don't forget the event's name");
+                        } else if (tempEventArray[1].equals("")) {
+                            echo.echoString(specific + "Don't forget the event's time");
                         } else {
-                            if (tempEventArray[0].equals("")) {
-                                echo.echoString(specific + "Don't forget the event's name");
-                            } else if (tempEventArray[1].equals("")) {
-                                echo.echoString(specific + "Don't forget the event's time");
-                            } else {
-                                memory.addEvent(tempEventArray[0], tempEventArray[1]);
-                            }
+                            memory.addEvent(tempEventArray[0], tempEventArray[1]);
                         }
                     }
-                    break;
+                }
+                break;
 
-                case "mark":
-                    if (tempStrArray.length == 1) {
-                        echo.echoString(specific + "Which task do you want me to mark as done?\n" +
+            case "mark":
+                if (tempStrArray.length == 1) {
+                    echo.echoString(specific + "Which task do you want me to mark as done?\n" +
+                            tryMark);
+                } else {
+                    String testString = tempStrArray[1];
+
+                    // Test if single number after 'mark'
+                    try {
+                        int address = Integer.parseInt(testString);
+                        memory.setDone(address);
+                    }
+                    catch (NumberFormatException exception) {
+                        echo.echoString("You need to give me a number doc!\n" +
                                 tryMark);
-                    } else {
-                        String testString = tempStrArray[1];
-
-                        // Test if single number after 'mark'
-                        try {
-                            int address = Integer.parseInt(testString);
-                            memory.setDone(address);
-                        }
-                        catch (NumberFormatException exception) {
-                            echo.echoString("You need to give me a number doc!\n" +
-                                    tryMark);
-                        }
                     }
-                    break;
+                }
+                break;
 
-                case "unmark":
-                    if (tempStrArray.length == 1) {
-                        echo.echoString(specific + "Which task do you want me to mark as undone?\n" +
+            case "unmark":
+                if (tempStrArray.length == 1) {
+                    echo.echoString(specific + "Which task do you want me to mark as undone?\n" +
+                            tryUnmark);
+                } else {
+                    String testString = tempStrArray[1];
+
+                    // Test if single number after 'unmark'
+                    try {
+                        int address = Integer.parseInt(testString);
+                        memory.setUndone(address);
+                    }
+                    catch (NumberFormatException exception) {
+                        echo.echoString("You need to give me a number doc!\n" +
                                 tryUnmark);
-                    } else {
-                        String testString = tempStrArray[1];
-
-                        // Test if single number after 'unmark'
-                        try {
-                            int address = Integer.parseInt(testString);
-                            memory.setUndone(address);
-                        }
-                        catch (NumberFormatException exception) {
-                            echo.echoString("You need to give me a number doc!\n" +
-                                    tryUnmark);
-                        }
                     }
-                    break;
+                }
+                break;
 
-                case "delete":
-                    if (tempStrArray.length == 1) {
-                        echo.echoString(specific + "Which task do you want me to delete?\n" +
+            case "delete":
+                if (tempStrArray.length == 1) {
+                    echo.echoString(specific + "Which task do you want me to delete?\n" +
+                            tryDelete);
+                } else {
+                    String testString = tempStrArray[1];
+
+                    // Test if single number after 'delete'
+                    try {
+                        int address = Integer.parseInt(testString);
+                        memory.deleteTask(address);
+                    }
+                    catch (NumberFormatException exception) {
+                        echo.echoString("You need to give me a number doc!\n" +
                                 tryDelete);
-                    } else {
-                        String testString = tempStrArray[1];
-
-                        // Test if single number after 'delete'
-                        try {
-                            int address = Integer.parseInt(testString);
-                            memory.deleteTask(address);
-                        }
-                        catch (NumberFormatException exception) {
-                            echo.echoString("You need to give me a number doc!\n" +
-                                    tryDelete);
-                        }
                     }
-                    break;
+                }
+                break;
 
-                    // If input is unexpected
-                default:
-                    echo.echoString(unknown + tempStrArray[0] + "'");
-                    break;
+                // If input is unexpected
+            default:
+                echo.echoString(unknown + tempStrArray[0] + "'");
+                break;
             }
         }
 
