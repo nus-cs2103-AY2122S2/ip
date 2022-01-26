@@ -6,7 +6,16 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * This class is the main controller of the application.
+ */
 public class Duke {
+    /**
+     * Coordinates the interactions between various other classes to accomplish the logic
+     * of the application.
+     * 
+     * @param args not used.
+     */
     public static void main(String[] args) {
         Storage storage = new Storage();
         TaskList taskList = new TaskList();

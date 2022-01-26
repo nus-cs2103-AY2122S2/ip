@@ -1,16 +1,20 @@
 package duke.command;
 
-import duke.command.Command;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Represents a command that when executed displays to the user all tasks in the task list.
+ */
 public class ListTaskCommand extends Command {
-
-    public ListTaskCommand() {
-        
-    }
-
+    /**
+     * Gets all tasks from <code>taskList</code>, then prompts <code>ui</code> to display them.
+     *
+     * @param ui user interface of the application.
+     * @param taskList task list of the application.
+     * @param storage disk storage of the application.
+     */
     @Override
     public void execute(Ui ui, TaskList taskList, Storage storage) {
         int numberOfTasks = taskList.getNumberOfTasks();
