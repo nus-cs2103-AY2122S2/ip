@@ -24,6 +24,11 @@ public class Deadline extends Task {
         return this.type;
     }
 
+    /**
+     * Return description and date of the task.
+     *
+     * @return  Description and date of the task.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + super.by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";

@@ -24,6 +24,11 @@ public class Event extends Task {
         return this.type;
     }
 
+    /**
+     * Return the description and date of the task.
+     *
+     * @return  Description and date of the task.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + super.by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
