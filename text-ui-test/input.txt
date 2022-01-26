@@ -1,0 +1,10 @@
+todo get a haircut
+event attend meeting /at 4pm 24th Jan
+list
+deadline submit project /by 11 30pm 30th Jan
+mark 2
+list
+mark 3
+unmark 2
+list
+bye
