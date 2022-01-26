@@ -10,6 +10,9 @@ import duke.util.Ui;
 import java.io.*;
 import java.util.Scanner;
 
+/**
+ * The bot main class
+ */
 public class Duke {
 
     private final static String DIRECTORY = "data";
@@ -37,6 +40,9 @@ public class Duke {
     }
 
 
+    /**
+     * Runs the bot
+     */
     public void run() {
         boolean isExit = false;
 
