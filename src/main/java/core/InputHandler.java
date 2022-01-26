@@ -1,11 +1,20 @@
 package core;
 
-import core.exceptions.*;
+import core.exceptions.InvalidDeleteIndexException;
+import core.exceptions.NoDeadlineMentionedException;
+import core.exceptions.NoDescriptionGivenException;
+import core.exceptions.NoEventLocaleMentionedException;
+import core.exceptions.NoTaskToDeleteException;
+import core.exceptions.TaskAlreadyDoneException;
+import core.exceptions.TaskAlreadyUnmarkedException;
+import core.exceptions.ToDoEmptyException;
 import core.tasks.Deadline;
 import core.tasks.Event;
 import core.tasks.Task;
 import core.tasks.ToDo;
 import utilities.OutputFormatter;
+
+import java.time.format.DateTimeParseException;
 
 import static java.lang.Integer.parseInt;
 
@@ -120,6 +129,8 @@ public class InputHandler {
             outputFormatter.appendAll("Got it. I've added this task:", "\n", taskList.getTaskByIndex(taskList.getLength() - 1), "\n", "Now you have ", taskList.getLength(), " task(s) in the list.");
         } catch (NoDescriptionGivenException | NoDeadlineMentionedException e) {
             outputFormatter.append(e.getMessage());
+        } catch (DateTimeParseException e) {
+            outputFormatter.append("The date format is invalid. The accepted format is yyyy-mm-dd and/or hh:mm");
         }
     }
 
@@ -148,6 +159,8 @@ public class InputHandler {
             outputFormatter.appendAll("Got it. I've added this task:", "\n", taskList.getTaskByIndex(taskList.getLength() - 1), "\n", "Now you have ", taskList.getLength(), " task(s) in the list.");
         } catch (NoDescriptionGivenException | NoEventLocaleMentionedException e) {
             outputFormatter.append(e.getMessage());
+        } catch (DateTimeParseException e) {
+            outputFormatter.append("The date format is invalid. The accepted format is yyyy-mm-dd and/or hh:mm");
         }
     }
 
