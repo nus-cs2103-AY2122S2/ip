@@ -27,42 +27,43 @@ public class AddCommand extends Command {
     /**
      * Adds date and task into <code>DateTable</code> and appends the new task into the database
      *
-     * @param dateTable Reference of the <code>DateTable</code> object
+     * @param dateTable  Reference of the <code>DateTable</code> object
      * @param botStorage Reference of the <code>BotStorage</code> object
-     * @param task The task need to be added
+     * @param task       The task need to be added
      * @throws IOException If an I/O error occurs
      */
-    private void printTask(DateTable dateTable, BotStoring botStorage, Task task) throws IOException {
+    private void addTaskDatabase(DateTable dateTable, BotStoring botStorage, Task task,
+            TaskList taskList) throws IOException {
         if (!task.getType().equals("T")) {
             dateTable.addDate(task);
         }
-        botStorage.addTaskToText(task);
+        botStorage.addTaskToDatabase(task);
+        taskList.addTask(task);
     }
 
     /**
-     * Creates the <code>Task</code> Object and adds to list of tasks and database respectively,
-     * also prints out the task content and the number of tasks after added
+     * Creates the <code>Task</code> Object and adds to list of tasks and database.
+     * Also prints out the task content and the number of tasks after added
      *
-     * @param taskList Reference of the <code>TaskList</code> object
-     * @param ui Reference of the <code>Ui</code> object
+     * @param taskList   Reference of the <code>TaskList</code> object
+     * @param ui         Reference of the <code>Ui</code> object
      * @param botStorage Reference of the <code>BotStorage</code> object
-     * @param dateTable Reference of the <code>DateTable</code> object
+     * @param dateTable  Reference of the <code>DateTable</code> object
      * @throws IOException If an I/O error occurs
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, BotStoring botStorage, DateTable dateTable)
-            throws IOException {
+    public void execute(TaskList taskList, Ui ui,
+            BotStoring botStorage, DateTable dateTable) throws IOException {
         if (type.equals("T") && fullInput.length() == 4) {
-            exception.emptyDescription("todo");
+            exception.printEmptyDescriptionError("todo");
         } else if (type.equals("D") && fullInput.length() == 8) {
-            exception.emptyDescription("deadline");
+            exception.printEmptyDescriptionError("deadline");
         } else if (type.equals("E") && fullInput.length() == 5) {
-            exception.emptyDescription("event");
+            exception.printEmptyDescriptionError("event");
         } else {
             Task task = new Task(description, type);
-            taskList.addTask(task);
-            ui.showTask(task, taskList.getTotalTask());
-            printTask(dateTable, botStorage, task);
+            addTaskDatabase(dateTable, botStorage, task, taskList);
+            ui.showAllTask(task, taskList.getTotalTask());
         }
     }
 

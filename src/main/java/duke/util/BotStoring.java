@@ -31,7 +31,7 @@ public class BotStoring implements Storing {
      * @throws IOException If an I/O error occur
      */
     public boolean isDatabaseExists() throws IOException {
-        if (! database.exists()) {
+        if (!database.exists()) {
             File directoryFile = new File(this.directory);
             directoryFile.mkdir();
             database.createNewFile();
@@ -61,7 +61,7 @@ public class BotStoring implements Storing {
                 task = new Task(description, type);
             }
             if (status.equals("1")) {
-                task.taskDone();
+                task.changeTaskDone();
             }
             storingList.add(task);
         }
@@ -71,13 +71,12 @@ public class BotStoring implements Storing {
      * Changes the status of the task in the database
      *
      * @param lineNumber The task location in the list
-     * @param task The task need to be changed
+     * @param task       The task need to be changed
      * @throws IOException If an I/O error occur
      */
-    public void changeStatusTask(
-            int lineNumber, Task task) throws IOException {
+    public void changeStatusTask(int lineNumber, Task task) throws IOException {
         List<String> lines = Files.readAllLines(database.toPath());
-        lines.set(lineNumber - 1, task.toFileText());
+        lines.set(lineNumber - 1, task.createTextDatabase());
         Files.write(database.toPath(), lines);
     }
 
@@ -87,9 +86,9 @@ public class BotStoring implements Storing {
      * @param task The task need to be added
      * @throws IOException If an I/O error occur
      */
-     public void addTaskToText(Task task) throws IOException {
+    public void addTaskToDatabase(Task task) throws IOException {
         FileWriter fileWriter = new FileWriter(path, true);
-        fileWriter.write(task.toFileText() + System.lineSeparator());
+        fileWriter.write(task.createTextDatabase() + System.lineSeparator());
         fileWriter.close();
     }
 

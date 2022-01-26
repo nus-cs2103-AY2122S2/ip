@@ -36,7 +36,7 @@ public interface Storing {
      * Changes the status of the task in the database
      *
      * @param lineNumber The task location in the list
-     * @param task The task need to be changed
+     * @param task       The task need to be changed
      * @throws IOException If an I/O error occur
      */
     void changeStatusTask(int lineNumber, Task task) throws IOException;
@@ -47,7 +47,7 @@ public interface Storing {
      * @param task The task need to be added
      * @throws IOException If an I/O error occur
      */
-    void addTaskToText(Task task) throws IOException;
+    void addTaskToDatabase(Task task) throws IOException;
 
     /**
      * Deletes a specific task in the database

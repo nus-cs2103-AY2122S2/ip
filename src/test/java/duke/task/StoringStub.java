@@ -26,7 +26,7 @@ public class StoringStub implements Storing {
     }
 
     @Override
-    public void addTaskToText(Task task) throws IOException {
+    public void addTaskToDatabase(Task task) throws IOException {
 
     }
 

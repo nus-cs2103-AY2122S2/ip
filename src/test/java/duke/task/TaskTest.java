@@ -15,9 +15,9 @@ public class TaskTest {
         Task task1 = new Task("return book /by 2/12/2019", "D");
         Task task2 = new Task("project meeting /at 12/4/2020", "E");
         Task task3 = new Task("borrow book", "T");
-        assertEquals("| D | 0 | return book | by 2/12/2019 |", task1.toFileText());
-        assertEquals("| E | 0 | project meeting | at 12/4/2020 |", task2.toFileText());
-        assertEquals("| T | 0 | borrow book |", task3.toFileText());
+        assertEquals("| D | 0 | return book | by 2/12/2019 |", task1.createTextDatabase());
+        assertEquals("| E | 0 | project meeting | at 12/4/2020 |", task2.createTextDatabase());
+        assertEquals("| T | 0 | borrow book |", task3.createTextDatabase());
     }
 
     @Test

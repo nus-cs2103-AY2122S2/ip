@@ -29,11 +29,12 @@ public class DateTable {
     public void getEventOnDate(String dateString) {
         LocalDate date = LocalDate.parse(dateString,
                 DateTimeFormatter.ofPattern("d/M/yyyy"));
+
         if (dateMap.containsKey(date)) {
             ArrayList<Task> eventList = dateMap.get(date);
             ui.showDate(eventList);
         } else {
-            exception.dateNotFound();
+            exception.printDateNotFoundError();
         }
     }
 
@@ -44,6 +45,7 @@ public class DateTable {
      */
     public void addDate(Task task) {
         LocalDate localDate = task.getTime();
+
         if (dateMap.containsKey(localDate)) {
             ArrayList<Task> eventList = dateMap.get(localDate);
             eventList.add(task);
@@ -60,7 +62,7 @@ public class DateTable {
      * @param task The task need to be removed
      */
     public void deleteTaskOnDate(Task task) {
-        if (! task.getType().equals("T")) {
+        if (!task.getType().equals("T")) {
             ArrayList<Task> taskArrayList = dateMap.get(task.getTime());
             taskArrayList.remove(task);
         }

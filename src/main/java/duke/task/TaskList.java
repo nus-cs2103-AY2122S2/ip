@@ -58,7 +58,6 @@ public class TaskList {
         return this.storingList;
     }
 
-
     public Task getTask(int taskNumber) {
         return storingList.get(taskNumber - 1);
     }

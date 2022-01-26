@@ -11,7 +11,7 @@ public class NumericCheck {
      * @param string The input string
      * @return True if the string can be parsed into an integer and false otherwise
      */
-    public static boolean checkNumeric(String string) {
+    public static boolean isNumeric(String string) {
         return string.matches("-?\\d+(\\.\\d+)?");
     }
 }

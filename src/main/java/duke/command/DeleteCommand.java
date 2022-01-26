@@ -4,8 +4,8 @@ import duke.datetime.DateTable;
 import duke.exception.BotException;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.util.NumericCheck;
 import duke.util.BotStoring;
+import duke.util.NumericCheck;
 import duke.util.Ui;
 
 import java.io.IOException;
@@ -26,17 +26,17 @@ public class DeleteCommand extends duke.command.Command {
      * Checks the description of the command and delete a specified task
      * from <code>TaskList</code> and database file
      *
-     * @param taskList Reference of the <code>TaskList</code> object
-     * @param ui Reference of the <code>Ui</code> object
+     * @param taskList   Reference of the <code>TaskList</code> object
+     * @param ui         Reference of the <code>Ui</code> object
      * @param botStorage Reference of the <code>BotStorage</code> object
-     * @param dateTable Reference of the <code>DateTable</code> object
+     * @param dateTable  Reference of the <code>DateTable</code> object
      * @throws IOException
      */
     @Override
     public void execute(TaskList taskList, Ui ui, BotStoring botStorage, DateTable dateTable)
             throws IOException {
-        if (! NumericCheck.checkNumeric(description)) {
-            exception.notNumeric("delete");
+        if (!NumericCheck.isNumeric(description)) {
+            exception.printNotNumericError("delete");
         } else {
             int taskNumber = Integer.parseInt(description);
             Task removeTask = taskList.removeTask(taskNumber);
