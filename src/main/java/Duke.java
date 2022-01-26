@@ -3,6 +3,18 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
+        String instructions =
+        "\n" +
+        "     **********************************************************************\n" +
+        "     * COMMANDS | FORMAT                                                  *\n" +
+        "     * normal task |  todo [taskname]                                     *\n" +
+        "     * normal task with deadline | deadline [taskname] /by [date&time]    *\n" +
+        "     * event task with deadline | event [taskname] /by [date&time]        *\n" +
+        "     *                                                                    *\n" +
+        "     * Note for [date&time]: enter it strictly in the following format    *\n" +
+        "     *    dd/mm/yyyy [24h] | eg: 31-12-1969 1830                          *\n" +
+        "     **********************************************************************\n" +
+        "\n";
         String logo =         "\n" +
                 "       _       _        \n" +
                 "      | |     | |       \n" +
@@ -16,6 +28,7 @@ public class Duke {
         System.out.println("    ____________________________________________________________\n" +
                 "     Hello! I'm Juke\n" +
                 "     What can I do for you?\n" +
+                instructions +
                 "    ____________________________________________________________");
         ArrayList<Task> itemList = new ArrayList<>();
         while(true) {
@@ -28,6 +41,7 @@ public class Duke {
                 System.out.println("    ____________________________________________________________\n" +
                         "     Nice! I've marked this task as done: \n" +
                         "       " + itemList.get(index - 1).getDescription() + "\n" +
+                        instructions +
                         "    ____________________________________________________________\n");
 
 
@@ -37,12 +51,14 @@ public class Duke {
                 System.out.println("    ____________________________________________________________\n" +
                         "     OK, I've marked this task as not done yet: \n" +
                         "       " + itemList.get(index - 1).getDescription() + "\n" +
+                        instructions +
                         "    ____________________________________________________________\n");
 
             } else if (splittedString[0].equals("todo")) { // check for todo tag
                 if (splittedString.length == 1) { //invalid todo command
                     System.out.println("    ____________________________________________________________\n" +
                             "     ☹ OOPS!!! The description of a todo cannot be empty.\n" +
+                            instructions +
                             "    ____________________________________________________________");
                 } else { //valid todo command
                     Task todoTask = new Todo(reply);
@@ -51,12 +67,14 @@ public class Duke {
                             "     Got it. I've added this task: \n" +
                             "       " + todoTask.getDescription() + "\n" +
                             "     Now you have " + itemList.size() + " tasks in the list.\n" +
+                            instructions +
                             "    ____________________________________________________________");
                 }
             } else if (splittedString[0].equals("deadline")) { // check for deadline tag
                 if (splittedString.length == 1) { //invalid deadline command
                     System.out.println("    ____________________________________________________________\n" +
                             "     ☹ OOPS!!! The description of a deadline cannot be empty.\n" +
+                            instructions +
                             "    ____________________________________________________________");
                 } else { //valid deadline command
                     Task deadlineTask = new Deadline(reply);
@@ -65,12 +83,14 @@ public class Duke {
                             "     Got it. I've added this task: \n" +
                             "       " + deadlineTask.getDescription() + "\n" +
                             "     Now you have " + itemList.size() + " tasks in the list.\n" +
+                            instructions +
                             "    ____________________________________________________________");
                 }
             } else if (splittedString[0].equals("event")) { // check for event tag
                 if (splittedString.length == 1) { //invalid event command
                     System.out.println("    ____________________________________________________________\n" +
                             "     ☹ OOPS!!! The description of a event cannot be empty.\n" +
+                            instructions +
                             "    ____________________________________________________________");
                 } else { //valid event command
                     Task eventTask = new Event(reply);
@@ -79,6 +99,7 @@ public class Duke {
                             "     Got it. I've added this task: \n" +
                             "       " + eventTask.getDescription() + "\n" +
                             "     Now you have " + itemList.size() + " tasks in the list.\n" +
+                            instructions +
                             "    ____________________________________________________________");
                 }
             } else if (reply.equals("bye")) { // check for bye
@@ -92,7 +113,8 @@ public class Duke {
                 for (int i = 0; i < itemList.size(); i++) {
                     totalString += "    " + (i + 1) + ". " + itemList.get(i).getDescription() + "\n";
                 }
-                totalString += "    ____________________________________________________________\n";
+                totalString += instructions +
+                        "    ____________________________________________________________\n";
                 System.out.println(totalString);
             } else if (splittedString[0].equals("delete")) { //check for delete
                 int index = Integer.valueOf(splittedString[1]);
@@ -102,10 +124,12 @@ public class Duke {
                         "     Noted. I've removed this task: \n" +
                         "       " + toRemove + "\n" +
                         "     Now you have " + itemList.size() + " tasks in the list.\n" +
+                        instructions +
                         "    ____________________________________________________________");
             } else { //check non-existing commands
                 System.out.println("    ____________________________________________________________\n" +
                         "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                        instructions +
                         "    ____________________________________________________________");
             }
         }
