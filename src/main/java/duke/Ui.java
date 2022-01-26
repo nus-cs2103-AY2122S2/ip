@@ -18,12 +18,17 @@ public class Ui {
 
     private static Ui instance;
 
+    /** Global scanner used by the Ui class. */
     private final Scanner scanner;
 
     private Ui() {
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Prints a greeting for the initial startup.
+     * @return The global instance of the <code>Ui</code> class.
+     */
     public Ui greet() {
         printCommand((linePrinter) -> {
             linePrinter.print("Hi! I'm " + BOT_NAME);
@@ -35,12 +40,23 @@ public class Ui {
         return this;
     }
 
+    /**
+     * Reads a line of input from {@link System#in}.
+     * @return Line of input read.
+     */
     public String readInput() {
         System.out.println("Enter a Command or New Task:");
 
         return this.scanner.nextLine();
     }
 
+    /**
+     * Provides a {@link IPrintable} object that can be printed to.
+     * Handles formatting of printed contents, including indentation and surrounding separators.
+     * @param action A <code>Function</code> object that accepts the provided {@link IPrintable} object
+     *               and returns a boolean to indicate if the application should continue running.
+     * @return <code>Boolean</code> indicating if the application should continue running.
+     */
     public boolean printCommand(Function<IPrintable, Boolean> action) {
         System.out.println(SEPARATOR);
         boolean isRunning = action.apply((line) -> {
@@ -50,6 +66,12 @@ public class Ui {
         return isRunning;
     }
 
+    /**
+     * Prints an error message onto the {@link IPrintable} object provided.
+     * Error message printer depends on the type of the provided {@link DukeException} object.
+     * @param linePrinter {@link IPrintable} object that the error should be printed to.
+     * @param ex Exception object that the error message should be printed for.
+     */
     public void printError(IPrintable linePrinter, DukeException ex) {
         if (ex instanceof DukeInvalidCommandException) {
             linePrinter.print(ERROR_INVALID_COMMAND);
@@ -61,6 +83,10 @@ public class Ui {
         }
     }
 
+    /**
+     * Returns the global instance of the {@link Ui} class.
+     * @return Global instance of the <code>Ui</code> class.
+     */
     public static Ui getInstance() {
         if (instance == null) {
             instance = new Ui();

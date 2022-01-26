@@ -3,6 +3,11 @@ package duke.command;
 import duke.exception.DukeInvalidCommandException;
 import duke.task.TaskType;
 
+/**
+ * Factory for {@link Command} objects.
+ * Translates command strings to an instance of some subclass of <code>Command</code>
+ * that can subsequently be executed.
+ */
 public class Parser {
     private static final String COMMAND_EXIT = "bye";
     private static final String COMMAND_LIST = "list";
@@ -16,6 +21,12 @@ public class Parser {
     private static final String COMMAND_BETWEEN = "between";
     private static final String COMMAND_SCHEDULE = "schedule";
 
+    /**
+     * Creates a {@link Command} object based on the supplied command string.
+     * @param command Command string to be translated.
+     * @return An instance of the associated <code>Command</code> object for handling the command.
+     * @throws DukeInvalidCommandException If an invalid command string is supplied.
+     */
     public static Command parse(String command)
             throws DukeInvalidCommandException {
         final String[] commandParts = command.split(" ");

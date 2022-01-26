@@ -5,7 +5,14 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.util.IPrintable;
 
+/**
+ * Represents a handler for the delete command.
+ */
 public class DeleteCommand extends Command {
+    /**
+     * Creates a handler for the delete command.
+     * @param args Arguments supplied to the command handler.
+     */
     DeleteCommand(String args) {
         super(args);
     }

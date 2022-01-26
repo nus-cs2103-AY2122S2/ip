@@ -6,7 +6,14 @@ import duke.util.IPrintable;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents a handler for the between command.
+ */
 public class BetweenCommand extends Command {
+    /**
+     * Creates a handler for the between command.
+     * @param args Arguments supplied to the command handler.
+     */
     BetweenCommand(String args) {
         super(args);
     }

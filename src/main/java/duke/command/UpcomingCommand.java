@@ -7,7 +7,14 @@ import duke.util.IPrintable;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Represents a handler for the upcoming command.
+ */
 public class UpcomingCommand extends Command {
+    /**
+     * Creates a handler for the upcoming command.
+     * @param args Arguments supplied to the command handler.
+     */
     UpcomingCommand(String args) {
         super(args);
     }

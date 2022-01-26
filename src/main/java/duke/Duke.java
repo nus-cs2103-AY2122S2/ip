@@ -5,7 +5,12 @@ import duke.exception.DukeException;
 import duke.exception.DukeIOException;
 import duke.task.TaskList;
 
+/**
+ * Represents an instance of the Duke application.
+ * Serves as the entry point for the entire application.
+ */
 public class Duke {
+    /** Global task list for all operations. */
     private static TaskList taskList;
 
     public static void main(String[] args) {
@@ -16,6 +21,11 @@ public class Duke {
 
     }
 
+    /**
+     * Performs pre-execution initialization of resources required throughout the application lifecycle.
+     * Loads any existing database and attaches observers for saving the database to disk.
+     * @return The current instance of the application being initialized.
+     */
     private Duke init() {
         try {
             taskList = Storage.load();
@@ -34,6 +44,9 @@ public class Duke {
         return this;
     }
 
+    /**
+     * Drives the main application Read-Evaluate-Print Loop.
+     */
     private void run() {
         Ui ui = Ui.getInstance().greet();
 

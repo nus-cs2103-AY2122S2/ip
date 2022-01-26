@@ -7,18 +7,37 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
+/**
+ * Represents a deadline type task.
+ * Contains a description and an associated limit date.
+ */
 public class Deadline extends Task {
     private LocalDateTime by;
 
+    /**
+     * Creates a deadline type task.
+     * @param task Description of the deadline.
+     * @param by Limit date of the task.
+     */
     public Deadline(String task, LocalDateTime by) {
         super(TaskType.DEADLINE, task);
         this.by = by;
     }
 
+    /**
+     * Creates an empty instance of the class to be populated by the
+     * {@link #readSerializedData(DataInputStream)} method.
+     * Usage should be avoided as there is potential for inconsistent states when the attributes are
+     * not immediately populated after creation.
+     */
     protected Deadline() {
         this("", null);
     }
 
+    /**
+     * Returns the limit date of the deadline task.
+     * @return Limit date of the deadline task.
+     */
     public LocalDateTime getBy() {
         return this.by;
     }

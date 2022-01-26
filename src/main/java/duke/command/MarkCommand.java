@@ -5,9 +5,18 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.util.IPrintable;
 
+/**
+ * Represents a handler for the mark and unmark commands.
+ * Encapsulates all set completion logic.
+ */
 public class MarkCommand extends Command {
     private final boolean newState;
 
+    /**
+     * Creates a handler for the mark or unmark command, depending on the supplied argument.
+     * @param args Arguments supplied to the command handler.
+     * @param newState The new completion state that the handler should set a task to.
+     */
     MarkCommand(String args, boolean newState) {
         super(args);
         this.newState = newState;
