@@ -1,6 +1,6 @@
 package main.java.duke;
 
-public enum Command {
+public enum Command1 {
     
     bye("bye"), delete("delete"), list("list"),
         mark("mark"), unmark("unmark"), todo("todo"),
@@ -8,7 +8,7 @@ public enum Command {
     
     public final String value;
     
-    Command(String value) {
+    Command1(String value) {
         this.value = value;
     }
     

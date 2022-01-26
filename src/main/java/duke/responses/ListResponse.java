@@ -1,8 +1,6 @@
 package main.java.duke.responses;
 
-import main.java.duke.task.Task;
-
-import java.util.ArrayList;
+import main.java.duke.data.TaskList;
 
 /**
  * Reponse that is created in the event of List command
@@ -10,14 +8,14 @@ import java.util.ArrayList;
 
 public class ListResponse implements Response {
 
-    ArrayList<Task> iterate;
+    TaskList iterate;
     int count = 1;
 
     /**
      * Constructor for ListResponse.
      * @param iterate list of items.
      */
-    public ListResponse(ArrayList<Task> iterate) {
+    public ListResponse(TaskList iterate) {
         this.iterate = iterate;
     }
 
@@ -31,7 +29,7 @@ public class ListResponse implements Response {
         );
 
         System.out.println("Here are the tasks in your list:");
-        iterate.forEach(x -> {
+        iterate.getTaskList().forEach(x -> {
             System.out.println(count + ". " + x.display());
             count++;
         });

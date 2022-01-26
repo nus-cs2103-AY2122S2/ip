@@ -13,7 +13,7 @@ public class MarkResponse implements Response {
     public void callback() {
         System.out.println(
                 "____________________________________________________________");
-            System.out.println("Nice! I've marked this task as done:\n");
+        System.out.println("Nice! I've marked this task as done:\n");
         System.out.println(this.currTask.display());
         System.out.println(
                 "____________________________________________________________");

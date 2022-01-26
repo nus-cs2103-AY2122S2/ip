@@ -1,8 +1,7 @@
 package main.java.duke.responses;
 
+import main.java.duke.data.TaskList;
 import main.java.duke.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * Response when added a Task
@@ -10,7 +9,7 @@ import java.util.ArrayList;
 
 public class AddTaskResponse implements Response {
     Task currTask;
-    ArrayList<Task> tasklist;
+    TaskList tasklist;
 
     /**
      * Constructor for the AddTaskResponse.
@@ -18,7 +17,7 @@ public class AddTaskResponse implements Response {
      * @param tasklist The List of Task.
      */
 
-    public AddTaskResponse(Task currTask, ArrayList<Task> tasklist) {
+    public AddTaskResponse(Task currTask, TaskList tasklist) {
         this.currTask = currTask;
         this.tasklist = tasklist;
     }
@@ -42,7 +41,7 @@ public class AddTaskResponse implements Response {
         );
 
         System.out.println(
-                "Now you have " + tasklist.size() + " tasks in this list"
+                "Now you have " + tasklist.getTaskList().size() + " tasks in this list"
         );
 
         System.out.println(

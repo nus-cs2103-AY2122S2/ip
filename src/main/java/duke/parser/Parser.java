@@ -1,17 +1,11 @@
 package main.java.duke.parser;
 
-import main.java.duke.data.TaskList;
-import main.java.duke.Command;
-import main.java.duke.data.Storage;
-import main.java.duke.responses.*;
-import main.java.duke.task.Deadline;
-import main.java.duke.task.Event;
-import main.java.duke.task.Task;
-import main.java.duke.task.ToDo;
+import main.java.duke.command.*;
 import main.java.duke.dukeexceptions.DukeException;
-import main.java.duke.dukeexceptions.ToDoException;
+import main.java.duke.dukeexceptions.ForeignException;
+import main.java.duke.responses.Response;
+import main.java.duke.responses.StartResponse;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -23,65 +17,29 @@ public class Parser {
         return new StartResponse();
     }
     
-    public Response getResponse(Command cmd , String Stringcmd, Storage store, TaskList runningTaskList) {
-
-        String[] stringCmdArr = Stringcmd.split(" ");
-        System.out.println("hi");
-        System.out.println(cmd);
-        try {
-            int index;
-            String[] ans;
-            Task tempTask;
-            switch (cmd) {
-                case delete:
-                    index = Integer.parseInt(stringCmdArr[1]);
-                    return new DeleteResponse(runningTaskList.removeTask(index), runningTaskList.taskLength());
-
-                case list:
-                    return new ListResponse(runningTaskList.getTaskList());
-
-                case mark:
-                    index = Integer.parseInt(stringCmdArr[1]);
-                    runningTaskList.markTask(index - 1);
-                    return new MarkResponse(runningTaskList.getTask(index - 1));
-
-                case unmark:
-                    index = Integer.parseInt(stringCmdArr[1]);
-                    runningTaskList.unMarkTask(index - 1);
-                    return new UnMarkResponse(runningTaskList.getTask(index - 1));
-
-                case todo:
-                    ans = Stringcmd.split("todo ");
-                    if (ans.length == 1) {
-                        throw new ToDoException("");
-                    }
-                    tempTask = new ToDo(ans[1]);
-                    runningTaskList.addTask(tempTask);
-                    store.loadToDisk(runningTaskList);
-                    return new AddTaskResponse(tempTask, runningTaskList.getTaskList());
-
-                case deadline:
-                    ans = Stringcmd.split(" /by ");
-                    tempTask = new Deadline(ans[0].replace("deadline ", ""), ans[1]);
-                    runningTaskList.addTask(tempTask);
-                    store.loadToDisk(runningTaskList);
-                    return new AddTaskResponse(tempTask, runningTaskList.getTaskList());
-
-                case event:
-                    
-                    ans = Stringcmd.split(" /at ");
-                    tempTask = new Event(ans[0].replace("deadline ", ""), ans[1]);
-                    runningTaskList.addTask(tempTask);
-                    store.loadToDisk(runningTaskList);
-                    return new AddTaskResponse(tempTask, runningTaskList.getTaskList());
-
-                case bye:
-                    return  new StopResponse();
-
-            }
-        } catch (DukeException | IOException e) {
-            e.getMessage();
+    public Command getCommand(String stringCmd) throws DukeException {
+        
+        String[] cmdArr = stringCmd.split(" ");
+        String stringFirstCmd = cmdArr[0];
+        switch (stringFirstCmd) {
+        case "bye":
+            return new ByeCommand();
+        case "delete":
+            return new DeleteCommand(stringCmd);
+        case "list":
+            return new ListCommand();
+        case "mark":
+            return new MarkCommand(stringCmd);
+        case "unmark":
+            return new UnmarkCommand(stringCmd);
+        case "todo":
+            return new TodoCommand(stringCmd);
+        case "deadline":
+            return new DeadlineCommand(stringCmd);
+        case "event":
+            return  new EventCommand(stringCmd);
+        default:
+            throw new ForeignException("");
         }
-        return null;
     }
 }

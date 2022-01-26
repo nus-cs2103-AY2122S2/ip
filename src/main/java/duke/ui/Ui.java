@@ -1,41 +1,23 @@
 package main.java.duke.ui;
 
-import main.java.duke.Command;
-import main.java.duke.dukeexceptions.ForeignException;
 import main.java.duke.responses.Response;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Ui {
-    static private ArrayList<String> commandList = new ArrayList<>(
-            Arrays.asList("bye", "delete", "list", "mark", "unmark", "todo", "deadline", "event"));
-
     Scanner sc;
-    
     
     public Ui() {
         sc = new Scanner(System.in);
     }
     
-
-    public String getNextLine() {
-        System.out.println("GetNextLine");
+    public String getNextLine() {   
         return sc.nextLine();
     }
-    public Command getCommand(String cmd) throws ForeignException {
-        System.out.println(cmd);
-        String[] stringCmdArr = cmd.split(" ");
-        if (!commandList.contains(stringCmdArr[0])) {
-            throw new ForeignException("");
-        }  else {
-            return Command.valueOf(stringCmdArr[0]);
-        }
-    }
     
-    static public void callResponse(Response response) {
+    public void callResponse(Response response) {
         response.callback();
     }
+      
     
 }

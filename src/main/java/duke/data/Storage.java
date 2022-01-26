@@ -1,5 +1,7 @@
 package main.java.duke.data;
 
+import main.java.duke.dukeexceptions.DukeException;
+import main.java.duke.dukeexceptions.ForeignException;
 import main.java.duke.task.Deadline;
 import main.java.duke.task.Event;
 import main.java.duke.task.Task;
@@ -49,7 +51,7 @@ public class Storage {
     }
   }
 
-  static private Task storageToTask(String taskString) {
+  static private Task stringToTask(String taskString) {
     String[] commandSplit = taskString.split(" \\| ");
     System.out.println(Arrays.toString(commandSplit));
     switch (commandSplit[0]) {
@@ -69,16 +71,19 @@ public class Storage {
     Scanner fileReader = new Scanner(this.storageTaskList);
     while (fileReader.hasNext()) {
       String command = fileReader.nextLine();
-      taskList.addTask(storageToTask(command));
+      taskList.addTask(stringToTask(command));
     }
   }
 
-  public void loadToDisk(TaskList taskList) throws IOException {
-    FileWriter fileWriter = new FileWriter(this.storageTaskList);
-    for (int i = 0; i < taskList.taskLength(); i++) {
-      fileWriter.write(taskList.getTask(i).toStore() + "\n");
+  public void loadToDisk(TaskList taskList) throws DukeException {
+    try {
+      FileWriter fileWriter = new FileWriter(this.storageTaskList);
+      for (int i = 0; i < taskList.taskLength(); i++) {
+        fileWriter.write(taskList.getTask(i).toStore() + "\n");
+      }
+      fileWriter.close();      
+    } catch (IOException e) {
+      throw new ForeignException("");
     }
-    fileWriter.close();
-
   }
 }
