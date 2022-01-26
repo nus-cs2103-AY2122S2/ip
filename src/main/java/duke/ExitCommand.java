@@ -1,4 +1,4 @@
-package main.duke.java;
+package main.java.duke;
 
 public class ExitCommand extends Command{
 
