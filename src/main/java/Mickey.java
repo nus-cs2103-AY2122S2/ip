@@ -7,6 +7,13 @@ public class Mickey {
     public static List<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
+        Save s = new Save("src/main/java/data.txt");
+        try {
+            tasks.addAll(s.loadTasks());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
         Scanner sc = new Scanner(System.in);
         System.out.println("Hey there! I'm Mickey, your Mouse assistant.\nWhat can I do for you today?\n");
         for (String cmd = sc.next(); !cmd.equals("bye"); cmd = sc.next()) {
@@ -117,6 +124,7 @@ public class Mickey {
             }
         }
         System.out.println("\tToodles! See ya real soon!");
+        s.saveTasks(tasks);
         tasks.clear();
     }
 }
