@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     private final String name;
     private boolean done;
 
@@ -23,4 +23,10 @@ public class Task {
     public boolean getDone() {
         return this.done;
     }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public abstract String toText();
 }
