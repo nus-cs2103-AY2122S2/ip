@@ -1,6 +1,6 @@
-package duke;
+package duke.task;
 
-import java.io.File;
+import duke.storage.Storage;
 import java.util.ArrayList;
 
 public class Task {
@@ -63,7 +63,8 @@ public class Task {
     }
 
     private void updateFile() {
-        FileReading.writeToPath("data/duke.txt", Task.printArray());
+        Storage storage = new Storage(Storage.filePath);
+        storage.writeToPath(Task.printArray());
     }
 
     public String toString() {

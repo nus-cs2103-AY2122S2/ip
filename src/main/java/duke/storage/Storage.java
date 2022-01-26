@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Storage {
-    private String filePath;
+    public static String filePath = "";
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -43,4 +43,10 @@ public class Storage {
             System.out.println("Something went wrong: " + e.getMessage());
         }
     }
+
+    public static String getCurrentFilePath() {
+        return filePath;
+    }
+
+
 }

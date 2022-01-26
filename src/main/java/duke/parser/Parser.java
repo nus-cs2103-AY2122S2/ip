@@ -1,13 +1,21 @@
 package duke.parser;
 
 
+
 import duke.exceptions.InvalidTypeException;
 import duke.exceptions.MissingNameException;
 import duke.exceptions.MissingEventDateException;
 import duke.exceptions.MissingDeadlineDateException;
 import duke.main.Duke;
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
+import duke.parser.DateTimeParser;
 import duke.ui.Ui;
-import duke.Task;
+import duke.task.Task;
+
+import java.time.format.DateTimeParseException;
 
 public class Parser {
 
@@ -70,7 +78,7 @@ public class Parser {
         } else {
 
             try {
-                String newTaskMessage = Duke.createTask(userInput);
+                String newTaskMessage = Parser.createTask(userInput);
                 System.out.println(newTaskMessage);
             } catch (InvalidTypeException e) {
                 String errorMsg = Ui.createLine()
@@ -101,6 +109,73 @@ public class Parser {
 
             return true;
         }
+    }
+
+    public static String createTask(String input) throws InvalidTypeException, MissingNameException, MissingEventDateException, MissingDeadlineDateException{
+        String[] splitString = input.split("/", 2);
+        String[] instruction = splitString[0].split(" ", 2);
+        Task currentTask = null;
+
+        switch(instruction[0]) {
+            case "todo":
+                if(instruction.length == 1 || instruction[1].equals("")) {
+                    throw new MissingNameException("Missing description");
+                }
+
+                currentTask = new ToDo(input.substring(4));
+                break;
+            case "event":
+
+                if(instruction.length == 1 || instruction[1].equals("")) {
+                    throw new MissingNameException("Missing description");
+                }
+
+                if(splitString.length == 1 || !splitString[1].startsWith("at ")) {
+                    throw new MissingEventDateException("Missing date");
+                }
+                try {
+                    currentTask = new Event(splitString[0].substring(5),
+                            DateTimeParser.parseDate(splitString[1].substring(3)));
+                } catch (DateTimeParseException e) {
+                    throw new MissingEventDateException("Wrong format of date");
+                }
+
+                break;
+            case "deadline":
+                if(instruction.length == 1 || instruction[1].equals("")) {
+                    throw new MissingNameException("Missing description");
+                }
+
+                if(splitString.length == 1 || !splitString[1].startsWith("by ")) {
+                    throw new MissingDeadlineDateException("Missing date");
+                }
+                try {
+                    currentTask = new Deadline(splitString[0].substring(8),
+                            DateTimeParser.parseDate(splitString[1].substring(3)));
+                } catch (DateTimeParseException e) {
+                    throw new MissingEventDateException("Wrong format of date");
+                }
+                break;
+
+            default:
+                throw new InvalidTypeException("Invalid type");
+        }
+
+       updateFile();
+
+
+        String output = "   __________________________________________________\n"
+                + "       Got it! I have added this following task :D \n"
+                + "       " + currentTask + "\n"
+                + "       " + "Now you have " + Task.getCounter() + " tasks in your list.\n"
+                + "   __________________________________________________";
+
+        return output;
+    }
+
+    public static void updateFile() {
+        Storage storage = new Storage(Storage.filePath);
+        storage.writeToPath(Task.printArray());
     }
 
 }
