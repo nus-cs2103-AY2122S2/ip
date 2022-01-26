@@ -116,6 +116,12 @@ public class TaskList {
     return output.trim();
   }
 
+  /**
+   * Returns a formatted string displaying the tasks in the given task list.
+   * Returns a predefined empty list message if the list is empty.
+   * @param taskList An ArrayList containing the tasks.
+   * @return A string describing the contents of the task list.
+   */
   public String displayCustomList(ArrayList<Task> taskList) {
     String output = "";
     if (taskList.size() == 0) {
@@ -129,6 +135,12 @@ public class TaskList {
     return output.trim();
   }
 
+  /**
+   * Find tasks in the task list that match specified keyword(s).
+   * Returns the matching tasks in an ArrayList.
+   * @param args String of keyword(s) to search for.
+   * @return An ArrayList containing the matched tasks.
+   */
   public ArrayList<Task> findMatch(String args) {
     ArrayList<Task> matchResultsList = new ArrayList<>();
     if (taskList.size() != 0) {

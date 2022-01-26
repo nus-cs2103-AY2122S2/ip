@@ -12,7 +12,6 @@ public class Parser {
     this.taskList = taskList;
   }
 
-
   /**
    * Parses the string given, and executes commands based on the command keyword detected.
    * @param string The user input string given.
