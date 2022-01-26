@@ -10,13 +10,18 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
- * Serializes and Deserializes Database Files into TaskStore object.
- * Database Files follow a custom binary format.
- * Does not provide File System operations.
+ * Serializes and Deserializes custom formatted database files into {@link TaskList} objects.
+ * Does not provide File System read or write operations.
+ * Uses a custom binary format for storage.
  */
 
 public class TaskListSerializer {
-
+    /**
+     * Creates a {@link TaskList} object from the data in the supplied input stream.
+     * @param dbStream Input stream to read data from for <code>TaskList</code> creation.
+     * @return Inflated <code>TaskList</code> object.
+     * @throws DukeIOException If any error occurs while reading the input stream.
+     */
     public static TaskList inflate(InputStream dbStream) throws DukeIOException {
         TaskList store = new TaskList();
         if (dbStream == null) {
@@ -42,6 +47,12 @@ public class TaskListSerializer {
         return store;
     }
 
+    /**
+     * Flattens and writes the {@link TaskList} object provided to the supplied output stream.
+     * @param store <code>TaskList</code> object to flatten and write.
+     * @param dbStream Output stream to write the data to.
+     * @throws DukeIOException If any error occurs while writing to the output stream.
+     */
     public static void deflate(TaskList store, OutputStream dbStream) throws DukeIOException {
         try (DataOutputStream dbDataStream = new DataOutputStream(dbStream)) {
             dbDataStream.writeInt(store.getTaskCount());
