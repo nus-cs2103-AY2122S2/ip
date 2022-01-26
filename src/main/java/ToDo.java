@@ -4,6 +4,10 @@ public class ToDo extends Task {
         System.out.println("[T][ ] " + name);
     }
 
+    public ToDo(String name, boolean done) {
+        super(name, done);
+    }
+
     @Override
     public String getStatus() {
         return "[T]" + super.getStatus();
@@ -21,5 +25,10 @@ public class ToDo extends Task {
         System.out.print("[T]");
         super.markNotDone();
         System.out.println();
+    }
+
+    @Override
+    public String save() {
+        return "T|"+ super.save();
     }
 }

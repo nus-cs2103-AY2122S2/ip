@@ -6,6 +6,11 @@ public class Event extends Task {
         System.out.println("[E][ ] " + name + " (at: " + time +")");
     }
 
+    public Event(String name, String time, boolean done) {
+        super(name, done);
+        this.time = time;
+    }
+
     @Override
     public String getStatus() {
         return "[E]" + super.getStatus() + " (at: " + time +")";
@@ -23,5 +28,10 @@ public class Event extends Task {
         System.out.print("[E]");
         super.markNotDone();
         System.out.println(" (at: " + time +")");
+    }
+
+    @Override
+    public String save() {
+        return "E|" + super.save() + "|" + time;
     }
 }

@@ -1,9 +1,14 @@
 public class Task {
     private String name;
     private boolean done;
+
     public Task(String name) {
         this.name = name;
-        this.done = false;
+    }
+
+    public Task(String name, boolean done) {
+        this.name = name;
+        this.done = done;
     }
 
     public String getStatus() {
@@ -19,5 +24,9 @@ public class Task {
     public void markNotDone() {
         System.out.print("[ ] " + name);
         done = false;
+    }
+
+    public String save() {
+        return (done ? "1" : "0" )+ "|" + name;
     }
 }

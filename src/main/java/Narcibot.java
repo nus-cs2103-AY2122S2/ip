@@ -1,19 +1,57 @@
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Narcibot {
     private static ArrayList<Task> list = new ArrayList<>();
-    public static void main(String[] args) {
+
+    public static void main(String[] args)  {
         System.out.println("I'm Narcibot, the best bot ever created.\nOh it's you, what a bother.\nHere's a hello as a formality. What do you want this time?\n");
+        File directory = new File("./data/tasks.txt");
+        try(FileReader fileReader = new FileReader(directory)) {
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line = bufferedReader.readLine();
+            while(line != null) {
+                String[] tokens = line.split("\\|", 4);
+                boolean done = tokens[1].equals("1") ? true : false;
+                switch(tokens[0]) {
+                    case "T":
+                        list.add(new ToDo(tokens[2], done));
+                        break;
+                    case "D":
+                        list.add(new Deadline(tokens[2], tokens[3], done));
+                        break;
+                    case "E":
+                        list.add(new Event(tokens[2], tokens[3], done));
+                        break;
+                }
+                line = bufferedReader.readLine();
+            }
+            System.out.println("I have loaded your prior tasks for you");
+        } catch (IOException e) {
+            System.out.println("You have no prior tasks");
+        }
         String input;
         Scanner sc = new Scanner(System.in);
         while(true) {
             input = sc.nextLine();
             if(command(input)) {
-                return;
+                break;
             }
         }
 
+        File file = new File("./data");
+        if(!file.exists()) {
+            file.mkdir();
+        }
+        try(FileWriter fileWriter = new FileWriter("./data/tasks.txt")) {
+            for (Task task : list) {
+                fileWriter.write(task.save() + "\n");
+            }
+        } catch (IOException e) {
+            System.out.println("File not found");
+        }
     }
 
     private static boolean command(String command) {
@@ -82,7 +120,7 @@ public class Narcibot {
                     if(tokens.length != 2) {
                         throw new IncorrectFormatException("You want me to remind you of something but you won't tell me of what it is? The format is deadline (task) /by (time)");
                     }
-                    String[] tokens2 = tokens[1].split("/by", 2);
+                    String[] tokens2 = tokens[1].split(" /by ", 2);
                     if(tokens2.length != 2 || tokens2[1].equals("")) {
                         throw new IncorrectFormatException("Please tell me the deadline time using /by. Format: deadline (task) /by (time)");
                     }
@@ -94,7 +132,7 @@ public class Narcibot {
                     if(tokens.length != 2) {
                         throw new IncorrectFormatException("You want me to remind you of something but you won't tell me of what it is? The format is event (task) /at (time)");
                     }
-                    String[] tokens3 = tokens[1].split("/at", 2);
+                    String[] tokens3 = tokens[1].split(" /at ", 2);
                     if(tokens3.length != 2 || tokens3[1].equals("")) {
                         throw new IncorrectFormatException("Please tell me the time of the event using /at. Format: event (task) /at (time)");
                     }

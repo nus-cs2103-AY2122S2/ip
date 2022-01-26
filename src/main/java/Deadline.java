@@ -1,9 +1,15 @@
 public class Deadline extends Task {
     private String time;
+
     public Deadline(String name, String time) {
         super(name);
         this.time = time;
         System.out.println("[D][ ] " + name + " (by: " + time +")");
+    }
+
+    public Deadline(String name, String time, boolean done) {
+        super(name, done);
+        this.time = time;
     }
 
     @Override
@@ -23,5 +29,10 @@ public class Deadline extends Task {
         System.out.print("[D]");
         super.markNotDone();
         System.out.println(" (by: " + time +")");
+    }
+
+    @Override
+    public String save() {
+        return "D|" + super.save() +"|" + time;
     }
 }
