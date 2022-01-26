@@ -1,3 +1,5 @@
+package duke;
+
 import duke.command.Parser;
 import java.util.Scanner;
 import duke.io.Storage;
