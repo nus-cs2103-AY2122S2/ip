@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Class containing methods to process the user input into a easier to handle form
+ */
 public class Parser {
 
     private static boolean isInteger(String str) {
@@ -69,11 +72,17 @@ public class Parser {
         return msg;
     }
 
+    /**
+     * Processes the users input and formats it into a String array separating the important information
+     * @param userInput raw String containing the user's input
+     * @return String array containing information on the type of task, description and Timing if required else if invalid input
+     *         return a String array containing only one element "null"
+     */
     public static String[] parseInput(String userInput) {
         try {
             return processInput(userInput);
         } catch (DukeException e) {
-            return new String[]{"null"};
+            return new String[]{"Error", e.getMessage()};
         }
     }
 }

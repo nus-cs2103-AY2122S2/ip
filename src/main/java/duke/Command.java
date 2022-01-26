@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Class responsible for executing the command from the userInput
+ */
 public class Command {
 
     private static String ListStatus(TaskList listOfTasks) {
@@ -96,6 +99,13 @@ public class Command {
         return toPrint.toString();
     }
 
+    /**
+     * Contains the logic for processing the processed userInput, finds the corresponding commands to the userInput and
+     * executes it
+     * @param processedInput String array containing valuable information regarding the command to execute
+     * @param listOfTasks TaskList containing the current list of task
+     * @return String containing any responses to the user after execution of command
+     */
     public static String execute(String[] processedInput, TaskList listOfTasks) {
         String toPrint = "";
         try {
@@ -120,6 +130,9 @@ public class Command {
                     break;
                 case "todo":
                     toPrint = addTodo(processedInput[1], listOfTasks);
+                    break;
+                case "Error":
+                    toPrint = processedInput[1];
                     break;
                 default:
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");

@@ -3,9 +3,18 @@ package duke;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 
+/**
+ * Inherits from Task and is the implementation of a Deadline task which contains a description and a deadline
+ */
 public class DeadLines extends Task {
     LocalDateTime deadline;
 
+    /**
+     * Constructor for the Deadline task
+     * @param task Description of task
+     * @param deadline Deadline of the task
+     * @throws DukeException if the format of the deadline is not correct or description is empty
+     */
     public DeadLines(String task, String deadline) throws DukeException {
         super(task);
         if (deadline == null) {
@@ -13,7 +22,7 @@ public class DeadLines extends Task {
         }
         this.deadline = formatDateTime(deadline);
         if (this.deadline == null) {
-            throw new DukeException("Incorrect format\n");
+            throw new DukeException("Incorrect Format/Date or Time is out of range\n");
         }
         this.initials = "D";
         if (task.length() < 1) {
@@ -21,11 +30,19 @@ public class DeadLines extends Task {
         }
     }
 
+    /**
+     * Converts the task into a readable form
+     * @return String containing information on this deadline task
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: Date-> " + this.deadline.getDayOfMonth() + " Month-> " + this.deadline.getMonth() + " Day-> " + this.deadline.getDayOfWeek() + " Year-> " + this.deadline.getYear() + " Time-> " + this.deadline.getHour() + this.deadline.getMinute() + ")";
     }
 
+    /**
+     * Converts the task into a compact version for storage
+     * @return String containing compact version of the task
+     */
     @Override
     public ArrayList<String> makeCompact() {
         ArrayList<String> out = super.makeCompact();

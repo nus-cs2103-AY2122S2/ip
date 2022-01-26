@@ -5,10 +5,16 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+/**
+ * CLass responsible for interacting with List of task storing and loading from storage
+ */
 public class Storage {
     private final String filepath;
     private final String filename;
 
+    /**
+     * Constructor for the Storage class
+     */
     public Storage() {
         this.filepath = System.getProperty("user.dir") + File.separator + "data";
         this.filename = "duke.Storage.txt";
@@ -28,6 +34,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads from the storage and returns the stored list of tasks
+     * @return an array list containing the stored list of tasks
+     */
     public ArrayList<Task> readFromStorage() {
         ArrayList<Task> listOfTasks = new ArrayList<>();
 
@@ -71,6 +81,10 @@ public class Storage {
         return listOfTasks;
     }
 
+    /**
+     * Writes all currently stored tasks into storage
+     * @param listOfTasks TaskList containing the list of tasks to be written to storage
+     */
     public void writeToStorage(TaskList listOfTasks) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(this.filepath + File.separator + this.filename));
