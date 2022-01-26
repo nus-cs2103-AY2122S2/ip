@@ -5,6 +5,7 @@ public enum Keyword {
     TODO,
     DEADLINE,
     EVENT,
+    DELETE,
     BYE,
     ERROR
 }

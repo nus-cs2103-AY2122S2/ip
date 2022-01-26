@@ -47,17 +47,20 @@ public class Pac {
                     case "event":
                         keyword = Keyword.EVENT;
                         break;
+                    case "delete":
+                        keyword = Keyword.DELETE;
+                        break;
                     default:
                         keyword = Keyword.ERROR;
                         break;
                 }
 
                 switch (keyword) {
-                    case LIST:
-                        displayList();
-                        break;
                     case BYE:
                         exitPac();
+                        break;
+                    case LIST:
+                        displayList();
                         break;
                     case MARK:
                         if (inputArray.length == 1) {
@@ -112,6 +115,20 @@ public class Pac {
                             addEvent(inputArray[1]);
                         } catch (ArrayIndexOutOfBoundsException e) {
                             System.out.println(newline + "\nSorry! Command format is incorrect.\n"
+                                    + newline + "\n");
+                        }
+                        break;
+                    case DELETE:
+                        if (inputArray.length == 1) {
+                            throw new PacException("DELETE should be followed by a integer.");
+                        }
+                        try {
+                            deleteTask(Integer.parseInt(inputArray[1]) - 1);
+                        } catch (NumberFormatException e) {
+                            System.out.println(newline + "\nSorry! MARK should be followed by a integer.\n"
+                                    + newline + "\n");
+                        } catch (IndexOutOfBoundsException e) {
+                            System.out.println(newline + "\nSorry! Please mention a valid task number.\n"
                                     + newline + "\n");
                         }
                         break;
@@ -188,6 +205,12 @@ public class Pac {
         System.out.println(newline);
         System.out.println("Task is marked as  not done. \n" + tasks.get(index));
         System.out.println(newline + "\n");
+    }
+
+    public static void deleteTask(int index) {
+        System.out.println(newline + "\nTask has been deleted: " + tasks.get(index));
+        tasks.remove(index);
+        System.out.println("You have " + tasks.size() + " tasks in your list" + "\n" + newline + "\n");
     }
 
     public static void displayList() {
