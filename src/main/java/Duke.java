@@ -1,3 +1,10 @@
+import duke.commands.Command;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
+
 import java.io.FileNotFoundException;
 
 public class Duke {
@@ -24,6 +31,9 @@ public class Duke {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
+                if (fullCommand.isEmpty()) {
+                    break;
+                }
                 Command<String> c = Parser.parseInput(fullCommand, tasks, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
@@ -34,6 +44,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        new Duke("./data/duke.txt").run();
     }
 }

@@ -1,9 +1,11 @@
+package duke.ui;
+
 import java.io.IOException;
 import java.sql.Statement;
 import java.util.Scanner;
 
 public class Ui {
-    static String lineDivider = "____________________________________________________________\n";
+    public static String lineDivider = "____________________________________________________________\n";
     static String greet = lineDivider
             + "Hello! I'm Mum!\nWhat can I do for you?\nType \"commands\" to get a list of all commands.\n"
             + lineDivider;
@@ -21,7 +23,10 @@ public class Ui {
 
     public String readCommand() {
         Scanner cmd = new Scanner(System.in);
-        return cmd.nextLine();
+        while (cmd.hasNext()) {
+            return cmd.nextLine();
+        }
+        return null;
     }
 
     public static void showLoadingError() {

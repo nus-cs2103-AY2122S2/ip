@@ -1,11 +1,20 @@
-import java.io.IOException;
+package duke.commands;
 
-public class UnmarkCommand extends Command<String> {
+import duke.commands.Command;
+
+import java.io.IOException;
+import duke.tasks.TaskList;
+import duke.storage.Storage;
+import duke.exception.DukeException;
+import duke.tasks.Task;
+import duke.ui.Ui;
+
+public class MarkCommand extends Command<String> {
     private final TaskList list;
     private final String[] echo;
     private final Storage storage;
 
-    public UnmarkCommand(TaskList list, String[] echo, Storage storage) throws DukeException {
+    public MarkCommand(TaskList list, String[] echo, Storage storage) throws DukeException {
         this.list = list;
         this.echo = echo;
         this.storage = storage;
@@ -13,7 +22,7 @@ public class UnmarkCommand extends Command<String> {
     }
 
     public void execute() throws DukeException {
-        String err = "Oh no! Which task do you wish to unmark? Try again :)\n";
+        String err = "Oh no! Which task do you wish to mark? Try again :)\n";
         String wrongNumber = "Oh no! This task number does not exist. Try again :)\n";
         String wrongFormat = "Oh no! Please do not spell out the number. Try again :)\n";
         int targetIndex;
@@ -34,10 +43,10 @@ public class UnmarkCommand extends Command<String> {
             throw new DukeException(wrongNumber);
         } else {
             Task curr = list.getTask(targetIndex - 1);
-            curr.unMark();
+            list.markTask(targetIndex - 1);
             String status = curr.getStatus();
             String description = curr.getDescription();
-            Ui.showUnmarkRes(status, description);
+            Ui.showMarkRes(status, description);
         }
         try {
             storage.writeToFile(list);

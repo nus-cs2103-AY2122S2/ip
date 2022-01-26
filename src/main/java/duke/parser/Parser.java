@@ -1,3 +1,10 @@
+package duke.parser;
+
+import duke.commands.*;
+import duke.tasks.TaskList;
+import duke.storage.Storage;
+import duke.exception.DukeException;
+
 public class Parser {
     public static Command<String> parseInput(String echo, TaskList listOfTasks, Storage storage) throws DukeException {
         if (echo.equalsIgnoreCase("bye")) {

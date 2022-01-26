@@ -1,6 +1,1 @@
-[T][ ] sell eggs
-[D][ ] make bread (by: 2021-12-12 17:00)
-[D][X] make cake (by: 2021-12-12 13:00)
-[D][ ] thrify (by: 2020-12-12 08:00)
-[D][ ] book sharing (by: 2020-12-12 00:10)
-[D][ ] sell bird (by: 2020-12-11 12:10)
+[D][ ] make cake (by: 2020-12-12 12:00)

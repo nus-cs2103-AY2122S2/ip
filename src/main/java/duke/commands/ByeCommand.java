@@ -1,3 +1,5 @@
+package duke.commands;
+
 public class ByeCommand extends  Command<String> {
     public ByeCommand() {
         execute();
