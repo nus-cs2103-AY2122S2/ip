@@ -1,6 +1,10 @@
 package Duke.main;
 
-import Duke.task.*;
+import Duke.task.Deadline;
+import Duke.task.ToDo;
+import Duke.task.Task;
+import Duke.task.TaskList;
+import Duke.task.Event;
 
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
@@ -10,10 +14,10 @@ import java.util.ArrayList;
  * Parser class is to parse user commands into strings and how to read the strings
  */
 public class Parser {
-    public Storage storage;
-    public TaskList tasks;
-    public Ui ui;
-    public String input;
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+    private String input;
 
     /**
      * Constructor of Parser class

@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * a data structure for tasks
  */
 public class TaskList extends ArrayList<Task> {
-    public static ArrayList<Task> taskList;
+    private static ArrayList<Task> taskList;
 
     /**
      * Constructor

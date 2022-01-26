@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * This class use to load and write data
  */
 public class Storage {
-    public String filePath;
+    private String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;

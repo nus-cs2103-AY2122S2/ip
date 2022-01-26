@@ -16,11 +16,11 @@ public class Task implements Serializable {
     }
 
     /**
-     * get whether it is done or not
+     * get whether it is done or not, mark task done task with X
      * @return String representation of true/false
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone ? "X" : " ");
     }
 
     /**

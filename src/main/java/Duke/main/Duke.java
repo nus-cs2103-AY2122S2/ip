@@ -2,13 +2,14 @@ package Duke.main;
 
 import Duke.task.TaskList;
 
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
-    public Storage storage;
-    public TaskList tasks;
-    public Ui ui;
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
     /**
      * constructor of the Duck program
