@@ -1,8 +1,15 @@
+package duke;
+
+import duke.command.Command;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
- * Duke Class contains a scanner to read user input and a TaskList that contains all tasks.
- * Duke only handles the processing of user input and responding to the user. Task list logic is
- * handled by the TaskList class.
+ * duke.Duke Class contains a scanner to read user input and a duke.task.TaskList that contains all tasks.
+ * duke.Duke only handles the processing of user input and responding to the user. duke.task.Task list logic is
+ * handled by the duke.task.TaskList class.
  */
 public class Duke {
     private final Ui ui;

@@ -1,3 +1,11 @@
+package duke.parser;
+
+import duke.*;
+import duke.command.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -78,7 +86,7 @@ public class Parser {
                             Date dateTime = parser.parse(time);
                             command = new AddCommand(new Event(title, dateTime));
                         } catch (ParseException e) {
-                            throw new InvalidDateTimeException("Incorrect time format");
+                            throw new InvalidArgumentException("Incorrect time format");
                         }
                     }
                 }
@@ -100,7 +108,7 @@ public class Parser {
                             Date dateTime = parser.parse(time);
                             command = new AddCommand(new Deadline(title, dateTime));
                         } catch (ParseException e) {
-                            throw new InvalidDateTimeException("Incorrect time format");
+                            throw new InvalidArgumentException("Incorrect time format");
                         }
                     }
                 }

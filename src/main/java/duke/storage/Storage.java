@@ -1,3 +1,12 @@
+package duke.storage;
+
+import duke.DukeException;
+import duke.InvalidArgumentException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -39,7 +48,7 @@ public class Storage {
                         Date dateTime = parser.parse(time);
                         tasks.add(new Deadline(taskInfo[0], dateTime, status));
                     } catch (ParseException e) {
-                        throw new InvalidDateTimeException("Invalid time format");
+                        throw new InvalidArgumentException("Invalid time format");
                     }
 
                 } else if (strTask.startsWith("[E")) {
@@ -50,7 +59,7 @@ public class Storage {
                         Date dateTime = parser.parse(time);
                         tasks.add(new Event(taskInfo[0], dateTime, status));
                     } catch (ParseException e) {
-                        throw new InvalidDateTimeException("Invalid time format");
+                        throw new InvalidArgumentException("Invalid time format");
                     }
                 }
             }
