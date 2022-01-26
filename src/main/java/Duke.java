@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.*;
 
 import exceptions.DukeException;
 import exceptions.DukeToDoEmptyException;
@@ -11,7 +12,8 @@ public class Duke {
     private ArrayList<Task> dukeList = new ArrayList<Task>();
     Scanner sc = new Scanner(System.in);
 
-    public void startDuke() throws DukeException {
+    public void startDuke() throws DukeException, IOException {
+        loadData();
         displayHelloMessage();
         String command = sc.next();
         String description = sc.nextLine();
@@ -65,7 +67,7 @@ public class Duke {
         dukeList.remove(taskIndex);
     }
 
-    void executeCommand(String command, String description) throws DukeException{
+    void executeCommand(String command, String description) throws DukeException, IOException{
         try {
         if (command.equals("list")) {
             displayList();
@@ -123,11 +125,13 @@ public class Duke {
             display("Now you have " + dukeList.size() + " tasks in the list.");
             displayLine();
         }
+            saveData();
 } catch ( DukeToDoEmptyException | DukeUnknownCommandException e) {
     displayLine();
     display(e.getMessage());
     displayLine();
 }
+
 
     }
 
@@ -145,7 +149,7 @@ public class Duke {
         displayLine();
     }
     
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws DukeException, IOException {
         Duke duke = new Duke();
         duke.startDuke();
     }
@@ -153,4 +157,72 @@ public class Duke {
     void display(Object command) {
         System.out.println(command);
     }
-}
+
+    public void saveData() throws IOException {
+        try {
+            File file = new File("../../../data/duke.txt");
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+
+            boolean createDirectory = file.getParentFile().mkdirs();
+            boolean created = file.createNewFile();
+            FileWriter fileWriter = new FileWriter(file, false);
+            for (Task task : dukeList) {
+                String text = "";
+                String description = task.description;
+                //task.isDone = false;
+                if (task instanceof ToDo) {
+                    text = "T | " + (task.isDone ? "1" : "0") + " | " + description + '\n';
+                } else if (task instanceof Event) {
+                    Event event = ((Event) task);
+                    text = "E | " + (task.isDone ? "1" : "0") + " | " + event.description.trim() + " | " + event.time + '\n';
+                } else {
+                    Deadline deadline = ((Deadline) task);
+                    text = "D | " + (task.isDone ? "1" : "0") + " | " + deadline.description.trim() + " | " + deadline.time + '\n';
+                }
+                fileWriter.write(text);
+                fileWriter.flush();
+            }
+        } catch(IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        public void loadData() throws IOException {
+            File file = new File("../../../data/duke.txt");
+            if(!file.exists()) {
+                file.createNewFile();
+            }
+
+            Scanner sc = new Scanner(file);
+            while (sc.hasNextLine()) {
+                String input = sc.nextLine();
+                String[] commandWords = input.split(" \\| ", 4);
+                Task task = null;
+                switch (commandWords[0]) {
+                    case "D" -> {
+                        task = new Deadline(commandWords[2], commandWords[3]);
+                        display(input);
+                    }
+                    case "E" -> {
+                        task = new Event(commandWords[2], commandWords[3]);
+                        display(input);
+                    }
+                    case "T" -> {
+                        task = new ToDo(commandWords[2]);
+                        String text = "T | " + (task.isDone ? "1" : "0") + " | " + task.description + '\n';
+                        display(input);
+                    }
+                    default -> System.err.println("error!!");
+                }
+
+                if (commandWords[1].equals("1")) {
+                    task.isComplete();
+                }
+                dukeList.add(task);
+            }
+            sc.close();
+        }
+    }
