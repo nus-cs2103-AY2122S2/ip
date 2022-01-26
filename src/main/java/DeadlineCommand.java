@@ -31,7 +31,7 @@ public class DeadlineCommand extends TaskCommand {
         try {
             localDate = LocalDate.parse(dateTime[0]);
         } catch (DateTimeParseException error) {
-            throw new DukeException(TIME_FORMAT_WRONG);
+            throw new DukeException(DATE_FORMAT_WRONG);
         }
 
         // parse the time in military format 0000
@@ -43,7 +43,7 @@ public class DeadlineCommand extends TaskCommand {
                 localTime = LocalTime.parse(dateTime[1], formatter);
             }
         } catch (DateTimeParseException error) {
-            throw new DukeException(DATE_FORMAT_WRONG);
+            throw new DukeException(TIME_FORMAT_WRONG);
         }
 
         newTask = new Deadline(false, statement, localDate, localTime);

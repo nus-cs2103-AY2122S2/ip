@@ -20,8 +20,8 @@ public class EventCommand extends TaskCommand {
         String statement = "";
         String[] dateTime;
         try {
-            statement = taskDescription.substring(0, taskDescription.indexOf(" /by"));
-            dateTime = taskDescription.substring(taskDescription.indexOf("/by") + 4).split(" ");
+            statement = taskDescription.substring(0, taskDescription.indexOf(" /at"));
+            dateTime = taskDescription.substring(taskDescription.indexOf("/at") + 4).split(" ");
         } catch (StringIndexOutOfBoundsException error) {
             throw new DukeException(TASK_FORMAT_WRONG);
         }
@@ -31,7 +31,7 @@ public class EventCommand extends TaskCommand {
         try {
             localDate = LocalDate.parse(dateTime[0]);
         } catch (DateTimeParseException error) {
-            throw new DukeException(TIME_FORMAT_WRONG);
+            throw new DukeException(DATE_FORMAT_WRONG);
         }
 
         // parse the time in military format 0000
@@ -43,7 +43,7 @@ public class EventCommand extends TaskCommand {
                 localTime = LocalTime.parse(dateTime[1], formatter);
             }
         } catch (DateTimeParseException error) {
-            throw new DukeException(DATE_FORMAT_WRONG);
+            throw new DukeException(TIME_FORMAT_WRONG);
         }
 
         newTask = new Event(false, statement, localDate, localTime);
