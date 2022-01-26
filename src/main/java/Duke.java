@@ -1,12 +1,21 @@
-import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Duke {
 
     public static String indent = "    ";
     public static String separator = "--------------------------------------------";
-    public static String[] openingMessage = new String[] {"Hello! I'm Duke", "What can I do for you?"};
+    public static String[] openingMessage = new String[] {"Hello! I'm Duke!", "What can I do for you?"};
     public static String closingMessage = "Bye. Hope to see you again soon!";
 
+    public static Path tasksPath = Paths.get("data", "tasks.txt");
+    public static File tasksFile = new File(tasksPath.toString());
     public static ArrayList<Task> allTasks = new ArrayList<>();
 
     public enum TaskType {
@@ -31,6 +40,51 @@ public class Duke {
         printIndent(separator + "\n");
     }
 
+    public static void loadTasks() throws DukeException {
+
+        // adds directory if it does not exist
+        File directory = new File("data");
+        boolean directoryCreated = directory.mkdir();
+
+        // creates a new file if it does not exist
+        boolean didNotExist;
+        try {
+            didNotExist = tasksFile.createNewFile();
+        } catch (IOException err) {
+            throw new DukeException(err.getMessage());
+        }
+
+        if (!directoryCreated && !didNotExist) {  // the file existed
+            try {
+                Scanner s = new Scanner(tasksFile); // create a Scanner using the File as the source
+                Task t;
+                while (s.hasNext()) {
+                    String someTask = s.nextLine();
+                    try {
+                        t = Task.importFromString(someTask);
+                        allTasks.add(t);
+                    } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException ignored) {
+                    }
+                }
+            } catch (FileNotFoundException err) {
+                throw new DukeException((err.getMessage()));
+            }
+        }
+    }
+
+    public static void saveTasks() throws DukeException {
+        try {
+            FileWriter fw = new FileWriter(tasksPath.toString());
+            for (Task t: allTasks) {
+                fw.write(t.exportToString() + "\n");
+            }
+            fw.close();
+        } catch (IOException err) {
+            throw new DukeException(err.getMessage());
+        }
+
+    }
+
     public static void displayTasks() {
         printIndent(separator);
         if (allTasks.size() == 0) {
@@ -52,7 +106,7 @@ public class Duke {
                 throw new DukeException("Description cannot be empty!");
             } else {
                 taskName = taskString.substring(5);  // "todo " has 5 characters
-                t = new ToDo(taskName);
+                t = new Todo(taskName);
             }
         } else if (taskString.startsWith("deadline ")) {
             if (taskString.length() <= 9) {
@@ -181,7 +235,7 @@ public class Duke {
                 String.format("Now you have %d tasks in the list.", allTasks.size())});
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         String logo = indent + " ____        _        \n"
                 + indent + "|  _ \\ _   _| | _____ \n"
                 + indent + "| | | | | | | |/ / _ \\\n"
@@ -191,6 +245,8 @@ public class Duke {
         // introduction messages
         System.out.println(logo);
         prettyPrint(openingMessage);
+
+        loadTasks();
 
         // read input
         Scanner sc = new Scanner(System.in);
@@ -214,6 +270,7 @@ public class Duke {
                 } else {  // add task
                     addTask(userInput);
                 }
+                saveTasks();
             } catch (DukeException err) {
                 prettyPrint(err.getMessage());
             }

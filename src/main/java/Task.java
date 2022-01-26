@@ -1,11 +1,6 @@
-public class Task {
+public abstract class Task {
 
     public boolean done = false;
-    public String taskName;
-
-    public Task(String taskName) {
-        this.taskName = taskName;
-    }
 
     public void setDone(boolean newDone) {
         this.done = newDone;
@@ -15,8 +10,27 @@ public class Task {
         return this.done;
     }
 
-    @Override
-    public String toString() {
-        return String.format("[%s] %s", this.done ? "X" : " ", this.taskName);
+    public abstract String exportToString();
+
+    public static Task importFromString(String exportedTask)
+            throws IllegalArgumentException, ArrayIndexOutOfBoundsException {
+        String[] details = exportedTask.split(" ");
+        Task task = null;
+        switch (Duke.TaskType.valueOf(details[0])) {
+            case TODO:
+                task = new Todo(details[1]);
+                task.setDone(Boolean.parseBoolean(details[2]));
+                break;
+            case EVENT:
+                task = new Event(details[1], details[3]);
+                task.setDone(Boolean.parseBoolean(details[2]));
+                break;
+            case DEADLINE:
+                task = new Deadline(details[1], details[3]);
+                task.setDone(Boolean.parseBoolean(details[2]));
+                break;
+        }
+        return task;
+
     }
 }
