@@ -9,6 +9,11 @@ import funbox.util.Storage;
 public abstract class Command {
     boolean isExit;
 
+    /**
+     * The constructor for the command class.
+     *
+     * @param isExit 
+     */
     public Command(boolean isExit) {
         this.isExit = isExit;
     }

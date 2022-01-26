@@ -19,6 +19,15 @@ public class Parser {
 
     public final String unknownCommand = "Sorry! You have used the command wrongly!";
 
+    /**
+     * Parse user input into commands.
+     *
+     * @param command The user's command to be parsed into a Command object.
+     * @param taskList The tasklist containing the user's tasks.
+     * @param ui Use for outputting messages for interaction with the users.
+     * @return Return a command object.
+     * @throws FunBoxExceptions If commandType != any of the strings in the switch-case.
+     */
     public Command parseCommand(String command, TaskList taskList, Ui ui) throws FunBoxExceptions {
         String[] parsedCommand = command.split(" ");
         String commandType = parsedCommand[0];
@@ -50,6 +59,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Concate the string in an array into a single string.
+     *
+     * @param parsedCommand The array containing the string to be concatenated.
+     * @param startingIndex The index to start concatenating from.
+     * @return Return a concatenated string.
+     */
     public String concatFormat(String[] parsedCommand, int startingIndex) {
         String result = "";
         for (int i = startingIndex; i < parsedCommand.length; i++) {
@@ -63,6 +79,13 @@ public class Parser {
         return result;
     }
 
+    /**
+     * Get the description and a date from a string.
+     *
+     * @param message The message to be parsed to get the description and date.
+     * @param type The type of task the message is.
+     * @return Return a string array where the first index is the description, and the second is the date.
+     */
     public String[] getDescriptionAndDate(String message, String type) {
         if (type.equals("event")) {
             return message.split(" /at ");

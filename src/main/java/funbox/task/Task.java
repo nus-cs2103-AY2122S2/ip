@@ -15,7 +15,8 @@ public class Task {
     /**
      * Constructor for Task class
      *
-     * @param description The description of task submitted by the users
+     * @param description The description of task submitted by the users.
+     * @param type The type of the task.
      */
     public Task(String description, String type) {
 

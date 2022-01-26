@@ -12,9 +12,12 @@ public class Event extends Task {
     public String time;
 
     /**
-     * The constructor class for Event
-     * @param description The description of task sent by the user
-     * @param by The deadline which the task should be completed by
+     * The constructors for event class.
+     *
+     * @param description The description of task sent by the user.
+     * @param date The date which the task should be completed by.
+     * @param time The time which the task should be completed by.
+     * @param type The type of the task.
      */
     public Event(String description, LocalDate date, String time, String type) {
         super(description, type);

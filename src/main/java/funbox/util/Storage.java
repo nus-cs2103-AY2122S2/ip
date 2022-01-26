@@ -35,6 +35,10 @@ public class Storage {
         this.typeHashmap.put("E", "event");
     }
 
+    /**
+     * Check if the directory `data/` and `task.txt` exists. If it does not exist, create it.
+     * If both files exist, read `task.txt` and load the data into the task list.
+     */
     private void preCheck() {
         if (!isDirectoryExist()) {
             boolean isDirectoryCreated = this.createDirectory();
@@ -96,6 +100,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Return the tasklist.
+     *
+     * @return Return the tasklist.
+     */
     public TaskList getTaskList() {
         return this.taskList;
     }
@@ -152,6 +161,12 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Delete tasks from `data.txt` file.
+     *
+     * @param index The position of the task on the file to be removed.
+     * @throws IOException If file does not exist.
+     */
     public void deleteTask(int index) throws IOException {
         this.createFile(this.TEMPFILEURL);
         File tempFile = new File(this.TEMPFILEURL);
