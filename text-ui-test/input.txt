@@ -1,8 +1,8 @@
 todo housework
 list
-deadline CS3230/by Friday
+deadline CS3230/by 2020-12-13
 list
-event CCA meeting/at Mon 1pm-3pm
+event CCA meeting/at 2014-02-03
 list
 mark 1
 list

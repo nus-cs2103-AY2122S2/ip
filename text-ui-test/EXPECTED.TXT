@@ -16,109 +16,130 @@ What do you want? :D
        This is the list of all tasks :D 
        1.[T][ ] housework
    __________________________________________________
+
    __________________________________________________
        Got it! I have added this following task :D 
-       [D][ ] CS3230 (by: Friday)
+       [D][ ] CS3230 (by: Sunday, December 13, 2020)
        Now you have 2 tasks in your list.
    __________________________________________________
    __________________________________________________
        This is the list of all tasks :D 
        1.[T][ ] housework
-       2.[D][ ] CS3230 (by: Friday)
+       2.[D][ ] CS3230 (by: Sunday, December 13, 2020)
    __________________________________________________
+
    __________________________________________________
        Got it! I have added this following task :D 
-       [E][ ] CCA meeting (at: Mon 1pm-3pm)
+       [E][ ] CCA meeting (at: Monday, February 3, 2014)
        Now you have 3 tasks in your list.
    __________________________________________________
    __________________________________________________
        This is the list of all tasks :D 
        1.[T][ ] housework
-       2.[D][ ] CS3230 (by: Friday)
-       3.[E][ ] CCA meeting (at: Mon 1pm-3pm)
+       2.[D][ ] CS3230 (by: Sunday, December 13, 2020)
+       3.[E][ ] CCA meeting (at: Monday, February 3, 2014)
    __________________________________________________
+
    __________________________________________________
        I have marked the following task as done! :D 
        [T][X] housework
    __________________________________________________
+
    __________________________________________________
        This is the list of all tasks :D 
        1.[T][X] housework
-       2.[D][ ] CS3230 (by: Friday)
-       3.[E][ ] CCA meeting (at: Mon 1pm-3pm)
+       2.[D][ ] CS3230 (by: Sunday, December 13, 2020)
+       3.[E][ ] CCA meeting (at: Monday, February 3, 2014)
    __________________________________________________
+
    __________________________________________________
        OK I have marked the following task as not done yet! :D 
        [T][ ] housework
    __________________________________________________
+
    __________________________________________________
        This is the list of all tasks :D 
        1.[T][ ] housework
-       2.[D][ ] CS3230 (by: Friday)
-       3.[E][ ] CCA meeting (at: Mon 1pm-3pm)
+       2.[D][ ] CS3230 (by: Sunday, December 13, 2020)
+       3.[E][ ] CCA meeting (at: Monday, February 3, 2014)
    __________________________________________________
+
    __________________________________________________
        OK I have delete the following task! :D 
        [T][ ] housework
        Now you have 2 tasks in your list.
    __________________________________________________
+
    __________________________________________________
        This is the list of all tasks :D 
-       1.[D][ ] CS3230 (by: Friday)
-       2.[E][ ] CCA meeting (at: Mon 1pm-3pm)
+       1.[D][ ] CS3230 (by: Sunday, December 13, 2020)
+       2.[E][ ] CCA meeting (at: Monday, February 3, 2014)
    __________________________________________________
+
    __________________________________________________
        You have entered "todo".
        You have to include name after command!
    __________________________________________________
+
    __________________________________________________
        You have entered "deadline".
        You have to include name after command!
    __________________________________________________
+
    __________________________________________________
        You have entered "deadline CS2040".
        You have to include deadline after command!
        Follow format [deadline <name>/by <date>]
    __________________________________________________
+
    __________________________________________________
        You have entered "deadline CS2040/".
        You have to include deadline after command!
        Follow format [deadline <name>/by <date>]
    __________________________________________________
+
    __________________________________________________
        You have entered "deadline CS2040/byw".
        You have to include deadline after command!
        Follow format [deadline <name>/by <date>]
    __________________________________________________
+
    __________________________________________________
        You have entered "deadline CS2040/by".
        You have to include deadline after command!
        Follow format [deadline <name>/by <date>]
    __________________________________________________
+
    __________________________________________________
        You have entered "event".
        You have to include name after command!
    __________________________________________________
+
    __________________________________________________
        You have entered "event CS2040".
        You have to include date after command!
        Please follow format [event <name>/at <date>]
    __________________________________________________
+
    __________________________________________________
        You have entered "event CS2040/".
        You have to include date after command!
        Please follow format [event <name>/at <date>]
    __________________________________________________
+
    __________________________________________________
        You have entered "event CS2040/atw".
        You have to include date after command!
        Please follow format [event <name>/at <date>]
    __________________________________________________
+
    __________________________________________________
        You have entered "event CS2040/at".
        You have to include date after command!
        Please follow format [event <name>/at <date>]
    __________________________________________________
+
    __________________________________________________
        Bye. I hope to see you soon.
    __________________________________________________
+
