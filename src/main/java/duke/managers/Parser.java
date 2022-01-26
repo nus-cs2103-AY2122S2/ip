@@ -3,7 +3,19 @@ package duke.managers;
 import duke.commands.*;
 import duke.exceptions.DukeException;
 
+/**
+ * Represents the manager that handles recognition of user input.
+ */
 public class Parser {
+
+    /**
+     * Takes in a user input and attempts to link it to a specific
+     * command.
+     *
+     * @param input a String that represents the input given by the user.
+     * @return a command that is recognized and created by the parser according
+     *         to the input.
+     */
     public Command parse(String input) throws DukeException {
         String[] tokens = input.split(" ");
         switch (tokens[0]) {
@@ -50,7 +62,7 @@ public class Parser {
         } catch (Exception exception) {
             throw new DukeException("Invalid input! Please enter the number of the task you want to mark.");
         }
-        return new MarkCommand(isMark, index);
+        return new MarkCommand(index, isMark);
     }
 
     protected ListCommand list() {
