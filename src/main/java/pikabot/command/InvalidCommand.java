@@ -15,6 +15,7 @@ public class InvalidCommand extends Command {
     public static void invalidTask() throws InvalidTaskCommandException {
         throw new InvalidTaskCommandException();
     }
+
     @Override
     public void execute(TaskList taskList, Storage storage) {
         try {
@@ -23,4 +24,6 @@ public class InvalidCommand extends Command {
             Ui.printExceptionMessage(e);
         }
     }
+
+
 }

@@ -26,6 +26,7 @@ public class TodoCommand extends Command {
             taskList.add(currTodo);
             Ui.indicateAddedTask(currTodo, taskList);
             storage.appendToFile(currTodo);
+
         } catch (TodoException | IOException e) {
             Ui.printExceptionMessage(e);
         }

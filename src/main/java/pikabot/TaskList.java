@@ -31,21 +31,33 @@ public class TaskList {
     //delete
     public void delete(int taskNumber) {
         int taskIndex = taskNumber - 1;
-        taskList.remove(taskIndex);
+        try {
+            taskList.remove(taskIndex);
+        } catch (IndexOutOfBoundsException e) {
+            Ui.printExceptionCustomisedMessage("Invalid task number!");
+        }
     }
 
     //mark
     public void markTaskAsDone(int taskNumber) {
         int taskIndex = taskNumber - 1;
-        Task currTask = taskList.get(taskIndex);
-        currTask.markAsDone();
+        try {
+            Task currTask = taskList.get(taskIndex);
+            currTask.markAsDone();
+        } catch (IndexOutOfBoundsException e) {
+            Ui.printExceptionCustomisedMessage("Invalid task number!");
+        }
     }
 
     //unmark
     public void markTaskAsUndone(int taskNumber) {
         int taskIndex = taskNumber - 1;
-        Task currTask = taskList.get(taskIndex);
-        currTask.markAsUndone();
+        try {
+            Task currTask = taskList.get(taskIndex);
+            currTask.markAsUndone();
+        } catch (IndexOutOfBoundsException e) {
+            Ui.printExceptionCustomisedMessage("Invalid task number!");
+        }
     }
 
     //find
