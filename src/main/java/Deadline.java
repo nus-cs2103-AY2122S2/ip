@@ -1,8 +1,11 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task{
 
-    private String dueDate;
+    private LocalDate dueDate;
 
-    public Deadline(String description, String dueDate, boolean isDone) {
+    public Deadline(String description, LocalDate dueDate, boolean isDone) {
         super(description, isDone);
         this.dueDate = dueDate;
     }
@@ -12,12 +15,14 @@ public class Deadline extends Task{
         return "DEADLINE" + "," + super.isDone + "," + super.description + "," + this.dueDate;
     }
 
-    public String getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
     @Override
     public String toString() {
-        return "[D] [" + this.getStatusIcon() + "] " + super.getDescription() + " (" + this.getDueDate() + ")";
+        return "[D] [" + this.getStatusIcon() + "] " +
+                super.getDescription() + " (" +
+                this.getDueDate().format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }
