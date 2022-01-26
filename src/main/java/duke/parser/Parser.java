@@ -21,6 +21,10 @@ public class Parser {
                 return new MarkTaskCommand(Integer.parseInt(userInputArr[1]) - 1, false);
             case "delete":
                 return new DeleteCommand(Integer.parseInt(userInputArr[1]) - 1);
+            case "find":
+                userInput = String.join(" ",
+                        Arrays.copyOfRange(userInputArr, 1, userInputArr.length));
+                return new FindTaskCommand(userInput);
             case "list":
                 return new ListCommand();
             case "bye":

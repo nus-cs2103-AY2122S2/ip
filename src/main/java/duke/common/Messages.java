@@ -8,6 +8,7 @@ public class Messages {
     public static final String MESSAGE_MARK = "Nice! I've marked this task as done.";
     public static final String MESSAGE_UNMARKED = "OK, I've marked this task as not done yet.";
     public static final String MESSAGE_DELETE = "Noted. I've removed this task.";
+    public static final String MESSAGE_FIND = "Here are the matching tasks in your list";
     public static final String MESSAGE_ADD_TODO = "Got it. I've added this todo.";
     public static final String MESSAGE_ADD_DEADLINE = "Got it. I've added this deadline.";
     public static final String MESSAGE_ADD_EVENT = "Got it. I've added this event.";
