@@ -51,9 +51,9 @@ public class Parser {
             }
             return new InvalidCommand();
         } catch (NumberFormatException e) {
-            return new InvalidCommand("the force cannot convert the value to a number.");
+            return new InvalidCommand("The force cannot convert the value to a number.");
         } catch (DateTimeParseException e) {
-            return new InvalidCommand("the force does not comprehend the date.");
+            return new InvalidCommand("The force does not comprehend the date.");
         } catch (IllegalArgumentException e) {
             return new InvalidCommand(e.getMessage());
         }

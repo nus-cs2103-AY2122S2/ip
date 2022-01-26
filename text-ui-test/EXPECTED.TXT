@@ -19,7 +19,7 @@ now you have 1 tasks in the list.
 ============================================================
 ============================================================
 Oops, the force has encountered an error:
-the force does not comprehend the date.
+The force does not comprehend the date.
 Please try again :(
 ============================================================
 ============================================================
@@ -29,7 +29,7 @@ now you have 2 tasks in the list.
 ============================================================
 ============================================================
 Oops, the force has encountered an error:
-the force does not comprehend the date.
+The force does not comprehend the date.
 Please try again :(
 ============================================================
 ============================================================
@@ -63,7 +63,7 @@ Currently, you have the following tasks:
 ============================================================
 ============================================================
 Oops, the force has encountered an error:
-the force does not comprehend the date.
+The force does not comprehend the date.
 Please try again :(
 ============================================================
 ============================================================
@@ -73,7 +73,7 @@ now you have 6 tasks in the list.
 ============================================================
 ============================================================
 Oops, the force has encountered an error:
-the force does not comprehend the date.
+The force does not comprehend the date.
 Please try again :(
 ============================================================
 ============================================================
@@ -139,12 +139,12 @@ Please try again :(
 ============================================================
 ============================================================
 Oops, the force has encountered an error:
-the force cannot convert the value to a number.
+The force cannot convert the value to a number.
 Please try again :(
 ============================================================
 ============================================================
 Oops, the force has encountered an error:
-the force cannot convert the value to a number.
+The force cannot convert the value to a number.
 Please try again :(
 ============================================================
 ============================================================
