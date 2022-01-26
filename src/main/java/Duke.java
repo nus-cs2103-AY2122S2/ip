@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,6 +15,9 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+
+
+
         String logo =         "\n" +
                 "       _       _        \n" +
                 "      | |     | |       \n" +
@@ -30,9 +34,21 @@ public class Duke {
                 "    ____________________________________________________________");
         ArrayList<Task> itemList = new ArrayList<>();
         while(true) {
+
+
             Scanner sc = new Scanner(System.in);
             String reply = sc.nextLine();
             String[] splittedString = reply.split(" ");
+
+            File file1 = new File("data/duke.txt");
+            file1.delete();
+
+            File file = new File("data/duke.txt");
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             if (splittedString[0].equals("mark") && splittedString.length == 2) { // check for mark tag
                 int index = Integer.valueOf(reply.split(" ")[1]);
                 itemList.get(index - 1).markAsDone();
@@ -123,10 +139,6 @@ public class Duke {
                         "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
                         "    ____________________________________________________________");
             }
-            System.out.println(itemList.size());
-
-            File existingFile = new File("data/duke.txt");
-            existingFile.delete();
 
             String file2 = "data/duke.txt";
             try {
