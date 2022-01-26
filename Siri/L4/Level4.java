@@ -74,15 +74,7 @@ public class Level4 {
                             + line);
                     break;
                 }
-            } else { //print everything user inputed with "added: " infront
-                /*String restOfInput = sc.nextLine();
-                String taskToDo = word + restOfInput;
-                Task t = new Task(taskToDo);
-                arrList.add(t);
-                System.out.println(line + "     This task has been added to your list:\n"
-                        + "     added: " + taskToDo + "\n"
-                        + line);*/
-            }
+            } else { } //do nothing
         }
     }
 }
