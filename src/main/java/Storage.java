@@ -1,6 +1,9 @@
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class Storage {
@@ -44,13 +47,13 @@ public class Storage {
                         }
                         break;
                     case "D":
-                        task = new DeadLines(compactTask[2], Bot.processDateTime(compactTask[3]));
+                        task = new DeadLines(compactTask[2], compactTask[3]);
                         if (compactTask[1].equals("1")) {
                             task.mark();
                         }
                         break;
                     case "E":
-                        task = new Event(compactTask[2], Bot.processDateTime(compactTask[3]));
+                        task = new Event(compactTask[2], compactTask[3]);
                         if (compactTask[1].equals("1")) {
                             task.mark();
                         }
@@ -69,10 +72,10 @@ public class Storage {
         return listOfTasks;
     }
 
-    public void writeToStorage(ArrayList<Task> listOfTasks) {
+    public void writeToStorage(TaskList listOfTasks) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(this.filepath + File.separator + this.filename));
-            for (Task i : listOfTasks) {
+            for (Task i : listOfTasks.getList()) {
                 try {
                     writer.write(formatTask(i));
                 } catch (IOException e) {

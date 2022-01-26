@@ -1,23 +1,32 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-        Bot Duke = new Bot();
-        Duke.greet();
-        Scanner sc = new Scanner(System.in);
+    private Ui ui;
+    private Storage storage;
+    private TaskList taskList;
 
-        String userInput = sc.nextLine();
-        // Repeat till bye is entered
+    public Duke() {
+        this.ui = new Ui();
+        this.storage = new Storage();
+        this.taskList = new TaskList(storage.readFromStorage());
+    }
+
+    public void run() {
+        this.ui.greet();
+        String userInput = ui.askForInput();
+
         while (!userInput.equals("bye")) {
-            try {
-                Duke.communicate(userInput);
-            } catch (DukeException e) {
-                System.out.println(Duke.encloseWithin(e.getMessage()));
-            }
-            // Get next input
-            userInput = sc.nextLine();
+            String[] processedInput = Parser.parseInput(userInput);
+            ui.say(Command.execute(processedInput, this.taskList));
+            userInput = ui.askForInput();
         }
-        Duke.sayGoodbye();
+        storage.writeToStorage(this.taskList);
+        ui.sayGoodbye();
+    }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.run();
     }
 }
 

@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class Task implements makeCompactable {
@@ -42,5 +45,16 @@ public class Task implements makeCompactable {
         }
         out.add(task);
         return out;
+    }
+
+    public LocalDateTime formatDateTime(String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+        date = date.trim();
+        try {
+            return LocalDateTime.parse(date, formatter);
+        } catch (DateTimeParseException e) {
+            System.out.println("Please follow the required format for dates:\nyyyy/MM/dd HH:mm");
+        }
+        return null;
     }
 }

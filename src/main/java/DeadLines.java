@@ -3,12 +3,15 @@ import java.time.LocalDateTime;
 public class DeadLines extends Task {
     LocalDateTime deadline;
 
-    public DeadLines (String task, LocalDateTime deadline) throws DukeException {
+    public DeadLines (String task, String deadline) throws DukeException {
         super(task);
         if (deadline == null) {
             throw new DukeException("Try Again with correct format!\n");
         }
-        this.deadline = deadline;
+        this.deadline = formatDateTime(deadline);
+        if (this.deadline == null) {
+            throw new DukeException("Incorrect format\n");
+        }
         this.initials = "D";
         if (task.length() < 1) {
             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.\n");
@@ -23,7 +26,7 @@ public class DeadLines extends Task {
     @Override
     public ArrayList<String> makeCompact() {
         ArrayList<String> out = super.makeCompact();
-        out.add(deadline);
+        out.add(deadline.toString().replaceFirst("T", " ").replaceAll("-", "/"));
         return out;
     }
 }
