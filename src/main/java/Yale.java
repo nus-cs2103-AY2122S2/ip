@@ -1,3 +1,6 @@
+import yale.command.Parser;
+import yale.command.Storage;
+import yale.command.Ui;
 import yale.task.TaskList;
 
 import java.util.Scanner;
@@ -22,9 +25,5 @@ public class Yale {
             }
         }
     }
-
-
-
-
 }
 

@@ -1,3 +1,5 @@
+package yale.command;
+
 import yale.task.TaskList;
 
 public class Parser {

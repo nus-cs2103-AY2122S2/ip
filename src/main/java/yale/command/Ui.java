@@ -1,3 +1,5 @@
+package yale.command;
+
 import java.util.Scanner;
 
 public class Ui {
