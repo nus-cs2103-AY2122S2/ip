@@ -56,4 +56,14 @@ public class TaskList implements Serializable {
         tasks.add(task);
         return task;
     }
+
+    public ArrayList<String> search(String searchString) {
+        ArrayList<String> taskSet = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.item.contains(searchString)) {
+                taskSet.add(task.toString());
+            }
+        }
+        return taskSet;
+    }
 }
