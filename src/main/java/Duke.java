@@ -75,7 +75,7 @@ public class Duke {
                 Command command = parser.parse(userResponse);
                 command.execute(userResponse, taskList, storage, ui);
                 if (command.getKey().equals("bye")) {
-                    break;
+                    this.isRunning = false;
                 }
             } catch (DukeException error) {
                 ui.printError(error.getMessage());
