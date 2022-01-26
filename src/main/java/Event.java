@@ -17,6 +17,11 @@ public class Event extends Task{
         this.time = time;
     }
 
+    public String getTime() {
+        return time;
+    }
+
+    @Override
     public String toString() {
         String mark;
         if (super.getDone()) {

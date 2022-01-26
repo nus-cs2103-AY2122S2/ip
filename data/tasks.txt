@@ -1,0 +1,6 @@
+T ~~ 0 ~~ Task1
+T ~~ 1 ~~ Task2
+E ~~ 0 ~~ Event1 ~~ 17th July
+D ~~ 1 ~~ Deadline1 ~~ 27th Jan
+T ~~ 0 ~~ Task3
+D ~~ 0 ~~ Deadline2 ~~ saturday

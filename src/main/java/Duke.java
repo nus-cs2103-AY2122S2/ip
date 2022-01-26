@@ -39,6 +39,10 @@ public class Duke {
         Memory memory = new Memory();
         boolean looping = true;
 
+        // Setup disk
+        memory.setup();
+
+        // First line
         echo.echoString("Heya! I'm Duke!\n" +
                 "What can I do for ya?");
 
@@ -54,6 +58,7 @@ public class Duke {
                 break;
 
             case "bye":
+                memory.parseUpdateAll();
                 looping = false;
                 break;
 
