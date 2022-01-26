@@ -1,47 +1,47 @@
+package narcibot;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Deadline extends Task {
+public class Event extends Task {
     private String time;
-
-    public Deadline(String name, String time) {
+    public Event(String name, String time) {
         super(name);
         this.time = time;
         try {
             LocalDate date = LocalDate.parse(time);
-            System.out.println("[D][ ] " + name + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")");
+            System.out.println("[E][ ] " + name + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")");
         } catch (DateTimeParseException e) {
-            System.out.println("[D][ ] " + name + " (by: " + time + ")");
+            System.out.println("[E][ ] " + name + " (by: " + time + ")");
         }
     }
 
-    public Deadline(String name, String time, boolean done) {
+    public Event(String name, String time, boolean done) {
         super(name, done);
         this.time = time;
     }
 
     @Override
     public String getStatus() {
-        return "[D]" + super.getStatus() +" (by: " + time +")";
+        return "[E]" + super.getStatus() + " (at: " + time +")";
     }
 
     @Override
     public void markDone() {
-        System.out.print("[D]");
+        System.out.print("[E]");
         super.markDone();
-        System.out.println(" (by: " + time +")");
+        System.out.println(" (at: " + time +")");
     }
 
     @Override
     public void markNotDone() {
-        System.out.print("[D]");
+        System.out.print("[E]");
         super.markNotDone();
-        System.out.println(" (by: " + time +")");
+        System.out.println(" (at: " + time +")");
     }
 
     @Override
     public String save() {
-        return "D|" + super.save() +"|" + time;
+        return "E|" + super.save() + "|" + time;
     }
 }

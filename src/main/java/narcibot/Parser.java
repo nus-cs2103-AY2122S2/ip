@@ -1,5 +1,4 @@
-import java.util.Arrays;
-import java.util.List;
+package narcibot;
 
 public class Parser {
     public String[] parse(String command) {

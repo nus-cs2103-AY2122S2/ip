@@ -1,3 +1,4 @@
+package narcibot;
 public class Ui {
     public void welcome() {
         System.out.println("I'm Narcibot, the best bot ever created.\n" +

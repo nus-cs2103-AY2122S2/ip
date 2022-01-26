@@ -1,3 +1,4 @@
+package narcibot;
 import java.io.*;
 
 public class Storage {
