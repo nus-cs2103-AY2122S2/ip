@@ -1,14 +1,8 @@
 package chatbot.util;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 
-public class FileUtils {
+public class Storage {
     public static <T extends Serializable> boolean Save(String filePath, T item) {
         try {
             File file = new File(filePath);

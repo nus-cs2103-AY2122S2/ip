@@ -2,17 +2,17 @@ package chatbot.command;
 
 import chatbot.task.Deadline;
 import chatbot.task.Task;
+import chatbot.task.TaskList;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DeadlineCommand implements Command {
     public static final String KEYWORD = "deadline";
 
     @Override
-    public CommandOutput execute(String[] input, ArrayList<Task> tasks) {
+    public CommandOutput execute(String[] input, TaskList taskList) {
         // Parse input.
         String desc = "";
         LocalDate date = null;
@@ -23,12 +23,12 @@ public class DeadlineCommand implements Command {
                 ++i;
             }
             desc = String.join(" ", Arrays.asList(input).subList(1, i));
-            date = LocalDate.parse(input[i+1]);
-            time = LocalTime.parse(input[i+2]);
+            date = LocalDate.parse(input[i + 1]);
+            time = LocalTime.parse(input[i + 2]);
         } catch (Exception ignored) {
         }
 
-        String commandFormat = "Please enter the command as \"deadline <desc> /by <date> <time>\"\n" +
+        String commandFormat = "Error: Please enter the command as \"" + KEYWORD + " <desc> /by <date> <time>\".\n" +
                 "Dates must be in YYYY-MM-DD format.\n" +
                 "Time must be in the HH:MM or HH:MM:SS format.";
         if (desc.isBlank()) {
@@ -41,7 +41,7 @@ public class DeadlineCommand implements Command {
 
         // Add event.
         Task task = new Deadline(desc, date, time);
-        tasks.add(task);
-        return new CommandOutput(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", task, tasks.size()), true);
+        taskList.add(task);
+        return new CommandOutput(String.format("Got it. I've added this task:\n  %s\nNow you have %d taskList in the list.", task, taskList.size()), true);
     }
 }

@@ -1,9 +1,7 @@
 package chatbot.command;
 
-import chatbot.task.Task;
-
-import java.util.ArrayList;
+import chatbot.task.TaskList;
 
 public interface Command {
-    CommandOutput execute(String[] input, ArrayList<Task> tasks);
+    CommandOutput execute(String[] input, TaskList taskList);
 }

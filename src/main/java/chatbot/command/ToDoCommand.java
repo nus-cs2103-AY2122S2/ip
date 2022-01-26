@@ -1,16 +1,16 @@
 package chatbot.command;
 
 import chatbot.task.Task;
+import chatbot.task.TaskList;
 import chatbot.task.ToDo;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ToDoCommand implements Command {
     public static final String KEYWORD = "todo";
 
     @Override
-    public CommandOutput execute(String[] input, ArrayList<Task> tasks) {
+    public CommandOutput execute(String[] input, TaskList taskList) {
         // Parse input.
         String desc = "";
         try {
@@ -18,13 +18,15 @@ public class ToDoCommand implements Command {
         } catch (Exception ignored) {
         }
 
+        String commandFormat = "Please enter the command as \"" + KEYWORD + " <desc>\".\n" +
+                "The description cannot be empty.";
         if (desc.isBlank()) {
-            return new CommandOutput("☹ OOPS!!! The description of a todo cannot be empty.", false);
+            return new CommandOutput("Error: Invalid description\n" + commandFormat, false);
         }
 
         // Add event.
         Task task = new ToDo(desc);
-        tasks.add(task);
-        return new CommandOutput(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", task, tasks.size()), true);
+        taskList.add(task);
+        return new CommandOutput(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", task, taskList.size()), true);
     }
 }

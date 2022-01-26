@@ -1,14 +1,18 @@
 package chatbot;
 
 import chatbot.command.*;
-import chatbot.task.Task;
-import chatbot.util.FileUtils;
+import chatbot.task.TaskList;
+import chatbot.util.Parser;
+import chatbot.util.Storage;
+import chatbot.util.Ui;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class ChatBot {
+    private static final String BOT_NAME = "Delphine";
+    private static final String SAVE_FILE_PATH = "./data/save_file";
+    private static final String QUIT_KEYWORD = "bye";
     private static final String LOGO =
             "⣿⡟⠙⠛⠋⠩⠭⣉⡛⢛⠫⠭⠄⠒⠄⠄⠄⠈⠉⠛⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n" +
             "⣿⡇⠄⠄⠄⠄⣠⠖⠋⣀⡤⠄⠒⠄⠄⠄⠄⠄⠄⠄⠄⠄⣈⡭⠭⠄⠄⠄⠉⠙\n" +
@@ -24,64 +28,48 @@ public class ChatBot {
             "⣿⣿⡟⡜⠄⠄⠄⠄⠙⠿⣿⣧⣽⣍⣾⣿⠿⠛⠁⠄⠄⠄⠄⠄⠄⠄⠄⠃⢿⣿\n" +
             "⣿⡿⠰⠄⠄⠄⠄⠄⠄⠄⠄⠈⠉⠩⠔⠒⠉⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠐⠘⣿\n" +
             "⣿⠃⠃⠄⠄⠄⠄⠄⠄⣀⢀⠄⠄⡀⡀⢀⣤⣴⣤⣤⣀⣀⠄⠄⠄⠄⠄⠄⠁⢹";
-    private static final String BOT_NAME = "Delphine";
-    private static final String KEYWORD_QUIT = "bye";
-    private static final String SAVE_FILE_PATH = "./data/Delphine.save";
 
-    private final Hashtable<String, Command> commands;
-    private final Command invalidCommand;
+    private final Parser parser;
 
     public ChatBot() {
-        this.commands = new Hashtable<>();
-        this.commands.put(DeadlineCommand.KEYWORD, new DeadlineCommand());
-        this.commands.put(DeleteCommand.KEYWORD, new DeleteCommand());
-        this.commands.put(EventCommand.KEYWORD, new EventCommand());
-        this.commands.put(ListCommand.KEYWORD, new ListCommand());
-        this.commands.put(MarkCommand.KEYWORD, new MarkCommand());
-        this.commands.put(ToDoCommand.KEYWORD, new ToDoCommand());
-        this.commands.put(UnmarkCommand.KEYWORD, new UnmarkCommand());
-        this.commands.put(ResetCommand.KEYWORD, new ResetCommand());
-        this.invalidCommand = new Command() {
-            @Override
-            public CommandOutput execute(String[] input, ArrayList<Task> tasks) {
-                return new CommandOutput("☹ OOPS!!! I'm sorry, but I don't know what that means :-(", false);
-            }
-        };
+        this.parser = new Parser();
+        this.parser.addCommand(DeadlineCommand.KEYWORD, new DeadlineCommand());
+        this.parser.addCommand(DeleteCommand.KEYWORD, new DeleteCommand());
+        this.parser.addCommand(EventCommand.KEYWORD, new EventCommand());
+        this.parser.addCommand(ListCommand.KEYWORD, new ListCommand());
+        this.parser.addCommand(MarkCommand.KEYWORD, new MarkCommand());
+        this.parser.addCommand(ToDoCommand.KEYWORD, new ToDoCommand());
+        this.parser.addCommand(UnmarkCommand.KEYWORD, new UnmarkCommand());
+        this.parser.addCommand(ResetCommand.KEYWORD, new ResetCommand());
     }
 
     public void run() {
-        // Load save file.
-        ArrayList<Task> tasks = FileUtils.Load(SAVE_FILE_PATH);
-        if (tasks == null) {
-            tasks = new ArrayList<>();
-        }
-
         // Greetings.
-        System.out.println(LOGO);
-        System.out.println(String.format("Hello! I'm %s!\nWhat can I do for you?", BOT_NAME));
+        Ui.println(LOGO + String.format("\nHello! I'm %s!\nWhat can I do for you?", BOT_NAME));
+        // Load save file.
+        TaskList taskList = (TaskList) Optional.ofNullable(Storage.Load(SAVE_FILE_PATH)).orElse(new TaskList());
 
         // User interaction.
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNext()) {
-            // Read input.
+            // Read input and split it by whitespace.
             String[] input = scanner.nextLine().split("\\s+");
-
             // Check for blank input.
             if (input.length == 0) {
                 continue;
             }
-
             // Close application.
-            if (input[0].equals(KEYWORD_QUIT)) {
-                System.out.println("Bye. Hope to see you again soon!");
+            if (input[0].equals(QUIT_KEYWORD)) {
+                Ui.println("Bye. Hope to see you again soon!");
                 break;
             }
 
             // Execute command.
-            CommandOutput commandOutput = commands.containsKey(input[0]) ? commands.get(input[0]).execute(input, tasks) : invalidCommand.execute(input, tasks);
-            System.out.println(commandOutput.output);
+            CommandOutput commandOutput = parser.getCommand(input[0]).execute(input, taskList);
+            Ui.println(commandOutput.output);
+            Ui.playSound("audio/ding.wav");
             if (commandOutput.isListEdited) {
-                FileUtils.Save(SAVE_FILE_PATH, tasks);
+                Storage.Save(SAVE_FILE_PATH, taskList);
             }
         }
     }
