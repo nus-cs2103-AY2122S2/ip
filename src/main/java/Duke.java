@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
@@ -9,19 +8,19 @@ public class Duke {
 
     private static void performAction(String action, String input) {
         switch (action) {
-            case "mark":
+         case "mark":
                 Duke.mark(input);
                 break;
-            case "unmark":
+         case "unmark":
                 Duke.unmark(input);
                 break;
-            case "list":
+         case "list":
                 Duke.printList();
                 break;
-            case "delete":
+         case "delete":
                 Duke.delete(input);
                 break;
-            default:
+         default:
                 Duke.addTask(input);
         }
     }
@@ -44,7 +43,7 @@ public class Duke {
     private static void addTask(String str) {    //adds task to list
         String action = Duke.getFirstWord(str);
         switch (action) {
-            case "todo":
+        case "todo":
                 try {
                     String[] todoArr = str.split(" ", 2);
                     if (todoArr.length <= 1) {
@@ -57,7 +56,7 @@ public class Duke {
                 } finally {
                     break;
                 }
-            case "deadline":
+        case "deadline":
                 //deadline do hw /by no idea :-p
                 try {
                     String[] deadlineArr = str.split("/by", 2);
@@ -76,7 +75,7 @@ public class Duke {
                 } finally {
                     break;
                 }
-            case "event":
+        case "event":
                 //event project meeting /at Mon 2-4pm
                 try {
                     String[] eventArr = str.split("/at", 2);
@@ -134,8 +133,9 @@ public class Duke {
                 throw new InvalidArgumentException("Excuse me, but mark what?");
             }
             int taskNumber = Integer.parseInt(words[1]);
-            if (taskNumber > list.size() || taskNumber <= 0)
+            if (taskNumber > list.size() || taskNumber <= 0) {
                 throw new OutOfBoundsException(String.format("The task %d does not exist!", taskNumber));
+            }
             list.get(taskNumber - 1).markAsDone();
             System.out.println("Nice! I've marked this task as done:");
             System.out.println(Duke.getTaskStatement(taskNumber - 1));
@@ -153,8 +153,9 @@ public class Duke {
                 throw new InvalidArgumentException("Excuse me, but mark what?");
             }
             int taskNumber = Integer.parseInt(words[1]);
-            if (taskNumber > list.size() || taskNumber <= 0)
+            if (taskNumber > list.size() || taskNumber <= 0) {
                 throw new OutOfBoundsException(String.format("The task %d does not exist!", taskNumber));
+            }
             list.get(taskNumber - 1).markAsUndone();
             System.out.println("OK, I've marked this task as not done yet:");
             System.out.println(getTaskStatement(taskNumber - 1));
@@ -169,9 +170,10 @@ public class Duke {
                 throw new InvalidArgumentException("Excuse me, but delete what?");
             }
             int taskNumber = Integer.parseInt(words[1]);
-            if (taskNumber > list.size() || taskNumber <= 0)
+            if (taskNumber > list.size() || taskNumber <= 0) {
                 throw new OutOfBoundsException(String.format("Cannot delete" +
                         " as task %d does not exist!", taskNumber));
+            }
             System.out.println("Noted. I've removed this task:");
             System.out.println(getTaskStatement(taskNumber - 1));
             list.remove(taskNumber - 1);
