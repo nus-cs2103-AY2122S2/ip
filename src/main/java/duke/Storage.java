@@ -16,14 +16,26 @@ public class Storage {
     protected String filePath;
     private static final ArrayList<Task> tasks = new ArrayList<>();
 
+
+    /**
+     * Instantiates a storage object given a directory path and a file path
+     * @param directoryPath directoryPath to storage file
+     * @param filePath filePath to stroage file
+     */
     public Storage(String directoryPath, String filePath) {
         this.directoryPath = directoryPath;
         this.filePath = filePath;
     }
 
+    /**
+     * Instantiates an empty storage object
+     */
     public Storage() {}
 
-
+    /**
+     * Method that takes in a list of tasks and writes it into the storage file
+     * @throws DukeException if the file cannot be found in the directory
+     */
     public static void writeToDukeFile() throws DukeException {
         try{
             FileWriter fw = new FileWriter("./data/duke.txt");
@@ -36,7 +48,11 @@ public class Storage {
         }
     }
 
-
+    /**
+     * Method that reads from the file and outputs a list of tasks that have been read from the list
+     * @return a list of tasks in the storage file object
+     * @throws DukeException if unable to read content from duke file/file does not exist
+     */
     public ArrayList<Task> readFromDukeFile() throws DukeException {
         boolean directoryExists = new File(this.directoryPath).exists();
         boolean fileExists = new File(this.filePath).exists();

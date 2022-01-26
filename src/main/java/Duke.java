@@ -8,6 +8,11 @@ public class Duke {
     private final Parser parser = new Parser();
 
 
+    /**
+     * Instantiates a Duke object with a directoryPath and filePath of the storageFile
+     * @param directoryPath directoryPath to storage file
+     * @param filePath filePath to storage file
+     */
     public Duke(String directoryPath, String filePath) {
         TaskList tasks1;
         this.ui = new TextUi();
@@ -21,6 +26,10 @@ public class Duke {
         this.tasks = tasks1;
     }
 
+    /**
+     * Method that runs the Duke Program
+     * @throws DukeException if there is an error that occurs while parsing the input
+     */
     public void run() throws DukeException {
         ui.greeting();
         boolean isExit = false;

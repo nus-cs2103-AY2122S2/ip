@@ -16,7 +16,12 @@ public class Event extends Task {
     private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private static final DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
-
+    /**
+     * Instantiates a new Event object
+     * @param description of Event
+     * @param at (duedate of event)
+     * @throws DukeException if the date format parsed is incorrect
+     */
     public Event(String description, String at) throws DukeException {
         super(description);
         if (isDateFormat(at)) {
@@ -28,6 +33,10 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Method that converts an event to its storage file format
+     * @return A string that describes an event with its storage file format
+     */
     @Override
     public String toFileFormat() {
         if (at != null) {
@@ -37,6 +46,11 @@ public class Event extends Task {
         }
     }
 
+
+    /**
+     * Method that converts an event to its display/string format
+     * @return A string that describes an event with its display format
+     */
     @Override
     public String toString() {
         if (this.at != null) {
@@ -46,6 +60,11 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * A method that takes in a string and checks if its in dateTime format
+     * @param dateTimeString duedate string
+     * @return A boolean that indicates if the string is in dateTime format
+     */
     private boolean isDateTimeFormat(String dateTimeString) {
         try {
             LocalDateTime.parse(dateTimeString, dateTimeFormat);
@@ -56,7 +75,11 @@ public class Event extends Task {
         return false;
     }
 
-
+    /**
+     * A method that takes in a string and check if its in date format
+     * @param dateString duedate string
+     * @return A boolean that indicates if a string is in date format
+     */
     private boolean isDateFormat(String dateString) {
         try {
             LocalDate.parse(dateString, dateFormat);
@@ -67,7 +90,11 @@ public class Event extends Task {
         return false;
     }
 
-
+    /**
+     * Takes in a dateTime object and converts it to the correct string display format
+     * @param dateTime dateTime object
+     * @return Formatted string containing details of the dateTime object
+     */
     public String formatDateTime(LocalDateTime dateTime) {
         String day = dateTime.getDayOfMonth() < 10 ? "0" + dateTime.getDayOfMonth() : "" + dateTime.getDayOfMonth();
         String month = dateTime.getMonthValue() < 10 ? "0" + dateTime.getMonthValue() : "" + dateTime.getMonthValue();
@@ -77,6 +104,11 @@ public class Event extends Task {
         return day + "-" + month + "-" + year + " " + hour + ":" + minute;
     }
 
+    /**
+     * Takes in a date object and converts it to the correct string display format
+     * @param date date object
+     * @return Formatted string containing details of the Date object
+     */
     public String formatDate(LocalDate date) {
         String day = date.getDayOfMonth() < 10 ? "0" + date.getDayOfMonth() : "" + date.getDayOfMonth();
         String month = date.getMonthValue() < 10 ? "0" + date.getMonthValue() : "" + date.getMonthValue();

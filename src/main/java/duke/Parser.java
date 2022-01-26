@@ -15,11 +15,18 @@ public class Parser {
         }
     }
 
+    /**
+     * Method that takes in a command Type and index and performs the appropriate task action
+     * @param commandType type of command user has inputted (i.e. bye, list...)
+     * @param index taskId
+     * @throws DukeException if task cannot be found within the tasklist
+     * @throws NumberFormatException if taskId is not a number.
+     */
     public void taskAction(CommandType commandType, String index) throws DukeException, NumberFormatException {
         try {
             int taskId = Integer.parseInt(index);
             if (!(taskId > 0 && taskId < (TaskList.getTaskSize() + 1))) {
-                throw new DukeException("tasks.Task cannot be found within the task list! Please fix your machigai!");
+                throw new DukeException("Task cannot be found within the task list! Please fix your machigai!");
             }
 
             switch (commandType) {
@@ -35,12 +42,17 @@ public class Parser {
             }
 
         } catch (NumberFormatException e) {
-            throw new DukeException("tasks.Task ID has to be an integer!");
+            throw new DukeException("Task ID has to be an integer!");
         }
 
     }
 
-
+    /**
+     * Method that parses the string input and performs the correct action
+     * @param input user input into the command lines
+     * @return true if the command that has been inputted equals "bye", else return false
+     * @throws DukeException if the command is invalid
+     */
     public boolean parseInput(String input) throws DukeException {
         String[] inputArray = input.split(" ");
 
@@ -98,20 +110,20 @@ public class Parser {
                 case TODO:
                     Task ToDo = new Todo(taskDetails);
                     if (taskDetails.equals("")) {
-                        throw new DukeException("tasks.Todo command is invalid!");
+                        throw new DukeException("Todo command is invalid!");
                     }
                     TaskList.addTask(ToDo);
                     break;
                 case DEADLINE:
                     if (description.equals("") || date.equals("")) {
-                        throw new DukeException("tasks.Deadline command is invalid!");
+                        throw new DukeException("Deadline command is invalid!");
                     }
                     Task Deadline = new Deadline(description, date);
                     TaskList.addTask(Deadline);
                     break;
                 case EVENT:
                     if (dateTime.equals("") || description.equals("")) {
-                        throw new DukeException("tasks.Event command is invalid");
+                        throw new DukeException("Event command is invalid");
                     }
                     Task Event = new Event(description, dateTime);
                     TaskList.addTask(Event);
