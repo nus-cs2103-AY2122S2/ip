@@ -10,7 +10,11 @@ import duke.ui.UiManager;
 
 import java.time.format.DateTimeParseException;
 
-
+/**
+ * AddTaskCommand Object that adds Task Objects to task list
+ * in TaskManager Object.
+ *
+ */
 public class AddTaskCommand extends Command{
     private String description;
     private String date;
@@ -18,6 +22,15 @@ public class AddTaskCommand extends Command{
     private UiManager uiManager;
     private Type type;
 
+    /**
+     * Constructs AddTaskCommand Object.
+     *
+     * @param um UiManager Object to handle input and output processes
+     * @param tm TaskManager Object to receive Task Objects
+     * @param task Task Object to be added
+     * @param t Type of Task Object
+     * @throws DateException if an invalid String is passed
+     */
     public AddTaskCommand(UiManager um, TaskManager tm, String task, Type t) throws DateException {
         this.uiManager = um;
         this.taskManager = tm;
@@ -45,6 +58,11 @@ public class AddTaskCommand extends Command{
         }
     }
 
+    /**
+     * Inserts Task Object into the TaskManager's
+     * task list without printing.
+     * Used during initialisation of program.
+     */
     public void insert() {
         try {
             switch (type) {
@@ -66,6 +84,11 @@ public class AddTaskCommand extends Command{
         }
     }
 
+    /**
+     * Inserts Task Object into TaskManager Object's task list.
+     *
+     * @throws DateTimeParseException if an invalid String is passed for date
+     */
     public void execute() throws DateTimeParseException{
         switch (type) {
             case TODO:

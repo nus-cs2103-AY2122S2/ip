@@ -13,6 +13,10 @@ import java.io.FileNotFoundException;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * CommandManager Object that handles initialisation,
+ * receiving and dispatching of commands.
+ */
 public class CommandManager {
     private final TaskManager tm;
     private final UiManager um;
@@ -21,6 +25,9 @@ public class CommandManager {
     private boolean isOpen;
 
 
+    /**
+     * Constructs the CommandManager Object.
+     */
     public CommandManager() {
         this.um = new UiManager();
         this.tm = new TaskManager(this.um);
@@ -29,14 +36,19 @@ public class CommandManager {
         this.loader = new TextLoader(this.um, this.tm, this.storage);
     }
 
-    public void open() {
-        this.isOpen = true;
-    }
-
+    /**
+     * Sets the boolean isOpen to false.
+     */
     public void close() {
         this.isOpen = false;
     }
 
+    /**
+     * Initialises and runs the program.
+     * Scans String input from console and issues
+     * commands to different objects via switching.
+     * Checks for and handles errors.
+     */
     public void run() {
         um.welcome();
         try {
@@ -107,7 +119,6 @@ public class CommandManager {
             } catch (DateTimeParseException e) {
                 um.errorMessage("Invalid date! Please use the format 'YYYY-MM-DD'");
             }
-
         } while (this.isOpen);
         sc.close();
     }

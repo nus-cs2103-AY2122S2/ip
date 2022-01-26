@@ -3,17 +3,33 @@ import duke.exceptions.InvalidOperationException;
 
 import java.time.LocalDate;
 
+/**
+ * Task Object of type Deadline.
+ * A Deadline Object can hold a String description, a LocalDate date,
+ * and a boolean isDone.
+ */
 public class Deadline extends Task {
     private String item;
     private LocalDate date;
     private boolean done;
 
+    /**
+     * Constructs the Deadline Object.
+     *
+     * @param details Description of the task
+     * @param date String to be converted to a LocalDate object
+     */
     public Deadline(String details, String date) {
         this.item = details;
         date = date.stripLeading();
         this.date = LocalDate.parse(date);
     }
 
+    /**
+     * Marks the boolean isDone as true.
+     *
+     * @throws InvalidOperationException if isDone is already true
+     */
     @Override
     public void mark() throws InvalidOperationException {
         if (this.done) {
@@ -23,6 +39,11 @@ public class Deadline extends Task {
 
     }
 
+    /**
+     * Marks the boolean isDone as false.
+     *
+     * @throws InvalidOperationException if isDone is already true
+     */
     @Override
     public void unmark() throws InvalidOperationException {
         if (!this.done) {
@@ -32,6 +53,9 @@ public class Deadline extends Task {
 
     }
 
+    /**
+     * @return a String representation of the Deadline Object
+     */
     @Override
     public String toString() {
         if (done) {
