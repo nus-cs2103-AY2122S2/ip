@@ -68,8 +68,11 @@ public class Save {
                 br.close();
             }
         }
-        catch (IOException | DukeException e) {
-            System.out.println("An error occurred while reading file");
+        catch (IOException e) {
+            System.out.println("An error occured while reading file");
+        }
+        catch (DukeException e) {
+            System.out.println(e.getErrorMsg());
         }
 
     }
