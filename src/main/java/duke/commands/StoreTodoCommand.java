@@ -35,7 +35,7 @@ public class StoreTodoCommand extends StoreCommand {
     @Override
     public void execute(TaskList taskList, Ui io, Storage storage) throws DukeException {
         io.showMessage("Got it. I've added this task:\n       "
-                + taskList.addTodoTask(tokens).toString()
+                + taskList.addTodoTask(tokens)
                 + "\n     Now you have " + taskList.getSize() + " task(s) in the list.");
         super.execute(taskList, io, storage);
     }

@@ -35,7 +35,7 @@ public class StoreDeadlineCommand extends StoreCommand {
     @Override
     public void execute(TaskList taskList, Ui io, Storage storage) throws DukeException {
         io.showMessage("Got it. I've added this task:\n       "
-                + taskList.addDeadlineTask(tokens).toString()
+                + taskList.addDeadlineTask(tokens)
                 + "\n     Now you have " + taskList.getSize() + " task(s) in the list.");
         super.execute(taskList, io, storage);
     }

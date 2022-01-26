@@ -76,7 +76,7 @@ public class Parser {
         try {
             index = Integer.parseInt(tokens[1]) - 1;
         } catch (Exception exception) {
-            throw new DukeException("Invalid input! Please enter the number of the task you want to mark.");
+            throw new DukeException("Invalid input! Please enter the number of the task you want to mark/unmark.");
         }
         return new MarkCommand(index, isMark);
     }

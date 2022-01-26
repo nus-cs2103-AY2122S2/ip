@@ -6,6 +6,12 @@ import duke.tasks.TaskList;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a find command recognized by the parser.
+ * FindCommand object stores a String that is to be used for searching. Upon
+ * execution of the object, it will attempt to search for tasks in the task list
+ * with description matching that of searchString.
+ */
 public class FindCommand extends Command {
 
     protected String searchString;

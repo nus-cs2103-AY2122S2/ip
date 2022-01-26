@@ -35,7 +35,7 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui io, Storage storage) throws DukeException {
         io.showMessage("Noted. I've removed this task:\n       "
-                + taskList.remove(index).toString()
+                + taskList.remove(index)
                 + "\n     Now you have " + taskList.getSize() + " task(s) in the list.");
         storage.save(taskList);
     }

@@ -17,50 +17,54 @@ public class TaskList implements Serializable {
         return tasks.size();
     }
 
-    public Task remove(int idx) throws DukeException {
+    public String remove(int idx) throws DukeException {
         try {
-            return tasks.remove(idx);
+            return tasks.remove(idx).toString();
         } catch (Exception e) {
             throw new DukeException("Invalid input! This task number does not exist.");
         }
     }
 
-    public Task get(int idx) {
-        return tasks.get(idx);
-    }
-
-    public Task markTask(int idx, boolean isMark) throws DukeException {
+    public String markTask(int idx, boolean isMark) throws DukeException {
         try {
             Task task = tasks.get(idx);
             task.setCompleted(isMark);
-            return task;
+            return task.toString();
         } catch (Exception e) {
             throw new DukeException("Invalid input! This task number does not exist.");
         }
     }
 
-    public Todo addTodoTask(String[] token) throws DukeException {
+    public String addTodoTask(String[] token) throws DukeException {
         Todo task = Todo.createTask(token);
         tasks.add(task);
-        return task;
+        return task.toString();
     }
 
-    public Deadline addDeadlineTask(String[] token) throws DukeException {
+    public String addDeadlineTask(String[] token) throws DukeException {
         Deadline task = Deadline.createTask(token);
         tasks.add(task);
-        return task;
+        return task.toString();
     }
 
-    public Event addEventTask(String[] token) throws DukeException {
+    public String addEventTask(String[] token) throws DukeException {
         Event task = Event.createTask(token);
         tasks.add(task);
-        return task;
+        return task.toString();
+    }
+
+    public ArrayList<String> list() {
+        ArrayList<String> taskSet = new ArrayList<>();
+        for (Task task : tasks) {
+            taskSet.add(task.toString());
+        }
+        return taskSet;
     }
 
     public ArrayList<String> search(String searchString) {
         ArrayList<String> taskSet = new ArrayList<>();
         for (Task task : tasks) {
-            if (task.item.contains(searchString)) {
+            if (task.description.contains(searchString)) {
                 taskSet.add(task.toString());
             }
         }
