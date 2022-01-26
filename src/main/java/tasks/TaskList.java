@@ -24,4 +24,8 @@ public class TaskList {
 	public Task get(int index) {
 		return TASKLIST.get(index);
 	}
+
+	public void set(int index, Task task){
+		TASKLIST.set(index, task);
+	}
 }
