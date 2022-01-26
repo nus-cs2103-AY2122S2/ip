@@ -3,17 +3,16 @@ import java.util.Scanner;
 
 public class TextUi {
     private final Scanner scanner;
+    private static final String DIVIDER = "===================================================";
+    private static final String logo = " ____        _\n"
+            + "|  _ \\ _   _| | _____\n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
 
     public TextUi() {
         scanner = new Scanner(System.in);
     }
-
-    private static final String DIVIDER = "===================================================";
-    private static final String logo = " ____        _\n"
-                                    + "|  _ \\ _   _| | _____\n"
-                                    + "| | | | | | | |/ / _ \\\n"
-                                    + "| |_| | |_| |   <  __/\n"
-                                    + "|____/ \\__,_|_|\\_\\___|\n";
 
     public void greeting() {
         System.out.println("Konnichiwassup from\n" + logo);
@@ -37,7 +36,5 @@ public class TextUi {
         return scanner.nextLine();
     }
 
-    public void closeScanner() {
-        scanner.close();
-    }
+    public void closeScanner() { scanner.close(); }
 }

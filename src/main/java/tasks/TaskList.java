@@ -20,7 +20,8 @@ public class TaskList {
         Task preview = tasks.get(taskId - 1);
         tasks.remove(taskId - 1);
         Storage.writeToDukeFile();
-        System.out.println("Otsukaresamadeshita! You have finally completed one task.\n" + preview);
+        System.out.println("Otsukaresamadeshita! You have finally completed one task.\n"
+                + preview);
     }
 
 
@@ -30,13 +31,15 @@ public class TaskList {
             toSet.markIsDone();
             tasks.set(taskId - 1, toSet);
             Storage.writeToDukeFile();
-            System.out.println("Sugoi! I have marked this task as done!\n" + tasks.get(taskId - 1).toString());
+            System.out.println("Sugoi! I have marked this task as done!\n"
+                    + tasks.get(taskId - 1).toString());
         } else {
             if (toSet.isDone) {
                 toSet.markUndone();
                 tasks.set(taskId - 1, toSet);
                 Storage.writeToDukeFile();
-                System.out.println("Daijoubu! I have unmarked this task for you!\n" + tasks.get(taskId - 1).toString());
+                System.out.println("Daijoubu! I have unmarked this task for you!\n"
+                        + tasks.get(taskId - 1).toString());
             } else {
                 throw new DukeException("This task has yet to be done!");
             }
@@ -47,7 +50,8 @@ public class TaskList {
         System.out.println("Added as per your request: " + task);
         tasks.add(task);
         Storage.writeToDukeFile();
-        System.out.println("You now have a total of " + tasks.size() + " tasks in your list! Subarashii!");
+        System.out.println("You now have a total of "
+                + tasks.size() + " tasks in your list! Subarashii!");
     }
 
 

@@ -19,10 +19,10 @@ public class Deadline extends Task {
         } else if (isDateTimeFormat(by)) {
             this.byTime = LocalDateTime.parse(by, dateTimeFormat);
         } else {
-            throw new DukeException("The date format parsed is incorrect! It should be dd-MM-yyyy or dd-MM-yyyy HH:mm!");
+            throw new DukeException("The date format parsed is incorrect!" +
+                    "It should be dd-MM-yyyy or dd-MM-yyyy HH:mm!");
         }
     }
-
 
     @Override
     public String toFileFormat() {
@@ -63,17 +63,29 @@ public class Deadline extends Task {
     }
 
     public String formatDateTime(LocalDateTime dateTime) {
-        String day = dateTime.getDayOfMonth() < 10 ? "0" + dateTime.getDayOfMonth() : "" + dateTime.getDayOfMonth();
-        String month = dateTime.getMonthValue() < 10 ? "0" + dateTime.getMonthValue() : "" + dateTime.getMonthValue();
+        String day = dateTime.getDayOfMonth() < 10
+                ? "0" + dateTime.getDayOfMonth()
+                : "" + dateTime.getDayOfMonth();
+        String month = dateTime.getMonthValue() < 10
+                ? "0" + dateTime.getMonthValue()
+                : "" + dateTime.getMonthValue();
         Integer year = dateTime.getYear();
-        String hour = dateTime.getHour() < 10 ? "0" + dateTime.getHour() : "" + dateTime.getHour();
-        String minute = dateTime.getMinute() < 10 ? "0" + dateTime.getMinute() : "" +  dateTime.getMinute();
+        String hour = dateTime.getHour() < 10
+                ? "0" + dateTime.getHour()
+                : "" + dateTime.getHour();
+        String minute = dateTime.getMinute() < 10
+                ? "0" + dateTime.getMinute()
+                : "" +  dateTime.getMinute();
         return day + "-" + month + "-" + year + " " + hour + ":" + minute;
     }
 
     public String formatDate(LocalDate date) {
-        String day = date.getDayOfMonth() < 10 ? "0" + date.getDayOfMonth() : "" + date.getDayOfMonth();
-        String month = date.getMonthValue() < 10 ? "0" + date.getMonthValue() : "" + date.getMonthValue();
+        String day = date.getDayOfMonth() < 10
+                ? "0" + date.getDayOfMonth()
+                : "" + date.getDayOfMonth();
+        String month = date.getMonthValue() < 10
+                ? "0" + date.getMonthValue()
+                : "" + date.getMonthValue();
         Integer year = date.getYear();
         return day + "-" + month + "-" + year;
     }

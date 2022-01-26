@@ -19,23 +19,23 @@ public class Parser {
         try {
             int taskId = Integer.parseInt(index);
             if (!(taskId > 0 && taskId < (TaskList.getTaskSize() + 1))) {
-                throw new DukeException("tasks.Task cannot be found within the task list! Please fix your machigai!");
+                throw new DukeException("Task cannot be found within the task list! Please fix your machigai!");
             }
 
             switch (commandType) {
-                case DELETE:
-                    TaskList.deleteTask(taskId);
-                    break;
-                case UNMARK:
-                    TaskList.markTask(taskId, false);
-                    break;
-                case MARK:
-                    TaskList.markTask(taskId, true);
-                    break;
+            case DELETE:
+                TaskList.deleteTask(taskId);
+                break;
+            case UNMARK:
+                TaskList.markTask(taskId, false);
+                break;
+            case MARK:
+                TaskList.markTask(taskId, true);
+                break;
             }
 
         } catch (NumberFormatException e) {
-            throw new DukeException("tasks.Task ID has to be an integer!");
+            throw new DukeException("Task ID has to be an integer!");
         }
 
     }
@@ -70,8 +70,8 @@ public class Parser {
                 }
             }
 
+            // task variables
             String taskDetails = taskDetailsBuilder.toString();
-
             String description = "";
             String date = "";
             String dateTime = "";
@@ -85,39 +85,38 @@ public class Parser {
             }
 
             switch (commandType) {
-
-                case DELETE:
-                    taskAction(CommandType.DELETE, inputArray[1]);
-                    break;
-                case UNMARK:
-                    taskAction(CommandType.UNMARK, inputArray[1]);
-                    break;
-                case MARK:
-                    taskAction(CommandType.MARK, inputArray[1]);
-                    break;
-                case TODO:
-                    Task ToDo = new Todo(taskDetails);
-                    if (taskDetails.equals("")) {
-                        throw new DukeException("tasks.Todo command is invalid!");
-                    }
-                    TaskList.addTask(ToDo);
-                    break;
-                case DEADLINE:
-                    if (description.equals("") || date.equals("")) {
-                        throw new DukeException("tasks.Deadline command is invalid!");
-                    }
-                    Task Deadline = new Deadline(description, date);
-                    TaskList.addTask(Deadline);
-                    break;
-                case EVENT:
-                    if (dateTime.equals("") || description.equals("")) {
-                        throw new DukeException("tasks.Event command is invalid");
-                    }
-                    Task Event = new Event(description, dateTime);
-                    TaskList.addTask(Event);
-                    break;
-                default:
-                    throw new DukeException("Sumimasen! I don't recognize this command. Please try again!");
+            case DELETE:
+                taskAction(CommandType.DELETE, inputArray[1]);
+                break;
+            case UNMARK:
+                taskAction(CommandType.UNMARK, inputArray[1]);
+                break;
+            case MARK:
+                taskAction(CommandType.MARK, inputArray[1]);
+                break;
+            case TODO:
+                Task ToDo = new Todo(taskDetails);
+                if (taskDetails.equals("")) {
+                    throw new DukeException("Todo command is invalid!");
+                }
+                TaskList.addTask(ToDo);
+                break;
+            case DEADLINE:
+                if (description.equals("") || date.equals("")) {
+                    throw new DukeException("Deadline command is invalid!");
+                }
+                Task Deadline = new Deadline(description, date);
+                TaskList.addTask(Deadline);
+                break;
+            case EVENT:
+                if (dateTime.equals("") || description.equals("")) {
+                    throw new DukeException("Event command is invalid");
+                }
+                Task Event = new Event(description, dateTime);
+                TaskList.addTask(Event);
+                break;
+            default:
+                throw new DukeException("Sumimasen! I don't recognize this command. Please try again!");
             }
         }
 
