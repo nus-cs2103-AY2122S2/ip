@@ -22,6 +22,11 @@ public class Deadline extends Task{
         this.ld = ld;
     }
 
+    public Deadline(String description, LocalDate ld, boolean isDone) {
+        super(description);
+        this.ld = ld;
+        this.isDone = isDone;
+    }
     @Override
     public String toString() {
         if(ld == null) {
@@ -35,6 +40,7 @@ public class Deadline extends Task{
     @Override
     public String getDetail(){
         int status = isDone ? 1 : 0;
-        return "E" + " | " + status + " | " + this.description + " | " + this.by + "\n";
+        String t = this.by == null ? ld.toString() : this.by;
+        return "D" + " | " + status + " | " + this.description + " | " + t + "\n";
     }
 }

@@ -12,7 +12,6 @@ public class Storage {
     public Storage(String filePath) {
         String[] pathArr = filePath.split("/");
         String directoryPath = "/" + pathArr[0];
-        System.out.println(directoryPath);
         try {
             file = new File(System.getProperty("user.dir") + "/" + filePath);
             if(!file.isFile()) {
@@ -49,7 +48,6 @@ public class Storage {
                 nextLine = sc.nextLine();
                 Task task = Parser.parseFileLine(nextLine);
                 taskList.add(task);
-                System.out.println("one task loaded");
             }
         } catch (FileNotFoundException e){
             System.out.println(e.getMessage() + " error loading ");

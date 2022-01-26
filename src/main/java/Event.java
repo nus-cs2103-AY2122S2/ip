@@ -20,6 +20,12 @@ public class Event extends Task{
         this.ld = ld;
     }
 
+    public Event(String description, LocalDate ld, boolean isDone) {
+        super(description);
+        this.ld = ld;
+        this.isDone = isDone;
+    }
+
     @Override
     public String toString() {
         if(ld == null) {
@@ -32,6 +38,7 @@ public class Event extends Task{
     @Override
     public String getDetail(){
         int status = isDone ? 1 : 0;
-        return "E" + " | " + status + " | " + this.description + " | " + this.time + "\n";
+        String t = this.time == null ? ld.toString() : this.time;
+        return "E" + " | " + status + " | " + this.description + " | " + t + "\n";
     }
 }

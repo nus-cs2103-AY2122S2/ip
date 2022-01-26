@@ -14,4 +14,12 @@ public class Ui {
     public void greet() {
         System.out.println("Nice to see you again, What can I do for you?");
     }
+
+    public void print(String message) {
+        System.out.println(message);
+    }
+
+    public void sayBye() {
+        System.out.println("bye !!!");
+    }
 }

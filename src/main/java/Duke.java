@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class Duke {
 
+
     //constructor
     private TaskList taskList;
     private Storage storage;
@@ -15,12 +16,7 @@ public class Duke {
     public Duke(String filePath) {
         storage = new Storage(filePath);
         ui = new Ui();
-//        try {
-            taskList = new TaskList(storage.load());
-            System.out.println("loading?");
-//        } catch(DukeException e) {
-//            System.out.println(e.toString());
-//        }
+        taskList = new TaskList(storage.load());
     }
 
     public void run(){
@@ -29,15 +25,19 @@ public class Duke {
         while(true) {
             try {
                 input = ui.nextLine().trim();
-                if(Parser.parseInputLine(input, taskList) == false) {
-                    break;
+                if(Parser.isExit(input)) {
+                    ui.sayBye();
+                    return;
                 }
+                String message = Parser.parseInputLine(input, taskList);
+                ui.print(message);
+                storage.save(taskList.getTaskList());
+
             }
             catch (DukeException e) {
                 System.out.println(e.toString());
             }
         }
-        storage.save(taskList.getTaskList());
 
     }
 
