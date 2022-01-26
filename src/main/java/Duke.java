@@ -73,7 +73,7 @@ public class Duke {
                         System.out.println("Got it. I've added this task:");
                         System.out.println(todo);
                     } else if (instructionType.equals(InstructionType.DEADLINE)) {
-                        String[] taskArr = title.split(" /by");
+                        String[] taskArr = title.split(" /by ");
                         String taskTitle = taskArr[0];
                         String dueBy = taskArr[1];
 
@@ -83,7 +83,7 @@ public class Duke {
                         System.out.println("Got it. I've added this task:");
                         System.out.println(deadline.toString());
                     } else if (instructionType.equals(InstructionType.EVENT)) {
-                        String[] taskArr = title.split(" /at");
+                        String[] taskArr = title.split(" /at ");
                         String taskTitle = taskArr[0];
                         String eventAt = taskArr[1];
 
@@ -100,7 +100,7 @@ public class Duke {
                 System.out.println("  ===================================");
             }
         } catch (DukeException e) {
-            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            System.out.println(e.getMessage());
             System.out.println("  ===================================");
         } catch (EmptyTodoException e) {
             System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
