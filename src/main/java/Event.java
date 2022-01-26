@@ -27,7 +27,12 @@ public class Event extends Task {
     @Override
     public String toDataString() {
         String isDone = super.isMarked() ? "1" : "0";
-        return getTaskIcon() + " | " + isDone + " | " + taskName + " | " + eventDate;
+        if (eventTime != null) {
+            return getTaskIcon() + " | " + isDone + " | " + taskName 
+                    + " | " + eventDate + " | " + eventTime;
+        } else {
+            return getTaskIcon() + " | " + isDone + " | " + taskName + " | " + eventDate;
+        }
     }
 
     @Override
@@ -35,7 +40,7 @@ public class Event extends Task {
         if (eventTime != null) {
             return "[" + getTaskIcon() + "][" + super.getStatusIcon() + "] " +
                     super.taskName + " (at: " + dateFormatter.format(eventDate)
-                    + timeFormatter.format(eventTime) + ")";
+                    + " " + timeFormatter.format(eventTime) + ")";
         } else {
             return "[" + getTaskIcon() + "][" + super.getStatusIcon() + "] " +
                     super.taskName + " (at: " + dateFormatter.format(eventDate) + ")";

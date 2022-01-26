@@ -27,7 +27,12 @@ public class Deadline extends Task {
     @Override
     public String toDataString() {
         String isDone = super.isMarked() ? "1" : "0";
-        return getTaskIcon() + " | " + isDone + " | " + taskName + " | " + deadlineDate;
+        if (deadlineTime != null) {
+            return getTaskIcon() + " | " + isDone + " | " + taskName 
+                    + " | " + deadlineDate + " | " + deadlineTime;
+        } else {
+            return getTaskIcon() + " | " + isDone + " | " + taskName + " | " + deadlineDate;
+        }
     }
 
     @Override
@@ -35,7 +40,7 @@ public class Deadline extends Task {
         if (deadlineTime != null) {
             return "[" + getTaskIcon() + "][" + super.getStatusIcon() + "] " +
                     super.taskName + " (by: " + dateFormatter.format(deadlineDate)
-                    + timeFormatter.format(deadlineTime) + ")";
+                    + " " + timeFormatter.format(deadlineTime) + ")";
         } else {
             return "[" + getTaskIcon() + "][" + super.getStatusIcon() + "] " +
                     super.taskName + " (by: " + dateFormatter.format(deadlineDate) + ")";

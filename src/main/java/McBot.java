@@ -57,19 +57,24 @@ public class McBot {
                 if (!folder.exists()) {
                     boolean isFolderCreated = folder.mkdir();
                     boolean isFileCreated = f.createNewFile();
-                    if (isFolderCreated && isFileCreated)
+                    if (isFolderCreated && isFileCreated) {
+                        System.out.println(frameLine);
                         System.out.println("I'ave created a new folder and file for ya, data/McBot.txt to save yer list");
+                        System.out.println(frameLine);
+                    }
                 } else {
                     boolean isFileCreated = f.createNewFile();
-                    if (isFileCreated)
+                    if (isFileCreated) {
+                        System.out.println(frameLine);
                         System.out.println("I'ave created a new file for ya, data/McBot.txt to save yer list");
+                        System.out.println(frameLine);
+                    }
                 }
             }
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
                 String[] str = s.nextLine().split(" \\| ");
                 Task t;
-                
                 switch (str[0]) {
                 case "T": {
                     t = new ToDo(str[2]);
@@ -77,12 +82,22 @@ public class McBot {
                 }
                 case "D": {
                     LocalDate date = LocalDate.parse(str[3]);
-                    t = new Deadline(str[2], date);
+                    if (str.length == 5) {
+                        LocalTime time = LocalTime.parse(str[4]);
+                        t = new Deadline(str[2], date, time);
+                    } else {
+                        t = new Deadline(str[2], date);
+                    }
                     break;
                 }
                 case "E": {
                     LocalDate date = LocalDate.parse(str[3]);
-                    t = new Event(str[2], date);
+                    if (str.length == 5) {
+                        LocalTime time = LocalTime.parse(str[4]);
+                        t = new Event(str[2], date, time);
+                    } else {
+                        t = new Event(str[2], date);
+                    }
                     break;
                 }
                 default:
