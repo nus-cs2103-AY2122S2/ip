@@ -1,12 +1,13 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
 public class Duke {
 
-    public static void main(String[] args) {
-        //Task[] listOfThings = new Task[100];
-        ArrayList<Task> listOfThings = new ArrayList<>();
+    static ArrayList<Task> listOfThings = new ArrayList<>();
+
+    public static void main(String[] args) throws IOException {
 
         String line = "____________________________________________________________";
         String indentation = "    ";
@@ -21,11 +22,12 @@ public class Duke {
         System.out.println(indentation + line);
         System.out.println(indentation + "Hello! I'm Duke\n" + indentation + "What can I do for you?");
         System.out.println(indentation + line);
-
-        Scanner sc= new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         String str = " ";
 
-        while(true){
+        File dataFile = loadFile();
+
+        while(true) {
             str = sc.nextLine();
             if (str.equals("list")) {
 
@@ -34,15 +36,17 @@ public class Duke {
                     System.out.println(indentation + "List is currently empty");
                     System.out.println(indentation + line);
                     continue;
-
                 }
+
                 System.out.println(indentation + line);
                 int numbering = 1;
                 for (Task t: listOfThings) {
                     System.out.println(indentation + String.valueOf(numbering) + ". "  + t.toString() + t.getStatus() + " " + t.getDescription());
                     numbering++;
                 }
+
                 System.out.println(indentation + line);
+
             }  else if(str.equals("bye")) {
                 System.out.println(indentation + line);
                 System.out.println(indentation + "Bye. Hope to see you again soon!");
@@ -56,6 +60,7 @@ public class Duke {
                     System.out.println(indentation + "OK, I've marked this task as not done yet:");
                     System.out.println(indentation + "  " + listOfThings.get(num - 1).toString() + listOfThings.get(num - 1).getStatus() + " " + listOfThings.get(num - 1).getDescription());
                     System.out.println(indentation + line);
+                    saveDataToFile(listOfThings);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(indentation + line);
                     System.out.println(indentation + "No such element in the list. Try again");
@@ -69,6 +74,7 @@ public class Duke {
                     System.out.println(indentation + "Nice! I've marked this task as done:");
                     System.out.println(indentation + "  " + listOfThings.get(num - 1).toString() + listOfThings.get(num - 1).getStatus() + " " + listOfThings.get(num - 1).getDescription());
                     System.out.println(indentation + line);
+                    saveDataToFile(listOfThings);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(indentation + line);
                     System.out.println(indentation + "No such element in the list. Try again");
@@ -83,6 +89,7 @@ public class Duke {
                 listOfThings.remove(num - 1);
                 System.out.println(indentation + "Now you have " + listOfThings.size() +" tasks in the list.");
                 System.out.println(indentation + line);
+                saveDataToFile(listOfThings);
             } else {
                     if (str.contains("todo")) {
                         try {
@@ -98,6 +105,7 @@ public class Duke {
                             System.out.println(indentation + "  " + newToDo.toString() + newToDo.getStatus() + " " + newToDo.getDescription());
                             System.out.println(indentation + "Now you have " + String.valueOf(listOfThings.size()) + " tasks in the list.");
                             System.out.println(indentation + line);
+                            appendToFile(dataFile, newToDo);
                         } catch (StringIndexOutOfBoundsException e) {
                             System.out.println(indentation + line);
                             System.out.println("      OOPS!!! The description of a todo cannot be empty.");
@@ -115,7 +123,7 @@ public class Duke {
                             System.out.println(indentation + "  " + newDeadline.toString() + newDeadline.getStatus() + " " + newDeadline.getDescription());
                             System.out.println(indentation + "Now you have " + String.valueOf(listOfThings.size()) + " tasks in the list.");
                             System.out.println(indentation + line);
-
+                            appendToFile(dataFile, newDeadline);
                         } catch (StringIndexOutOfBoundsException e) {
                             System.out.println(indentation + line);
                             System.out.println("      OOPS!!! Incorrect format for entering deadlines");
@@ -134,6 +142,8 @@ public class Duke {
                             System.out.println(indentation + "  " + newEvent.toString() + newEvent.getStatus() + " " + newEvent.getDescription());
                             System.out.println(indentation + "Now you have " + String.valueOf(listOfThings.size()) + " tasks in the list.");
                             System.out.println(indentation + line);
+                            appendToFile(dataFile, newEvent);
+
                         } catch (StringIndexOutOfBoundsException e) {
                             System.out.println(indentation + line);
                             System.out.println("      OOPS!!! Incorrect format for entering events");
@@ -148,95 +158,91 @@ public class Duke {
             }
         }
     }
-}
 
-class Task {
-    enum Type {
-        E, T, D
+    public static void saveDataToFile(ArrayList<Task> taskArrayList) throws IOException {
+
+
+        String basePath = new File("").getAbsolutePath();
+        File file = new File(basePath + "/data/myfile.txt");
+        FileWriter fileWriter = new FileWriter(file, false);
+
+        for (Task task: taskArrayList) {
+            String toPrint = task.toString() + task.getStatus() +  task.getDescription();
+            fileWriter.write(toPrint + "\n");
+
+        }
+        fileWriter.close();
     }
 
-    protected String description;
-    protected boolean status;
+    public static File loadFile() throws IOException {
 
-    public Task(String description) {
-        this.description = description;
-        status = false;
+
+        String basePath = new File("").getAbsolutePath();
+        String dataDirectory = basePath + "/data";
+        File directory = new File(dataDirectory);
+        if (! directory.exists()){
+            directory.mkdir();
+            System.out.println("Data folder does not exist. Creating directory... ");
+            // If you require it to make the entire directory path including parents,
+            // use directory.mkdirs(); here instead.
+        }
+
+        File file = new File(basePath + "/data/Duke.txt");
+
+
+        if (file.createNewFile()) {
+            System.out.println("Duke Text File does not exist. Creating file...");
+            return file;
+        }
+
+        System.out.println("Loading up data...");
+
+        Scanner scanner = new Scanner(file);
+        while (scanner.hasNextLine()) {
+            String currentLine = scanner.nextLine();
+            if (currentLine.contains("[T]")) {
+                ToDos todo;
+                if (currentLine.charAt(4) == 'X') {
+                    todo = new ToDos(currentLine.substring(6), true);
+                    listOfThings.add(todo);
+                } else {
+                    todo = new ToDos(currentLine.substring(6));
+                    listOfThings.add(todo);
+                }
+            } else if (currentLine.contains("[D]")) {
+                String date = currentLine.substring(currentLine.indexOf('(')+5, currentLine.indexOf(')'));
+                Deadline deadline;
+                if (currentLine.charAt(4) == 'X') {
+                    deadline = new Deadline(currentLine.substring(6, currentLine.indexOf('(')-1), true, date);
+                } else {
+                    deadline = new Deadline(currentLine.substring(6, currentLine.indexOf('(')-1), date);
+                }
+                listOfThings.add(deadline);
+            } else if (currentLine.contains("[E]")) {
+                String date = currentLine.substring(currentLine.indexOf('(')+5, currentLine.indexOf(')'));
+                Event event;
+                if (currentLine.charAt(4) == 'X') {
+                    event = new Event(currentLine.substring(6, currentLine.indexOf('(')-1), true, date);
+                } else {
+                    event = new Event(currentLine.substring(6, currentLine.indexOf('(')-1), date);
+                }
+                listOfThings.add(event);
+            }
+        }
+
+        return file;
     }
 
-    String getStatus() {
-        return status ? "[X]" : "[ ]";
-    }
+    static void appendToFile(File file, Task task) throws IOException {
 
-    void markDone() {
-        this.status = true;
-    }
+        FileWriter fileWriter = new FileWriter(file, true);
+        String toPrint = task.toString() + task.getStatus() +  task.getDescription();
+        fileWriter.write(toPrint + "\n");
+        fileWriter.close();
 
-    void unmarkDone() {
-        this.status = false;
-    }
-
-    String getDescription(){
-        return this.description;
-    }
-
-}
-
-class ToDos extends Task {
-
-    public ToDos(String description) {
-        super(description);
-    }
-
-    @Override
-    public String toString() {
-        return "[" + Type.T + "]";
-    }
-
-}
-
-class Deadline extends Task {
-
-    private String date;
-
-    public Deadline(String description, String date) {
-        super(description);
-        this.date = date;
-    }
-
-    @Override
-    public String toString() {
-        return "[" + Type.D + "]";
-    }
-
-    public String getDate() {
-        return this.date;
-    }
-
-    @Override
-    String getDescription() {
-        return this.description + " (by: " + date + ")";
-    }
-}
-
-class Event extends Task {
-
-    private String date;
-
-    public Event(String description, String date) {
-        super(description);
-        this.date = date;
-    }
-
-    @Override
-    public String toString() {
-        return "[" + Type.E + "]";
-    }
-    public String getDate() {
-        return this.date;
-    }
-
-    @Override
-    String getDescription() {
-        return this.description + " (at: " + date + ")";
     }
 }
+
+
+
+
