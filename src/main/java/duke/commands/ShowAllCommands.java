@@ -10,7 +10,7 @@ public class ShowAllCommands extends Command<String> {
         execute();
     }
 
-    public void execute() {
+    private void execute() {
         System.out.print(Ui.lineDivider + "COMMANDS:\n");
         switch (Commands.LIST) {
             case LIST:

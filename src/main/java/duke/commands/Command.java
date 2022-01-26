@@ -3,7 +3,7 @@ package duke.commands;
 import duke.exception.DukeException;
 
 public abstract class Command<T> {
-    public void execute() throws DukeException, DukeException {}
+    private void execute() throws DukeException, DukeException {}
     public boolean isExit(){
         return true;
     }

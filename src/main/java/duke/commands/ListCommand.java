@@ -13,7 +13,7 @@ public class ListCommand extends Command<String> {
         execute();
     }
 
-    public void execute() throws DukeException {
+    private void execute() throws DukeException {
         System.out.print(Ui.lineDivider + "Here are the tasks in your list:\n");
         for (int i = 0; i < list.getSize(); i++) {
             System.out.printf("%d." + list.getTask(i).toString() + "\n", i+1);

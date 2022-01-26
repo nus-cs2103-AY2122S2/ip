@@ -19,7 +19,7 @@ public class AddTodoCommand extends Command<String> {
         execute();
     }
 
-    public void execute() throws DukeException {
+    private void execute() throws DukeException {
         String err = "Oh no! The description of todo cannot be empty... Try again :)\n";
         if (echo.length == 1) {
             throw new DukeException(err);

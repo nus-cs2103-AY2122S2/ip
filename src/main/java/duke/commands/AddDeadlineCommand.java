@@ -18,7 +18,8 @@ public class AddDeadlineCommand extends Command<String> {
         this.storage = storage;
         execute();
     }
-    public void execute() throws DukeException {
+
+    private void execute() throws DukeException {
         String err = "Oh no! The description of deadline cannot be empty... Try again :)\n";
         String wrongFormat = "Oh no! The format for deadline task is wrong... Try again :)\n";
         if (echo.length == 1) {

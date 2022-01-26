@@ -5,7 +5,7 @@ public class ByeCommand extends  Command<String> {
         execute();
     }
 
-    public void execute() {
+    private void execute() {
         isExit();
     }
 

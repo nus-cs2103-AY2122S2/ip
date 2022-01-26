@@ -39,8 +39,8 @@ public class Event extends Task {
 
     @Override
     public String getTaskData() {
-        return "[D]" + super.toString() +
-                " (by: " + this.date + ")";
+        return "[E]" + super.toString() +
+                " (at: " + this.date + ")";
     }
 
     @Override

@@ -21,7 +21,7 @@ public class MarkCommand extends Command<String> {
         execute();
     }
 
-    public void execute() throws DukeException {
+    private void execute() throws DukeException {
         String err = "Oh no! Which task do you wish to mark? Try again :)\n";
         String wrongNumber = "Oh no! This task number does not exist. Try again :)\n";
         String wrongFormat = "Oh no! Please do not spell out the number. Try again :)\n";

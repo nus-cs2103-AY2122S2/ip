@@ -19,7 +19,7 @@ public class AddEventCommand extends Command<String>{
         execute();
     }
 
-    public void execute() throws DukeException {
+    private void execute() throws DukeException {
         String err = "Oh no! The description of event cannot be empty... Try again :)\n";
         String wrongFormat = "Oh no! The format for event task is wrong... Try again :)\n";
         if (echo.length == 1) {
