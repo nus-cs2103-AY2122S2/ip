@@ -1,15 +1,24 @@
 package chatbot.task;
 
-public class Event extends Task {
-    private final String time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
-    public Event(String desc, String time) {
+public class Event extends Task {
+    private final LocalDate startDate;
+    private final LocalTime startTime;
+    private final LocalDate endDate;
+    private final LocalTime endTime;
+
+    public Event(String desc, LocalDate startDate, LocalTime startTime, LocalDate endDate, LocalTime endTime) {
         super(desc);
-        this.time = time;
+        this.startDate = startDate;
+        this.startTime = startTime;
+        this.endDate = endDate;
+        this.endTime = endTime;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + time + ")";
+        return "[E]" + super.toString() + " (at: " + startDate.toString() + " " + startTime.toString() + " to " + endDate.toString() + " " + endTime.toString() + ")";
     }
 }

@@ -3,6 +3,8 @@ package chatbot.command;
 import chatbot.task.Deadline;
 import chatbot.task.Task;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -11,27 +13,35 @@ public class DeadlineCommand implements Command {
 
     @Override
     public String execute(String[] input, ArrayList<Task> tasks) {
-        // Parse input.
         String desc = "";
-        String time = "";
+        LocalDate date = null;
+        LocalTime time = null;
         try {
             int i = 1;
-            while (i < input.length && !input[i].equals("/by")) {
+            while (i < input.length && !input[i].equals("/at")) {
                 ++i;
             }
             desc = String.join(" ", Arrays.asList(input).subList(1, i));
-            time = String.join(" ", Arrays.asList(input).subList(i + 1, input.length));
+            date = LocalDate.parse(input[i+1]);
+            time = LocalTime.parse(input[i+2]);
         } catch (Exception ignored) {
         }
 
+        String commandFormat = "Please enter the command as \"deadline <desc> /by <date> <time>\"\n" +
+                "Dates must be in YYYY-MM-DD format.\n" +
+                "Time must be in the HH:MM or HH:MM:SS format.";
         if (desc.isBlank()) {
-            return "☹ OOPS!!! The description of an deadline cannot be empty.";
-        } else if (time.isBlank()) {
-            return "☹ OOPS!!! The time of a deadline cannot be empty.";
+            return "Invalid description.\n" + commandFormat;
+        }
+        if (date == null) {
+            return "Invalid date.\n" + commandFormat;
+        }
+        if (time == null) {
+            return "Invalid time.\n" + commandFormat;
         }
 
         // Add event.
-        Task task = new Deadline(desc, time);
+        Task task = new Deadline(desc, date, time);
         tasks.add(task);
         return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", task, tasks.size());
     }

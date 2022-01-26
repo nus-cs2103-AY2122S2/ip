@@ -1,15 +1,20 @@
 package chatbot.task;
 
-public class Deadline extends Task {
-    private final String time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
-    public Deadline(String desc, String time) {
+public class Deadline extends Task {
+    private final LocalDate date;
+    private final LocalTime time;
+
+    public Deadline(String desc, LocalDate date, LocalTime time) {
         super(desc);
+        this.date = date;
         this.time = time;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + time + ")";
+        return "[D]" + super.toString() + " (by: " + date.toString() + " " + time.toString() + ")";
     }
 }
