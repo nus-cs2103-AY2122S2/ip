@@ -1,4 +1,6 @@
-import java.util.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
 
 
 public class Duke {
@@ -109,6 +111,7 @@ public class Duke {
                         + "   __________________________________________________";
                 System.out.println(errorMsg);
             }
+
             return true;
         }
     }
@@ -165,6 +168,22 @@ public class Duke {
 
     public static void main(String[] args) {
         welcome();
+
+        File dataFolder = new File ("/data");
+
+        if (!dataFolder.exists()) {
+            dataFolder.mkdir();
+        }
+
+        File dataFile = new File("/data/duke.txt");
+        if (!dataFile.exists()) {
+            try {
+                dataFile.createNewFile();
+            } catch (IOException e) {
+                System.out.println("An error occured :(" + e);
+            }
+        }
+
         Scanner sc = new Scanner(System.in);
         String userInput = sc.nextLine();
 
