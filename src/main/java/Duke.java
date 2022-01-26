@@ -104,11 +104,11 @@ public class Duke {
     }
 
     private static Task makeDeadline(String name, String by) {
-        return new Deadline(name, by);
+        return new Deadline(name, by.trim());
     }
 
     private static Task makeEvent(String name, String at) {
-        return new Event(name, at);
+        return new Event(name, at.trim());
     }
 
     private static void remove(int idx) {
