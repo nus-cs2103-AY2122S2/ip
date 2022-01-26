@@ -19,6 +19,7 @@ import li.zhongfu.cs2103.chatbot.types.Deadline;
 import li.zhongfu.cs2103.chatbot.types.Event;
 import li.zhongfu.cs2103.chatbot.types.Storage;
 import li.zhongfu.cs2103.chatbot.types.Task;
+import li.zhongfu.cs2103.chatbot.types.TaskList;
 import li.zhongfu.cs2103.chatbot.types.ToDo;
 
 public class Duke {
@@ -48,27 +49,6 @@ public class Duke {
 
     private static void dialog(String line) {
         dialog(line.split("\n"));
-    }
-
-    /**
-     * Takes a list of items and returns a list of strings representing the items in
-     * an (1-indexed) ordered list.
-     * 
-     * Each string in the list is of the form {@code n. foo}, where {@code n} is the
-     * index of the item (starting from 1)
-     * and {@code foo} is the string representation of the item.
-     * 
-     * @param <T>   the type of items in {@code items}
-     * @param items the list of items to be enumerated
-     * @return a list of strings representing the items in an 1-indexed ordered list
-     */
-    private static <T> List<String> enumerateList(List<T> items) {
-        List<String> enumerated = new ArrayList<>();
-        int idx = 0;
-        for (T item : items) {
-            enumerated.add(String.format("%d. %s", ++idx, item));
-        }
-        return enumerated;
     }
 
     /**
@@ -113,24 +93,16 @@ public class Duke {
         System.out.println("Hello from\n" + logo + "\n");
 
         Storage storage = new Storage("data/tasks.dat");
-        List<Task> tasks = new ArrayList<>();
+        TaskList tasks;
         try {
-            List<Object> objs = storage.load();
-            for (Object o : objs) {
-                if (o instanceof Task) {
-                    tasks.add((Task) o);
-                } else {
-                    // is this a good idea? but it catches null too
-                    throw new ClassCastException(String.format("Expected Task, got %s", o instanceof Object ? o.getClass().getName() : "null"));
-                }
-            }
-            System.out.println(String.format("%d tasks loaded.", tasks.size()));
+            tasks = TaskList.loadFromStorage(storage);
+            System.out.println(String.format("Loaded %s tasks.", tasks.size()));
         } catch (FileNotFoundException e) {
             System.out.println("No saved tasks file found, starting with an empty task list.");
-            tasks = new ArrayList<>();
-        } catch (StorageException | ClassCastException e) {
+            tasks = new TaskList();
+        } catch (StorageException e) {
             System.out.println("Error loading tasks! Starting with an empty task list.");
-            tasks = new ArrayList<>();
+            tasks = new TaskList();
         }
 
         dialog(new String[] {
@@ -180,7 +152,7 @@ public class Duke {
                         } else {
                             List<String> output = new ArrayList<>();
                             output.add("Here are the tasks in your list:");
-                            output.addAll(enumerateList(tasks));
+                            output.addAll(tasks.toEnumeratedList());
                             dialog(output.toArray(String[]::new));
                         }
                         break;
@@ -230,32 +202,22 @@ public class Duke {
 
                     case "reload":
                         try {
-                            List<Task> newTasks = new ArrayList<>();
-                            List<Object> objs = storage.load();
-                            for (Object o : objs) {
-                                if (o instanceof Task) {
-                                    newTasks.add((Task) o);
-                                } else {
-                                    // is this a good idea? but it catches null too
-                                    throw new ClassCastException(String.format("Expected Task, got %s", o instanceof Object ? o.getClass().getName() : "null"));
-                                }
-                            }
-                            tasks = newTasks;
+                            tasks = TaskList.loadFromStorage(storage);
                             dialog(String.format("Tasks reloaded; %d tasks in list now", tasks.size()));
-                        } catch (StorageException | ClassCastException e) {
-                            dialog("Error loading tasks! Skipping reload.");
                         } catch (FileNotFoundException e) {
                             dialog("Saved tasks file not found! Skipping reload.");
+                        } catch (StorageException e) {
+                            dialog("Error loading tasks! Skipping reload.");
                         }
                         break;
                     
                     case "save":
-                        storage.save(tasks);
+                        tasks.save(storage);
                         dialog("Tasks saved!");
                         break;
 
                     case "bye":
-                        storage.save(tasks);
+                        tasks.save(storage);
                         dialog("Bye. Hope to see you again soon!");
                         return;
 
