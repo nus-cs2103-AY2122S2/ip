@@ -13,12 +13,12 @@ public class Task {
     public String type;
 
     /**
-     * Constructor for Task class
+     * Constructor for the Task.
      *
-     * @param description The description of task submitted by the users
+     * @param description The description of the task.
+     * @param type The type of task (Deadline, Event, Todo).
      */
     public Task(String description, String type) {
-
         this.description = description;
         this.isDone = false;
         this.type = type;
@@ -58,6 +58,11 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * Return a string representation.
+     *
+     * @return Return a string.
+     */
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;

@@ -7,15 +7,32 @@ import funbox.util.Storage;
 import funbox.util.Parser;
 import funbox.task.Event;
 
+/**
+ * Deal with handling command for Event.
+ */
 public class EventCommand extends Command {
     String description;
     Parser parser;
+
+    /**
+     * Constructor class for EventCommand.
+     *
+     * @param description The description of the task.
+     */
     public EventCommand(String description) {
         super(false);
         this.description = description;
         this.parser = new Parser();
     }
 
+    /**
+     * Execute the command which add Event task.
+     *
+     * @param taskList List of tasks.
+     * @param ui Interface which interact with users.
+     * @param storage Stores user tasks locally.
+     * @throws FunBoxExceptions If description == ""
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws FunBoxExceptions {
         if (description.equals("")) {

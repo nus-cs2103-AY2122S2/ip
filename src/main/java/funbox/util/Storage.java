@@ -10,6 +10,9 @@ import funbox.task.Event;
 import funbox.task.Task;
 import funbox.task.ToDo;
 
+/**
+ * Deal with writing and reading user commands locally.
+ */
 public class Storage {
     private final String DIRURL = "data/";
     private final String FILEURL = "data/tasks.txt";
@@ -20,6 +23,12 @@ public class Storage {
     private TaskList taskList;
     HashMap<String, String> typeHashmap;
 
+    /**
+     * The constructor for the storage class.
+     *
+     * @param ui Interface which interact with users.
+     * @param parser Parses user commands.
+     */
     public Storage(Ui ui, Parser parser) {
         this.ui = ui;
         this.parser = parser;
@@ -29,12 +38,19 @@ public class Storage {
         preCheck();
     }
 
+    /**
+     * Sets up the hashmap
+     */
     private void setUpHashMap() {
         this.typeHashmap.put("D", "deadline");
         this.typeHashmap.put("T", "todo");
         this.typeHashmap.put("E", "event");
     }
 
+    /**
+     * Checks if the required directory and file exists, and reads tasks from the file and
+     * insert it into a list.
+     */
     private void preCheck() {
         if (!isDirectoryExist()) {
             boolean isDirectoryCreated = this.createDirectory();
@@ -75,7 +91,7 @@ public class Storage {
     }
 
     /**
-     * Create directory 'data' under 'ip'
+     * Creates directory 'data' under 'ip'
      *
      * @return Return true if directory exists, otherwise, false
      */
@@ -84,7 +100,7 @@ public class Storage {
     }
 
     /**
-     * Create file `tasks.txt` under 'data' directory
+     * Creates file `tasks.txt` under 'data' directory
      */
     private void createFile(String fileUrl) {
         try {
@@ -152,6 +168,12 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * The task to be deleted from the file.
+     *
+     * @param index The position of the task in the file.
+     * @throws IOException If file does not exist.
+     */
     public void deleteTask(int index) throws IOException {
         this.createFile(this.TEMPFILEURL);
         File tempFile = new File(this.TEMPFILEURL);
