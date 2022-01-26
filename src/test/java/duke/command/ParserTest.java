@@ -21,6 +21,7 @@ public class ParserTest {
         assertTrue(Parser.parse("upcoming a") instanceof UpcomingCommand);
         assertTrue(Parser.parse("between a") instanceof BetweenCommand);
         assertTrue(Parser.parse("schedule a") instanceof ScheduleCommand);
+        assertTrue(Parser.parse("find a") instanceof FindCommand);
     }
 
     @Test
