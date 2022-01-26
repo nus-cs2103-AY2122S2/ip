@@ -15,9 +15,10 @@ public class Parser {
 
     public Parser(String s) {
         String[] statement = s.trim().concat(" ").split(" ", 2);
-        String x = statement[0].toLowerCase();
+        String commandRaw = statement[0];
+        String command = statement[0].toLowerCase();
         String desc = statement[1].trim();
-        switch (x) {
+        switch (command) {
         case "exit":
         case "bye": {
             this.ct = CommandType.BYE;
@@ -84,7 +85,7 @@ public class Parser {
         }
         default: {
             this.ct = CommandType.UNKNOWN;
-            System.out.println(ERROR_INVALID_COMMAND_START + statement[0] + ERROR_INVALID_COMMAND_END);
+            System.out.println(ERROR_INVALID_COMMAND_START + commandRaw + ERROR_INVALID_COMMAND_END);
             canActivate = false;
         }
         }

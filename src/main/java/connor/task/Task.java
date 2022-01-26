@@ -49,11 +49,15 @@ public class Task {
     }
 
     public void mark() {
-        isDone = true;
+        setDone(true);
     }
 
     public void unmark() {
-        isDone = false;
+        setDone(false);
+    }
+
+    private void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     @Override

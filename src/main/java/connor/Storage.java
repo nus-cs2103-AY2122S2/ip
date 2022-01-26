@@ -7,32 +7,36 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
     private static final String ERROR_GENERAL = "An error occurred.";
 
-    String filePath;
-    String taskDirectory;
+    private String filePath;
+    private String taskDirectory;
+    private ArrayList<Task> copyTasks;
 
     public Storage(String filePath, String taskDirectory) throws IOException {
         this.filePath = filePath;
         this.taskDirectory = taskDirectory;
-        new File(taskDirectory).mkdirs();
-        new File(filePath).createNewFile();
+        new File(this.taskDirectory).mkdirs();
+        new File(this.filePath).createNewFile();
+        copyTasks = new ArrayList<>();
     }
 
     public void loadTasks() throws FileNotFoundException, IndexOutOfBoundsException, InvalidTaskFileException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
-        ArrayList<Task> tasks = new ArrayList<>();
+        copyTasks = new ArrayList<>();
         while (s.hasNext()) {
-            tasks.add(stringToTask(s.nextLine()));
+            copyTasks.add(stringToTask(s.nextLine()));
         }
-        TaskList.setTasks(tasks);
+        TaskList.setTasks(copyTasks);
     }
 
     public static String taskToString(Task t) {
@@ -112,7 +116,8 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(filePath);
             StringBuilder textToUpdate = new StringBuilder();
-            for (Task t : TaskList.getTasks()) {
+            copyTasks = TaskList.getTasks();
+            for (Task t : copyTasks) {
                 textToUpdate.append(taskToString(t));
             }
             fw.write(textToUpdate.toString());
