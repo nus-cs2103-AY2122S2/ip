@@ -48,7 +48,6 @@ public class Deadline extends Task {
         } else {
             time += "am";
         }
-        System.out.println(date + month + year);
         String finalDescription = taskAtHand + "(" + "by " + date + " " + month + " " + year + ", " + time + ")";
         return "[D]" + "[" + super.getStatusIcon() + "] " + finalDescription;
     }
