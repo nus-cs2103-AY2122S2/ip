@@ -34,21 +34,7 @@ public class Duke {
             } else if (command.startsWith("event")) {
                 addEvent(command, storeList);
             } else if (command.startsWith("delete")) {
-                if (command.length() <= 7) {
-                    System.out.println("Master, you wished wrongly. Remember you have to wish in this format " +
-                            "delete tasknumber. Please wish again");
-                    continue;
-                } else {
-                    try {
-                        Task t = storeList.get(Integer.parseInt(command.substring(7)));
-                        System.out.println("Yes master. The task " + t.toString() + " has been removed");
-                        storeList.remove(Integer.parseInt(command.substring(7)));
-                        System.out.println("Now you have " + storeList.size() + " tasks left master");
-                    } catch (IndexOutOfBoundsException e) {
-                        System.out.println("Master, you only have " + storeList.size() + " tasks now. Please choose another task number");
-                    }
-                }
-
+                deleteTask(command, storeList);
             } else {
                 System.out.println("Master, I have all the knowledge in the world but I do not recognise that command," +
                         " Please wish again");
@@ -57,6 +43,22 @@ public class Duke {
         }
         sc.close();
 
+    }
+
+    public static void deleteTask(String command, ArrayList<Task> storeList) {
+        if (command.length() <= 7) {
+            System.out.println("Master, you wished wrongly. Remember you have to wish in this format " +
+                    "delete tasknumber. Please wish again");
+        } else {
+            try {
+                Task t = storeList.get(Integer.parseInt(command.substring(7)));
+                System.out.println("Yes master. The task " + t.toString() + " has been removed");
+                storeList.remove(Integer.parseInt(command.substring(7)));
+                System.out.println("Now you have " + storeList.size() + " tasks left master");
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Master, you only have " + storeList.size() + " tasks now. Please choose another task number");
+            }
+        }
     }
 
     public static void addEvent(String command, ArrayList<Task> storeList) {
