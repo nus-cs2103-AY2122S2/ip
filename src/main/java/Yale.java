@@ -1,20 +1,26 @@
-import yalebot.Deadline;
-import yalebot.TaskList;
-import yalebot.Event;
-import yalebot.ToDo;
+import yale.task.Deadline;
+import yale.task.TaskList;
+import yale.task.Event;
+import yale.task.ToDo;
 
+import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.NoSuchFileException;
 import java.util.Scanner;
 
 public class Yale {
     public static void main(String[] args) {
-        String logo = "----YALE----";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hi, I'm Yale!\n" );
+        String logo = "-----YALE-----";
+        System.out.println("Allow me to introduce myself\n" + logo);
+        System.out.println("The name's Yale.\n" );
         Scanner scanner = new Scanner(System.in);
         TaskList list = new TaskList();
+        String fileData = FileRead.loadFileContents("data/yale.txt");
+        list.importIn(fileData);
         while (true) {
             String command = receiveInput(scanner);
             performAction(command, list);
+            writeActionTo("data/yale.txt", list);
             if (checkExit(command)) {
                 break;
             }
@@ -28,7 +34,7 @@ public class Yale {
      * @return Input
      */
     public static String receiveInput(Scanner scanner) {
-        System.out.println("Enter command below:");
+        System.out.println("\nEnter command below:");
         String input = scanner.nextLine();
         return input;
     }
@@ -145,7 +151,6 @@ public class Yale {
             System.out.println("Error: " + command
                     + " is not a valid command. Please try again.");
             }
-
     }
 
     /**
@@ -157,4 +162,20 @@ public class Yale {
     public static boolean checkExit(String input) {
         return input.equals("bye");
     }
+
+    /**
+     * Writes String from list into specified file
+     * @param filePath
+     * @param list
+     */
+    public static void writeActionTo(String filePath, TaskList list) {
+        String file2 = filePath;
+        try {
+            FileWrite.writeToFile(file2, list.exportOut());
+        }
+        catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+    }
 }
+

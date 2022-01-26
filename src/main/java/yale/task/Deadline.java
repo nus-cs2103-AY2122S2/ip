@@ -1,4 +1,4 @@
-package yalebot;
+package yale.task;
 
 /**
  * Subclass of Task
@@ -21,6 +21,10 @@ public class Deadline extends Task {
     public Deadline(String name, boolean isMarked, String by) {
         super(name, isMarked);
         this.by = by;
+    }
+    @Override
+    public String export() {
+        return "D " + "| " + (isMarked? 1 : 0) + " | " + this.name + " | " + this.by;
     }
     /**
      * Returns a customised String

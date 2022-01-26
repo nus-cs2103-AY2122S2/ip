@@ -1,6 +1,4 @@
-package yalebot;
-
-import yalebot.Task;
+package yale.task;
 
 /**
  * Subclass of Task,
@@ -16,6 +14,10 @@ public class ToDo extends Task {
         super(name, isMarked);
     }
 
+    @Override
+    public String export() {
+        return "T " + "| " + (isMarked? 1 : 0) + " | " + this.name;
+    }
     /**
      * Returns a customised String
      * @return Customised String format

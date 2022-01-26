@@ -1,4 +1,4 @@
-package yalebot;
+package yale.task;
 
 /**
  * Subclass of Task
@@ -22,7 +22,10 @@ public class Event extends Task {
         super(name, isMarked);
         this.at = at;
     }
-
+    @Override
+    public String export() {
+        return "E " + "| " + (isMarked? 1 : 0) + " | " + this.name + " | " + this.at;
+    }
     /**
      * Returns a customised String
      * @return Customised String format

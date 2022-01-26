@@ -1,4 +1,4 @@
-package yalebot;
+package yale.task;
 
 /**
  * Generic Task class
@@ -7,12 +7,12 @@ public class Task {
     /**
      * String name to describe the task
      */
-    private String name;
+    protected String name;
     /**
      * Boolean isMarked to determine
      * if tasked is marked
      */
-    private boolean isMarked = false;
+    protected boolean isMarked = false;
 
     /**
      * Constructor method
@@ -50,6 +50,11 @@ public class Task {
         isMarked = false;
         System.out.println("OK, I've marked this task as not done yet:\n"
                 + "  " + getStatusIcon() + " " + name);
+    }
+
+    public String export() {
+        return " " + "| "
+                + (isMarked? 1 : 0) + " | " + this.name;
     }
 
     /**
