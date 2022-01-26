@@ -244,10 +244,10 @@ public class Duke {
                 returnStr += "T#" + t.isDone + "#" + t.description + "\n";
             } else if (t instanceof Deadline) {
                 Deadline d = (Deadline) t;
-                returnStr += "D#" + d.isDone + "#" + d.description + "#" + d.deadline + "\n";
+                returnStr += "D#" + d.isDone + "#" + d.description + "#" + d.time.get() + "\n";
             } else if (t instanceof Event) {
                 Event e = (Event) t;
-                returnStr += "E#" + e.isDone + "#" + e.description + "#" + e.time + "\n";
+                returnStr += "E#" + e.isDone + "#" + e.description + "#" + e.time.get() + "\n";
             }
         }
 
