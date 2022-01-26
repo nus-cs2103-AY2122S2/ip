@@ -5,6 +5,9 @@ import duke.DukeException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Represents the possible Command types.
+ */
 public enum CommandType {
     ADD_TODO("todo", "desc"),
     ADD_DEADLINE("deadline", "desc", "by"),
@@ -31,6 +34,12 @@ public enum CommandType {
         this.params = params;
     }
 
+    /**
+     * Maps a String to a CommandType.
+     *
+     * @param commandString The String to be mapped.
+     * @return The CommandType associated with the String.
+     */
     public static CommandType fromString(String commandString) {
         CommandType c = typeMap.get(commandString);
 

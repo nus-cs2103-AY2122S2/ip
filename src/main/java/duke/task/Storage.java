@@ -14,10 +14,18 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Saves and loads Task data in String format.
+ */
 public class Storage {
     private static final String SAVE_DIR = "data";
     private static final String FILE_NAME = SAVE_DIR + "/duke.txt";
 
+    /**
+     * Saves the data within a list of Tasks into a .txt file.
+     *
+     * @param tasks The list of Tasks to be saved.
+     */
     public void saveTasks(List<Task> tasks) {
         try {
             Path path = Paths.get(SAVE_DIR);
@@ -34,6 +42,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the Tasks stored in a .txt file into a list of tasks.
+     *
+     * @param tasks The list of tasks to load data into.
+     */
     public void loadTasks(List<Task> tasks) {
 
         try {

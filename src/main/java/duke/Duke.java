@@ -19,6 +19,9 @@ import java.time.temporal.ChronoField;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * Encapsulates the main high-level logic of the bot.
+ */
 public class Duke {
     private final Ui ui = new Ui();
     private final TaskList tasks = new TaskList();
@@ -29,6 +32,9 @@ public class Duke {
         new Duke().run();
     }
 
+    /**
+     * Starts scanning and processing user input until the exit command is received.
+     */
     public void run() {
         Scanner scanner = new Scanner(System.in);
         ui.greet();
@@ -46,6 +52,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Executes a Command.
+     *
+     * @param command The Command to be executed.
+     */
     private void processInput(Command command) {
         Map<String, String> params = command.getParams();
 
@@ -78,6 +89,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Retrieves the value of a parameter from a Map as an int.
+     *
+     * @param map   The Map containing parameters.
+     * @param param The name of the parameter to be retrieved.
+     * @return The value of the parameter as an int.
+     */
     private int getParamAsInt(Map<String, String> map, String param) {
         String strVal = map.get(param);
 
@@ -88,6 +106,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Retrieves the value of a parameter from a Map as a LocalDateTime.
+     *
+     * @param map   The Map containing parameters.
+     * @param param The name of the parameter to be retrieved.
+     * @return The value of the parameter as a LocalDateTime.
+     */
     private LocalDateTime getParamAsDateTime(Map<String, String> map, String param) {
         DateTimeFormatter formatter = new DateTimeFormatterBuilder().appendPattern("yyyy-M-d[ HHmm]")
                 .parseDefaulting(ChronoField.HOUR_OF_DAY, 0).parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
@@ -102,6 +127,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Retrieves the value of a parameter from a Map as a Duration.
+     *
+     * @param map   The Map containing parameters.
+     * @param param The name of the parameter to be retrieved.
+     * @return The value of the parameter as a Duration.
+     */
     private Duration getParamAsDuration(Map<String, String> map, String param) {
         String strVal = map.get(param);
 
@@ -112,21 +144,41 @@ public class Duke {
         }
     }
 
+    /**
+     * Marks the Task at the specified index as done and responds to the user with the appropriate message.
+     *
+     * @param index The index of the Task to be marked as done.
+     */
     private void markTask(int index) {
         tasks.mark(index);
         ui.acknowledgeMark(tasks.get(index));
     }
 
+    /**
+     * Marks the Task at the specified index as not done and responds to the user with the appropriate message.
+     *
+     * @param index The index of the Task to be marked as not done.
+     */
     private void unmarkTask(int index) {
         tasks.unmark(index);
         ui.acknowledgeUnmark(tasks.get(index));
     }
 
+    /**
+     * Adds a Task to the list of Tasks and responds to the user with the appropriate message.
+     *
+     * @param task The Task to be added.
+     */
     private void addTask(Task task) {
         tasks.add(task);
         ui.acknowledgeAdd(task, tasks.size());
     }
 
+    /**
+     * Removes the Task at the specified index and responds to the user with the appropriate message.
+     *
+     * @param index The index of the Task to be removed.
+     */
     private void deleteTask(int index) {
         Task deleted = tasks.get(index);
         tasks.remove(index);

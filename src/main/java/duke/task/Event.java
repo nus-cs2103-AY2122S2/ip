@@ -7,10 +7,20 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.StringJoiner;
 
+/**
+ * Represents a task with a time and duration.
+ */
 public class Event extends Task {
     private final LocalDateTime at;
     private final Duration duration;
 
+    /**
+     * Constructs an Event instance.
+     *
+     * @param description The description of the Event.
+     * @param at          The date and time of the Event.
+     * @param duration    The duration of the Event.
+     */
     public Event(String description, LocalDateTime at, Duration duration) {
         super(description);
 
@@ -26,6 +36,14 @@ public class Event extends Task {
         this.duration = duration;
     }
 
+    /**
+     * Constructs an Event instance.
+     *
+     * @param description The description of the Event.
+     * @param at          The date and time of the Event.
+     * @param duration    The duration of the Event.
+     * @param isDone      Whether the Event is done or not.
+     */
     public Event(String description, LocalDateTime at, Duration duration, boolean isDone) {
         this(description, at, duration);
         this.isDone = isDone;
