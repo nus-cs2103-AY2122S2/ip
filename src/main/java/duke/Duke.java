@@ -97,7 +97,7 @@ public class Duke {
         case "mark":
             // User input is 1-indexed, list uses 0-index
             int markIdx = Integer.parseInt(action.getArgs()) - 1;
-            tasks.mark(markIdx);
+            tasks.markTask(markIdx);
             ui.say("[*] Marked the following duke.task as done:\n" +
                     "\t" + tasks.getTask(markIdx).nameWithStatus());
             break;
@@ -105,7 +105,7 @@ public class Duke {
         case "unmark":
             // User input is 1-indexed, list uses 0-index
             int unmarkIdx = Integer.parseInt(action.getArgs()) - 1;
-            tasks.unmark(unmarkIdx);
+            tasks.unmarkTask(unmarkIdx);
             ui.say("[*] Marked the following duke.task as not done:\n" +
                     "\t" + tasks.getTask(unmarkIdx).nameWithStatus());
             break;

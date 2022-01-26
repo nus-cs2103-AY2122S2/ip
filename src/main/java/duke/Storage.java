@@ -34,7 +34,7 @@ public class Storage {
      *
      * @throws IOException cannot create directories/file
      */
-    private void checkOrCreateFile() throws IOException {
+    private void createIfNotExist() throws IOException {
         // Create file if it doesn't exist
         if (!this.file.exists()) {
             this.file.getParentFile().mkdirs();
@@ -49,7 +49,7 @@ public class Storage {
      * @throws IOException file access error
      */
     public void saveTasks(TaskList taskList) throws IOException {
-        checkOrCreateFile();
+        createIfNotExist();
         FileWriter fileWriter = new FileWriter(this.filename, false);
         fileWriter.write(taskList.tasksFileSaveFormat());
         fileWriter.close();
@@ -63,6 +63,8 @@ public class Storage {
      * @throws DukeException when format error is present in file
      */
     public TaskList loadTasks() throws IOException, DukeException {
+        createIfNotExist();
+
         try {
             Scanner fileReader = new Scanner(this.file);
 
