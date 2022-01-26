@@ -3,7 +3,14 @@ package duke.command;
 import duke.task.TaskList;
 import duke.util.IPrintable;
 
+/**
+ * Represents a handler for the list command.
+ */
 public class ListCommand extends Command {
+    /**
+     * Creates a handler for the list command.
+     * @param args Arguments supplied to the command handler.
+     */
     ListCommand(String args) {
         super(args);
     }

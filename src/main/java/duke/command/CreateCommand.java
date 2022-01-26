@@ -11,9 +11,18 @@ import duke.util.IPrintable;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents a handler for the todo, deadline and event commands.
+ * Encapsulates the creation logic for all available types of tasks.
+ */
 public class CreateCommand extends Command {
     private final TaskType taskType;
 
+    /**
+     * Creates a handler for a creation command.
+     * @param args Arguments supplied to the command handler.
+     * @param taskType The type of task to be created.
+     */
     CreateCommand(String args, TaskType taskType) {
         super(args);
         this.taskType = taskType;
@@ -22,31 +31,43 @@ public class CreateCommand extends Command {
     @Override
     public boolean execute(IPrintable linePrinter, TaskList taskList) throws DukeIllegalArgumentException {
         if (this.taskType == TaskType.TODO) {
-            this.parseCreateTodo(linePrinter, this.args, taskList);
+            this.parseCreateTodo(linePrinter, taskList);
         } else if (this.taskType == TaskType.DEADLINE) {
-            this.parseCreateDeadline(linePrinter, this.args, taskList);
+            this.parseCreateDeadline(linePrinter, taskList);
         } else if (this.taskType == TaskType.EVENT) {
-            this.parseCreateEvent(linePrinter, this.args, taskList);
+            this.parseCreateEvent(linePrinter, taskList);
         }
 
         return true;
     }
 
-    private void parseCreateTodo(IPrintable linePrinter, String args, TaskList taskList)
+    /**
+     * Parses and creates a Todo object.
+     * @param linePrinter Object that the command handler outputs responses to.
+     * @param taskList Current task list that the command handler should add a new task to.
+     * @throws DukeIllegalArgumentException If the argument string is empty.
+     */
+    private void parseCreateTodo(IPrintable linePrinter, TaskList taskList)
             throws DukeIllegalArgumentException {
         // Syntax Check
         if (args.equals("")) {
             throw new DukeIllegalArgumentException("Task name cannot be empty");
         }
 
-        final Task task = taskList.addTask(new Todo(args));
+        final Task task = taskList.addTask(new Todo(this.args));
         this.printResponse(linePrinter, task, taskList, "Todo");
     }
 
-    private void parseCreateDeadline(IPrintable linePrinter, String args, TaskList taskList)
+    /**
+     * Parses and creates a Deadline object.
+     * @param linePrinter Object that the command handler outputs responses to.
+     * @param taskList Current task list that the command handler should add a new task to.
+     * @throws DukeIllegalArgumentException If the argument string does not follow the expected format.
+     */
+    private void parseCreateDeadline(IPrintable linePrinter, TaskList taskList)
             throws DukeIllegalArgumentException {
         // Syntax Check
-        final String[] argParts = args.split(" /by ");
+        final String[] argParts = this.args.split(" /by ");
         if (argParts.length < 2) {
             throw new DukeIllegalArgumentException("Not in the format <Task name> /by <Date>");
         }
@@ -60,10 +81,16 @@ public class CreateCommand extends Command {
         this.printResponse(linePrinter, task, taskList, "Deadline");
     }
 
-    private void parseCreateEvent(IPrintable linePrinter, String args, TaskList taskList)
+    /**
+     * Parses and creates a Event object.
+     * @param linePrinter Object that the command handler outputs responses to.
+     * @param taskList Current task list that the command handler should add a new task to.
+     * @throws DukeIllegalArgumentException If the argument string does not follow the expected format.
+     */
+    private void parseCreateEvent(IPrintable linePrinter, TaskList taskList)
             throws DukeIllegalArgumentException {
         // Syntax Check
-        final String[] argParts = args.split(" /at ");
+        final String[] argParts = this.args.split(" /at ");
         if (argParts.length < 2) {
             throw new DukeIllegalArgumentException("Not in the format <Task name> /at <Date>");
         }

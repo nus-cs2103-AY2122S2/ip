@@ -7,7 +7,14 @@ import duke.util.IPrintable;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Represents a handler for the schedule command.
+ */
 public class ScheduleCommand extends Command {
+    /**
+     * Creates a handler for the schedule command.
+     * @param args Arguments supplied to the command handler.
+     */
     ScheduleCommand(String args) {
         super(args);
     }
