@@ -1,6 +1,6 @@
 import java.util.Scanner; //import Scanner
 import java.util.ArrayList; //import ArrayList
-import java.util.Arrays;
+import java.util.Arrays; //import Arrays
 
 public class Duke {
     public static void main(String[] args) {
@@ -26,7 +26,7 @@ public class Duke {
     /**
      * Method that handles the response for Level-1.
      */
-    public static void levelOneRespond () {
+    public static void levelOneRespond() {
         Scanner sc = new Scanner(System.in);
         String bye = "bye";
         String dukeMessage = "Duke: ";
@@ -39,11 +39,14 @@ public class Duke {
     }
 
     /**
-     * Method that handles the response for Level-3. Building on level 2, it adds the ability to mark and unmark tasks as well as different representation for Tasks. Furthermore,
+     * Method that handles the response for Level-4.
+     * Level 3:added the ability to mark and unmark tasks as well as different representation for Tasks. Furthermore,
      * the arraylist is changed to contain Task objects
+     * Level 4: Added Todo, Event and Deadline subclasses to be detected and handled in each seperate case
+     *
      * @param arrayLst arraylist that stores the Task entries for add and can be listed out.
      */
-    public static void levelFourRespond (ArrayList<Task> arrayLst) {
+    public static void levelFourRespond(ArrayList<Task> arrayLst) {
         Scanner sc = new Scanner(System.in);
         String bye = "bye";
         String lst = "list";
@@ -55,9 +58,9 @@ public class Duke {
         String tasksInList = "Here are the tasks in your list:";
         String input = sc.nextLine();
 
-        if (input.equals(bye)); //ends recursive loop, causing the bye statement in main to be executed
+        if (input.equals(bye)) ; //ends recursive loop, causing the bye statement in main to be executed
 
-        //list command
+            //list command
         else if (input.equals(lst)) {
             System.out.println(tasksInList);
             int i = 0;
@@ -70,20 +73,24 @@ public class Duke {
                 }
             }
             levelFourRespond(arrayLst);
+
+            //unmark
         } else if (input.contains(unmarkCommand)) { //unmark command
             String stringIdx = input.split(" ")[1];
-            int  idx = Integer.parseInt(stringIdx) - 1;
+            int idx = Integer.parseInt(stringIdx) - 1;
             Task unmarkTask = arrayLst.get(idx);
             unmarkTask.unmarkTask();
             levelFourRespond(arrayLst);
 
-        } else if (input.contains(markCommand)){ //mark command
+            //mark
+        } else if (input.contains(markCommand)) { //mark command
             String stringIdx = input.split(" ")[1];
             int idx = Integer.parseInt(stringIdx) - 1;
             Task markTask = arrayLst.get(idx);
             markTask.markTask();
             levelFourRespond(arrayLst);
 
+            //Todo
         } else if (input.contains(todo)) {
             String[] stringArray = input.split(" ");
             String[] nameArray = Arrays.copyOfRange(stringArray, 1, stringArray.length);
@@ -93,6 +100,8 @@ public class Duke {
             String todoMessage = "Got it. I've added this task:\n" + newTodo + "\nNow you have " + arrayLst.size() + " tasks in the list.";
             System.out.println(todoMessage);
             levelFourRespond(arrayLst);
+
+            //Event
         } else if (input.contains(event)) {
             String[] stringArrayIncludingEvent = input.split(" ");
             String[] stringArrayExcludingEvent = Arrays.copyOfRange(stringArrayIncludingEvent, 1, stringArrayIncludingEvent.length);
@@ -105,6 +114,8 @@ public class Duke {
             String eventMessage = "Got it. I've added this task:\n" + newEvent + "\nNow you have " + arrayLst.size() + " tasks in the list.";
             System.out.println(eventMessage);
             levelFourRespond(arrayLst);
+
+            //Deadline
         } else if (input.contains(deadline)) {
             String[] stringArrayIncludingDeadline = input.split(" ");
             String[] stringArrayExcludingDeadline = Arrays.copyOfRange(stringArrayIncludingDeadline, 1, stringArrayIncludingDeadline.length);
@@ -117,8 +128,7 @@ public class Duke {
             String deadlineMessage = "Got it. I've added this task:\n" + newDeadline + "\nNow you have " + arrayLst.size() + " tasks in the list.";
             System.out.println(deadlineMessage);
             levelFourRespond(arrayLst);
-        }
-        else { //add task
+        } else { //add task
             String added = "added: ";
             Task newTask = new Task(input);
             arrayLst.add(newTask);
@@ -127,100 +137,13 @@ public class Duke {
         }
 
     }
-
-    /**
-     * Represents a Task. Contains a Task constructor, two methods to mark and unmark tasks, toString() method as well as a isMark() method to check if Task is marked
-     */
-
-    public static class Task {
-        private boolean mark;
-        public String name;
-
-        /**
-         * Constructor
-         * @param name name of the task
-         */
-        public Task (String name) {
-            this.name = name;
-            this.mark = false;
-        }
-
-        /**
-         * markTask as done
-         */
-        public void markTask () {
-            String markedMessage = "Nice! I've marked this task as done:\n";
-            this.mark = true;
-            System.out.println(markedMessage + "  " + this);
-        }
-
-        /**
-         * unmarkTask
-         */
-        public void unmarkTask() {
-            String unmarkedMessage = "OK, I've marked this task as not done yet:\n";
-            this.mark = false;
-            System.out.println(unmarkedMessage + "  " + this);
-        }
-
-        /**
-         *
-         * @return boolean on whether task is marked
-         */
-        public boolean isMark() {
-            return this.mark;
-        }
-
-        /**
-         * @override
-         * @return String version of task, with marked and name. E.g. [X] Task
-         */
-        public String toString() {
-            if (this.mark) {
-                String marked = "[X] ";
-                return marked + this.name;
-            } else {
-                String unmarked = "[ ] ";
-                return unmarked + this.name;
-            }
-        }
-    }
-
-    public static class Todo extends Task {
-        public Todo (String name) {
-            super(name);
-        }
-
-        /**
-         * @override
-         * @return String of Todo task, eg: [T][X] Todo
-         */
-        public String toString() {
-            return "[T]" + super.toString();
-        }
-    }
-
-    public static class Event extends Task {
-        private static String dueDate;
-        public Event (String name, String time) { super(name); this.dueDate = time;}
-
-        /**
-         * @override
-         * @return String of Event task, eg: [E][X] Event
-         */
-        public String toString() { return "[E]" + super.toString() + "(at:" + this.dueDate + ")"; }
-    }
-
-    public static class Deadline extends Task {
-        private static String dueDate;
-        public Deadline(String name, String time) {super(name); this.dueDate = time;}
-
-        /**
-         * @override
-         * @return String of Deadline task, eg [D][X] Deadline (by:XX)
-         */
-
-        public String toString() { return "[D]" + super.toString() + "(by:" + this.dueDate + ")"; }
-    }
 }
+
+
+
+
+
+
+
+
 
