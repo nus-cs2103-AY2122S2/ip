@@ -1,34 +1,21 @@
+import storage.Storage;
 import ui.Ui;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
-
-
-
 
 public class Duke {
 
     private Ui ui;
+    private Storage storage;
 
     public Duke(String filePath) {
 
         ui = new Ui();
+        storage = new Storage(filePath);
 
-        File dataFolder = new File ("data");
-
-        if (!dataFolder.exists()) {
-            dataFolder.mkdir();
-        }
-
-        File dataFile = new File("data/duke.txt");
-        if (!dataFile.exists()) {
-            try {
-                dataFile.createNewFile();
-            } catch (IOException e) {
-                System.out.println("An error occured :(" + e);
-            }
-        }
     }
 
     public void run(){
@@ -154,9 +141,13 @@ public class Duke {
                 if(splitString.length == 1 || !splitString[1].startsWith("at ")) {
                     throw new MissingEventDateException("Missing date");
                 }
+                try {
+                    currentTask = new Event(splitString[0].substring(5),
+                            DateTimeParser.parseDate(splitString[1].substring(3)));
+                } catch (DateTimeParseException e) {
+                    throw new MissingEventDateException("Wrong format of date");
+                }
 
-                currentTask = new Event(splitString[0].substring(5),
-                        DateTimeParser.parseDate(splitString[1].substring(3)));
                 break;
             case "deadline":
                 if(instruction.length == 1 || instruction[1].equals("")) {
@@ -166,9 +157,12 @@ public class Duke {
                 if(splitString.length == 1 || !splitString[1].startsWith("by ")) {
                     throw new MissingDeadlineDateException("Missing date");
                 }
-
+                try {
                 currentTask = new Deadline(splitString[0].substring(8),
                         DateTimeParser.parseDate(splitString[1].substring(3)));
+                } catch (DateTimeParseException e) {
+                    throw new MissingEventDateException("Wrong format of date");
+                }
                 break;
 
             default:

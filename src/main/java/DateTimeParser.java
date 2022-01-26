@@ -1,11 +1,12 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 import java.util.Date;
 
 public class DateTimeParser {
 
-    public static LocalDate parseDate(String date) {
+    public static LocalDate parseDate(String date) throws DateTimeParseException {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate parsedDate = LocalDate.parse(date, formatter);
