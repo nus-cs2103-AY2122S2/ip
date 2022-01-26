@@ -1,11 +1,14 @@
 package li.zhongfu.cs2103.chatbot;
 
+import java.time.format.DateTimeFormatter;
+
 /**
  * Object that represents a to-do list task. Contains a name and a state.
  */
 public abstract class Task {
     private String name;
     private boolean done = false;
+    protected static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     
     /**
      * Creates a new task with the given name.
