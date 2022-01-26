@@ -1,7 +1,7 @@
 package duke.task;
 
 public class Task {
-    private String title;
+    private final String title;
     private boolean isDone;
 
     public Task(String title)  {
@@ -33,6 +33,10 @@ public class Task {
             return " ";
         }
 
+    }
+
+    public boolean contains(String keywords) {
+        return this.title.contains(keywords);
     }
 
     @Override
