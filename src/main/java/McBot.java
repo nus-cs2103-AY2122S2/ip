@@ -1,5 +1,8 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
@@ -46,7 +49,6 @@ public class McBot {
         Scanner sc = new Scanner(System.in);
         boolean running = true;
         ArrayList<Task> arrList = new ArrayList<>(100);
-        
         //Load data from McBot.txt, create folder or file or both if missing
         try {
             File f = new File("./data/McBot.txt");
@@ -67,17 +69,20 @@ public class McBot {
             while (s.hasNext()) {
                 String[] str = s.nextLine().split(" \\| ");
                 Task t;
+                
                 switch (str[0]) {
                 case "T": {
                     t = new ToDo(str[2]);
                     break;
                 }
                 case "D": {
-                    t = new Deadline(str[2], str[3]);
+                    LocalDate date = LocalDate.parse(str[3]);
+                    t = new Deadline(str[2], date);
                     break;
                 }
                 case "E": {
-                    t = new Event(str[2], str[3]);
+                    LocalDate date = LocalDate.parse(str[3]);
+                    t = new Event(str[2], date);
                     break;
                 }
                 default:
@@ -92,7 +97,8 @@ public class McBot {
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Data loaded is not format correctly, some data might be missing");
         }
-
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
         while(running) {
             try {
                 String fullCommand = sc.nextLine();
@@ -191,12 +197,21 @@ public class McBot {
                     try {
                         String[] str = command[1].split(" /by ");
                         String taskName = str[0];
-                        String deadlineDate = str[1];
+                        String[] deadlineStr = str[1].split(" ");
+                        String dateStr = deadlineStr[0];
+                        LocalDate deadlineDate = LocalDate.parse(dateStr, dateFormatter);
+                        Task t;
                         if (taskName.isBlank())
                             throw new invalidCommandException("you can't leave your deadline task empty");
-                        if (deadlineDate.isBlank())
+                        if (dateStr.isBlank())
                             throw new invalidCommandException("you can't leave your deadline date empty");
-                        Task t = new Deadline(taskName, deadlineDate);
+                        if (deadlineStr.length == 2) {
+                            String timeStr = deadlineStr[1];
+                            LocalTime deadlineTime = LocalTime.parse(timeStr, timeFormatter);
+                            t = new Deadline(taskName, deadlineDate, deadlineTime);
+                        } else {
+                            t = new Deadline(taskName, deadlineDate);
+                        }
                         arrList.add(t);
                         appendData(arrList, t);
                         System.out.println("Got 'em down as deadline:");
@@ -205,7 +220,7 @@ public class McBot {
                     } catch (invalidCommandException e) {
                         System.out.println(e.getMessage());
                     } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println("Fool, follow this format: deadline -TASKNAME- /by -DATE-");
+                        System.out.println("Fool, follow this format: deadline -TASKNAME- /by DD/MM/YYYY");
                     }
                     break;
                 }
@@ -213,12 +228,21 @@ public class McBot {
                     try {
                         String[] str = command[1].split(" /at ");
                         String taskName = str[0];
-                        String eventDetails = str[1];
+                        String[] eventDetails = str[1].split(" ");
+                        String dateStr = eventDetails[0];
+                        LocalDate eventDate = LocalDate.parse(dateStr, dateFormatter);
+                        Task t;
                         if (taskName.isBlank())
                             throw new invalidCommandException("you can't leave your event task empty");
-                        if (eventDetails.isBlank())
+                        if (dateStr.isBlank())
                             throw new invalidCommandException("you can't leave your event date/time empty");
-                        Task t = new Event(taskName, eventDetails);
+                        if (eventDetails.length == 2) {
+                            String timeStr = eventDetails[1];
+                            LocalTime eventTime = LocalTime.parse(timeStr, timeFormatter);
+                            t = new Event(taskName, eventDate, eventTime);
+                        } else {
+                            t = new Event(taskName, eventDate);
+                        }
                         arrList.add(t);
                         appendData(arrList, t);
                         System.out.println("Got 'em down as event:");
