@@ -5,7 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
-import duke.task.Task;
 import duke.ui.Ui;
 import duke.task.TaskList;
 import duke.error.DukeException;
@@ -88,9 +87,9 @@ public class Parser {
                     String.format("There are now %d task(s) in the list.", taskList.getSize()));
             return 1;
         case "delete":
-            Task deletedTask = taskList.getTask(Integer.parseInt(args[1]) - 1);
+            String deletedTaskString = taskList.getTask(Integer.parseInt(args[1]) - 1).toString();
             taskList.removeTask(Integer.parseInt(args[1]) - 1);
-            ui.print("Deleted Task:", " " + deletedTask.toString(),
+            ui.print("Deleted Task:", " " + deletedTaskString,
                     String.format("There are now %d task(s) in the list.", taskList.getSize()));
             return 1;
         case "find":
