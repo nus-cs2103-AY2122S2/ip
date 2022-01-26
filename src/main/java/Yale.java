@@ -17,21 +17,13 @@ public class Yale {
             String command = ui.receiveInput(scanner);
             parser.performAction(command, list);
             storage.writeTextTo(list);
-            if (checkExit(command)) {
+            if (ui.checkExit(command)) {
                 break;
             }
         }
     }
 
-    /**
-     * Method to check if user input
-     * is equal to "bye"
-     * @param input
-     * @return
-     */
-    public static boolean checkExit(String input) {
-        return input.equals("bye");
-    }
+
 
 
 }

@@ -8,7 +8,7 @@ public class Ui {
     public void welcomePrompt() {
         String logo = "-----YALE-----";
         System.out.println("Allow me to introduce myself\n" + logo);
-        System.out.println("The name's Yale.\n" );
+        System.out.println("The name's Yale." );
     }
 
     /**
@@ -21,5 +21,15 @@ public class Ui {
         System.out.println("\nEnter command below:");
         String input = scanner.nextLine();
         return input;
+    }
+
+    /**
+     * Method to check if user input
+     * is equal to "bye"
+     * @param input
+     * @return
+     */
+    public boolean checkExit(String input) {
+        return input.equals("bye");
     }
 }
