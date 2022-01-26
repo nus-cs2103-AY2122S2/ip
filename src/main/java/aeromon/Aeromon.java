@@ -1,3 +1,9 @@
+package aeromon;
+
+import aeromon.command.Command;
+import aeromon.command.CommandManager;
+import aeromon.task.TaskArrayList;
+
 import java.util.ArrayList;
 
 public class Aeromon {

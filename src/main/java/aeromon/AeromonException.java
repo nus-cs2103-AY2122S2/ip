@@ -1,3 +1,5 @@
+package aeromon;
+
 public class AeromonException extends Exception {
     /**
      * Public constructor, which only takes in the message.

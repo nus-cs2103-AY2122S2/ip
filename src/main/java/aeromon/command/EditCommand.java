@@ -1,3 +1,11 @@
+package aeromon.command;
+
+import aeromon.AeromonException;
+import aeromon.Storage;
+import aeromon.Ui;
+import aeromon.task.Task;
+import aeromon.task.TaskArrayList;
+
 public class EditCommand extends Command {
 
     private EditType editType;
@@ -11,29 +19,29 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public void execute(TaskArrayList taskList, Ui ui, Storage storage) throws AeromonException {
-        if (taskNum < 1 || taskNum > taskList.getSize()) {
+    public void execute(TaskArrayList taskArrayList, Ui ui, Storage storage) throws AeromonException {
+        if (taskNum < 1 || taskNum > taskArrayList.getSize()) {
             throw new AeromonException("Nani is that task number, sir?\n");
         } else {
             switch (editType) {
                 case MARK: {
                     int index = taskNum - 1;
-                    Task temp = taskList.get(index);
+                    Task temp = taskArrayList.get(index);
                     temp.markAsDone();
-                    storage.saveFile(taskList.getTasks());
+                    storage.saveFile(taskArrayList.getTasks());
                     break;
                 }
                 case UNMARK: {
                     int index = taskNum - 1;
-                    Task temp = taskList.get(index);
+                    Task temp = taskArrayList.get(index);
                     temp.markAsNotDone();
-                    storage.saveFile(taskList.getTasks());
+                    storage.saveFile(taskArrayList.getTasks());
                     break;
                 }
                 case DELETE: {
                     int index = taskNum - 1;
-                    taskList.remove(index);
-                    storage.saveFile(taskList.getTasks());
+                    taskArrayList.remove(index);
+                    storage.saveFile(taskArrayList.getTasks());
                     break;
                 }
             }

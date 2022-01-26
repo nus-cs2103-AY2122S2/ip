@@ -1,3 +1,5 @@
+package aeromon;
+
 import java.util.Scanner;
 
 public class Ui {

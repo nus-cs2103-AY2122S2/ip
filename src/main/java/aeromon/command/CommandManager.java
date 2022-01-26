@@ -1,4 +1,7 @@
-import java.text.ParseException;
+package aeromon.command;
+
+import aeromon.AeromonException;
+
 import java.time.LocalDate;
 
 public class CommandManager {
