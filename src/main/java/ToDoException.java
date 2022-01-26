@@ -1,4 +1,4 @@
-public class ToDoException extends Exception {
+public class ToDoException extends DukeException {
 
     @Override
     public String getMessage() {
