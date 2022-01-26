@@ -38,3 +38,5 @@ text-ui-test/EXPECTED-UNIX.TXT
 *.in
 *.ans
 *.out
+text-ui-test/data/duke.txt
+data/duke.txt

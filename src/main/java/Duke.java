@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -97,6 +98,8 @@ public class Duke {
                 new ResponePrinter(Templates.invalidTaskIdMsg).print();
             } catch (IndexOutOfBoundsException e) {
                 new ResponePrinter(Templates.invalidTaskIdMsg).print();
+            } catch (DateTimeParseException e) {
+                new ResponePrinter(Templates.invalidDateTimeFormatMsg).print();
             }
         }
 
