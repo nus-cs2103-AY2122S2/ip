@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.Map;
 
 import li.zhongfu.cs2103.chatbot.exceptions.StorageException;
+import li.zhongfu.cs2103.chatbot.types.Parser;
+import li.zhongfu.cs2103.chatbot.types.ParserResult;
 import li.zhongfu.cs2103.chatbot.types.Storage;
 import li.zhongfu.cs2103.chatbot.types.TaskList;
 import li.zhongfu.cs2103.chatbot.types.tasks.Deadline;
@@ -28,16 +30,7 @@ public class Duke {
 
     // should probably be using some friendly date parser library for this
     // but maybe we can avoid external libraries for now?
-    private static final DateTimeFormatter DATE_TIME_PARSE_FORMAT = new DateTimeFormatterBuilder()
-            .parseCaseInsensitive()
-            .appendOptional(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
-            .appendPattern("[yyyy-MM-dd[ HH:mm[:ss]]]")
-            .appendPattern("[MMM d yyyy[ HH:mm[:ss]]]")
-            .appendPattern("[d MMM yyyy[ HH:mm[:ss]]]")
-            .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
-            .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
-            .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
-            .toFormatter();
+    private static final 
 
     private static void dialog(String[] lines) {
         System.out.println("    " + HLINE);
@@ -51,40 +44,8 @@ public class Duke {
         dialog(line.split("\n"));
     }
 
-    /**
-     * Parses a string in the form {@code positional argument /arg1 foo bar /arg2 baz bax /arg3}
-     * and returns a {@code Map<String, String>} containing the parsed arguments, e.g.:
-     * 
-     * <pre>{
-     *      "": "positional argument",
-     *      "arg1": "foo bar",
-     *      "arg2": "baz bax",
-     *      "arg3": ""
-     * }</pre>
-     * 
-     * Empty argument names will be dropped; other duplicate argument names will have the value of
-     * the last occurrence of the argument.
-     * 
-     * @param args a string containing unparsed arguments
-     * @return a Map containing parsed arguments
-     */
-    private static Map<String, String> parseArgString(String taskString) {
-        Map<String, String> args = new HashMap<>();
-        String[] parts = taskString.split("(^|\\s+)/");
-        args.put("", parts[0]);
-
-        for (int i = 1; i < parts.length; i++) {
-            String[] arg = parts[i].split("\\s+", 2);
-            if (arg[0] == "") {
-                continue;
-            }
-            args.put(arg[0], arg.length == 2 ? arg[1]: "");
-        }
-
-        return args;
-    }
-
     public static void main(String[] args) throws IOException {
+        Parser parser = new Parser(System.in);
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -110,21 +71,19 @@ public class Duke {
                 "How can I help you?"
         });
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
         while (true) {
             try {
-                String input = br.readLine();
-                String[] parts = input.split("\\s", 2); // split into command and args
-                String inCmd = parts[0];
-                String inArgs = parts.length == 2 ? parts[1] : "";
-                switch (inCmd) {
+                ParserResult result = parser.parseNext();
+                String cmd = result.getCmd();
+                switch (cmd) {
                     case "mark":
                     case "unmark":
                     case "delete":
                         try {
-                            int idx = Integer.parseInt(inArgs) - 1; // list is 1-indexed
+                            int idx = Integer.parseInt(result.getPosArg()) - 1; // list is 1-indexed
 
-                            if (inCmd.equals("delete")) {
+                            if ("delete".equals(cmd)) {
                                 Task task = tasks.remove(idx);
                                 dialog(new String[] {
                                     "Task removed:",
@@ -132,7 +91,7 @@ public class Duke {
                                 });
                             } else {
                                 Task task = tasks.get(idx);
-                                boolean done = inCmd.equals("mark"); // set as done if cmd == "mark", else (e.g. cmd == "unmark") set as undone
+                                boolean done = "mark".equals(cmd); // set as done if cmd == "mark", else (e.g. cmd == "unmark") set as undone
                                 task.setDone(done); 
                                 dialog(new String[] {
                                     String.format("Task marked as %sdone:", done ? "" : "un"),
@@ -140,7 +99,7 @@ public class Duke {
                                 });
                             }
                         } catch (NumberFormatException e) {
-                            throw new DukeException(String.format("Hmm, that doesn't seem like a valid task number! Try '%s <number>'.", inCmd), e);
+                            throw new DukeException(String.format("Hmm, that doesn't seem like a valid task number! Try '%s <number>'.", cmd), e);
                         } catch (IndexOutOfBoundsException e) {
                             throw new DukeException("That task doesn't exist!", e);
                         }
@@ -161,35 +120,32 @@ public class Duke {
                     case "deadline":
                     case "event":
                         Task task;
-                        Map<String, String> taskArgs = parseArgString(inArgs);
-                        if (taskArgs.get("").isBlank()) { // includes strings with only whitespaces
+                        if (!result.hasNonblankPosArg()) { // including strings with only whitespaces
                             throw new DukeException("Task name cannot be empty!");
                         }
 
-                        if (inCmd.equals("deadline")) {
-                            if (!taskArgs.containsKey("by") || taskArgs.get("by").isEmpty()) {
-                                throw new DukeException(String.format("You need a time for your deadline! Try: deadline %s /by 1 jan 2050 12:15", taskArgs.get("")));
+                        if ("deadline".equals(cmd)) {
+                            if (!result.hasNonblankArg("by")) {
+                                throw new DukeException(String.format("You need a time for your deadline! Try: deadline %s /by 1 jan 2050 12:15", result.getPosArg()));
                             }
 
                             try {
-                                LocalDateTime parsedDate = LocalDateTime.parse(taskArgs.get("by"), DATE_TIME_PARSE_FORMAT);
-                                task = new Deadline(taskArgs.get(""), parsedDate);
+                                task = new Deadline(result.getPosArg(), parser.parseDateTime(result.getArg("by")));
                             } catch (DateTimeParseException e) {
-                                throw new DukeException(String.format("Unknown date format! Try: deadline %s /by 1 jan 2050 12:15", taskArgs.get("")));
+                                throw new DukeException(String.format("Unknown date format! Try: deadline %s /by 1 jan 2050 12:15", result.getPosArg()));
                             }
-                        } else if (inCmd.equals("event")) {
-                            if (!taskArgs.containsKey("at") || taskArgs.get("at").isEmpty()) {
-                                throw new DukeException(String.format("You need a time for your event! Try: event %s /at 1 jan 2050 12:15", taskArgs.get("")));
+                        } else if ("event".equals(cmd)) {
+                            if (!result.hasNonblankArg("at")) {
+                                throw new DukeException(String.format("You need a time for your event! Try: event %s /at 1 jan 2050 12:15", result.getPosArg()));
                             }
 
                             try {
-                                LocalDateTime parsedDate = LocalDateTime.parse(taskArgs.get("at"), DATE_TIME_PARSE_FORMAT);
-                                task = new Event(taskArgs.get(""), parsedDate);
+                                task = new Event(result.getPosArg(), parser.parseDateTime(result.getArg("at")));
                             } catch (DateTimeParseException e) {
-                                throw new DukeException(String.format("Unknown date format! Try: event %s /at 1 jan 2050 12:15", taskArgs.get("")));
+                                throw new DukeException(String.format("Unknown date format! Try: event %s /at 1 jan 2050 12:15", result.getPosArg()));
                             }
                         } else {
-                            task = new ToDo(taskArgs.get(""));
+                            task = new ToDo(result.getPosArg());
                         }
                         
                         tasks.add(task);
