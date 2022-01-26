@@ -1,3 +1,7 @@
+package duke.exception;
+
+import duke.ui.Ui;
+
 public class DukeCommandException extends DukeException {
     public DukeCommandException(String message) {
         super(message);

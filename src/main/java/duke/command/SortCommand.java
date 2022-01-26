@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 public class SortCommand extends Command {
     private TaskList.SortType type;
     public SortCommand(TaskList.SortType type, String[] inputArray) {

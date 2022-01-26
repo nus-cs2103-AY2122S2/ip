@@ -1,3 +1,7 @@
+package duke.exception;
+
+import duke.ui.Ui;
+
 public class DukeMissingArgumentException extends DukeException {
     public DukeMissingArgumentException(String message) {
         super(message);

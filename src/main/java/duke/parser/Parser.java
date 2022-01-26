@@ -1,3 +1,13 @@
+package duke.parser;
+
+import duke.*;
+import duke.command.*;
+import duke.exception.DukeCommandException;
+import duke.exception.DukeException;
+import duke.exception.DukeInvalidArgumentException;
+import duke.exception.DukeMissingArgumentException;
+import duke.task.*;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
