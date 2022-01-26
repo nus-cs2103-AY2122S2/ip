@@ -7,12 +7,13 @@ public class Duke {
         Scanner reader = new Scanner(System.in);
         System.out.println("Hello, traveller! My name in Paimon.\nHow can I help you today?");
         String input = readInput(reader);
-        //Task tasks[] = new Task[100]; //100 is an arbitrary constant
         List<Task> tasks = new LinkedList<Task>();
-        String command;
 
         while (!input.equals("bye")){
-            command = input.replaceAll(" .*", "");
+            String command = input.replaceAll(" .*", "");
+            if (input.indexOf(" ") > 0) {
+                input = input.substring(input.indexOf(" "));
+            }
 
             switch (command) {
                 case "list":
@@ -21,14 +22,38 @@ public class Duke {
                 case "do":
                     int i = Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;
                     tasks.get(i).markComplete();
+                    System.out.println("Task successfully updated.");
                     break;
                 case "undo":
                     int j = Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;
                     tasks.get(j).markIncomplete();
                     break;
+                case "todo":
+                    Todo t = new Todo(input);
+                    tasks.add(t);
+                    System.out.println("Got it! I have noted down the following task to your list.");
+                    System.out.println(t);
+                    break;
+                case "deadline":
+                    String datetime = input.replaceAll(".* by ", "");
+                    input = input.replaceAll(" by .*", "");
+                    Deadline d = new Deadline(input, datetime);
+                    tasks.add(d);
+                    System.out.println("Got it! I have noted down the following task to your list. " +
+                            "\nRemember the deadline!");
+                    System.out.println(d);
+                    break;
+                case "event":
+                    String time = input.replaceAll(".* at ", "");
+                    input = input.replaceAll(" at .*", "");
+                    Event e = new Event(input, time);
+                    tasks.add(e);
+                    System.out.println("Got it! I have noted down the following task to your list. " +
+                            "\nDo be there on time!");
+                    System.out.println(e);
+                    break;
                 default:
-                    tasks.add(new Task(input));
-                    System.out.println(input);
+                    System.out.println("That went over Paimon's head a little...");
             }
 
             input = readInput(reader);
@@ -43,20 +68,8 @@ public class Duke {
         return s.nextLine();
     }
 
-    /* Returns true if an item is in a given array, and false otherwise.
-     * Only compatible with Strings at the moment.
-     */
-    public static boolean inList(String[] list, String s) {
-        for (int i = 0; i < list.length; i++) {
-            if (list[i].equals(s)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     /* Prints out a given list.
-     * Only compatible with Strings at the moment.
+     * Only compatible with Tasks at the moment.
      */
     public static void printList(List<Task> t) {
         System.out.println("Hmm... Paimon keeps a clear record in her diary.");
@@ -65,6 +78,7 @@ public class Duke {
                 System.out.println(String.format("  %d. %s", i + 1, t.get(i)));
             }
             else {
+                System.out.println(String.format("You now have %d tasks on your list.", i));
                 return;
             }
         }
