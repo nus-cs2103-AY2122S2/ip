@@ -1,3 +1,5 @@
+package luke.data.tasks;
+
 import java.util.Map;
 
 public class Todo extends Task {

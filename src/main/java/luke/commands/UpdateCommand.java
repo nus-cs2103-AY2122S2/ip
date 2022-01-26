@@ -1,3 +1,5 @@
+package luke.commands;
+
 public abstract class UpdateCommand extends Command {
 
     private final int index;

@@ -1,3 +1,5 @@
+package luke.commands;
+
 public class CommandResult {
     private String result;
 

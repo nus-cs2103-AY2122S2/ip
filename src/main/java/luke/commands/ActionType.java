@@ -1,3 +1,5 @@
+package luke.commands;
+
 public enum ActionType {
     READ,
     ADD,

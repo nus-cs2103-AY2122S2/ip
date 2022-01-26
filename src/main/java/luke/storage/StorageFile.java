@@ -1,9 +1,9 @@
-import javax.swing.*;
+package luke.storage;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,7 +13,7 @@ public class StorageFile {
     public static final String DEFAULT_PATH = "data/luke.txt";
     private final File file;
 
-    StorageFile(String filePath) throws IOException {
+    public StorageFile(String filePath) throws IOException {
         this.file = new File(filePath);
         if (this.file.getParentFile() != null && !this.file.getParentFile().exists()) {
             this.file.getParentFile().mkdirs();

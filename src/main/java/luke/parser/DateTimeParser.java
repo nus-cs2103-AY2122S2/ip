@@ -1,3 +1,5 @@
+package luke.parser;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -28,6 +30,7 @@ public class DateTimeParser {
     public static String toString(LocalDateTime date) {
         return date.format(fromDateToString);
     }
+
     public static String toCommandString(LocalDateTime date) {
         return date.format(fromDateToCommand);
     }

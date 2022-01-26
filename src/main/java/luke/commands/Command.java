@@ -1,5 +1,6 @@
-import java.util.HashMap;
-import java.util.Map;
+package luke.commands;
+
+import luke.data.TaskList;
 
 public abstract class Command {
 

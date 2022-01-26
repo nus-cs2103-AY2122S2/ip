@@ -1,3 +1,5 @@
+package luke.data.tasks;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;

@@ -1,9 +1,13 @@
+package luke.commands;
+
+import luke.data.TaskList;
+
 public class MarkCommand extends UpdateCommand {
 
     private static final String DEFAULT_MESSAGE = "Using the force... Great! I have forced this task as done.";
     public static final CommandAction COMMAND_ACTION = CommandAction.MARK;
 
-    MarkCommand(int index) {
+    public MarkCommand(int index) {
         super(index);
     }
 

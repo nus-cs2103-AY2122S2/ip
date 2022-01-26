@@ -1,10 +1,15 @@
+package luke.data;
+
+import luke.data.tasks.Task;
+import luke.storage.Storable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList implements Storable {
     private List<Task> taskList;
 
-    TaskList() {
+    public TaskList() {
         taskList = new ArrayList<>();
     }
 

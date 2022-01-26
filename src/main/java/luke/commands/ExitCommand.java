@@ -1,3 +1,7 @@
+package luke.commands;
+
+import luke.data.TaskList;
+
 public class ExitCommand extends Command {
 
     private static final String DEFAULT_MESSAGE = "I'll take my leave... Do you know who is my father?";

@@ -1,3 +1,7 @@
+package luke.commands;
+
+import luke.data.TaskList;
+
 public class InvalidCommand extends Command {
 
     private static final String DEFAULT_MESSAGE = "Oops, the force does not support this action.\nPlease try again :(";

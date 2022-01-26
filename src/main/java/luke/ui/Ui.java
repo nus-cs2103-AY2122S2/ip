@@ -1,3 +1,5 @@
+package luke.ui;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -11,7 +13,7 @@ public class Ui {
     private static final String BORDER = "=".repeat(60);
     private final Scanner inputSc;
 
-    Ui() {
+    public Ui() {
         inputSc = new Scanner(System.in);
     }
 
