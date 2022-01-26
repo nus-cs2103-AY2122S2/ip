@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.MissingFormatArgumentException; // Imported MissingFormatArgumentException
 import java.util.Scanner; // Imported Scanner class
@@ -17,8 +18,9 @@ public class Duke {
         System.out.println(logo);
         Commands cmd = new Commands();
         Scanner io = new Scanner(System.in); // Scanner object created
+        File curr = null;
         try {
-            File curr = cmd.startup();
+            curr = cmd.startup();
             cmd.restore(curr);
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
@@ -165,6 +167,20 @@ public class Duke {
                             + "_______________________________________________________\n";
                     System.out.println(err);
                     break;
+                }
+            }
+            case "update": {
+                try {
+                    if (curr == null) {
+                        throw new FileNotFoundException();
+                    }
+                    cmd.update(curr);
+                    break;
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                    break;
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
             default:

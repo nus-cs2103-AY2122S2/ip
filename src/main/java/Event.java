@@ -14,4 +14,8 @@ public class Event extends Task {
     public String getEvent() {
         return "[E]" + this.getTask() + "(at: " + timeFrame + ")\n";
     }
+
+    public String getFormattedText() {
+        return "E:" + this.getMark() + ":" + this.getDescription() + ":" + this.timeFrame;
+    }
 }

@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
@@ -12,21 +14,21 @@ public class Commands {
     public Commands() { // Empty Constructor
     }
 
-    void bye() { // Get DukeLCH to Exit
+    public void bye() { // Get DukeLCH to Exit
         String bye = "_______________________________________________________\n"
                 + "Goodbye. I hope to be of service to you again soon!\n"
                 + "_______________________________________________________\n";
         System.out.println(bye);
     }
 
-    void list() { // Get DukeLCH to List cmdHistory
+    public void list() { // Get DukeLCH to List cmdHistory
         String border = "_______________________________________________________\n";
         System.out.println(border
                 + "These are your tasks that we have in our records:\n"
                 + taskHistory.printAll() + border);
     }
 
-    void mark(int index) {
+    public void mark(int index) {
         taskHistory.getTask(index).markTask();
         Task currTask = taskHistory.getTask(index);
         String tasking = "";
@@ -49,7 +51,7 @@ public class Commands {
         System.out.println(msg);
     }
 
-    void unmark(int index) {
+    public void unmark(int index) {
         taskHistory.getTask(index).unmarkTask();
         Task currTask = taskHistory.getTask(index);
         String tasking = "";
@@ -73,7 +75,7 @@ public class Commands {
         System.out.println(msg);
     }
 
-    void todo(String[] tokens) {
+    public void todo(String[] tokens) {
         String description = "";
         for (int i = 1; i < tokens.length; i++) {
             description = description.concat(tokens[i]);
@@ -84,7 +86,7 @@ public class Commands {
         taskHistory.addToDo(description);
     }
 
-    void deadline(String[] tokens) throws DukeException {
+    public void deadline(String[] tokens) throws DukeException {
         String description = "";
         String timeFrame = "";
         int timeStart = -1; // -1 is a placeholder to indicate /by has not been found
@@ -112,7 +114,7 @@ public class Commands {
         taskHistory.addDeadline(description, timeFrame);
     }
 
-    void event(String[] tokens) throws DukeException {
+    public void event(String[] tokens) throws DukeException {
         String description = "";
         String timeFrame = "";
         int timeStart = -1; // -1 is a placeholder to indicate /at has not been found
@@ -140,7 +142,7 @@ public class Commands {
         taskHistory.addEvent(description, timeFrame);
     }
 
-    void delete(int index) {
+    public void delete(int index) {
         taskHistory.deleteTask(index);
     }
 
@@ -158,7 +160,7 @@ public class Commands {
         return f2;
     }
 
-    void restore(File curr) throws FileNotFoundException {
+    public void restore(File curr) throws FileNotFoundException {
         Scanner s = new Scanner(curr);
         while (s.hasNext()) {
             String temp = s.nextLine();
@@ -179,5 +181,13 @@ public class Commands {
                 break;
             }
         }
+    }
+
+    void update(File curr) throws IOException {
+        String content = taskHistory.formatRecord();
+        FileWriter fw = new FileWriter(curr);
+        fw.append(content);
+        fw.flush();
+        fw.close();
     }
 }

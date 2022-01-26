@@ -1,5 +1,6 @@
 import java.lang.StringBuilder; // Imported StringBuilder class
 import java.util.ArrayList; // Imported ArrayList class
+import java.util.Iterator;
 
 public class TaskHistory {
     private final ArrayList<Task> record = new ArrayList<>(100); // ArrayList of size 100 by default
@@ -7,7 +8,7 @@ public class TaskHistory {
     public TaskHistory() { //Empty Constructor
     }
 
-    void addToDo(String description) {
+    public void addToDo(String description) {
         ToDos tempToDo = new ToDos(description);
         record.add(tempToDo);
         String msg = "_______________________________________________________\n"
@@ -18,12 +19,12 @@ public class TaskHistory {
         System.out.println(msg);
     }
 
-    void addToDo(int mark, String description) {
+    public void addToDo(int mark, String description) {
         ToDos tempToDo = new ToDos(mark, description);
         record.add(tempToDo);
     }
 
-    void addDeadline(String description, String timeFrame) {
+    public void addDeadline(String description, String timeFrame) {
         Deadlines tempDeadline = new Deadlines(description, timeFrame);
         record.add(tempDeadline);
         String msg = "_______________________________________________________\n"
@@ -34,12 +35,12 @@ public class TaskHistory {
         System.out.println(msg);
     }
 
-    void addDeadline(int mark, String description, String timeFrame) {
+    public void addDeadline(int mark, String description, String timeFrame) {
         Deadlines tempDeadline = new Deadlines(mark, description, timeFrame);
         record.add(tempDeadline);
     }
 
-    void addEvent(String description, String timeFrame) {
+    public void addEvent(String description, String timeFrame) {
         Event tempEvent = new Event(description, timeFrame);
         record.add(tempEvent);
         String msg = "_______________________________________________________\n"
@@ -50,7 +51,7 @@ public class TaskHistory {
         System.out.println(msg);
     }
 
-    void addEvent(int mark, String description, String timeFrame) {
+    public void addEvent(int mark, String description, String timeFrame) {
         Event tempEvent = new Event(mark, description, timeFrame);
         record.add(tempEvent);
     }
@@ -62,7 +63,7 @@ public class TaskHistory {
      *
      * @return string containing all the tasks stored in DukeLCH.
      */
-    String printAll() {
+    public String printAll() {
         int count = 1;
         StringBuilder result = new StringBuilder();
         for (Task nextTask : record) {
@@ -76,7 +77,7 @@ public class TaskHistory {
                 Event temp = (Event) nextTask;
                 result.append(count).append(".").append(temp.getEvent());
             } else {
-                System.out.println("Error occurred while processing " + nextTask.getTask()); // For some reason the task type is unknown
+                System.out.println("Error occurred while processing " + nextTask.getTask());
             }
             count++;
         }
@@ -87,11 +88,11 @@ public class TaskHistory {
         }
     }
 
-    Task getTask(int index) {
+    public Task getTask(int index) {
         return record.get(index);
     }
 
-    void deleteTask(int index) {
+    public void deleteTask(int index) {
         StringBuilder description = new StringBuilder();
         Task temp = record.remove(index);
         if (temp instanceof ToDos) {
@@ -104,7 +105,7 @@ public class TaskHistory {
             Event tempEvent = (Event) temp;
             description.append(tempEvent.getEvent());
         } else {
-            System.out.println("Error occurred while deleting " + temp.getTask()); // For some reason the task type is unknown
+            System.out.println("Error occurred while deleting " + temp.getTask());
         }
         String msg = "_______________________________________________________\n"
                 + "Understood, removing this task now:\n"
@@ -112,5 +113,27 @@ public class TaskHistory {
                 + "Now you have " + record.size() + " tasks in our records.\n"
                 + "_______________________________________________________\n";
         System.out.println(msg);
+    }
+
+    String formatRecord() {
+        StringBuilder s = new StringBuilder();
+        Iterator<Task> iterator = record.iterator();
+        while (iterator.hasNext()) {
+            Task temp = iterator.next();
+            if (temp instanceof ToDos) {
+                ToDos tempToDos = (ToDos) temp;
+                s.append(tempToDos.getFormattedText()).append("\n");
+            } else if (temp instanceof Deadlines) {
+                Deadlines tempDeadlines = (Deadlines) temp;
+                s.append(tempDeadlines.getFormattedText()).append("\n");
+            } else if (temp instanceof Event) {
+                Event tempEvent = (Event) temp;
+                s.append(tempEvent.getFormattedText()).append("\n");
+            } else {
+                System.out.println("Error occurred while deleting " + temp.getTask());
+            }
+        }
+        String content = s.toString();
+        return content;
     }
 }

@@ -20,6 +20,18 @@ public class Task {
         }
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
+    public String getMark() {
+        if (this.isDone) {
+            return "1";
+        } else {
+            return "0";
+        }
+    }
+
     public void markTask() {
         this.isDone = true;
     }

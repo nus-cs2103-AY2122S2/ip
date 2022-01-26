@@ -11,4 +11,8 @@ public class ToDos extends Task {
     public String getToDo() {
         return "[T]" + this.getTask() + "\n";
     }
+
+    public String getFormattedText() {
+        return "T:" + this.getMark() + ":" + this.getDescription();
+    }
 }

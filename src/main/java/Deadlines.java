@@ -14,4 +14,8 @@ public class Deadlines extends Task {
     public String getDeadline() {
         return "[D]" + this.getTask() + "(by: " + timeFrame + ")\n";
     }
+
+    public String getFormattedText() {
+        return "D:" + this.getMark() + ":" + this.getDescription() + ":" + this.timeFrame;
+    }
 }
