@@ -1,4 +1,2 @@
-T | 1 | me
-D | 0 | homework | May 5 2022 23:59
-T | 0 | wee
-D | 0 | me | Feb 2 2022 23:59
+T | 0 | borrow book
+E | 1 | project meeting  | May 5 2022 23:59
