@@ -30,27 +30,30 @@ public class Logic {
 
     private void doDelete(String description) throws InvalidTaskIndexException {
         int position = Integer.parseInt(description);
-        reminder.delete(position);
+        reminder.delete(position, true);
     }
 
     private void doTodo(String description) {
-        reminder.add(new Todo(description, TaskType.TODO.getTaskType()));
+        reminder.add(new Todo(TaskType.TODO.getTaskType(), description), true);
     }
 
-    private void doDeadline(String description) {
-        reminder.add(new Deadline(description, TaskType.DEADLINE.getTaskType()));
+    private void doDeadline(String description, String date) {
+        reminder.add(new Deadline(TaskType.DEADLINE.getTaskType(), description, date), true);
     }
 
-    private void doEvent(String description) {
-        reminder.add(new Event(description, TaskType.EVENT.getTaskType()));
+    private void doEvent(String description, String date) {
+        reminder.add(new Event(TaskType.EVENT.getTaskType(), description, date), true);
     }
 
     private void doDefault() throws InvalidCommandException {
         throw new InvalidCommandException();
     }
 
-    private String getCommand(String input) throws InvalidCommandException {
+    private String getValidCommand(String input) throws InvalidCommandException {
         String[] arr = input.split(" ");
+        if (input.startsWith("bye") || input.startsWith("list")) {
+            return arr[0];
+        }
         if (arr.length < 1 || input.equals("") || !Arrays.asList(VALID_COMMAND).contains(arr[0])) {
             throw new InvalidCommandException();
         }
@@ -58,32 +61,36 @@ public class Logic {
     }
 
     private String getDescription(String input, String command) throws IncompleteCommandException {
-        if (input.startsWith("bye") || input.startsWith("list")) {
-            return "";
+        if (!(command.equals("bye") || command.equals("list"))) {
+            String[] arr = input.split(command + " ");
+            if (arr.length < 2) {
+                throw new IncompleteCommandException(command);
+            }
+            arr = arr[1].split(" /by | /at ");
+            return arr[0];
         }
-        if (input.split(command + " ").length < 2) {
-            throw new IncompleteCommandException(command);
-        }
-        if (command.equals("todo")) {
-            return input.split("todo ")[1];
-        } else if (command.equals("deadline") || command.equals("event")) {
-            String[] arr = input.split(" /by | /at ");
+        return "";
+    }
+
+    private String getDate(String input, String command) throws IncompleteCommandException {
+        if (command.equals("deadline") || command.equals("event")) {
+            String[] arr = input.split(command + " ");
+            arr = arr[1].split(" /by | /at ");
             if (arr.length < 2) {
                 throw new IncompleteCommandException("'date' in " + command);
             } else {
-                boolean isDeadline = command.equals("deadline");
-                return isDeadline ? (arr[0].substring(9) + " (by: " + arr[1] + ")") :
-                        arr[0].substring(6) + " (at: " + arr[1] + ")";
+                return arr[1];
             }
         } else {
-            return input.split(command + " ")[1];
+            return "";
         }
     }
 
     public void run(String input) {
         try {
-            String command = getCommand(input);
+            String command = getValidCommand(input);
             String description = getDescription(input, command);
+            String date = getDate(input, command);
             switch (command) {
             case "bye":
                 doBye();
@@ -104,10 +111,10 @@ public class Logic {
                 doTodo(description);
                 break;
             case "deadline":
-                doDeadline(description);
+                doDeadline(description, date);
                 break;
             case "event":
-                doEvent(description);
+                doEvent(description, date);
                 break;
             default:
                 doDefault();

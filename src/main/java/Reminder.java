@@ -4,24 +4,32 @@ import java.util.List;
 public class Reminder {
     protected List<Task> reminders = new ArrayList<>();
 
-    public void add(Task task) {
+    public void add(Task task, boolean printMessage) {
         reminders.add(task);
-        System.out.println("\tGot it. I've added this task:");
-        printTaskAndSize(task);
+        if (printMessage) {
+            System.out.println("\tGot it. I've added this task:");
+            printTaskAndSize(task);
+        }
     }
 
-    public void delete(int position) throws InvalidTaskIndexException {
+    public void delete(int position, boolean printMessage) throws InvalidTaskIndexException {
         if (position > this.getSize()) {
             throw new InvalidTaskIndexException();
         } else {
             Task task = reminders.remove(--position);
-            System.out.println("\tNoted. I've removed this task:");
-            printTaskAndSize(task);
+            if(printMessage) {
+                System.out.println("\tNoted. I've removed this task:");
+                printTaskAndSize(task);
+            }
         }
     }
 
     public int getSize() {
         return reminders.size();
+    }
+
+    public List<Task> getReminders() {
+        return this.reminders;
     }
 
     public void list() {

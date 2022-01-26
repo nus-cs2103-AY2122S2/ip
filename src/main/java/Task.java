@@ -1,12 +1,21 @@
 public class Task {
-    protected String description;
-    protected boolean isDone;
     protected String taskType;
+    protected boolean isDone;
+    protected String description;
+    protected String date;
 
-    public Task(String description, String taskType) {
+    public Task(String taskType, String description, String date) {
         this.description = description;
         this.isDone = false;
         this.taskType = taskType;
+        this.date = date;
+    }
+
+    public Task(String taskType, boolean isDone, String description, String date) {
+        this.description = description;
+        this.isDone = isDone;
+        this.taskType = taskType;
+        this.date = date;
     }
 
     public String getStatusIcon() {
@@ -14,6 +23,17 @@ public class Task {
     }
 
     public String getTaskType() { return this.taskType;}
+
+    public boolean getIsDone() { return this.isDone;}
+
+    public String getDescription() { return this.description; }
+
+    public String getDate() {
+        if (!this.taskType.equals(TaskType.TODO.getTaskType())) {
+            return this.date;
+        }
+        return "";
+    }
 
     private boolean hasAlreadyMark() {
         return this.isDone;
