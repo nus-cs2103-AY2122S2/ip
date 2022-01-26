@@ -1,9 +1,14 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Logic {
     private final Reminder reminder;
     private static final String[] VALID_COMMAND =
-            {"bye", "deadline", "delete", "event",
+            {"bye", "date", "deadline", "delete", "event",
                     "list", "mark", "unmark", "todo"};
 
     public Logic(Reminder reminder) {
@@ -45,13 +50,28 @@ public class Logic {
         reminder.add(new Event(TaskType.EVENT.getTaskType(), description, date), true);
     }
 
+    private void doDate(String description) throws IncompleteCommandException {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[dd-MM-yyyy]" + "[dd/MM/yyyy]");
+            LocalDate.parse(description, formatter);
+            List<Task> list = findSpecificTasksByDate(description);
+            if (list.size() > 0) {
+                list.forEach(x -> System.out.println("\t" + x));
+            } else {
+                System.out.println("\tNo deadline/ event on this date");
+            }
+        } catch (DateTimeParseException e) {
+            System.out.println("\tNot a valid date");
+        }
+    }
+
     private void doDefault() throws InvalidCommandException {
         throw new InvalidCommandException();
     }
 
     private String getValidCommand(String input) throws InvalidCommandException {
         String[] arr = input.split(" ");
-        if (input.startsWith("bye") || input.startsWith("list")) {
+        if (input.startsWith("bye") || input.startsWith("list") || input.startsWith("date")) {
             return arr[0];
         }
         if (arr.length < 1 || input.equals("") || !Arrays.asList(VALID_COMMAND).contains(arr[0])) {
@@ -86,6 +106,16 @@ public class Logic {
         }
     }
 
+    private List<Task> findSpecificTasksByDate(String description) {
+        List <Task> list = new ArrayList<>();
+        for (Task task : reminder.getReminders()) {
+            if (task.matchDate(description)) {
+                list.add(task);
+            }
+        }
+        return list;
+    }
+
     public void run(String input) {
         try {
             String command = getValidCommand(input);
@@ -115,6 +145,9 @@ public class Logic {
                 break;
             case "event":
                 doEvent(description, date);
+                break;
+            case "date":
+                doDate(description);
                 break;
             default:
                 doDefault();
