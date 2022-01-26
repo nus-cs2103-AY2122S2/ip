@@ -16,20 +16,17 @@ import java.util.ArrayList;
 public class Parser {
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
     private String input;
 
     /**
      * Constructor of Parser class
      * @param storage where to load/read input data
      * @param taskList data to load/store
-     * @param ui user interface
      * @param input user input
      */
-    public Parser(Storage storage, TaskList taskList, Ui ui, String input) {
+    public Parser(Storage storage, TaskList taskList, String input) {
         this.storage = storage;
         this.tasks = taskList;
-        this.ui = ui;
         this.input = input;
     }
 
@@ -122,27 +119,31 @@ public class Parser {
                 int taskNum = Integer.parseInt(inputArr[1]) - 1;
                 tasks.deleteTask(taskNum);
                 storage.writeToFile(tasks);
-            } catch (IndexOutOfBoundsException exp) {
+            } catch (IndexOutOfBoundsException e) {
                 Ui.markErrorMessage();
             }
 
         } else if (inputArr[0].equals("find")) {
-            String str = inputArr[1];
-            ArrayList<Task> foundTasks = new ArrayList<Task>();
-            for (int i = 0; i < tasks.getTaskList().size(); i++) {
-                Task task = tasks.getTaskList().get(i);
-                if (task.getDescription().contains(str)) {
-                    foundTasks.add(task);
+            try {
+                String str = inputArr[1];
+                ArrayList<Task> foundTasks = new ArrayList<Task>();
+                for (int i = 0; i < tasks.getTaskList().size(); i++) {
+                    Task task = tasks.getTaskList().get(i);
+                    if (task.getDescription().contains(str)) {
+                        foundTasks.add(task);
+                    }
                 }
-            }
-            if (foundTasks.size() == 0) {
-                Ui.NotFoundMessage();
-            } else {
-                Ui.findMessage();
-                for (int i = 1; i <= foundTasks.size(); i++) {
-                    System.out.println(i + "." + foundTasks.get(i - 1));
+                if (foundTasks.size() == 0) {
+                    Ui.NotFoundMessage();
+                } else {
+                    Ui.findMessage();
+                    for (int i = 1; i <= foundTasks.size(); i++) {
+                        System.out.println(i + "." + foundTasks.get(i - 1));
+                    }
+                    System.out.println(Ui.LINE);
                 }
-                System.out.println(Ui.LINE);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                Ui.findErrorMessage();
             }
 
 

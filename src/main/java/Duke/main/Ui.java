@@ -109,6 +109,13 @@ public class Ui {
     }
 
     /**
+     * find error message
+     */
+    public static void findErrorMessage() {
+        System.out.println(LINE + "☹ OOPS!!! please indicate keywords to search\n" + LINE);
+    }
+
+    /**
      * general error message
      */
     public static void generalErrorMessage() {

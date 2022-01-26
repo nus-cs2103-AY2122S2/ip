@@ -8,8 +8,7 @@ import java.io.Serializable;
  * a subclass of task
  */
 public class Deadline extends Task implements Serializable {
-
-    protected LocalDate by;
+    private LocalDate by;
 
     /**
      * Constructor

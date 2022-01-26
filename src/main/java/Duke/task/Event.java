@@ -8,7 +8,7 @@ import java.io.Serializable;
  * a subclass of task
  */
 public class Event extends Task implements Serializable {
-    protected LocalDate at;
+    private LocalDate at;
 
     /**
      * Constructor

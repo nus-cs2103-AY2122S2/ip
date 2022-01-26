@@ -9,7 +9,6 @@ import java.util.Scanner;
 public class Duke {
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
 
     /**
      * constructor of the Duck program
@@ -33,11 +32,11 @@ public class Duke {
     /**
      * this method is used to run the Duke program
      */
-    public void run() throws IOException, ClassNotFoundException {
+    public void run() throws IOException {
         Ui.greeting();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
-            Parser p = new Parser(storage, tasks, ui, sc.nextLine());
+            Parser p = new Parser(storage, tasks, sc.nextLine());
             p.userCommand();
         }
     }
@@ -47,6 +46,6 @@ public class Duke {
      * @param args command line arguments
      */
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        new Duke("duke_Data_Saved.txt").run();
+        new Duke("duke_Saved.txt").run();
     }
 }

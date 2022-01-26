@@ -1,7 +1,7 @@
 package Duke.main;
 
 public class DukeException extends Exception {
-    String job;
+    private String job;
 
     DukeException(String message) {
         super(message);
