@@ -1,3 +1,7 @@
+package duke;
+
+import duke.ChiException;
+import duke.Deadline;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;

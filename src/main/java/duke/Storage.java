@@ -1,3 +1,8 @@
+package duke;
+
+import duke.ChiException;
+import duke.Deadline;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

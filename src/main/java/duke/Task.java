@@ -1,3 +1,5 @@
+package duke;
+
 public class Task {
 
     /** The description of the task. */

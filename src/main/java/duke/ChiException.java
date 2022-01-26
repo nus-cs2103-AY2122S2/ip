@@ -1,3 +1,5 @@
+package duke;
+
 public class ChiException extends Exception {
 
     /** The original message sent. */
