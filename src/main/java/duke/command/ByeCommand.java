@@ -6,10 +6,7 @@ import duke.managers.FileManager;
 import duke.managers.TaskList;
 
 public class ByeCommand extends Command{
-
-    private int taskIdx;
     private Ui ui;
-    private FileManager fileManager;
 
     public ByeCommand(String userTaskString) {
         super(userTaskString);

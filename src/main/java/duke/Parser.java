@@ -8,6 +8,7 @@ import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
 import duke.command.InvalidCommand;
+import duke.command.FindCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;

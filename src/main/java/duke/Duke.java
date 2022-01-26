@@ -32,7 +32,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         this.userTaskList = this.fileManager.loadTasks();
         Parser parser = new Parser();
-        ui.print("Hello, My Dear Friend... I'm duke.Duke, your personal motivator!");
+        ui.print("Hello, My Dear Friend... I'm Duke, your personal motivator!");
         Quote quoteOfTheDay = new Quote();
 //        duke.print(quoteOfTheDay.generateQuote());
         ui.print("What can i do for you today?");
