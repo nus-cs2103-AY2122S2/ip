@@ -1,6 +1,6 @@
 package Tasks;
 
-public class Task {
+abstract public class Task {
     private String task;
     private Boolean marked;
 
@@ -21,12 +21,10 @@ public class Task {
         return this.marked;
     }
 
+    abstract  public String cacheString();
+
     @Override
-    public String toString() {
-        if (this.marked) {
-            return "[X" + "] " + this.task;
-        } else {
-            return "[ " + "] " + this.task;
-        }
-    }
+    abstract public String toString();
+
+
 }

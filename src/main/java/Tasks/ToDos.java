@@ -7,6 +7,12 @@ public class ToDos extends Task {
     }
 
     @Override
+    public String cacheString() {
+        String s = getMarked() ? "1" : "0";
+        return "T" + "|" + s + "|" + this.getTask();
+    }
+
+    @Override
     public String toString() {
         if (this.getMarked()) {
             return "[T]" + "[X" + "] " + this.getTask();

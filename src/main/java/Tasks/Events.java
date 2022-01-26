@@ -9,6 +9,12 @@ public class Events extends Task {
     }
 
     @Override
+    public String cacheString() {
+        String s = getMarked() ? "1" : "0";
+        return "E" + "|" + s + "|" + this.getTask() + "|"  + this.details;
+    }
+
+    @Override
     public String toString() {
         if (this.getMarked()) {
             return "[E]" + "[X" + "] " + this.getTask() + " (at: " + this.details + ")";
