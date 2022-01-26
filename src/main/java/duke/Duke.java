@@ -1,9 +1,10 @@
-import javax.swing.text.DateFormatter;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Scanner;
+package duke;
+
+import duke.exception.DukeException;
+import duke.helper.Parser;
+import duke.helper.Storage;
+import duke.helper.TaskList;
+import duke.helper.Ui;
 
 public class Duke {
 
@@ -12,7 +13,7 @@ public class Duke {
     private TaskList taskList;
     private Storage storage;
     private Ui ui;
-    //private Ui ui;
+    //private duke.helper.Ui ui;
     public Duke(String filePath) {
         storage = new Storage(filePath);
         ui = new Ui();

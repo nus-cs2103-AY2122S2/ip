@@ -1,3 +1,11 @@
+package duke.helper;
+
+import duke.exception.*;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -73,7 +81,7 @@ public class Parser {
             } catch(IndexOutOfBoundsException e) {
                 throw new DukeInvalidIndexException();
             }
-            temp.isDone = true;
+            temp.markDone();
             return "Nice! I've marked this task as done:\n" + temp.toString();
 
         }

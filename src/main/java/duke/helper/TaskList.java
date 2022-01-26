@@ -1,6 +1,8 @@
-import java.io.*;
+package duke.helper;
+
+import duke.tasks.Task;
+
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class TaskList {
 //    private static String filePath = "/data/tasks.txt";
@@ -51,7 +53,7 @@ public class TaskList {
 //    public void save() {
 //        try{
 //            FileWriter fw = new FileWriter(System.getProperty("user.dir") + filePath);
-//            for(Task task : taskList){
+//            for(duke.tasks.Task task : taskList){
 //                fw.write(task.getDetail());
 //            }
 //            fw.close();
@@ -62,18 +64,18 @@ public class TaskList {
 //        }
 //    }
 
-//    public Task parse(String nextLine) {
+//    public duke.tasks.Task parse(String nextLine) {
 //            String[] strArr = nextLine.split(" \\| ");
 //            String[] subStrArr;
 //            String command = strArr[0];
 //            boolean isDone = strArr[1].equals("1") ? true : false;
 //            switch (command) {
 //                case "T":
-//                    return new Todo(strArr[2], isDone);
+//                    return new duke.tasks.Todo(strArr[2], isDone);
 //                case "D":
-//                    return new Deadline(strArr[2], strArr[3], isDone);
+//                    return new duke.tasks.Deadline(strArr[2], strArr[3], isDone);
 //                case "E":
-//                    return new Event(strArr[2], strArr[3], isDone);
+//                    return new duke.tasks.Event(strArr[2], strArr[3], isDone);
 //                default:
 //                    return null;
 //            }
@@ -86,7 +88,7 @@ public class TaskList {
 //            String nextLine;
 //            while (sc.hasNextLine()) {
 //                nextLine = sc.nextLine();
-//                Task task = parse(nextLine);
+//                duke.tasks.Task task = parse(nextLine);
 //                taskList.add(task);
 //            }
 //        } catch (FileNotFoundException e){
