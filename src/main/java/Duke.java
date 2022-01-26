@@ -1,3 +1,9 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,7 +19,13 @@ public class Duke {
         System.out.println("Hello uwu! I'm xzzz,");
         System.out.println("You can check your schedwle here (ɔ◔‿◔)ɔ ♥!");
 
+        checkFile();
+
+        readFile();
+
         respond();
+
+        saveFile();
     }
 
     private static void respond() {
@@ -40,6 +52,7 @@ public class Duke {
                 Task newTask;
                 if (command.equals("todo")) {
                     command = sc.nextLine();
+                    command.trim();
                     try {
                         newTask = makeToDo(command);
                     } catch (ToDoIllegalArgumentException ex) {
@@ -115,5 +128,59 @@ public class Duke {
         System.out.println("OKI!! i have removed this task: \n" +
                 toDoList.remove(idx - 1) + "\n" +
                 "now there are " + toDoList.size() + " tasks in the list! get to work (ง︡'-'︠)ง");
+    }
+
+    private static void checkFile() {
+        try {
+            Files.createDirectory(Paths.get("data"));
+        } catch (IOException ex) {
+        }
+
+        try {
+            Files.createFile(Paths.get("data/duke.txt"));
+        } catch (IOException ex) {
+        }
+    }
+
+    private static void saveFile() {
+        try {
+            String textToAdd = "";
+            for (Task task : toDoList) {
+                textToAdd += task.toText();
+            }
+
+            FileWriter fw = new FileWriter("data/duke.txt");
+            fw.write(textToAdd);
+            fw.close();
+        } catch (IOException ex) {
+            checkFile();
+            saveFile();
+        }
+    }
+
+    private static void readFile() {
+        File dataFile = new File("data/duke.txt");
+        try {
+            Scanner s = new Scanner(dataFile);
+            String[] taskLine;
+            while (s.hasNext()) {
+                taskLine = s.nextLine().split(" \\| ");
+
+                if (taskLine[0].equals("T")) {
+                    taskLine[2].trim();
+                    toDoList.add(new ToDo(taskLine[2]));
+                } else if (taskLine[0].equals("D")) {
+                    toDoList.add(new Deadline(taskLine[2], taskLine[3]));
+                } else if (taskLine[0].equals("E")) {
+                    toDoList.add(new Event(taskLine[2], taskLine[3]));
+                }
+
+                if (taskLine[1].equals("1")) {
+                    toDoList.get(toDoList.size() - 1).mark();
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            checkFile();
+        }
     }
 }
