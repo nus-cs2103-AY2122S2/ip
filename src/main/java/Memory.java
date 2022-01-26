@@ -1,6 +1,9 @@
-import java.io.IOException;
-import java.util.ArrayList;
 import java.io.File;
+import java.io.IOException;
+
+import java.time.format.DateTimeParseException;
+
+import java.util.ArrayList;
 
 /**
  * The Memory class handles the storage and access to available Tasks.
@@ -86,10 +89,15 @@ public class Memory {
      * @param time The due time of the Deadline.
      */
     public void addDeadline(String name, String time) {
-        taskMem.add(new Deadline(name, time));
-        size++;
-        echo.echoString("added deadline: " + getString(size - 1));
-        parser.updateAll();
+        try {
+            taskMem.add(new Deadline(name, time));
+            size++;
+            echo.echoString("added deadline: " + getString(size - 1));
+            parser.updateAll();
+        }
+        catch (DateTimeParseException e) {
+            echo.echoString("Please format your date in yyyy-mm-dd");
+        }
     }
 
     /**
@@ -99,10 +107,15 @@ public class Memory {
      * @param time The time of the Event.
      */
     public void addEvent(String name, String time) {
-        taskMem.add(new Event(name, time));
-        size++;
-        echo.echoString("added event: " + getString(size - 1));
-        parser.updateAll();
+        try {
+            taskMem.add(new Event(name, time));
+            size++;
+            echo.echoString("added event: " + getString(size - 1));
+            parser.updateAll();
+        }
+        catch (DateTimeParseException e) {
+            echo.echoString("Please format your date in yyyy-mm-dd");
+        }
     }
 
     /**

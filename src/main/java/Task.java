@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 /**
  * The Task class handles the interaction and form of tasks.
  *
@@ -17,7 +19,7 @@ public class Task {
         this.done = false;
     }
 
-    public String getTime() {
+    public LocalDate getTime() {
         return null;
     }
 

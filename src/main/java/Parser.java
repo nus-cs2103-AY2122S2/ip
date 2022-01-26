@@ -1,6 +1,9 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import java.time.LocalDate;
+
 import java.util.Scanner;
 
 /**
@@ -47,7 +50,6 @@ public class Parser {
         echo.echoString("Loading data...");
 
         String errorMessage = "These lines have been skipped:\n";
-        int loadSuccess = 0;
         int loadUnsuccess = 0;
 
         while(scanner.hasNext()) {
@@ -64,7 +66,6 @@ public class Parser {
                         if (tempStrArray[1].equals("1")) {
                             memory.setDone(memory.getSize());
                         }
-                        loadSuccess++;
                     }
                     break;
 
@@ -77,7 +78,6 @@ public class Parser {
                         if (tempStrArray[1].equals("1")) {
                             memory.setDone(memory.getSize());
                         }
-                        loadSuccess++;
                     }
                     break;
 
@@ -90,7 +90,6 @@ public class Parser {
                         if (tempStrArray[1].equals("1")) {
                             memory.setDone(memory.getSize());
                         }
-                        loadSuccess++;
                     }
                     break;
 
@@ -101,12 +100,6 @@ public class Parser {
             }
         }
 
-        int loadTotal = loadSuccess + loadUnsuccess;
-
-        echo.echoString("Loading data complete!");
-        echo.echoString("Successful: " + loadSuccess
-                + ", Unsuccessful: " + loadUnsuccess
-                + ". Total: " + loadTotal);
         if (loadUnsuccess > 0) {
             echo.echoString(errorMessage);
         }
@@ -129,7 +122,7 @@ public class Parser {
         for (int i = 0; i < size; i++) {
             Task task = memory.getTask(i);
             String tempName;
-            String tempTime;
+            LocalDate tempTime;
             String tempDone;
 
             tempName = task.getName();

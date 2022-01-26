@@ -1,10 +1,15 @@
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
+
 /**
  * The Deadline class extends the Task class by adding a due time.
  *
  * @author Rdac0
  */
 public class Deadline extends Task{
-    private String time;
+    private LocalDate time;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
 
     /**
      * Creates a Deadline object.
@@ -12,12 +17,12 @@ public class Deadline extends Task{
      * @param name The name of the Deadline.
      * @param time The due time of the Deadline.
      */
-    public Deadline(String name, String time) {
+    public Deadline(String name, String time) throws DateTimeParseException {
         super(name);
-        this.time = time;
+        this.time = LocalDate.parse(time);
     }
 
-    public String getTime() {
+    public LocalDate getTime() {
         return time;
     }
 
@@ -30,6 +35,6 @@ public class Deadline extends Task{
             mark = "[ ] ";
         }
         return "[D]" + mark + getName() +
-                " (by: " + this.time + ")";
+                " (by: " + this.time.format(formatter) + ")";
     }
 }

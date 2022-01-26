@@ -71,7 +71,7 @@ public class Duke {
                     echo.echoString(specific + tryTodo);
                 } else {
                     //Empty to-do
-                    if (tempStrArray[1] == "") {
+                    if (tempStrArray[1].equals("")) {
                         echo.echoString(specific + tryTodo);
                     } else {
                             memory.addTask(tempStrArray[1]);
