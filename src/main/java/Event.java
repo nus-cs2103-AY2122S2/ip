@@ -1,9 +1,8 @@
 public class Event extends Task {
-    String taskType = "E";
     String timeRange;
 
     public Event(String taskName, String timeRange) {
-        super(taskName);
+        super(taskName, "E");
         this.timeRange = timeRange;
     }
 

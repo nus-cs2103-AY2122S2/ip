@@ -1,10 +1,12 @@
-public class Task {
+public abstract class Task {
     boolean done;
     String taskName;
+    String taskType;
 
-    public Task(String taskName) {
+    public Task(String taskName, String taskType) {
         this.done = false;
         this.taskName = taskName;
+        this.taskType = taskType;
     }
 
     public String markAsDone(boolean isDone) {

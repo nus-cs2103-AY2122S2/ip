@@ -1,9 +1,16 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Duke {
     static String indent = "    ";
     static ArrayList<Task> taskList;
+
+    static String DB = "./data/task_list.txt";
+
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);  // Create a Scanner object
@@ -24,6 +31,7 @@ public class Duke {
                     case "bye":
                         dukeOutput(" Bye. Hope I never see you again!");
                         scanner.close();
+                        updateDB();
                         System.exit(0);
                     case "list":
                         StringBuilder tempOut = new StringBuilder("");
@@ -68,13 +76,13 @@ public class Duke {
                             taskList.add(newToDo);
                             dukeAddTaskOutput(newToDo);
                         } else if (firstWord.equals("deadline")) {
-                            String taskName = remainingUserInput.substring(0, remainingUserInput.indexOf("/by"));
+                            String taskName = remainingUserInput.substring(0, remainingUserInput.indexOf("/by") - 1);
                             String timeBy = remainingUserInput.substring(remainingUserInput.indexOf("/by") + 4);
                             Deadline newDeadline = new Deadline(taskName, timeBy);
                             taskList.add(newDeadline);
                             dukeAddTaskOutput(newDeadline);
                         } else if (firstWord.equals("event")) {
-                            String taskName = remainingUserInput.substring(0, remainingUserInput.indexOf("/at"));
+                            String taskName = remainingUserInput.substring(0, remainingUserInput.indexOf("/at") - 1);
                             String timeRange = remainingUserInput.substring(remainingUserInput.indexOf("/at") + 4);
                             Event newEvent = new Event(taskName, timeRange);
                             taskList.add(newEvent);
@@ -126,5 +134,60 @@ public class Duke {
         System.out.print(indent + "   " + task);
         printlnWithIndent(" Now you have "+ taskList.size() +" tasks in the list.");
         hLineBreak();
+    }
+
+    static void updateDB() {
+        createDirAndFileIfNonExistent(DB);
+        clearDB();
+        taskList.forEach((task)
+                -> appendTaskToDB(task));
+    }
+
+    static void appendTaskToDB(Task task) {
+        try {
+            FileWriter fw = new FileWriter(DB, true);
+            String stringToAppend = task.taskType + "|" + task.done + "|" + task.taskName;
+            switch (task.taskType) {
+                case "E":
+                    // typecasting because only an event would have taskType "E"
+                    Event event = (Event) task;
+                    stringToAppend = stringToAppend + "|" + event.timeRange;
+                    break;
+                case "D":
+                    // typecasting because only a deadline would havetaskType "D"
+                    Deadline deadlineTask = (Deadline) task;
+                    stringToAppend = stringToAppend + "|" + deadlineTask.deadline;
+                    break;
+            }
+            fw.write(stringToAppend + System.lineSeparator());
+            fw.close();
+        } catch (IOException e) {
+            dukeOutput("Error appending task to text file!");
+        }
+    }
+
+    static void clearDB() {
+        try {
+            FileWriter fw = new FileWriter(DB);
+            fw.write("");
+            fw.close();
+        } catch (IOException e) {
+            dukeOutput("Error clearing DB");
+        }
+    }
+
+    static void createDirAndFileIfNonExistent(String fileName) {
+        try {
+            File fileObj = new File(fileName);
+            File parentFile = fileObj.getParentFile();
+            if (!parentFile.exists()) {
+                parentFile.mkdir();
+            }
+            if (!fileObj.exists()) {
+                fileObj.createNewFile();
+            }
+        } catch (IOException e) {
+            dukeOutput("An Error has occured with file creation!");
+        }
     }
 }
