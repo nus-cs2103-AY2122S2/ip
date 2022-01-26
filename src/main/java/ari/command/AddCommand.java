@@ -1,3 +1,7 @@
+package ari.command;
+
+import ari.tasks.Task;
+
 public abstract class AddCommand extends Command {
     protected Task task;
 

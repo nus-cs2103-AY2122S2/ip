@@ -1,3 +1,7 @@
+package ari.command;
+
+import ari.tasks.Task;
+
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 

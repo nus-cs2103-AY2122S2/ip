@@ -1,3 +1,5 @@
+package ari.exception;
+
 public class DukeException extends IllegalArgumentException {
     public DukeException() {
     }

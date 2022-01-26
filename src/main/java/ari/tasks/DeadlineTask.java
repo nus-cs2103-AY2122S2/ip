@@ -1,21 +1,20 @@
+package ari.tasks;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class EventTask extends Task {
+import ari.exception.CommandFormatException;
+import ari.exception.EmptyCommandException;
+
+public class DeadlineTask extends Task {
     protected String time;
     protected LocalDate nowTime;
 
-    public EventTask(String message, String eventTime, LocalDate date) {
-        super.taskDescription = message;
-        this.time = eventTime;
-        this.nowTime = date;
-    }
+    public DeadlineTask(String message) throws EmptyCommandException, CommandFormatException, DateTimeParseException {
+        String[] taskArray = message.split("/by");
 
-    public EventTask(String message) throws EmptyCommandException, CommandFormatException, DateTimeParseException {
-        String[] taskArray = message.split("/at");
         LocalDate nowTime;
-
         if (taskArray[0].equals("")) {
             throw new EmptyCommandException();
         } else if (taskArray.length == 1) {
@@ -29,18 +28,25 @@ public class EventTask extends Task {
         time = nowTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 
-    public EventTask(String message, String when) {
+    public DeadlineTask(String message, String deadline, LocalDate date) {
+        super.taskDescription = message;
+        this.time = deadline;
+        this.nowTime = date;
+    }
+
+    public DeadlineTask(String message, String deadline) {
         super(message);
-        time = when;
+        time = deadline;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + time + ")";
+        return "[D]" + super.toString() + " (by: " + nowTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 
     @Override
     public String writeToFile() {
-        return "event "+ super.writeToFile() + "/at " + nowTime.toString();
+        return "deadline " + super.writeToFile() + "/by " + time.toString();
     }
+
 }

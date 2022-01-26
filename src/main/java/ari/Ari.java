@@ -1,3 +1,12 @@
+package ari;
+
+import ari.command.ByeCommand;
+import ari.command.Command;
+import ari.parser.Parser;
+import ari.storage.Storage;
+import ari.tasks.TaskList;
+import ari.ui.Ui;
+
 public class Ari {
     private String filePath;
 

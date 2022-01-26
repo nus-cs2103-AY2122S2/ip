@@ -1,3 +1,5 @@
+package ari.exception;
+
 public class CommandFormatException extends DukeException {
     public CommandFormatException() {
     }

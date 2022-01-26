@@ -1,3 +1,5 @@
+package ari.storage;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -5,6 +7,12 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import ari.command.Command;
+import ari.command.MarkCommand;
+import ari.parser.Parser;
+import ari.tasks.Task;
+import ari.tasks.TaskList;
 
 public class Storage { // deals with loading tasks from the file and saving tasks in the file
     public String path;

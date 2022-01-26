@@ -1,3 +1,5 @@
+package ari.tasks;
+
 import java.util.ArrayList;
 
 public class TaskList { // contains the task list

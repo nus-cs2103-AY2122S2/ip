@@ -1,3 +1,7 @@
+package ari.command;
+
+import ari.tasks.TaskList;
+
 public abstract class Command {
     protected TaskList taskList;
 

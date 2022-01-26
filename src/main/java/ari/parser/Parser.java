@@ -1,6 +1,21 @@
+package ari.parser;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
+
+import ari.command.ByeCommand;
+import ari.command.Command;
+import ari.command.DeadlineCommand;
+import ari.command.DeleteCommand;
+import ari.command.EventCommand;
+import ari.command.IncorrectCommand;
+import ari.command.ListCommand;
+import ari.command.MarkCommand;
+import ari.command.TodoCommand;
+import ari.command.UnmarkCommand;
+import ari.exception.CommandFormatException;
+import ari.exception.EmptyCommandException;
 
 public class Parser { // deals with making sense of the USER command
     public Parser() {
@@ -13,27 +28,27 @@ public class Parser { // deals with making sense of the USER command
         String commandWord = cmdArray[0].toLowerCase();
 
         switch (commandWord) {
-            case ByeCommand.COMMAND_WORD:
-                return new ByeCommand();
-            case ListCommand.COMMAND_WORD:
-                return new ListCommand();
-            case MarkCommand.COMMAND_WORD:
-                return prepareMark(command);
-            case UnmarkCommand.COMMAND_WORD:
-                return prepareUnmark(command);
-            case TodoCommand.COMMAND_WORD:
-                return prepareTodo(command);
-            case DeadlineCommand.COMMAND_WORD:
-                return prepareDeadline(command);
-            case EventCommand.COMMAND_WORD:
-                return prepareEvent(command);
-            case DeleteCommand.COMMAND_WORD:
-                return prepareDelete(command);
-            default:
-                return new IncorrectCommand("I am sorry Master, I am afraid I do not know what you mean");
+        case ByeCommand.COMMAND_WORD:
+            return new ByeCommand();
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
+        case MarkCommand.COMMAND_WORD:
+            return prepareMark(command);
+        case UnmarkCommand.COMMAND_WORD:
+            return prepareUnmark(command);
+        case TodoCommand.COMMAND_WORD:
+            return prepareTodo(command);
+        case DeadlineCommand.COMMAND_WORD:
+            return prepareDeadline(command);
+        case EventCommand.COMMAND_WORD:
+            return prepareEvent(command);
+        case DeleteCommand.COMMAND_WORD:
+            return prepareDelete(command);
+        default:
+            return new IncorrectCommand("I am sorry Master, I am afraid I do not know what you mean");
         }
     }
-    
+
     public Command fileParse(String instruction, String description) {
         String command = instruction + " " + description;
 
@@ -58,7 +73,7 @@ public class Parser { // deals with making sense of the USER command
         returnCommands[0] = words[0]; // commands
         returnCommands[1] = words[1]; // mark or not mark
         returnCommands[2] = String.join(" ", Arrays.copyOfRange(words, 2, words.length)); // description
-        
+
         return returnCommands;
     }
 

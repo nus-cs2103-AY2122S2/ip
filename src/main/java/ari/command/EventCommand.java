@@ -1,4 +1,8 @@
+package ari.command;
+
 import java.time.LocalDate;
+
+import ari.tasks.EventTask;
 
 public class EventCommand extends AddCommand {
     public static final String COMMAND_WORD = "event";

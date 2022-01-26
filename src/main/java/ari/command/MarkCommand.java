@@ -1,3 +1,5 @@
+package ari.command;
+
 public class MarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";
 

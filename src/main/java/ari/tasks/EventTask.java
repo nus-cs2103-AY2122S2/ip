@@ -1,15 +1,25 @@
+package ari.tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class DeadlineTask extends Task {
+import ari.exception.CommandFormatException;
+import ari.exception.EmptyCommandException;
+
+public class EventTask extends Task {
     protected String time;
     protected LocalDate nowTime;
 
-    public DeadlineTask(String message) throws EmptyCommandException, CommandFormatException, DateTimeParseException {
-        String[] taskArray = message.split("/by");
+    public EventTask(String message, String eventTime, LocalDate date) {
+        super.taskDescription = message;
+        this.time = eventTime;
+        this.nowTime = date;
+    }
 
+    public EventTask(String message) throws EmptyCommandException, CommandFormatException, DateTimeParseException {
+        String[] taskArray = message.split("/at");
         LocalDate nowTime;
+
         if (taskArray[0].equals("")) {
             throw new EmptyCommandException();
         } else if (taskArray.length == 1) {
@@ -23,25 +33,18 @@ public class DeadlineTask extends Task {
         time = nowTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 
-    public DeadlineTask(String message, String deadline, LocalDate date) {
-        super.taskDescription = message;
-        this.time = deadline;
-        this.nowTime = date;
-    }
-
-    public DeadlineTask(String message, String deadline) {
+    public EventTask(String message, String when) {
         super(message);
-        time = deadline;
+        time = when;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + time + ")";
+        return "[E]" + super.toString() + " (at: " + nowTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 
     @Override
     public String writeToFile() {
-        return "deadline "+ super.writeToFile() + "/by " + time.toString();
+        return "event "+ super.writeToFile() + "/at " + nowTime.toString();
     }
-
 }

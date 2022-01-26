@@ -1,3 +1,7 @@
+package ari.tasks;
+
+import ari.exception.EmptyCommandException;
+
 public class ToDoTask extends Task {
     public ToDoTask(String message) throws EmptyCommandException {
         super(message);

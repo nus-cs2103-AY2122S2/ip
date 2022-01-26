@@ -1,3 +1,7 @@
+package ari.tasks;
+
+import ari.exception.EmptyCommandException;
+
 public class Task {
     protected boolean isDone = false;
     protected String taskDescription;

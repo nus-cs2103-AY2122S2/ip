@@ -1,4 +1,8 @@
+package ari.command;
+
 import java.time.LocalDate;
+
+import ari.tasks.DeadlineTask;
 
 public class DeadlineCommand extends AddCommand {
     public static final String COMMAND_WORD = "deadline";

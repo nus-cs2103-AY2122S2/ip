@@ -1,3 +1,5 @@
+package ari.command;
+
 public class IncorrectCommand extends Command {
     private String message;
 

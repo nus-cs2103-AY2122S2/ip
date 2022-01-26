@@ -1,3 +1,5 @@
+package ari.command;
+
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
