@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import java.io.File;
@@ -135,6 +136,22 @@ public class Duke {
                 } catch (NumberFormatException n) {
                     System.out.println("Invalid input, please enter a valid index number instead");
                 }
+            } else if (splittedString[0].equals("find")) {
+                    String keyword = splittedString[1];
+                    List<Task> filteredItemList = new ArrayList<>();
+                    for (Task t : itemList) {
+                        filteredItemList.add(t);
+                    }
+                    filteredItemList.removeIf(s -> !s.getDescription().contains(keyword));
+                    String relevantTasks = "";
+                    int count = 1;
+                    for (Task t : filteredItemList) {
+                        relevantTasks += "     " + count + "." + t.getDescription() + "\n";
+                        count++;
+                    }
+                    System.out.println(op.border
+                                       + "     Here are the matching tasks in your list:\n" + relevantTasks
+                                       + op.instructions + op.border);
             } else { //check non-existing commands
                 System.out.println(op.border +
                         "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
