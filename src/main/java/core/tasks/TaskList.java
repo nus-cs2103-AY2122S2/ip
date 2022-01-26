@@ -1,9 +1,7 @@
-package core;
+package core.tasks;
 
 import core.exceptions.InvalidDeleteIndexException;
 import core.exceptions.NoTaskToDeleteException;
-import core.tasks.Task;
-import core.tasks.ToDo;
 import utilities.OutputFormatter;
 
 import java.util.ArrayList;
