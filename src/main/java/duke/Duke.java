@@ -94,6 +94,12 @@ public class Duke {
                     tasks.toString());
             break;
 
+        case "find":
+            String pattern = action.getArgs();
+            ui.say("[*] Here are the matching tasks in your list:\n" +
+                    tasks.searchTasks(pattern).toString());
+            break;
+
         case "mark":
             // User input is 1-indexed, list uses 0-index
             int markIdx = Integer.parseInt(action.getArgs()) - 1;

@@ -36,6 +36,22 @@ public class TaskListTest {
     }
 
     @Test
+    public void searchTasks() {
+        TaskList tasks = new TaskList();
+
+        tasks.addTask(new Todo("first"));
+        tasks.addTask(new Todo("second"));
+        tasks.addTask(new Todo("third"));
+        tasks.addTask(new Task("new 1"));
+        tasks.addTask(new Task("new 2"));
+
+        assertEquals(tasks.searchTasks("new").size(), 2);
+        assertEquals(tasks.searchTasks("ir").size(), 2);
+        assertEquals(tasks.searchTasks("fir").size(), 1);
+        assertEquals(tasks.searchTasks("fourth").size(), 0);
+    }
+
+    @Test
     public void getTask_indexOutOfBounds_exceptionThrown() {
         TaskList tasks = new TaskList();
 

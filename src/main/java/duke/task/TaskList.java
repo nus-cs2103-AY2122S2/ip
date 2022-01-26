@@ -2,6 +2,7 @@ package duke.task;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import duke.DukeException;
 
@@ -9,7 +10,15 @@ public class TaskList {
     /**
      * Main data structure to store Task objects
      */
-    private List<Task> tasks = new ArrayList<>();
+    private List<Task> tasks;
+
+    public TaskList() {
+        this(new ArrayList<>());
+    }
+
+    public TaskList(List<Task> tasks) {
+        this.tasks = tasks;
+    }
 
     /**
      * Adds a Task to existing TaskList.
@@ -114,6 +123,20 @@ public class TaskList {
         }
 
         return result;
+    }
+
+    /**
+     * Filter TaskList for Tasks whose names contain the search string
+     *
+     * @param search substring to search for
+     * @return filtered TaskList
+     */
+    public TaskList searchTasks(String search) {
+        return new TaskList(
+                this.tasks
+                        .stream()
+                        .filter(task -> task.getName().contains(search))
+                        .collect(Collectors.toList()));
     }
 
     @Override
