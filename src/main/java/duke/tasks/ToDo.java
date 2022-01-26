@@ -5,7 +5,6 @@ import duke.exceptions.InvalidOperationException;
 public class ToDo extends Task {
     private String description;
     private boolean done;
-    private String line = "-------------------------------------------";
 
     public ToDo(String details) {
         this.description = details;
