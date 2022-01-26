@@ -2,15 +2,13 @@ package duke.parser;
 
 import duke.command.AddCommand;
 import duke.command.Command;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
 import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.FindDateCommand;
-
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
 import duke.main.DukeException;
-
 import duke.task.DeadLine;
 import duke.task.Events;
 import duke.task.ToDos;
@@ -31,24 +29,24 @@ public class Parser {
     public static Command parse(String cmd) throws DukeException {
         String[] input = cmd.split(" ");
         switch (input[0]) {
-            case "bye":
-                return new ExitCommand();
-            case "list":
-                return new ListCommand();
-            case "todo":
-            case "deadline":
-            case "event":
-                return Parser.prepareAdd(input);
-            case "mark":
-            case "unmark":
-                return Parser.prepareMark(input);
-            case "delete":
-                return Parser.prepareDelete(input);
-            case "findDate":
-            case "find":
-                return Parser.prepareFind(input);
-            default:
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+        case "bye":
+            return new ExitCommand();
+        case "list":
+            return new ListCommand();
+        case "todo":
+        case "deadline":
+        case "event":
+            return Parser.prepareAdd(input);
+        case "mark":
+        case "unmark":
+            return Parser.prepareMark(input);
+        case "delete":
+            return Parser.prepareDelete(input);
+        case "findDate":
+        case "find":
+            return Parser.prepareFind(input);
+        default:
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
         }
     }
 
@@ -80,16 +78,19 @@ public class Parser {
             int i = 1;
             StringBuilder obj = new StringBuilder("");
             for (; i < input.length; i++) {
-                if (input[i].charAt(0) == '/') break;
+                if (input[i].charAt(0) == '/') {
+                    break;
+                }
                 obj.append(input[i]);
                 obj.append(" ");
             }
-            obj.setLength(obj.length()-1);
+            obj.setLength(obj.length() - 1);
 
             if (input[0].equals("deadline")) {
-                return new AddCommand(new DeadLine(obj.toString(), input[input.length-2], input[input.length-1]));
+                return new AddCommand(new DeadLine(obj.toString(), input[input.length - 2], input[input.length - 1]));
             } else {
-                return new AddCommand(new Events(obj.toString(), input[input.length-3], input[input.length-2], input[input.length-1]));
+                return new AddCommand(new Events(obj.toString(),
+                        input[input.length - 3], input[input.length - 2], input[input.length - 1]));
             }
         }
     }

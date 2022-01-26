@@ -1,15 +1,16 @@
 package duke.storage;
 
-import duke.task.Task;
-import duke.main.DukeException;
-import duke.task.TaskList;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import duke.main.DukeException;
+import duke.task.Task;
+import duke.task.TaskList;
+
 
 /**
  * Represents a storage system to save the tasks in the hard disk.
@@ -20,6 +21,10 @@ public class Storage {
     protected String filePath;
     protected File dir;
 
+    /**
+     * Constructor for Storage class
+     * @param filePath Path for file where data is stored and loaded
+     */
     public Storage(String filePath) {
         this.dir = new File(filePath);
         this.filePath = filePath;
@@ -55,7 +60,7 @@ public class Storage {
      * @param todo Task to be added to the hard disk.
      * @throws IOException If there is error in writing to disk.
      */
-    public void appendFile(Task todo) throws IOException{
+    public void appendFile(Task todo) throws IOException {
         FileWriter fw = new FileWriter(this.filePath, true);
         fw.write(todo.serialize());
         fw.close();
@@ -67,7 +72,7 @@ public class Storage {
      * @param todo TaskList to overwrite hard disk with.
      * @throws IOException If there is error in writing to disk.
      */
-    public void overWriteFile(TaskList todo) throws IOException{
+    public void overWriteFile(TaskList todo) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
         List<String> encodedList = todo.serializedList();
         for (String task : encodedList) {

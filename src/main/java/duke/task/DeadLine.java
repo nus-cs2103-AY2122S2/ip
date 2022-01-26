@@ -12,12 +12,25 @@ public class DeadLine extends Task {
     protected LocalDate bydate;
     protected LocalTime bytime;
 
+    /**
+     * Constructor for DeadLine class where DeadLine is by default uncompleted.
+     * @param objective Task to be done.
+     * @param date Date by which task should be done.
+     * @param time Time by which task should be done.
+     */
     public DeadLine(String objective, String date, String time) {
         super(objective);
         this.bydate = LocalDate.parse(date);
         this.bytime = LocalTime.parse(time);
     }
 
+    /**
+     * Constructor for DeadLine class where completion can be set.
+     * @param objective Task to be done.
+     * @param done Whether Task has been done.
+     * @param date Date by which task should be done.
+     * @param time Time by which task should be done.
+     */
     public DeadLine(String objective, Boolean done, String date, String time) {
         super(objective, done);
         this.bydate = LocalDate.parse(date);
@@ -33,8 +46,8 @@ public class DeadLine extends Task {
     public boolean equals(Object o) {
         if (o instanceof DeadLine) {
             DeadLine e = (DeadLine) o;
-            return this.bydate.equals(e.bydate) && this.bytime.equals(e.bytime) &&
-                    this.objective.equals(e.objective) && (this.done == e.done);
+            return this.bydate.equals(e.bydate) && this.bytime.equals(e.bytime)
+                    && this.objective.equals(e.objective) && (this.done == e.done);
         } else {
             return false;
         }
@@ -43,7 +56,7 @@ public class DeadLine extends Task {
     @Override
     public String serialize() {
         return "D|" + (this.done ? "1|" : "0|") + this.objective
-                + "|" + bydate.toString() + "|" + bytime.toString() +"\n";
+                + "|" + bydate.toString() + "|" + bytime.toString() + "\n";
     };
 
     @Override
