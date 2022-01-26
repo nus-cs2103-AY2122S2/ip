@@ -3,6 +3,7 @@ package duke.tasks;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+
 import duke.exception.DukeException;
 
 /**
@@ -74,8 +75,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getTaskData() {
-        return "[D]" + super.toString() +
-                " (by: " + this.date + ")";
+        return "[D]" + super.toString() + " (by: " + this.date + ")";
     }
 
     /**
@@ -85,7 +85,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() +
-                " (by: " + this.dateToString() + " " + this.timeToString() + ")";
+        return "[D]" + super.toString() + " (by: " + this.dateToString() + " " + this.timeToString() + ")";
     }
 }

@@ -1,8 +1,11 @@
 package duke.junit;
+
 import duke.exception.DukeException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
+
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**

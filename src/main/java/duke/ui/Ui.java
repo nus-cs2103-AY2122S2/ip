@@ -7,16 +7,17 @@ import java.util.Scanner;
  */
 public class Ui {
     public static String lineDivider = "____________________________________________________________\n";
-    static String greet = lineDivider
-            + "Hello! I'm Mum!\nWhat can I do for you?\nType \"commands\" to get a list of all commands.\n"
-            + lineDivider;
+    static String greet = lineDivider + "Hello! I'm Mum!\nWhat can I do for you?\n" +
+            "Type \"commands\" to get a list of all commands.\n" + lineDivider;
     static String goodBye = lineDivider + "Bye. Hope to see you again soon!\n" + lineDivider;
     static String addedTask = lineDivider + "Got it. I've added this task:\n" +
             "   %s\nNow you have %d tasks in the list.\n" + lineDivider;
-    static String deleteTask = lineDivider + "Noted. I've removed this task:\n%s\nNow you have %d tasks in the list\n" +
-            lineDivider;
-    static String markedTask = lineDivider + "Nice! I've marked this task as done:\n[%s] %s\n" + lineDivider;
-    static String unmarkedTask = lineDivider+ "Ok, I've marked this task as not done yet:\n[%s] %s\n" + lineDivider;
+    static String deleteTask = lineDivider + "Noted. I've removed this task:\n" +
+            "%s\nNow you have %d tasks in the list\n" + lineDivider;
+    static String markedTask = lineDivider + "Nice! I've marked this task as done:\n" +
+            "[%s] %s\n" + lineDivider;
+    static String unmarkedTask = lineDivider+ "Ok, I've marked this task as not done yet:\n" +
+            "[%s] %s\n" + lineDivider;
 
     /**
      * Empty constructor to initialise this ui.
