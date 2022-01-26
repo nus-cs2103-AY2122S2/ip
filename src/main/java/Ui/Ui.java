@@ -1,3 +1,5 @@
+package Ui;
+
 public class Ui {
 	public final static String LINE = "    ____________________________________________________________\n";
 	public final static String INDENT = "     ";
