@@ -61,4 +61,9 @@ public class Ui {
                 removed + "\n" +
                 "now there are " + toDoList.size() + " tasks in the list! get to work (ง︡'-'︠)ง");
     }
+
+    public void showLoadingError() {
+        System.out.println("UH-OH!! seems like the file is not in the right format... (⊙.⊙) \n" +
+                "don't worry! I'll start a new file for you!");
+    }
 }
