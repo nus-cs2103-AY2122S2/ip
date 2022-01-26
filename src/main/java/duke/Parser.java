@@ -2,6 +2,10 @@ package duke;
 
 public class Parser {
 
+    public Parser(){
+        Storage.parser = this;
+    }
+
     public static boolean parseInput(String input) throws EmptyDescriptorExceptions{
         if (input.equals("bye")) {
             Ui.printBye();

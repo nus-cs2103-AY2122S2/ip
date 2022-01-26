@@ -12,6 +12,10 @@ public class Storage {
     static File savedata;
     static Parser parser;
 
+    public Storage(){
+        load();
+    }
+
     public static void writeAllToFile() {
         try {
             FileWriter fw = new FileWriter(savedata);

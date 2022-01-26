@@ -16,9 +16,7 @@ public class Duke {
         Ui ui = new Ui();
         TaskList tasklist = new TaskList();
         Storage storage = new Storage();
-        storage.load();
         Parser parser = new Parser();
-        Storage.parser = parser;
         ui.loop();
     }
 
