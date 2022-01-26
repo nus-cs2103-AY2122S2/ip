@@ -11,6 +11,7 @@ import java.io.ObjectOutputStream;
 import java.io.ObjectInputFilter.FilterInfo;
 import java.io.ObjectInputFilter.Status;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -69,10 +70,16 @@ class TaskFilter {
     private TaskFilter() {
     }
 
+    private static final String[] ALLOWED_PACKAGES = {
+        "java.time",
+        "li.zhongfu.cs2103.chatbot.types"
+    };
+
     static Status checkInput(FilterInfo filterInfo) {
         Class<?> cls = filterInfo.serialClass();
         if (cls != null) {
-            return (Task.class.isAssignableFrom(cls)) ? Status.ALLOWED : Status.REJECTED;
+            String packageName = cls.getPackageName();
+            return Arrays.stream(ALLOWED_PACKAGES).anyMatch(packageName::equals) ? Status.ALLOWED : Status.REJECTED;
         }
         return Status.UNDECIDED;
     }
