@@ -8,16 +8,20 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static final ArrayList<Task> toDoList = new ArrayList<Task>(100);
+    private ArrayList<Task> toDoList;
+    private Ui ui;
 
     public static void main(String[] args) {
-        String logo = "__  __ ____________\n" +
-                "\\ \\/ /|_  /_  /_  /\n" +
-                " >  <  / / / / / / \n" +
-                "/_/\\_\\/___/___/___|";
-        System.out.println(logo);
-        System.out.println("Hello uwu! I'm xzzz,");
-        System.out.println("You can check your schedwle here (ɔ◔‿◔)ɔ ♥!");
+        new Duke().run();
+    }
+
+    public Duke() {
+        ui = new Ui();
+        toDoList = new ArrayList<Task>(100);
+    }
+
+    public void run() {
+        ui.greeting();
 
         checkFile();
 
@@ -28,17 +32,17 @@ public class Duke {
         saveFile();
     }
 
-    private static void respond() {
+    private void respond() {
         Scanner sc = new Scanner(System.in);
         label:
         while (sc.hasNext()) {
             String command = sc.next();
             switch (command) {
             case "bye":
-                System.out.println("Cya later~ ≧◉◡◉≦");
+                ui.goodbye();
                 break label;
             case "list":
-                displayList();
+                ui.displayList(toDoList);
                 sc.nextLine();
                 break;
             case "mark":
@@ -56,7 +60,7 @@ public class Duke {
                     try {
                         newTask = makeToDo(command);
                     } catch (ToDoIllegalArgumentException ex) {
-                        System.out.println(ex);
+                        ui.showIllegalArgumentError(ex);
                         break;
                     }
                 } else if (command.equals("deadline")) {
@@ -64,7 +68,7 @@ public class Duke {
                     try {
                         newTask = makeDeadline(s[0], s[1]);
                     } catch (IndexOutOfBoundsException ex) {
-                        System.out.println(new DeadlineIllegalArgumentException("Invalid Argument"));
+                        ui.showIncompleteArgumentError();
                         break;
                     }
                 } else {
@@ -72,77 +76,65 @@ public class Duke {
                     try {
                         newTask = makeEvent(s[0], s[1]);
                     } catch (IndexOutOfBoundsException ex) {
-                        System.out.println(new EventIllegalArgumentException("Invalid Argument"));
+                        ui.showIncompleteArgumentError();
                         break;
                     }
                 }
                 toDoList.add(newTask);
-                System.out.println("okie!! (✿◠‿◠)  i have added: \n" +
-                        newTask + "\n" +
-                        "now there are " + toDoList.size() + " tasks in the list! get to work (ง︡'-'︠)ง");
+                ui.confirmAddition(newTask, toDoList);
                 break;
             case "delete":
                 remove(sc.nextInt());
                 break;
             default:
-                System.out.println("sowwy i don't understand what that means ಠ_ಥ try something else pwease??");
+                ui.doNotUnderstand();
             }
         }
     }
 
-    private static void displayList() {
-        int number = 1;
-        System.out.println("here are your tasks ☜(ˆ▿ˆc)");
-        for (Task item : toDoList) {
-            System.out.println(number + ". " + item.toString());
-            number++;
-        }
-    }
 
-    private static void mark(int idx) {
+    private void mark(int idx) {
         toDoList.get(idx - 1).mark();
         if (toDoList.get(idx - 1).getDone()) {
-            System.out.println("yay!!! this task is now marked as done ٩(˘◡˘)۶");
+            ui.markAsDone(toDoList, idx);
         } else {
-            System.out.println("this task is now marked as not done yet... do it soon! ᕙ(`▿´)ᕗ");
+            ui.unmarkAsDone(toDoList, idx);
         }
-        System.out.println(toDoList.get(idx - 1).toString());
     }
 
-    private static Task makeToDo(String name) throws ToDoIllegalArgumentException {
+    private Task makeToDo(String name) throws ToDoIllegalArgumentException {
         if (name.isEmpty()) {
             throw new ToDoIllegalArgumentException("Illegal Argument");
         }
         return new ToDo(name);
     }
 
-    private static Task makeDeadline(String name, String by) {
+    private Task makeDeadline(String name, String by) {
         return new Deadline(name, by.trim());
     }
 
-    private static Task makeEvent(String name, String at) {
+    private Task makeEvent(String name, String at) {
         return new Event(name, at.trim());
     }
 
-    private static void remove(int idx) {
-        System.out.println("OKI!! i have removed this task: \n" +
-                toDoList.remove(idx - 1) + "\n" +
-                "now there are " + toDoList.size() + " tasks in the list! get to work (ง︡'-'︠)ง");
+    private void remove(int idx) {
+        Task removed = toDoList.remove(idx - 1);
+        ui.confirmRemoval(removed, toDoList);
     }
 
-    private static void checkFile() {
+    private void checkFile() {
         try {
             Files.createDirectory(Paths.get("data"));
-        } catch (IOException ex) {
+        } catch (IOException ignored) {
         }
 
         try {
             Files.createFile(Paths.get("data/duke.txt"));
-        } catch (IOException ex) {
+        } catch (IOException ignored) {
         }
     }
 
-    private static void saveFile() {
+    private void saveFile() {
         try {
             String textToAdd = "";
             for (Task task : toDoList) {
@@ -158,7 +150,7 @@ public class Duke {
         }
     }
 
-    private static void readFile() {
+    private void readFile() {
         File dataFile = new File("data/duke.txt");
         try {
             Scanner s = new Scanner(dataFile);
