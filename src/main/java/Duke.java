@@ -164,6 +164,9 @@ public class Duke {
             if (!file.exists()) {
                 file.createNewFile();
             }
+
+            boolean createDirectory = file.getParentFile().mkdirs();
+            boolean created = file.createNewFile();
             FileWriter fileWriter = new FileWriter(file, false);
             for (Task task : dukeList) {
                 String text = "";
@@ -173,10 +176,10 @@ public class Duke {
                     text = "T | " + (task.isDone ? "1" : "0") + " | " + description + '\n';
                 } else if (task instanceof Event) {
                     Event event = ((Event) task);
-                    text = "E | " + (task.isDone ? "1" : "0") + " | " + event.time + '\n';
+                    text = "E | " + (task.isDone ? "1" : "0") + " | " + event.description.trim() + " | " + event.time + '\n';
                 } else {
                     Deadline deadline = ((Deadline) task);
-                    text = "D | " + (task.isDone ? "1" : "0") + " | " + deadline.time + '\n';
+                    text = "D | " + (task.isDone ? "1" : "0") + " | " + deadline.description.trim() + " | " + deadline.time + '\n';
                 }
                 fileWriter.write(text);
                 fileWriter.flush();
@@ -195,20 +198,22 @@ public class Duke {
 
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
-                String[] commandWords = sc.nextLine().split("\\|", 4);
+                String input = sc.nextLine();
+                String[] commandWords = input.split(" \\| ", 4);
                 Task task = null;
                 switch (commandWords[0]) {
                     case "D" -> {
                         task = new Deadline(commandWords[2], commandWords[3]);
-                        display(sc.nextLine());
+                        display(input);
                     }
                     case "E" -> {
                         task = new Event(commandWords[2], commandWords[3]);
-                        display(sc.nextLine());
+                        display(input);
                     }
                     case "T" -> {
                         task = new ToDo(commandWords[2]);
-                        display(sc.nextLine());
+                        String text = "T | " + (task.isDone ? "1" : "0") + " | " + task.description + '\n';
+                        display(input);
                     }
                     default -> System.err.println("error!!");
                 }
