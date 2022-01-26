@@ -1,8 +1,8 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-
 
 public class Duke {
 
@@ -52,7 +52,7 @@ public class Duke {
                 System.out.println("Here are the tasks in your list:");
                 listAllTasks(tasks);
                 printLines();
-//                Handle Mark command
+                // Handle Mark command
             } else {
                 boolean valid = true;
                 Task newTask = null;
@@ -78,12 +78,13 @@ public class Duke {
                                     Task t = tasks.get(digit - 1);
                                     t.unmark();
                                     System.out.println(t.toString());
-                                }
-                                else if (split[0].equals(Commands.DELETE.toString())) {
+                                } else if (split[0].equals(Commands.DELETE.toString())) {
                                     System.out.println(tasks.get(digit - 1).toString());
                                     tasks.remove(digit - 1);
                                     printNumberOfTask(tasks);
-                                } else { valid = false; }
+                                } else {
+                                    valid = false;
+                                }
                             } else {
                                 System.out.println("Task does not exist! Try again.");
                             }
@@ -98,14 +99,21 @@ public class Duke {
                             } else if (split[0].equals(Commands.DEADLINE.toString())) {
                                 secondSplit = response.split(" /by ");
                                 if (secondSplit.length > 1) {
-                                    newTask = new Deadline(removeSubString(secondSplit[0], "deadline "), secondSplit[1]);
-                                } else { valid = false; }
+                                    newTask = new Deadline(removeSubString(secondSplit[0], "deadline "),
+                                            secondSplit[1]);
+                                } else {
+                                    valid = false;
+                                }
                             } else if (split[0].equals(Commands.EVENT.toString())) {
                                 secondSplit = response.split(" /at ");
                                 if (secondSplit.length > 1) {
                                     newTask = new Event(removeSubString(secondSplit[0], "event "), secondSplit[1]);
-                                } else { valid = false; }
-                            } else { valid = false; }
+                                } else {
+                                    valid = false;
+                                }
+                            } else {
+                                valid = false;
+                            }
                             if (valid) {
                                 handleResponse(split[0]);
                                 tasks.add(newTask);
@@ -122,19 +130,19 @@ public class Duke {
                 }
                 printLines();
             }
-        } while(!response.equals(Commands.BYE.toString()));
+        } while (!response.equals(Commands.BYE.toString()));
     }
 
-// ____________________________________________________________
-//                  START OF HELPER METHODS
-// ____________________________________________________________
+    // ____________________________________________________________
+    // START OF HELPER METHODS
+    // ____________________________________________________________
     public static void printLines() {
         System.out.println("____________________________________________________________");
     }
 
     public static void printHelp() {
         System.out.println("1. todo [task]");
-        System.out.println("2. deadline [task] /by [date and/or time]");
+        System.out.println("2. deadline [task] /by [date]");
         System.out.println("3. event [task] /at [location]");
         System.out.println("4. list");
         System.out.println("5. mark X (mark X task as done");
@@ -148,22 +156,23 @@ public class Duke {
             System.out.println("You have 0 task at the moment. Start by adding these commands:\n");
             printHelp();
         } else {
-            for(int i = 0; i < tasks.size(); i++) {
+            for (int i = 0; i < tasks.size(); i++) {
                 System.out.println(i + 1 + ". " + tasks.get(i).toString());
             }
         }
     }
 
     public static void printNumberOfTask(ArrayList<Task> tasks) {
-        System.out.println("Now you have " + tasks.size() +  " tasks in the list.");
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
     public static String removeSubString(String response, String word) {
         return response.replace(word, "");
     }
-// ____________________________________________________________
-//                  START OF COMMAND HANDLER
-// ____________________________________________________________
+
+    // ____________________________________________________________
+    // START OF COMMAND HANDLER
+    // ____________________________________________________________
     public static void handleResponse(String res) {
         switch (res) {
             case "mark":
@@ -183,4 +192,3 @@ public class Duke {
         }
     }
 }
-
