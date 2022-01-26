@@ -6,7 +6,6 @@ import duke.exception.DukeInvalidCommandException;
 import duke.testutil.PrinterStub;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;

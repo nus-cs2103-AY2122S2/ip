@@ -4,17 +4,13 @@ import duke.exception.DukeIllegalArgumentException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
-import duke.task.TaskType;
 import duke.task.Todo;
 import duke.testutil.PrinterStub;
-import duke.util.IPrintable;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class BetweenCommandTest {
