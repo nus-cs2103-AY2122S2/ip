@@ -6,21 +6,27 @@ public class DeadlineTask extends Task {
     protected String time;
     protected LocalDate nowTime;
 
-    public DeadlineTask(String message) throws EmptyMessageException, DateFormatException, DateTimeParseException {
+    public DeadlineTask(String message) throws EmptyCommandException, CommandFormatException, DateTimeParseException {
         String[] taskArray = message.split("/by");
 
         LocalDate nowTime;
         if (taskArray[0].equals("")) {
-            throw new EmptyMessageException();
+            throw new EmptyCommandException();
         } else if (taskArray.length == 1) {
-            throw new DateFormatException("Sorry Master, when is the due? (include /by)");
+            throw new CommandFormatException();
         } else {
             nowTime = LocalDate.parse(taskArray[1].stripLeading().stripTrailing());
         }
 
-        super.taskMessage = taskArray[0].stripLeading().stripTrailing();
+        super.taskDescription = taskArray[0].stripLeading().stripTrailing();
         this.nowTime = nowTime;
         time = nowTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+    }
+
+    public DeadlineTask(String message, String deadline, LocalDate date) {
+        super.taskDescription = message;
+        this.time = deadline;
+        this.nowTime = date;
     }
 
     public DeadlineTask(String message, String deadline) {
@@ -34,8 +40,8 @@ public class DeadlineTask extends Task {
     }
 
     @Override
-    public String textToFile() {
-        return "D "+ super.textToFile() + " /by" + time.toString();
+    public String writeToFile() {
+        return "deadline "+ super.writeToFile() + "/by " + time.toString();
     }
 
 }

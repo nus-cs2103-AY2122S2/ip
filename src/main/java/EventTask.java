@@ -6,20 +6,25 @@ public class EventTask extends Task {
     protected String time;
     protected LocalDate nowTime;
 
+    public EventTask(String message, String eventTime, LocalDate date) {
+        super.taskDescription = message;
+        this.time = eventTime;
+        this.nowTime = date;
+    }
 
-    public EventTask(String message) throws EmptyMessageException, DateFormatException, DateTimeParseException {
+    public EventTask(String message) throws EmptyCommandException, CommandFormatException, DateTimeParseException {
         String[] taskArray = message.split("/at");
         LocalDate nowTime;
 
         if (taskArray[0].equals("")) {
-            throw new EmptyMessageException();
+            throw new EmptyCommandException();
         } else if (taskArray.length == 1) {
-            throw new DateFormatException("Sorry Master, when is the due? (include /at)");
+            throw new CommandFormatException();
         } else {
             nowTime = LocalDate.parse(taskArray[1].stripLeading().stripTrailing());
         }
 
-        super.taskMessage = taskArray[0].stripLeading().stripTrailing();
+        super.taskDescription = taskArray[0].stripLeading().stripTrailing();
         this.nowTime = nowTime;
         time = nowTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
@@ -35,7 +40,7 @@ public class EventTask extends Task {
     }
 
     @Override
-    public String textToFile() {
-        return "E "+ super.textToFile() + " /at " + nowTime.toString();
+    public String writeToFile() {
+        return "event "+ super.writeToFile() + "/at " + nowTime.toString();
     }
 }

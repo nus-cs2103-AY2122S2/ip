@@ -1,34 +1,35 @@
 public class Task {
     protected boolean isDone = false;
-    protected String taskMessage;
+    protected String taskDescription;
 
-    public Task(String message) throws EmptyMessageException {
+    public Task(String message) throws EmptyCommandException {
         if (message.equals("")) {
-            throw new EmptyMessageException();
+            throw new EmptyCommandException();
         }
 
-        taskMessage = message;
-    }
-
-    protected Task(Task task) {
-        this(task.getTask());
+        this.taskDescription = message;
     }
 
     protected Task() {
-        taskMessage = "";
+        taskDescription = "";
     }
 
     @Override
     public String toString() {
-        String statusMessage = "[ ]";
+        String statusDescription = "[ ]";
         if (isDone) {
-            statusMessage = "[X]";
+            statusDescription = "[X]";
         }
 
-        return String.format("%s %s", statusMessage, taskMessage);
+        return String.format("%s %s", statusDescription, taskDescription);
     }
 
-    public boolean status() {
+    public String writeToFile() {
+        int bool = isDone ? 1 : 0;
+        return String.format("%d %s", bool, taskDescription);
+    }
+
+    public boolean hasDone() {
         return isDone;
     }
 
@@ -40,12 +41,7 @@ public class Task {
         isDone = false;
     }
 
-    public String getTask() {
-        return taskMessage;
-    }
-
-    public String textToFile() {
-        int bool = isDone ? 1 : 0;
-        return String.format("%d %s", bool, taskMessage);
+    public String getDescription() {
+        return taskDescription;
     }
 }

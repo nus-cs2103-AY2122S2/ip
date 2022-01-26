@@ -51,7 +51,7 @@
 	____________________________________________________________
 
 	____________________________________________________________
-	Dear Master, here is a list of things you have added:
+	Dear Master, here is a list of items you have added:
 	 1. [T][X] read book
 	 2. [D][ ] return book (by: June 6th)
 	 3. [E][ ] project meeting (at: Aug 6th 2-4pm)
@@ -77,7 +77,7 @@
 	____________________________________________________________
 
 	____________________________________________________________
-	Dear Master, here is a list of things you have added:
+	Dear Master, here is a list of items you have added:
 	 1. [T][ ] read book
 	 2. [D][ ] return book (by: June 6th)
 	 3. [E][ ] project meeting (at: Aug 6th 2-4pm)
