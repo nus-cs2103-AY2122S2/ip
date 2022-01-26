@@ -56,6 +56,17 @@ public class TaskManager {
         tasks.remove(num);
     }
 
+    public String findTasks(String s) {
+        String tasksFound = "";
+        for (int i = 0; i < this.tasks.size(); i++) {
+            Task currTask = tasks.get(i);
+            if (currTask.toString().contains(s)) {
+                tasksFound += "\n" + currTask.toString() ;
+            }
+        }
+        return tasksFound;
+    }
+
     public int size() {
         return tasks.size();
     }

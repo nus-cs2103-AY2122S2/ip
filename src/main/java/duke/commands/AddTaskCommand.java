@@ -11,7 +11,7 @@ import duke.ui.UiManager;
 import java.time.format.DateTimeParseException;
 
 
-public class AddTaskCommand extends Command{
+public class AddTaskCommand extends Command {
     private String description;
     private String date;
     private TaskManager taskManager;

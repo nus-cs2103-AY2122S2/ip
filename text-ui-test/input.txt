@@ -19,6 +19,7 @@ unmark 5
 list
 mark one
 list
+find book
 delete 3
 list
 delete 10
@@ -26,3 +27,7 @@ delete one
 todo
 deadline
 event
+find book
+find meeting
+find
+find nothing

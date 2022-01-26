@@ -7,5 +7,6 @@ public enum Type {
     MARK,
     UNMARK,
     SAVE,
-    DELETE;
+    DELETE,
+    FIND;
 }

@@ -95,6 +95,10 @@ public class CommandManager {
                         SaveCommand save = new SaveCommand(this.um, this.tm, Type.SAVE);
                         save.execute();
                         break;
+                    case "find":
+                        FindCommand find = new FindCommand(this.um, this.tm, command[1], Type.FIND);
+                        find.execute();
+                        break;
                     default:
                         throw new DukeException();
                 }

@@ -78,6 +78,13 @@ public class UiManager {
         System.out.println("No list saved previously!");
     }
 
+    public void printFind(String tasks, String taskName) {
+        this.showLine();
+        System.out.println("These are the tasks labeled " + taskName + ":");
+        System.out.println(tasks);
+        this.showLine();
+    }
+
     public void errorMessage(String s) {
         this.showLine();
         System.out.println(s);
@@ -94,6 +101,7 @@ public class UiManager {
                         (spliced[0].equals("delete")) ||
                         (spliced[0].equals("mark")) ||
                         (spliced[0].equals("unmark")) ||
+                        (spliced[0].equals("find")) ||
                         (spliced[0].equals("deadline")))) {
             throw new TaskIndexException("'" +spliced[0] + "'");
         }
