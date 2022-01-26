@@ -36,31 +36,19 @@ public class Parser {
             case LIST:
                 return new ListCommand();
             case TODO:
-                description = inputTxt.substring(inputTxt.indexOf(' ')).trim();
-                if (description.isEmpty()) {
-                    throw new DukeException(ui.MSG_EMPTYINPUT);
-                } else {
-                    return new AddCommand(CommandType.TODO, description);
-                }
-                case DEADLINE:
-                    return formatCmdWithTime(CommandType.DEADLINE, inputTxt);
-                case EVENT:
-                    return formatCmdWithTime(CommandType.EVENT, inputTxt);
-                case DONE:
-                    return formatCmdWithIdSelection(CommandType.DONE, inputTxt);
-                case DELETE:
-                    return formatCmdWithIdSelection(CommandType.DELETE, inputTxt);
-                case FIND:
-                    description = inputTxt.substring(inputTxt.indexOf(' ')).trim();
-                    if (description.isEmpty()) {
-                        throw new DukeException(ui.MSG_EMPTYINPUT);
-                    } else {
-                        return new FindCommand(description.toLowerCase());
-                    }
-
-                default:
-
-                    throw new DukeException(ui.MSG_INVALIDCMD);
+                return formatCmdWithSingleInput(CommandType.TODO, inputTxt);
+            case DEADLINE:
+                return formatCmdWithTime(CommandType.DEADLINE, inputTxt);
+            case EVENT:
+                return formatCmdWithTime(CommandType.EVENT, inputTxt);
+            case DONE:
+                return formatCmdWithIdSelection(CommandType.DONE, inputTxt);
+            case DELETE:
+                return formatCmdWithIdSelection(CommandType.DELETE, inputTxt);
+            case FIND:
+                return formatCmdWithSingleInput(CommandType.FIND, inputTxt);
+            default:
+                throw new DukeException(ui.MSG_INVALIDCMD);
         }
 
         } catch (DukeException e) {
@@ -77,6 +65,17 @@ public class Parser {
             ui.print(Ui.MSG_INVLIADCMDFORMAT);
         }
         return new InvalidCommand();
+    }
+
+    private Command formatCmdWithSingleInput(CommandType commandType, String inputTxt) throws DukeException {
+        String description = inputTxt.substring(inputTxt.indexOf(' ')).trim();
+        if (description.isEmpty()) {
+            throw new DukeException(ui.MSG_EMPTYINPUT);
+        } else if (commandType.equals(CommandType.TODO)) {
+            return new AddCommand(CommandType.TODO, description);
+        } else {
+            return new FindCommand(description.toLowerCase());
+        }
     }
 
     private Command formatCmdWithIdSelection(CommandType commandType, String inputTxt) throws DukeException {

@@ -9,7 +9,7 @@ public enum CommandType
     EVENT("event"),
     DONE("done"),
     DELETE("delete"),
-    FIND("FIND");
+    FIND("find");
 
     private String command;
 
