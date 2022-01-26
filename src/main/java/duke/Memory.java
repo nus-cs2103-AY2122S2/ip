@@ -1,3 +1,9 @@
+package duke;
+
+import duke.task.Task;
+import duke.task.Deadline;
+import duke.task.Event;
+
 import java.io.File;
 import java.io.IOException;
 

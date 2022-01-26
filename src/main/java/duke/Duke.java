@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Duke is a simple virtual assistant typically used
  * to teach students about programming.
