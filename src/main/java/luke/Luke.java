@@ -26,7 +26,7 @@ public class Luke {
         }
     }
 
-    public void initializeStorage() {
+    private void initializeStorage() {
         try {
             List<String> data = storageFile.load();
             if (!data.isEmpty()) {
