@@ -31,4 +31,5 @@ list
 delete 8
 mark 8
 unmark 8
+list
 bye

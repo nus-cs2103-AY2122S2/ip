@@ -1,11 +1,11 @@
 import java.util.Map;
 
-public class ToDo extends Task {
-    public ToDo(String description) {
+public class Todo extends Task {
+    public Todo(String description) {
         super(description);
     }
 
-    public ToDo(Map<String, String> args) {
+    public Todo(Map<String, String> args) {
         this(args.get("description"));
     }
 

@@ -13,10 +13,6 @@ public class StorageFile {
     public static final String DEFAULT_PATH = "data/luke.txt";
     private final File file;
 
-    StorageFile() throws IOException {
-        this(DEFAULT_PATH);
-    }
-
     StorageFile(String filePath) throws IOException {
         this.file = new File(filePath);
         if (this.file.getParentFile() != null && !this.file.getParentFile().exists()) {

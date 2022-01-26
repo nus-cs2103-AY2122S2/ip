@@ -18,7 +18,8 @@ I have added the following task into list:
 now you have 1 tasks in the list.
 ============================================================
 ============================================================
-Oops, the force does not comprehend the date.
+Oops, the force has encountered an error:
+the force does not comprehend the date.
 Please try again :(
 ============================================================
 ============================================================
@@ -27,7 +28,8 @@ I have added the following task into list:
 now you have 2 tasks in the list.
 ============================================================
 ============================================================
-Oops, the force does not comprehend the date.
+Oops, the force has encountered an error:
+the force does not comprehend the date.
 Please try again :(
 ============================================================
 ============================================================
@@ -60,7 +62,8 @@ Currently, you have the following tasks:
 	5. [T][ ] borrow book
 ============================================================
 ============================================================
-Oops, the force does not comprehend the date.
+Oops, the force has encountered an error:
+the force does not comprehend the date.
 Please try again :(
 ============================================================
 ============================================================
@@ -69,7 +72,8 @@ I have added the following task into list:
 now you have 6 tasks in the list.
 ============================================================
 ============================================================
-Oops, the force does not comprehend the date.
+Oops, the force has encountered an error:
+the force does not comprehend the date.
 Please try again :(
 ============================================================
 ============================================================
@@ -99,46 +103,48 @@ Oops, the force does not support this action.
 Please try again :(
 ============================================================
 ============================================================
-Oops, the force is not strong.
+Oops, the force has encountered an error:
 The description of todo cannot be empty.
 Please try again :(
 ============================================================
 ============================================================
-Oops, the force is not strong.
+Oops, the force has encountered an error:
 The description of deadline cannot be empty.
 Please try again :(
 ============================================================
 ============================================================
-Oops, the force is not strong.
+Oops, the force has encountered an error:
 The description of event cannot be empty.
 Please try again :(
 ============================================================
 ============================================================
-Oops, the force is not strong.
+Oops, the force has encountered an error:
 deadline require the by argument.
 Please try again :(
 ============================================================
 ============================================================
-Oops, the force is not strong.
+Oops, the force has encountered an error:
 event require the at argument.
 Please try again :(
 ============================================================
 ============================================================
-Oops, the force is not strong.
+Oops, the force has encountered an error:
 deadline require the by argument.
 Please try again :(
 ============================================================
 ============================================================
-Oops, the force is not strong.
+Oops, the force has encountered an error:
 event require the at argument.
 Please try again :(
 ============================================================
 ============================================================
-Oops, the force cannot convert the value to a number.
+Oops, the force has encountered an error:
+the force cannot convert the value to a number.
 Please try again :(
 ============================================================
 ============================================================
-Oops, the force cannot convert the value to a number.
+Oops, the force has encountered an error:
+the force cannot convert the value to a number.
 Please try again :(
 ============================================================
 ============================================================
@@ -155,16 +161,25 @@ Currently, you have the following tasks:
 	6. [E][ ] project meeting (at: 31/01/2022 16:00:00)
 ============================================================
 ============================================================
-Oops, the force cannot find the task.
+The force cannot find the task.
 Please try again :(
 ============================================================
 ============================================================
-Oops, the force cannot find the task.
+The force cannot find the task.
 Please try again :(
 ============================================================
 ============================================================
-Oops, the force cannot find the task.
+The force cannot find the task.
 Please try again :(
+============================================================
+============================================================
+Currently, you have the following tasks:
+	1. [D][X] return book (by: 06/06/2022 00:00:00)
+	2. [E][ ] project meeting (at: 06/08/2022 14:00:00)
+	3. [T][X] join sports club
+	4. [T][ ] borrow book
+	5. [D][ ] return book (by: 30/01/2022 14:00:00)
+	6. [E][ ] project meeting (at: 31/01/2022 16:00:00)
 ============================================================
 ============================================================
 I'll take my leave... Do you know who is my father?
