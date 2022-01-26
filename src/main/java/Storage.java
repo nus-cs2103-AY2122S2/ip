@@ -5,8 +5,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class Storage {
-    public static final String DEFAULT_STORAGE_DIRECTORY = "./data";
-    public static final String DEFAULT_STORAGE_FILEPATH = DEFAULT_STORAGE_DIRECTORY + "/data.txt";
+    public static final String DEFAULT_STORAGE_DIRECTORY = "./data/";
+    public static final String DEFAULT_STORAGE_FILEPATH = DEFAULT_STORAGE_DIRECTORY + "tasks.txt";
 
     public final Path path;
 
@@ -14,8 +14,8 @@ public class Storage {
         this(DEFAULT_STORAGE_FILEPATH);
     }
 
-    public Storage(String filePath) throws DukeException {
-        path = Paths.get(filePath);
+    public Storage(String fileName) throws DukeException {
+        path = Paths.get(DEFAULT_STORAGE_DIRECTORY + fileName);
         if (isValidPath(path)) {
             throw new DukeException("Storage file should end with '.txt'");
         }
@@ -26,11 +26,9 @@ public class Storage {
         if (isValidPath(path)) {
             return taskList;
         }
-        try {
+        try(BufferedReader reader = new BufferedReader(new FileReader(path.toString()))) {
             String strCurrentLine;
             Task currentTask;
-            FileReader fileReader = new FileReader(DEFAULT_STORAGE_FILEPATH);
-            BufferedReader reader = new BufferedReader(fileReader);
 
             while ((strCurrentLine = reader.readLine()) != null) {
                 String[] taskInput = strCurrentLine.split(" \\| ");
@@ -39,10 +37,10 @@ public class Storage {
                         currentTask = new Todo(taskInput[2]);
                         break;
                     case "D":
-                        currentTask = new Deadline(taskInput[2], taskInput[3]);
+                        currentTask = new Deadline(taskInput[2], Parser.parseDateTime(taskInput[3]));
                         break;
                     case "E":
-                        currentTask = new Event(taskInput[2], taskInput[3]);
+                        currentTask = new Event(taskInput[2], Parser.parseDateTime(taskInput[3]));
                         break;
                     default:
                         throw new DukeException("Invalid task type");
@@ -58,22 +56,23 @@ public class Storage {
             reader.close();
 
             return taskList;
+        } catch (FileNotFoundException e) {
+            throw new DukeException("No file in storage.");
         } catch (IOException ioe) {
             throw new DukeException("Error writing to file: " + path);
         }
     }
 
-    public void saveAllTasks(ArrayList<Task> tasks) throws DukeException {
+    public void saveAllTasks(TaskList tasks) throws DukeException {
         try {
             if (Files.notExists(path)) {
                 Files.createDirectories(Paths.get(DEFAULT_STORAGE_DIRECTORY));
                 Files.createFile(path);
             }
-            FileWriter fileWriter = new FileWriter(DEFAULT_STORAGE_FILEPATH);
-            BufferedWriter writer = new BufferedWriter(fileWriter);
+            BufferedWriter writer = new BufferedWriter(new FileWriter(path.toString()));
 
-            for (Task task : tasks) {
-                writer.append(task.getSaveFormat());
+            for (int i = 0; i < tasks.getSize(); i++) {
+                writer.append(tasks.getTask(i).getSaveFormat());
                 writer.append('\n');
             }
 
@@ -86,5 +85,9 @@ public class Storage {
 
     private static boolean isValidPath(Path filePath) {
         return !filePath.toString().endsWith(".txt");
+    }
+
+    public String getPath() {
+        return path.toString();
     }
 }

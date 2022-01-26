@@ -36,6 +36,6 @@ public class Task {
     @Override
     public String toString() {
         String stateIcon = this.isDone ? "X" : " ";
-        return "["+stateIcon+"]"+" "+this.title;
+        return String.format("[%s] %s",stateIcon, this.title);
     }
 }
