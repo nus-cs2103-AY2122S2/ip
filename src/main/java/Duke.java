@@ -1,27 +1,31 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-        System.out.println("A very good day to you master, I'm Blue the Genie");
-        System.out.println("What do you wish for today? Your wish is my command");
-        System.out.println("*-**-**-**-**-**-**-**-**-**-****-**-****-**-****-**");
+    public static void main(String[] args) throws IOException {
+        startGreeting();
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> storeList = new ArrayList<>();
+        restoreList(storeList);
+
         while (sc.hasNextLine()) {
             String command = sc.nextLine();
-            if (command.equals("bye")) {
+            if (command.equals("bye")) { // save the current list into the harddisk
+                int sizeOfList = storeList.size();
                 System.out.println("Rub my lamp to summon me again");
                 System.out.println("Good bye for now master");
                 System.out.println("*-**-**-**-**-**-**-**-**-**-****-**-****-**-****-**");
                 break;
             } else if (command.equals("list")) {
-                int sizeOfList = storeList.size();
-                System.out.println("Everything in my blue brain now:");
-                for (int i = 1; i <= sizeOfList; i++) {
-                    Task t = storeList.get(i - 1);
-                    System.out.println(i + "." + t.toString());
-                }
+                TaskList.printTheList(storeList);
+
             } else if (command.startsWith("mark ")) {
                 int taskNumber = Integer.parseInt(command.substring(5));
                 if (taskNumber > storeList.size()) {
@@ -127,5 +131,22 @@ public class Duke {
         }
         sc.close();
 
+    }
+
+    public static void restoreList(ArrayList<Task> arrlist) throws IOException {
+        String currentDirectory = Paths.get("Duke.java").toAbsolutePath().getParent().toString();
+        String newFilePath = currentDirectory + "/duke.txt";
+        // create the file if do not exist yet
+        try {
+            Files.createFile(Paths.get(newFilePath));
+        } catch (FileAlreadyExistsException e) {
+
+        }
+    }
+
+    public static void startGreeting() {
+        System.out.println("A very good day to you master, I'm Blue the Genie");
+        System.out.println("What do you wish for today? Your wish is my command");
+        System.out.println("*-**-**-**-**-**-**-**-**-**-****-**-****-**-****-**");
     }
 }
