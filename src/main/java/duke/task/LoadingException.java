@@ -1,4 +1,6 @@
-public class LoadingException extends DukeException {
+package duke.task;
+
+public class LoadingException extends duke.task.DukeException {
     public LoadingException(String message) {
         super(message);
     }

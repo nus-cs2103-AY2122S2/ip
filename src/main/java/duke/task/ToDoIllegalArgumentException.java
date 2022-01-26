@@ -1,4 +1,6 @@
-public class ToDoIllegalArgumentException extends DukeIllegalArgumentException {
+package duke.task;
+
+public class ToDoIllegalArgumentException extends duke.task.DukeIllegalArgumentException {
     public ToDoIllegalArgumentException(String message) {
         super(message);
     }

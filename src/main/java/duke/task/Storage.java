@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -23,10 +25,10 @@ public class Storage {
         }
     }
 
-    public void saveFile(ArrayList<Task> toDoList) {
+    public void saveFile(ArrayList<duke.task.Task> toDoList) {
         try {
             StringBuilder textToAdd = new StringBuilder();
-            for (Task task : toDoList) {
+            for (duke.task.Task task : toDoList) {
                 textToAdd.append(task.toText());
             }
 
@@ -39,9 +41,9 @@ public class Storage {
         }
     }
 
-    public ArrayList<Task> readFile() throws LoadingException {
+    public ArrayList<duke.task.Task> readFile() throws duke.task.LoadingException {
         File dataFile = new File("data/duke.txt");
-        ArrayList<Task> toDoList = new ArrayList<>(100);
+        ArrayList<duke.task.Task> toDoList = new ArrayList<>(100);
         try {
             Scanner s = new Scanner(dataFile);
             String[] taskLine;
@@ -51,13 +53,13 @@ public class Storage {
                 switch (taskLine[0]) {
                 case "T":
                     taskLine[2].trim();
-                    toDoList.add(new ToDo(taskLine[2]));
+                    toDoList.add(new duke.task.ToDo(taskLine[2]));
                     break;
                 case "D":
-                    toDoList.add(new Deadline(taskLine[2], taskLine[3]));
+                    toDoList.add(new duke.task.Deadline(taskLine[2], taskLine[3]));
                     break;
                 case "E":
-                    toDoList.add(new Event(taskLine[2], taskLine[3]));
+                    toDoList.add(new duke.task.Event(taskLine[2], taskLine[3]));
                     break;
                 }
 
@@ -69,8 +71,8 @@ public class Storage {
             return toDoList;
         } catch (FileNotFoundException ignored) {
         } catch (IndexOutOfBoundsException ex) {
-            throw new LoadingException("Index Out of Bounds");
+            throw new duke.task.LoadingException("Index Out of Bounds");
         }
-        return new ArrayList<Task> (100);
+        return new ArrayList<duke.task.Task> (100);
     }
 }

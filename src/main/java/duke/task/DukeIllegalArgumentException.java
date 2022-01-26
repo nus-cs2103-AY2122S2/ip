@@ -1,4 +1,6 @@
-public abstract class DukeIllegalArgumentException extends DukeException {
+package duke.task;
+
+public abstract class DukeIllegalArgumentException extends duke.task.DukeException {
     public DukeIllegalArgumentException(String message) {
         super(message);
     }
