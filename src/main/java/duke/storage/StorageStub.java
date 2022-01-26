@@ -7,7 +7,7 @@ public class StorageStub extends Storage {
 
     /**
      * Constructor of the class.
-     * 
+     *
      * @param s Filler String to be passed into parent class.
      */
     public StorageStub(String s) {

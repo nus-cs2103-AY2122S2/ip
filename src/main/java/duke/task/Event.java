@@ -53,9 +53,9 @@ public class Event extends Task {
     }
 
     /**
-     * Returns a standardized format for storing the deadline into the data file.
+     * Returns a standardized format for storing the event into the data file.
      *
-     * @return String of deadline in data file storage format.
+     * @return String of event in data file storage format.
      */
     @Override
     public String writeToFile() {

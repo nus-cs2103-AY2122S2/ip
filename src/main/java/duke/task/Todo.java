@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represents a task which is a simple Todo.
+ */
 public class Todo extends Task {
 
     /**
@@ -14,6 +17,11 @@ public class Todo extends Task {
         }
     }
 
+    /**
+     * Returns a standardized format for storing the todo into the data file.
+     *
+     * @return String of todo in data file storage format.
+     */
     @Override
     public String writeToFile() {
         return " T " + super.writeToFile();
