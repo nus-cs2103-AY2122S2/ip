@@ -1,9 +1,9 @@
 /**
  * Provides abstraction of an task in the todoList
  */
-public class Task {
-    private boolean finished;
-    private String content;
+public abstract class Task {
+    protected boolean finished;
+    protected String content;
 
     /**
      * Contructs an item object
@@ -36,5 +36,14 @@ public class Task {
             return "[ ] " + content;
         }
     }
+
+    public String toData() {
+        if (finished) {
+            return "1:" + content;
+        } else {
+            return "0:" + content;
+        }
+    }
+
 
 }
