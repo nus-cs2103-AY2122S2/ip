@@ -3,8 +3,8 @@ package com.duke.command;
 import com.duke.modules.TaskList;
 
 public abstract class Command {
-  protected TaskList taskList;
+    protected TaskList taskList;
 
-  public abstract CommandResult execute();
+    public abstract CommandResult execute();
 }
 
