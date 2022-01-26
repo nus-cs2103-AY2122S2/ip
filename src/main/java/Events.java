@@ -9,9 +9,9 @@
     @Override
     public String toString() {
         if (this.getMarked()) {
-            return "[E]" + "[X" + "] " + this.getTask() + " (at: " + this.details + ")";
+            return "[E]" + "[X" + "] " + this.getTask() + " (at: " + returnDate(this.details) + ")";
         } else {
-            return "[E]" + "[ " + "] " + this.getTask() + " (at: " + this.details + ")";
+            return "[E]" + "[ " + "] " + this.getTask() + " (at: " + returnDate(this.details) + ")";
         }
     }
 }
