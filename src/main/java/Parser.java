@@ -17,7 +17,7 @@ public class Parser {
             try {
              int index = Integer.parseInt(refine);
              if (index > size) {
-                 throw new ChiException("Too big index nyan1")
+                 throw new ChiException("Too big index nyan!");
              } else if (index < 0) {
                  throw new ChiException("No negative indexes nyan!");
              }
@@ -28,29 +28,91 @@ public class Parser {
         }
     }
 
-    private boolean processDeadlineMsg(String msg) throws ChiException {
-        String refine = msg.trim();
-        String[] refineMore = refine.split("by");
+    private String processDeadlineMsg(String msg, TaskList tl, Storage sge) throws ChiException, IOException {
+        String[] refineMore = msg.split("/by");
+        System.out.println(refineMore[0]);
+        if (refineMore[0].equals(msg)) {
+            throw new ChiException("Please include /by separator nyan!");
+        }
+        if (refineMore[0].trim().equals("")) {
+            throw new ChiException("deadline");
+        }
+        if (refineMore.length == 1) {
+            throw new ChiException("Please include a date time nyan!");
+        }
         if (refineMore.length > 2) {
             throw new ChiException("Too many /by-s nyannn!!!");
-        } else {
-            try {
-                LocalDate d = LocalDate.parse(refineMore[1].trim().split(" ")[0].trim(),
-                        DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                if (refineMore[1].trim().split(" ").length == 2) {
-                    LocalTime t = LocalTime.parse(refineMore[1].trim().split(" ")[1].trim(),
-                            DateTimeFormatter.ofPattern("HH:mm"));
-
-                }
-            } catch (DateTimeParseException e) {
-                return false;
-            }
-            return true;
         }
+        Task newTask1;
+        try {
+            LocalDate d = LocalDate.parse(refineMore[1].trim().split(" ")[0].trim(),
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            if (refineMore[1].trim().split(" ").length == 2) {
+                LocalTime t = LocalTime.parse(refineMore[1].trim().split(" ")[1].trim(),
+                        DateTimeFormatter.ofPattern("HH:mm"));
+                newTask1 = new Deadline(refineMore[0].trim(), d, t, false);
+
+            } else if (refineMore[1].trim().split(" ").length == 1) {
+                newTask1 = new Deadline(refineMore[0].trim(), d, false);
+            } else {
+                throw new ChiException("Too many date times nyan!!");
+            }
+            tl.addTask(newTask1);
+            sge.updateFile(newTask1, tl, "deadline");
+        } catch (DateTimeParseException e) {
+            throw new ChiException("This date time format is not recognized nyan!");
+        }
+        return String.format("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n",
+                newTask1, tl.getSize());
+
     }
 
-    private String processEventMsg(String msg) {
-
+    private String processEventMsg(String msg, TaskList tl, Storage sge) throws ChiException, IOException {
+        String[] refineMore = msg.split("/at");
+        if (refineMore[0].equals(msg)) {
+            throw new ChiException("Please include /at separator nyan!");
+        }
+        if (refineMore[0].trim().equals("")) {
+            throw new ChiException("event");
+        }
+        if (refineMore.length == 1) {
+            throw new ChiException("Please write a timing nyan!");
+        }
+        if (refineMore.length > 2) {
+            throw new ChiException("Too many /at-s nyan!");
+        }
+        Task newTask;
+        try {
+            LocalDate d = LocalDate.parse(refineMore[1].trim().split(" ")[0].trim(),
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            if (refineMore[1].trim().split(" ").length == 2) {
+                if (refineMore[1].trim().split(" ")[1].trim().split("-").length == 0) {
+                    throw new ChiException("No timing found nyan1");
+                } else if (refineMore[1].trim().split(" ")[1].trim().split("-").length == 1) {
+                    throw new ChiException("1 time is missing!");
+                } else if (refineMore[1].trim().split(" ")[1].trim().split("-").length > 2) {
+                    throw new ChiException("Too many timings!");
+                }
+                LocalTime t1 = LocalTime.parse(refineMore[1].trim().split(" ")[1].trim().split("-")[0],
+                        DateTimeFormatter.ofPattern("HH:mm"));
+                LocalTime t2 = LocalTime.parse(refineMore[1].trim().split(" ")[1].trim().split("-")[1],
+                        DateTimeFormatter.ofPattern("HH:mm"));
+                if (t1.isAfter(t2)) {
+                    throw new ChiException("The end time cannot come before start time nyan!");
+                }
+                newTask = new Event(refineMore[0].trim(), d, t1, t2, false);
+            } else if (refineMore[1].trim().split(" ").length == 1) {
+                newTask = new Event(refineMore[0].trim(), d, false);
+            } else {
+                throw new ChiException("Too many date time things nyan!");
+            }
+            tl.addTask(newTask);
+            sge.updateFile(newTask, tl, "event");
+        } catch (DateTimeParseException e) {
+            throw new ChiException("This date time format is not recognized nyan!!");
+        }
+        return String.format("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n",
+                newTask, tl.getSize());
     }
     public String processMessage(String msg, TaskList tl, Storage sge) throws ChiException, IOException {
         // Obtain 1st word
@@ -59,21 +121,27 @@ public class Parser {
             if (command[0].equals("list")) {
                 return tl.getTasksMsg();
             }
+            // Stretch goals command class storing commands HashMap to search and return them
+            if (command[0].toLowerCase().equals("deadline") || command[0].toLowerCase().equals("event") ||
+                    command[0].toLowerCase().equals("todo")) {
+                throw new ChiException(command[0].toLowerCase());
+            }
             // Unknown message, or command lacks task
-            throw new ChiException(msg.trim().toLowerCase());
+            throw new ChiException("The following command " + msg.trim().toLowerCase() + " cannot be understood");
         } else {
             // Check for keywords
+            int processed;
             switch (command[0].toLowerCase()) {
                 case "mark":
                     // Retrieve the task from the list
-                    int processed = processNumberMsg(msg.substring(4), tl.getSize());
+                    processed = processNumberMsg(msg.substring(4), tl.getSize());
                     Task doneTask = tl.getTask(processed);
                     // Mark as done
                     doneTask.markAsDone();
                     sge.updateFile(doneTask, tl, "mark");
                     return String.format("Great job nyan~!\n%s\n", doneTask);
                 case "unmark":
-                    int processed = processNumberMsg(msg.substring(6), tl.getSize());
+                    processed = processNumberMsg(msg.substring(6), tl.getSize());
                     Task doneTask1 = tl.getTask(processed);
                     doneTask1.markAsUndone();
                     sge.updateFile(doneTask1, tl, "unmark");
@@ -88,6 +156,7 @@ public class Parser {
                             newTask, tl.getSize());
                 case "deadline":
                     // Separate task and deadline
+                    /*
                     String[] content = msg.substring(8).split("/by");
                     // Create new Deadline object
                     if (content[0].trim().equals("")) {
@@ -107,9 +176,10 @@ public class Parser {
                     }
                     tl.addTask(newTask1);
                     sge.updateFile(newTask1, tl, "deadline");
-                    return String.format("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n",
-                            newTask1, tl.getSize());
+                    */
+                    return processDeadlineMsg(msg.substring(8), tl, sge);
                 case "event":
+                    /*
                     // Separate task and timing
                     String[] content1 = msg.substring(5).split("/at");
                     if (content1[0].trim().equals("")) {
@@ -132,10 +202,10 @@ public class Parser {
                     }
                     tl.addTask(newTask2);
                     sge.updateFile(newTask2, tl, "event");
-                    return String.format("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n",
-                            newTask2, tl.getSize());
+                    */
+                    return processEventMsg(msg.substring(5),tl,sge);
                 case "delete":
-                    int processed = processNumberMsg(msg.substring(6), tl.getSize());
+                    processed = processNumberMsg(msg.substring(6), tl.getSize());
                     Task toDelete = tl.getTask(processed);
                     tl.deleteTask(toDelete);
                     sge.updateFile(toDelete, tl, "delete");

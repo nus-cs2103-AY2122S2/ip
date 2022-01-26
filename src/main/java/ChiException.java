@@ -20,7 +20,7 @@ public class ChiException extends Exception {
         } else if (msg.equals("mark") || msg.equals("unmark") || msg.equals("delete")) {
             return "Hey! Please choose something to " + msg + " nyaan~!";
         } else {
-            return "Chi-san doesn't understand that nyaan~!";
+            return msg;
         }
     }
 

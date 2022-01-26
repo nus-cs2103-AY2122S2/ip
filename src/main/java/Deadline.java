@@ -32,7 +32,7 @@ public class Deadline extends Task {
     }
         @Override
         public String writeToFile() {
-            return " D " + super.writeToFile() + " | " + this.by;
+            return " D " + super.writeToFile() + " | " + this.by + " | " + this.byTime;
     }
     /**
      * Returns the task in proper format.

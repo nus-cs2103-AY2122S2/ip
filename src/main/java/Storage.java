@@ -36,12 +36,22 @@ public class Storage {
             }
             return new Todo(splitTask[2], false);
         } else if (splitTask[0].equals("D")) {
-            return new Deadline(splitTask[2], LocalDate.parse(splitTask[3], DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-                    LocalTime.parse(splitTask[4], DateTimeFormatter.ofPattern("HH:mm")), splitTask[1].equals("1"));
+            if (splitTask.length == 5) {
+                return new Deadline(splitTask[2], LocalDate.parse(splitTask[3], DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                        LocalTime.parse(splitTask[4], DateTimeFormatter.ofPattern("HH:mm")), splitTask[1].equals("1"));
+            } else {
+                return new Deadline(splitTask[2], LocalDate.parse(splitTask[3], DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                        splitTask[1].equals("1"));
+            }
         } else {
-            return new Event(splitTask[2], LocalDate.parse(splitTask[3], DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-                    LocalTime.parse(splitTask[4], DateTimeFormatter.ofPattern("HH:mm")),
-                    LocalTime.parse(splitTask[5], DateTimeFormatter.ofPattern("HH:mm")), splitTask[1].equals("1"));
+            if (splitTask.length == 6) {
+                return new Event(splitTask[2], LocalDate.parse(splitTask[3], DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                        LocalTime.parse(splitTask[4], DateTimeFormatter.ofPattern("HH:mm")),
+                        LocalTime.parse(splitTask[5], DateTimeFormatter.ofPattern("HH:mm")), splitTask[1].equals("1"));
+            } else {
+                return new Event(splitTask[2], LocalDate.parse(splitTask[3], DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                        splitTask[1].equals("1"));
+            }
         }
     }
 
