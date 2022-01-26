@@ -1,12 +1,12 @@
 import java.time.LocalDate;
 public class Event extends Task {
 
-    Event(String description, String time) {
-        super(description, LocalDate.parse(time));
+    Event(String description, LocalDate time) {
+        super(description, time);
     }
 
-    Event(String description, boolean isDone, String time) {
-        super(description, isDone, LocalDate.parse(time));
+    Event(String description, boolean isDone, LocalDate time) {
+        super(description, isDone, time);
     }
 
     @Override

@@ -2,12 +2,12 @@ import java.time.LocalDate;
 
 public class Deadline extends Task {
 
-    Deadline(String description, String deadline) {
-        super(description, LocalDate.parse(deadline));
+    Deadline(String description, LocalDate deadline) {
+        super(description, deadline);
     }
 
-    Deadline(String description, boolean isDone, String deadline) {
-        super(description, isDone, LocalDate.parse(deadline));
+    Deadline(String description, boolean isDone, LocalDate deadline) {
+        super(description, isDone, deadline);
     }
 
     @Override
