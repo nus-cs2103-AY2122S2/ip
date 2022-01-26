@@ -43,7 +43,7 @@ public class Ui {
 
             if (inp.equals("bye")) {
                 isExit = true;
-                storage.reSavingFiles(taskList.list_of_inputs);
+                storage.reSavingFiles(taskList.listOfInputs);
                 System.out.println("Bye. Hope to see you again soon!");
             } else if (inp.equals("list")) {
                 taskList.list();

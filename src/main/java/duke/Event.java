@@ -18,7 +18,8 @@ public class Event extends Task {
 
     @Override
     public String message() {
-        return "E | " + "[" +  this.getStatusIcon() + "] " + super.message() + "(at:" + dateTimeFormat(date) + " " + this.time + ")";
+        return "E | " + "[" +  this.getStatusIcon() + "] "
+                + super.message() + "(at:" + dateTimeFormat(date) + " " + this.time + ")";
     }
 
 

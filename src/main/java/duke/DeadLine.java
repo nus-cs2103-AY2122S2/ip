@@ -2,13 +2,13 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task {
+public class DeadLine extends Task {
 
     protected String by;
     protected String date;
     protected String time;
 
-    public Deadline(String description, String by) {
+    public DeadLine(String description, String by) {
         super(description);
         this.by = by;
         String[] dateTimeTemp = by.split(" ");
@@ -18,7 +18,8 @@ public class Deadline extends Task {
 
     @Override
     public String message() {
-        return "D | " + "[" +  this.getStatusIcon() + "] " + super.message() + "(by:" + dateTimeFormat(date) + " " + time + ")";
+        return "D | " + "[" +  this.getStatusIcon() + "] " + super.message()
+                + "(by:" + dateTimeFormat(date) + " " + time + ")";
     }
 
 
