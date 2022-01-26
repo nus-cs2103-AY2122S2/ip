@@ -1,5 +1,7 @@
-package DukeHelpers;
+package duke.helpers;
+
 import java.util.Scanner;
+
 public class Ui {
 
     private static Scanner sc;
@@ -9,7 +11,7 @@ public class Ui {
     }
 
     public void welcome() {
-        System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
+        System.out.println("Hello! I'm duke.Duke\n" + "What can I do for you?");
     }
 
     public static String readCommand() {
@@ -18,10 +20,6 @@ public class Ui {
 
     public static void closeScanner() {
         sc.close();
-    }
-
-    public static void showError(String str) {
-        System.out.println(str);
     }
 
     public static void showLoadingError() {

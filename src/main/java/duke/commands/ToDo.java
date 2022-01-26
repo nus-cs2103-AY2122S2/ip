@@ -1,4 +1,4 @@
-package Commands;
+package duke.commands;
 
 public class ToDo extends Task {
 

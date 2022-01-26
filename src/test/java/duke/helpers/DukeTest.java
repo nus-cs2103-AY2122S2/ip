@@ -1,7 +1,8 @@
-package DukeHelpers;
+package duke.helpers;
 
-import Commands.Command;
-import Exceptions.DukeException;
+import duke.commands.Command;
+import duke.exceptions.DukeException;
+
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -14,16 +15,16 @@ public class DukeTest {
     Ui ui;
 
     @Test
-    public void testWelcome() {
+    public void uiWelcome_welcomePrinted() {
         ui = new Ui();
         System.setOut(new PrintStream(outputStreamCaptor));
         ui.welcome();
-        assertEquals("Hello! I'm Duke\n" + "What can I do for you?",
+        assertEquals("Hello! I'm duke.Duke\n" + "What can I do for you?",
                 outputStreamCaptor.toString().trim());
     }
 
     @Test
-    public void testWrongDate() {
+    public void parserIsCommand_wrongDate_dukeExceptionThrown() {
         String s = "OOPS!!! Time of deadline is missing. Please indicate a stipulated time.";
         try {
             Parser.isCommand("deadline cook /by", Command.DEADLINE);

@@ -1,4 +1,4 @@
-package Commands;
+package duke.commands;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -13,14 +13,14 @@ public class Deadline extends Task {
     private String dateFormat;
     private String timeFormat;
 
-    private static final String[] dateFormats = {
+    private static final String[] DATE_FORMATS = {
             "dd/MM/yyyy",
             "dd MM yyyy",
             "yyyy/MM/dd",
             "yyyy MM dd",
             "MMM dd yyyy",
     };
-    private static final String[] timeFormats = {
+    private static final String[] TIME_FORMATS = {
             "HHmm",
             "HH:mm",
     };
@@ -31,7 +31,7 @@ public class Deadline extends Task {
     }
 
     public boolean isValidTime() {
-        for (String format : timeFormats) {
+        for (String format : TIME_FORMATS) {
             try {
                 if (this.by.split(" ").length != 1) {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
@@ -49,7 +49,7 @@ public class Deadline extends Task {
 
     public boolean isValidDate() {
         String d = this.by.split(" ")[0].replace("-", " ");
-        for (String format : dateFormats) {
+        for (String format : DATE_FORMATS) {
             try {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
                 LocalDate.parse(d, formatter);

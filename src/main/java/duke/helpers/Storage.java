@@ -1,17 +1,20 @@
-package DukeHelpers;
+package duke.helpers;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
+
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
+
 import java.util.ArrayList;
-import Commands.Deadline;
-import Commands.Event;
-import Commands.ToDo;
-import Commands.Task;
+
+import duke.commands.Deadline;
+import duke.commands.Event;
+import duke.commands.ToDo;
+import duke.commands.Task;
 
 
 public class Storage {
@@ -24,7 +27,6 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    // load file
     public ArrayList<Task> loadFileContents() throws IOException {
         if (!new File(this.dirPath).exists()) {
             Files.createDirectory(Path.of(dirPath));
@@ -72,7 +74,6 @@ public class Storage {
         return taskArr;
     }
 
-    // save file
     public static ArrayList<Task> saveToFile(ArrayList<Task> taskArr) {
         try {
             java.nio.file.Path path = java.nio.file.Paths.get("src/main/data/duke.txt");

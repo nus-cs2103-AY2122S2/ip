@@ -1,28 +1,29 @@
-package DukeHelpers;
+package duke.helpers;
 
-import DukeHelpers.Storage;
-import Exceptions.DukeException;
-import Exceptions.InvalidDateException;
-import Exceptions.InvalidIndexException;
-import Commands.Deadline;
-import Commands.Event;
-import Commands.ToDo;
-import Commands.Task;
+import duke.exceptions.DukeException;
+import duke.exceptions.InvalidDateException;
+import duke.exceptions.InvalidIndexException;
+
+import duke.commands.Deadline;
+import duke.commands.Event;
+import duke.commands.ToDo;
+import duke.commands.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
 
-    private static ArrayList<Task> arr;
+    private static ArrayList<Task> tasks;
 
     public TaskList(ArrayList<Task> arr) {
-        this.arr = arr;
+        this.tasks = arr;
     }
     public TaskList() {
-        this.arr = new ArrayList<Task>();
+        this.tasks = new ArrayList<Task>();
     }
 
     public static void addTask(Task t) {
-        arr.add(t);
+        tasks.add(t);
     }
 
     public static void deleteTask(String input, String ans) throws DukeException {
@@ -30,20 +31,20 @@ public class TaskList {
         int index = Integer.valueOf(strArr[1]) - 1;
         if (index >= 0 && index < len()) {
             Task t = getTask(index);
-            arr.remove(t);
+            tasks.remove(t);
             ans += "Noted. I've removed this task:\n\t\t" + t.toString() +
-                    "\n\tNow you have " + numOfTasks() + " in the list.";;
+                    "\n\tNow you have " + getNumOfTasks() + " in the list.";;
         } else {
             throw new InvalidIndexException();
         }
-        Storage.saveToFile(arr);
+        Storage.saveToFile(tasks);
         System.out.println(ans);
     }
 
     public static void getTaskList() {
         String ans = "\tHere are the tasks in your list:\n";
         for (int i = 0; i < len(); i++) {
-            Task t = arr.get(i);
+            Task t = tasks.get(i);
             if (i == len() - 1) {
                 ans += String.format("\t%d.%s", i + 1, t.toString());
             } else {
@@ -68,7 +69,7 @@ public class TaskList {
         } else {
             throw new InvalidIndexException();
         }
-        Storage.saveToFile(arr);
+        Storage.saveToFile(tasks);
         System.out.println(ans);
     }
 
@@ -76,9 +77,9 @@ public class TaskList {
         String desc = input.substring(5);
         ToDo t = new ToDo(desc);
         addTask(t);
-        Storage.saveToFile(arr);
+        Storage.saveToFile(tasks);
         ans += "Got it. I've added this task:\n\t\t" + t.toString() +
-                "\n\tNow you have " + numOfTasks() + " in the list.";
+                "\n\tNow you have " + getNumOfTasks() + " in the list.";
         System.out.println(ans);
     }
 
@@ -90,9 +91,9 @@ public class TaskList {
             throw new InvalidDateException();
         }
         addTask(t);
-        Storage.saveToFile(arr);
+        Storage.saveToFile(tasks);
         ans += "Got it. I've added this task:\n\t\t" + t.toString() +
-                "\n\tNow you have " + numOfTasks() + " in the list.";
+                "\n\tNow you have " + getNumOfTasks() + " in the list.";
         System.out.println(ans);
     }
 
@@ -104,24 +105,24 @@ public class TaskList {
             throw new InvalidDateException();
         }
         addTask(t);
-        Storage.saveToFile(arr);
+        Storage.saveToFile(tasks);
         ans += "Got it. I've added this task:\n\t\t" + t.toString() +
-                "\n\tNow you have " + numOfTasks() + " in the list.";
+                "\n\tNow you have " + getNumOfTasks() + " in the list.";
         System.out.println(ans);
     }
 
 
 
     public static Task getTask(int index) {
-        return arr.get(index);
+        return tasks.get(index);
     }
 
 
     public static int len() {
-        return arr.size();
+        return tasks.size();
     }
 
-    private static String numOfTasks() {
+    private static String getNumOfTasks() {
         return len() == 1
                 ? "1 task"
                 : len() + " tasks";

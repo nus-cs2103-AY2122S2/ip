@@ -1,8 +1,11 @@
-import DukeHelpers.Parser;
-import DukeHelpers.Storage;
-import DukeHelpers.TaskList;
-import DukeHelpers.Ui;
-import java.io.*;
+package duke;
+
+import duke.helpers.Parser;
+import duke.helpers.Storage;
+import duke.helpers.TaskList;
+import duke.helpers.Ui;
+
+import java.io.IOException;
 
 
 public class Duke {
