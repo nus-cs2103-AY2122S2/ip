@@ -1,6 +1,7 @@
 package duke.ui;
 
 import duke.commands.Type;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -21,6 +22,7 @@ public class TextStorage {
         this.content = "";
         this.uiManager = um;
     }
+
     private void writeToFile(String string) throws IOException {
         FileWriter fw = new FileWriter("storage/stored.txt");
         fw.write(string);
@@ -29,32 +31,32 @@ public class TextStorage {
 
     public void append(String task, Type t) {
         switch (t) {
-            case DEADLINE:
-                this.content += "deadline " + task + "\n";
-                break;
-            case EVENT:
-                this.content += "event " + task + "\n";
-                break;
-            case TODO:
-                this.content += "todo " + task + "\n";
-                break;
-            case MARK:
-                this.content += "mark " + task + "\n";
-                break;
-            case UNMARK:
-                this.content += "unmark " + task + "\n";
-                break;
-            case DELETE:
-                this.content += "delete " + task + "\n";
+        case DEADLINE:
+            this.content += "deadline " + task + "\n";
+            break;
+        case EVENT:
+            this.content += "event " + task + "\n";
+            break;
+        case TODO:
+            this.content += "todo " + task + "\n";
+            break;
+        case MARK:
+            this.content += "mark " + task + "\n";
+            break;
+        case UNMARK:
+            this.content += "unmark " + task + "\n";
+            break;
+        case DELETE:
+            this.content += "delete " + task + "\n";
+            break;
         }
-
     }
 
     public void save() {
         try {
             this.writeToFile(this.content);
         } catch (IOException e) {
-            uiManager.errorMessage("Oops! This is not a valid path!\nCheck if the directory exists!");
+            uiManager.showErrorMessage("Oops! This is not a valid path!\nCheck if the directory exists!");
 
         }
     }

@@ -5,54 +5,53 @@ import duke.ui.UiManager;
 import java.util.ArrayList;
 
 public class TaskManager {
-    private UiManager um;
+    private UiManager uiManager;
     private ArrayList<Task> tasks;
     private String taskList;
 
     public TaskManager(UiManager manager) {
-        this.um = manager;
+        this.uiManager = manager;
         this.tasks = new ArrayList<>();
     }
 
-    public void addTask(Task t) {
-        tasks.add(t);
-        um.printAdd(t, this.size());
+    public void addTask(Task task) {
+        tasks.add(task);
+        uiManager.printAdd(task, this.size());
     }
 
-    public void insertTask(Task t) {
-        tasks.add(t);
+    public void insertTask(Task task) {
+        tasks.add(task);
     }
 
     public void mark(Integer num) throws InvalidOperationException {
-        Task t = tasks.get(num);
-        t.mark();
-        um.printMark(t);
+        Task task = tasks.get(num);
+        task.mark();
+        uiManager.printMark(task);
     }
 
     public void labelDone(Integer num) throws InvalidOperationException {
-        Task t = tasks.get(num);
-        t.mark();
+        Task task = tasks.get(num);
+        task.mark();
     }
 
     public void unmark(Integer num) throws InvalidOperationException {
-        Task t = tasks.get(num);
-        t.unmark();
-        um.printUnmark(t);
+        Task task = tasks.get(num);
+        task.unmark();
+        uiManager.printUnmark(task);
     }
 
     public void labelUndone(Integer num) throws InvalidOperationException {
-        Task t = tasks.get(num);
-        t.unmark();
+        Task task = tasks.get(num);
+        task.unmark();
     }
 
     public void delete(int num) {
         String taskDetails = tasks.get(num).toString();
         tasks.remove(num);
-        um.printDelete(taskDetails, tasks.size());
+        uiManager.printDelete(taskDetails, tasks.size());
     }
 
     public void remove(int num) {
-        String taskDetails = tasks.get(num).toString();
         tasks.remove(num);
     }
 
@@ -62,13 +61,13 @@ public class TaskManager {
 
     @Override
     public String toString() {
-        String s = um.getLine() + "\n";
-        s += "Here's your list, Good Sir:\n";
+        String string = uiManager.getLine() + "\n";
+        string += "Here's your list, Good Sir:\n";
         for (int i = 0; i < tasks.size(); i++) {
-            s += i + 1 + ". "+ tasks.get(i).toString() + "\n";
+            string += i + 1 + ". "+ tasks.get(i).toString() + "\n";
         }
-        s += um.getLine();
-        this.taskList = s;
-        return s;
+        string += uiManager.getLine();
+        this.taskList = string;
+        return string;
     }
 }

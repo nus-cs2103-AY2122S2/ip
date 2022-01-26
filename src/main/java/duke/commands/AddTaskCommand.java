@@ -10,8 +10,7 @@ import duke.ui.UiManager;
 
 import java.time.format.DateTimeParseException;
 
-
-public class AddTaskCommand extends Command{
+public class AddTaskCommand extends Command {
     private String description;
     private String date;
     private TaskManager taskManager;
@@ -22,65 +21,64 @@ public class AddTaskCommand extends Command{
         this.uiManager = um;
         this.taskManager = tm;
         this.type = t;
-        switch(t) {
-            case TODO:
-                this.description = task;
-                break;
-            case DEADLINE:
-                String[] dInput = task.split("/by", 2);
-                if (dInput.length == 1) {
-                    throw new DateException("deadline");
-                }
-                this.description = dInput[0];
-                this.date = dInput[1];
-                break;
-            case EVENT:
-                String[] eInput = task.split("/at", 2);
-                if (eInput.length == 1) {
-                    throw new DateException("event");
-                }
-                this.description = eInput[0];
-                this.date = eInput[1];
-                break;
+        switch(type) {
+        case TODO:
+            this.description = task;
+            break;
+        case DEADLINE:
+            String[] dInput = task.split("/by", 2);
+            if (dInput.length == 1) {
+                throw new DateException("deadline");
+            }
+            this.description = dInput[0];
+            this.date = dInput[1];
+            break;
+        case EVENT:
+            String[] eInput = task.split("/at", 2);
+            if (eInput.length == 1) {
+                throw new DateException("event");
+            }
+            this.description = eInput[0];
+            this.date = eInput[1];
+            break;
         }
     }
 
     public void insert() {
         try {
             switch (type) {
-                case TODO:
-                    Task newToDo = new ToDo(this.description);
-                    taskManager.insertTask(newToDo);
-                    break;
-                case DEADLINE:
-                    Task newDeadline = new Deadline(this.description, this.date);
-                    taskManager.insertTask(newDeadline);
-                    break;
-                case EVENT:
-                    Task newEvent = new Event(this.description, this.date);
-                    taskManager.insertTask(newEvent);
-                    break;
-            }
-        } catch (DateTimeParseException e) {
-            uiManager.errorMessage("Invalid date in your saved entry!");
-        }
-    }
-
-    public void execute() throws DateTimeParseException{
-        switch (type) {
             case TODO:
                 Task newToDo = new ToDo(this.description);
-                taskManager.addTask(newToDo);
+                taskManager.insertTask(newToDo);
                 break;
             case DEADLINE:
                 Task newDeadline = new Deadline(this.description, this.date);
-                taskManager.addTask(newDeadline);
+                taskManager.insertTask(newDeadline);
                 break;
             case EVENT:
                 Task newEvent = new Event(this.description, this.date);
-                taskManager.addTask(newEvent);
+                taskManager.insertTask(newEvent);
                 break;
             }
+        } catch (DateTimeParseException e) {
+            uiManager.showErrorMessage("Invalid date in your saved entry!");
+        }
+    }
 
+    public void execute() throws DateTimeParseException {
+        switch (type) {
+        case TODO:
+            Task newToDo = new ToDo(this.description);
+            taskManager.addTask(newToDo);
+            break;
+        case DEADLINE:
+            Task newDeadline = new Deadline(this.description, this.date);
+            taskManager.addTask(newDeadline);
+            break;
+        case EVENT:
+            Task newEvent = new Event(this.description, this.date);
+            taskManager.addTask(newEvent);
+            break;
+        }
     }
 }

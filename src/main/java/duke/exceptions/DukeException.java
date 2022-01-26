@@ -1,6 +1,7 @@
 package duke.exceptions;
 
 public class DukeException extends Exception {
+
     public DukeException() {
     }
 
@@ -8,5 +9,4 @@ public class DukeException extends Exception {
     public String toString() {
         return "OOPS!!! You gave an invalid command!";
     }
-
 }
