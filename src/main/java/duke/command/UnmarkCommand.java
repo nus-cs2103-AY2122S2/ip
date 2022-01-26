@@ -5,7 +5,7 @@ import duke.managers.FileManager;
 import duke.managers.TaskList;
 
 public class UnmarkCommand extends Command{
-    int taskIdx;
+    private int taskIdx;
 
     public UnmarkCommand(String userTaskString, int taskIdx) {
         super(userTaskString);
@@ -14,6 +14,7 @@ public class UnmarkCommand extends Command{
 
     /**
      * Unmarks task as per taskIdx
+     *
      * @param taskList
      * @param fileManager
      * @throws DukeException

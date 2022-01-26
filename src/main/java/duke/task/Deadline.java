@@ -9,6 +9,7 @@ public class Deadline extends Task {
 
     /**
      * Deadline Constructor
+     *
      * @param description description of the deadline
      * @param deadlineDate exact deadline date in string format, will be converted into date object
      */
@@ -19,6 +20,7 @@ public class Deadline extends Task {
 
     /**
      * Returns deadline date in the format of "MMM dd yyyy"
+     *
      * @return string representing deadline date in "MMM dd yyyy"
      */
     public String getDeadlineDate(){

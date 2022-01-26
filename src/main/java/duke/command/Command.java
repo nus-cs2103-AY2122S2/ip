@@ -5,7 +5,7 @@ import duke.managers.FileManager;
 import duke.managers.TaskList;
 
 public abstract class Command {
-    String userTaskString;
+    private String userTaskString;
 
     public Command(String userTaskString) {
         this.userTaskString = userTaskString;

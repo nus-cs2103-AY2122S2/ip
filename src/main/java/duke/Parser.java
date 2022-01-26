@@ -1,6 +1,13 @@
 package duke;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
+import duke.command.ByeCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
+import duke.command.InvalidCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -8,7 +15,7 @@ import duke.task.Todo;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
-    Ui ui;
+    private Ui ui;
 
     public Parser() {
         ui = new Ui();
@@ -16,6 +23,7 @@ public class Parser {
 
     /**
      * Parses user input into their respective commands. Creates different Command type objects which is executed to perform its tasks.
+     *
      * @param userTaskString
      * @return Command Object
      * @throws DukeException
@@ -32,7 +40,8 @@ public class Parser {
                 //+1 is to take into account the " "after delete, -1 is to convert it into 0-based indexing
             } catch (StringIndexOutOfBoundsException err) { // For cases like "delete" without a number
                 ui.throwDukeException("Please enter a task number to delete!");
-            } catch (NumberFormatException err) { // For cases like "delete1" without a space in between or "delete 3b" where the term is not a number
+            } catch (NumberFormatException err) {
+                // For cases like "delete1" without a space in between or "delete 3b" where the term is not a number
                 ui.throwDukeException("Please delete a task in the following format:\n" +
                         "delete [number]");
             }
@@ -43,7 +52,8 @@ public class Parser {
                 //+1 is to take into account the " "after mark, -1 is to convert it into 0-based indexing
             } catch (StringIndexOutOfBoundsException err) { // For cases like "mark" without a number
                 ui.throwDukeException("Please enter a task number to mark!");
-            } catch (NumberFormatException err) { // For cases like "mark1" without a space in between or "mark 3b" where the term is not a number
+            } catch (NumberFormatException err) {
+                // For cases like "mark1" without a space in between or "mark 3b" where the term is not a number
                 ui.throwDukeException("Please mark a task in the following format:\n" +
                         "mark [number]");
             }
@@ -54,7 +64,8 @@ public class Parser {
                 //+1 is to take into account the " "after unmark, -1 is to convert it into 0-based indexing
             } catch (StringIndexOutOfBoundsException err) { // For cases like "unmark" without a number
                 ui.throwDukeException("Please enter a task number to unmark!");
-            } catch (NumberFormatException err) { // For cases like "unmark1" without a space in between or "unmark 3b" where the term is not a number
+            } catch (NumberFormatException err) {
+                // For cases like "unmark1" without a space in between or "unmark 3b" where the term is not a number
                 ui.throwDukeException("Please unmark a task in the following format:\n" +
                         "unmark [number]");
             }
@@ -84,7 +95,8 @@ public class Parser {
                 String[] descriptionTimingSplit = userTaskStringSliced.split(" /at ", 2);
                 Event userEvent = new Event(descriptionTimingSplit[0], descriptionTimingSplit[1]);
                 return new AddCommand(userTaskString, userEvent);
-            } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException err) { // For cases like "event" without any other information
+            } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException err) {
+                // For cases like "event" without any other information
                 ui.throwDukeException("Please enter an Event in the following format:\n" +
                         "event [description] /at [datetime]");
             }

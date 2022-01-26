@@ -2,7 +2,7 @@ package duke;
 
 public class DukeException extends Exception {
 
-    String errorMessage;
+    private String errorMessage;
 
     public DukeException(String errorMessage){
         super(errorMessage);

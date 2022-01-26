@@ -6,7 +6,7 @@ import duke.managers.FileManager;
 import duke.managers.TaskList;
 
 public class InvalidCommand extends Command{
-    Ui ui;
+    private Ui ui;
 
     public InvalidCommand(String userTaskString) {
         super(userTaskString);
@@ -15,6 +15,7 @@ public class InvalidCommand extends Command{
 
     /**
      * Throws exception when the command is invalid
+     *
      * @param taskList
      * @param fileManager
      * @throws DukeException

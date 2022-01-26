@@ -5,7 +5,7 @@ import duke.managers.TaskList;
 import duke.task.Task;
 
 public class AddCommand extends Command {
-    Task task;
+    private Task task;
 
     public AddCommand(String userTaskString, Task task) {
         super(userTaskString);
@@ -14,6 +14,7 @@ public class AddCommand extends Command {
 
     /**
      * Executes adding of task to TaskList (with printing)
+     *
      * @param taskList
      * @param fileManager
      */

@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Quote {
-    public ArrayList<String> alQuotes;
+    private ArrayList<String> alQuotes;
 
     /**
      * Contains quote list
@@ -13,7 +13,8 @@ public class Quote {
     public Quote(){
         alQuotes = new ArrayList<String>(Arrays.asList("Life is more than what is, its what it could be. What you could make it.\n",
                 "It is our choices that show what we truly are for more than our abilities\n",
-                "There comes a point in everybody’s life where we fell like giving up, its what we do at that point in time that defines who we are\n",
+                "There comes a point in everybody’s life where we fell like giving up, " +
+                        "its what we do at that point in time that defines who we are\n",
                 "What’s coming will come, and we’ll meet it when it does.\n",
                 "'And in the end,\n It is not the years in your life that count.\n It is the life in your years' - Abraham Lincoln",
                 "What we need to recognise is that the things we truly want, the things that are deeply meaningful, \n" +
@@ -32,6 +33,7 @@ public class Quote {
 
     /**
      * Generates random quote from a stored quote list
+     *
      * @return String of quote
      */
     public String generateQuote(){

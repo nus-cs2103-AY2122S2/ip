@@ -4,6 +4,7 @@ public class Ui {
 
     /**
      * Print statement with divider line
+     *
      * @param str input string to be printed
      */
     public void print(Object str) {
@@ -13,6 +14,7 @@ public class Ui {
 
     /**
      * Prints oridinary System.out.println
+     *
      * @param str input string to be printed
      */
     public void println(Object str) {
@@ -20,7 +22,7 @@ public class Ui {
     }
 
     /**
-     * Print statemeny for when system exits
+     * Print statement for when system exits
      */
     public void printBye(){
         this.print("Bye. Hope I've motivated you as much as I could have, and SMILE :D");

@@ -20,6 +20,7 @@ public class TaskList {
 
     /**
      * Returns exact Task of the specified index.
+     *
      * @param taskIdx
      * @return Task
      */
@@ -29,6 +30,7 @@ public class TaskList {
 
     /**
      * Returns total size of the TaskList (Number of task the user has)
+     *
      * @return Size of TaskList
      */
     public int getSize(){
@@ -37,6 +39,7 @@ public class TaskList {
 
     /**
      * Returns TaskList as an ArrayList
+     *
      * @return TaskList
      */
     public ArrayList<Task> getArrayList(){
@@ -45,6 +48,7 @@ public class TaskList {
 
     /**
      * Adds a task to the user Task List
+     *
      * @param task exact task to be added into users' Task List
      * @param toPrint boolean value to decide if we want to execute print statements
      */
@@ -63,6 +67,7 @@ public class TaskList {
 
     /**
      * Deletes specified user Task from Task List
+     *
      * @param taskIndex exact task index to be deleted
      * @throws DukeException if specified taskIndex is not valid (<=0 or > total size of TaskList)
      */
@@ -76,6 +81,7 @@ public class TaskList {
 
     /**
      * Checks if a specified task index is value
+     *
      * @param taskIndex exact task index to be verified
      * @return true if index is valid
      * @throws DukeException if specified taskIndex is not valid (<=0 or > total size of TaskList)
@@ -114,11 +120,13 @@ public class TaskList {
 
     /**
      * Marks tasks as done as specified by the task index
+     *
      * @param taskIndex exact task index to be marked
      * @param toPrint boolean value to decide if we want to execute print statements
      * @throws DukeException if specified taskIndex is not valid (<=0 or > total size of TaskList)
      */
-    public void markTaskDone(int taskIndex, Boolean toPrint) throws DukeException { //This is the actual index for arraylist checking (minus one already)
+    public void markTaskDone(int taskIndex, Boolean toPrint) throws DukeException {
+        //This is the actual index for arraylist checking (minus one already)
         if (this.checkValidTask(taskIndex)) {
             Task task = this.userTaskList.get(taskIndex);
             task.markAsDone();
@@ -130,11 +138,13 @@ public class TaskList {
 
     /**
      * Marks tasks as not done as specified by the task index
+     *
      * @param taskIndex exact task index to be unmarked
      * @param toPrint boolean value to decide if we want to execute print statements
      * @throws DukeException if specified taskIndex is not valid (<=0 or > total size of TaskList)
      */
-    public void markTaskNotDone(int taskIndex, Boolean toPrint) throws DukeException { //This is the actual index for arraylist checking (minus one already)
+    public void markTaskNotDone(int taskIndex, Boolean toPrint) throws DukeException {
+        //This is the actual index for arraylist checking (minus one already)
         if (this.checkValidTask(taskIndex)) {
             Task task = this.userTaskList.get(taskIndex);
             task.markAsNotDone();

@@ -6,7 +6,10 @@ import duke.managers.FileManager;
 import duke.managers.TaskList;
 
 public class ByeCommand extends Command{
-    Ui ui;
+
+    private int taskIdx;
+    private Ui ui;
+    private FileManager fileManager;
 
     public ByeCommand(String userTaskString) {
         super(userTaskString);
@@ -15,6 +18,7 @@ public class ByeCommand extends Command{
 
     /**
      * Executes saving of tasks and exiting.
+     *
      * @param taskList
      * @param fileManager
      * @throws DukeException when not able to save tasks (File does not exist etc).

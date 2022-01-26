@@ -16,9 +16,9 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class FileManager {
-    TaskList userTaskList;
-    String filePath;
-    Ui ui;
+    private TaskList userTaskList;
+    private String filePath;
+    private Ui ui;
 
     /**
      *
@@ -96,7 +96,8 @@ public class FileManager {
                 }
                 break;
             case "D":
-                Deadline deadline = new Deadline(loadedTaskSplit[2], LocalDate.parse(loadedTaskSplit[3], DateTimeFormatter.ofPattern("MMM dd yyyy")).toString());
+                Deadline deadline = new Deadline(loadedTaskSplit[2], LocalDate.parse(loadedTaskSplit[3],
+                        DateTimeFormatter.ofPattern("MMM dd yyyy")).toString());
                 // Parse the saved format "MMM dd yyyy" into yyyy-mm-dd which is what Deadline() class requires
                 this.userTaskList.addTask(deadline, false);
                 if (loadedTaskSplit[1].equals("1")) {

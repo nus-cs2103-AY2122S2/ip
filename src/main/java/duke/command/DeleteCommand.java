@@ -5,7 +5,7 @@ import duke.managers.FileManager;
 import duke.managers.TaskList;
 
 public class DeleteCommand extends Command{
-    int taskIdx;
+    private int taskIdx;
 
     public DeleteCommand(String userTaskString, int taskIdx) {
         super(userTaskString);
@@ -14,6 +14,7 @@ public class DeleteCommand extends Command{
 
     /**
      * Executes deletion of task per taskIdx
+     *
      * @param taskList
      * @param fileManager
      * @throws DukeException if task idx is not valid
