@@ -7,15 +7,33 @@ import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * Represents a storage that handles the saving/loading of
+ * data from/to hard disk.
+ * Stores the absolute path to the file that is used by the program.
+ */
 public class Storage {
 
     protected Path absoluteFilePath;
 
+    /**
+     * Creates an instance of a storage that stores/loads
+     * from the given path.
+     *
+     * @param filePath the relative path of the file from program root.
+     */
     public Storage(String filePath) {
         String currentDir = System.getProperty("user.dir");
         this.absoluteFilePath = Paths.get(currentDir, filePath);
     }
 
+    /**
+     * Returns a TaskList object that is loaded from the location
+     * of absoluteFIlePath. If the file does not exist, throw an
+     * error which indicates that there is no existing list of task.
+     *
+     * @return a TaskList that was saved previously by the program.
+     */
     public TaskList load() throws DukeException  {
 
         try {
@@ -30,7 +48,15 @@ public class Storage {
         }
     }
 
-    public void save(TaskList tasks) {
+    /**
+     * Saves the TaskList object that is currently being used by
+     * the program to the file specified by absoluteFilePath.
+     * If the file does not exist, create the file.
+     *
+     * @param taskList the task list that is currently used by
+     *                 the program.
+     */
+    public void save(TaskList taskList) {
         File file = new File(absoluteFilePath.toString());
         file.getParentFile().mkdirs();
         try {
@@ -40,7 +66,7 @@ public class Storage {
         try {
             FileOutputStream fos = new FileOutputStream(absoluteFilePath.toString());
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(tasks);
+            oos.writeObject(taskList);
             oos.close();
             fos.close();
         } catch (Exception e) {
