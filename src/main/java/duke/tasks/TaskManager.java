@@ -122,6 +122,25 @@ public class TaskManager {
         tasks.remove(num);
     }
 
+
+    /**
+     * Searches for the tasks containing a keyword.
+     *
+     * @param string String representing the keyword.
+     * @return a string containing the task list
+     */
+    public String findTasks(String string) {
+        String tasksFound = "";
+        for (int i = 0; i < this.tasks.size(); i++) {
+            Task currTask = tasks.get(i);
+            if (currTask.toString().contains(string)) {
+                tasksFound += "\n" + currTask.toString() ;
+            }
+        }
+        return tasksFound;
+    }
+
+
     /**
      * Returns the number of Task Objects in the ArrayList.
      *

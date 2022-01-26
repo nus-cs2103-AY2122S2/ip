@@ -108,6 +108,10 @@ public class CommandManager {
                     SaveCommand save = new SaveCommand(this.uiManager, this.taskManager, Type.SAVE);
                     save.execute();
                     break;
+                case "find":
+                    FindCommand find = new FindCommand(this.uiManager, this.taskManager, command[1], Type.FIND);
+                    find.execute();
+                    break;
                 default:
                     throw new DukeException();
                 }

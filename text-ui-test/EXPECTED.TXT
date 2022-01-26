@@ -99,6 +99,12 @@ Here's your list, Good Sir:
 4. [E][ ] project meeting (at: 1 JANUARY 2022)
 -------------------------------------------
 -------------------------------------------
+These are the tasks labeled book:
+
+[T][ ] borrow book
+[D][ ] return book (by: 1 JANUARY 2022)
+-------------------------------------------
+-------------------------------------------
 I removed this task for you:
 [D][ ] return book (by: 1 JANUARY 2022)
 Now you have 3 items in your list
@@ -124,4 +130,21 @@ OOPS!!! You didn't give me a proper 'deadline' typed task to include!
 -------------------------------------------
 -------------------------------------------
 OOPS!!! You didn't give me a proper 'event' typed task to include!
+-------------------------------------------
+-------------------------------------------
+These are the tasks labeled book:
+
+[T][ ] borrow book
+-------------------------------------------
+-------------------------------------------
+These are the tasks labeled meeting:
+
+[E][ ] project meeting (at: 1 JANUARY 2022)
+-------------------------------------------
+-------------------------------------------
+OOPS!!! You didn't give me a proper 'find' typed task to include!
+-------------------------------------------
+-------------------------------------------
+These are the tasks labeled nothing:
+
 -------------------------------------------

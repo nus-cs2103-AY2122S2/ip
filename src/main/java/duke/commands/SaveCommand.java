@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class SaveCommand extends Command{
+public class SaveCommand extends Command {
     private UiManager uiManager;
     private TaskManager taskManager;
     private String directory;

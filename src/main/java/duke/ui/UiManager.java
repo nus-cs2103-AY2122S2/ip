@@ -139,6 +139,7 @@ public class UiManager {
         System.out.println("No list saved previously!");
     }
 
+
     /**
      * Prints a formatted message with the attached error message.
      *
@@ -150,6 +151,19 @@ public class UiManager {
         this.showLine();
     }
 
+    /**
+     * Prints a formatted message of a task list with
+     * tasks containing a keyword.
+     *
+     * @param tasks the list of tasks in a String format
+     * @param taskName the String representation of the keyword
+     */
+    public void printFind(String tasks, String taskName) {
+        this.showLine();
+        System.out.println("These are the tasks labeled " + taskName + ":");
+        System.out.println(tasks);
+        this.showLine();
+    }
 
     /**
      * Converts a String into a String array, omitting
@@ -170,6 +184,7 @@ public class UiManager {
                 || (spliced[0].equals("delete"))
                 || (spliced[0].equals("mark"))
                 || (spliced[0].equals("unmark"))
+                || (spliced[0].equals("find"))
                 || (spliced[0].equals("deadline")))) {
             throw new TaskIndexException("'" +spliced[0] + "'");
         }
