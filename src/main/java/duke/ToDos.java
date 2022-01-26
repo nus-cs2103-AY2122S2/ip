@@ -2,7 +2,7 @@ package duke;
 
 public class ToDos extends Task {
 
-    public ToDos (String task) throws DukeException {
+    public ToDos(String task) throws DukeException {
         super(task);
         this.initials = "T";
         if (task.length() < 1) {

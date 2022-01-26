@@ -22,21 +22,21 @@ public class Parser {
     }
 
     private static String[] processInput(String inputMessage) throws DukeException {
-        String[] msg = new String[] {"null"};
+        String[] msg = new String[]{"null"};
         // One word messages
         if (inputMessage.equals("list")) {
-            msg = new String[] {"list"};
+            msg = new String[]{"list"};
         } else {
             // Mark and unmark have the same syntax, so only process it once
             if (inputMessage.length() < 4) {
                 // Do nothing (For Future methods to be added if their lengths are lesser than 4
-            } else if (inputMessage.substring(0,4).contains("todo")) {
+            } else if (inputMessage.substring(0, 4).contains("todo")) {
                 if (inputMessage.length() <= 4) {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but you need to provide a description for the Todo task\n");
                 }
                 msg = inputMessage.split("todo ");
                 msg[0] = "todo";
-            } else if (inputMessage.substring(0,6).contains("event ")) {
+            } else if (inputMessage.substring(0, 6).contains("event ")) {
                 if (inputMessage.contains(" /at")) {
                     String temp = inputMessage.substring(6);
                     msg = temp.split(" /at");
@@ -73,7 +73,7 @@ public class Parser {
         try {
             return processInput(userInput);
         } catch (DukeException e) {
-            return new String[] {"null"};
+            return new String[]{"null"};
         }
     }
 }

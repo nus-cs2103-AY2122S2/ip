@@ -2,10 +2,11 @@ package duke;
 
 import java.util.ArrayList;
 import java.time.LocalDateTime;
+
 public class DeadLines extends Task {
     LocalDateTime deadline;
 
-    public DeadLines (String task, String deadline) throws DukeException {
+    public DeadLines(String task, String deadline) throws DukeException {
         super(task);
         if (deadline == null) {
             throw new DukeException("Try Again with correct format!\n");

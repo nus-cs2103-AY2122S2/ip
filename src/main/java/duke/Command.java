@@ -1,8 +1,5 @@
 package duke;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-
 public class Command {
 
     private static String ListStatus(TaskList listOfTasks) {
@@ -110,7 +107,7 @@ public class Command {
                     toPrint = unmarkTask(processedInput[1], listOfTasks);
                     break;
                 case "mark":
-                    toPrint  = markTask(processedInput[1], listOfTasks);
+                    toPrint = markTask(processedInput[1], listOfTasks);
                     break;
                 case "delete":
                     toPrint = deleteTask(processedInput[1], listOfTasks);

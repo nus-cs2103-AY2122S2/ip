@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 public class Event extends Task {
     LocalDateTime timing;
 
-    public Event (String task, String timing) throws DukeException {
+    public Event(String task, String timing) throws DukeException {
         super(task);
         if (timing == null) {
             throw new DukeException("Try Again with correct format!\n");
@@ -23,7 +23,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: Date-> " + this.timing.getDayOfMonth() + " Month-> " +  this.timing.getMonth() + " Day-> " + this.timing.getDayOfWeek() + " Year-> " + this.timing.getYear() + " Time-> " + this.timing.getHour() + this.timing.getMinute() + ")";
+        return "[E]" + super.toString() + " (at: Date-> " + this.timing.getDayOfMonth() + " Month-> " + this.timing.getMonth() + " Day-> " + this.timing.getDayOfWeek() + " Year-> " + this.timing.getYear() + " Time-> " + this.timing.getHour() + this.timing.getMinute() + ")";
     }
 
     @Override

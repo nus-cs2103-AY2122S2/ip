@@ -3,7 +3,7 @@ package duke;
 import java.util.ArrayList;
 
 public class TaskList {
-    private ArrayList<Task> listOfTasks;
+    private final ArrayList<Task> listOfTasks;
 
     public TaskList(ArrayList<Task> listOfTasks) {
         this.listOfTasks = listOfTasks;
@@ -16,6 +16,7 @@ public class TaskList {
     public int size() {
         return this.listOfTasks.size();
     }
+
     public Task get(int index) {
         return this.listOfTasks.get(index);
     }
@@ -28,5 +29,7 @@ public class TaskList {
         this.listOfTasks.add(task);
     }
 
-    public ArrayList<Task> getList() {return this.listOfTasks;}
+    public ArrayList<Task> getList() {
+        return this.listOfTasks;
+    }
 }

@@ -6,8 +6,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Storage {
-    private String filepath;
-    private String filename;
+    private final String filepath;
+    private final String filename;
 
     public Storage() {
         this.filepath = System.getProperty("user.dir") + File.separator + "data";
@@ -60,14 +60,14 @@ public class Storage {
                 }
                 listOfTasks.add(task);
                 st = reader.readLine();
-                }
-            reader.close();
-            } catch (DukeException ex) {
-                System.out.println("IOException while trying to read from file");
-            } catch (IOException ex) {
-                System.out.println("Error in storage format");
-                ex.printStackTrace();
             }
+            reader.close();
+        } catch (DukeException ex) {
+            System.out.println("IOException while trying to read from file");
+        } catch (IOException ex) {
+            System.out.println("Error in storage format");
+            ex.printStackTrace();
+        }
         return listOfTasks;
     }
 

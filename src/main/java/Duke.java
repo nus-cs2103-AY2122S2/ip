@@ -1,9 +1,9 @@
 import duke.*;
 
 public class Duke {
-    private Ui ui;
-    private Storage storage;
-    private TaskList taskList;
+    private final Ui ui;
+    private final Storage storage;
+    private final TaskList taskList;
 
     public Duke() {
         this.ui = new Ui();

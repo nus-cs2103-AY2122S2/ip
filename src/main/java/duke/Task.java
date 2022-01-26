@@ -49,7 +49,7 @@ public class Task implements makeCompactable {
         return out;
     }
 
-    public LocalDateTime formatDateTime(String date) {
+    public static LocalDateTime formatDateTime(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
         date = date.trim();
         try {
