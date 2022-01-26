@@ -3,7 +3,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
-    private LocalDate by;
+    private final LocalDate by;
 
     /**
      * Public constructor for the Deadline object.
@@ -22,6 +22,6 @@ public class Deadline extends Task {
 
     @Override
     public String toOutputFormat() {
-        return String.format("D / %1$s / %2$s", super.toOutputFormat(), this.by);
+        return String.format("D / %1$s / %2$s", super.toOutputFormat(), by.format(dateTimeFormatter));
     }
 }

@@ -3,7 +3,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
-    private LocalDate at;
+    private final LocalDate at;
 
     /**
      * Public constructor for the Event object.
@@ -22,6 +22,6 @@ public class Event extends Task {
 
     @Override
     public String toOutputFormat() {
-        return String.format("E / %1$s / %2$s", super.toOutputFormat(), this.at);
+        return String.format("E / %1$s / %2$s", super.toOutputFormat(), at.format(dateTimeFormatter));
     }
 }
