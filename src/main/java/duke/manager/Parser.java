@@ -9,6 +9,7 @@ import duke.command.AddDeadlineCommand;
 import duke.command.AddEventCommand;
 import duke.command.DeleteTaskCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 
 public class Parser {
 
@@ -24,14 +25,14 @@ public class Parser {
                     throw new DukeException("☹ OOPS!!! Please choose a task number");
                 }
                 int taskNo = Integer.parseInt(fullCommand.split(" ")[1]) - 1;
-                return new MarkCommand(true,taskNo);
+                return new MarkCommand(true, taskNo);
             }
             case "unmark": {
                 if (fullCommand.split(" ").length == 1) {
                     throw new DukeException("☹ OOPS!!! Please choose a task number");
                 }
                 int taskNo = Integer.parseInt(fullCommand.split(" ")[1]) - 1;
-                return new MarkCommand(false,taskNo);
+                return new MarkCommand(false, taskNo);
             }
             case "todo": {
                 String task = fullCommand.replaceFirst("todo", "");
@@ -50,7 +51,7 @@ public class Parser {
                     throw new DukeException("☹ OOPS!!! The date/time of a deadline cannot be empty.");
                 }
                 String by = text[1];
-                return new AddDeadlineCommand(task,by);
+                return new AddDeadlineCommand(task, by);
             }
             case "event": {
                 String[] text = fullCommand.replaceFirst("event", "").split(" /at ");
@@ -62,7 +63,7 @@ public class Parser {
                     throw new DukeException("☹ OOPS!!! The time of an event cannot be empty.");
                 }
                 String at = text[1];
-                return new AddEventCommand(task,at);
+                return new AddEventCommand(task, at);
             }
             case "delete": {
                 if (fullCommand.split(" ").length == 1) {
@@ -73,6 +74,13 @@ public class Parser {
             }
             case "bye": {
                 return new ExitCommand();
+            }
+            case "find": {
+                if (fullCommand.split(" ").length == 1) {
+                    throw new DukeException("☹ OOPS!!! Please enter something for me to find!");
+                }
+                String toFind = fullCommand.split(" ")[1];
+                return new FindCommand(toFind);
             }
             default: {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
