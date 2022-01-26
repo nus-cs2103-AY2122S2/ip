@@ -6,6 +6,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Duke {
     private boolean isRunning;
     private ArrayList<Task> userTexts;
@@ -112,19 +117,45 @@ public class Duke {
                 // init the correct task type
                 if (firstCommand.equals("deadline")) {
                     exceptionErrPrint = "Did you remember to put in the deadline after /by? Or did u remember to add /by?";
-                    newTask = new Deadline(taskDescription.substring(0, taskDescription.indexOf(" /by")),
-                            taskDescription.substring(taskDescription.indexOf("/by") + 4));
+                    String statement = taskDescription.substring(0, taskDescription.indexOf(" /by"));
+                    String[] dateTime = taskDescription.substring(taskDescription.indexOf("/by") + 4).split(" ");
 
+                    exceptionErrPrint = "Date format maybe wrong. yy-mm-dd";
+                    LocalDate localDate = LocalDate.parse(dateTime[0]);
+
+                    exceptionErrPrint = "Time format wrong. HHmm";
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
+                    LocalTime localTime = LocalTime.parse("2359", formatter);
+                    if (dateTime.length > 1) {
+                        localTime = LocalTime.parse(dateTime[1], formatter);
+                    }
+
+                    newTask = new Deadline(false, statement, localDate, localTime);
                 } else if (firstCommand.equals("event")) {
                     exceptionErrPrint = "Did you remember to put in the timing after /at? Or did u remember to add /at?";
-                    newTask = new Event(taskDescription.substring(0, taskDescription.indexOf(" /at")),
-                            taskDescription.substring(taskDescription.indexOf("/at") + 4));
+                    String statement = taskDescription.substring(0, taskDescription.indexOf(" /at"));
+                    String[] dateTime = taskDescription.substring(taskDescription.indexOf("/at") + 4).split(" ");
+
+                    exceptionErrPrint = "Date format maybe wrong. yy-mm-dd";
+                    LocalDate localDate = LocalDate.parse(dateTime[0]);
+
+                    exceptionErrPrint = "Time format wrong. HHmm";
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
+                    LocalTime localTime = LocalTime.parse("2359", formatter);
+                    if (dateTime.length > 1) {
+                        localTime = LocalTime.parse(dateTime[1], formatter);
+                    }
+
+                    newTask = new Event(false, statement, localDate, localTime);
 
                 } else {
                     newTask = new Todo(taskDescription);
                 }
 
             } catch (StringIndexOutOfBoundsException error) {
+                throw new DukeException(
+                        "Something is wrong. " + exceptionErrPrint);
+            } catch (DateTimeParseException error) {
                 throw new DukeException(
                         "Something is wrong. " + exceptionErrPrint);
             }
@@ -182,9 +213,19 @@ public class Duke {
                 if (type.equals("T")) {
                     newTask = new Todo(Boolean.parseBoolean(st.nextToken()), st.nextToken());
                 } else if (type.equals("E")) {
-                    newTask = new Event(Boolean.parseBoolean(st.nextToken()), st.nextToken(), st.nextToken());
+                    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
+                    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+
+                    newTask = new Event(Boolean.parseBoolean(st.nextToken()), st.nextToken(),
+                            LocalDate.parse(st.nextToken(), dateFormatter),
+                            LocalTime.parse(st.nextToken(), timeFormatter));
                 } else if (type.equals("D")) {
-                    newTask = new Deadline(Boolean.parseBoolean(st.nextToken()), st.nextToken(), st.nextToken());
+                    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
+                    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+
+                    newTask = new Deadline(Boolean.parseBoolean(st.nextToken()), st.nextToken(),
+                            LocalDate.parse(st.nextToken(), dateFormatter),
+                            LocalTime.parse(st.nextToken(), timeFormatter));
                 }
 
                 taskList.add(newTask);
