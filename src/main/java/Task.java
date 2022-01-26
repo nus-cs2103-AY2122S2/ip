@@ -56,6 +56,13 @@ public class Task {
         return output;
     }
 
+<<<<<<< Updated upstream
+=======
+    private void updateFile() {
+        FileReading.writeToPath("/data/duke.txt", Task.printArray());
+    }
+
+>>>>>>> Stashed changes
     public String toString() {
         String status = this.isDone ? "X" : " ";
         return "[" + status + "] " + this.name;

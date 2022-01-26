@@ -1,8 +1,9 @@
+import java.time.LocalDate;
 public class Deadline extends Task {
     protected String type;
-    protected String time;
+    protected LocalDate time;
 
-    Deadline(String name, String time) {
+    Deadline(String name, LocalDate time) {
         super(name);
         this.time = time;
         this.type = "D";
@@ -12,6 +13,6 @@ public class Deadline extends Task {
     public String toString() {
         String status = this.isDone ? "X" : " ";
         return "[" + this.type + "][" + status + "]" + this.name + " (by: "
-                + this.time + ")";
+                + DateTimeParser.formatDate(this.time) + ")";
     }
 }

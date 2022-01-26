@@ -1,4 +1,11 @@
+<<<<<<< Updated upstream
 import java.util.*;
+=======
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
+import java.util.Scanner;
+>>>>>>> Stashed changes
 
 
 public class Duke {
@@ -136,7 +143,8 @@ public class Duke {
                     throw new MissingEventDateException("Missing date");
                 }
 
-                currentTask = new Event(splitString[0].substring(5), splitString[1].substring(3));
+                currentTask = new Event(splitString[0].substring(5),
+                        DateTimeParser.parseDate(splitString[1].substring(3)));
                 break;
             case "deadline":
                 if(instruction.length == 1 || instruction[1].equals("")) {
@@ -147,12 +155,16 @@ public class Duke {
                     throw new MissingDeadlineDateException("Missing date");
                 }
 
-                currentTask = new Deadline(splitString[0].substring(8), splitString[1].substring(3));
+                currentTask = new Deadline(splitString[0].substring(8),
+                        DateTimeParser.parseDate(splitString[1].substring(3)));
                 break;
 
             default:
                 throw new InvalidTypeException("Invalid type");
         }
+
+        FileReading.writeToPath("/data/duke.txt", Task.printArray());
+
 
         String output = "   __________________________________________________\n"
                 + "       Got it! I have added this following task :D \n"
