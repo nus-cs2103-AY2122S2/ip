@@ -13,7 +13,8 @@ public enum CommandType {
     MARK_TASK("mark", "id"),
     UNMARK_TASK("unmark", "id"),
     EXIT("bye"),
-    LIST("list");
+    LIST("list"),
+    FIND("find", "key");
 
     private static final Map<String, CommandType> typeMap = new HashMap<>();
 
