@@ -6,7 +6,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String getStatus() {
+    public String printTask() {
         if (this.status == 0) {
             return "[" + type + "][ ] " + activity + " (at " + at + ")";
         } else {
@@ -17,5 +17,10 @@ public class Event extends Task {
     @Override
     public String toString() {
         return type + "|" + status + "|" + activity + "|" + at + "|\n";
+    }
+
+    @Override
+    public String isTask() {
+        return "EVENT";
     }
 }

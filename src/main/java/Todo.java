@@ -5,7 +5,7 @@ public class Todo extends Task {
     }
 
     @Override
-    public String getStatus() {
+    public String printTask() {
         if (this.status == 0) {
             return "[" + type + "][ ] " + activity;
         } else {
@@ -16,5 +16,10 @@ public class Todo extends Task {
     @Override
     public String toString() {
         return type + "|" + status + "|" + activity + "|\n";
+    }
+
+    @Override
+    public String isTask() {
+        return "TODO";
     }
 }

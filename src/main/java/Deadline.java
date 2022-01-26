@@ -11,7 +11,7 @@ public class Deadline extends Task {
         date = LocalDate.parse(by.trim());
     }
     @Override
-    public String getStatus() {
+    public String printTask() {
         if (this.status == 0) {
             return "[" + type + "][ ] " + activity + " (by " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
         } else {
@@ -22,5 +22,10 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return type + "|" + status + "|" + activity + "|" + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + "|\n";
+    }
+
+    @Override
+    public String isTask() {
+        return "DEADLINE";
     }
 }
