@@ -173,6 +173,7 @@ public class Duke {
                         String currStr = sc.next();
                         if (currStr.equals("/by")) {
                             String time = sc.nextLine();
+                            time = time.substring(1);
                             addDeadline(task, time);
                             break;
                         } else {
@@ -187,6 +188,7 @@ public class Duke {
                         String currStr = sc.next();
                         if (currStr.equals("/at")) {
                             String time = sc.nextLine();
+                            time = time.substring(1);
                             addEvent(task, time);
                             break;
                         } else {
