@@ -1,4 +1,6 @@
+import java.io.IOException;
 import java.util.ArrayList;
+import java.io.File;
 
 /**
  * The Memory class handles the storage and access to available Tasks.
@@ -10,6 +12,8 @@ public class Memory {
     private ArrayList<Task> taskMem;
     private int size;
     private Echo echo;
+    private File file;
+    private Parser parser;
 
     /**
      * Creates a Memory object.
@@ -18,6 +22,7 @@ public class Memory {
         this.taskMem = new ArrayList<>();
         this.size = 0;
         this.echo = new Echo();
+        this.file = new File("data");
     }
 
     public int getSize() {
@@ -71,6 +76,7 @@ public class Memory {
         taskMem.add(new Task(name));
         size++;
         echo.echoString("added task: " + getString(size - 1));
+        parser.updateAll();
     }
 
     /**
@@ -83,6 +89,7 @@ public class Memory {
         taskMem.add(new Deadline(name, time));
         size++;
         echo.echoString("added deadline: " + getString(size - 1));
+        parser.updateAll();
     }
 
     /**
@@ -95,6 +102,7 @@ public class Memory {
         taskMem.add(new Event(name, time));
         size++;
         echo.echoString("added event: " + getString(size - 1));
+        parser.updateAll();
     }
 
     /**
@@ -111,6 +119,7 @@ public class Memory {
             echo.echoString("Cool! You've done this task:\n  " +
                     getString(address));
         }
+        parser.updateAll();
     }
 
     /**
@@ -127,6 +136,7 @@ public class Memory {
             echo.echoString("This task is now undone:\n  " +
                     getString(address));
         }
+        parser.updateAll();
     }
 
     /**
@@ -143,5 +153,35 @@ public class Memory {
             taskMem.remove(address);
             size--;
         }
+        parser.updateAll();
+    }
+
+    public void setup() {
+
+        if (!file.exists()) {
+            echo.echoString("Data folder does not exist. Creating folder...");
+            file.mkdir();
+        }
+
+        file = new File("data/tasks.txt");
+        if (!file.exists()) {
+            echo.echoString("Task data file does not exist. Creating file...");
+            try {
+                file.createNewFile();
+            }
+            catch(IOException e) {
+                echo.echoString(e.getMessage());
+            }
+        }
+
+        parser = new Parser(file, this);
+        parser.load();
+        parser.updateAll();
+
+        echo.echoString("Setup Complete!");
+    }
+
+    public void parseUpdateAll() {
+        parser.updateAll();
     }
 }

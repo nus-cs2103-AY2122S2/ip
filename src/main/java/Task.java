@@ -17,6 +17,10 @@ public class Task {
         this.done = false;
     }
 
+    public String getTime() {
+        return null;
+    }
+
     public String getName() {
         return name;
     }
@@ -39,6 +43,7 @@ public class Task {
         this.done = false;
     }
 
+    @Override
     public String toString() {
         String mark;
         if (this.done) {
