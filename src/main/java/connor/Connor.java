@@ -16,7 +16,6 @@ public class Connor {
     public static final String INPUT_HERE = ">>> ";
 
     private static final String TASK_FILEPATH = "data/connor.txt";
-    private static final String TASK_DIRECTORY = "./data";
 
     private static final String ERROR_FILE_NOT_FOUND = "Error! Task file not found!";
 
@@ -27,9 +26,9 @@ public class Connor {
     private Storage storage;
     private Ui ui;
 
-    public Connor(String filePath, String taskDirectory) throws IOException {
+    public Connor(String filePath) throws IOException {
         this.ui = new Ui();
-        this.storage = new Storage(filePath, taskDirectory);
+        this.storage = new Storage(filePath);
     }
 
     public void run() {
@@ -70,7 +69,7 @@ public class Connor {
 
     public static void main(String[] args) {
         try {
-            new Connor(TASK_FILEPATH, TASK_DIRECTORY).run();
+            new Connor(TASK_FILEPATH).run();
         } catch (IOException e) {
             print(e.getMessage());
         }

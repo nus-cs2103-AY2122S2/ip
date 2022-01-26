@@ -18,13 +18,19 @@ public class Storage {
     private static final String ERROR_GENERAL = "An error occurred.";
 
     private String filePath;
-    private String taskDirectory;
     private ArrayList<Task> copyTasks;
 
-    public Storage(String filePath, String taskDirectory) throws IOException {
+    public Storage(String filePath) throws IOException {
         this.filePath = filePath;
-        this.taskDirectory = taskDirectory;
-        new File(this.taskDirectory).mkdirs();
+        ArrayList<File> filePathDirectories = new ArrayList<>();
+        File currentFilePath = new File(this.filePath);
+        while (currentFilePath.getParentFile() != null) {
+            filePathDirectories.add(currentFilePath.getParentFile());
+            currentFilePath = currentFilePath.getParentFile();
+        }
+        for (int i = filePathDirectories.size() - 1; i >= 0; i--) {
+            filePathDirectories.get(i).mkdirs();
+        }
         new File(this.filePath).createNewFile();
         copyTasks = new ArrayList<>();
     }
