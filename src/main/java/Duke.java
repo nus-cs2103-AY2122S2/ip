@@ -88,11 +88,11 @@ public class Duke {
 
         taskList = new ArrayList<>();
 
-        // TODO: error handling
+        // TODO: error handling?
 
         Scanner sc = new Scanner(dataFile).useDelimiter("\\n");
-        while (sc.hasNext()) {
-            String[] input = sc.nextLine().split(" \\| ");
+        sc.forEachRemaining(entry -> {
+            String[] input = entry.split(" \\| ");
             Task newTask = null;
 
             if (input[0].equals("T")) { newTask = new ToDo(input[2]); }
@@ -114,7 +114,8 @@ public class Duke {
                 newTask.isMarked = input[1].equals("1");
                 taskList.add(newTask);
             }
-        }
+        });
+        sc.close();
     }
 
     public static void save() throws IOException {
