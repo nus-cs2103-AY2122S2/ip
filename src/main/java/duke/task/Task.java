@@ -6,19 +6,14 @@ public class Task {
 
     protected String description;
     public boolean isDone;
-    protected String type;
-
-    public DateTimeFormatter getOutputDateFormat() {
-        return outputDateFormat;
-    }
-
-    protected DateTimeFormatter outputDateFormat = DateTimeFormatter.ofPattern("MMM d yyyy");
+    protected DateTimeFormatter outputDateFormat =
+            DateTimeFormatter.ofPattern("MMM d yyyy");
+    protected static DateTimeFormatter inputDateFormat =
+            DateTimeFormatter.ofPattern("d/M/uuuu");
 
     public static DateTimeFormatter getInputDateFormat() {
         return inputDateFormat;
     }
-
-    protected static DateTimeFormatter inputDateFormat = DateTimeFormatter.ofPattern("d/M/uuuu");
 
     public Task(String description) {
         this.description = description;
@@ -26,7 +21,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "[X]" : "[ ]"); // mark done task with X
+        return (isDone ? "[X]" : "[ ]");
     }
 
     public void mark() {
@@ -36,6 +31,10 @@ public class Task {
 
     public void unmark() {
         this.isDone = false;
+    }
+
+    public boolean isDone() {
+        return this.isDone;
     }
 
     @Override

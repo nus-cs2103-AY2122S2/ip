@@ -33,25 +33,27 @@ public class TaskList {
         } else {
             taskList = new ArrayList<>();
             for (String d : data) {
-                String[] splicedS = d.split(" , ");
-                switch (splicedS[0]) {
+                String[] splitData = d.split(" , ");
+                switch (splitData[0]) {
                 case "T":
-                    ToDo toDo = new ToDo(splicedS[2]);
-                    if (splicedS[1].equals("1")) {
+                    ToDo toDo = new ToDo(splitData[2]);
+                    if (splitData[1].equals("1")) {
                         toDo.mark();
                     }
                     this.taskList.add(toDo);
                     break;
                 case "D":
-                    Deadline deadline = new Deadline(splicedS[2], LocalDate.parse(splicedS[3]));
-                    if (splicedS[1].equals("1")) {
+                    Deadline deadline = new Deadline(splitData[2],
+                            LocalDate.parse(splitData[3]));
+                    if (splitData[1].equals("1")) {
                         deadline.mark();
                     }
                     this.taskList.add(deadline);
                     break;
                 case "E":
-                    Event event = new Event(splicedS[2], LocalDate.parse(splicedS[3]));
-                    if (splicedS[1].equals("1")) {
+                    Event event = new Event(splitData[2],
+                            LocalDate.parse(splitData[3]));
+                    if (splitData[1].equals("1")) {
                         event.mark();
                     }
                     this.taskList.add(event);
@@ -65,6 +67,7 @@ public class TaskList {
     public void clearTaskList() {
         this.taskList = new ArrayList<>();
     }
+
     public int getTaskSize() {
         return this.taskList.size();
     }
@@ -84,54 +87,10 @@ public class TaskList {
     public void addToList(Task task, Ui ui, Storage storage) throws IOException {
         taskList.add(task);
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(task.taskDescriptionForFile() + System.lineSeparator());
+        stringBuilder.append(task.taskDescriptionForFile()
+                + System.lineSeparator());
         storage.appendToFile(stringBuilder.toString());
         ui.showAddTaskMessage(this, task);
-    }
-
-    public void markTask(Storage storage, Ui ui, int position) throws DukeException, IOException {
-        if (position < 1 || position > taskList.size()) {
-            throw new DukeException("duke.task.Task do not exist!");
-        } else if (taskList.get(position - 1).isDone == true) {
-            throw new DukeException("duke.task.Task is already marked as done!");
-        } else {
-            taskList.get(position - 1).mark();
-            storage.setInFile(position, taskList.get(position - 1).taskDescriptionForFile());
-            ui.showMarkMessage(taskList.get(position - 1));
-        }
-    }
-
-    public void unmarkTask(Storage storage, Ui ui, int position) throws DukeException, IOException {
-        if (position < 1 || position > taskList.size()) {
-            throw new DukeException("duke.task.Task do not exist!");
-        } else if (taskList.get(position - 1).isDone == false) {
-            throw new DukeException("duke.task.Task is already marked as not done!");
-        } else {
-            taskList.get(position - 1).unmark();
-            storage.setInFile(position, taskList.get(position - 1).taskDescriptionForFile());
-            //ui.showUnmarkMessage(taskList.get(position - 1));
-        }
-    }
-
-    public void deleteTask(Storage storage, Ui ui, int position) throws DukeException, IOException {
-        if (position < 0 || position > taskList.size()) {
-            throw new DukeException("duke.task.Task do not exist!");
-        } else {
-            Task task = taskList.get(position - 1);
-            taskList.remove(position - 1);
-            storage.writeToFile(taskList);
-            ui.showDeleteMessage(task, taskList.size());
-        }
-    }
-
-    public void showTaskList() {
-        if (taskList.size() == 0) {
-            System.out.println("You have not added any tasks!");
-        } else {
-            for (int i = 0; i < taskList.size(); i++) {
-                System.out.println(i + 1 + "." + taskList.get(i).toString());
-            }
-        }
     }
 }
 
