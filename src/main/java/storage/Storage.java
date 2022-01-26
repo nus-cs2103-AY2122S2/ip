@@ -39,9 +39,9 @@ public class Storage {
             }
             this.tasks = new ArrayList<>();
         } catch (EOFException e) {
-            throw new DukeException("Corrupted or invalid file. Please delete data/duke.txt and try again.");
+            throw new DukeException("Corrupted or invalid file. Please delete data/tasks.txt and try again.");
         } catch (IOException e) {
-            throw new DukeException("Input Stream could not read data/duke.txt file.");
+            throw new DukeException("Input Stream could not read data/tasks.txt file.");
         }
         return tasks;
     }
@@ -53,7 +53,7 @@ public class Storage {
             oos.writeObject(tasks);
             oos.close();
         } catch (IOException e) {
-            throw new DukeException("Unable to write into data/duke.txt.");
+            throw new DukeException("Unable to write into data/tasks.txt.");
         }
     }
 }
