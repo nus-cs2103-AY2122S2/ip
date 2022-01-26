@@ -19,6 +19,10 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public boolean isOn(String date) {
+        return false;
+    }
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
