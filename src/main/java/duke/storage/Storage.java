@@ -52,8 +52,13 @@ public class Storage {
                             }
                         }
                     } else {
-                        String content = line.substring(7);
-                        taskList.add(new ToDo(content));
+                        if (isDone.equals("X")){
+                            String content = line.substring(7);
+                            taskList.add(new ToDo(content, true));
+                        } else {
+                            String content = line.substring(7);
+                            taskList.add(new ToDo(content));
+                        }
                     }
                 }
                 line = bufferedReader.readLine();

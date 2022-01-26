@@ -27,4 +27,10 @@ public class MarkCommand extends Command {
             storage.save(taskList);
         }
     }
+
+    @Override
+    public boolean equals(Object command) {
+        MarkCommand mark = (MarkCommand) command;
+        return this.index == mark.index && this.mark.equals(mark.mark);
+    }
 }

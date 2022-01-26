@@ -17,4 +17,13 @@ public class AddCommand extends Command {
         taskList.addTask(task);
         storage.save(taskList);
     }
+
+    @Override
+    public boolean equals(Object command) {
+        if (this.task.compareTo(((AddCommand) command).task) == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

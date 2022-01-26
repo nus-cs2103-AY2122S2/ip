@@ -13,4 +13,9 @@ public class ListCommand extends Command {
     public void executeCommand(TaskList taskList, Ui ui, Storage storage) {
         ui.showUiForTaskList(taskList);
     }
+
+    @Override
+    public boolean equals(Object command) {
+        return this.getCommandArray()[0].equals(((ListCommand) command).getCommandArray()[0]);
+    }
 }

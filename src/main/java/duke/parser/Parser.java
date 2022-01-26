@@ -1,6 +1,5 @@
 package duke.parser;
 
-import duke.*;
 import duke.command.*;
 import duke.exception.DukeCommandException;
 import duke.exception.DukeException;
@@ -9,9 +8,17 @@ import duke.exception.DukeMissingArgumentException;
 import duke.task.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
+import java.util.Locale;
 
 public class Parser {
+    public static final DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+            .parseCaseInsensitive()
+            .appendPattern("yyyy-MM-dd HHmm")
+            .toFormatter(Locale.ENGLISH);
+
     public static Command parse(String inputCommand) throws DukeException {
         if (inputCommand.length() == 0) {
             try {
@@ -53,7 +60,7 @@ public class Parser {
                     content = inputCommand.substring(9, indexOfBy - 1);
                     LocalDateTime date = null;
                     try {
-                        date = LocalDateTime.parse(by, Duke.formatter);
+                        date = LocalDateTime.parse(by, formatter);
                         Task taskObj = new Deadline(content, date);
                         return new AddCommand(taskObj, inputArray);
                     } catch (DateTimeParseException e) {
@@ -71,10 +78,10 @@ public class Parser {
                     throw new DukeMissingArgumentException("\\at eventTime");
                 } else {
                     String by = inputCommand.substring(indexOfAt + 4);
-                    content = inputCommand.substring(9, indexOfAt - 1);
+                    content = inputCommand.substring(6, indexOfAt - 1);
                     LocalDateTime date = null;
                     try {
-                        date = LocalDateTime.parse(by, Duke.formatter);
+                        date = LocalDateTime.parse(by, formatter);
                         Task taskObj = new Event(content, date);
                         return new AddCommand(taskObj, inputArray);
                     } catch (DateTimeParseException e) {

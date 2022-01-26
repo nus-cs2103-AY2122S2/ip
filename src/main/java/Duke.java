@@ -1,5 +1,3 @@
-package duke;
-
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
@@ -13,12 +11,8 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.util.*;
 
 public class Duke {
-    public static final String botName = "duke";
     private static final String filePath = "data/duke.txt";
-    public static final DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-            .parseCaseInsensitive()
-            .appendPattern("yyyy-MM-dd HHmm")
-            .toFormatter(Locale.ENGLISH);
+
 
     private Storage storage;
     private TaskList tasks;
@@ -36,10 +30,7 @@ public class Duke {
     }
 
     public void run() {
-        Ui.printDivider();
-        System.out.println("    Hello, I'm " + botName + ".");
-        System.out.println("    What can I do for you?");
-        Ui.printDivider();
+        ui.showUiForStart();
         Scanner inputScanner = new Scanner(System.in);
         String input = "";
         while (!input.equals("bye")) {

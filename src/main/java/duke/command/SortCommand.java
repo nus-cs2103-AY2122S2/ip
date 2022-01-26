@@ -16,4 +16,10 @@ public class SortCommand extends Command {
         taskList.sortTaskList(this.type);
         storage.save(taskList);
     }
+
+    @Override
+    public boolean equals(Object command) {
+        SortCommand sortCommand = (SortCommand) command;
+        return this.type.equals(sortCommand.type);
+    }
 }

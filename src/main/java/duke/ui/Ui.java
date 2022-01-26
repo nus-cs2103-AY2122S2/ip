@@ -11,9 +11,17 @@ public class Ui {
     public static String divider = "    ____________________________________________________________";
     public static DateTimeFormatter formatter = DateTimeFormatter
             .ofPattern("HH:mm EEEE, MM-dd-yyyy").localizedBy(Locale.ENGLISH);
+    public static final String botName = "duke";
 
     public Ui() {
 
+    }
+
+    public void showUiForStart() {
+        printDivider();
+        System.out.println("    Hello, I'm " + botName + ".");
+        System.out.println("    What can I do for you?");
+        printDivider();
     }
 
     public void showUiForBye() {

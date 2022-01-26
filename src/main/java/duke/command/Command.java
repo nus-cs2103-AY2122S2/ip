@@ -27,6 +27,10 @@ public abstract class Command {
 
     protected String[] commandArray;
 
+    public String[] getCommandArray() {
+        return commandArray;
+    }
+
     public Command() {
         this.commandArray = new String[0];
     }
