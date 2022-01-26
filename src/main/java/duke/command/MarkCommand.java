@@ -13,6 +13,7 @@ public class MarkCommand extends Command{
     private int taskNo;
 
     /**
+     * A constructor to store the index of the task to mark and to determine if to mark as complete or incomplete.
      *
      * @param isMark True indicates to mark as complete, false to indicate to mark as incomplete.
      * @param taskNo The index of the task to mark.
