@@ -1,4 +1,6 @@
-class ToDos extends Task {
+package Tasks;
+
+public class ToDos extends Task {
 
     public ToDos(String task, Boolean marked) {
         super(task, marked);

@@ -1,4 +1,6 @@
-class DeadLines extends Task {
+package Tasks;
+
+public class DeadLines extends Task {
     private final String details;
 
     public DeadLines(String task, Boolean marked, String details) {

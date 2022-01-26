@@ -1,3 +1,5 @@
+package exceptions;
+
 public class EventException extends TaskException {
     public EventException() {
         super();

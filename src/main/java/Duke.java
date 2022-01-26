@@ -1,5 +1,15 @@
+import Tasks.DeadLines;
+import Tasks.Events;
+import Tasks.Task;
+import Tasks.ToDos;
+import exceptions.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+
 
 public class Duke {
     private static final ArrayList<Task> ls = new ArrayList<>();
@@ -7,6 +17,27 @@ public class Duke {
     public static void main(String[] args) {
         initDuke();
         Scanner sc = new Scanner(System.in);
+        File cachePath = "../../../data/duke.txt";
+        loadCache(cachePath);
+        dukeMainLogic(sc, cachePath);
+        sc.close();
+    }
+
+    private static void loadCache(String cachePath) {
+        File data = new File(cachePath);
+        try {
+            Scanner s = new Scanner(data);
+            while (s.hasNext()) {
+
+            }
+            s.close();
+        } catch (FileNotFoundException  e) {
+            System.out.println("There is no cache, " +
+                    "duke will be initialised as per normal.");
+        }
+    }
+
+    private static void dukeMainLogic(Scanner sc) {
         while (sc.hasNext()) {
             String userInput = sc.nextLine();
             String[] wordSplit = userInput.split(" ");
@@ -22,40 +53,38 @@ public class Duke {
             String action = wordSplit[0];
             String[] split = userInput.split("/");
             int start = userInput.indexOf(" ") + 1;
+            int end = userInput.lastIndexOf('/');
+            String task = end == -1 ? "" : userInput.substring(start, end - 1);
+            String details = split.length > 1 ? split[1].substring(3) : "";
 
             if (userInput.equals("bye")) {
                 sayBye();
                 break;
-            } else if (action.equals("list")) {
-                //prints the list
-                printList();
-            } else if (action.equals("mark")) {
-                //mark
-                mark(Integer.parseInt(wordSplit[1]) - 1);
-            } else if (action.equals("unmark")) {
-                //unmark
-                unmark(Integer.parseInt(wordSplit[1]) - 1);
-            } else if (action.equals("todo")) {
-                //add ToDos
-                addTask(new ToDos(userInput.substring(start), false));
-            } else if (action.equals("deadline") || action.equals("event")) {
-                int end = userInput.lastIndexOf('/');
-                String task = userInput.substring(start, end - 1);
-                String details = split[1].substring(3);
-                if (action.equals("deadline")) {
-                    //add DeadLines
-                    addTask(new DeadLines(task, false, details));
-                } else {
-                    //add Events
-                    addTask(new Events(task, false, details));
-                }
-            } else if (action.equals("delete")) {
-                //delete task
-                deleteTask(Integer.parseInt(wordSplit[1]) - 1);
             }
-
+            switch (action) {
+            case "list":
+                printList();
+                break;
+            case "mark":
+                mark(Integer.parseInt(wordSplit[1]) - 1);
+                break;
+            case "unmark":
+                unmark(Integer.parseInt(wordSplit[1]) - 1);
+                break;
+            case "todo":
+                addTask(new ToDos(userInput.substring(start), false));
+                break;
+            case "deadline":
+                addTask(new DeadLines(task, false, details));
+                break;
+            case "event":
+                addTask(new Events(task, false, details));
+                break;
+            case "delete":
+                deleteTask(Integer.parseInt(wordSplit[1]) - 1);
+                break;
+            }
         }
-        sc.close();
     }
 
     private static void deleteTask(int indx) {
@@ -72,13 +101,14 @@ public class Duke {
 
         } else if (splitInput.length == 1) {
             String command = splitInput[0];
-            if (command.equals("todo")) {
+            switch (command) {
+            case "todo":
                 throw new ToDosException();
-            } else if (command.equals("deadline")) {
+            case "deadline":
                 throw new DeadlineException();
-            } else if (command.equals("event")) {
+            case "event":
                 throw new EventException();
-            } else if (!command.equals("bye") && !command.equals("list")) {
+            default:
                 throw new IncorrectLengthException();
             }
         }
@@ -91,7 +121,7 @@ public class Duke {
     }
 
     private static void mark(int indx) {
-        System.out.println("Nice! I've marked this task as done: ");
+        System.out.println("Nice! I've marked this task as done:");
         Task t = ls.get(indx);
         t.setMarked(true);
         System.out.println(t);
@@ -99,7 +129,7 @@ public class Duke {
     }
 
     private static void unmark(int indx) {
-        System.out.println("OK, I've marked this task as not done yet: ");
+        System.out.println("OK, I've marked this task as not done yet:");
         Task t = ls.get(indx);
         t.setMarked(false);
         System.out.println(t);
@@ -108,7 +138,7 @@ public class Duke {
 
     private static void addTask(Task t) {
         ls.add(t);
-        System.out.println("Got it. I've added this task: ");
+        System.out.println("Got it. I've added this task:");
         System.out.println(" " + t);
         String s = String.format("Now you have %d tasks in the list.", ls.size());
         System.out.println(s);
@@ -130,7 +160,8 @@ public class Duke {
     }
 
     private static void printHorizontalLine() {
-        System.out.println("____________________________________________________________");
+        System.out.println("_____________" +
+                "_______________________________________________");
     }
 
     private static void initDuke() {

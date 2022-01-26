@@ -1,4 +1,6 @@
-class Task {
+package Tasks;
+
+public class Task {
     private String task;
     private Boolean marked;
 

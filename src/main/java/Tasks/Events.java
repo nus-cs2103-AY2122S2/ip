@@ -1,4 +1,6 @@
- class Events extends Task {
+package Tasks;
+
+public class Events extends Task {
      private final String details;
 
     public Events(String task, Boolean marked, String details) {
