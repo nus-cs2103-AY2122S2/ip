@@ -1,6 +1,6 @@
 package duke;
 
-import duke.exception.DukeIOException;
+import duke.exception.DukeIoException;
 import duke.exception.DukeIllegalArgumentException;
 import duke.exception.DukeInvalidCommandException;
 import duke.testutil.PrinterStub;
@@ -48,7 +48,7 @@ public class UiTest {
         PrinterStub printer = new PrinterStub();
         Ui.getInstance().printError(printer, new DukeInvalidCommandException("error 1"));
         Ui.getInstance().printError(printer, new DukeIllegalArgumentException("error 2"));
-        Ui.getInstance().printError(printer, new DukeIOException("error 3"));
+        Ui.getInstance().printError(printer, new DukeIoException("error 3"));
 
         assertEquals("I do not understand you!", printer.getLines().get(0));
         assertEquals("There was a problem understanding you:", printer.getLines().get(1));

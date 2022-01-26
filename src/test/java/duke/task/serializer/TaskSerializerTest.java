@@ -1,6 +1,6 @@
 package duke.task.serializer;
 
-import duke.exception.DukeIOException;
+import duke.exception.DukeIoException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class TaskSerializerTest {
     @Test
-    public void testInflate_valid_success() throws IOException, DukeIOException {
+    public void testInflate_valid_success() throws IOException, DukeIoException {
         for (int i = 1; i < 4; i++) {
             final int innerI = i;
             byte[] reference = StreamUtils.buildOutputStream((dOut) -> {
@@ -41,13 +41,13 @@ public class TaskSerializerTest {
         try {
             TaskSerializer.inflate(reference);
             fail();
-        } catch (DukeIOException ex) {
+        } catch (DukeIoException ex) {
             assertEquals("Encountered unknown format in database", ex.getMessage());
         }
     }
 
     @Test
-    public void testDeflate_valid_success() throws DukeIOException {
+    public void testDeflate_valid_success() throws DukeIoException {
         Task[] tasks = new Task[] {
                 new Todo("Test 1"),
                 new Deadline("Test 2", LocalDateTime.parse("2022-12-12T12:34")),

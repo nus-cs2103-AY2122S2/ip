@@ -1,6 +1,6 @@
 package duke.task.serializer;
 
-import duke.exception.DukeIOException;
+import duke.exception.DukeIoException;
 import duke.task.TaskList;
 
 import java.io.DataInputStream;
@@ -17,7 +17,7 @@ import java.io.OutputStream;
 
 public class TaskListSerializer {
 
-    public static TaskList inflate(InputStream dbStream) throws DukeIOException {
+    public static TaskList inflate(InputStream dbStream) throws DukeIoException {
         final TaskList taskList = new TaskList();
         if (dbStream == null) {
             return taskList;
@@ -32,18 +32,18 @@ public class TaskListSerializer {
                 final byte[] recordData = dbStream.readNBytes(recordLength);
                 try {
                     taskList.addTask(TaskSerializer.inflate(recordData));
-                } catch (DukeIOException ex) {
+                } catch (DukeIoException ex) {
                     System.out.println("Verbose: Failed to load Task record");
                 }
             }
         } catch (IOException ex) {
-            throw new DukeIOException("Failed to inflate database: IO Error");
+            throw new DukeIoException("Failed to inflate database: IO Error");
         }
 
         return taskList;
     }
 
-    public static void deflate(TaskList taskList, OutputStream dbStream) throws DukeIOException {
+    public static void deflate(TaskList taskList, OutputStream dbStream) throws DukeIoException {
         try (final DataOutputStream dbDataStream = new DataOutputStream(dbStream)) {
             dbDataStream.writeInt(taskList.getTaskCount());
             for (int i = 0; i < taskList.getTaskCount(); i++) {
@@ -52,7 +52,7 @@ public class TaskListSerializer {
                 dbDataStream.write(flattenedData);
             }
         } catch (IOException e) {
-            throw new DukeIOException("Failed to deflate database: IO Error");
+            throw new DukeIoException("Failed to deflate database: IO Error");
         }
     }
 }

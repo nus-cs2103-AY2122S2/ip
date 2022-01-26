@@ -1,6 +1,6 @@
 package duke.task.serializer;
 
-import duke.exception.DukeIOException;
+import duke.exception.DukeIoException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskListSerializerTest {
     @Test
-    public void testInflate_valid_success() throws IOException, DukeIOException {
+    public void testInflate_valid_success() throws IOException, DukeIoException {
         byte[] taskData = StreamUtils.buildOutputStream((dOut) -> {
             dOut.writeShort(1);
             dOut.writeUTF("Test Description 1");
@@ -37,7 +37,7 @@ public class TaskListSerializerTest {
     }
 
     @Test
-    public void testInflate_invalidData_recordSkipped() throws IOException, DukeIOException {
+    public void testInflate_invalidData_recordSkipped() throws IOException, DukeIoException {
         byte[] taskData = StreamUtils.buildOutputStream((dOut) -> {
             dOut.writeShort(1);
             dOut.writeUTF("Test Description 1");
@@ -67,7 +67,7 @@ public class TaskListSerializerTest {
     }
 
     @Test
-    public void testDeflate_valid_success() throws DukeIOException, IOException {
+    public void testDeflate_valid_success() throws DukeIoException, IOException {
         TaskList taskList = new TaskList();
         taskList.addTask(new Todo("Test 1"));
         taskList.addTask(new Deadline("Test 2", LocalDateTime.parse("2022-12-12T12:34")));

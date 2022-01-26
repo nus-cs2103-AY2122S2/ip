@@ -1,7 +1,7 @@
 package duke;
 
 import duke.exception.DukeException;
-import duke.exception.DukeIOException;
+import duke.exception.DukeIoException;
 import duke.exception.DukeIllegalArgumentException;
 import duke.exception.DukeInvalidCommandException;
 import duke.util.Printable;
@@ -56,7 +56,7 @@ public class Ui {
         } else if (ex instanceof DukeIllegalArgumentException) {
             linePrinter.print(ERROR_INVALID_SYNTAX);
             linePrinter.print(ex.getMessage());
-        } else if (ex instanceof DukeIOException) {
+        } else if (ex instanceof DukeIoException) {
             linePrinter.print(ERROR_IO);
         }
     }

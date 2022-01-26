@@ -1,6 +1,6 @@
 package duke;
 
-import duke.exception.DukeIOException;
+import duke.exception.DukeIoException;
 import duke.task.TaskList;
 import duke.task.serializer.TaskListSerializer;
 
@@ -20,33 +20,33 @@ public class Storage {
     private static final String DATA_FOLDER_PATH = "data/";
     private static final String DB_FILENAME = "store.db";
 
-    public static TaskList load() throws DukeIOException {
+    public static TaskList load() throws DukeIoException {
         final FileInputStream dbStream = openDatabaseRead();
 
         return TaskListSerializer.inflate(dbStream);
     }
 
-    public static void save(TaskList taskList) throws DukeIOException {
+    public static void save(TaskList taskList) throws DukeIoException {
         final FileOutputStream dbStream = openDatabaseWrite();
 
         TaskListSerializer.deflate(taskList, dbStream);
     }
 
-    private static void initDataStore() throws DukeIOException {
+    private static void initDataStore() throws DukeIoException {
         final File dataFolder = new File(DATA_FOLDER_PATH);
 
         if (dataFolder.exists() && !dataFolder.isDirectory()) {
-            throw new DukeIOException("Data Store is not a directory at: "
+            throw new DukeIoException("Data Store is not a directory at: "
                     + dataFolder.getAbsolutePath());
         } else if (!dataFolder.exists()) {
             if (!dataFolder.mkdir()) {
-                throw new DukeIOException("Cannot create data store directory at: "
+                throw new DukeIoException("Cannot create data store directory at: "
                         + dataFolder.getAbsolutePath());
             }
         }
     }
 
-    private static FileInputStream openDatabaseRead() throws DukeIOException {
+    private static FileInputStream openDatabaseRead() throws DukeIoException {
         initDataStore(); // throws DukeIOException
 
         final File database = Paths.get(DATA_FOLDER_PATH, DB_FILENAME).toFile();
@@ -58,20 +58,20 @@ public class Storage {
         }
     }
 
-    private static FileOutputStream openDatabaseWrite() throws DukeIOException {
+    private static FileOutputStream openDatabaseWrite() throws DukeIoException {
         initDataStore(); // throws DukeIOException
 
         final File database = Paths.get(DATA_FOLDER_PATH, DB_FILENAME).toFile();
         try {
             if (!database.exists()) {
                 if (!database.createNewFile()) {
-                    throw new DukeIOException("Could not create database");
+                    throw new DukeIoException("Could not create database");
                 }
             }
 
             return new FileOutputStream(database);
         } catch (IOException ex) {
-            throw new DukeIOException("Could not create database");
+            throw new DukeIoException("Could not create database");
         }
     }
 }
