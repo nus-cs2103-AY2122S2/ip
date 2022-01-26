@@ -128,7 +128,7 @@ public class Ui {
     /**
      * Prints out the list of tasks in a specific date
      *
-     * @param eventList List of tasks on the date
+     * @param eventList Collection of tasks on the date
      */
     public void showDate(ArrayList<Task> eventList) {
         System.out.println(TypicalString.LONG_LINE);
