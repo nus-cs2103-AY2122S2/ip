@@ -1,3 +1,5 @@
+import java.io.File; // Imported File class
+
 public class Commands {
 
     private final TaskHistory taskHistory = new TaskHistory();
@@ -135,5 +137,10 @@ public class Commands {
 
     void delete(int index) {
         taskHistory.deleteTask(index);
+    }
+
+    void startup() {
+        File f = new File("./data/");
+        System.out.println("File exists?: " + f.exists());
     }
 }
