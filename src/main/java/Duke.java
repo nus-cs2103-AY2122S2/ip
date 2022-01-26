@@ -60,14 +60,14 @@ public class Duke {
             } else {
                 int byIdx = taskString.indexOf("/by");
                 if (byIdx <= 9) {  // either -1, or 0 to 9
-                    throw new DukeException("Format for deadlines: 'deadline [some task] /by [time]'");
+                    throw new DukeException("Format for deadlines: 'deadline [some task] /by [dd/mm/yyyy hh:mm]'");
                 } else {
                     taskName = taskString.substring(9, byIdx-1);  // "deadline " has 9 characters
                     try {
                         String taskDeadline = taskString.substring(byIdx + 4);  // "/by " has 4 characters
                         t = new Deadline(taskName, taskDeadline);
                     } catch (StringIndexOutOfBoundsException err) {
-                        throw new DukeException("Format for deadlines: 'deadline [some task] /by [time]'");
+                        throw new DukeException("Format for deadlines: 'deadline [some task] /by [dd/mm/yyyy hh:mm]'");
                     }
                 }
             }
@@ -77,14 +77,14 @@ public class Duke {
             } else {
                 int atIdx = taskString.indexOf("/at");
                 if (atIdx <= 6) {  // either -1, or 0 to 6
-                    throw new DukeException("Format for events: 'event [some event] /at [time]'");
+                    throw new DukeException("Format for events: 'event [some event] /at [dd/mm/yyyy hh:mm]'");
                 } else {
                     taskName = taskString.substring(6, atIdx-1);  // "event " has 9 characters
                     try {
                         String taskTime = taskString.substring(atIdx + 4);  // "/at " has 4 characters
                         t = new Event(taskName, taskTime);
                     } catch (StringIndexOutOfBoundsException err) {
-                        throw new DukeException("Format for events: 'event [some event] /at [time]'");
+                        throw new DukeException("Format for events: 'event [some event] /at [dd/mm/yyyy hh:mm]'");
                     }
                 }
             }
