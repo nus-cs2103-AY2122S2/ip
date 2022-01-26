@@ -3,6 +3,7 @@ package duke.task;
 import duke.DukeException;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class TaskList {
     private final ArrayList<Task> tasks;
@@ -29,6 +30,11 @@ public class TaskList {
 
     public void addTask(Task task) {
         tasks.add(task);
+    }
+
+    public TaskList filterTask(String keywords) {
+        return new TaskList(this.tasks.stream().filter(task -> task.contains(keywords))
+                .collect(Collectors.toCollection(ArrayList::new)));
     }
 
     public void deleteTask(int taskId) throws DukeException {
