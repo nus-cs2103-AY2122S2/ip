@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.manager.Ui;
+import duke.manager.TaskList;
+import duke.manager.Storage;
+import duke.exception.DukeException;
+
 public class MarkCommand extends Command{
     private boolean isMark;
     private int taskNo;
@@ -13,11 +20,11 @@ public class MarkCommand extends Command{
         if (isMark) {
             taskList.markDone(taskNo);
             ui.print("Nice! I've marked this task as done:");
-            ui.print(taskList.tasks.get(taskList.tasks.size()-1).toString());
+            ui.print(taskList.getTask(taskNo).toString());
         } else {
             taskList.markUndone(taskNo);
             ui.print("OK, I've marked this task as not done yet:");
-            ui.print(taskList.tasks.get(taskList.tasks.size()-1).toString());
+            ui.print(taskList.getTask(taskNo).toString());
         }
         try {
             storage.save(taskList);

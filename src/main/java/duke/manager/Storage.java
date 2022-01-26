@@ -1,6 +1,16 @@
-import java.io.*;
-import java.util.ArrayList;
+package duke.manager;
 
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.File;
+import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.EOFException;
+import java.io.IOException;
+import duke.task.Task;
+import duke.exception.DukeException;
 
 public class Storage {
     private String filePath;
@@ -40,16 +50,16 @@ public class Storage {
         try {
             fileOut = new FileOutputStream(filePath);
             out = new ObjectOutputStream(fileOut);
-            out.writeObject(taskList.tasks);
+            out.writeObject(taskList.toArrayList());
             out.close();
             fileOut.close();
         } catch (IOException e) {
             File f = new File(filePath);
             f.getParentFile().mkdirs();
-            FileWriter fw = new FileWriter(filePath);
+            f.createNewFile();
             fileOut = new FileOutputStream(filePath);
             out = new ObjectOutputStream(fileOut);
-            out.writeObject(taskList.tasks);
+            out.writeObject(taskList.toArrayList());
             out.close();
             fileOut.close();
             throw new DukeException("Error trying to save your tasks, did  you delete the file while the program was still running?");

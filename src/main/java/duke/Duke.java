@@ -1,6 +1,11 @@
-import java.io.*;
-import java.util.ArrayList;
+package duke;
 
+import duke.manager.Ui;
+import duke.manager.TaskList;
+import duke.manager.Storage;
+import duke.manager.Parser;
+import duke.exception.DukeException;
+import duke.command.Command;
 
 public class Duke {
     private Ui ui;

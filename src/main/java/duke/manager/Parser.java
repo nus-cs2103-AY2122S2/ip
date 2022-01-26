@@ -1,3 +1,15 @@
+package duke.manager;
+
+import duke.exception.DukeException;
+import duke.command.Command;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.AddToDoCommand;
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
+import duke.command.DeleteTaskCommand;
+import duke.command.ExitCommand;
+
 public class Parser {
 
     public Command parse(String fullCommand) throws DukeException {

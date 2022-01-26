@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.manager.Ui;
+import duke.manager.TaskList;
+import duke.manager.Storage;
+import duke.exception.DukeException;
+import duke.task.Event;
+
 public class AddEventCommand extends Command{
     private String task;
     private String at;
@@ -14,7 +22,7 @@ public class AddEventCommand extends Command{
         taskList.add(event);
         ui.print("Got it. I've added this task:");
         ui.print(event.toString());
-        ui.print("Now you have " + taskList.tasks.size() +  " tasks in the list.");
+        ui.print("Now you have " + taskList.numOfTasks() +  " tasks in the list.");
         try {
             storage.save(taskList);
         } catch (Exception e) {

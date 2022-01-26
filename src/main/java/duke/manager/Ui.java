@@ -1,4 +1,9 @@
-import java.io.*;
+package duke.manager;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import duke.exception.DukeException;
 
 public class Ui {
     private static final String DIVIDER = "____________________________________________________________";

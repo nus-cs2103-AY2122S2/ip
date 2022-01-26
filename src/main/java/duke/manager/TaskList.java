@@ -1,7 +1,11 @@
+package duke.manager;
+
 import java.util.ArrayList;
+import duke.task.Task;
+import duke.exception.DukeException;
 
 public class TaskList {
-    ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     public TaskList() {
         this.tasks = new ArrayList<>();
@@ -20,6 +24,21 @@ public class TaskList {
             throw new DukeException("☹ OOPS!!! Invalid task number.");
         }
         return tasks.remove(taskNo);
+    }
+
+    public Task getTask(int taskNo) throws DukeException {
+        if (!isValidTaskNo(taskNo)) {
+            throw new DukeException("☹ OOPS!!! Invalid task number.");
+        }
+        return tasks.get(taskNo);
+    }
+
+    public int numOfTasks() {
+        return tasks.size();
+    }
+
+    public ArrayList<Task> toArrayList() {
+        return this.tasks;
     }
 
     public void markDone(int taskNo) throws DukeException {
