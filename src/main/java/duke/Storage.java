@@ -1,7 +1,6 @@
+package duke;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
 
 
 public class Storage {

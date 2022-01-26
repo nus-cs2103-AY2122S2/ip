@@ -1,6 +1,7 @@
+package duke;
 //solution below adapted from https://stackify.com/specify-handle-exceptions-java/
-public class TodoException extends DukeException {
-    public TodoException(String errorMessage) {
+public class EventException extends DukeException {
+    public EventException(String errorMessage) {
         super(errorMessage);
     }
 }

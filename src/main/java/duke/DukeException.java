@@ -1,6 +1,7 @@
+package duke;
 //solution below adapted from https://stackify.com/specify-handle-exceptions-java/
-public class DeadlineException extends DukeException{
-    public DeadlineException(String errorMessage) {
+public class DukeException extends Exception {
+    public DukeException(String errorMessage) {
         super(errorMessage);
     }
 }
