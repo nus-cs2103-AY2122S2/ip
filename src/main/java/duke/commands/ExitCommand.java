@@ -21,6 +21,6 @@ public class ExitCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui io, Storage storage) {
         io.bye();
-        isExit = true;
+        exitProgram = true;
     }
 }

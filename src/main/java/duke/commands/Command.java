@@ -10,6 +10,7 @@ import duke.managers.Storage;
 public abstract class Command {
     protected boolean isExit = false;
 
+    protected boolean exitProgram = false;
     /**
      * Executes the command object.
      *
@@ -25,6 +26,6 @@ public abstract class Command {
      * @return isExit which is the switch that determines if the program ends.
      */
     public boolean getExit() {
-        return isExit;
+        return exitProgram;
     }
 }
