@@ -10,7 +10,7 @@ public class EventCommand implements Command {
     public static final String KEYWORD = "event";
 
     @Override
-    public String execute(String[] input, ArrayList<Task> tasks) {
+    public CommandOutput execute(String[] input, ArrayList<Task> tasks) {
         // Parse input.
         String desc = "";
         String time = "";
@@ -25,14 +25,14 @@ public class EventCommand implements Command {
         }
 
         if (desc.isBlank()) {
-            return "☹ OOPS!!! The description of an event cannot be empty.";
+            return new CommandOutput("☹ OOPS!!! The description of an event cannot be empty.", false);
         } else if (time.isBlank()) {
-            return "☹ OOPS!!! The time of an event cannot be empty.";
+            return new CommandOutput("☹ OOPS!!! The time of an event cannot be empty.", false);
         }
 
         // Add event.
         Task task = new Event(desc, time);
         tasks.add(task);
-        return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", task, tasks.size());
+        return new CommandOutput(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", task, tasks.size()), true);
     }
 }

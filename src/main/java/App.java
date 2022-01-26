@@ -1,6 +1,6 @@
 import chatbot.ChatBot;
 
-public class Duke {
+public class App {
     public static void main(String[] args) {
         new ChatBot().run();
     }

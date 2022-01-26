@@ -10,7 +10,7 @@ public class ToDoCommand implements Command {
     public static final String KEYWORD = "todo";
 
     @Override
-    public String execute(String[] input, ArrayList<Task> tasks) {
+    public CommandOutput execute(String[] input, ArrayList<Task> tasks) {
         // Parse input.
         String desc = "";
         try {
@@ -19,12 +19,12 @@ public class ToDoCommand implements Command {
         }
 
         if (desc.isBlank()) {
-            return "☹ OOPS!!! The description of a todo cannot be empty.";
+            return new CommandOutput("☹ OOPS!!! The description of a todo cannot be empty.", false);
         }
 
         // Add event.
         Task task = new ToDo(desc);
         tasks.add(task);
-        return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", task, tasks.size());
+        return new CommandOutput(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", task, tasks.size()), true);
     }
 }

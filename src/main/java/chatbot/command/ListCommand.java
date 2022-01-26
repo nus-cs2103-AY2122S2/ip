@@ -8,11 +8,11 @@ public class ListCommand implements Command {
     public static final String KEYWORD = "list";
 
     @Override
-    public String execute(String[] input, ArrayList<Task> tasks) {
+    public CommandOutput execute(String[] input, ArrayList<Task> tasks) {
         String output = "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); ++i) {
             output += String.format("%d. %s%s", i + 1, tasks.get(i).toString(), i < tasks.size() - 1 ? "\n" : "");
         }
-        return output;
+        return new CommandOutput(output, false);
     }
 }
