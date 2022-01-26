@@ -1,3 +1,11 @@
+package duke.managers;
+
+import duke.DukeException;
+import duke.Ui;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -39,7 +47,7 @@ public class FileManager {
         }
     }
 
-    protected void saveTasks() throws DukeException {
+    public void saveTasks() throws DukeException {
         try {
             Files.deleteIfExists(new File(this.filePath).toPath());
         } catch (IOException e) {
@@ -49,11 +57,9 @@ public class FileManager {
         for (Task task:this.userTaskList.getArrayList()){
             this.appendToFile(this.filePath, task.toSaveDataFormat());
         }
-        ui.printBye();
-        System.exit(0);
     }
 
-    protected TaskList loadTasks() throws DukeException {
+    public TaskList loadTasks() throws DukeException {
         try {
             File file = new File(this.filePath);
             Scanner s = new Scanner(file);

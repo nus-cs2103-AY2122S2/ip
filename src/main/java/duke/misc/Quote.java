@@ -1,3 +1,5 @@
+package duke.misc;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -25,6 +27,10 @@ public class Quote {
         ));
     }
 
+    /**
+     * Generates random quote from a stored quote list
+     * @return String of quote
+     */
     public String generateQuote(){
         Random randGenerator = new Random();
         int randomNumber = randGenerator.nextInt(alQuotes.size());

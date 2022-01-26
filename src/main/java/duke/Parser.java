@@ -1,3 +1,10 @@
+package duke;
+
+import duke.command.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
+
 import java.time.format.DateTimeParseException;
 
 public class Parser {
@@ -7,6 +14,12 @@ public class Parser {
         ui = new Ui();
     }
 
+    /**
+     * Parses user input into their respective commands. Creates different Command type objects which is executed to perform its tasks.
+     * @param userTaskString
+     * @return Command Object
+     * @throws DukeException
+     */
     public Command parseUserCommand(String userTaskString) throws DukeException {
         if (userTaskString.equalsIgnoreCase("bye")){
             return new ByeCommand(userTaskString);

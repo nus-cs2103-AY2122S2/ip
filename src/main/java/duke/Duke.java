@@ -1,3 +1,10 @@
+package duke;
+
+import duke.command.Command;
+import duke.managers.FileManager;
+import duke.managers.TaskList;
+import duke.misc.Quote;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -5,17 +12,25 @@ public class Duke {
     public FileManager fileManager;
     Ui ui;
 
+    /**
+     * duke.Duke Constructor
+     * @param savedTasksPath final path of saved tasks file
+     */
     public Duke(String savedTasksPath){
         this.userTaskList = new TaskList();
         this.fileManager = new FileManager(savedTasksPath);
         ui = new Ui();
     }
 
+    /**
+     * Main duke run method which starts duke Chat Bot
+     * @throws DukeException if exceptions occur throughout the program
+     */
     public void run() throws DukeException {
         Scanner sc = new Scanner(System.in);
         this.userTaskList = this.fileManager.loadTasks();
         Parser parser = new Parser();
-        ui.print("Hello, My Dear Friend... I'm Duke, your personal motivator!");
+        ui.print("Hello, My Dear Friend... I'm duke.Duke, your personal motivator!");
         Quote quoteOfTheDay = new Quote();
 //        duke.print(quoteOfTheDay.generateQuote());
         ui.print("What can i do for you today?");

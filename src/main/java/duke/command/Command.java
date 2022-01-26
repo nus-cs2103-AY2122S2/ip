@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.managers.FileManager;
+import duke.managers.TaskList;
+
 public abstract class Command {
     String userTaskString;
 
