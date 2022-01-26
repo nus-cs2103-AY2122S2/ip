@@ -1,5 +1,4 @@
 public class Todo extends Task {
-    protected String by;
     char type;
 
     public Todo(String description) {

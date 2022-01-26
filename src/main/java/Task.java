@@ -24,6 +24,18 @@ public class Task {
         return this.description;
     }
 
+    public char getType() {
+        if (this instanceof Event) {
+            return 'e';
+        } else if (this instanceof Deadline) {
+            return 'd';
+        } else if (this instanceof Todo) {
+            return 't';
+        } else {
+            return 'x';
+        }
+    }
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
