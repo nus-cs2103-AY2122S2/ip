@@ -34,32 +34,40 @@ public class Duke {
                     continue;
                 }
                 if (parts[0].equals("mark")) {
-                    Task markTask = allTasks.get(Integer.parseInt(parts[1]) - 1);
-                    System.out.println(lines);
-                    if (markTask.isDone == true) {
-                        System.out.println("You have already done this task!");
+                    try {
+                        Task markTask = allTasks.get(Integer.parseInt(parts[1]) - 1);
+                        System.out.println(lines);
+                        if (markTask.isDone == true) {
+                            System.out.println("You have already done this task!");
+                            System.out.println(markTask.markAsDone());
+                            System.out.println(endline);
+                            continue;
+                        }
+                        System.out.println("Good Job! You have marked this task as done!");
                         System.out.println(markTask.markAsDone());
                         System.out.println(endline);
                         continue;
+                    } catch (IndexOutOfBoundsException e) {
+                        throw new DukeException("You have entered invalid task or that task does not exist!");
                     }
-                    System.out.println("Good Job! You have marked this task as done!");
-                    System.out.println(markTask.markAsDone());
-                    System.out.println(endline);
-                    continue;
                 }
                 if (parts[0].equals("unmark")) {
-                    Task markTask = allTasks.get(Integer.parseInt(parts[1]) - 1);
-                    System.out.println(lines);
-                    if (markTask.isDone == false) {
-                        System.out.println("This task is already in undone status");
+                    try {
+                        Task markTask = allTasks.get(Integer.parseInt(parts[1]) - 1);
+                        System.out.println(lines);
+                        if (markTask.isDone == false) {
+                            System.out.println("This task is already in undone status");
+                            System.out.println(markTask.markAsUndone());
+                            System.out.println(endline);
+                            continue;
+                        }
+                        System.out.println("OK, I have marked this as not done yet:");
                         System.out.println(markTask.markAsUndone());
                         System.out.println(endline);
                         continue;
+                    } catch (IndexOutOfBoundsException e) {
+                        throw new DukeException("You have entered invalid task or that task does not exist!");
                     }
-                    System.out.println("OK, I have marked this as not done yet:");
-                    System.out.println(markTask.markAsUndone());
-                    System.out.println(endline);
-                    continue;
                 }
                 if (parts[0].equals("todo")) {
 //                String todoDesription = Arrays.toString(Arrays.copyOfRange(parts,1,parts.length));
