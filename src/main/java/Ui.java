@@ -1,4 +1,25 @@
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Ui {
+    public static void run() throws IOException {
+        startGreeting();
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Task> storeList = new ArrayList<>();
+        Storage.restoreList(storeList);
+        while (sc.hasNextLine()) {
+            String command = sc.nextLine();
+            if (command.equals("bye")) {
+                startGoodbye();
+                Storage.saveList(storeList);
+                break;
+            } else {
+                CommandParser.parseCommand(command, storeList);
+            }
+        }
+        sc.close();
+    }
     public static void unknownCommand() {
         System.out.println("Master, I have all the knowledge in the world but I do not recognise that command," +
                 " Please wish again");

@@ -1,13 +1,12 @@
+
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class CommandParser {
 
     public static void parseCommand(String command, ArrayList<Task> storeList) throws IOException {
-        if (command.equals("bye")) {
-            Ui.startGoodbye();
-            Storage.saveList(storeList);
-        } else if (command.equals("list")) {
+        if (command.equals("list")) {
             TaskList.printTheList(storeList);
         } else if (command.startsWith("mark ")) {
             TaskList.markCommand(command, storeList);
