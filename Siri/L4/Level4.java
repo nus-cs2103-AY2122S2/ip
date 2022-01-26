@@ -10,10 +10,10 @@ public class Level4 {
 
         while (true) { //will keep querying user for input until user inputs "bye" into system
             String word = sc.next();
-            if (word.equals("bye")) { //print goodbye text and exit while loop,stop scanner from scanning
+            if (word.equals("bye")) { //prints goodbye text and exit while loop,stop scanner from scanning
                 System.out.println(line + "     Goodbye.\n" + line);
                 break; //end while loop
-            } else if (word.equals("list")) { //print all elements in a list with index in front
+            } else if (word.equals("list")) { //prints all elements in a list with index in front
                 System.out.println(line + "     Tasks to do:");
                 int s = arrList.size();
                 for (int i = 0; i < s; i++) {
@@ -21,7 +21,7 @@ public class Level4 {
                     System.out.println("     " + (i + 1) + "." + currTask);
                 }
                 System.out.println(line);
-            } else if (word.equals("mark")) {
+            } else if (word.equals("mark")) { //marks the specified task with an "X"
                 int num = sc.nextInt();
                 int index = num - 1;
                 Task t = arrList.get(index);
@@ -30,7 +30,7 @@ public class Level4 {
                 System.out.println(line + "     This task has been marked:\n"
                         + "       " + t.toString() + "\n"
                         + line);
-            } else if (word.equals("unmark")) {
+            } else if (word.equals("unmark")) { //unmarks the specified task
                 int num = sc.nextInt();
                 int index = num - 1;
                 Task t = arrList.get(index);
@@ -39,7 +39,7 @@ public class Level4 {
                 System.out.println(line + "     This task has been unmarked:\n"
                         + "       " + t.toString() + "\n"
                         + line);
-            } else if (word.equals("todo")) {
+            } else if (word.equals("todo")) { //creates todo task with "[T]" prefix and adds to the list
                 String restOfInput = sc.nextLine();
                 String taskToDo = restOfInput;
                 Todo t = new Todo(taskToDo);
@@ -47,6 +47,17 @@ public class Level4 {
                 System.out.println(line + "     This task has been added to your list:\n"
                         + "     added: " + taskToDo + "\n"
                         + line);
+            } else if (word.equals("deadline")) {
+                while (sc.hasNextLine()) {
+                    String[] userInput = sc.nextLine().split("/by");
+                    // The userInput array now contains [taskDescription, deadline]
+                    Deadline deadLineTask = new Deadline(userInput[0], userInput[1]);
+                    arrList.add(deadLineTask);
+                    System.out.println(line + "     This task has been added to your list:\n"
+                            + "     added: " + userInput[0] + "\n"
+                            + line);
+                    break;
+                }
             } else { //print everything user inputed with "added: " infront
                 String restOfInput = sc.nextLine();
                 String taskToDo = word + restOfInput;
