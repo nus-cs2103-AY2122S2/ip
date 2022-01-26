@@ -4,53 +4,53 @@ import duke.exceptions.InvalidOperationException;
 import java.time.LocalDate;
 
 public class Deadline extends Task {
-    private String item;
+    private String description;
     private LocalDate date;
-    private boolean done;
+    private boolean isDone;
 
     public Deadline(String details, String date) {
-        this.item = details;
+        this.description = details;
         date = date.stripLeading();
         this.date = LocalDate.parse(date);
     }
 
     @Override
     public void mark() throws InvalidOperationException {
-        if (this.done) {
+        if (this.isDone) {
             throw new InvalidOperationException("marked");
         }
-        this.done = true;
+        this.isDone = true;
 
     }
 
     @Override
     public void unmark() throws InvalidOperationException {
-        if (!this.done) {
+        if (!this.isDone) {
             throw new InvalidOperationException("unmarked");
         }
-        this.done = false;
+        this.isDone = false;
 
     }
 
     @Override
     public String toString() {
-        if (done) {
-            return "[D]"+"[X] " + item + "(by: " +
-                    date.getDayOfMonth() +
-                    " " +
-                    date.getMonth() +
-                    " " +
-                    date.getYear() +
-                    ")";
+        if (isDone) {
+            return "[D]"+"[X] " + description + "(by: "
+                    + date.getDayOfMonth()
+                    + " "
+                    + date.getMonth()
+                    + " "
+                    + date.getYear()
+                    + ")";
         }
         else {
-            return "[D]"+"[ ] "+ item + "(by: " +
-                    date.getDayOfMonth() +
-                    " " +
-                    date.getMonth() +
-                    " " +
-                    date.getYear() +
-                    ")";
+            return "[D]"+"[ ] "+ description + "(by: "
+                    + date.getDayOfMonth()
+                    + " "
+                    + date.getMonth()
+                    + " "
+                    + date.getYear()
+                    + ")";
         }
     }
 }

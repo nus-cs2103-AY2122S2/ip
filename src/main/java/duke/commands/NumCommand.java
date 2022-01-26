@@ -20,34 +20,34 @@ public class NumCommand extends Command {
     public void insert() {
         try {
             switch (type) {
-                case MARK:
-                    taskManager.labelDone(num);
-                    break;
-                case UNMARK:
-                    taskManager.labelUndone(num);
-                    break;
-                case DELETE:
-                    taskManager.remove(num);
+            case MARK:
+                taskManager.labelDone(num);
+                break;
+            case UNMARK:
+                taskManager.labelUndone(num);
+                break;
+            case DELETE:
+                taskManager.remove(num);
+                break;
             }
         } catch (IndexOutOfBoundsException e) {
-            uiManager.errorMessage("I don't think we have that task!\nUse 'list' to check");
+            uiManager.showErrorMessage("I don't think we have that task!\nUse 'list' to check");
         } catch (InvalidOperationException e) {
-            uiManager.errorMessage(e.toString());
+            uiManager.showErrorMessage(e.toString());
         }
-
     }
 
     public void execute() throws IndexOutOfBoundsException, InvalidOperationException {
             switch (type) {
-                case MARK:
-                    taskManager.mark(num);
-                    break;
-                case UNMARK:
-                    taskManager.unmark(num);
-                    break;
-                case DELETE:
-                    taskManager.delete(num);
+            case MARK:
+                taskManager.mark(num);
+                break;
+            case UNMARK:
+                taskManager.unmark(num);
+                break;
+            case DELETE:
+                taskManager.delete(num);
+                break;
             }
     }
-
 }

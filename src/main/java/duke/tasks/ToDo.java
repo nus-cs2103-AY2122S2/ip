@@ -4,39 +4,35 @@ import duke.exceptions.InvalidOperationException;
 
 public class ToDo extends Task {
     private String description;
-    private boolean done;
+    private boolean isDone;
 
     public ToDo(String details) {
         this.description = details;
-
     }
 
     @Override
     public void mark() throws InvalidOperationException {
-        if (this.done) {
+        if (this.isDone) {
             throw new InvalidOperationException("marked");
         }
-        this.done = true;
-
+        this.isDone = true;
     }
 
     @Override
     public void unmark() throws InvalidOperationException {
-        if (!this.done) {
+        if (!this.isDone) {
             throw new InvalidOperationException("unmarked");
         }
-        this.done = false;
-
+        this.isDone = false;
     }
 
     @Override
     public String toString() {
-        if (done) {
+        if (isDone) {
             return "[T]"+"[X] " + this.description;
         }
         else {
             return "[T]"+"[ ] "+ this.description;
         }
     }
-
 }

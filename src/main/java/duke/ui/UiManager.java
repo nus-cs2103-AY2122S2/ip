@@ -33,7 +33,7 @@ public class UiManager {
     public void printAdd(Task t, int i) {
         this.showLine();
         System.out.println("Got it, I added:\n"+ t);
-        System.out.printf("Now you have %d item(s) in your list\n", i);
+        System.out.printf("Now you have %d item(string) in your list\n", i);
         this.showLine();
     }
 
@@ -51,10 +51,10 @@ public class UiManager {
         this.showLine();
     }
 
-    public void printDelete(String s, int i) {
+    public void printDelete(String string, int i) {
         this.showLine();
         System.out.println("I removed this task for you:");
-        System.out.println(s);
+        System.out.println(string);
         System.out.printf("Now you have %d items in your list\n", i);
         this.showLine();
     }
@@ -78,23 +78,23 @@ public class UiManager {
         System.out.println("No list saved previously!");
     }
 
-    public void errorMessage(String s) {
+    public void showErrorMessage(String string) {
         this.showLine();
-        System.out.println(s);
+        System.out.println(string);
         this.showLine();
     }
 
-    public String[] parseCommand(String s) throws TaskIndexException {
-        s = s.stripLeading();
-        s = s.stripTrailing();
-        String[] spliced = s.split("\\s+", 2);
-        if (spliced.length == 1 &&
-                ((spliced[0].equals("todo")) ||
-                        (spliced[0].equals("event")) ||
-                        (spliced[0].equals("delete")) ||
-                        (spliced[0].equals("mark")) ||
-                        (spliced[0].equals("unmark")) ||
-                        (spliced[0].equals("deadline")))) {
+    public String[] parseCommand(String string) throws TaskIndexException {
+        string = string.stripLeading();
+        string = string.stripTrailing();
+        String[] spliced = string.split("\\s+", 2);
+        if (spliced.length == 1
+                && ((spliced[0].equals("todo"))
+                || (spliced[0].equals("event"))
+                || (spliced[0].equals("delete"))
+                || (spliced[0].equals("mark"))
+                || (spliced[0].equals("unmark"))
+                || (spliced[0].equals("deadline")))) {
             throw new TaskIndexException("'" +spliced[0] + "'");
         }
         return spliced;

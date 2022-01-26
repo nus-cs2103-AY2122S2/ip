@@ -21,6 +21,7 @@ public class SaveCommand extends Command{
         this.type = t;
         this.file = new File("storage");
     }
+
     private void writeToFile(String path) throws IOException {
         if (!file.exists()) {
             file.mkdir();
@@ -35,8 +36,7 @@ public class SaveCommand extends Command{
             this.writeToFile(this.directory);
             this.uiManager.printSave();
         } catch (IOException e) {
-            uiManager.errorMessage("Oops! This is not a valid path!\nCheck if the directory exists!");
-
+            uiManager.showErrorMessage("Oops! This is not a valid path!\nCheck if the directory exists!");
         }
     }
 }
