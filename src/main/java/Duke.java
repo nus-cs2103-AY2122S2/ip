@@ -17,45 +17,15 @@ public class Duke {
 
         while (sc.hasNextLine()) {
             String command = sc.nextLine();
-            if (command.equals("bye")) { // save the current list into the harddisk
-                int sizeOfList = storeList.size();
-                System.out.println("Rub my lamp to summon me again");
-                System.out.println("Good bye for now master");
-                System.out.println("*-**-**-**-**-**-**-**-**-**-****-**-****-**-****-**");
+            if (command.equals("bye")) {
+                saveList(storeList);
                 break;
             } else if (command.equals("list")) {
                 TaskList.printTheList(storeList);
-
             } else if (command.startsWith("mark ")) {
-                int taskNumber = Integer.parseInt(command.substring(5));
-                if (taskNumber > storeList.size()) {
-                    System.out.println("Master, you do not have that many tasks, you currently only have "
-                                                + storeList.size() + " tasks. Please wish again");
-                    continue;
-                } else if (taskNumber <= 0) {
-                    System.out.println("Master, I am only a genie. Please choose a number between 1 and " + storeList.size());
-                    continue;
-                } else {
-                    Task tobeMark = storeList.get(taskNumber - 1);
-                    tobeMark.setMark();
-                    System.out.println("You could have gotten me to help you. This task has been marked done");
-                    System.out.println(tobeMark.toString());
-                }
+                markCommand(command, storeList);
             } else if (command.startsWith("unmark ")) {
-                int taskNumber1 = Integer.parseInt(command.substring(7));
-                if (taskNumber1 > storeList.size()) {
-                    System.out.println("Master, you do not have that many tasks, you currently only have "
-                            + storeList.size() + " tasks. Please wish again");
-                    continue;
-                } else if (taskNumber1 <= 0) {
-                    System.out.println("Master, I am only a genie. Please choose a number between 1 and " + storeList.size());
-                    continue;
-                } else {
-                    Task tobeUnmark = storeList.get(taskNumber1 - 1);
-                    tobeUnmark.setUnmark();
-                    System.out.println("You probably need more genies to help you. This task has been marked as not done");
-                    System.out.println(tobeUnmark.toString());
-                }
+                unmarkCommand(command, storeList);
             } else if (command.startsWith("deadline")) {
                 int slash = command.indexOf("/");
                 if (slash == -1 || slash <= 9) {
@@ -133,6 +103,42 @@ public class Duke {
 
     }
 
+    public static void unmarkCommand(String command, ArrayList<Task> storeList) {
+        int taskNumber1 = Integer.parseInt(command.substring(7));
+        if (taskNumber1 > storeList.size()) {
+            System.out.println("Master, you do not have that many tasks, you currently only have "
+                    + storeList.size() + " tasks. Please wish again");
+        } else if (taskNumber1 <= 0) {
+            System.out.println("Master, I am only a genie. Please choose a number between 1 and " + storeList.size());
+        } else {
+            Task tobeUnmark = storeList.get(taskNumber1 - 1);
+            tobeUnmark.setUnmark();
+            System.out.println("You probably need more genies to help you. This task has been marked as not done");
+            System.out.println(tobeUnmark.toString());
+        }
+    }
+
+    public static void markCommand(String command, ArrayList<Task> storeList) {
+        int taskNumber = Integer.parseInt(command.substring(5));
+        if (taskNumber > storeList.size()) {
+            System.out.println("Master, you do not have that many tasks, you currently only have "
+                    + storeList.size() + " tasks. Please wish again");
+        } else if (taskNumber <= 0) {
+            System.out.println("Master, I am only a genie. Please choose a number between 1 and " + storeList.size());
+        } else {
+            Task tobeMark = storeList.get(taskNumber - 1);
+            tobeMark.setMark();
+            System.out.println("You could have gotten me to help you. This task has been marked done");
+            System.out.println(tobeMark.toString());
+        }
+    }
+
+    public static void startGoodbye() {
+        System.out.println("Rub my lamp to summon me again");
+        System.out.println("Good bye for now master");
+        System.out.println("*-**-**-**-**-**-**-**-**-**-****-**-****-**-****-**");
+    }
+
     public static void restoreList(ArrayList<Task> arrlist) throws IOException {
         String currentDirectory = Paths.get("Duke.java").toAbsolutePath().getParent().toString();
         String newFilePath = currentDirectory + "/duke.txt";
@@ -142,6 +148,11 @@ public class Duke {
         } catch (FileAlreadyExistsException e) {
 
         }
+    }
+
+    public static void saveList(ArrayList<Task> arrlist) throws IOException {
+
+
     }
 
     public static void startGreeting() {
