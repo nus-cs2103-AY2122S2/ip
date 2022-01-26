@@ -6,20 +6,17 @@ public class Ui {
 
     Scanner sc;
 
+    /** Constructs an instance of Ui. */
     public Ui() {
         sc = new Scanner(System.in);
     }
 
-    public void exit() {
-        horizontal();
-        System.out.println("Bye nerd. Glad you'll be interacting with a real life human now! Haha...");
-        horizontal();
-    }
-
+    /** Prints a horizontal line. */
     public void horizontal() {
         System.out.println("--------------------------------------------------");
     }
 
+    /** Prints the welcome message for the user. */
     public void welcome(){
         horizontal();
         System.out.println("Greetings, NERD! I'm Duke");
@@ -27,42 +24,80 @@ public class Ui {
         horizontal();
     }
 
+    /**
+     * Reads the command that the user inputs.
+     *
+     * @return String with the user input.
+     */
     public String readCommand() {
         String userinput = sc.nextLine();
         return userinput;
     }
 
-
+    /**
+     * Prints the task with its current position in the Tasklist.
+     *
+     * @param taskNum Current position of task in Tasklist.
+     * @param t Task to be printed.
+     */
     public void showTask(int taskNum, Task t) {
         System.out.println(taskNum + ". " + t);
     }
 
+    /** Prints the empty task message for the user. */
     public void showEmptyTask() {
         System.out.println("No tasks added yet!");
     }
 
+    /**
+     * Prints a message informing the user that the task is completed.
+     *
+     * @param t Task that has been completed.
+     */
     public void showMarkTask(Task t) {
         System.out.println("Cool! You seemed to have been productive just like me! I've marked this task as done:");
         System.out.println(t);
     }
 
+    /**
+     * Prints a message informing the user that a task has been successfully added.
+     *
+     * @param num Total number of tasks currently.
+     * @param t Task that has been added.
+     */
     public void showSucessfulAdd(Task t, int num) {
         System.out.println("Roger, I got you. I've added this task:");
         System.out.println(t);
         System.out.println("Now you have " + num + " tasks in the list.");
     }
 
+    /**
+     * Prints a message informing the user that a task has been successfully removed.
+     *
+     * @param num Total number of tasks currently.
+     * @param t Task that has been removed.
+     */
     public void showRemoveTask(Task t, int num) {
         System.out.println("Noted, I have removed this task:");
         System.out.println(t);
         System.out.println("Now you have " + num + " tasks in the list.");
     }
 
+    /**
+     * Prints a message informing the user that the task is unmarked as done.
+     *
+     * @param t Task that has been unmarked.
+     */
     public void showUnmarkTask(Task t) {
         System.out.println("Did you mess up something? Fine... I'll mark it as undone -- but I believe you can do it!:");
         System.out.println(t);
     }
 
+    /**
+     * Prints a message informing the user of the error encounted.
+     *
+     * @param type Type of error.
+     */
     public void showError(String type) {
         switch (type) {
         case ("LoadingError"):
@@ -94,6 +129,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints a message informing the user of the tasks loaded.
+     *
+     * @param tasks Tasks that have been loaded from previous execution of Duke.
+     */
     public void showTasksLoaded(TaskList tasks) {
         System.out.println("Here are the tasks we loaded up from your previous usage!");
         ArrayList<Task> t = tasks.getTaskArr();
@@ -106,6 +146,7 @@ public class Ui {
         }
     }
 
+    /** Prints the exit statement to the user. */
     public void sayGoodbye() {
         System.out.println("Bye! I'm sure you'll start talking to a real human now. Haha...");
     }
