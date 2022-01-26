@@ -50,7 +50,8 @@ public class Parser {
                 throw new JarvisException("The description of the deadline cannot be empty.");
             }
             if (split.length == 1) {
-                throw new JarvisException("Please specify the date of the deadline (usage: `deadline <description> /by <date>`).");
+                throw new JarvisException("Please specify the date of the deadline " +
+                        "(usage: `deadline <description> /by <date>`).");
             }
             if (split[1].trim().equals("")) {
                 throw new JarvisException("The date of the deadline cannot be empty.");
@@ -66,7 +67,8 @@ public class Parser {
                 throw new JarvisException("The description of the event cannot be empty.");
             }
             if (split.length == 1) {
-                throw new JarvisException("Please specify the date of the event (usage: `event <description> /at <date>`).");
+                throw new JarvisException("Please specify the date of the event " +
+                        "(usage: `event <description> /at <date>`).");
             }
             if (split[1].trim().equals("")) {
                 throw new JarvisException("The date of the event cannot be empty.");
