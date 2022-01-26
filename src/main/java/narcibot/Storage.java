@@ -19,8 +19,4 @@ public class Storage {
         }
         return new FileWriter(file);
     }
-
-    public void writeFile() {
-
-    }
 }

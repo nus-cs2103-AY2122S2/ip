@@ -10,9 +10,9 @@ public class Event extends Task {
         this.time = time;
         try {
             LocalDate date = LocalDate.parse(time);
-            System.out.println("[E][ ] " + name + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")");
+            System.out.println("[E][ ] " + name + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")");
         } catch (DateTimeParseException e) {
-            System.out.println("[E][ ] " + name + " (by: " + time + ")");
+            System.out.println("[E][ ] " + name + " (at: " + time + ")");
         }
     }
 

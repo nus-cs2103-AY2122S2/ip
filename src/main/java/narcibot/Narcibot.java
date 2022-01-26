@@ -1,6 +1,5 @@
 package narcibot;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Narcibot {
@@ -20,7 +19,7 @@ public class Narcibot {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main() {
         new Narcibot("tasks.txt","./data").run();
     }
 
