@@ -47,6 +47,16 @@ public class TaskList {
         }
     }
 
+    public ArrayList<Task> findTasks(String search) {
+        ArrayList<Task> result = new ArrayList<Task>();
+        for (Task t : tasks) {
+            if (t.description.contains(search)) {
+                result.add(t);
+            }
+        }
+        return result;
+    }
+
     public String taskListToString() {
         StringBuilder result = new StringBuilder();
         String title = tasks.isEmpty() ? "You got no task now! Start by adding new tasks."

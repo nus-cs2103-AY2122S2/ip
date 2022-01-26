@@ -30,6 +30,8 @@ public class Parser {
             return extractEvent(details);
         case "delete":
             return extractDelete(details);
+        case "find":
+            return extractFind(details);
         default:
             return new UnknownCommand();
         }
@@ -92,6 +94,14 @@ public class Parser {
             return new DeleteCommand(Integer.parseInt(details[1].trim()) - 1);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new DukeException("Please enter an integer!", e);
+        }
+    }
+
+    private static Command extractFind(String[] details) {
+        try {
+            return new FindCommand(details[1]);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Enter some word to search!", e);
         }
     }
 }
