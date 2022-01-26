@@ -7,6 +7,12 @@ public class Event extends Task {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy h:mm a");
     protected LocalDateTime at;
 
+    /**
+     * Constructs an Event object.
+     *
+     * @param description Description of the event.
+     * @param at Date and time of the event.
+     */
     public Event(String description, LocalDateTime at) {
         super(description);
         this.at = at;

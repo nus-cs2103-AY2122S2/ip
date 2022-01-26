@@ -9,6 +9,13 @@ import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 
 public class Parser {
+    /**
+     * Parses the input string into a command for Jarvis.
+     *
+     * @param input The user input to parse.
+     * @return The parsed command map.
+     * @throws JarvisException If input does not conform to the format.
+     */
     public static HashMap<String, Object> parseInput(String input) throws JarvisException {
         HashMap<String, Object> parsedCommand = new HashMap<>();
         String[] tokens = input.split(" ");
@@ -70,7 +77,13 @@ public class Parser {
         return parsedCommand;
     }
 
-
+    /**
+     * Parses a string into a LocalDateTime object.
+     *
+     * @param str The datetime string to parse.
+     * @return LocalDateTime object of the string.
+     * @throws JarvisException If string format is incorrect.
+     */
     private static LocalDateTime parseDateTime(String str) throws JarvisException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");

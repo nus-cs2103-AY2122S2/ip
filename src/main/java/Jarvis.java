@@ -14,6 +14,9 @@ public class Jarvis {
 
     private static boolean processNext = true;
 
+    /**
+     * Runs the main chat/program loop.
+     */
     public static void main(String[] args) throws JarvisException {
         startup();
 
@@ -51,12 +54,17 @@ public class Jarvis {
                 }
             } catch (IllegalArgumentException e) {
                 ui.echo("I'm afraid I don't understand your request.");
-            } catch (JarvisException de) {
-                ui.echo("I'm afraid I wasn't able to fulfill your request.\n" + de.getMessage());
+            } catch (JarvisException je) {
+                ui.echo("I'm afraid I wasn't able to fulfill your request.\n" + je.getMessage());
             }
         }
     }
 
+    /**
+     * Initializes the UI and loads the data file in storage into the program.
+     *
+     * @throws JarvisException If storage initialization fails.
+     */
     public static void startup() throws JarvisException {
         storage = new Storage("data/data.txt");
         ui = new Ui();
@@ -64,6 +72,11 @@ public class Jarvis {
         ui.welcome();
     }
 
+    /**
+     * Saves the program state into local storage and closes open resources.
+     *
+     * @throws JarvisException If save to storage fails.
+     */
     public static void shutdown() throws JarvisException {
         processNext = false;
         storage.saveChanges(tasks);

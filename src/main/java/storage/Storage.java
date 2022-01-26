@@ -14,10 +14,21 @@ import java.util.Scanner;
 public class Storage {
     private String dataFilePath;
 
+    /**
+     * Constructs a Storage object.
+     *
+     * @param dataFilePath Path of the file to store and retrieve data from.
+     */
     public Storage(String dataFilePath) {
         this.dataFilePath = dataFilePath;
     }
 
+    /**
+     * Loads data from the file path.
+     *
+     * @return List of tasks stored in the file.
+     * @throws JarvisException If file retrieval failed.
+     */
     public List<Task> loadData() throws JarvisException {
         try {
             List<Task> lst = new ArrayList<>();
@@ -56,6 +67,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the current state of tasks to storage.
+     *
+     * @param tasks The tasks to save to the file.
+     * @throws JarvisException If file saving failed.
+     */
     public void saveChanges(TaskList tasks) throws JarvisException {
         try {
             StringBuilder sb = new StringBuilder();
