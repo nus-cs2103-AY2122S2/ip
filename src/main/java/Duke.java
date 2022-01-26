@@ -6,18 +6,18 @@ public class Duke {
     private static final ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        try (Scanner scanner = new Scanner(System.in)) {
+            Storage storage = new Storage();
+            tasks.addAll(storage.loadALlTasks());
+            String logo = " ____        _        \n"
+                    + "|  _ \\ _   _| | _____ \n"
+                    + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n"
+                    + "|____/ \\__,_|_|\\_\\___|\n";
+            System.out.println("Hello from\n" + logo);
 
-        Scanner scanner = new Scanner(System.in);
 
-        System.out.println("What can I do for you?");
-
-        try {
+            System.out.println("What can I do for you?");
             while (true) {
 
                 String userInput = scanner.nextLine();
@@ -26,6 +26,7 @@ public class Duke {
                 InstructionType instructionType = parseUserInput(userInput);
 
                 if (instructionType.equals(InstructionType.BYE)) {
+                    storage.saveAllTasks(tasks);
                     System.out.println("Bye. Hope to see you again soon!");
                     System.out.println("  ===================================");
                     break;
@@ -65,7 +66,7 @@ public class Duke {
 
                     if (instructionType.equals(InstructionType.TODO)) {
                         if (title.isEmpty()) {
-                            throw new EmptyTodoException("☹ OOPS!!! The description of a todo cannot be empty.");
+                            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                         }
                         Task todo = new Todo(title);
                         tasks.add(todo);
@@ -73,7 +74,7 @@ public class Duke {
                         System.out.println("Got it. I've added this task:");
                         System.out.println(todo);
                     } else if (instructionType.equals(InstructionType.DEADLINE)) {
-                        String[] taskArr = title.split(" /by");
+                        String[] taskArr = title.split(" /by ");
                         String taskTitle = taskArr[0];
                         String dueBy = taskArr[1];
 
@@ -83,7 +84,7 @@ public class Duke {
                         System.out.println("Got it. I've added this task:");
                         System.out.println(deadline.toString());
                     } else if (instructionType.equals(InstructionType.EVENT)) {
-                        String[] taskArr = title.split(" /at");
+                        String[] taskArr = title.split(" /at ");
                         String taskTitle = taskArr[0];
                         String eventAt = taskArr[1];
 
@@ -100,14 +101,8 @@ public class Duke {
                 System.out.println("  ===================================");
             }
         } catch (DukeException e) {
-            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            System.out.println(e.getMessage());
             System.out.println("  ===================================");
-        } catch (EmptyTodoException e) {
-            System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
-            System.out.println("  ===================================");
-
-        } finally {
-            scanner.close();
         }
     }
 
