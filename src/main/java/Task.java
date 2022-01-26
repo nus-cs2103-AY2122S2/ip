@@ -62,6 +62,8 @@ public class Task {
         } catch (DateTimeParseException e) {
             System.out.println("Not a valid date");
             return false;
+        } catch (NullPointerException e) {
+            return false;
         }
     }
 

@@ -1,6 +1,3 @@
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Dazz {
@@ -31,12 +28,6 @@ public class Dazz {
         }
         dazz.storage.updateList(reminder);
         scanner.close();
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[dd-MM-yyyy]" + "[dd/MM/yyyy]");
-//        Deadline deadline = new Deadline("D", "yoyo", "02/12/2019");
-//        System.out.println(deadline.matchDate("gsgs"));
-//        System.out.println(deadline.dateFormat.toString());
-//        System.out.println(LocalDate.parse("02/12/2019", formatter).toString());
-
     }
 }
 
