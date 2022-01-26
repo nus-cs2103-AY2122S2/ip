@@ -25,7 +25,7 @@ public class MarkCommand implements Command {
             throw new DukeException("duke.task.Task do not exist!");
         } else {
             Task task = tasks.getTask(position);
-            if (task.isDone == true) {
+            if (task.isDone()) {
                 throw new DukeException("duke.task.Task is already marked as done!");
             } else {
                 task.mark();

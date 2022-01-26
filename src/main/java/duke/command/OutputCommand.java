@@ -7,13 +7,13 @@ import duke.Ui;
 public class OutputCommand implements Command{
 
     private String fullCommand;
-    private String[] splicedFullCommand;
+    private String[] splitFullCommand;
     private String taskType;
 
     public OutputCommand(String fullCommand) {
         this.fullCommand = fullCommand;
-        this.splicedFullCommand = fullCommand.split(" ",2);
-        this.taskType = splicedFullCommand[0];
+        this.splitFullCommand = fullCommand.split(" ",2);
+        this.taskType = splitFullCommand[0];
     }
 
     @Override
