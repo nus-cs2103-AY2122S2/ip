@@ -1,9 +1,9 @@
-package task;
+package Duke.task;
 
 import java.time.LocalDateTime;
 
 /**
- * Represents the task (with deadline) entered by user
+ * Represents the Duke.task (with deadline) entered by user
  */
 public class Deadline extends Task {
 

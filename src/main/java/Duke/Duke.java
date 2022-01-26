@@ -1,4 +1,10 @@
-import sonautil.*;
+package Duke;
+
+import Duke.sonautil.DukeException;
+import Duke.sonautil.Storage;
+import Duke.sonautil.TaskList;
+import Duke.sonautil.Parser;
+import Duke.sonautil.Ui;
 
 import java.io.IOException;
 import java.io.FileNotFoundException;
@@ -17,7 +23,7 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (DukeException | FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             Ui.invalidFileMessage();
             tasks = new TaskList();
         } catch (IOException e) {
@@ -47,7 +53,7 @@ public class Duke {
         System.exit(0);
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         new Duke("src/main/data/duke.txt").run();
     }
 }

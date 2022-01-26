@@ -1,6 +1,6 @@
-package sonautil;
+package Duke.sonautil;
 
-import task.Task;
+import Duke.task.Task;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file
@@ -22,17 +22,17 @@ public class Ui {
     }
 
     /**
-     * Prints out the line when Duke is responding
+     * Prints out the line when Duke.Duke is responding
      */
     public static void showLine() {
         System.out.println(LINE);
     }
 
     /**
-     * Prints out when Duke is list
+     * Prints out when Duke.Duke is list
      */
     public static void showListMessage() {
-        System.out.println(LINE + "\nHere is your task list!");
+        System.out.println(LINE + "\nHere is your Duke.task list!");
     }
 
     /**
@@ -54,7 +54,7 @@ public class Ui {
      * Prints out when file is not found
      */
     public static void fileNotFoundMessage() {
-        System.out.println("Oh no... I couldn't find the task list in your hard disk...\n" +
+        System.out.println("Oh no... I couldn't find the Duke.task list in your hard disk...\n" +
                 "Don't worry! I will create one for you now :)\n");
     }
 
@@ -69,7 +69,7 @@ public class Ui {
     }
 
     /**
-     * Prints out when task description is not entered by user
+     * Prints out when Duke.task description is not entered by user
      *
      * @return message to user
      */
@@ -129,26 +129,26 @@ public class Ui {
     }
 
     /**
-     * Prints out when a task is removed from the list
+     * Prints out when a Duke.task is removed from the list
      *
-     * @param task task to be removed
+     * @param task Duke.task to be removed
      */
     public static void taskRemovedMessage(Task task) {
-        System.out.println(LINE + "\nDone! I've removed this task:\n"
+        System.out.println(LINE + "\nDone! I've removed this Duke.task:\n"
                 + task.toString() + "\n" + LINE);
     }
 
     /**
-     * Prints out when user did not specify which task to remove
+     * Prints out when user did not specify which Duke.task to remove
      *
      * @return message to user
      */
     public static String taskRemoveEmptyMessage() {
-        return LINE + "\nWhich task do you want to delete? Add the number in the end to tell me~\n" + LINE;
+        return LINE + "\nWhich Duke.task do you want to delete? Add the number in the end to tell me~\n" + LINE;
     }
 
     /**
-     * Prints out when task list is empty
+     * Prints out when Duke.task list is empty
      *
      * @return message to user
      */
@@ -159,20 +159,20 @@ public class Ui {
     /**
      * Prints out when an event is entered successfully
      *
-     * @param task task to be entered
+     * @param task Duke.task to be entered
      * @param timeEntered inform user that the time is set to 00:00 since the user did not enter a time for the event
      * @param tasksAdded_index total number of tasks in the list
      */
     public static void eventEnterSuccessMessage(Task task, String timeEntered, int tasksAdded_index) {
         if (timeEntered.equals("true")) {
-            System.out.println((LINE + "\nWokay! I've added this task:\n"
+            System.out.println((LINE + "\nWokay! I've added this Duke.task:\n"
                     + task.toString()
-                    + "\nNow you have " + (tasksAdded_index) + " task(s) in the list\n" + LINE));
+                    + "\nNow you have " + (tasksAdded_index) + " Duke.task(s) in the list\n" + LINE));
         } else {
             System.out.println((LINE
                     + "\nSince you did not enter what time is this event happening, I will help you set it at 00:00!\n"
                     + task.toString()
-                    + "\nNow you have " + (tasksAdded_index) + " task(s) in the list\n" + LINE));
+                    + "\nNow you have " + (tasksAdded_index) + " Duke.task(s) in the list\n" + LINE));
         }
     }
 
@@ -199,19 +199,19 @@ public class Ui {
     /**
      * Prints out when deadline is entered successfully
      *
-     * @param task task to be entered
+     * @param task Duke.task to be entered
      * @param timeEntered inform user that the time is set to 23:59 since the user did not enter a time for the event
      * @param tasksAdded_index total number of tasks in the list
      */
     public static void deadlineEnterSuccessMessage(Task task, String timeEntered, int tasksAdded_index) {
         if (timeEntered.equals("true")) {
-            System.out.println((LINE + "\nWokay! I've added this task:\n" + task.toString()
-                    + "\nNow you have " + (tasksAdded_index) + " task(s) in the list\n" + LINE));
+            System.out.println((LINE + "\nWokay! I've added this Duke.task:\n" + task.toString()
+                    + "\nNow you have " + (tasksAdded_index) + " Duke.task(s) in the list\n" + LINE));
         } else {
-            System.out.println((LINE + "\nSince you did not enter the due time for this task, "
+            System.out.println((LINE + "\nSince you did not enter the due time for this Duke.task, "
                     + "I will help you set it at 23:59!\n"
                     + task.toString()
-                    + "\nNow you have " + (tasksAdded_index) + " task(s) in the list\n" + LINE));
+                    + "\nNow you have " + (tasksAdded_index) + " Duke.task(s) in the list\n" + LINE));
         }
     }
 
@@ -230,43 +230,43 @@ public class Ui {
      * @return message to user
      */
     public static String deadlineNoSlashMessage() {
-        return LINE + "\nWhen is the deadline? Add '/' and the date after your task to make me record ;)\n"
+        return LINE + "\nWhen is the deadline? Add '/' and the date after your Duke.task to make me record ;)\n"
                 + LINE;
     }
 
     /**
-     * Prints out when to-do task is entered successfully
+     * Prints out when to-do Duke.task is entered successfully
      *
-     * @param task task to be added
+     * @param task Duke.task to be added
      * @param taskAdded_index total number of tasks in the list
      */
     public static void todoEnteredSuccessMessage(Task task, int taskAdded_index) {
-        System.out.println(LINE + "\nWokay! I've added this task:\n"
+        System.out.println(LINE + "\nWokay! I've added this Duke.task:\n"
                 + task.toString()
-                + "\nNow you have " + (taskAdded_index) + " task(s) in the list\n" + LINE);
+                + "\nNow you have " + (taskAdded_index) + " Duke.task(s) in the list\n" + LINE);
     }
 
     /**
-     * Prints out when a task is successfully unmarked
+     * Prints out when a Duke.task is successfully unmarked
      *
-     * @param task task to be unmarked
+     * @param task Duke.task to be unmarked
      */
     public static void unmarkSuccessMessage(Task task) {
-        System.out.println(LINE + "\nAw man..I've marked this task as not done yet:\n"
+        System.out.println(LINE + "\nAw man..I've marked this Duke.task as not done yet:\n"
                 + task.toString() + "\n" + LINE);
     }
 
     /**
-     * Prints out when user repeatedly unmark a task
+     * Prints out when user repeatedly unmark a Duke.task
      *
      * @return message to user
      */
     public static String unmarkRepeatMessage() {
-        return LINE + "\nYou have already unmarked this task!\n" + LINE;
+        return LINE + "\nYou have already unmarked this Duke.task!\n" + LINE;
     }
 
     public static String taskDontExistMessage(int taskIndex) {
-        return LINE + "\nThere is no number " + (taskIndex + 1) + " in your task list!\n" + LINE;
+        return LINE + "\nThere is no number " + (taskIndex + 1) + " in your Duke.task list!\n" + LINE;
     }
 
     /**
@@ -275,25 +275,25 @@ public class Ui {
      * @return message to user
      */
     public static String unmarkNoNumberMessage() {
-        return LINE + "\nWhich task do you want to unmark? Add the number in the end to tell me~\n" + LINE;
+        return LINE + "\nWhich Duke.task do you want to unmark? Add the number in the end to tell me~\n" + LINE;
     }
 
     /**
-     * Prints out when a task is successfully marked
+     * Prints out when a Duke.task is successfully marked
      *
-     * @param task task to be marked
+     * @param task Duke.task to be marked
      */
     public static void markSuccessMessage(Task task) {
-        System.out.println(LINE + "\nYay! I've marked this task as done:\n" + task.toString() + "\n" + LINE);
+        System.out.println(LINE + "\nYay! I've marked this Duke.task as done:\n" + task.toString() + "\n" + LINE);
     }
 
     /**
-     * Prints out when user repeatedly mark a task
+     * Prints out when user repeatedly mark a Duke.task
      *
      * @return message to user
      */
     public static String markRepeatMessage() {
-        return LINE + "\nYou have already finished this task! :D\n" + LINE;
+        return LINE + "\nYou have already finished this Duke.task! :D\n" + LINE;
     }
 
     /**
@@ -302,17 +302,29 @@ public class Ui {
      * @return message to user
      */
     public static String markNoNumberMessage() {
-        return LINE + "\nWhich task do you want to mark? Add the number in the end to tell me~\n" + LINE;
+        return LINE + "\nWhich Duke.task do you want to mark? Add the number in the end to tell me~\n" + LINE;
     }
 
+    /**
+     * Prints out when keyword is not entered after "find"
+     *
+     * @return message to user
+     */
     public static String findNoKeywordError() {
         return LINE + "\nEnter your keyword behind 'find' to let me search for you! :)\n" + LINE;
     }
 
+    /**
+     * Prints out when there is no match to user's search
+
+     */
     public static void findNoMatchError() {
-        System.out.println(LINE + "\nI couldn't find any task that matches your search! :(\n" + LINE);
+        System.out.println(LINE + "\nI couldn't find any Duke.task that matches your search! :(\n" + LINE);
     }
 
+    /**
+     * Prints out when Sona is showing search result to user
+     */
     public static void findShowResult() {
         System.out.println(LINE + "\nHere are the tasks that match your search:");
     }

@@ -2,9 +2,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import sonautil.DukeException;
-import sonautil.Parser;
-import sonautil.TaskList;
+import Duke.sonautil.DukeException;
+import Duke.sonautil.Parser;
+import Duke.sonautil.TaskList;
 
 import java.util.Arrays;
 
@@ -58,7 +58,7 @@ public class DukeTest {
 
         TaskList list = new TaskList();
 
-        //test case 1.1: add todo task
+        //test case 1.1: add todo Duke.task
         list.executeCommand(new String[]{"todo", "play", null, null});
         assertEquals("[T][ ] play", list.getTask(0).toString());
 

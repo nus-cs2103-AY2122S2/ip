@@ -1,4 +1,4 @@
-package sonautil;
+package Duke.sonautil;
 
 import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
@@ -13,7 +13,7 @@ public class Parser {
     /**
      * Returns a String array (arr) of the user's command.
      * arr[0]: keyword of command, "unknown" if command invalid/does not exist
-     * arr[1]: string representation of task index (if applicable, null otherwise)
+     * arr[1]: string representation of Duke.task index (if applicable, null otherwise)
      * arr[2] : string representation of time (if applicable, null otherwise)
      * arr[3]: "true" if time is entered by user, "false" if not entered; null if not applicable
      *

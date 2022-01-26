@@ -1,4 +1,4 @@
-package sonautil;
+package Duke.sonautil;
 
 /**
  * Represents the exception thrown when user's command is invalid

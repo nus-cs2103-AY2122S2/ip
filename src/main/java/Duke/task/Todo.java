@@ -1,14 +1,17 @@
-package task;
+package Duke.task;
 
 /**
- * Represents the to-do task entered by user
+ * Represents the to-do Duke.task entered by user
  */
 public class Todo extends Task{
 
     public Todo(String description) {
         super(description);
     }
-    public Todo(String description, int isDone) { super(description, isDone); }
+
+    public Todo(String description, int isDone) {
+        super(description, isDone);
+    }
 
     @Override
     public String toString() {

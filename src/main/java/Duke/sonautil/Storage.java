@@ -1,6 +1,9 @@
-package sonautil;
+package Duke.sonautil;
 
-import task.*;
+import Duke.task.Deadline;
+import Duke.task.Event;
+import Duke.task.Task;
+import Duke.task.Todo;
 
 import java.util.ArrayList;
 
@@ -61,9 +64,9 @@ public class Storage {
     }
 
     /**
-     * deletes the task from local file by creating a temp file and copy every task except the one to be deleted
+     * deletes the Duke.task from local file by creating a temp file and copy every Duke.task except the one to be deleted
      *
-     * @param taskToDelete the index of task to delete
+     * @param taskToDelete the index of Duke.task to delete
      */
     public void deleteFromFile(int taskToDelete) {
         String oldFileName = "src/main/data/duke.txt";
@@ -101,7 +104,7 @@ public class Storage {
     }
 
     /**
-     * Appends the string representation task into the local file
+     * Appends the string representation Duke.task into the local file
      *
      * @param taskToAdd string to be added into the local file
      */
@@ -117,7 +120,7 @@ public class Storage {
     }
 
     /**
-     * loads task from local file
+     * loads Duke.task from local file
      *
      * @return Arraylist of tasks
      * @throws IOException if create new file fails
@@ -166,7 +169,7 @@ public class Storage {
     }
 
     /**
-     * creates a new local file for Duke to work
+     * creates a new local file for Duke.Duke to work
      *
      * @throws IOException if fails to make new directory and create new file
      */
@@ -177,11 +180,11 @@ public class Storage {
     }
 
     /**
-     * Changes the marking of 1 single task in the local file
+     * Changes the marking of 1 single Duke.task in the local file
      *
      * @param init initial string of the marking ("1" for done, "0" for not done).
      * @param goal final string of the marking ("1" for mark, "0" for unmark).
-     * @param taskToMark the index of task to be marked or unmarked
+     * @param taskToMark the index of Duke.task to be marked or unmarked
      * @throws IOException if fails access local file
      */
     private void changeMarking(String init, String goal, int taskToMark) throws IOException {
@@ -219,8 +222,6 @@ public class Storage {
         File newFile = new File(tempFileName);
         newFile.renameTo(oldFile);
     }
-
-
 
 
 }

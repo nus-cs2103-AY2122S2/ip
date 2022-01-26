@@ -1,4 +1,4 @@
-package task;
+package Duke.task;
 
 
 /**
@@ -21,24 +21,24 @@ public class Task {
     }
 
     /**
-     * Returns status icon of the task ("X" for done, " " for not done)
+     * Returns status icon of the Duke.task ("X" for done, " " for not done)
      *
-     * @return status icon of the task
+     * @return status icon of the Duke.task
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone ? "X" : " "); // mark done Duke.task with X
     }
 
 
     /**
-     * Marks the task as done
+     * Marks the Duke.task as done
      */
     public void markAsDone() {
         isDone = true;
     }
 
     /**
-     * Marks the task as not done
+     * Marks the Duke.task as not done
      */
     public void unmark() {
         isDone = false;

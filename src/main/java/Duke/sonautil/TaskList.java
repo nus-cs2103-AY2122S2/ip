@@ -1,13 +1,16 @@
-package sonautil;
+package Duke.sonautil;
 
-import task.*;
+import Duke.task.Deadline;
+import Duke.task.Event;
+import Duke.task.Task;
+import Duke.task.Todo;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
- * contains the task list. Has operations to add/delete tasks in the list
+ * contains the Duke.task list. Has operations to add/delete tasks in the list
  */
 public class TaskList {
 
@@ -25,7 +28,7 @@ public class TaskList {
     }
 
     /**
-     * Executes the user command on the task list. Does nothing when keyword is "unknown"
+     * Executes the user command on the Duke.task list. Does nothing when keyword is "unknown"
      *
      * @param command details of command retrieved from Parser
      * @throws DukeException if command is invalid
@@ -71,12 +74,12 @@ public class TaskList {
         case "mark": {
             int taskIndex = Integer.parseInt(command[1]);
 
-            //user trying to mark a non-existing task
+            //user trying to mark a non-existing Duke.task
             if (taskIndex >= tasksAdded_index || taskIndex < 0) {
                 throw new DukeException(Ui.taskDontExistMessage(taskIndex));
             }
 
-            //user trying to mark a done task as done again
+            //user trying to mark a done Duke.task as done again
             if (list.get(taskIndex).isDone) {
                 throw new DukeException(Ui.markRepeatMessage());
             }
@@ -89,11 +92,11 @@ public class TaskList {
 
         case "unmark": {
             int taskIndex = Integer.parseInt(command[1]);
-            //user trying to unmark a non-existing task
+            //user trying to unmark a non-existing Duke.task
             if (taskIndex >= tasksAdded_index || taskIndex < 0) {
                 throw new DukeException(Ui.taskDontExistMessage(taskIndex));
             }
-            //user trying to mark a undone task as undone again
+            //user trying to mark a undone Duke.task as undone again
             if (!list.get(taskIndex).isDone) {
                 throw new DukeException(Ui.unmarkRepeatMessage());
             }
@@ -109,7 +112,7 @@ public class TaskList {
                 throw new DukeException(Ui.listEmptyMessage());
             }
             int taskIndex = Integer.parseInt(command[1]);
-            //user trying to delete a non-existing task
+            //user trying to delete a non-existing Duke.task
             if (taskIndex >= tasksAdded_index || taskIndex < 0) {
                 throw new DukeException(Ui.taskDontExistMessage(taskIndex));
             }
@@ -182,9 +185,9 @@ public class TaskList {
     }
 
     /**
-     * Returns the task of the given index
+     * Returns the Duke.task of the given index
      *
-     * @param index index of task in the list
+     * @param index index of Duke.task in the list
      * @return Task of the given index
      */
     public Task getTask(int index) {
@@ -201,9 +204,9 @@ public class TaskList {
     }
 
     /**
-     * Adds task into the list
+     * Adds Duke.task into the list
      *
-     * @param task task to be added into the list
+     * @param task Duke.task to be added into the list
      */
     private void addTask(Task task) {
         list.add(task);
@@ -211,9 +214,9 @@ public class TaskList {
     }
 
     /**
-     * Removes task from the list
+     * Removes Duke.task from the list
      *
-     * @param taskIndex index of the task to be removed
+     * @param taskIndex index of the Duke.task to be removed
      */
     private void removeTask(int taskIndex) {
         list.remove(taskIndex);
