@@ -52,14 +52,14 @@ public class Ui {
      * Print logo.
      */
     public void printLogo() {
-        printMsg(DIVIDER, Messages.MESSAGE_LOGO, Messages.MESSAGE_HI, DIVIDER);
+        print(DIVIDER, Messages.MESSAGE_LOGO, Messages.MESSAGE_HI, DIVIDER);
     }
 
     /**
      * Print bye.
      */
     public void printBye() {
-        printMsg(DIVIDER, Messages.MESSAGE_BYE, DIVIDER);
+        print(DIVIDER, Messages.MESSAGE_BYE, DIVIDER);
     }
 
     /**
@@ -67,7 +67,7 @@ public class Ui {
      *
      * @param message the message.
      */
-    public void printMsg(String... message) {
+    public void print(String... message) {
         for (String m : message) {
             out.println(m);
         }
@@ -78,7 +78,7 @@ public class Ui {
      *
      * @param message the message.
      */
-    public void print(String... message) {
+    public void printMsg(String... message) {
         out.print(DIALOG_START);
         for (String m : message) {
             out.println(m);

@@ -4,10 +4,7 @@ import exception.InvalidInputException;
 
 import parser.Parser;
 
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.ToDo;
+import task.*;
 
 import java.io.*;
 
@@ -30,6 +27,14 @@ public class Storage {
      */
     public Storage() {
         this.path = getPath();
+    }
+
+    /**
+     * Constructor for class Storage.
+     */
+    public Storage(String path, ListTask tasks) throws IOException, InvalidInputException {
+        this.path = getPath();
+        tasks.addTaskList(this.readTaskFile(this.getPath()));
     }
 
     /**

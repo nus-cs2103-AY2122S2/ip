@@ -15,22 +15,45 @@ import java.io.IOException;
  */
 public class Meep {
 
+    private Storage storage;
+    private Parser parser;
+    private Ui ui;
+    private ListTask taskList;
+
     public static void main(String[] args) {
-        Storage storage = new Storage();
-        Parser parser = new Parser();
-        Ui ui = new Ui();
-        ui.printLogo();
-        ListTask taskList = new ListTask();
+        new Meep().run();
+    }
 
+    /**
+     * Runs the program until termination.
+     */
+    public void run() {
+        start();
+        readAndExecuteCommand();
+        saveTaskToFile();
+        System.exit(0);
+    }
+
+
+    /**
+     * Sets up all objects needed, loads up the data from the data file and prints the logo.
+     */
+    private void start() {
         try {
-            taskList.addTaskList(storage.readTaskFile(storage.getPath()));
+            this.ui = new Ui();
+            this.parser = new Parser();
+            this.taskList = new ListTask();
+            this.storage = new Storage("/java/data.txt", taskList);
+            ui.printLogo();
         } catch (IOException | InvalidInputException e) {
-            ui.print(e.getMessage());
-            // exit if no data file
-            return;
+            ui.printMsg(e.getMessage());
         }
+    }
 
-
+    /**
+     * Reads user input, parse it to command and execute it until exit command.
+     */
+    private void readAndExecuteCommand() {
         boolean isExit = false;
         String userInput = "In";
         while (!isExit) {
@@ -38,19 +61,25 @@ public class Meep {
                 userInput = ui.getUserCommand();
                 Command command = parser.parseUserInput(userInput, taskList.getList());
                 String result = command.execute(taskList);
-                ui.print(result);
+                ui.printMsg(result);
                 isExit = ExitCommand.isExit(command);
             } catch (InvalidInputException e) {
-                ui.print(e.getMessage());
+                ui.printMsg(e.getMessage());
                 continue;
             }
         }
+    }
 
+    /**
+     * Saves task to storage file.
+     */
+    private void saveTaskToFile(){
         try {
             storage.saveTaskToFile(taskList.getList());
         } catch (FileNotFoundException e) {
-            ui.print(e.getMessage());
+            ui.printMsg(e.getMessage());
         }
-
     }
+
+
 }
