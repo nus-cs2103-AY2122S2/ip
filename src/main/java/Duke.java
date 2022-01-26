@@ -59,7 +59,7 @@ public class Duke {
             case "event":
                 event(argument); break;
             default:
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         return true;
     }
@@ -71,14 +71,14 @@ public class Duke {
 
     private static void delete(String argument) {
         int index = Integer.parseInt(argument) - 1;
-        ioOut.println("Noted. I've removed this task: ");
+        ioOut.println("Noted. I've removed this task:");
         ioOut.println(todoList.deleteItem(index));
         ioOut.println(todoList.listCount());
     }
 
     private static void mark(String argument) {
         int index = Integer.parseInt(argument) - 1;
-        ioOut.println("Nice! I've marked this task as done: ");
+        ioOut.println("Nice! I've marked this task as done:");
         ioOut.println(todoList.markItem(index));
     }
 
@@ -90,27 +90,37 @@ public class Duke {
 
     private static void todo(String argument) throws DukeException {
         if (argument == null)
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-        ioOut.println("Got it. I've added this task: ");
-        ioOut.println(todoList.addTodo(argument));
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+
+        String response = todoList.addTodo(argument);
+        ioOut.println("Got it. I've added this task:");
+        ioOut.println(response);
         ioOut.println(todoList.listCount());
     }
 
-    private static void deadline(String argument) {
+    private static void deadline(String argument) throws DukeException {
         String[] split = argument.split(" /by ", 2);
+        if (split.length != 2) {
+            throw new DukeException("Date is not provided!");
+        }
         String name = split[0];
         String date = split[1];
-        ioOut.println("Got it. I've added this task: ");
-        ioOut.println(todoList.addDeadline(name, date));
+        String response = todoList.addDeadline(name, date);
+        ioOut.println("Got it. I've added this task:");
+        ioOut.println(response);
         ioOut.println(todoList.listCount());
     }
 
-    private static void event(String argument) {
+    private static void event(String argument) throws DukeException {
         String[] split = argument.split(" /at ", 2);
+        if (split.length != 2) {
+            throw new DukeException("Date is not provided!");
+        }
         String name = split[0];
         String date = split[1];
-        ioOut.println("Got it. I've added this task: ");
-        ioOut.println(todoList.addEvent(name, date));
+        String response = todoList.addEvent(name, date);
+        ioOut.println("Got it. I've added this task:");
+        ioOut.println(response);
         ioOut.println(todoList.listCount());
     }
 

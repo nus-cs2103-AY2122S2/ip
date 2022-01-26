@@ -30,13 +30,13 @@ public class TodoList {
         return item.toString();
     }
 
-    public String addDeadline(String name, String date) {
+    public String addDeadline(String name, String date) throws DukeException {
         Task item = new DeadlineTask(name, date);
         items.add(item);
         return item.toString();
     }
 
-    public String addEvent(String name, String date) {
+    public String addEvent(String name, String date) throws DukeException {
         Task item = new EventTask(name, date);
         items.add(item);
         return item.toString();

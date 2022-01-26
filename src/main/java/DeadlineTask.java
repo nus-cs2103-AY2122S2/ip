@@ -1,15 +1,24 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class DeadlineTask extends Task {
 
-    private final String date;
+    private final LocalDate date;
+    private final DateTimeFormatter pattern = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
-    public DeadlineTask(String name, String date) {
+    public DeadlineTask(String name, String date) throws DukeException {
         super(name);
-        this.date = date;
+        try {
+            this.date = LocalDate.parse(date);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Invalid date!");
+        }
     }
 
     @Override
     public String toString() {
-        return String.format("[D][%s] %s %s",
-                getStatusIcon(), name, String.format("(by: %s)", this.date));
+        String dateOutput = String.format("(by: %s)", date.format(pattern));
+        return String.format("[D][%s] %s %s", getStatusIcon(), name, dateOutput);
     }
 }
