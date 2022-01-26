@@ -4,8 +4,12 @@ import connor.Connor;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 
+/**
+ * Stores and edits the task list.
+ */
 public class TaskList {
     private static final String INDENT = Connor.INDENT;
     private static final String LINE = Connor.LINE;
@@ -45,6 +49,11 @@ public class TaskList {
         return tasks;
     }
 
+    /**
+     * Prints the {@code Task}s on the console, with one {@code Task} in each line.
+     * If there are no {@code Task}s in the task list, the method will print that
+     * there are no {@code Task}s on the console.
+     */
     public static void viewTasks() {
         if (tasks.size() == 0) {
             print(EMPTY_TASK_LIST);
@@ -56,6 +65,19 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a {@code Task} into the task list with a description.
+     * If the {@code Task} is a {@code Deadline} or an {@code Event}, the method splits the
+     * description into two parts, the actual description and when the {@code Task} is due/occurs,
+     * with the delimiter "/by" or "/at" respectively.
+     * <p>
+     * The method also checks if the given occasion is of the valid {@code LocalDate} format, defaulting
+     * to a regular {@code String} otherwise.
+     *
+     * @param taskType Type of {@code Task}.
+     * @param desc Description of the task and also the occasion if the {@code Task} is a
+     *             {@code Deadline} or an {@code Event}.
+     */
     public static void addTask(TaskType taskType, String desc) {
         if (desc.isEmpty()) {
             print(ERROR_EMPTY_TASK_DESC);
@@ -134,6 +156,11 @@ public class TaskList {
         getNoOfTasks();
     }
 
+    /**
+     * Deletes a {@code Task} in the task list with the given index.
+     *
+     * @param index Index of the task to be deleted.
+     */
     public static void deleteTask(int index) {
         try {
             Task t = tasks.get(index);
@@ -145,11 +172,20 @@ public class TaskList {
         }
     }
 
+    /**
+     * Clears all {@code Task}s from the task list.
+     */
     public static void clearTasks() {
         tasks.clear();
         print(CLEAR_TASKS_CONFIRMED);
     }
 
+    /**
+     * Marks/Unmarks a {@code Task} in the task list with the given index.
+     *
+     * @param ts Status of the task to be applied.
+     * @param index Index of the task to be marked/unmarked.
+     */
     public static void markStatus(TaskStatus ts, int index) {
         switch (ts) {
         case MARK: {
@@ -187,6 +223,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns the number of tasks in the task list, and also prints out a message
+     * saying the number of tasks in the task list.
+     *
+     * @return Number of tasks in the task list.
+     */
     public static int getNoOfTasks() {
         String plurality = tasks.size() == 1 ? "" : "s";
         print("You have " + tasks.size() + " task" + plurality + ".");
