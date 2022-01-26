@@ -14,7 +14,6 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> storeList = new ArrayList<>();
         restoreList(storeList);
-
         while (sc.hasNextLine()) {
             String command = sc.nextLine();
             if (command.equals("bye")) {
@@ -36,13 +35,16 @@ public class Duke {
             } else if (command.startsWith("delete")) {
                 deleteTask(command, storeList);
             } else {
-                System.out.println("Master, I have all the knowledge in the world but I do not recognise that command," +
-                        " Please wish again");
+                unknownCommand();
                 continue;
             }
         }
         sc.close();
+    }
 
+    public static void unknownCommand() {
+        System.out.println("Master, I have all the knowledge in the world but I do not recognise that command," +
+                " Please wish again");
     }
 
     public static void deleteTask(String command, ArrayList<Task> storeList) {
@@ -148,7 +150,7 @@ public class Duke {
         System.out.println("*-**-**-**-**-**-**-**-**-**-****-**-****-**-****-**");
     }
 
-    public static void restoreList(ArrayList<Task> arrlist) throws IOException {
+    public static void restoreList(ArrayList<Task> storeList) throws IOException {
         String currentDirectory = Paths.get("Duke.java").toAbsolutePath().getParent().toString();
         String newFilePath = currentDirectory + "/duke.txt";
         // create the file if do not exist yet
@@ -160,7 +162,7 @@ public class Duke {
     }
 
     public static void saveList(ArrayList<Task> arrlist) throws IOException {
-
+        int sizeOfList = arrlist.size();
 
     }
 
