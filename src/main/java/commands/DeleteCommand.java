@@ -27,6 +27,7 @@ public class DeleteCommand extends Command {
 
 	@Override
 	public void execute(TaskList tasks, Ui ui, Storage storage) throws OutOfRangeException {
+		this.tasks = tasks;
 		if (deleteIndex >= tasks.size()) {
 			throw new OutOfRangeException();
 		}

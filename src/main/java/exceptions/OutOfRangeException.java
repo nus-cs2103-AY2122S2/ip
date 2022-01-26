@@ -6,7 +6,7 @@ public class OutOfRangeException extends DukeException {
 	}
 
 	@Override
-	public void printError() {
-		printFormatted(new String[]{"☹ OOPS!!! The value input is not in the list"});
+	public String getMessage() {
+		return "☹ OOPS!!! The value input is not in the list";
 	}
 }

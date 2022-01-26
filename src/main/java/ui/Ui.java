@@ -22,6 +22,10 @@ public class Ui {
 		printLine();
 	}
 
+	public void showError(String msg){
+		printFormatted(new String[]{msg});
+	}
+
 	public static void printFormatted(String[] msg) {
 		for (int i = 0; i < msg.length; i++) {
 			if (msg[i] != null) {

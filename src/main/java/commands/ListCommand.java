@@ -8,7 +8,7 @@ import ui.Ui;
 import java.util.ArrayList;
 
 public class ListCommand extends Command {
-	private static TaskList tasks;
+	private TaskList tasks;
 
 	public ListCommand() {}
 

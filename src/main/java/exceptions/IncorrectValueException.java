@@ -6,7 +6,7 @@ public class IncorrectValueException extends DukeException {
 	}
 
 	@Override
-	public void printError() {
-		printFormatted(new String[]{"☹ OOPS!!! The value input is incorrect"});
+	public String getMessage() {
+		return "☹ OOPS!!! The value input is incorrect";
 	}
 }
