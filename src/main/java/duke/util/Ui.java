@@ -140,6 +140,19 @@ public class Ui {
         System.out.println(TypicalString.LONG_LINE);
     }
 
+    public void showSearchResult(int numIndex, int storingListSize, Task task) {
+        if (numIndex == 1) {
+            System.out.println(TypicalString.LONG_LINE);
+            System.out.println(" Here are the matching tasks in your list:");
+        }
+
+        System.out.println(" " + numIndex + "." + task);
+
+        if (numIndex == (storingListSize - 1)) {
+            System.out.println(TypicalString.LONG_LINE);
+        }
+    }
+
     /**
      * Prints out the error message when loading the bot
      */

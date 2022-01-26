@@ -1,13 +1,6 @@
 package duke.util;
 
-import duke.command.AddCommand;
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DateCommand;
-import duke.command.DeleteCommand;
-import duke.command.ShowListCommand;
-import duke.command.UpdateMarkCommand;
-import duke.command.WrongSyntaxCommand;
+import duke.command.*;
 import duke.datetime.DateTable;
 
 /**
@@ -89,6 +82,8 @@ public class Parser {
             return new DateCommand(dateTable, description);
         case "bye":
             return new ByeCommand();
+        case "find":
+            return new FindCommand(description);
         default:
             return new WrongSyntaxCommand();
         }

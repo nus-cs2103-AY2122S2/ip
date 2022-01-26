@@ -88,4 +88,20 @@ public class TaskList {
         return storingList.remove(taskNumber - 1);
     }
 
+    public void findTasksByKeyWord(String keyWord) {
+        int numIndex = 0;
+        for (int i = 0; i < storingList.size(); i++) {
+            Task task = storingList.get(i);
+            if (isTaskHasKeyWord(task, keyWord)) {
+                numIndex += 1;
+                ui.showSearchResult(numIndex, storingList.size(), task);
+            }
+        }
+    }
+
+    private boolean isTaskHasKeyWord(Task task, String keyWord) {
+        String taskString = task.toString();
+        return taskString.contains(keyWord);
+    }
+
 }

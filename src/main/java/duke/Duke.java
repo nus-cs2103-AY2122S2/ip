@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class Duke {
 
     private final static String DIRECTORY = "data";
-    private final static String FILE_NAME = "duke.Duke.txt";
+    private final static String FILE_NAME = "Duke.txt";
     private final static String PATH = DIRECTORY + "/" + FILE_NAME;
 
     private final BotStoring botStorage;
