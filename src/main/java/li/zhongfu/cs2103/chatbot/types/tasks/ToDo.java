@@ -1,4 +1,4 @@
-package li.zhongfu.cs2103.chatbot.types;
+package li.zhongfu.cs2103.chatbot.types.tasks;
 
 public class ToDo extends Task {
     public ToDo(String name) {

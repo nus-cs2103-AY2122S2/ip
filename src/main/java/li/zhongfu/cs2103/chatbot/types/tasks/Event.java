@@ -1,4 +1,4 @@
-package li.zhongfu.cs2103.chatbot.types;
+package li.zhongfu.cs2103.chatbot.types.tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

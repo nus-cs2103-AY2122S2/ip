@@ -15,12 +15,12 @@ import java.util.List;
 import java.util.Map;
 
 import li.zhongfu.cs2103.chatbot.exceptions.StorageException;
-import li.zhongfu.cs2103.chatbot.types.Deadline;
-import li.zhongfu.cs2103.chatbot.types.Event;
 import li.zhongfu.cs2103.chatbot.types.Storage;
-import li.zhongfu.cs2103.chatbot.types.Task;
 import li.zhongfu.cs2103.chatbot.types.TaskList;
-import li.zhongfu.cs2103.chatbot.types.ToDo;
+import li.zhongfu.cs2103.chatbot.types.tasks.Deadline;
+import li.zhongfu.cs2103.chatbot.types.tasks.Event;
+import li.zhongfu.cs2103.chatbot.types.tasks.Task;
+import li.zhongfu.cs2103.chatbot.types.tasks.ToDo;
 
 public class Duke {
     private static final String HLINE = "____________________________________________________________";

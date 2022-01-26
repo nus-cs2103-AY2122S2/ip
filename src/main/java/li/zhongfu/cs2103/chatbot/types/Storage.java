@@ -79,7 +79,7 @@ class TaskFilter {
 
     private static final String[] ALLOWED_PACKAGES = {
         "java.time",
-        "li.zhongfu.cs2103.chatbot.types"
+        "li.zhongfu.cs2103.chatbot.types.tasks"
     };
 
     static Status checkInput(FilterInfo filterInfo) {
