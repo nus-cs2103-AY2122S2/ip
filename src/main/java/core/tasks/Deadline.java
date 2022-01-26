@@ -4,11 +4,23 @@ import core.exceptions.NoDeadlineMentionedException;
 import core.exceptions.NoDescriptionGivenException;
 import utilities.OutputFormatter;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends Task {
+    protected LocalDate byDate;
+    protected LocalTime byTime;
     protected String by;
 
     private Deadline(String description, String by) {
         super(description);
+        String[] dateAndTime = by.split(" ");
+        this.byDate = LocalDate.parse(dateAndTime[0]);
+        if (dateAndTime.length > 1) {
+            this.byTime = LocalTime.parse(dateAndTime[1]);
+        }
         this.by = by;
     }
 
@@ -22,7 +34,7 @@ public class Deadline extends Task {
         return this.by;
     }
 
-    public static Deadline getInstance(String description, String by) throws NoDeadlineMentionedException, NoDescriptionGivenException {
+    public static Deadline getInstance(String description, String by) throws NoDeadlineMentionedException, NoDescriptionGivenException, DateTimeParseException {
         if (description.isBlank() || description.isBlank()) {
             throw new NoDescriptionGivenException();
         }
@@ -36,7 +48,12 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         OutputFormatter outputFormatter = OutputFormatter.getInstance();
-        outputFormatter.appendAll("[D]", super.toString(), " (by: ", this.by, ")");
+        outputFormatter.appendAll("[D]", super.toString(), " (by: ", byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        if (byTime != null) {
+            outputFormatter.appendAll(" ", byTime.format(DateTimeFormatter.ofPattern("Ka")), ")");
+            return outputFormatter.getFormattedOutput();
+        }
+        outputFormatter.append(")");
         return outputFormatter.getFormattedOutput();
     }
 }
