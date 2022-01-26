@@ -27,19 +27,24 @@ public class ChatBot {
     this.cmdLine = new Ui();
   }
   
-  public void run() throws DukeException {
+  public void run() {
     
-      store.initaliseStorage();
+      store.initialiseStorage();
+      this.taskList = store.loadFromDisk();
       cmdLine.callResponse(commandHandler.start());
       while(isRunning) {
-        String stringCmd = cmdLine.getNextLine();
-        Command cmd = commandHandler.getCommand(stringCmd);
-        cmd.getReasources(store, taskList);
-        if (cmd instanceof ByeCommand) {
-          isRunning = false;
+        try {
+          String stringCmd = cmdLine.getNextLine();
+          Command cmd = commandHandler.getCommand(stringCmd);
+          cmd.getReasources(store, taskList);
+          if (cmd instanceof ByeCommand) {
+            isRunning = false;
+          }
+          Response feedback = cmd.execute();
+          cmdLine.callResponse(feedback);
+        } catch (DukeException e) {
+          e.callback();
         }
-        Response feedback = cmd.execute();
-        cmdLine.callResponse(feedback);
       }
 
   }

@@ -15,6 +15,7 @@ public class MarkCommand extends Command{
         String[] stringCmdArr = stringCmd.split(" ");
         int index = Integer.parseInt(stringCmdArr[1]);
         this.taskList.markTask(index - 1);
+        this.store.loadToDisk(this.taskList);
         return new MarkResponse(this.taskList.getTask(index - 1));
     }
 }

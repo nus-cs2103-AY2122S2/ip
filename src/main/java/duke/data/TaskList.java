@@ -35,7 +35,7 @@ public class TaskList {
         taskLists.get(index).setMark(true);
     }
 
-    public void unMarkTask(int index) {
+    public void unmarkTask(int index) {
         taskLists.get(index).setMark(false);
     }
     

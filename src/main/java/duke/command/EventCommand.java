@@ -16,7 +16,7 @@ public class EventCommand extends  Command{
     public Response execute() throws DukeException {
         String[] stringCmdArr = this.stringCmd.split(" ");
         String[] ans = stringCmd.split(" /at ");
-        Task tempTask = new Event(ans[0].replace("deadline ", ""), ans[1]);
+        Task tempTask = new Event(ans[0].replace("event ", ""), ans[1]);
         this.taskList.addTask(tempTask);
         store.loadToDisk(this.taskList);
         return new AddTaskResponse(tempTask, this.taskList);
