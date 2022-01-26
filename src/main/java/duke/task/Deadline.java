@@ -13,23 +13,23 @@ public class Deadline extends Task {
      * Instantiate duke.task.Deadline object with date string
      *
      * @param name name for duke.task.Deadline
-     * @param deadline date of duke.task.Deadline (in d/M/yyyy format)
+     * @param date date of duke.task.Deadline (in d/M/yyyy format)
      * @throws DateTimeParseException date format error
      */
-    public Deadline(String name, String deadline) throws DateTimeParseException {
-        this(name, LocalDate.parse(deadline, CommandParser.DATE_FORMAT));
+    public Deadline(String name, String date) throws DateTimeParseException {
+        this(name, LocalDate.parse(date, CommandParser.DATE_FORMAT));
     }
 
     /**
      * Instantiate duke.task.Deadline object with date string, and status
      *
      * @param name name for duke.task.Deadline
-     * @param deadline date of duke.task.Deadline (in d/M/yyyy format)
+     * @param date date of duke.task.Deadline (in d/M/yyyy format)
      * @param done status of completion
      * @throws DateTimeParseException date format error
      */
-    public Deadline(String name, String deadline, Boolean done) throws DateTimeParseException {
-        this(name, LocalDate.parse(deadline, CommandParser.DATE_FORMAT), done);
+    public Deadline(String name, String date, Boolean done) throws DateTimeParseException {
+        this(name, LocalDate.parse(date, CommandParser.DATE_FORMAT), done);
     }
 
     /**
