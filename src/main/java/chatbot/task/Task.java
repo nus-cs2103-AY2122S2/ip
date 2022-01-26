@@ -9,10 +9,6 @@ public class Task {
         this.desc = desc;
     }
 
-    public boolean isDone() {
-        return isDone;
-    }
-
     public void setDone(boolean done) {
         this.isDone = done;
     }
