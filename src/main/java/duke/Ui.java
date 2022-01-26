@@ -10,7 +10,7 @@ public class Ui {
     }
 
     public void greet() {
-        String greeting = encloseWithin("Hello! I'm Duke\nWhat can I do for you?\n");
+        String greeting = encloseWithin("Hello! I'm duke.Duke\nWhat can I do for you?\n");
         System.out.println(greeting);
     }
 

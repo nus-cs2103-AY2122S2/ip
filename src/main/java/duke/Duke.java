@@ -1,4 +1,4 @@
-import duke.*;
+package duke;
 
 public class Duke {
     private final Ui ui;
@@ -22,11 +22,6 @@ public class Duke {
         }
         storage.writeToStorage(this.taskList);
         ui.sayGoodbye();
-    }
-
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
     }
 }
 
