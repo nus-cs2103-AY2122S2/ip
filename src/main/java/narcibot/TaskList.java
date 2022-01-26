@@ -10,7 +10,7 @@ public class TaskList {
     public TaskList(BufferedReader bufferedReader) throws IOException {
         list = new ArrayList<>();
         String line = bufferedReader.readLine();
-        while(line != null) {
+        while (line != null) {
             String[] tokens = line.split("\\|", 4);
             boolean done = tokens[1].equals("1");
             switch(tokens[0]) {
@@ -29,7 +29,7 @@ public class TaskList {
     }
 
     public void store(FileWriter fileWriter) throws IOException {
-        for(Task task: list) {
+        for (Task task: list) {
             fileWriter.write(task.save() + "\n");
         }
     }

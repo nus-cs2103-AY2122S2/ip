@@ -14,7 +14,7 @@ public class Storage {
     }
 
     public FileWriter store() throws IOException {
-        if(!path.exists()) {
+        if (!path.exists()) {
             path.mkdir();
         }
         return new FileWriter(file);
