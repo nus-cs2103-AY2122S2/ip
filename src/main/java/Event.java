@@ -22,6 +22,6 @@ public class Event extends Task {
 
     @Override
     public String getCommandString() {
-        return String.format("event %s /at %s", description, DateTimeParser.toString(this.date));
+        return String.format("event %s /at %s", description, DateTimeParser.toCommandString(this.date));
     }
 }

@@ -22,6 +22,6 @@ public class Deadline extends Task {
 
     @Override
     public String getCommandString() {
-        return String.format("deadline %s /by %s", description, DateTimeParser.toString(this.date));
+        return String.format("deadline %s /by %s", description, DateTimeParser.toCommandString(this.date));
     }
 }

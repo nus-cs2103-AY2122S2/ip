@@ -24,7 +24,7 @@ Please try again :(
 ============================================================
 ============================================================
 I have added the following task into list: 
-	[D][ ] return book (by: 06/06/2022 00:00:00)
+	[D][ ] return book (by: Jun 06 2022 00:00)
 now you have 2 tasks in the list.
 ============================================================
 ============================================================
@@ -34,7 +34,7 @@ Please try again :(
 ============================================================
 ============================================================
 I have added the following task into list: 
-	[E][ ] project meeting (at: 06/08/2022 14:00:00)
+	[E][ ] project meeting (at: Aug 06 2022 14:00)
 now you have 3 tasks in the list.
 ============================================================
 ============================================================
@@ -56,8 +56,8 @@ now you have 5 tasks in the list.
 ============================================================
 Currently, you have the following tasks:
 	1. [T][X] read book
-	2. [D][ ] return book (by: 06/06/2022 00:00:00)
-	3. [E][ ] project meeting (at: 06/08/2022 14:00:00)
+	2. [D][ ] return book (by: Jun 06 2022 00:00)
+	3. [E][ ] project meeting (at: Aug 06 2022 14:00)
 	4. [T][X] join sports club
 	5. [T][ ] borrow book
 ============================================================
@@ -68,7 +68,7 @@ Please try again :(
 ============================================================
 ============================================================
 I have added the following task into list: 
-	[D][ ] return book (by: 30/01/2022 14:00:00)
+	[D][ ] return book (by: Jan 30 2022 14:00)
 now you have 6 tasks in the list.
 ============================================================
 ============================================================
@@ -78,7 +78,7 @@ Please try again :(
 ============================================================
 ============================================================
 I have added the following task into list: 
-	[E][ ] project meeting (at: 31/01/2022 16:00:00)
+	[E][ ] project meeting (at: Jan 31 2022 16:00)
 now you have 7 tasks in the list.
 ============================================================
 ============================================================
@@ -91,12 +91,12 @@ I've forced this task as not done yet...
 ============================================================
 Currently, you have the following tasks:
 	1. [T][ ] read book
-	2. [D][X] return book (by: 06/06/2022 00:00:00)
-	3. [E][ ] project meeting (at: 06/08/2022 14:00:00)
+	2. [D][X] return book (by: Jun 06 2022 00:00)
+	3. [E][ ] project meeting (at: Aug 06 2022 14:00)
 	4. [T][X] join sports club
 	5. [T][ ] borrow book
-	6. [D][ ] return book (by: 30/01/2022 14:00:00)
-	7. [E][ ] project meeting (at: 31/01/2022 16:00:00)
+	6. [D][ ] return book (by: Jan 30 2022 14:00)
+	7. [E][ ] project meeting (at: Jan 31 2022 16:00)
 ============================================================
 ============================================================
 Oops, the force does not support this action.
@@ -153,12 +153,12 @@ Forcing it out... Success! I've removed the following task:
 ============================================================
 ============================================================
 Currently, you have the following tasks:
-	1. [D][X] return book (by: 06/06/2022 00:00:00)
-	2. [E][ ] project meeting (at: 06/08/2022 14:00:00)
+	1. [D][X] return book (by: Jun 06 2022 00:00)
+	2. [E][ ] project meeting (at: Aug 06 2022 14:00)
 	3. [T][X] join sports club
 	4. [T][ ] borrow book
-	5. [D][ ] return book (by: 30/01/2022 14:00:00)
-	6. [E][ ] project meeting (at: 31/01/2022 16:00:00)
+	5. [D][ ] return book (by: Jan 30 2022 14:00)
+	6. [E][ ] project meeting (at: Jan 31 2022 16:00)
 ============================================================
 ============================================================
 The force cannot find the task.
@@ -174,12 +174,12 @@ Please try again :(
 ============================================================
 ============================================================
 Currently, you have the following tasks:
-	1. [D][X] return book (by: 06/06/2022 00:00:00)
-	2. [E][ ] project meeting (at: 06/08/2022 14:00:00)
+	1. [D][X] return book (by: Jun 06 2022 00:00)
+	2. [E][ ] project meeting (at: Aug 06 2022 14:00)
 	3. [T][X] join sports club
 	4. [T][ ] borrow book
-	5. [D][ ] return book (by: 30/01/2022 14:00:00)
-	6. [E][ ] project meeting (at: 31/01/2022 16:00:00)
+	5. [D][ ] return book (by: Jan 30 2022 14:00)
+	6. [E][ ] project meeting (at: Jan 31 2022 16:00)
 ============================================================
 ============================================================
 I'll take my leave... Do you know who is my father?
@@ -197,12 +197,12 @@ How can I help you?
 ============================================================
 ============================================================
 Currently, you have the following tasks:
-	1. [D][X] return book (by: 06/06/2022 00:00:00)
-	2. [E][ ] project meeting (at: 06/08/2022 14:00:00)
+	1. [D][X] return book (by: Jun 06 2022 00:00)
+	2. [E][ ] project meeting (at: Aug 06 2022 14:00)
 	3. [T][X] join sports club
 	4. [T][ ] borrow book
-	5. [D][ ] return book (by: 30/01/2022 14:00:00)
-	6. [E][ ] project meeting (at: 31/01/2022 16:00:00)
+	5. [D][ ] return book (by: Jan 30 2022 14:00)
+	6. [E][ ] project meeting (at: Jan 31 2022 16:00)
 ============================================================
 ============================================================
 I'll take my leave... Do you know who is my father?
