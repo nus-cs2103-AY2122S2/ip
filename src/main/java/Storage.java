@@ -1,14 +1,11 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.StringTokenizer;
+import java.util.function.Function;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Storage {
@@ -49,33 +46,17 @@ public class Storage {
     }
 
     /* Load task list from file saved */
-    public void loadFromSave(ArrayList<Task> taskList) throws DukeException {
+    public <T extends Loading> void loadFromSave(ArrayList<T> taskList,
+            Function<String, T> factory)
+            throws DukeException {
         try {
             // read file
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
-                StringTokenizer st = new StringTokenizer(scanner.nextLine(), "|");
+                String nextLine = scanner.nextLine();
+                T newTask = factory.apply(nextLine); // create the proper obj type
 
-                String type = st.nextToken();
-                Task newTask = null;
-                if (type.equals("T")) {
-                    newTask = new Todo(Boolean.parseBoolean(st.nextToken()), st.nextToken());
-                } else if (type.equals("E")) {
-                    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
-                    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
-
-                    newTask = new Event(Boolean.parseBoolean(st.nextToken()), st.nextToken(),
-                            LocalDate.parse(st.nextToken(), dateFormatter),
-                            LocalTime.parse(st.nextToken(), timeFormatter));
-                } else if (type.equals("D")) {
-                    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
-                    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
-
-                    newTask = new Deadline(Boolean.parseBoolean(st.nextToken()), st.nextToken(),
-                            LocalDate.parse(st.nextToken(), dateFormatter),
-                            LocalTime.parse(st.nextToken(), timeFormatter));
-                }
-
+                newTask.extractFileData(nextLine);
                 taskList.add(newTask);
             }
 

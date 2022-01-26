@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+import java.util.function.Function;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -28,9 +29,23 @@ public class Duke {
         this.taskList = new TaskList();
         this.isRunning = true;
 
+        Function<String, Task> taskFactory = (String info) -> {
+            Task newTask = null;
+            char type = info.charAt(0);
+            if (type == 'T') {
+                newTask = new Todo();
+            } else if (type == 'E') {
+                newTask = new Event();
+            } else if (type == 'D') {
+                newTask = new Deadline();
+            }
+
+            return newTask;
+        };
+
         try {
             storage = new Storage("data.txt", "data/");
-            storage.loadFromSave(taskList.getTaskList());
+            storage.loadFromSave(taskList.getTaskList(), taskFactory);
         } catch (DukeException exception) {
             // issues loading from storage
         }

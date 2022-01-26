@@ -1,3 +1,5 @@
+import java.util.StringTokenizer;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -27,6 +29,20 @@ public class Event extends Task {
                 + "|"
                 + this.eventTime.format(DateTimeFormatter.ofPattern("hh:mm a"))
                 + "\n";
+    }
+
+    @Override
+    public void extractFileData(String data) {
+        StringTokenizer st = new StringTokenizer(data, "|");
+
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+
+        st.nextToken(); // remove the type symbol
+        isDone = Boolean.parseBoolean(st.nextToken());
+        taskDescription = st.nextToken();
+        eventDate = LocalDate.parse(st.nextToken(), dateFormatter);
+        eventTime = LocalTime.parse(st.nextToken(), timeFormatter);
     }
 
     @Override

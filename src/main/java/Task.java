@@ -1,4 +1,4 @@
-public abstract class Task implements Saving {
+public abstract class Task implements Saving, Loading {
     protected boolean isDone;
     protected String taskDescription;
 
