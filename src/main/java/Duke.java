@@ -1,17 +1,31 @@
+import javax.swing.*;
+import java.io.IOException;
 import java.util.*;
 
 public class Duke {
-    public static void main(String[] args) throws DukeException {
+    private Storage storage;
+    private TaskList tasks;
+
+    public Duke(String filePath) {
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (IOException e) {
+            System.out.println("No path exist");
+            tasks = new TaskList();
+        }
+    }
+
+    public void run() throws IOException {
         String lines = "____________________________________________________________";
         String endline = "____________________________________________________________\n";
         System.out.println("Hello!!! I am Duke, a new born chatbot\n");
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> allTasks = new ArrayList<>();
         System.out.println("How may I serve you?");
         while (true) {
-  
-                String input = sc.nextLine();
-                String[] parts = input.split(" ");
+            storage.saveFile(tasks);
+            String input = sc.nextLine();
+            String[] parts = input.split(" ");
             try {
 
                 if (input.equals("bye")) {
@@ -24,18 +38,15 @@ public class Duke {
                 if (input.equals("list")) {
                     System.out.println(lines);
                     System.out.println("Here are all your tasks:");
-                    for (int i = 0; i < allTasks.size(); i++) {
-                        System.out.println((i + 1) + "." + allTasks.get(i).toString());
+                    for (int i = 0; i < tasks.size(); i++) {
+                        System.out.println((i + 1) + "." + tasks.get(i).toString());
                     }
-//                for(Task t :allTasks) {
-//                    System.out.println("1. " + t.getDescription());
-//                }
                     System.out.println(lines + "\n");
                     continue;
                 }
                 if (parts[0].equals("mark")) {
                     try {
-                        Task markTask = allTasks.get(Integer.parseInt(parts[1]) - 1);
+                        Task markTask = tasks.get(Integer.parseInt(parts[1]) - 1);
                         System.out.println(lines);
                         if (markTask.isDone == true) {
                             System.out.println("You have already done this task!");
@@ -53,7 +64,7 @@ public class Duke {
                 }
                 if (parts[0].equals("unmark")) {
                     try {
-                        Task markTask = allTasks.get(Integer.parseInt(parts[1]) - 1);
+                        Task markTask = tasks.get(Integer.parseInt(parts[1]) - 1);
                         System.out.println(lines);
                         if (markTask.isDone == false) {
                             System.out.println("This task is already in undone status");
@@ -70,17 +81,16 @@ public class Duke {
                     }
                 }
                 if (parts[0].equals("todo")) {
-//                String todoDesription = Arrays.toString(Arrays.copyOfRange(parts,1,parts.length));
                     if (parts.length == 1) {
                         throw new TodoException("☹ OOPS!!! The description of a todo cannot be empty.(please insert again)");
                     }
                     String todoDesription = input.substring(5);
                     Task todo = new Todo(todoDesription);
-                    allTasks.add(todo);
+                    tasks.add(todo);
                     System.out.println(lines);
                     System.out.println("Got it, I have added a TODO task:");
                     System.out.println(todo.toString());
-                    System.out.println("Now you have " + allTasks.size() + " tasks in the list.");
+                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                     System.out.println(endline);
                     continue;
                 }
@@ -95,11 +105,11 @@ public class Duke {
                     String deadlineDesription = split1[0].substring(9);
                     String deadlineDate = split1[1];
                     Task deadline = new Deadline(deadlineDesription, deadlineDate);
-                    allTasks.add(deadline);
+                    tasks.add(deadline);
                     System.out.println(lines);
                     System.out.println("Got it, I have added a DEADLINE task:");
                     System.out.println(deadline.toString());
-                    System.out.println("Now you have " + allTasks.size() + " tasks in the list.");
+                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                     System.out.println(endline);
                     continue;
                 }
@@ -114,11 +124,11 @@ public class Duke {
                     String eventDesription = split1[0].substring(6);
                     String eventDate = split1[1];
                     Task event = new Event(eventDesription, eventDate);
-                    allTasks.add(event);
+                    tasks.add(event);
                     System.out.println(lines);
                     System.out.println("Got it, I have added an EVENT task:");
                     System.out.println(event.toString());
-                    System.out.println("Now you have " + allTasks.size() + " tasks in the list.");
+                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                     System.out.println(endline);
                     continue;
                 }
@@ -132,19 +142,17 @@ public class Duke {
                             throw new NumberFormatException();
                         }
                         int index = Integer.parseInt(parts[1]) - 1;
-                        Task taskToBeDelete = allTasks.get(index);
+                        Task taskToBeDelete = tasks.get(index);
                         System.out.println(lines);
                         System.out.println("Okay, I have removed this task:");
                         System.out.println(taskToBeDelete);
-                        allTasks.remove(index);
-                        System.out.println("Now you have " + allTasks.size() + " tasks in the list.");
+                        tasks.remove(index);
+                        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                         System.out.println(endline);
                         continue;
                     } catch (IndexOutOfBoundsException e) {
-                        throw new DeleteException("This task does not exist, there are " + allTasks.size() + " tasks now");
+                        throw new DeleteException("This task does not exist, there are " + tasks.size() + " tasks now");
                     }
-//                  catch (ArrayIndexOutOfBoundsException e) {
-//                        throw new DeleteException("You need to delete like this: delete <task number> , do not put extra wording");
                     catch (NumberFormatException e) {
                         throw new DeleteException("format must be: delete <task number> , other format is not acceptable");
                     }
@@ -153,12 +161,18 @@ public class Duke {
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
-//            System.out.println(lines);
-//            allTasks.add(new Task(input));
-//            System.out.println("added: " + input);
-//            System.out.println(endline);
 
         }
 
+    }
+
+    public static void main(String[] args) throws DukeException {
+
+
+        try {
+            new Duke("data/tasks.txt").run();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
