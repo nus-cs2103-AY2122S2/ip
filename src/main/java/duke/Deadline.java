@@ -1,14 +1,13 @@
-package Duke;
+package duke;
 
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
-
 /**
  * This class is a subclass of Task.
  * @author Sim Jun Heng
  * @version CS2103T AY21/22 Sem 2
  */
-public class Event extends Task {
+public class Deadline extends Task {
 
   private LocalDate date;
 
@@ -16,16 +15,17 @@ public class Event extends Task {
    * Method Constructor
    *
    * @param desc the task description
-   * @param date of the event
+   * @param date deadline of the task
+   * @param done the status of the task
    */
-  public Event(String desc, LocalDate date, boolean done) {
+  public Deadline(String desc, LocalDate date, boolean done) {
     super(desc, done);
     this.date = date;
   }
 
   @Override
   public String toString() {
-    String str = "[E]";
+    String str = "[D]";
     // Convert Current Date Format to MMM dd yyyy
     String customPattern = "MMM dd yyyy";
     DateTimeFormatter customFormat = DateTimeFormatter.ofPattern(customPattern);
@@ -41,10 +41,9 @@ public class Event extends Task {
   @Override
   public String changeFormat() {
     if (super.done) {
-      return "E,1," + super.desc + "," + this.date;
+      return "D,1," + super.desc + "," + this.date;
     } else {
-      return "E,0," + super.desc + "," + this.date;
+      return "D,0," + super.desc + "," + this.date;
     }
   }
-
 }

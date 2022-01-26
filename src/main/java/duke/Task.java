@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 /**
  * This class specifies all the methods and variables of a task.

@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 /**
  * This class is a subclass of Task.
