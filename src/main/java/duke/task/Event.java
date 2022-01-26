@@ -1,7 +1,11 @@
 package duke.task;
 
+import static duke.constant.Message.CLOSE_BRACKET;
+import static duke.constant.Message.OPEN_BRACKET;
+import static duke.constant.TaskConstant.PREFIX_EVENT;
+
 /**
- * A class represent for an event.
+ * A class represents for an event.
  */
 public class Event extends Task{
     protected String at;
@@ -32,6 +36,6 @@ public class Event extends Task{
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return OPEN_BRACKET + PREFIX_EVENT + CLOSE_BRACKET + super.toString() + " (at: " + at + ")";
     }
 }

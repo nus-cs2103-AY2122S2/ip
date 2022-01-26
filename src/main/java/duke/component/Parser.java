@@ -2,8 +2,6 @@ package duke.component;
 
 import java.time.DateTimeException;
 
-import duke.exception.DukeException;
-
 import duke.command.Command;
 import duke.command.ExitCommand;
 import duke.command.ListCommand;
@@ -31,6 +29,7 @@ import static duke.constant.CommandConstant.COMMAND_MARK;
 import static duke.constant.CommandConstant.COMMAND_TODO;
 import static duke.constant.CommandConstant.COMMAND_UNMARK;
 
+import duke.exception.DukeException;
 import duke.exception.UnknownCommandException;
 import duke.exception.EmptyTaskException;
 

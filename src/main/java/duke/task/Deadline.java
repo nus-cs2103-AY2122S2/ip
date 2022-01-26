@@ -4,8 +4,12 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import static duke.constant.Message.CLOSE_BRACKET;
+import static duke.constant.Message.OPEN_BRACKET;
+import static duke.constant.TaskConstant.PREFIX_DEADLINE;
+
 /**
- * A class represent for a deadline.
+ * A class represents for a deadline.
  */
 public class Deadline extends Task {
     protected LocalDate by;
@@ -37,6 +41,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        return OPEN_BRACKET + PREFIX_DEADLINE + CLOSE_BRACKET + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }

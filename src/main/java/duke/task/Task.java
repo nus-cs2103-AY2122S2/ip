@@ -1,7 +1,11 @@
 package duke.task;
 
+import static duke.constant.Message.CLOSE_BRACKET;
+import static duke.constant.Message.OPEN_BRACKET;
+import static duke.constant.Message.SPACE;
+
 /**
- * A basic class represent for a task.
+ * A basic class represents for a task.
  */
 public class Task {
     protected String description;
@@ -52,6 +56,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.getDescription();
+        return OPEN_BRACKET + this.getStatusIcon() + CLOSE_BRACKET + SPACE + this.getDescription();
     }
 }

@@ -1,7 +1,11 @@
 package duke.task;
 
+import static duke.constant.Message.CLOSE_BRACKET;
+import static duke.constant.Message.OPEN_BRACKET;
+import static duke.constant.TaskConstant.PREFIX_TODO;
+
 /**
- * A class represent for a todo.
+ * A class represents for a todo.
  */
 public class Todo extends Task {
     /**
@@ -20,6 +24,6 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return OPEN_BRACKET + PREFIX_TODO + CLOSE_BRACKET + super.toString();
     }
 }
