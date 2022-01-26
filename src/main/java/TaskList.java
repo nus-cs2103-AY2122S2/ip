@@ -9,6 +9,11 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
+    public TaskList(Ui ui) {
+        tasks = new ArrayList<>();
+        this.ui = ui;
+    }
+
     public TaskList(ArrayList<Task> tasks, Ui ui) {
         this.tasks = tasks;
         this.ui = ui;
@@ -35,9 +40,9 @@ public class TaskList {
 
     public void unmarkTask(int index) {
         if (tasks.size() == 0) {
-            ui.printDivider();
+            Ui.printDivider();
             System.out.println("    No tasks are in the list right now!");
-            ui.printDivider();
+            Ui.printDivider();
         } else if (index < 1 || index > tasks.size()) {
             try {
                 throw new DukeInvalidArgumentException("index is not in the list");
@@ -56,9 +61,9 @@ public class TaskList {
 
     public void deleteTask(int index) {
         if (tasks.size() == 0) {
-            ui.printDivider();
+            Ui.printDivider();
             System.out.println("    No tasks are in the list right now!");
-            ui.printDivider();
+            Ui.printDivider();
         } else if (index < 1 || index > tasks.size()) {
             try {
                 throw new DukeInvalidArgumentException("index is not in the list");
@@ -66,8 +71,8 @@ public class TaskList {
                 System.out.println(e.toString());
             }
         } else {
-            ui.showUiForDelete(tasks.get(index - 1), tasks.size());
             tasks.remove(index - 1);
+            ui.showUiForDelete(tasks.get(index - 1), tasks.size());
         }
     }
 

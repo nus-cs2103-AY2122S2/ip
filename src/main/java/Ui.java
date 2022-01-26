@@ -11,7 +11,7 @@ public class Ui {
 
     }
 
-    public void printEndMessage() {
+    public void showUiForBye() {
         printDivider();
         System.out.println("    Bye. Hope to see you again soon!");
         printDivider();
@@ -32,8 +32,6 @@ public class Ui {
         }
         printDivider();
     }
-
-
 
     public void showUiForAdd(Task taskObj, int listLength) {
         printDivider();

@@ -1,5 +1,4 @@
 delete 1
-delete
 deadline hello \by 2024-12-10 1600
 event zeros \at 2024-10-12 1800
 todo haiya

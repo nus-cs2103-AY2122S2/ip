@@ -21,8 +21,8 @@ public class Duke {
         try {
             this.tasks = new TaskList(storage.load(), ui);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            this.tasks = new TaskList();
+            System.out.println("    File not found!");
+            this.tasks = new TaskList(ui);
         }
     }
 

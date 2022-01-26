@@ -35,21 +35,12 @@ public class Parser {
                     throw new DukeMissingArgumentException("task description");
                 }
                 String content = "";
-                int indexOfBy = -1;
-                for (int k = 1; k < inputArray.length; k++) {
-                    if (inputArray[k].equals("\\by")) {
-                        indexOfBy = k;
-                        break;
-                    }
-                    content += inputArray[k];
-                }
+                int indexOfBy = inputCommand.lastIndexOf("\\by ");
                 if (indexOfBy == -1) {
                     throw new DukeMissingArgumentException("\\by deadlineTime");
                 } else {
-                    String by = "";
-                    for (int k = 3; k < inputArray.length; k++) {
-                        by += inputArray[k];
-                    }
+                    String by = inputCommand.substring(indexOfBy + 4);
+                    content = inputCommand.substring(9, indexOfBy - 1);
                     LocalDateTime date = null;
                     try {
                         date = LocalDateTime.parse(by, Duke.formatter);
@@ -65,21 +56,12 @@ public class Parser {
                     throw new DukeMissingArgumentException("task description");
                 }
                 String content = "";
-                int indexOfAt = -1;
-                for (int k = 1; k < inputArray.length; k++) {
-                    if (inputArray[k].equals("\\at")) {
-                        indexOfAt = k;
-                        break;
-                    }
-                    content += inputArray[k];
-                }
+                int indexOfAt = inputCommand.lastIndexOf("\\at ");
                 if (indexOfAt == -1) {
                     throw new DukeMissingArgumentException("\\at eventTime");
                 } else {
-                    String by = "";
-                    for (int k = 3; k < inputArray.length; k++) {
-                        by += inputArray[k];
-                    }
+                    String by = inputCommand.substring(indexOfAt + 4);
+                    content = inputCommand.substring(9, indexOfAt - 1);
                     LocalDateTime date = null;
                     try {
                         date = LocalDateTime.parse(by, Duke.formatter);
