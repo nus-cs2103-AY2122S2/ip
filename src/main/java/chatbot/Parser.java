@@ -9,18 +9,33 @@ import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
-
+/**
+* Parser class for the bot, to handle incoming inputs from the user.
+*/
 public class Parser {
     private static final String UNRECOGNIZED_COMMAND = "Sorry Sir, I do not understand that command.";
     private static final String NOT_VALID_NUMBER = "Please enter a valid number Sir.";
     private static final String COMMAND_REQUIRES_NUMBER = "Sorry Sir, this command requires a number.";
 
-    // farewell message
+    /**
+    * Displays the farewell message to the user.
+    */
     public static void displayFarewell() {
         String byeMessage = "Farewell Sir. May you have a wonderful day.";
         Ui.displayMessage(byeMessage);
     }
     
+    /**
+    * Returns the boolean of whether the bot should expect more inputs from the user,
+    * after processing the inputText String from the user.
+    * 
+    * @param    inputText    input of the user
+    * @param    taskList     TaskList of the user
+    * @param    storage      Storage of the user denoting the location of the save file
+    * @return                the boolean to denote whether there are more future inputs
+    * @see      TaskList 
+    * @see      Storage
+    */
     public static boolean parseText(String inputText, TaskList taskList, Storage storage) { // returns true if bot should continue parsing text
         String[] inputStringArray = inputText.split(" ");
         try {
@@ -74,7 +89,17 @@ public class Parser {
         }
     }
 
-    // creates the specified Task type given an input string
+    /**
+    * Returns the Task created from the user inputText.
+    * The type parameter determines which type of Task is created.
+    * Use "todo", "deadline", "event" to create the respective Task objects.
+    * 
+    * @param    type         the type of Task to be created
+    * @param    inputText    input of the user
+    * @return                the created Task
+    * @throws   DukeException
+    * @see      Task
+    */
     public static Task createNewTaskFromInput(String type, String inputText) throws DukeException {
         Task newTask;
         String taskName = "";
@@ -143,6 +168,15 @@ public class Parser {
         return newTask;
     }
 
+    /**
+    * Returns the integer index of the Task in the ArrayList from user input String,
+    * after processing the inputText String from the user.
+    * Taking in Strings that are not valid integers throws a DukeException.
+    * 
+    * @param    inputNumberString   input of the user
+    * @return                       the index of the Task
+    * @throws   DukeException
+    */
     public static int convertToTaskIndex(String inputNumberString) throws DukeException {
         // check if there is an integer after the text command input
         try {

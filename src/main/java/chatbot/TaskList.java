@@ -2,26 +2,49 @@ package chatbot;
 import java.util.ArrayList;
 
 import tasks.Task;
+/**
+* TaskList class for the bot, handling and storing the list of Task objects locally.
+*/
 public class TaskList {
     private ArrayList<Task> taskList;
 
     private static final String NO_SUCH_TASK = "I'm very sorry Sir, there is no such task you mentioned.";
 
+    /**
+    * Class constructor.
+    * <p>
+    * Creates a new ArrayList of Task objects.
+    */
     public TaskList() {
         this.taskList = new ArrayList<Task>();
     }
 
-    // returns array list
+    /**
+    * Returns the ArrayList of Task objects
+    */
     public ArrayList<Task> getTaskList() {
         return this.taskList;
     }
     
-    // add new Task to the task list
+    /**
+    * Adds a Task into the ArrayList of Task objects.
+    * <p>
+    * This method adds a Task without giving the user any reply.
+    * 
+    * @param    task    the Task object to be added
+    * @see      Task
+    */
     public void addTask(Task task) {
         this.taskList.add(task);
     }
 
-    // get Task from a given index
+    /**
+    * Returns the Task object at the specified ArrayList index.
+    * 
+    * @param    taskIndex    the index of the Task object
+    * @return                the Task object
+    * @see      Task
+    */
     public Task getTaskFromIndex(int taskIndex) throws DukeException {
         if (taskIndex >= this.taskList.size()) { // invalid integer input
             throw new DukeException(NO_SUCH_TASK);
@@ -29,7 +52,14 @@ public class TaskList {
         return this.taskList.get(taskIndex);
     }
 
-    // insert new Task
+    /**
+    * Returns the String of the reply to the user, after adding a Task
+    * newTask into the ArrayList.
+    * 
+    * @param    newTask    the Task object to be added
+    * @return              the String of the reply to the user
+    * @see      Task
+    */
     public String insertNewTask(Task newTask) throws DukeException {
         String reply = "";
         addTask(newTask);
@@ -40,7 +70,13 @@ public class TaskList {
         return reply;
     }
 
-    // returns task list in a message
+    /**
+    * Returns the String of the reply to the user showing all the tasks
+    * that they currently have.
+    * 
+    * @return           the String of the reply to the user
+    * @see      Task
+    */
     public String getTaskListMessage() {
         Integer counter = 1;
         String reply = "";
@@ -53,7 +89,17 @@ public class TaskList {
         return listHeader + reply;
     }
 
-    // mark / unmark task
+    /**
+    * Returns the String of the reply to the user, after marking a Task
+    * in the ArrayList as done or not done depending on String type.
+    * <p>
+    * String type requires "mark" or "unmark" to mark a task as done or not done.
+    * 
+    * @param    taskIndex    the index of the Task object to be marked
+    * @param    type         used to indicate if a task should be marked as done or not.
+    * @return                the String of the reply to the user
+    * @see      Task
+    */
     public String markTask(int taskIndex, String type) throws DukeException {
         String reply = "";
         // check command
@@ -79,7 +125,14 @@ public class TaskList {
         return reply;
     }
 
-    // delete command
+    /**
+    * Returns the String of the reply to the user, after deleting a Task
+    * in the ArrayList.
+    * 
+    * @param    taskIndex    the index of the Task object to be deleted
+    * @return                the String of the reply to the user
+    * @see      Task
+    */
     public String deleteTask(int taskIndex) throws DukeException {
         String reply = "";
         Task taskToRemove = getTaskFromIndex(taskIndex);

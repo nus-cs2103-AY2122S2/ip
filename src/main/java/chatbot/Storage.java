@@ -17,21 +17,35 @@ import java.time.LocalDate;
 // import java.time.format.DateTimeFormatter;
 // import java.time.temporal.ChronoUnit;
 import java.time.LocalTime;
-
+/**
+* Storage class to define a location to store the data of the bot.
+*/
 public class Storage {
-    
     private String filePath;
     private String fileDirectory;
 
     public static final String LOAD_SUCCESS = "I have successfully loaded your saved agenda, Sir.";
     public static final String UNREADABLE_FILE = "Sorry Sir, I was unable to access the data file.";
 
+    /**
+    * Class constructor.
+    *
+    * @param  filePath         String containing the desired location of the data file
+    * @param  fileDirectory    String containing the desired location of the data folder
+    */
     public Storage(String filePath, String fileDirectory) {
         this.filePath = filePath;
         this.fileDirectory = fileDirectory;
     }
 
-    // saves task list into duke.txt
+     /**
+    * Saves tasks in taskList into the data file duke.txt at filePath
+    * <p>
+    * The fileDirectory denotes the folder containing duke.txt
+    *
+    * @param  taskList      a TaskList containing all the tasks stored
+    * @throws DukeException
+    */
     public void saveData(TaskList taskList) throws DukeException {
         // create a directory if it doesn't exist
         File dataFile = new File(this.fileDirectory);
@@ -86,7 +100,12 @@ public class Storage {
         }
     }
 
-    // load the duke.txt into the array
+    /**
+    * Loads tasks into taskList from the data file duke.txt at filePath
+    *
+    * @param  taskList      a TaskList containing all the tasks stored
+    * @throws DukeException
+    */
     public void loadData(TaskList taskList) throws DukeException {
         try {
             // File directory = new File("./");

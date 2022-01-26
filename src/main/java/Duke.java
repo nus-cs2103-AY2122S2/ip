@@ -6,6 +6,9 @@ import chatbot.TaskList;
 import chatbot.Storage;
 import chatbot.Parser;
 
+/**
+* Duke class for the bot.
+*/
 public class Duke {
     private Storage storage;
     private TaskList taskList;
@@ -15,7 +18,29 @@ public class Duke {
 
     ////////////////////////////////////////////////////////////////
     // Main Methods
+    
+    /**
+    * Returns an Image object that can then be painted on the screen. 
+    * The url argument must specify an absolute <a href="#{@link}">{@link URL}</a>. The name
+    * argument is a specifier that is relative to the url argument. 
+    * <p>
+    * This method always returns immediately, whether or not the 
+    * image exists. When this applet attempts to draw the image on
+    * the screen, the data will be loaded. The graphics primitives 
+    * that draw the image will incrementally paint on the screen. 
+    *
+    * @param  url  an absolute URL giving the base location of the image
+    * @param  name the location of the image, relative to the url argument
+    * @return      the image at the specified URL
+    * @see         Image
+    */
 
+    /**
+    * Class constructor.
+    *
+    * @param  filePath  a string that denotes the intended directory of the
+    * stored data text file for the bot
+    */
     public Duke(String filePath) {
         this.storage = new Storage(FILE_PATH, FILE_DIR);
         this.taskList = new TaskList();
@@ -27,6 +52,9 @@ public class Duke {
         }
     }
 
+    /**
+    * Runs the Duke bot.
+    */
     public void run() {
         // print introduction message
         displayGreeting();
@@ -43,7 +71,9 @@ public class Duke {
         }
     }
 
-    // introduction message
+    /**
+    * Displays the greeting message to the user.
+    */
     public static void displayGreeting() {
         String introductionMessage = "Good day Sir. My name is Dook. \n How may I be of assistance?";
         Ui.displayMessage(introductionMessage);
