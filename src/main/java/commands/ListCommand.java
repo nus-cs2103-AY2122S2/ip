@@ -1,19 +1,20 @@
 package commands;
 
+import storage.Storage;
 import tasks.Task;
+import tasks.TaskList;
+import ui.Ui;
 
 import java.util.ArrayList;
 
 public class ListCommand extends Command {
-	private static ArrayList<Task> tasklist;
+	private static TaskList tasks;
 
-	public ListCommand(ArrayList<Task> tasklist) {
-		this.tasklist = tasklist;
-	}
+	public ListCommand() {}
 
 	@Override
-	public ArrayList<Task> getList() {
-		return tasklist;
+	public TaskList getList() {
+		return tasks;
 	}
 
 	@Override
@@ -22,14 +23,12 @@ public class ListCommand extends Command {
 	}
 
 	@Override
-	public void execute() {
-		printFormatted(tasklist);
-	}
+	public void execute(TaskList tasks, Ui ui, Storage storage) {
+		this.tasks = tasks;
 
-	public static void printFormatted(ArrayList<Task> tasklist) {
 		System.out.println(INDENT + "Here are the tasks in your list:");
-		for (int i = 0; i < tasklist.size(); i++) {
-			System.out.println(INDENT + (i + 1) + "." + tasklist.get(i));
+		for (int i = 0; i < tasks.size(); i++) {
+			System.out.println(INDENT + (i + 1) + "." + tasks.get(i));
 		}
 	}
 }

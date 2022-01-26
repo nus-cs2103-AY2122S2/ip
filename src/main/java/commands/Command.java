@@ -1,24 +1,16 @@
 package commands;
 
-import tasks.Task;
-
-import java.util.ArrayList;
+import exceptions.DukeException;
+import ui.Ui;
+import storage.Storage;
+import tasks.TaskList;
 
 public abstract class Command {
 	public final static String INDENT = "     ";
 
-	public abstract void execute();
+	public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
 	public abstract boolean ends();
 
-	public abstract ArrayList<Task> getList();
-
-	public static void printFormatted(String[] msg) {
-
-		for (int i = 0; i < msg.length; i++) {
-			if (msg[i] != null) {
-				System.out.println(INDENT + msg[i]);
-			}
-		}
-	}
+	public abstract TaskList getList();
 }

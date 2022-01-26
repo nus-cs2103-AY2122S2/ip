@@ -1,24 +1,23 @@
 package commands;
 
+import exceptions.OutOfRangeException;
+import storage.Storage;
 import tasks.*;
-
-import java.util.ArrayList;
+import ui.Ui;
 
 public class DeleteCommand extends Command {
-	private ArrayList<Task> tasklist;
+	private TaskList tasks;
 	private int deleteIndex;
 	private Task deleted;
 
-	public DeleteCommand(ArrayList<Task> tasklist, int deleteIndex) {
+	public DeleteCommand(int deleteIndex) {
 		this.deleteIndex = deleteIndex - 1;
-		this.tasklist = tasklist;
-		this.deleted = tasklist.get(this.deleteIndex);
-		this.tasklist.remove(this.deleteIndex);
+
 	}
 
 	@Override
-	public ArrayList<Task> getList() {
-		return tasklist;
+	public TaskList getList() {
+		return tasks;
 	}
 
 	@Override
@@ -27,10 +26,16 @@ public class DeleteCommand extends Command {
 	}
 
 	@Override
-	public void execute() {
-		printFormatted(new String[]{
+	public void execute(TaskList tasks, Ui ui, Storage storage) throws OutOfRangeException {
+		if (deleteIndex >= tasks.size()) {
+			throw new OutOfRangeException();
+		}
+		this.deleted = tasks.get(this.deleteIndex);
+		this.tasks.remove(this.deleteIndex);
+
+		ui.printFormatted(new String[]{
 				"Noted. I've removed this task:",
 				"  " + deleted,
-				"Now you have " + this.tasklist.size() + " tasks in the list"});
+				"Now you have " + this.tasks.size() + " tasks in the list"});
 	}
 }

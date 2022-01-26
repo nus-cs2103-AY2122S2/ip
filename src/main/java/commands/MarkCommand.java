@@ -1,24 +1,23 @@
 package commands;
 
+import exceptions.OutOfRangeException;
+import storage.Storage;
 import tasks.*;
+import ui.Ui;
 
 import java.util.ArrayList;
 
 public class MarkCommand extends Command {
-	private ArrayList<Task> tasklist;
+	private TaskList tasks;
 	private int pos;
 
-	public MarkCommand(ArrayList<Task> tasklist, int pos) {
-		this.tasklist = tasklist;
+	public MarkCommand(int pos) {
 		this.pos = pos - 1;
-		Task marked = tasklist.get(this.pos);
-		marked.mark();
-		this.tasklist.set(this.pos, marked);
 	}
 
 	@Override
-	public ArrayList<Task> getList() {
-		return tasklist;
+	public TaskList getList() {
+		return tasks;
 	}
 
 	@Override
@@ -27,7 +26,15 @@ public class MarkCommand extends Command {
 	}
 
 	@Override
-	public void execute() {
-		printFormatted(new String[]{"Nice! I've marked this task as done:", "  " + tasklist.get(this.pos)});
+	public void execute(TaskList tasks, Ui ui, Storage storage) throws OutOfRangeException {
+		this.tasks = tasks;
+		if (pos >= tasks.size()) {
+			throw new OutOfRangeException();
+		}
+		Task marked = tasks.get(this.pos);
+		marked.mark();
+		this.tasks.set(this.pos, marked);
+
+		ui.printFormatted(new String[]{"Nice! I've marked this task as done:", "  " + tasks.get(this.pos)});
 	}
 }

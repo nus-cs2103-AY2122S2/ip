@@ -1,14 +1,17 @@
 package commands;
 
-import tasks.Task;
+import tasks.TaskList;
+import ui.Ui;
+import storage.Storage;
 
-import java.util.ArrayList;
+import java.io.IOException;
 
 public class ByeCommand extends Command {
+	private TaskList tasks;
 
 	@Override
-	public ArrayList<Task> getList() {
-		return new ArrayList<Task>();
+	public TaskList getList() {
+		return tasks;
 	}
 
 	@Override
@@ -17,7 +20,14 @@ public class ByeCommand extends Command {
 	}
 
 	@Override
-	public void execute() {
-		printFormatted(new String[]{"Bye. Hope to see you again soon!"});
+	public void execute(TaskList tasks, Ui ui, Storage storage) {
+		this.tasks = tasks;
+		try{
+			storage.saveFile(tasks);
+		} catch (IOException e) {
+			System.out.println("An error occurred");
+			e.printStackTrace();
+		}
+		ui.printFormatted(new String[]{"Bye. Hope to see you again soon!"});
 	}
 }
