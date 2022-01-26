@@ -11,6 +11,12 @@ public class TaskList {
     private final List<Task> tasks;
     private final Ui ui;
 
+    /**
+     * Constructs a TaskList object.
+     *
+     * @param tasks The initial task list.
+     * @param ui For printing messages to the standard output.
+     */
     public TaskList(List<Task> tasks, Ui ui) {
         this.tasks = tasks;
         this.ui = ui;

@@ -9,6 +9,9 @@ public class Ui {
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Prints the welcome message banner.
+     */
     public void welcome() {
         String logo =
                 "      _          _          ____       __     __      ___       ____\n"
@@ -23,16 +26,29 @@ public class Ui {
                 + "At your service.\n");
     }
 
+    /**
+     * Prints a string to the console.
+     *
+     * @param str The string to print.
+     */
     public void echo(String str) {
         System.out.println("------------------------------------------------------------");
         System.out.println(str);
         System.out.println("------------------------------------------------------------");
     }
 
+    /**
+     * Reads the user input from the console.
+     *
+     * @return The user input in lowercase.
+     */
     public String readCommand() {
         return scanner.nextLine().toLowerCase();
     }
 
+    /**
+     * Prints a shutdown message and closes the standard output.
+     */
     public void shutdown() {
         scanner.close();
         echo("Goodbye. J.A.R.V.I.S. systems powering off...");
