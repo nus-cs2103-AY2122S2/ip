@@ -6,9 +6,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.StringJoiner;
 
+/**
+ * Represents a task that is due at a certain time.
+ */
 public class Deadline extends Task {
     private final LocalDateTime by;
 
+    /**
+     * Constructs a Deadline instance.
+     *
+     * @param description The description of the Deadline.
+     * @param by          The date and time of the Deadline.
+     */
     public Deadline(String description, LocalDateTime by) {
         super(description);
 
@@ -19,6 +28,13 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Constructs a Deadline instance.
+     *
+     * @param description The description of the Deadline.
+     * @param by          The date and time of the Deadline.
+     * @param isDone      Whether the Deadline is done or not.
+     */
     public Deadline(String description, LocalDateTime by, boolean isDone) {
         this(description, by);
         this.isDone = isDone;
