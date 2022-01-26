@@ -8,16 +8,29 @@ import com.duke.tasks.Task;
 
 import java.io.IOException;
 
+/**
+ * Represents a chatbot command for unmarking Tasks in the TaskList
+ */
 public class CommandUnmark extends Command {
   private String input;
   private TaskList taskList;
 
+  /**
+   * Constructor for this class.
+   * @param input The string of arguments entered by the user, excluding the command word.
+   * @param taskList The tasklist meant for the Tasks to be added to.
+   */
   public CommandUnmark(String input, TaskList taskList) {
     super();
     this.input = input;
     this.taskList = taskList;
   }
 
+  /**
+   * Returns a string of the result of executing the intended function of this class.
+   * This string is wrapped in a CommandResult object
+   * @return A CommandResult object containing the result message.
+   */
   @Override
   public CommandResult execute() {
     try {
@@ -36,6 +49,14 @@ public class CommandUnmark extends Command {
     }
   }
 
+  /**
+   * Finds a task in the specified index of the list, and marks it as not done.
+   * @param args The string of arguments entered by the user, excluding the command word.
+   * @return A string describing the result.
+   * @throws DukeInvalidArgumentException When there are no arguments given.
+   * @throws DukeEmptyListException When length of task list is 0.
+   * @throws IOException On failure to save list.
+   */
   public String taskUnmarker(String args) throws DukeInvalidArgumentException, DukeEmptyListException, IOException {
     if (args.length() < 1) {
       throw new DukeInvalidArgumentException("Please choose which task you would like to unmark.");
