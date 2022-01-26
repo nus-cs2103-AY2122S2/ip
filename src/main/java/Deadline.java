@@ -15,4 +15,9 @@ public class Deadline extends Task {
     public String toString() {
         return String.format("[D]%1$s (by: %2$s)", super.toString(), this.by);
     }
+
+    @Override
+    public String toOutputFormat() {
+        return String.format("D / %1$s / %2$s", super.toOutputFormat(), this.by);
+    }
 }
