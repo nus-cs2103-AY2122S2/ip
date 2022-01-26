@@ -9,6 +9,10 @@ public class Task {
         this.isDone = false;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     public void markAsDone() {
         this.isDone = true;
     }
@@ -18,7 +22,7 @@ public class Task {
     }
 
     public String toStringForSave() {
-        return (isDone ? "| 1 | " : "| 0 | ") + this.description;
+        return (isDone ? "# 1 # " : "# 0 # ") + this.description;
     }
 
     @Override

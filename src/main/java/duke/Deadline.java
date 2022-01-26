@@ -24,7 +24,7 @@ public class Deadline extends Task {
 
     @Override
     public String toStringForSave() {
-        return "D "+ super.toStringForSave() + " | " + this.deadlineDate + " " + this.time;
+        return "D "+ super.toStringForSave() + " # " + this.deadlineDate + " " + this.time;
     }
 
     @Override

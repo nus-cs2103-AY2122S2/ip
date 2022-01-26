@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 
 public class Parser {
-    static ArrayList<String> VALID_USER_COMMAND = new ArrayList<String>(Arrays.asList("todo", "event", "deadline", "mark", "unmark", "list", "bye", "delete"));
+    static ArrayList<String> VALID_USER_COMMAND = new ArrayList<String>(Arrays.asList("todo", "event", "deadline", "mark", "unmark", "list", "bye", "delete", "find"));
     static String LINES = "    ---------------------------------";
 
     // deal with the list command
@@ -65,10 +65,7 @@ public class Parser {
         String by = byAndTime[0];
 
         // splitting deadline into time and the rest
-        String[] deadlineTimeAndTheRest = userInputTask.split(" ");
-
-        String deadlineTime = deadlineTimeAndTheRest[3];
-        LocalTime time = LocalTime.parse(deadlineTime);
+        LocalTime time = LocalTime.parse(byAndTime[1]);
         LocalDate deadlineDate = LocalDate.parse(by);
 
         // adding task to todoList
@@ -115,15 +112,16 @@ public class Parser {
         String eventDescription = eventTaskArr[0];
         String[] eventDateAndTime = eventTaskArr[1].split(" ");
         String eventDate = eventDateAndTime[0];
-        LocalDate eventAtDate = LocalDate.parse(eventDate);
 
         // splitting event into time and the rest
         String[] eventTimeAndTheRest = userInputTask.split(" ");
-        String eventTime = eventTimeAndTheRest[3];
+
+        String eventTime = eventDateAndTime[1];
         LocalTime atTime = LocalTime.parse(eventTime);
+        LocalDate atDate = LocalDate.parse(eventDate);
 
         // adding task to todoList
-        Event userEventTask = new Event(eventDescription, eventAtDate, atTime);
+        Event userEventTask = new Event(eventDescription, atDate, atTime);
         taskList.addTask(userEventTask);
     }
 
@@ -164,6 +162,23 @@ public class Parser {
 
         // deleting task from the array list
         taskList.removeTask(taskToDelete);
+    }
+
+    static void parserFind(TaskList taskList, String userInputTask) {
+        TaskList tasks = new TaskList(new ArrayList<Task>());
+
+        for (int i = 0; i < taskList.size(); i++) {
+            if (taskList.get(i).getDescription().contains(userInputTask)) {
+                tasks.addWithoutPrint(taskList.get(i));
+            }
+        }
+
+        System.out.println(LINES);
+        System.out.println("    Here are the matching tasks in your list:");
+        for (int j = 0; j < tasks.size(); j++) {
+            System.out.println("    " + (j + 1) + "." + tasks.get(j).toString());
+        }
+        System.out.println(LINES);
     }
 
 

@@ -104,11 +104,8 @@ public class Duke {
                         String[] byAndTime = deadlineTaskArr[1].split(" ");
                         String by = byAndTime[0];
 
-                        // splitting deadline into time and the rest
-                        String[] deadlineTimeAndTheRest = userInputTask.split(" ");
-
                         try {
-                            String deadlineTime = deadlineTimeAndTheRest[3];
+                            String deadlineTime = byAndTime[1];
                         } catch (ArrayIndexOutOfBoundsException e) {
                             System.out.println(LINES);
                             System.out.println("    Deadline time is required");
@@ -116,7 +113,7 @@ public class Duke {
                             break;
                         }
 
-                        String deadlineTime = deadlineTimeAndTheRest[3];
+                        String deadlineTime = byAndTime[1];
 
                         // handle error when time is not in the hh:mm 24hr clock format
                         try {
@@ -154,15 +151,11 @@ public class Duke {
 
                         // splitting event into description and dateTime
                         String[] eventTaskArr = userInputTask.split(" /at ");
-                        String eventDescription = eventTaskArr[0];
                         String[] eventDateAndTime = eventTaskArr[1].split(" ");
                         String eventDate = eventDateAndTime[0];
 
-                        // splitting event into time and the rest
-                        String[] eventTimeAndTheRest = userInputTask.split(" ");
-
                         try {
-                            String eventTime = eventTimeAndTheRest[3];
+                            String eventTime = eventDateAndTime[1];
                         } catch (ArrayIndexOutOfBoundsException e) {
                             System.out.println(LINES);
                             System.out.println("    Event time is required");
@@ -170,7 +163,7 @@ public class Duke {
                             break;
                         }
 
-                        String eventTime = eventTimeAndTheRest[3];
+                        String eventTime = eventDateAndTime[1];
 
                         // handle error when time is not in the hh:mm 24hr clock format
                         try {
@@ -224,6 +217,10 @@ public class Duke {
 
                         // save update tasks to duke.txt
                         storage.save(taskList);
+                        break;
+
+                    case "find":
+                        Parser.parserFind(taskList, userInputTask);
                         break;
                 }
                 userInput = sc.nextLine();

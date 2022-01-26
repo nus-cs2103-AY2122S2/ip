@@ -54,10 +54,11 @@ public class Storage {
         // load task from duke.txt to todoList
         while (s.hasNext()) {
             String task = s.nextLine();
-            String[] taskContent = task.split("\\\\| ");
+            String[] taskContent = task.split(" # ");
             String taskType = taskContent[0];
-            String taskStatus = taskContent[2];
-            String taskDescription = taskContent[4];
+            String taskStatus = taskContent[1];
+            String taskDescription = taskContent[2];
+
 
 
             switch (taskType) {
@@ -75,8 +76,12 @@ public class Storage {
                 todoList.add(todoTask);
                 break;
             case "D":
-                LocalTime deadlineTime = LocalTime.parse(taskContent[7]);
-                LocalDate deadlineDate = LocalDate.parse(taskContent[6]);
+                String dateAndTime = taskContent[3];
+                String date = dateAndTime.split(" ")[0];
+                String time = dateAndTime.split(" ")[1];
+
+                LocalTime deadlineTime = LocalTime.parse(time);
+                LocalDate deadlineDate = LocalDate.parse(date);
 
                 Deadline deadlineTask = new Deadline(taskDescription, deadlineDate, deadlineTime);
 
@@ -91,8 +96,12 @@ public class Storage {
                 todoList.add(deadlineTask);
                 break;
             case "E":
-                LocalTime eventTime = LocalTime.parse(taskContent[7]);
-                LocalDate eventDate = LocalDate.parse(taskContent[6]);
+                String dateAndTimeEvent = taskContent[3];
+                String eventDateString = dateAndTimeEvent.split(" ")[0];
+                String eventTimeString = dateAndTimeEvent.split(" ")[1];
+
+                LocalTime eventTime = LocalTime.parse(eventTimeString);
+                LocalDate eventDate = LocalDate.parse(eventDateString);
 
                 Event eventTask = new Event(taskDescription, eventDate, eventTime);
 

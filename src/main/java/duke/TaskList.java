@@ -56,6 +56,10 @@ public class TaskList {
         System.out.println(LINES);
     }
 
+    public void addWithoutPrint(Task task) {
+        taskList.add(task);
+    }
+
     public void setTaskAsDone(int taskToMark) {
         taskList.get(taskToMark - 1).markAsDone();
 
