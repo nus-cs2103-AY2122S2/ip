@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 public class Johnny {
 
@@ -16,7 +17,6 @@ public class Johnny {
         Scanner sc = new Scanner(System.in);
         String input;
         InputList userList = new InputList();
-
         while(true) {
 
             try {
@@ -24,6 +24,8 @@ public class Johnny {
                 String[] tags = input.split(" ", 2);
 
                 if(input.equals("bye")) {
+                    userList.writeToFile();
+
                     System.out.println("Bye. Hope to see you again soon!");
                     break;
                 }
@@ -49,7 +51,7 @@ public class Johnny {
                     if(content.equals("")) {
                         throw new EmptyDescriptionException();
                     }
-                    Task newTask = new Todo(content);
+                    Task newTask = new Todo(content, false);
                     userList.add(newTask);
 
                     System.out.println("Got it! I've added this task:");
@@ -68,7 +70,7 @@ public class Johnny {
                     String content = tags[1];
                     String[] details = content.split("/", 2);
 
-                    Task newTask = new Deadline(details[0], details[1]);
+                    Task newTask = new Deadline(details[0], details[1], false);
                     userList.add(newTask);
 
                     System.out.println("Got it! I've added this task:");
@@ -87,7 +89,7 @@ public class Johnny {
                     String content = tags[1];
                     String[] details = content.split("/", 2);
 
-                    Task newTask = new Event(details[0], details[1]);
+                    Task newTask = new Event(details[0], details[1], false);
                     userList.add(newTask);
 
                     System.out.println("Got it! I've added this task:");

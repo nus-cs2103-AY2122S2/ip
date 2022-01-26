@@ -1,3 +1,10 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class InputList {
@@ -6,12 +13,54 @@ public class InputList {
     private ArrayList<Task> tasks;
 
     public InputList() {
-        count = 0;
         tasks = new ArrayList<Task>(100);
+        File file = new File(
+                "tasklist.txt");
+        try {
+            BufferedReader br
+                    = new BufferedReader(new FileReader(file));
+
+            String st;
+
+            while ((st = br.readLine()) != null) {
+                String[] words = st.split(",");
+                if(words[0].equals("TODO")) {
+                    tasks.add(new Todo(words[2], words[1].equals("true")));
+                } else if (words[0].equals("DEADLINE")) {
+                    tasks.add(new Deadline(words[2], words[3], words[1].equals("true")));
+                } else if (words[0].equals("EVENT")) {
+                    tasks.add(new Event(words[2], words[3], words[1].equals("true")));
+                }
+            }
+
+        } catch(FileNotFoundException e) {
+            System.out.println(e.getMessage() + "---File not found");
+        } catch(IOException e) {
+            System.out.println(e.getMessage() + "---IO Exception");
+        }
+    }
+
+    public static void main(String[] args) {
+
+    }
+
+    public void writeToFile() {
+        try {
+            File file = new File("tasklist.txt");
+            FileWriter writer = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(writer);
+
+            for(int i = 0; i < tasks.size(); i++) {
+                bw.write(tasks.get(i).getTaskString() + "\n");
+            }
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void printList() {
-        for(int i = 0; i < count; i++) {
+        for(int i = 0; i < tasks.size(); i++) {
             System.out.print(i + 1);
             System.out.println(". " + tasks.get(i).toString());
         }
@@ -42,6 +91,6 @@ public class InputList {
     }
 
     public int getCount() {
-        return this.count;
+        return tasks.size();
     }
 }

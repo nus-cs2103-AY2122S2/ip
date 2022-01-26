@@ -1,9 +1,15 @@
 public class Deadline extends Task{
+
     private String dueDate;
 
-    public Deadline(String description, String dueDate) {
-        super(description);
+    public Deadline(String description, String dueDate, boolean isDone) {
+        super(description, isDone);
         this.dueDate = dueDate;
+    }
+
+    @Override
+    public String getTaskString() {
+        return "DEADLINE" + "," + super.isDone + "," + super.description + "," + this.dueDate;
     }
 
     public String getDueDate() {
