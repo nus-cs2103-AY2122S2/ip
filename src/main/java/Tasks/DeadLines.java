@@ -17,9 +17,9 @@ public class DeadLines extends Task {
     @Override
     public String toString() {
         if (this.getMarked()) {
-            return "[D]" + "[X" + "] " + this.getTask() + " (by: " + this.details + ")";
+            return "[D]" + "[X" + "] " + this.getTask() + " (by: " + returnDate(this.details) + ")";
         } else {
-            return "[D]" + "[ " + "] " + this.getTask() + " (by: " + this.details + ")";
+            return "[D]" + "[ " + "] " + this.getTask() + " (by: " + returnDate(this.details) + ")";
         }
     }
 }
