@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Storage {
     private final String homeDir;
-    static ArrayList<Task> taskList;
+    public static ArrayList<Task> taskList;
 
     Storage() {
         this.homeDir = System.getProperty("user.dir");
