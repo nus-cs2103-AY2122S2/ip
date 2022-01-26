@@ -165,54 +165,8 @@ public class Parser {
                     return String.format("Ok! Chi-san has added:\n%s\nYou have %d tasks nyan~!\n",
                             newTask, tl.getSize());
                 case "deadline":
-                    // Separate task and deadline
-                    /*
-                    String[] content = msg.substring(8).split("/by");
-                    // Create new Deadline object
-                    if (content[0].trim().equals("")) {
-                        throw new ChiException("deadline");
-                    }
-                    // Create new Deadline object
-                    LocalDate d = LocalDate.parse(content[1].trim().split(" ")[0].trim(),
-                            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                    LocalTime t;
-                    Task newTask1;
-                    if (content[1].trim().split(" ").length == 2) {
-                        t = LocalTime.parse(content[1].trim().split(" ")[1].trim(),
-                                DateTimeFormatter.ofPattern("HH:mm"));
-                        newTask1 = new Deadline(content[0].trim(), d, t, false);
-                    } else {
-                        newTask1 = new Deadline(content[0].trim(), d, false);
-                    }
-                    tl.addTask(newTask1);
-                    sge.updateFile(newTask1, tl, "deadline");
-                    */
                     return processDeadlineMsg(msg.substring(8), tl, sge);
                 case "event":
-                    /*
-                    // Separate task and timing
-                    String[] content1 = msg.substring(5).split("/at");
-                    if (content1[0].trim().equals("")) {
-                        throw new ChiException("event");
-                    }
-                    // Create new Event object
-                    LocalDate ds = LocalDate.parse(content1[1].trim().split(" ")[0].trim(),
-                            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                    LocalTime t1;
-                    LocalTime t2;
-                    Task newTask2;
-                    if (content1[1].trim().split(" ").length == 2) {
-                        t1 = LocalTime.parse(content1[1].trim().split(" ")[1].trim().split("-")[0],
-                                DateTimeFormatter.ofPattern("HH:mm"));
-                        t2 = LocalTime.parse(content1[1].trim().split(" ")[1].trim().split("-")[1],
-                                DateTimeFormatter.ofPattern("HH:mm"));
-                        newTask2 = new Event(content1[0].trim(), ds, t1, t2, false);
-                    } else {
-                        newTask2 = new Event(content1[0].trim(), ds, false);
-                    }
-                    tl.addTask(newTask2);
-                    sge.updateFile(newTask2, tl, "event");
-                    */
                     return processEventMsg(msg.substring(5),tl,sge);
                 case "delete":
                     processed = processNumberMsg(msg.substring(6), tl.getSize());

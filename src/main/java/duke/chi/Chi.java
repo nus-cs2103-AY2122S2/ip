@@ -3,28 +3,27 @@ package duke.chi;
 import duke.exception.ChiException;
 import duke.parser.Parser;
 import duke.storage.Storage;
-import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.UI;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
+/**
+ * Main class for ChatBot. Composed of various component classes.
+ */
 public class Chi {
-    /**
-     * Stores the messages sent by the user.
-     */
+
+    /** Contains the task data stored in the hard-drive */
     private Storage storage;
+
+    /** Contains the task data stored in the program */
     private TaskList taskList;
+
+    /** Handles interactions with the user */
     private UI ui;
+
+    /** Interprets messages sent by the user */
     private Parser parser;
-    // delete these
-    private List<Task> messages;
-    private static final String DATA_FOLDER = "data/";
-    private static final String DATA_FILE = "data/tasks.txt";
-    private File dataFile;
 
     public Chi(String filepath) {
         this.storage = new Storage(filepath);
@@ -40,9 +39,6 @@ public class Chi {
             // print error for IO problems
             ui.printErrorMsg("There's something wrong with the IO nyan!");
         }
-        // Delete this
-        this.messages = new ArrayList<>();
-        // Make sure data file exists in directory
     }
 
     public void run() {
