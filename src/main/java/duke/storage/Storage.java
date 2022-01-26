@@ -1,11 +1,16 @@
 package duke.storage;
 
-import duke.tasks.*;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.Todo;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -50,14 +55,18 @@ public class Storage {
                     String description = info[0].substring(7);
                     String date = info[1].substring(0, info[1].length() - 1); //Oct 12 2020 1 pm
                     Deadline curr = new Deadline(description, date);
-                    if (isMarked) curr.mark();
+                    if (isMarked) {
+                        curr.mark();
+                    }
                     list.add(curr);
                 } else {
                     String[] info = currTask.split(" \\(at: ");
                     String description = info[0].substring(7);
                     String date = info[1].substring(0, info[1].length() - 1);
                     Event curr = new Event(description, date);
-                    if (isMarked) curr.mark();
+                    if (isMarked) {
+                        curr.mark();
+                    }
                     list.add(curr);
                 }
             }
