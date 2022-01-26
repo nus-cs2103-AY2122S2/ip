@@ -2,17 +2,19 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+
 /**
  * deadline class
  * inherit from Task class
  */
-public class Deadline extends Task {
+
+public class DeadLine extends Task {
 
     protected String by;
     protected String date;
     protected String time;
 
-    public Deadline(String description, String by) {
+    public DeadLine(String description, String by) {
         super(description);
         this.by = by;
         String[] dateTimeTemp = by.split(" ");
@@ -22,13 +24,14 @@ public class Deadline extends Task {
 
     @Override
     public String message() {
-        return "D | " + "[" +  this.getStatusIcon() + "] " + super.message() + "(by:" + dateTimeFormat(date) + " " + time + ")";
+        return "D | " + "[" +  this.getStatusIcon() + "] " + super.message()
+                + "(by:" + dateTimeFormat(date) + " " + time + ")";
     }
 
     /**
      * re-format the date and time
      * @param dateTime
-     * @return
+     * @return formated date and time
      */
     public String dateTimeFormat(String dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");

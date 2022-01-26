@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    ArrayList<Task> list_of_inputs = new ArrayList<>();
+    ArrayList<Task> listOfInputs = new ArrayList<>();
     String directory;
     String filePath;
 
@@ -27,8 +27,8 @@ public class TaskList {
      */
     public void list() {
         System.out.println("Here are your task(s):");
-        for (int i = 0; i < list_of_inputs.size(); i++) {
-            System.out.println(((i + 1) + ". " + list_of_inputs.get(i).message()));
+        for (int i = 0; i < listOfInputs.size(); i++) {
+            System.out.println(((i + 1) + ". " + listOfInputs.get(i).message()));
         }
     }
 
@@ -38,7 +38,7 @@ public class TaskList {
      * @throws IOException
      */
     public void mark( int curr_no) throws IOException {
-        Task task_done = list_of_inputs.get(curr_no);
+        Task task_done = listOfInputs.get(curr_no);
         System.out.println("Good work!! I have marked it done:\n" + task_done.markedDone());
         storage.updateData(task_done.message(),filePath);
     }
@@ -49,7 +49,7 @@ public class TaskList {
      * @throws IOException
      */
     public void unMark(int curr_no) throws IOException {
-        Task task_undone = list_of_inputs.get(curr_no);
+        Task task_undone = listOfInputs.get(curr_no);
         System.out.println("Alrightt! I have marked it undone:\n" + task_undone.markedUndone());
         storage.updateData(task_undone.message(),filePath);
     }
@@ -62,9 +62,9 @@ public class TaskList {
      */
     public String toDo(String str) throws IOException {
         Todos todo = new Todos(str);
-        list_of_inputs.add(todo);
+        listOfInputs.add(todo);
         storage.updateData(todo.message() , filePath);
-        return "Okayy!! I've added this task:\n " + todo.message() + "\n You have " + list_of_inputs.size() + " tasks in the list.";
+        return "Okayy!! I've added this task:\n " + todo.message() + "\n You have " + listOfInputs.size() + " tasks in the list.";
 
     }
 
@@ -76,10 +76,10 @@ public class TaskList {
      */
     public String deadLine(String str) throws IOException {
         String[] deadL = str.split("/by ", 2);
-        Deadline deadLineTemp = new Deadline(deadL[0], deadL[1]);
-        list_of_inputs.add(deadLineTemp);
+        DeadLine deadLineTemp = new DeadLine(deadL[0], deadL[1]);
+        listOfInputs.add(deadLineTemp);
         storage.updateData(deadLineTemp.message(),filePath);
-        return "Deadline for this task:\n " + deadLineTemp.message() + "\n You have " + list_of_inputs.size() + " tasks in the list.";
+        return "Deadline for this task:\n " + deadLineTemp.message() + "\n You have " + listOfInputs.size() + " tasks in the list.";
 
     }
 
@@ -92,9 +92,9 @@ public class TaskList {
     public String event(String str) throws IOException {
         String[] event = str.split("/at ", 2);
         Event eventTemp = new Event(event[0], event[1]);
-        list_of_inputs.add(eventTemp);
+        listOfInputs.add(eventTemp);
         storage.updateData(eventTemp.message(),filePath);
-        return "I have added this task and the event time is:\n " + eventTemp.message() + "\n You have " + list_of_inputs.size() + " tasks in the list.";
+        return "I have added this task and the event time is:\n " + eventTemp.message() + "\n You have " + listOfInputs.size() + " tasks in the list.";
 
     }
 
@@ -104,9 +104,9 @@ public class TaskList {
      */
     public void delete(String str) {
         int curr_no = Integer.parseInt(str) - 1;
-        list_of_inputs.remove(curr_no);
-        Delete deleteTemp = new Delete(list_of_inputs.get(curr_no).description);
-        System.out.println(deleteTemp.message() + "\nYou have " + list_of_inputs.size() + " tasks in the list.");
+        listOfInputs.remove(curr_no);
+        Delete deleteTemp = new Delete(listOfInputs.get(curr_no).description);
+        System.out.println(deleteTemp.message() + "\nYou have " + listOfInputs.size() + " tasks in the list.");
     }
 
     /**
@@ -118,11 +118,12 @@ public class TaskList {
         String line = bufReader.readLine();
         while (line != null) {
             Task t = new Task(line);
-            list_of_inputs.add(t);
+            listOfInputs.add(t);
             line = bufReader.readLine();
         }
         bufReader.close();
     }
+
 
 
 
