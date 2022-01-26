@@ -143,7 +143,7 @@ public class Save {
 				tasks.add(event);
 				break;
 			case DEADLINE:
-				String[] tokensDeadline = s.split("/");
+				String[] tokensDeadline = s.split("/by ");
 				String date = tokensDeadline[1];
 
 				String[] tokensNameDeadline = name.split("/");
