@@ -39,6 +39,6 @@ text-ui-test/EXPECTED-UNIX.TXT
 *.ans
 *.out
 
-# Storage Files
+# duke.io.Storage Files
 data/duke.txt
 text-ui-test/data/duke.txt

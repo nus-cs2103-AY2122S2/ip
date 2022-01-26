@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.text.SimpleDateFormat;
@@ -31,7 +33,7 @@ public abstract class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone ? "X" : " "); // mark done duke.task with X
     }
 
     public boolean getIsDone() {
