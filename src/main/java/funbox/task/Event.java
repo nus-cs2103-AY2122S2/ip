@@ -12,9 +12,12 @@ public class Event extends Task {
     public String time;
 
     /**
-     * The constructor class for Event
-     * @param description The description of task sent by the user
-     * @param by The deadline which the task should be completed by
+     * The constructor for the Event.
+     *
+     * @param description The description of the task.
+     * @param date The date the task should be completed at.
+     * @param time The time the task should be complete at.
+     * @param type The type of the task.
      */
     public Event(String description, LocalDate date, String time, String type) {
         super(description, type);
@@ -22,6 +25,11 @@ public class Event extends Task {
         this.time = time;
     }
 
+    /**
+     * Return a string representation.
+     *
+     * @return Return a string.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: "

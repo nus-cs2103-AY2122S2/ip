@@ -13,11 +13,22 @@ import funbox.command.MarkCommand;
 import funbox.command.UnmarkCommand;
 import funbox.exception.FunBoxExceptions;
 
-
+/**
+ * Deal with parsing and making sense of the user commands.
+ */
 public class Parser {
 
     public final String unknownCommand = "Sorry! You have used the command wrongly!";
 
+    /**
+     * Parses the user text commands to a Command object.
+     *
+     * @param command The command entered by the user.
+     * @param taskList The list containing the tasks.
+     * @param ui Interface which interact with users.
+     * @return Return a command object to be executed.
+     * @throws FunBoxExceptions If command is not available/exist.
+     */
     public Command parseCommand(String command, TaskList taskList, Ui ui) throws FunBoxExceptions {
         String[] parsedCommand = command.split(" ");
         String commandType = parsedCommand[0];
@@ -47,6 +58,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Concats the strings in the array to a single string.
+     *
+     * @param parsedCommand The array containing the strings to be concatenated.
+     * @param startingIndex The point which the concatenation should begin.
+     * @return Return a concatenated string.
+     */
     public String concatFormat(String[] parsedCommand, int startingIndex) {
         String result = "";
         for (int i = startingIndex; i < parsedCommand.length; i++) {
@@ -60,6 +78,14 @@ public class Parser {
         return result;
     }
 
+    /**
+     * Gets the description and date from a string.
+     *
+     * @param message The message to be parsed to retrieve the description and date.
+     * @param type The type of task.
+     * @return Returns a string array where the first item is the description
+     *         and the second item contains the date.
+     */
     public String[] getDescriptionAndDate(String message, String type) {
         if (type.equals("event")) {
             return message.split(" /at ");

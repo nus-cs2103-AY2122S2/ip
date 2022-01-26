@@ -65,9 +65,11 @@ public class TaskList {
     }
 
     /**
-     * Gets the tasks found on the date requested by user and prints it out.
+     * Filter the list based on the date provided by the user.
      *
-     * @param taskArr The commands provided by the users
+     * @param filterDate The date used to filter the list.
+     * @param taskList The list containing the task.
+     * @throws FunBoxExceptions If date is not formatted in `yyyy-mm-dd`.
      */
     public void filterTasks(String filterDate, TaskList taskList) throws FunBoxExceptions {
         LocalDate date;
@@ -105,8 +107,6 @@ public class TaskList {
 
         } catch (DateTimeParseException e) {
             throw new FunBoxExceptions("ERROR! Please ensure date is in the correct format: yyyy-mm-dd");
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new FunBoxExceptions("ERROR! Date not found in command `filter`!");
         }
     }
 }

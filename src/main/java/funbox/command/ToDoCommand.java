@@ -6,14 +6,30 @@ import funbox.util.TaskList;
 import funbox.util.Storage;
 import funbox.task.ToDo;
 
+/**
+ * Deal with handling command for ToDo.
+ */
 public class ToDoCommand extends Command {
     String description;
 
+    /**
+     * Constructor class for ToDoCommand.
+     *
+     * @param description The description of the task.
+     */
     public ToDoCommand(String description) {
         super(false);
         this.description = description;
     }
 
+    /**
+     * Execute the command which add ToDo task.
+     *
+     * @param taskList List of tasks.
+     * @param ui Interface which interact with users.
+     * @param storage Stores user tasks locally.
+     * @throws FunBoxExceptions If description == ""
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws FunBoxExceptions {
         if (description.equals("")) {
