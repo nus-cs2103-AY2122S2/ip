@@ -2,7 +2,7 @@ package duke.task;
 
 import java.io.Serializable;
 
-abstract public class Task implements Serializable {
+public abstract class Task implements Serializable {
     private String taskName;
     private boolean status;
 
@@ -23,7 +23,7 @@ abstract public class Task implements Serializable {
         return this.taskName;
     }
 
-    public boolean getStatus() {
+    public boolean isComplete() {
         return this.status;
     }
 

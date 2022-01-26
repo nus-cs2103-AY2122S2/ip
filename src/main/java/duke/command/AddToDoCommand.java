@@ -1,12 +1,12 @@
 package duke.command;
 
-import duke.manager.Ui;
-import duke.manager.TaskList;
-import duke.manager.Storage;
 import duke.exception.DukeException;
+import duke.manager.Storage;
+import duke.manager.TaskList;
+import duke.manager.Ui;
 import duke.task.ToDo;
 
-public class AddToDoCommand extends Command{
+public class AddToDoCommand extends Command {
     private String task;
 
     public AddToDoCommand(String task) {
@@ -20,7 +20,7 @@ public class AddToDoCommand extends Command{
         taskList.add(todo);
         ui.print("Got it. I've added this task:");
         ui.print(todo.toString());
-        ui.print("Now you have " + taskList.numOfTasks() +  " tasks in the list.");
+        ui.print("Now you have " + taskList.numOfTasks() + " tasks in the list.");
         try {
             storage.save(taskList);
         } catch (Exception e) {

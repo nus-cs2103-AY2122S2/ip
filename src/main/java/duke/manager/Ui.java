@@ -1,9 +1,10 @@
 package duke.manager;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.IOException;
 import duke.exception.DukeException;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Ui {
     private static final String DIVIDER = "____________________________________________________________";
@@ -20,22 +21,22 @@ public class Ui {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         try {
             String command = br.readLine();
-            return  command;
+            return command;
         } catch (IOException e) {
             throw new DukeException("Problem reading input, please give a proper input");
         }
     }
 
     public void showError(String errMessage) {
-        System.out.println(INDENTATION+errMessage);
+        System.out.println(INDENTATION + errMessage);
     }
 
     public void showLine() {
-        System.out.println(INDENTATION+DIVIDER);
+        System.out.println(INDENTATION + DIVIDER);
     }
 
     public void print(String message) {
-        System.out.println(INDENTATION+message);
+        System.out.println(INDENTATION + message);
     }
 
 }

@@ -1,11 +1,11 @@
 package duke.command;
 
-import duke.manager.Ui;
-import duke.manager.TaskList;
-import duke.manager.Storage;
 import duke.exception.DukeException;
+import duke.manager.Storage;
+import duke.manager.TaskList;
+import duke.manager.Ui;
 
-public class MarkCommand extends Command{
+public class MarkCommand extends Command {
     private boolean isMark;
     private int taskNo;
 

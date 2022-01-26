@@ -1,15 +1,14 @@
 package duke.task;
 
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     public ToDo(String taskName) {
-        super (taskName);
+        super(taskName);
     }
 
     @Override
     public String toString() {
-        String done = getStatus() ? "[X]" : "[ ]";
+        String done = isComplete() ? "[X]" : "[ ]";
         return "[T]" + done + getTaskName();
     }
-
 }
