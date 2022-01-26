@@ -4,13 +4,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.BufferedReader;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Save {
+public class Storage {
     String fileName;
     final String DATA_PATH = "data";
 
-    public Save(String fileName) {
+    public Storage(String fileName) {
         File directory = new File(DATA_PATH);
         if (!directory.exists()) {
             directory.mkdir();
@@ -46,12 +47,13 @@ public class Save {
         }
     }
 
-    public void ParseFile(List<Task> list) {
+    public List<Task> ParseFile() throws DukeException {
         try {
             File myFile = new File(DATA_PATH + "/" + fileName);
             if (myFile.exists()) {
                 BufferedReader br = new BufferedReader(new FileReader(myFile));
                 String tempLine;
+                List<Task> list = new ArrayList<>();
                 while ((tempLine = br.readLine()) != null) {
                     // Split[0] = identifier, [1] = isDone, [2] = Description, [3] = at or by
                     String [] split = tempLine.split("\\|");
@@ -66,14 +68,12 @@ public class Save {
                     }
                 }
                 br.close();
+                return list;
             }
         }
         catch (IOException e) {
-            System.out.println("An error occured while reading file");
+            throw new DukeException("An error occurred while reading file");
         }
-        catch (DukeException e) {
-            System.out.println(e.getErrorMsg());
-        }
-
+        return null;
     }
 }
