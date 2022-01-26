@@ -49,10 +49,6 @@ public class Ui {
         System.out.println("Now you have " + taskList.getSize() + " tasks in the list");
     }
 
-    public void printNoTasksFound() {
-        System.out.println("No tasks found on this date! You are free!");
-    }
-
     public void emptyList() {
         System.out.println("You have no tasks at the moment!");
     }
