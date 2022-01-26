@@ -8,7 +8,8 @@ public enum Command {
     DELETE,
     TODO,
     DEADLINE,
-    EVENT;
+    EVENT,
+    FIND;
 
     @Override
     public String toString() {
