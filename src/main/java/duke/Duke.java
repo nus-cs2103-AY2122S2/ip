@@ -1,3 +1,15 @@
+package duke;
+
+import duke.command.Command;
+import duke.command.Parser;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
+import duke.ui.Ui;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
