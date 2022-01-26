@@ -1,12 +1,26 @@
+package duke;
+
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.EditTaskMarkCommand;
+import duke.command.EventCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.Ui;
+
 import java.util.Scanner;
-import java.util.StringTokenizer;
 import java.util.function.Function;
 import java.util.HashMap;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class Duke {
     private boolean isRunning;
@@ -43,10 +57,11 @@ public class Duke {
         };
 
         try {
-            storage = new Storage("data.txt", "data/");
+            storage = new Storage("data.txt", "./data/");
             storage.loadFromSave(taskList.getTaskList(), taskFactory);
         } catch (DukeException exception) {
             // TODO:: issues loading from storage
+            System.out.println(exception.getMessage());
         }
 
         // init parser
@@ -63,7 +78,7 @@ public class Duke {
         parser = new Parser(commands);
     }
 
-    /* Run Duke default behavior */
+    /* Run duke.Duke default behavior */
     public void runDuke() {
         ui.startGreeting();
         Scanner sc = new Scanner(System.in);

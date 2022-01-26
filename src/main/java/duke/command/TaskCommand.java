@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.util.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.util.Ui;
+
 public abstract class TaskCommand extends Command {
     private final static String TASK_DESC_EMPTY = "The description of your task cannot be empty.";
 

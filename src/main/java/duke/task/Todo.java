@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.util.StringTokenizer;
 
 public class Todo extends Task {

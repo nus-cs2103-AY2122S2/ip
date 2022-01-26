@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.util.Loading;
+import duke.util.Saving;
+
 public abstract class Task implements Saving, Loading {
     protected boolean isDone;
     protected String taskDescription;

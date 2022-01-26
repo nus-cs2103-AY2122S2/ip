@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.util.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.util.Ui;
+
 public class DeleteCommand extends Command {
     private final static String NO_INPUT = "You need to put the task number you want to delete!";
     private final static String INVALID_INPUT = "Invalid input, you need to give a number/integer";

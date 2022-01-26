@@ -1,3 +1,8 @@
+package duke.util;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+
 import java.util.HashMap;
 import java.util.StringTokenizer;
 

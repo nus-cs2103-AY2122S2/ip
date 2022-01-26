@@ -1,8 +1,10 @@
+package duke.util;
+
 public class Ui {
     public Ui() {
     }
 
-    /* Initial greeting for Duke */
+    /* Initial greeting for duke.Duke */
     public void startGreeting() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

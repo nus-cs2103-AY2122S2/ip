@@ -1,3 +1,7 @@
+package duke.util;
+
+import duke.exception.DukeException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.function.Function;
@@ -19,7 +23,7 @@ public class Storage {
     private final static String FILE_LOADING_ERROR_MSG = "HEY! File load data cannot be read or may be corrupted! Your prev save may be gone, start anew.";
     private final static String CANNOT_WRITE_TO_FILE_MSG = "Cannot write data to file. What's up with that?";
 
-    Storage(String fileName, String fileDirPath) throws DukeException {
+    public Storage(String fileName, String fileDirPath) throws DukeException {
         this.fileDirPath = fileDirPath;
         fullFilePath = fileDirPath + "/" + fileName;
 
@@ -62,9 +66,7 @@ public class Storage {
 
             scanner.close();
 
-        } catch (IOException exception) {
-            throw new DukeException(FILE_LOADING_ERROR_MSG);
-        } catch (DateTimeParseException exception) {
+        } catch (IOException | DateTimeParseException exception) {
             throw new DukeException(FILE_LOADING_ERROR_MSG);
         }
     }
