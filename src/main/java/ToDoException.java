@@ -8,6 +8,6 @@ public class ToDoException extends BobbyException {
 
     @Override
     public String toString() {
-        return "    There is no description after the todo command :(";
+        return "\tThere is no description after the todo command :(";
     }
 }

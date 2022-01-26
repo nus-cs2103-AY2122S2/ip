@@ -3,29 +3,33 @@ import java.time.LocalDate;
 
 public class Task implements Serializable, Comparable<Task> {
     protected String taskName;
-    protected boolean done;
+    protected boolean isDone;
     protected LocalDate date;
 
     public Task(String taskName) {
         this.taskName = taskName;
-        this.done = false;
+        this.isDone = false;
         date = null;
     }
 
     public void markDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     public void unmarkDone() {
-        this.done = false;
+        this.isDone = false;
     }
 
     public String getStatus() {
-        return done ? "[X] " : "[ ] ";
+        return isDone ? "[X] " : "[ ] ";
     }
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public boolean isDone() {
+        return isDone;
     }
 
     @Override

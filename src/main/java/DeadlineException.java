@@ -10,19 +10,19 @@ public class DeadlineException extends BobbyException {
         String error_string;
         switch (errtype) {
         case "blank":
-            error_string = "    There is no description after the \"deadline\" command :(";
+            error_string = "\tThere is no description after the \"deadline\" command :(";
             break;
         case "no_slash":
-            error_string = "    I cannot tell the due date and time, put it after a \"/\"";
+            error_string = "\tI cannot tell the due date and time, put it after a \"/\"";
             break;
         case "no_date":
-            error_string = "    There is nothing after the \"/\"! When is this due?";
+            error_string = "\tThere is nothing after the \"/\"! When is this due?";
             break;
         case "invalid_date":
-            error_string = "    Wrong date format! I only accept dd-mm-yyyy!";
+            error_string = "\tWrong date format! I only accept dd-mm-yyyy!";
             break;
         default:
-            error_string = "    I cannot understand this..";
+            error_string = "\tI cannot understand this..";
         }
         return error_string;
     }
