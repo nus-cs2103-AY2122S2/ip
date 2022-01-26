@@ -90,11 +90,11 @@ public class Duke {
             if (command.equals("event")) {
                 displayLine();
                 display("Got it. I've added this task:");
-                String[] descriptionAndTime = description.split("/");
-                 String eventDescription = (descriptionAndTime[0].split(" ", 2))[1];
-                 //String eventTime = (descriptionAndTime[1].split(" ", 2))[1];
-                LocalDate localDate = LocalDate.parse((descriptionAndTime[1].split(" ",2))[1]);
-                String eventTime = localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy HHmm"));
+                String[] descriptionAndTime = description.split("/"); //gives by 2019-12-09
+                String eventDescription = (descriptionAndTime[0].split(" ", 2))[1];//
+                LocalDate localDate = LocalDate.parse((descriptionAndTime[1].split(" ",3))[1]);
+                // System.out.println(descriptionAndTime[1].split(" ", 3)[1]);
+                String eventTime = localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
                  Event newEvent = new Event(eventDescription, eventTime);
                  dukeList.add(newEvent);
                  display(newEvent);
@@ -104,10 +104,10 @@ public class Duke {
                 String[] descriptionAndTime = description.split("/"); //gives by 2019-12-09
                 String deadlineDescription = (descriptionAndTime[0].split(" ", 2))[1];//
                 LocalDate localDate = LocalDate.parse((descriptionAndTime[1].split(" ",3))[1]);
-                System.out.println(descriptionAndTime[1].split(" ", 3)[1]);
+               // System.out.println(descriptionAndTime[1].split(" ", 3)[1]);
                 String deadlineTime = localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
 //                DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-              System.out.println(deadlineTime);
+              //System.out.println(deadlineTime);
 //                LocalDateTime dateTime = (LocalDateTime.parse(((descriptionAndTime[1].split(" ",2))[1]), inputFormat));
                  Deadline newDeadline = new Deadline(deadlineDescription, deadlineTime);
 
