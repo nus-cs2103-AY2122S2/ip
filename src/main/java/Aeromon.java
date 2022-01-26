@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -120,7 +121,7 @@ public class Aeromon {
             case DEADLINE: {
                 String description = getDescription("deadline");
                 String[] info = description.split("/by ");
-                Deadline task = new Deadline(info[0].trim(), info[1]);
+                Deadline task = new Deadline(info[0].trim(), LocalDate.parse(info[1]));
                 tasks.add(task);
                 System.out.println(task);
                 System.out.println(getTasksStatus());
@@ -129,7 +130,7 @@ public class Aeromon {
             case EVENT: {
                 String description = getDescription("event");
                 String[] info = description.split("/at ");
-                Event task = new Event(info[0].trim(), info[1]);
+                Event task = new Event(info[0].trim(), LocalDate.parse(info[1]));
                 tasks.add(task);
                 System.out.println(task);
                 System.out.println(getTasksStatus());
@@ -191,12 +192,12 @@ public class Aeromon {
                             break;
                         }
                         case "D": {
-                            Deadline task = new Deadline(info[2], info[3]);
+                            Deadline task = new Deadline(info[2], LocalDate.parse(info[3]));
                             tasks.add(task);
                             break;
                         }
                         case "E": {
-                            Event task = new Event(info[2], info[3]);
+                            Event task = new Event(info[2], LocalDate.parse(info[3]));
                             tasks.add(task);
                             break;
                         }
