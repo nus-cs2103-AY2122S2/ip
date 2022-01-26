@@ -54,12 +54,10 @@ public class Storage {
         // load task from duke.txt to todoList
         while (s.hasNext()) {
             String task = s.nextLine();
-            String[] taskContent = task.split(" # ");
-            String taskType = taskContent[0];
-            String taskStatus = taskContent[1];
-            String taskDescription = taskContent[2];
-
-
+            String[] taskContents = task.split(" # ");
+            String taskType = taskContents[0];
+            String taskStatus = taskContents[1];
+            String taskDescription = taskContents[2];
 
             switch (taskType) {
             case "T":
@@ -76,13 +74,15 @@ public class Storage {
                 todoList.add(todoTask);
                 break;
             case "D":
-                String dateAndTime = taskContent[3];
+                String dateAndTime = taskContents[3];
                 String date = dateAndTime.split(" ")[0];
                 String time = dateAndTime.split(" ")[1];
 
+                // deadline date and time
                 LocalTime deadlineTime = LocalTime.parse(time);
                 LocalDate deadlineDate = LocalDate.parse(date);
 
+                // creating deadline task
                 Deadline deadlineTask = new Deadline(taskDescription, deadlineDate, deadlineTime);
 
                 // check if task is completed
@@ -96,13 +96,15 @@ public class Storage {
                 todoList.add(deadlineTask);
                 break;
             case "E":
-                String dateAndTimeEvent = taskContent[3];
+                String dateAndTimeEvent = taskContents[3];
                 String eventDateString = dateAndTimeEvent.split(" ")[0];
                 String eventTimeString = dateAndTimeEvent.split(" ")[1];
 
+                // event date and time
                 LocalTime eventTime = LocalTime.parse(eventTimeString);
                 LocalDate eventDate = LocalDate.parse(eventDateString);
 
+                // creating event task
                 Event eventTask = new Event(taskDescription, eventDate, eventTime);
 
                 // check if task is completed

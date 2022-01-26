@@ -30,20 +30,19 @@ public class Duke {
         /**
          * Array container for user's to do tasks
          */
-        ArrayList<Task> todoList = new ArrayList<Task>();
-        TaskList taskList = new TaskList(todoList);
+        ArrayList<Task> todoLists = new ArrayList<Task>();
+        TaskList taskLists = new TaskList(todoLists);
 
         // initializing storage
         Storage storage = new Storage();
 
         // load data when duke starts up
         try {
-            todoList = storage.load();
-            taskList = new TaskList(todoList);
+            todoLists = storage.load();
+            taskLists = new TaskList(todoLists);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
 
         String userInput = sc.nextLine();
 
@@ -51,7 +50,7 @@ public class Duke {
             /**
              * A string to display the remaining task number
              */
-            String displayTaskAmount = String.format("Now you have %d tasks in the list.", todoList.size() + 1);
+            String displayTaskAmount = String.format("Now you have %d tasks in the list.", todoLists.size() + 1);
 
             if (userInput.equals("bye")) {
                 isBye = true;
@@ -60,10 +59,11 @@ public class Duke {
                 System.out.println("    Bye. See you again next time! Have a nice day 😊!");
                 System.out.println(LINES);
             } else {
-                // storing input task in todoList
+                // storing input task in todoLists
                 String[] userInputArr = userInput.split(" ");
                 String userCommand = userInputArr[0];
-                String userInputTask = String.join(" ", Arrays.copyOfRange(userInputArr, 1, userInputArr.length));
+                String userInputTask = String.join(" ",
+                        Arrays.copyOfRange(userInputArr, 1, userInputArr.length));
 
                 try {
                     Parser.userCommandValidator(userCommand);
@@ -74,154 +74,150 @@ public class Duke {
                 }
 
                 switch (userCommand) {
-                    case "list":
-                        Parser.parserList(taskList);
+                case "list":
+                    Parser.parserList(taskLists);
+                    break;
+                case "todo":
+                    // handle error from empty task description
+                    try {
+                        Parser.parserTodo(taskLists, userInputTask);
+                    } catch (DukeException e) {
+                        System.out.println(LINES);
+                        System.out.println("    OOPS!!! The description of a todo cannot be empty.");
+                        System.out.println(LINES);
                         break;
-                    case "todo":
-                        // handle error from empty task description
-                        try {
-                            Parser.parserTodo(taskList, userInputTask);
-                        } catch (DukeException e) {
-                            System.out.println(LINES);
-                            System.out.println("    OOPS!!! The description of a todo cannot be empty.");
-                            System.out.println(LINES);
-                            break;
-                        }
+                    }
 
-                        // save tasks to duke.txt
-                        storage.save(taskList);
+                    // save tasks to duke.txt
+                    storage.save(taskLists);
+                    break;
+                case "deadline":
+                    // handle error from empty task description
+                    try {
+                        Parser.parserDeadlineValidator(userInputTask);
+                    } catch (DukeException e) {
                         break;
-                    case "deadline":
-                        // handle error from empty task description
-                        try {
-                            Parser.parserDeadlineValidator(userInputTask);
-                        } catch (DukeException e) {
-                            break;
-                        }
+                    }
 
-                        // splitting deadline into description and by
-                        String[] deadlineTaskArr = userInputTask.split(" /by ");
-                        String[] byAndTime = deadlineTaskArr[1].split(" ");
-                        String by = byAndTime[0];
+                    // splitting deadline into description and by
+                    String[] deadlineTaskArr = userInputTask.split(" /by ");
+                    String[] byAndTime = deadlineTaskArr[1].split(" ");
+                    String by = byAndTime[0];
 
-                        try {
-                            String deadlineTime = byAndTime[1];
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            System.out.println(LINES);
-                            System.out.println("    Deadline time is required");
-                            System.out.println(LINES);
-                            break;
-                        }
-
+                    try {
                         String deadlineTime = byAndTime[1];
-
-                        // handle error when time is not in the hh:mm 24hr clock format
-                        try {
-                            LocalTime.parse(deadlineTime);
-                        } catch (DateTimeParseException e) {
-                            System.out.println(LINES);
-                            System.out.println("    Time must be in the hh:mm 24hr format");
-                            System.out.println(LINES);
-                            break;
-                        }
-
-                        // handle error when there is invalid deadline date format
-                        try {
-                            Parser.deadlineDateFormatValidator(by);
-                        } catch (DukeException e) {
-                            System.out.println(LINES);
-                            System.out.println("    OOPS!!! Deadline tasks can only be in the YYYY-MM-DD format.");
-                            System.out.println(LINES);
-                            break;
-                        }
-
-                        Parser.parserDeadline(taskList, userInputTask);
-
-                        // save tasks to duke.txt
-                        storage.save(taskList);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println(LINES);
+                        System.out.println("    Deadline time is required");
+                        System.out.println(LINES);
                         break;
+                    }
 
-                    case "event":
+                    String deadlineTime = byAndTime[1];
 
-                        try {
-                            Parser.parserEventValidator(userInputTask);
-                        } catch (DukeException e) {
-                            break;
-                        }
+                    // handle error when time is not in the hh:mm 24hr clock format
+                    try {
+                        LocalTime.parse(deadlineTime);
+                    } catch (DateTimeParseException e) {
+                        System.out.println(LINES);
+                        System.out.println("    Time must be in the hh:mm 24hr format");
+                        System.out.println(LINES);
+                        break;
+                    }
 
-                        // splitting event into description and dateTime
-                        String[] eventTaskArr = userInputTask.split(" /at ");
-                        String[] eventDateAndTime = eventTaskArr[1].split(" ");
-                        String eventDate = eventDateAndTime[0];
+                    // handle error when there is invalid deadline date format
+                    try {
+                        Parser.deadlineDateFormatValidator(by);
+                    } catch (DukeException e) {
+                        System.out.println(LINES);
+                        System.out.println("    OOPS!!! Deadline tasks can only be in the YYYY-MM-DD format.");
+                        System.out.println(LINES);
+                        break;
+                    }
 
-                        try {
-                            String eventTime = eventDateAndTime[1];
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            System.out.println(LINES);
-                            System.out.println("    Event time is required");
-                            System.out.println(LINES);
-                            break;
-                        }
+                    Parser.parserDeadline(taskLists, userInputTask);
 
+                    // save tasks to duke.txt
+                    storage.save(taskLists);
+                    break;
+                case "event":
+
+                    try {
+                        Parser.parserEventValidator(userInputTask);
+                    } catch (DukeException e) {
+                        break;
+                    }
+
+                    // splitting event into description and dateTime
+                    String[] eventTaskArr = userInputTask.split(" /at ");
+                    String[] eventDateAndTime = eventTaskArr[1].split(" ");
+                    String eventDate = eventDateAndTime[0];
+
+                    try {
                         String eventTime = eventDateAndTime[1];
-
-                        // handle error when time is not in the hh:mm 24hr clock format
-                        try {
-                            LocalTime.parse(eventTime);
-                        } catch (DateTimeParseException e) {
-                            System.out.println(LINES);
-                            System.out.println("    Time must be in the hh:mm 24hr format");
-                            System.out.println(LINES);
-                            break;
-                        }
-
-                        LocalTime atTime = LocalTime.parse(eventTime);
-                        // handle error when there is invalid deadline date format
-                        try {
-                            Parser.eventDateFormatValidator(eventDate);
-                        } catch (DukeException e) {
-                            System.out.println(LINES);
-                            System.out.println("    OOPS!!! Deadline tasks can only be in the YYYY-MM-DD format.");
-                            System.out.println(LINES);
-                            break;
-                        }
-
-                        Parser.parserEvent(taskList, userInputTask);
-
-                        // save tasks to duke.txt
-                        storage.save(taskList);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println(LINES);
+                        System.out.println("    Event time is required");
+                        System.out.println(LINES);
                         break;
+                    }
 
-                    case "mark":
-                        Parser.parserMark(taskList, userInputArr);
+                    String eventTime = eventDateAndTime[1];
 
-                        // save update tasks to duke.txt
-                        storage.save(taskList);
+                    // handle error when time is not in the hh:mm 24hr clock format
+                    try {
+                        LocalTime.parse(eventTime);
+                    } catch (DateTimeParseException e) {
+                        System.out.println(LINES);
+                        System.out.println("    Time must be in the hh:mm 24hr format");
+                        System.out.println(LINES);
                         break;
+                    }
 
-                    case "unmark":
-                        Parser.parserUnmark(taskList, userInputArr);
+                    LocalTime atTime = LocalTime.parse(eventTime);
 
-                        // save update tasks to duke.txt
-                        storage.save(taskList);
+                    // handle error when there is invalid deadline date format
+                    try {
+                        Parser.eventDateFormatValidator(eventDate);
+                    } catch (DukeException e) {
+                        System.out.println(LINES);
+                        System.out.println("    OOPS!!! Deadline tasks can only be in the YYYY-MM-DD format.");
+                        System.out.println(LINES);
                         break;
+                    }
 
-                    case "delete":
-                        try {
-                            Parser.parserDeleteValidator(taskList, userInputTask);
-                        } catch (DukeException e) {
-                            break;
-                        }
+                    Parser.parserEvent(taskLists, userInputTask);
 
-                        Parser.parserDelete(taskList, userInputArr);
+                    // save tasks to duke.txt
+                    storage.save(taskLists);
+                    break;
+                case "mark":
+                    Parser.parserMark(taskLists, userInputArr);
 
-                        // save update tasks to duke.txt
-                        storage.save(taskList);
+                    // save update tasks to duke.txt
+                    storage.save(taskLists);
+                    break;
+                case "unmark":
+                    Parser.parserUnmark(taskLists, userInputArr);
+
+                    // save update tasks to duke.txt
+                    storage.save(taskLists);
+                    break;
+                case "delete":
+                    try {
+                        Parser.parserDeleteValidator(taskLists, userInputTask);
+                    } catch (DukeException e) {
                         break;
+                    }
 
-                    case "find":
-                        Parser.parserFind(taskList, userInputTask);
-                        break;
+                    Parser.parserDelete(taskLists, userInputArr);
+
+                    // save update tasks to duke.txt
+                    storage.save(taskLists);
+                    break;
+                case "find":
+                    Parser.parserFind(taskLists, userInputTask);
+                    break;
                 }
                 userInput = sc.nextLine();
             }
