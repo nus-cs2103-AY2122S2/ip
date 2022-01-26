@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -44,7 +46,7 @@ public class Command {
         return true;
     }
 
-    private static int formatNumber(String userInput) throws DukeException{
+    private static int formatNumber(String userInput) throws DukeException {
         if (!isInteger(userInput)) {
             throw new DukeException("☹ OOPS!!! Please enter a appropriate integer\n");
         }

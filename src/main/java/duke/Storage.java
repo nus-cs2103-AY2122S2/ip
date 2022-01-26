@@ -1,9 +1,8 @@
+package duke;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class Storage {
@@ -12,7 +11,7 @@ public class Storage {
 
     public Storage() {
         this.filepath = System.getProperty("user.dir") + File.separator + "data";
-        this.filename = "Storage.txt";
+        this.filename = "duke.Storage.txt";
         try {
             if (!Files.exists(Paths.get(filepath))) {
                 Files.createDirectories(Paths.get(filepath));

@@ -1,6 +1,4 @@
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+package duke;
 
 public class Parser {
 
@@ -43,7 +41,7 @@ public class Parser {
                     String temp = inputMessage.substring(6);
                     msg = temp.split(" /at");
                     if (msg.length != 2) {
-                        throw new DukeException("☹ OOPS!!! I'm sorry, the Event description cannot be empty\n");
+                        throw new DukeException("☹ OOPS!!! I'm sorry, the duke.Event description cannot be empty\n");
                     }
                     msg = new String[]{"event", msg[0], msg[1]};
                 } else {
