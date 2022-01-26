@@ -1,0 +1,4 @@
+Commands | Format
+todo |  todo [taskname]
+deadline | deadline [taskname] /[time]
+event | event [taskname] /[time]

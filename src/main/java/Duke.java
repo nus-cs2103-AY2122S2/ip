@@ -1,7 +1,18 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Duke {
+
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
     public static void main(String[] args) {
         String logo =         "\n" +
                 "       _       _        \n" +
@@ -95,19 +106,37 @@ public class Duke {
                 totalString += "    ____________________________________________________________\n";
                 System.out.println(totalString);
             } else if (splittedString[0].equals("delete")) { //check for delete
-                int index = Integer.valueOf(splittedString[1]);
+                try {
+                    int index = Integer.valueOf(splittedString[1]);
 
-                String toRemove = itemList.remove(index - 1).getDescription();
-                System.out.println("    ____________________________________________________________\n" +
-                        "     Noted. I've removed this task: \n" +
-                        "       " + toRemove + "\n" +
-                        "     Now you have " + itemList.size() + " tasks in the list.\n" +
-                        "    ____________________________________________________________");
+                    String toRemove = itemList.remove(index - 1).getDescription();
+                    System.out.println("    ____________________________________________________________\n" +
+                            "     Noted. I've removed this task: \n" +
+                            "       " + toRemove + "\n" +
+                            "     Now you have " + itemList.size() + " tasks in the list.\n" +
+                            "    ____________________________________________________________");
+                } catch (NumberFormatException n) {
+                    System.out.println("Invalid input, please enter a valid index number instead");
+                }
             } else { //check non-existing commands
                 System.out.println("    ____________________________________________________________\n" +
                         "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
                         "    ____________________________________________________________");
             }
+            System.out.println(itemList.size());
+
+            File existingFile = new File("data/duke.txt");
+            existingFile.delete();
+
+            String file2 = "data/duke.txt";
+            try {
+                for (Task t : itemList) {
+                    writeToFile(file2, t.getDescription() + "\n");
+                }
+            } catch (IOException e) {
+                System.out.println("Something went wrong: " + e.getMessage());
+            }
         }
+
     }
 }
