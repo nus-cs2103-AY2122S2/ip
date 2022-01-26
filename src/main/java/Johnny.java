@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.util.Scanner;
 public class Johnny {
 
@@ -70,7 +72,7 @@ public class Johnny {
                     String content = tags[1];
                     String[] details = content.split("/", 2);
 
-                    Task newTask = new Deadline(details[0], details[1], false);
+                    Task newTask = new Deadline(details[0], LocalDate.parse(details[1]), false);
                     userList.add(newTask);
 
                     System.out.println("Got it! I've added this task:");
@@ -89,7 +91,7 @@ public class Johnny {
                     String content = tags[1];
                     String[] details = content.split("/", 2);
 
-                    Task newTask = new Event(details[0], details[1], false);
+                    Task newTask = new Event(details[0], LocalDate.parse(details[1]), false);
                     userList.add(newTask);
 
                     System.out.println("Got it! I've added this task:");
@@ -108,6 +110,8 @@ public class Johnny {
             }
             catch (NoDateException e) {
                 System.out.println(e.errorMessage());
+            } catch (DateTimeException e) {
+                e.printStackTrace();
             }
         }
     }
