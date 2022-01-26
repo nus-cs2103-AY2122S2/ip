@@ -14,12 +14,16 @@ public class Duke {
 
         List<Task> tasks = new ArrayList<Task>();
 
+        Save saveFile = new Save("save.txt");
+        saveFile.ParseFile(tasks);
+
         while (true) {
             try {
                 String input = scanner.nextLine();
                 String[] split = input.split(" ");
                 if (input.equals("bye")) {
                     System.out.println(lines + "\nBye. Hope to see you again soon!\n" + lines);
+                    saveFile.OverwriteFile(tasks);
                     break;
                 } else if (input.equals("list")) {
                     System.out.println(lines);
@@ -87,7 +91,8 @@ public class Duke {
                     if (split.length == 1) {
                         throw new DukeException("OH NO! The description of event cannot be empty.");
                     } else {
-                        tasks.add(new Todo(input.replace("todo ", "")));
+                        Todo newTodo = new Todo(input.replace("todo ", ""));
+                        tasks.add(newTodo);
                         System.out.println(lines + "\nGot it. I've added this task:\n" + tasks.get(tasks.size()-1).toString()
                                 + "\n" + "Now you have " + tasks.size() + " tasks in the list.\n" + lines);
                     }
@@ -96,9 +101,10 @@ public class Duke {
                     if (split.length == 1) {
                         throw new DukeException("OH NO! The description of event cannot be empty.");
                     } else {
-                        String[] newSplit = input.split("/by ");
+                        String[] newSplit = input.split(" /by ");
                         if (newSplit.length > 1) {
-                            tasks.add(new Deadline(newSplit[0].replace("deadline ", ""), newSplit[1]));
+                            Deadline newDeadline = new Deadline(newSplit[0].replace("deadline ", ""), newSplit[1]);
+                            tasks.add(newDeadline);
                             System.out.println(lines + "\nGot it. I've added this task:\n" + tasks.get(tasks.size()-1).toString()
                                     + "\n" + "Now you have " + tasks.size() + " tasks in the list.\n" + lines);
                         } else {
@@ -109,9 +115,11 @@ public class Duke {
                     if (split.length == 1) {
                         throw new DukeException("OH NO! The description of event cannot be empty.");
                     } else {
-                        String[] newSplit = input.split("/at ");
+                        String[] newSplit = input.split(" /at ");
                         if (newSplit.length > 1) {
-                            tasks.add(new Event(newSplit[0].replace("event ", ""), newSplit[1]));
+                            Event newEvent = new Event(newSplit[0].replace("event ", ""), newSplit[1]);
+                            tasks.add(newEvent);
+                            saveFile.WriteToFile("E|0|" + newEvent.getDescription() + "|" + newEvent.getAt() + "\n");
                             System.out.println(lines + "\nGot it. I've added this task:\n" + tasks.get(tasks.size()-1).toString()
                                     + "\n" + "Now you have " + tasks.size() + " tasks in the list.\n" + lines);
                         } else {
@@ -121,6 +129,7 @@ public class Duke {
                 } else {
                     throw new DukeException("Sorry :( I don't know what this means.");
                 }
+                saveFile.OverwriteFile(tasks);
             } catch (DukeException e) {
                 System.out.println(lines + "\n" + e.getErrorMsg() + "\n" + lines);
             }
