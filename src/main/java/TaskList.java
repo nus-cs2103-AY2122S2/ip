@@ -1,59 +1,38 @@
-import java.io.IOException;
 import java.util.ArrayList;
-import java.io.File;
-import java.io.FileWriter;
 import java.util.Scanner;
 
-public class TodoList {
+public class TaskList {
 
     private final ArrayList<Task> items;
 
-    private File file;
-    private Scanner scanner;
-    private final String filePath = "data.txt";
+    private Storage storage;
 
-    TodoList() {
+    TaskList(Storage storage) throws DukeException {
         items = new ArrayList<>();
-        file = new File(filePath);
-        try {
-            file.createNewFile();
-            scanner = new Scanner(file);
-            readFromFile();
-        } catch (DukeException e) {
-
-            try {
-                // empty the corrupted file
-                FileWriter writer = new FileWriter(filePath, false);
-                writer.close();
-            } catch (IOException e1) {
-                System.out.println(e1.getMessage());
-            }
-
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
+        this.storage = storage;
+        readFromFile();
     }
 
-    public String deleteItem(int index) {
+    public String deleteItem(int index) throws DukeException {
         Task item = items.get(index);
         items.remove(index);
         saveToFile();
         return item.toString();
     }
 
-    public String markItem(int index) {
+    public String markItem(int index) throws DukeException {
         items.get(index).mark();
         saveToFile();
         return items.get(index).toString();
     }
 
-    public String unmarkItem(int index) {
+    public String unmarkItem(int index) throws DukeException {
         items.get(index).unmark();
         saveToFile();
         return items.get(index).toString();
     }
 
-    public String addTodo(String name) {
+    public String addTodo(String name) throws DukeException {
         Task item = new TodoTask(name);
         items.add(item);
         saveToFile();
@@ -75,6 +54,7 @@ public class TodoList {
     }
 
     private void readFromFile() throws DukeException {
+        Scanner scanner = storage.read();
         while (scanner.hasNext()) {
             String[] data = scanner.nextLine().split(" \\| ");
             String type = data[0];
@@ -99,19 +79,12 @@ public class TodoList {
         }
     }
 
-    private void saveToFile() {
-        try {
-            FileWriter writer = new FileWriter(filePath, false);
-            String result = "";
-            for (Task item : items) {
-                result = result.concat(item.toStore() + "\n");
-            }
-
-            writer.write(result);
-            writer.close();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+    private void saveToFile() throws DukeException{
+        String result = "";
+        for (Task item : items) {
+            result = result.concat(item.toStore() + "\n");
         }
+        this.storage.write(result);
     }
 
     public String listCount() {
