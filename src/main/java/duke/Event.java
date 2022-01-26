@@ -62,11 +62,11 @@ public class Event extends Task {
     public String getDescription() {
         String newReply = super.description.replace("event ", "");
         String taskAtHand = newReply.split("/")[0];
-        String deadline = newReply.split("/")[1].replace("at ", "at: ");
-        String date = deadline.split(" ")[1].split("-")[0];
-        String month = digitMonth_to_AlphabeticalMonth(deadline.split(" ")[1].split("-")[1]);
-        String year = deadline.split(" ")[1].split("-")[2];
-        String time = Integer.toString(Integer.parseInt(deadline.split(" ")[2]) % 1200);
+        String deadLine = newReply.split("/")[1].replace("at ", "at: ");
+        String date = deadLine.split(" ")[1].split("-")[0];
+        String month = digitMonth_to_AlphabeticalMonth(deadLine.split(" ")[1].split("-")[1]);
+        String year = deadLine.split(" ")[1].split("-")[2];
+        String time = Integer.toString(Integer.parseInt(deadLine.split(" ")[2]) % 1200);
         if (time.length() < 4 ) {
             time += "pm";
         } else {

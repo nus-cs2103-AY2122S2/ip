@@ -22,9 +22,10 @@ public class Duke {
 
 
         System.out.println(op.greeting + op.logo);
-        System.out.println(op.border +
-                op.firstPrompt +
-                op.instructions + op.border);
+        System.out.println(op.border
+                           + op.firstPrompt
+                           + op.instructions
+                           + op.border);
         ArrayList<Task> itemList = new ArrayList<>();
         while(true) {
 
