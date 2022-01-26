@@ -1,18 +1,10 @@
 package li.zhongfu.cs2103.chatbot;
 
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
-import java.time.temporal.ChronoField;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import li.zhongfu.cs2103.chatbot.exceptions.StorageException;
 import li.zhongfu.cs2103.chatbot.types.Parser;
@@ -26,35 +18,48 @@ import li.zhongfu.cs2103.chatbot.types.tasks.Task;
 import li.zhongfu.cs2103.chatbot.types.tasks.ToDo;
 
 public class Duke {
-        private static final String BOT_NAME = "Duke";
+    private final String botName;
 
-    public static void main(String[] args) throws IOException {
-        UserInterface ui = new UserInterface(System.out);
-        ui.printMotd();
-        Parser parser = new Parser(System.in);
+    private Parser parser;
+    private UserInterface ui;
+    private Storage storage;
+    private TaskList tasks;
 
-        Storage storage = new Storage("data/tasks.dat");
-        TaskList tasks;
+    public Duke(String botName, String filePath) {
+        this.botName = botName;
+        this.parser = new Parser(System.in);
+        this.ui = new UserInterface(System.out);
+        this.storage = new Storage(filePath);
+        this.init();
+    }
+
+    public Duke(String botName) {
+        this(botName, "data/tasks.dat");
+    }
+
+    private void init() {
+        this.ui.printMotd();
         try {
-            tasks = TaskList.loadFromStorage(storage);
-            ui.println(String.format("Loaded %s tasks.", tasks.size()));
+            this.tasks = TaskList.loadFromStorage(this.storage);
+            this.ui.println(String.format("Loaded %s tasks.", this.tasks.size()));
         } catch (FileNotFoundException e) {
-            ui.println("No saved tasks file found, starting with an empty task list.");
-            tasks = new TaskList();
+            this.ui.println("No saved tasks file found, starting with an empty task list.");
+            this.tasks = new TaskList();
         } catch (StorageException e) {
-            ui.println("Error loading tasks! Starting with an empty task list.");
-            tasks = new TaskList();
+            this.ui.println("Error loading tasks! Starting with an empty task list.");
+            this.tasks = new TaskList();
         }
 
-        ui.printDialog(new String[] {
-                String.format("Hello! I'm %s", BOT_NAME),
+        this.ui.printDialog(new String[] {
+                String.format("Hello! I'm %s", this.botName),
                 "How can I help you?"
         });
+    }
 
-        
+    public void loop() throws IOException {
         while (true) {
             try {
-                ParserResult result = parser.parseNext();
+                ParserResult result = this.parser.parseNext();
                 String cmd = result.getCmd();
                 switch (cmd) {
                     case "mark":
@@ -64,16 +69,16 @@ public class Duke {
                             int idx = Integer.parseInt(result.getPosArg()) - 1; // list is 1-indexed
 
                             if ("delete".equals(cmd)) {
-                                Task task = tasks.remove(idx);
-                                ui.printDialog(new String[] {
+                                Task task = this.tasks.remove(idx);
+                                this.ui.printDialog(new String[] {
                                     "Task removed:",
                                     String.format(" %s", task)
                                 });
                             } else {
-                                Task task = tasks.get(idx);
                                 boolean done = "mark".equals(cmd); // set as done if cmd == "mark", else (e.g. cmd == "unmark") set as undone
+                                Task task = this.tasks.get(idx);
                                 task.setDone(done); 
-                                ui.printDialog(new String[] {
+                                this.ui.printDialog(new String[] {
                                     String.format("Task marked as %sdone:", done ? "" : "un"),
                                     String.format(" %s", task)
                                 });
@@ -86,13 +91,13 @@ public class Duke {
                         break;
 
                     case "list":
-                        if (tasks.isEmpty()) {
-                            ui.printDialog("You have no tasks in your task list!");
+                        if (this.tasks.isEmpty()) {
+                            this.ui.printDialog("You have no tasks in your task list!");
                         } else {
                             List<String> output = new ArrayList<>();
                             output.add("Here are the tasks in your list:");
-                            output.addAll(tasks.toEnumeratedList());
-                            ui.printDialog(output.toArray(String[]::new));
+                            output.addAll(this.tasks.toEnumeratedList());
+                            this.ui.printDialog(output.toArray(String[]::new));
                         }
                         break;
 
@@ -110,7 +115,7 @@ public class Duke {
                             }
 
                             try {
-                                task = new Deadline(result.getPosArg(), parser.parseDateTime(result.getArg("by")));
+                                task = new Deadline(result.getPosArg(), this.parser.parseDateTime(result.getArg("by")));
                             } catch (DateTimeParseException e) {
                                 throw new DukeException(String.format("Unknown date format! Try: deadline %s /by 1 jan 2050 12:15", result.getPosArg()));
                             }
@@ -128,42 +133,47 @@ public class Duke {
                             task = new ToDo(result.getPosArg());
                         }
                         
-                        tasks.add(task);
-                        ui.printDialog(new String[] {
+                        this.tasks.add(task);
+                        this.ui.printDialog(new String[] {
                             "New task added:",
                             String.format(" %s", task),
-                            String.format("You now have %d tasks in your task list.", tasks.size())
+                            String.format("You now have %d tasks in your task list.", this.tasks.size())
                         });
                         break;
 
                     case "reload":
                         try {
-                            tasks = TaskList.loadFromStorage(storage);
-                            ui.printDialog(String.format("Tasks reloaded; %d tasks in list now", tasks.size()));
+                            this.tasks = TaskList.loadFromStorage(this.storage);
+                            this.ui.printDialog(String.format("Tasks reloaded; %d tasks in list now", this.tasks.size()));
                         } catch (FileNotFoundException e) {
-                            ui.printDialog("Saved tasks file not found! Skipping reload.");
+                            this.ui.printDialog("Saved tasks file not found! Skipping reload.");
                         } catch (StorageException e) {
-                            ui.printDialog("Error loading tasks! Skipping reload.");
+                            this.ui.printDialog("Error loading tasks! Skipping reload.");
                         }
                         break;
                     
                     case "save":
-                        tasks.save(storage);
-                        ui.printDialog("Tasks saved!");
+                        this.tasks.save(this.storage);
+                        this.ui.printDialog("Tasks saved!");
                         break;
 
                     case "bye":
-                        tasks.save(storage);
-                        ui.printDialog("Bye. Hope to see you again soon!");
+                        this.tasks.save(this.storage);
+                        this.ui.printDialog("Bye. Hope to see you again soon!");
                         return;
 
                     default:
                         throw new DukeException("I don't know what that means! Try: todo, deadline, event, list, delete, mark, unmark, reload, save, bye");
                 }
             } catch (DukeException e) {
-                ui.printDialog(e.getMessage().split("\n"));
+                this.ui.printDialog(e.getMessage().split("\n"));
             }
         }
+    }
+
+    public static void main(String[] args) throws IOException {
+        Duke duke = new Duke("Duke");
+        duke.loop();
     }
 }
 
