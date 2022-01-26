@@ -1,9 +1,24 @@
-public class Deadline extends Task{
-    private String dueBy;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-    public Deadline(String title, String dueBy) {
+public class Deadline extends Task{
+    private final LocalDateTime dueBy;
+    private static final String DEFAULT_DATE_FORMAT = "d/MM/yyyy HHmm";
+    private static final String OUTPUT_DATE_FORMAT = "dd MMMM yyyy HHmm";
+
+    public Deadline(String title, String dueBy) throws DukeException {
         super(title);
-        this.dueBy = dueBy;
+        this.dueBy = parseDateTime(dueBy);
+    }
+
+    public LocalDateTime parseDateTime(String dueBy) throws DukeException {
+        try {
+            DateTimeFormatter format = DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT);
+            return LocalDateTime.parse(dueBy, format);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Invalid date time format." + e.getMessage());
+        }
     }
 
     @Override
@@ -13,6 +28,7 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.dueBy + ")";
+        DateTimeFormatter format = DateTimeFormatter.ofPattern(OUTPUT_DATE_FORMAT);
+        return String.format("[D] %s (by: %s)",super.toString(), this.dueBy.format(format));
     }
 }
