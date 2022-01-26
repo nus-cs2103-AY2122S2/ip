@@ -1,11 +1,6 @@
-<<<<<<< Updated upstream
-import java.util.*;
-=======
-import java.io.File;
-import java.io.IOException;
-import java.util.Date;
+
 import java.util.Scanner;
->>>>>>> Stashed changes
+
 
 
 public class Duke {
