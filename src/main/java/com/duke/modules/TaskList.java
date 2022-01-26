@@ -74,4 +74,30 @@ public class TaskList {
     }
     return output.trim();
   }
+
+  public String displayCustomList(ArrayList<Task> taskList) {
+    String output = "";
+    if (taskList.size() == 0) {
+      output = "No matches found.";
+    } else {
+      for (int i = 0; i < taskList.size(); i++) {
+        Task currTask = taskList.get(i);
+        output = output + String.valueOf(i + 1) + ". " + currTask.toString() + "\n";
+      }
+    }
+    return output.trim();
+  }
+
+  public ArrayList<Task> findMatch(String args) {
+    ArrayList<Task> matchResultsList = new ArrayList<>();
+    if (taskList.size() != 0) {
+      for (int i = 0; i < taskList.size(); i++) {
+        Task currTask = taskList.get(i);
+        if (currTask.getDescription().contains(args)) {
+          matchResultsList.add(currTask);
+        }
+      }
+    }
+    return matchResultsList;
+  }
 }
