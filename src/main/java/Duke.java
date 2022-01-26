@@ -237,6 +237,6 @@ public class Duke {
     public static void startGreeting() {
         System.out.println("A very good day to you master, I'm Blue the Genie");
         System.out.println("What do you wish for today? Your wish is my command");
-        System.out.println("*-**-**-**-**-**-**-**-**-**-****-**-****-**-****-**");
+        System.out.println("****-**-****-**-****-**-****-**-****-**-****-**-****-**-****-**");
     }
 }
