@@ -1,0 +1,4 @@
+T|1|buy food 
+T|0|buy food 
+T|0|kill yourself 
+D|0|buy more more food|2020-10-10|18:00

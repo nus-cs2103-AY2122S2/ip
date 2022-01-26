@@ -45,6 +45,12 @@ public class DialogBox extends HBox {
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
+        for (int i = 0; i < tmp.size(); i++) {
+            if (tmp.get(i) instanceof Label) {
+                ((Label) tmp.get(i)).setStyle("-fx-background-color: #d4d4d4; " +
+                        "-fx-background-radius: 10;");
+            }
+        }
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
     }
