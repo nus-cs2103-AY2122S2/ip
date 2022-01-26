@@ -65,6 +65,13 @@ public class Parser {
                 throw new JarvisException("The date of the event cannot be empty.");
             }
             parsedCommand.put("date", parseDateTime(split[1]));
+        } else if (command == Command.FIND) {
+            try {
+                String keyword = tokens[1];
+                parsedCommand.put("keyword", keyword);
+            } catch (IndexOutOfBoundsException e) {
+                throw new JarvisException("The keyword cannot be empty.");
+            }
         }
 
         return parsedCommand;

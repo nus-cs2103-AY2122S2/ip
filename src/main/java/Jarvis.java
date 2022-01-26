@@ -46,6 +46,9 @@ public class Jarvis {
                 case EVENT:
                     tasks.addEvent(parsedCommand);
                     break;
+                case FIND:
+                    tasks.findTasks(parsedCommand);
+                    break;
                 default:
                     break;
                 }
