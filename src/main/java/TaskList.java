@@ -1,9 +1,36 @@
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.io.File;  // Import the File class
+import java.io.IOException;  // Import the IOException class to handle errors
 
 public class TaskList {
     private final ArrayList<Task> itemList = new ArrayList<>(0);
+    private Path absolutePath;
+    private String fileName;
 
-    public TaskList() {}
+    //read file and initialize arraylist: if dont have existing file, create.
+    public TaskList(String fileName) {
+        String currentDir = System.getProperty("user.dir");
+        Path currentPath = Path.of(currentDir + File.separator + "data");
+        this.absolutePath = currentPath.toAbsolutePath();
+        this.fileName = fileName;
+    }
+
+    public void initFile() {
+        try {
+            this.absolutePath = Files.createDirectories(this.absolutePath);
+        } catch (IOException err) {
+
+        }
+
+        try {
+            Path pathToFile = this.absolutePath.resolve(this.fileName);
+            Files.createFile(pathToFile);
+        } catch (IOException err) {
+
+        }
+    }
 
     public void addTodo(String taskKey) {
             String[] tokens = taskKey.split("todo ");

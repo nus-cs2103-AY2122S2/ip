@@ -2,9 +2,8 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Gene {
-    //In future iterations: Make Identity, TaskList as a initialized class.
     private final static Identity thisIdentity = new Identity();
-    private final static TaskList thisList = new TaskList();
+    private final static TaskList thisList = new TaskList("gene.txt");
 
     public static void main(String[] args) {
         String logo = " GGGG                      \n"
@@ -16,6 +15,7 @@ public class Gene {
                 + " GGGG    eeee   n    n   eeee ";
         System.out.println("Hello from\n" + logo);
 
+        thisList.initFile();
         Scanner scanner = new Scanner(System.in);
 
         while (scanner.hasNextLine()) {
