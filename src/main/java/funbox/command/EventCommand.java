@@ -1,4 +1,11 @@
-import java.time.LocalDate;
+package funbox.command;
+
+import funbox.exception.FunBoxExceptions;
+import funbox.util.Ui;
+import funbox.util.TaskList;
+import funbox.util.Storage;
+import funbox.util.Parser;
+import funbox.task.Event;
 
 public class EventCommand extends Command {
     String description;

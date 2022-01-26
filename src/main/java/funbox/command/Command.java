@@ -1,4 +1,10 @@
+package funbox.command;
+
 import java.io.IOException;
+import funbox.exception.FunBoxExceptions;
+import funbox.util.Ui;
+import funbox.util.TaskList;
+import funbox.util.Storage;
 
 public abstract class Command {
     boolean isExit;

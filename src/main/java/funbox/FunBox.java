@@ -1,8 +1,13 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+package funbox;
+
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.concurrent.ConcurrentMap;
+import funbox.util.Ui;
+import funbox.util.Parser;
+import funbox.util.Storage;
+import funbox.util.TaskList;
+import funbox.command.Command;
+import funbox.exception.FunBoxExceptions;
 
 /**
  * The FunBox class is used as the outer shell of FunBoxGear,
@@ -15,17 +20,14 @@ public class FunBox {
         Parser parser = new Parser();
         Storage storage = new Storage(ui, parser);
         TaskList taskList = storage.getTaskList();
-        boolean isExit = false;
-
         ui.greetUser();
-
-        boolean isLoop = true;
+        boolean isExit = false;
         while(!isExit) {
             try {
                 String command = sc.nextLine();
                 Command c = parser.parseCommand(command, taskList, ui);
                 c.execute(taskList, ui, storage);
-                isExit = c.isExit;
+                isExit = c.isExit();
             } catch (FunBoxExceptions | IOException e) {
                 ui.showError(e.getMessage());
             }

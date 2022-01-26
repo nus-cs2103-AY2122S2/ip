@@ -1,8 +1,14 @@
+package funbox.util;
+
 import java.io.*;
 import java.nio.file.Paths;
 import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
+import funbox.exception.FunBoxExceptions;
+import funbox.task.Deadline;
+import funbox.task.Event;
+import funbox.task.Task;
+import funbox.task.ToDo;
 
 public class Storage {
     private final String DIRURL = "data/";
@@ -18,6 +24,7 @@ public class Storage {
         this.ui = ui;
         this.parser = parser;
         this.typeHashmap = new HashMap<>();
+        this.taskList = new TaskList();
         setUpHashMap();
         preCheck();
     }
@@ -31,7 +38,6 @@ public class Storage {
     private void preCheck() {
         if (!isDirectoryExist()) {
             boolean isDirectoryCreated = this.createDirectory();
-
             if (isDirectoryCreated) {
                 this.ui.printDirSuccess();
                 this.createFile(this.FILEURL);

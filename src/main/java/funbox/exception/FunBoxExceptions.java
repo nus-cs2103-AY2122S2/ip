@@ -1,3 +1,5 @@
+package funbox.exception;
+
 /**
  * FunBoxExceptions is exceptions used by FunBoxGear for error handling
  */

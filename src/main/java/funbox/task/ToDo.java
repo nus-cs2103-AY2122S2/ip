@@ -1,6 +1,4 @@
-//@@author junrong98-reused
-//Reused from https://nus-cs2103-ay2122s2.github.io/website/admin/ip-w2.html
-// with minor modifications
+package funbox.task;
 
 /**
  * The ToDo class which inherits from Task.

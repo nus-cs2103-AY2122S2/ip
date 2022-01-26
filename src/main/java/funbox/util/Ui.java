@@ -1,4 +1,7 @@
+package funbox.util;
+
 import java.util.Scanner;
+import funbox.task.Task;
 
 public class Ui {
 

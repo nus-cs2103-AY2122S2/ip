@@ -1,3 +1,5 @@
+package funbox.task;
+
 //@@author junrong98-reused
 //Reused from https://nus-cs2103-ay2122s2.github.io/website/admin/ip-w2.html
 // with minor modifications
@@ -6,9 +8,9 @@
  * The task class represents the task user's wants to do
  */
 public class Task {
-    protected String description;
-    protected boolean isDone;
-    protected String type;
+    public String description;
+    public boolean isDone;
+    public String type;
 
     /**
      * Constructor for Task class
