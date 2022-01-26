@@ -1,8 +1,62 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Duke {
     public static void main(String[] args) throws Exception {
+
+        ArrayList<Task> list = new ArrayList<>(); // init arraylist
+
+        Path dirToCreate = Paths.get("").resolve("output");
+        Path subDir = Files.createDirectories(dirToCreate); // create subdirectory for output list
+        Path filePath = Paths.get(subDir + "/"  + "list.txt");
+
+        boolean fileExists = Files.exists(filePath);
+        if (!fileExists) { // if file does not exist, create the file
+            Files.createFile(filePath);
+        } else {
+            try {
+                FileReader fr=new FileReader(filePath.toString());
+                BufferedReader br=new BufferedReader(fr);
+                StringBuffer sb=new StringBuffer();
+                String currLine;
+                while((currLine=br.readLine())!=null)
+                {
+                    int taskInt = currLine.indexOf("[") + 1;
+                    char typeOfTask = currLine.charAt(taskInt);
+                    int doneInt = taskInt + 3;
+                    char taskDone = currLine.charAt(doneInt);
+                    String task = currLine.substring(doneInt + 3);
+                    if (typeOfTask == 'T') {
+                        ToDo toDo = new ToDo(task);
+                        if (taskDone == 'X') {
+                            toDo.isDone = true;
+                        }
+                        list.add(toDo);
+                    } else if (typeOfTask == 'D') {
+                        int start = task.indexOf(":");
+                        String date = task.substring((start + 2), (task.length() - 1));
+                        Deadline deadline = new Deadline(task.substring(0, start - 4), date);
+                        if (taskDone == 'X') {
+                            deadline.isDone = true;
+                        }
+                        list.add(deadline);
+                    } else if (typeOfTask == 'E') {
+                        int start = task.indexOf(":");
+                        String date = task.substring((start + 2), (task.length() - 1));
+                        Event event = new Event(task.substring(0, start - 4), date);
+                        if (taskDone == 'X') {
+                            event.isDone = true;
+                        }
+                        list.add(event);
+                    }
+                }
+            } catch (IOException e) {
+                System.out.println("An error occurred.");
+            }
+        }
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -10,7 +64,6 @@ public class Duke {
                 + "What can I do for you?\n";
         System.out.println(greeting); // print greeting message
 
-        ArrayList<Task> list = new ArrayList<>(); // init arraylist
         String input = "";
 
         while (!input.equals("bye")) {
@@ -38,22 +91,26 @@ public class Duke {
                     Task targetTask = list.get((index - 1));
                     targetTask.unmark();
                 }
+                updateList(list);
             } else if (firstWord.equals("delete")) { // delete task
                 String secondWord = inputs[1];
                 int index = Integer.parseInt(secondWord);
 
                 Task targetTask = list.get((index - 1));
+                list.remove((index - 1));
                 targetTask.delete();
                 System.out.println("Now you have " + list.size() + " tasks in your list.");
+                updateList(list);
             } else if (firstWord.equals("todo")) { // adds a todo task
                 if (inputs.length == 1) {
                     System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
                     break;
                 }
-                ToDo toDo = new ToDo(input.substring(5));
+                ToDo toDo = new ToDo(input.substring((5)));
                 list.add(toDo);
                 System.out.println("Got it. I've added this task:\n"
                         + toDo + "\nNow you have " + list.size() + " tasks in your list.");
+                updateList(list);
             } else if (firstWord.equals("deadline") || firstWord.equals("event")) {
                 int start = input.indexOf("/");
                 if (start == -1) { // if / char cannot be found
@@ -70,6 +127,7 @@ public class Duke {
                     list.add(deadline);
                     System.out.println("Got it. I've added this task:\n"
                             + deadline + "\nNow you have " + list.size() + " tasks in your list.");
+                    updateList(list);
                 } else { // adds an event task
                     if (inputs.length == 1) {
                         System.out.println("☹ OOPS!!! The description of an event cannot be empty.");
@@ -79,11 +137,34 @@ public class Duke {
                     list.add(event);
                     System.out.println("Got it. I've added this task:\n"
                             + event + "\nNow you have " + list.size() + " tasks in your list.");
+                    updateList(list);
                 }
             } else { // print error message
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 break;
             }
+        }
+    }
+
+    public static void updateList(ArrayList<Task> list) {
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter writer = new PrintWriter(stringWriter, true);
+
+        Path subDir = Paths.get("").resolve("output");
+        Path filePath = Paths.get(subDir + "/"  + "list.txt");
+
+        for (int i = 0; i < list.size(); i++) {
+            writer.println((i + 1) + "." + list.get(i));
+        }
+        String outputList = stringWriter.toString();
+
+        try {
+            FileWriter myWriter = new FileWriter(filePath.toString());
+            myWriter.write(outputList);
+            myWriter.close();
+        }
+        catch (IOException e) {
+            System.out.println("An error occurred.");
         }
     }
 
