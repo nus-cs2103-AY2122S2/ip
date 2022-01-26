@@ -6,21 +6,19 @@ public class TaskList {
     public TaskList() {}
 
     public void addTodo(String taskKey) {
-        try {
-            String[] tokens = taskKey.split(" ");
-            if (tokens.length <= 1) {
-                throw new BadDescriptionException("Todo task description is bad", "T");
-            }
-            String taskType = tokens[0];
+            String[] tokens = taskKey.split("todo ");
             String taskTitle = "";
-            for (int i = 1; i < tokens.length; i++) {
-                if (i == tokens.length - 1) {
-                    taskTitle = taskTitle + tokens[i];
-                    continue;
+            try {
+                if (tokens.length < 2) {
+                    throw new BadDescriptionException("todo"); //type
+                } else {
+                    taskTitle = tokens[1];
                 }
-                taskTitle = taskTitle + tokens[i] + " ";
+            } catch (BadDescriptionException err) {
+                System.out.println(err.getMessage());
+                return;
             }
-            Task newTask = new UnmarkedTask(taskTitle, taskType);
+            Task newTask = new TodoTask(taskTitle);
             this.itemList.add(newTask);
             System.out.println(
                     "----------------------------" +
@@ -31,86 +29,85 @@ public class TaskList {
                             + "\n"
                             + "--------------------------------------------------------"
             );
-        } catch (BadDescriptionException e) {
-            System.out.println("----------------------------" +
-                    "----------------------------\n" +
-                    "OOPS!!! The description of a todo cannot be empty" + "\n"
-                    + "--------------------------------------------------------");
-        }
     }
 
     public void addEvent(String taskKey) {
+        String[] tokens = taskKey.split("event ");
+        String taskTitle = "";
         try {
-            String[] tokens = taskKey.split(" ");
-            if (tokens.length <= 1) {
-                throw new BadDescriptionException("Event task description is bad", "E");
+            if (tokens.length < 2) {
+                throw new BadDescriptionException("event");
+
+            } else {
+                taskTitle = tokens[1];
             }
-            String taskType = tokens[0];
-            String taskTitle = "";
-            for (int i = 1; i < tokens.length; i++) {
-                if (i == tokens.length - 1) {
-                    taskTitle = taskTitle + tokens[i];
-                    continue;
-                }
-                taskTitle = taskTitle + tokens[i] + " ";
-            }
-            String[] secondSplit = taskTitle.split(" /at ");
-            taskTitle = secondSplit[0];
-            String deadline = secondSplit[1];
-            Task newTask = new UnmarkedTask(taskTitle, deadline, taskType);
-            this.itemList.add(newTask);
-            System.out.println(
-                    "----------------------------" +
-                            "----------------------------\n" +
-                            "Got it. I've added this task:\n"
-                            + "  " + newTask + "\n"
-                            + "Now you have " + this.itemList.size() + " tasks in the list."
-                            + "\n"
-                            + "--------------------------------------------------------"
-            );
-        } catch (BadDescriptionException e) {
-            System.out.println("----------------------------" +
-                    "----------------------------\n" +
-                    "OOPS!!! The description of an event cannot be empty" + "\n"
-                    + "--------------------------------------------------------");
+        } catch (BadDescriptionException err) {
+            System.out.println(err.getMessage());
+            return;
         }
+        String[] secondSplit = taskTitle.split(" /at ");
+        taskTitle = secondSplit[0];
+        String deadline = "";
+        try {
+            if (secondSplit.length < 2) {
+                throw new BadDeadlineException("event");
+            } else {
+                deadline = secondSplit[1];
+            }
+        } catch (BadDeadlineException err) {
+            System.out.println(err.getMessage());
+            return;
+        }
+        Task newTask = new EventTask(taskTitle, deadline);
+        this.itemList.add(newTask);
+        System.out.println(
+                "----------------------------" +
+                        "----------------------------\n" +
+                        "Got it. I've added this task:\n"
+                        + "  " + newTask + "\n"
+                        + "Now you have " + this.itemList.size() + " tasks in the list."
+                        + "\n"
+                        + "--------------------------------------------------------"
+        );
     }
 
     public void addDeadline(String taskKey) {
+        String[] tokens = taskKey.split("deadline ");
+        String taskTitle = "";
         try {
-            String[] tokens = taskKey.split(" ");
-            if (tokens.length <= 1) {
-                throw new BadDescriptionException("Deadline task description is bad", "D");
+            if (tokens.length < 2) {
+                throw new BadDescriptionException("deadline");
+            } else {
+                taskTitle = tokens[1];
             }
-            String taskType = tokens[0];
-            String taskTitle = "";
-            for (int i = 1; i < tokens.length; i++) {
-                if (i == tokens.length - 1) {
-                    taskTitle = taskTitle + tokens[i];
-                    continue;
-                }
-                taskTitle = taskTitle + tokens[i] + " ";
-            }
-            String[] secondSplit = taskTitle.split(" /by ");
-            taskTitle = secondSplit[0];
-            String deadline = secondSplit[1];
-            Task newTask = new UnmarkedTask(taskTitle, deadline, taskType);
-            this.itemList.add(newTask);
-            System.out.println(
-                    "----------------------------" +
-                            "----------------------------\n" +
-                            "Got it. I've added this task:\n"
-                            + "  " + newTask + "\n"
-                            + "Now you have " + this.itemList.size() + " tasks in the list."
-                            + "\n"
-                            + "--------------------------------------------------------"
-            );
-        } catch (BadDescriptionException e) {
-            System.out.println("----------------------------" +
-                    "----------------------------\n" +
-                    "OOPS!!! The description of a deadline cannot be empty" + "\n"
-                    + "--------------------------------------------------------");
+        } catch (BadDescriptionException err) {
+            System.out.println(err.getMessage());
+            return;
         }
+        String[] secondSplit = taskTitle.split(" /by ");
+        taskTitle = secondSplit[0];
+        String deadline = "";
+        try {
+            if (secondSplit.length < 2) {
+                throw new BadDeadlineException("deadline");
+            } else {
+                deadline = secondSplit[1];
+            }
+        } catch (BadDeadlineException err) {
+            System.out.println(err.getMessage());
+            return;
+        }
+        Task newTask = new DeadlineTask(taskTitle, deadline);
+        this.itemList.add(newTask);
+        System.out.println(
+                "----------------------------" +
+                        "----------------------------\n" +
+                        "Got it. I've added this task:\n"
+                        + "  " + newTask + "\n"
+                        + "Now you have " + this.itemList.size() + " tasks in the list."
+                        + "\n"
+                        + "--------------------------------------------------------"
+        );
     }
 
     public void deleteTask(String taskKey) {
@@ -141,7 +138,7 @@ public class TaskList {
                 "----------------------------" +
                         "----------------------------\n" +
                 "Nice! I've marked this task as done:"
-                        + "\n" + "  " + newTask
+                        + "\n" + "  " + targetTask
                         + "\n"
                         + "--------------------------------------------------------"
         );
@@ -158,7 +155,7 @@ public class TaskList {
                 "----------------------------" +
                         "----------------------------\n" +
                 "OK, I've marked this task as not done yet:"
-                        + "\n" + "  " + newTask
+                        + "\n" + "  " + targetTask
                         + "\n"
                         + "--------------------------------------------------------"
         );

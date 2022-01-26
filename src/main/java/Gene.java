@@ -1,17 +1,19 @@
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class Duke {
+public class Gene {
     //In future iterations: Make Identity, TaskList as a initialized class.
     private final static Identity thisIdentity = new Identity();
     private final static TaskList thisList = new TaskList();
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo = " GGGG                      \n"
+                    + "G    G   eeee   n nnn    eeee \n"
+                    + "G       e    e  nn   n  e    e\n"
+                     + "G  GGG  eeeeee  n    n  eeeeee\n"
+                + "G    G  e       n    n  e     \n"
+                + "G    G  e    e  n    n  e    e\n"
+                + " GGGG    eeee   n    n   eeee ";
         System.out.println("Hello from\n" + logo);
 
         Scanner scanner = new Scanner(System.in);
@@ -28,7 +30,7 @@ public class Duke {
                     System.out.println(
                             "----------------------------" +
                                     "----------------------------\n"
-                                    + Duke.thisList.printList()
+                                    + Gene.thisList.printList()
                                     + "--------------------------------------------------------"
                     );
                     continue;
@@ -36,37 +38,37 @@ public class Duke {
 
                 if (Identity.deleteMatch(nextKey)) {
                     //mark
-                    Duke.thisList.deleteTask(nextKey);
+                    Gene.thisList.deleteTask(nextKey);
                     continue;
                 }
 
                 if (Identity.markMatch(nextKey)) {
                     //mark
-                    Duke.thisList.markTask(nextKey);
+                    Gene.thisList.markTask(nextKey);
                     continue;
                 }
 
                 if (Identity.unmarkMatch(nextKey)) {
                     //unmark
-                    Duke.thisList.unmarkTask(nextKey);
+                    Gene.thisList.unmarkTask(nextKey);
                     continue;
                 }
 
                 if (Identity.todoMatch(nextKey)) {
                     //unmark
-                    Duke.thisList.addTodo(nextKey);
+                    Gene.thisList.addTodo(nextKey);
                     continue;
                 }
 
                 if (Identity.eventMatch(nextKey)) {
                     //unmark
-                    Duke.thisList.addEvent(nextKey);
+                    Gene.thisList.addEvent(nextKey);
                     continue;
                 }
 
                 if (Identity.deadlineMatch(nextKey)) {
                     //unmark
-                    Duke.thisList.addDeadline(nextKey);
+                    Gene.thisList.addDeadline(nextKey);
                     continue;
                 } else {
                     String errMsg = "----------------------------" +

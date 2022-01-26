@@ -1,14 +1,14 @@
-public class BadDescriptionException extends Exception {
+public class BadDeadlineException extends Exception {
     private final String taskType;
 
-    public BadDescriptionException(String type) {
+    public BadDeadlineException(String type) {
         this.taskType = type;
     }
 
     @Override
     public String getMessage() {
         return "--------------------------------------------------------\n"
-                + ":( OOPS!!! The description of a " + this.taskType + " cannot"
+                + ":( OOPS!!! The time details of a " + this.taskType + " cannot"
                 + " be empty."
                 + "\n--------------------------------------------------------";
     }
