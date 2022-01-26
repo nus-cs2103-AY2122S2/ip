@@ -12,7 +12,7 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
 
-        List<Task> tasks = new ArrayList<Task>();
+        List<Task> tasks = new ArrayList<>();
 
         Save saveFile = new Save("save.txt");
         saveFile.ParseFile(tasks);
@@ -29,7 +29,7 @@ public class Duke {
                     System.out.println(lines);
                     System.out.println("Here are the tasks in your list:");
                     for (int i = 0; i < tasks.size(); i++) {
-                        System.out.println(Integer.toString(i + 1) + "." + tasks.get(i).toString());
+                        System.out.println((i + 1) + "." + tasks.get(i).toString());
                     }
                     System.out.println(lines);
 
