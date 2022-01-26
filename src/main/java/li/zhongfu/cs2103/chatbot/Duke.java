@@ -1,12 +1,18 @@
 package li.zhongfu.cs2103.chatbot;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import li.zhongfu.cs2103.chatbot.types.Deadline;
+import li.zhongfu.cs2103.chatbot.types.Event;
+import li.zhongfu.cs2103.chatbot.types.Task;
+import li.zhongfu.cs2103.chatbot.types.ToDo;
 
 public class Duke {
     private static final String HLINE = "____________________________________________________________";
@@ -84,7 +90,19 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello from\n" + logo + "\n");
+
+        List<Task> tasks;
+        try {
+            tasks = Storage.load();
+            System.out.println(String.format("%d tasks loaded.", tasks.size()));
+        } catch (FileNotFoundException e) {
+            System.out.println("No saved tasks file found, starting with an empty task list.");
+            tasks = new ArrayList<>();
+        } catch (StorageException e) {
+            System.out.println("Error loading tasks! Starting with an empty task list.");
+            tasks = new ArrayList<>();
+        }
 
         dialog(new String[] {
                 String.format("Hello! I'm %s", BOT_NAME),
@@ -92,7 +110,6 @@ public class Duke {
         });
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        List<Task> tasks = new ArrayList<>();
         while (true) {
             try {
                 String input = br.readLine();
@@ -139,10 +156,6 @@ public class Duke {
                         }
                         break;
 
-                    case "bye":
-                        dialog("Bye. Hope to see you again soon!");
-                        return; // to shut the linter up
-
                     case "todo":
                     case "deadline":
                     case "event":
@@ -174,8 +187,29 @@ public class Duke {
                         });
                         break;
 
+                    case "reload":
+                        try {
+                            tasks = Storage.load();
+                            dialog(String.format("Tasks reloaded; %d tasks in list now", tasks.size()));
+                        } catch (StorageException e) {
+                            dialog("Error loading tasks! Skipping reload.");
+                        } catch (FileNotFoundException e) {
+                            dialog("Saved tasks file not found! Skipping reload.");
+                        }
+                        break;
+                    
+                    case "save":
+                        Storage.save(tasks);
+                        dialog("Tasks saved!");
+                        break;
+
+                    case "bye":
+                        Storage.save(tasks);
+                        dialog("Bye. Hope to see you again soon!");
+                        return;
+
                     default:
-                        throw new DukeException("I don't know what that means! Try: todo, deadline, event, list, delete, mark, unmark, bye");
+                        throw new DukeException("I don't know what that means! Try: todo, deadline, event, list, delete, mark, unmark, reload, save, bye");
                 }
             } catch (DukeException e) {
                 dialog(e.getMessage().split("\n"));

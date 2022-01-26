@@ -1,4 +1,4 @@
-package li.zhongfu.cs2103.chatbot;
+package li.zhongfu.cs2103.chatbot.types;
 
 public class Event extends Task {
     private String eventTime;
