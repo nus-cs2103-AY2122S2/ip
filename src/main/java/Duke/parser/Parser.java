@@ -57,6 +57,8 @@ public class Parser {
             }
         } catch (DukeException error) {
             return new HandleErrorCommand(error.getMessage());
+        } catch (ArrayIndexOutOfBoundsException error) {
+            return new HandleErrorCommand("Error! Wrong inputs");
         }
     }
 

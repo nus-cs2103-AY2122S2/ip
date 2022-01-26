@@ -14,12 +14,11 @@ public class HandleErrorCommand extends Command{
         this.errorMsg = errorMsg;
     }
 
-    @Override
+
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ui.showError(errorMsg);
     }
 
-    @Override
     public boolean isExit() {
         return false;
     }

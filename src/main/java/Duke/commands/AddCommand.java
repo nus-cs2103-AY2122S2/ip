@@ -12,13 +12,11 @@ public class AddCommand extends Command{
         this.task = task;
     }
 
-    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(task);
         ui.showTaskAdded(task, tasks.getTaskList());
     }
-
-    @Override
+    
     public boolean isExit() {
         return false;
     }

@@ -12,7 +12,7 @@ public class MarkCommand extends Command{
         this.taskNum = taskNum;
     }
 
-    @Override
+
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             int currTaskNum = Integer.parseInt(taskNum);
@@ -28,7 +28,7 @@ public class MarkCommand extends Command{
 
     }
 
-    @Override
+
     public boolean isExit() {
         return false;
     }

@@ -5,7 +5,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import duke.ui.DukeException;
-import duke.storage.Storage;
 /**
  * Represent the deadline of task.
  */
