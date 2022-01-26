@@ -1,10 +1,26 @@
 package duke;
-
+/**
+ * Represents the deadline tasks input by the user
+ */
 public class Deadline extends Task {
+    /**
+     * Super constructor to the task class
+     *
+     * @param description the description of the deadline task
+     * @return
+     * @throws
+     */
     public Deadline(String description) {
         super(description);
     }
 
+    /**
+     * Super constructor to the task class
+     *
+     * @param digitMonth the month represented numerically
+     * @return corresponding month in words if valid, else returns notValidMonth
+     * @throws
+     */
     public String digitMonth_to_AlphabeticalMonth(String digitMonth) {
         if (digitMonth.equals("01")) {
             return "January";
@@ -36,6 +52,14 @@ public class Deadline extends Task {
 
     }
 
+    /**
+     * Returns deadline task in string format
+     *
+     * @param
+     * @return deadline task in a string format, changing the numerical months to
+     * words, and 24h time to 12h time
+     * @throws
+     */
     public String getDescription() {
 
         String newReply = super.description.replace("deadline ", "");

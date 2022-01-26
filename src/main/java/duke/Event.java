@@ -1,9 +1,26 @@
 package duke;
-
+/**
+ * Represents the event tasks input by the user
+ */
 public class Event extends Task {
+    /**
+     * Super constructor to the task class
+     *
+     * @param description the description of the event task
+     * @return
+     * @throws
+     */
     public Event(String description) {
         super(description);
     }
+
+    /**
+     * Super constructor to the task class
+     *
+     * @param digitMonth the month represented numerically
+     * @return corresponding month in words if valid, else returns notValidMonth
+     * @throws
+     */
     public String digitMonth_to_AlphabeticalMonth(String digitMonth) {
         if (digitMonth.equals("01")) {
             return "January";
@@ -34,7 +51,14 @@ public class Event extends Task {
         }
 
     }
-
+    /**
+     * Returns deadline task in string format
+     *
+     * @param
+     * @return deadline task in a string format, changing the numerical months to
+     * words, and 24h time to 12h time
+     * @throws
+     */
     public String getDescription() {
         String newReply = super.description.replace("event ", "");
         String taskAtHand = newReply.split("/")[0];

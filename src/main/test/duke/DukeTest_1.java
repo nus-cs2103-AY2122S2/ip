@@ -6,6 +6,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DukeTest_1 {
 
+    /**
+     * Checks if the method that converts numerical months to
+     * months in words accurately works as intended
+     *
+     * @param
+     *
+     * @return test case passed or failed
+     * @throws
+     */
     @Test
     void checkMonthConverterMethod() {
         assertEquals("January",
@@ -14,6 +23,15 @@ class DukeTest_1 {
                 new Deadline("test").digitMonth_to_AlphabeticalMonth("1"));
     }
 
+    /**
+     * Checks if user input gives the intended output by verifying the commands
+     * "todo", "deadline", "event"
+     *
+     * @param
+     *
+     * @return test case passed or failed
+     * @throws
+     */
     @Test
     void checkGetDescription() {
         //check for todo
