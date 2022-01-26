@@ -4,9 +4,9 @@ import java.util.Scanner;
 public class Duke {
     private static final String LINE = "_______________________________________________";
     private static final String INTRO = "\nHello! I'm YQ\n" + "What can I do for you?\n";
-    private static final String LISTING = "Here are the tasks in your list:";
-    private static final String MARKING = "Nice! I've marked this task as done:\n  ";
-    private static final String UNMARKING = "OK, I've marked this task as not done yet:\n  ";
+    private static final String LIST = "Here are the tasks in your list:";
+    private static final String MARK = "Nice! I've marked this task as done:\n  ";
+    private static final String UNMARK = "OK, I've marked this task as not done yet:\n  ";
     private static final String ADDED = "Got it. I've added this task:\n  ";
     private static final String REMOVED = "Noted. I've removed this task:\n";
     private static final String ERROR_UNKNOWN = "OOPS, I'm sorry, but I don't know what that means :-(";
@@ -66,7 +66,7 @@ public class Duke {
     }
 
     public static void listAction(ArrayList<Task> listOfItems) {
-        System.out.println(LISTING);
+        System.out.println(LIST);
         for (int i = 0; i < listOfItems.size(); i++) {
             System.out.println(i + 1 + "." + listOfItems.get(i));
         }
@@ -79,7 +79,7 @@ public class Duke {
             taskToMark.markAsDone();
             listOfItems.set(num, taskToMark);
         }
-        System.out.println(MARKING + taskToMark);
+        System.out.println(MARK + taskToMark);
     }
 
     public static void unmarkAction(String taskNumber, ArrayList<Task> listOfItems) {
@@ -89,7 +89,7 @@ public class Duke {
             taskToUnmark.markAsUndone();
             listOfItems.set(num, taskToUnmark);
         }
-        System.out.println(UNMARKING + taskToUnmark);
+        System.out.println(UNMARK + taskToUnmark);
     }
 
     public static void toDoAction(String description, ArrayList<Task> lisOfItems) throws DukeException {
