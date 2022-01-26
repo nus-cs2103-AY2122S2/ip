@@ -28,7 +28,7 @@ public class ExceptionHandler {
      * Handles Duke exception by printing the error message.
      * @param e Specified-Duke exception
      */
-    public static void handleDukeException(DukeException e) {
+    public void handleDukeException(DukeException e) {
         if (e instanceof EmptyTaskException) {
             ui.printMessage(MESSAGE_EMPTY_TASK_EXCEPTION);
         } else if (e instanceof MissingDateTimeException) {
@@ -46,7 +46,7 @@ public class ExceptionHandler {
      * Handles other common exception by printing the error message.
      * @param e Default Exception class.
      */
-    public static void handleOtherException(Exception e) {
+    public void handleOtherException(Exception e) {
         if (e instanceof IOException) {
             ui.printMessage(MESSAGE_FILE_NOT_FOUND);
         } else if (e instanceof DateTimeException) {

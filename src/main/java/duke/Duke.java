@@ -27,7 +27,7 @@ public class Duke {
      */
     public Duke() {
         try {
-            tasks.setTasks(Storage.readDataFromFile());
+            tasks.setTasks(storage.readDataFromFile());
         } catch (IOException e) {
             exceptionHandler.handleOtherException(e);
         }
@@ -36,7 +36,7 @@ public class Duke {
     /**
      * Reads and executes commands from user inputs.
      */
-    public static void run() {
+    public void run() {
         ui.printGreeting();
         Scanner sc = new Scanner(System.in);
         while (true) {

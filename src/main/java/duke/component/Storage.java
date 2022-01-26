@@ -39,7 +39,7 @@ public class Storage {
      * @return ArrayList contains Task
      * @throws IOException if file not found
      */
-    public static ArrayList<Task> readDataFromFile() throws IOException{
+    public ArrayList<Task> readDataFromFile() throws IOException{
         if (Files.notExists(PATH_TO_STORAGE_FILE)) {
             createFile();
         }
@@ -61,10 +61,11 @@ public class Storage {
      * @param taskList TaskList class
      * @throws IOException if file not found
      */
-    public static void writeTaskToFile(TaskList taskList) throws IOException{
+    public void writeTaskToFile(TaskList taskList) throws IOException{
         FileWriter fw = new FileWriter(PATH_TO_STORAGE_FILE.toString());
+        Parser parser = new Parser();
         for (Task task: taskList.getTasks()) {
-            fw.write(Parser.formatTaskToStore(task));
+            fw.write(parser.formatTaskToStore(task));
         }
         fw.close();
     }

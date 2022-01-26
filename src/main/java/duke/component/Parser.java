@@ -49,7 +49,7 @@ public class Parser {
      * @param task the task to be formatted
      * @return String that can be written into a text file.
      */
-    public static String formatTaskToStore(Task task) {
+    public String formatTaskToStore(Task task) {
         String prefix;
         String data;
         if (task instanceof Deadline) {
@@ -83,13 +83,14 @@ public class Parser {
         String description = tokens[2];
 
         Task task;
+        ExceptionHandler exceptionHandler = new ExceptionHandler();
 
         if (prefix.equals(TaskConstant.PREFIX_DEADLINE)) {
             String by = tokens[3];
             try {
                 task = new Deadline(description, by);
             } catch (DateTimeException e) {
-                ExceptionHandler.handleOtherException(e);
+                exceptionHandler.handleOtherException(e);
                 task = new Todo(description);
             }
         } else if (prefix.equals(TaskConstant.PREFIX_EVENT)) {

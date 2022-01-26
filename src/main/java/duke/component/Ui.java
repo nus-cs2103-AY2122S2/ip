@@ -19,7 +19,7 @@ public class Ui {
     /**
      * Prints Greeting message.
      */
-    public static void printGreeting() {
+    public void printGreeting() {
         printMessage(GREETING);
     }
 
@@ -29,21 +29,21 @@ public class Ui {
      * @param sc Scanner class
      * @return String userInput
      */
-    public static String readCommand(Scanner sc) {
+    public String readCommand(Scanner sc) {
         return sc.nextLine();
     }
 
     /**
      * Prints goodbye message.
      */
-    public static void printGoodBye() {
+    public void printGoodBye() {
         printMessage(GOOD_BYE);
     }
 
     /**
      * Prints a horizontal line.
      */
-    public static void printLine() {
+    public void printLine() {
         System.out.println(HORIZONTAL_LINE);
     }
 
@@ -52,7 +52,7 @@ public class Ui {
      *
      * @param message String
      */
-    public static void printMessage(String message) {
+    public void printMessage(String message) {
         System.out.println(HORIZONTAL_LINE);
         System.out.println(message);
         System.out.println(HORIZONTAL_LINE);
@@ -63,7 +63,7 @@ public class Ui {
      *
      * @param message String
      */
-    public static void printMessageWithoutLine(String message) {
+    public void printMessageWithoutLine(String message) {
         System.out.println(message);
     }
 
