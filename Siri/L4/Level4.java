@@ -39,6 +39,14 @@ public class Level4 {
                 System.out.println(line + "     This task has been unmarked:\n"
                         + "       " + t.toString() + "\n"
                         + line);
+            } else if (word.equals("todo")) {
+                String restOfInput = sc.nextLine();
+                String taskToDo = restOfInput;
+                Todo t = new Todo(taskToDo);
+                arrList.add(t);
+                System.out.println(line + "     This task has been added to your list:\n"
+                        + "     added: " + taskToDo + "\n"
+                        + line);
             } else { //print everything user inputed with "added: " infront
                 String restOfInput = sc.nextLine();
                 String taskToDo = word + restOfInput;
