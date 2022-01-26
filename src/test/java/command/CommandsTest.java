@@ -1,10 +1,5 @@
 package command;
-import duke.Storage;
-import duke.Ui;
 import duke.command.DukeCommands;
-import duke.exception.DukeException;
-import duke.main.Duke;
-import duke.task.TaskList;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;

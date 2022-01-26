@@ -1,8 +1,6 @@
 package duke;
 
-import duke.command.Command;
 import duke.exception.DukeException;
-import duke.main.Duke;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
