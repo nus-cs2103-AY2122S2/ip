@@ -1,8 +1,10 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -81,7 +83,7 @@ public class Puke {
                     System.out.println("Are you sure you're making sense?");
                     break;
                 }
-            } catch (DukeException e) {
+            } catch (PukeException e) {
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e) {
                 System.out.println("I'll need a valid task number for it..");
@@ -115,33 +117,33 @@ public class Puke {
         }
     }
 
-    public static void markTask(ArrayList<Task> tasks, int taskNo) throws DukeException {
+    public static void markTask(ArrayList<Task> tasks, int taskNo) throws PukeException {
         if (taskNo < 1 || taskNo > tasks.size()) {
-            throw new DukeException(String.format("%d is not a valid task number!", taskNo));
+            throw new PukeException(String.format("%d is not a valid task number!", taskNo));
         }
         Task t = tasks.get(taskNo - 1);
         if (t.isDone()) {
-            throw new DukeException(String.format("Task #%d is already marked as done!", taskNo));
+            throw new PukeException(String.format("Task #%d is already marked as done!", taskNo));
         }
         t.mark();
         System.out.println("Kudos! I've marked this task as done:\n  " + t);
     }
 
-    public static void unmarkTask(ArrayList<Task> tasks, int taskNo) throws DukeException {
+    public static void unmarkTask(ArrayList<Task> tasks, int taskNo) throws PukeException {
         if (taskNo < 1 || taskNo > tasks.size()) {
-            throw new DukeException(String.format("%d is not a valid task number!", taskNo));
+            throw new PukeException(String.format("%d is not a valid task number!", taskNo));
         }
         Task t = tasks.get(taskNo - 1);
         if (!t.isDone()) {
-            throw new DukeException(String.format("Task #%d is not yet marked as done!", taskNo));
+            throw new PukeException(String.format("Task #%d is not yet marked as done!", taskNo));
         }
         t.unmark();
         System.out.println("Alright, I've marked this task as not done yet:\n  " + t);
     }
 
-    public static void addTask(ArrayList<Task> tasks, String type, String args) throws DukeException {
+    public static void addTask(ArrayList<Task> tasks, String type, String args) throws PukeException {
         if (args == null) {
-            throw new DukeException("I'll need a description for the task..");
+            throw new PukeException("I'll need a description for the task..");
         }
 
         Task t;
@@ -151,7 +153,7 @@ public class Puke {
             String[] taskDetail = args.split("/");
 
             if (taskDetail.length < 2) {
-                throw new DukeException("I'll need a date/time for this task..");
+                throw new PukeException("I'll need a date/time for this task..");
             }
 
             String dateTimeStr = taskDetail[1].split(" ", 2)[1];
@@ -161,7 +163,7 @@ public class Puke {
                 LocalDateTime dateTime = LocalDateTime.parse(dateTimeStr, formatter);
 
                 if (dateTime.isBefore(LocalDateTime.now())) {
-                    throw new DukeException("Why are you trying to create a task in the past?");
+                    throw new PukeException("Why are you trying to create a task in the past?");
                 }
 
                 if (type.equals("deadline")) {
@@ -170,7 +172,7 @@ public class Puke {
                     t = new Event(taskDetail[0], dateTime);
                 }
             } catch (DateTimeParseException e) {
-                throw new DukeException("I'll need a valid date/time in the format yyyy-mm-dd hh:mm");
+                throw new PukeException("I'll need a valid date/time in the format yyyy-mm-dd hh:mm");
             }
         }
 
@@ -180,9 +182,9 @@ public class Puke {
                 + (Task.getNoOfTasks() <= 1 ? " task" : " tasks") + " in the list.");
     }
 
-    public static void deleteTask(ArrayList<Task> tasks, int taskNo) throws DukeException {
+    public static void deleteTask(ArrayList<Task> tasks, int taskNo) throws PukeException {
         if (taskNo < 1 || taskNo > tasks.size()) {
-            throw new DukeException(String.format("%d is not a valid task number!", taskNo));
+            throw new PukeException(String.format("%d is not a valid task number!", taskNo));
         }
 
         String taskInfo = tasks.get(taskNo - 1).toString();
