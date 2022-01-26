@@ -1,7 +1,6 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
-    protected static int totalTasks = 0;
 
     public Task(String description) {
         this.description = description;
@@ -20,17 +19,11 @@ public class Task {
         this.isDone = false;
     }
 
-    public void incrementTask() {
-        totalTasks++;
-    }
-
-    public void decrementTask() {
-        totalTasks--;
-    }
-
-    public String printNoOfTasks() {
+    public String printNoOfTasks(int totalTasks) {
         return "Now you have " + totalTasks + " tasks in the list.";
     }
+    
+    public abstract String appendtoFile();
 
     @Override
     public String toString() {
