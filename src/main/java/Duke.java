@@ -1,45 +1,60 @@
+import ui.Ui;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
 
 
+
 public class Duke {
+
+    private Ui ui;
+
+    public Duke(String filePath) {
+
+        ui = new Ui();
+
+        File dataFolder = new File ("data");
+
+        if (!dataFolder.exists()) {
+            dataFolder.mkdir();
+        }
+
+        File dataFile = new File("data/duke.txt");
+        if (!dataFile.exists()) {
+            try {
+                dataFile.createNewFile();
+            } catch (IOException e) {
+                System.out.println("An error occured :(" + e);
+            }
+        }
+    }
+
+    public void run(){
+
+        Scanner sc = new Scanner(System.in);
+        String userInput = sc.nextLine();
+
+        while(processInput(userInput)) {
+            userInput = sc.nextLine();
+        }
+    }
 
     private static boolean isBye(String s) {
         return !s.equals("bye");
     }
 
-    private static void welcome() {
-        String welcomeMessage = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n"
-                + "Hello! I'm JJ\n"
-                + "What do you want? :D \n";
 
-        System.out.println("Hello from\n" + welcomeMessage);
-    }
-
-    private static void exit() {
-        String goodByeMessage = "   __________________________________________________\n"
-                + "       " + "Bye. I hope to see you soon." +"\n"
-                + "   __________________________________________________";
-        System.out.println(goodByeMessage);
-    }
-
-
-
-    private static boolean processInput(String userInput) {
+    private boolean processInput(String userInput) {
         if(userInput.equals("bye")) {
-            exit();
+            ui.exit();
             return false;
         } else if (userInput.equals("list")) {
             String listTask = Task.printArray();
-            String output = "   __________________________________________________\n"
+            String output = Ui.createLine()
                     + listTask + "\n"
-                    + "   __________________________________________________";
+                    + Ui.createLine();
             System.out.println(output);
 
             return true;
@@ -48,10 +63,10 @@ public class Duke {
             Task task =  Task.getTaskList()[Integer.parseInt(input[1]) - 1];
             task.markDone();
 
-            String output = "   __________________________________________________\n"
+            String output = Ui.createLine()
                     + "       I have marked the following task as done! :D \n"
                     + "       " + task + "\n"
-                    + "   __________________________________________________";
+                    + Ui.createLine();
 
             System.out.println(output);
             return true;
@@ -61,10 +76,10 @@ public class Duke {
             Task task =  Task.getTaskList()[Integer.parseInt(input[1]) - 1];
             task.markNotDone();
 
-            String output = "   __________________________________________________\n"
+            String output = Ui.createLine()
                     + "       OK I have marked the following task as not done yet! :D \n"
                     + "       " + task + "\n"
-                    + "   __________________________________________________";
+                    + Ui.createLine();
             System.out.println(output);
 
             return true;
@@ -73,11 +88,11 @@ public class Duke {
             Task task = Task.getTaskList()[Integer.parseInt(input[1]) - 1];
             task.deleteTask(task);
 
-            String output = "   __________________________________________________\n"
+            String output = Ui.createLine()
                     + "       OK I have delete the following task! :D \n"
                     + "       " + task + "\n"
                     + "       " + "Now you have " + Task.getCounter() + " tasks in your list.\n"
-                    + "   __________________________________________________";
+                    + Ui.createLine();
             System.out.println(output);
 
             return true;
@@ -87,29 +102,29 @@ public class Duke {
                 String newTaskMessage = createTask(userInput);
                 System.out.println(newTaskMessage);
             } catch (InvalidTypeException e) {
-                String errorMsg = "   __________________________________________________\n"
+                String errorMsg = Ui.createLine()
                         + "       Opps, the command \"" + userInput + "\" is not supported :(\n"
-                        + "   __________________________________________________";
+                        + Ui.createLine();
                 System.out.println(errorMsg);
             } catch (MissingNameException e ) {
-                String errorMsg = "   __________________________________________________\n"
+                String errorMsg = Ui.createLine()
                         + "       You have entered \"" + userInput + "\".\n"
                         + "       You have to include name after command!\n"
-                        + "   __________________________________________________";
+                        + Ui.createLine();
                 System.out.println(errorMsg);
             } catch (MissingEventDateException e) {
-                String errorMsg = "   __________________________________________________\n"
+                String errorMsg = Ui.createLine()
                         + "       You have entered \"" + userInput + "\".\n"
                         + "       You have to include date after command!\n"
                         + "       Please follow format [event <name>/at <date>]\n"
-                        + "   __________________________________________________";
+                        + Ui.createLine();
                 System.out.println(errorMsg);
             } catch (MissingDeadlineDateException e ) {
-                String errorMsg = "   __________________________________________________\n"
+                String errorMsg = Ui.createLine()
                         + "       You have entered \"" + userInput + "\".\n"
                         + "       You have to include deadline after command!\n"
                         + "       Follow format [deadline <name>/by <date>]\n"
-                        + "   __________________________________________________";
+                        + Ui.createLine();
                 System.out.println(errorMsg);
             }
 
@@ -160,7 +175,7 @@ public class Duke {
                 throw new InvalidTypeException("Invalid type");
         }
 
-        FileReading.writeToPath("/data/duke.txt", Task.printArray());
+        FileReading.writeToPath("data/duke.txt", Task.printArray());
 
 
         String output = "   __________________________________________________\n"
@@ -173,29 +188,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        welcome();
-
-        File dataFolder = new File ("/data");
-
-        if (!dataFolder.exists()) {
-            dataFolder.mkdir();
-        }
-
-        File dataFile = new File("/data/duke.txt");
-        if (!dataFile.exists()) {
-            try {
-                dataFile.createNewFile();
-            } catch (IOException e) {
-                System.out.println("An error occured :(" + e);
-            }
-        }
-
-        Scanner sc = new Scanner(System.in);
-        String userInput = sc.nextLine();
-
-        while(processInput(userInput)) {
-            userInput = sc.nextLine();
-        }
-
+        new Duke("data/duke.txt").run();
     }
 }
