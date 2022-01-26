@@ -1,5 +1,4 @@
 package duke.storage;
-
 import duke.tasks.*;
 
 import java.io.File;
@@ -9,13 +8,27 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Stores the tasks into a file and retrieve tasks from file when bot starts.
+ */
 public class Storage {
     private static String filePath;
 
+    /**
+     * Constructor of storage class to store filepath of file.
+     *
+     * @param filePath file's path where tasks are stored and read from
+     */
     public Storage(String filePath) {
         Storage.filePath = filePath;
     }
 
+    /**
+     * Store tasks to file when a task is added or deleted from the list.
+     *
+     * @param list the list belonging to user to be stored
+     * @throws IOException thrown when this file does not exist
+     */
     public void writeToFile(TaskList list) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         int i = 0;
@@ -27,6 +40,12 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Load tasks into the list when the bot starts running.
+     *
+     * @return tasks belonging to the user
+     * @throws FileNotFoundException thrown when the file to load form does not exist
+     */
     public ArrayList<Task> loadTasksFromFile() throws FileNotFoundException{
         ArrayList<Task> list = new ArrayList<>();
         try {

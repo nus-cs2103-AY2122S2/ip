@@ -5,7 +5,19 @@ import duke.tasks.TaskList;
 import duke.storage.Storage;
 import duke.exception.DukeException;
 
+/**
+ * Parser that make sense of the input by user.
+ */
 public class Parser {
+    /**
+     * Filter the input by user and act on the input.
+     *
+     * @param echo the input that is echoed by the user
+     * @param listOfTasks list of tasks belonging to user
+     * @param storage storage of the list
+     * @return the command to be executed by the bot
+     * @throws DukeException thrown when the input does not make sense
+     */
     public static Command<String> parseInput(String echo, TaskList listOfTasks, Storage storage) throws DukeException {
         if (echo.equalsIgnoreCase("bye")) {
             return new ByeCommand();
