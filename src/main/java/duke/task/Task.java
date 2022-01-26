@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -11,6 +13,10 @@ public class Task {
         this.description = description;
         this.isDone = isDone;
         this.taskType = type;
+    }
+
+    public boolean getIsDone() {
+        return this.isDone;
     }
 
     public String getStatusIcon() {
