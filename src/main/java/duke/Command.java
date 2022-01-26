@@ -112,34 +112,6 @@ public class Command {
         String toPrint = "";
         try {
             switch (processedInput[0]) {
-<<<<<<< HEAD
-                case "list":
-                    toPrint = listTasks(listOfTasks);
-                    break;
-                case "unmark":
-                    toPrint = unmarkTask(processedInput[1], listOfTasks);
-                    break;
-                case "mark":
-                    toPrint = markTask(processedInput[1], listOfTasks);
-                    break;
-                case "delete":
-                    toPrint = deleteTask(processedInput[1], listOfTasks);
-                    break;
-                case "deadline":
-                    toPrint = addDeadline(processedInput[1], processedInput[2], listOfTasks);
-                    break;
-                case "event":
-                    toPrint = addEvent(processedInput[1], processedInput[2], listOfTasks);
-                    break;
-                case "todo":
-                    toPrint = addTodo(processedInput[1], listOfTasks);
-                    break;
-                case "Error":
-                    toPrint = processedInput[1];
-                    break;
-                default:
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
-=======
             case "list":
                 toPrint = listTasks(listOfTasks);
                 break;
@@ -163,7 +135,6 @@ public class Command {
                 break;
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
->>>>>>> A-CodingStandard
             }
         } catch (DukeException e) {
             toPrint = e.getMessage();

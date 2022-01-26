@@ -3,11 +3,10 @@ package duke;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 
-<<<<<<< HEAD:src/main/java/duke/DeadLines.java
 /**
  * Inherits from Task and is the implementation of a Deadline task which contains a description and a deadline
  */
-public class DeadLines extends Task {
+public class Deadlines extends Task {
     LocalDateTime deadline;
 
     /**
@@ -16,13 +15,7 @@ public class DeadLines extends Task {
      * @param deadline Deadline of the task
      * @throws DukeException if the format of the deadline is not correct or description is empty
      */
-    public DeadLines(String task, String deadline) throws DukeException {
-=======
-public class Deadlines extends Task {
-    LocalDateTime deadline;
-
     public Deadlines(String task, String deadline) throws DukeException {
->>>>>>> A-CodingStandard:src/main/java/duke/Deadlines.java
         super(task);
         if (deadline == null) {
             throw new DukeException("Try Again with correct format!\n");
