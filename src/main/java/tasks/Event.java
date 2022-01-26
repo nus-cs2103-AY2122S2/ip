@@ -14,7 +14,7 @@ public class Event extends Task {
     /**
     * Class constructor.
     * <p>
-    * defaults the isDone boolean to false
+    * Defaults the isDone boolean to false
     *
     * @param  taskName  String containing the desired name of the event
     * @param  date      LocalDate containing the date of the event
@@ -30,8 +30,8 @@ public class Event extends Task {
     /**
     * Class constructor.
     * <p>
-    * defaults the isDone boolean to false
-    * defaults LocalTime time to null
+    * Defaults the isDone boolean to false
+    * Defaults LocalTime time to null
     *
     * @param  taskName  String containing the desired name of the event
     * @param  date      LocalDate containing the date of the event
@@ -60,7 +60,7 @@ public class Event extends Task {
     /**
     * Class constructor.
     * <p>
-    * defaults LocalTime time to null
+    * Defaults LocalTime time to null
     *
     * @param  taskName  String containing the desired name of the event
     * @param  date      LocalDate containing the date of the event
