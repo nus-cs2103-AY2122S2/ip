@@ -2,22 +2,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import Exceptions.*;
-import Storage.Storage;
-import Ui.Ui;
+import storage.Storage;
+import ui.Ui;
+import exceptions.*;
 import commands.*;
 import tasks.*;
 
 public class Duke {
 	private static ArrayList<Task> TASKLIST = new ArrayList<>();
+	private TaskList tasks;
 	private static Storage storage;
 	private static Ui ui;
+
 	public Duke(String filePath) {
 		storage = new Storage(filePath);
 		ui = new Ui();
 
 		try {
-			TASKLIST = storage.load();
+			tasks = storage.load();
 		} catch (IOException e) {
 			System.out.println("An error occurred");
 			e.printStackTrace();
@@ -35,7 +37,7 @@ public class Duke {
 				String input = sc.nextLine();
 				cmd = processInput(input);
 				ui.printLine();
-				cmd.execute();
+				cmd.execute(tasks, ui, storage);
 				ui.printLine();
 				if (cmd.ends()) {
 					break;
@@ -46,7 +48,7 @@ public class Duke {
 		}
 
 		try{
-			storage.saveFile(TASKLIST);
+			storage.saveFile(tasks);
 		} catch (IOException e) {
 			System.out.println("An error occurred");
 			e.printStackTrace();

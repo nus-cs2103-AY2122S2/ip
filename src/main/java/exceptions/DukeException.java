@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 public abstract class DukeException extends Exception {
 	public final static String LINE = "    ____________________________________________________________\n";

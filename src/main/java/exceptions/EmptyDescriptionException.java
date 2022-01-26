@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 public class EmptyDescriptionException extends DukeException {
 	private String type;

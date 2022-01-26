@@ -1,4 +1,4 @@
-package Ui;
+package ui;
 
 public class Ui {
 	public final static String LINE = "    ____________________________________________________________\n";

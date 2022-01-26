@@ -1,9 +1,6 @@
-package Storage;
+package storage;
 
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.ToDo;
+import tasks.*;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -13,13 +10,13 @@ import java.util.Scanner;
 
 public class Storage {
 	private String filePath;
-	private ArrayList<Task> TASKLIST = new ArrayList<>();
+	private TaskList tasks = new TaskList();
 
 	public Storage(String filePath) {
 		this.filePath = filePath;
 	}
 
-	public ArrayList load() throws IOException {
+	public TaskList load() throws IOException {
 		//load files
 		File directory = new File("data");
 		if(!directory.exists()){
@@ -63,16 +60,16 @@ public class Storage {
 				if(mark.equals("1")){
 					toAdd.mark();
 				}
-				TASKLIST.add(toAdd);
+				tasks.add(toAdd);
 			}
 		}
-		return TASKLIST;
+		return tasks;
 	}
 
-	public void saveFile(ArrayList<Task> TASKLIST) throws IOException {
+	public void saveFile(TaskList tasks) throws IOException {
 		FileWriter fw = new FileWriter("data/tasks.txt");
-		for (int i =0; i < TASKLIST.size(); i++){
-			Task t = TASKLIST.get(i);
+		for (int i =0; i < tasks.size(); i++){
+			Task t = tasks.get(i);
 			String type = t.getType();
 			String mark = t.getMark();
 			String detail = t.getDetail();
