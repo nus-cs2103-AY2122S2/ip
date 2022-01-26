@@ -35,6 +35,10 @@ public class Ui {
         System.out.println(HORIZONTAL_LINE);
     }
 
+    public static void printMessageWithoutLine(String message) {
+        System.out.println(message);
+    }
+
     public void printConfirmMark(Task currentTask) {
         printMessage(CONFIRM_MARK + LINE_PREFIX + LINE_SEPARATOR + LINE_PREFIX + currentTask.toString());
     }

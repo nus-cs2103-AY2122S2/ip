@@ -12,6 +12,8 @@ public final class Message {
     public static final String NO_TASK = LINE_PREFIX + "There are no tasks in your list";
     public static final String CONFIRM_MARK = LINE_PREFIX + "Nice! I've marked this task as done:";
     public static final String CONFIRM_UNMARK = LINE_PREFIX + "OK, I've marked this task as not done yet:";
+    public static final String NO_TASK_MATCHED = LINE_PREFIX + "There are no tasks matching the keyword.";
+    public static final String FOUND_TASK = LINE_PREFIX + "Here are the matching tasks in your list:";
 
     public static final String MESSAGE_EMPTY_TASK_EXCEPTION = LINE_PREFIX + "☹ OOPS!!! Missing arguments.";
     public static final String MESSAGE_MISSING_DATE_TIME_EXCEPTION = LINE_PREFIX + "☹ OOPS!!! Missing date/time. Please specify it.";
