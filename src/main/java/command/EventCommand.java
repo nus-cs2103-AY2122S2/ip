@@ -1,3 +1,12 @@
+package command;
+
+import command.Command;
+import exception.DukeException;
+import storage.Storage;
+import task.Event;
+import task.Task;
+import task.TaskList;
+import ui.Ui;
 
 public class EventCommand extends Command {
     protected Task event;

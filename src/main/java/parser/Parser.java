@@ -1,3 +1,7 @@
+package parser;
+
+import command.*;
+
 public class Parser {
     public enum Commands {
         TODO,
