@@ -1,7 +1,9 @@
-import java.io.IOException;
+import java.time.DateTimeException;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.io.File;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Puke {
     public static final String LINE = "____________________________________________________________\n";
@@ -126,10 +128,23 @@ public class Puke {
                 throw new DukeException("I'll need a date/time for this task..");
             }
 
-            if (type.equals("deadline")) {
-                t = new Deadline(taskDetail[0], taskDetail[1].split(" ", 2)[1]);
-            } else {
-                t = new Event(taskDetail[0], taskDetail[1].split(" ", 2)[1]);
+            String dateTimeStr = taskDetail[1].split(" ", 2)[1];
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+            try {
+                LocalDateTime dateTime = LocalDateTime.parse(dateTimeStr, formatter);
+
+                if (dateTime.isBefore(LocalDateTime.now())) {
+                    throw new DukeException("Why are you trying to create a task in the past?");
+                }
+
+                if (type.equals("deadline")) {
+                    t = new Deadline(taskDetail[0], dateTime);
+                } else {
+                    t = new Event(taskDetail[0], dateTime);
+                }
+            } catch (DateTimeParseException e) {
+                throw new DukeException("I'll need a valid date/time in the format yyyy-mm-dd hh:mm");
             }
         }
 
