@@ -28,6 +28,14 @@ public class Storage {
         this.file = new File(filename);
     }
 
+    private void checkOrCreateFile() throws IOException {
+        // Create file if it doesn't exist
+        if (!this.file.exists()) {
+            this.file.getParentFile().mkdirs();
+            this.file.createNewFile();
+        }
+    }
+
     /**
      * Saves Tasks to file in a standard format
      *
@@ -35,6 +43,7 @@ public class Storage {
      * @throws IOException file access error
      */
     public void saveTasks(TaskList taskList) throws IOException {
+        checkOrCreateFile();
         FileWriter fileWriter = new FileWriter(this.filename, false);
         fileWriter.write(taskList.tasksFileSaveFormat());
         fileWriter.close();
@@ -48,12 +57,6 @@ public class Storage {
      * @throws DukeException when format error is present in file
      */
     public TaskList loadTasks() throws IOException, DukeException {
-        // Create file if it doesn't exist
-        if (!this.file.exists()) {
-            this.file.getParentFile().mkdirs();
-            this.file.createNewFile();
-        }
-
         try {
             Scanner fileReader = new Scanner(this.file);
 
