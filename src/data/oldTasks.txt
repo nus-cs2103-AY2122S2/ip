@@ -1,0 +1,4 @@
+E 1 project meeting / Sunday 2-4pm
+D 0 return book / Sunday
+T 1 complete hw 
+E 0 tutorial / Monday 1-3pm

@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.task;
 
 
 public abstract class Task {
@@ -10,6 +10,7 @@ public abstract class Task {
      * done records if a task has been marked as complete.
      */
     private final boolean done;
+    private final String date;
 
     /**
      * Constructor for a task.
@@ -18,6 +19,7 @@ public abstract class Task {
     Task(String name) {
         this.taskName = name;
         this.done = false;
+        this.date = "";
     }
 
     /**
@@ -25,9 +27,10 @@ public abstract class Task {
      * @param name refers to the task name
      * @param doneStatus refers to the boolean that tracks if a task is complete
      */
-    Task(String name, boolean doneStatus) {
+    Task(String name, boolean doneStatus, String date) {
         this.taskName = name;
         this.done = doneStatus;
+        this.date = date;
     }
 
     /**
@@ -42,15 +45,18 @@ public abstract class Task {
      * Gets the taskName of the taskList.
      * @return String task name
      */
-    String getTaskName() {
+    public String getTaskName() {
         return this.taskName;
     }
 
+    public String getDate() { return this.date; }
     /**
      * Marks task as done.or undone.
      * @return new Task with done attribute as the boolean parameter
      */
     public abstract Task changeTaskStatus(boolean status);
+
+    public abstract String getTaskType();
 
     /**
      * prints task.

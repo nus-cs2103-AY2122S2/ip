@@ -1,15 +1,14 @@
-package seedu.duke;
+package seedu.duke.task;
 
 public class ToDo extends Task {
-
-    private boolean status;
+    private final String taskType = "T";
 
     /**
      * used to construct a ToDo object.
      * @param taskName which specifies name of task
      */
-    ToDo(String taskName) {
-        super(taskName, false);
+    public ToDo(String taskName) {
+        super(taskName);
     }
 
     /**
@@ -18,7 +17,11 @@ public class ToDo extends Task {
      * @param done to specify a boolean
      */
     ToDo(ToDo oldToDo, boolean done) {
-        super(oldToDo.getTaskName(), done);
+        super(oldToDo.getTaskName(), done, "");
+    }
+
+    public ToDo(String taskName, boolean done) {
+        super(taskName, done, "");
     }
 
     /**
@@ -29,6 +32,11 @@ public class ToDo extends Task {
     @Override
     public Task changeTaskStatus(boolean status) {
         return new ToDo(this, status);
+    }
+
+    @Override
+    public String getTaskType() {
+        return this.taskType;
     }
 
     @Override

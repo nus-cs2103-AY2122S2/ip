@@ -1,19 +1,15 @@
-package seedu.duke;
+package seedu.duke.task;
 
 public class Deadline extends Task {
-    /**
-     * Attribute enddate tracks the deadline input for the task.
-     */
-    private final String endDate;
+    private final String taskType = "D";
 
     /**
      * Creates a deadline.
      * @param taskName for task name
      * @param date for end date
      */
-    Deadline(String taskName, String date) {
-        super(taskName, false);
-        this.endDate = date;
+    public Deadline(String taskName, String date) {
+        super(taskName, false, date);
     }
 
     /**
@@ -22,16 +18,11 @@ public class Deadline extends Task {
      * @param done for specified boolean
      */
     Deadline(Deadline oldDeadline, boolean done) {
-        super(oldDeadline.getTaskName(), done);
-        this.endDate = oldDeadline.getDate();
+        super(oldDeadline.getTaskName(), done, oldDeadline.getDate());
     }
 
-    /**
-     * Returns date as a string.
-     * @return String date
-     */
-    String getDate() {
-        return this.endDate;
+    public Deadline(String taskName, boolean doneStatus, String date) {
+        super(taskName,doneStatus, date);
     }
 
     /**
@@ -44,12 +35,18 @@ public class Deadline extends Task {
         return new Deadline(this, status);
     }
 
+    @Override
+    public String getTaskType() {
+        return this.taskType;
+    }
+
     /**
      * prints the task string with [D] to annotate.
      * @return String task information
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString();
+        return "[D]" + super.toString()
+                + String.format(" (by: %s)",this.getDate());
     }
 }
