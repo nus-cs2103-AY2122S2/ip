@@ -8,7 +8,7 @@ public class DeadlineTask extends Task{
     protected LocalDate taskDate;
     protected LocalTime taskTime;
 
-    public DeadlineTask(String title, String taskDate) throws DateTimeException{
+    public DeadlineTask(String title, String taskDate){
         super(title);
         this.type = TaskType.DEADLINE;
         this.taskDate = LocalDate.parse(taskDate);
