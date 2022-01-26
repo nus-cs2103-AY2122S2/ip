@@ -1,16 +1,8 @@
 package funbox.util;
 
 import java.time.LocalDate;
-import funbox.command.Command;
-import funbox.command.ByeCommand;
-import funbox.command.ListCommand;
-import funbox.command.ToDoCommand;
-import funbox.command.EventCommand;
-import funbox.command.DeadlineCommand;
-import funbox.command.DeleteCommand;
-import funbox.command.FilterCommand;
-import funbox.command.MarkCommand;
-import funbox.command.UnmarkCommand;
+
+import funbox.command.*;
 import funbox.exception.FunBoxExceptions;
 
 
@@ -42,6 +34,8 @@ public class Parser {
             return new UnmarkCommand(Integer.parseInt(description));
         case "filter":
             return new FilterCommand(description);
+        case "find":
+            return new FindCommand(description);
         default:
             throw new FunBoxExceptions("ERROR! I do not know what the commands means :<");
         }
