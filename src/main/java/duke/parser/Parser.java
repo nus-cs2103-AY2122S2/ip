@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Locale;
 
 public class Parser {
 
@@ -26,7 +27,7 @@ public class Parser {
                 throw new DukeException(ui.MSG_EMPTYINPUT);
             }
 
-            String command;
+            String command, description;
             command = inputTxt.split(" ")[0].toUpperCase();
             CommandType action = CommandType.valueOf(command);
             switch (action) {
@@ -35,7 +36,7 @@ public class Parser {
             case LIST:
                 return new ListCommand();
             case TODO:
-                String description = inputTxt.substring(inputTxt.indexOf(' ')).trim();
+                description = inputTxt.substring(inputTxt.indexOf(' ')).trim();
                 if (description.isEmpty()) {
                     throw new DukeException(ui.MSG_EMPTYINPUT);
                 } else {
@@ -49,7 +50,16 @@ public class Parser {
                     return formatCmdWithIdSelection(CommandType.DONE, inputTxt);
                 case DELETE:
                     return formatCmdWithIdSelection(CommandType.DELETE, inputTxt);
+                case FIND:
+                    description = inputTxt.substring(inputTxt.indexOf(' ')).trim();
+                    if (description.isEmpty()) {
+                        throw new DukeException(ui.MSG_EMPTYINPUT);
+                    } else {
+                        return new FindCommand(description.toLowerCase());
+                    }
+
                 default:
+
                     throw new DukeException(ui.MSG_INVALIDCMD);
         }
 

@@ -40,6 +40,8 @@ public abstract class Task {
         return isDone;
     }
 
+    public String getDescription() { return this.description; }
+
     public void markAsDone() {
         this.isDone = true;
     }
