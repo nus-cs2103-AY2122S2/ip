@@ -1,3 +1,5 @@
+package doge.exception;
+
 public class DogeException extends Exception {
 	private final String message;
 

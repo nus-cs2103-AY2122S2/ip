@@ -1,3 +1,11 @@
+package doge;
+
+import doge.exception.DogeException;
+import doge.task.Deadline;
+import doge.task.Event;
+import doge.task.Task;
+import doge.task.Todo;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

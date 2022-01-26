@@ -1,3 +1,8 @@
+package doge.command;
+
+import doge.*;
+import doge.exception.DogeException;
+
 public class DeleteCommand extends Command {
     public DeleteCommand(String s) {
         super(s);

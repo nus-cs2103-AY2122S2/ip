@@ -1,22 +1,12 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+package doge;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import doge.command.Command;
+import doge.exception.DogeException;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-
-import java.util.Date;
-import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Doge {
     private Storage storage;

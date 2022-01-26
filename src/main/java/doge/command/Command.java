@@ -1,7 +1,15 @@
+package doge.command;
+
+import doge.Storage;
+import doge.TaskList;
+import doge.Ui;
+import doge.exception.DogeException;
+import doge.task.Task;
+
 public abstract class Command {
-    Task task;
-    String details;
-    boolean isExit;
+    protected Task task;
+    protected String details;
+    protected boolean isExit;
 
     public Command() {
 
@@ -23,9 +31,14 @@ public abstract class Command {
         return this.task != null;
     }
 
+    public Task getTask() {
+        return this.task;
+    }
+
     public void setExit(boolean b) {
         this.isExit = b;
     }
+
     public boolean isExit() {
         return this.isExit;
     }

@@ -1,3 +1,8 @@
+package doge.command;
+
+import doge.*;
+import doge.exception.DogeException;
+
 public class ByeCommand extends Command {
     public ByeCommand() {
 

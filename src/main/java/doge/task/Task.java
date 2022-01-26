@@ -1,13 +1,25 @@
+package doge.task;
+
 import java.time.LocalDateTime;
 
 public class Task {
-	String description;
-	LocalDateTime dateTime;
-	boolean isDone;
+	protected String description;
+	protected LocalDateTime dateTime;
+	protected boolean isDone;
 
 	public Task(String description) {
 		this.description = description.trim();
 		this.isDone = false;
+	}
+
+	public Task(String description, LocalDateTime dateTime) {
+		this.description = description.trim();
+		this.dateTime = dateTime;
+		this.isDone = false;
+	}
+
+	public boolean isDone() {
+		return this.isDone;
 	}
 
 	public String getStatusIcon() {
@@ -20,6 +32,10 @@ public class Task {
 
 	public void setDateTime(LocalDateTime dateTime) {
 		this.dateTime = dateTime;
+	}
+
+	public LocalDateTime getDateTime() {
+		return this.dateTime;
 	}
 
 	public void mark() {

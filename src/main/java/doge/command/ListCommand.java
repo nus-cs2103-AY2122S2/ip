@@ -1,3 +1,11 @@
+package doge.command;
+
+import doge.*;
+import doge.exception.DogeException;
+import doge.task.Deadline;
+import doge.task.Event;
+import doge.task.Task;
+
 import java.time.LocalDateTime;
 
 public class ListCommand extends Command {
@@ -31,10 +39,10 @@ public class ListCommand extends Command {
 
                 if (currTask instanceof Deadline) {
                     Deadline currDeadline = (Deadline) currTask;
-                    currDateTime = currDeadline.dateTime;
+                    currDateTime = currDeadline.getDateTime();
                 } else if (currTask instanceof Event) {
                     Event currEvent= (Event) currTask;
-                    currDateTime = currEvent.dateTime;
+                    currDateTime = currEvent.getDateTime();
                 } else {
                     continue;
                 }

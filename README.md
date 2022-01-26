@@ -1,4 +1,4 @@
-# Doge project template
+# doge.Doge project template
 
 This is a project template for a greenfield Java project. Its name is **_Doge_**, a person who occasionally pisses you off but at the end of the day, you still love them. Given below are instructions on how to use it.
 
@@ -24,10 +24,10 @@ This is a project template for a greenfield Java project. Its name is **_Doge_**
          ▀▀▀▀▀▀▀▀▀▀▀▀        
 ```
 
-## Features of Doge
+## Features of doge.Doge
 Some of the features that **_Doge_** has:
-1. Task tracker
-   1. Able to track different kinds of tasks (Todo, Event, Deadline)
+1. doge.task.Task tracker
+   1. Able to track different kinds of tasks (doge.task.Todo, doge.task.Event, doge.task.Deadline)
 
    2. Mark completed tasks
 
@@ -37,9 +37,9 @@ Some of the features that **_Doge_** has:
 
    5. List the current tasks
 
-## Basic Commands for Doge
+## Basic Commands for doge.Doge
 1. Adding a task:
-   1. **todo** `task`: adds a Todo task
+   1. **todo** `task`: adds a doge.task.Todo task
    
    2. **event** `task`/`yyyy-MM-dd HH:mm`: adds an event 
     

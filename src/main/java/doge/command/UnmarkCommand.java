@@ -1,3 +1,8 @@
+package doge.command;
+
+import doge.*;
+import doge.exception.DogeException;
+
 public class UnmarkCommand extends Command {
     public UnmarkCommand(String s) {
         super(s);
@@ -18,7 +23,7 @@ public class UnmarkCommand extends Command {
         if (pos > tasks.size() || pos < 0) {
             throw new DogeException("How am I supposed to unmark something that doesn't exist?");
         } else {
-            if (!tasks.getTask(pos - 1).isDone) {
+            if (!tasks.getTask(pos - 1).isDone()) {
                 throw new DogeException("Your task has been unmarked before...");
             }
 

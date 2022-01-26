@@ -1,3 +1,9 @@
+package doge.command;
+
+import doge.*;
+import doge.exception.DogeException;
+import doge.task.Task;
+
 import java.time.LocalDateTime;
 
 public class DeadlineCommand extends Command {

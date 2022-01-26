@@ -1,4 +1,20 @@
-import java.util.Locale;
+package doge;
+
+import doge.command.Command;
+import doge.command.ByeCommand;
+import doge.command.DeadlineCommand;
+import doge.command.DeleteCommand;
+import doge.command.EventCommand;
+import doge.command.ListCommand;
+import doge.command.MarkCommand;
+import doge.command.TodoCommand;
+import doge.command.UnmarkCommand;
+
+import doge.exception.DogeException;
+
+import doge.task.Deadline;
+import doge.task.Event;
+import doge.task.Todo;
 
 public class Parser {
 
