@@ -3,7 +3,7 @@ package duke.command;
 import duke.exception.DukeIllegalArgumentException;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.util.IPrintable;
+import duke.util.Printable;
 
 public class MarkCommand extends Command {
     private final boolean newState;
@@ -14,7 +14,7 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public boolean execute(IPrintable linePrinter, TaskList taskList) throws DukeIllegalArgumentException {
+    public boolean execute(Printable linePrinter, TaskList taskList) throws DukeIllegalArgumentException {
         Task task = parseSelectTask(taskList);
 
         if (task.isDone() == newState) {

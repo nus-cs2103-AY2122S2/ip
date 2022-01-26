@@ -4,7 +4,7 @@ import duke.exception.DukeException;
 import duke.exception.DukeIllegalArgumentException;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.util.IPrintable;
+import duke.util.Printable;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -54,6 +54,6 @@ public abstract class Command {
         }
     }
 
-    public abstract boolean execute(IPrintable linePrinter, TaskList taskList)
+    public abstract boolean execute(Printable linePrinter, TaskList taskList)
             throws DukeException;
 }

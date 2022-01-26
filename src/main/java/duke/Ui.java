@@ -4,7 +4,7 @@ import duke.exception.DukeException;
 import duke.exception.DukeIOException;
 import duke.exception.DukeIllegalArgumentException;
 import duke.exception.DukeInvalidCommandException;
-import duke.util.IPrintable;
+import duke.util.Printable;
 
 import java.util.Scanner;
 import java.util.function.Function;
@@ -41,7 +41,7 @@ public class Ui {
         return this.scanner.nextLine();
     }
 
-    public boolean printCommand(Function<IPrintable, Boolean> action) {
+    public boolean printCommand(Function<Printable, Boolean> action) {
         System.out.println(SEPARATOR);
         boolean isRunning = action.apply((line) -> {
             System.out.println("\t" + line);
@@ -50,7 +50,7 @@ public class Ui {
         return isRunning;
     }
 
-    public void printError(IPrintable linePrinter, DukeException ex) {
+    public void printError(Printable linePrinter, DukeException ex) {
         if (ex instanceof DukeInvalidCommandException) {
             linePrinter.print(ERROR_INVALID_COMMAND);
         } else if (ex instanceof DukeIllegalArgumentException) {

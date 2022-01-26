@@ -3,7 +3,7 @@ package duke.command;
 import duke.exception.DukeIllegalArgumentException;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.util.IPrintable;
+import duke.util.Printable;
 
 public class DeleteCommand extends Command {
     DeleteCommand(String args) {
@@ -11,7 +11,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public boolean execute(IPrintable linePrinter, TaskList taskList) throws DukeIllegalArgumentException {
+    public boolean execute(Printable linePrinter, TaskList taskList) throws DukeIllegalArgumentException {
         int taskIndex = parseTaskNumber();
         Task deleted = taskList.deleteTask(taskIndex);
 

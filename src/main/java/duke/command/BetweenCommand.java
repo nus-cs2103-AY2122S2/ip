@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.exception.DukeIllegalArgumentException;
 import duke.task.TaskList;
-import duke.util.IPrintable;
+import duke.util.Printable;
 
 import java.time.LocalDateTime;
 
@@ -12,7 +12,7 @@ public class BetweenCommand extends Command {
     }
 
     @Override
-    public boolean execute(IPrintable linePrinter, TaskList taskList) throws DukeIllegalArgumentException {
+    public boolean execute(Printable linePrinter, TaskList taskList) throws DukeIllegalArgumentException {
         final String[] argParts = args.split(" and ");
         if (argParts.length < 2) {
             throw new DukeIllegalArgumentException("Not in the format <date> and <date>");

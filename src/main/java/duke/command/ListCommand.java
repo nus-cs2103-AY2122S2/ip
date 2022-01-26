@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.task.TaskList;
-import duke.util.IPrintable;
+import duke.util.Printable;
 
 public class ListCommand extends Command {
     ListCommand(String args) {
@@ -9,7 +9,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public boolean execute(IPrintable linePrinter, TaskList taskList) {
+    public boolean execute(Printable linePrinter, TaskList taskList) {
         linePrinter.print("This is your task list:");
         taskList.forEach((index, task) -> {
             // Note that index passed into this consumer is 0-based. Increment by 1 for readability

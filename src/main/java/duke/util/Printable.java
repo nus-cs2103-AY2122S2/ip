@@ -1,5 +1,5 @@
 package duke.util;
 
-public interface IPrintable {
+public interface Printable {
     public void print(String input);
 }
