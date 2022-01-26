@@ -17,6 +17,15 @@ public class Todo extends Task {
         this.type = "T";
     }
 
+    /**
+     * Returns a String of the description of the task.
+     *
+     * @return  description of the task
+     */
+    public String getDescription() {
+        return super.description;
+    }
+
     @Override
     public String getType() {
         return this.type;

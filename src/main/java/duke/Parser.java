@@ -11,6 +11,7 @@ public class Parser {
     private Ui ui;
     private TaskList taskList;
     private Storage storage;
+    private Find finder = new Find();
 
     /**
      * Construct Parser object to read what user inputs.
@@ -107,6 +108,12 @@ public class Parser {
                         task += " " + currStr;
                     }
                 }
+                break;
+            }
+            case "find": {
+                String keyword = sc.next();
+                TaskList matchingTasks = finder.find(taskList, keyword);
+                ui.listMatching(matchingTasks);
                 break;
             }
             default:

@@ -19,6 +19,15 @@ public class Deadline extends Task {
         this.type = "D";
     }
 
+    /**
+     * Returns a String of the description of the task.
+     *
+     * @return  description of the task
+     */
+    public String getDescription() {
+        return super.description;
+    }
+
     @Override
     public String getType() {
         return this.type;

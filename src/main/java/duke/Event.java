@@ -19,6 +19,15 @@ public class Event extends Task {
         this.type = "E";
     }
 
+    /**
+     * Returns a String of the description of the task.
+     *
+     * @return  description of the task
+     */
+    public String getDescription() {
+        return super.description;
+    }
+
     @Override
     public String getType() {
         return this.type;

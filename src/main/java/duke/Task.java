@@ -50,7 +50,7 @@ public class Task {
      * @return  description of the task
      */
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     /**
