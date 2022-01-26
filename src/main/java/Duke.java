@@ -1,4 +1,6 @@
+
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -118,6 +120,8 @@ public class Duke {
                 new ResponePrinter(Templates.invalidTaskIdMsg).print();
             } catch (IOException e) {
                 new ResponePrinter(Templates.readErrorMsg).print();
+            } catch (DateTimeParseException e) {
+                new ResponePrinter(Templates.invalidDateTimeFormatMsg).print();
             }
         }
 

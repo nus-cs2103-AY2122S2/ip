@@ -30,6 +30,11 @@ public final class Templates {
     public static final String noTaskMsg = "☹ OOPS!!! No task exists!";
 
     public static final String readErrorMsg = "☹ OOPS!!! There was an error loading the file.";
+    
+    public static final String invalidDateTimeFormatMsg = "☹ OOPS!!! Wrong format for Date or Time. "
+        + "Please use [dd-MM-yyyy HH:mm] format. i.e. 30-05-1959 13:59";
+
+    public static final String invalidDateTimeMsg = "☹ OOPS!!! You can't set a task in the past!";
 
     public static String taskListMsg(ArrayList<Task> tasks) {
         StringBuffer result = new StringBuffer("Here are the tasks in your list: \n");
