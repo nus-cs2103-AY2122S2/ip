@@ -3,10 +3,10 @@ package duke;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 
-public class DeadLines extends Task {
+public class Deadlines extends Task {
     LocalDateTime deadline;
 
-    public DeadLines(String task, String deadline) throws DukeException {
+    public Deadlines(String task, String deadline) throws DukeException {
         super(task);
         if (deadline == null) {
             throw new DukeException("Try Again with correct format!\n");
@@ -23,7 +23,12 @@ public class DeadLines extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: Date-> " + this.deadline.getDayOfMonth() + " Month-> " + this.deadline.getMonth() + " Day-> " + this.deadline.getDayOfWeek() + " Year-> " + this.deadline.getYear() + " Time-> " + this.deadline.getHour() + this.deadline.getMinute() + ")";
+        return "[D]" + super.toString() + " (by: Date-> " + this.deadline.getDayOfMonth()
+                                             + " Month-> " + this.deadline.getMonth()
+                                             + " Day-> " + this.deadline.getDayOfWeek()
+                                             + " Year-> " + this.deadline.getYear()
+                                             + " Time-> " + this.deadline.getHour()
+                                             + this.deadline.getMinute() + ")";
     }
 
     @Override
