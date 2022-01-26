@@ -36,6 +36,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the task list to disk.
+     *
+     * @param todoList tasklist to save.
+     * @throws IOException If file does not exist.
+     */
     public void save(TaskList todoList) throws IOException {
         FileWriter fw = new FileWriter(this.relativePath);
         for (int i = 0; i < todoList.size(); i++) {
@@ -44,6 +50,12 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Returns an ArrayList of tasks from disk.
+     *
+     * @return ArrayList of tasks
+     * @throws FileNotFoundException
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
 
 

@@ -13,6 +13,13 @@ public class Event extends Task {
     protected int year;
     protected LocalTime time;
 
+    /**
+     * Constructs an Event object.
+     *
+     * @param description description of event.
+     * @param eventDate event date.
+     * @param time event time.
+     */
     public Event(String description, LocalDate eventDate, LocalTime time) {
         super(description);
         this.eventDate = eventDate;
@@ -22,11 +29,21 @@ public class Event extends Task {
         this.time = time;
     }
 
+    /**
+     * Returns a string representation to save to disk.
+     *
+     * @return String representation to save to disk.
+     */
     @Override
     public String toStringForSave() {
         return "E "+ super.toStringForSave() + " # " + this.eventDate + " " + this.time;
     }
 
+    /**
+     * Returns a string representation of the Event object.
+     *
+     * @return String represenation.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: "

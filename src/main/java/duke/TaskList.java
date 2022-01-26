@@ -8,19 +8,35 @@ public class TaskList {
 
     protected ArrayList<Task> taskLists;
 
+    /**
+     * Constructs a TaskList object.
+     *
+     * @param taskList an array of Task.
+     */
     public TaskList(ArrayList<Task> taskList) {
         this.taskLists = taskList;
     }
 
+    /**
+     * Returns a size integer of TaskList object.
+     *
+     * @return size of TaskList object.
+     */
     public int size() {
         return taskLists.size();
     }
 
+    /**
+     * Returns a Task object at that TaskList position.
+     *
+     * @param num position to get task.
+     * @return
+     */
     public Task get(int num) {
         return taskLists.get(num);
     }
 
-
+    /**Lists and print the all the Task in the TaskList.*/
     public void list() {
         System.out.println(LINES);
         System.out.println("    Here are the tasks in your list:");
@@ -31,6 +47,11 @@ public class TaskList {
         System.out.println(LINES);
     }
 
+    /**
+     * Removes task from TaskList.
+     *
+     * @param num position to remove task.
+     */
     public void removeTask(int num) {
 
         System.out.println(LINES);
@@ -43,6 +64,11 @@ public class TaskList {
         System.out.println(LINES);
     }
 
+    /**
+     * Adds Task to TaskList.
+     *
+     * @param task a Task to be added.
+     */
     public void addTask(Task task) {
         taskLists.add(task);
 
@@ -56,10 +82,20 @@ public class TaskList {
         System.out.println(LINES);
     }
 
+    /**
+     * Adds Task to TaskList without printing the Task.
+     *
+     * @param task Task to add.
+     */
     public void addWithoutPrint(Task task) {
         taskLists.add(task);
     }
 
+    /**
+     * Sets the specified Task as done.
+     *
+     * @param taskToMark an integer rank of Task in TaskList.
+     */
     public void setTaskAsDone(int taskToMark) {
         taskLists.get(taskToMark - 1).markAsDone();
 
@@ -71,6 +107,11 @@ public class TaskList {
         System.out.println(LINES);
     }
 
+    /**
+     * Sets the specified Task as undone.
+     *
+     * @param taskToUnmark an integer rank of task to mark as undone.
+     */
     public void setTaskAsUnDone(int taskToUnmark) {
         taskLists.get(taskToUnmark - 1).markAsNotDone();
 

@@ -21,15 +21,10 @@ public class Duke {
         // reading user input
         Scanner sc = new Scanner(System.in);
 
-        // INITIALIZING VARIABLES
-        /**
-         * whether the user's input is bye
-         */
+        // initializing variable
         boolean isBye = false;
 
-        /**
-         * Array container for user's to do tasks
-         */
+        // array container
         ArrayList<Task> todoLists = new ArrayList<Task>();
         TaskList taskLists = new TaskList(todoLists);
 
@@ -47,9 +42,7 @@ public class Duke {
         String userInput = sc.nextLine();
 
         while (!isBye) {
-            /**
-             * A string to display the remaining task number
-             */
+            // A string to display the remaining task number
             String displayTaskAmount = String.format("Now you have %d tasks in the list.", todoLists.size() + 1);
 
             if (userInput.equals("bye")) {
