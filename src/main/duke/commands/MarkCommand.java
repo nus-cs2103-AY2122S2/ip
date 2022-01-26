@@ -4,6 +4,9 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Sets a task as done.
+ */
 public class MarkCommand extends Command {
     protected int index;
     private static final String MESSAGE = "Nice! I've marked this task as done:";
