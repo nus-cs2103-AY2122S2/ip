@@ -1,34 +1,24 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class Duke {
 
-    String splitter = "______________________________________";
-    String indentationBase = "\t";
-    String indentationText = "\t  ";
-    String indentationTaskStatus = "\t    ";
     ArrayList<Task> taskList = new ArrayList<>();
     boolean firstUserChat = true;
-    String userName = "";
-    String taskFilePath = "data/tasks.txt";
-
-    String logo =   indentationText +
-                    "    _                  _     \n" + indentationText +
-                    "   |_|                |_|    \n" + indentationText +
-                    "    _  __ _ _ ____   ___ ___ \n" + indentationText +
-                    "   | |/ _` | '__\\ \\ / / / __|\n" + indentationText +
-                    "   | | (_| | |   \\ V /| \\__ \\\n" + indentationText +
-                    "   | |\\__,_|_|    \\_/ |_|___/\n" + indentationText +
-                    "  _/ |                       \n" + indentationText +
-                    " |__/                        \n"; 
+    String userName;
+    String taskFilePath;
+    Ui ui;
 
     public static void main(String[] args) {
-        new Duke().run();
+        new Duke("data/tasks.txt").run();
+    }
+
+    public Duke(String filePath) {
+        taskFilePath = filePath;
+        ui = new Ui();
     }
 
     private void loadFileContents(String taskFilePath) {
@@ -38,7 +28,7 @@ public class Duke {
             
             // checks if the user already has existing save data 
             if (!f.createNewFile()) {
-                System.out.println(indentationText + "loading previous save data...");
+                ui.showTask("loading previous save data...");
                 Scanner s = new Scanner(f);
                 while(s.hasNext()) {
                     
@@ -65,13 +55,13 @@ public class Duke {
                 s.close();
             // else creates the save data for further use
             } else {
-                System.out.println(indentationText + "creating save data...");
+                ui.showText("creating save data...");
             }
             
         } catch (IOException e) {
-            System.err.println(indentationText + e.getMessage());
+            ui.showError(e.getMessage());
         } catch (DukeException e) {
-            System.err.println(indentationText + e.getMessage());
+            ui.showError(e.getMessage());
         }
     }
 
@@ -85,21 +75,14 @@ public class Duke {
             }
             fw.close();
         } catch (IOException e) {
-            System.err.print(indentationText + e.getMessage());
+            ui.showError(e.getMessage());
         }
     }
 
     public void run() {
         
-        // Jarvis introduces himself & asks for user's name
-        System.out.println(String.format("%sHello, I'm\n%s%syour personal assistant.", indentationText, logo, indentationText));
-        System.out.println(String.format("%sHow should I address you?", indentationText));
-
-        Scanner sc = new Scanner(System.in);
-        userName = sc.nextLine();
-
-        // Jarvis addresses user
-        System.out.println(String.format("%sSplendid! My pleasure to serve you %s ", indentationText, userName));
+        // Jarvis introduces himself, asks for user's name & greets user
+        userName = ui.showWelcome();
 
         // load TaskList from existing data 
         loadFileContents(taskFilePath);
@@ -108,30 +91,18 @@ public class Duke {
 
         while(active) {
             try {
-                System.out.println(String.format("%sWhat %smay I assist you with today, %s? \n\t%s", indentationText, (firstUserChat ? "" : "else "), userName, splitter));
-                firstUserChat = (firstUserChat==true) ? false : firstUserChat;
 
-                String userInput = sc.nextLine();
-                userInput = userInput.trim();
-
+                String userInput = ui.readCommand();
                 String[] userInputString = userInput.split(" ", 2);
                 String command = userInputString[0];
                 Command commandType = Command.getCommand(command);
                 String description = userInputString.length > 1 ? userInputString[1] : "" ;
 
-                // unrecognised input by user 
-                if (commandType == null) {
-                    throw new DukeException("I'm sorry, you've input a command I don't recognize. Please try again.");
-                }
-
-                // Start of Duke's text block 
-                System.out.println(String.format("%s%s", indentationBase, splitter));
-
                 switch (commandType) {
                     
                     // Exit - "bye", exits the program 
                     case BYE:
-                        System.out.println(String.format("%sGoodbye for now. \n", indentationText));
+                        ui.showGoodbye();
                         active = false;
                         break;
 
@@ -179,11 +150,10 @@ public class Duke {
             }
             
             catch(DukeException e) {
-                System.err.println(String.format("%s%s", indentationText, e.getMessage()));
+                ui.showError(e.getMessage());
             }
         }
 
-        sc.close();
     }
 
     private void addTodo(String taskDescription) throws DukeException {
@@ -193,8 +163,8 @@ public class Duke {
         }
         Task task = new Todo(taskDescription, false); 
         taskList.add(task);
-        System.out.println(String.format("%sNoted. I've added this task:", indentationText));
-        System.out.println(String.format("%s%s", indentationTaskStatus, task));
+        ui.showText("Noted. I've added this task: ");
+        ui.showTask(task.toString());
     }
 
     private void addEventOrDeadline(String taskDescription, Command commandType, String regex) throws DukeException {
@@ -224,10 +194,10 @@ public class Duke {
             }
             
             taskList.add(task);
-            System.out.println(String.format("%sNoted. I've added this task:", indentationText));
-            System.out.println(String.format("%s%s", indentationTaskStatus, task));
+            ui.showText("Noted. I've added this task: ");
+            ui.showText(task.toString());
         } catch (DukeException e) {
-            System.err.println(indentationText + e.getMessage());
+            ui.showError(e.getMessage());
         }
     }
 
@@ -244,11 +214,11 @@ public class Duke {
 
                 Task task = taskList.get(taskIndex);
                 task.markAsDone();
-                System.out.println(String.format("%sOkay, marking this task as done:", indentationText));
-                System.out.println(String.format("%s%s", indentationTaskStatus, task));
+                ui.showText("Okay, marking this task as done:");
+                ui.showTask(task.toString());
                 
             } catch (DukeException e) {
-                System.err.println(String.format("%s%s", indentationText, e.getMessage())); 
+                ui.showError(e.getMessage());
             }
         } else {
             throw new DukeException("I'm sorry, you missed out the task index");
@@ -269,11 +239,11 @@ public class Duke {
 
                 Task task = taskList.get(taskIndex);
                 task.markAsUndone();
-                System.out.println(String.format("%sOkay, marking this task as not done yet:", indentationText));
-                System.out.println(String.format("%s%s", indentationTaskStatus, task));
+                ui.showText("Okay, marking this task as not done yet:");
+                ui.showTask(task.toString());
                 
             } catch (DukeException e) {
-                System.err.println(String.format("%s%s", indentationText, e.getMessage())); 
+                ui.showError(e.getMessage());
             }
         } else {
             throw new DukeException("I'm sorry, you missed out the task index");
@@ -282,12 +252,12 @@ public class Duke {
 
     private void listTasks() {
         if (taskList.size() == 0) {
-            System.out.println(String.format("%sYour list is empty %s", indentationText, userName));
+            ui.showText("Your list is empty");
         }
         else {
             for (int i = 0; i < taskList.size(); i++) {
                 Task task = taskList.get(i);
-                System.out.println(String.format("%s%d. %s", indentationText, i+1, task)); 
+                ui.showText((i+1) + ". " + task.toString());
             }
         }
     }
@@ -306,8 +276,8 @@ public class Duke {
         }
 
         Task task = taskList.remove(taskIndex);
-        System.out.println(String.format("%sOkay, I've deleted this task:", indentationText));
-        System.out.println(String.format("%s%s", indentationTaskStatus, task));
+        ui.showText("Okay, I've deleted this task");
+        ui.showTask(task.toString());
     }
 
 }
