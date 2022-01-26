@@ -137,6 +137,7 @@ public class TaskList {
         if (!isValidTaskIndex(taskIndex)) {
             throw new DukeException("The task index provided is invalid");
         }
+        
         tasks.get(taskIndex).mark();
     }
 
@@ -150,6 +151,7 @@ public class TaskList {
         if (!isValidTaskIndex(taskIndex)) {
             throw new DukeException("The task index provided is invalid");
         }
+        
         tasks.get(taskIndex).unmark();
     }
 
@@ -164,9 +166,11 @@ public class TaskList {
         if (!isValidTaskIndex(taskIndex)) {
             throw new DukeException("The task index provided is invalid");
         }
+        
         Task taskToBeDeleted = tasks.get(taskIndex);
         tasks.remove(taskIndex);
         numberOfTasks--;
+        
         return taskToBeDeleted;
     }
 }
