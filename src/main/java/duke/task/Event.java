@@ -19,10 +19,7 @@ public class Event extends Task {
         this("", null);
     }
 
-    public LocalDateTime getAt() {
-        return this.at;
-    }
-
+    @Override
     public Optional<LocalDateTime> getDate() {
         return Optional.of(this.at);
     }

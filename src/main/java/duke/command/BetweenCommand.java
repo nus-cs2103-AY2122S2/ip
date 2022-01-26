@@ -22,7 +22,7 @@ public class BetweenCommand extends Command {
 
         linePrinter.print(String.format("Here are your tasks in between %s and %s:",
                 argParts[0], argParts[1]));
-        taskList.forEach((index, task) -> {
+        taskList.doForEach((index, task) -> {
             task.getDate().ifPresent(date -> {
                 if (date.isBefore(end) && date.isAfter(start)) {
                     linePrinter.print(task.getReadableString());

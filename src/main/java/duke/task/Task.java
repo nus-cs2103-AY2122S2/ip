@@ -54,6 +54,7 @@ public abstract class Task implements Serializable {
     protected Task readSerializedData(DataInputStream dIn) throws IOException {
         this.description = dIn.readUTF();
         this.isDone = dIn.readBoolean();
+
         return this;
     }
 

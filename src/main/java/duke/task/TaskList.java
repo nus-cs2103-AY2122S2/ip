@@ -23,7 +23,7 @@ public class TaskList {
         return this.tasks.size();
     }
 
-    public void forEach(BiConsumer<Integer, ? super Task> consumer) {
+    public void doForEach(BiConsumer<Integer, ? super Task> consumer) {
         for (int i = 0; i < this.tasks.size(); i++) {
             consumer.accept(i, this.tasks.get(i));
         }
@@ -40,9 +40,9 @@ public class TaskList {
         if (index >= this.tasks.size() || index < 0) {
             return null;
         }
-        Task deleted = this.tasks.remove(index);
+        final Task deletedTask = this.tasks.remove(index);
         this.notifyListeners();
-        return deleted;
+        return deletedTask;
     }
 
     public Task markTask(Task task, boolean isDone) {
@@ -54,11 +54,11 @@ public class TaskList {
     }
 
     public void registerListener(Consumer<TaskList> listener) {
-        changeListeners.add(listener);
+        this.changeListeners.add(listener);
     }
 
     public void removeListener(Consumer<TaskList> listener) {
-        changeListeners.remove(listener);
+        this.changeListeners.remove(listener);
     }
 
     private void notifyListeners() {

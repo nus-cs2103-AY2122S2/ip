@@ -19,10 +19,6 @@ public class Deadline extends Task {
         this("", null);
     }
 
-    public LocalDateTime getBy() {
-        return this.by;
-    }
-
     @Override
     public Optional<LocalDateTime> getDate() {
         return Optional.of(this.by);

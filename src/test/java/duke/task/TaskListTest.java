@@ -81,7 +81,7 @@ public class TaskListTest {
             list.addTask(sourceTasks[i]);
         }
 
-        list.forEach(tasks::put);
+        list.doForEach(tasks::put);
 
         assertEquals(4, tasks.size());
         assertTrue(tasks.containsKey(0) && tasks.containsKey(1) && tasks.containsKey(2)

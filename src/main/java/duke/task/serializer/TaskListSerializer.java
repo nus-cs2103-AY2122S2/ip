@@ -18,19 +18,20 @@ import java.io.OutputStream;
 public class TaskListSerializer {
 
     public static TaskList inflate(InputStream dbStream) throws DukeIOException {
-        TaskList store = new TaskList();
+        final TaskList taskList = new TaskList();
         if (dbStream == null) {
-            return store;
+            return taskList;
         }
 
-        DataInputStream dbDataStream = new DataInputStream(dbStream);
+        final DataInputStream dbDataStream = new DataInputStream(dbStream);
         try (dbDataStream) {
-            int recordCount = dbDataStream.readInt();
+            final int recordCount = dbDataStream.readInt();
+
             for (int i = 0; i < recordCount; i++) {
-                int recordLength = dbDataStream.readInt();
-                byte[] recordData = dbStream.readNBytes(recordLength);
+                final int recordLength = dbDataStream.readInt();
+                final byte[] recordData = dbStream.readNBytes(recordLength);
                 try {
-                    store.addTask(TaskSerializer.inflate(recordData));
+                    taskList.addTask(TaskSerializer.inflate(recordData));
                 } catch (DukeIOException ex) {
                     System.out.println("Verbose: Failed to load Task record");
                 }
@@ -39,14 +40,14 @@ public class TaskListSerializer {
             throw new DukeIOException("Failed to inflate database: IO Error");
         }
 
-        return store;
+        return taskList;
     }
 
-    public static void deflate(TaskList store, OutputStream dbStream) throws DukeIOException {
-        try (DataOutputStream dbDataStream = new DataOutputStream(dbStream)) {
-            dbDataStream.writeInt(store.getTaskCount());
-            for (int i = 0; i < store.getTaskCount(); i++) {
-                byte[] flattenedData = TaskSerializer.deflate(store.getTaskByIndex(i));
+    public static void deflate(TaskList taskList, OutputStream dbStream) throws DukeIOException {
+        try (final DataOutputStream dbDataStream = new DataOutputStream(dbStream)) {
+            dbDataStream.writeInt(taskList.getTaskCount());
+            for (int i = 0; i < taskList.getTaskCount(); i++) {
+                final byte[] flattenedData = TaskSerializer.deflate(taskList.getTaskByIndex(i));
                 dbDataStream.writeInt(flattenedData.length);
                 dbDataStream.write(flattenedData);
             }

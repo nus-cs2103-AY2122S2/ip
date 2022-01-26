@@ -16,7 +16,7 @@ public class ScheduleCommand extends Command {
         final LocalDateTime dayStart = parseDate(this.args);
         final LocalDateTime dayEnd = dayStart.plusDays(1);
         linePrinter.print(String.format("Here are your tasks on %s:", this.args));
-        taskList.forEach((index, task) -> {
+        taskList.doForEach((index, task) -> {
             task.getDate().ifPresent(date -> {
                 if (date.isBefore(dayEnd) && date.isAfter(dayStart)) {
                     linePrinter.print(task.getReadableString());

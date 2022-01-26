@@ -16,11 +16,11 @@ import java.io.IOException;
 
 public class TaskSerializer {
     static Task inflate(byte[] data) throws DukeIOException {
-        ByteArrayInputStream memStream = new ByteArrayInputStream(data);
-        DataInputStream dataStream = new DataInputStream(memStream);
+        final ByteArrayInputStream memStream = new ByteArrayInputStream(data);
+        final DataInputStream dataStream = new DataInputStream(memStream);
 
         try (dataStream) {
-            int typeId = dataStream.readShort();
+            final int typeId = dataStream.readShort();
             TaskType taskType = TaskType.matchType(typeId);
             if (taskType == null) {
                 throw new DukeIOException("Encountered unknown format in database");
@@ -32,11 +32,13 @@ public class TaskSerializer {
     }
 
     static byte[] deflate(Task task) throws DukeIOException {
-        ByteArrayOutputStream memStream = new ByteArrayOutputStream();
-        DataOutputStream dataStream = new DataOutputStream(memStream);
+        final ByteArrayOutputStream memStream = new ByteArrayOutputStream();
+        final DataOutputStream dataStream = new DataOutputStream(memStream);
 
         try (dataStream) {
             task.serialize(dataStream);
+            dataStream.flush();
+            memStream.flush();
             return memStream.toByteArray();
         } catch (IOException ex) {
             throw new DukeIOException("Failed to serialize Task");
