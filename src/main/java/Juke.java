@@ -1,23 +1,29 @@
+import exception.*;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import exception.*;
-import task.*;
 
 public class Juke {
     private static final Juke INSTANCE = new Juke();
     
     private final ArrayList<Task> taskList;
     private final int taskListSize = 100;
+    private final FileManager fileManager;
     
     public Juke() {
         this.taskList = new ArrayList<>(this.taskListSize);
+        this.fileManager = new FileManager();
     }
     
     private void run(Scanner input) {
         this.greet();
+        this.loadFile();
         while (true) {
-            this.printMarker();
+            PrintHelper.getInstance().printMarker();
             
             String[] args = input.nextLine().strip().split("\\s+");
             if (args.length > 0) {
@@ -33,30 +39,62 @@ public class Juke {
                         break;
                     case "todo":
                         this.addTodoToTaskList(args);
+                        this.saveFile();
                         break;
                     case "deadline":
                         this.addDeadlineToTaskList(args);
+                        this.saveFile();
                         break;
                     case "event":
                         this.addEventToTaskList(args);
+                        this.saveFile();
                         break;
                     case "mark":
                         this.markTaskAsDone(args);
+                        this.saveFile();
                         break;
                     case "unmark":
                         this.markTaskAsNotDone(args);
+                        this.saveFile();
                         break;
                     case "delete":
                         this.deleteTaskFromTaskList(args);
+                        this.saveFile();
                         break;
                     default:
                         this.echo(args);
                     }
                 } catch (JukeException e) {
-                    this.errorPrint(e);
+                    PrintHelper.getInstance().errorPrint(e);
                 }
             }
         }
+    }
+    
+    private void loadFile() {
+        ArrayList<String[]> parseArr = this.fileManager.parse();
+        for (String[] args : parseArr) {
+            try {
+                Task task = this.fileManager.decode(args);
+                if (task != null) {
+                    this.taskList.add(task);
+                }
+            } catch (JukeException e) {
+                PrintHelper.getInstance().errorPrint(e);
+                System.exit(-1);
+            }
+        }
+    }
+    
+    private void saveFile() {
+        ArrayList<String[]> writeArr = new ArrayList<>();
+        for (Task task : this.taskList) {
+            String[] args = this.fileManager.encode(task);
+            if (args != null) {
+                writeArr.add(args);
+            }
+        }
+        this.fileManager.write(writeArr);
     }
     
     private void greet() {
@@ -73,16 +111,16 @@ public class Juke {
             + " | |     |_____|/     \\|____|   | ||_____|/  |____|/  \\|____|   | |  \n"
             + "  \\|_____|                  |___|/                          |___|/   \n";
         System.out.println(logo);
-        this.formattedPrint("Greetings Executor!");
+        PrintHelper.getInstance().formattedPrint("Greetings Executor!");
     }
     
     private void bye() {
-        this.formattedPrint("Until we meet again!");
+        PrintHelper.getInstance().formattedPrint("Until we meet again!");
         System.exit(0);
     }
     
     private void echo(String[] args) {
-        this.formattedPrint(String.join(" ", args));
+        PrintHelper.getInstance().formattedPrint(String.join(" ", args));
     }
     
     private void addTodoToTaskList(String[] args) throws JukeException {
@@ -94,7 +132,7 @@ public class Juke {
                 }
                 text = text.strip();
                 this.taskList.add(new Todo(text));
-                this.formattedPrint("Todo added: " + text);
+                PrintHelper.getInstance().formattedPrint("Todo added: " + text);
             } else {
                 throw new JukeTaskListFullException("todo");
             }
@@ -127,7 +165,7 @@ public class Juke {
                     }
                     time = time.strip();
                     this.taskList.add(new Deadline(text, time));
-                    this.formattedPrint("Deadline added: " + text);
+                    PrintHelper.getInstance().formattedPrint("Deadline added: " + text);
                 } else {
                     throw new JukeTaskListFullException("deadline");
                 }
@@ -163,7 +201,7 @@ public class Juke {
                     }
                     time = time.strip();
                     this.taskList.add(new Event(text, time));
-                    this.formattedPrint("Event added: " + text);
+                    PrintHelper.getInstance().formattedPrint("Event added: " + text);
                 } else {
                     throw new JukeTaskListFullException("event");
                 }
@@ -181,7 +219,7 @@ public class Juke {
             for (int i = 0; i < this.taskList.size(); i++) {
                 str += (i + 1) + ". " + this.taskList.get(i) + "\n";
             }
-            this.formattedPrint(str.stripTrailing());
+            PrintHelper.getInstance().formattedPrint(str.stripTrailing());
         } else {
             throw new JukeTaskListEmptyException("list");
         }
@@ -196,7 +234,7 @@ public class Juke {
                 }
                 String des = this.taskList.get(idx - 1).getDescription();
                 this.taskList.get(idx - 1).markAsDone();
-                this.formattedPrint("Marked task \u00ab" + des + "\u00bb as done.");
+                PrintHelper.getInstance().formattedPrint("Marked task \u00ab" + des + "\u00bb as done.");
             } catch (NumberFormatException e) {
                 throw new JukeInvalidArgumentException("mark", "<task index>", args[1]);
             }
@@ -214,7 +252,7 @@ public class Juke {
                 }
                 String des = this.taskList.get(idx - 1).getDescription();
                 this.taskList.get(idx - 1).markAsNotDone();
-                this.formattedPrint("Marked task \u00ab" + des + "\u00bb as not done.");
+                PrintHelper.getInstance().formattedPrint("Marked task \u00ab" + des + "\u00bb as not done.");
             } catch (NumberFormatException e) {
                 throw new JukeInvalidArgumentException("unmark", "<task index>", args[1]);
             }
@@ -232,7 +270,7 @@ public class Juke {
                 }
                 String des = this.taskList.get(idx - 1).getDescription();
                 this.taskList.remove(idx - 1);
-                this.formattedPrint("Removed task \u00ab" + des + "\u00bb from task list.");
+                PrintHelper.getInstance().formattedPrint("Removed task \u00ab" + des + "\u00bb from task list.");
             } catch (NumberFormatException e) {
                 throw new JukeInvalidArgumentException("delete", "<task index>", args[1]);
             }
@@ -241,21 +279,7 @@ public class Juke {
         }
     }
     
-    private void formattedPrint(String text) {
-        System.out.println("____________________________________________________________");
-        System.out.println(text);
-        System.out.println("____________________________________________________________\n");
-    }
-    
-    private void errorPrint(JukeException e) {
-        System.out.println("____________________________________________________________");
-        System.out.println("\ud83d\ude26 ERROR! " + e.getMessage());
-        System.out.println("____________________________________________________________\n");
-    }
-    
-    private void printMarker() {
-        System.out.print("\u232c ");
-    }
+
     
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
