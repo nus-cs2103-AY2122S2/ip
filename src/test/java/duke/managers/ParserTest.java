@@ -37,6 +37,8 @@ public class ParserTest {
             //test case 8
             assertTrue(parser.parse("unmark 1") instanceof MarkCommand);
 
+            //test case 9
+            assertTrue(parser.parse("find 2") instanceof FindCommand);
         } catch (Exception e) {
             System.out.println("Exception hit! Test failed");
         }
@@ -53,5 +55,44 @@ public class ParserTest {
         }
     }
 
+    @Test
+    public void handleCommandFeedback_invalidDelete_error() {
+        Parser parser = new Parser();
+        try {
+            parser.parse("delete a");
+        } catch (Exception e) {
+            assertEquals(e.getMessage(), "☹!!! Invalid input! Please enter the number of the task you want to delete.");
+        }
+    }
+
+    @Test
+    public void handleCommandFeedback_invalidMark_error() {
+        Parser parser = new Parser();
+        try {
+            parser.parse("mark b");
+        } catch (Exception e) {
+            assertEquals(e.getMessage(), "☹!!! Invalid input! Please enter the number of the task you want to mark/unmark.");
+        }
+    }
+
+    @Test
+    public void handleCommandFeedback_invalidUnmark_error() {
+        Parser parser = new Parser();
+        try {
+            parser.parse("unmark b");
+        } catch (Exception e) {
+            assertEquals(e.getMessage(), "☹!!! Invalid input! Please enter the number of the task you want to mark/unmark.");
+        }
+    }
+
+    @Test
+    public void handleCommandFeedback_invalidFind_error() {
+        Parser parser = new Parser();
+        try {
+            parser.parse("find");
+        } catch (Exception e) {
+            assertEquals(e.getMessage(), "☹!!! Invalid input! Please specify a description for the tasks to search!");
+        }
+    }
 
 }
