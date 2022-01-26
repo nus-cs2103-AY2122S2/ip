@@ -16,10 +16,10 @@ import java.nio.file.Paths;
  * of the <code>TaskList</code> object. Performs the creation of relevant directory structures and files.
  */
 public class Storage {
-    /** Name of the data directory */
+    /** Name of the data directory. */
     private static final String DATA_FOLDER_PATH = "data/";
 
-    /** Name of the database file */
+    /** Name of the database file. */
     private static final String DB_FILENAME = "store.db";
 
     /**

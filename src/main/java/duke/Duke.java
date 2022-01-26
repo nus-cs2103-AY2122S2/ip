@@ -10,7 +10,7 @@ import duke.task.TaskList;
  * Serves as the entry point for the entire application.
  */
 public class Duke {
-    /** Global task list for all operations */
+    /** Global task list for all operations. */
     private static TaskList taskList;
 
     public static void main(String[] args) {

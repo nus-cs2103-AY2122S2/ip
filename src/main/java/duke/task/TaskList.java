@@ -6,7 +6,7 @@ import java.util.function.Consumer;
 
 public class TaskList {
     private final ArrayList<Task> tasks;
-    /** list of handlers to be invoked when a change occurs */
+    /** list of handlers to be invoked when a change occurs. */
     private final ArrayList<Consumer<TaskList>> changeListeners;
 
     /**

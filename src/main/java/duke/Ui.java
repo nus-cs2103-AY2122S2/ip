@@ -18,7 +18,7 @@ public class Ui {
 
     private static Ui instance;
 
-    /** Global scanner used by the Ui class */
+    /** Global scanner used by the Ui class. */
     private final Scanner scanner;
 
     private Ui() {
@@ -53,8 +53,8 @@ public class Ui {
     /**
      * Provides a {@link IPrintable} object that can be printed to.
      * Handles formatting of printed contents, including indentation and surrounding separators.
-     * @param action A <code>Function object that accepts the provided {@link IPrintable} object and returns
-     *               a boolean to indicate if the application should continue running.
+     * @param action A <code>Function</code> object that accepts the provided {@link IPrintable} object
+     *               and returns a boolean to indicate if the application should continue running.
      * @return <code>Boolean</code> indicating if the application should continue running.
      */
     public boolean printCommand(Function<IPrintable, Boolean> action) {
@@ -84,7 +84,7 @@ public class Ui {
     }
 
     /**
-     * Returns the global instance of the {@link Ui} class,
+     * Returns the global instance of the {@link Ui} class.
      * @return Global instance of the <code>Ui</code> class.
      */
     public static Ui getInstance() {
