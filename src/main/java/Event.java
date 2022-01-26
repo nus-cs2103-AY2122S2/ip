@@ -7,6 +7,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String toMemory() {
+        return "E" + super.toMemory() + "@" + this.at;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.at + ")";
     }

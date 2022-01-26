@@ -1,11 +1,20 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import java.nio.file.Files;
 
 public class Tesseract {
     public static void main(String[] args) {
         String INDENT1 = "    ";
         String INDENT2 = "        ";
         String BREAKER = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-        List<Task> taskList = new ArrayList<Task>();
+        String SCHEDULE_PATH = "src/main/Data/Schedule.txt";
+        boolean hasUpdatedMemory = false;
 
         Scanner sc = new Scanner(System.in);
 
@@ -22,6 +31,8 @@ public class Tesseract {
         // greet the user
         System.out.println(greetingMsg);
 
+        List<Task> taskList = memToSchedule(SCHEDULE_PATH);
+
         String cmdLine = sc.nextLine();
 
         while (!cmdLine.equals("bye")) {
@@ -31,6 +42,7 @@ public class Tesseract {
 
             try {
                 checkCommand(cmdLine, taskList);
+                hasUpdatedMemory = true;
             } catch (TesseractException errMsg) {
                 System.out.println(errMsg);
                 cmdLine = sc.nextLine();
@@ -109,7 +121,15 @@ public class Tesseract {
             System.out.println(out);
             cmdLine = sc.nextLine();
         }
+
         System.out.println(farewellMsg);
+        if (hasUpdatedMemory) {
+            try {
+                updatedMemory(SCHEDULE_PATH, taskList);
+            } catch (TesseractException e) {
+                System.out.println(e);
+            }
+        }
     }
 
     public static void checkCommand(String cmdLine, List<Task> taskList) throws TesseractException {
@@ -164,6 +184,59 @@ public class Tesseract {
             return true;
         } catch (NumberFormatException e) {
             return false;
+        }
+    }
+
+    public static List<Task> memToSchedule(String filePath) {
+        File f = new File(filePath);
+        List<Task> taskList = new ArrayList<Task>();
+
+        try {
+            Scanner sc = new Scanner(f);
+            while (sc.hasNext()) {
+                String[] task = (sc.nextLine()).split("@", 4); // format: D^1^do something
+                Task taskNew;
+                if (task.length < 3)
+                    break;
+
+                switch (task[0]) {
+                    case "E":
+                        taskNew = new Event(task[2], task[3]);
+                        break;
+                    case "D":
+                        taskNew = new Deadline(task[2], task[3]);
+                        break;
+                    default: // todo
+                        taskNew = new Todo(task[2]);
+                        break;
+                }
+                if (Integer.parseInt(task[1]) == 1) {
+                    taskNew.markAsDone();
+                }
+                taskList.add(taskNew);
+            }
+        } catch (IOException e) {
+            try {
+                f.createNewFile();
+            } catch (IOException err) {
+                System.out.println("Not joking but I cannot create a memory for you.. \nYou mind changing a laptop?");
+            }
+        }
+
+        return taskList;
+    }
+
+    public static void updatedMemory(String filePath, List<Task> taskList) throws TesseractException {
+        try {
+            FileWriter fw = new FileWriter(filePath);
+            for (int i = 0; i < taskList.size(); i++) {
+                fw.write(taskList.get(i).toMemory());
+                fw.write(System.lineSeparator());
+            }
+            fw.close();
+        } catch (IOException e) {
+            throw new TesseractException("Sorry but I cannot upload your list of tasks into memory due to" +
+                        "some unforeseen errors :(");
         }
     }
 }

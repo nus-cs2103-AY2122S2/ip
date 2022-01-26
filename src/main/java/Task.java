@@ -19,6 +19,13 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public String toMemory() {
+        if (isDone) {
+            return "@1@" + description;
+        }
+        return "@0@" + description;
+    };
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
