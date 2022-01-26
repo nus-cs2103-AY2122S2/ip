@@ -11,6 +11,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * A class responsible for saving/loading a task list into/from a text file.
+ */
 public class Storage {
   public static Storage INSTANCE;
   private String directoryPath = System.getProperty("user.dir") + "/data/";
@@ -24,6 +27,12 @@ public class Storage {
     return INSTANCE;
   }
 
+  /**
+   * Saves the task list given to a text file.
+   * @param taskList A TaskList object
+   * @return A boolean depending on whether the saving process is successful.
+   * @throws IOException On failure of read or write operations.
+   */
   public boolean saveList(ArrayList<Task> taskList) throws IOException {
     boolean success = false;
     File file = new File(this.directoryPath + this.listFile);
@@ -43,8 +52,12 @@ public class Storage {
     return success;
   }
 
-
-
+  /**
+   * Load the task list from a text file stored in the save directory.
+   * @param taskList A TaskList object
+   * @return A boolean depending on whether the loading process is successful.
+   * @throws IOException On failure of read or write operations.
+   */
   public boolean loadList(ArrayList<Task> taskList) {
     boolean success = false;
     try {

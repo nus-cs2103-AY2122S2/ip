@@ -2,6 +2,9 @@ package com.duke.modules;
 
 import com.duke.command.*;
 
+/**
+ * A class responsible for parsing user inputs.
+ */
 public class Parser {
   private TaskList taskList;
 
@@ -10,6 +13,11 @@ public class Parser {
   }
 
 
+  /**
+   * Parses the string given, and executes commands based on the command keyword detected.
+   * @param string The user input string given.
+   * @return A CommandResult containing the result message of the execution of the command.
+   */
   public CommandResult parse(String string) {
     CommandResult cmdResult = null;
     String[] strArr = string.split(" ");
@@ -20,7 +28,7 @@ public class Parser {
         cmdResult = new CommandResult("*crickets*");
         break;
       case "bye":
-        cmdResult = new CommandBye(str, taskList).execute();
+        cmdResult = new CommandBye(str).execute();
         break;
       case "list":
         cmdResult = new CommandList(str, taskList).execute();

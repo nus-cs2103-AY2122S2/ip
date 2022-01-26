@@ -13,12 +13,21 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a chatbot command for adding Tasks to the TaskList
+ */
 public class CommandAdd extends Command {
   private String inputDateTimeFormat = "dd/MM/yyyy HHmm";
   private String type;
   private String input;
   private TaskList taskList;
 
+  /**
+   * Constructor for this class.
+   * @param type Specified type of Task.
+   * @param input The string of arguments entered by the user, excluding the command word.
+   * @param taskList The tasklist meant for the Tasks to be added to.
+   */
   public CommandAdd(String type, String input, TaskList taskList) {
     super();
     this.type = type;
@@ -26,6 +35,11 @@ public class CommandAdd extends Command {
     this.taskList = taskList;
   }
 
+  /**
+   * Returns a string of the result of executing the intended function of this class.
+   * This string is wrapped in a CommandResult object
+   * @return A CommandResult object containing the result message.
+   */
   @Override
   public CommandResult execute() {
     try {
@@ -42,6 +56,14 @@ public class CommandAdd extends Command {
     }
   }
 
+  /**
+   * Checks if the structure of the arguments is valid based on the tyoe of Task indicated.
+   * Returns the type of task as an enum if valid.
+   * @param type Type of Task.
+   * @param args The string of arguments entered by the user, excluding the command word.
+   * @return Type of Task on success.
+   * @throws DukeInvalidArgumentException On invalid argument string structure.
+   */
   private Task.TaskType taskIdentifier(String type, String args) throws DukeInvalidArgumentException {
     Task.TaskType taskType = null;
     if (type.equals("todo")) {
@@ -64,6 +86,16 @@ public class CommandAdd extends Command {
     return taskType;
   }
 
+  /**
+   * Creates a new Task object with the given arguments.
+   * Adds the created Task to the TaskList.
+   * @param type Type of Task, as an enum.
+   * @param args The string of arguments entered by the user, excluding the command word.
+   * @return A string describing the result.
+   * @throws DukeInvalidArgumentException On invalid argument string structure.
+   * @throws DateTimeParseException On invalid date/time format.
+   * @throws IOException On failure to save task list.
+   */
   private String taskAdder(String type, String args) throws DukeInvalidArgumentException, DateTimeParseException, IOException {
     String message = "";
     Task task = null;
