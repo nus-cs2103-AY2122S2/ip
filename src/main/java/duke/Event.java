@@ -1,8 +1,9 @@
-public class Deadline extends Task {
-    public Deadline(String description) {
+package duke;
+
+public class Event extends Task {
+    public Event(String description) {
         super(description);
     }
-
     public String digitMonth_to_AlphabeticalMonth(String digitMonth) {
         if (digitMonth.equals("01")) {
             return "January";
@@ -35,10 +36,9 @@ public class Deadline extends Task {
     }
 
     public String getDescription() {
-
-        String newReply = super.description.replace("deadline ", "");
+        String newReply = super.description.replace("event ", "");
         String taskAtHand = newReply.split("/")[0];
-        String deadline = newReply.split("/")[1].replace("by ", "by: ");
+        String deadline = newReply.split("/")[1].replace("at ", "at: ");
         String date = deadline.split(" ")[1].split("-")[0];
         String month = digitMonth_to_AlphabeticalMonth(deadline.split(" ")[1].split("-")[1]);
         String year = deadline.split(" ")[1].split("-")[2];
@@ -48,7 +48,8 @@ public class Deadline extends Task {
         } else {
             time += "am";
         }
-        String finalDescription = taskAtHand + "(" + "by " + date + " " + month + " " + year + ", " + time + ")";
-        return "[D]" + "[" + super.getStatusIcon() + "] " + finalDescription;
+        System.out.println(date + month + year);
+        String finalDescription = taskAtHand + "(" + "at " + date + " " + month + " " + year + ", " + time + ")";
+        return "[E]" + "[" + super.getStatusIcon() + "] " + finalDescription;
     }
 }
