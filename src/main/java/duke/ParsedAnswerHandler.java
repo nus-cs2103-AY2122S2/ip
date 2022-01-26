@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -28,7 +30,7 @@ public class ParsedAnswerHandler {
 
             case "todo":
                 ToDos td = new ToDos(pa.getDesc());
-                Storage.taskList.add(td);
+                TaskList.add(td);
                 try {
                     String sb = "T," +
                             "1," +
@@ -36,6 +38,7 @@ public class ParsedAnswerHandler {
                     BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true));
                     writer.append(sb);
                     writer.close();
+                    System.out.println("Successfully added todo task to list.");
                 } catch (IOException e) {
                     System.out.println("Error saving task to file.");
                 }
@@ -43,7 +46,7 @@ public class ParsedAnswerHandler {
 
             case "deadline":
                 Deadline dl = new Deadline(pa.getDesc(), pa.getDate());
-                Storage.taskList.add(dl);
+                TaskList.add(dl);
                 try {
                     String sb = "D," +
                             "1," +
@@ -53,6 +56,7 @@ public class ParsedAnswerHandler {
                     BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true));
                     writer.append(sb);
                     writer.close();
+                    System.out.println("Successfully added deadline to list.");
                 } catch (IOException e) {
                     System.out.println("Error saving task to file.");
                 }
@@ -60,7 +64,7 @@ public class ParsedAnswerHandler {
 
             case "event":
                 Event ev = new Event(pa.getDesc(), pa.getDate());
-                Storage.taskList.add(ev);
+                TaskList.add(ev);
                 try {
                     String sb = "E," +
                             "1," +
@@ -70,6 +74,7 @@ public class ParsedAnswerHandler {
                     BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true));
                     writer.append(sb);
                     writer.close();
+                    System.out.println("Successfully added event to list.");
                 } catch (IOException e) {
                     System.out.println("Error saving task to file.");
                 }
@@ -101,6 +106,9 @@ public class ParsedAnswerHandler {
                 System.out.println(pa.getDesc());
                 break;
 
+            case "delete":
+                TaskList.delete(pa.getIndex());
+                break;
         }
     }
 }

@@ -1,3 +1,5 @@
+package duke;
+
 public class ParsedAnswer {
     private String command;
     private Integer index;
