@@ -97,13 +97,15 @@ public class Duke {
 
             case "deadline":
                 masterList.add(new Deadlines(getDescription(inputArr), getDateTime(inputArr)));
-                System.out.println("Got it. I've added this task:\n\t " + input
+                System.out.println("Got it. I've added this task:\n\t "
+                        + (masterList.get(masterList.size() - 1)).toString()
                         + "\nNow you have " + masterList.size() + " tasks in the list.");
                 break;
 
             case "todo":
                 masterList.add(new ToDos(getDescription(inputArr)));
-                System.out.println("Got it. I've added this task:\n\t " + input
+                System.out.println("Got it. I've added this task:\n\t "
+                        + (masterList.get(masterList.size() - 1)).toString()
                         + "\nNow you have " + masterList.size() + " tasks in the list.");
                 break;
 
@@ -113,6 +115,15 @@ public class Duke {
                         + (masterList.get(masterList.size() - 1)).toString()
                         + "\nNow you have " + masterList.size() + " tasks in the list.");
                 break;
+
+            case "delete":
+                bw.write("Noted. I've removed this task:\n\t");
+                int indexDel = Integer.parseInt(inputArr[1]) - 1;
+                bw.write(masterList.remove(indexDel).toString());
+                bw.write("\nNow you have " + masterList.size() + " tasks in list.");
+                bw.flush();
+                break;
+
 
             default:
                 System.out.println("Invalid input: " + input);
