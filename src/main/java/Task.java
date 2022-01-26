@@ -1,4 +1,5 @@
-import java.util.*;
+import java.io.File;
+import java.util.ArrayList;
 
 public class Task {
     protected String name;
@@ -14,19 +15,23 @@ public class Task {
         this.isDone = false;
         listOfTask.add(this);
         counter++;
+        updateFile();
     }
 
     public void markDone() {
         this.isDone = true;
+        updateFile();
     }
 
     public void markNotDone() {
         this.isDone = false;
+        updateFile();
     }
     
     public void deleteTask(Task t) {
         listOfTask.remove(t);
         counter--;
+        updateFile();
     }
     
     
@@ -54,6 +59,10 @@ public class Task {
         }
 
         return output;
+    }
+
+    private void updateFile() {
+        FileReading.writeToPath("data/duke.txt", Task.printArray());
     }
 
     public String toString() {
