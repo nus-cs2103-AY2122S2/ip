@@ -67,6 +67,9 @@ public class Ui {
         System.out.println("Could you please talk some sense? I can't seem to comprehend what you're saying.");
     }
 
+    /**
+     * Print message for find command.
+     */
     public void find() {
         System.out.println("Finding tasks that match your keyword");
     }

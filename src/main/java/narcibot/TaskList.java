@@ -119,6 +119,10 @@ public class TaskList {
         return list.size();
     }
 
+    /**
+     * Finds tasks that has keyword in the name.
+     * @param keyword
+     */
     public void find(String keyword) {
         int matches = 0;
         for (Task task : list) {
