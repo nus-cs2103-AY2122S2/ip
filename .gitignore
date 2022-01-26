@@ -20,3 +20,4 @@ bin/
 
 # Data files
 /data/
+/src/main/java/META-INF/
