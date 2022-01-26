@@ -1,4 +1,4 @@
-import exception.JukeException;
+package juke;
 
 public class PrintHelper {
     private static final PrintHelper INSTANCE = new PrintHelper();

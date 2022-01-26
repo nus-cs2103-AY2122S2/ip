@@ -1,4 +1,4 @@
-package exception;
+package juke.exception;
 
 public class JukeException extends Exception {
     private String cmd;

@@ -1,12 +1,12 @@
-import exception.JukeException;
-import exception.JukeInvalidCommandException;
-import task.*;
+package juke;
+
+import juke.exception.JukeException;
+import juke.task.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 

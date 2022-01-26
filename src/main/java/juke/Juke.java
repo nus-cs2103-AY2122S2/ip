@@ -1,11 +1,13 @@
-import exception.*;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
+package juke;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import juke.exception.*;
+import juke.task.Deadline;
+import juke.task.Event;
+import juke.task.Task;
+import juke.task.Todo;
 
 public class Juke {
     private static final Juke INSTANCE = new Juke();
@@ -230,13 +232,13 @@ public class Juke {
             try {
                 int idx = Integer.parseInt(args[1]);
                 if (idx <= 0 || idx > this.taskList.size()) {
-                    throw new JukeInvalidArgumentException("mark", "<task index>", args[1]);
+                    throw new JukeInvalidArgumentException("mark", "<juke.task index>", args[1]);
                 }
                 String des = this.taskList.get(idx - 1).getDescription();
                 this.taskList.get(idx - 1).markAsDone();
                 PrintHelper.getInstance().formattedPrint("Marked task \u00ab" + des + "\u00bb as done.");
             } catch (NumberFormatException e) {
-                throw new JukeInvalidArgumentException("mark", "<task index>", args[1]);
+                throw new JukeInvalidArgumentException("mark", "<juke.task index>", args[1]);
             }
         } else {
             throw new JukeInvalidArgumentCountException("mark", 2, args.length);
@@ -248,13 +250,13 @@ public class Juke {
             try {
                 int idx = Integer.parseInt(args[1]);
                 if (idx <= 0 || idx > this.taskList.size()) {
-                    throw new JukeInvalidArgumentException("unmark", "<task index>", args[1]);
+                    throw new JukeInvalidArgumentException("unmark", "<juke.task index>", args[1]);
                 }
                 String des = this.taskList.get(idx - 1).getDescription();
                 this.taskList.get(idx - 1).markAsNotDone();
                 PrintHelper.getInstance().formattedPrint("Marked task \u00ab" + des + "\u00bb as not done.");
             } catch (NumberFormatException e) {
-                throw new JukeInvalidArgumentException("unmark", "<task index>", args[1]);
+                throw new JukeInvalidArgumentException("unmark", "<juke.task index>", args[1]);
             }
         } else {
             throw new JukeInvalidArgumentCountException("unmark", 2, args.length);
@@ -266,13 +268,13 @@ public class Juke {
             try {
                 int idx = Integer.parseInt(args[1]);
                 if (idx <= 0 || idx > this.taskList.size()) {
-                    throw new JukeInvalidArgumentException("delete", "<task index>", args[1]);
+                    throw new JukeInvalidArgumentException("delete", "<juke.task index>", args[1]);
                 }
                 String des = this.taskList.get(idx - 1).getDescription();
                 this.taskList.remove(idx - 1);
                 PrintHelper.getInstance().formattedPrint("Removed task \u00ab" + des + "\u00bb from task list.");
             } catch (NumberFormatException e) {
-                throw new JukeInvalidArgumentException("delete", "<task index>", args[1]);
+                throw new JukeInvalidArgumentException("delete", "<juke.task index>", args[1]);
             }
         } else {
             throw new JukeInvalidArgumentCountException("delete", 2, args.length);

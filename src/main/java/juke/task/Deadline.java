@@ -1,15 +1,17 @@
-package task;
+package juke.task;
+
+import juke.DateTimeHandler;
 
 public class Deadline extends Task {
-    private String time;
+    private DateTimeHandler date;
     
     public Deadline(String description, String time) {
         super(description);
-        this.time = time;
+        this.date = new DateTimeHandler(time);
     }
     
     public String getTime() {
-        return this.time;
+        return this.date.getDateTime();
     }
     
     @Override

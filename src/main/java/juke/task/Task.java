@@ -1,17 +1,17 @@
-package task;
+package juke.task;
 
 public abstract class Task {
     protected String description;
-    protected TaskStatus status;
+    protected juke.task.TaskStatus status;
     
     public Task(String description) {
         this.description = description;
-        this.status = TaskStatus.NOT_DONE;
+        this.status = juke.task.TaskStatus.NOT_DONE;
     }
     //test
     
     public void markAsDone() {
-        this.status = TaskStatus.DONE;
+        this.status = juke.task.TaskStatus.DONE;
     }
     
     public void markAsNotDone() {
