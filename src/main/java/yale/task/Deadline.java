@@ -1,4 +1,6 @@
 package yale.task;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Subclass of Task
@@ -10,7 +12,7 @@ public class Deadline extends Task {
      * String to represent the date
      * and time of deadline
      */
-    protected String by;
+    protected LocalDate by;
 
     /**
      * Constructor method
@@ -20,7 +22,7 @@ public class Deadline extends Task {
      */
     public Deadline(String name, boolean isMarked, String by) {
         super(name, isMarked);
-        this.by = by;
+        this.by = LocalDate.parse(by);
     }
     @Override
     public String export() {
@@ -32,6 +34,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by + ")";
+        return "[D]" + super.toString()
+                + " (by: " + this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

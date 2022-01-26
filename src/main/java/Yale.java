@@ -2,6 +2,7 @@ import yale.task.Deadline;
 import yale.task.TaskList;
 import yale.task.Event;
 import yale.task.ToDo;
+import java.time.DateTimeException;
 
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
@@ -118,8 +119,11 @@ public class Yale {
                         "Now you have " + list.getSize() + " tasks in the list.");
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Error: The description of an event cannot be empty.");
-            }
+            } catch (DateTimeException e) {
+            System.out.println("Error: Invalid date entered.");
         }
+
+    }
         // Event feature
         else if (command.contains("event")){
             try {
@@ -133,8 +137,11 @@ public class Yale {
                         "Now you have " + list.getSize() + " tasks in the list.");
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Error: The description of an event cannot be empty.");
-            }
+            } catch (DateTimeException e) {
+            System.out.println("Error: Invalid date entered.");
         }
+
+    }
         else if (command.contains("todo")){
             try{
                 String task = command.split("todo ", 2)[1]; // Remove word

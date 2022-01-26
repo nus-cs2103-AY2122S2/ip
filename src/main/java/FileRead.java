@@ -1,5 +1,4 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -10,7 +9,6 @@ public class FileRead {
     /**
      * Prints each line from specified file
      * @param filePath
-     * @throws FileNotFoundException
      */
     public static String loadFileContents(String filePath) {
         try {
