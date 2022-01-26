@@ -7,6 +7,9 @@ import java.util.Random;
 public class Quote {
     public ArrayList<String> alQuotes;
 
+    /**
+     * Contains quote list
+     */
     public Quote(){
         alQuotes = new ArrayList<String>(Arrays.asList("Life is more than what is, its what it could be. What you could make it.\n",
                 "It is our choices that show what we truly are for more than our abilities\n",

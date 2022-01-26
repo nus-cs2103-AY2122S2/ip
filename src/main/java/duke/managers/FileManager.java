@@ -1,5 +1,4 @@
 package duke.managers;
-
 import duke.DukeException;
 import duke.Ui;
 import duke.task.Deadline;
@@ -21,6 +20,10 @@ public class FileManager {
     String filePath;
     Ui ui;
 
+    /**
+     *
+     * @param filePath representing file path where user task is saved in
+     */
     public FileManager(String filePath) {
         userTaskList = new TaskList();
         this.filePath = filePath;
@@ -47,6 +50,10 @@ public class FileManager {
         }
     }
 
+    /**
+     * Saves user tasks into txt at file path
+     * @throws DukeException if txt file at file path does not exist
+     */
     public void saveTasks() throws DukeException {
         try {
             Files.deleteIfExists(new File(this.filePath).toPath());
@@ -59,6 +66,11 @@ public class FileManager {
         }
     }
 
+    /**
+     * Loads users' saved tasks into an TaskList
+     * @return TaskList containing users' saved tasks
+     * @throws DukeException
+     */
     public TaskList loadTasks() throws DukeException {
         try {
             File file = new File(this.filePath);
