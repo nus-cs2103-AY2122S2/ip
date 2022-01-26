@@ -1,9 +1,13 @@
 import java.util.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class Duke {
     private static List list;
@@ -143,9 +147,10 @@ public class Duke {
                 String output = "";
                 if (userInput.startsWith("deadline")) {
                     String description = userInput.substring(9, start - 1);
-                    //Deadline deadline = new Deadline(description, timing);
+                    DateTimeFormatter sourceFormat = DateTimeFormatter.ofPattern(" yyyy-MM-dd HHmm");
+                    LocalDateTime dateTime = LocalDateTime.parse(timing, sourceFormat);
                     Tasks taskType = Tasks.DEADLINE;
-                    Task deadline =  list.add(taskType, description, timing);
+                    Task deadline =  list.add(taskType, description, dateTime);
                     output = output + deadline.toString();
                 }
 
