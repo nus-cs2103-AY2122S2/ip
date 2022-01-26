@@ -1,10 +1,9 @@
-package ui;
+package duke.ui;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import storage.Storage;
-import tasks.Task;
+import duke.tasks.Task;
 
 public class Ui {
     private Scanner sc;

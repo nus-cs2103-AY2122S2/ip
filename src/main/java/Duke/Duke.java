@@ -1,9 +1,11 @@
-import commands.Command;
-import parser.Parser;
-import storage.Storage;
-import ui.DukeException;
-import ui.Ui;
-import tasklist.TaskList;
+package duke;
+
+import duke.commands.Command;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.ui.DukeException;
+import duke.ui.Ui;
+import duke.tasklist.TaskList;
 
 import java.io.IOException;
 

@@ -1,9 +1,9 @@
-package commands;
+package duke.commands;
 
-import storage.Storage;
-import ui.Ui;
-import tasklist.TaskList;
-import tasks.Task;
+import duke.storage.Storage;
+import duke.ui.Ui;
+import duke.tasklist.TaskList;
+import duke.tasks.Task;
 
 public class AddCommand extends Command{
     Task task;

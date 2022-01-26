@@ -1,11 +1,11 @@
-package tasks;
+package duke.tasks;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-import ui.DukeException;
-import storage.Storage;
+import duke.ui.DukeException;
+import duke.storage.Storage;
 /**
  * Represent the deadline of task.
  */

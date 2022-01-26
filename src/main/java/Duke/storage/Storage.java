@@ -1,4 +1,4 @@
-package storage;
+package duke.storage;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -6,16 +6,13 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-import ui.DukeException;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.ToDo;
-
-
+import duke.ui.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 
 public class Storage {
-
     private String saveFilePath;
 
     public Storage(String saveFilePath) {
@@ -56,8 +53,8 @@ public class Storage {
                     break;
                 }
             }
-        } catch (IOException | DukeException e) {
-            System.out.println("Opps! An error occurred. @.@");
+        } catch (IOException e) {
+            throw new DukeException("Opps! An error occurred. @.@");
         }
         return taskList;
     }

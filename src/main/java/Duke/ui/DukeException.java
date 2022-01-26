@@ -1,3 +1,5 @@
+package duke.ui;
+
 /**
  * Represent exceptions specific to Duke.
  */

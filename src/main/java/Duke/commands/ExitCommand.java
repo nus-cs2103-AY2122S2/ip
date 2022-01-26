@@ -1,9 +1,9 @@
-package commands;
+package duke.commands;
 
-import storage.Storage;
-import tasklist.TaskList;
-import ui.DukeException;
-import ui.Ui;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.DukeException;
+import duke.ui.Ui;
 
 public class ExitCommand extends Command{
 

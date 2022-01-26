@@ -1,9 +1,9 @@
-package commands;
+package duke.commands;
 
-import storage.Storage;
-import ui.DukeException;
-import ui.Ui;
-import tasklist.TaskList;
+import duke.storage.Storage;
+import duke.ui.DukeException;
+import duke.ui.Ui;
+import duke.tasklist.TaskList;
 
 
 public class HandleErrorCommand extends Command{
