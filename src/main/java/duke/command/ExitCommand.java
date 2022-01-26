@@ -10,7 +10,7 @@ import duke.task.TaskList;
 public class ExitCommand extends Command {
     @Override
     public String execute(TaskList task, Storage storage) {
-        return "";
+        return "Ok honey.";
     }
 
     @Override
