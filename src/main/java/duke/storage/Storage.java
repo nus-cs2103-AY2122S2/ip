@@ -17,12 +17,24 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Loads and stores tasks from given data file to and from application.
+ */
 public class Storage {
+
+    /** The relative file path of the data file */
     private String dataFilePath;
+
+    /** The relative path of the directory containing the data file */
     private String dataFolderPath;
+
+    /** The File object representing the data file */
     private File dataFile;
 
-
+    /**
+     * Constructor of the class.
+     * @param path The relative path of the data file to use for storage of tasks.
+     */
     public Storage(String path) {
         this.dataFilePath = path;
         String[] rPath = path.split("/");
@@ -33,6 +45,11 @@ public class Storage {
         this.dataFolderPath = s.toString();
     }
 
+    /**
+     * Deciphers a task in the data file.
+     * @param task A single task stored in the data file.
+     * @return A Task instance of the task read from the data file.
+     */
     private Task manageFileData(String task) {
         // We assume the task stored inside is correct
         String[] splitTask = task.split("\\|");
@@ -64,6 +81,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Extracts the tasks stored in the data file.
+     * @return An ArrayList of Task instances interpreted from data file.
+     * @throws IOException If there are interruptions while accessing the file.
+     * @throws ChiException If the file or its directory are not found.
+     */
     public ArrayList<Task> load() throws IOException, ChiException {
         try {
             ArrayList<Task> loadedTasks = new ArrayList<>();
@@ -87,6 +110,13 @@ public class Storage {
 
     }
 
+    /**
+     * Updates tasks on the data file.
+     * @param task The Task instance to be updated.
+     * @param tl The TaskList storing all Task instances.
+     * @param type The command used.
+     * @throws IOException If there are interruptions while accessing the file.
+     */
     public void updateFile(Task task, TaskList tl, String type) throws IOException {
         FileWriter fw;
         switch(type) {
