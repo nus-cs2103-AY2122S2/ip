@@ -1,9 +1,11 @@
+package duke;
+
 import java.util.ArrayList;
 import java.io.File;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 
-public class Storage {
+class Storage {
     
     private String filepath;
     

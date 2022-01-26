@@ -1,3 +1,4 @@
+package duke;
 import java.time.LocalDate;
 
 class Parser {
@@ -65,19 +66,15 @@ class Parser {
         String[] stringArr = input.split("#");
         
         if (stringArr[0].equals("T")) {
-            
             return new ToDo(stringArr[2], stringArr[1].equals("true"));
-            
-        } else if (stringArr[0].equals("D")) {
-            
-            return new Deadline(stringArr[2], stringArr[1].equals("true"), LocalDate.parse(stringArr[3]));
-            
-        } else if (stringArr[0].equals("E")) {
-            
-            return new Event(stringArr[2], stringArr[1].equals("true"), LocalDate.parse(stringArr[3]));
-            
-        } else {
 
+        } else if (stringArr[0].equals("D")) {
+            return new Deadline(stringArr[2], stringArr[1].equals("true"), LocalDate.parse(stringArr[3]));
+
+        } else if (stringArr[0].equals("E")) {
+            return new Event(stringArr[2], stringArr[1].equals("true"), LocalDate.parse(stringArr[3]));
+
+        } else {
             throw new DukeException("Problem retrieving files from data");
 
         }

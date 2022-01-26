@@ -1,11 +1,16 @@
+package duke;
+
 import java.util.Optional;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-public abstract class Task {
+
+abstract class Task {
+
+    protected static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("LLL dd yyyy");
+
     protected boolean isDone;
     protected String description;
     protected Optional<LocalDate> time;
-    protected static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("LLL dd yyyy");
 
     Task(String description) {
         this.description = description;

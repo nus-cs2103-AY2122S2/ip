@@ -1,4 +1,6 @@
-public class Ui {
+package duke;
+
+class Ui {
 
     private static final int LIST = 0;
     private static final int TODO = 1;
