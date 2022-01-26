@@ -12,13 +12,27 @@ import java.io.IOException;
 import duke.task.Task;
 import duke.exception.DukeException;
 
+
+/**
+ * Represents a storage object that handles the saving and loading in of the list of Tasks.
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * A constructor to store the relative filepath of the save file that contains the tasks.
+     * @param filePath The relative filepath of the save file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Returns An ArrayList of tasks that contains the saved tasks.
+     *
+     * @return ArrayList of Tasks.
+     * @throws Exception If there is a problem in closing the input streams, or the save is corrupted.
+     */
     public ArrayList<Task> load() throws Exception {
         FileInputStream fileIn = null;
         ObjectInputStream in = null;
@@ -44,6 +58,13 @@ public class Storage {
         }
     }
 
+    /**
+     *
+     * Saves the list of Tasks locally in the relative path.
+     *
+     * @param taskList The list of tasks.
+     * @throws Exception If there is an issue saving the tasks.
+     */
     public void save(TaskList taskList) throws Exception {
         FileOutputStream fileOut = null;
         ObjectOutputStream out = null;
@@ -62,7 +83,7 @@ public class Storage {
             out.writeObject(taskList.toArrayList());
             out.close();
             fileOut.close();
-            throw new DukeException("Error trying to save your tasks, did  you delete the file while the program was still running?");
+            throw new DukeException("Error trying to save your tasks, did you delete the file while the program was still running?");
         }
     }
 

@@ -5,12 +5,19 @@ import duke.manager.Ui;
 import duke.manager.TaskList;
 import duke.manager.Storage;
 
+/**
+ * Represents a command that will list out all the tasks in the TaskList upon execution.
+ */
 public class ListCommand extends Command{
 
-    public ListCommand() {
-        super();
-    }
-
+    /**
+     * Executes the command listing out all the tasks currently in the TaskList.
+     *
+     * @param taskList A TaskList that stores the tasks.
+     * @param ui An Ui object to handle user interaction.
+     * @param storage A Storage object to handle saving of data.
+     * @throws DukeException If there is an issue retrieving the tasks.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         ui.print("Here are your tasks:");
@@ -19,6 +26,10 @@ public class ListCommand extends Command{
         }
     }
 
+    /**
+     * Returns True if it is an exit command and false otherwise.
+     * @return A boolean.
+     */
     @Override
     public boolean isExit() {
         return false;

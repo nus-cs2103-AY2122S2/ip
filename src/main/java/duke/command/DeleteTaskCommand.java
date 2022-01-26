@@ -6,14 +6,30 @@ import duke.manager.Storage;
 import duke.exception.DukeException;
 import duke.task.Task;
 
+/**
+ * Represents a Command that will delete a specified Task upon execution.
+ */
 public class DeleteTaskCommand extends Command{
     private int taskNo;
 
+    /**
+     * A constructor to store the index of the Task to be deleted.
+     *
+     * @param taskNo The index of the Task to be deleted.
+     */
     public DeleteTaskCommand(int taskNo) {
         super();
         this.taskNo = taskNo;
     }
 
+    /**
+     * Executes the command by deleting the task at the index stored in this object.
+     *
+     * @param taskList A TaskList that stores the tasks.
+     * @param ui An Ui object to handle user interaction.
+     * @param storage A Storage object to handle saving of data.
+     * @throws DukeException If there is an issue saving the tasks.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task task = taskList.delete(taskNo);
@@ -27,6 +43,10 @@ public class DeleteTaskCommand extends Command{
         }
     }
 
+    /**
+     * Returns True if it is an exit command and false otherwise.
+     * @return A boolean.
+     */
     @Override
     public boolean isExit() {
         return false;
