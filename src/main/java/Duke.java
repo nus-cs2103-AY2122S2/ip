@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -80,73 +81,52 @@ public class Duke {
         Command.GREET.genericResponse(greeting);
     }
 
-    private static void init() throws DukeException, IOException {
-        // TODO: file handling using website
-        String currDir = System.getProperty("user.dir");
-        String dataName = "todo.dat";
-        Path dataDir = Paths.get(currDir, "data", dataName);
-        File dataFile = new File(String.valueOf(dataDir));
-
-        // Check if directory and file exists
+    private static void init() throws IOException {
+        File dataFile = new File("data/todo.dat");
         dataFile.getParentFile().mkdirs();
         if (!dataFile.exists()) { dataFile.createNewFile(); }
 
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(dataFile));
+        taskList = new ArrayList<>();
 
-            taskList = new ArrayList<>();
-            List<String> testList = br.lines().collect(Collectors.toList());
-            testList.forEach(line -> {
-                String[] input = line.split(" \\| ");
-                Task newEntry = null;
+        // TODO: error handling
 
-                // TODO: error handling
-                switch (input[0]) {
-                case "T":
-                    newEntry = new ToDo(input[2]);
-                    break;
-                case "D":
-                    try {
-                        newEntry = new Deadline(input[2], input[3]);
-                    } catch (DukeException e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                case "E":
-                    try {
-                        newEntry = new Event(input[2], input[3]);
-                    } catch (DukeException e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                default:
-                    break;
+        Scanner sc = new Scanner(dataFile).useDelimiter("\\n");
+        while (sc.hasNext()) {
+            String[] input = sc.nextLine().split(" \\| ");
+            Task newTask = null;
+
+            if (input[0].equals("T")) { newTask = new ToDo(input[2]); }
+            else if (input[0].equals("D")) {
+                try {
+                    newTask = new Deadline(input[2], input[3]);
+                } catch (DukeException e) {
+                    e.printStackTrace();
                 }
-                assert newEntry != null;
-                newEntry.isMarked = input[1].equals("1");
-                taskList.add(newEntry);
-            });
-            br.close();
-        } catch (Exception e) {
-            throw new DukeException(e.toString());
+            } else {
+                try {
+                    newTask = new Event(input[2], input[3]);
+                } catch (DukeException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (newTask != null) {
+                newTask.isMarked = input[1].equals("1");
+                taskList.add(newTask);
+            }
         }
     }
 
     public static void save() throws IOException {
-        String currDir = System.getProperty("user.dir");
-        String dataName = "todo.dat";
-        Path dataDir = Paths.get(currDir, "data", dataName);
-        File dataFile = new File(String.valueOf(dataDir));
-        BufferedWriter bw = new BufferedWriter(new FileWriter(dataFile, false));
-
+        FileWriter fw = new FileWriter("data/todo.dat", false);
         taskList.forEach(entry -> {
             try {
-                bw.write(entry.write());
+                fw.write(entry.write());
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
-        bw.close();
+        fw.close();
     }
 
     public static void main(String[] args) throws IOException, DukeException {
