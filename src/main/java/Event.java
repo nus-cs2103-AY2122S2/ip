@@ -12,7 +12,7 @@ public class Event  extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + time.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)) + ")" ;
+        return "[E]" + super.toString() + " (at: " + time.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) + ")" ;
     }
 
     @Override
@@ -23,6 +23,6 @@ public class Event  extends Task {
         } else {
             isFinishedData = "0";
         }
-        return "E:" + isFinishedData + ":" + super.content + ":" + time;
+        return "E:" + isFinishedData + ":" + super.content + ":" + time.format(DateTimeFormatter.ISO_DATE);
     }
 }

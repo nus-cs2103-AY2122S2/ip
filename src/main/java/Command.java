@@ -45,7 +45,7 @@ public class Command {
         return firstWord.equals("blah");
     }
 
-    public String deadLineContent() {
+    public String deadlineContent() {
         String content = words[1];
         for (int i = 2; i < words.length; i++) {
             if (words[i].equals("/by") )
@@ -55,7 +55,7 @@ public class Command {
         return content;
     }
 
-    public String deadLineDate() {
+    public String deadlineDate() {
         String date = userInput.split("/by ")[1];
         return date;
     }

@@ -11,7 +11,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " ( by:" + date.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)) + ")";
+        return "[D]" + super.toString() + " ( by:" + date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) + ")";
     }
 
     @Override
@@ -22,6 +22,6 @@ public class Deadline extends Task {
         } else {
             isFinishedData = "0";
         }
-        return "D:" + isFinishedData + ":" + super.content + ":" + date;
+        return "D:" + isFinishedData + ":" + super.content + ":" + date.format(DateTimeFormatter.ISO_DATE);
     }
 }

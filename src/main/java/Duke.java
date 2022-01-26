@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
+import java.util.Locale;
 
 public class Duke {
     private static TaskList taskList = new TaskList();
@@ -60,7 +61,9 @@ public class Duke {
             }
         }
     }
+
     public static void main(String[] args) {
+        Locale.setDefault(Locale.US);
         readData();
         Scanner myScanner = new Scanner(System.in);
         System.out.println("Hello from\n" + Response.LOGO);
@@ -112,7 +115,7 @@ public class Duke {
                 } else if (command.isDeadline())  {
                     //deadline command
                     try {
-                        Deadline newTask = new Deadline(command.deadLineContent(), command.deadLineDate());
+                        Deadline newTask = new Deadline(command.deadlineContent(), command.deadlineDate());
                         taskList.addTask(newTask);
                         Format.wrapPrint(Response.RESPONSE_ADDED + "\n" + newTask.toString() + "\n"
                                          + Response.taskNo(taskList.size()));
