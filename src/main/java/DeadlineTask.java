@@ -21,4 +21,9 @@ public class DeadlineTask extends Task {
         String dateOutput = String.format("(by: %s)", date.format(pattern));
         return String.format("[D][%s] %s %s", getStatusIcon(), name, dateOutput);
     }
+
+    @Override
+    public String toStore() {
+        return String.format("D | %d | %s | %s", this.isDone ? 1 : 0, this.name, this.date);
+    }
 }

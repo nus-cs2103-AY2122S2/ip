@@ -22,4 +22,9 @@ public class EventTask extends Task {
         return String.format("[E][%s] %s %s", getStatusIcon(), name, dateOutput);
     }
 
+    @Override
+    public String toStore() {
+        return String.format("E | %d | %s | %s", this.isDone ? 1 : 0, this.name, this.date);
+    }
+
 }
