@@ -20,95 +20,160 @@ public class Pac {
 
         while (true) {
             String input = sc.nextLine();
-            String[] inputArray = input.split(" ", 2);
-            String firstword = inputArray[0].toLowerCase();
-            Keyword keyword;
+            try {
+                String[] inputArray = input.split(" ", 2);
+                String firstword = inputArray[0].toLowerCase();
+                Keyword keyword;
 
-            switch (firstword) {
-                case "bye":
-                    keyword = Keyword.BYE;
-                    break;
-                case "list":
-                    keyword = Keyword.LIST;
-                    break;
-                case "mark":
-                    keyword = Keyword.MARK;
-                    break;
-                case "unmark":
-                    keyword = Keyword.UNMARK;
-                    break;
-                case "todo":
-                    keyword = Keyword.TODO;
-                    break;
-                case "deadline":
-                    keyword = Keyword.DEADLINE;
-                    break;
-                case "event":
-                    keyword = Keyword.EVENT;
-                    break;
-                default:
-                    keyword = Keyword.ERROR;
-                    break;
-            }
+                switch (firstword) {
+                    case "bye":
+                        keyword = Keyword.BYE;
+                        break;
+                    case "list":
+                        keyword = Keyword.LIST;
+                        break;
+                    case "mark":
+                        keyword = Keyword.MARK;
+                        break;
+                    case "unmark":
+                        keyword = Keyword.UNMARK;
+                        break;
+                    case "todo":
+                        keyword = Keyword.TODO;
+                        break;
+                    case "deadline":
+                        keyword = Keyword.DEADLINE;
+                        break;
+                    case "event":
+                        keyword = Keyword.EVENT;
+                        break;
+                    default:
+                        keyword = Keyword.ERROR;
+                        break;
+                }
 
-            switch (keyword) {
-                case BYE:
-                    exitPac();
-                    break;
-                case LIST:
-                    displayList();
-                    break;
-                case MARK:
-                    markTask(Integer.parseInt(inputArray[1]) - 1);
-                    break;
-                case UNMARK:
-                    unmarkTask(Integer.parseInt(inputArray[1]) - 1);
-                    break;
-                case TODO:
-                    addToDo(inputArray[1]);
-                    break;
-                case DEADLINE:
-                    addDeadline(inputArray[1]);
-                    break;
-                case EVENT:
-                    addEvent(inputArray[1]);
-                    break;
-                case ERROR:
-                    System.exit(0);
-                    break;
+                switch (keyword) {
+                    case LIST:
+                        displayList();
+                        break;
+                    case BYE:
+                        exitPac();
+                        break;
+                    case MARK:
+                        if (inputArray.length == 1) {
+                            throw new PacException("MARK should be followed by a integer.");
+                        }
+                        try {
+                            markTask(Integer.parseInt(inputArray[1]) - 1);
+                        } catch (NumberFormatException e) {
+                            System.out.println(newline + "\nSorry! MARK should be followed by a integer.\n"
+                                    + newline + "\n");
+                        } catch (IndexOutOfBoundsException e) {
+                            System.out.println(newline + "\nSorry! Please mention a valid task number.\n"
+                                    + newline + "\n");
+                        }
+                        break;
+                    case UNMARK:
+                        if (inputArray.length == 1) {
+                            throw new PacException("UNMARK should be followed by a integer.");
+                        }
+                        try {
+                            unmarkTask(Integer.parseInt(inputArray[1]) - 1);
+                        } catch (NumberFormatException e) {
+                            System.out.println(newline + "\nSorry! MARK should be followed by a integer.\n"
+                                    + newline + "\n");
+                        } catch (IndexOutOfBoundsException e) {
+                            System.out.println(newline + "\nSorry! Please mention a valid task number.\n"
+                                    + newline + "\n");
+                        }
+                        break;
+                    case TODO:
+                        if (inputArray.length == 1) {
+                            throw new PacException("Please mention a task.");
+                        }
+                        addToDo(inputArray[1]);
+                        break;
+                    case DEADLINE:
+                        if (inputArray.length == 1) {
+                            throw new PacException("Please mention a task.");
+                        }
+                        try {
+                            addDeadline(inputArray[1]);
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            System.out.println(newline + "\nSorry! Command format is incorrect.\n"
+                                    + newline + "\n");
+                        }
+                        break;
+                    case EVENT:
+                        if (inputArray.length == 1) {
+                            throw new PacException("Please mention a task.");
+                        }
+                        try {
+                            addEvent(inputArray[1]);
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            System.out.println(newline + "\nSorry! Command format is incorrect.\n"
+                                    + newline + "\n");
+                        }
+                        break;
+                    case ERROR:
+                        throw new PacException("I don't know what this means");
+                }
+            } catch (PacException e) {
+                System.out.println(newline + "\n" + e.getMessage() + "\n" + newline + "\n");
             }
         }
     }
 
     public static void addToDo(String description) {
-        Task task = new ToDo(description);
-        tasks.add(task);
-        System.out.println(newline + "\nadded: " + task.toString());
-        System.out.println("You have " + tasks.size() + " tasks in your list" + "\n" + newline + "\n");
+        try {
+            if (description.isBlank()) {
+                throw new PacException("Please mention a task.");
+            }
+            Task task = new ToDo(description);
+            tasks.add(task);
+            System.out.println(newline + "\nadded: " + task.toString());
+            System.out.println("You have " + tasks.size() + " tasks in your list" + "\n" + newline + "\n");
+        } catch (PacException e) {
+            System.out.println(newline + "\n" + e.getMessage() + "\n" + newline + "\n");
+        }
     }
 
     public static void addDeadline(String input) {
-        String[] inputArray = input.split("/");
-        inputArray[1] = inputArray[1].replaceFirst("BY ", "by ");
-        inputArray[1] = inputArray[1].replaceFirst("By ", "by ");
-        inputArray[1] = inputArray[1].replaceFirst("bY ", "by ");
-        inputArray[1] = inputArray[1].split("by ", 2)[1];
-        Task task = new Deadline(inputArray[0], inputArray[1]);
-        tasks.add(task);
-        System.out.println(newline + "\nadded: " + task.toString());
-        System.out.println("You have " + tasks.size() + " tasks in your list" + "\n" + newline + "\n");
+       try {
+           String[] inputArray = input.split("/");
+           inputArray[1] = inputArray[1].replaceFirst("BY ", "by ");
+           inputArray[1] = inputArray[1].replaceFirst("By ", "by ");
+           inputArray[1] = inputArray[1].replaceFirst("bY ", "by ");
+           inputArray[1] = inputArray[1].split("by ", 2)[1];
+           if (inputArray[1].isBlank()) {
+               throw new PacException("Please enter a valid date or time.");
+           }
+           Task task = new Deadline(inputArray[0], inputArray[1]);
+           tasks.add(task);
+           System.out.println(newline + "\nadded: " + task.toString());
+           System.out.println("You have " + tasks.size() + " tasks in your list" + "\n" + newline + "\n");
+       } catch (PacException e) {
+           System.out.println(newline + "\n" + e.getMessage() + "\n" + newline + "\n");
+       }
     }
 
     public static void addEvent(String input) {
-        String[] inputArray = input.split("/");
-        inputArray[1] = inputArray[1].replaceFirst("AT ", "by ");
-        inputArray[1] = inputArray[1].replaceFirst("At ", "by ");
-        inputArray[1] = inputArray[1].replaceFirst("aT ", "by ");
-        inputArray[1] = inputArray[1].split("at ", 2)[1];
-        Task task = new Event(inputArray[0], inputArray[1]);
-        tasks.add(task);
-        System.out.println(newline + "\nadded: " + task.toString());
-        System.out.println("You have " + tasks.size() + " tasks in your list" + "\n" + newline + "\n");
+        try {
+            String[] inputArray = input.split("/");
+            inputArray[1] = inputArray[1].replaceFirst("AT ", "by ");
+            inputArray[1] = inputArray[1].replaceFirst("At ", "by ");
+            inputArray[1] = inputArray[1].replaceFirst("aT ", "by ");
+            inputArray[1] = inputArray[1].split("at ", 2)[1];
+            if (inputArray[1].isBlank()) {
+                throw new PacException("Please enter a valid date or time.");
+            }
+            Task task = new Event(inputArray[0], inputArray[1]);
+            tasks.add(task);
+            System.out.println(newline + "\nadded: " + task.toString());
+            System.out.println("You have " + tasks.size() + " tasks in your list" + "\n" + newline + "\n");
+        } catch (PacException e) {
+            System.out.println(newline + "\n" + e.getMessage() + "\n" + newline + "\n");
+        }
     }
 
     public static void markTask(int index) {
