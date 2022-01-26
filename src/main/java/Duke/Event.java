@@ -28,7 +28,7 @@ public class Event extends Task {
 	 */
 	@Override
 	public String toString() {
-		return this.NAME + "(" + this.TIME + ")";
+		return this.NAME + "(at: " + this.TIME + ")";
 	}
 
 	/**
