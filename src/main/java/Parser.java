@@ -19,6 +19,12 @@ public class Parser {
     private String loadError = "";
     private String regex = " ~~ ";
 
+    /**
+     * Creates a Parser that is connected to a Memory.
+     *
+     * @param file File object to be passed to Scanner and FileWriter.
+     * @param memory Memory object to access.
+     */
     public Parser(File file, Memory memory) {
 
         this.file = file;
@@ -33,6 +39,9 @@ public class Parser {
 
     }
 
+    /**
+     * Loads the data file onto Memory.
+     */
     public void load() {
 
         echo.echoString("Loading data...");
@@ -103,6 +112,9 @@ public class Parser {
         }
     }
 
+    /**
+     * Updates the data file from Memory.
+     */
     public void updateAll() {
 
         try {
