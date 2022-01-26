@@ -1,9 +1,23 @@
 import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
 
 public class Duke {
     private static List list;
     public static void main(String[] args) {
         greet();
+        File directory = new File("data");
+        if (!(directory.exists() && directory.isDirectory())) {
+            directory.mkdirs();
+        }
+        try {
+            printFileContent("data/duke.txt");
+        } catch (FileNotFoundException e) {
+            File file = new File ("data/duke.txt");
+        }
         Scanner sc = new Scanner(System.in);
         String userInput = sc.nextLine();
         list = new List(100);
@@ -54,6 +68,11 @@ public class Duke {
             Task doneTask = list.markDone(number);
             System.out.println("Nice! I've marked this task as done:\n  "
                     + doneTask.toString());
+            try {
+                writeToFile("data/duke.txt", list.toString());
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
         }
         else if (userInput.startsWith("unmark")) {
             String str = userInput.substring(7);
@@ -61,6 +80,11 @@ public class Duke {
             Task unDoneTask = list.unmarkDone(number);
             System.out.println("OK, I've marked this task as not done yet:\n  "
                     + unDoneTask.toString());
+            try {
+                writeToFile("data/duke.txt", list.toString());
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
         }
         else if (userInput.startsWith("delete")) {
             String indexStr = userInput.substring(7);
@@ -71,6 +95,11 @@ public class Duke {
                                 + "Now you have "
                                 + list.getArrayList().size()
                                 + " tasks in the list");
+            try {
+                writeToFile("data/duke.txt", list.toString());
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
         }
         else if (userInput.startsWith("todo") || userInput.startsWith("deadline") ||
                     userInput.startsWith("event")) {
@@ -79,8 +108,11 @@ public class Duke {
                         + processTask(userInput, list)
                         + "\n" + "Now you have " + list.getArrayList().size()
                         + " tasks in the list.");
-            } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                writeToFile("data/duke.txt", list.toString());
+            } catch (DukeException dukeException) {
+                System.out.println(dukeException.getMessage());
+            } catch (IOException ioException) {
+                System.out.println(ioException.getMessage());
             }
         }
         else {
@@ -127,5 +159,19 @@ public class Duke {
                 return output;
             }
         }
+    }
+
+    public static void printFileContent(String filePath) throws FileNotFoundException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+            System.out.println(s.nextLine());
+        }
+    }
+
+    public static void writeToFile(String filePath, String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAppend);
+        fw.close();
     }
 }
