@@ -23,12 +23,12 @@ Number of tasks up to now: 1
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
-harish, I have added return book 
+harish, I have added return book
 Number of tasks up to now: 2
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
-harish, I have added project team meeting 
+harish, I have added project team meeting
 Number of tasks up to now: 3
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
@@ -45,8 +45,8 @@ Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 These are your Tasks, harish
 1. [T][ ] buy lunch
-2. [D][ ] return book (by:3rd Feb)
-3. [E][ ] project team meeting (at:22nd Jan 12-2pm)
+2. [D][ ] return book (by: 3rd Feb)
+3. [E][ ] project team meeting (at: 22nd Jan 12-2pm)
 4. [T][ ] buy shoes
 5. [T][ ] edit pics
 Number of tasks up to now: 5
@@ -54,7 +54,7 @@ Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
 Great job, on completing this task! \(^_^)/
-[D][X] return book (by:3rd Feb)
+[D][X] return book (by: 3rd Feb)
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
@@ -69,38 +69,38 @@ Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
 Sure, I have unmarked this task :
-[D][ ] return book (by:3rd Feb)
+[D][ ] return book (by: 3rd Feb)
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
-harish, I have added paint walls 
+harish, I have added paint walls
 Number of tasks up to now: 7
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
 Great job, on completing this task! \(^_^)/
-[D][X] paint walls (by:5th Feb)
+[D][X] paint walls (by: 5th Feb)
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
 Great job, on completing this task! \(^_^)/
-[E][X] project team meeting (at:22nd Jan 12-2pm)
+[E][X] project team meeting (at: 22nd Jan 12-2pm)
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
 These are your Tasks, harish
 1. [T][ ] buy lunch
-2. [D][ ] return book (by:3rd Feb)
-3. [E][X] project team meeting (at:22nd Jan 12-2pm)
+2. [D][ ] return book (by: 3rd Feb)
+3. [E][X] project team meeting (at: 22nd Jan 12-2pm)
 4. [T][ ] buy shoes
 5. [T][X] edit pics
 6. [T][ ] fill out application form
-7. [D][X] paint walls (by:5th Feb)
+7. [D][X] paint walls (by: 5th Feb)
 Number of tasks up to now: 7
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
-harish, I have added dance practice 
+harish, I have added dance practice
 Number of tasks up to now: 8
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
@@ -111,62 +111,62 @@ Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
 Sure, I have unmarked this task :
-[D][ ] paint walls (by:5th Feb)
+[D][ ] paint walls (by: 5th Feb)
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
 These are your Tasks, harish
 1. [T][ ] buy lunch
-2. [D][ ] return book (by:3rd Feb)
-3. [E][X] project team meeting (at:22nd Jan 12-2pm)
+2. [D][ ] return book (by: 3rd Feb)
+3. [E][X] project team meeting (at: 22nd Jan 12-2pm)
 4. [T][ ] buy shoes
 5. [T][ ] edit pics
 6. [T][ ] fill out application form
-7. [D][ ] paint walls (by:5th Feb)
-8. [E][ ] dance practice (at:Monday 8-9pm)
+7. [D][ ] paint walls (by: 5th Feb)
+8. [E][ ] dance practice (at: Monday 8-9pm)
 Number of tasks up to now: 8
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
 Sure, I have unmarked this task :
-[E][ ] project team meeting (at:22nd Jan 12-2pm)
+[E][ ] project team meeting (at: 22nd Jan 12-2pm)
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
-Task num :19 isn't present. Type 'list' command to view the task numbers.
+Task num: 19 isn't present. Type 'list' command to view the task numbers.
 Please try again
 ------------------------------------------------
 ------------------------------------------------
 The following task has been removed from the list :
-[D][ ] return book (by:3rd Feb)
+[D][ ] return book (by: 3rd Feb)
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
-Task missing for :delete
+Task missing for: delete
 Please try again
 ------------------------------------------------
 ------------------------------------------------
-Task num :12 isn't present. Type 'list' command to view the task numbers.
+Task num: 12 isn't present. Type 'list' command to view the task numbers.
 Please try again
 ------------------------------------------------
 ------------------------------------------------
-Task num :14 isn't present. Type 'list' command to view the task numbers.
+Task num: 14 isn't present. Type 'list' command to view the task numbers.
 Please try again
 ------------------------------------------------
 ------------------------------------------------
 These are your Tasks, harish
 1. [T][ ] buy lunch
-2. [E][ ] project team meeting (at:22nd Jan 12-2pm)
+2. [E][ ] project team meeting (at: 22nd Jan 12-2pm)
 3. [T][ ] buy shoes
 4. [T][ ] edit pics
 5. [T][ ] fill out application form
-6. [D][ ] paint walls (by:5th Feb)
-7. [E][ ] dance practice (at:Monday 8-9pm)
+6. [D][ ] paint walls (by: 5th Feb)
+7. [E][ ] dance practice (at: Monday 8-9pm)
 Number of tasks up to now: 7
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
-Task missing for :mark
+Task missing for: mark
 Please try again
 ------------------------------------------------
 ------------------------------------------------
@@ -182,23 +182,23 @@ Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 These are your Tasks, harish
 1. [T][X] buy lunch
-2. [E][ ] project team meeting (at:22nd Jan 12-2pm)
+2. [E][ ] project team meeting (at: 22nd Jan 12-2pm)
 3. [T][ ] buy shoes
 4. [T][X] edit pics
 5. [T][ ] fill out application form
-6. [D][ ] paint walls (by:5th Feb)
-7. [E][ ] dance practice (at:Monday 8-9pm)
+6. [D][ ] paint walls (by: 5th Feb)
+7. [E][ ] dance practice (at: Monday 8-9pm)
 Number of tasks up to now: 7
 Please let me know if there's anything else you would like to add, harish
 ------------------------------------------------
 ------------------------------------------------
-Task missing for :unmark
+Task missing for: unmark
 Please try again
 ------------------------------------------------
 You have not input any command, please add some and try again.
 ------------------------------------------------
 ------------------------------------------------
-Task missing for :DEADLINE
+Task missing for: DEADLINE
 Please try again
 ------------------------------------------------
 ------------------------------------------------
@@ -210,15 +210,15 @@ Time argument missing for Deadline mark /by
 Please try again
 ------------------------------------------------
 ------------------------------------------------
-Task missing for :EVENT
+Task missing for: EVENT
 Please try again
 ------------------------------------------------
 ------------------------------------------------
-Time argument missing for Deadline meet
+Time argument missing for Event meet
 Please try again
 ------------------------------------------------
 ------------------------------------------------
-Time argument missing for Deadline meet /at
+Time argument missing for Event meet /at
 Please try again
 ------------------------------------------------
 You have not input any command, please add some and try again.
@@ -245,12 +245,12 @@ You have not input any command, please add some and try again.
 ------------------------------------------------
 These are your Tasks, harish
 1. [T][X] buy lunch
-2. [E][ ] project team meeting (at:22nd Jan 12-2pm)
+2. [E][ ] project team meeting (at: 22nd Jan 12-2pm)
 3. [T][ ] buy shoes
 4. [T][X] edit pics
 5. [T][ ] fill out application form
-6. [D][ ] paint walls (by:5th Feb)
-7. [E][ ] dance practice (at:Monday 8-9pm)
+6. [D][ ] paint walls (by: 5th Feb)
+7. [E][ ] dance practice (at: Monday 8-9pm)
 8. [ ] return books to library
 Number of tasks up to now: 8
 Please let me know if there's anything else you would like to add, harish

@@ -1,0 +1,17 @@
+
+
+harish
+
+yes
+list
+todo make bread toast
+deadline take clothes out of drier
+deadline take clothes out of the dryer /by tomorrow
+event attend photoediting session /at Tuesday 12
+mark 34
+mark 3
+mark 5
+unmark 5
+delete 4
+
+bye

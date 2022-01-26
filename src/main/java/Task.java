@@ -12,8 +12,18 @@ public class Task {
     // symbol for indicating task is yet to be completed.
     private static final String SPACE = " ";
 
+    // symbol for task done.
+    private static final String DONE = "[X]";
+
+    // symbol for task not done.
+    private static final String NOT_DONE = "[ ]";
+
+    // stores the start index value.
+    private static final int START_INDEX = 0;
+
     // task variable stores the task.
     private final String task;
+
     // Tells if the task is completed.
     private boolean done;
 
@@ -23,8 +33,26 @@ public class Task {
      * returns a new instance of task.
      */
     Task(String task) {
-        this.task = task;
+        this.task = task.trim();
         this.done = false;
+    }
+
+    /**
+     * Constructor for Task.
+     * @param task the string output of Task.
+     * @param dummyVariable int to differentiate from other constructor.
+     * returns a new instance of Task.
+     */
+    Task(String task, int dummyVariable) {
+
+        if (task.substring(START_INDEX, DONE.length()).contains(DONE)) {
+            this.done = true;
+        } else {
+            this.done = false;
+        }
+
+        this.task = task.substring(DONE.length()).trim();
+
     }
 
     /**

@@ -1,0 +1,11 @@
+harish
+[T][X] buy lunch
+[E][ ] project team meeting (at: 22nd Jan 12-2pm)
+[T][X] buy shoes
+[T][ ] fill out application form
+[D][ ] paint walls (by: 5th Feb)
+[E][ ] dance practice (at: Monday 8-9pm)
+[ ] return books to library
+[T][ ] make bread toast
+[D][ ] take clothes out of the dryer (by: tomorrow)
+[E][ ] attend photoediting session (at: Tuesday 12)

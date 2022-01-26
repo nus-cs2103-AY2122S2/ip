@@ -1,0 +1,85 @@
+------------------------------------------------
+Hello There, My name is Conan! 
+Hope you're doing fine today! (^_^) 
+I'm a task manager, and I can help you keep up with your tasks.
+Now before we start, lets get acquainted! Lets start with our names!
+------------------------------------------------
+------------------------------------------------
+Please enter valid name
+------------------------------------------------
+Please enter valid name
+------------------------------------------------
+I have found out that there was a similar user in the past under the name :
+harish
+If this is you, would you like to continue from the previous tasks ?
+If this isn't you or you don't want to use the previous tasks, please type no
+------------------------------------------------
+------------------------------------------------
+You have entered: 
+Please enter either yes or no
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+These are your Tasks, harish
+1. [T][X] buy lunch
+2. [E][ ] project team meeting (at: 22nd Jan 12-2pm)
+3. [T][ ] buy shoes
+4. [T][X] edit pics
+5. [T][ ] fill out application form
+6. [D][ ] paint walls (by: 5th Feb)
+7. [E][ ] dance practice (at: Monday 8-9pm)
+8. [ ] return books to library
+Number of tasks up to now: 8
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+harish, I have added make bread toast
+Number of tasks up to now: 9
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+Time argument missing for Deadline take clothes out of drier
+Please try again
+------------------------------------------------
+------------------------------------------------
+harish, I have added take clothes out of the dryer
+Number of tasks up to now: 10
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+harish, I have added attend photoediting session
+Number of tasks up to now: 11
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+Task num: 34 isn't present. Type 'list' command to view the task numbers.
+Please try again
+------------------------------------------------
+------------------------------------------------
+Great job, on completing this task! \(^_^)/
+[T][X] buy shoes
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+Great job, on completing this task! \(^_^)/
+[T][X] fill out application form
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+Sure, I have unmarked this task :
+[T][ ] fill out application form
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+------------------------------------------------
+The following task has been removed from the list :
+[T][X] edit pics
+Please let me know if there's anything else you would like to add, harish
+------------------------------------------------
+You have not input any command, please add some and try again.
+------------------------------------------------
+------------------------------------------------
+Goodbye, harish
+Hope I helped you complete your tasks!
+Have a great day ahead, enjoy ! (^-^)/
+Hope to see you next time! 
+------------------------------------------------
