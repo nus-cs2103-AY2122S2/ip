@@ -47,7 +47,7 @@ public class Storage {
             String nextLine;
             while (sc.hasNextLine()) {
                 nextLine = sc.nextLine();
-                Task task = Parser.parse(nextLine);
+                Task task = Parser.parseFileLine(nextLine);
                 taskList.add(task);
                 System.out.println("one task loaded");
             }
