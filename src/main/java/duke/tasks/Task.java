@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 public abstract class Task implements Serializable {
 
-    protected String item;
+    protected String description;
     protected boolean completed;
 
     public Task (String obj) {
-        item = obj;
+        description = obj;
         completed = false;
     }
 
@@ -18,7 +18,7 @@ public abstract class Task implements Serializable {
 
     public String toString() {
         String display = completed ? "[X]" : "[ ]";
-        return display + " " + item.toString();
+        return display + " " + description.toString();
     }
 
 
