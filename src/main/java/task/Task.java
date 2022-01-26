@@ -18,6 +18,10 @@ public abstract class Task {
         this.status = TaskStatus.NOT_DONE;
     }
     
+    public TaskStatus getStatus() {
+        return this.status;
+    }
+    
     public String getStatusIcon() {
         return this.status.getStatusIcon();
     }
