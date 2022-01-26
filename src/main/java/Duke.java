@@ -130,9 +130,8 @@ public class Duke {
                 System.out.println("Please try again:");
                 continue;
             }
-
         }
-
+        sc.close();
     }
 
     public static void main(String[] args) throws DukeException {
