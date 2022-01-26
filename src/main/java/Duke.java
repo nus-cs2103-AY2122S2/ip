@@ -109,7 +109,8 @@ public class Duke {
 
             case "event":
                 masterList.add(new Events(getDescription(inputArr), getDateTime(inputArr)));
-                System.out.println("Got it. I've added this task:\n\t " + input
+                System.out.println("Got it. I've added this task:\n\t "
+                        + (masterList.get(masterList.size() - 1)).toString()
                         + "\nNow you have " + masterList.size() + " tasks in the list.");
                 break;
 
