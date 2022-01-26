@@ -48,7 +48,6 @@ public class Event extends Task {
         } else {
             time += "am";
         }
-        System.out.println(date + month + year);
         String finalDescription = taskAtHand + "(" + "at " + date + " " + month + " " + year + ", " + time + ")";
         return "[E]" + "[" + super.getStatusIcon() + "] " + finalDescription;
     }
