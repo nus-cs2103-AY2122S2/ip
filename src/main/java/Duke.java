@@ -1,5 +1,6 @@
 import Exceptions.EmptyMessageException;
 import Exceptions.WrongCommandException;
+import Exceptions.WrongDateFormatException;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -93,7 +94,7 @@ public class Duke {
                         throw new WrongCommandException("Invalid Command");
                     }
                 }
-            } catch (EmptyMessageException e) {
+            } catch (EmptyMessageException | WrongDateFormatException e) {
                 myPrinter.printExceptions(e);
                 //cmd = myScanner.nextLine();
             }
