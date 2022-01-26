@@ -25,6 +25,7 @@ public class Ui {
 
     /**
      * Reads input from user.
+     *
      * @param sc Scanner class
      * @return String userInput
      */
@@ -48,6 +49,7 @@ public class Ui {
 
     /**
      * Prints a message between two horizontal lines
+     *
      * @param message String
      */
     public static void printMessage(String message) {
@@ -56,6 +58,11 @@ public class Ui {
         System.out.println(HORIZONTAL_LINE);
     }
 
+    /**
+     * Prints a single message.
+     *
+     * @param message String
+     */
     public static void printMessageWithoutLine(String message) {
         System.out.println(message);
     }

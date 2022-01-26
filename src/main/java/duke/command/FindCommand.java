@@ -11,14 +11,28 @@ import static duke.constant.Message.LINE_PREFIX;
 import static duke.constant.Message.NO_TASK;
 import static duke.constant.Message.NO_TASK_MATCHED;
 
+/**
+ * A representation of the command for founding tasks in the list.
+ */
 public class FindCommand extends Command {
     String commandArgument;
 
+    /**
+     * Class constructor.
+     *
+     * @param commandArgument command argument from user input
+     */
     public FindCommand(String commandArgument) {
         this.commandArgument = commandArgument;
     }
 
-
+    /**
+     * Executes finding command.
+     *
+     * @param tasks   TaskList class
+     * @param ui      Ui class
+     * @param storage Storage class
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.getNumberOfTasks() == 0) {

@@ -15,7 +15,7 @@ public class TaskList {
      * Returns empty ArrayList.
      */
     public TaskList() {
-      tasks = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
