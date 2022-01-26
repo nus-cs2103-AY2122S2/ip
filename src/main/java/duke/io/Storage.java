@@ -24,7 +24,7 @@ public class Storage {
      * @param folderName folder name to create the save file
      * @param fileName name of save file
      * @param arr list of tasks to be saved
-     * @return
+     * @return 0: save success, -1: error encountered
      */
     public static int saveFile(String folderName, String fileName, ArrayList<Task> arr) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy");
