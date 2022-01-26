@@ -1,14 +1,21 @@
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Task {
     protected String taskType;
     protected boolean isDone;
     protected String description;
     protected String date;
+    protected LocalDate dateFormat;
 
     public Task(String taskType, String description, String date) {
         this.description = description;
         this.isDone = false;
         this.taskType = taskType;
         this.date = date;
+        toLocalDate();
     }
 
     public Task(String taskType, boolean isDone, String description, String date) {
@@ -16,6 +23,7 @@ public class Task {
         this.isDone = isDone;
         this.taskType = taskType;
         this.date = date;
+        toLocalDate();
     }
 
     public String getStatusIcon() {
@@ -33,6 +41,40 @@ public class Task {
             return this.date;
         }
         return "";
+    }
+
+    public String getDateFormat() {
+        try {
+            if (!this.taskType.equals(TaskType.TODO.getTaskType()) && this.dateFormat != null) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[dd MMM yyyy]");
+                return this.dateFormat.format(formatter);
+            }
+            return "Not a valid date";
+        } catch (DateTimeException e) {
+            return this.getDate();
+        }
+    }
+
+    public boolean matchDate(String date) {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[dd-MM-yyyy]" + "[dd/MM/yyyy]");
+            return this.dateFormat.toString().equals(LocalDate.parse(date, formatter).toString());
+        } catch (DateTimeParseException e) {
+            System.out.println("Not a valid date");
+            return false;
+        }
+    }
+
+    private void toLocalDate() {
+        try {
+            if (!this.taskType.equals(TaskType.TODO.getTaskType()) && !this.date.equals(this.getDateFormat())) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[dd-MM-yyyy]" + "[dd/MM/yyyy]");
+                this.dateFormat = LocalDate.parse(this.date, formatter);
+                this.date = this.getDateFormat();
+            }
+        } catch (DateTimeParseException e) {
+            this.dateFormat = null;
+        }
     }
 
     private boolean hasAlreadyMark() {
