@@ -53,7 +53,7 @@ public class TaskList {
      * @return true if the state of duke.task.Task was changed by marking (not done -> done)
      * @throws DukeException index out of range
      */
-    public Boolean mark(int index) throws DukeException {
+    public Boolean markTask(int index) throws DukeException {
         checkIndex(index);
         Task target = this.tasks.get(index);
         return target.mark();
@@ -66,7 +66,7 @@ public class TaskList {
      * @return true if the state of duke.task.Task was changed by unmarking (done -> not done)
      * @throws DukeException index out of range
      */
-    public Boolean unmark(int index) throws DukeException {
+    public Boolean unmarkTask(int index) throws DukeException {
         checkIndex(index);
         Task target = this.tasks.get(index);
         return target.unmark();
