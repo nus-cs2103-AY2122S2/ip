@@ -17,10 +17,7 @@ public class TaskList {
     // Constructor for making new file
     public TaskList() throws DukeException {
         try {
-            File directory = new File("data");
-            directory.mkdir();
-            File file = new File(directory, "ekud.txt");
-            file.createNewFile();
+            Storage.createNewFolderAndTextFile();
             taskList = new ArrayList<>();
         } catch (IOException err) {
             throw new DukeException("Could not create file for you!");
@@ -30,6 +27,7 @@ public class TaskList {
     // Constructor for loading existing file
     public TaskList(List<String> data) throws DukeException {
         if (data == null) {
+            throw new DukeException("Oops Ekud could not find the file");
         } else {
             taskList = new ArrayList<>();
             for (String d : data) {

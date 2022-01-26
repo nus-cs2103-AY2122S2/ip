@@ -25,7 +25,7 @@ public class Ui {
 
     public void showLoadingErrorMessage() {
         System.out.println("Oh no, looks like I have some trouble finding your task list.\n"
-                 + "Fred not, Ekud has created the file for you!");
+                + "Fred not, Ekud has created the file for you!");
     }
 
     public String readCommand() {
