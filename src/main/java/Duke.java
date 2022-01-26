@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.function.Function;
 
@@ -13,18 +12,20 @@ public class Duke {
 
     private TaskList taskList;
     private Storage storage;
+    private Ui ui;
 
     public static void main(String[] args) {
         Duke duke = new Duke();
 
-        duke.startGreeting();
         duke.runDuke();
     }
 
     public Duke() {
-        this.taskList = new TaskList();
-        this.isRunning = true;
+        taskList = new TaskList();
+        ui = new Ui();
+        isRunning = true;
 
+        // init storage
         Function<String, Task> taskFactory = (String info) -> {
             Task newTask = null;
             char type = info.charAt(0);
@@ -47,20 +48,9 @@ public class Duke {
         }
     }
 
-    /* Initial greeting for Duke */
-    public void startGreeting() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
-        printDukeResponse("Sup! Name's Duke \nHow can I help you today?");
-    }
-
     /* Run Duke default behavior */
     public void runDuke() {
+        ui.startGreeting();
         Scanner sc = new Scanner(System.in);
 
         while (this.isRunning) {
@@ -69,7 +59,7 @@ public class Duke {
             try {
                 commandsParsed(userResponse);
             } catch (DukeException error) {
-                printDukeResponse(error.getMessage());
+                ui.printError(error.getMessage());
             }
 
         }
@@ -84,14 +74,14 @@ public class Duke {
 
         // quit application
         if (firstCommand.equals("bye")) {
-            printDukeResponse("See ya!");
+            ui.printResponse("See ya!");
             this.isRunning = false;
             return;
         }
 
         // print task list
         if (firstCommand.equals("list")) {
-            printDukeResponse("Here are the tasks in your list: \n" + taskList.getTaskListStr());
+            ui.printResponse(("Here are the tasks in your list: \n" + taskList.getTaskListStr()));
             return;
         }
 
@@ -110,7 +100,7 @@ public class Duke {
             String cmdDescription = markTask ? "Nice I've marked this task as done: \n"
                     : "Alright, I've unmarked the task: \n ";
 
-            printDukeResponse(cmdDescription + updatedTask.toString());
+            ui.printResponse(cmdDescription + updatedTask.toString());
             return;
         }
 
@@ -177,7 +167,7 @@ public class Duke {
             String printStr = "Gotcha. Added the task: \n   " + newTask.toString()
                     + "\nNow you have " + String.valueOf(taskList.getTaskListSize()) + " tasks in your list.";
 
-            printDukeResponse(printStr);
+            ui.printResponse(printStr);
             return;
         }
 
@@ -191,32 +181,12 @@ public class Duke {
 
             Task task = taskList.removeTask(taskIndex);
             storage.saveList(taskList.getTaskList());
-            printDukeResponse("Got it, task has been removed: \n" + task.toString() + "\nNow you have "
+            ui.printResponse("Got it, task has been removed: \n" + task.toString() + "\nNow you have "
                     + String.valueOf(taskList.getTaskListSize()) + " tasks in your list.");
 
             return;
         }
 
         throw new DukeException("HEY! I don't know what this mean, command doesn't exist.");
-    }
-
-    /* Print in the Duke response format */
-    public void printDukeResponse(String response) {
-        System.out.println(
-                "\n--------------------------------------------------------------------------------------------");
-        System.out.println("Duke Speaking:\n");
-        System.out.println(response);
-        System.out.println(
-                "--------------------------------------------------------------------------------------------\n");
-    }
-
-    public String getListStr(ArrayList<? extends Object> list) {
-        StringBuilder sb = new StringBuilder("");
-
-        for (int i = 0; i < list.size(); ++i) {
-            sb.append(String.valueOf(i + 1)).append(". ").append(list.get(i).toString()).append("\n");
-        }
-
-        return sb.toString();
     }
 }
