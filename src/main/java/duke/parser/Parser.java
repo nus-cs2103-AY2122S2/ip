@@ -1,41 +1,25 @@
-import storage.Storage;
-import ui.Ui;
+package duke.parser;
 
-import java.io.File;
-import java.io.IOException;
-import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 
-public class Duke {
+import duke.exceptions.InvalidTypeException;
+import duke.exceptions.MissingNameException;
+import duke.exceptions.MissingEventDateException;
+import duke.exceptions.MissingDeadlineDateException;
+import duke.main.Duke;
+import duke.ui.Ui;
+import duke.Task;
 
-    private Ui ui;
-    private Storage storage;
+public class Parser {
 
-    public Duke(String filePath) {
+    private String command;
 
-        ui = new Ui();
-        storage = new Storage(filePath);
-
-    }
-
-    public void run(){
-
-        Scanner sc = new Scanner(System.in);
-        String userInput = sc.nextLine();
-
-        while(processInput(userInput)) {
-            userInput = sc.nextLine();
-        }
-    }
-
-    private static boolean isBye(String s) {
-        return !s.equals("bye");
+    public Parser(String command) {
+        this.command = command;
     }
 
 
-    private boolean processInput(String userInput) {
+    public static boolean processInput(String userInput) {
         if(userInput.equals("bye")) {
-            ui.exit();
             return false;
         } else if (userInput.equals("list")) {
             String listTask = Task.printArray();
@@ -86,7 +70,7 @@ public class Duke {
         } else {
 
             try {
-                String newTaskMessage = createTask(userInput);
+                String newTaskMessage = Duke.createTask(userInput);
                 System.out.println(newTaskMessage);
             } catch (InvalidTypeException e) {
                 String errorMsg = Ui.createLine()
@@ -119,69 +103,4 @@ public class Duke {
         }
     }
 
-    public static String createTask(String input) throws InvalidTypeException, MissingNameException, MissingEventDateException, MissingDeadlineDateException{
-        String[] splitString = input.split("/", 2);
-        String[] instruction = splitString[0].split(" ", 2);
-        Task currentTask = null;
-
-        switch(instruction[0]) {
-            case "todo":
-                if(instruction.length == 1 || instruction[1].equals("")) {
-                    throw new MissingNameException("Missing description");
-                }
-
-                currentTask = new ToDo(input.substring(4));
-                break;
-            case "event":
-
-                if(instruction.length == 1 || instruction[1].equals("")) {
-                    throw new MissingNameException("Missing description");
-                }
-
-                if(splitString.length == 1 || !splitString[1].startsWith("at ")) {
-                    throw new MissingEventDateException("Missing date");
-                }
-                try {
-                    currentTask = new Event(splitString[0].substring(5),
-                            DateTimeParser.parseDate(splitString[1].substring(3)));
-                } catch (DateTimeParseException e) {
-                    throw new MissingEventDateException("Wrong format of date");
-                }
-
-                break;
-            case "deadline":
-                if(instruction.length == 1 || instruction[1].equals("")) {
-                    throw new MissingNameException("Missing description");
-                }
-
-                if(splitString.length == 1 || !splitString[1].startsWith("by ")) {
-                    throw new MissingDeadlineDateException("Missing date");
-                }
-                try {
-                currentTask = new Deadline(splitString[0].substring(8),
-                        DateTimeParser.parseDate(splitString[1].substring(3)));
-                } catch (DateTimeParseException e) {
-                    throw new MissingEventDateException("Wrong format of date");
-                }
-                break;
-
-            default:
-                throw new InvalidTypeException("Invalid type");
-        }
-
-        FileReading.writeToPath("data/duke.txt", Task.printArray());
-
-
-        String output = "   __________________________________________________\n"
-                + "       Got it! I have added this following task :D \n"
-                + "       " + currentTask + "\n"
-                + "       " + "Now you have " + Task.getCounter() + " tasks in your list.\n"
-                + "   __________________________________________________";
-
-        return output;
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
-    }
 }

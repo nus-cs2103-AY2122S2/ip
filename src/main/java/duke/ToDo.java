@@ -1,7 +1,9 @@
+package duke;
+
 public class ToDo extends Task {
     protected String type;
 
-    ToDo(String name) {
+    public ToDo(String name) {
         super(name);
         this.type = "T";
     }
