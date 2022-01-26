@@ -19,6 +19,12 @@ public class Task {
         this.done = false;
     }
 
+    /**
+     * Returns null. Only here to be inherited.
+     * Should never be called.
+     *
+     * @return null.
+     */
     public LocalDate getTime() {
         return null;
     }
@@ -45,6 +51,11 @@ public class Task {
         this.done = false;
     }
 
+    /**
+     * Returns a formatted String representation of this Task.
+     *
+     * @return Formatted String.
+     */
     @Override
     public String toString() {
         String mark;

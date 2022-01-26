@@ -26,6 +26,11 @@ public class Deadline extends Task{
         return time;
     }
 
+    /**
+     * Returns a formatted String representation of this Deadline.
+     *
+     * @return Formatted String.
+     */
     @Override
     public String toString() {
         String mark;

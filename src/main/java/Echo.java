@@ -1,5 +1,7 @@
 /**
  * The Echo class is used to automatically format what Duke says.
+ * This is the other half of the analogue to the 'Ui' class in the example.
+ * Anytime you see Echo, it's UI.
  *
  * @author Rdac0
  */

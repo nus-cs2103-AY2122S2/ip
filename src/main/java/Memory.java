@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 /**
  * The Memory class handles the storage and access to available Tasks.
+ * This is the equivalent to the 'TaskList' class on the example.
  *
  * @author Rdac0
  */
@@ -169,6 +170,9 @@ public class Memory {
         parser.updateAll();
     }
 
+    /**
+     * Sets up the data file and parser.
+     */
     public void setup() {
 
         if (!file.exists()) {
@@ -194,6 +198,9 @@ public class Memory {
         echo.echoString("Setup Complete!");
     }
 
+    /**
+     * Updates the entire data file, writing from taskMem.
+     */
     public void parseUpdateAll() {
         parser.updateAll();
     }

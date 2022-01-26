@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 /**
  * The Parser class handles the parsing and interaction between Duke and files on the disk.
+ * This is the equivalent to the 'Storage' class on the example.
  *
  * @author Rdac0
  */
@@ -57,46 +58,46 @@ public class Parser {
             String[] tempStrArray = temp.split(regex, 0);
             switch(tempStrArray[0]) {
 
-                case "T":
-                    if (tempStrArray.length < 3) {
-                        errorMessage = errorMessage + temp + "\n";
-                        loadUnsuccess++;
-                    } else {
-                        memory.addTask(tempStrArray[2]);
-                        if (tempStrArray[1].equals("1")) {
-                            memory.setDone(memory.getSize());
-                        }
-                    }
-                    break;
-
-                case "D":
-                    if (tempStrArray.length < 4) {
-                        errorMessage = errorMessage + temp + "\n";
-                        loadUnsuccess++;
-                    } else {
-                        memory.addDeadline(tempStrArray[2], tempStrArray[3]);
-                        if (tempStrArray[1].equals("1")) {
-                            memory.setDone(memory.getSize());
-                        }
-                    }
-                    break;
-
-                case "E":
-                    if (tempStrArray.length < 4) {
-                        errorMessage = errorMessage + temp + "\n";
-                        loadUnsuccess++;
-                    } else {
-                        memory.addEvent(tempStrArray[2], tempStrArray[3]);
-                        if (tempStrArray[1].equals("1")) {
-                            memory.setDone(memory.getSize());
-                        }
-                    }
-                    break;
-
-                default:
+            case "T":
+                if (tempStrArray.length < 3) {
                     errorMessage = errorMessage + temp + "\n";
                     loadUnsuccess++;
-                    break;
+                } else {
+                    memory.addTask(tempStrArray[2]);
+                    if (tempStrArray[1].equals("1")) {
+                        memory.setDone(memory.getSize());
+                    }
+                }
+                break;
+
+            case "D":
+                if (tempStrArray.length < 4) {
+                    errorMessage = errorMessage + temp + "\n";
+                    loadUnsuccess++;
+                } else {
+                    memory.addDeadline(tempStrArray[2], tempStrArray[3]);
+                    if (tempStrArray[1].equals("1")) {
+                        memory.setDone(memory.getSize());
+                    }
+                }
+                break;
+
+            case "E":
+                if (tempStrArray.length < 4) {
+                    errorMessage = errorMessage + temp + "\n";
+                    loadUnsuccess++;
+                } else {
+                    memory.addEvent(tempStrArray[2], tempStrArray[3]);
+                    if (tempStrArray[1].equals("1")) {
+                        memory.setDone(memory.getSize());
+                    }
+                }
+                break;
+
+            default:
+                errorMessage = errorMessage + temp + "\n";
+                loadUnsuccess++;
+                break;
             }
         }
 

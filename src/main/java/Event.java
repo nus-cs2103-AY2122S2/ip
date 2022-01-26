@@ -26,6 +26,11 @@ public class Event extends Task{
         return time;
     }
 
+    /**
+     * Returns a formatted String representation of this Event.
+     *
+     * @return Formatted String.
+     */
     @Override
     public String toString() {
         String mark;
