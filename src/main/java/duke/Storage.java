@@ -10,7 +10,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
- * Class to abstract and encapsulate file interactions for duke.Duke.
+ * Class to abstract and encapsulate file interactions for Duke.
  *
  * File format:
  * tag||<0 or 1>||name[||additional arguments...]
@@ -21,6 +21,7 @@ public class Storage {
 
     /**
      * Instantiates a FileManager
+     *
      * @param filename path to file of interaction
      */
     public Storage(String filename) {
@@ -28,6 +29,11 @@ public class Storage {
         this.file = new File(filename);
     }
 
+    /**
+     * Checks the existence of the file, creates it if it doesn't exist
+     *
+     * @throws IOException cannot create directories/file
+     */
     private void checkOrCreateFile() throws IOException {
         // Create file if it doesn't exist
         if (!this.file.exists()) {
@@ -52,7 +58,7 @@ public class Storage {
     /**
      * Loads Tasks from file
      *
-     * @return duke.task.TaskList populated with data from file
+     * @return TaskList populated with data from file
      * @throws IOException file access error
      * @throws DukeException when format error is present in file
      */

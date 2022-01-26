@@ -3,6 +3,9 @@ package duke;
 import duke.task.Task;
 
 public class Ui {
+    /**
+     * Color class to display colored text in the terminal
+     */
     private class Color {
         public static final String NONE = "\033[m";
 
@@ -12,6 +15,9 @@ public class Ui {
         public static final String YELLOW = "\033[33m";
     }
 
+    /**
+     * Display banner containing title and subtitle
+     */
     public void printBanner() {
         String logo = "███╗░░██╗██╗██╗░░██╗██╗░░██╗██╗　　　　 　∧_∧\n"
                     + "████╗░██║██║██║░██╔╝██║░██╔╝██║　　　　 ( ﾟωﾟ)\n"
@@ -27,7 +33,7 @@ public class Ui {
     }
 
     /**
-     * Method for duke.Duke to print message in a formatted style.
+     * Method for Duke to print message in a formatted style
      *
      * @param message message to print
      */
@@ -46,7 +52,7 @@ public class Ui {
     }
 
     /**
-     * Method for duke.Duke to print error messages.
+     * Method for Duke to print error messages
      *
      * @param message error message to print
      */
@@ -55,7 +61,7 @@ public class Ui {
     }
 
     /**
-     * Method for duke.Duke to print warning messages.
+     * Method for Duke to print warning messages
      *
      * @param message warning message to print
      */
@@ -66,7 +72,7 @@ public class Ui {
     /**
      * Log the addition of tasks in the same format
      *
-     * @param task duke.task added to be logged
+     * @param task task added to be logged
      */
     public void logNewTask(Task task, int taskCount) {
         say(String.format(

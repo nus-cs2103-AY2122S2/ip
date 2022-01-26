@@ -13,10 +13,63 @@ import duke.command.Command;
 import duke.command.CommandParser;
 
 public class Duke {
+    /**
+     * List of Tasks
+     */
     private TaskList tasks;
+
+    /**
+     * Storage component for load/save Tasks upon program start/end
+     */
     private Storage storage;
+
+    /**
+     * Parser for handling user input
+     * Contains predefined command list and syntax
+     */
     private final CommandParser cmd = new CommandParser(new Scanner(System.in));
+
+    /**
+     * Ui component for displaying text in format and color
+     */
     private final Ui ui = new Ui();
+
+
+    /**
+     * Construct a Duke instance
+     *
+     * @param filename File to load and save Tasks
+     */
+    public Duke(String filename) {
+        ui.printBanner();
+
+        String introduction = "Hello, I'm Nikki\n" +
+                "What can I do for you?";
+        ui.say(introduction);
+
+        try {
+            storage = new Storage(filename);
+            tasks = storage.loadTasks();
+        } catch (IOException| DukeException e) {
+            ui.warning("[!] Error reading file - initializing duke.task list as empty list");
+            tasks = new TaskList();
+        }
+
+    }
+
+    /**
+     * Main driver method to run duke.Duke
+     */
+    public void run() {
+        while (true) {
+            try {
+                Command action = cmd.readAndParse();
+                handleAction(action);
+            } catch (DukeException e) {
+                ui.error("!( ｀Д´)ﾉ  " + e.getLocalizedMessage());
+            }
+        }
+    }
 
     /**
      * Perform certain behaviours according to the command passed.
@@ -94,42 +147,6 @@ public class Duke {
         default:
             throw new DukeException("I don't know what to do");
 
-        }
-    }
-
-    /**
-     * Construct a duke.Duke instance
-     *
-     * @param filename File to load and save Tasks
-     */
-    public Duke(String filename) {
-        ui.printBanner();
-
-        String introduction = "Hello, I'm Nikki\n" +
-                "What can I do for you?";
-        ui.say(introduction);
-
-        try {
-            storage = new Storage(filename);
-            tasks = storage.loadTasks();
-        } catch (IOException| DukeException e) {
-            ui.warning("[!] Error reading file - initializing duke.task list as empty list");
-            tasks = new TaskList();
-        }
-
-    }
-
-    /**
-     * Main driver method to run duke.Duke
-     */
-    public void run() {
-        while (true) {
-            try {
-                Command action = cmd.readAndParse();
-                handleAction(action);
-            } catch (DukeException e) {
-                ui.error("!( ｀Д´)ﾉ  " + e.getLocalizedMessage());
-            }
         }
     }
 

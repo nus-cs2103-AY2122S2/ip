@@ -10,9 +10,9 @@ public class Deadline extends Task {
     private LocalDate date;
 
     /**
-     * Instantiate duke.task.Deadline object with date string
+     * Instantiate Deadline object with date string
      *
-     * @param name name for duke.task.Deadline
+     * @param name name for Deadline
      * @param deadline date of duke.task.Deadline (in d/M/yyyy format)
      * @throws DateTimeParseException date format error
      */
@@ -21,10 +21,10 @@ public class Deadline extends Task {
     }
 
     /**
-     * Instantiate duke.task.Deadline object with date string, and status
+     * Instantiate Deadline object with date string, and status
      *
-     * @param name name for duke.task.Deadline
-     * @param deadline date of duke.task.Deadline (in d/M/yyyy format)
+     * @param name name for Deadline
+     * @param deadline date of Deadline (in d/M/yyyy format)
      * @param done status of completion
      * @throws DateTimeParseException date format error
      */
@@ -33,20 +33,20 @@ public class Deadline extends Task {
     }
 
     /**
-     * Instantiate duke.task.Deadline object
+     * Instantiate Deadline object
      *
-     * @param name name for duke.task.Deadline
-     * @param date date of duke.task.Deadline
+     * @param name name for Deadline
+     * @param date date of Deadline
      */
     public Deadline(String name, LocalDate date) {
         this(name, date, false);
     }
 
     /**
-     * Instantiate duke.task.Deadline object with status
+     * Instantiate Deadline object with status
      *
-     * @param name name for duke.task.Deadline
-     * @param date date of duke.task.Deadline
+     * @param name name for Deadline
+     * @param date date of Deadline
      * @param done status of completion
      */
     public Deadline(String name, LocalDate date, Boolean done) {

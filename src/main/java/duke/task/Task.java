@@ -3,7 +3,14 @@ package duke.task;
 import duke.DukeException;
 
 public class Task {
+    /**
+     * Mark in checkbox of completed Task
+     */
     private static final char completedMark = 'X';
+
+    /**
+     * Mark in checkbox of uncompleted Task
+     */
     private static final char incompleteMark = ' ';
 
     private String name;
@@ -29,9 +36,9 @@ public class Task {
     }
 
     /**
-     * Marks the duke.task.Task (marked as done)
+     * Marks the Task (marked as done)
      *
-     * @return true if the state of duke.task.Task was changed by marking (not done -> done)
+     * @return true if the state of Task was changed by marking (not done -> done)
      */
     public Boolean mark() {
         if (!this.isDone()) {
@@ -43,9 +50,9 @@ public class Task {
     }
 
     /**
-     * Unmarks the duke.task.Task (marked as not done)
+     * Unmarks the Task (marked as not done)
      *
-     * @return true if the state of duke.task.Task was changed by unmarking (done -> not done)
+     * @return true if the state of Task was changed by unmarking (done -> not done)
      */
     public Boolean unmark() {
         if (this.isDone()) {
@@ -57,25 +64,25 @@ public class Task {
     }
 
     /**
-     * Getter for the tag of the duke.task.Task
+     * Getter for the tag of the Task
      *
-     * @return tag of the duke.task.Task
+     * @return tag of the Task
      */
     public char getTag() {
         return this.tag;
     }
 
     /**
-     * Getter for the name of the duke.task.Task
+     * Getter for the name of the Task
      *
-     * @return name of the duke.task.Task
+     * @return name of the Task
      */
     public String getName() {
         return this.name;
     }
 
     /**
-     * Returns the state (done) of the duke.task.Task
+     * Returns the state (done) of the Task
      *
      * @return duke.task is done or not
      */
@@ -84,9 +91,9 @@ public class Task {
     }
 
     /**
-     * Returns the tag, status, and name of the duke.task.Task, formatted.
+     * Returns the tag, status, and name of the Task, formatted.
      *
-     * @return formatted string of the duke.task.Task info
+     * @return formatted string of the Task info
      */
     public String nameWithStatus() {
         return String.format("[%c][%c] %s",
@@ -96,9 +103,9 @@ public class Task {
     }
 
     /**
-     * Returns duke.task.Task info in a standard format for saving in file.
+     * Returns Task info in a standard format for saving in file.
      *
-     * @return formatted string for saving duke.task.Task
+     * @return formatted string for saving Task
      */
     public String fileSaveFormat() {
         return String.format("%c||%c||%s",
@@ -108,9 +115,9 @@ public class Task {
     }
 
     /**
-     * Parses a formatted string from file storage, then returns the duke.task.Task object
+     * Parses a formatted string from file storage, then returns the Task object
      *
-     * @return duke.task.Task object represented by the string
+     * @return Task object represented by the string
      */
     public static Task parseFileSaveFormat(String fmt) throws DukeException {
         // Split at "||"
