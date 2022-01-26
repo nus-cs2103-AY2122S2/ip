@@ -5,14 +5,28 @@ import duke.ui.Ui;
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
 
+/**
+ * Deals with handling command that mark tasks.
+ */
 public class MarkCommand extends Command{
     String taskNum;
 
+    /**
+     * Constructor for MarkCommand.
+     *
+     * @param taskNum the task number to be marked.
+     */
     public MarkCommand(String taskNum) {
         this.taskNum = taskNum;
     }
 
-
+    /**
+     * Marks the task and print out message to inform user.
+     *
+     * @param tasks List of the tasks.
+     * @param ui UI that deals with interactions with the user.
+     * @param storage storage handles the saving and writing to file.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             int currTaskNum = Integer.parseInt(taskNum);
@@ -28,7 +42,11 @@ public class MarkCommand extends Command{
 
     }
 
-
+    /**
+     * Checks if the user is exiting the program.
+     *
+     * @return false that user not exiting.
+     */
     public boolean isExit() {
         return false;
     }

@@ -6,8 +6,17 @@ import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.ToDo;
 
+/**
+ * Deals with handling of the user command.
+ */
 public class Parser {
 
+    /**
+     * Handles the user inputs.
+     *
+     * @param commandList the list of command includes keyword and description.
+     * @return the respective commands.
+     */
     public static Command parse(String[] commandList) {
         String first_word = commandList[0];
         String remaining_word = commandList[1].trim();

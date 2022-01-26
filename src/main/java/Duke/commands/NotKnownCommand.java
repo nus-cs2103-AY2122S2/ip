@@ -5,15 +5,27 @@ import duke.tasklist.TaskList;
 import duke.ui.DukeException;
 import duke.ui.Ui;
 
+/**
+ * Deals with handling command that is unknown.
+ */
 public class NotKnownCommand extends Command{
 
-
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    /**
+     * Prints out the error message.
+     *
+     * @param tasks List of the tasks.
+     * @param ui UI that deals with interactions with the user.
+     * @param storage storage handles the saving and writing to file.
+     */
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showError("OOPS!!! I'm sorry, but I don't know what that means :<");
-
     }
 
-
+    /**
+     * Checks if the user is exiting the program.
+     *
+     * @return false that user not exiting.
+     */
     public boolean isExit() {
         return false;
     }
