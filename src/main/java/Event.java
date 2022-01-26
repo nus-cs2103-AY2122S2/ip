@@ -1,4 +1,3 @@
-import javax.swing.text.DateFormatter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -37,16 +36,9 @@ public class Event extends Task {
      * @return the start and end time of Event.
      */
     public String getAt() {
-        if (start.toLocalDate().equals(end.toLocalDate())) {
-            return start.format(DateTimeFormatter.ofPattern("h:mm a")) + " - "
-                    + end.format(DateTimeFormatter.ofPattern("h:mm a")) + " "
-                    + start.format(DateTimeFormatter.ofPattern("MMMM d yyyy"));
-        } else {
-            return start.format(DateTimeFormatter.ofPattern("h:mm a")) + " "
-                    + start.format(DateTimeFormatter.ofPattern("MMMM d yyyy")) + " - "
-                    + end.format(DateTimeFormatter.ofPattern("h:mm a")) + " "
-                    + end.format(DateTimeFormatter.ofPattern("MMMM d yyyy"));
-        }
+        return start.format(DateTimeFormatter.ofPattern("h:mm a")) + " - "
+                + end.format(DateTimeFormatter.ofPattern("h:mm a")) + " "
+                + start.format(DateTimeFormatter.ofPattern("MMMM d yyyy"));
     }
 
     /**
@@ -67,6 +59,16 @@ public class Event extends Task {
      */
     public String endToString() {
         return end.toString();
+    }
+
+    /**
+     * Outputs the storage string/format for the task.
+     *
+     * @return string formatted for storage.
+     */
+    public String getStorageString() {
+        return "E | " + (getIsDone() ? "1" : "0") + " | " + getDescription()
+                + " | " + startToString() + " | " + endToString() + "\n";
     }
 
     /**

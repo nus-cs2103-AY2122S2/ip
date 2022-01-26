@@ -13,6 +13,15 @@ public class ToDo extends Task {
     }
 
     /**
+     * Outputs the storage string/format for the task.
+     *
+     * @return string formatted for storage.
+     */
+    public String getStorageString() {
+        return "T | " + (getIsDone() ? "1" : "0") + " | " + getDescription() + "\n";
+    }
+
+    /**
      * Outputs the string representation of ToDo with
      * description.
      *

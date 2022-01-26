@@ -24,7 +24,6 @@ public class Deadline extends Task {
     }
 
 
-
     /**
      * Outputs the deadline of the task as formatted string.
      *
@@ -43,6 +42,16 @@ public class Deadline extends Task {
      */
     public String byToString() {
         return by.toString();
+    }
+
+    /**
+     * Outputs the storage string/format for the task.
+     *
+     * @return string formatted for storage.
+     */
+    public String getStorageString() {
+        return "D | " + (getIsDone() ? "1" : "0") + " | " + getDescription()
+                + " | " + byToString() + "\n";
     }
 
     /**
