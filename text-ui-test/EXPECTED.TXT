@@ -19,7 +19,7 @@ Heee hooo I'm Tsohg! How can I help you?
 
 ~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
 
-Got it. I've added this task: 
+Got it. I've added this task:
 [T][ ] read book
 Now you have 1 tasks in the list.
 
@@ -28,8 +28,8 @@ Now you have 1 tasks in the list.
 
 ~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
 
-Got it. I've added this task: 
-[D][ ] return book (by: June 6th)
+Got it. I've added this task:
+[D][ ] return book (by: Jan 01 2022)
 Now you have 2 tasks in the list.
 
 ~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
@@ -37,8 +37,8 @@ Now you have 2 tasks in the list.
 
 ~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
 
-Got it. I've added this task: 
-[E][ ] project meeting (at: Aug 6th 2-4pm)
+Got it. I've added this task:
+[E][ ] project meeting (at: Nov 01 2022)
 Now you have 3 tasks in the list.
 
 ~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
@@ -48,15 +48,15 @@ Now you have 3 tasks in the list.
 
 Here are the tasks in your list:
 1.[T][ ] read book
-2.[D][ ] return book (by: June 6th)
-3.[E][ ] project meeting (at: Aug 6th 2-4pm)
+2.[D][ ] return book (by: Jan 01 2022)
+3.[E][ ] project meeting (at: Nov 01 2022)
 
 ~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
 
 
 ~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
 
-Nice! I've marked this task as done: 
+Nice! I've marked this task as done:
 [T][X] read book
 
 ~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
@@ -64,7 +64,7 @@ Nice! I've marked this task as done:
 
 ~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
 
-Got it. I've added this task: 
+Got it. I've added this task:
 [T][ ] join sports club
 Now you have 4 tasks in the list.
 
@@ -73,7 +73,7 @@ Now you have 4 tasks in the list.
 
 ~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
 
-Nice! I've marked this task as done: 
+Nice! I've marked this task as done:
 [T][X] join sports club
 
 ~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
@@ -83,8 +83,8 @@ Nice! I've marked this task as done:
 
 Here are the tasks in your list:
 1.[T][X] read book
-2.[D][ ] return book (by: June 6th)
-3.[E][ ] project meeting (at: Aug 6th 2-4pm)
+2.[D][ ] return book (by: Jan 01 2022)
+3.[E][ ] project meeting (at: Nov 01 2022)
 4.[T][X] join sports club
 
 ~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
@@ -92,7 +92,7 @@ Here are the tasks in your list:
 
 ~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
 
-Got it. I've added this task: 
+Got it. I've added this task:
 [T][ ] borrow book
 Now you have 5 tasks in the list.
 
@@ -103,8 +103,8 @@ Now you have 5 tasks in the list.
 
 Here are the tasks in your list:
 1.[T][X] read book
-2.[D][ ] return book (by: June 6th)
-3.[E][ ] project meeting (at: Aug 6th 2-4pm)
+2.[D][ ] return book (by: Jan 01 2022)
+3.[E][ ] project meeting (at: Nov 01 2022)
 4.[T][X] join sports club
 5.[T][ ] borrow book
 
@@ -113,8 +113,8 @@ Here are the tasks in your list:
 
 ~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
 
-Got it. I've added this task: 
-[D][ ] return book (by: Sunday)
+Got it. I've added this task:
+[D][ ] return book (by: Nov 30 2022)
 Now you have 6 tasks in the list.
 
 ~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
@@ -122,8 +122,8 @@ Now you have 6 tasks in the list.
 
 ~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
 
-Got it. I've added this task: 
-[E][ ] project meeting (at: Mon 2-4pm)
+Got it. I've added this task:
+[E][ ] project meeting (at: Mar 13 2022)
 Now you have 7 tasks in the list.
 
 ~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
@@ -131,32 +131,22 @@ Now you have 7 tasks in the list.
 
 ~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
 
-Got it. I've added this task: 
-[D][ ] do homework (by: no idea :-p)
-Now you have 8 tasks in the list.
-
-~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
-
-
-~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
-
 Here are the tasks in your list:
 1.[T][X] read book
-2.[D][ ] return book (by: June 6th)
-3.[E][ ] project meeting (at: Aug 6th 2-4pm)
+2.[D][ ] return book (by: Jan 01 2022)
+3.[E][ ] project meeting (at: Nov 01 2022)
 4.[T][X] join sports club
 5.[T][ ] borrow book
-6.[D][ ] return book (by: Sunday)
-7.[E][ ] project meeting (at: Mon 2-4pm)
-8.[D][ ] do homework (by: no idea :-p)
+6.[D][ ] return book (by: Nov 30 2022)
+7.[E][ ] project meeting (at: Mar 13 2022)
 
 ~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
 
 
 ~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
 
-Nice! I've marked this task as done: 
-[E][X] project meeting (at: Mon 2-4pm)
+Nice! I've marked this task as done:
+[E][X] project meeting (at: Mar 13 2022)
 
 ~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
 
@@ -164,7 +154,7 @@ Nice! I've marked this task as done:
 ~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
 
 OK, I've marked this task as not done yet:
-[E][ ] project meeting (at: Mon 2-4pm)
+[E][ ] project meeting (at: Mar 13 2022)
 
 ~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
 
@@ -173,13 +163,12 @@ OK, I've marked this task as not done yet:
 
 Here are the tasks in your list:
 1.[T][X] read book
-2.[D][ ] return book (by: June 6th)
-3.[E][ ] project meeting (at: Aug 6th 2-4pm)
+2.[D][ ] return book (by: Jan 01 2022)
+3.[E][ ] project meeting (at: Nov 01 2022)
 4.[T][X] join sports club
 5.[T][ ] borrow book
-6.[D][ ] return book (by: Sunday)
-7.[E][ ] project meeting (at: Mon 2-4pm)
-8.[D][ ] do homework (by: no idea :-p)
+6.[D][ ] return book (by: Nov 30 2022)
+7.[E][ ] project meeting (at: Mar 13 2022)
 
 ~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
 
@@ -200,18 +189,32 @@ OOPS!!! I'm sorry, but I don't know what that means :-(
 
 ~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
 
-Noted. I've removed this task: 
+Noted. I've removed this task:
 [T][X] read book
-Now you have 7 tasks in the list.
-
-~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
-
-
-~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
-
-Noted. I've removed this task: 
-[T][X] join sports club
 Now you have 6 tasks in the list.
+
+~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
+
+
+~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
+
+Noted. I've removed this task:
+[T][X] join sports club
+Now you have 5 tasks in the list.
+
+~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
+
+
+~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
+
+Date is not provided!
+
+~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
+
+
+~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
+
+Invalid date!
 
 ~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~"~._.~
 
