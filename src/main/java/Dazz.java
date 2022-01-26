@@ -18,7 +18,7 @@ public class Dazz {
             System.out.println(Design.HORIZONTAL_LINE);
             dazz.logic.run(input);
             System.out.println(Design.HORIZONTAL_LINE);
-            if (input.equals("bye")) {
+            if (input.startsWith("bye")) {
                 break;
             }
         }
