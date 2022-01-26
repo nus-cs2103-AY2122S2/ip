@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import duke.time.Time;
 
 /**
- * A type of task with a pending date, and may contain a time.
+ * Returns a type of task with a pending date, and may contain a time.
  */
 public class Deadline extends Task {
 
@@ -13,21 +13,21 @@ public class Deadline extends Task {
     private String time;
 
     /**
-     * Initializes the task of type Deadline.
+     * Returns the task of type Deadline.
      *
-     * @param completed Status of the task.
+     * @param isCompleted Status of the task.
      * @param task Task name.
      * @param deadline Date of the deadline.
      * @param time Time of the deadline. Optional field.
      */
-    public Deadline(boolean completed, String task, LocalDate deadline, String time) {
-        super(task, completed);
+    public Deadline(boolean isCompleted, String task, LocalDate deadline, String time) {
+        super(task, isCompleted);
         this.deadline = deadline;
         this.time = time;
     }
 
     /**
-     * Gets the date of the deadline. Formats it in DD MM YYYY.
+     * Returns the date of the deadline. Formats it in DD MM YYYY.
      *
      * @return A string to represent the date of the deadline.
      */
@@ -36,7 +36,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Gets the time of the deadline.
+     * Returns the time of the deadline.
      *
      * @return A string to represent the time of the deadline.
      */
@@ -45,7 +45,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Writes the deadline task in a readable form.
+     * Returns the deadline task in a readable form.
      *
      * @return A string representing the details of the deadline task.
      */

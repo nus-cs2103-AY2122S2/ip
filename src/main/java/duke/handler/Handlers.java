@@ -97,7 +97,7 @@ public enum Handlers {
     public static void deadlineHandler(Tasklist list, String input, String cmd) {
         try {
             int index = input.indexOf("/by");
-            String[] time = DukeException.taskValidity(index, input, cmd);
+            String[] time = DukeException.isTaskValid(index, input, cmd);
             Deadline task;
             LocalDate date = LocalDate.of(Integer.parseInt(time[2]), Integer.parseInt(time[1]),
                     Integer.parseInt(time[0]));
@@ -123,7 +123,7 @@ public enum Handlers {
      */
     public static void deleteHandler(Tasklist list, String input) {
         try {
-            int index = DukeException.indexValidity(input, list);
+            int index = DukeException.isIndexValid(input, list);
             System.out.println("Noted. Deleting this task...");
             Task t = list.delete(index);
             FileHandler.writeToFile(list);
@@ -144,7 +144,7 @@ public enum Handlers {
     public static void eventHandler(Tasklist list, String input, String cmd) {
         try {
             int index = input.indexOf("/at");
-            String[] time = DukeException.taskValidity(index, input, cmd);
+            String[] time = DukeException.isTaskValid(index, input, cmd);
             Event task;
             LocalDate date = LocalDate.of(Integer.parseInt(time[2]), Integer.parseInt(time[1]),
                     Integer.parseInt(time[0]));
@@ -170,7 +170,7 @@ public enum Handlers {
      */
     public static void findHandler(Tasklist list, String input) {
         try {
-            String searchPhrase = DukeException.wordValidity(input);
+            String searchPhrase = DukeException.isWordValid(input);
             LinkedList<Task> filtered = new LinkedList<>();
             for (int i = 0; i < list.getTotalTasks(); i++) {
                 if (list.getTask(i).getTaskName().contains(searchPhrase)) {
@@ -196,7 +196,7 @@ public enum Handlers {
      */
     public static void markHandler(Tasklist list, String input) {
         try {
-            int index = DukeException.indexValidity(input, list);
+            int index = DukeException.isIndexValid(input, list);
             System.out.println("Nice! I've marked this task as done!");
             Task t = list.mark(index);
             FileHandler.writeToFile(list);
@@ -223,7 +223,7 @@ public enum Handlers {
      */
     public static void todoHandler(Tasklist list, String input) {
         try {
-            DukeException.taskValidity(input);
+            DukeException.isTaskValid(input);
             Todo task = new Todo(false, input.substring(5));
             list.addTask(task);
             FileHandler.writeToFile(list);
@@ -242,7 +242,7 @@ public enum Handlers {
      */
     public static void unmarkHandler(Tasklist list, String input) {
         try {
-            int index = DukeException.indexValidity(input, list);
+            int index = DukeException.isIndexValid(input, list);
             System.out.println("Okay! I've marked this as undone!");
             Task t = list.unmark(index);
             FileHandler.writeToFile(list);

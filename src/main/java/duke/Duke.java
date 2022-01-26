@@ -7,12 +7,12 @@ import duke.handler.Handlers;
 import duke.task.Tasklist;
 
 /**
- * Our very own task manager, Duke!
+ * Returns the main task manager, Duke as an object.
  */
 public class Duke {
 
     /**
-     * Main function to execute the application.
+     * Handles the execution of the program.
      *
      * @param args Arguments, if any, to be passed for execution.
      */

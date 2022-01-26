@@ -5,12 +5,12 @@ import java.util.regex.Pattern;
 import duke.task.Tasklist;
 
 /**
- * A custom exception used to handle edge cases in our application.
+ * Returns a custom exception used to handle edge cases in our application.
  */
 public class DukeException extends Exception {
 
     /**
-     * Constructor to initialize the error, calls upon parent constructor.
+     * Returns an error object with a custom message.
      *
      * @param message This is the error message returned to users.
      */
@@ -19,7 +19,7 @@ public class DukeException extends Exception {
     }
 
     /**
-     * Function to specifically test Deadline and Event tasks.
+     * Checks whether the input is valid for Deadline and Event tasks. Otherwise, throws an exception.
      *
      * @param index Index of the keyword '/by' or '/at' that is too be used in the tasks.
      * @param input The string that the user has entered following the command.
@@ -27,7 +27,7 @@ public class DukeException extends Exception {
      * @return An array of the date and time format, if specified.
      * @throws DukeException If any of the params do not satisfy conditions for processing.
      */
-    public static String[] taskValidity(int index, String input, String taskType) throws DukeException {
+    public static String[] isTaskValid(int index, String input, String taskType) throws DukeException {
         if (taskType.equals("event")) {
             if (index == -1) {
                 throw new DukeException("Please specify a date using '/at'.\n");
@@ -73,12 +73,12 @@ public class DukeException extends Exception {
     }
 
     /**
-     * Function to specifically test Todo tasks.
+     * Checks whether the input is valid for Todo tasks. Otherwise, throws an exception.
      *
      * @param input The string that the user has entered following the command.
      * @throws DukeException If any of the params do not satisfy conditions for processing.
      */
-    public static void taskValidity(String input) throws DukeException {
+    public static void isTaskValid(String input) throws DukeException {
         if (input.length() < 5 || input.substring(5).strip().equals("")) {
             throw new DukeException("Please key in a valid task name.\n");
         }
@@ -88,14 +88,14 @@ public class DukeException extends Exception {
     }
 
     /**
-     * Function to test if the digit provided is valid.
+     * Returns the integer if input is valid. Otherwise, throws an exception.
      *
      * @param input The string that the user has entered following the command.
      * @param list Tasklist that contains all tasks.
      * @return The index to be used.
      * @throws DukeException If any of the params do not satisfy conditions for processing.
      */
-    public static int indexValidity(String input, Tasklist list) throws DukeException {
+    public static int isIndexValid(String input, Tasklist list) throws DukeException {
         String [] keywords = input.split(" ");
         int index;
         if (keywords.length != 2) {
@@ -116,13 +116,13 @@ public class DukeException extends Exception {
     }
 
     /**
-     * Function to test if the word provided is valid.
+     * Returns the keyword if input is valid. Otherwise, throws an exception.
      *
      * @param input The string that the user has entered following the command.
      * @return The word to be used.
      * @throws DukeException If any of the params do not satisfy conditions for processing.
      */
-    public static String wordValidity(String input) throws DukeException {
+    public static String isWordValid(String input) throws DukeException {
         if (input.length() < 6) {
             throw new DukeException("Please type in a word to search through the tasks.\n");
         }

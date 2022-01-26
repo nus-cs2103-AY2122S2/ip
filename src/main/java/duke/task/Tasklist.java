@@ -3,14 +3,14 @@ package duke.task;
 import java.util.LinkedList;
 
 /**
- * A container to store all the tasks that have been created.
+ * Returns a container to store all the tasks that have been created.
  */
 public class Tasklist {
 
     private LinkedList<Task> tasks;
 
     /**
-     * Creates the container. Only allows events, deadlines and todos.
+     * Returns the container. Only allows events, deadlines and todos.
      */
     public Tasklist() {
         this.tasks = new LinkedList<Task>();
@@ -26,7 +26,7 @@ public class Tasklist {
     }
 
     /**
-     * Gets the task specified.
+     * Returns the task specified.
      *
      * @param index Position of the task in the container.
      * @return Task matching the index.
@@ -36,7 +36,7 @@ public class Tasklist {
     }
 
     /**
-     * Gets the total number of tasks inside the container.
+     * Returns the total number of tasks inside the container.
      *
      * @return A number representing the total number of tasks.
      */
@@ -45,7 +45,7 @@ public class Tasklist {
     }
 
     /**
-     * Gets the task to be marked.
+     * Returns the task to be marked.
      *
      * @param index Position of the task in the container.
      * @return Task matching the index.
@@ -57,7 +57,7 @@ public class Tasklist {
     }
 
     /**
-     * Gets the task to be unmarked.
+     * Returns the task to be unmarked.
      *
      * @param index Position of the task in the container.
      * @return Task matching the index.
@@ -69,7 +69,7 @@ public class Tasklist {
     }
 
     /**
-     * Gets the task to be deleted.
+     * Returns the task to be deleted.
      *
      * @param index Position of the task in the container.
      * @return Task matching the index.
@@ -79,7 +79,7 @@ public class Tasklist {
     }
 
     /**
-     * Writes the tasks in a list format.
+     * Returns the tasks in a list format.
      *
      * @return A string representing all the details of the tasks.
      */
@@ -95,7 +95,7 @@ public class Tasklist {
     }
 
     /**
-     * Writes the tasks in a readable form.
+     * Returns the tasks in a readable form.
      *
      * @return A string representing all the details of the tasks.
      */

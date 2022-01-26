@@ -14,12 +14,12 @@ import duke.task.Todo;
 import duke.time.Time;
 
 /**
- * A class to handle reading, writing, creating and updating functionalities regarding external files.
+ * Returns a class to handle reading, writing, creating and updating functionalities regarding external files.
  */
 public class FileHandler {
 
     /**
-     * Used to get the desired path where the output file is stored.
+     * Returns the desired path where the output file is stored.
      *
      * @return The path in string format.
      */

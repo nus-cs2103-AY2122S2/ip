@@ -1,16 +1,22 @@
 package duke.task;
 
 /**
- * A type of task called todo.
+ * Returns a type of task called todo.
  */
 public class Todo extends Task {
 
-    public Todo (boolean completed, String task) {
-        super(task, completed);
+    /**
+     * Returns the task of type Todo.
+     *
+     * @param isCompleted Status of the task.
+     * @param task Task name.
+     */
+    public Todo (boolean isCompleted, String task) {
+        super(task, isCompleted);
     }
 
     /**
-     * Writes the todo task in a readable form.
+     * Returns the todo task in a readable form.
      *
      * @return A string representing the details of the todo task.
      */

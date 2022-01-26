@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Custom class to handle conversions between the different formats of time.
+ * Returns a custom time object to handle conversions between the different formats of time.
  */
 public class Time {
 

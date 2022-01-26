@@ -1,45 +1,45 @@
 package duke.task;
 
 /**
- * Object that encapsulates the details which the user wishes to complete.
+ * Returns an object that encapsulates the details which the user wishes to complete.
  */
 public class Task {
 
     private String task;
-    private boolean completed;
+    private boolean isCompleted;
 
     /**
-     * Initializes a task.
+     * Returns a new initialized task.
      *
      * @param task Task name.
-     * @param completed Status of the task.
+     * @param isCompleted Status of the task.
      */
-    public Task(String task, boolean completed) {
+    public Task(String task, boolean isCompleted) {
         this.task = task;
-        this.completed = completed;
+        this.isCompleted = isCompleted;
     }
 
     /**
-     * Marks the task as completed.
+     * Returns the task as completed.
      */
     public void mark() {
-        this.completed = true;
+        this.isCompleted = true;
     }
 
     /**
-     * Marks the task as incomplete.
+     * Returns the task as incomplete.
      */
     public void unmark() {
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     /**
-     * Checks to see if the task is completed.
+     * Returns a boolean depending on whether the task is completed.
      *
      * @return A boolean on whether the task is completed.
      */
     public boolean isCompleted() {
-        return this.completed;
+        return this.isCompleted;
     }
 
     /**
@@ -52,14 +52,14 @@ public class Task {
     }
 
     /**
-     * Writes the task in a readable form.
+     * Returns the task in a readable form.
      *
      * @return A string representing the details of the task.
      */
     @Override
     public String toString() {
         StringBuilder status = new StringBuilder();
-        if (this.completed) {
+        if (this.isCompleted) {
             status.append("[X] ");
         } else {
             status.append("[ ] ");
