@@ -8,6 +8,11 @@ public class Narcibot {
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Constructor for a Narcibot with indicating where the task will be saved
+     * @param fileName name of the file to save
+     * @param path path of the file to save
+     */
     public Narcibot(String fileName, String path) {
         ui = new Ui();
         parser = new Parser();
@@ -23,6 +28,9 @@ public class Narcibot {
         new Narcibot("tasks.txt","./data").run();
     }
 
+    /**
+     * Runs the Narcibot program.
+     */
     public void run()  {
         ui.welcome();
         String input;

@@ -1,6 +1,14 @@
 package narcibot;
 
+/**
+ * Class for the handling of parsing of input.
+ */
 public class Parser {
+    /**
+     * Parse the command into an array of strings.
+     * @param command the string to parse
+     * @return the parsed array of string
+     */
     public String[] parse(String command) {
         String[] tokens = command.split(" ",2);
         if(tokens.length != 1) {
