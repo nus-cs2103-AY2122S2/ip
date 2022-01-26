@@ -97,6 +97,13 @@ public class Narcibot {
                     }
                     ui.task(taskList.event(command[1], command[2]));
                     break;
+            case "find":
+                if(command.length != 2) {
+                    throw new IncorrectFormatException("You need to give me a keyword to find something.");
+                }
+                ui.find();
+                taskList.find(command[1]);
+                break;
                 default:
                     ui.unknown();
             }

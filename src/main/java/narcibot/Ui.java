@@ -38,4 +38,8 @@ public class Ui {
     public void unknown() {
         System.out.println("Could you please talk some sense? I can't seem to comprehend what you're saying.");
     }
+
+    public void find() {
+        System.out.println("Finding tasks that match your keyword");
+    }
 }
