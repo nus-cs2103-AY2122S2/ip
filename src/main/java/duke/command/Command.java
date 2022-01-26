@@ -37,15 +37,16 @@ public abstract class Command {
         return task;
     }
 
-    protected LocalDateTime parseDateTime(String dateString) throws DukeIllegalArgumentException {
-        return parseDateTime(dateString, "dd/MM/yyyy HH:mm");
-    }
-
     protected LocalDateTime parseDate(String dateString) throws DukeIllegalArgumentException {
         return parseDateTime(dateString + " 00:00", "dd/MM/yyyy HH:mm");
     }
 
-    protected LocalDateTime parseDateTime(String dateString, String pattern) throws DukeIllegalArgumentException {
+    protected LocalDateTime parseDateTime(String dateString) throws DukeIllegalArgumentException {
+        return parseDateTime(dateString, "dd/MM/yyyy HH:mm");
+    }
+
+    protected LocalDateTime parseDateTime(String dateString, String pattern)
+            throws DukeIllegalArgumentException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
         try {
             return LocalDateTime.parse(dateString, formatter);
@@ -54,6 +55,5 @@ public abstract class Command {
         }
     }
 
-    public abstract boolean execute(Printable linePrinter, TaskList taskList)
-            throws DukeException;
+    public abstract boolean execute(Printable linePrinter, TaskList taskList) throws DukeException;
 }

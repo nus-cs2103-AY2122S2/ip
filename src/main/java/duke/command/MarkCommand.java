@@ -6,20 +6,20 @@ import duke.task.TaskList;
 import duke.util.Printable;
 
 public class MarkCommand extends Command {
-    private final boolean newState;
+    private final boolean isDone;
 
-    MarkCommand(String args, boolean newState) {
+    MarkCommand(String args, boolean isDone) {
         super(args);
-        this.newState = newState;
+        this.isDone = isDone;
     }
 
     @Override
     public boolean execute(Printable linePrinter, TaskList taskList) throws DukeIllegalArgumentException {
-        Task task = parseSelectTask(taskList);
+        final Task task = parseSelectTask(taskList);
 
-        if (task.isDone() == newState) {
-            linePrinter.print(String.format("Task is already %s:", newState ? "done" : "not done"));
-        } else if (newState) {
+        if (task.isDone() == this.isDone) {
+            linePrinter.print(String.format("Task is already %s:", this.isDone ? "done" : "not done"));
+        } else if (this.isDone) {
             taskList.markTask(task, true);
             linePrinter.print("Great Job Finishing the task:");
         } else {

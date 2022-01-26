@@ -25,9 +25,9 @@ public class UpcomingCommand extends Command {
             throw new DukeIllegalArgumentException("Days must be a positive number");
         }
 
-        LocalDateTime endTime = LocalDateTime.now().plus(days, ChronoUnit.DAYS);
+        final LocalDateTime endTime = LocalDateTime.now().plus(days, ChronoUnit.DAYS);
         linePrinter.print(String.format("Here are your tasks in %d days:", days));
-        taskList.forEach((idx, task) -> {
+        taskList.forEach((index, task) -> {
             task.getDate().ifPresent(date -> {
                 if (date.isBefore(endTime)) {
                     linePrinter.print(task.getReadableString());

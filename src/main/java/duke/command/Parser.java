@@ -16,8 +16,7 @@ public class Parser {
     private static final String COMMAND_BETWEEN = "between";
     private static final String COMMAND_SCHEDULE = "schedule";
 
-    public static Command parse(String command)
-            throws DukeInvalidCommandException {
+    public static Command parse(String command) throws DukeInvalidCommandException {
         final String[] commandParts = command.split(" ");
         final String commandLowerCase = commandParts[0].toLowerCase();
         final String args = command.substring(commandLowerCase.length()).trim();
