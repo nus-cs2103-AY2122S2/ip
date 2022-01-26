@@ -68,12 +68,24 @@ public class Parser {
                 String toDelete = parseDelete(commandLine);
                 ui.deleteMessage(toDelete);
                 break;
+            case FIND:
+                String found = parseFind(commandLine);
+                ui.findMessage(found);
+                break;
             default:
                 break;
             }
         } catch (DukeException e) {
             throw e;
         }
+    }
+
+    private String parseFind(String[] commandLine) throws DukeException {
+        if (commandLine.length == 1) {
+            throw new DukeException.DukeNoDescriptionFoundException();
+        }
+
+        return taskList.find(commandLine[1]);
     }
 
     private void parseAdd(String[] commandLine) throws DukeException {

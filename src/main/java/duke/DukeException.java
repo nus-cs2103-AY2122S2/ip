@@ -14,7 +14,7 @@ public class DukeException extends Exception {
     public static class DukeNoDescriptionFoundException extends DukeException {
         @Override
         public String toString() {
-            return super.toString() + ": What do you want me to record? :(";
+            return super.toString() + ": What is the description? :(";
         }
     }
 

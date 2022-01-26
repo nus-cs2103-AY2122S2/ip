@@ -116,11 +116,36 @@ public class TaskList {
         this.tasks.remove(taskId - 1);
     }
 
+    /**
+     * Find all the tasks that contains a matching description.
+     *
+     * @param description of the tasks to find.
+     * @return string of tasks if found else null.
+     */
+    public String find(String description) {
+        ArrayList<Task> results = new ArrayList<>();
+
+        for (Task task : this.tasks) {
+            String text = task.getDescription();
+            String[] textArray = text.split("\\s+");
+            for (String toMatch : textArray) {
+                if (toMatch.equals(description)) {
+                    results.add(task);
+                }
+            }
+        }
+        return (results.size() == 0) ? null : formatTaskList(results);
+    }
+
     @Override
     public String toString() {
+        return formatTaskList(this.tasks);
+    }
+
+    private String formatTaskList(ArrayList<Task> tasks) {
         String str = "";
-        for (int i = 1; i <= this.tasks.size(); i++) {
-            str += i + "." + this.tasks.get(i - 1) + "\n";
+        for (int i = 1; i <= tasks.size(); i++) {
+            str += i + "." + tasks.get(i - 1) + "\n";
         }
         return str;
     }

@@ -12,7 +12,8 @@ public enum Command {
     MARK,
     UNMARK,
     ADD,
-    DELETE;
+    DELETE,
+    FIND;
 
     private static HashMap<String, Command> commands = new HashMap<>();
 
@@ -25,6 +26,7 @@ public enum Command {
         commands.put("deadline", Command.ADD);
         commands.put("event", Command.ADD);
         commands.put("delete", Command.DELETE);
+        commands.put("find", Command.FIND);
     }
 
     /**
