@@ -1,9 +1,15 @@
 package li.zhongfu.cs2103.chatbot.types;
 
+import java.io.Serializable;
+
 /**
  * Object that represents a to-do list task. Contains a name and a state.
+ * 
+ * Currently, it probably isn't possible for the state to be inconsistent e.g. after deserializing
+ * a (potentially malicious) serialized object, but keep this in mind if implementing subclasses
+ * with more advanced logic.
  */
-public abstract class Task {
+public abstract class Task implements Serializable {
     private String name;
     private boolean done = false;
     
