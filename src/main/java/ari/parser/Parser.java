@@ -89,7 +89,7 @@ public class Parser { // deals with making sense of the USER command
 
     private Command prepareMark(String arg) {
         try {
-            return new MarkCommand(Integer.valueOf(getArgument(arg)));
+            return new MarkCommand(Integer.parseInt(getArgument(arg)));
         } catch (EmptyCommandException emptyEx) {
             return new IncorrectCommand(emptyEx.getMessage());
         } catch (NumberFormatException numEx) {
@@ -99,7 +99,7 @@ public class Parser { // deals with making sense of the USER command
 
     private Command prepareUnmark(String arg) {
         try {
-            return new UnmarkCommand(Integer.valueOf(getArgument(arg)));
+            return new UnmarkCommand(Integer.parseInt(getArgument(arg)));
         } catch (EmptyCommandException emptyEx) {
             return new IncorrectCommand(emptyEx.getMessage());
         } catch (NumberFormatException numEx) {
@@ -145,7 +145,7 @@ public class Parser { // deals with making sense of the USER command
 
     private Command prepareDelete(String arg) {
         try {
-            return new DeleteCommand(Integer.valueOf(getArgument(arg)));
+            return new DeleteCommand(Integer.parseInt(getArgument(arg)));
         } catch (EmptyCommandException emptyEx) {
             return new IncorrectCommand(emptyEx.getMessage());
         } catch (NumberFormatException numEx) {
