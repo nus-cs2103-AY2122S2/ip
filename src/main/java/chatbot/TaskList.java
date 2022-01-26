@@ -146,4 +146,29 @@ public class TaskList {
         
         return reply;
     }
+
+    /**
+    * Returns the String of the reply to the user, after finding tasks
+    * that containing the input taskName String, if any were found.
+    * 
+    * @param    taskIndex    the index of the Task object to be deleted
+    * @return                the String of the reply to the user
+    * @see      Task
+    */
+    public String findTaskName(String taskName) {
+        String reply = "";
+        String listHeader = "These are the tasks that match your description Sir:";
+        String noTasksFound = "Sorry Sir, there are no tasks matching your description.";
+        Integer taskCounter = 1;
+        for (Task task : this.taskList) {
+            if (task.getTaskName().contains(taskName)) { // matching task
+                reply += "\n " + taskCounter.toString() + "." + task.toString();
+                taskCounter++;
+            }
+        }
+        if (taskCounter == 1) { // no tasks were found
+            return noTasksFound;
+        }
+        return listHeader + reply;
+    }
 }
