@@ -20,7 +20,7 @@ public class CommandParser {
             TaskList.addEvent(command, storeList);
         } else if (command.startsWith("delete")) {
             TaskList.deleteTask(command, storeList);
-        } else {
+        }  else {
             Ui.unknownCommand();
         }
     }
