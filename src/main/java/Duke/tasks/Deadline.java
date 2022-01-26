@@ -24,7 +24,6 @@ public class Deadline extends Task {
         super(description);
         this.date = super.getTaskDate(by);
         this.time = super.getTaskTime(by);
-
     }
 
     /**
