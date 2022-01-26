@@ -10,7 +10,7 @@ public class Event extends Task {
         super(description, LocalDate.parse(at));
     }
 
-    public String dateToString() {
+    private String dateToString() {
         String formattedDate = this.date.orElseThrow().format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return formattedDate;
     }

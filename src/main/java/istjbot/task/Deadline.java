@@ -6,11 +6,11 @@ import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
 
-    Deadline(String description, String by) throws DateTimeParseException {
+    public Deadline(String description, String by) throws DateTimeParseException {
         super(description, LocalDate.parse(by));
     }
 
-    public String dateToString() {
+    private String dateToString() {
         String formattedDate = this.date.orElseThrow().format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return formattedDate;
     }
