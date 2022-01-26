@@ -55,4 +55,26 @@ public class DukeListTest {
         int size = dl.getTaskList().size();
         assertEquals(0, size);
     }
+
+    @Test
+    public void findTaskTest() {
+        ArrayList<Task> taskList = new ArrayList<>();
+        taskList.add(new Todo("borrow book"));
+        taskList.add(new Todo("test"));
+        taskList.add(new Todo("bla bla"));
+        DukeList dl = new DukeList(taskList);
+        String expected = "Here are the matching tasks in your list:\n1. [T] [ ] borrow book\n";
+        assertEquals(expected, dl.find("book"));
+    }
+
+    @Test
+    public void findInvalidTaskTest() {
+        ArrayList<Task> taskList = new ArrayList<>();
+        taskList.add(new Todo("borrow book"));
+        taskList.add(new Todo("test"));
+        taskList.add(new Todo("bla bla"));
+        DukeList dl = new DukeList(taskList);
+        String expected = "No results found.";
+        assertEquals(expected, dl.find("pineapple"));
+    }
 }

@@ -114,6 +114,31 @@ public class DukeList {
                 + String.format("Now you have %d Duke.tasks in the list.", this.taskList.size());
     }
 
+    /**
+     * Find tasks that contain the keyword.
+     *
+     * @param keyword string to search for
+     * @return an array list of tasks that matches
+     */
+    public String find(String keyword) {
+        ArrayList<Task> matches = new ArrayList<>();
+        for (Task task: taskList) {
+            if (task.matches(keyword)) matches.add(task);
+        }
+
+        StringBuilder result;
+        int size = matches.size();
+        if (size == 0) {
+            result = new StringBuilder("No results found.");
+        } else {
+            result = new StringBuilder("Here are the matching tasks in your list:\n");
+            for (int i = 0; i < size; i++) {
+                result.append(String.format("%d. %s\n", i + 1, matches.get(i)));
+            }
+        }
+        return result.toString();
+    }
+
     @Override
     public String toString() {
         int size = this.taskList.size();

@@ -9,6 +9,7 @@ public class Parser {
     private static final String MARK_COMMAND = "mark";
     private static final String UNMARK_COMMAND = "unmark";
     private static final String DELETE_COMMAND = "delete";
+    private static final String FIND_COMMAND = "find";
 
     /**
      * Parse the user command.
@@ -40,6 +41,10 @@ public class Parser {
 
             case DELETE_COMMAND:
                 cmd = new DeleteCommand(getIdx(argv));
+                break;
+
+            case FIND_COMMAND:
+                cmd = new FindCommand(getKeyword(argv));
                 break;
 
             default:
@@ -84,6 +89,19 @@ public class Parser {
         if (!isNumeric(argv[1])) throw new InvalidCommandException("Invalid index");
 
         return Integer.parseInt(argv[1]);
+    }
+
+    /**
+     * Get keyword from the args.
+     *
+     * @param argv array of args
+     * @return keyword
+     * @throws InvalidCommandException keyword is invalid
+     */
+    public static String getKeyword(String[] argv) throws InvalidCommandException {
+        if (argv.length < 2) throw new InvalidCommandException("No keyword specified");
+
+        return argv[1];
     }
 
     /**
