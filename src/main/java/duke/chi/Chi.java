@@ -9,7 +9,7 @@ import duke.ui.UI;
 import java.io.IOException;
 
 /**
- * Main class for ChatBot. Composed of various component classes.
+ * Main class for ChatBot.
  */
 public class Chi {
 
@@ -25,6 +25,11 @@ public class Chi {
     /** Interprets messages sent by the user */
     private Parser parser;
 
+    /**
+     * Constructor of Chi class.
+     *
+     * @param filepath The filepath of task data saved in hard-disk.
+     */
     public Chi(String filepath) {
         this.storage = new Storage(filepath);
         this.parser = new Parser();
@@ -41,12 +46,19 @@ public class Chi {
         }
     }
 
+    /**
+     * Runs the UI component of Chat bot to start accepting and printing user input.
+     */
     public void run() {
         ui.printWelcome();
         ui.requestInput(this.taskList, this.storage, this.parser);
         ui.printGoodbye();
     }
 
+    /**
+     * Creates new Chi instance and starts running Chat bot.
+     * @param args The command line arguments supplied when program runs.
+     */
     public static void main(String[] args) {
         Chi myBot = new Chi("data/tasks.txt");
         myBot.run();
