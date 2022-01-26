@@ -27,27 +27,7 @@ public class Duke {
             } else if (command.startsWith("unmark ")) {
                 unmarkCommand(command, storeList);
             } else if (command.startsWith("deadline")) {
-                int slash = command.indexOf("/");
-                if (slash == -1 || slash <= 9) {
-                    System.out.println("Master, you wished wrongly. Remember you have to wish in this format " +
-                            "deadline task /by dateofdeadline. Please wish again");
-                    continue;
-                } else {
-                    String newtask = command.substring(9, slash - 1);
-                    if (newtask.equals("")) {
-                        System.out.println("Master, you wished wrongly. Remember you have to wish in this format " +
-                                "deadline task /by dateofdeadline. Please wish again");
-                        continue;
-                    } else {
-                        String endtime = command.substring(slash + 1);
-                        Deadline d = new Deadline(newtask, endtime);
-                        storeList.add(d);
-                        System.out.println("Added to my brain master:");
-                        System.out.println(d.toString());
-                        System.out.println("Currently I have " + storeList.size() + " things in my brain");
-                    }
-                }
-
+                addDeadline(command, storeList);
             } else if (command.startsWith("todo")) {
                 if (command.length() < 5) {
                     System.out.println("Master, I have all the knowledge in the world but I do not know what you want to do," +
@@ -101,6 +81,27 @@ public class Duke {
         }
         sc.close();
 
+    }
+
+    public static void addDeadline(String command, ArrayList<Task> storeList) {
+        int slash = command.indexOf("/");
+        if (slash == -1 || slash <= 9) {
+            System.out.println("Master, you wished wrongly. Remember you have to wish in this format " +
+                    "deadline task /by dateofdeadline. Please wish again");
+        } else {
+            String newtask = command.substring(9, slash - 1);
+            if (newtask.equals("")) {
+                System.out.println("Master, you wished wrongly. Remember you have to wish in this format " +
+                        "deadline task /by dateofdeadline. Please wish again");
+            } else {
+                String endtime = command.substring(slash + 1);
+                Deadline d = new Deadline(newtask, endtime);
+                storeList.add(d);
+                System.out.println("Added to my brain master:");
+                System.out.println(d.toString());
+                System.out.println("Currently I have " + storeList.size() + " things in my brain");
+            }
+        }
     }
 
     public static void unmarkCommand(String command, ArrayList<Task> storeList) {
