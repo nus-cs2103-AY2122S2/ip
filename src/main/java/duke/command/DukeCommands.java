@@ -6,11 +6,11 @@ import java.util.HashMap;
 public class DukeCommands {
 
     public enum DUKE_COMMANDS {
-        todo, deadline, event, mark, unmark, delete, list, bye, commands
+        todo, deadline, event, mark, unmark, delete, list, bye, commands, find
     }
 
     public enum DUKE_DESCRIPTION_COMMANDS {
-        todo, deadline, event, mark, unmark, delete
+        todo, deadline, event, mark, unmark, delete, find
     }
 
     public enum ADD_COMMANDS {
@@ -57,6 +57,7 @@ public class DukeCommands {
         h.put("unmark", "UNMARK_COMMAND");
         h.put("delete", "DELETE_COMMAND");
         h.put("bye", "EXIT_COMMAND");
+        h.put("find", "FIND_COMMAND");
         return h;
     }
 
