@@ -27,17 +27,23 @@ public class TaskList {
 
     public String markFinished(int num) {
         todo.get(num - 1).finished();
-        return Response.MARKDONE + "\n" +  todo.get(num - 1).toString();
+        return Response.RESPONSE_MARKDONE + "\n" +  todo.get(num - 1).toString();
     }
 
     public String unmarkFinished(int num) {
         todo.get(num - 1).notFinished();
-        return Response.MARKDONE + "\n" +  todo.get(num - 1).toString();
+        return Response.RESPONSE_MARKDONE + "\n" +  todo.get(num - 1).toString();
     }
 
     public int size() {
         return this.todo.size();
     }
 
-
+    public String toData() {
+        String txtdata = "";
+        for (int i = 0; i < todo.size(); i++) {
+            txtdata += todo.get(i).toData() + "\n";
+        }
+        return txtdata;
+    }
 }
