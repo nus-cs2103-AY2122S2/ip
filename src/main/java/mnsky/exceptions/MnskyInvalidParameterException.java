@@ -2,7 +2,7 @@ package mnsky.exceptions;
 
 public class MnskyInvalidParameterException extends MnskyException {
     /**
-     * Constructor for the class.
+     * Creates a MnskyInvalidParameterException object.
      * @param command The command that created and threw this exception.
      * @param parameterName The name of the parameter that caused this exception to be thrown.
      */

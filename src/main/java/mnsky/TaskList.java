@@ -13,7 +13,7 @@ public class TaskList {
     private ArrayList<Task> list;
 
     /**
-     * Constructor for the TaskList object. Retrieves the storage data if there are no issues with it.
+     * Creates a TaskList object. Retrieves the storage data if there are no issues with it.
      * @param ui The ui object, to be used for printing an exception.
      * @param storage The storage object, to be used for retrieving the storage data.
      */
@@ -41,7 +41,7 @@ public class TaskList {
 
     /**
      * Creates a new event (a task with an "at" parameter included) based on the parameters.
-     * @throws MnskyException Thrown if the name or the at parameter is missing.
+     * @throws MnskyException If the name or the at parameter is missing.
      * @return The new event.
      */
     public Event addEvent(String name, String at) throws MnskyException {
@@ -66,7 +66,7 @@ public class TaskList {
 
     /**
      * Creates a new deadline (a task with a "by" parameter included) based on the parameters.
-     * @throws MnskyException Thrown if the name or the by parameter is missing.
+     * @throws MnskyException If the name or the by parameter is missing.
      * @return The new deadline.
      */
     public Deadline addDeadline(String name, String by) {
@@ -94,7 +94,7 @@ public class TaskList {
      * @param command The command that called this function.
      * @param stringIndex The index in string form.
      * @return The index in integer form.
-     * @throws MnskyInvalidParameterException Thrown if the index is out of bounds or not a integer.
+     * @throws MnskyInvalidParameterException If the index is out of bounds or not an integer.
      */
     private int stringToIndex(String command, String stringIndex) throws MnskyInvalidParameterException {
         if (!stringIndex.matches("\\d+")) {
@@ -113,7 +113,7 @@ public class TaskList {
      * Marks the task corresponding to the given index parameter as done, if it exists.
      * @param stringIndex The index of the task to mark in string format.
      * @return The task that was marked.
-     * @throws MnskyInvalidParameterException Thrown if stringToIndex throws the exception.
+     * @throws MnskyInvalidParameterException If stringToIndex throws the exception.
      */
     public Task mark(String stringIndex) throws MnskyInvalidParameterException {
         int index = this.stringToIndex("mark", stringIndex);
@@ -125,7 +125,7 @@ public class TaskList {
      * Unmarks the task corresponding to the given index parameter so it is not done, if it exists.
      * @param stringIndex The index of the task to unmark in string format.
      * @return The task that was unmarked.
-     * @throws MnskyInvalidParameterException Thrown if stringToIndex throws the exception.
+     * @throws MnskyInvalidParameterException If stringToIndex throws the exception.
      */
     public Task unmark(String stringIndex) throws MnskyInvalidParameterException {
         int index = this.stringToIndex("unmark", stringIndex);
@@ -137,7 +137,7 @@ public class TaskList {
      * Deletes the task corresponding to the given index parameter, if it exists.
      * @param stringIndex The index of the task to delete in string format.
      * @return The task that was deleted.
-     * @throws MnskyInvalidParameterException Thrown if stringToIndex throws the exception.
+     * @throws MnskyInvalidParameterException If stringToIndex throws the exception.
      */
     public Task delete(String stringIndex) throws MnskyInvalidParameterException  {
         int index = this.stringToIndex("delete", stringIndex);
@@ -175,7 +175,7 @@ public class TaskList {
     /**
      * Adds all the task in the storage data to the task list.
      * @param storage The storage object.
-     * @throws MnskyException Thrown if there are any issues with converting the parsed storage data into tasks.
+     * @throws MnskyException If there are any issues with converting the parsed storage data into tasks.
      */
     private void getStorageData(Storage storage) throws MnskyException {
         ArrayList<ArrayList<String>> taskList = Parser.parseStorageData(storage.readFromDataFile());

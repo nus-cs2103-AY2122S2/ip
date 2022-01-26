@@ -52,23 +52,43 @@ public class Ui {
         System.out.println("[MNSKY has shut itself down]");
     }
 
+    /**
+     * Prints out the exception messages.
+     * @param e The exception to be printed out.
+     */
     public void printException(MnskyException e) {
         this.printMnsky("..?");
         System.out.println(e.getMessage());
     }
 
+    /**
+     * Prints out the string representation of the task.
+     * @param task The task to be printed out.
+     */
     public void printTask(Task task) {
         System.out.println(task.toString());
     }
 
+    /**
+     * Prints out the message for adding a new task to the list.
+     * @param task The new task that was added.
+     */
     public void printAddedTask(Task task) {
         System.out.printf("[MNSKY added task %s to their list]\n", task.getName());
     }
 
+    /**
+     * Prints out the message for deleting a task to the list.
+     * @param task The task that was deleted.
+     */
     public void printDeletedTask(Task task) {
-        System.out.printf("[MNSKY has deleted the task %s from the list.]\n", task.getName());
+        System.out.printf("[MNSKY deleted the task %s from the list.]\n", task.getName());
     }
 
+    /**
+     * Prints out the string representation of the whole task list.
+     * @param taskList The task list.
+     */
     public void printList(TaskList taskList) {
         System.out.print(taskList.toString());
     }

@@ -15,6 +15,10 @@ import java.util.Scanner;
 public class Storage {
     private String dataFilePath;
 
+    /**
+     * Creates a Storage object.
+     * @param dataFilePath The path of the file that stores the storage data.
+     */
     public Storage(String dataFilePath) {
         this.dataFilePath = dataFilePath;
     }
@@ -29,6 +33,8 @@ public class Storage {
 
     /**
      * Saves the current state of the list to the data file.
+     * @param taskList The task list.
+     * @throws MnskyException if an IOException occurs even after trying to create the data folder.
      */
     public void writeToDataFile(TaskList taskList) throws MnskyException {
         FileWriter fileWriter;
@@ -45,8 +51,8 @@ public class Storage {
             BufferedWriter bufferedWriter  = new BufferedWriter(fileWriter);
             ArrayList<Task> list = taskList.getTaskList();
 
-            for (int i = 0; i < list.size(); i++) {
-                bufferedWriter.write(list.get(i).getSaveData());
+            for (Task task : list) {
+                bufferedWriter.write(task.getSaveData());
                 bufferedWriter.newLine();
             }
 
@@ -58,9 +64,9 @@ public class Storage {
     }
 
     /**
-     * Retrieves all the tasks from the data file
-     * @return A list of all the tasks from the data file in its raw string format,
-     *  or an empty list if an error occurred.
+     *  Retrieves all the tasks from the data file.
+     * @return A list of all the tasks from the data file in its raw string format.
+     * @throws MnskyException If a FileNotFoundException occured.
      */
     public ArrayList<String> readFromDataFile() throws MnskyException {
         try {

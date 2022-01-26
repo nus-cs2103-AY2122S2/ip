@@ -9,6 +9,13 @@ public class Event extends Task {
     private LocalDate atDate;
     private LocalTime atTime;
 
+    /**
+     * Creates an event object.
+     * @param taskName The name of the event.
+     * @param at When the event will happen.
+     * @param atDate The date the event will happen, can be null if it doesn't exist.
+     * @param atTime The time the event will happen, can be null if it doesn't exist.
+     */
     public Event(String taskName, String at, LocalDate atDate, LocalTime atTime) {
         super(taskName);
         this.at = at;
@@ -16,6 +23,11 @@ public class Event extends Task {
         this.atTime = atTime;
     }
 
+    /**
+     * Overrides the string representation of the task to the [E] and then the generic task name.
+     * Uses the date and time representation of the at parameter if it exists.
+     * @return The overriden string representation of the task.
+     */
     @Override
     public String toString() {
         String genericTaskname = super.getGenericTaskName();
@@ -44,6 +56,10 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns the string representation to be used for the storage data.
+     * @return The string representation to be used for the storage data.
+     */
     @Override
     public String getSaveData() {
         return String.format("[E]%s /at %s", super.getGenericTaskName(), at);

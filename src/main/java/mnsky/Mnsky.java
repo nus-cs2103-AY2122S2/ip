@@ -11,7 +11,7 @@ public class Mnsky {
     private Storage storage;
 
     /**
-     * Constructor for the Mnsky object.
+     * Creates a UI object.
      */
     public Mnsky() {
         this.ui = new Ui();
@@ -20,6 +20,11 @@ public class Mnsky {
         this.ui.greeting();
     }
 
+    /**
+     * Returns whether or not command passed in the argument is a command that writes to the task list.
+     * @param searchedCommand The command to be checked.
+     * @return True if the command writes to the task list, or false otherwise.
+     */
     private boolean isWriteCommand(String searchedCommand) {
         String[] writeCommands = {"mark", "unmark", "todo", "event", "deadline", "delete"};
 
@@ -32,6 +37,10 @@ public class Mnsky {
         return false;
     }
 
+    /**
+     * Runs the main loop of Mnsky, including retrieving, parsing, and processing user input.
+     * @return False is the user input the command bye, or true otherwise.
+     */
     public boolean run() {
         String input = this.ui.getInput();
         ArrayList<String> parsedInput = Parser.parseInput(input);

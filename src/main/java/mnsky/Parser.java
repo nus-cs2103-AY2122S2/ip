@@ -13,7 +13,7 @@ public class Parser {
      * @param command The name of the command that called this function.
      * @param inputSplit The input, split into an array using space.
      * @return The value of the index parameter.
-     * @throws MnskyMissingParameterException Thrown if the index parameter is missing..
+     * @throws MnskyMissingParameterException If the index parameter is missing.
      */
     private static String retrieveIndex(String command, String[] inputSplit) throws MnskyMissingParameterException {
         if (inputSplit.length < 2) {
@@ -26,7 +26,7 @@ public class Parser {
     /**
      * Creates a new task by parsing the input.
      * @param input The input string.
-     * @throws MnskyMissingParameterException Thrown if the name parameter is missing.
+     * @throws MnskyMissingParameterException If the name parameter is missing.
      * @return The new task.
      */
     private static ArrayList<String> parseTask(String input) throws MnskyMissingParameterException {
@@ -69,7 +69,7 @@ public class Parser {
     /**
      * Creates a new event (a task with an "at" parameter included) by parsing the input.
      * @param inputSplit The input, split into an array using space.
-     * @throws MnskyMissingParameterException Thrown if the name or the at parameter is missing.
+     * @throws MnskyMissingParameterException If the name or the at parameter is missing.
      * @return The new event.
      */
     private static ArrayList<String> parseEvent(String[] inputSplit) throws MnskyMissingParameterException {
@@ -96,9 +96,9 @@ public class Parser {
 
     /**
      * Parses all the tasks in the storage data.
-     * @param rawTaskList
-     * @return
-     * @throws MnskyException
+     * @param rawTaskList The raw strings of the task list from the storage data.
+     * @return A parsed version of the strings of the task list from the storage data.
+     * @throws MnskyException If an exception occurs with parsing the raw task list.
      */
     public static ArrayList<ArrayList<String>> parseStorageData(ArrayList<String> rawTaskList) throws MnskyException {
         try {
@@ -126,7 +126,7 @@ public class Parser {
             }
 
             return taskList;
-        } catch (MnskyException e) {
+        } catch (MnskyMissingParameterException e) {
             throw new MnskyException("[MNSKY is having trouble remembering the previous task list...]\n");
         }
     }
