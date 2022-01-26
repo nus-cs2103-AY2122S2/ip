@@ -8,19 +8,14 @@ import java.util.Scanner;
 /**
  * @author Pun Hui Min
  */
-enum Commands {
-    BYE,
-    HELP,
-    LIST,
-    EVENT,
-    DEADLINE,
-    TODO,
-    DELETE
-}
+
 
 public class Duke {
 
     protected ArrayList<Task> tasks;
+    static final String NO_DESC = "Oops! \\(@.@)/ You have not keyed in a description for the task!\n" +
+            "Let's try again ~(^.^)~\n" +
+            "Type 'help' if you need to know how to use this command";
 
     public Duke() {
         this.tasks = new ArrayList<Task>();
@@ -99,9 +94,7 @@ public class Duke {
      */
     public void addTodo(String description) throws DukeException {
         if (description.length() == 0) {
-            throw new DukeException("Oops! \\(@.@)/ You have not keyed in a description for the task!\n" +
-                    "Let's try again ~(^.^)~\n" +
-                    "Type 'help' if you need to know how to use this command");
+            throw new DukeException(NO_DESC);
         } else {
             Todo entry = new Todo(description);
             this.tasks.add(entry);
@@ -120,9 +113,7 @@ public class Duke {
      */
     public void addDeadline(String description, String time) throws DukeException {
         if (description.length() == 0) {
-            throw new DukeException("Oops! \\(@.@)/ You have not keyed in a description for the task!\n" +
-                    "Let's try again ~(^.^)~\n" +
-                    "Type 'help' if you need to know how to use this command");
+            throw new DukeException(NO_DESC);
         }
         if (time.length() == 0) {
             throw new DukeException("Oops! \\(@.@)/ You have not keyed in a due date for the task!\n" +
@@ -146,9 +137,7 @@ public class Duke {
      */
     public void addEvent(String description, String time) throws DukeException {
         if (description.length() == 0) {
-            throw new DukeException("Oops! \\(@.@)/ You have not keyed in a description for the task!\n" +
-                    "Let's try again ~(^.^)~\n" +
-                    "Type 'help' if you need to know how to use this command");
+            throw new DukeException(NO_DESC);
         } else {
             Event entry = new Event(description, time);
             this.tasks.add(entry);
@@ -200,21 +189,27 @@ public class Duke {
      * @param ducky Takes in a Duke instance.
      * @param myObj Takes in a Scanner object.
      * @throws DukeException when the specified ID number is not in the list, if the time is not provided accurately,
-     * or if there was no description or command provided.
+     *                       or if there was no description or command provided.
      */
+
     public void check(Duke ducky, Scanner myObj) throws DukeException {
         String response = myObj.nextLine();
         String[] textEntered = response.split(" ", 2);
         String command = textEntered[0];
+        Checker state = new Checker(command);
 
-        if (command.equals("bye")) {
+        switch (state.getStatus()) {
+        case BYE:
             ducky.printBye();
             System.exit(1);
-        } else if (command.equals("help")) {
+            break;
+        case HELP:
             ducky.help();
-        } else if (command.equals("list")) {
+            break;
+        case LIST:
             ducky.printTasks();
-        } else if (command.equals("delete")) {
+            break;
+        case DELETE:
             try {
                 String id = textEntered[1];
                 ducky.deleteTask(id);
@@ -223,16 +218,16 @@ public class Duke {
                         "Let's try again ~(^.^)~\n" +
                         "Type 'help' if you need to know how to use this command");
             }
-        } else if (command.equals("todo")) {
+            break;
+        case TODO:
             try {
                 String description = textEntered[1];
                 ducky.addTodo(description);
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Oops! \\(@.@)/ You have not keyed in a description for the task!\n" +
-                        "Let's try again ~(^.^)~\n" +
-                        "Type 'help' if you need to know how to use this command");
+                throw new DukeException (NO_DESC);
             }
-        } else if (command.equals("deadline")) {
+            break;
+        case DEADLINE:
             try {
                 String text = textEntered[1];
                 String[] textArr = text.split("/by ");
@@ -245,15 +240,14 @@ public class Duke {
                 date.parse(time);
                 ducky.addDeadline(description, time);
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Oops! \\(@.@)/ You have not keyed in a description for the task!\n" +
-                        "Let's try again ~(^.^)~\n" +
-                        "Type 'help' if you need to know how to use this command");
+                throw new DukeException(NO_DESC);
             } catch (ParseException e) {
-                System.out.println("Oops, please put a valid time format!\n" +
+                throw new DukeException("Oops, please put a valid time format!\n" +
                         "Let's try again ~(^.^)~\n" +
                         "Type 'help' if you need to know how to use this command");
             }
-        } else if (command.equals("event")) {
+            break;
+        case EVENT:
             try {
                 String text = textEntered[1];
                 String[] textArr = text.split("/at ");
@@ -266,23 +260,21 @@ public class Duke {
                 date.parse(time);
                 ducky.addEvent(description, time);
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Oops! \\(@.@)/ You have not keyed in a description for the task!\n" +
-                        "Let's try again ~(^.^)~\n" +
-                        "Type 'help' if you need to know how to use this command");
+                System.out.println(NO_DESC);
             } catch (ParseException e) {
                 System.out.println("Oops, please put a valid time format!\n" +
                         "Let's try again ~(^.^)~\n" +
                         "Type 'help' if you need to know how to use this command");
             }
-        } else if (command.equals("unmark")) {
+            break;
+        case UNMARK:
             String strID = textEntered[1];
             ducky.unmarkItem(strID);
-        } else if (command.equals("mark")) {
-            String strID = textEntered[1];
-            ducky.markItem(strID);
-        } else {
-            throw new DukeException("Sorry, I did not catch that! \\(T.T)/\n" +
-                    "Please type 'help' to see all commands I can help with.");
+            break;
+        case MARK:
+            String id = textEntered[1];
+            ducky.markItem(id);
+            break;
         }
         System.out.println("~--~~--~~--~~(~v~)~~--~~--~~--~");
     }
