@@ -1,13 +1,13 @@
 package li.zhongfu.cs2103.chatbot.types;
 
 import java.io.FileNotFoundException;
-import java.io.IOError;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 import li.zhongfu.cs2103.chatbot.exceptions.StorageException;
+import li.zhongfu.cs2103.chatbot.types.tasks.Task;
 
 public class TaskList {
     private static Logger logger = Logger.getLogger(TaskList.class.getName());
