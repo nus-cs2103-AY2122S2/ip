@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Represents a Task that the user wants to keep track of
+ * Represents a Task that the user wants to keep track of.
  */
 public class Task {
     protected String taskName;
@@ -20,6 +20,10 @@ public class Task {
     Task(String taskName, boolean isDone) {
         this.taskName = taskName;
         this.isDone = isDone;
+    }
+
+    public String toFileString() {
+        return String.format("%s,%s,%s,", "Task", this.isDone, this.taskName);
     }
 
     public String getTaskName() {

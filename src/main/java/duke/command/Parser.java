@@ -103,13 +103,13 @@ public class Parser {
 
     /**
      * Validates a given String and argument list based on the given action and task list.
-     * A DukeException is thrown when the String or argument do not fit the corresponding action and task list provided <br>
+     * A DukeException is thrown when the String or argument do not fit the corresponding action and task list provided. <br>
      * <br>
      *
-     * @param inputString The string to be checked
-     * @param action The type action to be checked with
-     * @param args: The argument list to be checked
-     * @param taskList: The list of task to be checked with
+     * @param inputString The string to be checked.
+     * @param action The type action to be checked with.
+     * @param args: The argument list to be checked.
+     * @param taskList: The list of task to be checked with.
      */
 
     public void validate(String inputString, String action, String[] args, TaskList taskList) throws DukeException {

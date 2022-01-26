@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * A basic task to track its completion status
+ * A basic task to track its completion status.
  */
 public class ToDoTask extends Task{
     public ToDoTask(String taskName) {
@@ -12,6 +12,10 @@ public class ToDoTask extends Task{
     public ToDoTask(String taskName, boolean isDone) {
         this.taskName = taskName;
         this.isDone = isDone;
+    }
+
+    public String toFileString() {
+        return String.format("%s,%s,%s,", "T", this.isDone, this.taskName);
     }
 
     @Override

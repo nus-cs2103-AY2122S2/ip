@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
- * Container class to hold a list of tasks
+ * Container class to hold a list of tasks.
  */
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -20,16 +20,16 @@ public class TaskList {
     }
 
     /**
-     * Returns the list of tasks that matches the specified date <br>
+     * Returns the list of tasks that matches the specified date. <br>
      * by performing date comparison based on the specified type.<br><br>
      *
      * comparisonType is defined as follows:
-     * <li>0 : Tasks happening on the specified date </li>
-     * <li>1 : Tasks happening before the specified date</li>
-     * <li>2 : Tasks happening after the specified date</li>
+     * <li>0 : Tasks happening on the specified date. </li>
+     * <li>1 : Tasks happening before the specified date.</li>
+     * <li>2 : Tasks happening after the specified date.</li>
      *
-     * @param date The date that is to be compared with
-     * @param comparisonType The type of comparison to be performed
+     * @param date The date that is to be compared with.
+     * @param comparisonType The type of comparison to be performed.
      * @return A list of tasks that matches the specified date and comparisonType.
      */
     public ArrayList<Task> getTasksBasedOnDate(LocalDate date, int comparisonType) {
@@ -58,9 +58,9 @@ public class TaskList {
     }
 
     /**
-     * Returns the Task that is located at the highest index
+     * Returns the Task that is located at the highest index.
      *
-     * @return Task located at last index
+     * @return Task located at last index.
      */
     public Task getLast() {
         return tasks.get(tasks.size() - 1);
@@ -71,7 +71,7 @@ public class TaskList {
     }
 
     /**
-     * Creates a Task object as specified and adds it into the list of tasks
+     * Creates a Task object as specified and adds it into the list of tasks.
      * by performing date comparison based on the specified type.<br><br>
      *
      * taskType is defined as follows:
@@ -79,10 +79,10 @@ public class TaskList {
      * <li>1 : DeadlineTask</li>
      * <li>2 : EventTask</li>
      *
-     * @param taskName The name of the Task to be added
-     * @param isMarked If the Task that is being added is marked
-     * @param date The date of the Task (null for TodoTask)
-     * @param isMarked The type task to be added
+     * @param taskName The name of the Task to be added.
+     * @param isMarked If the Task that is being added is marked.
+     * @param date The date of the Task (null for TodoTask).
+     * @param isMarked The type task to be added.
      */
     public void addTask(String taskName, boolean isMarked, LocalDate date, int taskType) {
         switch (taskType) {

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * A task that is happening on the specified date
+ * A task that is happening on the specified date.
  */
 public class EventTask extends Task{
     private LocalDate d;
@@ -20,6 +20,12 @@ public class EventTask extends Task{
         this.d = date;
     }
 
+    public String toFileString() {
+        return String.format("%s,%s,%s,%s",
+                'E',
+                this.isDone,
+                this.taskName, this.d.format(DateTimeFormatter.ofPattern("dd/M/yyyy")));
+    }
 
     public LocalDate getDate() {
         return this.d;

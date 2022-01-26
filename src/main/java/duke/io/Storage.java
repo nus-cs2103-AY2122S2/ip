@@ -15,16 +15,16 @@ import duke.task.*;
 public class Storage {
     /**
      * Saves the content of the provided Task ArrayList into the file specified. <br>
-     * Tasks are delimited by ';' <br>
+     * Tasks are delimited by ';'. <br>
      * Tasks fields are delimited by ',', in the following format: <br>
-     * <pre> TodoTask Task: T ,Task Done Status ,Task Name </pre?>
-     * <pre> DeadlineTask Task: D, Task Done Status ,Task Name, Task Deadline Date </pre?>
-     * <pre> EventTask: E ,Task Done Status ,Task Name, Task Event Date <br> </pre?>
+     * <pre> TodoTask Task: T ,Task Done Status ,Task Name. </pre?>
+     * <pre> DeadlineTask Task: D, Task Done Status ,Task Name, Task Deadline Date. </pre?>
+     * <pre> EventTask: E ,Task Done Status ,Task Name, Task Event Date. <br> </pre?>
      *
-     * @param folderName folder name to create the save file
-     * @param fileName name of save file
-     * @param arr list of tasks to be saved
-     * @return 0: save success, -1: error encountered
+     * @param folderName folder name to create the save file.
+     * @param fileName name of save file.
+     * @param arr list of tasks to be saved.
+     * @return 0: save success, -1: error encountered.
      */
     public static int saveFile(String folderName, String fileName, ArrayList<Task> arr) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy");
@@ -66,11 +66,11 @@ public class Storage {
     }
 
     /**
-     * Loads the content from the file specified into the specified TaskList
+     * Loads the content from the file specified into the specified TaskList.
      *
-     * @param filePath path of the file to be read
-     * @param tl TaskList to be updated
-     * @return 0: load success, -1: error encountered
+     * @param filePath path of the file to be read.
+     * @param tl TaskList to be updated.
+     * @return 0: load success, -1: error encountered.
      */
     public static int loadFile(String filePath, TaskList tl) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy");
