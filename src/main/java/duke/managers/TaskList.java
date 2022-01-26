@@ -119,6 +119,27 @@ public class TaskList {
     }
 
     /**
+     * Prints out all of users tasks based on a matching String criteria
+     */
+    public void printUserTasks(String userFindTask) {
+        int numberOfTasks = this.userTaskList.size();
+        if (numberOfTasks == 0){
+            ui.print("You currently do not have any outstanding tasks! Great job! :D");
+        } else {
+            ui.println("Here are your tasks that satisfy your criteria:");
+            int secondaryCounter = 1;
+            for (int i = 1; i <= numberOfTasks; i++) {
+                Task userTask = this.userTaskList.get(i - 1);
+                if (userTask.getTaskDescription().matches("^.*" + userFindTask + ".*$")) {
+                    ui.println((String.valueOf(secondaryCounter) + ": " + userTask));
+                    secondaryCounter++;
+                }
+            }
+            ui.print("");
+        }
+    }
+
+    /**
      * Marks tasks as done as specified by the task index
      *
      * @param taskIndex exact task index to be marked
