@@ -1,3 +1,5 @@
+package duke.task;
+
 public abstract class Task {
     String activity;
     int status;
@@ -16,7 +18,5 @@ public abstract class Task {
     }
 
     public abstract String printTask();
-
-    public abstract String isTask();
 
 }

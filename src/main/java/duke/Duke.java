@@ -1,12 +1,18 @@
+package duke;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Parser;
+import duke.util.Ui;
+import duke.command.Command;
 
 public class Duke {
 
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
-    private Parser parser;
+    private final Storage storage;
+    private final TaskList tasks;
+    private final Ui ui;
+    private final Parser parser;
 
-    private Duke(String filepath) {
+    public Duke(String filepath) {
         this.ui = new Ui();
         this.storage = new Storage(filepath);
         this.tasks = new TaskList(storage.load());
@@ -25,8 +31,4 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-        Duke chatBot = new Duke("data/data.txt");
-        chatBot.run();
-    }
 }

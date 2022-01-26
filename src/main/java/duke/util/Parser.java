@@ -1,13 +1,26 @@
+package duke.util;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeParseException;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.command.Command;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.AddCommand;
+import duke.command.InvalidCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
+import duke.command.DeleteCommand;
 
 public class Parser {
     private static final SimpleDateFormat taskFormat = new SimpleDateFormat("MMM dd yyyy");
     private static final SimpleDateFormat savedFormat = new SimpleDateFormat("yyyy-MM-dd");
-    private static final ExitCommand EXIT_COMMAND = new ExitCommand();
-    private  static final ListCommand LIST = new ListCommand();
-    private  static final InvalidCommand INVALID_COMMAND = new InvalidCommand();
+    private static final Command EXIT_COMMAND = new ExitCommand();
+    private  static final Command LIST = new ListCommand();
+    private  static final Command INVALID_COMMAND = new InvalidCommand();
 
     public Parser(){}
 
@@ -77,7 +90,6 @@ public class Parser {
                 break;
             case "deadline":
                 String[] tempStr = splitStr[1].split(" /by ");
-                task = null;
                 try {
                     task = new Deadline(tempStr[0], tempStr[1]);
                 } catch (DateTimeParseException e) {

@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Todo extends Task {
 
     public Todo(String activity) {
@@ -18,8 +20,4 @@ public class Todo extends Task {
         return type + "|" + status + "|" + activity + "|\n";
     }
 
-    @Override
-    public String isTask() {
-        return "TODO";
-    }
 }

@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Event extends Task {
     String at;
     public Event(String activity, String at) {
@@ -19,8 +21,4 @@ public class Event extends Task {
         return type + "|" + status + "|" + activity + "|" + at + "|\n";
     }
 
-    @Override
-    public String isTask() {
-        return "EVENT";
-    }
 }
