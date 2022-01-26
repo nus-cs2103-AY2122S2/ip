@@ -171,7 +171,10 @@ public class Duke {
                             + "    2. todo [arg]\n"
                             + "    3. deadline [arg] /by [arg]\n"
                             + "    4. event [arg] /at [arg]\n"
-                            + "    5. bye\n"
+                            + "    5. mark [arg]"
+                            + "    6. unmark [arg]"
+                            + "    7. delete [arg]"
+                            + "    7. bye\n"
                             + "_______________________________________________________\n";
                     System.out.println(err);
                     break;
