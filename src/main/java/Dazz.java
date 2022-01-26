@@ -1,32 +1,33 @@
 import java.util.Scanner;
 
 public class Dazz {
-    private final Design design;
-    private final Logic logic;
-    private final Storage storage;
+    private Storage storage;
+    private final Ui ui;
+    private final Parser logic;
 
-    public Dazz(Reminder reminder) {
-        this.design = new Design();
-        this.logic = new Logic(reminder);
+
+    public Dazz(TaskList taskList) {
+        this.ui = new Ui();
+        this.logic = new Parser(taskList);
         this.storage = new Storage();
     }
 
     public static void main(String[] args) {
-        Reminder reminder = new Reminder();
-        Dazz dazz = new Dazz(reminder);
+        TaskList taskList = new TaskList();
+        Dazz dazz = new Dazz(taskList);
         Scanner scanner = new Scanner(System.in);
-        dazz.design.startUp();
-        dazz.storage.loadList(reminder);
+        dazz.ui.startUp();
+        dazz.storage.loadList(taskList);
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
-            System.out.println(Design.HORIZONTAL_LINE);
+            System.out.println(Ui.HORIZONTAL_LINE);
             dazz.logic.run(input);
-            System.out.println(Design.HORIZONTAL_LINE);
+            System.out.println(Ui.HORIZONTAL_LINE);
             if (input.startsWith("bye")) {
                 break;
             }
         }
-        dazz.storage.updateList(reminder);
+        dazz.storage.updateList(taskList);
         scanner.close();
     }
 }

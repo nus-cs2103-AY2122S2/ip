@@ -46,12 +46,12 @@ public class Storage {
         return task;
     }
 
-    public void loadList(Reminder reminder) {
+    public void loadList(TaskList taskList) {
         try {
             Scanner s = new Scanner(this.file);
             while (s.hasNext()) {
                 Task task = parseInput(s.nextLine());
-                reminder.add(task, false);
+                taskList.add(task, false);
             }
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
@@ -65,11 +65,11 @@ public class Storage {
                 task.getDescription() + separator + task.getDate();
     }
 
-    public void updateList(Reminder reminder)  {
+    public void updateList(TaskList taskList)  {
             try {
                 String filePath = file.getPath();
                 FileWriter fw = new FileWriter(filePath);
-                List<Task> list = reminder.getReminders();
+                List<Task> list = taskList.getReminders();
                 for (Task task : list) {
                     String textToAdd = processTaskToOutput(task);
                     fw.write(textToAdd + System.lineSeparator());

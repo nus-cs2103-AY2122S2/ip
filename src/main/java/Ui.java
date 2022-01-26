@@ -1,4 +1,4 @@
-public class Design {
+public class Ui {
     public static final String HORIZONTAL_LINE = "\t____________________________________________________________";
     public static final String LOGO = "\t  ____       _       _____   _____\n" +
             "\t |  _\"\\  U  /\"\\  u  |\"_  / u |\"_  / u\n" +

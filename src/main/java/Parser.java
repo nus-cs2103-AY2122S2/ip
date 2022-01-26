@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Logic {
-    private final Reminder reminder;
+public class Parser {
+    private final TaskList taskList;
     private static final String[] VALID_COMMAND =
             {"bye", "date", "deadline", "delete", "event",
                     "list", "mark", "unmark", "todo"};
 
-    public Logic(Reminder reminder) {
-        this.reminder = reminder;
+    public Parser(TaskList taskList) {
+        this.taskList = taskList;
     }
 
     private void doBye() {
@@ -20,34 +20,34 @@ public class Logic {
     }
 
     private void doList() {
-        this.reminder.list();
+        this.taskList.list();
     }
 
     private void doMark(String description) throws InvalidTaskIndexException {
         int position = Integer.parseInt(description);
-        reminder.mark(position);
+        taskList.mark(position);
     }
 
     private void doUnmark(String description) throws InvalidTaskIndexException {
         int position = Integer.parseInt(description);
-        reminder.unmark(position);
+        taskList.unmark(position);
     }
 
     private void doDelete(String description) throws InvalidTaskIndexException {
         int position = Integer.parseInt(description);
-        reminder.delete(position, true);
+        taskList.delete(position, true);
     }
 
     private void doTodo(String description) {
-        reminder.add(new Todo(TaskType.TODO.getTaskType(), description), true);
+        taskList.add(new Todo(TaskType.TODO.getTaskType(), description), true);
     }
 
     private void doDeadline(String description, String date) {
-        reminder.add(new Deadline(TaskType.DEADLINE.getTaskType(), description, date), true);
+        taskList.add(new Deadline(TaskType.DEADLINE.getTaskType(), description, date), true);
     }
 
     private void doEvent(String description, String date) {
-        reminder.add(new Event(TaskType.EVENT.getTaskType(), description, date), true);
+        taskList.add(new Event(TaskType.EVENT.getTaskType(), description, date), true);
     }
 
     private void doDate(String description) throws IncompleteCommandException {
@@ -108,7 +108,7 @@ public class Logic {
 
     private List<Task> findSpecificTasksByDate(String description) {
         List <Task> list = new ArrayList<>();
-        for (Task task : reminder.getReminders()) {
+        for (Task task : taskList.getReminders()) {
             if (task.matchDate(description)) {
                 list.add(task);
             }
