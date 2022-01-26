@@ -17,7 +17,7 @@ public class TodoTaskTest {
         assertEquals(new TodoTask("Title 1").toOutputLine(),
                 "T | 0 | Title 1");
         assertEquals(new TodoTask("Title 2", true).toOutputLine(),
-                "D | 1 | Title 2");
+                "T | 1 | Title 2");
 
     }
 
