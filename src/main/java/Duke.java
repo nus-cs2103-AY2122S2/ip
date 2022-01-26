@@ -1,4 +1,7 @@
 import java.io.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -6,8 +9,14 @@ import java.util.Scanner;
 public class Duke {
 
     static ArrayList<Task> listOfThings = new ArrayList<>();
+    static DateFormat formatter = new SimpleDateFormat("dd/MM/yy h:mm a");
 
-    public static void main(String[] args) throws IOException {
+    //21/07/2011 10:48 AM
+
+    public static void main(String[] args) throws IOException, ParseException {
+
+
+        File dataFile = loadFile();
 
         String line = "____________________________________________________________";
         String indentation = "    ";
@@ -17,15 +26,15 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
-
         System.out.println("Hello from\n" + logo);
         System.out.println(indentation + line);
-        System.out.println(indentation + "Hello! I'm Duke\n" + indentation + "What can I do for you?");
+        System.out.println(indentation + "Hello! I'm Duke\n" + indentation + "What can I do for you?\n" + indentation + "Type /help to see the commands that I can run :)");
         System.out.println(indentation + line);
         Scanner sc = new Scanner(System.in);
         String str = " ";
+        formatter.setLenient(false);
 
-        File dataFile = loadFile();
+
 
         while(true) {
             str = sc.nextLine();
@@ -90,71 +99,75 @@ public class Duke {
                 System.out.println(indentation + "Now you have " + listOfThings.size() +" tasks in the list.");
                 System.out.println(indentation + line);
                 saveDataToFile(listOfThings);
+
             } else {
-                    if (str.contains("todo")) {
-                        try {
-                            String newString = str.substring(5).trim();
-                            if (newString.length() == 0) {
-                                throw new StringIndexOutOfBoundsException();
-                            }
-
-                            ToDos newToDo = new ToDos(newString);
-                            listOfThings.add(newToDo);
-                            System.out.println(indentation + line);
-                            System.out.println(indentation + "Got it. I've added this task:");
-                            System.out.println(indentation + "  " + newToDo.toString() + newToDo.getStatus() + " " + newToDo.getDescription());
-                            System.out.println(indentation + "Now you have " + String.valueOf(listOfThings.size()) + " tasks in the list.");
-                            System.out.println(indentation + line);
-                            appendToFile(dataFile, newToDo);
-                        } catch (StringIndexOutOfBoundsException e) {
-                            System.out.println(indentation + line);
-                            System.out.println("      OOPS!!! The description of a todo cannot be empty.");
-                            System.out.println(indentation + line);
-
+                if (str.contains("todo")) {
+                    try {
+                        String newString = str.substring(5).trim();
+                        if (newString.length() == 0) {
+                            throw new StringIndexOutOfBoundsException();
                         }
-                    } else if (str.contains("deadline")) {
-                        try {
-                            String des = str.substring(9, str.indexOf('/') - 1).trim();
-                            String date = str.substring((str.indexOf('/') + 4)).trim();
-                            Deadline newDeadline = new Deadline(des, date);
-                            listOfThings.add(newDeadline);
-                            System.out.println(indentation + line);
-                            System.out.println(indentation + "Got it. I've added this task:");
-                            System.out.println(indentation + "  " + newDeadline.toString() + newDeadline.getStatus() + " " + newDeadline.getDescription());
-                            System.out.println(indentation + "Now you have " + String.valueOf(listOfThings.size()) + " tasks in the list.");
-                            System.out.println(indentation + line);
-                            appendToFile(dataFile, newDeadline);
-                        } catch (StringIndexOutOfBoundsException e) {
-                            System.out.println(indentation + line);
-                            System.out.println("      OOPS!!! Incorrect format for entering deadlines");
-                            System.out.println(indentation + line);
-
-                        }
-                    } else if (str.contains("event")) {
-                        try {
-                            String des = str.substring(6, str.indexOf('/') - 1).trim();
-                            String date = str.substring((str.indexOf('/') + 4)).trim();
-                            Event newEvent = new Event(des, date);
-                            listOfThings.add(newEvent);
-                            //listOfThings[counter] = new Event(des, date);
-                            System.out.println(indentation + line);
-                            System.out.println(indentation + "Got it. I've added this task:");
-                            System.out.println(indentation + "  " + newEvent.toString() + newEvent.getStatus() + " " + newEvent.getDescription());
-                            System.out.println(indentation + "Now you have " + String.valueOf(listOfThings.size()) + " tasks in the list.");
-                            System.out.println(indentation + line);
-                            appendToFile(dataFile, newEvent);
-
-                        } catch (StringIndexOutOfBoundsException e) {
-                            System.out.println(indentation + line);
-                            System.out.println("      OOPS!!! Incorrect format for entering events");
-                            System.out.println(indentation + line);
-                        }
-                    } else {
+                        ToDos newToDo = new ToDos(newString);
+                        listOfThings.add(newToDo);
                         System.out.println(indentation + line);
-                        System.out.println(indentation + " OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        System.out.println(indentation + "Got it. I've added this task:");
+                        System.out.println(indentation + "  " + newToDo.toString() + newToDo.getStatus() + " " + newToDo.getDescription());
+                        System.out.println(indentation + "Now you have " + String.valueOf(listOfThings.size()) + " tasks in the list.");
+                        System.out.println(indentation + line);
+                        appendToFile(dataFile, newToDo);
+                    } catch (StringIndexOutOfBoundsException e) {
+                        System.out.println(indentation + line);
+                        System.out.println("      OOPS!!! The description of a todo cannot be empty.");
                         System.out.println(indentation + line);
 
                     }
+                } else if (str.contains("deadline")) {
+                    try {
+                        String des = str.substring(9, str.indexOf('/') - 1).trim();
+                        String date = str.substring((str.indexOf('/') + 4)).trim();
+                        Date dueDate = (Date)formatter.parse(date);
+                        Deadline newDeadline = new Deadline(des, dueDate);
+                        listOfThings.add(newDeadline);
+                        System.out.println(indentation + line);
+                        System.out.println(indentation + "Got it. I've added this task:");
+                        System.out.println(indentation + "  " + newDeadline.toString() + newDeadline.getStatus() + " " + newDeadline.getDescription());
+                        System.out.println(indentation + "Now you have " + String.valueOf(listOfThings.size()) + " tasks in the list.");
+                        System.out.println(indentation + line);
+                        appendToFile(dataFile, newDeadline);
+                    } catch (StringIndexOutOfBoundsException | ParseException e) {
+                        System.out.println(indentation + line);
+                        System.out.println("      OOPS!!! Incorrect format for entering deadlines");
+                        System.out.println(indentation + line);
+
+                    }
+                } else if (str.contains("event")) {
+                    try {
+                        String des = str.substring(6, str.indexOf('/') - 1).trim();
+                        String date = str.substring((str.indexOf('/') + 4)).trim();
+                        Date dueDate = (Date)formatter.parse(date);
+                        Event newEvent = new Event(des, dueDate);
+                        listOfThings.add(newEvent);
+                        //listOfThings[counter] = new Event(des, date);
+                        System.out.println(indentation + line);
+                        System.out.println(indentation + "Got it. I've added this task:");
+                        System.out.println(indentation + "  " + newEvent.toString() + newEvent.getStatus() + " " + newEvent.getDescription());
+                        System.out.println(indentation + "Now you have " + String.valueOf(listOfThings.size()) + " tasks in the list.");
+                        System.out.println(indentation + line);
+                        appendToFile(dataFile, newEvent);
+
+                    } catch (StringIndexOutOfBoundsException | ParseException e) {
+                        System.out.println(indentation + line);
+                        System.out.println("      OOPS!!! Incorrect format for entering events");
+                        System.out.println(indentation + line);
+                    }
+                } else if (str.contains("/help")) {
+                    runHelpCommand();
+                } else {
+                    System.out.println(indentation + line);
+                    System.out.println(indentation + " OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    System.out.println(indentation + line);
+
+                }
             }
         }
     }
@@ -163,7 +176,7 @@ public class Duke {
 
 
         String basePath = new File("").getAbsolutePath();
-        File file = new File(basePath + "/data/myfile.txt");
+        File file = new File(basePath + "/data/Duke.txt");
         FileWriter fileWriter = new FileWriter(file, false);
 
         for (Task task: taskArrayList) {
@@ -174,7 +187,7 @@ public class Duke {
         fileWriter.close();
     }
 
-    public static File loadFile() throws IOException {
+    public static File loadFile() throws IOException, ParseException {
 
 
         String basePath = new File("").getAbsolutePath();
@@ -211,20 +224,23 @@ public class Duke {
                 }
             } else if (currentLine.contains("[D]")) {
                 String date = currentLine.substring(currentLine.indexOf('(')+5, currentLine.indexOf(')'));
+                Date dueDate = (Date)formatter.parse(date);
+
                 Deadline deadline;
                 if (currentLine.charAt(4) == 'X') {
-                    deadline = new Deadline(currentLine.substring(6, currentLine.indexOf('(')-1), true, date);
+                    deadline = new Deadline(currentLine.substring(6, currentLine.indexOf('(')-1), true, dueDate);
                 } else {
-                    deadline = new Deadline(currentLine.substring(6, currentLine.indexOf('(')-1), date);
+                    deadline = new Deadline(currentLine.substring(6, currentLine.indexOf('(')-1), dueDate);
                 }
                 listOfThings.add(deadline);
             } else if (currentLine.contains("[E]")) {
                 String date = currentLine.substring(currentLine.indexOf('(')+5, currentLine.indexOf(')'));
+                Date dueDate = (Date)formatter.parse(date);
                 Event event;
                 if (currentLine.charAt(4) == 'X') {
-                    event = new Event(currentLine.substring(6, currentLine.indexOf('(')-1), true, date);
+                    event = new Event(currentLine.substring(6, currentLine.indexOf('(')-1), true, dueDate);
                 } else {
-                    event = new Event(currentLine.substring(6, currentLine.indexOf('(')-1), date);
+                    event = new Event(currentLine.substring(6, currentLine.indexOf('(')-1), dueDate);
                 }
                 listOfThings.add(event);
             }
@@ -234,15 +250,19 @@ public class Duke {
     }
 
     static void appendToFile(File file, Task task) throws IOException {
-
         FileWriter fileWriter = new FileWriter(file, true);
         String toPrint = task.toString() + task.getStatus() +  task.getDescription();
         fileWriter.write(toPrint + "\n");
         fileWriter.close();
+    }
+
+    static void runHelpCommand() {
+        System.out.println("    Hello. You can run a few commands with this machine.");
+        System.out.println("    1. Type todo to create a task at hand. (eg. todo homework today)");
+        System.out.println("    2. Type event to create an event. (eg. event Career Fair /at 26/01/2022 10:00 AM)");
+        System.out.println("    3. Type deadline to create an deadline. (eg. deadline CS2103 Assignement /by 29/01/2022 11:59 PM)");
+        System.out.println("    4. Type list to see what are the tasks on hand.");
+
 
     }
 }
-
-
-
-

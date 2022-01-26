@@ -1,13 +1,19 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 class Event extends Task {
 
-    private String date;
+    private Date date;
+    private DateFormat formatter = new SimpleDateFormat("dd/MM/yy h:mm a");
 
-    public Event(String description, String date) {
+
+    public Event(String description, Date date) {
         super(description);
         this.date = date;
     }
 
-    public Event(String description, boolean hasCompleted, String date) {
+    public Event(String description, boolean hasCompleted, Date date) {
         super(description);
         this.status = hasCompleted;
         this.date = date;
@@ -18,12 +24,9 @@ class Event extends Task {
     public String toString() {
         return "[" + Type.E + "]";
     }
-    public String getDate() {
-        return this.date;
-    }
 
     @Override
     String getDescription() {
-        return this.description + " (at: " + date + ")";
+        return this.description + " (at: " + formatter.format(date).toString() + ")";
     }
 }
