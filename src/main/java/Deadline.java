@@ -5,10 +5,12 @@ import java.time.format.FormatStyle;
 public class Deadline extends Task {
 
     protected LocalDateTime ldt;
+    public String by;
 
     public Deadline(String description, String by) {
         super(description);
         this.ldt = parseString(by);
+        this.by = by;
     }
 
     @Override
@@ -21,5 +23,9 @@ public class Deadline extends Task {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return LocalDateTime.parse(by, formatter);
 
+    }
+
+    public String storageString() {
+        return String.format("[D][%s] %s %s", this.getStatusIcon(), this.description, this.by);
     }
 }

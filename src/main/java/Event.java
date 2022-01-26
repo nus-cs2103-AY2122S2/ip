@@ -5,10 +5,12 @@ import java.time.format.FormatStyle;
 public class Event extends Task {
 
     protected LocalDateTime ldt;
+    public String at;
 
     public Event(String description, String at) {
         super(description);
         this.ldt = parseString(at);
+        this.at = at;
     }
 
     @Override
@@ -21,5 +23,9 @@ public class Event extends Task {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return LocalDateTime.parse(at, formatter);
 
+    }
+
+    public String storageString() {
+        return String.format("[E][%s] %s %s", this.getStatusIcon(), this.description, this.at);
     }
 }
