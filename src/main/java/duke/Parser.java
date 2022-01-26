@@ -3,10 +3,9 @@ package duke;
 import duke.common.Const;
 import duke.task.Task;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
-
 import java.util.regex.Pattern;
+import java.time.format.DateTimeParseException;
+import java.time.LocalDateTime;
 
 /**
  * Parser class handles and process user's inputs with commands
