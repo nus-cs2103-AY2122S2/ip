@@ -5,7 +5,7 @@ import duke.tasks.TaskList;
 import duke.tasks.Task;
 import duke.ui.Ui;
 
-public class AddCommand extends Command{
+public class AddCommand extends Command {
     protected Task task;
     private static final String MESSAGE = "Got it. I've added this task:";
 

@@ -1,4 +1,5 @@
 package duke.tasks;
+
 /**
  * Represents a generic task.
  */
@@ -11,6 +12,7 @@ public class Task {
         this.description = description;
         isDone = false;
     }
+
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;

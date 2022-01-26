@@ -2,6 +2,7 @@ package duke.storage;
 
 import duke.DukeException;
 import duke.tasks.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -10,8 +11,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    private File directory = new File("data");
-    private File file = new File("data/tasks.txt");
+    private final File directory = new File("data");
+    private final File file = new File("data/tasks.txt");
 
     public Storage() throws DukeException {
         if (!directory.exists()) {
@@ -53,14 +54,14 @@ public class Storage {
         boolean isDone = task.charAt(1) == '1';
         String[] detail = task.substring(2).split(" \\| ");
         switch (type) {
-            case 'T':
-                return new ToDo(detail[0], isDone);
-            case 'E':
-                return new Event(detail[0], detail[1], isDone);
-            case 'D':
-                return new Deadline(detail[0], detail[1], isDone);
-            default:
-                return new Task("!!Looks like something went wrong with this task.");
+        case 'T':
+            return new ToDo(detail[0], isDone);
+        case 'E':
+            return new Event(detail[0], detail[1], isDone);
+        case 'D':
+            return new Deadline(detail[0], detail[1], isDone);
+        default:
+            return new Task("!!Looks like something went wrong with this task.");
         }
     }
 }

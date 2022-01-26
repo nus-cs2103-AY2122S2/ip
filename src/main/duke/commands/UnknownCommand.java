@@ -4,7 +4,7 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
-public class UnknownCommand extends Command{
+public class UnknownCommand extends Command {
     private static final String MESSAGE = "I'm sorry, but I don't know what that means :-(";
 
     @Override

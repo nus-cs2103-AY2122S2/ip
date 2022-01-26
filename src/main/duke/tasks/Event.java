@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents an event, is a subclass of task.
  */
-public class Event extends Task{
+public class Event extends Task {
     protected LocalDateTime at;
 
     public Event(String description, LocalDateTime at) {
@@ -15,7 +15,7 @@ public class Event extends Task{
     }
 
     public Event(String description, String at, boolean isDone) {
-        super(description,isDone);
+        super(description, isDone);
         this.at = LocalDateTime.parse(at, DateTimeFormatter.ofPattern("d/M/y HHmm"));
     }
 
