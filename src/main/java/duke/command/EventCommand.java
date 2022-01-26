@@ -55,7 +55,7 @@ public class EventCommand extends TaskCommand {
             throw new DukeException(TIME_FORMAT_WRONG);
         }
 
-        newTask = new Event(false, statement, localDate, localTime);
+        newTask = new Event(statement, localDate, localTime);
         updateTaskList(newTask, taskList, storage, ui);
     }
 }

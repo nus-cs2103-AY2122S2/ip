@@ -14,11 +14,13 @@ public class Deadline extends Task {
     public Deadline() {
         super();
 
-        this.deadlineDate = LocalDate.now(); // just get default date
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
+        this.deadlineDate = LocalDate.parse("2020-12-12"); // just get default date
+        this.deadlineTime = LocalTime.parse("2359", timeFormatter);
     }
 
-    public Deadline(boolean isDone, String taskDescription, LocalDate deadlineDate, LocalTime deadlineTime) {
-        super(isDone, taskDescription);
+    public Deadline(String taskDescription, LocalDate deadlineDate, LocalTime deadlineTime) {
+        super(taskDescription);
 
         this.deadlineDate = deadlineDate;
         this.deadlineTime = deadlineTime;

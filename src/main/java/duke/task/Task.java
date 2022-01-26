@@ -17,11 +17,6 @@ public abstract class Task implements Saving, Loading {
         this.taskDescription = taskDescription;
     }
 
-    public Task(boolean isDone, String taskDescription) {
-        this.taskDescription = taskDescription;
-        this.isDone = isDone;
-    }
-
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
     }

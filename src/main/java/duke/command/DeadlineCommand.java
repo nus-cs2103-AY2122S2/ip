@@ -55,7 +55,7 @@ public class DeadlineCommand extends TaskCommand {
             throw new DukeException(TIME_FORMAT_WRONG);
         }
 
-        newTask = new Deadline(false, statement, localDate, localTime);
+        newTask = new Deadline(statement, localDate, localTime);
         updateTaskList(newTask, taskList, storage, ui);
     }
 }

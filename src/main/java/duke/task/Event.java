@@ -14,11 +14,13 @@ public class Event extends Task {
     public Event() {
         super();
 
-        this.eventDate = LocalDate.now();
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
+        this.eventDate = LocalDate.parse("2020-12-12"); // just get default date
+        this.eventTime = LocalTime.parse("2359", timeFormatter);
     }
 
-    public Event(boolean isDone, String taskDescription, LocalDate eventDate, LocalTime eventTime) {
-        super(isDone, taskDescription);
+    public Event(String taskDescription, LocalDate eventDate, LocalTime eventTime) {
+        super(taskDescription);
 
         this.eventDate = eventDate;
         this.eventTime = eventTime;
