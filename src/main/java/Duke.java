@@ -1,16 +1,16 @@
-import Task.Tasklist;
+import Task.TaskList;
 import Duke.*;
 
 public class Duke {
 
     private Storage storage;
-    private Tasklist tasks;
+    private TaskList tasks;
     private UI ui;
 
     public Duke(String filePath) throws Exception {
         ui = new UI();
         storage = new Storage(filePath);
-        tasks = new Tasklist(storage.read());
+        tasks = new TaskList(storage.read());
     }
 
     public void run() throws Exception {

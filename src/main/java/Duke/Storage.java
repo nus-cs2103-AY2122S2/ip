@@ -9,7 +9,7 @@ public class Storage {
 
     private String filePath;
 
-    public Storage(String filePath) throws IOException {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -41,13 +41,10 @@ public class Storage {
     }
 
     public void write(ArrayList<Task> list) throws Exception {
-        int n = 0;
         FileWriter fw = new FileWriter(filePath);
-        while (n < list.size()) {
+        for(int n = 0; n < list.size(); n++) {
             fw.write(list.get(n).toSave() + "\n");
-            n+=1;
         }
-        System.out.println("Updated");
         fw.close();
     }
 }

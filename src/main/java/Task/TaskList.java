@@ -3,12 +3,20 @@ package Task;
 import Duke.UI;
 import java.util.ArrayList;
 
-public class Tasklist {
+public class TaskList {
 
     private ArrayList<Task> list;
 
-    public Tasklist(ArrayList<Task> list) {
+    public TaskList(ArrayList<Task> list) {
         this.list = list;
+    }
+
+    public ArrayList<Task> getList() {
+        return this.list;
+    }
+
+    public int size() {
+        return list.size();
     }
 
     public void add(Task task, int n) {
@@ -20,32 +28,21 @@ public class Tasklist {
         UI.deleteMessage(list.remove(no).toString());
     }
 
-    public int size() {
-        return list.size();
-    }
-
-    public void printTaskList() {
-        int m = 0; // counter for list
-        UI.line();
-        while(m < list.size()) {
-            System.out.println((m+1) + "." + list.get(m).toString());
-            m+=1;
-        }
-        UI.line();
-    }
-
     public void mark(int n) {
         list.get(n).markAsDone();
         UI.printMarked(list.get(n).toString());
     }
 
-    public void unmark(int n) {
+    public void unMark(int n) {
         list.get(n).markAsUnDone();
         UI.printUnMarked(list.get(n).toString());
     }
 
-    public ArrayList<Task> getList() {
-        return this.list;
+    public void printTaskList() {
+        UI.line();
+        for(int m = 0; m < list.size(); m++) {
+            System.out.println((m + 1) + "." + list.get(m).toString());
+        }
+        UI.line();
     }
 }
-
