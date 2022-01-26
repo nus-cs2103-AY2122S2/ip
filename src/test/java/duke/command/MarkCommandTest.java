@@ -10,6 +10,7 @@ import duke.testutil.PrinterStub;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -19,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class MarkCommandTest {
     @Test
     public void testParsing_valid_success() throws DukeIllegalArgumentException {
-        Task[] taskSource = new Task[] {
+        Task[] sourceTasks = new Task[] {
                 new Todo("Test"),
                 new Event("Test", LocalDateTime.parse("2022-12-22T12:00")),
                 new Deadline("Test", LocalDateTime.parse("2022-12-22T13:00")),
@@ -28,26 +29,24 @@ public class MarkCommandTest {
                 new Event("Test", LocalDateTime.parse("2022-12-24T16:00"))
         };
         TaskList list = new TaskList();
-        for (Task task : taskSource) {
-            list.addTask(task);
-        }
+        Arrays.stream(sourceTasks).forEachOrdered(list::addTask);
 
         PrinterStub linePrinter = new PrinterStub();
 
-        assertFalse(taskSource[0].isDone());
+        assertFalse(sourceTasks[0].isDone());
         new MarkCommand("1", true).execute(linePrinter, list);
-        assertTrue(taskSource[0].isDone());
-        assertEquals("\t " + taskSource[0].getReadableString(), linePrinter.getLines().get(1));
+        assertTrue(sourceTasks[0].isDone());
+        assertEquals("\t " + sourceTasks[0].getReadableString(), linePrinter.getLines().get(1));
 
         linePrinter.clear();
         new MarkCommand("5", true).execute(linePrinter, list);
-        assertTrue(taskSource[0].isDone());
-        assertEquals("\t " + taskSource[4].getReadableString(), linePrinter.getLines().get(1));
+        assertTrue(sourceTasks[0].isDone());
+        assertEquals("\t " + sourceTasks[4].getReadableString(), linePrinter.getLines().get(1));
 
         linePrinter.clear();
         new MarkCommand("1", false).execute(linePrinter, list);
-        assertFalse(taskSource[0].isDone());
-        assertEquals("\t " + taskSource[0].getReadableString(), linePrinter.getLines().get(1));
+        assertFalse(sourceTasks[0].isDone());
+        assertEquals("\t " + sourceTasks[0].getReadableString(), linePrinter.getLines().get(1));
     }
 
     @Test

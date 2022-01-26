@@ -10,6 +10,7 @@ import duke.testutil.PrinterStub;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -17,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class UpcomingCommandTest {
     @Test
     public void testParsing_valid_success() throws DukeIllegalArgumentException {
-        Task[] taskSource = new Task[] {
+        Task[] sourceTasks = new Task[] {
                 new Todo("Test"),
                 new Event("Test", LocalDateTime.now().plusDays(2).minusSeconds(10)),
                 new Deadline("Test", LocalDateTime.now().plusDays(3).minusSeconds(10)),
@@ -26,9 +27,7 @@ public class UpcomingCommandTest {
                 new Event("Test", LocalDateTime.now().plusDays(8).minusSeconds(10))
         };
         TaskList list = new TaskList();
-        for (Task task : taskSource) {
-            list.addTask(task);
-        }
+        Arrays.stream(sourceTasks).forEachOrdered(list::addTask);
 
         PrinterStub linePrinter = new PrinterStub();
 

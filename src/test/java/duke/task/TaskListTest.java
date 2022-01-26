@@ -2,6 +2,7 @@ package duke.task;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -76,10 +77,7 @@ public class TaskListTest {
                 new TaskStub("Task"),
                 new TaskStub("Task")
         };
-
-        for (int i = 0; i < 4; i++) {
-            list.addTask(sourceTasks[i]);
-        }
+        Arrays.stream(sourceTasks).forEachOrdered(list::addTask);
 
         list.doForEach(tasks::put);
 
