@@ -76,6 +76,8 @@ public class Parser {
             return new OutputCommand(input);
         case "EXIT_COMMAND":
             return new ExitCommand();
+        case "FIND_COMMAND":
+            return new FindCommand(input);
         default:
             return null;
         }
