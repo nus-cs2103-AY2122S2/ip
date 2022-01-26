@@ -1,0 +1,3 @@
+[T][X] sleep
+[D][X] sleep (by: 10pm)
+[E][ ] sleep (at: 10pm)
