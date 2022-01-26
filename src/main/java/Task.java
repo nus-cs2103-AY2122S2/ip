@@ -19,12 +19,17 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public boolean isOn(String date) {
+        return false;
+    }
+
     public String toMemory() {
         if (isDone) {
-            return "@1@" + description;
+            return "@1@" + this.description;
+        } else {
+            return "@0@" + this.description;
         }
-        return "@0@" + description;
-    };
+    }
 
     @Override
     public String toString() {

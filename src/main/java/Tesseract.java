@@ -6,7 +6,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import java.nio.file.Files;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Tesseract {
     public static void main(String[] args) {
@@ -42,9 +43,13 @@ public class Tesseract {
 
             try {
                 checkCommand(cmdLine, taskList);
+                if (cmd.equals("event") || cmd.equals("deadline") || cmd.equals("filter")) { // currently can only date
+                    checkValidTime(cmdArr[cmdArr.length - 1]);
+                }
                 hasUpdatedMemory = true;
             } catch (TesseractException errMsg) {
                 System.out.println(errMsg);
+                System.out.println();
                 cmdLine = sc.nextLine();
                 continue;
             }
@@ -69,6 +74,14 @@ public class Tesseract {
                 taskList.get(index).markAsUndone();
                 msg = "Seems like you have successfully undone your done task \n"
                         + INDENT2 + taskList.get(index).toString() + "\n";
+            } else if (cmd.equals("filter")) { // "filter /by date YYYY-MM-DDDD"
+                String date = cmdArr[cmdArr.length - 1];
+                msg = "Here are the tasks occuring on " + formatTime(date) + ":\n";
+                for (Task task : taskList) {
+                    if (task.isOn(date)) {
+                        msg += INDENT2 + task.toString() + "\n";
+                    }
+                }
             } else {
                 Task newTask;
                 if (cmd.equals("todo")) { // _Todo
@@ -87,7 +100,7 @@ public class Tesseract {
                         if (j < cmdLen) {
                             description += cmdArr[j] + " ";
                         } else if (j > cmdLen) {
-                            time += cmdArr[j] + " ";
+                            time += cmdArr[j];
                         }
                     }
                     newTask = new Event(description, time);
@@ -105,7 +118,7 @@ public class Tesseract {
                         if (j < cmdLen) {
                             description += cmdArr[j] + " ";
                         } else if (j > cmdLen) {
-                            time += cmdArr[j] + " ";
+                            time += cmdArr[j];
                         }
                     }
                     newTask = new Deadline(description, time);
@@ -123,6 +136,7 @@ public class Tesseract {
         }
 
         System.out.println(farewellMsg);
+
         if (hasUpdatedMemory) {
             try {
                 updatedMemory(SCHEDULE_PATH, taskList);
@@ -152,7 +166,11 @@ public class Tesseract {
                     throw new TesseractException("You need to enter a valid list number mah~");
                 }
                 break;
-
+            case "filter":
+                if (cmdLen < 3 || cmdLine.indexOf("/by") < 0) {
+                    throw new TesseractException("What do you want to filter by again?");
+                }
+                break;
             case "event":
                 if (cmdLen == 1) {
                     throw new TesseractException("Nah you need to provide me with the details of this event *_*");
@@ -175,6 +193,27 @@ public class Tesseract {
             default:
                 throw new TesseractException("Hey bro, not sure if this command is valid eh #_#");
         }
+    }
+
+    public static void checkValidTime(String time) throws TesseractException {
+        if (time.length() != 10) { // check if the string is of length 10
+            throw new TesseractException("Please enter date in the YYYY-MM-DD format~");
+        } else {
+            try {
+
+                String[] ints = time.split("-", 3);
+                for (String integer : ints) {
+                    Integer.parseInt(integer);
+                }
+            } catch (NumberFormatException e) {
+                throw new TesseractException("Please enter date in the YYYY-MM-DD format~");
+            }
+        }
+    }
+
+    public static String formatTime(String time) { // format "yyyy-mm-dd" to "MMM d yyyy"
+        LocalDate date = LocalDate.parse(time);
+        return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     // check if a command is valid

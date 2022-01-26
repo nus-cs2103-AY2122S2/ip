@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Event extends Task {
     protected String at;
 
@@ -12,7 +14,14 @@ public class Event extends Task {
     }
 
     @Override
+    public boolean isOn(String date) {
+        LocalDate time = LocalDate.parse(date);
+        LocalDate deadline = LocalDate.parse(this.at);
+        return time.equals(deadline);
+    }
+
+    @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.at + ")";
+        return "[E]" + super.toString() + " (at: " + Tesseract.formatTime(this.at) + ")";
     }
 }
