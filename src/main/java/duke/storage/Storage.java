@@ -1,3 +1,9 @@
+package duke.storage;
+
+import duke.DukeException;
+import duke.parser.Parser;
+import duke.task.*;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -17,7 +23,7 @@ public class Storage {
     public Storage(String fileName) throws DukeException {
         path = Paths.get(DEFAULT_STORAGE_DIRECTORY + fileName);
         if (isValidPath(path)) {
-            throw new DukeException("Storage file should end with '.txt'");
+            throw new DukeException("duke.storage.Storage file should end with '.txt'");
         }
     }
 

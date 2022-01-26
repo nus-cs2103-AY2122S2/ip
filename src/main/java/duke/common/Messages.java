@@ -1,3 +1,5 @@
+package duke.common;
+
 public class Messages {
     public static final String MESSAGE_WELCOME = "HELLO! WELCOME!";
     public static final String MESSAGE_GOOD_BYE = "Bye. Hope to see you again soon!";

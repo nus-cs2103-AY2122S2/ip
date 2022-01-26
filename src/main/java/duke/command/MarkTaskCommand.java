@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.common.Messages;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.TextUi;
+
 public class MarkTaskCommand extends Command {
     private static final boolean IS_EXIT = false;
     private final boolean isDone;
@@ -10,7 +18,7 @@ public class MarkTaskCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, TextUi ui, Storage storage) {
         try {
             tasks.markTask(taskId, isDone);
             String message;

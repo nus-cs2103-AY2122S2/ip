@@ -1,11 +1,19 @@
+package duke;
+
+import duke.command.Command;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.TextUi;
+
 public class Duke {
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private TextUi ui;
 
     public Duke(String fileName) {
         try {
-            ui = new Ui();
+            ui = new TextUi();
             storage = new Storage(fileName);
             tasks = new TaskList(storage.loadALlTasks());
         } catch (DukeException e) {

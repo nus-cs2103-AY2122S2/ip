@@ -1,8 +1,13 @@
+package duke.ui;
+
+import duke.common.Messages;
+import duke.parser.Parser;
+
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-public class Ui {
+public class TextUi {
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -14,11 +19,11 @@ public class Ui {
     private final Scanner in;
     private final PrintStream out;
 
-    public Ui() {
+    public TextUi() {
         this(System.in, System.out);
     }
 
-    public Ui(InputStream in, PrintStream out) {
+    public TextUi(InputStream in, PrintStream out) {
         this.in = new Scanner(in);
         this.out = out;
     }
@@ -52,7 +57,7 @@ public class Ui {
     }
 
     public void showLoadingError(String message) {
-        showToUser("Error loading Duke: " + message, DIVIDER);
+        showToUser("Error loading duke.Duke: " + message, DIVIDER);
     }
 
     public void showError(String message) {

@@ -1,3 +1,12 @@
+package duke.command;
+
+import duke.common.Messages;
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.TextUi;
+
 import java.time.LocalDateTime;
 
 public class AddDeadlineCommand extends Command {
@@ -12,7 +21,7 @@ public class AddDeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, TextUi ui, Storage storage) {
         Task task = new Deadline(title, dueBy);
         tasks.addTask(task);
         ui.showExecutionMessage(Messages.MESSAGE_ADD_DEADLINE, task.toString(), tasks.getSize());
