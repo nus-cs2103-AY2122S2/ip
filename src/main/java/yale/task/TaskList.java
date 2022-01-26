@@ -138,11 +138,15 @@ public class TaskList {
             }
             // Mark
             else if (markStatus.equals("mark")) {
-                list.getTask(itemNo-1).markItem();
+                list.getTask(itemNo-1).markTask();
+                System.out.println("Nice! I've marked this task as done:\n"
+                        + list.getTask(itemNo-1).toString());
             }
             // Unmark
             else {
-                list.getTask(itemNo-1).unmarkItem();
+                list.getTask(itemNo-1).unmarkTask();
+                System.out.println("OK, I've marked this task as not done yet:\n"
+                        + list.getTask(itemNo-1).toString());
             }
         } catch (NumberFormatException e) {
             System.out.println("Error: Please enter a valid task number");

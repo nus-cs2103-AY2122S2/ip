@@ -37,19 +37,15 @@ public class Task {
     /**
      * Marks a Task item as done
      */
-    public void markItem() {
+    public void markTask() {
         isMarked = true;
-        System.out.println("Nice! I've marked this task as done:\n"
-                + "  " + getStatusIcon() + " " + name);
     }
 
     /**
      * Unmarks a Task item
      */
-    public void unmarkItem() {
+    public void unmarkTask() {
         isMarked = false;
-        System.out.println("OK, I've marked this task as not done yet:\n"
-                + "  " + getStatusIcon() + " " + name);
     }
 
     public String export() {
