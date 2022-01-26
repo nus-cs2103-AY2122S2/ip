@@ -19,54 +19,34 @@ import li.zhongfu.cs2103.chatbot.types.Parser;
 import li.zhongfu.cs2103.chatbot.types.ParserResult;
 import li.zhongfu.cs2103.chatbot.types.Storage;
 import li.zhongfu.cs2103.chatbot.types.TaskList;
+import li.zhongfu.cs2103.chatbot.types.UserInterface;
 import li.zhongfu.cs2103.chatbot.types.tasks.Deadline;
 import li.zhongfu.cs2103.chatbot.types.tasks.Event;
 import li.zhongfu.cs2103.chatbot.types.tasks.Task;
 import li.zhongfu.cs2103.chatbot.types.tasks.ToDo;
 
 public class Duke {
-    private static final String HLINE = "____________________________________________________________";
-    private static final String BOT_NAME = "Duke";
-
-    // should probably be using some friendly date parser library for this
-    // but maybe we can avoid external libraries for now?
-    private static final 
-
-    private static void dialog(String[] lines) {
-        System.out.println("    " + HLINE);
-        for (String line : lines) {
-            System.out.println("    " + line);
-        }
-        System.out.println("    " + HLINE + "\n");
-    }
-
-    private static void dialog(String line) {
-        dialog(line.split("\n"));
-    }
+        private static final String BOT_NAME = "Duke";
 
     public static void main(String[] args) throws IOException {
+        UserInterface ui = new UserInterface(System.out);
+        ui.printMotd();
         Parser parser = new Parser(System.in);
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo + "\n");
 
         Storage storage = new Storage("data/tasks.dat");
         TaskList tasks;
         try {
             tasks = TaskList.loadFromStorage(storage);
-            System.out.println(String.format("Loaded %s tasks.", tasks.size()));
+            ui.println(String.format("Loaded %s tasks.", tasks.size()));
         } catch (FileNotFoundException e) {
-            System.out.println("No saved tasks file found, starting with an empty task list.");
+            ui.println("No saved tasks file found, starting with an empty task list.");
             tasks = new TaskList();
         } catch (StorageException e) {
-            System.out.println("Error loading tasks! Starting with an empty task list.");
+            ui.println("Error loading tasks! Starting with an empty task list.");
             tasks = new TaskList();
         }
 
-        dialog(new String[] {
+        ui.printDialog(new String[] {
                 String.format("Hello! I'm %s", BOT_NAME),
                 "How can I help you?"
         });
@@ -85,7 +65,7 @@ public class Duke {
 
                             if ("delete".equals(cmd)) {
                                 Task task = tasks.remove(idx);
-                                dialog(new String[] {
+                                ui.printDialog(new String[] {
                                     "Task removed:",
                                     String.format(" %s", task)
                                 });
@@ -93,7 +73,7 @@ public class Duke {
                                 Task task = tasks.get(idx);
                                 boolean done = "mark".equals(cmd); // set as done if cmd == "mark", else (e.g. cmd == "unmark") set as undone
                                 task.setDone(done); 
-                                dialog(new String[] {
+                                ui.printDialog(new String[] {
                                     String.format("Task marked as %sdone:", done ? "" : "un"),
                                     String.format(" %s", task)
                                 });
@@ -107,12 +87,12 @@ public class Duke {
 
                     case "list":
                         if (tasks.isEmpty()) {
-                            dialog("You have no tasks in your task list!");
+                            ui.printDialog("You have no tasks in your task list!");
                         } else {
                             List<String> output = new ArrayList<>();
                             output.add("Here are the tasks in your list:");
                             output.addAll(tasks.toEnumeratedList());
-                            dialog(output.toArray(String[]::new));
+                            ui.printDialog(output.toArray(String[]::new));
                         }
                         break;
 
@@ -149,7 +129,7 @@ public class Duke {
                         }
                         
                         tasks.add(task);
-                        dialog(new String[] {
+                        ui.printDialog(new String[] {
                             "New task added:",
                             String.format(" %s", task),
                             String.format("You now have %d tasks in your task list.", tasks.size())
@@ -159,29 +139,29 @@ public class Duke {
                     case "reload":
                         try {
                             tasks = TaskList.loadFromStorage(storage);
-                            dialog(String.format("Tasks reloaded; %d tasks in list now", tasks.size()));
+                            ui.printDialog(String.format("Tasks reloaded; %d tasks in list now", tasks.size()));
                         } catch (FileNotFoundException e) {
-                            dialog("Saved tasks file not found! Skipping reload.");
+                            ui.printDialog("Saved tasks file not found! Skipping reload.");
                         } catch (StorageException e) {
-                            dialog("Error loading tasks! Skipping reload.");
+                            ui.printDialog("Error loading tasks! Skipping reload.");
                         }
                         break;
                     
                     case "save":
                         tasks.save(storage);
-                        dialog("Tasks saved!");
+                        ui.printDialog("Tasks saved!");
                         break;
 
                     case "bye":
                         tasks.save(storage);
-                        dialog("Bye. Hope to see you again soon!");
+                        ui.printDialog("Bye. Hope to see you again soon!");
                         return;
 
                     default:
                         throw new DukeException("I don't know what that means! Try: todo, deadline, event, list, delete, mark, unmark, reload, save, bye");
                 }
             } catch (DukeException e) {
-                dialog(e.getMessage().split("\n"));
+                ui.printDialog(e.getMessage().split("\n"));
             }
         }
     }
