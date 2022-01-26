@@ -7,11 +7,22 @@ import duke.exception.DukeException;
 import duke.tasks.Event;
 import duke.ui.Ui;
 
+/**
+ * Command class that adds a event task to list.
+ */
 public class AddEventCommand extends Command<String>{
     private TaskList list;
     private String[] echo;
     private Storage storage;
 
+    /**
+     * Constructor that initialises the adding of event to list.
+     *
+     * @param list list of tasks to add this event to
+     * @param echo the input details of what to be added
+     * @param storage store of the list to be added to
+     * @throws DukeException when task cannot be added
+     */
     public AddEventCommand(TaskList list, String[] echo, Storage storage) throws DukeException {
         this.list = list;
         this.echo = echo;
@@ -45,6 +56,11 @@ public class AddEventCommand extends Command<String>{
         }
     }
 
+    /**
+     * Hint to stop the bot from running.
+     *
+     * @return false to not stop the bot from running
+     */
     public boolean isExit(){
         return false;
     }

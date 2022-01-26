@@ -9,11 +9,22 @@ import duke.exception.DukeException;
 import duke.tasks.Task;
 import duke.ui.Ui;
 
+/**
+ * Command class mark the task specified as done.
+ */
 public class MarkCommand extends Command<String> {
     private final TaskList list;
     private final String[] echo;
     private final Storage storage;
 
+    /**
+     * Constructor for this class to know where to mark.
+     *
+     * @param list the list from which to get the task
+     * @param echo the input of user to mark a specific task
+     * @param storage store of where the task list can be found
+     * @throws DukeException
+     */
     public MarkCommand(TaskList list, String[] echo, Storage storage) throws DukeException {
         this.list = list;
         this.echo = echo;
@@ -21,6 +32,11 @@ public class MarkCommand extends Command<String> {
         execute();
     }
 
+    /**
+     * Execution of marking the task.
+     *
+     * @throws DukeException thrown when the input format is wrong
+     */
     private void execute() throws DukeException {
         String err = "Oh no! Which task do you wish to mark? Try again :)\n";
         String wrongNumber = "Oh no! This task number does not exist. Try again :)\n";
@@ -55,6 +71,11 @@ public class MarkCommand extends Command<String> {
         }
     }
 
+    /**
+     * Hint to stop the bot from running.
+     *
+     * @return false to not stop the bot from running
+     */
     public boolean isExit(){
         return false;
     }
