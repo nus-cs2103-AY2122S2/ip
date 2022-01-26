@@ -174,7 +174,7 @@ public class Parser {
         }
 
         System.out.println(LINES);
-        System.out.println("    Here are the matching tasks in your list:");
+        System.out.println("    These are my finding tasks in your list 😄:");
         for (int j = 0; j < tasks.size(); j++) {
             System.out.println("    " + (j + 1) + "." + tasks.get(j).toString());
         }
