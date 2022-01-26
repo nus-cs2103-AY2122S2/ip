@@ -4,6 +4,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * this class contains the task list
+ * it will handle all task commands
+ * @author Kaiyi
+ */
 public class TaskList {
 
     ArrayList<Task> list_of_inputs = new ArrayList<>();
@@ -17,25 +22,44 @@ public class TaskList {
     }
     Storage storage = new Storage(directory,filePath);
 
+    /**
+     * print out the lists of tasks
+     */
     public void list() {
         System.out.println("Here are your task(s):");
         for (int i = 0; i < list_of_inputs.size(); i++) {
             System.out.println(((i + 1) + ". " + list_of_inputs.get(i).message()));
         }
-       // storage.readData(filePath);
     }
+
+    /**
+     * mark the list as done once it is called
+     * @param curr_no
+     * @throws IOException
+     */
     public void mark( int curr_no) throws IOException {
         Task task_done = list_of_inputs.get(curr_no);
         System.out.println("Good work!! I have marked it done:\n" + task_done.markedDone());
         storage.updateData(task_done.message(),filePath);
     }
 
+    /**
+     * unmark the list as undone once it is called
+     * @param curr_no
+     * @throws IOException
+     */
     public void unMark(int curr_no) throws IOException {
         Task task_undone = list_of_inputs.get(curr_no);
         System.out.println("Alrightt! I have marked it undone:\n" + task_undone.markedUndone());
         storage.updateData(task_undone.message(),filePath);
     }
 
+    /**
+     * to update on list and display the todo message once it is called
+     * @param str
+     * @return
+     * @throws IOException
+     */
     public String toDo(String str) throws IOException {
         Todos todo = new Todos(str);
         list_of_inputs.add(todo);
@@ -44,6 +68,12 @@ public class TaskList {
 
     }
 
+    /**
+     * to update on list and display the deadline message once it is called
+     * @param str
+     * @return
+     * @throws IOException
+     */
     public String deadLine(String str) throws IOException {
         String[] deadL = str.split("/by ", 2);
         Deadline deadLineTemp = new Deadline(deadL[0], deadL[1]);
@@ -53,6 +83,12 @@ public class TaskList {
 
     }
 
+    /**
+     * to update on the list and display the event message once it is called
+     * @param str
+     * @return
+     * @throws IOException
+     */
     public String event(String str) throws IOException {
         String[] event = str.split("/at ", 2);
         Event eventTemp = new Event(event[0], event[1]);
@@ -62,6 +98,10 @@ public class TaskList {
 
     }
 
+    /**
+     * to delete the task from list and display a message once it is called
+     * @param str
+     */
     public void delete(String str) {
         int curr_no = Integer.parseInt(str) - 1;
         list_of_inputs.remove(curr_no);
@@ -69,6 +109,10 @@ public class TaskList {
         System.out.println(deleteTemp.message() + "\nYou have " + list_of_inputs.size() + " tasks in the list.");
     }
 
+    /**
+     * to write previously saved data to ArrayList
+     * @throws IOException
+     */
     public void writeToArrFromPrevData () throws IOException {
         BufferedReader bufReader = new BufferedReader(new FileReader(filePath));
         String line = bufReader.readLine();
@@ -80,9 +124,6 @@ public class TaskList {
         bufReader.close();
     }
 
-    public void addToList(Task t) {
-        list_of_inputs.add(t);
-    }
 
 
 

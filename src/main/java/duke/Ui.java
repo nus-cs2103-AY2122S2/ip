@@ -3,6 +3,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * this class deals with interactions with the user
+ * @author Kaiyi
+ *
+ */
 
 public class Ui {
 
@@ -15,9 +20,14 @@ public class Ui {
     public Ui() {
     }
 
+
     String greeting = "Hello! I'm Duke\nWhat can I do for you?";
     String separation = "\n******************************\n";
 
+    /**
+     * display welcome message everytime user logs in
+     * @throws IOException
+     */
     public void welcomeMsg() throws IOException {
         System.out.println(separation + greeting + separation + "\nYou past Todos:");
         storage.readData(DUKE_TXTFILE);
@@ -25,7 +35,13 @@ public class Ui {
     }
 
 
-
+    /**
+     * for user to input command
+     * this method will call other methods depending on the user's input
+     * check if user input a valid commands and throw DukeException if commands are invalid
+     * @exception DukeException
+     * @throws IOException
+     */
     public void userCommand() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 

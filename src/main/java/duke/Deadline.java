@@ -2,6 +2,10 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * deadline class
+ * inherit from Task class
+ */
 public class Deadline extends Task {
 
     protected String by;
@@ -21,7 +25,11 @@ public class Deadline extends Task {
         return "D | " + "[" +  this.getStatusIcon() + "] " + super.message() + "(by:" + dateTimeFormat(date) + " " + time + ")";
     }
 
-
+    /**
+     * re-format the date and time
+     * @param dateTime
+     * @return
+     */
     public String dateTimeFormat(String dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
         LocalDate d = LocalDate.parse(dateTime,formatter);
