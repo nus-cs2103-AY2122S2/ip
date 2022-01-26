@@ -43,7 +43,7 @@ public class Ui {
 
     public boolean printCommand(Function<Printable, Boolean> action) {
         System.out.println(SEPARATOR);
-        boolean isRunning = action.apply((line) -> {
+        final boolean isRunning = action.apply((line) -> {
             System.out.println("\t" + line);
         });
         System.out.println(SEPARATOR);

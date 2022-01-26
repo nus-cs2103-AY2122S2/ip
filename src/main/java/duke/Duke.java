@@ -27,8 +27,10 @@ public class Duke {
                 }
             });
         } catch (DukeIOException ex) {
-            System.out.println("Cannot write to working directory.\n"
-                    + "Please check that you have write to the directory permissions.\n"
+            System.out.println("Encountered an error during initialization:\n"
+                    + "\t " + ex.getMessage() + " \n"
+                    + "Please check that you have read / write permissions in the current folder.\n"
+                    + "If the saved data file is corrupted, consider deleting the data folder.\n"
                     + "Will not save any changes!");
         }
         return this;
