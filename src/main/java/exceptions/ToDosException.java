@@ -1,3 +1,5 @@
+package exceptions;
+
 public class ToDosException extends TaskException {
     public ToDosException() {
         super();

@@ -1,12 +1,62 @@
+import Tasks.DeadLines;
+import Tasks.Events;
+import Tasks.Task;
+import Tasks.ToDos;
+import exceptions.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+
 
 public class Duke {
-    private static final ArrayList<Task> ls = new ArrayList<>();
+    private static final ArrayList<Task> LIST = new ArrayList<>();
+    private static final String PATH_OF_CACHE = "./data/duke.txt";
 
     public static void main(String[] args) {
         initDuke();
         Scanner sc = new Scanner(System.in);
+        loadCache();
+        loadDukeMainLogic(sc);
+        sc.close();
+    }
+
+    private static void loadCache() {
+        File data = new File(PATH_OF_CACHE);
+        try {
+            Scanner s = new Scanner(data);
+            while (s.hasNext()) {
+                String str = s.nextLine();
+                String[] arr = str.split("|");
+                String type = arr[0];
+                boolean marked = arr[2].equals("1");
+                String remainingStr = str.substring(str.lastIndexOf("|") + 1);
+                switch (type) {
+                case "D":
+                    LIST.add(new DeadLines(
+                            str.substring(4, str.lastIndexOf("|")),
+                            marked, remainingStr));
+                    break;
+                case "E":
+                    LIST.add(new Events(str.substring(4, str.lastIndexOf("|")),
+                            marked, remainingStr));
+                    break;
+                case "T":
+                    LIST.add(new ToDos(remainingStr, marked));
+                    break;
+                }
+            }
+            s.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("There is no cache, " +
+                    "duke will be initialised as per normal.");
+        }
+    }
+
+
+    private static void loadDukeMainLogic(Scanner sc) {
         while (sc.hasNext()) {
             String userInput = sc.nextLine();
             String[] wordSplit = userInput.split(" ");
@@ -19,49 +69,48 @@ public class Duke {
                 continue;
             }
 
+            writeCache();
             String action = wordSplit[0];
             String[] split = userInput.split("/");
             int start = userInput.indexOf(" ") + 1;
+            int end = userInput.lastIndexOf('/');
+            String task = end == -1 ? "" : userInput.substring(start, end - 1);
+            String details = split.length > 1 ? split[1].substring(3) : "";
 
             if (userInput.equals("bye")) {
                 sayBye();
                 break;
-            } else if (action.equals("list")) {
-                //prints the list
-                printList();
-            } else if (action.equals("mark")) {
-                //mark
-                mark(Integer.parseInt(wordSplit[1]) - 1);
-            } else if (action.equals("unmark")) {
-                //unmark
-                unmark(Integer.parseInt(wordSplit[1]) - 1);
-            } else if (action.equals("todo")) {
-                //add ToDos
-                addTask(new ToDos(userInput.substring(start), false));
-            } else if (action.equals("deadline") || action.equals("event")) {
-                int end = userInput.lastIndexOf('/');
-                String task = userInput.substring(start, end - 1);
-                String details = split[1].substring(3);
-                if (action.equals("deadline")) {
-                    //add DeadLines
-                    addTask(new DeadLines(task, false, details));
-                } else {
-                    //add Events
-                    addTask(new Events(task, false, details));
-                }
-            } else if (action.equals("delete")) {
-                //delete task
-                deleteTask(Integer.parseInt(wordSplit[1]) - 1);
             }
-
+            switch (action) {
+            case "list":
+                printList();
+                break;
+            case "mark":
+                mark(Integer.parseInt(wordSplit[1]) - 1);
+                break;
+            case "unmark":
+                unmark(Integer.parseInt(wordSplit[1]) - 1);
+                break;
+            case "todo":
+                addTask(new ToDos(userInput.substring(start), false));
+                break;
+            case "deadline":
+                addTask(new DeadLines(task, false, details));
+                break;
+            case "event":
+                addTask(new Events(task, false, details));
+                break;
+            case "delete":
+                deleteTask(Integer.parseInt(wordSplit[1]) - 1);
+                break;
+            }
         }
-        sc.close();
     }
 
     private static void deleteTask(int indx) {
         System.out.println("Noted. I've removed this task:");
-        System.out.println(ls.remove(indx));
-        String s = String.format("Now you have %d tasks in the list.", ls.size());
+        System.out.println(LIST.remove(indx));
+        String s = String.format("Now you have %d tasks in the list.", LIST.size());
         System.out.println(s);
         printHorizontalLine();
     }
@@ -72,14 +121,22 @@ public class Duke {
 
         } else if (splitInput.length == 1) {
             String command = splitInput[0];
-            if (command.equals("todo")) {
+            switch (command) {
+            case "todo":
                 throw new ToDosException();
-            } else if (command.equals("deadline")) {
+            case "deadline":
                 throw new DeadlineException();
-            } else if (command.equals("event")) {
+            case "event":
                 throw new EventException();
-            } else if (!command.equals("bye") && !command.equals("list")) {
-                throw new IncorrectLengthException();
+            }
+        } else {
+            String command = splitInput[0];
+            if (command.equals("mark") || command.equals("unmark")) {
+                try {
+                    Integer.parseInt(splitInput[1]);
+                } catch (NumberFormatException e) {
+                    throw new WrongInputException();
+                }
             }
         }
     }
@@ -91,35 +148,48 @@ public class Duke {
     }
 
     private static void mark(int indx) {
-        System.out.println("Nice! I've marked this task as done: ");
-        Task t = ls.get(indx);
+        System.out.println("Nice! I've marked this task as done:");
+        Task t = LIST.get(indx);
         t.setMarked(true);
         System.out.println(t);
         printHorizontalLine();
     }
 
     private static void unmark(int indx) {
-        System.out.println("OK, I've marked this task as not done yet: ");
-        Task t = ls.get(indx);
+        System.out.println("OK, I've marked this task as not done yet:");
+        Task t = LIST.get(indx);
         t.setMarked(false);
         System.out.println(t);
         printHorizontalLine();
     }
 
+    private static void writeCache() {
+        try {
+            File f = new File(PATH_OF_CACHE);
+            FileWriter fw = new FileWriter(f);
+            for (Task t : LIST) {
+                fw.write(t.cacheString() + System.lineSeparator());
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Something went wrong " + e.getMessage());
+        }
+    }
+
     private static void addTask(Task t) {
-        ls.add(t);
-        System.out.println("Got it. I've added this task: ");
+        LIST.add(t);
+        System.out.println("Got it. I've added this task:");
         System.out.println(" " + t);
-        String s = String.format("Now you have %d tasks in the list.", ls.size());
+        String s = String.format("Now you have %d tasks in the list.", LIST.size());
         System.out.println(s);
         printHorizontalLine();
     }
 
     private static void printList() {
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < ls.size(); i++) {
+        for (int i = 0; i < LIST.size(); i++) {
             String num = String.format("%d. ", i + 1);
-            System.out.println(num + ls.get(i).toString());
+            System.out.println(num + LIST.get(i).toString());
         }
         printHorizontalLine();
     }
@@ -130,7 +200,8 @@ public class Duke {
     }
 
     private static void printHorizontalLine() {
-        System.out.println("____________________________________________________________");
+        System.out.println("_____________" +
+                "_______________________________________________");
     }
 
     private static void initDuke() {

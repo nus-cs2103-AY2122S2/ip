@@ -1,5 +1,6 @@
-public class DeadlineException extends TaskException {
+package exceptions;
 
+public class DeadlineException extends TaskException {
     public DeadlineException() {
         super();
     }

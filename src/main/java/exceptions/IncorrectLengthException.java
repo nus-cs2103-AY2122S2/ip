@@ -1,3 +1,5 @@
+package exceptions;
+
 public class IncorrectLengthException extends TaskException {
     public IncorrectLengthException() {
         super();
