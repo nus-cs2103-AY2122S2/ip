@@ -1,12 +1,41 @@
-public class Event extends Task{
-    String startDate;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-    public Event (String task, String startDate) {
+public class Event extends Task{
+    static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
+    LocalDate startDate;
+    LocalTime time;
+
+    public Event (String task, String startDateString) throws DukeException {
+        super(task);
+        String[] datetime = startDateString.split(" ");
+        try {
+            startDate = LocalDate.parse(datetime[0], DATE_FORMATTER);
+            time = datetime.length == 1 ? null : LocalTime.parse(datetime[1], TIME_FORMATTER);
+        } catch (DateTimeParseException e) {
+            System.out.println(e);
+            throw new DukeException("Invalid date/time format!" 
+                    + " Expected date and/or time in the following formats: \n"
+                    + "yyyy-mm-dd | Example: 2022-06-26\n"
+                    + "yyyy-mm-dd HHmm | Example: 2022-06-26 2359");
+        }
+    }
+
+    public Event(String task, LocalDate startDate, LocalTime time) {
         super(task);
         this.startDate = startDate;
+        this.time = time;
     }
 
     public String toString() {
-        return String.format("[E]%s %s (at: %s)", this.statusString(), this.task, this.startDate);
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        String date = this.startDate.format(dateFormatter);
+        String time = this.time == null ? "" : " " + this.time.format(timeFormatter);
+        return String.format("[E]%s %s (at: %s%s)", this.statusString(), this.task, date, time);
     }
 }
