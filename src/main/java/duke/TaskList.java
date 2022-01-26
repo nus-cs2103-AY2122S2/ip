@@ -9,7 +9,14 @@ public class TaskList {
     private ArrayList<Task> tasks;
 
     /**
-     * Construct TaskList object which stores Task objects in an ArrayList.
+     * Constructs TaskList object which stores Task objects in an ArrayList.
+     */
+    public TaskList() {
+        this.tasks = new ArrayList<>();
+    }
+
+    /**
+     * Constructs TaskList object which stores Task objects in an ArrayList.
      *
      * @param loadedTasks   The initial tasks stored in an ArrayList.
      */
@@ -19,6 +26,15 @@ public class TaskList {
 
     public ArrayList<Task> getTaskList() {
         return this.tasks;
+    }
+
+    /**
+     * Adds a Task to the tasklist.
+     *
+     * @param task Task to be added to tasklist.
+     */
+    public void addTask(Task task) {
+        this.tasks.add(task);
     }
 
     /**
@@ -54,7 +70,7 @@ public class TaskList {
     }
 
     /**
-     * Delete the indicated task from the tasklist.
+     * Deletes the indicated task from the tasklist.
      *
      * @param taskNum   The task number which is to be deleted.
      */

@@ -82,7 +82,20 @@ public class Ui {
     }
 
     /**
-     * Throw error depending on what kind of error it is.
+     * Prints out a list of all matching tasks in the tasklist.
+     *
+     * @param taskList  Tasklist containing all matching tasks.
+     */
+    public void listMatching(TaskList taskList) {
+        System.out.println(LINE + "\n Here are the matching tasks in your list:");
+        for (int i = 1; i <= taskList.getTaskList().size(); i++) {
+            System.out.printf(" %d.%s\n", i, taskList.getTaskList().get(i - 1).toString());
+        }
+        System.out.println(LINE);
+    }
+
+    /**
+     * Throws error depending on what kind of error it is.
      *
      * @param type  The type of error to be thrown.
      */

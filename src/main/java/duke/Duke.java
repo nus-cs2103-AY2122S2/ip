@@ -37,7 +37,7 @@ public class Duke {
     }
 
     /**
-     * Set filepath and run Duke
+     * Sets filepath and run Duke
      *
      * @param args
      * @throws IOException
