@@ -18,6 +18,7 @@ public class Duke {
         while (sc.hasNextLine()) {
             String command = sc.nextLine();
             if (command.equals("bye")) {
+                startGoodbye();
                 saveList(storeList);
                 break;
             } else if (command.equals("list")) {
@@ -29,34 +30,9 @@ public class Duke {
             } else if (command.startsWith("deadline")) {
                 addDeadline(command, storeList);
             } else if (command.startsWith("todo")) {
-                if (command.length() < 5) {
-                    System.out.println("Master, I have all the knowledge in the world but I do not know what you want to do," +
-                            " Please wish again in the format todo task");
-                    continue;
-                } else {
-                    String newtask = command.substring(5);
-                    Todo t = new Todo(newtask);
-                    storeList.add(t);
-                    System.out.println("Added to my brain master:");
-                    System.out.println(t.toString());
-                    System.out.println("Currently I have " + storeList.size() + " things in my brain");
-                }
-
+                addTodo(command, storeList);
             } else if (command.startsWith("event")) {
-                int slash = command.indexOf("/");
-                if (slash == -1 || slash <= 6) {
-                    System.out.println("Master, you wished wrongly. Remember you have to wish in this format " +
-                            "deadline task /by dateofevent. Please wish again");
-                    continue;
-                } else {
-                    String newtask = command.substring(6, slash - 1);
-                    String attime = command.substring(slash + 1);
-                    Event e = new Event(newtask, attime);
-                    storeList.add(e);
-                    System.out.println("Added to my brain master:");
-                    System.out.println(e.toString());
-                    System.out.println("Currently I have " + storeList.size() + " things in my brain");
-                }
+                addEvent(command, storeList);
             } else if (command.startsWith("delete")) {
                 if (command.length() <= 7) {
                     System.out.println("Master, you wished wrongly. Remember you have to wish in this format " +
@@ -81,6 +57,36 @@ public class Duke {
         }
         sc.close();
 
+    }
+
+    public static void addEvent(String command, ArrayList<Task> storeList) {
+        int slash = command.indexOf("/");
+        if (slash == -1 || slash <= 6) {
+            System.out.println("Master, you wished wrongly. Remember you have to wish in this format " +
+                    "deadline task /by dateofevent. Please wish again");
+        } else {
+            String newtask = command.substring(6, slash - 1);
+            String attime = command.substring(slash + 1);
+            Event e = new Event(newtask, attime);
+            storeList.add(e);
+            System.out.println("Added to my brain master:");
+            System.out.println(e.toString());
+            System.out.println("Currently I have " + storeList.size() + " things in my brain");
+        }
+    }
+
+    public static void addTodo(String command, ArrayList<Task> storeList) {
+        if (command.length() < 5) {
+            System.out.println("Master, I have all the knowledge in the world but I do not know what you want to do," +
+                    " Please wish again in the format todo task");
+        } else {
+            String newtask = command.substring(5);
+            Todo t = new Todo(newtask);
+            storeList.add(t);
+            System.out.println("Added to my brain master:");
+            System.out.println(t.toString());
+            System.out.println("Currently I have " + storeList.size() + " things in my brain");
+        }
     }
 
     public static void addDeadline(String command, ArrayList<Task> storeList) {
