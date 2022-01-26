@@ -1,3 +1,10 @@
+package karen;
+
+import karen.task.Deadline;
+import karen.task.Event;
+import karen.task.Task;
+import karen.task.ToDo;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -96,7 +103,7 @@ public class Storage {
         }
     }
 
-    protected Task createTask(String taskType, String[] taskArgs) {
+    public Task createTask(String taskType, String[] taskArgs) {
         Task initTask;
 
         switch (taskType) {
@@ -116,19 +123,19 @@ public class Storage {
         return initTask;
     }
 
-    protected Task getTask(int index) throws IndexOutOfBoundsException {
+    public Task getTask(int index) throws IndexOutOfBoundsException {
         return this.taskList.get(index);
     }
 
-    protected ArrayList<Task> getTaskList() {
+    public ArrayList<Task> getTaskList() {
         return this.taskList;
     }
 
-    protected void addTask(Task item) {
+    public void addTask(Task item) {
         this.taskList.add(item);
     }
 
-    protected void deleteTask(int index) {
+    public void deleteTask(int index) {
         this.taskList.remove(index);
     }
 

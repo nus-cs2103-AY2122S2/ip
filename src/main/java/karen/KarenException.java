@@ -1,3 +1,5 @@
+package karen;
+
 public class KarenException extends Exception {
     String msg;
 

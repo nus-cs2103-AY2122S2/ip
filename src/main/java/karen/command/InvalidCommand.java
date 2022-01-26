@@ -1,3 +1,9 @@
+package karen.command;
+
+import karen.KarenException;
+import karen.Storage;
+import karen.Ui;
+
 public class InvalidCommand extends Command {
     public static final String DEFAULT_MESSAGE = "I don't understand anything - I want to speak with your manager";
     protected String message;

@@ -1,3 +1,9 @@
+package karen.command;
+
+import karen.KarenException;
+import karen.Storage;
+import karen.Ui;
+
 public abstract class Command {
     public Command() {
     }

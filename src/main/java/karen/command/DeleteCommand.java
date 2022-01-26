@@ -1,3 +1,10 @@
+package karen.command;
+
+import karen.KarenException;
+import karen.Storage;
+import karen.task.Task;
+import karen.Ui;
+
 public class DeleteCommand extends Command {
     private int taskIndex;
 
@@ -6,7 +13,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, Storage storage) throws KarenException{
+    public void execute(Ui ui, Storage storage) throws KarenException {
         try {
             Task item = storage.getTask(this.taskIndex);
             storage.deleteTask(this.taskIndex);

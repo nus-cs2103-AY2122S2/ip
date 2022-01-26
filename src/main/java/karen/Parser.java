@@ -1,3 +1,10 @@
+package karen;
+
+import karen.command.*;
+import karen.task.Deadline;
+import karen.task.Event;
+import karen.task.ToDo;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.regex.Matcher;

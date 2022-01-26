@@ -1,3 +1,7 @@
+package karen;
+
+import karen.command.Command;
+
 public class Karen {
     public Karen() {}
 

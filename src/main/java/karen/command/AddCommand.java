@@ -1,3 +1,9 @@
+package karen.command;
+
+import karen.Storage;
+import karen.task.Task;
+import karen.Ui;
+
 public class AddCommand extends Command {
     protected Task item;
 

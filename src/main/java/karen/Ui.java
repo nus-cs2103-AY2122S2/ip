@@ -1,3 +1,7 @@
+package karen;
+
+import karen.task.Task;
+
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -29,7 +33,7 @@ public class Ui {
         return String.format("%d.%s\n", index, item);
     }
 
-    protected String formatCount(String action, Task item, int count) {
+    public String formatCount(String action, Task item, int count) {
         return String.format("Fine. Task %s:\n %s\nNow you have %d in total.",
                 action, item.toString(), count);
     }
