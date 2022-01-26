@@ -21,8 +21,8 @@ public enum CommandType {
     private static final Map<String, CommandType> typeMap = new HashMap<>();
 
     static {
-        for (CommandType c : values()) {
-            typeMap.put(c.command, c);
+        for (CommandType type : values()) {
+            typeMap.put(type.command, type);
         }
     }
 
@@ -41,13 +41,13 @@ public enum CommandType {
      * @return The CommandType associated with the String.
      */
     public static CommandType fromString(String commandString) {
-        CommandType c = typeMap.get(commandString);
+        CommandType type = typeMap.get(commandString);
 
-        if (c == null) {
+        if (type == null) {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
 
-        return c;
+        return type;
     }
 
     public String[] getParams() {

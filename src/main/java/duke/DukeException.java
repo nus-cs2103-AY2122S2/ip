@@ -1,14 +1,13 @@
 package duke;
 
 public class DukeException extends RuntimeException {
-
     /**
      * Constructs a DukeException instance.
      *
-     * @param s The error message.
+     * @param message The error message.
      */
-    public DukeException(String s) {
-        super(s);
+    public DukeException(String message) {
+        super(message);
     }
 
     @Override

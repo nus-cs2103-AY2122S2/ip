@@ -140,11 +140,11 @@ public class Ui {
     /**
      * Prints an indented String. The indentation consists of a single tab and an additional number of whitespaces.
      *
-     * @param s       The String to be printed.
+     * @param string  The String to be printed.
      * @param padding The amount of additional whitespace padding.
      */
-    private void printTabbed(String s, int padding) {
-        String[] lines = s.split("\n");
+    private void printTabbed(String string, int padding) {
+        String[] lines = string.split("\n");
         char[] whiteSpace = new char[padding];
         Arrays.fill(whiteSpace, ' ');
 
