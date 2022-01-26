@@ -34,14 +34,6 @@ public class Deadline extends Task {
         this("", null);
     }
 
-    /**
-     * Returns the limit date of the deadline task.
-     * @return Limit date of the deadline task.
-     */
-    public LocalDateTime getBy() {
-        return this.by;
-    }
-
     @Override
     public Optional<LocalDateTime> getDate() {
         return Optional.of(this.by);

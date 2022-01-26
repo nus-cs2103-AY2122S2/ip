@@ -27,8 +27,7 @@ public class Parser {
      * @return An instance of the associated <code>Command</code> object for handling the command.
      * @throws DukeInvalidCommandException If an invalid command string is supplied.
      */
-    public static Command parse(String command)
-            throws DukeInvalidCommandException {
+    public static Command parse(String command) throws DukeInvalidCommandException {
         final String[] commandParts = command.split(" ");
         final String commandLowerCase = commandParts[0].toLowerCase();
         final String args = command.substring(commandLowerCase.length()).trim();
@@ -60,5 +59,4 @@ public class Parser {
             throw new DukeInvalidCommandException(String.format("No such command: %s", commandLowerCase));
         }
     }
-
 }

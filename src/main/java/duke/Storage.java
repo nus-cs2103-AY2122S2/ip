@@ -1,6 +1,6 @@
 package duke;
 
-import duke.exception.DukeIOException;
+import duke.exception.DukeIoException;
 import duke.task.TaskList;
 import duke.task.serializer.TaskListSerializer;
 
@@ -26,11 +26,11 @@ public class Storage {
      * Loads any previous data, if any, that was saved by a previous run of the application.
      * Inflates the <code>TaskList</code> object stored by the previous run.
      * @return <code>TaskList</code> object read from database file.
-     * @throws DukeIOException If an error occurs during any I/O operation or the database file read is
+     * @throws DukeIoException If an error occurs during any I/O operation or the database file read is
      *                         in an invalid format.
      */
-    public static TaskList load() throws DukeIOException {
-        FileInputStream dbStream = openDatabaseRead();
+    public static TaskList load() throws DukeIoException {
+        final FileInputStream dbStream = openDatabaseRead();
 
         return TaskListSerializer.inflate(dbStream);
     }
@@ -39,27 +39,27 @@ public class Storage {
      * Saves the provided <code>TaskList</code> object to disk.
      * Serializes and writes the object to a predetermined location on the file system.
      * @param taskList <code>TaskList</code> object to save.
-     * @throws DukeIOException If an error occurs during the write operation.
+     * @throws DukeIoException If an error occurs during the write operation.
      */
-    public static void save(TaskList taskList) throws DukeIOException {
-        FileOutputStream dbStream = openDatabaseWrite();
+    public static void save(TaskList taskList) throws DukeIoException {
+        final FileOutputStream dbStream = openDatabaseWrite();
 
         TaskListSerializer.deflate(taskList, dbStream);
     }
 
     /**
      * Creates the directory structure required for saving the database file.
-     * @throws DukeIOException If an error occurs during folder creation.
+     * @throws DukeIoException If an error occurs during folder creation.
      */
-    private static void initDataStore() throws DukeIOException {
-        File dataFolder = new File(DATA_FOLDER_PATH);
+    private static void initDataStore() throws DukeIoException {
+        final File dataFolder = new File(DATA_FOLDER_PATH);
 
         if (dataFolder.exists() && !dataFolder.isDirectory()) {
-            throw new DukeIOException("Data Store is not a directory at: "
+            throw new DukeIoException("Data Store is not a directory at: "
                     + dataFolder.getAbsolutePath());
         } else if (!dataFolder.exists()) {
             if (!dataFolder.mkdir()) {
-                throw new DukeIOException("Cannot create data store directory at: "
+                throw new DukeIoException("Cannot create data store directory at: "
                         + dataFolder.getAbsolutePath());
             }
         }
@@ -68,12 +68,12 @@ public class Storage {
     /**
      * Creates a read-stream from the database file on disk.
      * @return <Code>FileInputStream</Code> for the database file.
-     * @throws DukeIOException If an error occurs during the internal {@link #initDataStore()} operation.
+     * @throws DukeIoException If an error occurs during the internal {@link #initDataStore()} operation.
      */
-    private static FileInputStream openDatabaseRead() throws DukeIOException {
-        initDataStore(); // throws DukeIOException
+    private static FileInputStream openDatabaseRead() throws DukeIoException {
+        initDataStore(); // throws DukeIoException
 
-        File database = Paths.get(DATA_FOLDER_PATH, DB_FILENAME).toFile();
+        final File database = Paths.get(DATA_FOLDER_PATH, DB_FILENAME).toFile();
         try {
             return new FileInputStream(database);
         } catch (FileNotFoundException ex) {
@@ -86,23 +86,23 @@ public class Storage {
      * Creates a write-stream to the database file stored on disk.
      * Overwrites any existing data in the file.
      * @return <code>FileOutputStream</code> for the database file.
-     * @throws DukeIOException If an error occurs during the internal {@link #initDataStore()} or write
+     * @throws DukeIoException If an error occurs during the internal {@link #initDataStore()} or write
      *                         operation.
      */
-    private static FileOutputStream openDatabaseWrite() throws DukeIOException {
-        initDataStore(); // throws DukeIOException
+    private static FileOutputStream openDatabaseWrite() throws DukeIoException {
+        initDataStore(); // throws DukeIoException
 
-        File database = Paths.get(DATA_FOLDER_PATH, DB_FILENAME).toFile();
+        final File database = Paths.get(DATA_FOLDER_PATH, DB_FILENAME).toFile();
         try {
             if (!database.exists()) {
                 if (!database.createNewFile()) {
-                    throw new DukeIOException("Could not create database");
+                    throw new DukeIoException("Could not create database");
                 }
             }
 
             return new FileOutputStream(database);
         } catch (IOException ex) {
-            throw new DukeIOException("Could not create database");
+            throw new DukeIoException("Could not create database");
         }
     }
 }

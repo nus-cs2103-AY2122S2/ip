@@ -7,7 +7,7 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.TaskType;
 import duke.task.Todo;
-import duke.util.IPrintable;
+import duke.util.Printable;
 
 import java.time.LocalDateTime;
 
@@ -29,7 +29,7 @@ public class CreateCommand extends Command {
     }
 
     @Override
-    public boolean execute(IPrintable linePrinter, TaskList taskList) throws DukeIllegalArgumentException {
+    public boolean execute(Printable linePrinter, TaskList taskList) throws DukeIllegalArgumentException {
         if (this.taskType == TaskType.TODO) {
             this.parseCreateTodo(linePrinter, taskList);
         } else if (this.taskType == TaskType.DEADLINE) {
@@ -47,7 +47,7 @@ public class CreateCommand extends Command {
      * @param taskList Current task list that the command handler should add a new task to.
      * @throws DukeIllegalArgumentException If the argument string is empty.
      */
-    private void parseCreateTodo(IPrintable linePrinter, TaskList taskList)
+    private void parseCreateTodo(Printable linePrinter, TaskList taskList)
             throws DukeIllegalArgumentException {
         // Syntax Check
         if (args.equals("")) {
@@ -64,7 +64,7 @@ public class CreateCommand extends Command {
      * @param taskList Current task list that the command handler should add a new task to.
      * @throws DukeIllegalArgumentException If the argument string does not follow the expected format.
      */
-    private void parseCreateDeadline(IPrintable linePrinter, TaskList taskList)
+    private void parseCreateDeadline(Printable linePrinter, TaskList taskList)
             throws DukeIllegalArgumentException {
         // Syntax Check
         final String[] argParts = this.args.split(" /by ");
@@ -87,7 +87,7 @@ public class CreateCommand extends Command {
      * @param taskList Current task list that the command handler should add a new task to.
      * @throws DukeIllegalArgumentException If the argument string does not follow the expected format.
      */
-    private void parseCreateEvent(IPrintable linePrinter, TaskList taskList)
+    private void parseCreateEvent(Printable linePrinter, TaskList taskList)
             throws DukeIllegalArgumentException {
         // Syntax Check
         final String[] argParts = this.args.split(" /at ");
@@ -104,7 +104,7 @@ public class CreateCommand extends Command {
         this.printResponse(linePrinter, task, taskList, "Event");
     }
 
-    private void printResponse(IPrintable linePrinter, Task task, TaskList taskList, String type) {
+    private void printResponse(Printable linePrinter, Task task, TaskList taskList, String type) {
         linePrinter.print(String.format("Added the following %s Task:", type));
         linePrinter.print(String.format("\t%s", task.getReadableString()));
         linePrinter.print(String.format("Now you have %d task(s) in the list", taskList.getTaskCount()));

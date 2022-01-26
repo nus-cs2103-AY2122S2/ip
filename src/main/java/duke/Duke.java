@@ -2,7 +2,7 @@ package duke;
 
 import duke.command.Parser;
 import duke.exception.DukeException;
-import duke.exception.DukeIOException;
+import duke.exception.DukeIoException;
 import duke.task.TaskList;
 
 /**
@@ -32,13 +32,15 @@ public class Duke {
             taskList.registerListener(store -> {
                 try {
                     Storage.save(store);
-                } catch (DukeIOException ex) {
+                } catch (DukeIoException ex) {
                     System.out.println("Warning: An error occurred while saving Task list");
                 }
             });
-        } catch (DukeIOException ex) {
-            System.out.println("Cannot write to working directory.\n"
-                    + "Please check that you have write to the directory permissions.\n"
+        } catch (DukeIoException ex) {
+            System.out.println("Encountered an error during initialization:\n"
+                    + "\t " + ex.getMessage() + " \n"
+                    + "Please check that you have read / write permissions in the current folder.\n"
+                    + "If the saved data file is corrupted, consider deleting the data folder.\n"
                     + "Will not save any changes!");
         }
         return this;

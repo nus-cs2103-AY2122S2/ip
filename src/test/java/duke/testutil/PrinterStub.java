@@ -1,10 +1,10 @@
 package duke.testutil;
 
-import duke.util.IPrintable;
+import duke.util.Printable;
 
 import java.util.ArrayList;
 
-public class PrinterStub implements IPrintable {
+public class PrinterStub implements Printable {
     private final ArrayList<String> lines;
 
     public PrinterStub() {

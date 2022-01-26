@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.task.TaskList;
-import duke.util.IPrintable;
+import duke.util.Printable;
 
 /**
  * Represents a handler for the exit command.
@@ -16,7 +16,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public boolean execute(IPrintable linePrinter, TaskList taskList) {
+    public boolean execute(Printable linePrinter, TaskList taskList) {
         linePrinter.print("Goodbye! Have a Nice Day.");
         return false;
     }

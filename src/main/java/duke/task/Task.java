@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.util.ISerializable;
+import duke.util.Serializable;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-public abstract class Task implements ISerializable {
+public abstract class Task implements Serializable {
     private final TaskType type;
     private String description;
     private boolean isDone;
@@ -95,6 +95,7 @@ public abstract class Task implements ISerializable {
     protected Task readSerializedData(DataInputStream dIn) throws IOException {
         this.description = dIn.readUTF();
         this.isDone = dIn.readBoolean();
+
         return this;
     }
 

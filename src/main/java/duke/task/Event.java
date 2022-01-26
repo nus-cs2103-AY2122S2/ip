@@ -34,14 +34,6 @@ public class Event extends Task {
         this("", null);
     }
 
-    /**
-     * Returns the date associated with the event.
-     * @return Date associated with the event.
-     */
-    public LocalDateTime getAt() {
-        return this.at;
-    }
-
     @Override
     public Optional<LocalDateTime> getDate() {
         return Optional.of(this.at);

@@ -4,7 +4,7 @@ import duke.exception.DukeException;
 import duke.exception.DukeIllegalArgumentException;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.util.IPrintable;
+import duke.util.Printable;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -57,16 +57,6 @@ public abstract class Command {
     }
 
     /**
-     * Translates a date-time string to a {@link LocalDateTime} object.
-     * @param dateString Date-time string to process.
-     * @return A {@link LocalDateTime} that represents the supplied date-time.
-     * @throws DukeIllegalArgumentException If the supplied date-time string is not in a valid format.
-     */
-    protected LocalDateTime parseDateTime(String dateString) throws DukeIllegalArgumentException {
-        return parseDateTime(dateString, "dd/MM/yyyy HH:mm");
-    }
-
-    /**
      * Translates a date string to a {@link LocalDateTime} object.
      * @param dateString Date string to process.
      * @return A {@link LocalDateTime} that represents the supplied date at 00:00 hours.
@@ -74,6 +64,16 @@ public abstract class Command {
      */
     protected LocalDateTime parseDate(String dateString) throws DukeIllegalArgumentException {
         return parseDateTime(dateString + " 00:00", "dd/MM/yyyy HH:mm");
+    }
+
+    /**
+     * Translates a date-time string to a {@link LocalDateTime} object.
+     * @param dateString Date-time string to process.
+     * @return A {@link LocalDateTime} that represents the supplied date-time.
+     * @throws DukeIllegalArgumentException If the supplied date-time string is not in a valid format.
+     */
+    protected LocalDateTime parseDateTime(String dateString) throws DukeIllegalArgumentException {
+        return parseDateTime(dateString, "dd/MM/yyyy HH:mm");
     }
 
     /**
@@ -95,11 +95,10 @@ public abstract class Command {
 
     /**
      * Parses the arguments supplied and executes the actions relevant to the command.
-     * @param linePrinter {@link IPrintable} object that the command executor can output to.
+     * @param linePrinter {@link Printable} object that the command executor can output to.
      * @param taskList Current list of tasks that the command executor updates.
      * @return A boolean indicating if the application should continue execution.
      * @throws DukeException If an error is encountered while running the command.
      */
-    public abstract boolean execute(IPrintable linePrinter, TaskList taskList)
-            throws DukeException;
+    public abstract boolean execute(Printable linePrinter, TaskList taskList) throws DukeException;
 }

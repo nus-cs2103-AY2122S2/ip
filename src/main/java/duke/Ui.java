@@ -1,10 +1,10 @@
 package duke;
 
 import duke.exception.DukeException;
-import duke.exception.DukeIOException;
+import duke.exception.DukeIoException;
 import duke.exception.DukeIllegalArgumentException;
 import duke.exception.DukeInvalidCommandException;
-import duke.util.IPrintable;
+import duke.util.Printable;
 
 import java.util.Scanner;
 import java.util.function.Function;
@@ -51,15 +51,15 @@ public class Ui {
     }
 
     /**
-     * Provides a {@link IPrintable} object that can be printed to.
+     * Provides a {@link Printable} object that can be printed to.
      * Handles formatting of printed contents, including indentation and surrounding separators.
-     * @param action A <code>Function</code> object that accepts the provided {@link IPrintable} object
+     * @param action A <code>Function</code> object that accepts the provided {@link Printable} object
      *               and returns a boolean to indicate if the application should continue running.
      * @return <code>Boolean</code> indicating if the application should continue running.
      */
-    public boolean printCommand(Function<IPrintable, Boolean> action) {
+    public boolean printCommand(Function<Printable, Boolean> action) {
         System.out.println(SEPARATOR);
-        boolean isRunning = action.apply((line) -> {
+        final boolean isRunning = action.apply((line) -> {
             System.out.println("\t" + line);
         });
         System.out.println(SEPARATOR);
@@ -67,18 +67,18 @@ public class Ui {
     }
 
     /**
-     * Prints an error message onto the {@link IPrintable} object provided.
+     * Prints an error message onto the {@link Printable} object provided.
      * Error message printer depends on the type of the provided {@link DukeException} object.
-     * @param linePrinter {@link IPrintable} object that the error should be printed to.
+     * @param linePrinter {@link Printable} object that the error should be printed to.
      * @param ex Exception object that the error message should be printed for.
      */
-    public void printError(IPrintable linePrinter, DukeException ex) {
+    public void printError(Printable linePrinter, DukeException ex) {
         if (ex instanceof DukeInvalidCommandException) {
             linePrinter.print(ERROR_INVALID_COMMAND);
         } else if (ex instanceof DukeIllegalArgumentException) {
             linePrinter.print(ERROR_INVALID_SYNTAX);
             linePrinter.print(ex.getMessage());
-        } else if (ex instanceof DukeIOException) {
+        } else if (ex instanceof DukeIoException) {
             linePrinter.print(ERROR_IO);
         }
     }

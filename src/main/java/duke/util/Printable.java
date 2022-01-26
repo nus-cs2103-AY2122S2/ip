@@ -3,7 +3,7 @@ package duke.util;
 /**
  * Represents an object to which <code>String</code> objects can be written to.
  */
-public interface IPrintable {
+public interface Printable {
     /**
      * Prints the provided <code>String</code> input.
      * @param input String to be printed.

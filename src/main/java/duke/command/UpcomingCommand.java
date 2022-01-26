@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.exception.DukeIllegalArgumentException;
 import duke.task.TaskList;
-import duke.util.IPrintable;
+import duke.util.Printable;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -20,7 +20,7 @@ public class UpcomingCommand extends Command {
     }
 
     @Override
-    public boolean execute(IPrintable linePrinter, TaskList taskList) throws DukeIllegalArgumentException {
+    public boolean execute(Printable linePrinter, TaskList taskList) throws DukeIllegalArgumentException {
         int days;
         try {
             days = Integer.parseInt(args);
@@ -32,9 +32,9 @@ public class UpcomingCommand extends Command {
             throw new DukeIllegalArgumentException("Days must be a positive number");
         }
 
-        LocalDateTime endTime = LocalDateTime.now().plus(days, ChronoUnit.DAYS);
+        final LocalDateTime endTime = LocalDateTime.now().plus(days, ChronoUnit.DAYS);
         linePrinter.print(String.format("Here are your tasks in %d days:", days));
-        taskList.forEach((idx, task) -> {
+        taskList.doForEach((index, task) -> {
             task.getDate().ifPresent(date -> {
                 if (date.isBefore(endTime)) {
                     linePrinter.print(task.getReadableString());
