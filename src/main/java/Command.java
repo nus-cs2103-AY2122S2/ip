@@ -27,8 +27,14 @@ public enum Command {
         this.regex = regex;
     }
 
-    public static Command getCommand(String commandString) {
-        return commandMap.get(commandString);
+    public static Command getCommand(String commandString) throws DukeException {
+        Command command = commandMap.get(commandString);
+
+        if (command == null) {
+            throw new DukeException("I'm sorry, you've input a command I don't recognize. Please try again.");
+        }
+
+        return command;
     }
 
     public String getRegex() {
