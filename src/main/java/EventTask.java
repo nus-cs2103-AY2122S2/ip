@@ -13,4 +13,9 @@ public class EventTask extends Task {
                 getStatusIcon(), name, String.format("(at: %s)", this.date));
     }
 
+    @Override
+    public String toStore() {
+        return String.format("E | %d | %s | %s", this.isDone ? 1 : 0, this.name, this.date);
+    }
+
 }

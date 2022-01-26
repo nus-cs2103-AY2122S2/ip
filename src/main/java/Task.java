@@ -20,9 +20,6 @@ public abstract class Task {
         return isDone ? "X" : " ";
     }
 
-    @Override
-    public String toString() {
-        return String.format("[%s] %s", getStatusIcon(), this.name);
-    }
+    abstract public String toStore();
 
 }
