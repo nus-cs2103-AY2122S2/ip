@@ -1,6 +1,3 @@
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -23,8 +20,7 @@ public class McBot {
         Scanner sc = new Scanner(System.in);
         boolean running = true;
         ArrayList<Task> arrList = new ArrayList<>(100);
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
+
         while(running) {
             try {
                 String fullCommand = sc.nextLine();
@@ -121,21 +117,12 @@ public class McBot {
                     try {
                         String[] str = command[1].split("/by ");
                         String taskName = str[0];
-                        String[] deadlineStr = str[1].split(" ");
-                        String dateStr = deadlineStr[0];
-                        LocalDate deadlineDate = LocalDate.parse(dateStr, dateFormatter);
-                        Task t;
+                        String deadlineDate = str[1];
                         if (taskName.isBlank())
                             throw new invalidCommandException("you can't leave your deadline task empty");
-                        if (dateStr.isBlank())
+                        if (deadlineDate.isBlank())
                             throw new invalidCommandException("you can't leave your deadline date empty");
-                        if (deadlineStr.length == 2) {
-                            String timeStr = deadlineStr[1];
-                            LocalTime deadlineTime = LocalTime.parse(timeStr, timeFormatter);
-                            t = new Deadline(taskName, deadlineDate, deadlineTime);
-                        } else {
-                            t = new Deadline(taskName, deadlineDate);
-                        }
+                        Task t = new Deadline(taskName, deadlineDate);
                         arrList.add(t);
                         System.out.println("Got 'em down as deadline:");
                         System.out.println("[" + t.getTaskIcon() + "][" + t.getStatusIcon() + "] " + t.getFullDetails());
@@ -143,7 +130,7 @@ public class McBot {
                     } catch (invalidCommandException e) {
                         System.out.println(e.getMessage());
                     } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println("Fool, follow this format: deadline -TASKNAME- /by DD/MM/YYYY");
+                        System.out.println("Fool, follow this format: deadline -TASKNAME- /by -DATE-");
                     }
                     break;
                 }
@@ -151,21 +138,12 @@ public class McBot {
                     try {
                         String[] str = command[1].split("/at ");
                         String taskName = str[0];
-                        String[] eventDetails = str[1].split(" ");
-                        String dateStr = eventDetails[0];
-                        LocalDate eventDate = LocalDate.parse(dateStr, dateFormatter);
-                        Task t;
+                        String eventDetails = str[1];
                         if (taskName.isBlank())
                             throw new invalidCommandException("you can't leave your event task empty");
-                        if (dateStr.isBlank())
+                        if (eventDetails.isBlank())
                             throw new invalidCommandException("you can't leave your event date/time empty");
-                        if (eventDetails.length == 2) {
-                            String timeStr = eventDetails[1];
-                            LocalTime eventTime = LocalTime.parse(timeStr, timeFormatter);
-                            t = new Event(taskName, eventDate, eventTime);
-                        } else {
-                            t = new Event(taskName, eventDate);
-                        }
+                        Task t = new Event(taskName, eventDetails);
                         arrList.add(t);
                         System.out.println("Got 'em down as event:");
                         System.out.println("[" + t.getTaskIcon() + "][" + t.getStatusIcon() + "] " + t.getFullDetails());
