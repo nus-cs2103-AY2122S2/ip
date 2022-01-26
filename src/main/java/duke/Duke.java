@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 
 
@@ -35,7 +37,7 @@ public class Duke {
             } else if(echo.substring(0,4).equals("todo")) {
                 if(echo.equals("todo")){
                     System.out.println("wrong");
-                    //throw new DukeException(echo);
+                    //throw new exception.DukeException(echo);
 
                 } else {
                     Todo t = new Todo(echo);
