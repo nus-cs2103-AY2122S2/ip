@@ -82,7 +82,7 @@ public class Parser {
 
     Task parseForTodo(String command) throws DukeException {
         int indexTaskName = 5;
-        if (command.length() <= 5) { //"todo " / "todo" vs "todo write task" (correct)
+        if (command.length() <= 5) {
             throw new IncompleteCommandException();
         }
         String taskName = command.substring(indexTaskName);

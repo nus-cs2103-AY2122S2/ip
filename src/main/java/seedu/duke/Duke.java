@@ -7,6 +7,8 @@ import seedu.duke.exceptions.NoCommandException;
 import seedu.duke.exceptions.NoDateException;
 import seedu.duke.task.*;
 
+import java.io.IOException;
+
 /**
  * Functions as the chatbot by taking in inputs.
  * Also helps in giving out specified outputs.
@@ -38,13 +40,13 @@ public class Duke {
                 Command c = parser.parse(fullCommand); //read the full command and return the command
                 this.taskList = c.execute(this.taskList, this.ui, this.storage);
                 isExit = c.isExit();
-            } catch (DukeException e) {
+            } catch (DukeException | IOException e) {
                 ui.showError(e.getMessage());
             }
         }
     }
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) {
         String filePath = "C:\\Users\\isabe\\IdeaProjects\\ip-false\\src\\data\\oldTasks.txt";
         new Duke(filePath).run();
     }

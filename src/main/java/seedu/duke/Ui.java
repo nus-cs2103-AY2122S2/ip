@@ -72,4 +72,9 @@ public class Ui {
         System.out.println(String
                 .format("Nice! I've marked this task as done: \n%s", markedTask.toString()));
     }
+
+    public void showCompleteUpdateOfFile() {
+        System.out.println("Database has been updated");
+    }
+
 }

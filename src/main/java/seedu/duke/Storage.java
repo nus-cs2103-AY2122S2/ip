@@ -1,12 +1,12 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.UnableToStoreLineException;
+import seedu.duke.exceptions.UnableToUpdateDatabaseException;
 import seedu.duke.task.*;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
+import java.nio.file.*;
 import java.util.Scanner;
 
 public class Storage {
@@ -18,10 +18,12 @@ public class Storage {
         this.ui = ui;
     }
 
+    public String getFilePath() {
+        return this.filePath;
+    }
+
     TaskList getOldTaskList() throws DukeException {
-        //purpose of getOldTaskList: take in input from the file and return a tasklist
         TaskList oldTaskList = new TaskList();
-        //ui.startLoadingOldTasks()
         System.out.println("Hold on, I am checking if you have tasks saved.");
         // If the file does not exist,we create the file.
         // If the file exists, then we scan it to update the taskList
@@ -52,7 +54,7 @@ public class Storage {
     }
 
     Task getTaskFromSummary(String taskDetails) {
-        //taskType is the first letter - e.g. "T" for ToDo
+        //taskType is the first letter - e.g. "T"f
         String taskType = taskDetails.substring(0,1);
         //start from index 2 to skip space
         boolean doneStatus = Integer.parseInt(taskDetails.substring(2,3)) == 1;
@@ -74,7 +76,7 @@ public class Storage {
         }
     }
 
-    String createSummaryFromTask(Task task) {
+    public String createSummaryFromTask(Task task) {
         String taskType = task.getTaskType();
         String  summary = taskType + " ";
         summary += (task.isDone()) ? "1 " : "0 ";
@@ -82,28 +84,32 @@ public class Storage {
         if (taskType.equals("E") || taskType.equals("D")) {
             summary += "/ " + task.getDate();
         }
-        return summary;
+        return summary + "\n";
     }
 
-    //referenced from StackOverflow
-    void removeLine(String lineContent) throws IOException
-    {
-        File file = new File("C:\\Users\\isabe\\IdeaProjects\\ip-false\\src\\data\\oldTasks.txt");
-        File temp = new File("_temp_");
-        PrintWriter out = new PrintWriter(new FileWriter(temp));
-        Files.lines(file.toPath())
-                .filter(line -> !line.contains(lineContent))
-                .forEach(out::println);
-        out.flush();
-        out.close();
-        temp.renameTo(file);
+    public void addLine(String filePath, String lineContent) throws DukeException {
+        File f = new File(filePath);
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f, true));
+            bw.append(lineContent);
+            bw.close();
+        } catch (IOException e) {
+            throw new UnableToStoreLineException();
+        }
     }
 
-    //referenced from BaelDung
-    void addLine(String lineContent) throws IOException {
-        Files.write(
-                Paths.get("oldTasks.txt"),
-                lineContent.getBytes(),
-                StandardOpenOption.APPEND);
+    public void convertTaskListToFile(TaskList taskList) throws DukeException {
+        //rewrite to a new file
+        File f = new File(this.filePath);
+        if (f.delete()) {
+            ui.showCompleteUpdateOfFile();
+        } else {
+            throw new UnableToUpdateDatabaseException();
+        }
+        for (int i = 0; i < taskList.getNumberOfTasks(); i++) {
+            String lineToAdd = this.createSummaryFromTask(taskList.getTasks().get(i));
+            this.addLine(filePath, lineToAdd);
+        }
     }
 }
+

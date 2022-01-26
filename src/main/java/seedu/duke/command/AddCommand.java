@@ -1,8 +1,11 @@
 package seedu.duke.command;
 
 import seedu.duke.*;
+import seedu.duke.exceptions.DukeException;
 import seedu.duke.task.Task;
 import seedu.duke.task.TaskList;
+
+import java.io.IOException;
 
 public class AddCommand extends Command {
     private final Task taskToAdd;
@@ -12,9 +15,11 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public TaskList execute(TaskList taskList, Ui ui, Storage storage) {
+    public TaskList execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         TaskList newTaskList = taskList.add(taskToAdd);
         ui.showAddResult(newTaskList,taskToAdd);
+        String lineToAdd = storage.createSummaryFromTask(this.taskToAdd);
+        storage.addLine(storage.getFilePath(), lineToAdd);
         return newTaskList;
     }
 

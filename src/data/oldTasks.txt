@@ -1,4 +1,6 @@
-E 1 project meeting / Sunday 2-4pm
-D 0 return book / Sunday
-T 1 complete hw 
+D 1 return book / Sunday
 E 0 tutorial / Monday 1-3pm
+T 0 Ask for help    
+D 0 buy new water  / Wednesday
+T 0 play    
+T 0 play with friends 
