@@ -15,35 +15,14 @@ public class Duke {
 
     public static void main(String[] args) {
 
+        Outputs op = new Outputs();
 
 
-        String instructions =
-        "\n" +
-        "     **********************************************************************\n" +
-        "     * COMMANDS | FORMAT                                                  *\n" +
-        "     * normal task |  todo [taskname]                                     *\n" +
-        "     * normal task with deadline | deadline [taskname] /by [date&time]    *\n" +
-        "     * event task with deadline | event [taskname] /by [date&time]        *\n" +
-        "     *                                                                    *\n" +
-        "     * Note for [date&time]: enter it strictly in the following format    *\n" +
-        "     *    dd/mm/yyyy [24h] | eg: 31-12-1969 1830                          *\n" +
-        "     **********************************************************************\n" +
-        "\n";
-        String logo =         "\n" +
-                "       _       _        \n" +
-                "      | |     | |       \n" +
-                "      | |_   _| | _____ \n" +
-                "  _   | | | | | |/ / _ \\\n" +
-                " | |__| | |_| |   <  __/\n" +
-                "  \\____/ \\__,_|_|\\_\\___|\n" +
-                "                        \n" +
-                "                        \n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("    ____________________________________________________________\n" +
-                "     Hello! I'm Juke\n" +
-                "     What can I do for you?\n" +
-                instructions +
-                "    ____________________________________________________________");
+
+        System.out.println(op.greeting + op.logo);
+        System.out.println(op.border +
+                op.firstPrompt +
+                op.instructions + op.border);
         ArrayList<Task> itemList = new ArrayList<>();
         while(true) {
 
@@ -64,102 +43,102 @@ public class Duke {
             if (splittedString[0].equals("mark") && splittedString.length == 2) { // check for mark tag
                 int index = Integer.valueOf(reply.split(" ")[1]);
                 itemList.get(index - 1).markAsDone();
-                System.out.println("    ____________________________________________________________\n" +
+                System.out.println(op.border +
                         "     Nice! I've marked this task as done: \n" +
                         "       " + itemList.get(index - 1).getDescription() + "\n" +
-                        instructions +
-                        "    ____________________________________________________________\n");
+                        op.instructions +
+                        op.border);
 
 
             } else if (splittedString[0].equals("unmark") && splittedString.length == 2) { // check for unmark tag
                 int index = Integer.valueOf(reply.split(" ")[1]);
                 itemList.get(index - 1).markAsUndone();
-                System.out.println("    ____________________________________________________________\n" +
+                System.out.println(op.border +
                         "     OK, I've marked this task as not done yet: \n" +
                         "       " + itemList.get(index - 1).getDescription() + "\n" +
-                        instructions +
-                        "    ____________________________________________________________\n");
+                        op.instructions +
+                        op.border);
 
             } else if (splittedString[0].equals("todo")) { // check for todo tag
                 if (splittedString.length == 1) { //invalid todo command
-                    System.out.println("    ____________________________________________________________\n" +
+                    System.out.println(op.border +
                             "     ☹ OOPS!!! The description of a todo cannot be empty.\n" +
-                            instructions +
-                            "    ____________________________________________________________");
+                            op.instructions +
+                            op.border);
                 } else { //valid todo command
                     Task todoTask = new Todo(reply);
                     itemList.add(todoTask);
-                    System.out.println("    ____________________________________________________________\n" +
+                    System.out.println(op.border +
                             "     Got it. I've added this task: \n" +
                             "       " + todoTask.getDescription() + "\n" +
                             "     Now you have " + itemList.size() + " tasks in the list.\n" +
-                            instructions +
-                            "    ____________________________________________________________");
+                            op.instructions +
+                            op.border);
                 }
             } else if (splittedString[0].equals("deadline")) { // check for deadline tag
                 if (splittedString.length == 1) { //invalid deadline command
-                    System.out.println("    ____________________________________________________________\n" +
+                    System.out.println(op.border +
                             "     ☹ OOPS!!! The description of a deadline cannot be empty.\n" +
-                            instructions +
-                            "    ____________________________________________________________");
+                            op.instructions +
+                            op.border);
                 } else { //valid deadline command
                     Task deadlineTask = new Deadline(reply);
                     itemList.add(deadlineTask);
-                    System.out.println("    ____________________________________________________________\n" +
+                    System.out.println(op.border +
                             "     Got it. I've added this task: \n" +
                             "       " + deadlineTask.getDescription() + "\n" +
                             "     Now you have " + itemList.size() + " tasks in the list.\n" +
-                            instructions +
-                            "    ____________________________________________________________");
+                            op.instructions +
+                            op.border);
                 }
             } else if (splittedString[0].equals("event")) { // check for event tag
                 if (splittedString.length == 1) { //invalid event command
-                    System.out.println("    ____________________________________________________________\n" +
+                    System.out.println(op.border +
                             "     ☹ OOPS!!! The description of a event cannot be empty.\n" +
-                            instructions +
-                            "    ____________________________________________________________");
+                            op.instructions +
+                            op.border);
                 } else { //valid event command
                     Task eventTask = new Event(reply);
                     itemList.add(eventTask);
-                    System.out.println("    ____________________________________________________________\n" +
+                    System.out.println(op.border +
                             "     Got it. I've added this task: \n" +
                             "       " + eventTask.getDescription() + "\n" +
                             "     Now you have " + itemList.size() + " tasks in the list.\n" +
-                            instructions +
-                            "    ____________________________________________________________");
+                            op.instructions +
+                            op.border);
                 }
             } else if (reply.equals("bye")) { // check for bye
-                System.out.println("    ____________________________________________________________\n" +
+                System.out.println(op.border +
                         "     Bye. Hope to see you again soon!\n" +
-                        "    ____________________________________________________________");
+                        op.border);
                 break;
             } else if (reply.equals("list")) { // check for list
-                String totalString = "    ____________________________________________________________\n" +
+                String totalString = op.border +
                         "    Here are the tasks in your list:\n";
                 for (int i = 0; i < itemList.size(); i++) {
                     totalString += "    " + (i + 1) + ". " + itemList.get(i).getDescription() + "\n";
                 }
-                totalString += instructions +
-                        "    ____________________________________________________________\n";
+                totalString += op.instructions +
+                        op.border;
                 System.out.println(totalString);
             } else if (splittedString[0].equals("delete")) { //check for delete
                 try {
                     int index = Integer.valueOf(splittedString[1]);
 
                     String toRemove = itemList.remove(index - 1).getDescription();
-                    System.out.println("    ____________________________________________________________\n" +
+                    System.out.println(op.border +
                             "     Noted. I've removed this task: \n" +
                             "       " + toRemove + "\n" +
-                            "     Now you have " + itemList.size() + " tasks in the list.\n" + instructions +
-                            "    ____________________________________________________________");
+                            "     Now you have " + itemList.size() + " tasks in the list.\n" + op.instructions +
+                            op.border);
                 } catch (NumberFormatException n) {
                     System.out.println("Invalid input, please enter a valid index number instead");
                 }
             } else { //check non-existing commands
-                System.out.println("    ____________________________________________________________\n" +
+                System.out.println(op.border +
                         "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
-                        instructions +
-                        "    ____________________________________________________________");
+                        op.instructions +
+                        op.border);
             }
 
             String file2 = "data/duke.txt";
