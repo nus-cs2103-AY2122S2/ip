@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalTime;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.io.IOException;
@@ -54,9 +56,6 @@ public class Duke {
                         format(str.toString());
                     }
                 } else {
-                    //DateTimeFormatter pattern for reading date
-                    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-
                     //Split cmd into 2 parts, the type of task, and remaining text
                     String[] temp = toEcho.split(" ", 2);
                     String cmd = temp[0];
@@ -115,10 +114,16 @@ public class Duke {
                         if (incomplete) {
                             throw new DukeException("WHAT YOU WANT DO? NOTHING AH HELLOOOOOO?");
                         } else {
+                            //DateTimeFormatter pattern for reading date and time
+                            DateTimeFormatter dateInputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                            DateTimeFormatter timeInputFormatter = DateTimeFormatter.ofPattern("HHmm");
                             String task = rem.split(" /by ")[0];
-                            String dead = rem.split(" /by ")[1];
-                            LocalDateTime d1 = LocalDateTime.parse(dead, inputFormatter);
-                            Task tempTask = new Deadline(task, d1);
+                            String dateTime = rem.split(" /by ")[1];
+                            String date = dateTime.split(" ")[0];
+                            String time = dateTime.split(" ")[1];
+                            LocalDate d1 = LocalDate.parse(date, dateInputFormatter);
+                            LocalTime t1 = LocalTime.parse(time, timeInputFormatter);
+                            Task tempTask = new Deadline(task, d1, t1);
                             tasks.add(tempTask);
                             String confirm =
                                     "YOU BETTER FINISH THIS AH:" + TASKSPACE + tempTask + SPACE +
@@ -127,14 +132,21 @@ public class Duke {
                             format(confirm);
                         }
                     } else if (cmd.equals("event")) {
+                        //DateTimeFormatter pattern for reading date and time
+                        DateTimeFormatter dateInputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                        DateTimeFormatter timeInputFormatter = DateTimeFormatter.ofPattern("HHmm");
                         //event
                         if (incomplete) {
                             throw new DukeException("WHAT YOU WANT DO? NOTHING AH HELLOOOOOO?");
                         } else {
                             String task = rem.split(" /at ")[0];
                             String dead = rem.split(" /at ")[1];
-                            LocalDateTime d1 = LocalDateTime.parse(dead, inputFormatter);
-                            Task tempTask = new Event(task, d1);
+                            String date = dead.split(" ")[0];
+                            String[] time = dead.split(" ")[1].split("-");
+                            LocalDate d1 = LocalDate.parse(date, dateInputFormatter);
+                            LocalTime timeFrom = LocalTime.parse(time[0], timeInputFormatter);
+                            LocalTime timeTo = LocalTime.parse(time[1], timeInputFormatter);
+                            Task tempTask = new Event(task, d1, timeFrom, timeTo);
                             tasks.add(tempTask);
                             String confirm =
                                     "YOU BETTER REMEMBER THIS AH:" + TASKSPACE + tempTask + SPACE +

@@ -1,11 +1,14 @@
+import java.time.LocalTime;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Task {
     private String name;
     private boolean done;
-    private LocalDateTime dead;
+    private LocalDate date;
+    private LocalTime time;
+    private LocalTime timeFrom;
+    private LocalTime timeTo;
     private String type;
 
     public Task(String type, String name) {
@@ -14,10 +17,20 @@ public class Task {
         this.done = false;
     }
 
-    public Task(String type, String name, LocalDateTime dead) {
+    public Task(String type, String name, LocalDate date, LocalTime time) {
         this.type = type;
         this.name = name;
-        this.dead = dead;
+        this.date = date;
+        this.time = time;
+        this.done = false;
+    }
+
+    public Task(String type, String name, LocalDate date, LocalTime timeFrom, LocalTime timeTo) {
+        this.type = type;
+        this.name = name;
+        this.date = date;
+        this.timeFrom = timeFrom;
+        this.timeTo = timeTo;
         this.done = false;
     }
 
@@ -45,10 +58,26 @@ public class Task {
         return name;
     }
 
-    public String getDead() {
-        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
-        return dead.format(outputFormatter).toString();
+    public String getDate() {
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        return date.format(outputFormatter).toString();
     }
+
+    public String getTime() {
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("HHmm");
+        return time.format(outputFormatter).toString();
+    }
+
+    public String getTimeFrom() {
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("HHmm");
+        return timeFrom.format(outputFormatter).toString();
+    }
+
+    public String getTimeTo() {
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("HHmm");
+        return timeTo.format(outputFormatter).toString();
+    }
+
 
     @Override
     public String toString() {
