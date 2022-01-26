@@ -2,8 +2,11 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * event class
+ * inherit from Task class
+ */
 public class Event extends Task {
-
     protected String at;
     protected String date;
     protected String time;
@@ -21,7 +24,11 @@ public class Event extends Task {
         return "E | " + "[" +  this.getStatusIcon() + "] " + super.message() + "(at:" + dateTimeFormat(date) + " " + this.time + ")";
     }
 
-
+    /**
+     * re-format the date and time
+     * @param dateTime
+     * @return
+     */
     public String dateTimeFormat(String dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
         LocalDate d = LocalDate.parse(dateTime,formatter);

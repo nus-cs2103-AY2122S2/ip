@@ -1,6 +1,9 @@
 package duke;
 import java.util.Arrays;
 
+/**
+ * deals with invalid commands from user's input
+ */
 public class DukeException extends Exception{
 
     //all the commands
@@ -12,6 +15,11 @@ public class DukeException extends Exception{
 
     public DukeException() {}
 
+    /**
+     * check if the user's input are valid
+     * @param inp
+     * @throws DukeException
+     */
     public void invalidCommands (String inp) throws DukeException{
         String[] temp =  inp.split(" ",2);
         String cmd = temp[0];
@@ -33,6 +41,11 @@ public class DukeException extends Exception{
         }
     }
 
+    /**
+     * check if the deadline commands input by user is valid
+     * @param descrip
+     * @throws DukeException
+     */
     public void invalidDeadline (String descrip) throws DukeException {
          if ((descrip.split("/by",2)[0].equals(""))) {
             throw new DukeException("Please indicate the a task for this deadline");
@@ -43,6 +56,11 @@ public class DukeException extends Exception{
         }
     }
 
+    /**
+     * check if the event commands input by user is valid
+     * @param descrip
+     * @throws DukeException
+     */
     public void invalidEvent (String descrip) throws DukeException {
         if ((descrip.split("/at",2)[0].equals(""))) {
             throw new DukeException("Please indicate the a task for this event");

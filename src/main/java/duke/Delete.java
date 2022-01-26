@@ -1,4 +1,9 @@
 package duke;
+
+/**
+ * delete the tasks from list
+ * inherit from task
+ */
 public class Delete extends Task{
 
     public Delete(String description) {

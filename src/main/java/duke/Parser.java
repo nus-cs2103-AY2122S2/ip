@@ -2,6 +2,9 @@ package duke;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+/**
+ * deals with making sense of user command
+ */
 public class Parser {
 
     String directory;
@@ -12,7 +15,10 @@ public class Parser {
         this.filePath = filePath;
     }
 
-
+    /**
+     * check if directory exist
+     * @throws FileNotFoundException
+     */
     public void checkDir () throws FileNotFoundException {
         File dukeDirectory = new File(directory);
         if (!dukeDirectory.exists()) {
@@ -20,6 +26,10 @@ public class Parser {
         }
     }
 
+    /**
+     * check if file exist
+     * @throws FileNotFoundException
+     */
     public void checkFile() throws FileNotFoundException {
         File dukeFile = new File (filePath);
         if (!dukeFile.exists()) {
