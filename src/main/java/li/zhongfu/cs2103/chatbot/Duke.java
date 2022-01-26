@@ -4,6 +4,11 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +22,19 @@ import li.zhongfu.cs2103.chatbot.types.ToDo;
 public class Duke {
     private static final String HLINE = "____________________________________________________________";
     private static final String BOT_NAME = "Duke";
+
+    // should probably be using some friendly date parser library for this
+    // but maybe we can avoid external libraries for now?
+    private static final DateTimeFormatter DATE_TIME_PARSE_FORMAT = new DateTimeFormatterBuilder()
+            .parseCaseInsensitive()
+            .appendOptional(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+            .appendPattern("[yyyy-MM-dd[ HH:mm[:ss]]]")
+            .appendPattern("[MMM d yyyy[ HH:mm[:ss]]]")
+            .appendPattern("[d MMM yyyy[ HH:mm[:ss]]]")
+            .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
+            .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
+            .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
+            .toFormatter();
 
     private static void dialog(String[] lines) {
         System.out.println("    " + HLINE);
@@ -167,14 +185,26 @@ public class Duke {
 
                         if (inCmd.equals("deadline")) {
                             if (!taskArgs.containsKey("by") || taskArgs.get("by").isEmpty()) {
-                                throw new DukeException(String.format("You need a time for your deadline! Try: deadline %s /by next Sunday", taskArgs.get("")));
+                                throw new DukeException(String.format("You need a time for your deadline! Try: deadline %s /by 1 jan 2050 12:15", taskArgs.get("")));
                             }
-                            task = new Deadline(taskArgs.get(""), taskArgs.get("by"));
+
+                            try {
+                                LocalDateTime parsedDate = LocalDateTime.parse(taskArgs.get("by"), DATE_TIME_PARSE_FORMAT);
+                                task = new Deadline(taskArgs.get(""), parsedDate);
+                            } catch (DateTimeParseException e) {
+                                throw new DukeException(String.format("Unknown date format! Try: deadline %s /by 1 jan 2050 12:15", taskArgs.get("")));
+                            }
                         } else if (inCmd.equals("event")) {
                             if (!taskArgs.containsKey("at") || taskArgs.get("at").isEmpty()) {
-                                throw new DukeException(String.format("You need a time for your event! Try: event %s /at next Sunday", taskArgs.get("")));
+                                throw new DukeException(String.format("You need a time for your event! Try: event %s /at 1 jan 2050 12:15", taskArgs.get("")));
                             }
-                            task = new Event(taskArgs.get(""), taskArgs.get("at"));
+
+                            try {
+                                LocalDateTime parsedDate = LocalDateTime.parse(taskArgs.get("at"), DATE_TIME_PARSE_FORMAT);
+                                task = new Event(taskArgs.get(""), parsedDate);
+                            } catch (DateTimeParseException e) {
+                                throw new DukeException(String.format("Unknown date format! Try: event %s /at 1 jan 2050 12:15", taskArgs.get("")));
+                            }
                         } else {
                             task = new ToDo(taskArgs.get(""));
                         }
