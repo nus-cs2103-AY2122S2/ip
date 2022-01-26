@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 import java.util.MissingFormatArgumentException; // Imported MissingFormatArgumentException
 import java.util.Scanner; // Imported Scanner class
@@ -17,7 +18,8 @@ public class Duke {
         Commands cmd = new Commands();
         Scanner io = new Scanner(System.in); // Scanner object created
         try {
-            cmd.startup();
+            File curr = cmd.startup();
+            cmd.restore(curr);
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }

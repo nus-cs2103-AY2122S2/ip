@@ -7,6 +7,11 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, int mark) {
+        this.description = description;
+        this.isDone = mark == 1;
+    }
+
     public String getTask() {
         if (this.isDone) {
             return "[X] " + this.description;

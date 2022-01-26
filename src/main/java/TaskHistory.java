@@ -18,6 +18,11 @@ public class TaskHistory {
         System.out.println(msg);
     }
 
+    void addToDo(int mark, String description) {
+        ToDos tempToDo = new ToDos(mark, description);
+        record.add(tempToDo);
+    }
+
     void addDeadline(String description, String timeFrame) {
         Deadlines tempDeadline = new Deadlines(description, timeFrame);
         record.add(tempDeadline);
@@ -29,6 +34,11 @@ public class TaskHistory {
         System.out.println(msg);
     }
 
+    void addDeadline(int mark, String description, String timeFrame) {
+        Deadlines tempDeadline = new Deadlines(mark, description, timeFrame);
+        record.add(tempDeadline);
+    }
+
     void addEvent(String description, String timeFrame) {
         Event tempEvent = new Event(description, timeFrame);
         record.add(tempEvent);
@@ -38,6 +48,11 @@ public class TaskHistory {
                 + "Currently you have " + record.size() + " tasks in our records.\n"
                 + "_______________________________________________________\n";
         System.out.println(msg);
+    }
+
+    void addEvent(int mark, String description, String timeFrame) {
+        Event tempEvent = new Event(mark, description, timeFrame);
+        record.add(tempEvent);
     }
 
     /**

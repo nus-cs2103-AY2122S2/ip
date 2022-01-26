@@ -1,8 +1,9 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Scanner;
 
 public class Commands {
 
@@ -143,30 +144,40 @@ public class Commands {
         taskHistory.deleteTask(index);
     }
 
-    void startup() throws IOException {
+    File startup() throws IOException {
         String home = System.getProperty("user.home");
-
         Path path = Paths.get(home,"Duke", "data");
-        boolean directoryExists = Files.exists(path);
-        System.out.println(path);
-        System.out.println(directoryExists);
-
         String filePath = String.valueOf(path);
-
+        // Check if parent and child directory exists else create them
         File f1 = new File(filePath);
-        if (f1.mkdirs()) {
-            System.out.println("Successfully created data folder");
-        } else {
-            System.out.println("Creation of data folder was unsuccessful");
-        }
-        System.out.println(filePath);
-
+        f1.mkdirs();
+        // Check if duke.txt exits else create it
         File f2 = new File (filePath + "\\duke.txt");
+        f2.createNewFile();
 
-        if (f2.createNewFile()) {
-            System.out.println("Successfully created duke.txt");
-        } else {
-            System.out.println("Creation of duke.txt was unsuccessful");
+        return f2;
+    }
+
+    void restore(File curr) throws FileNotFoundException {
+        Scanner s = new Scanner(curr);
+        while (s.hasNext()) {
+            String temp = s.nextLine();
+            String[] arr = temp.split(":");
+            int mark = Integer.parseInt(arr[1]);
+            switch (arr[0]) {
+            case "T":
+                taskHistory.addToDo(mark, arr[2]);
+                break;
+            case "D":
+                taskHistory.addDeadline(mark, arr[2], arr[3]);
+                break;
+            case "E":
+                taskHistory.addEvent(mark, arr[2], arr[3]);
+                break;
+            default:
+                System.out.println("load unsuccessful");
+                break;
+            }
         }
     }
 }

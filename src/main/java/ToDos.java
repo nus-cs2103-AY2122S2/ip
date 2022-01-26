@@ -4,6 +4,10 @@ public class ToDos extends Task {
         super(description);
     }
 
+    public ToDos(int mark, String description) {
+        super(description, mark);
+    }
+
     public String getToDo() {
         return "[T]" + this.getTask() + "\n";
     }

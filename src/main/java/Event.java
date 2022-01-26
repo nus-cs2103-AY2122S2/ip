@@ -6,6 +6,11 @@ public class Event extends Task {
         this.timeFrame = timeFrame;
     }
 
+    public Event(int mark, String description, String timeFrame) {
+        super(description, mark);
+        this.timeFrame = timeFrame;
+    }
+
     public String getEvent() {
         return "[E]" + this.getTask() + "(at: " + timeFrame + ")\n";
     }
