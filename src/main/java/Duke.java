@@ -249,6 +249,7 @@ public class Duke {
                         String currStr = sc.next();
                         if (currStr.equals("/by")) {
                             String time = sc.nextLine();
+                            time = time.substring(1);
                             addDeadline(task, time);
                             updateFile(String.valueOf(filePath));
                             break;
@@ -264,6 +265,7 @@ public class Duke {
                         String currStr = sc.next();
                         if (currStr.equals("/at")) {
                             String time = sc.nextLine();
+                            time = time.substring(1);
                             addEvent(task, time);
                             updateFile(String.valueOf(filePath));
                             break;
