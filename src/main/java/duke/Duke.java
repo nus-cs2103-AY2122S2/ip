@@ -1,4 +1,6 @@
-import javax.sound.midi.SysexMessage;
+package duke;
+
+;
 
 public class Duke {
 
