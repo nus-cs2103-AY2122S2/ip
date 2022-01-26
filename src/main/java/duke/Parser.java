@@ -33,6 +33,13 @@ public class Parser {
             // Mark and unmark have the same syntax, so only process it once
             if (inputMessage.length() < 4) {
                 // Do nothing (For Future methods to be added if their lengths are lesser than 4
+            } else if (inputMessage.substring(0,4).contains("find")) {
+                if (inputMessage.length() <= 4) {
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but you need to provide a description "
+                                             + "for the find task\n");
+                }
+                msg = inputMessage.split("find ");
+                msg[0] = "find";
             } else if (inputMessage.substring(0, 4).contains("todo")) {
                 if (inputMessage.length() <= 4) {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but you need to provide a description "

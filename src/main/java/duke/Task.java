@@ -9,9 +9,9 @@ import java.util.ArrayList;
  * General class encompassing all the common functionalities of all children tasks
  */
 public class Task {
-    String task;
-    Boolean done;
-    String initials;
+    private String task;
+    private Boolean done;
+    public String initials;
 
     /**
      * Constructor for General Task
@@ -34,6 +34,14 @@ public class Task {
      */
     public void unmark() {
         this.done = false;
+    }
+
+    /**
+     * Returns the description of the current task
+     * @return String containing the description of the current task
+     */
+    public String describe() {
+        return this.task;
     }
 
     /**

@@ -71,8 +71,8 @@ public class Command {
         StringBuilder toPrint = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < listOfTasks.size(); i++) {
             int num = i + 1;
-            String add = num + "." + listOfTasks.get(i) + "\n";
-            toPrint.append(add);
+            String toAdd = num + "." + listOfTasks.get(i) + "\n";
+            toPrint.append(toAdd);
         }
         return toPrint.toString();
     }
@@ -98,6 +98,19 @@ public class Command {
         toUnmark.unmark();
         StringBuilder toPrint = new StringBuilder("OK, I've marked this task as not done yet:\n").append(toUnmark)
                                                                                                  .append("\n");
+        return toPrint.toString();
+    }
+
+    private static String findTask(String keyword, TaskList listOfTasks) {
+        StringBuilder toPrint = new StringBuilder("Here are the matching tasks in your list:\n");
+        int count = 1;
+        for (Task task: listOfTasks.getList()) {
+            if (task.describe().contains(keyword)) {
+                String toAdd = count + "." + task + "\n";
+                toPrint.append(toAdd);
+                count++;
+            }
+        }
         return toPrint.toString();
     }
 
@@ -132,6 +145,9 @@ public class Command {
                 break;
             case "todo":
                 toPrint = addTodo(processedInput[1], listOfTasks);
+                break;
+            case "find":
+                toPrint = findTask(processedInput[1], listOfTasks);
                 break;
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
