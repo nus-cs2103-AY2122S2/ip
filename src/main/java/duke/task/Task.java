@@ -41,4 +41,8 @@ public abstract class Task implements Serializable {
         }
     }
 
+    public boolean getCompletionStatus(){
+        return this.isFinished;
+    }
+
 }

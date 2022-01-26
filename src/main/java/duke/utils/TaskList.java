@@ -85,7 +85,7 @@ public class TaskList {
         Ui.printList(tasks);
     }
 
-    private int getSize(){
+    public int getSize(){
         return tasks.size();
     }
 
