@@ -44,17 +44,9 @@ public class TaskList {
     }
 
     /**
-     * Prints string out in a specified way
-     * @param str
-     */
-    public void print(Object str){
-        ui.println(str);
-        ui.println("_".repeat(100));
-    }
-
-    /**
      * Adds a task to the user Task List
-     * @param task
+     * @param task exact task to be added into users' Task List
+     * @param toPrint boolean value to decide if we want to execute print statements
      */
     public void addTask(Task task, Boolean toPrint) {
         this.userTaskList.add(task);
@@ -71,7 +63,7 @@ public class TaskList {
 
     /**
      * Deletes specified user Task from Task List
-     * @param taskIndex
+     * @param taskIndex exact task index to be deleted
      * @throws DukeException if specified taskIndex is not valid (<=0 or > total size of TaskList)
      */
     public void deleteTask(int taskIndex) throws DukeException {
@@ -84,7 +76,7 @@ public class TaskList {
 
     /**
      * Checks if a specified task index is value
-     * @param taskIndex
+     * @param taskIndex exact task index to be verified
      * @return true if index is valid
      * @throws DukeException if specified taskIndex is not valid (<=0 or > total size of TaskList)
      */
@@ -96,7 +88,7 @@ public class TaskList {
     }
 
     /**
-     * Prints out all of users tasks
+     * Prints all of the users tasks in a nice format
      */
     public void printUserTasks() {
         int numberOfTasks = this.userTaskList.size();
@@ -122,7 +114,8 @@ public class TaskList {
 
     /**
      * Marks tasks as done as specified by the task index
-     * @param taskIndex
+     * @param taskIndex exact task index to be marked
+     * @param toPrint boolean value to decide if we want to execute print statements
      * @throws DukeException if specified taskIndex is not valid (<=0 or > total size of TaskList)
      */
     public void markTaskDone(int taskIndex, Boolean toPrint) throws DukeException { //This is the actual index for arraylist checking (minus one already)
@@ -137,7 +130,8 @@ public class TaskList {
 
     /**
      * Marks tasks as not done as specified by the task index
-     * @param taskIndex
+     * @param taskIndex exact task index to be unmarked
+     * @param toPrint boolean value to decide if we want to execute print statements
      * @throws DukeException if specified taskIndex is not valid (<=0 or > total size of TaskList)
      */
     public void markTaskNotDone(int taskIndex, Boolean toPrint) throws DukeException { //This is the actual index for arraylist checking (minus one already)

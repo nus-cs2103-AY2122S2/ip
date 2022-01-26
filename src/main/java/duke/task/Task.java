@@ -4,11 +4,6 @@ public abstract class Task {
     private String taskDescription;
     private String tag;
 
-    /**
-     * Constructor for Task
-     * @param taskDescription
-     * @param tag
-     */
     public Task (String taskDescription, String tag){
         this.taskDescription = taskDescription;
         this.isDone = false;

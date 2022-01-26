@@ -4,6 +4,11 @@ public class Event extends Task {
 
     private String eventTiming;
 
+    /**
+     *
+     * @param description description of event task
+     * @param eventTiming timing of event
+     */
     public Event(String description, String eventTiming){
         super(description, "E");
         this.eventTiming = eventTiming;
@@ -15,7 +20,7 @@ public class Event extends Task {
 
     /**
      * returns deadline in save data format (format to be saved in data.txt file for task storage)
-     * @return
+     * @return string representing the format it is saved in
      */
     @Override
     public String toSaveDataFormat() {

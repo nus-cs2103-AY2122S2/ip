@@ -15,6 +15,12 @@ public abstract class Command {
         return this.userTaskString;
     }
 
+    /**
+     * Abstract method which executes the commands' tasks
+     * @param taskList
+     * @param fileManager
+     * @throws DukeException
+     */
     public abstract void executeTask(TaskList taskList, FileManager fileManager) throws DukeException;
 
 }

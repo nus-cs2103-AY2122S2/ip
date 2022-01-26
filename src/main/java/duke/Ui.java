@@ -4,7 +4,7 @@ public class Ui {
 
     /**
      * Print statement with divider line
-     * @param str
+     * @param str input string to be printed
      */
     public void print(Object str) {
         System.out.println(str);
@@ -13,7 +13,7 @@ public class Ui {
 
     /**
      * Prints oridinary System.out.println
-     * @param str
+     * @param str input string to be printed
      */
     public void println(Object str) {
         System.out.println(str);
