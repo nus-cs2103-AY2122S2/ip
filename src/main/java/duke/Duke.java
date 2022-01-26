@@ -38,7 +38,7 @@ public class Duke {
             try {
                 String input = scanner.nextLine();
                 Command command = Parser.parse(input);
-                processInput(command);
+                executeCommand(command);
                 storage.saveTasks(tasks);
             } catch (DukeException e) {
                 ui.showError(e.toString());
@@ -46,7 +46,7 @@ public class Duke {
         }
     }
 
-    private void processInput(Command command) {
+    private void executeCommand(Command command) {
         Map<String, String> params = command.getParams();
 
         switch (command.getType()) {

@@ -94,8 +94,8 @@ public class Ui {
         printTabbed(TEXT_DIVIDER, 0);
     }
 
-    private void printTabbed(String s, int padding) {
-        String[] lines = s.split("\n");
+    private void printTabbed(String string, int padding) {
+        String[] lines = string.split("\n");
         char[] whiteSpace = new char[padding];
         Arrays.fill(whiteSpace, ' ');
 

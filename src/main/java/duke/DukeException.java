@@ -2,8 +2,8 @@ package duke;
 
 public class DukeException extends RuntimeException {
 
-    public DukeException(String s) {
-        super(s);
+    public DukeException(String message) {
+        super(message);
     }
 
     @Override
