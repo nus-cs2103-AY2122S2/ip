@@ -121,6 +121,13 @@ public class Ui {
         System.out.println(TypicalString.LONG_LINE);
     }
 
+    /**
+     * Prints results that match with the keyword
+     *
+     * @param numIndex        Current number of task that match with the keyword
+     * @param storingListSize Current size of <code>TaskList</code>
+     * @param task            Task that been matched with keyword
+     */
     public void showSearchResult(int numIndex, int storingListSize, Task task) {
         if (numIndex == 1) {
             System.out.println(TypicalString.LONG_LINE);

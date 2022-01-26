@@ -87,6 +87,11 @@ public class TaskList {
         return storingList.remove(taskNumber - 1);
     }
 
+    /**
+     * Finds tasks in the storing list that match with the keyword
+     *
+     * @param keyWord The keyword to find the matching task
+     */
     public void findTasksByKeyWord(String keyWord) {
         int numIndex = 0;
         for (int i = 0; i < storingList.size(); i++) {
@@ -98,6 +103,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Checks if the task contains the keyword
+     *
+     * @param task The task needed to be checked
+     * @param keyWord The required keyword in the task
+     * @return True if the task contains keyword and false otherwise
+     */
     private boolean isTaskHasKeyWord(Task task, String keyWord) {
         String taskString = task.toString();
         return taskString.contains(keyWord);
