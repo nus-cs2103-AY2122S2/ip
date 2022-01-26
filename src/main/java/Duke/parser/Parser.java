@@ -52,6 +52,11 @@ public class Parser {
                     return new HandleErrorCommand("OOPS!!! Please input a number. :<");
                 }
                 return new DeleteCommand(remaining_word);
+            case "find":
+                if (remaining_word.equals("")) {
+                    return new HandleErrorCommand("OOPS!!! Please input a number. :<");
+                }
+                return new FindCommand(remaining_word);
             default:
                 return new NotKnownCommand();
             }
