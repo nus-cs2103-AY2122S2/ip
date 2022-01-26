@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 /**
@@ -80,9 +81,14 @@ public class Memory {
      * @param time The due time of the Deadline.
      */
     public void addDeadline(String name, String time) {
-        taskMem.add(new Deadline(name, time));
-        size++;
-        echo.echoString("added deadline: " + getString(size - 1));
+        try {
+            taskMem.add(new Deadline(name, time));
+            size++;
+            echo.echoString("added deadline: " + getString(size - 1));
+        }
+        catch (DateTimeParseException e) {
+            echo.echoString("Please format your date in yyyy-mm-dd");
+        }
     }
 
     /**

@@ -1,10 +1,15 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * The Event class extends the Task class by adding an event time.
  *
  * @author Rdac0
  */
 public class Event extends Task{
-    private String time;
+    private LocalDate time;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
 
     /**
      * Creates an Event object.
@@ -12,9 +17,9 @@ public class Event extends Task{
      * @param name The name of the Event.
      * @param time The time of the Event.
      */
-    public Event(String name, String time) {
+    public Event(String name, String time) throws DateTimeParseException {
         super(name);
-        this.time = time;
+        this.time = LocalDate.parse(time);
     }
 
     public String toString() {
@@ -25,6 +30,6 @@ public class Event extends Task{
             mark = "[ ] ";
         }
         return "[E]" + mark + getName() +
-                " (at: " + this.time + ")";
+                " (at: " + this.time.format(formatter) + ")";
     }
 }
