@@ -4,7 +4,7 @@ import duke.command.Command;
 import duke.datetime.DateTable;
 import duke.task.TaskList;
 import duke.util.Parser;
-import duke.util.BotStorage;
+import duke.util.BotStoring;
 import duke.util.Ui;
 
 import java.io.*;
@@ -16,14 +16,14 @@ public class Duke {
     private final static String FILE_NAME = "duke.Duke.txt";
     private final static String PATH = DIRECTORY + "/" + FILE_NAME;
 
-    private final BotStorage botStorage;
+    private final BotStoring botStorage;
     private final TaskList taskList;
     private final Ui ui;
     private final DateTable dateTable;
 
     public Duke(String path, String directory) throws IOException {
         TaskList taskList1;
-        botStorage = new BotStorage(path, directory);
+        botStorage = new BotStoring(path, directory);
         Scanner sc = new Scanner(System.in);
         ui = new Ui(sc);
         dateTable = new DateTable(ui);

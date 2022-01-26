@@ -3,14 +3,32 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Stores the information about the task
+ */
 public class Task {
     private final String description;
     private boolean isComplete;
     private final String type;
     private LocalDate time;
-    private final String command;
+    private String timeCommand;
 
     public Task(String description, String type) {
+        int slashIndex = parseDescription(description, type);
+        this.description = description.substring(0, slashIndex);
+        this.isComplete = false;
+        this.type = type;
+    }
+
+    /**
+     * Parses the description into smaller components, such as time and the time command
+     * and returns the index at the start of the time command
+     *
+     * @param description The description of the task
+     * @param type The type of the task
+     * @return The index at the start of time command
+     */
+    private int parseDescription(String description, String type) {
         int slashIndex;
         int command;
         if (! type.equals("T")) {
@@ -19,24 +37,33 @@ public class Task {
             String timeString = description.substring(command + 1);
             this.time = LocalDate.parse(timeString,
                     DateTimeFormatter.ofPattern("d/M/yyyy"));
-            this.command = description.substring(slashIndex + 1, command);
+            this.timeCommand = description.substring(slashIndex + 1, command);
         } else {
             slashIndex = description.length();
-            this.command = "";
+            this.timeCommand = "";
         }
-        this.description = description.substring(0, slashIndex);
-        this.isComplete = false;
-        this.type = type;
+        return slashIndex;
     }
 
+    /**
+     * Changes the task state to become completed
+     */
     public void taskDone() {
         this.isComplete = true;
     }
 
+    /**
+     * Changes the task state to become uncompleted
+     */
     public void taskUndone() {
         this.isComplete = false;
     }
 
+    /**
+     * Returns the string used to append to the database file
+     *
+     * @return The string with the database file format
+     */
     public String toFileText() {
         String done;
         String timeDue;
@@ -46,10 +73,10 @@ public class Task {
             done = "0";
         }
 
-        if (this.command.equals("")) {
+        if (this.timeCommand.equals("")) {
             timeDue = " |";
         } else {
-            timeDue = "| " + command + " " +
+            timeDue = "| " + timeCommand + " " +
                     this.time.format(DateTimeFormatter.ofPattern("d/M/yyyy")) + " |";
         }
 
@@ -64,6 +91,11 @@ public class Task {
         return this.type;
     }
 
+    /**
+     * Returns the display string of the task
+     *
+     * @return The string that describes the task
+     */
     @Override
     public String toString() {
         String temp = "[ ]";
@@ -71,8 +103,8 @@ public class Task {
             temp = "[X]";
         }
         String timeCommand = "";
-        if (! command.equals("")) {
-            timeCommand = "(" + command + ": " +
+        if (! this.timeCommand.equals("")) {
+            timeCommand = "(" + this.timeCommand + ": " +
                     time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         }
         return "[" + type + "]" + temp + " " + description + timeCommand;

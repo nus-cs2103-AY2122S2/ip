@@ -5,6 +5,9 @@ import duke.task.Task;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a helper program to read from and write to interface
+ */
 public class Ui {
     private final Scanner sc;
 
@@ -41,6 +44,9 @@ public class Ui {
         startChat();
     }
 
+    /**
+     * Prints out the welcoming text when user initialize the bot
+     */
     public void startChat() {
         System.out.println(TypicalString.LONG_LINE);
         System.out.println(TypicalString.HELLO);
@@ -48,12 +54,20 @@ public class Ui {
         System.out.println(TypicalString.LONG_LINE);
     }
 
+    /**
+     * Prints out the goodbye text when user end the bot
+     */
     public void endChat() {
         System.out.println(TypicalString.LONG_LINE);
         System.out.println(TypicalString.GOODBYE);
         System.out.println(TypicalString.LONG_LINE);
     }
 
+    /**
+     * Prints out all the task in the current list
+     *
+     * @param storingList Current task list
+     */
     public void showListTask(ArrayList<Task> storingList) {
         System.out.println(TypicalString.LONG_LINE);
         System.out.println(" Here are the tasks in your list:");
@@ -63,6 +77,12 @@ public class Ui {
         System.out.println(TypicalString.LONG_LINE);
     }
 
+    /**
+     * Prints out the response based on changing state of the task
+     *
+     * @param task Task that changing state
+     * @param isDone State of the task
+     */
     public void showTaskMark(Task task, boolean isDone) {
         if (isDone) {
             task.taskDone();
@@ -77,6 +97,12 @@ public class Ui {
         System.out.println(TypicalString.LONG_LINE);
     }
 
+    /**
+     * Prints out the task and total number of tasks after adding
+     *
+     * @param task Task that just been added in
+     * @param numTask Number of tasks after adding
+     */
     public void showTask(Task task, int numTask) {
         System.out.println(TypicalString.LONG_LINE);
         System.out.println(TypicalString.ADDED_TASK);
@@ -85,6 +111,12 @@ public class Ui {
         System.out.println(TypicalString.LONG_LINE);
     }
 
+    /**
+     * Prints out the task that been deleted and the number of tasks afterwards
+     *
+     * @param task Task that just been deleted
+     * @param numTask Number of tasks left
+     */
     public void showDeleteTask(Task task, int numTask) {
         System.out.println(TypicalString.LONG_LINE);
         System.out.println(" Noted. I've removed this duke.task: ");
@@ -93,6 +125,11 @@ public class Ui {
         System.out.println(TypicalString.LONG_LINE);
     }
 
+    /**
+     * Prints out the list of tasks in a specific date
+     *
+     * @param eventList List of tasks on the date
+     */
     public void showDate(ArrayList<Task> eventList) {
         System.out.println(TypicalString.LONG_LINE);
         System.out.println("You have " + eventList.size() +
@@ -103,12 +140,20 @@ public class Ui {
         System.out.println(TypicalString.LONG_LINE);
     }
 
+    /**
+     * Prints out the error message when loading the bot
+     */
     public void showLoadingError() {
         System.out.println(TypicalString.LONG_LINE);
         System.out.println(" Sorry, some problem have occurred during initialization: ");
         System.out.println(TypicalString.LONG_LINE);
     }
 
+    /**
+     * Returns the input string from scanner
+     *
+     * @return Input string
+     */
     public String readCommand() {
         return sc.nextLine();
     }

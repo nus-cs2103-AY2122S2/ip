@@ -1,14 +1,14 @@
 package duke.task;
 
-import duke.util.Storage;
+import duke.util.Storing;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class StorageStub implements Storage {
+public class StoringStub implements Storing {
     private long length;
 
-    public StorageStub(String path, String directory) {
+    public StoringStub(String path, String directory) {
         if (path.equals("data/duke.Duke.txt") && directory.equals("data")) {
             this.length = 1;
         } else {

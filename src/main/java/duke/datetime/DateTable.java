@@ -9,6 +9,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Stores collection of task and time and performs operation to it
+ */
 public class DateTable {
     private HashMap<LocalDate, ArrayList<Task>> dateMap = new HashMap<>();
     private final BotException exception = new BotException();
@@ -18,6 +21,11 @@ public class DateTable {
         this.ui = ui;
     }
 
+    /**
+     * Prints out the list of event on a specific date
+     *
+     * @param dateString The string version of the date
+     */
     public void getEventOnDate(String dateString) {
         LocalDate date = LocalDate.parse(dateString,
                 DateTimeFormatter.ofPattern("d/M/yyyy"));
@@ -29,6 +37,11 @@ public class DateTable {
         }
     }
 
+    /**
+     * Adds date with task to the collection
+     *
+     * @param task The task need to be added to the collection
+     */
     public void addDate(Task task) {
         LocalDate localDate = task.getTime();
         if (dateMap.containsKey(localDate)) {
@@ -38,6 +51,18 @@ public class DateTable {
             ArrayList<Task> eventList = new ArrayList<>();
             eventList.add(task);
             dateMap.put(localDate, eventList);
+        }
+    }
+
+    /**
+     * Removes the task from the collection
+     *
+     * @param task The task need to be removed
+     */
+    public void deleteTaskOnDate(Task task) {
+        if (! task.getType().equals("T")) {
+            ArrayList<Task> taskArrayList = dateMap.get(task.getTime());
+            taskArrayList.remove(task);
         }
     }
 }

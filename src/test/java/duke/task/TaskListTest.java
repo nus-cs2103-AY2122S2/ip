@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.util.Storage;
+import duke.util.Storing;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -11,18 +11,18 @@ public class TaskListTest {
 
     @Test
     public void isFileHasTextTest() throws IOException {
-        Storage storageReal = new StorageStub("data/duke.Duke.txt", "data");
-        Storage storageFake = new StorageStub("test/duke.Duke.txt", "test");
-        TaskList taskListReal = new TaskList(storageReal);
-        TaskList taskListFake = new TaskList(storageFake);
+        Storing storingReal = new StoringStub("data/duke.Duke.txt", "data");
+        Storing storingFake = new StoringStub("test/duke.Duke.txt", "test");
+        TaskList taskListReal = new TaskList(storingReal);
+        TaskList taskListFake = new TaskList(storingFake);
         assertEquals(true, taskListReal.isFileHasText());
         assertEquals(false, taskListFake.isFileHasText());
     }
 
     @Test
     public void addTaskTest() {
-        Storage storage = new StorageStub("data/duke.Duke.txt", "data");
-        TaskList taskList = new TaskList(storage);
+        Storing storing = new StoringStub("data/duke.Duke.txt", "data");
+        TaskList taskList = new TaskList(storing);
         assertEquals(0, taskList.getTotalTask());
         taskList.addTask(new Task("return book /by 2/12/2019", "D"));
         assertEquals(1, taskList.getTotalTask());
@@ -30,8 +30,8 @@ public class TaskListTest {
 
     @Test
     public void deleteTaskTest() {
-        Storage storage = new StorageStub("data/duke.Duke.txt", "data");
-        TaskList taskList = new TaskList(storage);
+        Storing storing = new StoringStub("data/duke.Duke.txt", "data");
+        TaskList taskList = new TaskList(storing);
         taskList.addTask(new Task("return book /by 2/12/2019", "D"));
         taskList.addTask(new Task("return book /by 2/12/2019", "D"));
         taskList.removeTask(1);
