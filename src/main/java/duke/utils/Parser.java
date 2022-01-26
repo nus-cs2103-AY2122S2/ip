@@ -1,3 +1,5 @@
+package duke.utils;
+
 import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 

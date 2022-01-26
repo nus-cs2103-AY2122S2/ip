@@ -1,4 +1,9 @@
+package duke.task;
+
+import duke.utils.Ui;
+
 import java.io.Serializable;
+
 
 public abstract class Task implements Serializable {
 
