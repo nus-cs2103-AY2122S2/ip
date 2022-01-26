@@ -6,9 +6,9 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class Task implements makeCompactable {
-    String task;
-    Boolean done;
-    String initials;
+    private String task;
+    private Boolean done;
+    public String initials;
 
     public Task(String task) {
         this.task = task;
@@ -21,6 +21,10 @@ public class Task implements makeCompactable {
 
     public void unmark() {
         this.done = false;
+    }
+
+    public String describe() {
+        return this.task;
     }
 
     @Override

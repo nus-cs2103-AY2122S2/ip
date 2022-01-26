@@ -68,8 +68,8 @@ public class Command {
         StringBuilder toPrint = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < listOfTasks.size(); i++) {
             int num = i + 1;
-            String add = num + "." + listOfTasks.get(i) + "\n";
-            toPrint.append(add);
+            String toAdd = num + "." + listOfTasks.get(i) + "\n";
+            toPrint.append(toAdd);
         }
         return toPrint.toString();
     }
@@ -96,33 +96,49 @@ public class Command {
         return toPrint.toString();
     }
 
+    private static String findTask(String keyword, TaskList listOfTasks) {
+        StringBuilder toPrint = new StringBuilder("Here are the matching tasks in your list:\n");
+        int count = 1;
+        for (Task task: listOfTasks.getList()) {
+            if (task.describe().contains(keyword)) {
+                String toAdd = count + "." + task + "\n";
+                toPrint.append(toAdd);
+                count++;
+            }
+        }
+        return toPrint.toString();
+    }
+
     public static String execute(String[] processedInput, TaskList listOfTasks) {
         String toPrint = "";
         try {
             switch (processedInput[0]) {
-                case "list":
-                    toPrint = listTasks(listOfTasks);
-                    break;
-                case "unmark":
-                    toPrint = unmarkTask(processedInput[1], listOfTasks);
-                    break;
-                case "mark":
-                    toPrint = markTask(processedInput[1], listOfTasks);
-                    break;
-                case "delete":
-                    toPrint = deleteTask(processedInput[1], listOfTasks);
-                    break;
-                case "deadline":
-                    toPrint = addDeadline(processedInput[1], processedInput[2], listOfTasks);
-                    break;
-                case "event":
-                    toPrint = addEvent(processedInput[1], processedInput[2], listOfTasks);
-                    break;
-                case "todo":
-                    toPrint = addTodo(processedInput[1], listOfTasks);
-                    break;
-                default:
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+            case "list":
+                toPrint = listTasks(listOfTasks);
+                break;
+            case "unmark":
+                toPrint = unmarkTask(processedInput[1], listOfTasks);
+                break;
+            case "mark":
+                toPrint = markTask(processedInput[1], listOfTasks);
+                break;
+            case "delete":
+                toPrint = deleteTask(processedInput[1], listOfTasks);
+                break;
+            case "deadline":
+                toPrint = addDeadline(processedInput[1], processedInput[2], listOfTasks);
+                break;
+            case "event":
+                toPrint = addEvent(processedInput[1], processedInput[2], listOfTasks);
+                break;
+            case "todo":
+                toPrint = addTodo(processedInput[1], listOfTasks);
+                break;
+            case "find":
+                toPrint = findTask(processedInput[1], listOfTasks);
+                break;
+            default:
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
             }
         } catch (DukeException e) {
             toPrint = e.getMessage();
