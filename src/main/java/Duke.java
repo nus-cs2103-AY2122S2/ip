@@ -5,6 +5,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
+
 
 public class Duke {
     public static void main(String[] args) throws IOException {
@@ -158,7 +160,8 @@ public class Duke {
             File f = new File(newFilePath);
             Scanner s = new Scanner(f);
             while (s.hasNextLine()) {
-                if (s.nextLine().equals("e")) {
+                String typeOfTask = s.nextLine();
+                if (typeOfTask.equals("e")) {
                     Event created = new Event(s.nextLine(), s.nextLine());
                     if (s.nextLine().equals("1")) {
                         created.setMark();
@@ -166,7 +169,8 @@ public class Duke {
                         created.setUnmark();
                     }
                     storeList.add(created);
-                } else if (s.next() == "d") {
+                    continue;
+                } else if (typeOfTask.equals("d")) {
                     Deadline created = new Deadline(s.nextLine(), s.nextLine());
                     if (s.nextLine().equals("1")) {
                         created.setMark();
@@ -174,7 +178,8 @@ public class Duke {
                         created.setUnmark();
                     }
                     storeList.add(created);
-                } else if (s.next() == "t") {
+                    continue;
+                } else if (typeOfTask.equals("t")) {
                     Todo created = new Todo(s.nextLine());
                     if (s.nextLine().equals("1")) {
                         created.setMark();
@@ -182,6 +187,7 @@ public class Duke {
                         created.setUnmark();
                     }
                     storeList.add(created);
+                    continue;
                 }
             }
         }
