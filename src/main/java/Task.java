@@ -11,14 +11,18 @@ public class Task {
         return (isDone ? "X" : " ");
     }
 
-    public String getT() {
-        return description;
-    }
-
     @Override
     public String toString() {
-        String v = "[" + this.getStatusIcon() + "]" + " " + this.getT();
+        String v = "[" + this.getStatusIcon() + "]" + " " + this.description;
         return v;
+    }
+
+    public String toSave() {
+        if (isDone == true) {
+            return ": 1 :" + this.description;
+        } else {
+            return ": 0 :" + this.description;
+        }
     }
 
     public void markAsDone() {

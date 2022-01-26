@@ -1,8 +1,9 @@
 import java.io.*;
 import java.util.ArrayList;
 
+
 public class Duke {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -25,18 +26,23 @@ public class Duke {
                 + "||  ||  ||  ||  ||  ||      ||    ||   \\\\   \\\\       ||\n"
                 + "||==||  ||==||  ||==||======||====||    \\\\===\\\\======||\n";
 
+        ArrayList<Task> list = new ArrayList<>();
+        String filePath = "data/duke.txt";
+        File file = new File(filePath);
+        list = Duke.read(file, list);
+
+        int n = list.size();
+
         System.out.println("\n" + logo + line);
         System.out.println(start+ line);
 
-        ArrayList<Task> list = new ArrayList<>();
-        int n = 0;
         String cmd = br.readLine();
 
         while(!cmd.equals("bye")){
             String[] c = cmd.split(" ");
             try {
                 if (c[0].equals("list")) {
-                    int m = 1;
+                    int m = 1; // counter for list
                     int k = n;
                     System.out.println(line);
                     while(k > 0) {
@@ -79,7 +85,7 @@ public class Duke {
                         throw new DukeException(gdes);
                     }
                     String[] x = cmd.substring(5).split("/at ");
-                    list.add(new Event(x[0],x[1]));
+                    list.add(new Event(x[0], x[1]));
                     System.out.println(line + gotit + list.get(n).toString() + "\n" + now1 + (n+1) + now2 + line);
                     n+=1;
                 } else if (c[0].equals("delete")) {
@@ -98,6 +104,49 @@ public class Duke {
             }
             cmd = br.readLine();
         }
+
+        try {
+            write(filePath, list);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
         System.out.println(line + "Bye yo. Hope I helped you!" + line);
     }
+
+    private static ArrayList<Task> read(File file, ArrayList<Task> list) throws Exception {
+        if (file.exists()) {
+            BufferedReader r = new BufferedReader(new FileReader(file));
+            String t = r.readLine();
+            while (!(t == null)) {
+                char i = t.charAt(0);
+                //System.out.println(in);
+                if (i == 'T') {
+                    String[] in = t.split(":");
+                    list.add(new Todo(in[2]));
+                } else if (i == 'D') {
+                    String[] in = t.split(":");
+                    list.add(new Deadline(in[2], in[3]));
+                } else if (i == 'E') {
+                    String[] in = t.split(":");
+                    list.add(new Event(in[2], in[3]));
+                } else {
+                    // do nothing
+                }
+                t = r.readLine();
+            }
+        }
+        return list;
+    }
+
+    private static void write(String filepath, ArrayList<Task> list) throws Exception {
+        FileWriter fw = new FileWriter(filepath);
+        int n = 0;
+        while (n < list.size()) {
+            fw.write(list.get(n).toSave() + "\n");
+            n+=1;
+        }
+        fw.close();
+        System.out.println(filepath + " updated.");
+    }
+
 }

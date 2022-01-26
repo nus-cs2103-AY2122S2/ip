@@ -1,0 +1,4 @@
+T: 0 : eat
+D: 0 : project ai   :  7pm 22 december 2022
+E: 0 : intern meeting   :  nus hall 3
+D: 0 : project yoyo  : 9pm cny day
