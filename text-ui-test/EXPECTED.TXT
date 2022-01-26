@@ -1,76 +1,66 @@
 No past tasks found! Let's start creating tasks!
-
 Hello, My Dear Friend... I'm Duke, your personal motivator!
 ____________________________________________________________________________________________________
 What can i do for you today?
 ____________________________________________________________________________________________________
 You currently do not have any outstanding tasks! Great job! :D
 ____________________________________________________________________________________________________
-Fantabulous! You have added this Todo Item:
-[T][] read book
-____________________________________________________________________________________________________
-Here are your tasks:
-1: [T][] read book
-These are all your tasks! Only 1 more remaining! Keep going!
+Please mark a task in the following format:
+mark [number]
 ____________________________________________________________________________________________________
 There is no such task! Maybe you entered the wrong task?
 ____________________________________________________________________________________________________
-Congratulations on completing the task!
-[T][Done!] read book
+Fantabulous! You have added this Todo Item:
+[T][] finish cs2103 work
 ____________________________________________________________________________________________________
-Here are your tasks:
-1: [T][Done!] read book
-You have completed all your tasks! Great job!
-____________________________________________________________________________________________________
-Perfect! You have added this Deadline Item:
-[D][] return book (By: Jan 06 2022)
-Remember to stick to your objective date!
-____________________________________________________________________________________________________
-Here are your tasks:
-1: [T][Done!] read book
-2: [D][] return book (By: Jan 06 2022)
-These are all your tasks! Only 1 more remaining! Keep going!
-____________________________________________________________________________________________________
-Perfect! You have added this Event Item:
-[E][] project meeting (At: Aug 6th 2-4pm)
+Magnifico! You have added this Event Item:
+[E][] IS4241 Tutorial (At: 8pm)
 Remember to be there 5 minutes early!
 ____________________________________________________________________________________________________
 Here are your tasks:
-1: [T][Done!] read book
-2: [D][] return book (By: Jan 06 2022)
-3: [E][] project meeting (At: Aug 6th 2-4pm)
+1: [T][] finish cs2103 work
+2: [E][] IS4241 Tutorial (At: 8pm)
 These are all your tasks! Only 2 more remaining! Keep going!
+____________________________________________________________________________________________________
+Perfect! You have added this Deadline Item:
+[D][] finish dissert work (By: Jan 28 2022)
+Remember to stick to your objective date!
+____________________________________________________________________________________________________
+Here are your tasks:
+1: [T][] finish cs2103 work
+2: [E][] IS4241 Tutorial (At: 8pm)
+3: [D][] finish dissert work (By: Jan 28 2022)
+These are all your tasks! Only 3 more remaining! Keep going!
 ____________________________________________________________________________________________________
 Fantabulous! You have added this Todo Item:
-[T][] join sports club
+[T][] go for a run
 ____________________________________________________________________________________________________
 Here are your tasks:
-1: [T][Done!] read book
-2: [D][] return book (By: Jan 06 2022)
-3: [E][] project meeting (At: Aug 6th 2-4pm)
-4: [T][] join sports club
-These are all your tasks! Only 3 more remaining! Keep going!
+1: [T][] finish cs2103 work
+2: [E][] IS4241 Tutorial (At: 8pm)
+3: [D][] finish dissert work (By: Jan 28 2022)
+4: [T][] go for a run
+These are all your tasks! Only 4 more remaining! Keep going!
 ____________________________________________________________________________________________________
 Congratulations on completing the task!
-[T][Done!] join sports club
-____________________________________________________________________________________________________
-I have un-marked this task!
-[T][] join sports club
+[T][Done!] go for a run
 ____________________________________________________________________________________________________
 Here are your tasks:
-1: [T][Done!] read book
-2: [D][] return book (By: Jan 06 2022)
-3: [E][] project meeting (At: Aug 6th 2-4pm)
-4: [T][] join sports club
+1: [T][] finish cs2103 work
+2: [E][] IS4241 Tutorial (At: 8pm)
+3: [D][] finish dissert work (By: Jan 28 2022)
+4: [T][Done!] go for a run
 These are all your tasks! Only 3 more remaining! Keep going!
 ____________________________________________________________________________________________________
-I have removed [T][] join sports club
+There is no such task! Maybe you entered the wrong task?
+____________________________________________________________________________________________________
+I have removed [T][Done!] go for a run
 ____________________________________________________________________________________________________
 Here are your tasks:
-1: [T][Done!] read book
-2: [D][] return book (By: Jan 06 2022)
-3: [E][] project meeting (At: Aug 6th 2-4pm)
-These are all your tasks! Only 2 more remaining! Keep going!
+1: [T][] finish cs2103 work
+2: [E][] IS4241 Tutorial (At: 8pm)
+3: [D][] finish dissert work (By: Jan 28 2022)
+These are all your tasks! Only 3 more remaining! Keep going!
 ____________________________________________________________________________________________________
 Bye. Hope I've motivated you as much as I could have, and SMILE :D
 ____________________________________________________________________________________________________

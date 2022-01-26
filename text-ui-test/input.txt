@@ -1,18 +1,16 @@
 list
-todo read book
-list
-mark 2
+mark1
 mark 1
+todo finish cs2103 work
+event IS4241 Tutorial /at 8pm
 list
-deadline return book /by 2022-01-06
+deadline finish dissert work /by 2022-01-28
 list
-event project meeting /at Aug 6th 2-4pm
-list
-todo join sports club
+todo go for a run
 list
 mark 4
-unmark 4
 list
+delete 5
 delete 4
 list
 bye

@@ -11,6 +11,10 @@ public class Event extends Task {
         return this.eventTiming;
     }
 
+    /**
+     * returns deadline in save data format (format to be saved in data.txt file for task storage)
+     * @return
+     */
     @Override
     public String toSaveDataFormat() {
         String isDone = (super.checkIsDone() == true) ? "1" : "0";

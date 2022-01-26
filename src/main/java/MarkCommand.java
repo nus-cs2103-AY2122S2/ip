@@ -6,8 +6,8 @@ public class MarkCommand extends Command{
         this.taskIdx = taskIdx;
     }
 
-    public void executeTask(TaskList taskList) throws DukeException {
-        taskList.deleteTask(this.taskIdx);
+    public void executeTask(TaskList taskList, FileManager fileManager) throws DukeException {
+        taskList.markTaskDone(taskIdx, true);
     }
-
 }
+

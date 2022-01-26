@@ -3,16 +3,29 @@ public abstract class Task {
     private String taskDescription;
     private String tag;
 
+    /**
+     * Constructor for Task
+     * @param taskDescription
+     * @param tag
+     */
     public Task (String taskDescription, String tag){
         this.taskDescription = taskDescription;
         this.isDone = false;
         this.tag = tag;
     }
 
+    /**
+     * Checks if a task is done
+     * @return
+     */
     public boolean checkIsDone(){
         return this.isDone;
     }
 
+    /**
+     * Gets task description
+     * @return
+     */
     public String getTaskDescription(){
         return this.taskDescription;
     }

@@ -1,2 +1,97 @@
-package PACKAGE_NAME;public class FileManager {
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
+import java.util.regex.Pattern;
+
+public class FileManager {
+    TaskList userTaskList;
+    String filePath;
+    Ui ui;
+
+    public FileManager(String filePath) {
+        userTaskList = new TaskList();
+        this.filePath = filePath;
+        ui = new Ui();
+    }
+
+    private void appendToFile(String filePath, String textToAppend) throws DukeException {
+        try {
+            FileWriter fw = new FileWriter(filePath, true);
+            fw.write(textToAppend);
+            fw.close();
+        } catch (IOException e){
+            ui.throwDukeException(("We did not manage to save your tasks:\n" + e.getMessage()));
+        }
+    }
+
+    private void createFile(String filePath) throws DukeException {
+        try {
+            File yourFile = new File(filePath);
+            yourFile.getParentFile().mkdirs(); //
+            yourFile.createNewFile(); //Will not create new file if it exists
+        } catch (IOException e) {
+            ui.throwDukeException("We did not manage to create a file to save your tasks!");
+        }
+    }
+
+    protected void saveTasks() throws DukeException {
+        try {
+            Files.deleteIfExists(new File(this.filePath).toPath());
+        } catch (IOException e) {
+            ui.throwDukeException("File does not exist!");
+        }
+        this.createFile(this.filePath); //Creates file at filePath if it does not exist
+        for (Task task:this.userTaskList.getArrayList()){
+            this.appendToFile(this.filePath, task.toSaveDataFormat());
+        }
+        ui.printBye();
+        System.exit(0);
+    }
+
+    protected TaskList loadTasks() throws DukeException {
+        try {
+            File file = new File(this.filePath);
+            Scanner s = new Scanner(file);
+            while (s.hasNext()){
+                String loadedTask = s.nextLine();
+                this.parseLoadedTask(loadedTask);
+            }
+        } catch (FileNotFoundException e) {
+            ui.println("No past tasks found! Let's start creating tasks!");
+        }
+        return this.userTaskList;
+    }
+
+    private void parseLoadedTask(String loadedTask) throws DukeException {
+        String[] loadedTaskSplit = loadedTask.split(Pattern.quote("|"));
+        switch (loadedTaskSplit[0]) {
+            case "T":
+                Todo todo = new Todo(loadedTaskSplit[2]);
+                this.userTaskList.addTask(todo, false);
+                if (loadedTaskSplit[1].equals("1")) {
+                    this.userTaskList.markTaskDone(this.userTaskList.getSize()-1, false);
+                }
+                break;
+            case "D":
+                Deadline deadline = new Deadline(loadedTaskSplit[2], LocalDate.parse(loadedTaskSplit[3], DateTimeFormatter.ofPattern("MMM dd yyyy")).toString());
+                // Parse the saved format "MMM dd yyyy" into yyyy-mm-dd which is what Deadline() class requires
+                this.userTaskList.addTask(deadline, false);
+                if (loadedTaskSplit[1].equals("1")) {
+                    this.userTaskList.markTaskDone(this.userTaskList.getSize()-1, false);
+                }
+                break;
+            case "E":
+                Event event = new Event(loadedTaskSplit[2], loadedTaskSplit[3]);
+                this.userTaskList.addTask(event, false);
+                if (loadedTaskSplit[1].equals("1")) {
+                    this.userTaskList.markTaskDone(this.userTaskList.getSize()-1, false);
+                }
+                break;
+        }
+    }
 }
