@@ -10,18 +10,35 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * TextLoader Object that handles loading of task list from
+ * a saved text file during program initialisation.
+ */
 public class TextLoader {
     private final UiManager uiManager;
     private final TaskManager taskManager;
     private final TextStorage storage;
 
 
+    /**
+     * Constructs TextLoader Object
+     *
+     * @param uiManager UiManager Object to handle input and output processes
+     * @param taskManager TaskManager Object to hold Task Objects
+     * @param textStorage TextStorage Object to store task list
+     */
     public TextLoader(UiManager uiManager, TaskManager taskManager, TextStorage textStorage) {
         this.uiManager = uiManager;
         this.taskManager = taskManager;
         this.storage = textStorage;
     }
 
+    /**
+     * Loads saved task list into TaskManager Object
+     *
+     * @throws FileNotFoundException if saved text file is not present
+     * @throws TaskIndexException if saved text file holds corrupted entries
+     */
     public void load() throws FileNotFoundException, TaskIndexException {
         File f = new File("storage/stored.txt");
         Scanner sc = new Scanner(f);

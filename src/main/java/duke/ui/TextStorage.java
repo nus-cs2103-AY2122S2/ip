@@ -6,13 +6,23 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
+/**
+ * TextStorage Object that handles storage of Tasks in a text file.
+ * Checks for presence of the storage directory.
+ * Creates storage directory if absent.
+ * Creates text file if absent.
+ */
 public class TextStorage {
     private File file;
     private boolean isOpen;
     private String content;
     private UiManager uiManager;
 
+    /**
+     * Constructs the TextStorage Object.
+     *
+     * @param um UiManager used for input and output processes
+     */
     public TextStorage(UiManager um) {
         this.file = new File("storage");
         if (!file.exists()) {
@@ -29,6 +39,12 @@ public class TextStorage {
         fw.close();
     }
 
+    /**
+     * Appends Task Object to task list in the form of a string
+     *
+     * @param task String representing Task Object
+     * @param t Type of task object
+     */
     public void append(String task, Type t) {
         switch (t) {
         case DEADLINE:
@@ -52,6 +68,10 @@ public class TextStorage {
         }
     }
 
+    /**
+     * Saves task list into text file.
+     * Prints error message if directory is absent.
+     */
     public void save() {
         try {
             this.writeToFile(this.content);

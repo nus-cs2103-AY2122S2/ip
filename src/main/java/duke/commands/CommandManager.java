@@ -13,6 +13,10 @@ import java.io.FileNotFoundException;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * CommandManager Object that handles initialisation,
+ * receiving and dispatching of commands.
+ */
 public class CommandManager {
     private final TaskManager taskManager;
     private final UiManager uiManager;
@@ -20,6 +24,10 @@ public class CommandManager {
     private final TextLoader loader;
     private boolean isOpen;
 
+
+    /**
+     * Constructs the CommandManager Object.
+     */
     public CommandManager() {
         this.uiManager = new UiManager();
         this.taskManager = new TaskManager(this.uiManager);
@@ -28,10 +36,19 @@ public class CommandManager {
         this.loader = new TextLoader(this.uiManager, this.taskManager, this.storage);
     }
 
+    /**
+     * Sets the boolean isOpen to false.
+     */
     public void setClose() {
         this.isOpen = false;
     }
 
+    /**
+     * Initialises and runs the program.
+     * Scans String input from console and issues
+     * commands to different objects via switching.
+     * Checks for and handles errors.
+     */
     public void run() {
         uiManager.welcome();
         try {
