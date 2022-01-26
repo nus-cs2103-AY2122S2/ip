@@ -82,7 +82,7 @@ public class Narcibot {
                     if(tokens.length != 2) {
                         throw new IncorrectFormatException("You want me to remind you of something but you won't tell me of what it is? The format is deadline (task) /by (time)");
                     }
-                    String[] tokens2 = tokens[1].split("/by", 2);
+                    String[] tokens2 = tokens[1].split(" /by ", 2);
                     if(tokens2.length != 2 || tokens2[1].equals("")) {
                         throw new IncorrectFormatException("Please tell me the deadline time using /by. Format: deadline (task) /by (time)");
                     }
@@ -94,7 +94,7 @@ public class Narcibot {
                     if(tokens.length != 2) {
                         throw new IncorrectFormatException("You want me to remind you of something but you won't tell me of what it is? The format is event (task) /at (time)");
                     }
-                    String[] tokens3 = tokens[1].split("/at", 2);
+                    String[] tokens3 = tokens[1].split(" /at ", 2);
                     if(tokens3.length != 2 || tokens3[1].equals("")) {
                         throw new IncorrectFormatException("Please tell me the time of the event using /at. Format: event (task) /at (time)");
                     }

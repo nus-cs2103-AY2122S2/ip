@@ -1,9 +1,18 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Event extends Task {
     private String time;
     public Event(String name, String time) {
         super(name);
         this.time = time;
-        System.out.println("[E][ ] " + name + " (at: " + time +")");
+        try {
+            LocalDate date = LocalDate.parse(time);
+            System.out.println("[E][ ] " + name + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")");
+        } catch (DateTimeParseException e) {
+            System.out.println("[E][ ] " + name + " (by: " + time + ")");
+        }
     }
 
     @Override
