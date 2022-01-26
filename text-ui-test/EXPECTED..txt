@@ -64,7 +64,7 @@ What should Charizard do next?
 
 What should Charizard do next?
 ********************************************************************************
-    duke.task.Task number does not exist. Charizard is confused..
+    Task number does not exist. Charizard is confused..
     
 ********************************************************************************
 
@@ -95,7 +95,7 @@ What should Charizard do next?
 
 What should Charizard do next?
 ********************************************************************************
-    duke.task.Task number does not exist. Charizard is confused..
+    Task number does not exist. Charizard is confused..
     
 ********************************************************************************
 
@@ -133,7 +133,7 @@ What should Charizard do next?
 
 What should Charizard do next?
 ********************************************************************************
-    duke.task.Task number does not exist. Charizard is confused..
+    Task number does not exist. Charizard is confused..
     
 ********************************************************************************
 
