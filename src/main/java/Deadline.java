@@ -12,7 +12,14 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String getFullDetails() {
-        return (super.getFullDetails() + "(by: " + this.deadlineDate + ")");
+    public String toDataString() {
+        String isDone = super.isMarked() ? "1" : "0";
+        return getTaskIcon() + " | " + isDone + " | " + taskName + " | " + deadlineDate;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + getTaskIcon() + "][" + super.getStatusIcon() + "] " +
+                super.taskName + " (by: " + this.deadlineDate + ")";
     }
 }

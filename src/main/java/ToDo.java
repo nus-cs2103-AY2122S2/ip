@@ -7,4 +7,15 @@ public class ToDo extends Task {
     public String getTaskIcon() {
         return "T";
     }
+    
+    @Override
+    public String toDataString() {
+        String isDone = super.isMarked() ? "1" : "0";
+        return getTaskIcon() + " | " + isDone + " | " + taskName;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + getTaskIcon() + "][" + super.getStatusIcon() + "] " + super.taskName;
+    }
 }
