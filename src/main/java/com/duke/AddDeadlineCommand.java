@@ -1,4 +1,6 @@
-public class AddDeadlineCommand extends Command{
+package com.duke;
+
+public class AddDeadlineCommand extends Command {
 
     private final Task task;
 

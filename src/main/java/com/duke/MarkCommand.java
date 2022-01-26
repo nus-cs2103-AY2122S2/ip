@@ -1,3 +1,5 @@
+package com.duke;
+
 public class MarkCommand extends Command{
 
     private final int pos;

@@ -1,3 +1,5 @@
+package com.duke;
+
 public class ToDoException extends DukeException {
 
     @Override

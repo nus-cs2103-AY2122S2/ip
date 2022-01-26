@@ -1,3 +1,5 @@
+package com.duke;
+
 public class AddToDoCommand extends Command{
 
     private final Task task;

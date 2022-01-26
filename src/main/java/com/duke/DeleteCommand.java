@@ -1,3 +1,5 @@
+package com.duke;
+
 public class DeleteCommand extends Command{
 
     private final int pos;

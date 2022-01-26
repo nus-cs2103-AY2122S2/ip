@@ -1,3 +1,5 @@
+package com.duke;
+
 public class Parser {
 
     public static Command parse(String input) throws DukeException {
