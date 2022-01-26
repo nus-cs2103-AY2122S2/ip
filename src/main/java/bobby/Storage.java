@@ -1,3 +1,8 @@
+package bobby;
+
+import bobby.exception.StorageException;
+import bobby.task.Task;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -21,7 +26,7 @@ public class Storage {
             task = (ArrayList<Task>) ois.readObject();
             ois.close();
         } catch (IOException | ClassNotFoundException e) {
-            System.out.println(e.getMessage());
+            System.out.println("test");
         }
         return task;
     }
@@ -32,7 +37,7 @@ public class Storage {
             oos.writeObject(tasks);
             oos.close();
         } catch (IOException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 }

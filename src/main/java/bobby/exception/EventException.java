@@ -1,5 +1,7 @@
+package bobby.exception;
+
 public class EventException extends BobbyException {
-    public String errtype;
+    private String errtype;
 
     public EventException(String message) {
         super(message);

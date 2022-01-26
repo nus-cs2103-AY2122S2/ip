@@ -1,23 +1,25 @@
+package bobby.task;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Task implements Serializable, Comparable<Task> {
-    protected String taskName;
-    protected boolean isDone;
-    protected LocalDate date;
+    private String taskName;
+    private boolean isDone;
+    private LocalDate date;
 
     public Task(String taskName) {
         this.taskName = taskName;
-        this.isDone = false;
+        isDone = false;
         date = null;
     }
 
     public void markDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     public void unmarkDone() {
-        this.isDone = false;
+        isDone = false;
     }
 
     public String getStatus() {
@@ -34,7 +36,7 @@ public class Task implements Serializable, Comparable<Task> {
 
     @Override
     public String toString() {
-        return this.getStatus() + this.taskName;
+        return getStatus() + taskName;
     }
 
     @Override

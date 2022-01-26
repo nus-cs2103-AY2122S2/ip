@@ -1,3 +1,5 @@
+package bobby.task;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -5,7 +7,7 @@ public class TaskList {
     private ArrayList<Task> tasks;
 
     public TaskList() {
-        this.tasks = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     public TaskList(ArrayList<Task> tasks) {
@@ -18,6 +20,10 @@ public class TaskList {
 
     public void removeTask(Task t) {
         tasks.remove(t);
+    }
+
+    public void removeAll() {
+        tasks = new ArrayList<>();
     }
 
     public int getSize() {
@@ -33,10 +39,13 @@ public class TaskList {
     }
 
     public void sortTaskList() {
+        if (tasks.isEmpty()) {
+            return;
+        }
         Collections.sort(tasks);
     }
 
     public boolean isEmpty() {
-        return this.tasks.isEmpty();
+        return tasks.isEmpty();
     }
 }

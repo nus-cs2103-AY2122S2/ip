@@ -1,5 +1,7 @@
+package bobby.exception;
+
 public class MarkException extends BobbyException {
-    public String errtype;
+    private String errtype;
 
     public MarkException(String message) {
         super(message);
@@ -11,25 +13,25 @@ public class MarkException extends BobbyException {
         String error_string;
         switch (errtype) {
         case "empty":
-            error_string = "     Which task?";
+            error_string = "\tWhich task?";
             break;
         case "letter":
-            error_string = "    C'mon, a letter is not a number dude";
+            error_string = "\tC'mon, a letter is not a number dude";
             break;
         case "OOB":
-            error_string = "    Number too big, count properly!";
+            error_string = "\tNumber too big, count properly!";
             break;
         case "negative":
-            error_string = "    Invalid number man, cannot be 0 or negative";
+            error_string = "\tInvalid number man, cannot be 0 or negative";
             break;
         case "alr_marked":
-            error_string = "    This task is already marked as done";
+            error_string = "\tThis task is already marked as done";
             break;
         case "alr_unmarked":
-            error_string = "    This task is already marked as undone";
+            error_string = "\tThis task is already marked as undone";
             break;
         default:
-            error_string = "    I cannot understand this..";
+            error_string = "\tI cannot understand this..";
         }
         return error_string;
     }

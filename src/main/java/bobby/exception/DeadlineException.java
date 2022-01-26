@@ -1,5 +1,8 @@
+package bobby.exception;
+
 public class DeadlineException extends BobbyException {
-    public String errtype;
+    private String errtype;
+
     public DeadlineException(String message) {
         super(message);
         errtype = message;

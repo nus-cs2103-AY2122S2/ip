@@ -1,5 +1,8 @@
+package bobby.exception;
+
 public abstract class BobbyException extends IllegalArgumentException{
-    String errorType;
+    private String errorType;
+
     public BobbyException(String message) {
         super(message);
         errorType = message;

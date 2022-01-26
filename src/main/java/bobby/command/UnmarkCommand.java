@@ -1,7 +1,17 @@
-public class MarkCommand extends Command {
+package bobby.command;
+
+import bobby.exception.BobbyException;
+import bobby.exception.MarkException;
+import bobby.Storage;
+import bobby.task.Task;
+import bobby.task.TaskList;
+import bobby.Ui;
+
+public class UnmarkCommand extends Command {
     private String fullCommand;
     private String[] fullCommandArr;
-    public MarkCommand(String fullCommand, String[] fullCommandArr) {
+
+    public UnmarkCommand(String fullCommand, String[] fullCommandArr) {
         this.fullCommand = fullCommand;
         this.fullCommandArr = fullCommandArr;
     }
@@ -11,7 +21,7 @@ public class MarkCommand extends Command {
         ui.printLongLine();
         if (fullCommand.substring(4).isBlank()) {                             // no argument
             throw new MarkException("empty");
-        } else if (Character.isLetter(fullCommand.charAt(5))) {               // contains letter instead of number
+        } else if (Character.isLetter(fullCommand.charAt(7))) {               // contains letter instead of number
             throw new MarkException("letter");
         } else if (Integer.parseInt(fullCommandArr[1]) > tasks.getSize()) {        // out of bounds
             throw new MarkException("OOB");
@@ -19,11 +29,11 @@ public class MarkCommand extends Command {
             throw new MarkException("negative");
         }
         Task task = tasks.getIndex(Integer.parseInt(fullCommandArr[1]) - 1);
-        if (task.isDone()) {
-            throw new MarkException("alr_marked");
+        if (!task.isDone()) {
+            throw new MarkException("alr_unmarked");
         }
-        task.markDone();
+        task.unmarkDone();
         storage.saveTasks(tasks.getTaskList());
-        ui.markMessage(task);
+        ui.unmarkMessage(task);
     }
 }

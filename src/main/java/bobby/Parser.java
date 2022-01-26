@@ -1,8 +1,12 @@
+package bobby;
+
+import bobby.command.*;
+
 public class Parser {
 
     public static Command parse(String fullCommand) {
         String[] fullCommandArr = fullCommand.split(" ");
-        Command command = null;
+        Command command;
         switch(fullCommandArr[0]) {
         case "bye": command = new ByeCommand();
             break;

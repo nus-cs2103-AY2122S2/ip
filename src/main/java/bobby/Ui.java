@@ -1,4 +1,8 @@
-import java.util.Locale;
+package bobby;
+
+import bobby.task.Task;
+import bobby.task.TaskList;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -60,7 +64,7 @@ public class Ui {
     }
 
     public String readCommand() {
-        return sc.nextLine().toLowerCase(Locale.ROOT);
+        return sc.nextLine().toLowerCase();
     }
 
     public void printTaskList(TaskList tasks) {
@@ -107,7 +111,16 @@ public class Ui {
         System.out.println("\t  " + task);
     }
 
+    public void deleteAllMessage() {
+        System.out.println("\tAlright I'm deleting ALL tasks \t(*・‿・)ノ⌒*:･ﾟ✧");
+        System.out.println("\tWow the list is so empty");
+    }
+
     public void printNumTasks(TaskList tasks) {
         System.out.println("\t" + "Now you have " + tasks.getSize() + " in the list.");
+    }
+
+    public void print(String message) {
+        System.out.println(message);
     }
 }

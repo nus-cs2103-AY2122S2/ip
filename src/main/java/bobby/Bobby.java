@@ -1,5 +1,10 @@
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+package bobby;
+
+import bobby.command.ByeCommand;
+import bobby.command.Command;
+import bobby.exception.BobbyException;
+import bobby.task.TaskList;
+
 import java.util.Scanner;
 
 public class Bobby {
@@ -10,10 +15,11 @@ public class Bobby {
 
     public Bobby(String filePath) {
         ui = new Ui(new Scanner(System.in));
-        storage = new Storage(FILE_LOCATION);
         try {
+            storage = new Storage(FILE_LOCATION);
             tasks = new TaskList(storage.loadTasks());
-        } catch (StorageException e) {
+        } catch (BobbyException e) {
+            ui.print(e.getMessage());
             ui.printLoadingError();
             tasks = new TaskList();
         }
