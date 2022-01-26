@@ -3,6 +3,7 @@ package core;
 import core.exceptions.InvalidDeleteIndexException;
 import core.exceptions.NoTaskToDeleteException;
 import core.tasks.Task;
+import core.tasks.ToDo;
 import utilities.OutputFormatter;
 
 import java.util.ArrayList;
@@ -91,6 +92,22 @@ public class TaskList {
                 }
             }
         }
+        return outputFormatter.getFormattedOutput();
+    }
+
+    public String exportFileOutput() {
+        OutputFormatter outputFormatter = OutputFormatter.getInstance();
+
+        for (Task t : this.taskList) {
+            String[] arr;
+            if (t instanceof ToDo) {
+                arr = new String[] {t.getLabel(), t.status(), t.getTaskDescription()};
+            } else {
+                arr = new String[] {t.getLabel(), t.status(), t.getTaskDescription(), t.getPeripheralInfo()};
+            }
+            outputFormatter.appendAll(String.join(" | ", arr), "\n");
+        }
+
         return outputFormatter.getFormattedOutput();
     }
 

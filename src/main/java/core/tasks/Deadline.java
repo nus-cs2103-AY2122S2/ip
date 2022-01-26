@@ -12,6 +12,16 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    @Override
+    public String getLabel() {
+        return "D";
+    }
+
+    @Override
+    public String getPeripheralInfo() {
+        return this.by;
+    }
+
     public static Deadline getInstance(String description, String by) throws NoDeadlineMentionedException, NoDescriptionGivenException {
         if (description.isBlank() || description.isBlank()) {
             throw new NoDescriptionGivenException();

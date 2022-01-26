@@ -1,11 +1,26 @@
 package core;
 
-import core.exceptions.*;
+import core.exceptions.FileIsCorruptException;
+import core.exceptions.InvalidDeleteIndexException;
+import core.exceptions.NoDeadlineMentionedException;
+import core.exceptions.NoDescriptionGivenException;
+import core.exceptions.NoEventLocaleMentionedException;
+import core.exceptions.NoTaskToDeleteException;
+import core.exceptions.TaskAlreadyDoneException;
+import core.exceptions.TaskAlreadyUnmarkedException;
+import core.exceptions.ToDoEmptyException;
 import core.tasks.Deadline;
 import core.tasks.Event;
 import core.tasks.Task;
 import core.tasks.ToDo;
 import utilities.OutputFormatter;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import static java.lang.Integer.parseInt;
 
@@ -87,7 +102,7 @@ public class InputHandler {
 
     private void handleToDo(String inputData, OutputFormatter outputFormatter) {
         try {
-            String description = inputData.substring(4);
+            String description = inputData.substring(4).trim();
             taskList.addTask(ToDo.getInstance(description));
             outputFormatter.appendAll("Got it. I've added this task:", "\n", taskList.getTaskByIndex(taskList.getLength() - 1), "\n", "Now you have ", taskList.getLength(), " task(s) in the list.");
         } catch (ToDoEmptyException e) {
@@ -171,6 +186,56 @@ public class InputHandler {
         } catch (InvalidDeleteIndexException | NoTaskToDeleteException e) {
             outputFormatter.append(e.getMessage());
         }
+    }
+
+    public void initializeWithFile(File file) throws IOException, FileIsCorruptException {
+        BufferedReader fileReader = new BufferedReader(new FileReader(file));
+        String fileLine = fileReader.readLine();
+        while (fileLine != null) {
+            handleFileInput(fileLine);
+            fileLine = fileReader.readLine();
+        }
+    }
+
+    public void handleFileInput(String inputData) throws FileIsCorruptException {
+        String[] separatedInputSequence = inputData.split(" \\| ");
+        boolean isMarked = separatedInputSequence[1].equals("X");
+        int lengthOfInputSequence = separatedInputSequence.length;
+
+        switch (separatedInputSequence[0]) {
+        case "T":
+            if (lengthOfInputSequence != 3) {
+                throw new FileIsCorruptException();
+            }
+            this.taskList.addTask(ToDo.getInstance(separatedInputSequence[2]));
+            break;
+        case "D":
+            if (lengthOfInputSequence != 4) {
+                throw new FileIsCorruptException();
+            }
+            this.taskList.addTask(Deadline.getInstance(separatedInputSequence[2], separatedInputSequence[3]));
+            break;
+        case "E":
+            if (lengthOfInputSequence != 4) {
+                throw new FileIsCorruptException();
+            }
+            this.taskList.addTask(Event.getInstance(separatedInputSequence[2], separatedInputSequence[3]));
+            break;
+        }
+
+        if (isMarked) {
+            this.taskList.getTaskByIndex(this.taskList.getLength() - 1).complete();
+        }
+    }
+
+    public void saveToFile(String filePath) throws IOException {
+        File file = new File(filePath);
+        boolean hasCreatedDirectory = file.getParentFile().mkdirs();
+        boolean hasCreatedFile = file.createNewFile();
+        BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+        writer.flush();
+        writer.write(this.taskList.exportFileOutput());
+        writer.close();
     }
 
 }

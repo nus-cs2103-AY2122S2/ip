@@ -1,9 +1,12 @@
 package core;
 
+import core.exceptions.FileIsCorruptException;
+
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.IOException;
 import java.io.PrintWriter;
 
 public class IOManager {
@@ -14,6 +17,8 @@ public class IOManager {
     private final String WELCOME_MESSAGE = "Hello! I'm Dooke\n What can I do for you?";
     private final String BYE_COMMAND = "bye";
     private final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
+
+    private final String FILE_PATH = "./data/duke.txt";
 
     public static IOManager getInstance() {
         return new IOManager();
@@ -56,6 +61,22 @@ public class IOManager {
     public void start() {
         displayWelcomeMessage();
         try {
+            File file = new File(FILE_PATH);
+            if (file.exists()) {
+                inputHandler.initializeWithFile(file);
+            }
+            beginRepl();
+            inputHandler.saveToFile(FILE_PATH);
+        } catch (FileIsCorruptException fileIsCorruptException) {
+            display(fileIsCorruptException.getMessage());
+            fileIsCorruptException.printStackTrace();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+    }
+
+    private void beginRepl() {
+        try {
             InputStreamReader inputStreamReader = new InputStreamReader(this.inputStream);
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
@@ -68,7 +89,6 @@ public class IOManager {
                 String output = inputHandler.handleInput(input);
                 display(output);
             }
-
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }

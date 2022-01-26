@@ -24,6 +24,16 @@ public class Event extends Task {
     }
 
     @Override
+    public String getPeripheralInfo() {
+        return this.at;
+    }
+
+    @Override
+    public String getLabel() {
+        return "E";
+    }
+
+    @Override
     public String toString() {
         OutputFormatter outputFormatter = OutputFormatter.getInstance();
         outputFormatter.appendAll("[E]", super.toString(), " (at: ", this.at, ")");

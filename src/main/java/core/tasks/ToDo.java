@@ -17,6 +17,11 @@ public class ToDo extends Task {
     }
 
     @Override
+    public String getLabel() {
+        return "T";
+    }
+
+    @Override
     public String toString() {
         OutputFormatter outputFormatter = OutputFormatter.getInstance();
         outputFormatter.appendAll("[T]", super.toString());

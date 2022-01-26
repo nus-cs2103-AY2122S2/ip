@@ -63,6 +63,14 @@ public class Task {
         this.isCompleted = false;
     }
 
+    public String getLabel() {
+        return "G";
+    }
+
+    public String getPeripheralInfo() {
+        return "";
+    }
+
     public boolean isCompleted() {
         return this.isCompleted;
     }
