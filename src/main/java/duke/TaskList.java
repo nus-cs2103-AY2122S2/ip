@@ -28,14 +28,13 @@ public class TaskList {
     public static void deleter(int num){
         if (num > 0 && num <= Task.totalTask){
             num--;
-            System.out.println(" Noted. I've removed this task: ");
-            System.out.printf("  [%s][%s] %s\n",tasklist.get(num).type, tasklist.get(num).getStatus(), tasklist.get(num).name);
+            Ui.printRemovedThisTask(num);
             tasklist.remove(num);
             Task.totalTask--;
             for(int i = num; i <Task.totalTask; i++){
                 tasklist.get(i).decrementNum();
             }
-            System.out.printf("Now you have %d tasks in the list.\n", Task.totalTask);
+            Ui.printTotalTasks();
         } else {
             System.out.println("☹ OOPS!!! There is no such task found.");
         }
@@ -54,27 +53,14 @@ public class TaskList {
         Task curr = tasklist.get(taskNum);
         if (input.startsWith("mark")){
             curr.mark();
-            System.out.println("Nice! I've marked this task as done: ");
-            System.out.printf("  [%s][%s] %s\n", curr.type, curr.getStatus(), curr.name);
+            Ui.printMarkTaskDone(curr);
         } else {
             curr.unmark();
-            System.out.println("OK, I've marked this task as not done yet: ");
-            System.out.printf("  [%s][%s] %s\n", curr.type, curr.getStatus(), curr.name);
+            Ui.printMarkTaskNotDone(curr);
         }
         Storage.writeAllToFile();
     }
 
-    /**
-     * Lists all tasks in tasklist. (in input order)
-     *
-     */
-    public static void listAllTask(){
-        System.out.printf("Here are the tasks in your list:\n");
-        for(int i=0; i<Task.totalTask; i++){
-            System.out.print(tasklist.get(i).toString());
-        }
-        System.out.println("__________________________________________________________________");
-    }
 
     public static void addTask(String name, String time, String type, boolean isReading){
         if (type.equals("D")){

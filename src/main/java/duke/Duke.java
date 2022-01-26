@@ -14,22 +14,12 @@ public class Duke {
 
     public static void main(String[] args){
         Ui ui = new Ui();
-        Scanner sc = new Scanner(System.in);
-        boolean isBye = false;
         TaskList tasklist = new TaskList();
         Storage storage = new Storage();
         storage.load();
         Parser parser = new Parser();
         Storage.parser = parser;
-        while(!isBye) {
-            try {
-                String input = sc.nextLine();
-                isBye = Parser.parseInput(input);
-            }
-            catch (EmptyDescriptorExceptions e){
-                System.out.println("☹ OOPS!!! The description of a task cannot be empty.");
-            }
-        }
+        ui.loop();
     }
 
 }

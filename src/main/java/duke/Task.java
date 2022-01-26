@@ -47,7 +47,7 @@ public class Task {
             }
         }
         catch (EmptyDescriptorExceptions e){
-            System.out.println("☹ OOPS!!! The description of a task cannot be empty.");
+            Ui.printEmptyDescriptionException();
         }
         catch (IOException e) {
             e.printStackTrace();

@@ -4,11 +4,11 @@ public class Parser {
 
     public static boolean parseInput(String input) throws EmptyDescriptorExceptions{
         if (input.equals("bye")) {
-            System.out.println("Bye. I hope to see you sometime soon! :)");
+            Ui.printBye();
             return true;
         } else {
             if (input.equals("list")) {
-                TaskList.listAllTask();
+                Ui.printAllTasks();
             } else if (input.startsWith("mark") || input.startsWith("unmark")) {
                 TaskList.markTask(input);
             } else if (input.startsWith("todo")) {
@@ -30,7 +30,7 @@ public class Parser {
             } else if (input.startsWith("delete")) {
                 TaskList.deleter(Integer.parseInt(input.substring(7, input.length())));
             } else {
-                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what does that mean :-(");
+                Ui.printWhatDoesThatMean();
             }
             return false;
         }

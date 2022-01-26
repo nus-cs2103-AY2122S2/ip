@@ -1,9 +1,25 @@
 package duke;
 
+import java.util.Scanner;
+
 public class Ui {
 
     public Ui(){
         startup();
+    }
+
+    public void loop(){
+        Scanner sc = new Scanner(System.in);
+        boolean isBye = false;
+        while(!isBye) {
+            try {
+                String input = sc.nextLine();
+                isBye = Parser.parseInput(input);
+            }
+            catch (EmptyDescriptorExceptions e){
+                Ui.printEmptyDescriptionException();
+            }
+        }
     }
 
     public static void startup(){
@@ -14,6 +30,41 @@ public class Ui {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("What can i do for you?");
+    }
+
+    public static void printBye(){
+        System.out.println("Bye. I hope to see you sometime soon! :)");
+    }
+
+    public static void printWhatDoesThatMean(){
+        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what does that mean :-(");
+    }
+
+    public static void printEmptyDescriptionException(){
+        System.out.println("☹ OOPS!!! The description of a task cannot be empty.");
+    }
+
+    public static void printAllTasks(){
+        System.out.printf("Here are the tasks in your list:\n");
+        for(int i=0; i<Task.totalTask; i++){
+            System.out.print(TaskList.tasklist.get(i).toString());
+        }
+        System.out.println("__________________________________________________________________");
+    }
+
+    public static void printRemovedThisTask(int num){
+        System.out.println(" Noted. I've removed this task: ");
+        System.out.printf("  [%s][%s] %s\n",TaskList.tasklist.get(num).type, TaskList.tasklist.get(num).getStatus(), TaskList.tasklist.get(num).name);
+    }
+
+    public static void printMarkTaskDone(Task curr){
+        System.out.println("Nice! I've marked this task as done: ");
+        System.out.printf("  [%s][%s] %s\n", curr.type, curr.getStatus(), curr.name);
+    }
+
+    public static void printMarkTaskNotDone(Task curr){
+        System.out.println("OK, I've marked this task as not done yet: ");
+        System.out.printf("  [%s][%s] %s\n", curr.type, curr.getStatus(), curr.name);
     }
 
     public static void printTotalTasks(){
