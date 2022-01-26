@@ -67,8 +67,8 @@ public class TaskListTest {
         tasks.addTask(new Todo("second"));
         tasks.addTask(new Todo("third"));
 
-        assertThrows(DukeException.class, () -> tasks.mark(-1));
-        assertThrows(DukeException.class, () -> tasks.mark(3));
+        assertThrows(DukeException.class, () -> tasks.markTask(-1));
+        assertThrows(DukeException.class, () -> tasks.markTask(3));
     }
 
     @Test
@@ -79,7 +79,7 @@ public class TaskListTest {
         tasks.addTask(new Todo("second"));
         tasks.addTask(new Todo("third"));
 
-        assertThrows(DukeException.class, () -> tasks.unmark(-1));
-        assertThrows(DukeException.class, () -> tasks.unmark(3));
+        assertThrows(DukeException.class, () -> tasks.unmarkTask(-1));
+        assertThrows(DukeException.class, () -> tasks.unmarkTask(3));
     }
 }
