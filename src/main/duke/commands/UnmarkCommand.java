@@ -4,7 +4,7 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
-public class UnmarkCommand extends Command{
+public class UnmarkCommand extends Command {
     protected int index;
     private static final String MESSAGE = "Nice! I've marked this task as not done yet:";
 

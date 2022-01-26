@@ -6,9 +6,6 @@ import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class Duke {
     private Storage storage;
     private TaskList tasks;
