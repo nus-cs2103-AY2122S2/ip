@@ -37,6 +37,9 @@ public class Parser {
       case "clearls":
         cmdResult = new CommandClear(str, taskList).execute();
         break;
+      case "find":
+        cmdResult = new CommandFind(str, taskList).execute();
+        break;
       case "todo":
       case "deadline":
       case "event":
