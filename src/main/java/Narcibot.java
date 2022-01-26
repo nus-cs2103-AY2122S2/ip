@@ -4,151 +4,109 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Narcibot {
-    private static ArrayList<Task> list = new ArrayList<>();
+    private Storage storage;
+    private TaskList taskList;
+    private Ui ui;
+    private Parser parser;
 
-    public static void main(String[] args)  {
-        System.out.println("I'm Narcibot, the best bot ever created.\nOh it's you, what a bother.\nHere's a hello as a formality. What do you want this time?\n");
-        File directory = new File("./data/tasks.txt");
-        try(FileReader fileReader = new FileReader(directory)) {
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            String line = bufferedReader.readLine();
-            while(line != null) {
-                String[] tokens = line.split("\\|", 4);
-                boolean done = tokens[1].equals("1") ? true : false;
-                switch(tokens[0]) {
-                    case "T":
-                        list.add(new ToDo(tokens[2], done));
-                        break;
-                    case "D":
-                        list.add(new Deadline(tokens[2], tokens[3], done));
-                        break;
-                    case "E":
-                        list.add(new Event(tokens[2], tokens[3], done));
-                        break;
-                }
-                line = bufferedReader.readLine();
-            }
-            System.out.println("I have loaded your prior tasks for you");
+    public Narcibot(String fileName, String path) {
+        ui = new Ui();
+        parser = new Parser();
+        storage = new Storage(fileName, path);
+        try {
+            taskList = new TaskList(storage.load());
         } catch (IOException e) {
-            System.out.println("You have no prior tasks");
+            ui.noFile();
         }
+    }
+
+    public static void main(String[] args) {
+        new Narcibot("tasks.txt","./data").run();
+    }
+
+    public void run()  {
+        ui.welcome();
         String input;
         Scanner sc = new Scanner(System.in);
         while(true) {
             input = sc.nextLine();
-            if(command(input)) {
+            if(command(parser.parse(input))) {
                 break;
             }
         }
 
-        File file = new File("./data");
-        if(!file.exists()) {
-            file.mkdir();
-        }
-        try(FileWriter fileWriter = new FileWriter("./data/tasks.txt")) {
-            for (Task task : list) {
-                fileWriter.write(task.save() + "\n");
-            }
+        try {
+                taskList.store(storage.store());
         } catch (IOException e) {
             System.out.println("File not found");
         }
     }
 
-    private static boolean command(String command) {
+    private boolean command(String[] command) {
         boolean end = false;
-        String[] tokens = command.split(" ",2);
         try {
-            switch (tokens[0]) {
+            switch (command[0]) {
                 case "bye":
-                    if(tokens.length != 1) {
+                    if(command.length != 1) {
                         throw new IncorrectFormatException("Please enter only one word for this command");
                     }
-                    System.out.println("So you finally decided to leave. Goodbye! Not that I really care.");
-                    end = true;
-                    break;
+                    ui.bye();
+                    return true;
                 case "list":
-                    if(tokens.length != 1) {
+                    if(command.length != 1) {
                         throw new IncorrectFormatException("Please enter only one word for this command.");
                     }
-                    System.out.println("Do I have to remind you again?");
-                    for (int i = 0; i < list.size(); i++) {
-                        System.out.println((i + 1) + "." + list.get(i).getStatus());
-                    }
+                    ui.list();
+                    taskList.list();
                     break;
                 case "mark":
-                    if(tokens.length != 2) {
+                    if(command.length != 2) {
                         throw new IncorrectFormatException("Please enter mark followed by a number for this command. Example: mark 8");
                     }
-                    int index1 = Integer.parseInt((tokens[1]));
-                    if(index1 < 1 || index1 > list.size()) {
-                        throw new IncorrectFormatException("Please enter a valid task number.");
-                    }
-                    System.out.println("You finally did something? I'll mark it for you then.");
-                    list.get(index1 - 1).markDone();
+                    ui.mark();
+                    taskList.mark(command[1]);
                     break;
                 case "unmark":
-                    if(tokens.length != 2) {
+                    if(command.length != 2) {
                         throw new IncorrectFormatException("Please enter unmark followed by a number for this command. Example: unmark 7");
                     }
-                    int index2 = Integer.parseInt((tokens[1]));
-                    if(index2 < 1 || index2 > list.size()) {
-                        throw new IncorrectFormatException("Please enter a valid task number.");
-                    }
-                    System.out.println("As expected... another task that wasn't finished at all.");
-                    list.get(index2 - 1).markNotDone();
+                    ui.unmark();
+                    taskList.unmark(command[1]);
                     break;
                 case "delete":
-                    if(tokens.length != 2) {
+                    if(command.length != 2) {
                         throw new IncorrectFormatException("Please enter delete followed by a number for this command. Example: delete 7");
                     }
-                    int index3 = Integer.parseInt((tokens[1]));
-                    if(index3 < 1 || index3 > list.size()) {
-                        throw new IncorrectFormatException("Please enter a valid task number.");
-                    }
-                    System.out.println("Removing this task, guess you gave up after all.");
-                    list.remove(index3 - 1);
+                    ui.delete();
+                    taskList.delete(command[1]);
                     break;
                 case "todo":
-                    if(tokens.length != 2) {
+                    if(command.length != 2) {
                         throw new IncorrectFormatException("You want me to remind you of something but you won't tell me of what it is?");
                     }
-                    list.add(new ToDo(tokens[1]));
-                    System.out.println("I have added this task cause you won't remember it.");
-                    System.out.println("You now have " + list.size() + " tasks");
+                    ui.task(taskList.todo(command[1]));
                     break;
                 case "deadline":
-                    if(tokens.length != 2) {
+                    if(command.length != 3) {
                         throw new IncorrectFormatException("You want me to remind you of something but you won't tell me of what it is? The format is deadline (task) /by (time)");
                     }
-                    String[] tokens2 = tokens[1].split(" /by ", 2);
-                    if(tokens2.length != 2 || tokens2[1].equals("")) {
-                        throw new IncorrectFormatException("Please tell me the deadline time using /by. Format: deadline (task) /by (time)");
-                    }
-                    list.add(new Deadline(tokens2[0], tokens2[1]));
-                    System.out.println("I have added this task cause you won't remember it.");
-                    System.out.println("You now have " + list.size() + " tasks");
+                    ui.task(taskList.deadline(command[1], command[2]));
                     break;
                 case "event":
-                    if(tokens.length != 2) {
+                    if(command.length != 3) {
                         throw new IncorrectFormatException("You want me to remind you of something but you won't tell me of what it is? The format is event (task) /at (time)");
                     }
-                    String[] tokens3 = tokens[1].split(" /at ", 2);
-                    if(tokens3.length != 2 || tokens3[1].equals("")) {
-                        throw new IncorrectFormatException("Please tell me the time of the event using /at. Format: event (task) /at (time)");
-                    }
-                    list.add(new Event(tokens3[0], tokens3[1]));
-                    System.out.println("I have added this task cause you won't remember it.");
-                    System.out.println("You now have " + list.size() + " tasks");
+                    ui.task(taskList.event(command[1], command[2]));
                     break;
                 default:
-                    System.out.println("Could you please talk some sense? I can't seem to comprehend what you're saying.");
+                    ui.unknown();
             }
         }  catch (NumberFormatException e) {
             System.out.println("Are you even trying to specify a task? Please enter in digits if you're wondering.");
         } catch (IncorrectFormatException e) {
             System.out.println(e.getMessage());
         }
-        return end;
+        return false;
     }
 
 }
