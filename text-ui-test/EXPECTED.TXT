@@ -1,13 +1,13 @@
 Hey, Aeromon here! Fancy a cup of tea?
 Nicely! I've added for you: 
 [T][ ] cs2103T
-Aiyo, now you have 1 tasks in the list, jiayous!
+Aiyo, now you have 1 aeromon.tasks in the list, jiayous!
 Nicely! I've added for you: 
 [D][ ] ip  (by: 2359 tonight)
-Aiyo, now you have 2 tasks in the list, jiayous!
+Aiyo, now you have 2 aeromon.tasks in the list, jiayous!
 Nicely! I've added for you: 
 [E][ ] prepare tutorial  (at: tomorrow before lecture)
-Aiyo, now you have 3 tasks in the list, jiayous!
+Aiyo, now you have 3 aeromon.tasks in the list, jiayous!
 1: [T][ ] cs2103T
 2: [D][ ] ip  (by: 2359 tonight)
 3: [E][ ] prepare tutorial  (at: tomorrow before lecture)

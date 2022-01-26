@@ -24,6 +24,7 @@ public class Task {
      */
     public void markAsDone() {
         isDone = true;
+        System.out.println("Naisu! You've completed: \n" + this);
     }
 
     /**
@@ -31,10 +32,16 @@ public class Task {
      */
     public void markAsNotDone() {
         isDone = false;
+        System.out.println("OI! What happened to completing: \n" + this);
     }
 
     @Override
     public String toString() {
         return String.format("[%1$s] %2$s", getStatusIcon(), description);
+    }
+
+    public String toOutputFormat() {
+        int status = this.isDone ? 1 : 0;
+        return String.format("%d / %s", status, this.description);
     }
 }
