@@ -22,6 +22,7 @@ public class Ui {
     private static final String TEXT_ACKNOWLEDGE_UNMARK = "OK, I've marked this task as not done yet:";
     private static final String TEXT_ACKNOWLEDGE_DELETE = "Noted. I've removed this task:";
     private static final String TEXT_ACKNOWLEDGE_TASK = "Got it. I've added this task:";
+    private static final String TEXT_ACKNOWLEDGE_FIND = "Here are the matching tasks in your list:";
 
     /**
      * Displays the Duke logo and the greeting message.
@@ -114,6 +115,18 @@ public class Ui {
         printTabbed(TEXT_ACKNOWLEDGE_DELETE, 1);
         printTabbed(task.toString(), 3);
         printTabbed("Now you have " + numTasksRemaining + " tasks in the list.", 1);
+        printDivider();
+        System.out.println();
+    }
+
+    public void acknowledgeFind(List<Task> tasks) {
+        printDivider();
+        printTabbed(TEXT_ACKNOWLEDGE_FIND, 1);
+        for (int i = 0; i < tasks.size(); i++) {
+            String entry = (i + 1) + "." + tasks.get(i).toString();
+            printTabbed(entry, 1);
+        }
+
         printDivider();
         System.out.println();
     }

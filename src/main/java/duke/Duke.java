@@ -16,6 +16,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -67,6 +68,10 @@ public class Duke {
             break;
         case LIST:
             ui.listTasks(tasks);
+            break;
+        case FIND:
+            List<Task> foundTasks = tasks.search(params.get("key"));
+            ui.acknowledgeFind(foundTasks);
             break;
         case MARK_TASK:
             markTask(getParamAsInt(params, "id") - 1);
