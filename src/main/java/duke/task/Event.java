@@ -4,19 +4,27 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a task which is an event.
+ */
 public class Event extends Task {
 
-    /** Stores the time span of the event. */
+    /** The date of the event */
     private LocalDate date;
+
+    /** The starting time of the event */
     private LocalTime time1;
+
+    /** The ending time of the event */
     private LocalTime time2;
 
     /**
      * Constructor of Event class.
+     *
      * @param description The description of the event.
-     * @param date The time span of the event.
+     * @param date The date of the event as a LocalDate object.
+     * @param isDone The completion status of the event.
      */
-
     public Event(String description, LocalDate date, boolean isDone ) {
         super(description);
         this.date=  date;
@@ -24,6 +32,16 @@ public class Event extends Task {
             this.markAsDone();
         }
     }
+
+    /**
+     * Constructor of Event class.
+     *
+     * @param description The description of the event.
+     * @param date The date of the event as a LocalDate object.
+     * @param t1 The start time of the event as a LocalTime object.
+     * @param t2 The end time of the event as a LocalTime object.
+     * @param isDone The completion status of the event.
+     */
     public Event(String description, LocalDate date, LocalTime t1, LocalTime t2, boolean isDone ) {
         super(description);
         this.date=  date;
@@ -33,14 +51,21 @@ public class Event extends Task {
             this.markAsDone();
         }
     }
-        @Override
-        public String writeToFile() {
-            return " E " + super.writeToFile() + " | " + this.date + " | " + this.time1 + " | " + this.time2;
-        }
 
     /**
-     * Returns the task in proper format.
-     * @return String of the Event.
+     * Returns a standardized format for storing the deadline into the data file.
+     *
+     * @return String of deadline in data file storage format.
+     */
+    @Override
+    public String writeToFile() {
+        return " E " + super.writeToFile() + " | " + this.date + " | " + this.time1 + " | " + this.time2;
+    }
+
+    /**
+     * Adds extra custom formatting for user view specific to events.
+     *
+     * @return A custom String display of the event.
      */
     @Override
     public String toString() {

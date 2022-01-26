@@ -4,6 +4,7 @@ public class Todo extends Task {
 
     /**
      * Constructor of Todo Class
+     *
      * @param description The description of the todo.
      */
     public Todo(String description, boolean isDone) {
@@ -19,8 +20,9 @@ public class Todo extends Task {
     }
 
     /**
-     * Returns the task in proper format.
-     * @return String of the todo.
+     * Adds extra custom formatting for user view specific to todos.
+     *
+     * @return A custom String display of the Todo.
      */
     @Override
     public String toString() {

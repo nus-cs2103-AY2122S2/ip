@@ -33,6 +33,7 @@ public class Storage {
 
     /**
      * Constructor of the class.
+     *
      * @param path The relative path of the data file to use for storage of tasks.
      */
     public Storage(String path) {
@@ -47,6 +48,7 @@ public class Storage {
 
     /**
      * Deciphers a task in the data file.
+     *
      * @param task A single task stored in the data file.
      * @return A Task instance of the task read from the data file.
      */
@@ -83,6 +85,7 @@ public class Storage {
 
     /**
      * Extracts the tasks stored in the data file.
+     *
      * @return An ArrayList of Task instances interpreted from data file.
      * @throws IOException If there are interruptions while accessing the file.
      * @throws ChiException If the file or its directory are not found.
@@ -112,6 +115,7 @@ public class Storage {
 
     /**
      * Updates tasks on the data file.
+     *
      * @param task The Task instance to be updated.
      * @param tl The TaskList storing all Task instances.
      * @param type The command used.

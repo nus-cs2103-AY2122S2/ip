@@ -4,16 +4,23 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a task which has a deadline.
+ */
 public class Deadline extends Task {
 
-    /** Deadline timing. */
+    /** The date of the deadline */
     private LocalDate by;
+
+    /** The time of day of the deadline */
     private LocalTime byTime;
 
     /**
      * Constructor for Deadline Class.
+     *
      * @param description The description of the deadline.
-     * @param by The timing of the deadline.
+     * @param by The date of the deadline as a LocalDate object.
+     * @param isDone The completion status of the deadline.
      */
     public Deadline(String description, LocalDate by, boolean isDone) {
         super(description);
@@ -24,6 +31,14 @@ public class Deadline extends Task {
             }
     }
 
+    /**
+     * Constructor for Deadline Class.
+     *
+     * @param description The description of the deadline.
+     * @param by The date of the deadline as a LocalDate object.
+     * @param byTime The time of day of the deadline as a LocalTime object.
+     * @param isDone The completion status of the deadline.
+     */
     public Deadline(String description, LocalDate by, LocalTime byTime, boolean isDone) {
         super(description);
         this.by = by;
@@ -32,13 +47,21 @@ public class Deadline extends Task {
             this.markAsDone();
         }
     }
-        @Override
-        public String writeToFile() {
-            return " D " + super.writeToFile() + " | " + this.by + " | " + this.byTime;
-    }
+
     /**
-     * Returns the task in proper format.
-     * @return String of the deadline.
+     * Returns a standardized format for storing the deadline into the data file.
+     *
+     * @return String of deadline in data file storage format.
+     */
+    @Override
+    public String writeToFile() {
+        return " D " + super.writeToFile() + " | " + this.by + " | " + this.byTime;
+    }
+
+    /**
+     * Adds extra custom formatting for user view specific to deadlines.
+     *
+     * @return A custom String display of the deadline.
      */
     @Override
     public String toString() {
