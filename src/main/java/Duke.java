@@ -7,7 +7,7 @@ import chatbot.Storage;
 import chatbot.Parser;
 
 /**
-* Duke class for the bot.
+* Duke class for the bot. Contains the main method.
 */
 public class Duke {
     private Storage storage;
