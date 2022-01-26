@@ -1,3 +1,5 @@
+package Duke;
+
 public class UI {
     static String line = "\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++\n";
     static String start = "              Greetings! Mike here!\n" +

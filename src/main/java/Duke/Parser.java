@@ -1,3 +1,10 @@
+package Duke;
+
+import Task.Deadline;
+import Task.Event;
+import Task.Tasklist;
+import Task.Todo;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
