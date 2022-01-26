@@ -1,11 +1,19 @@
 package duke;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Event class to store event type of task.
+ */
 public class Event extends Task {
-    // attributes
+
     protected String type;
 
-    // constructor
+    /**
+     * Construct Event object.
+     *
+     * @param description Description of task.
+     * @param at    When the task is happening.
+     */
     public Event(String description, String at) {
         super(description, at);
         this.type = "E";

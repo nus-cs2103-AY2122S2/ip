@@ -2,19 +2,35 @@ package duke;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Parser class to read what the user inputs.
+ */
 public class Parser {
+
     private Scanner sc = new Scanner(System.in);
     private Ui ui;
     private TaskList taskList;
     private Storage storage;
 
+    /**
+     * Construct Parser object to read what user inputs.
+     *
+     * @param ui    Ui object for interacting with the user.
+     * @param taskList  Tasklist object for storing the tasks.
+     * @param storage   Storage object for loading and saving the tasks from/to local drive.
+     */
     public Parser(Ui ui, TaskList taskList, Storage storage) {
         this.ui = ui;
         this.taskList = taskList;
         this.storage = storage;
     }
 
-    public void readUsrInput() throws IOException {
+    /**
+     * Read user input and execute commands according to user input
+     *
+     * @throws IOException  If user inputs invalid command.
+     */
+    public void readUserInput() throws IOException {
         whileLoop:
         while (sc.hasNextLine()) {
             String usrInput = sc.next();

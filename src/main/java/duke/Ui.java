@@ -1,21 +1,31 @@
 package duke;
 
+/**
+ * Ui class to interact with the user in console.
+ */
 public class Ui {
-    // attributes
+
     public static final String LINE = "____________________________________________________________";
 
-    // constructor
+    /**
+     * Construct a Ui object.
+     */
     public Ui() {
     }
 
     /**
-     * Prints out the greeting message
+     * Prints out the greeting message.
      */
     public void greet() {
         String output = LINE + "\n Hello! I'm Duke\n What can I do for you?\n" + LINE;
         System.out.println(output);
     }
 
+    /**
+     * Adds a task to the tasklist.
+     *
+     * @param taskList  TaskList object containing the ArrayList of tasks.
+     */
     public void addTask(TaskList taskList) {
         System.out.println(LINE + "\n Got it. I've added this task:");
         System.out.println("   " + taskList.getTaskList().get(taskList.getTaskList().size() - 1).toString());
@@ -23,6 +33,12 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    /**
+     * Deletes a task from the tasklist.
+     *
+     * @param taskList  TaskList object containing the ArrayList of tasks.
+     * @param removedTask   Task object to be removed.
+     */
     public void deleteTask(TaskList taskList, Task removedTask) {
         System.out.println(LINE + "\n Noted. I've removed this task:");
         System.out.println("   " + removedTask.toString());
@@ -30,12 +46,22 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    /**
+     * Marks a task as done.
+     *
+     * @param markedTask    Task object which is done.
+     */
     public void markTask(Task markedTask) {
         System.out.println(LINE + "\n Nice! I've marked this task as done:");
         System.out.println("   " + markedTask.toString());
         System.out.println(LINE);
     }
 
+    /**
+     * Marks a task as not done.
+     *
+     * @param unmarkedTask  Task object which is not done.
+     */
     public void unmarkTask(Task unmarkedTask) {
         System.out.println(LINE + "\n OK, I've marked this task as not done yet:");
         System.out.println("   " + unmarkedTask.toString());
@@ -43,7 +69,9 @@ public class Ui {
     }
 
     /**
-     * Prints out a list of all tasks in the tasklist
+     * Prints out a list of all tasks in the tasklist.
+     *
+     * @param taskList  Tasklist containing all tasks.
      */
     public void list(TaskList taskList) {
         System.out.println(LINE + "\n Here are the tasks in your list:");
@@ -54,9 +82,9 @@ public class Ui {
     }
 
     /**
-     * Throw error depending on what kind of error it is
+     * Throw error depending on what kind of error it is.
      *
-     * @param type  The type of error to be thrown
+     * @param type  The type of error to be thrown.
      */
     public void throwError(String type) {
         System.out.println(LINE);
@@ -71,7 +99,7 @@ public class Ui {
     }
 
     /**
-     * Print out a goodbye line
+     * Print out a goodbye line.
      */
     public void exit() {
         System.out.println(LINE + "\n Bye. Hope to see you again soon!\n" + LINE);

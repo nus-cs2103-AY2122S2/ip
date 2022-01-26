@@ -7,15 +7,30 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Storage class to load and save file to local drive.
+ */
 public class Storage {
-    // attributes
+
     private final String filePath;
 
-    // constructor
+    /**
+     * Construct a Storage object to load and save file to local drive.
+     *
+     * @param filePath  Filepath of where to load/save file from/to.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Load file and read data line by line.
+     * Convert the data to Task objects.
+     * Return an ArrayList containing the Task objects.
+     *
+     * @return  ArrayList containing the Task objects.
+     * @throws IOException  If fail to read the file.
+     */
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> loadedTasks = new ArrayList<>();
         FileReader fReader = new FileReader(String.valueOf(this.filePath));
@@ -50,7 +65,10 @@ public class Storage {
         return loadedTasks;
     }
 
-    public void mkDir() {
+    /**
+     * Make directory to where the file should be saved.
+     */
+    public void makeDirectory() {
         String home = System.getProperty("user.home");
         java.nio.file.Path folderPath = java.nio.file.Paths.get(home, "data");
         File folder = new File(String.valueOf(folderPath));
@@ -63,6 +81,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Save the file to the specified directory.
+     *
+     * @param tasks Tasklist to be saved to the file.
+     * @throws IOException  If error saving tasklist to file.
+     */
     public void save(TaskList tasks) throws IOException {
         FileWriter fWriter = new FileWriter(String.valueOf(filePath));
         BufferedWriter writer = new BufferedWriter(fWriter);
