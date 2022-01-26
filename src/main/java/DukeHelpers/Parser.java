@@ -7,9 +7,19 @@ import Exceptions.InvalidCommandException;
 import java.util.regex.Pattern;
 import Commands.Command;
 
-
+/**
+ * Represents a parser which makes sense of user inputs and calls the calls the corresponding commands.
+ */
 public class Parser {
 
+    /**
+     * Determines the type of commands given in the user input.
+     *
+     * @param s user input.
+     * @param command type of command to be checked against.
+     * @return boolean that indicates if the user gave the specified command.
+     * @throws DukeException If deadline and event commands are missing date and/or time.
+     */
     static boolean isCommand(String s, Command command) throws DukeException {
         boolean res = false;
         boolean missingDesc = false;
@@ -47,6 +57,13 @@ public class Parser {
         return res;
     }
 
+    /**
+     * Parse user input and calls TaskList to perform operations accordingly.
+     *
+     * @param input User input.
+     * @throws DukeException If command doesn't exist.
+     * @throws java.io.IOException If I/O operations fail or is interrupted.
+     */
     public static void parse(String input) {
         String ans = "\t";
         try {
