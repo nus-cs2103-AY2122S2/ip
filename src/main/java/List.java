@@ -1,4 +1,5 @@
 import java.util.*;
+import java.time.LocalDateTime;
 
 /**
  * This class encapsulates a list of Tasks input from the user which is stored in an Array List.
@@ -59,16 +60,18 @@ public class List {
                 ToDo toDo = new ToDo(description);
                 arrayList.add(toDo);
                 return toDo;
-            case DEADLINE:
-                Deadline deadline = new Deadline(description, timing);
-                arrayList.add(deadline);
-                return deadline;
             case EVENT:
                 Event event = new Event(description, timing);
                 arrayList.add(event);
                 return event;
         }
         return new ToDo(description);
+    }
+
+    public Task add(Tasks taskType, String description, LocalDateTime date) throws DukeException {
+        Deadline deadline = new Deadline(description, date);
+        arrayList.add(deadline);
+        return deadline;
     }
 
     /**
@@ -85,6 +88,7 @@ public class List {
             return arrayList.remove(index - 1);
         }
     }
+
 
     /**
      *
