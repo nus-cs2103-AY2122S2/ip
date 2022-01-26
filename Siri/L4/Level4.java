@@ -48,6 +48,7 @@ public class Level4 {
                         + "     added: " + taskToDo + "\n"
                         + line);
             } else if (word.equals("deadline")) {
+                //creates deadline task with "[D]" prefix and deadline postfix and adds to list
                 while (sc.hasNextLine()) {
                     String[] userInput = sc.nextLine().split("/by");
                     // The userInput array now contains [taskDescription, deadline]
