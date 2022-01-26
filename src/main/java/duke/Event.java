@@ -28,7 +28,7 @@ public class Event extends Task {
     /**
      * re-format the date and time
      * @param dateTime
-     * @return
+     * @return reformatted date and time
      */
     public String dateTimeFormat(String dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");

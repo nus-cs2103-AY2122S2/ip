@@ -32,11 +32,21 @@ public class TaskList {
         }
     }
 
-    /**
-     * mark the list as done once it is called
-     * @param curr_no
-     * @throws IOException
-     */
+
+    public void find(String word) {
+        boolean hasWord = false;
+        for (int i = 0; i < listOfInputs.size(); i++) {
+            if (listOfInputs.get(i).description.contains(word)) {
+                System.out.println(listOfInputs.get(i).message());
+                hasWord = true;
+            }
+            if (i == listOfInputs.size() - 1 && !hasWord) {
+                System.err.println("No task with the word: " + word);
+                break;
+            }
+        }
+    }
+
     public void mark( int curr_no) throws IOException {
         Task task_done = listOfInputs.get(curr_no);
         System.out.println("Good work!! I have marked it done:\n" + task_done.markedDone());
