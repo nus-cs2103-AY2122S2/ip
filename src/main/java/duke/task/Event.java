@@ -15,6 +15,7 @@ public class Event extends Task {
 
     /**
      * returns deadline in save data format (format to be saved in data.txt file for task storage)
+     *
      * @return
      */
     @Override

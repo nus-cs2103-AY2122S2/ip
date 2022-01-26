@@ -6,6 +6,7 @@ public abstract class Task {
 
     /**
      * Constructor for Task
+     *
      * @param taskDescription
      * @param tag
      */
@@ -17,6 +18,7 @@ public abstract class Task {
 
     /**
      * Checks if a task is done
+     *
      * @return
      */
     public boolean checkIsDone(){
@@ -25,6 +27,7 @@ public abstract class Task {
 
     /**
      * Gets task description
+     *
      * @return
      */
     public String getTaskDescription(){

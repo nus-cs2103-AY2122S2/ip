@@ -4,7 +4,7 @@ import duke.managers.FileManager;
 import duke.managers.TaskList;
 
 public class ListCommand extends Command{
-    int taskIdx;
+    private int taskIdx;
 
     public ListCommand(String userTaskString) {
         super(userTaskString);
@@ -12,6 +12,7 @@ public class ListCommand extends Command{
 
     /**
      * List current remaining user tasks.
+     *
      * @param taskList
      * @param fileManager
      */

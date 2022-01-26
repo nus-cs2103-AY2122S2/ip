@@ -8,6 +8,7 @@ public class Todo extends Task {
 
     /**
      * returns Todo in save data format (format to be saved in data.txt file for task storage)
+     *
      * @return
      */
     @Override

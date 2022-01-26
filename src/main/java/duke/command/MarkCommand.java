@@ -5,7 +5,7 @@ import duke.managers.FileManager;
 import duke.managers.TaskList;
 
 public class MarkCommand extends Command{
-    int taskIdx;
+    private int taskIdx;
 
     public MarkCommand(String userTaskString, int taskIdx) {
         super(userTaskString);
@@ -14,6 +14,7 @@ public class MarkCommand extends Command{
 
     /**
      * Marks user task as per taskIdx.
+     *
      * @param taskList
      * @param fileManager
      * @throws DukeException

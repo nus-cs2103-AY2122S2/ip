@@ -8,12 +8,13 @@ import duke.misc.Quote;
 import java.util.Scanner;
 
 public class Duke {
-    public TaskList userTaskList;
-    public FileManager fileManager;
+    private TaskList userTaskList;
+    private FileManager fileManager;
     Ui ui;
 
     /**
-     * duke.Duke Constructor
+     * Duke Constructor
+     *
      * @param savedTasksPath final path of saved tasks file
      */
     public Duke(String savedTasksPath){
@@ -24,6 +25,7 @@ public class Duke {
 
     /**
      * Main duke run method which starts duke Chat Bot
+     *
      * @throws DukeException if exceptions occur throughout the program
      */
     public void run() throws DukeException {
