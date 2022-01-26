@@ -13,8 +13,18 @@ public class TaskList {
         return tasks.size() - 1;
     }
 
+    public int addToDo(String description, boolean isDone) {
+        this.tasks.add(new ToDo(description, isDone));
+        return tasks.size() - 1;
+    }
+
     public int addDeadline(String description, String by) {
         this.tasks.add(new Deadline(description, by));
+        return tasks.size() - 1;
+    }
+
+    public int addDeadline(String description, boolean isDone, String by) {
+        this.tasks.add(new Deadline(description, isDone, by));
         return tasks.size() - 1;
     }
 
@@ -23,17 +33,18 @@ public class TaskList {
         return tasks.size() - 1;
     }
 
+    public int addEvent(String description, boolean isDone, String at) {
+        this.tasks.add(new Event(description, isDone, at));
+        return tasks.size() - 1;
+    }
+
     public int deleteTask(int task) {
         tasks.remove(task);
         return tasks.size() - 1;
     }
 
-    public boolean isDone (int i) {
-        return tasks.get(i).getIsDone();
-    }
-
-    public void completeTask(int i) {
-        tasks.get(i).markAsDone();
+    public ArrayList<Task> getTaskList() {
+        return this.tasks;
     }
 
     public Task getTask(int i) {
@@ -45,6 +56,14 @@ public class TaskList {
     }
 
     public boolean isEmpty() { return tasks.size() == 0; }
+
+    public boolean isDone (int i) {
+        return tasks.get(i).getIsDone();
+    }
+
+    public void completeTask(int i) {
+        tasks.get(i).markAsDone();
+    }
 
     @Override
     public String toString(){

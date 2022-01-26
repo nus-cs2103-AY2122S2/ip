@@ -29,6 +29,8 @@ public final class Templates {
 
     public static final String noTaskMsg = "☹ OOPS!!! No task exists!";
 
+    public static final String readErrorMsg = "☹ OOPS!!! There was an error loading the file.";
+
     public static String taskListMsg(ArrayList<Task> tasks) {
         StringBuffer result = new StringBuffer("Here are the tasks in your list: \n");
         for (int i = 1; i <= tasks.size(); i++) {

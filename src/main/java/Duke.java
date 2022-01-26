@@ -1,13 +1,27 @@
+import java.io.IOException;
 import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
+
+    private static TaskList taskList;
+    private static Store store;
+
+    private static void init() {
+        store = new Store();
+        try {
+            taskList = store.importTasks();
+        } catch (IOException e) {
+            new ResponePrinter(Templates.readErrorMsg).print();
+        }
+    }
+
     public static void main(String[] args) throws DukeException {
+        init();
         // Constant Declarations
         final Scanner sc = new Scanner(System.in);
 
         // Variable Declarations
-        TaskList taskList = new TaskList();
         String[] formatInputTxt;
         String inputTxt, command, description, due;
         int taskId;
@@ -41,6 +55,7 @@ public class Duke {
                             throw new DukeException(Templates.emptyInputMsg);
                         taskId = taskList.addToDo(description);
                         new ResponePrinter(Templates.addTaskMsg((taskList.getTask(taskId)).toString(), taskId + 1)).print();
+                        store.writeToFile(taskList);
                         break;
                     case DEADLINE:
                         formatInputTxt = inputTxt.split(" /by ");
@@ -50,6 +65,7 @@ public class Duke {
                             throw new DukeException(Templates.invalidFormatMsg);
                         taskId = taskList.addDeadline(description, due);
                         new ResponePrinter(Templates.addTaskMsg(taskList.getTask(taskId).toString(), taskId + 1)).print();
+                        store.writeToFile(taskList);
                         break;
                     case EVENT:
                         formatInputTxt = inputTxt.split(" /at ");
@@ -59,6 +75,7 @@ public class Duke {
                             throw new DukeException(Templates.invalidFormatMsg);
                         taskId = taskList.addEvent(description, due);
                         new ResponePrinter(Templates.addTaskMsg(taskList.getTask(taskId).toString(), taskId + 1)).print();
+                        store.writeToFile(taskList);
                         break;
                     case DONE:
                         formatInputTxt = inputTxt.split(" ");
@@ -71,6 +88,7 @@ public class Duke {
                         } else {
                             taskList.completeTask(taskId);
                             new ResponePrinter(Templates.completeTaskMsg(taskList.getTask(taskId).toString())).print();
+                            store.writeToFile(taskList);
                         }
                         break;
                     case DELETE:
@@ -82,6 +100,7 @@ public class Duke {
                             Task task = taskList.getTask(taskId);
                             int totalTask = taskList.deleteTask(taskId);
                             new ResponePrinter(Templates.deleteTaskMsg(task.toString(), totalTask + 1)).print();
+                            store.writeToFile(taskList);
                         }
                         break;
                     default:
@@ -97,6 +116,8 @@ public class Duke {
                 new ResponePrinter(Templates.invalidTaskIdMsg).print();
             } catch (IndexOutOfBoundsException e) {
                 new ResponePrinter(Templates.invalidTaskIdMsg).print();
+            } catch (IOException e) {
+                new ResponePrinter(Templates.readErrorMsg).print();
             }
         }
 
