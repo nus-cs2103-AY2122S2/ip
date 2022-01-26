@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.StringTokenizer;
 import java.util.function.Function;
+import java.util.HashMap;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -13,6 +14,7 @@ public class Duke {
     private TaskList taskList;
     private Storage storage;
     private Ui ui;
+    private Parser parser;
 
     public static void main(String[] args) {
         Duke duke = new Duke();
@@ -44,8 +46,21 @@ public class Duke {
             storage = new Storage("data.txt", "data/");
             storage.loadFromSave(taskList.getTaskList(), taskFactory);
         } catch (DukeException exception) {
-            // issues loading from storage
+            // TODO:: issues loading from storage
         }
+
+        // init parser
+        HashMap<String, Command> commands = new HashMap<String, Command>();
+        commands.put("bye", new ByeCommand("bye"));
+        commands.put("list", new ListCommand("list"));
+        commands.put("mark", new EditTaskMarkCommand("mark", true));
+        commands.put("unmark", new EditTaskMarkCommand("unmark", false));
+        commands.put("todo", new TodoCommand("todo"));
+        commands.put("deadline", new DeadlineCommand("deadline"));
+        commands.put("event", new EventCommand("event"));
+        commands.put("delete", new DeleteCommand("delete"));
+
+        parser = new Parser(commands);
     }
 
     /* Run Duke default behavior */
@@ -57,11 +72,14 @@ public class Duke {
             String userResponse = sc.nextLine();
 
             try {
-                commandsParsed(userResponse);
+                Command command = parser.parse(userResponse);
+                command.execute(userResponse, taskList, storage, ui);
+                if (command.getKey().equals("bye")) {
+                    break;
+                }
             } catch (DukeException error) {
                 ui.printError(error.getMessage());
             }
-
         }
 
         sc.close();
