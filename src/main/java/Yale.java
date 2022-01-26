@@ -9,34 +9,21 @@ import java.util.Scanner;
 
 public class Yale {
     public static void main(String[] args) {
-        String logo = "-----YALE-----";
-        System.out.println("Allow me to introduce myself\n" + logo);
-        System.out.println("The name's Yale.\n" );
+        Ui ui = new Ui();
+        ui.welcomePrompt();
         Scanner scanner = new Scanner(System.in);
         TaskList list = new TaskList();
         String fileData = FileRead.loadFileContents("data/yale.txt");
         list.importIn(fileData);
         Parser parser = new Parser();
         while (true) {
-            String command = receiveInput(scanner);
+            String command = ui.receiveInput(scanner);
             parser.performAction(command, list);
             writeActionTo("data/yale.txt", list);
             if (checkExit(command)) {
                 break;
             }
         }
-    }
-
-    /**
-     * Method to receive input from the scanner and
-     * returns that input in a String format
-     * @param scanner
-     * @return Input
-     */
-    public static String receiveInput(Scanner scanner) {
-        System.out.println("\nEnter command below:");
-        String input = scanner.nextLine();
-        return input;
     }
 
     /**
