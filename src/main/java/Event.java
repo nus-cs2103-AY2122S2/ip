@@ -30,14 +30,17 @@ public class Event extends Task{
         this.time = time;
     }
 
-    public Event (String task, boolean isDone, String startDate) {
-        super(task, isDone);
-        this.startDate = startDate;
+    public Event (String task, boolean isDone, String startDate) throws DukeException{
+        this(task, startDate);
+        this.isDone = isDone;
     }
 
     public String toFileFormat() {
         Integer i = this.isDone ? 1 : 0;
-        return String.format("E | %d | %s | %s\n", i, this.task, startDate);
+        String startDateString = startDate.format(DATE_FORMATTER);
+        String timeString = time == null ? "" : " " + time.format(TIME_FORMATTER);
+        return String.format("E | %d | %s | %s%s\n", 
+                i, this.task, startDateString, timeString);
     }
 
     @Override

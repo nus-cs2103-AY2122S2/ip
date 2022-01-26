@@ -6,7 +6,6 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task{
     static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
-    String deadlineDate;
     LocalDate deadline;
     LocalTime time;
 
@@ -30,14 +29,17 @@ public class Deadline extends Task{
         this.time = time;
     }
 
-    public Deadline (String task, boolean isDone, String deadlineDate) {
-        super(task, isDone);
-        this.deadlineDate = deadlineDate;
+    public Deadline (String task, boolean isDone, String deadlineDate) throws DukeException{
+        this(task, deadlineDate);
+        this.isDone = isDone;
     }
 
     public String toFileFormat() {
         Integer i = this.isDone ? 1 : 0;
-        return String.format("D | %d | %s | %s\n", i, this.task, deadlineDate);
+        String deadlineString = deadline.format(DATE_FORMATTER);
+        String timeString = time == null ? "" : " " + time.format(TIME_FORMATTER);
+        return String.format("D | %d | %s | %s%s\n", 
+                i, this.task, deadlineString, timeString);
     }
 
     @Override

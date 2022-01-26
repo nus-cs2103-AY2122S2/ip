@@ -7,7 +7,15 @@ public class DukeEngine {
     public boolean isPolling;
 
     public DukeEngine() {
-        itemList = Storage.readSaveFile();
+        try {
+            itemList = Storage.readSaveFile();
+        } catch (DukeException e) {
+            System.out.println(
+                chatBox("File is corrupted and Duke is unable to restore data from previous sessions.\n" 
+                        + "Resetting contents of save-file."));
+            itemList = new ArrayList<>();
+        }
+        
         isPolling = true;
         System.out.println(chatBox(greetingMessage()));
     }
@@ -63,6 +71,7 @@ public class DukeEngine {
         } catch (DukeException e) {
             replyMessage = e.getMessage();
         } catch (IOException ioException) {
+            System.out.println(ioException);
             replyMessage = "Something went wrong with the hard disk!";
         }
 

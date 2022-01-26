@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -29,41 +30,41 @@ public class Storage {
 
     }
 
-    public static ArrayList<Task> readSaveFile() {
+    public static ArrayList<Task> readSaveFile() throws DukeException{
         ArrayList<Task> taskList = new ArrayList<>();
         File f = new File(FILEPATH);
-        Scanner s;
+        Scanner s = null;
 
         try {
             s = new Scanner(f);
-        } catch (IOException e) {
-            return taskList;
-        }
+            while(s.hasNextLine()) {
+                String packet = s.nextLine();
+                String[] packetSections = packet.split(" \\| ");
+                String taskName = packetSections[2];
+                boolean isDone = Integer.parseInt(packetSections[1]) == 1;
 
-        while(s.hasNextLine()) {
-            String packet = s.nextLine();
-            String[] packetSections = packet.split(" \\| ");
-            String taskName = packetSections[2];
-            boolean isDone = Integer.parseInt(packetSections[1]) == 1;
-
-            switch (packetSections[0]){
-            case "T":
-                taskList.add(new ToDo(taskName, isDone));
-                break;
-            case "D":
-                String deadlineDate = packetSections[3];
-                taskList.add(new Deadline(taskName, isDone, deadlineDate));
-                break;
-            case "E":
-                String startDate = packetSections[3];
-                taskList.add(new Event(taskName, isDone, startDate));
-                break;
-            default:
-                break;
+                switch (packetSections[0]){
+                case "T":
+                    taskList.add(new ToDo(taskName, isDone));
+                    break;
+                case "D":
+                    String deadlineString = packetSections[3];
+                    taskList.add(new Deadline(taskName, isDone, deadlineString));
+                    break;
+                case "E":
+                    String startDateString = packetSections[3];
+                    taskList.add(new Event(taskName, isDone, startDateString));
+                    break;
+                default:
+                    break;
+                }
             }
+        } catch (FileNotFoundException e) {
+            taskList = new ArrayList<>();
+        } finally {
+            s.close();
         }
 
-        s.close();
         return taskList;
         
     }
