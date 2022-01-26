@@ -62,7 +62,7 @@ public class Task {
     }
 
     private void updateFile() {
-        FileReading.writeToPath("data/duke.txt", Task.printArray());
+        FileReading.writeToPath("/data/duke.txt", Task.printArray());
     }
 
     public String toString() {
