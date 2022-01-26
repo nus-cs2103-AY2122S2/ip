@@ -1,10 +1,10 @@
-package ari.tasks;
+package main.java.ari.tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import ari.exception.CommandFormatException;
-import ari.exception.EmptyCommandException;
+import main.java.ari.exception.CommandFormatException;
+import main.java.ari.exception.EmptyCommandException;
 
 public class EventTask extends Task {
     protected String time;

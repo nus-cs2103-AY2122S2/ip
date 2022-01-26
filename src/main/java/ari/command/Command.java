@@ -1,6 +1,6 @@
-package ari.command;
+package main.java.ari.command;
 
-import ari.tasks.TaskList;
+import main.java.ari.tasks.TaskList;
 
 public abstract class Command {
     protected TaskList taskList;

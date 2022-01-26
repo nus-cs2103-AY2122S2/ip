@@ -1,4 +1,4 @@
-package ari.storage;
+package main.java.ari.storage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,11 +8,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import ari.command.Command;
-import ari.command.MarkCommand;
-import ari.parser.Parser;
-import ari.tasks.Task;
-import ari.tasks.TaskList;
+import main.java.ari.command.Command;
+import main.java.ari.command.MarkCommand;
+import main.java.ari.parser.Parser;
+import main.java.ari.tasks.Task;
+import main.java.ari.tasks.TaskList;
 
 public class Storage { // deals with loading tasks from the file and saving tasks in the file
     public String path;
@@ -45,7 +45,7 @@ public class Storage { // deals with loading tasks from the file and saving task
                 try {
                     file.createNewFile();
                 } catch (IOException e) {
-                    System.out.println("An error has occured in Storage class");
+                    System.out.println("An error has occurred in Storage class");
                     break;
                 }
             } else {

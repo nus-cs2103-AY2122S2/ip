@@ -1,6 +1,6 @@
-package ari.command;
+package main.java.ari.command;
 
-import ari.tasks.ToDoTask;
+import main.java.ari.tasks.ToDoTask;
 
 public class TodoCommand extends AddCommand {
     public static final String COMMAND_WORD = "todo";

@@ -1,4 +1,4 @@
-package ari.command;
+package main.java.ari.command;
 
 public class IncorrectCommand extends Command {
     private String message;

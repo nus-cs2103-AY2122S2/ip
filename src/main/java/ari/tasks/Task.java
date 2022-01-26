@@ -1,6 +1,6 @@
-package ari.tasks;
+package main.java.ari.tasks;
 
-import ari.exception.EmptyCommandException;
+import main.java.ari.exception.EmptyCommandException;
 
 public class Task {
     protected boolean isDone = false;

@@ -1,4 +1,4 @@
-package ari.exception;
+package main.java.ari.exception;
 
 public class EmptyCommandException extends DukeException {
     public EmptyCommandException() {

@@ -1,21 +1,21 @@
-package ari.parser;
+package main.java.ari.parser;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
-import ari.command.ByeCommand;
-import ari.command.Command;
-import ari.command.DeadlineCommand;
-import ari.command.DeleteCommand;
-import ari.command.EventCommand;
-import ari.command.IncorrectCommand;
-import ari.command.ListCommand;
-import ari.command.MarkCommand;
-import ari.command.TodoCommand;
-import ari.command.UnmarkCommand;
-import ari.exception.CommandFormatException;
-import ari.exception.EmptyCommandException;
+import main.java.ari.command.ByeCommand;
+import main.java.ari.command.Command;
+import main.java.ari.command.DeadlineCommand;
+import main.java.ari.command.DeleteCommand;
+import main.java.ari.command.EventCommand;
+import main.java.ari.command.IncorrectCommand;
+import main.java.ari.command.ListCommand;
+import main.java.ari.command.MarkCommand;
+import main.java.ari.command.TodoCommand;
+import main.java.ari.command.UnmarkCommand;
+import main.java.ari.exception.CommandFormatException;
+import main.java.ari.exception.EmptyCommandException;
 
 public class Parser { // deals with making sense of the USER command
     public Parser() {
@@ -53,16 +53,16 @@ public class Parser { // deals with making sense of the USER command
         String command = instruction + " " + description;
 
         switch (instruction) {
-            case MarkCommand.COMMAND_WORD:
-                return prepareMark(command);
-            case TodoCommand.COMMAND_WORD:
-                return prepareTodo(command);
-            case DeadlineCommand.COMMAND_WORD:
-                return prepareDeadline(command);
-            case EventCommand.COMMAND_WORD:
-                return prepareEvent(command);
-            default:
-                return new IncorrectCommand("Unknown commands in file!");
+        case MarkCommand.COMMAND_WORD:
+            return prepareMark(command);
+        case TodoCommand.COMMAND_WORD:
+            return prepareTodo(command);
+        case DeadlineCommand.COMMAND_WORD:
+            return prepareDeadline(command);
+        case EventCommand.COMMAND_WORD:
+            return prepareEvent(command);
+        default:
+            return new IncorrectCommand("Unknown commands in file!");
         }
     }
 

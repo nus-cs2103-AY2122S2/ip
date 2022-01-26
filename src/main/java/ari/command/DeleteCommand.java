@@ -1,6 +1,6 @@
-package ari.command;
+package main.java.ari.command;
 
-import ari.tasks.Task;
+import main.java.ari.tasks.Task;
 
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";

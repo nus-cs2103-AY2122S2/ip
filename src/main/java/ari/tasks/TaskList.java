@@ -1,4 +1,4 @@
-package ari.tasks;
+package main.java.ari.tasks;
 
 import java.util.ArrayList;
 
