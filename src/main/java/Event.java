@@ -7,20 +7,18 @@ public class Event extends Task {
     protected LocalDate atDate;
     protected LocalTime atTime;
 
-    public Event(String description, LocalDate atDate, LocalTime atTime) {
-        super(description);
+    public Event(String description, boolean isDone, LocalDate atDate, LocalTime atTime) {
+        super(description, isDone);
         this.atDate = atDate;
         this.atTime = atTime;
     }
+
     protected String getDateTime() {
         return atDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + " "
                 + atTime.format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
-    public Event(String description, boolean isDone, String at) {
-        super(description, isDone);
-        this.at = at;
-    }
+
 
     public String getType() {
         return  "E";
@@ -28,7 +26,8 @@ public class Event extends Task {
 
     @Override
     public String formatToSave() {
-        return super.formatToSave() + "|" + this.at;
+        return super.formatToSave() + "|" + atDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+                + " " + atTime.format(DateTimeFormatter.ofPattern("HH:mm"));
     };
 
     @Override

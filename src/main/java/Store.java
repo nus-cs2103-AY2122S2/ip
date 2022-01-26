@@ -47,6 +47,8 @@ public class Store {
             }
         } catch (FileNotFoundException e) {
             this.file.createNewFile();
+        } catch (DukeException e) {
+            new ResponePrinter(e.getMessage()).print();
         }
         return taskList;
     }

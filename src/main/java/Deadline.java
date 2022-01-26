@@ -7,8 +7,8 @@ public class Deadline extends Task {
     protected LocalDate byDate;
     protected LocalTime byTime;
 
-    public Deadline(String description, LocalDate byDate, LocalTime byTime) {
-        super(description);
+    public Deadline(String description, boolean isDone, LocalDate byDate, LocalTime byTime) {
+        super(description, isDone);
         this.byDate = byDate;
         this.byTime = byTime;
     }
@@ -18,10 +18,7 @@ public class Deadline extends Task {
                 + byTime.format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
-    public Deadline(String description, boolean isDone, String by) {
-        super(description, isDone);
-        this.by = by;
-    }
+
 
     public String getType() {
         return  "D";
@@ -29,7 +26,8 @@ public class Deadline extends Task {
 
     @Override
     public String formatToSave() {
-        return super.formatToSave() + "|" + this.by;
+        return super.formatToSave() + "|" + byDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + " "
+                + byTime.format(DateTimeFormatter.ofPattern("HH:mm"));
     };
 
     @Override
