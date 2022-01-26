@@ -1,6 +1,9 @@
 package duke.constant;
 
-public class TaskConstant {
+/**
+ * A class that contains constants related to Task.
+ */
+public final class TaskConstant {
     public static final String PREFIX_TODO = "T";
     public static final String PREFIX_DEADLINE = "D";
     public static final String PREFIX_EVENT = "E";

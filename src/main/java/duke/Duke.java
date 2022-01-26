@@ -21,6 +21,10 @@ public class Duke {
     private static Parser parser = new Parser();
     private static TaskList tasks = new TaskList();
 
+    /**
+     * Class constructor
+     * Initialize tasks by reading data file
+     */
     public Duke() {
         try {
             tasks.setTasks(Storage.readDataFromFile());
@@ -28,6 +32,10 @@ public class Duke {
             exceptionHandler.handleOtherException(e);
         }
     }
+
+    /**
+     * Reads and executes commands from user inputs.
+     */
     public static void run() {
         ui.printGreeting();
         Scanner sc = new Scanner(System.in);
@@ -44,6 +52,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Main function to run Duke
+     * @param args Unused
+     */
     public static void main(String[] args) {
         new Duke().run();
     }
