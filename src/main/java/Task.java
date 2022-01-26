@@ -1,6 +1,7 @@
 class Task {
 
-    private int status; // 1 indicates done and 0 indicates not done
+    // 1 indicates done and 0 indicates not done
+    private int status;
     private final String name;
 
     public Task(String name) {
