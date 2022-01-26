@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
-    private String dataFilePath;
+    private final String dataFilePath;
 
     public Storage(String dataFilePath) {
         this.dataFilePath = dataFilePath;

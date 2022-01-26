@@ -43,7 +43,8 @@ public class TaskList {
             task.markAsDone();
             ui.echo("I've marked the following task as completed:\n\t" + task);
         } catch (IndexOutOfBoundsException e) {
-            throw new JarvisException("Please specify a valid task number (between 1 to " + tasks.size() + " inclusive).");
+            throw new JarvisException("Please specify a valid task number (between 1 to " +
+                    tasks.size() + " inclusive).");
         }
     }
 
@@ -54,7 +55,8 @@ public class TaskList {
             task.markAsUndone();
             ui.echo("I've marked the following task as incomplete:\n\t" + task);
         } catch (IndexOutOfBoundsException e) {
-            throw new JarvisException("Please specify a valid task number (between 1 to " + tasks.size() + " inclusive).");
+            throw new JarvisException("Please specify a valid task number (between 1 to " +
+                    tasks.size() + " inclusive).");
         }
     }
 
@@ -67,7 +69,8 @@ public class TaskList {
                     + task + "\n"
                     + "Now you have " + tasks.size() + " task(s) in your list.");
         } catch (IndexOutOfBoundsException e) {
-            throw new JarvisException("Please specify a valid task number (between 1 to " + tasks.size() + " inclusive).");
+            throw new JarvisException("Please specify a valid task number (between 1 to " +
+                    tasks.size() + " inclusive).");
         }
     }
 
