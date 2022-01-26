@@ -9,6 +9,7 @@ import duke.command.AddToDoTaskCommand;
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeleteTaskCommand;
+import duke.command.FindTaskCommand;
 import duke.command.ListTaskCommand;
 import duke.command.MarkTaskCommand;
 import duke.command.UnmarkTaskCommand;
@@ -36,6 +37,8 @@ public class Parser {
                 return new ByeCommand();
             case "list":
                 return new ListTaskCommand();
+            case "find":
+                return new FindTaskCommand(commandTokens[1]);
             case "mark":
                 int indexOfTaskToMark = Integer.parseInt(commandTokens[1]) - OFFSET;
                 return new MarkTaskCommand(indexOfTaskToMark);
