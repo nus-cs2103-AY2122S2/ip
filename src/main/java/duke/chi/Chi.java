@@ -1,10 +1,16 @@
-package duke;
+package duke.chi;
+
+import duke.exception.ChiException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.tasklist.TaskList;
+import duke.ui.UI;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class Chi {
     /**

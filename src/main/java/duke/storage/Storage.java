@@ -1,7 +1,11 @@
-package duke;
+package duke.storage;
 
-import duke.ChiException;
-import duke.Deadline;
+import duke.exception.ChiException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.tasklist.TaskList;
 
 import java.io.File;
 import java.io.FileNotFoundException;

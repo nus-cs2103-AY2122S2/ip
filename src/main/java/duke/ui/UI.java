@@ -1,4 +1,9 @@
-package duke;
+package duke.ui;
+
+import duke.exception.ChiException;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.parser.Parser;
 
 import java.io.IOException;
 import java.util.Scanner;

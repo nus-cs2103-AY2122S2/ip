@@ -1,7 +1,13 @@
-package duke;
+package duke.parser;
 
-import duke.ChiException;
-import duke.Deadline;
+import duke.exception.ChiException;
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.tasklist.TaskList;
+import duke.task.Event;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
