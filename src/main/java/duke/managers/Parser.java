@@ -17,6 +17,8 @@ public class Parser {
                 return delete(tokens);
             case "bye":
                 return exit();
+            case "find":
+                return find(tokens);
             case "todo":
                 return new StoreTodoCommand(tokens);
             case "deadline":
@@ -28,6 +30,20 @@ public class Parser {
         }
     }
 
+    protected FindCommand find(String[] tokens) throws DukeException {
+        if (tokens.length < 2)
+            throw new DukeException("Invalid input! Please specify a description for the tasks to search!");
+        String searchString = "";
+        for (String token : tokens) {
+            if (token.equals("find")) {
+                continue;
+            }
+            else {
+                searchString += " " + token;
+            }
+        }
+        return new FindCommand(searchString.trim());
+    }
     protected ExitCommand exit() {
         return new ExitCommand();
     }
