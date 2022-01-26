@@ -1,12 +1,12 @@
 todo borrow book
 deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
+event project meeting /at 30-05-2023 13:59
 list
 done 1
 done 2
 done 3
 list
-deadline do homework /by no idea :-p
+deadline do homework /by 30-05-2023 13:59
 list
 done 66
 done -1
@@ -21,3 +21,7 @@ event project meeting /by
 wwww
 event fff
 bye
+
+catch (IllegalArgumentException e) {
+            ui.print(Ui.MSG_INVLIADCMDFORMAT);
+        }

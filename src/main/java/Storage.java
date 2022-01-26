@@ -2,14 +2,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Scanner;
 
-public class Store {
+public class Storage {
 
     public static final String PATH = String.join(File.separator,"data","duke.txt");
     private File file;
 
-    public Store() {
+    public Storage() {
         this.file = new File(PATH);
         if (!this.file.getParentFile().exists())  {
             this.file.getParentFile().mkdir();
@@ -30,25 +32,40 @@ public class Store {
         TaskList taskList = new TaskList();
         try {
             Scanner s = new Scanner(this.file);
+            String[] input;
+            LocalDate date;
+            LocalTime time;
             while (s.hasNext()) {
                 String[] inputLine = s.nextLine().split("\\|");
                 String type = inputLine[0];
                 boolean isDone = inputLine[1].equals("1");
-                switch (type){
+                switch (type) {
                     case "T":
                         taskList.addToDo(inputLine[2],isDone);
                         break;
                     case "E":
-                        taskList.addEvent(inputLine[2],isDone,inputLine[3]);
+                        input = inputLine[3].split(" ");
+                        if (input.length != 2) {
+                            throw new DukeException(Ui.MSG_FILEREADERROR);
+                        }
+                        date = Parser.formatDate(input[0]);
+                        time = Parser.formatTime(date, input[1]);
+                        taskList.addEvent(inputLine[2],isDone, date, time);
                         break;
                     case "D":
-                        taskList.addDeadline(inputLine[2],isDone,inputLine[3]);
+                        input = inputLine[3].split(" ");
+                        if (input.length != 2) {
+                            throw new DukeException(Ui.MSG_FILEREADERROR);
+                        }
+                        date = Parser.formatDate(input[0]);
+                        time = Parser.formatTime(date, input[1]);
+                        taskList.addDeadline(inputLine[2],date,time);
                 }
             }
         } catch (FileNotFoundException e) {
             this.file.createNewFile();
         } catch (DukeException e) {
-            new ResponePrinter(e.getMessage()).print();
+            Ui.print(e.getMessage());
         }
         return taskList;
     }

@@ -19,7 +19,6 @@ public class Deadline extends Task {
     }
 
 
-
     public String getType() {
         return  "D";
     }

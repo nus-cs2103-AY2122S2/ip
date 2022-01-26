@@ -1,16 +1,16 @@
-public enum Action
+public enum CommandType
 {
-    EXIT("bye"),
+    BYE("bye"),
     LIST("list"),
     TODO("todo"),
     DEADLINE("deadline"),
     EVENT("event"),
     DONE("done"),
-    DELETE("delete"),;
+    DELETE("delete");
 
     private String command;
 
-    Action(String command) {
+    CommandType(String command) {
         this.command = command;
     }
 
