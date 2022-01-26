@@ -1,4 +1,6 @@
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 
@@ -77,7 +79,10 @@ public class Duke {
                         throw new DukeException(gdes);
                     }
                     String[] x = cmd.substring(8).split("/by ");
-                    list.add(new Deadline(x[0],x[1]));
+                    DateTimeFormatter formatIn = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                    DateTimeFormatter formatOut = DateTimeFormatter.ofPattern("MMM-dd-yyyy HH:mm a");
+                    String formatedDate = LocalDateTime.parse(x[1],formatIn).format(formatOut);
+                    list.add(new Deadline(x[0], formatedDate));
                     System.out.println(line + gotit + list.get(n).toString() + "\n" + now1 + (n+1) + now2 + line);
                     n+=1;
                 } else if (c[0].equals("event")) {
