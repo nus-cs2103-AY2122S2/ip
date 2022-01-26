@@ -1,0 +1,4 @@
+T | 1 | vvvv
+D | 0 | sadf  | sa
+E | 1 | sdf  | 234
+T | 0 | chuash ihong

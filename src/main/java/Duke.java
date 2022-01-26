@@ -9,7 +9,7 @@ public class Duke {
         ArrayList<Task> allTasks = new ArrayList<>();
         System.out.println("How may I serve you?");
         while (true) {
-
+  
                 String input = sc.nextLine();
                 String[] parts = input.split(" ");
             try {
