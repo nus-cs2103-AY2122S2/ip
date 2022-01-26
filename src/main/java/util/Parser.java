@@ -1,7 +1,9 @@
+package util;
+
 public class Parser {
     String task, item;
 
-    Parser() {
+    public Parser() {
         this.task = "";
         this.item = "";
     }

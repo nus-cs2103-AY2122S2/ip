@@ -1,3 +1,5 @@
+package util;
+
 public class Ui {
 
     public void greet() {

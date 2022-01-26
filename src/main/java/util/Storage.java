@@ -1,14 +1,24 @@
+package util;
+
+import task.Task;
+import task.Todo;
+import task.Event;
+import task.Deadline;
+
+import exception.DukeException;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.io.FileWriter;
 import java.util.Scanner;
 
+
 public class Storage {
 
     File file;
 
-    Storage(String filePath) throws DukeException {
+    public Storage(String filePath) throws DukeException {
         this.file = new File(filePath);
 
     }
