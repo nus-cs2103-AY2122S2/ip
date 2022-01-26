@@ -38,4 +38,20 @@ public class TaskList {
     public ArrayList<Task> getTaskList() {
         return taskList;
     }
+
+    /**
+     * Finds the relevant tasks based on input.
+     *
+     * @param input input of the keyword by user.
+     * @return the list of result that match the input.
+     */
+    public ArrayList<Task> findTask(String input) {
+        ArrayList<Task> temp = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.getDescription().toLowerCase().contains(input.toLowerCase())) {
+                temp.add(task);
+            }
+        }
+        return temp;
+    }
 }

@@ -75,6 +75,18 @@ public class Ui {
                 + currTask);
     }
 
+    public void displaySearchResult(ArrayList<Task> resultList) {
+        if (resultList.size() == 0) {
+            System.out.println("Opps! No such results");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < resultList.size(); i++) {
+                Task currTask = resultList.get(i);
+                System.out.println(i + 1 + ". " + currTask);
+            }
+        }
+    }
+
 
 
 }
