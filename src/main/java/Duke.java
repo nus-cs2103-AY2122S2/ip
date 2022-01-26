@@ -70,38 +70,38 @@ public class Duke {
         String title = "";
         String time = "";
         switch (input) {
-            case "todo":
-                if (command[1].isEmpty()) {
-                    throw new DukeException("Please tell me what you need to do");
-                }
-                task = new Todo(command[1]);
-                break;
-            case "deadline":
-                if (command[1].isEmpty()) {
-                    throw new DukeException("Please tell me what you need to do");
-                }
-                try {
-                    title = command[1].split("/by ")[0];
-                    time = command[1].split("/by ")[1];
-                    task = new Deadline(title, time);
-                } catch (IndexOutOfBoundsException e) {
-                    throw new DukeException("Please tell me the deadline in this format: <Activity> /by <Time>");
-                }
-                break;
-            case "event":
-                if (command[1].isEmpty()) {
-                    throw new DukeException("Please tell me what you need to do");
-                }
-                try {
-                    title = command[1].split("/at ")[0];
-                    time = command[1].split("/at ")[1];
-                    task = new Event(title, time);
-                } catch (IndexOutOfBoundsException e){
-                    throw new DukeException("Please tell me when your event is in this format: <Activity> /at <Time>");
-                }
-                break;
-            default:
-                throw new DukeException("Sorry I don't understand what that is :(");
+        case "todo":
+            if (command[1].isEmpty()) {
+                throw new DukeException("Please tell me what you need to do");
+            }
+            task = new Todo(command[1]);
+            break;
+        case "deadline":
+            if (command[1].isEmpty()) {
+                throw new DukeException("Please tell me what you need to do");
+            }
+            try {
+                title = command[1].split("/by ")[0];
+                time = command[1].split("/by ")[1];
+                task = new Deadline(title, time);
+            } catch (IndexOutOfBoundsException e) {
+                throw new DukeException("Please tell me the deadline in this format: <Activity> /by <Time>");
+            }
+            break;
+        case "event":
+            if (command[1].isEmpty()) {
+                throw new DukeException("Please tell me what you need to do");
+            }
+            try {
+                title = command[1].split("/at ")[0];
+                time = command[1].split("/at ")[1];
+                task = new Event(title, time);
+            } catch (IndexOutOfBoundsException e){
+                throw new DukeException("Please tell me when your event is in this format: <Activity> /at <Time>");
+            }
+            break;
+        default:
+            throw new DukeException("Sorry I don't understand what that is :(");
         }
 
         taskArray.add(task);
