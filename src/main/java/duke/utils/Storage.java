@@ -14,7 +14,7 @@ public  class Storage {
 
         try {
 
-            FileInputStream readData = new FileInputStream("list.ser");
+            FileInputStream readData = new FileInputStream("data/list.ser");
             ObjectInputStream readStream = new ObjectInputStream(readData);
             ArrayList<Task> savedTasks = (ArrayList<Task>) readStream.readObject();
             readStream.close();
@@ -34,7 +34,7 @@ public  class Storage {
 
         try {
 
-            FileOutputStream writeData = new FileOutputStream("list.ser");
+            FileOutputStream writeData = new FileOutputStream("data/list.ser");
             ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
             writeStream.writeObject(saved);
             writeStream.flush();
