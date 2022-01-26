@@ -1,5 +1,9 @@
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
 
 public class Duke {
     /**
@@ -119,12 +123,22 @@ public class Duke {
         }
     }
 
+    /**
+     * Display message after marking task as complete
+     *
+     * @param task Task to be marked as complete
+     */
     public static void displayMarkMsg(String task) {
         String markMsg = "Nice! I've marked this task as done:\n"
                 + task + "\n";
         System.out.println(formatMsg(markMsg));
     }
 
+    /**
+     * Display message after marking task as incomplete
+     *
+     * @param task Task to be marked as incomplete
+     */
     public static void displayUnmarkMsg(String task) {
         String unmarkMsg = "Nice! I've marked this task as NOT done:\n"
                 + task + "\n";
@@ -175,6 +189,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Display listed message after listing task
+     *
+     * @param task Task that was listed
+     * @param size Number of tasks remaining in list
+     */
     public static void displayListedText(Task task, int size) {
         String output = " Got it. I've added this task:\n   "
                 + task.toString()
@@ -184,10 +204,22 @@ public class Duke {
         System.out.println(formatMsg(output));
     }
 
+    /**
+     * Get timing from event task
+     *
+     * @param text Text input from user
+     * @return Timing for event task
+     */
     public static String getEventTiming(String text) {
         return text.split("/at")[1].trim();
     }
 
+    /**
+     * Get timing from deadline task
+     *
+     * @param text Text input from user
+     * @return Timing for deadline task
+     */
     public static String getDeadlineTiming(String text) {
         return text.split("/by")[1].trim();
     }
@@ -258,6 +290,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Display deletion message after deleting task
+     *
+     * @param deletedTask Task that was deleted
+     * @param size Number of tasks remaining in list
+     */
     public static void displayDeletedMessage(Task deletedTask, int size) {
         String output = " Noted. I've removed this task:\n"
                 + "  "
@@ -269,7 +307,121 @@ public class Duke {
     }
 
     /**
-     * Runs Level 5 & 6 version of the app, Exception handling
+     * Load list data from "data/list.txt" if exists, otherwise
+     * create empty "data/list.txt" file and return empty arraylist
+     *
+     * @return Arraylist of Tasks
+     * @throws FileNotFoundException
+     */
+    public static ArrayList<Task> loadListFromDisk(String defaultPath) throws FileNotFoundException {
+        File defaultFile = new File(defaultPath);
+
+        // if list.txt does not exist, create empty list.txt file
+        // and return an empty ArrayList
+        if (!defaultFile.exists()) {
+            if (!defaultFile.getParentFile().exists()) {
+                String output = "Data directory does not exist, creating list file now at: "
+                        + defaultPath
+                        + "\n";
+                System.out.println(formatMsg(output));
+                if (!defaultFile.getParentFile().mkdirs()) {
+                    System.out.println("Error occurred when trying to create Data directory :(");
+                }
+            }
+
+            try {
+                defaultFile.createNewFile();
+            } catch (IOException err) {
+                System.out.println("An IO error occurred while trying to create list.txt file :(");
+                err.printStackTrace();
+            }
+
+            return new ArrayList<>();
+
+        } else {
+            // if list.txt file exists, load from disk and return
+            // ArrayList of Tasks from list.txt
+            Scanner f = new Scanner(defaultFile);
+            ArrayList<Task> data = new ArrayList<>();
+
+            while (f.hasNext()) {
+                String[] taskLineSplit = f.nextLine().split(",");
+                Boolean completed = Integer.parseInt(taskLineSplit[1]) == 1 ? true : false;
+                String taskName = taskLineSplit[2];
+                Task storedTask;
+
+                // get event type + timing
+                if (taskLineSplit[0].equals("T")) {
+                    storedTask = new Task(taskName);
+                    storedTask.setTodo();
+                } else {
+                    storedTask = new Task(taskName, taskLineSplit[3]);
+                    if (taskLineSplit[0].equals("E")) {
+                        storedTask.setEvent();
+                    } else if (taskLineSplit[0].equals("D")) {
+                        storedTask.setDeadline();
+                    }
+                }
+
+                // get completion status
+                if (completed)
+                    storedTask.markAsComplete();
+                else
+                    storedTask.markAsIncomplete();
+
+                data.add(storedTask);
+            }
+
+            return data;
+        }
+    }
+
+    /**
+     * Overwrite data in "data/list.txt" with current list data
+     *
+     * @param data Arraylist of Tasks data
+     * @param defaultPath Default path "data/list.txt"
+     * @throws IOException Throws FileNotFoundException error if writing to non-existent file
+     */
+    public static void saveListOnDisk(ArrayList<Task> data, String defaultPath) throws IOException {
+        String dataText = "";
+
+        for (Task task: data) {
+            String taskText = "";
+            // set event type
+            if (task.eventType.equals(Task.Type.EVENT))
+                taskText += "E,";
+            else if (task.eventType.equals(Task.Type.TODO))
+                taskText += "T,";
+            else if (task.eventType.equals(Task.Type.DEADLINE))
+                taskText += "D,";
+
+            // set task completion status
+            if (task.getIsDone())
+                taskText += "1,";
+            else
+                taskText += "0,";
+
+            // set task name & timing
+            if (task.eventType.equals(Task.Type.TODO)) {
+                taskText += task.getDescription().trim();
+            } else {
+                taskText += task.getDescription().trim() + ",";
+                taskText += task.getTime();
+            }
+
+            taskText += "\n";
+            dataText += taskText;
+        }
+
+        FileWriter fw = new FileWriter(defaultPath, false);
+        fw.write(dataText);
+        fw.close();
+    }
+
+    /**
+     * Runs Level 5, 6 & 7 version of the app, Exception handling,
+     * Hard disk storage
      *
      * @throws DukeException for checked errors handled by Duke app
      */
@@ -277,12 +429,26 @@ public class Duke {
         displayWelcomeMsg();
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> data = new ArrayList<>();
+        String defaultPath = "data/list.txt";
+
+        try {
+            data = loadListFromDisk(defaultPath);
+        } catch (FileNotFoundException err) {
+            System.out.println("File not found");
+        }
 
         for (int i = 0; i < 100; i++) {
             String input = sc.nextLine().trim();
             String command = input.split(" ")[0];
 
             if (command.equals("bye")) {
+                try {
+                    saveListOnDisk(data, defaultPath);
+                } catch (IOException err) {
+                    System.out.println("Error occurred while trying to save list data to disk");
+                    err.printStackTrace();
+                }
+
                 displayExitMsg();
                 return;
 
@@ -351,8 +517,6 @@ public class Duke {
             }
         }
     }
-
-
 
     public static void main(String[] args) throws DukeException {
         levelFinal();

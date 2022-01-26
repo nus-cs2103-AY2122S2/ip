@@ -1,3 +1,12 @@
+/**
+ * Task object that stores event type, task name,
+ * completion status and deadline (optional)
+ *
+ * @param description Name of task
+ * @param isDone Completion status
+ * @param eventType Name of task
+ * @param time Name of task
+ */
 public class Task {
     enum Type {
         TODO,
@@ -24,6 +33,10 @@ public class Task {
         this.time = time;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
@@ -32,6 +45,14 @@ public class Task {
         return (eventType == Type.EVENT ? "[E]" :
                 eventType == Type.TODO ? "[T]" :
                 eventType == Type.DEADLINE ? "[D]" : "[ ]");
+    }
+
+    public boolean getIsDone() {
+        return isDone;
+    }
+
+    public String getTime() {
+        return time;
     }
 
     @Override
