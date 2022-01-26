@@ -23,6 +23,7 @@ public class Duke {
 
             switch (command) {
                 case "list":
+                    System.out.println("Hmm... Paimon keeps a clear record in her diary.");
                     printList(tasks);
                     break;
                 case "do":
@@ -33,6 +34,12 @@ public class Duke {
                 case "undo":
                     int j = Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;
                     tasks.get(j).markIncomplete();
+                    break;
+                case "delete":
+                    int k = Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;
+                    tasks.remove(k);
+                    System.out.println("Noted, the task has been scrubbed off the list!");
+                    printList(tasks);
                     break;
                 case "todo":
                     Todo t = new Todo(input);
@@ -78,10 +85,10 @@ public class Duke {
      * Only compatible with Tasks at the moment.
      */
     public static void printList(List<Task> t) {
-        System.out.println("Hmm... Paimon keeps a clear record in her diary.");
         for (int i = 0; i < t.size(); i++) {
             if (t.get(i) != null) {
-                System.out.println("  " + i+1 +". " + t.get(i));
+                int index = i+1;
+                System.out.println("  " + index + ". " + t.get(i));
             }
             else {
                 System.out.println("You now have " + i +" tasks on your list.");
@@ -98,9 +105,13 @@ public class Duke {
         }
 
         String firstWord = input.replaceAll(" .*", "");
-        if (firstWord.equals("do") || firstWord.equals("undo")) {
+        if (firstWord.equals("do") || firstWord.equals("undo") || firstWord.equals("delete")) {
             input = input.replaceAll(".* ", "");
-            return input.matches("[0-9]+");
+            if (input.matches("[0-9]+")) {
+                return true;
+            }
+            System.out.println("You need to specify the task you want to "+ firstWord + " by its index :c");
+            return false;
         }
 
         if (firstWord.equals("todo")) {
