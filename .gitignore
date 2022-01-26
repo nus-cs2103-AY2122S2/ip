@@ -21,4 +21,5 @@ text-ui-test/EXPECTED-UNIX.TXT
 *.jar
 *.exe
 # log files, temprary files, settings of ide (local files)
+/data/
 # sensitive content like personal information

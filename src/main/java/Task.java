@@ -1,4 +1,6 @@
-public class Task {
+import java.io.Serializable;
+
+public class Task implements Serializable{
     protected String desc;    
     protected boolean isDone;    
 
@@ -17,6 +19,10 @@ public class Task {
 
     public String getDesc() {
         return this.desc;
+    }
+
+    public boolean isThisDone() {
+        return this.isDone;
     }
 
     public String getStatusIcon() {
