@@ -27,8 +27,8 @@ public class Level4 {
                 Task t = arrList.get(index);
                 t.markAsDone();
                 arrList.set(index, t);
-                System.out.println(line + "     This task has been marked:\n"
-                        + "       " + t.toString() + "\n"
+                System.out.println(line + "     This task has been marked:\n       "
+                        + t.toString() + "\n"
                         + line);
             } else if (word.equals("unmark")) { //unmarks the specified task
                 int num = sc.nextInt();
@@ -36,16 +36,17 @@ public class Level4 {
                 Task t = arrList.get(index);
                 t.markAsNotDone();
                 arrList.set(index, t);
-                System.out.println(line + "     This task has been unmarked:\n"
-                        + "       " + t.toString() + "\n"
+                System.out.println(line + "     This task has been unmarked:\n       "
+                        + t.toString() + "\n"
                         + line);
             } else if (word.equals("todo")) { //creates todo task with "[T]" prefix and adds to the list
                 String restOfInput = sc.nextLine();
                 String taskToDo = restOfInput;
                 Todo t = new Todo(taskToDo);
                 arrList.add(t);
-                System.out.println(line + "     This task has been added to your list:\n"
-                        + "     added: " + taskToDo + "\n"
+                System.out.println(line + "     This task has been added to your list:\n       "
+                        + t.toString() + "\n" + "\n"
+                        + "     Number of task(s) in your list: " + arrList.size() + "\n"
                         + line);
             } else if (word.equals("deadline")) {
                 //creates deadline task with "[D]" prefix and deadline postfix and adds to list
@@ -54,19 +55,33 @@ public class Level4 {
                     // The userInput array now contains [taskDescription, deadline]
                     Deadline deadLineTask = new Deadline(userInput[0], userInput[1]);
                     arrList.add(deadLineTask);
-                    System.out.println(line + "     This task has been added to your list:\n"
-                            + "     added: " + userInput[0] + "\n"
+                    System.out.println(line + "     This task has been added to your list:\n       "
+                            + deadLineTask.toString() + "\n" + "\n"
+                            + "     Number of task(s) in your list: " + arrList.size() + "\n"
+                            + line);
+                    break;
+                }
+            } else if (word.equals("event")) {
+                //creates event task with "[E]" prefix and event date postfix and adds to list
+                while (sc.hasNextLine()) {
+                    String[] userInput = sc.nextLine().split("/at");
+                    // The userInput array now contains [taskDescription, event date]
+                    Event eventTask = new Event(userInput[0], userInput[1]);
+                    arrList.add(eventTask);
+                    System.out.println(line + "     This task has been added to your list:\n       "
+                            + eventTask.toString() + "\n" + "\n"
+                            + "     Number of task(s) in your list: " + arrList.size() + "\n"
                             + line);
                     break;
                 }
             } else { //print everything user inputed with "added: " infront
-                String restOfInput = sc.nextLine();
+                /*String restOfInput = sc.nextLine();
                 String taskToDo = word + restOfInput;
                 Task t = new Task(taskToDo);
                 arrList.add(t);
                 System.out.println(line + "     This task has been added to your list:\n"
                         + "     added: " + taskToDo + "\n"
-                        + line);
+                        + line);*/
             }
         }
     }
