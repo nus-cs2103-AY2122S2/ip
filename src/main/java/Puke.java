@@ -3,6 +3,10 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 
 public class Puke {
     public static final String LINE = "____________________________________________________________\n";
@@ -150,10 +154,23 @@ public class Puke {
                 throw new DukeException("I'll need a date/time for this task..");
             }
 
-            if (type.equals("deadline")) {
-                t = new Deadline(taskDetail[0].trim(), taskDetail[1].split(" ", 2)[1].trim());
-            } else {
-                t = new Event(taskDetail[0].trim(), taskDetail[1].split(" ", 2)[1].trim());
+            String dateTimeStr = taskDetail[1].split(" ", 2)[1];
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+            try {
+                LocalDateTime dateTime = LocalDateTime.parse(dateTimeStr, formatter);
+
+                if (dateTime.isBefore(LocalDateTime.now())) {
+                    throw new DukeException("Why are you trying to create a task in the past?");
+                }
+
+                if (type.equals("deadline")) {
+                    t = new Deadline(taskDetail[0], dateTime);
+                } else {
+                    t = new Event(taskDetail[0], dateTime);
+                }
+            } catch (DateTimeParseException e) {
+                throw new DukeException("I'll need a valid date/time in the format yyyy-mm-dd hh:mm");
             }
         }
 
@@ -180,16 +197,17 @@ public class Puke {
         while (s.hasNext()) {
             String[] taskInfo = s.nextLine().split("@@");
             Task t = null;
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
             switch (taskInfo[0]) {
             case "T":
                 t = new Todo(taskInfo[2]);
                 break;
             case "D":
-                t = new Deadline(taskInfo[2], taskInfo[3]);
+                t = new Deadline(taskInfo[2], LocalDateTime.parse(taskInfo[3], formatter));
                 break;
             case "E":
-                t = new Event(taskInfo[2], taskInfo[3]);
+                t = new Event(taskInfo[2], LocalDateTime.parse(taskInfo[3], formatter));
                 break;
             }
 
