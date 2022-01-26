@@ -29,8 +29,9 @@ public class Task {
      * @return The index at the start of time command
      */
     private int parseDescription(String description, String type) {
-        int slashIndex;
-        int command;
+        int slashIndex = -1;
+        int command = -1;
+
         if (! type.equals("T")) {
             slashIndex = description.indexOf("/");
             command = description.indexOf(" ", slashIndex);
@@ -48,14 +49,14 @@ public class Task {
     /**
      * Changes the task state to become completed
      */
-    public void taskDone() {
+    public void changeTaskDone() {
         this.isComplete = true;
     }
 
     /**
      * Changes the task state to become uncompleted
      */
-    public void taskUndone() {
+    public void changeTaskUndone() {
         this.isComplete = false;
     }
 
@@ -64,9 +65,10 @@ public class Task {
      *
      * @return The string with the database file format
      */
-    public String toFileText() {
-        String done;
-        String timeDue;
+    public String createTextDatabase() {
+        String done = "";
+        String timeDue = "";
+
         if (isComplete) {
             done = "1";
         } else {
@@ -98,15 +100,17 @@ public class Task {
      */
     @Override
     public String toString() {
-        String temp = "[ ]";
+        String bracketString = "[ ]";
+        String timeCommandString = "";
+
         if (isComplete) {
-            temp = "[X]";
+            bracketString = "[X]";
         }
-        String timeCommand = "";
+
         if (! this.timeCommand.equals("")) {
-            timeCommand = "(" + this.timeCommand + ": " +
+            timeCommandString = "(" + this.timeCommand + ": " +
                     time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         }
-        return "[" + type + "]" + temp + " " + description + timeCommand;
+        return "[" + type + "]" + bracketString + " " + description + timeCommandString;
     }
 }

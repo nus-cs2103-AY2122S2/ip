@@ -1,21 +1,14 @@
 package duke.util;
 
-import duke.command.AddCommand;
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DateCommand;
-import duke.command.DeleteCommand;
-import duke.command.ShowListCommand;
-import duke.command.UpdateMarkCommand;
-import duke.command.WrongSyntaxCommand;
+import duke.command.*;
 import duke.datetime.DateTable;
 
 /**
  * Helps to parse the input command into the respective Command Object
  */
 public class Parser {
-    private static String botCommandWord;
-    private static String description;
+    private static String botCommandWord = "";
+    private static String description = "";
 
     public Parser() {
     }
@@ -34,7 +27,7 @@ public class Parser {
     /**
      * Returns the key command word from the input command
      *
-     * @param command The user input command
+     * @param command      The user input command
      * @param commandIndex Separation index between key command word and description
      * @return The key command word
      */
@@ -49,7 +42,7 @@ public class Parser {
     /**
      * Returns the description from the input command
      *
-     * @param command The user input command
+     * @param command      The user input command
      * @param commandIndex Separation index between key command word and description
      * @return The description
      */
@@ -65,11 +58,11 @@ public class Parser {
      * Returns a specific Command Object base on the input command
      *
      * @param dateTable The database of date and tasks
-     * @param fullCommand The user input command
+     * @param fullInput The user input command
      * @return Command Object that suitable for the input command
      */
-    public static Command parse(DateTable dateTable, String fullCommand) {
-        readInput(fullCommand);
+    public static Command parse(DateTable dateTable, String fullInput) {
+        readInput(fullInput);
         switch (botCommandWord) {
         case "list":
             return new ShowListCommand();
@@ -78,11 +71,11 @@ public class Parser {
         case "unmark":
             return new UpdateMarkCommand(description, false);
         case "todo":
-            return new AddCommand(fullCommand, description,"T");
+            return new AddCommand(fullInput, description, "T");
         case "deadline":
-            return new AddCommand(fullCommand, description,"D");
+            return new AddCommand(fullInput, description, "D");
         case "event":
-            return new AddCommand(fullCommand, description,"E");
+            return new AddCommand(fullInput, description, "E");
         case "delete":
             return new DeleteCommand(description);
         case "date":

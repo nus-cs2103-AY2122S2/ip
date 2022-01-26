@@ -10,7 +10,7 @@ public class BotException {
      *
      * @param description The input command type
      */
-    public void emptyDescription(String description) {
+    public void printEmptyDescriptionError(String description) {
         System.out.println("____________________________________________________________");
         System.out.println("  ☹ OOPS!!! The description of a " + description + " cannot be empty.");
         System.out.println("____________________________________________________________");
@@ -22,7 +22,7 @@ public class BotException {
      *
      * @param description The input command type
      */
-    public void notNumeric(String description) {
+    public void printNotNumericError(String description) {
         System.out.println("____________________________________________________________");
         System.out.println("  ☹ OOPS!!! The description of a " + description + " must be a number.");
         System.out.println("____________________________________________________________");
@@ -31,7 +31,7 @@ public class BotException {
     /**
      * Prints error when the input command does not belong to any known command
      */
-    public void wrongSyntax() {
+    public void printWrongSyntaxError() {
         System.out.println("____________________________________________________________");
         System.out.println("  ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         System.out.println("____________________________________________________________");
@@ -40,7 +40,7 @@ public class BotException {
     /**
      * Prints error when the input date does not appear in the database
      */
-    public void dateNotFound() {
+    public void printDateNotFoundError() {
         System.out.println("____________________________________________________________");
         System.out.println("  ☹ OOPS!!! You don't have any deadlines/events on this day :-(");
         System.out.println("____________________________________________________________");

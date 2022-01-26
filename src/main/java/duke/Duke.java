@@ -7,7 +7,7 @@ import duke.util.Parser;
 import duke.util.BotStoring;
 import duke.util.Ui;
 
-import java.io.*;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -25,11 +25,13 @@ public class Duke {
     private final DateTable dateTable;
 
     public Duke(String path, String directory) throws IOException {
-        TaskList taskList1;
+        TaskList taskList1 = new TaskList();
+
         botStorage = new BotStoring(path, directory);
         Scanner sc = new Scanner(System.in);
         ui = new Ui(sc);
         dateTable = new DateTable(ui);
+
         try {
             taskList1 = new TaskList(botStorage, ui, dateTable);
         } catch (IOException e) {
@@ -46,7 +48,7 @@ public class Duke {
     public void run() {
         boolean isExit = false;
 
-        while (! isExit) {
+        while (!isExit) {
             try {
                 String command = ui.readCommand();
                 Command c = Parser.parse(dateTable, command);
@@ -57,6 +59,7 @@ public class Duke {
             }
         }
     }
+
     public static void main(String[] args) throws IOException {
         new Duke(PATH, DIRECTORY).run();
     }
