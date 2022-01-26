@@ -10,7 +10,7 @@ public class DukeList {
 
     private final Storage storage;
     private final ArrayList<Task> taskList;
-    private boolean useStorage;
+    private final boolean useStorage;
 
     /**
      * Constructor for DukeList
@@ -26,6 +26,9 @@ public class DukeList {
         this.useStorage = true;
     }
 
+    /**
+     * Constructor for DukeList that is non-persistent.
+     */
     public DukeList(ArrayList<Task> taskList) {
         this.storage = null;
         this.taskList = taskList;

@@ -73,8 +73,7 @@ public class Storage {
         if (!fileExist()) {
             try {
                 initFile();
-            } catch (IOException e) {
-                ;
+            } catch (IOException ignored) {
             }
         }
 

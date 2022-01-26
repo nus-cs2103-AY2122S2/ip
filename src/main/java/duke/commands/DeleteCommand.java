@@ -18,7 +18,7 @@ public class DeleteCommand extends Command {
     /**
      * Function to execute the command.
      *
-     * @param dukeList dukelist object
+     * @param dukeList dukeList object
      * @param ui ui object
      */
     @Override

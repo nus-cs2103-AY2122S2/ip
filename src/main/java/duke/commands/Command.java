@@ -5,12 +5,17 @@ import duke.UI;
 import duke.exceptions.InvalidTaskException;
 
 public abstract class Command {
+    /**
+     * Checks if the command is a terminating one.
+     *
+     * @return boolean whether to terminate
+     */
     public boolean isExit() { return false; }
 
     /**
      * Function to execute the command.
      *
-     * @param dukeList dukelist object
+     * @param dukeList dukeList object
      * @param ui ui object
      * @throws InvalidTaskException invalid task
      */

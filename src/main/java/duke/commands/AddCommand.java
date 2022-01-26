@@ -19,7 +19,7 @@ public class AddCommand extends Command {
     /**
      * Function to execute the command.
      *
-     * @param dukeList dukelist object
+     * @param dukeList dukeList object
      * @param ui ui object
      * @throws InvalidTaskException invalid task
      */

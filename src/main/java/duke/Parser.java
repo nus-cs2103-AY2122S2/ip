@@ -3,8 +3,6 @@ package duke;
 import duke.commands.*;
 import duke.exceptions.InvalidCommandException;
 
-import java.util.Objects;
-
 public class Parser {
     private static final String QUIT_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
