@@ -40,6 +40,13 @@ public class TaskHistory {
         System.out.println(msg);
     }
 
+    /**
+     * Returns string containing all the tasks in stored in DukeLCH.
+     * If there is no tasks stored, "There has been no recorded user
+     * input!" is returned.
+     *
+     * @return string containing all the tasks stored in DukeLCH.
+     */
     String printAll() {
         int count = 1;
         StringBuilder result = new StringBuilder();
