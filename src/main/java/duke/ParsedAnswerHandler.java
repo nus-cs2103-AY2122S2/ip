@@ -21,11 +21,7 @@ public class ParsedAnswerHandler {
                 break;
 
             case "list":
-                ArrayList<Task> taskArrayList = Storage.taskList;
-                System.out.println("Here are the tasks in your list: " + "\n");
-                for (int i = 0; i < taskArrayList.size(); i++) {
-                    System.out.println( (i + 1) + ". "  + taskArrayList.get(i) + "\n");
-                }
+                TaskList.list();
                 break;
 
             case "todo":
