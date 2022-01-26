@@ -1,20 +1,21 @@
+import java.time.LocalDate;
+
 public class Task {
     // attributes
     protected String description;
     protected boolean isDone;
     protected String type;
-    protected String by;
+    protected LocalDate by;
 
     // constructor
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-        this.by = "";
     }
 
     public Task(String description, String by) {
         this.description = description;
-        this.by = by;
+        this.by = LocalDate.parse(by);
         this.isDone = false;
     }
 
@@ -55,7 +56,7 @@ public class Task {
     }
 
     public String getBy() {
-        return this.by;
+        return this.by.toString();
     }
 
     public String toString() {
