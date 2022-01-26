@@ -19,6 +19,16 @@ public class TodoList {
             file.createNewFile();
             scanner = new Scanner(file);
             readFromFile();
+        } catch (DukeException e) {
+
+            try {
+                // empty the corrupted file
+                FileWriter writer = new FileWriter(filePath, false);
+                writer.close();
+            } catch (IOException e1) {
+                System.out.println(e1.getMessage());
+            }
+
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -64,7 +74,7 @@ public class TodoList {
         return item.toString();
     }
 
-    private void readFromFile() {
+    private void readFromFile() throws DukeException {
         while (scanner.hasNext()) {
             String[] data = scanner.nextLine().split(" \\| ");
             String type = data[0];
