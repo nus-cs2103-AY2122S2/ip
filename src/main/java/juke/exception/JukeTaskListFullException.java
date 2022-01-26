@@ -1,4 +1,4 @@
-package exception;
+package juke.exception;
 
 public class JukeTaskListFullException extends JukeException {
     public JukeTaskListFullException(String cmd) {
@@ -7,6 +7,6 @@ public class JukeTaskListFullException extends JukeException {
     
     @Override
     public String getMessage() {
-        return "Task list is full, " + this.getCommand() + " could not add new task to list.";
+        return "Task list is full, " + this.getCommand() + " could not add new juke.task to list.";
     }
 }

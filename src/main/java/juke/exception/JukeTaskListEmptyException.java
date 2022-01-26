@@ -1,4 +1,4 @@
-package exception;
+package juke.exception;
 
 public class JukeTaskListEmptyException extends JukeException {
     public JukeTaskListEmptyException(String cmd) {

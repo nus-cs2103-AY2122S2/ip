@@ -1,4 +1,4 @@
-package task;
+package juke.task;
 
 public enum TaskStatus {
     NOT_DONE("\u2610"),

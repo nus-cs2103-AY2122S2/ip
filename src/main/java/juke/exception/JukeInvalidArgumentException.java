@@ -1,4 +1,4 @@
-package exception;
+package juke.exception;
 
 public class JukeInvalidArgumentException extends JukeException {
     private String expected;
