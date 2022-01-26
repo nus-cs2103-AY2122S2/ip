@@ -56,6 +56,10 @@ public class Ui {
         System.out.println(HORIZONTAL_LINE);
     }
 
+    public static void printMessageWithoutLine(String message) {
+        System.out.println(message);
+    }
+
     /**
      * Prints a confirmation after marking task as Done.
      *

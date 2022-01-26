@@ -2,6 +2,7 @@ package duke.component;
 
 import java.time.DateTimeException;
 
+import duke.command.FindCommand;
 import duke.command.Command;
 import duke.command.ExitCommand;
 import duke.command.ListCommand;
@@ -24,6 +25,7 @@ import static duke.constant.CommandConstant.COMMAND_BYE;
 import static duke.constant.CommandConstant.COMMAND_DEADLINE;
 import static duke.constant.CommandConstant.COMMAND_DELETE;
 import static duke.constant.CommandConstant.COMMAND_EVENT;
+import static duke.constant.CommandConstant.COMMAND_FIND;
 import static duke.constant.CommandConstant.COMMAND_LIST;
 import static duke.constant.CommandConstant.COMMAND_MARK;
 import static duke.constant.CommandConstant.COMMAND_TODO;
@@ -133,6 +135,8 @@ public class Parser {
             return new AddDeadlineCommand(commandArgument);
         case COMMAND_EVENT:
             return new AddEventCommand(commandArgument);
+        case COMMAND_FIND:
+            return new FindCommand(commandArgument);
         default:
             throw new UnknownCommandException();
         }
