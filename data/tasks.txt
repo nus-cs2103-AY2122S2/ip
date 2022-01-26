@@ -1,2 +1,3 @@
-DEADLINE ? false !
 TODO eat true
+TODO sleep false
+EVENT drink true 21/12/1999-12:01

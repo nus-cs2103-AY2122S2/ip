@@ -13,7 +13,7 @@ public abstract class Task {
     public abstract String exportToString();
 
     public static Task importFromString(String exportedTask)
-            throws IllegalArgumentException, ArrayIndexOutOfBoundsException {
+            throws IllegalArgumentException, ArrayIndexOutOfBoundsException, DukeException {
         String[] details = exportedTask.split(" ");
         Task task = null;
         switch (Duke.TaskType.valueOf(details[0])) {
