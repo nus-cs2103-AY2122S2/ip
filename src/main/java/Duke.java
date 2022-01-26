@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Duke {
     /**
@@ -257,11 +255,6 @@ public class Duke {
             }
 
             continue;
-
-//            Task newTask = new Task(input);
-//            data.add(newTask);
-//            String output = " added: " + input + "\n";
-//            System.out.println(formatMsg(output));
         }
     }
 
@@ -277,6 +270,8 @@ public class Duke {
 
     /**
      * Runs Level 5 & 6 version of the app, Exception handling
+     *
+     * @throws DukeException for checked errors handled by Duke app
      */
     public static void levelFinal() throws DukeException {
         displayWelcomeMsg();
@@ -356,6 +351,8 @@ public class Duke {
             }
         }
     }
+
+
 
     public static void main(String[] args) throws DukeException {
         levelFinal();
