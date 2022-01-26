@@ -25,9 +25,6 @@ public class Deadline extends Task {
 	public Deadline(String name, String dateStr) {
 		super(name);
 		this.NAME = name;
-<<<<<<< HEAD
-		this.DATE = date;
-=======
 
 		String[] tokens = dateStr.split("\\s+");
 		this.date = LocalDate.parse(tokens[0]);
@@ -52,7 +49,6 @@ public class Deadline extends Task {
 
 		String str = this.date.format(dateFormatter) + ", " + this.time.format(timeFormatter);
 		return str;
->>>>>>> branch-Level-8
 	}
 
 	/**
@@ -62,11 +58,7 @@ public class Deadline extends Task {
 	 */
 	@Override
 	public String toString() {
-<<<<<<< HEAD
-		return this.NAME + "(" + DATE + ")";
-=======
 		return this.NAME + "(by: " + dateStr + ")";
->>>>>>> branch-Level-8
 	}
 
 	/**
@@ -94,6 +86,6 @@ public class Deadline extends Task {
 	 * @return Deadline of Task.
 	 */
 	public String getDate() {
-		return this.DATE;
+		return this.dateStr;
 	}
 }
