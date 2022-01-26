@@ -1,4 +1,8 @@
-import java.io.File; // Imported File class
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Commands {
 
@@ -139,8 +143,30 @@ public class Commands {
         taskHistory.deleteTask(index);
     }
 
-    void startup() {
-        File f = new File("./data/");
-        System.out.println("File exists?: " + f.exists());
+    void startup() throws IOException {
+        String home = System.getProperty("user.home");
+
+        Path path = Paths.get(home,"Duke", "data");
+        boolean directoryExists = Files.exists(path);
+        System.out.println(path);
+        System.out.println(directoryExists);
+
+        String filePath = String.valueOf(path);
+
+        File f1 = new File(filePath);
+        if (f1.mkdirs()) {
+            System.out.println("Successfully created data folder");
+        } else {
+            System.out.println("Creation of data folder was unsuccessful");
+        }
+        System.out.println(filePath);
+
+        File f2 = new File (filePath + "\\duke.txt");
+
+        if (f2.createNewFile()) {
+            System.out.println("Successfully created duke.txt");
+        } else {
+            System.out.println("Creation of duke.txt was unsuccessful");
+        }
     }
 }

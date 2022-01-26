@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.MissingFormatArgumentException; // Imported MissingFormatArgumentException
 import java.util.Scanner; // Imported Scanner class
 
@@ -15,7 +16,11 @@ public class Duke {
         System.out.println(logo);
         Commands cmd = new Commands();
         Scanner io = new Scanner(System.in); // Scanner object created
-
+        try {
+            cmd.startup();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
         label:
         while (true) {
             String input = io.nextLine();
