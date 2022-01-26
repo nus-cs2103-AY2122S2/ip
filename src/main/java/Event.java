@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task{
     LocalDate date;
 
-    public Event(String taskName, String at) throws Exception{
+    public Event(String taskName, String at) throws DukeException{
         super(taskName);
         boolean isCorrectFormat = formatChecker(at);
         if (isCorrectFormat) {

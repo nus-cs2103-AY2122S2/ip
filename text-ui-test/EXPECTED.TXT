@@ -28,7 +28,7 @@ Hello from
        [D][ ] return book (by: Jan 30 2022)
      Now you have 3 tasks in the list.
     ____________________________________________________________
-Incorrect date format, please use yyyy-mm-dd.
+Invalid date format, please use yyyy-mm-dd.
     ____________________________________________________________
      OK, I've marked this task as not done yet:
        [T][ ] borrow book

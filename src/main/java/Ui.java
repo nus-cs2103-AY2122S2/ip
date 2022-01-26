@@ -1,0 +1,36 @@
+import java.io.*;
+
+public class Ui {
+    private static final String DIVIDER = "____________________________________________________________";
+    private static final String INDENTATION = "    ";
+    private static final String GREETING = "     Hello! I'm Duke\n" + "     What can I do for you?";
+
+    public void greet() {
+        showLine();
+        System.out.println(GREETING);
+        showLine();
+    }
+
+    public String readCommand() throws DukeException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            String command = br.readLine();
+            return  command;
+        } catch (IOException e) {
+            throw new DukeException("Problem reading input, please give a proper input");
+        }
+    }
+
+    public void showError(String errMessage) {
+        System.out.println(INDENTATION+errMessage);
+    }
+
+    public void showLine() {
+        System.out.println(INDENTATION+DIVIDER);
+    }
+
+    public void print(String message) {
+        System.out.println(INDENTATION+message);
+    }
+
+}

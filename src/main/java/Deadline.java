@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task{
     LocalDate dueDate;
 
-    public Deadline(String taskName, String by) throws Exception {
+    public Deadline(String taskName, String by) throws DukeException {
         super(taskName);
         boolean isCorrectFormat = formatChecker(by);
         if (isCorrectFormat) {
