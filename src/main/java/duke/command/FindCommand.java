@@ -15,7 +15,7 @@ public class FindCommand extends Command {
     }
 
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        StringBuffer result = new StringBuffer("Here are the matching tasks in your list:\n");
+        StringBuffer result = new StringBuffer("Here are the matching task(s) in your list:\n");
         int count = 1;
         for (int i = 0; i < taskList.getTotalTasks(); i++) {
             if (taskList.getTask(i).getDescription().toLowerCase().contains(this.searchInput)) {
@@ -23,6 +23,10 @@ public class FindCommand extends Command {
                 count++;
             }
         }
-        ui.print(result.toString().trim());
+        if (count == 1) {
+            ui.print(ui.MSG_NOMATCH);
+        } else {
+            ui.print(result.toString().trim());
+        }
     }
 }

@@ -47,7 +47,9 @@ public class Ui {
     public static final String MSG_INVALIDDATETIMEFORMAT = "☹ OOPS!!! Wrong format for Date or Time. "
             + "Please use [dd-MM-yyyy HH:mm] format. i.e. 30-05-1959 13:59";
 
-    public static final String MSG_INVALIDDATETIME= "☹ OOPS!!! You can't set a duke.task in the past!";
+    public static final String MSG_INVALIDDATETIME = "☹ OOPS!!! You can't set a duke.task in the past!";
+
+    public static final String MSG_NOMATCH = "☹ OOPS!!! Nothing matches.";
 
     public static String taskListMsg(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getTaskList();

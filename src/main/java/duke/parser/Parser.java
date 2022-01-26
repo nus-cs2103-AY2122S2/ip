@@ -54,7 +54,7 @@ public class Parser {
         } catch (DukeException e) {
             ui.print(e.getMessage());
         } catch (NumberFormatException e) {
-            ui.print(Ui.MSG_INVALIDTASKID);
+            ui.print(Ui.MSG_INVALIDTASK);
         } catch (ArrayIndexOutOfBoundsException|StringIndexOutOfBoundsException e) {
             ui.print(Ui.MSG_INVLIADCMDFORMAT);
         }  catch (IndexOutOfBoundsException e) {
