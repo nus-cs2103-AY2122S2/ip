@@ -1,15 +1,12 @@
+import java.time.LocalDate;
 public class Event extends Task {
 
-    String time;
-
     Event(String description, String time) {
-        super(description);
-        this.time = time;
+        super(description, LocalDate.parse(time));
     }
 
     Event(String description, boolean isDone, String time) {
-        super(description, isDone);
-        this.time = time;
+        super(description, isDone, LocalDate.parse(time));
     }
 
     @Override
@@ -20,7 +17,7 @@ public class Event extends Task {
             tempStr = "X";
         }
 
-        return "[E][" + tempStr + "] " + this.description + "(" + this.time + ")";
+        return "[E][" + tempStr + "] " + this.description + "(" + this.time.get().format(dateFormatter) + ")";
     }
 }
 
