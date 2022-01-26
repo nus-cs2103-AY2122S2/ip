@@ -88,6 +88,13 @@ public class Parser {
                 ui.throwDukeException("Please enter an Event in the following format:\n" +
                         "event [description] /at [datetime]");
             }
+        } else if (userTaskString.matches("^(find|Find|FIND).*")) {
+            try {
+                String userFindTask = userTaskString.substring(4 + 1);
+                return new FindCommand(userTaskString, userFindTask);
+            } catch (StringIndexOutOfBoundsException err) { //For cases like "find" without any further description
+                ui.throwDukeException("Please enter a description!");
+            }
         }
         return new InvalidCommand(userTaskString);
     }
