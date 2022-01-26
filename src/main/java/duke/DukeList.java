@@ -10,19 +10,42 @@ public class DukeList {
 
     private final Storage storage;
     private final ArrayList<Task> taskList;
+    private boolean useStorage;
 
     /**
-     * Constructor for Duke.DukeList
+     * Constructor for DukeList
      */
-    public DukeList() {
-        this.storage = new Storage();
+    public DukeList(Storage storage) {
+        this.storage = storage;
 
         if (storage.fileExist()) {
             this.taskList = storage.readData();
         } else {
             this.taskList = new ArrayList<>(CAPACITY);
         }
+        this.useStorage = true;
+    }
 
+    public DukeList(ArrayList<Task> taskList) {
+        this.storage = null;
+        this.taskList = taskList;
+        this.useStorage = false;
+    }
+
+    /**
+     * Update the data in the storage.
+     */
+    public void updateStorage() {
+        if (useStorage) this.storage.writeData(taskList);
+    }
+
+    /**
+     * Get the task list.
+     *
+     * @return array of tasks
+     */
+    public ArrayList<Task> getTaskList() {
+        return this.taskList;
     }
 
     /**
@@ -35,7 +58,7 @@ public class DukeList {
 
         Task task = Task.of(taskString);
         this.taskList.add(task);
-        this.storage.writeData(taskList);
+        updateStorage();
 
         return "Got it. I've added this task:\n"
                 + String.format("\t%s\n", task)
@@ -51,7 +74,7 @@ public class DukeList {
     public String markTask(int idx) throws IndexOutOfBoundsException {
         Task task = this.taskList.get(idx - 1);
         task.markAsCompleted();
-        this.storage.writeData(taskList);
+        updateStorage();
 
         return "Nice! I've marked this task as done:\n"
                 + String.format("\t%s", task);
@@ -66,7 +89,7 @@ public class DukeList {
     public String unmarkTask(int idx) throws IndexOutOfBoundsException {
         Task task = this.taskList.get(idx - 1);
         task.markAsUncompleted();
-        this.storage.writeData(taskList);
+        updateStorage();
 
         return "OK, I've marked this task as not done yet:\n"
                 + String.format("\t%s", task);
@@ -81,7 +104,7 @@ public class DukeList {
      */
     public String delete(int idx) throws IndexOutOfBoundsException {
         Task task = this.taskList.remove(idx - 1);
-        this.storage.writeData(taskList);
+        updateStorage();
 
         return "Noted. I've removed this task:\n"
                 + String.format("\t%s\n", task)

@@ -1,6 +1,7 @@
 package duke.tasks;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     public static final String TASK_CODE = "E";
@@ -18,6 +19,10 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public String getDateString() {
+        return at.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+    }
+
     /**
      * Get the csv representation of the task.
      *
@@ -29,6 +34,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s (by: %s)", TASK_CODE, super.toString(), at);
+        return String.format("[%s] %s (at: %s)", TASK_CODE, super.toString(), getDateString());
     }
 }

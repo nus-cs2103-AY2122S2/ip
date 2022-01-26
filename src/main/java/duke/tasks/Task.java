@@ -24,6 +24,13 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    /**
+     * Factory method of task.
+     *
+     * @param taskString string representation of task
+     * @return a task object
+     * @throws InvalidTaskException invalid task
+     */
     public static Task of(String taskString) throws InvalidTaskException {
         Task task;
         String[] taskArr = taskString.split(" ", 2);
@@ -77,6 +84,14 @@ public abstract class Task {
         return task;
     }
 
+    /**
+     * Convert a string from csv format to task.
+     *
+     * @param taskString csv string of task
+     * @param delimiter separator
+     * @return task object
+     * @throws InvalidTaskException invalid task
+     */
     public static Task fromCsv(String taskString, String delimiter) throws InvalidTaskException {
         Task task;
         String[] taskArr = taskString.split(delimiter);

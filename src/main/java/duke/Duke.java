@@ -9,6 +9,7 @@ public class Duke {
 
     private String status;
     private final UI ui;
+    private final Storage storage;
     private final DukeList dukeList;
 
     /**
@@ -17,7 +18,17 @@ public class Duke {
     public Duke() {
         this.status = STATUS_RUNNING;
         this.ui = new UI();
-        this.dukeList = new DukeList();
+        this.storage = new Storage();
+        this.dukeList = new DukeList(storage);
+    }
+
+    /**
+     * Checks if the current instance is running.
+     *
+     * @return boolean of whether the instance of running
+     */
+    public boolean isRunning() {
+        return this.status.equals(STATUS_RUNNING);
     }
 
     /**

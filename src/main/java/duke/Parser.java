@@ -3,6 +3,8 @@ package duke;
 import duke.commands.*;
 import duke.exceptions.InvalidCommandException;
 
+import java.util.Objects;
+
 public class Parser {
     private static final String QUIT_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
@@ -67,7 +69,7 @@ public class Parser {
      * @throws InvalidCommandException command is invalid
      */
     public static String getAction(String[] argv) throws InvalidCommandException {
-        if (argv.length < 1) throw new InvalidCommandException("No command specified");
+        if (argv[0].equals("")) throw new InvalidCommandException("No command specified");
 
         return argv[0];
     }
