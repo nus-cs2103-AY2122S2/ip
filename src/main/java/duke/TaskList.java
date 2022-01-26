@@ -1,6 +1,9 @@
 package duke;
 import java.util.ArrayList;
 
+/**
+ * A class that stores a lot of tasks as one array
+ */
 public class TaskList {
     private ArrayList<Task> taskList;
 

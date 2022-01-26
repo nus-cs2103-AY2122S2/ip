@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.*;
 
 public class Duke {
+    /**
+     * A task taking chatbot
+     */
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -22,6 +25,11 @@ public class Duke {
 
     }
 
+    /**
+     * Main method to activate chatbot
+     *
+     * @throws IOException
+     */
     public void run() throws IOException {
         ui = new Ui();
         Scanner sc = new Scanner(System.in);

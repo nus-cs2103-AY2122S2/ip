@@ -2,7 +2,9 @@ package duke;
 import java.io.*;
 import java.util.ArrayList;
 
-
+/**
+ * Storage class that helps to save or load existing data from local site
+ */
 public class Storage {
     private final String filePath;
 
@@ -10,6 +12,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Will load the data if it exist, if it does not exist, it will create a new file named "tasks.txt"
+     * @return An array of loaded tasks
+     * @throws IOException
+     */
     public ArrayList<Task> load() throws IOException {
         // TODO: 26/1/2022
         ArrayList<Task> result = new ArrayList<>();
@@ -41,6 +48,13 @@ public class Storage {
 
     }
 
+    /**
+     * Method to load file line by line and translate them into list of tasks
+     * @param path file path to the data
+     * @return An array of tasks
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     public ArrayList<Task> loadFile(File path) throws FileNotFoundException, IOException {
         FileReader reader = new FileReader(path);
         BufferedReader br = new BufferedReader(reader);
@@ -68,6 +82,11 @@ public class Storage {
         return result;
     }
 
+    /**
+     * Write current list of tasks into the file
+     * @param taskList Current list of tasks
+     * @throws IOException
+     */
     public void saveFile(TaskList taskList) throws IOException {
         FileWriter fileWriter = new FileWriter(filePath);
         for (int i = 0; i <taskList.size() ; i++) {

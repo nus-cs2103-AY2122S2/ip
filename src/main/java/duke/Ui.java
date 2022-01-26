@@ -2,24 +2,36 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * User Interface class, print beautiful output to user
+ */
 public class Ui {
     private String lines = "____________________________" +
             "________________________________";
     private String endline = "___________________________" +
             "_________________________________\n";
 
-
+    /**
+     * constructor
+     */
     public Ui() {
         System.out.println("Hello!!! I am Duke, a new born chatbot\n");
         System.out.println("How may I serve you?");
     }
 
+    /**
+     * print bye message
+     */
     public void bye() {
         System.out.println(lines);
         System.out.println("Bye! See you again");
         System.out.println(endline);
     }
 
+    /**
+     * print list of tasks
+     * @param tasks current list of tasks
+     */
     public void list(TaskList tasks) {
         System.out.println(lines);
         System.out.println("Here are all your tasks:");
@@ -29,6 +41,13 @@ public class Ui {
         System.out.println(lines + "\n");
     }
 
+    /**
+     * Mark task as done
+     * @param tasks current list of tasks
+     * @param parts User's input (split into parts)
+     * @throws DukeException
+     * @throws IndexOutOfBoundsException
+     */
     public void mark(TaskList tasks, String[] parts) throws DukeException, IndexOutOfBoundsException {
         try {
             Task markTask = tasks.get(Integer.parseInt(parts[1]) - 1);
@@ -46,6 +65,13 @@ public class Ui {
         }
     }
 
+    /**
+     * Mark task as undone
+     * @param tasks current list of tasks
+     * @param parts User's input (split into parts)
+     * @throws DukeException
+     * @throws IndexOutOfBoundsException
+     */
     public void unmark(TaskList tasks, String[] parts) throws DukeException, IndexOutOfBoundsException {
         try {
             Task markTask = tasks.get(Integer.parseInt(parts[1]) - 1);
@@ -63,6 +89,13 @@ public class Ui {
         }
     }
 
+    /**
+     * Add a todo task
+     * @param tasks Current list of tasks
+     * @param parts User's input (split into parts)
+     * @param input User's original input
+     * @throws TodoException
+     */
     public void todo(TaskList tasks, String[] parts, String input) throws TodoException {
         if (parts.length == 1) {
             throw new TodoException("☹ OOPS!!! The description of a todo cannot be empty.(please insert again)");
@@ -77,6 +110,13 @@ public class Ui {
         System.out.println(endline);
     }
 
+    /**
+     * Add a deadline task
+     * @param tasks Current list of tasks
+     * @param parts User's input (split into parts)
+     * @param input User's original input
+     * @throws DeadlineException
+     */
     public void deadline(TaskList tasks, String[] parts, String input) throws DeadlineException {
         if (parts.length == 1) {
             throw new DeadlineException("Emm, what is your task again? (please insert again)");
@@ -96,6 +136,13 @@ public class Ui {
         System.out.println(endline);
     }
 
+    /**
+     * Add an event task
+     * @param tasks Current list of tasks
+     * @param parts User's input (split into parts)
+     * @param input User's original input
+     * @throws DeadlineException
+     */
     public void event(TaskList tasks, String[] parts, String input) throws EventException {
         if (parts.length == 1) {
             throw new EventException("The format should be: event <description> /at <date>");
@@ -115,6 +162,12 @@ public class Ui {
         System.out.println(endline);
     }
 
+    /**
+     * Delete a task
+     * @param tasks Current list of tasks
+     * @param parts User's input (split into parts)
+     * @throws DeleteException
+     */
     public void delete(TaskList tasks, String[] parts) throws DeleteException{
         try {
             if (parts.length == 1) {

@@ -1,4 +1,8 @@
 package duke;
+
+/**
+ * A type of tasks, have a specific ddate
+ */
 public class Event extends Task {
 
     protected String at;
@@ -13,6 +17,10 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * Transform the task into the format of data, to be stored into file data
+     * @return A formatted string
+     */
     @Override
     public String dataFormatOfTask() {
         String bool;
