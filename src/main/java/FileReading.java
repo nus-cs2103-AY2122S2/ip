@@ -12,7 +12,6 @@ public class FileReading {
 
     public static void writeToPath(String filePath, String textToAdd) {
         String file = filePath;
-        System.out.println("test");
         try {
             writeToFile(file, textToAdd);
         } catch (IOException e) {
