@@ -1,3 +1,4 @@
+package duke;
 public class Todo extends Task {
     // attributes
     protected String type;

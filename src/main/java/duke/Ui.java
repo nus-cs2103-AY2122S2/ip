@@ -1,3 +1,5 @@
+package duke;
+
 public class Ui {
     // attributes
     public static final String LINE = "____________________________________________________________";
@@ -12,9 +14,6 @@ public class Ui {
     public void greet() {
         String output = LINE + "\n Hello! I'm Duke\n What can I do for you?\n" + LINE;
         System.out.println(output);
-    }
-
-    public void showLoadingError() {
     }
 
     public void addTask(TaskList taskList) {
