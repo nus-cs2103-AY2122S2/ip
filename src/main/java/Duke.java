@@ -1,5 +1,8 @@
 import java.io.*;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Duke {
     public static void main(String[] args) throws Exception {
@@ -66,19 +69,35 @@ public class Duke {
                         System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
                         break;
                     }
-                    Deadline deadline = new Deadline(input.substring(9, start - 1), date);
-                    list.add(deadline);
-                    System.out.println("Got it. I've added this task:\n"
-                            + deadline + "\nNow you have " + list.size() + " tasks in your list.");
+                    try {
+                        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+                        Date formattedDate = dateFormatter.parse(date);
+                        String dateToString = new SimpleDateFormat("MMM-dd-yyyy HHmm").format(formattedDate);
+
+                        Deadline deadline = new Deadline(input.substring(9, start - 1), dateToString);
+                        list.add(deadline);
+                        System.out.println("Got it. I've added this task:\n"
+                                + deadline + "\nNow you have " + list.size() + " tasks in your list.");
+                    } catch (ParseException e) {
+                        System.out.println("Please enter a valid date!");
+                    }
                 } else { // adds an event task
                     if (inputs.length == 1) {
                         System.out.println("☹ OOPS!!! The description of an event cannot be empty.");
                         break;
                     }
-                    Event event = new Event(input.substring(6, start - 1), date);
-                    list.add(event);
-                    System.out.println("Got it. I've added this task:\n"
-                            + event + "\nNow you have " + list.size() + " tasks in your list.");
+                    try {
+                        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+                        Date formattedDate = dateFormatter.parse(date);
+                        String dateToString = new SimpleDateFormat("MMM-dd-yyyy HHmm").format(formattedDate);
+
+                        Event event = new Event(input.substring(6, start - 1), dateToString);
+                        list.add(event);
+                        System.out.println("Got it. I've added this task:\n"
+                                + event + "\nNow you have " + list.size() + " tasks in your list.");
+                    } catch (ParseException e) {
+                        System.out.println("Please enter a valid date!");
+                    }
                 }
             } else { // print error message
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
