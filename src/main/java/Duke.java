@@ -13,7 +13,7 @@ import java.time.format.DateTimeParseException;
 
 public class Duke {
     private boolean isRunning;
-    private ArrayList<Task> userTexts;
+    private TaskList taskList;
 
     public static void main(String[] args) {
         Duke duke = new Duke();
@@ -23,10 +23,10 @@ public class Duke {
     }
 
     public Duke() {
-        this.userTexts = new ArrayList<Task>();
+        this.taskList = new TaskList();
         this.isRunning = true;
 
-        loadFromSave(userTexts);
+        loadFromSave(taskList.getTaskList());
     }
 
     /* Initial greeting for Duke */
@@ -73,7 +73,7 @@ public class Duke {
 
         // print task list
         if (firstCommand.equals("list")) {
-            printDukeResponse("Here are the tasks in your list: \n" + getListStr(userTexts));
+            printDukeResponse("Here are the tasks in your list: \n" + taskList.getTaskListStr());
             return;
         }
 
@@ -88,17 +88,11 @@ public class Duke {
                 throw new DukeException("Invalid input, you need to give a number/integer");
             }
 
-            if (taskIndex >= userTexts.size()) {
-                throw new DukeException("Yo yo yo, this task don't exist. Give a legitimate task number.");
-            }
-
-            Task task = userTexts.get(taskIndex);
-            task.setIsDone(markTask);
-            saveTaskList(userTexts);
+            Task updatedTask = taskList.markTask(taskIndex, markTask);
             String cmdDescription = markTask ? "Nice I've marked this task as done: \n"
                     : "Alright, I've unmarked the task: \n ";
 
-            printDukeResponse(cmdDescription + task.toString());
+            printDukeResponse(cmdDescription + updatedTask.toString());
             return;
         }
 
@@ -160,10 +154,10 @@ public class Duke {
                         "Something is wrong. " + exceptionErrPrint);
             }
 
-            this.userTexts.add(newTask);
-            saveTaskList(userTexts);
+            taskList.addTask(newTask);
+            saveTaskList(taskList.getTaskList());
             String printStr = "Gotcha. Added the task: \n   " + newTask.toString()
-                    + "\nNow you have " + String.valueOf(this.userTexts.size()) + " tasks in your list.";
+                    + "\nNow you have " + String.valueOf(taskList.getTaskListSize()) + " tasks in your list.";
 
             printDukeResponse(printStr);
             return;
@@ -177,15 +171,10 @@ public class Duke {
                 throw new DukeException("Invalid input, you need to give a number/integer");
             }
 
-            if (taskIndex >= userTexts.size()) {
-                throw new DukeException("Yo yo yo, this task don't exist. Give a legitimate task number.");
-            }
-
-            Task task = userTexts.get(taskIndex);
-            userTexts.remove(taskIndex);
-            saveTaskList(userTexts);
+            Task task = taskList.removeTask(taskIndex);
+            saveTaskList(taskList.getTaskList());
             printDukeResponse("Got it, task has been removed: \n" + task.toString() + "\nNow you have "
-                    + String.valueOf(this.userTexts.size()) + " tasks in your list.");
+                    + String.valueOf(taskList.getTaskListSize()) + " tasks in your list.");
 
             return;
         }
