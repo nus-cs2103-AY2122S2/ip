@@ -15,16 +15,13 @@ public class Duke {
     private TaskList toDoList;
     private Storage storage;
     private Ui ui;
-    private final String filepath;
+    private final String filepath = "./tasklist.txt";
 
     /**
      * Constructor for Duke.
-     * Tries to retrieve the list of Tasks from the given path.
-     *
-     * @param filepath to read/retrieve the list of Tasks from
+     * Tries to retrieve the list of Tasks from the default filepath
      */
-    public Duke(String filepath) {
-        this.filepath = filepath;
+    public Duke() {
         storage = new Storage(this.filepath);
         ui = new Ui();
 
@@ -68,6 +65,6 @@ public class Duke {
      * @throws IOException   when an IO error occurs
      */
     public static void main(String[] args) throws DukeException, IOException {
-        new Duke("./tasklist.txt").run();
+        new Duke().run();
     }
 }
