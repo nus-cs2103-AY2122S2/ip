@@ -14,8 +14,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import li.zhongfu.cs2103.chatbot.exceptions.StorageException;
 import li.zhongfu.cs2103.chatbot.types.Deadline;
 import li.zhongfu.cs2103.chatbot.types.Event;
+import li.zhongfu.cs2103.chatbot.types.Storage;
 import li.zhongfu.cs2103.chatbot.types.Task;
 import li.zhongfu.cs2103.chatbot.types.ToDo;
 
@@ -110,14 +112,23 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo + "\n");
 
-        List<Task> tasks;
+        Storage storage = new Storage("data/tasks.dat");
+        List<Task> tasks = new ArrayList<>();
         try {
-            tasks = Storage.load();
+            List<Object> objs = storage.load();
+            for (Object o : objs) {
+                if (o instanceof Task) {
+                    tasks.add((Task) o);
+                } else {
+                    // is this a good idea? but it catches null too
+                    throw new ClassCastException(String.format("Expected Task, got %s", o instanceof Object ? o.getClass().getName() : "null"));
+                }
+            }
             System.out.println(String.format("%d tasks loaded.", tasks.size()));
         } catch (FileNotFoundException e) {
             System.out.println("No saved tasks file found, starting with an empty task list.");
             tasks = new ArrayList<>();
-        } catch (StorageException e) {
+        } catch (StorageException | ClassCastException e) {
             System.out.println("Error loading tasks! Starting with an empty task list.");
             tasks = new ArrayList<>();
         }
@@ -219,9 +230,19 @@ public class Duke {
 
                     case "reload":
                         try {
-                            tasks = Storage.load();
+                            List<Task> newTasks = new ArrayList<>();
+                            List<Object> objs = storage.load();
+                            for (Object o : objs) {
+                                if (o instanceof Task) {
+                                    newTasks.add((Task) o);
+                                } else {
+                                    // is this a good idea? but it catches null too
+                                    throw new ClassCastException(String.format("Expected Task, got %s", o instanceof Object ? o.getClass().getName() : "null"));
+                                }
+                            }
+                            tasks = newTasks;
                             dialog(String.format("Tasks reloaded; %d tasks in list now", tasks.size()));
-                        } catch (StorageException e) {
+                        } catch (StorageException | ClassCastException e) {
                             dialog("Error loading tasks! Skipping reload.");
                         } catch (FileNotFoundException e) {
                             dialog("Saved tasks file not found! Skipping reload.");
@@ -229,12 +250,12 @@ public class Duke {
                         break;
                     
                     case "save":
-                        Storage.save(tasks);
+                        storage.save(tasks);
                         dialog("Tasks saved!");
                         break;
 
                     case "bye":
-                        Storage.save(tasks);
+                        storage.save(tasks);
                         dialog("Bye. Hope to see you again soon!");
                         return;
 
