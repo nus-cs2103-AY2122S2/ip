@@ -4,7 +4,14 @@ import duke.exception.DukeIllegalArgumentException;
 import duke.task.TaskList;
 import duke.util.IPrintable;
 
+/**
+ * Represents a handler for the find command.
+ */
 public class FindCommand extends Command {
+    /**
+     * Creates a handler for the find command.
+     * @param args Arguments supplied to the command handler.
+     */
     FindCommand(String args) {
         super(args);
     }
