@@ -64,10 +64,10 @@ You fool!! It is already unmark'd
 You fool!! It is already mark'd
 ==========================================
 ==========================================
-That ain't a number that I accept boi
+I only accept integers boi
 ==========================================
 ==========================================
-That ain't a number that I accept boi
+I only accept integers boi
 ==========================================
 ==========================================
 Don't mess with me boi, that number is not in the list
@@ -107,7 +107,7 @@ Boi, I can't delete a number that ain't on the list
 ==========================================
 ==========================================
 Aye, I 'ave deleted it
-  [T][X] read book
+[T][X] read book
 Ye now have 2 tasks in list lad
 ==========================================
 ==========================================
@@ -117,7 +117,7 @@ Here are yer tasks boi:
 ==========================================
 ==========================================
 Aye, I 'ave deleted it
-  [D][ ] return book (by: Sunday)
+[D][ ] return book (by: Sunday)
 Ye now have 1 tasks in list lad
 ==========================================
 ==========================================

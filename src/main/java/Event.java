@@ -10,9 +10,16 @@ public class Event extends Task {
     public String getTaskIcon() {
         return "E";
     }
+    
+    @Override
+    public String toDataString() {
+        String isDone = super.isMarked() ? "1" : "0";
+        return getTaskIcon() + " | " + isDone + " | " + taskName + " | " + eventDetails;
+    }
 
     @Override
-    public String getFullDetails() {
-        return (super.getFullDetails() + "(at: " + this.eventDetails + ")");
+    public String toString() {
+        return "[" + getTaskIcon() + "][" + super.getStatusIcon() + "] " + 
+                super.taskName + " (at: " + this.eventDetails + ")";
     }
 }

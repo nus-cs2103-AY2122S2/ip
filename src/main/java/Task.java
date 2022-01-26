@@ -26,8 +26,13 @@ public class Task {
     public boolean isMarked() {
         return isDone;
     }
-
-    public String getFullDetails() {
-        return this.taskName;
+    
+    public String toDataString() {
+        return "";
+    }
+    
+    @Override
+    public String toString() {
+        return "[" + getTaskIcon() + "][" + getStatusIcon() + "] " + taskName;
     }
 }
