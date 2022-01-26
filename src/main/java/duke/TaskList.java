@@ -21,7 +21,7 @@ public class TaskList {
     }
 
 
-    public void list(){
+    public void list() {
         System.out.println(LINES);
         System.out.println("    Here are the tasks in your list:");
         for (int i = 0; i < taskList.size(); i++) {
@@ -31,7 +31,7 @@ public class TaskList {
         System.out.println(LINES);
     }
 
-    public void removeTask(int num){
+    public void removeTask(int num) {
 
         System.out.println(LINES);
         System.out.println("    Noted. I've removed this task:");
@@ -43,7 +43,7 @@ public class TaskList {
         System.out.println(LINES);
     }
 
-    public void addTask(Task task){
+    public void addTask(Task task) {
         taskList.add(task);
 
         String displayTaskAmount = String.format("Now you have %d tasks in the list.", taskList.size());
@@ -56,7 +56,7 @@ public class TaskList {
         System.out.println(LINES);
     }
 
-    public void setTaskAsDone(int taskToMark){
+    public void setTaskAsDone(int taskToMark) {
         taskList.get(taskToMark - 1).markAsDone();
 
         System.out.println(LINES);

@@ -45,6 +45,8 @@ public class Storage {
     }
 
     public ArrayList<Task> load() throws FileNotFoundException {
+
+
         File f = new File(this.relativePath);
         Scanner s = new Scanner(f);
         ArrayList<Task> todoList = new ArrayList<>();
