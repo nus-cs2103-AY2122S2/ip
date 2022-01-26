@@ -36,6 +36,7 @@ public class Duke {
                     if (tokens.length != 1) {
                         throw new DukeException("argument for bye detected");
                     }
+                    cmd.update(curr);
                     cmd.bye();
                     break label;
                 } catch (DukeException ex) {
@@ -45,6 +46,8 @@ public class Duke {
                             + "_______________________________________________________\n";
                     System.out.println(err);
                     break;
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             case "list":
                 try {
