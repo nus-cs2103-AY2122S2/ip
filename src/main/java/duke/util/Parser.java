@@ -82,6 +82,8 @@ public class Parser {
             return new DateCommand(dateTable, description);
         case "bye":
             return new ByeCommand();
+        case "find":
+            return new FindCommand(description);
         default:
             return new WrongSyntaxCommand();
         }
