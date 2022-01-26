@@ -12,13 +12,27 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     private String saveFilePath;
 
+    /**
+     * Constructor for Storage.
+     *
+     * @param saveFilePath the directory path for the save file.
+     */
     public Storage(String saveFilePath) {
         this.saveFilePath = saveFilePath;
     }
 
+    /**
+     * Reads the existing file. If there is existing file, then add to the ArrayList.
+     *
+     * @return the the list of tasks.
+     * @throws DukeException If files cannot be read or created.
+     */
     public ArrayList<Task> load() throws DukeException{
         ArrayList<Task> taskList = new ArrayList<>();
         try {
@@ -59,6 +73,12 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Writes the task in task list into the file.
+     *
+     * @param taskList the list of tasks.
+     * @throws DukeException if you cannot write into the file.
+     */
     public void save(ArrayList<Task> taskList) throws DukeException{
         try {
             FileWriter writer = new FileWriter(saveFilePath);

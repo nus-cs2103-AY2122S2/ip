@@ -5,11 +5,10 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import duke.ui.DukeException;
-import duke.storage.Storage;
-/**
- * Represent the deadline of task.
- */
 
+/**
+ * Represents the deadline of task.
+ */
 public class Deadline extends Task {
     protected LocalDate date;
     protected LocalTime time;
@@ -27,7 +26,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * The String representation of Deadline in the save file.
+     * Strings representation of Deadline in the save file.
      *
      * @return the formats of the String to be save in the file
      */
@@ -38,7 +37,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * The String representation of Deadline.
+     * Strings representation of Deadline.
      *
      * @return [D] with the status and description of the task,
      *         and by when.

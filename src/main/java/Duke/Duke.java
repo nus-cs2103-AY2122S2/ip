@@ -9,12 +9,19 @@ import duke.tasklist.TaskList;
 
 import java.io.IOException;
 
+/**
+ * Represent the main class of the program.
+ */
 public class Duke {
-
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for Duke.
+     *
+     * @param filePath the directory of save file.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -26,6 +33,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the program.
+     *
+     * @throws DukeException exception thrown when error occurs.
+     */
     public void run() throws DukeException {
         ui.showWelcome();
         boolean isExit = false;

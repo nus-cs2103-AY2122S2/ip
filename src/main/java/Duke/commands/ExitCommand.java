@@ -5,18 +5,29 @@ import duke.tasklist.TaskList;
 import duke.ui.DukeException;
 import duke.ui.Ui;
 
+/**
+ * Deals with handling command that user exit.
+ */
 public class ExitCommand extends Command{
 
-    public ExitCommand() {
-    }
-
-    @Override
+    /**
+     * Saves the tasks into file and print to inform user.
+     *
+     * @param tasks List of the tasks.
+     * @param ui UI that deals with interactions with the user.
+     * @param storage storage handles the saving and writing to file.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         storage.save(tasks.getTaskList());
         ui.showGoodBye();
     }
 
-    @Override
+
+    /**
+     * Checks if the user is exiting the program.
+     *
+     * @return true that user is exiting.
+     */
     public boolean isExit() {
         return true;
     }

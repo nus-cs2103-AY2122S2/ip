@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 
 import duke.ui.DukeException;
 /**
- * Represent the event of task.
+ * Represents the event of task.
  */
 public class Event extends Task {
     protected LocalDate date;
@@ -25,9 +25,9 @@ public class Event extends Task {
     }
 
     /**
-     * The String representation of Event in the save file.
+     * Strings representation of Event in the save file.
      *
-     * @return the formats of the String to be save in the file
+     * @return the formats of the String to be save in the file.
      */
     @Override
     public String saveToFileString() {
@@ -36,7 +36,7 @@ public class Event extends Task {
     }
 
     /**
-     * The String representation of event.
+     * Strings representation of event.
      *
      * @return [E] with the status and description of the task,
      *         and at when.
