@@ -57,4 +57,8 @@ public class Task {
     public String save() {
         return (done ? "1" : "0" )+ "|" + name;
     }
+
+    public boolean inName(String name) {
+        return this.name.contains(name);
+    }
 }

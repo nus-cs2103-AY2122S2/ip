@@ -40,6 +40,7 @@ public class TaskList {
         for (Task task: list) {
             fileWriter.write(task.save() + "\n");
         }
+        fileWriter.close();
     }
 
     /**
@@ -116,5 +117,15 @@ public class TaskList {
     public int event(String task, String time) {
         list.add(new Event(task, time));
         return list.size();
+    }
+
+    public void find(String keyword) {
+        int matches = 0;
+        for (Task task : list) {
+            if(task.inName(keyword)) {
+                System.out.println((matches + 1) +"." + task.getStatus());
+                matches++;
+            }
+        }
     }
 }
