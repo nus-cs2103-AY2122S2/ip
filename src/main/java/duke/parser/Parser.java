@@ -40,6 +40,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the datetime string of an event or deadline based on the
+     * default date format.
+     *
+     * @param dateTime datetime string of the event or deadline
+     * @return localdatetime format of the given datetime
+     * @throws DukeException if datetime string is invalid format
+     */
     public static LocalDateTime parseDateTime(String dateTime) throws DukeException {
         try {
             DateTimeFormatter format = DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT);
@@ -49,6 +57,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the task word as singular or plural noun
+     *
+     * @param size the size of the tasklist
+     * @return task word in singular or plural
+     */
     public static String parseTaskSize(int size) {
         return size > 1 ? "s" : "";
     }
