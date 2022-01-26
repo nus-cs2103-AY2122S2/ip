@@ -44,29 +44,30 @@ public class Storage {
         String st;
         Task task = new Task("null");
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(this.filepath + File.separator + this.filename));
+            BufferedReader reader = new BufferedReader(new FileReader(this.filepath
+                                                        + File.separator + this.filename));
             st = reader.readLine();
             while (st != null) {
                 String[] compactTask = st.split("-");
                 switch (compactTask[0]) {
-                    case "T":
-                        task = new ToDos(compactTask[2]);
-                        if (compactTask[1].equals("1")) {
-                            task.mark();
-                        }
-                        break;
-                    case "D":
-                        task = new DeadLines(compactTask[2], compactTask[3]);
-                        if (compactTask[1].equals("1")) {
-                            task.mark();
-                        }
-                        break;
-                    case "E":
-                        task = new Event(compactTask[2], compactTask[3]);
-                        if (compactTask[1].equals("1")) {
-                            task.mark();
-                        }
-                        break;
+                case "T":
+                    task = new ToDos(compactTask[2]);
+                    if (compactTask[1].equals("1")) {
+                        task.mark();
+                    }
+                    break;
+                case "D":
+                    task = new Deadlines(compactTask[2], compactTask[3]);
+                    if (compactTask[1].equals("1")) {
+                        task.mark();
+                    }
+                    break;
+                case "E":
+                    task = new Event(compactTask[2], compactTask[3]);
+                    if (compactTask[1].equals("1")) {
+                        task.mark();
+                    }
+                    break;
                 }
                 listOfTasks.add(task);
                 st = reader.readLine();
@@ -87,7 +88,8 @@ public class Storage {
      */
     public void writeToStorage(TaskList listOfTasks) {
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(this.filepath + File.separator + this.filename));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(this.filepath
+                                                        + File.separator + this.filename));
             for (Task i : listOfTasks.getList()) {
                 try {
                     writer.write(formatTask(i));

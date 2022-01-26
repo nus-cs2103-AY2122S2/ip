@@ -36,7 +36,12 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: Date-> " + this.timing.getDayOfMonth() + " Month-> " + this.timing.getMonth() + " Day-> " + this.timing.getDayOfWeek() + " Year-> " + this.timing.getYear() + " Time-> " + this.timing.getHour() + this.timing.getMinute() + ")";
+        return "[E]" + super.toString() + " (at: Date-> " + this.timing.getDayOfMonth()
+                                             + " Month-> " + this.timing.getMonth()
+                                             + " Day-> " + this.timing.getDayOfWeek()
+                                             + " Year-> " + this.timing.getYear()
+                                             + " Time-> " + this.timing.getHour()
+                                             + this.timing.getMinute() + ")";
     }
 
     /**

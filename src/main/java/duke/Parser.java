@@ -35,7 +35,8 @@ public class Parser {
                 // Do nothing (For Future methods to be added if their lengths are lesser than 4
             } else if (inputMessage.substring(0, 4).contains("todo")) {
                 if (inputMessage.length() <= 4) {
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but you need to provide a description for the Todo task\n");
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but you need to provide a description "
+                                              + "for the Todo task\n");
                 }
                 msg = inputMessage.split("todo ");
                 msg[0] = "todo";
@@ -48,7 +49,8 @@ public class Parser {
                     }
                     msg = new String[]{"event", msg[0], msg[1]};
                 } else {
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but you need to use the following format:\n" + "event {description} /at {yyyy/MM/dd HH:mm}\n");
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but you need to use the following format:\n"
+                                              + "event {description} /at {yyyy/MM/dd HH:mm}\n");
                 }
             } else if (inputMessage.contains("delete") || inputMessage.contains("mark")) {
                 msg = inputMessage.split(" ");
@@ -64,8 +66,8 @@ public class Parser {
                     }
                     msg = new String[]{"deadline", msg[0], msg[1]};
                 } else {
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but you need to use the following format:\n" +
-                            "deadline {description} /by {yyyy/MM/dd HH:mm}\n");
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but you need to use the following format:\n"
+                                             + "deadline {description} /by {yyyy/MM/dd HH:mm}\n");
                 }
             }
         }
