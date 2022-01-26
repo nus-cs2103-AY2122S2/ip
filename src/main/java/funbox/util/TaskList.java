@@ -3,6 +3,7 @@ package funbox.util;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
 import funbox.exception.FunBoxExceptions;
 import funbox.task.Task;
 import funbox.task.Deadline;
@@ -65,9 +66,10 @@ public class TaskList {
     }
 
     /**
-     * Gets the tasks found on the date requested by user and prints it out.
      *
-     * @param taskArr The commands provided by the users
+     * @param filterDate
+     * @param taskList
+     * @throws FunBoxExceptions
      */
     public void filterTasks(String filterDate, TaskList taskList) throws FunBoxExceptions {
         LocalDate date;
@@ -107,6 +109,16 @@ public class TaskList {
             throw new FunBoxExceptions("ERROR! Please ensure date is in the correct format: yyyy-mm-dd");
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new FunBoxExceptions("ERROR! Date not found in command `filter`!");
+        }
+    }
+
+    public void findTasks(String filter, Ui ui) {
+        ArrayList<Task> filteredList = new ArrayList<>(this.taskList);
+        filteredList.removeIf(task -> !task.description.toLowerCase().contains(filter.toLowerCase()));
+        int counter = 1;
+        for (Task task : filteredList) {
+            ui.printTask(counter, task);
+            counter++;
         }
     }
 }

@@ -11,6 +11,7 @@ import funbox.command.DeleteCommand;
 import funbox.command.FilterCommand;
 import funbox.command.MarkCommand;
 import funbox.command.UnmarkCommand;
+import funbox.command.FindCommand;
 import funbox.exception.FunBoxExceptions;
 
 
@@ -42,6 +43,8 @@ public class Parser {
             return new UnmarkCommand(Integer.parseInt(description));
         case "filter":
             return new FilterCommand(description);
+        case "find":
+            return new FindCommand(description);
         default:
             throw new FunBoxExceptions("ERROR! I do not know what the commands means :<");
         }
