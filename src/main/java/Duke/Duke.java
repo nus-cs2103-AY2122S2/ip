@@ -23,7 +23,7 @@ public class Duke {
 
 		while (Running) {
 			String input = sc.nextLine();
-			String[] tokens = input.split(" ");
+			String[] tokens = input.split("\\s+");
 			String command = tokens[0];
 
 			try {
@@ -100,7 +100,7 @@ public class Duke {
 						break;
 					case EVENT:
 						try {
-							String[] tokensEvent = input.split("/");
+							String[] tokensEvent = input.split("/at ");
 							String time = tokensEvent[1];
 
 							String[] tokensNameEvent = name.split("/");
@@ -123,12 +123,13 @@ public class Duke {
 						break;
 					case DEADLINE:
 						try {
-							String[] tokensDeadline = input.split("/");
+							String[] tokensDeadline = input.split("/by ");
 							String date = tokensDeadline[1];
 
 							String[] tokensNameDeadline = name.split("/");
 							String deadlineName = tokensNameDeadline[0];
 							Deadline deadline = new Deadline(deadlineName, date);
+
 							tasks.add(deadline);
 
 							System.out.println("\t____________________________________________________________");
@@ -139,7 +140,8 @@ public class Duke {
 							count++;
 						} catch (ArrayIndexOutOfBoundsException e) {
 							System.out.println("\t____________________________________________________________");
-							System.out.println("\t☹ Woof Woof!!! Please specify a date!!!");
+							System.out.println("\t☹ Please provide the date and time in the format YYYY-MM-DD " +
+									"HHMM");
 							System.out.println("\t____________________________________________________________");
 							continue;
 						}
