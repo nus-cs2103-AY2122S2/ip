@@ -11,6 +11,13 @@ public class EventTask extends Task {
         this.markedStatus = false;
     }
 
+    public EventTask(String taskTitle, String deadline, boolean isMarked) {
+        super(taskTitle, deadline);
+        this.taskTitle = taskTitle;
+        this.deadline = deadline;
+        this.markedStatus = isMarked;
+    }
+
     public Task markTask() {
         if (!this.markedStatus) {
             this.markedStatus = true;

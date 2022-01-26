@@ -9,6 +9,12 @@ public class TodoTask extends Task {
         this.markedStatus = false;
     }
 
+    public TodoTask(String taskTitle, boolean isMarked) {
+        super(taskTitle);
+        this.taskTitle = taskTitle;
+        this.markedStatus = isMarked;
+    }
+
     public Task markTask() {
         if (!this.markedStatus) {
             this.markedStatus = true;
