@@ -33,15 +33,14 @@ public class Duke {
             String reply = sc.nextLine();
             String[] splittedString = reply.split(" ");
 
-            File file1 = new File("data/duke.txt");
-            file1.delete();
-
             File file = new File("data/duke.txt");
+            file.delete();
             try {
                 file.createNewFile();
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println(" ");
             }
+
             if (splittedString[0].equals("mark") && splittedString.length == 2) { // check for mark tag
                 int index = Integer.valueOf(reply.split(" ")[1]);
                 itemList.get(index - 1).markAsDone();
@@ -149,7 +148,7 @@ public class Duke {
                     writeToFile(file2, t.getDescription() + "\n");
                 }
             } catch (IOException e) {
-                System.out.println("Something went wrong: " + e.getMessage());
+                System.out.println("");
             }
         }
     }
