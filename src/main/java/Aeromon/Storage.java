@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,6 +20,7 @@ public class Storage {
             } else {
                 ArrayList<Task> tasks = new ArrayList<>();
                 Scanner fileScanner = new Scanner(localTasks);
+                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
                 while (fileScanner.hasNextLine()) {
                     String content = fileScanner.nextLine();
@@ -30,12 +32,12 @@ public class Storage {
                             break;
                         }
                         case "D": {
-                            Deadline task = new Deadline(info[2], LocalDate.parse(info[3]));
+                            Deadline task = new Deadline(info[2], LocalDate.parse(info[3], dateTimeFormatter));
                             tasks.add(task);
                             break;
                         }
                         case "E": {
-                            Event task = new Event(info[2], LocalDate.parse(info[3]));
+                            Event task = new Event(info[2], LocalDate.parse(info[3],dateTimeFormatter));
                             tasks.add(task);
                             break;
                         }
