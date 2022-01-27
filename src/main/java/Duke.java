@@ -240,10 +240,10 @@ public class Duke {
 
             if (splitted.length == 4 && splitted[0].equals("D")) {
                 // deadline
-                t = new Deadline(splitted[2], splitted[3]);    
+                t = new Deadline(splitted[2], this.strToDate(splitted[3]));    
             } else if (splitted.length == 4 && splitted[0].equals("E")) {
                 // event
-                t = new Event(splitted[2], splitted[3]);
+                t = new Event(splitted[2], this.strToDate(splitted[3]));
             } else if (splitted.length == 3 && splitted[0].equals("T")) {
                 // todo
                 t = new Todo(splitted[2]);
@@ -272,6 +272,8 @@ public class Duke {
         }
         fw.write(data);        
         fw.close();
+    }
+
     /**
      * Changes from String to LocalDate.
      */
