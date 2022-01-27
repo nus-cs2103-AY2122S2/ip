@@ -1,10 +1,15 @@
-package com.duke;
+package com.duke.command;
 
-public class AddDeadlineCommand extends Command {
+import com.duke.task.Task;
+import com.duke.task.TaskList;
+import com.duke.util.Storage;
+import com.duke.util.Ui;
+
+public class AddToDoCommand extends Command {
 
     private final Task task;
 
-    public AddDeadlineCommand(Task task) {
+    public AddToDoCommand(Task task) {
         this.task = task;
     }
 

@@ -1,4 +1,11 @@
-package com.duke;
+package com.duke.util;
+
+import com.duke.command.*;
+import com.duke.exception.DukeException;
+import com.duke.exception.ToDoException;
+import com.duke.task.Deadline;
+import com.duke.task.Event;
+import com.duke.task.Todo;
 
 public class Parser {
 

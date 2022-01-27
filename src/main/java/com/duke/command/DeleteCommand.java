@@ -1,6 +1,11 @@
-package com.duke;
+package com.duke.command;
 
-public class DeleteCommand extends Command{
+import com.duke.util.Storage;
+import com.duke.task.Task;
+import com.duke.task.TaskList;
+import com.duke.util.Ui;
+
+public class DeleteCommand extends Command {
 
     private final int pos;
 

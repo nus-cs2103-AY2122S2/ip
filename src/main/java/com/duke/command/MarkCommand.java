@@ -1,6 +1,10 @@
-package com.duke;
+package com.duke.command;
 
-public class MarkCommand extends Command{
+import com.duke.util.Storage;
+import com.duke.task.TaskList;
+import com.duke.util.Ui;
+
+public class MarkCommand extends Command {
 
     private final int pos;
 

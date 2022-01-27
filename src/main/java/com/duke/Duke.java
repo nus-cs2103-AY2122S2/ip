@@ -1,8 +1,13 @@
 package com.duke;
 
+import com.duke.command.Command;
+import com.duke.exception.DukeException;
+import com.duke.task.TaskList;
+import com.duke.util.Parser;
+import com.duke.util.Storage;
+import com.duke.util.Ui;
+
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Duke {
 

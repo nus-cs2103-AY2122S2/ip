@@ -1,4 +1,6 @@
-package com.duke;
+package com.duke.util;
+
+import com.duke.task.*;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -48,26 +50,26 @@ public class Storage {
             StringBuilder text = new StringBuilder();
             for (int i=0; i<arr.getCount(); i++) {
                 if (arr.get(i) instanceof Todo) {
-                    if (arr.get(i).isDone) {
-                        text.append("T").append(" - 1 - ").append(arr.get(i).description).append("\n");
+                    if (arr.get(i).getIsDone()) {
+                        text.append("T").append(" - 1 - ").append(arr.get(i).getDescription()).append("\n");
                     } else {
-                        text.append("T").append(" - 0 - ").append(arr.get(i).description).append("\n");
+                        text.append("T").append(" - 0 - ").append(arr.get(i).getDescription()).append("\n");
                     }
                 } else if (arr.get(i) instanceof Deadline) {
-                    if (arr.get(i).isDone) {
-                        text.append("D").append(" - 1 - ").append(arr.get(i).description).append(" - ")
-                                .append(((Deadline) arr.get(i)).by).append("\n");
+                    if (arr.get(i).getIsDone()) {
+                        text.append("D").append(" - 1 - ").append(arr.get(i).getDescription()).append(" - ")
+                                .append(((Deadline) arr.get(i)).getDate()).append("\n");
                     } else {
-                        text.append("D").append(" - 0 - ").append(arr.get(i).description).append(" - ")
-                                .append(((Deadline) arr.get(i)).by).append("\n");
+                        text.append("D").append(" - 0 - ").append(arr.get(i).getDescription()).append(" - ")
+                                .append(((Deadline) arr.get(i)).getDate()).append("\n");
                     }
                 } else {
-                    if (arr.get(i).isDone) {
-                        text.append("E").append(" - 1 - ").append(arr.get(i).description).append(" - ")
-                                .append(((Event) arr.get(i)).at).append("\n");
+                    if (arr.get(i).getIsDone()) {
+                        text.append("E").append(" - 1 - ").append(arr.get(i).getDescription()).append(" - ")
+                                .append(((Event) arr.get(i)).getDate()).append("\n");
                     } else {
-                        text.append("E").append(" - 0 - ").append(arr.get(i).description).append(" - ")
-                                .append(((Event) arr.get(i)).at).append("\n");
+                        text.append("E").append(" - 0 - ").append(arr.get(i).getDescription()).append(" - ")
+                                .append(((Event) arr.get(i)).getDate()).append("\n");
                     }
                 }
             }

@@ -1,15 +1,21 @@
-package com.duke;
+package com.duke.task;
+
+import com.duke.task.Task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task{
+public class Event extends Task {
 
-    protected LocalDate at;
+    private LocalDate at;
 
     public Event(String description, String at) {
         super(description);
         this.at = LocalDate.parse(at);
+    }
+
+    public String getDate() {
+        return at.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     @Override

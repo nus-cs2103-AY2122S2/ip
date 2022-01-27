@@ -1,6 +1,10 @@
-package com.duke;
+package com.duke.command;
 
-public class ExitCommand extends Command{
+import com.duke.util.Storage;
+import com.duke.task.TaskList;
+import com.duke.util.Ui;
+
+public class ExitCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         storage.save(tasks);
