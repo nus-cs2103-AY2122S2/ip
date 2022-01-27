@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -73,7 +74,7 @@ public class Duke {
         System.out.print(sb);
     }
 
-    private String addTask(String[] command) throws DukeException{
+    private String addTask(String[] command) {
         Task t;
         String description;
         String details;
@@ -90,14 +91,14 @@ public class Duke {
                         tasks.add(t);
                         return printTask(t);
                 case "deadline":
-                        description = task.split("/")[0];
-                        details = task.split("/by")[1];
+                        description = task.split(" /")[0];
+                        details = task.split("/by ")[1];
                         t = new Deadline(description, details);
                         tasks.add(t);
                         return printTask(t);
                 case "event":
-                        description = task.split("/")[0];
-                        details = task.split("/at")[1];
+                        description = task.split(" /")[0];
+                        details = task.split("/at ")[1];
                         t = new Event(description, details);
                         tasks.add(t);
                         return printTask(t);
@@ -105,6 +106,9 @@ public class Duke {
         }
         catch (DukeException e) {
             return e.emptyDesc();
+        }
+        catch (DateTimeParseException e) {
+            return "Get the date format right!\n" + "dd/MM/yyyy HH:mm OR yyyy-MM-dd HH:mm\n";
         }
         return "";
     }
