@@ -1,0 +1,5 @@
+Here are the tasks in your list:
+1. [T][ ] borrow book
+2. [T][ ] borrow book
+3. [E][ ] project meeting (at: Mon 2-4pm)
+4. [T][ ] go to the gym

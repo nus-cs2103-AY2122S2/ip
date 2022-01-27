@@ -14,10 +14,6 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    public Task() {
-
-    }
-
     /**
      * This method mark the task as done.
      */

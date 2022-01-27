@@ -6,15 +6,13 @@ import java.time.LocalDateTime;
  */
 public class List {
     private ArrayList<Task> arrayList;//Array List to store the tasks.
-    private final int maxSize;//the maximum number of tasks possible, defined by requirement.
 
-    /**
-     *
-     * @param size: The maximum number of tasks possible which corresponds to maxSize.
-     */
-    public List(int size) {
-        this.maxSize = size;
-        this.arrayList = new ArrayList<Task>(maxSize);
+    public List() {
+        this.arrayList = new ArrayList<>();
+    }
+
+    public List(ArrayList<Task> list) {
+        this.arrayList = list;
     }
 
     /**
@@ -28,23 +26,19 @@ public class List {
     /**
      * This method marks a task at a specific index in the list as done.
      * @param index index of the task to be marked done in the array list of list
-     * @return return the task that is marked as done.
      */
-    public Task markDone(int index) {
+    public void markDone(int index) {
         Task task = arrayList.get(index);
         task.markDone();
-        return task;
     }
 
     /**
      * This method marks a task at a specific index in the list as not done.
      * @param index index of the task to be marked as not done in the array list of list.
-     * @return return the task that is marked as not done.
      */
-    public Task unmarkDone(int index) {
+    public void unmarkDone(int index) {
         Task task = arrayList.get(index);
         task.unmarkDone();
-        return task;
     }
 
     /**
@@ -52,26 +46,23 @@ public class List {
      * @param taskType Enum Tasks
      * @param description Description of task
      * @param timing date/time for Deadline and event task
-     * @return return a todo task, deadline task or event task that is added to the list
      */
-    public Task add(Tasks taskType, String description, String timing) throws DukeException {
+    public void add(Tasks taskType, String description, String timing) {
         switch (taskType) {
             case TODO:
                 ToDo toDo = new ToDo(description);
                 arrayList.add(toDo);
-                return toDo;
+                break;
             case EVENT:
                 Event event = new Event(description, timing);
                 arrayList.add(event);
-                return event;
+                break;
         }
-        return new ToDo(description);
     }
 
-    public Task add(Tasks taskType, String description, LocalDateTime date) throws DukeException {
+    public void add(Tasks taskType, String description, LocalDateTime date) {
         Deadline deadline = new Deadline(description, date);
         arrayList.add(deadline);
-        return deadline;
     }
 
     /**
@@ -89,6 +80,9 @@ public class List {
         }
     }
 
+    public Task getLast() {
+        return arrayList.get(arrayList.size() - 1);
+    }
 
     /**
      *
@@ -97,9 +91,9 @@ public class List {
     @Override
     public String toString() {
         String str = "Here are the tasks in your list:\n";
-        for (int i = 0; i < arrayList.size(); i++) {
+        for (int i = 0; i < this.arrayList.size(); i++) {
             int index = i + 1;
-            str = str + index + ". " + arrayList.get(i).toString() + "\n";
+            str = str + index + ". " + this.arrayList.get(i).toString() + "\n";
         }
         return str;
     }
