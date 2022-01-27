@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 /**
  * This is a DukeList class that handles the operations to the
@@ -10,10 +11,15 @@ import java.util.ArrayList;
  */
 
 public class DukeList {
-    protected ArrayList<Task> tasks;
+    protected ArrayList<Task> tasks = new ArrayList<>();
+    String line = "____________________________________________________________ \n";
 
-    public DukeList() {
-        tasks = new ArrayList<>();
+    public ArrayList<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
@@ -21,13 +27,11 @@ public class DukeList {
      */
     public String add(Task t, FileAction f) {
         StringBuilder res = new StringBuilder();
-        String line = "____________________________________________________________ \n";
         tasks.add(t);
         res.append(line).append("Got it. I've added this task: \n");
         res.append(t.toString()).append("\n");
         res.append("Now you have ").append(tasks.size());
         res.append(" tasks in the list.\n").append(line);
-        f.save(t.toString());
         return res.toString();
     }
 
@@ -37,13 +41,12 @@ public class DukeList {
     public String delete(int i, FileAction f) throws DukeException {
         Task t;
         StringBuilder res = new StringBuilder();
-        String line = "____________________________________________________________ \n";
         try {
             t = tasks.get(i - 1);
             tasks.remove(i - 1);
         } catch (Exception e) {
             StringBuilder error = new StringBuilder();
-            error.append("\n____________________________________________________________\n").append("☹ OOPS!!! Fam, you do not even have this numbered Task in your list.\n");
+            error.append(line ).append("☹ OOPS!!! Fam, you do not even have this numbered Task in your list.\n");
             error.append("____________________________________________________________\n");
             throw new DukeException(error.toString());
         }
@@ -76,12 +79,10 @@ public class DukeList {
      */
     public String markTask(int i, FileAction f) {
         StringBuilder res = new StringBuilder();
-        String line = "____________________________________________________________ \n";
         res.append(line).append("Nice! I've marked this task as done: \n");
         Task t = tasks.get(i - 1);
-        t.setDone(true);
+        t.setDone(1);
         res.append(t.toString()).append(line);
-        //fAction.save(t.toString());
         return res.toString();
     }
 
@@ -94,9 +95,18 @@ public class DukeList {
         String line = "____________________________________________________________ \n";
         res.append(line).append("OK, I've marked this task as not done yet: \n");
         Task t = tasks.get(i - 1);
-        t.setDone(false);
+        t.setDone(0);
         res.append(t.toString()).append(line);
-        //fAction.save(t.toString());
         return res.toString();
+    }
+
+    /**
+     * Saves the current instances of Task items in Tasks list into
+     * provided text file
+     */
+    public void saveAllTasks(FileAction f) throws IOException {
+        for (Task t : tasks) {
+            f.saveFile(t.toString());
+        }
     }
 }

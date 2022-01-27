@@ -17,22 +17,21 @@ import java.util.Scanner;
 
 public class FileAction {
     protected String filepath;
-    protected FileWriter fileW;
-    protected FileReader fileR;
+    protected FileWriter fileWriter;
+    protected FileReader fileReader;
     protected BufferedWriter writer;
     protected BufferedReader reader;
 
-    public FileAction(String path) throws IOException {
-        fileR = new FileReader(path);
-        reader = new BufferedReader(fileR);
+    public FileAction(String path) {
+        filepath = path;
     }
 
     /**
      * Saves content of Tasks into given file
      */
     public void saveFile(String cont) throws IOException {
-        fileW = new FileWriter(filepath);
-        writer = new BufferedWriter(fileW);
+        fileWriter = new FileWriter(filepath);
+        writer = new BufferedWriter(fileWriter);
         try {
             writer.write(cont);
         } catch (IOException e) {
@@ -73,16 +72,19 @@ public class FileAction {
      * Reads tasks saved in the hard drive file provided by the user and
      * places Task objects into the current DukeList
      */
-    public ArrayList<Task> readTasksFromFile() {
+    public ArrayList<Task> readTasksFromFile() throws FileNotFoundException {
         ArrayList<Task> readTasks = new ArrayList<>();
         String line = "";
+        fileReader = new FileReader(filepath);
+        reader = new BufferedReader(fileReader);
+
         try {
             while ((line = reader.readLine()) != null) {
                 String[] arrOfString = line.split(" - ");
                 readTasks.add(taskFromText(arrOfString));
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error in reading tasks from file!");
         }
         return readTasks;
     }
@@ -109,7 +111,6 @@ public class FileAction {
                 System.out.println("Invalid Task type!");
                 break;
         }
-        System.out.println(newT.toString());
         return newT;
     }
 }
