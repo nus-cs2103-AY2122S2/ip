@@ -3,6 +3,9 @@ package kidsnd274.duke.command;
 import kidsnd274.duke.TaskList;
 import kidsnd274.duke.taskobjects.Event;
 
+/**
+ * Command to add an event task to the task list
+ */
 public class AddEventCommand extends AddCommand {
     public static final String COMMAND_WORD = "event";
 

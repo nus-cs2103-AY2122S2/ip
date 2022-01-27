@@ -3,6 +3,9 @@ package kidsnd274.duke.command;
 import kidsnd274.duke.TaskList;
 import kidsnd274.duke.taskobjects.Todo;
 
+/**
+ * Command to add a Todo Task to the task list
+ */
 public class AddTodoCommand extends AddCommand {
     public static final String COMMAND_WORD = "todo";
 

@@ -14,10 +14,21 @@ public class Duke {
     private TextUi ui;
     private Parser parser;
 
+
+    /**
+     * The main entry point to the application
+     *
+     * Creates an instance of Duke and starts the application
+     */
     public static void main(String[] args) {
         new Duke().run();
     }
 
+    /**
+     * Starts the main logic of the program
+     *
+     * Instantiates TextUi, Storage, TaskList, and Parser objects and starts input loop
+     */
     public void run() {
         // Setting up the goods
         ui = new TextUi();

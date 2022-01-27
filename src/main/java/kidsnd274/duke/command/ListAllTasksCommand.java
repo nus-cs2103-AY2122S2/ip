@@ -2,6 +2,9 @@ package kidsnd274.duke.command;
 
 import kidsnd274.duke.TaskList;
 
+/**
+ * Command to list out all the tasks and its current status
+ */
 public class ListAllTasksCommand extends TaskListCommand {
     public static final String COMMAND_WORD = "list";
 

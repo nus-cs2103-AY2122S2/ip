@@ -3,10 +3,13 @@ package kidsnd274.duke.command;
 import kidsnd274.duke.TaskList;
 import kidsnd274.duke.taskobjects.Task;
 
+/**
+ * A class representing a command to delete an item from the task list
+ */
 public class DeleteCommand extends TaskListCommand {
     public static final String COMMAND_WORD = "delete";
 
-    private int taskNo;
+    private final int taskNo;
 
     public DeleteCommand(TaskList taskList, int taskNo) {
         super(taskList);
