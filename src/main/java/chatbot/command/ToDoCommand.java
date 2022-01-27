@@ -7,10 +7,11 @@ import chatbot.task.ToDo;
 import java.util.Arrays;
 
 public class ToDoCommand implements Command {
-    public static final String KEYWORD = "todo";
-    public static final String FORMAT = "Command Format: \"" + KEYWORD + " <desc>\"";
+    public static final String TRIGGER = "todo";
+    public static final String FORMAT = "Command Format: \"" + TRIGGER + " <desc>\"";
 
-    @Override public CommandOutput execute(String[] input, TaskList taskList) {
+    @Override
+    public CommandOutput execute(String[] input, TaskList taskList) {
         // Parse input.
         String desc = "";
         try {

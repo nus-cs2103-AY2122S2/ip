@@ -9,12 +9,13 @@ import java.time.LocalTime;
 import java.util.Arrays;
 
 public class DeadlineCommand implements Command {
-    public static final String KEYWORD = "deadline";
+    public static final String TRIGGER = "deadline";
     public static final String FORMAT =
-            "Command Format: \"" + KEYWORD + " <desc> /by <date> <time>\"\n" + "Date format: YYYY-MM-DD\n"
+            "Command Format: \"" + TRIGGER + " <desc> /by <date> <time>\"\n" + "Date format: YYYY-MM-DD\n"
                     + "Time format: HH:MM or HH:MM:SS";
 
-    @Override public CommandOutput execute(String[] input, TaskList taskList) {
+    @Override
+    public CommandOutput execute(String[] input, TaskList taskList) {
         // Parse input.
         String desc = "";
         LocalDate date = null;

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class TaskList extends ArrayList<Task> implements Serializable {
     private final String saveFile;
 
-    public TaskList(String saveFile) {
+    private TaskList(String saveFile) {
         this.saveFile = saveFile;
     }
 
@@ -20,20 +20,49 @@ public class TaskList extends ArrayList<Task> implements Serializable {
         return taskList;
     }
 
-    @Override public boolean add(Task task) {
+    public static TaskList create() {
+        return new TaskList("");
+    }
+
+    @Override
+    public boolean add(Task task) {
         boolean ret = super.add(task);
-        Storage.Save(saveFile, this);
+        if (!saveFile.isBlank()) {
+            Storage.Save(saveFile, this);
+        }
         return ret;
     }
 
-    @Override public Task remove(int index) {
+    @Override
+    public Task remove(int index) {
         Task ret = super.remove(index);
-        Storage.Save(saveFile, this);
+        if (!saveFile.isBlank()) {
+            Storage.Save(saveFile, this);
+        }
         return ret;
     }
 
-    @Override public void clear() {
+    @Override
+    public void clear() {
         super.clear();
-        Storage.Save(saveFile, this);
+        if (!saveFile.isBlank()) {
+            Storage.Save(saveFile, this);
+        }
+    }
+
+    /**
+     * Find all tasks in the list containing the specified keyword.
+     *
+     * @param keyword the keyword to search for in the list
+     * @return an array containing the found tasks
+     */
+    public Task[] find(String keyword) {
+        ArrayList<Task> tasks = new ArrayList<>();
+        for (Task t : this) {
+            if (t.toString().contains(keyword)) {
+                tasks.add(t);
+            }
+        }
+        return tasks.toArray(new Task[0]);
     }
 }
