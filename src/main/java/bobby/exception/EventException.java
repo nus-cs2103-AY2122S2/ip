@@ -1,32 +1,32 @@
 package bobby.exception;
 
 public class EventException extends BobbyException {
-    private String errtype;
+    private String errType;
 
     public EventException(String message) {
         super(message);
-        this.errtype = message;
+        this.errType = message;
     }
 
     @Override
     public String toString() {
-        String error_string;
-        switch (errtype) {
+        String errorMsg;
+        switch (errType) {
         case "blank":
-            error_string = "\tThere is no description after the event command :(";
+            errorMsg = "\tThere is no description after the event command :(";
             break;
         case "no_slash":
-            error_string = "\tI cannot tell the time of the event, put the time after a \"/\"";
+            errorMsg = "\tI cannot tell the time of the event, put the time after a \"/\"";
             break;
         case "no_date":
-            error_string = "\tThere is nothing after the \"/\"! When is this event happening?";
+            errorMsg = "\tThere is nothing after the \"/\"! When is this event happening?";
             break;
         case "invalid_date":
-            error_string = "\tWrong date format! I only accept dd-mm-yyyy!";
+            errorMsg = "\tWrong date format! I only accept dd-mm-yyyy!";
             break;
         default:
-            error_string = "\tI cannot understand this..";
+            errorMsg = "\tI cannot understand this..";
         }
-        return error_string;
+        return errorMsg;
     }
 }

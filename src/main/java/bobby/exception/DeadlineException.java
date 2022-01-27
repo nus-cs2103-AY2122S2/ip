@@ -1,32 +1,32 @@
 package bobby.exception;
 
 public class DeadlineException extends BobbyException {
-    private String errtype;
+    private String errorType;
 
     public DeadlineException(String message) {
         super(message);
-        errtype = message;
+        errorType = message;
     }
 
     @Override
     public String toString() {
-        String error_string;
-        switch (errtype) {
+        String errorMsg;
+        switch (errorType) {
         case "blank":
-            error_string = "\tThere is no description after the \"deadline\" command :(";
+            errorMsg = "\tThere is no description after the \"deadline\" command :(";
             break;
         case "no_slash":
-            error_string = "\tI cannot tell the due date and time, put it after a \"/\"";
+            errorMsg = "\tI cannot tell the due date and time, put it after a \"/\"";
             break;
         case "no_date":
-            error_string = "\tThere is nothing after the \"/\"! When is this due?";
+            errorMsg = "\tThere is nothing after the \"/\"! When is this due?";
             break;
         case "invalid_date":
-            error_string = "\tWrong date format! I only accept dd-mm-yyyy!";
+            errorMsg = "\tWrong date format! I only accept dd-mm-yyyy!";
             break;
         default:
-            error_string = "\tI cannot understand this..";
+            errorMsg = "\tI cannot understand this..";
         }
-        return error_string;
+        return errorMsg;
     }
 }
