@@ -35,6 +35,12 @@ public class Memory {
         this.file = new File("data");
     }
 
+    /**
+     * Returns stored size of taskMem, not actual size.
+     * Although, they should be the same.
+     *
+     * @return Stored size of taskMem.
+     */
     public int getSize() {
         return size;
     }
@@ -65,7 +71,9 @@ public class Memory {
     }
 
     /**
-     * Echoes all Tasks in Memory.
+     * Returns a string representation of all Tasks in Memory.
+     *
+     * @return String representation.
      */
     public String listAll() {
         if (size == 0) {
@@ -80,9 +88,10 @@ public class Memory {
     }
 
     /**
-     * Adds a Task to memory.
+     * Adds a Task to Memory.
      *
      * @param name The name of the Task to be made.
+     * @return String audit message.
      */
     public String addTask(String name) {
         taskMem.add(new Task(name));
@@ -92,10 +101,11 @@ public class Memory {
     }
 
     /**
-     * Adds a Deadline to memory.
+     * Adds a Deadline to Memory.
      *
      * @param name The name of the Deadline to be made.
      * @param time The due time of the Deadline.
+     * @return String audit message.
      */
     public String addDeadline(String name, String time) {
         try {
@@ -110,10 +120,11 @@ public class Memory {
     }
 
     /**
-     * Adds an Event to memory.
+     * Adds an Event to Memory.
      *
      * @param name The name of the Event to be made.
      * @param time The time of the Event.
+     * @return String audit message.
      */
     public String addEvent(String name, String time) {
         try {
@@ -131,6 +142,7 @@ public class Memory {
      * Sets a Task in Memory as done.
      *
      * @param fakeAddress The address of the Task to request, as shown to the user.
+     * @return String audit message.
      */
     public String setDone(int fakeAddress) {
         int address = fakeAddress - 1;
@@ -148,6 +160,7 @@ public class Memory {
      * Sets a Task in Memory as undone.
      *
      * @param fakeAddress The address of the Task to request, as shown to the user.
+     * @return String audit message.
      */
     public String setUndone(int fakeAddress) {
         int address = fakeAddress - 1;
@@ -162,9 +175,10 @@ public class Memory {
     }
 
     /**
-     * Removes a Task from memory.
+     * Removes a Task from Memory.
      *
      * @param fakeAddress The address of the Task to request, as shown to the user.
+     * @return String audit message.
      */
     public String deleteTask(int fakeAddress) {
         int address = fakeAddress - 1;
@@ -180,7 +194,7 @@ public class Memory {
     }
 
     /**
-     * Sets up the data file and parser.
+     * Sets up the data file and Parser.
      */
     public void setup() {
 
