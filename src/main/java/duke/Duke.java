@@ -6,6 +6,7 @@ import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.EditTaskMarkCommand;
 import duke.command.EventCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.exception.DukeException;
@@ -67,6 +68,7 @@ public class Duke {
         // init parser
         HashMap<String, Command> commands = new HashMap<String, Command>();
         commands.put("bye", new ByeCommand("bye"));
+        commands.put("find", new FindCommand("find"));
         commands.put("list", new ListCommand("list"));
         commands.put("mark", new EditTaskMarkCommand("mark", true));
         commands.put("unmark", new EditTaskMarkCommand("unmark", false));

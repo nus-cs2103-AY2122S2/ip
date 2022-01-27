@@ -3,15 +3,22 @@ package duke.task;
 import duke.exception.DukeException;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class TaskList {
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     // tasklist exception messages
     private final static String INDEX_NO_EXIST = "Yo yo yo, this task don't exist. Give a legitimate task number.";
 
     public TaskList() {
         tasks = new ArrayList<Task>();
+    }
+
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     // edit the marking of tasks
@@ -59,5 +66,19 @@ public class TaskList {
         }
 
         return sb.toString();
+    }
+
+    public TaskList getTaskListWithKeyword(final String keyword) {
+        boolean yes = tasks.get(0).getTaskDescription().contains(keyword);
+
+        //predicate to check if task description has keyword
+        Predicate<Task> filterPredicate = task -> {
+            return task.getTaskDescription().toLowerCase().matches(keyword.toLowerCase());
+        };
+
+        //filter task
+        ArrayList<Task> filteredTasks = tasks.stream().filter(filterPredicate).collect(Collectors.toCollection(ArrayList::new));
+
+        return new TaskList(filteredTasks);
     }
 }

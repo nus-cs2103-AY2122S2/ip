@@ -15,7 +15,13 @@ public abstract class Command {
     public abstract void execute(String input, TaskList taskList, Storage storage, Ui ui) throws DukeException;
 
     protected String getTaskDescription(String input, String emptyDescErrDesc) throws DukeException {
-        String taskDescription = input.substring(input.indexOf(key) + key.length() + 1);
+        String taskDescription = "";
+
+        try {
+            taskDescription = input.substring(input.indexOf(key) + key.length() + 1);
+        } catch (IndexOutOfBoundsException exception) {
+            throw new DukeException(emptyDescErrDesc);
+        }
 
         if (taskDescription.length() == 0) {
             throw new DukeException(emptyDescErrDesc);
