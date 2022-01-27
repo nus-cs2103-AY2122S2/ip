@@ -1,5 +1,6 @@
 package arthur;
 
+import arthur.Storage;
 import arthur.task.Deadline;
 import arthur.task.Event;
 import arthur.task.Task;
