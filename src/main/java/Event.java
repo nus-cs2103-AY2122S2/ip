@@ -11,6 +11,10 @@ public class Event extends Task {
         this.dateInfo = dateInfo;
     }
 
+    public String whatType() {
+        return "E";
+    }
+
     /**
      * toString method specific for Event class,
      * inherits toString() fromTask class while adding additional information
@@ -18,6 +22,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at:" + this.dateInfo + ")";
+        return "[E]" + super.toString() + " (at: " + this.dateInfo + ")";
     }
 }

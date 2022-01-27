@@ -11,6 +11,10 @@ public class Deadline extends Task {
         this.dateInfo = dateInfo;
     }
 
+    public String whatType() {
+        return "D";
+    }
+
     /**
      * toString method specific for Deadline class,
      * inherits toString() fromTask class while adding additional information
@@ -18,6 +22,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by:" + this.dateInfo + ")";
+        return "[D]" + super.toString() + " (by: " + this.dateInfo + ")";
     }
 }

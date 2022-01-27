@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -15,7 +15,6 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-
     public void setMark() {
         isDone = true; // Set the value of isDone to true
     }
@@ -23,6 +22,8 @@ public class Task {
     public void setUnmark() {
         isDone = false; // Set the value of isDone to false
     }
+
+    public abstract String whatType();
 
     public String toString() {
         return "[" + getStatusIcon() + "] " + this.description;

@@ -1,6 +1,7 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-//import ip.src.main.java.Task;
 
 public class Duke {
     /**
@@ -11,8 +12,15 @@ public class Duke {
         String input = "";
         Boolean end = false;
         ArrayList<Task> store = new ArrayList(100);
-        int curr = 0;
 
+        try {
+            new ReadFile(store);
+        } catch (FileNotFoundException e) {
+            System.err.println(e);
+            System.exit(0);
+        }
+
+        int curr = store.size();
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
 
         // While loop ends when user inputs bye
@@ -58,7 +66,7 @@ public class Duke {
             }
             // If user inputs keyword deadline, add this task as a Deadline class
             else if (splitInput[0].equals("deadline")) {
-                String[] splitInput2 = splitInput[1].split("/by", 2);
+                String[] splitInput2 = splitInput[1].split(" /by ", 2);
                 store.add(new Deadline(splitInput2[0], splitInput2[1]));
                 int temp = curr + 1;
                 System.out.println("Got it. I've added this task:\n  " + store.get(curr).toString()
@@ -67,7 +75,7 @@ public class Duke {
             }
             // If user inputs keyword event, add this task as an Event class
             else if (splitInput[0].equals("event")) {
-                String[] splitInput2 = splitInput[1].split("/at", 2);
+                String[] splitInput2 = splitInput[1].split(" /at ", 2);
                 store.add(new Event(splitInput2[0], splitInput2[1]));
                 int temp = curr + 1;
                 System.out.println("Got it. I've added this task:\n  " + store.get(curr).toString()
@@ -86,6 +94,11 @@ public class Duke {
             else {}
         }
         System.out.println("Bye. Hope to see you again soon!");
+        try {
+            new WriteFile(store);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 
