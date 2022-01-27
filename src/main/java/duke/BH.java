@@ -1,7 +1,8 @@
+package duke;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 
 public class BH {
     private ArrayList<Task> list;
@@ -16,7 +17,7 @@ public class BH {
         this.ui = new Ui();
     }
 
-    void run() throws DukeException {
+    public void run() throws DukeException {
         this.ui.greet();
         try {
             while (true) {
