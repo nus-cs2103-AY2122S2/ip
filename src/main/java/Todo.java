@@ -8,6 +8,10 @@ public class Todo extends Task {
         super(description);
     }
 
+    public String whatType() {
+        return "T";
+    }
+
     /**
      * toString method specific for Todo class,
      * inherits toString() fromTask class while adding additional information
