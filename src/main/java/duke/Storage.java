@@ -67,10 +67,11 @@ public class Storage {
                 }
                 br.close();
                 return list;
+            } else {
+                return new ArrayList<>();
             }
         } catch (IOException e) {
             throw new DukeException("An error occurred while reading file");
         }
-        return null;
     }
 }

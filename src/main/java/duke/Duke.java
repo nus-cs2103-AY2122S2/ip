@@ -10,6 +10,12 @@ public class Duke {
     private final Storage storage;
     private TaskList tasks;
 
+    /**
+     * Default constructor for Duke
+     *
+     * @param fileName File name to give save data
+     */
+
     public Duke(String fileName) {
         ui = new Ui();
         storage = new Storage(fileName);
