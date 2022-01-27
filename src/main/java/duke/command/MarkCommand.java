@@ -25,11 +25,11 @@ public class MarkCommand extends Command {
      * Constructor to the mark or unmark command.
      *
      * @param taskNumber Task number to mark or unmark
-     * @param mark Boolean to indicate to mark or unmark the task
+     * @param toMark Boolean to indicate to mark or unmark the task
      * @throws DukeException If the task number given is empty or not an integer
      */
     public MarkCommand(String taskNumber, boolean toMark) throws DukeException {
-        if (taskNumber.equals("")){
+        if (taskNumber.equals("")) {
             if (toMark) {
                 throw new DukeException(ERROR_EMPTY_MARK);
             } else {

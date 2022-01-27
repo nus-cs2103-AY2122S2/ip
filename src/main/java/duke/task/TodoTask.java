@@ -1,9 +1,9 @@
 package duke.task;
 
 /**
- * Tasks set as todo
+ * Tasks set as todo.
  */
-public class TodoTask extends Task{
+public class TodoTask extends Task {
 
     /**
      * Constructor for todo task.
@@ -17,8 +17,8 @@ public class TodoTask extends Task{
 
     /**
      * Constructor for todo task with specified done state.
-     * @param title
-     * @param isDone
+     * @param title Title of task
+     * @param isDone Done state
      */
     public TodoTask(String title, Boolean isDone) {
         super(title, isDone);

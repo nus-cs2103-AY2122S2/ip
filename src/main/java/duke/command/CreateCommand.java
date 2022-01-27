@@ -39,7 +39,7 @@ public class CreateCommand extends Command {
      * @param taskType Type of task to create
      * @throws DukeException If the arguments is an empty string
      */
-    public CreateCommand(String args, TaskType taskType) throws DukeException{
+    public CreateCommand(String args, TaskType taskType) throws DukeException {
         if (args.equals("")) {
             throw new DukeException(ERROR_INVALID_TITLE);
         }
@@ -52,7 +52,7 @@ public class CreateCommand extends Command {
      *
      * @param tasks Task list
      * @param ui UI object
-     * @throws DukeException If there are incompatibilities or errors in the format for creating a particular task
+     * @throws DukeException If there are incompatibilities or errors in the format for creating task
      */
     @Override
     public void execute(List<Task> tasks, Ui ui) throws DukeException {
