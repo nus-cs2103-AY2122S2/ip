@@ -28,6 +28,10 @@ public class Ui {
     private final String goodbye = "\tBye! Hope to see you again soon! (｡^‿‿^｡)";
     private final String invalid = "\tInvalid command!   (╯°□°)╯︵ ┻━┻ ︵ ╯(°□° ╯)";
 
+    public void print(String message) {
+        System.out.println(message);
+    }
+
     public void printLongLine() {
         System.out.print(line1);
     }
@@ -61,20 +65,6 @@ public class Ui {
 
     public String readCommand() {
         return sc.nextLine();
-    }
-
-    public void printTaskList(TaskList tasks) {
-        Task currTask;
-        if (tasks.isEmpty()) {
-            System.out.println("\tWow you are very free now! Enjoy~ ༼ つ ◕_◕ ༽つ");
-        } else {
-            System.out.println("\tI've sorted and put the any deadlines/events to the top for you :)");
-        }
-        for (int i = 0; i < tasks.getSize(); i++) {
-            currTask = tasks.getIndex(i);
-            int index = i + 1;
-            System.out.println("\t" + index + "." + currTask);
-        }
     }
 
     public void markMessage(Task task) {
@@ -116,7 +106,31 @@ public class Ui {
         System.out.println("\t" + "Now you have " + tasks.getSize() + " in the list.");
     }
 
-    public void print(String message) {
-        System.out.println(message);
+    public void printTaskList(TaskList tasks) {
+        Task currTask;
+        if (tasks.isEmpty()) {
+            System.out.println("\tWow you are very free now! Enjoy~ ༼ つ ◕_◕ ༽つ");
+        } else {
+            System.out.println("\tI've sorted and put the any deadlines/events to the top for you :)");
+        }
+        for (int i = 0; i < tasks.getSize(); i++) {
+            currTask = tasks.getIndex(i);
+            int index = i + 1;
+            System.out.println("\t" + index + "." + currTask);
+        }
+    }
+
+    public void printFindTaskList(TaskList tasks) {
+        Task currTask;
+        if (tasks.isEmpty()) {
+            System.out.println("\tNo matching tasks in your list \t(≧︿≦)");
+        } else {
+            System.out.println("\tHere are the matching tasks in your list:");
+            for (int i = 0; i < tasks.getSize(); i++) {
+                currTask = tasks.getIndex(i);
+                int index = i + 1;
+                System.out.println("\t" + index + "." + currTask);
+            }
+        }
     }
 }
