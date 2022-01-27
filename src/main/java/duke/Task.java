@@ -4,7 +4,7 @@ package duke;
  * Represents a task
  */
 public abstract class Task {
-    private final String description;
+    private String description;
     private boolean isCompleted;
 
     Task(String description) {
@@ -53,6 +53,14 @@ public abstract class Task {
      */
     public String getType() {
         return "Task";
+    }
+
+    /**
+     * Updates the description of a task
+     * @param description New description of the task
+     */
+    public void updateDescription(String description) {
+        this.description = description;
     }
 
     /**

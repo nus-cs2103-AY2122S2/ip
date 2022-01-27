@@ -105,7 +105,7 @@ public class Parser {
     /**
      * Parses a command to mark a <code>Task</code>
      * @param commandArguments User input arguments supplied
-     * @param taskManager Handle the marking, unmarking, deleting and adding of tasks
+     * @param taskManager Handles task operations
      * @return String representing the response by the Duke application as a result of the user command
      * @throws DukeException Handles any errors that occur during the function
      */
@@ -128,7 +128,7 @@ public class Parser {
     /**
      * Parses a command to unmark a <code>Task</code>
      * @param commandArguments User input arguments supplied
-     * @param taskManager Handle the marking, unmarking, deleting and adding of tasks
+     * @param taskManager Handles task operations
      * @return String representing the response by the Duke application as a result of the user command
      * @throws DukeException Handles any errors that occur during the function
      */
@@ -151,7 +151,7 @@ public class Parser {
     /**
      * Parses a command to delete a <code>Task</code>
      * @param commandArguments User input arguments supplied
-     * @param taskManager Handle the marking, unmarking, deleting and adding of tasks
+     * @param taskManager Handles task operations
      * @return String representing the response by the Duke application as a result of the user command
      * @throws DukeException Handles any errors that occur during the function
      */
@@ -174,7 +174,7 @@ public class Parser {
     /**
      * Parses a command to add a <code>ToDo</code> object
      * @param commandArguments User input arguments supplied
-     * @param taskManager Handle the marking, unmarking, deleting and adding of tasks
+     * @param taskManager Handles task operations
      * @return String representing the response by the Duke application as a result of the user command
      * @throws DukeException Handles any errors that occur during the function
      */
@@ -192,7 +192,7 @@ public class Parser {
     /**
      * Parses a command to add a <code>Deadline</code> object
      * @param commandArguments User input arguments supplied
-     * @param taskManager Handle the marking, unmarking, deleting and adding of tasks
+     * @param taskManager Handles task operations
      * @return String representing the response by the Duke application as a result of the user command
      * @throws DukeException Handles any errors that occur during the function
      */
@@ -227,7 +227,7 @@ public class Parser {
     /**
      * Parses a command to add an <code>Event</code> object
      * @param commandArguments User input arguments supplied
-     * @param taskManager Handle the marking, unmarking, deleting and adding of tasks
+     * @param taskManager Handles task operations
      * @return String representing the response by the Duke application as a result of the user command
      * @throws DukeException Handles any errors that occur during the function
      */
@@ -262,7 +262,7 @@ public class Parser {
     /**
      * Parses a command to find tasks matching the description string
      * @param commandArguments User input arguments supplied
-     * @param taskManager Handle the marking, unmarking, deleting and adding of tasks
+     * @param taskManager Handles task operations
      * @return String representing the response by the Duke application as a result of the user command
      * @throws DukeException Handles any errors that occur during the function
      */
@@ -277,9 +277,35 @@ public class Parser {
     }
 
     /**
+     * Parses the command to update a task description
+     * @param commandArguments User input arguments supplied
+     * @param taskManager Handles task operations
+     * @return String representing the response by the Duke application as a result of the user command
+     * @throws DukeException
+     */
+    public static String parseUpdateCommand(String[] commandArguments,
+            TaskManager taskManager) throws DukeException {
+        if (commandArguments.length < 3) {
+            throw new DukeInsufficientArgumentsException();
+        }
+        String response = "";
+        try {
+            int updateIndex = Integer.parseInt(commandArguments[1]) - 1;
+            String newDescription = String.join(" ", Arrays.copyOfRange(commandArguments,
+                    2, commandArguments.length));
+            response = taskManager.update(updateIndex, newDescription);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeTaskNotFoundException();
+        } catch (NumberFormatException e) {
+            throw new DukeInvalidArgumentsException();
+        }
+        return response;
+    }
+
+    /**
      * Parses a command to find tasks matching a given date
      * @param commandArguments User input arguments supplied
-     * @param taskManager Handle the marking, unmarking, deleting and adding of tasks
+     * @param taskManager Handles task operations
      * @return String representing the response by the Duke application as a result of the user command
      * @throws DukeException Handles any errors that occur during the function
      */
@@ -297,7 +323,7 @@ public class Parser {
     /**
      * Parses user input and invokes other functions depending on the type of user command
      * @param command User input
-     * @param taskManager Handle the marking, unmarking, deleting and adding of tasks
+     * @param taskManager Handles task operations
      * @return String representing the response by the Duke application as a result of the user command
      */
     public static String parseCommand(String command, TaskManager taskManager) {
@@ -332,6 +358,8 @@ public class Parser {
                 return parseFindCommand(commandArguments, taskManager);
             case "date":
                 return parseFindByDateCommand(commandArguments, taskManager);
+            case "update":
+                return parseUpdateCommand(commandArguments, taskManager);
             default:
                 throw new DukeInvalidCommandException();
             }

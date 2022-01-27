@@ -153,6 +153,17 @@ public class TaskManager {
     }
 
     /**
+     * Updates the description of a task at a given index with a new description
+     * @param index Index of task to be updated
+     * @param newDescription New description of the task
+     * @return String representing the response when a task is updated
+     */
+    public String update(int index, String newDescription) {
+        this.taskList.get(index).updateDescription(newDescription);
+        return "OK, I've updated the description for this task:\n    " + this.taskList.get(index);
+    }
+
+    /**
      * Marks a task as not completed
      * @param index Index of task to be unmarked
      * @return String representing the response when a task is unmarked
