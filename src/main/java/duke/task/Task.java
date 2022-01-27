@@ -8,15 +8,11 @@ public abstract class Task {
     public Task(String description, TaskType type) {
         this.description = description;
         this.type = type;
-        this.isDone = false;
+        isDone = false;
     }
 
     public void mark(boolean done) {
-        this.isDone = done;
-    }
-
-    public String getDescription() {
-        return this.description;
+        isDone = done;
     }
 
     public String getFileSaveFormat() {
@@ -26,15 +22,15 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s", getSymbol(), getStatusSymbol(), this.description);
+        return String.format("[%s][%s] %s", getSymbol(), getStatusSymbol(), description);
     }
 
     private String getStatusSymbol() {
-        return this.isDone ? "X" : " ";
+        return isDone ? "X" : " ";
     }
 
     private String getSymbol() {
-        switch (this.type) {
+        switch (type) {
         case TODO:
             return "T";
         case DEADLINE:

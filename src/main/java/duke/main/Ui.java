@@ -36,9 +36,9 @@ public class Ui {
      * Constructs a new Ui instance.
      */
     public Ui() {
-        this.reader = new BufferedReader(new InputStreamReader(System.in));
-        this.writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
-        this.message = new StringBuilder();
+        reader = new BufferedReader(new InputStreamReader(System.in));
+        writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+        message = new StringBuilder();
     }
 
     /**

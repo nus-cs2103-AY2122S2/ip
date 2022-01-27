@@ -15,7 +15,7 @@ public class TaskList {
      * Constructs a new empty TaskList instance.
      */
     public TaskList() {
-        this.tasks = new ArrayList<Task>();
+        tasks = new ArrayList<Task>();
     }
 
     /**
@@ -86,7 +86,7 @@ public class TaskList {
      * @return An ArrayList representing the TaskList instance.
      */
     public ArrayList<Task> getTasks() {
-        return this.tasks;
+        return tasks;
     }
 
     /**
