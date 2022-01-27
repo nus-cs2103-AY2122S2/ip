@@ -3,6 +3,9 @@ package dazz;
 import dazz.command.Command;
 import dazz.exception.DazzException;
 
+/**
+ *
+ */
 public class Dazz {
     private final Storage storage;
     private final Ui ui;
