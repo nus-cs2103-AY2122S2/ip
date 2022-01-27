@@ -112,6 +112,13 @@ public class Parser {
 
             int taskNo = Integer.parseInt(inputArray[1]) - 1;
             return new DeleteCommand(taskList, taskNo);
+        } else if (command.equals(FindCommand.COMMAND_WORD)) {
+            String[] inputSplit = input.split(" ", 2);
+            if (inputSplit.length < 2) {
+                return new ErrorCommand("Search query cannot be empty");
+            }
+            String searchQuery = inputSplit[1];
+            return new FindCommand(taskList, searchQuery);
         }
 
         return new ErrorCommand("Unknown command: " + command);

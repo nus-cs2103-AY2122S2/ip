@@ -17,7 +17,7 @@ public class TaskList {
      * Takes in no argument and creates an empty task list
      */
     public TaskList() {
-        this.taskList = new ArrayList<Task>();
+        this.taskList = new ArrayList<>();
     }
 
     /**
@@ -86,6 +86,17 @@ public class TaskList {
             newString.append(i + 1);
             newString.append(". ");
             newString.append(taskList.get(i).getCurrentStatus());
+        }
+        return newString.toString();
+    }
+
+    public String search(String searchQuery) {
+        StringBuilder newString = new StringBuilder();
+        for (int i = 0; i < taskList.size(); i++) {
+            Task currentTask = taskList.get(i);
+            if (currentTask.getTaskName().contains(searchQuery)) {
+                newString.append(i + 1).append(". ").append(currentTask.getCurrentStatus()).append("\n");
+            }
         }
         return newString.toString();
     }
