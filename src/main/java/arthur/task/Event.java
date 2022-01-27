@@ -10,6 +10,11 @@ public class Event extends Task {
     private final String at;
     private final DateTime timings;
 
+    /**
+     * Constructor for event objects
+     * @param e String to be created as Task
+     * @param at String with the necessary timing info
+     */
     public Event(String e, String at) {
         super(e);
         timings = new DateTime(at);

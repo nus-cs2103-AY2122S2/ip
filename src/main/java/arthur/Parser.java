@@ -7,6 +7,10 @@ public class Parser {
     private String command;
     private boolean isEnd;
 
+    /**
+     * Constructor for the parser object
+     * @param inst String instruction to be followed
+     */
     public Parser(String inst) {
         this.command = inst;
     }

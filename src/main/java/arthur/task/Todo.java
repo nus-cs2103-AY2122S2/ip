@@ -5,6 +5,10 @@ package arthur.task;
  */
 public class Todo extends Task {
 
+    /**
+     * Constructor for Todo objects
+     * @param e String to be created as Task object
+     */
     public Todo(String e) {
         super(e);
     }
