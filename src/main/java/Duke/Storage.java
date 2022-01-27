@@ -37,7 +37,6 @@ public class Storage {
     }
 
     public ArrayList<Task> load() {
-
         ArrayList<Task> list = new ArrayList<>(); // init arraylist
 
         try {
@@ -45,6 +44,7 @@ public class Storage {
             BufferedReader br = new BufferedReader(fr);
             StringBuffer sb = new StringBuffer();
             String currLine;
+
             while ((currLine = br.readLine()) != null) {
                 int taskInt = currLine.indexOf("[") + 1;
                 char typeOfTask = currLine.charAt(taskInt);
