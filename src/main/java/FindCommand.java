@@ -32,6 +32,13 @@ public class FindCommand extends Command {
         this.keyword = cmdArr[KEYWORD];
     }
 
+    /**
+     * Execute the command on the system to find tasks according to keywords.
+     *
+     * @param taskList The list of all current tasks.
+     * @param ui The user interface.
+     * @param storage The memory storage.
+     */
     @Override
     public void execute(TaskList taskList, TessUi ui, Storage storage) {
         if (this.command.equals("find")) {

@@ -63,8 +63,9 @@ public class Command {
         case "unmark":
             if (cmdLen == 1) {
                 throw new TesseractException("Which task you want to remove again?");
-            } else if (cmdLen > 2 || !Command.isInteger(cmdArr[1]) || Integer.parseInt(cmdArr[1]) > numOfTasks
-            || Integer.parseInt(cmdArr[1]) < 1) {
+            } else if (cmdLen > 2 || !Command.isInteger(cmdArr[1])
+                    || Integer.parseInt(cmdArr[1]) > numOfTasks
+                    || Integer.parseInt(cmdArr[1]) < 1) {
                 throw new TesseractException("You need to enter a valid list number mah~");
             }
             break;
@@ -100,7 +101,8 @@ public class Command {
             break;
         case "todo":
             if (cmdLen == 1) {
-                throw new TesseractException("I cannot create todo if you don't tell me what it's about eh :-(");
+                throw new TesseractException("I cannot create todo"
+                + " if you don't tell me what it's about eh :-(");
             }
             break;
         default:

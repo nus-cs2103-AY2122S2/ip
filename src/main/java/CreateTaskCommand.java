@@ -44,14 +44,14 @@ public class CreateTaskCommand extends Command {
         Date date;
         int cmdLen = cmdArr.length;
         switch (taskType) {
-            case "event":
-                newTask = new Event(description, cmdArr[cmdLen - 1]);
-                break;
-            case "deadline":
-                newTask = new Deadline(description, cmdArr[cmdLen - 1]);
-                break;
-            default: // "todo"
-                newTask = new Todo(description);
+        case "event":
+            newTask = new Event(description, cmdArr[cmdLen - 1]);
+            break;
+        case "deadline":
+            newTask = new Deadline(description, cmdArr[cmdLen - 1]);
+            break;
+        default: // "todo"
+            newTask = new Todo(description);
         }
         taskList.addTask(newTask);
         storage.needUpdate();

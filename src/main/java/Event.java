@@ -37,7 +37,8 @@ public class Event extends Task {
      */
     @Override
     public String toMemoryString() {
-        return "E" + super.toMemoryString() + "@" + this.at;
+        return "E" + super.toMemoryString()
+                + "@" + this.at;
     }
 
     /**
@@ -58,6 +59,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + date.formattedTime() + ")";
+        return "[E]" + super.toString()
+                + " (at: " + date.formattedTime() + ")";
     }
 }
