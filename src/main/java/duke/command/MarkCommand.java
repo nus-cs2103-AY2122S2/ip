@@ -12,6 +12,7 @@ public class MarkCommand extends Command {
         MARK,
         UNMARK;
     }
+
     private int index;
     private Mark mark;
 
