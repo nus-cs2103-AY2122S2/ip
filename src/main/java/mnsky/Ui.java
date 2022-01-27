@@ -1,5 +1,6 @@
 package mnsky;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import mnsky.exceptions.MnskyException;
@@ -85,10 +86,12 @@ public class Ui {
     }
 
     /**
-     * Prints out the string representation of the whole task list.
-     * @param taskList The task list.
+     * Prints out all the strings in th l ist.
+     * @param listStrings The list of strings.
      */
-    public void printList(TaskList taskList) {
-        System.out.print(taskList.toString());
+    public void printListStrings(ArrayList<String> listStrings) {
+        for (String string : listStrings) {
+            System.out.println(string);
+        }
     }
 }

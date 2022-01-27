@@ -41,7 +41,6 @@ public class Mnsky {
 
     /**
      * Runs the main loop of Mnsky, including retrieving, parsing, and processing user input.
-     * @return False is the user input the command bye, or true otherwise.
      */
     public void run() {
         boolean isRunning = true;
@@ -56,7 +55,7 @@ public class Mnsky {
                     isRunning = false;
                     break;
                 case "list":
-                    ui.printList(taskList);
+                    ui.printListStrings(taskList.getListStrings());
                     break;
                 case "mark":
                     Task markedTask = taskList.mark(parsedInput.get(1));
@@ -81,6 +80,9 @@ public class Mnsky {
                 case "delete":
                     Task deleted = taskList.delete(parsedInput.get(1));
                     ui.printDeletedTask(deleted);
+                    break;
+                case "find":
+                    this.ui.printListStrings(taskList.find(parsedInput.get(1)));
                     break;
                 default:
                     ui.printMnsky("...");

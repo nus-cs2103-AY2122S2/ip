@@ -94,6 +94,15 @@ public class Parser {
         return new ArrayList<>(List.of("event", eventName, at));
     }
 
+    private static String retrieveSearchTerm(String input) {
+        String[] inputSplit = input.split(" ", 2);
+        if (inputSplit.length < 2) {
+            throw new MnskyMissingParameterException("find", "search_term");
+        }
+
+        return inputSplit[1];
+    }
+
     /**
      * Parses all the tasks in the storage data.
      * @param rawTaskList The raw strings of the task list from the storage data.
@@ -167,6 +176,10 @@ public class Parser {
         case "delete":
             parsedInput.add("delete");
             parsedInput.add(retrieveIndex("delete", inputSplit));
+            break;
+        case "find":
+            parsedInput.add("find");
+            parsedInput.add(retrieveSearchTerm(input));
             break;
         default:
             parsedInput.add("invalid");

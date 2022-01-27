@@ -208,6 +208,22 @@ public class TaskList {
         }
     }
 
+    public ArrayList<String> find(String searchTerm) {
+        ArrayList<String> foundTasks = new ArrayList<>();
+
+        for (Task task : tasks) {
+            if (task.getName().contains(searchTerm)) {
+                foundTasks.add(task.toString());
+            }
+        }
+
+        if (foundTasks.size() == 0) {
+            foundTasks.add("[MNSKY couldn't find any tasks matching the search term.]");
+        }
+
+        return foundTasks;
+    }
+
     /**
      * Gets a list of the storage data of all the tasks in the task list.
      * @return The list of storage data of all the tasks.
@@ -224,16 +240,16 @@ public class TaskList {
      * Gets the string representation of the list, which differs depending on if the list is empty or not.
      * @return The string representation of the list.
      */
-    @Override
-    public String toString() {
+    public ArrayList<String> getListStrings() {
+        ArrayList<String> listStrings = new ArrayList<>();
         if (tasks.size() == 0) {
-            return "[MNSKY presents an empty task list.]";
+            listStrings.add("[MNSKY presents an empty task list.]");
         } else {
-            StringBuilder sb = new StringBuilder();
             for (int i = 0; i < tasks.size(); i++) {
-                sb.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
+                listStrings.add(String.format("%d. %s", i + 1, tasks.get(i)));
             }
-            return sb.toString();
         }
+
+        return listStrings;
     }
 }
