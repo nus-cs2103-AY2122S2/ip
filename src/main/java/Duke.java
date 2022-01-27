@@ -28,11 +28,11 @@ public class Duke {
             switch(type) {
                 case "E":
                     String at = commandArr[3];
-                    tasks.add(new Event(description, status, at));
+                    tasks.add(new Event(description, at, status));
                     break;
                 case "D":
                     String by = commandArr[3];
-                    tasks.add(new Deadline(description, status, by));
+                    tasks.add(new Deadline(description, by, status));
                     break;
                 case "T":
                     tasks.add(new ToDo(description, status));

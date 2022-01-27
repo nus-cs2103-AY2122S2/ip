@@ -4,23 +4,24 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     protected LocalDateTime at;
 
-    public Event(String description, String at) {
-        super(description);
+    public Event(String description, String at, boolean isDone) {
+        super(description, isDone);
         this.at = LocalDateTime.parse(at, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
     }
 
-    public Event(String description, boolean isDone, String at) {
-        super(description, isDone);
-        this.at = at;
+    public Event(String description, String at) {
+        this(description, at, false);
     }
 
     @Override
     public String save() {
-        return "E | " + super.save() + " | " + this.at  + System.lineSeparator();
+        String dateTime = at.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+        return "E | " + super.save() + " | " + dateTime + System.lineSeparator();
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")) + ")";
+        String dateTime = at.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm"));
+        return "[E]" + super.toString() + " (at: " + dateTime + ")";
     }
 }
