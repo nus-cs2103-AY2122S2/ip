@@ -1,6 +1,14 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.Path;
+import java.io.IOException;
+import java.io.FileWriter;
+import java.util.Arrays;
 
 public class Duke {
     private static final String LINE = "_____________________________________________________________";
@@ -29,7 +37,29 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         List<Task> tasks = new ArrayList<Task>();
-        List<String> commands = List.of("list", "bye", "mark", "unmark", "delete", "todo", "event", "deadline");
+        List<String> commands = List.of("list", "bye", "mark", "unmark", "delete", "todo", "event", "deadline", "save");
+
+        try {
+            if (Files.exists(Paths.get("data/duke.txt"))) {
+                File f = new File("data/duke.txt");
+                Scanner fileScanner = new Scanner(f);
+                while(fileScanner.hasNextLine()) {
+                    List<String> description = Arrays.asList(fileScanner.nextLine().split(" "));
+                    Boolean isDone = description.get(0).equals("X");
+                    Task task = Task.createTask(description.subList(1, description.size()));
+                    if (isDone) {
+                        task.markAsDone();
+                    }
+                    tasks.add(task);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(GAP + e.getMessage());
+            System.out.println(LINE);
+        } catch (InvalidArgumentException e) {
+            System.out.println(GAP + e.getMessage());
+            System.out.println(LINE);
+        }
 
         while (true) {
             try {
@@ -51,19 +81,26 @@ public class Duke {
                 } else if (instruction[0].equals("mark") || instruction[0].equals("unmark")) {
                     int taskNum = Integer.parseInt(instruction[1]);
 
-                    if(taskNum > tasks.size()) throw new InvalidIndexException();
+                    if (taskNum > tasks.size()) {
+                        throw new InvalidIndexException();
+                    }
 
                     String response;
 
-                    if(instruction[0].equals("mark")) response = tasks.get(taskNum - 1).markAsDone();
-                    else response = tasks.get(taskNum - 1).markAsNotDone();
+                    if (instruction[0].equals("mark")) {
+                        response = tasks.get(taskNum - 1).markAsDone();
+                    } else {
+                        response = tasks.get(taskNum - 1).markAsNotDone();
+                    }
 
                     System.out.println(GAP + response);
 
                 } else if (instruction[0].equals("delete")) {
                     int taskNum = Integer.parseInt(instruction[1]);
 
-                    if (taskNum > tasks.size()) throw new InvalidIndexException();
+                    if (taskNum > tasks.size()) {
+                        throw new InvalidIndexException();
+                    }
 
                     System.out.println(String.format(GAP + "Ok, I will remove this task: \n %s", tasks.get(taskNum - 1)));
                     tasks.remove(taskNum - 1);
@@ -71,19 +108,45 @@ public class Duke {
                 } else if (instruction[0].equals("todo") || instruction[0].equals("event") || instruction[0].equals("deadline")) {
                     Task newTask;
 
-                    if(instruction[0].equals("todo")) newTask = Todo.of(instruction);
-                    else if (instruction[0].equals("event")) newTask = Event.of(instruction);
-                    else newTask = Deadline.of(instruction);
+                    if(instruction[0].equals("todo")) {
+                        newTask = Todo.of(instruction);
+                    } else if (instruction[0].equals("event")) {
+                        newTask = Event.of(instruction);
+                    } else {
+                        newTask = Deadline.of(instruction);
+                    }
 
                     tasks.add(newTask);
                     System.out.println(GAP + "Got it. I've added this task\n" + GAP +  newTask);
                     System.out.println(String.format(GAP + "You have %d tasks in the list", tasks.size()));
 
+                } else if (instruction[0].equals("save")) {
+                    String output;
+                    for (Task task : tasks) {
+                        System.out.println(task);
+                    }
+                    Path dir = Paths.get("data");
+                    Path store = Paths.get("data/duke.txt");
+                    if (!Files.exists(dir)) {
+                        Files.createDirectory(dir);
+                        Files.createFile(store);
+                    } else if (!Files.exists(store)) {
+                        Files.createFile(store);
+                    }
+
+                    FileWriter writer = new FileWriter("data/duke.txt");
+                    for (Task task : tasks) {
+                        writer.write(task.toStorageString() + "\n");
+                    }
+                    writer.close();
                 }
                 System.out.println(LINE);
             }
             catch (DukeException e){
-                System.out.println(GAP +    e.getMessage());
+                System.out.println(GAP + e.getMessage());
+                System.out.println(LINE);
+            } catch (IOException e) {
+                System.out.println(GAP + e.getMessage());
                 System.out.println(LINE);
             }
         }
