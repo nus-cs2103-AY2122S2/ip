@@ -17,13 +17,31 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * Storage is a utility class representing the file path on the disk
+ * storing the user's list of tasks.
+ * <p/>
+ * This class contains functions to load and save tasks to the disk.
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Creates a new Storage instance with the given file path.
+     *
+     * @param filePath The file path on the disk for saving and loading tasks.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Returns an ArrayList of tasks stored in the file path of this storage.
+     *
+     * @return An ArrayList containing the tasks loaded from the file.
+     * If the file does not exist, returns an empty ArrayList.
+     * @throws DukeException If file input cannot be read of file input has wrong format.
+     */
     public ArrayList<Task> loadTasks() throws DukeException {
         File file = new File(filePath);
         if (!file.exists()) {
@@ -61,6 +79,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Stores an ArrayList of tasks to the file path of this storage.
+     *
+     * @param tasks The ArrayList of tasks to be stored.
+     * @throws DukeException If the contents cannot be written to the specified file.
+     */
     public void saveFileData(ArrayList<Task> tasks) throws DukeException {
         try {
             if (Files.notExists(Paths.get(filePath))) {

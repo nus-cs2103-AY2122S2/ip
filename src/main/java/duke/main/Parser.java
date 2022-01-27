@@ -14,6 +14,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parser is a utility class with static methods used to parse
+ * user input into Command and LocalDateTime objects.
+ * the output on the screen.
+ */
 public class Parser {
     /**
      * Returns a Command object representing the user input.
