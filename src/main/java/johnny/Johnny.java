@@ -20,6 +20,11 @@ public class Johnny {
         ui = new Ui(this.tasks, this.store);
     }
 
+    /**
+     * Starts running the program by calling
+     * the Ui.handleUi() method
+     *
+     */
     public void run() {
         try {
             ui.handleUi();

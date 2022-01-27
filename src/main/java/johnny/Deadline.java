@@ -12,6 +12,13 @@ public class Deadline extends Task {
         this.dueDate = dueDate;
     }
 
+    /**
+     * Overrides parent method to return
+     * string that can be written to the text
+     * file (formatted for Deadline objects)
+     *
+     * @return String to write to file.
+     */
     @Override
     public String getTaskString() {
         return "DEADLINE" + "," + super.isDone + "," + super.description + "," + this.dueDate;

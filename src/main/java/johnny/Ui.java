@@ -15,15 +15,6 @@ public class Ui {
         this.store = store;
     }
 
-    public static boolean isNumeric(String str) {
-        try {
-            Integer.parseInt(str);
-            return true;
-        } catch(NumberFormatException e){
-            return false;
-        }
-    }
-
     public void handleUi() throws InvalidArgumentsException, EmptyDescriptionException, NoDateException, DateTimeException{
         System.out.println("Hello! I'm Johnny.Johnny \n" + "What can I do for you?");
         Scanner sc = new Scanner(System.in);

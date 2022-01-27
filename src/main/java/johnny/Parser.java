@@ -16,13 +16,11 @@ public class Parser {
     public static String ADD_EVENT = "ADD_EVENT";
 
 
-
-
     public Parser(String userInput) {
         this.input = userInput;
     }
 
-    public static boolean isNumeric(String str) {
+    private static boolean isNumeric(String str) {
         try {
             Integer.parseInt(str);
             return true;
@@ -31,6 +29,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses input String into an Arraylist
+     * of tags depending on command
+     *
+     * @return Arraylist of tags.
+     * @throws EmptyDescriptionException  If description for tasks is not mentioned.
+     * @throws NoDateException  If no/incorrectly formatted date is entered for tasks.
+     * @throws InvalidArgumentsException  If input command is invalid.
+     */
     public ArrayList<String> parse() throws EmptyDescriptionException, NoDateException, InvalidArgumentsException {
         String[] tags = input.split(" ", 2);
         ArrayList<String> result = new ArrayList<>();

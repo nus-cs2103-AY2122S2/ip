@@ -17,7 +17,13 @@ public class Storage {
         this.filepath = filepath;
     }
 
-
+    /**
+     * Reads tasks from the text file to
+     * an ArrayList
+     *
+     * @return ArrayList of tasks.
+     * @throws IOException
+     */
     public ArrayList<Task> readTasks() throws IOException{
         ArrayList<Task> taskList = new ArrayList<>();
 
@@ -44,6 +50,11 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Writes task from ArrayList to text file
+     *
+     * @param t  ArrayList of tasks.
+     */
     public void writeTasks(ArrayList<Task> t) {
         try {
             File file = new File("tasklist.txt");

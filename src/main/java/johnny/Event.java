@@ -12,6 +12,13 @@ public class Event extends Task {
         this.eventDate = eventDate;
     }
 
+    /**
+     * Overrides parent method to return
+     * string that can be written to the text
+     * file (formatted for Event objects)
+     *
+     * @return String to write to file.
+     */
     @Override
     public String getTaskString() {
         return "EVENT" + "," + super.isDone + "," + super.description + "," + this.eventDate;
