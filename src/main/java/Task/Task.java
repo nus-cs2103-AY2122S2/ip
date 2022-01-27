@@ -1,3 +1,5 @@
+package Task;
+
 public class Task {
 
     protected String description;
@@ -37,6 +39,10 @@ public class Task {
     public void delete() {
         System.out.println("Noted. I've removed this task: \n"
                 + toString());
+    }
+
+    public void complete() {
+        this.isDone = true;
     }
 
     @Override

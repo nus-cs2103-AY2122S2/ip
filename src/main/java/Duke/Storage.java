@@ -1,3 +1,10 @@
+package Duke;
+
+import Task.Task;
+import Task.ToDo;
+import Task.Deadline;
+import Task.Event;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -47,7 +54,7 @@ public class Storage {
                 if (typeOfTask == 'T') {
                     ToDo toDo = new ToDo(task);
                     if (taskDone == 'X') {
-                        toDo.isDone = true;
+                        toDo.complete();
                     }
                     list.add(toDo);
                 } else if (typeOfTask == 'D') {
@@ -55,7 +62,7 @@ public class Storage {
                     String date = task.substring((start + 2), (task.length() - 1));
                     Deadline deadline = new Deadline(task.substring(0, start - 4), date);
                     if (taskDone == 'X') {
-                        deadline.isDone = true;
+                        deadline.complete();
                     }
                     list.add(deadline);
                 } else if (typeOfTask == 'E') {
@@ -63,7 +70,7 @@ public class Storage {
                     String date = task.substring((start + 2), (task.length() - 1));
                     Event event = new Event(task.substring(0, start - 4), date);
                     if (taskDone == 'X') {
-                        event.isDone = true;
+                        event.complete();
                     }
                     list.add(event);
                 }

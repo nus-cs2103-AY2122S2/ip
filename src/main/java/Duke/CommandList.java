@@ -1,3 +1,10 @@
+package Duke;
+
+import Task.Task;
+import Task.ToDo;
+import Task.Deadline;
+import Task.Event;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
