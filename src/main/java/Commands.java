@@ -208,17 +208,17 @@ public class Commands {
         Scanner s = new Scanner(curr);
         while (s.hasNext()) {
             String temp = s.nextLine();
-            String[] arr = temp.split(":");
+            String[] arr = temp.split(">");
             int mark = Integer.parseInt(arr[1]);
             switch (arr[0]) {
             case "T":
                 taskHistory.addToDo(mark, arr[2]);
                 break;
             case "D":
-                taskHistory.addDeadline(mark, arr[2], arr[3]);
+                taskHistory.addDeadline(mark, arr[2], arr[3], arr[4]);
                 break;
             case "E":
-                taskHistory.addEvent(mark, arr[2], arr[3]);
+                taskHistory.addEvent(mark, arr[2], arr[3], arr[4]);
                 break;
             default:
                 System.out.println("load unsuccessful");

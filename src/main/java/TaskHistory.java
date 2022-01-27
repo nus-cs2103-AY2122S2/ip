@@ -19,18 +19,13 @@ public class TaskHistory {
         System.out.println(msg);
     }
 
-<<<<<<< HEAD
     public void addToDo(int mark, String description) {
         ToDos tempToDo = new ToDos(mark, description);
         record.add(tempToDo);
     }
 
-    public void addDeadline(String description, String timeFrame) {
-        Deadlines tempDeadline = new Deadlines(description, timeFrame);
-=======
-    void addDeadline(String description, String date, String time) {
+    public void addDeadline(String description, String date, String time) {
         Deadlines tempDeadline = new Deadlines(description, date, time);
->>>>>>> branch-Level-8
         record.add(tempDeadline);
         String msg = "_______________________________________________________\n"
                 + "Understood, adding this task now:\n"
@@ -40,18 +35,13 @@ public class TaskHistory {
         System.out.println(msg);
     }
 
-<<<<<<< HEAD
-    public void addDeadline(int mark, String description, String timeFrame) {
-        Deadlines tempDeadline = new Deadlines(mark, description, timeFrame);
+    public void addDeadline(int mark, String description, String date, String time) {
+        Deadlines tempDeadline = new Deadlines(mark, description, date, time);
         record.add(tempDeadline);
     }
 
-    public void addEvent(String description, String timeFrame) {
-        Event tempEvent = new Event(description, timeFrame);
-=======
-    void addEvent(String description, String date, String time) {
+    public void addEvent(String description, String date, String time) {
         Event tempEvent = new Event(description, date, time);
->>>>>>> branch-Level-8
         record.add(tempEvent);
         String msg = "_______________________________________________________\n"
                 + "Understood, adding this task now:\n"
@@ -61,8 +51,8 @@ public class TaskHistory {
         System.out.println(msg);
     }
 
-    public void addEvent(int mark, String description, String timeFrame) {
-        Event tempEvent = new Event(mark, description, timeFrame);
+    public void addEvent(int mark, String description, String date, String time) {
+        Event tempEvent = new Event(mark, description, date, time);
         record.add(tempEvent);
     }
 

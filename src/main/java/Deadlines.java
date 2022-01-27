@@ -1,7 +1,3 @@
-import java.sql.Time;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 public class Deadlines extends Task {
     private final String time;
     private final String date;
@@ -12,9 +8,10 @@ public class Deadlines extends Task {
         this.date = date;
     }
 
-    public Deadlines(int mark, String description, String timeFrame) {
+    public Deadlines(int mark, String description, String date, String time) {
         super(description, mark);
-        this.timeFrame = timeFrame;
+        this.date = date;
+        this.time = time;
     }
 
     public String getDeadline() {
@@ -22,6 +19,6 @@ public class Deadlines extends Task {
     }
 
     public String getFormattedText() {
-        return "D:" + this.getMark() + ":" + this.getDescription() + ":" + this.timeFrame;
+        return "D>" + this.getMark() + ">" + this.getDescription() + ">" + this.date + ">" + this.time;
     }
 }

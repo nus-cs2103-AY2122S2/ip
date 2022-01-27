@@ -13,6 +13,6 @@ public class ToDos extends Task {
     }
 
     public String getFormattedText() {
-        return "T:" + this.getMark() + ":" + this.getDescription();
+        return "T>" + this.getMark() + ">" + this.getDescription();
     }
 }

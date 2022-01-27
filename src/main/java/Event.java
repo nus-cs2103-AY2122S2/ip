@@ -8,9 +8,10 @@ public class Event extends Task {
         this.time = time;
     }
 
-    public Event(int mark, String description, String timeFrame) {
+    public Event(int mark, String description, String date, String time) {
         super(description, mark);
-        this.timeFrame = timeFrame;
+        this.date = date;
+        this.time = time;
     }
 
     public String getEvent() {
@@ -18,6 +19,6 @@ public class Event extends Task {
     }
 
     public String getFormattedText() {
-        return "E:" + this.getMark() + ":" + this.getDescription() + ":" + this.timeFrame;
+        return "E>" + this.getMark() + ">" + this.getDescription() + ">" + this.date + ">" + this.time;
     }
 }

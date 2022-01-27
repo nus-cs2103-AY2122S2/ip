@@ -216,13 +216,14 @@ public class Duke {
                             + "* Unrecognised keyword used *\n"
                             + "Please try the keywords provided below:\n"
                             + "    1. list\n"
-                            + "    2. todo [arg]\n"
-                            + "    3. deadline [arg] /by [arg]\n"
-                            + "    4. event [arg] /at [arg]\n"
-                            + "    5. mark [arg]"
-                            + "    6. unmark [arg]"
-                            + "    7. delete [arg]"
-                            + "    7. bye\n"
+                            + "    2. todo [description]\n"
+                            + "    3. deadline [description] /by [date] [time]\n"
+                            + "    4. event [description] /at [date] [time]\n"
+                            + "    5. mark [#entry]\n"
+                            + "    6. unmark [#entry]\n"
+                            + "    7. delete [#entry]\n"
+                            + "    8. update\n"
+                            + "    9. bye\n"
                             + "_______________________________________________________\n";
                     System.out.println(err);
                     break;
