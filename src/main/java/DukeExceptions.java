@@ -36,7 +36,6 @@ final class EmptyTask extends EmptyParameters {
 
     private EmptyTask(String s) {
         super(s);
-        //TODO Auto-generated constructor stub
     }
     
     static EmptyTask createEmptyTask(String taskCmd) throws EmptyTask {
@@ -48,7 +47,6 @@ final class EmptyDate extends EmptyParameters {
 
     private EmptyDate(String s) {
         super(s);
-        //TODO Auto-generated constructor stub
     }
     
     static EmptyDate createEmptyDate(String taskCmd) throws EmptyDate {
@@ -61,7 +59,6 @@ final class EmptyNumber extends EmptyParameters {
 
     private EmptyNumber(String s) {
         super(s);
-        //TODO Auto-generated constructor stub
     }
 
     static EmptyNumber createEmptyNumber(String cmd) throws EmptyNumber {
