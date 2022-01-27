@@ -36,30 +36,30 @@ public class Parser {
      */
     public static Command parseCommand(String[] inputArr) {
         switch(inputArr[0].toLowerCase(Locale.ROOT)) {
-            case "deadline": {
-                return new DeadlineCommand(inputArr);
-            }
-            case "delete": {
-                return new DeleteCommand(inputArr);
-            }
-            case "event": {
-                return new EventCommand(inputArr);
-            }
-            case "list": {
-                return new ListCommand(inputArr);
-            }
-            case "mark": {
-                return new MarkCommand(inputArr);
-            }
-            case "todo": {
-                return new TodoCommand(inputArr);
-            }
-            case "unmark": {
-                return new UnmarkCommand(inputArr);
-            }
-            default: {
-                return new InvalidCommand(inputArr);
-            }
+        case "deadline": {
+            return new DeadlineCommand(inputArr);
+        }
+        case "delete": {
+            return new DeleteCommand(inputArr);
+        }
+        case "event": {
+            return new EventCommand(inputArr);
+        }
+        case "list": {
+            return new ListCommand(inputArr);
+        }
+        case "mark": {
+            return new MarkCommand(inputArr);
+        }
+        case "todo": {
+            return new TodoCommand(inputArr);
+        }
+        case "unmark": {
+            return new UnmarkCommand(inputArr);
+        }
+        default: {
+            return new InvalidCommand(inputArr);
+        }
         }
     }
 
@@ -92,15 +92,15 @@ public class Parser {
         } else {
             String[] deadlineDetails = deadlineArray[1].split("/by ", 2);
             if (deadlineDetails.length == 1) {
-                throw new DeadlineException("The description of a deadline must contain a deadline " +
-                        "in the numerical format YYYY-MM-DD");
+                throw new DeadlineException("The description of a deadline must contain " +
+                    "a deadline in the numerical format YYYY-MM-DD");
             } else {
                 try {
                     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                     return new Deadline(deadlineDetails[0], LocalDate.parse(deadlineDetails[1], dtf));
                 } catch (DateTimeParseException e) {
-                    throw new DeadlineException("Invalid deadline! Deadline has to be a valid date in " +
-                            "numerical format YYYY-MM-DD");
+                    throw new DeadlineException("Invalid deadline! Deadline has to be a " +
+                        "valid date in numerical format YYYY-MM-DD");
                 }
             }
         }
@@ -120,17 +120,16 @@ public class Parser {
             String[] eventDetails = eventArray[1].split("/at ", 2);
             if (eventDetails.length == 1) {
                 throw new EventException("The description of an event must contain a date in " +
-                        "the numerical format YYYY-MM-DD");
+                    "the numerical format YYYY-MM-DD");
             } else {
                 try {
                     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                     return new Event(eventDetails[0], LocalDate.parse(eventDetails[1], dtf));
                 } catch (DateTimeParseException e) {
                     throw new EventException("Invalid exception! Event has to have a valid date in " +
-                            "numerical format YYYY-MM-DD");
+                        "numerical format YYYY-MM-DD");
                 }
             }
         }
     }
-
 }

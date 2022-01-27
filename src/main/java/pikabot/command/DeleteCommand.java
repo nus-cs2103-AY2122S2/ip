@@ -44,5 +44,4 @@ public class DeleteCommand extends Command {
 
         Ui.indicateRemovedTask(taskToDelete, taskList);
     }
-
 }

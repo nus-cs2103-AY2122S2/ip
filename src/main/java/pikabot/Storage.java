@@ -53,6 +53,7 @@ public class Storage {
      * @throws FileNotFoundException If file is not found.
      */
     public static TaskList fileToTaskList(File f) throws FileNotFoundException {
+
         Scanner sc = new Scanner(f);
         ArrayList<Task> arrList = new ArrayList<>();
         TaskList taskList = new TaskList(arrList);
@@ -73,6 +74,7 @@ public class Storage {
                     deadline.markAsDone();
                 }
                 taskList.add(deadline);
+
             } else if (taskType == 'E') {
                 String[] taskDetails = taskStr.split("\\(at: ", 2);
                 String description = taskDetails[0];
@@ -83,6 +85,7 @@ public class Storage {
                     event.markAsDone();
                 }
                 taskList.add(event);
+
             } else {
                 Todo todo = new Todo(taskStr);
                 if (isTaskDone) {

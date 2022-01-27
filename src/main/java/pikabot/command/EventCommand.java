@@ -46,7 +46,7 @@ public class EventCommand extends Command {
 
         } catch (DateTimeParseException e) {
             Ui.printExceptionCustomisedMessage("The description of an event must" +
-                    "contain a date in the numerical format YYYY-MM-DD");
+                "contain a date in the numerical format YYYY-MM-DD");
         }
     }
 }
