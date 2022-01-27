@@ -124,7 +124,7 @@ public class Duke {
      */
     public void mark(int idx) {
         taskList.get(idx - 1).mark();
-        if (taskList.get(idx - 1).getDone()) {
+        if (taskList.get(idx - 1).getIsDone()) {
             ui.markAsDone(taskList.getToDoList(), idx);
         } else {
             ui.unmarkAsDone(taskList.getToDoList(), idx);

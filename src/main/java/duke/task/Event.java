@@ -42,6 +42,6 @@ public class Event extends duke.task.Task {
      */
     @Override
     public String toText() {
-        return "E | " + (this.getDone() ? 1 : 0) + " | " + this.getName() + " | " + this.at + "\n";
+        return "E | " + (this.getIsDone() ? 1 : 0) + " | " + this.getName() + " | " + this.at + "\n";
     }
 }

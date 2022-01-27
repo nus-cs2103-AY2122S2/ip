@@ -30,6 +30,6 @@ public class ToDo extends duke.task.Task {
      */
     @Override
     public String toText() {
-        return "T | " + (this.getDone() ? 1 : 0) + " | " + this.getName() + "\n";
+        return "T | " + (this.getIsDone() ? 1 : 0) + " | " + this.getName() + "\n";
     }
 }

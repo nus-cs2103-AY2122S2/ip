@@ -43,6 +43,6 @@ public class Deadline extends duke.task.Task {
      */
     @Override
     public String toText() {
-        return "D | " + (this.getDone() ? 1 : 0) + " | " + this.getName() + " | " + this.by + "\n";
+        return "D | " + (this.getIsDone() ? 1 : 0) + " | " + this.getName() + " | " + this.by + "\n";
     }
 }

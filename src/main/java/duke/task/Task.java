@@ -5,16 +5,16 @@ package duke.task;
  */
 public abstract class Task {
     private final String name;
-    private boolean done;
+    private boolean isDone;
 
     /**
-     * Returns a new <code>Task</code> object with the specified name and done status.
+     * Returns a new <code>Task</code> object with the specified name and isDone status.
      * @param name Name of the task.
-     * @param done Done status of the task.
+     * @param isDone isDone status of the task.
      */
-    public Task(String name, boolean done) {
+    public Task(String name, boolean isDone) {
         this.name = name;
-        this.done = done;
+        this.isDone = isDone;
     }
 
     /**
@@ -26,10 +26,10 @@ public abstract class Task {
     }
 
     /**
-     * Reverses the done status of the <code>Task</code>.
+     * Reverses the isDone status of the <code>Task</code>.
      */
     public void mark() {
-        this.done = !this.done;
+        this.isDone = !this.isDone;
     }
 
     /**
@@ -38,15 +38,15 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return "[" + (this.done? "X" : " ") + "] " + this.name;
+        return "[" + (this.isDone? "X" : " ") + "] " + this.name;
     }
 
     /**
-     * Returns the done status of the task.
-     * @return Done status of the task.
+     * Returns the isDone status of the task.
+     * @return isDone status of the task.
      */
-    public boolean getDone() {
-        return this.done;
+    public boolean getIsDone() {
+        return this.isDone;
     }
 
     /**
