@@ -13,10 +13,8 @@ public class Duke {
         while (true) {
             try {
                 String command = scanner.nextLine();
-//                String commandApp = command + " ";
                 String[] commandArr = command.split(" ");
                 String firstWord = commandArr[0];
-//                System.out.println("num of strings in commandArr: " + commandArr.length);
                 if (!(firstWord.equals("bye") || firstWord.equals("list") || firstWord.equals("mark") || firstWord.equals("unmark") ||
                     firstWord.equals("todo") || firstWord.equals("deadline") || firstWord.equals("event") || firstWord.equals("delete"))) {
                     throw new InvalidCommandException();
