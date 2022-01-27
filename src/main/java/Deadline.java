@@ -1,3 +1,8 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.util.Date;
+
 /**
  * This is a child class of Task, Deadline.
  * Deadline accepts another variable, 'by' that
@@ -9,9 +14,9 @@
  */
 
 public class Deadline extends Task {
-    protected String by;
+    protected LocalDate by;
 
-    public Deadline(String n, boolean d, String b) {
+    public Deadline(String n, boolean d, LocalDate b) {
         super(n, d);
         super.type = 'D';
         by = b;
@@ -19,10 +24,11 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MMMM-dd");
         StringBuilder res = new StringBuilder();
         res.append(getTaskIcon()).append(this.getDoneIcon());
         res.append(this.name).append("\n");
-        res.append(by).append("\n");
+        res.append(by.format(formatter)).append("\n");
         return res.toString();
     }
 
