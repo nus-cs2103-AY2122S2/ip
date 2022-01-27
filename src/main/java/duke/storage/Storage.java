@@ -19,13 +19,25 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+/**
+ * Responsible for loading the list of tasks from an existing and saving changes in the list to that file.
+ */
 public class Storage {
     private final Path filepath;
 
+    /**
+     * Constructs a Storage object with a filepath that it will reference for retrieving/storing data.
+     * @param path The filepath for data
+     */
     public Storage(String path) {
         this.filepath = Paths.get(path);
     }
 
+    /**
+     * Loads the task list from the filepath provided during Storage construction.
+     * @return The ArrayList of tasks in the provided file
+     * @throws DukeException If the file cannot be parsed or does not exist
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
             File file = new File(filepath.toString());
@@ -69,6 +81,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes all tasks in the given list to filepath.
+     * @param tasks The ArrayList of tasks
+     * @throws FileSaveException If the tasks cannot be stored in the respective file
+     */
     public void write(ArrayList<Task> tasks) throws FileSaveException {
         File directory = new File(filepath.toString()).getParentFile();
 

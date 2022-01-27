@@ -7,15 +7,17 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * duke.Duke Class contains a scanner to read user input and a duke.task.TaskList that contains all tasks.
- * duke.Duke only handles the processing of user input and responding to the user. duke.task.Task list logic is
- * handled by the duke.task.TaskList class.
+ * Ace (Duke), a program that manages tasks and todos for the user.
  */
 public class Duke {
     private final Ui ui;
     private final Storage storage;
     private TaskList taskList;
 
+    /**
+     * Constructs a Duke task manager.
+     * @param filepath The filepath in which the task list is stored and retrieved from
+     */
     public Duke(String filepath) {
         this.ui = new Ui();
         this.storage = new Storage(filepath);
@@ -26,6 +28,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Begins running Duke.
+     */
     public void run() {
         boolean exit = false;
         ui.displayWelcome();
@@ -44,6 +49,7 @@ public class Duke {
         }
 
     }
+
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }

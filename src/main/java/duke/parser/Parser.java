@@ -10,7 +10,17 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Responsible for parsing user input and identifying correctly formatted commands.
+ */
 public class Parser {
+
+    /**
+     * Parses and identifies the command provided by the user.
+     * @param strCommand The user's command in String format.
+     * @return The Command object corresponding to the user's input.
+     * @throws DukeException If the user provides an invalid or incorrectly formatted command.
+     */
     public static Command parse(String strCommand) throws DukeException {
         String[] splitCommand = strCommand.split(" ", 2);
         String keyword = splitCommand[0];
