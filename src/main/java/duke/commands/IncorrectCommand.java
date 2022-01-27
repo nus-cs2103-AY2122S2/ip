@@ -9,7 +9,7 @@ import duke.ui.Ui;
  * Represents an incorrect command.
  */
 public class IncorrectCommand extends Command {
-    private String incorrectMessage;
+    private final String incorrectMessage;
 
     /**
      * Creates a new incorrect command.
@@ -20,6 +20,15 @@ public class IncorrectCommand extends Command {
         incorrectMessage = s;
     }
 
+    /**
+     * Executes the "incorrect" command.
+     *
+     * @param tasks the TaskList containing the current tasks
+     * @param ui the Ui of the chatbot
+     * @param storage the storage of the chatbot
+     * @return the result of executing the "incorrect" command
+     * @throws DukeException if there were any errors with storage operations
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         return incorrectMessage;

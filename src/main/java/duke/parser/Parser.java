@@ -66,7 +66,7 @@ public class Parser {
      * Checks if a given time is in valid format.
      *
      * @param t a string containing a time
-     * @return true if the stirng provided is a valid time, false otherwise
+     * @return true if the string provided is a valid time, false otherwise
      */
     private static boolean isValidTime(String t) {
         try {
@@ -102,7 +102,7 @@ public class Parser {
      * Parses input in the context of adding a deadline.
      *
      * @param request full user input
-     * @return the prepared command
+     * @return the prepared add command
      */
     private Command prepareDeadline(String request)  {
         if (request.strip()
@@ -153,7 +153,7 @@ public class Parser {
      * Parses input in the context of adding an event.
      *
      * @param request full user input
-     * @return the prepared command
+     * @return the prepared add command
      */
     private Command prepareEvent(String request) {
         if (request.strip()
@@ -204,7 +204,7 @@ public class Parser {
      * Parses input in the context of a delete command.
      *
      * @param request full user input
-     * @return the prepared command
+     * @return the prepared delete command
      */
     private Command prepareDelete(String request) {
         String[] parsedReq = request.split(" ");
@@ -226,7 +226,7 @@ public class Parser {
      * Parses input in the context of a mark command.
      *
      * @param request full user input
-     * @return the prepared command
+     * @return the prepared mark command
      */
     private Command prepareMark(String request) {
         String[] parsedReq = request.split(" ");
@@ -248,7 +248,7 @@ public class Parser {
      * Parses input in the context of an unmark command.
      *
      * @param request full user input
-     * @return the prepared command
+     * @return the prepared unmark command
      */
     private Command prepareUnmark(String request) {
         String[] parsedReq = request.split(" ");
@@ -267,6 +267,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses input in the context of a find command.
+     *
+     * @param request full user input
+     * @return the prepared find command
+     */
     private Command prepareFind(String request) {
         if (request.strip().equals("find")) {
             return new IncorrectCommand("Please provide me with keywords for the task(s) you would like to find.");

@@ -21,6 +21,15 @@ public class MarkCommand extends Command {
         targetIndex = i - 1;
     }
 
+    /**
+     * Executes the mark command.
+     *
+     * @param tasks the TaskList containing the current tasks
+     * @param ui the Ui of the chatbot
+     * @param storage the storage of the chatbot
+     * @return the result of executing the mark command
+     * @throws DukeException if there were any errors with storage operations
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task t = tasks.markTask(targetIndex);

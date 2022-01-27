@@ -13,7 +13,6 @@ import duke.ui.Ui;
  * Initialises the application and starts the interaction with the user.
  */
 public class Duke {
-    // contain tasks in array
     private TaskList tasks;
     private Ui ui;
     private Storage storage;

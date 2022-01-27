@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Represents a list of tasks.
  */
 public class TaskList {
-    // contain tasks in array
+    // contains tasks in an ArrayList
     private final ArrayList<Task> tasks;
 
     /**
@@ -101,7 +101,7 @@ public class TaskList {
     /**
      * Produces a string representation of the TaskList.
      *
-     * @return a String containing the tasks within the TaskList
+     * @return a string containing the tasks within the TaskList
      */
     @Override
     public String toString() {

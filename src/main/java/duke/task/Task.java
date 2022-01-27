@@ -44,7 +44,7 @@ public abstract class Task {
     /**
      * Produces the representation of the task in save file format.
      *
-     * @return a String representation of the task to be used in storage
+     * @return a string representation of the task to be used in storage
      */
     public abstract String getAppendData();
 
@@ -67,9 +67,9 @@ public abstract class Task {
     }
 
     /**
-     * Produces a string representation of the Task.
+     * Produces a string representation of the task.
      *
-     * @return a String representation of the Task
+     * @return a string representation of the task
      */
     @Override
     public String toString() {

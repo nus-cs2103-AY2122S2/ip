@@ -9,7 +9,6 @@ import duke.ui.Ui;
  * Represents an executable command.
  */
 public abstract class Command {
-
     /**
      * Executes the command and returns the result.
      *

@@ -83,16 +83,31 @@ public class Deadline extends Task {
         return d.format(dateOut) + " " + t.format(timeOut);
     }
 
+    /**
+     * Checks if a date is present in the deadline.
+     *
+     * @return True if a date is present, false otherwise
+     */
     @Override
     public boolean isHasDate() {
         return hasDate;
     }
 
+    /**
+     * Checks if a time is present in the deadline.
+     *
+     * @return True if a time is present, false otherwise
+     */
     @Override
     public boolean isHasTime() {
         return hasTime;
     }
 
+    /**
+     * Produces the representation of the deadline in save file format.
+     *
+     * @return a string representation of the deadline to be used in storage
+     */
     @Override
     public String getAppendData() {
         return "D | " + (super.isDone ? "1" : "0") + " | " + description + " | " +
@@ -100,6 +115,11 @@ public class Deadline extends Task {
                 (hasTime ? t.toString() : "0");
     }
 
+    /**
+     * Produces a string representation of the deadline.
+     *
+     * @return a string representation of the deadline
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " +
