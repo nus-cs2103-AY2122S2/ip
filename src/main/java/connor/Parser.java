@@ -1,9 +1,21 @@
 package connor;
 
-import connor.command.*;
+import connor.command.AddCommand;
+import connor.command.ByeCommand;
+import connor.command.ChangeStatusCommand;
+import connor.command.ClearCommand;
+import connor.command.Command;
+import connor.command.CommandType;
+import connor.command.DeleteCommand;
+import connor.command.ListCommand;
 import connor.task.TaskStatus;
 import connor.task.TaskType;
 
+/**
+ * Parses the user's input and activates the correct command.
+ *
+ * @author jaysmyname
+ */
 public class Parser {
     private static final String ERROR_INDEX_NOT_INTEGER = "Error! Index must be a valid integer.";
     private static final String ERROR_INVALID_COMMAND_START = "My apologies, I don't understand what '";
@@ -13,6 +25,14 @@ public class Parser {
     Command command;
     boolean canActivate = true;
 
+    /**
+     * Constructor for {@code Parser} class. Parses the user's input and creates the corresponding
+     * {@code Command} if the command is valid. If the command or description of the command is invalid,
+     * the {@code Parser} object will register the command as invalid and set {@code canActivate}
+     * to {@code false}.
+     *
+     * @param s User's input.
+     */
     public Parser(String s) {
         String[] statement = s.trim().concat(" ").split(" ", 2);
         String commandRaw = statement[0];
@@ -91,6 +111,9 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the command, if it is a valid command.
+     */
     public void parse() {
         if (!canActivate) {
             return;

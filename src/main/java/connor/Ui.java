@@ -1,13 +1,18 @@
 package connor;
 
+/**
+ * Prints to the console things that should not be handled by the {@code Parser}.
+ * (For example, the intro loading sequence.)
+ *
+ * @author jaysmyname
+ */
 public class Ui {
 
     public Ui() {}
 
-    public void display(String s) {
-        System.out.println(s);
-    }
-
+    /**
+     * Prints the Connor logo and user greeting.
+     */
     public void greetings() {
         String logo = " .d8888b.\n"
                 + "d88P  Y88b\n"
@@ -24,7 +29,12 @@ public class Ui {
         print(Connor.LINE);
     }
 
-    private void print(String s) {
+    /**
+     * Prints the given string to the console.
+     *
+     * @param s String to be printed to console.
+     */
+    public void print(String s) {
         System.out.println(s);
     }
 

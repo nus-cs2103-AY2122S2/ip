@@ -1,14 +1,22 @@
 package connor;
 
+import connor.command.ByeCommand;
 import connor.exception.InvalidTaskFileException;
 import connor.task.Task;
 import connor.task.TaskList;
 
 import java.io.FileNotFoundException;
-import java.util.Scanner;
-import java.util.ArrayList;
 import java.io.IOException;
 
+import java.util.Scanner;
+import java.util.ArrayList;
+
+/**
+ * Main class for Connor program to start running.
+ *
+ * @author jaysmyname
+ * @version 1.0.0
+ */
 public class Connor {
     public static final String CURRENT_VERSION = "Version 1.0.0";
     public static final String LINE = "_".repeat(66);
@@ -26,11 +34,25 @@ public class Connor {
     private Storage storage;
     private Ui ui;
 
+    /**
+     * Constructor for {@code Connor} class.
+     *
+     * @param filePath File path to store text file of task list.
+     * @throws IOException If an I/O error occurs.
+     */
     public Connor(String filePath) throws IOException {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
     }
 
+    /**
+     * Runs the Connor program. Greets the user first, shows their current tasks,
+     * and finally asks for the user's input.
+     * <p>
+     * Once the user has inputted their command,
+     * the program attempts to parse and activate the input if the input is valid,
+     * before asking for another input. This process loops indefinitely until the user exits.
+     */
     public void run() {
         ui.greetings();
         try {
@@ -59,14 +81,30 @@ public class Connor {
         sc.close();
     }
 
-        private static void print(String s) {
+    /**
+     * Prints the given string to the console.
+     *
+     * @param s String to be printed to console.
+     */
+    private static void print(String s) {
         System.out.println(s);
     }
 
-    public static void setActive(boolean b) {
-        isActive = b;
+    /**
+     * Sets isActive. Currently, only used by {@code ByeCommand} to exit the program.
+     *
+     * @param isActive
+     * @see ByeCommand#activate()
+     */
+    public static void setActive(boolean isActive) {
+        Connor.isActive = isActive;
     }
 
+    /**
+     * Creates a new Connor object with the constant file path name and runs the program.
+     *
+     * @param args Command line arguments.
+     */
     public static void main(String[] args) {
         try {
             new Connor(TASK_FILEPATH).run();
