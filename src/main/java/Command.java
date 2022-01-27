@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 abstract class Command {
 
     protected enum CommandName {
@@ -21,7 +23,7 @@ abstract class Command {
                 if (parameter.isBlank())
                     throw EmptyNumber.createEmptyNumber("Mark");
                 try {
-                    taskList.getTask(Integer.parseInt(parameter)).setDone();
+                    taskList.markTask(Integer.parseInt(parameter));
                 } catch (IndexOutOfBoundsException e) {
                     throw new ListIndexOutOfBound();
                 }
@@ -34,11 +36,11 @@ abstract class Command {
             public void run(String parameter, TaskList taskList) throws DukeExceptions {
                 if (parameter.isBlank())
                     throw EmptyNumber.createEmptyNumber("Unmark");
-                try {
-                    taskList.getTask(Integer.parseInt(parameter)).setUndone();
-                } catch (IndexOutOfBoundsException e) {
-                    throw new ListIndexOutOfBound();
-                }
+                    try {
+                        taskList.unmarkTask(Integer.parseInt(parameter));
+                    } catch (IndexOutOfBoundsException e) {
+                        throw new ListIndexOutOfBound();
+                    }
                 System.out.println("Alright! It's done:");
                 System.out.println(taskList.getTask(Integer.parseInt(parameter)).toString());
             }
@@ -48,7 +50,7 @@ abstract class Command {
             public void run(String parameter, TaskList taskList) throws DukeExceptions {
                 if (parameter.isBlank())
                     throw EmptyTask.createEmptyTask("todo");
-                Task todo = new ToDo(parameter);
+                Task todo = Task.createTask("TODO", false, parameter, null);
                 taskList.addTask(todo);
                 System.out.println("Alright! Added that to the list: ");
                 System.out.println(todo.toString());
@@ -60,16 +62,16 @@ abstract class Command {
             public void run(String parameter, TaskList taskList) throws DukeExceptions {
                 if (parameter.isBlank())
                     throw EmptyTask.createEmptyTask("dateline");
-                int index = parameter.indexOf("/by");
+                int index = parameter.indexOf("/by ");
                 if (index < 0)
                     throw EmptyDate.createEmptyDate("dateline");
                 String task = parameter.substring(0, index);
                 if (task.isBlank())
                     throw EmptyTask.createEmptyTask("dateline");
-                String date = parameter.substring(index + 3, parameter.length());
+                String date = parameter.substring(index + 4, parameter.length());
                 if (date.isBlank())
                     throw EmptyDate.createEmptyDate("dateline");
-                Task deadline = new Deadline(task, date);
+                Task deadline = Task.createTask("DEADLINE", false, task, date);
                 taskList.addTask(deadline);
                 System.out.println("Alright! Added that to the list: ");
                 System.out.println(deadline.toString());
@@ -82,16 +84,16 @@ abstract class Command {
                 // TODO Auto-generated method stub
                 if (parameter.isBlank())
                     throw EmptyTask.createEmptyTask("event");
-                int index = parameter.indexOf("/at");
+                int index = parameter.indexOf("/at ");
                 if (index < 0)
                     throw EmptyDate.createEmptyDate("event");
                 String task = parameter.substring(0, index);
                 if (task.isBlank())
                     throw EmptyTask.createEmptyTask("event");
-                String date = parameter.substring(index + 3, parameter.length());
+                String date = parameter.substring(index + 4, parameter.length());
                 if (date.isBlank())
                     throw EmptyDate.createEmptyDate("event");
-                Task event = new Event(task, date);
+                Task event = Task.createTask("EVENT", false, task, date);
                 taskList.addTask(event);
                 System.out.println("Alright! Added that to the list: ");
                 System.out.println(event.toString());
