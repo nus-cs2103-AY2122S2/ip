@@ -34,7 +34,7 @@ public class Event extends Task {
     }
 
     /**
-     * Obtain the type of <code>Task</code>
+     * Obtains the type of <code>Task</code>
      * @return String corresponding to the type of <code>Task</code>
      */
     @Override
@@ -43,7 +43,7 @@ public class Event extends Task {
     }
 
     /**
-     * Obtain the time of the <code>Event</code> object
+     * Obtains the time of the <code>Event</code> object
      * @return String corresponding to the time of the <code>Task</code>
      */
     public String getTime() {

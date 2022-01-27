@@ -34,7 +34,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Obtain the type of <code>Task</code>
+     * Obtains the type of <code>Task</code>
      * @return String corresponding to the type of <code>Task</code>
      */
     @Override
@@ -43,7 +43,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Obtain the due date of the <code>Deadline</code> object
+     * Obtains the due date of the <code>Deadline</code> object
      * @return String corresponding to the deadline date of the <code>Task</code>
      */
     public String getTime() {

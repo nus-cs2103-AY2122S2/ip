@@ -28,7 +28,7 @@ public class Storage {
     }
 
     /**
-     * Load tasks from the saved file to the user application
+     * Loads tasks from the saved file to the user application
      * @return List of tasks found in the saved file
      * @throws DukeInvalidFileException Throws error when file saved is invalid
      */
@@ -49,7 +49,7 @@ public class Storage {
     }
 
     /**
-     * Save tasks into a file
+     * Saves tasks into a file
      * @param taskList <code>ArrayList</code> of tasks
      * @throws DukeInvalidFileSaveException Throws exception when tasks cannot be saved
      */

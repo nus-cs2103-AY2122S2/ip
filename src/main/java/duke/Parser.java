@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class Parser {
 
     /**
-     * Exit response of the Duke application
+     * Returns exit response when the exit command is invoked
      * @return String representing exit message
      */
     public static String exitResponse() {
@@ -16,7 +16,7 @@ public class Parser {
     }
 
     /**
-     * Determine if user command is the exit command
+     * Determines if user command is the exit command
      * @param command User input
      * @return Returns true if user input is the exit command
      */
@@ -28,7 +28,7 @@ public class Parser {
     }
 
     /**
-     * Parse a <code>ToDo</code> object into a String to be saved to the backup file
+     * Parses a <code>ToDo</code> object into a String to be saved to the backup file
      * @param task <code>ToDo</code> object to be parsed
      * @return String corresponding to the <code>ToDo</code> object
      */
@@ -38,7 +38,7 @@ public class Parser {
     }
 
     /**
-     * Parse a <code>Event</code> object into a String to be saved to the backup file
+     * Parses an <code>Event</code> object into a String to be saved to the backup file
      * @param task <code>Event</code> object to be parsed
      * @return String corresponding to the <code>Event</code> object
      */
@@ -49,7 +49,7 @@ public class Parser {
     }
 
     /**
-     * Parse a <code>Deadline</code> object into a String to be saved to the backup file
+     * Parses a <code>Deadline</code> object into a String to be saved to the backup file
      * @param task <code>Deadline</code> object to be parsed
      * @return String corresponding to the <code>Deadline</code> object
      */
@@ -60,7 +60,7 @@ public class Parser {
     }
 
     /**
-     *
+     * Parses a single line representing a <code>Task</code> found in the backup file
      * @param line A line representing a saved <code>Task</code> found in the backup file
      * @return <code>Task</code> represented by the String input found in the backup file
      * @throws DukeInvalidFileException Throws exception if file contents are invalid and cannot be parsed
@@ -103,7 +103,7 @@ public class Parser {
     }
 
     /**
-     * Parse a command to mark a <code>Task</code>
+     * Parses a command to mark a <code>Task</code>
      * @param commandArguments User input arguments supplied
      * @param taskManager Handle the marking, unmarking, deleting and adding of tasks
      * @return String representing the response by the Duke application as a result of the user command
@@ -126,7 +126,7 @@ public class Parser {
     }
 
     /**
-     * Parse a command to unmark a <code>Task</code>
+     * Parses a command to unmark a <code>Task</code>
      * @param commandArguments User input arguments supplied
      * @param taskManager Handle the marking, unmarking, deleting and adding of tasks
      * @return String representing the response by the Duke application as a result of the user command
@@ -149,7 +149,7 @@ public class Parser {
     }
 
     /**
-     * Parse a command to delete a <code>Task</code>
+     * Parses a command to delete a <code>Task</code>
      * @param commandArguments User input arguments supplied
      * @param taskManager Handle the marking, unmarking, deleting and adding of tasks
      * @return String representing the response by the Duke application as a result of the user command
@@ -172,7 +172,7 @@ public class Parser {
     }
 
     /**
-     * Parse a command to add a <code>ToDo</code> object
+     * Parses a command to add a <code>ToDo</code> object
      * @param commandArguments User input arguments supplied
      * @param taskManager Handle the marking, unmarking, deleting and adding of tasks
      * @return String representing the response by the Duke application as a result of the user command
@@ -190,7 +190,7 @@ public class Parser {
     }
 
     /**
-     * Parse a command to add a <code>Deadline</code> object
+     * Parses a command to add a <code>Deadline</code> object
      * @param commandArguments User input arguments supplied
      * @param taskManager Handle the marking, unmarking, deleting and adding of tasks
      * @return String representing the response by the Duke application as a result of the user command
@@ -225,7 +225,7 @@ public class Parser {
     }
 
     /**
-     * Parse a command to add an <code>Event</code> object
+     * Parses a command to add an <code>Event</code> object
      * @param commandArguments User input arguments supplied
      * @param taskManager Handle the marking, unmarking, deleting and adding of tasks
      * @return String representing the response by the Duke application as a result of the user command
@@ -260,7 +260,7 @@ public class Parser {
     }
 
     /**
-     * Parse a command to find tasks matching the description string
+     * Parses a command to find tasks matching the description string
      * @param commandArguments User input arguments supplied
      * @param taskManager Handle the marking, unmarking, deleting and adding of tasks
      * @return String representing the response by the Duke application as a result of the user command
@@ -277,7 +277,7 @@ public class Parser {
     }
 
     /**
-     * Parse a command to find tasks matching a given date
+     * Parses a command to find tasks matching a given date
      * @param commandArguments User input arguments supplied
      * @param taskManager Handle the marking, unmarking, deleting and adding of tasks
      * @return String representing the response by the Duke application as a result of the user command
@@ -295,7 +295,7 @@ public class Parser {
     }
 
     /**
-     * Parse user input and invokes other functions depending on the type of user command
+     * Parses user input and invokes other functions depending on the type of user command
      * @param command User input
      * @param taskManager Handle the marking, unmarking, deleting and adding of tasks
      * @return String representing the response by the Duke application as a result of the user command

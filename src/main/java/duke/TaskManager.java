@@ -1,6 +1,5 @@
 package duke;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -21,7 +20,7 @@ public class TaskManager {
     }
 
     /**
-     * Obtain the list of tasks
+     * Obtains the list of tasks
      * @return <code>ArrayList</code> representing the list of tasks
      */
     ArrayList<Task> getTasks() {
@@ -29,7 +28,7 @@ public class TaskManager {
     }
 
     /**
-     * Obtain the number of tasks
+     * Obtains the number of tasks
      * @return Integer representing the number of tasks
      */
     int countTasks() {
@@ -37,7 +36,7 @@ public class TaskManager {
     }
 
     /**
-     * Listing out all the saved user tasks
+     * Lists out all the saved user tasks
      * @return String representing the list of all tasks
      */
     public String list() {
@@ -48,7 +47,7 @@ public class TaskManager {
     }
 
     /**
-     * List out tasks in an array a d return a string representing the tasks
+     * Lists out tasks in an array a d return a string representing the tasks
      * @param tasks Array of tasks
      * @return String representing the tasks within the array
      */
@@ -64,7 +63,7 @@ public class TaskManager {
     }
 
     /**
-     * Marking a task as completed
+     * Marks a task as completed
      * @param index Index of task to be marked
      * @return String representing the response when a task is marked
      */
@@ -81,7 +80,7 @@ public class TaskManager {
         return response;
     }
     /**
-     * Deleting a task
+     * Deletes a task
      * @param index Index of task to be deleted
      * @return String representing the response when a task is deleted
      */
@@ -100,7 +99,7 @@ public class TaskManager {
     }
 
     /**
-     * Adding a task
+     * Adds a task to the <code>taskList</code>>
      * @param task Task to be added to the list
      * @return String representing the response when a task is added
      */
@@ -113,7 +112,7 @@ public class TaskManager {
     }
 
     /**
-     * Finding tasks that match a description
+     * Finds tasks that match a description
      * @param description String describing task
      * @return String representing tasks matching the description
      */
@@ -127,7 +126,7 @@ public class TaskManager {
     }
 
     /**
-     * Finding tasks that match a given date
+     * Finds tasks that match a given date
      * @param date Date supplied by user input
      * @return String representing tasks with given date
      */
@@ -154,7 +153,7 @@ public class TaskManager {
     }
 
     /**
-     * Marking a task as not completed
+     * Marks a task as not completed
      * @param index Index of task to be unmarked
      * @return String representing the response when a task is unmarked
      */

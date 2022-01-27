@@ -5,20 +5,20 @@ package duke;
  */
 public abstract class Task {
     private final String description;
-    private boolean completed;
+    private boolean isCompleted;
 
     Task(String description) {
         this.description = description;
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     Task(String description, Boolean completed) {
         this.description = description;
-        this.completed = completed;
+        this.isCompleted = completed;
     }
 
     /**
-     * Obtain the description of the task
+     * Obtains the description of the task
      * @return String corresponding to the description of the task
      */
     public String getDescription() {
@@ -26,29 +26,29 @@ public abstract class Task {
     }
 
     /**
-     * Obtain the completion status of the task
+     * Obtains the completion status of the task
      * @return Boolean corresponding to whether the task is completed
      */
     public boolean isCompleted() {
-        return this.completed;
+        return this.isCompleted;
     }
 
     /**
-     * Marking the tasks as completed
+     * Marks the tasks as completed
      */
     public void mark() {
-        this.completed = true;
+        this.isCompleted = true;
     }
 
     /**
-     * Marking the task as not completed
+     * Marks the task as not completed
      */
     public void unmark() {
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     /**
-     * Obtain the type of <code>Task</code>
+     * Obtains the type of <code>Task</code>
      * @return String representing the type of <code>Task</code>
      */
     public String getType() {
@@ -62,7 +62,7 @@ public abstract class Task {
     @Override
     public String toString() {
         String taskString = "";
-        if (this.completed) {
+        if (this.isCompleted) {
             taskString += "[X] ";
         } else {
             taskString += "[ ] ";

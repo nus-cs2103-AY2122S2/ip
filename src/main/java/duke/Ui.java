@@ -28,7 +28,7 @@ public class Ui {
     }
 
     /**
-     * Read user input
+     * Reads user input
      * @return String representing the user input
      */
     String readCommand() {
