@@ -9,56 +9,40 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 /**
- * Main class which runs an interactive CLI-based chatbot which manages your todos
+ * Contains the list of Tasks and all the operations on them.
+ * Can list, mark and unmark, add, and remove tasks.
  * 
  * @author Hong Yi En, Ian
  * @version Jan 2022 (AY21/22 Sem 2)
  */
-public class Lily {
-
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
-
-    public Lily(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
-        }
-    }
-
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        new Lily("data/tasks.txt").run();
-    }
-
-    private static final String indent = "    ";
+public class TaskList {
     private static LinkedList<Task> list;
 
-    private enum Cmd {
-        EXIT, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, REMOVE, INVALID
+    /**
+     * Creates a new TaskList.
+     */
+    public TaskList() throws LilyException { // why throw?
+        list = new LinkedList<>();
     }
+
+    /**
+     * Creates a new TaskList from the data in the savefile.
+     * @param loadedData The TaskList from the savefile.
+     * @throws LilyException idk why who
+     */
+    public TaskList(LinkedList<Task> loadedData) throws LilyException { // why throw?
+        list = loadedData;
+    }
+
+    // add all the functions which interact with tasks
+}
+
+
+
+
+
+
+
 
     private static LinkedList<Task> load(String filePath) throws IOException {
         LinkedList<Task> result = new LinkedList<>();

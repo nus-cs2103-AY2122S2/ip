@@ -8,51 +8,20 @@ import lily.task.Todo;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
 /**
- * Main class which runs an interactive CLI-based chatbot which manages your todos
+ * Deals with all the interactions with the user.
  * 
  * @author Hong Yi En, Ian
  * @version Jan 2022 (AY21/22 Sem 2)
  */
-public class Lily {
-
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
-
-    public Lily(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
-        }
-    }
-
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        new Lily("data/tasks.txt").run();
-    }
-
+public class Ui {
     private static final String indent = "    ";
     private static LinkedList<Task> list;
 
