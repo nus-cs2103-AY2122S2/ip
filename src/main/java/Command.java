@@ -16,18 +16,38 @@ import tesseract.main.TessUi;
 import tesseract.main.TesseractException;
 
 
-
+/**
+ * Represent a command.
+ * @author Fan Jue
+ * @version 0.1.0
+ * @since 0.1.0
+ */
 public class Command {
+    /** The specific command keyword */
     protected String cmdWord;
 
     Command(String keyword) {
         this.cmdWord = keyword;
     }
 
+    /**
+     * Execute the command on the system.
+     *
+     * @param taskList The list of all current tasks.
+     * @param ui The user interface.
+     * @param storage The memory storage.
+     */
     public void execute(TaskList taskList, TessUi ui, Storage storage) {
         ui.admitBug();
     };
 
+    /**
+     * Process the input to check if it is a valid command.
+     *
+     * @param fullCmd The line of input.
+     * @param numOfTasks The current number of tasks in list.
+     * @throws TesseractException If the input is not a valid command.
+     */
     public static void process(String fullCmd, int numOfTasks) throws TesseractException {
         String[] cmdArr = fullCmd.split(" ");
         int cmdLen = cmdArr.length;
@@ -89,6 +109,12 @@ public class Command {
 
     }
 
+    /**
+     * Return a command generated from the input line.
+     *
+     * @param fullCmd The line of input.
+     * @return A command to be executed.
+     */
     public static Command generate(String fullCmd) {
         String[] cmdArr = fullCmd.split(" ");
         switch (cmdArr[0]) {
@@ -114,6 +140,12 @@ public class Command {
         return new Command(""); // dummy command
     }
 
+    /**
+     * Check if the input string can be converted to an integer.
+     *
+     * @param str The input string to be tested.
+     * @return True if the input string represents an integer, false otherwise.
+     */
     public static boolean isInteger(String str) {
         try {
             Integer.parseInt(str);
@@ -123,6 +155,11 @@ public class Command {
         }
     }
 
+    /**
+     * Check if the program is terminated.
+     *
+     * @return False for all commands except ExitCommand.
+     */
     public boolean isExit() {
         return false;
     }
