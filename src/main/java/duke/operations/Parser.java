@@ -71,7 +71,7 @@ public class Parser {
     }
 
     /**
-     * Parse the user input and handles the various commands depending on the input.
+     * Parses the user input and handles the various commands depending on the input.
      * E.g., if user keys in "todo run", this task will go to the respective if block and handle it.
      *
      * @param input the user input.
