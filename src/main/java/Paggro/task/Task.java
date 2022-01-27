@@ -1,22 +1,16 @@
-public abstract class Task {
-    public enum TaskType {
-        TODO,
-        DEADLINE,
-        EVENT
-    }
-    TaskType type;
-    String description;
-    boolean isDone;
+package paggro.task;
 
-    public Task(String des, TaskType type) {
+public abstract class Task {
+    String description;
+    public boolean isDone;
+
+    public Task(String des) {
         description = des;
-        this.type = type;
         isDone = false;
     }
 
-    public Task(String des, TaskType type, boolean isDone) {
+    public Task(String des, boolean isDone) {
         description = des;
-        this.type = type;
         this.isDone = isDone;
     }
 

@@ -1,11 +1,16 @@
+package paggro.lister;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import java.time.LocalDate;
 
+import paggro.task.Task;
+import paggro.notableDate.NotableDate;
+
 public class Lister {
-    ArrayList<Task> tasks;
-    HashMap<LocalDate, NotableDate> dateMap;
+    public ArrayList<Task> tasks;
+    public HashMap<LocalDate, NotableDate> dateMap;
 
     public Lister() {
         tasks = new ArrayList<>();

@@ -1,10 +1,12 @@
+package paggro.task;
+
 public class ToDo extends Task {
     public ToDo(String des) {
-        super(des, TaskType.TODO);
+        super(des);
     }
 
     public ToDo(String des, boolean isDone) {
-        super(des, TaskType.EVENT, isDone);
+        super(des, isDone);
     }
 
     @Override

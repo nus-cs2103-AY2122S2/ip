@@ -1,6 +1,9 @@
-import java.util.Scanner;
+package paggro.ui;
 
+import java.util.Scanner;
 import java.util.ArrayList;
+
+import paggro.task.Task;
 
 public class Ui {
     Scanner sc;

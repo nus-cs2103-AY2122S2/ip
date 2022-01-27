@@ -1,5 +1,11 @@
-import java.io.FileNotFoundException;
 import java.io.IOException;
+
+import paggro.storage.Storage;
+import paggro.ui.Ui;
+import paggro.lister.Lister;
+import paggro.exception.PaggroException;
+import paggro.command.Command;
+import paggro.parser.Parser;
 
 public class PaggroBot {
     Storage storage;
@@ -26,7 +32,7 @@ public class PaggroBot {
                 ui.showLine();
                 Command cmd = Parser.parse(input);
                 cmd.execute(lister, ui, storage);
-                isExit = cmd.isExit;
+                isExit = cmd.isExit();
             } catch (PaggroException e) {
                 ui.showError(e.getMessage());
             } finally {

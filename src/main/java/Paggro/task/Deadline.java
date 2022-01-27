@@ -1,17 +1,21 @@
+package paggro.task;
+
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+import paggro.notableDate.NotableDate;
+
 public class Deadline extends Task {
-    NotableDate date;
+    public NotableDate date;
     LocalTime time;
 
     public Deadline(String des, NotableDate date, boolean isDone) {
-        super(des, TaskType.DEADLINE, isDone);
+        super(des, isDone);
         this.date = date;
     }
 
     public Deadline(String des, NotableDate date, LocalTime time, boolean isDone) {
-        super(des, TaskType.DEADLINE, isDone);
+        super(des, isDone);
         this.date = date;
         this.time = time;
     }

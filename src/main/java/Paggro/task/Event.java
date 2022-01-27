@@ -1,17 +1,21 @@
+package paggro.task;
+
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+import paggro.notableDate.NotableDate;
+
 public class Event extends Task {
-    NotableDate date;
+    public NotableDate date;
     LocalTime time;
 
     public Event(String des, NotableDate date, boolean isDone) {
-        super(des, TaskType.EVENT, isDone);
+        super(des, isDone);
         this.date = date;
     }
 
     public Event(String des, NotableDate date, LocalTime time, boolean isDone) {
-        super(des, TaskType.EVENT, isDone);
+        super(des, isDone);
         this.date = date;
         this.time = time;
     }
