@@ -19,32 +19,29 @@ public class Lily {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private Parser parser;
 
     public Lily(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
+        } catch (LilyException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
+        parser = new Parser(tasks, ui, storage);
     }
 
     public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
+        ui.showWelcome(tasks);
+        this.parser.parse(); // executes commands also
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
                 isExit = c.isExit();
-            } catch (DukeException e) {
+            } catch (LilyException e) {
                 ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
             }
         }
     }
@@ -52,7 +49,9 @@ public class Lily {
     public static void main(String[] args) {
         new Lily("data/tasks.txt").run();
     }
+}
 
+class OldLily {
     private static final String indent = "    ";
     private static LinkedList<Task> list;
 

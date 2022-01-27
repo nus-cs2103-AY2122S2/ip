@@ -3,6 +3,8 @@ import lily.task.Task;
 
 import java.util.LinkedList;
 
+import lily.task.LilyException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -32,7 +34,7 @@ public class Storage {
      * @return Saved tasks in the savefile.
      * @throws IOException If there is no savefile or a problem arose.
      */
-    public LinkedList<Task> load() throws IOException {
+    public LinkedList<Task> load() throws LilyException {
         LinkedList<Task> result = new LinkedList<>();
         try {
             FileInputStream fis = new FileInputStream(filePath);
@@ -44,6 +46,8 @@ public class Storage {
             ois.close();
             fis.close();
             result = read;
+        } catch (IOException e) {
+            throw new LilyException("There's no save file.");
         } catch (ClassNotFoundException c) {
            System.out.println("Class not found");
             c.printStackTrace();
@@ -56,7 +60,7 @@ public class Storage {
      * @param list The Tasklist to be exported.
      * @throws IOException If a problem arose.
      */
-    public void save(LinkedList<Task> list) throws IOException {
+    public void save(TaskList list) throws IOException {
         if (!list.isEmpty()) {
             File dataFolder = new File("/data");
             if (!dataFolder.exists()) {
@@ -64,7 +68,7 @@ public class Storage {
             }
             FileOutputStream fos = new FileOutputStream(filePath);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(list);
+            oos.writeObject(list.getContents());
             oos.close();
             fos.close();
         }
