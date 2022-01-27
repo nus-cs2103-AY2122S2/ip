@@ -8,7 +8,6 @@ public class ToDo extends Task {
         this.type = "T";
     }
 
-
     @Override
     public String toString() {
         String status = this.isDone ? "X" : " ";

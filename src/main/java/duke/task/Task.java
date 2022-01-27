@@ -7,7 +7,6 @@ public class Task {
     protected String name;
     protected boolean isDone;
     protected int id;
-
     private static ArrayList<Task> listOfTask = new ArrayList<>(100);
     private static int counter = 0;
 
@@ -40,6 +39,7 @@ public class Task {
         Task[] newArray = listOfTask.toArray(new Task[0]);
         return newArray;
     }
+
     public static String getCounter() {
         return Integer.toString(counter);
     }

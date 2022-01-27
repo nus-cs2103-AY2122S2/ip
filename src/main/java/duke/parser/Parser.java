@@ -1,20 +1,15 @@
 package duke.parser;
 
-
-
 import duke.exceptions.InvalidTypeException;
 import duke.exceptions.MissingNameException;
 import duke.exceptions.MissingEventDateException;
 import duke.exceptions.MissingDeadlineDateException;
-import duke.main.Duke;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.ToDo;
-import duke.parser.DateTimeParser;
-import duke.ui.Ui;
 import duke.task.Task;
-
+import duke.task.ToDo;
+import duke.ui.Ui;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
@@ -24,7 +19,6 @@ public class Parser {
     public Parser(String userInput) {
         this.userInput = userInput;
     }
-
 
     public boolean processInput() {
         if(userInput.equals("bye")) {
@@ -48,8 +42,8 @@ public class Parser {
                     + Ui.createLine();
 
             System.out.println(output);
-            return true;
 
+            return true;
         } else if (userInput.split(" ")[0].equals("unmark")) {
             String[] input = userInput.split(" ");
             Task task =  Task.getTaskList()[Integer.parseInt(input[1]) - 1];
@@ -117,52 +111,53 @@ public class Parser {
         Task currentTask = null;
 
         switch(instruction[0]) {
-            case "todo":
-                if(instruction.length == 1 || instruction[1].equals("")) {
-                    throw new MissingNameException("Missing description");
-                }
+        case "todo":
+            if(instruction.length == 1 || instruction[1].equals("")) {
+                throw new MissingNameException("Missing description");
+            }
 
-                currentTask = new ToDo(input.substring(4));
-                break;
-            case "event":
+            currentTask = new ToDo(input.substring(4));
 
-                if(instruction.length == 1 || instruction[1].equals("")) {
-                    throw new MissingNameException("Missing description");
-                }
+            break;
+        case "event":
+            if(instruction.length == 1 || instruction[1].equals("")) {
+                throw new MissingNameException("Missing description");
+            }
 
-                if(splitString.length == 1 || !splitString[1].startsWith("at ")) {
-                    throw new MissingEventDateException("Missing date");
-                }
-                try {
-                    currentTask = new Event(splitString[0].substring(5),
-                            DateTimeParser.parseDate(splitString[1].substring(3)));
-                } catch (DateTimeParseException e) {
-                    throw new MissingEventDateException("Wrong format of date");
-                }
+            if(splitString.length == 1 || !splitString[1].startsWith("at ")) {
+                throw new MissingEventDateException("Missing date");
+            }
 
-                break;
-            case "deadline":
-                if(instruction.length == 1 || instruction[1].equals("")) {
-                    throw new MissingNameException("Missing description");
-                }
+            try {
+                currentTask = new Event(splitString[0].substring(5),
+                        DateTimeParser.parseDate(splitString[1].substring(3)));
+            } catch (DateTimeParseException e) {
+                throw new MissingEventDateException("Wrong format of date");
+            }
 
-                if(splitString.length == 1 || !splitString[1].startsWith("by ")) {
-                    throw new MissingDeadlineDateException("Missing date");
-                }
-                try {
-                    currentTask = new Deadline(splitString[0].substring(8),
-                            DateTimeParser.parseDate(splitString[1].substring(3)));
-                } catch (DateTimeParseException e) {
-                    throw new MissingEventDateException("Wrong format of date");
-                }
-                break;
+            break;
+        case "deadline":
+            if(instruction.length == 1 || instruction[1].equals("")) {
+                throw new MissingNameException("Missing description");
+            }
 
-            default:
-                throw new InvalidTypeException("Invalid type");
+            if(splitString.length == 1 || !splitString[1].startsWith("by ")) {
+                throw new MissingDeadlineDateException("Missing date");
+            }
+
+            try {
+                currentTask = new Deadline(splitString[0].substring(8),
+                        DateTimeParser.parseDate(splitString[1].substring(3)));
+            } catch (DateTimeParseException e) {
+                throw new MissingEventDateException("Wrong format of date");
+            }
+
+            break;
+        default:
+            throw new InvalidTypeException("Invalid type");
         }
 
-       updateFile();
-
+        updateFile();
 
         String output = "   __________________________________________________\n"
                 + "       Got it! I have added this following task :D \n"
