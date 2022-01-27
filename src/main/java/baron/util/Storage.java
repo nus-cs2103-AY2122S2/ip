@@ -16,14 +16,29 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the data file.
+ */
 public class Storage {
     private static final String FILE_DELIMITER = "rwN>fox8@j`XNc;CA#FYzLogY.5Ze";
     private final File file;
 
+    /**
+     * Constructs the {@code Storage} object with {@code File} location at the specified
+     * relative file path.
+     *
+     * @param relativeFilePath the relative file path that user wants to store the data at.
+     */
     public Storage(String relativeFilePath) {
         this.file = new File(relativeFilePath);
     }
 
+    /**
+     * Loads and returns all the tasks in an {@code ArrayList<Task>}.
+     *
+     * @return all the tasks in the form of an {@code ArrayList<Task>}.
+     * @throws BaronException if the file is not found or the parsing of the data file fails.
+     */
     public ArrayList<Task> load() throws BaronException {
         this.createFileIfNotExists();
         if (this.file.exists() && this.file.isFile()) {
@@ -46,12 +61,18 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the given task list of type {@code ArrayList<Task>} into the data file.
+     *
+     * @param taskList the list of tasks to be saved.
+     * @throws BaronException if data file is not found or {@code FileWriter} throws IOException.
+     */
     public void save(ArrayList<Task> taskList) throws BaronException {
         this.createFileIfNotExists();
         if (this.file.exists() && this.file.isFile()) {
             try {
                 FileWriter fileWriter = new FileWriter(this.file);
-                for (Task task: taskList) {
+                for (Task task : taskList) {
                     fileWriter.write(task.toSaveString(Storage.FILE_DELIMITER) + "\n");
                 }
                 fileWriter.close();
