@@ -1,34 +1,33 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.IOException;
+package bernie.tasks;
+
+import bernie.enums.Type;
+import bernie.exceptions.InvalidArgumentException;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TaskList helps to store bernie.tasks given by the user. TaskList is contained in
+ * TaskList helps to store tasks given by the user. TaskList is contained in
  * the Bot class and handles the Task for the Bot.
  * 1st method: add, which adds inputs by the user into the storage.
  * 2nd method: list, which shows what's in the TaskList currently.
  */
 
 public class TaskList {
-    List<Task> tasks;
+    private List<Task> tasks;
     /**
-     * Constructs a TaskList containing an array to contain bernie.tasks
+     * Constructs a TaskList containing an array to contain tasks
      */
-    TaskList() {
+    public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
-    int getSize() {
+    public int getSize() {
         return tasks.size();
     }
 
-    boolean isEmpty() {
+    public boolean isEmpty() {
         return tasks.size() == 0;
     }
 
@@ -37,14 +36,14 @@ public class TaskList {
      * @param i int, the index of the Task
      * @return Task object
      */
-    Task getTask(int i) {
+    public Task getTask(int i) {
         return tasks.get(i);
     }
 
-    int numTasksLeft() {
+    public int numTasksLeft() {
         int count = 0;
         for (Task task : tasks) {
-            if (!task.isDone) {
+            if (!task.getIsDone()) {
                 count++;
             }
         }
@@ -52,29 +51,29 @@ public class TaskList {
     }
 
     /**
-     * Adds a Task given the inputArr and taskType determined by Bernie.
-     * @param inputArr String[], given by Bernie
-     * @param taskType String[], either todo, deadline or event
+     * Adds a Task given the parsedArr and taskType determined by Bernie
+     * @param parsedArr String[], given by Bernie
+     * @param taskType Type, either TODO, DEADLINE or EVENT
      * @return Task created
      */
-    Task addTask(String[] inputArr, String taskType) throws IllegalArgumentException {
+    public Task addTask(String[] parsedArr, Type taskType) {
         Task newTask = null;
         String description;
         LocalDate by;
         String at;
         switch (taskType) {
-            case "todo":
-                description = inputArr[0];
+            case TODO:
+                description = parsedArr[0];
                 newTask = new ToDo(description);
                 break;
-            case "deadline":
-                description = inputArr[0];
-                by = LocalDate.parse(inputArr[1]);
+            case DEADLINE:
+                description = parsedArr[0];
+                by = LocalDate.parse(parsedArr[1]);
                 newTask = new Deadline(description, by);
                 break;
-            case "event":
-                description = inputArr[0];
-                at = inputArr[1];
+            case EVENT:
+                description = parsedArr[0];
+                at = parsedArr[1];
                 newTask = new Event(description, at);
                 break;
             default:
@@ -85,9 +84,9 @@ public class TaskList {
     }
 
     /**
-     * Prints out every item contained in the bernie.tasks array
+     * Prints out every item contained in the tasks array
      */
-    void listTasks() {
+    public void listTasks() {
         for (int i = 0; i < tasks.size(); i++) {
             Task currentTask = tasks.get(i);
             System.out.printf("%d. %s\n", i + 1, currentTask);
@@ -99,9 +98,8 @@ public class TaskList {
      * @param action String, mark or unmark
      * @param taskNumber String, the taskNumber we want to mark or unmark
      * @return the resulting Task after mark or unmark
-     * @throws BernieException if we attempt to mark a marked Task or unmark an unnmarked Task
      */
-    Task markTask(Type action, String taskNumber) throws BernieException {
+    public Task markTask(Type action, String taskNumber) {
         int taskIndex = Integer.parseInt(taskNumber) - 1;
         if (action.equals(Type.MARK)) {
             tasks.get(taskIndex).markDone();
@@ -111,22 +109,21 @@ public class TaskList {
         return tasks.get(taskIndex);
     }
 
-    Task taskExists(String taskNum) throws BernieException {
+    public Task taskExists(String taskNum) throws InvalidArgumentException {
         int index = Integer.parseInt(taskNum) - 1;
         try {
-            Task existingTask = tasks.get(index);
-            return existingTask;
+            return tasks.get(index);
         } catch (IndexOutOfBoundsException e) {
-            throw new BernieException("Task number does not exist!");
+            throw new InvalidArgumentException("Task number does not exist!");
         }
     }
 
     /**
-     * Deletes bernie.tasks from the List
+     * Deletes tasks from the List
      * @param taskNum String, the task number
      * @return Task, the task that is deleted
      */
-    Task deleteTask(String taskNum) {
+    public Task deleteTask(String taskNum) {
         int taskIndex = Integer.parseInt(taskNum) - 1;
         return tasks.remove(taskIndex);
     }

@@ -13,8 +13,8 @@ src/main/resources/docs/
 *.iml
 bin/
 
-/text-ui-test/ACTUAL.txt
-text-ui-test/EXPECTED-UNIX.TXT
+/text-uiHandler-test/ACTUAL.txt
+text-uiHandler-test/EXPECTED-UNIX.TXT
 
 # class files
 *.class

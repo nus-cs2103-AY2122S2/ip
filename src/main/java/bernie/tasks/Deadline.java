@@ -1,11 +1,13 @@
+package bernie.tasks;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    protected LocalDate by;
+    private LocalDate by;
 
     /**
-     * Constructs a Deadline class for bernie.tasks that needs to be done before a timing
+     * Constructs a Deadline class for tasks that needs to be done before a timing
      * @param description String
      * @param by String, the deadline to meet by
      */

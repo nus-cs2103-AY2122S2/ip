@@ -1,3 +1,8 @@
+package bernie.storage;
+
+import bernie.tasks.Task;
+import bernie.tasks.TaskList;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
@@ -6,7 +11,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 /**
- * Storage class handles the loading and saving of bernie.tasks in the file
+ * Storage class handles the loading and saving of tasks in the file
  */
 public class Storage {
     String root = System.getProperty("user.dir");
@@ -17,7 +22,7 @@ public class Storage {
     /**
      * Constructs the Storage class with the File tasksFile and dataDir
      */
-    Storage() {
+    public Storage() {
         this.tasksFile = new File(root + "/data", "Bernie.txt");
         this.dataDir = new File(root, "data");
     }
@@ -26,7 +31,7 @@ public class Storage {
      * Loads the data when Bernie starts up if it exists and reads. If doesn't
      * exist, creates the required files
      */
-    void loadTasks() {
+    public void loadTasks() {
         try {
             if (tasksFile.exists() && dataDir.exists()) {
                 System.out.println("On the list:");
@@ -54,11 +59,11 @@ public class Storage {
 
     /**
      * Handles the conditions for checking if the File exist before
-     * saving the bernie.tasks with the save function. If File doesn't exist,
+     * saving the tasks with the save function. If File doesn't exist,
      * the required files will be created before save
-     * @param tasks TaskList, takes in the current bernie.tasks
+     * @param tasks TaskList, takes in the current tasks
      */
-    void saveTasks(TaskList tasks) {
+    public void saveTasks(TaskList tasks) {
         try {
             if (dataDir.exists() && tasksFile.exists()) {
                 save(tasks);
@@ -75,9 +80,9 @@ public class Storage {
     }
 
     /**
-     * Saves the most updated bernie.tasks whenever the bernie.tasks changes upon
+     * Saves the most updated tasks whenever the tasks changes upon
      * delete or add by writing the file. The file is saved to ./data/Bernie.txt
-     * @params bernie.tasks TaskList, takes in the current bernie.tasks
+     * @params tasks TaskList, takes in the current tasks
      * @throws IOException
      */
     void save(TaskList tasks) throws IOException {

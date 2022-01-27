@@ -1,3 +1,5 @@
+package bernie.tasks;
+
 public class ToDo extends Task {
     /**
      * Constructs a ToDo class for a general Task
