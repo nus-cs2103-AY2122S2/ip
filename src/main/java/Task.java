@@ -8,7 +8,7 @@ public class Task {
     }
 
     /**
-     * Provide status info of a task.
+     * Provides status info of a task.
      *
      * @return "X" if the task is done; " " if it is not.
      */
@@ -17,25 +17,33 @@ public class Task {
     }
 
     /**
-     * Mark a task as done.
+     * Marks a task as done.
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * Unmark a task.
+     * Unmarks a task.
      */
 	public void unmarkAsDone() {
 		this.isDone = false;
 	}
 
     /**
-     * Provide the status info and description of a task.
+     * Provides the status info and description of a task.
      *
      * @return A string includes status and description.
      */
     public String toString() {
         return ("[" + this.getStatusIcon() + "] " + this.description);
+    }
+
+    /**
+     * Provides the string representation of the task for data storage
+     */
+    public String toStoreInfo() {
+        String status = isDone ? "1" : "0";
+        return " | " + status + " | " + this.description + "\n";
     }
 }

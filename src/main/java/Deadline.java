@@ -17,4 +17,13 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + time + ")";
     }
+
+    /**
+     * Provides the string representation of the task for data storage
+     */
+    @Override
+    public String toStoreInfo() {
+        String status = isDone ? "1" : "0";
+        return "D | " + status + " | " + this.description + " | " + this.time + "\n";
+    }
 }

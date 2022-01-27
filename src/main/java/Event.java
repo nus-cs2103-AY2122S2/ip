@@ -17,4 +17,12 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.time + ")";
     }
+
+    /**
+     * Provides the string representation of the task for data storage
+     */
+    public String toStoreInfo() {
+        String status = isDone ? "1" : "0";
+        return "E | " + status + " | " + this.description + " | " + this.time + "\n";
+    }
 }
