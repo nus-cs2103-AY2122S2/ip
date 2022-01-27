@@ -47,13 +47,13 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                + (time != null ? (" " + time.format(DateTimeFormatter.ofPattern("HH:mm"))) : "") + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + (
+                time != null ? (" " + time.format(DateTimeFormatter.ofPattern("HH:mm"))) : "") + ")";
     }
 
     @Override
     public String getFileString() {
-        return "D|" + (isDone == true ? "1|" : "0|") + getDescription() + "|" + getBy()
-                + (time != null ? (" " + time.toString()) : "") + "\n";
+        return "D|" + (isDone == true ? "1|" : "0|") + getDescription() + "|" + getBy() + (
+                time != null ? (" " + time) : "") + "\n";
     }
 }

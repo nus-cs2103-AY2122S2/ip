@@ -47,13 +47,13 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                + (time != null ? (" " + time.format(DateTimeFormatter.ofPattern("HH:mm"))) : "") + ")";
+        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + (
+                time != null ? (" " + time.format(DateTimeFormatter.ofPattern("HH:mm"))) : "") + ")";
     }
 
     @Override
     public String getFileString() {
-        return "E|" + (isDone == true ? "1|" : "0|") + getDescription() + "|" + getAt()
-                + (time != null ? (" " + time.toString()) : "") + "\n";
+        return "E|" + (isDone == true ? "1|" : "0|") + getDescription() + "|" + getAt() + (
+                time != null ? (" " + time) : "") + "\n";
     }
 }

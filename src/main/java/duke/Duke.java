@@ -1,12 +1,13 @@
 package duke;
 
 import duke.task.*;
+
 import java.util.Scanner;
 
 public class Duke {
 
-    private Ui ui;
-    private Storage storage;
+    private final Ui ui;
+    private final Storage storage;
     private TaskList tasks;
 
     public Duke(String fileName) {
@@ -14,10 +15,13 @@ public class Duke {
         storage = new Storage(fileName);
         try {
             tasks = new TaskList(storage.ParseFile());
-        }
-        catch (DukeException e) {
+        } catch (DukeException e) {
             ui.sayMessage(e.getErrorMsg());
         }
+    }
+
+    public static void main(String[] args) {
+        new Duke("save.txt").run();
     }
 
     public void run() {
@@ -29,7 +33,7 @@ public class Duke {
             try {
                 String input = scanner.nextLine();
                 Parser.RESULT parseResult = parser.parseInput(input);
-                switch(parseResult) {
+                switch (parseResult) {
                 case BYE:
                     ui.sayGoodbye();
                     storage.OverwriteFile(tasks.getTasks());
@@ -42,8 +46,7 @@ public class Duke {
                     int index = parser.parseIndex(input);
                     if (index < tasks.getTasks().size()) {
                         tasks.markTaskDone(index);
-                        ui.sayMessage("Nice! I've marked this task as done:\n" +
-                                tasks.getTask(index).toString());
+                        ui.sayMessage("Nice! I've marked this task as done:\n" + tasks.getTask(index).toString());
                     } else {
                         throw new DukeException("No such task exists.");
                     }
@@ -54,8 +57,7 @@ public class Duke {
                     int index = parser.parseIndex(input);
                     if (index < tasks.getTasks().size()) {
                         tasks.markTaskNotDone(index);
-                        ui.sayMessage("Nice! I've marked this task as not done:\n" +
-                                tasks.getTask(index).toString());
+                        ui.sayMessage("Nice! I've marked this task as not done:\n" + tasks.getTask(index).toString());
                     } else {
                         throw new DukeException("No such task exists.");
                     }
@@ -66,8 +68,7 @@ public class Duke {
                     int index = parser.parseIndex(input);
                     if (index < tasks.getTasks().size()) {
                         Task removedTask = tasks.removeTask(index);
-                        ui.sayMessage("Noted. I've removed this task:\n" +
-                                removedTask.toString());
+                        ui.sayMessage("Noted. I've removed this task:\n" + removedTask.toString());
                     } else {
                         throw new DukeException("No such task exists.");
                     }
@@ -76,25 +77,28 @@ public class Duke {
                 case TODO: {
                     Todo newTodo = new Todo(parser.parseTodo(input));
                     tasks.addTask(newTodo);
-                    ui.sayMessage("Got it. I've added this task:\n" + newTodo.toString() + "\n" + "Now you have "
-                            + tasks.getTasks().size() + " tasks in the list.");
+                    ui.sayMessage(
+                            "Got it. I've added this task:\n" + newTodo + "\n" + "Now you have " + tasks.getTasks()
+                                    .size() + " tasks in the list.");
                     storage.OverwriteFile(tasks.getTasks());
                     break;
                 }
                 case DEADLINE:
                     String[] deadlineInput = parser.parseDeadline(input);
-                    Deadline newDeadline = new Deadline(deadlineInput[0],deadlineInput[1]);
+                    Deadline newDeadline = new Deadline(deadlineInput[0], deadlineInput[1]);
                     tasks.addTask(newDeadline);
-                    ui.sayMessage("Got it. I've added this task:\n" + newDeadline.toString() + "\n" + "Now you have "
-                            + tasks.getTasks().size() + " tasks in the list.");
+                    ui.sayMessage(
+                            "Got it. I've added this task:\n" + newDeadline + "\n" + "Now you have " + tasks.getTasks()
+                                    .size() + " tasks in the list.");
                     storage.OverwriteFile(tasks.getTasks());
                     break;
                 case EVENT:
                     String[] eventInput = parser.parseEvent(input);
                     Event newEvent = new Event(eventInput[0], eventInput[1]);
                     tasks.addTask(newEvent);
-                    ui.sayMessage("Got it. I've added this task:\n" + newEvent.toString() + "\n" + "Now you have "
-                            + tasks.getTasks().size() + " tasks in the list.");
+                    ui.sayMessage(
+                            "Got it. I've added this task:\n" + newEvent + "\n" + "Now you have " + tasks.getTasks()
+                                    .size() + " tasks in the list.");
                     storage.OverwriteFile(tasks.getTasks());
                     break;
                 case ERROR:
@@ -104,9 +108,5 @@ public class Duke {
                 ui.sayMessage(e.getErrorMsg());
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("save.txt").run();
     }
 }

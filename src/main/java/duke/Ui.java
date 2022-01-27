@@ -2,10 +2,12 @@ package duke;
 
 import duke.task.Task;
 import duke.task.TaskList;
+
 import java.util.List;
 
 public class Ui {
     private static final String LINES = "____________________________________________________________";
+
     Ui() {
     }
 

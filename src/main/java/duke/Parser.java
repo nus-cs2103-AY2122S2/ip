@@ -1,18 +1,6 @@
 package duke;
 
 public class Parser {
-    public enum RESULT {
-        BYE,
-        LIST,
-        MARK,
-        UNMARK,
-        DELETE,
-        TODO,
-        DEADLINE,
-        EVENT,
-        ERROR
-    }
-
     public Parser() {
     }
 
@@ -74,6 +62,7 @@ public class Parser {
             }
         }
     }
+
     public String[] parseEvent(String input) throws DukeException {
         String[] split = input.split(" ");
         if (split.length < 2) {
@@ -87,6 +76,10 @@ public class Parser {
                 throw new DukeException("You are missing the date!.");
             }
         }
+    }
+
+    public enum RESULT {
+        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, ERROR
     }
 
 }
