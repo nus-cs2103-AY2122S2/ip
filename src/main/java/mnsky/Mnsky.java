@@ -43,47 +43,39 @@ public class Mnsky {
 
             try {
                 switch (parsedInput.get(0)) {
-                    case "bye":
-                        ui.printBye();
-                        isRunning = false;
-                        break;
-
-                    case "list":
-                        ui.printList(taskList);
-                        break;
-
-                    case "mark":
-                        Task markedTask = taskList.mark(parsedInput.get(1));
-                        ui.printTask(markedTask);
-                        break;
-
-                    case "unmark":
-                        Task unmarkedTask = taskList.unmark(parsedInput.get(1));
-                        ui.printTask(unmarkedTask);
-                        break;
-
-                    case "task":
-                        Task task = taskList.addTask(parsedInput.get(1));
-                        ui.printAddedTask(task);
-                        break;
-
-                    case "event":
-                        Event event = taskList.addEvent(parsedInput.get(1), parsedInput.get(2));
-                        ui.printAddedTask(event);
-                        break;
-
-                    case "deadline":
-                        Deadline deadline = taskList.addDeadline(parsedInput.get(1), parsedInput.get(2));
-                        ui.printAddedTask(deadline);
-                        break;
-
-                    case "delete":
-                        Task deleted = taskList.delete(parsedInput.get(1));
-                        ui.printDeletedTask(deleted);
-                        break;
-
-                    default:
-                        ui.printMnsky("...");
+                case "bye":
+                    ui.printBye();
+                    isRunning = false;
+                    break;
+                case "list":
+                    ui.printList(taskList);
+                    break;
+                case "mark":
+                    Task markedTask = taskList.mark(parsedInput.get(1));
+                    ui.printTask(markedTask);
+                    break;
+                case "unmark":
+                    Task unmarkedTask = taskList.unmark(parsedInput.get(1));
+                    ui.printTask(unmarkedTask);
+                    break;
+                case "task":
+                    Task task = taskList.addTask(parsedInput.get(1));
+                    ui.printAddedTask(task);
+                    break;
+                case "event":
+                    Event event = taskList.addEvent(parsedInput.get(1), parsedInput.get(2));
+                    ui.printAddedTask(event);
+                    break;
+                case "deadline":
+                    Deadline deadline = taskList.addDeadline(parsedInput.get(1), parsedInput.get(2));
+                    ui.printAddedTask(deadline);
+                    break;
+                case "delete":
+                    Task deleted = taskList.delete(parsedInput.get(1));
+                    ui.printDeletedTask(deleted);
+                    break;
+                default:
+                    ui.printMnsky("...");
                 }
             } catch (MnskyException e) {
                 ui.printException(e);

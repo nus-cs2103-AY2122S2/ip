@@ -141,43 +141,35 @@ public class Parser {
         ArrayList<String> parsedInput = new ArrayList<>();
 
         switch (inputSplit[0]) {
-            case "bye":
-                parsedInput.add("bye");
-                break;
-
-            case "list":
-                parsedInput.add("list");
-                break;
-
-            case "mark":
-                parsedInput.add("mark");
-                parsedInput.add(retrieveIndex("mark", inputSplit));
-                break;
-
-            case "unmark":
-                parsedInput.add("unmark");
-                parsedInput.add(retrieveIndex("unmark", inputSplit));
-                break;
-
-            case "todo":
-                parsedInput = parseTask(input);
-                break;
-
-            case "event":
-                parsedInput = parseEvent(inputSplit);
-                break;
-
-            case "deadline":
-                parsedInput = parseDeadline(inputSplit);
-                break;
-
-            case "delete":
-                parsedInput.add("delete");
-                parsedInput.add(retrieveIndex("delete", inputSplit));
-                break;
-
-            default:
-                parsedInput.add("invalid");
+        case "bye":
+            parsedInput.add("bye");
+            break;
+        case "list":
+            parsedInput.add("list");
+            break;
+        case "mark":
+            parsedInput.add("mark");
+            parsedInput.add(retrieveIndex("mark", inputSplit));
+            break;
+        case "unmark":
+            parsedInput.add("unmark");
+            parsedInput.add(retrieveIndex("unmark", inputSplit));
+            break;
+        case "todo":
+            parsedInput = parseTask(input);
+            break;
+        case "event":
+            parsedInput = parseEvent(inputSplit);
+            break;
+        case "deadline":
+            parsedInput = parseDeadline(inputSplit);
+            break;
+        case "delete":
+            parsedInput.add("delete");
+            parsedInput.add(retrieveIndex("delete", inputSplit));
+            break;
+        default:
+            parsedInput.add("invalid");
         }
 
         return parsedInput;
