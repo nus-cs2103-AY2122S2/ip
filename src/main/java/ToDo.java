@@ -10,7 +10,7 @@
 
 public class ToDo extends Task {
 
-    public ToDo(String n, boolean d) {
+    public ToDo(String n, int d) {
         super(n, d);
         super.type = 'T';
     }
@@ -18,7 +18,8 @@ public class ToDo extends Task {
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
-        res.append(getTaskIcon()).append(this.getDoneIcon());
+        res.append(getTaskIcon()).append(" - ");
+        res.append(this.getDoneIcon()).append(" - ");
         res.append(this.name).append("\n");;
         return res.toString();
     }

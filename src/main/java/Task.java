@@ -10,10 +10,10 @@
 
 public abstract class Task {
     protected String name;
-    protected boolean done;
+    protected int done;
     protected Character type;
 
-    public Task(String n, boolean d) {
+    public Task(String n, int d) {
         name = n;
         done = d;
     }
@@ -22,7 +22,7 @@ public abstract class Task {
         return name;
     }
 
-    public boolean getDone() {
+    public int getDone() {
         return done;
     }
 
@@ -34,7 +34,7 @@ public abstract class Task {
         this.name = name;
     }
 
-    public void setDone(boolean done) {
+    public void setDone(int done) {
         this.done = done;
     }
 
@@ -45,16 +45,14 @@ public abstract class Task {
     /**
      * Sets the Task to be done
      */
-    public String getDoneIcon() {
-        return getDone()
-                ? "[X]"
-                : "[ ]";
+    public int getDoneIcon() {
+        return getDone();
     }
 
     /**
      * Sets the Task's type of: Todo, Deadline, Event
      */
     public String getTaskIcon() {
-        return String.format("[%c]", type);
+        return String.format("%c", type);
     }
 }

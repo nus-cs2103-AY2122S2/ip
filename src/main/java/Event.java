@@ -11,7 +11,7 @@
 public class Event extends Task {
     protected String at;
 
-    public Event(String n, boolean d, String a) {
+    public Event(String n, int d, String a) {
         super(n, d);
         super.type = 'E';
         at = a;
@@ -20,8 +20,9 @@ public class Event extends Task {
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
-        res.append(getTaskIcon()).append(this.getDoneIcon());
-        res.append(this.name).append("\n");;
+        res.append(getTaskIcon()).append(" - ");
+        res.append(this.getDoneIcon()).append(" - ");
+        res.append(this.name).append(" - ");;
         res.append(at).append("\n");
         return res.toString();
     }
