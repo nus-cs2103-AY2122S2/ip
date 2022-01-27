@@ -12,4 +12,9 @@ public class ListCommand extends Command {
         tasks.sortTaskList();
         ui.printTaskList(tasks);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof ListCommand;
+    }
 }

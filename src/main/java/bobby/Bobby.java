@@ -5,6 +5,8 @@ import bobby.command.Command;
 import bobby.exception.BobbyException;
 import bobby.task.TaskList;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Bobby {
@@ -16,11 +18,9 @@ public class Bobby {
     public Bobby(String filePath) {
         ui = new Ui(new Scanner(System.in));
         try {
-            storage = new Storage(FILE_LOCATION);
+            storage = new Storage(new File(FILE_LOCATION));
             tasks = new TaskList(storage.loadTasks());
-        } catch (BobbyException e) {
-            ui.print(e.getMessage());
-            ui.printLoadingError();
+        } catch (BobbyException | FileNotFoundException e) {
             tasks = new TaskList();
         }
     }

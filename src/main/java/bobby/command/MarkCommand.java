@@ -36,4 +36,9 @@ public class MarkCommand extends Command {
         storage.saveTasks(tasks.getTaskList());
         ui.markMessage(task);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof MarkCommand;
+    }
 }

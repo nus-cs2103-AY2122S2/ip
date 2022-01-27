@@ -12,11 +12,9 @@ public class StorageException extends BobbyException {
     public String toString() {
         String error_string;
         switch(errtype) {
-        case "file_not_found": error_string = "\tFile not found. Creating file now. (づ｡◕‿‿◕｡)づ";
+        case "no_file": error_string = "\tFile not found. Creating file now. (づ｡◕‿‿◕｡)づ";
             break;
-        case "io": error_string = "";
-            break;
-        case "storage": error_string = "\t";
+        case "empty_file": error_string = "Empty file found! Nothing to import";
             break;
         default: error_string = "\tSomething went wrong. Couldn't save or load tasks";
         }

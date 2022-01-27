@@ -44,5 +44,10 @@ public class DeleteCommand extends Command {
         storage.saveTasks(tasks.getTaskList());
         ui.printNumTasks(tasks);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof DeleteCommand;
+    }
 }
 

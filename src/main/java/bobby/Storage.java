@@ -5,6 +5,7 @@ import bobby.task.Task;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -12,21 +13,23 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class Storage {
-    private final File bobbyFile;
+    private File bobbyFile;
 
-    public Storage(String filepath) {
-        this.bobbyFile = new File(filepath);
+    public Storage(File dataFile) {
+        this.bobbyFile = dataFile;
     }
 
     @SuppressWarnings("unchecked")
-    public ArrayList<Task> loadTasks() throws StorageException {
-        ArrayList<Task> task = new ArrayList<>();
+    public ArrayList<Task> loadTasks() throws StorageException, FileNotFoundException {
+        ArrayList<Task> task;
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(bobbyFile));
             task = (ArrayList<Task>) ois.readObject();
             ois.close();
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println("test");
+        } catch (ClassNotFoundException | FileNotFoundException e) {
+            throw new StorageException("no_file");
+        } catch (IOException e) {
+            throw new StorageException("empty_file");
         }
         return task;
     }

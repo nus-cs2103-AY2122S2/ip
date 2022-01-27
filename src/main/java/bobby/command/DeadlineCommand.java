@@ -12,12 +12,10 @@ import java.text.SimpleDateFormat;
 
 public class DeadlineCommand extends Command {
     private String fullCommand;
-    private String[] fullCommandArr;
-    private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
+    private final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
 
-    public DeadlineCommand(String fullCommand, String[] fullCommandArr) {
+    public DeadlineCommand(String fullCommand) {
         this.fullCommand = fullCommand;
-        this.fullCommandArr = fullCommandArr;
     }
 
     public boolean isValidDate(String input) {
@@ -50,5 +48,10 @@ public class DeadlineCommand extends Command {
         tasks.addTask(newDeadline);
         storage.saveTasks(tasks.getTaskList());
         ui.printNumTasks(tasks);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof DeadlineCommand;
     }
 }

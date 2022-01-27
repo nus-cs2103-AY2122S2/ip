@@ -10,4 +10,6 @@ public abstract class Command {
     }
 
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws BobbyException;
+    @Override
+    public abstract boolean equals(Object obj);
 }

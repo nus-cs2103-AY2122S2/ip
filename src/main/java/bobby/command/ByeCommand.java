@@ -10,4 +10,9 @@ public class ByeCommand extends Command {
         ui.goodbyeMessage();
         storage.saveTasks(tasks.getTaskList());
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof ByeCommand;
+    }
 }

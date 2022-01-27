@@ -12,15 +12,16 @@ import java.text.SimpleDateFormat;
 
 public class EventCommand extends Command {
     private String fullCommand;
-    private String[] fullCommandArr;
-    private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
+    private final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
 
-    public EventCommand(String fullCommand, String[] fullCommandArr) {
+    public EventCommand(String fullCommand) {
         this.fullCommand = fullCommand;
-        this.fullCommandArr = fullCommandArr;
     }
 
     public boolean isValidDate(String input) {
+        if (input.contains("[a-zA-Z]+") || input.length() != 10) {
+            return false;
+        }
         try {
             SIMPLE_DATE_FORMAT.setLenient(false);
             SIMPLE_DATE_FORMAT.parse(input);
@@ -50,5 +51,10 @@ public class EventCommand extends Command {
         tasks.addTask(newEvent);
         storage.saveTasks(tasks.getTaskList());
         ui.printNumTasks(tasks);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof EventCommand;
     }
 }

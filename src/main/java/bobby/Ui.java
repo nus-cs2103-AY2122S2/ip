@@ -28,10 +28,6 @@ public class Ui {
     private final String goodbye = "\tBye! Hope to see you again soon! (｡^‿‿^｡)";
     private final String invalid = "\tInvalid command!   (╯°□°)╯︵ ┻━┻ ︵ ╯(°□° ╯)";
 
-    public void printLoadingError() {
-        System.out.println("Error in loading file");
-    }
-
     public void printLongLine() {
         System.out.print(line1);
     }
@@ -64,7 +60,7 @@ public class Ui {
     }
 
     public String readCommand() {
-        return sc.nextLine().toLowerCase();
+        return sc.nextLine();
     }
 
     public void printTaskList(TaskList tasks) {

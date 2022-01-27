@@ -36,4 +36,9 @@ public class UnmarkCommand extends Command {
         storage.saveTasks(tasks.getTaskList());
         ui.unmarkMessage(task);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof UnmarkCommand;
+    }
 }
