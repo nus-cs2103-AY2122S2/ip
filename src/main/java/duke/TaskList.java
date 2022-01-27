@@ -9,12 +9,6 @@ public class TaskList {
         tasklist = new ArrayList<Task>();
     }
 
-    public static void markTaskNum(int taskNum, String check){
-        if (check.equals("true") && (taskNum > 0)) {
-            tasklist.get(taskNum).mark();
-        }
-    }
-
     /**
      * Deletes a specified index (starts from 1) from the input ArrayList and shifts
      * all subsequent task numbers accordingly by +1.
@@ -24,7 +18,7 @@ public class TaskList {
     public static void deleter(int num){
         if (num > 0 && num <= Task.totalTask){
             num--;
-            Ui.printRemovedThisTask(num);
+            Ui.PrintRemoveThisTask(num);
             tasklist.remove(num);
             Task.totalTask--;
             for(int i = num; i <Task.totalTask; i++){
@@ -55,19 +49,6 @@ public class TaskList {
             Ui.printMarkTaskNotDone(curr);
         }
         Storage.writeAllToFile();
-    }
-
-
-    public static void addTask(String name, String time, String type, boolean isReading){
-        Task task;
-        if (type.equals("D")){
-            task = new Deadline(name, Task.totalTask, time, isReading);
-        } else if (type.equals("E")){
-            task = new Event(name, Task.totalTask, time, isReading);
-        } else {
-            task = new ToDo(name, Task.totalTask, isReading);
-        }
-        tasklist.add(task);
     }
 
 }

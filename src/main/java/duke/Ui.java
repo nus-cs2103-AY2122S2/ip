@@ -47,7 +47,7 @@ public class Ui {
         System.out.println("__________________________________________________________________");
     }
 
-    public static void printRemovedThisTask(int num){
+    public static void PrintRemoveThisTask(int num){
         System.out.println(" Noted. I've removed this task: ");
         System.out.printf("  [%s][%s] %s\n",TaskList.tasklist.get(num).type, TaskList.tasklist.get(num).getStatus(), TaskList.tasklist.get(num).name);
     }
@@ -66,7 +66,7 @@ public class Ui {
         System.out.printf("Now you have %d task on the list.\n", Task.totalTask);
     }
 
-    public static void printAddingTasks(Task task){
+    public static void printAddThisTask(Task task){
         System.out.println("Got it. I've added this task: ");
         if (task.type.equals("D")) {
             System.out.printf(" [D][%s] %s (by: %s) \n", task.getStatus(), task.name, task.time);
