@@ -1,5 +1,7 @@
+package duke;
+
 /**
- * Task object that stores event type, task name,
+ * duke.Task object that stores event type, task name,
  * completion status and deadline (optional)
  *
  * @param description Name of task

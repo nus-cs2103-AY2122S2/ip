@@ -1,6 +1,8 @@
+package duke;
+
 public class EventEmptyException extends DukeException {
     /**
-     * Returns an EventEmptyException if an empty event is found
+     * Returns an duke.EventEmptyException if an empty event is found
      *
      * @author  Ryan Aidan
      */

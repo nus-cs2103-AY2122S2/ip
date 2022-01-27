@@ -1,6 +1,8 @@
+package duke;
+
 public class UnknownCommandException extends DukeException {
     /**
-     * Returns an UnknownCommandException if an unknown command
+     * Returns an duke.UnknownCommandException if an unknown command
      * is entered by the user
      *
      * @author  Ryan Aidan

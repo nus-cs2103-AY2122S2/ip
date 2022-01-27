@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -31,7 +33,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        String welcomeMsg = "Hello! I'm Duke\n"
+        String welcomeMsg = "Hello! I'm duke.Duke\n"
                 + "What can I do for you?\n";
         System.out.println(formatMsg(welcomeMsg));
     }
@@ -46,7 +48,7 @@ public class Duke {
     /**
      * Returns string of stored data as an indexed list
      *
-     * @param data arrayList of Task data
+     * @param data arrayList of duke.Task data
      * @return     data as a list in a single string
      */
     public static String renderTaskList(ArrayList<Task> data) {
@@ -65,7 +67,7 @@ public class Duke {
     /**
      * Display message after marking task as complete
      *
-     * @param task Task to be marked as complete
+     * @param task duke.Task to be marked as complete
      */
     public static void displayMarkMsg(String task) {
         String markMsg = "Nice! I've marked this task as done:\n"
@@ -76,7 +78,7 @@ public class Duke {
     /**
      * Display message after marking task as incomplete
      *
-     * @param task Task to be marked as incomplete
+     * @param task duke.Task to be marked as incomplete
      */
     public static void displayUnmarkMsg(String task) {
         String unmarkMsg = "Nice! I've marked this task as NOT done:\n"
@@ -99,7 +101,7 @@ public class Duke {
         String[] timingSplit = fullDateString.split("to");
 
         if (timingSplit.length < 2) {
-            System.out.println("Error, Event must contain both start & end timings!");
+            System.out.println("Error, duke.Event must contain both start & end timings!");
             return new String[]{};
         } else {
             String dateText = timingSplit[0].trim().split(" ")[0];
@@ -122,7 +124,7 @@ public class Duke {
     /**
      * Display deletion message after deleting task
      *
-     * @param deletedTask Task that was deleted
+     * @param deletedTask duke.Task that was deleted
      * @param size Number of tasks remaining in list
      */
     public static void displayDeletedMessage(Task deletedTask, int size) {
@@ -183,12 +185,12 @@ public class Duke {
                     // if event starts with T, initialise as TODO
                     storedTask = new Todo(taskName);
                 } else if (taskLineSplit[0].equals("E")) {
-                    // if event starts with E, initialise as Event
+                    // if event starts with E, initialise as duke.Event
                     String startTime = taskLineSplit[taskLineSplit.length - 2];
                     String endTime = taskLineSplit[taskLineSplit.length - 1];
                     storedTask = new Event(taskName, startTime, endTime);
                 } else {
-                    // otherwise, event must start with D, initialise as Deadline
+                    // otherwise, event must start with D, initialise as duke.Deadline
                     String endTime = taskLineSplit[taskLineSplit.length - 1];
                     storedTask = new Deadline(taskName, endTime);
                 }
@@ -262,7 +264,7 @@ public class Duke {
      * Runs Level 5, 6 & 7 version of the app, Exception handling,
      * Hard disk storage
      *
-     * @throws DukeException for checked errors handled by Duke app
+     * @throws DukeException for checked errors handled by duke.Duke app
      */
     public static void levelFinal() throws DukeException {
         displayWelcomeMsg();

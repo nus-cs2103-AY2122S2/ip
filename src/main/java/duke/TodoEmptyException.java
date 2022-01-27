@@ -1,6 +1,8 @@
+package duke;
+
 public class TodoEmptyException extends DukeException {
     /**
-     * Returns a TodoEmptyException if an empty TODO event
+     * Returns a duke.TodoEmptyException if an empty TODO event
      * is entered by the user
      *
      * @author  Ryan Aidan
