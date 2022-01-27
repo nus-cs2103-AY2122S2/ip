@@ -16,198 +16,54 @@ import java.time.LocalDate;
 //import java.io.*;
 //import java.util.*;
 
+/**
+ * Represents the Duke bot
+ */
 public class Duke {
 
-    public static void output_matching_deadline(List<Task> all, LocalDate input_date) {
-        List<Task> match_date = new ArrayList<Task>();
-        for (Task t : all) {
-            if (Task.isDeadline(t)) {
-                Deadline d = (Deadline) t;
-                if (d.getDate().equals(input_date.toString())) {
-                    match_date.add(t);
-                }
-            }
-        }
-        System.out.println("Here you go! Hope it includes the event you were looking for:)");
-        for (Task t : match_date) {
-            System.out.println(t);
-        }
-    }
+    private Storage storage;
+    private TaskList tasklist;
+    private Ui ui;
 
-    private static void getFileContent(String filePath) throws FileNotFoundException {
-        // print all contents in file
-        File f = new File(filePath);
-        Scanner s = new Scanner(f);
-        while (s.hasNext()) {
-            System.out.println((s.nextLine()));
+    public Duke(String filepath) throws DukeException {
+        ui = new Ui();
+        ui.showWelcome();
+        storage = new Storage(filepath);
+        try {
+            tasklist = new TaskList(storage.getAllTasks());
+        } catch (DukeException e) {
+            tasklist = new TaskList();
+        } catch (IOException e) {
+            System.exit(0);
+        } catch (DukeDeadlineException e) {
+            ui.showError(e.getMessage());
+            tasklist = new TaskList();
         }
     }
 
-    public static void writeToFile(List<Task> taskList, String filepath) throws IOException {
-        FileWriter fw = new FileWriter(filepath);
-
-        // go through all Task object and write to filepath
-        for (int i = 1; i <= taskList.size(); i++) {
-            fw.write(i + ". " + taskList.get(i - 1));
-            fw.write('\n');
-        }
-        fw.close();
+    public static void main(String[] args) throws DukeException {
+        new Duke("src/main/data/duke.txt").run();
     }
 
-
-    public static void main(String[] args) throws DukeException, DukeDeadlineException, IOException {
-
-        String filepath = "src/main/data/duke.txt";
-
-        // check directory
-        File directory = new File("src/main/data");
-        if (!directory.exists()) {
-            System.out.println("No such directory but let me make one for you !");
-            directory.mkdir();
-        }
-
-        // check directory
-        File file = new File(filepath);
-
-        System.out.println("Oh hello dear, I'm Dukie, Zi Xin's favourite chattie box\n" +
-                "Nice to meet you dear:>\n" +
-                "What can I do for you?");
-
-        Scanner myObj = new Scanner(System.in); //Create a Scanner object
-        String input; //declare a string variable to store input
-        List<Task> all = new ArrayList<Task>(); //ArrayList of Task
-
-        while (myObj.hasNextLine()) {
-            input = myObj.nextLine();
-
-            if (input.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!"); //ending sentence
-                System.exit(0);
-            } else { //check input not "bye"
-                String[] words = input.split(" ", 2);
-
-                if (input.equals("list")) { //if list
-                    writeToFile(all, filepath);
-                    System.out.println("Here are the tasks in your list:");
-
-                    // check file exist, if exists > list
-                    try {
-                        getFileContent(filepath);
-                    } catch (FileNotFoundException e) {
-                        System.out.println("I can't find duke.txt:( but I shall make one for you!");
-                    }
-                } else if (words[0].equals("mark")) {
-                    int n = Integer.parseInt(words[1]);
-
-                    all.get(n - 1).markDone();
-                    // reload new content to duke.txt
-                    try {
-                        writeToFile(all, filepath);
-                    } catch (IOException e) {
-                        System.out.println("Something went wrong when update file duke.txt:(");
-                    }
-
-
-                } else if (words[0].equals("unmark")) {
-                    int n = Integer.parseInt(words[1]);
-
-                    // call Task method, mark task as not done
-                    all.get(n - 1).unMarkDone();
-
-                    // reload new content to duke.txt
-                    try {
-                        writeToFile(all, filepath);
-                    } catch (IOException e) {
-                        System.out.println("Something went wrong when update file duke.txt:(");
-                    }
-
-                } else if (words[0].equals("delete")) {
-                    int n = Integer.parseInt(words[1]);
-
-                    // remove Task from List
-                    all.remove(n - 1);
-                    try {
-                        System.out.println("Now you have " + all.size() + " tasks in the list.");
-                        writeToFile(all, filepath);
-                    } catch (IOException e) {
-                        System.out.println("Something went wrong when adding to file duke.txt:(");
-                    }
-                } else if (words[0].equals("find")) {
-                    // get all deadline tasks that matches input date
-                    String input_date = words[1];
-
-                    try {
-                        LocalDate localdate = LocalDate.parse(input_date);
-                        Duke.output_matching_deadline(all, localdate);
-                    } catch (Exception e) {
-                        DukeException ex = new DukeException("Please input date in the format YYYY-MM-DD to be found");
-                        System.out.println(ex.getMessage());
-                    }
-                }
-                else {
-                    // handle adding of Tasks or ending statement
-                    if (words[0].equals("todo")) {
-                        try {
-                            ToDo item = new ToDo(words[1]);
-                            all.add(item);
-                            System.out.println("Got it. I've added this task: ");
-                            System.out.println(item);
-
-                            // update storage file
-                            writeToFile(all, filepath);
-                            System.out.println(" Now you have " + all.size() + " tasks in the list.");
-
-                        } catch (IOException e) {
-                            System.out.println("Something went wrong when adding to file duke.txt:(");
-                        } catch (Exception e) {
-                            DukeTodoException error = new DukeTodoException("OOPS!!! The description of a todo cannot be empty.");
-                            System.out.println(error.getMessage());
-                        }
-                    } else if (words[0].equals("deadline")) {
-                        try {
-                            Deadline item = Deadline.setDeadline(words[1]);
-                            if (item != null) {
-                                all.add(item);
-//                                System.out.println("Got it. I've added this task: ");
-//                                System.out.println(item);
-
-                                // update storage file
-                                writeToFile(all, filepath);
-                                System.out.println(" Now you have " + all.size() + " tasks in the list."); //print when new task added
-
-                            }
-                        } catch (Exception e) {
-                            DukeDeadlineException d = new DukeDeadlineException("OOPS!!! Please re-enter.");
-                            System.out.println(d.getMessage());
-                        }
-                    } else if (words[0].equals("event")) {
-                        try {
-                            Event item = Event.setEvent(words[1]);
-                            if (item != null) {
-                                all.add(item);
-                                System.out.println("Got it. I've added this task: ");
-                                System.out.println(item);
-
-                                // update storage file
-                                writeToFile(all, filepath);
-                                System.out.println(" Now you have " + all.size() + " tasks in the list."); //print when new task added
-
-                            }
-                        } catch (IOException e) {
-                            System.out.println("Something went wrong when adding to file duke.txt:(");
-                        } catch (Exception e) {
-                            DukeEventException d = new DukeEventException("OOPS!!! Please re-enter.");
-                            System.out.println(d.getMessage());
-                        }
-                    } else {
-
-                        // if not within listed commands
-                        DukeException d = new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-                        System.out.println(d.getMessage());
-                    }
-
-                }
-
+    public void run() {
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine(); // show the divider line ("_______")
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasklist, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } catch (IOException e) {
+                ui.showError(e.getMessage());
+            } catch (DukeDeadlineException e) {
+                ui.showError(e.getMessage());
+            } catch (DukeEventException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
             }
         }
     }
