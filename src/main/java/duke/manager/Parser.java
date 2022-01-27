@@ -9,6 +9,7 @@ import duke.command.AddDeadlineCommand;
 import duke.command.AddEventCommand;
 import duke.command.DeleteTaskCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 
 /**
  * Represents a parser object to parse the input that is given by the user.
@@ -63,7 +64,7 @@ public class Parser {
                     throw new DukeException("☹ OOPS!!! The date/time of a deadline cannot be empty.");
                 }
                 String by = text[1];
-                return new AddDeadlineCommand(task,by);
+                return new AddDeadlineCommand(task, by);
             }
             case "event": {
                 String[] text = fullCommand.replaceFirst("event", "").split(" /at ");
@@ -83,6 +84,13 @@ public class Parser {
             }
             case "bye": {
                 return new ExitCommand();
+            }
+            case "find": {
+                if (fullCommand.split(" ").length == 1) {
+                    throw new DukeException("☹ OOPS!!! Please enter something for me to find!");
+                }
+                String toFind = fullCommand.split(" ")[1];
+                return new FindCommand(toFind);
             }
             default: {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
