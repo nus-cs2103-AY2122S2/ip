@@ -3,61 +3,61 @@ abstract class Command {
     protected enum CommandName {
         BYE {
             @Override
-            public void run(String parameter, ItemList<Task> taskList) {
+            public void run(String parameter, TaskList taskList) {
                 System.out.println("Arrivederci!");
                 System.exit(0);
             }
         },
         LIST {
             @Override
-            public void run(String parameter, ItemList<Task> taskList) {
+            public void run(String parameter, TaskList taskList) {
                 System.out.println("Here you go sir:");
-                taskList.printList();
+                taskList.printTasks();
             }
         },
         MARK {
             @Override
-            public void run(String parameter, ItemList<Task> taskList) throws DukeExceptions {
+            public void run(String parameter, TaskList taskList) throws DukeExceptions {
                 if (parameter.isBlank())
                     throw EmptyNumber.createEmptyNumber("Mark");
                 try {
-                    taskList.getItem(Integer.parseInt(parameter)).setDone();
+                    taskList.getTask(Integer.parseInt(parameter)).setDone();
                 } catch (IndexOutOfBoundsException e) {
                     throw new ListIndexOutOfBound();
                 }
                 System.out.println("Alright! It's done:");
-                System.out.println(taskList.getItem(Integer.parseInt(parameter)).toString());
+                System.out.println(taskList.getTask(Integer.parseInt(parameter)).toString());
             }  
         },
         UNMARK {
             @Override
-            public void run(String parameter, ItemList<Task> taskList) throws DukeExceptions {
+            public void run(String parameter, TaskList taskList) throws DukeExceptions {
                 if (parameter.isBlank())
                     throw EmptyNumber.createEmptyNumber("Unmark");
                 try {
-                    taskList.getItem(Integer.parseInt(parameter)).setUndone();
+                    taskList.getTask(Integer.parseInt(parameter)).setUndone();
                 } catch (IndexOutOfBoundsException e) {
                     throw new ListIndexOutOfBound();
                 }
                 System.out.println("Alright! It's done:");
-                System.out.println(taskList.getItem(Integer.parseInt(parameter)).toString());
+                System.out.println(taskList.getTask(Integer.parseInt(parameter)).toString());
             }
         },
         TODO {
             @Override
-            public void run(String parameter, ItemList<Task> taskList) throws DukeExceptions {
+            public void run(String parameter, TaskList taskList) throws DukeExceptions {
                 if (parameter.isBlank())
                     throw EmptyTask.createEmptyTask("todo");
                 Task todo = new ToDo(parameter);
-                taskList.addItem(todo);
+                taskList.addTask(todo);
                 System.out.println("Alright! Added that to the list: ");
                 System.out.println(todo.toString());
-                taskList.printNoItems();
+                taskList.printNoTasks();
             }
         },
         DEADLINE {
             @Override
-            public void run(String parameter, ItemList<Task> taskList) throws DukeExceptions {
+            public void run(String parameter, TaskList taskList) throws DukeExceptions {
                 if (parameter.isBlank())
                     throw EmptyTask.createEmptyTask("dateline");
                 int index = parameter.indexOf("/by");
@@ -70,15 +70,15 @@ abstract class Command {
                 if (date.isBlank())
                     throw EmptyDate.createEmptyDate("dateline");
                 Task deadline = new Deadline(task, date);
-                taskList.addItem(deadline);
+                taskList.addTask(deadline);
                 System.out.println("Alright! Added that to the list: ");
                 System.out.println(deadline.toString());
-                taskList.printNoItems();
+                taskList.printNoTasks();
             }
         },
         EVENT {
             @Override
-            public void run(String parameter, ItemList<Task> taskList) throws DukeExceptions {
+            public void run(String parameter, TaskList taskList) throws DukeExceptions {
                 // TODO Auto-generated method stub
                 if (parameter.isBlank())
                     throw EmptyTask.createEmptyTask("event");
@@ -92,23 +92,23 @@ abstract class Command {
                 if (date.isBlank())
                     throw EmptyDate.createEmptyDate("event");
                 Task event = new Event(task, date);
-                taskList.addItem(event);
+                taskList.addTask(event);
                 System.out.println("Alright! Added that to the list: ");
                 System.out.println(event.toString());
-                taskList.printNoItems();
+                taskList.printNoTasks();
             }  
         },
         DELETE {
             @Override
-            public void run(String parameter, ItemList<Task> taskList) throws DukeExceptions {
+            public void run(String parameter, TaskList taskList) throws DukeExceptions {
                 if (parameter.isBlank())
                     throw EmptyNumber.createEmptyNumber("Delete");
                 try {
-                    Task deletedTask = taskList.getItem(Integer.parseInt(parameter));
+                    Task deletedTask = taskList.getTask(Integer.parseInt(parameter));
                     taskList.deleteFromIndex(Integer.parseInt(parameter));
                     System.out.println("Alright, I've deleted this from the list:");
                     System.out.println(deletedTask.toString());
-                    taskList.printNoItems();
+                    taskList.printNoTasks();
                 } catch (IndexOutOfBoundsException e) {
                     throw new ListIndexOutOfBound();
                 }
@@ -116,12 +116,12 @@ abstract class Command {
             }
         };
 
-        public abstract void run(String parameter, ItemList<Task> taskList) throws DukeExceptions;
+        public abstract void run(String parameter, TaskList taskList) throws DukeExceptions;
     }
 
     abstract protected void run() throws DukeExceptions;
 
-    static void runCommand(String input, ItemList<Task> taskList) throws DukeExceptions {
+    static void runCommand(String input, TaskList taskList) throws DukeExceptions {
         String command;
         String parameter = "";
         String[] splited = input.split("\\s+");

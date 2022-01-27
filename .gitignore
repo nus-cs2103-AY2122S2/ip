@@ -23,3 +23,6 @@ text-ui-test/EXPECTED-UNIX.TXT
 
 #temporay files
 *.tmp
+
+#vscode files
+/.vscode/
