@@ -6,8 +6,18 @@ import java.io.*;
 import java.util.ArrayList;
 
 
+/**
+ * Class that deals with storing/saving
+ * data on the hard disk
+ */
 public  class Storage {
 
+    /**
+     * Retrieves saved tasks
+     * from the hard disk
+     *
+     * @return List of Tasks that has been saved on the hard disk
+     */
     // The solution below has been adapted from https://samderlust.com/dev-blog/java/write-read-arraylist-object-file-java
     @SuppressWarnings("unchecked")
     public static ArrayList<Task> getSavedList(){
@@ -29,6 +39,12 @@ public  class Storage {
 
     }
 
+    /**
+     * Saves the given list of tasks to the
+     * hard disk
+     *
+     * @param saved The current list of tasks to be saved to hard disk
+     */
     // The solution below has been adapted from https://samderlust.com/dev-blog/java/write-read-arraylist-object-file-java
     public static void saveListToDisk(ArrayList<Task> saved){
 

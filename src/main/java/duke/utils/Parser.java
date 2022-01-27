@@ -3,8 +3,20 @@ package duke.utils;
 import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 
+/**
+ * Represents instance of Parser class
+ * that deals with interpreting user commands
+ */
 public class Parser {
 
+    /**
+     * Interprets a user's commands
+     * and carries out the command
+     *
+     * @param userInput The current command to be parsed
+     * @param tl Instance of the tasklist at this moment
+     * @throws DukeException If the user's command is not valid
+     */
     public static void parse(String userInput, TaskList tl) throws DukeException {
 
         StringTokenizer st = new StringTokenizer(userInput, " ");

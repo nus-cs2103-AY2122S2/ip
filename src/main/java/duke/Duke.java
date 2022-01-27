@@ -1,12 +1,17 @@
 package duke;
-
-
 import duke.utils.*;
 
+
+/**
+ * Represents an instance of the task
+ * manager
+ */
 public class Duke {
+
 
     private Ui ui;
     private TaskList tl;
+
 
     public Duke(){
         this.ui = new Ui();
