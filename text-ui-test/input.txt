@@ -1,9 +1,7 @@
 list
 todo borrow book
-list
 deadline return book /by this Sunday
 event project meeting /at Tues 2-4pm
-list
 mark 2
 list
 mark 3
@@ -13,4 +11,19 @@ deadline do homework /by no idea :)
 delete 1
 delete 2
 list
+invalidcommand
+
+todo
+deadline
+event
+deadline noby
+event noat
+deadline /by notaskname
+event /at notaskname
+deadline name /by
+event name /at
+mark -15
+mark
+unmark 23
+delete 2323233
 bye

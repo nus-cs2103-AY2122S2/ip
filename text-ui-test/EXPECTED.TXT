@@ -4,18 +4,12 @@ Empty list!
 Athena: Okay, I've added this task to your list.
 [T][ ] borrow book
 Athena: Now you have 1 task in your list.
-Athena: Here's the current list of tasks:
-1. [T][ ] borrow book
 Athena: Okay, I've added this task to your list.
 [D][ ] return book (by: this Sunday)
 Athena: Now you have 2 tasks in your list.
 Athena: Okay, I've added this task to your list.
 [E][ ] project meeting (at: Tues 2-4pm)
 Athena: Now you have 3 tasks in your list.
-Athena: Here's the current list of tasks:
-1. [T][ ] borrow book
-2. [D][ ] return book (by: this Sunday)
-3. [E][ ] project meeting (at: Tues 2-4pm)
 Athena: Alright, I've marked the following task as done:
 [D][X] return book (by: this Sunday)
 Athena: Here's the current list of tasks:
@@ -42,4 +36,19 @@ Athena: Now you have 2 tasks in your list.
 Athena: Here's the current list of tasks:
 1. [D][ ] return book (by: this Sunday)
 2. [D][ ] do homework (by: no idea :))
+Athena: That's an invalid command. Please try again.
+Athena: That's an invalid command. Please try again.
+Athena: Error. Please provide a task name.
+Athena: Error. Please provide a task name.
+Athena: Error. Please provide a task name.
+Athena: Error. Please provide a date and/or time.
+Athena: Error. Please provide a date and/or time.
+Athena: Error. Please provide a task name.
+Athena: Error. Please provide a task name.
+Athena: Error. Please provide a date and/or time.
+Athena: Error. Please provide a date and/or time.
+Athena: Error. There is no such task. Please try again.
+Athena: Error. Please provide a valid task number.
+Athena: Error. There is no such task. Please try again.
+Athena: Error. There is no such task. Please try again.
 Athena: Farewell!

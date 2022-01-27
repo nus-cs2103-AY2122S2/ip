@@ -1,7 +1,5 @@
 import java.util.Scanner;
 
-// TODO: If have time, create own exceptions and encapsulate entire switch statement within try-catch
-
 public class Athena {
     private final TaskList taskList;
     private boolean isActive;
@@ -17,55 +15,46 @@ public class Athena {
             return;
         }
 
+        // Separate out the command keyword from the other arguments given
         String[] splitInput = input.split(" ", 2);
         String command = splitInput[0];
         String arguments = "";
         if (splitInput.length > 1) {
             arguments = splitInput[1];
         }
-        switch (command) {
+        // Run the given command
+        try {
+            switch (command) {
             case "todo":
                 String taskName = readTaskNameForTodo(arguments);
-                if (!taskName.equals("")) {
-                    String taskString = taskList.addTodo(taskName);
-                    sayTaskAddingLines(taskString);
-                }
+                String taskString = taskList.addTodo(taskName);
+                sayTaskAddingLines(taskString);
                 break;
             case "deadline":
                 String[] taskNameAndDate = readTaskNameAndDate(arguments, "/by");
-                if (taskNameAndDate.length != 0) {
-                    String taskString = taskList.addDeadline(taskNameAndDate[0], taskNameAndDate[1]);
-                    sayTaskAddingLines(taskString);
-                }
+                taskString = taskList.addDeadline(taskNameAndDate[0], taskNameAndDate[1]);
+                sayTaskAddingLines(taskString);
                 break;
             case "event":
                 taskNameAndDate = readTaskNameAndDate(arguments, "/at");
-                if (taskNameAndDate.length != 0) {
-                    String taskString = taskList.addEvent(taskNameAndDate[0], taskNameAndDate[1]);
-                    sayTaskAddingLines(taskString);
-                }
+                taskString = taskList.addEvent(taskNameAndDate[0], taskNameAndDate[1]);
+                sayTaskAddingLines(taskString);
                 break;
             case "mark":
                 int taskNumber = readTaskNumberFromInput(arguments);
-                if (taskNumber != -1) {
-                    sayText("Alright, I've marked the following task as done:");
-                    System.out.println(taskList.markTaskAsDone(taskNumber));
-                }
+                sayText("Alright, I've marked the following task as done:");
+                System.out.println(taskList.markTaskAsDone(taskNumber));
                 break;
             case "unmark":
                 taskNumber = readTaskNumberFromInput(arguments);
-                if (taskNumber != -1) {
-                    sayText("Alright, I've marked the following task as not done:");
-                    System.out.println(taskList.markTaskAsNotDone(taskNumber));
-                }
+                sayText("Alright, I've marked the following task as not done:");
+                System.out.println(taskList.markTaskAsNotDone(taskNumber));
                 break;
             case "delete":
                 taskNumber = readTaskNumberFromInput(arguments);
-                if (taskNumber != -1) {
-                    sayText("Alright, I've deleted the following task from the list.");
-                    System.out.println(taskList.deleteTask(taskNumber));
-                    sayNumberOfTasksInList();
-                }
+                sayText("Alright, I've deleted the following task from the list.");
+                System.out.println(taskList.deleteTask(taskNumber));
+                sayNumberOfTasksInList();
                 break;
             case "list":
                 sayText("Here's the current list of tasks:");
@@ -77,57 +66,52 @@ public class Athena {
             default:
                 sayText("That's an invalid command. Please try again.");
                 break;
+            }
+        } catch (AthenaInputException e) {
+            sayText(e.getMessage());
         }
     }
 
-    // Returns - 1 if invalid.
-    private int readTaskNumberFromInput(String input) {
-        int taskNumber;
+    private int readTaskNumberFromInput(String input) throws AthenaInputException {
+        int taskNumber = -1;
         try {
             taskNumber = Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            sayText("Error. I need a valid task number. Please try again.");
-            return -1;
+            throw new AthenaInputException(ErrorCode.MISSING_TASK_NUMBER);
         }
         if (taskNumber < 1 || taskNumber > this.taskList.getNumberOfTasks()) {
-            sayText("Error. The given task number does not exist. Please try again.");
-            return -1;
+            throw new AthenaInputException(ErrorCode.INVALID_TASK_NUMBER);
+        } else {
+            return taskNumber;
         }
-        return taskNumber;
     }
 
-    // Returns "" if invalid.
-    private String readTaskNameForTodo(String input) {
+    private String readTaskNameForTodo(String input) throws AthenaInputException {
         if (input.equals("")) {
-            sayText("Error. Please provide a task name.");
-            return "";
+            throw new AthenaInputException(ErrorCode.MISSING_TASK_NAME);
         }
         return input.strip();
     }
 
-    // Returns empty String array if invalid.
-    private String[] readTaskNameAndDate(String input, String separator) {
-        String missingTaskNameMsg = "Error. Please provide a task name.";
-        String missingDateTimeMsg = "Error. Please provide a date and/or time.";
-
+    private String[] readTaskNameAndDate(String input, String separator) throws AthenaInputException {
         if (input.equals("")) {
-            sayText(missingTaskNameMsg);
-            return new String[0];
+            throw new AthenaInputException(ErrorCode.MISSING_TASK_NAME);
         } else if (!input.contains(separator)) {
-            sayText(missingDateTimeMsg);
-            return new String[0];
+            throw new AthenaInputException(ErrorCode.MISSING_TASK_DATETIME);
+        } else {
+            // Split input into task name and datetime
+            String[] taskNameAndDate = input.split(separator, 2);
+            taskNameAndDate[0] = taskNameAndDate[0].strip();
+            taskNameAndDate[1] = taskNameAndDate[1].strip();
+
+            // Check that the required fields are present
+            if (taskNameAndDate[0].equals("")) {
+                throw new AthenaInputException(ErrorCode.MISSING_TASK_NAME);
+            } else if (taskNameAndDate[1].equals("")) {
+                throw new AthenaInputException(ErrorCode.MISSING_TASK_DATETIME);
+            }
+            return taskNameAndDate;
         }
-        String[] taskNameAndDate = input.split(separator, 2);
-        taskNameAndDate[0] = taskNameAndDate[0].strip();
-        taskNameAndDate[1] = taskNameAndDate[1].strip();
-        if (taskNameAndDate[0].equals("")) {
-            sayText(missingTaskNameMsg);
-            return new String[0];
-        } else if (taskNameAndDate[1].equals("")) {
-            sayText(missingDateTimeMsg);
-            return new String[0];
-        }
-        return taskNameAndDate;
     }
 
     public boolean isActive() {
