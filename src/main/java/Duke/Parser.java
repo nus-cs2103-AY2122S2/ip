@@ -41,40 +41,70 @@ public class Parser {
 					command = new ListCommand();
 					break;
 				case MARK:
-					String markStr = tokens[1];
-					int taskNumMark = Integer.parseInt(markStr) - 1;
-					command = new MarkCommand(taskNumMark);
+					try {
+						String markStr = tokens[1];
+						int taskNumMark = Integer.parseInt(markStr) - 1;
+						command = new MarkCommand(taskNumMark);
+					} catch (IndexOutOfBoundsException e) {
+						System.out.println("\t____________________________________________________________");
+						System.out.println("\t☹ Woof Woof!!! This task cannot be found with my Wonka eyes!!!");
+						System.out.println("\t____________________________________________________________");
+					}
 					break;
 				case UNMARK:
-					String unmarkStr = tokens[1];
-					int taskNumUnmark = Integer.parseInt(unmarkStr) - 1;
-					command = new UnmarkCommand(taskNumUnmark);
+					try {
+						String unmarkStr = tokens[1];
+						int taskNumUnmark = Integer.parseInt(unmarkStr) - 1;
+						command = new UnmarkCommand(taskNumUnmark);
+					} catch (IndexOutOfBoundsException e) {
+						System.out.println("\t____________________________________________________________");
+						System.out.println("\t☹ Woof Woof!!! This task cannot be found with my Wonka eyes!!!");
+						System.out.println("\t____________________________________________________________");
+					}
 					break;
 				case TODO:
 					Todo todo = new Todo(name);
 					command = new AddCommand(todo);
 					break;
 				case EVENT:
-					String[] tokensEvent = input.split("/at ");
-					String time = tokensEvent[1];
+					try {
+						String[] tokensEvent = input.split("/at ");
+						String time = tokensEvent[1];
 
-					String[] tokensNameEvent = name.split("/");
-					String eventName = tokensNameEvent[0];
-					Event event = new Event(eventName, time);
-					command = new AddCommand(event);
+						String[] tokensNameEvent = name.split("/");
+						String eventName = tokensNameEvent[0];
+						Event event = new Event(eventName, time);
+						command = new AddCommand(event);
+					} catch (IndexOutOfBoundsException e) {
+						System.out.println("\t____________________________________________________________");
+						System.out.println("\t☹ Please specify a date!!");
+						System.out.println("\t____________________________________________________________");
+					}
 					break;
 				case DEADLINE:
-					String[] tokensDeadline = input.split("/by ");
-					String date = tokensDeadline[1];
+					try {
+						String[] tokensDeadline = input.split("/by ");
+						String date = tokensDeadline[1];
 
-					String[] tokensNameDeadline = name.split("/");
-					String deadlineName = tokensNameDeadline[0];
-					Deadline deadline = new Deadline(deadlineName, date);
-					command = new AddCommand(deadline);
+						String[] tokensNameDeadline = name.split("/");
+						String deadlineName = tokensNameDeadline[0];
+						Deadline deadline = new Deadline(deadlineName, date);
+						command = new AddCommand(deadline);
+					} catch (IndexOutOfBoundsException e) {
+						System.out.println("\t____________________________________________________________");
+						System.out.println("\t☹ Please specify a date!!");
+						System.out.println("\t____________________________________________________________");
+					}
 					break;
 				case DELETE:
-					int taskNum = Integer.parseInt(tokens[1]) - 1;
-					command = new DeleteCommand(taskNum);
+					try {
+						int taskNum = Integer.parseInt(tokens[1]) - 1;
+						command = new DeleteCommand(taskNum);
+					} catch (IndexOutOfBoundsException e) {
+						System.out.println("\t____________________________________________________________");
+						System.out.println("\t☹ Woof Woof!!! Please specify a task to be deleted!!!");
+						System.out.println("\t____________________________________________________________");
+					}
 					break;
 				default:
 					throw new InvalidCommandException("\t☹ Woof Woof!!! This command is unidentifiable!!!");
