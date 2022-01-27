@@ -103,6 +103,11 @@ public class Parser {
             }
             break;
         }
+        case "find": {
+            this.ct = CommandType.FIND;
+            this.command = new FindCommand(desc);
+            break;
+        }
         default: {
             this.commandType = CommandType.UNKNOWN;
             System.out.println(ERROR_INVALID_COMMAND_START + commandRaw + ERROR_INVALID_COMMAND_END);

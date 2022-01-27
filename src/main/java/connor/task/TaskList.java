@@ -23,6 +23,8 @@ public class TaskList {
     private static final String CLEAR_TASKS_CANCEL = "Cancelled clearing all tasks. Phew!";
     private static final String MARK_TASK = "Good job! I've marked the following task as completed: ";
     private static final String UNMARK_TASK = "Understood. I've unmarked the following task: ";
+    private static final String NO_MATCHING_TASKS = "Sorry, there are no matching tasks in your list.";
+    private static final String SHOW_MATCHING_TASKS = "Here are the matching tasks in your list: ";
     private static final String ERROR_EMPTY_INDEX = "Error! Index cannot be empty.";
     private static final String ERROR_EMPTY_TASK_DESC = "Error! Tasks cannot have an empty description.";
     private static final String ERROR_EMPTY_DL_DESC = "Error! Deadlines cannot have empty descriptions or dates.";
@@ -221,6 +223,31 @@ public class TaskList {
             break;
         }
         }
+    }
+
+    /**
+     * Finds {@code Task}s in the task list that have the keyword in their description,
+     * prints out the matching tasks and returns an {@code ArrayList} with the matching tasks.
+     *
+     * @param keyword Keyword used to find matching {@code Task}s.
+     * @return An {@code ArrayList} of the matching tasks.
+     */
+    public static ArrayList<Task> findTasks(String keyword) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task t : TaskList.getTasks()) {
+            if (t.getDesc().contains(keyword.trim())) {
+                matchingTasks.add(t);
+            }
+        }
+        if (matchingTasks.size() == 0) {
+            print(NO_MATCHING_TASKS);
+        } else {
+            print(SHOW_MATCHING_TASKS);
+            for (int i = 1; i <= matchingTasks.size(); i++) {
+                print(INDENT + i + ". " + matchingTasks.get(i - 1));
+            }
+        }
+        return matchingTasks;
     }
 
     /**
