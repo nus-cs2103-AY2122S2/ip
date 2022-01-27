@@ -54,30 +54,30 @@ public class InputHandler {
         OutputFormatter outputFormatter = OutputFormatter.getInstance();
 
         switch (inputType) {
-            case MARK :
-                handleMark(inputData, outputFormatter);
-                break;
-            case UNMARK :
-                handleUnmark(inputData, outputFormatter);
-                break;
-            case LIST :
-                handleList(outputFormatter);
-                break;
-            case TODO :
-                handleToDo(inputData, outputFormatter);
-                break;
-            case DEADLINE :
-                handleDeadline(inputData, outputFormatter);
-                break;
-            case EVENT :
-                handleEvent(inputData, outputFormatter);
-                break;
-            case DELETE :
-                handleDelete(inputData, outputFormatter);
-                break;
-            case UNKNOWN :
-                handleUnknown(outputFormatter);
-                break;
+        case MARK :
+            handleMark(inputData, outputFormatter);
+            break;
+        case UNMARK :
+            handleUnmark(inputData, outputFormatter);
+            break;
+        case LIST :
+            handleList(outputFormatter);
+            break;
+        case TODO :
+            handleToDo(inputData, outputFormatter);
+            break;
+        case DEADLINE :
+            handleDeadline(inputData, outputFormatter);
+            break;
+        case EVENT :
+            handleEvent(inputData, outputFormatter);
+            break;
+        case DELETE :
+            handleDelete(inputData, outputFormatter);
+            break;
+        case UNKNOWN :
+            handleUnknown(outputFormatter);
+            break;
         }
         return outputFormatter.getFormattedOutput();
     }
