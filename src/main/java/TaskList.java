@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.lang.StringBuilder;
+import java.util.List;
 
 public class TaskList {
     private ArrayList<Task> taskList;
@@ -8,6 +9,31 @@ public class TaskList {
     public TaskList() {
         taskList = new ArrayList<>();
         wasModified = false;
+    }
+
+    // Known bug - code will break if user input includes |
+    public TaskList(List<String> saveTextFormat) {
+        this();
+        for (int i = 0; i < saveTextFormat.size(); i++) {
+            String taskSaveString = saveTextFormat.get(i);
+            String[] taskParams = taskSaveString.split("\\|");
+            switch (taskParams[0]) {
+            case "T":
+                taskList.add(new ToDo(taskParams[2]));
+                break;
+            case "E":
+                taskList.add(new Event(taskParams[2], taskParams[3]));
+                break;
+            case "D":
+                taskList.add(new Deadline(taskParams[2], taskParams[3]));
+                break;
+            default:
+                break;
+            }
+            if (taskParams[1].equals("1")) {
+                markTaskAsDone(i + 1);
+            }
+        }
     }
 
     public void resetLastModified() {
