@@ -4,13 +4,13 @@ import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 
 /**
- * Represents instance of Parser class
+ * Represent instance of Parser class
  * that deals with interpreting user commands
  */
 public class Parser {
 
     /**
-     * Interprets a user's commands
+     * Interpret a user's input
      * and carries out the command
      *
      * @param userInput The current command to be parsed

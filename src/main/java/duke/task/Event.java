@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
 
     /**
-     * Stores the date on which this Event
+     * Store the date on which this Event
      * occurs
      */
     protected LocalDate date;

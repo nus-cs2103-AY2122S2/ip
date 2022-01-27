@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Represents an instance of a ToDo
+ * Represent an instance of a ToDo
  * type of Task
  */
 public class ToDo extends Task {

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public  class Storage {
 
     /**
-     * Retrieves saved tasks
+     * Retrieve saved tasks
      * from the hard disk
      *
      * @return List of Tasks that has been saved on the hard disk
@@ -40,7 +40,7 @@ public  class Storage {
     }
 
     /**
-     * Saves the given list of tasks to the
+     * Save the given list of tasks to the
      * hard disk
      *
      * @param saved The current list of tasks to be saved to hard disk

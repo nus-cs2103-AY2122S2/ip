@@ -12,10 +12,10 @@ import java.io.Serializable;
  */
 public abstract class Task implements Serializable {
 
-    /** Stores a string description of the task **/
+    /** Store a string description of the task **/
     protected String description;
 
-    /** Stores whether the task has been completed **/
+    /** Store whether the task has been completed **/
     protected boolean isFinished;
 
 
@@ -31,7 +31,7 @@ public abstract class Task implements Serializable {
     }
 
     /**
-     * Marks this instance of task
+     * Mark this instance of task
      * as completed
      */
     public void markCompleted(){
@@ -40,7 +40,7 @@ public abstract class Task implements Serializable {
     }
 
     /**
-     * Marks this instance of task
+     * Mark this instance of task
      * as not completed
      */
     public void markNotCompleted(){
@@ -67,7 +67,7 @@ public abstract class Task implements Serializable {
     }
 
     /**
-     * Returns the completion status of
+     * Return the completion status of
      * this task
      *
      * @return Completion status of this task
