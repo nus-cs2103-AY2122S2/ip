@@ -14,7 +14,7 @@ public class Parser {
         this.commands = new Hashtable<>();
         this.unrecognizedCommand = new Command() {
             @Override public CommandOutput execute(String[] input, TaskList taskList) {
-                return new CommandOutput("Unrecognised command.", "audio/ding.sfx");
+                return new CommandOutput("Unrecognised command.", "audio/ding.wav");
             }
         };
 

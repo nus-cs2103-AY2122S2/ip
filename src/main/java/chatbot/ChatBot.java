@@ -44,7 +44,7 @@ public class ChatBot {
 
     public void run() {
         Ui.println(LOGO + String.format("\nHello! I'm %s!\nWhat can I do for you?", BOT_NAME));
-        TaskList taskList = new TaskList(SAVE_FILE_PATH);
+        TaskList taskList = TaskList.create(SAVE_FILE_PATH);
 
         // User interaction.
         Scanner scanner = new Scanner(System.in);
