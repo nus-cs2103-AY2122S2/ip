@@ -1,7 +1,18 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
+    private static void writeToFile(String filePath, ArrayList<Task> textToAdd) throws IOException {
+            FileWriter fw = new FileWriter(filePath);
+            for(Task t: textToAdd) {
+                fw.write(t.toString() + System. lineSeparator());
+            }
+            fw.close();
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -10,7 +21,14 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello I'm\n" + logo);
         System.out.println("What can I do for you?");
+        try {
+            File taskFile = new File("taskHistory.txt");
+            taskFile.createNewFile();
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
 
+        String filePath = "taskHistory.txt";
         ArrayList<Task> taskHistory = new ArrayList<Task>();
         Scanner userInput = new Scanner(System.in);
         String nextInput = userInput.nextLine();
@@ -35,6 +53,11 @@ public class Duke {
                             String[] task = words[1].split("/by ");
                             Deadline d = new Deadline(task[0], task[1]);
                             taskHistory.add(d);
+                            try {
+                                writeToFile(filePath, taskHistory);
+                            } catch (IOException de) {
+                                System.out.println("Something went wrong: " + de.getMessage());
+                            }
                             System.out.println("Got it. I've added this task:");
                             System.out.println(d.toString());
                             System.out.println("Now you have " + taskHistory.size() + " tasks in the list.");
@@ -47,6 +70,11 @@ public class Duke {
                             String task = words[1];
                             Todo t = new Todo(task);
                             taskHistory.add(t);
+                            try {
+                                writeToFile(filePath, taskHistory);
+                            } catch (IOException te) {
+                                System.out.println("Something went wrong: " + te.getMessage());
+                            }
                             System.out.println("Got it. I've added this task:");
                             System.out.println(t.toString());
                             System.out.println("Now you have " + taskHistory.size() + " tasks in the list.");
@@ -59,6 +87,11 @@ public class Duke {
                             String[] task = words[1].split("/at ");
                             Event e = new Event(task[0], task[1]);
                             taskHistory.add(e);
+                            try {
+                                writeToFile(filePath, taskHistory);
+                            } catch (IOException ee) {
+                                System.out.println("Something went wrong: " + ee.getMessage());
+                            }
                             System.out.println("Got it. I've added this task:");
                             System.out.println(e.toString());
                             System.out.println("Now you have " + taskHistory.size() + " tasks in the list.");
@@ -70,6 +103,11 @@ public class Duke {
                         } else {
                             int taskID = Integer.valueOf(words[1]);
                             taskHistory.get(taskID - 1).markDone();
+                            try {
+                                writeToFile(filePath, taskHistory);
+                            } catch (IOException e) {
+                                System.out.println("Something went wrong: " + e.getMessage());
+                            }
                             System.out.println("Nice! I've marked this task as done:");
                             System.out.println(taskHistory.get(taskID - 1).toString());
                             break;
@@ -80,6 +118,11 @@ public class Duke {
                         } else {
                             int taskID = Integer.valueOf(words[1]);
                             taskHistory.get(taskID - 1).markUndone();
+                            try {
+                                writeToFile(filePath, taskHistory);
+                            } catch (IOException e) {
+                                System.out.println("Something went wrong: " + e.getMessage());
+                            }
                             System.out.println("OK, I've marked this task as not done yet:");
                             System.out.println(taskHistory.get(taskID - 1).toString());
                             break;
@@ -92,6 +135,11 @@ public class Duke {
                             System.out.println("Noted. I've removed this task:");
                             System.out.println(taskHistory.get(taskID - 1).toString());
                             taskHistory.remove(taskID - 1);
+                            try {
+                                writeToFile(filePath, taskHistory);
+                            } catch (IOException e) {
+                                System.out.println("Something went wrong: " + e.getMessage());
+                            }
                             System.out.println("Now you have " + taskHistory.size() + " tasks in the list.");
                             break;
                         }
