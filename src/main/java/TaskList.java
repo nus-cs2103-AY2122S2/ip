@@ -181,21 +181,27 @@ public class TaskList {
     }
 
     public void deleteTask(String taskKey) {
-        String[] tokens = taskKey.split(" ");
-        String strIndex = tokens[1]; //error here
-        int index = Integer.parseInt(strIndex);
-        Task targetTask = this.itemList.get(index);
-        this.itemList.remove(index); //error if empty
-        deleteLineToFile(index); //error if empty
-        System.out.println(
-                "----------------------------" +
-                        "----------------------------\n" +
-                        "Noted. I've removed this task:\n"
-                        + "  " + targetTask + "\n"
-                        + "Now you have " + this.itemList.size() + " tasks in the list."
-                        + "\n"
-                        + "--------------------------------------------------------"
-        );
+        //must not be empty
+        try {
+            String[] tokens = taskKey.split(" ");
+            String strIndex = tokens[1]; //error here
+            int index = Integer.parseInt(strIndex);
+            Task targetTask = this.itemList.get(index);
+            this.itemList.remove(index); //error if empty
+            deleteLineToFile(index); //error if empty
+            System.out.println(
+                    "----------------------------" +
+                            "----------------------------\n" +
+                            "Noted. I've removed this task:\n"
+                            + "  " + targetTask + "\n"
+                            + "Now you have " + this.itemList.size() + " tasks in the list."
+                            + "\n"
+                            + "--------------------------------------------------------"
+            );
+        } catch (Exception err) {
+            System.out.println("File and list is already empty");
+        }
+
     }
 
     public void markTask(String taskKey) {
