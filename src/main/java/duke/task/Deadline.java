@@ -7,8 +7,8 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
 
     /** Deadline timing. */
-    private LocalDate by;
-    private LocalTime byTime;
+    private LocalDate deadlineDate;
+    private LocalTime deadlineTime;
 
     /**
      * Constructor for Deadline Class.
@@ -17,31 +17,35 @@ public class Deadline extends Task {
      */
     public Deadline(String description, LocalDate by, boolean isDone) {
         super(description);
-        this.by = by;
-        this.byTime = null;
-            if (isDone) {
-                this.markAsDone();
-            }
-    }
-
-    public Deadline(String description, LocalDate by, LocalTime byTime, boolean isDone) {
-        super(description);
-        this.by = by;
-        this.byTime = byTime;
+        this.deadlineDate = by;
+        this.deadlineTime = null;
         if (isDone) {
             this.markAsDone();
         }
     }
-        @Override
-        public String writeToFile() {
-            return " D " + super.writeToFile() + " | " + this.by + " | " + this.byTime;
+
+    public Deadline(String description, LocalDate by, LocalTime byTime, boolean isDone) {
+        super(description);
+        this.deadlineDate = by;
+        this.deadlineTime = byTime;
+        if (isDone) {
+            this.markAsDone();
+        }
     }
+
+    @Override
+    public String writeToFile() {
+        return " D " + super.writeToFile() + " | " + this.deadlineDate + " | " + this.deadlineTime;
+    }
+
     /**
      * Returns the task in proper format.
      * @return String of the deadline.
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " " + this.byTime.format(DateTimeFormatter.ofPattern("hh:mm a")) + " " + ")";
+        return "[D]" + super.toString() + " (by: "
+                + this.deadlineDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " "
+                + this.deadlineTime.format(DateTimeFormatter.ofPattern("hh:mm a")) + " )";
     }
 }

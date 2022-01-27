@@ -7,36 +7,37 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
 
     /** Stores the time span of the event. */
-    private LocalDate date;
-    private LocalTime time1;
-    private LocalTime time2;
+    private LocalDate eventDate;
+    private LocalTime eventStartTime;
+    private LocalTime eventEndTime;
 
     /**
      * Constructor of Event class.
      * @param description The description of the event.
      * @param date The time span of the event.
      */
-
     public Event(String description, LocalDate date, boolean isDone ) {
         super(description);
-        this.date=  date;
+        this.eventDate = date;
         if (isDone) {
             this.markAsDone();
         }
     }
     public Event(String description, LocalDate date, LocalTime t1, LocalTime t2, boolean isDone ) {
         super(description);
-        this.date=  date;
-        this.time1 = t1;
-        this.time2 = t2;
+        this.eventDate =  date;
+        this.eventStartTime = t1;
+        this.eventEndTime = t2;
         if (isDone) {
             this.markAsDone();
         }
     }
-        @Override
-        public String writeToFile() {
-            return " E " + super.writeToFile() + " | " + this.date + " | " + this.time1 + " | " + this.time2;
-        }
+
+    @Override
+    public String writeToFile() {
+        return " E " + super.writeToFile() + " | " + this.eventDate + " | " + this.eventStartTime + " | "
+                + this.eventEndTime;
+    }
 
     /**
      * Returns the task in proper format.
@@ -44,6 +45,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " from " + time1.format(DateTimeFormatter.ofPattern("hh: mm a")) + " to " + time2.format(DateTimeFormatter.ofPattern("hh: mm a")) + " " + ")";
+        return "[E]" + super.toString() + " (at: " + this.eventDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
+                + " from " + eventStartTime.format(DateTimeFormatter.ofPattern("hh: mm a")) + " to "
+                + eventEndTime.format(DateTimeFormatter.ofPattern("hh: mm a")) + " " + ")";
     }
 }
