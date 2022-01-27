@@ -1,3 +1,5 @@
+import java.time.format.DateTimeParseException;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -81,13 +83,13 @@ public class Duke {
                         } else if (firstWord.equals("deadline")) {
                             String taskName = remainingUserInput.substring(0, remainingUserInput.indexOf("/by") - 1);
                             String timeBy = remainingUserInput.substring(remainingUserInput.indexOf("/by") + 4);
-                            Deadline newDeadline = new Deadline(taskName, timeBy);
+                            Deadline newDeadline = new Deadline(taskName, timeBy, false);
                             taskList.add(newDeadline);
                             dukeAddTaskOutput(newDeadline);
                         } else if (firstWord.equals("event")) {
                             String taskName = remainingUserInput.substring(0, remainingUserInput.indexOf("/at") - 1);
                             String timeRange = remainingUserInput.substring(remainingUserInput.indexOf("/at") + 4);
-                            Event newEvent = new Event(taskName, timeRange);
+                            Event newEvent = new Event(taskName, timeRange, false);
                             taskList.add(newEvent);
                             dukeAddTaskOutput(newEvent);
                         }
@@ -104,6 +106,8 @@ public class Duke {
             } catch (DukeException e) {
                 dukeOutput(e.getMessage());
                 continue;
+            } catch (DateTimeParseException e) {
+                dukeOutput("Date must be of format yyyy-mm-dd!");
             }
         }
     }
@@ -154,7 +158,7 @@ public class Duke {
                 case "E":
                     // typecasting because only an event would have taskType "E"
                     Event event = (Event) task;
-                    stringToAppend = stringToAppend + "|" + event.timeRange;
+                    stringToAppend = stringToAppend + "|" + event.eventDate + "|" + event.timeRange;
                     break;
                 case "D":
                     // typecasting because only a deadline would havetaskType "D"
@@ -198,7 +202,6 @@ public class Duke {
         // get taskList from hard disk aka DB
         try {
             File dbObj = new File(DB);
-            System.out.println(dbObj.exists());
             if (!dbObj.exists()) {
                 createDirAndFileIfNonExistent(DB);
                 return;
@@ -206,15 +209,14 @@ public class Duke {
             Scanner s = new Scanner(dbObj);
             while (s.hasNext()) {
                 String currLine = s.nextLine();
-                System.out.println(currLine);
                 String[] currLineSplit = currLine.split("\\|");
                 String taskType = currLineSplit[0];
                 boolean isDone = currLineSplit[1].equals("true");
                 String taskName = currLineSplit[2];
-                System.out.println(taskType + " & " + isDone + " & " + taskName);
 
                 if (taskType.equals("E")) {
-                    taskList.add(new Event(taskName, currLineSplit[3], isDone));
+                    taskList.add(new Event(taskName,
+                            currLineSplit[3], currLineSplit[4], isDone));
                 } else if (taskType.equals("D")) {
                     taskList.add(new Deadline(taskName, currLineSplit[3], isDone));
                 } else {

@@ -1,13 +1,20 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
     String timeRange;
+    LocalDate eventDate;
 
-    public Event(String taskName, String timeRange) {
-        super(taskName, "E");
-        this.timeRange = timeRange;
+    public Event(String taskName, String dateTime, boolean isDone) {
+        super(taskName, "E", isDone);
+        String[] dateTimeSplit = dateTime.split(" ");
+        this.eventDate = LocalDate.parse(dateTimeSplit[0]);
+        this.timeRange = dateTimeSplit[1];
     }
 
-    public Event(String taskName, String timeRange, boolean isDone) {
+    public Event(String taskName, String dateTime, String timeRange, boolean isDone) {
         super(taskName, "E", isDone);
+        this.eventDate = LocalDate.parse(dateTime);
         this.timeRange = timeRange;
     }
 
@@ -30,10 +37,12 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[" + this.taskType + "]" +
-                "[" + (isDone ? "X" : " ") + "] " +
-                this.taskName +
-                " (at: " + this.timeRange + ")" +
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("LLL dd yyyy");
+        String eventDateFormatted = eventDate.format(formatter);
+        return "[" + this.taskType + "]"
+                + "[" + (isDone ? "X" : " ") + "] "
+                + this.taskName
+                + " (at: " + eventDateFormatted + " " + this.timeRange + ")" +
                 "\n";
     }
 }
