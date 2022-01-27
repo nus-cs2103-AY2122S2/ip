@@ -24,7 +24,7 @@ public class Deadline extends Task {
     public Deadline(String description, LocalDate by, boolean isDone) {
         super(description);
         this.deadlineDate = by;
-        this.deadlineTime = null;
+        this.deadlineTime = LocalTime.parse("23:59", DateTimeFormatter.ofPattern("HH:mm"));
         if (isDone) {
             this.markAsDone();
         }
@@ -54,7 +54,7 @@ public class Deadline extends Task {
      */
     @Override
     public String writeToFile() {
-        return " D " + super.writeToFile() + " | " + this.deadlineDate + " | " + this.deadlineTime;
+        return " D " + super.writeToFile() + " | " + this.deadlineDate + " | " + this.deadlineTime + "\n";
     }
 
     /**

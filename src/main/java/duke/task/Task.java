@@ -67,7 +67,7 @@ public class Task {
      * @return String of task in data file storage format.
      */
     public String writeToFile() {
-        return this.isDone ? "| 1 | " + this.description : "| 0 | " + this.description + "\n";
+        return this.isDone ? "| 1 | " + this.description : "| 0 | " + this.description;
     }
 
     /**

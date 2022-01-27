@@ -1,2 +1,4 @@
- T | 0 | something
- T | 0 | something 1
+
+ T | 0 | soemthing
+ D | 0 | something | 2022-10-10 | 23:59
+ E | 0 | something | 2022-04-04 | 00:00 | 23:59

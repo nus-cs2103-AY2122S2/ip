@@ -26,6 +26,8 @@ public class Event extends Task {
     public Event(String description, LocalDate date, boolean isDone ) {
         super(description);
         this.eventDate = date;
+        this.eventStartTime = LocalTime.parse("00:00", DateTimeFormatter.ofPattern("HH:mm"));
+        this.eventEndTime = LocalTime.parse("23:59", DateTimeFormatter.ofPattern("HH:mm"));
         if (isDone) {
             this.markAsDone();
         }
@@ -58,7 +60,7 @@ public class Event extends Task {
     @Override
     public String writeToFile() {
         return " E " + super.writeToFile() + " | " + this.eventDate + " | " + this.eventStartTime + " | "
-                + this.eventEndTime;
+                + this.eventEndTime + "\n";
     }
 
     /**
