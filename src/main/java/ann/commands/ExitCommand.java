@@ -1,3 +1,5 @@
+package ann.commands;
+
 public class ExitCommand extends Command{
 
     public ExitCommand() {

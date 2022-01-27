@@ -1,3 +1,7 @@
+package ann.commands;
+
+import ann.data.TaskList;
+
 public abstract class Command {
     private String message;
     protected TaskList taskList;

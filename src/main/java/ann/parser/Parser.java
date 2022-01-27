@@ -1,3 +1,16 @@
+package ann.parser;
+
+import ann.commands.AddCommand;
+import ann.commands.Command;
+import ann.commands.DeleteCommand;
+import ann.commands.ExitCommand;
+import ann.commands.IncorrectCommand;
+import ann.commands.ListCommand;
+import ann.commands.MarkCommand;
+import ann.commands.UnmarkCommand;
+import ann.data.InputPattern;
+import ann.data.tasks.TaskType;
+
 public class Parser {
     public static Command parse(String input) {
         if(input.toLowerCase().equals("bye")) {
@@ -32,11 +45,11 @@ public class Parser {
             String taskType = input.split(" ")[1].toLowerCase();
             switch (taskType) {
                 case "todo":
-                    return handleTodo(input.substring(9));
+                    return handleTodo(input.substring(6));
                 case "event":
-                    return handleEvent(input.substring(10));
+                    return handleEvent(input.substring(7));
                 case "deadline":
-                    return handleDeadline(input.substring(13));
+                    return handleDeadline(input.substring(10));
                 default:
                     return new IncorrectCommand("Oop! Please enter a valid task type!");
             }

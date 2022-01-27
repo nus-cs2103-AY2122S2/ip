@@ -1,3 +1,5 @@
+package ann.commands;
+
 public class IncorrectCommand extends Command{
 
     public IncorrectCommand(String message) {

@@ -1,7 +1,16 @@
-import java.io.FileNotFoundException;
+package ann;
+
 import java.util.ArrayList;
 
-public class Duke {
+import ann.commands.Command;
+import ann.commands.ExitCommand;
+import ann.data.tasks.Task;
+import ann.data.TaskList;
+import ann.parser.Parser;
+import ann.storage.Storage;
+import ann.ui.Ui;
+
+public class Ann {
 
     private Storage storage;
     private TaskList tasks;
@@ -10,7 +19,7 @@ public class Duke {
     private ArrayList<Task> list;
     private int numItems;
 
-    public Duke(String folderName, String fileName) {
+    public Ann(String folderName, String fileName) {
         try {
             this.ui = new Ui();
             this.storage = new Storage(folderName, fileName);
@@ -54,6 +63,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data", "ann.txt").run();
+        new Ann("data", "ann.txt").run();
     }
 }
