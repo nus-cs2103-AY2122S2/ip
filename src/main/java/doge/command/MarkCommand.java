@@ -5,11 +5,25 @@ import doge.TaskList;
 import doge.Ui;
 import doge.exception.DogeException;
 
+/**
+ * Represents the "mark" command. Doge bot will mark a specific task.
+ */
 public class MarkCommand extends Command {
+    /**
+     * Constructor for class MarkCommand.
+     *
+     * @param s the task no. that will be marked
+     */
     public MarkCommand(String s) {
         super(s);
     }
 
+    /**
+     * Executes the "mark" command. It marks the specified task from the TskList.
+     *
+     * {@inheritDoc}
+     * @throws DogeException if it fails to mark the specified task
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DogeException {
         if (this.details.isEmpty()) {
             throw new DogeException("How am I suppose to mark something without knowing which task?");
@@ -34,6 +48,9 @@ public class MarkCommand extends Command {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "Wasn't expecting you to finish that task, I've already marked it!";

@@ -11,14 +11,25 @@ import doge.task.Task;
 import java.time.LocalDateTime;
 
 /**
- * Represents the "deadline" command. Doge bot will add a task of "deadline" type
+ * Represents the "deadline" command. Doge bot will add a task of "deadline" type into the TaskList.
  */
 public class DeadlineCommand extends Command {
 
+    /**
+     * Constructor for class DeadlineCommand.
+     *
+     * @param task the deadline task that is associated with this command
+     */
     public DeadlineCommand (Task task) {
         super(task);
     }
 
+    /**
+     * Executes the "deadline" command. It adds a task of "deadline" type into the TaskList.
+     *
+     * {@inheritDoc}
+     * @throws DogeException if it fails to add the "deadline" task into the TaskList
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DogeException {
         String[] curr = this.task.getDescription().split("/");
 
@@ -34,6 +45,10 @@ public class DeadlineCommand extends Command {
         }
     }
 
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "Stop troubling me, I've already added this task:";

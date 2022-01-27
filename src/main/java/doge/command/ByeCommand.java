@@ -11,17 +11,26 @@ import doge.exception.DogeException;
 public class ByeCommand extends Command {
 
     /**
-     *
+     * Constructor for class ByeCommand.
      */
     public ByeCommand() {
 
     }
 
+    /**
+     * Executes the "Bye" command. It saves the current TaskList into storage and then Doge bot terminates itself.
+     *
+     * {@inheritDoc}
+     * @throws DogeException if storage fails to save task list
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DogeException {
         storage.save(tasks.getTaskList());
         this.setExit(true);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "Doge:   Please don't ever bother me again, bye.";

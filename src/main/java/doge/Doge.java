@@ -24,6 +24,10 @@ public class Doge {
         }
     }
 
+    public static void main(String[] args) {
+        new Doge().run();
+    }
+
     public void run() {
         boolean isExit = false;
         this.ui.showLine();
@@ -45,10 +49,6 @@ public class Doge {
                 this.ui.showLine();
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new Doge().run();
     }
 
     public static LocalDateTime getDateTime(String input) throws DogeException {

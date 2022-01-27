@@ -12,13 +12,28 @@ import doge.task.Task;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents the "list" command. User can either list all tasks or only tasks that are due within a specified
+ * duration.
+ */
 public class ListCommand extends Command {
     private String message;
 
+    /**
+     * Constructor for class ListCommand.
+     *
+     * @param details the details of the occurrence period of the tasks
+     */
     public ListCommand(String details) {
         super(details);
     }
 
+    /**
+     * Executes the "list" command. It either list all tasks or tasks that are due by a certain period if stated.
+     *
+     * {@inheritDoc}
+     * @throws DogeException if it fails to list the tasks
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DogeException {
         StringBuilder output = new StringBuilder("Here are the tasks in your list:");
         if (this.details.isEmpty()) {
@@ -89,6 +104,9 @@ public class ListCommand extends Command {
         this.message = output.toString();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return message;

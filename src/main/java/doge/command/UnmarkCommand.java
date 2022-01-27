@@ -5,11 +5,27 @@ import doge.TaskList;
 import doge.Ui;
 import doge.exception.DogeException;
 
+/**
+ * Represents the "unmark" command. Doge bot will add a task of "unmark" type into the TaskList.
+ */
 public class UnmarkCommand extends Command {
+
+    /**
+     * Constructor for the class UnmarkCommand.
+     *
+     * @param s the task no. that will be unmarked
+     */
     public UnmarkCommand(String s) {
         super(s);
     }
 
+
+    /**
+     * Executes the "unmark" command. It unmarks the specified task from the TaskList.
+     *
+     * {@inheritDoc}
+     * @throws DogeException if it fails to unmark the specified task
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DogeException {
         if (this.details.isEmpty()) {
             throw new DogeException("How am I suppose to unmark something without knowing which task?");
@@ -34,6 +50,9 @@ public class UnmarkCommand extends Command {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "Knew you didnt't finish that task, I've already unmarked it for you!";

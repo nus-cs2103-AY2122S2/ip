@@ -10,12 +10,25 @@ import doge.task.Task;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents the "event" command. Doge bot will add a task of "event" type into the TaskList.
+ */
 public class EventCommand extends Command {
 
+    /**
+     * Constructor for class EventCommand.
+     * @param task the event task that is associated with this command
+     */
     public EventCommand(Task task) {
         super(task);
     }
 
+    /**
+     * Executes the "event" command. It adds a task of "event" type into the TaskList.
+     *
+     * {@inheritDoc}
+     * @throws DogeException if it fails to add the "event" task into the TaskList
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DogeException {
         String[] curr = this.task.getDescription().split("/");
 
@@ -31,6 +44,9 @@ public class EventCommand extends Command {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "Stop troubling me, I've already added this task:";

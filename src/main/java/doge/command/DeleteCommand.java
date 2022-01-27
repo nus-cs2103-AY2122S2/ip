@@ -1,13 +1,30 @@
 package doge.command;
 
-import doge.*;
+import doge.Storage;
+import doge.TaskList;
+import doge.Ui;
 import doge.exception.DogeException;
 
+/**
+ * Represents the "delete" command. Doge bot will delete a specified task from the TaskList.
+ */
 public class DeleteCommand extends Command {
+
+    /**
+     * Constructor for class DeleteCommand
+     *
+     * @param s the task no. that will be deleted
+     */
     public DeleteCommand(String s) {
         super(s);
     }
 
+    /**
+     * Executes the "delete" command. It deletes the specified task from the TaskList.
+     *
+     * {@inheritDoc}
+     * @throws DogeException if it fails to delete the specified task
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DogeException {
         if (this.details.isEmpty()) {
             throw new DogeException("How am I suppose to delete something without knowing which task?");
@@ -28,6 +45,9 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "I've already deleted for you! You're welcome.";

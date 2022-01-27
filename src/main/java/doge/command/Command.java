@@ -28,6 +28,14 @@ public abstract class Command {
         this.isExit = false;
     }
 
+    /**
+     * Executes the current command.
+     *
+     * @param tasks the TaskList that keeps an arrayList of the current list of tasks
+     * @param ui the Ui that Doge bot is using
+     * @param storage the storage to save the list of tasks to
+     * @throws DogeException if there is a failure in TaskList or Storage method calls
+     */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DogeException;
 
     public boolean haveTask() {
