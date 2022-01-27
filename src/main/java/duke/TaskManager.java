@@ -2,6 +2,8 @@ package duke;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Represents the list of tasks and functions to carry out task-related functions such as marking, unmarking, deleting
@@ -116,12 +118,8 @@ public class TaskManager {
      * @return String representing tasks matching the description
      */
     public String find(String description) {
-        ArrayList<Task> tasks = new ArrayList<Task>();
-        for (Task task: this.taskList) {
-            if (task.getDescription().contains(description)) {
-                tasks.add(task);
-            }
-        }
+        Stream<Task> filteredTasks = taskList.stream().filter(task -> task.getDescription().contains(description));
+        ArrayList<Task> tasks = new ArrayList<>(filteredTasks.collect(Collectors.toList()));
         if (tasks.size() == 0) {
             return "There are no tasks matching this description.";
         }
