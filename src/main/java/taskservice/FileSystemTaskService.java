@@ -16,6 +16,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -112,7 +113,7 @@ public class FileSystemTaskService implements TaskService {
             task = new Todo(tokens[2].trim());
             break;
         case "D":
-            task = new Deadline(tokens[2].trim(), tokens[3].trim());
+            task = new Deadline(tokens[2].trim(), LocalDate.parse(tokens[3].trim(), Deadline.DATE_INPUT_FORMAT));
             break;
         case "E":
             task = new Event(tokens[2].trim(), tokens[3].trim());
@@ -145,7 +146,7 @@ public class FileSystemTaskService implements TaskService {
             return "T" + statusAndDesc;
         } else if (task instanceof Deadline) {
             final Deadline d = (Deadline) task;
-            return "D" + statusAndDesc + " | " + d.getBy();
+            return "D" + statusAndDesc + " | " + d.getBy().format(Deadline.DATE_INPUT_FORMAT);
         } else if (task instanceof Event) {
             final Event e = (Event) task;
             return "E" + statusAndDesc + " | " + e.getAt();
