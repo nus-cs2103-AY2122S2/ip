@@ -35,6 +35,22 @@ public class Ui {
         System.out.println(INDENTATION + LINE);
     }
 
+    public static void printListOfMatchedTasks(TaskList taskList, String keyword) {
+        System.out.println(INDENTATION + LINE);
+        System.out.println(INDENTATION + "Here are the tasks containing \"keyword\" in your list:");
+
+        int taskNumber = 1;
+        int length = taskList.noOfTasks();
+
+        while (taskNumber <= length) {
+            System.out.println(INDENTATION + taskNumber + "." +
+                taskList.get(taskNumber - 1));
+            taskNumber++;
+        }
+
+        System.out.println(INDENTATION + LINE);
+    }
+
     public static void indicateMarked(Task task) {
         System.out.println(INDENTATION + LINE);
         System.out.println(INDENTATION + "Nice! I've marked this task as done:");
