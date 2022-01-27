@@ -1,10 +1,13 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
     String taskType = "D";
-    String deadline;
+    LocalDate deadline;
 
     public Deadline(String taskName, String deadline) {
         super(taskName);
-        this.deadline = deadline;
+        this.deadline = LocalDate.parse(deadline);
     }
 
     @Override
@@ -26,10 +29,12 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("LLL dd yyyy");
+        String deadlineFormatted = deadline.format(formatter);
         return "[" + this.taskType + "]" +
                 "[" + (done ? "X" : " ") + "] " +
                 this.taskName +
-                "(by: " + this.deadline + ")" +
+                "(by: " + deadlineFormatted + ")" +
                 "\n";
     }
 }

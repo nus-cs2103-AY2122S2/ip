@@ -68,8 +68,8 @@ public class Duke {
                         dukeAddTaskOutput(newDeadline);
                     } else if (firstWord.equals("event")) {
                         String taskName = remainingUserInput.substring(0, remainingUserInput.indexOf("/at"));
-                        String timeRange = remainingUserInput.substring(remainingUserInput.indexOf("/at") + 4);
-                        Event newEvent = new Event(taskName, timeRange);
+                        String dateTime = remainingUserInput.substring(remainingUserInput.indexOf("/at") + 4);
+                        Event newEvent = new Event(taskName, dateTime);
                         taskList.add(newEvent);
                         dukeAddTaskOutput(newEvent);
                     } else { // if none of the above tasks
