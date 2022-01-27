@@ -25,7 +25,7 @@ public class Ui {
      *
      * @param str The output to be stylised.
      */
-    public void stylePrint(String str) {
+    public void printWithStyle(String str) {
         System.out.println("________\n" + str);
     }
 
@@ -47,14 +47,14 @@ public class Ui {
                 " / ___ / /___/ /___   \n" +
                 "/_/  |_\\____/_____/   \n" +
                 "                      \n";
-        stylePrint(logo + "\nHi, I'm Ace. What can I do for you?");
+        printWithStyle(logo + "\nHi, I'm Ace. What can I do for you?");
     }
 
     /**
      * Displays an exit message to the user.
      */
     public void displayGoodbye() {
-        stylePrint("See you later!");
+        printWithStyle("See you later!");
     }
 
     /**
@@ -64,14 +64,14 @@ public class Ui {
      */
     public void displayTasks(ArrayList<Task> tasks) {
         if (tasks.size() == 0) {
-            stylePrint("There are no tasks in your list.");
+            printWithStyle("There are no tasks in your list.");
         } else {
             StringBuilder strBuilder = new StringBuilder();
             for (int i = 0; i < tasks.size(); i++) {
                 String line = i + 1 + ". " + tasks.get(i) + '\n';
                 strBuilder.append(line);
             }
-            stylePrint("Here are your tasks:\n" + strBuilder.toString());
+            printWithStyle("Here are your tasks:\n" + strBuilder.toString());
         }
     }
 
@@ -81,7 +81,7 @@ public class Ui {
      * @param errorMessage The error message to be displayed.
      */
     public void displayError(String errorMessage) {
-        stylePrint(errorMessage);
+        printWithStyle(errorMessage);
     }
 
     /**
@@ -90,7 +90,7 @@ public class Ui {
      * @param task The marked task.
      */
     public void displayMarkedTask(Task task) {
-        stylePrint("The following task has been marked as complete:\n" + task.toString());
+        printWithStyle("The following task has been marked as complete:\n" + task.toString());
     }
 
     /**
@@ -99,7 +99,7 @@ public class Ui {
      * @param task The unmarked task.
      */
     public void displayUnmarkedTask(Task task) {
-        stylePrint("The following task has been marked as incomplete:\n" + task.toString());
+        printWithStyle("The following task has been marked as incomplete:\n" + task.toString());
     }
 
     /**
@@ -108,7 +108,7 @@ public class Ui {
      * @param task The deleted task.
      */
     public void displayDeletedTask(Task task) {
-        stylePrint("The following task has been deleted:\n" + task.toString());
+        printWithStyle("The following task has been deleted:\n" + task.toString());
     }
 
     /**
@@ -117,7 +117,7 @@ public class Ui {
      * @param task The added task.
      */
     public void displayAddedTask(Task task) {
-        stylePrint("The following task has been added:\n" + task.toString());
+        printWithStyle("The following task has been added:\n" + task.toString());
     }
 
     /**

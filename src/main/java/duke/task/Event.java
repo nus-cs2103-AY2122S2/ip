@@ -14,10 +14,10 @@ public class Event extends Task {
      *
      * @param title The name given to the task.
      * @param time The date and time of the event.
-     * @param status Indicates whether the task has been completed or not.
+     * @param isComplete Indicates whether the task has been completed or not.
      */
-    public Event(String title, Date time, boolean status) {
-        super(title, status);
+    public Event(String title, Date time, boolean isComplete) {
+        super(title, isComplete);
         this.time = time;
     }
 

@@ -14,10 +14,10 @@ public class Deadline extends Task {
      *
      * @param title The name given to the task.
      * @param time The date and time of the deadline.
-     * @param status Indicates whether the task has been completed or not.
+     * @param isComplete Indicates whether the task has been completed or not.
      */
-    public Deadline(String title, Date time, boolean status) {
-        super(title, status);
+    public Deadline(String title, Date time, boolean isComplete) {
+        super(title, isComplete);
         this.time = time;
     }
 

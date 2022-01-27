@@ -9,10 +9,10 @@ public class Todo extends Task {
      * Constructs a Todo task object.
      *
      * @param taskName The name given to the task.
-     * @param status Indicates whether the task has been completed or not.
+     * @param isComplete Indicates whether the task has been completed or not.
      */
-    public Todo(String taskName, boolean status) {
-        super(taskName, status);
+    public Todo(String taskName, boolean isComplete) {
+        super(taskName, isComplete);
     }
 
     /**
