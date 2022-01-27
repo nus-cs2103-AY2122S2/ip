@@ -45,7 +45,8 @@ public class Parser {
     private static boolean notKeyWord(String command) {
         return (!command.equals("bye") && !command.equals("list")
                 && !command.equals("delete")  && !command.equals("mark") && !command.equals("unmark")
-                && !command.equals("todo") && !command.equals("deadline") && !command.equals("event"));
+                && !command.equals("todo") && !command.equals("deadline") && !command.equals("event") &&
+                !command.equals("find"));
     }
 
 
