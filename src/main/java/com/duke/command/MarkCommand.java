@@ -9,7 +9,7 @@ import com.duke.util.Ui;
  */
 public class MarkCommand extends Command {
 
-    private final int pos;
+    private int pos;
 
     public MarkCommand(int pos) {
         this.pos = pos;

@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    private final String path;
+    private String path;
 
     public Storage(String path) {
         this.path = path;

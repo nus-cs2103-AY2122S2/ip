@@ -7,7 +7,7 @@ import com.duke.util.Ui;
 
 public class AddDeadlineCommand extends Command {
 
-    private final Task task;
+    private Task task;
 
     public AddDeadlineCommand(Task task) {
         this.task = task;
