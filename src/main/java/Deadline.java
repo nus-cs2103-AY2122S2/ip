@@ -1,5 +1,8 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
-    protected String by;
+    protected LocalDate by;
 
     /*
         if user didn't type "/by" (byIdx == -1)
@@ -9,7 +12,7 @@ public class Deadline extends Task {
     */
     public Deadline(String s) throws LilyException {
         super(findDescStart(s));
-        this.by = s.substring(s.indexOf("/by") + 4);
+        by = LocalDate.parse(s.substring(s.indexOf("/by") + 4));
     }
 
     private static String findDescStart(String s) throws LilyException {
@@ -22,6 +25,6 @@ public class Deadline extends Task {
     
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("dd MMM yy")) + ")";
     }
 } 

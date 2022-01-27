@@ -82,8 +82,7 @@ public class Lily {
                 case LIST:
                     // throw error instead
                     if (list.isEmpty()) {
-                       prettyPrint("there's 
-                       nothing in the list bro");
+                       prettyPrint("there's nothing in the list bro");
                     } else {
                         prettyPrint("you told me you had to\n" + printList());
                     }
