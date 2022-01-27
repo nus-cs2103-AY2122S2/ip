@@ -47,7 +47,6 @@ public class Duke {
             if (task.equals("todo")) {
                 if (!item.equals("")) {
                     tasks.add(new Todo(item));
-                    ui.reply(addTask(tasks.get(tasks.size() - 1), tasks.size()));
                 } else {
                     throw new DukeException("Can read instructions or not? Todo cannot be empty :/");
                 }
@@ -57,7 +56,6 @@ public class Duke {
                     String thing = item.split(" /by ")[0];
                     String time = item.split(" /by ")[1];
                     tasks.add(new Deadline(thing, time));
-                    ui.reply(addTask(tasks.get(tasks.size() - 1), tasks.size()));
                 } else {
                     ui.reply("Can read instructions or not? Deadline cannot be empty :/");
                 }
@@ -67,7 +65,6 @@ public class Duke {
                     String thing = item.split(" /at ")[0];
                     String time = item.split(" /at ")[1];
                     tasks.add(new Event(thing, time));
-                    ui.reply(addTask(tasks.get(tasks.size() - 1), tasks.size()));
                 } else {
                     ui.reply("Can read instructions or not? Event cannot be empty :/");
                 }
@@ -104,15 +101,7 @@ public class Duke {
                 }
 
             } else if (task.equals("delete")) {
-                try {
-                    int index = Integer.parseInt(item);
-                    Task t = tasks.get(index - 1);
-                    tasks.remove(index - 1);
-                    ui.reply(removeTask(t, tasks.size()));
-                } catch (IndexOutOfBoundsException e) {
-                    ui.reply("You can't do that! It's not on the list!");
-                }
-
+                tasks.deleteItem(item);
 
             } else {
                 ui.reply("What is this? Can you read English?");
@@ -126,39 +115,6 @@ public class Duke {
 
         ui.exit();
         sc.close();
-    }
-
-    private static String addTask(Task task, int total) {
-        String tab = "    ";
-        String firstLine = "Ah sure. I've added this task:\n";
-        String secondLine = tab + "  " + task.toString() + "\n";
-        String thirdLine;
-        if (total == 1) {
-            thirdLine = tab + "Now you have " + total + " task in the list.";
-        } else {
-            thirdLine = tab + "Now you have " + total + " tasks in the list.";
-        }
-
-        return firstLine + secondLine + thirdLine;
-
-    }
-
-    private static String removeTask(Task task, int total) {
-        String tab = "    ";
-        String firstLine = "Less work for you then less work for me then. I've removed this task:\n";
-        String secondLine = tab + "  " + task.toString() + "\n";
-        String thirdLine;
-
-        if (total == 1) {
-            thirdLine = tab + "Now you have " + total + " task in the list.";
-        } else {
-            thirdLine = tab + "Now you have " + total + " tasks in the list.";
-        }
-        return firstLine + secondLine + thirdLine;
-
-
-
-
     }
 
 }
