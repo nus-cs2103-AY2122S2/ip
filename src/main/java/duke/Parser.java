@@ -44,6 +44,8 @@ public class Parser {
                 ui.showError("EventFormatError");
                 throw new UnsupportedOperationException();
             }
+        case ("find"):
+            return new FindCommand(words[1]);
         case ("delete"):
             return new DeleteCommand(Integer.parseInt(words[1]) - 1);
         case ("bye"):
