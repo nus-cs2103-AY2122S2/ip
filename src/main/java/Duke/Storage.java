@@ -22,6 +22,9 @@ public class Storage {
 
     protected Path filePath;
 
+    /**
+     * Default constructor for Storage object.
+     */
     public Storage() {
         try {
             Path dirToCreate = Paths.get("").resolve("output");
@@ -36,6 +39,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads list of tasks saved from previous execution of program.
+     *
+     * @return a list of Tasks loaded from previous runs
+     */
     public ArrayList<Task> load() {
 
         ArrayList<Task> list = new ArrayList<>(); // init arraylist
@@ -81,6 +89,11 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Stores current list of tasks for future usage.
+     *
+     * @param list list of Tasks to store into local storage
+     */
     public void store(ArrayList<Task> list) {
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter, true);
