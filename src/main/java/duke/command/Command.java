@@ -17,12 +17,12 @@ public abstract class Command {
      * @param storage  the storage
      * @throws CortanaException the cortana exception
      */
-    abstract public void execute(TaskList tasks, Ui ui, Storage storage) throws CortanaException;
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws CortanaException;
 
     /**
      * Is user exited.
      *
      * @return whether the user inputs an exit command
      */
-    abstract public boolean isExit();
+    public abstract boolean isExit();
 }

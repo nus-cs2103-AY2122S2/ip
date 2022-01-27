@@ -1,28 +1,27 @@
 package utils;
 
-import duke.command.Command;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
-import duke.command.UnmarkCommand;
-import duke.command.DeleteCommand;
-import duke.command.DeleteAllCommand;
-import duke.command.AddCommand;
-import duke.command.ShowAllTasksOnSameDateCommand;
-import duke.command.FindCommand;
-
-import duke.task.Todo;
-
-import duke.utils.CortanaException;
-import duke.utils.Parser;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteAllCommand;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.ShowAllTasksOnSameDateCommand;
+import duke.command.UnmarkCommand;
+import duke.task.Todo;
+import duke.utils.CortanaException;
+import duke.utils.Parser;
 
 public class ParserTest {
     @Test
@@ -107,8 +106,10 @@ public class ParserTest {
     @DisplayName("Should parse to ShowAllTasksOnSameDateCommand")
     public void parsedToShowAllTasksOnSameDateCommand() {
         try {
-            LocalDateTime localDateTime = LocalDateTime.parse("2022-01-24 1800",  DateTimeFormatter.ofPattern("yyyy-M-d HHmm"));
-            ShowAllTasksOnSameDateCommand showAllTasksOnSameDateCommand = new ShowAllTasksOnSameDateCommand(localDateTime, "2022-01-24 1800");
+            LocalDateTime localDateTime = LocalDateTime.parse("2022-01-24 1800",
+                    DateTimeFormatter.ofPattern("yyyy-M-d HHmm"));
+            ShowAllTasksOnSameDateCommand showAllTasksOnSameDateCommand = new ShowAllTasksOnSameDateCommand(
+                    localDateTime, "2022-01-24 1800");
             Command parsedCommand = Parser.parse("show all 2022-01-24 1800");
             assertEquals(showAllTasksOnSameDateCommand, parsedCommand);
         } catch (CortanaException e) {

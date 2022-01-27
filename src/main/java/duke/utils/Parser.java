@@ -1,27 +1,25 @@
 package duke.utils;
 
-import duke.command.Command;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
-import duke.command.UnmarkCommand;
-import duke.command.DeleteCommand;
-import duke.command.DeleteAllCommand;
-import duke.command.AddCommand;
-import duke.command.ShowAllTasksOnSameDateCommand;
-import duke.command.FindCommand;
-
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Todo;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
 import java.util.regex.Pattern;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteAllCommand;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.ShowAllTasksOnSameDateCommand;
+import duke.command.UnmarkCommand;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 
 /**
  * The type Parser.
@@ -79,12 +77,12 @@ public class Parser {
                         throw new CortanaException("Please specify the date time you are looking for!");
                     } else {
                         String dateTimeString = input.replaceAll("show all ", "");
-                        boolean correctTimeFormat = Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2}( \\d{4})?").
-                                matcher(dateTimeString).find();
+                        boolean correctTimeFormat = Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2}( \\d{4})?")
+                                .matcher(dateTimeString).find();
                         if (correctTimeFormat) {
                             LocalDateTime localDateTime;
-                            boolean hasTime = Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2} \\d{4}").
-                                    matcher(dateTimeString).find();
+                            boolean hasTime = Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2} \\d{4}")
+                                    .matcher(dateTimeString).find();
                             if (hasTime) {
                                 /* user specifies time */
                                 localDateTime = LocalDateTime.parse(dateTimeString,
@@ -98,8 +96,8 @@ public class Parser {
                             return new ShowAllTasksOnSameDateCommand(localDateTime, dateTimeString);
                         } else {
                             /* user input format is invalid */
-                            throw new CortanaException("Invalid date time format! " +
-                                    "Please follow the format yyyy-M-d HHmm!");
+                            throw new CortanaException("Invalid date time format! "
+                                    + "Please follow the format yyyy-M-d HHmm!");
                         }
                     }
                 } catch (DateTimeParseException e) {
@@ -114,13 +112,13 @@ public class Parser {
                     return new FindCommand(keyWord);
                 }
             } else {
-               try {
+                try {
                     String taskType = isEmptyDeadline ? "deadline" : isEmptyEvent ? "event" : "todo";
-                    if (isEmptyDeadline || isEmptyEvent || isEmptyTodo ) {
+                    if (isEmptyDeadline || isEmptyEvent || isEmptyTodo) {
                         /* user does not specify task description*/
                         String aOrAn = isEmptyEvent ? "an " : "a ";
-                        throw new CortanaException("OOPS!!! The description of " +
-                                aOrAn + taskType + " cannot be empty!");
+                        throw new CortanaException("OOPS!!! The description of " + aOrAn + taskType
+                                + " cannot be empty!");
                     } else {
                         boolean hasBy = Pattern.compile("/by .*").matcher(input).find();
                         boolean hasAt = Pattern.compile("/at .*").matcher(input).find();
@@ -145,8 +143,8 @@ public class Parser {
                                 }
                                 return new AddCommand(deadline);
                             } else {
-                                throw new CortanaException("Invalid date time format!" +
-                                        "Please follow the format yyyy-M-d HHmm!");
+                                throw new CortanaException("Invalid date time format!"
+                                        + "Please follow the format yyyy-M-d HHmm!");
                             }
                         } else if (isEventWithDescription && hasAt) {
                             /* valid event command */
@@ -169,8 +167,8 @@ public class Parser {
                                 }
                                 return new AddCommand(event);
                             } else {
-                                throw new CortanaException("Invalid date time format!" +
-                                        "Please follow the format yyyy-M-d HHmm!");
+                                throw new CortanaException("Invalid date time format!"
+                                        + "Please follow the format yyyy-M-d HHmm!");
                             }
                         } else if (isTodoWithDescription) {
                             /* valid todo command */
@@ -188,8 +186,7 @@ public class Parser {
                             throw new CortanaException("I don't know what that means :(");
                         }
                     }
-                }
-                catch (DateTimeParseException e) {
+                } catch (DateTimeParseException e) {
                     throw new CortanaException("Invalid date/time!");
                 }
             }

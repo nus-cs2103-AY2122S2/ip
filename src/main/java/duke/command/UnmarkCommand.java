@@ -1,13 +1,12 @@
 package duke.command;
 
-import duke.task.Task;
+import java.util.Objects;
 
+import duke.task.Task;
 import duke.utils.CortanaException;
 import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
-
-import java.util.Objects;
 
 /**
  * The type Unmark command.
@@ -24,9 +23,16 @@ public class UnmarkCommand extends Command {
         this.index = index;
     }
 
+    /**
+     * Execute mark task as undone operation.
+     *
+     * @param taskList the task list to operate on
+     * @param ui the ui to operate on
+     * @param storage the storage to operate on
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws CortanaException {
         try {
-            Task task = taskList.tasksArrayList.get(index);
+            Task task = taskList.getTaskList().get(index);
             task.markAsUndone();
             storage.writeFile(taskList);
             ui.unmarked(task);

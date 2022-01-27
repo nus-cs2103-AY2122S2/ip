@@ -1,8 +1,8 @@
 package duke.utils;
 
-import duke.task.Task;
-
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * The type Ui.
@@ -12,13 +12,13 @@ public class Ui {
      * Show welcome message.
      */
     public void showWelcome() {
-        String logo = "\n" +
-                "   ____                  _                           \n" +
-                "  / ___|   ___    _ __  | |_    __ _   _ __     __ _ \n" +
-                " | |      / _ \\  | '__| | __|  / _` | | '_ \\   / _` |\n" +
-                " | |___  | (_) | | |    | |_  | (_| | | | | | | (_| |\n" +
-                "  \\____|  \\___/  |_|     \\__|  \\__,_| |_| |_|  \\__,_|\n" +
-                "                                                     \n";
+        String logo = "\n"
+                + "   ____                  _                           \n"
+                + "  / ___|   ___    _ __  | |_    __ _   _ __     __ _ \n"
+                + " | |      / _ \\  | '__| | __|  / _` | | '_ \\   / _` |\n"
+                + " | |___  | (_) | | |    | |_  | (_| | | | | | | (_| |\n"
+                + "  \\____|  \\___/  |_|     \\__|  \\__,_| |_| |_|  \\__,_|\n"
+                + "                                                     \n";
         System.out.println("Hello from\n" + logo + "\nMy name is Cortana, what can I do for you?");
     }
 
@@ -73,9 +73,9 @@ public class Ui {
      * @param task  the task
      */
     public void addedTask(TaskList tasks, Task task) {
-        String taskOrTasks = tasks.tasksArrayList.size() <= 1 ? "duke/task" : "tasks";
-        System.out.println("Got it. I've added this task: \n" + " " + task +
-                "\nNow you have " + tasks.tasksArrayList.size() + " " + taskOrTasks + " in the list.");
+        String taskOrTasks = tasks.getTaskList().size() <= 1 ? "duke/task" : "tasks";
+        System.out.println("Got it. I've added this task: \n" + " " + task
+                + "\nNow you have " + tasks.getTaskList().size() + " " + taskOrTasks + " in the list.");
     }
 
     /**
@@ -85,9 +85,9 @@ public class Ui {
      * @param taskDeleted the task deleted
      */
     public void deletedTask(TaskList tasks, Task taskDeleted) {
-        String taskOrTasks = tasks.tasksArrayList.size() <= 1 ? "duke/task" : "tasks";
-        System.out.println("Noted. I've removed this task: \n" + " " + taskDeleted + "\n" +
-                "Now you have " + tasks.tasksArrayList.size() + " " + taskOrTasks + " in the list.");
+        String taskOrTasks = tasks.getTaskList().size() <= 1 ? "duke/task" : "tasks";
+        System.out.println("Noted. I've removed this task: \n" + " " + taskDeleted + "\n"
+                + "Now you have " + tasks.getTaskList().size() + " " + taskOrTasks + " in the list.");
     }
 
     /**
@@ -143,6 +143,12 @@ public class Ui {
         System.out.printf("Found %d %s with date/time %s.\n", numberOfTasksOnSameDate, taskOrTasks, time);
     }
 
+    /**
+     * Show founded task with the same keyword.
+     *
+     * @param numberOfTasksMatchKeyword the number of tasks on the same date
+     * @param keyword                   the keyword to search for
+     */
     public void foundTasksMatchKeyword(int numberOfTasksMatchKeyword, String keyword) {
         String taskOrTasks = numberOfTasksMatchKeyword <= 1 ? "task" : "tasks";
         System.out.printf("Found %d %s containing keyword \"%s\".\n", numberOfTasksMatchKeyword, taskOrTasks, keyword);

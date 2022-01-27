@@ -1,18 +1,16 @@
 package duke.task;
 
-import duke.utils.Ui;
-
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-
 import java.util.Locale;
 import java.util.Objects;
+
+import duke.utils.Ui;
 
 /**
  * The task type Deadline.
@@ -45,10 +43,10 @@ public class Deadline extends Task {
         LocalDate localDate = by.toLocalDate();
         LocalTime localTime = by.toLocalTime();
         String displayDate = String.format("%s, %s %s, %s",
-                localDate.getDayOfWeek().toString().substring(0, 1).toUpperCase() +
-                        localDate.getDayOfWeek().toString().substring(1).toLowerCase(),
-                localDate.getMonth().toString().substring(0, 1).toUpperCase() +
-                        localDate.getMonth().toString().substring(1).toLowerCase(),
+                localDate.getDayOfWeek().toString().substring(0, 1).toUpperCase()
+                        + localDate.getDayOfWeek().toString().substring(1).toLowerCase(),
+                localDate.getMonth().toString().substring(0, 1).toUpperCase()
+                        + localDate.getMonth().toString().substring(1).toLowerCase(),
                 localDate.getDayOfMonth(),
                 localDate.getYear());
         String displayTime = "";

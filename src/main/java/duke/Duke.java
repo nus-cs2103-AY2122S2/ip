@@ -1,13 +1,13 @@
 package duke;
 
+import java.nio.file.Paths;
+
 import duke.command.Command;
+import duke.utils.CortanaException;
+import duke.utils.Parser;
 import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
-import duke.utils.Parser;
-import duke.utils.CortanaException;
-
-import java.nio.file.Paths;
 
 /**
  * Duke the todolist helper, it's actual name is Cortana in this particular implementation.
@@ -35,7 +35,7 @@ public class Duke {
         boolean isExit = false;
         ui.showWelcome();
 
-        while(!isExit) {
+        while (!isExit) {
             try {
                 String command = ui.readCommand();
                 ui.showLine();
@@ -56,7 +56,7 @@ public class Duke {
      * @param args the input arguments
      */
     public static void main(String[] args) {
-        String PATH = Paths.get("").toAbsolutePath() + "/data/";
-        new Duke(PATH).run();
+        String path = Paths.get("").toAbsolutePath() + "/data/";
+        new Duke(path).run();
     }
 }

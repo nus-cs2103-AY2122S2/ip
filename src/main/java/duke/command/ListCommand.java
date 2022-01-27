@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.task.Task;
-
 import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
@@ -11,12 +10,19 @@ import duke.utils.Ui;
  */
 public class ListCommand extends Command {
 
-    public void execute(TaskList taskList, Ui ui, Storage storage)  {
-        if (taskList.tasksArrayList.size() == 0) {
+    /**
+     * Execute list all the task operation.
+     *
+     * @param taskList the task list to operate on
+     * @param ui the ui to operate on
+     * @param storage the storage to operate on
+     */
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
+        if (taskList.getTaskList().size() == 0) {
             ui.noTaskLeft();
         } else {
-            for (int i = 0; i < taskList.tasksArrayList.size(); i ++) {
-                Task task = taskList.tasksArrayList.get(i);
+            for (int i = 0; i < taskList.getTaskList().size(); i++) {
+                Task task = taskList.getTaskList().get(i);
                 ui.listed(i + 1, task);
             }
         }

@@ -1,10 +1,10 @@
 package duke.utils;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import duke.task.Task;
 
 /**
  * The type TaskList.
@@ -13,11 +13,11 @@ public class TaskList {
     /**
      * The array list storing all tasks.
      */
-    public ArrayList<Task> tasksArrayList = new ArrayList<>();
+    private final ArrayList<Task> tasksArrayList = new ArrayList<>();
     /**
      * The set storing all tasks.
      */
-    public Set<Task> taskSet = new HashSet<>();
+    private final Set<Task> taskSet = new HashSet<>();
 
     /**
      * Instantiates a new Task list.
@@ -27,5 +27,13 @@ public class TaskList {
     public TaskList(ArrayList<Task> tasksArrayList) {
         this.taskSet.addAll(tasksArrayList);
         this.tasksArrayList.addAll(tasksArrayList);
+    }
+
+    public ArrayList<Task> getTaskList() {
+        return this.tasksArrayList;
+    }
+
+    public Set<Task> getTaskSet() {
+        return this.taskSet;
     }
 }

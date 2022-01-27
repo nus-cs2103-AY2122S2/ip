@@ -1,33 +1,32 @@
 package utils;
 
-import duke.task.Deadline;
-import duke.task.Todo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import duke.utils.CortanaException;
-import duke.utils.Parser;
-import duke.utils.TaskList;
-import duke.utils.Ui;
-
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+
+import duke.task.Deadline;
+import duke.task.Todo;
+import duke.utils.CortanaException;
+import duke.utils.Parser;
+import duke.utils.TaskList;
+import duke.utils.Ui;
 
 public class UiTest {
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-    Ui ui;
+    private Ui ui;
 
     @BeforeEach
     public void setUpUi() {
@@ -39,15 +38,15 @@ public class UiTest {
     @DisplayName("Welcome message should be shown")
     public void showWelcomeMessage() {
         ui.showWelcome();
-        String logo = "\n" +
-                "   ____                  _                           \n" +
-                "  / ___|   ___    _ __  | |_    __ _   _ __     __ _ \n" +
-                " | |      / _ \\  | '__| | __|  / _` | | '_ \\   / _` |\n" +
-                " | |___  | (_) | | |    | |_  | (_| | | | | | | (_| |\n" +
-                "  \\____|  \\___/  |_|     \\__|  \\__,_| |_| |_|  \\__,_|\n" +
-                "                                                     \n";
-
-        assertEquals(String.format("Hello from\n%s\nMy name is Cortana, what can I do for you?", logo), outputStreamCaptor.toString().trim());
+        String logo = "\n"
+                + "   ____                  _                           \n"
+                + "  / ___|   ___    _ __  | |_    __ _   _ __     __ _ \n"
+                + " | |      / _ \\  | '__| | __|  / _` | | '_ \\   / _` |\n"
+                + " | |___  | (_) | | |    | |_  | (_| | | | | | | (_| |\n"
+                + "  \\____|  \\___/  |_|     \\__|  \\__,_| |_| |_|  \\__,_|\n"
+                + "                                                     \n";
+        assertEquals(String.format("Hello from\n%s\nMy name is Cortana, what can I do for you?", logo),
+                outputStreamCaptor.toString().trim());
     }
 
     @Test
@@ -79,7 +78,8 @@ public class UiTest {
     @DisplayName("Task message should be shown")
     public void printTask() {
         Todo dummyTodo = new Todo("read book");
-        Deadline dummyDeadline = new Deadline("return book", LocalDateTime.of(LocalDate.of(2022,1,25), LocalTime.MAX));
+        Deadline dummyDeadline = new Deadline("return book",
+                LocalDateTime.of(LocalDate.of(2022, 1, 25), LocalTime.MAX));
         ui.printTask(dummyTodo);
         String dummyTodoString = "[T][ ] read book";
         assertEquals(dummyTodoString, outputStreamCaptor.toString().trim());
@@ -95,9 +95,9 @@ public class UiTest {
         TaskList tasks = new TaskList(new ArrayList<>());
         Todo dummyTodo = new Todo("read book");
         ui.addedTask(tasks, dummyTodo);
-        String taskOrTasks = tasks.tasksArrayList.size() <= 1 ? "duke/task" : "tasks";
-        String addedTask = "Got it. I've added this task: \n" + " " + dummyTodo +
-                "\nNow you have " + tasks.tasksArrayList.size() + " " + taskOrTasks + " in the list.";
+        String taskOrTasks = tasks.getTaskList().size() <= 1 ? "duke/task" : "tasks";
+        String addedTask = "Got it. I've added this task: \n" + " " + dummyTodo
+                + "\nNow you have " + tasks.getTaskList().size() + " " + taskOrTasks + " in the list.";
         assertEquals(addedTask, outputStreamCaptor.toString().trim());
     }
 
@@ -107,9 +107,9 @@ public class UiTest {
         TaskList tasks = new TaskList(new ArrayList<>());
         Todo dummyTodo = new Todo("read book");
         ui.deletedTask(tasks, dummyTodo);
-        String taskOrTasks = tasks.tasksArrayList.size() <= 1 ? "duke/task" : "tasks";
-        String deletedTask = "Noted. I've removed this task: \n" + " " + dummyTodo + "\n" +
-                "Now you have " + tasks.tasksArrayList.size() + " " + taskOrTasks + " in the list.";
+        String taskOrTasks = tasks.getTaskList().size() <= 1 ? "duke/task" : "tasks";
+        String deletedTask = "Noted. I've removed this task: \n" + " " + dummyTodo + "\n"
+                + "Now you have " + tasks.getTaskList().size() + " " + taskOrTasks + " in the list.";
         assertEquals(deletedTask, outputStreamCaptor.toString().trim());
     }
 
@@ -194,7 +194,8 @@ public class UiTest {
             fail();
         } catch (Exception e) {
             ui.showErrorMessage(e.getMessage());
-            assertEquals("Invalid date time format! Please follow the format yyyy-M-d HHmm!", outputStreamCaptor.toString().trim());
+            assertEquals("Invalid date time format! Please follow the format yyyy-M-d HHmm!",
+                    outputStreamCaptor.toString().trim());
         }
     }
 
@@ -206,7 +207,8 @@ public class UiTest {
             fail();
         } catch (Exception e) {
             ui.showErrorMessage(e.getMessage());
-            assertEquals("Please specify the date time you are looking for!", outputStreamCaptor.toString().trim());
+            assertEquals("Please specify the date time you are looking for!",
+                    outputStreamCaptor.toString().trim());
         }
     }
 
@@ -230,7 +232,8 @@ public class UiTest {
             fail();
         } catch (CortanaException e) {
             ui.showErrorMessage(e.getMessage());
-            assertEquals("Please specify the deadline time with the /by keyword!", outputStreamCaptor.toString().trim());
+            assertEquals("Please specify the deadline time with the /by keyword!",
+                    outputStreamCaptor.toString().trim());
         }
     }
 
@@ -242,7 +245,8 @@ public class UiTest {
             fail();
         } catch (CortanaException e) {
             ui.showErrorMessage(e.getMessage());
-            assertEquals("Please specify the event time with the /at keyword!", outputStreamCaptor.toString().trim());
+            assertEquals("Please specify the event time with the /at keyword!",
+                    outputStreamCaptor.toString().trim());
         }
     }
 

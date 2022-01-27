@@ -1,10 +1,10 @@
 package duke.command;
 
+import java.util.Objects;
+
 import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
-
-import java.util.Objects;
 
 /**
  * The type Exit command.
@@ -16,6 +16,13 @@ public class ExitCommand extends Command {
      */
     public ExitCommand() {}
 
+    /**
+     * Execute exit operation.
+     *
+     * @param taskList the task list to operate on
+     * @param ui the ui to operate on
+     * @param storage the storage to operate on
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.exited();
     }

@@ -1,13 +1,12 @@
 package duke.command;
 
-import duke.task.Task;
+import java.util.Objects;
 
+import duke.task.Task;
 import duke.utils.CortanaException;
 import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
-
-import java.util.Objects;
 
 /**
  * The type Add command.
@@ -24,12 +23,19 @@ public class AddCommand extends Command {
         this.task = task;
     }
 
+    /**
+     * Execute the add task operation.
+     *
+     * @param taskList the task list to operate on
+     * @param ui the ui to operate on
+     * @param storage the storage to operate on
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws CortanaException {
-        if (taskList.taskSet.contains(task)) {
+        if (taskList.getTaskSet().contains(task)) {
             throw new CortanaException("Task already exists!");
         } else {
-            taskList.taskSet.add(task);
-            taskList.tasksArrayList.add(task);
+            taskList.getTaskSet().add(task);
+            taskList.getTaskList().add(task);
             try {
                 storage.writeFile(taskList);
             } catch (Exception e) {

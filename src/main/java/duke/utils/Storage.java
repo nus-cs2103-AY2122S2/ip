@@ -1,32 +1,34 @@
 package duke.utils;
 
-import java.io.*;
 
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-
-import duke.task.Task;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Todo;
-
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
-
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * The type Storage.
  */
 public class Storage {
     private final String filePath;
-    private static File taskFile;
+    private File taskFile;
 
     /**
      * Instantiates a new Storage.
@@ -69,7 +71,7 @@ public class Storage {
         try {
             FileInputStream fileInputStream = new FileInputStream(taskFile);
             Scanner scanner = new Scanner(fileInputStream);
-            while(scanner.hasNextLine()) {
+            while (scanner.hasNextLine()) {
                 Task taskToAdd = fileToTask(scanner.nextLine());
                 tasksArrayList.add(taskToAdd);
             }
@@ -87,7 +89,7 @@ public class Storage {
      */
     public void writeFile(TaskList tasks) throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream(taskFile, false);
-        for (Task task: tasks.tasksArrayList) {
+        for (Task task: tasks.getTaskList()) {
             String taskToWrite = task.toString() + '\n';
             fileOutputStream.write(taskToWrite.getBytes(StandardCharsets.UTF_8));
         }
@@ -144,7 +146,7 @@ public class Storage {
                 /* todo */
                 String description = taskInString.substring(7);
                 Todo todo = new Todo(description);
-                todo.setDone(isDone);;
+                todo.setDone(isDone);
                 return todo;
             }
         } catch (DateTimeParseException e) {
