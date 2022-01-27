@@ -16,7 +16,7 @@ public class Deadline extends Task {
         this.dateTime = date;
     }
 
-    private String getDateTimeFormat() {
+    public String getDateTimeFormat() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[dd MMM yyyy, hh:mma]");
         return this.dateTime.format(formatter);
     }

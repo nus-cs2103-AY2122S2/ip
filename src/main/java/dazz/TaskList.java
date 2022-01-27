@@ -43,7 +43,6 @@ public class TaskList {
         } else {
             return this.taskList.get(--position);
         }
-
     }
 
     public int getSize() {
