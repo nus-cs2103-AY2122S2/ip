@@ -14,17 +14,24 @@ import main.java.ari.parser.Parser;
 import main.java.ari.tasks.Task;
 import main.java.ari.tasks.TaskList;
 
-public class Storage { // deals with loading tasks from the file and saving tasks in the file
+/**
+ * Storage deals with loading tasks from file and saving tasks into file
+ */
+public class Storage {
     public String path;
     protected File filePath;
 
-    public Storage(String path) {
-        this.path = path;
-    }
-
+    /**
+     * Constructor of Storage
+     */
     public Storage() {
     }
 
+    /**
+     * Sets path to save/load file
+     *
+     * @param filePath file path to save file or load file
+     */
     public void setFile(String filePath) {
         path = filePath;
 
@@ -35,6 +42,9 @@ public class Storage { // deals with loading tasks from the file and saving task
         }
     }
 
+    /**
+     * Creates file at specified location
+     */
     private void createFile() {
         String[] paths = path.split("/");
         String tempPath = "";
@@ -54,6 +64,11 @@ public class Storage { // deals with loading tasks from the file and saving task
         }
     }
 
+    /**
+     * Saves tasks in file
+     *
+     * @param taskList list of Tasks to save
+     */
     public void save(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getAllTasks();
 
@@ -70,6 +85,11 @@ public class Storage { // deals with loading tasks from the file and saving task
 
     }
 
+    /**
+     * Loads the task into a list if the file exists
+     *
+     * @return list of Tasks present in the file
+     */
     public TaskList load() {
         File file = new File(path);
         TaskList taskList = new TaskList();
@@ -77,7 +97,6 @@ public class Storage { // deals with loading tasks from the file and saving task
         try {
             Scanner reader = new Scanner(file);
             Parser parser = new Parser();
-            // add the data in the file to the list
             while (reader.hasNextLine()) {
                 String line = reader.nextLine();
                 String[] todos = parser.fileBreakdown(line);
