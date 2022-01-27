@@ -4,10 +4,12 @@
  */
 public class Deadline extends Task {
     private final String by;
+    private DateTime timings;
 
     public Deadline(String e, String by) {
         super(e);
-        this.by = by;
+        timings = new DateTime(by);
+        this.by = timings.getString();
     }
 
     @Override
