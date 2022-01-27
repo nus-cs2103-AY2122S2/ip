@@ -4,6 +4,13 @@ public class Todo extends Task{
     }
 
     @Override
+    public String formatString() {
+        String output = "T";
+        String markState = this.isDone ? "mark" : "unmark";
+        return output + " | " + markState + " | " + this.description;
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }
