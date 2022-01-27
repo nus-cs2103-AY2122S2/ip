@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.PrintWriter;
+
+import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -132,6 +136,8 @@ public class Ultoi {
             }
 
             System.out.print(lineBreaker);
+
+            save(logs);
         }
     }
 
@@ -201,5 +207,35 @@ public class Ultoi {
             default:
                 throw new UltoiException("<OoO> Error! I do not understand what that means.");
         }
+    }
+
+    private static void save(List<Task> tasks) {
+        // check if the directory exists
+        String home = System.getProperty("user.home");
+        java.nio.file.Path path = java.nio.file.Paths.get(home,  "iP", "data", "Ultoi.txt");
+        File file = path.toFile();
+        boolean doesExist = java.nio.file.Files.exists(path);
+
+        if (! doesExist) {
+            try {
+                file.createNewFile();
+            } catch (Exception e) {
+
+            }
+        }
+
+        System.out.println(file);
+        // save
+        PrintWriter pw;
+        try {
+            pw = new PrintWriter(file);
+        } catch (Exception e) {
+            pw = new PrintWriter(System.out);
+        }
+        for (int i = 0; i < tasks.size(); i++) {
+            pw.println(tasks.get(i));
+        }
+
+        pw.close();
     }
 }

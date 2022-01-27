@@ -5,5 +5,5 @@ public abstract class Command {
         this.message = message;
     }
 
-
+    abstract public void execute(UltoiUI ui);
 }
