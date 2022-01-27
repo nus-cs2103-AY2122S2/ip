@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class Duke {
 
@@ -25,7 +26,14 @@ public class Duke {
                 if (arr.length == 1) {
                     throw new DukeException("It seems you haven't included the deadline");
                 } else {
-                    Deadline d = new Deadline(arr[0], arr[1]);
+                    String[] date = arr[1].split("-");
+                    if (date.length != 3) {
+                        throw new DukeException("Your deadline should be in the format yyyy-mm-dd");
+                    }
+                    Deadline d = new Deadline(arr[0],
+                            LocalDate.of(Integer.parseInt(date[0]),
+                                    Integer.parseInt(date[1]),
+                                    Integer.parseInt(date[2])));
                     list.add(d);
                     System.out.println("Got it. I've added: \n" + d.toString());
                     System.out.printf("Sheesh you've now got %d tasks in the list\n", list.size());
