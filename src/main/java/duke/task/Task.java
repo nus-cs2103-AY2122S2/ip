@@ -51,7 +51,7 @@ public class Task {
     }
 
     public String writeToFile() {
-        return this.isDone ? "| 1 | " + this.description : "| 0 | " + this.description;
+        return this.isDone ? "| 1 | " + this.description : "| 0 | " + this.description + "\n";
     }
     /**
      * Returns task in proper format.
