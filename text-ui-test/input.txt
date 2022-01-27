@@ -18,5 +18,8 @@ list
 delete 4
 delete 99
 delete asdf
+find Party
+find nd
+find xxxxxxxx
 asdfGHJKL
 exit
