@@ -1,18 +1,22 @@
 package task;
 
-public class Deadline extends Task {
-    public String time;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String description, String time){
+public class Deadline extends Task {
+    public LocalDateTime time;
+
+
+    public Deadline(String description, LocalDateTime time){
         super(description);
         this.time = time;
     }
-    public String getTime(){
+    public LocalDateTime getTime(){
         return this.time;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " " + this.time;
+        return "[D]" + super.toString() + " by " + this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 }
