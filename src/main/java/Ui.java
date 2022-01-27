@@ -2,8 +2,9 @@
  * Utility class that deals with common messages and outputs to terminal.
  */
 public class Ui {
-
+    
     public static final String LINE = "----------------------------------------\n";
+    public static final String GREETING_MESSAGE = "Wow! Hello! I'm Duke.\nWhat can I do for you?";
     public static final String UNKNOWN_COMMAND_MESSAGE = "OoPs! I don't know what that means :P";
     public static final String READ_WRITE_ERROR_MESSAGE =  "Something went wrong with the hard disk!";
     public static final String CORRUPTED_SAVE_MESSAGE = 

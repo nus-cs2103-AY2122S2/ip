@@ -1,11 +1,11 @@
 import java.io.IOException;
 
-public class DukeEngine {
+public class Parser {
     
     private TaskList tasks;
     public boolean isPolling;
 
-    public DukeEngine() {
+    public Parser() {
         try {
             tasks = Storage.readSaveFile();
         } catch (DukeException e) {
@@ -14,7 +14,7 @@ public class DukeEngine {
         }
         
         isPolling = true;
-        Ui.printMessage(greetingMessage());
+        Ui.printMessage(Ui.GREETING_MESSAGE);
     }
 
     public void inputHandler(String input) {
@@ -91,14 +91,6 @@ public class DukeEngine {
         return command.equals("deadline") 
             ? new Deadline(taskArgs[0], taskArgs[1])
             : new Event(taskArgs[0], taskArgs[1]);
-    }
-
-    public String greetingMessage() {
-        StringBuilder greeting = new StringBuilder();
-        greeting.append("Wow! Hello! I'm Duke.\n");
-        greeting.append("What can I do for you?");
-
-        return greeting.toString();
     }
 
     public String byeMessage() {
