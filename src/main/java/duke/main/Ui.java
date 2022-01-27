@@ -25,9 +25,9 @@ public class Ui {
     private StringBuilder message;
 
     public Ui() {
-        this.reader = new BufferedReader(new InputStreamReader(System.in));
-        this.writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
-        this.message = new StringBuilder();
+        reader = new BufferedReader(new InputStreamReader(System.in));
+        writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+        message = new StringBuilder();
     }
 
     public void appendMessage(String message) {

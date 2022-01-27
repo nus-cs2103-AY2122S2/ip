@@ -9,7 +9,7 @@ public class TaskList {
     private ArrayList<Task> tasks;
 
     public TaskList() {
-        this.tasks = new ArrayList<Task>();
+        tasks = new ArrayList<Task>();
     }
 
     public TaskList(ArrayList<Task> tasks) {
@@ -45,7 +45,7 @@ public class TaskList {
     }
 
     public ArrayList<Task> getTasks() {
-        return this.tasks;
+        return tasks;
     }
 
     public int getSize() {

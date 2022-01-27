@@ -9,13 +9,13 @@ public class Duke {
     private Storage storage;
 
     public Duke(String filePath) {
-        this.ui = new Ui();
-        this.storage = new Storage(filePath);
+        ui = new Ui();
+        storage = new Storage(filePath);
         try {
-            this.tasks = new TaskList(storage.loadTasks());
+            tasks = new TaskList(storage.loadTasks());
         } catch (DukeException e) {
             ui.showLoadingError();
-            this.tasks = new TaskList();
+            tasks = new TaskList();
         }
     }
 

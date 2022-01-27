@@ -84,23 +84,23 @@ public class Parser {
     }
 
     private static AddDeadlineCommand parseDeadlineCommand(String input) throws DukeException {
-        String[] splitInput = input.split("/by");
-        if (!validateDeadlineEventSplit(splitInput)) {
+        String[] splitInputs = input.split("/by");
+        if (!validateDeadlineEventSplit(splitInputs)) {
             throw new DukeException(DukeException.ERROR_WRONG_FORMAT + "\n" + DukeException.FORMAT_DEADLINE);
         }
-        String description = splitInput[0].trim();
-        String deadlineString = splitInput[1].trim();
+        String description = splitInputs[0].trim();
+        String deadlineString = splitInputs[1].trim();
         LocalDateTime deadline = parseDateTime(deadlineString);
         return new AddDeadlineCommand(description, deadline);
     }
 
     private static AddEventCommand parseEventCommand(String input) throws DukeException {
-        String[] splitInput = input.split("/at");
-        if (!validateDeadlineEventSplit(splitInput)) {
+        String[] splitInputs = input.split("/at");
+        if (!validateDeadlineEventSplit(splitInputs)) {
             throw new DukeException(DukeException.ERROR_WRONG_FORMAT + "\n" + DukeException.FORMAT_EVENT);
         }
-        String description = splitInput[0].trim();
-        String timeString = splitInput[1].trim();
+        String description = splitInputs[0].trim();
+        String timeString = splitInputs[1].trim();
         LocalDateTime time = parseDateTime(timeString);
         return new AddEventCommand(description, time);
     }
@@ -114,8 +114,8 @@ public class Parser {
         }
     }
 
-    private static boolean validateDeadlineEventSplit(String[] splitInput) throws DukeException {
-        if (splitInput.length != 2 || splitInput[0].matches("\\s*") || splitInput[1].matches("\\s*")) {
+    private static boolean validateDeadlineEventSplit(String[] splitInputs) throws DukeException {
+        if (splitInputs.length != 2 || splitInputs[0].matches("\\s*") || splitInputs[1].matches("\\s*")) {
             return false;
         }
         return true;

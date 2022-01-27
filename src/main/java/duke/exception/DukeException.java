@@ -12,14 +12,7 @@ public class DukeException extends Exception {
     public static final String FORMAT_EVENT = "Try using \"event <task_name> /by <event_time>\".";
     public static final String FORMAT_DATE = "Date and time must be in yyyy/MM/dd HHmm format.";
 
-    private String debugMessage;
-
     public DukeException(String displayMessage) {
         super(displayMessage);
-    }
-
-    public DukeException(String displayMessage, String debugMessage) {
-        super(displayMessage);
-        this.debugMessage = debugMessage;
     }
 }
