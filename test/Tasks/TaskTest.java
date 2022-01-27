@@ -2,15 +2,19 @@ package Tasks;
 
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
-
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class for Tasks.
+ */
 class TaskTest {
 
+    /**
+     * Test method for setMarked in Tasks class.
+     */
     @Test
     void testSetMarked() {
-        Task t = new ToDos("hello", false);
+        Tasks t = new ToDos("hello", false);
         assertEquals(false, t.getMarked());
         t.setMarked(true);
         assertEquals(true, t.getMarked());
@@ -18,20 +22,26 @@ class TaskTest {
         assertEquals(false, t.getMarked());
     }
 
+    /**
+     * Test method for getTask in Tasks class.
+     */
     @Test
     void testGetTask() {
-        Task t1 = new ToDos("hello world", false);
+        Tasks t1 = new ToDos("hello world", false);
         assertEquals("hello world", t1.getTask());
-        Task t2 = new ToDos("hello world #1e2d*asd", false);
+        Tasks t2 = new ToDos("hello world #1e2d*asd", false);
         assertEquals("hello world #1e2d*asd", t2.getTask());
     }
 
+    /**
+     * Test method for returnDate in Tasks class.
+     */
     @Test
     void testReturnDate() {
-       assertEquals("12312312312412412", Task.returnDate("12312312312412412"));
-       assertEquals("13-2020-15", Task.returnDate("13-2020-15"));
-       assertEquals("Oct-2020-15", Task.returnDate("Oct-2020-15"));
-       assertEquals("Jan 20 2015", Task.returnDate("2015-01-20"));
-       assertEquals("Dec 10 1990", Task.returnDate("Dec 10 1990"));
+       assertEquals("12312312312412412", Tasks.returnDate("12312312312412412"));
+       assertEquals("13-2020-15", Tasks.returnDate("13-2020-15"));
+       assertEquals("Oct-2020-15", Tasks.returnDate("Oct-2020-15"));
+       assertEquals("Jan 20 2015", Tasks.returnDate("2015-01-20"));
+       assertEquals("Dec 10 1990", Tasks.returnDate("Dec 10 1990"));
     }
 }

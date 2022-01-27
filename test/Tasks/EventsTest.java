@@ -4,8 +4,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class for Events.
+ */
 class EventsTest {
 
+    /**
+     * Test method for cacheString in Events class.
+     */
     @Test
     void cacheString() {
         //testcase 1
@@ -25,6 +31,9 @@ class EventsTest {
         assertEquals("E|1|home work|Oct 17 2020", e4.cacheString());
     }
 
+    /**
+     * Test method for toString in Events class.
+     */
     @Test
     void testToString() {
         //testcase 1

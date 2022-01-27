@@ -3,8 +3,14 @@ package Tasks;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class for DeadLines.
+ */
 class DeadLinesTest {
 
+    /**
+     * Test method for cacheString in DeadLines class.
+     */
     @Test
     void testCacheString() {
         //testcase 1
@@ -24,6 +30,9 @@ class DeadLinesTest {
         assertEquals("D|1|home work|Oct 17 2020", d4.cacheString());
     }
 
+    /**
+     * Test method for toString in DeadLines class.
+     */
     @Test
     void testToString() {
         //testcase 1
