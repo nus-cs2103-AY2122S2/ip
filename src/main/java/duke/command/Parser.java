@@ -19,8 +19,15 @@ public class Parser {
 
     private static final String ERROR_INVALID_COMMAND = "OOPS!!! You have entered an invalid command :(";
 
+    /**
+     * Parser to process the entered comments.
+     *
+     * @param fullCommand Entire line entered by user
+     * @return Command object of what the user entered
+     * @throws DukeException If the command is invalid
+     */
     public static Command parse(String fullCommand) throws DukeException{
-        String splittedCommand[] = fullCommand.split("\\s+");
+        String[] splittedCommand = fullCommand.split("\\s+");
         String command = splittedCommand[0];
         String args = fullCommand.substring(splittedCommand[0].length()).trim();
 

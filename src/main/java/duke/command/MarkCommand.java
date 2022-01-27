@@ -19,6 +19,13 @@ public class MarkCommand extends Command{
     private int taskNumber;
     private boolean mark;
 
+    /**
+     * Constructor to the mark or unmark command.
+     *
+     * @param taskNumber Task number to mark or unmark
+     * @param mark Boolean to indicate to mark or unmark the task
+     * @throws DukeException If the task number given is empty or not an integer
+     */
     public MarkCommand(String taskNumber, boolean mark) throws DukeException{
         if (taskNumber.equals("")){
             if (mark)
@@ -37,6 +44,13 @@ public class MarkCommand extends Command{
         }
     }
 
+    /**
+     * Execution of the mark command to mark/unmark the corresponding task.
+     *
+     * @param tasks Task list
+     * @param ui UI object
+     * @throws DukeException If the task number is out of range of the task list
+     */
     @Override
     public void execute(List<Task> tasks, UI ui) throws DukeException{
         if (this.taskNumber > tasks.size() || this.taskNumber <= 0){
