@@ -1,13 +1,13 @@
-package Tasks;
+package tasks;
 
 public class Task {
 
     protected String description;
-    protected boolean status;
+    protected boolean isComplete;
 
     public Task(String description) {
         this.description = description;
-        this.status = false;
+        this.isComplete = false;
     }
 
     public String getDescription() {
@@ -15,16 +15,20 @@ public class Task {
     }
 
     public void setComplete() {
-        this.status = true;
+        this.isComplete = true;
     }
 
     public void setIncomplete() {
-        this.status = false;
+        this.isComplete = false;
+    }
+
+    public boolean isComplete() {
+        return this.isComplete;
     }
 
     @Override
     public String toString() {
-        return status
+        return isComplete
                 ? "[X] " + description
                 : "[ ] " + description;
     }
