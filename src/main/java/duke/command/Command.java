@@ -34,6 +34,15 @@ public abstract class Command {
     public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
     /**
+     * Returns the type of Command.
+     *
+     * @return CommandType of command.
+     */
+    public CommandType getCommandType() {
+        return commandType;
+    }
+
+    /**
      * Outputs whether the command is an Exit Command.
      *
      * @return True if command is Exit, false otherwise.
