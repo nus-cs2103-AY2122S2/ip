@@ -1,13 +1,20 @@
-import java.util.Scanner;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
+
 
 public class BH {
     private ArrayList<Task> list;
     static Scanner sc = new Scanner(System.in);
     static String line = "\n---------------------\n";
+    private static String filePath = "/Users/brandonrhan/Downloads/NUS/CS2103/ip/data/duke.txt";
     
     BH() {
         this.list = new ArrayList<Task>();
+    }
+
+    private BH(ArrayList<Task> list) {
+        this.list = list;
     }
     
     void greet() {
@@ -19,7 +26,7 @@ public class BH {
         System.out.println("Hello, I am B.H. How can I help you?\n" + logo + line);
     }
 
-    void run() {
+    void run() throws DukeException {
         try {
             while (true) {
                 String input = sc.nextLine();
@@ -68,15 +75,64 @@ public class BH {
                     int index = Integer.parseInt(inputArray[1]) - 1;
                     System.out.println(line + "Okay, I have remove this task:\n" +
                             this.deleteTask(index) + line);
-                }
-                else {
-                    throw new DukeException("Wrong input");
+                } else {
+                    System.out.println("Wrong input, please check again");
                 }
             }
-        } catch (DukeException e) {
-            System.out.println(line + "Please check your input" + line);
-        } catch (ArrayIndexOutOfBoundsException exception) {
-            System.out.println("Wrong index");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
+            throw new DukeException("Duke exception!!!");
+        }
+    }
+
+    void load() throws DukeException {
+        try {
+            FileReader reader = new FileReader(filePath);
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            String input = bufferedReader.readLine();
+            while (input != null) {
+                String[] task = input.split("/");
+                String type = task[0];
+                String status = task[1];
+                String thing = task[2];
+                if (type.equals("T")) {
+                    Task newTask = new Todo(thing);
+                    if (status.equals("1")) {
+                        newTask.mark();
+                    }
+                    this.addToList(newTask);
+                } else if (type.equals("D")) {
+                    Task newTask = new Deadline(thing, task[3]);
+                    if (status.equals("1")) {
+                        newTask.mark();
+                    }
+                    this.addToList(newTask);
+                } else if (type.equals("E")) {
+                    Task newTask = new Event(thing, task[3]);
+                    if (status.equals("1")) {
+                        newTask.mark();
+                    }
+                    this.addToList(newTask);
+                }
+                input = bufferedReader.readLine();
+            }
+        } catch (IOException | ArrayIndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
+            throw new DukeException("Loading error");
+        }
+    }
+
+    void save() {
+        try {
+            FileWriter writer = new FileWriter(filePath);
+            BufferedWriter br = new BufferedWriter(writer);
+            for (int i = 0; i < this.getListSize(); i++) {
+                br.write(this.list.get(i).saveFormat());
+                br.newLine();
+            }
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

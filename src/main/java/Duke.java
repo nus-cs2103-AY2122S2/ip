@@ -1,4 +1,4 @@
-import java.util.Scanner;
+
 public class Duke {
 
     enum functions {
@@ -15,8 +15,10 @@ public class Duke {
     public static void main(String[] args) throws DukeException {
 
         BH bh = new BH();
+        bh.load();
         bh.greet();
         bh.run();
+        bh.save();
 
     }
 }

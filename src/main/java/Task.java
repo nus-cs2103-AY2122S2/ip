@@ -17,6 +17,15 @@ public class Task {
         this.done = false;
     }
 
+    String saveFormat() {
+        if (this.done) {
+            return this.type + "/1/" + this.task;
+        } else {
+            return this.type + "/0/" + this.task;
+        }
+    }
+
+
     @Override
     public String toString() {
         if (this.done) {
