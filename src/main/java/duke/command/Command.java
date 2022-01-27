@@ -19,6 +19,7 @@ public class Command {
      * @return Response class that would contains the UI message.
      * @throws DukeException To catch possible errors.
      */
+
     
     public Response execute() throws DukeException {
         return  null;
@@ -30,7 +31,7 @@ public class Command {
      * @param taskList local Taskist
      */
     
-    public void getReasources(Storage store, TaskList taskList) {
+    public void getResources(Storage store, TaskList taskList) {
         this.store = store;
         this.taskList = taskList;
     }

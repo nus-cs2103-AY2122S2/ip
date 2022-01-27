@@ -6,13 +6,13 @@ import main.java.duke.dukeexceptions.DukeException;
 import java.time.LocalDateTime;
 
 /**
- * Events is a type of Task, containing extra information.
+ * Events is a Type of Task, containing extra information.
  */
 public class Event extends Task {
 
-  String type = "E";
-  String info;
-  LocalDateTime dateInfo;
+  private static String TYPE = "E";
+  private String info;
+  private LocalDateTime dateInfo;
   
   /**
    * Constructor of Events
@@ -38,12 +38,12 @@ public class Event extends Task {
 
   @Override
   public String toStore() {
-    return this.type + " | " + this.markStore() + " | " + this.name + " | " + this.info;
+    return TYPE + " | " + this.markStore() + " | " + this.name + " | " + this.info;
   }
 
   @Override
   public String display() {
-    return "[" + this.type + "] " + "[" + markDisplay() + "] " + this.name + " (at " + dateInfo.format(this.dateTimeFormatterOut) + ")";
+    return "[" + TYPE + "] " + "[" + markDisplay() + "] " + this.name + " (at " + dateInfo.format(this.dateTimeFormatterOut) + ")";
   }
 
 }

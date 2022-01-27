@@ -5,6 +5,7 @@ import main.java.duke.dukeexceptions.DukeTaskListException;
 import main.java.duke.responses.DeleteResponse;
 import main.java.duke.responses.Response;
 
+
 /***
  * Command that is created when user wants to delete a Task
  */
@@ -15,6 +16,7 @@ public class DeleteCommand extends  Command{
      * Constructors the Command using the user command 
      * @param stringCmd String representation of the users command
      */
+
     
     public DeleteCommand(String stringCmd) {
         this.stringCmd = stringCmd;
@@ -27,11 +29,11 @@ public class DeleteCommand extends  Command{
      */
     @Override
     public Response execute() throws DukeException {
-        String[] stringCmdArr = stringCmd.split(" ");
-        if (stringCmdArr.length == 1) {
+        String[] stringCmdUnits = stringCmd.split(" ");
+        if (stringCmdUnits.length == 1) {
             throw new DukeTaskListException("");
         }
-        int index = Integer.parseInt(stringCmdArr[1]);
+        int index = Integer.parseInt(stringCmdUnits[1]);
         if (index > taskList.taskLength() || index < 1) {
             throw new DukeTaskListException("");
         }

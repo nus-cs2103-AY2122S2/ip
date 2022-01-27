@@ -36,7 +36,7 @@ public class Duke {
   public void run() {
     
     store.initialiseStorage();
-    this.taskList = store.loadFromDisk();
+    taskList = store.loadFromDisk();
     cmdLine.callResponse(commandHandler.welcome());
     cmdLine.callResponse(commandHandler.start());
     
@@ -44,7 +44,7 @@ public class Duke {
       try {
         String stringCmd = cmdLine.getNextLine();
         Command cmd = commandHandler.getCommand(stringCmd);
-        cmd.getReasources(store, taskList);
+        cmd.getResources(store, taskList);
         if (cmd instanceof ByeCommand) {
           isRunning = false;
         }

@@ -1,11 +1,11 @@
 package main.java.duke.task;
 
 /**
- * A type of task.
+ * A Type of task.
  */
 public class ToDo extends Task {
 
-    String type = "T";
+    private static String TYPE = "T";
     
   /**
    * Constructs the ToDo task with the given name.
@@ -23,7 +23,7 @@ public class ToDo extends Task {
 
   @Override
   public String toStore() {
-    return this.type + " | " + this.markStore() + " | " + this.name;
+    return TYPE + " | " + this.markStore() + " | " + this.name;
   }
 
   /**
@@ -34,6 +34,6 @@ public class ToDo extends Task {
 
   @Override
   public String display() {
-    return "[" + this.type + "] " + "[" + markDisplay() + "] " + this.name;
+    return "[" + TYPE + "] " + "[" + markDisplay() + "] " + this.name;
   }
 }

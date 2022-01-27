@@ -8,13 +8,15 @@ import java.util.ArrayList;
  * List containing all the Task
  */
 public class TaskList {
-    private ArrayList<Task> taskLists;
+
+    private ArrayList<Task> tasks;
 
     /**
      * Constructs a empty TaskList
      */
+
     public TaskList() {
-        taskLists = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
@@ -22,7 +24,7 @@ public class TaskList {
      * @param newTask
      */
     public void addTask(Task newTask) {
-        taskLists.add(newTask);
+        tasks.add(newTask);
     }
 
     /**
@@ -31,7 +33,7 @@ public class TaskList {
      * @return Task that was removed
      */
     public Task removeTask(int index) {
-        return taskLists.remove(index);
+        return tasks.remove(index);
     }
 
     /***
@@ -40,21 +42,21 @@ public class TaskList {
      * @return the Task at that specific index
      */
     public Task getTask(int index) {
-        return taskLists.get(index);
+        return tasks.get(index);
     }
 
     /***
      * @return Gets number of Task in the TaskList
      */
     public int taskLength() {
-        return taskLists.size();
+        return tasks.size();
     }
 
     /***
      * @return a ArrayList of Task
      */
     public ArrayList<Task> getTaskList() {
-        return this.taskLists;
+        return this.tasks;
     }
 
     /***
@@ -62,7 +64,7 @@ public class TaskList {
      * @param index index in the task
      */
     public void markTask(int index) {
-        taskLists.get(index).setMark(true);
+        tasks.get(index).setMark(true);
     }
     
     /***
@@ -70,7 +72,7 @@ public class TaskList {
      * @param index index in the task
      */
     public void unmarkTask(int index) {
-        taskLists.get(index).setMark(false);
+        tasks.get(index).setMark(false);
     }
     
 }

@@ -7,6 +7,7 @@ import main.java.duke.responses.Response;
 import main.java.duke.responses.StartResponse;
 import main.java.duke.responses.WelcomeResponse;
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -15,12 +16,10 @@ import java.util.Arrays;
  */
 
 public class Parser {
-    static private ArrayList<String> commandList = new ArrayList<>(
-            Arrays.asList("bye", "delete", "list", "mark", "unmark", "todo", "deadline", "event"));
-
     /**
      * @return a WelcomeResponse.
      */
+
     public Response welcome() {
         return new WelcomeResponse();
     }
@@ -40,8 +39,8 @@ public class Parser {
     
     public Command getCommand(String stringCmd) throws DukeException {
         
-        String[] cmdArr = stringCmd.split(" ");
-        String stringFirstCmd = cmdArr[0];
+        String[] stringCmdUnits = stringCmd.split(" ");
+        String stringFirstCmd = stringCmdUnits[0];
         switch (stringFirstCmd) {
         case "bye":
             return new ByeCommand();

@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
  */
 
 public class Deadline extends Task {
-  private String type = "D";
+  private static String TYPE = "D";
   private String info;
   private LocalDateTime dateInfo;
   
@@ -33,7 +33,7 @@ public class Deadline extends Task {
 
   @Override
   public String toStore() {
-    return this.type + " | " + this.markStore() + " | " + this.name + " | " + this.info;
+    return TYPE + " | " + this.markStore() + " | " + this.name + " | " + this.info;
   }
 
   /**
@@ -42,6 +42,6 @@ public class Deadline extends Task {
 
   @Override
   public String display() {
-    return "[" + this.type + "] " + "[" + markDisplay() + "] " + this.name + " (by " + dateInfo.format(this.dateTimeFormatterOut) + ")";
+    return "[" + TYPE + "] " + "[" + markDisplay() + "] " + this.name + " (by " + dateInfo.format(this.dateTimeFormatterOut) + ")";
   }
 }

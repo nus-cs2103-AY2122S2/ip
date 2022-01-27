@@ -36,11 +36,11 @@ public class Task {
   /**
    * Void methods that sets the completeness of the task based on the input.
    * 
-   * @param bool representing the completeness of the task.
+   * @param isMarked representing the completeness of the task.
    */
 
-  public void setMark(boolean bool) {
-    this.isMarked = bool;
+  public void setMark(boolean isMarked) {
+    this.isMarked = isMarked;
   }
 
   /**

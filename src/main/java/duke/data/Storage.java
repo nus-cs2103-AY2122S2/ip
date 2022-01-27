@@ -16,17 +16,18 @@ import java.util.Scanner;
  * Storage is a class that allows users to access a persist storage
  */
 public class Storage {
-
-  File storageTaskList;
-  TaskList runningTaskList;
-
+  
   /***
    * Constructs the contents of the Storage with a TaskList
    * @param runningTaskList that to be added to the Storage
    */
+
+  private File persistStore;
+  private TaskList runningTaskList;
+
   
   public Storage(TaskList runningTaskList) {
-    this.storageTaskList = new File("data/command.txt");
+    this.persistStore = new File("data/command.txt");
     this.runningTaskList = runningTaskList;
   }
 
@@ -39,11 +40,11 @@ public class Storage {
     try {
       if (data.exists()) {
       } else {
-        data.mkdir();
+        data.mkdirs();
       }
-      if (storageTaskList.exists()) {
+      if (persistStore.exists()) {
       } else {
-        storageTaskList.createNewFile();
+        persistStore.createNewFile();
       }
     } catch (Exception e) {
         e.getMessage();
@@ -60,16 +61,16 @@ public class Storage {
   }
 
   static private Task storageToTask(String taskString) {
-    String[] commandSplit = taskString.split(" \\| ");
-    switch (commandSplit[0]) {
-      case "T":
-        return new ToDo(commandSplit[2], storageToMark(commandSplit[1]));
-      case "D":
-        return new Deadline(commandSplit[2], storageToMark(commandSplit[1]), commandSplit[3]);
-      case "E":
-        return new Event(commandSplit[2], storageToMark(commandSplit[1]), commandSplit[3]);
-      default:
-        return null;
+    String[] stringCmdUnits = taskString.split(" \\| ");
+    switch (stringCmdUnits[0]) {
+    case "T":
+      return new ToDo(stringCmdUnits[2], storageToMark(stringCmdUnits[1]));
+    case "D":
+      return new Deadline(stringCmdUnits[2], storageToMark(stringCmdUnits[1]), stringCmdUnits[3]);
+    case "E":
+      return new Event(stringCmdUnits[2], storageToMark(stringCmdUnits[1]), stringCmdUnits[3]);
+    default:
+      return null;
     }
   }
 
@@ -79,7 +80,7 @@ public class Storage {
   public TaskList loadFromDisk() {
     try {
       Scanner fileReader = null;
-      fileReader = new Scanner(this.storageTaskList);
+      fileReader = new Scanner(persistStore);
       TaskList taskList = new TaskList();
       while (fileReader.hasNext()) {
         String command = fileReader.nextLine();
@@ -98,7 +99,7 @@ public class Storage {
 
   public void loadToDisk(TaskList taskList) throws DukeException {
     try {
-      FileWriter fileWriter = new FileWriter(this.storageTaskList);
+      FileWriter fileWriter = new FileWriter(persistStore);
       for (int i = 0; i < taskList.taskLength(); i++) {
         fileWriter.write(taskList.getTask(i).toStore() + "\n");
       }
