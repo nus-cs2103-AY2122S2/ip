@@ -2,26 +2,26 @@ import java.time.LocalDate;
 
 public class Event extends Task {
     protected String at;
+    protected Date date;
 
     Event(String description, String at) {
         super(description);
         this.at = at;
+        this.date = new Date(at);
     }
 
     @Override
-    public String toMemory() {
-        return "E" + super.toMemory() + "@" + this.at;
+    public String toMemoryString() {
+        return "E" + super.toMemoryString() + "@" + this.at;
     }
 
     @Override
-    public boolean isOn(String date) {
-        LocalDate time = LocalDate.parse(date);
-        LocalDate deadline = LocalDate.parse(this.at);
-        return time.equals(deadline);
+    public boolean isOn(Date date) {
+        return this.date.equals(date);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + Tesseract.formatTime(this.at) + ")";
+        return "[E]" + super.toString() + " (at: " + date.formattedTime() + ")";
     }
 }

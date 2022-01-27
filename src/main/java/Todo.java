@@ -4,8 +4,8 @@ public class Todo extends Task {
     }
 
     @Override
-    public String toMemory() {
-        return "T" + super.toMemory();
+    public String toMemoryString() {
+        return "T" + super.toMemoryString();
     }
 
     @Override

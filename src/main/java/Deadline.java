@@ -2,26 +2,26 @@ import java.time.LocalDate;
 
 public class Deadline extends Task {
     protected String by;
+    protected Date date;
 
     public Deadline(String description, String by) {
         super(description);
+        this.date = new Date(by);
         this.by = by;
     }
 
     @Override
-    public String toMemory() {
-        return "D" + super.toMemory() + "@" + this.by;
+    public String toMemoryString() {
+        return "D" + super.toMemoryString() + "@" + this.by;
     }
 
     @Override
-    public boolean isOn(String date) {
-        LocalDate time = LocalDate.parse(date);
-        LocalDate deadline = LocalDate.parse(this.by);
-        return time.equals(deadline);
+    public boolean isOn(Date date) {
+        return this.date.equals(date);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + Tesseract.formatTime(this.by) + ")";
+        return "[D]" + super.toString() + " (by: " + date.formattedTime() + ")";
     }
 }

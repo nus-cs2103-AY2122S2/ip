@@ -19,11 +19,11 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    public boolean isOn(String date) {
+    public boolean isOn(Date date) {
         return false;
     }
 
-    public String toMemory() {
+    public String toMemoryString() {
         if (isDone) {
             return "@1@" + this.description;
         } else {
