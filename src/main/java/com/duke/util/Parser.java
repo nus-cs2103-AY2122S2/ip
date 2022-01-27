@@ -2,10 +2,11 @@ package com.duke.util;
 
 import com.duke.command.*;
 import com.duke.exception.DukeException;
-import com.duke.exception.ToDoException;
 import com.duke.task.Deadline;
 import com.duke.task.Event;
 import com.duke.task.Todo;
+
+import java.time.format.DateTimeParseException;
 
 public class Parser {
 
@@ -18,16 +19,21 @@ public class Parser {
             int pos = Integer.parseInt(input.split(" ")[1]);
             return new MarkCommand(pos);
         } else if (input.split(" ")[0].equals("todo")) {
-            String[] ls = input.split(" ");
+            String[] ls = input.split(" ", 2);
             if (ls.length <= 1) {
-                throw new ToDoException();
+                throw new DukeException("\t ☹ OOPS!!! The description of a todo cannot be empty.");
             }
             String des = ls[1];
             return new AddToDoCommand(new Todo(des));
         } else if (input.split(" ")[0].equals("deadline")) {
-            String des = input.split(" /", 2)[0].split(" ", 2)[1];
-            String date = input.split("/", 2)[1].split(" ", 2)[1];
-            return new AddDeadlineCommand(new Deadline(des, date));
+            try {
+                String des = input.split(" /", 2)[0].split(" ", 2)[1];
+                String date = input.split("/", 2)[1].split(" ", 2)[1];
+                return new AddDeadlineCommand(new Deadline(des, date));
+            } catch (DateTimeParseException e) {
+                throw new DukeException("\t " + "The date format should be YYYY-MM-DD");
+            }
+
         } else if (input.split(" ")[0].equals("event")) {
             String des = input.split(" /", 2)[0].split(" ", 2)[1];
             String date = input.split("/", 2)[1].split(" ", 2)[1];
@@ -36,7 +42,7 @@ public class Parser {
             int pos = Integer.parseInt(input.split(" ")[1]);
             return new DeleteCommand(pos);
         } else {
-            throw new DukeException();
+            throw new DukeException("\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }

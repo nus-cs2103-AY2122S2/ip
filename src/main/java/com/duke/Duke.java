@@ -7,8 +7,6 @@ import com.duke.util.Parser;
 import com.duke.util.Storage;
 import com.duke.util.Ui;
 
-import java.io.*;
-
 public class Duke {
 
     private Storage storage;
@@ -39,8 +37,7 @@ public class Duke {
         }
     }
 
-
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         new Duke("tasks.txt").run();
     }
 }

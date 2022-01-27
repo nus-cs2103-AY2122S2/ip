@@ -14,8 +14,8 @@ public class Event extends Task {
         this.at = LocalDate.parse(at);
     }
 
-    public String getDate() {
-        return at.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+    public LocalDate getDate() {
+        return at;
     }
 
     @Override

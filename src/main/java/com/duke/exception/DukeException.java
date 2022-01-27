@@ -2,8 +2,14 @@ package com.duke.exception;
 
 public class DukeException extends Exception{
 
+    private String message;
+
+    public DukeException(String message) {
+        this.message = message;
+    }
+
     @Override
     public String getMessage() {
-        return "\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+        return message;
     }
 }

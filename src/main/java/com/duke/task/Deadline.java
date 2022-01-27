@@ -14,8 +14,8 @@ public class Deadline extends Task {
         this.by = LocalDate.parse(by);
     }
 
-    public String getDate() {
-        return by.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+    public LocalDate getDate() {
+        return by;
     }
 
     @Override
