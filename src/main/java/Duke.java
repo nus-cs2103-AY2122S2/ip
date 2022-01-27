@@ -1,5 +1,7 @@
 import java.util.Arrays;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 
@@ -98,7 +100,9 @@ public class Duke {
                                 "Oops, please tell me where this will occur!"
                         );
                     }
-                    Task event = new Event(stripDescription(input)[0], stripDescription(input)[1]);
+
+                    LocalDate date = LocalDate.parse(stripDescription(input)[1]);
+                    Task event = new Event(stripDescription(input)[0], date);
                     System.out.println("Got it. I've added this task:");
                     list.add(event);
                     System.out.println(event.toString());
@@ -119,7 +123,10 @@ public class Duke {
                                 "Oops, please tell me when is this due!"
                         );
                     }
-                    Task deadline = new Deadline(stripDescription(input)[0], stripDescription(input)[1]);
+
+                    LocalDate date = LocalDate.parse(stripDescription(input)[1]);
+
+                    Task deadline = new Deadline(stripDescription(input)[0], date);
                     System.out.println("Got it. I've added this task:");
                     list.add(deadline);
                     System.out.println(deadline.toString());
@@ -168,6 +175,8 @@ public class Duke {
             System.out.println("Sad to see you leave, come back soon!");
         } catch (DukeException e) {
             System.err.print(e);
+        } catch (DateTimeParseException e) {
+            System.err.println("Oops! That was not a valid date format, please try again in the format yyyy-mm-dd!");
         }
     }
 
