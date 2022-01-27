@@ -1,5 +1,6 @@
 package duke;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -34,17 +35,26 @@ public class TaskManager {
     }
 
     /**
-     * Listing out the tasks
-     * @return String representing the list of tasks
+     * Listing out all the saved user tasks
+     * @return String representing the list of all tasks
      */
     public String list() {
         if (this.countTasks() == 0) {
             return "You have no tasks.";
         }
-        String response = "Here are the tasks in your list:\n";
-        for (int i = 1; i <= this.countTasks(); i++) {
-            response += (i + ". " + this.taskList.get(i - 1));
-            if (i != this.countTasks()) {
+        return "Here are the tasks in your list:\n" + this.listTasks(this.taskList);
+    }
+
+    /**
+     * List out tasks in an array a d return a string representing the tasks
+     * @param tasks Array of tasks
+     * @return String representing the tasks within the array
+     */
+    public String listTasks(ArrayList<Task> tasks) {
+        String response = "";
+        for (int i = 1; i <= tasks.size(); i++) {
+            response += (i + ". " + tasks.get(i - 1));
+            if (i != tasks.size()) {
                 response += "\n";
             }
         }
@@ -115,14 +125,7 @@ public class TaskManager {
         if (tasks.size() == 0) {
             return "There are no tasks matching this description.";
         }
-        String response = "Here are the tasks matching the description:\n";
-        for (int i = 1; i <= tasks.size(); i++) {
-            response += (i + ". " + tasks.get(i - 1));
-            if (i != tasks.size()) {
-                response += "\n";
-            }
-        }
-        return response;
+        return "Here are the tasks matching the description:\n" + this.listTasks(tasks);
     }
 
     /**
@@ -149,14 +152,7 @@ public class TaskManager {
         if (tasks.size() == 0) {
             return "There are no tasks with this date.";
         }
-        String response = "Here are the tasks with the given date date:\n";
-        for (int i = 1; i <= tasks.size(); i++) {
-            response += (i + ". " + tasks.get(i - 1));
-            if (i != tasks.size()) {
-                response += "\n";
-            }
-        }
-        return response;
+        return "Here are the tasks with the given date:\n" + this.listTasks(tasks);
     }
 
     /**
