@@ -1,7 +1,11 @@
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 
 public class TaskList {
     private final ArrayList<Task> itemList = new ArrayList<>(0);
@@ -196,6 +200,7 @@ public class TaskList {
         Task targetTask = this.itemList.get(index);
         Task newTask = targetTask.markTask();
         this.itemList.set(index, newTask);
+        updatesToFile(index, "1");
         System.out.println(
                 "----------------------------" +
                         "----------------------------\n" +
@@ -213,6 +218,7 @@ public class TaskList {
         Task targetTask = this.itemList.get(index);
         Task newTask = targetTask.unmarkTask();
         this.itemList.set(index, newTask);
+        updatesToFile(index, "0");
         System.out.println(
                 "----------------------------" +
                         "----------------------------\n" +
@@ -233,6 +239,23 @@ public class TaskList {
         }
 
         return initList.toString();
+    }
+
+    public void updatesToFile(int index, String mark) {
+        //use already written text in file to edit.
+        int lineSkip = index == 0 ? 0 : index - 1;
+        String targetLine = "";
+        try {
+            List<String> lines = Files.readAllLines(this.absolutePath, StandardCharsets.UTF_8);
+            targetLine = lines.get(lineSkip);
+            List<String> tokens = Arrays.asList(targetLine.split(" / "));
+            tokens.set(tokens.size() - 1, mark);
+            targetLine = String.join(" / ", tokens);
+            lines.set(lineSkip, targetLine);
+            Files.write(this.absolutePath, lines, StandardCharsets.UTF_8);
+        } catch (Exception err) {
+
+        }
     }
 
     public void writeToFile(String taskKey, String taskType, boolean isMarked) {
