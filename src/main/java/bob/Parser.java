@@ -46,8 +46,12 @@ public class Parser {
                 throw new DeadlineException();
             }
             String taskName = strArr[0].trim();
-            LocalDateTime dateTime = LocalDateTime.parse(strArr[1].trim());
-            return new DeadlineCommand(taskName, dateTime);
+            try {
+                LocalDateTime dateTime = LocalDateTime.parse(strArr[1].trim());
+                return new DeadlineCommand(taskName, dateTime);
+            } catch (DateTimeParseException e) {
+                throw new DeadlineException();
+            }
         } else if (firstWord.equalsIgnoreCase("todo")) {
             String taskName = input.substring(4).trim();
             String[] strArr = input.substring(4).split(" ");

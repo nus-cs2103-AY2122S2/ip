@@ -19,5 +19,5 @@ bin/
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
 text-ui-test/Bob.txt
-src/main/java/Bob.txt
+src/main/java/bob/Bob.txt
 
