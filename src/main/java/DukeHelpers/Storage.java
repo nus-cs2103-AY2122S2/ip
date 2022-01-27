@@ -13,18 +13,32 @@ import Commands.Event;
 import Commands.ToDo;
 import Commands.Task;
 
-
+/**
+ * Represents a storage for all Task data a Duke object saves according to user input.
+ */
 public class Storage {
 
     private String dirPath;
     private String filePath;
 
+    /**
+     * Constructs a Storage object.
+     *
+     * @param dirPath directory path for directory of data to be stored.
+     * @param filePath file path for data to be stored.
+     */
     public Storage(String dirPath, String filePath) {
         this.dirPath = dirPath;
         this.filePath = filePath;
     }
 
-    // load file
+    /**
+     * Loads existing data on Tasks if it exists, creates directory and file to store data if it doesn't exist.
+     *
+     * @return An array of Task where a Duke object stores all Task data from the user.
+     * @throws IOException If I/O operations fails or is interrupted.
+     * @throws NoSuchFileException If file for storage of Task data could not be created.
+     */
     public ArrayList<Task> loadFileContents() throws IOException {
         if (!new File(this.dirPath).exists()) {
             Files.createDirectory(Path.of(dirPath));
@@ -72,7 +86,12 @@ public class Storage {
         return taskArr;
     }
 
-    // save file
+    /**
+     * Writes existing data on Tasks to a directory and file.
+     *
+     * @return An array of Task where a Duke object stores all Task data from the user.
+     * @throws IOException If I/O operations fails or is interrupted.
+     */
     public static ArrayList<Task> saveToFile(ArrayList<Task> taskArr) {
         try {
             java.nio.file.Path path = java.nio.file.Paths.get("src/main/data/duke.txt");

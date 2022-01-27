@@ -7,9 +7,19 @@ import Exceptions.InvalidCommandException;
 import java.util.regex.Pattern;
 import Commands.Command;
 
-
+/**
+ * Represents a parser which makes sense of user inputs and calls the calls the corresponding commands.
+ */
 public class Parser {
 
+    /**
+     * Determines the type of commands given in the user input.
+     *
+     * @param s user input.
+     * @param command type of command to be checked against.
+     * @return boolean that indicates if the user gave the specified command.
+     * @throws DukeException If deadline and event commands are missing date and/or time.
+     */
     static boolean isCommand(String s, Command command) throws DukeException {
         boolean res = false;
         boolean missingDesc = false;
@@ -43,12 +53,20 @@ public class Parser {
                 break;
             case FIND:
                 res = res = Pattern.matches("find .+", s);
+                break;
         }
         if (missingDesc) { throw new EmptyDescriptionException(command.toString()); }
         if (missingTime) { throw new EmptyTimeException(command.toString()); }
         return res;
     }
 
+    /**
+     * Parse user input and calls TaskList to perform operations accordingly.
+     *
+     * @param input User input.
+     * @throws DukeException If command doesn't exist.
+     * @throws java.io.IOException If I/O operations fail or is interrupted.
+     */
     public static void parse(String input) {
         String ans = "\t";
         try {
@@ -59,13 +77,13 @@ public class Parser {
             } else if (isCommand(input, Command.DELETE)) {
                 TaskList.deleteTask(input, ans);
             } else if (isCommand(input, Command.TOGGLEMARK)) {
-                TaskList.toggleMarkTask(ans, input);
+                TaskList.toggleMarkTask(input, ans);
             } else if (isCommand(input, Command.TODO)) {
-                TaskList.onTodo(ans, input);
+                TaskList.onTodo(input, ans);
             } else if (isCommand(input, Command.DEADLINE)) {
-                TaskList.onDeadline(ans, input);
+                TaskList.onDeadline(input, ans);
             } else if (isCommand(input, Command.EVENT)) {
-                TaskList.onEvent(ans, input);
+                TaskList.onEvent(input, ans);
             } else if (isCommand(input, Command.FIND)) {
                 TaskList.getMatchedTasks(input);
             } else {
