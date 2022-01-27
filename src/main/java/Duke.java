@@ -1,4 +1,10 @@
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -85,14 +91,47 @@ public class Duke {
             } else {
                 throw new NoGoodException("");
             }
-            this.list.add((t));
+            this.list.add(t);
+            record(t + "\n");
             return "Got it. I've added this task:\n  " +
                     t + "\nNow you have " + this.list.size() + " tasks in the list.";
         }
         catch (ArrayIndexOutOfBoundsException e) {
             return "Your expression of time is not valid";
         } catch (NoGoodException e) {
-            return " ☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+            return "OOPS!!! I'm sorry, but I don't know what that means :-(";
+        }
+    }
+
+    private void makeDirectory() throws IOException{
+        String fileName = "../data";
+        Path path = Paths.get(fileName);
+        if (!Files.exists(path)) {
+            Files.createDirectory(path);
+            creatFile();
+        }
+    }
+
+    private void creatFile() throws IOException {
+        File file = new File("../data/record.txt");
+        if (!file.createNewFile())  {
+            if (file.delete()) {
+                creatFile();
+            } else {
+                System.out.println("something is wrong.");
+            }
+        }
+    }
+
+    private void record(String info) {
+        try {
+            makeDirectory();
+            FileWriter myWriter = new FileWriter("../data/record.txt");
+            myWriter.write(info);
+            myWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
     }
 
