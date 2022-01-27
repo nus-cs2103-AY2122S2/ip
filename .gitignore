@@ -18,3 +18,5 @@ text-ui-test/EXPECTED-UNIX.TXT
 *.class
 text-ui-test/ACTUAL.TXT
 src/main/java/data/data.txt
+data/
+src/main/java/META-INF/MANIFEST.MF
