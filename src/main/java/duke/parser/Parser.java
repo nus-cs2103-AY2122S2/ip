@@ -40,6 +40,9 @@ public class Parser {
             case DELETE:
                 taskList.delete(Integer.parseInt(input[1]) - 1);
                 break;
+            case FIND:
+                taskList.find(input[1]);
+                break;
             default:
                 Task task = getTask(input, type);
                 if (task != null) {
@@ -76,7 +79,7 @@ public class Parser {
                 task = new Event(strings[0], LocalDate.parse(strings[1].substring(3)));
                 break;
             case TODO:
-                task = new Todo(userInput[1]);
+                task = new Todo(userInput[1].strip());
                 break;
             }
 
@@ -87,7 +90,7 @@ public class Parser {
 
         } catch (DukeException e) {
             if (isCommandRecognized(userInput[0])) {
-                ui.echo(" ☹ OOPS!!! The description of a " + userInput[0] + " cannot be empty.");
+                ui.echo("☹ OOPS!!! The description of a " + userInput[0] + " cannot be empty.");
             } else if (e.getMessage().equals("Error in task") || e.getMessage().equals("Error")) {
                 ui.echo("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
@@ -126,6 +129,9 @@ public class Parser {
         case "event":
             type = Type.EVENT;
             break;
+        case "find":
+            type = Type.FIND;
+            break;
         case "list":
             type = Type.LIST;
             break;
@@ -150,6 +156,7 @@ public class Parser {
         DEADLINE,
         DELETE,
         EVENT,
+        FIND,
         LIST,
         MARK,
         UNMARK,
