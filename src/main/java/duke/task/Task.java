@@ -64,6 +64,24 @@ public class Task {
         return Integer.toString(counter);
     }
 
+    public static Integer[] findTask(String keyword) {
+        int arrayLength = listOfTask.size();
+        Task[] tempArray = Task.getTaskList();
+
+        ArrayList<Integer> listOfTaskWithKeyword = new ArrayList<Integer>();
+
+        for(int i = 0; i < arrayLength; i++) {
+            if(tempArray[i].name.contains(keyword)) {
+                listOfTaskWithKeyword.add(i);
+            }
+        }
+
+        Integer[] result = new Integer[listOfTaskWithKeyword.size()];
+        listOfTaskWithKeyword.toArray(result);
+
+        return result;
+    }
+
     /**
      * Retrieve a formatted String of the current task list.
      *
@@ -87,7 +105,28 @@ public class Task {
         return output;
     }
 
-    private void updateFile() {
+    /**
+     * Retrieve a formatted String of the current task list.
+     *
+     * @param array an integer array containing task number to be printed
+     * @return a String with the current task list
+     */
+    public static String printArray(Integer[] array) {
+        int arrayLength = array.length;
+        Task[] tempArray = Task.getTaskList();
+        String output = "";
+
+        for (int i = 0; i < arrayLength; i++) {
+            output += "       " + Integer.toString(i + 1) + "." + tempArray[array[i]];
+            if (i != arrayLength - 1) {
+                output += "\n";
+            }
+        }
+
+        return output;
+    }
+
+        private void updateFile() {
         Storage storage = new Storage(Storage.filePath);
         storage.writeToPath(Task.printArray());
     }

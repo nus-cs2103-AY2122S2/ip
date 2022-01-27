@@ -74,6 +74,29 @@ public class Parser {
             System.out.println(output);
 
             return true;
+        } else if (userInput.split(" ")[0].equals("find")) {
+            String[] input = userInput.split(" ");
+            Integer[] foundTask = Task.findTask(userInput.substring(5));
+
+            if(input.length > 1) {
+
+                String output = Ui.createLine()
+                        + "       OK I have found the following task! :D \n"
+                        + Task.printArray(foundTask) + "\n"
+                        + Ui.createLine();
+                System.out.println(output);
+
+            } else {
+                String errorMsg = Ui.createLine()
+                        + "       You have entered the find command.\n"
+                        + "       What do you want to find?\n"
+                        + Ui.createLine();
+                System.out.println(errorMsg);
+            }
+
+
+            return true;
+
         } else {
 
             try {
