@@ -57,8 +57,7 @@ public class Storage {
         String file2 = this.filePath;
         try {
             writeToFile(list.exportOut());
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
     }

@@ -132,18 +132,13 @@ public class TaskList {
             String[] commandArray = command.split(" ");
             String markStatus = commandArray[0];
             int itemNo = Integer.parseInt(commandArray[1]);
-            // Edge cases
-            if (itemNo > list.getSize() || itemNo < 1) {
+            if (itemNo > list.getSize() || itemNo < 1) { // Edge cases
                 System.out.println("Error: That task does not exist!");
-            }
-            // Mark
-            else if (markStatus.equals("mark")) {
+            } else if (markStatus.equals("mark")) { // Mark
                 list.getTask(itemNo-1).markTask();
                 System.out.println("Nice! I've marked this task as done:\n"
                         + list.getTask(itemNo-1).toString());
-            }
-            // Unmark
-            else {
+            } else { // Unmark
                 list.getTask(itemNo-1).unmarkTask();
                 System.out.println("OK, I've marked this task as not done yet:\n"
                         + list.getTask(itemNo-1).toString());
