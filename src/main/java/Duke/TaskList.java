@@ -36,4 +36,8 @@ public class TaskList {
 	public int getCount() {
 		return this.count;
 	}
+
+	public ArrayList<Task> getCurrentList() {
+		return this.tasks;
+	}
 }
