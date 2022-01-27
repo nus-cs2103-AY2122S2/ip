@@ -3,6 +3,9 @@ package kidsnd274.duke.command;
 import kidsnd274.duke.TaskList;
 import kidsnd274.duke.taskobjects.Deadline;
 
+/**
+ * Command to add a deadline task to the task list
+ */
 public class AddDeadlineCommand extends AddCommand {
     public static final String COMMAND_WORD = "deadline";
 
