@@ -24,6 +24,7 @@ public class CommandList {
     public void execute(String input, Parser parser, ArrayList<Task> list, Storage storage) {
         String[] inputs = input.split(" ");
         String firstWord = inputs[0];
+
         if (input.equals("bye")) { // check for exit condition
             System.out.println("Bye. Hope to see you again soon!");
             parser.terminate();
