@@ -10,7 +10,8 @@ public class ToDoCommand implements Command {
     public static final String KEYWORD = "todo";
     public static final String FORMAT = "Command Format: \"" + KEYWORD + " <desc>\"";
 
-    @Override public CommandOutput execute(String[] input, TaskList taskList) {
+    @Override
+    public CommandOutput execute(String[] input, TaskList taskList) {
         // Parse input.
         String desc = "";
         try {

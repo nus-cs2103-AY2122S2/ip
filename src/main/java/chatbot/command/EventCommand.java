@@ -14,7 +14,8 @@ public class EventCommand implements Command {
             "Command format: \"" + KEYWORD + " <desc> /at <start_date> <start_time> <end_date> <end_time>\"\n"
                     + "Date format: YYYY-MM-DD\n" + "Time format: HH:MM or HH:MM:SS";
 
-    @Override public CommandOutput execute(String[] input, TaskList taskList) {
+    @Override
+    public CommandOutput execute(String[] input, TaskList taskList) {
         // Parse input.
         String desc = "";
         LocalDate startDate = null;

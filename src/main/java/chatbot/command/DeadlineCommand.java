@@ -14,7 +14,8 @@ public class DeadlineCommand implements Command {
             "Command Format: \"" + KEYWORD + " <desc> /by <date> <time>\"\n" + "Date format: YYYY-MM-DD\n"
                     + "Time format: HH:MM or HH:MM:SS";
 
-    @Override public CommandOutput execute(String[] input, TaskList taskList) {
+    @Override
+    public CommandOutput execute(String[] input, TaskList taskList) {
         // Parse input.
         String desc = "";
         LocalDate date = null;

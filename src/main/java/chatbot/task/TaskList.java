@@ -20,19 +20,22 @@ public class TaskList extends ArrayList<Task> implements Serializable {
         return taskList;
     }
 
-    @Override public boolean add(Task task) {
+    @Override
+    public boolean add(Task task) {
         boolean ret = super.add(task);
         Storage.Save(saveFile, this);
         return ret;
     }
 
-    @Override public Task remove(int index) {
+    @Override
+    public Task remove(int index) {
         Task ret = super.remove(index);
         Storage.Save(saveFile, this);
         return ret;
     }
 
-    @Override public void clear() {
+    @Override
+    public void clear() {
         super.clear();
         Storage.Save(saveFile, this);
     }

@@ -13,7 +13,8 @@ public class Deadline extends Task {
         this.time = time;
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
         return "[D]" + super.toString() + " (by: " + date.toString() + " " + time.toString() + ")";
     }
 }

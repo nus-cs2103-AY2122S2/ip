@@ -8,7 +8,8 @@ public class MarkCommand implements Command {
     public static final String FORMAT =
             "Command format: \"" + KEYWORD + " <index>\"\n" + "Index range: 1 to <size of list>";
 
-    @Override public CommandOutput execute(String[] input, TaskList taskList) {
+    @Override
+    public CommandOutput execute(String[] input, TaskList taskList) {
         try {
             int index = Integer.parseInt(input[1]);
             Task task = taskList.get(index - 1);
