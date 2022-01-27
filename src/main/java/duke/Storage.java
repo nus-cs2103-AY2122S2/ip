@@ -25,15 +25,17 @@ public class Storage {
      */
     public Storage(String filepath) throws DukeException {
 
-        String directory_path = "src/main/data";
-        File directory = new File(directory_path);
-        if (!directory.exists()) {
-            directory.mkdir();
-            throw new DukeException("No such directory but let me make one for you !");
-        }
+//        String directory_path = "src/main/data";
+//        String directory_path = "./";
+//        File directory = new File(directory_path);
+//        if (!directory.exists()) {
+//            directory.mkdir();
+//            throw new DukeException("No such directory but let me make one for you !");
+//        }
         File store = new File(filepath);
         try {
             store.createNewFile();
+            System.out.println("File is created!");
         } catch (IOException e) {
             throw new DukeException("No such storage file! Or maybe file exists already!");
         }
