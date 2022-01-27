@@ -16,6 +16,9 @@ public class Duke {
             "Let's try again ~(^.^)~\n" +
             "Type 'help' if you need to know how to use this command";
     static final String BYE_RESPONSE = "Bye~ Hope to see you again soon!\n~--~~--~~--~~(~v~)~~--~~--~~--~";
+    static final String INVALID_DATE = "Oops, please put a valid time format!\n" +
+            "Let's try again ~(^.^)~\n" +
+            "Type 'help' if you need to know how to use this command";
 
     public Duke() {
         this.tasks = new ArrayList<Task>();
@@ -118,6 +121,7 @@ public class Duke {
      * @throws DukeException when there is no description provided or when there is no time specified by the user.
      */
     public void addDeadline(String description, String time) throws DukeException {
+        DateHelper datetime = new DateHelper(time);
         if (description.length() == 0) {
             throw new DukeException(NO_DESC);
         }
@@ -126,7 +130,7 @@ public class Duke {
                     "Let's try again ~(^.^)~\n" +
                     "Type 'help' if you need to know how to use this command");
         } else {
-            Deadline entry = new Deadline(description, time);
+            Deadline entry = new Deadline(description, datetime);
             this.tasks.add(entry);
             String message = entry.getTask();
             System.out.println("I have added the following deadline:\n" + message);
@@ -142,10 +146,11 @@ public class Duke {
      * @throws DukeException when there is no description provided or when there is no time specified by the user.
      */
     public void addEvent(String description, String time) throws DukeException {
+        DateHelper datetime = new DateHelper(time);
         if (description.length() == 0) {
             throw new DukeException(NO_DESC);
         } else {
-            Event entry = new Event(description, time);
+            Event entry = new Event(description, datetime);
             this.tasks.add(entry);
             String message = entry.getTask();
             System.out.println("I have added the following event:\n" + message);
@@ -197,7 +202,6 @@ public class Duke {
      * @throws DukeException when the specified ID number is not in the list, if the time is not provided accurately,
      *                       or if there was no description or command provided.
      */
-
     public void check(Duke ducky, Scanner myObj) throws DukeException {
         String response = myObj.nextLine();
         String[] textEntered = response.split(" ", 2);
@@ -230,7 +234,7 @@ public class Duke {
                 String description = textEntered[1];
                 ducky.addTodo(description);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException (NO_DESC);
+                throw new DukeException(NO_DESC);
             }
             break;
         case DEADLINE:
@@ -245,15 +249,9 @@ public class Duke {
                     throw new DukeException("Oops, please specify a date!");
                 }
                 String time = textArr[1];
-                SimpleDateFormat date = new java.text.SimpleDateFormat("dd/MM/yyyy");
-                date.parse(time);
                 ducky.addDeadline(description, time);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException(NO_DESC);
-            } catch (ParseException e) {
-                throw new DukeException("Oops, please put a valid time format!\n" +
-                        "Let's try again ~(^.^)~\n" +
-                        "Type 'help' if you need to know how to use this command");
             }
             break;
         case EVENT:
@@ -268,15 +266,9 @@ public class Duke {
                     throw new DukeException("Oops, please specify a date!");
                 }
                 String time = textArr[1];
-                SimpleDateFormat date = new java.text.SimpleDateFormat("dd/MM/yyyy");
-                date.parse(time);
                 ducky.addEvent(description, time);
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println(NO_DESC);
-            } catch (ParseException e) {
-                System.out.println("Oops, please put a valid time format!\n" +
-                        "Let's try again ~(^.^)~\n" +
-                        "Type 'help' if you need to know how to use this command");
             }
             break;
         case UNMARK:

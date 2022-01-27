@@ -13,7 +13,7 @@ public class TextWriter {
             FileWriter myWriter = new FileWriter(this.filename, false);
             myWriter.write(this.contents);
             myWriter.close();
-            System.out.println("Your tasks have been saved in " + this.filename + ".");
+            System.out.println("Your tasks have been saved in " +  this.filename + ".");
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();

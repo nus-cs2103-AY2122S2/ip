@@ -38,7 +38,7 @@ Let's try again ~(^.^)~
 Type 'help' if you need to know how to use this command
 ~--~~--~~--~~(~v~)~~--~~--~~--~
 I have added the following deadline:
-[D][ ] drawing (by: 01/07/2022)
+[D][ ] drawing (by: 01 July 2022)
 You now have 2 tasks
 ~--~~--~~--~~(~v~)~~--~~--~~--~
 Oops! \(@.@)/ You have not keyed in a description for the task!
@@ -46,7 +46,7 @@ Let's try again ~(^.^)~
 Type 'help' if you need to know how to use this command
 ~--~~--~~--~~(~v~)~~--~~--~~--~
 I have added the following event:
-[E][ ] ball (at: 10/02/2022)
+[E][ ] ball (at: 10 February 2022)
 You now have 3 tasks
 ~--~~--~~--~~(~v~)~~--~~--~~--~
 Oops! \(@.@)/ You have not keyed in a description for the task!
@@ -55,18 +55,18 @@ Type 'help' if you need to know how to use this command
 ~--~~--~~--~~(~v~)~~--~~--~~--~
 Here are your tasks:
 1. [T][ ] Java week 2
-2. [D][ ] drawing (by: 01/07/2022)
-3. [E][ ] ball (at: 10/02/2022)
+2. [D][ ] drawing (by: 01 July 2022)
+3. [E][ ] ball (at: 10 February 2022)
 ~--~~--~~--~~(~v~)~~--~~--~~--~
 Oops! \(@.@)/ This task does not exist.
 Please type 'list' to see existing tasks *(^.^)*
 ~--~~--~~--~~(~v~)~~--~~--~~--~
 I have removed this from your tasks:
-[D][ ] drawing (by: 01/07/2022)
+[D][ ] drawing (by: 01 July 2022)
 You now have 2 tasks
 ~--~~--~~--~~(~v~)~~--~~--~~--~
 Ok, I have marked the following task:
-[E][X] ball (at: 10/02/2022)
+[E][X] ball (at: 10 February 2022)
 ~--~~--~~--~~(~v~)~~--~~--~~--~
 Sorry, I could not find the item \(T.T)/
 Please type 'list' to view your current entries.
@@ -75,18 +75,26 @@ Sorry, I could not find the item \(T.T)/
 Please type 'list' to view your current entries.
 ~--~~--~~--~~(~v~)~~--~~--~~--~
 Sure, I have unmarked the following task:
-[E][ ] ball (at: 10/02/2022)
+[E][ ] ball (at: 10 February 2022)
 ~--~~--~~--~~(~v~)~~--~~--~~--~
 Sorry, I could not find that \(T.T)/
 Please type 'list' to view your current entries.
 ~--~~--~~--~~(~v~)~~--~~--~~--~
 Here are your tasks:
 1. [T][ ] Java week 2
-2. [E][ ] ball (at: 10/02/2022)
+2. [E][ ] ball (at: 10 February 2022)
 ~--~~--~~--~~(~v~)~~--~~--~~--~
 Please use "/by"
 ~--~~--~~--~~(~v~)~~--~~--~~--~
 Please use "/at"
+~--~~--~~--~~(~v~)~~--~~--~~--~
+Oops, please put a valid time format!
+Let's try again ~(^.^)~
+Type 'help' if you need to know how to use this command
+~--~~--~~--~~(~v~)~~--~~--~~--~
+I have added the following event:
+[E][ ] soccer (at: 20 February 2022)
+You now have 3 tasks
 ~--~~--~~--~~(~v~)~~--~~--~~--~
 Your tasks have been saved in duke.txt.
 Bye~ Hope to see you again soon!
