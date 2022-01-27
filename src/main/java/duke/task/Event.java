@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -17,7 +19,7 @@ public class Event extends Task {
     protected LocalDateTime end;
 
     /**
-     * Constructor to create a deadline task.
+     * Constructor to create a Event task.
      *
      * @param description text description of the Event.
      * @param start start dates/times.

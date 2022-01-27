@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.common.DukeException;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 /**
  * Class representing the functionality of Task
  */
@@ -20,10 +27,11 @@ public abstract class Command {
      * of the command of the child classes.
      *
      * @param taskList list of tasks.
-     * @param ui user interface of the chatbot.
-     * @param storage storage used by chatbot.
+     * @param ui user interface of the chat bot.
+     * @param storage storage used by chat bot.
+     * @throws DukeException if there is an error when executing.
      */
-    abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Outputs whether the command is an Exit Command.

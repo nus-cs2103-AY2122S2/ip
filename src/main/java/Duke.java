@@ -1,10 +1,17 @@
+import duke.command.Command;
+import duke.common.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 /**
  * Runs a Personal Assistant Chat bot.
  */
 public class Duke {
 
     /**
-     * Storage handles loading and saving of tasks.
+     * duke.storage.Storage handles loading and saving of tasks.
      */
     private Storage storage;
 
@@ -41,7 +48,7 @@ public class Duke {
     }
 
     /**
-     * Runs and manages Duke chat  bot.
+     * Runs and manages Duke chat bot.
      */
     public void run() {
         ui.showWelcome();
@@ -67,7 +74,7 @@ public class Duke {
      *
      * Calls the run function for Duke chat bot.
      *
-     * @param args Command line arguments from terminal.
+     * @param args command line arguments from terminal.
      */
     public static void main(String[] args) {
         new Duke(FILE_PATH).run();

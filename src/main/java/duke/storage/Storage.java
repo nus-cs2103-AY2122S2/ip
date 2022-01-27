@@ -1,3 +1,13 @@
+package duke.storage;
+
+import duke.common.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.TaskType;
+import duke.task.ToDo;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,7 +37,7 @@ public class Storage {
     /**
      * Create the file and necessary folder to store tasks.
      *
-     * @throws FileIOException exception when unable to create file or folder.
+     * @throws FileIOException if unable to create file or folder.
      */
     private void createFile() throws FileIOException {
         try {
@@ -45,21 +55,21 @@ public class Storage {
      * @param tokens tokens to parsed.
      * @throws InvalidFileSyntaxException If syntax is unknown.
      */
-    private void parseMarkSyntax(Task task, String[] tokens) throws InvalidFileSyntaxException{
+    private void parseMarkSyntax(Task task, String[] tokens) throws InvalidFileSyntaxException {
         tokens[1] = tokens[1].trim();
         if (tokens[1].equals("1")) {
             task.markAsDone();
         } else if (tokens[1].equals("0")) {
             task.unmarkAsDone();
         } else {
-            throw new InvalidFileSyntaxException("Failed to load task: Unkown Task Mark Syntax");
+            throw new InvalidFileSyntaxException("Failed to load task: invalid task mark syntax");
         }
     }
 
     /**
-     * Parse input and create ToDo task.
+     * Parse input and create a ToDo task.
      *
-     * @param tokens input to be parsed
+     * @param tokens input to be parsed.
      * @return ToDo task.
      */
     private Task parseTodoTask(String[] tokens) {
@@ -69,7 +79,7 @@ public class Storage {
     /**
      * Parse input and create Event task.
      *
-     * @param tokens input to be parsed
+     * @param tokens input to be parsed.
      * @return Event task.
      */
     private Task parseEventTask(String[] tokens) {
@@ -81,7 +91,7 @@ public class Storage {
     /**
      * Parse input and create Deadline task.
      *
-     * @param tokens input to be parsed
+     * @param tokens input to be parsed.
      * @return Deadline task.
      */
     private Task parseDeadlineTask(String[] tokens) {
@@ -94,11 +104,10 @@ public class Storage {
      * Outputs the list of tasks.
      *
      * @return ArrayList of loaded Tasks.
-     * @throws DukeException exception thrown if there is wrong syntax or I/O error.
-     * @see Task
+     * @throws DukeException if there is wrong syntax or I/O error.
      */
     public ArrayList<Task> load() throws DukeException {
-        ArrayList taskList = new ArrayList();
+        ArrayList<Task> taskList = new ArrayList<>();
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(STORAGE_FILE));
             String line;
@@ -114,7 +123,7 @@ public class Storage {
                 } else if (tokens[0].equals("E")) {
                     task = parseEventTask(tokens);
                 } else {
-                    throw new InvalidFileSyntaxException("Failed to load task: Unknown Task type");
+                    throw new InvalidFileSyntaxException("Failed to load task: invalid task type");
                 }
                 parseMarkSyntax(task, tokens);
                 taskList.add(task);
@@ -132,9 +141,9 @@ public class Storage {
     /**
      * Saves the tasks from task list to the file stored locally.
      *
-     * @throws FileIOException exception when unable to create or write to file.
+     * @throws FileIOException if unable to create or write to file.
      */
-    protected void saveToFile(TaskList taskList) throws FileIOException {
+    public void saveToFile(TaskList taskList) throws FileIOException {
         try {
             if (!STORAGE_FILE.exists()) {
                 createFile();

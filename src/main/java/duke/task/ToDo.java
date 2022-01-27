@@ -1,10 +1,12 @@
+package duke.task;
+
 /**
  * Tasks that does not have any date/time attached to it.
  */
 public class ToDo extends Task {
 
     /**
-     * Contrustor to create a deadline task.
+     * Constructor to create a deadline task.
      *
      * @param description text description of the ToDo.
      */

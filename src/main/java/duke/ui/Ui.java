@@ -1,3 +1,7 @@
+package duke.ui;
+
+import duke.common.DukeException;
+
 import java.util.Scanner;
 
 /**
@@ -59,7 +63,7 @@ public class Ui {
     }
 
     /**
-     * Prints out the welcome message of the Chatbot.
+     * Prints out the welcome message of the Chat bot.
      */
     public void showWelcome() {
         System.out.println(

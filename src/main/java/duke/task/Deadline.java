@@ -1,9 +1,11 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
  * Tasks that is required to be done before a specific
- * date/time. Inherits from Task.
+ * date/time.
  */
 public class Deadline extends Task {
 
@@ -56,9 +58,9 @@ public class Deadline extends Task {
 
     /**
      * Outputs the string to represent deadline with
-     * description and due date/time
+     * description and due date/time.
      *
-     * @return formatted string respresting the Deadline
+     * @return formatted string representing the Deadline.
      */
     @Override
     public String toString() {

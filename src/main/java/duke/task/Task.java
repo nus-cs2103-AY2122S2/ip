@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Represents the tasks the user stores and
  * keeps track whether the task is done.
@@ -20,7 +22,7 @@ public class Task {
     public TaskType type;
 
     /**
-     * Contrustor to create Task object.
+     * Constructor to create Task object.
      *
      * @param description string representing the task.
      */

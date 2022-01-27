@@ -1,3 +1,7 @@
+package duke.storage;
+
+import duke.common.DukeException;
+
 /**
  *  Exception thrown when file follows and incorrect format
  *  or syntax.

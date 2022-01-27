@@ -1,3 +1,5 @@
+package duke.common;
+
 /**
  * Exceptions that are specific to the Duke ChatBot.
  * Inherits from Exception.

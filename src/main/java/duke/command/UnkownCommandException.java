@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.common.DukeException;
+
 /**
  * Exception to handle cases where the command entered
  * is unknown/invalid.

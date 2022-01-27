@@ -1,3 +1,17 @@
+package duke.parser;
+
+import duke.command.Command;
+import duke.command.CreateDeadlineCommand;
+import duke.command.CreateEventCommand;
+import duke.command.CreateToDoCommand;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnkownCommandException;
+import duke.command.UnmarkCommand;
+import duke.common.DukeException;
+
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
@@ -47,10 +61,10 @@ public class Parser {
     }
 
     /**
-     * Parse input tokens and creates CreateToDoCommand.
+     * Parse input tokens and creates a CreateToDoCommand.
      *
      * @param tokens input tokens to be parsed.
-     * @return CreateToDo Command.
+     * @return CreateToDoCommand.
      * @throws DukeException if there are invalid arguments.
      */
     private static Command parseTodoCommand(String[] tokens) throws DukeException {
@@ -71,7 +85,7 @@ public class Parser {
      * Parse input tokens and creates Delete Command.
      *
      * @param tokens input tokens to be parsed.
-     * @return Delete Command.
+     * @return DeleteCommand.
      * @throws if there are invalid arguments.
      */
     private static Command parseDeleteCommand(String[] tokens) throws DukeException {
@@ -98,7 +112,7 @@ public class Parser {
     private static Command parseDeadlineCommand(String[] tokens) throws DukeException {
         if (tokens.length < 2) {
             throw new InvalidArgumentException(":-( OOPS!!! The description of "
-                    + "Deadline cannot be empty.");
+                    + "deadline cannot be empty.");
         }
         StringBuilder stringBuilder = new StringBuilder();
         Boolean foundKeyword = false;
@@ -136,7 +150,7 @@ public class Parser {
     }
 
     /**
-     * Parse input tokens and creates CreateEventCommand.
+     * Parse input tokens and creates a CreateEventCommand.
      *
      * @param tokens input tokens to be parsed.
      * @return CreateEventCommand.
@@ -145,7 +159,7 @@ public class Parser {
     private static Command parseEventCommand(String[] tokens) throws DukeException {
         if (tokens.length < 2) {
             throw new InvalidArgumentException(":-( OOPS!!! The description of "
-                    + "Event cannot be empty.");
+                    + "event cannot be empty.");
         }
         StringBuilder stringBuilder = new StringBuilder();
         Boolean foundKeyword = false;

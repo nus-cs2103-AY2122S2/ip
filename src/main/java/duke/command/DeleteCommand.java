@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.common.DukeException;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 /**
  * Responsible for the functionality needed when deleting a task.
  */
@@ -23,15 +31,15 @@ public class DeleteCommand extends Command {
      * out appropriate response message.
      *
      * @param taskList list of tasks.
-     * @param ui user interface of the chatbot.
-     * @param storage storage used by chatbot.
-     * @throw DukeException File I/O exception thrown when saving file.
+     * @param ui user interface of the chat bot.
+     * @param storage storage used by chat bot.
+     * @throw DukeException if there is a File I/O exception thrown when saving file.
      */
     @Override
-    void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task task = taskList.remove(point - 1);
         storage.saveToFile(taskList);
-        ui.showMessage("Noted. I've removed this task:\n "
-                + task + "\n" + taskList.sizeDescription());
+        ui.showMessage("Noted. I've removed this task:\n " + task
+                + "\n" + taskList.sizeDescription());
     }
 }

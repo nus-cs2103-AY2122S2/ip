@@ -1,10 +1,17 @@
+package duke.command;
+
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 /**
  * Responsible for the functionality needed when listing out all the task.
  */
 public class ListCommand extends Command{
 
     /**
-     * Constructor to create List Command.
+     * Constructor to create List duke.command.Command.
      */
     public ListCommand() {
         super(CommandType.LIST);
@@ -13,7 +20,7 @@ public class ListCommand extends Command{
     /**
      * Returns the string containing list of tasks.
      *
-     * @param taskList Task list loaded to the chat bot.
+     * @param taskList duke.task.Task list loaded to the chat bot.
      * @return list of tasks as a string.
      */
     private static String listToString(TaskList taskList) {
@@ -34,11 +41,11 @@ public class ListCommand extends Command{
      * Prints out the list of tasks.
      *
      * @param taskList list of tasks.
-     * @param ui user interface of the chatbot.
-     * @param storage storage used by chatbot.
+     * @param ui user interface of the chat bot.
+     * @param storage storage used by chat bot.
      */
     @Override
-    void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         String output = listToString(taskList);
         ui.showMessage(output);
     }

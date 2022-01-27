@@ -1,3 +1,7 @@
+package duke.parser;
+
+import duke.common.DukeException;
+
 /**
  * Exception thrown when the user inputs the data and time invalid format.
  */
