@@ -1,3 +1,4 @@
+package duke;
 public class Response {
     public static final
     String LOGO = " ____        _        \n"

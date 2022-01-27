@@ -1,4 +1,5 @@
-class Over {
+package duke;
+public class Over {
     boolean isOver;
 
     public Over() {

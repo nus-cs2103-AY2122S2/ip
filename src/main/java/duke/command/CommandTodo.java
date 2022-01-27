@@ -1,4 +1,10 @@
-class CommandTodo extends Command {
+package duke.command;
+import duke.TaskList;
+import duke.Todo;
+import duke.Response;
+import duke.Ui;
+
+public class CommandTodo extends Command {
     TaskList taskList;
     String todoContent;
 

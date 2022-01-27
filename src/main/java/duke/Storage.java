@@ -1,3 +1,4 @@
+package duke;
 import java.nio.file.Paths;
 import java.nio.file.Path;
 import java.nio.file.Files;
@@ -8,7 +9,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-class Storage {
+public class Storage {
     public void writeData(TaskList taskList) {
         Path dirPath = Paths.get("data");
         Path filePath = Paths.get("data/taskList.txt");

@@ -1,4 +1,9 @@
-class CommandDelete extends Command {
+package duke.command;
+import duke.TaskList;
+import duke.Task;
+import duke.Response;
+import duke.Ui;
+public class CommandDelete extends Command {
     TaskList taskList;
     int taskNo;
 

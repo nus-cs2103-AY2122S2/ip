@@ -1,7 +1,11 @@
+package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import duke.command.Command;
+import duke.dukeException.NoTimeGivenException;
+import duke.command.*;
 
-class Parser {
+public class Parser {
     public static Command parse(String userInput, TaskList taskList, Over over)
     throws NoTimeGivenException {
         String[] words;

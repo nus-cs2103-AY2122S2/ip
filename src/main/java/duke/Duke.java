@@ -1,5 +1,8 @@
+package duke;
 import java.util.Scanner;
 import java.util.Locale;
+import duke.command.Command;
+import duke.dukeException.NoTimeGivenException;
 
 public class Duke {
     private static TaskList taskList = new TaskList();

@@ -1,18 +1,18 @@
+package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
-public class Event  extends Task {
-    private LocalDate time;
-
-    public Event(String content, LocalDate time) {
+public class Deadline extends Task {
+    private LocalDate date;
+    public Deadline(String content, LocalDate date) {
         super(content);
-        this.time = time;
+        this.date = date;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + time.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) + ")" ;
+        return "[D]" + super.toString() + " ( by:" + date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) + ")";
     }
 
     @Override
@@ -23,6 +23,6 @@ public class Event  extends Task {
         } else {
             isFinishedData = "0";
         }
-        return "E:" + isFinishedData + ":" + super.content + ":" + time.format(DateTimeFormatter.ISO_DATE);
+        return "D:" + isFinishedData + ":" + super.content + ":" + date.format(DateTimeFormatter.ISO_DATE);
     }
 }

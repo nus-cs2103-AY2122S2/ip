@@ -1,3 +1,4 @@
+package duke;
 /**
  * Provides abstraction of an task in the todoList
  */

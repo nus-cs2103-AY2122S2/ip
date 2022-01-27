@@ -1,17 +1,19 @@
+package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
-public class Deadline extends Task {
-    private LocalDate date;
-    public Deadline(String content, LocalDate date) {
+public class Event  extends Task {
+    private LocalDate time;
+
+    public Event(String content, LocalDate time) {
         super(content);
-        this.date = date;
+        this.time = time;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " ( by:" + date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) + ")";
+        return "[E]" + super.toString() + " (at: " + time.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) + ")" ;
     }
 
     @Override
@@ -22,6 +24,6 @@ public class Deadline extends Task {
         } else {
             isFinishedData = "0";
         }
-        return "D:" + isFinishedData + ":" + super.content + ":" + date.format(DateTimeFormatter.ISO_DATE);
+        return "E:" + isFinishedData + ":" + super.content + ":" + time.format(DateTimeFormatter.ISO_DATE);
     }
 }
