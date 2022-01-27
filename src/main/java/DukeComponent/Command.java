@@ -47,7 +47,15 @@ public class Command {
         case "delete":
             deleteTask(Integer.parseInt(wordSplit[1]) - 1);
             break;
+        case "find":
+            find(userInput.substring(5));
+            break;
         }
+    }
+
+    private void find(String description) {
+        System.out.println("Here are the matching task in your list: ");
+        tasks.find(description);
     }
 
     private void deleteTask(int indx) {
