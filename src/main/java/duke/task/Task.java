@@ -1,3 +1,4 @@
+package duke.task;
 /**
  * This class encapsulates a task input by the user.
  */

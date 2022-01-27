@@ -1,6 +1,12 @@
+package duke.command;
+
+import duke.List;
+import duke.Storage;
+import duke.Ui;
+import duke.exception.DukeException;
 import java.io.IOException;
 
-public class Command {
+abstract public class Command {
 
     private boolean isExit;
 

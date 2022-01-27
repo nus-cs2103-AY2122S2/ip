@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * This class encapsulates an Event task which inherits from Task.
  */

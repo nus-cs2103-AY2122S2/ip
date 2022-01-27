@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * This is an Enum class of Task Types, TODO, DEADLINE and EVENT
  */
