@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -11,6 +12,11 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         Scanner scanner = new Scanner(System.in);
         Control control = new Control();
+        CreateFile file = new CreateFile();
+        boolean isCreated = file.createFile();
+        if (!isCreated) {
+            control.load(file.getFileName());
+        }
         String firstWord= "";
         while (true) {
             try {
@@ -18,10 +24,12 @@ public class Duke {
                 System.out.print(fromDuke);
                 String[] commandArr = command.split(" ");
                 firstWord = commandArr[0];
-                if (!(firstWord.equals("bye") || firstWord.equals("list") || firstWord.equals("mark") || firstWord.equals("unmark") ||
-                    firstWord.equals("todo") || firstWord.equals("deadline") || firstWord.equals("event") || firstWord.equals("delete"))) {
+                if (!(firstWord.equals("bye") || firstWord.equals("list") || firstWord.equals("mark") ||
+                        firstWord.equals("unmark") || firstWord.equals("todo") || firstWord.equals("deadline") ||
+                        firstWord.equals("event") || firstWord.equals("delete") || firstWord.equals("save"))) {
                     throw new InvalidCommandException();
                 } else if (firstWord.equals("bye")) {
+                    control.writeTasksToFile();
                     control.bye();
                     break;
                 } else if (firstWord.equals("list")) {
@@ -36,9 +44,12 @@ public class Duke {
                     control.deadline(command);
                 } else if (firstWord.equals("event")) {
                     control.event(command);
-                } else if (firstWord.equals("delete")) {
+                } else if (firstWord.equals("save")) {
+                    control.save();
+                } else { //firstWord.equals("delete")
                     control.delete(command);
                 }
+
             } catch (InvalidCommandException e) {
                 System.out.println("'" + firstWord + "' is an invalid command! Please try again!");
             } catch (InvalidDescriptionException e) {

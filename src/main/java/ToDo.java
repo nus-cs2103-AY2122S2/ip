@@ -1,5 +1,6 @@
 public class ToDo extends Task{
     public ToDo(String name, boolean isChecked, String taskLabel) {
+
         super(name, isChecked, taskLabel);
     }
 

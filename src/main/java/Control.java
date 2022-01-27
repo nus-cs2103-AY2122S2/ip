@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Control {
@@ -108,7 +112,62 @@ public class Control {
         } catch (IndexOutOfBoundsException e) {
             System.out.println("That index number is out of range! Please try again!");
         }
+    }
 
+    public void save() {
+        writeTasksToFile();
+    }
+
+    public void load(String fileName) {
+        String command = null;
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(fileName));
+            while((command = reader.readLine()) != null){
+                String[] commandArr = command.split("]");
+                String cmdTemp = commandArr[0];
+                String firstWord = cmdTemp.substring(cmdTemp.length() - 1);
+                String taskName = command.substring(10);
+                String isMarked = command.substring(7, 8);
+                boolean isMarkedBool = isMarked == " ";
+
+                if (firstWord.equals("T")) {
+                    ToDo task = new ToDo(taskName, isMarkedBool, "T");
+                    this.tasks.add(task);
+
+                } else if (firstWord.equals("D")) {
+                    String[] detailsArr = taskName.split("by: ");
+                    String detail = detailsArr[1].substring(0, detailsArr[1].length() - 1);
+                    System.out.println(taskName);
+                    System.out.println(isMarkedBool);
+                    System.out.println(detail);
+                    Deadline task = new Deadline(detailsArr[0], isMarkedBool, "D", detail);
+                    System.out.println(task.toString());
+                    this.tasks.add(task);
+
+                } else if (firstWord.equals("E")) {
+                    String[] detailsArr = taskName.split("at: ");
+                    String detail = detailsArr[1].substring(0, detailsArr[1].length() - 2);
+                    Event task  = new Event(taskName, isMarkedBool, "E", detail);
+                    this.tasks.add(task);
+                    // event(command);
+                }
+            }
+        } catch (ArrayIndexOutOfBoundsException | FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void writeTasksToFile() {
+        WriteFile writeFile = new WriteFile();
+        writeFile.clearFile();
+        int leng = tasks.toArray().length;
+        for (int i = 0; i < leng; i++) {
+            Task task = tasks.get(i);
+            int num = i + 1;
+            writeFile.writeToFile(num + ": " + task.toString() + System.lineSeparator());
+        }
     }
 
 }
