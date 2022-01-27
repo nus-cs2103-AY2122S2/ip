@@ -20,6 +20,10 @@ public abstract class Task {
         return String.format("%s | %s | %s", getSymbol(), doneString, description);
     }
 
+    public boolean hasSubstring(String searchText) {
+        return description.contains(searchText);
+    }
+
     @Override
     public String toString() {
         return String.format("[%s][%s] %s", getSymbol(), getStatusSymbol(), description);
