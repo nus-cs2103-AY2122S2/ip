@@ -9,8 +9,10 @@ public class MarkCommand extends Command {
         MARK,
         UNMARK;
     }
+
     private int index;
     private Mark mark;
+
     public MarkCommand(int index, Mark mark, String[] commandArray) {
         super(commandArray);
         this.index = index;

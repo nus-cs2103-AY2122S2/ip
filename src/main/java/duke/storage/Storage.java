@@ -61,7 +61,7 @@ public class Storage {
                             }
                         }
                     } else {
-                        if (isDone.equals("X")){
+                        if (isDone.equals("X")) {
                             String content = line.substring(7);
                             taskList.add(new ToDo(content, true));
                         } else {

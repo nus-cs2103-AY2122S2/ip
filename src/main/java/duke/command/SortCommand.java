@@ -6,6 +6,7 @@ import duke.ui.Ui;
 
 public class SortCommand extends Command {
     private TaskList.SortType type;
+
     public SortCommand(TaskList.SortType type, String[] inputArray) {
         super(inputArray);
         this.type = type;

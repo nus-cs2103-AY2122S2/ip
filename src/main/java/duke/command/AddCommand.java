@@ -12,6 +12,7 @@ public class AddCommand extends Command {
         super(commandArray);
         this.task = task;
     }
+
     @Override
     public void executeCommand(TaskList taskList, Ui ui, Storage storage) {
         taskList.addTask(task);
