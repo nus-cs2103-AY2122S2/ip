@@ -12,14 +12,9 @@ public class Duke {
 
     public static void main(String[] args){
         Ui ui = new Ui();
-        initialise();
-        ui.loop();
-    }
-
-    public static void initialise(){
-        TaskList tasklist = new TaskList();
-        Storage storage = new Storage();
         Parser parser = new Parser();
+        Storage storage = new Storage();
+        ui.loop(storage.tasklist);
     }
 
 }
