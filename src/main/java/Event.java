@@ -7,6 +7,11 @@ public class Event extends Task{
     }
 
     @Override
+    public String getSaveString() {
+        return super.getSaveString() + "|" + eventDate;
+    }
+
+    @Override
     public String getIcon() {
         return "E";
     }

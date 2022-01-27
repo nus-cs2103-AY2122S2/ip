@@ -1,12 +1,33 @@
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Athena {
-    private final TaskList taskList;
+    private static final String SAVE_DIRECTORY = "data";
+    private static final String SAVE_FILE_NAME = "athena.txt";
+
+    private TaskList taskList;
     private boolean isActive;
 
     public Athena() {
-        this.taskList = new TaskList();
-        this.isActive = true;
+        // Load save data if present
+        java.nio.file.Path savePath = Paths.get(SAVE_DIRECTORY, SAVE_FILE_NAME);
+        // Assume that if file exists, it must contain the right data.
+        if (Files.exists(savePath)) {
+            try {
+                loadFromDisk(savePath);
+            } catch (IOException e) {
+                sayText("I couldn't load from disk. Opening new task list instead.");
+                taskList = new TaskList();
+            }
+        } else {
+            taskList = new TaskList();
+        }
+
+        isActive = true;
         sayText("Greetings! My name is Athena. What can I help you with?");
     }
 
@@ -23,6 +44,7 @@ public class Athena {
             arguments = splitInput[1];
         }
         // Run the given command
+        taskList.resetLastModified();
         try {
             switch (command) {
             case "todo":
@@ -69,6 +91,15 @@ public class Athena {
             }
         } catch (AthenaInputException e) {
             sayText(e.getMessage());
+        }
+        // Save the updated list to hard disk when needed
+        if (taskList.wasModified()) {
+            try {
+                saveToDisk();
+                System.out.println("saved");
+            } catch (IOException e) {
+                sayText("I encountered a problem saving to disk: " + e.getMessage());
+            }
         }
     }
 
@@ -139,6 +170,24 @@ public class Athena {
         } else {
             sayText(String.format("Now you have %d tasks in your list.", this.taskList.getNumberOfTasks()));
         }
+    }
+
+    private void saveToDisk() throws IOException {
+        java.nio.file.Path directoryPath = Paths.get(SAVE_DIRECTORY);
+        java.nio.file.Path savePath = directoryPath.resolve(SAVE_FILE_NAME);
+
+        // Create the data directory if necessary
+        if (!Files.exists(directoryPath)) {
+            Files.createDirectory(directoryPath);
+        }
+        // Save the file, overriding any existing save
+        ArrayList<String> taskListTextFormat = taskList.getSaveRepresentation();
+        Files.write(savePath, taskListTextFormat);
+    }
+
+    private void loadFromDisk(java.nio.file.Path savePath) throws IOException {
+        List<String> taskListTextFormat = Files.readAllLines(savePath);
+        taskList =  new TaskList(taskListTextFormat);
     }
 
     public static void main(String[] args) {

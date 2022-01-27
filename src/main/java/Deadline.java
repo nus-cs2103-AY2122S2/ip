@@ -7,6 +7,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String getSaveString() {
+        return super.getSaveString() + "|" + dueDate;
+    }
+
+    @Override
     public String getIcon() {
         return "D";
     }

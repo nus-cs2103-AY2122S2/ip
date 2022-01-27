@@ -18,6 +18,10 @@ public abstract class Task {
     // Returns the icon of the type of task
     public abstract String getIcon();
 
+    public String getSaveString() {
+        return getIcon() + "|" + (isDone ? 1 : 0) + "|" + description;
+    }
+
     @Override
     public String toString() {
         String completionMark = (this.isDone? "X" : " ");
