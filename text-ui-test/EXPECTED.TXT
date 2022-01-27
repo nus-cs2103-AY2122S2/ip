@@ -4,52 +4,38 @@
      _________________________________
      _________________________________
      Got it. I've added this task:
-       [T][ ] read book
+       [T][ ] sleep
      Now you have 1 tasks in the list.
      _________________________________
      _________________________________
      Got it. I've added this task:
-       [D][ ] return book (by: June 6th)
+       [E][ ] wake up (at: 26-Jan-2022)
      Now you have 2 tasks in the list.
      _________________________________
      _________________________________
-     I'm sorry, but I don't know what that means :-(
+     ☹ OOPS!!! Invalid exception! Event has to have a valid date in numerical format YYYY-MM-DD
+     _________________________________
+     _________________________________
+     ☹ OOPS!!! The description of a deadline cannot be empty.
      _________________________________
      _________________________________
      Got it. I've added this task:
-       [E][ ] project meeting (at: Aug 6th 2-4pm)
+       [D][ ] submit homework (by: 30-Jan-2022)
      Now you have 3 tasks in the list.
      _________________________________
      _________________________________
-     ☹ OOPS!!! The description of a todo cannot be empty.
-     _________________________________
-     _________________________________
-     ☹ OOPS!!! The description of an event must contain a specific time
-     _________________________________
-     _________________________________
-     Got it. I've added this task:
-       [E][ ] 2nd project meeting (at: Aug 8th 2-4pm)
-     Now you have 4 tasks in the list.
-     _________________________________
-     _________________________________
      Nice! I've marked this task as done:
-     [T][X] read book
+     [T][X] sleep
      _________________________________
      _________________________________
      Noted. I've removed this task:
-       [T][X] read book
-     Now you have 3 tasks in the list
+       [T][X] sleep
+     Now you have 2 tasks in the list
      _________________________________
      _________________________________
      Here are the tasks in your list:
-     1.[D][ ] return book (by: June 6th)
-     2.[E][ ] project meeting (at: Aug 6th 2-4pm)
-     3.[E][ ] 2nd project meeting (at: Aug 8th 2-4pm)
-     _________________________________
-     _________________________________
-     Got it. I've added this task:
-       [D][ ] do homework (by: no idea :-p)
-     Now you have 4 tasks in the list.
+     1.[E][ ] wake up (at: 26-Jan-2022)
+     2.[D][ ] submit homework (by: 30-Jan-2022)
      _________________________________
      _________________________________
      Bye. Hope to see you again!
