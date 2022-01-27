@@ -9,10 +9,19 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+/**
+ * Runs the whole application PikaBot, an application
+ * that serves as a ChatBot to keep track of your tasks.
+ */
 public class PikaBot {
 
     static String FILEPATH = "data/tasks.txt";
 
+    /**
+     * Boots up PikaBot application.
+     *
+     * @param args Command line arguments entered by user.
+     */
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -30,7 +39,6 @@ public class PikaBot {
 
         String input = sc.nextLine();
         String[] strInputArr = input.split(" ", 2);
-
 
         while (!strInputArr[0].equals("bye")) {
             Command command = Parser.parseCommand(strInputArr);

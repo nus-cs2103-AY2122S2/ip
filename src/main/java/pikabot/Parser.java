@@ -23,9 +23,17 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Locale;
 
+/**
+ * Parses user input from CLI into a Task command.
+ */
 public class Parser {
 
-    //parse command
+    /**
+     * Returns a command after parsing input from user.
+     *
+     * @param inputArr Array containing input string from user.
+     * @return Command.
+     */
     public static Command parseCommand(String[] inputArr) {
         switch(inputArr[0].toLowerCase(Locale.ROOT)) {
             case "deadline": {
@@ -55,8 +63,13 @@ public class Parser {
         }
     }
 
-
-    //parseTodo
+    /**
+     * Returns a Todo command after parsing input from user.
+     *
+     * @param todoArray String array containing input string from user.
+     * @return Todo command.
+     * @throws TodoException If input is invalid.
+     */
     public static Todo parseTodo(String[] todoArray) throws TodoException {
         if (todoArray.length == 1) {
             throw new TodoException();
@@ -66,7 +79,13 @@ public class Parser {
         }
     }
 
-    //parseDeadline
+    /**
+     * Returns a Deadline commmand after parsing input from user.
+     *
+     * @param deadlineArray String array containing input string from user.
+     * @return Deadline command.
+     * @throws DeadlineException If input is invalid.
+     */
     public static Deadline parseDeadline(String[] deadlineArray) throws DeadlineException {
         if (deadlineArray.length == 1) {
             throw new DeadlineException("The description of a deadline cannot be empty.");
@@ -87,8 +106,13 @@ public class Parser {
         }
     }
 
-
-    //parseEvent
+    /**
+     * Returns an Event command after parsing input from user.
+     *
+     * @param eventArray String array containing input string from user.
+     * @return Event command.
+     * @throws EventException If input is invalid.
+     */
     public static Event parseEvent(String[] eventArray) throws EventException {
         if (eventArray.length == 1) {
             throw new EventException("The description of an event cannot be empty.");
