@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-//import ip.src.main.java.Task;
 
 public class Duke {
     /**
@@ -58,7 +57,7 @@ public class Duke {
             }
             // If user inputs keyword deadline, add this task as a Deadline class
             else if (splitInput[0].equals("deadline")) {
-                String[] splitInput2 = splitInput[1].split("/by", 2);
+                String[] splitInput2 = splitInput[1].split(" /by ", 2);
                 store.add(new Deadline(splitInput2[0], splitInput2[1]));
                 int temp = curr + 1;
                 System.out.println("Got it. I've added this task:\n  " + store.get(curr).toString()
@@ -67,7 +66,7 @@ public class Duke {
             }
             // If user inputs keyword event, add this task as an Event class
             else if (splitInput[0].equals("event")) {
-                String[] splitInput2 = splitInput[1].split("/at", 2);
+                String[] splitInput2 = splitInput[1].split(" /at ", 2);
                 store.add(new Event(splitInput2[0], splitInput2[1]));
                 int temp = curr + 1;
                 System.out.println("Got it. I've added this task:\n  " + store.get(curr).toString()

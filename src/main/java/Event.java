@@ -1,5 +1,7 @@
 public class Event extends Task {
     protected String dateInfo;
+    protected DateParse date;
+    protected TimeParse time;
 
     /**
      * Constructor for Event class
@@ -8,7 +10,10 @@ public class Event extends Task {
      */
     public Event(String description, String dateInfo) {
         super(description);
-        this.dateInfo = dateInfo;
+        String[] str = dateInfo.split(" ", 2);
+        this.date = new DateParse(str[0]);
+        this.time = new TimeParse(str[1]);
+        this.dateInfo = this.date.toString() + " " + this.time.toString();
     }
 
     /**
@@ -18,6 +23,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at:" + this.dateInfo + ")";
+        return "[E]" + super.toString() + " (at: " + this.dateInfo + ")";
     }
 }
