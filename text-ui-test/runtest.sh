@@ -13,7 +13,7 @@ then
 fi
 
 # compile the code into the bin folder, terminates if error occurred
-if ! find .. -name "*.java" -print | xargs javac -d ../bin
+if ! find ../src/main -name "*.java" -print | xargs javac -d ../bin
 then
     echo "********** BUILD FAILURE **********"
     exit 1

@@ -11,9 +11,9 @@ public class Event extends Task {
 
     public Event(String taskName, String at, LocalDate atDate, LocalTime atTime) {
         super(taskName);
-        at = at;
-        atDate = atDate;
-        atTime = atTime;
+        this.at = at;
+        this.atDate = atDate;
+        this.atTime = atTime;
     }
 
     @Override

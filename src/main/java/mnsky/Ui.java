@@ -48,7 +48,6 @@ public class Ui {
      * Prints out the bye messages.
      */
     public void printBye() {
-        printMnsky("I can help!");
         System.out.println("[MNSKY has shut itself down]");
     }
 

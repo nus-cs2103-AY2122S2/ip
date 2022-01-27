@@ -44,7 +44,6 @@ public class Mnsky {
             try {
                 switch (parsedInput.get(0)) {
                 case "bye":
-                    ui.printBye();
                     isRunning = false;
                     break;
                 case "list":
@@ -87,6 +86,8 @@ public class Mnsky {
 
             ui.printMnsky("I can help!");
         }
+
+        ui.printBye();
     }
 
     public static void main(String[] args) {
