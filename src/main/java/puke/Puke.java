@@ -36,7 +36,7 @@ public class Puke {
             ui.printCommandHead();
 
             try {
-                response = parser.processInput(sc.nextLine(), tasks, ui);
+                response = parser.processInput(sc.nextLine(), tasks);
 
                 if (response == null) {
                     storage.saveTasks(tasks);

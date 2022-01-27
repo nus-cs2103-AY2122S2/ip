@@ -5,7 +5,7 @@ import puke.task.TaskList;
 import puke.ui.Ui;
 
 public class Parser {
-    public String processInput(String s, TaskList tasks, Ui ui) throws PukeException {
+    public String processInput(String s, TaskList tasks) throws PukeException {
         String[] inputs = s.split(" ", 2);
         String command = inputs[0]; // get the first word of the input
 
