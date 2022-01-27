@@ -6,7 +6,7 @@ import duke.main.TaskList;
 import duke.main.Ui;
 
 /**
- * Represents a Command which, when executed, lists all Task objects in the TaskList innstance.
+ * Represents a Command which, when executed, lists all Task objects in the TaskList instance.
  */
 public class ListCommand extends Command {
     private static final boolean IS_EXIT = false;

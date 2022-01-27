@@ -8,15 +8,29 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a Command which, when executed, finds all matching Task objects in the TaskList instance.
+ */
 public class FindCommand extends Command {
     private static final boolean IS_EXIT = false;
     private String searchDescription;
 
+    /**
+     * Creates a new FindCommand instance with the specified search description.
+     *
+     * @param searchDescription The text which descriptions of matching tasks are expected to contain
+     */
     public FindCommand(String searchDescription) {
         super(IS_EXIT);
         this.searchDescription = searchDescription;
     }
 
+    /**
+     * Displays all matching Task objects from the given TaskList instance.
+     *
+     * @param tasks The TaskList instance to be searched.
+     * @param ui The Ui object used for displaying the Task objects.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> matchedTasks = tasks.findTasks(searchDescription);

@@ -99,6 +99,12 @@ public class TaskList {
         return tasks.size();
     }
 
+    /**
+     * Returns an ArrayList of tasks that matches the description.
+     *
+     * @return ArrayList of tasks that matches the description.
+     * @param searchDescription Search text to be partially matched with task's description.
+     */
     public ArrayList<Task> findTasks(String searchDescription) {
         return new ArrayList<Task>(tasks.stream()
                 .filter(task -> task.hasSubstring(searchDescription))
