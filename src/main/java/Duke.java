@@ -66,8 +66,9 @@ public class Duke {
     public void executeCommand(String commandType, String commandInfo) throws DukeException, IOException {
         int taskNum;
         Task task;
-        String taskDescription;
         String taskInfo;
+        String taskDescription;
+        String taskDateTime;
 
         switch (commandType.toLowerCase()) {
         case "bye":
@@ -94,14 +95,18 @@ public class Duke {
             break;
         case "deadline":
             taskInfo = processTaskInfoFromDeadlineCommand(commandInfo);
-            String[] deadlineTaskDetails = taskInfo.split("/", 2);
-            task = new Deadline(deadlineTaskDetails[0], deadlineTaskDetails[1]);
+            taskDescription = taskInfo.split("/", 2)[0].trim();
+            String taskByDateTime = taskInfo.split("/", 2)[1].trim();
+            taskDateTime = taskByDateTime.split("\\s+", 2)[1].trim();
+            task = new Deadline(taskDescription, taskDateTime);
             addTask(tasks, task);
             break;
         case "event":
             taskInfo = processTaskInfoFromEventCommand(commandInfo);
-            String[] eventTaskDetails = taskInfo.split("/", 2);
-            task = new Event(eventTaskDetails[0], eventTaskDetails[1]);
+            taskDescription = taskInfo.split("/", 2)[0].trim();
+            String taskAtDateTime = taskInfo.split("/", 2)[1].trim();
+            taskDateTime = taskAtDateTime.split("\\s+", 2)[1].trim();
+            task = new Event(taskDescription, taskDateTime);
             addTask(tasks, task);
             break;
         default:

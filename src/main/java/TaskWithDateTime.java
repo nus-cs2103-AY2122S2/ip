@@ -31,13 +31,12 @@ public abstract class TaskWithDateTime extends Task {
     }
 
     /**
-     * Returns the string representation of the date/time.
+     * Returns the string representation of the date/time in output format.
      *
-     * @return The string representation of the date/time
+     * @return The string representation of the date/time for output
      */
-    protected String getDateTime() {
-        String[] dateTimeParts = dateTimeInput.split(" ", 2);
-        return dateTimeParts[1];
+    public String getDateTimeOutput() {
+        return dateTimeInput;
     }
 
     /**
@@ -55,7 +54,7 @@ public abstract class TaskWithDateTime extends Task {
      */
     @Override
     public String toString() {
-        return super.toString() + dateTimeInfo();
+        return super.toString() + " " + dateTimeInfo();
     }
 
     /**
