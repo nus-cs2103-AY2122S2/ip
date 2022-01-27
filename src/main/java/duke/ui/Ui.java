@@ -35,7 +35,7 @@ public class Ui {
         stylePrint("See you later!");
     }
 
-    public void displayTasks(ArrayList<Task> tasks) {
+    public void displayAllTasks(ArrayList<Task> tasks) {
         if (tasks.size() == 0) {
             stylePrint("There are no tasks in your list.");
         } else {
@@ -45,6 +45,19 @@ public class Ui {
                 strBuilder.append(line);
             }
             stylePrint("Here are your tasks:\n" + strBuilder.toString());
+        }
+    }
+
+    public void displayMatchingTasks(ArrayList<Task> tasks) {
+        if (tasks.size() == 0) {
+            stylePrint("There are no matching tasks in your list.");
+        } else {
+            StringBuilder strBuilder = new StringBuilder();
+            for (int i = 0; i < tasks.size(); i++) {
+                String line = i + 1 + ". " + tasks.get(i) + '\n';
+                strBuilder.append(line);
+            }
+            stylePrint("Here are the matching tasks:\n" + strBuilder.toString());
         }
     }
 

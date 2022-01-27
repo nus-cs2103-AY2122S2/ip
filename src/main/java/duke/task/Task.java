@@ -17,6 +17,10 @@ public abstract class Task {
         return (this.status ? "[X]" : "[ ]");
     }
 
+    public String getTitle() {
+        return this.title;
+    }
+
     /**
      * Marks the given task as complete.
      */

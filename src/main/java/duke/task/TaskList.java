@@ -20,6 +20,17 @@ public class TaskList {
         return tasks;
     }
 
+    public ArrayList<Task> getTasksByKeyword(String keyword) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+
+        for (Task task : tasks) {
+            if (task.getTitle().contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
+    }
+
     public Task getTask(int index) throws TaskOutOfBoundsException {
         if (0 < index & index <= tasks.size()) {
             return tasks.get(index - 1);
