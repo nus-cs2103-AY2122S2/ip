@@ -13,6 +13,9 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 import java.io.IOException;
 
+/**
+ * Storage object that deals with exporting and importing task list items to a file
+ */
 class Storage {
     private final Path pathToFile;
 
