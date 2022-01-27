@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
+import java.time.LocalDate;
 
 public class Duke {
     /**
@@ -91,7 +92,7 @@ public class Duke {
             if (description.equals("") || time.equals("")) {
                 throw new DukeException("\t ☹ OOPS!!! The description or time of an event cannot be empty.\n");
             }
-            t = new Event(description, time);
+            t = new Event(description, this.strToDate(time));
         } else { 
             // deadline
             timeIndex = input.indexOf(" /by ");
@@ -108,7 +109,7 @@ public class Duke {
             if (description.equals("") || time.equals("")) {
                 throw new DukeException("\t ☹ OOPS!!! The description or time of a deadline cannot be empty.\n");
             }
-            t = new Deadline(description, time);
+            t = new Deadline(description, this.strToDate(time));
         }
         this.lst.add(t);
         this.printMsg("\t Got it. I've added this task:\n\t   " + t.toString()
@@ -206,6 +207,13 @@ public class Duke {
             this.printMsg("\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
         }
         this.run();
+    }
+
+    /**
+     * Changes from String to LocalDate.
+     */
+    private LocalDate strToDate(String str) {
+        return LocalDate.parse(str);
     }
 
     public static void main(String[] args) {

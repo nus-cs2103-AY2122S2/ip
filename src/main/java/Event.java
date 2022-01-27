@@ -1,10 +1,13 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents tasks that start at a specific time and ends at a specific time.
  */
 public class Event extends Task {
-    protected String time;
+    protected LocalDate time;
 
-    public Event(String description, String time) {
+    public Event(String description, LocalDate time) {
         super(description);
         this.time = time;
     }
@@ -15,6 +18,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.time + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        return "[E]" + super.toString() + " (at: " + time.format(formatter) + ")";
     }
 }
