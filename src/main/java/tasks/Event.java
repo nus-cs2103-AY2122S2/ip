@@ -9,11 +9,11 @@ import java.time.format.DateTimeParseException;
 /** A class that functions as an abstraction of an event task. */
 public class Event extends Task {
 
-    public static String wrongFormatErrorString = "Format for events: 'event [some event] /at [dd/mm/yyyy-hh:mm]'";
-    DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy-HH:mm");
-    DateTimeFormatter niceFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+    public static String WRONG_FORMAT_ERROR_STRING = "Format for events: 'event [some event] /at [dd/mm/yyyy-hh:mm]'";
+    DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy-HH:mm");
+    DateTimeFormatter PRETTY_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
 
-    public Task.TaskType type = Task.TaskType.EVENT;
+    public Task.TaskType taskType = Task.TaskType.EVENT;
     public String taskName;
     public LocalDateTime eventTime;
 
@@ -27,9 +27,9 @@ public class Event extends Task {
     public Event(String taskName, String eventTime) throws DukeException {
         this.taskName = taskName;
         try {
-            this.eventTime = LocalDateTime.parse(eventTime, inputFormat);
+            this.eventTime = LocalDateTime.parse(eventTime, INPUT_FORMAT);
         } catch (DateTimeParseException err) {
-            throw new DukeException(wrongFormatErrorString);
+            throw new DukeException(WRONG_FORMAT_ERROR_STRING);
         }
     }
 
@@ -41,7 +41,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         return String.format("[E][%s] %s (at: %s)",
-                this.done ? "X" : " ", this.taskName, this.eventTime.format(niceFormat));
+                this.isDone() ? "X" : " ", this.taskName, this.eventTime.format(PRETTY_FORMAT));
     }
 
     /**
@@ -51,6 +51,6 @@ public class Event extends Task {
      */
     public String exportToString() {
         return String.format("%s %s %s %s",
-            this.type, this.taskName, this.done, this.eventTime.format(inputFormat));
+            this.taskType, this.taskName, this.isDone(), this.eventTime.format(INPUT_FORMAT));
     }
 }

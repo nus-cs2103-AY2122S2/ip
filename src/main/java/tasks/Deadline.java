@@ -9,11 +9,12 @@ import java.time.format.DateTimeParseException;
 /** A class that functions as an abstraction of a deadline task. */
 public class Deadline extends Task {
 
-    public static String wrongFormatErrorString = "Format for deadlines: 'deadline [some task] /by [dd/mm/yyyy-hh:mm]'";
-    public DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy-HH:mm");
-    public DateTimeFormatter niceFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+    public static String WRONG_FORMAT_ERROR_STRING =
+            "Format for deadlines: 'deadline [some task] /by [dd/mm/yyyy-hh:mm]'";
+    public DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy-HH:mm");
+    public DateTimeFormatter PRETTY_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
 
-    public Task.TaskType type = Task.TaskType.DEADLINE;
+    public Task.TaskType taskType = Task.TaskType.DEADLINE;
     public String taskName;
     public LocalDateTime deadline;
 
@@ -27,9 +28,9 @@ public class Deadline extends Task {
     public Deadline(String taskName, String deadline) throws DukeException {
         this.taskName = taskName;
         try {
-            this.deadline = LocalDateTime.parse(deadline, inputFormat);
+            this.deadline = LocalDateTime.parse(deadline, INPUT_FORMAT);
         } catch (DateTimeParseException err) {
-            throw new DukeException(wrongFormatErrorString);
+            throw new DukeException(WRONG_FORMAT_ERROR_STRING);
         }
     }
 
@@ -41,7 +42,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return String.format("[D][%s] %s (by: %s)",
-                this.done ? "X" : " ", this.taskName, this.deadline.format(niceFormat));
+                this.isDone() ? "X" : " ", this.taskName, this.deadline.format(PRETTY_FORMAT));
     }
 
     /**
@@ -51,6 +52,6 @@ public class Deadline extends Task {
      */
     public String exportToString() {
         return String.format("%s %s %s %s",
-            this.type, this.taskName, this.done, this.deadline.format(inputFormat));
+            this.taskType, this.taskName, this.isDone(), this.deadline.format(INPUT_FORMAT));
     }
 }

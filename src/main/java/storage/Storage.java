@@ -16,13 +16,13 @@ import tasks.Task;
 public class Storage {
 
     /** Directory which stores the tasks on a .txt file. */
-    public File directory = new File("data");
+    public File DIRECTORY = new File("data");
 
     /** Path of the .txt file. */
-    public Path tasksPath = Paths.get("data", "tasks.txt");
+    public Path TASKS_PATH = Paths.get("data", "tasks.txt");
 
     /** .txt file which stores the Duke tasks. */
-    public File tasksFile = new File(tasksPath.toString());
+    public File TASKS_FILE = new File(TASKS_PATH.toString());
 
     /**
      * Returns an ArrayList of tasks, if a valid .txt tasks file exist on disk.
@@ -35,19 +35,19 @@ public class Storage {
         ArrayList<Task> allTasks = new ArrayList<>();
 
         // adds directory if it does not exist
-        boolean directoryCreated = directory.mkdir();
+        boolean directoryCreated = DIRECTORY.mkdir();
 
         // creates a new file if it does not exist
         boolean didNotExist;
         try {
-            didNotExist = tasksFile.createNewFile();
+            didNotExist = TASKS_FILE.createNewFile();
         } catch (IOException err) {
             throw new DukeException(err.getMessage());
         }
 
         if (!directoryCreated && !didNotExist) {  // the file existed
             try {
-                Scanner s = new Scanner(tasksFile); // create a Scanner using the File as the source
+                Scanner s = new Scanner(TASKS_FILE); // create a Scanner using the File as the source
                 Task t;
                 while (s.hasNext()) {
                     String someTask = s.nextLine();
@@ -73,7 +73,7 @@ public class Storage {
      */
     public void saveTasks(ArrayList<Task> allTasks) throws DukeException {
         try {
-            FileWriter fw = new FileWriter(tasksPath.toString());
+            FileWriter fw = new FileWriter(TASKS_PATH.toString());
             for (Task t: allTasks) {
                 fw.write(t.exportToString() + "\n");
             }
