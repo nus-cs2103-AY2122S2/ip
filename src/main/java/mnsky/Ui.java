@@ -3,6 +3,7 @@ package mnsky;
 import mnsky.exceptions.MnskyException;
 import mnsky.task.Task;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -69,7 +70,9 @@ public class Ui {
         System.out.printf("[MNSKY has deleted the task %s from the list.]\n", task.getName());
     }
 
-    public void printList(TaskList taskList) {
-        System.out.print(taskList.toString());
+    public void printListStrings(ArrayList<String> listStrings) {
+        for (String string : listStrings) {
+            System.out.println(string);
+        }
     }
 }

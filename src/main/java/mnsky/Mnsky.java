@@ -34,16 +34,17 @@ public class Mnsky {
 
     public boolean run() {
         String input = this.ui.getInput();
-        ArrayList<String> parsedInput = Parser.parseInput(input);
 
         try {
+            ArrayList<String> parsedInput = Parser.parseInput(input);
+
             switch (parsedInput.get(0)) {
             case "bye":
                 this.ui.bye();
                 return false;
 
             case "list":
-                this.ui.printList(this.taskList);
+                this.ui.printListStrings(this.taskList.getListString());
                 break;
 
             case "mark":
@@ -76,15 +77,19 @@ public class Mnsky {
                 this.ui.printDeletedTask(deleted);
                 break;
 
+            case "find":
+                this.ui.printListStrings(taskList.find(parsedInput.get(1)));
+                break;
+
             default:
                 this.ui.printMnsky("...");
             }
+
+            if (this.isWriteCommand(parsedInput.get(0))) {
+                this.storage.writeToDataFile(this.taskList);
+            }
         } catch (MnskyException e) {
             this.ui.printException(e);
-        }
-
-        if (this.isWriteCommand(parsedInput.get(0))) {
-            this.storage.writeToDataFile(this.taskList);
         }
 
         this.ui.printMnsky("I can help!");
