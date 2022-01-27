@@ -25,6 +25,15 @@ public class Todo extends Task {
         return String.format("[T][%s] %s", this.isDone() ? "X" : " ", this.taskName);
     }
 
+
+    /**
+     * Returns the description of the task.
+     * @return The description of the todo.
+     */
+    public String getDescription() {
+        return this.taskName;
+    }
+
     /**
      * Converts the task into a string representation to be used to be saved on disk.
      *

@@ -35,6 +35,9 @@ public abstract class Task {
         return this.isDone;
     }
 
+    /** Method to be implemented by any Task: to be able to retrieve its description. */
+    public abstract String getDescription();
+
     /** Method to be implemented by any Task: to be able to be represented by a string. */
     public abstract String exportToString();
 

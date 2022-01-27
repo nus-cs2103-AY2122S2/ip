@@ -46,6 +46,14 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns the description of the task.
+     * @return The description of the deadline.
+     */
+    public String getDescription() {
+        return this.taskName;
+    }
+
+    /**
      * Converts the task into a string representation to be used to be saved on disk.
      *
      * @return The task in string format to be used to be saved on disk.

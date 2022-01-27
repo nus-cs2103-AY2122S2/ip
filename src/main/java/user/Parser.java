@@ -85,6 +85,16 @@ public class Parser {
     }
 
     /**
+     * Returns the keywords of the task string to be found.
+     *
+     * @param command The user's input of a task to find.
+     * @return The keywords given by the user.
+     */
+    public String handleFindTask(String command) {
+        return command.substring(5);  // "find " is 7 letters
+    }
+
+    /**
      * Returns a Todo task given the user's input to create a Todo task.
      *
      * @param taskString The user's input.

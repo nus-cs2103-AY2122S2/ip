@@ -4,6 +4,7 @@ import exceptions.DukeException;
 import tasks.Task;
 import tasks.Tasklist;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /** A class that handles the interactions with the user. */
@@ -101,6 +102,19 @@ public class Ui {
      *
      * @return The user's input.
      */
+    public void displayFoundTasks(ArrayList<Task> foundTasks) {
+        printIndent(SEPARATOR);
+        if (foundTasks.size() == 0) {
+            printIndent("No tasks are found!");
+        } else {
+            printIndent("Here are the matching tasks in your list:");
+            for (int i = 0; i < foundTasks.size(); i++) {
+                printIndent(String.format("%d. %s", i+1, foundTasks.get(i)));
+            }
+        }
+        printIndent(SEPARATOR + "\n");
+    }
+
     public String getInput() {
         return sc.nextLine();
     }
@@ -126,7 +140,11 @@ public class Ui {
                  int taskToDelete = parser.handleDeleteTask(userInput, tasklist.getNumTasks());
                  String[] result = tasklist.deleteTask(taskToDelete);
                  prettyPrint(result);
-            } else {  // add task
+            } else if (userInput.startsWith("find ")) {  // find task
+                 String keywords = parser.handleFindTask(userInput);
+                 ArrayList<Task> foundTasks = tasklist.findTasks(keywords);
+                 displayFoundTasks(foundTasks);
+             } else {  // add task
                 Task t = parser.addTask(userInput);
                  tasklist.addTask(t);
                  String[] messages = new String[] {

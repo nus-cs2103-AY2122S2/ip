@@ -108,4 +108,14 @@ public class Tasklist {
             thisTask.toString(),
             String.format("Now you have %d tasks in the list.", allTasks.size())};
     }
+
+    public ArrayList<Task> findTasks(String keywords) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (Task t : allTasks) {
+            if (t.getDescription().contains(keywords)) {
+                foundTasks.add(t);
+            }
+        }
+        return foundTasks;
+    }
 }
