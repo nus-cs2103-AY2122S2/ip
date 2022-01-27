@@ -12,6 +12,7 @@ import java.time.format.DateTimeParseException;
 public class Event extends Task {
     protected LocalDate atDate;
     protected LocalTime atTime;
+    protected String at;
 
     private Event(String description, String at) {
         super(description);
@@ -20,6 +21,7 @@ public class Event extends Task {
         if (dateAndTime.length > 1) {
             this.atTime = LocalTime.parse(dateAndTime[1]);
         }
+        this.at = at;
     }
 
     public static Event getInstance(String description, String at) throws DateTimeParseException, NoEventLocaleMentionedException, NoDescriptionGivenException {
