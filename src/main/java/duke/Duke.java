@@ -20,10 +20,10 @@ public class Duke {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load());
+            this.tasks = new TaskList(storage.load());
         } catch (RonException e) {
-            tasks = new TaskList(filePath);
-            ui.showLoadingError();
+            this.tasks = new TaskList(filePath);
+            this.ui.showLoadingError();
         }
     }
 
