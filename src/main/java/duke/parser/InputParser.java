@@ -7,6 +7,9 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class InputParser extends Parser {
     public void parseInput(String input, TaskList tasks) throws RonException {
         String trimmedText = input.trim();
@@ -88,6 +91,12 @@ public class InputParser extends Parser {
             System.out.println("Task added!");
             System.out.println(task);
             System.out.println("There are " + tasks.size() + " task(s) in the list.");
+        } else if (input.contains("find")) {
+            if (input.replace("find", "").trim().length() == 0) {
+                throw new EmptyDescriptionException("find");
+            }
+            System.out.println("Here are some tasks that match your request:");
+            tasks.findTasks(input.substring(5));
         } else {
             throw (new UnidentifiedException());
         }

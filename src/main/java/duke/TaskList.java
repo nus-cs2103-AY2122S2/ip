@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TaskList {
-    private final List<Task> store;
+    private List<Task> store;
     private final File file;
 
     public TaskList(File file) throws RonException {
@@ -72,6 +72,22 @@ public class TaskList {
     public void printTasks() {
         int i = 1;
         for (Task task : this.store) {
+            System.out.print(i + ".");
+            System.out.println(task);
+            i++;
+        }
+    }
+
+    public void findTasks(String substring) {
+        List<Task> tempList = new ArrayList<>();
+        for (Task task : this.store) {
+            if (task.getDescription().contains(substring)) {
+                tempList.add(task);
+            }
+        }
+
+        int i = 1;
+        for (Task task : tempList) {
             System.out.print(i + ".");
             System.out.println(task);
             i++;
