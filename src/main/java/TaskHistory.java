@@ -18,8 +18,8 @@ public class TaskHistory {
         System.out.println(msg);
     }
 
-    void addDeadline(String description, String timeFrame) {
-        Deadlines tempDeadline = new Deadlines(description, timeFrame);
+    void addDeadline(String description, String date, String time) {
+        Deadlines tempDeadline = new Deadlines(description, date, time);
         record.add(tempDeadline);
         String msg = "_______________________________________________________\n"
                 + "Understood, adding this task now:\n"
@@ -29,8 +29,8 @@ public class TaskHistory {
         System.out.println(msg);
     }
 
-    void addEvent(String description, String timeFrame) {
-        Event tempEvent = new Event(description, timeFrame);
+    void addEvent(String description, String date, String time) {
+        Event tempEvent = new Event(description, date, time);
         record.add(tempEvent);
         String msg = "_______________________________________________________\n"
                 + "Understood, adding this task now:\n"

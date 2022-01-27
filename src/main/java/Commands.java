@@ -1,3 +1,4 @@
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -12,20 +13,41 @@ public class Commands {
     public Commands() { // Empty Constructor
     }
 
-    public LocalDate convertToDukeDate(String date) throws DukeException {
+    public String convertToDukeDate(String date) {
         SimpleDateFormat df1 = new SimpleDateFormat("dd/MM/yyyy");
         df1.setLenient(false);
         SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd");
         df2.setLenient(false);
         try {
             Date dummyDate1 = df1.parse(date);
-            return dummyDate1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate dukeDate1 = dummyDate1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            return dukeDate1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         } catch (ParseException e1) {
             try {
                 Date dummyDate2 = df2.parse(date);
-                return LocalDate.parse(date);
+                LocalDate dukeDate2 = LocalDate.parse(date);
+                return dukeDate2.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
             } catch (ParseException e2) {
-                throw new DukeException("Failed to convert date");
+                return date;
+            }
+        }
+    }
+
+    public String convertToDukeTime(String time) {
+        if (time.contains("am") || time.contains("pm")
+                || time.contains("AM") || time.contains("PM")
+                || time.contains("Am") || time.contains("Pm")) {
+            return time;
+        } else {
+            String splicedTime = time.substring(0, 4);
+            DateFormat inputFormat = new SimpleDateFormat("HHmm");
+            DateFormat outputFormat = new SimpleDateFormat("hh:mmaa");
+            try {
+                Date dukeTime = inputFormat.parse(splicedTime);
+                return outputFormat.format(dukeTime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return time;
             }
         }
     }
@@ -104,7 +126,8 @@ public class Commands {
 
     void deadline(String[] tokens) throws DukeException {
         String description = "";
-        String timeFrame = "";
+        String date = "";
+        String time = "";
         int timeStart = -1; // -1 is a placeholder to indicate /by has not been found
         for (int i = 1; i < tokens.length; i++) {
             if (tokens[i].equals("/by")) {
@@ -115,29 +138,21 @@ public class Commands {
             }
             description = description.concat(" ");
         }
-
-        // Check for timeFrame
+        // Check for Date and Time
         if (timeStart == -1) {
             throw new DukeException("'/by' not detected");
         }
-
-        for (int j = timeStart + 1; j < tokens.length; j++) {
-            try {
-                LocalDate dukeDate = convertToDukeDate(tokens[j]);
-                timeFrame = timeFrame.concat(dukeDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
-            } catch (DukeException e) {
-                timeFrame = timeFrame.concat(tokens[j]);
-            }
-            if (j != (tokens.length - 1)) {
-                timeFrame = timeFrame.concat(" ");
-            }
-        }
-        taskHistory.addDeadline(description, timeFrame);
+        // Handle Date
+        date = date.concat(convertToDukeDate(tokens[timeStart + 1]));
+        // Handle Time
+        time = time.concat(convertToDukeTime(tokens[timeStart + 2]));
+        taskHistory.addDeadline(description, date, time);
     }
 
     void event(String[] tokens) throws DukeException {
         String description = "";
-        String timeFrame = "";
+        String date = "";
+        String time = "";
         int timeStart = -1; // -1 is a placeholder to indicate /at has not been found
         for (int i = 1; i < tokens.length; i++) {
             if (tokens[i].startsWith("/")) {
@@ -153,19 +168,14 @@ public class Commands {
         if (timeStart == -1) {
             throw new DukeException("'/at' not detected");
         }
-
-        for (int j = timeStart + 1; j < tokens.length; j++) {
-            try {
-                LocalDate dukeDate = convertToDukeDate(tokens[j]);
-                timeFrame = timeFrame.concat(dukeDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
-            } catch (DukeException e) {
-                timeFrame = timeFrame.concat(tokens[j]);
-            }
-            if (j != (tokens.length - 1)) {
-                timeFrame = timeFrame.concat(" ");
-            }
-        }
-        taskHistory.addEvent(description, timeFrame);
+        // Handle Date
+        date = date.concat(convertToDukeDate(tokens[timeStart + 1]));
+        // Handle Time
+        String[] arr = tokens[timeStart + 2].split("-");
+        time = time.concat(convertToDukeTime(arr[0])
+                .concat("-")
+                .concat(convertToDukeTime(arr[1])));
+        taskHistory.addEvent(description, date, time);
     }
 
     void delete(int index) {
