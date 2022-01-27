@@ -35,6 +35,16 @@ public abstract class Task {
         }
     }
 
+    /**
+     * Return a boolean representing if the keyword in search matches the task description.
+     *
+     * @param keyword The keyword to filter tasks.
+     * @return True if the keyword exists in the task description, false otherwise.
+     */
+    public boolean isMatch(String keyword) {
+        return (this.description.indexOf(keyword) >= 0);
+    }
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;

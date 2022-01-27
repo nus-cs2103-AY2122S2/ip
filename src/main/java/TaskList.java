@@ -74,6 +74,22 @@ public class TaskList {
         return new TaskList(tasks, tasks.size());
     }
 
+    /**
+     * Return a new TaskList of tasks filtered by the given keyword.
+     *
+     * @param keyword The keyword to filter all match task description.
+     * @return
+     */
+    public TaskList filterByKeyword(String keyword) {
+        List<Task> tasks = new ArrayList<Task>();
+        for (Task task : taskList) {
+            if (task.isMatch(keyword)) {
+                tasks.add(task);
+            }
+        }
+        return new TaskList(tasks, tasks.size());
+    }
+
     public void addTask(Task tNew) {
         this.numOfTasks += 1;
         this.taskList.add(tNew);
