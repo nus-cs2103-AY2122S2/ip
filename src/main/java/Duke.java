@@ -1,5 +1,9 @@
 import java.io.IOException;
 import java.io.PrintWriter;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;  // Import the File class
@@ -48,7 +52,7 @@ public class Duke {
                     System.out.println("------------------------------------------------------");
                     System.out.println("Here are your tasks:");
                     for (int i = 1; i <= this.list.size(); i++) {
-                        System.out.println(i + ". " + this.list.get(i-1));
+                        System.out.println(i + ". " + this.list.get(i - 1));
                     }
                     System.out.println("======================================================");
                     break;
@@ -76,32 +80,41 @@ public class Duke {
                     break;
                 case "deadline":
                     System.out.println("------------------------------------------------------");
-                    is_valid_date_task(details, "deadline");
-                    String[] d_deets = details.split("/");
-                    Deadline deadline = new Deadline(d_deets[0].trim(), d_deets[1].trim().substring(3));
-                    add_task(deadline, true);
-                    save_to_file();
-                    break;
+                is_valid_task(details, "deadline");
+                String[] d_deets = details.split("/");
+                String dd = d_deets[1].trim().substring(3);
+                System.out.println(dd);
+                try {
+                    LocalDate.parse(dd);
+                } catch (DateTimeParseException e) {
+                    System.out.println("Please enter a date with the format yyyy-mm-dd");
+                }
+                Deadline deadline = new Deadline(d_deets[0].trim(), LocalDate.parse(dd));
+                add_task(deadline, true);
+                break;
                 case "event":
                     System.out.println("------------------------------------------------------");
-                    is_valid_date_task(details, "event");
+                    is_valid_task(details, "event");
                     String[] e_deets = details.split("/");
-                    Event event = new Event(e_deets[0].trim(), e_deets[1].trim().substring(3));
+                    String de = e_deets[1].trim().substring(3);
+                    try {
+                        LocalDate.parse(de);
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Please enter a date with the format yyyy-mm-dd");
+                    }
+                    Event event = new Event(e_deets[0].trim(), LocalDate.parse(de));
                     add_task(event, true);
-                    save_to_file();
                     break;
                 case "todo":
                     System.out.println("------------------------------------------------------");
-                    is_valid_date_task(details, "todo");
+                    is_valid_task(details, "todo");
                     ToDo td = new ToDo(details);
                     add_task(td, true);
-                    save_to_file();
                     break;
                 case "delete":
                     try {
                         System.out.println("------------------------------------------------------");
                         delete_task(Integer.parseInt(details) - 1);
-                        save_to_file();
                         System.out.println();
                         System.out.println("======================================================");
                     } catch (IndexOutOfBoundsException e) {
@@ -113,6 +126,8 @@ public class Duke {
             }
         }
     }
+
+
 
     private void record_data_input() {
         String dir = System.getProperty("user.dir");
@@ -135,14 +150,14 @@ public class Duke {
                     add_task(td, false);
                     break;
                 case "D":
-                    Deadline deadline = new Deadline(data[2], data[3]);
+                    Deadline deadline = new Deadline(data[2], LocalDate.parse(data[3]));
                     add_task(deadline, false);
                     if (data[1].equals('1')){
                         deadline.mark();
                     }
                     break;
                 case "E":
-                    Event event = new Event(data[2], data[3]);
+                    Event event = new Event(data[2], LocalDate.parse(data[3]));
                     add_task(event, false);
                     if (data[1].equals('1')){
                         event.mark();
@@ -174,7 +189,7 @@ public class Duke {
                 "\nNow you have " + this.list.size() + " tasks in the list.");
     }
 
-    private boolean is_valid_date_task(String details, String type) throws DukeException{
+    private boolean is_valid_task(String details, String type) throws DukeException{
         if (details.length() == 0) {
             throw new DukeException("☹ OOPS!!! The description of a " + type + " cannot be empty.");
         }
@@ -183,8 +198,7 @@ public class Duke {
         }
         else if ((type.equals("deadline") || type.equals("event")) && details.endsWith("/")) {
             throw new DukeException("☹ OOPS!!! The date of a " + type + " cannot be empty. Type the date after your /");
-        }
-        else {
+        } else {
             return true;
         }
     }
